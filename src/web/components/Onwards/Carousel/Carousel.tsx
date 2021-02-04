@@ -151,6 +151,9 @@ const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
 	}
 `;
 
+// Set grid widths for use at desktop and above
+const desktopGridWidth = 60;
+
 // Not used for buttons above carousel
 const buttonContainerStyle = css`
 	display: flex;
@@ -164,39 +167,7 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
-
-const buttonStyle = css`
-	border: 0 none;
-	border-radius: 100%;
-	height: 34px;
-	width: 34px;
-	background-color: ${palette.neutral[0]};
-	cursor: pointer;
-	margin: 0;
-	padding: 0;
-
-	&:hover,
-	&:focus {
-		outline: none;
-		background-color: ${palette.brandAlt[400]};
-		svg {
-			fill: ${palette.neutral[7]};
-		}
-	}
-	svg {
-		fill: ${palette.neutral[100]};
-		height: 34px;
-	}
-
-	&::before {
-		background-color: rgba(0, 0, 0, 0.35);
-	}
-`;
-
-// Set grid widths for use at desktop and above
-const desktopGridWidth = 60;
-
-const prevButtonStyle = css`
+const prevButtonContainerStyle = css`
 	${from.desktop} {
 		left: ${desktopGridWidth / 2}px;
 	}
@@ -210,8 +181,43 @@ const prevButtonStyle = css`
 	}
 `;
 
-const nextButtonStyle = css`
+const nextButtonContainerStyle = css`
 	right: ${desktopGridWidth / 2}px;
+`;
+
+const buttonStyle = css`
+	border: 0 none;
+	border-radius: 100%;
+	height: 34px;
+	width: 34px;
+	background-color: ${palette.neutral[0]};
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+
+	&:active {
+		outline: none;
+		background-color: ${palette.brandAlt[400]};
+		svg {
+			fill: ${palette.neutral[7]};
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	svg {
+		fill: ${palette.neutral[100]};
+		height: 34px;
+	}
+
+	&::before {
+		background-color: rgba(0, 0, 0, 0.35);
+	}
+`;
+
+const nextButtonStyle = css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
 `;
@@ -281,7 +287,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 }: CarouselCardProps) => (
 	<LI
 		stretch={true}
-		percentage="100%"
+		percentage="25%"
 		showDivider={!isFirst}
 		padSides={true}
 		padSidesOnMobile={true}
@@ -300,7 +306,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			imageUrl={imageUrl || ''}
 			showClock={true}
 			alwaysVertical={true}
-			minWidthInPixels={258}
+			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
 		/>
 	</LI>
@@ -456,7 +462,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div className={cx(buttonContainerStyle, prevButtonStyle)}>
+			<div className={cx(buttonContainerStyle, prevButtonContainerStyle)}>
 				<button
 					onClick={prev}
 					aria-label="Move carousel backwards"
@@ -466,11 +472,11 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</button>
 			</div>
 
-			<div className={cx(buttonContainerStyle, nextButtonStyle)}>
+			<div className={cx(buttonContainerStyle, nextButtonContainerStyle)}>
 				<button
 					onClick={next}
 					aria-label="Move carousel forwards"
-					className={buttonStyle}
+					className={cx(buttonStyle, nextButtonStyle)}
 				>
 					<SvgChevronRightSingle />
 				</button>
@@ -500,7 +506,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={next}
 								aria-label="Move carousel forwards"
-								className={buttonStyle}
+								className={cx(buttonStyle, nextButtonStyle)}
 							>
 								<SvgChevronRightSingle />
 							</button>
