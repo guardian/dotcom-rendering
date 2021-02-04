@@ -40,6 +40,7 @@ const styles = `
 	}
     body {
 		margin: 0;
+		height: 100%;
 		min-height: 100%;
     }
 `;

@@ -29,8 +29,13 @@ interface Props {
 	item: Item;
 }
 
+const mainStyles = css`
+	height: 100%;
+`;
+
 const articleWrapperStyles = (item: Format): SerializedStyles => css`
 	background-color: ${item.design === Design.Media ? neutral[0] : 'inherit'};
+	min-height: 100%;
 `;
 
 const articleStyles = css`
@@ -118,7 +123,7 @@ const Article: FC<Props> = ({ item }) => {
 		item.design === Design.Media
 	) {
 		return (
-			<main>
+			<main css={mainStyles}>
 				<article css={articleWrapperStyles(item)}>
 					<div css={headerBackgroundStyles(item)}>
 						<section css={getSectionStyles(item)}>
