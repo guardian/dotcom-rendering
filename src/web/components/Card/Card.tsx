@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -128,14 +128,9 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	const pillarToUse =
-		format.design === Design.Comment && format.theme === Pillar.News
-			? Pillar.Opinion
-			: format.theme;
-
 	return (
-		<CardLink linkTo={linkTo} design={format.design} pillar={pillarToUse}>
-			<TopBar topBarColour={pillarPalette[pillarToUse].main}>
+		<CardLink linkTo={linkTo} design={format.design} pillar={format.theme}>
+			<TopBar topBarColour={pillarPalette[format.theme].main}>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}
@@ -173,7 +168,7 @@ export const Card = ({
 									<CardHeadline
 										headlineText={headlineText}
 										design={format.design}
-										pillar={pillarToUse}
+										pillar={format.theme}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
@@ -237,7 +232,7 @@ export const Card = ({
 										webPublicationDate ? (
 											<CardAge
 												design={format.design}
-												pillar={pillarToUse}
+												pillar={format.theme}
 												webPublicationDate={
 													webPublicationDate
 												}
@@ -253,7 +248,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												pillar={pillarToUse}
+												pillar={format.theme}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -265,7 +260,7 @@ export const Card = ({
 										shortCount ? (
 											<CardCommentCount
 												design={format.design}
-												pillar={pillarToUse}
+												pillar={format.theme}
 												long={longCount}
 												short={shortCount}
 											/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Pillar, Display } from '@guardian/types';
+import { Display } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -100,11 +100,10 @@ export const SecondTierItem = ({
 	} = trail;
 
 	const avatarToShow = avatarUrl || image;
-	const pillarToUse = design === Design.Comment ? Pillar.Opinion : pillar;
-	const formatToUse: Format = {
+	const format: Format = {
 		design,
 		display: Display.Standard,
-		theme: pillarToUse,
+		theme: pillar,
 	};
 
 	return (
@@ -121,7 +120,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								design={design}
 								headlineText={headlineText}
-								pillar={formatToUse.theme}
+								pillar={format.theme}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -129,7 +128,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								design={design}
 								headlineText={headlineText}
-								pillar={formatToUse.theme}
+								pillar={format.theme}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -147,7 +146,7 @@ export const SecondTierItem = ({
 									<Avatar
 										imageSrc={avatarToShow}
 										imageAlt=""
-										palette={decidePalette(formatToUse)}
+										palette={decidePalette(format)}
 									/>
 								</div>
 							</div>
