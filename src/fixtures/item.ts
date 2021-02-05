@@ -66,6 +66,25 @@ const comment: Item = {
 	...fields,
 };
 
+const interview: Item = {
+	design: Design.Interview,
+	...fields,
+};
+
+const media: Item = {
+	design: Design.Media,
+	...fields,
+};
+
 // ----- Exports ----- //
 
-export { article, analysis, feature, review, advertisementFeature, comment };
+export {
+	article,
+	analysis,
+	feature,
+	review,
+	advertisementFeature,
+	comment,
+	interview,
+	media,
+};
