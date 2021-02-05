@@ -12,7 +12,7 @@ const screenReadable = css`
 	${visuallyHidden};
 `;
 
-const veggieBurgerIconStyles = (ID: string) => {
+const veggieBurgerIconStyles = (navInputCheckboxID: string) => {
 	const beforeAfterStyles = css`
 		content: '';
 		background-color: currentColor;
@@ -33,7 +33,7 @@ const veggieBurgerIconStyles = (ID: string) => {
             to support NoJS
         */
 		/* stylelint-disable-next-line selector-type-no-unknown */
-		${`#${buildID(ID, navInputCheckboxId)}`}:checked ~ div & {
+		${`#${navInputCheckboxID}`}:checked ~ div & {
 			background-color: transparent;
 		}
 
@@ -50,7 +50,7 @@ const veggieBurgerIconStyles = (ID: string) => {
 			top: -6px;
 			/* refer to comment above */
 			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${buildID(ID, navInputCheckboxId)}`}:checked ~ div & {
+			${`#${navInputCheckboxID}`}:checked ~ div & {
 				top: 0;
 				transform: rotate(-45deg);
 			}
@@ -61,7 +61,7 @@ const veggieBurgerIconStyles = (ID: string) => {
 			bottom: -6px;
 			/* refer to comment above */
 			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${buildID(ID, navInputCheckboxId)}`}:checked ~ div & {
+			${`#${navInputCheckboxID}`}:checked ~ div & {
 				bottom: 0;
 				transform: rotate(45deg);
 			}
@@ -124,7 +124,11 @@ export const VeggieBurgerMenu: React.FC<{
 			data-cy="veggie-burger"
 		>
 			<span className={screenReadable}>Show More</span>
-			<span className={veggieBurgerIconStyles(ID)} />
+			<span
+				className={veggieBurgerIconStyles(
+					buildID(ID, navInputCheckboxId),
+				)}
+			/>
 		</label>
 		/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
 	);
