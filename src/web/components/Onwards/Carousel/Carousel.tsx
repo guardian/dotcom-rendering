@@ -9,7 +9,6 @@ import {
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
-import { Display } from '@guardian/types';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
@@ -175,7 +174,7 @@ const titleStyle = (pillar: Theme) => css`
 	color: ${pillarPalette[pillar].main};
 `;
 
-export const Title = ({
+const Title = ({
 	title,
 	pillar,
 }: {
@@ -186,56 +185,6 @@ export const Title = ({
 	<h2 className={headerStyles}>
 		More from <span className={titleStyle(pillar)}>{title}</span>
 	</h2>
-);
-
-type CarouselCardProps = {
-	isFirst: boolean;
-	pillar: Theme;
-	design: Design;
-	display?: Display;
-	linkTo: string;
-	headlineText: string;
-	webPublicationDate: string;
-	kickerText?: string;
-	imageUrl?: string;
-	isFullCardImage?: boolean;
-};
-
-export const CarouselCard: React.FC<CarouselCardProps> = ({
-	pillar,
-	design,
-	linkTo,
-	imageUrl,
-	headlineText,
-	webPublicationDate,
-	kickerText,
-	isFirst,
-	isFullCardImage,
-}: CarouselCardProps) => (
-	<LI
-		stretch={true}
-		percentage="100%"
-		showDivider={!isFirst}
-		padSides={true}
-		padSidesOnMobile={true}
-	>
-		<Card
-			linkTo={linkTo}
-			format={{
-				display: Display.Standard,
-				design,
-				theme: pillar,
-			}}
-			headlineText={headlineText}
-			webPublicationDate={webPublicationDate}
-			kickerText={kickerText || ''}
-			imageUrl={imageUrl || ''}
-			showClock={true}
-			alwaysVertical={true}
-			minWidthInPixels={258}
-			isFullCardImage={isFullCardImage}
-		/>
-	</LI>
 );
 
 export const Carousel: React.FC<OnwardsType> = ({
@@ -374,7 +323,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</div>
 
 				<div className={dotsStyle}>
-					{trails.map((value, i) => (
+					{trails.map((_, i) => (
 						<span
 							onClick={() => goToIndex(i)}
 							// This button is not particularly useful for keyboard users as the stories
@@ -394,31 +343,28 @@ export const Carousel: React.FC<OnwardsType> = ({
 					className={carouselStyle(isFullCardImage)}
 					ref={carouselRef}
 				>
-					{trails.map((trail, i) => {
-						const {
-							pillar: cardPillar,
-							design,
-							url: linkTo,
-							headline: headlineText,
-							webPublicationDate,
-							image: imageUrl,
-							kickerText,
-						} = trail;
-						return (
-							<CarouselCard
-								key={trail.url + i}
-								isFirst={i === 0}
-								pillar={cardPillar}
-								design={design}
-								linkTo={linkTo}
-								headlineText={headlineText}
-								webPublicationDate={webPublicationDate}
-								imageUrl={imageUrl}
-								kickerText={kickerText}
+					{trails.map((trail, i) => (
+						<LI
+							stretch={true}
+							percentage="100%"
+							showDivider={i !== 0}
+							padSides={true}
+							padSidesOnMobile={true}
+						>
+							<Card
+								linkTo={trail.url}
+								format={trail.format}
+								headlineText={trail.headline}
+								webPublicationDate={trail.webPublicationDate}
+								kickerText={trail.kickerText || ''}
+								imageUrl={trail.image || ''}
+								showClock={true}
+								alwaysVertical={true}
+								minWidthInPixels={258}
 								isFullCardImage={isFullCardImage}
 							/>
-						);
-					})}
+						</LI>
+					))}
 				</ul>
 			</div>
 		</div>
