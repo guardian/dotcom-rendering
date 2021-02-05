@@ -3,8 +3,17 @@ import { render } from '@testing-library/react';
 
 import { ClickToView } from './ClickToView';
 
+type CoreAPI = import('@guardian/ab-core/dist/types').CoreAPI;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 describe('ClickToView', () => {
+	const ab: CoreAPI = {
+		allRunnableTests: () => [],
+		runnableTest: () => null,
+		firstRunnableTest: () => null,
+		isUserInVariant: () => true,
+	};
+
 	it('It should render the third party content if it is not tracking', () => {
 		const thirdPartyContent = <div data-testid="third-party-content" />;
 		const { getByTestId } = render(
@@ -12,6 +21,8 @@ describe('ClickToView', () => {
 				isTracking={false}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
+				ab={ab}
+				isServerSide={false}
 			>
 				{thirdPartyContent}
 			</ClickToView>,
@@ -26,6 +37,8 @@ describe('ClickToView', () => {
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
+				ab={ab}
+				isServerSide={false}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,
@@ -41,7 +54,12 @@ describe('ClickToView', () => {
 	});
 	it('It should render a generic overlay if a source is not present', () => {
 		const { getByText } = render(
-			<ClickToView isTracking={true} sourceDomain="athirdparty.com">
+			<ClickToView
+				isTracking={true}
+				sourceDomain="athirdparty.com"
+				isServerSide={false}
+				ab={ab}
+			>
 				<div id="third-party-content" />
 			</ClickToView>,
 		);

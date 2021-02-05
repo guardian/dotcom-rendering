@@ -8,6 +8,8 @@ import { Button } from '@guardian/src-button';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
 
+type CoreAPI = import('@guardian/ab-core/dist/types').CoreAPI;
+
 type Props = {
 	children: React.ReactNode;
 	role?: RoleType;
@@ -15,6 +17,8 @@ type Props = {
 	isTracking: boolean;
 	source?: string;
 	sourceDomain?: string;
+	isServerSide?: boolean;
+	ab?: CoreAPI;
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -77,6 +81,24 @@ const roleButtonText = (role: RoleType) => {
 	}
 };
 
+const shouldDisplayOverlay = (
+	isServerSide: boolean,
+	isTracking: boolean,
+	isOverlayClicked: boolean,
+	ab?: CoreAPI,
+) => {
+	if (!isTracking) {
+		return false;
+	}
+	if (isOverlayClicked) {
+		return false;
+	}
+	if (isServerSide) {
+		return false;
+	}
+	return ab && ab.isUserInVariant('ClickToViewTest', 'manual');
+};
+
 export const ClickToView = ({
 	children,
 	role = 'inline',
@@ -84,11 +106,13 @@ export const ClickToView = ({
 	isTracking,
 	source,
 	sourceDomain = 'unknown',
+	isServerSide = true,
+	ab,
 }: Props) => {
-	const [showOverlay, setShowOverlay] = useState<boolean>(true);
+	const [isOverlayClicked, setOverlayClicked] = useState<boolean>(false);
 
 	const handleClick = () => {
-		setShowOverlay(false);
+		setOverlayClicked(true);
 		if (onAccept) {
 			setTimeout(() => onAccept());
 		}
@@ -96,7 +120,7 @@ export const ClickToView = ({
 
 	const textSize = roleTextSize(role);
 
-	if (isTracking && showOverlay) {
+	if (shouldDisplayOverlay(isServerSide, isTracking, isOverlayClicked, ab)) {
 		return (
 			<div
 				className={css`

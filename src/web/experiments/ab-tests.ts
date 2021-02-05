@@ -9,6 +9,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@root/src/web/experiments/tests/newsletter-merch-unit-test';
+import { clickToViewTest } from '@root/src/web/experiments/tests/click-to-view-test';
 
 export const tests: ABTest[] = [
 	abTestTest,
@@ -19,4 +20,5 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	deeplyReadTest,
+	clickToViewTest,
 ];
