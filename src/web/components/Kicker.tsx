@@ -7,6 +7,16 @@ import { PulsingDot } from '@root/src/web/components/PulsingDot';
 import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 import { pillarPalette } from '@frontend/lib/pillars';
 
+// Defines a prefix to be used with a headline (e.g. 'Live /')
+type Props = {
+	text: string;
+	design: Design;
+	pillar: Theme;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
+};
+
 const kickerStyles = (colour: string) => css`
 	color: ${colour};
 	font-weight: 700;
@@ -45,7 +55,7 @@ export const Kicker = ({
 	showPulsingDot,
 	showSlash = true,
 	inCard,
-}: KickerType) => {
+}: Props) => {
 	const kickerColour = decideColour(design, pillar, inCard);
 	return (
 		<span className={kickerStyles(kickerColour)}>

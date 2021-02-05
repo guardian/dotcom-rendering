@@ -437,16 +437,6 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-// Defines a prefix to be used with a headline (e.g. 'Live /')
-interface KickerType {
-	text: string;
-	design: Design;
-	pillar: Theme;
-	showPulsingDot?: boolean;
-	showSlash?: boolean;
-	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
-}
-
 type ImagePositionType = 'left' | 'top' | 'right';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
