@@ -272,6 +272,8 @@ export const canShow = ({
 
 			const { meta, module } = json.data;
 
+			module.props.onReminderOpen = sendOphanReminderOpenEvent;
+
 			return { result: true, meta: { meta, module } };
 		});
 };
@@ -315,11 +317,10 @@ export const ReaderRevenueEpic = ({ meta, module }: any) => {
 			const { abTestName } = meta;
 
 			logView(abTestName);
-			console.log('About to send Ophan event');
 			sendOphanComponentEvent('VIEW', meta);
 		}
 	}, [hasBeenSeen, meta]);
-
+	console.log('module', module);
 	if (Epic) {
 		return (
 			<div ref={setNode} className={wrapperMargins}>
