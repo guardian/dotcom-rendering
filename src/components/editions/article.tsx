@@ -34,8 +34,8 @@ const mainStyles = css`
 `;
 
 const articleWrapperStyles = (item: Format): SerializedStyles => css`
-	background-color: ${item.design === Design.Media ? neutral[0] : 'inherit'};
 	min-height: 100%;
+	background-color: ${item.design === Design.Media ? neutral[7] : 'inherit'};
 `;
 
 const articleStyles = css`

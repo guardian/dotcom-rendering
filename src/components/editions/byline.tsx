@@ -22,7 +22,9 @@ import { ShareIcon } from './shareIcon';
 import {
 	articleWidthStyles,
 	borderWidthStyles,
+	tabletImmersiveWidth,
 	wideArticleMargin,
+	wideImmersiveWidth,
 } from './styles';
 
 // ----- Styles ----- //
@@ -49,16 +51,19 @@ const interviewStyles = css`
 const immersiveStyles = css`
 	padding-left: ${remSpace[2]};
 	padding-right: ${remSpace[2]};
+	box-sizing: border-box;
 
 	${from.tablet} {
+		padding-left: 0;
+		padding-right: ${remSpace[2]};
 		margin-left: ${remSpace[6]};
+		width: ${tabletImmersiveWidth}px;
 	}
 
 	${from.wide} {
 		margin-left: ${wideArticleMargin}px;
+		width: ${wideImmersiveWidth}px;
 	}
-
-	${articleWidthStyles}
 `;
 
 const galleryStyles = css`
@@ -160,12 +165,13 @@ const bylineSecondaryStyles = (
 `;
 
 const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
-	if (format.design === Design.Interview) {
-		return css(styles(kickerColor), interviewStyles);
-	}
-
+	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
 		return css(styles(kickerColor), immersiveStyles);
+	}
+
+	if (format.design === Design.Interview) {
+		return css(styles(kickerColor), interviewStyles);
 	}
 
 	if (format.design === Design.Comment) {

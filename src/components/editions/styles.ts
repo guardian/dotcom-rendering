@@ -19,6 +19,9 @@ export const wideArticleMargin = 144;
 const wideBorderWidth = wideContentWidth + 13;
 const tabletBorderWidth = tabletContentWidth + 13;
 
+export const tabletImmersiveWidth = tabletBorderWidth;
+export const wideImmersiveWidth = wideBorderWidth;
+
 export const sidePadding = css`
 	padding-left: ${remSpace[2]};
 	padding-right: ${remSpace[2]};
@@ -60,11 +63,8 @@ export const articleMarginStyles: SerializedStyles = css`
 `;
 
 export const headerBackgroundColour = (format: Format): Colour => {
-	if (format.design === Design.Feature) {
-		if (format.display === Display.Immersive) {
-			return Palette.neutral[7];
-		}
-		return Palette.neutral[100];
+	if (format.display === Display.Immersive) {
+		return Palette.neutral[7];
 	}
 
 	if (format.design === Design.Analysis) {
@@ -72,7 +72,7 @@ export const headerBackgroundColour = (format: Format): Colour => {
 	}
 
 	if (format.design === Design.Media) {
-		return Palette.neutral[0];
+		return Palette.neutral[7];
 	}
 
 	if (format.design === Design.Comment) {
