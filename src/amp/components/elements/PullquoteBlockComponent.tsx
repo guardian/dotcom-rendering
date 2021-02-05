@@ -22,18 +22,15 @@ export const PullquoteBlockComponent: React.FC<{
 	html?: string;
 	pillar: Theme;
 }> = ({ html, pillar }) => {
-	if (html) {
-		return (
-			<aside className={styles(pillar)}>
-				<Quote />{' '}
-				<span
-					dangerouslySetInnerHTML={{
-						__html: html,
-					}}
-				/>
-			</aside>
-		);
-	} else {
-		return null;
-	}
+	if (!html) return <></>;
+	return (
+		<aside className={styles(pillar)}>
+			<Quote />{' '}
+			<span
+				dangerouslySetInnerHTML={{
+					__html: html,
+				}}
+			/>
+		</aside>
+	);
 };
