@@ -61,7 +61,6 @@ const Review = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			...isImmersive(),
 			theme: selectPillar(Pillar.Culture),
 		}}
 	/>
