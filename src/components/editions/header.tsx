@@ -58,6 +58,10 @@ const galleryHeaderStyles = css`
 	}
 `;
 
+const pictureHeaderStyles = css`
+	border: none;
+`;
+
 const galleryLinesStyles = css`
 	${from.tablet} {
 		margin-left: 0;
@@ -207,7 +211,7 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const PictureHeader: FC<HeaderProps> = ({ item }) => (
-	<header css={galleryHeaderStyles}>
+	<header css={pictureHeaderStyles}>
 		<div css={galleryInnerHeaderStyles}>
 			<div css={galleryHeaderBorderStyles}>
 				<Headline item={item} />
