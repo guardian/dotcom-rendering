@@ -14,7 +14,6 @@ import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
@@ -228,9 +227,7 @@ export const Card = ({
 												<Avatar
 													imageSrc={avatar.src}
 													imageAlt={avatar.alt}
-													palette={decidePalette(
-														format,
-													)}
+													palette={palette}
 												/>
 											</AvatarContainer>
 										</Hide>
@@ -253,13 +250,13 @@ export const Card = ({
 											<Avatar
 												imageSrc={avatar.src}
 												imageAlt={avatar.alt}
-												palette={decidePalette(format)}
+												palette={palette}
 											/>
 										</AvatarContainer>
 									</Hide>
 								)}
 								<CardFooter
-									design={format.design}
+									format={format}
 									age={
 										webPublicationDate ? (
 											<CardAge
