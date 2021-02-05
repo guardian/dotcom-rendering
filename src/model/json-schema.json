@@ -2332,7 +2332,6 @@
             "required": [
                 "_type",
                 "assetId",
-                "channelId",
                 "expired",
                 "id",
                 "mediaTitle"
