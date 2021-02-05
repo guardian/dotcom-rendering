@@ -13,7 +13,7 @@ import {
 } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import Headline from './headline';
+import Headline from '.';
 
 // ----- Setup ------ //
 
