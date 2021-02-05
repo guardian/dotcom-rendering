@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { Design, Display, Pillar, Special } from '@guardian/types';
 
 import { Section } from '@frontend/web/components/Section';
 import { Flex } from '@frontend/web/components/Flex';
@@ -135,12 +135,12 @@ export const News = () => (
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
 										display: Display.Standard,
-										theme: Pillar.News,
+										theme: Special.SpecialReport,
 										design: Design.Article,
 									}}
 									palette={decidePalette({
 										display: Display.Standard,
-										theme: Pillar.News,
+										theme: Special.SpecialReport,
 										design: Design.Article,
 									})}
 									headlineText={headlines[4]}
@@ -509,12 +509,12 @@ export const Related = () => (
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
 								display: Display.Standard,
-								theme: Pillar.Sport,
+								theme: Special.SpecialReport,
 								design: Design.Comment,
 							}}
 							palette={decidePalette({
 								display: Display.Standard,
-								theme: Pillar.Sport,
+								theme: Special.SpecialReport,
 								design: Design.Comment,
 							})}
 							headlineText={headlines[8]}
@@ -699,12 +699,12 @@ export const Quad = () => (
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
 								display: Display.Standard,
-								theme: Pillar.Opinion,
+								theme: Special.SpecialReport,
 								design: Design.Article,
 							}}
 							palette={decidePalette({
 								display: Display.Standard,
-								theme: Pillar.Opinion,
+								theme: Special.SpecialReport,
 								design: Design.Article,
 							})}
 							headlineText={headlines[11]}

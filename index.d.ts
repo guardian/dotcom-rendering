@@ -65,6 +65,7 @@ type Palette = {
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;
+		card: Colour;
 	},
 	fill: {
 		commentCount: Colour;

@@ -185,6 +185,21 @@ const backgroundAvatar = (format: Format): string => {
 	}
 };
 
+const backgroundCard = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	switch (format.design) {
+		case Design.GuardianView:
+		case Design.Comment:
+			return opinion[800];
+		case Design.Media:
+			return neutral[20];
+		case Design.Live:
+			return pillarPalette[format.theme].dark;
+		default:
+			return neutral[97];
+	}
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -240,6 +255,7 @@ export const decidePalette = (format: Format): Palette => {
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
+			card: backgroundCard(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

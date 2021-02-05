@@ -123,6 +123,7 @@ const fullCardImageAgeStyles = css`
 export const Card = ({
 	linkTo,
 	format,
+	palette,
 	headlineText,
 	headlineSize,
 	showQuotes,
@@ -161,7 +162,7 @@ export const Card = ({
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
 	return (
-		<CardLink linkTo={linkTo} design={format.design} pillar={format.theme}>
+		<CardLink linkTo={linkTo} format={format} palette={palette}>
 			<TopBar topBarColour={pillarPalette[format.theme].main}>
 				<CardLayout
 					imagePosition={imagePosition}

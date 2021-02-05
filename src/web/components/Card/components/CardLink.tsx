@@ -1,16 +1,16 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
-import { neutral, opinion } from '@guardian/src-foundations/palette';
-import { pillarPalette } from '@frontend/lib/pillars';
+import { Design, Format } from '@guardian/types';
+import { neutral } from '@guardian/src-foundations/palette';
 
-const linkStyles = (design: Design, pillar: Theme) => {
+const linkStyles = (format: Format, palette: Palette) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
+		background-color: ${palette.background.card};
 
 		/* The whole card is one link so we card level styles here */
 		width: 100%;
@@ -38,12 +38,11 @@ const linkStyles = (design: Design, pillar: Theme) => {
 		}
 	`;
 
-	switch (design) {
+	switch (format.design) {
 		case Design.GuardianView:
 		case Design.Comment:
 			return css`
 				${baseLinkStyles}
-				background-color: ${opinion[800]};
 				:hover {
 					/* TODO: This colour is hard coded here because it does not yet
                            exist in src-foundation. Once it's been added, please
@@ -55,8 +54,6 @@ const linkStyles = (design: Design, pillar: Theme) => {
 		case Design.Media:
 			return css`
 				${baseLinkStyles}
-				background-color: ${neutral[20]};
-
 				:hover {
 					filter: brightness(90%);
 				}
@@ -64,8 +61,6 @@ const linkStyles = (design: Design, pillar: Theme) => {
 		case Design.Live:
 			return css`
 				${baseLinkStyles}
-				background-color: ${pillarPalette[pillar].dark};
-
 				:hover {
 					filter: brightness(90%);
 				}
@@ -73,8 +68,6 @@ const linkStyles = (design: Design, pillar: Theme) => {
 		default:
 			return css`
 				${baseLinkStyles}
-				background-color: ${neutral[97]};
-
 				:hover {
 					background-color: ${neutral[93]};
 				}
@@ -85,14 +78,14 @@ const linkStyles = (design: Design, pillar: Theme) => {
 type Props = {
 	children: React.ReactNode;
 	linkTo: string;
-	design: Design;
-	pillar: Theme;
+	format: Format;
+	palette: Palette;
 };
 
-export const CardLink = ({ children, linkTo, design, pillar }: Props) => (
+export const CardLink = ({ children, linkTo, format, palette }: Props) => (
 	<a
 		href={linkTo}
-		className={linkStyles(design, pillar)}
+		className={linkStyles(format, palette)}
 		data-link-name="article"
 	>
 		{children}
