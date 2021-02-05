@@ -142,12 +142,32 @@ const textArticleLinkHover = (format: Format): string => {
 	}
 };
 
+const textCardHeadline = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return WHITE;
+	switch (format.design) {
+		case Design.Feature:
+		case Design.Interview:
+			return pillarPalette[format.theme].dark;
+		case Design.Media:
+		case Design.Live:
+			return neutral[97];
+		default:
+			return BLACK;
+	}
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.GuardianView) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
 	return 'transparent';
+};
+
+const textCardKicker = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
+	return pillarPalette[format.theme].main;
 };
 
 const backgroundSeriesTitle = (format: Format): string => {
@@ -255,6 +275,8 @@ export const decidePalette = (format: Format): Palette => {
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
+			cardHeadline: textCardHeadline(format),
+			cardKicker: textCardKicker(format),
 		},
 		background: {
 			article: backgroundArticle(format),

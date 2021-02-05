@@ -9,13 +9,12 @@ import { until } from '@guardian/src-foundations/mq';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
-import { pillarPalette } from '@frontend/lib/pillars';
 import { space } from '@guardian/src-foundations';
 
 type Props = {
 	headlineText: string; // The text shown
-	design: Design; // Used to decide when to add type specific styles
-	pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
+	format: Format; // Used to decide when to add type specific styles
+	palette: Palette; // Used to colour the headline and the kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
@@ -81,23 +80,6 @@ const underlinedStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const colourStyles = (colour: string) => css`
-	color: ${colour};
-`;
-
-const headlineStyles = (design: Design, pillar: Theme) => {
-	switch (design) {
-		case Design.Feature:
-		case Design.Interview:
-			return colourStyles(pillarPalette[pillar].dark);
-		case Design.Media:
-		case Design.Live:
-			return colourStyles(neutral[97]);
-		default:
-			return undefined;
-	}
-};
-
 const fullCardImageTextStyles = css`
 	${headline.xxxsmall()};
 	color: ${neutral[100]};
@@ -111,8 +93,8 @@ const fullCardImageTextStyles = css`
 
 export const CardHeadline = ({
 	headlineText,
-	design,
-	pillar,
+	format,
+	palette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -126,7 +108,7 @@ export const CardHeadline = ({
 		<h4
 			className={cx(
 				fontStyles(size),
-				design === Design.Analysis && underlinedStyles(size),
+				format.design === Design.Analysis && underlinedStyles(size),
 				isFullCardImage &&
 					css`
 						line-height: 1; /* Reset line height in full image carousel */
@@ -137,27 +119,33 @@ export const CardHeadline = ({
 				{kickerText && (
 					<Kicker
 						text={kickerText}
-						design={design}
-						pillar={pillar}
+						design={format.design}
+						pillar={format.theme}
 						showPulsingDot={showPulsingDot}
 						showSlash={showSlash}
 						inCard={true}
 					/>
 				)}
 				{showQuotes && (
-					<QuoteIcon
-						colour={pillarPalette[pillar].main}
-						size={size}
-					/>
+					<QuoteIcon colour={palette.text.cardKicker} size={size} />
 				)}
 
-				<span className={headlineStyles(design, pillar)}>
+				<span
+					className={css`
+						color: ${palette.text.cardHeadline};
+					`}
+				>
 					{headlineText}
 				</span>
 			</span>
 		</h4>
 		{byline && showByline && (
-			<Byline text={byline} design={design} pillar={pillar} size={size} />
+			<Byline
+				text={byline}
+				design={format.design}
+				pillar={format.theme}
+				size={size}
+			/>
 		)}
 	</>
 );

@@ -59,6 +59,8 @@ type Palette = {
 		syndicationButton: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
+		cardHeadline: Colour;
+		cardKicker: Colour;
 	},
 	background: {
 		article: Colour;
@@ -80,7 +82,7 @@ type Palette = {
 	},
 	topBar: {
 		card: Colour;
-	}
+	},
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
