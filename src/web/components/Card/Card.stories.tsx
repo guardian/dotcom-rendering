@@ -700,12 +700,12 @@ export const Quad = () => (
 							format={{
 								display: Display.Standard,
 								theme: Special.SpecialReport,
-								design: Design.Article,
+								design: Design.Live,
 							}}
 							palette={decidePalette({
 								display: Display.Standard,
 								theme: Special.SpecialReport,
-								design: Design.Article,
+								design: Design.Live,
 							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -715,7 +715,7 @@ export const Quad = () => (
 							showClock={true}
 							commentCount={30989}
 							isLiveBlog={true}
-							kickerText="Special Report"
+							showPulsingDot={true}
 						/>
 					</LI>
 					<LI
