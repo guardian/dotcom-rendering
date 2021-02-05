@@ -136,7 +136,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition, ID = '' }: Props) => {
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','0')
                             })
-                            // focusOnFirstNavElement()
+                            focusOnFirstNavElement()
                           }
                         })
                         var toggleMainMenu = function(e){
