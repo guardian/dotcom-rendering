@@ -2,11 +2,11 @@ import { ABTest } from '@guardian/ab-core';
 
 export const stickyNavTest: ABTest = {
 	id: 'stickyNavTest',
-	start: '2021-02-01',
+	start: '2021-02-10',
 	expiry: '2021-05-03',
 	author: 'nlong',
 	description: 'Tests sticky nav behaviour.',
-	audience: 1,
+	audience: 0.1,
 	audienceOffset: 0,
 	successMeasure:
 		'Increased CTR on sticky variant, more visits to fronts, increase in number of pillars visited per user.',
