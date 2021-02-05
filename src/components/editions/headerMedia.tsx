@@ -7,8 +7,10 @@ import { Img } from '@guardian/image-rendering';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display, none, some } from '@guardian/types';
+import HeaderImageCaption, {
+	captionId,
+} from 'components/editions/headerImageCaption';
 import StarRating from 'components/editions/starRating';
-import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
@@ -69,6 +71,7 @@ const videoStyles = css`
 
 const fullWidthCaptionStyles = css`
 	width: 100%;
+	height: 100%;
 
 	${from.tablet} {
 		width: 100%;
