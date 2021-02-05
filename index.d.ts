@@ -61,6 +61,7 @@ type Palette = {
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
 		cardKicker: Colour;
+		linkKicker: Colour;
 	},
 	background: {
 		article: Colour;

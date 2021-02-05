@@ -156,6 +156,10 @@ const textCardHeadline = (format: Format): string => {
 	}
 };
 
+const textLinkKicker = (): string => {
+	return BLACK;
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -277,6 +281,7 @@ export const decidePalette = (format: Format): Palette => {
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline: textCardHeadline(format),
 			cardKicker: textCardKicker(format),
+			linkKicker: textLinkKicker(),
 		},
 		background: {
 			article: backgroundArticle(format),
