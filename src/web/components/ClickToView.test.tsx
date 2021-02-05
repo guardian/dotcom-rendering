@@ -3,15 +3,15 @@ import { render } from '@testing-library/react';
 
 import { ClickToView } from './ClickToView';
 
-type CoreAPI = import('@guardian/ab-core/dist/types').CoreAPI;
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 describe('ClickToView', () => {
-	const ab: CoreAPI = {
-		allRunnableTests: () => [],
-		runnableTest: () => null,
-		firstRunnableTest: () => null,
-		isUserInVariant: () => true,
+	const MockABTestAPI = (isUserInVariant: boolean) => {
+		return {
+			allRunnableTests: () => [],
+			runnableTest: () => null,
+			firstRunnableTest: () => null,
+			isUserInVariant: () => isUserInVariant,
+		};
 	};
 
 	it('It should render the third party content if it is not tracking', () => {
@@ -21,10 +21,42 @@ describe('ClickToView', () => {
 				isTracking={false}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				ab={ab}
+				ab={MockABTestAPI(false)}
 				isServerSide={false}
 			>
 				{thirdPartyContent}
+			</ClickToView>,
+		);
+
+		expect(getByTestId('third-party-content')).toBeInTheDocument();
+	});
+
+	it('It should render third party content if the user is not in the ab test variant', () => {
+		const { getByTestId } = render(
+			<ClickToView
+				isTracking={true}
+				source="A Third Party"
+				sourceDomain="athirdparty.com"
+				ab={MockABTestAPI(false)}
+				isServerSide={false}
+			>
+				<div data-testid="third-party-content" />
+			</ClickToView>,
+		);
+
+		expect(getByTestId('third-party-content')).toBeInTheDocument();
+	});
+
+	it('It should render third party content if rendered server side', () => {
+		const { getByTestId } = render(
+			<ClickToView
+				isTracking={true}
+				source="A Third Party"
+				sourceDomain="athirdparty.com"
+				ab={MockABTestAPI(true)}
+				isServerSide={true}
+			>
+				<div data-testid="third-party-content" />
 			</ClickToView>,
 		);
 
@@ -37,7 +69,7 @@ describe('ClickToView', () => {
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				ab={ab}
+				ab={MockABTestAPI(true)}
 				isServerSide={false}
 			>
 				<div id="third-party-content" />
@@ -58,7 +90,7 @@ describe('ClickToView', () => {
 				isTracking={true}
 				sourceDomain="athirdparty.com"
 				isServerSide={false}
-				ab={ab}
+				ab={MockABTestAPI(true)}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,

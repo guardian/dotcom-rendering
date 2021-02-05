@@ -93,7 +93,14 @@ const shouldDisplayOverlay = (
 	if (isOverlayClicked) {
 		return false;
 	}
+	/**
+	 * This check will exist for the duration of the ABTest.
+	 * The ab test is enabled manually so almost every one will not see the overlay,
+	 * this check forces the article to get rendered without the overlay to avoid
+	 * re-rendering the component client side in the majority of cases.
+	 */
 	if (isServerSide) {
+		console.log('is server side');
 		return false;
 	}
 	return ab && ab.isUserInVariant('ClickToViewTest', 'manual');

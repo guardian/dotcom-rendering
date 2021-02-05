@@ -7,8 +7,8 @@ export const clickToViewTest: ABTest = {
 	author: 'Francis Rhys-Jones',
 	description:
 		'This test is to allow the journalists to see the impact of the roll out of the ClickToView component on the content they are publishing prior to going live.',
-	audience: 0.001,
-	audienceOffset: 1,
+	audience: 0,
+	audienceOffset: 0,
 	successMeasure: 'The use of embedded content will go down.',
 	audienceCriteria: 'Everyone',
 	idealOutcome:
