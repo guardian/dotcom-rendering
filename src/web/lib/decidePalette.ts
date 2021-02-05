@@ -233,6 +233,12 @@ const borderArticleLinkHover = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const topBarCard = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -267,6 +273,9 @@ export const decidePalette = (format: Format): Palette => {
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
+		},
+		topBar: {
+			card: topBarCard(format),
 		},
 	};
 };

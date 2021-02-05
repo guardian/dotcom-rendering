@@ -11,7 +11,6 @@ import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
-import { pillarPalette } from '@frontend/lib/pillars';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 
@@ -163,7 +162,7 @@ export const Card = ({
 
 	return (
 		<CardLink linkTo={linkTo} format={format} palette={palette}>
-			<TopBar topBarColour={pillarPalette[format.theme].main}>
+			<TopBar palette={palette}>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}

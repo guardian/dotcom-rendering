@@ -3,10 +3,10 @@ import { css } from 'emotion';
 
 type Props = {
 	children: React.ReactNode;
-	topBarColour: string;
+	palette: Palette;
 };
 
-export const TopBar = ({ children, topBarColour }: Props) => (
+export const TopBar = ({ children, palette }: Props) => (
 	<div
 		className={css`
 			display: flex;
@@ -18,7 +18,7 @@ export const TopBar = ({ children, topBarColour }: Props) => (
 
 			/* Styling for top bar */
 			:before {
-				background-color: ${topBarColour};
+				background-color: ${palette.topBar.card};
 				content: '';
 				position: absolute;
 				top: 0;
