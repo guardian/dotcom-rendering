@@ -311,7 +311,6 @@ export const ReaderRevenueEpic = ({ meta, module }: any) => {
 	}, []);
 
 	useEffect(() => {
-		console.log(hasBeenSeen, meta);
 		if (hasBeenSeen && meta) {
 			// Should only run once
 			const { abTestName } = meta;
@@ -320,7 +319,6 @@ export const ReaderRevenueEpic = ({ meta, module }: any) => {
 			sendOphanComponentEvent('VIEW', meta);
 		}
 	}, [hasBeenSeen, meta]);
-	console.log('module', module);
 	if (Epic) {
 		return (
 			<div ref={setNode} className={wrapperMargins}>

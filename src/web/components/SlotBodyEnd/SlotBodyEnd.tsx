@@ -54,9 +54,8 @@ const buildReaderRevenueEpicConfig = ({
 					tags,
 					contributionsServiceUrl,
 				}),
-			/* eslint-disable-next-line react/jsx-props-no-spreading */
 			show: (meta: any) => () => {
-				console.log(meta);
+				/* eslint-disable-next-line react/jsx-props-no-spreading */
 				return <ReaderRevenueEpic {...meta} />;
 			},
 		},
