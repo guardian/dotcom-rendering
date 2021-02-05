@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Format } from '@guardian/types';
+import { Design, Format, Special } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
 
 const linkStyles = (format: Format, palette: Palette) => {
@@ -37,6 +37,15 @@ const linkStyles = (format: Format, palette: Palette) => {
 			opacity: 0.1;
 		}
 	`;
+
+	if (format.theme === Special.SpecialReport) {
+		return css`
+			${baseLinkStyles}
+			:hover {
+				filter: brightness(90%);
+			}
+		`;
+	}
 
 	switch (format.design) {
 		case Design.GuardianView:
