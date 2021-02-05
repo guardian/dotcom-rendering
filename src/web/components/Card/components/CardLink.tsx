@@ -61,12 +61,6 @@ const linkStyles = (format: Format, palette: Palette) => {
 				}
 			`;
 		case Design.Media:
-			return css`
-				${baseLinkStyles}
-				:hover {
-					filter: brightness(90%);
-				}
-			`;
 		case Design.Live:
 			return css`
 				${baseLinkStyles}
