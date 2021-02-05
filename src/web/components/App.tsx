@@ -473,14 +473,14 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</>
 				</HydrateOnce>
 			))}
-			<HydrateOnce root="sticky-nav-root">
+			<Portal root="sticky-nav-root">
 				<StickyNav
 					CAPI={CAPI}
 					NAV={NAV}
 					format={format}
 					palette={palette}
 				/>
-			</HydrateOnce>
+			</Portal>
 
 			{NAV.subNavSections && (
 				<HydrateOnce root="sub-nav-root">

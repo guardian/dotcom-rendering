@@ -15,7 +15,12 @@ import { Hide } from '@frontend/web/components/Hide';
 import { clearFix } from '@root/src/lib/mixins';
 
 import { Display } from '@guardian/types';
-import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
+import {
+	buildID,
+	navInputCheckboxId,
+	showMoreButtonId,
+	veggieBurgerId,
+} from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
@@ -23,6 +28,7 @@ type Props = {
 	nav: NavType;
 	subscribeUrl: string;
 	edition: Edition;
+	ID?: string; // required for sticky-nav test as JS behaviour coded against element ID and now we have multiple menus.
 };
 
 const clearFixStyle = css`
@@ -67,7 +73,7 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
+export const Nav = ({ format, nav, subscribeUrl, edition, ID = '' }: Props) => {
 	return (
 		<div className={rowStyles}>
 			{/*
@@ -86,11 +92,23 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 				dangerouslySetInnerHTML={{
 					__html: `document.addEventListener('DOMContentLoaded', function(){
                         // Used to toggle data-link-name on label buttons
-                        var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
-                        var showMoreButton = document.getElementById('${showMoreButtonId}')
-                        var veggieBurger = document.getElementById('${veggieBurgerId}')
+                        var navInputCheckbox = document.getElementById('${buildID(
+							ID,
+							navInputCheckboxId,
+						)}')
+                        var showMoreButton = document.getElementById('${buildID(
+							ID,
+							showMoreButtonId,
+						)}')
+                        var veggieBurger = document.getElementById('${buildID(
+							ID,
+							veggieBurgerId,
+						)}')
                         var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
-                        var expandedMenu = document.getElementById('expanded-menu')
+                        var expandedMenu = document.getElementById('${buildID(
+							ID,
+							'expanded-menu',
+						)}')
 
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')
@@ -104,7 +122,8 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
                             firstColLabel.focus()
                           }
                         }
-                        navInputCheckbox.addEventListener('click',function(){
+
+                        navInputCheckbox.addEventListener('click',function(event){
                           if(!navInputCheckbox.checked) {
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
@@ -117,7 +136,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','0')
                             })
-                            focusOnFirstNavElement()
+                            // focusOnFirstNavElement()
                           }
                         })
                         var toggleMainMenu = function(e){
@@ -199,7 +218,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 					className={css`
 						${visuallyHidden};
 					`}
-					id={navInputCheckboxId}
+					id={buildID(ID, navInputCheckboxId)}
 					name="more"
 					tabIndex={-1}
 					key="OpenExpandedMenuCheckbox"
@@ -212,7 +231,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu nav={nav} display={format.display} />
+				<ExpandedMenu nav={nav} display={format.display} ID={ID} />
 			</nav>
 			{format.display === Display.Immersive && (
 				<PositionRoundel>

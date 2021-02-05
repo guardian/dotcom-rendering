@@ -49,7 +49,7 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
-import { StickyNav } from '@root/src/web/components/StickyNav/StickyNav';
+import { NavGroup } from '@root/src/web/components/StickyNav/StickyNav';
 
 const gridTemplateWide = css`
 	grid-template-areas:
@@ -287,6 +287,10 @@ const ageWarningMargins = css`
 	}
 `;
 
+const stickyNavRootStyle = css`
+	display: inline;
+`;
+
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -357,13 +361,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			</div>
 
 			<div>
-				<div id="sticky-nav-root">
-					<StickyNav
-						CAPI={makeGuardianBrowserCAPI(CAPI)}
-						NAV={NAV}
-						palette={palette}
-						format={format}
-					/>
+				<div id="sticky-nav-root" className={stickyNavRootStyle}>
+					<div data-name="placeholder">
+						<NavGroup
+							CAPI={makeGuardianBrowserCAPI(CAPI)}
+							NAV={NAV}
+							palette={palette}
+							format={format}
+						/>
+					</div>
 				</div>
 
 				<Section

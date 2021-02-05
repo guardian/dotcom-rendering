@@ -9,9 +9,9 @@ import { Display } from '@guardian/types';
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
 import { Columns } from './Columns';
-import { navInputCheckboxId } from '../config';
+import { buildID, navInputCheckboxId } from '../config';
 
-const mainMenuStyles = css`
+const mainMenuStyles = (ID: string) => css`
 	background-color: ${brandBackground.primary};
 	box-sizing: border-box;
 	${textSans.large()};
@@ -29,7 +29,7 @@ const mainMenuStyles = css`
         to support NoJS
     */
 	/* stylelint-disable-next-line selector-type-no-unknown */
-	${`#${navInputCheckboxId}`}:checked ~ div & {
+	${`#${buildID(ID, navInputCheckboxId)}`}:checked ~ div & {
 		${from.desktop} {
 			display: block;
 			overflow: visible;
@@ -56,7 +56,7 @@ const mainMenuStyles = css`
 
 	/* refer to comment above */
 	/* stylelint-disable */
-	${`#${navInputCheckboxId}`}:checked ~ div & {
+	${`#${buildID(ID, navInputCheckboxId)}`}:checked ~ div & {
 		${until.desktop} {
 			transform: translateX(
 				0%
@@ -93,14 +93,15 @@ const mainMenuStyles = css`
 export const ExpandedMenu: React.FC<{
 	display: Display;
 	nav: NavType;
-}> = ({ display, nav }) => {
+	ID: string;
+}> = ({ display, nav, ID }) => {
 	return (
-		<div id="expanded-menu">
-			<ShowMoreMenu display={display} />
-			<VeggieBurgerMenu display={display} />
+		<div id={buildID(ID, 'expanded-menu')}>
+			<ShowMoreMenu display={display} ID={ID} />
+			<VeggieBurgerMenu display={display} ID={ID} />
 			<div
-				id="expanded-menu"
-				className={mainMenuStyles}
+				id={buildID(ID, 'expanded-menu')}
+				className={mainMenuStyles(ID)}
 				data-testid="expanded-menu"
 				data-cy="expanded-menu"
 			>

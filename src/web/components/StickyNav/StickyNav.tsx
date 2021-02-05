@@ -10,31 +10,35 @@ import { brandBackground, brandLine } from '@guardian/src-foundations/palette';
 import libDebounce from 'lodash.debounce';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { useAB } from '@guardian/ab-react';
 
 interface Props {
 	CAPI: CAPIBrowserType;
 	NAV: NavType;
 	format: Format;
 	palette: Palette;
+	ID?: string;
 }
 
 const stickyStyle = (theme: Theme) => css`
 	position: sticky;
 	top: 0;
-	z-index: 9000;
+	z-index: 900;
 	background-color: white;
 	box-shadow: 0 0 transparent, 0 0 transparent,
 		1px 3px 6px ${neutralBorder(theme)};
 `;
 
-const fixedStyle = (theme: Theme) => css`
+const fixedStyle = (theme: Theme, display: boolean) => css`
 	width: 100%;
 	position: fixed;
 	top: 0;
-	z-index: 9000;
+	z-index: 900;
 	background-color: white;
 	box-shadow: 0 0 transparent, 0 0 transparent,
 		1px 3px 6px ${neutralBorder(theme)};
+
+	display: ${display ? 'block' : 'none'};
 `;
 
 export const NavGroup: React.FC<Props> = ({
@@ -42,6 +46,7 @@ export const NavGroup: React.FC<Props> = ({
 	NAV,
 	format,
 	palette,
+	ID,
 }: Props) => {
 	const theme = decideTheme({
 		pillar: CAPI.pillar,
@@ -65,6 +70,7 @@ export const NavGroup: React.FC<Props> = ({
 					}}
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
+					ID={ID || ''}
 				/>
 			</Section>
 			{NAV.subNavSections && (
@@ -152,31 +158,32 @@ const StickyNavBackscroll: React.FC<Props> = ({
 		<>
 			<NavGroup CAPI={CAPI} NAV={NAV} palette={palette} format={format} />
 
-			{state.shouldFix && (
-				<div className={fixedStyle(pillar)}>
-					<NavGroup
-						CAPI={CAPI}
-						NAV={NAV}
-						palette={palette}
-						format={format}
-					/>
-				</div>
-			)}
+			<div className={fixedStyle(pillar, state.shouldFix)}>
+				<NavGroup
+					CAPI={CAPI}
+					NAV={NAV}
+					palette={palette}
+					format={format}
+					ID="sticky"
+				/>
+			</div>
 		</>
 	);
 };
 
 // StickyNav is the entrypoint for the nav during this engagement test. It
 // handles AB test logic and picks the right variant for the user.
+//
+// Relies on AB data so *client-side only.*
 export const StickyNav: React.FC<Props> = ({
 	CAPI,
 	NAV,
 	palette,
 	format,
 }: Props) => {
-	// const ABTestAPI = useAB();
-	/* 	if (true) {
-		// ABTestAPI.isUserInVariant('stickyNavTest', 'sticky-nav-simple')) {
+	const ABTestAPI = useAB();
+
+	if (ABTestAPI.isUserInVariant('stickyNavTest', 'sticky-nav-simple')) {
 		return (
 			<StickyNavSimple
 				CAPI={CAPI}
@@ -185,9 +192,8 @@ export const StickyNav: React.FC<Props> = ({
 				format={format}
 			/>
 		);
-	} */
-	if (true) {
-		// ABTestAPI.isUserInVariant('stickyNavTest', 'sticky-nav-backscroll')) {
+	}
+	if (ABTestAPI.isUserInVariant('stickyNavTest', 'sticky-nav-backscroll')) {
 		return (
 			<StickyNavBackscroll
 				CAPI={CAPI}
