@@ -119,8 +119,7 @@ export const CardHeadline = ({
 				{kickerText && (
 					<Kicker
 						text={kickerText}
-						design={format.design}
-						pillar={format.theme}
+						palette={palette}
 						showPulsingDot={showPulsingDot}
 						showSlash={showSlash}
 						inCard={true}

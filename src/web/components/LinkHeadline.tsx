@@ -79,8 +79,7 @@ export const LinkHeadline = ({
 		{kickerText && (
 			<Kicker
 				text={kickerText}
-				design={format.design}
-				pillar={format.theme}
+				palette={palette}
 				showPulsingDot={showPulsingDot}
 				showSlash={showSlash}
 			/>

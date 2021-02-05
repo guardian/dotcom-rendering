@@ -156,8 +156,30 @@ const textCardHeadline = (format: Format): string => {
 	}
 };
 
-const textLinkKicker = (): string => {
-	return BLACK;
+const textCardKicker = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
+	switch (format.design) {
+		case Design.Live:
+			switch (format.theme) {
+				case Pillar.News:
+					return '#ffbac8';
+				case Pillar.Sport:
+					return '#90dcff';
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		case Design.Media:
+			if (format.theme === Pillar.News)
+				return pillarPalette[format.theme].bright;
+			return pillarPalette[format.theme].main;
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
+const textLinkKicker = (format: Format): string => {
+	return pillarPalette[format.theme].main;
 };
 
 const backgroundArticle = (format: Format): string => {
@@ -166,12 +188,6 @@ const backgroundArticle = (format: Format): string => {
 	if (format.design === Design.GuardianView) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
 	return 'transparent';
-};
-
-const textCardKicker = (format: Format): string => {
-	if (format.theme === Special.SpecialReport)
-		return brandAltBackground.primary;
-	return pillarPalette[format.theme].main;
 };
 
 const backgroundSeriesTitle = (format: Format): string => {
@@ -281,7 +297,7 @@ export const decidePalette = (format: Format): Palette => {
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline: textCardHeadline(format),
 			cardKicker: textCardKicker(format),
-			linkKicker: textLinkKicker(),
+			linkKicker: textLinkKicker(format),
 		},
 		background: {
 			article: backgroundArticle(format),
