@@ -55,7 +55,10 @@ const buildReaderRevenueEpicConfig = ({
 					contributionsServiceUrl,
 				}),
 			/* eslint-disable-next-line react/jsx-props-no-spreading */
-			show: (meta: any) => () => <ReaderRevenueEpic {...meta} />,
+			show: (meta: any) => () => {
+				console.log(meta);
+				return <ReaderRevenueEpic {...meta} />;
+			},
 		},
 		timeoutMillis: null, // TODO: do we want a timeout?
 	};

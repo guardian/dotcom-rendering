@@ -3,6 +3,7 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import {
+	logView,
 	getBodyEnd,
 	getViewLog,
 	getWeeklyArticleHistory,
@@ -15,6 +16,11 @@ import {
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
+import {
+	sendOphanComponentEvent,
+	// TestMeta, TODO: Do we still need this?
+} from '@root/src/web/browser/ophan/ophan';
+import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 import { getCookie } from '../../browser/cookie';
 
 const { css } = emotion;
@@ -266,12 +272,19 @@ export const canShow = ({
 
 			const { meta, module } = json.data;
 
-			return { result: true, meta: { ...meta, module } };
+			return { result: true, meta: { meta, module } };
 		});
 };
 
-export const ReaderRevenueEpic = ({ module }: any) => {
+export const ReaderRevenueEpic = ({ meta, module }: any) => {
+	// TODO: sort out this any
 	const [Epic, setEpic] = useState<React.FC>();
+
+	const [hasBeenSeen, setNode] = useHasBeenSeen({
+		rootMargin: '-18px',
+		threshold: 0,
+		debounce: true,
+	}) as HasBeenSeen;
 
 	useEffect(() => {
 		window.guardian.automat = {
@@ -295,9 +308,21 @@ export const ReaderRevenueEpic = ({ module }: any) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		console.log(hasBeenSeen, meta);
+		if (hasBeenSeen && meta) {
+			// Should only run once
+			const { abTestName } = meta;
+
+			logView(abTestName);
+			console.log('About to send Ophan event');
+			sendOphanComponentEvent('VIEW', meta);
+		}
+	}, [hasBeenSeen, meta]);
+
 	if (Epic) {
 		return (
-			<div className={wrapperMargins}>
+			<div ref={setNode} className={wrapperMargins}>
 				{/* eslint-disable-next-line react/jsx-props-no-spreading */}
 				<Epic {...module.props} />
 			</div>
