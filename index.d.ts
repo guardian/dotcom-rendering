@@ -453,36 +453,6 @@ type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
-interface CardType {
-    linkTo: string;
-    format: Format;
-    headlineText: string;
-    headlineSize?: SmallHeadlineSize;
-    showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
-    byline?: string;
-    isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
-    showByline?: boolean;
-    webPublicationDate?: string;
-    imageUrl?: string;
-    imagePosition?: ImagePositionType;
-    imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
-    isFullCardImage?: boolean // For use in Carousel until we decide a `Display.Immersive` convention
-    standfirst?: string;
-    avatar?: AvatarType;
-    showClock?: boolean;
-    mediaType?: MediaType;
-    mediaDuration?: number;
-    // Kicker
-    kickerText?: string;
-    showPulsingDot?: boolean;
-    showSlash?: boolean;
-    commentCount?: number;
-    starRating?: number;
-    alwaysVertical?: boolean;
-    minWidthInPixels?: number;
-}
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
 type HeadlineLink = {
@@ -490,34 +460,6 @@ type HeadlineLink = {
 	visitedColour?: string; // a custom colour for the :visited state
 	preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
 };
-
-interface LinkHeadlineType {
-	design: Design;
-	headlineText: string; // The text shown
-	pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
-	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-	kickerText?: string;
-	showPulsingDot?: boolean;
-	showSlash?: boolean;
-	showQuotes?: boolean; // When true the QuoteIcon is shown
-	size?: SmallHeadlineSize;
-	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
-	byline?: string;
-}
-
-interface CardHeadlineType {
-	headlineText: string; // The text shown
-	design: Design; // Used to decide when to add type specific styles
-	pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
-	kickerText?: string;
-	showPulsingDot?: boolean;
-	showSlash?: boolean;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
-	size?: SmallHeadlineSize;
-	byline?: string;
-    showByline?: boolean;
-    isFullCardImage?: boolean; // Used for carousel AB test
-}
 
 type UserBadge = {
 	name: string;

@@ -27,6 +27,37 @@ import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 
+type Props = {
+	linkTo: string;
+	format: Format;
+	headlineText: string;
+	headlineSize?: SmallHeadlineSize;
+	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	byline?: string;
+	isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
+	showByline?: boolean;
+	webPublicationDate?: string;
+	imageUrl?: string;
+	imagePosition?: ImagePositionType;
+	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+	isFullCardImage?: boolean; // For use in Carousel until we decide a `Display.Immersive` convention
+	standfirst?: string;
+	avatar?: AvatarType;
+	showClock?: boolean;
+	mediaType?: MediaType;
+	mediaDuration?: number;
+	// Kicker
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	commentCount?: number;
+	starRating?: number;
+	alwaysVertical?: boolean;
+	minWidthInPixels?: number;
+};
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
+
 type CoveragesType = {
 	image: {
 		small: CardPercentageType;
@@ -113,7 +144,7 @@ export const Card = ({
 	starRating,
 	alwaysVertical,
 	minWidthInPixels,
-}: CardType) => {
+}: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
 	let contentCoverage: CardPercentageType | undefined;

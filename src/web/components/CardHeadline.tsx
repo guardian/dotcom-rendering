@@ -12,6 +12,19 @@ import { Byline } from '@root/src/web/components/Byline';
 import { pillarPalette } from '@frontend/lib/pillars';
 import { space } from '@guardian/src-foundations';
 
+type Props = {
+	headlineText: string; // The text shown
+	design: Design; // Used to decide when to add type specific styles
+	pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	size?: SmallHeadlineSize;
+	byline?: string;
+	showByline?: boolean;
+	isFullCardImage?: boolean; // Used for carousel AB test
+};
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
 		case 'large':
@@ -108,7 +121,7 @@ export const CardHeadline = ({
 	byline,
 	showByline,
 	isFullCardImage,
-}: CardHeadlineType) => (
+}: Props) => (
 	<>
 		<h4
 			className={cx(

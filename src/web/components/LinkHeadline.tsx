@@ -8,6 +8,20 @@ import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
 import { pillarPalette } from '@frontend/lib/pillars';
 
+type Props = {
+	design: Design;
+	headlineText: string; // The text shown
+	pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
+	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	showQuotes?: boolean; // When true the QuoteIcon is shown
+	size?: SmallHeadlineSize;
+	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
+	byline?: string;
+};
+
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
 		case 'large':
@@ -63,7 +77,7 @@ export const LinkHeadline = ({
 	size = 'medium',
 	link,
 	byline,
-}: LinkHeadlineType) => (
+}: Props) => (
 	<h4 className={fontStyles(size)}>
 		{kickerText && (
 			<Kicker
