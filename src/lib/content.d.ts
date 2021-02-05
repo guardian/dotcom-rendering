@@ -244,7 +244,7 @@ interface ProfileAtomBlockElement {
 
 interface PullquoteBlockElement {
 	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
-	html: string;
+	html?: string;
 	role: string;
 	attribution?: string;
 }
