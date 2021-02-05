@@ -7,6 +7,7 @@ import { Section } from '@frontend/web/components/Section';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Card } from './Card';
 import { UL } from './components/UL';
@@ -40,6 +41,11 @@ export const News = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.News,
+								design: Design.Article,
+							})}
 							headlineText={headlines[0]}
 							headlineSize="large"
 							kickerText={kickers[4]}
@@ -62,6 +68,11 @@ export const News = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.News,
+								design: Design.Article,
+							})}
 							headlineText={headlines[1]}
 							headlineSize="large"
 							kickerText={kickers[0]}
@@ -80,6 +91,11 @@ export const News = () => (
 								theme: Pillar.Culture,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Culture,
+								design: Design.Article,
+							})}
 							headlineText={headlines[2]}
 							kickerText={kickers[1]}
 							imageUrl={images[3]}
@@ -102,6 +118,11 @@ export const News = () => (
 										theme: Pillar.Opinion,
 										design: Design.GuardianView,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Opinion,
+										design: Design.GuardianView,
+									})}
 									headlineText={headlines[3]}
 									kickerText="Editorial"
 									imageUrl={images[6]}
@@ -117,6 +138,11 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.News,
+										design: Design.Article,
+									})}
 									headlineText={headlines[4]}
 									headlineSize="small"
 								/>
@@ -129,6 +155,11 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.News,
+										design: Design.Article,
+									})}
 									headlineText={headlines[5]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -151,6 +182,11 @@ export const News = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Sport,
+										design: Design.Article,
+									})}
 									headlineText={headlines[6]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -165,6 +201,11 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.News,
+										design: Design.Article,
+									})}
 									headlineText={headlines[7]}
 									headlineSize="small"
 									kickerText={kickers[1]}
@@ -178,6 +219,11 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.News,
+										design: Design.Article,
+									})}
 									headlineText={headlines[8]}
 									headlineSize="small"
 									kickerText={kickers[0]}
@@ -191,6 +237,11 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.News,
+										design: Design.Article,
+									})}
 									headlineText={headlines[9]}
 									headlineSize="small"
 									kickerText={kickers[2]}
@@ -204,6 +255,11 @@ export const News = () => (
 										theme: Pillar.Lifestyle,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Lifestyle,
+										design: Design.Article,
+									})}
 									headlineText={headlines[10]}
 									headlineSize="small"
 									kickerText={kickers[0]}
@@ -217,6 +273,11 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.News,
+										design: Design.Article,
+									})}
 									headlineText={headlines[11]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -250,6 +311,11 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Sport,
+										design: Design.Article,
+									})}
 									headlineText={headlines[6]}
 									headlineSize="medium"
 									kickerText={kickers[4]}
@@ -266,6 +332,11 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Sport,
+										design: Design.Article,
+									})}
 									headlineText={headlines[6]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -283,6 +354,11 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Sport,
+										design: Design.Article,
+									})}
 									headlineText={headlines[6]}
 									headlineSize="small"
 									kickerText={kickers[2]}
@@ -299,6 +375,11 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Sport,
+										design: Design.Article,
+									})}
 									headlineText={headlines[2]}
 									headlineSize="small"
 									kickerText={kickers[1]}
@@ -315,6 +396,11 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
+									palette={decidePalette({
+										display: Display.Standard,
+										theme: Pillar.Sport,
+										design: Design.Article,
+									})}
 									headlineText={headlines[7]}
 									headlineSize="small"
 									kickerText={kickers[0]}
@@ -338,6 +424,11 @@ export const InDepth = () => (
 								theme: Pillar.Opinion,
 								design: Design.Comment,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Opinion,
+								design: Design.Comment,
+							})}
 							headlineText={headlines[7]}
 							headlineSize="large"
 							kickerText={kickers[0]}
@@ -370,6 +461,11 @@ export const Related = () => (
 								theme: Pillar.Sport,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Sport,
+								design: Design.Article,
+							})}
 							headlineText={headlines[7]}
 							headlineSize="medium"
 							kickerText={kickers[3]}
@@ -390,6 +486,11 @@ export const Related = () => (
 								theme: Pillar.Sport,
 								design: Design.Live,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Sport,
+								design: Design.Live,
+							})}
 							headlineText={headlines[8]}
 							headlineSize="medium"
 							kickerText={kickers[0]}
@@ -411,6 +512,11 @@ export const Related = () => (
 								theme: Pillar.Sport,
 								design: Design.Comment,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Sport,
+								design: Design.Comment,
+							})}
 							headlineText={headlines[8]}
 							headlineSize="medium"
 							kickerText={kickers[1]}
@@ -429,6 +535,11 @@ export const Related = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.News,
+								design: Design.Article,
+							})}
 							headlineText={headlines[9]}
 							headlineSize="small"
 							kickerText={kickers[0]}
@@ -447,6 +558,11 @@ export const Related = () => (
 								theme: Pillar.Sport,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Sport,
+								design: Design.Article,
+							})}
 							headlineText={headlines[10]}
 							headlineSize="small"
 							kickerText={kickers[2]}
@@ -465,6 +581,11 @@ export const Related = () => (
 								theme: Pillar.Culture,
 								design: Design.Interview,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Culture,
+								design: Design.Interview,
+							})}
 							headlineText={headlines[1]}
 							headlineSize="small"
 							kickerText={kickers[1]}
@@ -483,6 +604,11 @@ export const Related = () => (
 								theme: Pillar.Lifestyle,
 								design: Design.Feature,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Lifestyle,
+								design: Design.Feature,
+							})}
 							headlineText={headlines[3]}
 							headlineSize="small"
 							kickerText={kickers[0]}
@@ -510,6 +636,11 @@ export const Spotlight = () => (
 						theme: Pillar.Sport,
 						design: Design.Feature,
 					}}
+					palette={decidePalette({
+						display: Display.Standard,
+						theme: Pillar.Sport,
+						design: Design.Feature,
+					})}
 					headlineText={headlines[11]}
 					headlineSize="large"
 					kickerText={kickers[1]}
@@ -540,6 +671,11 @@ export const Quad = () => (
 								theme: Pillar.Opinion,
 								design: Design.Comment,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Opinion,
+								design: Design.Comment,
+							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							showQuotes={true}
@@ -566,6 +702,11 @@ export const Quad = () => (
 								theme: Pillar.Opinion,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Opinion,
+								design: Design.Article,
+							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							webPublicationDate="2019-11-11T09:45:30.000Z"
@@ -587,6 +728,11 @@ export const Quad = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.News,
+								design: Design.Article,
+							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[0]}
@@ -609,6 +755,11 @@ export const Quad = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.News,
+								design: Design.Article,
+							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[2]}
@@ -645,6 +796,11 @@ export const Media = () => (
 								theme: Pillar.Culture,
 								design: Design.Media,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Culture,
+								design: Design.Media,
+							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							webPublicationDate="2019-11-11T09:45:30.000Z"
@@ -667,6 +823,11 @@ export const Media = () => (
 								theme: Pillar.News,
 								design: Design.Media,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.News,
+								design: Design.Media,
+							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[0]}
@@ -690,6 +851,11 @@ export const Media = () => (
 								theme: Pillar.Sport,
 								design: Design.Media,
 							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Pillar.Sport,
+								design: Design.Media,
+							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[1]}

@@ -749,7 +749,8 @@ interface BaseTrailType {
     linkText?: string;
 }
 interface TrailType extends BaseTrailType {
-    format: Format;
+		format: Format;
+		palette: Palette;
 }
 
 interface CAPITrailType extends BaseTrailType {

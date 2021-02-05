@@ -30,6 +30,7 @@ import { CardAge } from './components/CardAge';
 type Props = {
 	linkTo: string;
 	format: Format;
+	palette: Palette;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion

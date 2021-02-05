@@ -354,6 +354,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<Card
 								linkTo={trail.url}
 								format={trail.format}
+								palette={trail.palette}
 								headlineText={trail.headline}
 								webPublicationDate={trail.webPublicationDate}
 								kickerText={trail.kickerText || ''}
