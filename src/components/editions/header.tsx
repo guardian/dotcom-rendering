@@ -12,6 +12,7 @@ import Lines from 'components/editions/lines';
 import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
+import { isPicture } from 'item';
 import type { FC, ReactElement } from 'react';
 import {
 	articleMarginStyles,
@@ -55,6 +56,10 @@ const galleryHeaderStyles = css`
 	${from.tablet} {
 		border: none;
 	}
+`;
+
+const pictureHeaderStyles = css`
+	border: none;
 `;
 
 const galleryLinesStyles = css`
@@ -205,6 +210,20 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
+const PictureHeader: FC<HeaderProps> = ({ item }) => (
+	<header css={pictureHeaderStyles}>
+		<div css={galleryInnerHeaderStyles}>
+			<div css={galleryHeaderBorderStyles}>
+				<Headline item={item} />
+				<Standfirst item={item} />
+				<Lines className={galleryLinesStyles} />
+				<Byline item={item} shareIcon />
+			</div>
+		</div>
+		<HeaderMedia item={item} />
+	</header>
+);
+
 const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 	<header>
 		<HeaderMedia item={item} />
@@ -232,7 +251,11 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	} else if (item.design === Design.Comment) {
 		return <CommentHeader item={item} />;
 	} else if (item.design === Design.Media) {
-		return <GalleryHeader item={item} />;
+		return isPicture(item.tags) ? (
+			<PictureHeader item={item} />
+		) : (
+			<GalleryHeader item={item} />
+		);
 	} else {
 		return <StandardHeader item={item} />;
 	}
