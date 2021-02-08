@@ -816,6 +816,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 
 		case ElementKind.Pullquote: {
 			const { quote, attribution } = element;
+			console.log(element);
 			return h(EditionsPullquote, { quote, attribution, format, key });
 		}
 
