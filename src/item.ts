@@ -244,10 +244,9 @@ const isReview = hasSomeTag([
 
 const isAnalysis = hasTag('tone/analysis');
 
-const isLetter = hasTag('tone/letters')
+const isLetter = hasTag('tone/letters');
 
 const isComment = hasTag('tone/comment');
-
 
 const isFeature = hasTag('tone/features');
 
@@ -307,6 +306,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			design: Design.Analysis,
 			...itemFieldsWithBody(context, request),
 		};
+	} else if (isLetter(tags)) {
+		return {
+			design: Design.Letter,
+			...itemFieldsWithBody(context, request),
+		};
 	} else if (isComment(tags)) {
 		const item = itemFieldsWithBody(context, request);
 		return {
@@ -319,13 +323,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			design: Design.Interview,
 			...itemFieldsWithBody(context, request),
 		};
-	} else if (isLetter(tags)) {
-		return {
-			design: Design.Letter,
-			...itemFieldsWithBody(context, request),
-		};
-	}	
-	else if (isFeature(tags)) {
+	} else if (isFeature(tags)) {
 		return {
 			design: Design.Feature,
 			...itemFieldsWithBody(context, request),
