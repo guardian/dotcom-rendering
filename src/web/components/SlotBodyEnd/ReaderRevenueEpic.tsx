@@ -20,6 +20,7 @@ import {
 	sendOphanComponentEvent,
 	// TestMeta, TODO: Do we still need this?
 } from '@root/src/web/browser/ophan/ophan';
+import { initPerf } from 'src/web/browser/initPerf';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 import { getCookie } from '../../browser/cookie';
 
@@ -239,6 +240,8 @@ export const canShow = ({
 		// We never serve Reader Revenue epics in this case
 		return Promise.resolve({ result: false });
 	}
+	const dataPerf = initPerf('contributions-epic-data');
+	dataPerf.start();
 
 	const forcedVariant = getForcedVariant('epic');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
@@ -262,6 +265,7 @@ export const canShow = ({
 			),
 		)
 		.then((response) => {
+			dataPerf.end();
 			return checkForErrors(response);
 		})
 		.then((response) => response.json())
@@ -300,10 +304,8 @@ export const ReaderRevenueEpic = ({ meta, module }: any) => {
 		window
 			.guardianPolyfilledImport(module.url)
 			.then((epicModule) => {
-				// Figure out onReminderOpen:
-				// onReminderOpen: sendOphanReminderOpenEvent,
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-				// sendOphanComponentEvent('INSERT', meta);
+				sendOphanComponentEvent('INSERT', meta);
 			})
 			// eslint-disable-next-line no-console
 			.catch((error) => console.log(`epic - error is: ${error}`));
