@@ -2,7 +2,6 @@ import fetchMock from 'fetch-mock';
 
 import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
 import { series } from '@root/fixtures/series';
-import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 import { discussion } from '@root/fixtures/discussion';
 import { storypackage } from '@root/fixtures/storypackage';
@@ -159,7 +158,12 @@ export const mockRESTCalls = () =>
 			/.*api.nextgen.guardianapps.co.uk\/sharecount.*/,
 			{
 				status: 200,
-				body: sharecount,
+				body: {
+					path:
+						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					share_count: 273,
+					refreshStatus: true,
+				},
 			},
 			{ overwriteRoutes: false },
 		)
