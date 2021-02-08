@@ -216,6 +216,12 @@ interface Block {
 	blockFirstPublishedDisplay?: string;
 	primaryDateLine: string;
 	secondaryDateLine: string;
+	createdOn?: number;
+	createdOnDisplay?: string;
+	lastUpdated?: number;
+	lastUpdatedDisplay?: string;
+	firstPublished?: number;
+	firstPublishedDisplay?: string;
 }
 
 interface Pagination {
