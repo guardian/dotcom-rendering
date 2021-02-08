@@ -377,7 +377,7 @@ interface YoutubeBlockElement {
 	assetId: string;
 	mediaTitle: string;
 	id: string;
-	channelId: string;
+	channelId?: string;
 	duration?: number;
 	posterImage?: {
 		url: string;
