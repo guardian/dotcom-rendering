@@ -11,7 +11,7 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
-import { kickerPicker } from './kickerPicker';
+import { kickerPicker } from '../kickerPicker';
 
 // ----- Component ----- //
 
