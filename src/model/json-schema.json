@@ -1221,6 +1221,15 @@
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1833,6 +1842,9 @@
                 },
                 "attribution": {
                     "type": "string"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -2260,6 +2272,15 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2501,6 +2522,24 @@
                     "type": "string"
                 },
                 "secondaryDateLine": {
+                    "type": "string"
+                },
+                "createdOn": {
+                    "type": "number"
+                },
+                "createdOnDisplay": {
+                    "type": "string"
+                },
+                "lastUpdated": {
+                    "type": "number"
+                },
+                "lastUpdatedDisplay": {
+                    "type": "string"
+                },
+                "firstPublished": {
+                    "type": "number"
+                },
+                "firstPublishedDisplay": {
                     "type": "string"
                 }
             },
