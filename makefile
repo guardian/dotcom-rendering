@@ -152,7 +152,7 @@ gen-schema:
 	@git add src/model/json-schema.json
 
 gen-fixtures:
-	$(call log, "Generating new schema")
+	$(call log, "Generating new article fixture data")
 	@node scripts/test-data/gen-fixtures.js
 	@git add fixtures/articles/.
 
