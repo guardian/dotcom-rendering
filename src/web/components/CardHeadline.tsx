@@ -72,7 +72,14 @@ const colourStyles = (colour: string) => css`
 	color: ${colour};
 `;
 
-const headlineStyles = (design: Design, pillar: Theme) => {
+const headlineStyles = (
+	design: Design,
+	pillar: Theme,
+	isFullCardImage?: boolean,
+) => {
+	if (isFullCardImage) {
+		return neutral[100];
+	}
 	switch (design) {
 		case Design.Feature:
 		case Design.Interview:
@@ -129,6 +136,7 @@ export const CardHeadline = ({
 						showPulsingDot={showPulsingDot}
 						showSlash={showSlash}
 						inCard={true}
+						isFullCardImage={isFullCardImage}
 					/>
 				)}
 				{showQuotes && (
@@ -138,7 +146,9 @@ export const CardHeadline = ({
 					/>
 				)}
 
-				<span className={headlineStyles(design, pillar)}>
+				<span
+					className={headlineStyles(design, pillar, isFullCardImage)}
+				>
 					{headlineText}
 				</span>
 			</span>

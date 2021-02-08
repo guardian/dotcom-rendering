@@ -10,6 +10,7 @@ type Props = {
 	ophanComponentName: OphanComponentName;
 	Container: React.FC<OnwardsType>;
 	pillar: Theme;
+	isFullCardImage?: boolean;
 };
 
 type OnwardsResponse = {
@@ -25,6 +26,7 @@ export const OnwardsData = ({
 	ophanComponentName,
 	Container,
 	pillar,
+	isFullCardImage,
 }: Props) => {
 	const { data } = useApi<OnwardsResponse>(url);
 
@@ -50,6 +52,7 @@ export const OnwardsData = ({
 				description={data.description}
 				ophanComponentName={ophanComponentName}
 				pillar={pillar}
+				isFullCardImage={isFullCardImage}
 			/>
 		);
 	}

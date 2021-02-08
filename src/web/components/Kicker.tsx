@@ -21,7 +21,12 @@ const slashStyles = css`
 	}
 `;
 
-const decideColour = (design: Design, pillar: Theme, inCard?: boolean) => {
+const decideColour = (
+	design: Design,
+	pillar: Theme,
+	inCard?: boolean,
+	isFullCardImage?: boolean,
+) => {
 	switch (design) {
 		case Design.Live:
 			// TODO: We need this colour in source foundation
@@ -30,11 +35,14 @@ const decideColour = (design: Design, pillar: Theme, inCard?: boolean) => {
 				: pillarPalette[pillar].main;
 		case Design.Media:
 			// On Media cards, when pillar is news we use the bright colour as this looks better on a dark background vs. main
-			return inCard && pillar === Pillar.News
+			return (inCard || isFullCardImage) && pillar === Pillar.News
 				? pillarPalette[pillar].bright
 				: pillarPalette[pillar].main;
 		default:
-			return pillarPalette[pillar].main;
+			// On full card images, kicker text brighter to be accessible on dark background
+			return isFullCardImage && pillar === Pillar.News
+				? pillarPalette[pillar][500]
+				: pillarPalette[pillar].main;
 	}
 };
 
@@ -45,8 +53,9 @@ export const Kicker = ({
 	showPulsingDot,
 	showSlash = true,
 	inCard,
+	isFullCardImage,
 }: KickerType) => {
-	const kickerColour = decideColour(design, pillar, inCard);
+	const kickerColour = decideColour(design, pillar, inCard, isFullCardImage);
 	return (
 		<span className={kickerStyles(kickerColour)}>
 			{showPulsingDot && <PulsingDot colour={kickerColour} />}

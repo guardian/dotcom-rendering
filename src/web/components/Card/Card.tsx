@@ -135,7 +135,10 @@ export const Card = ({
 
 	return (
 		<CardLink linkTo={linkTo} design={format.design} pillar={pillarToUse}>
-			<TopBar topBarColour={pillarPalette[pillarToUse].main}>
+			<TopBar
+				topBarColour={pillarPalette[pillarToUse].main}
+				isFullCardImage={isFullCardImage}
+			>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}

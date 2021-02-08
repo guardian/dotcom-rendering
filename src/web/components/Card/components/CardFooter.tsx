@@ -45,7 +45,10 @@ export const CardFooter = ({
 	commentCount,
 	isFullCardImage,
 }: Props) => {
-	if (design === Design.Comment || design === Design.GuardianView) {
+	if (
+		!isFullCardImage &&
+		(design === Design.Comment || design === Design.GuardianView)
+	) {
 		return (
 			<footer className={spaceBetween}>
 				{age}

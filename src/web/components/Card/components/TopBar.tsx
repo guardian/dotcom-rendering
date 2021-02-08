@@ -4,9 +4,10 @@ import { css } from 'emotion';
 type Props = {
 	children: React.ReactNode;
 	topBarColour: string;
+	isFullCardImage?: boolean;
 };
 
-export const TopBar = ({ children, topBarColour }: Props) => (
+export const TopBar = ({ children, topBarColour, isFullCardImage }: Props) => (
 	<div
 		className={css`
 			display: flex;
@@ -24,7 +25,7 @@ export const TopBar = ({ children, topBarColour }: Props) => (
 				top: 0;
 				left: 0;
 				right: 0;
-				height: 1px;
+				height: ${isFullCardImage ? 4 : 1}px;
 				z-index: 2;
 			}
 		`}

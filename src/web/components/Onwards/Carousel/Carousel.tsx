@@ -6,7 +6,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { palette, space } from '@guardian/src-foundations';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { Display } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { Hide } from '@frontend/web/components/Hide';
@@ -54,13 +54,14 @@ const wrapperStyle = css`
 	display: flex;
 	justify-content: space-between;
 	overflow: hidden;
+	padding-right: 40px;
 `;
 
 // For desktop and above, are we at the last card. Is one less than the dots style equivalent
 const isLastCardShowing = (index: number, totalStories: number) =>
 	index >= totalStories - 4;
 
-const containerStyles = (index: number, totalStories: number) => css`
+const containerStyles = css`
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -68,6 +69,7 @@ const containerStyles = (index: number, totalStories: number) => css`
 	overflow: hidden; /* Needed for scrolling to work */
 
 	margin-top: 6px;
+	margin-bottom: 24px;
 
 	margin-left: 0px;
 	margin-right: 0px;
@@ -80,29 +82,9 @@ const containerStyles = (index: number, totalStories: number) => css`
 	}
 
 	${from.leftCol} {
-		margin-left: 0px;
+		margin-left: -1px;
 		margin-right: -10px;
-		margin-top: 5px;
-
-		&::after {
-			content: '';
-			display: ${!isLastCardShowing(index, totalStories)
-				? 'block'
-				: 'none'};
-			position: absolute;
-			background: rgba(255, 255, 255, 0.5);
-			height: 100%;
-			width: 68px; /* Worked out to manually fit the remainder of the last card showing */
-			pointer-events: none;
-			right: 0;
-			top: 0;
-		}
-	}
-
-	${from.wide} {
-		&::after {
-			width: 148px; /* Worked out to manually fit the remainder of the last card showing */
-		}
+		margin-top: 6px;
 	}
 `;
 
@@ -161,21 +143,34 @@ const dotActiveStyle = (pillar: Theme) => css`
 	}
 `;
 
-const adjustNumberOfDotsStyle = (index: number, totalStories: number) => css`
+const adjustNumberOfDotsStyle = (
+	index: number,
+	totalStories: number,
+	isFullCardImage?: boolean,
+) => {
 	/* This is a bit of a hack for the test, while we think of better UX here.
-    The dots can't line up on Desktop because we don't show 1 story per swipe*/
-	${from.phablet} {
-		display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+    The dots can't line up on Desktop because we don't show 1 story per swipe */
+	if (isFullCardImage) {
+		return css`
+			${from.desktop} {
+				display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+			}
+		`;
 	}
+	return css`
+		${from.phablet} {
+			display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+		}
 
-	${from.tablet} {
-		display: ${index >= totalStories - 2 ? 'none' : 'auto'};
-	}
+		${from.tablet} {
+			display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+		}
 
-	${from.desktop} {
-		display: ${index >= totalStories - 3 ? 'none' : 'auto'};
-	}
-`;
+		${from.desktop} {
+			display: ${index >= totalStories - 3 ? 'none' : 'auto'};
+		}
+	`;
+};
 
 // Not used for buttons above carousel
 const buttonContainerStyle = css`
@@ -196,15 +191,12 @@ const prevButtonContainerStyle = css`
 	}
 
 	${from.wide} {
-		left: 200px;
+		left: 205px;
 	}
 `;
 
-const nextButtonContainerStyle = (index: number, totalStories: number) => css`
-	${from.desktop} {
-		display: ${isLastCardShowing(index, totalStories) ? 'none' : 'auto'};
-	}
-	right: 30px;
+const nextButtonContainerStyle = css`
+	right: 10px;
 `;
 
 const buttonStyle = css`
@@ -217,7 +209,8 @@ const buttonStyle = css`
 	padding: 0;
 	background-color: ${palette.neutral[0]};
 
-	&:active {
+	&:active,
+	&:hover {
 		outline: none;
 		background-color: ${palette.brandAlt[400]};
 		svg {
@@ -331,8 +324,9 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			imageUrl={imageUrl || ''}
 			showClock={true}
 			alwaysVertical={true}
-			minWidthInPixels={200}
+			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
+			showQuotes={design === Design.Comment}
 		/>
 	</LI>
 );
@@ -342,6 +336,7 @@ type HeaderAndNavProps = {
 	trails: TrailType[];
 	pillar: Theme;
 	index: number;
+	isFullCardImage?: boolean;
 	goToIndex: (newIndex: number) => void;
 };
 
@@ -350,6 +345,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	trails,
 	pillar,
 	index,
+	isFullCardImage,
 	goToIndex,
 }) => (
 	<div>
@@ -362,10 +358,15 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 					// are tabb-able themselves so we hide them with aria and make them
 					// not available to keyboard
 					aria-hidden="true"
+					key={`dot-${i}`}
 					className={cx(
 						dotStyle,
 						i === index && dotActiveStyle(pillar),
-						adjustNumberOfDotsStyle(i, trails.length),
+						adjustNumberOfDotsStyle(
+							i,
+							trails.length,
+							isFullCardImage,
+						),
 					)}
 				/>
 			))}
@@ -485,6 +486,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 					trails={trails}
 					pillar={pillar}
 					index={index}
+					isFullCardImage={isFullCardImage}
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
@@ -498,12 +500,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</button>
 			</div>
 
-			<div
-				className={cx(
-					buttonContainerStyle,
-					nextButtonContainerStyle(index, trails.length),
-				)}
-			>
+			<div className={cx(buttonContainerStyle, nextButtonContainerStyle)}>
 				<button
 					onClick={next}
 					aria-label="Move carousel forwards"
@@ -516,7 +513,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</button>
 			</div>
 			<div
-				className={containerStyles(index, trails.length)}
+				className={containerStyles}
 				data-component={ophanComponentName}
 				data-link={formatAttrString(heading)}
 			>
@@ -527,6 +524,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							trails={trails}
 							pillar={pillar}
 							index={index}
+							isFullCardImage={isFullCardImage}
 							goToIndex={goToIndex}
 						/>
 						<Hide when="below" breakpoint="desktop">

@@ -403,7 +403,8 @@ interface KickerType {
 	pillar: Theme;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
-	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
+    inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
+    isFullCardImage?: boolean;
 }
 
 type ImagePositionType = 'left' | 'top' | 'right';
