@@ -123,6 +123,9 @@ interface EmbedBlockElement {
 	alt?: string;
 	html: string;
 	isMandatory: boolean;
+	isThirdPartyTracking?: boolean;
+	source?: string;
+	sourceDomain?: string;
 }
 
 interface ExplainerAtomBlockElement {
@@ -247,6 +250,7 @@ interface PullquoteBlockElement {
 	html?: string;
 	role: string;
 	attribution?: string;
+	isThirdPartyTracking?: boolean;
 }
 
 interface QABlockElement {
@@ -363,6 +367,9 @@ interface VideoYoutubeBlockElement {
 	credit?: string;
 	title?: string;
 	role?: RoleType;
+	isThirdPartyTracking?: boolean;
+	source?: string;
+	sourceDomain?: string;
 }
 
 interface YoutubeBlockElement {
