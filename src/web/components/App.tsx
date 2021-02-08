@@ -635,8 +635,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={documentBlockElement.isThirdPartyTracking}
 						source={documentBlockElement.source}
 						sourceDomain={documentBlockElement.sourceDomain}
-						isServerSide={false}
-						ab={ABTestAPI}
+						serverSideABTests={{}}
 					>
 						<DocumentBlockComponent
 							embedUrl={documentBlockElement.embedUrl}

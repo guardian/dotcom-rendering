@@ -31,6 +31,10 @@ const paragraphStyle = css`
 	margin-bottom: 8px;
 `;
 
+const serverSideABTests: { [key: string]: string } = {
+	clickToViewVariant: 'variant',
+};
+
 const RoleStory = ({
 	children,
 	role,
@@ -65,6 +69,7 @@ const RoleStory = ({
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
+						serverSideABTests={serverSideABTests}
 					>
 						{children}
 					</ClickToView>
@@ -445,6 +450,7 @@ export const EmbedBlockComponentStory = () => {
 							EmbeddedElements.facebookEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -468,6 +474,7 @@ export const EmbedBlockComponentStory = () => {
 							EmbeddedElements.vimeoEmbedEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -491,6 +498,7 @@ export const EmbedBlockComponentStory = () => {
 							EmbeddedElements.youtubeEmbedEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -514,6 +522,7 @@ export const EmbedBlockComponentStory = () => {
 							EmbeddedElements.spotifyEmbedEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -537,6 +546,7 @@ export const EmbedBlockComponentStory = () => {
 							EmbeddedElements.bandcampEmbedEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -563,6 +573,7 @@ export const EmbedBlockComponentStory = () => {
 								.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -588,6 +599,7 @@ export const EmbedBlockComponentStory = () => {
 							EmbeddedElements.bbcEmbedEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -635,6 +647,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-1"]')
 						}
+						serverSideABTests={serverSideABTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="1"
@@ -661,6 +674,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-2"]')
 						}
+						serverSideABTests={serverSideABTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="2"
@@ -688,6 +702,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-3"]')
 						}
+						serverSideABTests={serverSideABTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="3"
@@ -715,6 +730,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-4"]')
 						}
+						serverSideABTests={serverSideABTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="4"
@@ -742,6 +758,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-5"]')
 						}
+						serverSideABTests={serverSideABTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="5"
@@ -788,6 +805,7 @@ export const VimeoBlockComponentStory = () => {
 							EmbeddedElements.vimeoVideoEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<VimeoBlockComponent
 							format={{
@@ -846,6 +864,7 @@ export const DocumentBlockComponentStory = () => {
 							EmbeddedElements.scribdDocumentEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<DocumentBlockComponent
 							embedUrl={
@@ -894,6 +913,7 @@ export const SoundCloudBlockComponentStory = () => {
 							EmbeddedElements.soundcloudAudioEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<SoundcloudBlockComponent
 							element={EmbeddedElements.soundcloudAudioEmbed}
@@ -915,6 +935,7 @@ export const SoundCloudBlockComponentStory = () => {
 							EmbeddedElements.soundcloudEmbedEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<SoundcloudBlockComponent
 							element={EmbeddedElements.soundcloudEmbedEmbed}
@@ -958,6 +979,7 @@ export const SpotifyBlockComponentStory = () => {
 							EmbeddedElements.spotifyAudioEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<SpotifyBlockComponent
 							embedUrl={
@@ -1019,6 +1041,7 @@ export const TweetBlockComponentStory = () => {
 							EmbeddedElements.twitterTweetEmbed.sourceDomain
 						}
 						role="inline"
+						serverSideABTests={serverSideABTests}
 					>
 						<TweetBlockComponent
 							element={EmbeddedElements.twitterTweetEmbed}

@@ -8,8 +8,6 @@ import { Button } from '@guardian/src-button';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
 
-type CoreAPI = import('@guardian/ab-core/dist/types').CoreAPI;
-
 type Props = {
 	children: React.ReactNode;
 	role?: RoleType;
@@ -17,8 +15,7 @@ type Props = {
 	isTracking: boolean;
 	source?: string;
 	sourceDomain?: string;
-	isServerSide?: boolean;
-	ab?: CoreAPI;
+	serverSideABTests: { [key: string]: string };
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -82,10 +79,9 @@ const roleButtonText = (role: RoleType) => {
 };
 
 const shouldDisplayOverlay = (
-	isServerSide: boolean,
 	isTracking: boolean,
 	isOverlayClicked: boolean,
-	ab?: CoreAPI,
+	isInABTestVariant: boolean,
 ) => {
 	if (!isTracking) {
 		return false;
@@ -93,17 +89,11 @@ const shouldDisplayOverlay = (
 	if (isOverlayClicked) {
 		return false;
 	}
-	/**
-	 * This check will exist for the duration of the ABTest.
-	 * The ab test is enabled manually so almost every one will not see the overlay,
-	 * this check forces the article to get rendered without the overlay to avoid
-	 * re-rendering the component client side in the majority of cases.
-	 */
-	if (isServerSide) {
-		console.log('is server side');
-		return false;
-	}
-	return ab && ab.isUserInVariant('ClickToViewTest', 'manual');
+	return isInABTestVariant;
+};
+
+const isInABTestVariant = (abTestConfig: { [key: string]: string }) => {
+	return abTestConfig.clickToViewVariant === 'variant';
 };
 
 export const ClickToView = ({
@@ -113,8 +103,7 @@ export const ClickToView = ({
 	isTracking,
 	source,
 	sourceDomain = 'unknown',
-	isServerSide = true,
-	ab,
+	serverSideABTests,
 }: Props) => {
 	const [isOverlayClicked, setOverlayClicked] = useState<boolean>(false);
 
@@ -127,7 +116,13 @@ export const ClickToView = ({
 
 	const textSize = roleTextSize(role);
 
-	if (shouldDisplayOverlay(isServerSide, isTracking, isOverlayClicked, ab)) {
+	if (
+		shouldDisplayOverlay(
+			isTracking,
+			isOverlayClicked,
+			isInABTestVariant(serverSideABTests),
+		)
+	) {
 		return (
 			<div
 				className={css`

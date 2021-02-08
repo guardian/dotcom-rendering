@@ -5,13 +5,13 @@ import { ClickToView } from './ClickToView';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 describe('ClickToView', () => {
-	const MockABTestAPI = (isUserInVariant: boolean) => {
-		return {
-			allRunnableTests: () => [],
-			runnableTest: () => null,
-			firstRunnableTest: () => null,
-			isUserInVariant: () => isUserInVariant,
-		};
+	const MockABTestAPI = (
+		isUserInVariant: boolean,
+	): { [key: string]: string } => {
+		if (isUserInVariant) {
+			return { clickToViewVariant: 'variant' };
+		}
+		return {};
 	};
 
 	it('It should render the third party content if it is not tracking', () => {
@@ -21,8 +21,7 @@ describe('ClickToView', () => {
 				isTracking={false}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				ab={MockABTestAPI(false)}
-				isServerSide={false}
+				serverSideABTests={MockABTestAPI(false)}
 			>
 				{thirdPartyContent}
 			</ClickToView>,
@@ -37,24 +36,7 @@ describe('ClickToView', () => {
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				ab={MockABTestAPI(false)}
-				isServerSide={false}
-			>
-				<div data-testid="third-party-content" />
-			</ClickToView>,
-		);
-
-		expect(getByTestId('third-party-content')).toBeInTheDocument();
-	});
-
-	it('It should render third party content if rendered server side', () => {
-		const { getByTestId } = render(
-			<ClickToView
-				isTracking={true}
-				source="A Third Party"
-				sourceDomain="athirdparty.com"
-				ab={MockABTestAPI(true)}
-				isServerSide={true}
+				serverSideABTests={MockABTestAPI(false)}
 			>
 				<div data-testid="third-party-content" />
 			</ClickToView>,
@@ -69,8 +51,7 @@ describe('ClickToView', () => {
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				ab={MockABTestAPI(true)}
-				isServerSide={false}
+				serverSideABTests={MockABTestAPI(true)}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,
@@ -89,8 +70,7 @@ describe('ClickToView', () => {
 			<ClickToView
 				isTracking={true}
 				sourceDomain="athirdparty.com"
-				isServerSide={false}
-				ab={MockABTestAPI(true)}
+				serverSideABTests={MockABTestAPI(true)}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,

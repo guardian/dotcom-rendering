@@ -428,6 +428,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
+									serverSideABTests={CAPI.config.abTests}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines

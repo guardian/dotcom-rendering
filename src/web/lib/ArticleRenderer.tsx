@@ -64,7 +64,8 @@ export const ArticleRenderer: React.FC<{
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ format, palette, elements, adTargeting, host }) => {
+	serverSideABTests: { [key: string]: string };
+}> = ({ format, palette, elements, adTargeting, host, serverSideABTests }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -179,6 +180,7 @@ export const ArticleRenderer: React.FC<{
 								isTracking={element.isThirdPartyTracking}
 								source={element.source}
 								sourceDomain={element.sourceDomain}
+								serverSideABTests={serverSideABTests}
 							>
 								<DocumentBlockComponent
 									embedUrl={element.embedUrl}
