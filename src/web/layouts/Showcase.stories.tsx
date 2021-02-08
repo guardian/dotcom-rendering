@@ -48,7 +48,8 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		HydrateApp({ CAPI, NAV });
+		const serverSideABTests: { [key: string]: string } = {};
+		HydrateApp({ CAPI, NAV, serverSideABTests });
 		embedIframe();
 	}, [ServerCAPI, NAV]);
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;

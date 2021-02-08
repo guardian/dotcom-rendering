@@ -118,7 +118,11 @@ const GetMatchStats = React.lazy(() => {
 	});
 });
 
-type Props = { CAPI: CAPIBrowserType; NAV: NavType };
+type Props = {
+	CAPI: CAPIBrowserType;
+	NAV: NavType;
+	serverSideABTests: { [key: string]: string };
+};
 
 const componentEventHandler = (
 	componentType: any,
@@ -137,7 +141,7 @@ const componentEventHandler = (
 	submitComponentEvent(componentEvent);
 };
 
-export const App = ({ CAPI, NAV }: Props) => {
+export const App = ({ CAPI, NAV, serverSideABTests }: Props) => {
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
@@ -635,7 +639,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={documentBlockElement.isThirdPartyTracking}
 						source={documentBlockElement.source}
 						sourceDomain={documentBlockElement.sourceDomain}
-						serverSideABTests={{}}
+						serverSideABTests={serverSideABTests}
 					>
 						<DocumentBlockComponent
 							embedUrl={documentBlockElement.embedUrl}
