@@ -18,7 +18,7 @@ import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import {
 	sendOphanComponentEvent,
-	// TestMeta, TODO: Do we still need this?
+	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
@@ -27,6 +27,12 @@ import { getCookie } from '../../browser/cookie';
 const { css } = emotion;
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
+type EpicConfig = {
+	meta: TestMeta;
+	module: any;
+};
+type RenderedReaderRevenueEpic = any;
+type MaybeRenderedReaderRevenueEpic = RenderedReaderRevenueEpic | null;
 
 const checkForErrors = (response: any) => {
 	if (!response.ok) {
@@ -170,10 +176,12 @@ export const canShow = ({
 		});
 };
 
-export const ReaderRevenueEpic = ({ meta, module }: any) => {
+export const ReaderRevenueEpic = ({
+	meta,
+	module,
+}: EpicConfig): MaybeRenderedReaderRevenueEpic => {
 	// TODO: sort out this any
 	const [Epic, setEpic] = useState<React.FC>();
-
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
 		rootMargin: '-18px',
 		threshold: 0,
