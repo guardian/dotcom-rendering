@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/types';
+import { Display, Pillar } from '@guardian/types';
 
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
@@ -118,8 +118,9 @@ const CAPITrails: CAPITrailType[] = [
 ];
 
 const trails: TrailType[] = CAPITrails.map((thisTrail) => {
+	const display = Display.Standard;
 	const design = decideDesign(thisTrail.designType, []);
-	const pillar = decideTheme({ pillar: thisTrail.pillar, design });
+	const theme = decideTheme({ pillar: thisTrail.pillar, design });
 	return {
 		url: thisTrail.url,
 		headline: thisTrail.headline,
@@ -130,8 +131,11 @@ const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 		webPublicationDate: thisTrail.webPublicationDate,
 		mediaType: thisTrail.mediaType,
 		mediaDuration: thisTrail.mediaDuration,
-		pillar,
-		design,
+		format: {
+			display,
+			theme,
+			design,
+		},
 	};
 });
 

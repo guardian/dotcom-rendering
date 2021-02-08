@@ -248,7 +248,7 @@ interface ProfileAtomBlockElement {
 
 interface PullquoteBlockElement {
 	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
-	html: string;
+	html?: string;
 	role: string;
 	attribution?: string;
 }
@@ -387,6 +387,80 @@ interface YoutubeBlockElement {
 	role?: RoleType;
 }
 
+interface WitnessTypeDataBase {
+	authorUsername: string;
+	authorGuardianProfileUrl: string;
+	originalUrl: string;
+	source: string;
+	title: string;
+	url: string;
+	dateCreated: string;
+	apiUrl: string;
+	authorName: string;
+	witnessEmbedType: string;
+	html?: string;
+	authorWitnessProfileUrl: string;
+}
+
+interface WitnessTypeDataImage extends WitnessTypeDataBase {
+	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataImage';
+	type: 'image';
+	alt: string;
+	caption: string;
+	mediaId: string;
+	photographer: string;
+}
+
+interface WitnessTypeDataVideo extends WitnessTypeDataBase {
+	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataVideo';
+	type: 'video';
+	description: string;
+	youtubeHtml: string;
+	youtubeDescription: string;
+	youtubeUrl: string;
+	width: number;
+	youtubeSource: string;
+	youtubeAuthorName: string;
+	height: number;
+	youtubeTitle: string;
+}
+
+interface WitnessTypeDataText extends WitnessTypeDataBase {
+	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataText';
+	type: 'text';
+	description: string;
+	authorUsername: string;
+	originalUrl: string;
+	source: string;
+	title: string;
+	url: string;
+	dateCreated: string;
+	apiUrl: string;
+	authorName: string;
+	witnessEmbedType: string;
+	authorWitnessProfileUrl: string;
+}
+
+interface WitnessAssetType {
+	type: 'Image';
+	mimeType: 'image/jpeg';
+	file: string;
+	typeData: {
+		name: string;
+	};
+}
+interface WitnessTypeBlockElement {
+	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
+	assets: WitnessAssetType[];
+
+	isThirdPartyTracking: boolean;
+
+	witnessTypeData:
+		| WitnessTypeDataImage
+		| WitnessTypeDataVideo
+		| WitnessTypeDataText;
+}
+
 type CAPIElement =
 	| AudioAtomBlockElement
 	| AudioBlockElement
@@ -429,7 +503,8 @@ type CAPIElement =
 	| VideoFacebookBlockElement
 	| VideoVimeoBlockElement
 	| VideoYoutubeBlockElement
-	| YoutubeBlockElement;
+	| YoutubeBlockElement
+	| WitnessTypeBlockElement;
 
 // -------------------------------------
 // Misc

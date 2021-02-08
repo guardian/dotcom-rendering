@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design, Display } from '@guardian/types';
+import { Design } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -40,16 +40,12 @@ export const FourOrLess = ({ content }: Props) => {
 					>
 						<Card
 							linkTo={trail.url}
-							format={{
-								display: Display.Standard,
-								design: trail.design,
-								theme: trail.pillar,
-							}}
+							format={trail.format}
 							headlineText={trail.headline}
 							headlineSize="medium"
 							byline={trail.byline}
 							showByline={trail.showByline}
-							showQuotes={trail.design === Design.Comment}
+							showQuotes={trail.format.design === Design.Comment}
 							webPublicationDate={trail.webPublicationDate}
 							kickerText={trail.kickerText}
 							showPulsingDot={trail.isLiveBlog}

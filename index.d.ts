@@ -30,6 +30,7 @@ type CAPIDesign =
 	| 'SpecialReport'
 	| 'GuardianLabs';
 
+type Display = import('@guardian/types').Display;
 type Design = import('@guardian/types').Design;
 type Theme = import('@guardian/types').Theme;
 type Format = import('@guardian/types').Format;
@@ -808,8 +809,7 @@ interface BaseTrailType {
     linkText?: string;
 }
 interface TrailType extends BaseTrailType {
-	design: Design;
-	pillar: Theme;
+    format: Format;
 }
 
 interface CAPITrailType extends BaseTrailType {
