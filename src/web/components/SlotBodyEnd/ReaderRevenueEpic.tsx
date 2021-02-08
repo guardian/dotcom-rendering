@@ -20,7 +20,7 @@ import {
 	sendOphanComponentEvent,
 	// TestMeta, TODO: Do we still need this?
 } from '@root/src/web/browser/ophan/ophan';
-import { initPerf } from 'src/web/browser/initPerf';
+import { initPerf } from '@root/src/web/browser/initPerf';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 import { getCookie } from '../../browser/cookie';
 
