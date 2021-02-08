@@ -695,6 +695,7 @@ interface ConfigTypeBrowser {
 	remoteBanner: boolean;
 	ausMoment2020Header: boolean;
 	switches: CAPIType['config']['switches'];
+	abTests: CAPIType['config']['abTests'];
 	host?: string;
 	idUrl?: string;
 	mmaUrl?: string;

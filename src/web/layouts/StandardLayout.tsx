@@ -523,7 +523,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									serverSideABTests={CAPI.config.abTests}
+									abTests={CAPI.config.abTests}
 								/>
 								{showMatchStats && <div id="match-stats" />}
 

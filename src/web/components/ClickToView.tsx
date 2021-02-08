@@ -15,7 +15,7 @@ type Props = {
 	isTracking: boolean;
 	source?: string;
 	sourceDomain?: string;
-	serverSideABTests: { [key: string]: string };
+	abTests: CAPIType['config']['abTests'];
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -92,7 +92,7 @@ const shouldDisplayOverlay = (
 	return isInABTestVariant;
 };
 
-const isInABTestVariant = (abTestConfig: { [key: string]: string }) => {
+const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
 	return abTestConfig.clickToViewVariant === 'variant';
 };
 
@@ -103,7 +103,7 @@ export const ClickToView = ({
 	isTracking,
 	source,
 	sourceDomain = 'unknown',
-	serverSideABTests,
+	abTests,
 }: Props) => {
 	const [isOverlayClicked, setOverlayClicked] = useState<boolean>(false);
 
@@ -120,7 +120,7 @@ export const ClickToView = ({
 		shouldDisplayOverlay(
 			isTracking,
 			isOverlayClicked,
-			isInABTestVariant(serverSideABTests),
+			isInABTestVariant(abTests),
 		)
 	) {
 		return (

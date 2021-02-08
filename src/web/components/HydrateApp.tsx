@@ -12,10 +12,9 @@ import { loadableReady } from '@loadable/component';
 type Props = {
 	CAPI: CAPIBrowserType;
 	NAV: NavType;
-	serverSideABTests: { [key: string]: string };
 };
 
-export const HydrateApp = ({ CAPI, NAV, serverSideABTests }: Props) => {
+export const HydrateApp = ({ CAPI, NAV }: Props) => {
 	const mvtId = Number(
 		(CAPI.config.isDev && getCookie('GU_mvt_id_local')) || // Simplify localhost testing by creating a different mvt id
 			getCookie('GU_mvt_id'),
@@ -52,11 +51,7 @@ export const HydrateApp = ({ CAPI, NAV, serverSideABTests }: Props) => {
 				ophanRecord={ophanRecordFunc}
 				forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
 			>
-				<App
-					CAPI={CAPI}
-					NAV={NAV}
-					serverSideABTests={serverSideABTests}
-				/>
+				<App CAPI={CAPI} NAV={NAV} />
 			</ABProvider>,
 
 			document.getElementById('react-root'),

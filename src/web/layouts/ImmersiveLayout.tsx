@@ -503,7 +503,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									serverSideABTests={CAPI.config.abTests}
+									abTests={CAPI.config.abTests}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines

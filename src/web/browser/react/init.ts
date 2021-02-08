@@ -11,8 +11,6 @@ const init = (): Promise<void> => {
 		data: { CAPI, NAV },
 	} = window.guardian.app;
 
-	const serverSideABTests = window.guardian.config.tests || {};
-
 	/**
 	 * TODO: Remove conditional when Emotion's issue is resolved.
 	 * We're having to prevent emotion hydrating styles in the browser
@@ -24,7 +22,7 @@ const init = (): Promise<void> => {
 	}
 
 	// Partially hydrate the client using a combination of islands and portals
-	HydrateApp({ CAPI, NAV, serverSideABTests });
+	HydrateApp({ CAPI, NAV });
 
 	return Promise.resolve();
 };

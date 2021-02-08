@@ -5,9 +5,9 @@ import { ClickToView } from './ClickToView';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 describe('ClickToView', () => {
-	const MockABTestAPI = (
+	const abTests = (
 		isUserInVariant: boolean,
-	): { [key: string]: string } => {
+	): CAPIType['config']['abTests'] => {
 		if (isUserInVariant) {
 			return { clickToViewVariant: 'variant' };
 		}
@@ -21,7 +21,7 @@ describe('ClickToView', () => {
 				isTracking={false}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				serverSideABTests={MockABTestAPI(false)}
+				abTests={abTests(false)}
 			>
 				{thirdPartyContent}
 			</ClickToView>,
@@ -36,7 +36,7 @@ describe('ClickToView', () => {
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				serverSideABTests={MockABTestAPI(false)}
+				abTests={abTests(false)}
 			>
 				<div data-testid="third-party-content" />
 			</ClickToView>,
@@ -51,7 +51,7 @@ describe('ClickToView', () => {
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
-				serverSideABTests={MockABTestAPI(true)}
+				abTests={abTests(true)}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,
@@ -70,7 +70,7 @@ describe('ClickToView', () => {
 			<ClickToView
 				isTracking={true}
 				sourceDomain="athirdparty.com"
-				serverSideABTests={MockABTestAPI(true)}
+				abTests={abTests(true)}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,
