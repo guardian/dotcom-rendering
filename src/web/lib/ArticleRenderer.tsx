@@ -529,7 +529,7 @@ export const ArticleRenderer: React.FC<{
 											witnessTypeDataImage.dateCreated
 										}
 										alt={witnessTypeDataImage.alt}
-										pillar={pillar}
+										pillar={format.theme}
 									/>
 								</Figure>
 							);
@@ -552,7 +552,7 @@ export const ArticleRenderer: React.FC<{
 										dateCreated={
 											witnessTypeDataVideo.dateCreated
 										}
-										pillar={pillar}
+										pillar={format.theme}
 									/>
 								</Figure>
 							);
@@ -572,7 +572,7 @@ export const ArticleRenderer: React.FC<{
 										dateCreated={
 											witnessTypeDataText.dateCreated
 										}
-										pillar={pillar}
+										pillar={format.theme}
 									/>
 								</Figure>
 							);
