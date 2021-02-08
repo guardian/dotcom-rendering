@@ -136,7 +136,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@NODE_ENV=production webpack --config scripts/webpack/frontend
+	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
 check-env: # private
 	$(call log, "checking environment")
