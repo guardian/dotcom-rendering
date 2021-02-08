@@ -149,7 +149,7 @@ const StandardHeader: FC<HeaderProps> = ({ item }) => (
 		<Headline item={item} />
 		<Standfirst item={item} />
 		<Lines />
-		<Byline item={item} shareIcon />
+		<Byline item={item} />
 	</header>
 );
 
@@ -160,7 +160,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 		<HeaderMedia item={item} />
 		<Standfirst item={item} />
 		<Lines />
-		<Byline item={item} shareIcon />
+		<Byline item={item} />
 	</header>
 );
 
@@ -168,7 +168,7 @@ const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Headline item={item} />
-		<Byline item={item} large />
+		<Byline item={item} />
 		<Lines />
 		<Standfirst item={item} shareIcon />
 	</header>
@@ -178,7 +178,7 @@ const CommentHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Headline item={item} />
-		<Byline item={item} large avatar />
+		<Byline item={item} />
 		<Lines />
 		<Standfirst item={item} shareIcon />
 	</header>
@@ -192,7 +192,7 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 			<Standfirst item={item} />
 		</div>
 		<Lines className={linesBorderStyles} />
-		<Byline item={item} shareIcon />
+		<Byline item={item} />
 	</header>
 );
 
@@ -204,7 +204,7 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 			<div css={galleryHeaderBorderStyles}>
 				<Standfirst item={item} />
 				<Lines className={galleryLinesStyles} />
-				<Byline item={item} shareIcon />
+				<Byline item={item} />
 			</div>
 		</div>
 	</header>
@@ -217,7 +217,7 @@ const PictureHeader: FC<HeaderProps> = ({ item }) => (
 				<Headline item={item} />
 				<Standfirst item={item} />
 				<Lines className={galleryLinesStyles} />
-				<Byline item={item} shareIcon />
+				<Byline item={item} />
 			</div>
 		</div>
 		<HeaderMedia item={item} />
@@ -234,7 +234,7 @@ const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 			<Standfirst item={item} />
 			<Lines />
 		</div>
-		<Byline item={item} shareIcon />
+		<Byline item={item} />
 	</header>
 );
 
