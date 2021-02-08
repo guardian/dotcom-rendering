@@ -301,9 +301,13 @@ export const ReaderRevenueEpic = ({ meta, module }: any) => {
 			emotion,
 		};
 
+		const modulePerf = initPerf('contributions-epic-module');
+		modulePerf.start();
+
 		window
 			.guardianPolyfilledImport(module.url)
 			.then((epicModule) => {
+				modulePerf.end();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 				sendOphanComponentEvent('INSERT', meta);
 			})
@@ -318,6 +322,7 @@ export const ReaderRevenueEpic = ({ meta, module }: any) => {
 			const { abTestName } = meta;
 
 			logView(abTestName);
+
 			sendOphanComponentEvent('VIEW', meta);
 		}
 	}, [hasBeenSeen, meta]);
