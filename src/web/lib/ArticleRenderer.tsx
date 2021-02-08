@@ -29,9 +29,11 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { WitnessVideoBlockComponent } from '@root/src/web/components/elements/WitnessVideoBlockComponent';
-import { WitnessImageBlockComponent } from '@root/src/web/components/elements/WitnessImageBlockComponent';
-import { WitnessTextBlockComponent } from '@root/src/web/components/elements/WitnessTextBlockComponent';
+import {
+	WitnessVideoBlockComponent,
+	WitnessImageBlockComponent,
+	WitnessTextBlockComponent,
+} from '@root/src/web/components/elements/WitnessBlockComponent';
 
 import { Figure } from '@root/src/web/components/Figure';
 
