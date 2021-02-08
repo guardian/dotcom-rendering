@@ -21,6 +21,20 @@ export default {
 	},
 };
 
+const convertToImmersive = (trails: TrailType[]): TrailType[] => {
+	return trails.map((trail) => {
+		const format = {
+			...trail.format,
+			display: Display.Immersive,
+		};
+		return {
+			...trail,
+			format,
+			palette: decidePalette(format),
+		};
+	});
+};
+
 const trails: TrailType[] = [
 	{
 		url:
@@ -278,6 +292,8 @@ const trails: TrailType[] = [
 	},
 ];
 
+const immersiveTrails = convertToImmersive(trails);
+
 export const Headlines = () => (
 	<>
 		<Carousel
@@ -302,7 +318,7 @@ export const Immersive = () => (
 	<>
 		<Carousel
 			heading="Headlines"
-			trails={trails}
+			trails={immersiveTrails}
 			ophanComponentName="curated-content"
 			pillar={Pillar.News}
 			isFullCardImage={true}
@@ -310,7 +326,7 @@ export const Immersive = () => (
 
 		<Carousel
 			heading="Sport"
-			trails={trails}
+			trails={immersiveTrails}
 			ophanComponentName="curated-content"
 			pillar={Pillar.Sport}
 			isFullCardImage={true}

@@ -143,6 +143,7 @@ const textArticleLinkHover = (format: Format): string => {
 };
 
 const textCardHeadline = (format: Format): string => {
+	if (format.display === Display.Immersive) return WHITE;
 	if (format.theme === Special.SpecialReport) return WHITE;
 	switch (format.design) {
 		case Design.Feature:
@@ -159,6 +160,8 @@ const textCardHeadline = (format: Format): string => {
 const textCardKicker = (format: Format): string => {
 	if (format.theme === Special.SpecialReport)
 		return brandAltBackground.primary;
+	if (format.display === Display.Immersive)
+		return pillarPalette[format.theme].bright;
 	switch (format.design) {
 		case Design.Live:
 			switch (format.theme) {
