@@ -279,7 +279,7 @@
         "react-dom": "^16.13.1"
     },
     "run-if-changed": {
-        "src/lib/content.d.ts": "make gen-schema",
-        "src/lib/index.d.ts": "make gen-schema"
+        "src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
+        "src/lib/index.d.ts": "make gen-schema && make gen-fixtures"
     }
 }

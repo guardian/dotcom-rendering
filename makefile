@@ -151,6 +151,10 @@ gen-schema:
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/json-schema.json
 
+gen-fixtures:
+	$(call log, "Generating new article fixture data")
+	@node scripts/test-data/gen-fixtures.js
+
 perf-test:
 	@node scripts/perf/perf-test.js
 
