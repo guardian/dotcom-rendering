@@ -57,6 +57,8 @@ import {
 	getConsentFor,
 } from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
+import { ClickToView } from '@root/src/web/components/ClickToView';
+import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -116,7 +118,10 @@ const GetMatchStats = React.lazy(() => {
 	});
 });
 
-type Props = { CAPI: CAPIBrowserType; NAV: NavType };
+type Props = {
+	CAPI: CAPIBrowserType;
+	NAV: NavType;
+};
 
 const componentEventHandler = (
 	componentType: any,
@@ -620,6 +625,28 @@ export const App = ({ CAPI, NAV }: Props) => {
 							'EXPAND',
 						)}
 					/>
+				</HydrateOnce>
+			))}
+			{CAPI.documentBlockElements.map((documentBlockElement, index) => (
+				<HydrateOnce
+					key={index}
+					root="document-block-element"
+					index={documentBlockElement.documentIndex}
+				>
+					<ClickToView
+						role={documentBlockElement.role}
+						isTracking={documentBlockElement.isThirdPartyTracking}
+						source={documentBlockElement.source}
+						sourceDomain={documentBlockElement.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<DocumentBlockComponent
+							embedUrl={documentBlockElement.embedUrl}
+							height={documentBlockElement.height}
+							width={documentBlockElement.width}
+							title={documentBlockElement.title}
+						/>
+					</ClickToView>
 				</HydrateOnce>
 			))}
 			<Portal root="most-viewed-right">

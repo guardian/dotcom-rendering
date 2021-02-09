@@ -427,6 +427,7 @@ type CAPIBrowserType = {
 	youtubeBlockElement: YoutubeBlockElement[];
 	youtubeMainMediaBlockElement: YoutubeBlockElement[];
 	quizAtoms: QuizAtomBlockElement[];
+	documentBlockElements: DocumentBlockElement[];
 };
 
 interface TagType {
@@ -633,6 +634,7 @@ interface ConfigTypeBrowser {
 	remoteBanner: boolean;
 	ausMoment2020Header: boolean;
 	switches: CAPIType['config']['switches'];
+	abTests: CAPIType['config']['abTests'];
 	host?: string;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -706,7 +708,8 @@ type IslandType =
 	| 'audio-atom'
 	| 'youtube-block'
 	| 'youtube-block-main-media'
-	| 'chart-atom';
+	| 'chart-atom'
+	| 'document-block-element';
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as

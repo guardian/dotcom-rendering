@@ -13,6 +13,7 @@ type Props = {
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;
+	abTests: CAPIType['config']['abTests'];
 };
 
 const bodyStyle = (display: Display) => css`
@@ -55,6 +56,7 @@ export const ArticleBody = ({
 	blocks,
 	adTargeting,
 	host,
+	abTests,
 }: Props) => {
 	return (
 		<div className={cx(bodyStyle(format.display), linkColour(palette))}>
@@ -64,6 +66,7 @@ export const ArticleBody = ({
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}
+				abTests={abTests}
 			/>
 		</div>
 	);
