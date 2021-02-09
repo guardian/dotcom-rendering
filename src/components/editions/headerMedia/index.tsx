@@ -25,9 +25,9 @@ import {
 	tabletImageWidth,
 	wideArticleMargin,
 	wideImageWidth,
-} from './styles';
+} from '../styles';
 
-// ----- Component ----- //
+// ----- Styles ----- //
 
 const styles = css`
 	margin: 0;
@@ -85,15 +85,6 @@ const fullWidthCaptionStyles = css`
 	}
 `;
 
-const isFullWidthImage = (format: Format): boolean =>
-	format.display === Display.Immersive ||
-	format.design === Design.Interview ||
-	format.design === Design.Media;
-
-const getStyles = (format: Format): SerializedStyles => {
-	return isFullWidthImage(format) ? fullWidthStyles : styles;
-};
-
 const pictureStyles: SerializedStyles = css`
 	width: calc(100% - ${remSpace[4]});
 	${sidePadding}
@@ -109,14 +100,6 @@ const pictureStyles: SerializedStyles = css`
 		width: calc(100% - ${wideArticleMargin}px - ${wideArticleMargin}px);
 	}
 `;
-
-const getCaptionStyles = (format: Format): SerializedStyles => {
-	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
-};
-
-const getImageSizes = (format: Format): Sizes => {
-	return isFullWidthImage(format) ? fullWidthSizes : sizes;
-};
 
 const getImageStyle = (
 	{ width, height }: Image,
@@ -145,6 +128,25 @@ const getImageStyle = (
 		}
 	`;
 };
+
+const isFullWidthImage = (format: Format): boolean =>
+	format.display === Display.Immersive ||
+	format.design === Design.Interview ||
+	format.design === Design.Media;
+
+const getStyles = (format: Format): SerializedStyles => {
+	return isFullWidthImage(format) ? fullWidthStyles : styles;
+};
+
+const getCaptionStyles = (format: Format): SerializedStyles => {
+	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
+};
+
+const getImageSizes = (format: Format): Sizes => {
+	return isFullWidthImage(format) ? fullWidthSizes : sizes;
+};
+
+// ----- Component ----- //
 
 interface Props {
 	item: Item;
@@ -176,6 +178,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				image,
 				image: { nativeCaption, credit },
 			} = media;
+
 			return (
 				<figure
 					css={[
