@@ -40,7 +40,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 
 	if (format.theme === Special.SpecialReport) {
 		return css`
-			${baseLinkStyles}
+			${baseLinkStyles};
 			:hover {
 				filter: brightness(90%);
 			}
@@ -51,7 +51,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 		case Design.GuardianView:
 		case Design.Comment:
 			return css`
-				${baseLinkStyles}
+				${baseLinkStyles};
 				:hover {
 					/* TODO: This colour is hard coded here because it does not yet
                            exist in src-foundation. Once it's been added, please
@@ -63,14 +63,14 @@ const linkStyles = (format: Format, palette: Palette) => {
 		case Design.Media:
 		case Design.Live:
 			return css`
-				${baseLinkStyles}
+				${baseLinkStyles};
 				:hover {
 					filter: brightness(90%);
 				}
 			`;
 		default:
 			return css`
-				${baseLinkStyles}
+				${baseLinkStyles};
 				:hover {
 					background-color: ${neutral[93]};
 				}
