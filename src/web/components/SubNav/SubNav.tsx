@@ -4,13 +4,10 @@ import { css, cx } from 'emotion';
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
-
-import { pillarPalette, pillarMap } from '@root/src/lib/pillars';
 
 type Props = {
 	subNavSections: SubNavType;
-	format: Format;
+	palette: Palette;
 	currentNavLink: string;
 };
 
@@ -115,7 +112,7 @@ const parentLinkStyle = css`
 	font-weight: 700;
 `;
 
-const listItemStyles = css`
+const listItemStyles = (palette: Palette) => css`
 	:after {
 		content: '';
 		display: inline-block;
@@ -126,6 +123,7 @@ const listItemStyles = css`
 		border-left: 10px solid ${neutral[7]};
 		margin-top: 12px;
 		margin-left: 2px;
+		border-left-color: ${palette.border.subNav};
 
 		${from.tablet} {
 			margin-top: 16px;
@@ -133,19 +131,10 @@ const listItemStyles = css`
 	}
 `;
 
-// I'm not sure what the palette.neutral is for this should always receive a pillar by types.
-const leftColBorder = pillarMap(
-	(pillar) => css`
-		:after {
-			border-left-color: ${pillarPalette[pillar].main};
-		}
-	`,
-);
-
 const trimLeadingSlash = (url: string): string =>
 	url.substr(0, 1) === '/' ? url.slice(1) : url;
 
-export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
+export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ulRef = useRef<HTMLUListElement>(null);
@@ -163,7 +152,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 		} else {
 			setShowMore(false);
 		}
-	}, [ulRef, setShowMore]);
+	}, []);
 
 	const collapseWrapper = !showMore || !isExpanded;
 	const expandSubNav = !showMore || isExpanded;
@@ -176,6 +165,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 				spaceBetween,
 			)}
 			data-cy="sub-nav"
+			data-component="sub-nav"
 		>
 			<ul
 				ref={ulRef}
@@ -187,10 +177,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
-						className={cx(
-							listItemStyles,
-							leftColBorder[format.theme],
-						)}
+						className={listItemStyles(palette)}
 					>
 						<a
 							className={parentLinkStyle}
@@ -220,6 +207,7 @@ export const SubNav = ({ subNavSections, format, currentNavLink }: Props) => {
 				<button
 					onClick={() => setIsExpanded(!isExpanded)}
 					className={showMoreStyle}
+					data-link-name="nav2 : subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}
 				</button>

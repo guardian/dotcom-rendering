@@ -75,7 +75,7 @@ const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
 	ampFooter: buildRRLinkCategories(data, 'ampFooter'),
 });
 
-export const extract = (data: {}): NavType => {
+export const extractNAV = (data: {}): NavType => {
 	let pillars = getArray<any>(data, 'pillars');
 
 	pillars = pillars.map((link) => getLink(link, { isPillar: true }));

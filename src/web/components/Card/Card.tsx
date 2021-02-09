@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -11,11 +11,9 @@ import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
-import { pillarPalette } from '@frontend/lib/pillars';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
@@ -26,6 +24,38 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
+
+type Props = {
+	linkTo: string;
+	format: Format;
+	palette: Palette;
+	headlineText: string;
+	headlineSize?: SmallHeadlineSize;
+	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	byline?: string;
+	isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
+	showByline?: boolean;
+	webPublicationDate?: string;
+	imageUrl?: string;
+	imagePosition?: ImagePositionType;
+	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+	isFullCardImage?: boolean; // For use in Carousel until we decide a `Display.Immersive` convention
+	standfirst?: string;
+	avatar?: AvatarType;
+	showClock?: boolean;
+	mediaType?: MediaType;
+	mediaDuration?: number;
+	// Kicker
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	commentCount?: number;
+	starRating?: number;
+	alwaysVertical?: boolean;
+	minWidthInPixels?: number;
+};
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
 type CoveragesType = {
 	image: {
@@ -91,6 +121,7 @@ const fullCardImageAgeStyles = css`
 export const Card = ({
 	linkTo,
 	format,
+	palette,
 	headlineText,
 	headlineSize,
 	showQuotes,
@@ -113,7 +144,7 @@ export const Card = ({
 	starRating,
 	alwaysVertical,
 	minWidthInPixels,
-}: CardType) => {
+}: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
 	let contentCoverage: CardPercentageType | undefined;
@@ -128,17 +159,9 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	const pillarToUse =
-		format.design === Design.Comment && format.theme === Pillar.News
-			? Pillar.Opinion
-			: format.theme;
-
 	return (
-		<CardLink linkTo={linkTo} design={format.design} pillar={pillarToUse}>
-			<TopBar
-				topBarColour={pillarPalette[pillarToUse].main}
-				isFullCardImage={isFullCardImage}
-			>
+		<CardLink linkTo={linkTo} format={format} palette={palette}>
+			<TopBar palette={palette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}
@@ -175,8 +198,8 @@ export const Card = ({
 								>
 									<CardHeadline
 										headlineText={headlineText}
-										design={format.design}
-										pillar={pillarToUse}
+										format={format}
+										palette={palette}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
@@ -204,9 +227,7 @@ export const Card = ({
 												<Avatar
 													imageSrc={avatar.src}
 													imageAlt={avatar.alt}
-													palette={decidePalette(
-														format,
-													)}
+													palette={palette}
 												/>
 											</AvatarContainer>
 										</Hide>
@@ -229,18 +250,18 @@ export const Card = ({
 											<Avatar
 												imageSrc={avatar.src}
 												imageAlt={avatar.alt}
-												palette={decidePalette(format)}
+												palette={palette}
 											/>
 										</AvatarContainer>
 									</Hide>
 								)}
 								<CardFooter
-									design={format.design}
+									format={format}
 									age={
 										webPublicationDate ? (
 											<CardAge
 												design={format.design}
-												pillar={pillarToUse}
+												pillar={format.theme}
 												webPublicationDate={
 													webPublicationDate
 												}
@@ -256,7 +277,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												pillar={pillarToUse}
+												pillar={format.theme}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -268,7 +289,7 @@ export const Card = ({
 										shortCount ? (
 											<CardCommentCount
 												design={format.design}
-												pillar={pillarToUse}
+												pillar={format.theme}
 												long={longCount}
 												short={shortCount}
 											/>

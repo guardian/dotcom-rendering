@@ -30,6 +30,7 @@ type CAPIDesign =
 	| 'SpecialReport'
 	| 'GuardianLabs';
 
+type Display = import('@guardian/types').Display;
 type Design = import('@guardian/types').Design;
 type Theme = import('@guardian/types').Theme;
 type Format = import('@guardian/types').Format;
@@ -50,16 +51,38 @@ type Palette = {
 		sectionTitle: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
+		caption: Colour;
+		captionLink: Colour;
+		subMeta: Colour;
+		subMetaLabel: Colour;
+		subMetaLink: Colour;
+		syndicationButton: Colour;
+		articleLink: Colour;
+		articleLinkHover: Colour;
+		cardHeadline: Colour;
+		cardKicker: Colour;
+		linkKicker: Colour;
 	},
 	background: {
 		article: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;
+		card: Colour;
 	},
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
+		captionTriangle: Colour;
+	},
+	border: {
+		syndicationButton: Colour;
+		subNav: Colour;
+		articleLink: Colour;
+		articleLinkHover: Colour;
+	},
+	topBar: {
+		card: Colour;
 	},
 };
 
@@ -121,24 +144,12 @@ interface Branding {
 	};
 }
 
-interface CAPILinkType extends SimpleLinkType {
-	longTitle: string;
-	children?: LinkType[];
-	mobileOnly?: boolean;
-	pillar?: CAPIPillar;
-	more?: boolean;
-}
-
 interface LinkType extends SimpleLinkType {
 	longTitle: string;
 	children?: LinkType[];
 	mobileOnly?: boolean;
 	pillar?: Pillar;
 	more?: boolean;
-}
-
-interface CAPIPillarType extends CAPILinkType {
-	pillar: CAPIPillar;
 }
 
 interface PillarType extends LinkType {
@@ -184,10 +195,6 @@ interface NavType extends BaseNavType {
 	pillars: PillarType[];
 }
 
-interface CAPINavType extends BaseNavType {
-	pillars: CAPIPillarType[];
-}
-
 interface SubNavBrowserType {
 	currentNavLink: string;
 	subNavSections?: SubNavType;
@@ -216,6 +223,12 @@ interface Block {
 	blockFirstPublishedDisplay?: string;
 	primaryDateLine: string;
 	secondaryDateLine: string;
+	createdOn?: number;
+	createdOnDisplay?: string;
+	lastUpdated?: number;
+	lastUpdatedDisplay?: string;
+	firstPublished?: number;
+	firstPublishedDisplay?: string;
 }
 
 interface Pagination {
@@ -263,6 +276,38 @@ type PageTypeType = {
 	isPreview: boolean;
 	isSensitive: boolean;
 };
+
+// Data types for the API request bodies from clients that require
+// transformation before internal use. If we use the data as-is, we avoid the
+// CAPI prefix. Note also, the 'CAPI' prefix naming convention is a bit
+// misleading - the model is *not* the same as the Content API content models.
+
+interface CAPILinkType {
+    url: string;
+    title: string;
+    longTitle: string;
+    iconName: string;
+    children?: CAPILinkType[];
+    mobileOnly?: boolean;
+    pillar?: CAPIPillar;
+    more?: boolean;
+    classList?: string[];
+}
+
+interface CAPINavType {
+    currentUrl: string;
+    pillars: CAPILinkType[];
+    otherLinks: CAPILinkType[];
+    brandExtensions: CAPILinkType[];
+    currentNavLink?: CAPILinkType;
+    currentParent?: CAPILinkType;
+    currentPillar?: CAPILinkType;
+    subNavSections?: {
+        parent?: CAPILinkType;
+        links: CAPILinkType[];
+    };
+    readerRevenueLinks: ReaderRevenuePositions;
+}
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
@@ -321,8 +366,7 @@ interface CAPIType {
 	trailText: string;
 	badge?: BadgeType;
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	nav: any; // as not extracting directly into NavType here for now (nav stuff is getting moved out)
+	nav: CAPINavType; // TODO move this out as most code uses a different internal NAV model.
 
 	pageFooter: FooterType;
 
@@ -334,6 +378,9 @@ interface CAPIType {
 	matchUrl?: string;
 	isSpecialReport: boolean;
 }
+
+// Browser data models. Note the CAPI prefix here means something different to
+// the models above.
 
 type CAPIBrowserType = {
 	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
@@ -396,17 +443,6 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-// Defines a prefix to be used with a headline (e.g. 'Live /')
-interface KickerType {
-	text: string;
-	design: Design;
-	pillar: Theme;
-	showPulsingDot?: boolean;
-	showSlash?: boolean;
-    inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
-    isFullCardImage?: boolean;
-}
-
 type ImagePositionType = 'left' | 'top' | 'right';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
@@ -420,36 +456,6 @@ type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
-interface CardType {
-    linkTo: string;
-    format: Format;
-    headlineText: string;
-    headlineSize?: SmallHeadlineSize;
-    showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
-    byline?: string;
-    isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
-    showByline?: boolean;
-    webPublicationDate?: string;
-    imageUrl?: string;
-    imagePosition?: ImagePositionType;
-    imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
-    isFullCardImage?: boolean // For use in Carousel until we decide a `Display.Immersive` convention
-    standfirst?: string;
-    avatar?: AvatarType;
-    showClock?: boolean;
-    mediaType?: MediaType;
-    mediaDuration?: number;
-    // Kicker
-    kickerText?: string;
-    showPulsingDot?: boolean;
-    showSlash?: boolean;
-    commentCount?: number;
-    starRating?: number;
-    alwaysVertical?: boolean;
-    minWidthInPixels?: number;
-}
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
 type HeadlineLink = {
@@ -457,34 +463,6 @@ type HeadlineLink = {
 	visitedColour?: string; // a custom colour for the :visited state
 	preventFocus?: boolean; // if true, stop the link from being tabbable and focusable
 };
-
-interface LinkHeadlineType {
-	design: Design;
-	headlineText: string; // The text shown
-	pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
-	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
-	kickerText?: string;
-	showPulsingDot?: boolean;
-	showSlash?: boolean;
-	showQuotes?: boolean; // When true the QuoteIcon is shown
-	size?: SmallHeadlineSize;
-	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
-	byline?: string;
-}
-
-interface CardHeadlineType {
-	headlineText: string; // The text shown
-	design: Design; // Used to decide when to add type specific styles
-	pillar: Theme; // Used to colour the headline (dark) and the kicker (main)
-	kickerText?: string;
-	showPulsingDot?: boolean;
-	showSlash?: boolean;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
-	size?: SmallHeadlineSize;
-	byline?: string;
-    showByline?: boolean;
-    isFullCardImage?: boolean; // Used for carousel AB test
-}
 
 type UserBadge = {
 	name: string;
@@ -698,10 +676,6 @@ interface DCRBrowserDocumentData {
 	linkedData: object;
 }
 
-interface Props {
-	data: DCRServerDocumentData; // Do not fall to the tempation to rename 'data' into something else
-}
-
 type IslandType =
 	| 'reader-revenue-links-header'
 	| 'sub-nav-root'
@@ -778,8 +752,8 @@ interface BaseTrailType {
     linkText?: string;
 }
 interface TrailType extends BaseTrailType {
-	design: Design;
-	pillar: Theme;
+		format: Format;
+		palette: Palette;
 }
 
 interface CAPITrailType extends BaseTrailType {

@@ -14,6 +14,8 @@ import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { Card } from '@frontend/web/components/Card/Card';
 import { LI } from '@frontend/web/components/Card/components/LI';
 
+import { decidePalette } from '@root/src/web/lib/decidePalette';
+
 // Carousel icons - need replicating from source for centring
 
 const SvgChevronLeftSingle = () => {
@@ -268,7 +270,7 @@ const titleStyle = (pillar: Theme) => css`
 	color: ${pillarPalette[pillar].main};
 `;
 
-export const Title = ({
+const Title = ({
 	title,
 	pillar,
 }: {
@@ -281,10 +283,24 @@ export const Title = ({
 	</h2>
 );
 
+const convertToImmersive = (trails: TrailType[]): TrailType[] => {
+	return trails.map((trail) => {
+		const format = {
+			...trail.format,
+			display: Display.Immersive,
+		};
+		return {
+			...trail,
+			format,
+			palette: decidePalette(format),
+		};
+	});
+};
+
 type CarouselCardProps = {
 	isFirst: boolean;
-	pillar: Theme;
-	design: Design;
+	format: Format;
+	trailPalette: Palette;
 	display?: Display;
 	linkTo: string;
 	headlineText: string;
@@ -295,8 +311,8 @@ type CarouselCardProps = {
 };
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
-	pillar,
-	design,
+	format,
+	trailPalette,
 	linkTo,
 	imageUrl,
 	headlineText,
@@ -315,11 +331,8 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	>
 		<Card
 			linkTo={linkTo}
-			format={{
-				display: Display.Standard,
-				design,
-				theme: pillar,
-			}}
+			format={format}
+			palette={trailPalette}
 			headlineText={headlineText}
 			webPublicationDate={webPublicationDate}
 			kickerText={kickerText || ''}
@@ -328,7 +341,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			alwaysVertical={true}
 			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
-			showQuotes={design === Design.Comment}
+			showQuotes={format.design === Design.Comment}
 		/>
 	</LI>
 );
@@ -477,6 +490,8 @@ export const Carousel: React.FC<OnwardsType> = ({
 		}
 	});
 
+	if (isFullCardImage) trails = convertToImmersive(trails);
+
 	return (
 		<div
 			className={wrapperStyle}
@@ -560,10 +575,10 @@ export const Carousel: React.FC<OnwardsType> = ({
 				>
 					{trails.map((trail, i) => {
 						const {
-							pillar: cardPillar,
-							design,
 							url: linkTo,
 							headline: headlineText,
+							format,
+							palette: trailPalette,
 							webPublicationDate,
 							image: imageUrl,
 							kickerText,
@@ -572,8 +587,8 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<CarouselCard
 								key={trail.url + i}
 								isFirst={i === 0}
-								pillar={cardPillar}
-								design={design}
+								format={format}
+								trailPalette={trailPalette}
 								linkTo={linkTo}
 								headlineText={headlineText}
 								webPublicationDate={webPublicationDate}

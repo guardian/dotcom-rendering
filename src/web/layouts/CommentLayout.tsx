@@ -345,7 +345,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								format={format}
+								palette={palette}
 							/>
 						</Section>
 					)}
@@ -455,10 +455,9 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							}
 						>
 							<MainMedia
-								display={format.display}
-								design={format.design}
+								format={format}
+								palette={palette}
 								elements={CAPI.mainMediaElements}
-								pillar={format.theme}
 								adTargeting={adTargeting}
 								starRating={
 									format.design === Design.Review &&
@@ -492,6 +491,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<main className={maxWidth}>
 								<ArticleBody
 									format={format}
+									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
@@ -502,7 +502,6 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pillar={format.theme}
 								/>
 								<SubMeta
-									pillar={format.theme}
 									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -619,7 +618,7 @@ export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						format={format}
+						palette={palette}
 					/>
 					<GuardianLines count={4} pillar={format.theme} />
 				</Section>

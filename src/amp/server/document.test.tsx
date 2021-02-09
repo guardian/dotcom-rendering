@@ -1,8 +1,8 @@
 import validator from 'amphtml-validator';
 import React from 'react';
-import { CAPI } from '@root/fixtures/CAPI/CAPI';
+import { Article as CAPI } from '@root/fixtures/articles/Article';
 import { Article } from '@root/src/amp/pages/Article';
-import { extract as extractNAV } from '@root/src/model/extract-nav';
+import { extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { document } from './document';
 

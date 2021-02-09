@@ -1,29 +1,17 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display, Design } from '@guardian/types';
 
 export const SpotifyBlockComponent: React.FC<{
 	embedUrl?: string;
 	height?: number;
 	width?: number;
 	title?: string;
-	pillar: Theme;
+	format: Format;
+	palette: Palette;
 	caption?: string;
-	display: Display;
-	design: Design;
 	credit?: string;
-}> = ({
-	embedUrl,
-	width,
-	height,
-	title,
-	pillar,
-	caption,
-	display,
-	design,
-	credit,
-}) => {
+}> = ({ embedUrl, width, height, title, format, palette, caption, credit }) => {
 	const embedContainer = css`
 		iframe {
 			width: 100%;
@@ -45,9 +33,8 @@ export const SpotifyBlockComponent: React.FC<{
 					{caption && (
 						<Caption
 							captionText={caption}
-							design={design}
-							pillar={pillar}
-							display={display}
+							format={format}
+							palette={palette}
 							credit={credit}
 						/>
 					)}
