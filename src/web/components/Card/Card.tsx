@@ -161,7 +161,7 @@ export const Card = ({
 
 	return (
 		<CardLink linkTo={linkTo} format={format} palette={palette}>
-			<TopBar palette={palette}>
+			<TopBar palette={palette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}
