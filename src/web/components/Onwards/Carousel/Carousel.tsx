@@ -309,6 +309,8 @@ type CarouselCardProps = {
 	kickerText?: string;
 	imageUrl?: string;
 	isFullCardImage?: boolean;
+	dataComponent?: string;
+	dataLinkName?: string;
 };
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
@@ -321,6 +323,8 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	kickerText,
 	isFirst,
 	isFullCardImage,
+	dataComponent,
+	dataLinkName,
 }: CarouselCardProps) => (
 	<LI
 		stretch={true}
@@ -343,6 +347,8 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
 			showQuotes={format.design === Design.Comment}
+			dataComponent={dataComponent}
+			dataLinkName={dataLinkName}
 		/>
 	</LI>
 );
@@ -384,6 +390,9 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 							isFullCardImage,
 						),
 					)}
+					data-link-name={`${
+						isFullCardImage ? 'carousel-large' : 'carousel-small'
+					}-nav-dot-${i}`}
 				/>
 			))}
 		</div>
@@ -400,6 +409,13 @@ export const Carousel: React.FC<OnwardsType> = ({
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
+	const [maxIndex, setMaxIndex] = useState(0);
+
+	const variantComponentName = isFullCardImage
+		? 'carousel-large'
+		: 'carousel-small';
+
+	const arrowName = `${variantComponentName}-arrow`;
 
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
@@ -483,13 +499,20 @@ export const Carousel: React.FC<OnwardsType> = ({
 	};
 
 	useEffect(() => {
-		if (carouselRef.current) {
-			carouselRef.current.addEventListener(
+		const carousel = carouselRef.current;
+		if (carousel) {
+			carousel.addEventListener('scroll', libDebounce(getSetIndex, 100));
+			return carousel.removeEventListener(
 				'scroll',
 				libDebounce(getSetIndex, 100),
 			);
 		}
 	});
+
+	// No idea if this is the best approach but it prevents issues with libDebounce
+	// using old data to determine the max index. Instead we say update maxIndex
+	// when index changes and compare it against the prior maxIndex only.
+	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
 	if (isFullCardImage) trails = convertToImmersive(trails);
 
@@ -513,6 +536,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 					onClick={prev}
 					aria-label="Move carousel backwards"
 					className={cx(buttonStyle, prevButtonStyle(index))}
+					data-link-name={`${arrowName}-prev`}
 				>
 					<SvgChevronLeftSingle />
 				</button>
@@ -526,6 +550,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						buttonStyle,
 						nextButtonStyle(index, trails.length),
 					)}
+					data-link-name={`${arrowName}-next`}
 				>
 					<SvgChevronRightSingle />
 				</button>
@@ -553,6 +578,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 									buttonStyle,
 									prevButtonStyle(index),
 								)}
+								data-link-name={`${arrowName}-prev`}
 							>
 								<SvgChevronLeftSingle />
 							</button>
@@ -563,6 +589,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 									buttonStyle,
 									nextButtonStyle(index, trails.length),
 								)}
+								data-link-name={`${arrowName}-next`}
 							>
 								<SvgChevronRightSingle />
 							</button>
@@ -596,6 +623,8 @@ export const Carousel: React.FC<OnwardsType> = ({
 								imageUrl={imageUrl}
 								kickerText={kickerText}
 								isFullCardImage={isFullCardImage}
+								dataComponent={`${variantComponentName} | maxIndex-${maxIndex}`}
+								dataLinkName={`${variantComponentName}-card-position-${i}`}
 							/>
 						);
 					})}
