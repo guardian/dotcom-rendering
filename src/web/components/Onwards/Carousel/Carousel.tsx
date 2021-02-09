@@ -103,6 +103,7 @@ const carouselStyle = (isFullCardImage?: boolean) => css`
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
+	overflow-y: hidden; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
 	${from.tablet} {
 		&::-webkit-scrollbar {
 			display: none;
