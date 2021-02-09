@@ -238,7 +238,13 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		</div>
 	);
 
-	const Box = ({ children }: { children: React.ReactNode }) => (
+	const Box = ({
+		palette,
+		children,
+	}: {
+		palette: Palette;
+		children: React.ReactNode;
+	}) => (
 		<div
 			className={css`
 				/*
@@ -257,7 +263,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						position: absolute;
 						width: 50%;
 						right: 0;
-						background-color: ${neutral[0]};
+						background-color: ${palette.background.headline};
 						${getZIndex('immersiveBlackBox')}
 						top: 0;
 						bottom: 0;
@@ -355,7 +361,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									badge={CAPI.badge}
 								/>
 							</ContainerLayout>
-							<Box>
+							<Box palette={palette}>
 								<ContainerLayout
 									verticalMargins={false}
 									padContent={false}

@@ -245,6 +245,19 @@ const backgroundCard = (format: Format): string => {
 	}
 };
 
+const backgroundHeadline = (format: Format): string => {
+	switch (format.display) {
+		case Display.Immersive:
+			if (format.theme === Special.SpecialReport)
+				return specialReport[300];
+			return BLACK;
+		case Display.Showcase:
+		case Display.Standard:
+		default:
+			return 'transparent';
+	}
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -310,6 +323,7 @@ export const decidePalette = (format: Format): Palette => {
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
 			card: backgroundCard(format),
+			headline: backgroundHeadline(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
