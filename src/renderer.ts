@@ -358,6 +358,8 @@ const noLinksStandfirstTextElement = (format: Format) => (
 			return h('p', { key }, children);
 		case 'STRONG':
 			return h('strong', { key }, children);
+		case '#text':
+			return textElement(format)(node, key);
 		default:
 			return null;
 	}

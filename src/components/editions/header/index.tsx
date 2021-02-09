@@ -247,6 +247,7 @@ const LetterHeader: FC<HeaderProps> = ({ item }) => (
 		<Series item={item} />
 		<Headline item={item} />
 		<Lines />
+		<Standfirst item={item} shareIcon />
 	</header>
 );
 
