@@ -77,7 +77,7 @@ const openExpandedMenuStyles = (display: Display) => css`
 
 export const ShowMoreMenu = ({ display }: { display: Display }) => (
 	<>
-		{/* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */}
+		{/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */}
 		{/*
     // @ts-ignore */}
 		<label
@@ -95,6 +95,6 @@ export const ShowMoreMenu = ({ display }: { display: Display }) => (
 			<span className={screenReadable}>Show</span>
 			<span className={showMoreTextStyles}>More</span>
 		</label>
-		{/* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */}
+		{/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */}
 	</>
 );
