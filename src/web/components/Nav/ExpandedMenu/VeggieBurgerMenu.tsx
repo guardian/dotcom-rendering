@@ -108,7 +108,7 @@ export const VeggieBurgerMenu: React.FC<{
 	display: Display;
 }> = ({ display }) => {
 	return (
-		/* eslint-disable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
+		/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
 		// @ts-ignore
 		<label
 			id={veggieBurgerId}
@@ -125,6 +125,6 @@ export const VeggieBurgerMenu: React.FC<{
 			<span className={screenReadable}>Show More</span>
 			<span className={veggieBurgerIconStyles()} />
 		</label>
-		/* eslint-enable @typescript-eslint/ban-ts-ignore, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
+		/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
 	);
 };
