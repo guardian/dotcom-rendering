@@ -131,9 +131,7 @@ export const CardHeadline = ({
 
 				<span
 					className={css`
-						color: ${isFullCardImage
-							? neutral[100]
-							: palette.text.cardHeadline};
+						color: ${palette.text.cardHeadline};
 					`}
 				>
 					{headlineText}
