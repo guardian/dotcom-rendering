@@ -154,7 +154,6 @@ gen-schema:
 gen-fixtures:
 	$(call log, "Generating new article fixture data")
 	@node scripts/test-data/gen-fixtures.js
-	@git add fixtures/articles/.
 
 perf-test:
 	@node scripts/perf/perf-test.js
