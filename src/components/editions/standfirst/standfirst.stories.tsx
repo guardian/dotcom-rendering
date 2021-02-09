@@ -1,10 +1,10 @@
 // ----- Imports ----- //
-
-import { Display, Pillar, toOption} from '@guardian/types';
+import { neutral } from '@guardian/src-foundations/palette';
+import { Display, Pillar, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
-import { article, analysis, comment, media } from 'fixtures/item';
+import { analysis, article, comment, media } from 'fixtures/item';
 import { pipe2 } from 'lib';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -64,15 +64,20 @@ const Analysis = (): ReactElement => (
 	/>
 );
 
-
 const Media = (): ReactElement => (
-	<Standfirst
-		item={{
-			...media,
-			standfirst,
-			theme: selectPillar(Pillar.News),
+	<div
+		style={{
+			backgroundColor: `${neutral[7]}`,
 		}}
-	/>
+	>
+		<Standfirst
+			item={{
+				...media,
+				standfirst,
+				theme: selectPillar(Pillar.News),
+			}}
+		/>
+	</div>
 );
 
 // ----- Exports ----- //
@@ -83,4 +88,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, Showcase, Comment, Analysis, Media};
+export { Default, Showcase, Comment, Analysis, Media };
