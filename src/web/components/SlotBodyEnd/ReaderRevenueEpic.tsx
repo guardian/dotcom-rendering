@@ -31,8 +31,9 @@ type EpicConfig = {
 	meta: TestMeta;
 	module: any;
 };
-type RenderedReaderRevenueEpic = any;
-type MaybeRenderedReaderRevenueEpic = RenderedReaderRevenueEpic | null;
+type ReaderRevenueEpicJSX = React.ReactElement;
+
+type MaybeReaderRevenueEpicJSX = ReaderRevenueEpicJSX | null;
 
 const checkForErrors = (response: any) => {
 	if (!response.ok) {
@@ -176,7 +177,7 @@ export const canShow = ({
 export const ReaderRevenueEpic = ({
 	meta,
 	module,
-}: EpicConfig): MaybeRenderedReaderRevenueEpic => {
+}: EpicConfig): MaybeReaderRevenueEpicJSX => {
 	// TODO: sort out this any
 	const [Epic, setEpic] = useState<React.FC>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
