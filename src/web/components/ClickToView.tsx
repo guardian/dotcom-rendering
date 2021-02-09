@@ -105,10 +105,10 @@ export const ClickToView = ({
 	sourceDomain = 'unknown',
 	abTests,
 }: Props) => {
-	const [isOverlayClicked, setOverlayClicked] = useState<boolean>(false);
+	const [isOverlayClicked, setIsOverlayClicked] = useState<boolean>(false);
 
 	const handleClick = () => {
-		setOverlayClicked(true);
+		setIsOverlayClicked(true);
 		if (onAccept) {
 			setTimeout(() => onAccept());
 		}

@@ -169,7 +169,7 @@ export const ArticleRenderer: React.FC<{
 							</>
 						</Figure>
 					);
-				case 'model.dotcomrendering.pageElements.DocumentBlockElement': {
+				case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 					return (
 						<Figure
 							role={element.role}
@@ -191,7 +191,6 @@ export const ArticleRenderer: React.FC<{
 							</ClickToView>
 						</Figure>
 					);
-				}
 				case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 					if (!element.safe) {
 						return (
