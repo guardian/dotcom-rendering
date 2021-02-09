@@ -307,7 +307,7 @@ export const OnwardsUpper = ({
 						ophanComponentName="curated-content"
 						Container={Carousel}
 						pillar={pillar}
-						// isFullCardImage={true}
+						isFullCardImage={true}
 					/>
 				</Section>
 			)}
