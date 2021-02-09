@@ -139,6 +139,9 @@
                     },
                     {
                         "$ref": "#/definitions/YoutubeBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/WitnessTypeBlockElement"
                     }
                 ]
             }
@@ -290,7 +293,9 @@
         "badge": {
             "$ref": "#/definitions/BadgeType"
         },
-        "nav": {},
+        "nav": {
+            "$ref": "#/definitions/CAPINavType"
+        },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
         },
@@ -1187,12 +1192,25 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
+                },
+                "documentIndex": {
+                    "type": "number"
                 }
             },
             "required": [
                 "_type",
                 "embedUrl",
                 "height",
+                "isThirdPartyTracking",
                 "width"
             ]
         },
@@ -1219,6 +1237,15 @@
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1831,11 +1858,13 @@
                 },
                 "attribution": {
                     "type": "string"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
                 }
             },
             "required": [
                 "_type",
-                "html",
                 "role"
             ]
         },
@@ -2259,6 +2288,15 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2330,10 +2368,345 @@
             "required": [
                 "_type",
                 "assetId",
-                "channelId",
                 "expired",
                 "id",
                 "mediaTitle"
+            ]
+        },
+        "WitnessTypeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessBlockElement"
+                    ]
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WitnessAssetType"
+                    }
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "witnessTypeData": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataImage"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataVideo"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataText"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "_type",
+                "assets",
+                "isThirdPartyTracking",
+                "witnessTypeData"
+            ]
+        },
+        "WitnessAssetType": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Image"
+                    ]
+                },
+                "mimeType": {
+                    "type": "string",
+                    "enum": [
+                        "image/jpeg"
+                    ]
+                },
+                "file": {
+                    "type": "string"
+                },
+                "typeData": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
+            },
+            "required": [
+                "file",
+                "mimeType",
+                "type",
+                "typeData"
+            ]
+        },
+        "WitnessTypeDataImage": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataImage"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "image"
+                    ]
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "mediaId": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "alt",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "caption",
+                "dateCreated",
+                "mediaId",
+                "originalUrl",
+                "photographer",
+                "source",
+                "title",
+                "type",
+                "url",
+                "witnessEmbedType"
+            ]
+        },
+        "WitnessTypeDataVideo": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataVideo"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "video"
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "youtubeHtml": {
+                    "type": "string"
+                },
+                "youtubeDescription": {
+                    "type": "string"
+                },
+                "youtubeUrl": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "youtubeSource": {
+                    "type": "string"
+                },
+                "youtubeAuthorName": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "youtubeTitle": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "dateCreated",
+                "description",
+                "height",
+                "originalUrl",
+                "source",
+                "title",
+                "type",
+                "url",
+                "width",
+                "witnessEmbedType",
+                "youtubeAuthorName",
+                "youtubeDescription",
+                "youtubeHtml",
+                "youtubeSource",
+                "youtubeTitle",
+                "youtubeUrl"
+            ]
+        },
+        "WitnessTypeDataText": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataText"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "text"
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "dateCreated",
+                "description",
+                "originalUrl",
+                "source",
+                "title",
+                "type",
+                "url",
+                "witnessEmbedType"
             ]
         },
         "Block": {
@@ -2471,6 +2844,9 @@
                             },
                             {
                                 "$ref": "#/definitions/YoutubeBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/WitnessTypeBlockElement"
                             }
                         ]
                     }
@@ -2500,6 +2876,24 @@
                     "type": "string"
                 },
                 "secondaryDateLine": {
+                    "type": "string"
+                },
+                "createdOn": {
+                    "type": "number"
+                },
+                "createdOnDisplay": {
+                    "type": "string"
+                },
+                "lastUpdated": {
+                    "type": "number"
+                },
+                "lastUpdatedDisplay": {
+                    "type": "string"
+                },
+                "firstPublished": {
+                    "type": "number"
+                },
+                "firstPublishedDisplay": {
                     "type": "string"
                 }
             },
@@ -3006,6 +3400,162 @@
             "required": [
                 "imageUrl",
                 "seriesTag"
+            ]
+        },
+        "CAPINavType": {
+            "type": "object",
+            "properties": {
+                "currentUrl": {
+                    "type": "string"
+                },
+                "pillars": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "otherLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "brandExtensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "currentNavLink": {
+                    "$ref": "#/definitions/CAPILinkType"
+                },
+                "currentParent": {
+                    "$ref": "#/definitions/CAPILinkType"
+                },
+                "currentPillar": {
+                    "$ref": "#/definitions/CAPILinkType"
+                },
+                "subNavSections": {
+                    "type": "object",
+                    "properties": {
+                        "parent": {
+                            "$ref": "#/definitions/CAPILinkType"
+                        },
+                        "links": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CAPILinkType"
+                            }
+                        }
+                    },
+                    "required": [
+                        "links"
+                    ]
+                },
+                "readerRevenueLinks": {
+                    "$ref": "#/definitions/ReaderRevenuePositions"
+                }
+            },
+            "required": [
+                "brandExtensions",
+                "currentUrl",
+                "otherLinks",
+                "pillars",
+                "readerRevenueLinks"
+            ]
+        },
+        "CAPILinkType": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "mobileOnly": {
+                    "type": "boolean"
+                },
+                "pillar": {
+                    "$ref": "#/definitions/CAPIPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "iconName",
+                "longTitle",
+                "title",
+                "url"
+            ]
+        },
+        "ReaderRevenuePositions": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "footer": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "sideMenu": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampHeader": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampFooter": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                }
+            },
+            "required": [
+                "ampFooter",
+                "ampHeader",
+                "footer",
+                "header",
+                "sideMenu"
+            ]
+        },
+        "ReaderRevenueCategories": {
+            "type": "object",
+            "properties": {
+                "contribute": {
+                    "type": "string"
+                },
+                "subscribe": {
+                    "type": "string"
+                },
+                "support": {
+                    "type": "string"
+                },
+                "gifting": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contribute",
+                "gifting",
+                "subscribe",
+                "support"
             ]
         },
         "FooterType": {

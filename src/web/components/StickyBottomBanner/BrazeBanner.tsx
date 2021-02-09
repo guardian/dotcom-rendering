@@ -15,6 +15,11 @@ import {
 	clearHasCurrentBrazeUser,
 } from '@root/src/web/lib/hasCurrentBrazeUser';
 import { checkBrazeDependencies } from '@root/src/web/lib/braze/checkBrazeDependencies';
+import { BrazeMessages } from '@root/src/web/lib/braze/BrazeMessages';
+import {
+	getInitialisedAppboy,
+	SDK_OPTIONS,
+} from '@root/src/web/lib/braze/initialiseAppboy';
 import { CanShowResult } from './bannerPicker';
 
 type Meta = {
@@ -36,14 +41,6 @@ const containerStyles = emotion.css`
     ${getZIndex('banner')}
 `;
 
-const SDK_OPTIONS = {
-	enableLogging: false,
-	noCookies: true,
-	baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
-	sessionTimeoutInSeconds: 1,
-	minimumIntervalBetweenTriggerActionsInSeconds: 0,
-};
-
 const getMessageFromBraze = async (
 	apiKey: string,
 	brazeUuid: string,
@@ -51,9 +48,7 @@ const getMessageFromBraze = async (
 	const sdkLoadTiming = initPerf('braze-sdk-load');
 	sdkLoadTiming.start();
 
-	const { default: appboy } = await import(
-		/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
-	);
+	const appboy = await getInitialisedAppboy(apiKey);
 
 	const sdkLoadTimeTaken = sdkLoadTiming.end();
 	record({
@@ -64,14 +59,16 @@ const getMessageFromBraze = async (
 	const appboyTiming = initPerf('braze-appboy');
 	appboyTiming.start();
 
-	appboy.initialize(apiKey, SDK_OPTIONS);
+	const brazeMessages = new BrazeMessages(appboy);
 
-	const canShowPromise: Promise<CanShowResult> = new Promise((resolve) => {
-		let subscriptionId: string | undefined;
+	const messages = brazeMessages.getMessageForBanner();
 
-		const callback = (message: any) => {
-			const { extras } = message;
+	appboy.changeUser(brazeUuid);
+	appboy.openSession();
+	setHasCurrentBrazeUser();
 
+	return messages
+		.then((message) => {
 			const logButtonClickWithBraze = (internalButtonId: number) => {
 				const thisButton = new appboy.InAppMessageButton(
 					`Button: ID ${internalButtonId}`,
@@ -82,57 +79,36 @@ const getMessageFromBraze = async (
 					undefined,
 					internalButtonId,
 				);
-				appboy.logInAppMessageButtonClick(thisButton, message);
+				appboy.logInAppMessageButtonClick(thisButton, message as any);
 			};
 
 			const logImpressionWithBraze = () => {
 				// Log the impression with Braze
 				appboy.logInAppMessageImpression(message);
 			};
-
-			if (extras) {
-				const meta = {
-					dataFromBraze: extras,
-					logImpressionWithBraze,
-					logButtonClickWithBraze,
-				};
-
-				resolve({ result: true, meta });
-			} else {
-				resolve({ result: false });
-			}
-
-			// Unsubscribe
-			if (subscriptionId) {
-				appboy.removeSubscription(subscriptionId);
-			}
-		};
-
-		// Keep hold of the subscription ID so that we can unsubscribe in the
-		// callback, ensuring that the callback is only invoked once per page
-		subscriptionId = appboy.subscribeToInAppMessage(callback);
-
-		setHasCurrentBrazeUser();
-		appboy.changeUser(brazeUuid);
-		appboy.openSession();
-	});
-
-	canShowPromise
-		.then(() => {
+			const meta = {
+				dataFromBraze: message.extras,
+				logImpressionWithBraze,
+				logButtonClickWithBraze,
+			};
+			return { result: true, meta };
+		})
+		.then((outcome) => {
 			const appboyTimeTaken = appboyTiming.end();
 
 			record({
 				component: 'braze-appboy-timing',
 				value: appboyTimeTaken,
 			});
+
+			return outcome;
 		})
 		.catch(() => {
+			return { result: false };
+		})
+		.finally(() => {
 			appboyTiming.clear();
-			// eslint-disable-next-line no-console
-			console.log('Appboy Timing failed.');
 		});
-
-	return canShowPromise;
 };
 
 const FORCE_BRAZE_ALLOWLIST = [
@@ -179,11 +155,7 @@ const maybeWipeUserData = async (
 	brazeUuid?: null | string,
 ): Promise<void> => {
 	if (apiKey && !brazeUuid && hasCurrentBrazeUser()) {
-		const { default: appboy } = await import(
-			/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
-		);
-
-		appboy.initialize(apiKey, SDK_OPTIONS);
+		const appboy = await getInitialisedAppboy(apiKey);
 
 		try {
 			appboy.wipeData();

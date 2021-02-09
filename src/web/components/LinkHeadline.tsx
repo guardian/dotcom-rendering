@@ -6,7 +6,20 @@ import { headline } from '@guardian/src-foundations/typography';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
-import { pillarPalette } from '@frontend/lib/pillars';
+
+type Props = {
+	headlineText: string; // The text shown
+	format: Format;
+	palette: Palette; // Used to colour the headline and the kicker
+	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	showQuotes?: boolean; // When true the QuoteIcon is shown
+	size?: SmallHeadlineSize;
+	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
+	byline?: string;
+};
 
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
@@ -36,9 +49,7 @@ const textDecorationUnderline = css`
 
 const linkStyles = css`
 	position: relative;
-
 	color: inherit;
-
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
@@ -52,9 +63,9 @@ const visitedStyles = (visitedColour: string) => css`
 `;
 
 export const LinkHeadline = ({
-	design,
 	headlineText,
-	pillar,
+	format,
+	palette,
 	showUnderline = false,
 	kickerText,
 	showPulsingDot,
@@ -63,19 +74,18 @@ export const LinkHeadline = ({
 	size = 'medium',
 	link,
 	byline,
-}: LinkHeadlineType) => (
+}: Props) => (
 	<h4 className={fontStyles(size)}>
 		{kickerText && (
 			<Kicker
 				text={kickerText}
-				design={design}
-				pillar={pillar}
+				palette={palette}
 				showPulsingDot={showPulsingDot}
 				showSlash={showSlash}
 			/>
 		)}
 		{showQuotes && (
-			<QuoteIcon colour={pillarPalette[pillar].main} size={size} />
+			<QuoteIcon colour={palette.text.linkKicker} size={size} />
 		)}
 		{link ? (
 			// We were passed a link object so headline should be a link, with link styling
@@ -98,8 +108,8 @@ export const LinkHeadline = ({
 				{byline && (
 					<Byline
 						text={byline}
-						design={design}
-						pillar={pillar}
+						design={format.design}
+						pillar={format.theme}
 						size={size}
 					/>
 				)}
@@ -111,8 +121,8 @@ export const LinkHeadline = ({
 				{byline && (
 					<Byline
 						text={byline}
-						design={design}
-						pillar={pillar}
+						design={format.design}
+						pillar={format.theme}
 						size={size}
 					/>
 				)}

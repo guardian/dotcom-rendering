@@ -1,8 +1,7 @@
 import { useApi } from '@root/src/web/lib/api';
 import React from 'react';
 
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { decideTrail } from '@root/src/web/lib/decideTrail';
 
 type Props = {
 	url: string;
@@ -10,6 +9,7 @@ type Props = {
 	ophanComponentName: OphanComponentName;
 	Container: React.FC<OnwardsType>;
 	pillar: Theme;
+	isFullCardImage?: boolean;
 };
 
 type OnwardsResponse = {
@@ -25,6 +25,7 @@ export const OnwardsData = ({
 	ophanComponentName,
 	Container,
 	pillar,
+	isFullCardImage,
 }: Props) => {
 	const { data } = useApi<OnwardsResponse>(url);
 
@@ -32,14 +33,7 @@ export const OnwardsData = ({
 		trails: CAPITrailType[],
 		trailLimit: number,
 	): TrailType[] => {
-		return trails.slice(0, trailLimit).map((trail) => {
-			const design = decideDesign(trail.designType, []);
-			return {
-				...trail,
-				pillar: decideTheme({ pillar: trail.pillar, design }),
-				design,
-			};
-		});
+		return trails.slice(0, trailLimit).map(decideTrail);
 	};
 
 	if (data && data.trails) {
@@ -50,6 +44,7 @@ export const OnwardsData = ({
 				description={data.description}
 				ophanComponentName={ophanComponentName}
 				pillar={pillar}
+				isFullCardImage={isFullCardImage}
 			/>
 		);
 	}

@@ -1,8 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Pillar, Display } from '@guardian/types';
-import type { Format } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -91,21 +89,15 @@ export const SecondTierItem = ({
 		isLiveBlog,
 		avatarUrl,
 		image,
-		design,
+		format,
+		palette,
 		byline,
 		showByline,
-		pillar,
 		ageWarning,
 		headline: headlineText,
 	} = trail;
 
 	const avatarToShow = avatarUrl || image;
-	const pillarToUse = design === Design.Comment ? Pillar.Opinion : pillar;
-	const formatToUse: Format = {
-		design,
-		display: Display.Standard,
-		theme: pillarToUse,
-	};
 
 	return (
 		<div className={itemStyles(showRightBorder)}>
@@ -119,17 +111,17 @@ export const SecondTierItem = ({
 						<div className={titleStyles}>{title}</div>
 						{isLiveBlog ? (
 							<LinkHeadline
-								design={design}
 								headlineText={headlineText}
-								pillar={formatToUse.theme}
+								format={format}
+								palette={palette}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
 						) : (
 							<LinkHeadline
-								design={design}
 								headlineText={headlineText}
-								pillar={formatToUse.theme}
+								format={format}
+								palette={palette}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -147,7 +139,7 @@ export const SecondTierItem = ({
 									<Avatar
 										imageSrc={avatarToShow}
 										imageAlt=""
-										palette={decidePalette(formatToUse)}
+										palette={decidePalette(format)}
 									/>
 								</div>
 							</div>

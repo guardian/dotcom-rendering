@@ -1,5 +1,5 @@
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { CAPI } from '@root/fixtures/CAPI/CAPI';
+import { Article } from '@root/fixtures/articles/Article';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { setCountryCodeSynchronous } from '@root/src/web/lib/getCountryCode';
 import {
@@ -10,6 +10,8 @@ import {
 	isValidTag,
 	isCountry,
 } from './displayRule';
+
+const CAPI = Article;
 
 describe('SignInGate - displayRule methods', () => {
 	describe('isNPageOrHigherPageView', () => {

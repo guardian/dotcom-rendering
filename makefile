@@ -136,7 +136,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@NODE_ENV=production webpack --config scripts/webpack/frontend
+	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
 check-env: # private
 	$(call log, "checking environment")
@@ -150,6 +150,10 @@ gen-schema:
 	$(call log, "Generating new schema")
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/json-schema.json
+
+gen-fixtures:
+	$(call log, "Generating new article fixture data")
+	@node scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js

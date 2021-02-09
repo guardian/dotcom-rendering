@@ -122,6 +122,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 
 			// switches
 			switches: CAPI.config.switches,
+			abTests: CAPI.config.abTests,
 			slotBodyEnd: CAPI.config.switches.slotBodyEnd,
 			ampPrebid: CAPI.config.switches.ampPrebid,
 			permutive: CAPI.config.switches.permutive,
@@ -244,6 +245,11 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 				return acc as YoutubeBlockElement[];
 			},
 			[] as YoutubeBlockElement[],
+		),
+		documentBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.DocumentBlockElement',
+			'documentIndex',
 		),
 	};
 };

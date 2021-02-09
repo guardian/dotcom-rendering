@@ -3,9 +3,10 @@ import { css } from 'emotion';
 
 import { Design } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
+import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
-	design: Design;
+	format: Format;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -22,8 +23,10 @@ const fullCardImageLayout = css`
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: column;
-	margin-bottom: -2px;
 	margin-right: -1px;
+	${from.tablet} {
+		margin-bottom: -2px;
+	}
 `;
 
 const flexEnd = css`
@@ -39,13 +42,17 @@ const linesWrapperStyles = css`
 `;
 
 export const CardFooter = ({
-	design,
+	format,
 	age,
 	mediaMeta,
 	commentCount,
 	isFullCardImage,
 }: Props) => {
-	if (design === Design.Comment || design === Design.GuardianView) {
+	if (
+		!isFullCardImage &&
+		(format.design === Design.Comment ||
+			format.design === Design.GuardianView)
+	) {
 		return (
 			<footer className={spaceBetween}>
 				{age}
@@ -57,7 +64,7 @@ export const CardFooter = ({
 		);
 	}
 
-	if (design === Design.Media) {
+	if (format.design === Design.Media) {
 		return (
 			<footer className={spaceBetween}>
 				{mediaMeta}

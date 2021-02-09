@@ -1,5 +1,33 @@
-import { CAPI } from '@root/fixtures/CAPI/CAPI';
+import { Article } from '@root/fixtures/articles/Article';
 import { buildAdTargeting } from './ad-targeting';
+
+const CAPI = {
+	...Article,
+	config: {
+		...Article.config,
+		adUnit: '/59666047/theguardian.com/money/article/ng',
+		edition: 'UK',
+		section: 'money',
+		sharedAdTargeting: {
+			ct: 'article',
+			co: ['rob-davies'],
+			url:
+				'/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+			su: ['0'],
+			edition: 'uk',
+			tn: ['news'],
+			p: 'ng',
+			k: [
+				'ticket-prices',
+				'consumer-affairs',
+				'internet',
+				'viagogo',
+				'money',
+			],
+			sh: 'https://theguardian.com/p/64ak8',
+		},
+	},
+};
 
 describe('buildAdTargeting', () => {
 	const expectedAdTargeting = {

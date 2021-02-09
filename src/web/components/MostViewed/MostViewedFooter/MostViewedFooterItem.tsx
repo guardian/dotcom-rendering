@@ -77,22 +77,22 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 			<div className={headlineHeader}>
 				{trail.isLiveBlog ? (
 					<LinkHeadline
-						design={trail.design}
 						headlineText={trail.headline}
-						pillar={trail.pillar}
+						format={trail.format}
+						palette={trail.palette}
 						size="small"
 						kickerText="Live"
 						showSlash={true}
 						showPulsingDot={true}
-						showQuotes={trail.design === Design.Comment}
+						showQuotes={trail.format.design === Design.Comment}
 					/>
 				) : (
 					<LinkHeadline
-						design={trail.design}
 						headlineText={trail.headline}
-						pillar={trail.pillar}
+						format={trail.format}
+						palette={trail.palette}
 						size="small"
-						showQuotes={trail.design === Design.Comment}
+						showQuotes={trail.format.design === Design.Comment}
 					/>
 				)}
 			</div>

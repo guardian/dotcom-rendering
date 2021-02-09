@@ -29,6 +29,12 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import {
+	WitnessVideoBlockComponent,
+	WitnessImageBlockComponent,
+	WitnessTextBlockComponent,
+} from '@root/src/web/components/elements/WitnessBlockComponent';
+import { ClickToView } from '@root/src/web/components/ClickToView';
 
 import { Figure } from '@root/src/web/components/Figure';
 
@@ -58,7 +64,8 @@ export const ArticleRenderer: React.FC<{
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ format, palette, elements, adTargeting, host }) => {
+	abTests: CAPIType['config']['abTests'];
+}> = ({ format, palette, elements, adTargeting, host, abTests }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -164,13 +171,24 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 					return (
-						<Figure role={element.role}>
-							<DocumentBlockComponent
-								embedUrl={element.embedUrl}
-								height={element.height}
-								width={element.width}
-								title={element.title}
-							/>
+						<Figure
+							role={element.role}
+							id={`document-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<DocumentBlockComponent
+									embedUrl={element.embedUrl}
+									height={element.height}
+									width={element.width}
+									title={element.title}
+								/>
+							</ClickToView>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.EmbedBlockElement':
@@ -505,6 +523,77 @@ export const ArticleRenderer: React.FC<{
 							language={element.language}
 						/>
 					);
+				case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
+					const witnessType = element.witnessTypeData._type;
+					switch (witnessType) {
+						case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
+							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+							const witnessTypeDataImage = element.witnessTypeData as WitnessTypeDataImage;
+							return (
+								<Figure>
+									<WitnessImageBlockComponent
+										assets={element.assets}
+										caption={witnessTypeDataImage.caption}
+										title={witnessTypeDataImage.title}
+										authorName={
+											witnessTypeDataImage.authorName
+										}
+										dateCreated={
+											witnessTypeDataImage.dateCreated
+										}
+										alt={witnessTypeDataImage.alt}
+										pillar={format.theme}
+									/>
+								</Figure>
+							);
+						case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
+							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+							const witnessTypeDataVideo = element.witnessTypeData as WitnessTypeDataVideo;
+							return (
+								<Figure>
+									<WitnessVideoBlockComponent
+										title={witnessTypeDataVideo.title}
+										description={
+											witnessTypeDataVideo.description
+										}
+										authorName={
+											witnessTypeDataVideo.authorName
+										}
+										youtubeHtml={
+											witnessTypeDataVideo.youtubeHtml
+										}
+										dateCreated={
+											witnessTypeDataVideo.dateCreated
+										}
+										pillar={format.theme}
+									/>
+								</Figure>
+							);
+						case 'model.dotcomrendering.pageElements.WitnessTypeDataText':
+							// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+							const witnessTypeDataText = element.witnessTypeData as WitnessTypeDataText;
+							return (
+								<Figure>
+									<WitnessTextBlockComponent
+										title={witnessTypeDataText.title}
+										description={
+											witnessTypeDataText.description
+										}
+										authorName={
+											witnessTypeDataText.authorName
+										}
+										dateCreated={
+											witnessTypeDataText.dateCreated
+										}
+										pillar={format.theme}
+									/>
+								</Figure>
+							);
+						default:
+							return null;
+					}
+				}
+
 				case 'model.dotcomrendering.pageElements.AudioBlockElement':
 				case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 				case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':

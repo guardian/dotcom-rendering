@@ -301,7 +301,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								format={format}
+								palette={palette}
 							/>
 						</Section>
 					)}
@@ -428,6 +428,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
+									abTests={CAPI.config.abTests}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines
@@ -435,7 +436,6 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pillar={format.theme}
 								/>
 								<SubMeta
-									pillar={format.theme}
 									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -552,7 +552,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						format={format}
+						palette={palette}
 					/>
 					<GuardianLines count={4} pillar={format.theme} />
 				</Section>

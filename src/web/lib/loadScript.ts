@@ -16,7 +16,7 @@ export const loadScript = (
 				({ src: scriptSrc }) => script.src === scriptSrc,
 			)
 		) {
-			return resolve();
+			return resolve(undefined);
 		}
 
 		Object.assign(script, props);
