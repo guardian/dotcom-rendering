@@ -9,6 +9,7 @@ import { Review } from '@root/fixtures/articles/Review';
 import { Analysis } from '@root/fixtures/articles/Analysis';
 import { Feature } from '@root/fixtures/articles/Feature';
 import { GuardianView } from '@root/fixtures/articles/GuardianView';
+import { SpecialReport } from '@root/fixtures/articles/SpecialReport';
 import { Interview } from '@root/fixtures/articles/Interview';
 import { Quiz } from '@root/fixtures/articles/Quiz';
 import { Recipe } from '@root/fixtures/articles/Recipe';
@@ -125,6 +126,14 @@ AnalysisStory.story = {
 		viewport: { defaultViewport: 'tablet' },
 		chromatic: { viewports: [740] },
 	},
+};
+
+export const SpecialReportStory = () => {
+	const ServerCAPI = convertToImmersive(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
 };
 
 export const FeatureStory = () => {
