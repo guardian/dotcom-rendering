@@ -238,7 +238,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		</div>
 	);
 
-	const BlackBox = ({ children }: { children: React.ReactNode }) => (
+	const Box = ({ children }: { children: React.ReactNode }) => (
 		<div
 			className={css`
 				/*
@@ -333,7 +333,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/*
                         This z-index is what ensures the headline title text shows above main media. For
                         the actual headline we set the z-index deeper in ArticleHeadline itself so that
-                        the text appears above the pseudo BlackBox element
+                        the text appears above the pseudo Box element
                     */
 								position: relative;
 								${getZIndex('articleHeadline')};
@@ -355,7 +355,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									badge={CAPI.badge}
 								/>
 							</ContainerLayout>
-							<BlackBox>
+							<Box>
 								<ContainerLayout
 									verticalMargins={false}
 									padContent={false}
@@ -369,7 +369,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										byline={CAPI.author.byline}
 									/>
 								</ContainerLayout>
-							</BlackBox>
+							</Box>
 						</div>
 					</>
 				)}
