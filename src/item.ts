@@ -91,6 +91,11 @@ interface Comment extends Fields {
 	body: Body;
 }
 
+interface Letter extends Fields {
+	design: Design.Letter;
+	body: Body;
+}
+
 interface Interactive extends Fields {
 	design: Design.Interactive;
 	body: Body;
@@ -99,11 +104,21 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-	design: Exclude<Design, Design.LiveBlog | Design.Review | Design.Comment>;
+	design: Exclude<
+		Design,
+		Design.LiveBlog | Design.Review | Design.Comment | Design.Letter
+	>;
 	body: Body;
 }
 
-type Item = Liveblog | Review | Comment | Standard | Interactive | MatchReport;
+type Item =
+	| Liveblog
+	| Review
+	| Comment
+	| Standard
+	| Interactive
+	| MatchReport
+	| Letter;
 
 // ----- Convenience Types ----- //
 
@@ -375,6 +390,7 @@ export {
 	Standard,
 	MatchReport,
 	ResizedRelatedContent,
+	Letter,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,

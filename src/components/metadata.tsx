@@ -59,7 +59,11 @@ const ShortMetadata: FC<Props> = ({ item }: Props) => (
 const Metadata: FC<Props> = (props: Props) => {
 	const { display, design } = props.item;
 
-	if (display === Display.Immersive || design === Design.Comment) {
+	if (
+		display === Display.Immersive ||
+		design === Design.Comment ||
+		design === Design.Letter
+	) {
 		return <ShortMetadata {...props} />;
 	}
 
