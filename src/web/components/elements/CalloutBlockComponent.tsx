@@ -124,7 +124,7 @@ const buttonWrapperStyles = css`
 // after it was opened
 let hasFormBeenOpened = true;
 
-type formData = { [key in string]: any };
+type FormDataType = { [key in string]: any };
 
 export const CalloutBlockComponent = ({
 	callout,
@@ -143,7 +143,7 @@ export const CalloutBlockComponent = ({
 
 	const { title, description, formFields } = callout;
 
-	const onSubmit = async (formData: formData) => {
+	const onSubmit = async (formData: FormDataType) => {
 		// Reset error for new submission attempt
 		setError('');
 
