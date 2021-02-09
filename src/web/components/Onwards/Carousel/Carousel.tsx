@@ -54,7 +54,9 @@ const wrapperStyle = css`
 	display: flex;
 	justify-content: space-between;
 	overflow: hidden;
-	padding-right: 40px;
+	${from.tablet} {
+		padding-right: 40px;
+	}
 `;
 
 // For desktop and above, are we at the last card. Is one less than the dots style equivalent

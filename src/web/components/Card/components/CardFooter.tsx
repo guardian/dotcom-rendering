@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { Design } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
+import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
 	design: Design;
@@ -22,8 +23,10 @@ const fullCardImageLayout = css`
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: column;
-	margin-bottom: -2px;
 	margin-right: -1px;
+	${from.tablet} {
+		margin-bottom: -2px;
+	}
 `;
 
 const flexEnd = css`
