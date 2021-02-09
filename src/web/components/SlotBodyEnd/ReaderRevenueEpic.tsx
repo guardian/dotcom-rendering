@@ -12,7 +12,6 @@ import {
 	isRecurringContributor,
 	getLastOneOffContributionDate,
 	shouldHideSupportMessaging,
-	getArticleCountConsent,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -21,6 +20,7 @@ import {
 	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { initPerf } from '@root/src/web/browser/initPerf';
+import { Metadata } from '@guardian/automat-client/dist/types';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 import { getCookie } from '../../browser/cookie';
 
@@ -84,8 +84,7 @@ type Props = {
 	contributionsServiceUrl: string;
 };
 
-// TODO specify return type (need to update client to provide this first)
-const buildPayload = async (props: Props) => {
+const buildPayload = async (props: Props): Promise<Metadata> => {
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -100,7 +99,6 @@ const buildPayload = async (props: Props) => {
 			shouldHideReaderRevenue: props.shouldHideReaderRevenue,
 			isMinuteArticle: props.isMinuteArticle,
 			isPaidContent: props.isPaidContent,
-			isSensitive: props.isSensitive,
 			tags: props.tags,
 			showSupportMessaging: !shouldHideSupportMessaging(
 				props.isSignedIn || false,
@@ -111,7 +109,6 @@ const buildPayload = async (props: Props) => {
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			epicViewLog: getViewLog(),
 			weeklyArticleHistory: getWeeklyArticleHistory(),
-			hasOptedOutOfArticleCount: !(await getArticleCountConsent()),
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: props.countryCode,
 		},
