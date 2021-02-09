@@ -1,4 +1,5 @@
 import { Design, Display, Pillar } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { findCount, buildUrl } from './useComments';
 
@@ -83,6 +84,11 @@ describe('buildUrl', () => {
 							theme: Pillar.Opinion,
 							design: Design.Comment,
 						},
+						palette: decidePalette({
+							display: Display.Standard,
+							theme: Pillar.Opinion,
+							design: Design.Comment,
+						}),
 						webPublicationDate: '2020-11-03T11:00:02.000Z',
 						headline:
 							"There's no point railing against Farage. You have to present an alternative",
@@ -103,6 +109,11 @@ describe('buildUrl', () => {
 							theme: Pillar.Opinion,
 							design: Design.Comment,
 						},
+						palette: decidePalette({
+							display: Display.Standard,
+							theme: Pillar.Opinion,
+							design: Design.Comment,
+						}),
 						webPublicationDate: '2020-11-03T10:26:01.000Z',
 						headline:
 							"This election isn't about the next four years. It's about the next four millennia",
@@ -139,6 +150,11 @@ describe('buildUrl', () => {
 							theme: Pillar.Opinion,
 							design: Design.Comment,
 						},
+						palette: decidePalette({
+							display: Display.Standard,
+							theme: Pillar.Opinion,
+							design: Design.Comment,
+						}),
 						webPublicationDate: '2020-11-03T15:33:04.000Z',
 						headline:
 							'The EHRC report shows how difficult building real anti-racist politics will be',
@@ -159,6 +175,11 @@ describe('buildUrl', () => {
 							theme: Pillar.Opinion,
 							design: Design.Comment,
 						},
+						palette: decidePalette({
+							display: Display.Standard,
+							theme: Pillar.Opinion,
+							design: Design.Comment,
+						}),
 						webPublicationDate: '2020-11-03T13:50:06.000Z',
 						headline:
 							"Macron wants to fix France's social ills – but he won't do it by 'reforming' Islam",

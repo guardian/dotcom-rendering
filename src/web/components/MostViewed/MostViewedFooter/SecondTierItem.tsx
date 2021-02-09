@@ -90,6 +90,7 @@ export const SecondTierItem = ({
 		avatarUrl,
 		image,
 		format,
+		palette,
 		byline,
 		showByline,
 		ageWarning,
@@ -110,17 +111,17 @@ export const SecondTierItem = ({
 						<div className={titleStyles}>{title}</div>
 						{isLiveBlog ? (
 							<LinkHeadline
-								design={format.design}
 								headlineText={headlineText}
-								pillar={format.theme}
+								format={format}
+								palette={palette}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
 						) : (
 							<LinkHeadline
-								design={format.design}
 								headlineText={headlineText}
-								pillar={format.theme}
+								format={format}
+								palette={palette}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>

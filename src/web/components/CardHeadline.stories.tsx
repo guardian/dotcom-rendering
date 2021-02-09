@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design, Display, Pillar, Special } from '@guardian/types';
+
 import { Section } from '@frontend/web/components/Section';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
 
@@ -14,8 +16,16 @@ export const Article = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how an Article card headline looks"
-			design={Design.Article}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 		/>
 	</Section>
 );
@@ -25,8 +35,16 @@ export const Analysis = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how an Analysis card headline looks"
-			design={Design.Analysis}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Analysis,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Analysis,
+				theme: Pillar.News,
+			})}
 		/>
 	</Section>
 );
@@ -36,8 +54,16 @@ export const Feature = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a Feature card headline looks"
-			design={Design.Feature}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.News,
+			})}
 		/>
 	</Section>
 );
@@ -47,8 +73,16 @@ export const xsmallStory = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a large card headline looks"
-			design={Design.Article}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 			size="large"
 		/>
 	</Section>
@@ -59,8 +93,16 @@ export const liveStory = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with a live kicker looks"
-			design={Design.Article}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 			kickerText="Live"
 		/>
 	</Section>
@@ -71,8 +113,16 @@ export const noSlash = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with no kicker slash looks"
-			design={Design.Article}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 			kickerText="Live"
 			showSlash={false}
 		/>
@@ -84,8 +134,16 @@ export const pulsingDot = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with a pulsing dot looks"
-			design={Design.Article}
-			pillar={Pillar.News}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			})}
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
@@ -97,8 +155,16 @@ export const cultureVariant = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a Feature card headline with the culture pillar looks"
-			design={Design.Feature}
-			pillar={Pillar.Culture}
+			format={{
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.Culture,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.Culture,
+			})}
 			kickerText="Art and stuff"
 		/>
 	</Section>
@@ -109,8 +175,16 @@ export const AnalysisXSmall = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="Xsmall card headline for an Analysis article"
-			design={Design.Analysis}
-			pillar={Pillar.Lifestyle}
+			format={{
+				display: Display.Standard,
+				design: Design.Analysis,
+				theme: Pillar.Lifestyle,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Analysis,
+				theme: Pillar.Lifestyle,
+			})}
 			size="large"
 		/>
 	</Section>
@@ -121,8 +195,16 @@ export const opinionxxxsmall = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how small card headline for opinion articles look"
-			design={Design.Comment}
-			pillar={Pillar.Opinion}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Opinion,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Opinion,
+			})}
 			showQuotes={true}
 			size="small"
 		/>
@@ -134,8 +216,16 @@ export const OpinionKicker = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how an opinion card headline with a kicker and quotes looks"
-			design={Design.Article}
-			pillar={Pillar.Opinion}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.Opinion,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.Opinion,
+			})}
 			showQuotes={true}
 			kickerText="George Monbiot"
 			showSlash={true}
@@ -144,12 +234,46 @@ export const OpinionKicker = () => (
 );
 OpinionKicker.story = { name: 'With an opinion kicker' };
 
+export const SpecialReport = () => (
+	<Section
+		showTopBorder={false}
+		showSideBorders={false}
+		backgroundColour="grey"
+	>
+		<CardHeadline
+			headlineText="This is how a Special Report card headline with kicker and quotes looks"
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Special.SpecialReport,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Special.SpecialReport,
+			})}
+			showQuotes={true}
+			kickerText="Special Report"
+			showSlash={true}
+		/>
+	</Section>
+);
+SpecialReport.story = { name: 'with theme SpecialReport' };
+
 export const Busy = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="I look life a buffoon. I feel incredible. And then I vomit"
-			design={Design.Feature}
-			pillar={Pillar.Lifestyle}
+			format={{
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.Lifestyle,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Feature,
+				theme: Pillar.Lifestyle,
+			})}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
 			showSlash={true}

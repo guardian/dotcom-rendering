@@ -15,6 +15,8 @@ import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { Card } from '@frontend/web/components/Card/Card';
 import { LI } from '@frontend/web/components/Card/components/LI';
 import { pillarPalette } from '@root/src/lib/pillars';
+import { Display } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const navIconStyle = css`
 	display: inline-block;
@@ -187,6 +189,20 @@ const Title = ({
 	</h2>
 );
 
+const convertToImmersive = (trails: TrailType[]): TrailType[] => {
+	return trails.map((trail) => {
+		const format = {
+			...trail.format,
+			display: Display.Immersive,
+		};
+		return {
+			...trail,
+			format,
+			palette: decidePalette(format),
+		};
+	});
+};
+
 export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
@@ -288,6 +304,8 @@ export const Carousel: React.FC<OnwardsType> = ({
 		}
 	});
 
+	if (isFullCardImage) trails = convertToImmersive(trails);
+
 	return (
 		<div
 			className={wrapperStyle}
@@ -354,6 +372,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<Card
 								linkTo={trail.url}
 								format={trail.format}
+								palette={trail.palette}
 								headlineText={trail.headline}
 								webPublicationDate={trail.webPublicationDate}
 								kickerText={trail.kickerText || ''}
