@@ -163,6 +163,9 @@ interface GuVideoBlockElement {
 	html: string;
 	source: string;
 	role?: RoleType;
+	imageMedia?: { allImages: Image[] };
+	originalUrl?: string;
+	url?: string;
 }
 
 interface HighlightBlockElement {
@@ -552,6 +555,8 @@ interface Image {
 		height: string;
 		width: string;
 		isMaster?: string;
+		source?: string;
+		caption?: string;
 	};
 	mediaType: string;
 	mimeType: string;
@@ -561,6 +566,13 @@ interface Image {
 interface VideoAssets {
 	url: string;
 	mimeType: string;
+	fields?: {
+		source?: string;
+		embeddable?: string;
+		height?: string;
+		width?: string;
+		caption?: string;
+	};
 }
 
 interface TimelineEvent {

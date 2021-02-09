@@ -2661,64 +2661,202 @@ export const SpecialReport: CAPIType = {
 				{
 					assets: [
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/3gp/small/2016/04/06/160406PanamaPapersv2_small.3gp',
 							mimeType: 'video/3gp:small',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/HLS/2016/04/06/160406PanamaPapersv2.m3u8',
 							mimeType: 'video/m3u8',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/mainwebsite/2016/04/06/160406PanamaPapersv2_desk.mp4',
 							mimeType: 'video/mp4',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/3gp/large/2016/04/06/160406PanamaPapersv2_large.3gp',
 							mimeType: 'video/3gp:large',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/webM/2016/04/06/160406PanamaPapersv2_synd_768k_vp8.webm',
 							mimeType: 'video/webm',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '563',
+								caption: 'Panama Papers video holding image',
+								width: '1000',
+							},
 							url:
 								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1000.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '281',
+								caption: 'Panama Papers video holding image',
+								width: '500',
+							},
 							url:
 								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/500.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '79',
+								caption: 'Panama Papers video holding image',
+								width: '140',
+							},
 							url:
 								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/140.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '975',
+								caption: 'Panama Papers video holding image',
+								width: '1734',
+							},
 							url:
 								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1734.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '975',
+								caption: 'Panama Papers video holding image',
+								width: '1734',
+							},
 							url:
 								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/master/1734.jpg',
 							mimeType: 'image/jpeg',
 						},
 					],
 					role: 'inline',
+					imageMedia: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									source: 'Guardian',
+									height: '563',
+									caption:
+										'Panama Papers video holding image',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1000.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									source: 'Guardian',
+									height: '281',
+									caption:
+										'Panama Papers video holding image',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/500.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									source: 'Guardian',
+									height: '79',
+									caption:
+										'Panama Papers video holding image',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/140.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									source: 'Guardian',
+									height: '975',
+									caption:
+										'Panama Papers video holding image',
+									width: '1734',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1734.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									source: 'Guardian',
+									height: '975',
+									caption:
+										'Panama Papers video holding image',
+									width: '1734',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/master/1734.jpg',
+							},
+						],
+					},
 					_type:
 						'model.dotcomrendering.pageElements.GuVideoBlockElement',
 					caption:
 						'<a href="http://www.theguardian.com/news/video/2016/apr/06/biggest-leak-ever-panama-papers-video-explainer">The Panama Papers explained</a>',
 					html:
 						'<video data-media-id="gu-video-5704f6dee4b0401b41c4ef5c" class="gu-video" controls="controls" poster=""> <source src="https://cdn.theguardian.tv/mainwebsite/2016/04/06/160406PanamaPapersv2_desk.mp4"/><source src="https://cdn.theguardian.tv/3gp/small/2016/04/06/160406PanamaPapersv2_small.3gp"/><source src="https://cdn.theguardian.tv/HLS/2016/04/06/160406PanamaPapersv2.m3u8"/><source src="https://cdn.theguardian.tv/3gp/large/2016/04/06/160406PanamaPapersv2_large.3gp"/><source src="https://cdn.theguardian.tv/webM/2016/04/06/160406PanamaPapersv2_synd_768k_vp8.webm"/> </video>',
+					originalUrl:
+						'http://www.theguardian.com/news/video/2016/apr/06/biggest-leak-ever-panama-papers-video-explainer',
 					source: 'Guardian',
+					url:
+						'http://www.theguardian.com/news/video/2016/apr/06/biggest-leak-ever-panama-papers-video-explainer',
 				},
 				{
 					_type:
@@ -3621,63 +3759,206 @@ export const SpecialReport: CAPIType = {
 				{
 					assets: [
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/mainwebsite/2016/04/08/160408CameronExplainer1_desk.mp4',
 							mimeType: 'video/mp4',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/3gp/small/2016/04/08/160408CameronExplainer1_small.3gp',
 							mimeType: 'video/3gp:small',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/3gp/large/2016/04/08/160408CameronExplainer1_large.3gp',
 							mimeType: 'video/3gp:large',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/HLS/2016/04/08/160408CameronExplainer1.m3u8',
 							mimeType: 'video/m3u8',
 						},
 						{
+							fields: {
+								source: 'guardian.co.uk',
+								embeddable: 'false',
+								height: '1080',
+								width: '1920',
+							},
 							url:
 								'https://cdn.theguardian.tv/webM/2016/04/08/160408CameronExplainer1_synd_768k_vp8.webm',
 							mimeType: 'video/webm',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '79',
+								caption:
+									'David Cameron Panama Papers explainer image.',
+								width: '140',
+							},
 							url:
 								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/140.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '281',
+								caption:
+									'David Cameron Panama Papers explainer image.',
+								width: '500',
+							},
 							url:
 								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/500.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '975',
+								caption:
+									'David Cameron Panama Papers explainer image.',
+								width: '1734',
+							},
 							url:
 								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1734.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '975',
+								caption:
+									'David Cameron Panama Papers explainer image.',
+								width: '1734',
+							},
 							url:
 								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/master/1734.jpg',
 							mimeType: 'image/jpeg',
 						},
 						{
+							fields: {
+								source: 'Guardian',
+								height: '563',
+								caption:
+									'David Cameron Panama Papers explainer image.',
+								width: '1000',
+							},
 							url:
 								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1000.jpg',
 							mimeType: 'image/jpeg',
 						},
 					],
 					role: 'supporting',
+					imageMedia: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									source: 'Guardian',
+									height: '79',
+									caption:
+										'David Cameron Panama Papers explainer image.',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/140.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									source: 'Guardian',
+									height: '281',
+									caption:
+										'David Cameron Panama Papers explainer image.',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/500.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									source: 'Guardian',
+									height: '975',
+									caption:
+										'David Cameron Panama Papers explainer image.',
+									width: '1734',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1734.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									source: 'Guardian',
+									height: '975',
+									caption:
+										'David Cameron Panama Papers explainer image.',
+									width: '1734',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/master/1734.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									source: 'Guardian',
+									height: '563',
+									caption:
+										'David Cameron Panama Papers explainer image.',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1000.jpg',
+							},
+						],
+					},
 					_type:
 						'model.dotcomrendering.pageElements.GuVideoBlockElement',
 					caption: '',
 					html:
 						'<video data-media-id="gu-video-5707a0f3e4b08e1197c163a1" class="gu-video" controls="controls" poster=""> <source src="https://cdn.theguardian.tv/mainwebsite/2016/04/08/160408CameronExplainer1_desk.mp4"/><source src="https://cdn.theguardian.tv/3gp/small/2016/04/08/160408CameronExplainer1_small.3gp"/><source src="https://cdn.theguardian.tv/3gp/large/2016/04/08/160408CameronExplainer1_large.3gp"/><source src="https://cdn.theguardian.tv/HLS/2016/04/08/160408CameronExplainer1.m3u8"/><source src="https://cdn.theguardian.tv/webM/2016/04/08/160408CameronExplainer1_synd_768k_vp8.webm"/> </video>',
+					originalUrl:
+						'http://www.theguardian.com/news/video/2016/apr/08/how-david-cameron-dodged-the-panama-papers-questions-video-explainer',
 					source: 'Guardian',
+					url:
+						'http://www.theguardian.com/news/video/2016/apr/08/how-david-cameron-dodged-the-panama-papers-questions-video-explainer',
 				},
 				{
 					_type:
