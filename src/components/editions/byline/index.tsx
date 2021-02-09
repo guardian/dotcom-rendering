@@ -17,17 +17,17 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
-import EditionsAvatar from './avatar';
-import { ShareIcon } from './shareIcon';
+import EditionsAvatar from '../avatar';
+import { ShareIcon } from '../shareIcon';
 import {
 	articleWidthStyles,
 	borderWidthStyles,
 	tabletImmersiveWidth,
 	wideArticleMargin,
 	wideImmersiveWidth,
-} from './styles';
+} from '../styles';
 
-// ----- Styles ----- //
+// ----- Template Specific Styles ----- //
 
 const interviewStyles = css`
 	padding-left: ${remSpace[2]};
@@ -52,6 +52,7 @@ const immersiveStyles = css`
 	padding-left: ${remSpace[2]};
 	padding-right: ${remSpace[2]};
 	box-sizing: border-box;
+	background-color: ${neutral[7]};
 
 	${from.tablet} {
 		padding-left: 0;
@@ -83,6 +84,8 @@ const avatarWrapperStyles = css`
 	bottom: 0;
 	right: 0;
 `;
+
+// ----- Byline Component Styles ----- //
 
 const styles = (kickerColor: string): SerializedStyles => {
 	return css`
@@ -136,56 +139,58 @@ const standardTextStyles = (
 	${body.medium({ fontStyle, fontWeight })}
 `;
 
-const bylinePrimaryStyles = (
-	kickerColor: string,
-	large?: boolean,
-): SerializedStyles => {
-	if (large) {
+const bylinePrimaryStyles = (format: Format): SerializedStyles => {
+	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	const color = ignoreKickerColour(format) ? neutral[100] : kickerColor;
+
+	if (format.design === Design.Analysis || format.design === Design.Comment) {
 		return css`
-			color: ${kickerColor};
+			color: ${color};
 			${largeTextStyles('normal', 'bold', 'regular')}
 		`;
 	}
 
 	return css`
-		color: ${kickerColor};
+		color: ${color};
 		${standardTextStyles('normal', 'bold')}
 	`;
 };
 
-const bylineSecondaryStyles = (
+const bylineSecondaryStyles = (format: Format): SerializedStyles => {
+	const color = ignoreKickerColour(format) ? neutral[100] : neutral[7];
+
+	if (format.design === Design.Analysis || format.design === Design.Comment) {
+		return css`
+			${largeTextStyles('italic', 'light')};
+			color: ${color};
+		`;
+	}
+	return css`
+		${standardTextStyles('italic', 'light')};
+		color: ${color};
+	`;
+};
+
+const getBylineStyles = (
+	format: Format,
 	kickerColor: string,
-	large?: boolean,
-): SerializedStyles => css`
-	${large
-		? largeTextStyles('italic', 'light')
-		: standardTextStyles('italic', 'light')}
-
-	color: ${kickerColor === neutral[100] ? neutral[100] : neutral[7]}
-`;
-
-const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
+): SerializedStyles => {
 	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
 		return css(styles(kickerColor), immersiveStyles);
 	}
-
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
-
 	if (format.design === Design.Comment) {
 		return css(styles(kickerColor), commentStyles);
 	}
-
 	if (format.display === Display.Showcase) {
 		return css(styles(kickerColor), showcaseStyles);
 	}
-
 	if (format.design === Design.Media) {
 		return css(styles(kickerColor), galleryStyles);
 	}
-
 	return styles(kickerColor);
 };
 
@@ -193,52 +198,50 @@ const getStyles = (format: Format, kickerColor: string): SerializedStyles => {
 
 interface Props {
 	item: Item;
-	shareIcon?: boolean;
-	large?: boolean;
-	avatar?: boolean;
 }
 
-const renderText = (
-	byline: DocumentFragment,
-	kickerColor: string,
-	large?: boolean,
-): ReactNode =>
+const renderText = (byline: DocumentFragment, format: Format): ReactNode =>
 	Array.from(byline.childNodes).map((node) => {
 		switch (node.nodeName) {
 			case 'A':
 				return (
-					<span css={bylinePrimaryStyles(kickerColor, large)}>
+					<span css={bylinePrimaryStyles(format)}>
 						{node.textContent ?? ''}
 					</span>
 				);
 			case 'SPAN':
 			case '#text':
 				return (
-					<span css={bylineSecondaryStyles(kickerColor, large)}>
+					<span css={bylineSecondaryStyles(format)}>
 						{node.textContent ?? ''}
 					</span>
 				);
 		}
 	});
 
-const Byline: FC<Props> = ({ item, shareIcon, large, avatar }) => {
+const hasShareIcon = (format: Format): boolean =>
+	!(format.design === Design.Analysis || format.design === Design.Comment);
+
+const hasAvatar = (format: Format): boolean => format.design === Design.Comment;
+
+const ignoreKickerColour = (format: Format): boolean =>
+	format.design === Design.Media || format.display === Display.Immersive;
+
+const Byline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
-
-	const ignoreKickerColour = (format: Format): boolean =>
-		format.design === Design.Media || format.display === Display.Immersive;
 
 	const bylineColor = ignoreKickerColour(format) ? neutral[100] : kickerColor;
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getStyles(format, bylineColor)}>
-			<address>{renderText(byline, bylineColor, large)}</address>
-			{shareIcon && (
+		<div css={getBylineStyles(format, bylineColor)}>
+			<address>{renderText(byline, format)}</address>
+			{hasShareIcon(format) && (
 				<span className="js-share-button" role="button">
 					<ShareIcon />
 				</span>
 			)}
-			{avatar && (
+			{hasAvatar(format) && (
 				<div css={avatarWrapperStyles}>
 					<EditionsAvatar item={item} />
 				</div>
