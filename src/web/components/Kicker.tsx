@@ -1,11 +1,16 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
-
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
-import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
-import { pillarPalette } from '@frontend/lib/pillars';
+
+// Defines a prefix to be used with a headline (e.g. 'Live /')
+type Props = {
+	text: string;
+	palette: Palette;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
+};
 
 const kickerStyles = (colour: string) => css`
 	color: ${colour};
@@ -21,32 +26,16 @@ const slashStyles = css`
 	}
 `;
 
-const decideColour = (design: Design, pillar: Theme, inCard?: boolean) => {
-	switch (design) {
-		case Design.Live:
-			// TODO: We need this colour in source foundation
-			return inCard
-				? decidePillarLight(pillar)
-				: pillarPalette[pillar].main;
-		case Design.Media:
-			// On Media cards, when pillar is news we use the bright colour as this looks better on a dark background vs. main
-			return inCard && pillar === Pillar.News
-				? pillarPalette[pillar].bright
-				: pillarPalette[pillar].main;
-		default:
-			return pillarPalette[pillar].main;
-	}
-};
-
 export const Kicker = ({
 	text,
-	design,
-	pillar,
+	palette,
 	showPulsingDot,
 	showSlash = true,
 	inCard,
-}: KickerType) => {
-	const kickerColour = decideColour(design, pillar, inCard);
+}: Props) => {
+	const kickerColour = inCard
+		? palette.text.cardKicker
+		: palette.text.linkKicker;
 	return (
 		<span className={kickerStyles(kickerColour)}>
 			{showPulsingDot && <PulsingDot colour={kickerColour} />}

@@ -2,6 +2,7 @@ import { Display, Pillar } from '@guardian/types';
 
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const CAPITrails: CAPITrailType[] = [
 	{
@@ -136,6 +137,11 @@ const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 			theme,
 			design,
 		},
+		palette: decidePalette({
+			display,
+			theme,
+			design,
+		}),
 	};
 });
 

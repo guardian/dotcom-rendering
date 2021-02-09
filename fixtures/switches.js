@@ -1,4 +1,4 @@
-export const switches = {
+module.exports = { switches: {
 	abCommercialCmpCustomise: true,
 	prebidAppnexusUkRow: true,
 	prebidTrustx: true,
@@ -91,4 +91,4 @@ export const switches = {
 	abCommercialAdVerification: false,
 	inizio: true,
 	acast: true,
-};
+}}

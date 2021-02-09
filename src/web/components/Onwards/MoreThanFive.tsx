@@ -35,6 +35,7 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[0].url}
 						format={content[0].format}
+						palette={content[0].palette}
 						headlineText={content[0].headline}
 						headlineSize="medium"
 						byline={content[0].byline}
@@ -61,6 +62,7 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[1].url}
 						format={content[1].format}
+						palette={content[1].palette}
 						headlineText={content[1].headline}
 						headlineSize="medium"
 						byline={content[1].byline}
@@ -87,6 +89,7 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[2].url}
 						format={content[2].format}
+						palette={content[2].palette}
 						headlineText={content[2].headline}
 						headlineSize="medium"
 						byline={content[2].byline}
@@ -113,6 +116,7 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[3].url}
 						format={content[3].format}
+						palette={content[3].palette}
 						headlineText={content[3].headline}
 						headlineSize="medium"
 						byline={content[3].byline}
@@ -142,6 +146,7 @@ export const MoreThanFive = ({ content }: Props) => {
 						<Card
 							linkTo={trail.url}
 							format={trail.format}
+							palette={trail.palette}
 							headlineText={trail.headline}
 							headlineSize="small"
 							byline={trail.byline}

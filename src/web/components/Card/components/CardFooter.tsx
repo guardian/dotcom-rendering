@@ -5,7 +5,7 @@ import { Design } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
 
 type Props = {
-	design: Design;
+	format: Format;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -39,13 +39,16 @@ const linesWrapperStyles = css`
 `;
 
 export const CardFooter = ({
-	design,
+	format,
 	age,
 	mediaMeta,
 	commentCount,
 	isFullCardImage,
 }: Props) => {
-	if (design === Design.Comment || design === Design.GuardianView) {
+	if (
+		format.design === Design.Comment ||
+		format.design === Design.GuardianView
+	) {
 		return (
 			<footer className={spaceBetween}>
 				{age}
@@ -57,7 +60,7 @@ export const CardFooter = ({
 		);
 	}
 
-	if (design === Design.Media) {
+	if (format.design === Design.Media) {
 		return (
 			<footer className={spaceBetween}>
 				{mediaMeta}
