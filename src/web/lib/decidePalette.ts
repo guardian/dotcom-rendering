@@ -15,9 +15,9 @@ const WHITE = neutral[100];
 const BLACK = text.primary;
 
 const textHeadline = (format: Format): string => {
-	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.display) {
 		case Display.Immersive:
+			if (format.theme === Special.SpecialReport) return WHITE;
 			switch (format.design) {
 				case Design.PrintShop:
 					return BLACK;
@@ -26,6 +26,8 @@ const textHeadline = (format: Format): string => {
 			}
 		case Display.Showcase:
 		case Display.Standard: {
+			if (format.theme === Special.SpecialReport)
+				return specialReport[100];
 			switch (format.design) {
 				case Design.Review:
 				case Design.Recipe:
