@@ -17,20 +17,20 @@ export const abTestTest: ABTest = {
 		{
 			id: 'control',
 			test: (): void => {},
-			impression: (impression) => {
+			impression: (impression: () => void): void => {
 				impression();
 			},
-			success: (success) => {
+			success: (success: () => void): void => {
 				success();
 			},
 		},
 		{
 			id: 'variant',
 			test: (): void => {},
-			impression: (impression) => {
+			impression: (impression: () => void): void => {
 				impression();
 			},
-			success: (success) => {
+			success: (success: () => void): void => {
 				success();
 			},
 		},

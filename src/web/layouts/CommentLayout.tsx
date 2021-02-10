@@ -253,7 +253,12 @@ interface Props {
 	palette: Palette;
 }
 
-export const CommentLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const CommentLayout = ({
+	CAPI,
+	NAV,
+	format,
+	palette,
+}: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;

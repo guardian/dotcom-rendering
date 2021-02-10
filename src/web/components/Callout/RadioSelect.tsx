@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { RadioGroup, Radio } from '@guardian/src-radio';
 import { FieldLabel } from './FieldLabel';
 
-type fieldProp = {
+type FieldProp = {
 	formField: CampaignFieldRadio;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
@@ -14,7 +14,7 @@ export const RadioSelect = ({
 	formField,
 	formData,
 	setFormData,
-}: fieldProp) => (
+}: FieldProp) => (
 	// work around to enforce `display: flex;` to `RadioGroup`'s fieldset tag
 	// https://github.com/guardian/source/issues/580
 	<div

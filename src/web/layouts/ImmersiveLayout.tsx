@@ -193,7 +193,12 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const ImmersiveLayout = ({
+	CAPI,
+	NAV,
+	format,
+	palette,
+}: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;

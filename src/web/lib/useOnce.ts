@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  * @param {Function} task - The task to execute once
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
-export const useOnce = (task: Function, waitFor: unknown[]) => {
+export const useOnce = (task: Function, waitFor: unknown[]): void => {
 	const [alreadyRun, setAlreadyRun] = useState(false);
 	const isReady = waitFor.every((dep) => dep !== undefined);
 	useEffect(() => {

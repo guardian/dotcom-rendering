@@ -53,7 +53,6 @@ module.exports = {
         'react/jsx-boolean-value': [2, 'always'],
         'import/prefer-default-export': 'off',
         // TODO: remove
-        '@typescript-eslint/camelcase': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',

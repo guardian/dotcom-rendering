@@ -58,7 +58,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
 
-export const ArticleStory = () => {
+export const ArticleStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Article);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -78,7 +78,7 @@ ArticleStory.story = {
 	},
 };
 
-export const ReviewStory = () => {
+export const ReviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Review);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -90,13 +90,13 @@ ReviewStory.story = {
 	},
 };
 
-export const CommentStory = () => {
+export const CommentStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Comment);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
 
-export const PhotoEssayStory = () => {
+export const PhotoEssayStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(PhotoEssay);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -104,7 +104,7 @@ PhotoEssayStory.story = {
 	name: 'PhotoEssay',
 };
 
-export const MobilePhotoEssay = () => {
+export const MobilePhotoEssay = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(PhotoEssay);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -116,7 +116,7 @@ MobilePhotoEssay.story = {
 	},
 };
 
-export const AnalysisStory = () => {
+export const AnalysisStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Analysis);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -128,7 +128,7 @@ AnalysisStory.story = {
 	},
 };
 
-export const SpecialReportStory = () => {
+export const SpecialReportStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(SpecialReport);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -136,7 +136,7 @@ SpecialReportStory.story = {
 	name: 'SpecialReport',
 };
 
-export const FeatureStory = () => {
+export const FeatureStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Feature);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -148,7 +148,7 @@ FeatureStory.story = {
 	},
 };
 
-export const GuardianViewStory = () => {
+export const GuardianViewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(GuardianView);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -160,31 +160,31 @@ GuardianViewStory.story = {
 	},
 };
 
-export const InterviewStory = () => {
+export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Interview);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 InterviewStory.story = { name: 'Interview' };
 
-export const QuizStory = () => {
+export const QuizStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Quiz);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 QuizStory.story = { name: 'Quiz' };
 
-export const RecipeStory = () => {
+export const RecipeStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Recipe);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 RecipeStory.story = { name: 'Recipe' };
 
-export const MatchReportStory = () => {
+export const MatchReportStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(MatchReport);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
 
-export const PrintShopStory = () => {
+export const PrintShopStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(PrintShop);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
