@@ -11,8 +11,8 @@ const isDinkus = (element: CAPIElement): boolean => {
 
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstChild) return false;
-	// We allow both spaced and unspaced dinkuses
-	return frag.textContent === '* * *' || frag.textContent === '***';
+	// We only allow spaced dinkuses. The unspaced *** is passed through untouched
+	return frag.textContent === '* * *';
 };
 
 const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
