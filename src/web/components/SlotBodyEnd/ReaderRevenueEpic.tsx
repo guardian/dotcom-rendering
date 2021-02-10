@@ -30,7 +30,10 @@ const { css } = emotion;
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 type EpicConfig = {
 	meta: TestMeta;
-	module: any;
+	module: {
+		url: string;
+		props: {};
+	};
 };
 
 const checkForErrors = (response: any) => {
