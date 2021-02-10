@@ -193,6 +193,43 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
+const Box = ({
+	palette,
+	children,
+}: {
+	palette: Palette;
+	children: React.ReactNode;
+}) => (
+	<div
+		className={css`
+			/*
+									This pseudo css shows a black box to the right of the headline
+									so that the black background of the inverted text stretches
+									all the way right. But only from mobileLandscape because below
+									that we want to show a gap. To work properly it needs to wrap
+									the healine so it inherits the correct height based on the length
+									of the headline text
+							*/
+			${from.mobileLandscape} {
+				position: relative;
+				:after {
+					content: '';
+					display: block;
+					position: absolute;
+					width: 50%;
+					right: 0;
+					background-color: ${palette.background.headline};
+					${getZIndex('immersiveBlackBox')}
+					top: 0;
+					bottom: 0;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
 export const ImmersiveLayout = ({
 	CAPI,
 	NAV,
@@ -240,43 +277,6 @@ export const ImmersiveLayout = ({
 				format={format}
 				shouldLimitWidth={true}
 			/>
-		</div>
-	);
-
-	const Box = ({
-		palette,
-		children,
-	}: {
-		palette: Palette;
-		children: React.ReactNode;
-	}) => (
-		<div
-			className={css`
-				/*
-                    This pseudo css shows a black box to the right of the headline
-                    so that the black background of the inverted text stretches
-                    all the way right. But only from mobileLandscape because below
-                    that we want to show a gap. To work properly it needs to wrap
-                    the healine so it inherits the correct height based on the length
-                    of the headline text
-                */
-				${from.mobileLandscape} {
-					position: relative;
-					:after {
-						content: '';
-						display: block;
-						position: absolute;
-						width: 50%;
-						right: 0;
-						background-color: ${palette.background.headline};
-						${getZIndex('immersiveBlackBox')}
-						top: 0;
-						bottom: 0;
-					}
-				}
-			`}
-		>
-			{children}
 		</div>
 	);
 
