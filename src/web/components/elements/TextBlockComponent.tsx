@@ -58,23 +58,26 @@ const shouldShowDropCap = ({
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 }) => {
-	// Sometimes paragraphs other than the 1st one can have drop caps
-	if (forceDropCap) return true;
-	// Otherwise, we're only interested in marking the first para as a drop cap
-	if (!isFirstParagraph) return false;
-	// If immersive, we show drop caps for the first para
-	if (format.display === Display.Immersive) return true;
-	// The first para has a drop cap for these design types
-	switch (format.design) {
-		case Design.Feature:
-		case Design.Comment:
-		case Design.Review:
-		case Design.Interview:
-		case Design.PhotoEssay:
-		case Design.Recipe:
-			return true;
-		default:
-			return false;
+	function allowsDropCaps(design: Design) {
+		switch (design) {
+			case Design.Feature:
+			case Design.Comment:
+			case Design.Review:
+			case Design.Interview:
+			case Design.PhotoEssay:
+			case Design.Recipe:
+				return true;
+			default:
+				return false;
+		}
+	}
+	if (allowsDropCaps(format.design) || format.display === Display.Immersive) {
+		// When dropcaps are allowed, we always mark the first paragraph as a drop cap
+		if (isFirstParagraph) return true;
+		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
+		// prior to it in the article body (Eg: * * *), causing the forceDropCap flag to
+		// be set
+		if (forceDropCap) return true;
 	}
 };
 
