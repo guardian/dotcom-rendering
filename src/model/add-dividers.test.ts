@@ -111,8 +111,7 @@ describe('Dividers and Drop Caps', () => {
 						},
 						{
 							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
-							html: '<p>***</p>',
+								'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
 							_type:
