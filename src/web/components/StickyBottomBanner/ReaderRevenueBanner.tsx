@@ -238,6 +238,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Banner
 					{...module.props}
+					// @ts-ignore
 					submitComponentEvent={submitComponentEvent}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
