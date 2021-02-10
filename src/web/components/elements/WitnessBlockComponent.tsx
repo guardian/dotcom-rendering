@@ -77,7 +77,7 @@ export const WitnessWrapper = ({
 	dateCreated,
 	pillar,
 	children,
-}: WrapperProps) => {
+}: WrapperProps): JSX.Element => {
 	return (
 		<div className={wrapperStyles}>
 			<div className={mainContentWrapperStyles}>{children}</div>
@@ -145,7 +145,7 @@ export const WitnessImageBlockComponent = ({
 	dateCreated,
 	alt,
 	pillar,
-}: ImageProps) => {
+}: ImageProps): React.ReactNode => {
 	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
 	// asset in the list
 	const bestImgSource =
@@ -201,7 +201,7 @@ export const WitnessTextBlockComponent = ({
 	dateCreated,
 	description,
 	pillar,
-}: TextProps) => (
+}: TextProps): React.ReactNode => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}
@@ -241,7 +241,7 @@ export const WitnessVideoBlockComponent = ({
 	youtubeHtml,
 	dateCreated,
 	pillar,
-}: VideoProps) => (
+}: VideoProps): React.ReactNode => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}

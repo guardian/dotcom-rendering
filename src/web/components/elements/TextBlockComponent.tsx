@@ -23,7 +23,7 @@ const isLetter = (letter: string) => {
 	return letter.toLowerCase() !== letter.toUpperCase();
 };
 
-const isLongEnough = (html: any) => {
+const isLongEnough = (html: any): boolean => {
 	// Only show a dropcap if the block of text is 200 characters or
 	// longer. But we first need to strip any markup from our html string so
 	// that we accurately measure the length that the reader will see. Eg. remove
@@ -35,18 +35,18 @@ const isLongEnough = (html: any) => {
 	return html.replace(/(<([^>]+)>)/gi, '').length > 199;
 };
 
-const decideDropCapLetter = (html: string) => {
+const decideDropCapLetter = (html: string): string => {
 	const first = html.substr(0, 1);
 	if (first === '“') {
 		const second = html.substr(1, 1);
 
 		if (!isLetter(second)) {
-			return false;
+			return '';
 		}
 		return `${first}${second}`;
 	}
 
-	return isLetter(first) && first;
+	return isLetter(first) ? first : '';
 };
 
 const shouldShowDropCap = ({
@@ -57,7 +57,7 @@ const shouldShowDropCap = ({
 	format: Format;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
-}) => {
+}): boolean => {
 	// Sometimes paragraphs other than the 1st one can have drop caps
 	if (forceDropCap) return true;
 	// Otherwise, we're only interested in marking the first para as a drop cap
@@ -95,12 +95,64 @@ const sanitiserOptions = {
 	},
 };
 
-export const TextBlockComponent: React.FC<Props> = ({
+const paraStyles = css`
+	margin-bottom: 16px;
+	${body.medium()};
+
+	ul {
+		margin-bottom: 12px;
+	}
+
+	${from.tablet} {
+		ul {
+			margin-bottom: 16px;
+		}
+	}
+
+	li {
+		margin-bottom: 6px;
+		padding-left: 20px;
+
+		p {
+			display: inline;
+		}
+	}
+
+	li:before {
+		display: inline-block;
+		content: '';
+		border-radius: 6px;
+		height: 12px;
+		width: 12px;
+		margin-right: 8px;
+		background-color: ${neutral[86]};
+		margin-left: -20px;
+	}
+
+	/* Subscript and Superscript styles */
+	sub {
+		bottom: -0.25em;
+	}
+
+	sup {
+		top: -0.5em;
+	}
+
+	sub,
+	sup {
+		font-size: 75%;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+`;
+
+export const TextBlockComponent = ({
 	html,
 	format,
 	forceDropCap,
 	isFirstParagraph,
-}: Props) => {
+}: Props): React.ReactNode | null => {
 	const {
 		willUnwrap: isUnwrapped,
 		unwrappedHtml,
@@ -120,58 +172,6 @@ export const TextBlockComponent: React.FC<Props> = ({
 		],
 		html,
 	});
-
-	const paraStyles = css`
-		margin-bottom: 16px;
-		${body.medium()};
-
-		ul {
-			margin-bottom: 12px;
-		}
-
-		${from.tablet} {
-			ul {
-				margin-bottom: 16px;
-			}
-		}
-
-		li {
-			margin-bottom: 6px;
-			padding-left: 20px;
-
-			p {
-				display: inline;
-			}
-		}
-
-		li:before {
-			display: inline-block;
-			content: '';
-			border-radius: 6px;
-			height: 12px;
-			width: 12px;
-			margin-right: 8px;
-			background-color: ${neutral[86]};
-			margin-left: -20px;
-		}
-
-		/* Subscript and Superscript styles */
-		sub {
-			bottom: -0.25em;
-		}
-
-		sup {
-			top: -0.5em;
-		}
-
-		sub,
-		sup {
-			font-size: 75%;
-			line-height: 0;
-			position: relative;
-			vertical-align: baseline;
-		}
-	`;
 
 	const firstLetter = decideDropCapLetter(unwrappedHtml);
 	const remainingLetters = firstLetter

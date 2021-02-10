@@ -30,7 +30,7 @@ export const Elements = (
 	pillar: Pillar,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
-) => {
+): React.ReactNode => {
 	const cleanedElements = elements.map((element) =>
 		'html' in element ? { ...element, html: clean(element.html) } : element,
 	);

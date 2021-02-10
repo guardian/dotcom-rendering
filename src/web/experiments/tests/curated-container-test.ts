@@ -19,30 +19,30 @@ export const curatedContainerTest2: ABTest = {
 		{
 			id: 'control',
 			test: (): void => {},
-			impression: (impression) => {
+			impression: (impression: () => void): void => {
 				impression();
 			},
-			success: (success) => {
+			success: (success: () => void): void => {
 				success();
 			},
 		},
 		{
 			id: 'fixed',
 			test: (): void => {},
-			impression: (impression) => {
+			impression: (impression: () => void): void => {
 				impression();
 			},
-			success: (success) => {
+			success: (success: () => void): void => {
 				success();
 			},
 		},
 		{
 			id: 'carousel',
 			test: (): void => {},
-			impression: (impression) => {
+			impression: (impression: () => void): void => {
 				impression();
 			},
-			success: (success) => {
+			success: (success: () => void): void => {
 				success();
 			},
 		},

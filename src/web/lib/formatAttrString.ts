@@ -8,7 +8,7 @@ const replaceSpacesWithHyphens: strInOutFunc = (str) =>
 const removeTempChars: strInOutFunc = (str) =>
 	str.replace(new RegExp('[;]', 'g'), ''); // Strip out those semicolons
 
-export const formatAttrString = (input: string) =>
+export const formatAttrString = (input: string): string =>
 	removeTempChars(
 		replaceSpacesWithHyphens(lowercase(removeAlphaNumeric(input))),
 	);

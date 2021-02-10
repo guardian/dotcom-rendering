@@ -43,7 +43,10 @@ class CAPIEnhancer {
 	}
 }
 
-export const render = ({ body }: express.Request, res: express.Response) => {
+export const render = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
 	try {
 		const CAPI = new CAPIEnhancer(body)
 			.validateAsCAPIType()
@@ -68,7 +71,10 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 	}
 };
 
-export const renderPerfTest = (req: express.Request, res: express.Response) => {
+export const renderPerfTest = (
+	req: express.Request,
+	res: express.Response,
+): void => {
 	req.body = JSON.parse(bodyJSON);
 	render(req, res);
 };
