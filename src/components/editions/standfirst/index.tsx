@@ -11,10 +11,35 @@ import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { getThemeStyles } from 'themeStyles';
-import { ShareIcon } from './shareIcon';
-import { articleWidthStyles, sidePadding } from './styles';
+import { ShareIcon } from '../shareIcon';
+import { articleWidthStyles, sidePadding } from '../styles';
 
-// ----- Component ----- //
+// ----- Template Format Specific Styles ----- //
+
+const interviewStyles = css`
+	${sidePadding}
+`;
+const showcaseStyles = css`
+	${headline.xxsmall({ lineHeight: 'tight' })}
+	color: ${neutral[20]}
+`;
+
+const galleryStyles = css`
+	${headline.xxsmall({ lineHeight: 'tight', fontWeight: 'regular' })}
+	color: ${neutral[100]};
+`;
+
+const greyTextStyles = css`
+	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
+	color: ${neutral[46]}
+`;
+
+const immersiveStyles = `
+	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })};
+	color: ${neutral[100]};
+`;
+
+// ----- Headline Component Styles ----- //
 
 const styles = (kickerColor: string): SerializedStyles => css`
 	${body.medium({ lineHeight: 'tight' })}
@@ -51,37 +76,6 @@ const styles = (kickerColor: string): SerializedStyles => css`
 		}
 	}
 `;
-
-const interviewStyles = css`
-	${sidePadding}
-`;
-const showcaseStyles = css`
-	${headline.xxsmall({ lineHeight: 'tight' })}
-	color: ${neutral[20]}
-`;
-
-const galleryStyles = css`
-	${headline.xxsmall({ lineHeight: 'tight', fontWeight: 'regular' })}
-	color: ${neutral[100]};
-`;
-
-const greyTextStyles = css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${neutral[46]}
-`;
-
-const immersiveStyles = `
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })};
-	color: ${neutral[100]};
-`;
-
-interface Props {
-	item: Item;
-	shareIcon?: boolean;
-}
-
-const noLinks = true;
-
 const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
@@ -103,6 +97,14 @@ const getStyles = (format: Format): SerializedStyles => {
 	}
 	return styles(kickerColor);
 };
+
+// ----- Component ----- //
+interface Props {
+	item: Item;
+	shareIcon?: boolean;
+}
+
+const noLinks = true;
 
 const Standfirst: FC<Props> = ({ item, shareIcon }) => {
 	return maybeRender(item.standfirst, (standfirst) => (
