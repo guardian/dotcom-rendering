@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
 
-const isClassicDinkus = (element: CAPIElement): boolean => {
+const isDinkus = (element: CAPIElement): boolean => {
 	// Classic dinkus do not trigger dropcaps
 	if (
 		element._type !==
@@ -12,27 +12,7 @@ const isClassicDinkus = (element: CAPIElement): boolean => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstChild) return false;
 	// A dinkus is can be spaced or unspaced
-	return frag.textContent === '***';
-};
-
-const isModernDinkus = (element: CAPIElement): boolean => {
-	// A modern dinkus renders the same line but will also set the dropCap
-	// flag on the next paragraph
-	if (
-		element._type !==
-			'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
-		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
-	)
-		return false;
-
-	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstChild) return false;
-	// A dinkus is can be spaced or unspaced
-	return frag.textContent === '* * *';
-};
-
-const isDinkus = (element: CAPIElement): boolean => {
-	return isClassicDinkus(element) || isModernDinkus(element);
+	return frag.textContent === '***' || frag.textContent === '* * *';
 };
 
 const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
@@ -51,8 +31,8 @@ const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
 				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 			});
 		} else if (
-			// If the previous element was a modern dinkus and this one is a text block, set it's dropCap flag
-			isModernDinkus(elements[i - 1]) &&
+			// If the previous element was a dinkus and this one is a text block, set it's dropCap flag
+			isDinkus(elements[i - 1]) &&
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement'
 		) {

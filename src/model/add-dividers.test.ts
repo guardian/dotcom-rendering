@@ -92,7 +92,7 @@ describe('Dividers and Drop Caps', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should NOT become a drop cap.</p>',
+							html: '<p>I should become a drop cap.</p>',
 						},
 					],
 				},
@@ -116,7 +116,8 @@ describe('Dividers and Drop Caps', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should NOT become a drop cap.</p>',
+							dropCap: true,
+							html: '<p>I should become a drop cap.</p>',
 						},
 					],
 				},
@@ -214,7 +215,7 @@ describe('Dividers and Drop Caps', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
-							html: '<h2><strong>* * *</strong></h2>',
+							html: '<h2><strong>***</strong></h2>',
 						},
 						{
 							_type:
