@@ -23,7 +23,7 @@ const isLetter = (letter: string) => {
 	return letter.toLowerCase() !== letter.toUpperCase();
 };
 
-const isLongEnough = (html: any): boolean => {
+const isLongEnough = (html: string): boolean => {
 	// Only show a dropcap if the block of text is 200 characters or
 	// longer. But we first need to strip any markup from our html string so
 	// that we accurately measure the length that the reader will see. Eg. remove

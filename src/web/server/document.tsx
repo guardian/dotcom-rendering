@@ -109,25 +109,26 @@ export const document = ({ data }: Props): string => {
 	// Pass the array of extracted (read: built with addChunk) scripts to
 	// generatedScriptTags so that we can build a script tag array of
 	// modern and legacy scripts.
+	const preAssets = loadableExtractor
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		.getPreAssets(); // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
+	// Pre assets returns an array of objects structured as:
+	// {
+	//     filename: 'elements-RichLinkComponent.js',
+	//     scriptType: 'script',
+	//     chunk: 'elements-RichLinkComponent',
+	//     url: '/elements-RichLinkComponent.js',
+	//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
+	//     type: 'mainAsset',
+	//     linkType: 'preload'
+	// }
+
 	const loadableScripts = generateScriptTags(
-		loadableExtractor
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			.getPreAssets() // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
-			// Pre assets returns an array of objects structured as:
-			// {
-			//     filename: 'elements-RichLinkComponent.js',
-			//     scriptType: 'script',
-			//     chunk: 'elements-RichLinkComponent',
-			//     url: '/elements-RichLinkComponent.js',
-			//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
-			//     type: 'mainAsset',
-			//     linkType: 'preload'
-			// }
-			.map((script: { url: string }) => ({
-				src: `${script.url}`,
-				module: true,
-			})),
+		(preAssets || []).map((script: { url: string }) => ({
+			src: `${script.url}`,
+			module: true,
+		})),
 	);
 	// Loadable generates configuration script elements as the first two items
 	// of the script element array. We need to generate the react component version

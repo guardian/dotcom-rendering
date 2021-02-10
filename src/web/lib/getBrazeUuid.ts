@@ -6,7 +6,7 @@ export const getBrazeUuid = async (ajaxUrl: string): Promise<string> => {
 	return callApi(url, {
 		credentials: 'include',
 	})
-		.then((json) => json.user.privateFields.brazeUuid)
+		.then((json) => json?.user?.privateFields?.brazeUuid)
 		.catch((error) => {
 			window.guardian.modules.sentry.reportError(error, 'getBrazeUuid');
 		});

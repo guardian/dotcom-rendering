@@ -13,14 +13,16 @@ import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
-	asyncCountryCode?: Promise<string>;
+	asyncCountryCode?: Promise<string | void>;
 	CAPI: CAPIBrowserType;
 	idApiUrl: string;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
-	const item = localStorage.getItem(`gu.prefs.${key}`);
-	return (item && JSON.parse(item).value) || undefined;
+	const item: { [key: string]: string } = JSON.parse(
+		localStorage.getItem(`gu.prefs.${key}`) || '',
+	);
+	return item.value;
 };
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;

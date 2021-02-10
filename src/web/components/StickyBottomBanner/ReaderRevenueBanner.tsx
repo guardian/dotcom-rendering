@@ -24,7 +24,7 @@ import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-clien
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from './bannerPicker';
 
-const checkForErrors = (response: any) => {
+const checkForErrors = (response: Response) => {
 	if (!response.ok) {
 		throw Error(
 			response.statusText ||
@@ -155,7 +155,7 @@ export const canShow = async ({
 	)
 		.then(checkForErrors)
 		.then((response) => response.json())
-		.then((json) => {
+		.then((json: { data?: any }) => {
 			if (!json.data) {
 				if (
 					engagementBannerLastClosedAt &&
@@ -174,7 +174,7 @@ export const canShow = async ({
 
 type Props = {
 	meta: any;
-	module: any;
+	module: { url: string; name: string; props: any[] };
 };
 
 export const ReaderRevenueBanner = ({ meta, module }: Props) => {
@@ -200,7 +200,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 
 		window
 			.guardianPolyfilledImport(module.url)
-			.then((bannerModule) => {
+			.then((bannerModule: { [key: string]: JSX.Element }) => {
 				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
 				sendOphanComponentEvent('INSERT', meta);
 			})

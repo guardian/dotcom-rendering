@@ -27,7 +27,7 @@ const { css } = emotion;
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
-const checkForErrors = (response: any) => {
+const checkForErrors = (response: Response) => {
 	if (!response.ok) {
 		throw Error(
 			response.statusText ||
@@ -171,32 +171,42 @@ const MemoisedInner = ({
 				return checkForErrors(response);
 			})
 			.then((response) => response.json())
-			.then((json) => {
-				if (!json.data) {
-					return;
-				}
+			.then(
+				(json: {
+					data: { meta: any; module: { url: string; props: any } };
+				}) => {
+					if (!json.data) {
+						return;
+					}
 
-				const { meta, module } = json.data;
+					const { meta, module } = json.data;
 
-				const modulePerf = initPerf('contributions-epic-module');
-				modulePerf.start();
+					const modulePerf = initPerf('contributions-epic-module');
+					modulePerf.start();
 
-				// eslint-disable-next-line no-restricted-globals
-				window
-					.guardianPolyfilledImport(module.url)
-					.then((epicModule) => {
-						modulePerf.end();
-						setEpicMeta(meta);
-						setEpicProps({
-							...module.props,
-							onReminderOpen: sendOphanReminderOpenEvent,
-						});
-						setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-						sendOphanComponentEvent('INSERT', meta);
-					})
-					// eslint-disable-next-line no-console
-					.catch((error) => console.log(`epic - error is: ${error}`));
-			});
+					// eslint-disable-next-line no-restricted-globals
+					window
+						.guardianPolyfilledImport(module.url)
+						.then(
+							(epicModule: {
+								ContributionsEpic: JSX.Element;
+							}) => {
+								modulePerf.end();
+								setEpicMeta(meta);
+								setEpicProps({
+									...module.props,
+									onReminderOpen: sendOphanReminderOpenEvent,
+								});
+								setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
+								sendOphanComponentEvent('INSERT', meta);
+							},
+						)
+						// eslint-disable-next-line no-console
+						.catch((error) =>
+							console.log(`epic - error is: ${error}`),
+						);
+				},
+			);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

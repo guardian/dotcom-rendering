@@ -5,7 +5,7 @@ import { useApi as useApi_ } from '@root/src/web/lib/api';
 import { OnwardsLayout } from './OnwardsLayout';
 
 const response = { data: linkAndDescription };
-const useApi: any = useApi_;
+const useApi: { [key: string]: any } = useApi_;
 
 jest.mock('@root/src/web/lib/api', () => ({
 	useApi: jest.fn(),
