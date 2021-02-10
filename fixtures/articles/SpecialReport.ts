@@ -12,170 +12,180 @@
  */
 
 export const SpecialReport: CAPIType = {
-	shouldHideReaderRevenue: true,
 	slotMachineFlags: '',
-	isAdFreeUser: false,
 	main:
-		'<figure class="element element-image" data-media-id="bc9acaefba82b18506aa4e60801d0a6af7176a44"> <img src="https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/1000.jpg" alt="The offices of Mossack Fonseca in Panama City." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">The offices of Mossack Fonseca in Panama City.</span> <span class="element-image__credit">Photograph: Joe Raedle/Getty Images</span> </figcaption> </figure>',
+		'<figure class="element element-image" data-media-id="d8da03945736194ce74fe635c925b11e1aaa2625"> \n <img src="https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/1000.jpg" alt="The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.</span> \n  <span class="element-image__credit">Illustration: Guardian Design</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/news/series/panama-papers',
-			title: 'Panama Papers: a special investigation',
+			url: '/environment/series/the-polluters',
+			title: 'The polluters',
 		},
 	],
 	commercialProperties: {
 		UK: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['lukeharding'],
-				},
-				{
 					name: 'edition',
 					value: 'uk',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/4t3m4',
+					name: 'url',
+					value:
+						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'corporate-governance',
+						'environment',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
+					name: 'sh',
+					value: 'https://gu.com/p/ccmyh',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
-					name: 'url',
-					value:
-						'/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+					name: 'co',
+					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
-					name: 'se',
-					value: ['panama-papers'],
-				},
-				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'k',
-					value: [
-						'business',
-						'uk/uk',
-						'world',
-						'panama-papers',
-						'tax-havens',
-						'the-super-rich',
-						'taxavoidance',
-					],
+					name: 'ob',
+					value: 't',
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['lukeharding'],
+					name: 'url',
+					value:
+						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/4t3m4',
+					name: 'k',
+					value: [
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'corporate-governance',
+						'environment',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
+					name: 'sh',
+					value: 'https://gu.com/p/ccmyh',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
-					name: 'url',
-					value:
-						'/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+					name: 'co',
+					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
-					name: 'se',
-					value: ['panama-papers'],
-				},
-				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'k',
-					value: [
-						'business',
-						'uk/uk',
-						'world',
-						'panama-papers',
-						'tax-havens',
-						'the-super-rich',
-						'taxavoidance',
-					],
-				},
-				{
 					name: 'edition',
 					value: 'us',
+				},
+				{
+					name: 'ob',
+					value: 't',
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['lukeharding'],
+					name: 'url',
+					value:
+						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/4t3m4',
+					name: 'k',
+					value: [
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'corporate-governance',
+						'environment',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
+					name: 'sh',
+					value: 'https://gu.com/p/ccmyh',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
-					name: 'url',
-					value:
-						'/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+					name: 'co',
+					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
-					name: 'se',
-					value: ['panama-papers'],
-				},
-				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'k',
-					value: [
-						'business',
-						'uk/uk',
-						'world',
-						'panama-papers',
-						'tax-havens',
-						'the-super-rich',
-						'taxavoidance',
-					],
+					name: 'ob',
+					value: 't',
 				},
 				{
 					name: 'edition',
@@ -186,12 +196,25 @@ export const SpecialReport: CAPIType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['lukeharding'],
+					name: 'url',
+					value:
+						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/4t3m4',
+					name: 'k',
+					value: [
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'corporate-governance',
+						'environment',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
 				},
 				{
 					name: 'tn',
@@ -202,245 +225,54 @@ export const SpecialReport: CAPIType = {
 					value: 'int',
 				},
 				{
+					name: 'sh',
+					value: 'https://gu.com/p/ccmyh',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
-					name: 'url',
-					value:
-						'/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+					name: 'co',
+					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
-					name: 'se',
-					value: ['panama-papers'],
-				},
-				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'k',
-					value: [
-						'business',
-						'uk/uk',
-						'world',
-						'panama-papers',
-						'tax-havens',
-						'the-super-rich',
-						'taxavoidance',
-					],
+					name: 'ob',
+					value: 't',
 				},
 			],
 		},
-	},
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
-		],
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTYucG5n&s=76ebcbbbe5aafde1539aa27accfd4d2e',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers?contenttype=Article&source=twitter',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
-		'twitter:app:url:iphone':
-			'gnmguardian://news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers?contenttype=Article&source=twitter',
 	},
 	beaconURL: '//phar.gu-web.net',
-	sectionName: 'news',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
-	pageType: {
-		hasShowcaseMainElement: false,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: true,
-	},
-	hasStoryPackage: true,
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	publication: 'The Guardian',
+	publication: 'The Observer',
 	trailText:
-		'As Panama Papers shine light on offshore world, Luke Harding takes a closer look at company exploiting tropical tax havens',
+		'Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis',
 	subMetaKeywordLinks: [
 		{
-			url: '/business/taxavoidance',
-			title: 'Tax avoidance',
+			url: '/business/oilandgascompanies',
+			title: 'Oil and gas companies',
 		},
 		{
-			url: '/world/tax-havens',
-			title: 'Tax havens',
+			url: '/environment/energy',
+			title: 'Energy',
 		},
 		{
-			url: '/world/panama-papers',
-			title: 'Panama Papers',
+			url: '/business/energy-industry',
+			title: 'Energy industry',
 		},
 		{
-			url: '/news/the-super-rich',
-			title: 'The super-rich',
+			url: '/business/corporate-governance',
+			title: 'Corporate governance',
 		},
 		{
 			url: '/tone/news',
@@ -448,10 +280,8 @@ export const SpecialReport: CAPIType = {
 		},
 	],
 	contentType: 'Article',
-	headline:
-		'Mossack Fonseca: inside the firm that helps the super-rich hide their money',
 	nav: {
-		currentUrl: '/news',
+		currentUrl: '/environment/energy',
 		pillars: [
 			{
 				title: 'News',
@@ -1716,6 +1546,630 @@ export const SpecialReport: CAPIType = {
 				classList: [],
 			},
 		],
+		currentNavLink: {
+			title: 'Energy',
+			url: '/environment/energy',
+			longTitle: '',
+			iconName: '',
+			children: [],
+			classList: [],
+		},
+		currentParent: {
+			title: 'Environment',
+			url: '/environment',
+			longTitle: '',
+			iconName: '',
+			children: [
+				{
+					title: 'Climate change',
+					url: '/environment/climate-change',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Wildlife',
+					url: '/environment/wildlife',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Energy',
+					url: '/environment/energy',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Pollution',
+					url: '/environment/pollution',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+			],
+			classList: [],
+		},
+		currentPillar: {
+			title: 'News',
+			url: '/',
+			longTitle: 'Headlines',
+			iconName: 'home',
+			children: [
+				{
+					title: 'UK',
+					url: '/uk-news',
+					longTitle: 'UK news',
+					iconName: '',
+					children: [
+						{
+							title: 'UK politics',
+							url: '/politics',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							longTitle: '',
+							iconName: '',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+							],
+							classList: [],
+						},
+						{
+							title: 'Media',
+							url: '/media',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Law',
+							url: '/law',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Scotland',
+							url: '/uk/scotland',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Wales',
+							url: '/uk/wales',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Northern Ireland',
+							url: '/uk/northernireland',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+					],
+					classList: [],
+				},
+				{
+					title: 'World',
+					url: '/world',
+					longTitle: 'World news',
+					iconName: '',
+					children: [
+						{
+							title: 'Europe',
+							url: '/world/europe-news',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'US',
+							url: '/us-news',
+							longTitle: 'US news',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Americas',
+							url: '/world/americas',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Asia',
+							url: '/world/asia',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Australia',
+							url: '/australia-news',
+							longTitle: 'Australia news',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Middle East',
+							url: '/world/middleeast',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Africa',
+							url: '/world/africa',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Inequality',
+							url: '/inequality',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+					],
+					classList: [],
+				},
+				{
+					title: 'Business',
+					url: '/business',
+					longTitle: '',
+					iconName: '',
+					children: [
+						{
+							title: 'Economics',
+							url: '/business/economics',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Banking',
+							url: '/business/banking',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							longTitle: '',
+							iconName: '',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+									longTitle: '',
+									iconName: '',
+									children: [],
+									classList: [],
+								},
+							],
+							classList: [],
+						},
+						{
+							title: 'Markets',
+							url: '/business/stock-markets',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Project Syndicate',
+							url:
+								'/business/series/project-syndicate-economists',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'B2B',
+							url: '/business-to-business',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Retail',
+							url: '/business/retail',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+					],
+					classList: [],
+				},
+				{
+					title: 'Coronavirus',
+					url: '/world/coronavirus-outbreak',
+					longTitle: 'Coronavirus',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Football',
+					url: '/football',
+					longTitle: '',
+					iconName: '',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+					],
+					classList: [],
+				},
+				{
+					title: 'Environment',
+					url: '/environment',
+					longTitle: '',
+					iconName: '',
+					children: [
+						{
+							title: 'Climate change',
+							url: '/environment/climate-change',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Wildlife',
+							url: '/environment/wildlife',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Energy',
+							url: '/environment/energy',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Pollution',
+							url: '/environment/pollution',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+					],
+					classList: [],
+				},
+				{
+					title: 'UK politics',
+					url: '/politics',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Education',
+					url: '/education',
+					longTitle: '',
+					iconName: '',
+					children: [
+						{
+							title: 'Schools',
+							url: '/education/schools',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Teachers',
+							url: '/teacher-network',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Universities',
+							url: '/education/universities',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+						{
+							title: 'Students',
+							url: '/education/students',
+							longTitle: '',
+							iconName: '',
+							children: [],
+							classList: [],
+						},
+					],
+					classList: [],
+				},
+				{
+					title: 'Society',
+					url: '/society',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Science',
+					url: '/science',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Tech',
+					url: '/technology',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Global development',
+					url: '/global-development',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Obituaries',
+					url: '/tone/obituaries',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+			],
+			classList: [],
+		},
+		subNavSections: {
+			parent: {
+				title: 'Environment',
+				url: '/environment',
+				longTitle: '',
+				iconName: '',
+				children: [
+					{
+						title: 'Climate change',
+						url: '/environment/climate-change',
+						longTitle: '',
+						iconName: '',
+						children: [],
+						classList: [],
+					},
+					{
+						title: 'Wildlife',
+						url: '/environment/wildlife',
+						longTitle: '',
+						iconName: '',
+						children: [],
+						classList: [],
+					},
+					{
+						title: 'Energy',
+						url: '/environment/energy',
+						longTitle: '',
+						iconName: '',
+						children: [],
+						classList: [],
+					},
+					{
+						title: 'Pollution',
+						url: '/environment/pollution',
+						longTitle: '',
+						iconName: '',
+						children: [],
+						classList: [],
+					},
+				],
+				classList: [],
+			},
+			links: [
+				{
+					title: 'Climate change',
+					url: '/environment/climate-change',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Wildlife',
+					url: '/environment/wildlife',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Energy',
+					url: '/environment/energy',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+				{
+					title: 'Pollution',
+					url: '/environment/pollution',
+					longTitle: '',
+					iconName: '',
+					children: [],
+					classList: [],
+				},
+			],
+		},
 		readerRevenueLinks: {
 			header: {
 				contribute:
@@ -1769,15 +2223,331 @@ export const SpecialReport: CAPIType = {
 			},
 		},
 	},
+	author: {
+		byline: 'Patrick Greenfield',
+		twitterHandle: 'pgreenfielduk',
+	},
+	designType: 'Immersive',
+	editionId: 'UK',
+	standfirst:
+		'<p>Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis</p>',
+	openGraphData: {
+		'og:url':
+			'http://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+		'article:author':
+			'https://www.theguardian.com/profile/patrick-greenfield',
+		'og:image:height': '720',
+		'og:description':
+			'Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis',
+		'og:image:width': '1200',
+		'og:image':
+			'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tYWdlLTIwMTkucG5n&enable=upscale&s=679ee83cd2271fb0b26b2cd135be6411',
+		'al:ios:url':
+			'gnmguardian://environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments?contenttype=Article&source=applinks',
+		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:type': 'article',
+		'al:ios:app_store_id': '409128287',
+		'article:section': 'Environment',
+		'article:published_time': '2019-10-12T11:00:19.000Z',
+		'og:title':
+			"World's top three asset managers oversee $300bn fossil fuel investments",
+		'fb:app_id': '180444840287',
+		'article:tag':
+			'Fossil fuels,Oil and gas companies,Business,Energy,Energy industry,Environment,Corporate governance',
+		'al:ios:app_name': 'The Guardian',
+		'og:site_name': 'the Guardian',
+		'article:modified_time': '2019-10-12T18:40:38.000Z',
+	},
+	sectionUrl: 'environment/fossil-fuels',
+	pageId:
+		'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+	version: 3,
+	tags: [
+		{
+			id: 'environment/series/the-polluters',
+			type: 'Series',
+			title: 'The polluters',
+		},
+		{
+			id: 'environment/fossil-fuels',
+			type: 'Keyword',
+			title: 'Fossil fuels',
+		},
+		{
+			id: 'business/oilandgascompanies',
+			type: 'Keyword',
+			title: 'Oil and gas companies',
+		},
+		{
+			id: 'business/business',
+			type: 'Keyword',
+			title: 'Business',
+		},
+		{
+			id: 'environment/energy',
+			type: 'Keyword',
+			title: 'Energy',
+		},
+		{
+			id: 'business/energy-industry',
+			type: 'Keyword',
+			title: 'Energy industry',
+		},
+		{
+			id: 'environment/environment',
+			type: 'Keyword',
+			title: 'Environment',
+		},
+		{
+			id: 'business/corporate-governance',
+			type: 'Keyword',
+			title: 'Corporate governance',
+		},
+		{
+			id: 'type/article',
+			type: 'Type',
+			title: 'Article',
+		},
+		{
+			id: 'tone/news',
+			type: 'Tone',
+			title: 'News',
+		},
+		{
+			id: 'profile/patrick-greenfield',
+			type: 'Contributor',
+			title: 'Patrick Greenfield',
+			twitterHandle: 'pgreenfielduk',
+		},
+		{
+			id: 'publication/theobserver',
+			type: 'Publication',
+			title: 'The Observer',
+		},
+		{
+			id: 'theobserver/news',
+			type: 'NewspaperBook',
+			title: 'Main section',
+		},
+		{
+			id: 'theobserver/news/uknews',
+			type: 'NewspaperBookSection',
+			title: 'News',
+		},
+		{
+			id: 'tracking/commissioningdesk/uk-investigations',
+			type: 'Tracking',
+			title: 'UK Investigations ',
+		},
+	],
+	badge: {
+		seriesTag: 'environment/series/the-polluters',
+		imageUrl:
+			'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
+	},
+	pillar: 'news',
+	webURL:
+		'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+	showBottomSocialButtons: true,
+	isImmersive: true,
+	sectionLabel: 'Fossil fuels',
+	shouldHideReaderRevenue: false,
+	isAdFreeUser: false,
+	pageFooter: {
+		footerLinks: [
+			[
+				{
+					text: 'About us',
+					url: '/about',
+					dataLinkName: 'uk : footer : about us',
+					extraClasses: '',
+				},
+				{
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
+				},
+				{
+					text: 'Complaints & corrections',
+					url: '/info/complaints-and-corrections',
+					dataLinkName: 'complaints',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
+					extraClasses: '',
+				},
+				{
+					text: 'Work for us',
+					url: 'https://workforus.theguardian.com',
+					dataLinkName: 'uk : footer : work for us',
+					extraClasses: '',
+				},
+				{
+					text: 'Privacy policy',
+					url: '/info/privacy',
+					dataLinkName: 'privacy',
+					extraClasses: '',
+				},
+				{
+					text: 'Cookie policy',
+					url: '/info/cookies',
+					dataLinkName: 'cookie',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
+					extraClasses: '',
+				},
+				{
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
+				},
+			],
+			[
+				{
+					text: 'All topics',
+					url: '/index/subjects/a',
+					dataLinkName: 'uk : footer : all topics',
+					extraClasses: '',
+				},
+				{
+					text: 'All writers',
+					url: '/index/contributors',
+					dataLinkName: 'uk : footer : all contributors',
+					extraClasses: '',
+				},
+				{
+					text: 'Modern Slavery Act',
+					url:
+						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Digital newspaper archive',
+					url: 'https://theguardian.newspapers.com',
+					dataLinkName: 'digital newspaper archive',
+					extraClasses: '',
+				},
+				{
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : facebook',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : youtube',
+					extraClasses: '',
+				},
+				{
+					text: 'Instagram',
+					url: 'https://www.instagram.com/guardian',
+					dataLinkName: 'uk : footer : instagram',
+					extraClasses: '',
+				},
+				{
+					text: 'LinkedIn',
+					url: 'https://www.linkedin.com/company/theguardian',
+					dataLinkName: 'uk : footer : linkedin',
+					extraClasses: '',
+				},
+				{
+					text: 'Twitter',
+					url: 'https://twitter.com/guardian',
+					dataLinkName: 'uk: footer : twitter',
+					extraClasses: '',
+				},
+				{
+					text: 'Newsletters',
+					url:
+						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
+					extraClasses: '',
+				},
+			],
+			[
+				{
+					text: 'Advertise with us',
+					url: 'https://advertising.theguardian.com',
+					dataLinkName: 'uk : footer : advertise with us',
+					extraClasses: '',
+				},
+				{
+					text: 'Guardian Labs',
+					url: '/guardian-labs',
+					dataLinkName: 'uk : footer : guardian labs',
+					extraClasses: '',
+				},
+				{
+					text: 'Search jobs',
+					url:
+						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					dataLinkName: 'uk : footer : jobs',
+					extraClasses: '',
+				},
+				{
+					text: 'Patrons',
+					url:
+						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+			],
+		],
+	},
+	twitterData: {
+		'twitter:app:id:iphone': '409128287',
+		'twitter:app:name:googleplay': 'The Guardian',
+		'twitter:app:name:ipad': 'The Guardian',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tYWdlLTIwMTkucG5n&s=6878a1ac84f1229012571b662f77e65b',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
+			'gnmguardian://environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments?contenttype=Article&source=twitter',
+		'twitter:card': 'summary_large_image',
+		'twitter:app:name:iphone': 'The Guardian',
+		'twitter:creator': '@pgreenfielduk',
+		'twitter:app:id:ipad': '409128287',
+		'twitter:app:id:googleplay': 'com.guardian',
+		'twitter:app:url:googleplay':
+			'guardian://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+		'twitter:app:url:iphone':
+			'gnmguardian://environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments?contenttype=Article&source=twitter',
+	},
+	sectionName: 'environment',
+	pageType: {
+		hasShowcaseMainElement: false,
+		isFront: false,
+		isLiveblog: false,
+		isMinuteArticle: false,
+		isPaidContent: false,
+		isPreview: false,
+		isSensitive: false,
+	},
+	hasStoryPackage: false,
+	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	headline:
+		"World's top three asset managers oversee $300bn fossil fuel investments",
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
 			role: 'immersive',
 			data: {
-				copyright: '2016 Getty Images',
-				alt: 'The offices of Mossack Fonseca in Panama City.',
-				caption: 'The offices of Mossack Fonseca in Panama City.',
-				credit: 'Photograph: Joe Raedle/Getty Images',
+				alt:
+					'The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.',
+				caption:
+					'The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.',
+				credit: 'Illustration: Guardian Design',
 			},
 			imageSources: [
 				{
@@ -1785,32 +2555,32 @@ export const SpecialReport: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=c4a7f40a6d7b6b3675949054696c72a9',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=85&auto=format&fit=max&s=539379ffe774750050bc08b8529a78a5',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3dd17057db0cecf165318cee6e9c1e67',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3af65f26cb8d39edf9819eaf6b299d3b',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=1034c232ade8a2636d0eb4b6bf3668bd',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=85&auto=format&fit=max&s=978256ab83845be3b66eef5d93ef9aa7',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=df4eaefe659ccaaeaa1ba12fd6a8b4e3',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=807b33c44ed85ec151f4b28c0bf28c4b',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=f08f94b6adb5f3840bfa1618a123dcee',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=85&auto=format&fit=max&s=bca6039053ac235a51c3e236de208d07',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c4b92c08097aac22bc6d00682fe3379b',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=d22fa73c1857c58451b1f57450db2e42',
 							width: 890,
 						},
 					],
@@ -1820,22 +2590,22 @@ export const SpecialReport: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=140&quality=85&auto=format&fit=max&s=cbd6f804628f791c0adc9839b84ac3ef',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=140&quality=85&auto=format&fit=max&s=c5c13cf293e82bb1518bc39e9dbc0685',
 							width: 140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=032208f0856b4c0908f5b1deadb7e8a9',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=3155dc7521cda659dedc8307a918a898',
 							width: 280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=120&quality=85&auto=format&fit=max&s=7c18ba909d1f1f9450c38fe9ff2c8553',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=120&quality=85&auto=format&fit=max&s=0e7831ef862663d5361bb58a00dfcf2a',
 							width: 120,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7b641ec2bbf4d437ad262d132b4b497e',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7c1f26635ac3fb0d139456e21a5f7401',
 							width: 240,
 						},
 					],
@@ -1845,52 +2615,52 @@ export const SpecialReport: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=380&quality=85&auto=format&fit=max&s=bcc7d73b5f66949c19dd572d44242468',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=380&quality=85&auto=format&fit=max&s=c98dc7a78646f25bc46cd43d0002f989',
 							width: 380,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=5389e9e9d43b1e2b1ff3994a1e6f2675',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=88f5924e96baca96b4c486b90e40fef2',
 							width: 760,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=d6f0eabc2b3a2dc023d5431bb4354b87',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=300&quality=85&auto=format&fit=max&s=fe30519165df165b58d79942b3ba4914',
 							width: 300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=2609b22087acb48f48cfd94dcfee2c71',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8e0bb76c4eb79d5a46091807e15d8d9d',
 							width: 600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=c4a7f40a6d7b6b3675949054696c72a9',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=85&auto=format&fit=max&s=539379ffe774750050bc08b8529a78a5',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3dd17057db0cecf165318cee6e9c1e67',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3af65f26cb8d39edf9819eaf6b299d3b',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=1034c232ade8a2636d0eb4b6bf3668bd',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=85&auto=format&fit=max&s=978256ab83845be3b66eef5d93ef9aa7',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=df4eaefe659ccaaeaa1ba12fd6a8b4e3',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=807b33c44ed85ec151f4b28c0bf28c4b',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=f08f94b6adb5f3840bfa1618a123dcee',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=85&auto=format&fit=max&s=bca6039053ac235a51c3e236de208d07',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c4b92c08097aac22bc6d00682fe3379b',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=d22fa73c1857c58451b1f57450db2e42',
 							width: 890,
 						},
 					],
@@ -1900,72 +2670,72 @@ export const SpecialReport: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1020&quality=85&auto=format&fit=max&s=0145eb9573fb671f7fcd8ae9beefac3f',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1020&quality=85&auto=format&fit=max&s=2fa4f2a29f1c6897ec41c3ecd91ccfa8',
 							width: 1020,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a4f0fe2bffef622420ffdca43b0e632e',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b536244811017897ed50a11566d30a26',
 							width: 2040,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=940&quality=85&auto=format&fit=max&s=83604eacb51ab2cf91d4368d2bf1ef66',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=940&quality=85&auto=format&fit=max&s=3fa3f795a94f8513bf5258cb6b8edbd2',
 							width: 940,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=0e1d10653c974c9cfb5fc206a75fef6a',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d473dd4763268cebdbd1fd61b0685c3e',
 							width: 1880,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=96da14278247f2a339757f43b26fcb61',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=85&auto=format&fit=max&s=2271f9bc101d521731c8576abcd25071',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=466082b68792019a149b16d4a2abe492',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=61222a2385b6948f8ede60707de969cf',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=96da14278247f2a339757f43b26fcb61',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=85&auto=format&fit=max&s=2271f9bc101d521731c8576abcd25071',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=466082b68792019a149b16d4a2abe492',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=61222a2385b6948f8ede60707de969cf',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=9642bedbdd5e1aab7203739864d96a29',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=660&quality=85&auto=format&fit=max&s=2b456ed69359199a1874428117c3d8f6',
 							width: 660,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=34ef08f6c5a329352c854350fc61dcb8',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=20e88af6045563546227b785a35e78ee',
 							width: 1320,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=263217b2835c2e3cce261064228335eb',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=85&auto=format&fit=max&s=b2e1f22986fd04d12de11d3b8d7819dc',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=badb6de7e7849b45824c4a257f91c62b',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=8510b1acce1680cfedade6710df80be5',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=41d981a733dc1e9d6c2bc2f931fe0a32',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=85&auto=format&fit=max&s=153fa0a2e6746719754b8fcd13f4e48d',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0de546a3a2f5715d2e944860d2b35e92',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=c8ae3698f8dc74a9ac8d6b83e7f166f0',
 							width: 930,
 						},
 					],
@@ -1975,32 +2745,32 @@ export const SpecialReport: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=c4a7f40a6d7b6b3675949054696c72a9',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=85&auto=format&fit=max&s=539379ffe774750050bc08b8529a78a5',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3dd17057db0cecf165318cee6e9c1e67',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3af65f26cb8d39edf9819eaf6b299d3b',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=1034c232ade8a2636d0eb4b6bf3668bd',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=85&auto=format&fit=max&s=978256ab83845be3b66eef5d93ef9aa7',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=df4eaefe659ccaaeaa1ba12fd6a8b4e3',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=807b33c44ed85ec151f4b28c0bf28c4b',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=f08f94b6adb5f3840bfa1618a123dcee',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=85&auto=format&fit=max&s=bca6039053ac235a51c3e236de208d07',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c4b92c08097aac22bc6d00682fe3379b',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=d22fa73c1857c58451b1f57450db2e42',
 							width: 890,
 						},
 					],
@@ -2010,72 +2780,72 @@ export const SpecialReport: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1300&quality=85&auto=format&fit=max&s=e0a93a59ac047447dafcc5fd2b57d44d',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1300&quality=85&auto=format&fit=max&s=99e5eee1aa72493f0a45b38fdea3a7b7',
 							width: 1300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0cb61b8429ac8581b60c24fc95a19087',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=5b7119d2931acb6342a89ea0a968732b',
 							width: 2600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1140&quality=85&auto=format&fit=max&s=f5091b268d753eba97ea3628fb1f9ef1',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1140&quality=85&auto=format&fit=max&s=858dc52fed3b9b4ff420795345c7b6a7',
 							width: 1140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=6b9879f0aec919828ee39bf51bf3bd67',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=85f10bad48e065766790ddd8c27a3f61',
 							width: 2280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1125&quality=85&auto=format&fit=max&s=2cd64e0f1dff2d7e458935e97aa733a0',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1125&quality=85&auto=format&fit=max&s=c6fd2064654315719333843c588640e9',
 							width: 1125,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=3aa139aa2f4720a1f09c3057832bf03b',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=c6cba2820e922c1562d52646ec55aea3',
 							width: 2250,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=965&quality=85&auto=format&fit=max&s=6d3102d0a07aaa9228b4417a1bf423c3',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=965&quality=85&auto=format&fit=max&s=3c220076ab9721f8350b3466b8beed61',
 							width: 965,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=f534d395971e21fbe5ceca7a410fffc4',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=8213fad02e7f29c529852541c42e1d43',
 							width: 1930,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=725&quality=85&auto=format&fit=max&s=991f8ce584f8aecb0bcc1989d303619e',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=725&quality=85&auto=format&fit=max&s=0472dc64e585660aa70dc877443011df',
 							width: 725,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=b989cb967370110470a97d7e73bcf7d3',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=304d245ad06736f6ffb06ecf7e897961',
 							width: 1450,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=263217b2835c2e3cce261064228335eb',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=85&auto=format&fit=max&s=b2e1f22986fd04d12de11d3b8d7819dc',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=badb6de7e7849b45824c4a257f91c62b',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=8510b1acce1680cfedade6710df80be5',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=41d981a733dc1e9d6c2bc2f931fe0a32',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=85&auto=format&fit=max&s=153fa0a2e6746719754b8fcd13f4e48d',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0de546a3a2f5715d2e944860d2b35e92',
+								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=c8ae3698f8dc74a9ac8d6b83e7f166f0',
 							width: 930,
 						},
 					],
@@ -2087,27 +2857,16 @@ export const SpecialReport: CAPIType = {
 					{
 						index: 0,
 						fields: {
-							height: '84',
-							width: '140',
+							height: '1200',
+							width: '2000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/140.jpg',
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/2000.jpg',
 					},
 					{
 						index: 1,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/500.jpg',
-					},
-					{
-						index: 2,
 						fields: {
 							height: '600',
 							width: '1000',
@@ -2115,1251 +2874,86 @@ export const SpecialReport: CAPIType = {
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/1000.jpg',
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/500.jpg',
 					},
 					{
 						index: 3,
 						fields: {
-							height: '1200',
-							width: '2000',
+							height: '84',
+							width: '140',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/2000.jpg',
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/140.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							height: '1800',
-							width: '3000',
+							height: '5792',
+							width: '9653',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg',
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/9653.jpg',
 					},
 					{
 						index: 5,
 						fields: {
 							isMaster: 'true',
-							height: '1800',
-							width: '3000',
+							height: '5792',
+							width: '9653',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'http://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/master/3000.jpg',
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg',
 					},
 				],
 			},
 			displayCredit: true,
 		},
 	],
-	webPublicationDate: '2016-04-08T12:15:09.000Z',
-	author: {
-		byline: 'Luke Harding',
-	},
-	designType: 'Immersive',
+	webPublicationDate: '2019-10-12T11:00:19.000Z',
 	blocks: [
 		{
-			id: '57012959e4b0f2216ccb274f',
+			id: '5d887cc78f0834740f3c0692',
 			elements: [
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>In June 2013, two Swiss lawyers held a private telephone chat. They were annoyed. In London, David Cameron had just given a speech. The <a href="https://www.theguardian.com/politics/2013/jun/14/tax-secrecy-central-register-cameron">prime minister had promised to sweep away decades of offshore “tax secrecy”</a> by introducing a central register. Anybody who owned an offshore company would have to declare it to the authorities.</p>',
+						'<p>The world’s three largest money managers have built a combined $300bn fossil fuel investment portfolio using money from people’s private savings and pension contributions, the Guardian can reveal.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>The G8 summit, to be hosted by Cameron on the shores of Lough Erne, in Northern Ireland, was looming. Top of the agenda: how to stop aggressive tax avoidance.</p>',
-				},
-				{
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						'A world of hidden wealth: why we are shining a light offshore',
-					url:
-						'http://www.theguardian.com/news/2016/apr/03/a-world-of-hidden-wealth-why-we-are-shining-a-light-offshore',
+						'<p>BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP, have continued to grow billion-dollar stakes in some of the most carbon-intensive companies since the Paris agreement, financial data shows.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>For much of the 20th century hiding your money was simple. You got a lawyer, filled in a form and set up a Swiss bank account or offshore “shell company”.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Nobody asked questions. For a couple of thousand dollars a year, it was possible to hide away profits where governments could never find them.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>But in the UK crown dependencies and overseas territories where financial services were the main source of jobs and income times were changing. In tropical tax havens such as the British Virgin Islands a chill wind – or at least the threat of one – was blowing.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>One of the Swiss lawyers was Sandro Hangartner, the Zurich boss of the Panamanian law firm Mossack Fonseca.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The other man, his disgruntled caller, was Sascha Züger. Züger’s company looked after the assets of some very wealthy South Americans.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In an email to his head office in Panama, Hangartner wrote: “Sascha is not very pleased about the development in BVI [British Virgin Islands].”</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>He was now looking for “alternatives”, Hangartner added – in other words other secret jurisdictions where a client might park their money.</p>',
-				},
-				{
-					role: 'showcase',
-					data: {
-						copyright: '© Corbis.  All Rights Reserved.',
-						alt:
-							'David Cameron and fellow leaders including Angela Merkel and Vladimir Putin at the G8 in 2013.',
-						caption:
-							'David Cameron and fellow leaders including Angela Merkel and Vladimir Putin at the G8 in 2013.',
-						credit: 'Photograph: Yin Gang/Xinhua Press/Corbis',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=620&quality=85&auto=format&fit=max&s=19eaada5eaade8c2098df9868c7bb719',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=04396769b6c053da2f265f9bc14b5fe9',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=605&quality=85&auto=format&fit=max&s=5e906293c66f9188b32f534e9a2384d8',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e19ef4a0ae13b3db41ac069cd66a37b',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=445&quality=85&auto=format&fit=max&s=17f7b5cfb1c42e3fcbd12ad164b36530',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=885f8a3333b8ca9cdca4cc9b2b844ac9',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=140&quality=85&auto=format&fit=max&s=dd8231a1a8dd053578bec81e493e686d',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=6e172f965baf583c1a9dfe6846de0d7e',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=120&quality=85&auto=format&fit=max&s=1b4431564f68d21ac0a7c0cbbbb14f31',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=bc43e1374d09e2bf63f3ed26be3c0356',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=380&quality=85&auto=format&fit=max&s=1c7d2f7545f72db71c9bb62fc90f06db',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=ad24168fb3652e21f34f3a0cc444a8e9',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=300&quality=85&auto=format&fit=max&s=4e9da021f09ddf3f1ecc89797869c485',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=a3888f82197915b8b3804fd60d95a36f',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=620&quality=85&auto=format&fit=max&s=19eaada5eaade8c2098df9868c7bb719',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=04396769b6c053da2f265f9bc14b5fe9',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=605&quality=85&auto=format&fit=max&s=5e906293c66f9188b32f534e9a2384d8',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e19ef4a0ae13b3db41ac069cd66a37b',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=445&quality=85&auto=format&fit=max&s=17f7b5cfb1c42e3fcbd12ad164b36530',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=885f8a3333b8ca9cdca4cc9b2b844ac9',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1020&quality=85&auto=format&fit=max&s=17e5dc410351af20f55a83166c88ac17',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=c187b80760efdd0a6251f51d49de972b',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=940&quality=85&auto=format&fit=max&s=4efe55f235304efbc29bb6e1eede29bf',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=bf58abe1be8b1f17a5d5cab88a6ab206',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=700&quality=85&auto=format&fit=max&s=c1cdd67a1bf8829b671780ab8f28c814',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d72135e62bf4a07c1313c96f01e0811c',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=700&quality=85&auto=format&fit=max&s=c1cdd67a1bf8829b671780ab8f28c814',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d72135e62bf4a07c1313c96f01e0811c',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=660&quality=85&auto=format&fit=max&s=063a6e461b87b7994cbe6d2b0937f34e',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=d6685cb0d8b09113259fa9b97fd6f262',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=645&quality=85&auto=format&fit=max&s=a24c617361aac79628ca7cbb8939a332',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9fb28a7e0e113def7c4599013c15bf3c',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=465&quality=85&auto=format&fit=max&s=6bdf247e1cf3a63313a3cc0ef889c415',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=98597bcd56818f30180adf204cf38873',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=620&quality=85&auto=format&fit=max&s=19eaada5eaade8c2098df9868c7bb719',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=04396769b6c053da2f265f9bc14b5fe9',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=605&quality=85&auto=format&fit=max&s=5e906293c66f9188b32f534e9a2384d8',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e19ef4a0ae13b3db41ac069cd66a37b',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=445&quality=85&auto=format&fit=max&s=17f7b5cfb1c42e3fcbd12ad164b36530',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=885f8a3333b8ca9cdca4cc9b2b844ac9',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1300&quality=85&auto=format&fit=max&s=69254e60e3f5659168a1feb102a86bb6',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=aabd8ff45f3d9a2e9278c53cb0028186',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1140&quality=85&auto=format&fit=max&s=8b87cfe31ebbe53df81de22469c9b6b7',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=ca250878ada237bae62f1e2b8aff2e7b',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1125&quality=85&auto=format&fit=max&s=5568484a800cbc03072e27f5e971efc5',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=44935a7b7e6d24bc8ef6a84749739faf',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=965&quality=85&auto=format&fit=max&s=32567cfefdd20f5b2911a7e1b8abdced',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=221a5e4c8c827482694cb873c5b23b7a',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=725&quality=85&auto=format&fit=max&s=5445468e08bcb1862948b8be4f1f283a',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=0fdf7c8119556060ba946c4c24b19ed3',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=645&quality=85&auto=format&fit=max&s=a24c617361aac79628ca7cbb8939a332',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9fb28a7e0e113def7c4599013c15bf3c',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=465&quality=85&auto=format&fit=max&s=6bdf247e1cf3a63313a3cc0ef889c415',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=98597bcd56818f30180adf204cf38873',
-									width: 930,
-								},
-							],
-						},
-					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '2578',
-									width: '4296',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/4296.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '2578',
-									width: '4296',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/master/4296.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1a0f50f266aa6da425ac0bf05a2c4fe82d3de3e5/0_31_4296_2578/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>For the network of international lawyers and accountants who serviced the offshore industry, these were troubled times.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Cameron’s speech was merely the latest piece of unwelcome attention. Since 2008, and the global financial crisis, cash-strapped exchequers had been trying to get their hands on billions in potential tax revenue hidden offshore. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>How serious these attempts were was a matter for debate.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>What wasn’t in doubt were the vast sums involved. According to the US economist Gabriel Zucman, 8% of the world’s wealth – a vast $7.6tn (£5.3tn) – was stashed in tax havens.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Zucman estimates the loss in global tax revenues at $200bn per year. That includes $35bn in the US and $78bn in Europe.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Previous attempts to bring about transparency had flopped. But now the world’s leading economies – the G20, G8 and Organisation for Economic Cooperation and Development – were apparently pursuing the theme with zeal.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>If Cameron got his way, British overseas territories such as the BVI and Gibraltar would soon have to draw up a register of beneficial owners – the real owners of a company, even though their name may not appear on the shareholder register. The crown dependencies Jersey, Guernsey and the Isle of Man would fall into line, too.</p>',
-				},
-				{
-					assets: [
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/3gp/small/2016/04/06/160406PanamaPapersv2_small.3gp',
-							mimeType: 'video/3gp:small',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/HLS/2016/04/06/160406PanamaPapersv2.m3u8',
-							mimeType: 'video/m3u8',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/mainwebsite/2016/04/06/160406PanamaPapersv2_desk.mp4',
-							mimeType: 'video/mp4',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/3gp/large/2016/04/06/160406PanamaPapersv2_large.3gp',
-							mimeType: 'video/3gp:large',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/webM/2016/04/06/160406PanamaPapersv2_synd_768k_vp8.webm',
-							mimeType: 'video/webm',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '563',
-								caption: 'Panama Papers video holding image',
-								width: '1000',
-							},
-							url:
-								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1000.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '281',
-								caption: 'Panama Papers video holding image',
-								width: '500',
-							},
-							url:
-								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/500.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '79',
-								caption: 'Panama Papers video holding image',
-								width: '140',
-							},
-							url:
-								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/140.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '975',
-								caption: 'Panama Papers video holding image',
-								width: '1734',
-							},
-							url:
-								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1734.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '975',
-								caption: 'Panama Papers video holding image',
-								width: '1734',
-							},
-							url:
-								'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/master/1734.jpg',
-							mimeType: 'image/jpeg',
-						},
-					],
-					role: 'inline',
-					imageMedia: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									source: 'Guardian',
-									height: '563',
-									caption:
-										'Panama Papers video holding image',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1000.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									source: 'Guardian',
-									height: '281',
-									caption:
-										'Panama Papers video holding image',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/500.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									source: 'Guardian',
-									height: '79',
-									caption:
-										'Panama Papers video holding image',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/140.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									source: 'Guardian',
-									height: '975',
-									caption:
-										'Panama Papers video holding image',
-									width: '1734',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/1734.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									source: 'Guardian',
-									height: '975',
-									caption:
-										'Panama Papers video holding image',
-									width: '1734',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/9747d77140d7b3859ffbc4f4edfaf7f690d0860b/0_4_1734_975/master/1734.jpg',
-							},
-						],
-					},
-					_type:
-						'model.dotcomrendering.pageElements.GuVideoBlockElement',
-					caption:
-						'<a href="http://www.theguardian.com/news/video/2016/apr/06/biggest-leak-ever-panama-papers-video-explainer">The Panama Papers explained</a>',
-					html:
-						'<video data-media-id="gu-video-5704f6dee4b0401b41c4ef5c" class="gu-video" controls="controls" poster=""> <source src="https://cdn.theguardian.tv/mainwebsite/2016/04/06/160406PanamaPapersv2_desk.mp4"/><source src="https://cdn.theguardian.tv/3gp/small/2016/04/06/160406PanamaPapersv2_small.3gp"/><source src="https://cdn.theguardian.tv/HLS/2016/04/06/160406PanamaPapersv2.m3u8"/><source src="https://cdn.theguardian.tv/3gp/large/2016/04/06/160406PanamaPapersv2_large.3gp"/><source src="https://cdn.theguardian.tv/webM/2016/04/06/160406PanamaPapersv2_synd_768k_vp8.webm"/> </video>',
-					originalUrl:
-						'http://www.theguardian.com/news/video/2016/apr/06/biggest-leak-ever-panama-papers-video-explainer',
-					source: 'Guardian',
-					url:
-						'http://www.theguardian.com/news/video/2016/apr/06/biggest-leak-ever-panama-papers-video-explainer',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>As Hangartner admitted, the reason many clients used offshore structures was to keep their identities confidential. This was for a variety of reasons. Often, one offshore company would own another, and another, like so many Russian dolls.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Now this elaborate system of concealment was under threat. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Hangartner and Züger discussed a solution. If Britain’s colonial islands were about to pull open the curtain of banking secrecy, what about other jurisdictions? Züger’s answer: he would wind up his clients’ offshore businesses in the BVI and re-register them in non-British territories such as the Seychelles or Panama – dodging Cameron’s stated initiative on transparency.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>His clients’ names would remain secret and beyond the grasp of even the most dogged tax inspector. Mossack Fonseca would help. For a fee. “He asked us to give him a quote,” Hangartner reported.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>The world of Mossack Fonseca</h2>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mossack Fonseca is a law firm based in Panama. Founded in 1977, it is the world’s fourth biggest provider of offshore services. Until the publication this week of the <a href="https://www.theguardian.com/news/series/panama-papers">Panama Papers</a>, it was mostly obscure. In fact, it sits at the heart of the global offshore industry, and acts for about 300,000 companies. More than half are registered in British tax havens – as well as in the UK.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mossfon, as the company styles itself, employs 600 staff in 42 countries. Its offices are located in the world’s leading secrecy jurisdictions – Jersey, Cyprus, Luxembourg, the Swiss canton of Zug, all nodes on the superhighway of global capital.</p>',
-				},
-				{
-					role: 'supporting',
-					data: {
-						copyright: '2016 Getty Images',
-						alt: 'A Mossack Fonseca sign near the offices.',
-						caption: 'A Mossack Fonseca sign near the offices.',
-						credit: 'Photograph: Joe Raedle/Getty Images',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=620&quality=85&auto=format&fit=max&s=24038d66931c624d41b110487e88c8e8',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a4094af17ae71e63c6a6038ccde25ab0',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=605&quality=85&auto=format&fit=max&s=94228e243c178e7dad234a92a0ecbd90',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b60bc4a977f064ee6b6b8e86e5fd4497',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=445&quality=85&auto=format&fit=max&s=e2bbd30bb6803f881a76265e6b554154',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5832a36e86d98022e91df64a4b47b763',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=140&quality=85&auto=format&fit=max&s=24271e62c58d59861e11926542a4d73e',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fc046c2fbc7426a5dff5f1a58f145ac5',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=120&quality=85&auto=format&fit=max&s=6375514fd49684c6b877bf0773534661',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=cf25853dfe7e8507d0f704e1d6315233',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=380&quality=85&auto=format&fit=max&s=0b41d12bf3126e37fe10a74b808259b2',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=26f49521f398e6e019422fbd77cf12a9',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=300&quality=85&auto=format&fit=max&s=165cd8267266fe185ac168f8770e7316',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=efef3c7878d38d157099a135c72314c0',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=620&quality=85&auto=format&fit=max&s=24038d66931c624d41b110487e88c8e8',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a4094af17ae71e63c6a6038ccde25ab0',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=605&quality=85&auto=format&fit=max&s=94228e243c178e7dad234a92a0ecbd90',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b60bc4a977f064ee6b6b8e86e5fd4497',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=445&quality=85&auto=format&fit=max&s=e2bbd30bb6803f881a76265e6b554154',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5832a36e86d98022e91df64a4b47b763',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1020&quality=85&auto=format&fit=max&s=a380bf448c49b26e57870299f2641f62',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=ec30ca1c5db89a502271d4b33bd73523',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=940&quality=85&auto=format&fit=max&s=d85873318f983067ddcb6b700c24d8f4',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=675a34437c35fa01567855de45377cdf',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=700&quality=85&auto=format&fit=max&s=d577ebe0dbcf75cbe6f0d7efc39de7e1',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=dd5a8319bf5e2e4e4a2d784b13fe9cb1',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=700&quality=85&auto=format&fit=max&s=d577ebe0dbcf75cbe6f0d7efc39de7e1',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=dd5a8319bf5e2e4e4a2d784b13fe9cb1',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=660&quality=85&auto=format&fit=max&s=b8815a940934664e8ce2e1b13242c0d8',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=6ab788cdc0eaea4f512ccae1ef6119bc',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=645&quality=85&auto=format&fit=max&s=bdedaf121c5ea9f3e0a172735b52cca7',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e662835aac8e367d30cf38e56e9821d8',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=465&quality=85&auto=format&fit=max&s=54cc8c3ed8eb0c7002cf72035225c955',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b148e35efb3dafdf40e7845e95ef0928',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=620&quality=85&auto=format&fit=max&s=24038d66931c624d41b110487e88c8e8',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a4094af17ae71e63c6a6038ccde25ab0',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=605&quality=85&auto=format&fit=max&s=94228e243c178e7dad234a92a0ecbd90',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b60bc4a977f064ee6b6b8e86e5fd4497',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=445&quality=85&auto=format&fit=max&s=e2bbd30bb6803f881a76265e6b554154',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5832a36e86d98022e91df64a4b47b763',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1300&quality=85&auto=format&fit=max&s=306f18609a868bd1b55733519b91d634',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=006d981b1a5aad74a7c1a4a3aff5b361',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1140&quality=85&auto=format&fit=max&s=8b843cd835633a1e3a81567cd08606f3',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=e80d86135d844fe5c361fa9809272b10',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1125&quality=85&auto=format&fit=max&s=501a58aae7bec2939b6a90c7c5587524',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=a946087791a6277dc9cdd602ab066668',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=965&quality=85&auto=format&fit=max&s=e0c23e3c5d1562234802043dba476484',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=9b849ac6c2311205ab0632a8c8bff727',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=725&quality=85&auto=format&fit=max&s=4a13738e0df84aae3d62d91f53dd7021',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=a0d7d11b406f6a328605fb5ec71c142f',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=645&quality=85&auto=format&fit=max&s=bdedaf121c5ea9f3e0a172735b52cca7',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e662835aac8e367d30cf38e56e9821d8',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=465&quality=85&auto=format&fit=max&s=54cc8c3ed8eb0c7002cf72035225c955',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b148e35efb3dafdf40e7845e95ef0928',
-									width: 930,
-								},
-							],
-						},
-					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1746',
-									width: '2909',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/2909.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1746',
-									width: '2909',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/master/2909.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/adfbc4677ac69d5826a33285d3ae80c7d1dd97e4/0_246_2909_1746/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Its corporate slogan sums up the firm’s mission, to help the rich stay rich: “Wealth management as you deserve it.”</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><a href="https://www.theguardian.com/news/2016/apr/03/mossack-fonsecas-response-to-the-panama-papers">Mossack Fonseca says it complies with international protocols</a> to ensure its companies are not used for money laundering, tax dodging or other illicit purposes.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>But the <a href="https://www.theguardian.com/news/2016/apr/03/a-world-of-hidden-wealth-why-we-are-shining-a-light-offshore">Panama Papers have shone a light on a hidden world</a> the firm says it does not recognise – one that sometimes facilitates crime, launders dirty money and finds ways of busting sanctions. Plus evading tax. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>This week’s <a href="https://www.theguardian.com/world/2016/apr/06/panama-papers-all-revelations-so-far-data-leak">revelations</a> have focused on politicians, celebrities and the famous: the <a href="https://www.theguardian.com/news/2016/apr/03/panama-papers-money-hidden-offshore">murky finances of Vladimir Putin’s friends</a> and the <a href="https://www.theguardian.com/news/2016/apr/07/david-cameron-father-ian-sought-legal-advice-tax-havens-panama-papers">offshore tax arrangements made by David Cameron’s late father, Ian</a>. Others who feature in the leaked data include African despots, international arms smugglers, drug dealers and corporate vehicles belonging to outcast states such as North Korea and Syria. Mossack denies it busts sanctions. <br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The biggest group in the <a href="https://www.theguardian.com/news/2016/apr/03/what-you-need-to-know-about-the-panama-papers">Panama Papers</a> are not household names. They are what you might call the anonymous international rich. It is not, of course, illegal to set up an offshore firm. Many use company structures for legitimate reasons.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>According to Mossack Fonseca’s brochure, the law firm specialises in “trust services, investor advisory, offshore/onshore structures, commercial law and asset protection”.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Its main function is as an incorporation agent, licensed by various tax havens to register companies there. The firm operates in 21 territories.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Its biggest jurisdiction is the UK-administered BVI, followed by Panama, the Bahamas, and the Seychelles, and the islands of Samoa and Niue near New Zealand.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>If a client wants to set up an offshore firm or trust, Mossack Fonseca will register it and take care of the local paperwork – for a fee, plus an annual charge.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>It will set up bank accounts. It will even provide nominee directors to sit on the “board” of your offshore company.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The company’s leaked internal database gives some idea of the massive scale of these international operations, many of them perfectly legal. The 11.5m documents include shareholder registers, bank statements, emails from lawyers and accountants, passport scans and contracts. Much of it legal, if hidden.</p>',
+						'<p>The two largest asset managers, BlackRock and Vanguard, have also routinely opposed motions at fossil fuel companies that would have forced directors to take more action on climate change, the analysis reveals.</p>',
 				},
 				{
 					role: 'inline',
 					data: {
-						copyright:
-							'Copyright (c) 2010 Rex Features. No use without permission.',
-						alt:
-							'David Cameron with his parents Ian and Mary during the 2010 election campaign.',
-						caption:
-							'David Cameron with his parents Ian and Mary during the 2010 election campaign.',
-						credit: 'Photograph: Rex/Shutterstock',
+						alt: 'Fossil fuel holdings: The Vanguard Group',
+						credit: 'Illustration: Guardian Design',
 					},
 					imageSources: [
 						{
@@ -3367,32 +2961,32 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=620&quality=85&auto=format&fit=max&s=e3c08229dc68055f466f6522fb997440',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=98efdde243642befa76fac1686774ecd',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=110518ae0a6082ab13290edbf3131093',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1cf2343891cecac0245ca45f5e612b7f',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=605&quality=85&auto=format&fit=max&s=917c0cea6e273a16230c95e897724498',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=f871ea37934f666118aeaf701cf3c4ec',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ee9140b7c626300186ee58ca162fbba2',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=da40f96cff3f32f9628d21e2e6e9e67e',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=445&quality=85&auto=format&fit=max&s=02526d541441f5f7699e1ba5da218556',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=c302e4e1c5c97fc671763480205e6e2e',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ff49daca06c9fe55831892d1104ae915',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=89bf2d9cb0e2a933fce30d3352b66778',
 									width: 890,
 								},
 							],
@@ -3402,22 +2996,22 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=140&quality=85&auto=format&fit=max&s=bd3d4cdd7123465faaa01e237957e3c9',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=140&quality=85&auto=format&fit=max&s=fd36c8cc7f83b5c315291623cede52a6',
 									width: 140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=c20cd50e0f9476aa29b4eb12f39e0256',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=ca9e3eca1b80b7907a3e2306e8a9a531',
 									width: 280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=120&quality=85&auto=format&fit=max&s=f7a9e2fd91d2e478977730739c4259bf',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=120&quality=85&auto=format&fit=max&s=f597fd58aec086a6a4e3c19f9540b996',
 									width: 120,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=f11acb4aa535095ed0702cd473073381',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1972cb39961d4bde92363b8cb0b3411f',
 									width: 240,
 								},
 							],
@@ -3427,52 +3021,52 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=380&quality=85&auto=format&fit=max&s=6250923475c5e4c32548129c1efbc004',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=380&quality=85&auto=format&fit=max&s=ba975413314da94d9db76138a997e153',
 									width: 380,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=d961f2a44273aecd4b24e102e9845e0e',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=c01090ff367515d4480e84ffc580d144',
 									width: 760,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=300&quality=85&auto=format&fit=max&s=64a09f8c009feef5f1083da986b42495',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=300&quality=85&auto=format&fit=max&s=c3d16f00410d1518ce7e23f27dc97b39',
 									width: 300,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=df234bac5ca5f31c1ab61196e5ea43e4',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3b2ce36d7413cf378450a3ac41348a1c',
 									width: 600,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=620&quality=85&auto=format&fit=max&s=e3c08229dc68055f466f6522fb997440',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=98efdde243642befa76fac1686774ecd',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=110518ae0a6082ab13290edbf3131093',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1cf2343891cecac0245ca45f5e612b7f',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=605&quality=85&auto=format&fit=max&s=917c0cea6e273a16230c95e897724498',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=f871ea37934f666118aeaf701cf3c4ec',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ee9140b7c626300186ee58ca162fbba2',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=da40f96cff3f32f9628d21e2e6e9e67e',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=445&quality=85&auto=format&fit=max&s=02526d541441f5f7699e1ba5da218556',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=c302e4e1c5c97fc671763480205e6e2e',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ff49daca06c9fe55831892d1104ae915',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=89bf2d9cb0e2a933fce30d3352b66778',
 									width: 890,
 								},
 							],
@@ -3482,72 +3076,72 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1020&quality=85&auto=format&fit=max&s=045c4cfc3cff8b1704578ac84cf979e8',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1020&quality=85&auto=format&fit=max&s=c9d5fbc6d9173eb15f2fe56e9ff3e9b0',
 									width: 1020,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=c337d9728a6fcdd67ec98c1a197f52dd',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=3bf32c16a68d40bcda9880ae3485efe5',
 									width: 2040,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=940&quality=85&auto=format&fit=max&s=f5caa646f01a14116c09c68bb0f2f0a8',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=940&quality=85&auto=format&fit=max&s=d19b850e5dbf3c840b6149d7a2187c4b',
 									width: 940,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c02a4026a8dffca6666cdd96a5c2d1b6',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=ee05143a6a79c1b1b851e871e90dde64',
 									width: 1880,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=700&quality=85&auto=format&fit=max&s=2694d77a861015a8aa0cdfea7b0c898b',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=92e99d9d86258afc4e6fbd49b830e4bd',
 									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=50d0f5d5d86a66b7787d3f795fc28fd4',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8cc4c62f1bd79891cacf2a8743f37c20',
 									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=700&quality=85&auto=format&fit=max&s=2694d77a861015a8aa0cdfea7b0c898b',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=92e99d9d86258afc4e6fbd49b830e4bd',
 									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=50d0f5d5d86a66b7787d3f795fc28fd4',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8cc4c62f1bd79891cacf2a8743f37c20',
 									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=660&quality=85&auto=format&fit=max&s=99b70cc4704e840fddae7310af93def9',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=660&quality=85&auto=format&fit=max&s=ee3a4566b3c551e89cf5d7dae94456fc',
 									width: 660,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=d2f8bd00c38d705c5e1cb356a0b6b067',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f37c221ffe4a9807b54c4e497d656ccf',
 									width: 1320,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=645&quality=85&auto=format&fit=max&s=3aaa252a04ea4bb3ece04097438d8568',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=fe238500f09366fa51ca99dc311d12f0',
 									width: 645,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f4bb5f151c087e68bbca3abf5bac3644',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=53fcf19f7b4d7bf82bac202bd0ee05c6',
 									width: 1290,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=465&quality=85&auto=format&fit=max&s=ede3746aa85ac43507d777861e82d88d',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0870fa508c7a327c8bf973c3000b5b0b',
 									width: 465,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e642d87d469e6de7b6522bec3e32f0d1',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=079bf138715302318881b11fa3661e83',
 									width: 930,
 								},
 							],
@@ -3557,32 +3151,32 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=620&quality=85&auto=format&fit=max&s=e3c08229dc68055f466f6522fb997440',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=98efdde243642befa76fac1686774ecd',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=110518ae0a6082ab13290edbf3131093',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1cf2343891cecac0245ca45f5e612b7f',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=605&quality=85&auto=format&fit=max&s=917c0cea6e273a16230c95e897724498',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=f871ea37934f666118aeaf701cf3c4ec',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ee9140b7c626300186ee58ca162fbba2',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=da40f96cff3f32f9628d21e2e6e9e67e',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=445&quality=85&auto=format&fit=max&s=02526d541441f5f7699e1ba5da218556',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=c302e4e1c5c97fc671763480205e6e2e',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ff49daca06c9fe55831892d1104ae915',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=89bf2d9cb0e2a933fce30d3352b66778',
 									width: 890,
 								},
 							],
@@ -3592,72 +3186,72 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1300&quality=85&auto=format&fit=max&s=c117b46f1fc8425fa304d0c9bcaa87e4',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1300&quality=85&auto=format&fit=max&s=007bd870327e2cc846a8f45ade884e8e',
 									width: 1300,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=5f8792f42a7f24df3567e9c083746487',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0e795df9225cc50b7cc54cbfc312e5eb',
 									width: 2600,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1140&quality=85&auto=format&fit=max&s=a233c6ae69fa777eb0fbb87f12fa8c3e',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1140&quality=85&auto=format&fit=max&s=0bc0b765bcf72596d880483583f96c37',
 									width: 1140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=120fd99133760d62ac75b8dd7e1c5131',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7e13f3b492695c936b5eefcefd01e982',
 									width: 2280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1125&quality=85&auto=format&fit=max&s=1e69dae46dbc1dc99ab58c2aca4d7546',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1125&quality=85&auto=format&fit=max&s=b3aecf87e9d29b65b15db29a779d3617',
 									width: 1125,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=463f39d720aa7ca4fdcf4d1c1c9a94b9',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=826526e825ee8eba5ecd523adb9df881',
 									width: 2250,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=965&quality=85&auto=format&fit=max&s=dabc4a746354d43030f4229f6404068b',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=6d7433ad20ce7e8964633b229d93b6dc',
 									width: 965,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=3fc59b14e16c7abd8866edda6e802fb7',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=263fdaa2f19c5271aecccb5f833b265f',
 									width: 1930,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=725&quality=85&auto=format&fit=max&s=8ab29dd70ccfc38c258776eddc99d389',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=6b7d46f74979690902f7c53c8a17d7d8',
 									width: 725,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=f459685af54d9e5e9132864db4a9387f',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=3cac0ad47084abbe4f9ee1a09b2ef2fd',
 									width: 1450,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=645&quality=85&auto=format&fit=max&s=3aaa252a04ea4bb3ece04097438d8568',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=fe238500f09366fa51ca99dc311d12f0',
 									width: 645,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f4bb5f151c087e68bbca3abf5bac3644',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=53fcf19f7b4d7bf82bac202bd0ee05c6',
 									width: 1290,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=465&quality=85&auto=format&fit=max&s=ede3746aa85ac43507d777861e82d88d',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0870fa508c7a327c8bf973c3000b5b0b',
 									width: 465,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e642d87d469e6de7b6522bec3e32f0d1',
+										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=079bf138715302318881b11fa3661e83',
 									width: 930,
 								},
 							],
@@ -3670,69 +3264,58 @@ export const SpecialReport: CAPIType = {
 							{
 								index: 0,
 								fields: {
-									height: '2077',
-									width: '3462',
+									height: '1240',
+									width: '1240',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/3462.jpg',
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1240.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '2077',
-									width: '3462',
+									height: '1240',
+									width: '1240',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/master/3462.jpg',
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
+									height: '1000',
 									width: '1000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/1000.jpg',
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1000.jpg',
 							},
 							{
-								index: 4,
+								index: 3,
 								fields: {
-									height: '300',
+									height: '500',
 									width: '500',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/500.jpg',
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/500.jpg',
 							},
 							{
-								index: 5,
+								index: 4,
 								fields: {
-									height: '84',
+									height: '140',
 									width: '140',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/33d571b94198c813394642d557c66dfa092830c4/220_8_3462_2077/140.jpg',
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/140.jpg',
 							},
 						],
 					},
@@ -3742,308 +3325,25 @@ export const SpecialReport: CAPIType = {
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>But like so many mosaic pieces, they also show how the global financial system plays a leading role in offshore money laundering.</p>',
+						'<p>The investment rise is driven by the success in the last decade of tracker funds that use algorithms to follow major stock exchange indices such as the FTSE 100 and S&amp;P 500. </p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Many British entities are involved, from banks to states such as the BVI. <a href="https://www.theguardian.com/politics/2016/apr/05/david-cameron-must-come-clean-on-tax-says-jeremy-corbyn-panama-papers">Jeremy Corbyn</a> and other politicians have this week called on the prime minister to <a href="https://www.theguardian.com/news/2016/apr/05/panama-papers-five-things-britain-could-do-now-to-clean-up-tax-havens">clean up UK-administered tax havens</a>. The dilemma for Downing Street is that the UK profits from this black money.</p>',
+						'<p>The Guardian has worked with the thinktank InfluenceMap and the business data specialists ProxyInsight to analyse the role played by asset managers in the financing and management of some of the world’s biggest fossil fuel companies.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>It is not illegal to create or use offshore companies – and the <a href="https://www.theguardian.com/world/panama-papers" data-component="auto-linked-tag">Panama Papers</a> show some banks were doing it on an industrial scale.</p>',
-				},
-				{
-					assets: [
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/mainwebsite/2016/04/08/160408CameronExplainer1_desk.mp4',
-							mimeType: 'video/mp4',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/3gp/small/2016/04/08/160408CameronExplainer1_small.3gp',
-							mimeType: 'video/3gp:small',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/3gp/large/2016/04/08/160408CameronExplainer1_large.3gp',
-							mimeType: 'video/3gp:large',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/HLS/2016/04/08/160408CameronExplainer1.m3u8',
-							mimeType: 'video/m3u8',
-						},
-						{
-							fields: {
-								source: 'guardian.co.uk',
-								embeddable: 'false',
-								height: '1080',
-								width: '1920',
-							},
-							url:
-								'https://cdn.theguardian.tv/webM/2016/04/08/160408CameronExplainer1_synd_768k_vp8.webm',
-							mimeType: 'video/webm',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '79',
-								caption:
-									'David Cameron Panama Papers explainer image.',
-								width: '140',
-							},
-							url:
-								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/140.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '281',
-								caption:
-									'David Cameron Panama Papers explainer image.',
-								width: '500',
-							},
-							url:
-								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/500.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '975',
-								caption:
-									'David Cameron Panama Papers explainer image.',
-								width: '1734',
-							},
-							url:
-								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1734.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '975',
-								caption:
-									'David Cameron Panama Papers explainer image.',
-								width: '1734',
-							},
-							url:
-								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/master/1734.jpg',
-							mimeType: 'image/jpeg',
-						},
-						{
-							fields: {
-								source: 'Guardian',
-								height: '563',
-								caption:
-									'David Cameron Panama Papers explainer image.',
-								width: '1000',
-							},
-							url:
-								'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1000.jpg',
-							mimeType: 'image/jpeg',
-						},
-					],
-					role: 'supporting',
-					imageMedia: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									source: 'Guardian',
-									height: '79',
-									caption:
-										'David Cameron Panama Papers explainer image.',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/140.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									source: 'Guardian',
-									height: '281',
-									caption:
-										'David Cameron Panama Papers explainer image.',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/500.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									source: 'Guardian',
-									height: '975',
-									caption:
-										'David Cameron Panama Papers explainer image.',
-									width: '1734',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1734.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									source: 'Guardian',
-									height: '975',
-									caption:
-										'David Cameron Panama Papers explainer image.',
-									width: '1734',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/master/1734.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									source: 'Guardian',
-									height: '563',
-									caption:
-										'David Cameron Panama Papers explainer image.',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/11f943f1aa239f918b2992fdf0f3177405d0322a/0_10_1734_975/1000.jpg',
-							},
-						],
-					},
-					_type:
-						'model.dotcomrendering.pageElements.GuVideoBlockElement',
-					caption: '',
-					html:
-						'<video data-media-id="gu-video-5707a0f3e4b08e1197c163a1" class="gu-video" controls="controls" poster=""> <source src="https://cdn.theguardian.tv/mainwebsite/2016/04/08/160408CameronExplainer1_desk.mp4"/><source src="https://cdn.theguardian.tv/3gp/small/2016/04/08/160408CameronExplainer1_small.3gp"/><source src="https://cdn.theguardian.tv/3gp/large/2016/04/08/160408CameronExplainer1_large.3gp"/><source src="https://cdn.theguardian.tv/HLS/2016/04/08/160408CameronExplainer1.m3u8"/><source src="https://cdn.theguardian.tv/webM/2016/04/08/160408CameronExplainer1_synd_768k_vp8.webm"/> </video>',
-					originalUrl:
-						'http://www.theguardian.com/news/video/2016/apr/08/how-david-cameron-dodged-the-panama-papers-questions-video-explainer',
-					source: 'Guardian',
-					url:
-						'http://www.theguardian.com/news/video/2016/apr/08/how-david-cameron-dodged-the-panama-papers-questions-video-explainer',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>HSBC used Mossack Fonseca to create about 2,000 offshore companies. So did Coutts (500 companies) and Barclays (300). Many of these were created in 2005, when the EU savings directive came into force.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The directive was meant to prevent cross-border tax evasion. If you were a UK citizen who got interest from a Swiss bank account, the Swiss government automatically had to inform the UK tax office.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>A good idea – except it could be easily dodged. How? By setting up an anonymous offshore company. And that’s exactly what some people did, funnelling even more money through structures set up and registered by firms such as Mossack Fonseca. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Fears of the super-rich</h2>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mossack Fonseca’s leaked emails reveal the extraordinary measures that some of its well-heeled clients took to keep their financial affairs secret. Especially the Europeans and Americans, who have latterly found themselves under scrutiny from their own governments. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>One theme that emerges is anxiety. Wealthy individuals with “undeclared” offshore bank accounts are afraid they might get rumbled. </p>',
-				},
-				{
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						"'The game is rigged by those who write the rules': British readers on the Panama papers",
-					url:
-						'http://www.theguardian.com/politics/2016/apr/13/the-game-is-rigged-by-those-who-write-the-rules-british-readers-on-the-panama-papers',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Another theme is victimhood. <a href="https://www.theguardian.com/news/the-super-rich" data-component="auto-linked-tag">The super-rich</a>, it appears, feel they are being unfairly picked on – persecuted even.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In one 2014 email, Hangartner recounts a conversation with a contact who worked for Global Trust Advisors, a financial services firm based in Luxembourg.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The contact told him that her Italian clients were going to desperate lengths to avoid being caught: “She cited the reduction in [offshore] business was due to pressure from the Italian government chasing clients. She had heard that the fiscal authorities would look at what car you drive, if you go to Switzerland, etc so clients are scared.” Typically, she added, clients would cover their trail by using a Panama company to buy a Luxembourg company, which would in turn buy an asset in Italy.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Such was the level of mistrust, the rich would “often use nicknames” when calling her office.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>To be helpful, Mossack Fonseca offered a “virtual” office service for its spooked customers. For $1,500 a year, the company would set up a fake email account, using the domain @tradedirect.biz. Wealthy clients could correspond using anonymous invented names.</p>',
+						'<p> Figures compiled by <a href="https://influencemap.org/index.html">InfluenceMap</a> show how Blackrock, Vanguard and State Street – known as the big three – have become crucial climate actors in the financial world. They are the largest money managers in the $74tn industry.</p>',
 				},
 				{
 					role: 'inline',
 					data: {
-						copyright: '© David Coleman / Alamy Stock Photo',
-						alt:
-							'A beach in the British Virgin Islands where thousands of companies were incorporated by Mossack Fonseca.',
-						caption:
-							'A beach in the British Virgin Islands where thousands of companies were incorporated by Mossack Fonseca.',
-						credit: 'Photograph: Alamy',
+						alt: 'Fossil fuel holdings: BlackRock',
+						credit: 'Illustration: Guardian Design',
 					},
 					imageSources: [
 						{
@@ -4051,32 +3351,32 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=620&quality=85&auto=format&fit=max&s=313161eca7cbe0e4d54ce160056c86ed',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=f719159212de69ebe1d53bc304a8f441',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b48f5b96ce73e90dcf44dc9d3053a626',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=80b97228bea784224c7925438135acb1',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=605&quality=85&auto=format&fit=max&s=53ed38cb9abc52770466b2c84fae128f',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=0be0871ebe9c3b8beeed32631ed571f5',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7b97fdf07eb349257cd389dada9eadab',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=40fc0c64402158b73cd74f664f6fdc5b',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=445&quality=85&auto=format&fit=max&s=cedce8584571e407a491918e07340cc1',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=8c5a197a7a8f6c5b2044a673ad0c5e22',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=23af1168a537994606cbe901c9830601',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=15821094bc233207e5279ba183f5c775',
 									width: 890,
 								},
 							],
@@ -4086,22 +3386,22 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=140&quality=85&auto=format&fit=max&s=578cb2971154f11321e83394b78aeca5',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=140&quality=85&auto=format&fit=max&s=b91dbfa5bd204c08e651961c9a7ba10f',
 									width: 140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=0a1b18324bb46a3d8d3ab452f393429b',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=8730ff58cd2b99fc5ac6287ee897cf6e',
 									width: 280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=120&quality=85&auto=format&fit=max&s=87349a90b18fc05da9fe5691dbad2807',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=120&quality=85&auto=format&fit=max&s=db122e40ffd8d0b5b9d7d9d3e8d6f038',
 									width: 120,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=ab1c688541281650da22d14a28d1b2e4',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=4a0baa8d53550a46f5b363b074dcaeb0',
 									width: 240,
 								},
 							],
@@ -4111,52 +3411,52 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=380&quality=85&auto=format&fit=max&s=324907a0351d818f93e708b17e1ae97f',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=380&quality=85&auto=format&fit=max&s=62c54a704f615267efc753c8cb4359c8',
 									width: 380,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=13823c3907a6f72fbff06fd4dc94322e',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=32af55ddc1bfad17ea4b146fe8248bf2',
 									width: 760,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=300&quality=85&auto=format&fit=max&s=67ceef448581b54e56322aa167800f50',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=300&quality=85&auto=format&fit=max&s=92ba4e3bbed2ce0bd6f12628fdf445e6',
 									width: 300,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8e5881481c175a55a418006225c64193',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=1ce71d776ce9b09761d3e35231bb4740',
 									width: 600,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=620&quality=85&auto=format&fit=max&s=313161eca7cbe0e4d54ce160056c86ed',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=f719159212de69ebe1d53bc304a8f441',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b48f5b96ce73e90dcf44dc9d3053a626',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=80b97228bea784224c7925438135acb1',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=605&quality=85&auto=format&fit=max&s=53ed38cb9abc52770466b2c84fae128f',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=0be0871ebe9c3b8beeed32631ed571f5',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7b97fdf07eb349257cd389dada9eadab',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=40fc0c64402158b73cd74f664f6fdc5b',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=445&quality=85&auto=format&fit=max&s=cedce8584571e407a491918e07340cc1',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=8c5a197a7a8f6c5b2044a673ad0c5e22',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=23af1168a537994606cbe901c9830601',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=15821094bc233207e5279ba183f5c775',
 									width: 890,
 								},
 							],
@@ -4166,72 +3466,72 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1020&quality=85&auto=format&fit=max&s=0d14332a0ce87eb5bcaad5501222488c',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1020&quality=85&auto=format&fit=max&s=83246cbd1174b5058b78ba7e2a400ae8',
 									width: 1020,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=af03d269ba93155684e816c1c45d4f92',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=4784ad24cbb07cc6b717416ba01901a8',
 									width: 2040,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=940&quality=85&auto=format&fit=max&s=cfb2d9dc1ac2d5c697408cf07f35eed3',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=940&quality=85&auto=format&fit=max&s=d73d2246f176954f0e7240f1ec5aca63',
 									width: 940,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=83ef6f22a2aaa2f9baf5e353a5d5145f',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=5d3f1b2f54d7ee673fb08f7bc2771275',
 									width: 1880,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=700&quality=85&auto=format&fit=max&s=70d83afece0c53a0272fd27de1cc0f40',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=95712b1476a748f227b045b38ec55fc7',
 									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=129dfa63aaa301027a0885be42e4ecb4',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d855714acde61fd13968b059f4d8c644',
 									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=700&quality=85&auto=format&fit=max&s=70d83afece0c53a0272fd27de1cc0f40',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=95712b1476a748f227b045b38ec55fc7',
 									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=129dfa63aaa301027a0885be42e4ecb4',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d855714acde61fd13968b059f4d8c644',
 									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=660&quality=85&auto=format&fit=max&s=ed74d4c5eed8168a3a0a654275afbea2',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=660&quality=85&auto=format&fit=max&s=fcc82bdf60c2a8de9778b17acd70d803',
 									width: 660,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1fc9f60892f37c84c59d29357c4a56ee',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ae2439c61786b1f40faa4f7fba44f42f',
 									width: 1320,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=645&quality=85&auto=format&fit=max&s=3e2a868caf7aa5927fd1eec316ce15d7',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=5d42ec283036d849acd23124a8770936',
 									width: 645,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b80c8ed1a44086adc5a33b25bc30e3b9',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f8c62e68ab25f5a2a74c795f56db2cd5',
 									width: 1290,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=465&quality=85&auto=format&fit=max&s=8b650df68b8879bbbcffe74e25d6c4df',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=945ceb6684c56e81be99320aa8d500bf',
 									width: 465,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7f3c97fa98aac8dc9d5a384247cd8fed',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=487451129c4fd88a85910d3e460af3fd',
 									width: 930,
 								},
 							],
@@ -4241,32 +3541,32 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=620&quality=85&auto=format&fit=max&s=313161eca7cbe0e4d54ce160056c86ed',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=f719159212de69ebe1d53bc304a8f441',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b48f5b96ce73e90dcf44dc9d3053a626',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=80b97228bea784224c7925438135acb1',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=605&quality=85&auto=format&fit=max&s=53ed38cb9abc52770466b2c84fae128f',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=0be0871ebe9c3b8beeed32631ed571f5',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7b97fdf07eb349257cd389dada9eadab',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=40fc0c64402158b73cd74f664f6fdc5b',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=445&quality=85&auto=format&fit=max&s=cedce8584571e407a491918e07340cc1',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=8c5a197a7a8f6c5b2044a673ad0c5e22',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=23af1168a537994606cbe901c9830601',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=15821094bc233207e5279ba183f5c775',
 									width: 890,
 								},
 							],
@@ -4276,72 +3576,72 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1300&quality=85&auto=format&fit=max&s=c4a906ec61417415816d0798d26ba376',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1300&quality=85&auto=format&fit=max&s=c501c6f5058e4780e3ae22f2286c76c0',
 									width: 1300,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e03592ab5950a8e116ac3b363de92c2d',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=f51fb8df0b7afeea3cd3d4c62f722248',
 									width: 2600,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1140&quality=85&auto=format&fit=max&s=767a2ca3d3a84d24e81dd4de77a25701',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1140&quality=85&auto=format&fit=max&s=eb16047b2b7bb0eee47a89b491691669',
 									width: 1140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=d1e9e29d433195f0fdef9cc5dabc7823',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3806aa7c549558e56a5289602fbb1181',
 									width: 2280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1125&quality=85&auto=format&fit=max&s=6c9ed6fb88c2750e93794e9a5bb54f73',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1125&quality=85&auto=format&fit=max&s=15ea3ab49be5aeec72c0a6673f52050e',
 									width: 1125,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=7ede6b3e86dc7aa9e2dfc508da2d55d1',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=919105b62e3435f44c4a2a28b18a3a9c',
 									width: 2250,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=965&quality=85&auto=format&fit=max&s=904281d27c8c9863f34b6c4182a06faf',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=b9b73527199fffb6bce54a9553d682f3',
 									width: 965,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=9cf5c77d0a56fa327e34e080ac6f8e12',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a895f191e51d8a266c8daf817374a88f',
 									width: 1930,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=725&quality=85&auto=format&fit=max&s=f3b4f829435ac5abe9fe19dd92de3709',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=09427239b898eb09b7dabf596cf547e5',
 									width: 725,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=9a05df59648e0d096e4262aa9b0c4b72',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=a8a7cdf4f959187c74b92373bf44f483',
 									width: 1450,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=645&quality=85&auto=format&fit=max&s=3e2a868caf7aa5927fd1eec316ce15d7',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=5d42ec283036d849acd23124a8770936',
 									width: 645,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b80c8ed1a44086adc5a33b25bc30e3b9',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f8c62e68ab25f5a2a74c795f56db2cd5',
 									width: 1290,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=465&quality=85&auto=format&fit=max&s=8b650df68b8879bbbcffe74e25d6c4df',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=945ceb6684c56e81be99320aa8d500bf',
 									width: 465,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7f3c97fa98aac8dc9d5a384247cd8fed',
+										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=487451129c4fd88a85910d3e460af3fd',
 									width: 930,
 								},
 							],
@@ -4354,69 +3654,58 @@ export const SpecialReport: CAPIType = {
 							{
 								index: 0,
 								fields: {
-									height: '3625',
-									width: '6040',
+									height: '1240',
+									width: '1240',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/6040.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1240.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '3625',
-									width: '6040',
+									height: '1240',
+									width: '1240',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/master/6040.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
+									height: '1000',
 									width: '1000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/1000.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1000.jpg',
 							},
 							{
-								index: 4,
+								index: 3,
 								fields: {
-									height: '300',
+									height: '500',
 									width: '500',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/500.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/500.jpg',
 							},
 							{
-								index: 5,
+								index: 4,
 								fields: {
-									height: '84',
+									height: '140',
 									width: '140',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/fe4e015edf23411e0a502442aff3595bdc000770/124_559_6040_3625/140.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/140.jpg',
 							},
 						],
 					},
@@ -4426,99 +3715,25 @@ export const SpecialReport: CAPIType = {
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Some in the files leap out at you: Harry Potter, Winnie Pooh and Daniel Radcliffe. Obviously not the real one.</p>',
+						'<p>According to an analysis of the data, their effective thermal coal, oil and gas reserve holdings through the companies they manage have surged 34.8% since 2016.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>One customer used the name Isaac Asimov – a nod to the master of 20th-century science fiction, whom he admired. (As of 2010, “Mr Asimov” – actually a wealthy lawyer from Barcelona called Gabriel Pretus – had an impressive $21m in six different offshore accounts. He stood trial in Spain for tax crimes but was fully exonerated last year. There is no suggestion he has done anything illegal.) </p>',
+						'<p>This means they are now the largest investors in public oil, gas and coal companies, managing funds for large pension funds, university endowments and insurance companies.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>There were some surreal exchanges. In May 2008, “Harry Potter” was worried about a bank transfer to one of his offshore companies, Winterbotham Trust, located in the Bahamian capital of Nassau. He emailed: “Have you seen money?”</p>',
-				},
-				{
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						"What are the Panama Papers? A guide to history's biggest data leak",
-					url:
-						'http://www.theguardian.com/news/2016/apr/03/what-you-need-to-know-about-the-panama-papers',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Later that day Mossack Fonseca asset management – the firm’s investment advisory arm – replied with good news for the boy wizard. Its email read: “Dear Harry, the money was received [$25,000].”</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The firm also recommended a “trade direct” account to the Cheshire-based owner of a private Panamanian foundation. In setting up his offshore foundation, the owner insisted on “total anonymity”.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>One of Mossack Fonseca’s lawyers described their British client as paranoid, adding that the $1,500 fee to bury his identity “sounds like a lot to me”.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>If you wanted to buy a property without anyone knowing, Mossack Fonseca had a way to help. In 2012, the firm emailed a five-page PowerPoint document to a wealthy German explaining how to do it.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>There were several steps: turn liquid investments into cash, put the funds in an escrow or third-party account, and then transfer them to an offshore company.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The law firm recommended that the company was then restructured to show Mossack Fonseca as its beneficial owner. That way the bank would not know the German was behind the transaction.<br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In certain cases the company was willing to provide a further “very sensitive” service. It would hire a “natural person trustee” – someone who would pretend to be the beneficial owner of a company. This person would “sign lots of documents” to convince banks they were the real thing.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The service seemed to make a mockery of Cameron’s proposal to publish a central register of beneficial owners. And it did not come cheap. Mossack Fonseca’s partner Ramses Owens quoted at least $17,500 a year.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>He recommended it to a US client, a hedge-fund CEO who was having problems with HSBC. She agreed.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>But who might agree to play this tricky role? The firm’s co-founder Ramón Fonseca had the answer – his former father-in-law Edmund Ward.</p>',
+						'<p>While asset managers do not own the companies in which they invest, they often exercise shareholders rights on behalf of clients to vote on board members and company policy issues. </p>',
 				},
 				{
 					role: 'inline',
 					data: {
-						alt:
-							'Some Mossack Fonseca clients used fake names, such as Harry Potter.',
-						caption:
-							'Some Mossack Fonseca clients used fake names, such as Harry Potter.',
-						credit:
-							'Photograph: Allstar/Warner Bros/Sportsphoto Ltd/Allstar',
+						alt: 'Fossil fuel holdings: State Street Corporation',
+						credit: 'Illustration: Guardian Design',
 					},
 					imageSources: [
 						{
@@ -4526,32 +3741,32 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=620&quality=85&auto=format&fit=max&s=6f988ded070e9b02d26d04a1f1a784d8',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=fc5a68494bb19069f16892bb53da486d',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e4aeaf521c1c5ce2ab3abf4041398a30',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=488ffd425fb6c864e7bd1a85f117e750',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=605&quality=85&auto=format&fit=max&s=9c06b71e741a079461c59dd545f125d3',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=00057343f4b441f17ec4fd3ded31c6c5',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=404aa7b95876e31887d2b1ca11d98853',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9a13bd1f3d4d38e746d4d516b9585090',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=445&quality=85&auto=format&fit=max&s=4a13c8d76a4c091cc8330d5b66277d3a',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=f4e783ef0074f593857cb9d93fc1322b',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f91b5d9f0ceccb61198603e2c6047f30',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3ef331dc12ebbd221f869988ebfa5c74',
 									width: 890,
 								},
 							],
@@ -4561,22 +3776,22 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=140&quality=85&auto=format&fit=max&s=7a10a3cc5eabd35f999177ca60714d38',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=140&quality=85&auto=format&fit=max&s=d72b77c46196bfdfab147497f85c3e59',
 									width: 140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=39726b2b154acd1838e4ff65fa3dc8dc',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=4cd08f1b10a940b7de42aad0ea8295e8',
 									width: 280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=120&quality=85&auto=format&fit=max&s=64546ba3c9f0808d66194fdd4065f48b',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=120&quality=85&auto=format&fit=max&s=9d8c16a53c595e23e399f079b2aefeb5',
 									width: 120,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=bb11e59a487b238d97b3c4f15d1fdaf8',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=131040d4b8496151b01c292472e119d4',
 									width: 240,
 								},
 							],
@@ -4586,52 +3801,52 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=380&quality=85&auto=format&fit=max&s=1104725375f7aefb0a2063e725f14fa2',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=380&quality=85&auto=format&fit=max&s=1b0bbfb6ec6cf3039230f9e78d09438e',
 									width: 380,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=8337040f89377b2791ca47136a560665',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=57c017b6e8745043e5f2f5a90ed7259b',
 									width: 760,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=300&quality=85&auto=format&fit=max&s=0929a674b315ebf8b816c338582831c7',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=300&quality=85&auto=format&fit=max&s=82b8f9f19a6dec9fe4da101eb36b9acc',
 									width: 300,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=5c4adb2beebc08cd7081d1fbe74a7cca',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=549610c66ab3ac6fc7d97d8ff524fc46',
 									width: 600,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=620&quality=85&auto=format&fit=max&s=6f988ded070e9b02d26d04a1f1a784d8',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=fc5a68494bb19069f16892bb53da486d',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e4aeaf521c1c5ce2ab3abf4041398a30',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=488ffd425fb6c864e7bd1a85f117e750',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=605&quality=85&auto=format&fit=max&s=9c06b71e741a079461c59dd545f125d3',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=00057343f4b441f17ec4fd3ded31c6c5',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=404aa7b95876e31887d2b1ca11d98853',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9a13bd1f3d4d38e746d4d516b9585090',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=445&quality=85&auto=format&fit=max&s=4a13c8d76a4c091cc8330d5b66277d3a',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=f4e783ef0074f593857cb9d93fc1322b',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f91b5d9f0ceccb61198603e2c6047f30',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3ef331dc12ebbd221f869988ebfa5c74',
 									width: 890,
 								},
 							],
@@ -4641,72 +3856,72 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1020&quality=85&auto=format&fit=max&s=019b508a53e39ab5c612a855fb60e405',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1020&quality=85&auto=format&fit=max&s=4143a8e44d3eb5c9415d9ac193a5f604',
 									width: 1020,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=ce9d25a31ad1edf5346c4d453f421ccf',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=8961bc23a493c4a83069dbdaea5ab81c',
 									width: 2040,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=940&quality=85&auto=format&fit=max&s=d930dde40b2eb94846e4c22aaa96de25',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=940&quality=85&auto=format&fit=max&s=d098e3468a4f85556060d92c6f15a7bb',
 									width: 940,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=61b0cc16d28c715929fbf25bbc08db9d',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=7a665b23c20e3c7b2c6e014cd2b682cf',
 									width: 1880,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=700&quality=85&auto=format&fit=max&s=f36357ba1f8119d0d1a72955288e3aff',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=c12e8c67b39c59b45e501c52830e09ae',
 									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=931b5cc72638f8e8beb08937d1b95ddb',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d947a94b22e035b407823a2c1a4558a2',
 									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=700&quality=85&auto=format&fit=max&s=f36357ba1f8119d0d1a72955288e3aff',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=c12e8c67b39c59b45e501c52830e09ae',
 									width: 700,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=931b5cc72638f8e8beb08937d1b95ddb',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d947a94b22e035b407823a2c1a4558a2',
 									width: 1400,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=660&quality=85&auto=format&fit=max&s=108a4d018575f1629d9ca327258fb2a2',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=660&quality=85&auto=format&fit=max&s=2b3eabd2c4f6ca196d0b09b71cb45f4a',
 									width: 660,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a876144097d7bfed3a7b6c57d6d8adea',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=7c049c1d46dbcdaba79ad4a5a3067fb3',
 									width: 1320,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=645&quality=85&auto=format&fit=max&s=61b3f71d68dfc216f13057b8b24907e6',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=2629105dc9f1018d66b6f81b88e5c7bc',
 									width: 645,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9d82e9ab5dd978b63840e5604b953d28',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=737e01f4d9e32d8f051d98996090d4ae',
 									width: 1290,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=465&quality=85&auto=format&fit=max&s=03f7bca02b5de93b5dda654038cac5cd',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0d05938976befd23759effb3a5abbca4',
 									width: 465,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1b0916eac64a002dccf3995226bd4f4e',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7cf97d29f1cf315ee0bc977ea687571a',
 									width: 930,
 								},
 							],
@@ -4716,32 +3931,32 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=620&quality=85&auto=format&fit=max&s=6f988ded070e9b02d26d04a1f1a784d8',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=fc5a68494bb19069f16892bb53da486d',
 									width: 620,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e4aeaf521c1c5ce2ab3abf4041398a30',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=488ffd425fb6c864e7bd1a85f117e750',
 									width: 1240,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=605&quality=85&auto=format&fit=max&s=9c06b71e741a079461c59dd545f125d3',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=00057343f4b441f17ec4fd3ded31c6c5',
 									width: 605,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=404aa7b95876e31887d2b1ca11d98853',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9a13bd1f3d4d38e746d4d516b9585090',
 									width: 1210,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=445&quality=85&auto=format&fit=max&s=4a13c8d76a4c091cc8330d5b66277d3a',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=f4e783ef0074f593857cb9d93fc1322b',
 									width: 445,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f91b5d9f0ceccb61198603e2c6047f30',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3ef331dc12ebbd221f869988ebfa5c74',
 									width: 890,
 								},
 							],
@@ -4751,72 +3966,72 @@ export const SpecialReport: CAPIType = {
 							srcSet: [
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1300&quality=85&auto=format&fit=max&s=ad2e23a031e0de3bf73ff5b68a358bb3',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1300&quality=85&auto=format&fit=max&s=256cb4d8eafdaf73f24c1242b81783b4',
 									width: 1300,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=4d9fb857c6a31d0e86fe5fc347049f9e',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b82dcaa95f09de44ec229acb9e1cadcf',
 									width: 2600,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1140&quality=85&auto=format&fit=max&s=6855447be94827c0377651ec38eb0fac',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1140&quality=85&auto=format&fit=max&s=b0505c1d0badb5209e78d8c5d888b48c',
 									width: 1140,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=887fa46d56ee49c133c6ca5f21330cda',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=1130f62482c8562afdf25d1a55664fbb',
 									width: 2280,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1125&quality=85&auto=format&fit=max&s=a1deb00af21bac95b20971a8269a0192',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1125&quality=85&auto=format&fit=max&s=45e3f142ea816c1d10fc761c54684641',
 									width: 1125,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e755b7c73c0aa19766c340546fcdc239',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e6c6a635f9cb30d93ea46616f578d8e6',
 									width: 2250,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=965&quality=85&auto=format&fit=max&s=0ae480fc2778700c4e34f5d55818ebf2',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=564ccad06ad32b498e00e8b57c52ba14',
 									width: 965,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=8486e34fd9ce3182765fdc530349176c',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=c7a44faee96fa295f58aa5550bfa1df6',
 									width: 1930,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=725&quality=85&auto=format&fit=max&s=48ef53e2949e209ff70bd697334e8693',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=a3f28bf3250d77cf6cbc7083378d9330',
 									width: 725,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=1c263e9405cfe5ff10b927486ce14fea',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=56b3be840b7a7ca33d80f003838e329b',
 									width: 1450,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=645&quality=85&auto=format&fit=max&s=61b3f71d68dfc216f13057b8b24907e6',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=2629105dc9f1018d66b6f81b88e5c7bc',
 									width: 645,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9d82e9ab5dd978b63840e5604b953d28',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=737e01f4d9e32d8f051d98996090d4ae',
 									width: 1290,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=465&quality=85&auto=format&fit=max&s=03f7bca02b5de93b5dda654038cac5cd',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0d05938976befd23759effb3a5abbca4',
 									width: 465,
 								},
 								{
 									src:
-										'https://i.guim.co.uk/img/media/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1b0916eac64a002dccf3995226bd4f4e',
+										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7cf97d29f1cf315ee0bc977ea687571a',
 									width: 930,
 								},
 							],
@@ -4829,69 +4044,58 @@ export const SpecialReport: CAPIType = {
 							{
 								index: 0,
 								fields: {
-									height: '1647',
-									width: '2745',
+									height: '1240',
+									width: '1240',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/2745.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1240.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '1647',
-									width: '2745',
+									height: '1240',
+									width: '1240',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/master/2745.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
+									height: '1000',
 									width: '1000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/1000.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1000.jpg',
 							},
 							{
-								index: 4,
+								index: 3,
 								fields: {
-									height: '300',
+									height: '500',
 									width: '500',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/500.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/500.jpg',
 							},
 							{
-								index: 5,
+								index: 4,
 								fields: {
-									height: '84',
+									height: '140',
 									width: '140',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb055678f11104d510fe0c4ca6f7c8134552bf53/0_150_2745_1647/140.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/140.jpg',
 							},
 						],
 					},
@@ -4901,2293 +4105,150 @@ export const SpecialReport: CAPIType = {
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Owens did not spell out the relationship, describing Ward, then in his early 80s, modestly as a “UK citizen residing in Panama since 50 years ago, engineer, entrepreneur”.</p>',
+						'<p>Disclosures for publicly available company reports show that from 2015 to 2019 Vanguard and BlackRock used their votes to frequently oppose efforts to improve climate-related financial disclosures.</p>',
+				},
+				{
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The investigation by the Guardian has found:</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>He turns up elsewhere in the files as the nominee director and “beneficiario” of several other companies.</p>',
+						'<ul> \n <li><p>Vanguard ($161.1bn), BlackRock ($87.3bn) and State Street ($38.3bn) oversee a combined $286.7bn of shares in oil, coal and gas companies through 1,712 funds. Their total combined portfolio is likely to be higher as the calculation excludes direct holdings and non-listed fund holdings.</p></li> \n <li><p>The potential CO<sub>2</sub> emissions from the investments have increased from 10.593 gigatonnes (Gt) to 14.283Gt since the Paris agreement, equivalent to 38% of global fossil fuel CO<sub>2</sub> emissions last year.</p></li> \n <li><p>BlackRock and Vanguard opposed or abstained on more than 80% of climate-related motions at FTSE 100 and S&amp;P 500 fossil fuel companies between 2015 and 2019, according to data provided by <a href="https://www.proxyinsight.com/about/overview/">ProxyInsight</a>.</p></li> \n <li><p>The big three are among a number of asset managers that offer “climate-friendly” and “sustainable” investment funds that have substantial holdings in fossil fuel companies.</p></li> \n</ul>',
 				},
 				{
 					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Amid tougher regulation, some rich clients were mistrustful of revealing their identities to anybody. They included Frederic Hottinger, the seventh generation of a venerable Swiss banking family.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The Hottingers had 11 Panamanian companies with Mossack Fonseca and were aghast when the names of these firms and their directors popped up on Google.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>An employee working for the Hottinger dynasty, complained. An internal email recorded: “This [the Google search result] was too much.” The employee explained how “paranoid the Europeans are about secrecy and now they do not feel safe with offshore companies because of the level of information required”.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Controversial clients</h2>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mossack Fonseca is entitled to rely on professional intermediaries. They conduct much of the due diligence on their offshore customers. Still, the Panamanian law firm retains some responsibilities. It’s obvious stuff – checking the identity and background of potential and existing clients; asking basic questions such as “what’s the source of your wealth”?</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The aim is to prevent money laundering, the financing of terrorism, and other serious crimes. <a href="https://www.theguardian.com/world/tax-havens" data-component="auto-linked-tag">Tax havens</a> such as Panama, Anguilla, and Samoa have all passed anti-money laundering laws; Mossack Fonseca is obliged to follow them, at least on paper.<br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The Panama files, however, reveal the company’s checks seem frequently flawed.</p>',
-				},
-				{
-					role: 'supporting',
-					data: {
-						alt:
-							'Files suggest rich individuals with ‘undeclared’ offshore bank accounts are afraid to get rumbled.',
-						caption:
-							'Files suggest rich individuals with ‘undeclared’ offshore bank accounts are afraid to get rumbled.',
-						credit: 'Photograph: Kacper Pempel/Reuters',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=620&quality=85&auto=format&fit=max&s=5fa301bfd15644dfa4242918b2af11ae',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c034213fa48e35b2d46992f041163211',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=605&quality=85&auto=format&fit=max&s=2fe24707617fbfbd8b98a8d20051b9b6',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=1ea07e08afbb9fa4c8959ef72741ba82',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=445&quality=85&auto=format&fit=max&s=b95d6f8c294d310e9b55594b49f3657e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e26d093150930b21c39929439a36fd23',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=140&quality=85&auto=format&fit=max&s=e2901f902a101a3e2ba32c27c3e51d5a',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=32cd5092ae69be1bd19d84a79609465b',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=120&quality=85&auto=format&fit=max&s=dfb85936ae317ef5dbcb7cdbcbaeac20',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=f3f91a9d83c2c9ad106ea6b62d285ce2',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=380&quality=85&auto=format&fit=max&s=caa9fccf9d6be3c9d4700f9ba932dec1',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=e687b913ce30b7e71b71fce8a041454a',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=300&quality=85&auto=format&fit=max&s=6dc4d6dd110b1f670034cd3595073647',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8fba64fbb598fc3b7025def28438b24e',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=620&quality=85&auto=format&fit=max&s=5fa301bfd15644dfa4242918b2af11ae',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c034213fa48e35b2d46992f041163211',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=605&quality=85&auto=format&fit=max&s=2fe24707617fbfbd8b98a8d20051b9b6',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=1ea07e08afbb9fa4c8959ef72741ba82',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=445&quality=85&auto=format&fit=max&s=b95d6f8c294d310e9b55594b49f3657e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e26d093150930b21c39929439a36fd23',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1020&quality=85&auto=format&fit=max&s=0faf9a9f0505eebf137b1dda9c750da3',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=69390ea23555b88a3f4c8d6b34435fe4',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=940&quality=85&auto=format&fit=max&s=6f1b41090cf12d29f3f66f3399149046',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=b992d1cf5ba053b570dd4887fbdc4b57',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=700&quality=85&auto=format&fit=max&s=9982b2bfde845714b6f99cb39250abb7',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8844d731a7a0a0b13cfc3aeaced38274',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=700&quality=85&auto=format&fit=max&s=9982b2bfde845714b6f99cb39250abb7',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8844d731a7a0a0b13cfc3aeaced38274',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=660&quality=85&auto=format&fit=max&s=2e70bdca0ff7d50ab05ea18497c10c30',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=57a4fb419dcdffcaca290f0fd69f768c',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=645&quality=85&auto=format&fit=max&s=5377e5f9c123a65cf88c51c445da1493',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5f971c8a6681222410f2d7cfa352f7fc',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=465&quality=85&auto=format&fit=max&s=9d6f5424b0cb4d8b22f4b94d95aea48e',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=92ebcba3b4323a54cc3c566fee48962d',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=620&quality=85&auto=format&fit=max&s=5fa301bfd15644dfa4242918b2af11ae',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c034213fa48e35b2d46992f041163211',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=605&quality=85&auto=format&fit=max&s=2fe24707617fbfbd8b98a8d20051b9b6',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=1ea07e08afbb9fa4c8959ef72741ba82',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=445&quality=85&auto=format&fit=max&s=b95d6f8c294d310e9b55594b49f3657e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e26d093150930b21c39929439a36fd23',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1300&quality=85&auto=format&fit=max&s=5c196a993aae6c8a7163d1fd4c8141b8',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=26ca8a2c9a5c884754012fe892742c17',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1140&quality=85&auto=format&fit=max&s=7baec81890511359a9b5e14d402abb2d',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3a950502a2287314b344b933a9cc4ecf',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1125&quality=85&auto=format&fit=max&s=0c4ba5e18be595a13796ba83f6f4fd91',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=40ce99adddba1e9ba068778c3669fe43',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=965&quality=85&auto=format&fit=max&s=1fd05c1b59ec397dee15bfd7b50a247b',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=15747407193d1e471ee49d3af48b6dc6',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=725&quality=85&auto=format&fit=max&s=4819d714406431e1095f9a01091e065c',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=cd60735f196b01a733d95ae5ebfbedb0',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=645&quality=85&auto=format&fit=max&s=5377e5f9c123a65cf88c51c445da1493',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5f971c8a6681222410f2d7cfa352f7fc',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=465&quality=85&auto=format&fit=max&s=9d6f5424b0cb4d8b22f4b94d95aea48e',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=92ebcba3b4323a54cc3c566fee48962d',
-									width: 930,
-								},
-							],
-						},
-					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1991',
-									width: '3317',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/3317.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1991',
-									width: '3317',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/master/3317.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/091fed82b42e9209ff357608c97561bfa17ba94a/44_0_3317_1991/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mossack Fonseca has its own compliance department. Typically, though, its investigation into a client’s background is perfunctory, done via Google, the FBI’s website and an online database. If the searches turn up an adverse finding the company is meant to resign as agent. Sometimes this happens, often it does not. Months and even years went by without action after Mossack Fonseca discovered a customer was a villain.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The fear may have been that if you ask too many intrusive questions a client will find a different and more accommodating lawyer.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In 2010, Mossack Fonseca asked to see a copy of the passport of Sheikh Abdulaziz al-Thani, son of Qatar’s billionaire eighth emir.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Not an unreasonable request. But the sheikh’s Jersey-based trust manager Paul Baudet was having none of it. He shot back: “You are not going to get the passport.” He did not have any utility bills, “since all his bills are paid by the government”. Also, his Highness was “hard to get hold of and very private”. In short: get lost.<br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>On another occasion, compliance wanted to see the passport of the notorious Russian oligarch German Khan. Khan did not supply it. (According to US diplomatic cables, the billionaire was a fan of the Godfather and would turn up to business meetings armed with a pistol.) Dieter Buchholz, Mossack Fonseca’s Zurich boss, sent an exasperated note to his colleagues in Panama, writing: “What shall we do, shoot the client? Let’s assume it is the person you are looking for? Shall we inform the police? Awaiting your comments. Kind regards, Dieter.”</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>One shocking example contained in the papers shows how Mossack Fonseca incorporated three companies for Andrew Mogilyansky, a wealthy Russian-American businessman. In 2014, the firm’s compliance department belatedly found out that Mogilyansky was a convicted paedophile.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Between 2003 and 2004, according to US court papers, he had sex with 13- and 14-year-old girls taken from orphanages and metro stations in St Petersburg. Prosecutors said the expenses from his Moscow trips were booked via his Mossack Fonseca company, IFEX Global Ltd.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mogilyansky was arrested in 2008 and jailed for eight years in 2009.<br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Only in 2014 did Mossack Fonseca notice something was amiss. It sent a letter to USA Corporate Services, a New York intermediary used by Mogilyansky, saying it had found adverse information during a check. The firm’s general manager said it had “lost touch” with Mogilyansky.</p>',
-				},
-				{
-					role: 'inline',
-					data: {
-						alt: 'Andrew Mogilyansky.',
-						caption: 'Andrew Mogilyansky.',
-						credit:
-							'Photograph: J Vespa/WireImage for Elara Diamond',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=620&quality=85&auto=format&fit=max&s=e6f336d7d88c26c478ffac023734a071',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3658c3b78a76e89f0da83f5bbdccdf92',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=605&quality=85&auto=format&fit=max&s=18887363191d934fd99acd75abff3e1c',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=e1080ef3b25e927bfd1918d47a8db9d0',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=445&quality=85&auto=format&fit=max&s=028a428c18dce0bc49db9e7ef47e92b7',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5bdc5248e313b5547e8cb17ff76fadf0',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=140&quality=85&auto=format&fit=max&s=456d3187f9807f1a283279e5a0ad4f22',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=ddf7215374af0ad8636f2cea46a05b16',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=120&quality=85&auto=format&fit=max&s=2f4d4d6d06c3b3043c7550bda74ca45e',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=d3bdbff31f640907ab73d9d945ade44e',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=380&quality=85&auto=format&fit=max&s=0925e22134bbcce814f5092e346d3c41',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=47e39dd7d09212a1b4a570d7e14458c4',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=300&quality=85&auto=format&fit=max&s=01b2379ebe0d12094e8540f959ace1cd',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=2185e8f363d7be3979bdc5f7f50ec8c6',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=620&quality=85&auto=format&fit=max&s=e6f336d7d88c26c478ffac023734a071',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3658c3b78a76e89f0da83f5bbdccdf92',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=605&quality=85&auto=format&fit=max&s=18887363191d934fd99acd75abff3e1c',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=e1080ef3b25e927bfd1918d47a8db9d0',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=445&quality=85&auto=format&fit=max&s=028a428c18dce0bc49db9e7ef47e92b7',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5bdc5248e313b5547e8cb17ff76fadf0',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1020&quality=85&auto=format&fit=max&s=08f5466234a635f0b0ff83cf0de4fb01',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=bd7467700a5c1053bc95ce4bb76555e9',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=940&quality=85&auto=format&fit=max&s=0ec5e5a8f5e1866c14da49ff5e4794e6',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=e95653e60b47d4b4d7749216039f4110',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=700&quality=85&auto=format&fit=max&s=761249e800c06a9d3488fdf2d8d2793e',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=68e570ea3aff8c154c76b01061c03192',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=700&quality=85&auto=format&fit=max&s=761249e800c06a9d3488fdf2d8d2793e',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=68e570ea3aff8c154c76b01061c03192',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=660&quality=85&auto=format&fit=max&s=6e5221152ccf23a9706ccff719a8f42a',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ab2974229fbbb6811a40051b8446dcad',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=645&quality=85&auto=format&fit=max&s=907d329ad78ee330e1f51cb019e7c83e',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c45c2398d5724e16a9cdf2d460c7f3a5',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=465&quality=85&auto=format&fit=max&s=8dfd77a8f3dc2565038954434ea41284',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b891ef2a1248cf823ed6a43060ae46d5',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=620&quality=85&auto=format&fit=max&s=e6f336d7d88c26c478ffac023734a071',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3658c3b78a76e89f0da83f5bbdccdf92',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=605&quality=85&auto=format&fit=max&s=18887363191d934fd99acd75abff3e1c',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=e1080ef3b25e927bfd1918d47a8db9d0',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=445&quality=85&auto=format&fit=max&s=028a428c18dce0bc49db9e7ef47e92b7',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5bdc5248e313b5547e8cb17ff76fadf0',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1300&quality=85&auto=format&fit=max&s=b84625d6c28004dca2e7e97de5d31cc2',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=46dc1086fba81a58df9f324668182ac8',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1140&quality=85&auto=format&fit=max&s=c15a4576b6d801cf6e885c423db8a79c',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=22bd46a5e5c2e8bcc4f91be51fc16348',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1125&quality=85&auto=format&fit=max&s=d450a492e8f4003e7a8cad3b3b9d4a6e',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=b7e4c767cd9a976fca2eae54c8825d88',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=965&quality=85&auto=format&fit=max&s=f4b357e953b05d588a2d761f1b0ea51a',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=0506d49e3379cfe2463fc515b6245e40',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=725&quality=85&auto=format&fit=max&s=07de974bce2c04401107f086c3a58cf0',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=6de5ac8d8c71dd13e67260c6758325b9',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=645&quality=85&auto=format&fit=max&s=907d329ad78ee330e1f51cb019e7c83e',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c45c2398d5724e16a9cdf2d460c7f3a5',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=465&quality=85&auto=format&fit=max&s=8dfd77a8f3dc2565038954434ea41284',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b891ef2a1248cf823ed6a43060ae46d5',
-									width: 930,
-								},
-							],
-						},
-					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '833',
-									width: '1390',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/1390.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '833',
-									width: '1390',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/master/1390.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cb2fc7ccd72526583405ad8297336b25ed3f4172/1610_279_1390_833/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Amazingly, USA Corporate Services concluded there was nothing much wrong. It wrote that there was no evidence that Mogilyansky had used his company for anything other than the legitimate business purpose.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The firm said in an email: “Aside from the emotionally charged allegations to which the client seems to have confessed, there are no other allegations of wrongdoing related to his companies.” Nevertheless, the firm acknowledged there was a reputational cost to doing business with Mogilyansky and recommended Mossack Fonseca dump him.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>By April 2015, however, the firm still had not resigned as the registered agent. Nor, seemingly, had it reported the case to the relevant financial authorities in the US. As of 2016, the company – registered in the BVI with an address in the sleepy Swiss municipality of Meggen – still appears to be active.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Now released from prison, Mogilyansky denies he ever ran a prostitution ring and says that Putin’s spy agencies framed him because of his political opposition to the Kremlin. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>USA Corporate Services also denied wrongdoing. It said it discovered Mogilyansky’s conviction in 2014. It added: “The news of [his] activities were a shock to us, and finding out what he did was frankly disgusting. Compliance dept[artment]s rarely are interested in emotional discussions, they just want the facts.” </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mossack Fonseca says it conducts due diligence on all its clients, old and new, and refuses to work with any who refuse to provide the right documents. It also said it had hired an additional 26 people to its compliance department in the last 18 months.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>When the authorities did pursue Mossack Fonseca over a client, the firm went into full-blown panic mode.<br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In 2013, the BVI’s financial services commission discovered that the beneficial owner of Pan World Investments, incorporated by the company, was <a href="https://www.theguardian.com/world/2015/oct/12/egypt-court-hosni-mubarak-sons-gamal-alaa-release-corruption-conviction">Alaa Mubarak</a>, the son of Egypt’s ousted president Hosni Mubarak.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Two years earlier the EU had imposed sanctions on father and son, freezing all their assets. Mubarak Jr had given an address in London.</p>',
-				},
-				{
-					role: 'inline',
-					data: {
-						alt:
-							'Hosni Mubarak’s son Alaa during his 2013 retrial in Cairo.',
-						caption:
-							'Hosni Mubarak’s son Alaa during his 2013 retrial in Cairo.',
-						credit: 'Photograph: Khaled Desouki/AFP/Getty Images',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=620&quality=85&auto=format&fit=max&s=8ce75cc0f9c52402dc8ece9d26f8b298',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=df3b352d6397d66fd10f8383488434ff',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=605&quality=85&auto=format&fit=max&s=98a1250063a1dfbd04e695392628e8d5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b5ced93c32c1874c6c9f230b0cf5a1fb',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=445&quality=85&auto=format&fit=max&s=06615c34b70bdeb2455e19296b1dfb42',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e331914d0bb025e1beb2317fba0eef52',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=140&quality=85&auto=format&fit=max&s=a1da9b8991329815bedd74e942670695',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b7a17b5499ff60c46e81c34e1429afa7',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=120&quality=85&auto=format&fit=max&s=6d60ae8d4ba412fcf1e8968ef6ec4ecd',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=99601ffa0ab3880c3831ff64e0827952',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=380&quality=85&auto=format&fit=max&s=b25bbee72955178a59e39db03f968fbf',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=8b5dbec1c7117ab1a2d6f0a5d19db2fb',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=300&quality=85&auto=format&fit=max&s=17da0b496cd97395f11a1ff737a65c53',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=d3620df0e9f2ce294f6938d70859e240',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=620&quality=85&auto=format&fit=max&s=8ce75cc0f9c52402dc8ece9d26f8b298',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=df3b352d6397d66fd10f8383488434ff',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=605&quality=85&auto=format&fit=max&s=98a1250063a1dfbd04e695392628e8d5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b5ced93c32c1874c6c9f230b0cf5a1fb',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=445&quality=85&auto=format&fit=max&s=06615c34b70bdeb2455e19296b1dfb42',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e331914d0bb025e1beb2317fba0eef52',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1020&quality=85&auto=format&fit=max&s=b43821a7f68570a39796ffd7b484aba7',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b34dda784857d2e8720250450737f522',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=940&quality=85&auto=format&fit=max&s=a496bee5b89e29a0406a4cf8d44a686a',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d7e2dbf5c6a3e5832fa66570cfc70d3d',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=700&quality=85&auto=format&fit=max&s=b66634535fad4d4e65dab90c13a2f60c',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=20399498f231094c8873b97969f9a069',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=700&quality=85&auto=format&fit=max&s=b66634535fad4d4e65dab90c13a2f60c',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=20399498f231094c8873b97969f9a069',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=660&quality=85&auto=format&fit=max&s=ad369b88bdf559e8ce719df8ed7ddb0c',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=dd2ab003ae98e1be65183fd663a0fef5',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=645&quality=85&auto=format&fit=max&s=a66406f54b1f2ded93c2cb2ea8039ac5',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=70d03f84a5c9a75683d6e3e85a9ccefd',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=465&quality=85&auto=format&fit=max&s=c6e411c54e418f80d52939853d61a7ab',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=9460486078f05597d8ad0ba7cc40a5a1',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=620&quality=85&auto=format&fit=max&s=8ce75cc0f9c52402dc8ece9d26f8b298',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=df3b352d6397d66fd10f8383488434ff',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=605&quality=85&auto=format&fit=max&s=98a1250063a1dfbd04e695392628e8d5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b5ced93c32c1874c6c9f230b0cf5a1fb',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=445&quality=85&auto=format&fit=max&s=06615c34b70bdeb2455e19296b1dfb42',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e331914d0bb025e1beb2317fba0eef52',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1300&quality=85&auto=format&fit=max&s=49407df1527c5701928b22b8f3b782f6',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=9db6d335c1ce958a494c4bd29a141a6d',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1140&quality=85&auto=format&fit=max&s=f6d34383976e83f5dcead03c219027fa',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=6caf93827c41f98b5dd7a3c2b8c027de',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1125&quality=85&auto=format&fit=max&s=c90e1d8a2699b775b809528ae75dbbcd',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=c8682763b8fe47e48d552ab53ef16417',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=965&quality=85&auto=format&fit=max&s=8db19580c1ff6a694b34bba337321451',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=181cf6b014d1f74b3401f56b713075c5',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=725&quality=85&auto=format&fit=max&s=d632274b3efdc0d802e9e63cb847c4ef',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=fbbb245f79172dfaae34e1aed2c312a6',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=645&quality=85&auto=format&fit=max&s=a66406f54b1f2ded93c2cb2ea8039ac5',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=70d03f84a5c9a75683d6e3e85a9ccefd',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=465&quality=85&auto=format&fit=max&s=c6e411c54e418f80d52939853d61a7ab',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=9460486078f05597d8ad0ba7cc40a5a1',
-									width: 930,
-								},
-							],
-						},
-					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1527',
-									width: '2544',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/2544.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1527',
-									width: '2544',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/master/2544.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8847031c80b085081c29c55a13c6cf3fcda10507/1950_198_2544_1527/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The firm, a family investment fund, had nearly $1bn in assets. Why, the BVI wanted to know, had Mossack Fonseca slumbered through the Arab spring and continued to act for Mubarak?</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Mossack’s corporate lawyers swapped frantic emails.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“The reality is that we didn’t identify the BO [beneficial owner] since the beginning [as we should have],” one of its lawyers wrote from Panama.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The firm decided to admit nothing. It blamed Credit Suisse, which had introduced Mubarak in the first place. The bank was at fault, it said. The regulator disagreed, and fined Mossack Fonseca $37,500 for due diligence failings.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The story had a postscript. In 2014, Credit Suisse got in touch. It wanted to reactivate Pan World Investments. Despite reservations, Mossack Fonseca agreed. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The firm points out it has not been sued or accused of wrongdoing by any court in the world and has operated beyond reproach for 40 years.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>‘We created a monster’</h2>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>As Ramón Fonseca tells it, his law firm started from humble beginnings. After graduating from law at Panama University, Fonseca spent six years working for the UN in Geneva. When he returned to Panama City, Fonseca launched his own legal business, with just one secretary, in 1977. He grabbed his suitcase and hit the road. He went to Switzerland – talking to clients and potential clients – and to China. Later the same year, he joined forces with another ambitious German-Panamanian lawyer, Jürgen Mossack.</p>',
-				},
-				{
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						'Putin dismisses Panama Papers as an attempt to destabilise Russia',
+						'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					url:
-						'http://www.theguardian.com/news/2016/apr/07/putin-dismisses-panama-papers-as-an-attempt-to-destabilise-russia',
+						'https://interactive.guim.co.uk/uploader/embed/2019/10/index-html-2-zip/giv-3902aB667jcgq7fB/',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>At the time, offshore companies were entering a golden age. Growth in global trade, increased international financial transactions and the dissolution of empire all contributed to this giddy boom. Countries signed double taxation treaties with each other: if a company paid tax in one jurisdiction it was unreasonable to expect it to pay again in a second territory. This swiftly led to what is called transfer pricing: with profits booked in low-tax territories and losses shifted to high-tax jurisdictions.</p>',
+						'<p>BlackRock, Vanguard and State Street did not challenge the findings.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Ultimately, it also led to double non-taxation, with companies shifting all of their profits offshore. </p>',
+						'<p>They told the Guardian they prioritised private engagements with company boards, where the climate crisis was regularly discussed. They said they had increased the size of their teams responsible for investment stewardship, opting to use their votes as a final resort.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Mossack’s backstory, meanwhile, was striking. In 1939, his father Erhard joined the Hitler youth and later fought with the Waffen-SS. In March 1945, US forces captured him on the western front. He was sent to a PoW camp, escaped and was rearrested in 1946 in Germany, still apparently spouting Nazi views.</p>',
+						'<p>Vanguard said it neither managed the companies in which it invested nor sought to influence their business strategy. “As a steward of lifetime savings for more than 20 million people around the world, and a practically permanent investor in more than 10,000 companies, Vanguard is concerned about the long-term impact of climate risk,” a spokesman said.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Jürgen was born two years later. At the age of 13, he moved with his family to the US and then to Panama where he studied law in Panama City before working in London between 1975-77 and then teaming up with Fonseca.</p>',
+						'<p>“While voting at shareholder meetings is important … it is only one part of the larger corporate governance process. We regularly engage with companies on our shareholders’ behalf and believe that engagement and broader advocacy, in addition to voting, can effect meaningful changes that generate long-term value for all shareholders.”</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Their practice, Mossack Fonseca &amp; Co, got bigger. In a 2008 TV interview, Fonseca said: “Together, we created a monster.”</p>',
+						'<p>BlackRock said it “offers investors a wide range of environmentally sustainable investment options … [and] is also a leading investor in renewable power generation globally. Our award-winning climate research helps investors understand and mitigate the impact of climate change on their portfolios.”</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>The monster took advantage of Panama’s lax corporate laws. It is entirely legal to create joint stock companies where owners could hide their identities. These offshore structures often involved opaque multiple firms: known in the trade as layering. These structures were perfect for money laundering. When the US invaded Panama in 1989, arresting Manuel Noriega, investor confidence was shaken. Mossack Fonseca adroitly shifted incorporations from Panama to the BVI, which exploded as an offshore centre.</p>',
+						'<p> State Street said: “If an investor wants to buy an ETF [exchange-traded fund] that tracks the FTSE 100, we would purchase the shares (proportionately) of all the companies in that FTSE 100 index in order to meet the objective of that strategy. That will today undoubtedly include energy companies.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>The BVI had another big and legitimate advantage for risk-averse clients: a British legal system, answerable to the high court in London.</p>',
+						'<p>“We do not proactively determine whether to exclude a particular company or sector since it would be inconsistent with the stated ETF objective. If an investor did want a strategy that considered climate issues or other ESG [environmental, social and governance] factors, that would be a different product with a different index; we can provide that too.”</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Over the years the company built up impeccable connections. From the 1990s, Fonseca was active in politics. By the noughties he was minister counsellor to Panama’s then president Ricardo Martinelli.</p>',
-				},
-				{
-					role: 'supporting',
-					data: {
-						alt: 'Panama’s former president Ricardo Martinelli.',
-						caption:
-							'Panama’s former president Ricardo Martinelli.',
-						credit: 'Photograph: Johan Ordonez/AFP/Getty Images',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=620&quality=85&auto=format&fit=max&s=3ccede93a308608677478396dd7a63e7',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ab1b6ad04ff17d7f4d97372f5d954690',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=605&quality=85&auto=format&fit=max&s=d1112f38999d9d4286d678d63d3990d9',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=47405964b25dd50f624605ac82a4684f',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=445&quality=85&auto=format&fit=max&s=10e1429fa225bae3c74a75ed0aa67624',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c7cb392538c37709c2bc0ad3bec82ffc',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=140&quality=85&auto=format&fit=max&s=487b50fc64cc7f323d4eae2d109f14c9',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=37e079533c4093dc61d4845656cadb69',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=120&quality=85&auto=format&fit=max&s=94685bedbebfb3f7ec105d4a3dced0cf',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=fae7139e64ddf804397f897d0f2a4f85',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=380&quality=85&auto=format&fit=max&s=85a45bfd9ffd68f6125b102ef742d161',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=9be3549c6f64917199f8803445e07077',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=300&quality=85&auto=format&fit=max&s=769741f7aaaaa81709ac74517f2be512',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=739517304cd27d8d2a59065588358d6a',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=620&quality=85&auto=format&fit=max&s=3ccede93a308608677478396dd7a63e7',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ab1b6ad04ff17d7f4d97372f5d954690',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=605&quality=85&auto=format&fit=max&s=d1112f38999d9d4286d678d63d3990d9',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=47405964b25dd50f624605ac82a4684f',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=445&quality=85&auto=format&fit=max&s=10e1429fa225bae3c74a75ed0aa67624',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c7cb392538c37709c2bc0ad3bec82ffc',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1020&quality=85&auto=format&fit=max&s=13fa6059d74535d1092eea148369c863',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=8829ff88725bdd0d728e5aaf73a2f49f',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=940&quality=85&auto=format&fit=max&s=26b88fefd0aefe41309e9c120d7a5933',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=af4be64a40e20258a5cead9de3d85e2b',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=700&quality=85&auto=format&fit=max&s=f1216e80897b6e6bc0cbf5c4dbeea7e7',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d5f4f11e8d9dfb8913744c674598fc75',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=700&quality=85&auto=format&fit=max&s=f1216e80897b6e6bc0cbf5c4dbeea7e7',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d5f4f11e8d9dfb8913744c674598fc75',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=660&quality=85&auto=format&fit=max&s=682858e43e3edd833cccb01f962105b0',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=83144b213fe80fb32e6ed51eab2e0c4e',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=645&quality=85&auto=format&fit=max&s=a8b5892b1798fe556a79689bed32e471',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9291c4b47a9a0ff2e61615c06d430aea',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=465&quality=85&auto=format&fit=max&s=fca07724329a1bcbc93c33fad422075b',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0df87d1d4b08e67218b716a9e1898725',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=620&quality=85&auto=format&fit=max&s=3ccede93a308608677478396dd7a63e7',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ab1b6ad04ff17d7f4d97372f5d954690',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=605&quality=85&auto=format&fit=max&s=d1112f38999d9d4286d678d63d3990d9',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=47405964b25dd50f624605ac82a4684f',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=445&quality=85&auto=format&fit=max&s=10e1429fa225bae3c74a75ed0aa67624',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=c7cb392538c37709c2bc0ad3bec82ffc',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1300&quality=85&auto=format&fit=max&s=08a0d1ab7ce02d1a4903ee0feaa5c2ba',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e746649099114f983b2907b5f0d18339',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1140&quality=85&auto=format&fit=max&s=6e25bd999729887999cf21560c483322',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=8d745b0b4b12a0d70b54aea3b4cdaea1',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1125&quality=85&auto=format&fit=max&s=250eb34c6335f594d82d7c045b7b49a0',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=129544e0cb16f52e621941121dfd8531',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=965&quality=85&auto=format&fit=max&s=51969632646065176467b835e3633982',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a58a0905b6c4a5b7d9e6b3e4622bf264',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=725&quality=85&auto=format&fit=max&s=df6a7099e7f7a1cf87ac537fa8648e90',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=e693b6f5ea3705ed7539c51d4dc26429',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=645&quality=85&auto=format&fit=max&s=a8b5892b1798fe556a79689bed32e471',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9291c4b47a9a0ff2e61615c06d430aea',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=465&quality=85&auto=format&fit=max&s=fca07724329a1bcbc93c33fad422075b',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0df87d1d4b08e67218b716a9e1898725',
-									width: 930,
-								},
-							],
-						},
-					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '365',
-									width: '609',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/609.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '365',
-									width: '609',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/master/609.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/500.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bed4dc1a9089448b1215bffe6fc9a6f15016bc64/47_223_609_365/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
+						'<p>Asset managers are increasingly finding themselves at the heart of social and environmental issues, and corporate governance experts have <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3282794">raised concerns</a> about conflicts of interest in their business models.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>He is close to Panama’s current president, Juan Carlos Varela, and part of his informal kitchen cabinet.</p>',
+						'<p>Campaigners are demanding asset managers vote out company directors who are not deemed to be taking sufficient action.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p> “I communicate a lot with him [the president] through blackberry and WhatsApp,” Fonseca said in a TV interview, adding: “We are friends first and then fellow politicians.” Fonseca drops into weekly cabinet meetings by helicopter. Mossack, meanwhile, advised Varela when the latter was foreign minister.</p>',
+						'<p>In June, the London-based Legal &amp; General, formerly a top 20 investor in ExxonMobil, announced it was selling a $300m stake in the company and would use remaining shares to vote against the chief executive, Darren Woods.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Tax avoidance might seem, to many, an immoral activity. But the professionals who make it possible enjoy surprising support in Washington from rightwing libertarian lobbyists. One, the Center for Freedom and Prosperity (CF&amp;P), promotes what it calls “tax competition”. Its main enemy is the Paris-based OECD – “a bunch of crazy European socialists”, in the words of the group’s founder Daniel J Mitchell. In 2012, Mitchell’s colleague Andy Quinlan sent an email to Mossack’s daughter Jennifer, who was working at her father’s firm. Quinlan was visiting Panama and wanted to drop by.<br></p>',
+						'<p>But environmental shareholder proposals face increasing challenges from the management of fossil fuel companies, which are being sustained by the American regulator, the Securities and Exchange Commission. The SEC declined to comment.</p>',
 				},
 				{
 					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Quinlan offered to brief her on “what CF&amp;P is doing in Washington” and “the current legislative climate on offshore tax and information exchange schemes”.</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The lobbyist worked with Mossack following the OECD’s bombshell report in 2000. It featured a blacklist of 35 tax havens and threatened measures against jurisdictions that failed to clean up their act. That August, Mossack warmly received Quinlan. “I can coordinate a discussion group with our attorneys,” the reply read. </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>There were other forums where rich people averse to paying government taxes could meet and exchange views.</p>',
-				},
-				{
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						"Mossack Fonseca's role in fight over painting stolen by Nazis",
+						'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					url:
-						'http://www.theguardian.com/news/2016/apr/07/how-mossack-fonseca-offshore-helped-fight-modigliani-painting-stolen-nazis-panama-papers',
+						'https://interactive.guim.co.uk/uploader/embed/2019/10/index-html-zip/giv-3902IuFhH1AZI8qy/',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>In 2008, Ramses Owens, one of the law firm’s partners took part in a “wealth symposium” at Panama City’s Sheraton hotel.</p>',
+						'<p>In April, ExxonMobil shareholders were denied a vote on whether the company should set targets for cutting greenhouse gas emissions by the SEC, which called the proposal an attempt to “micromanage” the company.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>According to its brochure, the annual event brought together “33 leading investment, tax, privacy and asset protection experts from Europe, Asia and the Americas”. The brochure, aimed at US citizens unsettled by Barack Obama’s recent election to the White House, described Panama as a “489-year-old colonial city and modern, world-class asset haven on the shores of the Caribbean”.</p>',
+						'<p>Data for the 2019 season of annual general meetings for shareholders, provided by Institutional Shareholder Services, shows that only a quarter of proposals made it to a vote at companies in the US, with 79 of the 105 motions either withdrawn or omitted.</p>',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.QABlockElement',
+					html:
+						'<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
+					id: 'e182ee5f-c378-4474-b7da-79f6b0a671b3',
+					title: 'What is the polluters project?',
+					credit: '',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>The blurb for Owens’s presentation read: “Secure your wealth with an 82-year-old proven, virtually 100% courtroom-proof structure. This fascinating structure has managed to evade the slickest attorneys’ tricks and protect the wealth of individuals worldwide for the last eight decades.” Other adverts were similarly brazen. A talk by Colin Bowen, an offshore insurance provider based on the Isle of Man, read: “How to stiff contingency lawyers, unscrupulous creditors and greedy ‘exes’ – all with this one savvy vehicle. This off-the-beaten-path structure does all that … and defers taxes. It’s perfect for beating wealth leeches at their own game.”</p>',
+						'<p>Despite setbacks, other proposals and engagements by asset managers have been more successful. In an industry first last year, intense pressure from shareholders forced Royal Dutch Shell to set carbon emission targets linked to executive pay. The decision was backed by Climate Action 100+, a group of $35tn investors who are pushing fossil fuel companies to react to the crisis.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Ironically, the biggest threat to offshore buccaneers like Mossack Fonseca came not from government “wealth leeches” but from the inside. In 2013, the International Consortium of Investigative Journalists (ICIJ) disclosed details of 130,000 offshore accounts. Its leak included 2.5m secret records. One panicked client emailed Mossack Fonseca to seek reassurance that his private data stored on the island of Samoa was safe? The law firm assured him there was nothing to worry about. The situation was serious, it said, but there was no way his name might get out.</p>',
-				},
-				{
-					role: 'showcase',
-					data: {
-						alt:
-							'Lightning in Panama City. The Panama Papers leak has rocked the world of offshore secrecy.',
-						caption:
-							'Lightning in Panama City. The Panama Papers leak has rocked the world of offshore secrecy.',
-						credit: 'Photograph: Marcos Delgado/EPA',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=620&quality=85&auto=format&fit=max&s=0edddacdc06c91633817889c1b6c37ae',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3cd6ac23a9dfb83a7ba37f4dc6d1a5aa',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=605&quality=85&auto=format&fit=max&s=48945bdceb4e960bd0573cb8349cead1',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=222319ce01dac3ceabf35b776eac74da',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=445&quality=85&auto=format&fit=max&s=6f9d2b4c33e555b4a1265132af9d46f4',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3387bdf1ebb19ff8983a9c08ec38a5ee',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=140&quality=85&auto=format&fit=max&s=6e725f1840bb91e9e2802bb803d676d8',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f133a77c512387b4e0516755c95bc2a8',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=120&quality=85&auto=format&fit=max&s=8be40045528a9b9a74d7bec4fb4e0429',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=9b62a1939cabc384f02f1ab2c099db9b',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=380&quality=85&auto=format&fit=max&s=c33a09335a0fdbc5264bd570efde6e03',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=8ac54abee0d63c5477151a8782912ad3',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=300&quality=85&auto=format&fit=max&s=5e3b5a0bba3e4713fd884da33c8f3cca',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=f09de212c897ba89b0b27d199e35b428',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=620&quality=85&auto=format&fit=max&s=0edddacdc06c91633817889c1b6c37ae',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3cd6ac23a9dfb83a7ba37f4dc6d1a5aa',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=605&quality=85&auto=format&fit=max&s=48945bdceb4e960bd0573cb8349cead1',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=222319ce01dac3ceabf35b776eac74da',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=445&quality=85&auto=format&fit=max&s=6f9d2b4c33e555b4a1265132af9d46f4',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3387bdf1ebb19ff8983a9c08ec38a5ee',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1020&quality=85&auto=format&fit=max&s=ca05e1472f75c4a0ce34c04916aa3101',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=c0aac1f5f6f20d2dda9fa5b9024d02c2',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=940&quality=85&auto=format&fit=max&s=d1acffa84213d69def1866df141736aa',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=e592ed1ba52558e9182a11aef299f426',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=700&quality=85&auto=format&fit=max&s=61852aa5b38e9912fb07d6b46e379253',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7f7e75f9f7850d39085d72beefe29d96',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=700&quality=85&auto=format&fit=max&s=61852aa5b38e9912fb07d6b46e379253',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7f7e75f9f7850d39085d72beefe29d96',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=660&quality=85&auto=format&fit=max&s=65fd13d91f5a1867848833ec2da0974b',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=b858a84d099a5d48421db3fb92c4cb57',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=645&quality=85&auto=format&fit=max&s=0c4b3a8484749f836d845cc7d9ddfbea',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5991800f8d97b8aa19bfb7778098b85a',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=465&quality=85&auto=format&fit=max&s=7853e9af973142dcc5906548cd3bdd8e',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6613a1b471916c77a704c456cc1e030f',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=620&quality=85&auto=format&fit=max&s=0edddacdc06c91633817889c1b6c37ae',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3cd6ac23a9dfb83a7ba37f4dc6d1a5aa',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=605&quality=85&auto=format&fit=max&s=48945bdceb4e960bd0573cb8349cead1',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=222319ce01dac3ceabf35b776eac74da',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=445&quality=85&auto=format&fit=max&s=6f9d2b4c33e555b4a1265132af9d46f4',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3387bdf1ebb19ff8983a9c08ec38a5ee',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1300&quality=85&auto=format&fit=max&s=04b28706681aa26a7046fae4428aff5f',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=c5b37da2b1aea88c6f75bd6dedabbad5',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1140&quality=85&auto=format&fit=max&s=c695632dbd54187a560fd5a0df365130',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=5c30b4749b9d259c62aca5435bdaf647',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1125&quality=85&auto=format&fit=max&s=fdda496720057c99075b5c3db7a35c97',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=fab9cb87dce4d3749a27f39f28e065b5',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=965&quality=85&auto=format&fit=max&s=32910732abf83e96877ac74c9fc0565e',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=7e74be8edbcdf54c7193c5ce0774e12e',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=725&quality=85&auto=format&fit=max&s=19f99009eb6e6940c68eef7c34b77869',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=ea3f8f89efb23998a3f4b3df1329392c',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=645&quality=85&auto=format&fit=max&s=0c4b3a8484749f836d845cc7d9ddfbea',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5991800f8d97b8aa19bfb7778098b85a',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=465&quality=85&auto=format&fit=max&s=7853e9af973142dcc5906548cd3bdd8e',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6613a1b471916c77a704c456cc1e030f',
-									width: 930,
-								},
-							],
-						},
-					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/2000.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/master/2000.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/58ccf98feff7adfc22d8f9468a71cca288009877/0_100_2000_1200/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
+						'<p>Many pension funds and asset managers support schemes to improve information about how climate-critical companies are responding to environmental concerns, including the Transition Pathway Initiative, which grades the boards of fossil fuel, energy and transport companies on their response.</p>',
 				},
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>The email added: “Our commitment to our clients’ privacy has always been paramount, and in this regard your confidential information is stored in our state-of-the-art data centre, and any communication with our global network is handled through an encryption algorithm that complies with the highest world-class standards.” It stressed: “Documents in hard copy are filed in our warehouse in Panama which is under 24/7 custody.”</p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Still, <a href="https://www.theguardian.com/news/2016/apr/04/uk-tax-officials-hmrc-seek-access-to-huge-leak-of-mossack-fonseca-papers">Mossack Fonseca</a> was soon caught up in another embarrassing leak. In February 2015, records from the company’s Luxembourg office were passed to Germany’s Süddeutsche Zeitung, and the German tax authorities got hold of them, too. Investigators raided the offices of <a href="http://www.sueddeutsche.de/wirtschaft/kanzlei-mossack-fonseca-datenleck-erschuettert-offshore-dienstleister-in-panama-1.2365907">Commerzbank</a> as well as private residences, looking for evidence of tax evasion.</p>',
-				},
-				{
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text: 'How to contact the Guardian securely',
-					url:
-						'https://www.theguardian.com/help/2016/sep/19/how-to-contact-the-guardian-securely',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>This latest leak, from an unknown source, spans Mossack Fonseca’s entire global database. It has put the firm at the centre of a global scandal<a href="http://mossfonmedia.com/">. The company insists it has done nothing wrong, and says press reports misinterpret what it typically does.</a></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Clients turn to offshore vehicles for reasons of secrecy; after the journalists it is the tax inspectors who will come knocking. Authorities in the UK, Australia and New Zealand are now investigating. Not all of those who feature in this massive archive are tax cheats. Many are using offshore companies for legitimate reasons. But others are, by any standards, crooks. The blow to the firm’s reputation could hardly be bigger.<br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Will the lawyers change their ways? </p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In late 2014, the magazine Vice published a long, unflattering profile of Mossack Fonseca, headlined “the law firm that works with oligarchs, money launderers, and dictators”. One unhappy reader was Fonesca’s niece, Carolina. She posted a comment saying: “I live guilt-free, and I don’t give a shit all you people making fun of my uncle and of Panama. We are a happy country where nobody works because all you fuckers bring YOUR dirty money here. LOL we just spend it. YOUR governments are the ones making crimes. We are just lawyers and we don’t care. Panama is the happiest country in the world.”<br></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><em>Panama Papers reporting team: Juliette Garside, Luke Harding, Holly Watt, David Pegg, Helena Bengtsson, Simon Bowers, Owen Gibson and Nick Hopkins</em></p>',
-				},
-				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>• This article was amended on 9 May 2016. An earlier version referred to Mossack’s niece commenting on a Vice article. </p>',
+						'<p>BlackRock, Vanguard and State Street are supporters of the Task Force on Climate-related Financial Disclosures, a voluntary scheme chaired by the former New York mayor Michael Bloomberg to improve information.<br></p>',
 				},
 			],
-			createdOn: 1459693913000,
-			createdOnDisplay: '15.31 BST',
-			blockCreatedOn: 1459693913000,
-			blockCreatedOnDisplay: '15.31 BST',
-			lastUpdated: 1539390780000,
-			lastUpdatedDisplay: '01.33 BST',
-			blockLastUpdated: 1474925296000,
-			blockLastUpdatedDisplay: '22.28 BST',
-			firstPublished: 1460117709000,
-			firstPublishedDisplay: '13.15 BST',
-			blockFirstPublished: 1459693938000,
-			blockFirstPublishedDisplay: '15.32 BST',
-			primaryDateLine: 'Fri 8 Apr 2016 13.15 BST',
-			secondaryDateLine: 'Last modified on Sat 13 Oct 2018 01.33 BST',
+			createdOn: 1569225927000,
+			createdOnDisplay: '09.05 BST',
+			blockCreatedOn: 1569225927000,
+			blockCreatedOnDisplay: '09.05 BST',
+			lastUpdated: 1570905638000,
+			lastUpdatedDisplay: '19.40 BST',
+			blockLastUpdated: 1570877166000,
+			blockLastUpdatedDisplay: '11.46 BST',
+			firstPublished: 1570878019000,
+			firstPublishedDisplay: '12.00 BST',
+			blockFirstPublished: 1569225929000,
+			blockFirstPublishedDisplay: '09.05 BST',
+			primaryDateLine: 'Sat 12 Oct 2019 12.00 BST',
+			secondaryDateLine: 'Last modified on Sat 12 Oct 2019 19.40 BST',
 		},
 	],
 	linkedData: [
@@ -7195,7 +4256,7 @@ export const SpecialReport: CAPIType = {
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+				'https://amp.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -7222,161 +4283,45 @@ export const SpecialReport: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTYucG5n&enable=upscale&s=45d65e509bb4e8b8433a7c7ea1c3d2c6',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tYWdlLTIwMTkucG5n&enable=upscale&s=679ee83cd2271fb0b26b2cd135be6411',
+				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4bb041a9a5874018d06418523b32ec8c',
+				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=4a0656b66d5e6b573815a54af1b5573a',
+				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&quality=85&auto=format&fit=max&s=20ed795fcb0bd75efe4651fb31411c08',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Luke Harding',
-					sameAs: 'https://www.theguardian.com/profile/lukeharding',
+					name: 'Patrick Greenfield',
+					sameAs:
+						'https://www.theguardian.com/profile/patrick-greenfield',
 				},
 			],
-			datePublished: '2016-04-08T12:15:09.000Z',
+			datePublished: '2019-10-12T11:00:19.000Z',
 			headline:
-				'Mossack Fonseca: inside the firm that helps the super-rich hide their money',
-			dateModified: '2018-10-13T00:33:00.000Z',
+				"World's top three asset managers oversee $300bn fossil fuel investments",
+			dateModified: '2019-10-12T18:40:38.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+				'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+				'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+					'android-app://com.guardian/https/www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 			},
 		},
 	],
-	editionId: 'UK',
-	webPublicationDateDisplay: 'Fri 8 Apr 2016 13.15 BST',
+	webPublicationDateDisplay: 'Sat 12 Oct 2019 12.00 BST',
 	shouldHideAds: false,
-	standfirst:
-		'<p>As Panama Papers shine light on offshore world, Luke Harding takes a closer look at company exploiting tropical tax havens</p>',
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
-		'article:author': 'https://www.theguardian.com/profile/lukeharding',
-		'og:image:height': '720',
-		'og:description':
-			'As Panama Papers shine light on offshore world, Luke Harding takes a closer look at company exploiting tropical tax havens',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTYucG5n&enable=upscale&s=45d65e509bb4e8b8433a7c7ea1c3d2c6',
-		'al:ios:url':
-			'gnmguardian://news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'News',
-		'article:published_time': '2016-04-08T12:15:09.000Z',
-		'og:title':
-			'Mossack Fonseca: inside the firm that helps the super-rich hide their money',
-		'fb:app_id': '180444840287',
-		'article:tag':
-			'Business,Tax avoidance,UK news,World news,Tax havens,Panama Papers,The super-rich',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-		'article:modified_time': '2018-10-13T00:33:00.000Z',
-	},
 	webTitle:
-		'Mossack Fonseca: inside the firm that helps the super-rich hide their money',
+		"World's top three asset managers oversee $300bn fossil fuel investments",
 	isSpecialReport: true,
-	sectionUrl: 'business/business',
-	pageId:
-		'news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
-	version: 3,
-	tags: [
-		{
-			id: 'news/series/panama-papers',
-			type: 'Series',
-			title: 'Panama Papers: a special investigation',
-		},
-		{
-			id: 'business/business',
-			type: 'Keyword',
-			title: 'Business',
-		},
-		{
-			id: 'business/taxavoidance',
-			type: 'Keyword',
-			title: 'Tax avoidance',
-		},
-		{
-			id: 'uk/uk',
-			type: 'Keyword',
-			title: 'UK news',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/news',
-			type: 'Tone',
-			title: 'News',
-		},
-		{
-			id: 'world/tax-havens',
-			type: 'Keyword',
-			title: 'Tax havens',
-		},
-		{
-			id: 'world/panama-papers',
-			type: 'Keyword',
-			title: 'Panama Papers',
-		},
-		{
-			id: 'news/the-super-rich',
-			type: 'Keyword',
-			title: 'The super-rich',
-		},
-		{
-			id: 'profile/lukeharding',
-			type: 'Contributor',
-			title: 'Luke Harding',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/12/26/Luke_Harding,_L.png?width=300&quality=85&auto=format&fit=max&s=66745a465450ef83b65d9bdc30fbf272',
-		},
-		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
-		},
-		{
-			id: 'theguardian/mainsection',
-			type: 'NewspaperBook',
-			title: 'Main section',
-		},
-		{
-			id: 'theguardian/mainsection/topstories',
-			type: 'NewspaperBookSection',
-			title: 'Top stories',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-foreign',
-			type: 'Tracking',
-			title: 'UK Foreign',
-		},
-	],
-	pillar: 'news',
 	isCommentable: false,
-	webURL:
-		'https://www.theguardian.com/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
 	keyEvents: [],
-	showBottomSocialButtons: true,
-	isImmersive: true,
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
@@ -7515,5 +4460,4 @@ export const SpecialReport: CAPIType = {
 			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
 		isPhotoEssay: false,
 	},
-	sectionLabel: 'Business',
 };
