@@ -14,7 +14,8 @@ type Props = {
 	onAccept?: Function;
 	isTracking: boolean;
 	source?: string;
-	sourceDomain: string;
+	sourceDomain?: string;
+	abTests: CAPIType['config']['abTests'];
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -22,12 +23,12 @@ const roleTextSize = (role: RoleType) => {
 		case 'immersive':
 		case 'inline':
 		case 'showcase': {
-			return textSans.small();
+			return textSans.medium();
 		}
 		case 'halfWidth':
 		case 'supporting':
 		case 'thumbnail': {
-			return textSans.xsmall();
+			return textSans.small();
 		}
 	}
 };
@@ -77,18 +78,37 @@ const roleButtonText = (role: RoleType) => {
 	}
 };
 
+const shouldDisplayOverlay = (
+	isTracking: boolean,
+	isOverlayClicked: boolean,
+	isInABTestVariant: boolean,
+) => {
+	if (!isTracking) {
+		return false;
+	}
+	if (isOverlayClicked) {
+		return false;
+	}
+	return isInABTestVariant;
+};
+
+const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
+	return abTestConfig.clickToViewVariant === 'variant';
+};
+
 export const ClickToView = ({
 	children,
 	role = 'inline',
 	onAccept,
 	isTracking,
 	source,
-	sourceDomain,
+	sourceDomain = 'unknown',
+	abTests,
 }: Props) => {
-	const [showOverlay, setShowOverlay] = useState<boolean>(true);
+	const [isOverlayClicked, setIsOverlayClicked] = useState<boolean>(false);
 
 	const handleClick = () => {
-		setShowOverlay(false);
+		setIsOverlayClicked(true);
 		if (onAccept) {
 			setTimeout(() => onAccept());
 		}
@@ -96,7 +116,13 @@ export const ClickToView = ({
 
 	const textSize = roleTextSize(role);
 
-	if (isTracking && showOverlay) {
+	if (
+		shouldDisplayOverlay(
+			isTracking,
+			isOverlayClicked,
+			isInABTestVariant(abTests),
+		)
+	) {
 		return (
 			<div
 				className={css`
@@ -107,11 +133,13 @@ export const ClickToView = ({
 					flex-direction: column;
 					justify-content: space-between;
 					padding: ${space[3]}px;
+					margin-bottom: 8px;
 				`}
 			>
 				<div
 					className={css`
 						${roleHeadlineSize(role)}
+						margin-bottom: 8px;
 					`}
 				>
 					{source
@@ -123,6 +151,9 @@ export const ClickToView = ({
 						${textSize}
 						a {
 							${textSize}
+						}
+						p {
+							margin-bottom: 8px;
 						}
 					`}
 				>

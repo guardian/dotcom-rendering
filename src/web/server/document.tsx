@@ -45,7 +45,7 @@ interface Props {
 	data: DCRServerDocumentData;
 }
 
-export const document = ({ data }: Props) => {
+export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
 	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
@@ -102,7 +102,7 @@ export const document = ({ data }: Props) => {
 	);
 	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
 	chunksForPage.forEach((chunk) => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		loadableExtractor.addChunk(chunk.chunkName); // addChunk is *undocumented* and not in TS types. It allows manually adding chunks to extractor.
 	});
@@ -111,7 +111,7 @@ export const document = ({ data }: Props) => {
 	// modern and legacy scripts.
 	const loadableScripts = generateScriptTags(
 		loadableExtractor
-			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			.getPreAssets() // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
 			// Pre assets returns an array of objects structured as:

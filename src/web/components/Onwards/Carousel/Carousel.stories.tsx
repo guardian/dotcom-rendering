@@ -1,8 +1,11 @@
 import React from 'react';
 
 import { Design, Display, Pillar } from '@guardian/types';
-
 import { breakpoints } from '@guardian/src-foundations/mq';
+import { Section } from '@root/src/web/components/Section';
+
+import { decidePalette } from '@root/src/web/lib/decidePalette';
+
 import { Carousel } from './Carousel';
 
 export default {
@@ -17,6 +20,20 @@ export default {
 			],
 		},
 	},
+};
+
+const convertToImmersive = (trails: TrailType[]): TrailType[] => {
+	return trails.map((trail) => {
+		const format = {
+			...trail.format,
+			display: Display.Immersive,
+		};
+		return {
+			...trail,
+			format,
+			palette: decidePalette(format),
+		};
+	});
 };
 
 const trails: TrailType[] = [
@@ -35,6 +52,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Live,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Live,
+		}),
 		webPublicationDate: '2020-09-15T13:46:52.000Z',
 		headline:
 			'UK coronavirus: testing shortage will take weeks to resolve, says Matt Hancock',
@@ -55,6 +77,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T11:44:46.000Z',
 		headline: 'Ex-Tory MP jailed for two years for sexual assaults',
 		shortUrl: 'https://theguardian.com/p/ezmac',
@@ -75,6 +102,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T13:24:45.000Z',
 		headline: 'No 10 rejects any concessions for rebel Tories on bill',
 		shortUrl: 'https://theguardian.com/p/ezn2d',
@@ -95,6 +127,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T13:15:36.000Z',
 		headline:
 			'World fails to meet a single target to stop destruction of nature – UN report',
@@ -116,6 +153,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T10:41:04.000Z',
 		headline: 'Poisoned Russian opposition leader posts hospital photo',
 		shortUrl: 'https://theguardian.com/p/ezmtk',
@@ -136,6 +178,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T11:00:32.000Z',
 		headline:
 			'Gary Lineker takes 25% pay cut and agrees to tweet more carefully',
@@ -157,6 +204,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T09:30:22.000Z',
 		headline: 'Former ambassador warns of election violence',
 		shortUrl: 'https://theguardian.com/p/ezk38',
@@ -177,6 +229,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T13:04:57.000Z',
 		headline:
 			"Trump threatens to retaliate to any attack with '1,000 times greater' force",
@@ -198,6 +255,11 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T13:28:24.000Z',
 		headline:
 			'Government vows to empty Lesbos of all refugees by Easter after fire',
@@ -219,6 +281,11 @@ const trails: TrailType[] = [
 			theme: Pillar.Culture,
 			design: Design.Article,
 		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.Culture,
+			design: Design.Article,
+		}),
 		webPublicationDate: '2020-09-15T12:21:07.000Z',
 		headline: 'Most diverse shortlist ever as Hilary Mantel misses out',
 		shortUrl: 'https://theguardian.com/p/ezmt9',
@@ -226,21 +293,26 @@ const trails: TrailType[] = [
 	},
 ];
 
+const immersiveTrails = convertToImmersive(trails);
+
 export const Headlines = () => (
 	<>
-		<Carousel
-			heading="Headlines"
-			trails={trails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.News}
-		/>
-
-		<Carousel
-			heading="Sport"
-			trails={trails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.Sport}
-		/>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Headlines"
+				trails={trails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.News}
+			/>
+		</Section>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Sport"
+				trails={trails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.Sport}
+			/>
+		</Section>
 	</>
 );
 
@@ -248,21 +320,24 @@ Headlines.story = 'Headlines carousel';
 
 export const Immersive = () => (
 	<>
-		<Carousel
-			heading="Headlines"
-			trails={trails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.News}
-			isFullCardImage={true}
-		/>
-
-		<Carousel
-			heading="Sport"
-			trails={trails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.Sport}
-			isFullCardImage={true}
-		/>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Headlines"
+				trails={immersiveTrails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.News}
+				isFullCardImage={true}
+			/>
+		</Section>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Sport"
+				trails={immersiveTrails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.Sport}
+				isFullCardImage={true}
+			/>
+		</Section>
 	</>
 );
 

@@ -3,10 +3,11 @@ import { css } from 'emotion';
 
 type Props = {
 	children: React.ReactNode;
-	topBarColour: string;
+	palette: Palette;
+	isFullCardImage?: boolean;
 };
 
-export const TopBar = ({ children, topBarColour }: Props) => (
+export const TopBar = ({ children, palette, isFullCardImage }: Props) => (
 	<div
 		className={css`
 			display: flex;
@@ -18,13 +19,13 @@ export const TopBar = ({ children, topBarColour }: Props) => (
 
 			/* Styling for top bar */
 			:before {
-				background-color: ${topBarColour};
+				background-color: ${palette.topBar.card};
 				content: '';
 				position: absolute;
 				top: 0;
 				left: 0;
 				right: 0;
-				height: 1px;
+				height: ${isFullCardImage ? 4 : 1}px;
 				z-index: 2;
 			}
 		`}

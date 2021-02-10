@@ -48,7 +48,7 @@ export default {
 	},
 };
 
-export const Newsletters = () => (
+export const Newsletters = (): React.ReactNode => (
 	<>
 		<Section
 			showSideBorders={true}

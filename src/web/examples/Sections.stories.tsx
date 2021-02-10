@@ -49,7 +49,7 @@ export default {
 	},
 };
 
-export const Sections = () => (
+export const Sections = (): React.ReactNode => (
 	<>
 		<Section
 			showTopBorder={false}

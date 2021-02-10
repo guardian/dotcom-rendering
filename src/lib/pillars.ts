@@ -12,7 +12,7 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 
-type colour = string;
+type ColourType = string;
 
 export const pillarNames: Theme[] = [
 	Pillar.News,
@@ -24,41 +24,41 @@ export const pillarNames: Theme[] = [
 ];
 
 type PillarPalette = {
-	dark: colour;
-	main: colour;
-	bright: colour;
-	pastel: colour;
-	faded: colour;
-	300: colour;
-	400: colour;
-	500: colour;
-	600: colour;
-	800: colour;
+	dark: ColourType;
+	main: ColourType;
+	bright: ColourType;
+	pastel: ColourType;
+	faded: ColourType;
+	300: ColourType;
+	400: ColourType;
+	500: ColourType;
+	600: ColourType;
+	800: ColourType;
 };
 
 type SpecialPalette = {
-	dark: colour;
-	main: colour;
-	bright: colour;
-	faded: colour;
-	300: colour;
-	400: colour;
-	500: colour;
-	800: colour;
+	dark: ColourType;
+	main: ColourType;
+	bright: ColourType;
+	faded: ColourType;
+	300: ColourType;
+	400: ColourType;
+	500: ColourType;
+	800: ColourType;
 };
 
 type LabsPalette = {
-	dark: colour;
-	main: colour;
-	bright: colour;
-	faded: colour;
-	300: colour;
-	400: colour;
-	500: colour;
-	800: colour;
+	dark: ColourType;
+	main: ColourType;
+	bright: ColourType;
+	faded: ColourType;
+	300: ColourType;
+	400: ColourType;
+	500: ColourType;
+	800: ColourType;
 };
 
-// pillarPalette exposes a convenience object for deciding colour
+// pillarPalette exposes a convenience object for deciding ColourType
 //
 // Usage:
 // `pillarPalette[Pillar.Opinion][300]`
@@ -172,7 +172,7 @@ Further notes on this function:
       a key for each pillar and values of type T.
  */
 
-export const neutralBorder = (pillar: Theme): colour => {
+export const neutralBorder = (pillar: Theme): ColourType => {
 	switch (pillar) {
 		case Special.Labs:
 			return border.primary; // 'dark' theme

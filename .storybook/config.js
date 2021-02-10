@@ -4,7 +4,6 @@ import fetchMock from 'fetch-mock';
 import MockDate from 'mockdate';
 import { configure, addParameters } from '@storybook/react';
 
-import { sharecount } from '@root/fixtures/article';
 import { commentCount } from '@root/fixtures/commentCounts';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 
@@ -104,7 +103,12 @@ fetchMock
         'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
         {
             status: 200,
-            body: sharecount,
+            body: {
+                path:
+                    'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+                share_count: 273,
+                refreshStatus: true,
+            },
         },
         {
             overwriteRoutes: false,

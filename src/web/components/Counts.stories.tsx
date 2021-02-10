@@ -4,7 +4,6 @@ import fetchMock from 'fetch-mock';
 
 import { Pillar, Design, Display } from '@guardian/types';
 
-import { sharecount } from '@root/fixtures/article';
 import { decidePalette } from '../lib/decidePalette';
 
 import { Counts } from './Counts';
@@ -79,7 +78,12 @@ export const ShareOnly = () => {
 			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
 			{
 				status: 200,
-				body: sharecount,
+				body: {
+					path:
+						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					share_count: 273,
+					refreshStatus: true,
+				},
 			},
 			{ overwriteRoutes: false },
 		);

@@ -142,6 +142,49 @@ const textArticleLinkHover = (format: Format): string => {
 	}
 };
 
+const textCardHeadline = (format: Format): string => {
+	if (format.display === Display.Immersive) return WHITE;
+	if (format.theme === Special.SpecialReport) return WHITE;
+	switch (format.design) {
+		case Design.Feature:
+		case Design.Interview:
+			return pillarPalette[format.theme].dark;
+		case Design.Media:
+		case Design.Live:
+			return neutral[97];
+		default:
+			return BLACK;
+	}
+};
+
+const textCardKicker = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
+	if (format.display === Display.Immersive)
+		return pillarPalette[format.theme].bright;
+	switch (format.design) {
+		case Design.Live:
+			switch (format.theme) {
+				case Pillar.News:
+					return '#ffbac8';
+				case Pillar.Sport:
+					return '#90dcff';
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		case Design.Media:
+			if (format.theme === Pillar.News)
+				return pillarPalette[format.theme].bright;
+			return pillarPalette[format.theme].main;
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
+const textLinkKicker = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
@@ -185,6 +228,21 @@ const backgroundAvatar = (format: Format): string => {
 	}
 };
 
+const backgroundCard = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	switch (format.design) {
+		case Design.GuardianView:
+		case Design.Comment:
+			return opinion[800];
+		case Design.Media:
+			return neutral[20];
+		case Design.Live:
+			return pillarPalette[format.theme].dark;
+		default:
+			return neutral[97];
+	}
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -218,6 +276,12 @@ const borderArticleLinkHover = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const topBarCard = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -234,12 +298,16 @@ export const decidePalette = (format: Format): Palette => {
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
+			cardHeadline: textCardHeadline(format),
+			cardKicker: textCardKicker(format),
+			linkKicker: textLinkKicker(format),
 		},
 		background: {
 			article: backgroundArticle(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
+			card: backgroundCard(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -251,6 +319,9 @@ export const decidePalette = (format: Format): Palette => {
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
+		},
+		topBar: {
+			card: topBarCard(format),
 		},
 	};
 };
