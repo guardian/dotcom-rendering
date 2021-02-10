@@ -54,7 +54,6 @@ type Props = {
 	alwaysVertical?: boolean;
 	minWidthInPixels?: number;
 	// Ophan tracking
-	dataComponent?: string;
 	dataLinkName?: string;
 };
 
@@ -147,7 +146,6 @@ export const Card = ({
 	starRating,
 	alwaysVertical,
 	minWidthInPixels,
-	dataComponent,
 	dataLinkName,
 }: Props) => {
 	// Decide how we position the image on the card
@@ -169,7 +167,6 @@ export const Card = ({
 			linkTo={linkTo}
 			format={format}
 			palette={palette}
-			dataComponent={dataComponent}
 			dataLinkName={dataLinkName}
 		>
 			<TopBar palette={palette} isFullCardImage={isFullCardImage}>

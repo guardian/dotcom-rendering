@@ -323,7 +323,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	kickerText,
 	isFirst,
 	isFullCardImage,
-	dataComponent,
 	dataLinkName,
 }: CarouselCardProps) => (
 	<LI
@@ -347,7 +346,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
 			showQuotes={format.design === Design.Comment}
-			dataComponent={dataComponent}
 			dataLinkName={dataLinkName}
 		/>
 	</LI>
@@ -600,6 +598,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				<ul
 					className={carouselStyle(isFullCardImage)}
 					ref={carouselRef}
+					data-component={`${variantComponentName} | maxIndex-${maxIndex}`}
 				>
 					{trails.map((trail, i) => {
 						const {
@@ -623,7 +622,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 								imageUrl={imageUrl}
 								kickerText={kickerText}
 								isFullCardImage={isFullCardImage}
-								dataComponent={`${variantComponentName} | maxIndex-${maxIndex}`}
 								dataLinkName={`${variantComponentName}-card-position-${i}`}
 							/>
 						);
