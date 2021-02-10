@@ -253,6 +253,8 @@ const backgroundHeadline = (format: Format): string => {
 			return BLACK;
 		case Display.Showcase:
 		case Display.Standard:
+			if (format.design === Design.Interview) return BLACK;
+			return 'transparent';
 		default:
 			return 'transparent';
 	}
