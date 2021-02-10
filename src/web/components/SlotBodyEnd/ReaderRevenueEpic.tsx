@@ -12,6 +12,7 @@ import {
 	isRecurringContributor,
 	getLastOneOffContributionDate,
 	shouldHideSupportMessaging,
+	getArticleCountConsent,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -31,9 +32,6 @@ type EpicConfig = {
 	meta: TestMeta;
 	module: any;
 };
-type ReaderRevenueEpicJSX = React.ReactElement;
-
-type MaybeReaderRevenueEpicJSX = ReaderRevenueEpicJSX | null;
 
 const checkForErrors = (response: any) => {
 	if (!response.ok) {
@@ -110,10 +108,11 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			epicViewLog: getViewLog(),
 			weeklyArticleHistory: getWeeklyArticleHistory(),
+			hasOptedOutOfArticleCount: !(await getArticleCountConsent()),
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: props.countryCode,
 		},
-	};
+	} as Metadata; // Metadata incorrectly does not include hasOptedOutOfArticleCount
 };
 
 export const canShow = ({
@@ -174,10 +173,7 @@ export const canShow = ({
 		});
 };
 
-export const ReaderRevenueEpic = ({
-	meta,
-	module,
-}: EpicConfig): MaybeReaderRevenueEpicJSX => {
+export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
 	// TODO: sort out this any
 	const [Epic, setEpic] = useState<React.FC>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
