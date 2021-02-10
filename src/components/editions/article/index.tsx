@@ -10,7 +10,7 @@ import { Design, Display, partition } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
-import Header from './header';
+import Header from '../header';
 import {
 	articleMarginStyles,
 	articleWidthStyles,
@@ -18,7 +18,7 @@ import {
 	sidePadding,
 	tabletContentWidth,
 	wideContentWidth,
-} from './styles';
+} from '../styles';
 
 const wide = wideContentWidth + 12;
 const tablet = tabletContentWidth + 12;

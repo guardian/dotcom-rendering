@@ -25,7 +25,7 @@ import {
 	wideArticleMargin,
 	wideContentWidth,
 	wideImmersiveWidth,
-} from './styles';
+} from '../styles';
 
 const wide = wideContentWidth + 12;
 const tablet = tabletContentWidth + 12;
