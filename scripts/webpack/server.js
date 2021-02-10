@@ -21,17 +21,12 @@ module.exports = () => ({
             allowlist: [/^@guardian/],
         }),
         ({request}, callback) => {
-            return request.endsWith('manifest.json')
-                ? callback(null, `commonjs ${request}`)
-                : callback();
-        },
-        ({request}, callback) => {
-            return request.endsWith('manifest.legacy.json')
-                ? callback(null, `commonjs ${request}`)
-                : callback();
-        },
-        ({request}, callback) => {
             return request.endsWith('loadable-manifest-browser.json')
+                ? callback(null, `commonjs ${request}`)
+                : callback();
+        },
+        ({request}, callback) => {
+            return request.endsWith('loadable-manifest-browser.legacy.json')
                 ? callback(null, `commonjs ${request}`)
                 : callback();
         },
