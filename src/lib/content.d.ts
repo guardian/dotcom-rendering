@@ -1,6 +1,12 @@
 // -------------------------------------
 // Elements
 // -------------------------------------
+interface ThirdPartyEmbeddedContent {
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
+}
+
 interface InteractiveAtomBlockElementBase {
 	url: string;
 	placeholderUrl?: string;
@@ -107,7 +113,7 @@ interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
 }
 
-interface DocumentBlockElement {
+interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
 	embedUrl: string;
 	height: number;
@@ -120,16 +126,17 @@ interface DocumentBlockElement {
 	documentIndex?: number;
 }
 
-interface EmbedBlockElement {
+interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
 	safe?: boolean;
 	role?: RoleType;
 	alt?: string;
 	html: string;
 	isMandatory: boolean;
-	isThirdPartyTracking?: boolean;
+	isThirdPartyTracking: boolean;
 	source?: string;
 	sourceDomain?: string;
+	embedIndex?: number;
 }
 
 interface ExplainerAtomBlockElement {
@@ -185,12 +192,16 @@ interface ImageBlockElement {
 	title?: string;
 }
 
-interface InstagramBlockElement {
+interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
 	html: string;
 	url: string;
 	hasCaption: boolean;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
+	instagramIndex?: number;
 }
 
 interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
@@ -206,7 +217,7 @@ interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
 	_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
 }
 
-interface MapBlockElement {
+interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	embedUrl: string;
 	originalUrl: string;
@@ -216,6 +227,9 @@ interface MapBlockElement {
 	width: number;
 	caption?: string;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	sourceDomain?: string;
+	mapIndex?: number;
 }
 
 interface MediaAtomBlockElement {
@@ -249,12 +263,15 @@ interface ProfileAtomBlockElement {
 	role?: RoleType;
 }
 
-interface PullquoteBlockElement {
+interface PullquoteBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
 	html?: string;
-	role: string;
+	role: RoleType;
 	attribution?: string;
-	isThirdPartyTracking?: boolean;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
+	pullquoteIndex?: number;
 }
 
 interface QABlockElement {
@@ -277,16 +294,19 @@ interface RichLinkBlockElement {
 	richLinkIndex?: number;
 }
 
-interface SoundcloudBlockElement {
+interface SoundcloudBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
 	html: string;
 	id: string;
 	isTrack: boolean;
 	isMandatory: boolean;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
 }
 
-interface SpotifyBlockElement {
+interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
 	embedUrl?: string;
 	title?: string;
@@ -294,6 +314,10 @@ interface SpotifyBlockElement {
 	width?: number;
 	caption?: string;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
+	spotifyIndex?: number;
 }
 
 interface SubheadingBlockElement {
@@ -324,21 +348,27 @@ interface TimelineBlockElement {
 	role?: RoleType;
 }
 
-interface TweetBlockElement {
+interface TweetBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.TweetBlockElement';
 	html: string;
 	url: string;
 	id: string;
 	hasMedia: boolean;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
 }
 
-interface VideoBlockElement {
+interface VideoBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoBlockElement';
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
 }
 
-interface VideoFacebookBlockElement {
+interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
 	url: string;
 	height: number;
@@ -346,9 +376,13 @@ interface VideoFacebookBlockElement {
 	caption?: string;
 	embedUrl?: string;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
+	videoFacebookIndex?: number;
 }
 
-interface VideoVimeoBlockElement {
+interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
 	embedUrl?: string;
 	url: string;
@@ -358,9 +392,12 @@ interface VideoVimeoBlockElement {
 	credit?: string;
 	title?: string;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
 }
 
-interface VideoYoutubeBlockElement {
+interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
 	embedUrl?: string;
 	url: string;
@@ -371,7 +408,7 @@ interface VideoYoutubeBlockElement {
 	credit?: string;
 	title?: string;
 	role?: RoleType;
-	isThirdPartyTracking?: boolean;
+	isThirdPartyTracking: boolean;
 	source?: string;
 	sourceDomain?: string;
 }
@@ -456,7 +493,7 @@ interface WitnessAssetType {
 		name: string;
 	};
 }
-interface WitnessTypeBlockElement {
+interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
 	assets: WitnessAssetType[];
 
@@ -466,6 +503,9 @@ interface WitnessTypeBlockElement {
 		| WitnessTypeDataImage
 		| WitnessTypeDataVideo
 		| WitnessTypeDataText;
+	source?: string;
+	sourceDomain?: string;
+	witnessIndex?: number;
 }
 
 type CAPIElement =
@@ -512,6 +552,31 @@ type CAPIElement =
 	| VideoYoutubeBlockElement
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement;
+
+type CAPIThirdPartyEmbedElement =
+	| DocumentBlockElement
+	| EmbedBlockElement
+	| InstagramBlockElement
+	| MapBlockElement
+	| PullquoteBlockElement
+	| SoundcloudBlockElement
+	| SpotifyBlockElement
+	| TweetBlockElement
+	| VideoBlockElement
+	| VideoFacebookBlockElement
+	| VideoVimeoBlockElement
+	| VideoYoutubeBlockElement
+	| WitnessTypeBlockElement;
+
+// elements requiring click to view
+// 	| DocumentBlockElement
+// 	| EmbedBlockElement
+// 	| InstagramBlockElement
+// 	| MapBlockElement
+// 	| PullquoteBlockElement
+// 	| SpotifyBlockElement
+// 	| VideoFacebookBlockElement
+// 	| WitnessTypeBlockElement;
 
 // -------------------------------------
 // Misc

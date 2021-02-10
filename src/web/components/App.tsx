@@ -57,8 +57,16 @@ import {
 	getConsentFor,
 } from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
+import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
+import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
+import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
+import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
+import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -627,24 +635,181 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.documentBlockElements.map((documentBlockElement, index) => (
+			{CAPI.documentBlockElements.map((element) => (
 				<HydrateOnce
-					key={index}
 					root="document-block-element"
-					index={documentBlockElement.documentIndex}
+					index={element.documentIndex}
 				>
 					<ClickToView
-						role={documentBlockElement.role}
-						isTracking={documentBlockElement.isThirdPartyTracking}
-						source={documentBlockElement.source}
-						sourceDomain={documentBlockElement.sourceDomain}
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 						abTests={CAPI.config.abTests}
 					>
 						<DocumentBlockComponent
-							embedUrl={documentBlockElement.embedUrl}
-							height={documentBlockElement.height}
-							width={documentBlockElement.width}
-							title={documentBlockElement.title}
+							embedUrl={element.embedUrl}
+							height={element.height}
+							width={element.width}
+							title={element.title}
+						/>
+					</ClickToView>
+				</HydrateOnce>
+			))}
+			{CAPI.embedBlockElements.map((element) => (
+				<HydrateOnce
+					root="embed-block-element"
+					index={element.embedIndex}
+				>
+					{element.safe ? (
+						<ClickToView
+							role={element.role}
+							isTracking={element.isThirdPartyTracking}
+							source={element.source}
+							sourceDomain={element.sourceDomain}
+							abTests={CAPI.config.abTests}
+						>
+							<EmbedBlockComponent
+								key={element.embedIndex}
+								html={element.html}
+								alt={element.alt}
+							/>
+						</ClickToView>
+					) : (
+						<ClickToView
+							role={element.role}
+							isTracking={element.isThirdPartyTracking}
+							source={element.source}
+							sourceDomain={element.sourceDomain}
+							abTests={CAPI.config.abTests}
+							onAccept={() =>
+								updateIframeHeight(
+									`iframe[name="unsafe-embed-${
+										element.embedIndex || 0
+									}"]`,
+								)
+							}
+						>
+							<UnsafeEmbedBlockComponent
+								key={element.embedIndex}
+								html={element.html}
+								alt={element.alt || ''}
+								index={element.embedIndex || 0}
+							/>
+						</ClickToView>
+					)}
+				</HydrateOnce>
+			))}
+			{CAPI.instagramBlockElements.map((element) => (
+				<HydrateOnce
+					root="instagram-block-element"
+					index={element.instagramIndex}
+				>
+					<ClickToView
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<InstagramBlockComponent
+							key={element.instagramIndex}
+							element={element}
+						/>
+					</ClickToView>
+				</HydrateOnce>
+			))}
+			{CAPI.mapBlockElements.map((element) => (
+				<HydrateOnce root="map-block-element" index={element.mapIndex}>
+					<ClickToView
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<MapEmbedBlockComponent
+							format={format}
+							palette={palette}
+							embedUrl={element.embedUrl}
+							height={element.height}
+							width={element.width}
+							caption={element.caption}
+							credit={element.source}
+							title={element.title}
+						/>
+					</ClickToView>
+				</HydrateOnce>
+			))}
+			{CAPI.pullquoteBlockElements.map((element) => (
+				<HydrateOnce
+					root="pullquote-block-element"
+					index={element.pullquoteIndex}
+				>
+					<ClickToView
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<PullQuoteBlockComponent
+							key={element.pullquoteIndex}
+							html={element.html}
+							pillar={format.theme}
+							design={format.design}
+							attribution={element.attribution}
+							role={element.role}
+						/>
+					</ClickToView>
+				</HydrateOnce>
+			))}
+			{CAPI.spotifyBlockElements.map((element) => (
+				<HydrateOnce
+					root="spotify-block-element"
+					index={element.spotifyIndex}
+				>
+					<ClickToView
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<SpotifyBlockComponent
+							embedUrl={element.embedUrl}
+							height={element.height}
+							width={element.width}
+							title={element.title}
+							format={format}
+							palette={palette}
+							caption={element.caption}
+							credit="Spotify"
+						/>
+					</ClickToView>
+				</HydrateOnce>
+			))}
+			{CAPI.videoFacebookBlockElements.map((element) => (
+				<HydrateOnce
+					root="video-facebook-block-element"
+					index={element.videoFacebookIndex}
+				>
+					<ClickToView
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<VideoFacebookBlockComponent
+							format={format}
+							palette={palette}
+							embedUrl={element.embedUrl}
+							height={element.height}
+							width={element.width}
+							caption={element.caption}
+							credit={element.caption}
+							title={element.caption}
 						/>
 					</ClickToView>
 				</HydrateOnce>
