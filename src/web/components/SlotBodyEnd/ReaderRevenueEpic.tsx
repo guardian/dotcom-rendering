@@ -78,7 +78,6 @@ type Props = {
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
-	isSensitive: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
 };
@@ -112,7 +111,7 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: props.countryCode,
 		},
-	} as Metadata; // Metadata incorrectly does not include hasOptedOutOfArticleCount
+	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
 
 export const canShow = ({
@@ -123,7 +122,6 @@ export const canShow = ({
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
-	isSensitive,
 	tags,
 	contributionsServiceUrl,
 }: Props): Promise<CanShowResult> => {
@@ -147,7 +145,6 @@ export const canShow = ({
 		isPaidContent,
 		tags,
 		contributionsServiceUrl,
-		isSensitive,
 	})
 		.then((contributionsPayload) =>
 			getBodyEnd(

@@ -676,7 +676,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 					isMinuteArticle={CAPI.pageType.isMinuteArticle}
 					isPaidContent={CAPI.pageType.isPaidContent}
-					isSensitive={CAPI.config.isSensitive}
 					tags={CAPI.tags}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>

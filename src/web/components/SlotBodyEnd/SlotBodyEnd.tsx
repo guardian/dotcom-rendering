@@ -21,7 +21,6 @@ type Props = {
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
-	isSensitive: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
 };
@@ -34,7 +33,6 @@ const buildReaderRevenueEpicConfig = ({
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
-	isSensitive,
 	tags,
 	contributionsServiceUrl,
 }: any): CandidateConfig => {
@@ -50,7 +48,6 @@ const buildReaderRevenueEpicConfig = ({
 					shouldHideReaderRevenue,
 					isMinuteArticle,
 					isPaidContent,
-					isSensitive,
 					tags,
 					contributionsServiceUrl,
 				}),
@@ -71,7 +68,6 @@ export const SlotBodyEnd = ({
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
-	isSensitive,
 	tags,
 	contributionsServiceUrl,
 }: Props) => {
@@ -85,7 +81,6 @@ export const SlotBodyEnd = ({
 			shouldHideReaderRevenue,
 			isMinuteArticle,
 			isPaidContent,
-			isSensitive,
 			tags,
 			contributionsServiceUrl,
 		});
