@@ -145,7 +145,7 @@ export const WitnessImageBlockComponent = ({
 	dateCreated,
 	alt,
 	pillar,
-}: ImageProps): React.ReactNode => {
+}: ImageProps): JSX.Element => {
 	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
 	// asset in the list
 	const bestImgSource =
@@ -201,7 +201,7 @@ export const WitnessTextBlockComponent = ({
 	dateCreated,
 	description,
 	pillar,
-}: TextProps): React.ReactNode => (
+}: TextProps): JSX.Element => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}
@@ -241,7 +241,7 @@ export const WitnessVideoBlockComponent = ({
 	youtubeHtml,
 	dateCreated,
 	pillar,
-}: VideoProps): React.ReactNode => (
+}: VideoProps): JSX.Element => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}

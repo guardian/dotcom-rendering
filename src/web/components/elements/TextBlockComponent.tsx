@@ -152,7 +152,7 @@ export const TextBlockComponent = ({
 	format,
 	forceDropCap,
 	isFirstParagraph,
-}: Props): React.ReactNode | null => {
+}: Props): JSX.Element | null => {
 	const {
 		willUnwrap: isUnwrapped,
 		unwrappedHtml,
