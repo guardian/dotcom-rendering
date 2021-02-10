@@ -9,7 +9,7 @@ import { useApi as useApi_ } from '@root/src/web/lib/api';
 import { MostViewedRight } from './MostViewedRight';
 
 const response = { data: mockTab1 };
-const useApi: any = useApi_;
+const useApi: { [key: string]: any } = useApi_;
 
 jest.mock('../../../lib/api', () => ({
 	useApi: jest.fn(),

@@ -12,7 +12,7 @@ import { ABProvider } from '@guardian/ab-react';
 import { MostViewedFooterData } from './MostViewedFooterData';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useApi: any = useApi_;
+const useApi: { [key: string]: any } = useApi_;
 
 jest.mock('../../../lib/api', () => ({
 	useApi: jest.fn(),

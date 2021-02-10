@@ -68,7 +68,13 @@ export const Donut = ({
 	};
 
 	// Segments
-	const segments: any[] = [];
+	const segments: {
+		d: string;
+		color: string;
+		transform: string;
+		label: string;
+		value: number;
+	}[] = [];
 	let segmentAngle;
 	let endRadius;
 	let arc;
