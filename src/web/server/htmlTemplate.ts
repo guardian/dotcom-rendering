@@ -38,7 +38,7 @@ export const htmlTemplate = ({
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
 	keywords: string;
-}) => {
+}): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
 			? 'favicon-32x32.ico'

@@ -45,7 +45,7 @@ interface Props {
 	data: DCRServerDocumentData;
 }
 
-export const document = ({ data }: Props) => {
+export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
 	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(

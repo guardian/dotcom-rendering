@@ -3,7 +3,7 @@ import libDebounce from 'lodash.debounce';
 
 const useHasBeenSeen = (
 	options: IntersectionObserverInit & { debounce?: boolean },
-) => {
+): [boolean, React.Dispatch<React.SetStateAction<HTMLElement | null>>] => {
 	const [hasBeenSeen, setHasBeenSeen] = useState<boolean>(false);
 	const [node, setNode] = useState<HTMLElement | null>(null);
 

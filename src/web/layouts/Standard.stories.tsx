@@ -55,37 +55,37 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
 
-export const ArticleStory = () => {
+export const ArticleStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Article);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ArticleStory.story = { name: 'Article' };
 
-export const ReviewStory = () => {
+export const ReviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Review);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
 
-export const PrintShopStory = () => {
+export const PrintShopStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PrintShop);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 PrintShopStory.story = { name: 'PrintShop' };
 
-export const CommentStory = () => {
+export const CommentStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Comment);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
 
-export const PhotoEssayStory = () => {
+export const PhotoEssayStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PhotoEssay);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 PhotoEssayStory.story = { name: 'PhotoEssay' };
 
-export const AnalysisStory = () => {
+export const AnalysisStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Analysis);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -97,13 +97,13 @@ AnalysisStory.story = {
 	},
 };
 
-export const FeatureStory = () => {
+export const FeatureStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Feature);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 FeatureStory.story = { name: 'Feature' };
 
-export const GuardianViewStory = () => {
+export const GuardianViewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(GuardianView);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -115,7 +115,7 @@ GuardianViewStory.story = {
 	},
 };
 
-export const InterviewStory = () => {
+export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Interview);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -127,7 +127,7 @@ InterviewStory.story = {
 	},
 };
 
-export const QuizStory = () => {
+export const QuizStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Quiz);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -139,7 +139,7 @@ QuizStory.story = {
 	},
 };
 
-export const RecipeStory = () => {
+export const RecipeStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Recipe);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -151,7 +151,7 @@ RecipeStory.story = {
 	},
 };
 
-export const MatchReportStory = () => {
+export const MatchReportStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(MatchReport);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
