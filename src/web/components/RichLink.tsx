@@ -35,7 +35,7 @@ type CardStyle =
 	| 'external'
 	| 'news';
 
-type colour = string;
+type ColourType = string;
 
 interface Props {
 	richLinkIndex: number;
@@ -87,26 +87,26 @@ const neutralBackground = css`
 	}
 `;
 
-const richLinkPillarColour: (format: Format) => colour = (format) => {
+const richLinkPillarColour: (format: Format) => ColourType = (format) => {
 	if (format) {
 		return pillarPalette[format.theme].main;
 	}
 	return pillarPalette[Pillar.News][400];
 };
 
-const pillarBackground: (format: Format) => colour = (format) => {
+const pillarBackground: (format: Format) => ColourType = (format) => {
 	return css`
 		background-color: ${richLinkPillarColour(format)};
 	`;
 };
 
-const textColour: (format: Format) => colour = (format) => {
+const textColour: (format: Format) => ColourType = (format) => {
 	return css`
 		color: ${richLinkPillarColour(format)};
 	`;
 };
 
-const richLinkTopBorder: (format: Format) => colour = (format) => {
+const richLinkTopBorder: (format: Format) => ColourType = (format) => {
 	return css`
 		border-top: 1px;
 		border-top-style: solid;
@@ -142,7 +142,7 @@ const richLinkTitle = css`
 	}
 `;
 
-const richLinkReadMore: (format: Format) => colour = (format) => {
+const richLinkReadMore: (format: Format) => ColourType = (format) => {
 	return css`
 		fill: ${richLinkPillarColour(format)};
 		color: ${richLinkPillarColour(format)};

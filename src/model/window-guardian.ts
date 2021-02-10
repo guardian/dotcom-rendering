@@ -1,8 +1,8 @@
-type stage = 'DEV' | 'CODE' | 'PROD';
+type StageType = 'DEV' | 'CODE' | 'PROD';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
-	stage: stage;
+	stage: StageType;
 	frontendAssetsFullURL: string;
 	page: {
 		dcrCouldRender: boolean;
