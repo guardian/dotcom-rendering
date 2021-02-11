@@ -879,6 +879,9 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 
 		case ElementKind.QuizAtom:
 			return quizAtomRenderer(format, element);
+
+		default:
+			return null;
 	}
 };
 
