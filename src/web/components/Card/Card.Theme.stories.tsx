@@ -1,8 +1,8 @@
-import { Card } from './Card';
-
 import { Design, Display, Pillar } from '@guardian/types';
 
 import { Format } from './Card.Format.stories';
+
+import { Card } from './Card';
 
 export default {
 	component: Card,
