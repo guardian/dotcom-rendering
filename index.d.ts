@@ -300,8 +300,8 @@ interface CAPINavType {
     otherLinks: CAPILinkType[];
     brandExtensions: CAPILinkType[];
     currentNavLink?: CAPILinkType;
-    currentParent?: CAPILinkType;
-    currentPillar?: CAPILinkType;
+    currentNavLinkTitle?: string;
+    currentPillarTitle?: string;
     subNavSections?: {
         parent?: CAPILinkType;
         links: CAPILinkType[];
