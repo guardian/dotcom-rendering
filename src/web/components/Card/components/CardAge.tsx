@@ -19,19 +19,19 @@ type Props = {
 	isFullCardImage?: boolean;
 };
 
-const ageStyles = (
-	design: Design,
-	pillar: Theme,
-	isFullCardImage?: boolean,
-) => {
+const ageStyles = (format: Format, isFullCardImage?: boolean) => {
 	// This is annoying but can't apply SVG color otherwise
 	const smallImageSvgColor =
-		design === Design.Live ? decidePillarLight(pillar) : neutral[46];
+		format.design === Design.Live
+			? decidePillarLight(format.theme)
+			: neutral[46];
 
 	const svgColor = isFullCardImage ? neutral[100] : smallImageSvgColor;
 
 	const smallImageTextColor =
-		design === Design.Live ? decidePillarLight(pillar) : neutral[60];
+		format.design === Design.Live
+			? decidePillarLight(format.theme)
+			: neutral[60];
 
 	return css`
 		${textSans.xsmall()};
@@ -55,18 +55,18 @@ const ageStyles = (
 
 		> time {
 			${textSans.xsmall({
-				fontWeight: design === Design.Media ? `bold` : `regular`,
+				fontWeight: format.design === Design.Media ? `bold` : `regular`,
 			})};
 		}
 	`;
 };
 
-const colourStyles = (design: Design, pillar: Theme) => {
-	switch (design) {
+const colourStyles = (format: Format) => {
+	switch (format.design) {
 		case Design.Live:
 			return css`
 				/* stylelint-disable-next-line color-no-hex */
-				color: ${decidePillarLight(pillar)};
+				color: ${decidePillarLight(format.theme)};
 			`;
 		default:
 			return css`
@@ -107,8 +107,8 @@ export const CardAge = ({
 	return (
 		<span
 			className={cx(
-				ageStyles(format.design, format.theme, isFullCardImage),
-				colourStyles(format.design, format.theme),
+				ageStyles(format, isFullCardImage),
+				colourStyles(format),
 			)}
 		>
 			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
