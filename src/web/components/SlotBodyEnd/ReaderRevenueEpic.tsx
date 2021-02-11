@@ -33,8 +33,17 @@ type EpicConfig = {
 	meta: TestMeta;
 	module: {
 		url: string;
-		props: {};
+		props: EpicProps;
 	};
+};
+
+type EpicProps = {
+	variant: {};
+	tracking: {};
+	countryCode?: string;
+	numArticles: number;
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	onReminderOpen?: Function;
 };
 
 const checkForErrors = (response: any) => {
@@ -175,7 +184,7 @@ export const canShow = ({
 };
 
 export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
-	const [Epic, setEpic] = useState<React.FC>();
+	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
 		rootMargin: '-18px',
 		threshold: 0,
