@@ -18,7 +18,7 @@ import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from '../avatar';
-import { ShareIcon } from '../shareIcon';
+import ShareIcon from '../shareIcon';
 import {
 	articleWidthStyles,
 	borderWidthStyles,
