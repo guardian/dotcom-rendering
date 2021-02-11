@@ -158,6 +158,11 @@ const textCardHeadline = (format: Format): string => {
 };
 
 const textCardKicker = (format: Format): string => {
+	if (
+		format.theme === Special.SpecialReport &&
+		format.design === Design.Comment
+	)
+		return pillarPalette[Pillar.Opinion][500];
 	if (format.theme === Special.SpecialReport)
 		return brandAltBackground.primary;
 	if (format.display === Display.Immersive)
