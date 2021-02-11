@@ -5,6 +5,8 @@ import {
 	text,
 	specialReport,
 	opinion,
+	news,
+	sport,
 	brandAltBackground,
 	border,
 } from '@guardian/src-foundations';
@@ -173,9 +175,9 @@ const textCardKicker = (format: Format): string => {
 		case Design.Live:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
 				default:
 					return pillarPalette[format.theme].main;
 			}
