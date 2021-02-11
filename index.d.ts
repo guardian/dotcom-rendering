@@ -75,6 +75,7 @@ type Palette = {
 		commentCount: Colour;
 		shareIcon: Colour;
 		captionTriangle: Colour;
+		cardClock: Colour;
 	},
 	border: {
 		syndicationButton: Colour;

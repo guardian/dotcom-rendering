@@ -8,7 +8,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
 import { makeRelativeDate } from '@root/src/web/lib/dateTime';
-import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
@@ -20,17 +19,6 @@ type Props = {
 };
 
 const ageStyles = (format: Format, palette: Palette) => {
-	// This is annoying but can't apply SVG color otherwise
-	const smallImageSvgColor =
-		format.design === Design.Live
-			? decidePillarLight(format.theme)
-			: neutral[46];
-
-	const svgColor =
-		format.display === Display.Immersive
-			? neutral[100]
-			: smallImageSvgColor;
-
 	return css`
 		${textSans.xsmall()};
 		color: ${palette.text.cardAge};
@@ -44,7 +32,7 @@ const ageStyles = (format: Format, palette: Palette) => {
 		}
 
 		svg {
-			fill: ${svgColor};
+			fill: ${palette.fill.cardClock};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;

@@ -282,6 +282,31 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillCardClock = (format: Format): string => {
+	if (format.display === Display.Immersive) return WHITE;
+	if (
+		format.theme === Special.SpecialReport &&
+		format.design === Design.Comment
+	)
+		return pillarPalette[Pillar.Opinion][500];
+	if (format.theme === Special.SpecialReport) return WHITE;
+	switch (format.design) {
+		case Design.Live:
+			switch (format.theme) {
+				case Pillar.News:
+					return '#ffbac8';
+				case Pillar.Sport:
+					return '#90dcff';
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		case Design.Media:
+			return WHITE;
+		default:
+			return neutral[46];
+	}
+};
+
 const borderSyndicationButton = (): string => {
 	return border.secondary;
 };
@@ -338,6 +363,7 @@ export const decidePalette = (format: Format): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
+			cardClock: fillCardClock(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),
