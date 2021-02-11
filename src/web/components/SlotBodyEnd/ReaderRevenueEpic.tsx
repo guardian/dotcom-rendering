@@ -46,7 +46,7 @@ type EpicProps = {
 	onReminderOpen?: Function;
 };
 
-const checkForErrors = (response: any) => {
+const checkForErrors = (response: Response) => {
 	if (!response.ok) {
 		throw Error(
 			response.statusText ||
@@ -170,7 +170,7 @@ export const canShow = ({
 			return checkForErrors(response);
 		})
 		.then((response) => response.json())
-		.then((json) => {
+		.then((json: { data: EpicConfig }) => {
 			if (!json.data) {
 				return { result: false };
 			}
@@ -205,7 +205,7 @@ export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
 
 		window
 			.guardianPolyfilledImport(module.url)
-			.then((epicModule) => {
+			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
 				modulePerf.end();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 				sendOphanComponentEvent('INSERT', meta);
