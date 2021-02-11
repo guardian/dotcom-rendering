@@ -398,7 +398,7 @@ export const Comment: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&s=7a1e40b6933da57b1bccbcff134341f2',
+			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&s=77ef16f3e784adf8d32f1f5724d0559f',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
@@ -3123,7 +3123,7 @@ export const Comment: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=fe5a345c4e6193a0047355b6f968e5c4',
+				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
 				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bd2f2a476abaf5a0bc7c70f1f31dba50',
 				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d3257abb4b456eb86f445acfe8dfcdf3',
 				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&quality=85&auto=format&fit=max&s=3d4a5bbf7513a6d5c91a173d5b4ad0b5',
@@ -3168,7 +3168,7 @@ export const Comment: CAPIType = {
 			'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=fe5a345c4e6193a0047355b6f968e5c4',
+			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
 		'al:ios:url':
 			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',

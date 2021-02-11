@@ -96,7 +96,7 @@ const richLinkCard = {
 	pillar: 'culture',
 };
 
-export const mockRESTCalls = () =>
+export const mockRESTCalls = (): void => {
 	fetchMock
 		.restore()
 		// Most read by Geo
@@ -194,3 +194,4 @@ export const mockRESTCalls = () =>
 			},
 			{ overwriteRoutes: false },
 		);
+};

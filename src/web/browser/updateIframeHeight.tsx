@@ -1,13 +1,14 @@
+type HeightEventType = { source: { name: string } };
+
 export const updateIframeHeight = (queryString: string): Promise<void> => {
 	const iframes: HTMLIFrameElement[] = [].slice.call(
 		document.querySelectorAll(queryString),
 	);
-	type heightEvent = { source: { name: string } };
 
 	window.addEventListener('message', (event) => {
 		const iframe: HTMLIFrameElement | undefined = iframes.find((i) => {
 			try {
-				return i.name === (event as heightEvent).source.name;
+				return i.name === (event as HeightEventType).source.name;
 			} catch (e) {
 				return false;
 			}

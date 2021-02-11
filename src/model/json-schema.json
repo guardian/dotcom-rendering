@@ -1389,6 +1389,26 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "imageMedia": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1407,9 +1427,77 @@
                 },
                 "mimeType": {
                     "type": "string"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "source": {
+                            "type": "string"
+                        },
+                        "embeddable": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "required": [
+                "mimeType",
+                "url"
+            ]
+        },
+        "Image": {
+            "type": "object",
+            "properties": {
+                "index": {
+                    "type": "number"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "isMaster": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
+                },
+                "mediaType": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fields",
+                "index",
+                "mediaType",
                 "mimeType",
                 "url"
             ]
@@ -1494,48 +1582,6 @@
                 "imageSources",
                 "media",
                 "role"
-            ]
-        },
-        "Image": {
-            "type": "object",
-            "properties": {
-                "index": {
-                    "type": "number"
-                },
-                "fields": {
-                    "type": "object",
-                    "properties": {
-                        "height": {
-                            "type": "string"
-                        },
-                        "width": {
-                            "type": "string"
-                        },
-                        "isMaster": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "height",
-                        "width"
-                    ]
-                },
-                "mediaType": {
-                    "type": "string"
-                },
-                "mimeType": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "fields",
-                "index",
-                "mediaType",
-                "mimeType",
-                "url"
             ]
         },
         "ImageSource": {

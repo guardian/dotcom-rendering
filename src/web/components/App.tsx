@@ -158,7 +158,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 	// non-async version (this is the case in the banner picker where some
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
-	const [asyncCountryCode, setAsyncCountryCode] = useState<Promise<string>>();
+	const [asyncCountryCode, setAsyncCountryCode] = useState<
+		Promise<string | void>
+	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
@@ -182,7 +184,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 		// run one time
 		if (isSignedIn) {
 			getUser(CAPI.config.discussionApiUrl).then((theUser) => {
-				setUser(theUser);
+				if (theUser) setUser(theUser);
 			});
 		} else {
 			setUser(null);

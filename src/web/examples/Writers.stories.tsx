@@ -41,7 +41,7 @@ const Grey = ({
 	/>
 );
 
-const Author = () => (
+const Author = (): JSX.Element => (
 	<div
 		className={css`
 			padding-top: 0.25rem;
@@ -64,7 +64,7 @@ export default {
 	},
 };
 
-export const Writers = () => (
+export const Writers = (): React.ReactNode => (
 	<>
 		<Section
 			showTopBorder={false}

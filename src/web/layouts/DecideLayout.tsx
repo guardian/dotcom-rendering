@@ -18,7 +18,7 @@ type Props = {
 	NAV: NavType;
 };
 
-export const DecideLayout = ({ CAPI, NAV }: Props) => {
+export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	const display: Display = decideDisplay(CAPI);
 	const design: Design = decideDesign(CAPI.designType, CAPI.tags);
 	const pillar: Pillar = decideTheme({

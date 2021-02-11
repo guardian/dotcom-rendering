@@ -48,14 +48,16 @@ export const setCountryCodeSynchronous = (countryCode: string): void => {
 export const getCountryCodeFromLocalStorage = (): string | null => {
 	try {
 		const item = localStorage.getItem(COUNTRY_CODE_KEY);
-		const localCountryCode = item ? JSON.parse(item) : null;
+		const localCountryCode: { [key: string]: any } = JSON.parse(
+			item || '{}',
+		);
 		return localCountryCode.value || null;
 	} catch (error) {
 		return null;
 	}
 };
 
-export const getCountryCode = async () => {
+export const getCountryCode = async (): Promise<string | void> => {
 	// Read local storage to see if we already have a value
 	let localCountryCode: LocalCountryCodeType | null;
 	try {
@@ -79,7 +81,7 @@ export const getCountryCode = async () => {
 				return response;
 			})
 			.then((response) => response.json())
-			.then((json) => json.country)
+			.then((json: { country: string }) => json.country)
 			.catch((error) => {
 				window.guardian.modules.sentry.reportError(
 					error,

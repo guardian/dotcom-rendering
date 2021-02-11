@@ -53,6 +53,8 @@ type Props = {
 	starRating?: number;
 	alwaysVertical?: boolean;
 	minWidthInPixels?: number;
+	// Ophan tracking
+	dataLinkName?: string;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -144,6 +146,7 @@ export const Card = ({
 	starRating,
 	alwaysVertical,
 	minWidthInPixels,
+	dataLinkName,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -160,7 +163,12 @@ export const Card = ({
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
 	return (
-		<CardLink linkTo={linkTo} format={format} palette={palette}>
+		<CardLink
+			linkTo={linkTo}
+			format={format}
+			palette={palette}
+			dataLinkName={dataLinkName}
+		>
 			<TopBar palette={palette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}

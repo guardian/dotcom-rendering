@@ -54,49 +54,49 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
 
-export const ArticleStory = () => {
+export const ArticleStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Article);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ArticleStory.story = { name: 'Article' };
 
-export const ReviewStory = () => {
+export const ReviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Review);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
 
-export const CommentStory = () => {
+export const CommentStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Comment);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
 
-export const PhotoEssayStory = () => {
+export const PhotoEssayStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(PhotoEssay);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 PhotoEssayStory.story = { name: 'PhotoEssay' };
 
-export const AnalysisStory = () => {
+export const AnalysisStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Analysis);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 AnalysisStory.story = { name: 'Analysis' };
 
-export const FeatureStory = () => {
+export const FeatureStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Feature);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 FeatureStory.story = { name: 'Feature' };
 
-export const GuardianViewStory = () => {
+export const GuardianViewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(GuardianView);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 GuardianViewStory.story = { name: 'GuardianView' };
 
-export const InterviewStory = () => {
+export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Interview);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -108,7 +108,7 @@ InterviewStory.story = {
 	},
 };
 
-export const QuizStory = () => {
+export const QuizStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Quiz);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -120,7 +120,7 @@ QuizStory.story = {
 	},
 };
 
-export const RecipeStory = () => {
+export const RecipeStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Recipe);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
@@ -132,7 +132,7 @@ RecipeStory.story = {
 	},
 };
 
-export const MatchReportStory = () => {
+export const MatchReportStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(MatchReport);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };

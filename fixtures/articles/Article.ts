@@ -390,7 +390,7 @@ export const Article: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=0d0e32b4acbe3d0c6562eb50b7643b00',
+			'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=791f5baa9445473c090f4df756088bc1',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe?contenttype=Article&source=twitter',
@@ -3322,7 +3322,7 @@ export const Article: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=6d097acb8908a66d70f40cbb86f9a9a8',
+				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=87f04661a6a817547fcda09efc969896',
 				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=140a9aa95750cca4cd5611019f3323e9',
 				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=00050297e023e2f5be7225dd3a9ac19b',
 				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&quality=85&auto=format&fit=max&s=21af9b1d12b0db548e3a006c14400cfc',
@@ -3368,7 +3368,7 @@ export const Article: CAPIType = {
 			'Without urgent action, rising sea levels by end of century could leave cities under water',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=6d097acb8908a66d70f40cbb86f9a9a8',
+			'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=87f04661a6a817547fcda09efc969896',
 		'al:ios:url':
 			'gnmguardian://environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',

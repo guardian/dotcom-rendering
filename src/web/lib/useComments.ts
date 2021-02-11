@@ -73,7 +73,7 @@ export const buildUrl = (sections: OnwardsType[]) => {
 	return `https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=${shortUrlIds}`;
 };
 
-export function useComments<T>(onwardsSections: OnwardsType[]) {
+export function useComments(onwardsSections: OnwardsType[]) {
 	// useComments takes the onwards response and makes a batch call to the
 	// discussion api (useApi) to get comment counts for all articles referenced in
 	// the trails. It then uses the response from that call to create a copy of the

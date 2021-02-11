@@ -193,7 +193,49 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
+const Box = ({
+	palette,
+	children,
+}: {
+	palette: Palette;
+	children: React.ReactNode;
+}) => (
+	<div
+		className={css`
+			/*
+									This pseudo css shows a black box to the right of the headline
+									so that the black background of the inverted text stretches
+									all the way right. But only from mobileLandscape because below
+									that we want to show a gap. To work properly it needs to wrap
+									the healine so it inherits the correct height based on the length
+									of the headline text
+							*/
+			${from.mobileLandscape} {
+				position: relative;
+				:after {
+					content: '';
+					display: block;
+					position: absolute;
+					width: 50%;
+					right: 0;
+					background-color: ${palette.background.headline};
+					${getZIndex('immersiveBlackBox')}
+					top: 0;
+					bottom: 0;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+export const ImmersiveLayout = ({
+	CAPI,
+	NAV,
+	format,
+	palette,
+}: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -235,37 +277,6 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				format={format}
 				shouldLimitWidth={true}
 			/>
-		</div>
-	);
-
-	const BlackBox = ({ children }: { children: React.ReactNode }) => (
-		<div
-			className={css`
-				/*
-                    This pseudo css shows a black box to the right of the headline
-                    so that the black background of the inverted text stretches
-                    all the way right. But only from mobileLandscape because below
-                    that we want to show a gap. To work properly it needs to wrap
-                    the healine so it inherits the correct height based on the length
-                    of the headline text
-                */
-				${from.mobileLandscape} {
-					position: relative;
-					:after {
-						content: '';
-						display: block;
-						position: absolute;
-						width: 50%;
-						right: 0;
-						background-color: ${neutral[0]};
-						${getZIndex('immersiveBlackBox')}
-						top: 0;
-						bottom: 0;
-					}
-				}
-			`}
-		>
-			{children}
 		</div>
 	);
 
@@ -333,7 +344,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/*
                         This z-index is what ensures the headline title text shows above main media. For
                         the actual headline we set the z-index deeper in ArticleHeadline itself so that
-                        the text appears above the pseudo BlackBox element
+                        the text appears above the pseudo Box element
                     */
 								position: relative;
 								${getZIndex('articleHeadline')};
@@ -355,7 +366,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									badge={CAPI.badge}
 								/>
 							</ContainerLayout>
-							<BlackBox>
+							<Box palette={palette}>
 								<ContainerLayout
 									verticalMargins={false}
 									padContent={false}
@@ -369,7 +380,7 @@ export const ImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										byline={CAPI.author.byline}
 									/>
 								</ContainerLayout>
-							</BlackBox>
+							</Box>
 						</div>
 					</>
 				)}

@@ -6,7 +6,7 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { neutral, space } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 import { Display, Design, Format } from '@guardian/types';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
@@ -102,12 +102,12 @@ const shiftSlightly = css`
 	margin-bottom: 16px;
 `;
 
-const invertedStyles = css`
+const invertedStyles = (palette: Palette) => css`
 	position: relative;
 	white-space: pre-wrap;
 	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
-	box-shadow: -6px 0 0 black;
+	box-shadow: -6px 0 0 ${palette.background.headline};
 	/* Box decoration is required to push the box shadow out on Firefox */
 	box-decoration-break: clone;
 `;
@@ -128,8 +128,8 @@ const reducedBottomPadding = css`
 	padding-bottom: ${space[4]}px;
 `;
 
-const blackBackground = css`
-	background-color: ${neutral[0]};
+const darkBackground = (palette: Palette) => css`
+	background-color: ${palette.background.headline};
 `;
 
 const invertedText = css`
@@ -243,7 +243,7 @@ export const ArticleHeadline = ({
 						<h1
 							className={cx(
 								immersiveWrapper,
-								blackBackground,
+								darkBackground(palette),
 								css`
 									color: ${palette.text.headline};
 								`,
@@ -253,7 +253,7 @@ export const ArticleHeadline = ({
 								className={cx(
 									jumboFont,
 									maxWidth,
-									invertedStyles,
+									invertedStyles(palette),
 									immersiveStyles,
 									displayBlock,
 								)}
@@ -345,8 +345,8 @@ export const ArticleHeadline = ({
 							>
 								<span
 									className={cx(
-										blackBackground,
-										invertedStyles,
+										darkBackground(palette),
+										invertedStyles(palette),
 										displayInline,
 									)}
 								>
