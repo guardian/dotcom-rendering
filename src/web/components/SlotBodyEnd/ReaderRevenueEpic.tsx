@@ -3,9 +3,9 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import {
-	logView,
 	getBodyEnd,
 	getViewLog,
+	logView,
 	getWeeklyArticleHistory,
 } from '@guardian/automat-client';
 import {
@@ -16,14 +16,14 @@ import {
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
+import { initPerf } from '@root/src/web/browser/initPerf';
 import {
 	sendOphanComponentEvent,
 	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
-import { initPerf } from '@root/src/web/browser/initPerf';
 import { Metadata } from '@guardian/automat-client/dist/types';
-import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 import { getCookie } from '../../browser/cookie';
+import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 
 const { css } = emotion;
 
