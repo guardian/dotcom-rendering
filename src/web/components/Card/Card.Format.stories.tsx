@@ -52,7 +52,7 @@ export const Format = (format: Format, title: string) => () => (
 								...format,
 								theme: Pillar.Culture,
 							})}
-							headlineText="Sport"
+							headlineText="Culture"
 							standfirst={standfirsts[0]}
 							headlineSize="medium"
 							kickerText={title}
@@ -75,7 +75,7 @@ export const Format = (format: Format, title: string) => () => (
 								...format,
 								theme: Pillar.Sport,
 							})}
-							headlineText="Culture"
+							headlineText="Sport"
 							standfirst={standfirsts[0]}
 							headlineSize="medium"
 							kickerText={title}
@@ -98,7 +98,7 @@ export const Format = (format: Format, title: string) => () => (
 								...format,
 								theme: Pillar.Opinion,
 							})}
-							headlineText="Lifestyle"
+							headlineText="Opinion"
 							standfirst={standfirsts[0]}
 							headlineSize="medium"
 							kickerText={title}
@@ -119,7 +119,7 @@ export const Format = (format: Format, title: string) => () => (
 								...format,
 								theme: Pillar.Lifestyle,
 							})}
-							headlineText="Opinion"
+							headlineText="Lifestyle"
 							standfirst={standfirsts[0]}
 							headlineSize="medium"
 							kickerText={title}
