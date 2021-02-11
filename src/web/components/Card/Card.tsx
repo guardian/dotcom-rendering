@@ -268,8 +268,7 @@ export const Card = ({
 									age={
 										webPublicationDate ? (
 											<CardAge
-												design={format.design}
-												pillar={format.theme}
+												format={format}
 												webPublicationDate={
 													webPublicationDate
 												}

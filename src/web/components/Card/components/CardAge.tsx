@@ -13,8 +13,7 @@ import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
-	design: Design;
-	pillar: Theme;
+	format: Format;
 	webPublicationDate: string;
 	showClock?: boolean;
 	isFullCardImage?: boolean;
@@ -89,8 +88,7 @@ const fullCardImageTextStyles = css`
 `;
 
 export const CardAge = ({
-	design,
-	pillar,
+	format,
 	webPublicationDate,
 	showClock,
 	isFullCardImage,
@@ -109,8 +107,8 @@ export const CardAge = ({
 	return (
 		<span
 			className={cx(
-				ageStyles(design, pillar, isFullCardImage),
-				colourStyles(design, pillar),
+				ageStyles(format.design, format.theme, isFullCardImage),
+				colourStyles(format.design, format.theme),
 			)}
 		>
 			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
