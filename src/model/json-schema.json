@@ -1193,6 +1193,9 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
+                "documentIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1201,9 +1204,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "documentIndex": {
-                    "type": "number"
                 }
             },
             "required": [
@@ -1238,6 +1238,9 @@
                 "isMandatory": {
                     "type": "boolean"
                 },
+                "embedIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1246,9 +1249,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "embedIndex": {
-                    "type": "number"
                 }
             },
             "required": [
@@ -1649,6 +1649,9 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
+                "instagramIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1657,9 +1660,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "instagramIndex": {
-                    "type": "number"
                 }
             },
             "required": [
@@ -1756,9 +1756,6 @@
                 "originalUrl": {
                     "type": "string"
                 },
-                "source": {
-                    "type": "string"
-                },
                 "title": {
                     "type": "string"
                 },
@@ -1774,14 +1771,17 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
+                "mapIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
-                "sourceDomain": {
+                "source": {
                     "type": "string"
                 },
-                "mapIndex": {
-                    "type": "number"
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1790,7 +1790,6 @@
                 "height",
                 "isThirdPartyTracking",
                 "originalUrl",
-                "source",
                 "title",
                 "width"
             ]
@@ -1932,6 +1931,9 @@
                 "attribution": {
                     "type": "string"
                 },
+                "pullquoteIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1940,9 +1942,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "pullquoteIndex": {
-                    "type": "number"
                 }
             },
             "required": [
@@ -2092,6 +2091,9 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
+                "spotifyIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -2100,9 +2102,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "spotifyIndex": {
-                    "type": "number"
                 }
             },
             "required": [
@@ -2330,6 +2329,9 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
+                "videoFacebookIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -2338,9 +2340,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "videoFacebookIndex": {
-                    "type": "number"
                 }
             },
             "required": [
@@ -2559,9 +2558,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "witnessIndex": {
-                    "type": "number"
                 }
             },
             "required": [
