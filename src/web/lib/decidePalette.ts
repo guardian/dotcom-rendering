@@ -193,26 +193,36 @@ const textCardKicker = (format: Format): string => {
 };
 
 const textCardAge = (format: Format): string => {
-	if (
-		format.theme === Special.SpecialReport &&
-		format.design === Design.Comment
-	)
-		return pillarPalette[Pillar.Opinion][500];
-	if (format.theme === Special.SpecialReport) return WHITE;
 	switch (format.design) {
+		case Design.Comment:
+			switch (format.theme) {
+				case Special.SpecialReport:
+					// TODO: Pull this in from souce once we see it here:
+					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+					return '#ff9941';
+				default:
+					return neutral[60];
+			}
 		case Design.Live:
 			switch (format.theme) {
 				case Pillar.News:
 					return '#ffbac8';
 				case Pillar.Sport:
 					return '#90dcff';
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
 				default:
 					return pillarPalette[format.theme].main;
 			}
 		case Design.Media:
 			return WHITE;
 		default:
-			return neutral[60];
+			switch (format.theme) {
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
+				default:
+					return neutral[60];
+			}
 	}
 };
 
@@ -309,27 +319,36 @@ const fillCaptionTriangle = (format: Format): string => {
 };
 
 const fillCardClock = (format: Format): string => {
-	if (format.display === Display.Immersive) return WHITE;
-	if (
-		format.theme === Special.SpecialReport &&
-		format.design === Design.Comment
-	)
-		return pillarPalette[Pillar.Opinion][500];
-	if (format.theme === Special.SpecialReport) return WHITE;
 	switch (format.design) {
+		case Design.Comment:
+			switch (format.theme) {
+				case Special.SpecialReport:
+					// TODO: Pull this in from souce once we see it here:
+					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+					return '#ff9941';
+				default:
+					return neutral[46];
+			}
 		case Design.Live:
 			switch (format.theme) {
 				case Pillar.News:
 					return '#ffbac8';
 				case Pillar.Sport:
 					return '#90dcff';
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
 				default:
 					return pillarPalette[format.theme].main;
 			}
 		case Design.Media:
 			return WHITE;
 		default:
-			return neutral[46];
+			switch (format.theme) {
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
+				default:
+					return neutral[46];
+			}
 	}
 };
 
