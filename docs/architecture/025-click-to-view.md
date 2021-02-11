@@ -67,7 +67,7 @@ PullquoteBlockElement | yes | It is possible to include an iframe in a pullquote
 SoundcloudBlockElement | no | Soundcloud claim to not track users
 SpotifyBlockElement | yes | Spotify track users
 TweetBlockElement | no | twitter support a [do-not-track](https://developer.twitter.com/en/docs/twitter-for-websites/privacy) feature
-VideoBlockElement | yes | These contain videos from random providers which may track.
+VideoBlockElement | no | These contain videos from random providers which may track. However we do not currently render these videos 😱
 VideoFacebookBlockElement | yes | Facebook
 VideoVimeoBlockElement | no | Vimeo provide a 'do-not-track' feature
 VideoYoutubeBlockElement | no | Youtube provide a 'do-not-track' feature

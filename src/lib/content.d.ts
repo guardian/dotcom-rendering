@@ -553,31 +553,6 @@ type CAPIElement =
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement;
 
-type CAPIThirdPartyEmbedElement =
-	| DocumentBlockElement
-	| EmbedBlockElement
-	| InstagramBlockElement
-	| MapBlockElement
-	| PullquoteBlockElement
-	| SoundcloudBlockElement
-	| SpotifyBlockElement
-	| TweetBlockElement
-	| VideoBlockElement
-	| VideoFacebookBlockElement
-	| VideoVimeoBlockElement
-	| VideoYoutubeBlockElement
-	| WitnessTypeBlockElement;
-
-// elements requiring click to view
-// 	| DocumentBlockElement
-// 	| EmbedBlockElement
-// 	| InstagramBlockElement
-// 	| MapBlockElement
-// 	| PullquoteBlockElement
-// 	| SpotifyBlockElement
-// 	| VideoFacebookBlockElement
-// 	| WitnessTypeBlockElement;
-
 // -------------------------------------
 // Misc
 // -------------------------------------

@@ -669,15 +669,6 @@ export const ArticleRenderer: React.FC<{
 							return null;
 					}
 				}
-				// 	| DocumentBlockElement
-				// 	| EmbedBlockElement
-				// 	| InstagramBlockElement
-				// 	| MapBlockElement
-				// 	| PullquoteBlockElement
-				// 	| SpotifyBlockElement
-				// 	| VideoFacebookBlockElement
-				// 	| WitnessTypeBlockElement;
-
 				case 'model.dotcomrendering.pageElements.AudioBlockElement':
 				case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 				case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
