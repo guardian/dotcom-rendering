@@ -127,9 +127,7 @@ function cspEditions(
 ): string {
 	return `
 	default-src 'self';
-	style-src 'self' https://interactive.guim.co.uk ${assetHashes(
-		styles,
-	)} ${styleSrc(styles, thirdPartyEmbed.twitter, true)};
+	style-src 'self' ${assetHashes(styles)};
 	img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'

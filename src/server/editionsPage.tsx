@@ -101,16 +101,17 @@ function render(
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 	const body = renderBody(item);
-	const head = renderHead(
-		request,
-		getThirdPartyEmbeds(request.content),
-		body.css,
-		body.ids,
-	);
+	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
+	const head = renderHead(request, thirdPartyEmbeds, body.css, body.ids);
 
 	const clientScript = map(getAssetLocation)(some('editions.js'));
 
-	const scripts = <Scripts clientScript={clientScript} twitter={false} />;
+	const scripts = (
+		<Scripts
+			clientScript={clientScript}
+			twitter={thirdPartyEmbeds.twitter}
+		/>
+	);
 
 	return {
 		html: buildHtml(head, body.html, scripts),
