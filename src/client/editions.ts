@@ -3,7 +3,7 @@ import {
 	MessageKind,
 	pingEditionsNative,
 } from '@guardian/renditions';
-import { ShareIcon } from 'components/editions/shareIcon';
+import ShareIcon from 'components/editions/shareIcon';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import interactives from './interactives';

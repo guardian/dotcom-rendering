@@ -11,7 +11,7 @@ import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { getThemeStyles } from 'themeStyles';
-import { ShareIcon } from '../shareIcon';
+import ShareIcon from '../shareIcon';
 import { articleWidthStyles, sidePadding } from '../styles';
 
 // ----- Template Format Specific Styles ----- //

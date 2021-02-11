@@ -52,7 +52,7 @@ const buttonStyles = css`
 	height: 2.5rem;
 `;
 
-export const ShareIcon: FC = () => {
+const ShareIcon: FC = () => {
 	const platform = usePlatform(Platform.IOS);
 	useEffect(() => {
 		pingEditionsNative({ kind: MessageKind.PlatformQuery });
@@ -72,3 +72,5 @@ export const ShareIcon: FC = () => {
 		</button>
 	);
 };
+
+export default ShareIcon;
