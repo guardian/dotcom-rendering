@@ -29,6 +29,14 @@ const { css } = emotion;
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
+type PreEpicConfig = {
+	meta: TestMeta;
+	module: {
+		url: string;
+		props: {};
+	};
+};
+
 type EpicConfig = {
 	meta: TestMeta;
 	module: {
@@ -38,12 +46,8 @@ type EpicConfig = {
 };
 
 type EpicProps = {
-	variant: {};
-	tracking: {};
-	countryCode?: string;
-	numArticles: number;
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	onReminderOpen?: Function;
+	onReminderOpen: Function;
+	// Also anything specified by support-dotcom-components
 };
 
 const checkForErrors = (response: Response) => {
@@ -170,16 +174,21 @@ export const canShow = ({
 			return checkForErrors(response);
 		})
 		.then((response) => response.json())
-		.then((json: { data: EpicConfig }) => {
+		.then((json: { data: PreEpicConfig }) => {
 			if (!json.data) {
 				return { result: false };
 			}
 
 			const { meta, module } = json.data;
 
-			module.props.onReminderOpen = sendOphanReminderOpenEvent;
-
-			return { result: true, meta: { meta, module } };
+			return {
+				result: true,
+				meta: {
+					meta,
+					module,
+					onReminderOpen: sendOphanReminderOpenEvent,
+				},
+			};
 		});
 };
 
