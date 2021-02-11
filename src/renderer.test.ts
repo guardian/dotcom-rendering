@@ -496,23 +496,6 @@ describe('Renders different types of Editions elements', () => {
 		expect(getHtml(pullquote)).toContain('quote');
 	});
 
-	test('ElementKind.RichLink', () => {
-		const nodes = renderEditions(richLinkElement());
-		const richLink = nodes.flat()[0];
-		expect(getHtml(richLink)).toContain(
-			'<h1>this links to a related article</h1>',
-		);
-		expect(getHtml(richLink)).toContain('href="https://theguardian.com"');
-	});
-
-	test('ElementKind.Interactive', () => {
-		const nodes = renderEditions(interactiveElement());
-		const interactive = nodes.flat()[0];
-		expect(getHtml(interactive)).toContain(
-			'<iframe src="https://theguardian.com" height="500" title=""></iframe>',
-		);
-	});
-
 	test('ElementKind.Tweet', () => {
 		const nodes = renderEditions(tweetElement());
 		const tweet = nodes.flat()[0];
