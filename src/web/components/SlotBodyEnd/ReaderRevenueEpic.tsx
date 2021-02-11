@@ -28,6 +28,7 @@ import { getCookie } from '../../browser/cookie';
 const { css } = emotion;
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
+
 type EpicConfig = {
 	meta: TestMeta;
 	module: {
@@ -174,7 +175,6 @@ export const canShow = ({
 };
 
 export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
-	// TODO: sort out this any
 	const [Epic, setEpic] = useState<React.FC>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
 		rootMargin: '-18px',
