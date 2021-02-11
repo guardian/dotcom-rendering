@@ -13,10 +13,10 @@ const siteName = 'frontend';
 const port = process.env.PORT || 9000;
 
 module.exports = {
-    dist,
-    root,
-    target,
-    siteName,
-    statik,
-    port,
+	dist,
+	root,
+	target,
+	siteName,
+	statik,
+	port,
 };

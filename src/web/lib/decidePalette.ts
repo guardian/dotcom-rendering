@@ -5,6 +5,8 @@ import {
 	text,
 	specialReport,
 	opinion,
+	news,
+	sport,
 	brandAltBackground,
 	border,
 } from '@guardian/src-foundations';
@@ -15,9 +17,9 @@ const WHITE = neutral[100];
 const BLACK = text.primary;
 
 const textHeadline = (format: Format): string => {
-	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.display) {
 		case Display.Immersive:
+			if (format.theme === Special.SpecialReport) return WHITE;
 			switch (format.design) {
 				case Design.PrintShop:
 					return BLACK;
@@ -26,6 +28,8 @@ const textHeadline = (format: Format): string => {
 			}
 		case Display.Showcase:
 		case Display.Standard: {
+			if (format.theme === Special.SpecialReport)
+				return specialReport[100];
 			switch (format.design) {
 				case Design.Review:
 				case Design.Recipe:
@@ -158,6 +162,13 @@ const textCardHeadline = (format: Format): string => {
 };
 
 const textCardKicker = (format: Format): string => {
+	if (
+		format.theme === Special.SpecialReport &&
+		format.design === Design.Comment
+	)
+		// TODO: Pull this in from souce once we see it here:
+		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+		return '#ff9941';
 	if (format.theme === Special.SpecialReport)
 		return brandAltBackground.primary;
 	if (format.display === Display.Immersive)
@@ -166,9 +177,9 @@ const textCardKicker = (format: Format): string => {
 		case Design.Live:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
 				default:
 					return pillarPalette[format.theme].main;
 			}
@@ -267,6 +278,21 @@ const backgroundCard = (format: Format): string => {
 	}
 };
 
+const backgroundHeadline = (format: Format): string => {
+	switch (format.display) {
+		case Display.Immersive:
+			if (format.theme === Special.SpecialReport)
+				return specialReport[300];
+			return BLACK;
+		case Display.Showcase:
+		case Display.Standard:
+			if (format.design === Design.Interview) return BLACK;
+			return 'transparent';
+		default:
+			return 'transparent';
+	}
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -358,6 +384,7 @@ export const decidePalette = (format: Format): Palette => {
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
 			card: backgroundCard(format),
+			headline: backgroundHeadline(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
