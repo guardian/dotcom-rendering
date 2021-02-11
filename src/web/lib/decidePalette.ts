@@ -162,7 +162,9 @@ const textCardKicker = (format: Format): string => {
 		format.theme === Special.SpecialReport &&
 		format.design === Design.Comment
 	)
-		return pillarPalette[Pillar.Opinion][500];
+		// TODO: Pull this in from souce once we see it here:
+		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+		return '#ff9941';
 	if (format.theme === Special.SpecialReport)
 		return brandAltBackground.primary;
 	if (format.display === Display.Immersive)
