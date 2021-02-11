@@ -181,6 +181,30 @@ const textCardKicker = (format: Format): string => {
 	}
 };
 
+const textCardAge = (format: Format): string => {
+	if (
+		format.theme === Special.SpecialReport &&
+		format.design === Design.Comment
+	)
+		return pillarPalette[Pillar.Opinion][500];
+	if (format.theme === Special.SpecialReport) return WHITE;
+	switch (format.design) {
+		case Design.Live:
+			switch (format.theme) {
+				case Pillar.News:
+					return '#ffbac8';
+				case Pillar.Sport:
+					return '#90dcff';
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		case Design.Media:
+			return WHITE;
+		default:
+			return neutral[60];
+	}
+};
+
 const textLinkKicker = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
@@ -301,6 +325,7 @@ export const decidePalette = (format: Format): Palette => {
 			cardHeadline: textCardHeadline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
+			cardAge: textCardAge(format),
 		},
 		background: {
 			article: backgroundArticle(format),

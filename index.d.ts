@@ -62,6 +62,7 @@ type Palette = {
 		cardHeadline: Colour;
 		cardKicker: Colour;
 		linkKicker: Colour;
+		cardAge: Colour;
 	},
 	background: {
 		article: Colour;

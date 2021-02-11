@@ -269,6 +269,7 @@ export const Card = ({
 										webPublicationDate ? (
 											<CardAge
 												format={format}
+												palette={palette}
 												webPublicationDate={
 													webPublicationDate
 												}
