@@ -16,7 +16,7 @@ import { images, headlines, standfirsts, kickers } from './Card.mocks';
 
 export default {
 	component: Card,
-	title: 'Components/Card',
+	title: 'Components/Card/Layouts',
 	parameters: {
 		viewport: {
 			// This has the effect of turning off the viewports addon by default
