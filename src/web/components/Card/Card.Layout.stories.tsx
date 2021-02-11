@@ -453,7 +453,7 @@ export const Related = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<UL direction="row" bottomMargin={true}>
-					<LI padSides={true}>
+					<LI padSides={true} percentage="33%">
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
@@ -475,6 +475,7 @@ export const Related = () => (
 						/>
 					</LI>
 					<LI
+						percentage="33%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
@@ -501,6 +502,7 @@ export const Related = () => (
 						/>
 					</LI>
 					<LI
+						percentage="33%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
@@ -527,7 +529,7 @@ export const Related = () => (
 					</LI>
 				</UL>
 				<UL direction="row">
-					<LI padSides={true}>
+					<LI padSides={true} percentage="25%">
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
@@ -547,6 +549,7 @@ export const Related = () => (
 						/>
 					</LI>
 					<LI
+						percentage="25%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
@@ -570,6 +573,7 @@ export const Related = () => (
 						/>
 					</LI>
 					<LI
+						percentage="25%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
@@ -593,6 +597,7 @@ export const Related = () => (
 						/>
 					</LI>
 					<LI
+						percentage="25%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
@@ -663,7 +668,7 @@ export const Quad = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<UL direction="row">
-					<LI padSides={true}>
+					<LI percentage="25%" padSides={true}>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
@@ -691,6 +696,7 @@ export const Quad = () => (
 						/>
 					</LI>
 					<LI
+						percentage="25%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
@@ -719,6 +725,7 @@ export const Quad = () => (
 						/>
 					</LI>
 					<LI
+						percentage="25%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
@@ -746,6 +753,7 @@ export const Quad = () => (
 						/>
 					</LI>
 					<LI
+						percentage="25%"
 						padSides={true}
 						showDivider={true}
 						showTopMarginWhenStacked={true}
