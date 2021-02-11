@@ -56,7 +56,7 @@ const buildReaderRevenueEpicConfig = ({
 				return <ReaderRevenueEpic {...meta} />;
 			},
 		},
-		timeoutMillis: null, // TODO: do we want a timeout?
+		timeoutMillis: null,
 	};
 };
 
