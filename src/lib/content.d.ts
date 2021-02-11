@@ -120,9 +120,6 @@ interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
 	width: number;
 	title?: string;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 	documentIndex?: number;
 }
 
@@ -133,9 +130,6 @@ interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
 	alt?: string;
 	html: string;
 	isMandatory: boolean;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 	embedIndex?: number;
 }
 
@@ -201,9 +195,6 @@ interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	url: string;
 	hasCaption: boolean;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 	instagramIndex?: number;
 }
 
@@ -224,14 +215,11 @@ interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	embedUrl: string;
 	originalUrl: string;
-	source: string;
 	title: string;
 	height: number;
 	width: number;
 	caption?: string;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	sourceDomain?: string;
 	mapIndex?: number;
 }
 
@@ -271,9 +259,6 @@ interface PullquoteBlockElement extends ThirdPartyEmbeddedContent {
 	html?: string;
 	role: RoleType;
 	attribution?: string;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 	pullquoteIndex?: number;
 }
 
@@ -304,9 +289,6 @@ interface SoundcloudBlockElement extends ThirdPartyEmbeddedContent {
 	isTrack: boolean;
 	isMandatory: boolean;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 }
 
 interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
@@ -317,9 +299,6 @@ interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 	width?: number;
 	caption?: string;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 	spotifyIndex?: number;
 }
 
@@ -358,17 +337,11 @@ interface TweetBlockElement extends ThirdPartyEmbeddedContent {
 	id: string;
 	hasMedia: boolean;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 }
 
 interface VideoBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoBlockElement';
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 }
 
 interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
@@ -379,9 +352,6 @@ interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
 	caption?: string;
 	embedUrl?: string;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 	videoFacebookIndex?: number;
 }
 
@@ -395,9 +365,6 @@ interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
 	credit?: string;
 	title?: string;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 }
 
 interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
@@ -411,9 +378,6 @@ interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 	credit?: string;
 	title?: string;
 	role?: RoleType;
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
 }
 
 interface YoutubeBlockElement {
@@ -506,9 +470,6 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataImage
 		| WitnessTypeDataVideo
 		| WitnessTypeDataText;
-	source?: string;
-	sourceDomain?: string;
-	witnessIndex?: number;
 }
 
 type CAPIElement =
