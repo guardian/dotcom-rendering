@@ -12,6 +12,14 @@ import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
+type Props = {
+	design: Design;
+	pillar: Theme;
+	webPublicationDate: string;
+	showClock?: boolean;
+	isFullCardImage?: boolean;
+};
+
 const ageStyles = (
 	design: Design,
 	pillar: Theme,
@@ -79,14 +87,6 @@ const fullCardImageTextStyles = css`
 	padding-left: ${space[1]}px;
 	padding-right: ${space[1]}px;
 `;
-
-type Props = {
-	design: Design;
-	pillar: Theme;
-	webPublicationDate: string;
-	showClock?: boolean;
-	isFullCardImage?: boolean;
-};
 
 export const CardAge = ({
 	design,
