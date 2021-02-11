@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Display, Pillar } from '@guardian/types/Format';
+import { Display, Pillar } from '@guardian/types';
 import { boolean, radios, withKnobs } from '@storybook/addon-knobs';
 import {
 	advertisementFeature,
@@ -9,7 +9,6 @@ import {
 	feature,
 	review,
 } from 'fixtures/item';
-import React from 'react';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Headline from './headline';

@@ -18,21 +18,34 @@ import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
 import { neutral, text as textColour } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Design } from '@guardian/types/Format';
-import type { Format } from '@guardian/types/Format';
 import {
 	andThen,
+	Design,
 	fromNullable,
+	fromUnsafe,
 	map,
 	none,
 	some,
+	toOption,
 	withDefault,
-} from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
-import type { Result } from '@guardian/types/result';
-import { fromUnsafe, toOption } from '@guardian/types/result';
+} from '@guardian/types';
+import type { Format, Option, Result } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
-import type { BodyElement } from 'bodyElement';
+import type {
+	AudioAtom as AudioAtomElement,
+	BodyElement,
+	Embed,
+	GuideAtom as GuideAtomElement,
+	Image,
+	Instagram,
+	InteractiveAtom as InteractiveAtomElement,
+	MediaAtom as MediaAtomElement,
+	ProfileAtom as ProfileAtomElement,
+	QandaAtom as QandaAtomElement,
+	QuizAtom as QuizAtomElement,
+	Text,
+	TimelineAtom as TimelineAtomElement,
+} from 'bodyElement';
 import Anchor from 'components/anchor';
 import InteractiveAtom, {
 	atomCss,
@@ -43,7 +56,10 @@ import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
+import GalleryImage from 'components/editions/galleryImage';
+import EditionsPullquote from 'components/editions/pullquote';
 import HorizontalRule from 'components/horizontalRule';
+import Interactive from 'components/interactive';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
@@ -322,30 +338,36 @@ const standfirstTextElement = (format: Format) => (
 	}
 };
 
+const noLinksStandfirstTextElement = (format: Format) => (
+	node: Node,
+	key: number,
+): ReactNode => {
+	const children = Array.from(node.childNodes).map(
+		standfirstTextElement(format),
+	);
+	switch (node.nodeName) {
+		case 'P':
+			return h('p', { key }, children);
+		case 'STRONG':
+			return h('strong', { key }, children);
+		default:
+			return null;
+	}
+};
+
 const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 	Array.from(doc.childNodes).map(textElement(format));
 
-const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
-	Array.from(doc.childNodes).map(standfirstTextElement(format));
-
-const Interactive = (props: { url: string; title?: string }): ReactElement => {
-	const styles = css`
-		margin: ${remSpace[4]} 0;
-		${darkModeCss`
-            padding: ${remSpace[4]};
-            background: ${neutral[100]}
-        `}
-	`;
-	return styledH(
-		'figure',
-		{ css: styles, className: 'interactive' },
-		h(
-			'iframe',
-			{ src: props.url, height: 500, title: props.title ?? '' },
-			null,
-		),
+const standfirstText = (
+	doc: DocumentFragment,
+	format: Format,
+	noLinks?: boolean,
+): ReactNode[] =>
+	Array.from(doc.childNodes).map(
+		noLinks
+			? noLinksStandfirstTextElement(format)
+			: standfirstTextElement(format),
 	);
-};
 
 const Tweet = (props: {
 	content: NodeList;
@@ -375,12 +397,12 @@ const captionElement = (format: Format) => (
 	switch (node.nodeName) {
 		case 'STRONG':
 			return format.design === Design.Media
-				? h('h2', { css: captionHeadingStyles, key }, children)
+				? styledH('h2', { css: captionHeadingStyles, key }, children)
 				: children;
 		case 'BR':
 			return null;
 		case 'EM':
-			return h(
+			return styledH(
 				'em',
 				{
 					css: css`
@@ -394,7 +416,7 @@ const captionElement = (format: Format) => (
 				children,
 			);
 		case 'A':
-			return h(
+			return styledH(
 				Anchor,
 				{
 					href: withDefault('')(getHref(node)),
@@ -419,36 +441,282 @@ const captionElement = (format: Format) => (
 const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
 	Array.from(doc.childNodes).map(captionElement(format));
 
+const imageRenderer = (
+	format: Format,
+	element: Image,
+	key: number,
+): ReactNode => {
+	const { caption, credit, nativeCaption } = element;
+
+	return h(BodyImage, {
+		caption: map<DocumentFragment, ReactNode>((cap) => [
+			renderCaption(cap, format),
+			h(Credit, { credit, format, key }),
+		])(caption),
+		format,
+		key,
+		supportsDarkMode: true,
+		lightbox: some({
+			className: 'js-launch-slideshow',
+			caption: nativeCaption,
+			credit,
+		}),
+		image: element,
+		leftColumnBreakpoint: some<Breakpoint>('wide'),
+	});
+};
+
+const textRenderer = (
+	format: Format,
+	excludeStyles: boolean,
+	element: Text,
+): ReactNode => {
+	return excludeStyles
+		? Array.from(element.doc.childNodes).map(plainTextElement)
+		: text(element.doc, format);
+};
+
+const embedRenderer = (element: Embed): ReactNode => {
+	const props = {
+		dangerouslySetInnerHTML: {
+			__html: element.html,
+		},
+	};
+
+	const figureCss = css`
+		margin: ${remSpace[4]} 0;
+		${darkModeCss`
+			background: white;
+			padding: ${remSpace[2]};
+		`}
+	`;
+	const captionStyles = css`
+		${textSans.xsmall()}
+		color: ${textColour.supporting};
+	`;
+
+	const figure = (alt: string | null): ReactElement => {
+		const children = [
+			h('div', props),
+			styledH('figcaption', { css: captionStyles }, alt),
+		];
+		return styledH('figure', { css: figureCss }, children);
+	};
+
+	return pipe2(
+		element.alt,
+		map((alt) => figure(alt)),
+		withDefault(figure(null)),
+	);
+};
+
+const instagramRenderer = (element: Instagram): ReactNode => {
+	const props = {
+		dangerouslySetInnerHTML: {
+			__html: element.html,
+		},
+	};
+
+	return h('div', props);
+};
+
+const guideAtomRenderer = (
+	format: Format,
+	element: GuideAtomElement,
+): ReactNode => {
+	return h(GuideAtom, {
+		...element,
+		pillar: themeToPillar(format.theme),
+		likeHandler: () => {
+			console.log('like clicked');
+		},
+		dislikeHandler: () => {
+			console.log('dislike clicked');
+		},
+		expandCallback: () => {
+			console.log('expand clicked');
+		},
+	});
+};
+
+const qandaAtomRenderer = (
+	format: Format,
+	element: QandaAtomElement,
+): ReactNode => {
+	return h(QandaAtom, {
+		...element,
+		pillar: themeToPillar(format.theme),
+		likeHandler: () => {
+			console.log('like clicked');
+		},
+		dislikeHandler: () => {
+			console.log('dislike clicked');
+		},
+		expandCallback: () => {
+			console.log('expand clicked');
+		},
+	});
+};
+
+const profileAtomRenderer = (
+	format: Format,
+	element: ProfileAtomElement,
+): ReactNode => {
+	return h(ProfileAtom, {
+		...element,
+		pillar: themeToPillar(format.theme),
+		likeHandler: () => {
+			console.log('like clicked');
+		},
+		dislikeHandler: () => {
+			console.log('dislike clicked');
+		},
+		expandCallback: () => {
+			console.log('expand clicked');
+		},
+	});
+};
+
+const timelineAtomRenderer = (
+	format: Format,
+	element: TimelineAtomElement,
+): ReactNode => {
+	return h(TimelineAtom, {
+		...element,
+		pillar: themeToPillar(format.theme),
+		likeHandler: () => {
+			console.log('like clicked');
+		},
+		dislikeHandler: () => {
+			console.log('dislike clicked');
+		},
+		expandCallback: () => {
+			console.log('expand clicked');
+		},
+	});
+};
+
+const interactiveAtomRenderer = (
+	format: Format,
+	element: InteractiveAtomElement,
+): ReactNode => {
+	const { html, css: styles, js } = element;
+	if (format.design !== Design.Interactive) {
+		const fenced = `
+			<html>
+				<head>
+					<meta charset="utf-8">
+					<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+					<style>${styles}</style>
+					<style>${atomCss}</style>
+				</head>
+				<body>
+					${html}
+					<script>${withDefault('')(js)}</script>
+					<script>${atomScript}</script>
+				</body>
+			</html>
+		`;
+		return h('iframe', { srcdoc: fenced });
+	} else {
+		return h(InteractiveAtom, { html, styles, js, format });
+	}
+};
+
+const mediaAtomRenderer = (
+	format: Format,
+	element: MediaAtomElement,
+): ReactNode => {
+	const { posterUrl, videoId, duration, caption } = element;
+
+	const backgroundColor = (format: Format): string =>
+		format.design === Design.Comment ? neutral[86] : neutral[97];
+
+	const styles = css`
+		width: 100%;
+		padding-bottom: 56.25%;
+		margin: 0;
+		background: ${backgroundColor(format)};
+		${darkModeCss`
+			background: ${neutral[20]};
+		`}
+	`;
+
+	const figureAttributes = {
+		css: css`
+			margin: ${remSpace[4]} 0;
+		`,
+	};
+
+	const attributes = {
+		'data-posterUrl': posterUrl,
+		'data-videoId': videoId,
+		'data-duration': duration,
+		className: 'native-video',
+		css: styles,
+	};
+	const figcaption = h(FigCaption, {
+		format,
+		supportsDarkMode: true,
+		children: map((cap: DocumentFragment) => renderCaption(cap, format))(
+			caption,
+		),
+	});
+	return styledH('figure', figureAttributes, [
+		styledH('div', attributes),
+		figcaption,
+	]);
+};
+
+const audioAtomRenderer = (
+	format: Format,
+	element: AudioAtomElement,
+): ReactNode => {
+	const { theme } = format;
+	const pillar = themeFromString('pillar/' + themeToPillar(theme));
+	const audioAtomStyles = css`
+		figure {
+			margin: 0;
+		}
+	`;
+	return styledH(
+		'div',
+		{
+			...element,
+			pillar,
+			className: 'js-audio-atom',
+			css: audioAtomStyles,
+		},
+		h(AudioAtom, { ...element, pillar }),
+	);
+};
+
+const quizAtomRenderer = (
+	format: Format,
+	element: QuizAtomElement,
+): ReactNode => {
+	const props = JSON.stringify(element);
+	const hydrationParams = h(
+		'script',
+		{ className: 'js-quiz-params', type: 'application/json' },
+		props,
+	);
+	return h('div', { className: 'js-quiz' }, [
+		hydrationParams,
+		h(QuizAtom, { ...element }),
+	]);
+};
+
 const render = (format: Format, excludeStyles = false) => (
 	element: BodyElement,
 	key: number,
 ): ReactNode => {
 	switch (element.kind) {
 		case ElementKind.Text:
-			return excludeStyles
-				? Array.from(element.doc.childNodes).map(plainTextElement)
-				: text(element.doc, format);
+			return textRenderer(format, excludeStyles, element);
 
-		case ElementKind.Image: {
-			const { caption, credit, nativeCaption } = element;
-
-			return h(BodyImage, {
-				caption: map<DocumentFragment, ReactNode>((cap) => [
-					renderCaption(cap, format),
-					h(Credit, { credit, format, key }),
-				])(caption),
-				format,
-				key,
-				supportsDarkMode: true,
-				lightbox: some({
-					className: 'js-launch-slideshow',
-					caption: nativeCaption,
-					credit,
-				}),
-				image: element,
-				leftColumnBreakpoint: some<Breakpoint>('wide'),
-			});
-		}
+		case ElementKind.Image:
+			return imageRenderer(format, element, key);
 
 		case ElementKind.Pullquote: {
 			const { quote, attribution } = element;
@@ -493,225 +761,137 @@ const render = (format: Format, excludeStyles = false) => (
 			return h(CalloutForm, { campaign, format, description });
 		}
 
-		case ElementKind.Embed: {
-			const props = {
-				dangerouslySetInnerHTML: {
-					__html: element.html,
-				},
-			};
+		case ElementKind.Embed:
+			return embedRenderer(element);
 
-			const figureCss = css`
-				margin: ${remSpace[4]} 0;
-				${darkModeCss`
-                    background: white;
-                    padding: ${remSpace[2]};
-                `}
-			`;
-			const captionStyles = css`
-				${textSans.xsmall()}
-				color: ${textColour.supporting};
-			`;
-
-			const figure = (alt: string | null): ReactElement => {
-				const children = [
-					h('div', props),
-					styledH('figcaption', { css: captionStyles }, alt),
-				];
-				return styledH('figure', { css: figureCss }, children);
-			};
-
-			return pipe2(
-				element.alt,
-				map((alt) => figure(alt)),
-				withDefault(figure(null)),
-			);
-		}
-
-		case ElementKind.Instagram: {
-			const props = {
-				dangerouslySetInnerHTML: {
-					__html: element.html,
-				},
-			};
-
-			return h('div', props);
-		}
+		case ElementKind.Instagram:
+			return instagramRenderer(element);
 
 		case ElementKind.ExplainerAtom: {
 			return h(ExplainerAtom, { ...element });
 		}
 
-		case ElementKind.GuideAtom: {
-			return h(GuideAtom, {
-				...element,
-				pillar: themeToPillar(format.theme),
-				likeHandler: () => {
-					console.log('like clicked');
-				},
-				dislikeHandler: () => {
-					console.log('dislike clicked');
-				},
-				expandCallback: () => {
-					console.log('expand clicked');
-				},
-			});
-		}
+		case ElementKind.GuideAtom:
+			return guideAtomRenderer(format, element);
 
-		case ElementKind.QandaAtom: {
-			return h(QandaAtom, {
-				...element,
-				pillar: themeToPillar(format.theme),
-				likeHandler: () => {
-					console.log('like clicked');
-				},
-				dislikeHandler: () => {
-					console.log('dislike clicked');
-				},
-				expandCallback: () => {
-					console.log('expand clicked');
-				},
-			});
-		}
+		case ElementKind.QandaAtom:
+			return qandaAtomRenderer(format, element);
 
-		case ElementKind.ProfileAtom: {
-			return h(ProfileAtom, {
-				...element,
-				pillar: themeToPillar(format.theme),
-				likeHandler: () => {
-					console.log('like clicked');
-				},
-				dislikeHandler: () => {
-					console.log('dislike clicked');
-				},
-				expandCallback: () => {
-					console.log('expand clicked');
-				},
-			});
-		}
+		case ElementKind.ProfileAtom:
+			return profileAtomRenderer(format, element);
 
-		case ElementKind.TimelineAtom: {
-			return h(TimelineAtom, {
-				...element,
-				pillar: themeToPillar(format.theme),
-				likeHandler: () => {
-					console.log('like clicked');
-				},
-				dislikeHandler: () => {
-					console.log('dislike clicked');
-				},
-				expandCallback: () => {
-					console.log('expand clicked');
-				},
-			});
-		}
+		case ElementKind.TimelineAtom:
+			return timelineAtomRenderer(format, element);
 
 		case ElementKind.ChartAtom: {
 			return h(ChartAtom, { ...element });
 		}
 
-		case ElementKind.InteractiveAtom: {
-			const { html, css: styles, js } = element;
-			if (format.design !== Design.Interactive) {
-				const fenced = `
-                    <html>
-                        <head>
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-                            <style>${styles}</style>
-                            <style>${atomCss}</style>
-                        </head>
-                        <body>
-                            ${html}
-                            <script>${withDefault('')(js)}</script>
-                            <script>${atomScript}</script>
-                        </body>
-                    </html>
-                `;
-				return h('iframe', { srcdoc: fenced });
-			} else {
-				return h(InteractiveAtom, { html, styles, js, format });
-			}
+		case ElementKind.InteractiveAtom:
+			return interactiveAtomRenderer(format, element);
+
+		case ElementKind.MediaAtom:
+			return mediaAtomRenderer(format, element);
+
+		case ElementKind.AudioAtom:
+			return audioAtomRenderer(format, element);
+
+		case ElementKind.QuizAtom:
+			return quizAtomRenderer(format, element);
+	}
+};
+
+const renderEditions = (format: Format, excludeStyles = false) => (
+	element: BodyElement,
+	key: number,
+): ReactNode => {
+	switch (element.kind) {
+		case ElementKind.Text:
+			return textRenderer(format, excludeStyles, element);
+
+		case ElementKind.Image:
+			return format.design === Design.Media
+				? h(GalleryImage, { format, image: element })
+				: imageRenderer(format, element, key);
+
+		case ElementKind.Pullquote: {
+			const { quote, attribution } = element;
+			return h(EditionsPullquote, { quote, attribution, format, key });
 		}
 
-		case ElementKind.MediaAtom: {
-			const { posterUrl, videoId, duration, caption } = element;
+		case ElementKind.LiveEvent:
+			return h(LiveEventLink, { ...element, key });
 
-			const backgroundColor = (format: Format): string =>
-				format.design === Design.Comment ? neutral[86] : neutral[97];
+		case ElementKind.Tweet:
+			return h(Tweet, { content: element.content, format, key });
 
-			const styles = css`
-				width: 100%;
-				padding-bottom: 56.25%;
-				margin: 0;
-				background: ${backgroundColor(format)};
-				${darkModeCss`
-                    background: ${neutral[20]};
-                `}
-			`;
-
-			const figureAttributes = {
-				css: css`
-					margin: ${remSpace[4]} 0;
-				`,
-			};
-
-			const attributes = {
-				'data-posterUrl': posterUrl,
-				'data-videoId': videoId,
-				'data-duration': duration,
-				className: 'native-video',
-				css: styles,
-			};
-			const figcaption = h(FigCaption, {
-				format,
-				supportsDarkMode: true,
-				children: map((cap: DocumentFragment) =>
-					renderCaption(cap, format),
-				)(caption),
+		case ElementKind.Audio:
+			return h(Audio, {
+				src: element.src,
+				width: element.width,
+				height: element.height,
 			});
-			return styledH('figure', figureAttributes, [
-				styledH('div', attributes),
-				figcaption,
-			]);
+
+		case ElementKind.Video:
+			return h(Video, {
+				src: element.src,
+				width: element.width,
+				height: element.height,
+			});
+
+		case ElementKind.Callout: {
+			const { campaign, description } = element;
+			return h(CalloutForm, { campaign, format, description });
 		}
 
-		case ElementKind.AudioAtom: {
-			const { theme } = format;
-			const pillar = themeFromString('pillar/' + themeToPillar(theme));
-			const audioAtomStyles = css`
-				figure {
-					margin: 0;
-				}
-			`;
-			return styledH(
-				'div',
-				{
-					...element,
-					pillar,
-					className: 'js-audio-atom',
-					css: audioAtomStyles,
-				},
-				h(AudioAtom, { ...element, pillar }),
-			);
-		}
+		case ElementKind.Embed:
+			return embedRenderer(element);
 
-		case ElementKind.QuizAtom: {
-			const props = JSON.stringify(element);
-			const hydrationParams = h(
-				'script',
-				{ className: 'js-quiz-params', type: 'application/json' },
-				props,
-			);
-			return h('div', { className: 'js-quiz' }, [
-				hydrationParams,
-				h(QuizAtom, { ...element }),
-			]);
-		}
+		case ElementKind.Instagram:
+			return instagramRenderer(element);
+
+		case ElementKind.ExplainerAtom:
+			return h(ExplainerAtom, { ...element });
+
+		case ElementKind.GuideAtom:
+			return guideAtomRenderer(format, element);
+
+		case ElementKind.QandaAtom:
+			return qandaAtomRenderer(format, element);
+
+		case ElementKind.ProfileAtom:
+			return profileAtomRenderer(format, element);
+
+		case ElementKind.TimelineAtom:
+			return timelineAtomRenderer(format, element);
+
+		case ElementKind.ChartAtom:
+			return h(ChartAtom, { ...element });
+
+		case ElementKind.InteractiveAtom:
+			return interactiveAtomRenderer(format, element);
+
+		case ElementKind.MediaAtom:
+			return mediaAtomRenderer(format, element);
+
+		case ElementKind.AudioAtom:
+			return audioAtomRenderer(format, element);
+
+		case ElementKind.QuizAtom:
+			return quizAtomRenderer(format, element);
+
+		default:
+			return null;
 	}
 };
 
 const renderAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
 	elements.map(render(format));
+
+const renderEditionsAll = (
+	format: Format,
+	elements: BodyElement[],
+): ReactNode[] => elements.map(renderEditions(format));
 
 const renderAllWithoutStyles = (
 	format: Format,
@@ -722,6 +902,7 @@ const renderAllWithoutStyles = (
 
 export {
 	renderAll,
+	renderEditionsAll,
 	renderAllWithoutStyles,
 	text as renderText,
 	textElement as renderTextElement,

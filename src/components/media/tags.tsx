@@ -3,7 +3,6 @@ import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import React from 'react';
 import type { FC } from 'react';
 
 const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`

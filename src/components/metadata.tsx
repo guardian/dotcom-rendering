@@ -2,14 +2,13 @@
 
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import { Design, Display } from '@guardian/types/Format';
+import { Design, Display } from '@guardian/types';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
 import CommentCount from 'components/commentCount';
 import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import type { Item } from 'item';
-import React from 'react';
 import type { FC } from 'react';
 
 // ----- Component ----- //

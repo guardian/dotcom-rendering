@@ -10,8 +10,8 @@ import {
 	opinion,
 	sport,
 } from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types/Format';
-import { Design, Display, Pillar } from '@guardian/types/Format';
+import type { Format } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 
 // ----- Types ----- //
 
@@ -42,7 +42,7 @@ const textHeadlinePrimary = (format: Format): Colour => {
 		return neutral[100];
 	}
 
-	if (format.design === Design.Feature) {
+	if (format.design === Design.Feature || format.design === Design.Review) {
 		switch (format.theme) {
 			case Pillar.Opinion:
 				return opinion[300];
@@ -52,7 +52,6 @@ const textHeadlinePrimary = (format: Format): Colour => {
 				return culture[300];
 			case Pillar.Lifestyle:
 				return lifestyle[300];
-			case Pillar.News:
 			default:
 				return news[300];
 		}

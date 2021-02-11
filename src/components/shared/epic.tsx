@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
+import { FrictionScreenReason } from '@guardian/bridget/FrictionScreenReason';
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
@@ -14,7 +15,7 @@ import { body, headline } from '@guardian/src-foundations/typography';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
 import { ThemeProvider } from 'emotion-theming';
 import { acquisitionsClient } from 'native/nativeApi';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //
@@ -139,11 +140,15 @@ function Epic({
 			<div className="button-container">
 				<ThemeProvider theme={buttonReaderRevenue}>
 					{epicButton(firstButton, () =>
-						acquisitionsClient.launchFrictionScreen(),
+						acquisitionsClient.launchFrictionScreen(
+							FrictionScreenReason.epic,
+						),
 					)}
 					{secondButton
 						? epicButton(secondButton, () =>
-								acquisitionsClient.launchFrictionScreen(),
+								acquisitionsClient.launchFrictionScreen(
+									FrictionScreenReason.epic,
+								),
 						  )
 						: null}
 				</ThemeProvider>

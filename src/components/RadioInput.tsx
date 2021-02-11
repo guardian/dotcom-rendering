@@ -4,7 +4,6 @@ import type { FormOption } from '@guardian/apps-rendering-api-models/formOption'
 import { remSpace } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Radio, RadioGroup } from '@guardian/src-radio';
-import React from 'react';
 import type { ReactElement } from 'react';
 
 interface RadioInputProps {

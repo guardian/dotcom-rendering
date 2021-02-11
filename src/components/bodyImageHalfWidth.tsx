@@ -5,7 +5,6 @@ import { css } from '@emotion/core';
 import { breakpoints, remSpace } from '@guardian/src-foundations';
 import Img from 'components/img';
 import type { BodyImageProps as Props } from 'image';
-import React from 'react';
 import type { FC } from 'react';
 
 // ----- Setup ----- //

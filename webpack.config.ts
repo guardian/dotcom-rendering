@@ -8,7 +8,7 @@ import CleanCSS from 'clean-css';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { Compiler, Configuration, Resolve } from 'webpack';
 import webpack from 'webpack';
-import ManifestPlugin from 'webpack-manifest-plugin';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import nodeExternals from 'webpack-node-externals';
 import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
 
@@ -72,6 +72,7 @@ const serverConfig = (
 						allowlist: [/@guardian/],
 					}),
 			  ],
+
 		node: {
 			__dirname: false,
 		},
@@ -93,9 +94,15 @@ const serverConfig = (
 							loader: 'babel-loader',
 							options: {
 								presets: [
-									'@babel/preset-react',
-									'@emotion/babel-preset-css-prop',
+									[
+										'@babel/preset-react',
+										{
+											runtime: 'automatic',
+											importSource: '@emotion/core',
+										},
+									],
 								],
+								plugins: ['@emotion'],
 							},
 						},
 						{
@@ -121,6 +128,7 @@ export const clientConfig: Configuration = {
 	entry: {
 		article: 'client/article.ts',
 		media: 'client/media.ts',
+		editions: 'client/editions.ts',
 	},
 	target: 'web',
 	devtool: 'inline-cheap-source-map',
@@ -128,7 +136,7 @@ export const clientConfig: Configuration = {
 		path: path.resolve(__dirname, 'dist/assets'),
 		filename: '[name].js',
 	},
-	plugins: [new ManifestPlugin({ writeToFileEmit: true })],
+	plugins: [new WebpackManifestPlugin({ writeToFileEmit: true })],
 	resolve: resolve('clientDev'),
 	devServer: {
 		publicPath: '/assets/',
@@ -145,8 +153,14 @@ export const clientConfig: Configuration = {
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								'@babel/preset-react',
-								'@emotion/babel-preset-css-prop',
+								[
+									'@babel/preset-react',
+									{
+										runtime: 'automatic',
+										importSource: '@emotion/core',
+									},
+								],
+
 								[
 									'@babel/preset-env',
 									{
@@ -162,6 +176,7 @@ export const clientConfig: Configuration = {
 									},
 								],
 							],
+							plugins: ['@emotion'],
 						},
 					},
 					{
@@ -186,7 +201,7 @@ const clientConfigProduction = {
 	mode: 'production',
 	devtool: false,
 	plugins: [
-		new ManifestPlugin(),
+		new WebpackManifestPlugin(),
 		new HtmlWebpackPlugin({
 			meta: {
 				'Content-Security-Policy': {

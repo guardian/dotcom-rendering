@@ -2,14 +2,11 @@ import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Display } from '@guardian/types/Format';
-import type { Format } from '@guardian/types/Format';
-import { OptionKind } from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
+import { Display, OptionKind } from '@guardian/types';
+import type { Format, Option } from '@guardian/types';
 import { MainMediaKind } from 'headerMedia';
 import type { MainMedia } from 'headerMedia';
 import type { Item } from 'item';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { renderCaption } from 'renderer';
 

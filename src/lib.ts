@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { Option } from '@guardian/types/option';
-import { map, withDefault } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { fromNullable, map, withDefault } from '@guardian/types';
 import type { ReactElement } from 'react';
 
 // ----- Functions ----- //
@@ -62,6 +62,9 @@ function handleErrors(response: Response): Response | never {
 	}
 	return response;
 }
+
+const index = (i: number) => <A>(arr: A[]): Option<A> => fromNullable(arr[i]);
+
 // ----- Exports ----- //
 
 export {
@@ -77,4 +80,5 @@ export {
 	isObject,
 	maybeRender,
 	handleErrors,
+	index,
 };

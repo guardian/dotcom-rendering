@@ -11,22 +11,21 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgAudio, SvgCamera, SvgQuote, SvgVideo } from '@guardian/src-icons';
-import { Design, Display } from '@guardian/types/Format';
-import type { Format } from '@guardian/types/Format';
 import {
+	Design,
+	Display,
 	fromNullable,
 	map,
 	OptionKind,
 	withDefault,
-} from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
+} from '@guardian/types';
+import type { Format, Option } from '@guardian/types';
 import Img from 'components/img';
 import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import { border } from 'editorialPalette';
 import type { Image } from 'image';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';

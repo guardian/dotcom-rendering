@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import { Lines } from '@guardian/src-ed-lines';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { map, withDefault } from '@guardian/types/option';
+import { map, withDefault } from '@guardian/types';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Series from 'components/series';
@@ -16,7 +16,6 @@ import HeaderMedia from 'headerMedia';
 import type { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
 import { pipe2 } from 'lib';
 import type { FC, ReactNode } from 'react';
-import React from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,

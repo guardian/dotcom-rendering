@@ -8,13 +8,10 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, Audio, Video, BodyElement } from 'bodyElement';
-import { Design } from '@guardian/types/Format';
+import { Design, Display, none, resultMap, toOption, withDefault } from '@guardian/types';
 import { JSDOM } from 'jsdom';
-import { Display } from '@guardian/types/Format';
-import { withDefault } from '@guardian/types/option';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe2 } from 'lib';
-import { toOption, map } from '@guardian/types/result';
 import { articleContentWith } from 'helperTest';
 
 const articleContent = {
@@ -182,7 +179,7 @@ const getFirstBody = (item: Review | Standard) =>
 	pipe2(
 		item.body[0],
 		toOption,
-		withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '' }),
+		withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '', alt: none }),
 	);
 
 describe('fromCapi returns correct Item', () => {
@@ -579,8 +576,8 @@ describe('audio elements', () => {
 		const item = f(articleContentWith(audioElement)) as Standard;
 		pipe2(
 			item.body[0],
-			map<BodyElement, Audio>((element) => element as Audio),
-			map(({ src, width, height }) => {
+			resultMap<BodyElement, Audio>((element) => element as Audio),
+			resultMap(({ src, width, height }) => {
 				expect(src).toContain('https://open.spotify.com/embed/track/');
 				expect(width).toContain('300');
 				expect(height).not.toContain('380');
@@ -639,8 +636,8 @@ describe('video elements', () => {
 		const item = f(articleContentWith(videoElement)) as Standard;
 		pipe2(
 			item.body[0],
-			map<BodyElement, Video>((element) => element as Video),
-			map(({ src, width, height }) => {
+			resultMap<BodyElement, Video>((element) => element as Video),
+			resultMap(({ src, width, height }) => {
 				expect(src).toBe('https://www.youtube-nocookie.com/embed/');
 				expect(width).toBe('460');
 				expect(height).toBe('259');

@@ -87,6 +87,10 @@ module.exports = {
 		// This check seems to be flaky, and complains about things that TS is happy about
 		'react/prop-types': 'off',
 		'import/no-unresolved': 'off',
+		// JSX no longer requires React in scope as of React 17
+		// https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#eslint
+		'react/jsx-uses-react': 'off',
+		'react/react-in-jsx-scope': 'off',
 		indent: 'off',
 		'import/no-default-export': 'off',
 	},

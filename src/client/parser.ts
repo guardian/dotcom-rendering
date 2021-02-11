@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { Result } from '@guardian/types/result';
-import { err, ok } from '@guardian/types/result';
+import type { Result } from '@guardian/types';
+import { err, ok } from '@guardian/types';
 import { errorToString } from 'lib';
 
 // ----- Functions ----- //

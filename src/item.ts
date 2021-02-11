@@ -9,10 +9,8 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { Format } from '@guardian/types/Format';
-import { Design, Display, Pillar } from '@guardian/types/Format';
-import { fromNullable, map } from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
+import type { Format, Option } from '@guardian/types';
+import { Design, Display, fromNullable, map, Pillar } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import type { Logo } from 'capi';
@@ -232,7 +230,12 @@ const isVideo = hasTag('type/video');
 
 const isGallery = hasTag('type/gallery');
 
-const isMedia = hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
+const isMedia = hasSomeTag([
+	'type/audio',
+	'type/video',
+	'type/gallery',
+	'type/picture',
+]);
 
 const isReview = hasSomeTag([
 	'tone/reviews',
@@ -257,6 +260,8 @@ const isGuardianView = hasTag('tone/editorials');
 const isQuiz = hasTag('tone/quizzes');
 
 const isAdvertisementFeature = hasTag('tone/advertisement-features');
+
+const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog = (context: Context) => (
 	request: RenderingRequest,
@@ -306,6 +311,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			...item,
 			theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme,
 		};
+	} else if (isInterview(tags)) {
+		return {
+			design: Design.Interview,
+			...itemFieldsWithBody(context, request),
+		};
 	} else if (isFeature(tags)) {
 		return {
 			design: Design.Feature,
@@ -316,11 +326,6 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isRecipe(tags)) {
 		return {
 			design: Design.Recipe,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isInterview(tags)) {
-		return {
-			design: Design.Interview,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isGuardianView(tags)) {
@@ -366,4 +371,5 @@ export {
 	isAudio,
 	isVideo,
 	isGallery,
+	isPicture,
 };

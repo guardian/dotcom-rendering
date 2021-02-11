@@ -1,6 +1,5 @@
 import { css } from '@emotion/core';
 import type { FC, ReactElement } from 'react';
-import React from 'react';
 
 export interface AudioProps {
 	src: string;

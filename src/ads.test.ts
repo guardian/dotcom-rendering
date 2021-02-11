@@ -2,7 +2,7 @@ import { getAdPlaceholderInserter } from './ads';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar, Format, Design, Display } from '@guardian/types/Format';
+import { Pillar, Format, Design, Display } from '@guardian/types';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'bodyElement';
 

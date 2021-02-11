@@ -5,13 +5,12 @@ import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { map, withDefault } from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
+import { map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import Dateline from 'components/dateline';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 import { renderText } from '../../renderer';
 
