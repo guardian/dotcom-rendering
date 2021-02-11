@@ -2,6 +2,7 @@
 
 import { Design, Display, none, Pillar, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import type { Body } from 'bodyElement';
 import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
 import type { Image } from 'image';
@@ -27,6 +28,19 @@ const bylineHtml: Option<DocumentFragment> = pipe2(
 	parseHtml,
 	toOption,
 );
+
+const docFixture = (): DocumentFragment => {
+	const doc = new DocumentFragment();
+
+	const el = document.createElement('p');
+
+	el.innerText =
+		'Readers of Prospect magazine recently voted him the world’s fourth-best thinker. And right now he is thinking about 3 November, and whether the United States will reject or endorse Donald Trump. No one knows what will happen; not even West, not least because in the US he sees contradictions that even he can’t fully explain.';
+
+	doc.appendChild(el);
+
+	return doc;
+};
 
 const srcset =
 	'https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=32&quality=85&fit=bounds&s=100fc280274e40946afb34d4b561ce9f 32w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e 64w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=128&quality=85&fit=bounds&s=35b6ce614cae19fbdcdefa55a670eda5 128w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=192&quality=85&fit=bounds&s=930a05d87b62a1f613ff76f3ee0c97a0 192w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=256&quality=85&fit=bounds&s=8c44b90de342114bd3bf6145767d4b31 256w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=400&quality=85&fit=bounds&s=8491504dfb944eee7ef173e739cb4f74 400w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=600&quality=85&fit=bounds&s=668fc2d7278f6c4a553f806c9b2d47d3 600w';
@@ -80,10 +94,112 @@ const mainMedia = {
 	},
 };
 
+const doc = docFixture();
+
+const body: Body = [
+	{
+		kind: 0,
+		value: {
+			kind: 0,
+			doc,
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 1,
+			src:
+				'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d',
+			srcset:
+				'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w',
+			dpr2Srcset:
+				'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w',
+			alt: {
+				kind: 0,
+				value: 'Jane Giddins outside her home in Newton St Loe',
+			},
+			width: 2000,
+			height: 2500,
+			caption: none,
+			credit: { kind: 0, value: 'Photograph: Sam Frost/The Guardian' },
+			nativeCaption: {
+				kind: 0,
+				value:
+					'Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles.',
+			},
+			role: 0,
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 0,
+			doc,
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 0,
+			doc,
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 15,
+			html:
+				"<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+			title: "What is Queen's consent?",
+			id: '575888ee-9973-4256-9a96-bad4b9c65d81',
+			image: undefined,
+			credit: undefined,
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 0,
+			doc,
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 0,
+			doc,
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 2,
+			quote:
+				'Why should the crown be allowed to carry on with a feudal system just because they want to?',
+			attribution: { kind: 0, value: 'Jane Giddins' },
+		},
+	},
+	{
+		kind: 0,
+		value: {
+			kind: 0,
+			doc,
+		},
+	},
+
+	{
+		kind: 0,
+		value: {
+			kind: 0,
+			doc,
+		},
+	},
+];
+
 const fields = {
 	theme: Pillar.News,
 	display: Display.Standard,
-	body: [],
+	body: body,
 	headline: headline,
 	standfirst: standfirst,
 	byline: '',
@@ -148,6 +264,7 @@ const interview: Item = {
 const media: Item = {
 	design: Design.Media,
 	...fields,
+	body: [],
 };
 
 // ----- Exports ----- //
