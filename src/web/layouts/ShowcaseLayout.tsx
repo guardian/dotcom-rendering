@@ -216,7 +216,12 @@ interface Props {
 	palette: Palette;
 }
 
-export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const ShowcaseLayout = ({
+	CAPI,
+	NAV,
+	format,
+	palette,
+}: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -428,6 +433,7 @@ export const ShowcaseLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
+									abTests={CAPI.config.abTests}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines

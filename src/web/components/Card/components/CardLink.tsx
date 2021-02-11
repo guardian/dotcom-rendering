@@ -83,13 +83,20 @@ type Props = {
 	linkTo: string;
 	format: Format;
 	palette: Palette;
+	dataLinkName?: string;
 };
 
-export const CardLink = ({ children, linkTo, format, palette }: Props) => (
+export const CardLink = ({
+	children,
+	linkTo,
+	format,
+	palette,
+	dataLinkName = 'article',
+}: Props) => (
 	<a
 		href={linkTo}
 		className={linkStyles(format, palette)}
-		data-link-name="article"
+		data-link-name={dataLinkName}
 	>
 		{children}
 	</a>

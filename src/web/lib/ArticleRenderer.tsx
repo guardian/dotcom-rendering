@@ -34,6 +34,7 @@ import {
 	WitnessImageBlockComponent,
 	WitnessTextBlockComponent,
 } from '@root/src/web/components/elements/WitnessBlockComponent';
+import { ClickToView } from '@root/src/web/components/ClickToView';
 
 import { Figure } from '@root/src/web/components/Figure';
 
@@ -63,7 +64,8 @@ export const ArticleRenderer: React.FC<{
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ format, palette, elements, adTargeting, host }) => {
+	abTests: CAPIType['config']['abTests'];
+}> = ({ format, palette, elements, adTargeting, host, abTests }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -169,13 +171,24 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 					return (
-						<Figure role={element.role}>
-							<DocumentBlockComponent
-								embedUrl={element.embedUrl}
-								height={element.height}
-								width={element.width}
-								title={element.title}
-							/>
+						<Figure
+							role={element.role}
+							id={`document-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<DocumentBlockComponent
+									embedUrl={element.embedUrl}
+									height={element.height}
+									width={element.width}
+									title={element.title}
+								/>
+							</ClickToView>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.EmbedBlockElement':

@@ -114,6 +114,10 @@ interface DocumentBlockElement {
 	width: number;
 	title?: string;
 	role?: RoleType;
+	isThirdPartyTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
+	documentIndex?: number;
 }
 
 interface EmbedBlockElement {

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Design, Display, Pillar } from '@guardian/types';
 import { breakpoints } from '@guardian/src-foundations/mq';
+import { Section } from '@root/src/web/components/Section';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
@@ -296,19 +297,22 @@ const immersiveTrails = convertToImmersive(trails);
 
 export const Headlines = () => (
 	<>
-		<Carousel
-			heading="Headlines"
-			trails={trails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.News}
-		/>
-
-		<Carousel
-			heading="Sport"
-			trails={trails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.Sport}
-		/>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Headlines"
+				trails={trails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.News}
+			/>
+		</Section>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Sport"
+				trails={trails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.Sport}
+			/>
+		</Section>
 	</>
 );
 
@@ -316,21 +320,24 @@ Headlines.story = 'Headlines carousel';
 
 export const Immersive = () => (
 	<>
-		<Carousel
-			heading="Headlines"
-			trails={immersiveTrails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.News}
-			isFullCardImage={true}
-		/>
-
-		<Carousel
-			heading="Sport"
-			trails={immersiveTrails}
-			ophanComponentName="curated-content"
-			pillar={Pillar.Sport}
-			isFullCardImage={true}
-		/>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Headlines"
+				trails={immersiveTrails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.News}
+				isFullCardImage={true}
+			/>
+		</Section>
+		<Section showTopBorder={true}>
+			<Carousel
+				heading="Sport"
+				trails={immersiveTrails}
+				ophanComponentName="curated-content"
+				pillar={Pillar.Sport}
+				isFullCardImage={true}
+			/>
+		</Section>
 	</>
 );
 

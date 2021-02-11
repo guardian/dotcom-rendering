@@ -16,3 +16,4 @@ node_modules/
 !/src/**/*.js
 !/fixtures/**/*.ts
 !/cypress/**/*.js
+!/scripts/**/*.js

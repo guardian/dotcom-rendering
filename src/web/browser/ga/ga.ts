@@ -45,13 +45,14 @@ export const init = (): void => {
 	});
 };
 
-type coreVitalsArgs = {
+type CoreVitalsArgsType = {
 	name: string;
 	delta: number;
 	id: string;
 };
+
 // https://www.npmjs.com/package/web-vitals#using-analyticsjs
-const sendCoreVital = ({ name, delta, id }: coreVitalsArgs): void => {
+const sendCoreVital = ({ name, delta, id }: CoreVitalsArgsType): void => {
 	const { ga } = window;
 
 	if (!ga) {

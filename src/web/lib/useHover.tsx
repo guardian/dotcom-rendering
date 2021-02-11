@@ -9,7 +9,7 @@ export function useHover<T>(): [MutableRefObject<T>, boolean] {
 	const handleMouseOut = () => setValue(false);
 
 	useEffect(() => {
-		const node: any = ref.current;
+		const node: HTMLElement | undefined = ref.current;
 		if (node) {
 			node.addEventListener('mouseover', handleMouseOver);
 			node.addEventListener('mouseout', handleMouseOut);

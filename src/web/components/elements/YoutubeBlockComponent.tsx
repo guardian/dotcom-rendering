@@ -88,7 +88,7 @@ export const YoutubeBlockComponent = ({
 	width = 460,
 	duration,
 	origin,
-}: Props) => {
+}: Props): JSX.Element => {
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');

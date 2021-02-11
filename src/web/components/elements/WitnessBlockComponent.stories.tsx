@@ -135,7 +135,7 @@ export const WitnessVideoBlockComponentDefault = () => (
 			title="Warhammer Quest Timelapse"
 			description="Tell me if you&#39;ve heard this one before: A Dwarf, a thief, a fighter and a priest walk into a dungeon ... Warhammer Quest is the quintessential &#39;Old School&#39; dungeon-crawler."
 			authorName="Gregg Lewis-Qualls"
-			youtubeHtml='<iframe width="440" height="330" src="https://www.youtube.com/embed/XRq83txBgxw?wmode=opaque&feature=oembed" frameborder="0" allowfullscreen></iframe>'
+			youtubeHtml='<iframe width="440" height="330" src="https://www.youtube.com/embed/N9Cgy-ke5-s?origin=https://www.theguardian.com&widgetid=1&modestbranding=1" frameborder="0" allowfullscreen></iframe>'
 			dateCreated="2015-08-27T13:32:32Z"
 			pillar={Pillar.Sport}
 		/>

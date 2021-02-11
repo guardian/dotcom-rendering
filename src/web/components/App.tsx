@@ -57,6 +57,8 @@ import {
 	getConsentFor,
 } from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
+import { ClickToView } from '@root/src/web/components/ClickToView';
+import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -116,7 +118,10 @@ const GetMatchStats = React.lazy(() => {
 	});
 });
 
-type Props = { CAPI: CAPIBrowserType; NAV: NavType };
+type Props = {
+	CAPI: CAPIBrowserType;
+	NAV: NavType;
+};
 
 const componentEventHandler = (
 	componentType: any,
@@ -145,7 +150,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 	// non-async version (this is the case in the banner picker where some
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
-	const [asyncCountryCode, setAsyncCountryCode] = useState<Promise<string>>();
+	const [asyncCountryCode, setAsyncCountryCode] = useState<
+		Promise<string | void>
+	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
@@ -169,7 +176,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 		// run one time
 		if (isSignedIn) {
 			getUser(CAPI.config.discussionApiUrl).then((theUser) => {
-				setUser(theUser);
+				if (theUser) setUser(theUser);
 			});
 		} else {
 			setUser(null);
@@ -620,6 +627,28 @@ export const App = ({ CAPI, NAV }: Props) => {
 							'EXPAND',
 						)}
 					/>
+				</HydrateOnce>
+			))}
+			{CAPI.documentBlockElements.map((documentBlockElement, index) => (
+				<HydrateOnce
+					key={index}
+					root="document-block-element"
+					index={documentBlockElement.documentIndex}
+				>
+					<ClickToView
+						role={documentBlockElement.role}
+						isTracking={documentBlockElement.isThirdPartyTracking}
+						source={documentBlockElement.source}
+						sourceDomain={documentBlockElement.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<DocumentBlockComponent
+							embedUrl={documentBlockElement.embedUrl}
+							height={documentBlockElement.height}
+							width={documentBlockElement.width}
+							title={documentBlockElement.title}
+						/>
+					</ClickToView>
 				</HydrateOnce>
 			))}
 			<Portal root="most-viewed-right">
