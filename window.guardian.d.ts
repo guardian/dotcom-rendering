@@ -11,11 +11,7 @@ declare global {
                 data: {
                     GA: { [key: string]: any }
                     [key: string]: any
-                    CAPI: {
-                        config: {
-                            frontendAssetsFullURL: string;
-                        }
-                    }
+                    CAPI: CAPIBrowserType
                 };
                 cssIDs: string[];
 

@@ -18,7 +18,7 @@ interface AdInfo {
 }
 
 type Props = {
-	items: { [key: string]: any; id: string }[];
+	items: JSX.Element[];
 	adSlots: number[];
 	adClassName: string;
 	adInfo: AdInfo;
@@ -49,6 +49,9 @@ export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
 			return (
 				<>
 					{item}
+					{/* TODO: we should not be assuming the JSX has an ID property and using it as such, we should update `items` to contain IDs and JSX elements */}
+					{/*
+                    // @ts-ignore */}
 					{ad(`ad-${item.id}`)}
 				</>
 			);
