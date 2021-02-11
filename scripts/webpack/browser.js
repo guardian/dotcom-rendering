@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack');
-const AssetsManifest = require('webpack-assets-manifest');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
 
@@ -25,10 +24,6 @@ const generateName = (isLegacyJS) => {
 	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
-
-// used to stop multiple compilers overwriting other compiler's data
-const manifestData = {};
-const legacyManifestData = {};
 
 const scriptPath = (package) =>
 	[
@@ -59,12 +54,6 @@ module.exports = ({ isLegacyJS }) => ({
 		splitChunks: { cacheGroups: { default: false } },
 	},
 	plugins: [
-		new AssetsManifest({
-			writeToDisk: true,
-			assets: isLegacyJS ? legacyManifestData : manifestData,
-			// Need to explicitly define output file names to avoid overwrites
-			output: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
-		}),
 		DEV && new webpack.HotModuleReplacementPlugin(),
 		DEV && friendlyErrorsWebpackPlugin(),
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7

@@ -714,7 +714,7 @@ type IslandType =
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as
-// defined in manifest.json
+// defined in loadable-manifest-browser.json
 type BlockElementType = string;
 interface ComponentNameChunkMap {
     chunkName: string;

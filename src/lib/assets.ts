@@ -1,21 +1,16 @@
-import { joinUrl } from './joinUrl';
-
 interface AssetHash {
-	[key: string]: string;
+	[key: string]: { [key: string]: [] };
 }
 
-let assetHash: AssetHash = {};
-let assetHashLegacy: AssetHash = {};
 let loadableManifest: AssetHash = {};
+let loadableManifestLegacy: AssetHash = {};
 
 try {
 	// path is relative to the server bundle
 	// eslint-disable-next-line import/no-unresolved
-	assetHash = require('./manifest.json');
-	// eslint-disable-next-line import/no-unresolved
-	assetHashLegacy = require('./manifest.legacy.json');
-	// eslint-disable-next-line import/no-unresolved
 	loadableManifest = require('./loadable-manifest-browser.json');
+	// eslint-disable-next-line import/no-unresolved
+	loadableManifestLegacy = require('./loadable-manifest-browser.legacy.json');
 } catch (e) {
 	// do nothing
 }
@@ -31,14 +26,27 @@ export const CDN = stage
 	? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
 	: '/';
 export const loadableManifestJson = loadableManifest;
-export const getDist = ({
-	path,
-	legacy,
-}: {
-	path: string;
-	legacy: boolean;
-}): string => {
-	const selectedAssetHash = legacy ? assetHashLegacy : assetHash;
-	const formattedPath = joinUrl([path]);
-	return `${CDN}assets/${selectedAssetHash[formattedPath] || formattedPath}`;
+
+export const getScriptArrayFromFilename = (filename: string) => {
+	// 'ophan.87b473fc83e9ca6250fc.js' -> 'ophan'
+	const chunkName = filename.split('.')[0];
+	const chunks: string[] | undefined =
+		loadableManifestLegacy.assetsByChunkName[chunkName];
+	const legacyFilename = chunks && chunks.length > 0 && chunks[0];
+	return [
+		{ src: `${CDN}assets/${filename}`, legacy: false },
+		{ src: `${CDN}assets/${legacyFilename}`, legacy: true },
+	];
+};
+
+export const getByChunkName = (
+	chunkName: string,
+): { src: string; legacy?: boolean }[] | [] => {
+	const chunks: string[] | undefined =
+		loadableManifestJson.assetsByChunkName[chunkName];
+	const filename = chunks && chunks.length > 0 && chunks[0];
+	if (!filename) {
+		return [];
+	}
+	return getScriptArrayFromFilename(filename);
 };
