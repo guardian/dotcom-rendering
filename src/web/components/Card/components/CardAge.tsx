@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
@@ -16,17 +16,19 @@ type Props = {
 	format: Format;
 	webPublicationDate: string;
 	showClock?: boolean;
-	isFullCardImage?: boolean;
 };
 
-const ageStyles = (format: Format, isFullCardImage?: boolean) => {
+const ageStyles = (format: Format) => {
 	// This is annoying but can't apply SVG color otherwise
 	const smallImageSvgColor =
 		format.design === Design.Live
 			? decidePillarLight(format.theme)
 			: neutral[46];
 
-	const svgColor = isFullCardImage ? neutral[100] : smallImageSvgColor;
+	const svgColor =
+		format.display === Display.Immersive
+			? neutral[100]
+			: smallImageSvgColor;
 
 	const smallImageTextColor =
 		format.design === Design.Live
@@ -87,12 +89,7 @@ const fullCardImageTextStyles = css`
 	padding-right: ${space[1]}px;
 `;
 
-export const CardAge = ({
-	format,
-	webPublicationDate,
-	showClock,
-	isFullCardImage,
-}: Props) => {
+export const CardAge = ({ format, webPublicationDate, showClock }: Props) => {
 	const displayString = makeRelativeDate(
 		new Date(webPublicationDate).getTime(),
 		{
@@ -105,13 +102,13 @@ export const CardAge = ({
 	}
 
 	return (
-		<span
-			className={cx(
-				ageStyles(format, isFullCardImage),
-				colourStyles(format),
-			)}
-		>
-			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
+		<span className={cx(ageStyles(format), colourStyles(format))}>
+			<span
+				className={cx(
+					format.display === Display.Immersive &&
+						fullCardImageTextStyles,
+				)}
+			>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate}>{displayString}</time>
 			</span>

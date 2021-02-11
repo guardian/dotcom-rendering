@@ -273,9 +273,6 @@ export const Card = ({
 													webPublicationDate
 												}
 												showClock={showClock}
-												isFullCardImage={
-													isFullCardImage
-												}
 											/>
 										) : undefined
 									}
