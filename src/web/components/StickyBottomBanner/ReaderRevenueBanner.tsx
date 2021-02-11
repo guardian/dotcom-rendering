@@ -22,7 +22,7 @@ import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
-import { CanShowResult } from './bannerPicker';
+import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
 const checkForErrors = (response: Response) => {
 	if (!response.ok) {
