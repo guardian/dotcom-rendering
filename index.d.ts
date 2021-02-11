@@ -286,7 +286,7 @@ interface CAPILinkType {
     url: string;
     title: string;
     longTitle: string;
-    iconName: string;
+    iconName?: string;
     children?: CAPILinkType[];
     mobileOnly?: boolean;
     pillar?: CAPIPillar;
