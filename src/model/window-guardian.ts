@@ -88,6 +88,10 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		);
 	};
 
+	// If our element is one that could possibly track, but hasn't been marked
+	// as such by the back-end, we remove it from the array of elements that we'll
+	// hydrate on the client-side.
+	// https://github.com/guardian/dotcom-rendering/blob/click-to-view-for-all-element-types/docs/architecture/025-click-to-view.md#click-to-view-component
 	const thirdPartyTrackingElementsOnly = <
 		T extends ThirdPartyEmbeddedContent
 	>(

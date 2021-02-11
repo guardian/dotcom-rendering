@@ -2,10 +2,10 @@
 
 ## Overview
 
-We support embedding may types of third party content in our products. There is the potential for the third party
-to do a certain amount of tracking of our users activity of their use of our product using their embedded content.
+We support embedding many types of third party content in our products. There is the potential for the third party
+to do a certain amount of tracking of our reader's activity of their use of our product using their embedded content.
 
-In an attempt to give the use choice about being tracked by the third parties we have implemented a
+In an attempt to give the reader choice about being tracked by the third parties we have implemented a
 'click to view' system.
 
 Some third parties support do-not-track features for their product eg youtube provide a youtube-nocookie.com domain
