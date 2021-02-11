@@ -288,7 +288,6 @@ interface CAPILinkType {
     longTitle: string;
     iconName?: string;
     children?: CAPILinkType[];
-    mobileOnly?: boolean;
     pillar?: CAPIPillar;
     more?: boolean;
     classList?: string[];
