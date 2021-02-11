@@ -285,7 +285,7 @@ type PageTypeType = {
 interface CAPILinkType {
     url: string;
     title: string;
-    longTitle: string;
+    longTitle?: string;
     iconName?: string;
     children?: CAPILinkType[];
     pillar?: CAPIPillar;

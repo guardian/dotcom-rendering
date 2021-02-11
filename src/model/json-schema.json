@@ -3499,7 +3499,6 @@
                 }
             },
             "required": [
-                "longTitle",
                 "title",
                 "url"
             ]

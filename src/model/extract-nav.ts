@@ -46,7 +46,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
 	const title = getString(data, 'title');
 	return {
 		title,
-		longTitle: getString(data, 'longTitle') || title,
+		longTitle: getString(data, 'longTitle', '') || title,
 		url: getString(data, 'url'),
 		pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
 		children: getArray<object>(data, 'children', []).map(
