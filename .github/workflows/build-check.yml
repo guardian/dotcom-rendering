@@ -2,7 +2,7 @@ name: Build Check
 on: push
 
 jobs:
-    amp_validation:
+    build_check:
         name: Build Check
         runs-on: ubuntu-latest
         steps:
