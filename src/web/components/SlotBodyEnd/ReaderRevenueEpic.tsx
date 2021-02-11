@@ -174,7 +174,7 @@ export const canShow = ({
 			return checkForErrors(response);
 		})
 		.then((response) => response.json())
-		.then((json: { data: PreEpicConfig }) => {
+		.then((json: { data?: PreEpicConfig }) => {
 			if (!json.data) {
 				return { result: false };
 			}
