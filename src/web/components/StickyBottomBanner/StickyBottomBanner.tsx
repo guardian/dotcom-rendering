@@ -19,10 +19,11 @@ type Props = {
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
-	const item: { [key: string]: string } = JSON.parse(
-		localStorage.getItem(`gu.prefs.${key}`) || '',
-	);
-	return item.value;
+	const item = localStorage.getItem(`gu.prefs.${key}`);
+
+	if (item) {
+		return JSON.parse(item).value;
+	}
 };
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
