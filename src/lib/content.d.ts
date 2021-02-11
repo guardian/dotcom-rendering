@@ -254,12 +254,12 @@ interface ProfileAtomBlockElement {
 	role?: RoleType;
 }
 
-interface PullquoteBlockElement extends ThirdPartyEmbeddedContent {
+interface PullquoteBlockElement {
 	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
 	html?: string;
-	role: RoleType;
+	role: string;
 	attribution?: string;
-	pullquoteIndex?: number;
+	isThirdPartyTracking?: boolean;
 }
 
 interface QABlockElement {

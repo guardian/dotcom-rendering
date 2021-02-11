@@ -64,7 +64,6 @@ import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBloc
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
-import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import {
@@ -739,29 +738,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 							caption={element.caption}
 							credit={element.source}
 							title={element.title}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
-			{CAPI.pullquoteBlockElements.map((element) => (
-				<HydrateOnce
-					root="pullquote-block-element"
-					index={element.pullquoteIndex}
-				>
-					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
-						abTests={CAPI.config.abTests}
-					>
-						<PullQuoteBlockComponent
-							key={element.pullquoteIndex}
-							html={element.html}
-							pillar={format.theme}
-							design={format.design}
-							attribution={element.attribution}
-							role={element.role}
 						/>
 					</ClickToView>
 				</HydrateOnce>

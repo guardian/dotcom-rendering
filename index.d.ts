@@ -432,7 +432,6 @@ type CAPIBrowserType = {
 	embedBlockElements: EmbedBlockElement[];
 	instagramBlockElements: InstagramBlockElement[];
 	mapBlockElements: MapBlockElement[];
-	pullquoteBlockElements: PullquoteBlockElement[];
 	spotifyBlockElements: SpotifyBlockElement[];
 	videoFacebookBlockElements: VideoFacebookBlockElement[];
 };
@@ -720,7 +719,6 @@ type IslandType =
 	| 'embed-block-element'
 	| 'instagram-block-element'
 	| 'map-block-element'
-	| 'pullquote-block-element'
 	| 'spotify-block-element'
 	| 'video-facebook-block-element';
 

@@ -377,24 +377,14 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 					return (
-						<div id={`pullquote-block-element-${i}`}>
-							<ClickToView
-								role={element.role}
-								isTracking={element.isThirdPartyTracking}
-								source={element.source}
-								sourceDomain={element.sourceDomain}
-								abTests={abTests}
-							>
-								<PullQuoteBlockComponent
-									key={i}
-									html={element.html}
-									pillar={format.theme}
-									design={format.design}
-									attribution={element.attribution}
-									role={element.role}
-								/>
-							</ClickToView>
-						</div>
+						<PullQuoteBlockComponent
+							key={i}
+							html={element.html}
+							pillar={format.theme}
+							design={format.design}
+							attribution={element.attribution}
+							role={element.role}
+						/>
 					);
 				case 'model.dotcomrendering.pageElements.QABlockElement':
 					return (

@@ -1926,27 +1926,17 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "type": "string"
                 },
                 "attribution": {
                     "type": "string"
                 },
-                "pullquoteIndex": {
-                    "type": "number"
-                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
-                },
-                "source": {
-                    "type": "string"
-                },
-                "sourceDomain": {
-                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "isThirdPartyTracking",
                 "role"
             ]
         },
