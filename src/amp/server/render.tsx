@@ -72,6 +72,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		if (e instanceof TypeError) {
 			res.status(400).send(`<pre>${e.message}</pre>`);
 		} else {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			res.status(500).send(`<pre>${e.message}</pre>`);
 		}
 	}

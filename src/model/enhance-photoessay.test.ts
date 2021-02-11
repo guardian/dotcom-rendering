@@ -4,7 +4,7 @@ import { enhancePhotoEssay } from './enhance-photoessay';
 import { bodyJSON } from './exampleBodyJSON';
 import { exampleImage as image } from '../../fixtures/exampleImage';
 
-const article = JSON.parse(bodyJSON);
+const article: CAPIType = JSON.parse(bodyJSON);
 const photoEssay = {
 	...article,
 	config: {
@@ -21,7 +21,7 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('sets the designType to PhotoEssay when isPhotoEssay is true', () => {
-		const input = {
+		const input: CAPIType = {
 			...article,
 			config: {
 				...article.config,
@@ -41,7 +41,7 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('does not change the designType to PhotoEssay when isPhotoEssay is false', () => {
-		const input = {
+		const input: CAPIType = {
 			...article,
 			config: {
 				...article.config,
@@ -61,10 +61,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('sets the caption for an image if the following element is a text element with ul and li tags', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						image,
 						{
@@ -78,11 +82,15 @@ describe('Enhance Photo Essays', () => {
 			],
 		};
 
-		const expectedOutput = {
+		const expectedOutput: CAPIType = {
 			...photoEssay,
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							...image,
@@ -103,10 +111,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('creates a multi image element if 2 images in a row are halfWidth', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -131,6 +143,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -166,10 +182,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('still creates images inline if roles are not halfWidth', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -194,6 +214,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -225,10 +249,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('does not use a multi block element for a single image', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -252,6 +280,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -276,10 +308,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('sets the title prop for the previous image element when a h2 caption is found', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						image,
 						{
@@ -302,6 +338,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							...image,
@@ -326,10 +366,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles when a caption, then a title follow an image, both are used', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -363,6 +407,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -393,10 +441,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles when a title, then a caption follow an image, both are used', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -430,6 +482,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -460,10 +516,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles if the last image has no caption', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -498,6 +558,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -536,10 +600,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles if the last few images are not followed by any caption or title', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -575,6 +643,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -616,16 +688,24 @@ describe('Enhance Photo Essays', () => {
 		expect(enhancePhotoEssay(input)).toEqual(expectedOutput);
 	});
 
+	// Need to ignore TS to check test works for other element types
 	it('will pass through other element types', () => {
-		const input = {
+		// @ts-ignore
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
+							// @ts-ignore
 							_type:
 								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							html: '<p>A Pullquote</p>',
+							// @ts-ignore
 							pillar: Pillar.News,
 							designType: 'PhotoEssay',
 							role: 'inline',
@@ -646,6 +726,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:
@@ -673,10 +757,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('creates two sets of multi image elements when there are 4 halfWidths images in a row', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -700,6 +788,10 @@ describe('Enhance Photo Essays', () => {
 				{
 					elements: [
 						{
+							id: '123',
+							primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+							secondaryDateLine:
+								'Last modified on Wed 9 Dec 2020 13.40 GMT',
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							images: [
@@ -746,10 +838,14 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('halfWidth images without an image to be paired with are placed as single images by themselves', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -770,6 +866,10 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					id: '123',
+					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+					secondaryDateLine:
+						'Last modified on Wed 9 Dec 2020 13.40 GMT',
 					elements: [
 						{
 							_type:

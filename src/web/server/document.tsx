@@ -112,7 +112,7 @@ export const document = ({ data }: Props): string => {
 	const preAssets = loadableExtractor
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		.getPreAssets(); // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
+		.getPreAssets() as any[]; // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
 	// Pre assets returns an array of objects structured as:
 	// {
 	//     filename: 'elements-RichLinkComponent.js',
@@ -125,7 +125,7 @@ export const document = ({ data }: Props): string => {
 	// }
 
 	const loadableScripts = generateScriptTags(
-		(preAssets || []).map((script: { url: string }) => ({
+		preAssets.map((script: { url: string }) => ({
 			src: `${script.url}`,
 			module: true,
 		})),

@@ -5,7 +5,7 @@ export const findPillar: (
 	tags?: TagType[],
 ) => Theme | undefined = (name, tags?) => {
 	// Flag paid content for Labs pillar (for styling purposes)
-	const isPaidContent = (tag: any) =>
+	const isPaidContent = (tag: TagType) =>
 		tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
 
 	if (tags && tags.some(isPaidContent)) {
@@ -35,7 +35,7 @@ export const findCAPIPillar: (
 	tags?: TagType[],
 ) => CAPIPillar | undefined = (name, tags?) => {
 	// Flag paid content for Labs pillar (for styling purposes)
-	const isPaidContent = (tag: any) =>
+	const isPaidContent = (tag: TagType) =>
 		tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
 
 	if (tags && tags.some(isPaidContent)) {

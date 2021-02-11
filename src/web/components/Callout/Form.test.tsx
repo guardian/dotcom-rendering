@@ -122,6 +122,7 @@ describe('Callout from', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[textField.id]: 'textInput',
 		});
@@ -150,6 +151,7 @@ describe('Callout from', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[textAreaField.id]: 'textAreaInput',
 		});
@@ -181,6 +183,7 @@ describe('Callout from', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[radioField.id]: 'radio 2',
 		});
@@ -212,6 +215,7 @@ describe('Callout from', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[checkboxField.id]: ['checkbox 1', 'checkbox 3'],
 		});
@@ -264,6 +268,7 @@ describe('Callout from', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[selectField.id]: selectText,
 		});
@@ -302,8 +307,8 @@ describe('Callout from', () => {
 			'Share with the Guardian',
 		) as HTMLButtonElement;
 		fireEvent.click(submitButton);
-
 		expect(mockSubmit.mock.calls.length).toBe(1);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
 			[checkboxField.id]: ['checkbox 1', 'checkbox 2'],
 			[radioField.id]: 'radio 1',

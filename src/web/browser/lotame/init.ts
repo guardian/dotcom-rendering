@@ -2,11 +2,13 @@ import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
 
 const shouldServeLotame = (window: Window) => {
-	const geo = window.localStorage.getItem('gu.geolocation');
-	if (geo === null) {
+	const geo: { [key: string]: any } = JSON.parse(
+		window.localStorage.getItem('gu.geolocation') || '{}',
+	);
+	if (!geo.value) {
 		return false;
 	}
-	return !['US', 'CA', 'AU', 'NZ'].includes(JSON.parse(geo).value);
+	return !['US', 'CA', 'AU', 'NZ'].includes(geo.value);
 };
 
 // Loads user tracking (ad segment) data, which is then used to

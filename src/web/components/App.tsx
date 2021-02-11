@@ -294,7 +294,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				loadScript('https://www.google-analytics.com/analytics.js');
 				loadScript(window.guardian.gaPath);
 			} else {
-				(window as any).ga = null;
+				window.ga = null;
 			}
 		});
 	}, []);

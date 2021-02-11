@@ -47,16 +47,18 @@ const getAllParams = function getGuardianConfigurationRecursiveStep(
 	params = [],
 	token: string | undefined = undefined,
 ): Promise<AWSParameter[]> {
-	return getParams(stage, token).then((response) => {
-		if (!response.NextToken) {
-			return params;
-		}
-		return getAllParams(
-			stage,
-			params.concat(response.Parameters),
-			response.NextToken === '' ? undefined : response.NextToken,
-		);
-	});
+	return getParams(stage, token).then(
+		(response: Response & { NextToken?: any; Parameters?: any }) => {
+			if (!response.NextToken) {
+				return params;
+			}
+			return getAllParams(
+				stage,
+				params.concat(response.Parameters),
+				response.NextToken === '' ? undefined : response.NextToken,
+			);
+		},
+	);
 };
 
 // returns a configuration object

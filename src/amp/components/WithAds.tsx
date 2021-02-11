@@ -18,7 +18,7 @@ interface AdInfo {
 }
 
 type Props = {
-	items: any[];
+	items: { [key: string]: any; id: string }[];
 	adSlots: number[];
 	adClassName: string;
 	adInfo: AdInfo;

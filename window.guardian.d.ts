@@ -8,8 +8,17 @@ declare global {
     interface Window {
         guardian: {
             app: {
-                data: any;
+                data: {
+                    GA: { [key: string]: any }
+                    [key: string]: any
+                    CAPI: {
+                        config: {
+                            frontendAssetsFullURL: string;
+                        }
+                    }
+                };
                 cssIDs: string[];
+
             };
             mustardCut: boolean;
             polyfilled: boolean;
@@ -44,7 +53,7 @@ declare global {
             gaPath:  string;
         };
         GoogleAnalyticsObject: string;
-        ga: UniversalAnalytics.ga;
+        ga: UniversalAnalytics.ga | null;
         /**
          * ES6 module import, possibly polyfilled depending on the current
          * browser. There are three categories:

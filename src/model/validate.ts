@@ -12,7 +12,7 @@ const ajv = new Ajv(options);
 
 const validate = ajv.compile(schema);
 
-export const validateAsCAPIType = (data: any): CAPIType => {
+export const validateAsCAPIType = (data: { [key: string]: any }): CAPIType => {
 	const isValid = validate(data);
 
 	if (!isValid) {
