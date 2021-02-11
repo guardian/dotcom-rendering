@@ -60,7 +60,7 @@ dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
 	@NODE_ENV=development nodemon scripts/frontend/dev-server
 
-# cypress #####################################
+# tests #####################################
 
 percy: clear clean-dist install
 
@@ -71,6 +71,10 @@ cypress: clear clean-dist install
 ampValidation: clean-dist install
 	$(call log, "starting frontend DEV server for AMP Validation")
 	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'node scripts/test/amp-validation.js'
+
+buildCheck: clean-dist install
+	$(call log, "checking build files")
+	'node scripts/test/build-check.js'
 
 # quality #########################################
 

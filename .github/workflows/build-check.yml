@@ -1,0 +1,27 @@
+name: Build Check
+on: push
+
+jobs:
+    amp_validation:
+        name: Build Check
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
+
+            - name: Use Node.js 14.15
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '14.15'
+
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            - uses: bahmutov/npm-install@v1
+
+            - name: Install
+              run: yarn
+
+						- name: Generate production build
+							run: make build
+
+            - name: Validate Build
+              run: make buildCheck
