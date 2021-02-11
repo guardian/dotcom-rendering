@@ -39,7 +39,7 @@ export const getScriptArrayFromFilename = (filename: string) => {
 	];
 };
 
-export const getByChunkName = (
+export const getScriptArrayFromChunkName = (
 	chunkName: string,
 ): { src: string; legacy?: boolean }[] | [] => {
 	const chunks: string[] | undefined =

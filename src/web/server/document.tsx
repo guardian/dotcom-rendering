@@ -7,7 +7,7 @@ import { CacheProvider } from '@emotion/core';
 import { escapeData } from '@root/src/lib/escapeData';
 import {
 	getScriptArrayFromFilename,
-	getByChunkName,
+	getScriptArrayFromChunkName,
 	loadableManifestJson,
 } from '@root/src/lib/assets';
 
@@ -172,10 +172,10 @@ export const document = ({ data }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			...getByChunkName('ophan'),
+			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			...getByChunkName('sentryLoader'),
-			...getByChunkName('dynamicImport'),
+			...getScriptArrayFromChunkName('sentryLoader'),
+			...getScriptArrayFromChunkName('dynamicImport'),
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(Boolean),
 	);
@@ -188,13 +188,13 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getByChunkName('lotame'),
-		...getByChunkName('atomIframe'),
-		...getByChunkName('embedIframe'),
-		...getByChunkName('newsletterEmbedIframe'),
+		...getScriptArrayFromChunkName('lotame'),
+		...getScriptArrayFromChunkName('atomIframe'),
+		...getScriptArrayFromChunkName('embedIframe'),
+		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
 	]);
 
-	const gaChunk = getByChunkName('ga');
+	const gaChunk = getScriptArrayFromChunkName('ga');
 	const gaPath = {
 		modern: gaChunk.filter((script) => script.legacy === false)[0].src,
 		legacy: gaChunk.filter((script) => script.legacy === true)[0].src,
