@@ -60,6 +60,7 @@ const windowGuardian = {
 };
 
 // Stub global Guardian object
+// @ts-ignore
 window.guardian = windowGuardian;
 
 // Mock Local Storage
