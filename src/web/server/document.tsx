@@ -5,7 +5,11 @@ import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
 
 import { escapeData } from '@root/src/lib/escapeData';
-import { getDist, loadableManifestJson } from '@root/src/lib/assets';
+import {
+	getScriptArrayFromFilename,
+	getByChunkName,
+	loadableManifestJson,
+} from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
@@ -19,26 +23,19 @@ interface RenderToStringResult {
 }
 
 const generateScriptTags = (
-	scripts: Array<{ src: string; module?: boolean }>,
+	scripts: Array<{ src: string; legacy?: boolean }>,
 ) =>
 	scripts.reduce((scriptTags, script) => {
-		if (script.module) {
-			scriptTags.push(
-				`<script type="module" src="${getDist({
-					path: script.src,
-					legacy: false,
-				})}"></script>`,
-			);
-			scriptTags.push(
-				`<script defer nomodule src="${getDist({
-					path: script.src,
-					legacy: true,
-				})}"></script>`,
-			);
-		} else {
-			scriptTags.push(`<script defer src="${script.src}"></script>`);
+		let attrs = 'defer';
+
+		if (Object.prototype.hasOwnProperty.call(script, 'legacy')) {
+			attrs = script.legacy ? 'defer nomodule' : 'type="module"';
 		}
-		return scriptTags;
+
+		return [
+			...scriptTags,
+			`<script ${attrs} src="${script.src}"></script>`,
+		];
 	}, [] as string[]);
 
 interface Props {
@@ -109,27 +106,31 @@ export const document = ({ data }: Props): string => {
 	// Pass the array of extracted (read: built with addChunk) scripts to
 	// generatedScriptTags so that we can build a script tag array of
 	// modern and legacy scripts.
-	const preAssets = loadableExtractor
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	const arrayOfLoadableScriptObjects: {
+		src: string;
+		module: boolean;
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+	}[] = loadableExtractor
 		// @ts-ignore
-		.getPreAssets() as any[]; // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
-	// Pre assets returns an array of objects structured as:
-	// {
-	//     filename: 'elements-RichLinkComponent.js',
-	//     scriptType: 'script',
-	//     chunk: 'elements-RichLinkComponent',
-	//     url: '/elements-RichLinkComponent.js',
-	//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
-	//     type: 'mainAsset',
-	//     linkType: 'preload'
-	// }
+		.getPreAssets() // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
+		// Pre assets returns an array of objects structured as:
+		// {
+		//     filename: 'elements-RichLinkComponent.js',
+		//     scriptType: 'script',
+		//     chunk: 'elements-RichLinkComponent',
+		//     url: '/elements-RichLinkComponent.js',
+		//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
+		//     type: 'mainAsset',
+		//     linkType: 'preload'
+		// }
+		.reduce(
+			(scriptArr: [], script: { filename: string }) => [
+				...scriptArr,
+				...getScriptArrayFromFilename(script.filename),
+			],
+			[],
+		);
 
-	const loadableScripts = generateScriptTags(
-		preAssets.map((script: { url: string }) => ({
-			src: `${script.url}`,
-			module: true,
-		})),
-	);
 	// Loadable generates configuration script elements as the first two items
 	// of the script element array. We need to generate the react component version
 	// and then build an array of them, rendering them to string and grabbing
@@ -171,11 +172,11 @@ export const document = ({ data }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			{ src: 'ophan.js', module: true },
+			...getByChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			{ src: 'sentryLoader.js', module: true },
-			{ src: 'dynamicImport.js', module: true },
-			// { src: 'react.js', module: true }, // This is now generated through loadableComponents
+			...getByChunkName('sentryLoader'),
+			...getByChunkName('dynamicImport'),
+			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(Boolean),
 	);
 
@@ -187,21 +188,16 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		{ src: 'lotame.js', module: true },
-		{ src: 'atomIframe.js', module: true },
-		{ src: 'embedIframe.js', module: true },
-		{ src: 'newsletterEmbedIframe.js', module: true },
+		...getByChunkName('lotame'),
+		...getByChunkName('atomIframe'),
+		...getByChunkName('embedIframe'),
+		...getByChunkName('newsletterEmbedIframe'),
 	]);
 
+	const gaChunk = getByChunkName('ga');
 	const gaPath = {
-		modern: getDist({
-			path: 'ga.js',
-			legacy: false,
-		}),
-		legacy: getDist({
-			path: 'ga.js',
-			legacy: true,
-		}),
+		modern: gaChunk.filter((script) => script.legacy === false)[0].src,
+		legacy: gaChunk.filter((script) => script.legacy === true)[0].src,
 	};
 
 	/**
@@ -224,7 +220,6 @@ export const document = ({ data }: Props): string => {
 
 	return htmlTemplate({
 		linkedData,
-		loadableScripts,
 		loadableConfigScripts,
 		priorityScriptTags,
 		lowPriorityScriptTags,
