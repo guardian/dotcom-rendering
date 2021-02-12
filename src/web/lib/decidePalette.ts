@@ -319,11 +319,13 @@ const fillCaptionTriangle = (format: Format): string => {
 };
 
 const fillCardClock = (format: Format): string => {
+	// Setting Card clock colour for immersive cards to all be dark grey
+	if (format.display === Display.Immersive) return neutral[60];
 	switch (format.design) {
 		case Design.Comment:
 			switch (format.theme) {
 				case Special.SpecialReport:
-					// TODO: Pull this in from souce once we see it here:
+					// TODO: Pull this in from source once we see it here:
 					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
 					return '#ff9941';
 				default:
