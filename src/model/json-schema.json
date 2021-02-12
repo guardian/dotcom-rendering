@@ -3548,8 +3548,6 @@
                 }
             },
             "required": [
-                "iconName",
-                "longTitle",
                 "title",
                 "url"
             ]
