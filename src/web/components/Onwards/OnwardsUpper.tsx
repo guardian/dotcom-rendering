@@ -297,6 +297,11 @@ export const OnwardsUpper = ({
 		'curated-content-variant-carousel-large',
 	);
 
+	const inControlCarouselTest = ABTestAPI.isUserInVariant(
+		'CuratedContent3Carousel',
+		'curated-content-variant-control',
+	);
+
 	if (inSmallCardCarouselTest) {
 		return (
 			<div className={onwardsWrapper}>
@@ -353,15 +358,17 @@ export const OnwardsUpper = ({
 	}
 	return (
 		<div className={onwardsWrapper}>
-			<Section showTopBorder={true}>
-				<OnwardsData
-					url={curatedDataUrl}
-					limit={8}
-					ophanComponentName="curated-content"
-					Container={OnwardsLayout}
-					pillar={pillar}
-				/>
-			</Section>
+			{inControlCarouselTest && (
+				<Section showTopBorder={true}>
+					<OnwardsData
+						url={curatedDataUrl}
+						limit={8}
+						ophanComponentName="curated-content"
+						Container={OnwardsLayout}
+						pillar={pillar}
+					/>
+				</Section>
+			)}
 
 			{url && (
 				<Section>
