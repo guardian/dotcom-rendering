@@ -197,6 +197,7 @@ export const ArticleRenderer: React.FC<{
 							<Figure
 								role={element.role}
 								id={`embed-block-element-${i}`}
+								key={`embed-block-element-${i}`}
 							>
 								<ClickToView
 									role={element.role}
@@ -219,6 +220,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure
 							role={element.role}
 							id={`embed-block-element-${i}`}
+							key={`embed-block-element-${i}`}
 						>
 							<ClickToView
 								role={element.role}
@@ -295,6 +297,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure
 							role={element.role}
 							id={`instagram-block-element-${i}`}
+							key={`instagram-block-element-${i}`}
 						>
 							<ClickToView
 								role={element.role}
@@ -326,6 +329,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure
 							role={element.role}
 							id={`map-block-element-${i}`}
+							key={`map-block-element-${i}`}
 						>
 							<ClickToView
 								role={element.role}
@@ -424,6 +428,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure
 							role={element.role}
 							id={`spotify-block-element-${i}`}
+							key={`spotify-block-element-${i}`}
 						>
 							<ClickToView
 								role={element.role}
@@ -478,6 +483,7 @@ export const ArticleRenderer: React.FC<{
 						<Figure
 							role={element.role}
 							id={`video-facebook-block-element-${i}`}
+							key={`video-facebook-block-element-${i}`}
 						>
 							<ClickToView
 								role={element.role}
