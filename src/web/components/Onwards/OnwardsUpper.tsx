@@ -311,6 +311,7 @@ export const OnwardsUpper = ({
 						limit={8}
 						ophanComponentName="curated-content"
 						Container={Carousel}
+						isCuratedContent={true}
 						pillar={pillar}
 					/>
 				</Section>
