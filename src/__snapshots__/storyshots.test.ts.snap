@@ -1,0 +1,3863 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Anchor Default 1`] = `
+<a
+  className="css-5uwmeq-Anchor"
+  href="https://theguardian.com"
+>
+  “everything that was recommended was done”.
+</a>
+`;
+
+exports[`Storyshots Bullet Default 1`] = `
+<p
+  className="css-3s648a-Bullet"
+>
+  <span
+    className="css-2g8li-Bullet"
+  >
+    •
+  </span>
+   Lorem ipsum
+</p>
+`;
+
+exports[`Storyshots Byline Comment 1`] = `
+<address
+  className="css-1r4n4os"
+>
+  <a
+    className="css-17bjzi4"
+    href="https://theguardian.com"
+  >
+    Jane Smith
+  </a>
+   Editor of things
+</address>
+`;
+
+exports[`Storyshots Byline Default 1`] = `
+<address
+  className="css-1ry8e32"
+>
+  <a
+    className="css-xw3z4n"
+    href="https://theguardian.com"
+  >
+    Jane Smith
+  </a>
+   Editor of things
+</address>
+`;
+
+exports[`Storyshots Byline Labs 1`] = `
+<address
+  className="css-17wdvyp"
+>
+  <a
+    className="css-eav8uk"
+    href="https://theguardian.com"
+  >
+    Jane Smith
+  </a>
+   Editor of things
+</address>
+`;
+
+exports[`Storyshots CommentCount Default 1`] = `
+<button
+  className="css-19mgwvn"
+>
+  <svg
+    className="css-9iqumf"
+    viewBox="0 0 9 8"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      height="6"
+      rx="1.2"
+      width="9"
+      x="0"
+      y="0"
+    />
+    <polygon
+      points="2,6 2,8 2.5,8 4,6"
+    />
+  </svg>
+  1,234
+</button>
+`;
+
+exports[`Storyshots Dateline Default 1`] = `
+<time
+  className="date js-date css-l03xpa"
+  data-date={2019-12-17T03:24:00.000Z}
+>
+  Tue 17 Dec 2019 03.24 UTC
+</time>
+`;
+
+exports[`Storyshots Editions/Article Analysis 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-2ammhe-Article"
+  >
+    <div
+      className="css-cezksd-Article"
+    >
+      <section
+        className="css-wzgevt-Article"
+      >
+        <header
+          className="css-3qmmbh-AnalysisHeader"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-12lxyki-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-3d4hzy-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-afvmvk-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-1bvtd5i"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <div
+            className="css-165wy3b-Headline"
+          >
+            <h1
+              className="css-acwztd-Headline"
+            >
+              Reclaimed lakes and giant airports: how Mexico City might have looked
+            </h1>
+          </div>
+          <div
+            className="css-s7agzf"
+          >
+            <address>
+              <span
+                className="css-11gwkgb"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="css-15jtyuf"
+              >
+                 Editor of things
+              </span>
+            </address>
+          </div>
+          <div
+            className="css-7m2n2v-EditionsLines"
+          >
+            <div
+              className="css-1xgmaw8-straightLines-fourLines-Lines"
+            />
+          </div>
+          <div
+            className="css-1fihjfe"
+          >
+            <p>
+              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+            </p>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="css-rdfey0-ShareIcon"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-yn5fb1-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      >
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <figure
+          className="css-huy3rj-BodyImage"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow css-1we7mgb-Img"
+              data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
+              data-credit="Photograph: Sam Frost/The Guardian"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+        </figure>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <div
+          className="css-cq3eyp-containerStyling"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="css-l8n9ox-detailStyling"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="css-dp9r84-atomTitleStyling"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="css-gpo7xk-titleStyling"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="css-1rv27d3-showHideStyling"
+              >
+                <span
+                  className="css-117w3ky-iconSpacing"
+                >
+                  <span
+                    className="css-kd64v9-plusStyling"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="css-1vg8ran-bodyStyling"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="css-dc74hn-footerStyling"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="css-fgqqde-className"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="css-1hq58dr-buttonStyling"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="css-soya5m-buttonStyling-className"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="css-5a9sl9-className"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <aside
+          className="css-c1l0e9-Pullquote"
+        >
+          <blockquote
+            className="css-vhllol-Pullquote"
+          >
+            <p
+              className="css-a5coej-Pullquote"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="css-1znb75"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Article Comment 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-2ammhe-Article"
+  >
+    <div
+      className="css-v93u6i-Article"
+    >
+      <section
+        className="css-wzgevt-Article"
+      >
+        <header
+          className="css-1d01hcu-CommentHeader"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-12lxyki-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-xqx25p-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-169o3q0-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-6okjyw"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <div
+            className="css-165wy3b-Headline"
+          >
+            <h1
+              className="css-k4j3s4-Headline"
+            >
+              <span
+                className="css-1od8ezt"
+              >
+                <svg
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                Reclaimed lakes and giant airports: how Mexico City might have looked
+              </span>
+            </h1>
+          </div>
+          <div
+            className="css-1xck3cj"
+          >
+            <address>
+              <span
+                className="css-1tnqwjd"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="css-15jtyuf"
+              >
+                 Editor of things
+              </span>
+            </address>
+            <div
+              className="css-17kiv7u"
+            >
+              <picture>
+                <source
+                  media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                  sizes="105px"
+                  srcSet="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=32&quality=85&fit=bounds&s=100fc280274e40946afb34d4b561ce9f 32w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e 64w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=128&quality=85&fit=bounds&s=35b6ce614cae19fbdcdefa55a670eda5 128w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=192&quality=85&fit=bounds&s=930a05d87b62a1f613ff76f3ee0c97a0 192w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=256&quality=85&fit=bounds&s=8c44b90de342114bd3bf6145767d4b31 256w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=400&quality=85&fit=bounds&s=8491504dfb944eee7ef173e739cb4f74 400w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=600&quality=85&fit=bounds&s=668fc2d7278f6c4a553f806c9b2d47d3 600w"
+                />
+                <source
+                  sizes="105px"
+                  srcSet="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=32&quality=85&fit=bounds&s=100fc280274e40946afb34d4b561ce9f 32w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e 64w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=128&quality=85&fit=bounds&s=35b6ce614cae19fbdcdefa55a670eda5 128w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=192&quality=85&fit=bounds&s=930a05d87b62a1f613ff76f3ee0c97a0 192w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=256&quality=85&fit=bounds&s=8c44b90de342114bd3bf6145767d4b31 256w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=400&quality=85&fit=bounds&s=8491504dfb944eee7ef173e739cb4f74 400w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=600&quality=85&fit=bounds&s=668fc2d7278f6c4a553f806c9b2d47d3 600w"
+                />
+                <img
+                  alt="image"
+                  className="css-1w5z5b1-Img"
+                  data-ratio={1}
+                  src="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e"
+                />
+              </picture>
+            </div>
+          </div>
+          <div
+            className="css-7m2n2v-EditionsLines"
+          >
+            <div
+              className="css-1xgmaw8-straightLines-fourLines-Lines"
+            />
+          </div>
+          <div
+            className="css-a9bgr4"
+          >
+            <p>
+              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+            </p>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="css-rdfey0-ShareIcon"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-yn5fb1-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      >
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <figure
+          className="css-huy3rj-BodyImage"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow css-198316x-Img"
+              data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
+              data-credit="Photograph: Sam Frost/The Guardian"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+        </figure>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <div
+          className="css-cq3eyp-containerStyling"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="css-l8n9ox-detailStyling"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="css-3w82vu-atomTitleStyling"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="css-gpo7xk-titleStyling"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="css-1p3af4l-showHideStyling"
+              >
+                <span
+                  className="css-117w3ky-iconSpacing"
+                >
+                  <span
+                    className="css-kd64v9-plusStyling"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="css-5oaelj-bodyStyling"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="css-dc74hn-footerStyling"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="css-fgqqde-className"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="css-con9lg-buttonStyling"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="css-av88v2-buttonStyling-className"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="css-5a9sl9-className"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <aside
+          className="css-1f6ukfo-Pullquote"
+        >
+          <blockquote
+            className="css-vhllol-Pullquote"
+          >
+            <p
+              className="css-cgf9f8-Pullquote"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="css-1znb75"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Article Default 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-2ammhe-Article"
+  >
+    <div
+      className="css-16sk62p-Article"
+    >
+      <section
+        className="css-wzgevt-Article"
+      >
+        <header
+          className="css-10xsu7p-StandardHeader"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-12lxyki-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-3d4hzy-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-169o3q0-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-6okjyw"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <div
+            className="css-165wy3b-Headline"
+          >
+            <h1
+              className="css-13o616v-Headline"
+            >
+              Reclaimed lakes and giant airports: how Mexico City might have looked
+            </h1>
+          </div>
+          <div
+            className="css-h42k03"
+          >
+            <p>
+              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+            </p>
+          </div>
+          <div
+            className="css-7m2n2v-EditionsLines"
+          >
+            <div
+              className="css-1xgmaw8-straightLines-fourLines-Lines"
+            />
+          </div>
+          <div
+            className="css-teh8lu"
+          >
+            <address>
+              <span
+                className="css-s6pm0t"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="css-1yh100x"
+              >
+                 Editor of things
+              </span>
+            </address>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="css-rdfey0-ShareIcon"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-yn5fb1-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      >
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <figure
+          className="css-huy3rj-BodyImage"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow css-1we7mgb-Img"
+              data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
+              data-credit="Photograph: Sam Frost/The Guardian"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+        </figure>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <div
+          className="css-cq3eyp-containerStyling"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="css-l8n9ox-detailStyling"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="css-3w82vu-atomTitleStyling"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="css-gpo7xk-titleStyling"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="css-1p3af4l-showHideStyling"
+              >
+                <span
+                  className="css-117w3ky-iconSpacing"
+                >
+                  <span
+                    className="css-kd64v9-plusStyling"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="css-5oaelj-bodyStyling"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="css-dc74hn-footerStyling"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="css-fgqqde-className"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="css-con9lg-buttonStyling"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="css-av88v2-buttonStyling-className"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="css-5a9sl9-className"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <aside
+          className="css-1f6ukfo-Pullquote"
+        >
+          <blockquote
+            className="css-vhllol-Pullquote"
+          >
+            <p
+              className="css-cgf9f8-Pullquote"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="css-1znb75"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Article Feature 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-2ammhe-Article"
+  >
+    <div
+      className="css-16sk62p-Article"
+    >
+      <section
+        className="css-wzgevt-Article"
+      >
+        <header
+          className="css-10xsu7p-StandardHeader"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-12lxyki-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-3d4hzy-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-1tza6s1-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-1vqrqak"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <div
+            className="css-165wy3b-Headline"
+          >
+            <h1
+              className="css-3zxxdv-Headline"
+            >
+              Reclaimed lakes and giant airports: how Mexico City might have looked
+            </h1>
+          </div>
+          <div
+            className="css-1rir6qk"
+          >
+            <p>
+              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+            </p>
+          </div>
+          <div
+            className="css-7m2n2v-EditionsLines"
+          >
+            <div
+              className="css-1xgmaw8-straightLines-fourLines-Lines"
+            />
+          </div>
+          <div
+            className="css-t8cjud"
+          >
+            <address>
+              <span
+                className="css-1410z7r"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="css-1yh100x"
+              >
+                 Editor of things
+              </span>
+            </address>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="css-rdfey0-ShareIcon"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-yn5fb1-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      >
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <figure
+          className="css-huy3rj-BodyImage"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow css-1we7mgb-Img"
+              data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
+              data-credit="Photograph: Sam Frost/The Guardian"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+        </figure>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <div
+          className="css-cq3eyp-containerStyling"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="css-l8n9ox-detailStyling"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="css-lzpv1d-atomTitleStyling"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="css-gpo7xk-titleStyling"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="css-1s5nci7-showHideStyling"
+              >
+                <span
+                  className="css-117w3ky-iconSpacing"
+                >
+                  <span
+                    className="css-kd64v9-plusStyling"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="css-dv25nz-bodyStyling"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="css-dc74hn-footerStyling"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="css-fgqqde-className"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="css-27e8o5-buttonStyling"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="css-dl0cko-buttonStyling-className"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="css-5a9sl9-className"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <aside
+          className="css-llu3t1-Pullquote"
+        >
+          <blockquote
+            className="css-vhllol-Pullquote"
+          >
+            <p
+              className="css-19my7cx-Pullquote"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="css-1znb75"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Article Interview 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-2ammhe-Article"
+  >
+    <div
+      className="css-16sk62p-Article"
+    >
+      <section
+        className="css-1dhlyus-Article"
+      >
+        <header>
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-dej5xk-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-1ly9xbv-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-ianha0-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-1vqrqak"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <div
+            className="css-c356nv-InterviewHeader"
+          >
+            <div
+              className="css-165wy3b-Headline"
+            >
+              <div
+                className="css-1duggjj-Headline"
+              />
+              <h1
+                className="css-ghqarw-Headline"
+              >
+                <span
+                  className="css-1hvs9iy"
+                >
+                  Reclaimed lakes and giant airports: how Mexico City might have looked
+                </span>
+              </h1>
+            </div>
+            <div
+              className="css-18316b1"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
+          </div>
+          <div
+            className="css-ybmkx6-EditionsLines"
+          >
+            <div
+              className="css-1xgmaw8-straightLines-fourLines-Lines"
+            />
+          </div>
+          <div
+            className="css-1r6t5jr"
+          >
+            <address>
+              <span
+                className="css-1410z7r"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="css-1yh100x"
+              >
+                 Editor of things
+              </span>
+            </address>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="css-rdfey0-ShareIcon"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-yn5fb1-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      >
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <figure
+          className="css-huy3rj-BodyImage"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow css-1we7mgb-Img"
+              data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
+              data-credit="Photograph: Sam Frost/The Guardian"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+        </figure>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <div
+          className="css-cq3eyp-containerStyling"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="css-l8n9ox-detailStyling"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="css-lzpv1d-atomTitleStyling"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="css-gpo7xk-titleStyling"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="css-1s5nci7-showHideStyling"
+              >
+                <span
+                  className="css-117w3ky-iconSpacing"
+                >
+                  <span
+                    className="css-kd64v9-plusStyling"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="css-dv25nz-bodyStyling"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="css-dc74hn-footerStyling"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="css-fgqqde-className"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="css-27e8o5-buttonStyling"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="css-dl0cko-buttonStyling-className"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="css-5a9sl9-className"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <aside
+          className="css-llu3t1-Pullquote"
+        >
+          <blockquote
+            className="css-vhllol-Pullquote"
+          >
+            <p
+              className="css-19my7cx-Pullquote"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="css-1znb75"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Article Media 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-58dfiu-Article"
+  >
+    <div
+      className="css-18oto43-Article"
+    >
+      <section
+        className="css-1dhlyus-Article"
+      >
+        <header
+          className="css-70tn5r-GalleryHeader"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-dej5xk-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-vgwzwo-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-nr1xa1-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-6okjyw"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <div
+            className="css-cm0bg2-GalleryHeader"
+          >
+            <div
+              className="css-165wy3b-Headline"
+            >
+              <h1
+                className="css-1cwqm68-Headline"
+              >
+                Reclaimed lakes and giant airports: how Mexico City might have looked
+              </h1>
+            </div>
+            <div
+              className="css-y9xf0m-GalleryHeader"
+            >
+              <div
+                className="css-mwiu58"
+              >
+                <p>
+                  The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+                </p>
+              </div>
+              <div
+                className="css-22kpax-EditionsLines"
+              >
+                <div
+                  className="css-1xgmaw8-straightLines-fourLines-Lines"
+                />
+              </div>
+              <div
+                className="css-o0edii"
+              >
+                <address>
+                  <span
+                    className="css-1vsgm6a"
+                  >
+                    Jane Smith
+                  </span>
+                  <span
+                    className="css-1u4yveu"
+                  >
+                     Editor of things
+                  </span>
+                </address>
+                <span
+                  className="js-share-button"
+                  role="button"
+                >
+                  <button
+                    className="css-rdfey0-ShareIcon"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      fill="none"
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="15"
+                        cy="15"
+                        r="14.5"
+                      />
+                      <path
+                        d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                      />
+                    </svg>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-1f5frn6-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      />
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Article Review 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-2ammhe-Article"
+  >
+    <div
+      className="css-8rvrj7-Article"
+    >
+      <section
+        className="css-wzgevt-Article"
+      >
+        <header
+          className="css-10xsu7p-StandardHeader"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-12lxyki-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-3d4hzy-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-mx0oi0-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-pfziyb"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+            <div
+              className="css-qw9jwe-StarRating"
+            >
+              <span
+                className="css-kuz013"
+              >
+                <svg
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span
+                className="css-kuz013"
+              >
+                <svg
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span
+                className="css-kuz013"
+              >
+                <svg
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span
+                className="css-kuz013"
+              >
+                <svg
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span
+                className="css-w8n5c6-empty"
+              >
+                <svg
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+          </figure>
+          <div
+            className="css-165wy3b-Headline"
+          >
+            <h1
+              className="css-1r46rn4-Headline"
+            >
+              Reclaimed lakes and giant airports: how Mexico City might have looked
+            </h1>
+          </div>
+          <div
+            className="css-1193fgv"
+          >
+            <p>
+              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+            </p>
+          </div>
+          <div
+            className="css-7m2n2v-EditionsLines"
+          >
+            <div
+              className="css-1xgmaw8-straightLines-fourLines-Lines"
+            />
+          </div>
+          <div
+            className="css-1acgyo2"
+          >
+            <address>
+              <span
+                className="css-ixhtuz"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="css-1yh100x"
+              >
+                 Editor of things
+              </span>
+            </address>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="css-rdfey0-ShareIcon"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-yn5fb1-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      >
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <figure
+          className="css-huy3rj-BodyImage"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow css-1we7mgb-Img"
+              data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
+              data-credit="Photograph: Sam Frost/The Guardian"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+        </figure>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <div
+          className="css-cq3eyp-containerStyling"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="css-l8n9ox-detailStyling"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="css-1mdioea-atomTitleStyling"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="css-gpo7xk-titleStyling"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="css-bawg6n-showHideStyling"
+              >
+                <span
+                  className="css-117w3ky-iconSpacing"
+                >
+                  <span
+                    className="css-kd64v9-plusStyling"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="css-1piahod-bodyStyling"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="css-dc74hn-footerStyling"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="css-fgqqde-className"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="css-8jszxu-buttonStyling"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="css-1dn7oml-buttonStyling-className"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="css-5a9sl9-className"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <aside
+          className="css-zws4bj-Pullquote"
+        >
+          <blockquote
+            className="css-vhllol-Pullquote"
+          >
+            <p
+              className="css-1eb8lfx-Pullquote"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="css-1znb75"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Article Showcase 1`] = `
+<main
+  className="css-2qsm3-Article"
+>
+  <article
+    className="css-2ammhe-Article"
+  >
+    <div
+      className="css-16sk62p-Article"
+    >
+      <section
+        className="css-wzgevt-Article"
+      >
+        <header
+          className="css-10xsu7p-StandardHeader"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="css-12lxyki-HeaderMedia"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt=""
+                className="js-launch-slideshow js-main-image css-3d4hzy-Img"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="css-169o3q0-HeaderImageCaption"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="css-6okjyw"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <div
+            className="css-165wy3b-Headline"
+          >
+            <h1
+              className="css-13o616v-Headline"
+            >
+              Reclaimed lakes and giant airports: how Mexico City might have looked
+            </h1>
+          </div>
+          <div
+            className="css-h42k03"
+          >
+            <p>
+              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+            </p>
+          </div>
+          <div
+            className="css-7m2n2v-EditionsLines"
+          >
+            <div
+              className="css-1xgmaw8-straightLines-fourLines-Lines"
+            />
+          </div>
+          <div
+            className="css-teh8lu"
+          >
+            <address>
+              <span
+                className="css-s6pm0t"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="css-1yh100x"
+              >
+                 Editor of things
+              </span>
+            </address>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="css-rdfey0-ShareIcon"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="css-yn5fb1-Article"
+    >
+      <section
+        className="css-1rrc8kn-Article"
+      >
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <figure
+          className="css-huy3rj-BodyImage"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow css-1we7mgb-Img"
+              data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
+              data-credit="Photograph: Sam Frost/The Guardian"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+        </figure>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <div
+          className="css-cq3eyp-containerStyling"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="css-l8n9ox-detailStyling"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="css-3w82vu-atomTitleStyling"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="css-gpo7xk-titleStyling"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="css-1p3af4l-showHideStyling"
+              >
+                <span
+                  className="css-117w3ky-iconSpacing"
+                >
+                  <span
+                    className="css-kd64v9-plusStyling"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="css-5oaelj-bodyStyling"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="css-dc74hn-footerStyling"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="css-fgqqde-className"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="css-con9lg-buttonStyling"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="css-av88v2-buttonStyling-className"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="css-15k23p-className"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="css-5a9sl9-className"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <aside
+          className="css-1f6ukfo-Pullquote"
+        >
+          <blockquote
+            className="css-vhllol-Pullquote"
+          >
+            <p
+              className="css-cgf9f8-Pullquote"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="css-1znb75"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+        <p
+          className="css-ril8fi-Paragraph"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
+exports[`Storyshots Editions/Avatar Default 1`] = `
+<picture>
+  <source
+    media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+    sizes="105px"
+    srcSet="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=32&quality=85&fit=bounds&s=100fc280274e40946afb34d4b561ce9f 32w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e 64w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=128&quality=85&fit=bounds&s=35b6ce614cae19fbdcdefa55a670eda5 128w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=192&quality=85&fit=bounds&s=930a05d87b62a1f613ff76f3ee0c97a0 192w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=256&quality=85&fit=bounds&s=8c44b90de342114bd3bf6145767d4b31 256w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=400&quality=85&fit=bounds&s=8491504dfb944eee7ef173e739cb4f74 400w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=600&quality=85&fit=bounds&s=668fc2d7278f6c4a553f806c9b2d47d3 600w"
+  />
+  <source
+    sizes="105px"
+    srcSet="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=32&quality=85&fit=bounds&s=100fc280274e40946afb34d4b561ce9f 32w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e 64w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=128&quality=85&fit=bounds&s=35b6ce614cae19fbdcdefa55a670eda5 128w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=192&quality=85&fit=bounds&s=930a05d87b62a1f613ff76f3ee0c97a0 192w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=256&quality=85&fit=bounds&s=8c44b90de342114bd3bf6145767d4b31 256w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=400&quality=85&fit=bounds&s=8491504dfb944eee7ef173e739cb4f74 400w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=600&quality=85&fit=bounds&s=668fc2d7278f6c4a553f806c9b2d47d3 600w"
+  />
+  <img
+    alt="image"
+    className="css-1i77lxz-Img"
+    data-ratio={1}
+    src="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e"
+  />
+</picture>
+`;
+
+exports[`Storyshots Editions/Byline Analysis 1`] = `
+<div
+  className="css-teh8lu"
+>
+  <address>
+    <span
+      className="css-1tnqwjd"
+    >
+      Jane Smith
+    </span>
+    <span
+      className="css-15jtyuf"
+    >
+       Editor of things
+    </span>
+  </address>
+</div>
+`;
+
+exports[`Storyshots Editions/Byline Comment 1`] = `
+<div
+  style={
+    Object {
+      "marginTop": "64px",
+    }
+  }
+>
+  <div
+    className="css-1xck3cj"
+  >
+    <address>
+      <span
+        className="css-1tnqwjd"
+      >
+        Jane Smith
+      </span>
+      <span
+        className="css-15jtyuf"
+      >
+         Editor of things
+      </span>
+    </address>
+    <div
+      className="css-17kiv7u"
+    >
+      <picture>
+        <source
+          media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+          sizes="105px"
+          srcSet="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=32&quality=85&fit=bounds&s=100fc280274e40946afb34d4b561ce9f 32w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e 64w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=128&quality=85&fit=bounds&s=35b6ce614cae19fbdcdefa55a670eda5 128w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=192&quality=85&fit=bounds&s=930a05d87b62a1f613ff76f3ee0c97a0 192w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=256&quality=85&fit=bounds&s=8c44b90de342114bd3bf6145767d4b31 256w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=400&quality=85&fit=bounds&s=8491504dfb944eee7ef173e739cb4f74 400w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=600&quality=85&fit=bounds&s=668fc2d7278f6c4a553f806c9b2d47d3 600w"
+        />
+        <source
+          sizes="105px"
+          srcSet="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=32&quality=85&fit=bounds&s=100fc280274e40946afb34d4b561ce9f 32w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e 64w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=128&quality=85&fit=bounds&s=35b6ce614cae19fbdcdefa55a670eda5 128w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=192&quality=85&fit=bounds&s=930a05d87b62a1f613ff76f3ee0c97a0 192w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=256&quality=85&fit=bounds&s=8c44b90de342114bd3bf6145767d4b31 256w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=400&quality=85&fit=bounds&s=8491504dfb944eee7ef173e739cb4f74 400w, https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=600&quality=85&fit=bounds&s=668fc2d7278f6c4a553f806c9b2d47d3 600w"
+        />
+        <img
+          alt="image"
+          className="css-1w5z5b1-Img"
+          data-ratio={1}
+          src="https://i.guim.co.uk/img/uploads/2017/10/06/Emma-Brockes,-L.png?width=64&quality=85&fit=bounds&s=b6b6831a7a599a815002b8a4c041342e"
+        />
+      </picture>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Editions/Byline Default 1`] = `
+<div
+  className="css-teh8lu"
+>
+  <address>
+    <span
+      className="css-s6pm0t"
+    >
+      Jane Smith
+    </span>
+    <span
+      className="css-1yh100x"
+    >
+       Editor of things
+    </span>
+  </address>
+  <span
+    className="js-share-button"
+    role="button"
+  >
+    <button
+      className="css-rdfey0-ShareIcon"
+      onClick={[Function]}
+    >
+      <svg
+        fill="none"
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="15"
+          cy="15"
+          r="14.5"
+        />
+        <path
+          d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+        />
+      </svg>
+    </button>
+  </span>
+</div>
+`;
+
+exports[`Storyshots Editions/Byline Feature 1`] = `
+<div
+  className="css-teh8lu"
+>
+  <address>
+    <span
+      className="css-s6pm0t"
+    >
+      Jane Smith
+    </span>
+    <span
+      className="css-1yh100x"
+    >
+       Editor of things
+    </span>
+  </address>
+  <span
+    className="js-share-button"
+    role="button"
+  >
+    <button
+      className="css-rdfey0-ShareIcon"
+      onClick={[Function]}
+    >
+      <svg
+        fill="none"
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="15"
+          cy="15"
+          r="14.5"
+        />
+        <path
+          d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+        />
+      </svg>
+    </button>
+  </span>
+</div>
+`;
+
+exports[`Storyshots Editions/Byline Interview 1`] = `
+<div
+  className="css-8x2t1u"
+>
+  <address>
+    <span
+      className="css-s6pm0t"
+    >
+      Jane Smith
+    </span>
+    <span
+      className="css-1yh100x"
+    >
+       Editor of things
+    </span>
+  </address>
+  <span
+    className="js-share-button"
+    role="button"
+  >
+    <button
+      className="css-rdfey0-ShareIcon"
+      onClick={[Function]}
+    >
+      <svg
+        fill="none"
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="15"
+          cy="15"
+          r="14.5"
+        />
+        <path
+          d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+        />
+      </svg>
+    </button>
+  </span>
+</div>
+`;
+
+exports[`Storyshots Editions/Byline Review 1`] = `
+<div
+  className="css-teh8lu"
+>
+  <address>
+    <span
+      className="css-s6pm0t"
+    >
+      Jane Smith
+    </span>
+    <span
+      className="css-1yh100x"
+    >
+       Editor of things
+    </span>
+  </address>
+  <span
+    className="js-share-button"
+    role="button"
+  >
+    <button
+      className="css-rdfey0-ShareIcon"
+      onClick={[Function]}
+    >
+      <svg
+        fill="none"
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="15"
+          cy="15"
+          r="14.5"
+        />
+        <path
+          d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+        />
+      </svg>
+    </button>
+  </span>
+</div>
+`;
+
+exports[`Storyshots Editions/Byline Showcase 1`] = `
+<div
+  className="css-58spt4"
+>
+  <address>
+    <span
+      className="css-s6pm0t"
+    >
+      Jane Smith
+    </span>
+    <span
+      className="css-1yh100x"
+    >
+       Editor of things
+    </span>
+  </address>
+  <span
+    className="js-share-button"
+    role="button"
+  >
+    <button
+      className="css-rdfey0-ShareIcon"
+      onClick={[Function]}
+    >
+      <svg
+        fill="none"
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="15"
+          cy="15"
+          r="14.5"
+        />
+        <path
+          d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+        />
+      </svg>
+    </button>
+  </span>
+</div>
+`;
+
+exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
+<figure
+  aria-labelledby="header-image-caption"
+  className="css-dej5xk-HeaderMedia"
+>
+  <picture>
+    <source
+      media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+      sizes="100vw"
+      srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+    />
+    <source
+      sizes="100vw"
+      srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+    />
+    <img
+      alt=""
+      className="js-launch-slideshow js-main-image css-1ly9xbv-Img"
+      data-ratio={0.6}
+      src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+    />
+  </picture>
+  <figcaption
+    className="css-nr1xa1-HeaderImageCaption"
+  >
+    <details>
+      <summary>
+        <span
+          className="css-6okjyw"
+        >
+          <svg
+            viewBox="0 0 30 30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clipRule="evenodd"
+              d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+              fillRule="evenodd"
+            />
+          </svg>
+          Click to see figure caption
+        </span>
+      </summary>
+      <span
+        id="header-image-caption"
+      >
+        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+         
+        Photograph: Philip Keith/The Guardian
+      </span>
+    </details>
+  </figcaption>
+</figure>
+`;
+
+exports[`Storyshots Editions/HeaderMedia Image 1`] = `
+<figure
+  aria-labelledby="header-image-caption"
+  className="css-12lxyki-HeaderMedia"
+>
+  <picture>
+    <source
+      media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+    />
+    <source
+      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+    />
+    <img
+      alt=""
+      className="js-launch-slideshow js-main-image css-3d4hzy-Img"
+      data-ratio={0.6}
+      src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+    />
+  </picture>
+  <figcaption
+    className="css-169o3q0-HeaderImageCaption"
+  >
+    <details>
+      <summary>
+        <span
+          className="css-6okjyw"
+        >
+          <svg
+            viewBox="0 0 30 30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clipRule="evenodd"
+              d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+              fillRule="evenodd"
+            />
+          </svg>
+          Click to see figure caption
+        </span>
+      </summary>
+      <span
+        id="header-image-caption"
+      >
+        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+         
+        Photograph: Philip Keith/The Guardian
+      </span>
+    </details>
+  </figcaption>
+</figure>
+`;
+
+exports[`Storyshots Editions/HeaderMedia Video 1`] = `
+<div
+  className="css-x1sm9l"
+>
+  <iframe
+    allowFullScreen={true}
+    className="css-7y7f6n"
+    frameBorder="0"
+    scrolling="no"
+    src="https://embed.theguardian.com/embed/atom/media/26401ff7-24d0-4ba5-8882-2c32c2b379f0#noadsaf"
+    title="Super Bowl LV: Tom Brady MVP as Buccaneers beat Chiefs 31-9 – video report"
+  />
+</div>
+`;
+
+exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
+<figure
+  aria-labelledby="header-image-caption"
+  className="css-12lxyki-HeaderMedia"
+>
+  <picture>
+    <source
+      media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+    />
+    <source
+      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+    />
+    <img
+      alt=""
+      className="js-launch-slideshow js-main-image css-3d4hzy-Img"
+      data-ratio={0.6}
+      src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+    />
+  </picture>
+  <figcaption
+    className="css-mx0oi0-HeaderImageCaption"
+  >
+    <details>
+      <summary>
+        <span
+          className="css-pfziyb"
+        >
+          <svg
+            viewBox="0 0 30 30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clipRule="evenodd"
+              d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+              fillRule="evenodd"
+            />
+          </svg>
+          Click to see figure caption
+        </span>
+      </summary>
+      <span
+        id="header-image-caption"
+      >
+        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+         
+        Photograph: Philip Keith/The Guardian
+      </span>
+    </details>
+  </figcaption>
+  <div
+    className="css-qw9jwe-StarRating"
+  >
+    <span
+      className="css-kuz013"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-kuz013"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-kuz013"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-kuz013"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-w8n5c6-empty"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+  </div>
+</figure>
+`;
+
+exports[`Storyshots Editions/Headline Analysis 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <h1
+    className="css-1qz0qx9-Headline"
+  >
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/Headline Comment 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <h1
+    className="css-k4j3s4-Headline"
+  >
+    <span
+      className="css-1od8ezt"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+          fillRule="evenodd"
+        />
+      </svg>
+      Reclaimed lakes and giant airports: how Mexico City might have looked
+    </span>
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/Headline Default 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <h1
+    className="css-13o616v-Headline"
+  >
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/Headline Feature 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <h1
+    className="css-1v4opfu-Headline"
+  >
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/Headline Interview 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <div
+    className="css-1duggjj-Headline"
+  />
+  <h1
+    className="css-ghqarw-Headline"
+  >
+    <span
+      className="css-1hvs9iy"
+    >
+      Reclaimed lakes and giant airports: how Mexico City might have looked
+    </span>
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/Headline Media 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <h1
+    className="css-1cwqm68-Headline"
+  >
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/Headline Review 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <h1
+    className="css-1r46rn4-Headline"
+  >
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/Headline Showcase 1`] = `
+<div
+  className="css-165wy3b-Headline"
+>
+  <h1
+    className="css-1kmuawa-Headline"
+  >
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </h1>
+</div>
+`;
+
+exports[`Storyshots Editions/PullQuote Default 1`] = `
+<aside
+  className="css-1f6ukfo-Pullquote"
+>
+  <blockquote
+    className="css-vhllol-Pullquote"
+  >
+    <p
+      className="css-cgf9f8-Pullquote"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+          fillRule="evenodd"
+        />
+      </svg>
+      The anti-slaughter movement is declining due to increased surveillance and repression that criminalises Tibetan identity
+    </p>
+    <cite
+      className="css-1znb75"
+    >
+      Katia Buffetrille, anthropologist
+    </cite>
+  </blockquote>
+</aside>
+`;
+
+exports[`Storyshots Editions/Series Default 1`] = `
+<nav
+  className="css-zzo0sh"
+>
+  Running
+</nav>
+`;
+
+exports[`Storyshots Editions/Series Immersive 1`] = `
+<nav
+  className="css-103n3es"
+>
+  The long read
+</nav>
+`;
+
+exports[`Storyshots Editions/Series Interview 1`] = `
+<nav
+  className="css-dtesww"
+>
+  Interview
+</nav>
+`;
+
+exports[`Storyshots Editions/ShareIcon Default 1`] = `
+<div
+  className="css-1wlqhgk-Default"
+>
+  <button
+    className="css-rdfey0-ShareIcon"
+    onClick={[Function]}
+  >
+    <svg
+      fill="none"
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="15"
+        cy="15"
+        r="14.5"
+      />
+      <path
+        d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`Storyshots Editions/Standfirst Analysis 1`] = `
+<div
+  className="css-a9bgr4"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Editions/Standfirst Comment 1`] = `
+<div
+  className="css-a9bgr4"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Editions/Standfirst Default 1`] = `
+<div
+  className="css-h42k03"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Editions/Standfirst Media 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#121212",
+    }
+  }
+>
+  <div
+    className="css-mwiu58"
+  >
+    <p>
+      The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Editions/Standfirst Showcase 1`] = `
+<div
+  className="css-1mgym3w"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Follow Default 1`] = `
+<button
+  className="js-follow css-ylaspq-Follow"
+  data-display-name="Jane Smith"
+  data-id="profile/janesmith"
+>
+  <span
+    className="js-status"
+  >
+    Follow 
+  </span>
+  Jane Smith
+</button>
+`;
+
+exports[`Storyshots Footer Default 1`] = `
+<div
+  className="css-1tni85m-FooterCcpa"
+>
+  © 
+  2021
+   Guardian News and Media Limited or its affiliated companies. All rights reserved.
+  <br />
+  <a
+    className="css-j4jbe3-FooterCcpa"
+    href="https://www.theguardian.com/help/privacy-policy"
+  >
+    Privacy Policy
+  </a>
+</div>
+`;
+
+exports[`Storyshots Footer With Ccpa 1`] = `
+<div
+  className="css-1tni85m-FooterCcpa"
+>
+  © 
+  2021
+   Guardian News and Media Limited or its affiliated companies. All rights reserved.
+  <br />
+  <a
+    className="css-1telkou"
+    href="https://www.theguardian.com/help/privacy-policy"
+  >
+    California Residents - Do Not Sell
+  </a>
+   · 
+  <a
+    className="css-j4jbe3-FooterCcpa"
+    href="https://www.theguardian.com/help/privacy-policy"
+  >
+    Privacy Policy
+  </a>
+</div>
+`;
+
+exports[`Storyshots Headline Analysis 1`] = `
+<h1
+  className="css-5hyg8b-Headline"
+>
+  <span>
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </span>
+</h1>
+`;
+
+exports[`Storyshots Headline Default 1`] = `
+<h1
+  className="css-swyj2a-Headline"
+>
+  <span>
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </span>
+</h1>
+`;
+
+exports[`Storyshots Headline Feature 1`] = `
+<h1
+  className="css-1wsu5kv-Headline"
+>
+  <span>
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </span>
+</h1>
+`;
+
+exports[`Storyshots Headline Labs 1`] = `
+<h1
+  className="css-10s8ewe-Headline"
+>
+  <span>
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </span>
+</h1>
+`;
+
+exports[`Storyshots Headline Review 1`] = `
+<h1
+  className="css-p4webw-Headline"
+>
+  <span>
+    Reclaimed lakes and giant airports: how Mexico City might have looked
+  </span>
+  <div>
+    <span
+      className="css-ihxckh"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-ihxckh"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-ihxckh"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-hfq1j9-empty"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+    <span
+      className="css-hfq1j9-empty"
+    >
+      <svg
+        viewBox="0 0 30 30"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </span>
+  </div>
+</h1>
+`;
+
+exports[`Storyshots HorizontalRule Default 1`] = `
+<hr
+  className="css-lmf0pc-HorizontalRule"
+/>
+`;
+
+exports[`Storyshots Paragraph Default 1`] = `
+<p
+  className="css-ril8fi-Paragraph"
+>
+  Ever since Mexico City was founded on an island in the lake of Texcoco its inhabitants have dreamed of water: containing it, draining it and now retaining it.
+</p>
+`;
+
+exports[`Storyshots Paragraph Labs 1`] = `
+<p
+  className="css-ludswr-Paragraph"
+>
+  Ever since Mexico City was founded on an island in the lake of Texcoco its inhabitants have dreamed of water: containing it, draining it and now retaining it.
+</p>
+`;
+
+exports[`Storyshots Rich Link Default 1`] = `
+<section
+  className="css-ke3kvz-Default"
+>
+  <aside
+    className="js-rich-link css-1xpjeoh-RichLink"
+  >
+    <a
+      href="https://theguardian.com"
+    >
+      <div
+        className="js-image"
+      />
+      <h1>
+        Axolotls in crisis: the fight to save the water monster of Mexico City.
+      </h1>
+      <button>
+        <svg
+          viewBox="0 0 30 30"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clipRule="evenodd"
+            d="M4 15.95h19.125l-7.5 8.975.975.975 10.425-10.45v-1L16.6 4l-.975.975 7.5 8.975H4v2z"
+            fillRule="evenodd"
+          />
+        </svg>
+        Read more
+      </button>
+    </a>
+  </aside>
+</section>
+`;
+
+exports[`Storyshots Shared Tags 1`] = `
+<ul
+  className="css-y50d1d-Tags"
+>
+  <li>
+    <a
+      href="https://mapi.co.uk/tag"
+    >
+      Tag title
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://mapi.co.uk/tag"
+    >
+      Tag title
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://mapi.co.uk/tag"
+    >
+      Tag title
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Storyshots Standfirst Comment 1`] = `
+<div
+  className="css-qiidkb"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Standfirst Default 1`] = `
+<div
+  className="css-bb3wik"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Standfirst Feature 1`] = `
+<div
+  className="css-qiidkb"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Standfirst Review 1`] = `
+<div
+  className="css-qiidkb"
+>
+  <p>
+    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+  </p>
+</div>
+`;
+
+exports[`Storyshots Star Rating Default 1`] = `
+<div>
+  <span
+    className="css-ihxckh"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="css-ihxckh"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="css-ihxckh"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="css-hfq1j9-empty"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="css-hfq1j9-empty"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+</div>
+`;
+
+exports[`Storyshots Star Rating Not Review 1`] = `null`;
