@@ -75,6 +75,7 @@ const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
 	ampFooter: buildRRLinkCategories(data, 'ampFooter'),
 });
 
+// TODO refactor now that we know data must be CAPINavType.
 export const extractNAV = (data: {}): NavType => {
 	let pillars = getArray<any>(data, 'pillars');
 
@@ -98,7 +99,7 @@ export const extractNAV = (data: {}): NavType => {
 			'brandExtensions',
 			[],
 		).map((l) => getLink(l, { isPillar: false })),
-		currentNavLink: getString(data, 'currentNavLink.title', ''),
+		currentNavLink: getString(data, 'currentNavLinkTitle', ''),
 		subNavSections: subnav
 			? {
 					parent: subnav.parent
