@@ -268,20 +268,24 @@ const headerStyles = css`
 	margin-left: 0;
 `;
 
-const titleStyle = (pillar: Theme) => css`
-	color: ${pillarPalette[pillar].main};
+const titleStyle = (pillar: Theme, isCuratedContent?: boolean) => css`
+	color: ${isCuratedContent
+		? pillarPalette[pillar].main
+		: palette.text.primary};
 `;
 
 const Title = ({
 	title,
 	pillar,
+	isCuratedContent,
 }: {
 	title: string;
-	url?: string;
 	pillar: Theme;
+	isCuratedContent?: boolean;
 }) => (
 	<h2 className={headerStyles}>
-		More from <span className={titleStyle(pillar)}>{title}</span>
+		{isCuratedContent ? 'More from ' : ''}
+		<span className={titleStyle(pillar, isCuratedContent)}>{title}</span>
 	</h2>
 );
 
@@ -357,6 +361,7 @@ type HeaderAndNavProps = {
 	trails: TrailType[];
 	pillar: Theme;
 	index: number;
+	isCuratedContent?: boolean;
 	isFullCardImage?: boolean;
 	goToIndex: (newIndex: number) => void;
 };
@@ -366,11 +371,16 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	trails,
 	pillar,
 	index,
+	isCuratedContent,
 	isFullCardImage,
 	goToIndex,
 }) => (
 	<div>
-		<Title title={heading} pillar={pillar} />
+		<Title
+			title={heading}
+			pillar={pillar}
+			isCuratedContent={isCuratedContent}
+		/>
 		<div className={dotsStyle}>
 			{trails.map((value, i) => (
 				<span
@@ -404,6 +414,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	ophanComponentName,
 	pillar,
 	isFullCardImage,
+	isCuratedContent,
 }: OnwardsType) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -526,6 +537,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 					trails={trails}
 					pillar={pillar}
 					index={index}
+					isCuratedContent={isCuratedContent}
 					isFullCardImage={isFullCardImage}
 					goToIndex={goToIndex}
 				/>
@@ -566,6 +578,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							trails={trails}
 							pillar={pillar}
 							index={index}
+							isCuratedContent={isCuratedContent}
 							isFullCardImage={isFullCardImage}
 							goToIndex={goToIndex}
 						/>

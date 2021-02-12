@@ -299,7 +299,7 @@ export const Headlines = () => (
 	<>
 		<Section showTopBorder={true}>
 			<Carousel
-				heading="Headlines"
+				heading="More on this story"
 				trails={trails}
 				ophanComponentName="curated-content"
 				pillar={Pillar.News}
@@ -311,6 +311,7 @@ export const Headlines = () => (
 				trails={trails}
 				ophanComponentName="curated-content"
 				pillar={Pillar.Sport}
+				isCuratedContent={true}
 			/>
 		</Section>
 	</>
@@ -322,7 +323,7 @@ export const Immersive = () => (
 	<>
 		<Section showTopBorder={true}>
 			<Carousel
-				heading="Headlines"
+				heading="More on this story"
 				trails={immersiveTrails}
 				ophanComponentName="curated-content"
 				pillar={Pillar.News}
@@ -336,6 +337,7 @@ export const Immersive = () => (
 				ophanComponentName="curated-content"
 				pillar={Pillar.Sport}
 				isFullCardImage={true}
+				isCuratedContent={true}
 			/>
 		</Section>
 	</>
