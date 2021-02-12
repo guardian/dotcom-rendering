@@ -113,7 +113,7 @@ const carouselStyle = (isFullCardImage?: boolean) => css`
 	}
 
 	${until.tablet} {
-		margin-left: -5px; /* Align firstcard on mobile devices */
+		margin-left: -10px; /* Align firstcard on mobile devices */
 	}
 `;
 
@@ -185,6 +185,7 @@ const buttonContainerStyle = css`
 	position: absolute;
 	z-index: 20;
 	height: 100%;
+	padding-bottom: 36px; /* Align buttons centrally with cards */
 
 	${until.leftCol} {
 		display: none;
