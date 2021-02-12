@@ -192,6 +192,40 @@ const textCardKicker = (format: Format): string => {
 	}
 };
 
+const textCardAge = (format: Format): string => {
+	switch (format.design) {
+		case Design.Comment:
+			switch (format.theme) {
+				case Special.SpecialReport:
+					// TODO: Pull this in from souce once we see it here:
+					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+					return '#ff9941';
+				default:
+					return neutral[60];
+			}
+		case Design.Live:
+			switch (format.theme) {
+				case Pillar.News:
+					return '#ffbac8';
+				case Pillar.Sport:
+					return '#90dcff';
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		case Design.Media:
+			return WHITE;
+		default:
+			switch (format.theme) {
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
+				default:
+					return neutral[60];
+			}
+	}
+};
+
 const textLinkKicker = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
@@ -284,6 +318,40 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillCardClock = (format: Format): string => {
+	switch (format.design) {
+		case Design.Comment:
+			switch (format.theme) {
+				case Special.SpecialReport:
+					// TODO: Pull this in from souce once we see it here:
+					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+					return '#ff9941';
+				default:
+					return neutral[46];
+			}
+		case Design.Live:
+			switch (format.theme) {
+				case Pillar.News:
+					return '#ffbac8';
+				case Pillar.Sport:
+					return '#90dcff';
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		case Design.Media:
+			return WHITE;
+		default:
+			switch (format.theme) {
+				case Special.SpecialReport:
+					return brandAltBackground.primary;
+				default:
+					return neutral[46];
+			}
+	}
+};
+
 const borderSyndicationButton = (): string => {
 	return border.secondary;
 };
@@ -327,6 +395,7 @@ export const decidePalette = (format: Format): Palette => {
 			cardHeadline: textCardHeadline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
+			cardAge: textCardAge(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -340,6 +409,7 @@ export const decidePalette = (format: Format): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
+			cardClock: fillCardClock(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),
