@@ -11,6 +11,11 @@ import {
 
 export default {
 	title: 'Components/WitnessBlockComponent',
+	parameters: {
+		chromatic: {
+			disable: true,
+		},
+	},
 };
 
 export const WitnessTextBlockComponentDefault = () => (
