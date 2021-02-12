@@ -93,7 +93,6 @@ const shouldDisplayOverlay = (
 };
 
 const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
-	console.log(abTestConfig);
 	return true;
 	// return abTestConfig.clickToViewVariant === 'variant';
 };
