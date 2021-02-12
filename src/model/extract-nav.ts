@@ -67,7 +67,7 @@ const buildRRLinkCategories = (
 	gifting: getString(data, `${rrLinkConfig}.${position}.gifting`, ''),
 });
 
-const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
+const buildRRLinkModel = (data: any): ReaderRevenuePositions => ({
 	header: buildRRLinkCategories(data, 'header'),
 	footer: buildRRLinkCategories(data, 'footer'),
 	sideMenu: buildRRLinkCategories(data, 'sideMenu'),
@@ -76,12 +76,12 @@ const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
 });
 
 // TODO refactor now that we know data must be CAPINavType.
-export const extractNAV = (data: {}): NavType => {
+export const extractNAV = (data: any): NavType => {
 	let pillars = getArray<any>(data, 'pillars');
 
 	pillars = pillars.map((link) => getLink(link, { isPillar: true }));
 
-	const subnav = get(data, 'subNavSections');
+	const subnav = get(data, 'subNavSections') as undefined | { parent?: any };
 
 	return {
 		pillars,

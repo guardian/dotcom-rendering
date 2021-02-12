@@ -1,3 +1,6 @@
+import { Parameter } from 'aws-sdk/clients/ssm';
+import { PromiseResult } from 'aws-sdk/lib/request';
+
 import AWS from 'aws-sdk';
 
 process.env.AWS_PROFILE = 'frontend';
@@ -8,13 +11,8 @@ const STACK = 'frontend';
 
 const ssm = new AWS.SSM();
 
-interface AWSParameter {
-	Name: string;
-	Value: string;
-}
-
 interface ConfigMap {
-	[key: string]: string;
+	[key: string]: any;
 }
 
 interface GuardianConfiguration {
@@ -29,7 +27,7 @@ interface GuardianConfiguration {
 const getParams = function getAWSParameterStoreParameters(
 	stage: string,
 	token: string | undefined = undefined,
-): Promise<any> {
+): Promise<PromiseResult<AWS.SSM.GetParametersByPathResult, AWS.AWSError>> {
 	const params = {
 		Path: `/${STACK}/${stage}/`,
 		Recursive: true,
@@ -44,16 +42,16 @@ const getParams = function getAWSParameterStoreParameters(
 
 const getAllParams = function getGuardianConfigurationRecursiveStep(
 	stage: string,
-	params = [],
+	params: Parameter[] = [],
 	token: string | undefined = undefined,
-): Promise<AWSParameter[]> {
+): Promise<Parameter[]> {
 	return getParams(stage, token).then((response) => {
 		if (!response.NextToken) {
 			return params;
 		}
 		return getAllParams(
 			stage,
-			params.concat(response.Parameters),
+			params.concat(response.Parameters || []),
 			response.NextToken === '' ? undefined : response.NextToken,
 		);
 	});
@@ -65,11 +63,16 @@ const getGuardianConfiguration = (
 	stage: string,
 ): Promise<GuardianConfiguration> => {
 	return getAllParams(stage).then((params) => {
-		const configuration: ConfigMap = params.reduce((map: ConfigMap, p) => {
-			const newMap = map;
-			newMap[p.Name] = p.Value;
-			return map;
-		}, {});
+		const configuration: ConfigMap = params.reduce(
+			(map, p) =>
+				p.Name
+					? {
+							...map,
+							[p.Name]: p.Value,
+					  }
+					: { ...map },
+			{},
+		);
 
 		return {
 			getParameter: (key: string) =>

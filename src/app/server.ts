@@ -37,7 +37,8 @@ const buildUrlFromQueryParam = (req: Request) => {
 	// Note. This is the same as how dev-server.js works
 	const DEFAULT_URL =
 		'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
-	const url = new URL(req.query.url || DEFAULT_URL);
+	const query = req.query as { url?: string } | undefined;
+	const url = new URL((query && query.url) || DEFAULT_URL);
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams && url.searchParams.toString();
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
@@ -136,14 +137,16 @@ if (process.env.NODE_ENV === 'production') {
                 </html>
             `);
 		} catch (e) {
-			res.status(500).send(`<pre>${e.stack}</pre>`);
+			const error = e as Error;
+			res.status(500).send(`<pre>${error.stack}</pre>`);
 		}
 	});
 
 	// express requires all 4 args here:
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	app.use((err: any, req: any, res: any, next: any) => {
-		res.status(500).send(`<pre>${err.stack}</pre>`);
+	app.use((e: any, req: any, res: Response, next: any) => {
+		const error = e as Error;
+		res.status(500).send(`<pre>${error.stack}</pre>`);
 	});
 
 	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {

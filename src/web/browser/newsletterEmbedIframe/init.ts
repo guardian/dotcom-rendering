@@ -21,7 +21,9 @@ const init = (): Promise<void> => {
 		});
 		if (iframes.length !== 0) {
 			try {
-				const message = JSON.parse(event.data);
+				const message: { [key: string]: string } = JSON.parse(
+					event.data,
+				);
 				switch (message.type) {
 					case 'set-height':
 						iframes.forEach((iframe) => {

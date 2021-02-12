@@ -7,6 +7,7 @@ jest.mock('@guardian/consent-management-platform', () => ({
 	onConsentChange: (callback: any) => {
 		callback(mockOnConsentChangeResult);
 	},
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	getConsentFor: jest.requireActual('@guardian/consent-management-platform')
 		.getConsentFor,
 }));
