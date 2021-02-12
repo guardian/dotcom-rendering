@@ -1,24 +1,29 @@
 import React from 'react';
 
-import { unescapeData } from '@root/src/lib/escapeData';
 import { css } from 'emotion';
 
-const widthOverride = css`
-	iframe {
-		/* The instagram embed js hijacks the iframe and calculated an incorrect width, which pushed the body out */
-		min-width: 300px !important;
-	}
+const fullWidthStyles = css`
+	width: 100%;
 `;
 
+/**
+ * Note the iframe created in this compoenet is dependent on the embedIFrame function being
+ * called to be size correctly.
+ * src/web/browser/embedIframe/embedIframe.ts
+ */
 export const InstagramBlockComponent: React.FC<{
 	element: InstagramBlockElement;
-}> = ({ element }) => {
+	index: number;
+}> = ({ element, index }) => {
 	return (
-		<div className={widthOverride}>
-			<div
-				data-cy="instagram-embed"
-				dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
-			/>
-		</div>
+		<iframe
+			className={`${fullWidthStyles} js-embed__iframe`}
+			name={`instagram-embed-${index}`}
+			data-cy="instagram-embed"
+			title={`Instagram Post ${index}`}
+			srcDoc={`${element}
+			<script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
+			<gu-script>iframeMessenger.enableAutoResize();</gu-script>`}
+		/>
 	);
 };
