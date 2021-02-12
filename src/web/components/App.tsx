@@ -712,10 +712,18 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={CAPI.config.abTests}
+						onAccept={() =>
+							updateIframeHeight(
+								`iframe[name="instagram-embed-${
+									element.instagramIndex || 0
+								}"]`,
+							)
+						}
 					>
 						<InstagramBlockComponent
 							key={element.instagramIndex}
 							element={element}
+							index={element.instagramIndex || 0}
 						/>
 					</ClickToView>
 				</HydrateOnce>
