@@ -21,7 +21,7 @@ export const InstagramBlockComponent: React.FC<{
 			name={`instagram-embed-${index}`}
 			data-cy="instagram-embed"
 			title={`Instagram Post ${index}`}
-			srcDoc={`${element}
+			srcDoc={`${element.html}
 			<script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
 			<gu-script>iframeMessenger.enableAutoResize();</gu-script>`}
 		/>
