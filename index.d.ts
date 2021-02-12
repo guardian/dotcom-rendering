@@ -62,6 +62,7 @@ type Palette = {
 		cardHeadline: Colour;
 		cardKicker: Colour;
 		linkKicker: Colour;
+		cardAge: Colour;
 	},
 	background: {
 		article: Colour;
@@ -75,6 +76,7 @@ type Palette = {
 		commentCount: Colour;
 		shareIcon: Colour;
 		captionTriangle: Colour;
+		cardClock: Colour;
 	},
 	border: {
 		syndicationButton: Colour;
@@ -286,10 +288,9 @@ type PageTypeType = {
 interface CAPILinkType {
     url: string;
     title: string;
-    longTitle: string;
-    iconName: string;
+    longTitle?: string;
+    iconName?: string;
     children?: CAPILinkType[];
-    mobileOnly?: boolean;
     pillar?: CAPIPillar;
     more?: boolean;
     classList?: string[];
@@ -301,8 +302,8 @@ interface CAPINavType {
     otherLinks: CAPILinkType[];
     brandExtensions: CAPILinkType[];
     currentNavLink?: CAPILinkType;
-    currentParent?: CAPILinkType;
-    currentPillar?: CAPILinkType;
+    currentNavLinkTitle?: string;
+    currentPillarTitle?: string;
     subNavSections?: {
         parent?: CAPILinkType;
         links: CAPILinkType[];

@@ -41,9 +41,9 @@ export const getScriptArrayFromFilename = (
 	];
 };
 
-export const getByChunkName = (
+export const getScriptArrayFromChunkName = (
 	chunkName: string,
-): { src: string; legacy?: boolean }[] | [] => {
+): { src: string; legacy?: boolean }[] => {
 	const chunks: string[] | undefined =
 		loadableManifestJson.assetsByChunkName[chunkName];
 	const filename = chunks && chunks.length > 0 && chunks[0];

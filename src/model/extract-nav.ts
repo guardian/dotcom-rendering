@@ -46,7 +46,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
 	const title = getString(data, 'title');
 	return {
 		title,
-		longTitle: getString(data, 'longTitle') || title,
+		longTitle: getString(data, 'longTitle', '') || title,
 		url: getString(data, 'url'),
 		pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
 		children: getArray<object>(data, 'children', []).map(
@@ -75,6 +75,7 @@ const buildRRLinkModel = (data: any): ReaderRevenuePositions => ({
 	ampFooter: buildRRLinkCategories(data, 'ampFooter'),
 });
 
+// TODO refactor now that we know data must be CAPINavType.
 export const extractNAV = (data: any): NavType => {
 	let pillars = getArray<any>(data, 'pillars');
 
@@ -98,7 +99,7 @@ export const extractNAV = (data: any): NavType => {
 			'brandExtensions',
 			[],
 		).map((l) => getLink(l, { isPillar: false })),
-		currentNavLink: getString(data, 'currentNavLink.title', ''),
+		currentNavLink: getString(data, 'currentNavLinkTitle', ''),
 		subNavSections: subnav
 			? {
 					parent: subnav.parent
