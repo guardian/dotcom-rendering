@@ -1193,6 +1193,9 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
+                "documentIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1201,9 +1204,6 @@
                 },
                 "sourceDomain": {
                     "type": "string"
-                },
-                "documentIndex": {
-                    "type": "number"
                 }
             },
             "required": [
@@ -1238,6 +1238,9 @@
                 "isMandatory": {
                     "type": "boolean"
                 },
+                "embedIndex": {
+                    "type": "number"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1251,7 +1254,8 @@
             "required": [
                 "_type",
                 "html",
-                "isMandatory"
+                "isMandatory",
+                "isThirdPartyTracking"
             ]
         },
         "ExplainerAtomBlockElement": {
@@ -1644,12 +1648,25 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "instagramIndex": {
+                    "type": "number"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "hasCaption",
                 "html",
+                "isThirdPartyTracking",
                 "url"
             ]
         },
@@ -1739,9 +1756,6 @@
                 "originalUrl": {
                     "type": "string"
                 },
-                "source": {
-                    "type": "string"
-                },
                 "title": {
                     "type": "string"
                 },
@@ -1756,14 +1770,26 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "mapIndex": {
+                    "type": "number"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "embedUrl",
                 "height",
+                "isThirdPartyTracking",
                 "originalUrl",
-                "source",
                 "title",
                 "width"
             ]
@@ -2008,6 +2034,15 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2015,6 +2050,7 @@
                 "html",
                 "id",
                 "isMandatory",
+                "isThirdPartyTracking",
                 "isTrack"
             ]
         },
@@ -2044,10 +2080,23 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "spotifyIndex": {
+                    "type": "number"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "isThirdPartyTracking"
             ]
         },
         "SubheadingBlockElement": {
@@ -2196,6 +2245,15 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2203,6 +2261,7 @@
                 "hasMedia",
                 "html",
                 "id",
+                "isThirdPartyTracking",
                 "url"
             ]
         },
@@ -2217,10 +2276,20 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "isThirdPartyTracking"
             ]
         },
         "VideoFacebookBlockElement": {
@@ -2249,11 +2318,24 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "videoFacebookIndex": {
+                    "type": "number"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "height",
+                "isThirdPartyTracking",
                 "url",
                 "width"
             ]
@@ -2290,11 +2372,21 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "height",
+                "isThirdPartyTracking",
                 "url",
                 "width"
             ]
@@ -2348,6 +2440,7 @@
             "required": [
                 "_type",
                 "height",
+                "isThirdPartyTracking",
                 "originalUrl",
                 "url",
                 "width"
@@ -2449,6 +2542,12 @@
                             "$ref": "#/definitions/WitnessTypeDataText"
                         }
                     ]
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
