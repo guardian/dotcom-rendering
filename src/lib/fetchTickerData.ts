@@ -23,7 +23,7 @@ const checkForErrors = (response: Response): Promise<Response> => {
 	return Promise.resolve(response);
 };
 
-const parse = (json: any): Promise<TickerData> => {
+const parse = (json: { total: string; goal: string }): Promise<TickerData> => {
 	const total = parseInt(json.total, 10);
 	const goal = parseInt(json.goal, 10);
 

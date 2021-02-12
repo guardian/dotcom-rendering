@@ -27,7 +27,9 @@ export const CDN = stage
 	: '/';
 export const loadableManifestJson = loadableManifest;
 
-export const getScriptArrayFromFilename = (filename: string) => {
+export const getScriptArrayFromFilename = (
+	filename: string,
+): { src: string; legacy: boolean }[] => {
 	// 'ophan.87b473fc83e9ca6250fc.js' -> 'ophan'
 	const chunkName = filename.split('.')[0];
 	const chunks: string[] | undefined =
@@ -39,9 +41,9 @@ export const getScriptArrayFromFilename = (filename: string) => {
 	];
 };
 
-export const getByChunkName = (
+export const getScriptArrayFromChunkName = (
 	chunkName: string,
-): { src: string; legacy?: boolean }[] | [] => {
+): { src: string; legacy?: boolean }[] => {
 	const chunks: string[] | undefined =
 		loadableManifestJson.assetsByChunkName[chunkName];
 	const filename = chunks && chunks.length > 0 && chunks[0];

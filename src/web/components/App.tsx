@@ -294,7 +294,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 				loadScript('https://www.google-analytics.com/analytics.js');
 				loadScript(window.guardian.gaPath);
 			} else {
-				(window as any).ga = null;
+				// We should never be able to directly set things to the global window object.
+				// But in this case we want to stub things for testing, so it's ok to ignore this rule
+				// @ts-ignore
+				window.ga = null;
 			}
 		});
 	}, []);
