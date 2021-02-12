@@ -203,7 +203,6 @@ const textCardAge = (format: Format): string => {
 				default:
 					return neutral[60];
 			}
-		case Design.Media:
 		case Design.Live:
 			switch (format.theme) {
 				case Pillar.News:
@@ -215,6 +214,8 @@ const textCardAge = (format: Format): string => {
 				default:
 					return pillarPalette[format.theme].main;
 			}
+		case Design.Media:
+			return WHITE;
 		default:
 			switch (format.theme) {
 				case Special.SpecialReport:
@@ -328,7 +329,6 @@ const fillCardClock = (format: Format): string => {
 				default:
 					return neutral[46];
 			}
-		case Design.Media:
 		case Design.Live:
 			switch (format.theme) {
 				case Pillar.News:
@@ -340,6 +340,8 @@ const fillCardClock = (format: Format): string => {
 				default:
 					return pillarPalette[format.theme].main;
 			}
+		case Design.Media:
+			return WHITE;
 		default:
 			switch (format.theme) {
 				case Special.SpecialReport:
