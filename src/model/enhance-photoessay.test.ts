@@ -13,6 +13,12 @@ const photoEssay = {
 	},
 };
 
+const metaData = {
+	id: '123',
+	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
+};
+
 describe('Enhance Photo Essays', () => {
 	it('simplay passes through the same object if not a photo essay', () => {
 		// example.designType does not equal 'PhotoEssay'
@@ -65,10 +71,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						image,
 						{
@@ -87,10 +90,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							...image,
@@ -115,10 +115,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -143,10 +140,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -186,10 +180,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -214,10 +205,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -253,10 +241,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -280,10 +265,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -312,10 +294,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						image,
 						{
@@ -338,10 +317,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							...image,
@@ -370,10 +346,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -407,10 +380,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -445,10 +415,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -482,10 +449,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -520,10 +484,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -558,10 +519,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -604,10 +562,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -643,10 +598,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -695,10 +647,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							// @ts-ignore
@@ -726,10 +675,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -761,10 +707,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -786,10 +729,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
@@ -842,10 +782,7 @@ describe('Enhance Photo Essays', () => {
 			...photoEssay,
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -866,10 +803,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
-					id: '123',
-					primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-					secondaryDateLine:
-						'Last modified on Wed 9 Dec 2020 13.40 GMT',
+					...metaData,
 					elements: [
 						{
 							_type:
