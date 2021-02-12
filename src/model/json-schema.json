@@ -3475,11 +3475,11 @@
                 "currentNavLink": {
                     "$ref": "#/definitions/CAPILinkType"
                 },
-                "currentParent": {
-                    "$ref": "#/definitions/CAPILinkType"
+                "currentNavLinkTitle": {
+                    "type": "string"
                 },
-                "currentPillar": {
-                    "$ref": "#/definitions/CAPILinkType"
+                "currentPillarTitle": {
+                    "type": "string"
                 },
                 "subNavSections": {
                     "type": "object",
@@ -3531,9 +3531,6 @@
                         "$ref": "#/definitions/CAPILinkType"
                     }
                 },
-                "mobileOnly": {
-                    "type": "boolean"
-                },
                 "pillar": {
                     "$ref": "#/definitions/CAPIPillar"
                 },
@@ -3548,8 +3545,6 @@
                 }
             },
             "required": [
-                "iconName",
-                "longTitle",
                 "title",
                 "url"
             ]

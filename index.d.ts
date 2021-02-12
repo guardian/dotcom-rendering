@@ -286,10 +286,9 @@ type PageTypeType = {
 interface CAPILinkType {
     url: string;
     title: string;
-    longTitle: string;
-    iconName: string;
+    longTitle?: string;
+    iconName?: string;
     children?: CAPILinkType[];
-    mobileOnly?: boolean;
     pillar?: CAPIPillar;
     more?: boolean;
     classList?: string[];
@@ -301,8 +300,8 @@ interface CAPINavType {
     otherLinks: CAPILinkType[];
     brandExtensions: CAPILinkType[];
     currentNavLink?: CAPILinkType;
-    currentParent?: CAPILinkType;
-    currentPillar?: CAPILinkType;
+    currentNavLinkTitle?: string;
+    currentPillarTitle?: string;
     subNavSections?: {
         parent?: CAPILinkType;
         links: CAPILinkType[];
@@ -714,7 +713,7 @@ type IslandType =
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as
-// defined in manifest.json
+// defined in loadable-manifest-browser.json
 type BlockElementType = string;
 interface ComponentNameChunkMap {
     chunkName: string;

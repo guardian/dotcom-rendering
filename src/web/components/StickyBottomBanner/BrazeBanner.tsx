@@ -20,7 +20,7 @@ import {
 	getInitialisedAppboy,
 	SDK_OPTIONS,
 } from '@root/src/web/lib/braze/initialiseAppboy';
-import { CanShowResult } from './bannerPicker';
+import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
 type Meta = {
 	dataFromBraze: {
