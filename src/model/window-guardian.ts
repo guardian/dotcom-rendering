@@ -1,3 +1,5 @@
+import { forBrowser } from './extract-nav';
+
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
 export interface WindowGuardianConfig {
@@ -335,6 +337,7 @@ export const makeWindowGuardian = (
 			cssIDs,
 			data: {
 				...dcrDocumentData,
+				NAV: forBrowser(dcrDocumentData.NAV),
 				CAPI: makeGuardianBrowserCAPI(dcrDocumentData.CAPI),
 			},
 		},

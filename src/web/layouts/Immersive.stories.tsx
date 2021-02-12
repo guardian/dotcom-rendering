@@ -21,7 +21,7 @@ import { HydrateApp } from '@root/src/web/components/HydrateApp';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
-import { extractNAV } from '@root/src/model/extract-nav';
+import { extractNAV, forBrowser } from '@root/src/model/extract-nav';
 import { DecideLayout } from './DecideLayout';
 
 mockRESTCalls();
@@ -52,7 +52,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		HydrateApp({ CAPI, NAV });
+		HydrateApp({ CAPI, NAV: forBrowser(NAV) });
 		embedIframe();
 	}, [ServerCAPI, NAV]);
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;

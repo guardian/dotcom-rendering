@@ -113,3 +113,14 @@ export const extractNAV = (data: any): NavType => {
 		readerRevenueLinks: buildRRLinkModel(data),
 	};
 };
+
+export const forBrowser = (nav: NavType): BrowserNavType => {
+	return {
+		topLevelPillars: nav.pillars.map((p) => ({
+			...p,
+			children: undefined,
+		})),
+		currentNavLink: nav.currentNavLink,
+		subNavSections: nav.subNavSections,
+	};
+};

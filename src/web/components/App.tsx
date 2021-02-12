@@ -66,7 +66,11 @@ import { InstagramBlockComponent } from '@root/src/web/components/elements/Insta
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
-import { StickyNav } from '@root/src/web/components/StickyNav/StickyNav';
+import {
+	StickyNavSimple,
+	StickyNavBackscroll,
+} from '@root/src/web/components/StickyNav/StickyNav';
+
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -128,7 +132,7 @@ const GetMatchStats = React.lazy(() => {
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	NAV: NavType;
+	NAV: BrowserNavType;
 };
 
 const componentEventHandler = (
@@ -326,6 +330,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
+	// sticky nav test status
+	const inStickyNavBackscroll = ABTestAPI.isUserInVariant(
+		'stickyNavTest',
+		'sticky-nav-backscroll',
+	);
+	const inStickyNavSimple = ABTestAPI.isUserInVariant(
+		'stickyNavTest',
+		'sticky-nav-simple',
+	);
+
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
 		() => {
@@ -473,14 +487,28 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</>
 				</HydrateOnce>
 			))}
-			<Portal root="sticky-nav-root">
-				<StickyNav
-					CAPI={CAPI}
-					NAV={NAV}
-					format={format}
-					palette={palette}
-				/>
-			</Portal>
+
+			{inStickyNavBackscroll && (
+				<Portal root="sticky-nav-root">
+					<StickyNavBackscroll
+						capiData={CAPI}
+						navData={NAV}
+						format={format}
+						palette={palette}
+					/>
+				</Portal>
+			)}
+
+			{inStickyNavSimple && (
+				<Portal root="sticky-nav-root">
+					<StickyNavSimple
+						capiData={CAPI}
+						navData={NAV}
+						format={format}
+						palette={palette}
+					/>
+				</Portal>
+			)}
 
 			{NAV.subNavSections && (
 				<HydrateOnce root="sub-nav-root">

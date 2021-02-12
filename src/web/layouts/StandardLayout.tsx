@@ -50,6 +50,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { NavGroup } from '@root/src/web/components/StickyNav/StickyNav';
+import { forBrowser } from '@root/src/model/extract-nav';
 
 const gridTemplateWide = css`
 	grid-template-areas:
@@ -364,10 +365,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<div id="sticky-nav-root" className={stickyNavRootStyle}>
 					<div data-name="placeholder">
 						<NavGroup
-							CAPI={makeGuardianBrowserCAPI(CAPI)}
-							NAV={NAV}
+							capiData={makeGuardianBrowserCAPI(CAPI)}
+							navData={forBrowser(NAV)}
 							palette={palette}
 							format={format}
+							ID="lazy-nav"
 						/>
 					</div>
 				</div>
