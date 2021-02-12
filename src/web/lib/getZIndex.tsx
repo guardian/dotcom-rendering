@@ -26,6 +26,9 @@ const indices = [
 
 	'banner',
 
+	// Stick-nav test
+	'stickyNav',
+
 	// Header
 	'stickyAdWrapper',
 	'headerWrapper',

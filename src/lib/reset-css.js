@@ -32,11 +32,6 @@ const defaults = `
     em {
         font-style: italic;
     }
-
-    *:focus {
-        outline-color: red;
-        outline-style: solid;
-    }
 `;
 
 module.exports = [resetCSS, defaults].join('').replace(/\s/g, '');

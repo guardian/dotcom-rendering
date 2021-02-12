@@ -11,6 +11,7 @@ import libDebounce from 'lodash.debounce';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useAB } from '@guardian/ab-react';
+import { getZIndex } from '@root/src/web/lib/getZIndex';
 
 interface Props {
 	CAPI: CAPIBrowserType;
@@ -29,16 +30,16 @@ const stickyStyle = (theme: Theme) => css`
 		1px 3px 6px ${neutralBorder(theme)};
 `;
 
-const fixedStyle = (theme: Theme, display: boolean) => css`
+const fixedStyle = (theme: Theme, shouldDisplay: boolean) => css`
 	width: 100%;
 	position: fixed;
 	top: 0;
-	z-index: 900;
+	z-index: ${getZIndex('stickyNav')};
 	background-color: white;
 	box-shadow: 0 0 transparent, 0 0 transparent,
 		1px 3px 6px ${neutralBorder(theme)};
 
-	display: ${display ? 'block' : 'none'};
+	display: ${shouldDisplay ? 'block' : 'none'};
 `;
 
 export const NavGroup: React.FC<Props> = ({
@@ -47,48 +48,38 @@ export const NavGroup: React.FC<Props> = ({
 	format,
 	palette,
 	ID,
-}: Props) => {
-	const theme = decideTheme({
-		pillar: CAPI.pillar,
-		design: decideDesign(CAPI.designType, CAPI.tags),
-	});
-
-	return (
-		<div>
+}: Props) => (
+	<div>
+		<Section
+			showSideBorders={true}
+			borderColour={brandLine.primary}
+			showTopBorder={false}
+			padded={false}
+			backgroundColour={brandBackground.primary}
+		>
+			<Nav
+				nav={NAV}
+				format={format}
+				subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+				edition={CAPI.editionId}
+				ID={ID || ''}
+			/>
+		</Section>
+		{NAV.subNavSections && (
 			<Section
-				showSideBorders={true}
-				borderColour={brandLine.primary}
-				showTopBorder={false}
+				backgroundColour={palette.background.article}
 				padded={false}
-				backgroundColour={brandBackground.primary}
+				sectionId="sub-nav-root"
 			>
-				<Nav
-					nav={NAV}
-					format={{
-						...format,
-						theme,
-					}}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
-					ID={ID || ''}
+				<SubNav
+					subNavSections={NAV.subNavSections}
+					currentNavLink={NAV.currentNavLink}
+					palette={palette}
 				/>
 			</Section>
-			{NAV.subNavSections && (
-				<Section
-					backgroundColour={palette.background.article}
-					padded={false}
-					sectionId="sub-nav-root"
-				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-					/>
-				</Section>
-			)}
-		</div>
-	);
-};
+		)}
+	</div>
+);
 
 // StickyNavSimple is a basic, CSS only, sticky nav. The nav stays at the top of
 // the viewport as the user scrolls past it's initial placement.
