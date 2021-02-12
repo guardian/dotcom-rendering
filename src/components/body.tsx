@@ -15,6 +15,7 @@ import Standard from 'components/standard/article';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
+import FootballScores from './footballScores';
 
 // ----- Functions ----- //
 
@@ -77,7 +78,8 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === Design.Review ||
 		item.design === Design.Article ||
 		item.design === Design.Interactive ||
-		item.design === Design.Quiz
+		item.design === Design.Quiz ||
+		item.design === Design.MatchReport
 	) {
 		return <Standard item={item}>{render(item, body)}</Standard>;
 	}
@@ -89,6 +91,7 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 			</AdvertisementFeature>
 		);
 	}
+
 
 	return notImplemented;
 };

@@ -256,6 +256,8 @@ const isQuiz = hasTag('tone/quizzes');
 
 const isAdvertisementFeature = hasTag('tone/advertisement-features');
 
+const isMatchReport = hasTag('tone/matchreport');
+
 const fromCapiLiveBlog = (context: Context) => (
 	request: RenderingRequest,
 ): Liveblog => {
@@ -336,6 +338,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			design: Design.AdvertisementFeature,
 			...itemFieldsWithBody(context, request),
 			logo: paidContentLogo(tags),
+		};
+	} else if (isMatchReport(tags)) {
+		return {
+			design: Design.MatchReport,
+			...itemFieldsWithBody(context, request),
 		};
 	}
 
