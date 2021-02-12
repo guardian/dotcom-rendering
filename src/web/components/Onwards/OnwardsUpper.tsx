@@ -299,7 +299,7 @@ export const OnwardsUpper = ({
 
 	const inControlCarouselTest = ABTestAPI.isUserInVariant(
 		'CuratedContent3Carousel',
-		'curated-content-variant-control',
+		'curated-content-control',
 	);
 
 	if (inSmallCardCarouselTest) {
