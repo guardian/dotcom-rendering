@@ -13,10 +13,7 @@ export const getBrazeUuid = async (ajaxUrl: string): Promise<string | void> => {
 						brazeUuid?: string;
 					};
 				};
-			}) =>
-				json.user &&
-				json.user.privateFields &&
-				json.user.privateFields.brazeUuid,
+			}) => json?.user?.privateFields?.brazeUuid,
 		)
 		.catch((error) => {
 			window.guardian.modules.sentry.reportError(error, 'getBrazeUuid');
