@@ -532,6 +532,7 @@ type OnwardsType = {
 	url?: string;
 	ophanComponentName: OphanComponentName;
     pillar: Theme;
+	isCuratedContent?: boolean;
     isFullCardImage?: boolean
 };
 

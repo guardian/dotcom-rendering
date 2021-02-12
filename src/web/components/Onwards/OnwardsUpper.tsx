@@ -307,6 +307,7 @@ export const OnwardsUpper = ({
 						ophanComponentName="curated-content"
 						Container={Carousel}
 						pillar={pillar}
+						isCuratedContent={true}
 						isFullCardImage={true}
 					/>
 				</Section>
@@ -318,6 +319,7 @@ export const OnwardsUpper = ({
 						limit={8}
 						ophanComponentName="curated-content"
 						Container={OnwardsLayout}
+						isCuratedContent={true}
 						pillar={pillar}
 					/>
 				</Section>
