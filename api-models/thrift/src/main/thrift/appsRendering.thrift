@@ -127,5 +127,5 @@ struct RenderingRequest {
     5: optional Branding branding
     6: optional list<Campaign> campaigns
     7: optional RelatedContent relatedContent
-    8: optional FootballContent footbalContent
+    8: optional FootballContent footballContent
 }
