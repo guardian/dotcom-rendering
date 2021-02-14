@@ -1,9 +1,11 @@
 // ----- Imports ----- //
 
 import { Tag } from '@guardian/content-api-models/v1/tag';
-import { andThen, map, map2, OptionKind, none, some } from '@guardian/types';
+import { andThen, map, map2, OptionKind, none, some, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { isObject, pipe, pipe2 } from 'lib';
+import { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
+import { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
 
 // ----- Types ----- //
 
@@ -248,6 +250,13 @@ const teamsFromTags = (tags: Tag[]): Option<Teams> => {
     return none;
 }
 
+const teamsFromFootballContent = (footballContent: Option<FootballContent>): Option<Teams> => {
+    return pipe(
+        footballContent,
+        map((c: FootballContent ) => {return [c.homeTeam.id, c.awayTeam.id]}),
+    )
+}
+
 // ----- Exports ----- //
 
 export type {
@@ -261,4 +270,5 @@ export {
     TeamLocation,
     parseMatchScores,
     teamsFromTags,
+    teamsFromFootballContent
 }

@@ -35,7 +35,7 @@ import {
 } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
 import { dateToString } from 'date';
-import { teamsFromTags } from 'football';
+import { teamsFromFootballContent, teamsFromTags } from 'football';
 
 // ----- Styles ----- //
 
@@ -114,10 +114,11 @@ const Standard: FC<Props> = ({ item, children }) => {
 				withDefault(<></>),
 		  )
 		: null;
-	
-	const footballPlaceholder =
+
+		const footballPlaceholder =
 		pipe2(
-			teamsFromTags(item.tags),
+			//teamsFromTags(item.tags),
+			teamsFromFootballContent(item.footballContent),
 			map(teams =>
 				<div
 					id="js-football-scores"
