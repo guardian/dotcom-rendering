@@ -2,6 +2,7 @@
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
+import type { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
@@ -52,6 +53,7 @@ interface Fields extends Format {
 	internalShortId: Option<string>;
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
+	footballContent: Option<FootballContent>;
 }
 
 interface ResizedRelatedContent extends RelatedContent {
@@ -160,7 +162,7 @@ const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, branding, commentCount, relatedContent } = request;
+	const { content, branding, commentCount, relatedContent, footballContent } = request;
 	return {
 		theme: themeFromString(content.pillarId),
 		display: getDisplay(content),
@@ -197,6 +199,7 @@ const itemFields = (
 				),
 			})),
 		),
+		footballContent: fromNullable(footballContent),
 	};
 };
 
