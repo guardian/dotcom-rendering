@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import { css, cx } from '@emotion/css';
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
@@ -170,7 +170,7 @@ const template = `
 
 <amp-accordion>
 <section>
-    <h2 class=${cx(link, editionLink)}>
+    <h2 class="${cx(link, editionLink)}">
         <i></i>
         Switch edition
     </h2>

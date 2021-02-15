@@ -4,4 +4,5 @@ export const composeLabsCSS = (
 	pillar: Theme,
 	baseCSS: string,
 	labsCSS: string,
-): string => (pillar === Special.Labs ? cx(baseCSS, labsCSS) : baseCSS);
+): string | string[] =>
+	pillar === Special.Labs ? [baseCSS, labsCSS] : baseCSS;
