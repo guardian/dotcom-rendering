@@ -63,7 +63,7 @@ const makeWindowGuardianConfig = (
 		tests: config.abTests || {},
 		ophan: {
 			pageViewId: '',
-			browserId: ''
+			browserId: '',
 		},
 	} as WindowGuardianConfig;
 };
