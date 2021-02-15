@@ -1083,9 +1083,9 @@ export const InstagramBlockComponentStory = () => {
 				`}
 			>
 				<p className={paragraphStyle}>
-					Example of a twitter embed from an &apos;tweet&apos; element
+					Example of a instagram embed from an &apos;instagram&apos; element
 					type, the embed source article is{' '}
-					<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
+					<a href="https://www.theguardian.com/music/2017/aug/23/taylor-swift-reputation-new-album">
 						here
 					</a>
 				</p>
