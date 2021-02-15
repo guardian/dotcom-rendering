@@ -1,14 +1,20 @@
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
+import { getCookie } from '../cookie';
 
 
 const jsonData = {
-    'page_view_id': '',
-    'fid': 0,
-    'cls': 0,
-    'lcp': 0,
-    'fcp': 0,
-    'ttfb': 0,
+	'page_view_id': '',
+	'received_timestamp': `${new Date().toISOString()}`,
+	'id': 'prod',
+	'received_date': '2021-02-03',
+    'fid': null,
+    'cls': null,
+    'lcp': null,
+    'fcp': null,
+    'ttfb': null,
 }
+
+
 
 export const coreVitals = (): void =>
 {
@@ -17,84 +23,74 @@ export const coreVitals = (): void =>
         value: number;
     };
 
-
 const getValue = ({ name, value }: coreVitalsArgs): void => {
+
     switch(name){
         case('FCP'):
-            console.log(`FCP: ${  value}`);
-            jsonData.fcp = value;
+            jsonData.fcp = parseFloat(value.toFixed(6));
             break;
         case('CLS'):
-            console.log(`CLS: ${value}`)
-            jsonData.cls = value;
+            jsonData.cls = parseFloat(value.toFixed(6));
             break;
         case('LCP'):
-            console.log(`LCP: ${value}`)
-            jsonData.lcp = value;
+            jsonData.lcp = parseFloat(value.toFixed(6));
             break;
         case('FID'):
-            console.log(`FID: ${value}`)
-            jsonData.fid = value;
+            jsonData.fid = parseFloat(value.toFixed(6));
             break;
         case('TTFB'):
-            console.log(`TTFB: ${value}`)
-            jsonData.ttfb = value;
+            jsonData.ttfb = parseFloat(value.toFixed(6));
             break;
     }
-	if(jsonData.cls !== null)
-	{
-		/*fetch('https://performance-events.guardianapis.com/core-web-vitals', {
-  		method: 'POST',
-  		headers: {
-    		'Content-Type': 'application/json',
-  		},
-  		body: JSON.stringify(jsonData),
+    if(jsonData.cls !== null)
+    {
+        fetch('https://performance-events.guardianapis.com/core-web-vitals', {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
+            body: JSON.stringify(jsonData)
 		})
-	.then(response => response.json())
-	.then(data => {
-  	console.log('Success:', data);
-	})
-	.catch((error) => {
-  	console.error('Error:', error);
-	});*/
-
-
-	let headers = {
-    type: 'application/json'
-  	};
-  let blob = new Blob([JSON.stringify(jsonData)], headers);
-  navigator.sendBeacon('https://performance-events.guardianapis.com/core-web-vitals', blob);
-
-
-	}
-
+		console.log(JSON.stringify(jsonData));
+    };
 }
 
-if(window.guardian && window.guardian.ophan)
-        {
-            jsonData.page_view_id = window.guardian.ophan.pageViewId;
-        }
-        getFID(getValue);
-        getLCP(getValue);
-        getFCP(getValue);
-        getTTFB(getValue);
-
-        // At the moment a final CLS score is only reported on a 'visiblitychange' event (which is far from ideal)
-        // https://github.com/WICG/layout-instability#computing-dcls-with-the-api
-        // We need to find a more reliable way to record CLS without switching tabs.
-        // I looked at using the 'unload' event but it only returns the cls delta for that event, which is incorrect.
-        getCLS(getValue);
+	getCLS(getValue, false);
+	getFID(getValue);
+    getLCP(getValue);
+    getFCP(getValue);
+    getTTFB(getValue);
 
 
     document.addEventListener("DOMContentLoaded", function() {
 
+        if(window.guardian && window.guardian.ophan)
+        {
+			jsonData.page_view_id = window.guardian.ophan.pageViewId;
+			jsonData.id = window.guardian.config.ophan.browserId;
+		}
 
+		// Temporary to look at what happens to CLS over time
+        logCLS();
     });
 
 };
 
-
-
-
-
-
+const logCLS = () => {
+	let cls = 0;
+	new PerformanceObserver(entryList => {
+		const entries = entryList.getEntries() || [];
+		entries.forEach(e => {
+			if (!e.hadRecentInput) { // omit entries likely caused by user input
+				cls += e.value;
+				console.log(`CLS DELTA: ${ e.value}`);
+			}
+		});
+		console.log(`Cumulative Layout Shift: ${cls}`);
+	}).observe({ type: "layout-shift", buffered: true })
+}
