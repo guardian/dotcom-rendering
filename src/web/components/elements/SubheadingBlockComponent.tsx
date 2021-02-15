@@ -1,4 +1,3 @@
-import React from 'react';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 

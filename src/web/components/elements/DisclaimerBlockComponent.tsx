@@ -1,4 +1,3 @@
-import React from 'react';
 import { body } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { css } from '@emotion/react';

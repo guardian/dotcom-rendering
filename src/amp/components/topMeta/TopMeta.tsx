@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Design, Special } from '@guardian/types';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';

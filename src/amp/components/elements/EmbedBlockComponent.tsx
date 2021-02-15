@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const EmbedBlockComponent: React.FC<{
 	element: EmbedBlockElement;
 }> = ({ element }) => {

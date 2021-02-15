@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Design, Display, Pillar } from '@guardian/types';
 import { breakpoints } from '@guardian/src-foundations/mq';
 import { Section } from '@root/src/web/components/Section';

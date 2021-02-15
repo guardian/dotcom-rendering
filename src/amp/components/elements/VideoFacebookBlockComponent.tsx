@@ -1,4 +1,3 @@
-import React from 'react';
 import { Caption } from '@root/src/amp/components/Caption';
 
 export const VideoFacebookBlockComponent: React.FC<{

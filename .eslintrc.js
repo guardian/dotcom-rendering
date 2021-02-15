@@ -66,7 +66,12 @@ module.exports = {
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/prefer-as-const': 'off',
         '@typescript-eslint/restrict-plus-operands': 'off',
-        'no-shadow': 'off',
+		'no-shadow': 'off',
+		
+		"@typescript-eslint/no-unused-vars-experimental": "error",
+		"react-hooks/exhaustive-deps": "warn",
+		"react/jsx-uses-react": "off",
+		"react/react-in-jsx-scope": "off",
 
         '@typescript-eslint/explicit-function-return-type': [0],
         '@typescript-eslint/no-inferrable-types': [0],

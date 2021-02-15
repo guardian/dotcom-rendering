@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 
 import { CodeBlockComponent } from './CodeBlockComponent';
@@ -11,7 +9,7 @@ export default {
 
 export const JavascriptStory = () => {
 	const javascript = `
-import React from 'react';
+
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 

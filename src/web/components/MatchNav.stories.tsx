@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Section } from './Section';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { border } from '@guardian/src-foundations/palette';
 import { from, between, until } from '@guardian/src-foundations/mq';

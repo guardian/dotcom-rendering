@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Display, Design, Pillar } from '@guardian/types';
 import { Section } from './Section';
 

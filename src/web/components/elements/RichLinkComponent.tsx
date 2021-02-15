@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { RichLink, DefaultRichLink } from '@root/src/web/components/RichLink';
 
 import { useApi } from '@root/src/web/lib/api';

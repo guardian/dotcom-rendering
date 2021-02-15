@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, wait } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '@root/src/web/lib/contributions';
 import { ABProvider } from '@guardian/ab-react';

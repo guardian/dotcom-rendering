@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const AudioAtomBlockComponent: React.FC<{
 	element: AudioAtomBlockElement;
 }> = ({ element }) => {

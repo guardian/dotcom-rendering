@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';

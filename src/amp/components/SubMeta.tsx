@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';

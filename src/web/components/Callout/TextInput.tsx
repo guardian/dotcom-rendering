@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TextInput as SourceTextInput } from '@guardian/src-text-input';
 
 type Props = {

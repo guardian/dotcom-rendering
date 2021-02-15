@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useApi } from '@root/src/web/lib/api';
 
 import { Placeholder } from '@root/src/web/components/Placeholder';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { RadioSelect } from './RadioSelect';
 import { CheckboxSelect } from './CheckboxSelect';
 

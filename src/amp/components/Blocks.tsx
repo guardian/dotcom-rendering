@@ -1,4 +1,3 @@
-import React from 'react';
 import { Elements } from '@root/src/amp/components/Elements';
 import { css } from '@emotion/react';
 import { pillarPalette } from '@root/src/lib/pillars';

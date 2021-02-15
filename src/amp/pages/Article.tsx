@@ -1,4 +1,3 @@
-import React from 'react';
 import { Footer } from '@root/src/amp/components/Footer';
 import { Container } from '@root/src/amp/components/Container';
 import { Body as BodyArticle } from '@root/src/amp/components/BodyArticle';

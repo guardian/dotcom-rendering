@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';

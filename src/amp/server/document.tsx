@@ -1,4 +1,3 @@
-import React from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { CacheProvider } from '@emotion/core';

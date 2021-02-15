@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { PulsingDot, DISABLE_FLASHING_ELEMENTS_CLASS } from './PulsingDot';
 

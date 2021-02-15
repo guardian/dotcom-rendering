@@ -1,4 +1,3 @@
-import React from 'react';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
 type Props = {

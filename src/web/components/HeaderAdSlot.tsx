@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';

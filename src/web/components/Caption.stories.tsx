@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Section } from '@frontend/web/components/Section';
 import { Caption } from '@frontend/web/components/Caption';
 import { Display, Design, Pillar, Special } from '@guardian/types';

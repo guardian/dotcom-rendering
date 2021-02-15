@@ -1,4 +1,3 @@
-import React from 'react';
 import { PermutivePayload } from '@root/src/amp/lib/permutive';
 
 export interface AnalyticsModel {

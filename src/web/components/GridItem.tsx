@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
