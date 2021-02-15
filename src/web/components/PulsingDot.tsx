@@ -1,17 +1,10 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { keyframes } from '@emotion/core';
 
-export const DISABLE_FLASHING_ELEMENTS_CLASS = 'disable-flashing-elements';
+import { storage } from '@guardian/libs';
 
-const livePulse = keyframes`{
-    0% {opacity: 1;}
-    10% {opacity: .25;}
-    40% {opacity: 1;}
-    100% {opacity: 1;}
-}`;
-
-const pulsingDot = (colour?: string) => css`
+const dotStyles = (colour?: string) => css`
 	color: ${colour && colour};
 	::before {
 		border-radius: 62.5rem;
@@ -23,8 +16,18 @@ const pulsingDot = (colour?: string) => css`
 		content: '';
 		margin-right: 0.1875rem;
 		vertical-align: initial;
-		animation: ${livePulse} 1s infinite;
 	}
+`;
+
+const livePulse = keyframes`{
+    0% {opacity: 1;}
+    10% {opacity: .25;}
+    40% {opacity: 1;}
+    100% {opacity: 1;}
+}`;
+
+const animate = css`
+	animation: ${livePulse} 1s infinite;
 `;
 
 interface Props {
@@ -34,12 +37,11 @@ interface Props {
 export const PulsingDot = ({ colour }: Props) => {
 	// Respect the accessibility flag set here
 	// https://www.theguardian.com/help/accessibility-help
-	const flashingIsDisabled = !!document.getElementsByClassName(
-		DISABLE_FLASHING_ELEMENTS_CLASS,
-	).length;
-	if (flashingIsDisabled) {
-		return null;
-	}
-
-	return <span className={pulsingDot(colour)} />;
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+	const flashingEnabled = storage.local.get(
+		'gu.prefs.accessibility.flashing-elements',
+	);
+	return (
+		<span className={cx(dotStyles(colour), flashingEnabled && animate)} />
+	);
 };
