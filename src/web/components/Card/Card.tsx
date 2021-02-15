@@ -282,7 +282,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												pillar={format.theme}
+												palette={palette}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
