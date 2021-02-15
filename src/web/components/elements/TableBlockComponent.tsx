@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { palette, border } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -44,7 +44,7 @@ export const TableBlockComponent: React.FC<{
 }> = ({ element }) => {
 	return (
 		<div
-			className={tableEmbed}
+			css={tableEmbed}
 			data-cy="football-table-embed"
 			dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
 		/>

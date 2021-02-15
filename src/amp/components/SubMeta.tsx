@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import { text } from '@guardian/src-foundations/palette';
@@ -133,9 +133,9 @@ export const SubMeta: React.FC<{
 	guardianBaseURL,
 }) => {
 	const sectionListItems = sections.map((link) => (
-		<li className={itemStyle} key={link.url}>
+		<li css={itemStyle} key={link.url}>
 			<a
-				className={sectionLinkStyle(pillar)}
+				css={sectionLinkStyle(pillar)}
 				href={`${guardianBaseURL}${link.url}`}
 			>
 				{link.title}
@@ -144,11 +144,8 @@ export const SubMeta: React.FC<{
 	));
 
 	const keywordListItems = keywords.map((link) => (
-		<li className={itemStyle} key={link.url}>
-			<a
-				className={linkStyle(pillar)}
-				href={`${guardianBaseURL}${link.url}`}
-			>
+		<li css={itemStyle} key={link.url}>
+			<a css={linkStyle(pillar)} href={`${guardianBaseURL}${link.url}`}>
 				{link.title}
 			</a>
 		</li>
@@ -156,13 +153,13 @@ export const SubMeta: React.FC<{
 
 	return (
 		<>
-			<div className={guardianLines(pillar)}>
-				<span className={labelStyle}>Topics</span>
-				<ul className={sectionListStyle}>{sectionListItems}</ul>
-				<ul className={keywordListStyle(pillar)}>{keywordListItems}</ul>
+			<div css={guardianLines(pillar)}>
+				<span css={labelStyle}>Topics</span>
+				<ul css={sectionListStyle}>{sectionListItems}</ul>
+				<ul css={keywordListStyle(pillar)}>{keywordListItems}</ul>
 			</div>
 			<ShareIcons
-				className={shareIcons}
+				css={shareIcons}
 				sharingUrls={sharingURLs}
 				pillar={pillar}
 				displayIcons={[
@@ -176,19 +173,16 @@ export const SubMeta: React.FC<{
 				]}
 			/>
 			{/* TODO link to actual (non-AMP) site here. Also handle comment count behaviour. */}
-			<div className={cx(guardianLines(pillar), siteLinks)}>
+			<div css={[guardianLines(pillar), siteLinks]}>
 				{isCommentable && (
 					<a
-						className={siteLinkStyle}
+						css={siteLinkStyle}
 						href={`${guardianBaseURL}/${pageID}#comments`}
 					>
-						<CommentIcon className={commentIcon} /> View comments
+						<CommentIcon css={commentIcon} /> View comments
 					</a>
 				)}
-				<a
-					className={siteLinkStyle}
-					href={`${guardianBaseURL}/${pageID}`}
-				>
+				<a css={siteLinkStyle} href={`${guardianBaseURL}/${pageID}`}>
 					View on theguardian.com
 				</a>
 			</div>

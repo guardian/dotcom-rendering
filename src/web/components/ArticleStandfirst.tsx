@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { border } from '@guardian/src-foundations/palette';
 
@@ -35,7 +35,7 @@ export const ArticleStandfirst = ({
 	pillar,
 	standfirst,
 }: Props) => (
-	<div className={cx(standfirstStyles, standfirstLinks[pillar])}>
+	<div css={[standfirstStyles, standfirstLinks[pillar]]}>
 		<Standfirst display={display} design={design} standfirst={standfirst} />
 	</div>
 );

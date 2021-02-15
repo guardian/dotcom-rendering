@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import Star from '@frontend/static/icons/star.svg';
 import { palette } from '@guardian/src-foundations';
 
@@ -41,8 +41,8 @@ export const StarRating: React.FC<{
 				if (i < n) {
 					return <Star key={i} />;
 				}
-				return <Star className={emptyStar} key={i} />;
+				return <Star css={emptyStar} key={i} />;
 			});
 	};
-	return <div className={cx(ratingsWrapper, sizeClass)}>{stars(rating)}</div>;
+	return <div css={[ratingsWrapper, sizeClass]}>{stars(rating)}</div>;
 };

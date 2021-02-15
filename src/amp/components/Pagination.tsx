@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -77,7 +77,7 @@ export const Pagination: React.SFC<{
 	}
 
 	return (
-		<div className={paginationStyle}>
+		<div css={paginationStyle}>
 			<p>
 				{link(
 					guardianURL,

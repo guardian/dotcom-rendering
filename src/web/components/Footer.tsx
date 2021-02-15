@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	brand,
@@ -188,7 +188,7 @@ const FooterLinks: React.FC<{
 		const linkList = linkGroup.map((l: FooterLink, index: number) => (
 			<li key={`${l.url}${index}`}>
 				<a
-					className={cx(footerLink, l.extraClasses)}
+					css={[footerLink, l.extraClasses]}
 					href={l.url}
 					data-link-name={l.dataLinkName}
 				>
@@ -201,13 +201,13 @@ const FooterLinks: React.FC<{
 	});
 
 	const rrLinks = (
-		<div className={readerRevenueLinks}>
+		<div css={readerRevenueLinks}>
 			<div id="reader-revenue-links-footer" />
 		</div>
 	);
 
 	return (
-		<div className={footerList}>
+		<div css={footerList}>
 			{linkGroups}
 			{rrLinks}
 		</div>
@@ -223,11 +223,11 @@ export const Footer: React.FC<{
 }> = ({ pillars, pillar, pageFooter }) => (
 	<footer
 		data-print-layout="hide"
-		className={footer}
+		css={footer}
 		data-link-name="footer"
 		data-component="footer"
 	>
-		<div className={pillarWrap}>
+		<div css={pillarWrap}>
 			<Pillars
 				display={Display.Standard}
 				pillars={pillars}
@@ -236,23 +236,23 @@ export const Footer: React.FC<{
 				dataLinkName="footer"
 			/>
 		</div>
-		<div className={footerItemContainers}>
+		<div css={footerItemContainers}>
 			<iframe
 				title="Guardian Email Sign-up Form"
 				src="https://www.theguardian.com/email/form/footer/today-uk"
 				id="footer__email-form"
-				className={emailSignup}
+				css={emailSignup}
 				data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
 				data-node-uid="2"
 				height="100"
 			/>
 
 			<FooterLinks pageFooter={pageFooter} />
-			<div className={bttPosition}>
+			<div css={bttPosition}>
 				<BackToTop />
 			</div>
 		</div>
-		<div className={copyright}>
+		<div css={copyright}>
 			© {year} Guardian News & Media Limited or its affiliated companies.
 			All rights reserved. (modern)
 		</div>

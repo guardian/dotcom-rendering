@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	text,
@@ -34,8 +34,6 @@ type CardStyle =
 	| 'letters'
 	| 'external'
 	| 'news';
-
-type ColourType = string;
 
 interface Props {
 	richLinkIndex: number;
@@ -87,31 +85,11 @@ const neutralBackground = css`
 	}
 `;
 
-const richLinkPillarColour: (format: Format) => ColourType = (format) => {
+const richLinkPillarColour: (format: Format) => string = (format) => {
 	if (format) {
 		return pillarPalette[format.theme].main;
 	}
 	return pillarPalette[Pillar.News][400];
-};
-
-const pillarBackground: (format: Format) => ColourType = (format) => {
-	return css`
-		background-color: ${richLinkPillarColour(format)};
-	`;
-};
-
-const textColour: (format: Format) => ColourType = (format) => {
-	return css`
-		color: ${richLinkPillarColour(format)};
-	`;
-};
-
-const richLinkTopBorder: (format: Format) => ColourType = (format) => {
-	return css`
-		border-top: 1px;
-		border-top-style: solid;
-		border-top-color: ${richLinkPillarColour(format)};
-	`;
 };
 
 const richLinkLink = css`
@@ -141,14 +119,6 @@ const richLinkTitle = css`
 		padding-bottom: 5px;
 	}
 `;
-
-const richLinkReadMore: (format: Format) => ColourType = (format) => {
-	return css`
-		fill: ${richLinkPillarColour(format)};
-		color: ${richLinkPillarColour(format)};
-		padding-top: 2px;
-	`;
-};
 
 const readMoreTextStyle = css`
 	${headline.xxxsmall()};
@@ -289,24 +259,28 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			className={pillarBackground(format)}
+			css={css`
+				background-color: ${richLinkPillarColour(format)};
+			`}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div className={cx(richLinkContainer, neutralBackground)}>
-				<a className={richLinkLink} href={url}>
-					<div className={richLinkTopBorder(format)} />
+			<div css={[richLinkContainer, neutralBackground]}>
+				<a css={richLinkLink} href={url}>
+					<div
+						css={css`
+							border-top: 1px;
+							border-top-style: solid;
+							border-top-color: ${richLinkPillarColour(format)};
+						`}
+					/>
 					{showImage && (
 						<div>
-							<img
-								className={imageStyles}
-								src={thumbnailUrl}
-								alt=""
-							/>
+							<img css={imageStyles} src={thumbnailUrl} alt="" />
 						</div>
 					)}
-					<div className={richLinkElements}>
-						<div className={richLinkHeader}>
-							<div className={richLinkTitle}>
+					<div css={richLinkElements}>
+						<div css={richLinkHeader}>
+							<div css={richLinkTitle}>
 								{isOpinion && (
 									<>
 										<Hide when="above" breakpoint="wide">
@@ -332,12 +306,21 @@ export const RichLink = ({
 								{linkText}
 							</div>
 							{isOpinion && (
-								<div className={cx(byline, textColour(format))}>
+								<div
+									css={[
+										byline,
+										css`
+											color: ${richLinkPillarColour(
+												format,
+											)};
+										`,
+									]}
+								>
 									{mainContributor}
 								</div>
 							)}
 							{starRating && starRating > 0 && (
-								<div className={starWrapper}>
+								<div css={starWrapper}>
 									<StarRating
 										rating={starRating}
 										size="medium"
@@ -345,13 +328,13 @@ export const RichLink = ({
 								</div>
 							)}
 							{isPaidContent && sponsorName && (
-								<div className={paidForBranding}>
+								<div css={paidForBranding}>
 									Paid for by {sponsorName}
 								</div>
 							)}
 						</div>
 						{isOpinion && contributorImage && (
-							<div className={contributorImageWrapper}>
+							<div css={contributorImageWrapper}>
 								<Avatar
 									imageSrc={contributorImage}
 									imageAlt={mainContributor}
@@ -359,9 +342,15 @@ export const RichLink = ({
 								/>
 							</div>
 						)}
-						<div className={richLinkReadMore(format)}>
+						<div
+							css={css`
+								fill: ${richLinkPillarColour(format)};
+								color: ${richLinkPillarColour(format)};
+								padding-top: 2px;
+							`}
+						>
 							<ArrowInCircle />
-							<div className={readMoreTextStyle}>
+							<div css={readMoreTextStyle}>
 								{readMoreText(contentType)}
 							</div>
 						</div>

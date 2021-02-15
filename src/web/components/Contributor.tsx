@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -67,12 +67,12 @@ export const Contributor: React.FC<{
 			data-link-name="byline"
 		>
 			{format.design !== Design.Interview && (
-				<div className={bylineStyles(palette)}>
+				<div css={bylineStyles(palette)}>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (
-				<div className={twitterHandleStyles(palette)}>
+				<div css={twitterHandleStyles(palette)}>
 					<TwitterIcon />
 					<a
 						href={`https://www.twitter.com/${author.twitterHandle}`}

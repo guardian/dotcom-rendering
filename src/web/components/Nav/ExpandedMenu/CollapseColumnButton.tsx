@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
@@ -75,12 +75,12 @@ export const CollapseColumnButton: React.FC<{
 	// @ts-ignore
 	<label
 		id={collapseColumnInputId}
-		className={cx(
+		css={[
 			'selectableMenuItem',
 			collapseColumnButton,
 			showColumnLinksStyle(columnInputId),
 			hideDesktop,
-		)}
+		]}
 		aria-label={`Toggle ${title}`}
 		htmlFor={columnInputId}
 		aria-haspopup="true"

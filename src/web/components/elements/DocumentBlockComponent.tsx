@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const widthOverride = css`
 	iframe {
@@ -15,7 +15,7 @@ export const DocumentBlockComponent: React.FC<{
 	title?: string;
 }> = ({ embedUrl, title, width, height }) => {
 	return (
-		<div className={widthOverride}>
+		<div css={widthOverride}>
 			<iframe
 				src={embedUrl}
 				title={title}

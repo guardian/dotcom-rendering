@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { TextArea as SourceTextArea } from '@guardian/src-text-area';
 
@@ -18,7 +18,7 @@ export const TextArea = ({ formField, formData, setFormData }: Props) => (
 		<SourceTextArea
 			data-testid={`form-field-${formField.id}`}
 			label={formField.label}
-			className={textAreaStyles}
+			css={textAreaStyles}
 			optional={!formField.required}
 			value={formField.id in formData ? formData[formField.id] : ''}
 			onChange={(e) =>

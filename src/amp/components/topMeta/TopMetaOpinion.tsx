@@ -1,7 +1,7 @@
 import React from 'react';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
@@ -76,15 +76,13 @@ const BylineMeta: React.SFC<{
 		: null;
 
 	return (
-		<div className={bylineWrapper}>
+		<div css={bylineWrapper}>
 			<Byline
 				byline={articleData.author.byline}
 				tags={articleData.tags}
 				pillar={pillar}
 				guardianBaseURL={articleData.guardianBaseURL}
-				className={cx(bylineStyle(pillar), {
-					[bottomPadding]: !bylineImageUrl,
-				})}
+				css={[bylineStyle(pillar), !bylineImageUrl && bottomPadding]}
 			/>
 
 			{contributorTag && bylineImageUrl && contributorCount === 1 && (
@@ -121,7 +119,7 @@ export const TopMetaOpinion: React.FC<{
 				fallbackToSection={false}
 			/>
 
-			<h1 className={headerStyle}>{articleData.headline}</h1>
+			<h1 css={headerStyle}>{articleData.headline}</h1>
 
 			{branding && <Branding branding={branding} pillar={pillar} />}
 

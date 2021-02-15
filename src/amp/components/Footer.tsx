@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/src-foundations/typography';
 import {
@@ -135,7 +135,7 @@ const FooterLinks: React.FC<{
 			.filter((l) => isOnPlatform(l, LinkPlatform.Amp))
 			.map((l, index) => (
 				<li key={`${l.url}${index}`}>
-					<a className={footerLink} href={l.url} on={l.on}>
+					<a css={footerLink} href={l.url} on={l.on}>
 						{l.title}
 					</a>
 				</li>
@@ -143,17 +143,17 @@ const FooterLinks: React.FC<{
 		const key = linkGroup.reduce((acc, { title }) => `acc-${title}`, '');
 
 		return (
-			<ul key={key} className={footerListBlock}>
+			<ul key={key} css={footerListBlock}>
 				{ls}
 			</ul>
 		);
 	});
 
 	return (
-		<div className={footerList}>
+		<div css={footerList}>
 			{linkGroups}
-			<div key="rrblock" className={footerListBlock}>
-				<div className={supportLink}>Support The&nbsp;Guardian</div>
+			<div key="rrblock" css={footerListBlock}>
+				<div css={supportLink}>Support The&nbsp;Guardian</div>
 				<ReaderRevenueButton
 					nav={nav}
 					rrLink="ampFooter"
@@ -174,20 +174,20 @@ const FooterLinks: React.FC<{
 };
 
 export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => (
-	<footer className={footer}>
+	<footer css={footer}>
 		<InnerContainer>
-			<div className={footerInner}>
+			<div css={footerInner}>
 				<FooterLinks links={footerLinksNew} nav={nav} />
 			</div>
 		</InnerContainer>
-		<InnerContainer className={copyrightContainer}>
-			<a className={backToTopLink} href="#top">
-				<span className={backToTopText}>Back to top</span>
-				<span className={iconContainer}>
-					<i className={icon} />
+		<InnerContainer css={copyrightContainer}>
+			<a css={backToTopLink} href="#top">
+				<span css={backToTopText}>Back to top</span>
+				<span css={iconContainer}>
+					<i css={icon} />
 				</span>
 			</a>
-			<div className={copyright}>
+			<div css={copyright}>
 				© {year} Guardian News & Media Limited or its affiliated
 				companies. All rights reserved.
 			</div>

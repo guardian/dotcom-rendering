@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { palette } from '@guardian/src-foundations';
 import { text } from '@guardian/src-foundations/palette';
@@ -43,8 +43,8 @@ export const RichLinkBlockComponent: React.FC<{
 	element: RichLinkBlockElement;
 	pillar: Theme;
 }> = ({ element, pillar }) => (
-	<aside className={richLinkContainer}>
-		<a className={cx(richLink, pillarColour(pillar))} href={element.url}>
+	<aside css={richLinkContainer}>
+		<a css={[richLink, pillarColour(pillar)]} href={element.url}>
 			{element.text}
 		</a>
 	</aside>

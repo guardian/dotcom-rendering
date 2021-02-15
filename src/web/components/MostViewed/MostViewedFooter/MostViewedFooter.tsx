@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -125,23 +125,24 @@ export const MostViewedFooter = ({
 	return (
 		<div
 			data-print-layout="hide"
-			className={`content-footer ${cx(adSlotUnspecifiedWidth)}`}
+			className="content-footer"
+			css={adSlotUnspecifiedWidth}
 		>
 			<div
-				className={cx(stackBelow('leftCol'), mostPopularAdStyle)}
+				css={[stackBelow('leftCol'), mostPopularAdStyle]}
 				data-link-name="most-popular"
 				data-component="most-popular"
 				data-cy-ab-user-in-variant={abTestCypressDataAttr}
 				data-cy-ab-runnable-test={variantFromRunnable}
 			>
-				<section className={asideWidth}>
+				<section css={asideWidth}>
 					{inDeeplyReadTestVariant ? (
-						<h2 className={headingStyles}>Across The Guardian</h2>
+						<h2 css={headingStyles}>Across The Guardian</h2>
 					) : (
-						<h2 className={headingStyles}>Most popular</h2>
+						<h2 css={headingStyles}>Most popular</h2>
 					)}
 				</section>
-				<section className={stackBelow('desktop')}>
+				<section css={stackBelow('desktop')}>
 					<Lazy margin={300}>
 						<Suspense fallback={<></>}>
 							<MostViewedFooterData
@@ -152,7 +153,7 @@ export const MostViewedFooter = ({
 						</Suspense>
 					</Lazy>
 					<div
-						className={css`
+						css={css`
 							margin: 6px 0 0 10px;
 						`}
 					>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from, Breakpoint } from '@guardian/src-foundations/mq';
@@ -85,7 +85,7 @@ export const MostViewedFooterData = ({
 		const tabs = 'tabs' in data ? data.tabs : data;
 		return (
 			<div
-				className={css`
+				css={css`
 					width: 100%;
 				`}
 			>
@@ -94,7 +94,7 @@ export const MostViewedFooterData = ({
 					sectionName={sectionName}
 					pillar={pillar}
 				/>
-				<div className={cx(stackBelow('tablet'), secondTierStyles)}>
+				<div css={[stackBelow('tablet'), secondTierStyles]}>
 					{'mostCommented' in data && (
 						<SecondTierItem
 							trail={decideTrail(data.mostCommented)}

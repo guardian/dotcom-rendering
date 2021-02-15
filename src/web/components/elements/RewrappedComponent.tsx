@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 // Ideally we want to want to avoid an unnecessary 'span' wrapper,

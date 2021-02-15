@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar } from '@guardian/types';
 
@@ -81,7 +81,7 @@ immersiveStory.story = { name: 'Immersive' };
 export const ImmersiveComment = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				background-color: lightgray;
 				padding: 20px;
 			`}

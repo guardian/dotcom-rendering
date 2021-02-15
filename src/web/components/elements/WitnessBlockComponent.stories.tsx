@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Pillar } from '@guardian/types';
 
@@ -20,7 +20,7 @@ export default {
 
 export const WitnessTextBlockComponentDefault = () => (
 	<div
-		className={css`
+		css={css`
 			margin: 15px;
 			width: 620px;
 		`}
@@ -112,7 +112,7 @@ const assets: WitnessAssetType[] = [
 
 export const WitnessImageBlockComponentDefault = () => (
 	<div
-		className={css`
+		css={css`
 			margin: 15px;
 			width: 620px;
 		`}
@@ -131,7 +131,7 @@ export const WitnessImageBlockComponentDefault = () => (
 
 export const WitnessVideoBlockComponentDefault = () => (
 	<div
-		className={css`
+		css={css`
 			margin: 15px;
 			width: 620px;
 		`}

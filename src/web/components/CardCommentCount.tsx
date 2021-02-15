@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Pillar } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -85,21 +85,21 @@ const colourStyles = (design: Design, pillar: Theme) => {
 export const CardCommentCount = ({ design, pillar, short, long }: Props) => {
 	return (
 		<div
-			className={cx(
+			css={[
 				containerStyles,
 				design === Design.Media
 					? mediaStyles(pillar)
 					: colourStyles(design, pillar),
-			)}
+			]}
 			aria-label={`${short} Comments`}
 		>
-			<div className={svgStyles}>
+			<div css={svgStyles}>
 				<CommentIcon />
 			</div>
-			<div className={longStyles} aria-hidden="true">
+			<div css={longStyles} aria-hidden="true">
 				{long}
 			</div>
-			<div className={shortStyles} aria-hidden="true">
+			<div css={shortStyles} aria-hidden="true">
 				{short}
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -128,7 +128,7 @@ const decidePosition = (role: RoleType) => {
 
 export const Figure = ({ role = 'inline', children, id }: Props) => {
 	return (
-		<figure id={id} className={decidePosition(role)}>
+		<figure id={id} css={decidePosition(role)}>
 			{children}
 		</figure>
 	);

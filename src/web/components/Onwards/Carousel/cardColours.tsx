@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { neutral, opinion } from '@guardian/src-foundations/palette';
 import { Design } from '@guardian/types';
 import { pillarPalette } from '@frontend/lib/pillars';

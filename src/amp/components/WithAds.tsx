@@ -1,6 +1,6 @@
 import React from 'react';
 import { Ad } from '@root/src/amp/components/Ad';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const clear = css`
 	clear: both;
@@ -34,7 +34,7 @@ export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
 		// data-sort-time and id needed for amp-live-list validation
 		<div id={id} data-sort-time="1">
 			<Ad
-				className={adClassName}
+				css={adClassName}
 				edition={adInfo.edition}
 				section={adInfo.section}
 				contentType={adInfo.contentType}
@@ -60,7 +60,7 @@ export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
 	return (
 		<>
 			{withAds}
-			<div id="clean-blocks" data-sort-time="1" className={clear} />
+			<div id="clean-blocks" data-sort-time="1" css={clear} />
 		</>
 	);
 };

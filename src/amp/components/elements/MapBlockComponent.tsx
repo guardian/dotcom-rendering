@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { Caption } from '@root/src/amp/components/Caption';
 
 const noCaptionStyle = css`
@@ -31,7 +31,7 @@ export const MapBlockComponent: React.SFC<{
 			<amp-iframe {...attributes} />
 		</Caption>
 	) : (
-		<figure className={noCaptionStyle}>
+		<figure css={noCaptionStyle}>
 			<amp-iframe {...attributes} />
 		</figure>
 	);

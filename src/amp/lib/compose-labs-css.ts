@@ -1,5 +1,3 @@
-import { cx } from 'emotion';
-
 import { Special } from '@guardian/types';
 
 export const composeLabsCSS = (

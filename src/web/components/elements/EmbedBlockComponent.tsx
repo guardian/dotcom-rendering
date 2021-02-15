@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { unescapeData } from '@root/src/lib/escapeData';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
 
@@ -27,11 +27,9 @@ export const EmbedBlockComponent = ({ html, alt }: Props) => {
 	// TODO: Email embeds are being turned into atoms, so we can remove this hack when that happens
 	const isEmailEmbed = html.includes('email/form');
 	return (
-		<div data-cy="embed-block" className={embedContainer}>
+		<div data-cy="embed-block" css={embedContainer}>
 			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
-			{isEmailEmbed && alt && (
-				<div className={emailCaptionStyle}>{alt}</div>
-			)}
+			{isEmailEmbed && alt && <div css={emailCaptionStyle}>{alt}</div>}
 		</div>
 	);
 };

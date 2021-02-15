@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { body } from '@guardian/src-foundations/typography';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
@@ -16,7 +16,7 @@ type Props = {
 
 const BlockquoteRow = ({ children }: { children: React.ReactNode }) => (
 	<blockquote
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 		`}

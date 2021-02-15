@@ -260,7 +260,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	}, []);
 
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
 				submitComponentEvent={submitComponentEvent}

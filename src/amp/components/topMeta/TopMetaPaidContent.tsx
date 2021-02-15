@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
@@ -57,8 +57,8 @@ const PaidForByLogo: React.FC<{
 	const { logo, sponsorName } = branding;
 
 	return (
-		<div className={paidForLogoStyle}>
-			<div className={paidForLogoLabelStyle}>Paid for by</div>
+		<div css={paidForLogoStyle}>
+			<div css={paidForLogoLabelStyle}>Paid for by</div>
 			<a
 				href={logo.link}
 				data-sponsor={sponsorName.toLowerCase()}
@@ -78,7 +78,7 @@ const PaidForByLogo: React.FC<{
 
 const Headline: React.FC<{
 	headlineText: string;
-}> = ({ headlineText }) => <h1 className={headerStyle}>{headlineText}</h1>;
+}> = ({ headlineText }) => <h1 css={headerStyle}>{headlineText}</h1>;
 
 export const TopMetaPaidContent: React.FC<{
 	articleData: ArticleModel;
@@ -107,7 +107,7 @@ export const TopMetaPaidContent: React.FC<{
 				tags={articleData.tags}
 				pillar={pillar}
 				guardianBaseURL={articleData.guardianBaseURL}
-				className={bylineStyle}
+				css={bylineStyle}
 			/>
 
 			<TopMetaExtras

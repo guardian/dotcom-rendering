@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
@@ -192,7 +192,7 @@ export const TextBlockComponent = ({
 		isLongEnough(remainingLetters)
 	) {
 		return (
-			<p className={paraStyles}>
+			<p css={paraStyles}>
 				<DropCap letter={firstLetter} format={format} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}

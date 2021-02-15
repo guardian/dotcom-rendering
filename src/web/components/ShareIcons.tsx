@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
@@ -76,9 +76,9 @@ export const ShareIcons: React.FC<{
 	palette: Palette;
 }> = ({ pageId, webTitle, displayIcons, palette }) => {
 	return (
-		<ul className={ulStyles}>
+		<ul css={ulStyles}>
 			{displayIcons.includes('facebook') && (
-				<li className={liStyles} key="facebook">
+				<li css={liStyles} key="facebook">
 					<a
 						href={`https://www.facebook.com/dialog/share?app_id=202314643182694&href=${encodeUrl(
 							pageId,
@@ -87,7 +87,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on Facebook"
 						target="_blank"
 					>
-						<span className={iconStyles(palette)}>
+						<span css={iconStyles(palette)}>
 							<FacebookIcon />
 						</span>
 					</a>
@@ -95,7 +95,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('twitter') && (
-				<li className={liStyles} key="twitter">
+				<li css={liStyles} key="twitter">
 					<a
 						href={`https://twitter.com/intent/tweet?text=${encodeTitle(
 							webTitle,
@@ -104,7 +104,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on Twitter"
 						target="_blank"
 					>
-						<span className={iconStyles(palette)}>
+						<span css={iconStyles(palette)}>
 							<TwitterIconPadded />
 						</span>
 					</a>
@@ -112,7 +112,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('email') && (
-				<li className={liStyles} key="email">
+				<li css={liStyles} key="email">
 					<a
 						href={`mailto:?subject=${encodeTitle(
 							webTitle,
@@ -121,7 +121,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share via Email"
 						target="_blank"
 					>
-						<span className={iconStyles(palette)}>
+						<span css={iconStyles(palette)}>
 							<EmailIcon />
 						</span>
 					</a>
@@ -129,7 +129,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('linkedIn') && (
-				<li className={liStyles} key="linkedIn">
+				<li css={liStyles} key="linkedIn">
 					<a
 						href={`http://www.linkedin.com/shareArticle?title=${encodeTitle(
 							webTitle,
@@ -138,7 +138,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on LinkedIn"
 						target="_blank"
 					>
-						<span className={iconStyles(palette)}>
+						<span css={iconStyles(palette)}>
 							<LinkedInIcon />
 						</span>
 					</a>
@@ -146,7 +146,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('pinterest') && (
-				<li className={liStyles} key="pinterest">
+				<li css={liStyles} key="pinterest">
 					<a
 						href={`http://www.pinterest.com/pin/find/?url=${encodeUrl(
 							pageId,
@@ -155,7 +155,7 @@ export const ShareIcons: React.FC<{
 						aria-label="Share on Pinterest"
 						target="_blank"
 					>
-						<span className={iconStyles(palette)}>
+						<span css={iconStyles(palette)}>
 							<PinterestIcon />
 						</span>
 					</a>
@@ -164,7 +164,7 @@ export const ShareIcons: React.FC<{
 
 			{displayIcons.includes('whatsApp') && (
 				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles} key="whatsApp">
+					<li css={liStyles} key="whatsApp">
 						<a
 							href={`whatsapp://send?text="${encodeTitle(
 								webTitle,
@@ -173,7 +173,7 @@ export const ShareIcons: React.FC<{
 							aria-label="Share on WhatsApp"
 							target="_blank"
 						>
-							<span className={iconStyles(palette)}>
+							<span css={iconStyles(palette)}>
 								<WhatsAppIcon />
 							</span>
 						</a>
@@ -183,7 +183,7 @@ export const ShareIcons: React.FC<{
 
 			{displayIcons.includes('messenger') && (
 				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles} key="messenger">
+					<li css={liStyles} key="messenger">
 						<a
 							href={`fb-messenger://share?link=${encodeUrl(
 								pageId,
@@ -192,7 +192,7 @@ export const ShareIcons: React.FC<{
 							aria-label="Share on Messanger>"
 							target="_blank"
 						>
-							<span className={iconStyles(palette)}>
+							<span css={iconStyles(palette)}>
 								<MessengerIcon />
 							</span>
 						</a>

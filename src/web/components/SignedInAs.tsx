@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text, border, neutral, news } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -92,11 +92,11 @@ export const SignedInAs = ({
 		user.privateFields.canPostComment === false;
 
 	return (
-		<div className={containerStyles}>
-			<h2 className={headingStyles}>
+		<div css={containerStyles}>
+			<h2 css={headingStyles}>
 				comments{' '}
 				<span
-					className={css`
+					css={css`
 						color: ${neutral[60]};
 					`}
 				>
@@ -106,11 +106,11 @@ export const SignedInAs = ({
 
 			{/* User is banned */}
 			{enableDiscussionSwitch && isBanned && (
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					Commenting has been disabled for this account (
 					<a
 						href="https://www.theguardian.com/community-faqs#321a"
-						className={linkStyles(pillar)}
+						css={linkStyles(pillar)}
 					>
 						why?
 					</a>{' '}
@@ -120,7 +120,7 @@ export const SignedInAs = ({
 
 			{/* Discussion is disabled sitewide */}
 			{user && enableDiscussionSwitch === false && (
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					Commenting has been disabled at this time
 				</span>
 			)}
@@ -130,20 +130,20 @@ export const SignedInAs = ({
 				user &&
 				!isBanned &&
 				!isClosedForComments && (
-					<div className={rowUntilDesktop}>
-						<div className={imageWrapper}>
+					<div css={rowUntilDesktop}>
+						<div css={imageWrapper}>
 							<img
 								src={
 									user.secureAvatarUrl ||
 									'https://avatar.guim.co.uk/no-user-image.gif'
 								}
 								alt={user.displayName || 'Guardian User'}
-								className={imageStyles}
+								css={imageStyles}
 							/>
 						</div>
-						<div className={textStyles}>
+						<div css={textStyles}>
 							Signed in as
-							<div className={usernameStyles}>
+							<div css={usernameStyles}>
 								{user.displayName || 'Guardian User'}
 							</div>
 						</div>
@@ -152,12 +152,12 @@ export const SignedInAs = ({
 
 			{/* User is logged out (show this even if the discussion is closed) */}
 			{!user && (
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					<a
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						className={linkStyles(pillar)}
+						css={linkStyles(pillar)}
 					>
 						Sign in
 					</a>{' '}
@@ -166,7 +166,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						className={linkStyles(pillar)}
+						css={linkStyles(pillar)}
 					>
 						create your Guardian account
 					</a>{' '}
@@ -176,7 +176,7 @@ export const SignedInAs = ({
 
 			{/* The discussion is closed (only appears for logged in users) */}
 			{enableDiscussionSwitch && user && isClosedForComments && (
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					This discussion is closed for comments
 				</span>
 			)}

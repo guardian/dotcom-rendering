@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { neutral, border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -116,7 +116,7 @@ const TabHeading = ({ heading }: { heading: string }) => {
 		default:
 			return (
 				<span
-					className={css`
+					css={css`
 						text-transform: capitalize;
 					`}
 					// "Across The Guardian" has a non-breaking space entity between "The" and "Guardian - Eg. "Across The&nbsp;Guardian"
@@ -138,7 +138,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 	return (
 		<div>
 			{Array.isArray(data) && data.length > 1 && (
-				<ul className={tabsContainer} role="tablist">
+				<ul css={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
@@ -147,13 +147,13 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 							: selectedListTabStyles(pillar);
 						return (
 							<li
-								className={cx(
+								css={[
 									listTab,
 									isSelected
 										? selectedStyles
 										: unselectedStyles,
 									isFirst && firstTab,
-								)}
+								]}
 								role="tab"
 								aria-selected={isSelected}
 								aria-controls={`tabs-popular-${i}`}
@@ -163,11 +163,11 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 								data-link-name={tab.heading}
 							>
 								<button
-									className={tabButton}
+									css={tabButton}
 									onClick={() => setSelectedTabIndex(i)}
 								>
 									<span
-										className={css`
+										css={css`
 											${visuallyHidden};
 										`}
 									>
@@ -183,9 +183,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 			)}
 			{data.map((tab: TrailTabType, i: number) => (
 				<ol
-					className={cx(gridContainer, {
-						[hideList]: i !== selectedTabIndex,
-					})}
+					css={[gridContainer, i !== selectedTabIndex && hideList]}
 					id={`tabs-popular-${i}`}
 					data-cy={`tab-body-${i}`}
 					key={`tabs-popular-${i}`}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinkStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 import { textSans } from '@guardian/src-foundations/typography';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const brandingStyle = (pillar: Theme) => css`
 	padding: 10px 0;
@@ -29,10 +29,10 @@ export const Branding: React.FC<{
 	const { logo, sponsorName } = branding;
 
 	return (
-		<div className={brandingStyle(pillar)}>
-			<div className={brandingLabelStyle}>{branding.logo.label}</div>
+		<div css={brandingStyle(pillar)}>
+			<div css={brandingLabelStyle}>{branding.logo.label}</div>
 			<a
-				className={brandingLogoStyle}
+				css={brandingLogoStyle}
 				href={logo.link}
 				data-sponsor={sponsorName.toLowerCase()}
 				rel="nofollow"

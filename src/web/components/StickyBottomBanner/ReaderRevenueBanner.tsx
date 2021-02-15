@@ -233,7 +233,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
 				ref={setNode}
-				className={emotion.css`width: 100%; ${getZIndex('banner')}`}
+				css={emotion.css`width: 100%; ${getZIndex('banner')}`}
 			>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Banner

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -45,7 +45,7 @@ export const SubheadingBlockComponent: React.FC<{
 	isImmersive: boolean;
 }> = ({ html, pillar, isImmersive }) => (
 	<span
-		className={composeLabsCSS(
+		css={composeLabsCSS(
 			pillar,
 			cx(style(pillar), { [immersiveBodyStyle]: isImmersive }),
 			subHeadingStyleLabs,

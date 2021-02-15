@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
@@ -52,7 +52,5 @@ const colourStyles = (design: Design, pillar: Theme) => {
 };
 
 export const Byline = ({ text, design, pillar, size }: Props) => (
-	<span className={cx(bylineStyles(size), colourStyles(design, pillar))}>
-		{text}
-	</span>
+	<span css={[bylineStyles(size), colourStyles(design, pillar)]}>{text}</span>
 );

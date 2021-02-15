@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { HighlightBlockComponent } from '@frontend/web/components/elements/HighlightBlockComponent';
 
@@ -21,7 +21,7 @@ const containerStyles = css`
 
 export const defaultStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<HighlightBlockComponent html={htmlwithBlockquotes} />
 		</div>
 	);
@@ -30,7 +30,7 @@ defaultStory.story = { name: 'default' };
 
 export const blockquoteStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<HighlightBlockComponent html={htmlwithPTags} />
 		</div>
 	);

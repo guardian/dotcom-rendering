@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { unescapeData } from '@root/src/lib/escapeData';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const widthOverride = css`
 	iframe {
@@ -14,7 +14,7 @@ export const InstagramBlockComponent: React.FC<{
 	element: InstagramBlockElement;
 }> = ({ element }) => {
 	return (
-		<div className={widthOverride}>
+		<div css={widthOverride}>
 			<div
 				data-cy="instagram-embed"
 				dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}

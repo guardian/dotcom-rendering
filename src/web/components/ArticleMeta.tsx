@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { border } from '@guardian/src-foundations/palette';
 import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
@@ -186,7 +186,7 @@ const shouldShowContributor = (format: Format) => {
 
 const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 140px;
 			height: 140px;
 			margin-top: 6px;
@@ -210,7 +210,7 @@ const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
 
 const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: column;
 
@@ -242,8 +242,8 @@ export const ArticleMeta = ({
 
 	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
 	return (
-		<div className={metaContainer(format)}>
-			<div className={cx(meta)}>
+		<div css={metaContainer(format)}>
+			<div css={meta}>
 				{branding && (
 					<Branding branding={branding} pillar={format.theme} />
 				)}
@@ -274,8 +274,8 @@ export const ArticleMeta = ({
 						</div>
 					</>
 				</RowBelowLeftCol>
-				<div data-print-layout="hide" className={metaFlex}>
-					<div className={metaExtras}>
+				<div data-print-layout="hide" css={metaFlex}>
+					<div css={metaExtras}>
 						<ShareIcons
 							pageId={pageId}
 							webTitle={webTitle}
@@ -283,7 +283,7 @@ export const ArticleMeta = ({
 							displayIcons={['facebook', 'twitter', 'email']}
 						/>
 					</div>
-					<div className={metaNumbers}>
+					<div css={metaNumbers}>
 						<Counts>
 							{/* The meta-number classname is needed by Counts.tsx */}
 							<div

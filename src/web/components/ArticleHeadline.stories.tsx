@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar } from '@guardian/types';
 import { Section } from './Section';
@@ -113,7 +113,7 @@ export const ShowcaseInterview = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>
@@ -162,7 +162,7 @@ export const ShowcaseInterviewNobyline = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>

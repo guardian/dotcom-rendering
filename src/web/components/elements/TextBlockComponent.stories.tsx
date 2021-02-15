@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar } from '@guardian/types';
 
@@ -30,7 +30,7 @@ export default {
 
 export const defaultStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
 				format={{
@@ -47,7 +47,7 @@ defaultStory.story = { name: 'default' };
 
 export const DropCap = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
 				forceDropCap={true}
@@ -65,7 +65,7 @@ DropCap.story = { name: 'with drop cap' };
 
 export const QuotedDropCap = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={quotedHtml}
 				forceDropCap={false}
@@ -83,7 +83,7 @@ QuotedDropCap.story = { name: 'with quoted drop cap' };
 
 export const ShortText = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={shortHtml}
 				forceDropCap={true}
@@ -101,7 +101,7 @@ ShortText.story = { name: 'with text less than 200 characters' };
 
 export const NoTags = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={differentWrapperTags}
 				forceDropCap={true}
@@ -119,7 +119,7 @@ NoTags.story = { name: 'with no p tags' };
 
 export const FeatureDropCap = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
 				forceDropCap={false}
@@ -137,7 +137,7 @@ FeatureDropCap.story = { name: 'with design of Feature' };
 
 export const AList = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={aListHtml}
 				forceDropCap={true}
@@ -155,7 +155,7 @@ AList.story = { name: 'with a list' };
 
 export const BadMarkup = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={badMarkup}
 				forceDropCap={false}
@@ -173,7 +173,7 @@ BadMarkup.story = { name: 'with a bad markup' };
 
 export const SubSupscript = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={
 					'<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>'

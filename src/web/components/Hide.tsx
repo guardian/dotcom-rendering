@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { until, from, Breakpoint } from '@guardian/src-foundations/mq';
 
 type Props = {
@@ -23,5 +23,5 @@ export const Hide = ({ children, when, breakpoint }: Props) => {
 			}
 		`;
 	}
-	return <span className={whenToHide}>{children}</span>;
+	return <span css={whenToHide}>{children}</span>;
 };

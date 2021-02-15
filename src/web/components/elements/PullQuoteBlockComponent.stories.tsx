@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Pillar } from '@guardian/types';
 
@@ -22,7 +22,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</LeftColumn>
 			<div
-				className={css`
+				css={css`
 					width: 620px;
 					padding: 20px;
 				`}

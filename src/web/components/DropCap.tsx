@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Pillar } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
@@ -72,7 +72,7 @@ const innerStyles = (format: Format) => {
 };
 
 export const DropCap = ({ letter, format }: Props) => (
-	<span className={outerStyles(format)}>
-		<span className={innerStyles(format)}>{letter}</span>
+	<span css={outerStyles(format)}>
+		<span css={innerStyles(format)}>{letter}</span>
 	</span>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -151,7 +151,7 @@ const ampAdElem = (
 	const multiSizes = sizes.map((e) => `${e.width}x${e.height}`).join(',');
 	return (
 		<amp-ad
-			class={cx(adClass, adRegionClasses[adRegion])}
+			class={[adClass, adRegionClasses[adRegion]]}
 			data-block-on-consent=""
 			width={width}
 			height={height}
@@ -186,7 +186,7 @@ export const Ad: React.SFC<{
 	commercialProperties,
 	className,
 }) => (
-	<div className={cx(adStyle, className)}>
+	<div css={[adStyle, className]}>
 		{ampAdElem(
 			'US',
 			edition,

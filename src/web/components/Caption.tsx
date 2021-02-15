@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -140,7 +140,7 @@ export const Caption = ({
 		case Design.PhotoEssay:
 			return (
 				<figcaption
-					className={cx(
+					css={[
 						css`
 							${textSans.xsmall({ lineHeight: 'tight' })};
 							color: ${palette.text.caption};
@@ -158,11 +158,11 @@ export const Caption = ({
 						padCaption && captionPadding,
 						shouldLimitWidth && veryLimitedWidth,
 						shouldLimitWidth && bigLeftMargin,
-					)}
+					]}
 				>
 					{captionText && (
 						<span
-							className={captionLink(palette)}
+							css={captionLink(palette)}
 							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',
@@ -176,28 +176,26 @@ export const Caption = ({
 		default:
 			return (
 				<figcaption
-					className={cx(
+					css={[
 						captionStyle(palette),
 						shouldLimitWidth && limitedWidth,
 						!isOverlayed && bottomMargin,
 						isOverlayed && overlayedStyles,
-						{
-							[captionPadding]: padCaption,
-						},
-					)}
+						padCaption && captionPadding,
+					]}
 				>
 					<span
-						className={cx(
+						css={[
 							iconStyle(palette),
 							format.display === Display.Immersive &&
 								hideIconBelowLeftCol,
-						)}
+						]}
 					>
 						<TriangleIcon />
 					</span>
 					{captionText && (
 						<span
-							className={captionLink(palette)}
+							css={captionLink(palette)}
 							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',

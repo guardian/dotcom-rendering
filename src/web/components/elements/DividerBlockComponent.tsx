@@ -1,11 +1,11 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 
 export const DividerBlockComponent = () => (
 	<hr
-		className={css`
+		css={css`
 			width: 150px;
 			height: 1px;
 			border: 0;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { OnwardContainer } from '@root/src/amp/components/OnwardContainer';
 
@@ -120,5 +120,5 @@ export const Onward: React.FC<{
 		headlines,
 	);
 
-	return <InnerContainer className={wrapper}>{containers}</InnerContainer>;
+	return <InnerContainer css={wrapper}>{containers}</InnerContainer>;
 };

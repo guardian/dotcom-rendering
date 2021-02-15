@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
@@ -24,7 +24,7 @@ export const PullquoteBlockComponent: React.FC<{
 }> = ({ html, pillar }) => {
 	if (!html) return <></>;
 	return (
-		<aside className={styles(pillar)}>
+		<aside css={styles(pillar)}>
 			<Quote />{' '}
 			<span
 				dangerouslySetInnerHTML={{

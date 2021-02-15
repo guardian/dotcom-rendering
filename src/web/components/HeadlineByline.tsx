@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -103,16 +103,16 @@ export const HeadlineByline = ({
 				case Design.GuardianView:
 				case Design.Comment:
 					return (
-						<div className={cx(opinionStyles(pillar), whiteText)}>
+						<div css={[opinionStyles(pillar), whiteText]}>
 							<BylineLink byline={byline} tags={tags} />
 						</div>
 					);
 				default:
 					if (byline) {
 						return (
-							<div className={immersiveStyles}>
+							<div css={immersiveStyles}>
 								by{' '}
-								<span className={immersiveLinkStyles(pillar)}>
+								<span css={immersiveLinkStyles(pillar)}>
 									<BylineLink byline={byline} tags={tags} />
 								</span>
 							</div>
@@ -128,8 +128,8 @@ export const HeadlineByline = ({
 			switch (design) {
 				case Design.Interview:
 					return (
-						<div className={wrapperStyles}>
-							<div className={yellowBoxStyles}>
+						<div css={wrapperStyles}>
+							<div css={yellowBoxStyles}>
 								<BylineLink byline={byline} tags={tags} />
 							</div>
 						</div>

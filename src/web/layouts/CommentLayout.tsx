@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
@@ -74,7 +74,7 @@ const StandardGrid = ({
 	display: Display;
 }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -385,21 +385,17 @@ export const CommentLayout = ({
 						<Border />
 					</GridItem>
 					<GridItem area="headline">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<div
-								className={cx(
+								css={[
 									avatarHeadlineWrapper,
 									showAvatar && minHeightWithAvatar,
-								)}
+								]}
 							>
 								{/* TOP - we use divs here to position content in groups using flex */}
-								<div
-									className={cx(
-										!showAvatar && headlinePadding,
-									)}
-								>
+								<div css={!showAvatar && headlinePadding}>
 									{age && (
-										<div className={ageWarningMargins}>
+										<div css={ageWarningMargins}>
 											<AgeWarning age={age} />
 										</div>
 									)}
@@ -420,7 +416,7 @@ export const CommentLayout = ({
 								{/* BOTTOM */}
 								<div>
 									{showAvatar && avatarUrl && (
-										<div className={avatarPositionStyles}>
+										<div css={avatarPositionStyles}>
 											<ContributorAvatar
 												imageSrc={avatarUrl}
 												imageAlt={
@@ -438,7 +434,7 @@ export const CommentLayout = ({
 						</div>
 					</GridItem>
 					<GridItem area="lines">
-						<div className={pushToBottom}>
+						<div css={pushToBottom}>
 							<GuardianLines count={8} pillar={format.theme} />
 						</div>
 					</GridItem>
@@ -452,7 +448,7 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="media">
 						<div
-							className={
+							css={
 								format.display === Display.Showcase &&
 								CAPI.pageType.hasShowcaseMainElement
 									? mainMediaWrapper
@@ -475,7 +471,7 @@ export const CommentLayout = ({
 						</div>
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -493,7 +489,7 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={maxWidth}>
+							<main css={maxWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -528,7 +524,7 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {

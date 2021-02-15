@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { pillarPalette } from '@root/src/lib/pillars';
 import InfoIcon from '@frontend/static/icons/info.svg';
 import PlusIcon from '@frontend/static/icons/plus.svg';
@@ -120,15 +120,13 @@ export const Expandable: React.FC<{
 	credit?: string;
 	pillar: Theme;
 }> = ({ id, type, title, img, html, credit, pillar }) => (
-	<aside className={wrapper(pillar)}>
-		<div className={headers}>
-			<span className={cx(headerStyle, pillarColour(pillar))}>
-				{type}
-			</span>
-			<h2 className={headerStyle}>{title}</h2>
+	<aside css={wrapper(pillar)}>
+		<div css={headers}>
+			<span css={[headerStyle, pillarColour(pillar)]}>{type}</span>
+			<h2 css={headerStyle}>{title}</h2>
 		</div>
 
-		<div className={innerStyle} hidden={true} id={id}>
+		<div css={innerStyle} hidden={true} id={id}>
 			{img && (
 				<amp-img
 					class={imageStyle}
@@ -145,8 +143,8 @@ export const Expandable: React.FC<{
 				}}
 			/>
 			{credit && (
-				<span className={creditStyle}>
-					<span className={iconStyle}>
+				<span css={creditStyle}>
+					<span css={iconStyle}>
 						<InfoIcon />
 					</span>{' '}
 					{credit}
@@ -156,7 +154,7 @@ export const Expandable: React.FC<{
 
 		<button
 			on={`tap:${id}.toggleVisibility,show-${id}.toggleVisibility,hide-${id}.toggleVisibility`}
-			className={buttonStyles}
+			css={buttonStyles}
 		>
 			<span id={`show-${id}`}>
 				<PlusIcon />

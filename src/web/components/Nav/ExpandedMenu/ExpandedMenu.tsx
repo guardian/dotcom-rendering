@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -100,7 +100,7 @@ export const ExpandedMenu: React.FC<{
 			<VeggieBurgerMenu display={display} />
 			<div
 				id="expanded-menu"
-				className={mainMenuStyles}
+				css={mainMenuStyles}
 				data-testid="expanded-menu"
 				data-cy="expanded-menu"
 			>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -25,7 +25,7 @@ type Props = {
 };
 
 export const HeadlineTag = ({ tagText, pillar }: Props) => (
-	<div className={headlineTagWrapper}>
-		<div className={headlineTagStyles(pillar)}>{tagText}</div>
+	<div css={headlineTagWrapper}>
+		<div css={headlineTagStyles(pillar)}>{tagText}</div>
 	</div>
 );

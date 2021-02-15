@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -160,27 +160,24 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 	return (
 		<div
 			data-print-layout="hide"
-			className={cx(
-				{ [wrapperCollapsed]: collapseWrapper },
-				spaceBetween,
-			)}
+			css={[collapseWrapper && wrapperCollapsed, spaceBetween]}
 			data-cy="sub-nav"
 			data-component="sub-nav"
 		>
 			<ul
 				ref={ulRef}
-				className={cx({
-					[collapsedStyles]: !expandSubNav,
-					[expandedStyles]: expandSubNav,
-				})}
+				css={[
+					!expandSubNav && collapsedStyles,
+					expandSubNav && expandedStyles,
+				]}
 			>
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
-						className={listItemStyles(palette)}
+						css={listItemStyles(palette)}
 					>
 						<a
-							className={parentLinkStyle}
+							css={parentLinkStyle}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -190,9 +187,10 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 				{subNavSections.links.map((link) => (
 					<li key={link.url}>
 						<a
-							className={cx(linkStyle, {
-								[selected]: link.title === currentNavLink,
-							})}
+							css={[
+								linkStyle,
+								link.title === currentNavLink && selected,
+							]}
 							href={link.url}
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
 								link.url,
@@ -206,7 +204,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 			{showMore && (
 				<button
 					onClick={() => setIsExpanded(!isExpanded)}
-					className={showMoreStyle}
+					css={showMoreStyle}
 					data-link-name="nav2 : subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}

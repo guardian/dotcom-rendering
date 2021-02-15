@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import {
@@ -125,14 +125,10 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 }) => {
 	if (shouldHideSupportMessaging()) {
 		return (
-			<div className={cx(inHeader && headerStyles)}>
-				<div
-					className={cx({
-						[hiddenUntilTablet]: inHeader,
-					})}
-				>
-					<div className={messageStyles(true)}> Thank you </div>
-					<div className={subMessageStyles}>
+			<div css={inHeader && headerStyles}>
+				<div css={inHeader && hiddenUntilTablet}>
+					<div css={messageStyles(true)}> Thank you </div>
+					<div css={subMessageStyles}>
 						Your support powers our independent journalism
 					</div>
 				</div>
@@ -140,27 +136,23 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 		);
 	}
 	return (
-		<div className={cx(inHeader && headerStyles)}>
-			<div
-				className={cx({
-					[hiddenUntilTablet]: inHeader,
-				})}
-			>
-				<div className={messageStyles(false)}>
+		<div css={inHeader && headerStyles}>
+			<div css={inHeader && hiddenUntilTablet}>
+				<div css={messageStyles(false)}>
 					<span>Support the&nbsp;Guardian</span>
 				</div>
-				<div className={subMessageStyles}>
+				<div css={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
 				<a
-					className={linkStyles}
+					css={linkStyles}
 					href={urls.contribute}
 					data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 				>
 					Contribute <ArrowRightIcon />
 				</a>
 				<a
-					className={linkStyles}
+					css={linkStyles}
 					href={urls.subscribe}
 					data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
 				>
@@ -168,15 +160,10 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 				</a>
 			</div>
 
-			<div
-				className={cx({
-					[hiddenFromTablet]: inHeader,
-					[hidden]: !inHeader,
-				})}
-			>
+			<div css={[inHeader && hiddenFromTablet, !inHeader && hidden]}>
 				{edition === 'UK' ? (
 					<a
-						className={linkStyles}
+						css={linkStyles}
 						href={urls.subscribe}
 						data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 					>
@@ -184,7 +171,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 					</a>
 				) : (
 					<a
-						className={linkStyles}
+						css={linkStyles}
 						href={urls.contribute}
 						data-link-name={`${dataLinkNamePrefix}support-cta`}
 					>

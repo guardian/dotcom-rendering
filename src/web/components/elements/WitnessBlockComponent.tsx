@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral, space } from '@guardian/src-foundations';
 import { headline, body } from '@guardian/src-foundations/typography';
@@ -79,15 +79,15 @@ export const WitnessWrapper = ({
 	children,
 }: WrapperProps): JSX.Element => {
 	return (
-		<div className={wrapperStyles}>
-			<div className={mainContentWrapperStyles}>{children}</div>
+		<div css={wrapperStyles}>
+			<div css={mainContentWrapperStyles}>{children}</div>
 			<footer>
-				<p className={witnessIconWrapperStyles}>
+				<p css={witnessIconWrapperStyles}>
 					Sent via
-					<span className={witnessIconStyles(pillar)}>
+					<span css={witnessIconStyles(pillar)}>
 						guardian
 						<span
-							className={css`
+							css={css`
 								color: ${neutral[46]};
 							`}
 						>
@@ -95,16 +95,16 @@ export const WitnessWrapper = ({
 						</span>
 					</span>
 				</p>
-				<div className={witnessDetailsWrapperStyles}>
-					<div className={witnessDetailsSpacingStyles}>
+				<div css={witnessDetailsWrapperStyles}>
+					<div css={witnessDetailsSpacingStyles}>
 						<p
-							className={css`
+							css={css`
 								${body.small()}
 							`}
 						>
 							By
 							<span
-								className={authorNameStyles(pillar)}
+								css={authorNameStyles(pillar)}
 								itemProp="author"
 								itemType="http://schema.org/Person"
 							>
@@ -112,7 +112,7 @@ export const WitnessWrapper = ({
 							</span>
 						</p>
 						<p
-							className={css`
+							css={css`
 								${body.small()}
 							`}
 						>
@@ -160,22 +160,22 @@ export const WitnessImageBlockComponent = ({
 		>
 			<>
 				<img
-					className={css`
+					css={css`
 						width: 100%;
 					`}
 					src={bestImgSource && bestImgSource.file}
 					alt={alt}
 					itemProp="contentURL"
 				/>
-				<figcaption className={captionStyles}>
+				<figcaption css={captionStyles}>
 					<h3
-						className={titleStyles(pillar)}
+						css={titleStyles(pillar)}
 						itemProp="name"
 						dangerouslySetInnerHTML={{ __html: title }}
 					/>
 					<div itemProp="description">
 						<p
-							className={css`
+							css={css`
 								${body.medium()}
 							`}
 							dangerouslySetInnerHTML={{ __html: caption }}
@@ -209,13 +209,13 @@ export const WitnessTextBlockComponent = ({
 	>
 		<>
 			<h3
-				className={titleStyles(pillar)}
+				css={titleStyles(pillar)}
 				itemProp="name"
 				dangerouslySetInnerHTML={{ __html: title }}
 			/>
 			<div itemProp="text">
 				<p
-					className={css`
+					css={css`
 						${body.medium()}
 					`}
 					dangerouslySetInnerHTML={{ __html: description }}
@@ -249,22 +249,22 @@ export const WitnessVideoBlockComponent = ({
 	>
 		<>
 			<div
-				className={css`
+				css={css`
 					iframe {
 						width: 100%;
 					}
 				`}
 				dangerouslySetInnerHTML={{ __html: youtubeHtml }}
 			/>
-			<figcaption className={captionStyles}>
+			<figcaption css={captionStyles}>
 				<h3
-					className={titleStyles(pillar)}
+					css={titleStyles(pillar)}
 					itemProp="name"
 					dangerouslySetInnerHTML={{ __html: title }}
 				/>
 				<div itemProp="description">
 					<p
-						className={css`
+						css={css`
 							${body.medium()}
 						`}
 						dangerouslySetInnerHTML={{ __html: description }}

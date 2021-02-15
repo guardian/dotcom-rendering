@@ -45,13 +45,13 @@ export const Placeholder = ({
 }: Props) => (
 	<div
 		id={rootId}
-		className={css`
+		css={css`
 			flex-grow: 1;
 		`}
 	>
 		<div
 			data-name="placeholder"
-			className={css`
+			css={css`
 				height: ${height}px;
 				width: ${width ? `${width}px` : '100%'};
 				margin-bottom: ${spaceBelow && space[spaceBelow]}px;

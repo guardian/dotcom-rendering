@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -86,7 +86,7 @@ export const LI = ({
 
 	return (
 		<li
-			className={cx(
+			css={[
 				liStyles,
 				sizeStyles,
 				showDivider && verticalDivider,
@@ -94,7 +94,7 @@ export const LI = ({
 				bottomMargin && marginBottomStyles,
 				showTopMarginWhenStacked && marginTopStyles,
 				snapAlignStart && snapAlignStartStyles,
-			)}
+			]}
 		>
 			{children}
 		</li>

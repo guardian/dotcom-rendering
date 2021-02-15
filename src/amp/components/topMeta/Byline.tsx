@@ -32,5 +32,5 @@ export const Byline: React.FC<{
 		return token;
 	});
 
-	return <div className={className}>{linkedByline}</div>;
+	return <div css={className}>{linkedByline}</div>;
 };

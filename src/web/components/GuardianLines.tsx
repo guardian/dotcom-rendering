@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Lines } from '@guardian/src-ed-lines';
 import { remSpace } from '@guardian/src-foundations';
@@ -27,7 +27,7 @@ export const GuardianLines = ({
 	count: 4 | 8 | undefined;
 	effect?: 'straight' | 'squiggly' | 'dotted';
 }) => (
-	<div className={linesCssOverwrite(pillar)}>
+	<div css={linesCssOverwrite(pillar)}>
 		<Lines count={count} effect={effect} />
 	</div>
 );

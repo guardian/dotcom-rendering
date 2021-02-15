@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import Star from '@frontend/static/icons/star.svg';
 import { neutral } from '@guardian/src-foundations/palette';
 
@@ -51,21 +51,21 @@ export const StarRating: React.FC<{
 	rating: number;
 	size: SizeType;
 }> = ({ rating, size }) => (
-	<div className={determineSize(size)}>
-		<div className={starWrapper}>
-			<Star className={rating < 1 && emptyStar} />
+	<div css={determineSize(size)}>
+		<div css={starWrapper}>
+			<Star css={rating < 1 && emptyStar} />
 		</div>
-		<div className={starWrapper}>
-			<Star className={rating < 2 && emptyStar} />
+		<div css={starWrapper}>
+			<Star css={rating < 2 && emptyStar} />
 		</div>
-		<div className={starWrapper}>
-			<Star className={rating < 3 && emptyStar} />
+		<div css={starWrapper}>
+			<Star css={rating < 3 && emptyStar} />
 		</div>
-		<div className={starWrapper}>
-			<Star className={rating < 4 && emptyStar} />
+		<div css={starWrapper}>
+			<Star css={rating < 4 && emptyStar} />
 		</div>
-		<div className={starWrapper}>
-			<Star className={rating < 5 && emptyStar} />
+		<div css={starWrapper}>
+			<Star css={rating < 5 && emptyStar} />
 		</div>
 	</div>
 );

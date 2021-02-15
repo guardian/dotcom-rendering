@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brandText } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
@@ -53,12 +53,12 @@ const style = css`
 	}
 `;
 
-const SVG = () => <TheGuardianLogoSVG className={style} />;
+const SVG = () => <TheGuardianLogoSVG css={style} />;
 
 export const Logo: React.FC = () => (
-	<a className={link} href="/" data-link-name="nav2 : logo">
+	<a css={link} href="/" data-link-name="nav2 : logo">
 		<span
-			className={css`
+			css={css`
 				${visuallyHidden};
 			`}
 		>

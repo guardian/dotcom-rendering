@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { DocumentBlockComponent } from './DocumentBlockComponent';
 
@@ -10,7 +10,7 @@ export default {
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			max-width: 620px;
 			padding: 20px;
 		`}

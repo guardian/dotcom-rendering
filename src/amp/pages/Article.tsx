@@ -6,7 +6,7 @@ import { Body as BodyLiveblog } from '@root/src/amp/components/BodyLiveblog';
 import { Header } from '@root/src/amp/components/Header';
 import { Onward } from '@root/src/amp/components/Onward';
 import { AdConsent } from '@root/src/amp/components/AdConsent';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
@@ -69,7 +69,7 @@ export const Article: React.FC<{
 			)}
 
 			{/* /TODO change to gray bgcolor */}
-			<div key="main" className={backgroundColour}>
+			<div key="main" css={backgroundColour}>
 				<Container>
 					<Header
 						nav={nav}

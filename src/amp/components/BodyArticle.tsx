@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Special } from '@guardian/types';
 
@@ -95,7 +95,7 @@ export const Body: React.FC<{
 		<WithAds
 			items={elementsWithoutAds}
 			adSlots={slotIndexes}
-			adClassName={adStyle}
+			adcss={adStyle}
 			adInfo={adInfo}
 		/>
 	);
@@ -105,7 +105,7 @@ export const Body: React.FC<{
 	);
 
 	return (
-		<InnerContainer className={body(pillar, design)}>
+		<InnerContainer css={body(pillar, design)}>
 			<TopMeta
 				design={design}
 				pillar={pillar}

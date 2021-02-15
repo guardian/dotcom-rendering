@@ -1,7 +1,7 @@
 import React from 'react';
 import { body } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const style = (pillar: Theme) => css`
 	${body.small()};
@@ -22,7 +22,7 @@ export const DisclaimerBlockComponent: React.FC<{
 	pillar: Theme;
 }> = ({ html, pillar }) => (
 	<footer
-		className={style(pillar)}
+		css={style(pillar)}
 		data-cy="affiliate-disclaimer"
 		dangerouslySetInnerHTML={{
 			__html: html,

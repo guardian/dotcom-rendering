@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { keyframes } from '@emotion/core';
 
 export const DISABLE_FLASHING_ELEMENTS_CLASS = 'disable-flashing-elements';
@@ -41,5 +41,5 @@ export const PulsingDot = ({ colour }: Props) => {
 		return null;
 	}
 
-	return <span className={pulsingDot(colour)} />;
+	return <span css={pulsingDot(colour)} />;
 };

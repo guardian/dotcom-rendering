@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 const container = css`
 	margin: auto;
@@ -11,7 +11,7 @@ export const Container: React.FC<{
 	children: React.ReactNode;
 }> = ({ className, children, ...props }) => (
 	// eslint-disable-next-line react/jsx-props-no-spreading
-	<div className={cx(container, className)} {...props}>
+	<div css={[container, className]} {...props}>
 		{children}
 	</div>
 );

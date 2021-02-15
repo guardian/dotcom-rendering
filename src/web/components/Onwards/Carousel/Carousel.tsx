@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import libDebounce from 'lodash/debounce';
 
 import { headline } from '@guardian/src-foundations/typography';
@@ -279,8 +279,8 @@ const Title = ({
 	url?: string;
 	pillar: Theme;
 }) => (
-	<h2 className={headerStyles}>
-		More from <span className={titleStyle(pillar)}>{title}</span>
+	<h2 css={headerStyles}>
+		More from <span css={titleStyle(pillar)}>{title}</span>
 	</h2>
 );
 
@@ -370,7 +370,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 }) => (
 	<div>
 		<Title title={heading} pillar={pillar} />
-		<div className={dotsStyle}>
+		<div css={dotsStyle}>
 			{trails.map((value, i) => (
 				<span
 					onClick={() => goToIndex(i)}
@@ -379,7 +379,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 					// not available to keyboard
 					aria-hidden="true"
 					key={`dot-${i}`}
-					className={cx(
+					css={[
 						dotStyle,
 						i === index && dotActiveStyle(pillar),
 						adjustNumberOfDotsStyle(
@@ -387,7 +387,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 							trails.length,
 							isFullCardImage,
 						),
-					)}
+					]}
 					data-link-name={`${
 						isFullCardImage ? 'carousel-large' : 'carousel-small'
 					}-nav-dot-${i}`}
@@ -515,10 +515,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	if (isFullCardImage) trails = convertToImmersive(trails);
 
 	return (
-		<div
-			className={wrapperStyle}
-			data-link-name={formatAttrString(heading)}
-		>
+		<div css={wrapperStyle} data-link-name={formatAttrString(heading)}>
 			<LeftColumn showRightBorder={false} showPartialRightBorder={true}>
 				<HeaderAndNav
 					heading={heading}
@@ -529,37 +526,34 @@ export const Carousel: React.FC<OnwardsType> = ({
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div className={cx(buttonContainerStyle, prevButtonContainerStyle)}>
+			<div css={[buttonContainerStyle, prevButtonContainerStyle]}>
 				<button
 					onClick={prev}
 					aria-label="Move carousel backwards"
-					className={cx(buttonStyle, prevButtonStyle(index))}
+					css={[buttonStyle, prevButtonStyle(index)]}
 					data-link-name={`${arrowName}-prev`}
 				>
 					<SvgChevronLeftSingle />
 				</button>
 			</div>
 
-			<div className={cx(buttonContainerStyle, nextButtonContainerStyle)}>
+			<div css={[buttonContainerStyle, nextButtonContainerStyle]}>
 				<button
 					onClick={next}
 					aria-label="Move carousel forwards"
-					className={cx(
-						buttonStyle,
-						nextButtonStyle(index, trails.length),
-					)}
+					css={[buttonStyle, nextButtonStyle(index, trails.length)]}
 					data-link-name={`${arrowName}-next`}
 				>
 					<SvgChevronRightSingle />
 				</button>
 			</div>
 			<div
-				className={containerStyles}
+				css={containerStyles}
 				data-component={ophanComponentName}
 				data-link={formatAttrString(heading)}
 			>
 				<Hide when="above" breakpoint="leftCol">
-					<div className={headerRowStyles}>
+					<div css={headerRowStyles}>
 						<HeaderAndNav
 							heading={heading}
 							trails={trails}
@@ -572,10 +566,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={prev}
 								aria-label="Move carousel backwards"
-								className={cx(
-									buttonStyle,
-									prevButtonStyle(index),
-								)}
+								css={[buttonStyle, prevButtonStyle(index)]}
 								data-link-name={`${arrowName}-prev`}
 							>
 								<SvgChevronLeftSingle />
@@ -583,10 +574,10 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={next}
 								aria-label="Move carousel forwards"
-								className={cx(
+								css={[
 									buttonStyle,
 									nextButtonStyle(index, trails.length),
-								)}
+								]}
 								data-link-name={`${arrowName}-next`}
 							>
 								<SvgChevronRightSingle />
@@ -596,7 +587,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</Hide>
 
 				<ul
-					className={carouselStyle(isFullCardImage)}
+					css={carouselStyle(isFullCardImage)}
 					ref={carouselRef}
 					data-component={`${variantComponentName} | maxIndex-${maxIndex}`}
 				>

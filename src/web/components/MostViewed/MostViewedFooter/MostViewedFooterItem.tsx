@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
@@ -69,12 +69,12 @@ type Props = {
 };
 
 export const MostViewedFooterItem = ({ trail, position }: Props) => (
-	<li className={gridItem(position)} data-link-name={`${position} | text`}>
-		<a className={headlineLink} href={trail.url} data-link-name="article">
-			<span className={bigNumber}>
+	<li css={gridItem(position)} data-link-name={`${position} | text`}>
+		<a css={headlineLink} href={trail.url} data-link-name="article">
+			<span css={bigNumber}>
 				<BigNumber index={position} />
 			</span>
-			<div className={headlineHeader}>
+			<div css={headlineHeader}>
 				{trail.isLiveBlog ? (
 					<LinkHeadline
 						headlineText={trail.headline}
@@ -97,7 +97,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 				)}
 			</div>
 			{trail.ageWarning && (
-				<div className={ageWarningStyles}>
+				<div css={ageWarningStyles}>
 					<AgeWarning age={trail.ageWarning} size="small" />
 				</div>
 			)}

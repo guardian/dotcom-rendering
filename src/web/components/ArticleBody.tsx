@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
@@ -59,7 +59,7 @@ export const ArticleBody = ({
 	abTests,
 }: Props) => {
 	return (
-		<div className={cx(bodyStyle(format.display), linkColour(palette))}>
+		<div css={[bodyStyle(format.display), linkColour(palette)]}>
 			<ArticleRenderer
 				format={format}
 				palette={palette}

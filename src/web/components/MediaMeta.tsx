@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 
@@ -92,7 +92,7 @@ const MediaIcon = ({
 	mediaType: MediaType;
 	pillar: Theme;
 }) => (
-	<span className={iconWrapperStyles(mediaType, pillar)}>
+	<span css={iconWrapperStyles(mediaType, pillar)}>
 		<Icon mediaType={mediaType} />
 	</span>
 );
@@ -103,12 +103,10 @@ const MediaDuration = ({
 }: {
 	mediaDuration: number;
 	pillar: Theme;
-}) => (
-	<p className={durationStyles(pillar)}>{secondsToDuration(mediaDuration)}</p>
-);
+}) => <p css={durationStyles(pillar)}>{secondsToDuration(mediaDuration)}</p>;
 
 export const MediaMeta = ({ mediaType, mediaDuration, pillar }: Props) => (
-	<div className={wrapperStyles}>
+	<div css={wrapperStyles}>
 		<MediaIcon mediaType={mediaType} pillar={pillar} />
 		&nbsp;
 		{mediaDuration && (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -79,7 +79,7 @@ const mainImage = (element: ImageBlockElement) => {
 	}
 
 	return (
-		<figure className={figureStyle}>
+		<figure css={figureStyle}>
 			<amp-img
 				src={image.src}
 				alt={element.data.alt}
@@ -96,12 +96,12 @@ const mainImage = (element: ImageBlockElement) => {
 						aria-checked={false}
 						type="checkbox"
 						id="show-caption"
-						className={inputStyle}
+						css={inputStyle}
 					/>
 					{/* eslint-disable jsx-a11y/label-has-associated-control */}
-					<label className={labelStyle} htmlFor="show-caption">
+					<label css={labelStyle} htmlFor="show-caption">
 						<span
-							className={css`
+							css={css`
 								${visuallyHidden}
 							`}
 						>
@@ -109,7 +109,7 @@ const mainImage = (element: ImageBlockElement) => {
 						</span>
 						<InfoIcon />
 					</label>
-					<figcaption className={captionStyle}>
+					<figcaption css={captionStyle}>
 						{element.data.caption}{' '}
 						{element.displayCredit && element.data.credit}
 					</figcaption>
@@ -151,8 +151,6 @@ export const MainMedia: React.FC<{
 	adTargeting?: any;
 }> = ({ element, pillar, adTargeting }) => {
 	return (
-		<div className={expanded}>
-			{asComponent(element, pillar, adTargeting)}
-		</div>
+		<div css={expanded}>{asComponent(element, pillar, adTargeting)}</div>
 	);
 };

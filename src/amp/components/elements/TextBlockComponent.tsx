@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { body, textSans } from '@guardian/src-foundations/typography';
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
@@ -77,7 +77,7 @@ export const TextBlockComponent: React.FC<{
 	pillar: Theme;
 }> = ({ html, pillar }) => (
 	<span
-		className={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
+		css={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
 		dangerouslySetInnerHTML={{
 			__html: sanitise(html),
 		}}

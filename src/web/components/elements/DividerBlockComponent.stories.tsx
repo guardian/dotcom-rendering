@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { DividerBlockComponent } from '@frontend/web/components/elements/DividerBlockComponent';
 import { Design, Display, Pillar } from '@guardian/types';
@@ -23,7 +23,7 @@ const lorem =
 export const Default = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				padding: 20px;
 			`}
 		>

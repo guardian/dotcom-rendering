@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	MoustacheSection,
@@ -213,36 +213,34 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 				items="."
 			>
 				<MoustacheTemplate>
-					<div className={epicStyle}>
+					<div css={epicStyle}>
 						<MoustacheSection name="ticker">
-							<div className={tickerWrapperStyle}>
-								<div className={tickerInfoStyle}>
-									<div className={leftStyle}>
-										<p className={topLeftStyle}>
+							<div css={tickerWrapperStyle}>
+								<div css={tickerInfoStyle}>
+									<div css={leftStyle}>
+										<p css={topLeftStyle}>
 											{moustacheVariable('topLeft')}
 										</p>
-										<p className={labelStyle}>
+										<p css={labelStyle}>
 											{moustacheVariable('bottomLeft')}
 										</p>
 									</div>
-									<div className={rightStyle}>
-										<p className={topRightStyle}>
+									<div css={rightStyle}>
+										<p css={topRightStyle}>
 											{moustacheVariable('topRight')}
 										</p>
-										<p className={labelStyle}>
+										<p css={labelStyle}>
 											{moustacheVariable('bottomRight')}
 										</p>
 									</div>
 								</div>
 
 								<div>
-									<div className={tickerBackgroundStyle}>
+									<div css={tickerBackgroundStyle}>
 										<MoustacheSection name="goalExceededMarkerPercentage">
 											<div
 												id="goal-exceeded-marker"
-												className={
-													goalExceededMarkerStyle
-												}
+												css={goalExceededMarkerStyle}
 												style={{
 													left: `${moustacheVariable(
 														'goalExceededMarkerPercentage',
@@ -253,7 +251,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 
 										<div
 											id="ticker-progress"
-											className={tickerProgressStyle}
+											css={tickerProgressStyle}
 											style={{
 												width: `${moustacheVariable(
 													'percentage',
@@ -264,15 +262,15 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</div>
 							</div>
 						</MoustacheSection>
-						<h2 className={epicHeaderStyle}>
+						<h2 css={epicHeaderStyle}>
 							<MoustacheVariable name="heading" />
 						</h2>
 						<MoustacheSection name="paragraphs">
-							<p className={epicParagraphStyle}>
+							<p css={epicParagraphStyle}>
 								<MoustacheVariable name="." />
 							</p>
 						</MoustacheSection>
-						<span className={highlightedTextStyle}>
+						<span css={highlightedTextStyle}>
 							<MoustacheVariable name="highlightedText" />
 						</span>
 						<br />
@@ -290,11 +288,11 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 										),
 									},
 								)}
-								className={supportButtonStyle}
+								css={supportButtonStyle}
 							>
 								<MoustacheVariable name="text" />
 								<svg
-									className={arrowStyle}
+									css={arrowStyle}
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 17.89"
 									preserveAspectRatio="xMinYMid"
@@ -304,7 +302,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
 								</svg>
 							</a>
-							<div className={acceptedPaymentMethodsWrapperStyle}>
+							<div css={acceptedPaymentMethodsWrapperStyle}>
 								<amp-img
 									layout="fixed"
 									height="25px"

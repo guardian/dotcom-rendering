@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';

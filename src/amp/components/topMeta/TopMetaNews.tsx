@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -46,10 +46,10 @@ const Headline: React.FC<{
 }> = ({ headlineText, starRating }) => {
 	return (
 		<div>
-			<h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
+			<h1 css={headerStyle}>{curly(headlineText)}</h1>
 
 			{starRating !== undefined && (
-				<div className={starRatingWrapper}>
+				<div css={starRatingWrapper}>
 					<StarRating rating={starRating} size="large" />
 				</div>
 			)}
@@ -102,7 +102,7 @@ export const TopMetaNews: React.FC<{
 				tags={articleData.tags}
 				pillar={pillar}
 				guardianBaseURL={articleData.guardianBaseURL}
-				className={bylineStyle(pillar)}
+				css={bylineStyle(pillar)}
 			/>
 
 			<TopMetaExtras

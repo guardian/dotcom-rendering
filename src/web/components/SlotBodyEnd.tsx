@@ -223,7 +223,7 @@ const MemoisedInner = ({
 
 	if (Epic) {
 		return (
-			<div ref={setNode} className={wrapperMargins}>
+			<div ref={setNode} css={wrapperMargins}>
 				{/* eslint-disable-next-line react/jsx-props-no-spreading */}
 				<Epic {...epicProps} />
 			</div>

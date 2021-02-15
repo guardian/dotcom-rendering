@@ -29,7 +29,7 @@ export const TwitterBlockComponent: React.FC<{
 			data-dnt="true"
 		>
 			{fallbackHTML && (
-				<div placeholder="" className={TextStyle(pillar)}>
+				<div placeholder="" css={TextStyle(pillar)}>
 					<blockquote
 						dangerouslySetInnerHTML={{ __html: fallbackHTML }}
 					/>

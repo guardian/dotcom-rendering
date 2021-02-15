@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
@@ -36,7 +36,7 @@ const containerStyles = css`
 
 export const defaultStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
@@ -50,7 +50,7 @@ defaultStory.story = { name: 'simple' };
 
 export const ShortStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={shortQuoteHtml}
@@ -64,7 +64,7 @@ ShortStory.story = { name: 'short and simple' };
 
 export const QuotedStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
@@ -79,7 +79,7 @@ QuotedStory.story = { name: 'quoted' };
 
 export const ShortQuotedStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={shortQuoteHtml}

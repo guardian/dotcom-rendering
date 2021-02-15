@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
@@ -102,7 +102,7 @@ const standfirstStyles = (design: Design, display: Display) => {
 export const Standfirst = ({ display, design, standfirst }: Props) => (
 	<div
 		data-print-layout="hide"
-		className={cx(nestedStyles, standfirstStyles(design, display))}
+		css={[nestedStyles, standfirstStyles(design, display)]}
 		// eslint-disable-next-line react/no-danger
 		dangerouslySetInnerHTML={{
 			__html: sanitise(standfirst, {

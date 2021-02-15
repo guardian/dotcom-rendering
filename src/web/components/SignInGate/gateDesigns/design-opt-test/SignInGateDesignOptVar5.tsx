@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	headline,
@@ -62,7 +62,7 @@ export const Lines: FunctionComponent<LinesProps> = (props) => {
 		${cssOverrides}
 	`;
 
-	return <hr className={linesCss} />;
+	return <hr css={linesCss} />;
 };
 
 const signInGateBackground = css`
@@ -140,33 +140,29 @@ export const SignInGateDesignOptVar5 = ({
 }: SignInGateProps) => {
 	return (
 		<div
-			className={cx([
-				signInGateContainer,
-				signInGateBackground,
-				leftMarginFill,
-			])}
+			css={[signInGateContainer, signInGateBackground, leftMarginFill]}
 			data-cy="sign-in-gate-design-opt-variant-5"
 		>
 			<style>{hideElementsCss}</style>
-			<div className={firstParagraphOverlay(!!isComment)} />
-			<h1 className={cx([headingStyles, leftMarginFill])}>
+			<div css={firstParagraphOverlay(!!isComment)} />
+			<h1 css={[headingStyles, leftMarginFill]}>
 				Register for free and continue reading
 			</h1>
 			<Lines />
-			<p className={bodyBold}>
+			<p css={bodyBold}>
 				It’s important to say this is not a step towards a paywall
 			</p>
-			<p className={bodyText}>
+			<p css={bodyText}>
 				Registering is a free and simple way to help us sustain our
 				independent Guardian journalism.
 			</p>
-			<p className={bodyText}>
+			<p css={bodyText}>
 				When you register with us we are able to improve our news
 				experience for you and for others. You will always be able to
 				control your own&nbsp;
 				<button
 					data-cy="sign-in-gate-design-opt-variant-5_privacy"
-					className={privacyLink}
+					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
@@ -176,10 +172,10 @@ export const SignInGateDesignOptVar5 = ({
 				</button>
 				. Thank you.
 			</p>
-			<div className={actionButtons}>
+			<div css={actionButtons}>
 				<LinkButton
 					data-cy="sign-in-gate-design-opt-variant-5_register"
-					className={registerButton}
+					css={registerButton}
 					priority="primary"
 					size="small"
 					href={signInUrl}
@@ -192,7 +188,7 @@ export const SignInGateDesignOptVar5 = ({
 
 				<LinkButton
 					data-cy="sign-in-gate-design-opt-variant-5_dismiss"
-					className={laterButton}
+					css={laterButton}
 					priority="subdued"
 					size="small"
 					onClick={() => {
@@ -203,15 +199,8 @@ export const SignInGateDesignOptVar5 = ({
 					I’ll do it later
 				</LinkButton>
 			</div>
-			<div className={signInLinkSection}>
-				<p
-					className={cx([
-						bodyBold,
-						signInHeader,
-						lineTop,
-						leftMarginFill,
-					])}
-				>
+			<div css={signInLinkSection}>
+				<p css={[bodyBold, signInHeader, lineTop, leftMarginFill]}>
 					Have a subscription? Made a contribution? Already
 					registered?
 				</p>
@@ -226,7 +215,7 @@ export const SignInGateDesignOptVar5 = ({
 					Sign In
 				</Link>
 			</div>
-			<div className={faq}>
+			<div css={faq}>
 				<Link
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
 					onClick={() => {
