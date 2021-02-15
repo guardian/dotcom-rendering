@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { Special } from '@guardian/types';
+
 import { pillarPalette } from '@root/src/lib/pillars';
-import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 
 const style = (pillar: Theme) => css`
 	h2 {
@@ -44,11 +46,15 @@ export const SubheadingBlockComponent: React.FC<{
 	isImmersive: boolean;
 }> = ({ html, pillar, isImmersive }) => (
 	<span
-		css={composeLabsCSS(
-			pillar,
-			cx(style(pillar), { [immersiveBodyStyle]: isImmersive }),
-			subHeadingStyleLabs,
-		)}
+		css={
+			pillar === Special.Labs
+				? [
+						style(pillar),
+						isImmersive && immersiveBodyStyle,
+						subHeadingStyleLabs,
+				  ]
+				: subHeadingStyleLabs
+		}
 		dangerouslySetInnerHTML={{
 			__html: html,
 		}}

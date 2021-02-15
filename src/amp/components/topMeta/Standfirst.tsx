@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { Special } from '@guardian/types';
+
 import { neutralBorder } from '@root/src/lib/pillars';
-import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 import {
 	ListStyle,
 	LinkStyle,
@@ -42,7 +44,11 @@ export const Standfirst: React.SFC<{
 	return (
 		<div
 			data-print-layout="hide"
-			css={composeLabsCSS(pillar, cx(standfirstCss(pillar)), labsStyle)}
+			css={
+				pillar === Special.Labs
+					? [standfirstCss(pillar), labsStyle]
+					: standfirstCss(pillar)
+			}
 			dangerouslySetInnerHTML={{
 				__html: text,
 			}}

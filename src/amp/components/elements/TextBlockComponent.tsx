@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
+import { Special } from '@guardian/types';
 import { body, textSans } from '@guardian/src-foundations/typography';
+
 import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import { sanitise } from '@frontend/lib/sanitise-html';
-import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 
 // Note, this should only apply basic text styling. It is a case where we want
 // to re-use styling, but generally we should avoid this as it couples
@@ -76,7 +78,11 @@ export const TextBlockComponent: React.FC<{
 	pillar: Theme;
 }> = ({ html, pillar }) => (
 	<span
-		css={composeLabsCSS(pillar, TextStyle(pillar), textStyleLabs)}
+		css={
+			pillar === Special.Labs
+				? [TextStyle(pillar), textStyleLabs]
+				: TextStyle(pillar)
+		}
 		dangerouslySetInnerHTML={{
 			__html: sanitise(html),
 		}}
