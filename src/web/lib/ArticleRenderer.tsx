@@ -194,23 +194,47 @@ export const ArticleRenderer: React.FC<{
 				case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 					if (!element.safe) {
 						return (
-							<Figure role={element.role}>
-								<UnsafeEmbedBlockComponent
-									key={i}
-									html={element.html}
-									alt={element.alt || ''}
-									index={i}
-								/>
+							<Figure
+								role={element.role}
+								id={`embed-block-element-${i}`}
+								key={`embed-block-element-${i}`}
+							>
+								<ClickToView
+									role={element.role}
+									isTracking={element.isThirdPartyTracking}
+									source={element.source}
+									sourceDomain={element.sourceDomain}
+									abTests={abTests}
+								>
+									<UnsafeEmbedBlockComponent
+										key={i}
+										html={element.html}
+										alt={element.alt || ''}
+										index={i}
+									/>
+								</ClickToView>
 							</Figure>
 						);
 					}
 					return (
-						<Figure role={element.role}>
-							<EmbedBlockComponent
-								key={i}
-								html={element.html}
-								alt={element.alt}
-							/>
+						<Figure
+							role={element.role}
+							id={`embed-block-element-${i}`}
+							key={`embed-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<EmbedBlockComponent
+									key={i}
+									html={element.html}
+									alt={element.alt}
+								/>
+							</ClickToView>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
@@ -270,12 +294,24 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.InstagramBlockElement':
 					return (
-						<Figure role={element.role}>
-							<InstagramBlockComponent
-								key={i}
-								element={element}
-								index={i}
-							/>
+						<Figure
+							role={element.role}
+							id={`instagram-block-element-${i}`}
+							key={`instagram-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<InstagramBlockComponent
+									key={i}
+									element={element}
+									index={i}
+								/>
+							</ClickToView>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
@@ -291,17 +327,29 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.MapBlockElement':
 					return (
-						<Figure role={element.role}>
-							<MapEmbedBlockComponent
-								format={format}
-								palette={palette}
-								embedUrl={element.embedUrl}
-								height={element.height}
-								width={element.width}
-								caption={element.caption}
-								credit={element.source}
-								title={element.title}
-							/>
+						<Figure
+							role={element.role}
+							id={`map-block-element-${i}`}
+							key={`map-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<MapEmbedBlockComponent
+									format={format}
+									palette={palette}
+									embedUrl={element.embedUrl}
+									height={element.height}
+									width={element.width}
+									caption={element.caption}
+									credit={element.source}
+									title={element.title}
+								/>
+							</ClickToView>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -378,17 +426,29 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
 					return (
-						<Figure role={element.role}>
-							<SpotifyBlockComponent
-								embedUrl={element.embedUrl}
-								height={element.height}
-								width={element.width}
-								title={element.title}
-								format={format}
-								palette={palette}
-								caption={element.caption}
-								credit="Spotify"
-							/>
+						<Figure
+							role={element.role}
+							id={`spotify-block-element-${i}`}
+							key={`spotify-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<SpotifyBlockComponent
+									embedUrl={element.embedUrl}
+									height={element.height}
+									width={element.width}
+									title={element.title}
+									format={format}
+									palette={palette}
+									caption={element.caption}
+									credit="Spotify"
+								/>
+							</ClickToView>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
@@ -421,17 +481,29 @@ export const ArticleRenderer: React.FC<{
 					);
 				case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 					return (
-						<Figure role={element.role}>
-							<VideoFacebookBlockComponent
-								format={format}
-								palette={palette}
-								embedUrl={element.embedUrl}
-								height={element.height}
-								width={element.width}
-								caption={element.caption}
-								credit={element.caption}
-								title={element.caption}
-							/>
+						<Figure
+							role={element.role}
+							id={`video-facebook-block-element-${i}`}
+							key={`video-facebook-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<VideoFacebookBlockComponent
+									format={format}
+									palette={palette}
+									embedUrl={element.embedUrl}
+									height={element.height}
+									width={element.width}
+									caption={element.caption}
+									credit={element.caption}
+									title={element.caption}
+								/>
+							</ClickToView>
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
@@ -594,7 +666,6 @@ export const ArticleRenderer: React.FC<{
 							return null;
 					}
 				}
-
 				case 'model.dotcomrendering.pageElements.AudioBlockElement':
 				case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 				case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':

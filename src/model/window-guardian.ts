@@ -88,6 +88,17 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		);
 	};
 
+	// If our element type is one that can contain third party content that can track user, but hasn't been marked
+	// as 'tracking' by the back-end, we remove it from the array of elements that we'll hydrate on the client-side.
+	// https://github.com/guardian/dotcom-rendering/blob/click-to-view-for-all-element-types/docs/architecture/025-click-to-view.md#click-to-view-component
+	const thirdPartyTrackingElementsOnly = <
+		T extends ThirdPartyEmbeddedContent
+	>(
+		elements: T[],
+	): T[] => {
+		return elements.filter((element) => element.isThirdPartyTracking);
+	};
+
 	/* Kept for posteriy...for now anyway!
     const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
         (acc, element, index: number) => {
@@ -246,10 +257,47 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			},
 			[] as YoutubeBlockElement[],
 		),
-		documentBlockElements: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.DocumentBlockElement',
-			'documentIndex',
+		documentBlockElements: thirdPartyTrackingElementsOnly(
+			blockElementWithIndex(
+				CAPI.blocks,
+				'model.dotcomrendering.pageElements.DocumentBlockElement',
+				'documentIndex',
+			),
+		),
+		embedBlockElements: thirdPartyTrackingElementsOnly(
+			blockElementWithIndex(
+				CAPI.blocks,
+				'model.dotcomrendering.pageElements.EmbedBlockElement',
+				'embedIndex',
+			),
+		),
+		instagramBlockElements: thirdPartyTrackingElementsOnly(
+			blockElementWithIndex(
+				CAPI.blocks,
+				'model.dotcomrendering.pageElements.InstagramBlockElement',
+				'instagramIndex',
+			),
+		),
+		mapBlockElements: thirdPartyTrackingElementsOnly(
+			blockElementWithIndex(
+				CAPI.blocks,
+				'model.dotcomrendering.pageElements.MapBlockElement',
+				'mapIndex',
+			),
+		),
+		spotifyBlockElements: thirdPartyTrackingElementsOnly(
+			blockElementWithIndex(
+				CAPI.blocks,
+				'model.dotcomrendering.pageElements.SpotifyBlockElement',
+				'spotifyIndex',
+			),
+		),
+		videoFacebookBlockElements: thirdPartyTrackingElementsOnly(
+			blockElementWithIndex(
+				CAPI.blocks,
+				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
+				'videoFacebookIndex',
+			),
 		),
 	};
 };

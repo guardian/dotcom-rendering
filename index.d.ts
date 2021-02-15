@@ -431,6 +431,11 @@ type CAPIBrowserType = {
 	youtubeMainMediaBlockElement: YoutubeBlockElement[];
 	quizAtoms: QuizAtomBlockElement[];
 	documentBlockElements: DocumentBlockElement[];
+	embedBlockElements: EmbedBlockElement[];
+	instagramBlockElements: InstagramBlockElement[];
+	mapBlockElements: MapBlockElement[];
+	spotifyBlockElements: SpotifyBlockElement[];
+	videoFacebookBlockElements: VideoFacebookBlockElement[];
 };
 
 interface TagType {
@@ -712,7 +717,12 @@ type IslandType =
 	| 'youtube-block'
 	| 'youtube-block-main-media'
 	| 'chart-atom'
-	| 'document-block-element';
+	| 'document-block-element'
+	| 'embed-block-element'
+	| 'instagram-block-element'
+	| 'map-block-element'
+	| 'spotify-block-element'
+	| 'video-facebook-block-element';
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as
