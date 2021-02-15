@@ -38,9 +38,13 @@ export const PulsingDot = ({ colour }: Props) => {
 	// Respect the accessibility flag set here
 	// https://www.theguardian.com/help/accessibility-help
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	const flashingEnabled = storage.local.get(
+	const flashingPreference = storage.local.get(
 		'gu.prefs.accessibility.flashing-elements',
 	);
+	// flashingPreference is null if no preference exists and explicitly
+	// false when the reader has said they don't want flashing
+	const flashingEnabled = flashingPreference !== false;
+	console.log('flashingEnabled', flashingEnabled);
 	return (
 		<span className={cx(dotStyles(colour), flashingEnabled && animate)} />
 	);
