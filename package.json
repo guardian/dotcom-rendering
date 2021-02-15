@@ -107,7 +107,7 @@
         "minify-css-string": "^1.0.0",
         "ophan-tracker-js": "^1.3.23",
         "pm2": "^4.5.0",
-        "polished": "^1.9.2",
+        "polished": "^4.1.0",
         "preact": "^10.5.12",
         "preact-render-to-string": "^5.1.12",
         "prettier-eslint": "^11.0.0",
