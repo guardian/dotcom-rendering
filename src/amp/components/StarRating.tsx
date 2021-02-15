@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import Star from '@frontend/static/icons/star.svg';
 import { palette } from '@guardian/src-foundations';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';

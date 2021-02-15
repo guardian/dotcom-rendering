@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Props = {
 	byline: string;
 	tags: TagType[];

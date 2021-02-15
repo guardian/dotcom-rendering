@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
 import { Lines } from '@guardian/src-ed-lines';

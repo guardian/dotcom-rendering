@@ -1,4 +1,3 @@
-import React from 'react';
 import Number0 from './0.svg';
 import Number1 from './1.svg';
 import Number2 from './2.svg';

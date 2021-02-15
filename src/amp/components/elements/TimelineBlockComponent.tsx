@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Expandable } from '@root/src/amp/components/Expandable';
 import { css } from '@emotion/react';

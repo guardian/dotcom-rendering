@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
 import { Design, Format, Special } from '@guardian/types';

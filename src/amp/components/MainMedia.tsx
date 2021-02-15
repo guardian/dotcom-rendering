@@ -1,4 +1,3 @@
-import React from 'react';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
 import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';

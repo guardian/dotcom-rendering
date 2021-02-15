@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { linkAndDescription } from '@root/fixtures/onwards.mocks';
 import { useApi as useApi_ } from '@root/src/web/lib/api';

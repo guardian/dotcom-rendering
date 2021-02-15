@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import Logo from '@frontend/static/logos/the-guardian.svg';
 import { pillarPalette } from '@root/src/lib/pillars';

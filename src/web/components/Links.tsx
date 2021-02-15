@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 import SearchIcon from '@frontend/static/icons/search.svg';

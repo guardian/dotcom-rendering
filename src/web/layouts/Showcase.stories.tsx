@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';

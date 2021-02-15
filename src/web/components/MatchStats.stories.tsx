@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { game } from '@root/fixtures/game';
 
 import { Section } from './Section';

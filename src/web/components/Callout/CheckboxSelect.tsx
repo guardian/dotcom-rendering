@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CheckboxGroup, Checkbox } from '@guardian/src-checkbox';
 import { FieldLabel } from './FieldLabel';
 

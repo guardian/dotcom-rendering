@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const SoundcloudBlockComponent: React.FC<{
 	element: SoundcloudBlockElement;
 }> = ({ element }) => {

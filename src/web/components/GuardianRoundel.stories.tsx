@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { GuardianRoundel } from './GuardianRoundel';
 
 export default {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
 import { RadioGroup, Radio } from '@guardian/src-radio';

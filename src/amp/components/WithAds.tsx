@@ -1,4 +1,3 @@
-import React from 'react';
 import { Ad } from '@root/src/amp/components/Ad';
 import { css } from '@emotion/react';
 

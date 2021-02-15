@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';

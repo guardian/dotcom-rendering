@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { palette, border } from '@guardian/src-foundations';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { bylineTokens } from '@root/src/amp/lib/byline-tokens';
 
 export const Byline: React.FC<{

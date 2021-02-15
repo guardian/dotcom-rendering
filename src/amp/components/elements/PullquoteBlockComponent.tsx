@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette } from '@root/src/lib/pillars';

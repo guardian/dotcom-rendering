@@ -1,5 +1,3 @@
-import React from 'react';
-
 const open = (name: string, invert?: boolean) =>
 	`{{${invert ? '^' : '#'}${name}}}`;
 const close = (name: string) => `{{/${name}}}`;

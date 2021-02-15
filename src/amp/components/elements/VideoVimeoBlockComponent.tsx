@@ -1,4 +1,3 @@
-import React from 'react';
 import { getIdFromUrl } from '@root/src/amp/lib/get-video-id';
 import { Caption } from '@root/src/amp/components/Caption';
 

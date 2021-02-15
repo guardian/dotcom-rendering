@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';

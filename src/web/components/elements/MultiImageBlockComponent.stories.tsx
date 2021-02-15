@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Design, Display, Pillar } from '@guardian/types';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { decidePalette } from '@root/src/web/lib/decidePalette';

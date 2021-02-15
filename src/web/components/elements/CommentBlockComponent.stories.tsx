@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 
 import { CommentBlockComponent } from '@frontend/web/components/elements/CommentBlockComponent';

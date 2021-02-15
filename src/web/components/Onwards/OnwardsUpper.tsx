@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Pillar } from '@guardian/types';
 import { useAB } from '@guardian/ab-react';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { pillarPalette } from '@root/src/lib/pillars';
 import InfoIcon from '@frontend/static/icons/info.svg';

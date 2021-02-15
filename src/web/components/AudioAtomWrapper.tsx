@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AudioAtom } from '@guardian/atoms-rendering';
 import {
 	onConsentChange,

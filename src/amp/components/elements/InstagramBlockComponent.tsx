@@ -1,5 +1,3 @@
-import React from 'react';
-
 const getShortcode: (url: string) => string = (url) => {
 	const match = /.*\/(.*)\//.exec(url);
 	if (match == null) {

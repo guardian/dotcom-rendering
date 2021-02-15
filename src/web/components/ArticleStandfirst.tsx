@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { border } from '@guardian/src-foundations/palette';

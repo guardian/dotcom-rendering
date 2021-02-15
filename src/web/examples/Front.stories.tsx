@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Section } from '@frontend/web/components/Section';

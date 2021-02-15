@@ -1,4 +1,3 @@
-import React from 'react';
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { css } from '@emotion/react';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
