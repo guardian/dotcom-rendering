@@ -44,7 +44,6 @@ export const PulsingDot = ({ colour }: Props) => {
 	// flashingPreference is null if no preference exists and explicitly
 	// false when the reader has said they don't want flashing
 	const flashingEnabled = flashingPreference !== false;
-	console.log('flashingEnabled', flashingEnabled);
 	return (
 		<span className={cx(dotStyles(colour), flashingEnabled && animate)} />
 	);
