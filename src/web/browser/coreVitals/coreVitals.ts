@@ -1,15 +1,19 @@
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
+
+// Stops ts assuming json values are null
+const temp : any = null;
+
 const jsonData = {
 	'page_view_id': '',
 	'received_timestamp': `${new Date().toISOString()}`,
 	'id': 'prod',
 	'received_date': new Date().toISOString().slice(0, 10),
-    'fid': null,
-    'cls': null,
-    'lcp': null,
-    'fcp': null,
-    'ttfb': null,
+    'fid': temp,
+    'cls': temp,
+    'lcp': temp,
+    'fcp': temp,
+    'ttfb': temp,
 }
 
 export const coreVitals = (): void =>
