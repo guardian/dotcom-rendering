@@ -62,6 +62,8 @@ type Palette = {
 		cardHeadline: Colour;
 		cardKicker: Colour;
 		linkKicker: Colour;
+		cardStandfirst: Colour;
+		cardFooter: Colour;
 	},
 	background: {
 		article: Colour;
@@ -75,6 +77,7 @@ type Palette = {
 		commentCount: Colour;
 		shareIcon: Colour;
 		captionTriangle: Colour;
+		cardIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;

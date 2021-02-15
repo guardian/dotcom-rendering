@@ -23,10 +23,11 @@ type Props = {
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
-	const item = localStorage.getItem(`gu.prefs.${key}`);
+	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
 
 	if (item) {
-		return JSON.parse(item).value;
+		const parsedItem = JSON.parse(item) as { [key: string]: any };
+		return parsedItem.value;
 	}
 };
 

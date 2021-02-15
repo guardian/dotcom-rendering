@@ -3,25 +3,20 @@ import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { pillarPalette } from '@frontend/lib/pillars';
 import Audio from '@frontend/static/icons/audio.svg';
 import Photo from '@frontend/static/icons/photo.svg';
 import Video from '@frontend/static/icons/video.svg';
-import { Pillar } from '@guardian/types';
 
 type Props = {
 	mediaType: MediaType;
-	pillar: Theme;
+	palette: Palette;
 	mediaDuration?: number;
 };
 
-const iconWrapperStyles = (mediaType: MediaType, pillar: Theme) => css`
+const iconWrapperStyles = (mediaType: MediaType, palette: Palette) => css`
 	width: 24px;
 	height: 23px;
-	/* Below we force the colour to be bright if the pillar is news (because it looks better) */
-	background-color: ${pillar === Pillar.News
-		? pillarPalette[pillar].bright
-		: pillarPalette[pillar].main};
+	background-color: ${palette.fill.cardIcon};
 	border-radius: 50%;
 	display: inline-block;
 
@@ -36,11 +31,8 @@ const iconWrapperStyles = (mediaType: MediaType, pillar: Theme) => css`
 	}
 `;
 
-const durationStyles = (pillar: Theme) => css`
-	/* Below we force the colour to be bright if the pillar is news (because it looks better) */
-	color: ${pillar === Pillar.News
-		? pillarPalette[pillar].bright
-		: pillarPalette[pillar].main};
+const durationStyles = (palette: Palette) => css`
+	color: ${palette.text.cardFooter};
 	${textSans.xsmall({ fontWeight: `bold` })}
 `;
 
@@ -87,30 +79,30 @@ const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 
 const MediaIcon = ({
 	mediaType,
-	pillar,
+	palette,
 }: {
 	mediaType: MediaType;
-	pillar: Theme;
+	palette: Palette;
 }) => (
-	<span css={iconWrapperStyles(mediaType, pillar)}>
+	<span css={iconWrapperStyles(mediaType, palette)}>
 		<Icon mediaType={mediaType} />
 	</span>
 );
 
 const MediaDuration = ({
 	mediaDuration,
-	pillar,
+	palette,
 }: {
 	mediaDuration: number;
-	pillar: Theme;
-}) => <p css={durationStyles(pillar)}>{secondsToDuration(mediaDuration)}</p>;
+	palette: Palette;
+}) => <p css={durationStyles(palette)}>{secondsToDuration(mediaDuration)}</p>;
 
-export const MediaMeta = ({ mediaType, mediaDuration, pillar }: Props) => (
+export const MediaMeta = ({ mediaType, mediaDuration, palette }: Props) => (
 	<div css={wrapperStyles}>
-		<MediaIcon mediaType={mediaType} pillar={pillar} />
+		<MediaIcon mediaType={mediaType} palette={palette} />
 		&nbsp;
 		{mediaDuration && (
-			<MediaDuration mediaDuration={mediaDuration} pillar={pillar} />
+			<MediaDuration mediaDuration={mediaDuration} palette={palette} />
 		)}
 	</div>
 );

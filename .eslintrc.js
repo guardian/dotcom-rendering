@@ -54,7 +54,6 @@ module.exports = {
         'import/prefer-default-export': 'off',
         // TODO: remove
         '@typescript-eslint/explicit-module-boundary-types': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-return': 'off',

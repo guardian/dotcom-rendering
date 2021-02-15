@@ -274,6 +274,7 @@ export const ArticleRenderer: React.FC<{
 							<InstagramBlockComponent
 								key={i}
 								element={element}
+								index={i}
 							/>
 						</Figure>
 					);

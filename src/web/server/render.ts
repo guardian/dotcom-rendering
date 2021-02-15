@@ -67,6 +67,7 @@ export const render = (
 
 		res.status(200).send(resp);
 	} catch (e) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		res.status(500).send(`<pre>${e.stack}</pre>`);
 	}
 };

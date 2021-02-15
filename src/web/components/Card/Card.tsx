@@ -248,7 +248,7 @@ export const Card = ({
 								]}
 							>
 								{standfirst && (
-									<StandfirstWrapper>
+									<StandfirstWrapper palette={palette}>
 										{standfirst}
 									</StandfirstWrapper>
 								)}
@@ -268,15 +268,12 @@ export const Card = ({
 									age={
 										webPublicationDate ? (
 											<CardAge
-												design={format.design}
-												pillar={format.theme}
+												format={format}
+												palette={palette}
 												webPublicationDate={
 													webPublicationDate
 												}
 												showClock={showClock}
-												isFullCardImage={
-													isFullCardImage
-												}
 											/>
 										) : undefined
 									}
@@ -285,7 +282,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												pillar={format.theme}
+												palette={palette}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -296,8 +293,7 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												design={format.design}
-												pillar={format.theme}
+												palette={palette}
 												long={longCount}
 												short={shortCount}
 											/>
