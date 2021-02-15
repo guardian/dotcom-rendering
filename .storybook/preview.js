@@ -120,4 +120,5 @@ export const parameters = {
         viewports: guardianViewports,
         defaultViewport: 'wide',
     },
+	layout: 'fullscreen'
 }
