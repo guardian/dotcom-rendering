@@ -1077,12 +1077,12 @@ export const InstagramBlockComponentStory = () => {
 			centralBorder="full"
 		>
 			<div
-				className={css`
+				css={css`
 					max-width: 620px;
 					clear: left;
 				`}
 			>
-				<p className={paragraphStyle}>
+				<p css={paragraphStyle}>
 					Example of a instagram embed from an &apos;instagram&apos;
 					element type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/music/2017/aug/23/taylor-swift-reputation-new-album">
@@ -1111,7 +1111,7 @@ export const InstagramBlockComponentStory = () => {
 						/>
 					</ClickToView>
 				</Figure>
-				<p className={paragraphStyle}>The end.</p>,
+				<p css={paragraphStyle}>The end.</p>,
 			</div>
 		</ContainerLayout>
 	);
