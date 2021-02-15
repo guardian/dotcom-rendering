@@ -293,8 +293,7 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												design={format.design}
-												pillar={format.theme}
+												palette={palette}
 												long={longCount}
 												short={shortCount}
 											/>
