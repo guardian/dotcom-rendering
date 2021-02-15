@@ -80,7 +80,7 @@ const bodyWrapperStyles = css`
 	${articleWidthStyles}
 `;
 
-const galleryWrapperStyles = css`
+export const galleryWrapperStyles = css`
 	box-sizing: border-box;
 	padding-top: ${remSpace[3]};
 	padding-right: 0;
