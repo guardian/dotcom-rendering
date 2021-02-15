@@ -15,7 +15,6 @@ import Standard from 'components/standard/article';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
-import FootballScores from './footballScores';
 
 // ----- Functions ----- //
 

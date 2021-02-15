@@ -35,7 +35,8 @@ import {
 } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
 import { dateToString } from 'date';
-import { teamsFromFootballContent, teamsFromTags } from 'football';
+import { teamsFromFootballContent } from 'football';
+import FootballScores from 'components/footballScores';
 
 // ----- Styles ----- //
 
@@ -133,6 +134,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
+				<FootballScores item={item}/>
 				{footballPlaceholder}
 				<header>
 					<HeaderMedia item={item} />
