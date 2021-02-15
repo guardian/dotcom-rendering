@@ -2,7 +2,6 @@ import isChromatic from 'chromatic/isChromatic';
 
 import fetchMock from 'fetch-mock';
 import MockDate from 'mockdate';
-import { configure, addParameters } from '@storybook/react';
 
 import { commentCount } from '@root/fixtures/commentCounts';
 import { getFontsCss } from '@root/src/lib/fonts-css';
@@ -115,12 +114,10 @@ fetchMock
         },
     );
 
-addParameters({
-    viewport: {
+
+export const parameters = {
+	viewport: {
         viewports: guardianViewports,
         defaultViewport: 'wide',
     },
-});
-
-// automatically import all files ending in *.stories.tsx
-configure(require.context('../', true, /\.stories\.tsx?$/), module);
+}
