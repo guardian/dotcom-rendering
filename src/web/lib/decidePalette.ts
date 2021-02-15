@@ -162,6 +162,8 @@ const textCardHeadline = (format: Format): string => {
 	}
 };
 
+const textCardStandfirst = textCardHeadline;
+
 const textCardKicker = (format: Format): string => {
 	if (
 		format.theme === Special.SpecialReport &&
@@ -436,6 +438,7 @@ export const decidePalette = (format: Format): Palette => {
 			cardHeadline: textCardHeadline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
+			cardStandfirst: textCardStandfirst(format),
 			cardFooter: textCardFooter(format),
 		},
 		background: {

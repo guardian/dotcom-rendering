@@ -248,7 +248,7 @@ export const Card = ({
 								)}
 							>
 								{standfirst && (
-									<StandfirstWrapper>
+									<StandfirstWrapper palette={palette}>
 										{standfirst}
 									</StandfirstWrapper>
 								)}
