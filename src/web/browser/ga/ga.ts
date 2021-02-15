@@ -126,14 +126,21 @@ export const sendPageView = (): void => {
 	try {
 		const NG_STORAGE_KEY = 'gu.analytics.referrerVars';
 		const referrerVarsData = window.sessionStorage.getItem(NG_STORAGE_KEY);
-		const referrerVars = JSON.parse(referrerVarsData || '""');
-		if (referrerVars && referrerVars.value) {
+		const referrerVars: { [key: string]: any } = JSON.parse(
+			referrerVarsData || '{}',
+		);
+		if (referrerVars.value) {
+			const value = referrerVars.value as {
+				time: number;
+				tag: string;
+				path: string;
+			};
 			const d = new Date().getTime();
-			if (d - referrerVars.value.time < 60 * 1000) {
+			if (d - value.time < 60 * 1000) {
 				// One minute
-				ga(send, 'event', 'Click', 'Internal', referrerVars.value.tag, {
+				ga(send, 'event', 'Click', 'Internal', value.tag, {
 					nonInteraction: true, // to avoid affecting bounce rate
-					dimension12: referrerVars.value.path,
+					dimension12: value.path,
 				});
 			}
 			window.sessionStorage.removeItem(NG_STORAGE_KEY);

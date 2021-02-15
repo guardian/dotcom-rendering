@@ -20,5 +20,6 @@ export const clean = compose(
 			minifyCSS: true,
 			minifyJS: true,
 		}),
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	DOMPurify.sanitize,
 );

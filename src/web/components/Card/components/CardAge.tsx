@@ -1,34 +1,27 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
 import { makeRelativeDate } from '@root/src/web/lib/dateTime';
-import { decidePillarLight } from '@root/src/web/lib/decidePillarLight';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
-const ageStyles = (
-	design: Design,
-	pillar: Theme,
-	isFullCardImage?: boolean,
-) => {
-	// This is annoying but can't apply SVG color otherwise
-	const smallImageSvgColor =
-		design === Design.Live ? decidePillarLight(pillar) : neutral[46];
+type Props = {
+	format: Format;
+	palette: Palette;
+	webPublicationDate: string;
+	showClock?: boolean;
+};
 
-	const svgColor = isFullCardImage ? neutral[100] : smallImageSvgColor;
-
-	const smallImageTextColor =
-		design === Design.Live ? decidePillarLight(pillar) : neutral[60];
-
+const ageStyles = (format: Format, palette: Palette) => {
 	return css`
 		${textSans.xsmall()};
-		color: ${smallImageTextColor};
+		color: ${palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
@@ -39,7 +32,7 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${svgColor};
+			fill: ${palette.fill.cardIcon};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -48,24 +41,10 @@ const ageStyles = (
 
 		> time {
 			${textSans.xsmall({
-				fontWeight: design === Design.Media ? `bold` : `regular`,
+				fontWeight: format.design === Design.Media ? `bold` : `regular`,
 			})};
 		}
 	`;
-};
-
-const colourStyles = (design: Design, pillar: Theme) => {
-	switch (design) {
-		case Design.Live:
-			return css`
-				/* stylelint-disable-next-line color-no-hex */
-				color: ${decidePillarLight(pillar)};
-			`;
-		default:
-			return css`
-				color: ${neutral[60]};
-			`;
-	}
 };
 
 const fullCardImageTextStyles = css`
@@ -80,20 +59,11 @@ const fullCardImageTextStyles = css`
 	padding-right: ${space[1]}px;
 `;
 
-type Props = {
-	design: Design;
-	pillar: Theme;
-	webPublicationDate: string;
-	showClock?: boolean;
-	isFullCardImage?: boolean;
-};
-
 export const CardAge = ({
-	design,
-	pillar,
+	format,
+	palette,
 	webPublicationDate,
 	showClock,
-	isFullCardImage,
 }: Props) => {
 	const displayString = makeRelativeDate(
 		new Date(webPublicationDate).getTime(),
@@ -107,13 +77,13 @@ export const CardAge = ({
 	}
 
 	return (
-		<span
-			className={cx(
-				ageStyles(design, pillar, isFullCardImage),
-				colourStyles(design, pillar),
-			)}
-		>
-			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
+		<span className={cx(ageStyles(format, palette))}>
+			<span
+				className={cx(
+					format.display === Display.Immersive &&
+						fullCardImageTextStyles,
+				)}
+			>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate}>{displayString}</time>
 			</span>

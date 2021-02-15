@@ -1925,10 +1925,10 @@
     tunnel-agent "^0.6.0"
     uuid "^3.3.2"
 
-"@cypress/skip-test@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@cypress/skip-test/-/skip-test-2.5.0.tgz#ba3fc8c441a9dda5fa410e783006107ff3b9d050"
-  integrity sha512-OqyToxRLUG/EAfZa0w8sAooOW6tr8pYCBpo3SLsKycrV2RTj9Sy7rB+5U0MvES87kWCHtO10qMIESuw8RiEYyQ==
+"@cypress/skip-test@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@cypress/skip-test/-/skip-test-2.6.0.tgz#73fc58477b436638cfdfaa212b5378ff81b9b3ee"
+  integrity sha512-H5dnS+o0HaSKPexR5wuwF2YGq5praxRZMVodba/Ar9/SuDEWVlW3qxbn9ar06MFjtQnMsHjo4QHQoZzrUPLrHA==
 
 "@cypress/xvfb@^1.2.4":
   version "1.2.4"
@@ -2212,10 +2212,10 @@
     "@guardian/src-label" "^2.7.1"
     "@guardian/src-user-feedback" "^2.7.1"
 
-"@guardian/src-svgs@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-2.7.1.tgz#5a9ff0bdcaf0693e749ad9bebab6067d9735a124"
-  integrity sha512-2D119cFHGktQxJ0tvccJ7sXxpN28IfoO+rUIOLmjSc7MdbZzk+8eFlrOtoFHDB0LjsEcVDXjlVNy7pjWBGuDIA==
+"@guardian/src-svgs@^2.8.2":
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-2.8.2.tgz#4e05c4f144c8507d39166aa6aa8c146c8a3612ae"
+  integrity sha512-PyZJ6jwUKUMsHdKywz/Pgk7oHjvSDdEqTZq6vkiOPJLTjEraEdyO6amu7L7ynVO58CmgzJ+6SwOOAtilHU/LRw==
 
 "@guardian/src-text-area@^2.7.1":
   version "2.7.1"
@@ -15322,15 +15322,10 @@ prettier@~2.0.5:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
   integrity sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
 
-pretty-bytes@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
-  integrity sha1-sr+C5zUNZcbDOqlaqlpPYyf2HNk=
-
-pretty-bytes@^5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.4.1.tgz#cd89f79bbcef21e3d21eb0da68ffe93f803e884b"
-  integrity sha512-s1Iam6Gwz3JI5Hweaz4GoCD1WUNUIyzePFy5+Js2hjwGVt2Z79wNN+ZKOZ2vB6C+Xs6njyB84Z1IthQg8d9LxA==
+pretty-bytes@^5.4.1, pretty-bytes@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.5.0.tgz#0cecda50a74a941589498011cf23275aa82b339e"
+  integrity sha512-p+T744ZyjjiaFlMUZZv6YPC5JrkNj8maRmPaQCWFJFplUAzpIUTRaTcS+7wmZtUoFXHtESJb23ISliaWyz3SHA==
 
 pretty-error@^2.1.1:
   version "2.1.1"

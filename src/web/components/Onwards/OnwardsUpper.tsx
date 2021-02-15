@@ -285,24 +285,55 @@ export const OnwardsUpper = ({
 
 	const ABTestAPI = useAB();
 
-	const containerDataUrl = getContainerDataUrl(pillar, edition, ajaxUrl);
+	const curatedDataUrl = getContainerDataUrl(pillar, edition, ajaxUrl);
 
-	const inCuratedContainerTest2 = ABTestAPI.isUserInVariant(
-		'CuratedContainerTest2',
-		'fixed',
+	const inSmallCardCarouselTest = ABTestAPI.isUserInVariant(
+		'CuratedContent3Carousel',
+		'curated-content-variant-carousel-small',
 	);
 
-	const inCuratedCarouselTest = ABTestAPI.isUserInVariant(
-		'CuratedContainerTest2',
-		'carousel',
+	const inLargeCardCarouselTest = ABTestAPI.isUserInVariant(
+		'CuratedContent3Carousel',
+		'curated-content-variant-carousel-large',
 	);
 
-	return (
-		<div className={onwardsWrapper}>
-			{inCuratedCarouselTest && (
+	const inControlCarouselTest = ABTestAPI.isUserInVariant(
+		'CuratedContent3Carousel',
+		'curated-content-control',
+	);
+
+	if (inSmallCardCarouselTest) {
+		return (
+			<div className={onwardsWrapper}>
 				<Section showTopBorder={true}>
 					<OnwardsData
-						url={containerDataUrl}
+						url={curatedDataUrl}
+						limit={8}
+						ophanComponentName="curated-content"
+						Container={Carousel}
+						pillar={pillar}
+					/>
+				</Section>
+				{url && (
+					<Section>
+						<OnwardsData
+							url={url}
+							limit={8}
+							ophanComponentName={ophanComponentName}
+							Container={Carousel}
+							pillar={pillar}
+						/>
+					</Section>
+				)}
+			</div>
+		);
+	}
+	if (inLargeCardCarouselTest) {
+		return (
+			<div className={onwardsWrapper}>
+				<Section showTopBorder={true}>
+					<OnwardsData
+						url={curatedDataUrl}
 						limit={8}
 						ophanComponentName="curated-content"
 						Container={Carousel}
@@ -310,11 +341,27 @@ export const OnwardsUpper = ({
 						isFullCardImage={true}
 					/>
 				</Section>
-			)}
-			{inCuratedContainerTest2 && (
+				{url && (
+					<Section>
+						<OnwardsData
+							url={url}
+							limit={8}
+							ophanComponentName={ophanComponentName}
+							Container={Carousel}
+							pillar={pillar}
+							isFullCardImage={true}
+						/>
+					</Section>
+				)}
+			</div>
+		);
+	}
+	return (
+		<div className={onwardsWrapper}>
+			{inControlCarouselTest && (
 				<Section showTopBorder={true}>
 					<OnwardsData
-						url={containerDataUrl}
+						url={curatedDataUrl}
 						limit={8}
 						ophanComponentName="curated-content"
 						Container={OnwardsLayout}
@@ -322,6 +369,7 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
+
 			{url && (
 				<Section>
 					<OnwardsData

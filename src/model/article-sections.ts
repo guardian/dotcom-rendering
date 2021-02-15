@@ -89,7 +89,7 @@ export const sections: SectionNielsenAPI[] = [
 	},
 ];
 
-const subsections = {
+const subsections: { [key: string]: any } = {
 	books: sections[1],
 	'childrens-books-site': sections[1],
 	business: sections[2],
@@ -154,7 +154,7 @@ const subsections = {
 };
 
 export const findBySubsection = (subsection: string): SectionNielsenAPI => {
-	const section = (subsections as any)[subsection];
+	const section = subsections[subsection];
 	if (section) {
 		return section;
 	}

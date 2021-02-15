@@ -22,7 +22,7 @@ type ResultData = { [key: string]: string | boolean };
 
 type DependencyResult = {
 	name: string;
-	value: Promise<string | boolean | null | undefined>;
+	value: Promise<string | boolean | null | undefined | void>;
 };
 const buildFailureResponse = (name: string, value: any, data: ResultData) => ({
 	isSuccessful: false,
@@ -87,9 +87,10 @@ const checkBrazeDependencies = async (
 				return buildFailureResponse(name, result, data);
 			}
 		} catch (e) {
+			const error = e as Error;
 			return buildFailureResponse(
 				name,
-				e && e.message ? e.message : e,
+				error && error.message ? error.message : error,
 				data,
 			);
 		}
