@@ -192,7 +192,7 @@ const textCardKicker = (format: Format): string => {
 	}
 };
 
-const textCardAge = (format: Format): string => {
+const textCardFooter = (format: Format): string => {
 	switch (format.design) {
 		case Design.Comment:
 			switch (format.theme) {
@@ -318,7 +318,7 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillCardClock = (format: Format): string => {
+const fillCardIcon = (format: Format): string => {
 	switch (format.design) {
 		case Design.Comment:
 			switch (format.theme) {
@@ -395,7 +395,7 @@ export const decidePalette = (format: Format): Palette => {
 			cardHeadline: textCardHeadline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
-			cardAge: textCardAge(format),
+			cardFooter: textCardFooter(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -409,7 +409,7 @@ export const decidePalette = (format: Format): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
-			cardClock: fillCardClock(format),
+			cardIcon: fillCardIcon(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),
