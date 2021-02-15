@@ -7,7 +7,7 @@ const fullWidthStyles = css`
 `;
 
 /**
- * Note the iframe created in this compoenet is dependent on the embedIFrame function being
+ * Note the iframe created in this component is dependent on the embedIFrame function being
  * called to be size correctly.
  * src/web/browser/embedIframe/embedIframe.ts
  */

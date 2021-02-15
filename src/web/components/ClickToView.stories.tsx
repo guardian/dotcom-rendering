@@ -1083,8 +1083,8 @@ export const InstagramBlockComponentStory = () => {
 				`}
 			>
 				<p className={paragraphStyle}>
-					Example of a instagram embed from an &apos;instagram&apos; element
-					type, the embed source article is{' '}
+					Example of a instagram embed from an &apos;instagram&apos;
+					element type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/music/2017/aug/23/taylor-swift-reputation-new-album">
 						here
 					</a>
