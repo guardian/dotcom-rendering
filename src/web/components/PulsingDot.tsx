@@ -28,6 +28,9 @@ const livePulse = keyframes`{
 
 const animate = css`
 	animation: ${livePulse} 1s infinite;
+	@media (prefers-reduced-motion: reduce) {
+		animation: none;
+	}
 `;
 
 interface Props {
