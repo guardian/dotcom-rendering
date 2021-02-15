@@ -111,6 +111,7 @@ export default {
 	component: Article,
 	title: 'Editions/Article',
 	decorators: [withKnobs],
+	parameters: { layout: 'fullscreen' },
 };
 
 export {
