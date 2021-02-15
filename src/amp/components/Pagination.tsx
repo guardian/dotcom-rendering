@@ -17,7 +17,7 @@ const paginationStyle = css`
 	align-items: center;
 `;
 
-const paginationLinkStyle = (isActive: boolean, isMarginRight: boolean) => css`
+const paginationLinkStyle = (isActive: boolean) => css`
 	width: 36px;
 	border-radius: 100%;
 
@@ -27,7 +27,7 @@ const paginationLinkStyle = (isActive: boolean, isMarginRight: boolean) => css`
 	height: 36px;
 	display: inline-block;
 
-	margin-right: ${isMarginRight ? '5px' : '0px'};
+	margin-right: 0px;
 
 	span {
 		fill: ${palette.neutral[100]};
@@ -43,34 +43,14 @@ const paginationLinkStyle = (isActive: boolean, isMarginRight: boolean) => css`
 	}
 `;
 
+const marginRightStyle = css`
+	margin-right: 5px;
+`;
+
 export const Pagination: React.SFC<{
 	pagination?: Pagination;
 	guardianURL: string;
 }> = ({ pagination, guardianURL }) => {
-	const link = (
-		url: string,
-		icon: JSX.Element,
-		suffix?: string,
-		hasRightMargin: boolean = false,
-	): JSX.Element => {
-		const styles = paginationLinkStyle(
-			suffix !== undefined,
-			hasRightMargin,
-		);
-
-		const attrs = {
-			className: styles,
-			href: suffix ? url + suffix : undefined,
-		};
-
-		return (
-			// eslint-disable-next-line react/jsx-props-no-spreading
-			<a {...attrs}>
-				<span>{icon}</span>
-			</a>
-		);
-	};
-
 	if (!pagination) {
 		return null;
 	}
@@ -78,13 +58,34 @@ export const Pagination: React.SFC<{
 	return (
 		<div css={paginationStyle}>
 			<p>
-				{link(
-					guardianURL,
-					<ChevronLeftDouble />,
-					pagination.newest,
-					true,
-				)}
-				{link(guardianURL, <ChevronLeftSingle />, pagination.newer)}
+				<a
+					css={[
+						paginationLinkStyle(pagination.newest !== undefined),
+						marginRightStyle,
+					]}
+					href={
+						pagination.newest
+							? `${guardianURL}${pagination.newest}`
+							: ''
+					}
+				>
+					<span>
+						<ChevronLeftDouble />
+					</span>
+				</a>
+
+				<a
+					css={[paginationLinkStyle(pagination.newest !== undefined)]}
+					href={
+						pagination.newest
+							? `${guardianURL}${pagination.newest}`
+							: ''
+					}
+				>
+					<span>
+						<ChevronLeftSingle />
+					</span>
+				</a>
 			</p>
 
 			<p>
@@ -92,13 +93,34 @@ export const Pagination: React.SFC<{
 			</p>
 
 			<p>
-				{link(
-					guardianURL,
-					<ChevronRightSingle />,
-					pagination.older,
-					true,
-				)}
-				{link(guardianURL, <ChevronRightDouble />, pagination.oldest)}
+				<a
+					css={[
+						paginationLinkStyle(pagination.older !== undefined),
+						marginRightStyle,
+					]}
+					href={
+						pagination.older
+							? `${guardianURL}${pagination.older}`
+							: ''
+					}
+				>
+					<span>
+						<ChevronRightSingle />
+					</span>
+				</a>
+
+				<a
+					css={[paginationLinkStyle(pagination.older !== undefined)]}
+					href={
+						pagination.older
+							? `${guardianURL}${pagination.older}`
+							: ''
+					}
+				>
+					<span>
+						<ChevronRightDouble />
+					</span>
+				</a>
 			</p>
 		</div>
 	);
