@@ -7,7 +7,7 @@ import { CacheProvider } from '@emotion/core';
 import { escapeData } from '@root/src/lib/escapeData';
 import {
 	getScriptArrayFromFilename,
-	getByChunkName,
+	getScriptArrayFromChunkName,
 	loadableManifestJson,
 } from '@root/src/lib/assets';
 
@@ -103,33 +103,44 @@ export const document = ({ data }: Props): string => {
 		// @ts-ignore
 		loadableExtractor.addChunk(chunk.chunkName); // addChunk is *undocumented* and not in TS types. It allows manually adding chunks to extractor.
 	});
-	// Pass the array of extracted (read: built with addChunk) scripts to
-	// generatedScriptTags so that we can build a script tag array of
-	// modern and legacy scripts.
-	const arrayOfLoadableScriptObjects: {
+
+	let arrayOfLoadableScriptObjects: {
 		src: string;
-		module: boolean;
-	}[] = loadableExtractor
+		legacy: boolean;
+	}[] = [];
+
+	// Pre assets returns an array of objects structured as:
+	// {
+	//     filename: 'elements-RichLinkComponent.js',
+	//     scriptType: 'script',
+	//     chunk: 'elements-RichLinkComponent',
+	//     url: '/elements-RichLinkComponent.js',
+	//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
+	//     type: 'mainAsset',
+	//     linkType: 'preload'
+	// }
+	//
+
+	const preAssets: {
+		filename: string;
+		scriptType: string;
+		chunk: string;
+		url: string;
+		path: string;
+		type: string;
+		linkType: string;
+	}[] =
+		// PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		.getPreAssets() // PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
-		// Pre assets returns an array of objects structured as:
-		// {
-		//     filename: 'elements-RichLinkComponent.js',
-		//     scriptType: 'script',
-		//     chunk: 'elements-RichLinkComponent',
-		//     url: '/elements-RichLinkComponent.js',
-		//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
-		//     type: 'mainAsset',
-		//     linkType: 'preload'
-		// }
-		.reduce(
-			(scriptArr: [], script: { filename: string }) => [
-				...scriptArr,
-				...getScriptArrayFromFilename(script.filename),
-			],
-			[],
-		);
+		loadableExtractor.getPreAssets();
+
+	preAssets.forEach((script) => {
+		arrayOfLoadableScriptObjects = [
+			...arrayOfLoadableScriptObjects,
+			...getScriptArrayFromFilename(script.filename),
+		];
+	});
 
 	// Loadable generates configuration script elements as the first two items
 	// of the script element array. We need to generate the react component version
@@ -172,10 +183,10 @@ export const document = ({ data }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			...getByChunkName('ophan'),
+			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			...getByChunkName('sentryLoader'),
-			...getByChunkName('dynamicImport'),
+			...getScriptArrayFromChunkName('sentryLoader'),
+			...getScriptArrayFromChunkName('dynamicImport'),
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(Boolean),
 	);
@@ -188,16 +199,22 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getByChunkName('lotame'),
-		...getByChunkName('atomIframe'),
-		...getByChunkName('embedIframe'),
-		...getByChunkName('newsletterEmbedIframe'),
+		...getScriptArrayFromChunkName('lotame'),
+		...getScriptArrayFromChunkName('atomIframe'),
+		...getScriptArrayFromChunkName('embedIframe'),
+		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
 	]);
 
-	const gaChunk = getByChunkName('ga');
+	const gaChunk = getScriptArrayFromChunkName('ga');
+	const modernScript = gaChunk.filter(
+		(script) => script && script.legacy === false,
+	)[0];
+	const legacyScript = gaChunk.filter(
+		(script) => script && script.legacy === true,
+	)[0];
 	const gaPath = {
-		modern: gaChunk.filter((script) => script.legacy === false)[0].src,
-		legacy: gaChunk.filter((script) => script.legacy === true)[0].src,
+		modern: modernScript.src,
+		legacy: legacyScript.src,
 	};
 
 	/**

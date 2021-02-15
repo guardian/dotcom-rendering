@@ -60,6 +60,9 @@ const windowGuardian = {
 };
 
 // Stub global Guardian object
+// We should never be able to directly set things to the global window object.
+// But in this case we want to stub things for testing, so it's ok to ignore this rule
+// @ts-ignore
 window.guardian = windowGuardian;
 
 // Mock Local Storage

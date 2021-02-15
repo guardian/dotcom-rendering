@@ -140,9 +140,13 @@ const getBrazeMetaFromQueryString = (): Meta | null => {
 					logButtonClickWithBraze: () => {},
 				};
 			} catch (e) {
+				const error = e as Error;
 				// Parsing failed. Log a message and fall through.
 				// eslint-disable-next-line no-console
-				console.log(`There was an error with ${qsArg}: `, e.message);
+				console.log(
+					`There was an error with ${qsArg}: `,
+					error.message,
+				);
 			}
 		}
 	}

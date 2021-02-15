@@ -15,7 +15,10 @@ export const updateIframeHeight = (queryString: string): Promise<void> => {
 		});
 		if (iframe) {
 			try {
-				const message = JSON.parse(event.data);
+				const message = JSON.parse(event.data) as {
+					type: string;
+					value: string;
+				};
 				switch (message.type) {
 					case 'set-height':
 						iframe.height = message.value;
