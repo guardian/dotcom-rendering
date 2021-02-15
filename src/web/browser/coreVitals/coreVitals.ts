@@ -1,12 +1,10 @@
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
-import { getCookie } from '../cookie';
-
 
 const jsonData = {
 	'page_view_id': '',
 	'received_timestamp': `${new Date().toISOString()}`,
 	'id': 'prod',
-	'received_date': '2021-02-03',
+	'received_date': new Date().toISOString().slice(0, 10),
     'fid': null,
     'cls': null,
     'lcp': null,
@@ -14,16 +12,14 @@ const jsonData = {
     'ttfb': null,
 }
 
-
-
 export const coreVitals = (): void =>
 {
-    type coreVitalsArgs = {
+    type CoreVitalsArgs = {
         name: string;
         value: number;
     };
 
-const getValue = ({ name, value }: coreVitalsArgs): void => {
+	const getValue = ({ name, value }: CoreVitalsArgs): void => {
 
     switch(name){
         case('FCP'):
@@ -41,7 +37,9 @@ const getValue = ({ name, value }: coreVitalsArgs): void => {
         case('TTFB'):
             jsonData.ttfb = parseFloat(value.toFixed(6));
             break;
-    }
+	}
+
+	// If CLS has been calculated
     if(jsonData.cls !== null)
     {
         fetch('https://performance-events.guardianapis.com/core-web-vitals', {
@@ -56,9 +54,16 @@ const getValue = ({ name, value }: coreVitalsArgs): void => {
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
             body: JSON.stringify(jsonData)
 		})
-		console.log(JSON.stringify(jsonData));
     };
 }
+
+	// Set page view and browser ID
+	if(window.guardian && window.guardian.ophan)
+    {
+		jsonData.page_view_id = window.guardian.ophan.pageViewId;
+		jsonData.id = window.guardian.config.ophan.browserId;
+	}
+
 
 	getCLS(getValue, false);
 	getFID(getValue);
@@ -67,30 +72,4 @@ const getValue = ({ name, value }: coreVitalsArgs): void => {
     getTTFB(getValue);
 
 
-    document.addEventListener("DOMContentLoaded", function() {
-
-        if(window.guardian && window.guardian.ophan)
-        {
-			jsonData.page_view_id = window.guardian.ophan.pageViewId;
-			jsonData.id = window.guardian.config.ophan.browserId;
-		}
-
-		// Temporary to look at what happens to CLS over time
-        logCLS();
-    });
-
 };
-
-const logCLS = () => {
-	let cls = 0;
-	new PerformanceObserver(entryList => {
-		const entries = entryList.getEntries() || [];
-		entries.forEach(e => {
-			if (!e.hadRecentInput) { // omit entries likely caused by user input
-				cls += e.value;
-				console.log(`CLS DELTA: ${ e.value}`);
-			}
-		});
-		console.log(`Cumulative Layout Shift: ${cls}`);
-	}).observe({ type: "layout-shift", buffered: true })
-}
