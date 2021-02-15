@@ -1,5 +1,5 @@
 import { Ad } from '@root/src/amp/components/Ad';
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 
 const clear = css`
 	clear: both;
@@ -19,11 +19,11 @@ interface AdInfo {
 type Props = {
 	items: JSX.Element[];
 	adSlots: number[];
-	adClassName: string;
+	adcss: SerializedStyles;
 	adInfo: AdInfo;
 };
 
-export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
+export const WithAds = ({ items, adSlots, adcss, adInfo }: Props) => {
 	const commercialConfig = {
 		usePrebid: adInfo.switches.ampPrebid,
 		usePermutive: adInfo.switches.permutive,
@@ -33,7 +33,7 @@ export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
 		// data-sort-time and id needed for amp-live-list validation
 		<div id={id} data-sort-time="1">
 			<Ad
-				css={adClassName}
+				adcss={adcss}
 				edition={adInfo.edition}
 				section={adInfo.section}
 				contentType={adInfo.contentType}

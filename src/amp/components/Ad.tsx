@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -176,16 +176,16 @@ export const Ad: React.SFC<{
 	contentType: string;
 	config: CommercialConfig;
 	commercialProperties: CommercialProperties;
-	className: string;
+	adcss: SerializedStyles;
 }> = ({
 	edition,
 	section,
 	contentType,
 	config,
 	commercialProperties,
-	className,
+	adcss,
 }) => (
-	<div css={[adStyle, className]}>
+	<div css={[adStyle, adcss]}>
 		{ampAdElem(
 			'US',
 			edition,
