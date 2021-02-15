@@ -1,4 +1,6 @@
+import { css } from '@emotion/react';
 import { render } from '@testing-library/react';
+
 import { Ad } from '@root/src/amp/components/Ad';
 
 type ObjectType = { [key: string]: any };
@@ -39,7 +41,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				className=""
+				adcss={css``}
 			/>,
 		);
 
@@ -93,7 +95,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				className=""
+				adcss={css``}
 			/>,
 		);
 
@@ -138,7 +140,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				className=""
+				adcss={css``}
 			/>,
 		);
 
@@ -184,7 +186,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				className=""
+				adcss={css``}
 			/>,
 		);
 
