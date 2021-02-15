@@ -21,7 +21,7 @@ type Props = {
 const ageStyles = (format: Format, palette: Palette) => {
 	return css`
 		${textSans.xsmall()};
-		color: ${palette.text.cardAge};
+		color: ${palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like GuardianLines) */
@@ -32,7 +32,7 @@ const ageStyles = (format: Format, palette: Palette) => {
 		}
 
 		svg {
-			fill: ${palette.fill.cardClock};
+			fill: ${palette.fill.cardIcon};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;

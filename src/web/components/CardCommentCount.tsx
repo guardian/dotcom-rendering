@@ -18,7 +18,7 @@ const containerStyles = (palette: Palette) => css`
 	${textSans.xsmall()};
 	padding-left: 5px;
 	padding-right: 5px;
-	color: ${palette.text.cardAge};
+	color: ${palette.text.cardFooter};
 `;
 
 const svgStyles = (palette: Palette) => css`
@@ -27,7 +27,7 @@ const svgStyles = (palette: Palette) => css`
 		height: 14px;
 		width: 14px;
 		margin-right: 2px;
-		fill: ${palette.fill.cardClock};
+		fill: ${palette.fill.cardIcon};
 	}
 `;
 
