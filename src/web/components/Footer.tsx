@@ -195,7 +195,7 @@ const FooterLinks: React.FC<{
 				</a>
 			</li>
 		));
-		const key = linkGroup.reduce((acc, { text }) => `acc-${text}`, '');
+		const key = linkGroup.reduce((_acc, { text }) => `acc-${text}`, '');
 		return <ul key={key}>{linkList}</ul>;
 	});
 

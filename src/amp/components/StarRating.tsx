@@ -36,7 +36,7 @@ export const StarRating: React.FC<{
 	const stars = (n: number) => {
 		return Array(5)
 			.fill(0)
-			.map((el, i) => {
+			.map((_, i) => {
 				if (i < n) {
 					return <Star key={i} />;
 				}

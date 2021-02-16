@@ -65,7 +65,7 @@ if (process.env.NODE_ENV === 'production') {
 	app.use(express.json({ limit: '50mb' }));
 	app.use(compression());
 
-	app.get('/_healthcheck', (req: Request, res: Response) => {
+	app.get('/_healthcheck', (_req: Request, res: Response) => {
 		res.status(200).send('OKAY');
 	});
 
@@ -117,7 +117,7 @@ if (process.env.NODE_ENV === 'production') {
 	app.use('/ArticlePerfTest', renderArticlePerfTest);
 	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
 
-	app.get('/', (req: Request, res: Response) => {
+	app.get('/', (_req: Request, res: Response) => {
 		try {
 			res.send(`
                 <!DOCTYPE html>
@@ -144,7 +144,7 @@ if (process.env.NODE_ENV === 'production') {
 
 	// express requires all 4 args here:
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	app.use((e: any, req: any, res: Response, next: any) => {
+	app.use((e: any, _req: any, res: Response, _next: any) => {
 		const error = e as Error;
 		res.status(500).send(`<pre>${error.stack}</pre>`);
 	});

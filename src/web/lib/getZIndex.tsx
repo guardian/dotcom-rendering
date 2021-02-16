@@ -51,7 +51,7 @@ const indices = [
 type ZIndex = typeof indices[number];
 
 function reverseArray(array: any[]) {
-	return array.map((item, index) => array[array.length - 1 - index]);
+	return array.map((_item, index) => array[array.length - 1 - index]);
 }
 
 const decideIndex = (name: string): number | null => {

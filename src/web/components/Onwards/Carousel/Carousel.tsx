@@ -371,7 +371,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	<div>
 		<Title title={heading} pillar={pillar} />
 		<div css={dotsStyle}>
-			{trails.map((value, i) => (
+			{trails.map((_value, i) => (
 				<span
 					onClick={() => goToIndex(i)}
 					// This button is not particularly useful for keyboard users as the stories

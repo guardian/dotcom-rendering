@@ -68,7 +68,7 @@ const init = async (): Promise<void> => {
 
 		// This is how we lazy load Sentry. We setup custom functions and
 		// listeners to inject Sentry when an error happens
-		window.onerror = (message, url, line, column, error) =>
+		window.onerror = (_message, _url, _line, _column, error) =>
 			injectSentry(error);
 		window.onunhandledrejection = (event: undefined | { reason?: any }) =>
 			event && injectSentry(event.reason);
