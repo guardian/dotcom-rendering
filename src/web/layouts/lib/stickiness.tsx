@@ -33,7 +33,8 @@ const bannerWrapper = css`
 	bottom: 0;
 	${getZIndexImportant('banner')}
 	max-height: 80vh;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	width: 100% !important;
 	background: none !important;
