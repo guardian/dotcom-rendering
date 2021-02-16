@@ -54,9 +54,9 @@ export const coreVitals = (): void => {
 		console.log(window.location.hostname);
 
 		const endpoint =
-			window.location.hostname === 'www.theguardian.com'
-				? 'https://performance-events.guardianapis.com/core-web-vitals'
-				: 'http://performance-events.code.dev-guardianapis.com/core-web-vitals';
+			window.guardian.config.stage === 'DEV'
+				? 'http://performance-events.code.dev-guardianapis.com/core-web-vitals'
+				: 'https://performance-events.guardianapis.com/core-web-vitals';
 
 		// If CLS has been calculated
 		if (jsonData.cls !== null) {
