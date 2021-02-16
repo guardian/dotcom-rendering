@@ -76,11 +76,7 @@ export const ArticleRenderer: React.FC<{
 			switch (element._type) {
 				case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 					return (
-						<Figure
-							key={`audio-atom-${i}`}
-							id={`audio-atom-${i}`}
-							role={element.role}
-						>
+						<Figure id={`audio-atom-${i}`} role={element.role}>
 							<AudioAtom
 								id={element.id}
 								trackUrl={element.trackUrl}
