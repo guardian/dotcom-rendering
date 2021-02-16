@@ -174,9 +174,10 @@ export const document = ({ data }: Props): string => {
 			{ src: polyfillIO },
 			...getByChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
+			...getByChunkName('coreVitals'),
 			...getByChunkName('sentryLoader'),
 			...getByChunkName('dynamicImport'),
-			...getByChunkName('coreVitals'),
+
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(Boolean),
 	);
