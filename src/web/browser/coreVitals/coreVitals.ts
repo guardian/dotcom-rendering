@@ -14,11 +14,14 @@ type CoreWebVitalsPayload = {
 	ttfb: null | number;
 };
 
+const timestamp = new Date();
+const date = new Date().toISOString().slice(0, 10);
+
 const jsonData: CoreWebVitalsPayload = {
 	id: '',
 	page_view_id: '',
-	received_timestamp: new Date().toISOString(),
-	received_date: new Date().toISOString().slice(0, 10),
+	received_timestamp: timestamp.toISOString(),
+	received_date: date,
 	fid: null,
 	cls: null,
 	lcp: null,
