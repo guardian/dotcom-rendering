@@ -165,10 +165,10 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
 
 			${from.wide} {
 				grid-template-columns:
-					219px /* Left Column (220 - 1px border) */
-					1px /* Vertical grey border */
-					1fr /* Main content */
-					300px; /* Right Column */
+					219px
+					1px
+					1fr
+					300px;
 
 				${hasPreFurniture
 					? gridTemplateWidePreFurnished
@@ -177,10 +177,10 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
 
 			${until.wide} {
 				grid-template-columns:
-					140px /* Left Column */
-					1px /* Vertical grey border */
-					1fr /* Main content */
-					300px; /* Right Column */
+					140px
+					1px
+					1fr
+					300px;
 
 				${hasPreFurniture
 					? gridTemplateWidePreFurnished
@@ -189,15 +189,15 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
 
 			${until.leftCol} {
 				grid-template-columns:
-					1fr /* Main content */
-					300px; /* Right Column */
+					1fr
+					300px;
 				${hasPreFurniture
 					? gridTemplateLeftColPreFurnished
 					: gridTemplateLeftCol}
 			}
 
 			${until.desktop} {
-				grid-template-columns: 1fr; /* Main content */
+				grid-template-columns: 1fr;
 				${hasPreFurniture
 					? gridTemplateDesktopPreFurnished
 					: gridTemplateDesktop}
@@ -206,7 +206,7 @@ const layoutGrid = (hasPreFurniture?: boolean) =>
 			${until.tablet} {
 				grid-column-gap: 0px;
 
-				grid-template-columns: 1fr; /* Main content */
+				grid-template-columns: 1fr;
 				${hasPreFurniture
 					? gridTemplateTabletPreFurnished
 					: gridTemplateTablet}
