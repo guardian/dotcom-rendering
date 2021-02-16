@@ -38,6 +38,7 @@ const interviewStyles = css`
 		margin-left: ${remSpace[6]};
 		padding-left: ${remSpace[3]};
 		padding-right: ${remSpace[3]};
+		border-right: 1px solid ${border.secondary};
 	}
 
 	${from.wide} {
@@ -45,7 +46,6 @@ const interviewStyles = css`
 	}
 	${borderWidthStyles}
 	border-bottom: 1px solid ${border.secondary};
-	border-right: 1px solid ${border.secondary};
 `;
 
 const immersiveStyles = css`
