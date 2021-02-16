@@ -136,7 +136,7 @@
         "@babel/runtime": "^7.12.5",
         "@guardian/prettier": "^0.4.2",
         "@loadable/babel-plugin": "^5.13.2",
-        "@loadable/webpack-plugin": "^5.14.0",
+        "@loadable/webpack-plugin": "^5.14.2",
         "@storybook/addon-essentials": "^6.1.18",
         "@storybook/react": "^6.1.18",
         "@testing-library/dom": "^7.27.1",
