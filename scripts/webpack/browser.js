@@ -79,7 +79,13 @@ module.exports = ({ isLegacyJS }) => ({
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								'@babel/preset-react',
+								[
+									'@babel/preset-react',
+									{
+										runtime: 'automatic',
+										importSource: '@emotion/react',
+									},
+								],
 								// @babel/preset-env is used for legacy browsers
 								// @babel/preset-modules is used for modern browsers
 								// this allows us to reduce bundle sizes

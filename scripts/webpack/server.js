@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { siteName } = require('../frontend/config');
 
 module.exports = () => ({
@@ -17,15 +18,18 @@ module.exports = () => ({
 	},
 	externals: [
 		'@loadable/component',
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
 		}),
 		({ request }, callback) => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			return request.endsWith('loadable-manifest-browser.json')
 				? callback(null, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			return request.endsWith('loadable-manifest-browser.legacy.json')
 				? callback(null, `commonjs ${request}`)
 				: callback();
@@ -44,8 +48,13 @@ module.exports = () => ({
 						loader: 'babel-loader',
 						options: {
 							presets: [
-								// TODO: remove @babel/preset-react once we stop using JSX in server folder
-								'@babel/preset-react',
+								[
+									'@babel/preset-react',
+									{
+										runtime: 'automatic',
+										importSource: '@emotion/react',
+									},
+								],
 								[
 									'@babel/preset-env',
 									{
