@@ -26,7 +26,6 @@ import {
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
-import { setup as setupFootballScores } from 'client/football';
 
 // ----- Run ----- //
 
@@ -456,4 +455,3 @@ hydrateQuizAtoms();
 footerInit();
 localDates();
 richLinks();
-setupFootballScores();

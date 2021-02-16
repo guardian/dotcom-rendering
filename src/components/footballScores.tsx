@@ -6,13 +6,11 @@ import { from } from '@guardian/src-foundations/mq';
 import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { MatchStatusKind, TeamLocation } from 'football';
-import type { Team, MatchStatus } from 'football';
+import type { MatchStatus } from 'football';
 import React, { FC } from 'react';
-
-// ----- Subcomponents ----- //
-
+import { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
 interface TeamProps {
-    team: Team;
+    team: FootballTeam;
     location: TeamLocation;
 }
 
@@ -94,7 +92,7 @@ const TeamScore: FC<TeamProps> = ({ team, location }) =>
             </div>
         </div>
         <ul css={scorerStyles(location)}>
-            {team.scorers.map(scorer => <li>{scorer.name} {scorer.time}'</li>)}
+            {team.scorers.map(scorer => <li>{scorer.player} {scorer.timeInMinutes}'</li>)}
         </ul>
     </section>
 
@@ -140,11 +138,11 @@ const MatchStatusIcon: FC<MatchStatusIconProps> = ({ status }) => {
 // ----- Component ----- //
 
 interface Props {
-    league: string;
-    stadium: string;
-    homeTeam: Team;
-    awayTeam: Team;
-    status: MatchStatus;
+    league: string,
+    stadium: string,
+    status: MatchStatus,
+    homeTeam: FootballTeam,
+    awayTeam: FootballTeam
 }
 
 const styles = css`

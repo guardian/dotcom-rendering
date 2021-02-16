@@ -6,7 +6,7 @@ import { Lines } from '@guardian/src-ed-lines';
 import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { Display, map, withDefault } from '@guardian/types';
+import { Display, map, OptionKind, withDefault } from '@guardian/types';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Metadata from 'components/metadata';
@@ -26,7 +26,7 @@ import type {
 } from 'item';
 import { pipe2 } from 'lib';
 import React from 'react';
-import type { FC, ReactNode, ReactElement } from 'react';
+import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -34,8 +34,8 @@ import {
 	onwardStyles,
 } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
-import { dateToString } from 'date';
-import { teamsFromFootballContent } from 'football';
+import { parseMatchScores } from 'football';
+import FootballScores from 'components/footballScores';
 
 // ----- Styles ----- //
 
@@ -115,26 +115,24 @@ const Standard: FC<Props> = ({ item, children }) => {
 		  )
 		: null;
 
-		const footballPlaceholder =
-		pipe2(
-			//teamsFromTags(item.tags),
-			teamsFromFootballContent(item.footballContent),
-			map(teams =>
-				<div
-					id="js-football-scores"
-					data-team-a={teams[0]}
-					data-team-b={teams[1]}
-					data-date={dateToString(item.publishDate)}
-				/>,
-			),
-			withDefault<ReactElement | null>(null),
-		);
+	const matchScores = parseMatchScores(item.footballContent);
 
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
-				{/* <FootballScores item={item}/> */}
-				{footballPlaceholder}
+				{
+					matchScores.kind === OptionKind.Some ? (
+						<div id="js-football-scores">
+							<FootballScores 
+								league={matchScores.value.league}
+								stadium={matchScores.value.stadium}
+								homeTeam={matchScores.value.homeTeam} 
+								awayTeam={matchScores.value.awayTeam} 
+								status={matchScores.value.status}
+							/>
+						</div>
+					) : null
+				}
 				<header>
 					<HeaderMedia item={item} />
 					<Series item={item} />
