@@ -1,8 +1,8 @@
 import React from 'react';
-import { extractCritical } from 'emotion-server';
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import createCache from '@emotion/cache';
 import { renderToString } from 'react-dom/server';
-import { cache } from 'emotion';
-import { CacheProvider } from '@emotion/core';
 
 import { escapeData } from '@root/src/lib/escapeData';
 import {
@@ -15,12 +15,6 @@ import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
-
-interface RenderToStringResult {
-	html: string;
-	css: string;
-	ids: string[];
-}
 
 const generateScriptTags = (
 	scripts: Array<{ src: string; legacy?: boolean }>,
@@ -45,16 +39,21 @@ interface Props {
 export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
-	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
-		renderToString(
-			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
-			<CacheProvider value={cache}>
-				<React.StrictMode>
-					<DecideLayout CAPI={CAPI} NAV={NAV} />
-				</React.StrictMode>
-			</CacheProvider>,
-		),
+
+	const key = 'dcr';
+	const cache = createCache({ key });
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCritical } = createEmotionServer(cache);
+
+	const element = (
+		<CacheProvider value={cache}>
+			<React.StrictMode>
+				<DecideLayout CAPI={CAPI} NAV={NAV} />
+			</React.StrictMode>
+		</CacheProvider>
 	);
+
+	const { html, css, ids: cssIDs } = extractCritical(renderToString(element));
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const loadableExtractor = new ChunkExtractor({

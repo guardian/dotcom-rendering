@@ -1,7 +1,8 @@
-import { extractCritical } from 'emotion-server';
+import { CacheProvider } from '@emotion/react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { CacheProvider } from '@emotion/core';
-import { cache } from 'emotion';
+import createEmotionServer from '@emotion/server/create-instance';
+import createCache from '@emotion/cache';
+
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import he from 'he';
@@ -29,8 +30,12 @@ export const document = ({
 	scripts: string[];
 	metadata: Metadata;
 }) => {
+	const key = 'dcr';
+	const cache = createCache({ key });
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCritical } = createEmotionServer(cache);
+
 	const { html, css }: RenderToStringResult = extractCritical(
-		// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
 		renderToStaticMarkup(
 			<CacheProvider value={cache}>{body}</CacheProvider>,
 		),
