@@ -6,7 +6,7 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { SlotBodyEnd } from '@frontend/web/components/SlotBodyEnd';
+import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
@@ -828,7 +828,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 					isMinuteArticle={CAPI.pageType.isMinuteArticle}
 					isPaidContent={CAPI.pageType.isPaidContent}
-					isSensitive={CAPI.config.isSensitive}
 					tags={CAPI.tags}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
