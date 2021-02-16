@@ -72,10 +72,10 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${from.wide} {
 					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+						219px
+						1px
+						1fr
+						300px;
 					grid-template-areas:
 						'title  border  headline    headline'
 						'lines  border  media       media'
@@ -87,10 +87,10 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.wide} {
 					grid-template-columns:
-						140px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+						140px
+						1px
+						1fr
+						300px;
 					grid-template-areas:
 						'title  border  headline    headline'
 						'lines  border  media       media'
@@ -102,8 +102,8 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.leftCol} {
 					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
+						1fr
+						300px;
 					grid-template-areas:
 						'title      right-column'
 						'headline   right-column'
@@ -117,7 +117,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.desktop} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 1fr;
 					grid-template-areas:
 						'title'
 						'headline'
@@ -130,7 +130,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 1fr;
 					grid-template-areas:
 						'media'
 						'title'
