@@ -313,6 +313,7 @@ type CarouselCardProps = {
 	webPublicationDate: string;
 	kickerText?: string;
 	imageUrl?: string;
+	imageMap?: CarouselImagesMap;
 	isFullCardImage?: boolean;
 	dataComponent?: string;
 	dataLinkName?: string;
@@ -323,6 +324,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	trailPalette,
 	linkTo,
 	imageUrl,
+	imageMap,
 	headlineText,
 	webPublicationDate,
 	kickerText,
@@ -346,6 +348,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			webPublicationDate={webPublicationDate}
 			kickerText={kickerText || ''}
 			imageUrl={imageUrl || ''}
+			imageMap={imageMap}
 			showClock={true}
 			alwaysVertical={true}
 			minWidthInPixels={220}
@@ -622,6 +625,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							palette: trailPalette,
 							webPublicationDate,
 							image: imageUrl,
+							carouselImages,
 							kickerText,
 						} = trail;
 						return (
@@ -634,6 +638,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 								headlineText={headlineText}
 								webPublicationDate={webPublicationDate}
 								imageUrl={imageUrl}
+								imageMap={carouselImages}
 								kickerText={kickerText}
 								isFullCardImage={isFullCardImage}
 								dataLinkName={`${variantComponentName}-card-position-${i}`}

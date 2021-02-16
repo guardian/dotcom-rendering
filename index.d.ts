@@ -739,12 +739,17 @@ interface RichLinkBlockLoadable extends ComponentNameChunkMap {
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
 
+interface CarouselImagesMap {
+	'300'?: string;
+	'460'?: string;
+}
 interface BaseTrailType {
     url: string;
     headline: string;
     isLiveBlog: boolean;
     webPublicationDate: string;
     image?: string;
+	carouselImages?: CarouselImagesMap;
     avatarUrl?: string;
     mediaType?: MediaType;
     mediaDuration?: number;
