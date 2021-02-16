@@ -10143,6 +10143,105 @@ exports[`Storyshots Editions/Byline Showcase 1`] = `
 </div>
 `;
 
+exports[`Storyshots Editions/GalleryImage Default 1`] = `
+.emotion-0 {
+  box-sizing: border-box;
+  padding-top: 0.75rem;
+  padding-right: 0;
+  padding-left: 0;
+  border: none;
+}
+
+@media (min-width:740px) {
+  .emotion-0 {
+    width: 538px;
+    padding-right: 1rem;
+    border-right: 1px solid #FFFFFF;
+  }
+}
+
+@media (min-width:1300px) {
+  .emotion-0 {
+    width: 557px;
+  }
+}
+
+.emotion-1 {
+  margin: 0 0 1.5rem;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-width:740px) {
+  .emotion-1 p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.emotion-2 {
+  width: 100%;
+  height: calc(100% * 1);
+  background-color: #F6F6F6;
+  color: #999999;
+  display: block;
+}
+
+@media (min-width:740px) {
+  .emotion-3 {
+    position: absolute;
+    top: -0.25rem;
+    width: 170px;
+    right: calc(-170px - 2rem);
+  }
+}
+
+.emotion-4 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+}
+
+<div
+  className="emotion-0"
+>
+  <figure
+    className="editions-gallery-figure emotion-1"
+  >
+    <picture>
+      <source
+        media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+        sizes="100%"
+        srcSet="https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=140&quality=85&fit=bounds&s=2bf934ce61f9f3137904793ea5b85c9a 140w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=500&quality=85&fit=bounds&s=94dc44b35cec62a756b7987b9d4ddd0c 500w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=1000&quality=85&fit=bounds&s=95116aeeb4c32cdef0f794d0fddca0a1 1000w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=1500&quality=85&fit=bounds&s=2bb1e5fa8401f287b74b010d87752e70 1500w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=2000&quality=85&fit=bounds&s=8e3dc20909198c6c7d3386531ef4ab32 2000w"
+      />
+      <source
+        sizes="100%"
+        srcSet="https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=140&quality=85&fit=bounds&s=2bf934ce61f9f3137904793ea5b85c9a 140w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=500&quality=85&fit=bounds&s=94dc44b35cec62a756b7987b9d4ddd0c 500w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=1000&quality=85&fit=bounds&s=95116aeeb4c32cdef0f794d0fddca0a1 1000w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=1500&quality=85&fit=bounds&s=2bb1e5fa8401f287b74b010d87752e70 1500w, https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=2000&quality=85&fit=bounds&s=8e3dc20909198c6c7d3386531ef4ab32 2000w"
+      />
+      <img
+        alt="image"
+        className="emotion-2"
+        data-ratio={1}
+        src="https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=500&quality=85&fit=bounds&s=94dc44b35cec62a756b7987b9d4ddd0c"
+      />
+    </picture>
+    <div
+      className="editions-gallery-caption emotion-3"
+    >
+      <p
+        className="emotion-4"
+      >
+        Most of these images were taken when male partnerships were illegal. Approximately 120 years ago, this couple held opposite edges of a sign. They posed for that photo in a very different world than the one we live in today.
+      </p>
+    </div>
+  </figure>
+</div>
+`;
+
 exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
 .emotion-0 {
   margin: 0;
@@ -11978,6 +12077,121 @@ exports[`Storyshots Editions/Standfirst Showcase 1`] = `
   </p>
 </div>
 `;
+
+exports[`Storyshots Editions/Star Rating Default 1`] = `
+.emotion-0 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.emotion-1 {
+  background-color: #FFE500;
+  display: inline-block;
+}
+
+.emotion-1:nth-of-type(5) {
+  padding-right: 2px;
+}
+
+.emotion-1 svg {
+  margin: 0 -0.125rem;
+  height: 1.75rem;
+}
+
+.emotion-4 {
+  background-color: #FFE500;
+  display: inline-block;
+  fill: transparent;
+  stroke: #121212;
+}
+
+.emotion-4:nth-of-type(5) {
+  padding-right: 2px;
+}
+
+.emotion-4 svg {
+  margin: 0 -0.125rem;
+  height: 1.75rem;
+}
+
+<div
+  className="emotion-0"
+>
+  <span
+    className="emotion-1"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="emotion-1"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="emotion-1"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="emotion-4"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+  <span
+    className="emotion-4"
+  >
+    <svg
+      viewBox="0 0 30 30"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.4499 23.5499L20.1249 16.45L26.1499 12.025L25.8499 11.075H18.4L16.1 4H15.05L12.775 11.075H5.3L5 12.025L11.025 16.45L8.74999 23.5499L9.52498 24.1499L15.575 19.7249L21.6249 24.1499L22.4499 23.5499Z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+</div>
+`;
+
+exports[`Storyshots Editions/Star Rating Not Review 1`] = `null`;
 
 exports[`Storyshots Follow Default 1`] = `
 .emotion-0 {
