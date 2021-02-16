@@ -1,5 +1,7 @@
-import React from 'react';
-import { css, SerializedStyles } from '@emotion/react';
+// @ts-ignore
+import { jsx as _jsx } from 'react/jsx-runtime';
+import { ClassNames } from '@emotion/react';
+
 import { unescapeData } from '@root/src/lib/escapeData';
 
 // Ideally we want to want to avoid an unnecessary 'span' wrapper,
@@ -13,34 +15,31 @@ import { unescapeData } from '@root/src/lib/escapeData';
 export const RewrappedComponent = ({
 	isUnwrapped,
 	html,
-	elCss = css``,
+	elCss,
 	tagName,
 }: {
 	isUnwrapped: boolean;
 	html: string;
-	elCss?: SerializedStyles;
+	elCss?: string;
 	tagName: string;
-}) => {
-	const element = isUnwrapped ? tagName : 'span';
+}) => (
+	<ClassNames>
+		{({ css }) => {
+			const element = isUnwrapped ? tagName : 'span';
 
-	// If we implement a span, we want to apply the CSS to the inner element
-	// to ensure we still style correctly
-	const innerElCss = css`
-		${tagName} {
-			${elCss}
-		}
-	`;
+			const innerElCss = css`
+				${tagName} {
+					${elCss || css``}
+				}
+			`;
 
-	const style = isUnwrapped ? elCss : innerElCss;
-
-	// Create a react element from the tagName passed in OR
-	// default to <span> if we've not been able to unwrap based on prefix & suffix
-	const ElementComponent = React.createElement(`${element}`, {
-		className: style,
-		dangerouslySetInnerHTML: {
-			__html: unescapeData(html),
-		},
-	});
-
-	return ElementComponent;
-};
+			const style = isUnwrapped ? elCss : innerElCss;
+			return _jsx(`${element}`, {
+				className: style,
+				dangerouslySetInnerHTML: {
+					__html: unescapeData(html),
+				},
+			});
+		}}
+	</ClassNames>
+);

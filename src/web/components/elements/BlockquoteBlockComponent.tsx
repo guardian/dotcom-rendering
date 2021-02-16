@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { ClassNames } from '@emotion/react';
 
 import { body } from '@guardian/src-foundations/typography';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
@@ -14,34 +14,19 @@ type Props = {
 };
 
 const BlockquoteRow = ({ children }: { children: React.ReactNode }) => (
-	<blockquote
-		css={css`
-			display: flex;
-			flex-direction: row;
-		`}
-	>
-		{children}
-	</blockquote>
+	<ClassNames>
+		{({ css }) => (
+			<blockquote
+				css={css`
+					display: flex;
+					flex-direction: row;
+				`}
+			>
+				{children}
+			</blockquote>
+		)}
+	</ClassNames>
 );
-
-const baseBlockquoteStyles = css`
-	margin-bottom: 16px;
-	${body.medium()};
-	font-style: italic;
-`;
-
-const simpleBlockquoteStyles = css`
-	${baseBlockquoteStyles}
-	margin-top: 16px;
-	margin-right: 0;
-	margin-bottom: 16px;
-	margin-left: 33px;
-`;
-
-const quotedBlockquoteStyles = css`
-	${baseBlockquoteStyles}
-	color: ${neutral[46]};
-`;
 
 export const BlockquoteBlockComponent: React.FC<Props> = ({
 	html,
@@ -73,21 +58,41 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 		return (
 			<BlockquoteRow>
 				<QuoteIcon colour={pillarPalette[pillar].main} size="medium" />
-				<RewrappedComponent
-					isUnwrapped={isUnwrapped}
-					html={unwrappedHtml}
-					elCss={quotedBlockquoteStyles}
-					tagName={unwrappedElement}
-				/>
+				<ClassNames>
+					{({ css }) => (
+						<RewrappedComponent
+							isUnwrapped={isUnwrapped}
+							html={unwrappedHtml}
+							elCss={css`
+								margin-bottom: 16px;
+								${body.medium()};
+								font-style: italic;
+								color: ${neutral[46]};
+							`}
+							tagName={unwrappedElement}
+						/>
+					)}
+				</ClassNames>
 			</BlockquoteRow>
 		);
 	}
 	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={unwrappedHtml}
-			elCss={simpleBlockquoteStyles}
-			tagName={unwrappedElement}
-		/>
+		<ClassNames>
+			{({ css }) => (
+				<RewrappedComponent
+					isUnwrapped={isUnwrapped}
+					html={unwrappedHtml}
+					elCss={css`
+						${body.medium()};
+						font-style: italic;
+						margin-top: 16px;
+						margin-right: 0;
+						margin-bottom: 16px;
+						margin-left: 33px;
+					`}
+					tagName={unwrappedElement}
+				/>
+			)}
+		</ClassNames>
 	);
 };

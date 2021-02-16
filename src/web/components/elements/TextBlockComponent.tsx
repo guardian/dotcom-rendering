@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { ClassNames } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
@@ -98,58 +98,6 @@ const sanitiserOptions = {
 	},
 };
 
-const paraStyles = css`
-	margin-bottom: 16px;
-	${body.medium()};
-
-	ul {
-		margin-bottom: 12px;
-	}
-
-	${from.tablet} {
-		ul {
-			margin-bottom: 16px;
-		}
-	}
-
-	li {
-		margin-bottom: 6px;
-		padding-left: 20px;
-
-		p {
-			display: inline;
-		}
-	}
-
-	li:before {
-		display: inline-block;
-		content: '';
-		border-radius: 6px;
-		height: 12px;
-		width: 12px;
-		margin-right: 8px;
-		background-color: ${neutral[86]};
-		margin-left: -20px;
-	}
-
-	/* Subscript and Superscript styles */
-	sub {
-		bottom: -0.25em;
-	}
-
-	sup {
-		top: -0.5em;
-	}
-
-	sub,
-	sup {
-		font-size: 75%;
-		line-height: 0;
-		position: relative;
-		vertical-align: baseline;
-	}
-`;
-
 export const TextBlockComponent = ({
 	html,
 	format,
@@ -181,34 +129,89 @@ export const TextBlockComponent = ({
 		? unwrappedHtml.substr(firstLetter.length)
 		: unwrappedHtml;
 
-	if (
-		shouldShowDropCap({
-			format,
-			isFirstParagraph,
-			forceDropCap,
-		}) &&
-		firstLetter &&
-		isLongEnough(remainingLetters)
-	) {
-		return (
-			<p css={paraStyles}>
-				<DropCap letter={firstLetter} format={format} />
-				<RewrappedComponent
-					isUnwrapped={isUnwrapped}
-					html={sanitise(remainingLetters, sanitiserOptions)}
-					elCss={paraStyles}
-					tagName="span"
-				/>
-			</p>
-		);
-	}
-
 	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles}
-			tagName={unwrappedElement || 'p'}
-		/>
+		<ClassNames>
+			{({ css }) => {
+				const paraStyles = css`
+					margin-bottom: 16px;
+					${body.medium()};
+
+					ul {
+						margin-bottom: 12px;
+					}
+
+					${from.tablet} {
+						ul {
+							margin-bottom: 16px;
+						}
+					}
+
+					li {
+						margin-bottom: 6px;
+						padding-left: 20px;
+
+						p {
+							display: inline;
+						}
+					}
+
+					li:before {
+						display: inline-block;
+						content: '';
+						border-radius: 6px;
+						height: 12px;
+						width: 12px;
+						margin-right: 8px;
+						background-color: ${neutral[86]};
+						margin-left: -20px;
+					}
+
+					/* Subscript and Superscript styles */
+					sub {
+						bottom: -0.25em;
+					}
+
+					sup {
+						top: -0.5em;
+					}
+
+					sub,
+					sup {
+						font-size: 75%;
+						line-height: 0;
+						position: relative;
+						vertical-align: baseline;
+					}
+				`;
+
+				const showDropCaps =
+					shouldShowDropCap({
+						format,
+						isFirstParagraph,
+						forceDropCap,
+					}) &&
+					firstLetter &&
+					isLongEnough(remainingLetters);
+
+				return showDropCaps ? (
+					<p className={paraStyles}>
+						<DropCap letter={firstLetter} format={format} />
+						<RewrappedComponent
+							isUnwrapped={isUnwrapped}
+							html={sanitise(remainingLetters, sanitiserOptions)}
+							elCss={paraStyles}
+							tagName="span"
+						/>
+					</p>
+				) : (
+					<RewrappedComponent
+						isUnwrapped={isUnwrapped}
+						html={sanitise(unwrappedHtml, sanitiserOptions)}
+						elCss={paraStyles}
+						tagName={unwrappedElement || 'p'}
+					/>
+				);
+			}}
+		</ClassNames>
 	);
 };
