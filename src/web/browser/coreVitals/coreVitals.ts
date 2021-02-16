@@ -1,18 +1,29 @@
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
-// Stops ts assuming json values are null
-const temp: any = null;
+// This sends data to the test table
 
-const jsonData = {
+type CoreWebVitalsPayload = {
+	page_view_id: string;
+	received_timestamp: string;
+	id: string;
+	received_date: string;
+	fid: null | number;
+	cls: null | number;
+	lcp: null | number;
+	fcp: null | number;
+	ttfb: null | number;
+};
+
+const jsonData: CoreWebVitalsPayload = {
+	id: '',
 	page_view_id: '',
-	received_timestamp: `${new Date().toISOString()}`,
-	id: 'prod',
+	received_timestamp: new Date().toISOString(),
 	received_date: new Date().toISOString().slice(0, 10),
-	fid: temp,
-	cls: temp,
-	lcp: temp,
-	fcp: temp,
-	ttfb: temp,
+	fid: null,
+	cls: null,
+	lcp: null,
+	fcp: null,
+	ttfb: null,
 };
 
 export const coreVitals = (): void => {
@@ -21,22 +32,22 @@ export const coreVitals = (): void => {
 		value: number;
 	};
 
-	const getValue = ({ name, value }: CoreVitalsArgs): void => {
+	const addToJson = ({ name, value }: CoreVitalsArgs): void => {
 		switch (name) {
 			case 'FCP':
-				jsonData.fcp = parseFloat(value.toFixed(6));
+				jsonData.fcp = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'CLS':
-				jsonData.cls = parseFloat(value.toFixed(6));
+				jsonData.cls = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'LCP':
-				jsonData.lcp = parseFloat(value.toFixed(6));
+				jsonData.lcp = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'FID':
-				jsonData.fid = parseFloat(value.toFixed(6));
+				jsonData.fid = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'TTFB':
-				jsonData.ttfb = parseFloat(value.toFixed(6));
+				jsonData.ttfb = Math.round(value * 1000000) / 1000000;
 				break;
 		}
 
@@ -66,9 +77,9 @@ export const coreVitals = (): void => {
 		jsonData.id = window.guardian.config.ophan.browserId;
 	}
 
-	getCLS(getValue, false);
-	getFID(getValue);
-	getLCP(getValue);
-	getFCP(getValue);
-	getTTFB(getValue);
+	getCLS(addToJson, false);
+	getFID(addToJson);
+	getLCP(addToJson);
+	getFCP(addToJson);
+	getTTFB(addToJson);
 };
