@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
+import * as emotionTheming from '@emotion/react';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import {
 	getWeeklyArticleHistory,
