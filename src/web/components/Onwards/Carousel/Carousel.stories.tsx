@@ -39,13 +39,17 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 const trails: TrailType[] = [
 	{
 		url:
-			'https://www.theguardian.com/politics/live/2020/sep/15/uk-coronavirus-live-covid-19-second-wave-testing-capacity-government-brexit-politics-boris-johnson',
+			'https://www.theguardian.com/politics/live/2021/feb/17/uk-covid-nationwide-rapid-testing-lockdown-coronavirus-latest-update',
 		linkText:
-			'UK coronavirus live: Covid testing shortage will take weeks to resolve, says Matt Hancock',
+			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
 		showByline: false,
-		byline: 'Andrew Sparrow',
+		byline: 'Yohannes Lowe',
 		image:
-			'https://i.guim.co.uk/img/media/9e3148e304f3d6d6eeafadaf4b707eb4b6f4f64c/0_196_3500_2099/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=4c6370b54991b05550d1fa7b78f69829',
+			'https://i.guim.co.uk/img/media/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg?width=300&quality=85&auto=format&fit=max&s=9a17ef5d7a6240caa29965407ef912e0',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg?width=300&quality=85&auto=format&fit=max&s=9a17ef5d7a6240caa29965407ef912e0',
+			460: 'https://i.guim.co.uk/img/media/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg?width=460&quality=85&auto=format&fit=max&s=bfec50f21befd99c68868a648ac002c9',
+		},
 		isLiveBlog: true,
 		format: {
 			display: Display.Standard,
@@ -57,20 +61,24 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Live,
 		}),
-		webPublicationDate: '2020-09-15T13:46:52.000Z',
+		webPublicationDate: '2021-02-17T12:45:05.000Z',
 		headline:
-			'UK coronavirus: testing shortage will take weeks to resolve, says Matt Hancock',
-		shortUrl: 'https://theguardian.com/p/ezyq3',
+			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
+		shortUrl: 'https://gu.com/p/gekj6',
 	},
 	{
 		url:
-			'https://www.theguardian.com/society/2020/sep/15/ex-tory-mp-charlie-elphicke-jailed-for-two-years-for-sexual-assaults',
+			'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
 		linkText:
-			'Ex-Tory MP Charlie Elphicke jailed for two years for sexual assaults',
+			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
 		showByline: false,
-		byline: 'Ben Quinn',
+		byline: 'Nicola Davis and agency',
 		image:
-			'https://i.guim.co.uk/img/media/877e5e3f240c1958504827796249cd8a46caf0a1/0_116_1969_1181/master/1969.jpg?width=300&quality=85&auto=format&fit=max&s=444e206a147224a7e50e0eeb4780620c',
+			'https://i.guim.co.uk/img/media/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg?width=300&quality=85&auto=format&fit=max&s=501112ecfd78672fc4a19133053fe04a',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg?width=300&quality=85&auto=format&fit=max&s=501112ecfd78672fc4a19133053fe04a',
+			460: 'https://i.guim.co.uk/img/media/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg?width=460&quality=85&auto=format&fit=max&s=72289dbb38ff18ad9e953bb47b96a1c4',
+		},
 		isLiveBlog: false,
 		format: {
 			display: Display.Standard,
@@ -82,71 +90,24 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		}),
-		webPublicationDate: '2020-09-15T11:44:46.000Z',
-		headline: 'Ex-Tory MP jailed for two years for sexual assaults',
-		shortUrl: 'https://theguardian.com/p/ezmac',
-		kickerText: 'Charlie Elphicke',
-	},
-	{
-		url:
-			'https://www.theguardian.com/politics/2020/sep/15/no-10-rejects-any-concessions-for-rebel-tories-on-brexit-bill',
-		linkText:
-			'No 10 rejects any concessions for rebel Tories on Brexit bill',
-		showByline: false,
-		byline: 'Jessica Elgot and Peter Walker',
-		image:
-			'https://i.guim.co.uk/img/media/f7c663fe69644c3ca5fd402fab40f3b5501064cc/0_99_4505_2703/master/4505.jpg?width=300&quality=85&auto=format&fit=max&s=fca4c60f52a8e1c686d48742d43e6887',
-		isLiveBlog: false,
-		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		},
-		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		}),
-		webPublicationDate: '2020-09-15T13:24:45.000Z',
-		headline: 'No 10 rejects any concessions for rebel Tories on bill',
-		shortUrl: 'https://theguardian.com/p/ezn2d',
-		kickerText: 'Brexit',
-	},
-	{
-		url:
-			'https://www.theguardian.com/environment/2020/sep/15/every-global-target-to-stem-destruction-of-nature-by-2020-missed-un-report-aoe',
-		linkText:
-			'World fails to meet a single target to stop destruction of nature – UN report',
-		showByline: false,
-		byline: 'Patrick Greenfield',
-		image:
-			'https://i.guim.co.uk/img/media/b204a14ffd1911591e9aa0f2df6769798bbdd1c1/0_225_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=b7f695cc8b23cec50344273aa46503bf',
-		isLiveBlog: false,
-		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		},
-		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		}),
-		webPublicationDate: '2020-09-15T13:15:36.000Z',
+		webPublicationDate: '2021-02-17T10:03:02.000Z',
 		headline:
-			'World fails to meet a single target to stop destruction of nature – UN report',
-		shortUrl: 'https://theguardian.com/p/ezgye',
-		kickerText: 'Environment',
+			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
+		shortUrl: 'https://gu.com/p/gey5n',
 	},
 	{
 		url:
-			'https://www.theguardian.com/world/2020/sep/15/alexei-navalny-poisoned-russian-opposition-leader-photo-hospital',
+			'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
 		linkText:
-			"'Hi, this is Navalny': poisoned Russian opposition leader posts hospital photo",
+			'Scottish government inadequately prepared for Covid – watchdog',
 		showByline: false,
-		byline: 'Shaun Walker in Moscow',
+		byline: 'Libby Brooks Scotland correspondent',
 		image:
-			'https://i.guim.co.uk/img/media/f285ba35a26e663f9d5e2808558f644fa12765e1/0_136_960_576/master/960.jpg?width=300&quality=85&auto=format&fit=max&s=b33e6ce3806d5e7ddb26d4decbb824a5',
+			'https://i.guim.co.uk/img/media/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg?width=300&quality=85&auto=format&fit=max&s=4de26576c2388e49ee9c9414d5c46d6d',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg?width=300&quality=85&auto=format&fit=max&s=4de26576c2388e49ee9c9414d5c46d6d',
+			460: 'https://i.guim.co.uk/img/media/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg?width=460&quality=85&auto=format&fit=max&s=5c00af8c60a6927dc8c46fea69e6e7d3',
+		},
 		isLiveBlog: false,
 		format: {
 			display: Display.Standard,
@@ -158,46 +119,24 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		}),
-		webPublicationDate: '2020-09-15T10:41:04.000Z',
-		headline: 'Poisoned Russian opposition leader posts hospital photo',
-		shortUrl: 'https://theguardian.com/p/ezmtk',
-		kickerText: "'Hi, this is Navalny'",
-	},
-	{
-		url:
-			'https://www.theguardian.com/media/2020/sep/15/gary-lineker-takes-bbc-pay-cut-and-agrees-to-tweet-more-carefully',
-		linkText:
-			'Gary Lineker takes 25% BBC pay cut and agrees to tweet more carefully',
-		showByline: false,
-		byline: 'Jim Waterson Media editor',
-		image:
-			'https://i.guim.co.uk/img/media/3ec6d136faade765328e86db332665d19e011d1c/0_1268_3203_1922/master/3203.jpg?width=300&quality=85&auto=format&fit=max&s=b8ec99f56446dc12f76c6880d43b1202',
-		isLiveBlog: false,
-		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		},
-		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		}),
-		webPublicationDate: '2020-09-15T11:00:32.000Z',
+		webPublicationDate: '2021-02-17T11:11:43.000Z',
 		headline:
-			'Gary Lineker takes 25% pay cut and agrees to tweet more carefully',
-		shortUrl: 'https://theguardian.com/p/ezmcp',
-		kickerText: 'BBC',
+			'Scottish government inadequately prepared for Covid, says watchdog',
+		shortUrl: 'https://gu.com/p/gey2h',
 	},
 	{
 		url:
-			'https://www.theguardian.com/us-news/2020/sep/15/us-election-kim-darroch-donald-trump-joe-biden',
+			'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
 		linkText:
-			'‘The US feels very volatile’: former ambassador warns of election violence',
+			'‘Encouraging’ signs for Covid vaccine as over-80s deaths fall in England',
 		showByline: false,
-		byline: 'Julian Borger in Washington',
+		byline: 'Anna Leach, Ashley Kirk and Pamela Duncan',
 		image:
-			'https://i.guim.co.uk/img/media/cf291623610b4e9bd53adad56ea1752c5557ad21/0_26_5636_3382/master/5636.jpg?width=300&quality=85&auto=format&fit=max&s=444feb3e9cc898bda708438d05ea6941',
+			'https://i.guim.co.uk/img/media/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=51c9ef2f26b312a7c057d86e9a53f365',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=51c9ef2f26b312a7c057d86e9a53f365',
+			460: 'https://i.guim.co.uk/img/media/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=a6ac6e3f75c8338cc1afed646f484943',
+		},
 		isLiveBlog: false,
 		format: {
 			display: Display.Standard,
@@ -209,46 +148,24 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		}),
-		webPublicationDate: '2020-09-15T09:30:22.000Z',
-		headline: 'Former ambassador warns of election violence',
-		shortUrl: 'https://theguardian.com/p/ezk38',
-		kickerText: '‘The US feels very volatile’',
-	},
-	{
-		url:
-			'https://www.theguardian.com/us-news/2020/sep/15/trump-iran-retaliate-1000-times-greater-force',
-		linkText:
-			"Trump threatens to retaliate to any Iran attack with '1,000 times greater' force",
-		showByline: false,
-		byline: 'Tom McCarthy',
-		image:
-			'https://i.guim.co.uk/img/media/c38b10a48e27c463ce16d058e02aafda4328e52f/0_20_2462_1478/master/2462.jpg?width=300&quality=85&auto=format&fit=max&s=63656ef63ad936d92d96316f13ce2715',
-		isLiveBlog: false,
-		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		},
-		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
-		}),
-		webPublicationDate: '2020-09-15T13:04:57.000Z',
+		webPublicationDate: '2021-02-16T16:00:55.000Z',
 		headline:
-			"Trump threatens to retaliate to any attack with '1,000 times greater' force",
-		shortUrl: 'https://theguardian.com/p/ezmpz',
-		kickerText: 'Iran',
+			'‘Encouraging’ signs for Covid vaccine as over-80s deaths fall in England',
+		shortUrl: 'https://gu.com/p/g94y7',
 	},
 	{
 		url:
-			'https://www.theguardian.com/world/2020/sep/15/after-fire-greece-vows-to-empty-lesbos-of-all-refugees-by-easter',
+			'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
 		linkText:
-			'Greece vows to empty Lesbos of all refugees by Easter after fire',
+			'Contact tracing alone has little impact on curbing Covid spread, report finds',
 		showByline: false,
-		byline: 'Helena Smith in Athens Philip Oltermann in Berlin',
+		byline: 'Nicola Davis and Natalie Grover',
 		image:
-			'https://i.guim.co.uk/img/media/8c0eff269da77ac303734e8717705d4b70f7d5e2/0_97_5472_3283/master/5472.jpg?width=300&quality=85&auto=format&fit=max&s=3b45f3f609dd7aee06eb1428a172bb8c',
+			'https://i.guim.co.uk/img/media/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg?width=300&quality=85&auto=format&fit=max&s=63ca0f0e218f3c7d886231b544a82cbd',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg?width=300&quality=85&auto=format&fit=max&s=63ca0f0e218f3c7d886231b544a82cbd',
+			460: 'https://i.guim.co.uk/img/media/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg?width=460&quality=85&auto=format&fit=max&s=c418c5d1966c7da232eb9fb58e5bbd30',
+		},
 		isLiveBlog: false,
 		format: {
 			display: Display.Standard,
@@ -260,36 +177,98 @@ const trails: TrailType[] = [
 			theme: Pillar.News,
 			design: Design.Article,
 		}),
-		webPublicationDate: '2020-09-15T13:28:24.000Z',
+		webPublicationDate: '2021-02-16T18:22:53.000Z',
 		headline:
-			'Government vows to empty Lesbos of all refugees by Easter after fire',
-		shortUrl: 'https://theguardian.com/p/ezm92',
-		kickerText: 'Greece',
+			'Contact tracing alone has little impact on curbing Covid spread, report finds',
+		shortUrl: 'https://gu.com/p/geeq2',
 	},
 	{
 		url:
-			'https://www.theguardian.com/books/2020/sep/15/most-diverse-booker-prize-shortlist-is-also-almost-all-american-hilary-mantel',
+			'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
 		linkText:
-			'Most diverse Booker prize shortlist ever as Hilary Mantel misses out',
+			'Ethnicity and poverty are Covid risk factors, new Oxford modelling tool shows',
 		showByline: false,
-		byline: 'Alison Flood',
+		byline:
+			'Sarah Boseley Health editor and Aamna Mohdin Community affairs correspondent',
 		image:
-			'https://i.guim.co.uk/img/media/f022aacc31e1e95a07f382206c9b8e5620214e0a/0_0_2560_1536/master/2560.jpg?width=300&quality=85&auto=format&fit=max&s=b4a6348eb191bf5d366ed6282f2ada70',
+			'https://i.guim.co.uk/img/media/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg?width=300&quality=85&auto=format&fit=max&s=206ae21754ca45db0f098b08091562ef',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg?width=300&quality=85&auto=format&fit=max&s=206ae21754ca45db0f098b08091562ef',
+			460: 'https://i.guim.co.uk/img/media/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg?width=460&quality=85&auto=format&fit=max&s=ba37fece37f9819111a7ded88284e535',
+		},
 		isLiveBlog: false,
 		format: {
 			display: Display.Standard,
-			theme: Pillar.Culture,
+			theme: Pillar.News,
 			design: Design.Article,
 		},
 		palette: decidePalette({
 			display: Display.Standard,
-			theme: Pillar.Culture,
+			theme: Pillar.News,
 			design: Design.Article,
 		}),
-		webPublicationDate: '2020-09-15T12:21:07.000Z',
-		headline: 'Most diverse shortlist ever as Hilary Mantel misses out',
-		shortUrl: 'https://theguardian.com/p/ezmt9',
-		kickerText: 'Booker prize 2020',
+		webPublicationDate: '2021-02-16T16:35:45.000Z',
+		headline:
+			'Ethnicity and poverty are Covid risk factors, new Oxford modelling tool shows',
+		shortUrl: 'https://gu.com/p/gee2t',
+	},
+	{
+		url:
+			'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
+		linkText:
+			'UK Covid: 799 more deaths and 10,625 new cases reported; Scottish schools in phased return from Monday – as it happened',
+		showByline: false,
+		byline: 'Nicola Slawson',
+		image:
+			'https://i.guim.co.uk/img/media/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg?width=300&quality=85&auto=format&fit=max&s=5dbe0a813852f2ce7304f2eddd0b6e45',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg?width=300&quality=85&auto=format&fit=max&s=5dbe0a813852f2ce7304f2eddd0b6e45',
+			460: 'https://i.guim.co.uk/img/media/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg?width=460&quality=85&auto=format&fit=max&s=8f0e19d4111cd7b3c24ab9575447183a',
+		},
+		isLiveBlog: true,
+		format: {
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Article,
+		}),
+		webPublicationDate: '2021-02-16T17:00:15.000Z',
+		headline:
+			'UK Covid: 799 more deaths and 10,625 new cases reported; Scottish schools in phased return from Monday – as it happened',
+		shortUrl: 'https://gu.com/p/geczb',
+	},
+	{
+		url:
+			'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
+		linkText:
+			'QCovid: how improved algorithm can identify more higher-risk adults',
+		showByline: false,
+		byline: 'Sarah Boseley Health editor',
+		image:
+			'https://i.guim.co.uk/img/media/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg?width=300&quality=85&auto=format&fit=max&s=de76d3ccfb81477fa0ec3e24a93a0daf',
+		carouselImages: {
+			300: 'https://i.guim.co.uk/img/media/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg?width=300&quality=85&auto=format&fit=max&s=de76d3ccfb81477fa0ec3e24a93a0daf',
+			460: 'https://i.guim.co.uk/img/media/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg?width=460&quality=85&auto=format&fit=max&s=22504f7fa18de75cba0b1d63d8dec15f',
+		},
+		isLiveBlog: false,
+		format: {
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Analysis,
+		},
+		palette: decidePalette({
+			display: Display.Standard,
+			theme: Pillar.News,
+			design: Design.Analysis,
+		}),
+		webPublicationDate: '2021-02-16T18:42:44.000Z',
+		headline:
+			'QCovid: how improved algorithm can identify more higher-risk adults',
+		shortUrl: 'https://gu.com/p/gefev',
 	},
 ];
 
@@ -299,7 +278,7 @@ export const Headlines = () => (
 	<>
 		<Section showTopBorder={true}>
 			<Carousel
-				heading="Headlines"
+				heading="More on this story"
 				trails={trails}
 				ophanComponentName="curated-content"
 				pillar={Pillar.News}
@@ -311,6 +290,7 @@ export const Headlines = () => (
 				trails={trails}
 				ophanComponentName="curated-content"
 				pillar={Pillar.Sport}
+				isCuratedContent={true}
 			/>
 		</Section>
 	</>
@@ -322,7 +302,7 @@ export const Immersive = () => (
 	<>
 		<Section showTopBorder={true}>
 			<Carousel
-				heading="Headlines"
+				heading="More on this story"
 				trails={immersiveTrails}
 				ophanComponentName="curated-content"
 				pillar={Pillar.News}
@@ -336,6 +316,7 @@ export const Immersive = () => (
 				ophanComponentName="curated-content"
 				pillar={Pillar.Sport}
 				isFullCardImage={true}
+				isCuratedContent={true}
 			/>
 		</Section>
 	</>
