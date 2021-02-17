@@ -414,7 +414,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 		!Number.isNaN(parseInt(relatedItem.starRating))
 			? stars(parseInt(relatedItem.starRating))
 			: null;
-	const articleId = link.split('.com/').pop();
+	const articleId = link.slice(1);
 
 	return (
 		<li
