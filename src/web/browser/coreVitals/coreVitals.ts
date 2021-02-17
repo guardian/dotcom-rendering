@@ -5,7 +5,7 @@ import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 type CoreWebVitalsPayload = {
 	page_view_id: string | null;
 	received_timestamp: string | null;
-	id: string | null;
+	browser_id: string | null;
 	received_date: string;
 	fid: null | number;
 	cls: null | number;
@@ -18,7 +18,7 @@ const timestamp = new Date();
 const date = new Date().toISOString().slice(0, 10);
 
 const jsonData: CoreWebVitalsPayload = {
-	id: null,
+	browser_id: null,
 	page_view_id: null,
 	received_timestamp: timestamp.toISOString(),
 	received_date: date,
@@ -77,7 +77,7 @@ export const coreVitals = (): void => {
 	// Set page view and browser ID
 	if (window.guardian && window.guardian.ophan) {
 		jsonData.page_view_id = window.guardian.ophan.pageViewId;
-		jsonData.id = window.guardian.config.ophan.browserId;
+		jsonData.browser_id = window.guardian.config.ophan.browserId;
 	}
 
 	getCLS(addToJson, false);
