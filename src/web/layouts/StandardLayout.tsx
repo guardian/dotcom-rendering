@@ -507,9 +507,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}
 								tags={CAPI.tags}
-								primaryDateline={CAPI.blocks[0].primaryDateLine}
+								primaryDateline={CAPI.webPublicationDateDisplay}
 								secondaryDateline={
-									CAPI.blocks[0].secondaryDateLine
+									CAPI.webPublicationSecondaryDateDisplay
 								}
 							/>
 						</div>

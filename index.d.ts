@@ -331,6 +331,7 @@ interface CAPIType {
 	webPublicationDate: string;
 
 	webPublicationDateDisplay: string;
+	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
 	editionId: Edition;
 	pageId: string;

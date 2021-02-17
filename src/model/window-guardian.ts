@@ -1,3 +1,5 @@
+import { capitalize } from 'cypress/types/lodash';
+
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
 export interface WindowGuardianConfig {
@@ -74,18 +76,21 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		blockElementType: CAPIElement['_type'],
 		indexName: string,
 	): T[] => {
-		return blocks[0].elements.reduce(
-			(acc: T[], element: CAPIElement, index: number) => {
-				if (element._type === blockElementType) {
-					acc.push({
-						...element,
-						[indexName]: index,
-					} as T);
-				}
-				return acc;
-			},
-			[] as T[],
-		);
+		if (blocks.length > 0) {
+			return blocks[0].elements.reduce(
+				(acc: T[], element: CAPIElement, index: number) => {
+					if (element._type === blockElementType) {
+						acc.push({
+							...element,
+							[indexName]: index,
+						} as T);
+					}
+					return acc;
+				},
+				[] as T[],
+			);
+		}
+		return [];
 	};
 
 	// If our element type is one that can contain third party content that can track user, but hasn't been marked
