@@ -200,7 +200,6 @@ interface SimpleNavType {
 	otherLinks: MoreType;
 	brandExtensions: LinkType[];
 	readerRevenueLinks: ReaderRevenuePositions;
-	// TODO subnav required?
 }
 
 interface NavType extends BaseNavType {

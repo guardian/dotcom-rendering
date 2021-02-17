@@ -66,6 +66,7 @@ export const NavGroup: React.FC<NavGroupProps> = ({
 				edition={capiData.editionId}
 				currentNavLinkTitle={navData.currentNavLink}
 				ID={ID || 'lazy-nav'}
+				ajaxUrl={capiData.config.ajaxUrl}
 			/>
 		</Section>
 		{navData.subNavSections && (

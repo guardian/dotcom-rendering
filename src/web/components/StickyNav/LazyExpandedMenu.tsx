@@ -94,8 +94,11 @@ const mainMenuStyles = (ID: string) => css`
 	}
 `;
 
-const fetchNavData = (edition: Edition): Promise<SimpleNavType> => {
-	const url = `http://localhost:9000/nav/${edition.toLowerCase()}.json`;
+const fetchNavData = (
+	ajaxUrl: string,
+	edition: Edition,
+): Promise<SimpleNavType> => {
+	const url = `${ajaxUrl}/nav/${edition.toLowerCase()}.json`;
 	return fetch(url)
 		.then((resp) => resp.json())
 		.then((json) => extractNAV(json));
@@ -111,18 +114,19 @@ export const LazyExpandedMenu: React.FC<{
 	currentNavLinkTitle: string;
 	expand: boolean;
 	edition: Edition;
-}> = ({ display, currentNavLinkTitle, ID, expand, edition }) => {
+	ajaxUrl: string;
+}> = ({ display, currentNavLinkTitle, ID, expand, edition, ajaxUrl }) => {
 	const [navData, setNavData] = useState<NavType | undefined>(undefined);
 
 	useEffect(() => {
 		if (expand) {
 			// fetch API data
-			fetchNavData(edition).then((data) => {
+			fetchNavData(ajaxUrl, edition).then((data) => {
 				const fullNav = enrich(currentNavLinkTitle, data);
 				setNavData(fullNav);
 			});
 		}
-	}, [expand, currentNavLinkTitle, edition]);
+	}, [expand, currentNavLinkTitle, edition, ajaxUrl]);
 
 	return (
 		<div id={buildID(ID, 'expanded-menu')}>

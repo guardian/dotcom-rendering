@@ -30,6 +30,7 @@ type Props = {
 	edition: Edition;
 	currentNavLinkTitle: string;
 	ID: string;
+	ajaxUrl: string;
 };
 
 const clearFixStyle = css`
@@ -82,6 +83,7 @@ export const LazyNav = ({
 	topLevelPillars,
 	currentNavLinkTitle,
 	ID,
+	ajaxUrl,
 }: Props) => {
 	const [dataRequired, setDataRequired] = useState(false);
 
@@ -245,6 +247,7 @@ export const LazyNav = ({
 					expand={dataRequired}
 					currentNavLinkTitle={currentNavLinkTitle}
 					edition={edition}
+					ajaxUrl={ajaxUrl}
 				/>
 			</nav>
 			{format.display === Display.Immersive && (
