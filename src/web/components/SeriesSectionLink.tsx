@@ -96,7 +96,7 @@ const titleBadgeWrapper = css`
 	margin-right: ${space[2]}px;
 `;
 
-const immersiveTitleBadgeStyle = css`
+const immersiveTitleBadgeStyle = (palette: Palette) => css`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -105,6 +105,9 @@ const immersiveTitleBadgeStyle = css`
 	line-height: 1.15;
 	/* Offset parent container margins when Immersive */
 	margin-bottom: -10px;
+	background-color: ${palette.background.seriesTitle};
+	box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+		6px 0 0 0 ${palette.background.seriesTitle};
 `;
 
 export const SeriesSectionLink = ({
@@ -224,18 +227,7 @@ export const SeriesSectionLink = ({
 						return (
 							<div
 								className={cx(
-									invertedStyle,
-									css`
-										background-color: ${palette.background
-											.seriesTitle};
-										box-shadow: -6px 0 0 0
-												${palette.background
-													.seriesTitle},
-											6px 0 0 0
-												${palette.background
-													.seriesTitle};
-									`,
-									immersiveTitleBadgeStyle,
+									badge && immersiveTitleBadgeStyle(palette),
 								)}
 							>
 								{badge && (
@@ -252,8 +244,16 @@ export const SeriesSectionLink = ({
 										sectionLabelLink,
 										css`
 											color: ${palette.text.seriesTitle};
-											flex: 1 1 auto;
+											background-color: ${palette
+												.background.seriesTitle};
+											box-shadow: -6px 0 0 0
+													${palette.background
+														.seriesTitle},
+												6px 0 0 0
+													${palette.background
+														.seriesTitle};
 										`,
+										invertedStyle,
 									)}
 									href={`${guardianBaseURL}/${tag.id}`}
 									data-component="series"
