@@ -139,7 +139,10 @@ const immersiveStandfirstStyles = css`
 
 const linesBorderStyles = css`
 	${articleMarginStyles}
-	border-right: 1px solid ${border.secondary};
+
+	${from.tablet} {
+		border-right: 1px solid ${border.secondary};
+	}
 `;
 
 const StandardHeader: FC<HeaderProps> = ({ item }) => (

@@ -46,7 +46,7 @@ const headerStyles = css`
 	${articleWidthStyles}
 	border-bottom: 1px solid ${border.secondary};
 
-	${from.phablet} {
+	${from.tablet} {
 		padding-right: ${remSpace[3]};
 		border-right: 1px solid ${border.secondary};
 	}
@@ -63,7 +63,7 @@ const bodyStyles = css`
 		padding-bottom: ${remSpace[2]};
 	}
 
-	${from.phablet} {
+	${from.tablet} {
 		p {
 			margin: 0;
 			padding-top: ${remSpace[2]};
@@ -75,9 +75,12 @@ const bodyStyles = css`
 `;
 
 const bodyWrapperStyles = css`
-	padding-right: ${remSpace[3]};
-	border-right: 1px solid ${border.secondary};
 	${articleWidthStyles}
+
+	${from.tablet} {
+		padding-right: ${remSpace[3]};
+		border-right: 1px solid ${border.secondary};
+	}
 `;
 
 export const galleryWrapperStyles = css`

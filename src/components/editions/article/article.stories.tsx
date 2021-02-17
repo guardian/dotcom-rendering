@@ -70,7 +70,7 @@ const Showcase = (): ReactElement => (
 	<Article
 		item={{
 			...article,
-			...isImmersive(),
+			display: Display.Showcase,
 			theme: selectPillar(Pillar.News),
 		}}
 	/>
