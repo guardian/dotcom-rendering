@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { Block } from '@guardian/content-api-models/v1/block';
-import type { Option } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import { maybeCapiDate } from 'capi';

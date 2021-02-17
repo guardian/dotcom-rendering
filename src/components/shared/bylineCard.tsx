@@ -5,13 +5,16 @@ import { remSpace } from '@guardian/src-foundations';
 import { neutral, opinion, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
-import type { Format } from '@guardian/types/Format';
-import { Design, Display } from '@guardian/types/Format';
-import { fromNullable, map, withDefault } from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
+import type { Format, Option } from '@guardian/types';
+import {
+	Design,
+	Display,
+	fromNullable,
+	map,
+	withDefault,
+} from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
@@ -178,17 +181,17 @@ const footerStyles = css`
 `;
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
+	const { link, pillar, lastModified } = relatedItem;
 	const format = {
-		theme: themeFromString(relatedItem.pillar.id),
+		theme: themeFromString(pillar.id),
 		design: Design.Article,
 		display: Display.Standard,
 	};
 
 	const img = cardImage(relatedItem);
-	const lastModified = relatedItem.lastModified?.iso8601;
-	const articleId = relatedItem.link.split('.com/').pop();
+	const articleId = link.slice(1);
 	const date = lastModified
-		? relativeFirstPublished(fromNullable(new Date(lastModified)))
+		? relativeFirstPublished(fromNullable(new Date(lastModified.iso8601)))
 		: null;
 	return (
 		<li

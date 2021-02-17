@@ -4,13 +4,10 @@ import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Theme } from '@guardian/types/Format';
-import { Pillar } from '@guardian/types/Format';
-import type { Option } from '@guardian/types/option';
-import { map, withDefault } from '@guardian/types/option';
+import type { Option, Theme } from '@guardian/types';
+import { map, Pillar, withDefault } from '@guardian/types';
 import { formatDate } from 'date';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss as darkMode } from 'styles';
 

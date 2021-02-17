@@ -7,8 +7,8 @@ import { ContentType } from '@guardian/content-api-models/v1/contentType';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
-import type { Option } from '@guardian/types/option';
-import { andThen, fromNullable, map, none, some } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import { fromString as dateFromString } from 'date';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
@@ -145,12 +145,13 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
 };
 
 const requiresInlineStyles = (content: Content): boolean => {
-	return !!(
-		content.fields?.commentable ??
-		content.atoms?.quizzes ??
-		content.atoms?.audios ??
-		content.atoms?.charts
-	);
+	// return !!(
+	//	   content.fields?.commentable ??
+	//	   content.atoms?.quizzes ??
+	//	   content.atoms?.audios ??
+	//	   content.atoms?.charts
+	// );
+	return false;
 };
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {

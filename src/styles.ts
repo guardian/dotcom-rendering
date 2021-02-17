@@ -8,18 +8,9 @@ import {
 	neutral,
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types/Format';
-import { Design } from '@guardian/types/Format';
-import type { Option } from '@guardian/types/option';
-import { map, none, some, withDefault } from '@guardian/types/option';
+import type { Format, Option } from '@guardian/types';
+import { Design, map, none, some, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
-
-const BASE_PADDING = 8;
-
-export const baseMultiply = (value: number): number => value * BASE_PADDING;
-
-export const basePx = (...values: number[]): string =>
-	values.map(baseMultiply).join('px ') + 'px';
 
 export const sidePadding = css`
 	padding-left: ${remSpace[2]};
@@ -138,7 +129,7 @@ export const adStyles = (format: Format): SerializedStyles => {
 				${textSans.xsmall()}
 				padding: ${remSpace[2]};
 				float: left;
-				width: calc(100% - ${basePx(2)});
+				width: calc(100% - ${remSpace[4]});
 
 				h1 {
 					margin: 0;
@@ -172,12 +163,12 @@ export const adStyles = (format: Format): SerializedStyles => {
 			}
 
 			${until.phablet} {
-				margin: 1em ${basePx(-1)};
+				margin: 1em -${remSpace[2]};
 			}
 
 			${from.desktop} {
 				position: absolute;
-				margin-left: calc(${wideContentWidth}px + ${basePx(2)});
+				margin-left: calc(${wideContentWidth}px + ${remSpace[4]});
 				min-width: 300px;
 				margin-bottom: ${remSpace[6]};
 			}

@@ -1,32 +1,60 @@
+const testCoveragePaths = [
+	'renderer.ts',
+	'item.ts',
+	'atoms.ts',
+	'capi.ts',
+	'bodyElement.ts',
+	'contributor.ts',
+	'date.ts',
+	'image.ts',
+	'lib.ts',
+	'liveBlock.ts',
+	'relatedContent.ts',
+	'video.ts',
+	'client/article.ts',
+	'client/editions.ts',
+	'client/parser.ts',
+	'server/paramParser.ts',
+	'server/csp.ts',
+	'components/editions/kickerPicker.ts',
+].map((path) => `<rootDir>/src/${path}`);
+
 module.exports = {
-    collectCoverage: true,
-    preset: "ts-jest/presets/js-with-ts",
-    rootDir: "../",
-    globals: {
-        "ts-jest": {
-            babelConfig: {
-                presets: [
-                    [
-                        "@babel/preset-env",
-                        { targets: { node: "12" }, modules: "cjs" },
-                    ],
-                    "@babel/preset-react",
-                    "@emotion/babel-preset-css-prop",
-                ],
-            },
-            tsConfig: "config/tsconfig.test.json",
-        },
-    },
-    coverageThreshold: {
-        global: {
-            branches: 75,
-            functions: 75,
-            lines: 75,
-            statements: 75,
-        },
-    },
-    coverageReporters: ["text", "html", "text-summary"],
-    collectCoverageFrom: ["<rootDir>/src/renderer.ts", "<rootDir>/src/item.ts"],
-    moduleDirectories: ["node_modules", "src"],
-    transformIgnorePatterns: ["node_modules/(?!@guardian)"],
+	collectCoverage: true,
+	preset: 'ts-jest/presets/js-with-ts',
+	rootDir: '../',
+	globals: {
+		'ts-jest': {
+			babelConfig: {
+				presets: [
+					[
+						'@babel/preset-env',
+						{ targets: { node: '12' }, modules: 'cjs' },
+					],
+					[
+						'@babel/preset-react',
+						{
+							runtime: 'automatic',
+							importSource: '@emotion/core',
+						},
+					],
+				],
+				plugins: ['@emotion'],
+			},
+			tsconfig: 'config/tsconfig.test.json',
+		},
+	},
+	coverageThreshold: {
+		global: {
+			branches: 37,
+			functions: 47,
+			lines: 49,
+			statements: 49,
+		},
+	},
+	coverageReporters: ['text', 'html', 'text-summary'],
+	collectCoverageFrom: testCoveragePaths,
+	moduleDirectories: ['node_modules', 'src'],
+	snapshotSerializers: ['@emotion/jest/serializer'],
+	transformIgnorePatterns: ['node_modules/(?!@guardian)'],
 };

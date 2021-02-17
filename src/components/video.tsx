@@ -1,7 +1,6 @@
 import { css } from '@emotion/core';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import type { FC, ReactElement } from 'react';
-import React from 'react';
 import { darkModeCss } from 'styles';
 
 export interface VideoProps {

@@ -1,16 +1,15 @@
 import { css } from '@emotion/core';
+import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { Design, Display, Pillar } from '@guardian/types/Format';
+import { Design, Display, Pillar } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import React from 'react';
-import { basePx } from 'styles';
 import { selectPillar } from '../storybookHelpers';
 import RichLink, { richLinkWidth } from './richLink';
 
 const overrideStyle = css`
 	${from.wide} {
-		margin-left: calc(${richLinkWidth} + ${basePx(2)} + ${basePx(3)});
+		margin-left: calc(${richLinkWidth} + ${remSpace[4]} + ${remSpace[6]});
 	}
 `;
 

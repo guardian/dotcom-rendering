@@ -7,7 +7,6 @@ import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import Img from 'components/img';
 import type { BodyImageProps } from 'image';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

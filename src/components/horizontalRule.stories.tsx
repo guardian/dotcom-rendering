@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import type { FC } from 'react';
-import React from 'react';
 import HorizontalRule from './horizontalRule';
 
 // ----- Stories ----- //

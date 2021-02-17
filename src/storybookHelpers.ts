@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Pillar } from '@guardian/types/Format';
+import { Pillar } from '@guardian/types';
 import { select } from '@storybook/addon-knobs';
 
 // ----- Helpers ----- //

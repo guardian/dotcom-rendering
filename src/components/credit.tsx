@@ -3,12 +3,9 @@
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types/Format';
-import { Design } from '@guardian/types/Format';
-import type { Option } from '@guardian/types/option';
-import { map, withDefault } from '@guardian/types/option';
+import type { Format, Option } from '@guardian/types';
+import { Design, map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactElement } from 'react';
 
 // ----- Component ----- //

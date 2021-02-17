@@ -1,40 +1,16 @@
 // ----- Imports ----- //
 
-import { createHash } from 'crypto';
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import type { Image as ImageData } from '@guardian/image-rendering';
-import { Role } from '@guardian/image-rendering';
-import type { Format } from '@guardian/types/Format';
-import { andThen, fromNullable, map, none, some } from '@guardian/types/option';
-import type { Option } from '@guardian/types/option';
-import { fromUnsafe, ResultKind } from '@guardian/types/result';
-import type { Result } from '@guardian/types/result';
+import { Dpr, src, srcsets } from '@guardian/image-rendering';
+import type { Format, Option } from '@guardian/types';
+import { andThen, fromNullable, map, none, Role, some } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { ReactNode } from 'react';
 import type { Context } from 'types/parserContext';
 
-// ----- Setup ----- //
-
-const imageResizer = 'https://i.guim.co.uk/img';
-
-const defaultWidths = [140, 500, 1000, 1500, 2000];
-
-// Percentage.
-const defaultQuality = 85;
-const lowerQuality = 45;
-
 // ----- Types ----- //
-
-const enum Dpr {
-	One,
-	Two,
-}
-
-interface Srcsets {
-	srcset: string;
-	dpr2Srcset: string;
-}
 
 interface Image extends ImageData {
 	caption: Option<DocumentFragment>;
@@ -49,63 +25,6 @@ interface BodyImageProps {
 }
 
 // ----- Functions ----- //
-
-const getSubdomain = (domain: string): string => domain.split('.')[0];
-
-const sign = (salt: string, path: string): string =>
-	createHash('md5')
-		.update(salt + path)
-		.digest('hex');
-
-function src(salt: string, input: string, width: number, dpr: Dpr): string {
-	const maybeUrl: Result<string, URL> = fromUnsafe(
-		() => new URL(input),
-		'invalid url',
-	);
-
-	switch (maybeUrl.kind) {
-		case ResultKind.Ok: {
-			const url = maybeUrl.value;
-			const service = getSubdomain(url.hostname);
-
-			const params = new URLSearchParams({
-				width: width.toString(),
-				quality:
-					dpr === Dpr.Two
-						? lowerQuality.toString()
-						: defaultQuality.toString(),
-				fit: 'bounds',
-			});
-
-			const path = `${url.pathname}?${params.toString()}`;
-			const sig = sign(salt, path);
-
-			return `${imageResizer}/${service}${path}&s=${sig}`;
-		}
-		case ResultKind.Err:
-		default: {
-			return input;
-		}
-	}
-}
-
-const srcsetWithWidths = (widths: number[]) => (
-	url: string,
-	salt: string,
-	dpr: Dpr,
-): string =>
-	widths.map((width) => `${src(salt, url, width, dpr)} ${width}w`).join(', ');
-
-const srcset: (
-	url: string,
-	salt: string,
-	dpr: Dpr,
-) => string = srcsetWithWidths(defaultWidths);
-
-const srcsets = (url: string, salt: string): Srcsets => ({
-	srcset: srcset(url, salt, Dpr.One),
-	dpr2Srcset: srcset(url, salt, Dpr.Two),
-});
 
 const parseCredit = (
 	displayCredit: boolean | undefined,
@@ -150,8 +69,13 @@ const parseImage = ({ docParser, salt }: Context) => (
 			}
 
 			return some({
-				src: src(salt, asset.file, 500, Dpr.One),
-				...srcsets(asset.file, salt),
+				src: src(
+					salt,
+					asset.typeData.secureFile ?? asset.file,
+					500,
+					Dpr.One,
+				),
+				...srcsets(asset.typeData.secureFile ?? asset.file, salt),
 				alt: fromNullable(data?.alt),
 				width: asset.typeData.width,
 				height: asset.typeData.height,
@@ -187,14 +111,4 @@ const parseCardImage = (
 
 // ----- Exports ----- //
 
-export {
-	Image,
-	Dpr,
-	src,
-	srcset,
-	srcsetWithWidths,
-	sign,
-	parseImage,
-	parseCardImage,
-	BodyImageProps,
-};
+export { Image, parseImage, parseCardImage, BodyImageProps };

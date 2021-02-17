@@ -5,13 +5,12 @@ import { css } from '@emotion/core';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { between, from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types/Format';
-import { Design, Display } from '@guardian/types/Format';
+import type { Format } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 import StarRating from 'components/starRating';
 import { border } from 'editorialPalette';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
-import React from 'react';
 import type { ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 

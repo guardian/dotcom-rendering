@@ -3,7 +3,6 @@
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
-import React from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

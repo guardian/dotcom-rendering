@@ -1,10 +1,9 @@
 // ----- Section ----- //
 
-import type { Option } from '@guardian/types/option';
-import { map, withDefault } from '@guardian/types/option';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { FC, ReactElement } from 'react';
-import React from 'react';
 
 // ----- Sub-Components ----- //
 

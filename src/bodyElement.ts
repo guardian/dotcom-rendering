@@ -6,10 +6,15 @@ import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
-import type { Option } from '@guardian/types/option';
-import { fromNullable, map, withDefault } from '@guardian/types/option';
-import type { Result } from '@guardian/types/result';
-import { err, ok, map as rmap } from '@guardian/types/result';
+import type { Option, Result } from '@guardian/types';
+import {
+	err,
+	fromNullable,
+	map,
+	ok,
+	resultMap,
+	withDefault,
+} from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
 import type { Image as ImageData } from 'image';
@@ -44,6 +49,11 @@ const enum ElementKind {
 	QuizAtom,
 }
 
+type Text = {
+	kind: ElementKind.Text;
+	doc: DocumentFragment;
+};
+
 type Image = ImageData & {
 	kind: ElementKind.Image;
 };
@@ -60,6 +70,17 @@ type Video = {
 	src: string;
 	height: string;
 	width: string;
+};
+
+type Embed = {
+	kind: ElementKind.Embed;
+	html: string;
+	alt: Option<string>;
+};
+
+type Instagram = {
+	kind: ElementKind.Instagram;
+	html: string;
 };
 
 type MediaKind = ElementKind.Audio | ElementKind.Video;
@@ -138,10 +159,7 @@ interface QuizAtom {
 }
 
 type BodyElement =
-	| {
-			kind: ElementKind.Text;
-			doc: DocumentFragment;
-	  }
+	| Text
 	| Image
 	| {
 			kind: ElementKind.Pullquote;
@@ -151,7 +169,7 @@ type BodyElement =
 	| {
 			kind: ElementKind.Interactive;
 			url: string;
-			alt?: string;
+			alt: Option<string>;
 	  }
 	| {
 			kind: ElementKind.RichLink;
@@ -162,16 +180,9 @@ type BodyElement =
 			kind: ElementKind.Tweet;
 			content: NodeList;
 	  }
-	| {
-			kind: ElementKind.Instagram;
-			html: string;
-	  }
+	| Instagram
 	| Audio
-	| {
-			kind: ElementKind.Embed;
-			html: string;
-			alt: Option<string>;
-	  }
+	| Embed
 	| {
 			kind: ElementKind.Callout;
 			id: string;
@@ -288,7 +299,11 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 				return err('No iframeUrl field on interactiveTypeData');
 			}
 
-			return ok({ kind: ElementKind.Interactive, url: iframeUrl, alt });
+			return ok({
+				kind: ElementKind.Interactive,
+				url: iframeUrl,
+				alt: fromNullable(alt),
+			});
 		}
 
 		case ElementType.RICH_LINK: {
@@ -314,7 +329,7 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 
 			return pipe(
 				tweetContent(id, context.docParser(h)),
-				rmap((content) => ({ kind: ElementKind.Tweet, content })),
+				resultMap((content) => ({ kind: ElementKind.Tweet, content })),
 			);
 		}
 
@@ -440,4 +455,23 @@ const parseElements = (
 
 // ----- Exports ----- //
 
-export { ElementKind, BodyElement, Audio, Video, Body, parseElements };
+export {
+	ElementKind,
+	BodyElement,
+	Audio,
+	Video,
+	Body,
+	Image,
+	Text,
+	Embed,
+	Instagram,
+	GuideAtom,
+	InteractiveAtom,
+	MediaAtom,
+	QandaAtom,
+	ProfileAtom,
+	TimelineAtom,
+	AudioAtom,
+	QuizAtom,
+	parseElements,
+};

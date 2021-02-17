@@ -5,10 +5,8 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import type { Option } from '@guardian/types/option';
-import { map, OptionKind, withDefault } from '@guardian/types/option';
-import type { Result } from '@guardian/types/result';
-import { either, err, ok } from '@guardian/types/result';
+import type { Option, Result } from '@guardian/types';
+import { either, err, map, ok, OptionKind, withDefault } from '@guardian/types';
 import bodyParser from 'body-parser';
 import { capiEndpoint } from 'capi';
 import compression from 'compression';
@@ -178,11 +176,12 @@ async function serveArticlePost(
 	try {
 		const renderingRequest = await mapiDecoder(req.body);
 		const richLinkDetails = req.query.richlink === '';
+		const isEditions = req.query.editions === '';
 
 		if (richLinkDetails) {
 			void serveRichLinkDetails(renderingRequest, res);
 		} else {
-			void serveArticle(renderingRequest, res, false);
+			void serveArticle(renderingRequest, res, isEditions);
 		}
 	} catch (e) {
 		logger.error(`This error occurred`, e);

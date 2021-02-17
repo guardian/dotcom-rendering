@@ -4,8 +4,7 @@ import { SvgGuardianLiveLogo } from '@guardian/src-brand';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { ReactElement } from 'react';
-import React from 'react';
-import { basePx, darkModeCss } from 'styles';
+import { darkModeCss } from 'styles';
 
 const richLinkWidth = '8.75rem';
 
@@ -69,7 +68,6 @@ const liveEventLinkStyles: SerializedStyles = css`
 
 	float: left;
 	clear: left;
-	margin: ${basePx(1, 2, 1, 0)};
 	margin: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} 0;
 
 	width: ${richLinkWidth};

@@ -1,10 +1,8 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar } from '@guardian/types/Format';
-import { some } from '@guardian/types/option';
+import { Design, Display, Pillar, some } from '@guardian/types';
 import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import React from 'react';
 import { selectPillar } from 'storybookHelpers';
 import CommentCount from './commentCount';
 

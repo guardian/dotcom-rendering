@@ -3,7 +3,6 @@ import { breakpoints, neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { FC } from 'react';
-import React from 'react';
 import { darkModeCss } from 'styles';
 
 // Footer content styles

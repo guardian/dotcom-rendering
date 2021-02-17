@@ -1,4 +1,4 @@
-import { map, withDefault } from '@guardian/types/option';
+import { map, withDefault } from '@guardian/types';
 import HeaderImage from 'components/headerImage';
 import HeaderVideo from 'components/headerVideo';
 import type { Image as ImageData } from 'image';
@@ -6,7 +6,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe2 } from 'lib';
 import type { FC } from 'react';
-import React from 'react';
 import type { Video as VideoData } from 'video';
 
 export const enum MainMediaKind {
