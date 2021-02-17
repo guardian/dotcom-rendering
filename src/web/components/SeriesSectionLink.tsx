@@ -7,6 +7,7 @@ import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
 import { Display, Design } from '@guardian/types';
+import { Badge } from '@frontend/web/components/Badge';
 
 type Props = {
 	format: Format;
@@ -87,6 +88,21 @@ const fontStyles = css`
 const secondaryStyle = css`
 	${headline.xxxsmall({ fontWeight: 'regular' })};
 	display: block;
+`;
+
+const titleBadgeWrapper = css`
+	margin-bottom: ${space[1]}px;
+	margin-top: ${space[1]}px;
+	margin-right: ${space[2]}px;
+`;
+
+const immersiveTitleBadgeStyle = css`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-bottom: 0px;
+	max-width: max-content;
+	line-height: 1.15;
 `;
 
 export const SeriesSectionLink = ({
@@ -204,12 +220,10 @@ export const SeriesSectionLink = ({
 					if (hasSeriesTag) {
 						if (!tag) return null; // Just to keep ts happy
 						return (
-							<a
-								href={`${guardianBaseURL}/${tag.id}`}
+							<div
 								className={cx(
-									sectionLabelLink,
+									invertedStyle,
 									css`
-										color: ${palette.text.seriesTitle};
 										background-color: ${palette.background
 											.seriesTitle};
 										box-shadow: -6px 0 0 0
@@ -219,13 +233,33 @@ export const SeriesSectionLink = ({
 												${palette.background
 													.seriesTitle};
 									`,
-									invertedStyle,
+									immersiveTitleBadgeStyle,
 								)}
-								data-component="series"
-								data-link-name="article series"
 							>
-								<span>{tag.title}</span>
-							</a>
+								{badge && (
+									<div className={titleBadgeWrapper}>
+										<Badge
+											imageUrl={badge.imageUrl}
+											seriesTag={badge.seriesTag}
+										/>
+									</div>
+								)}
+
+								<a
+									className={cx(
+										sectionLabelLink,
+										css`
+											color: ${palette.text.seriesTitle};
+											flex: 1 1 auto;
+										`,
+									)}
+									href={`${guardianBaseURL}/${tag.id}`}
+									data-component="series"
+									data-link-name="article series"
+								>
+									<span>{tag.title}</span>
+								</a>
+							</div>
 						);
 					}
 					// Immersives show nothing at all if there's no series tag
