@@ -3,9 +3,9 @@ import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 // This sends data to the test table
 
 type CoreWebVitalsPayload = {
-	page_view_id: string;
-	received_timestamp: string;
-	id: string;
+	page_view_id: string | null;
+	received_timestamp: string | null;
+	id: string | null;
 	received_date: string;
 	fid: null | number;
 	cls: null | number;
@@ -14,11 +14,14 @@ type CoreWebVitalsPayload = {
 	ttfb: null | number;
 };
 
+const timestamp = new Date();
+const date = new Date().toISOString().slice(0, 10);
+
 const jsonData: CoreWebVitalsPayload = {
-	id: '',
-	page_view_id: '',
-	received_timestamp: new Date().toISOString(),
-	received_date: new Date().toISOString().slice(0, 10),
+	id: null,
+	page_view_id: null,
+	received_timestamp: timestamp.toISOString(),
+	received_date: date,
 	fid: null,
 	cls: null,
 	lcp: null,
