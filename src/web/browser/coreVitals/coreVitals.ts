@@ -58,7 +58,8 @@ export const coreVitals = (): void => {
 
 		const endpoint =
 			window.location.hostname === 'm.code.dev-theguardian.com' ||
-			window.location.hostname === 'localhost'
+			window.location.hostname === 'localhost' ||
+			window.location.hostname === 'preview.gutools.co.uk'
 				? 'http://performance-events.code.dev-guardianapis.com/core-web-vitals'
 				: 'https://performance-events.guardianapis.com/core-web-vitals';
 
