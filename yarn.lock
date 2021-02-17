@@ -2526,11 +2526,6 @@
     "@guardian/src-label" "^3.2.0"
     "@guardian/src-user-feedback" "^3.2.0"
 
-"@guardian/src-svgs@^2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-2.8.2.tgz#4e05c4f144c8507d39166aa6aa8c146c8a3612ae"
-  integrity sha512-PyZJ6jwUKUMsHdKywz/Pgk7oHjvSDdEqTZq6vkiOPJLTjEraEdyO6amu7L7ynVO58CmgzJ+6SwOOAtilHU/LRw==
-
 "@guardian/src-text-area@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-text-area/-/src-text-area-3.2.0.tgz#f6f12f3d5c96dbfbd0b273ed78057b779617bf74"
