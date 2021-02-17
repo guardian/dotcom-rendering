@@ -15,23 +15,46 @@ import {
 	getArticleCountConsent,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
+import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
 	sendOphanComponentEvent,
 	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
-import { getCookie } from '../browser/cookie';
-import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+import { Metadata } from '@guardian/automat-client/dist/types';
+import { getCookie } from '../../browser/cookie';
+import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 
 const { css } = emotion;
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
+type PreEpicConfig = {
+	meta: TestMeta;
+	module: {
+		url: string;
+		props: {};
+	};
+};
+
+type EpicConfig = {
+	meta: TestMeta;
+	module: {
+		url: string;
+		props: EpicProps;
+	};
+};
+
+type EpicProps = {
+	onReminderOpen: Function;
+	// Also anything specified by support-dotcom-components
+};
+
 const checkForErrors = (response: Response) => {
 	if (!response.ok) {
 		throw Error(
 			response.statusText ||
-				`SlotBodyEnd | An api call returned HTTP status ${response.status}`,
+				`ReaderRevenueEpic | An api call returned HTTP status ${response.status}`,
 		);
 	}
 	return response;
@@ -72,13 +95,11 @@ type Props = {
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
-	isSensitive: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
 };
 
-// TODO specify return type (need to update client to provide this first)
-const buildPayload = async (props: Props) => {
+const buildPayload = async (props: Props): Promise<Metadata> => {
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -93,7 +114,6 @@ const buildPayload = async (props: Props) => {
 			shouldHideReaderRevenue: props.shouldHideReaderRevenue,
 			isMinuteArticle: props.isMinuteArticle,
 			isPaidContent: props.isPaidContent,
-			isSensitive: props.isSensitive,
 			tags: props.tags,
 			showSupportMessaging: !shouldHideSupportMessaging(
 				props.isSignedIn || false,
@@ -108,10 +128,10 @@ const buildPayload = async (props: Props) => {
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: props.countryCode,
 		},
-	};
+	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
 
-const MemoisedInner = ({
+export const canShow = ({
 	isSignedIn,
 	countryCode,
 	contentType,
@@ -119,14 +139,61 @@ const MemoisedInner = ({
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
-	isSensitive,
 	tags,
 	contributionsServiceUrl,
-}: Props) => {
-	const [Epic, setEpic] = useState<React.FC>();
-	const [epicProps, setEpicProps] = useState<{}>();
-	const [epicMeta, setEpicMeta] = useState<TestMeta>();
+}: Props): Promise<CanShowResult> => {
+	if (shouldHideReaderRevenue || isPaidContent) {
+		// We never serve Reader Revenue epics in this case
+		return Promise.resolve({ result: false });
+	}
+	const dataPerf = initPerf('contributions-epic-data');
+	dataPerf.start();
 
+	const forcedVariant = getForcedVariant('epic');
+	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
+
+	return buildPayload({
+		isSignedIn,
+		countryCode,
+		contentType,
+		sectionName,
+		shouldHideReaderRevenue,
+		isMinuteArticle,
+		isPaidContent,
+		tags,
+		contributionsServiceUrl,
+	})
+		.then((contributionsPayload) =>
+			getBodyEnd(
+				contributionsPayload,
+				`${contributionsServiceUrl}/epic${queryString}`,
+			),
+		)
+		.then((response) => {
+			dataPerf.end();
+			return checkForErrors(response);
+		})
+		.then((response) => response.json())
+		.then((json: { data?: PreEpicConfig }) => {
+			if (!json.data) {
+				return { result: false };
+			}
+
+			const { meta, module } = json.data;
+
+			return {
+				result: true,
+				meta: {
+					meta,
+					module,
+					onReminderOpen: sendOphanReminderOpenEvent,
+				},
+			};
+		});
+};
+
+export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
+	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
 		rootMargin: '-18px',
 		threshold: 0,
@@ -142,132 +209,39 @@ const MemoisedInner = ({
 			emotion,
 		};
 
-		const dataPerf = initPerf('contributions-epic-data');
-		dataPerf.start();
+		const modulePerf = initPerf('contributions-epic-module');
+		modulePerf.start();
 
-		const forcedVariant = getForcedVariant('epic');
-		const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
-
-		buildPayload({
-			isSignedIn,
-			countryCode,
-			contentType,
-			sectionName,
-			shouldHideReaderRevenue,
-			isMinuteArticle,
-			isPaidContent,
-			tags,
-			contributionsServiceUrl,
-			isSensitive,
-		})
-			.then((contributionsPayload) =>
-				getBodyEnd(
-					contributionsPayload,
-					`${contributionsServiceUrl}/epic${queryString}`,
-				),
-			)
-			.then((response) => {
-				dataPerf.end();
-				return checkForErrors(response);
+		window
+			.guardianPolyfilledImport(module.url)
+			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
+				modulePerf.end();
+				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
+				sendOphanComponentEvent('INSERT', meta);
 			})
-			.then((response) => response.json())
-			.then(
-				(json: {
-					data: { meta: any; module: { url: string; props: any } };
-				}) => {
-					if (!json.data) {
-						return;
-					}
-
-					const { meta, module } = json.data;
-
-					const modulePerf = initPerf('contributions-epic-module');
-					modulePerf.start();
-
-					// eslint-disable-next-line no-restricted-globals
-					window
-						.guardianPolyfilledImport(module.url)
-						.then(
-							(epicModule: {
-								ContributionsEpic: JSX.Element;
-							}) => {
-								modulePerf.end();
-								setEpicMeta(meta);
-								setEpicProps({
-									...module.props,
-									onReminderOpen: sendOphanReminderOpenEvent,
-								});
-								setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-								sendOphanComponentEvent('INSERT', meta);
-							},
-						)
-						// eslint-disable-next-line no-console
-						.catch((error) =>
-							console.log(`epic - error is: ${error}`),
-						);
-				},
-			);
+			// eslint-disable-next-line no-console
+			.catch((error) => console.log(`epic - error is: ${error}`));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// Should only run once
 	useEffect(() => {
-		if (hasBeenSeen && epicMeta) {
-			const { abTestName } = epicMeta;
+		if (hasBeenSeen && meta) {
+			// Should only run once
+			const { abTestName } = meta;
 
 			logView(abTestName);
 
-			sendOphanComponentEvent('VIEW', epicMeta);
+			sendOphanComponentEvent('VIEW', meta);
 		}
-	}, [hasBeenSeen, epicMeta]);
-
+	}, [hasBeenSeen, meta]);
 	if (Epic) {
 		return (
 			<div ref={setNode} className={wrapperMargins}>
 				{/* eslint-disable-next-line react/jsx-props-no-spreading */}
-				<Epic {...epicProps} />
+				<Epic {...module.props} />
 			</div>
 		);
 	}
 
 	return null;
-};
-
-export const SlotBodyEnd = ({
-	isSignedIn,
-	countryCode,
-	contentType,
-	sectionName,
-	shouldHideReaderRevenue,
-	isMinuteArticle,
-	isPaidContent,
-	isSensitive,
-	tags,
-	contributionsServiceUrl,
-}: Props) => {
-	if (isSignedIn === undefined || countryCode === undefined) {
-		return null;
-	}
-
-	if (shouldHideReaderRevenue || isPaidContent) {
-		// We never serve Reader Revenue epics in this case
-		return null;
-	}
-
-	// Memoised as we only ever want to call the Slots API once, for simplicity
-	// and performance reasons.
-	return (
-		<MemoisedInner
-			isSignedIn={isSignedIn}
-			countryCode={countryCode}
-			contentType={contentType}
-			sectionName={sectionName}
-			shouldHideReaderRevenue={shouldHideReaderRevenue}
-			isMinuteArticle={isMinuteArticle}
-			isPaidContent={isPaidContent}
-			isSensitive={isSensitive}
-			tags={tags}
-			contributionsServiceUrl={contributionsServiceUrl}
-		/>
-	);
 };

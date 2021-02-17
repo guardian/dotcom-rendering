@@ -249,7 +249,7 @@ export const Card = ({
 								)}
 							>
 								{standfirst && (
-									<StandfirstWrapper>
+									<StandfirstWrapper palette={palette}>
 										{standfirst}
 									</StandfirstWrapper>
 								)}
@@ -283,7 +283,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												pillar={format.theme}
+												palette={palette}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -294,8 +294,7 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												design={format.design}
-												pillar={format.theme}
+												palette={palette}
 												long={longCount}
 												short={shortCount}
 											/>

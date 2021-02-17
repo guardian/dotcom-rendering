@@ -9,6 +9,7 @@ import {
 	sport,
 	brandAltBackground,
 	border,
+	brandAlt,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -161,16 +162,17 @@ const textCardHeadline = (format: Format): string => {
 	}
 };
 
+const textCardStandfirst = textCardHeadline;
+
 const textCardKicker = (format: Format): string => {
 	if (
 		format.theme === Special.SpecialReport &&
 		format.design === Design.Comment
 	)
-		// TODO: Pull this in from souce once we see it here:
+		// TODO: Pull this in from source as opinion[550]
 		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
 		return '#ff9941';
-	if (format.theme === Special.SpecialReport)
-		return brandAltBackground.primary;
+	if (format.theme === Special.SpecialReport) return brandAlt[400];
 	if (format.display === Display.Immersive)
 		return pillarPalette[format.theme].bright;
 	switch (format.design) {
@@ -184,15 +186,26 @@ const textCardKicker = (format: Format): string => {
 					return pillarPalette[format.theme].main;
 			}
 		case Design.Media:
-			if (format.theme === Pillar.News)
-				return pillarPalette[format.theme].bright;
-			return pillarPalette[format.theme].main;
+			switch (format.theme) {
+				case Pillar.News:
+					return news[600];
+				case Pillar.Sport:
+					return sport[600];
+				case Pillar.Opinion:
+					// TODO: Pull this in from source as opinion[550]
+					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+					return '#ff9941';
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				default:
+					return pillarPalette[format.theme][500];
+			}
 		default:
 			return pillarPalette[format.theme].main;
 	}
 };
 
-const textCardAge = (format: Format): string => {
+const textCardFooter = (format: Format): string => {
 	switch (format.design) {
 		case Design.Comment:
 			switch (format.theme) {
@@ -215,7 +228,22 @@ const textCardAge = (format: Format): string => {
 					return pillarPalette[format.theme].main;
 			}
 		case Design.Media:
-			return WHITE;
+			switch (format.theme) {
+				case Special.SpecialReport:
+					return brandAlt[400];
+				case Pillar.News:
+					return news[600];
+				case Pillar.Sport:
+					return sport[600];
+				case Pillar.Opinion:
+					// TODO: Pull this in from source as opinion[550]
+					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+					return '#ff9941';
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				default:
+					return pillarPalette[format.theme][500];
+			}
 		default:
 			switch (format.theme) {
 				case Special.SpecialReport:
@@ -318,7 +346,7 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillCardClock = (format: Format): string => {
+const fillCardIcon = (format: Format): string => {
 	// Setting Card clock colour for immersive cards to all be dark grey
 	if (format.display === Display.Immersive) return neutral[60];
 	switch (format.design) {
@@ -343,7 +371,22 @@ const fillCardClock = (format: Format): string => {
 					return pillarPalette[format.theme].main;
 			}
 		case Design.Media:
-			return WHITE;
+			switch (format.theme) {
+				case Special.SpecialReport:
+					return brandAlt[400];
+				case Pillar.News:
+					return news[600];
+				case Pillar.Sport:
+					return sport[600];
+				case Pillar.Opinion:
+					// TODO: Pull this in from source as opinion[550]
+					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
+					return '#ff9941';
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				default:
+					return pillarPalette[format.theme][500];
+			}
 		default:
 			switch (format.theme) {
 				case Special.SpecialReport:
@@ -397,7 +440,8 @@ export const decidePalette = (format: Format): Palette => {
 			cardHeadline: textCardHeadline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
-			cardAge: textCardAge(format),
+			cardStandfirst: textCardStandfirst(format),
+			cardFooter: textCardFooter(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -411,7 +455,7 @@ export const decidePalette = (format: Format): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
-			cardClock: fillCardClock(format),
+			cardIcon: fillCardIcon(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),
