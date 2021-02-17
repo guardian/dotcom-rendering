@@ -103,6 +103,8 @@ const immersiveTitleBadgeStyle = css`
 	padding-bottom: 0px;
 	max-width: max-content;
 	line-height: 1.15;
+	/* Offset parent container margins when Immersive */
+	margin-bottom: -10px;
 `;
 
 export const SeriesSectionLink = ({
