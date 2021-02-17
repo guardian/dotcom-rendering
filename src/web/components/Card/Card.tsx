@@ -37,7 +37,6 @@ type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
-	imageMap?: CarouselImagesMap; // TODO: Make this less specific and replace imageUrl with it.
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
 	isFullCardImage?: boolean; // For use in Carousel until we decide a `Display.Immersive` convention
@@ -184,30 +183,11 @@ export const Card = ({
 								alwaysVertical={alwaysVertical}
 								isFullCardImage={isFullCardImage}
 							>
-								{/* Handle different image sizes for the Immersive Carousel cards */}
-								<picture>
-									<source
-										srcSet={`${
-											imageMap && isFullCardImage
-												? imageMap['300']
-												: ''
-										}`}
-										media="(max-width: 660px)"
-									/>
-									<source
-										srcSet={`${
-											imageMap && isFullCardImage
-												? imageMap['460']
-												: ''
-										}`}
-										media="(min-width: 661px)"
-									/>
-									<img
-										src={imageUrl}
-										alt=""
-										role="presentation"
-									/>
-								</picture>
+								<img
+									src={imageUrl}
+									alt=""
+									role="presentation"
+								/>
 								<>
 									{starRating && (
 										<StarRatingComponent
