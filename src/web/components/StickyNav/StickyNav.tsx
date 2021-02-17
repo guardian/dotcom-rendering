@@ -9,8 +9,7 @@ import { brandBackground, brandLine } from '@guardian/src-foundations/palette';
 import libDebounce from 'lodash.debounce';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
-// import { useAB } from '@guardian/ab-react';
-// import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { LazyNav } from './LazyNav';
 
 interface Props {
@@ -27,7 +26,7 @@ interface NavGroupProps extends Props {
 const stickyStyle = (theme: Theme) => css`
 	position: sticky;
 	top: 0;
-	z-index: 900;
+	${getZIndex('stickyNav')}
 	background-color: white;
 	box-shadow: 0 0 transparent, 0 0 transparent,
 		1px 3px 6px ${neutralBorder(theme)};
