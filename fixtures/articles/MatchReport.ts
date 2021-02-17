@@ -2388,6 +2388,8 @@ export const MatchReport: CAPIType = {
 		},
 	],
 	webPublicationDate: '2021-02-05T22:16:43.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	blocks: [
 		{
 			id: '601d96ef8f0862592e4b23ca',

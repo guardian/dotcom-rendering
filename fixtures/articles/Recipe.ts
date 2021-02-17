@@ -2336,6 +2336,8 @@ export const Recipe: CAPIType = {
 		},
 	],
 	webPublicationDate: '2021-02-06T10:30:38.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	author: {
 		byline: 'Meera Sodha',
 	},

@@ -1810,6 +1810,8 @@ export const PrintShop: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [],
 	webPublicationDate: '2020-12-17T09:07:18.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	author: {
 		byline: 'Guardian sport',
 	},

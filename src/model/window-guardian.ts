@@ -1,5 +1,3 @@
-import { capitalize } from 'cypress/types/lodash';
-
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
 export interface WindowGuardianConfig {

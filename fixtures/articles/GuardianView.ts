@@ -2271,6 +2271,8 @@ export const GuardianView: CAPIType = {
 		},
 	],
 	webPublicationDate: '2021-02-03T18:54:37.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	author: {
 		byline: 'Editorial',
 	},

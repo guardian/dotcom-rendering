@@ -1890,6 +1890,8 @@ export const Feature: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-02-10T06:59:35.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	author: {
 		byline: 'Lanre Bakare',
 		twitterHandle: 'lanre_bakare',

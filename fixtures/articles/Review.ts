@@ -2402,6 +2402,8 @@ export const Review: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-01-17T12:00:05.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	blocks: [
 		{
 			id: '5e1df3f28f08d66fcfaa3e49',
@@ -2916,6 +2918,7 @@ export const Review: CAPIType = {
 		},
 	],
 	webPublicationDateDisplay: 'Fri 17 Jan 2020 12.00 GMT',
+
 	shouldHideAds: false,
 	webTitle:
 		'Sex Education season two review – fast, funny and still not for the faint-hearted',

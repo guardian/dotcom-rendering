@@ -2305,6 +2305,7 @@ export const Analysis: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-02-10T12:31:25.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
 	author: {
 		byline: 'Rory Carroll Ireland correspondent',
 		twitterHandle: 'rorycarroll72',

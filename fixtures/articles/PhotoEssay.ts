@@ -2202,6 +2202,8 @@ export const PhotoEssay: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-12-09T06:30:30.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	author: {
 		byline: 'Cat Vinton',
 	},

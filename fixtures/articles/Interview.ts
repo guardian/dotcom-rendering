@@ -3108,6 +3108,8 @@ export const Interview: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-02-09T11:00:04.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	author: {
 		byline: 'Elle Hunt',
 	},

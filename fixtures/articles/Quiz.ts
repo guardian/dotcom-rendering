@@ -2230,6 +2230,8 @@ export const Quiz: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-01-18T07:00:23.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	blocks: [
 		{
 			id: '71b595fc-e84e-45e9-9c87-cb1ce9c34392',

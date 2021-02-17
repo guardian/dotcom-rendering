@@ -2244,6 +2244,8 @@ export const Article: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
+
 	author: {
 		byline: 'Jennifer Rankin in Brussels',
 	},

@@ -2388,6 +2388,7 @@ export const SpecialReport: CAPIType = {
 		},
 	],
 	webPublicationDate: '2019-10-12T11:00:19.000Z',
+	webPublicationSecondaryDateDisplay: '2020-02-10T12:31:25.000Z',
 	blocks: [
 		{
 			id: '5d887cc78f0834740f3c0692',
