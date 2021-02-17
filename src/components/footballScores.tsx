@@ -92,7 +92,7 @@ const TeamScore: FC<TeamProps> = ({ team, location }) =>
             </div>
         </div>
         <ul css={scorerStyles(location)}>
-            {team.scorers.map(scorer => <li>{scorer.player} {scorer.timeInMinutes}'</li>)}
+            {team.scorers.map(scorer => <li>{scorer.player} {scorer.timeInMinutes}' {scorer.additionalInfo}</li>)}
         </ul>
     </section>
 
