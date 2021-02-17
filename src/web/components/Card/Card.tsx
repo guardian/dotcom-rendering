@@ -131,7 +131,6 @@ export const Card = ({
 	showByline,
 	webPublicationDate,
 	imageUrl,
-	imageMap,
 	imagePosition,
 	imageSize,
 	isFullCardImage,
