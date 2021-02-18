@@ -63,6 +63,7 @@ type Props = {
 	index: number;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
+	starRating?: number;
 };
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -79,6 +80,7 @@ export const ElementRenderer = ({
 	index,
 	hideCaption,
 	isMainMedia,
+	starRating,
 }: Props) => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -294,6 +296,7 @@ export const ElementRenderer = ({
 						element={element}
 						hideCaption={hideCaption}
 						isMainMedia={isMainMedia}
+						starRating={starRating}
 						title={element.title}
 					/>
 				</Figure>
