@@ -9,6 +9,7 @@ import { startup } from '@root/src/web/browser/startup';
 // browsers that cut the mustard (support modules).**
 const initialiseDynamicImport = () => {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-implied-eval
 		window.guardianPolyfilledImport = new Function(
 			'url',
 			`return import(url)`,
