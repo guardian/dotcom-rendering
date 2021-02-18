@@ -122,6 +122,7 @@ const realTimeConfig = (
 		'timeout=TIMEOUT',
 		'adcid=ADCID',
 		'purl=HREF',
+		'gdpr_consent=CONSENT_STRING',
 	].join('&');
 
 	const data = {
