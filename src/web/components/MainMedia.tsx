@@ -2,14 +2,9 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { until } from '@guardian/src-foundations/mq';
-
-import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
-import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
-import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideoBlockComponent';
-import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { Display } from '@guardian/types';
 
+import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
@@ -55,93 +50,6 @@ const immersiveWrapper = css`
     overflow: hidden;
 `;
 
-function renderElement(
-	element: CAPIElement,
-	format: Format,
-	palette: Palette,
-	i: number,
-	hideCaption?: boolean,
-	adTargeting?: AdTargeting,
-	starRating?: number,
-	host?: string,
-) {
-	switch (element._type) {
-		case 'model.dotcomrendering.pageElements.ImageBlockElement':
-			return (
-				<ImageComponent
-					key={i}
-					element={element}
-					format={format}
-					palette={palette}
-					hideCaption={hideCaption}
-					isMainMedia={true}
-					role={element.role}
-					starRating={starRating}
-				/>
-			);
-		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-			return (
-				<div
-					key={i}
-					id={`youtube-block-main-media-${i}`}
-					data-cy="main-media-youtube-atom"
-				>
-					<YoutubeBlockComponent
-						key={i}
-						format={format}
-						palette={palette}
-						hideCaption={hideCaption}
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						adTargeting={adTargeting}
-						isMainMedia={true}
-						id={element.id}
-						assetId={element.assetId}
-						channelId={element.channelId}
-						expired={element.expired}
-						overrideImage={element.overrideImage}
-						posterImage={element.posterImage}
-						duration={element.duration}
-						origin={host}
-					/>
-				</div>
-			);
-		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-			return (
-				<YoutubeEmbedBlockComponent
-					format={format}
-					palette={palette}
-					embedUrl={element.embedUrl}
-					height={element.height}
-					width={element.width}
-					caption={element.caption}
-					credit={element.credit}
-					title={element.title}
-				/>
-			);
-		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-			return (
-				<GuVideoBlockComponent
-					html={element.html}
-					format={format}
-					palette={palette}
-					credit={element.source}
-					caption={element.caption}
-				/>
-			);
-		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-			return (
-				<EmbedBlockComponent html={element.html} alt={element.alt} />
-			);
-		default:
-			// eslint-disable-next-line no-console
-			console.warn(
-				`The following main media element is not supported by DCR ${element._type}`,
-			);
-			return null;
-	}
-}
-
 export const MainMedia: React.FC<{
 	format: Format;
 	palette: Palette;
@@ -150,6 +58,7 @@ export const MainMedia: React.FC<{
 	adTargeting?: AdTargeting;
 	starRating?: number;
 	host?: string;
+	abTests: CAPIType['config']['abTests'];
 }> = ({
 	elements,
 	format,
@@ -158,6 +67,7 @@ export const MainMedia: React.FC<{
 	adTargeting,
 	starRating,
 	host,
+	abTests,
 }) => (
 	<div
 		className={cx(
@@ -165,17 +75,18 @@ export const MainMedia: React.FC<{
 			format.display === Display.Immersive ? immersiveWrapper : noGutters,
 		)}
 	>
-		{elements.map((element, i) =>
-			renderElement(
-				element,
-				format,
-				palette,
-				i,
-				hideCaption,
-				adTargeting,
-				starRating,
-				host,
-			),
-		)}
+		{elements.map((element, index) => (
+			<ElementRenderer
+				element={element}
+				format={format}
+				palette={palette}
+				index={index}
+				hideCaption={hideCaption}
+				adTargeting={adTargeting}
+				starRating={starRating}
+				host={host}
+				abTests={abTests}
+			/>
+		))}
 	</div>
 );
