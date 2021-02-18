@@ -1,11 +1,11 @@
 // ----- Imports ----- //
 
 import { RenderingRequestSerde } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { ContentSerde } from '@guardian/content-api-models/v1/content';
 import { ErrorResponseSerde } from '@guardian/content-api-models/v1/errorResponse';
 import { ItemResponseSerde } from '@guardian/content-api-models/v1/itemResponse';
 import { TBufferedTransport, TCompactProtocol } from 'thrift';
 import type { TProtocol, TTransport } from 'thrift';
-import { ContentSerde } from '@guardian/content-api-models/v1/content';
 
 // ----- Types ----- //
 

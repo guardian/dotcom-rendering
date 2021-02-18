@@ -25,10 +25,10 @@ import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';
 import {
+	capiContentDecoder,
 	capiDecoder,
 	errorDecoder,
 	mapiDecoder,
-	capiContentDecoder,
 } from 'server/decoders';
 import { render as renderEditions } from 'server/editionsPage';
 import { render } from 'server/page';
