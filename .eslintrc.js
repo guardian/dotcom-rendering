@@ -62,7 +62,6 @@ module.exports = {
         'no-console': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-floating-promises': 'off',
-        '@typescript-eslint/no-implied-eval': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
 		'no-shadow': 'off',
 
