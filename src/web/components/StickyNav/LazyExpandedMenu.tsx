@@ -6,9 +6,9 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { Display } from '@guardian/types';
-import { Columns } from '@root/src/web/components/Nav/ExpandedMenu/Columns';
-import { ShowMoreMenu } from '@root/src/web/components/Nav/ExpandedMenu/ShowMoreMenu';
-import { VeggieBurgerMenu } from '@root/src/web/components/Nav/ExpandedMenu/VeggieBurgerMenu';
+import { Columns } from './ExpandedMenu/Columns';
+import { ShowMoreMenu } from './ExpandedMenu/ShowMoreMenu';
+import { VeggieBurgerMenu } from './ExpandedMenu/VeggieBurgerMenu';
 import {
 	buildID,
 	navInputCheckboxId,

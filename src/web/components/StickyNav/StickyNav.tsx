@@ -10,17 +10,26 @@ import libDebounce from 'lodash.debounce';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { LazyNav } from './LazyNav';
+import { Nav } from '../Nav/Nav';
 
-interface Props {
+interface BrowserProps {
 	capiData: CAPIBrowserType;
 	navData: BrowserNavType;
 	format: Format;
 	palette: Palette;
 }
 
-interface NavGroupProps extends Props {
+interface NavGroupLazyProps extends BrowserProps {
 	ID: string;
+}
+
+interface NavGroupEagerProps {
+	capiData: CAPIType;
+	navData: NavType;
+	format: Format;
+	palette: Palette;
 }
 
 const stickyStyle = (theme: Theme) => css`
@@ -44,13 +53,53 @@ const fixedStyle = (theme: Theme, shouldDisplay: boolean) => css`
 	display: ${shouldDisplay ? 'block' : 'none'};
 `;
 
-export const NavGroup: React.FC<NavGroupProps> = ({
+export const NavGroupEager: React.FC<NavGroupEagerProps> = ({
+	capiData,
+	navData,
+	format,
+	palette,
+}: NavGroupEagerProps) => (
+	<>
+		<Section
+			showSideBorders={true}
+			borderColour={brandLine.primary}
+			showTopBorder={false}
+			padded={false}
+			backgroundColour={brandBackground.primary}
+		>
+			<Nav
+				nav={navData}
+				format={{
+					...format,
+					theme: getCurrentPillar(capiData),
+				}}
+				subscribeUrl={capiData.nav.readerRevenueLinks.header.subscribe}
+				edition={capiData.editionId}
+			/>
+		</Section>
+		{navData.subNavSections && (
+			<Section
+				backgroundColour={palette.background.article}
+				padded={false}
+				sectionId="sub-nav-root"
+			>
+				<SubNav
+					subNavSections={navData.subNavSections}
+					currentNavLink={navData.currentNavLink}
+					palette={palette}
+				/>
+			</Section>
+		)}
+	</>
+);
+
+const NavGroupLazy: React.FC<NavGroupLazyProps> = ({
 	capiData,
 	navData,
 	format,
 	palette,
 	ID,
-}: NavGroupProps) => (
+}: NavGroupLazyProps) => (
 	<div>
 		<Section
 			showSideBorders={true}
@@ -90,12 +139,12 @@ export const NavGroup: React.FC<NavGroupProps> = ({
 //
 // *Note:* this uses position:sticky, which only works if the parent element is
 // scrollable and has a fixed height.
-export const StickyNavSimple: React.FC<Props> = ({
+export const StickyNavSimple: React.FC<BrowserProps> = ({
 	capiData,
 	navData,
 	palette,
 	format,
-}: Props) => {
+}: BrowserProps) => {
 	const theme = decideTheme({
 		pillar: capiData.pillar,
 		design: decideDesign(capiData.designType, capiData.tags),
@@ -103,7 +152,7 @@ export const StickyNavSimple: React.FC<Props> = ({
 
 	return (
 		<div className={stickyStyle(theme)}>
-			<NavGroup
+			<NavGroupLazy
 				capiData={capiData}
 				navData={navData}
 				palette={palette}
@@ -117,12 +166,12 @@ export const StickyNavSimple: React.FC<Props> = ({
 // StickyNavBackScroll reappears fixed to top of viewport if below initial buffer and user
 // is scrolling back. The idea is that scrolling back up may indicate intent to
 // reach nav.
-export const StickyNavBackscroll: React.FC<Props> = ({
+export const StickyNavBackscroll: React.FC<BrowserProps> = ({
 	capiData,
 	navData,
 	format,
 	palette,
-}: Props) => {
+}: BrowserProps) => {
 	const initialState = { shouldFix: false, scrollY: 0 };
 	const [state, setState] = useState(initialState);
 
@@ -157,7 +206,7 @@ export const StickyNavBackscroll: React.FC<Props> = ({
 
 	return (
 		<>
-			<NavGroup
+			<NavGroupLazy
 				capiData={capiData}
 				navData={navData}
 				palette={palette}
@@ -166,7 +215,7 @@ export const StickyNavBackscroll: React.FC<Props> = ({
 			/>
 
 			<div className={fixedStyle(pillar, state.shouldFix)}>
-				<NavGroup
+				<NavGroupLazy
 					capiData={capiData}
 					navData={navData}
 					palette={palette}

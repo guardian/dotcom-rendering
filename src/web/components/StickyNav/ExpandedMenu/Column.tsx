@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css, cx } from 'emotion';
 
 import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
@@ -174,30 +174,37 @@ export const Column = ({
 	const columnInputId = `${column.title}-checkbox-input`;
 	const collapseColumnInputId = `${column.title}-button`;
 
+	/*
+        IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
+
+        We therefore use JS to make the Nav elements more accessibile. We add a
+        keydown `addEventListener` to toggle the column drop down.
+        This is not a perfect solution as not all screen readers support JS
+        https://webaim.org/projects/screenreadersurvey8/#javascript
+    */
+	useEffect(() => {
+		const handler = (e: KeyboardEvent) => {
+			// keyCode: 13 => Enter key | keyCode: 32 => Space key
+			if (e.keyCode === 13 || e.keyCode === 32) {
+				e.preventDefault();
+				const el = document.getElementById(columnInputId);
+				el?.click();
+			}
+		};
+
+		document
+			.getElementById(collapseColumnInputId)
+			?.addEventListener('keydown', handler);
+
+		return () => {
+			document
+				.getElementById(collapseColumnInputId)
+				?.removeEventListener('keydown', handler);
+		};
+	}, [columnInputId, collapseColumnInputId]);
+
 	return (
 		<li className={cx(columnStyle, pillarDivider)} role="none">
-			{/*
-                IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
-
-                We therefore use JS to make the Nav elements more accessibile. We add a
-                keydown `addEventListener` to toggle the column drop down.
-                This is not a perfect solution as not all screen readers support JS
-                https://webaim.org/projects/screenreadersurvey8/#javascript
-            */}
-			<script
-				dangerouslySetInnerHTML={{
-					__html: `document.addEventListener('DOMContentLoaded', function(){
-                        document.getElementById('${collapseColumnInputId}').addEventListener('keydown', function(e){
-                            // keyCode: 13 => Enter key | keyCode: 32 => Space key
-                            if (e.keyCode === 13 || e.keyCode === 32) {
-                                e.preventDefault()
-                                document.getElementById('${columnInputId}').click();
-                            }
-                        })
-                    })`,
-				}}
-			/>
-
 			{/*
                 IMPORTANT NOTE:
                 It is important to have the input as the 1st sibling for NoJS to work
