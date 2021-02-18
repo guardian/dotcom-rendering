@@ -40,7 +40,7 @@ const showMore = css`
 	}
 `;
 
-export const ShowMoreButton: React.SFC<{}> = () => (
+export const ShowMoreButton: React.FC = () => (
 	<div className={showMore} aria-label="Show more">
 		<PlusIcon />
 		Show more
