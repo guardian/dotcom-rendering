@@ -128,6 +128,8 @@ interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
 	safe?: boolean;
 	role?: RoleType;
 	alt?: string;
+	height?: number;
+	width?: number;
 	html: string;
 	isMandatory: boolean;
 	embedIndex?: number;
@@ -364,6 +366,7 @@ interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
 	caption?: string;
 	credit?: string;
 	title?: string;
+	originalUrl?: string;
 	role?: RoleType;
 }
 
