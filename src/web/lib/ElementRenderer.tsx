@@ -53,6 +53,16 @@ import {
 } from '@guardian/atoms-rendering';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 
+type Props = {
+	format: Format;
+	palette: Palette;
+	element: CAPIElement;
+	adTargeting?: AdTargeting;
+	host?: string;
+	abTests: CAPIType['config']['abTests'];
+	index: number;
+	hideCaption?: boolean;
+};
 // This is required for spacefinder to work!
 const commercialPosition = css`
 	position: relative;
@@ -66,15 +76,8 @@ export const ElementRenderer = ({
 	host,
 	abTests,
 	index,
-}: {
-	format: Format;
-	palette: Palette;
-	element: CAPIElement;
-	adTargeting?: AdTargeting;
-	host?: string;
-	abTests: CAPIType['config']['abTests'];
-	index: number;
-}) => {
+	hideCaption,
+}: Props) => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
@@ -287,6 +290,7 @@ export const ElementRenderer = ({
 						palette={palette}
 						key={index}
 						element={element}
+						hideCaption={hideCaption}
 						title={element.title}
 					/>
 				</Figure>
@@ -544,7 +548,7 @@ export const ElementRenderer = ({
 						format={format}
 						palette={palette}
 						key={index}
-						hideCaption={false}
+						hideCaption={hideCaption}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
