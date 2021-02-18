@@ -64,7 +64,6 @@ module.exports = {
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/no-implied-eval': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
-        '@typescript-eslint/prefer-as-const': 'off',
         '@typescript-eslint/restrict-plus-operands': 'off',
         'no-shadow': 'off',
 
