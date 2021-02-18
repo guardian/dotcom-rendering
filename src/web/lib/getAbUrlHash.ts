@@ -2,7 +2,7 @@ import { Participations } from '@guardian/ab-core';
 
 export const getForcedParticipationsFromUrl = (
 	windowHash: string,
-): Participations | {} => {
+): Participations => {
 	if (windowHash.startsWith('#ab')) {
 		const tokens = windowHash.replace('#ab-', '').split(',');
 		return tokens.reduce((obj, token) => {

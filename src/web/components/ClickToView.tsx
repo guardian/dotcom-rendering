@@ -11,7 +11,7 @@ import { space } from '@guardian/src-foundations';
 type Props = {
 	children: React.ReactNode;
 	role?: RoleType;
-	onAccept?: Function;
+	onAccept?: () => void;
 	isTracking: boolean;
 	source?: string;
 	sourceDomain?: string;

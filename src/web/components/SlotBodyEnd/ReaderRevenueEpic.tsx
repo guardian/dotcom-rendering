@@ -33,7 +33,7 @@ type PreEpicConfig = {
 	meta: TestMeta;
 	module: {
 		url: string;
-		props: {};
+		props: { [key: string]: any };
 	};
 };
 
@@ -46,7 +46,7 @@ type EpicConfig = {
 };
 
 type EpicProps = {
-	onReminderOpen: Function;
+	onReminderOpen: () => void;
 	// Also anything specified by support-dotcom-components
 };
 
