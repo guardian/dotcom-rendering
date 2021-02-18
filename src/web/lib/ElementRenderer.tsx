@@ -62,6 +62,7 @@ type Props = {
 	abTests: CAPIType['config']['abTests'];
 	index: number;
 	hideCaption?: boolean;
+	isMainMedia?: boolean;
 };
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -77,6 +78,7 @@ export const ElementRenderer = ({
 	abTests,
 	index,
 	hideCaption,
+	isMainMedia,
 }: Props) => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -552,7 +554,7 @@ export const ElementRenderer = ({
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
-						isMainMedia={false}
+						isMainMedia={isMainMedia}
 						id={element.id}
 						assetId={element.assetId}
 						channelId={element.channelId}
