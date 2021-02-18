@@ -1,9 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { Special } from '@guardian/types';
+
 import { neutralBorder } from '@root/src/lib/pillars';
-import { composeLabsCSS } from '@root/src/amp/lib/compose-labs-css';
 import {
 	ListStyle,
 	LinkStyle,
@@ -43,11 +45,11 @@ export const Standfirst: React.SFC<{
 	return (
 		<div
 			data-print-layout="hide"
-			className={composeLabsCSS(
-				pillar,
-				cx(standfirstCss(pillar)),
-				labsStyle,
-			)}
+			className={
+				pillar === Special.Labs
+					? cx(standfirstCss(pillar), labsStyle)
+					: standfirstCss(pillar)
+			}
 			dangerouslySetInnerHTML={{
 				__html: text,
 			}}
