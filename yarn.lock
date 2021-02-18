@@ -2394,10 +2394,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.11.2.tgz#668d0f911aff5c3bc42cb54c606b07640d18f0b8"
   integrity sha512-tX+lZZFgn9PP8RUj14MnsYa7ikBAyTWfQJPNls4o2Q5c+o0uRVYHnlgifvspj0k1m05rFEmYjnmj7rxwpnH2Xw==
 
-"@guardian/discussion-rendering@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-6.1.0.tgz#e576a22de1a06ba92d680c08b57702dd0218e066"
-  integrity sha512-JNbj1CIInmqYv2WZ0qhgrousJ76pf3HbBQFDbvLy9fABJ/nxxoJyc7eMuPu9VPjpf+F4fUHuyeLzsjuSo39DBA==
+"@guardian/discussion-rendering@^6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-6.1.1.tgz#1ba93897366a37072777c30293d6ad181790397b"
+  integrity sha512-qkmABiX4Wk+uWkp+OrL2EpKmWRPzewxX5hlv6nGEAD7SiuLw12PH6slWfMixf0bQiUzCLrhiMJ53i4Q6acI0WQ==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
