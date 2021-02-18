@@ -54,7 +54,10 @@ const timeoutify = (
 
 			candidateConfig.candidate
 				.canShow()
-				.then((result) => resolve(result));
+				.then((result) => resolve(result))
+				.catch((e) =>
+					console.error(`timeoutify candidate - error: ${e}`),
+				);
 		});
 
 	const cancelTimeout = () => timer && clearTimeout(timer);
@@ -109,15 +112,17 @@ export const pickMessage = ({
 			Promise.resolve({ idx: -1 }),
 		);
 
-		winner.then(({ idx, meta }: WinningMessage) => {
-			clearAllTimeouts(candidateConfigsWithTimeout);
-			resolve(
-				idx === -1
-					? defaultShow
-					: () =>
-							candidateConfigsWithTimeout[idx].candidate.show(
-								meta,
-							),
-			);
-		});
+		winner
+			.then(({ idx, meta }: WinningMessage) => {
+				clearAllTimeouts(candidateConfigsWithTimeout);
+				resolve(
+					idx === -1
+						? defaultShow
+						: () =>
+								candidateConfigsWithTimeout[idx].candidate.show(
+									meta,
+								),
+				);
+			})
+			.catch((e) => console.error(`pickMessage winner - error: ${e}`));
 	});

@@ -117,9 +117,13 @@ export const StickyBottomBanner = ({
 			name: 'banner',
 		};
 
-		pickMessage(bannerConfig).then((PickedBanner: () => MaybeFC) =>
-			setSelectedBanner(PickedBanner),
-		);
+		pickMessage(bannerConfig)
+			.then((PickedBanner: () => MaybeFC) =>
+				setSelectedBanner(PickedBanner),
+			)
+			.catch((e) =>
+				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
+			);
 	}, [isSignedIn, asyncCountryCode, CAPI]);
 
 	if (SelectedBanner) {

@@ -27,9 +27,13 @@ export const DefaultStory = (): ReactElement => {
 
 		import(
 			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
-		).then((module) => {
-			setBrazeMessage(() => module.BrazeMessage);
-		});
+		)
+			.then((module) => {
+				setBrazeMessage(() => module.BrazeMessage);
+			})
+			.catch((e) =>
+				console.error(`braze-components dynamic import - error: ${e}`),
+			);
 	}, []);
 
 	if (BrazeMessage) {

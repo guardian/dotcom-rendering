@@ -73,7 +73,9 @@ const init = async (): Promise<void> => {
 		window.onunhandledrejection = (event: undefined | { reason?: any }) =>
 			event && injectSentry(event.reason);
 		window.guardian.modules.sentry.reportError = (error) => {
-			injectSentry(error);
+			injectSentry(error).catch((e) =>
+				console.error(`injectSentry - error: ${e}`),
+			);
 		};
 	} catch {
 		// We failed to setup Sentry :(
