@@ -223,7 +223,7 @@ Resources:
 
               mkdir /var/log/dotcom-rendering
               chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-							chown -R dotcom-rendering:frontend /home/ubuntu/.pm2/logs
+              chown -R dotcom-rendering:frontend /home/ubuntu/.pm2/logs
 
               /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js -i max
 
