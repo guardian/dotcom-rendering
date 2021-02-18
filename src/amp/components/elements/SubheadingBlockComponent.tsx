@@ -51,7 +51,7 @@ export const SubheadingBlockComponent: React.FC<{
 			pillar === Special.Labs
 				? cx(
 						style(pillar),
-						{ [immersiveBodyStyle]: isImmersive },
+						isImmersive && immersiveBodyStyle,
 						subHeadingStyleLabs,
 				  )
 				: style(pillar)
