@@ -89,11 +89,7 @@ struct Campaign {
 struct Scorer {
     1: string player
     2: i32 timeInMinutes
-}
-
-struct FollowUp {
-    1: string type
-    2: string uri
+    3: string additionalInfo
 }
 
 struct FootballTeam {
@@ -103,15 +99,13 @@ struct FootballTeam {
     4: string crestUri
     5: i32 score
     6: list<Scorer> scorers
-    7: FollowUp FollowUp
 }
 
 struct FootballContent {
     1: required string id
     2: required string status
-    3: optional string phase,
-    4: required string kickOff,
-    5: required string competitionDisplayName,
+    4: required string kickOff
+    5: required string competitionDisplayName
     6: required FootballTeam homeTeam
     7: required FootballTeam awayTeam
     8: required string matchInfoUri
@@ -121,7 +115,7 @@ struct FootballContent {
 
 struct RenderingRequest {
     1: required v1.Content content
-    2: optional i32 commentCount 
+    2: optional i32 commentCount
     3: optional bool specialReport
     4: optional map<string,string> targetingParams
     5: optional Branding branding
