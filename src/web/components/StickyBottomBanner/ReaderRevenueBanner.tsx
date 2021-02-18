@@ -88,7 +88,10 @@ const buildPayload = (props: BuildPayloadProps) => {
 };
 
 // TODO replace this with an imported version from the client lib
-const getBanner = (meta: {}, url: string): Promise<Response> => {
+const getBanner = (
+	meta: { [key: string]: any },
+	url: string,
+): Promise<Response> => {
 	const json = JSON.stringify(meta);
 	return fetch(url, {
 		method: 'post',

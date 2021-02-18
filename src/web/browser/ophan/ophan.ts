@@ -9,7 +9,7 @@ import {
 	TestMeta,
 } from '@guardian/types';
 
-export const record = (event: {}): void => {
+export const record = (event: { [key: string]: any }): void => {
 	if (
 		window.guardian &&
 		window.guardian.ophan &&

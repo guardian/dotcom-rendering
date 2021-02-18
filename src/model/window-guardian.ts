@@ -17,7 +17,7 @@ export interface WindowGuardianConfig {
 		adUnit: string;
 		showRelatedContent: boolean;
 		ajaxUrl: string;
-		hbImpl: object | string;
+		hbImpl: { [key: string]: any } | string;
 		shouldHideReaderRevenue: boolean;
 	} & ConfigType;
 	libs: {

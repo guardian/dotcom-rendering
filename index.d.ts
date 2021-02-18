@@ -349,7 +349,7 @@ interface CAPIType {
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
 	webURL: string;
-	linkedData: object[];
+	linkedData: { [key: string]: any }[];
 	config: ConfigType;
 	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
 	// in decideDesign but need to allow the type here before then
@@ -589,7 +589,7 @@ interface ConfigType extends CommercialConfigType {
 	googletagUrl: string;
 	stage: string;
 	frontendAssetsFullURL: string;
-	hbImpl: object | string;
+	hbImpl: { [key: string]: any } | string;
 	adUnit: string;
 	isSensitive: boolean;
 	videoDuration: number;
@@ -676,7 +676,7 @@ interface DCRServerDocumentData {
 	CAPI: CAPIType;
 	NAV: NavType;
 	GA: GADataType;
-	linkedData: object;
+	linkedData: { [key: string]: any; };
 }
 
 interface DCRBrowserDocumentData {
@@ -685,7 +685,7 @@ interface DCRBrowserDocumentData {
 	CAPI: CAPIBrowserType;
 	NAV: SubNavBrowserType;
 	GA: GADataType;
-	linkedData: object;
+	linkedData: { [key: string]: any; };
 }
 
 type IslandType =

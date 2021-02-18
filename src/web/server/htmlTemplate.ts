@@ -23,7 +23,7 @@ export const htmlTemplate = ({
 }: {
 	title?: string;
 	description: string;
-	linkedData: object;
+	linkedData: { [key: string]: any };
 	loadableConfigScripts: string[];
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];

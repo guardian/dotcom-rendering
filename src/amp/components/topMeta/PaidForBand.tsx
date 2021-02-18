@@ -103,7 +103,7 @@ const iconStyle = css`
 	height: 20px;
 `;
 
-export const PaidForBand: React.FC<{}> = () => (
+export const PaidForBand: React.FC = () => (
 	<header className={headerStyle}>
 		<div className={metaStyle}>
 			<span>Paid content</span>

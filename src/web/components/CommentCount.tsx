@@ -11,7 +11,7 @@ type Props = {
 	palette: Palette;
 	isCommentable: boolean;
 	commentCount: number;
-	setIsExpanded: Function;
+	setIsExpanded: (isExpanded: boolean) => void;
 };
 
 const containerStyles = (palette: Palette) => css`
