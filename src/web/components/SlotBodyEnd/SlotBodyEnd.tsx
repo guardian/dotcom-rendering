@@ -89,9 +89,11 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 
-		pickMessage(epicConfig).then((PickedEpic: () => MaybeFC) =>
-			setSelectedEpic(PickedEpic),
-		);
+		pickMessage(epicConfig)
+			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
+			.catch((e) =>
+				console.error(`SlotBodyEnd pickMessage - error: ${e}`),
+			);
 	}, [isSignedIn, countryCode]);
 
 	if (SelectedEpic) {

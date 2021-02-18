@@ -31,8 +31,12 @@ const fetchExperimentsData = (): Promise<void> => {
 const oneMinute = 60_000;
 const refreshExperimentsData = () => {
 	setTimeout(() => {
-		fetchExperimentsData().then(refreshExperimentsData);
+		fetchExperimentsData()
+			.then(refreshExperimentsData)
+			.catch((e) => console.error(`fetchExperimentsData - error: ${e}`));
 	}, oneMinute * 2);
 };
 
-fetchExperimentsData().then(refreshExperimentsData);
+fetchExperimentsData()
+	.then(refreshExperimentsData)
+	.catch((e) => console.error(`fetchExperimentsData - error: ${e}`));

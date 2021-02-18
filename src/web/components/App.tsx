@@ -182,9 +182,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 		// useOnce means this code will only run once isSignedIn is defined, and only
 		// run one time
 		if (isSignedIn) {
-			getUser(CAPI.config.discussionApiUrl).then((theUser) => {
-				if (theUser) setUser(theUser);
-			});
+			getUser(CAPI.config.discussionApiUrl)
+				.then((theUser) => {
+					if (theUser) setUser(theUser);
+				})
+				.catch((e) => console.error(`getUser - error: ${e}`));
 		} else {
 			setUser(null);
 		}
@@ -194,7 +196,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 		const callFetch = () => {
 			const countryCodePromise = getCountryCode();
 			setAsyncCountryCode(countryCodePromise);
-			countryCodePromise.then((cc) => setCountryCode(cc || ''));
+			countryCodePromise
+				.then((cc) => setCountryCode(cc || ''))
+				.catch((e) =>
+					console.error(`countryCodePromise - error: ${e}`),
+				);
 		};
 		callFetch();
 	}, []);
@@ -214,7 +220,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 				incrementWeeklyArticleCount();
 			}
 		};
-		incrementArticleCountsIfConsented();
+		incrementArticleCountsIfConsented().catch((e) =>
+			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
+		);
 	}, []);
 
 	// Ensure the focus state of any buttons/inputs in any of the Source
@@ -274,13 +282,19 @@ export const App = ({ CAPI, NAV }: Props) => {
 			onConsentChange(() => {
 				if (!recordedConsentTime) {
 					recordedConsentTime = true;
-					cmp.willShowPrivacyMessage().then((willShow) => {
-						trackPerformance(
-							'consent',
-							'acquired',
-							willShow ? 'new' : 'existing',
+					cmp.willShowPrivacyMessage()
+						.then((willShow) => {
+							trackPerformance(
+								'consent',
+								'acquired',
+								willShow ? 'new' : 'existing',
+							);
+						})
+						.catch((e) =>
+							console.error(
+								`CMP willShowPrivacyMessage - error: ${e}`,
+							),
 						);
-					});
 				}
 			});
 
@@ -298,8 +312,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 		onConsentChange((state: any) => {
 			const consentGiven = getConsentFor('google-analytics', state);
 			if (consentGiven) {
-				loadScript('https://www.google-analytics.com/analytics.js');
-				loadScript(window.guardian.gaPath);
+				Promise.all([
+					loadScript('https://www.google-analytics.com/analytics.js'),
+					loadScript(window.guardian.gaPath),
+				]).catch((e) => console.error(`GA - error: ${e}`));
 			} else {
 				// We should never be able to directly set things to the global window object.
 				// But in this case we want to stub things for testing, so it's ok to ignore this rule
