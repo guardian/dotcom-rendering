@@ -78,6 +78,12 @@ interface QuizAtomBlockElement {
 	id: string;
 	questions: QuestionType[];
 	resultBuckets: ResultBucketsType[];
+	resultGroups: {
+		id: string;
+		title: string;
+		shareText: string;
+		minScore: number;
+	}[];
 }
 
 interface CodeBlockElement {

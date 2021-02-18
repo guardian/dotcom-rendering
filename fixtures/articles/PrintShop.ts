@@ -12,9 +12,7 @@
  */
 
 export const PrintShop: CAPIType = {
-	shouldHideReaderRevenue: false,
 	slotMachineFlags: '',
-	isAdFreeUser: false,
 	main: '',
 	subMetaSectionLinks: [
 		{
@@ -216,6 +214,904 @@ export const PrintShop: CAPIType = {
 			],
 		},
 	},
+	beaconURL: '//phar.gu-web.net',
+	webPublicationSecondaryDateDisplay:
+		'Last modified on Thu 17 Dec 2020 14.04 GMT',
+	editionLongForm: 'UK edition',
+	hasRelated: true,
+	publication: 'theguardian.com',
+	trailText:
+		'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
+	subMetaKeywordLinks: [
+		{
+			url: '/artanddesign/photography',
+			title: 'Photography',
+		},
+	],
+	contentType: 'Article',
+	nav: {
+		currentUrl: '/artanddesign',
+		pillars: [
+			{
+				title: 'News',
+				url: '/',
+				longTitle: 'Headlines',
+				iconName: 'home',
+				children: [
+					{
+						title: 'UK',
+						url: '/uk-news',
+						longTitle: 'UK news',
+						children: [
+							{
+								title: 'UK politics',
+								url: '/politics',
+							},
+							{
+								title: 'Education',
+								url: '/education',
+								children: [
+									{
+										title: 'Schools',
+										url: '/education/schools',
+									},
+									{
+										title: 'Teachers',
+										url: '/teacher-network',
+									},
+									{
+										title: 'Universities',
+										url: '/education/universities',
+									},
+									{
+										title: 'Students',
+										url: '/education/students',
+									},
+								],
+							},
+							{
+								title: 'Media',
+								url: '/media',
+							},
+							{
+								title: 'Society',
+								url: '/society',
+							},
+							{
+								title: 'Law',
+								url: '/law',
+							},
+							{
+								title: 'Scotland',
+								url: '/uk/scotland',
+							},
+							{
+								title: 'Wales',
+								url: '/uk/wales',
+							},
+							{
+								title: 'Northern Ireland',
+								url: '/uk/northernireland',
+							},
+						],
+					},
+					{
+						title: 'World',
+						url: '/world',
+						longTitle: 'World news',
+						children: [
+							{
+								title: 'Europe',
+								url: '/world/europe-news',
+							},
+							{
+								title: 'US',
+								url: '/us-news',
+								longTitle: 'US news',
+							},
+							{
+								title: 'Americas',
+								url: '/world/americas',
+							},
+							{
+								title: 'Asia',
+								url: '/world/asia',
+							},
+							{
+								title: 'Australia',
+								url: '/australia-news',
+								longTitle: 'Australia news',
+							},
+							{
+								title: 'Middle East',
+								url: '/world/middleeast',
+							},
+							{
+								title: 'Africa',
+								url: '/world/africa',
+							},
+							{
+								title: 'Inequality',
+								url: '/inequality',
+							},
+							{
+								title: 'Global development',
+								url: '/global-development',
+							},
+						],
+					},
+					{
+						title: 'Business',
+						url: '/business',
+						children: [
+							{
+								title: 'Economics',
+								url: '/business/economics',
+							},
+							{
+								title: 'Banking',
+								url: '/business/banking',
+							},
+							{
+								title: 'Money',
+								url: '/money',
+								children: [
+									{
+										title: 'Property',
+										url: '/money/property',
+									},
+									{
+										title: 'Pensions',
+										url: '/money/pensions',
+									},
+									{
+										title: 'Savings',
+										url: '/money/savings',
+									},
+									{
+										title: 'Borrowing',
+										url: '/money/debt',
+									},
+									{
+										title: 'Careers',
+										url: '/money/work-and-careers',
+									},
+								],
+							},
+							{
+								title: 'Markets',
+								url: '/business/stock-markets',
+							},
+							{
+								title: 'Project Syndicate',
+								url:
+									'/business/series/project-syndicate-economists',
+							},
+							{
+								title: 'B2B',
+								url: '/business-to-business',
+							},
+							{
+								title: 'Retail',
+								url: '/business/retail',
+							},
+						],
+					},
+					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+					},
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
+						title: 'Environment',
+						url: '/environment',
+						children: [
+							{
+								title: 'Climate change',
+								url: '/environment/climate-change',
+							},
+							{
+								title: 'Wildlife',
+								url: '/environment/wildlife',
+							},
+							{
+								title: 'Energy',
+								url: '/environment/energy',
+							},
+							{
+								title: 'Pollution',
+								url: '/environment/pollution',
+							},
+						],
+					},
+					{
+						title: 'UK politics',
+						url: '/politics',
+					},
+					{
+						title: 'Education',
+						url: '/education',
+						children: [
+							{
+								title: 'Schools',
+								url: '/education/schools',
+							},
+							{
+								title: 'Teachers',
+								url: '/teacher-network',
+							},
+							{
+								title: 'Universities',
+								url: '/education/universities',
+							},
+							{
+								title: 'Students',
+								url: '/education/students',
+							},
+						],
+					},
+					{
+						title: 'Society',
+						url: '/society',
+					},
+					{
+						title: 'Science',
+						url: '/science',
+					},
+					{
+						title: 'Tech',
+						url: '/technology',
+					},
+					{
+						title: 'Global development',
+						url: '/global-development',
+					},
+					{
+						title: 'Obituaries',
+						url: '/tone/obituaries',
+					},
+				],
+			},
+			{
+				title: 'Opinion',
+				url: '/commentisfree',
+				longTitle: 'Opinion home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'The Guardian view',
+						url: '/profile/editorial',
+					},
+					{
+						title: 'Columnists',
+						url: '/index/contributors',
+					},
+					{
+						title: 'Cartoons',
+						url: '/cartoons/archive',
+					},
+					{
+						title: 'Opinion videos',
+						url: '/type/video+tone/comment',
+					},
+					{
+						title: 'Letters',
+						url: '/tone/letters',
+					},
+				],
+			},
+			{
+				title: 'Sport',
+				url: '/sport',
+				longTitle: 'Sport home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
+						title: 'Cricket',
+						url: '/sport/cricket',
+					},
+					{
+						title: 'Rugby union',
+						url: '/sport/rugby-union',
+					},
+					{
+						title: 'Tennis',
+						url: '/sport/tennis',
+					},
+					{
+						title: 'Cycling',
+						url: '/sport/cycling',
+					},
+					{
+						title: 'F1',
+						url: '/sport/formulaone',
+					},
+					{
+						title: 'Golf',
+						url: '/sport/golf',
+					},
+					{
+						title: 'Boxing',
+						url: '/sport/boxing',
+					},
+					{
+						title: 'Rugby league',
+						url: '/sport/rugbyleague',
+					},
+					{
+						title: 'Racing',
+						url: '/sport/horse-racing',
+					},
+					{
+						title: 'US sports',
+						url: '/sport/us-sport',
+					},
+				],
+			},
+			{
+				title: 'Culture',
+				url: '/culture',
+				longTitle: 'Culture home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Film',
+						url: '/film',
+					},
+					{
+						title: 'Music',
+						url: '/music',
+					},
+					{
+						title: 'TV & radio',
+						url: '/tv-and-radio',
+					},
+					{
+						title: 'Books',
+						url: '/books',
+					},
+					{
+						title: 'Art & design',
+						url: '/artanddesign',
+					},
+					{
+						title: 'Stage',
+						url: '/stage',
+					},
+					{
+						title: 'Games',
+						url: '/games',
+					},
+					{
+						title: 'Classical',
+						url: '/music/classicalmusicandopera',
+					},
+				],
+			},
+			{
+				title: 'Lifestyle',
+				url: '/lifeandstyle',
+				longTitle: 'Lifestyle home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Fashion',
+						url: '/fashion',
+					},
+					{
+						title: 'Food',
+						url: '/food',
+					},
+					{
+						title: 'Recipes',
+						url: '/tone/recipes',
+					},
+					{
+						title: 'Travel',
+						url: '/travel',
+						children: [
+							{
+								title: 'UK',
+								url: '/travel/uk',
+							},
+							{
+								title: 'Europe',
+								url: '/travel/europe',
+							},
+							{
+								title: 'US',
+								url: '/travel/usa',
+							},
+						],
+					},
+					{
+						title: 'Health & fitness',
+						url: '/lifeandstyle/health-and-wellbeing',
+					},
+					{
+						title: 'Women',
+						url: '/lifeandstyle/women',
+					},
+					{
+						title: 'Men',
+						url: '/lifeandstyle/men',
+					},
+					{
+						title: 'Love & sex',
+						url: '/lifeandstyle/love-and-sex',
+					},
+					{
+						title: 'Beauty',
+						url: '/fashion/beauty',
+					},
+					{
+						title: 'Home & garden',
+						url: '/lifeandstyle/home-and-garden',
+					},
+					{
+						title: 'Money',
+						url: '/money',
+						children: [
+							{
+								title: 'Property',
+								url: '/money/property',
+							},
+							{
+								title: 'Pensions',
+								url: '/money/pensions',
+							},
+							{
+								title: 'Savings',
+								url: '/money/savings',
+							},
+							{
+								title: 'Borrowing',
+								url: '/money/debt',
+							},
+							{
+								title: 'Careers',
+								url: '/money/work-and-careers',
+							},
+						],
+					},
+					{
+						title: 'Cars',
+						url: '/technology/motoring',
+					},
+				],
+			},
+		],
+		otherLinks: [
+			{
+				title: 'The Guardian app',
+				url:
+					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+			},
+			{
+				title: 'Video',
+				url: '/video',
+			},
+			{
+				title: 'Podcasts',
+				url: '/podcasts',
+			},
+			{
+				title: 'Pictures',
+				url: '/inpictures',
+			},
+			{
+				title: 'Newsletters',
+				url: '/email-newsletters',
+			},
+			{
+				title: "Today's paper",
+				url: '/theguardian',
+				children: [
+					{
+						title: 'Obituaries',
+						url: '/tone/obituaries',
+					},
+					{
+						title: 'G2',
+						url: '/theguardian/g2',
+					},
+					{
+						title: 'Weekend',
+						url: '/theguardian/weekend',
+					},
+					{
+						title: 'The Guide',
+						url: '/theguardian/theguide',
+					},
+					{
+						title: 'Saturday review',
+						url: '/theguardian/guardianreview',
+					},
+				],
+			},
+			{
+				title: 'Inside the Guardian',
+				url: 'https://www.theguardian.com/membership',
+			},
+			{
+				title: 'The Observer',
+				url: '/observer',
+				children: [
+					{
+						title: 'Comment',
+						url: '/theobserver/news/comment',
+					},
+					{
+						title: 'The New Review',
+						url: '/theobserver/new-review',
+					},
+					{
+						title: 'Observer Magazine',
+						url: '/theobserver/magazine',
+					},
+					{
+						title: 'Observer Food Monthly',
+						url: '/theobserver/foodmonthly',
+					},
+				],
+			},
+			{
+				title: 'Guardian Weekly',
+				url:
+					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+			},
+			{
+				title: 'Crosswords',
+				url: '/crosswords',
+				children: [
+					{
+						title: 'Blog',
+						url: '/crosswords/crossword-blog',
+					},
+					{
+						title: 'Editor',
+						url: '/crosswords/series/crossword-editor-update',
+					},
+					{
+						title: 'Quick',
+						url: '/crosswords/series/quick',
+					},
+					{
+						title: 'Cryptic',
+						url: '/crosswords/series/cryptic',
+					},
+					{
+						title: 'Prize',
+						url: '/crosswords/series/prize',
+					},
+					{
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
+						title: 'Genius',
+						url: '/crosswords/series/genius',
+					},
+					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Azed',
+						url: '/crosswords/series/azed',
+					},
+				],
+			},
+		],
+		brandExtensions: [
+			{
+				title: 'Search jobs',
+				url:
+					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+			},
+			{
+				title: 'Hire with Guardian Jobs',
+				url:
+					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+			},
+			{
+				title: 'Holidays',
+				url:
+					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+			},
+			{
+				title: 'Live events',
+				url:
+					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+			},
+			{
+				title: 'Masterclasses',
+				url: '/guardian-masterclasses',
+			},
+			{
+				title: 'Digital Archive',
+				url: 'https://theguardian.newspapers.com',
+			},
+			{
+				title: 'Guardian Print Shop',
+				url: '/artanddesign/series/gnm-print-sales',
+			},
+			{
+				title: 'Patrons',
+				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+			},
+			{
+				title: 'Guardian Puzzles app',
+				url: 'https://puzzles.theguardian.com/download',
+			},
+		],
+		currentNavLinkTitle: 'Art & design',
+		currentPillarTitle: 'Culture',
+		subNavSections: {
+			links: [
+				{
+					title: 'Film',
+					url: '/film',
+				},
+				{
+					title: 'Music',
+					url: '/music',
+				},
+				{
+					title: 'TV & radio',
+					url: '/tv-and-radio',
+				},
+				{
+					title: 'Books',
+					url: '/books',
+				},
+				{
+					title: 'Art & design',
+					url: '/artanddesign',
+				},
+				{
+					title: 'Stage',
+					url: '/stage',
+				},
+				{
+					title: 'Games',
+					url: '/games',
+				},
+				{
+					title: 'Classical',
+					url: '/music/classicalmusicandopera',
+				},
+			],
+		},
+		readerRevenueLinks: {
+			header: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			footer: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			sideMenu: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			ampHeader: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			ampFooter: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+		},
+	},
+	author: {
+		byline: 'Guardian sport',
+	},
+	designType: 'Immersive',
+	editionId: 'UK',
+	standfirst:
+		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
+	openGraphData: {
+		'og:url':
+			'http://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+		'article:author': 'https://www.theguardian.com/profile/guardian-sport',
+		'og:image:height': '720',
+		'og:description':
+			'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
+		'og:image:width': '1200',
+		'og:image':
+			'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=78a10cbc67fd64bbdff889b85c10b3c3',
+		'al:ios:url':
+			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=applinks',
+		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:type': 'article',
+		'al:ios:app_store_id': '409128287',
+		'article:section': 'Art and design',
+		'article:published_time': '2020-12-17T09:07:18.000Z',
+		'og:title': 'Buy a classic sport photograph: the immortal Bobby Moore',
+		'fb:app_id': '180444840287',
+		'article:tag':
+			'England,Football,Sport,Photography,Art and design,Culture',
+		'al:ios:app_name': 'The Guardian',
+		'og:site_name': 'the Guardian',
+		'article:modified_time': '2020-12-17T14:04:58.000Z',
+	},
+	sectionUrl: 'football/england',
+	pageId:
+		'artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+	version: 3,
+	tags: [
+		{
+			id: 'artanddesign/series/guardian-print-shop',
+			type: 'Series',
+			title: 'Guardian Print Shop',
+		},
+		{
+			id: 'football/england',
+			type: 'Keyword',
+			title: 'England',
+		},
+		{
+			id: 'football/football',
+			type: 'Keyword',
+			title: 'Football',
+		},
+		{
+			id: 'sport/sport',
+			type: 'Keyword',
+			title: 'Sport',
+		},
+		{
+			id: 'artanddesign/photography',
+			type: 'Keyword',
+			title: 'Photography',
+		},
+		{
+			id: 'artanddesign/artanddesign',
+			type: 'Keyword',
+			title: 'Art and design',
+		},
+		{
+			id: 'culture/culture',
+			type: 'Keyword',
+			title: 'Culture',
+		},
+		{
+			id: 'type/article',
+			type: 'Type',
+			title: 'Article',
+		},
+		{
+			id: 'profile/guardian-sport',
+			type: 'Contributor',
+			title: 'Guardian sport',
+		},
+		{
+			id: 'tracking/commissioningdesk/uk-pictures-guardian-news',
+			type: 'Tracking',
+			title: 'UK Pictures Guardian News',
+		},
+	],
+	pillar: 'culture',
+	webURL:
+		'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+	showBottomSocialButtons: true,
+	isImmersive: true,
+	sectionLabel: 'England',
+	shouldHideReaderRevenue: false,
+	isAdFreeUser: false,
 	pageFooter: {
 		footerLinks: [
 			[
@@ -386,10 +1282,7 @@ export const PrintShop: CAPIType = {
 		'twitter:app:url:iphone':
 			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=twitter',
 	},
-	beaconURL: '//phar.gu-web.net',
 	sectionName: 'artanddesign',
-	editionLongForm: 'UK edition',
-	hasRelated: true,
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -401,1419 +1294,10 @@ export const PrintShop: CAPIType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	publication: 'theguardian.com',
-	trailText:
-		'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
-	subMetaKeywordLinks: [
-		{
-			url: '/artanddesign/photography',
-			title: 'Photography',
-		},
-	],
-	contentType: 'Article',
 	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
-	nav: {
-		currentUrl: '/artanddesign',
-		pillars: [
-			{
-				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
-					{
-						title: 'UK',
-						url: '/uk-news',
-						longTitle: 'UK news',
-						iconName: '',
-						children: [
-							{
-								title: 'UK politics',
-								url: '/politics',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Education',
-								url: '/education',
-								longTitle: '',
-								iconName: '',
-								children: [
-									{
-										title: 'Schools',
-										url: '/education/schools',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Teachers',
-										url: '/teacher-network',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Universities',
-										url: '/education/universities',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Students',
-										url: '/education/students',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-								],
-								classList: [],
-							},
-							{
-								title: 'Media',
-								url: '/media',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Society',
-								url: '/society',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Law',
-								url: '/law',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Scotland',
-								url: '/uk/scotland',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Wales',
-								url: '/uk/wales',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Northern Ireland',
-								url: '/uk/northernireland',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'World',
-						url: '/world',
-						longTitle: 'World news',
-						iconName: '',
-						children: [
-							{
-								title: 'Europe',
-								url: '/world/europe-news',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'US',
-								url: '/us-news',
-								longTitle: 'US news',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Americas',
-								url: '/world/americas',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Asia',
-								url: '/world/asia',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Australia',
-								url: '/australia-news',
-								longTitle: 'Australia news',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Middle East',
-								url: '/world/middleeast',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Africa',
-								url: '/world/africa',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Inequality',
-								url: '/inequality',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Global development',
-								url: '/global-development',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Business',
-						url: '/business',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Economics',
-								url: '/business/economics',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Banking',
-								url: '/business/banking',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Money',
-								url: '/money',
-								longTitle: '',
-								iconName: '',
-								children: [
-									{
-										title: 'Property',
-										url: '/money/property',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Pensions',
-										url: '/money/pensions',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Savings',
-										url: '/money/savings',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Borrowing',
-										url: '/money/debt',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Careers',
-										url: '/money/work-and-careers',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-								],
-								classList: [],
-							},
-							{
-								title: 'Markets',
-								url: '/business/stock-markets',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'B2B',
-								url: '/business-to-business',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Environment',
-						url: '/environment',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Climate change',
-								url: '/environment/climate-change',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Wildlife',
-								url: '/environment/wildlife',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Energy',
-								url: '/environment/energy',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Pollution',
-								url: '/environment/pollution',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'UK politics',
-						url: '/politics',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Society',
-						url: '/society',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Science',
-						url: '/science',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Tech',
-						url: '/technology',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Obituaries',
-						url: '/tone/obituaries',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Columnists',
-						url: '/index/contributors',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Cartoons',
-						url: '/cartoons/archive',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Letters',
-						url: '/tone/letters',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Football',
-						url: '/football',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Cricket',
-						url: '/sport/cricket',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Rugby union',
-						url: '/sport/rugby-union',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Tennis',
-						url: '/sport/tennis',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Cycling',
-						url: '/sport/cycling',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'F1',
-						url: '/sport/formulaone',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Golf',
-						url: '/sport/golf',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Boxing',
-						url: '/sport/boxing',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Rugby league',
-						url: '/sport/rugbyleague',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Racing',
-						url: '/sport/horse-racing',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'US sports',
-						url: '/sport/us-sport',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Film',
-						url: '/film',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Music',
-						url: '/music',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Books',
-						url: '/books',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Art & design',
-						url: '/artanddesign',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Stage',
-						url: '/stage',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Games',
-						url: '/games',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Fashion',
-						url: '/fashion',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Food',
-						url: '/food',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Recipes',
-						url: '/tone/recipes',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Travel',
-						url: '/travel',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'UK',
-								url: '/travel/uk',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Europe',
-								url: '/travel/europe',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'US',
-								url: '/travel/usa',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Health & fitness',
-						url: '/lifeandstyle/health-and-wellbeing',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Women',
-						url: '/lifeandstyle/women',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Men',
-						url: '/lifeandstyle/men',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Love & sex',
-						url: '/lifeandstyle/love-and-sex',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Beauty',
-						url: '/fashion/beauty',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Home & garden',
-						url: '/lifeandstyle/home-and-garden',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Cars',
-						url: '/technology/motoring',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Video',
-				url: '/video',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				longTitle: '',
-				iconName: '',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/tone/obituaries',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Weekend',
-						url: '/theguardian/weekend',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'The Guide',
-						url: '/theguardian/theguide',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Saturday review',
-						url: '/theguardian/guardianreview',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				longTitle: '',
-				iconName: '',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				longTitle: '',
-				iconName: '',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Guardian Puzzles app',
-				url: 'https://puzzles.theguardian.com/download',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-		],
-		currentNavLink: {
-			title: 'Art & design',
-			url: '/artanddesign',
-			longTitle: '',
-			iconName: '',
-			children: [],
-			classList: [],
-		},
-		subNavSections: {
-			links: [
-				{
-					title: 'Film',
-					url: '/film',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Music',
-					url: '/music',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'TV & radio',
-					url: '/tv-and-radio',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Books',
-					url: '/books',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Art & design',
-					url: '/artanddesign',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Stage',
-					url: '/stage',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Games',
-					url: '/games',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Classical',
-					url: '/music/classicalmusicandopera',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-			],
-		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-		},
-	},
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [],
 	webPublicationDate: '2020-12-17T09:07:18.000Z',
-	author: {
-		byline: 'Guardian sport',
-	},
-	designType: 'Immersive',
 	blocks: [
 		{
 			id: '5dc05a8c8f0809525b6f5f10',
@@ -2328,101 +1812,12 @@ export const PrintShop: CAPIType = {
 			},
 		},
 	],
-	editionId: 'UK',
 	webPublicationDateDisplay: 'Thu 17 Dec 2020 09.07 GMT',
 	shouldHideAds: false,
-	standfirst:
-		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-		'article:author': 'https://www.theguardian.com/profile/guardian-sport',
-		'og:image:height': '720',
-		'og:description':
-			'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=78a10cbc67fd64bbdff889b85c10b3c3',
-		'al:ios:url':
-			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'Art and design',
-		'article:published_time': '2020-12-17T09:07:18.000Z',
-		'og:title': 'Buy a classic sport photograph: the immortal Bobby Moore',
-		'fb:app_id': '180444840287',
-		'article:tag':
-			'England,Football,Sport,Photography,Art and design,Culture',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-12-17T14:04:58.000Z',
-	},
 	webTitle: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	isSpecialReport: false,
-	sectionUrl: 'football/england',
-	pageId:
-		'artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-	version: 3,
-	tags: [
-		{
-			id: 'artanddesign/series/guardian-print-shop',
-			type: 'Series',
-			title: 'Guardian Print Shop',
-		},
-		{
-			id: 'football/england',
-			type: 'Keyword',
-			title: 'England',
-		},
-		{
-			id: 'football/football',
-			type: 'Keyword',
-			title: 'Football',
-		},
-		{
-			id: 'sport/sport',
-			type: 'Keyword',
-			title: 'Sport',
-		},
-		{
-			id: 'artanddesign/photography',
-			type: 'Keyword',
-			title: 'Photography',
-		},
-		{
-			id: 'artanddesign/artanddesign',
-			type: 'Keyword',
-			title: 'Art and design',
-		},
-		{
-			id: 'culture/culture',
-			type: 'Keyword',
-			title: 'Culture',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'profile/guardian-sport',
-			type: 'Contributor',
-			title: 'Guardian sport',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-pictures-guardian-news',
-			type: 'Tracking',
-			title: 'UK Pictures Guardian News',
-		},
-	],
-	pillar: 'culture',
 	isCommentable: false,
-	webURL:
-		'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 	keyEvents: [],
-	showBottomSocialButtons: true,
-	isImmersive: true,
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
@@ -2561,5 +1956,4 @@ export const PrintShop: CAPIType = {
 			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
 		isPhotoEssay: false,
 	},
-	sectionLabel: 'England',
 };

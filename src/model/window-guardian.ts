@@ -74,6 +74,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		blockElementType: CAPIElement['_type'],
 		indexName: string,
 	): T[] => {
+		if (blocks.length === 0) return [];
 		return blocks[0].elements.reduce(
 			(acc: T[], element: CAPIElement, index: number) => {
 				if (element._type === blockElementType) {

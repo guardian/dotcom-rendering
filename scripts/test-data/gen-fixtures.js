@@ -81,6 +81,11 @@ const articles = [
 		url:
 			'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 	},
+	{
+		name: 'Quiz',
+		url:
+			'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+	},
 ];
 
 const HEADER = `/**
