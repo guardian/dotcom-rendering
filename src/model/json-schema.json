@@ -1232,6 +1232,12 @@
                 "alt": {
                     "type": "string"
                 },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -2368,6 +2374,9 @@
                     "type": "string"
                 },
                 "title": {
+                    "type": "string"
+                },
+                "originalUrl": {
                     "type": "string"
                 },
                 "role": {
