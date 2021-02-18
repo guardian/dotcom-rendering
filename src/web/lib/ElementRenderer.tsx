@@ -293,6 +293,7 @@ export const ElementRenderer = ({
 						key={index}
 						element={element}
 						hideCaption={hideCaption}
+						isMainMedia={isMainMedia}
 						title={element.title}
 					/>
 				</Figure>
