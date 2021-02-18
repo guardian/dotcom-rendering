@@ -107,20 +107,6 @@ export const AdConsent: React.FC = ({}) => {
 					}}
 				/>
 			</amp-consent>
-			<amp-iframe
-				width="1"
-				title="User Sync"
-				height="1"
-				sandbox="allow-scripts allow-same-origin"
-				frameborder="0"
-				src="https://acdn.adnxs.com/prebid/amp/user-sync/load-cookie-with-consent.html?endpoint=appnexus&max_sync_count=5&gdpr_consent=CONSENT_STRING"
-			>
-				<amp-img
-					layout="fill"
-					src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-					placeholder={true}
-				/>
-			</amp-iframe>
 		</>
 	);
 };
