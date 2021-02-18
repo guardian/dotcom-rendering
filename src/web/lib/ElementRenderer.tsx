@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
@@ -35,7 +34,6 @@ import {
 	WitnessTextBlockComponent,
 } from '@root/src/web/components/elements/WitnessBlockComponent';
 import { ClickToView } from '@root/src/web/components/ClickToView';
-
 import { Figure } from '@root/src/web/components/Figure';
 
 import {
@@ -51,7 +49,6 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
-import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 
 type Props = {
 	format: Format;
@@ -65,10 +62,6 @@ type Props = {
 	isMainMedia?: boolean;
 	starRating?: number;
 };
-// This is required for spacefinder to work!
-const commercialPosition = css`
-	position: relative;
-`;
 
 export const ElementRenderer = ({
 	format,
@@ -659,39 +652,4 @@ export const ElementRenderer = ({
 		default:
 			return null;
 	}
-};
-
-export const ArticleRenderer: React.FC<{
-	format: Format;
-	palette: Palette;
-	elements: CAPIElement[];
-	adTargeting?: AdTargeting;
-	host?: string;
-	abTests: CAPIType['config']['abTests'];
-}> = ({ format, palette, elements, adTargeting, host, abTests }) => {
-	// const cleanedElements = elements.map(element =>
-	//     'html' in element ? { ...element, html: clean(element.html) } : element,
-	// );
-	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
-	//    But should be soon.
-	const output = elements.map((element, index) => (
-		<ElementRenderer
-			format={format}
-			palette={palette}
-			element={element}
-			adTargeting={adTargeting}
-			host={host}
-			abTests={abTests}
-			index={index}
-		/>
-	));
-
-	return (
-		<div
-			className={`article-body-commercial-selector ${commercialPosition} article-body-viewer-selector`}
-		>
-			{/* Insert the placeholder for the sign in gate on the 2nd article element */}
-			{withSignInGateSlot(output)}
-		</div>
-	); // classname that space finder is going to target for in-body ads in DCR
 };
