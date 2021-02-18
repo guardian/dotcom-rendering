@@ -334,6 +334,7 @@ export const ImmersiveLayout = ({
 						}
 						host={host}
 						hideCaption={true}
+						abTests={CAPI.config.abTests}
 					/>
 				</div>
 				{mainMedia && (

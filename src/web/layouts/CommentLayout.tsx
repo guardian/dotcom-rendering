@@ -471,6 +471,7 @@ export const CommentLayout = ({
 										: undefined
 								}
 								host={host}
+								abTests={CAPI.config.abTests}
 							/>
 						</div>
 					</GridItem>
