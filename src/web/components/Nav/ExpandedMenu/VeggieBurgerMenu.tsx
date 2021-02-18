@@ -6,13 +6,13 @@ import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
 import { Display } from '@guardian/types';
-import { navInputCheckboxId, veggieBurgerId, buildID } from '../config';
+import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`
 	${visuallyHidden};
 `;
 
-const veggieBurgerIconStyles = (navInputCheckboxID: string) => {
+const veggieBurgerIconStyles = () => {
 	const beforeAfterStyles = css`
 		content: '';
 		background-color: currentColor;
@@ -33,7 +33,7 @@ const veggieBurgerIconStyles = (navInputCheckboxID: string) => {
             to support NoJS
         */
 		/* stylelint-disable-next-line selector-type-no-unknown */
-		${`#${navInputCheckboxID}`}:checked ~ div & {
+		${`#${navInputCheckboxId}`}:checked ~ div & {
 			background-color: transparent;
 		}
 
@@ -50,7 +50,7 @@ const veggieBurgerIconStyles = (navInputCheckboxID: string) => {
 			top: -6px;
 			/* refer to comment above */
 			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${navInputCheckboxID}`}:checked ~ div & {
+			${`#${navInputCheckboxId}`}:checked ~ div & {
 				top: 0;
 				transform: rotate(-45deg);
 			}
@@ -61,7 +61,7 @@ const veggieBurgerIconStyles = (navInputCheckboxID: string) => {
 			bottom: -6px;
 			/* refer to comment above */
 			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${navInputCheckboxID}`}:checked ~ div & {
+			${`#${navInputCheckboxId}`}:checked ~ div & {
 				bottom: 0;
 				transform: rotate(45deg);
 			}
@@ -106,17 +106,16 @@ const veggieBurgerStyles = (display: Display) => css`
 
 export const VeggieBurgerMenu: React.FC<{
 	display: Display;
-	ID: string;
-}> = ({ display, ID }) => {
+}> = ({ display }) => {
 	return (
 		/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
 		// @ts-ignore
 		<label
-			id={buildID(ID, veggieBurgerId)}
+			id={veggieBurgerId}
 			className={veggieBurgerStyles(display)}
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
-			htmlFor={buildID(ID, navInputCheckboxId)}
+			htmlFor={navInputCheckboxId}
 			data-link-name="nav2 : veggie-burger: show"
 			// @ts-ignore
 			tabIndex={0}
@@ -124,11 +123,7 @@ export const VeggieBurgerMenu: React.FC<{
 			data-cy="veggie-burger"
 		>
 			<span className={screenReadable}>Show More</span>
-			<span
-				className={veggieBurgerIconStyles(
-					buildID(ID, navInputCheckboxId),
-				)}
-			/>
+			<span className={veggieBurgerIconStyles()} />
 		</label>
 		/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
 	);

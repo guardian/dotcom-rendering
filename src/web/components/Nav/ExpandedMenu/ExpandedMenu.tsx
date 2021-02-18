@@ -96,8 +96,8 @@ export const ExpandedMenu: React.FC<{
 }> = ({ display, nav }) => {
 	return (
 		<div id="expanded-menu">
-			<ShowMoreMenu display={display} ID="" />
-			<VeggieBurgerMenu display={display} ID="" />
+			<ShowMoreMenu display={display} />
+			<VeggieBurgerMenu display={display} />
 			<div
 				id="expanded-menu"
 				className={mainMenuStyles}
