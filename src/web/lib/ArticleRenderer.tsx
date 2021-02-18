@@ -31,6 +31,7 @@ export const ArticleRenderer: React.FC<{
 			host={host}
 			abTests={abTests}
 			index={index}
+			isMainMedia={false}
 		/>
 	));
 
