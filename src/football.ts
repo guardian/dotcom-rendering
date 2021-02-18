@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { andThen, map, OptionKind, none, some } from '@guardian/types';
+import { andThen, map, OptionKind, none, some, fromNullable } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { pipe2 } from 'lib';
 import { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
@@ -94,9 +94,6 @@ const parseTime = (time: unknown): Option<string> => {
     return some(`${date.getUTCHours()}:${date.getUTCMinutes()}`);
 }
 
-const parseString = (string: unknown): Option<string> =>
-    typeof string === 'string' ? some(string) : none;
-
 const parseMatchStatus = (status: string, time: string): Option<MatchStatus> =>
     pipe2(
         status,
@@ -116,7 +113,7 @@ const parseMatchStatus = (status: string, time: string): Option<MatchStatus> =>
 
 const parseMatchScores = (footballContent: Option<FootballContent>): Option<MatchScores> => {
     if (footballContent.kind === OptionKind.Some){
-        const stadium = parseString(footballContent.value.venue);
+        const stadium = fromNullable(footballContent.value.venue);
         const status = parseMatchStatus(footballContent.value.status, footballContent.value.kickOff);
     
         if (
