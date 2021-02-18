@@ -28,7 +28,7 @@ import {
 	capiDecoder,
 	errorDecoder,
 	mapiDecoder,
-	capiSearchDecoder,
+	capiContentDecoder,
 } from 'server/decoders';
 import { render as renderEditions } from 'server/editionsPage';
 import { render } from 'server/page';
@@ -189,24 +189,22 @@ async function serveArticlePost(
 	}
 }
 
-async function serveEditionArticlePost(
+async function serveEditionsArticlePost(
 	req: Request,
 	res: ExpressResponse,
 	next: NextFunction,
 ): Promise<void> {
 	try {
-		// req.body: should contain a direct response from capi
-		// fetched by the edition backend
-		const searchResponse = await capiSearchDecoder(req.body);
-		// this end point serve single article so take the first item only
-		const content = searchResponse.results[0];
+		// req.body: should contain a 'Content' object which fetched by the
+		// Edition backend from the capi
+		const content = await capiContentDecoder(req.body);
 		const mockedRenderingRequest: RenderingRequest = {
 			content,
 		};
-		void serveArticle(mockedRenderingRequest, res, false);
+		void serveArticle(mockedRenderingRequest, res, true);
 	} catch (e) {
-		console.error(e);
-		res.status(400).send('bad request');
+		logger.error('This error occurred', e);
+		next(e);
 	}
 }
 
@@ -287,7 +285,7 @@ app.get('/*', bodyParser.raw(), serveArticleGet);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);
 
-app.post('/render-edition-article', bodyParser.raw(), serveEditionArticlePost);
+app.post('/editions-article', bodyParser.raw(), serveEditionsArticlePost);
 
 app.listen(port, () => {
 	if (process.env.NODE_ENV === 'production') {
