@@ -12,9 +12,7 @@
  */
 
 export const Analysis: CAPIType = {
-	shouldHideReaderRevenue: false,
 	slotMachineFlags: '',
-	isAdFreeUser: false,
 	main:
 		'<figure class="element element-image" data-media-id="59ff93fd27eea2be66feecf0b9a7c0b98d12877a"> \n <img src="https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg" alt="The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters" width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.</span> \n  <span class="element-image__credit">Photograph: Peter Morrison/AP</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
@@ -217,6 +215,995 @@ export const Analysis: CAPIType = {
 			],
 		},
 	},
+	beaconURL: '//phar.gu-web.net',
+	webPublicationSecondaryDateDisplay:
+		'Last modified on Thu 13 Feb 2020 10.21 GMT',
+	editionLongForm: 'UK edition',
+	hasRelated: true,
+	publication: 'The Guardian',
+	trailText:
+		'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+	subMetaKeywordLinks: [
+		{
+			url: '/politics/sinn-fein',
+			title: 'Sinn Féin',
+		},
+		{
+			url: '/world/fine-gael',
+			title: 'Fine Gael',
+		},
+		{
+			url: '/world/fianna-fail',
+			title: 'Fianna Fail',
+		},
+		{
+			url: '/world/europe-news',
+			title: 'Europe',
+		},
+		{
+			url: '/tone/explainers',
+			title: 'explainers',
+		},
+	],
+	contentType: 'Article',
+	nav: {
+		currentUrl: '/world/europe-news',
+		pillars: [
+			{
+				title: 'News',
+				url: '/',
+				longTitle: 'Headlines',
+				iconName: 'home',
+				children: [
+					{
+						title: 'UK',
+						url: '/uk-news',
+						longTitle: 'UK news',
+						children: [
+							{
+								title: 'UK politics',
+								url: '/politics',
+							},
+							{
+								title: 'Education',
+								url: '/education',
+								children: [
+									{
+										title: 'Schools',
+										url: '/education/schools',
+									},
+									{
+										title: 'Teachers',
+										url: '/teacher-network',
+									},
+									{
+										title: 'Universities',
+										url: '/education/universities',
+									},
+									{
+										title: 'Students',
+										url: '/education/students',
+									},
+								],
+							},
+							{
+								title: 'Media',
+								url: '/media',
+							},
+							{
+								title: 'Society',
+								url: '/society',
+							},
+							{
+								title: 'Law',
+								url: '/law',
+							},
+							{
+								title: 'Scotland',
+								url: '/uk/scotland',
+							},
+							{
+								title: 'Wales',
+								url: '/uk/wales',
+							},
+							{
+								title: 'Northern Ireland',
+								url: '/uk/northernireland',
+							},
+						],
+					},
+					{
+						title: 'World',
+						url: '/world',
+						longTitle: 'World news',
+						children: [
+							{
+								title: 'Europe',
+								url: '/world/europe-news',
+							},
+							{
+								title: 'US',
+								url: '/us-news',
+								longTitle: 'US news',
+							},
+							{
+								title: 'Americas',
+								url: '/world/americas',
+							},
+							{
+								title: 'Asia',
+								url: '/world/asia',
+							},
+							{
+								title: 'Australia',
+								url: '/australia-news',
+								longTitle: 'Australia news',
+							},
+							{
+								title: 'Middle East',
+								url: '/world/middleeast',
+							},
+							{
+								title: 'Africa',
+								url: '/world/africa',
+							},
+							{
+								title: 'Inequality',
+								url: '/inequality',
+							},
+							{
+								title: 'Global development',
+								url: '/global-development',
+							},
+						],
+					},
+					{
+						title: 'Business',
+						url: '/business',
+						children: [
+							{
+								title: 'Economics',
+								url: '/business/economics',
+							},
+							{
+								title: 'Banking',
+								url: '/business/banking',
+							},
+							{
+								title: 'Money',
+								url: '/money',
+								children: [
+									{
+										title: 'Property',
+										url: '/money/property',
+									},
+									{
+										title: 'Pensions',
+										url: '/money/pensions',
+									},
+									{
+										title: 'Savings',
+										url: '/money/savings',
+									},
+									{
+										title: 'Borrowing',
+										url: '/money/debt',
+									},
+									{
+										title: 'Careers',
+										url: '/money/work-and-careers',
+									},
+								],
+							},
+							{
+								title: 'Markets',
+								url: '/business/stock-markets',
+							},
+							{
+								title: 'Project Syndicate',
+								url:
+									'/business/series/project-syndicate-economists',
+							},
+							{
+								title: 'B2B',
+								url: '/business-to-business',
+							},
+							{
+								title: 'Retail',
+								url: '/business/retail',
+							},
+						],
+					},
+					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+					},
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
+						title: 'Environment',
+						url: '/environment',
+						children: [
+							{
+								title: 'Climate change',
+								url: '/environment/climate-change',
+							},
+							{
+								title: 'Wildlife',
+								url: '/environment/wildlife',
+							},
+							{
+								title: 'Energy',
+								url: '/environment/energy',
+							},
+							{
+								title: 'Pollution',
+								url: '/environment/pollution',
+							},
+						],
+					},
+					{
+						title: 'UK politics',
+						url: '/politics',
+					},
+					{
+						title: 'Education',
+						url: '/education',
+						children: [
+							{
+								title: 'Schools',
+								url: '/education/schools',
+							},
+							{
+								title: 'Teachers',
+								url: '/teacher-network',
+							},
+							{
+								title: 'Universities',
+								url: '/education/universities',
+							},
+							{
+								title: 'Students',
+								url: '/education/students',
+							},
+						],
+					},
+					{
+						title: 'Society',
+						url: '/society',
+					},
+					{
+						title: 'Science',
+						url: '/science',
+					},
+					{
+						title: 'Tech',
+						url: '/technology',
+					},
+					{
+						title: 'Global development',
+						url: '/global-development',
+					},
+					{
+						title: 'Obituaries',
+						url: '/tone/obituaries',
+					},
+				],
+			},
+			{
+				title: 'Opinion',
+				url: '/commentisfree',
+				longTitle: 'Opinion home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'The Guardian view',
+						url: '/profile/editorial',
+					},
+					{
+						title: 'Columnists',
+						url: '/index/contributors',
+					},
+					{
+						title: 'Cartoons',
+						url: '/cartoons/archive',
+					},
+					{
+						title: 'Opinion videos',
+						url: '/type/video+tone/comment',
+					},
+					{
+						title: 'Letters',
+						url: '/tone/letters',
+					},
+				],
+			},
+			{
+				title: 'Sport',
+				url: '/sport',
+				longTitle: 'Sport home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
+						title: 'Cricket',
+						url: '/sport/cricket',
+					},
+					{
+						title: 'Rugby union',
+						url: '/sport/rugby-union',
+					},
+					{
+						title: 'Tennis',
+						url: '/sport/tennis',
+					},
+					{
+						title: 'Cycling',
+						url: '/sport/cycling',
+					},
+					{
+						title: 'F1',
+						url: '/sport/formulaone',
+					},
+					{
+						title: 'Golf',
+						url: '/sport/golf',
+					},
+					{
+						title: 'Boxing',
+						url: '/sport/boxing',
+					},
+					{
+						title: 'Rugby league',
+						url: '/sport/rugbyleague',
+					},
+					{
+						title: 'Racing',
+						url: '/sport/horse-racing',
+					},
+					{
+						title: 'US sports',
+						url: '/sport/us-sport',
+					},
+				],
+			},
+			{
+				title: 'Culture',
+				url: '/culture',
+				longTitle: 'Culture home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Film',
+						url: '/film',
+					},
+					{
+						title: 'Music',
+						url: '/music',
+					},
+					{
+						title: 'TV & radio',
+						url: '/tv-and-radio',
+					},
+					{
+						title: 'Books',
+						url: '/books',
+					},
+					{
+						title: 'Art & design',
+						url: '/artanddesign',
+					},
+					{
+						title: 'Stage',
+						url: '/stage',
+					},
+					{
+						title: 'Games',
+						url: '/games',
+					},
+					{
+						title: 'Classical',
+						url: '/music/classicalmusicandopera',
+					},
+				],
+			},
+			{
+				title: 'Lifestyle',
+				url: '/lifeandstyle',
+				longTitle: 'Lifestyle home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Fashion',
+						url: '/fashion',
+					},
+					{
+						title: 'Food',
+						url: '/food',
+					},
+					{
+						title: 'Recipes',
+						url: '/tone/recipes',
+					},
+					{
+						title: 'Travel',
+						url: '/travel',
+						children: [
+							{
+								title: 'UK',
+								url: '/travel/uk',
+							},
+							{
+								title: 'Europe',
+								url: '/travel/europe',
+							},
+							{
+								title: 'US',
+								url: '/travel/usa',
+							},
+						],
+					},
+					{
+						title: 'Health & fitness',
+						url: '/lifeandstyle/health-and-wellbeing',
+					},
+					{
+						title: 'Women',
+						url: '/lifeandstyle/women',
+					},
+					{
+						title: 'Men',
+						url: '/lifeandstyle/men',
+					},
+					{
+						title: 'Love & sex',
+						url: '/lifeandstyle/love-and-sex',
+					},
+					{
+						title: 'Beauty',
+						url: '/fashion/beauty',
+					},
+					{
+						title: 'Home & garden',
+						url: '/lifeandstyle/home-and-garden',
+					},
+					{
+						title: 'Money',
+						url: '/money',
+						children: [
+							{
+								title: 'Property',
+								url: '/money/property',
+							},
+							{
+								title: 'Pensions',
+								url: '/money/pensions',
+							},
+							{
+								title: 'Savings',
+								url: '/money/savings',
+							},
+							{
+								title: 'Borrowing',
+								url: '/money/debt',
+							},
+							{
+								title: 'Careers',
+								url: '/money/work-and-careers',
+							},
+						],
+					},
+					{
+						title: 'Cars',
+						url: '/technology/motoring',
+					},
+				],
+			},
+		],
+		otherLinks: [
+			{
+				title: 'The Guardian app',
+				url:
+					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+			},
+			{
+				title: 'Video',
+				url: '/video',
+			},
+			{
+				title: 'Podcasts',
+				url: '/podcasts',
+			},
+			{
+				title: 'Pictures',
+				url: '/inpictures',
+			},
+			{
+				title: 'Newsletters',
+				url: '/email-newsletters',
+			},
+			{
+				title: "Today's paper",
+				url: '/theguardian',
+				children: [
+					{
+						title: 'Obituaries',
+						url: '/tone/obituaries',
+					},
+					{
+						title: 'G2',
+						url: '/theguardian/g2',
+					},
+					{
+						title: 'Weekend',
+						url: '/theguardian/weekend',
+					},
+					{
+						title: 'The Guide',
+						url: '/theguardian/theguide',
+					},
+					{
+						title: 'Saturday review',
+						url: '/theguardian/guardianreview',
+					},
+				],
+			},
+			{
+				title: 'Inside the Guardian',
+				url: 'https://www.theguardian.com/membership',
+			},
+			{
+				title: 'The Observer',
+				url: '/observer',
+				children: [
+					{
+						title: 'Comment',
+						url: '/theobserver/news/comment',
+					},
+					{
+						title: 'The New Review',
+						url: '/theobserver/new-review',
+					},
+					{
+						title: 'Observer Magazine',
+						url: '/theobserver/magazine',
+					},
+					{
+						title: 'Observer Food Monthly',
+						url: '/theobserver/foodmonthly',
+					},
+				],
+			},
+			{
+				title: 'Guardian Weekly',
+				url:
+					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+			},
+			{
+				title: 'Crosswords',
+				url: '/crosswords',
+				children: [
+					{
+						title: 'Blog',
+						url: '/crosswords/crossword-blog',
+					},
+					{
+						title: 'Editor',
+						url: '/crosswords/series/crossword-editor-update',
+					},
+					{
+						title: 'Quick',
+						url: '/crosswords/series/quick',
+					},
+					{
+						title: 'Cryptic',
+						url: '/crosswords/series/cryptic',
+					},
+					{
+						title: 'Prize',
+						url: '/crosswords/series/prize',
+					},
+					{
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
+						title: 'Genius',
+						url: '/crosswords/series/genius',
+					},
+					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Azed',
+						url: '/crosswords/series/azed',
+					},
+				],
+			},
+		],
+		brandExtensions: [
+			{
+				title: 'Search jobs',
+				url:
+					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+			},
+			{
+				title: 'Hire with Guardian Jobs',
+				url:
+					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+			},
+			{
+				title: 'Holidays',
+				url:
+					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+			},
+			{
+				title: 'Live events',
+				url:
+					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+			},
+			{
+				title: 'Masterclasses',
+				url: '/guardian-masterclasses',
+			},
+			{
+				title: 'Digital Archive',
+				url: 'https://theguardian.newspapers.com',
+			},
+			{
+				title: 'Guardian Print Shop',
+				url: '/artanddesign/series/gnm-print-sales',
+			},
+			{
+				title: 'Patrons',
+				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+			},
+			{
+				title: 'Guardian Puzzles app',
+				url: 'https://puzzles.theguardian.com/download',
+			},
+		],
+		currentNavLinkTitle: 'Europe',
+		currentPillarTitle: 'News',
+		subNavSections: {
+			parent: {
+				title: 'World',
+				url: '/world',
+				longTitle: 'World news',
+				children: [
+					{
+						title: 'Europe',
+						url: '/world/europe-news',
+					},
+					{
+						title: 'US',
+						url: '/us-news',
+						longTitle: 'US news',
+					},
+					{
+						title: 'Americas',
+						url: '/world/americas',
+					},
+					{
+						title: 'Asia',
+						url: '/world/asia',
+					},
+					{
+						title: 'Australia',
+						url: '/australia-news',
+						longTitle: 'Australia news',
+					},
+					{
+						title: 'Middle East',
+						url: '/world/middleeast',
+					},
+					{
+						title: 'Africa',
+						url: '/world/africa',
+					},
+					{
+						title: 'Inequality',
+						url: '/inequality',
+					},
+					{
+						title: 'Global development',
+						url: '/global-development',
+					},
+				],
+			},
+			links: [
+				{
+					title: 'Europe',
+					url: '/world/europe-news',
+				},
+				{
+					title: 'US',
+					url: '/us-news',
+					longTitle: 'US news',
+				},
+				{
+					title: 'Americas',
+					url: '/world/americas',
+				},
+				{
+					title: 'Asia',
+					url: '/world/asia',
+				},
+				{
+					title: 'Australia',
+					url: '/australia-news',
+					longTitle: 'Australia news',
+				},
+				{
+					title: 'Middle East',
+					url: '/world/middleeast',
+				},
+				{
+					title: 'Africa',
+					url: '/world/africa',
+				},
+				{
+					title: 'Inequality',
+					url: '/inequality',
+				},
+				{
+					title: 'Global development',
+					url: '/global-development',
+				},
+			],
+		},
+		readerRevenueLinks: {
+			header: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			footer: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			sideMenu: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			ampHeader: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+			ampFooter: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+			},
+		},
+	},
+	author: {
+		byline: 'Rory Carroll Ireland correspondent',
+		twitterHandle: 'rorycarroll72',
+	},
+	designType: 'Analysis',
+	editionId: 'UK',
+	standfirst:
+		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
+	openGraphData: {
+		'og:url':
+			'http://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+		'article:author': 'https://www.theguardian.com/profile/rorycarroll',
+		'og:image:height': '720',
+		'og:description':
+			'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+		'og:image:width': '1200',
+		'og:image':
+			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
+		'al:ios:url':
+			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=applinks',
+		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:type': 'article',
+		'al:ios:app_store_id': '409128287',
+		'article:section': 'World news',
+		'article:published_time': '2020-02-10T12:31:25.000Z',
+		'og:title': 'Irish general election: who won and what happens now?',
+		'fb:app_id': '180444840287',
+		'article:tag':
+			'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
+		'al:ios:app_name': 'The Guardian',
+		'og:site_name': 'the Guardian',
+		'article:modified_time': '2020-02-13T10:21:28.000Z',
+	},
+	sectionUrl: 'world/ireland',
+	pageId:
+		'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+	version: 3,
+	tags: [
+		{
+			id: 'world/ireland',
+			type: 'Keyword',
+			title: 'Ireland',
+		},
+		{
+			id: 'politics/sinn-fein',
+			type: 'Keyword',
+			title: 'Sinn Féin',
+		},
+		{
+			id: 'world/fine-gael',
+			type: 'Keyword',
+			title: 'Fine Gael',
+		},
+		{
+			id: 'world/fianna-fail',
+			type: 'Keyword',
+			title: 'Fianna Fail',
+		},
+		{
+			id: 'world/world',
+			type: 'Keyword',
+			title: 'World news',
+		},
+		{
+			id: 'world/europe-news',
+			type: 'Keyword',
+			title: 'Europe',
+		},
+		{
+			id: 'type/article',
+			type: 'Type',
+			title: 'Article',
+		},
+		{
+			id: 'tone/explainers',
+			type: 'Tone',
+			title: 'Explainers',
+		},
+		{
+			id: 'tone/analysis',
+			type: 'Tone',
+			title: 'Analysis',
+		},
+		{
+			id: 'profile/rorycarroll',
+			type: 'Contributor',
+			title: 'Rory Carroll',
+			twitterHandle: 'rorycarroll72',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/uploads/2017/10/09/Rory-Carroll,-L.png?width=300&quality=85&auto=format&fit=max&s=149d14183d07b7c04e04798e0edbc5e4',
+		},
+		{
+			id: 'publication/theguardian',
+			type: 'Publication',
+			title: 'The Guardian',
+		},
+		{
+			id: 'theguardian/mainsection',
+			type: 'NewspaperBook',
+			title: 'Main section',
+		},
+		{
+			id: 'theguardian/mainsection/uknews',
+			type: 'NewspaperBookSection',
+			title: 'UK news',
+		},
+		{
+			id: 'tracking/commissioningdesk/uk-foreign',
+			type: 'Tracking',
+			title: 'UK Foreign',
+		},
+	],
+	pillar: 'news',
+	webURL:
+		'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+	showBottomSocialButtons: true,
+	isImmersive: false,
+	sectionLabel: 'Ireland',
+	shouldHideReaderRevenue: false,
+	isAdFreeUser: false,
 	pageFooter: {
 		footerLinks: [
 			[
@@ -388,10 +1375,7 @@ export const Analysis: CAPIType = {
 		'twitter:app:url:iphone':
 			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
 	},
-	beaconURL: '//phar.gu-web.net',
 	sectionName: 'world',
-	editionLongForm: 'UK edition',
-	hasRelated: true,
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -403,1517 +1387,7 @@ export const Analysis: CAPIType = {
 	},
 	hasStoryPackage: true,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	publication: 'The Guardian',
-	trailText:
-		'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
-	subMetaKeywordLinks: [
-		{
-			url: '/politics/sinn-fein',
-			title: 'Sinn Féin',
-		},
-		{
-			url: '/world/fine-gael',
-			title: 'Fine Gael',
-		},
-		{
-			url: '/world/fianna-fail',
-			title: 'Fianna Fail',
-		},
-		{
-			url: '/world/europe-news',
-			title: 'Europe',
-		},
-		{
-			url: '/tone/explainers',
-			title: 'explainers',
-		},
-	],
-	contentType: 'Article',
 	headline: 'Irish general election: who won and what happens now?',
-	nav: {
-		currentUrl: '/world/europe-news',
-		pillars: [
-			{
-				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
-					{
-						title: 'UK',
-						url: '/uk-news',
-						longTitle: 'UK news',
-						iconName: '',
-						children: [
-							{
-								title: 'UK politics',
-								url: '/politics',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Education',
-								url: '/education',
-								longTitle: '',
-								iconName: '',
-								children: [
-									{
-										title: 'Schools',
-										url: '/education/schools',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Teachers',
-										url: '/teacher-network',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Universities',
-										url: '/education/universities',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Students',
-										url: '/education/students',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-								],
-								classList: [],
-							},
-							{
-								title: 'Media',
-								url: '/media',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Society',
-								url: '/society',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Law',
-								url: '/law',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Scotland',
-								url: '/uk/scotland',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Wales',
-								url: '/uk/wales',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Northern Ireland',
-								url: '/uk/northernireland',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'World',
-						url: '/world',
-						longTitle: 'World news',
-						iconName: '',
-						children: [
-							{
-								title: 'Europe',
-								url: '/world/europe-news',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'US',
-								url: '/us-news',
-								longTitle: 'US news',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Americas',
-								url: '/world/americas',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Asia',
-								url: '/world/asia',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Australia',
-								url: '/australia-news',
-								longTitle: 'Australia news',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Middle East',
-								url: '/world/middleeast',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Africa',
-								url: '/world/africa',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Inequality',
-								url: '/inequality',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Global development',
-								url: '/global-development',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Business',
-						url: '/business',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Economics',
-								url: '/business/economics',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Banking',
-								url: '/business/banking',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Money',
-								url: '/money',
-								longTitle: '',
-								iconName: '',
-								children: [
-									{
-										title: 'Property',
-										url: '/money/property',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Pensions',
-										url: '/money/pensions',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Savings',
-										url: '/money/savings',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Borrowing',
-										url: '/money/debt',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-									{
-										title: 'Careers',
-										url: '/money/work-and-careers',
-										longTitle: '',
-										iconName: '',
-										children: [],
-										classList: [],
-									},
-								],
-								classList: [],
-							},
-							{
-								title: 'Markets',
-								url: '/business/stock-markets',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'B2B',
-								url: '/business-to-business',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Environment',
-						url: '/environment',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Climate change',
-								url: '/environment/climate-change',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Wildlife',
-								url: '/environment/wildlife',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Energy',
-								url: '/environment/energy',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Pollution',
-								url: '/environment/pollution',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'UK politics',
-						url: '/politics',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Society',
-						url: '/society',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Science',
-						url: '/science',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Tech',
-						url: '/technology',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Obituaries',
-						url: '/tone/obituaries',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Columnists',
-						url: '/index/contributors',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Cartoons',
-						url: '/cartoons/archive',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Letters',
-						url: '/tone/letters',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Football',
-						url: '/football',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Cricket',
-						url: '/sport/cricket',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Rugby union',
-						url: '/sport/rugby-union',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Tennis',
-						url: '/sport/tennis',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Cycling',
-						url: '/sport/cycling',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'F1',
-						url: '/sport/formulaone',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Golf',
-						url: '/sport/golf',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Boxing',
-						url: '/sport/boxing',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Rugby league',
-						url: '/sport/rugbyleague',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Racing',
-						url: '/sport/horse-racing',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'US sports',
-						url: '/sport/us-sport',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Film',
-						url: '/film',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Music',
-						url: '/music',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Books',
-						url: '/books',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Art & design',
-						url: '/artanddesign',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Stage',
-						url: '/stage',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Games',
-						url: '/games',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Fashion',
-						url: '/fashion',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Food',
-						url: '/food',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Recipes',
-						url: '/tone/recipes',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Travel',
-						url: '/travel',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'UK',
-								url: '/travel/uk',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Europe',
-								url: '/travel/europe',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'US',
-								url: '/travel/usa',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Health & fitness',
-						url: '/lifeandstyle/health-and-wellbeing',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Women',
-						url: '/lifeandstyle/women',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Men',
-						url: '/lifeandstyle/men',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Love & sex',
-						url: '/lifeandstyle/love-and-sex',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Beauty',
-						url: '/fashion/beauty',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Home & garden',
-						url: '/lifeandstyle/home-and-garden',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						longTitle: '',
-						iconName: '',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-								longTitle: '',
-								iconName: '',
-								children: [],
-								classList: [],
-							},
-						],
-						classList: [],
-					},
-					{
-						title: 'Cars',
-						url: '/technology/motoring',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Video',
-				url: '/video',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				longTitle: '',
-				iconName: '',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/tone/obituaries',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Weekend',
-						url: '/theguardian/weekend',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'The Guide',
-						url: '/theguardian/theguide',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Saturday review',
-						url: '/theguardian/guardianreview',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				longTitle: '',
-				iconName: '',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			{
-				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				longTitle: '',
-				iconName: '',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Masterclasses',
-				url: '/guardian-masterclasses',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-			{
-				title: 'Guardian Puzzles app',
-				url: 'https://puzzles.theguardian.com/download',
-				longTitle: '',
-				iconName: '',
-				children: [],
-				classList: [],
-			},
-		],
-		currentNavLink: {
-			title: 'Europe',
-			url: '/world/europe-news',
-			longTitle: '',
-			iconName: '',
-			children: [],
-			classList: [],
-		},
-		subNavSections: {
-			parent: {
-				title: 'World',
-				url: '/world',
-				longTitle: 'World news',
-				iconName: '',
-				children: [
-					{
-						title: 'Europe',
-						url: '/world/europe-news',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'US',
-						url: '/us-news',
-						longTitle: 'US news',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Americas',
-						url: '/world/americas',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Asia',
-						url: '/world/asia',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Australia',
-						url: '/australia-news',
-						longTitle: 'Australia news',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Middle East',
-						url: '/world/middleeast',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Africa',
-						url: '/world/africa',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Inequality',
-						url: '/inequality',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-						longTitle: '',
-						iconName: '',
-						children: [],
-						classList: [],
-					},
-				],
-				classList: [],
-			},
-			links: [
-				{
-					title: 'Europe',
-					url: '/world/europe-news',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'US',
-					url: '/us-news',
-					longTitle: 'US news',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Americas',
-					url: '/world/americas',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Asia',
-					url: '/world/asia',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Australia',
-					url: '/australia-news',
-					longTitle: 'Australia news',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Middle East',
-					url: '/world/middleeast',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Africa',
-					url: '/world/africa',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Inequality',
-					url: '/inequality',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-				{
-					title: 'Global development',
-					url: '/global-development',
-					longTitle: '',
-					iconName: '',
-					children: [],
-					classList: [],
-				},
-			],
-		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-			},
-		},
-	},
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
@@ -2305,11 +1779,6 @@ export const Analysis: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-02-10T12:31:25.000Z',
-	author: {
-		byline: 'Rory Carroll Ireland correspondent',
-		twitterHandle: 'rorycarroll72',
-	},
-	designType: 'Analysis',
 	blocks: [
 		{
 			id: '5e413c398f0811db2faf4cdd',
@@ -2518,124 +1987,12 @@ export const Analysis: CAPIType = {
 			},
 		},
 	],
-	editionId: 'UK',
 	webPublicationDateDisplay: 'Mon 10 Feb 2020 12.31 GMT',
 	shouldHideAds: false,
-	standfirst:
-		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-		'article:author': 'https://www.theguardian.com/profile/rorycarroll',
-		'og:image:height': '720',
-		'og:description':
-			'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
-		'al:ios:url':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'World news',
-		'article:published_time': '2020-02-10T12:31:25.000Z',
-		'og:title': 'Irish general election: who won and what happens now?',
-		'fb:app_id': '180444840287',
-		'article:tag':
-			'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-13T10:21:28.000Z',
-	},
 	webTitle: 'Irish general election: who won and what happens now?',
 	isSpecialReport: false,
-	sectionUrl: 'world/ireland',
-	pageId:
-		'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-	version: 3,
-	tags: [
-		{
-			id: 'world/ireland',
-			type: 'Keyword',
-			title: 'Ireland',
-		},
-		{
-			id: 'politics/sinn-fein',
-			type: 'Keyword',
-			title: 'Sinn Féin',
-		},
-		{
-			id: 'world/fine-gael',
-			type: 'Keyword',
-			title: 'Fine Gael',
-		},
-		{
-			id: 'world/fianna-fail',
-			type: 'Keyword',
-			title: 'Fianna Fail',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
-		},
-		{
-			id: 'world/europe-news',
-			type: 'Keyword',
-			title: 'Europe',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/explainers',
-			type: 'Tone',
-			title: 'Explainers',
-		},
-		{
-			id: 'tone/analysis',
-			type: 'Tone',
-			title: 'Analysis',
-		},
-		{
-			id: 'profile/rorycarroll',
-			type: 'Contributor',
-			title: 'Rory Carroll',
-			twitterHandle: 'rorycarroll72',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/10/09/Rory-Carroll,-L.png?width=300&quality=85&auto=format&fit=max&s=149d14183d07b7c04e04798e0edbc5e4',
-		},
-		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
-		},
-		{
-			id: 'theguardian/mainsection',
-			type: 'NewspaperBook',
-			title: 'Main section',
-		},
-		{
-			id: 'theguardian/mainsection/uknews',
-			type: 'NewspaperBookSection',
-			title: 'UK news',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-foreign',
-			type: 'Tracking',
-			title: 'UK Foreign',
-		},
-	],
-	pillar: 'news',
 	isCommentable: false,
-	webURL:
-		'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	keyEvents: [],
-	showBottomSocialButtons: true,
-	isImmersive: false,
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
@@ -2774,5 +2131,4 @@ export const Analysis: CAPIType = {
 			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
 		isPhotoEssay: false,
 	},
-	sectionLabel: 'Ireland',
 };
