@@ -6,14 +6,15 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { Display } from '@guardian/types';
-import { Columns } from './ExpandedMenu/Columns';
-import { ShowMoreMenu } from './ExpandedMenu/ShowMoreMenu';
-import { VeggieBurgerMenu } from './ExpandedMenu/VeggieBurgerMenu';
 import {
 	buildID,
 	navInputCheckboxId,
 } from '@root/src/web/components/Nav/config';
 import { extractNAV } from '@root/src/model/extract-nav';
+
+import { Columns } from './ExpandedMenu/Columns';
+import { ShowMoreMenu } from './ExpandedMenu/ShowMoreMenu';
+import { VeggieBurgerMenu } from './ExpandedMenu/VeggieBurgerMenu';
 
 const mainMenuStyles = (ID: string) => css`
 	background-color: ${brandBackground.primary};
