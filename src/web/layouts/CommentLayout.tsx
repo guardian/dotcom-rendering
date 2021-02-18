@@ -486,7 +486,7 @@ export const CommentLayout = ({
 								tags={CAPI.tags}
 								primaryDateline={CAPI.webPublicationDateDisplay}
 								secondaryDateline={
-									CAPI.blocks[0].secondaryDateLine
+									CAPI.webPublicationSecondaryDateDisplay
 								}
 							/>
 						</div>
