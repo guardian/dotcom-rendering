@@ -631,7 +631,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 								: fallbackImageUrl;
 						return (
 							<CarouselCard
-								key={trail.url + i}
+								key={`${trail.url}${i}`}
 								isFirst={i === 0}
 								format={format}
 								trailPalette={trailPalette}
