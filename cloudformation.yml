@@ -215,6 +215,7 @@ Resources:
               unzip -q ${App}.zip -d ${App}
               
               chown -R dotcom-rendering:frontend ${App}
+						  chown -R dotcom-rendering:frontend /home/ubuntu/.pm2/logs
 
               cd ${App}
 
