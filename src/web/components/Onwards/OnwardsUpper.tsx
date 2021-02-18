@@ -305,16 +305,6 @@ export const OnwardsUpper = ({
 	if (inSmallCardCarouselTest) {
 		return (
 			<div className={onwardsWrapper}>
-				<Section showTopBorder={true}>
-					<OnwardsData
-						url={curatedDataUrl}
-						limit={8}
-						ophanComponentName="curated-content"
-						Container={Carousel}
-						isCuratedContent={true}
-						pillar={pillar}
-					/>
-				</Section>
 				{url && (
 					<Section>
 						<OnwardsData
@@ -326,23 +316,22 @@ export const OnwardsUpper = ({
 						/>
 					</Section>
 				)}
-			</div>
-		);
-	}
-	if (inLargeCardCarouselTest) {
-		return (
-			<div className={onwardsWrapper}>
 				<Section showTopBorder={true}>
 					<OnwardsData
 						url={curatedDataUrl}
 						limit={8}
 						ophanComponentName="curated-content"
 						Container={Carousel}
-						pillar={pillar}
 						isCuratedContent={true}
-						isFullCardImage={true}
+						pillar={pillar}
 					/>
 				</Section>
+			</div>
+		);
+	}
+	if (inLargeCardCarouselTest) {
+		return (
+			<div className={onwardsWrapper}>
 				{url && (
 					<Section>
 						<OnwardsData
@@ -355,11 +344,33 @@ export const OnwardsUpper = ({
 						/>
 					</Section>
 				)}
+				<Section showTopBorder={true}>
+					<OnwardsData
+						url={curatedDataUrl}
+						limit={8}
+						ophanComponentName="curated-content"
+						Container={Carousel}
+						pillar={pillar}
+						isCuratedContent={true}
+						isFullCardImage={true}
+					/>
+				</Section>
 			</div>
 		);
 	}
 	return (
 		<div className={onwardsWrapper}>
+			{url && (
+				<Section>
+					<OnwardsData
+						url={url}
+						limit={8}
+						ophanComponentName={ophanComponentName}
+						Container={OnwardsLayout}
+						pillar={pillar}
+					/>
+				</Section>
+			)}
 			{inControlCarouselTest && (
 				<Section showTopBorder={true}>
 					<OnwardsData
@@ -368,18 +379,6 @@ export const OnwardsUpper = ({
 						ophanComponentName="curated-content"
 						Container={OnwardsLayout}
 						isCuratedContent={true}
-						pillar={pillar}
-					/>
-				</Section>
-			)}
-
-			{url && (
-				<Section>
-					<OnwardsData
-						url={url}
-						limit={8}
-						ophanComponentName={ophanComponentName}
-						Container={OnwardsLayout}
 						pillar={pillar}
 					/>
 				</Section>
