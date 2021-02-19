@@ -2,6 +2,7 @@
 
 import { none, some } from '@guardian/types';
 import {
+	compose,
 	errorToString,
 	handleErrors,
 	identity,
@@ -15,6 +16,27 @@ import {
 import 'whatwg-fetch';
 
 // ----- Tests ----- //
+
+describe('compose', () => {
+	it('composes three functions correctly', () => {
+		type A = string;
+		type B = number;
+		type C = boolean;
+
+		const a: A = 'a';
+		const b: B = 1;
+		const c: C = true;
+
+		const g = jest.fn<B, [A]>((a: A): B => b);
+		const f = jest.fn<C, [B]>((b: B): C => c);
+
+		const composed = compose(f, g);
+		const result = composed(a);
+		expect(g).toHaveBeenCalledWith(a);
+		expect(f).toHaveBeenCalledWith(b);
+		expect(result).toBe(c);
+	});
+});
 
 describe('identity', () => {
 	it('returns the same value that it was given', () => {
