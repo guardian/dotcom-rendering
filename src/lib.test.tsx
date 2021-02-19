@@ -18,7 +18,7 @@ import 'whatwg-fetch';
 // ----- Tests ----- //
 
 describe('compose', () => {
-	it('composes three functions correctly', () => {
+	it('composes two functions correctly', () => {
 		type A = string;
 		type B = number;
 		type C = boolean;
