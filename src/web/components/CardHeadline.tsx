@@ -89,7 +89,7 @@ const fullCardImageTextStyles = css`
 	box-decoration-break: clone;
 	line-height: 1.25;
 	/* white-space: pre-wrap; */
-	padding-right:${space[1]}px;
+	padding-right: ${space[1]}px;
 	${until.desktop} {
 		${headline.xxxsmall()};
 	}
