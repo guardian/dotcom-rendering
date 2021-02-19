@@ -56,5 +56,7 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
 
 			document.getElementById('react-root'),
 		);
-	});
+	}).catch((e) =>
+		console.error(`HydrateApp @loadable/component - error: ${e}`),
+	);
 };

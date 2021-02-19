@@ -111,7 +111,7 @@ export const Discussion = ({
 		};
 
 		if (isCommentable) {
-			callFetch();
+			callFetch().catch((e) => console.error(`callFetch - error: ${e}`));
 		}
 	}, [discussionApiUrl, shortUrlId, isCommentable]);
 
@@ -120,14 +120,14 @@ export const Discussion = ({
 	// on.
 	useEffect(() => {
 		if (hashCommentId) {
-			getCommentContext(discussionApiUrl, hashCommentId).then(
-				(context) => {
+			getCommentContext(discussionApiUrl, hashCommentId)
+				.then((context) => {
 					setCommentPage(context.page);
 					setCommentPageSize(context.pageSize);
 					setCommentOrderBy(context.orderBy);
 					setIsExpanded(true);
-				},
-			);
+				})
+				.catch((e) => console.error(`getCommentContext - error: ${e}`));
 		}
 	}, [discussionApiUrl, hashCommentId]);
 

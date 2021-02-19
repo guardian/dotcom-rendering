@@ -81,14 +81,18 @@ const underlinedStyles = (size: SmallHeadlineSize) => {
 };
 
 const fullCardImageTextStyles = css`
-	${headline.xxxsmall()};
+	${headline.xxsmall()};
 	color: ${neutral[100]};
 	background-color: rgba(0, 0, 0, 0.75);
 	box-shadow: -${space[1]}px 0 0 rgba(0, 0, 0, 0.75);
 	/* Box decoration is required to push the box shadow out on Firefox */
 	box-decoration-break: clone;
 	line-height: 1.25;
-	white-space: pre-wrap;
+	/* white-space: pre-wrap; */
+	padding-right: ${space[1]}px;
+	${until.desktop} {
+		${headline.xxxsmall()};
+	}
 `;
 
 export const CardHeadline = ({
