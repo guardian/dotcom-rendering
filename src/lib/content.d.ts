@@ -215,8 +215,13 @@ interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
 	role?: RoleType;
 }
 
-interface InteractiveBlockElement extends InteractiveAtomBlockElementBase {
+interface InteractiveBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
+	url: string;
+	isMandatory?: boolean;
+	scriptUrl?: string;
+	alt?: string;
+	role?: RoleType;
 }
 
 interface MapBlockElement extends ThirdPartyEmbeddedContent {
