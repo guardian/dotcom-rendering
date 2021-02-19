@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { identity, isElement, toArray } from './lib';
+import { identity, isElement, toArray, memoise } from './lib';
 
 // ----- Tests ----- //
 
@@ -43,5 +43,30 @@ describe('toArray', () => {
 		expect(toArray([1])).toStrictEqual([[1]]);
 		expect(toArray(null)).toStrictEqual([null]);
 		expect(toArray(undefined)).toStrictEqual([undefined]);
+	});
+});
+
+describe('memoise', () => {
+	it('always returns the same value', () => {
+		const mockValue = 'a value';
+		const mockFn = jest.fn(() => mockValue);
+
+		const fn = memoise(mockFn);
+		const firstCall = fn();
+		const secondCall = fn();
+
+		expect(firstCall).toEqual(mockValue);
+		expect(secondCall).toEqual(mockValue);
+	});
+
+	it('only calls the memoised function once', () => {
+		const mockValue = 'a value';
+		const mockFn = jest.fn(() => mockValue);
+
+		const fn = memoise(mockFn);
+		fn();
+		fn();
+		fn();
+		expect(mockFn).toBeCalledTimes(1);
 	});
 });
