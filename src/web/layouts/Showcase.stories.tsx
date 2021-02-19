@@ -50,6 +50,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
 		HydrateApp({ CAPI, NAV });
 		embedIframe().catch((e) =>
+			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);
 	}, [ServerCAPI, NAV]);
