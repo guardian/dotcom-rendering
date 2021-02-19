@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { identity, isElement } from './lib';
+import { identity, isElement, toArray } from './lib';
 
 // ----- Tests ----- //
 
@@ -33,5 +33,15 @@ describe('isElement', () => {
 	it('returns false for attribute nodes', () => {
 		const attributeNode = document.createAttribute('test-attrib');
 		expect(isElement(attributeNode)).toBe(false);
+	});
+});
+
+describe('toArray', () => {
+	it('turns a value into an array of that value', () => {
+		expect(toArray(1)).toStrictEqual([1]);
+		expect(toArray('some string')).toStrictEqual(['some string']);
+		expect(toArray([1])).toStrictEqual([[1]]);
+		expect(toArray(null)).toStrictEqual([null]);
+		expect(toArray(undefined)).toStrictEqual([undefined]);
 	});
 });
