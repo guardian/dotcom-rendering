@@ -5,6 +5,7 @@ import {
 	errorToString,
 	handleErrors,
 	identity,
+	index,
 	isElement,
 	isObject,
 	maybeRender,
@@ -194,5 +195,18 @@ describe('handleErrors', () => {
 		expect(() => handleErrors(res)).toThrowErrorMatchingInlineSnapshot(
 			`"response error message"`,
 		);
+	});
+});
+
+describe('index', () => {
+	const value = 'value';
+	const arr = [value];
+
+	it('returns a some given an index within the bounds of the array', () => {
+		expect(index(0)(arr)).toEqual(some(value));
+	});
+
+	it('returns a none given an out of bounds index', () => {
+		expect(index(1)(arr)).toEqual(none);
 	});
 });
