@@ -347,6 +347,13 @@ interface TweetBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
+interface VineBlockElement extends ThirdPartyEmbeddedContent {
+	_type: 'model.dotcomrendering.pageElements.VineBlockElement';
+	url: string;
+	height: number;
+	width: number;
+}
+
 interface VideoBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoBlockElement';
 	role?: RoleType;
@@ -523,6 +530,7 @@ type CAPIElement =
 	| VideoFacebookBlockElement
 	| VideoVimeoBlockElement
 	| VideoYoutubeBlockElement
+	| VineBlockElement
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement;
 
