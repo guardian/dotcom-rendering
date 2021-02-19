@@ -1,12 +1,14 @@
 // ----- Imports ----- //
 
+import { none, some } from '@guardian/types';
 import {
+	errorToString,
 	identity,
 	isElement,
-	toArray,
-	memoise,
-	errorToString,
 	isObject,
+	maybeRender,
+	memoise,
+	toArray,
 } from './lib';
 
 // ----- Tests ----- //
@@ -89,7 +91,7 @@ describe('errorToString', () => {
 
 	it(`returns the object's toString`, () => {
 		const o1 = new Object();
-		const o2 = { toString: () => message };
+		const o2 = { toString: (): string => message };
 		expect(errorToString(o1, fallback)).toBe('[object Object]');
 		expect(errorToString(o2, fallback)).toBe(message);
 	});
@@ -136,4 +138,41 @@ describe('isObject', () => {
 	test.each(objects)(`returns true for '%p'}`, (...[obj]) =>
 		expect(isObject(obj)).toBe(true),
 	);
+});
+
+describe('maybeRender', () => {
+	it('renders a react element given `some` value', () => {
+		expect(maybeRender(some('a string'), (value) => <>{value}</>))
+			.toMatchInlineSnapshot(`
+		<React.Fragment>
+		  a string
+		</React.Fragment>
+	`);
+	});
+
+	it('returns a react element given `some` value even if it is falsey', () => {
+		expect(
+			maybeRender(some(null), (value) => <>{value}</>),
+		).toMatchInlineSnapshot(`<React.Fragment />`);
+
+		expect(
+			maybeRender(some(false), (value) => <>{value}</>),
+		).toMatchInlineSnapshot(`<React.Fragment />`);
+
+		expect(
+			maybeRender(some(undefined), (value) => <>{value}</>),
+		).toMatchInlineSnapshot(`<React.Fragment />`);
+		expect(maybeRender(some(''), (value) => <>{value}</>))
+			.toMatchInlineSnapshot(`
+		<React.Fragment>
+		  
+		</React.Fragment>
+	`);
+	});
+
+	it('returns null given a none', () => {
+		expect(
+			maybeRender(none, (value) => <>{value}</>),
+		).toMatchInlineSnapshot(`null`);
+	});
 });
