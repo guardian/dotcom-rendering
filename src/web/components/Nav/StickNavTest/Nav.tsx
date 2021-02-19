@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { css, cx } from 'emotion';
 
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -16,17 +16,21 @@ import { clearFix } from '@root/src/lib/mixins';
 
 import { Display } from '@guardian/types';
 import {
+	buildID,
 	navInputCheckboxId,
 	showMoreButtonId,
 	veggieBurgerId,
-} from '../config';
+} from '@root/src/web/components/Nav/config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
 	format: Format;
-	nav: NavType;
+	topLevelPillars: PillarType[];
 	subscribeUrl: string;
 	edition: Edition;
+	currentNavLinkTitle: string;
+	ID: string;
+	ajaxUrl: string;
 };
 
 const clearFixStyle = css`
@@ -71,95 +75,115 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
+// Will lazily fetch required data for expanded menu when menu is expanded by user.
+export const Nav = ({
+	format,
+	subscribeUrl,
+	edition,
+	topLevelPillars,
+	currentNavLinkTitle,
+	ID,
+	ajaxUrl,
+}: Props) => {
+	const [dataRequired, setDataRequired] = useState(false);
+
+	// Accessibility
+	useEffect(() => {
+		// Used to toggle data-link-name on label buttons
+		const navInputCheckbox = document.getElementById(
+			`${buildID(ID, navInputCheckboxId)}`,
+		) as HTMLInputElement;
+
+		const showMoreButton = document.getElementById(
+			`${buildID(ID, showMoreButtonId)}`,
+		) as HTMLElement;
+
+		const veggieBurger = document.getElementById(
+			`${buildID(ID, veggieBurgerId)}`,
+		) as HTMLElement;
+
+		const expandedMenuClickableTags = document.querySelectorAll(
+			'.selectableMenuItem',
+		);
+
+		const expandedMenu = document.getElementById(
+			`${buildID(ID, 'expanded-menu')}`,
+		) as HTMLElement;
+
+		if (navInputCheckbox === null) return;
+
+		navInputCheckbox.addEventListener('click', () => {
+			if (!navInputCheckbox.checked) {
+				showMoreButton.setAttribute(
+					'data-link-name',
+					'nav2 : veggie-burger: show',
+				);
+				veggieBurger.setAttribute(
+					'data-link-name',
+					'nav2 : veggie-burger: show',
+				);
+				expandedMenuClickableTags.forEach(($selectableElement) => {
+					$selectableElement.setAttribute('tabindex', '-1');
+				});
+			} else {
+				showMoreButton.setAttribute(
+					'data-link-name',
+					'nav2 : veggie-burger: hide',
+				);
+				veggieBurger.setAttribute(
+					'data-link-name',
+					'nav2 : veggie-burger: hide',
+				);
+				expandedMenuClickableTags.forEach(($selectableElement) => {
+					$selectableElement.setAttribute('tabindex', '0');
+				});
+				// focusOnFirstNavElement(); TODO but tricky with current approach
+			}
+		});
+
+		const toggleMainMenu = () => {
+			navInputCheckbox?.click();
+		};
+		// Close hide menu on press enter
+		const keydownToggleMainMenu = (e: KeyboardEvent) => {
+			// keyCode: 13 => Enter key | keyCode: 32 => Space key
+			if (e.keyCode === 13 || e.keyCode === 32) {
+				e.preventDefault();
+				toggleMainMenu();
+			}
+		};
+		showMoreButton?.addEventListener('keydown', keydownToggleMainMenu);
+		veggieBurger?.addEventListener('keydown', keydownToggleMainMenu);
+
+		// Accessibility to hide Nav when pressing escape key
+		document.addEventListener('keydown', (e: KeyboardEvent) => {
+			// keyCode: 27 => esc
+			if (e.keyCode === 27) {
+				if (navInputCheckbox?.checked) {
+					toggleMainMenu();
+					if (
+						window.getComputedStyle(veggieBurger).display === 'none'
+					) {
+						showMoreButton.focus();
+					} else {
+						veggieBurger.focus();
+					}
+				}
+			}
+		});
+		// onBlur close dialog
+		document.addEventListener('mousedown', (e: Event) => {
+			if (
+				navInputCheckbox.checked &&
+				!expandedMenu.contains(e.target as Node)
+			) {
+				toggleMainMenu();
+			}
+		});
+	}, [ID]);
+
 	return (
 		<div className={rowStyles}>
-			{/*
-                IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
-
-                We therefore use JS to make the Nav elements more accessibile. We add a
-                keydown `addEventListener` to both the veggie burger button and the show
-                more menu buttons. We also listen to escape key presses to close the Nav menu.
-                We also toggle the tabindex of clickable items to make sure that even when we
-                are displaying the menu on mobile and tablet, that it doesnt get highlighted
-                when tabbing though the page.
-                This is not a perfect solution as not all screen readers support JS
-                https://webaim.org/projects/screenreadersurvey8/#javascript
-            */}
-			<script
-				dangerouslySetInnerHTML={{
-					__html: `document.addEventListener('DOMContentLoaded', function(){
-                        // Used to toggle data-link-name on label buttons
-                        var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
-                        var showMoreButton = document.getElementById('${showMoreButtonId}')
-                        var veggieBurger = document.getElementById('${veggieBurgerId}')
-                        var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
-                        var expandedMenu = document.getElementById('expanded-menu')
-
-                        // We assume News is the 1st column
-                        var firstColLabel = document.getElementById('News-button')
-                        var firstColLink = document.querySelectorAll('#newsLinks > li:first-of-type > a')[0]
-
-                        var focusOnFirstNavElement = function(){
-                          // need to focus on first element in list, firstColLabel is not viewable on desktop
-                          if(window.getComputedStyle(firstColLabel).display === 'none'){
-                            firstColLink.focus()
-                          } else {
-                            firstColLabel.focus()
-                          }
-                        }
-                        navInputCheckbox.addEventListener('click',function(){
-                          if(!navInputCheckbox.checked) {
-                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
-                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
-                            expandedMenuClickableTags.forEach(function($selectableElement){
-                                $selectableElement.setAttribute('tabindex','-1')
-                            })
-                          } else {
-                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
-                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
-                            expandedMenuClickableTags.forEach(function($selectableElement){
-                                $selectableElement.setAttribute('tabindex','0')
-                            })
-                            focusOnFirstNavElement()
-                          }
-                        })
-                        var toggleMainMenu = function(e){
-                          navInputCheckbox.click()
-                        }
-                        // Close hide menu on press enter
-                        var keydownToggleMainMenu = function(e){
-                          // keyCode: 13 => Enter key | keyCode: 32 => Space key
-                          if (e.keyCode === 13 || e.keyCode === 32) {
-                            e.preventDefault()
-                            toggleMainMenu()
-                          }
-                        }
-                        showMoreButton.addEventListener('keydown', keydownToggleMainMenu)
-                        veggieBurger.addEventListener('keydown', keydownToggleMainMenu)
-                        // Accessibility to hide Nav when pressing escape key
-                        document.addEventListener('keydown', function(e){
-                          // keyCode: 27 => esc
-                          if (e.keyCode === 27) {
-                            if(navInputCheckbox.checked) {
-                              toggleMainMenu()
-                              if(window.getComputedStyle(veggieBurger).display === 'none'){
-                                showMoreButton.focus()
-                              }else{
-                                veggieBurger.focus()
-                              }
-                            }
-                          }
-                        })
-                        // onBlur close dialog
-                        document.addEventListener('mousedown', function(e){
-                          if(navInputCheckbox.checked && !expandedMenu.contains(e.target)){
-                            toggleMainMenu()
-                          }
-                        });
-                      })`,
-				}}
-			/>
 			<nav
 				className={cx(
 					clearFixStyle,
@@ -203,20 +227,28 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 					className={css`
 						${visuallyHidden};
 					`}
-					id={navInputCheckboxId}
+					id={buildID(ID, navInputCheckboxId)}
 					name="more"
 					tabIndex={-1}
 					key="OpenExpandedMenuCheckbox"
 					aria-hidden="true"
+					onClick={() => setDataRequired(true)}
 				/>
 				<Pillars
 					display={format.display}
-					pillars={nav.pillars}
+					pillars={topLevelPillars}
 					pillar={format.theme}
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu nav={nav} display={format.display} />
+				<ExpandedMenu
+					display={format.display}
+					ID={ID}
+					expand={dataRequired}
+					currentNavLinkTitle={currentNavLinkTitle}
+					edition={edition}
+					ajaxUrl={ajaxUrl}
+				/>
 			</nav>
 			{format.display === Display.Immersive && (
 				<PositionRoundel>

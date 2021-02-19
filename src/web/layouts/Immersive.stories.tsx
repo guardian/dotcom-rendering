@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 
 import { breakpoints } from '@guardian/src-foundations/mq';
 
-import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
+import {
+	makeGuardianBrowserCAPI,
+	makeGuardianBrowserNav,
+} from '@root/src/model/window-guardian';
 import { Article } from '@root/fixtures/articles/Article';
 import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
 import { Review } from '@root/fixtures/articles/Review';
@@ -53,7 +56,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		HydrateApp({ CAPI, NAV });
+		HydrateApp({ CAPI, NAV: makeGuardianBrowserNav(NAV) });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);

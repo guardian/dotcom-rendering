@@ -7,7 +7,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 
 import { Display } from '@guardian/types';
-import { navInputCheckboxId, showMoreButtonId } from '../../config';
+import { navInputCheckboxId, showMoreButtonId, buildID } from '../../config';
 
 const screenReadable = css`
 	${visuallyHidden};
@@ -75,17 +75,23 @@ const openExpandedMenuStyles = (display: Display) => css`
 	}
 `;
 
-export const ShowMoreMenu = ({ display }: { display: Display }) => (
+export const ShowMoreMenu = ({
+	display,
+	ID,
+}: {
+	display: Display;
+	ID: string;
+}) => (
 	<>
 		{/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */}
 		{/*
     // @ts-ignore */}
 		<label
-			id={showMoreButtonId}
+			id={buildID(ID, showMoreButtonId)}
 			className={openExpandedMenuStyles(display)}
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
-			htmlFor={navInputCheckboxId}
+			htmlFor={buildID(ID, navInputCheckboxId)}
 			data-link-name="nav2 : veggie-burger: show"
 			// @ts-ignore
 			tabIndex={0}
