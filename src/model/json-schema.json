@@ -126,6 +126,9 @@
                         "$ref": "#/definitions/TweetBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/VineBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/VideoBlockElement"
                     },
                     {
@@ -247,8 +250,7 @@
             "type": "array",
             "items": {
                 "type": "object",
-                "properties": {},
-                "additionalProperties": true
+                "additionalProperties": {}
             }
         },
         "config": {
@@ -2302,6 +2304,42 @@
                 "url"
             ]
         },
+        "VineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VineBlockElement"
+                    ]
+                },
+                "url": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "height",
+                "isThirdPartyTracking",
+                "url",
+                "width"
+            ]
+        },
         "VideoBlockElement": {
             "type": "object",
             "properties": {
@@ -3016,6 +3054,9 @@
                                 "$ref": "#/definitions/TweetBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/VineBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/VideoBlockElement"
                             },
                             {
@@ -3249,8 +3290,7 @@
                     "anyOf": [
                         {
                             "type": "object",
-                            "properties": {},
-                            "additionalProperties": true
+                            "additionalProperties": {}
                         },
                         {
                             "type": "string"
