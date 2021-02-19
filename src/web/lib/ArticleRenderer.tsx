@@ -27,6 +27,7 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
+import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import {
@@ -479,6 +480,8 @@ export const ArticleRenderer: React.FC<{
 							<TweetBlockComponent element={element} />
 						</Figure>
 					);
+				case 'model.dotcomrendering.pageElements.VineBlockElement':
+					return <VineBlockComponent element={element} />;
 				case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 					return (
 						<Figure
