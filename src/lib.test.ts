@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { identity, isElement, toArray, memoise } from './lib';
+import { identity, isElement, toArray, memoise, errorToString } from './lib';
 
 // ----- Tests ----- //
 
@@ -68,5 +68,30 @@ describe('memoise', () => {
 		fn();
 		fn();
 		expect(mockFn).toBeCalledTimes(1);
+	});
+});
+
+describe('errorToString', () => {
+	const message = 'An error message';
+	const fallback = 'A fallback message';
+
+	it('returns the Error message string', () => {
+		const err = new Error(message);
+		expect(errorToString(err, fallback)).toBe(`Error: ${message}`);
+	});
+
+	it(`returns the object's toString`, () => {
+		const o1 = new Object();
+		const o2 = { toString: () => message };
+		expect(errorToString(o1, fallback)).toBe('[object Object]');
+		expect(errorToString(o2, fallback)).toBe(message);
+	});
+
+	it('returns a fallback when no error or object provided', () => {
+		expect(errorToString('1', fallback)).toBe(fallback);
+		expect(errorToString(1, fallback)).toBe(fallback);
+		expect(errorToString(null, fallback)).toBe(fallback);
+		expect(errorToString(undefined, fallback)).toBe(fallback);
+		expect(errorToString([], fallback)).toBe(fallback);
 	});
 });
