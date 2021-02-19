@@ -86,6 +86,7 @@ export const MainMedia: React.FC<{
 				starRating={starRating}
 				host={host}
 				abTests={abTests}
+				isMainMedia={true}
 			/>
 		))}
 	</div>

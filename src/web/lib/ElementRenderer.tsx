@@ -78,7 +78,11 @@ export const ElementRenderer = ({
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
-				<Figure id={`audio-atom-${index}`} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					id={`audio-atom-${index}`}
+					role={element.role}
+				>
 					<AudioAtom
 						id={element.id}
 						trackUrl={element.trackUrl}
@@ -113,7 +117,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.CommentBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<CommentBlockComponent
 						body={element.body}
 						avatarURL={element.avatarURL}
@@ -126,7 +130,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<DisclaimerBlockComponent
 						html={element.html}
 						pillar={format.theme}
@@ -137,7 +141,11 @@ export const ElementRenderer = ({
 			return <DividerBlockComponent />;
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return (
-				<Figure id={`callout-${index}`} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					id={`callout-${index}`}
+					role={element.role}
+				>
 					<CalloutBlockComponent
 						callout={element}
 						pillar={format.theme}
@@ -146,13 +154,13 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<ChartAtom id={element.id} html={element.html} />
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return (
-				<Figure id={`quiz-atom-${index}`}>
+				<Figure isMainMedia={isMainMedia} id={`quiz-atom-${index}`}>
 					<>
 						{element.quizType === 'personality' && (
 							<PersonalityQuizAtom
@@ -173,6 +181,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={element.role}
 					id={`document-block-element-${index}`}
 				>
@@ -196,6 +205,7 @@ export const ElementRenderer = ({
 			if (!element.safe) {
 				return (
 					<Figure
+						isMainMedia={isMainMedia}
 						role={element.role}
 						id={`embed-block-element-${index}`}
 						key={`embed-block-element-${index}`}
@@ -219,6 +229,7 @@ export const ElementRenderer = ({
 			}
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={element.role}
 					id={`embed-block-element-${index}`}
 					key={`embed-block-element-${index}`}
@@ -240,7 +251,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<ExplainerAtom
 						key={index}
 						id={element.id}
@@ -251,7 +262,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return (
-				<Figure id={`guide-atom-${index}`} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					id={`guide-atom-${index}`}
+					role={element.role}
+				>
 					<GuideAtom
 						id={element.id}
 						title={element.title}
@@ -267,7 +282,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<GuVideoBlockComponent
 						html={element.html}
 						format={format}
@@ -281,7 +296,7 @@ export const ElementRenderer = ({
 			return <HighlightBlockComponent key={index} html={element.html} />;
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<ImageBlockComponent
 						format={format}
 						palette={palette}
@@ -297,6 +312,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={element.role}
 					id={`instagram-block-element-${index}`}
 					key={`instagram-block-element-${index}`}
@@ -318,7 +334,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<InteractiveAtom
 						id={element.id}
 						html={element.html}
@@ -330,6 +346,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={element.role}
 					id={`map-block-element-${index}`}
 					key={`map-block-element-${index}`}
@@ -356,7 +373,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<MultiImageBlockComponent
 						format={format}
 						palette={palette}
@@ -368,7 +385,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 			return (
-				<Figure id={`profile-atom-${index}`} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					id={`profile-atom-${index}`}
+					role={element.role}
+				>
 					<ProfileAtom
 						id={element.id}
 						title={element.title}
@@ -395,7 +416,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return (
-				<Figure id={`qanda-atom-${index}`} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					id={`qanda-atom-${index}`}
+					role={element.role}
+				>
 					<QandaAtom
 						id={element.id}
 						title={element.title}
@@ -422,13 +447,18 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
 			return (
-				<Figure key={index} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					key={index}
+					role={element.role}
+				>
 					<SoundcloudBlockComponent element={element} />
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={element.role}
 					id={`spotify-block-element-${index}`}
 					key={`spotify-block-element-${index}`}
@@ -457,7 +487,7 @@ export const ElementRenderer = ({
 			return <SubheadingBlockComponent key={index} html={element.html} />;
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<TableBlockComponent element={element} />
 				</Figure>
 			);
@@ -475,13 +505,18 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			return (
-				<Figure key={index} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					key={index}
+					role={element.role}
+				>
 					<TweetBlockComponent element={element} />
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={element.role}
 					id={`video-facebook-block-element-${index}`}
 					key={`video-facebook-block-element-${index}`}
@@ -508,7 +543,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<VimeoBlockComponent
 						format={format}
 						palette={palette}
@@ -523,7 +558,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return (
-				<Figure role={element.role}>
+				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<YoutubeEmbedBlockComponent
 						format={format}
 						palette={palette}
@@ -539,6 +574,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					key={index}
 					role={element.role}
 					id={`youtube-block-${index}`}
@@ -567,7 +603,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return (
-				<Figure role={element.role} id={`timeline-atom-${index}`}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={element.role}
+					id={`timeline-atom-${index}`}
+				>
 					<TimelineAtom
 						id={element.id}
 						title={element.title}
@@ -600,7 +640,7 @@ export const ElementRenderer = ({
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataImage = element.witnessTypeData as WitnessTypeDataImage;
 					return (
-						<Figure>
+						<Figure isMainMedia={isMainMedia}>
 							<WitnessImageBlockComponent
 								assets={element.assets}
 								caption={witnessTypeDataImage.caption}
@@ -616,7 +656,7 @@ export const ElementRenderer = ({
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataVideo = element.witnessTypeData as WitnessTypeDataVideo;
 					return (
-						<Figure>
+						<Figure isMainMedia={isMainMedia}>
 							<WitnessVideoBlockComponent
 								title={witnessTypeDataVideo.title}
 								description={witnessTypeDataVideo.description}
@@ -631,7 +671,7 @@ export const ElementRenderer = ({
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataText = element.witnessTypeData as WitnessTypeDataText;
 					return (
-						<Figure>
+						<Figure isMainMedia={isMainMedia}>
 							<WitnessTextBlockComponent
 								title={witnessTypeDataText.title}
 								description={witnessTypeDataText.description}
