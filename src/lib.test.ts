@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { identity } from './lib';
+import { identity, isElement } from './lib';
 
 // ----- Tests ----- //
 
@@ -9,5 +9,29 @@ describe('identity', () => {
 		expect(identity(2)).toBe(2);
 		expect(identity('hello world')).toBe('hello world');
 		expect(identity({ foo: 'bar' })).toEqual({ foo: 'bar' });
+	});
+});
+
+describe('isElement', () => {
+	it('returns true for element nodes', () => {
+		['div', 'p', 'img'].forEach((descriptor) => {
+			const el = document.createElement(descriptor);
+			expect(isElement(el)).toBe(true);
+		});
+	});
+
+	it('returns false for text nodes', () => {
+		const textNode = document.createTextNode('Some text');
+		expect(isElement(textNode)).toBe(false);
+	});
+
+	it('returns false for document fragments', () => {
+		const frag = document.createDocumentFragment();
+		expect(isElement(frag)).toBe(false);
+	});
+
+	it('returns false for attribute nodes', () => {
+		const attributeNode = document.createAttribute('test-attrib');
+		expect(isElement(attributeNode)).toBe(false);
 	});
 });
