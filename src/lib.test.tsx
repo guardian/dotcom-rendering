@@ -13,6 +13,7 @@ import {
 	memoise,
 	pipe,
 	pipe2,
+	pipe3,
 	toArray,
 } from './lib';
 import 'whatwg-fetch';
@@ -47,7 +48,7 @@ describe('pipe', () => {
 	const a: A = 1;
 	const b: B = '1';
 
-	const fn = jest.fn<B, [A]>((a: number) => b);
+	const fn = jest.fn<B, [A]>((a: A): B => b);
 
 	const result = pipe<A, B>(a, fn);
 
@@ -64,14 +65,37 @@ describe('pipe2', () => {
 	const b: B = '1';
 	const c = true;
 
-	const f = jest.fn<B, [A]>((a: number): string => b);
-	const g = jest.fn<C, [B]>((b: string): boolean => c);
+	const f = jest.fn<B, [A]>((a: A): B => b);
+	const g = jest.fn<C, [B]>((b: B): C => c);
 
 	const result = pipe2<A, B, C>(a, f, g);
 
 	expect(f).toHaveBeenCalledWith(a);
 	expect(g).toHaveBeenCalledWith(b);
 	expect(result).toBe(c);
+});
+
+describe('pipe3', () => {
+	type A = number;
+	type B = string;
+	type C = boolean;
+	type D = [number, string];
+
+	const a: A = 1;
+	const b: B = '1';
+	const c: C = true;
+	const d: D = [a, b];
+
+	const f = jest.fn<B, [A]>((a: A): B => b);
+	const g = jest.fn<C, [B]>((b: B): C => c);
+	const h = jest.fn<D, [C]>((c: C): D => d);
+
+	const result = pipe3<A, B, C, D>(a, f, g, h);
+
+	expect(f).toHaveBeenCalledWith(a);
+	expect(g).toHaveBeenCalledWith(b);
+	expect(h).toHaveBeenCalledWith(c);
+	expect(result).toBe(d);
 });
 
 describe('identity', () => {
