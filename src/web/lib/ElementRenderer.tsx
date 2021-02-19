@@ -584,7 +584,11 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					key={index}
 					role={element.role}
-					id={`youtube-block-${index}`}
+					id={
+						isMainMedia
+							? `youtube-block-main-media-${index}`
+							: `youtube-block-${index}`
+					}
 				>
 					<YoutubeBlockComponent
 						format={format}
