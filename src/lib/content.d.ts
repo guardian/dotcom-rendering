@@ -224,6 +224,7 @@ interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	embedUrl: string;
 	originalUrl: string;
 	title: string;
+	source: string;
 	height: number;
 	width: number;
 	caption?: string;

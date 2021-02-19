@@ -37,7 +37,7 @@ export const getScriptArrayFromFilename = (
 	const legacyFilename = chunks && chunks.length > 0 && chunks[0];
 	return [
 		{ src: `${CDN}assets/${filename}`, legacy: false },
-		{ src: `${CDN}assets/${legacyFilename}`, legacy: true },
+		{ src: `${CDN}assets/${legacyFilename || ''}`, legacy: true },
 	];
 };
 
