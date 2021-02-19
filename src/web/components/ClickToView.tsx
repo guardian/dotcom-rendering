@@ -13,6 +13,7 @@ type Props = {
 	role?: RoleType;
 	onAccept?: Function;
 	isTracking: boolean;
+	isMainMedia?: boolean;
 	source?: string;
 	sourceDomain?: string;
 	abTests: CAPIType['config']['abTests'];
@@ -78,12 +79,18 @@ const roleButtonText = (role: RoleType) => {
 	}
 };
 
-const shouldDisplayOverlay = (
-	isTracking: boolean,
-	isOverlayClicked: boolean,
-	isInABTestVariant: boolean,
-) => {
-	if (!isTracking) {
+const shouldDisplayOverlay = ({
+	isTracking,
+	isOverlayClicked,
+	isInABTestVariant,
+	isMainMedia,
+}: {
+	isTracking: boolean;
+	isOverlayClicked: boolean;
+	isInABTestVariant: boolean;
+	isMainMedia?: boolean;
+}) => {
+	if (isMainMedia || !isTracking) {
 		return false;
 	}
 	if (isOverlayClicked) {
@@ -101,6 +108,7 @@ export const ClickToView = ({
 	role = 'inline',
 	onAccept,
 	isTracking,
+	isMainMedia,
 	source,
 	sourceDomain = 'unknown',
 	abTests,
@@ -117,11 +125,12 @@ export const ClickToView = ({
 	const textSize = roleTextSize(role);
 
 	if (
-		shouldDisplayOverlay(
+		shouldDisplayOverlay({
 			isTracking,
 			isOverlayClicked,
-			isInABTestVariant(abTests),
-		)
+			isInABTestVariant: isInABTestVariant(abTests),
+			isMainMedia,
+		})
 	) {
 		return (
 			<div

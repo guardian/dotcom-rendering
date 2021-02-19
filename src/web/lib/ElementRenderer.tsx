@@ -188,6 +188,7 @@ export const ElementRenderer = ({
 					<ClickToView
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
@@ -213,6 +214,7 @@ export const ElementRenderer = ({
 						<ClickToView
 							role={element.role}
 							isTracking={element.isThirdPartyTracking}
+							isMainMedia={isMainMedia}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
 							abTests={abTests}
@@ -237,6 +239,7 @@ export const ElementRenderer = ({
 					<ClickToView
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
@@ -320,6 +323,7 @@ export const ElementRenderer = ({
 					<ClickToView
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
@@ -354,6 +358,7 @@ export const ElementRenderer = ({
 					<ClickToView
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
@@ -466,6 +471,7 @@ export const ElementRenderer = ({
 					<ClickToView
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
@@ -524,6 +530,7 @@ export const ElementRenderer = ({
 					<ClickToView
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
