@@ -11,6 +11,7 @@ import {
 	isObject,
 	maybeRender,
 	memoise,
+	pipe,
 	toArray,
 } from './lib';
 import 'whatwg-fetch';
@@ -36,6 +37,21 @@ describe('compose', () => {
 		expect(f).toHaveBeenCalledWith(b);
 		expect(result).toBe(c);
 	});
+});
+
+describe('pipe', () => {
+	type A = number;
+	type B = string;
+
+	const a: A = 1;
+	const b: B = '1';
+
+	const fn = jest.fn<B, [A]>((a: number) => a.toString());
+
+	const result = pipe<A, B>(a, fn);
+
+	expect(fn).toHaveBeenCalledWith(a);
+	expect(result).toBe(b);
 });
 
 describe('identity', () => {
