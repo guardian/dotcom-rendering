@@ -12,6 +12,7 @@ import {
 	maybeRender,
 	memoise,
 	pipe,
+	pipe2,
 	toArray,
 } from './lib';
 import 'whatwg-fetch';
@@ -46,12 +47,31 @@ describe('pipe', () => {
 	const a: A = 1;
 	const b: B = '1';
 
-	const fn = jest.fn<B, [A]>((a: number) => a.toString());
+	const fn = jest.fn<B, [A]>((a: number) => b);
 
 	const result = pipe<A, B>(a, fn);
 
 	expect(fn).toHaveBeenCalledWith(a);
 	expect(result).toBe(b);
+});
+
+describe('pipe2', () => {
+	type A = number;
+	type B = string;
+	type C = boolean;
+
+	const a: A = 1;
+	const b: B = '1';
+	const c = true;
+
+	const f = jest.fn<B, [A]>((a: number): string => b);
+	const g = jest.fn<C, [B]>((b: string): boolean => c);
+
+	const result = pipe2<A, B, C>(a, f, g);
+
+	expect(f).toHaveBeenCalledWith(a);
+	expect(g).toHaveBeenCalledWith(b);
+	expect(result).toBe(c);
 });
 
 describe('identity', () => {
