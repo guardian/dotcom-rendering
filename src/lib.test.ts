@@ -1,6 +1,13 @@
 // ----- Imports ----- //
 
-import { identity, isElement, toArray, memoise, errorToString } from './lib';
+import {
+	identity,
+	isElement,
+	toArray,
+	memoise,
+	errorToString,
+	isObject,
+} from './lib';
 
 // ----- Tests ----- //
 
@@ -94,4 +101,39 @@ describe('errorToString', () => {
 		expect(errorToString(undefined, fallback)).toBe(fallback);
 		expect(errorToString([], fallback)).toBe(fallback);
 	});
+});
+
+describe('isObject', () => {
+	const nonObjects = [
+		null,
+		undefined,
+		false,
+		0,
+		NaN,
+		'',
+		true,
+		1,
+		'a',
+		Symbol('a'),
+	];
+
+	test.each(nonObjects)('returns false for %p', (...[nonObject]) =>
+		expect(isObject(nonObject)).toBe(false),
+	);
+
+	const objects = [
+		[1, 2, 3],
+		Object(false),
+		new Date(),
+		new Error(),
+		{ a: 1 },
+		Object(0),
+		/x/,
+		Object('a'),
+		document.body,
+	];
+
+	test.each(objects)(`returns true for '%p'}`, (...[obj]) =>
+		expect(isObject(obj)).toBe(true),
+	);
 });
