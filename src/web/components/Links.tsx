@@ -134,7 +134,6 @@ export const Links = ({
 	mmaUrl: mmaUrlFromConfig,
 }: Props) => {
 	const [showGiftingLink, setShowGiftingLink] = useState<boolean>();
-	// const [userIsDefined, setUserIsDefined] = useState<boolean>();
 	const [identityLinks, setIdentityLinks] = useState<DropdownLinkType[]>();
 
 	// show gifting if support messaging isn't shown
