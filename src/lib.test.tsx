@@ -3,6 +3,7 @@
 import { none, some } from '@guardian/types';
 import {
 	errorToString,
+	handleErrors,
 	identity,
 	isElement,
 	isObject,
@@ -10,6 +11,7 @@ import {
 	memoise,
 	toArray,
 } from './lib';
+import 'whatwg-fetch';
 
 // ----- Tests ----- //
 
@@ -174,5 +176,23 @@ describe('maybeRender', () => {
 		expect(
 			maybeRender(none, (value) => <>{value}</>),
 		).toMatchInlineSnapshot(`null`);
+	});
+});
+
+describe('handleErrors', () => {
+	it('returns the response if the status is ok', () => {
+		const res = new Response();
+		expect(handleErrors(res)).toBe(res);
+	});
+
+	it('throws an error if the response is not ok', () => {
+		// mock a not ok response
+		const res = new Response('', {
+			status: 400,
+			statusText: 'response error message',
+		});
+		expect(() => handleErrors(res)).toThrowErrorMatchingInlineSnapshot(
+			`"response error message"`,
+		);
 	});
 });
