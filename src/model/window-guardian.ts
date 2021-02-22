@@ -68,25 +68,21 @@ const makeWindowGuardianConfig = (
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 	// For some elements it is important to keep thier index in the `elements` array
-
 	const blockElementWithIndex = <T extends CAPIElement>(
 		blocks: { elements: CAPIElement[] }[],
 		blockElementType: CAPIElement['_type'],
 		indexName: string,
 	): T[] => {
 		if (blocks.length === 0) return [];
-		return blocks[0].elements.reduce(
-			(acc: T[], element: CAPIElement, index: number) => {
-				if (element._type === blockElementType) {
-					acc.push({
-						...element,
-						[indexName]: index,
-					} as T);
-				}
-				return acc;
-			},
-			[] as T[],
-		);
+		return blocks[0].elements.map((element: CAPIElement, index: number) => {
+			if (element._type === blockElementType) {
+				return {
+					...element,
+					[indexName]: index,
+				};
+			}
+			return element;
+		}) as T[];
 	};
 
 	// If our element type is one that can contain third party content that can track user, but hasn't been marked
