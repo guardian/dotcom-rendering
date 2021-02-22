@@ -91,7 +91,6 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 		);
 	}
 
-
 	return notImplemented;
 };
 
