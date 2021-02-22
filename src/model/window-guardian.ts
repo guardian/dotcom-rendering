@@ -281,6 +281,13 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 				'videoFacebookIndex',
 			),
 		),
+		vineBlockElements: thirdPartyTrackingElementsOnly(
+			blockElementWithIndex(
+				CAPI.blocks,
+				'model.dotcomrendering.pageElements.VineBlockElement',
+				'vineBlockIndex',
+			),
+		),
 	};
 };
 

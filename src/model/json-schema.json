@@ -2322,16 +2322,13 @@
                 "width": {
                     "type": "number"
                 },
-                "role": {
-                    "$ref": "#/definitions/RoleType"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
-                "vineIndex": {
+                "vineBlockIndex": {
                     "type": "number"
                 },
                 "isThirdPartyTracking": {

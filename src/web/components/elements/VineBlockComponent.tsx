@@ -13,12 +13,11 @@ const titleStyle = css`
 export const VineBlockComponent: React.FC<{
 	element: VineBlockElement;
 }> = ({ element }) => {
-	console.log(element);
 	return (
 		<>
 			{element.url && element.width && element.height && (
 				<div>
-					<div css={titleStyle}>
+					<div className={titleStyle}>
 						<p>{element.title}</p>
 					</div>
 
