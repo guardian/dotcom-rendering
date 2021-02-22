@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
+import { select, text, withKnobs } from '@storybook/addon-knobs';
 import FootballScores, { MatchStatusKind } from 'components/footballScores';
-import { text, withKnobs, select } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 
 // ----- Helpers ----- //
