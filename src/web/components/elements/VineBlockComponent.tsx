@@ -11,7 +11,7 @@ export const VineBlockComponent: React.FC<{
 					height={element.height}
 					width={element.width}
 				>
-					<div className="element-vine">
+					<div>
 						<iframe
 							title="vine-embed"
 							src={element.url}
