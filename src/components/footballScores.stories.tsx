@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
 import FootballScores, { MatchStatusKind } from 'components/footballScores';
 import { text, withKnobs, select } from '@storybook/addon-knobs';
+import type { FC } from 'react';
 
 // ----- Helpers ----- //
 
