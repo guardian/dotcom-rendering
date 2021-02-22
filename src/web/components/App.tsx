@@ -830,6 +830,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					index={element.vineBlockIndex}
 				>
 					<ClickToView
+						// No role given by CAPI
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						isTracking={element.isThirdPartyTracking}
