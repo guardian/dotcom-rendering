@@ -100,24 +100,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		return elements.filter((element) => element.isThirdPartyTracking);
 	};
 
-	/* Kept for posteriy...for now anyway!
-    const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
-        (acc, element, index: number) => {
-            if (
-                element._type ===
-                'model.dotcomrendering.pageElements.RichLinkBlockElement'
-            ) {
-                acc.push({
-                    ...element,
-                    richLinkIndex: index,
-                } as RichLinkBlockElement);
-            }
-            return acc;
-        },
-        [] as RichLinkBlockElement[],
-    );
-*/
-
 	return {
 		designType: CAPI.designType,
 		pillar: CAPI.pillar,
