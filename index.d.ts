@@ -341,7 +341,7 @@ interface CAPIType {
 	isImmersive: boolean;
 	sectionLabel: string;
 	sectionUrl: string;
-	sectionName: string;
+	sectionName?: string;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
 	shouldHideAds: boolean;
@@ -396,7 +396,7 @@ type CAPIBrowserType = {
 	editionId: Edition;
 	editionLongForm: string;
 	contentType: string;
-	sectionName: string;
+	sectionName?: string;
 	shouldHideReaderRevenue: boolean;
 	pageType: {
 		isMinuteArticle: boolean;
