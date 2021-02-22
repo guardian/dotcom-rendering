@@ -42,6 +42,11 @@ const articles = [
 			'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
 	},
 	{
+		name: 'Live',
+		url:
+			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+	},
+	{
 		name: 'GuardianView',
 		url:
 			'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
