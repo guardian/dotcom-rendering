@@ -15,8 +15,8 @@ const quoteStyles = (colour?: string) => css`
 const sizeStyles = (size: SmallHeadlineSize) => {
 	const tinySvg = css`
 		svg {
-			height: 12px;
-			width: 6px;
+			height: 13px;
+			width: 7px;
 		}
 	`;
 	const smallSvg = css`
