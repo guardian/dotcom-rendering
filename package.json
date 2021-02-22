@@ -131,6 +131,7 @@
     "webpack-dev-server": "^3.11.1",
     "webpack-manifest-plugin": "^3.0.0",
     "webpack-node-externals": "^2.5.2",
+    "whatwg-fetch": "^3.6.1",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   }
