@@ -6,6 +6,7 @@ import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
 import { Review } from '@root/fixtures/articles/Review';
 import { Analysis } from '@root/fixtures/articles/Analysis';
 import { Feature } from '@root/fixtures/articles/Feature';
+import { Live } from '@root/fixtures/articles/Live';
 import { GuardianView } from '@root/fixtures/articles/GuardianView';
 import { Interview } from '@root/fixtures/articles/Interview';
 import { Quiz } from '@root/fixtures/articles/Quiz';
@@ -91,6 +92,32 @@ export const FeatureStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 FeatureStory.story = { name: 'Feature' };
+
+export const LiveStory = (): React.ReactNode => {
+	const LiveBlog = {
+		...Live,
+		config: {
+			...Live.config,
+			isLive: true,
+		},
+	};
+	const ServerCAPI = convertToShowcase(LiveBlog);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LiveStory.story = { name: 'LiveBlog' };
+
+export const DeadStory = (): React.ReactNode => {
+	const DeadBlog = {
+		...Live,
+		config: {
+			...Live.config,
+			isLive: false,
+		},
+	};
+	const ServerCAPI = convertToShowcase(DeadBlog);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+DeadStory.story = { name: 'DeadBlog' };
 
 export const GuardianViewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(GuardianView);
