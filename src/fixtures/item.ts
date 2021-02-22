@@ -222,6 +222,7 @@ const fields = {
 	internalShortId: none,
 	commentCount: none,
 	relatedContent: none,
+	footballContent: none
 };
 
 const article: Item = {

@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 import FootballScores, { MatchStatusKind } from 'components/footballScores';
-import { text, number, withKnobs, select } from '@storybook/addon-knobs';
+import { text, withKnobs, select } from '@storybook/addon-knobs';
 
 // ----- Helpers ----- //
 
@@ -27,19 +27,26 @@ const Default: FC = () =>
         league={text("League", "Premier League")}
         stadium={text("Stadium", "Etihad Stadium")}
         homeTeam={{
-            name: text("Home Team Name", "Man City"),
-            score: number("Home Team Score", 4),
-            scorers: [
-                { name: "Stones", time: 26 },
-                { name: "Gundogan", time: 56 },
-                { name: "Stones", time: 68 },
-                { name: "Sterling", time: 88 },
-            ]
+            id: "1006",
+            name: "Arsenal",
+            shortCode: "ARS",
+            crestUri: "https://i.guim.co.uk/img/sport/football/crests/1006.png?w=#{width}&h=#{height}&q=#{quality}&fit=bounds&sig-ignores-params=true&s=245ccb3526331f781858849f18e80283",
+            score: 0,
+            scorers: []
         }}
         awayTeam={{
-            name: text("Away Team Name", "Crystal Palace"),
-            score: number("Away Team Score", 0),
-            scorers: []
+            id: "11",
+            name: "Man City",
+            shortCode: "MNC",
+            crestUri: "https://i.guim.co.uk/img/sport/football/crests/11.png?w=#{width}&h=#{height}&q=#{quality}&fit=bounds&sig-ignores-params=true&s=69570ed9a99d983d2d793a0f9855f205",
+            score: 1,
+            scorers: [
+                {
+                    player: "Sterling",
+                    timeInMinutes: 2,
+                    additionalInfo: ""
+                }
+            ]
         }}
         status={{ kind: selectMatchStatus(), time: "20:00" }}
     />
