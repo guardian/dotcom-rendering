@@ -56,7 +56,7 @@ const CAPITrails: CAPITrailType[] = [
 		byline: 'Damian Carrington Environment editor',
 		image:
 			'https://i.guim.co.uk/img/media/1774967ff6b9127a43b06c0685d1fd499c965141/98_0_3413_2048/master/3413.jpg?width=900&quality=85&s=7332d70e260400883bfdcb5b1453ef10',
-		isLiveBlog: true,
+		isLiveBlog: false,
 		webPublicationDate: '2019-12-02T09:45:30.000Z',
 		pillar: 'sport',
 		designType: 'Article',
@@ -120,7 +120,7 @@ const CAPITrails: CAPITrailType[] = [
 
 const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 	const display = Display.Standard;
-	const design = decideDesign(thisTrail.designType, []);
+	const design = decideDesign(thisTrail.designType, [], thisTrail.isLiveBlog);
 	const theme = decideTheme({ pillar: thisTrail.pillar, design });
 	return {
 		url: thisTrail.url,

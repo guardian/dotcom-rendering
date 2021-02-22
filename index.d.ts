@@ -420,6 +420,8 @@ type CAPIBrowserType = {
 	isImmersive: boolean;
 	isPhotoEssay: boolean;
 	isSpecialReport: boolean;
+	isLiveBlog: boolean;
+	isLive: boolean;
 	matchUrl?: string;
 	callouts: CalloutBlockElement[];
 	qandaAtoms: QABlockElement[];
@@ -612,6 +614,8 @@ interface ConfigType extends CommercialConfigType {
 	mmaUrl?: string;
 	brazeApiKey?: string;
 	ipsosTag?: string;
+	isLiveBlog: boolean;
+	isLive: boolean;
 }
 
 interface ConfigTypeBrowser {

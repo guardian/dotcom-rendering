@@ -175,6 +175,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		isImmersive: CAPI.isImmersive,
 		isPhotoEssay: CAPI.config.isPhotoEssay,
 		isSpecialReport: CAPI.isSpecialReport,
+		isLiveBlog: CAPI.config.isLiveBlog,
+		isLive: CAPI.config.isLive,
 		matchUrl: CAPI.matchUrl,
 		callouts: blockElementWithIndex(
 			CAPI.blocks,
