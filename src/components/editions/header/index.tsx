@@ -46,7 +46,7 @@ const galleryInnerHeaderStyles = css`
 		padding-left: ${tabletArticleMargin}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		padding-left: ${wideArticleMargin}px;
 	}
 `;
@@ -67,7 +67,7 @@ const galleryLinesStyles = css`
 		margin-left: 0;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: 0;
 	}
 `;
@@ -78,7 +78,7 @@ const galleryHeaderBorderStyles = css`
 		border-right: 1px solid ${neutral[100]};
 		box-sizing: border-box;
 		width: ${tablet}px;
-		${from.wide} {
+		${from.desktop} {
 			width: ${wide}px;
 		}
 	}
@@ -92,7 +92,7 @@ const interviewStyles = (item: Item): SerializedStyles => {
 			padding-left: ${tabletArticleMargin}px;
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			padding-left: ${wideArticleMargin}px;
 		}
 
@@ -115,7 +115,7 @@ const immersiveHeadlineStyles = (item: Item): SerializedStyles => {
 			width: ${tabletImmersiveWidth}px;
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			padding-left: ${wideArticleMargin}px;
 			width: ${wideImmersiveWidth}px;
 		}
@@ -132,7 +132,7 @@ const immersiveStandfirstStyles = css`
 		padding-left: ${tabletArticleMargin}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		padding-left: ${wideArticleMargin}px;
 	}
 `;
