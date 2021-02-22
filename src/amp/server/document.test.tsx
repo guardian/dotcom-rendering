@@ -41,7 +41,7 @@ test('produces valid AMP doc', async () => {
 		title: 'Foo',
 		fbPixelaccount: 'XXXXXXXXXX',
 		comscoreID: 'XXXXXXX',
-		section: CAPI.sectionName,
+		section: CAPI.sectionName || '', // TODO: sectionName should be required but is missing from CAPI on some article types (ex: Interview fixture)
 		contentType: CAPI.contentType,
 		id: CAPI.pageId,
 		beacon: `${CAPI.beaconURL}/count/pv.gif`,
@@ -61,7 +61,11 @@ test('produces valid AMP doc', async () => {
 		<Article
 			experimentsData={{}}
 			nav={nav}
-			articleData={{ ...CAPI, shouldHideReaderRevenue: false }}
+			articleData={{
+				...CAPI,
+				sectionName: CAPI.sectionName || '', // TODO: sectionName should be required but is missing from CAPI on some article types (ex: Interview fixture)
+				shouldHideReaderRevenue: false,
+			}}
 			config={config}
 			analytics={analytics}
 		/>
