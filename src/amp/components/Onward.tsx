@@ -41,14 +41,14 @@ const sectionHasMostViewed = (sectionID: string): boolean => {
 
 export const Onward: React.FC<{
 	pageID: string;
-	sectionID?: string; // TODO: sectionID should not be an optional property
+	sectionID: string;
 	hasStoryPackage: boolean;
 	hasRelated: boolean;
 	seriesTags: TagType[];
 	guardianBaseURL: string;
 }> = ({
 	pageID,
-	sectionID = '', // TODO: sectionID should not be an optional property
+	sectionID,
 	hasStoryPackage,
 	hasRelated,
 	seriesTags,
