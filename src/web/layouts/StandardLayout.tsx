@@ -51,7 +51,6 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { ContainerLayout } from '../components/ContainerLayout';
 
 const StandardGrid = ({
 	children,
@@ -341,10 +340,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</Section>
 				</Stuck>
 				<SendToBack>
-					<ContainerLayout
+					<Section
 						showTopBorder={false}
-						sideBorders={false}
-						padContent={false}
+						showSideBorders={false}
+						padded={false}
 						backgroundColour={brandBackground.primary}
 					>
 						<Header
@@ -352,7 +351,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
 						/>
-					</ContainerLayout>
+					</Section>
 
 					<Section
 						showSideBorders={true}
