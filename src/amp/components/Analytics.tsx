@@ -6,7 +6,7 @@ export interface AnalyticsModel {
 	title: string;
 	fbPixelaccount: string;
 	comscoreID: string;
-	section?: string;
+	section: string;
 	contentType: string;
 	id: string;
 	beacon: string;
@@ -28,7 +28,7 @@ export const Analytics: React.FC<{
 		fbPixelaccount,
 		comscoreID,
 		title,
-		section = '',
+		section,
 		contentType,
 		id,
 		beacon,
