@@ -120,7 +120,7 @@ const CAPITrails: CAPITrailType[] = [
 
 const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 	const display = Display.Standard;
-	const design = decideDesign(thisTrail.designType, []);
+	const design = decideDesign(thisTrail.designType, [], thisTrail.isLiveBlog);
 	const theme = decideTheme({ pillar: thisTrail.pillar, design });
 	return {
 		url: thisTrail.url,
