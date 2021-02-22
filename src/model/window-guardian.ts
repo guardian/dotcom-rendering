@@ -67,7 +67,9 @@ const makeWindowGuardianConfig = (
 };
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
-	// For some elements it is important to keep thier index in the `elements` array
+	// For some elements it is important to keep thier index in the `elements` array. We do this because
+	// we need a way to tell the client which element to hydrate. Could we do this better? Yes, we could
+	// set an elementId on Frontend and use that to id each element instead.
 	const blockElementWithIndex = <T extends CAPIElement>(
 		blocks: { elements: CAPIElement[] }[],
 		blockElementType: CAPIElement['_type'],
