@@ -382,6 +382,7 @@ export const ShowcaseLayout = ({
 										: undefined
 								}
 								host={host}
+								abTests={CAPI.config.abTests}
 							/>
 						</div>
 					</GridItem>
