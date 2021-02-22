@@ -230,3 +230,107 @@ export const linkStory = () => (
 	</Section>
 );
 linkStory.story = { name: 'With linkTo provided' };
+
+export const LiveSizes = () => (
+	<Section showTopBorder={false} showSideBorders={false}>
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Large live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="large"
+		/>
+		<br />
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Medium live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="medium"
+		/>
+		<br />
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Small live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="small"
+		/>
+		<br />
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Tiny live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="tiny"
+		/>
+	</Section>
+);
+LiveSizes.story = { name: 'with various sizes' };
+
+export const Updated = () => (
+	<Section showTopBorder={false} showSideBorders={false}>
+		<LinkHeadline
+			headlineText=""
+			format={{
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Live,
+				theme: Pillar.News,
+			})}
+			showPulsingDot={true}
+			showSlash={false}
+			kickerText="Updated 7m ago"
+			size="tiny"
+		/>
+	</Section>
+);
+Updated.story = { name: 'Last updated' };
