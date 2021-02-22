@@ -326,7 +326,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, []);
 
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign(CAPI.designType, CAPI.tags);
+	const design: Design = decideDesign(
+		CAPI.designType,
+		CAPI.tags,
+		CAPI.isLiveBlog,
+	);
 	const pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,

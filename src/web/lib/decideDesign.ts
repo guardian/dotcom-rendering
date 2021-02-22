@@ -3,12 +3,14 @@ import { Design } from '@guardian/types';
 export const decideDesign = (
 	designType: CAPIDesign,
 	tags: TagType[],
+	isLiveBlog?: boolean,
 ): Design => {
 	if (
 		tags.find((tag) => tag.id === 'artanddesign/series/guardian-print-shop')
 	) {
 		return Design.PrintShop;
 	}
+	if (isLiveBlog) return Design.Live;
 	switch (designType) {
 		case 'Article':
 			return Design.Article;
@@ -22,8 +24,6 @@ export const decideDesign = (
 			return Design.Comment;
 		case 'Feature':
 			return Design.Feature;
-		case 'Live':
-			return Design.Live;
 		case 'Recipe':
 			return Design.Recipe;
 		case 'MatchReport':

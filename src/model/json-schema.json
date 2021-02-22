@@ -247,8 +247,7 @@
             "type": "array",
             "items": {
                 "type": "object",
-                "properties": {},
-                "additionalProperties": true
+                "additionalProperties": {}
             }
         },
         "config": {
@@ -3249,8 +3248,7 @@
                     "anyOf": [
                         {
                             "type": "object",
-                            "properties": {},
-                            "additionalProperties": true
+                            "additionalProperties": {}
                         },
                         {
                             "type": "string"
@@ -3327,6 +3325,12 @@
                 "ipsosTag": {
                     "type": "string"
                 },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "isLive": {
+                    "type": "boolean"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -3372,6 +3376,8 @@
                 "googletagUrl",
                 "hbImpl",
                 "idApiUrl",
+                "isLive",
+                "isLiveBlog",
                 "isPhotoEssay",
                 "isSensitive",
                 "keywordIds",
