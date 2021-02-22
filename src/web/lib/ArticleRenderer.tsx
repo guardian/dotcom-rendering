@@ -500,12 +500,14 @@ export const ArticleRenderer: React.FC<{
 				case 'model.dotcomrendering.pageElements.VineBlockElement':
 					return (
 						<Figure
+							// No role given by CAPI
 							// eslint-disable-next-line jsx-a11y/aria-role
 							role="inline"
 							id={`vine-block-element-${i}`}
 							key={`vine-block-element-${i}`}
 						>
 							<ClickToView
+								// No role given by CAPI
 								// eslint-disable-next-line jsx-a11y/aria-role
 								role="inline"
 								isTracking={element.isThirdPartyTracking}
