@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
-import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
+import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
@@ -162,7 +162,13 @@ const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, branding, commentCount, relatedContent, footballContent } = request;
+	const {
+		content,
+		branding,
+		commentCount,
+		relatedContent,
+		footballContent,
+	} = request;
 	return {
 		theme: themeFromString(content.pillarId),
 		display: getDisplay(content),

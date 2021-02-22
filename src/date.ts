@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { Option } from '@guardian/types';
-import { none, some, map, withDefault } from '@guardian/types';
+import { map, none, some, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 
 // ----- Setup ----- //
@@ -151,8 +151,8 @@ function formatSeconds(seconds: string): Option<string> {
 const dateToString = (date: Option<Date>): string =>
 	pipe2(
 		date,
-		map(d => d.toISOString()),
-		withDefault(""),
+		map((d) => d.toISOString()),
+		withDefault(''),
 	);
 
 // ----- Exports ----- //

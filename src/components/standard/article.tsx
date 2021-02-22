@@ -7,6 +7,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import { Display, map, OptionKind, withDefault } from '@guardian/types';
+import FootballScores from 'components/footballScores';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Metadata from 'components/metadata';
@@ -18,6 +19,7 @@ import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
 import Tags from 'components/shared/tags';
 import Standfirst from 'components/standfirst';
+import { parseMatchScores } from 'football';
 import HeaderMedia from 'headerMedia';
 import type {
 	Item,
@@ -34,8 +36,6 @@ import {
 	onwardStyles,
 } from 'styles';
 import { getThemeStyles, themeToPillar } from 'themeStyles';
-import { parseMatchScores } from 'football';
-import FootballScores from 'components/footballScores';
 
 // ----- Styles ----- //
 
@@ -120,19 +120,17 @@ const Standard: FC<Props> = ({ item, children }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
-				{
-					matchScores.kind === OptionKind.Some ? (
-						<div id="js-football-scores">
-							<FootballScores 
-								league={matchScores.value.league}
-								stadium={matchScores.value.stadium}
-								homeTeam={matchScores.value.homeTeam} 
-								awayTeam={matchScores.value.awayTeam} 
-								status={matchScores.value.status}
-							/>
-						</div>
-					) : null
-				}
+				{matchScores.kind === OptionKind.Some ? (
+					<div id="js-football-scores">
+						<FootballScores
+							league={matchScores.value.league}
+							stadium={matchScores.value.stadium}
+							homeTeam={matchScores.value.homeTeam}
+							awayTeam={matchScores.value.awayTeam}
+							status={matchScores.value.status}
+						/>
+					</div>
+				) : null}
 				<header>
 					<HeaderMedia item={item} />
 					<Series item={item} />
