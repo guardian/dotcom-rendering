@@ -24,7 +24,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 
 		const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
 
-		const sectionName = CAPI.sectionName || '';
+		const sectionName = CAPI.sectionName || ''; // TODO: sectionName should be required but is missing from CAPI on some article types (ex: Interview fixture)
 
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
@@ -58,7 +58,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			body: (
 				<Article
 					experimentsData={getAmpExperimentCache()}
-					articleData={CAPI}
+					articleData={{ ...CAPI, sectionName }} // TODO: sectionName should be required but is missing from CAPI on some article types (ex: Interview fixture)
 					nav={extractNAV(CAPI.nav)}
 					analytics={analytics}
 					config={config}
