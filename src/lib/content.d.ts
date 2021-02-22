@@ -352,10 +352,9 @@ interface VineBlockElement extends ThirdPartyEmbeddedContent {
 	url: string;
 	height: number;
 	width: number;
-	role?: RoleType;
 	originalUrl: string;
 	title: string;
-	vineIndex?: number;
+	vineBlockIndex?: number;
 }
 
 interface VideoBlockElement extends ThirdPartyEmbeddedContent {

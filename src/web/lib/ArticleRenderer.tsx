@@ -500,11 +500,14 @@ export const ArticleRenderer: React.FC<{
 				case 'model.dotcomrendering.pageElements.VineBlockElement':
 					return (
 						<Figure
-							role={element.role}
-							id={`document-block-element-${i}`}
+							// eslint-disable-next-line jsx-a11y/aria-role
+							role="inline"
+							id={`vine-block-element-${i}`}
+							key={`vine-block-element-${i}`}
 						>
 							<ClickToView
-								role={element.role}
+								// eslint-disable-next-line jsx-a11y/aria-role
+								role="inline"
 								isTracking={element.isThirdPartyTracking}
 								source={element.source}
 								sourceDomain={element.sourceDomain}

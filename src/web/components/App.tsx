@@ -827,10 +827,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 			{CAPI.vineBlockElements.map((element) => (
 				<HydrateOnce
 					root="vine-block-element"
-					index={element.vineIndex}
+					index={element.vineBlockIndex}
 				>
 					<ClickToView
-						role={element.role}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
