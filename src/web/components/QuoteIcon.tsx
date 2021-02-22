@@ -13,6 +13,12 @@ const quoteStyles = (colour?: string) => css`
 `;
 
 const sizeStyles = (size: SmallHeadlineSize) => {
+	const tinySvg = css`
+		svg {
+			height: 12px;
+			width: 6px;
+		}
+	`;
 	const smallSvg = css`
 		svg {
 			height: 16px;
@@ -34,6 +40,10 @@ const sizeStyles = (size: SmallHeadlineSize) => {
 		}
 	`;
 	switch (size) {
+		case 'tiny':
+			return css`
+				${tinySvg}
+			`;
 		case 'small':
 			return css`
 				${smallSvg}
@@ -51,10 +61,6 @@ const sizeStyles = (size: SmallHeadlineSize) => {
 				${until.desktop} {
 					${mediumSvg}
 				}
-			`;
-		default:
-			return css`
-				${mediumSvg}
 			`;
 	}
 };
