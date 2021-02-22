@@ -223,18 +223,6 @@ async function serveArticleGet(
 	}
 }
 
-async function serveFootballScores(
-	req: Request,
-	res: ExpressResponse,
-): Promise<void> {
-	const selector = req.query.selector;
-
-	const result = await fetch(`https://mobile.guardianapis.com/sport/football/matches?selector=${selector}`);
-	const json = await result.json();
-
-	res.status(200).json(json);
-}
-
 // ----- App ----- //
 
 logger.info(`Starting ${App} in ${Stage} for the stack ${Stack}`);
@@ -269,7 +257,6 @@ app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
 app.get('/rendered-items/*', bodyParser.raw(), serveArticleGet);
-app.get('/sport/football/matches', bodyParser.raw(), serveFootballScores);
 app.get('/*', bodyParser.raw(), serveArticleGet);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);
