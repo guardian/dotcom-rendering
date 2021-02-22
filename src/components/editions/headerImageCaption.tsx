@@ -50,7 +50,7 @@ const HeaderImageCaptionStyles = (
 			padding-left: ${remSpace[6]};
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			padding-left: 9rem;
 		}
 	}

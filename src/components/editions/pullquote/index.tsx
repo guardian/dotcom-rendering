@@ -28,7 +28,8 @@ const styles = (format: Format): SerializedStyles => {
 
 		float: left;
 		clear: left;
-		${from.wide} {
+
+		${from.desktop} {
 			float: right;
 			clear: right;
 			margin-right: calc(-${pullquoteWidth} - 2.5rem);

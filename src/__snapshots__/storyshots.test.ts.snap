@@ -286,7 +286,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     width: 545px;
   }
@@ -305,7 +305,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     margin-left: 144px;
   }
@@ -328,19 +328,9 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-5 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-5 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -352,7 +342,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -377,12 +366,12 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 @media (min-width:740px) {
   .emotion-6 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-6 {
     width: 750px;
     height: 450px;
@@ -436,7 +425,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 details[open] {
     padding-left: 9rem;
   }
@@ -444,11 +433,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 @media (min-width:740px) {
   .emotion-7 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 {
     width: 750px;
   }
@@ -573,7 +562,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-12 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -602,7 +591,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-13 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -622,7 +611,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-14 {
     width: 558px;
   }
@@ -664,7 +653,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-16 {
     width: 545px;
   }
@@ -711,7 +700,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     width: 545px;
   }
@@ -730,7 +719,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     margin-left: 144px;
   }
@@ -1092,7 +1081,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-42 {
     float: right;
     clear: right;
@@ -1500,7 +1489,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     width: 545px;
   }
@@ -1519,7 +1508,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     margin-left: 144px;
   }
@@ -1542,19 +1531,9 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-5 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-5 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -1566,7 +1545,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -1591,12 +1569,12 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 @media (min-width:740px) {
   .emotion-6 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-6 {
     width: 750px;
     height: 450px;
@@ -1650,7 +1628,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 details[open] {
     padding-left: 9rem;
   }
@@ -1658,11 +1636,11 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 @media (min-width:740px) {
   .emotion-7 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 {
     width: 750px;
   }
@@ -1801,7 +1779,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-13 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -1830,7 +1808,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-14 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -1866,7 +1844,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-17 {
     width: 558px;
   }
@@ -1908,7 +1886,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-19 {
     width: 545px;
   }
@@ -1955,7 +1933,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-21 {
     width: 545px;
   }
@@ -1974,7 +1952,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-21 {
     margin-left: 144px;
   }
@@ -2336,7 +2314,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-45 {
     float: right;
     clear: right;
@@ -2779,7 +2757,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     width: 545px;
   }
@@ -2798,7 +2776,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     margin-left: 144px;
   }
@@ -2821,19 +2799,9 @@ exports[`Storyshots Editions/Article Default 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-5 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-5 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -2845,7 +2813,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -2870,12 +2837,12 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
 @media (min-width:740px) {
   .emotion-6 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-6 {
     width: 750px;
     height: 450px;
@@ -2929,7 +2896,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 details[open] {
     padding-left: 9rem;
   }
@@ -2937,11 +2904,11 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
 @media (min-width:740px) {
   .emotion-7 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 {
     width: 750px;
   }
@@ -3026,7 +2993,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-11 {
     width: 545px;
   }
@@ -3070,7 +3037,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-12 {
     width: 558px;
   }
@@ -3150,7 +3117,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     width: 545px;
   }
@@ -3169,7 +3136,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     margin-left: 144px;
   }
@@ -3531,7 +3498,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-42 {
     float: right;
     clear: right;
@@ -3939,7 +3906,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     width: 545px;
   }
@@ -3958,7 +3925,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     margin-left: 144px;
   }
@@ -3981,19 +3948,9 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-5 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-5 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -4005,7 +3962,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -4030,12 +3986,12 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
 @media (min-width:740px) {
   .emotion-6 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-6 {
     width: 750px;
     height: 450px;
@@ -4089,7 +4045,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 details[open] {
     padding-left: 9rem;
   }
@@ -4097,11 +4053,11 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
 @media (min-width:740px) {
   .emotion-7 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 {
     width: 750px;
   }
@@ -4186,7 +4142,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-11 {
     width: 545px;
   }
@@ -4230,7 +4186,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-12 {
     width: 558px;
   }
@@ -4310,7 +4266,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     width: 545px;
   }
@@ -4329,7 +4285,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     margin-left: 144px;
   }
@@ -4691,7 +4647,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-42 {
     float: right;
     clear: right;
@@ -5161,15 +5117,9 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-6 details[open] {
     padding-left: 9rem;
-  }
-}
-
-@media (min-width:740px) {
-  .emotion-6 {
-    width: 100%;
   }
 }
 
@@ -5198,7 +5148,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-8 {
     padding-left: 144px;
   }
@@ -5260,7 +5210,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-11 {
     width: 545px;
   }
@@ -5326,7 +5276,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-13 {
     width: 545px;
   }
@@ -5377,7 +5327,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-14 {
     width: 558px;
   }
@@ -5389,7 +5339,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-14 {
     margin-left: 144px;
   }
@@ -5459,7 +5409,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-16 {
     margin-left: 144px;
   }
@@ -5471,7 +5421,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-16 {
     width: 558px;
   }
@@ -5506,7 +5456,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-20 {
     width: 545px;
   }
@@ -5525,7 +5475,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-20 {
     margin-left: 144px;
   }
@@ -5887,7 +5837,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-44 {
     float: right;
     clear: right;
@@ -6376,15 +6326,9 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 details[open] {
     padding-left: 9rem;
-  }
-}
-
-@media (min-width:740px) {
-  .emotion-7 {
-    width: 100%;
   }
 }
 
@@ -6421,7 +6365,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-9 {
     padding-left: 144px;
   }
@@ -6461,7 +6405,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-11 {
     width: 545px;
   }
@@ -6475,7 +6419,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
     width: 538px;
   }
 
-  @media (min-width:1300px) {
+  @media (min-width:980px) {
     .emotion-12 {
       width: 557px;
     }
@@ -6509,7 +6453,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-13 {
     width: 545px;
   }
@@ -6553,7 +6497,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-14 {
     width: 558px;
   }
@@ -6565,7 +6509,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-14 {
     margin-left: 0;
   }
@@ -6622,7 +6566,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-16 {
     width: 545px;
   }
@@ -6665,7 +6609,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-20 {
     width: 545px;
   }
@@ -6684,7 +6628,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-20 {
     margin-left: 144px;
   }
@@ -6698,7 +6642,7 @@ exports[`Storyshots Editions/Article Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-20 {
     width: 557px;
   }
@@ -6910,7 +6854,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     width: 545px;
   }
@@ -6929,7 +6873,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     margin-left: 144px;
   }
@@ -6952,19 +6896,9 @@ exports[`Storyshots Editions/Article Review 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-5 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-5 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -6976,7 +6910,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -7001,12 +6934,12 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
 @media (min-width:740px) {
   .emotion-6 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-6 {
     width: 750px;
     height: 450px;
@@ -7060,7 +6993,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 details[open] {
     padding-left: 9rem;
   }
@@ -7068,11 +7001,11 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
 @media (min-width:740px) {
   .emotion-7 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 {
     width: 750px;
   }
@@ -7193,7 +7126,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-17 {
     width: 545px;
   }
@@ -7237,7 +7170,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     width: 558px;
   }
@@ -7317,7 +7250,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-24 {
     width: 545px;
   }
@@ -7336,7 +7269,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-24 {
     margin-left: 144px;
   }
@@ -7698,7 +7631,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-48 {
     float: right;
     clear: right;
@@ -8180,7 +8113,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     width: 545px;
   }
@@ -8199,7 +8132,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-3 {
     margin-left: 144px;
   }
@@ -8263,19 +8196,9 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-7 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-7 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -8287,7 +8210,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -8312,12 +8234,12 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
 @media (min-width:740px) {
   .emotion-8 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-8 {
     width: 750px;
     height: 450px;
@@ -8371,7 +8293,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-9 details[open] {
     padding-left: 9rem;
   }
@@ -8379,11 +8301,11 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
 @media (min-width:740px) {
   .emotion-9 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-9 {
     width: 750px;
   }
@@ -8432,7 +8354,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-11 {
     width: 545px;
   }
@@ -8476,7 +8398,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-12 {
     width: 558px;
   }
@@ -8557,7 +8479,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     width: 545px;
   }
@@ -8576,7 +8498,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-18 {
     margin-left: 144px;
   }
@@ -8938,7 +8860,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-42 {
     float: right;
     clear: right;
@@ -9409,7 +9331,7 @@ exports[`Storyshots Editions/Byline Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-1 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -9438,7 +9360,7 @@ exports[`Storyshots Editions/Byline Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -9524,7 +9446,7 @@ exports[`Storyshots Editions/Byline Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-1 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -9553,7 +9475,7 @@ exports[`Storyshots Editions/Byline Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
@@ -9883,7 +9805,7 @@ exports[`Storyshots Editions/Byline Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     margin-left: 144px;
   }
@@ -9895,7 +9817,7 @@ exports[`Storyshots Editions/Byline Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 558px;
   }
@@ -10190,7 +10112,7 @@ exports[`Storyshots Editions/GalleryImage Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 557px;
   }
@@ -10345,15 +10267,9 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 details[open] {
     padding-left: 9rem;
-  }
-}
-
-@media (min-width:740px) {
-  .emotion-2 {
-    width: 100%;
   }
 }
 
@@ -10432,19 +10348,9 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-0 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -10456,7 +10362,6 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -10481,12 +10386,12 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
 
 @media (min-width:740px) {
   .emotion-1 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-1 {
     width: 750px;
     height: 450px;
@@ -10540,7 +10445,7 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 details[open] {
     padding-left: 9rem;
   }
@@ -10548,11 +10453,11 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
 
 @media (min-width:740px) {
   .emotion-2 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 {
     width: 750px;
   }
@@ -10662,19 +10567,9 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   position: relative;
 }
 
-@media (min-width:740px) {
-  .emotion-0 {
-    width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 750px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -10686,7 +10581,6 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   display: block;
   display: block;
   width: 100%;
-  height: calc(100vw * 0.6);
 }
 
 @media (min-width:740px) {
@@ -10711,12 +10605,12 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
 
 @media (min-width:740px) {
   .emotion-1 {
-    width: 720px;
-    height: 432px;
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * height / width);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-1 {
     width: 750px;
     height: 450px;
@@ -10770,7 +10664,7 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 details[open] {
     padding-left: 9rem;
   }
@@ -10778,11 +10672,11 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
 
 @media (min-width:740px) {
   .emotion-2 {
-    width: 720px;
+    width: calc(100vw - 3.75rem);
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 {
     width: 750px;
   }
@@ -11277,7 +11171,7 @@ exports[`Storyshots Editions/Headline Interview 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-2 {
     width: 545px;
   }
@@ -11371,7 +11265,7 @@ exports[`Storyshots Editions/Headline Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-1 {
     width: 545px;
   }
@@ -11509,7 +11403,7 @@ exports[`Storyshots Editions/PullQuote Default 1`] = `
   clear: left;
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     float: right;
     clear: right;
@@ -11775,7 +11669,7 @@ exports[`Storyshots Editions/Standfirst Analysis 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 545px;
   }
@@ -11847,7 +11741,7 @@ exports[`Storyshots Editions/Standfirst Comment 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 545px;
   }
@@ -11914,7 +11808,7 @@ exports[`Storyshots Editions/Standfirst Default 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 545px;
   }
@@ -11985,7 +11879,7 @@ exports[`Storyshots Editions/Standfirst Media 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 545px;
   }
@@ -12065,7 +11959,7 @@ exports[`Storyshots Editions/Standfirst Showcase 1`] = `
   }
 }
 
-@media (min-width:1300px) {
+@media (min-width:980px) {
   .emotion-0 {
     width: 545px;
   }
