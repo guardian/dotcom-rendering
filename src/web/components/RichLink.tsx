@@ -226,39 +226,6 @@ const imageStyles = css`
 	height: auto;
 `;
 
-type DefaultProps = {
-	index: number;
-	headlineText: string;
-	url: string;
-	isPlaceholder?: boolean;
-};
-
-export const DefaultRichLink: React.FC<DefaultProps> = ({
-	index,
-	headlineText,
-	url,
-	isPlaceholder,
-}) => {
-	return (
-		<RichLink
-			richLinkIndex={index}
-			cardStyle="news"
-			thumbnailUrl=""
-			headlineText={headlineText}
-			contentType="article"
-			url={url}
-			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
-			}}
-			tags={[]}
-			sponsorName=""
-			isPlaceholder={isPlaceholder}
-		/>
-	);
-};
-
 export const RichLink = ({
 	richLinkIndex,
 	cardStyle,
@@ -369,5 +336,38 @@ export const RichLink = ({
 				</a>
 			</div>
 		</div>
+	);
+};
+
+type DefaultProps = {
+	index: number;
+	headlineText: string;
+	url: string;
+	isPlaceholder?: boolean;
+};
+
+export const DefaultRichLink: React.FC<DefaultProps> = ({
+	index,
+	headlineText,
+	url,
+	isPlaceholder,
+}) => {
+	return (
+		<RichLink
+			richLinkIndex={index}
+			cardStyle="news"
+			thumbnailUrl=""
+			headlineText={headlineText}
+			contentType="article"
+			url={url}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
+			tags={[]}
+			sponsorName=""
+			isPlaceholder={isPlaceholder}
+		/>
 	);
 };

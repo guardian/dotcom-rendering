@@ -60,7 +60,6 @@ module.exports = {
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',
         'no-console': 'off',
-        '@typescript-eslint/no-use-before-define': 'off',
 		'no-shadow': 'off',
 
         '@typescript-eslint/explicit-function-return-type': [0],

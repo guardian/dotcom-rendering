@@ -22,6 +22,19 @@ const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 	return byline.split(regex);
 };
 
+const ContributorLink: React.FC<{
+	contributor: string;
+	contributorTagId: string;
+}> = ({ contributor, contributorTagId }) => (
+	<a
+		rel="author"
+		data-link-name="auto tag link"
+		href={`//www.theguardian.com/${contributorTagId}`}
+	>
+		{contributor}
+	</a>
+);
+
 export const BylineLink = ({ byline, tags }: Props) => {
 	const renderedTokens = bylineAsTokens(byline, tags).map((token, i) => {
 		const associatedTags = getContributorTags(tags).filter(
@@ -41,16 +54,3 @@ export const BylineLink = ({ byline, tags }: Props) => {
 
 	return <>{renderedTokens}</>;
 };
-
-const ContributorLink: React.FC<{
-	contributor: string;
-	contributorTagId: string;
-}> = ({ contributor, contributorTagId }) => (
-	<a
-		rel="author"
-		data-link-name="auto tag link"
-		href={`//www.theguardian.com/${contributorTagId}`}
-	>
-		{contributor}
-	</a>
-);
