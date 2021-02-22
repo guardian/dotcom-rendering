@@ -74,15 +74,14 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		indexName: string,
 	): T[] => {
 		if (blocks.length === 0) return [];
-		return blocks[0].elements.map((element: CAPIElement, index: number) => {
-			if (element._type === blockElementType) {
+		return blocks[0].elements
+			.map((element: CAPIElement, index: number) => {
 				return {
 					...element,
 					[indexName]: index,
 				};
-			}
-			return element;
-		}) as T[];
+			})
+			.filter((element) => element._type === blockElementType) as T[];
 	};
 
 	// If our element type is one that can contain third party content that can track user, but hasn't been marked
