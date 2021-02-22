@@ -1,27 +1,24 @@
 // ----- Imports ----- //
-
+import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { Lines } from '@guardian/src-ed-lines';
-import { border } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import type { FC } from 'react';
-import { editionsArticleWidth } from './styles';
+import { borderWidthStyles } from './styles';
 
 // ----- Component ----- //
 
 const styles = css`
-	${from.phablet} {
-		width: ${editionsArticleWidth}rem;
-		border-right: 1px solid ${border.secondary};
-	}
+	box-sizing: border-box;
 
-	${from.wide} {
-		margin: 0 auto;
-	}
+	${borderWidthStyles}
 `;
 
-const EditionsLines: FC = () => (
-	<div css={styles}>
+interface Props {
+	className?: SerializedStyles;
+}
+
+const EditionsLines: FC<Props> = ({ className }) => (
+	<div css={[styles, className]}>
 		<Lines />
 	</div>
 );

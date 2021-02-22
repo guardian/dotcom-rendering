@@ -233,7 +233,12 @@ const isVideo = hasTag('type/video');
 
 const isGallery = hasTag('type/gallery');
 
-const isMedia = hasSomeTag(['type/audio', 'type/video', 'type/gallery']);
+const isMedia = hasSomeTag([
+	'type/audio',
+	'type/video',
+	'type/gallery',
+	'type/picture',
+]);
 
 const isReview = hasSomeTag([
 	'tone/reviews',
@@ -260,6 +265,7 @@ const isQuiz = hasTag('tone/quizzes');
 const isAdvertisementFeature = hasTag('tone/advertisement-features');
 
 const isMatchReport = hasTag('tone/matchreport');
+const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog = (context: Context) => (
 	request: RenderingRequest,
@@ -309,6 +315,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			...item,
 			theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme,
 		};
+	} else if (isInterview(tags)) {
+		return {
+			design: Design.Interview,
+			...itemFieldsWithBody(context, request),
+		};
 	} else if (isFeature(tags)) {
 		return {
 			design: Design.Feature,
@@ -319,11 +330,6 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isRecipe(tags)) {
 		return {
 			design: Design.Recipe,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isInterview(tags)) {
-		return {
-			design: Design.Interview,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isGuardianView(tags)) {
@@ -374,4 +380,5 @@ export {
 	isAudio,
 	isVideo,
 	isGallery,
+	isPicture,
 };

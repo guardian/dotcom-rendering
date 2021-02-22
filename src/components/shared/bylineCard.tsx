@@ -181,17 +181,17 @@ const footerStyles = css`
 `;
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
+	const { link, pillar, lastModified } = relatedItem;
 	const format = {
-		theme: themeFromString(relatedItem.pillar.id),
+		theme: themeFromString(pillar.id),
 		design: Design.Article,
 		display: Display.Standard,
 	};
 
 	const img = cardImage(relatedItem);
-	const lastModified = relatedItem.lastModified?.iso8601;
-	const articleId = relatedItem.link.split('.com/').pop();
+	const articleId = link.slice(1);
 	const date = lastModified
-		? relativeFirstPublished(fromNullable(new Date(lastModified)))
+		? relativeFirstPublished(fromNullable(new Date(lastModified.iso8601)))
 		: null;
 	return (
 		<li

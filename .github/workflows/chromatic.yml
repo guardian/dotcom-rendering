@@ -2,6 +2,18 @@ name: 'Chromatic'
 
 on:
     push:
+        branches:
+            - main
+        paths-ignore:
+            - 'api-models/'
+            - 'project/'
+            - '*.sbt'
+            - '*.md'
+            - '*.yml'
+            - '.gitignore'
+    pull_request:
+        branches:
+            - main
         paths-ignore:
             - 'api-models/'
             - 'project/'

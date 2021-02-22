@@ -71,6 +71,7 @@ const richLinkElement = (): BodyElement => ({
 const interactiveElement = (): BodyElement => ({
 	kind: ElementKind.Interactive,
 	url: 'https://theguardian.com',
+	alt: none,
 });
 
 const tweetElement = (): BodyElement => ({
@@ -493,23 +494,6 @@ describe('Renders different types of Editions elements', () => {
 		const pullquote = nodes.flat()[0];
 		expect(getHtml(pullquote)).toContain('attribution');
 		expect(getHtml(pullquote)).toContain('quote');
-	});
-
-	test('ElementKind.RichLink', () => {
-		const nodes = renderEditions(richLinkElement());
-		const richLink = nodes.flat()[0];
-		expect(getHtml(richLink)).toContain(
-			'<h1>this links to a related article</h1>',
-		);
-		expect(getHtml(richLink)).toContain('href="https://theguardian.com"');
-	});
-
-	test('ElementKind.Interactive', () => {
-		const nodes = renderEditions(interactiveElement());
-		const interactive = nodes.flat()[0];
-		expect(getHtml(interactive)).toContain(
-			'<iframe src="https://theguardian.com" height="500" title=""></iframe>',
-		);
 	});
 
 	test('ElementKind.Tweet', () => {

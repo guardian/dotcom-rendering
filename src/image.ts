@@ -69,8 +69,13 @@ const parseImage = ({ docParser, salt }: Context) => (
 			}
 
 			return some({
-				src: src(salt, asset.file, 500, Dpr.One),
-				...srcsets(asset.file, salt),
+				src: src(
+					salt,
+					asset.typeData.secureFile ?? asset.file,
+					500,
+					Dpr.One,
+				),
+				...srcsets(asset.typeData.secureFile ?? asset.file, salt),
 				alt: fromNullable(data?.alt),
 				width: asset.typeData.width,
 				height: asset.typeData.height,

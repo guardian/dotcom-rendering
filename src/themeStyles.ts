@@ -12,6 +12,8 @@ interface ThemeStyles {
 	liveblogBackground: string;
 	liveblogDarkBackground: string;
 	link: string;
+	cameraIcon: string;
+	cameraIconBackground: string;
 }
 
 type ThemeColours = {
@@ -25,6 +27,8 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: palette.news[300],
 		liveblogDarkBackground: palette.news[200],
 		link: palette.news[300],
+		cameraIcon: palette.news[800],
+		cameraIconBackground: palette.news[400],
 	},
 	[Pillar.Opinion]: {
 		kicker: palette.opinion[400],
@@ -32,6 +36,8 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: palette.opinion[300],
 		liveblogDarkBackground: palette.opinion[200],
 		link: palette.opinion[300],
+		cameraIcon: palette.opinion[800],
+		cameraIconBackground: palette.opinion[400],
 	},
 	[Pillar.Sport]: {
 		kicker: palette.sport[400],
@@ -39,6 +45,8 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: palette.sport[300],
 		liveblogDarkBackground: palette.sport[200],
 		link: palette.sport[300],
+		cameraIcon: palette.sport[800],
+		cameraIconBackground: palette.sport[400],
 	},
 	[Pillar.Culture]: {
 		kicker: palette.culture[400],
@@ -46,6 +54,8 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: palette.culture[300],
 		liveblogDarkBackground: palette.culture[200],
 		link: palette.culture[300],
+		cameraIcon: palette.culture[800],
+		cameraIconBackground: palette.culture[400],
 	},
 	[Pillar.Lifestyle]: {
 		kicker: palette.lifestyle[400],
@@ -53,6 +63,8 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: palette.lifestyle[300],
 		liveblogDarkBackground: palette.lifestyle[200],
 		link: palette.lifestyle[300],
+		cameraIcon: palette.lifestyle[800],
+		cameraIconBackground: palette.lifestyle[400],
 	},
 	[Special.SpecialReport]: {
 		kicker: palette.specialReport[400],
@@ -60,6 +72,8 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: palette.specialReport[300],
 		liveblogDarkBackground: palette.specialReport[200],
 		link: palette.specialReport[300],
+		cameraIcon: palette.specialReport[800],
+		cameraIconBackground: palette.specialReport[400],
 	},
 };
 

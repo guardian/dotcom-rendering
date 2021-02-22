@@ -56,8 +56,10 @@ import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
+import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import HorizontalRule from 'components/horizontalRule';
+import Interactive from 'components/interactive';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
@@ -336,30 +338,36 @@ const standfirstTextElement = (format: Format) => (
 	}
 };
 
+const noLinksStandfirstTextElement = (format: Format) => (
+	node: Node,
+	key: number,
+): ReactNode => {
+	const children = Array.from(node.childNodes).map(
+		standfirstTextElement(format),
+	);
+	switch (node.nodeName) {
+		case 'P':
+			return h('p', { key }, children);
+		case 'STRONG':
+			return h('strong', { key }, children);
+		default:
+			return null;
+	}
+};
+
 const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
 	Array.from(doc.childNodes).map(textElement(format));
 
-const standfirstText = (doc: DocumentFragment, format: Format): ReactNode[] =>
-	Array.from(doc.childNodes).map(standfirstTextElement(format));
-
-const Interactive = (props: { url: string; title?: string }): ReactElement => {
-	const styles = css`
-		margin: ${remSpace[4]} 0;
-		${darkModeCss`
-            padding: ${remSpace[4]};
-            background: ${neutral[100]}
-        `}
-	`;
-	return styledH(
-		'figure',
-		{ css: styles, className: 'interactive' },
-		h(
-			'iframe',
-			{ src: props.url, height: 500, title: props.title ?? '' },
-			null,
-		),
+const standfirstText = (
+	doc: DocumentFragment,
+	format: Format,
+	noLinks?: boolean,
+): ReactNode[] =>
+	Array.from(doc.childNodes).map(
+		noLinks
+			? noLinksStandfirstTextElement(format)
+			: standfirstTextElement(format),
 	);
-};
 
 const Tweet = (props: {
 	content: NodeList;
@@ -389,12 +397,12 @@ const captionElement = (format: Format) => (
 	switch (node.nodeName) {
 		case 'STRONG':
 			return format.design === Design.Media
-				? h('h2', { css: captionHeadingStyles, key }, children)
+				? styledH('h2', { css: captionHeadingStyles, key }, children)
 				: children;
 		case 'BR':
 			return null;
 		case 'EM':
-			return h(
+			return styledH(
 				'em',
 				{
 					css: css`
@@ -408,7 +416,7 @@ const captionElement = (format: Format) => (
 				children,
 			);
 		case 'A':
-			return h(
+			return styledH(
 				Anchor,
 				{
 					href: withDefault('')(getHref(node)),
@@ -802,27 +810,17 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 			return textRenderer(format, excludeStyles, element);
 
 		case ElementKind.Image:
-			return imageRenderer(format, element, key);
+			return format.design === Design.Media
+				? h(GalleryImage, { format, image: element })
+				: imageRenderer(format, element, key);
 
 		case ElementKind.Pullquote: {
 			const { quote, attribution } = element;
 			return h(EditionsPullquote, { quote, attribution, format, key });
 		}
 
-		case ElementKind.RichLink: {
-			const { url, linkText } = element;
-			return h(RichLink, { url, linkText, key, format });
-		}
-
 		case ElementKind.LiveEvent:
 			return h(LiveEventLink, { ...element, key });
-
-		case ElementKind.Interactive:
-			return h(Interactive, {
-				url: element.url,
-				key,
-				title: element.alt,
-			});
 
 		case ElementKind.Tweet:
 			return h(Tweet, { content: element.content, format, key });
@@ -881,6 +879,9 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 
 		case ElementKind.QuizAtom:
 			return quizAtomRenderer(format, element);
+
+		default:
+			return null;
 	}
 };
 
