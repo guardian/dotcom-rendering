@@ -19,8 +19,8 @@ const showMore = css`
 `;
 
 export const InteractiveBlockComponent: React.SFC<{
-	url: string;
-	isMandatory: boolean | undefined;
+	url?: string;
+	isMandatory?: boolean;
 }> = ({ url, isMandatory }) => {
 	// If this element is mandatory, we don't know if we can render it properly, so we have to
 	// throw an error and chuck the whole page out of AMP. You're barred son.
@@ -28,6 +28,10 @@ export const InteractiveBlockComponent: React.SFC<{
 		throw new Error(
 			'This page cannot be rendered due to incompatible content that is marked as mandatory.',
 		);
+	}
+
+	if (!url) {
+		return null;
 	}
 
 	return (

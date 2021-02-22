@@ -217,7 +217,7 @@ interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
 
 interface InteractiveBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
-	url: string;
+	url?: string;
 	isMandatory?: boolean;
 	scriptUrl?: string;
 	alt?: string;

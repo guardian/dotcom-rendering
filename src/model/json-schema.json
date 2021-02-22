@@ -1759,25 +1759,21 @@
                 "url": {
                     "type": "string"
                 },
-                "placeholderUrl": {
+                "isMandatory": {
+                    "type": "boolean"
+                },
+                "scriptUrl": {
                     "type": "string"
                 },
-                "id": {
+                "alt": {
                     "type": "string"
                 },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
-                "_type",
-                "url"
+                "_type"
             ]
         },
         "MapBlockElement": {
