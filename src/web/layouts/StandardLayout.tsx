@@ -51,181 +51,180 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-
-const gridTemplateWide = css`
-	grid-template-areas:
-		'title  border  headline     right-column'
-		'.      border  standfirst   right-column'
-		'lines  border  media        right-column'
-		'meta   border  media        right-column'
-		'meta   border  body         right-column'
-		'.      border  .            right-column';
-`;
-
-const gridTemplateWidePreFurnished = css`
-	grid-template-areas:
-		'title  border  preFurniture right-column'
-		'.      border  headline     right-column'
-		'.      border  standfirst   right-column'
-		'lines  border  media        right-column'
-		'meta   border  media        right-column'
-		'meta   border  body         right-column'
-		'.      border  .            right-column';
-`;
-
-const gridTemplateLeftCol = css`
-	grid-template-areas:
-		'title         right-column'
-		'headline      right-column'
-		'standfirst    right-column'
-		'media         right-column'
-		'lines         right-column'
-		'meta          right-column'
-		'body          right-column'
-		'.             right-column';
-`;
-
-const gridTemplateLeftColPreFurnished = css`
-	grid-template-areas:
-		'preFurniture  right-column'
-		'title         right-column'
-		'headline      right-column'
-		'standfirst    right-column'
-		'media         right-column'
-		'lines         right-column'
-		'meta          right-column'
-		'body          right-column'
-		'.             right-column';
-`;
-
-const gridTemplateDesktop = css`
-	grid-template-areas:
-		'title'
-		'headline'
-		'standfirst'
-		'media'
-		'lines'
-		'meta'
-		'body';
-`;
-const gridTemplateDesktopPreFurnished = css`
-	grid-template-areas:
-		'preFurniture'
-		'title'
-		'headline'
-		'standfirst'
-		'media'
-		'lines'
-		'meta'
-		'body';
-`;
-
-const gridTemplateTablet = css`
-	grid-template-areas:
-		'media'
-		'title'
-		'headline'
-		'standfirst'
-		'lines'
-		'meta'
-		'body';
-`;
-const gridTemplateTabletPreFurnished = css`
-	grid-template-areas:
-		'preFurniture'
-		'media'
-		'title'
-		'headline'
-		'standfirst'
-		'lines'
-		'meta'
-		'body';
-`;
-
-const layoutGrid = (hasPreFurniture?: boolean) =>
-	css`
-		/* IE Fallback */
-		display: flex;
-		flex-direction: column;
-		${until.leftCol} {
-			margin-left: 0px;
-		}
-		${from.leftCol} {
-			margin-left: 151px;
-		}
-		${from.wide} {
-			margin-left: 230px;
-		}
-
-		@supports (display: grid) {
-			display: grid;
-			width: 100%;
-			margin-left: 0;
-
-			grid-column-gap: 10px;
-
-			${from.wide} {
-				grid-template-columns:
-					219px /* Left Column (220 - 1px border) */
-					1px /* Vertical grey border */
-					1fr /* Main content */
-					300px; /* Right Column */
-
-				${hasPreFurniture
-					? gridTemplateWidePreFurnished
-					: gridTemplateWide}
-			}
-
-			${until.wide} {
-				grid-template-columns:
-					140px /* Left Column */
-					1px /* Vertical grey border */
-					1fr /* Main content */
-					300px; /* Right Column */
-
-				${hasPreFurniture
-					? gridTemplateWidePreFurnished
-					: gridTemplateWide}
-			}
-
-			${until.leftCol} {
-				grid-template-columns:
-					1fr /* Main content */
-					300px; /* Right Column */
-				${hasPreFurniture
-					? gridTemplateLeftColPreFurnished
-					: gridTemplateLeftCol}
-			}
-
-			${until.desktop} {
-				grid-template-columns: 1fr; /* Main content */
-				${hasPreFurniture
-					? gridTemplateDesktopPreFurnished
-					: gridTemplateDesktop}
-			}
-
-			${until.tablet} {
-				grid-column-gap: 0px;
-
-				grid-template-columns: 1fr; /* Main content */
-				${hasPreFurniture
-					? gridTemplateTabletPreFurnished
-					: gridTemplateTablet}
-			}
-		}
-	`;
+import { ContainerLayout } from '../components/ContainerLayout';
 
 const StandardGrid = ({
 	children,
-	design,
-	CAPI,
+	isMatchReport,
 }: {
 	children: React.ReactNode;
-	design: Design;
-	CAPI: CAPIType;
+	isMatchReport: boolean;
 }) => (
 	<div
-		className={layoutGrid(design === Design.MatchReport && !!CAPI.matchUrl)}
+		className={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.leftCol} {
+				margin-left: 0px;
+			}
+			${from.leftCol} {
+				margin-left: 151px;
+			}
+			${from.wide} {
+				margin-left: 230px;
+			}
+
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+
+				grid-column-gap: 10px;
+
+				${from.wide} {
+					grid-template-columns:
+						219px /* Left Column (220 - 1px border) */
+						1px /* Vertical grey border */
+						1fr /* Main content */
+						300px; /* Right Column */
+
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'title  border  matchNav     right-column'
+									'.      border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `}
+				}
+
+				${until.wide} {
+					grid-template-columns:
+						140px /* Left Column */
+						1px /* Vertical grey border */
+						1fr /* Main content */
+						300px; /* Right Column */
+
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'title  border  matchNav     right-column'
+									'.      border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `}
+				}
+
+				${until.leftCol} {
+					grid-template-columns:
+						1fr /* Main content */
+						300px; /* Right Column */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav      right-column'
+									'title         right-column'
+									'headline      right-column'
+									'standfirst    right-column'
+									'media         right-column'
+									'lines         right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title         right-column'
+									'headline      right-column'
+									'standfirst    right-column'
+									'media         right-column'
+									'lines         right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+						  `}
+				}
+
+				${until.desktop} {
+					grid-template-columns: 1fr; /* Main content */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav'
+									'title'
+									'headline'
+									'standfirst'
+									'media'
+									'lines'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'standfirst'
+									'media'
+									'lines'
+									'meta'
+									'body';
+						  `}
+				}
+
+				${until.tablet} {
+					grid-column-gap: 0px;
+
+					grid-template-columns: 1fr; /* Main content */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav'
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'lines'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'lines'
+									'meta'
+									'body';
+						  `}
+				}
+			}
+		`}
 	>
 		{children}
 	</div>
@@ -316,8 +315,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showMatchStats =
-		format.design === Design.MatchReport && CAPI.matchUrl;
+	const isMatchReport =
+		format.design === Design.MatchReport && !!CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -342,10 +341,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</Section>
 				</Stuck>
 				<SendToBack>
-					<Section
+					<ContainerLayout
 						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
+						sideBorders={false}
+						padContent={false}
 						backgroundColour={brandBackground.primary}
 					>
 						<Header
@@ -353,7 +352,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
 						/>
-					</Section>
+					</ContainerLayout>
 
 					<Section
 						showSideBorders={true}
@@ -404,7 +403,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 			>
-				<StandardGrid design={format.design} CAPI={CAPI}>
+				<StandardGrid isMatchReport={isMatchReport}>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}
@@ -419,7 +418,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="border">
 						<Border />
 					</GridItem>
-					<GridItem area="preFurniture">
+					<GridItem area="matchNav">
 						<div className={maxWidth}>
 							{format.design === Design.MatchReport &&
 								CAPI.matchUrl && (
@@ -525,7 +524,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									host={host}
 									abTests={CAPI.config.abTests}
 								/>
-								{showMatchStats && <div id="match-stats" />}
+								{isMatchReport && <div id="match-stats" />}
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines

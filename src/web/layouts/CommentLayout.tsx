@@ -46,26 +46,6 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 
-const gridWide = css`
-	grid-template-areas:
-		'title      border  headline    right-column'
-		'lines      border  headline    right-column'
-		'meta       border  standfirst  right-column'
-		'meta       border  media       right-column'
-		'.          border  body        right-column'
-		'.          border  .           right-column';
-`;
-
-const showcaseGridWide = css`
-	grid-template-areas:
-		'title      border  headline    headline'
-		'lines      border  headline    headline'
-		'meta       border  standfirst  standfirst'
-		'meta       border  media       media'
-		'.          border  body        right-column'
-		'.          border  .           right-column';
-`;
-
 const StandardGrid = ({
 	children,
 	display,
@@ -103,8 +83,24 @@ const StandardGrid = ({
 						300px; /* Right Column */
 
 					${display === Display.Showcase
-						? showcaseGridWide
-						: gridWide}
+						? css`
+								grid-template-areas:
+									'title      border  headline    headline'
+									'lines      border  headline    headline'
+									'meta       border  standfirst  standfirst'
+									'meta       border  media       media'
+									'.          border  body        right-column'
+									'.          border  .           right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title      border  headline    right-column'
+									'lines      border  headline    right-column'
+									'meta       border  standfirst  right-column'
+									'meta       border  media       right-column'
+									'.          border  body        right-column'
+									'.          border  .           right-column';
+						  `}
 				}
 
 				${until.wide} {
@@ -115,8 +111,24 @@ const StandardGrid = ({
 						300px; /* Right Column */
 
 					${display === Display.Showcase
-						? showcaseGridWide
-						: gridWide}
+						? css`
+								grid-template-areas:
+									'title      border  headline    headline'
+									'lines      border  headline    headline'
+									'meta       border  standfirst  standfirst'
+									'meta       border  media       media'
+									'.          border  body        right-column'
+									'.          border  .           right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title      border  headline    right-column'
+									'lines      border  headline    right-column'
+									'meta       border  standfirst  right-column'
+									'meta       border  media       right-column'
+									'.          border  body        right-column'
+									'.          border  .           right-column';
+						  `}
 				}
 
 				${until.leftCol} {
