@@ -50,7 +50,7 @@ describe('AnalyticsComponent', () => {
 	it('if section is undefined then do not include the MoDI snowplow tag', () => {
 		const analytics = {
 			...analyticsBase,
-			section: 'business',
+			section: '',
 		};
 		const { container } = render(<Analytics analytics={analytics} />);
 
