@@ -16,29 +16,26 @@ export const VineBlockComponent: React.FC<{
 	return (
 		<>
 			{element.url && element.width && element.height && (
-				<div>
-					<div className={titleStyle}>
-						<p>{element.title}</p>
-					</div>
-
-					<MaintainAspectRatio
-						height={element.height}
-						width={element.width}
-					>
-						<div className="element-vine">
-							<iframe
-								title="vine-embed"
-								src={element.url}
-								height={element.height}
-								width={element.width}
-							/>
-							<script
-								async={true}
-								src="https://platform.vine.co/static/scripts/embed.js"
-							/>
+				<MaintainAspectRatio
+					height={element.height}
+					width={element.width}
+				>
+					<div>
+						<div className={titleStyle}>
+							<p>{element.title}</p>
 						</div>
-					</MaintainAspectRatio>
-				</div>
+						<iframe
+							title="vine-embed"
+							src={element.url}
+							height={element.height}
+							width={element.width}
+						/>
+						<script
+							async={true}
+							src="https://platform.vine.co/static/scripts/embed.js"
+						/>
+					</div>
+				</MaintainAspectRatio>
 			)}
 		</>
 	);
