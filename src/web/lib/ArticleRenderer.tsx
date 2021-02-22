@@ -498,7 +498,22 @@ export const ArticleRenderer: React.FC<{
 						</Figure>
 					);
 				case 'model.dotcomrendering.pageElements.VineBlockElement':
-					return <VineBlockComponent element={element} />;
+					return (
+						<Figure
+							role={element.role}
+							id={`document-block-element-${i}`}
+						>
+							<ClickToView
+								role={element.role}
+								isTracking={element.isThirdPartyTracking}
+								source={element.source}
+								sourceDomain={element.sourceDomain}
+								abTests={abTests}
+							>
+								<VineBlockComponent element={element} />
+							</ClickToView>
+						</Figure>
+					);
 				case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 					return (
 						<Figure

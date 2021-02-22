@@ -439,6 +439,7 @@ type CAPIBrowserType = {
 	mapBlockElements: MapBlockElement[];
 	spotifyBlockElements: SpotifyBlockElement[];
 	videoFacebookBlockElements: VideoFacebookBlockElement[];
+	vineBlockElements: VineBlockElement[];
 };
 
 interface TagType {
@@ -728,7 +729,8 @@ type IslandType =
 	| 'instagram-block-element'
 	| 'map-block-element'
 	| 'spotify-block-element'
-	| 'video-facebook-block-element';
+	| 'video-facebook-block-element'
+	| 'vine-block-element';
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as
