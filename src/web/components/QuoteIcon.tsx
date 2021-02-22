@@ -66,11 +66,11 @@ const sizeStyles = (size: SmallHeadlineSize) => {
 };
 
 type Props = {
-	colour?: string;
-	size?: SmallHeadlineSize;
+	colour: string;
+	size: SmallHeadlineSize;
 };
 
-export const QuoteIcon = ({ colour, size = 'medium' }: Props) => (
+export const QuoteIcon = ({ colour, size }: Props) => (
 	<span className={sizeStyles(size)}>
 		<svg
 			width="70"

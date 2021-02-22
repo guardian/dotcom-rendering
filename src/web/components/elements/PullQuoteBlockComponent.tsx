@@ -159,7 +159,10 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					)}
 				>
-					<QuoteIcon colour={pillarPalette[pillar].main} />
+					<QuoteIcon
+						colour={pillarPalette[pillar].main}
+						size="medium"
+					/>
 					<blockquote
 						className={css`
 							display: inline;
@@ -241,7 +244,10 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					)}
 				>
-					<QuoteIcon colour={pillarPalette[pillar].main} />
+					<QuoteIcon
+						colour={pillarPalette[pillar].main}
+						size="medium"
+					/>
 					<blockquote
 						className={css`
 							display: inline;
