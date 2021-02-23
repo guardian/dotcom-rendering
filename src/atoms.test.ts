@@ -6,6 +6,8 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { ContentChangeDetails } from '@guardian/content-atom-model/contentChangeDetails';
 import { GuideAtom } from '@guardian/content-atom-model/guide/guideAtom';
 import { GuideItem } from '@guardian/content-atom-model/guide/guideItem';
+import { QAndAAtom } from '@guardian/content-atom-model/qanda/qAndAAtom';
+import { QAndAItem } from '@guardian/content-atom-model/qanda/qAndAItem';
 import { err, fromNullable, ok } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import Int64 from 'node-int64';
@@ -98,7 +100,6 @@ describe('parseAtom', () => {
 		});
 
 		it('returns InteractiveAtom result type given the correct args', () => {
-			// (atoms.interactives as Atom[])[0]["data"] as .interactive
 			const atomsWithData = { ...atoms };
 			const css = 'css';
 			const html = 'html';
@@ -206,6 +207,87 @@ describe('parseAtom', () => {
 					id: atomId,
 					image: 'image-file',
 					credit: 'credit',
+				}),
+			);
+		});
+	});
+
+	describe('qanda', () => {
+		let atoms: Atoms;
+		let qanda: Atom;
+		let qandaItem: QAndAItem;
+		let qandaAtom: QAndAAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'qanda',
+			};
+			qandaItem = {
+				title: 'qanda title',
+				body: 'qanda body',
+			};
+			qandaAtom = {
+				item: qandaItem,
+			};
+			qanda = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.QANDA,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'qanda',
+					qanda: qandaAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				qandas: [qanda],
+			};
+		});
+
+		it(`returns an error if no guide atom id matches`, () => {
+			qanda.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error if no guide title or body`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No title or body for atom: ${atomId}`),
+			);
+		});
+
+		it(`returns GuideAtom result type given the correct guide`, () => {
+			qanda.title = 'qanda title';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.QandaAtom,
+					html: 'qanda body',
+					title: qanda.title,
+					id: atomId,
+					image: undefined,
+					credit: undefined,
+				}),
+			);
+
+			qandaAtom.eventImage = {
+				master: { file: 'image-file', credit: 'credit' },
+				assets: [],
+				mediaId: 'media-id',
+			};
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.QandaAtom,
+					html: 'qanda body',
+					id: atomId,
+					image: 'image-file',
+					credit: 'credit',
+					title: qanda.title,
 				}),
 			);
 		});
