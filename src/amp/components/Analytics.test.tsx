@@ -20,7 +20,6 @@ const analyticsBase: AnalyticsModel = {
 		},
 	},
 	ipsosSectionName: 'section',
-	section: '',
 };
 
 describe('AnalyticsComponent', () => {
@@ -50,7 +49,6 @@ describe('AnalyticsComponent', () => {
 	it('if section is undefined then do not include the MoDI snowplow tag', () => {
 		const analytics = {
 			...analyticsBase,
-			section: '',
 		};
 		const { container } = render(<Analytics analytics={analytics} />);
 

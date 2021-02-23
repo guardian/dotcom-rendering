@@ -41,7 +41,7 @@ const sectionHasMostViewed = (sectionID: string): boolean => {
 
 export const Onward: React.FC<{
 	pageID: string;
-	sectionID: string;
+	sectionID?: string;
 	hasStoryPackage: boolean;
 	hasRelated: boolean;
 	seriesTags: TagType[];
@@ -95,15 +95,16 @@ export const Onward: React.FC<{
 	);
 
 	const hasSectionMostViewed = sectionID && sectionHasMostViewed(sectionID);
-	const sectionMostViewed = hasSectionMostViewed
-		? container(
-				`${ampBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
-				`most-viewed-in-${sectionID}`,
-		  )
-		: container(
-				`${ampBaseURL}/container/count/1/offset/0/mf2.json`,
-				'most-viewed',
-		  );
+	const sectionMostViewed =
+		hasSectionMostViewed && sectionID
+			? container(
+					`${ampBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
+					`most-viewed-in-${sectionID}`,
+			  )
+			: container(
+					`${ampBaseURL}/container/count/1/offset/0/mf2.json`,
+					'most-viewed',
+			  );
 
 	const headlines = container(
 		`${ampBaseURL}/container/count/3/offset/${
