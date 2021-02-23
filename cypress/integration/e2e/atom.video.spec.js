@@ -21,7 +21,7 @@ describe('Video', function () {
 		});
 		it('should render', function () {
 			cy.visit(`/Article?url=${mainMediaVideo}`);
-			cy.get(`[data-cy="main-media-youtube-atom"]`).should('be.visible');
+			cy.get(`[id^="youtube-block"]`).should('be.visible');
 		});
 
 		it('should dispatch play to server', function () {

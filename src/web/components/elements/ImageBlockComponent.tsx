@@ -7,6 +7,8 @@ type Props = {
 	element: ImageBlockElement;
 	hideCaption?: boolean;
 	title?: string;
+	isMainMedia?: boolean;
+	starRating?: number;
 };
 
 export const ImageBlockComponent = ({
@@ -15,6 +17,8 @@ export const ImageBlockComponent = ({
 	element,
 	hideCaption,
 	title,
+	isMainMedia,
+	starRating,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -23,6 +27,8 @@ export const ImageBlockComponent = ({
 			format={format}
 			palette={palette}
 			hideCaption={hideCaption}
+			isMainMedia={isMainMedia}
+			starRating={starRating}
 			role={role}
 			title={title}
 		/>

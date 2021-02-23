@@ -25,6 +25,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
 
 		const sectionName = CAPI.sectionName || '';
+		const neilsenAPIID = findBySubsection(sectionName).apiID;
 
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
@@ -35,7 +36,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			contentType: CAPI.contentType,
 			id: CAPI.pageId,
 			beacon: `${CAPI.beaconURL}/count/pv.gif`,
-			neilsenAPIID: findBySubsection(sectionName).apiID,
+			neilsenAPIID,
 			domain: 'amp.theguardian.com',
 			permutive: {
 				namespace: 'guardian',

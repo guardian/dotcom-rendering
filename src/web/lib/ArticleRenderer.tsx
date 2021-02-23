@@ -52,6 +52,9 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
+
+import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
+
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 
 // This is required for spacefinder to work!
