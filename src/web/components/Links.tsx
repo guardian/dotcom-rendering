@@ -141,6 +141,10 @@ export const Links = ({
 		setShowGiftingLink(getCookie('gu_hide_support_messaging') === 'true');
 	}, []);
 
+	// Fall back on prod URLs just in case these aren't set for any reason
+	const idUrl = idUrlFromConfig || 'https://profile.theguardian.com';
+	const mmaUrl = mmaUrlFromConfig || 'https://manage.theguardian.com';
+
 	// userId is used to construction `Comments & replies` URL. We therefore need to handle the
 	// case where userId is not defined.
 	// This logic also causes a re-render resolving a previosu issue we had when we know the DOM
@@ -188,10 +192,6 @@ export const Links = ({
 			setIdentityLinks([]);
 		}
 	}, [userId, setIdentityLinks]);
-
-	// Fall back on prod URLs just in case these aren't set for any reason
-	const idUrl = idUrlFromConfig || 'https://profile.theguardian.com';
-	const mmaUrl = mmaUrlFromConfig || 'https://manage.theguardian.com';
 
 	return (
 		<div data-print-layout="hide" className={linksStyles}>
