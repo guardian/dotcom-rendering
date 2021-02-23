@@ -66,6 +66,7 @@ import { InstagramBlockComponent } from '@root/src/web/components/elements/Insta
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
+import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -820,6 +821,24 @@ export const App = ({ CAPI, NAV }: Props) => {
 							credit={element.caption}
 							title={element.caption}
 						/>
+					</ClickToView>
+				</HydrateOnce>
+			))}
+			{CAPI.vineBlockElements.map((element) => (
+				<HydrateOnce
+					root="vine-block-element"
+					index={element.vineBlockIndex}
+				>
+					<ClickToView
+						// No role given by CAPI
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+						abTests={CAPI.config.abTests}
+					>
+						<VineBlockComponent element={element} />
 					</ClickToView>
 				</HydrateOnce>
 			))}
