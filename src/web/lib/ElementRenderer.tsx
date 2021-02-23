@@ -651,8 +651,8 @@ export const ElementRenderer = ({
 					// No role given by CAPI
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
-					id={`vine-block-element-${1}`}
-					key={`vine-block-element-${1}`}
+					id={`vine-block-element-${index}`}
+					key={`vine-block-element-${index}`}
 				>
 					<ClickToView
 						// No role given by CAPI
