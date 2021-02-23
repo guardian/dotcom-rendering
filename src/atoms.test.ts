@@ -6,6 +6,8 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { ContentChangeDetails } from '@guardian/content-atom-model/contentChangeDetails';
 import { GuideAtom } from '@guardian/content-atom-model/guide/guideAtom';
 import { GuideItem } from '@guardian/content-atom-model/guide/guideItem';
+import { ProfileAtom } from '@guardian/content-atom-model/profile/profileAtom';
+import { ProfileItem } from '@guardian/content-atom-model/profile/profileItem';
 import { QAndAAtom } from '@guardian/content-atom-model/qanda/qAndAAtom';
 import { QAndAItem } from '@guardian/content-atom-model/qanda/qAndAItem';
 import { err, fromNullable, ok } from '@guardian/types';
@@ -288,6 +290,87 @@ describe('parseAtom', () => {
 					image: 'image-file',
 					credit: 'credit',
 					title: qanda.title,
+				}),
+			);
+		});
+	});
+
+	describe('profile', () => {
+		let atoms: Atoms;
+		let profile: Atom;
+		let profileItem: ProfileItem;
+		let profileAtom: ProfileAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'profile',
+			};
+			profileItem = {
+				title: 'profile title',
+				body: 'profile body',
+			};
+			profileAtom = {
+				items: [profileItem],
+			};
+			profile = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.PROFILE,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'profile',
+					profile: profileAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				profiles: [profile],
+			};
+		});
+
+		it(`returns an error if no profile atom id matches`, () => {
+			profile.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error if no profile title or body`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No title or body for atom: ${atomId}`),
+			);
+		});
+
+		it(`returns ProfileAtom result type given the correct profile`, () => {
+			profile.title = 'profile title';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.ProfileAtom,
+					html: 'profile body',
+					title: profile.title,
+					id: atomId,
+					image: undefined,
+					credit: undefined,
+				}),
+			);
+
+			profileAtom.headshot = {
+				master: { file: 'image-file', credit: 'credit' },
+				assets: [],
+				mediaId: 'media-id',
+			};
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.ProfileAtom,
+					html: 'profile body',
+					id: atomId,
+					image: 'image-file',
+					credit: 'credit',
+					title: profile.title,
 				}),
 			);
 		});
