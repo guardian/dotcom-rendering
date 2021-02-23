@@ -3326,6 +3326,12 @@
                 "ipsosTag": {
                     "type": "string"
                 },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "isLive": {
+                    "type": "boolean"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -3371,6 +3377,8 @@
                 "googletagUrl",
                 "hbImpl",
                 "idApiUrl",
+                "isLive",
+                "isLiveBlog",
                 "isPhotoEssay",
                 "isSensitive",
                 "keywordIds",

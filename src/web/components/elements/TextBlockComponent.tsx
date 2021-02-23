@@ -32,7 +32,7 @@ const isLongEnough = (html: string): boolean => {
 	// a good discussion on how this can be done. Of the two approaches, regex and
 	// DOM, both have unikely failure scenarios but the impact for failure with DOM
 	// manipulation carries a potential security risk so we're using a regex.
-	return html.replace(/(<([^>]+)>)/gi, '').length > 199;
+	return html.replace(/(<([^>]+)>)/gi, '').length >= 199;
 };
 
 const decideDropCapLetter = (html: string): string => {

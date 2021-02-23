@@ -2586,5 +2586,7 @@ export const Feature: CAPIType = {
 		ampIframeUrl:
 			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
 		isPhotoEssay: false,
+		isLiveBlog: false,
+		isLive: false,
 	},
 };

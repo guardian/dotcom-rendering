@@ -59,7 +59,6 @@ module.exports = {
         '@typescript-eslint/no-unsafe-return': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
         'no-console': 'off',
-        '@typescript-eslint/no-use-before-define': 'off',
 		'no-shadow': 'off',
 
         '@typescript-eslint/explicit-function-return-type': [0],

@@ -67,26 +67,23 @@ const makeWindowGuardianConfig = (
 };
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
-	// For some elements it is important to keep thier index in the `elements` array
-
+	// For some elements it is important to keep thier index in the `elements` array. We do this because
+	// we need a way to tell the client which element to hydrate. Could we do this better? Yes, we could
+	// set an elementId on Frontend and use that to id each element instead.
 	const blockElementWithIndex = <T extends CAPIElement>(
 		blocks: { elements: CAPIElement[] }[],
 		blockElementType: CAPIElement['_type'],
 		indexName: string,
 	): T[] => {
 		if (blocks.length === 0) return [];
-		return blocks[0].elements.reduce(
-			(acc: T[], element: CAPIElement, index: number) => {
-				if (element._type === blockElementType) {
-					acc.push({
-						...element,
-						[indexName]: index,
-					} as T);
-				}
-				return acc;
-			},
-			[] as T[],
-		);
+		return blocks[0].elements
+			.map((element: CAPIElement, index: number) => {
+				return {
+					...element,
+					[indexName]: index,
+				};
+			})
+			.filter((element) => element._type === blockElementType) as T[];
 	};
 
 	// If our element type is one that can contain third party content that can track user, but hasn't been marked
@@ -99,24 +96,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 	): T[] => {
 		return elements.filter((element) => element.isThirdPartyTracking);
 	};
-
-	/* Kept for posteriy...for now anyway!
-    const richLinksWithIndex: RichLinkBlockElement[] = CAPI.blocks[0].elements.reduce(
-        (acc, element, index: number) => {
-            if (
-                element._type ===
-                'model.dotcomrendering.pageElements.RichLinkBlockElement'
-            ) {
-                acc.push({
-                    ...element,
-                    richLinkIndex: index,
-                } as RichLinkBlockElement);
-            }
-            return acc;
-        },
-        [] as RichLinkBlockElement[],
-    );
-*/
 
 	return {
 		designType: CAPI.designType,
@@ -193,6 +172,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		isImmersive: CAPI.isImmersive,
 		isPhotoEssay: CAPI.config.isPhotoEssay,
 		isSpecialReport: CAPI.isSpecialReport,
+		isLiveBlog: CAPI.config.isLiveBlog,
+		isLive: CAPI.config.isLive,
 		matchUrl: CAPI.matchUrl,
 		callouts: blockElementWithIndex(
 			CAPI.blocks,
