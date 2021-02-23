@@ -4,6 +4,8 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { Atom } from '@guardian/content-atom-model/atom';
 import { AtomType } from '@guardian/content-atom-model/atomType';
 import { ContentChangeDetails } from '@guardian/content-atom-model/contentChangeDetails';
+import { GuideAtom } from '@guardian/content-atom-model/guide/guideAtom';
+import { GuideItem } from '@guardian/content-atom-model/guide/guideItem';
 import { err, fromNullable, ok } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import Int64 from 'node-int64';
@@ -122,6 +124,88 @@ describe('parseAtom', () => {
 					html,
 					css,
 					js: fromNullable(js),
+				}),
+			);
+		});
+	});
+
+	describe('guide', () => {
+		let atoms: Atoms;
+		let guide: Atom;
+		let guideItem: GuideItem;
+		let guideAtom: GuideAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'guide',
+			};
+			guideItem = {
+				title: 'guide title',
+				body: 'guide body',
+				entities: [],
+			};
+			guideAtom = {
+				items: [guideItem],
+			};
+			guide = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.GUIDE,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'guide',
+					guide: guideAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				guides: [guide],
+			};
+		});
+
+		it(`returns an error if no guide atom id matches`, () => {
+			guide.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error if no guide title or body`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No title or body for atom: ${atomId}`),
+			);
+		});
+
+		it(`returns GuideAtom result type given the correct guide`, () => {
+			guide.title = 'guide title';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.GuideAtom,
+					html: 'guide body',
+					title: guide.title,
+					id: atomId,
+					image: undefined,
+					credit: undefined,
+				}),
+			);
+
+			guideAtom.guideImage = {
+				master: { file: 'image-file', credit: 'credit' },
+				assets: [],
+				mediaId: 'media-id',
+			};
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.GuideAtom,
+					html: 'guide body',
+					title: guide.title,
+					id: atomId,
+					image: 'image-file',
+					credit: 'credit',
 				}),
 			);
 		});
