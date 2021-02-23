@@ -102,6 +102,19 @@ export const ElementRenderer = ({
 					quoted={element.quoted}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+			return (
+				<Figure
+					isMainMedia={isMainMedia}
+					id={`callout-${index}`}
+					role={element.role}
+				>
+					<CalloutBlockComponent
+						callout={element}
+						pillar={format.theme}
+					/>
+				</Figure>
+			);
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return (
 				<CaptionBlockComponent
@@ -114,6 +127,19 @@ export const ElementRenderer = ({
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
 					isOverlayed={element.isOverlayed}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
+			return (
+				<Figure isMainMedia={isMainMedia} role={element.role}>
+					<ChartAtom id={element.id} html={element.html} />
+				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.CodeBlockElement':
+			return (
+				<CodeBlockComponent
+					code={element.code}
+					language={element.language}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.CommentBlockElement':
@@ -140,45 +166,6 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
 			return <DividerBlockComponent />;
-		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
-			return (
-				<Figure
-					isMainMedia={isMainMedia}
-					id={`callout-${index}`}
-					role={element.role}
-				>
-					<CalloutBlockComponent
-						callout={element}
-						pillar={format.theme}
-					/>
-				</Figure>
-			);
-		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
-					<ChartAtom id={element.id} html={element.html} />
-				</Figure>
-			);
-		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
-			return (
-				<Figure isMainMedia={isMainMedia} id={`quiz-atom-${index}`}>
-					<>
-						{element.quizType === 'personality' && (
-							<PersonalityQuizAtom
-								id={element.id}
-								questions={element.questions}
-								resultBuckets={element.resultBuckets}
-							/>
-						)}
-						{element.quizType === 'knowledge' && (
-							<KnowledgeQuizAtom
-								id={element.id}
-								questions={element.questions}
-							/>
-						)}
-					</>
-				</Figure>
-			);
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return (
 				<Figure
@@ -377,6 +364,13 @@ export const ElementRenderer = ({
 					</ClickToView>
 				</Figure>
 			);
+		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
+			return (
+				<VideoAtom
+					assets={element.assets}
+					poster={element.posterImage && element.posterImage[0].url}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return (
 				<Figure isMainMedia={isMainMedia} role={element.role}>
@@ -438,6 +432,26 @@ export const ElementRenderer = ({
 						dislikeHandler={() => {}}
 						expandCallback={() => {}}
 					/>
+				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
+			return (
+				<Figure isMainMedia={isMainMedia} id={`quiz-atom-${index}`}>
+					<>
+						{element.quizType === 'personality' && (
+							<PersonalityQuizAtom
+								id={element.id}
+								questions={element.questions}
+								resultBuckets={element.resultBuckets}
+							/>
+						)}
+						{element.quizType === 'knowledge' && (
+							<KnowledgeQuizAtom
+								id={element.id}
+								questions={element.questions}
+							/>
+						)}
+					</>
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
@@ -510,6 +524,24 @@ export const ElementRenderer = ({
 					/>
 				</>
 			);
+		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+			return (
+				<Figure
+					isMainMedia={isMainMedia}
+					role={element.role}
+					id={`timeline-atom-${index}`}
+				>
+					<TimelineAtom
+						id={element.id}
+						title={element.title}
+						pillar={format.theme}
+						events={element.events}
+						likeHandler={() => {}}
+						dislikeHandler={() => {}}
+						expandCallback={() => {}}
+					/>
+				</Figure>
+			);
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			return (
 				<Figure
@@ -578,72 +610,6 @@ export const ElementRenderer = ({
 						title={element.title}
 					/>
 				</Figure>
-			);
-		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-			return (
-				<Figure
-					isMainMedia={isMainMedia}
-					key={index}
-					role={element.role}
-					id={
-						isMainMedia
-							? `youtube-block-main-media-${index}`
-							: `youtube-block-${index}`
-					}
-				>
-					<YoutubeBlockComponent
-						format={format}
-						palette={palette}
-						key={index}
-						hideCaption={hideCaption}
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						adTargeting={adTargeting}
-						isMainMedia={isMainMedia}
-						id={element.id}
-						assetId={element.assetId}
-						channelId={element.channelId}
-						expired={element.expired}
-						overrideImage={element.overrideImage}
-						posterImage={element.posterImage}
-						duration={element.duration}
-						mediaTitle={element.mediaTitle}
-						altText={element.altText}
-						origin={host}
-					/>
-				</Figure>
-			);
-		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
-			return (
-				<Figure
-					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`timeline-atom-${index}`}
-				>
-					<TimelineAtom
-						id={element.id}
-						title={element.title}
-						pillar={format.theme}
-						events={element.events}
-						likeHandler={() => {}}
-						dislikeHandler={() => {}}
-						expandCallback={() => {}}
-					/>
-				</Figure>
-			);
-		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			return (
-				<VideoAtom
-					assets={element.assets}
-					poster={element.posterImage && element.posterImage[0].url}
-				/>
-			);
-		case 'model.dotcomrendering.pageElements.CodeBlockElement':
-			return (
-				<CodeBlockComponent
-					code={element.code}
-					language={element.language}
-				/>
 			);
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return (
@@ -719,6 +685,40 @@ export const ElementRenderer = ({
 					return null;
 			}
 		}
+		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
+			return (
+				<Figure
+					isMainMedia={isMainMedia}
+					key={index}
+					role={element.role}
+					id={
+						isMainMedia
+							? `youtube-block-main-media-${index}`
+							: `youtube-block-${index}`
+					}
+				>
+					<YoutubeBlockComponent
+						format={format}
+						palette={palette}
+						key={index}
+						hideCaption={hideCaption}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						adTargeting={adTargeting}
+						isMainMedia={isMainMedia}
+						id={element.id}
+						assetId={element.assetId}
+						channelId={element.channelId}
+						expired={element.expired}
+						overrideImage={element.overrideImage}
+						posterImage={element.posterImage}
+						duration={element.duration}
+						mediaTitle={element.mediaTitle}
+						altText={element.altText}
+						origin={host}
+					/>
+				</Figure>
+			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
