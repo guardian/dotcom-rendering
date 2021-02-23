@@ -26,6 +26,7 @@ import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockC
 import { TweetBlockComponent } from '@root/src/web/components/elements/TweetBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBlockComponent';
+import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
 import {
@@ -643,6 +644,28 @@ export const ElementRenderer = ({
 					code={element.code}
 					language={element.language}
 				/>
+			);
+		case 'model.dotcomrendering.pageElements.VineBlockElement':
+			return (
+				<Figure
+					// No role given by CAPI
+					// eslint-disable-next-line jsx-a11y/aria-role
+					role="inline"
+					id={`vine-block-element-${i}`}
+					key={`vine-block-element-${i}`}
+				>
+					<ClickToView
+						// No role given by CAPI
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+						abTests={abTests}
+					>
+						<VineBlockComponent element={element} />
+					</ClickToView>
+				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
 			const witnessType = element.witnessTypeData._type;
