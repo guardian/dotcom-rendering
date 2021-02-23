@@ -12,6 +12,7 @@ import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
+import { LiveLayout } from './LiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
@@ -87,6 +88,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Standard:
 		default: {
 			switch (design) {
+				case Design.Live:
+					return (
+						<LiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
 				case Design.Comment:
 				case Design.GuardianView:
 					return (
