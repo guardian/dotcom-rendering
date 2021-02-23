@@ -2,33 +2,33 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
 
-describe('AnalyticsComponent', () => {
-	const analytics: AnalyticsModel = {
-		gaTracker: 'UA-XXXXXXX-X',
-		title: 'Foo',
-		fbPixelaccount: 'XXXXXXXXXX',
-		comscoreID: 'XXXXXXX',
-		contentType: 'Article',
-		id: 'some/page',
-		beacon: `localhost/count/pv.gif`,
-		neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
-		domain: 'amp.theguardian.com',
-		permutive: {
-			namespace: 'guardian',
-			apiKey: '42-2020',
-			payload: {
-				'properties.content.title': 'article title',
-			},
+const analyticsBase: AnalyticsModel = {
+	gaTracker: 'UA-XXXXXXX-X',
+	title: 'Foo',
+	fbPixelaccount: 'XXXXXXXXXX',
+	comscoreID: 'XXXXXXX',
+	contentType: 'Article',
+	id: 'some/page',
+	beacon: `localhost/count/pv.gif`,
+	neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
+	domain: 'amp.theguardian.com',
+	permutive: {
+		namespace: 'guardian',
+		apiKey: '42-2020',
+		payload: {
+			'properties.content.title': 'article title',
 		},
-		ipsosSectionName: 'section',
-	};
+	},
+	ipsosSectionName: 'section',
+};
 
-	beforeEach(() => {
-		delete analytics.section;
-	});
-
+describe('AnalyticsComponent', () => {
 	it('if section is business then include the MoDI snowplow tag', () => {
-		analytics.section = 'business';
+		const analytics = {
+			...analyticsBase,
+			section: 'business',
+		};
+
 		const { container } = render(<Analytics analytics={analytics} />);
 
 		const ampAnalyticsSnowplowElement = container.querySelectorAll(
@@ -47,6 +47,9 @@ describe('AnalyticsComponent', () => {
 	});
 
 	it('if section is undefined then do not include the MoDI snowplow tag', () => {
+		const analytics = {
+			...analyticsBase,
+		};
 		const { container } = render(<Analytics analytics={analytics} />);
 
 		const ampAnalyticsSnowplowElement = container.querySelector(
@@ -57,7 +60,10 @@ describe('AnalyticsComponent', () => {
 	});
 
 	it('if section is not business then do not include the MoDI snowplow tag', () => {
-		analytics.section = 'politics';
+		const analytics = {
+			...analyticsBase,
+			section: 'politics',
+		};
 		const { container } = render(<Analytics analytics={analytics} />);
 
 		const ampAnalyticsSnowplowElement = container.querySelector(
