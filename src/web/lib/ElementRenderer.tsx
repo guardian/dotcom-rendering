@@ -339,7 +339,7 @@ export const ElementRenderer = ({
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
-						index={i}
+						index={index}
 					/>
 				</Figure>
 			);
