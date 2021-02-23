@@ -478,6 +478,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								host={host}
+								abTests={CAPI.config.abTests}
 							/>
 						</div>
 					</GridItem>
