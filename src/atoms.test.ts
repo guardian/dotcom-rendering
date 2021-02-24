@@ -17,6 +17,7 @@ import { ProfileAtom } from '@guardian/content-atom-model/profile/profileAtom';
 import { ProfileItem } from '@guardian/content-atom-model/profile/profileItem';
 import { QAndAAtom } from '@guardian/content-atom-model/qanda/qAndAAtom';
 import { QAndAItem } from '@guardian/content-atom-model/qanda/qAndAItem';
+import { QuizAtom } from '@guardian/content-atom-model/quiz/quizAtom';
 import { TimelineAtom } from '@guardian/content-atom-model/timeline/timelineAtom';
 import { TimelineItem } from '@guardian/content-atom-model/timeline/timelineItem';
 import { err, fromNullable, ok, some } from '@guardian/types';
@@ -756,6 +757,95 @@ describe('parseAtom', () => {
 					kicker: 'audio-kickcer',
 					title: 'audio title',
 					trackUrl: 'track-url',
+				}),
+			);
+		});
+	});
+
+	describe('quiz', () => {
+		let atoms: Atoms;
+		let quiz: Atom;
+		let quizAtom: QuizAtom;
+		let answerMock = {
+			answerText: 'answer text',
+			assets: [],
+			weight: 1,
+			id: 'answer-id',
+		};
+		let questionsMock = [
+			{
+				questionText: 'question text',
+				assets: [],
+				answers: [answerMock],
+				id: 'question-id',
+			},
+		];
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'quiz',
+			};
+			quizAtom = {
+				id: 'quiz-id',
+				title: 'quiz title',
+				revealAtEnd: true,
+				published: true,
+				content: {
+					questions: questionsMock,
+				},
+				quizType: 'quiz type',
+			};
+			quiz = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.AUDIO,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'quiz',
+					quiz: quizAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				quizzes: [quiz],
+			};
+		});
+
+		it(`returns an error if no quiz atom id matches`, () => {
+			quiz.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error of quiz atom has no content`, () => {
+			quizAtom.content.questions = [];
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No content for atom: ${atomId}`),
+			);
+		});
+
+		it(`parses quiz atom correctly`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.QuizAtom,
+					id: atomId,
+					questions: [
+						{
+							text: 'question text',
+							...questionsMock[0],
+							answers: [
+								{
+									...answerMock,
+									isCorrect: true,
+									text: 'answer text',
+								},
+							],
+						},
+					],
 				}),
 			);
 		});
