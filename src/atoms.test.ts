@@ -3,6 +3,7 @@ import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { Atom } from '@guardian/content-atom-model/atom';
 import { AtomType } from '@guardian/content-atom-model/atomType';
+import { ChartAtom } from '@guardian/content-atom-model/chart/chartAtom';
 import { ContentChangeDetails } from '@guardian/content-atom-model/contentChangeDetails';
 import { GuideAtom } from '@guardian/content-atom-model/guide/guideAtom';
 import { GuideItem } from '@guardian/content-atom-model/guide/guideItem';
@@ -12,6 +13,7 @@ import { QAndAAtom } from '@guardian/content-atom-model/qanda/qAndAAtom';
 import { QAndAItem } from '@guardian/content-atom-model/qanda/qAndAItem';
 import { err, fromNullable, ok } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
+import { atomScript } from 'components/atoms/interactiveAtom';
 import Int64 from 'node-int64';
 import { DocParser } from 'types/parserContext';
 import { formatOptionalDate, parseAtom } from './atoms';
@@ -371,6 +373,91 @@ describe('parseAtom', () => {
 					image: 'image-file',
 					credit: 'credit',
 					title: profile.title,
+				}),
+			);
+		});
+	});
+
+	describe('chart', () => {
+		let atoms: Atoms;
+		let chart: Atom;
+		let chartAtom: ChartAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'chart',
+			};
+			chart = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.PROFILE,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'chart',
+					chart: chartAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				charts: [chart],
+			};
+		});
+
+		it(`returns an error if no chart atom id matches`, () => {
+			chart.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error if no chart title or defaultHtml`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No title or defaultHtml for atom: ${atomId}`),
+			);
+		});
+
+		it('parses', () => {
+			chart.title = 'chart title';
+			chart.defaultHtml = 'some default html';
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.ChartAtom,
+					title: 'chart title',
+					id: atomId,
+					html: `some default html<script>${atomScript}</script>`,
+					css: [],
+					js: [],
+				}),
+			);
+
+			const frag = document.createDocumentFragment();
+			const css = `some css`;
+			const inlineCss = `display: inline;`;
+			const js = `some javascript`;
+			const styleEl = document.createElement('style');
+			const jsEl = document.createElement('script');
+			const el = document.createElement('div');
+			el.setAttribute('style', inlineCss);
+			styleEl.append(document.createTextNode(css));
+			jsEl.append(document.createTextNode(js));
+			frag.appendChild(el);
+			frag.appendChild(styleEl);
+			frag.appendChild(jsEl);
+
+			docParser = jest.fn(() => frag);
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.ChartAtom,
+					title: 'chart title',
+					id: atomId,
+					html: `some default html<script>${atomScript}</script>`,
+					css: [css, inlineCss],
+					js: [js],
 				}),
 			);
 		});
