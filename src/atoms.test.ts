@@ -11,6 +11,8 @@ import { ProfileAtom } from '@guardian/content-atom-model/profile/profileAtom';
 import { ProfileItem } from '@guardian/content-atom-model/profile/profileItem';
 import { QAndAAtom } from '@guardian/content-atom-model/qanda/qAndAAtom';
 import { QAndAItem } from '@guardian/content-atom-model/qanda/qAndAItem';
+import { TimelineAtom } from '@guardian/content-atom-model/timeline/timelineAtom';
+import { TimelineItem } from '@guardian/content-atom-model/timeline/timelineItem';
 import { err, fromNullable, ok } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/atoms/interactiveAtom';
@@ -458,6 +460,90 @@ describe('parseAtom', () => {
 					html: `some default html<script>${atomScript}</script>`,
 					css: [css, inlineCss],
 					js: [js],
+				}),
+			);
+		});
+	});
+
+	describe('timeline', () => {
+		let atoms: Atoms;
+		let timeline: Atom;
+		let timelineItem: TimelineItem;
+		let timelineAtom: TimelineAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'timeline',
+			};
+			timelineItem = {
+				title: 'timeline title',
+				date: new Int64(1),
+			};
+			timelineAtom = {
+				events: [timelineItem],
+				description: 'timeline description',
+			};
+			timeline = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.PROFILE,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'timeline',
+					timeline: timelineAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				timelines: [timeline],
+			};
+		});
+
+		it(`returns an error if no timeline atom id matches`, () => {
+			timeline.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error if no timeline title or body`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No title or body for atom: ${atomId}`),
+			);
+		});
+
+		it(`returns an error of the timeline event date is not valid`, () => {
+			timeline.title = 'timeline title';
+			timelineItem.body = 'timeline item body';
+			timelineItem.date = new Int64('123456789abcdef0');
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`Invalid date in timeline atom`),
+			);
+		});
+
+		it(`parses timeline atom correctly`, () => {
+			timeline.title = 'timeline title';
+			timelineItem.body = 'timeline item body';
+			timelineItem.date = new Int64(1);
+			timelineItem.toDate = new Int64(1614157023336);
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.TimelineAtom,
+					title: 'timeline title',
+					id: atomId,
+					events: [
+						{
+							body: 'timeline item body',
+							date: 'Thu Jan 01 1970',
+							title: 'timeline title',
+							toDate: 'Wed Feb 24 2021',
+						},
+					],
+					description: 'timeline description',
 				}),
 			);
 		});
