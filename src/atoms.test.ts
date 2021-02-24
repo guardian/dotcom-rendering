@@ -71,6 +71,17 @@ describe('parseAtom', () => {
 		);
 	});
 
+	it('returns an error if atom type not supported', () => {
+		let unsupportedAtomType = 'unsupported type';
+		blockElement.contentAtomTypeData = {
+			atomId: atomId,
+			atomType: unsupportedAtomType,
+		};
+		expect(parseAtom(blockElement, {}, docParser)).toEqual(
+			err(`Atom type not supported: ${unsupportedAtomType}`),
+		);
+	});
+
 	describe('interactives', () => {
 		let atoms: Atoms;
 		let interactive: Atom;
