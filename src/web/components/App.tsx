@@ -670,7 +670,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<DocumentBlockComponent
 							embedUrl={element.embedUrl}
@@ -692,7 +691,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 							isTracking={element.isThirdPartyTracking}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
-							abTests={CAPI.config.abTests}
 						>
 							<EmbedBlockComponent
 								key={element.embedIndex}
@@ -706,7 +704,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 							isTracking={element.isThirdPartyTracking}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
-							abTests={CAPI.config.abTests}
 							onAccept={() =>
 								updateIframeHeight(
 									`iframe[name="unsafe-embed-${
@@ -735,7 +732,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={CAPI.config.abTests}
 						onAccept={() =>
 							updateIframeHeight(
 								`iframe[name="instagram-embed-${
@@ -759,7 +755,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -784,7 +779,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<SpotifyBlockComponent
 							embedUrl={element.embedUrl}
@@ -809,7 +803,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -836,7 +829,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<VineBlockComponent element={element} />
 					</ClickToView>

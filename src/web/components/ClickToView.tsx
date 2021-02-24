@@ -16,7 +16,6 @@ type Props = {
 	isMainMedia?: boolean;
 	source?: string;
 	sourceDomain?: string;
-	abTests: CAPIType['config']['abTests'];
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -82,12 +81,10 @@ const roleButtonText = (role: RoleType) => {
 const shouldDisplayOverlay = ({
 	isTracking,
 	isOverlayClicked,
-	isInABTestVariant,
 	isMainMedia,
 }: {
 	isTracking: boolean;
 	isOverlayClicked: boolean;
-	isInABTestVariant: boolean;
 	isMainMedia?: boolean;
 }) => {
 	if (isMainMedia || !isTracking) {
@@ -96,11 +93,7 @@ const shouldDisplayOverlay = ({
 	if (isOverlayClicked) {
 		return false;
 	}
-	return isInABTestVariant;
-};
-
-const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
-	return abTestConfig.clickToViewVariant === 'variant';
+	return true;
 };
 
 export const ClickToView = ({
@@ -111,7 +104,6 @@ export const ClickToView = ({
 	isMainMedia,
 	source,
 	sourceDomain = 'unknown',
-	abTests,
 }: Props) => {
 	const [isOverlayClicked, setIsOverlayClicked] = useState<boolean>(false);
 
@@ -128,7 +120,6 @@ export const ClickToView = ({
 		shouldDisplayOverlay({
 			isTracking,
 			isOverlayClicked,
-			isInABTestVariant: isInABTestVariant(abTests),
 			isMainMedia,
 		})
 	) {
