@@ -41,7 +41,7 @@ const interviewStyles = css`
 		border-right: 1px solid ${border.secondary};
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: ${wideArticleMargin}px;
 	}
 	${borderWidthStyles}
@@ -61,7 +61,7 @@ const immersiveStyles = css`
 		width: ${tabletImmersiveWidth}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: ${wideArticleMargin}px;
 		width: ${wideImmersiveWidth}px;
 	}
@@ -127,7 +127,7 @@ const largeTextStyles = (
 		${headline.small({ fontStyle, fontWeight, lineHeight })};
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		${headline.medium({ fontStyle, fontWeight, lineHeight })};
 	}
 `;

@@ -37,7 +37,7 @@ export const borderWidthStyles: SerializedStyles = css`
 		width: ${tabletBorderWidth}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		width: ${wideBorderWidth}px;
 	}
 `;
@@ -47,7 +47,7 @@ export const articleWidthStyles: SerializedStyles = css`
 		width: ${tabletContentWidth}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		width: ${wideContentWidth}px;
 	}
 `;
@@ -57,7 +57,7 @@ export const articleMarginStyles: SerializedStyles = css`
 		margin-left: ${tabletArticleMargin}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: ${wideArticleMargin}px;
 	}
 `;

@@ -95,7 +95,7 @@ export const galleryWrapperStyles = css`
 		border-right: 1px solid ${neutral[100]};
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		width: ${wide}px;
 	}
 `;
