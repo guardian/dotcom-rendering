@@ -8,13 +8,17 @@ import { ContentChangeDetails } from '@guardian/content-atom-model/contentChange
 import { ExplainerAtom } from '@guardian/content-atom-model/explainer/explainerAtom';
 import { GuideAtom } from '@guardian/content-atom-model/guide/guideAtom';
 import { GuideItem } from '@guardian/content-atom-model/guide/guideItem';
+import { AssetType } from '@guardian/content-atom-model/media/assetType';
+import { Category } from '@guardian/content-atom-model/media/category';
+import { MediaAtom } from '@guardian/content-atom-model/media/mediaAtom';
+import { Platform } from '@guardian/content-atom-model/media/platform';
 import { ProfileAtom } from '@guardian/content-atom-model/profile/profileAtom';
 import { ProfileItem } from '@guardian/content-atom-model/profile/profileItem';
 import { QAndAAtom } from '@guardian/content-atom-model/qanda/qAndAAtom';
 import { QAndAItem } from '@guardian/content-atom-model/qanda/qAndAItem';
 import { TimelineAtom } from '@guardian/content-atom-model/timeline/timelineAtom';
 import { TimelineItem } from '@guardian/content-atom-model/timeline/timelineItem';
-import { err, fromNullable, ok } from '@guardian/types';
+import { err, fromNullable, ok, some } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/atoms/interactiveAtom';
 import Int64 from 'node-int64';
@@ -606,6 +610,89 @@ describe('parseAtom', () => {
 					html: 'explainer body',
 					title: 'explainer title',
 					id: atomId,
+				}),
+			);
+		});
+	});
+
+	describe('media', () => {
+		let atoms: Atoms;
+		let media: Atom;
+		let mediaAtom: MediaAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'media',
+			};
+			mediaAtom = {
+				title: '',
+				assets: [
+					{
+						assetType: AssetType.VIDEO,
+						id: 'asset-id',
+						version: new Int64(1),
+						platform: Platform.YOUTUBE,
+					},
+				],
+				category: Category.NEWS,
+				posterUrl: 'poster-url',
+				duration: new Int64(1000),
+				activeVersion: new Int64(1),
+			};
+			media = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.MEDIA,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'media',
+					media: mediaAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				media: [media],
+			};
+		});
+
+		it(`returns an error if no media atom id matches`, () => {
+			media.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error given no poster url`, () => {
+			mediaAtom.posterUrl = '';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No posterUrl for atom: ${atomId}`),
+			);
+		});
+
+		it(`returns an error given no video id`, () => {
+			mediaAtom.activeVersion = new Int64(42);
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No videoId for atom: ${atomId}`),
+			);
+		});
+
+		it(`parses media atom correctly`, () => {
+			const frag = document.createDocumentFragment();
+			const el = document.createElement('h1');
+			el.appendChild(document.createTextNode('media title'));
+			frag.appendChild(el);
+			docParser = jest.fn(() => frag);
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.MediaAtom,
+					posterUrl: 'poster-url',
+					caption: some(frag),
+					duration: some(1000),
+					videoId: 'asset-id',
 				}),
 			);
 		});
