@@ -3,6 +3,7 @@ import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { Atom } from '@guardian/content-atom-model/atom';
 import { AtomType } from '@guardian/content-atom-model/atomType';
+import { AudioAtom } from '@guardian/content-atom-model/audio/audioAtom';
 import { ChartAtom } from '@guardian/content-atom-model/chart/chartAtom';
 import { ContentChangeDetails } from '@guardian/content-atom-model/contentChangeDetails';
 import { ExplainerAtom } from '@guardian/content-atom-model/explainer/explainerAtom';
@@ -693,6 +694,68 @@ describe('parseAtom', () => {
 					caption: some(frag),
 					duration: some(1000),
 					videoId: 'asset-id',
+				}),
+			);
+		});
+	});
+
+	describe('audio', () => {
+		let atoms: Atoms;
+		let audio: Atom;
+		let audioAtom: AudioAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'audio',
+			};
+			audioAtom = {
+				kicker: 'audio-kickcer',
+				coverUrl: 'cover-url',
+				trackUrl: 'track-url',
+				duration: 1000,
+				contentId: 'content-id',
+			};
+			audio = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.AUDIO,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'audio',
+					audio: audioAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				audios: [audio],
+			};
+		});
+
+		it(`returns an error if no audio atom id matches`, () => {
+			audio.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error given no audio title`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No title for audio atom with id: ${atomId}`),
+			);
+		});
+
+		it(`parses audio atom correctly`, () => {
+			audio.title = 'audio title';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.AudioAtom,
+					id: 'atom-id',
+					kicker: 'audio-kickcer',
+					title: 'audio title',
+					trackUrl: 'track-url',
 				}),
 			);
 		});
