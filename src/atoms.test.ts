@@ -5,6 +5,7 @@ import { Atom } from '@guardian/content-atom-model/atom';
 import { AtomType } from '@guardian/content-atom-model/atomType';
 import { ChartAtom } from '@guardian/content-atom-model/chart/chartAtom';
 import { ContentChangeDetails } from '@guardian/content-atom-model/contentChangeDetails';
+import { ExplainerAtom } from '@guardian/content-atom-model/explainer/explainerAtom';
 import { GuideAtom } from '@guardian/content-atom-model/guide/guideAtom';
 import { GuideItem } from '@guardian/content-atom-model/guide/guideItem';
 import { ProfileAtom } from '@guardian/content-atom-model/profile/profileAtom';
@@ -487,7 +488,7 @@ describe('parseAtom', () => {
 			timeline = {
 				id: atomId,
 				title: '',
-				atomType: AtomType.PROFILE,
+				atomType: AtomType.TIMELINE,
 				labels: [],
 				defaultHtml: '',
 				data: {
@@ -544,6 +545,67 @@ describe('parseAtom', () => {
 						},
 					],
 					description: 'timeline description',
+				}),
+			);
+		});
+	});
+
+	describe('explainer', () => {
+		let atoms: Atoms;
+		let explainer: Atom;
+		let explainerAtom: ExplainerAtom;
+
+		beforeEach(() => {
+			blockElement.contentAtomTypeData = {
+				atomId: atomId,
+				atomType: 'explainer',
+			};
+			explainerAtom = {
+				title: '',
+				body: '',
+				displayType: 0,
+			};
+			explainer = {
+				id: atomId,
+				title: '',
+				atomType: AtomType.EXPLAINER,
+				labels: [],
+				defaultHtml: '',
+				data: {
+					kind: 'explainer',
+					explainer: explainerAtom,
+				},
+				contentChangeDetails: {} as ContentChangeDetails,
+				commissioningDesks: [],
+			};
+			atoms = {
+				explainers: [explainer],
+			};
+		});
+
+		it(`returns an error if no explainer atom id matches`, () => {
+			explainer.data.kind = 'interactive';
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No atom matched this id: ${atomId}`),
+			);
+		});
+
+		it(`returns an error if no explainer title or body`, () => {
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				err(`No title or body for atom: ${atomId}`),
+			);
+		});
+
+		it(`parses explainer atom correctly`, () => {
+			explainerAtom.title = 'explainer title';
+			explainerAtom.body = 'explainer body';
+
+			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
+				ok({
+					kind: ElementKind.ExplainerAtom,
+					html: 'explainer body',
+					title: 'explainer title',
+					id: atomId,
 				}),
 			);
 		});
