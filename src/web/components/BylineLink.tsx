@@ -10,7 +10,6 @@ const getContributorTags = (tags: TagType[]): TagType[] => {
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
-
 	/*
 		Q: Why does this function exist ?
 
@@ -36,10 +35,12 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 		This function doesn't change any thing for the "standard" case, but solves the "Sam Levin|Sam Levine" case and similar cases.
 	*/
 
-	return titles.sort((a, b) => {
-		return a.localeCompare(b);
-	  }).reverse();
-}
+	return titles
+		.sort((a, b) => {
+			return a.localeCompare(b);
+		})
+		.reverse();
+};
 
 // This crazy function aims to split bylines such as
 // 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
@@ -50,7 +51,9 @@ const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 	const titles = getContributorTags(tags).map((c) => c.title);
 	// The contributor tag title should exist inside the byline for this regex to work
 
-	const regex = new RegExp(`(${applyCleverOrderingForMatching(titles).join('|')})`);
+	const regex = new RegExp(
+		`(${applyCleverOrderingForMatching(titles).join('|')})`,
+	);
 
 	return byline.split(regex);
 };
