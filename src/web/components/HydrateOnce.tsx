@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 type Props = {
-	root: IslandType;
+	rootId: string;
 	children: JSX.Element;
-	index?: number;
+	name?: string;
 	waitFor?: unknown[];
 };
 
@@ -22,12 +22,16 @@ const isReady = (dependencies: unknown[]): boolean => {
  * @param {number} index - Used when there are multiple elements the same (eg. RichLinks)
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
-export const HydrateOnce = ({ root, children, index, waitFor = [] }: Props) => {
+export const HydrateOnce = ({
+	rootId,
+	name,
+	children,
+	waitFor = [],
+}: Props) => {
 	const [alreadyHydrated, setAlreadyHydrated] = useState(false);
 	if (alreadyHydrated) return null;
 	if (!isReady(waitFor)) return null;
-	const rootId = index === 0 || index ? `${root}-${index}` : root;
-	const { start, end } = initPerf(`${rootId}-hydrate`);
+	const { start, end } = initPerf(`hydrate-${name || rootId}`);
 	const element = document.getElementById(rootId);
 	if (!element) return null;
 	start();

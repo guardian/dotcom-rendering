@@ -25,6 +25,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quote</blockquote>',
 						},
@@ -42,6 +43,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quote</blockquote>',
 							quoted: true,
@@ -68,6 +70,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is not a quote</blockquote>',
 						},
@@ -89,6 +92,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.HighlightBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is not a quote</blockquote>',
 						},
@@ -114,6 +118,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted blockquote</blockquote>',
 						},
@@ -135,6 +140,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted blockquote</blockquote>',
 							quoted: true,
@@ -157,6 +163,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html: '<blockquote>This is a quote</blockquote>',
 						},
 					],
@@ -173,6 +180,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html: '<blockquote>This is a quote</blockquote>',
 						},
 					],
@@ -193,6 +201,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="somethingelse">This is a simple blockquote</blockquote>',
 						},
@@ -210,6 +219,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="somethingelse">This is a simple blockquote</blockquote>',
 						},
@@ -231,12 +241,14 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted quote</blockquote>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is a simple quote</blockquote>',
 						},
@@ -254,6 +266,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted quote</blockquote>',
 							quoted: true,
@@ -261,6 +274,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is a simple quote</blockquote>',
 						},

@@ -392,7 +392,6 @@ type CAPIBrowserType = {
 	designType: CAPIDesign;
 	pillar: CAPIPillar;
 	config: ConfigTypeBrowser;
-	richLinks: RichLinkBlockElement[];
 	editionId: Edition;
 	editionLongForm: string;
 	contentType: string;
@@ -423,23 +422,8 @@ type CAPIBrowserType = {
 	isLiveBlog: boolean;
 	isLive: boolean;
 	matchUrl?: string;
-	callouts: CalloutBlockElement[];
-	qandaAtoms: QABlockElement[];
-	guideAtoms: GuideAtomBlockElement[];
-	profileAtoms: ProfileAtomBlockElement[];
-	timelineAtoms: TimelineBlockElement[];
-	chartAtoms: ChartAtomBlockElement[];
-	audioAtoms: AudioAtomBlockElement[];
-	youtubeBlockElement: YoutubeBlockElement[];
-	youtubeMainMediaBlockElement: YoutubeBlockElement[];
-	quizAtoms: QuizAtomBlockElement[];
-	documentBlockElements: DocumentBlockElement[];
-	embedBlockElements: EmbedBlockElement[];
-	instagramBlockElements: InstagramBlockElement[];
-	mapBlockElements: MapBlockElement[];
-	spotifyBlockElements: SpotifyBlockElement[];
-	videoFacebookBlockElements: VideoFacebookBlockElement[];
-	vineBlockElements: VineBlockElement[];
+	richLinks: RichLinkBlockElement[];
+	elementsToHydrate: CAPIElement[];
 };
 
 interface TagType {
@@ -692,45 +676,6 @@ interface DCRBrowserDocumentData {
 	GA: GADataType;
 	linkedData: { [key: string]: any; };
 }
-
-type IslandType =
-	| 'reader-revenue-links-header'
-	| 'sub-nav-root'
-	| 'edition-root'
-	| 'most-viewed-right'
-	| 'share-count-root'
-	| 'comment-count-root'
-	| 'most-viewed-footer'
-	| 'reader-revenue-links-footer'
-	| 'slot-body-end'
-	| 'bottom-banner'
-	| 'onwards-upper-whensignedin'
-	| 'onwards-upper-whensignedout'
-	| 'onwards-lower-whensignedin'
-	| 'onwards-lower-whensignedout'
-	| 'rich-link'
-	| 'links-root'
-	| 'match-nav'
-	| 'match-stats'
-	| 'callout'
-	| 'comments'
-	| 'quiz-atom'
-	| 'qanda-atom'
-	| 'guide-atom'
-	| 'profile-atom'
-	| 'timeline-atom'
-	| 'sign-in-gate'
-	| 'audio-atom'
-	| 'youtube-block'
-	| 'youtube-block-main-media'
-	| 'chart-atom'
-	| 'document-block-element'
-	| 'embed-block-element'
-	| 'instagram-block-element'
-	| 'map-block-element'
-	| 'spotify-block-element'
-	| 'video-facebook-block-element'
-	| 'vine-block-element';
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as

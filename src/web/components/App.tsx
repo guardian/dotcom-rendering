@@ -350,8 +350,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 	const YoutubeBlockComponent = loadable(
 		() => {
 			if (
-				CAPI.youtubeBlockElement.length > 0 ||
-				CAPI.youtubeMainMediaBlockElement.length > 0
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.YoutubeBlockElement',
+				).length > 0
 			) {
 				return import(
 					'@frontend/web/components/elements/YoutubeBlockComponent'
@@ -366,7 +369,13 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const RichLinkComponent = loadable(
 		() => {
-			if (CAPI.richLinks.length > 0) {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+				).length > 0
+			) {
 				return import(
 					'@frontend/web/components/elements/RichLinkComponent'
 				);
@@ -376,6 +385,80 @@ export const App = ({ CAPI, NAV }: Props) => {
 		{
 			resolveComponent: (module) => module.RichLinkComponent,
 		},
+	);
+
+	// We use this function to filter the elementsToHydrate array by a particular
+	// type so that we can hydrate them. We use T to force the type and keep TS
+	// content because *we* know that if _type equals a thing then the type is
+	// guarenteed but TS isn't so sure and needs assurance
+	const elementsByType = <T extends CAPIElement>(
+		elements: CAPIElement[],
+		type: string,
+	): T[] => elements.filter((element) => element._type === type) as T[];
+
+	const youTubeAtoms = elementsByType<YoutubeBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.YoutubeBlockElement',
+	);
+	const quizAtoms = elementsByType<QuizAtomBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.QuizAtomBlockElement',
+	);
+	const callouts = elementsByType<CalloutBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.CalloutBlockElement',
+	);
+	const chartAtoms = elementsByType<ChartAtomBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
+	);
+	const audioAtoms = elementsByType<AudioAtomBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
+	);
+	const qandaAtoms = elementsByType<QABlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.QABlockElement',
+	);
+	const guideAtoms = elementsByType<GuideAtomBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+	);
+	const profileAtoms = elementsByType<ProfileAtomBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
+	);
+	const timelineAtoms = elementsByType<TimelineBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.TimelineBlockElement',
+	);
+	const documents = elementsByType<DocumentBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.DocumentBlockElement',
+	);
+	const embeds = elementsByType<EmbedBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.EmbedBlockElement',
+	);
+	const instas = elementsByType<InstagramBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.InstagramBlockElement',
+	);
+	const maps = elementsByType<MapBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.MapBlockElement',
+	);
+	const spotifies = elementsByType<SpotifyBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.SpotifyBlockElement',
+	);
+	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
+	);
+	const vines = elementsByType<VineBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.VineBlockElement',
 	);
 
 	return (
@@ -390,7 +473,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
-			<Portal root="reader-revenue-links-header">
+			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
@@ -398,7 +481,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					inHeader={true}
 				/>
 			</Portal>
-			<HydrateOnce root="links-root" waitFor={[user]}>
+			<HydrateOnce rootId="links-root" waitFor={[user]}>
 				<Links
 					giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
 					userId={user ? user.userId : undefined}
@@ -406,24 +489,20 @@ export const App = ({ CAPI, NAV }: Props) => {
 					mmaUrl={CAPI.config.mmaUrl}
 				/>
 			</HydrateOnce>
-			<HydrateOnce root="edition-root">
+			<HydrateOnce rootId="edition-root">
 				<EditionDropdown
 					edition={CAPI.editionId}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
 			</HydrateOnce>
-			<Portal root="share-count-root">
+			<Portal rootId="share-count-root">
 				<ShareCount
 					ajaxUrl={CAPI.config.ajaxUrl}
 					pageId={CAPI.pageId}
 				/>
 			</Portal>
-			{CAPI.youtubeMainMediaBlockElement.map((youtubeBlock, index) => (
-				<HydrateOnce
-					key={index}
-					root="youtube-block-main-media"
-					index={youtubeBlock.youtubeIndex}
-				>
+			{youTubeAtoms.map((youTubeAtom) => (
+				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
 						format={format}
 						palette={palette}
@@ -432,69 +511,40 @@ export const App = ({ CAPI, NAV }: Props) => {
 						role="inline"
 						adTargeting={adTargeting}
 						isMainMedia={false}
-						id={youtubeBlock.id}
-						assetId={youtubeBlock.assetId}
-						channelId={youtubeBlock.channelId}
-						expired={youtubeBlock.expired}
-						overrideImage={youtubeBlock.overrideImage}
-						posterImage={youtubeBlock.posterImage}
-						duration={youtubeBlock.duration}
-						mediaTitle={youtubeBlock.mediaTitle}
-						altText={youtubeBlock.altText}
+						id={youTubeAtom.id}
+						assetId={youTubeAtom.assetId}
+						channelId={youTubeAtom.channelId}
+						expired={youTubeAtom.expired}
+						overrideImage={youTubeAtom.overrideImage}
+						posterImage={youTubeAtom.posterImage}
+						duration={youTubeAtom.duration}
+						mediaTitle={youTubeAtom.mediaTitle}
+						altText={youTubeAtom.altText}
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.youtubeBlockElement.map((youtubeBlock, index) => (
-				<HydrateOnce
-					key={index}
-					root="youtube-block"
-					index={youtubeBlock.youtubeIndex}
-				>
-					<YoutubeBlockComponent
-						format={format}
-						palette={palette}
-						hideCaption={false}
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						adTargeting={adTargeting}
-						isMainMedia={false}
-						id={youtubeBlock.id}
-						assetId={youtubeBlock.assetId}
-						channelId={youtubeBlock.channelId}
-						expired={youtubeBlock.expired}
-						overrideImage={youtubeBlock.overrideImage}
-						posterImage={youtubeBlock.posterImage}
-						duration={youtubeBlock.duration}
-						mediaTitle={youtubeBlock.mediaTitle}
-						altText={youtubeBlock.altText}
-					/>
-				</HydrateOnce>
-			))}
-			{CAPI.quizAtoms.map((quizAtoms, index) => (
-				<HydrateOnce
-					key={index}
-					root="quiz-atom"
-					index={quizAtoms.quizIndex}
-				>
+
+			{quizAtoms.map((quizAtom) => (
+				<HydrateOnce rootId={quizAtom.elementId}>
 					<>
-						{quizAtoms.quizType === 'personality' && (
+						{quizAtom.quizType === 'personality' && (
 							<PersonalityQuizAtom
-								id={quizAtoms.id}
-								questions={quizAtoms.questions}
-								resultBuckets={quizAtoms.resultBuckets}
+								id={quizAtom.id}
+								questions={quizAtom.questions}
+								resultBuckets={quizAtom.resultBuckets}
 							/>
 						)}
-						{quizAtoms.quizType === 'knowledge' && (
+						{quizAtom.quizType === 'knowledge' && (
 							<KnowledgeQuizAtom
-								id={quizAtoms.id}
-								questions={quizAtoms.questions}
+								id={quizAtom.id}
+								questions={quizAtom.questions}
 							/>
 						)}
 					</>
 				</HydrateOnce>
 			))}
 			{NAV.subNavSections && (
-				<HydrateOnce root="sub-nav-root">
+				<HydrateOnce rootId="sub-nav-root">
 					<>
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -505,36 +555,32 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</HydrateOnce>
 			)}
 			{CAPI.matchUrl && (
-				<Portal root="match-nav">
+				<Portal rootId="match-nav">
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
 				</Portal>
 			)}
-			{CAPI.richLinks.map((link, index) => (
-				<Portal
-					key={index}
-					root="rich-link"
-					richLinkIndex={link.richLinkIndex}
-				>
+			{CAPI.richLinks.map((richLink, index) => (
+				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
-						element={link}
+						element={richLink}
 						pillar={pillar}
 						ajaxEndpoint={CAPI.config.ajaxUrl}
 						richLinkIndex={index}
 					/>
 				</Portal>
 			))}
-			{CAPI.callouts.map((callout) => (
-				<HydrateOnce root="callout" index={callout.calloutIndex}>
+			{callouts.map((callout) => (
+				<HydrateOnce rootId={callout.elementId}>
 					<CalloutBlockComponent callout={callout} pillar={pillar} />
 				</HydrateOnce>
 			))}
-			{CAPI.chartAtoms.map((chart) => (
-				<HydrateOnce root="chart-atom" index={chart.chartIndex}>
-					<ChartAtom id={chart.id} html={chart.html} />
+			{chartAtoms.map((chartAtom) => (
+				<HydrateOnce rootId={chartAtom.elementId}>
+					<ChartAtom id={chartAtom.id} html={chartAtom.html} />
 				</HydrateOnce>
 			))}
-			{CAPI.audioAtoms.map((audioAtom) => (
-				<HydrateOnce root="audio-atom" index={audioAtom.audioIndex}>
+			{audioAtoms.map((audioAtom) => (
+				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper
 						id={audioAtom.id}
 						trackUrl={audioAtom.trackUrl}
@@ -547,8 +593,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.qandaAtoms.map((qandaAtom) => (
-				<HydrateOnce root="qanda-atom" index={qandaAtom.qandaIndex}>
+			{qandaAtoms.map((qandaAtom) => (
+				<HydrateOnce rootId={qandaAtom.elementId}>
 					<QandaAtom
 						id={qandaAtom.id}
 						title={qandaAtom.title}
@@ -574,8 +620,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.guideAtoms.map((guideAtom) => (
-				<HydrateOnce root="guide-atom" index={guideAtom.guideIndex}>
+			{guideAtoms.map((guideAtom) => (
+				<HydrateOnce rootId={guideAtom.elementId}>
 					<GuideAtom
 						id={guideAtom.id}
 						title={guideAtom.title}
@@ -601,11 +647,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.profileAtoms.map((profileAtom) => (
-				<HydrateOnce
-					root="profile-atom"
-					index={profileAtom.profileIndex}
-				>
+			{profileAtoms.map((profileAtom) => (
+				<HydrateOnce rootId={profileAtom.elementId}>
 					<ProfileAtom
 						id={profileAtom.id}
 						title={profileAtom.title}
@@ -631,11 +674,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.timelineAtoms.map((timelineAtom) => (
-				<HydrateOnce
-					root="timeline-atom"
-					index={timelineAtom.timelineIndex}
-				>
+			{timelineAtoms.map((timelineAtom) => (
+				<HydrateOnce rootId={timelineAtom.elementId}>
 					<TimelineAtom
 						id={timelineAtom.id}
 						title={timelineAtom.title}
@@ -660,189 +700,165 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.documentBlockElements.map((element) => (
-				<HydrateOnce
-					root="document-block-element"
-					index={element.documentIndex}
-				>
+			{documents.map((document) => (
+				<HydrateOnce rootId={document.elementId}>
 					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
+						role={document.role}
+						isTracking={document.isThirdPartyTracking}
+						source={document.source}
+						sourceDomain={document.sourceDomain}
 						abTests={CAPI.config.abTests}
 					>
 						<DocumentBlockComponent
-							embedUrl={element.embedUrl}
-							height={element.height}
-							width={element.width}
-							title={element.title}
+							embedUrl={document.embedUrl}
+							height={document.height}
+							width={document.width}
+							title={document.title}
 						/>
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{CAPI.embedBlockElements.map((element) => (
-				<HydrateOnce
-					root="embed-block-element"
-					index={element.embedIndex}
-				>
-					{element.safe ? (
+			{embeds.map((embed, index) => (
+				<HydrateOnce rootId={embed.elementId}>
+					{embed.safe ? (
 						<ClickToView
-							role={element.role}
-							isTracking={element.isThirdPartyTracking}
-							source={element.source}
-							sourceDomain={element.sourceDomain}
+							role={embed.role}
+							isTracking={embed.isThirdPartyTracking}
+							source={embed.source}
+							sourceDomain={embed.sourceDomain}
 							abTests={CAPI.config.abTests}
 						>
 							<EmbedBlockComponent
-								key={element.embedIndex}
-								html={element.html}
-								alt={element.alt}
+								html={embed.html}
+								alt={embed.alt}
 							/>
 						</ClickToView>
 					) : (
 						<ClickToView
-							role={element.role}
-							isTracking={element.isThirdPartyTracking}
-							source={element.source}
-							sourceDomain={element.sourceDomain}
+							role={embed.role}
+							isTracking={embed.isThirdPartyTracking}
+							source={embed.source}
+							sourceDomain={embed.sourceDomain}
 							abTests={CAPI.config.abTests}
 							onAccept={() =>
 								updateIframeHeight(
-									`iframe[name="unsafe-embed-${
-										element.embedIndex || 0
-									}"]`,
+									`iframe[name="unsafe-embed-${index}"]`,
 								)
 							}
 						>
 							<UnsafeEmbedBlockComponent
-								key={element.embedIndex}
-								html={element.html}
-								alt={element.alt || ''}
-								index={element.embedIndex || 0}
+								key={embed.elementId}
+								html={embed.html}
+								alt={embed.alt || ''}
+								index={index}
 							/>
 						</ClickToView>
 					)}
 				</HydrateOnce>
 			))}
-			{CAPI.instagramBlockElements.map((element) => (
-				<HydrateOnce
-					root="instagram-block-element"
-					index={element.instagramIndex}
-				>
+			{instas.map((insta, index) => (
+				<HydrateOnce rootId={insta.elementId}>
 					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
+						role={insta.role}
+						isTracking={insta.isThirdPartyTracking}
+						source={insta.source}
+						sourceDomain={insta.sourceDomain}
 						abTests={CAPI.config.abTests}
 						onAccept={() =>
 							updateIframeHeight(
-								`iframe[name="instagram-embed-${
-									element.instagramIndex || 0
-								}"]`,
+								`iframe[name="instagram-embed-${index}"]`,
 							)
 						}
 					>
 						<InstagramBlockComponent
-							key={element.instagramIndex}
-							element={element}
-							index={element.instagramIndex || 0}
+							element={insta}
+							index={index}
 						/>
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{CAPI.mapBlockElements.map((element) => (
-				<HydrateOnce root="map-block-element" index={element.mapIndex}>
+			{maps.map((map) => (
+				<HydrateOnce rootId={map.elementId}>
 					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
+						role={map.role}
+						isTracking={map.isThirdPartyTracking}
+						source={map.source}
+						sourceDomain={map.sourceDomain}
 						abTests={CAPI.config.abTests}
 					>
 						<MapEmbedBlockComponent
 							format={format}
 							palette={palette}
-							embedUrl={element.embedUrl}
-							height={element.height}
-							width={element.width}
-							caption={element.caption}
-							credit={element.source}
-							title={element.title}
+							embedUrl={map.embedUrl}
+							height={map.height}
+							width={map.width}
+							caption={map.caption}
+							credit={map.source}
+							title={map.title}
 						/>
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{CAPI.spotifyBlockElements.map((element) => (
-				<HydrateOnce
-					root="spotify-block-element"
-					index={element.spotifyIndex}
-				>
+			{spotifies.map((spotify) => (
+				<HydrateOnce rootId={spotify.elementId}>
 					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
+						role={spotify.role}
+						isTracking={spotify.isThirdPartyTracking}
+						source={spotify.source}
+						sourceDomain={spotify.sourceDomain}
 						abTests={CAPI.config.abTests}
 					>
 						<SpotifyBlockComponent
-							embedUrl={element.embedUrl}
-							height={element.height}
-							width={element.width}
-							title={element.title}
+							embedUrl={spotify.embedUrl}
+							height={spotify.height}
+							width={spotify.width}
+							title={spotify.title}
 							format={format}
 							palette={palette}
-							caption={element.caption}
+							caption={spotify.caption}
 							credit="Spotify"
 						/>
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{CAPI.videoFacebookBlockElements.map((element) => (
-				<HydrateOnce
-					root="video-facebook-block-element"
-					index={element.videoFacebookIndex}
-				>
+			{facebookVideos.map((facebookVideo) => (
+				<HydrateOnce rootId={facebookVideo.elementId}>
 					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
+						role={facebookVideo.role}
+						isTracking={facebookVideo.isThirdPartyTracking}
+						source={facebookVideo.source}
+						sourceDomain={facebookVideo.sourceDomain}
 						abTests={CAPI.config.abTests}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
 							palette={palette}
-							embedUrl={element.embedUrl}
-							height={element.height}
-							width={element.width}
-							caption={element.caption}
-							credit={element.caption}
-							title={element.caption}
+							embedUrl={facebookVideo.embedUrl}
+							height={facebookVideo.height}
+							width={facebookVideo.width}
+							caption={facebookVideo.caption}
+							credit={facebookVideo.caption}
+							title={facebookVideo.caption}
 						/>
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{CAPI.vineBlockElements.map((element) => (
-				<HydrateOnce
-					root="vine-block-element"
-					index={element.vineBlockIndex}
-				>
+			{vines.map((vine) => (
+				<HydrateOnce rootId={vine.elementId}>
 					<ClickToView
 						// No role given by CAPI
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
-						isTracking={element.isThirdPartyTracking}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
+						isTracking={vine.isThirdPartyTracking}
+						source={vine.source}
+						sourceDomain={vine.sourceDomain}
 						abTests={CAPI.config.abTests}
 					>
-						<VineBlockComponent element={element} />
+						<VineBlockComponent element={vine} />
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			<Portal root="most-viewed-right">
+			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
 						<MostViewedRightWrapper pillar={pillar} />
@@ -850,7 +866,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</Lazy>
 			</Portal>
 			{CAPI.matchUrl && (
-				<Portal root="match-stats">
+				<Portal rootId="match-stats">
 					<Lazy margin={300}>
 						<Suspense fallback={<Placeholder height={800} />}>
 							<GetMatchStats matchUrl={CAPI.matchUrl} />
@@ -858,7 +874,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</Lazy>
 				</Portal>
 			)}
-			<Portal root="slot-body-end">
+			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
 					isSignedIn={isSignedIn}
 					countryCode={countryCode}
@@ -872,7 +888,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				/>
 			</Portal>
 			<Portal
-				root={
+				rootId={
 					isSignedIn
 						? 'onwards-upper-whensignedin'
 						: 'onwards-upper-whensignedout'
@@ -898,7 +914,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</Lazy>
 			</Portal>
 			<Portal
-				root={
+				rootId={
 					isSignedIn
 						? 'onwards-lower-whensignedin'
 						: 'onwards-lower-whensignedout'
@@ -915,10 +931,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</Suspense>
 				</Lazy>
 			</Portal>
-			<Portal root="sign-in-gate">
+			<Portal rootId="sign-in-gate">
 				<SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
 			</Portal>
-			<HydrateOnce root="comments" waitFor={[user]}>
+			<HydrateOnce rootId="comments" waitFor={[user]}>
 				<Discussion
 					discussionApiUrl={CAPI.config.discussionApiUrl}
 					shortUrlId={CAPI.config.shortUrlId}
@@ -937,7 +953,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					display={display}
 				/>
 			</HydrateOnce>
-			<Portal root="most-viewed-footer">
+			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
 					pillar={pillar}
 					sectionName={CAPI.sectionName}
@@ -945,7 +961,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					display={display}
 				/>
 			</Portal>
-			<Portal root="reader-revenue-links-footer">
+			<Portal rootId="reader-revenue-links-footer">
 				<Lazy margin={300}>
 					<ReaderRevenueLinks
 						urls={CAPI.nav.readerRevenueLinks.footer}
@@ -955,7 +971,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</Lazy>
 			</Portal>
-			<Portal root="bottom-banner">
+			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
 					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
