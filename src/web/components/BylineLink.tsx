@@ -9,6 +9,38 @@ const getContributorTags = (tags: TagType[]): TagType[] => {
 	return tags.filter((t) => t.type === 'Contributor');
 };
 
+const applyCleverOrderingForMatching = (titles: string[]): string[] => {
+
+	/*
+		Q: Why does this function exist ?
+
+		A: We had a case where the byline was "Sam Levin in Los Angeles and Sam Levine in New York",
+		which would lead to the regex: Sam Levin|Sam Levine. Unfortunately the first expression would take priority and we would end up
+		with a bylineAsTokens equal to [
+			'',
+			'Sam Levin',
+			' in Los Angeles and ',
+			'Sam Levin',
+			'e in New York'
+		]
+
+		The solution here is simply to order the titles in decreasing lenght. This ensures that in a case where one name is a substring or another
+		name, then the longest name is tried first, preventing the problem we had. We now have a bylineAsTokens equals to [
+			'',
+			'Sam Levin',
+			' in Los Angeles and ',
+			'Sam Levine',
+			' in New York'
+		]
+
+		This function doesn't change any thing for the "standard" case, but solves the "Sam Levin|Sam Levine" case and similar cases.
+	*/
+
+	return titles.sort((a, b) => {
+		return a.localeCompare(b);
+	  }).reverse();
+}
+
 // This crazy function aims to split bylines such as
 // 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
 // Or
@@ -17,7 +49,8 @@ const getContributorTags = (tags: TagType[]): TagType[] => {
 const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 	const titles = getContributorTags(tags).map((c) => c.title);
 	// The contributor tag title should exist inside the byline for this regex to work
-	const regex = new RegExp(`(${titles.join('|')})`);
+
+	const regex = new RegExp(`(${applyCleverOrderingForMatching(titles).join('|')})`);
 
 	return byline.split(regex);
 };
