@@ -49,6 +49,7 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { NavGroupEager } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
+import { getZIndex } from '../lib/getZIndex';
 
 const StandardGrid = ({
 	children,
@@ -286,6 +287,8 @@ const ageWarningMargins = css`
 
 const stickyNavRootStyle = css`
 	display: inline;
+	position: relative;
+	${getZIndex('stickyNavWrapper')}
 `;
 
 interface Props {
