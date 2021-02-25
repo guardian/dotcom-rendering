@@ -135,6 +135,7 @@ export const ClickToView = ({
 					padding: ${space[3]}px;
 					margin-bottom: 8px;
 				`}
+				data-cy="click-to-view"
 			>
 				<div
 					className={css`
@@ -192,6 +193,7 @@ export const ClickToView = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={() => handleClick()}
+						data-cy="click-to-view-button"
 					>
 						{roleButtonText(role)}
 					</Button>
