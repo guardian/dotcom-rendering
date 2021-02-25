@@ -319,4 +319,4 @@ function parseAtom(
 	}
 }
 
-export { parseAtom };
+export { parseAtom, formatOptionalDate };
