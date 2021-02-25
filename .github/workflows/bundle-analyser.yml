@@ -23,8 +23,8 @@ jobs:
             - name: Generate production build
               run: make build
 
-						- name: Archive code coverage results
-							uses: actions/upload-artifact@v2
-							with:
-								name: bundle-analyser-report
-								path: dist/browser-bundles.html
+            - name: Archive code coverage results
+              uses: actions/upload-artifact@v2
+              with:
+                name: bundle-analyser-report
+                path: dist/browser-bundles.html
