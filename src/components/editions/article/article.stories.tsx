@@ -105,6 +105,13 @@ const Gallery = (): ReactElement => (
 	/>
 );
 
+Gallery.parameters = {
+	backgrounds: {
+		default: 'gallery-template-bg',
+		values: [{ name: 'gallery-template-bg', value: '#121212' }],
+	},
+};
+
 // ----- Exports ----- //
 
 export default {
