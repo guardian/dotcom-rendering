@@ -96,7 +96,7 @@ const Comment = (): ReactElement => (
 	/>
 );
 
-const Media = (): ReactElement => (
+const Gallery = (): ReactElement => (
 	<Article
 		item={{
 			...media,
@@ -122,5 +122,5 @@ export {
 	Showcase,
 	Interview,
 	Comment,
-	Media,
+	Gallery,
 };
