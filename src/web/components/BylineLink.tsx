@@ -23,7 +23,7 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 			'e in New York'
 		]
 
-		The solution here is simply to order the titles in decreasing lenght. This ensures that in a case where one name is a substring or another
+		The solution here is simply to order the titles in decreasing length. This ensures that in a case where one name is a substring or another
 		name, then the longest name is tried first, preventing the problem we had. We now have a bylineAsTokens equals to [
 			'',
 			'Sam Levin',
