@@ -33,6 +33,9 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 		]
 
 		This function doesn't change any thing for the "standard" case, but solves the "Sam Levin|Sam Levine" case and similar cases.
+
+		ps: If one day another problem comes up whose solution would be incompatible with this correction, then a better solution for the matching
+		will have to be invented from the ground up, but for the moment, this will do :)
 	*/
 
 	return titles
