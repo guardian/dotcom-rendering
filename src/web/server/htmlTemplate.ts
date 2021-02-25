@@ -214,6 +214,15 @@ export const htmlTemplate = ({
                     })(window, document);
                 </script>
 
+				<script>
+					window.curlConfig = {
+						baseUrl: '${CDN}assets',
+						apiName: 'require'
+					};
+					window.curl = window.curlConfig;
+				</script>
+
+
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
 						keywords,
