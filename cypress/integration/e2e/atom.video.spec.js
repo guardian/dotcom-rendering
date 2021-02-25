@@ -19,10 +19,6 @@ describe('Video', function () {
 		beforeEach(function () {
 			disableCMP();
 		});
-		it('should render', function () {
-			cy.visit(`/Article?url=${mainMediaVideo}`);
-			cy.get(`[id^="youtube-block"]`).should('be.visible');
-		});
 
 		it('should dispatch play to server', function () {
 			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
@@ -54,11 +50,6 @@ describe('Video', function () {
 	describe('Embed youtube video', function () {
 		beforeEach(function () {
 			disableCMP();
-		});
-		it('should render', function () {
-			cy.visit(`/Article?url=${embedMediaVideo}`);
-			cy.get(`#youtube-block-41`).scrollIntoView();
-			cy.get(`#youtube-block-41`).should('be.visible');
 		});
 
 		it('should dispatch play to server', function () {
