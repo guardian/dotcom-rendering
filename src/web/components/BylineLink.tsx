@@ -40,7 +40,7 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 
 	return titles
 		.sort((a, b) => {
-			return a.localeCompare(b);
+			return a.length - b.length;
 		})
 		.reverse();
 };
