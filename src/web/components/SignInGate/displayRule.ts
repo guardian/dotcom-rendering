@@ -4,8 +4,8 @@ import {
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
 import { getCountryCodeFromLocalStorage } from '@frontend/web/lib/getCountryCode';
-import { CurrentABTest } from "@root/src/web/components/SignInGate/gateDesigns/types";
-import { hasUserDismissedGateMoreThanCount } from "@root/src/web/components/SignInGate/dismissGate";
+import { CurrentABTest } from '@root/src/web/components/SignInGate/gateDesigns/types';
+import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {

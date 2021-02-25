@@ -2,7 +2,7 @@ import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
-import { SignInGateCopyOptVar } from "./gateDesigns/copy-opt-test/SignInGateCopyOptVar";
+import { SignInGateCopyOptVar } from './gateDesigns/copy-opt-test/SignInGateCopyOptVar';
 
 export default {
 	component: SignInGateSelector,

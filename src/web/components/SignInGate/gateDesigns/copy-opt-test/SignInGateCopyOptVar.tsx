@@ -28,17 +28,20 @@ export const SignInGateCopyOptVar = ({
 	ophanComponentId,
 	isComment,
 	signInGateCopy,
-}: SignInGateProps
-) => {
+}: SignInGateProps) => {
 	return (
-		<div className={signInGateContainer} data-cy={`sign-in-gate-${abTest?.variant}`}>
+		<div
+			className={signInGateContainer}
+			data-cy={`sign-in-gate-${abTest?.variant}`}
+		>
 			<style>{hideElementsCss}</style>
 			<div className={firstParagraphOverlay(!!isComment)} />
 			<h1 className={headingStyles}>{signInGateCopy?.header}</h1>
 			<p className={bodyBold}>{signInGateCopy?.subHeader}</p>
-			{signInGateCopy?.paragraphs.map(paragraph => {
-				return <p className={bodyText}>{paragraph}</p>
-			})};
+			{signInGateCopy?.paragraphs.map((paragraph) => {
+				return <p className={bodyText}>{paragraph}</p>;
+			})}
+			;
 			<div className={actionButtons}>
 				<LinkButton
 					data-cy={`sign-in-gate-${abTest?.variant}_register`}
@@ -66,11 +69,9 @@ export const SignInGateCopyOptVar = ({
 					I’ll do it later
 				</LinkButton>
 			</div>
-
 			<p className={cx([bodyBold, signInHeader])}>
 				Have a subscription? Made a contribution? Already registered?
 			</p>
-
 			<Link
 				data-cy={`sign-in-gate-${abTest?.variant}_signin`}
 				className={signInLink}
@@ -81,7 +82,6 @@ export const SignInGateCopyOptVar = ({
 			>
 				Sign In
 			</Link>
-
 			<div className={faq}>
 				<Link
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}

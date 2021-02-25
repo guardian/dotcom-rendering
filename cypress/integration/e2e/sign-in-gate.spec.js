@@ -184,7 +184,6 @@ describe('Sign In Gate Tests', function () {
 		});
 	});
 
-
 	describe('Sign In Gate Copy Test', function () {
 		beforeEach(function () {
 			disableCMP();
