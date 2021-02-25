@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+// import { load } from 'bare-amd-loader';
 
 type Props = {
 	url?: string;
 	scriptUrl?: string;
-	role?: RoleType;
 	alt?: string;
-	index?: number;
 };
 
 /*
@@ -46,43 +45,60 @@ https://gist.github.com/gtrufitt/c8f08caef0ae810a42fde5a4c0549ad0
 
 THE STANDARD BOOT.js
 boot.js is defined from https://github.com/guardian/interactive-boot-scripts/blob/master/iframe-wrapper/boot.js
-and is sent with all interactive elements in the scriptUrl from CAPI to do a number of things:
+and is sent with all interactive elements in the scriptUrl from CAPI to do a two simple things:
 - Create an iframe using the href of the anchor and set the src
-- Add event listener to the window to listen for 'message'
-- TBC
+- Add event listener to the window to listen for 'message' of the following types
+	- set-height
+	- navigate
+	- scroll-to
+	- get-location
+	- get-position
+	- monitor-position
 
 It has not been updated since 2016.
 
 MIGRATION FROM FRONTEND
-For the standard boot.js, we will re-write the behavior in modern JS to avoid the requirement of an AMD loader
+- TODO For the standard boot.js, we will re-write the behavior in modern JS to avoid the requirement of an AMD loader
 and to avoid loading the boot.js file.
+- For all other files that do not load the standard boot.js, we'll add a AMD loader to the page
 
 For the remaining few we dynamically load and AMD loader and support the contract as defined
 https://www.npmjs.com/package/bare-amd-loader
 
 */
 
-export const InteractiveBlockComponent = ({
-	url,
-	scriptUrl,
-	alt,
-	index,
-}: Props) => {
-	const [render, setRender] = useState(false);
+export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
+	const wrapperRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
-		console.log('loaded');
-		setRender(true);
-	}, []);
-	console.log(scriptUrl);
+		if (scriptUrl) {
+			// We're going to use curl AMD loader to load the script that the
+			// interactive has given us.
+			window.require(
+				[scriptUrl],
+				(interactive: {
+					boot: (
+						el: HTMLDivElement,
+						document: Document,
+						config: unknown,
+					) => void;
+				}) => {
+					if (wrapperRef.current !== null) {
+						interactive.boot(
+							wrapperRef.current,
+							document,
+							window.guardian.config,
+						);
+					}
+				},
+			);
+		}
+	}, [scriptUrl]);
+
 	return (
-		<div id={`interactive-block-${index}`}>
-			$
-			{render ? (
-				<iframe src={url} title={alt || ''} />
-			) : (
-				<p>This is an empty iframe</p>
-			)}
-			;
+		<div data-cypress="interactive-element" ref={wrapperRef}>
+			<a data-name="placeholder" href={url}>
+				{alt}
+			</a>
 		</div>
 	);
 };
