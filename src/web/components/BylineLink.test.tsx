@@ -16,6 +16,21 @@ describe('bylineAsTokens', () => {
 		expect(bylineAsTokens(byline, tags)).toEqual(tokenExpected);
 	});
 
+	it('Correctly extract the correct contributor tag when more than one tag with the same title', () => {
+		const byline = 'Paul Kagame';
+		const tags = [
+			{ id: 'world/paul-kagame', type: 'Keyword', title: 'Paul Kagame' },
+			{
+				id: 'profile/paul-kagame',
+				type: 'Contributor',
+				title: 'Paul Kagame',
+			},
+		];
+		const tokenExpected = ['', 'Paul Kagame', ''];
+		expect(bylineAsTokens(byline, tags)).toEqual(tokenExpected);
+		expect(bylineAsTokens(byline, tags.reverse())).toEqual(tokenExpected);
+	});
+
 	it('Correctly process the sam-levin/sam-levine in either tags order', () => {
 		const byline = 'Sam Levin in Los Angeles and Sam Levine in New York';
 		const tags = [
