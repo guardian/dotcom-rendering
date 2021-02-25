@@ -10,13 +10,9 @@ describe('bylineAsTokens', () => {
 				title: 'Gwyn Topham',
 				twitterHandle: 'GwynTopham',
 				bylineImageUrl: 'https://i.guim.co.uk/something',
-			  },
+			},
 		];
-		const tokenExpected = [
-			'',
-			'Gwyn Topham',
-            ' Transport correspondent',
-		];
+		const tokenExpected = ['', 'Gwyn Topham', ' Transport correspondent'];
 		expect(bylineAsTokens(byline, tags)).toEqual(tokenExpected);
 	});
 
