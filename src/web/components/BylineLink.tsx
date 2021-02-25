@@ -9,6 +9,13 @@ const getContributorTags = (tags: TagType[]): TagType[] => {
 	return tags.filter((t) => t.type === 'Contributor');
 };
 
+export const getContributorTagsForToken = (
+	tags: TagType[],
+	token: string,
+): TagType[] => {
+	return getContributorTags(tags).filter((t) => t.title === token);
+};
+
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 	/*
 		Q: Why does this function exist ?
@@ -76,14 +83,12 @@ const ContributorLink: React.FC<{
 
 export const BylineLink = ({ byline, tags }: Props) => {
 	const renderedTokens = bylineAsTokens(byline, tags).map((token, i) => {
-		const associatedTags = getContributorTags(tags).filter(
-			(t) => t.title === token,
-		);
-		if (associatedTags.length > 0) {
+		const contributorTags = getContributorTagsForToken(tags, token);
+		if (contributorTags.length > 0) {
 			return (
 				<ContributorLink
 					contributor={token}
-					contributorTagId={associatedTags[0].id}
+					contributorTagId={contributorTags[0].id}
 					key={i}
 				/>
 			);

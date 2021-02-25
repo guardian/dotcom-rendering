@@ -1,4 +1,4 @@
-import { bylineAsTokens } from './BylineLink';
+import { bylineAsTokens, getContributorTagsForToken } from './BylineLink';
 
 describe('bylineAsTokens', () => {
 	it('Correctly performs the standard one contributor case', () => {
@@ -12,8 +12,8 @@ describe('bylineAsTokens', () => {
 				bylineImageUrl: 'https://i.guim.co.uk/something',
 			},
 		];
-		const tokenExpected = ['', 'Gwyn Topham', ' Transport correspondent'];
-		expect(bylineAsTokens(byline, tags)).toEqual(tokenExpected);
+		const tokensExpected = ['', 'Gwyn Topham', ' Transport correspondent'];
+		expect(bylineAsTokens(byline, tags)).toEqual(tokensExpected);
 	});
 
 	it('Correctly extract the correct contributor tag when more than one tag with the same title', () => {
@@ -26,9 +26,23 @@ describe('bylineAsTokens', () => {
 				title: 'Paul Kagame',
 			},
 		];
-		const tokenExpected = ['', 'Paul Kagame', ''];
-		expect(bylineAsTokens(byline, tags)).toEqual(tokenExpected);
-		expect(bylineAsTokens(byline, tags.reverse())).toEqual(tokenExpected);
+		const tokensExpected = ['', 'Paul Kagame', ''];
+		expect(bylineAsTokens(byline, tags)).toEqual(tokensExpected);
+
+		const token = 'Paul Kagame';
+		const contributorTagsExpected = [
+			{
+				id: 'profile/paul-kagame',
+				type: 'Contributor',
+				title: 'Paul Kagame',
+			},
+		];
+		expect(getContributorTagsForToken(tags, token)).toEqual(
+			contributorTagsExpected,
+		);
+		expect(getContributorTagsForToken(tags.reverse(), token)).toEqual(
+			contributorTagsExpected,
+		);
 	});
 
 	it('Correctly process the sam-levin/sam-levine in either tags order', () => {
@@ -47,14 +61,14 @@ describe('bylineAsTokens', () => {
 				title: 'Sam Levine',
 			},
 		];
-		const tokenExpected = [
+		const tokensExpected = [
 			'',
 			'Sam Levin',
 			' in Los Angeles and ',
 			'Sam Levine',
 			' in New York',
 		];
-		expect(bylineAsTokens(byline, tags)).toEqual(tokenExpected);
-		expect(bylineAsTokens(byline, tags.reverse())).toEqual(tokenExpected);
+		expect(bylineAsTokens(byline, tags)).toEqual(tokensExpected);
+		expect(bylineAsTokens(byline, tags.reverse())).toEqual(tokensExpected);
 	});
 });
