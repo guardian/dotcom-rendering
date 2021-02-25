@@ -75,8 +75,6 @@ const ContributorLink: React.FC<{
 );
 
 export const BylineLink = ({ byline, tags }: Props) => {
-	console.log(byline);
-	console.log(tags);
 	const renderedTokens = bylineAsTokens(byline, tags).map((token, i) => {
 		const associatedTags = getContributorTags(tags).filter(
 			(t) => t.title === token,
