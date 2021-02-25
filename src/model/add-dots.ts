@@ -1,23 +1,29 @@
-// Check if the block contains a dot, replace with an empty span with a bullet attribute
+// Check if the block contains a dot
 const hasDots = (element: CAPIElement): boolean => {
 	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
 		return false;
 
 	if (element.html.includes('•')) {
-		element.html = element.html.replace(
+		return true;
+	}
+	return false;
+};
+
+// Replace dot with empty span
+const transformDot = (element: string): string => {
+	if (element.includes('•')) {
+		element = element.replace(
 			new RegExp('[•]', 'g'),
 			'<span data-dcr-style="bullet"></span>',
 		);
-		return true;
 	}
-
-	return false;
+	return element;
 };
 
 const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 	// Loop over elements and check if a dot is in the TextBlockElement
 	const enhanced: CAPIElement[] = [];
-	elements.forEach((element) => {
+	elements.map((element) => {
 		if (
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
@@ -25,6 +31,7 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 		) {
 			enhanced.push({
 				...element,
+				html: transformDot(element.html),
 			});
 		} else {
 			enhanced.push(element);
@@ -33,19 +40,8 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-// On rare occasions the standfirst uses dots so it is also checked
-const checkStandFirstForDots = (standFirst: string) => {
-	if (standFirst.includes('•')) {
-		return standFirst.replace(
-			new RegExp('[•]', 'g'),
-			'<span data-dcr-style="bullet"></span>',
-		);
-	}
-	return standFirst;
-};
-
 export const addDots = (data: CAPIType): CAPIType => {
-	data.standfirst = checkStandFirstForDots(data.standfirst);
+	data.standfirst = transformDot(data.standfirst);
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,
