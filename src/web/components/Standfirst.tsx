@@ -5,16 +5,18 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Theme } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
+import { pillarPalette } from '@root/src/lib/pillars';
 
 type Props = {
 	display: Display;
 	design: Design;
+	theme: Theme;
 	standfirst: string;
 };
 
-const nestedStyles = css`
+const nestedStyles = (theme: Theme) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -41,6 +43,16 @@ const nestedStyles = css`
 
 	strong {
 		font-weight: bold;
+	}
+
+	[data-dcr-style='bullet'] {
+		display: inline-block;
+		content: '';
+		border-radius: 0.375rem;
+		height: 0.75rem;
+		width: 0.75rem;
+		margin-right: 0.125rem;
+		background-color: ${pillarPalette[theme].main};
 	}
 `;
 
@@ -99,10 +111,10 @@ const standfirstStyles = (design: Design, display: Display) => {
 	}
 };
 
-export const Standfirst = ({ display, design, standfirst }: Props) => (
+export const Standfirst = ({ display, design, standfirst, theme }: Props) => (
 	<div
 		data-print-layout="hide"
-		className={cx(nestedStyles, standfirstStyles(design, display))}
+		className={cx(nestedStyles(theme), standfirstStyles(design, display))}
 		// eslint-disable-next-line react/no-danger
 		dangerouslySetInnerHTML={{
 			__html: sanitise(standfirst, {

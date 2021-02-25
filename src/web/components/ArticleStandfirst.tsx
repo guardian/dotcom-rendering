@@ -36,6 +36,11 @@ export const ArticleStandfirst = ({
 	standfirst,
 }: Props) => (
 	<div className={cx(standfirstStyles, standfirstLinks[pillar])}>
-		<Standfirst display={display} design={design} standfirst={standfirst} />
+		<Standfirst
+			display={display}
+			design={design}
+			standfirst={standfirst}
+			theme={pillar}
+		/>
 	</div>
 );

@@ -5,7 +5,7 @@ import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Special } from '@guardian/types';
 
-import { neutralBorder } from '@root/src/lib/pillars';
+import { neutralBorder, pillarPalette } from '@root/src/lib/pillars';
 import {
 	ListStyle,
 	LinkStyle,
@@ -27,6 +27,17 @@ const standfirstCss = (pillar: Theme) => css`
 
 	${ListStyle(neutralBorder(pillar))};
 	${LinkStyle(pillar)};
+
+	/* Styles for bullets, these are usually used on opinion articles */
+	[data-dcr-style='bullet'] {
+		display: inline-block;
+		content: '';
+		border-radius: 0.375rem;
+		height: 0.75rem;
+		width: 0.75rem;
+		margin-right: 0.125rem;
+		background-color: ${pillarPalette[pillar].main};
+	}
 `;
 
 // Labs paid content only
