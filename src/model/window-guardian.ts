@@ -86,17 +86,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			.filter((element) => element._type === blockElementType) as T[];
 	};
 
-	// If our element type is one that can contain third party content that can track user, but hasn't been marked
-	// as 'tracking' by the back-end, we remove it from the array of elements that we'll hydrate on the client-side.
-	// https://github.com/guardian/dotcom-rendering/blob/click-to-view-for-all-element-types/docs/architecture/025-click-to-view.md#click-to-view-component
-	const thirdPartyTrackingElementsOnly = <
-		T extends ThirdPartyEmbeddedContent
-	>(
-		elements: T[],
-	): T[] => {
-		return elements.filter((element) => element.isThirdPartyTracking);
-	};
-
 	return {
 		designType: CAPI.designType,
 		pillar: CAPI.pillar,
@@ -239,54 +228,40 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			},
 			[] as YoutubeBlockElement[],
 		),
-		documentBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.DocumentBlockElement',
-				'documentIndex',
-			),
+		documentBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.DocumentBlockElement',
+			'documentIndex',
 		),
-		embedBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.EmbedBlockElement',
-				'embedIndex',
-			),
+		embedBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.EmbedBlockElement',
+			'embedIndex',
 		),
-		instagramBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.InstagramBlockElement',
-				'instagramIndex',
-			),
+		instagramBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.InstagramBlockElement',
+			'instagramIndex',
 		),
-		mapBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.MapBlockElement',
-				'mapIndex',
-			),
+		mapBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.MapBlockElement',
+			'mapIndex',
 		),
-		spotifyBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.SpotifyBlockElement',
-				'spotifyIndex',
-			),
+		spotifyBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.SpotifyBlockElement',
+			'spotifyIndex',
 		),
-		videoFacebookBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-				'videoFacebookIndex',
-			),
+		videoFacebookBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
+			'videoFacebookIndex',
 		),
-		vineBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.VineBlockElement',
-				'vineBlockIndex',
-			),
+		vineBlockElements: blockElementWithIndex(
+			CAPI.blocks,
+			'model.dotcomrendering.pageElements.VineBlockElement',
+			'vineBlockIndex',
 		),
 	};
 };
