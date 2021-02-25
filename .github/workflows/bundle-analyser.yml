@@ -28,12 +28,3 @@ jobs:
               with:
                 name: bundle-analyser-report
                 path: dist/browser-bundles.html
-
-            - uses: actions/download-artifact@v2
-              id: download
-              with: 
-                name: 'bundle-analyser-report'
-                path: path/to/artifacts
-
-            - name: 'Echo download path'
-              run: echo ${{steps.download.outputs.download-path}}
