@@ -15,11 +15,11 @@ const isReady = (dependencies: unknown[]): boolean => {
 };
 
 /**
- * Finds the element with the same id as `root` and calls `ReactDOM.hydrate(children, element)`. Only
+ * Finds the element with the same id as `rootId` and calls `ReactDOM.hydrate(children, element)`. Only
  * executes once and only after all variables in `waitFor` are defined.
- * @param {String} root - The id of the element to hydrate
+ * @param {String} rootId - The id of the element to hydrate
+ * @param {String} name - Used to log out performance data via `initPerf()`
  * @param children - The react elements passed to ReactDOM.hydrate()
- * @param {number} index - Used when there are multiple elements the same (eg. RichLinks)
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
 export const HydrateOnce = ({
