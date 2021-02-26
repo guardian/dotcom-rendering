@@ -93,7 +93,10 @@ export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 	}, [scriptUrl]);
 
 	return (
-		<div data-cypress="interactive-element" ref={wrapperRef}>
+		<div
+			data-cypress={`interactive-element-${encodeURI(alt)}`}
+			ref={wrapperRef}
+		>
 			<a data-name="placeholder" href={url}>
 				{alt}
 			</a>
