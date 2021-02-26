@@ -1,14 +1,3 @@
-// Check if the block contains a dot
-const hasDots = (element: CAPIElement): boolean => {
-	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
-		return false;
-
-	if (element.html.includes('•')) {
-		return true;
-	}
-	return false;
-};
-
 // Replace dot with empty span
 const transformDot = (element: string): string => {
 	if (element.includes('•')) {
@@ -27,7 +16,7 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 		if (
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
-			hasDots(element)
+			element.html.includes('•')
 		) {
 			enhanced.push({
 				...element,
