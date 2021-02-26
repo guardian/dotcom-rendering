@@ -1311,12 +1311,12 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
         <div
           className="emotion-25"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
+          data-atom-type="profile"
         >
           <details
             className="emotion-26"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
+            data-snippet-type="profile"
           >
             <summary
               onClick={[Function]}
@@ -1324,7 +1324,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
               <span
                 className="emotion-27"
               >
-                Quick Guide
+                Profile
               </span>
               <h4
                 className="emotion-28"
@@ -2579,12 +2579,12 @@ exports[`Storyshots Editions/Article Comment 1`] = `
         <div
           className="emotion-28"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
+          data-atom-type="profile"
         >
           <details
             className="emotion-29"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
+            data-snippet-type="profile"
           >
             <summary
               onClick={[Function]}
@@ -2592,7 +2592,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
               <span
                 className="emotion-30"
               >
-                Quick Guide
+                Profile
               </span>
               <h4
                 className="emotion-31"
@@ -3728,12 +3728,12 @@ exports[`Storyshots Editions/Article Default 1`] = `
         <div
           className="emotion-25"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
+          data-atom-type="profile"
         >
           <details
             className="emotion-26"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
+            data-snippet-type="profile"
           >
             <summary
               onClick={[Function]}
@@ -3741,7 +3741,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
               <span
                 className="emotion-27"
               >
-                Quick Guide
+                Profile
               </span>
               <h4
                 className="emotion-28"
@@ -4877,12 +4877,12 @@ exports[`Storyshots Editions/Article Feature 1`] = `
         <div
           className="emotion-25"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
+          data-atom-type="profile"
         >
           <details
             className="emotion-26"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
+            data-snippet-type="profile"
           >
             <summary
               onClick={[Function]}
@@ -4890,7 +4890,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
               <span
                 className="emotion-27"
               >
-                Quick Guide
+                Profile
               </span>
               <h4
                 className="emotion-28"
@@ -6076,12 +6076,12 @@ exports[`Storyshots Editions/Article Interview 1`] = `
         <div
           className="emotion-27"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
+          data-atom-type="profile"
         >
           <details
             className="emotion-28"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
+            data-snippet-type="profile"
           >
             <summary
               onClick={[Function]}
@@ -6089,7 +6089,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
               <span
                 className="emotion-29"
               >
-                Quick Guide
+                Profile
               </span>
               <h4
                 className="emotion-30"
@@ -7935,12 +7935,12 @@ exports[`Storyshots Editions/Article Review 1`] = `
         <div
           className="emotion-31"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
+          data-atom-type="profile"
         >
           <details
             className="emotion-32"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
+            data-snippet-type="profile"
           >
             <summary
               onClick={[Function]}
@@ -7948,7 +7948,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
               <span
                 className="emotion-33"
               >
-                Quick Guide
+                Profile
               </span>
               <h4
                 className="emotion-34"
@@ -9090,12 +9090,12 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
         <div
           className="emotion-25"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
+          data-atom-type="profile"
         >
           <details
             className="emotion-26"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
+            data-snippet-type="profile"
           >
             <summary
               onClick={[Function]}
@@ -9103,7 +9103,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
               <span
                 className="emotion-27"
               >
-                Quick Guide
+                Profile
               </span>
               <h4
                 className="emotion-28"
