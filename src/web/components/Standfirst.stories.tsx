@@ -16,7 +16,11 @@ export const Article = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Article}
-				theme={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -30,7 +34,11 @@ export const Comment = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Comment}
-				theme={Pillar.Opinion}
+				format={{
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				}}
 				standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -44,7 +52,11 @@ export const Feature = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Feature}
-				theme={Pillar.Culture}
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				}}
 				standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -58,7 +70,11 @@ export const Immersive = () => {
 			<Standfirst
 				display={Display.Immersive}
 				design={Design.Article}
-				theme={Pillar.News}
+				format={{
+					display: Display.Immersive,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -72,7 +88,11 @@ export const Review = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Review}
-				theme={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Review,
+					theme: Pillar.Culture,
+				}}
 				standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -86,7 +106,11 @@ export const Live = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Live}
-				theme={Pillar.Culture}
+				format={{
+					display: Display.Standard,
+					design: Design.Live,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how Live standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -100,7 +124,11 @@ export const Interview = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Interview}
-				theme={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Interview,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -114,7 +142,11 @@ export const Analysis = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Analysis}
-				theme={Pillar.Culture}
+				format={{
+					display: Display.Standard,
+					design: Design.Analysis,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -128,7 +160,11 @@ export const Media = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Media}
-				theme={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.Media,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -142,7 +178,11 @@ export const Recipe = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Recipe}
-				theme={Pillar.Lifestyle}
+				format={{
+					display: Display.Standard,
+					design: Design.Recipe,
+					theme: Pillar.Lifestyle,
+				}}
 				standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -156,7 +196,11 @@ export const MatchReport = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.MatchReport}
-				theme={Pillar.Sport}
+				format={{
+					display: Display.Standard,
+					design: Design.MatchReport,
+					theme: Pillar.Sport,
+				}}
 				standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -170,7 +214,11 @@ export const Quiz = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Quiz}
-				theme={Pillar.Lifestyle}
+				format={{
+					display: Display.Standard,
+					design: Design.Quiz,
+					theme: Pillar.Lifestyle,
+				}}
 				standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -184,7 +232,11 @@ export const SpecialReport = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.Article}
-				theme={Pillar.Lifestyle}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -198,7 +250,11 @@ export const GuardianView = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.GuardianView}
-				theme={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.GuardianView,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how GuardianView standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -212,7 +268,11 @@ export const PhotoEssay = () => {
 			<Standfirst
 				display={Display.Standard}
 				design={Design.PhotoEssay}
-				theme={Pillar.News}
+				format={{
+					display: Display.Standard,
+					design: Design.PhotoEssay,
+					theme: Pillar.News,
+				}}
 				standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>

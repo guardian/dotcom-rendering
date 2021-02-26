@@ -5,18 +5,19 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { Display, Design, Theme } from '@guardian/types';
+import { Display, Design, Theme, Format } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	display: Display;
 	design: Design;
-	theme: Theme;
+	theme?: Theme;
 	standfirst: string;
+	format: Format;
 };
 
-const nestedStyles = (theme: Theme) => css`
+const nestedStyles = (format: Format) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -52,7 +53,7 @@ const nestedStyles = (theme: Theme) => css`
 		height: 0.75rem;
 		width: 0.75rem;
 		margin-right: 0.125rem;
-		background-color: ${pillarPalette[theme].main};
+		background-color: ${decidePalette(format).background};
 	}
 `;
 
@@ -111,10 +112,10 @@ const standfirstStyles = (design: Design, display: Display) => {
 	}
 };
 
-export const Standfirst = ({ display, design, standfirst, theme }: Props) => (
+export const Standfirst = ({ display, design, standfirst, format }: Props) => (
 	<div
 		data-print-layout="hide"
-		className={cx(nestedStyles(theme), standfirstStyles(design, display))}
+		className={cx(nestedStyles(format), standfirstStyles(design, display))}
 		// eslint-disable-next-line react/no-danger
 		dangerouslySetInnerHTML={{
 			__html: sanitise(standfirst, {

@@ -460,6 +460,7 @@ export const CommentLayout = ({
 							design={format.design}
 							pillar={format.theme}
 							standfirst={CAPI.standfirst}
+							format={format}
 						/>
 					</GridItem>
 					<GridItem area="media">

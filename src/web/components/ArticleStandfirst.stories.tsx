@@ -26,6 +26,11 @@ export const defaultStory = () => {
 						design={Design.Article}
 						standfirst="This the default standfirst text. Aut explicabo officia delectus omnis repellendus voluptas"
 						pillar={Pillar.News}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.News,
+						}}
 					/>
 				</ArticleContainer>
 			</Flex>
