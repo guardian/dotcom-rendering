@@ -460,6 +460,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VineBlockElement',
 	);
+	const richLinks = elementsByType<RichLinkBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.RichLinkBlockElement',
+	);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -559,7 +563,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
 				</Portal>
 			)}
-			{CAPI.richLinks.map((richLink, index) => (
+			{richLinks.map((richLink, index) => (
 				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
 						element={richLink}

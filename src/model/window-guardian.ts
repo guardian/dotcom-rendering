@@ -69,6 +69,7 @@ const makeWindowGuardianConfig = (
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 	// We hydrate these elements if they appear on the page
 	const typesThatNeedHydrating: string[] = [
+		'model.dotcomrendering.pageElements.RichLinkBlockElement',
 		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
 		'model.dotcomrendering.pageElements.CalloutBlockElement',
 		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
@@ -196,17 +197,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		isLiveBlog: CAPI.config.isLiveBlog,
 		isLive: CAPI.config.isLive,
 		matchUrl: CAPI.matchUrl,
-		richLinks: CAPI.blocks
-			// Get all elements arrays from all blocks -> [[x][r][r][x]]
-			.map((block) => block.elements)
-			// Flatten them -> [x,r,r,x]
-			.flat()
-			// Filter for rich links -> [r,r]
-			.filter(
-				(element) =>
-					element._type ===
-					'model.dotcomrendering.pageElements.RichLinkBlockElement',
-			) as RichLinkBlockElement[],
 		elementsToHydrate: CAPI.blocks
 			// Get all elements arrays from all blocks -> [[h][h][x]]
 			.map((block) => block.elements)

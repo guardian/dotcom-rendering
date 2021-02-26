@@ -422,7 +422,6 @@ type CAPIBrowserType = {
 	isLiveBlog: boolean;
 	isLive: boolean;
 	matchUrl?: string;
-	richLinks: RichLinkBlockElement[];
 	elementsToHydrate: CAPIElement[];
 };
 
