@@ -11,7 +11,7 @@ import { loadableReady } from '@loadable/component';
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	NAV: NavType;
+	NAV: BrowserNavType;
 };
 
 export const HydrateApp = ({ CAPI, NAV }: Props) => {

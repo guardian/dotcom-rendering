@@ -50,13 +50,13 @@ const pillarsStyles = (display: Display) => css`
 		bottom: 0;
 		left: 0;
 		right: 0;
-		height: ${display === Display.Immersive ? '49px' : '37px'};
+		height: ${display === Display.Immersive ? '48px' : '36px'};
 		${from.tablet} {
 			border-bottom: 0;
 			height: 49px;
 		}
 		${from.desktop} {
-			height: ${display === Display.Immersive ? '49px' : '43px'};
+			height: ${display === Display.Immersive ? '48px' : '42px'};
 		}
 	}
 `;
