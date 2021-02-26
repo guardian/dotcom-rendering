@@ -39,7 +39,7 @@ export const SignInGateCopyOptVar = ({
 			<h1 className={headingStyles}>{signInGateCopy?.header}</h1>
 			<p className={bodyBold}>{signInGateCopy?.subHeader}</p>
 			{signInGateCopy?.paragraphs.map((paragraph) => {
-				return <p className={bodyText}>{paragraph}</p>;
+				return <p className={bodyText}>{paragraph}</p>
 			})}
 			;
 			<div className={actionButtons}>
