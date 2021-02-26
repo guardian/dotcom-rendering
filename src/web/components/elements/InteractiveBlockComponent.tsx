@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-// import { load } from 'bare-amd-loader';
 
 type Props = {
 	url?: string;
@@ -62,8 +61,7 @@ MIGRATION FROM FRONTEND
 and to avoid loading the boot.js file.
 - For all other files that do not load the standard boot.js, we'll add a AMD loader to the page
 
-For the remaining few we dynamically load and AMD loader and support the contract as defined
-https://www.npmjs.com/package/bare-amd-loader
+For the remaining few we dynamically load and AMD loader and support the contract as defined with curl AMD loader
 
 */
 
