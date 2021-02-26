@@ -6,7 +6,6 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 type Props = {
 	rootId: string;
 	children: JSX.Element;
-	name?: string;
 	waitFor?: unknown[];
 };
 
@@ -18,20 +17,14 @@ const isReady = (dependencies: unknown[]): boolean => {
  * Finds the element with the same id as `rootId` and calls `ReactDOM.hydrate(children, element)`. Only
  * executes once and only after all variables in `waitFor` are defined.
  * @param {String} rootId - The id of the element to hydrate
- * @param {String} name - Used to log out performance data via `initPerf()`
  * @param children - The react elements passed to ReactDOM.hydrate()
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
-export const HydrateOnce = ({
-	rootId,
-	name,
-	children,
-	waitFor = [],
-}: Props) => {
+export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
 	const [alreadyHydrated, setAlreadyHydrated] = useState(false);
 	if (alreadyHydrated) return null;
 	if (!isReady(waitFor)) return null;
-	const { start, end } = initPerf(`hydrate-${name || rootId}`);
+	const { start, end } = initPerf('hydration');
 	const element = document.getElementById(rootId);
 	if (!element) return null;
 	start();
