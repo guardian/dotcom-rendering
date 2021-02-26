@@ -393,6 +393,7 @@ export const ShowcaseLayout = ({
 							pillar={format.theme}
 							standfirst={CAPI.standfirst}
 							format={format}
+							palette={palette}
 						/>
 					</GridItem>
 					<GridItem area="lines">

@@ -7,7 +7,6 @@ import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import { Display, Design, Theme, Format } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	display: Display;
@@ -15,9 +14,10 @@ type Props = {
 	theme?: Theme;
 	standfirst: string;
 	format: Format;
+	palette: Palette;
 };
 
-const nestedStyles = (format: Format) => css`
+const nestedStyles = (palette: Palette) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -53,7 +53,7 @@ const nestedStyles = (format: Format) => css`
 		height: 0.75rem;
 		width: 0.75rem;
 		margin-right: 0.125rem;
-		background-color: ${decidePalette(format).background};
+		background-color: ${palette.background.avatar};
 	}
 `;
 
@@ -112,10 +112,16 @@ const standfirstStyles = (design: Design, display: Display) => {
 	}
 };
 
-export const Standfirst = ({ display, design, standfirst, format }: Props) => (
+export const Standfirst = ({
+	display,
+	design,
+	standfirst,
+	format,
+	palette,
+}: Props) => (
 	<div
 		data-print-layout="hide"
-		className={cx(nestedStyles(format), standfirstStyles(design, display))}
+		className={cx(nestedStyles(palette), standfirstStyles(design, display))}
 		// eslint-disable-next-line react/no-danger
 		dangerouslySetInnerHTML={{
 			__html: sanitise(standfirst, {

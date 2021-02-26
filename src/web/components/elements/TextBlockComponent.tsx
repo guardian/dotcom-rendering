@@ -11,13 +11,13 @@ import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedC
 
 import { DropCap } from '@frontend/web/components/DropCap';
 import { Display, Design, Format } from '@guardian/types';
-import { pillarPalette } from '@root/src/lib/pillars';
 
 type Props = {
 	html: string;
 	format: Format;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
+	palette: Palette;
 };
 
 const isLetter = (letter: string) => {
@@ -100,7 +100,7 @@ const sanitiserOptions = {
 	},
 };
 
-const paraStyles = (format: Format) => css`
+const paraStyles = (format: Format, palette: Palette) => css`
 	margin-bottom: 16px;
 	${body.medium()};
 
@@ -158,7 +158,7 @@ const paraStyles = (format: Format) => css`
 		height: 0.75rem;
 		width: 0.75rem;
 		margin-right: 0.125rem;
-		background-color: ${pillarPalette[format.theme].main};
+		background-color: ${palette.background.avatar};
 	}
 `;
 
@@ -167,6 +167,7 @@ export const TextBlockComponent = ({
 	format,
 	forceDropCap,
 	isFirstParagraph,
+	palette,
 }: Props): JSX.Element | null => {
 	const {
 		willUnwrap: isUnwrapped,
@@ -203,12 +204,12 @@ export const TextBlockComponent = ({
 		isLongEnough(remainingLetters)
 	) {
 		return (
-			<p className={paraStyles(format)}>
+			<p className={paraStyles(format, palette)}>
 				<DropCap letter={firstLetter} format={format} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={sanitise(remainingLetters, sanitiserOptions)}
-					elCss={paraStyles(format)}
+					elCss={paraStyles(format, palette)}
 					tagName="span"
 				/>
 			</p>
@@ -219,7 +220,7 @@ export const TextBlockComponent = ({
 		<RewrappedComponent
 			isUnwrapped={isUnwrapped}
 			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles(format)}
+			elCss={paraStyles(format, palette)}
 			tagName={unwrappedElement || 'p'}
 		/>
 	);

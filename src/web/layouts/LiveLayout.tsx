@@ -469,6 +469,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							pillar={format.theme}
 							standfirst={CAPI.standfirst}
 							format={format}
+							palette={palette}
 						/>
 					</GridItem>
 					<GridItem area="media">

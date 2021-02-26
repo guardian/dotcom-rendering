@@ -5,6 +5,7 @@ import { DividerBlockComponent } from '@frontend/web/components/elements/Divider
 import { Design, Display, Pillar } from '@guardian/types';
 
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
+import { decidePalette } from 'src/web/lib/decidePalette';
 
 export default {
 	component: DividerBlockComponent,
@@ -31,14 +32,29 @@ export const Default = () => {
 				html="<p>This is a dinkus</p>"
 				format={format}
 				isFirstParagraph={true}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 			/>
 			<TextBlockComponent
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				html={lorem}
 				format={format}
 				isFirstParagraph={false}
 			/>
 			<DividerBlockComponent />
 			<TextBlockComponent
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				html={lorem}
 				format={format}
 				isFirstParagraph={false}

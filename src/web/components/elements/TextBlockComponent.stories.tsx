@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { Display, Design, Pillar } from '@guardian/types';
 
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
+import { decidePalette } from 'src/web/lib/decidePalette';
 
 const html =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
@@ -38,6 +39,11 @@ export const defaultStory = () => {
 					design: Design.Article,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				isFirstParagraph={false}
 			/>
 		</div>
@@ -56,6 +62,11 @@ export const DropCap = () => {
 					design: Design.Article,
 					display: Display.Immersive,
 				}}
+				palette={decidePalette({
+					display: Display.Immersive,
+					design: Design.Article,
+					theme: Pillar.Culture,
+				})}
 				isFirstParagraph={false}
 			/>
 		</div>
@@ -74,6 +85,11 @@ export const QuotedDropCap = () => {
 					design: Design.Comment,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				})}
 				isFirstParagraph={true}
 			/>
 		</div>
@@ -92,6 +108,11 @@ export const ShortText = () => {
 					design: Design.Article,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				isFirstParagraph={false}
 			/>
 		</div>
@@ -110,6 +131,11 @@ export const NoTags = () => {
 					design: Design.Article,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				isFirstParagraph={false}
 			/>
 		</div>
@@ -128,6 +154,11 @@ export const FeatureDropCap = () => {
 					design: Design.Feature,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				})}
 				isFirstParagraph={true}
 			/>
 		</div>
@@ -146,6 +177,11 @@ export const AList = () => {
 					design: Design.Article,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				isFirstParagraph={false}
 			/>
 		</div>
@@ -164,6 +200,11 @@ export const BadMarkup = () => {
 					design: Design.Article,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				isFirstParagraph={false}
 			/>
 		</div>
@@ -184,6 +225,11 @@ export const SubSupscript = () => {
 					design: Design.Article,
 					display: Display.Standard,
 				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				isFirstParagraph={false}
 			/>
 		</div>

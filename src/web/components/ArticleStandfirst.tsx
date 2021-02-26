@@ -28,6 +28,7 @@ type Props = {
 	pillar: Theme;
 	format: Format;
 	standfirst: string; // Can be html
+	palette: Palette;
 };
 
 export const ArticleStandfirst = ({
@@ -36,6 +37,7 @@ export const ArticleStandfirst = ({
 	pillar,
 	standfirst,
 	format,
+	palette,
 }: Props) => (
 	<div className={cx(standfirstStyles, standfirstLinks[pillar])}>
 		<Standfirst
@@ -43,6 +45,7 @@ export const ArticleStandfirst = ({
 			design={design}
 			standfirst={standfirst}
 			format={format}
+			palette={palette}
 		/>
 	</div>
 );

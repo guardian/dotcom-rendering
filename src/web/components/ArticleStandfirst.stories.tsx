@@ -7,6 +7,7 @@ import { ArticleStandfirst } from './ArticleStandfirst';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
+import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: ArticleStandfirst,
@@ -31,6 +32,11 @@ export const defaultStory = () => {
 							design: Design.Article,
 							theme: Pillar.News,
 						}}
+						palette={decidePalette({
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.News,
+						})}
 					/>
 				</ArticleContainer>
 			</Flex>

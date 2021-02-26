@@ -1,5 +1,3 @@
-import { JSDOM } from 'jsdom';
-
 // Replace dot with empty span
 const transformDot = (element: string): string => {
 	if (element.includes('•')) {
@@ -18,42 +16,6 @@ const transformLastDot = (element: string): string => {
 		new RegExp('[•]', 'g'),
 		'<span data-dcr-style="bullet"></span>',
 	);
-};
-
-// Replace dot with list - This does assume the standfirst will split into 2 pieces
-const transformStandFirstDot = (element: string): string => {
-	if (element.includes('•')) {
-		// Split string into fragments
-		const frag = JSDOM.fragment(element);
-		// Check for fragment validity
-		if (frag.children.length > 0 && frag != null && frag.children != null) {
-			for (let i = 0; i < frag.children.length; i += 1) {
-				// Find the fragment with the dot
-				if (frag.children.item(i)?.textContent?.includes('•')) {
-					const temp = frag?.children?.item(i)?.textContent;
-					if (temp != null) {
-						// Create string array by splitting on the dot
-						const stringFragments = temp.split('•');
-						// Get last element which had the dot
-						const listElement =
-							stringFragments[stringFragments.length - 1];
-						const finalString: string = '';
-						// construct the return string
-						return finalString.concat(
-							'<p>',
-							stringFragments[0],
-							'<br ><br >',
-							'<ul ><li>',
-							listElement,
-							'</li><ul>',
-							'</p>',
-						);
-					}
-				}
-			}
-		}
-	}
-	return element;
 };
 
 const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
@@ -84,7 +46,7 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 };
 
 export const addDots = (data: CAPIType): CAPIType => {
-	data.standfirst = transformStandFirstDot(data.standfirst);
+	data.standfirst = transformDot(data.standfirst);
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,

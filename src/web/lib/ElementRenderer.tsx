@@ -521,6 +521,7 @@ export const ElementRenderer = ({
 						html={element.html}
 						format={format}
 						forceDropCap={element.dropCap}
+						palette={palette}
 					/>
 				</>
 			);
