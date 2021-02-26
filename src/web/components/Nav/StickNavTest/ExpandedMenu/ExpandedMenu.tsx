@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { css } from 'emotion';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
@@ -13,6 +13,7 @@ import {
 import { extractNAV } from '@root/src/model/extract-nav';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { useApi } from '@root/src/web/lib/api';
 import { Columns } from './Columns';
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
@@ -96,18 +97,20 @@ const mainMenuStyles = (ID: string) => css`
 	}
 `;
 
-const fetchNavData = (
-	ajaxUrl: string,
-	edition: Edition,
-): Promise<SimpleNavType> => {
+const ExpandedMenuInner: React.FC<{
+	currentNavLinkTitle: string;
+	edition: Edition;
+	ajaxUrl: string;
+}> = ({ currentNavLinkTitle, edition, ajaxUrl }) => {
 	const url = `${ajaxUrl}/nav/${edition.toLowerCase()}.json`;
-	return fetch(url)
-		.then((resp) => resp.json())
-		.then((json) => extractNAV(json));
-};
+	const { data } = useApi<SimpleNavType>(url);
 
-const enrich = (currentNavLinkTitle: string, nav: SimpleNavType) => {
-	return extractNAV({ currentNavLinkTitle, ...nav });
+	if (data) {
+		const fullNav = extractNAV({ currentNavLinkTitle, ...data });
+		return <Columns nav={fullNav} />;
+	}
+
+	return null;
 };
 
 export const ExpandedMenu: React.FC<{
@@ -118,19 +121,6 @@ export const ExpandedMenu: React.FC<{
 	edition: Edition;
 	ajaxUrl: string;
 }> = ({ display, currentNavLinkTitle, ID, expand, edition, ajaxUrl }) => {
-	const [navData, setNavData] = useState<NavType | undefined>(undefined);
-
-	useEffect(() => {
-		if (expand) {
-			// fetch API data
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			fetchNavData(ajaxUrl, edition).then((data) => {
-				const fullNav = enrich(currentNavLinkTitle, data);
-				setNavData(fullNav);
-			});
-		}
-	}, [expand, currentNavLinkTitle, edition, ajaxUrl]);
-
 	return (
 		<div id={buildID(ID, 'expanded-menu')}>
 			<ShowMoreMenu display={display} ID={ID} />
@@ -141,7 +131,13 @@ export const ExpandedMenu: React.FC<{
 				data-testid="expanded-menu"
 				data-cy="expanded-menu"
 			>
-				{navData && <Columns nav={navData} />}
+				{expand && (
+					<ExpandedMenuInner
+						currentNavLinkTitle={currentNavLinkTitle}
+						edition={edition}
+						ajaxUrl={ajaxUrl}
+					/>
+				)}
 			</div>
 		</div>
 	);
