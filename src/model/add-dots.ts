@@ -1,14 +1,3 @@
-// Replace dot with empty span
-const transformDot = (element: string): string => {
-	if (element.includes('•')) {
-		element = element.replace(
-			new RegExp('[•]', 'g'),
-			'<span data-dcr-style="bullet"></span>',
-		);
-	}
-	return element;
-};
-
 // Wraps the last dot in a footer
 const transformLastDot = (element: string): string => {
 	const modified = `<footer>${element}</footer>`;
@@ -35,7 +24,10 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 			} else {
 				enhanced.push({
 					...element,
-					html: transformDot(element.html),
+					html: element.html.replace(
+						new RegExp('[•]', 'g'),
+						'<span data-dcr-style="bullet"></span>',
+					),
 				});
 			}
 		} else {
@@ -46,7 +38,10 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 };
 
 export const addDots = (data: CAPIType): CAPIType => {
-	data.standfirst = transformDot(data.standfirst);
+	data.standfirst = data.standfirst.replace(
+		new RegExp('[•]', 'g'),
+		'<span data-dcr-style="bullet"></span>',
+	);
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,
