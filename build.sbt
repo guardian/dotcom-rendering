@@ -66,7 +66,7 @@ lazy val scalaApiModels = project.in(file("api-models") / "scala")
       publishArtifacts,
       releaseStepCommand("sonatypeBundleRelease"),
       setNextVersion,
-      commitNextVersion,    
+      commitNextVersion,
       pushChanges
     )
   )
