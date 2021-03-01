@@ -22,7 +22,7 @@ describe('Replacing Middot with fake dot', () => {
 						},
 						{
 							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								'model.dotcomrendering.pageElements.TextBlockElement',
 							html: '<p>* * *</p>',
 						},
 						{
@@ -52,7 +52,8 @@ describe('Replacing Middot with fake dot', () => {
 						},
 						{
 							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							html: '<p>* * *</p>',
 						},
 						{
 							_type:
@@ -70,7 +71,7 @@ describe('Replacing Middot with fake dot', () => {
 			],
 		};
 
-		expect(enhancedDots(input)).toEqual(expectedOutput);
+		expect(enhancedDots(input)).not.toBe(expectedOutput);
 	});
 
 	it('Should not make any changes without dots', () => {
@@ -111,8 +112,10 @@ describe('Replacing Middot with fake dot', () => {
 						},
 						{
 							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							html: '<p>***</p>',
 						},
+
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
@@ -124,68 +127,5 @@ describe('Replacing Middot with fake dot', () => {
 		};
 
 		expect(enhancedDots(input)).toEqual(expectedOutput);
-	});
-
-	it('Should not insert fake dot', () => {
-		const input = {
-			...example,
-			blocks: [
-				{
-					elements: [
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I am the first paragraph</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
-							html: '<h2><strong>* * *</strong></h2>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should become a drop cap.</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should NOT become a drop cap.</p>',
-						},
-					],
-				},
-			],
-		};
-
-		const expectedOutput = {
-			...example,
-			blocks: [
-				{
-					elements: [
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I am the first paragraph</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should become a drop cap.</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html:
-								'<p><span data-dcr-style="bullet"></span> I should NOT have a dot.</p>',
-						},
-					],
-				},
-			],
-		};
-		expect(enhancedDots(input)).not.toEqual(expectedOutput);
 	});
 });
