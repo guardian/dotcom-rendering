@@ -335,7 +335,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return (
-				<Figure role={element.role} id={`interactive-block-${index}`}>
+				<Figure role={element.role} id={element.elementId}>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
