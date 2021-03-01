@@ -157,7 +157,6 @@ describe('Elements', function () {
 			cy.visit(
 				'Article?url=https://www.theguardian.com/us-news/2017/jan/17/donald-trump-america-great-again-northampton-county-pennsylvania',
 			);
-			console.log(getIframeBody());
 			getIframeBody().contains('Switching parties');
 		});
 
