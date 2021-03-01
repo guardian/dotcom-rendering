@@ -2,14 +2,7 @@
 
 import type { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
-import {
-	andThen,
-	fromNullable,
-	map,
-	none,
-	OptionKind,
-	some,
-} from '@guardian/types';
+import { andThen, fromNullable, map, map2, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { pipe2 } from 'lib';
 
@@ -126,32 +119,19 @@ const parseMatchStatus = (status: string, time: string): Option<MatchStatus> =>
 		}),
 	);
 
-const parseMatchScores = (
+const parseMatchScores: (
 	footballContent: Option<FootballContent>,
-): Option<MatchScores> => {
-	if (footballContent.kind === OptionKind.Some) {
-		const stadium = fromNullable(footballContent.value.venue);
-		const status = parseMatchStatus(
-			footballContent.value.status,
-			footballContent.value.kickOff,
-		);
-
-		if (
-			stadium.kind === OptionKind.Some &&
-			status.kind === OptionKind.Some
-		) {
-			return some({
-				league: footballContent.value.competitionDisplayName,
-				stadium: stadium.value,
-				status: status.value,
-				homeTeam: footballContent.value.homeTeam,
-				awayTeam: footballContent.value.awayTeam,
-			});
-		}
-	}
-
-	return none;
-};
+) => Option<MatchScores> = andThen((football: FootballContent) => {
+	const maybeStadium = fromNullable(football.venue);
+	const maybeStatus = parseMatchStatus(football.status, football.kickOff);
+	return map2((stadium: string, status: MatchStatus) => ({
+		league: football.competitionDisplayName,
+		stadium: stadium,
+		status: status,
+		homeTeam: football.homeTeam,
+		awayTeam: football.awayTeam,
+	}))(maybeStadium)(maybeStatus);
+});
 
 // ----- Exports ----- //
 
