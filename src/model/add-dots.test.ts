@@ -1,12 +1,12 @@
-import { addDots } from './add-dots';
+import { enhancedDots } from './add-dots';
 import { bodyJSON } from './exampleBodyJSON';
 
 const example = JSON.parse(bodyJSON);
 
 describe('Replacing Middot with fake dot', () => {
 	it('creates an identical but new object when no changes are needed', () => {
-		expect(addDots(example)).not.toBe(example); // We created a new object
-		expect(addDots(example)).toEqual(example); // The new object is what we expect
+		expect(enhancedDots(example)).not.toBe(example); // We created a new object
+		expect(enhancedDots(example)).toEqual(example); // The new object is what we expect
 	});
 
 	it('replace the Middot', () => {
@@ -70,7 +70,7 @@ describe('Replacing Middot with fake dot', () => {
 			],
 		};
 
-		expect(addDots(input)).toEqual(expectedOutput);
+		expect(enhancedDots(input)).toEqual(expectedOutput);
 	});
 
 	it('Should not make any changes without dots', () => {
@@ -123,7 +123,7 @@ describe('Replacing Middot with fake dot', () => {
 			],
 		};
 
-		expect(addDots(input)).toEqual(expectedOutput);
+		expect(enhancedDots(input)).toEqual(expectedOutput);
 	});
 
 	it('Should not insert fake dot', () => {
@@ -186,6 +186,6 @@ describe('Replacing Middot with fake dot', () => {
 				},
 			],
 		};
-		expect(addDots(input)).not.toEqual(expectedOutput);
+		expect(enhancedDots(input)).not.toEqual(expectedOutput);
 	});
 });
