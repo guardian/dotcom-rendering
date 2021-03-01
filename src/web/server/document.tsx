@@ -183,6 +183,10 @@ export const document = ({ data }: Props): string => {
 			element._type ===
 			'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
+
+	function isDefined<T>(argument: T | boolean): argument is T {
+		return argument !== false;
+	}
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -190,9 +194,6 @@ export const document = ({ data }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	function isDefined<T>(argument: T | boolean): argument is T {
-		return argument !== false;
-	}
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
