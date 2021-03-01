@@ -565,17 +565,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-<<<<<<< HEAD
 			{interactiveElements.map((interactiveBlock) => (
 				<Portal rootId={interactiveBlock.elementId}>
-=======
-			{CAPI.interactiveBlockElements.map((interactiveBlock, index) => (
-				<Portal
-					key={index}
-					root="interactive-block"
-					richLinkIndex={interactiveBlock.interactiveBlockIndex}
-				>
->>>>>>> Add First Pass at InteractiveBlockElement as parity with Frontend
 					<InteractiveBlockComponent
 						url={interactiveBlock.url}
 						scriptUrl={interactiveBlock.scriptUrl}
