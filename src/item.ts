@@ -53,7 +53,12 @@ interface Fields extends Format {
 	internalShortId: Option<string>;
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
-	footballContent: Option<FootballContent>;
+}
+
+interface MatchReport extends Fields {
+	design: Design.MatchReport;
+	body: Body;
+	football: Option<FootballContent>;
 }
 
 interface ResizedRelatedContent extends RelatedContent {
@@ -107,7 +112,8 @@ type Item =
 	| Comment
 	| Standard
 	| Interactive
-	| AdvertisementFeature;
+	| AdvertisementFeature
+	| MatchReport;
 
 // ----- Convenience Types ----- //
 
@@ -162,13 +168,7 @@ const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const {
-		content,
-		branding,
-		commentCount,
-		relatedContent,
-		footballContent,
-	} = request;
+	const { content, branding, commentCount, relatedContent } = request;
 	return {
 		theme: themeFromString(content.pillarId),
 		display: getDisplay(content),
@@ -205,7 +205,6 @@ const itemFields = (
 				),
 			})),
 		),
-		footballContent: fromNullable(footballContent),
 	};
 };
 
@@ -357,6 +356,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isMatchReport(tags)) {
 		return {
 			design: Design.MatchReport,
+			football: fromNullable(request.footballContent),
 			...itemFieldsWithBody(context, request),
 		};
 	}
