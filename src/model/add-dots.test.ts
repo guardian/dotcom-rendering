@@ -18,16 +18,6 @@ describe('Middot Tests', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>* * *</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should become a drop cap.</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
 							html: '<p>• I should have a dot.</p>',
 						},
 					],
@@ -44,16 +34,6 @@ describe('Middot Tests', () => {
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
 							html: '<p>I am the first paragraph</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>* * *</p>',
-						},
-						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should become a drop cap.</p>',
 						},
 						{
 							_type:
@@ -83,7 +63,7 @@ describe('Middot Tests', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>***</p>',
+							html: '<p>*</p>',
 						},
 						{
 							_type:
@@ -108,7 +88,7 @@ describe('Middot Tests', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>***</p>',
+							html: '<p>*</p>',
 						},
 
 						{
