@@ -16,7 +16,7 @@ import { BodyImage, FigCaption } from '@guardian/image-rendering';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
-import { neutral, text as textColour } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import {
 	andThen,
@@ -34,7 +34,6 @@ import { ElementKind } from 'bodyElement';
 import type {
 	AudioAtom as AudioAtomElement,
 	BodyElement,
-	Embed,
 	GuideAtom as GuideAtomElement,
 	Image,
 	Instagram,
@@ -51,20 +50,19 @@ import InteractiveAtom, {
 	atomCss,
 	atomScript,
 } from 'components/atoms/interactiveAtom';
-import Audio from 'components/audio';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
+import EmbedComponent from 'components/embed';
 import HorizontalRule from 'components/horizontalRule';
 import Interactive from 'components/interactive';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
 import RichLink from 'components/richLink';
-import Video from 'components/video';
 import { isElement, pipe, pipe2 } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
@@ -476,40 +474,6 @@ const textRenderer = (
 		: text(element.doc, format);
 };
 
-const embedRenderer = (element: Embed): ReactNode => {
-	const props = {
-		dangerouslySetInnerHTML: {
-			__html: element.html,
-		},
-	};
-
-	const figureCss = css`
-		margin: ${remSpace[4]} 0;
-		${darkModeCss`
-			background: white;
-			padding: ${remSpace[2]};
-		`}
-	`;
-	const captionStyles = css`
-		${textSans.xsmall()}
-		color: ${textColour.supporting};
-	`;
-
-	const figure = (alt: string | null): ReactElement => {
-		const children = [
-			h('div', props),
-			styledH('figcaption', { css: captionStyles }, alt),
-		];
-		return styledH('figure', { css: figureCss }, children);
-	};
-
-	return pipe2(
-		element.alt,
-		map((alt) => figure(alt)),
-		withDefault(figure(null)),
-	);
-};
-
 const instagramRenderer = (element: Instagram): ReactNode => {
 	const props = {
 		dangerouslySetInnerHTML: {
@@ -742,27 +706,13 @@ const render = (format: Format, excludeStyles = false) => (
 		case ElementKind.Tweet:
 			return h(Tweet, { content: element.content, format, key });
 
-		case ElementKind.Audio:
-			return h(Audio, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
-		case ElementKind.Video:
-			return h(Video, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
 		case ElementKind.Callout: {
 			const { campaign, description } = element;
 			return h(CalloutForm, { campaign, format, description });
 		}
 
 		case ElementKind.Embed:
-			return embedRenderer(element);
+			return h(EmbedComponent, { embed: element.embed });
 
 		case ElementKind.Instagram:
 			return instagramRenderer(element);
@@ -825,27 +775,13 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.Tweet:
 			return h(Tweet, { content: element.content, format, key });
 
-		case ElementKind.Audio:
-			return h(Audio, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
-		case ElementKind.Video:
-			return h(Video, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
 		case ElementKind.Callout: {
 			const { campaign, description } = element;
 			return h(CalloutForm, { campaign, format, description });
 		}
 
 		case ElementKind.Embed:
-			return embedRenderer(element);
+			return h(EmbedComponent, { embed: element.embed });
 
 		case ElementKind.Instagram:
 			return instagramRenderer(element);
