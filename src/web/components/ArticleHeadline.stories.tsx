@@ -232,16 +232,6 @@ export const Interview = () => (
 				<Standfirst
 					display={Display.Standard}
 					design={Design.Interview}
-					format={{
-						display: Display.Standard,
-						design: Design.Interview,
-						theme: Pillar.News,
-					}}
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Interview,
-						theme: Pillar.News,
-					})}
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia
@@ -290,16 +280,6 @@ export const InterviewNoByline = () => (
 				<Standfirst
 					display={Display.Standard}
 					design={Design.Interview}
-					format={{
-						display: Display.Standard,
-						design: Design.Interview,
-						theme: Pillar.News,
-					}}
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Interview,
-						theme: Pillar.News,
-					})}
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia

@@ -458,8 +458,6 @@ export const ImmersiveLayout = ({
 							design={format.design}
 							pillar={format.theme}
 							standfirst={CAPI.standfirst}
-							format={format}
-							palette={palette}
 						/>
 					</GridItem>
 					<GridItem area="byline">

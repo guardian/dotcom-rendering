@@ -5,7 +5,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { Display, Design, Theme, Format } from '@guardian/types';
+import { Display, Design, Theme } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 type Props = {
@@ -13,8 +13,6 @@ type Props = {
 	design: Design;
 	theme?: Theme;
 	standfirst: string;
-	format: Format;
-	palette: Palette;
 };
 
 const nestedStyles = () => css`
@@ -112,13 +110,7 @@ const standfirstStyles = (design: Design, display: Display) => {
 	}
 };
 
-export const Standfirst = ({
-	display,
-	design,
-	standfirst,
-	format,
-	palette,
-}: Props) => (
+export const Standfirst = ({ display, design, standfirst }: Props) => (
 	<div
 		data-print-layout="hide"
 		className={cx(nestedStyles(), standfirstStyles(design, display))}
