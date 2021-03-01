@@ -100,7 +100,7 @@ const sanitiserOptions = {
 	},
 };
 
-const paraStyles = (format: Format, palette: Palette) => css`
+const paraStyles = (palette: Palette) => css`
 	margin-bottom: 16px;
 	${body.medium()};
 
@@ -158,7 +158,7 @@ const paraStyles = (format: Format, palette: Palette) => css`
 		height: 0.75rem;
 		width: 0.75rem;
 		margin-right: 0.125rem;
-		background-color: ${palette.background.avatar};
+		background-color: ${palette.background.bullet};
 	}
 `;
 
@@ -204,12 +204,12 @@ export const TextBlockComponent = ({
 		isLongEnough(remainingLetters)
 	) {
 		return (
-			<p className={paraStyles(format, palette)}>
+			<p className={paraStyles(palette)}>
 				<DropCap letter={firstLetter} format={format} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={sanitise(remainingLetters, sanitiserOptions)}
-					elCss={paraStyles(format, palette)}
+					elCss={paraStyles(palette)}
 					tagName="span"
 				/>
 			</p>
@@ -220,7 +220,7 @@ export const TextBlockComponent = ({
 		<RewrappedComponent
 			isUnwrapped={isUnwrapped}
 			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles(format, palette)}
+			elCss={paraStyles(palette)}
 			tagName={unwrappedElement || 'p'}
 		/>
 	);
