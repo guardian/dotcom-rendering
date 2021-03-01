@@ -21,6 +21,7 @@ const enhance = (
 					enhanced.push({
 						_type:
 							'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+						elementId: element.elementId,
 						html: element.html,
 						quoted: true,
 					});
@@ -30,6 +31,7 @@ const enhance = (
 					enhanced.push({
 						_type:
 							'model.dotcomrendering.pageElements.HighlightBlockElement',
+						elementId: element.elementId,
 						html: element.html,
 					});
 				} else {

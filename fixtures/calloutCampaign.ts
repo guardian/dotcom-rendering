@@ -1,5 +1,6 @@
 export const calloutCampaign: CalloutBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.CalloutBlockElement',
+	elementId: 'mockId',
 	id: '14d1b1bc-8983-43fb-8f2e-8ca08a711944',
 	calloutsUrl:
 		'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
@@ -122,6 +123,7 @@ export const calloutCampaign: CalloutBlockElement = {
 
 export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.CalloutBlockElement',
+	elementId: 'mockId',
 	id: '14d1b1bc-8983-43fb-8f2e-8ca08a711944',
 	calloutsUrl:
 		'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',

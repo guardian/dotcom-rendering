@@ -1330,6 +1330,7 @@ export const Quiz: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
+			elementId: '6c671ba8-a07e-4865-926b-b4db8661d5ae',
 			role: 'showcase',
 			data: {
 				alt:
@@ -1719,9 +1720,23 @@ export const Quiz: CAPIType = {
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
 	blocks: [
 		{
-			id: '5ee1f3138f0875833522a23a',
+			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
+			blockFirstPublishedDisplay: '10.03 BST',
+			blockLastUpdated: 1591917260000,
+			firstPublishedDisplay: '10.09 BST',
+			lastUpdatedDisplay: '10.09 BST',
+			blockCreatedOnDisplay: '10.02 BST',
+			blockLastUpdatedDisplay: '00.14 BST',
+			firstPublished: 1591952964000,
+			createdOn: 1591866131000,
+			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
+			blockCreatedOn: 1591866131000,
+			blockFirstPublished: 1591866202000,
+			createdOnDisplay: '10.02 BST',
+			lastUpdated: 1591952965000,
 			elements: [
 				{
+					elementId: '1da02ed3-4f82-4149-ad6e-872f5edf9e3f',
 					quizType: 'knowledge',
 					resultBuckets: [],
 					questions: [
@@ -2347,20 +2362,7 @@ export const Quiz: CAPIType = {
 					],
 				},
 			],
-			createdOn: 1591866131000,
-			createdOnDisplay: '10.02 BST',
-			blockCreatedOn: 1591866131000,
-			blockCreatedOnDisplay: '10.02 BST',
-			lastUpdated: 1591952965000,
-			lastUpdatedDisplay: '10.09 BST',
-			blockLastUpdated: 1591917260000,
-			blockLastUpdatedDisplay: '00.14 BST',
-			firstPublished: 1591952964000,
-			firstPublishedDisplay: '10.09 BST',
-			blockFirstPublished: 1591866202000,
-			blockFirstPublishedDisplay: '10.03 BST',
-			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
-			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
+			id: '5ee1f3138f0875833522a23a',
 		},
 	],
 	linkedData: [

@@ -81,7 +81,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`audio-atom-${index}`}
+					id={element.elementId}
 					role={element.role}
 				>
 					<AudioAtom
@@ -106,7 +106,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`callout-${index}`}
+					id={element.elementId}
 					role={element.role}
 				>
 					<CalloutBlockComponent
@@ -171,7 +171,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={element.role}
-					id={`document-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						role={element.role}
@@ -196,8 +196,7 @@ export const ElementRenderer = ({
 					<Figure
 						isMainMedia={isMainMedia}
 						role={element.role}
-						id={`embed-block-element-${index}`}
-						key={`embed-block-element-${index}`}
+						id={element.elementId}
 					>
 						<ClickToView
 							role={element.role}
@@ -221,8 +220,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={element.role}
-					id={`embed-block-element-${index}`}
-					key={`embed-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						role={element.role}
@@ -255,7 +253,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`guide-atom-${index}`}
+					id={element.elementId}
 					role={element.role}
 				>
 					<GuideAtom
@@ -305,8 +303,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={element.role}
-					id={`instagram-block-element-${index}`}
-					key={`instagram-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						role={element.role}
@@ -340,8 +337,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={element.role}
-					id={`map-block-element-${index}`}
-					key={`map-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						role={element.role}
@@ -387,7 +383,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`profile-atom-${index}`}
+					id={element.elementId}
 					role={element.role}
 				>
 					<ProfileAtom
@@ -418,7 +414,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`qanda-atom-${index}`}
+					id={element.elementId}
 					role={element.role}
 				>
 					<QandaAtom
@@ -436,7 +432,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} id={`quiz-atom-${index}`}>
+				<Figure isMainMedia={isMainMedia} id={element.elementId}>
 					<>
 						{element.quizType === 'personality' && (
 							<PersonalityQuizAtom
@@ -456,7 +452,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return (
-				<div key={index} id={`rich-link-${index}`}>
+				<div key={index} id={element.elementId}>
 					<DefaultRichLink
 						index={index}
 						headlineText={element.text}
@@ -480,8 +476,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={element.role}
-					id={`spotify-block-element-${index}`}
-					key={`spotify-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						role={element.role}
@@ -529,7 +524,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={element.role}
-					id={`timeline-atom-${index}`}
+					id={element.elementId}
 				>
 					<TimelineAtom
 						id={element.id}
@@ -557,8 +552,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={element.role}
-					id={`video-facebook-block-element-${index}`}
-					key={`video-facebook-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						role={element.role}
@@ -617,8 +611,7 @@ export const ElementRenderer = ({
 					// No role given by CAPI
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
-					id={`vine-block-element-${index}`}
-					key={`vine-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						// No role given by CAPI
@@ -689,13 +682,8 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					key={index}
 					role={element.role}
-					id={
-						isMainMedia
-							? `youtube-block-main-media-${index}`
-							: `youtube-block-${index}`
-					}
+					id={element.elementId}
 				>
 					<YoutubeBlockComponent
 						format={format}

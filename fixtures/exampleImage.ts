@@ -1,5 +1,6 @@
 export const exampleImage: ImageBlockElement = {
 	role: 'inline',
+	elementId: 'mockId',
 	data: {
 		alt: 'Judy sits in Walworth Square, SE17',
 		caption:
