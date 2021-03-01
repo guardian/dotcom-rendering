@@ -2,7 +2,10 @@ import { getZIndex } from './getZIndex';
 
 describe('getZIndex', () => {
 	it('gets the correct zindex for group and sibling', () => {
-		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 9;');
+		expect(getZIndex('banner')).toBe('z-index: 12;');
+		expect(getZIndex('stickyNav')).toBe('z-index: 11;');
+		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 10;');
+		expect(getZIndex('stickyNavWrapper')).toBe('z-index: 9;');
 		expect(getZIndex('headerWrapper')).toBe('z-index: 8;');
 		expect(getZIndex('headerLinks')).toBe('z-index: 7;');
 		expect(getZIndex('TheGuardian')).toBe('z-index: 6;');

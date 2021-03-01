@@ -68,6 +68,10 @@ import { SpotifyBlockComponent } from '@root/src/web/components/elements/Spotify
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import {
+	StickyNavSimple,
+	StickyNavBackscroll,
+} from '@root/src/web/components/Nav/StickNavTest/StickyNav';
+import {
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
@@ -128,7 +132,7 @@ const GetMatchStats = React.lazy(() => {
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	NAV: NavType;
+	NAV: BrowserNavType;
 };
 
 const componentEventHandler = (
@@ -346,6 +350,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
+	// sticky nav test status
+	const inStickyNavBackscroll = ABTestAPI.isUserInVariant(
+		'stickyNavTest',
+		'sticky-nav-backscroll',
+	);
+	const inStickyNavSimple = ABTestAPI.isUserInVariant(
+		'stickyNavTest',
+		'sticky-nav-simple',
+	);
+
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
 		() => {
@@ -547,6 +561,29 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</>
 				</HydrateOnce>
 			))}
+
+			{inStickyNavBackscroll && (
+				<Portal rootId="sticky-nav-root">
+					<StickyNavBackscroll
+						capiData={CAPI}
+						navData={NAV}
+						format={format}
+						palette={palette}
+					/>
+				</Portal>
+			)}
+
+			{inStickyNavSimple && (
+				<Portal rootId="sticky-nav-root">
+					<StickyNavSimple
+						capiData={CAPI}
+						navData={NAV}
+						format={format}
+						palette={palette}
+					/>
+				</Portal>
+			)}
+
 			{NAV.subNavSections && (
 				<HydrateOnce rootId="sub-nav-root">
 					<>

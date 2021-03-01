@@ -8,6 +8,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@root/src/web/experiments/tests/newsletter-merch-unit-test';
+import { stickyNavTest } from '@root/src/web/experiments/tests/sticky-nav-test';
 
 export const tests: ABTest[] = [
 	abTestTest,
@@ -17,4 +18,5 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	deeplyReadTest,
+	stickyNavTest,
 ];

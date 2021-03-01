@@ -195,6 +195,14 @@ interface BaseNavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
+// TODO rename
+interface SimpleNavType {
+	pillars: PillarType[];
+	otherLinks: MoreType;
+	brandExtensions: LinkType[];
+	readerRevenueLinks: ReaderRevenuePositions;
+}
+
 interface NavType extends BaseNavType {
 	pillars: PillarType[];
 }
@@ -667,11 +675,17 @@ interface DCRServerDocumentData {
 	linkedData: { [key: string]: any; };
 }
 
+interface BrowserNavType {
+	topLevelPillars: PillarType[];
+	currentNavLink: string;
+	subNavSections?: SubNavType;
+}
+
 interface DCRBrowserDocumentData {
 	page: string;
 	site: string;
 	CAPI: CAPIBrowserType;
-	NAV: SubNavBrowserType;
+	NAV: BrowserNavType;
 	GA: GADataType;
 	linkedData: { [key: string]: any; };
 }

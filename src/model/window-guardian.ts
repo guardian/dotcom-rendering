@@ -232,6 +232,17 @@ export interface WindowGuardian {
 	};
 }
 
+export const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
+	return {
+		topLevelPillars: nav.pillars.map((p) => ({
+			...p,
+			children: undefined,
+		})),
+		currentNavLink: nav.currentNavLink,
+		subNavSections: nav.subNavSections,
+	};
+};
+
 export const makeWindowGuardian = (
 	dcrDocumentData: DCRServerDocumentData,
 	cssIDs: string[],
@@ -241,10 +252,7 @@ export const makeWindowGuardian = (
 			cssIDs,
 			data: {
 				...dcrDocumentData,
-				NAV: {
-					subNavSections: dcrDocumentData.NAV.subNavSections,
-					currentNavLink: dcrDocumentData.NAV.currentNavLink,
-				},
+				NAV: makeGuardianBrowserNav(dcrDocumentData.NAV),
 				CAPI: makeGuardianBrowserCAPI(dcrDocumentData.CAPI),
 			},
 		},
