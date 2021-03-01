@@ -25,7 +25,7 @@ const twoSections = [
 	{
 		value: 29,
 		label: 'Dat1',
-		color: '#fff',
+		color: '#9fe111',
 	},
 	{
 		value: 71,
