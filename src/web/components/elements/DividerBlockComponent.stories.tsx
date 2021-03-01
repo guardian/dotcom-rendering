@@ -5,7 +5,7 @@ import { DividerBlockComponent } from '@frontend/web/components/elements/Divider
 import { Design, Display, Pillar } from '@guardian/types';
 
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
-import { decidePalette } from 'src/web/lib/decidePalette';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 export default {
 	component: DividerBlockComponent,

@@ -17,7 +17,7 @@ type Props = {
 	palette: Palette;
 };
 
-const nestedStyles = (palette: Palette) => css`
+const nestedStyles = () => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -53,7 +53,7 @@ const nestedStyles = (palette: Palette) => css`
 		height: 0.75rem;
 		width: 0.75rem;
 		margin-right: 0.125rem;
-		background-color: ${palette.background.avatar};
+		background-color: ${neutral[86]};
 	}
 `;
 
@@ -121,7 +121,7 @@ export const Standfirst = ({
 }: Props) => (
 	<div
 		data-print-layout="hide"
-		className={cx(nestedStyles(palette), standfirstStyles(design, display))}
+		className={cx(nestedStyles(), standfirstStyles(design, display))}
 		// eslint-disable-next-line react/no-danger
 		dangerouslySetInnerHTML={{
 			__html: sanitise(standfirst, {

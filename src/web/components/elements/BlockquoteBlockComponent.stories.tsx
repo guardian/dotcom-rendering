@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { Display, Design, Pillar } from '@guardian/types';
-import { decidePalette } from 'src/web/lib/decidePalette';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';
