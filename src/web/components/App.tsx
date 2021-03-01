@@ -401,6 +401,26 @@ export const App = ({ CAPI, NAV }: Props) => {
 		},
 	);
 
+	const InteractiveBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.InteractiveBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/InteractiveBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.InteractiveBlockComponent,
+		},
+	);
+
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -478,6 +498,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.RichLinkBlockElement',
 	);
+	const interactiveElements = elementsByType<InteractiveBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -541,7 +565,15 @@ export const App = ({ CAPI, NAV }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-
+			{interactiveElements.map((interactiveBlock) => (
+				<Portal rootId={interactiveBlock.elementId}>
+					<InteractiveBlockComponent
+						url={interactiveBlock.url}
+						scriptUrl={interactiveBlock.scriptUrl}
+						alt={interactiveBlock.alt}
+					/>
+				</Portal>
+			))}
 			{quizAtoms.map((quizAtom) => (
 				<HydrateOnce rootId={quizAtom.elementId}>
 					<>

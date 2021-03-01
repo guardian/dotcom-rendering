@@ -1833,6 +1833,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "interactiveBlockIndex": {
+                    "type": "number"
                 }
             },
             "required": [

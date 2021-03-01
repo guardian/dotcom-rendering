@@ -228,6 +228,7 @@ interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
 	role?: RoleType;
 }
 
+// Can't guarantee anything in interactiveBlockElement :shrug:
 interface InteractiveBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
 	elementId: string;
@@ -236,6 +237,7 @@ interface InteractiveBlockElement {
 	scriptUrl?: string;
 	alt?: string;
 	role?: RoleType;
+	interactiveBlockIndex?: number;
 }
 
 interface MapBlockElement extends ThirdPartyEmbeddedContent {

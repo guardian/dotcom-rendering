@@ -80,6 +80,11 @@ export const document = ({ data }: Props): string => {
 			chunkName: 'elements-RichLinkComponent',
 			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 		},
+		{
+			chunkName: 'elements-InteractiveBlockComponent',
+			addWhen:
+				'model.dotcomrendering.pageElements.InteractiveBlockElement',
+		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
