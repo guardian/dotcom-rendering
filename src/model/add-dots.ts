@@ -1,6 +1,6 @@
 // Current fix for incorrect use of Middot
 
-const transformDot = (html: string): string => {
+const transformDots = (html: string): string => {
 	return html.replace(
 		new RegExp('[•]', 'g'),
 		'<span data-dcr-style="bullet"></span>',
@@ -19,15 +19,12 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 			if (elements.length - 1 === i) {
 				enhanced.push({
 					...element,
-					html: `<footer>${transformDot(element.html)}</footer>`,
+					html: `<footer>${transformDots(element.html)}</footer>`,
 				});
 			} else {
 				enhanced.push({
 					...element,
-					html: element.html.replace(
-						new RegExp('[•]', 'g'),
-						'<span data-dcr-style="bullet"></span>',
-					),
+					html: transformDots(element.html),
 				});
 			}
 		} else {
@@ -48,6 +45,6 @@ export const enhancedDots = (data: CAPIType): CAPIType => {
 	return {
 		...data,
 		blocks: enhancedBlocks,
-		standfirst: transformDot(data.standfirst),
+		standfirst: transformDots(data.standfirst),
 	} as CAPIType;
 };

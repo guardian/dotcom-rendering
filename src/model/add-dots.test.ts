@@ -3,13 +3,8 @@ import { bodyJSON } from './exampleBodyJSON';
 
 const example = JSON.parse(bodyJSON);
 
-describe('Replacing Middot with fake dot', () => {
-	it('creates an identical but new object when no changes are needed', () => {
-		expect(enhancedDots(example)).not.toBe(example); // We created a new object
-		expect(enhancedDots(example)).toEqual(example); // The new object is what we expect
-	});
-
-	it('replace the Middot', () => {
+describe('Middot Tests', () => {
+	it('Output should not be the same as input as dot has been replaced', () => {
 		const input = {
 			...example,
 			blocks: [
@@ -64,7 +59,7 @@ describe('Replacing Middot with fake dot', () => {
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
 							html:
-								'<p><span data-dcr-style="bullet"></span> I should NOT have a dot.</p>',
+								'<p><span data-dcr-style="bullet"></span> I should have have a dot.</p>',
 						},
 					],
 				},
@@ -74,7 +69,7 @@ describe('Replacing Middot with fake dot', () => {
 		expect(enhancedDots(input)).not.toBe(expectedOutput);
 	});
 
-	it('Should not make any changes without dots', () => {
+	it('It does not incorrectly replace * with dot spans', () => {
 		const input = {
 			...example,
 			blocks: [
@@ -87,13 +82,13 @@ describe('Replacing Middot with fake dot', () => {
 						},
 						{
 							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								'model.dotcomrendering.pageElements.TextBlockElement',
 							html: '<p>***</p>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should become a drop cap.</p>',
+							html: '<p>I am text.</p>',
 						},
 					],
 				},
@@ -112,14 +107,14 @@ describe('Replacing Middot with fake dot', () => {
 						},
 						{
 							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								'model.dotcomrendering.pageElements.TextBlockElement',
 							html: '<p>***</p>',
 						},
 
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
-							html: '<p>I should become a drop cap.</p>',
+							html: '<p>I am text.</p>',
 						},
 					],
 				},
