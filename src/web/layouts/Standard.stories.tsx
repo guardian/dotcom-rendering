@@ -18,7 +18,7 @@ import { Recipe } from '@root/fixtures/articles/Recipe';
 import { Comment } from '@root/fixtures/articles/Comment';
 import { MatchReport } from '@root/fixtures/articles/MatchReport';
 
-import { HydrateApp } from '@root/src/web/components/HydrateApp';
+import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
@@ -53,7 +53,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		HydrateApp({ CAPI, NAV: makeGuardianBrowserNav(NAV) });
+		BootReact({ CAPI, NAV: makeGuardianBrowserNav(NAV) });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);

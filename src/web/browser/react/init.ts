@@ -3,7 +3,7 @@ import { hydrate as hydrateCSS } from 'emotion';
 
 import { startup } from '@root/src/web/browser/startup';
 
-import { HydrateApp } from '@root/src/web/components/HydrateApp';
+import { BootReact } from '@root/src/web/components/BootReact';
 
 const init = (): Promise<void> => {
 	const {
@@ -22,7 +22,7 @@ const init = (): Promise<void> => {
 	}
 
 	// Partially hydrate the client using a combination of islands and portals
-	HydrateApp({ CAPI, NAV });
+	BootReact({ CAPI, NAV });
 
 	return Promise.resolve();
 };

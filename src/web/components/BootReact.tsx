@@ -14,7 +14,7 @@ type Props = {
 	NAV: BrowserNavType;
 };
 
-export const HydrateApp = ({ CAPI, NAV }: Props) => {
+export const BootReact = ({ CAPI, NAV }: Props) => {
 	const mvtId = Number(
 		(CAPI.config.isDev && getCookie('GU_mvt_id_local')) || // Simplify localhost testing by creating a different mvt id
 			getCookie('GU_mvt_id'),
@@ -22,7 +22,7 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
 	if (!mvtId) {
 		// 0 is default and falsy here
 		// eslint-disable-next-line no-console
-		console.log('There is no MVT ID set, see HydrateApp.tsx');
+		console.log('There is no MVT ID set, see BootReact.tsx');
 	}
 
 	const ophanRecordFunc =
@@ -57,6 +57,6 @@ export const HydrateApp = ({ CAPI, NAV }: Props) => {
 			document.getElementById('react-root'),
 		);
 	}).catch((e) =>
-		console.error(`HydrateApp @loadable/component - error: ${e}`),
+		console.error(`BootReact @loadable/component - error: ${e}`),
 	);
 };
