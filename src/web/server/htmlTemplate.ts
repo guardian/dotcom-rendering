@@ -109,9 +109,6 @@ export const htmlTemplate = ({
 
 	const weAreHiringMessage = `
 <!--
-The Guardian
-Honesty, integrity, courage, fairness, and a sense of duty to the reader and the community
-
 We are hiring, ever thought about joining us?
 https://workforus.theguardian.com/careers/product-engineering/
 --->`;
