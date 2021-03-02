@@ -72,6 +72,7 @@ type Palette = {
 		avatar: Colour;
 		card: Colour;
 		headline: Colour;
+		bullet: Colour;
 	},
 	fill: {
 		commentCount: Colour;
