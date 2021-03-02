@@ -74,7 +74,7 @@ export const coreVitals = (): void => {
 				redirect: 'follow',
 				referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
 				body: JSON.stringify(jsonData),
-			});
+			}).catch(() => {});
 		}
 	};
 
