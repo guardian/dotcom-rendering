@@ -27,7 +27,7 @@ import type {
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
-import { pipe2 } from 'lib';
+import { maybeRender, pipe2 } from 'lib';
 import React from 'react';
 import type { FC, ReactNode } from 'react';
 import {
@@ -122,17 +122,17 @@ const Standard: FC<Props> = ({ item, children }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
-				{matchScores.kind === OptionKind.Some ? (
+				{maybeRender(matchScores, (scores) => (
 					<div id="js-football-scores">
 						<FootballScores
-							league={matchScores.value.league}
-							stadium={matchScores.value.stadium}
-							homeTeam={matchScores.value.homeTeam}
-							awayTeam={matchScores.value.awayTeam}
-							status={matchScores.value.status}
+							league={scores.league}
+							stadium={scores.stadium}
+							homeTeam={scores.homeTeam}
+							awayTeam={scores.awayTeam}
+							status={scores.status}
 						/>
 					</div>
-				) : null}
+				))}
 				<header>
 					<HeaderMedia item={item} />
 					<Series item={item} />
