@@ -201,7 +201,6 @@ export const document = ({ data }: Props): string => {
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			...getScriptArrayFromChunkName('sentryLoader'),
 			...getScriptArrayFromChunkName('dynamicImport'),
-			...getScriptArrayFromChunkName('coreVitals'),
 			pageHasInteractiveElements && {
 				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
