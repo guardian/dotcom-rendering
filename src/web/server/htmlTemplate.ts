@@ -107,9 +107,44 @@ export const htmlTemplate = ({
 		(src) => `<link rel="dns-prefetch" href="${src}">`,
 	);
 
+	const weAreHiringMessage = `
+<!--
+
+                                    GGGGGGGGG                                   
+                           GGGGGGGGGGGGGGGGGGGGGGGGGG                           
+                       GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG                      
+                    GGGGGGGGGGGGGGGGG      GG   GGGGGGGGGGGGG                   
+                  GGGGGGGGGGGG        GGGGGGGGG      GGGGGGGGGG                 
+                GGGGGGGGGGG         GGGGGGGGGGGGG       GGGGGGGGG               
+              GGGGGGGGGG          GGGGGGGGGGGGGGGGG     GGGGGGGGGGG             
+             GGGGGGGGG           GGGGGGGGGGGGGGGGGGG    GGGGGGGGGGGG            
+            GGGGGGGGG           GGGGGGGGGGGGGGGGGGGGGG  GGGGGGGGGGGGG           
+           GGGGGGGGG            GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG          
+           GGGGGGGG             GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG          
+          GGGGGGGG              GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG         
+          GGGGGGGG              GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG         
+          GGGGGGGG              GGGGGGGGGGGG              GGGGGGGGGGGGG         
+           GGGGGGG              GGGGGGGGGGGGG           GGGGGGGGGGGGGG          
+           GGGGGGGG             GGGGGGGGGGGGG           GGGGGGGGGGGGGG          
+            GGGGGGGG            GGGGGGGGGGGGG           GGGGGGGGGGGGG           
+             GGGGGGGG            GGGGGGGGGGGG           GGGGGGGGGGGG            
+              GGGGGGGGG           GGGGGGGGGGG           GGGGGGGGGGG             
+                GGGGGGGGGG         GGGGGGGGGG           GGGGGGGGG               
+                  GGGGGGGGGGG        GGGGGGGG        GGGGGGGGGG                 
+                    GGGGGGGGGGGGGG      GGGGG  GGGGGGGGGGGGGG                   
+                       GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG                      
+                            GGGGGGGGGGGGGGGGGGGGGGGGG                           
+                                    GGGGGGGGG                                   
+                                              
+
+        We are hiring, ever thought about joining us?
+        https://workforus.theguardian.com/careers/product-engineering/
+--->`;
+
 	return `<!doctype html>
         <html lang="en">
             <head>
+			    ${weAreHiringMessage}
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
                 <meta charset="utf-8">
