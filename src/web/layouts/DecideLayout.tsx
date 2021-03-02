@@ -4,7 +4,7 @@ import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDisplayV2 } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 
@@ -20,21 +20,13 @@ type Props = {
 };
 
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
-	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign(
-		CAPI.designType,
-		CAPI.tags,
-		CAPI.config.isLiveBlog,
-	);
-	const pillar: Pillar = decideTheme({
-		pillar: CAPI.pillar,
-		design,
-		isSpecialReport: CAPI.isSpecialReport,
-	});
+	const display: Display = decideDisplayV2(CAPI.format);
+	const design: Design = decideDesign(CAPI.format);
+	const theme: Pillar = decideTheme(CAPI.format);
 	const format: Format = {
 		display,
 		design,
-		theme: pillar,
+		theme,
 	};
 	const palette = decidePalette(format);
 
