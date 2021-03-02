@@ -142,7 +142,7 @@ export const Discussion = ({
 	return (
 		<>
 			{commentCount !== undefined && beingHydrated && (
-				<Portal root="comment-count-root">
+				<Portal rootId="comment-count-root">
 					<CommentCount
 						isCommentable={isCommentable}
 						commentCount={commentCount}

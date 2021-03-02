@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom';
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 type Props = {
-	root: IslandType;
+	rootId: string;
 	children: JSX.Element;
-	index?: number;
 	waitFor?: unknown[];
 };
 
@@ -15,19 +14,17 @@ const isReady = (dependencies: unknown[]): boolean => {
 };
 
 /**
- * Finds the element with the same id as `root` and calls `ReactDOM.hydrate(children, element)`. Only
+ * Finds the element with the same id as `rootId` and calls `ReactDOM.hydrate(children, element)`. Only
  * executes once and only after all variables in `waitFor` are defined.
- * @param {String} root - The id of the element to hydrate
+ * @param {String} rootId - The id of the element to hydrate
  * @param children - The react elements passed to ReactDOM.hydrate()
- * @param {number} index - Used when there are multiple elements the same (eg. RichLinks)
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
-export const HydrateOnce = ({ root, children, index, waitFor = [] }: Props) => {
+export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
 	const [alreadyHydrated, setAlreadyHydrated] = useState(false);
 	if (alreadyHydrated) return null;
 	if (!isReady(waitFor)) return null;
-	const rootId = index === 0 || index ? `${root}-${index}` : root;
-	const { start, end } = initPerf(`${rootId}-hydrate`);
+	const { start, end } = initPerf('hydration');
 	const element = document.getElementById(rootId);
 	if (!element) return null;
 	start();

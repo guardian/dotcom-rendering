@@ -117,12 +117,49 @@ describe('Elements', function () {
 					.should('not.be.empty')
 					.then(cy.wrap);
 			};
+
 			cy.visit(
 				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
 			getIframeBody().contains('radiolab');
 		});
+
+		it('should render the interactive using a boot.js', function () {
+			const getIframeBody = () => {
+				return cy
+					.get(
+						'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
+					)
+					.its('0.contentDocument.body')
+					.should('not.be.empty')
+					.then(cy.wrap);
+			};
+
+			cy.visit(
+				'Article?url=https://www.theguardian.com/sport/2019/nov/15/forget-a-super-bowl-slump-the-la-rams-have-a-jared-goff-problem',
+			);
+
+			getIframeBody().contains('The Rams’ dead cap numbers for 2020');
+		});
+
+		it('should render the interactive using a non-boot.js', function () {
+			const getIframeBody = () => {
+				return cy
+					.get(
+						'[data-cypress="interactive-element-pa%20county%20by%20county"] > iframe',
+					)
+					.its('0.contentDocument.body')
+					.should('not.be.empty')
+					.then(cy.wrap);
+			};
+
+			cy.visit(
+				'Article?url=https://www.theguardian.com/us-news/2017/jan/17/donald-trump-america-great-again-northampton-county-pennsylvania',
+			);
+			getIframeBody().contains('Switching parties');
+		});
+
 		it('should render the soundcloud embed', function () {
 			const getIframeBody = () => {
 				return cy
