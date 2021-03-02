@@ -54,23 +54,27 @@ export const coreVitals = (): void => {
 				break;
 		}
 
+		const endpoint =
+			window.location.hostname === 'm.code.dev-theguardian.com' ||
+			window.location.hostname === 'localhost' ||
+			window.location.hostname === 'preview.gutools.co.uk'
+				? 'http://performance-events.code.dev-guardianapis.com/core-web-vitals'
+				: 'https://performance-events.guardianapis.com/core-web-vitals';
+
 		// If CLS has been calculated
 		if (jsonData.cls !== null) {
-			fetch(
-				'https://performance-events.guardianapis.com/core-web-vitals',
-				{
-					method: 'POST', // *GET, POST, PUT, DELETE, etc.
-					mode: 'cors', // no-cors, *cors, same-origin
-					cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-					credentials: 'same-origin', // include, *same-origin, omit
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					redirect: 'follow',
-					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
-					body: JSON.stringify(jsonData),
+			fetch(endpoint, {
+				method: 'POST', // *GET, POST, PUT, DELETE, etc.
+				mode: 'cors', // no-cors, *cors, same-origin
+				cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+				credentials: 'same-origin', // include, *same-origin, omit
+				headers: {
+					'Content-Type': 'application/json',
 				},
-			);
+				redirect: 'follow',
+				referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
+				body: JSON.stringify(jsonData),
+			});
 		}
 	};
 
