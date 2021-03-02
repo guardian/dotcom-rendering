@@ -41,12 +41,16 @@ const Default: FC = () => (
 			shortCode: 'MNC',
 			crestUri:
 				'https://i.guim.co.uk/img/sport/football/crests/11.png?w=#{width}&h=#{height}&q=#{quality}&fit=bounds&sig-ignores-params=true&s=69570ed9a99d983d2d793a0f9855f205',
-			score: 1,
+			score: 2,
 			scorers: [
 				{
 					player: 'Sterling',
 					timeInMinutes: 2,
-					additionalInfo: '',
+					additionalInfo: '.g',
+				},
+				{
+					player: 'Beckham',
+					timeInMinutes: 30,
 				},
 			],
 		}}

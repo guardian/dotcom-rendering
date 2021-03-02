@@ -87,18 +87,18 @@ struct Campaign {
 }
 
 struct Scorer {
-    1: string player
-    2: i32 timeInMinutes
-    3: string additionalInfo
+    1: required string player
+    2: required i32 timeInMinutes
+    3: optional string additionalInfo
 }
 
 struct FootballTeam {
-    1: string id
-    2: string name
-    3: string shortCode
-    4: string crestUri
-    5: i32 score
-    6: list<Scorer> scorers
+    1: required string id
+    2: required string name
+    3: required string shortCode
+    4: required string crestUri
+    5: required i32 score
+    6: required list<Scorer> scorers
 }
 
 struct FootballContent {
@@ -108,9 +108,7 @@ struct FootballContent {
     5: required string competitionDisplayName
     6: required FootballTeam homeTeam
     7: required FootballTeam awayTeam
-    8: required string matchInfoUri
-    9: optional string venue
-    10: optional string comments
+    8: optional string venue
 }
 
 struct RenderingRequest {
