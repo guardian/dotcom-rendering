@@ -6,7 +6,7 @@ import { Lines } from '@guardian/src-ed-lines';
 import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { Display, map, none, OptionKind, withDefault } from '@guardian/types';
+import { Display, map, none, withDefault } from '@guardian/types';
 import FootballScores from 'components/footballScores';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
