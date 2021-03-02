@@ -4,7 +4,8 @@ import { cx } from 'emotion';
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from '../types';
+import { cmp } from '@root/node_modules/@guardian/consent-management-platform';
+import { CurrentABTest, SignInGateProps } from '../types';
 import {
 	actionButtons,
 	bodyBold,
@@ -14,11 +15,42 @@ import {
 	headingStyles,
 	hideElementsCss,
 	laterButton,
+	privacyLink,
 	registerButton,
 	signInGateContainer,
 	signInHeader,
 	signInLink,
 } from '../shared';
+
+// if the words 'privacy settings' are present in the paragraph once, replace it with the privacy settings CMP button
+const formatParagraph = (
+	paragraph: string,
+	ophanComponentId: string,
+	abTest: CurrentABTest | undefined,
+) => {
+	if (paragraph.includes('privacy settings')) {
+		const parts = paragraph.split('privacy settings');
+		if (parts.length === 2) {
+			return (
+				<p className={bodyText}>
+					{parts[0]}
+					<button
+						data-cy={`sign-in-gate-${abTest?.variant}_privacy`}
+						className={privacyLink}
+						onClick={() => {
+							cmp.showPrivacyManager();
+							trackLink(ophanComponentId, 'privacy', abTest);
+						}}
+					>
+						privacy settings
+					</button>
+					{parts[1]}
+				</p>
+			);
+		}
+	}
+	return <p className={bodyText}>{paragraph}</p>;
+};
 
 export const SignInGateCopyOptVar = ({
 	signInUrl,
@@ -39,7 +71,7 @@ export const SignInGateCopyOptVar = ({
 			<h1 className={headingStyles}>{signInGateCopy?.header}</h1>
 			<p className={bodyBold}>{signInGateCopy?.subHeader}</p>
 			{signInGateCopy?.paragraphs.map((paragraph) => {
-				return <p className={bodyText}>{paragraph}</p>;
+				return formatParagraph(paragraph, ophanComponentId, abTest);
 			})}
 			<div className={actionButtons}>
 				<LinkButton

@@ -14,7 +14,7 @@ export const signInGateCopyOpt: ABTest = {
 		'3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss or reshown after 5 dismisses, not on help, info sections etc. exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
 	dataLinkNames: 'SignInGateCopyOpt',
 	idealOutcome:
-		'We believe that we could increase sign in conversion by at least 5% by implementing these design changes',
+		'We believe that we could increase sign in conversion by at least 5% by implementing these copy changes',
 	showForSensitive: false,
 	canRun: () => true,
 	variants: [
