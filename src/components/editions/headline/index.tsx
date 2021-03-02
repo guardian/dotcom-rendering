@@ -171,16 +171,24 @@ const getHeadlineStyles = (
 ): SerializedStyles => {
 	const sharedStyles = getSharedStyles(format);
 
-	// Display.Immersive needs to come before Design.Interview
-	switch (format.display) {
-		case Display.Immersive:
-			return css(
-				sharedStyles,
-				getFontStyles('tight', 'bold'),
-				immersiveStyles,
-			);
-		case Display.Showcase:
-			return css(sharedStyles, getFontStyles('tight', 'bold'));
+	if (format.display === Display.Immersive) {
+		return css(
+			sharedStyles,
+			getFontStyles('tight', 'bold'),
+			immersiveStyles,
+		);
+	}
+
+	if (format.design === Design.Comment) {
+		return css(
+			sharedStyles,
+			getFontStyles('regular', 'light'),
+			commentStyles,
+		);
+	}
+
+	if (format.display === Display.Showcase) {
+		return css(sharedStyles, getFontStyles('tight', 'bold'));
 	}
 
 	switch (format.design) {
@@ -197,12 +205,6 @@ const getHeadlineStyles = (
 				sharedStyles,
 				getFontStyles('regular', 'light'),
 				analysisStyles(kickerColor),
-			);
-		case Design.Comment:
-			return css(
-				sharedStyles,
-				getFontStyles('regular', 'light'),
-				commentStyles,
 			);
 		case Design.Media:
 			return css(sharedStyles, galleryStyles);
