@@ -3,9 +3,9 @@ import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
-
 import { escapeData } from '@root/src/lib/escapeData';
 import {
+	CDN,
 	getScriptArrayFromFilename,
 	getScriptArrayFromChunkName,
 	loadableManifestJson,
@@ -79,6 +79,11 @@ export const document = ({ data }: Props): string => {
 		{
 			chunkName: 'elements-RichLinkComponent',
 			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+		},
+		{
+			chunkName: 'elements-InteractiveBlockComponent',
+			addWhen:
+				'model.dotcomrendering.pageElements.InteractiveBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -173,6 +178,15 @@ export const document = ({ data }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
+	const pageHasInteractiveElements = CAPIElements.some(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	);
+
+	function isDefined<T>(argument: T | boolean): argument is T {
+		return argument !== false;
+	}
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -187,8 +201,11 @@ export const document = ({ data }: Props): string => {
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			...getScriptArrayFromChunkName('sentryLoader'),
 			...getScriptArrayFromChunkName('dynamicImport'),
+			pageHasInteractiveElements && {
+				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
+			},
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
-		].filter(Boolean),
+		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);
 
 	/**

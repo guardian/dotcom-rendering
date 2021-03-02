@@ -19,3 +19,6 @@ node_modules/
 !/cypress/**/*.js
 !/cypress/**/*.ts
 !/scripts/**/*.js
+
+# Ignore specific files
+/**/*/curl-with-js-and-domReady.js

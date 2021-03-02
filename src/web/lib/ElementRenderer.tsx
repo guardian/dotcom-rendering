@@ -15,6 +15,7 @@ import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideo
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
@@ -329,6 +330,16 @@ export const ElementRenderer = ({
 						html={element.html}
 						js={element.js}
 						css={element.css}
+					/>
+				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
+			return (
+				<Figure role={element.role} id={element.elementId}>
+					<InteractiveBlockComponent
+						url={element.url}
+						scriptUrl={element.scriptUrl}
+						alt={element.alt}
 					/>
 				</Figure>
 			);
