@@ -5,7 +5,7 @@ import {
 	SignInGateComponent,
 	SignInGateCopy,
 } from '@frontend/web/components/SignInGate/gateDesigns/types';
-import { canShowCopyOpt as canShow } from '@frontend/web/components/SignInGate/displayRule';
+import { canShow } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 const SignInGateCopyOptVar2 = React.lazy(() => {

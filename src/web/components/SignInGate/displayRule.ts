@@ -75,7 +75,7 @@ export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
 	);
 };
 
-export const canShowCopyOpt = (
+export const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
 	currentTest: CurrentABTest,
