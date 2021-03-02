@@ -188,17 +188,20 @@ const getHeadlineStyles = (
 		);
 	}
 
+	// this needs to come before Display.Showcase
+	if (format.design === Design.Interview) {
+		return css(
+			sharedStyles,
+			getFontStyles('tight', 'bold'),
+			interviewStyles,
+		);
+	}
+
 	if (format.display === Display.Showcase) {
 		return css(sharedStyles, getFontStyles('tight', 'bold'));
 	}
 
 	switch (format.design) {
-		case Design.Interview:
-			return css(
-				sharedStyles,
-				getFontStyles('tight', 'bold'),
-				interviewStyles,
-			);
 		case Design.Review:
 			return css(sharedStyles, getFontStyles('tight', 'bold'));
 		case Design.Analysis:
