@@ -179,6 +179,7 @@ const getHeadlineStyles = (
 		);
 	}
 
+	// this needs to come before Display.Showcase
 	if (format.design === Design.Comment) {
 		return css(
 			sharedStyles,
