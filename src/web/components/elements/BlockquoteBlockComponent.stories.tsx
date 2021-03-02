@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { Display, Design, Pillar } from '@guardian/types';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';
@@ -26,11 +25,6 @@ const SomeText = () => (
 			design: Design.Article,
 			display: Display.Standard,
 		}}
-		palette={decidePalette({
-			display: Display.Standard,
-			design: Design.Article,
-			theme: Pillar.News,
-		})}
 		isFirstParagraph={false}
 	/>
 );

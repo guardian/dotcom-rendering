@@ -34,7 +34,7 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const enhancedDots = (data: CAPIType): CAPIType => {
+export const enhanceDots = (data: CAPIType): CAPIType => {
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,

@@ -4,7 +4,7 @@ import { extractNAV } from '@root/src/model/extract-nav';
 import { document } from '@root/src/web/server/document';
 import { validateAsCAPIType } from '@root/src/model/validate';
 import { addDividers } from '@root/src/model/add-dividers';
-import { enhancedDots } from '@root/src/model/add-dots';
+import { enhanceDots } from '@root/src/model/add-dots';
 import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhancePhotoEssay } from '@root/src/model/enhance-photoessay';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
@@ -23,8 +23,8 @@ class CAPIEnhancer {
 		return this;
 	}
 
-	enhancedDots() {
-		this.capi = enhancedDots(this.capi);
+	enhanceDots() {
+		this.capi = enhanceDots(this.capi);
 		return this;
 	}
 
@@ -58,7 +58,7 @@ export const render = (
 			.validateAsCAPIType()
 			.addDividers()
 			.enhanceBlockquotes()
-			.enhancedDots()
+			.enhanceDots()
 			.enhancePhotoEssay().capi;
 		const resp = document({
 			data: {

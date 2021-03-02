@@ -1,4 +1,4 @@
-import { enhancedDots } from './add-dots';
+import { enhanceDots } from './add-dots';
 import { bodyJSON } from './exampleBodyJSON';
 
 const example = JSON.parse(bodyJSON);
@@ -46,7 +46,7 @@ describe('Middot Tests', () => {
 			],
 		};
 
-		expect(enhancedDots(input)).not.toBe(expectedOutput);
+		expect(enhanceDots(input)).not.toBe(expectedOutput);
 	});
 
 	it('It does not incorrectly replace * with dot spans', () => {
@@ -101,6 +101,6 @@ describe('Middot Tests', () => {
 			],
 		};
 
-		expect(enhancedDots(input)).toEqual(expectedOutput);
+		expect(enhanceDots(input)).toEqual(expectedOutput);
 	});
 });

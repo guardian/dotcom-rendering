@@ -13,7 +13,6 @@ import { Display, Design, Pillar } from '@guardian/types';
 import { breakpoints } from '@guardian/src-foundations/mq';
 
 import { Figure } from './Figure';
-import { decidePalette } from '../lib/decidePalette';
 
 const textHtml =
 	'<p>US and British intelligence agencies have successfully cracked much of the online encryption relied upon by hundreds of millions of people to protect the privacy of their personal data, online transactions and emails, according to top-secret documents revealed by former contractor Edward Snowden.</p>';
@@ -26,11 +25,6 @@ const SomeText = () => (
 			design: Design.Article,
 			display: Display.Standard,
 		}}
-		palette={decidePalette({
-			display: Display.Standard,
-			design: Design.Article,
-			theme: Pillar.News,
-		})}
 		isFirstParagraph={false}
 	/>
 );
