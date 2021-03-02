@@ -107,9 +107,19 @@ export const htmlTemplate = ({
 		(src) => `<link rel="dns-prefetch" href="${src}">`,
 	);
 
+	const weAreHiringMessage = `
+<!--
+The Guardian
+Honesty, integrity, courage, fairness, and a sense of duty to the reader and the community
+
+We are hiring, ever thought about joining us?
+https://workforus.theguardian.com/careers/product-engineering/
+--->`;
+
 	return `<!doctype html>
         <html lang="en">
             <head>
+			    ${weAreHiringMessage}
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
                 <meta charset="utf-8">
