@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import 'regenerator-runtime/runtime.js';
-import { AudioAtom, QuizAtom } from '@guardian/atoms-rendering';
-import type { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
+import { AudioAtom, PersonalityQuizAtom, KnowledgeQuizAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
@@ -369,10 +368,14 @@ function hydrateQuizAtoms(): void {
 		const props = atom.querySelector('.js-quiz-params')?.innerHTML;
 		try {
 			if (props) {
-				const quizProps: unknown = JSON.parse(
+				const quizProps = JSON.parse(
 					props.replace(/&quot;/g, '"'),
 				);
-				ReactDOM.hydrate(h(QuizAtom, quizProps as QuizAtomType), atom);
+				if (quizProps.quizType === 'personality') {
+					ReactDOM.hydrate(h(PersonalityQuizAtom, quizProps), atom);
+				} else if (quizProps.quizType === 'knowledge') {
+					ReactDOM.hydrate(h(KnowledgeQuizAtom, quizProps), atom);
+				}
 			}
 		} catch (e) {
 			console.error(e);

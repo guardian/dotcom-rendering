@@ -300,15 +300,29 @@ function parseAtom(
 					...question,
 					answers: question.answers.map((answer) => {
 						return {
+							id: answer.id,
 							text: answer.answerText,
 							isCorrect: !!answer.weight,
-							...answer,
+							answerBuckets: answer.bucket ?? [],
 						};
 					}),
 				};
 			});
 
-			return ok({ kind: ElementKind.QuizAtom, id, questions });
+			if (atom.data.quiz.quizType === 'knowledge') {
+				return ok({ kind: ElementKind.KnowledgeQuizAtom, id, questions });
+			}
+
+			if (atom.data.quiz.quizType === 'personality') {
+				return ok({
+					kind: ElementKind.PersonalityQuizAtom,
+					id,
+					questions,
+					resultBuckets: atom.data.quiz.content.resultBuckets?.buckets ?? [],
+				});
+
+			}
+
 		}
 
 		default: {

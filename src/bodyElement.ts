@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-import type { QuestionType } from '@guardian/atoms-rendering/dist/QuizAtom';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
@@ -46,7 +45,8 @@ const enum ElementKind {
 	TimelineAtom,
 	ChartAtom,
 	AudioAtom,
-	QuizAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
 }
 
 type Text = {
@@ -135,11 +135,39 @@ interface AudioAtom {
 	title: string;
 }
 
-interface QuizAtom {
-	kind: ElementKind.QuizAtom;
+interface KnowledgeQuizAtom {
+	kind: ElementKind.KnowledgeQuizAtom;
 	id: string;
 	questions: QuestionType[];
 }
+
+interface PersonalityQuizAtom {
+	kind: ElementKind.PersonalityQuizAtom;
+	id: string;
+	questions: QuestionType[];
+	resultBuckets: ResultBucket[];
+}
+
+type AnswerType = {
+    id: string;
+    text: string;
+    revealText?: string;
+    isCorrect: boolean;
+    answerBuckets: string[];
+};
+
+type ResultBucket = {
+    id: string;
+    title: string;
+    description: string;
+};
+
+type QuestionType = {
+	id: string;
+	text: string;
+	answers: AnswerType[];
+	imageUrl?: string;
+};
 
 type BodyElement =
 	| Text
@@ -188,7 +216,8 @@ type BodyElement =
 	| TimelineAtom
 	| ChartAtom
 	| AudioAtom
-	| QuizAtom;
+	| KnowledgeQuizAtom
+	| PersonalityQuizAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -427,6 +456,7 @@ export {
 	ProfileAtom,
 	TimelineAtom,
 	AudioAtom,
-	QuizAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
 	parseElements,
 };

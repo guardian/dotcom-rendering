@@ -7,9 +7,10 @@ import {
 	ChartAtom,
 	ExplainerAtom,
 	GuideAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
 	ProfileAtom,
 	QandaAtom,
-	QuizAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { BodyImage, FigCaption } from '@guardian/image-rendering';
@@ -41,7 +42,8 @@ import type {
 	MediaAtom as MediaAtomElement,
 	ProfileAtom as ProfileAtomElement,
 	QandaAtom as QandaAtomElement,
-	QuizAtom as QuizAtomElement,
+	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
+	PersonalityQuizAtom as PersonalityQuizAtomElement,
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
@@ -657,7 +659,7 @@ const audioAtomRenderer = (
 
 const quizAtomRenderer = (
 	format: Format,
-	element: QuizAtomElement,
+	element: KnowledgeQuizAtomElement | PersonalityQuizAtomElement,
 ): ReactNode => {
 	const props = JSON.stringify(element);
 	const hydrationParams = h(
@@ -665,10 +667,18 @@ const quizAtomRenderer = (
 		{ className: 'js-quiz-params', type: 'application/json' },
 		props,
 	);
-	return h('div', { className: 'js-quiz' }, [
-		hydrationParams,
-		h(QuizAtom, { ...element }),
-	]);
+	if (element.kind === ElementKind.KnowledgeQuizAtom) {
+		return h('div', { className: 'js-quiz' }, [
+			hydrationParams,
+			h(KnowledgeQuizAtom, { ...element }),
+		]);
+	}
+	if (element.kind === ElementKind.PersonalityQuizAtom) {
+		return h('div', { className: 'js-quiz' }, [
+			hydrationParams,
+			h(PersonalityQuizAtom, { ...element }),
+		]);
+	}
 };
 
 const render = (format: Format, excludeStyles = false) => (
@@ -746,7 +756,8 @@ const render = (format: Format, excludeStyles = false) => (
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
 
-		case ElementKind.QuizAtom:
+		case ElementKind.KnowledgeQuizAtom:
+		case ElementKind.PersonalityQuizAtom:
 			return quizAtomRenderer(format, element);
 	}
 };
@@ -813,7 +824,8 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
 
-		case ElementKind.QuizAtom:
+		case ElementKind.KnowledgeQuizAtom:
+		case ElementKind.PersonalityQuizAtom:
 			return quizAtomRenderer(format, element);
 
 		default:

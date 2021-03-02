@@ -95,7 +95,7 @@ function themeFromString(theme: string | undefined): Pillar {
 	}
 }
 
-function themeToPillar(theme: Theme): string {
+function themeToPillarString(theme: Theme): string {
 	switch (theme) {
 		case Pillar.Opinion:
 			return 'opinion';
@@ -111,6 +111,15 @@ function themeToPillar(theme: Theme): string {
 	}
 }
 
+function themeToPillar(theme: Theme): Pillar {
+	switch (theme) {
+		case Special.SpecialReport:
+			return Pillar.News;
+		default:
+			return theme;
+	}
+}
+
 // ----- Exports ----- //
 
-export { ThemeStyles, getThemeStyles, themeFromString, themeToPillar };
+export { ThemeStyles, getThemeStyles, themeFromString, themeToPillarString, themeToPillar };
