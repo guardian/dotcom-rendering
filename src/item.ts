@@ -376,6 +376,7 @@ export {
 	Review,
 	AdvertisementFeature,
 	Standard,
+	MatchReport,
 	ResizedRelatedContent,
 	fromCapi,
 	fromCapiLiveBlog,

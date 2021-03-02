@@ -6,7 +6,7 @@ import { Lines } from '@guardian/src-ed-lines';
 import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { Display, map, OptionKind, withDefault } from '@guardian/types';
+import { Display, map, none, OptionKind, withDefault } from '@guardian/types';
 import FootballScores from 'components/footballScores';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
@@ -23,6 +23,7 @@ import { parseMatchScores } from 'football';
 import HeaderMedia from 'headerMedia';
 import type {
 	Item,
+	MatchReport as MatchReportItem,
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
@@ -87,7 +88,7 @@ const itemStyles = (item: Item): SerializedStyles => {
 };
 
 interface Props {
-	item: StandardItem | ReviewItem;
+	item: StandardItem | ReviewItem | MatchReportItem;
 	children: ReactNode[];
 }
 
@@ -115,7 +116,8 @@ const Standard: FC<Props> = ({ item, children }) => {
 		  )
 		: null;
 
-	const matchScores = parseMatchScores(item.footballContent);
+	const matchScores =
+		'football' in item ? parseMatchScores(item.football) : none;
 
 	return (
 		<main css={[Styles, DarkStyles]}>
