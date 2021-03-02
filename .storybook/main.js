@@ -1,8 +1,8 @@
 const path = require('path');
 
 module.exports = {
-  "stories": ["../src/**/*.stories.@(tsx)"],
-	"addons": ["@storybook/addon-essentials"],
+	stories: ['../src/**/*.stories.@(tsx)'],
+	addons: ['@storybook/addon-essentials'],
 	webpackFinal: async (config) => {
 		const rules = config.module.rules;
 		const { extensions } = config.resolve;
@@ -22,13 +22,27 @@ module.exports = {
 			],
 			use: [
 				{
-					loader: require.resolve('awesome-typescript-loader'),
+					loader: 'babel-loader',
 					options: {
-						silent: true,
-						useBabel: true,
-						babelOptions: {
-							plugins: ['@babel/plugin-proposal-optional-chaining'],
-						},
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									bugfixes: true,
+									targets: {
+										esmodules: true,
+									},
+								},
+							],
+						],
+					},
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
 					},
 				},
 			],
@@ -53,6 +67,5 @@ module.exports = {
 		};
 
 		return config;
-	}
-}
-
+	},
+};
