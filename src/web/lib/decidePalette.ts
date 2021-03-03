@@ -85,6 +85,11 @@ const textByline = (format: Format): string => {
 	}
 };
 
+const textHeadlineByline = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
 const textTwitterHandle = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
@@ -331,6 +336,12 @@ const backgroundHeadline = (format: Format): string => {
 	}
 };
 
+const backgroundHeadlineByline = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
+	return 'transparent';
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -421,6 +432,10 @@ const topBarCard = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const hoverHeadlineByline = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -442,6 +457,7 @@ export const decidePalette = (format: Format): Palette => {
 			linkKicker: textLinkKicker(format),
 			cardStandfirst: textCardStandfirst(format),
 			cardFooter: textCardFooter(format),
+			headlineByline: textHeadlineByline(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -450,6 +466,7 @@ export const decidePalette = (format: Format): Palette => {
 			avatar: backgroundAvatar(format),
 			card: backgroundCard(format),
 			headline: backgroundHeadline(format),
+			headlineByline: backgroundHeadlineByline(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -465,6 +482,9 @@ export const decidePalette = (format: Format): Palette => {
 		},
 		topBar: {
 			card: topBarCard(format),
+		},
+		hover: {
+			headlineByline: hoverHeadlineByline(format),
 		},
 	};
 };

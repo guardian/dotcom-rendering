@@ -5,8 +5,8 @@ import { headline } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
-import { pillarPalette } from '@frontend/lib/pillars';
 import { Display, Design, Format } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const wrapperStyles = css`
 	margin-left: 6px;
@@ -36,13 +36,16 @@ const yellowBoxStyles = css`
 	}
 `;
 
-const opinionStyles = (pillar: Theme) => css`
+const opinionStyles = (palette: Palette) => css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
 	line-height: 38px;
+	/* Used to prevent the byline stretching full width */
+	display: inline;
 	font-style: italic;
-	color: ${pillarPalette[pillar].main};
+	color: ${palette.text.headlineByline};
+	background: ${palette.background.headlineByline};
 
 	a {
 		color: inherit;
@@ -60,14 +63,14 @@ const immersiveStyles = css`
 	margin-bottom: ${space[6]}px;
 `;
 
-const immersiveLinkStyles = (pillar: Theme) => css`
+const immersiveLinkStyles = (palette: Palette) => css`
 	a {
-		color: ${pillarPalette[pillar].main};
-		border-bottom: 1px solid ${pillarPalette[pillar].main};
+		color: ${palette.text.headlineByline};
+		border-bottom: 1px solid ${palette.text.headlineByline};
 		text-decoration: none;
 		:hover {
-			border-bottom: 1px solid ${pillarPalette[pillar].dark};
-			color: ${pillarPalette[pillar].dark};
+			border-bottom: 1px solid ${palette.hover.headlineByline};
+			color: ${palette.hover.headlineByline};
 			text-decoration: none;
 		}
 	}
@@ -85,12 +88,14 @@ type Props = {
 };
 
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
+	const palette = decidePalette(format);
+
 	switch (format.display) {
 		case Display.Immersive:
 			return (
 				<div className={immersiveStyles}>
 					by{' '}
-					<span className={immersiveLinkStyles(format.theme)}>
+					<span className={immersiveLinkStyles(palette)}>
 						<BylineLink byline={byline} tags={tags} />
 					</span>
 				</div>
@@ -111,7 +116,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case Design.Comment:
 					return (
 						<div
-							className={`${opinionStyles(format.theme)} ${
+							className={`${opinionStyles(palette)} ${
 								tags.filter((tag) => tag.type === 'Contributor')
 									.length === 1
 									? authorBylineWithImage
