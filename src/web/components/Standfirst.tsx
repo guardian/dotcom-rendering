@@ -42,6 +42,16 @@ const nestedStyles = css`
 	strong {
 		font-weight: bold;
 	}
+
+	[data-dcr-style='bullet'] {
+		display: inline-block;
+		content: '';
+		border-radius: 0.375rem;
+		height: 0.75rem;
+		width: 0.75rem;
+		margin-right: 0.125rem;
+		background-color: ${neutral[86]};
+	}
 `;
 
 const standfirstStyles = (design: Design, display: Display) => {

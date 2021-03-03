@@ -36,7 +36,7 @@ export const InteractiveBlockComponent: React.SFC<{
 
 	return (
 		<amp-iframe
-			className={styles}
+			class={styles}
 			src={url}
 			layout="responsive"
 			sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups"

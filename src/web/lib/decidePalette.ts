@@ -342,6 +342,11 @@ const backgroundHeadlineByline = (format: Format): string => {
 	return 'transparent';
 };
 
+const backgroundBullet = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -467,6 +472,7 @@ export const decidePalette = (format: Format): Palette => {
 			card: backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
+			bullet: backgroundBullet(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

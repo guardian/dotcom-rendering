@@ -74,6 +74,7 @@ type Palette = {
 		card: Colour;
 		headline: Colour;
 		headlineByline: Colour;
+		bullet: Colour;
 	},
 	fill: {
 		commentCount: Colour;
@@ -717,8 +718,13 @@ interface RichLinkBlockLoadable extends ComponentNameChunkMap {
     addWhen: RichLinkBlockElement['_type'];
 }
 
+interface InteractiveBlockLoadaable extends ComponentNameChunkMap {
+    chunkName: 'elements-InteractiveBlockComponent';
+    addWhen: InteractiveBlockElement['_type'];
+}
+
 // There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
+type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable, InteractiveBlockLoadaable]
 
 interface CarouselImagesMap {
 	'300'?: string;

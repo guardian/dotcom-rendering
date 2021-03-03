@@ -27,6 +27,7 @@ export interface WindowGuardianConfig {
 	tests?: { [key: string]: string };
 	ophan: {
 		pageViewId: string;
+		browserId: string;
 	};
 }
 
@@ -62,6 +63,7 @@ const makeWindowGuardianConfig = (
 		tests: config.abTests || {},
 		ophan: {
 			pageViewId: '',
+			browserId: '',
 		},
 	} as WindowGuardianConfig;
 };
@@ -74,6 +76,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		'model.dotcomrendering.pageElements.CalloutBlockElement',
 		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
 		'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
 		'model.dotcomrendering.pageElements.QABlockElement',
 		'model.dotcomrendering.pageElements.QuizAtomBlockElement',
