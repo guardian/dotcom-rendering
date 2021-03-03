@@ -120,6 +120,8 @@ try {
 			.then((json) => {
 				// Add test config
 				json.config = config;
+				// TODO: Remove this when we add in support for CAPI format to DCR
+				delete json.format;
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name
