@@ -274,6 +274,11 @@ const comment: Item = {
 	...fields,
 };
 
+const editorial: Item = {
+	design: Design.GuardianView,
+	...fields,
+};
+
 const interview: Item = {
 	design: Design.Interview,
 	...fields,
@@ -296,4 +301,5 @@ export {
 	comment,
 	interview,
 	media,
+	editorial,
 };

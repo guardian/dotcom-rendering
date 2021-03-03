@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-
+import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { Display, Pillar } from '@guardian/types';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import {
@@ -10,6 +10,7 @@ import {
 	interview,
 	media,
 	review,
+	editorial,
 } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -24,6 +25,16 @@ const isImmersive = (): { display: Display } => {
 			: Display.Standard,
 	};
 };
+
+const getTag = (id: string, webTitle: string): Tag => ({
+	id,
+	type: 6,
+	webTitle,
+	webUrl: '',
+	apiUrl: '',
+	references: [],
+	internalName: '',
+});
 
 // ----- Stories ----- //
 
@@ -43,6 +54,17 @@ const Analysis = (): ReactElement => (
 			...analysis,
 			...isImmersive(),
 			theme: selectPillar(Pillar.Lifestyle),
+		}}
+	/>
+);
+
+const Editorial = (): ReactElement => (
+	<Article
+		item={{
+			...editorial,
+			tags: [getTag('tone/editorials', 'View from the Guardian ')],
+			...isImmersive(),
+			theme: selectPillar(Pillar.Opinion),
 		}}
 	/>
 );
@@ -123,4 +145,5 @@ export {
 	Interview,
 	Comment,
 	Media,
+	Editorial,
 };
