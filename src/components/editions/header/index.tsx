@@ -245,6 +245,8 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	// Display.Immersive needs to come before Design.Interview
 	if (item.display === Display.Immersive) {
 		return <ImmersiveHeader item={item} />;
+	} else if (item.design === Design.GuardianView) {
+		return <StandardHeader item={item} />;
 	} else if (item.design === Design.Interview) {
 		return <InterviewHeader item={item} />;
 	} else if (item.design === Design.Comment) {
