@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
@@ -11,6 +11,7 @@ import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';
+import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 
 const { css } = emotion;
 
@@ -101,6 +102,12 @@ const BrazeEpic = ({
 }: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 
+	const [hasBeenSeen, setNode] = useHasBeenSeen({
+		rootMargin: '-18px',
+		threshold: 0,
+		debounce: true,
+	});
+
 	useOnce(() => {
 		window.guardian.automat = {
 			react: React,
@@ -119,13 +126,17 @@ const BrazeEpic = ({
 			.guardianPolyfilledImport(componentUrl)
 			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-				// TODO: log the impression when the epic is in view (using hasBeenSeen probably)
-				meta.logImpressionWithBraze();
 			})
 			.catch((error) => {
 				window.guardian.modules.sentry.reportError(error, 'braze-epic');
 			});
 	}, [contributionsServiceUrl, meta]);
+
+	useEffect(() => {
+		if (hasBeenSeen && meta) {
+			meta.logImpressionWithBraze();
+		}
+	}, [hasBeenSeen, meta]);
 
 	if (Epic && meta.dataFromBraze) {
 		// This will come from Braze via the meta from canShow
@@ -136,7 +147,7 @@ const BrazeEpic = ({
 
 		if (props) {
 			return (
-				<div className={wrapperMargins}>
+				<div ref={setNode} className={wrapperMargins}>
 					{/* eslint-disable-next-line react/jsx-props-no-spreading */}
 					<Epic {...props} />
 				</div>
