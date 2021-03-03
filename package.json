@@ -140,7 +140,7 @@
         "@storybook/react": "^6.1.20",
         "@testing-library/dom": "^7.27.1",
         "@testing-library/react": "^11.2.5",
-        "@testing-library/user-event": "^12.6.0",
+        "@testing-library/user-event": "^12.8.1",
         "@types/amphtml-validator": "^1.0.1",
         "@types/compose-function": "^0.0.30",
         "@types/compression": "^0.0.36",
