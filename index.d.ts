@@ -64,6 +64,7 @@ type Palette = {
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
+		headlineByline: Colour;
 	},
 	background: {
 		article: Colour;
@@ -72,6 +73,7 @@ type Palette = {
 		avatar: Colour;
 		card: Colour;
 		headline: Colour;
+		headlineByline: Colour;
 		bullet: Colour;
 	},
 	fill: {
@@ -89,6 +91,9 @@ type Palette = {
 	topBar: {
 		card: Colour;
 	},
+	hover: {
+		headlineByline: Colour;
+	}
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

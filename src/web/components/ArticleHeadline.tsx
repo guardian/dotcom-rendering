@@ -227,9 +227,7 @@ export const ArticleHeadline = ({
 							</h1>
 							{byline && (
 								<HeadlineByline
-									display={format.display}
-									design={format.design}
-									pillar={format.theme}
+									format={format}
 									byline={byline}
 									tags={tags}
 								/>
@@ -299,9 +297,7 @@ export const ArticleHeadline = ({
 							</h1>
 							{byline && (
 								<HeadlineByline
-									display={format.display}
-									design={format.design}
-									pillar={format.theme}
+									format={format}
 									byline={byline}
 									tags={tags}
 								/>
@@ -355,9 +351,7 @@ export const ArticleHeadline = ({
 							</h1>
 							{byline && (
 								<HeadlineByline
-									display={format.display}
-									design={format.design}
-									pillar={format.theme}
+									format={format}
 									byline={byline}
 									tags={tags}
 								/>
