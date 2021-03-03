@@ -1,26 +1,66 @@
-type Callback = (message: Message) => void;
+/* eslint-disable max-classes-per-file */
+
+import type appboy from '@braze/web-sdk-core';
 
 type Extras = Record<string, string>;
 
-interface Appboy {
-	subscribeToInAppMessage: (callback: Callback) => string;
+interface BrazeMessagesInterface {
+	getMessageForBanner: () => Promise<BrazeMessage>;
+	getMessageForEndOfArticle: () => Promise<BrazeMessage>;
 }
 
-interface Message {
-	extras?: Extras;
-	triggerId?: string; // This keeps Typescript happy, because Message could be an InAppMessage or a ControlMessage
-}
+class BrazeMessage {
+	appboy: typeof appboy;
 
-class BrazeMessages {
-	appboy: Appboy;
+	message: appboy.InAppMessage;
 
-	constructor(appboy: Appboy) {
-		this.appboy = appboy;
+	constructor(message: appboy.InAppMessage, appboyInstance: typeof appboy) {
+		this.message = message;
+		this.appboy = appboyInstance;
 	}
 
-	private getMessageForSlot(targetSlotName: string): Promise<Message> {
+	logImpression() {
+		this.appboy.logInAppMessageImpression(this.message);
+	}
+
+	logButtonClick(internalButtonId: number) {
+		const button = new this.appboy.InAppMessageButton(
+			`Button: ID ${internalButtonId}`,
+			undefined,
+			undefined,
+			undefined,
+			undefined,
+			undefined,
+			internalButtonId,
+		);
+		this.appboy.logInAppMessageButtonClick(button, this.message);
+	}
+
+	get extras(): Extras | undefined {
+		return this.message.extras;
+	}
+}
+
+class BrazeMessages implements BrazeMessagesInterface {
+	appboy: typeof appboy;
+
+	bannerMessage: Promise<BrazeMessage>;
+
+	endOfArticleMessage: Promise<BrazeMessage>;
+
+	constructor(appboyInstance: typeof appboy) {
+		this.appboy = appboyInstance;
+		this.bannerMessage = this.getMessageForSlot('Banner');
+		this.endOfArticleMessage = this.getMessageForSlot('EndOfArticle');
+	}
+
+	private getMessageForSlot(targetSlotName: string): Promise<BrazeMessage> {
 		return new Promise((resolve) => {
-			const callback = (message: Message) => {
+			const callback = (
+				m: appboy.InAppMessage | appboy.ControlMessage,
+			) => {
+				// Cast this as we only ever expect it to be an InAppMessage
+				const message = m as appboy.InAppMessage;
 				const { extras } = message;
 
 				if (
@@ -28,7 +68,7 @@ class BrazeMessages {
 					extras.slotName &&
 					extras.slotName === targetSlotName
 				) {
-					resolve(message);
+					resolve(new BrazeMessage(message, this.appboy));
 				}
 			};
 
@@ -36,13 +76,13 @@ class BrazeMessages {
 		});
 	}
 
-	getMessageForBanner(): Promise<Message> {
-		return this.getMessageForSlot('Banner');
+	getMessageForBanner(): Promise<BrazeMessage> {
+		return this.bannerMessage;
 	}
 
-	getMessageForEndOfArticle(): Promise<Message> {
-		return this.getMessageForSlot('EndOfArticle');
+	getMessageForEndOfArticle(): Promise<BrazeMessage> {
+		return this.endOfArticleMessage;
 	}
 }
 
-export { BrazeMessages, Message, Callback };
+export { BrazeMessages, BrazeMessagesInterface, BrazeMessage };

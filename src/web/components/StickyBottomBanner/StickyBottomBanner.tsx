@@ -13,13 +13,14 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
+import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
 	asyncCountryCode?: Promise<string | void>;
 	CAPI: CAPIBrowserType;
-	idApiUrl: string;
+	brazeMessages?: Promise<BrazeMessagesInterface>;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
@@ -86,12 +87,11 @@ const buildReaderRevenueBannerConfig = (
 };
 
 const buildBrazeBanner = (
-	isSignedIn: boolean,
-	idApiUrl: string,
+	brazeMessages: Promise<BrazeMessagesInterface>,
 ): CandidateConfig => ({
 	candidate: {
 		id: 'braze-banner',
-		canShow: () => canShowBrazeBanner(isSignedIn, idApiUrl),
+		canShow: () => canShowBrazeBanner(brazeMessages),
 		show: (meta: any) => () => <BrazeBanner meta={meta} />,
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
@@ -101,7 +101,7 @@ export const StickyBottomBanner = ({
 	isSignedIn,
 	asyncCountryCode,
 	CAPI,
-	idApiUrl,
+	brazeMessages,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -111,7 +111,9 @@ export const StickyBottomBanner = ({
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<string>,
 		);
-		const brazeBanner = buildBrazeBanner(isSignedIn as boolean, idApiUrl);
+		const brazeBanner = buildBrazeBanner(
+			brazeMessages as Promise<BrazeMessagesInterface>,
+		);
 		const bannerConfig: SlotConfig = {
 			candidates: [CMP, readerRevenue, brazeBanner],
 			name: 'banner',
@@ -124,7 +126,7 @@ export const StickyBottomBanner = ({
 			.catch((e) =>
 				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, asyncCountryCode, CAPI]);
+	}, [isSignedIn, asyncCountryCode, CAPI, brazeMessages]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;

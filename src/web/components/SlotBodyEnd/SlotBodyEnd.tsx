@@ -8,10 +8,12 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 
+import { BrazeMessagesInterface } from 'src/web/lib/braze/BrazeMessages';
 import {
 	ReaderRevenueEpic,
 	canShow as canShowReaderRevenueEpic,
 } from './ReaderRevenueEpic';
+import { MaybeBrazeEpic, canShow as canShowBrazeEpic } from './BrazeEpic';
 
 type Props = {
 	isSignedIn?: boolean;
@@ -23,6 +25,7 @@ type Props = {
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
+	brazeMessages?: Promise<BrazeMessagesInterface>;
 };
 
 const buildReaderRevenueEpicConfig = ({
@@ -60,6 +63,27 @@ const buildReaderRevenueEpicConfig = ({
 	};
 };
 
+const buildBrazeEpicConfig = (
+	brazeMessages: Promise<BrazeMessagesInterface>,
+	contributionsServiceUrl: string,
+	countryCode: string,
+): CandidateConfig => {
+	return {
+		candidate: {
+			id: 'braze-epic',
+			canShow: () => canShowBrazeEpic(brazeMessages),
+			show: (meta: any) => () => (
+				<MaybeBrazeEpic
+					meta={meta}
+					contributionsServiceUrl={contributionsServiceUrl}
+					countryCode={countryCode}
+				/>
+			),
+		},
+		timeoutMillis: null,
+	};
+};
+
 export const SlotBodyEnd = ({
 	isSignedIn,
 	countryCode,
@@ -70,6 +94,7 @@ export const SlotBodyEnd = ({
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
+	brazeMessages,
 }: Props) => {
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -84,8 +109,13 @@ export const SlotBodyEnd = ({
 			tags,
 			contributionsServiceUrl,
 		});
+		const brazeEpic = buildBrazeEpicConfig(
+			brazeMessages as Promise<BrazeMessagesInterface>,
+			contributionsServiceUrl,
+			countryCode as string,
+		);
 		const epicConfig: SlotConfig = {
-			candidates: [readerRevenueEpic],
+			candidates: [readerRevenueEpic, brazeEpic],
 			name: 'slotBodyEnd',
 		};
 
@@ -94,7 +124,7 @@ export const SlotBodyEnd = ({
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, countryCode]);
+	}, [isSignedIn, countryCode, brazeMessages]);
 
 	if (SelectedEpic) {
 		return <SelectedEpic />;

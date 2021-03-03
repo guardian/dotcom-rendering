@@ -71,12 +71,14 @@ import {
 	StickyNavSimple,
 	StickyNavBackscroll,
 } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
+import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
 import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
+import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -164,6 +166,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 	// executing their canShow logic until countryCode is available):
 	const [asyncCountryCode, setAsyncCountryCode] = useState<
 		Promise<string | void>
+	>();
+
+	const [brazeMessages, setBrazeMessages] = useState<
+		Promise<BrazeMessagesInterface>
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
@@ -329,6 +335,12 @@ export const App = ({ CAPI, NAV }: Props) => {
 			}
 		});
 	}, []);
+
+	useOnce(() => {
+		setBrazeMessages(
+			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
+		);
+	}, [isSignedIn, CAPI.config.idApiUrl]);
 
 	const display: Display = decideDisplay(CAPI);
 	const design: Design = decideDesign(
@@ -958,6 +970,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 					tags={CAPI.tags}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					brazeMessages={brazeMessages}
 				/>
 			</Portal>
 			<Portal
@@ -1049,7 +1062,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
 					CAPI={CAPI}
-					idApiUrl={CAPI.config.idApiUrl}
+					brazeMessages={brazeMessages}
 				/>
 			</Portal>
 		</React.StrictMode>

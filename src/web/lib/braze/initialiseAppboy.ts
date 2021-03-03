@@ -1,3 +1,5 @@
+import type appboy from '@braze/web-sdk-core';
+
 const SDK_OPTIONS = {
 	enableLogging: false,
 	noCookies: true,
@@ -6,14 +8,26 @@ const SDK_OPTIONS = {
 	minimumIntervalBetweenTriggerActionsInSeconds: 0,
 };
 
-const getInitialisedAppboy = async (apiKey: string): Promise<typeof appboy> => {
-	const { default: appboy } = await import(
+const initialiseAppboy = async (apiKey: string): Promise<typeof appboy> => {
+	const importedAppboy = ((await import(
 		/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
-	);
+	)) as unknown) as typeof appboy;
 
-	appboy.initialize(apiKey, SDK_OPTIONS);
+	importedAppboy.initialize(apiKey, SDK_OPTIONS);
 
-	return appboy;
+	return importedAppboy;
 };
+
+const getInitialisedAppboy = (() => {
+	let cache: Promise<typeof appboy>;
+
+	return (apiKey: string): Promise<typeof appboy> => {
+		if (cache === undefined) {
+			cache = initialiseAppboy(apiKey);
+		}
+
+		return cache;
+	};
+})();
 
 export { getInitialisedAppboy, SDK_OPTIONS };
