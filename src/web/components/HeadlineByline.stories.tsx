@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 
 import { HeadlineByline } from './HeadlineByline';
 
@@ -39,6 +39,21 @@ export const commentStory = () => {
 	);
 };
 commentStory.story = { name: 'Comment' };
+
+export const specialStory = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Special.SpecialReport,
+			}}
+			byline="Jane Smith"
+			tags={[]}
+		/>
+	);
+};
+specialStory.story = { name: 'SpecialReport' };
 
 export const commentWithBylineImageStory = () => {
 	// Not visibly different in storybook but will apply a width
