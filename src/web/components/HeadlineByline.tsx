@@ -91,18 +91,14 @@ type Props = {
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case Display.Immersive:
-			if (byline) {
-				return (
-					<div className={immersiveStyles}>
-						by{' '}
-						<span className={immersiveLinkStyles(format.theme)}>
-							<BylineLink byline={byline} tags={tags} />
-						</span>
-					</div>
-				);
-			}
-
-			return null;
+			return (
+				<div className={immersiveStyles}>
+					by{' '}
+					<span className={immersiveLinkStyles(format.theme)}>
+						<BylineLink byline={byline} tags={tags} />
+					</span>
+				</div>
+			);
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
