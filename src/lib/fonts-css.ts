@@ -287,6 +287,28 @@ const fontList: FontDisplay[] = [
 		weight: 700,
 		style: 'normal',
 	},
+	{
+		family: 'GuardianTextSans',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
+	},
+	{
+		family: 'Guardian Text Sans Web',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
+	},
 ];
 
 const assetsUrl = (path: string): string =>
