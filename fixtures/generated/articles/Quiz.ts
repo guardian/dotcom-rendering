@@ -38,6 +38,10 @@ export const Quiz: CAPIType = {
 					value: 'uk',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
 					name: 'se',
 					value: ['guardian-sport-network'],
 				},
@@ -69,10 +73,6 @@ export const Quiz: CAPIType = {
 					name: 'k',
 					value: ['sport', 'football'],
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		US: {
@@ -81,6 +81,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -118,10 +122,6 @@ export const Quiz: CAPIType = {
 					name: 'k',
 					value: ['sport', 'football'],
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		AU: {
@@ -130,6 +130,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -167,10 +171,6 @@ export const Quiz: CAPIType = {
 					name: 'edition',
 					value: 'au',
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		INT: {
@@ -179,6 +179,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -215,10 +219,6 @@ export const Quiz: CAPIType = {
 				{
 					name: 'k',
 					value: ['sport', 'football'],
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
 				},
 			],
 		},
@@ -1064,6 +1064,11 @@ export const Quiz: CAPIType = {
 	},
 	designType: 'Quiz',
 	editionId: 'UK',
+	format: {
+		design: 'QuizDesign',
+		theme: 'SportPillar',
+		display: 'ShowcaseDisplay',
+	},
 	standfirst:
 		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
 	openGraphData: {
@@ -1330,6 +1335,7 @@ export const Quiz: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
+			elementId: '8320ff3f-49b9-452f-8d79-d05da44ee1bf',
 			role: 'showcase',
 			data: {
 				alt:
@@ -1719,9 +1725,23 @@ export const Quiz: CAPIType = {
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
 	blocks: [
 		{
-			id: '5ee1f3138f0875833522a23a',
+			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
+			blockFirstPublishedDisplay: '10.03 BST',
+			blockLastUpdated: 1591917260000,
+			firstPublishedDisplay: '10.09 BST',
+			lastUpdatedDisplay: '10.09 BST',
+			blockCreatedOnDisplay: '10.02 BST',
+			blockLastUpdatedDisplay: '00.14 BST',
+			firstPublished: 1591952964000,
+			createdOn: 1591866131000,
+			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
+			blockCreatedOn: 1591866131000,
+			blockFirstPublished: 1591866202000,
+			createdOnDisplay: '10.02 BST',
+			lastUpdated: 1591952965000,
 			elements: [
 				{
+					elementId: 'd2f63c34-b0d2-4288-9b37-d8f7b3590d94',
 					quizType: 'knowledge',
 					resultBuckets: [],
 					questions: [
@@ -2347,20 +2367,7 @@ export const Quiz: CAPIType = {
 					],
 				},
 			],
-			createdOn: 1591866131000,
-			createdOnDisplay: '10.02 BST',
-			blockCreatedOn: 1591866131000,
-			blockCreatedOnDisplay: '10.02 BST',
-			lastUpdated: 1591952965000,
-			lastUpdatedDisplay: '10.09 BST',
-			blockLastUpdated: 1591917260000,
-			blockLastUpdatedDisplay: '00.14 BST',
-			firstPublished: 1591952964000,
-			firstPublishedDisplay: '10.09 BST',
-			blockFirstPublished: 1591866202000,
-			blockFirstPublishedDisplay: '10.03 BST',
-			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
-			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
+			id: '5ee1f3138f0875833522a23a',
 		},
 	],
 	linkedData: [

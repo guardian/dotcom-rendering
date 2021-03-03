@@ -3,7 +3,7 @@ import isChromatic from 'chromatic/isChromatic';
 import fetchMock from 'fetch-mock';
 import MockDate from 'mockdate';
 
-import { commentCount } from '@root/fixtures/commentCounts';
+import { commentCount } from '@root/fixtures/manual/commentCount';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 
 import { defaults } from './default-css';

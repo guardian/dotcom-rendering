@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import { Pillar } from '@guardian/types';
 
-import { mockTab1 } from '@root/fixtures/mostViewed';
+import { mockTab1 } from '@root/fixtures/manual/mostViewed';
 import { useApi as useApi_ } from '@root/src/web/lib/api';
 
 import { MostViewedRight } from './MostViewedRight';

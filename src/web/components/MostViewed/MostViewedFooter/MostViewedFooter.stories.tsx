@@ -8,7 +8,7 @@ import {
 	responseWithTwoTabs,
 	responseWithOneTab,
 	responseWithMissingImage,
-} from '@root/fixtures/mostViewed';
+} from '@root/fixtures/manual/mostViewed';
 import { Section } from '@frontend/web/components/Section';
 
 import { MostViewedFooter } from './MostViewedFooter';

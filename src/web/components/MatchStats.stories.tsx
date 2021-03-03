@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { game } from '@root/fixtures/game';
+import { game } from '@root/fixtures/manual/game';
 
 import { Section } from './Section';
 import { Flex } from './Flex';

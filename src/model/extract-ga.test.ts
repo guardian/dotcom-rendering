@@ -1,4 +1,4 @@
-import { Article } from '@root/fixtures/articles/Article';
+import { Article } from '@root/fixtures/generated/articles/Article';
 import { extract } from './extract-ga';
 
 const pillar: CAPIPillar = 'news';

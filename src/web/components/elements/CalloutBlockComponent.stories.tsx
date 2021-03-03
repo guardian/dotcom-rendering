@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
 import { Pillar } from '@guardian/types';
-import { calloutCampaign } from '@root/fixtures/calloutCampaign';
+import { calloutCampaign } from '@root/fixtures/manual/calloutCampaign';
 
 import { CalloutBlockComponent } from './CalloutBlockComponent';
 
