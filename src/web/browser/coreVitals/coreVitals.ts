@@ -1,7 +1,5 @@
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
 
-// This sends data to the test table
-
 type CoreWebVitalsPayload = {
 	page_view_id: string | null;
 	received_timestamp: string | null;
@@ -63,26 +61,26 @@ export const coreVitals = (): void => {
 
 		// If CLS has been calculated
 		if (jsonData.cls !== null) {
-			fetch(endpoint, {
-				method: 'POST', // *GET, POST, PUT, DELETE, etc.
-				mode: 'cors', // no-cors, *cors, same-origin
-				cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-				credentials: 'same-origin', // include, *same-origin, omit
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				redirect: 'follow',
-				referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
-				body: JSON.stringify(jsonData),
-			}).catch(() => {});
+			// Set page view and browser ID
+			if (window.guardian && window.guardian.ophan) {
+				jsonData.page_view_id = window.guardian.ophan.pageViewId;
+				jsonData.browser_id = window.guardian.config.ophan.browserId;
+
+				fetch(endpoint, {
+					method: 'POST', // *GET, POST, PUT, DELETE, etc.
+					mode: 'cors', // no-cors, *cors, same-origin
+					cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+					credentials: 'same-origin', // include, *same-origin, omit
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					redirect: 'follow',
+					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
+					body: JSON.stringify(jsonData),
+				}).catch(() => {});
+			}
 		}
 	};
-
-	// Set page view and browser ID
-	if (window.guardian && window.guardian.ophan) {
-		jsonData.page_view_id = window.guardian.ophan.pageViewId;
-		jsonData.browser_id = window.guardian.config.ophan.browserId;
-	}
 
 	getCLS(addToJson, false);
 	getFID(addToJson);
