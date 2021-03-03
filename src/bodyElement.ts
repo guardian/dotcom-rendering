@@ -17,10 +17,12 @@ import {
 } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
+import { parseAudio, parseGeneric, parseVideo } from 'embed';
+import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
-import { pipe, pipe2 } from 'lib';
-import type { Context, DocParser } from 'types/parserContext';
+import { compose, pipe, pipe2 } from 'lib';
+import type { Context } from 'types/parserContext';
 
 // ----- Types ----- //
 
@@ -32,11 +34,9 @@ const enum ElementKind {
 	RichLink,
 	Tweet,
 	Instagram,
-	Audio,
 	Embed,
 	Callout,
 	LiveEvent,
-	Video,
 	InteractiveAtom,
 	ExplainerAtom,
 	MediaAtom,
@@ -58,32 +58,15 @@ type Image = ImageData & {
 	kind: ElementKind.Image;
 };
 
-type Audio = {
-	kind: ElementKind.Audio;
-	src: string;
-	height: string;
-	width: string;
-};
-
-type Video = {
-	kind: ElementKind.Video;
-	src: string;
-	height: string;
-	width: string;
-};
-
-type Embed = {
+type EmbedElement = {
 	kind: ElementKind.Embed;
-	html: string;
-	alt: Option<string>;
+	embed: Embed;
 };
 
 type Instagram = {
 	kind: ElementKind.Instagram;
 	html: string;
 };
-
-type MediaKind = ElementKind.Audio | ElementKind.Video;
 
 interface InteractiveAtom {
 	kind: ElementKind.InteractiveAtom;
@@ -181,8 +164,7 @@ type BodyElement =
 			content: NodeList;
 	  }
 	| Instagram
-	| Audio
-	| Embed
+	| EmbedElement
 	| {
 			kind: ElementKind.Callout;
 			id: string;
@@ -197,7 +179,6 @@ type BodyElement =
 			price?: string;
 			start?: string;
 	  }
-	| Video
 	| InteractiveAtom
 	| ExplainerAtom
 	| MediaAtom
@@ -230,24 +211,12 @@ const tweetContent = (
 	);
 };
 
-const parseIframe = (docParser: DocParser) => (
-	html: string,
-	kind: MediaKind,
-): Result<string, Audio | Video> => {
-	const iframe = docParser(html).querySelector('iframe');
-	const src = iframe?.getAttribute('src');
-
-	if (!iframe || !src) {
-		return err('No iframe within html');
-	}
-
-	return ok({
-		kind,
-		src,
-		width: iframe.getAttribute('width') ?? '380',
-		height: iframe.getAttribute('height') ?? '300',
-	});
-};
+const toEmbedElement: (
+	parsed: Result<string, Embed>,
+) => Result<string, BodyElement> = resultMap((embed) => ({
+	kind: ElementKind.Embed,
+	embed,
+}));
 
 const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 	element: BlockElement,
@@ -334,7 +303,7 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 		}
 
 		case ElementType.EMBED: {
-			const { html: embedHtml, alt } = element.embedTypeData ?? {};
+			const { html: embedHtml } = element.embedTypeData ?? {};
 
 			if (!embedHtml) {
 				return err('No html field on embedTypeData');
@@ -365,11 +334,10 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 				});
 			}
 
-			return ok({
-				kind: ElementKind.Embed,
-				html: embedHtml,
-				alt: fromNullable(alt),
-			});
+			return compose(
+				toEmbedElement,
+				parseGeneric(context.docParser),
+			)(element);
 		}
 
 		case ElementType.MEMBERSHIP: {
@@ -407,25 +375,14 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 			return ok({ kind: ElementKind.Instagram, html: instagramHtml });
 		}
 
-		case ElementType.AUDIO: {
-			const { html: audioHtml } = element.audioTypeData ?? {};
+		case ElementType.AUDIO:
+			return compose(
+				toEmbedElement,
+				parseAudio(context.docParser),
+			)(element);
 
-			if (!audioHtml) {
-				return err('No html field on audioTypeData');
-			}
-
-			return parseIframe(context.docParser)(audioHtml, ElementKind.Audio);
-		}
-
-		case ElementType.VIDEO: {
-			const { html: videoHtml } = element.videoTypeData ?? {};
-
-			if (!videoHtml) {
-				return err('No html field on videoTypeData');
-			}
-
-			return parseIframe(context.docParser)(videoHtml, ElementKind.Video);
-		}
+		case ElementType.VIDEO:
+			return compose(toEmbedElement, parseVideo)(element);
 
 		case ElementType.CONTENTATOM: {
 			if (!atoms) {
@@ -458,8 +415,6 @@ const parseElements = (
 export {
 	ElementKind,
 	BodyElement,
-	Audio,
-	Video,
 	Body,
 	Image,
 	Text,

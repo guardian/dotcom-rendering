@@ -171,25 +171,37 @@ const getHeadlineStyles = (
 ): SerializedStyles => {
 	const sharedStyles = getSharedStyles(format);
 
-	// Display.Immersive needs to come before Design.Interview
-	switch (format.display) {
-		case Display.Immersive:
-			return css(
-				sharedStyles,
-				getFontStyles('tight', 'bold'),
-				immersiveStyles,
-			);
-		case Display.Showcase:
-			return css(sharedStyles, getFontStyles('tight', 'bold'));
+	if (format.display === Display.Immersive) {
+		return css(
+			sharedStyles,
+			getFontStyles('tight', 'bold'),
+			immersiveStyles,
+		);
+	}
+
+	// this needs to come before Display.Showcase
+	if (format.design === Design.Comment) {
+		return css(
+			sharedStyles,
+			getFontStyles('regular', 'light'),
+			commentStyles,
+		);
+	}
+
+	// this needs to come before Display.Showcase
+	if (format.design === Design.Interview) {
+		return css(
+			sharedStyles,
+			getFontStyles('tight', 'bold'),
+			interviewStyles,
+		);
+	}
+
+	if (format.display === Display.Showcase) {
+		return css(sharedStyles, getFontStyles('tight', 'bold'));
 	}
 
 	switch (format.design) {
-		case Design.Interview:
-			return css(
-				sharedStyles,
-				getFontStyles('tight', 'bold'),
-				interviewStyles,
-			);
 		case Design.Review:
 			return css(sharedStyles, getFontStyles('tight', 'bold'));
 		case Design.Analysis:
@@ -197,12 +209,6 @@ const getHeadlineStyles = (
 				sharedStyles,
 				getFontStyles('regular', 'light'),
 				analysisStyles(kickerColor),
-			);
-		case Design.Comment:
-			return css(
-				sharedStyles,
-				getFontStyles('regular', 'light'),
-				commentStyles,
 			);
 		case Design.Media:
 			return css(sharedStyles, galleryStyles);

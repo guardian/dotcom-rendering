@@ -16,6 +16,8 @@ import { Design, Display, Format } from '@guardian/types';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode, render as renderDom } from 'react-dom';
+import { EmbedKind } from 'embed';
+import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 
 const mockFormat: Format = {
 	theme: Pillar.News,
@@ -86,25 +88,39 @@ const instagramElement = (): BodyElement => ({
 	html: '<blockquote>Instagram</blockquote>',
 });
 
-const embedElement = (): BodyElement => ({
+const embedElement: BodyElement = {
 	kind: ElementKind.Embed,
-	html: '<section>Embed</section>',
-	alt: none,
-});
+	embed: {
+		kind: EmbedKind.Generic,
+		html: '<section>Embed</section>',
+		height: 300,
+		alt: none,
+		mandatory: false,
+		source: some('mockSource'),
+		sourceDomain: some('mockSourceDomain'),
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
+	}
+};
 
-const videoElement = (): BodyElement => ({
-	kind: ElementKind.Video,
-	src: 'https://www.youtube.com/',
-	height: '300',
-	width: '500',
-});
+const videoElement: BodyElement = {
+	kind: ElementKind.Embed,
+	embed: {
+		kind: EmbedKind.YouTube,
+		id: 'mockYoutubeId',
+		height: 300,
+		width: 500,
+	}
+};
 
-const audioElement = (): BodyElement => ({
-	kind: ElementKind.Audio,
-	src: 'https://www.spotify.com/',
-	height: '300',
-	width: '500',
-});
+const audioElement: BodyElement = {
+	kind: ElementKind.Embed,
+	embed: {
+		kind: EmbedKind.Spotify,
+		src: 'https://www.spotify.com/',
+		height: 300,
+		width: 500,
+	}
+};
 
 const liveEventElement = (): BodyElement => ({
 	kind: ElementKind.LiveEvent,
@@ -331,13 +347,13 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Embed', () => {
-		const nodes = render(embedElement());
+		const nodes = render(embedElement);
 		const embed = nodes.flat()[0];
-		expect(getHtml(embed)).toContain('<div><section>Embed</section></div>');
+		expect(getHtml(embed)).toContain('<iframe srcDoc=\"&lt;section&gt;Embed&lt;/section&gt;\" title=\"Embed\" height=\"322\"></iframe>');
 	});
 
 	test('ElementKind.Audio', () => {
-		const nodes = render(audioElement());
+		const nodes = render(audioElement);
 		const audio = nodes.flat()[0];
 		expect(getHtml(audio)).toContain(
 			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
@@ -345,10 +361,10 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Video', () => {
-		const nodes = render(videoElement());
+		const nodes = render(videoElement);
 		const video = nodes.flat()[0];
 		expect(getHtml(video)).toContain(
-			'src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"',
+			'src="https://www.youtube-nocookie.com/embed/mockYoutubeId?wmode=opaque&amp;feature=oembed" height="300" width="500" allowfullscreen="" title="Video element"',
 		);
 	});
 
@@ -427,7 +443,7 @@ describe('Renders different types of elements', () => {
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
-			'<div kind="20" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
+			'<div kind="18" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
 		);
 	});
 
@@ -511,13 +527,13 @@ describe('Renders different types of Editions elements', () => {
 	});
 
 	test('ElementKind.Embed', () => {
-		const nodes = renderEditions(embedElement());
+		const nodes = renderEditions(embedElement);
 		const embed = nodes.flat()[0];
-		expect(getHtml(embed)).toContain('<div><section>Embed</section></div>');
+		expect(getHtml(embed)).toContain('<iframe srcDoc=\"&lt;section&gt;Embed&lt;/section&gt;\" title=\"Embed\" height=\"322\"></iframe>');
 	});
 
 	test('ElementKind.Audio', () => {
-		const nodes = renderEditions(audioElement());
+		const nodes = renderEditions(audioElement);
 		const audio = nodes.flat()[0];
 		expect(getHtml(audio)).toContain(
 			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
@@ -525,10 +541,10 @@ describe('Renders different types of Editions elements', () => {
 	});
 
 	test('ElementKind.Video', () => {
-		const nodes = renderEditions(videoElement());
+		const nodes = renderEditions(videoElement);
 		const video = nodes.flat()[0];
 		expect(getHtml(video)).toContain(
-			'src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"',
+			'src="https://www.youtube-nocookie.com/embed/mockYoutubeId?wmode=opaque&amp;feature=oembed" height="300" width="500" allowfullscreen="" title="Video element"',
 		);
 	});
 
@@ -607,7 +623,7 @@ describe('Renders different types of Editions elements', () => {
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
-			'<div kind="20" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
+			'<div kind="18" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
 		);
 	});
 

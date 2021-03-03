@@ -5,8 +5,8 @@ import { darkModeCss } from 'styles';
 
 export interface VideoProps {
 	src: string;
-	width: string;
-	height: string;
+	width: number;
+	height: number;
 }
 
 const videoStyles = css`
