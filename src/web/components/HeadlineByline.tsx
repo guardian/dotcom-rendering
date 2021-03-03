@@ -90,39 +90,19 @@ type Props = {
 
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
-		case Display.Immersive: {
-			switch (format.design) {
-				case Design.GuardianView:
-				case Design.Comment:
-					return (
-						<div
-							className={cx(
-								opinionStyles(format.theme),
-								whiteText,
-							)}
-						>
+		case Display.Immersive:
+			if (byline) {
+				return (
+					<div className={immersiveStyles}>
+						by{' '}
+						<span className={immersiveLinkStyles(format.theme)}>
 							<BylineLink byline={byline} tags={tags} />
-						</div>
-					);
-				default:
-					if (byline) {
-						return (
-							<div className={immersiveStyles}>
-								by{' '}
-								<span
-									className={immersiveLinkStyles(
-										format.theme,
-									)}
-								>
-									<BylineLink byline={byline} tags={tags} />
-								</span>
-							</div>
-						);
-					}
-
-					return null;
+						</span>
+					</div>
+				);
 			}
-		}
+
+			return null;
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
