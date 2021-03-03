@@ -1335,7 +1335,7 @@ export const Quiz: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '8320ff3f-49b9-452f-8d79-d05da44ee1bf',
+			elementId: 'e64c7ab8-2249-41bd-aef7-80863c7443ad',
 			role: 'showcase',
 			data: {
 				alt:
@@ -1741,7 +1741,7 @@ export const Quiz: CAPIType = {
 			lastUpdated: 1591952965000,
 			elements: [
 				{
-					elementId: 'd2f63c34-b0d2-4288-9b37-d8f7b3590d94',
+					elementId: '1043c247-090e-40dc-93e5-07cc141a5d27',
 					quizType: 'knowledge',
 					resultBuckets: [],
 					questions: [

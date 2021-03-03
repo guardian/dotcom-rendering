@@ -1396,7 +1396,7 @@ export const Analysis: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '45d8674f-980e-4e92-a61a-7e69a3c8cc7a',
+			elementId: '0c64b077-51e8-4190-a3fa-8d89d8ebbeb8',
 			role: 'inline',
 			data: {
 				copyright:
@@ -1803,27 +1803,27 @@ export const Analysis: CAPIType = {
 			lastUpdated: 1581589288000,
 			elements: [
 				{
-					elementId: '6de00c13-da61-4855-83c2-b60bb68573ca',
+					elementId: 'bfab23a1-9a4d-425b-978b-0b27ff5e0f46',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Who won Ireland’s general election?</h2>',
 				},
 				{
-					elementId: 'f5637e09-4c57-4b7a-bc8a-e70f5263ca30',
+					elementId: 'ad411363-cf9e-408a-b5f6-2aa5274f11d7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
 				},
 				{
-					elementId: 'ba43e768-8ac1-4d24-ac7d-ebece6725636',
+					elementId: 'ef6cf26b-1770-4700-aaf0-fb9fd5725f5f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
 				},
 				{
-					elementId: '6e4a5446-48e5-4dc4-aaa4-d5d7345313c5',
+					elementId: 'e7cb7d36-f3e5-4f7a-b49b-7fcf3fd6ff17',
 					role: 'thumbnail',
 					prefix: 'Related: ',
 					_type:
@@ -1833,40 +1833,40 @@ export const Analysis: CAPIType = {
 						'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
 				},
 				{
-					elementId: '0268a523-f578-40e8-bf95-ea6b774341c2',
+					elementId: '68a36202-24fd-4fab-8bf1-255598124bd4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
 				},
 				{
-					elementId: '53228f79-81a3-4e49-8aa2-60d10384ac41',
+					elementId: 'ae242375-f2ba-46be-b2ec-543c93ade328',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Was Sinn Féin’s success a surprise?</h2>',
 				},
 				{
-					elementId: '6118fbc1-05f3-4f10-a06c-66360f4f93a1',
+					elementId: '834e9a46-64ab-4500-be4b-02a726adfe2c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
 				},
 				{
-					elementId: '7da7aaa9-2775-4a62-a615-959a95fac017',
+					elementId: 'afb39575-af47-4936-b102-3b3b5f9011bf',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Is Varadkar going to lose power?</h2>',
 				},
 				{
-					elementId: '842be0d8-b8fa-43f8-b8eb-7db6231df92f',
+					elementId: 'dbde46f0-f6b0-4151-8e45-87b271fe1561',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
 				},
 				{
-					elementId: 'fad3e28c-9482-4253-afef-67a72cbac81e',
+					elementId: 'd87e543a-4e31-4399-a6dc-9eeebb131554',
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					html:
 						'<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
@@ -1875,74 +1875,74 @@ export const Analysis: CAPIType = {
 					credit: '',
 				},
 				{
-					elementId: '2bb7a383-9ae3-45be-9b36-c3e15f16d3cf',
+					elementId: 'c1e9e4c3-05a0-4fc9-bbe3-502f435b0e04',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Why did Sinn Féin do so well?</h2>',
 				},
 				{
-					elementId: 'fea3f706-145d-4bfc-9371-4407694c9578',
+					elementId: 'a8242859-d234-46bb-a62d-484d2aebc36f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
 				},
 				{
-					elementId: '4658a389-4cef-4dbf-9a2d-1d1085cb4793',
+					elementId: 'd79a8837-4fa0-4777-abc1-8283cd1cc78e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
 				},
 				{
-					elementId: 'feb106a6-ca67-47de-836e-35617152964d',
+					elementId: '36c097c6-481e-44dc-bde2-d2f91bd0f98c',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>What happens next?</h2>',
 				},
 				{
-					elementId: '25d41282-8986-4f9e-9413-4c333f615426',
+					elementId: 'd274ec9c-96e5-4c81-b739-dfd337c8b747',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
 				},
 				{
-					elementId: 'df4291ab-d408-427d-8159-274e32631434',
+					elementId: 'bd6e4b6b-b6a8-48c7-a65a-2daee0008eb8',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
 				},
 				{
-					elementId: '04d13350-c4ef-4204-8134-ed535f672a2a',
+					elementId: '8ff4519a-fcc0-400c-a05e-8822bf1aab02',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
 				},
 				{
-					elementId: '732590be-a83d-4e50-9636-429051d93f3e',
+					elementId: '1f1061fc-a246-4fd3-be37-0d72b8b586fe',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
 				},
 				{
-					elementId: '2b8fb1f6-504a-4d70-8eb3-7433f483b2de',
+					elementId: '98e9fb14-50b8-478b-890e-e4ec3edc0bcb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>One plausible outcome: deadlock, and another election.</p>',
 				},
 				{
-					elementId: '390b2555-5245-4b1f-ad26-4d04cfd1990c',
+					elementId: 'a1cfa6b0-de7c-46b5-a9b7-7574a9e53f8a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Read more</strong></p>',
 				},
 				{
-					elementId: '2323cecc-2ba8-4427-b7f0-84f43b4778f7',
+					elementId: 'e9339bdf-05e1-4952-a1e1-47c51c33a0e9',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
