@@ -96,7 +96,7 @@ describe('Enhance Photo Essays', () => {
 					elements: [
 						{
 							...image,
-							role: 'inline',
+							role: 'showcase',
 							displayCredit: false,
 							data: {
 								...image.data,
@@ -155,7 +155,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: 'mockId',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -777,7 +777,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: 'mockId',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -796,7 +796,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: 'mockId',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -854,7 +854,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: 'mockId',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
