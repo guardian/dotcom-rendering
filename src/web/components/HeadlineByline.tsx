@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -51,10 +51,6 @@ const opinionStyles = (pillar: Theme) => css`
 			text-decoration: underline;
 		}
 	}
-`;
-
-const whiteText = css`
-	color: white;
 `;
 
 const immersiveStyles = css`
