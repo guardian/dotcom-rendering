@@ -21,6 +21,7 @@ import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item, Review } from 'item';
 import { pipe2 } from 'lib';
+import { galleryBody } from './galleryBody';
 
 // ----- Fixture ----- //
 
@@ -287,7 +288,7 @@ const interview: Item = {
 const media: Item = {
 	design: Design.Media,
 	...fields,
-	body: [],
+	body: galleryBody,
 };
 
 // ----- Exports ----- //

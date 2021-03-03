@@ -118,7 +118,7 @@ const Comment = (): ReactElement => (
 	/>
 );
 
-const Media = (): ReactElement => (
+const Gallery = (): ReactElement => (
 	<Article
 		item={{
 			...media,
@@ -126,6 +126,13 @@ const Media = (): ReactElement => (
 		}}
 	/>
 );
+
+Gallery.parameters = {
+	backgrounds: {
+		default: 'gallery-template-bg',
+		values: [{ name: 'gallery-template-bg', value: '#121212' }],
+	},
+};
 
 // ----- Exports ----- //
 
@@ -144,6 +151,6 @@ export {
 	Showcase,
 	Interview,
 	Comment,
-	Media,
 	Editorial,
+	Gallery,
 };
