@@ -1032,11 +1032,6 @@ export const PhotoEssay: CAPIType = {
 	},
 	designType: 'Feature',
 	editionId: 'UK',
-	format: {
-		design: 'FeatureDesign',
-		theme: 'LifestylePillar',
-		display: 'StandardDisplay',
-	},
 	standfirst:
 		'<p>Photographer Cat Vinton’s work follows nomadic people in the natural world, but the pandemic meant being closer to home – living out of her vehicle and exploring the Cornish way of life </p>',
 	openGraphData: {

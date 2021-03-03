@@ -1064,11 +1064,6 @@ export const Quiz: CAPIType = {
 	},
 	designType: 'Quiz',
 	editionId: 'UK',
-	format: {
-		design: 'QuizDesign',
-		theme: 'SportPillar',
-		display: 'ShowcaseDisplay',
-	},
 	standfirst:
 		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
 	openGraphData: {

@@ -1059,11 +1059,6 @@ export const Feature: CAPIType = {
 	},
 	designType: 'Feature',
 	editionId: 'UK',
-	format: {
-		design: 'FeatureDesign',
-		theme: 'CulturePillar',
-		display: 'StandardDisplay',
-	},
 	standfirst:
 		'<p>Jeff Bezos was mocked by Rock, Brad Pitt had a pop at Trump and Sigourney Weaver laced up her gloves</p>\n<ul>\n <li><a href="https://www.theguardian.com/film/2020/feb/09/oscar-winners-2020-oscars-full-list-live-as-they-happen">Oscar winners 2020: the complete list</a><br></li>\n <li><a href="https://www.theguardian.com/film/gallery/2020/feb/10/razzle-and-dazzle-oscars-2020-after-parties-in-pictures">Razzle and dazzle: the after-parties in pictures</a></li>\n</ul>',
 	openGraphData: {

@@ -1081,11 +1081,6 @@ export const SpecialReport: CAPIType = {
 	},
 	designType: 'Immersive',
 	editionId: 'UK',
-	format: {
-		design: 'ArticleDesign',
-		theme: 'SpecialReportTheme',
-		display: 'ImmersiveDisplay',
-	},
 	standfirst:
 		'<p>Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis</p>',
 	openGraphData: {

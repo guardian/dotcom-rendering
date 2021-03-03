@@ -1126,11 +1126,6 @@ export const Recipe: CAPIType = {
 	},
 	designType: 'Recipe',
 	editionId: 'UK',
-	format: {
-		design: 'FeatureDesign',
-		theme: 'LifestylePillar',
-		display: 'StandardDisplay',
-	},
 	standfirst:
 		'<p><em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce</p>',
 	openGraphData: {

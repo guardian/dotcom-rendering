@@ -1066,11 +1066,6 @@ export const GuardianView: CAPIType = {
 	},
 	designType: 'GuardianView',
 	editionId: 'UK',
-	format: {
-		design: 'CommentDesign',
-		theme: 'OpinionPillar',
-		display: 'StandardDisplay',
-	},
 	standfirst:
 		'<p>Controlling cross-border transmission of Covid cases is far from easy, but the government appears scarcely to have even tried</p>',
 	openGraphData: {

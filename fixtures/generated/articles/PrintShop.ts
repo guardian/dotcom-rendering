@@ -1021,11 +1021,6 @@ export const PrintShop: CAPIType = {
 	},
 	designType: 'Immersive',
 	editionId: 'UK',
-	format: {
-		design: 'PrintShopDesign',
-		theme: 'CulturePillar',
-		display: 'ImmersiveDisplay',
-	},
 	standfirst:
 		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
 	openGraphData: {
@@ -1321,7 +1316,7 @@ export const PrintShop: CAPIType = {
 			lastUpdated: 1608213898000,
 			elements: [
 				{
-					elementId: '29eb7f29-9d60-4b0e-9d5f-0fa956701be4',
+					elementId: '4c859bdc-0e36-4baa-b780-40951bc2e1a4',
 					role: 'immersive',
 					data: {
 						alt: 'Bobby Moore in 1973',
@@ -1705,54 +1700,54 @@ export const PrintShop: CAPIType = {
 					displayCredit: false,
 				},
 				{
-					elementId: '27abfa93-d276-4775-825c-772a83d94eae',
+					elementId: 'a0d32cde-51bf-4eec-8ce9-60979b502bea',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
 				},
 				{
-					elementId: '9479a95b-1d8f-4729-9012-8803528c7416',
+					elementId: '4cdb6d97-30d9-497b-9b7b-551337aa08a9',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
 				},
 				{
-					elementId: '9c93e02d-dbc8-483b-bb8d-2002be331c18',
+					elementId: '03fea297-1bef-4247-b85a-05234d3eb9fc',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
 				},
 				{
-					elementId: '23717624-b4f1-48ab-b69a-cb2c0802b4b6',
+					elementId: '48fe69ed-9f60-4a62-9192-6368d57284a0',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
 				},
 				{
-					elementId: 'e99be8d1-b295-4c15-a409-27e498fe3b82',
+					elementId: '46dc8a98-a15d-484a-900b-1235e6832887',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
 				},
 				{
-					elementId: 'd2e1235d-b04f-4706-894a-c56f2b136a13',
+					elementId: '38367870-b5e4-4701-b60f-c0bc2a9177f0',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
 				},
 				{
-					elementId: 'd4ebc40c-ab54-4f75-a83d-a4dcb3d53441',
+					elementId: '2ba32e33-e25c-490d-97d9-94b9165ff0e3',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
 				},
 				{
-					elementId: '75047654-479e-48f0-83cc-32f77e91989d',
+					elementId: 'e3df8c2c-e189-4609-b03e-0f32b5bdde5a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:

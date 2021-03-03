@@ -1090,11 +1090,6 @@ export const Analysis: CAPIType = {
 	},
 	designType: 'Analysis',
 	editionId: 'UK',
-	format: {
-		design: 'AnalysisDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
-	},
 	standfirst:
 		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
 	openGraphData: {

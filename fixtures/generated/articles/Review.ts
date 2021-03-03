@@ -1083,11 +1083,6 @@ export const Review: CAPIType = {
 	},
 	designType: 'Review',
 	editionId: 'UK',
-	format: {
-		design: 'ReviewDesign',
-		theme: 'CulturePillar',
-		display: 'ShowcaseDisplay',
-	},
 	standfirst:
 		'<p>The teenagers’ sexual escapades continue apace, bringing constant laughs in this rare, magnificent comedy that is good for both the heart and the soul</p>',
 	openGraphData: {

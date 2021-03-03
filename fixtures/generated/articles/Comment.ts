@@ -1133,11 +1133,6 @@ export const Comment: CAPIType = {
 	},
 	designType: 'Comment',
 	editionId: 'UK',
-	format: {
-		design: 'CommentDesign',
-		theme: 'OpinionPillar',
-		display: 'StandardDisplay',
-	},
 	standfirst:
 		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
 	openGraphData: {

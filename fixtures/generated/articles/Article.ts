@@ -1064,11 +1064,6 @@ export const Article: CAPIType = {
 	},
 	designType: 'Article',
 	editionId: 'UK',
-	format: {
-		design: 'ArticleDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
-	},
 	standfirst:
 		'<p>Without urgent action, rising sea levels by end of century could leave cities under water</p>',
 	openGraphData: {

@@ -1060,11 +1060,6 @@ export const MatchReport: CAPIType = {
 	},
 	designType: 'MatchReport',
 	editionId: 'UK',
-	format: {
-		design: 'MatchReportDesign',
-		theme: 'SportPillar',
-		display: 'StandardDisplay',
-	},
 	standfirst: '',
 	openGraphData: {
 		'og:url':

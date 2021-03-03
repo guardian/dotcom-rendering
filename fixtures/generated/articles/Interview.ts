@@ -1254,11 +1254,6 @@ export const Interview: CAPIType = {
 	},
 	designType: 'Interview',
 	editionId: 'UK',
-	format: {
-		design: 'FeatureDesign',
-		theme: 'NewsPillar',
-		display: 'ShowcaseDisplay',
-	},
 	standfirst:
 		'<p>The first model to wear a hijab on the cover of Vogue, the first to wear a burkini in Sports Illustrated… Halima Aden is used to breaking barriers. Here she talks about shattering stereotypes and using fashion as a force for change</p>',
 	openGraphData: {
