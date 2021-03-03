@@ -331,6 +331,11 @@ const backgroundHeadline = (format: Format): string => {
 	}
 };
 
+const backgroundBullet = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -450,6 +455,7 @@ export const decidePalette = (format: Format): Palette => {
 			avatar: backgroundAvatar(format),
 			card: backgroundCard(format),
 			headline: backgroundHeadline(format),
+			bullet: backgroundBullet(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
