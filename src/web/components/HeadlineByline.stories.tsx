@@ -13,9 +13,11 @@ export default {
 export const interviewStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Interview}
-			pillar={Pillar.Culture}
+			format={{
+				display: Display.Standard,
+				design: Design.Interview,
+				theme: Pillar.Culture,
+			}}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -26,9 +28,11 @@ interviewStory.story = { name: 'Interview' };
 export const commentStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Comment}
-			pillar={Pillar.Sport}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Sport,
+			}}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -40,9 +44,11 @@ export const commentWithBylineImageStory = () => {
 	// Not visibly different in storybook but will apply a width
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Comment}
-			pillar={Pillar.Sport}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Sport,
+			}}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -62,9 +68,11 @@ commentWithBylineImageStory.story = { name: 'Comment with byline image' };
 export const immersiveStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Immersive}
-			design={Design.Article}
-			pillar={Pillar.Lifestyle}
+			format={{
+				display: Display.Immersive,
+				design: Design.Article,
+				theme: Pillar.Lifestyle,
+			}}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -87,9 +95,11 @@ export const ImmersiveComment = () => {
 			`}
 		>
 			<HeadlineByline
-				display={Display.Immersive}
-				design={Design.Comment}
-				pillar={Pillar.Lifestyle}
+				format={{
+					display: Display.Immersive,
+					design: Design.Comment,
+					theme: Pillar.Lifestyle,
+				}}
 				byline="Jane Smith"
 				tags={[
 					{
@@ -107,9 +117,11 @@ ImmersiveComment.story = { name: 'Immersive Comment' };
 export const MultipleStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Immersive}
-			design={Design.Article}
-			pillar={Pillar.Lifestyle}
+			format={{
+				display: Display.Immersive,
+				design: Design.Article,
+				theme: Pillar.Lifestyle,
+			}}
 			byline="Jane Smith, John Doe and Nae Bevan"
 			tags={[
 				{
@@ -136,9 +148,11 @@ MultipleStory.story = { name: 'Immersive with multiple contributors' };
 export const noBylineStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Interview}
-			pillar={Pillar.Culture}
+			format={{
+				display: Display.Standard,
+				design: Design.Interview,
+				theme: Pillar.Culture,
+			}}
 			byline=""
 			tags={[]}
 		/>

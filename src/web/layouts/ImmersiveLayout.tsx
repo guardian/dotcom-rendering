@@ -462,9 +462,7 @@ export const ImmersiveLayout = ({
 					</GridItem>
 					<GridItem area="byline">
 						<HeadlineByline
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
+							format={format}
 							tags={CAPI.tags}
 							byline={
 								CAPI.author.byline ? CAPI.author.byline : ''

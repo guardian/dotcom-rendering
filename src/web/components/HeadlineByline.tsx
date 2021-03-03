@@ -6,7 +6,7 @@ import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import { pillarPalette } from '@frontend/lib/pillars';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Format } from '@guardian/types';
 
 const wrapperStyles = css`
 	margin-left: 6px;
@@ -83,27 +83,24 @@ const authorBylineWithImage = css`
 `;
 
 type Props = {
-	display: Display;
-	design: Design;
-	pillar: Theme;
+	format: Format;
 	byline: string;
 	tags: TagType[];
 };
 
-export const HeadlineByline = ({
-	display,
-	design,
-	pillar,
-	byline,
-	tags,
-}: Props) => {
-	switch (display) {
+export const HeadlineByline = ({ format, byline, tags }: Props) => {
+	switch (format.display) {
 		case Display.Immersive: {
-			switch (design) {
+			switch (format.design) {
 				case Design.GuardianView:
 				case Design.Comment:
 					return (
-						<div className={cx(opinionStyles(pillar), whiteText)}>
+						<div
+							className={cx(
+								opinionStyles(format.theme),
+								whiteText,
+							)}
+						>
 							<BylineLink byline={byline} tags={tags} />
 						</div>
 					);
@@ -112,7 +109,11 @@ export const HeadlineByline = ({
 						return (
 							<div className={immersiveStyles}>
 								by{' '}
-								<span className={immersiveLinkStyles(pillar)}>
+								<span
+									className={immersiveLinkStyles(
+										format.theme,
+									)}
+								>
 									<BylineLink byline={byline} tags={tags} />
 								</span>
 							</div>
@@ -125,7 +126,7 @@ export const HeadlineByline = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (design) {
+			switch (format.design) {
 				case Design.Interview:
 					return (
 						<div className={wrapperStyles}>
@@ -138,7 +139,7 @@ export const HeadlineByline = ({
 				case Design.Comment:
 					return (
 						<div
-							className={`${opinionStyles(pillar)} ${
+							className={`${opinionStyles(format.theme)} ${
 								tags.filter((tag) => tag.type === 'Contributor')
 									.length === 1
 									? authorBylineWithImage
