@@ -11,39 +11,51 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Recipe: CAPIType = {
+export const Comment: CAPIType = {
 	slotMachineFlags: '',
 	main:
-		'<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
+		'<figure class="element element-image" data-media-id="90f6640a4b3a916602353d2158a042b6a7e63726"> <img src="https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg" alt="A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’</span> <span class="element-image__credit">Photograph: Mark Pinder/The Guardian</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/food/vegan',
-			title: 'Vegan food and drink',
+			url: '/business/austerity',
+			title: 'Austerity',
 		},
 		{
-			url: '/food/series/the-new-vegan',
-			title: 'The new vegan',
+			url: '/commentisfree/commentisfree',
+			title: 'Opinion',
 		},
 	],
 	commercialProperties: {
 		UK: {
 			adTargeting: [
 				{
-					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					name: 'co',
+					value: ['johnharris'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8n8j',
 				},
 				{
 					name: 'edition',
 					value: 'uk',
 				},
 				{
-					name: 'tn',
-					value: ['recipes', 'features'],
+					name: 'url',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/fz7hz',
+					name: 'k',
+					value: [
+						'politics',
+						'business',
+						'conservatives',
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+					],
 				},
 				{
 					name: 'su',
@@ -54,46 +66,45 @@ export const Recipe: CAPIType = {
 					value: 'article',
 				},
 				{
+					name: 'tn',
+					value: ['comment'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'starter',
-						'snacks',
-						'chinese',
-					],
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
+					name: 'co',
+					value: ['johnharris'],
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/fz7hz',
+					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
+					name: 'url',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				},
+				{
+					name: 'k',
+					value: [
+						'politics',
+						'business',
+						'conservatives',
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+					],
 				},
 				{
 					name: 'su',
@@ -104,50 +115,49 @@ export const Recipe: CAPIType = {
 					value: 'article',
 				},
 				{
+					name: 'tn',
+					value: ['comment'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
 					name: 'edition',
 					value: 'us',
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'starter',
-						'snacks',
-						'chinese',
-					],
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
+					name: 'co',
+					value: ['johnharris'],
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/fz7hz',
+					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
+					name: 'url',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				},
+				{
+					name: 'k',
+					value: [
+						'politics',
+						'business',
+						'conservatives',
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+					],
 				},
 				{
 					name: 'su',
@@ -158,50 +168,49 @@ export const Recipe: CAPIType = {
 					value: 'article',
 				},
 				{
+					name: 'tn',
+					value: ['comment'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-				{
 					name: 'edition',
 					value: 'au',
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'starter',
-						'snacks',
-						'chinese',
-					],
 				},
 			],
 		},
 		INT: {
 			adTargeting: [
 				{
-					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
+					name: 'co',
+					value: ['johnharris'],
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/fz7hz',
+					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
+					name: 'url',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				},
+				{
+					name: 'k',
+					value: [
+						'politics',
+						'business',
+						'conservatives',
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+					],
 				},
 				{
 					name: 'edition',
@@ -216,74 +225,49 @@ export const Recipe: CAPIType = {
 					value: 'article',
 				},
 				{
+					name: 'tn',
+					value: ['comment'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'starter',
-						'snacks',
-						'chinese',
-					],
 				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Sat 6 Feb 2021 10.30 GMT',
+		'Last modified on Mon 10 Feb 2020 11.19 GMT',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
-		'<em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce',
+		'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
 	subMetaKeywordLinks: [
 		{
-			url: '/food/vegetables',
-			title: 'Vegetables',
+			url: '/business/economics',
+			title: 'Economics',
 		},
 		{
-			url: '/food/food',
-			title: 'Food',
+			url: '/politics/conservatives',
+			title: 'Conservatives',
 		},
 		{
-			url: '/food/chinese',
-			title: 'Chinese food and drink',
+			url: '/politics/conservativehome',
+			title: 'ConservativeHome',
 		},
 		{
-			url: '/food/main-course',
-			title: 'Main course',
-		},
-		{
-			url: '/food/snacks',
-			title: 'Snacks',
-		},
-		{
-			url: '/food/starter',
-			title: 'Starter',
-		},
-		{
-			url: '/tone/recipes',
-			title: 'recipes',
+			url: '/tone/comment',
+			title: 'comment',
 		},
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/food',
+		currentUrl: '/business/economics',
 		pillars: [
 			{
 				title: 'News',
@@ -978,63 +962,73 @@ export const Recipe: CAPIType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 		],
-		currentNavLinkTitle: 'Food',
-		currentPillarTitle: 'Lifestyle',
+		currentNavLinkTitle: 'Economics',
+		currentPillarTitle: 'News',
 		subNavSections: {
+			parent: {
+				title: 'Business',
+				url: '/business',
+				children: [
+					{
+						title: 'Economics',
+						url: '/business/economics',
+					},
+					{
+						title: 'Banking',
+						url: '/business/banking',
+					},
+					{
+						title: 'Money',
+						url: '/money',
+						children: [
+							{
+								title: 'Property',
+								url: '/money/property',
+							},
+							{
+								title: 'Pensions',
+								url: '/money/pensions',
+							},
+							{
+								title: 'Savings',
+								url: '/money/savings',
+							},
+							{
+								title: 'Borrowing',
+								url: '/money/debt',
+							},
+							{
+								title: 'Careers',
+								url: '/money/work-and-careers',
+							},
+						],
+					},
+					{
+						title: 'Markets',
+						url: '/business/stock-markets',
+					},
+					{
+						title: 'Project Syndicate',
+						url: '/business/series/project-syndicate-economists',
+					},
+					{
+						title: 'B2B',
+						url: '/business-to-business',
+					},
+					{
+						title: 'Retail',
+						url: '/business/retail',
+					},
+				],
+			},
 			links: [
 				{
-					title: 'Fashion',
-					url: '/fashion',
+					title: 'Economics',
+					url: '/business/economics',
 				},
 				{
-					title: 'Food',
-					url: '/food',
-				},
-				{
-					title: 'Recipes',
-					url: '/tone/recipes',
-				},
-				{
-					title: 'Travel',
-					url: '/travel',
-					children: [
-						{
-							title: 'UK',
-							url: '/travel/uk',
-						},
-						{
-							title: 'Europe',
-							url: '/travel/europe',
-						},
-						{
-							title: 'US',
-							url: '/travel/usa',
-						},
-					],
-				},
-				{
-					title: 'Health & fitness',
-					url: '/lifeandstyle/health-and-wellbeing',
-				},
-				{
-					title: 'Women',
-					url: '/lifeandstyle/women',
-				},
-				{
-					title: 'Men',
-					url: '/lifeandstyle/men',
-				},
-				{
-					title: 'Love & sex',
-					url: '/lifeandstyle/love-and-sex',
-				},
-				{
-					title: 'Beauty',
-					url: '/fashion/beauty',
-				},
-				{
-					title: 'Home & garden',
-					url: '/lifeandstyle/home-and-garden',
+					title: 'Banking',
+					url: '/business/banking',
 				},
 				{
 					title: 'Money',
@@ -1063,8 +1057,20 @@ export const Recipe: CAPIType = {
 					],
 				},
 				{
-					title: 'Cars',
-					url: '/technology/motoring',
+					title: 'Markets',
+					url: '/business/stock-markets',
+				},
+				{
+					title: 'Project Syndicate',
+					url: '/business/series/project-syndicate-economists',
+				},
+				{
+					title: 'B2B',
+					url: '/business-to-business',
+				},
+				{
+					title: 'Retail',
+					url: '/business/retail',
 				},
 			],
 		},
@@ -1122,87 +1128,88 @@ export const Recipe: CAPIType = {
 		},
 	},
 	author: {
-		byline: 'Meera Sodha',
+		byline: 'John Harris',
+		twitterHandle: 'johnharris1969',
 	},
-	designType: 'Recipe',
+	designType: 'Comment',
 	editionId: 'UK',
 	standfirst:
-		'<p><em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce</p>',
+		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-		'article:author': 'https://www.theguardian.com/profile/meera-sodha',
+			'http://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+		'article:author': 'https://www.theguardian.com/profile/johnharris',
 		'og:image:height': '720',
 		'og:description':
-			'Cong you bing are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce',
+			'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
+			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
 		'al:ios:url':
-			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=applinks',
+			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Food',
-		'article:published_time': '2021-02-06T10:30:38.000Z',
+		'article:section': 'Opinion',
+		'article:published_time': '2020-02-10T06:00:27.000Z',
 		'og:title':
-			'Meera Sodha’s vegan recipe for spring onion pancakes | The new vegan',
+			'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Vegan food and drink,Vegetables,Food,Chinese food and drink,Life and style,Main course,Snacks,Starter',
+			'Austerity,UK news,Economics,Business,Politics,Conservatives,ConservativeHome',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2021-02-06T10:30:38.000Z',
+		'article:modified_time': '2020-02-10T11:19:50.000Z',
 	},
-	sectionUrl: 'food/vegan',
+	sectionUrl: 'business/austerity',
 	pageId:
-		'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+		'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	version: 3,
 	tags: [
 		{
-			id: 'food/series/the-new-vegan',
-			type: 'Series',
-			title: 'The new vegan',
+			id: 'commentisfree/commentisfree',
+			type: 'Blog',
+			title: 'Opinion',
 		},
 		{
-			id: 'food/vegan',
+			id: 'business/austerity',
 			type: 'Keyword',
-			title: 'Vegan food and drink',
+			title: 'Austerity',
 		},
 		{
-			id: 'food/vegetables',
-			type: 'Keyword',
-			title: 'Vegetables',
+			id: 'tone/comment',
+			type: 'Tone',
+			title: 'Comment',
 		},
 		{
-			id: 'food/food',
+			id: 'uk/uk',
 			type: 'Keyword',
-			title: 'Food',
+			title: 'UK news',
 		},
 		{
-			id: 'food/chinese',
+			id: 'business/economics',
 			type: 'Keyword',
-			title: 'Chinese food and drink',
+			title: 'Economics',
 		},
 		{
-			id: 'lifeandstyle/lifeandstyle',
+			id: 'business/business',
 			type: 'Keyword',
-			title: 'Life and style',
+			title: 'Business',
 		},
 		{
-			id: 'food/main-course',
+			id: 'politics/politics',
 			type: 'Keyword',
-			title: 'Main course',
+			title: 'Politics',
 		},
 		{
-			id: 'food/snacks',
+			id: 'politics/conservatives',
 			type: 'Keyword',
-			title: 'Snacks',
+			title: 'Conservatives',
 		},
 		{
-			id: 'food/starter',
+			id: 'politics/conservativehome',
 			type: 'Keyword',
-			title: 'Starter',
+			title: 'ConservativeHome',
 		},
 		{
 			id: 'type/article',
@@ -1210,21 +1217,12 @@ export const Recipe: CAPIType = {
 			title: 'Article',
 		},
 		{
-			id: 'tone/recipes',
-			type: 'Tone',
-			title: 'Recipes',
-		},
-		{
-			id: 'tone/features',
-			type: 'Tone',
-			title: 'Features',
-		},
-		{
-			id: 'profile/meera-sodha',
+			id: 'profile/johnharris',
 			type: 'Contributor',
-			title: 'Meera Sodha',
+			title: 'John Harris',
+			twitterHandle: 'johnharris1969',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera_Sodha,_L.png?width=300&quality=85&auto=format&fit=max&s=135136df516ad3a2a8ca0ccfb446a904',
+				'https://i.guim.co.uk/img/uploads/2019/06/26/John_Harris_Next_Gen.png?width=300&quality=85&auto=format&fit=max&s=71554a58d52e35724d1464ab0e413199',
 		},
 		{
 			id: 'publication/theguardian',
@@ -1232,27 +1230,27 @@ export const Recipe: CAPIType = {
 			title: 'The Guardian',
 		},
 		{
-			id: 'theguardian/feast',
+			id: 'theguardian/journal',
 			type: 'NewspaperBook',
-			title: 'Feast',
+			title: 'Journal',
 		},
 		{
-			id: 'theguardian/feast/feast',
+			id: 'theguardian/journal/opinion',
 			type: 'NewspaperBookSection',
-			title: 'Feast',
+			title: 'Opinion',
 		},
 		{
-			id: 'tracking/commissioningdesk/feast',
+			id: 'tracking/commissioningdesk/uk-opinion',
 			type: 'Tracking',
-			title: 'UK Feast',
+			title: 'UK Opinion',
 		},
 	],
-	pillar: 'lifestyle',
+	pillar: 'opinion',
 	webURL:
-		'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+		'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Vegan food and drink',
+	sectionLabel: 'Austerity',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1412,20 +1410,21 @@ export const Recipe: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=ec72ab6b5b0af60af5e401be7fbb9b85',
+			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&s=77ef16f3e784adf8d32f1f5724d0559f',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
+			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
+		'twitter:creator': '@johnharris1969',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			'guardian://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 		'twitter:app:url:iphone':
-			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
+			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
 	},
-	sectionName: 'food',
+	sectionName: 'commentisfree',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1437,18 +1436,19 @@ export const Recipe: CAPIType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
+	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '8591be51-0e19-4db6-bbf4-19012d483526',
+			elementId: 'ec491741-cdd8-4785-b3ff-17ccdf60150c',
 			role: 'inline',
 			data: {
-				alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
+				copyright: '©Mark Pinder',
+				alt:
+					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
 				caption:
-					'Meera Sodha’s spring onion pancakes with sesame sauce.',
-				credit:
-					'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
+				credit: 'Photograph: Mark Pinder/The Guardian',
 			},
 			imageSources: [
 				{
@@ -1456,32 +1456,32 @@ export const Recipe: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
 							width: 890,
 						},
 					],
@@ -1491,22 +1491,22 @@ export const Recipe: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=140&quality=85&auto=format&fit=max&s=008ad26364b5689c6f8b77de55ade880',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=85&auto=format&fit=max&s=668c45e6439ce78e74caabc670caae95',
 							width: 140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1cc25b4ca9c8db2cbfe793b1749e8278',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=5e94737d27c7a05cbed83892fd012f8a',
 							width: 280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=120&quality=85&auto=format&fit=max&s=9d77405d0083b03b935b3adc671a3c61',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=85&auto=format&fit=max&s=26ea4d3fe4bdb051075f28ac562d948d',
 							width: 120,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=8fe2af437b3b2a3d07aa93c7d5b6ec92',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=85351583559b7e857a2b0025a5840a9f',
 							width: 240,
 						},
 					],
@@ -1516,52 +1516,52 @@ export const Recipe: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=380&quality=85&auto=format&fit=max&s=8607e63381731166269954691e0d087f',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=85&auto=format&fit=max&s=8ca054ff212c3cf6081d12e3fb07f48a',
 							width: 380,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=7fa82a0187870dbdce5d4355b8707d6b',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=835b7e68c3c7dbd3949e979c421ed9f2',
 							width: 760,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=300&quality=85&auto=format&fit=max&s=b4e8d8ba855c13fad9a4f80b198fe752',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=85&auto=format&fit=max&s=e82066644d9998c30c539675dd442c80',
 							width: 300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=983762eeff9cf0184efd87c9f58a292c',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=123b68c0d764968a95bf8f9437c79dcf',
 							width: 600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
 							width: 890,
 						},
 					],
@@ -1571,72 +1571,72 @@ export const Recipe: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=85&auto=format&fit=max&s=0f8576b561babcea6db4ac7c4c39b61d',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=85&auto=format&fit=max&s=26a09576dd9b3bac4ab827034f7f91c8',
 							width: 1020,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f0e68993e508db8c81d513a740aae17d',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=813b6acd761529966116835eff6a8909',
 							width: 2040,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=85&auto=format&fit=max&s=2f6f81f802ccbc45a720d702343d52bc',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=85&auto=format&fit=max&s=3319f7b3832d50285dfb34b7f0fd0c94',
 							width: 940,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=531f9cb72baad5291f6d5abd8ae6cee0',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=b7779aa84cf1776a55a3e7d39689315b',
 							width: 1880,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=85&auto=format&fit=max&s=783f5534691df8762be1335594ed34ad',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=85&auto=format&fit=max&s=0326f2185bb8e242f4433dc27a3ec922',
 							width: 660,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=07f6fbb711263a205caf7010f4f798d5',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1eb4e21b9178b60d2110ac9a0a16cf36',
 							width: 1320,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
 							width: 930,
 						},
 					],
@@ -1646,32 +1646,32 @@ export const Recipe: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
 							width: 890,
 						},
 					],
@@ -1681,72 +1681,72 @@ export const Recipe: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=85&auto=format&fit=max&s=dc1a27541c4a1a32bc6d0fd66c7bd421',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=85&auto=format&fit=max&s=aa6833bc19ffd820a12ce33c3eb2d63f',
 							width: 1300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8e1bb367a46778fe5f2a33b52ce76c00',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=616dca8321ef2cf9feb36b48d349cefa',
 							width: 2600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=85&auto=format&fit=max&s=d4dabfc10b7bc1ff85093297a569cae4',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=85&auto=format&fit=max&s=b8a3b1d849822273359f87c045c3aa76',
 							width: 1140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=1e911fff808b4df87a01d7443bfa6ed9',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3e8e7586f1725a997b04a34e2e521b3c',
 							width: 2280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1125&quality=85&auto=format&fit=max&s=7a1e3699cb217a0702e12784c32f5546',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=85&auto=format&fit=max&s=8704c5061b3a6f1e0d897580494ac4d7',
 							width: 1125,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=a89aad8e374d6777adc4921990a970b9',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4736204e8038bf3a4008c9e184b75956',
 							width: 2250,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=965&quality=85&auto=format&fit=max&s=2253468b51b234688a514efda30b28ac',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=85&auto=format&fit=max&s=0f68b28eaa79271f6458ec7c84ea08d7',
 							width: 965,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=d16d3f30174ec4d0bbae8dc0bf32e81c',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=cb7abf09cb7946df62726e737d20cc7a',
 							width: 1930,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=725&quality=85&auto=format&fit=max&s=aeb5250059ec234cb74983c89c775355',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=85&auto=format&fit=max&s=1559cec86eaba98a1a38fd2468085622',
 							width: 725,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=be5ae6d801368022ac6a5f37f0b93283',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=07d0cecc175e2386725996b5aee44abf',
 							width: 1450,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
+								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
 							width: 930,
 						},
 					],
@@ -1758,167 +1758,196 @@ export const Recipe: CAPIType = {
 					{
 						index: 0,
 						fields: {
-							height: '2000',
-							width: '1702',
+							height: '84',
+							width: '140',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/1702.jpg',
+							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/140.jpg',
 					},
 					{
 						index: 1,
 						fields: {
-							height: '1000',
-							width: '851',
+							height: '300',
+							width: '500',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg',
+							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/500.jpg',
 					},
 					{
 						index: 2,
 						fields: {
-							height: '500',
-							width: '426',
+							height: '600',
+							width: '1000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/426.jpg',
+							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg',
 					},
 					{
 						index: 3,
 						fields: {
-							height: '4384',
-							width: '3731',
+							height: '1200',
+							width: '2000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/3731.jpg',
+							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/2000.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							isMaster: 'true',
-							height: '4384',
-							width: '3731',
+							height: '1944',
+							width: '3240',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
+							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/3240.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '1944',
+							width: '3240',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg',
 					},
 				],
 			},
 			displayCredit: true,
 		},
 	],
-	webPublicationDate: '2021-02-06T10:30:38.000Z',
+	webPublicationDate: '2020-02-10T06:00:27.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Sat 6 Feb 2021 10.30 GMT',
-			blockFirstPublishedDisplay: '12.45 GMT',
-			blockLastUpdated: 1612283118000,
-			firstPublishedDisplay: '10.30 GMT',
-			lastUpdatedDisplay: '10.30 GMT',
-			blockCreatedOnDisplay: '11.12 BST',
-			blockLastUpdatedDisplay: '16.25 GMT',
-			firstPublished: 1612607438000,
-			createdOn: 1592302354000,
-			primaryDateLine: 'Sat 6 Feb 2021 10.30 GMT',
-			blockCreatedOn: 1592302354000,
-			blockFirstPublished: 1608295512000,
-			createdOnDisplay: '11.12 BST',
-			lastUpdated: 1612607438000,
+			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 11.19 GMT',
+			blockLastUpdated: 1581270178000,
+			firstPublishedDisplay: '06.00 GMT',
+			lastUpdatedDisplay: '11.19 GMT',
+			blockCreatedOnDisplay: '12.12 GMT',
+			blockLastUpdatedDisplay: '17.42 GMT',
+			firstPublished: 1581314427000,
+			createdOn: 1581250344000,
+			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
+			blockCreatedOn: 1581250344000,
+			createdOnDisplay: '12.12 GMT',
+			lastUpdated: 1581333590000,
 			elements: [
 				{
-					elementId: '8946a9d8-77f2-45b7-bb66-99355e831764',
+					elementId: '3a982d0a-af6b-4382-aabb-e7c5e5ed5fb7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
+						'<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
 				},
 				{
-					elementId: '969f465c-5ce5-4501-bca4-525d9922fc0f',
+					elementId: '1beb71e5-022f-4219-9c5a-76d9c11dfc77',
+					role: 'supporting',
+					isThirdPartyTracking: false,
 					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
+						'model.dotcomrendering.pageElements.PullquoteBlockElement',
+					html:
+						'£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
 				},
 				{
-					elementId: '1f1ea308-7576-4db5-92c8-05d4225448a4',
+					elementId: '9f849b9d-abe1-4448-9e14-a3919c4aa55c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
+						'<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
 				},
 				{
-					elementId: 'a55b942e-7ed8-45bc-883c-327aa3dc867f',
+					elementId: 'b7211465-212e-463e-b295-99f0f15d0c14',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
+						'<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
 				},
 				{
-					elementId: 'd9abc3cb-dfb3-4eba-8d33-5aec3ce44079',
+					elementId: '0d2e3475-4dc3-4055-b862-26391ca70728',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
+						'<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
 				},
 				{
-					elementId: '80092907-fc06-4865-848b-2cdb9854c8f4',
+					elementId: '9fd683ed-ec9b-4a02-98fe-d46ad592c950',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
+						'<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
 				},
 				{
-					elementId: 'e1730c45-08c0-4ad8-8467-af4376e7b86c',
+					elementId: '2c4b10eb-61e0-453b-91fb-f90e703a4579',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
+						'<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
 				},
 				{
-					elementId: 'b70d1a51-7850-4c57-bfdd-121109e56266',
+					elementId: '3ec236b7-d5b4-454b-a5d7-0765c18a284b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
+						'<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
 				},
 				{
-					elementId: '8f00b99d-9faa-4e8b-9b1d-7ab90e87c821',
+					elementId: 'f34fde06-f683-4a71-85bf-c0b9c58cb3ec',
+					role: 'thumbnail',
+					prefix: 'Related: ',
+					_type:
+						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					text:
+						'Tory plans to ‘level up’ the north are laughably inadequate | Polly Toynbee',
+					url:
+						'https://www.theguardian.com/commentisfree/2020/feb/06/tory-level-up-north-regional-inequality',
+				},
+				{
+					elementId: '1e2a56ff-bfbb-4e44-9db2-49140d117d6b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
+						'<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
 				},
 				{
-					elementId: '947d41fc-1a18-4c22-a4cb-ea94b1df2e12',
+					elementId: '3b2f0119-6f9a-41f4-8b15-89375615599a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
+						'<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
 				},
 				{
-					elementId: 'c766d05b-9e35-4302-a716-e0e4ed507204',
+					elementId: 'c537739e-4ddd-45ad-adde-8471d4380f9f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
+						'<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
 				},
 				{
-					elementId: 'ced94a6a-b116-4b9a-92c0-e3bc932f9000',
+					elementId: '562ba08c-8ef7-449c-b2a4-ec0483f98fbf',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
+						'<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
+				},
+				{
+					elementId: '493ddb79-e091-49c5-a894-21663c553843',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>• John Harris is a Guardian columnist</p>',
 				},
 			],
-			id: '5ee89b118f089a4ae3aff6e7',
+			id: '6bc6fa8c-a504-4e81-9828-3a7a0a78b052',
 		},
 	],
 	linkedData: [
@@ -1926,7 +1955,7 @@ export const Recipe: CAPIType = {
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1953,40 +1982,41 @@ export const Recipe: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=9dc1dcd25475025daa5c87bd12a35761',
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=5f74068db4e833bc2746941c4240a323',
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&quality=85&auto=format&fit=max&s=13e43d46439a7085e9731dda87d5c949',
+				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
+				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bd2f2a476abaf5a0bc7c70f1f31dba50',
+				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d3257abb4b456eb86f445acfe8dfcdf3',
+				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&quality=85&auto=format&fit=max&s=3d4a5bbf7513a6d5c91a173d5b4ad0b5',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Meera Sodha',
-					sameAs: 'https://www.theguardian.com/profile/meera-sodha',
+					name: 'John Harris',
+					sameAs: 'https://www.theguardian.com/profile/johnharris',
 				},
 			],
-			datePublished: '2021-02-06T10:30:38.000Z',
-			headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
-			dateModified: '2021-02-06T10:30:38.000Z',
+			datePublished: '2020-02-10T06:00:27.000Z',
+			headline:
+				'Austerity is grinding on – it has cut too deep to ‘level up’',
+			dateModified: '2020-02-10T11:19:50.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Sat 6 Feb 2021 10.30 GMT',
+	webPublicationDateDisplay: 'Mon 10 Feb 2020 06.00 GMT',
 	shouldHideAds: false,
 	webTitle:
-		'Meera Sodha’s vegan recipe for spring onion pancakes | The new vegan',
+		'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
 	isSpecialReport: false,
 	isCommentable: true,
 	keyEvents: [],

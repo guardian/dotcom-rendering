@@ -38,6 +38,10 @@ export const Quiz: CAPIType = {
 					value: 'uk',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
 					name: 'se',
 					value: ['guardian-sport-network'],
 				},
@@ -69,10 +73,6 @@ export const Quiz: CAPIType = {
 					name: 'k',
 					value: ['sport', 'football'],
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		US: {
@@ -81,6 +81,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -118,10 +122,6 @@ export const Quiz: CAPIType = {
 					name: 'k',
 					value: ['sport', 'football'],
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		AU: {
@@ -130,6 +130,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -167,10 +171,6 @@ export const Quiz: CAPIType = {
 					name: 'edition',
 					value: 'au',
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		INT: {
@@ -179,6 +179,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -215,10 +219,6 @@ export const Quiz: CAPIType = {
 				{
 					name: 'k',
 					value: ['sport', 'football'],
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
 				},
 			],
 		},
@@ -1330,7 +1330,7 @@ export const Quiz: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '6c671ba8-a07e-4865-926b-b4db8661d5ae',
+			elementId: 'e64c7ab8-2249-41bd-aef7-80863c7443ad',
 			role: 'showcase',
 			data: {
 				alt:
@@ -1736,7 +1736,7 @@ export const Quiz: CAPIType = {
 			lastUpdated: 1591952965000,
 			elements: [
 				{
-					elementId: '1da02ed3-4f82-4149-ad6e-872f5edf9e3f',
+					elementId: '1043c247-090e-40dc-93e5-07cc141a5d27',
 					quizType: 'knowledge',
 					resultBuckets: [],
 					questions: [

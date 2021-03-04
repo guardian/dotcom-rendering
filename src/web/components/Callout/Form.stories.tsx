@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import {
 	calloutCampaign,
 	calloutCampaignOnlyTwoRadio,
-} from '@root/fixtures/calloutCampaign';
+} from '@root/fixtures/manual/calloutCampaign';
 import { Form } from './Form';
 
 export default {

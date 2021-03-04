@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 const fetch = require('node-fetch');
 const execa = require('execa');
+const fs = require('fs');
 const { resolve } = require('path');
 const { config } = require('../../fixtures/config');
 
 const root = resolve(__dirname, '..', '..');
-const fs = require('fs');
 
 /**
  * gen-fixtures.ts
@@ -109,24 +113,54 @@ const HEADER = `/**
 `;
 
 try {
+	// Article fixtures
 	const requests = articles.map((article) => {
 		return fetch(`${article.url}.json?dcr`)
 			.then((res) => res.json())
 			.then((json) => {
 				// Add test config
 				json.config = config;
+				// TODO: Remove this when we add in support for CAPI format to DCR
+				delete json.format;
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name
 				}: CAPIType = ${JSON.stringify(json, null, 4)}`;
 				fs.writeFileSync(
-					`${root}/fixtures/articles/${article.name}.ts`,
+					`${root}/fixtures/generated/articles/${article.name}.ts`,
 					contents,
 					'utf8',
 				);
 				console.log(`Created ${article.name}.ts`);
 			});
 	});
+	// Images fixture
+	requests.push(
+		fetch(
+			'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton.json?dcr',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				const images = json.blocks[0].elements.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.ImageBlockElement',
+				);
+
+				// Write the new fixture data
+				const contents = `${HEADER}export const images: ImageBlockElement[] = ${JSON.stringify(
+					images,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/images.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created Images.ts`);
+			}),
+	);
 
 	Promise.all(requests).finally(() => {
 		console.log('\nFormatting files...');
@@ -137,7 +171,7 @@ try {
 			'error',
 		]).then(() => {
 			console.log(
-				`\nDone ✅ Successfully created ${articles.length} fixtures\n`,
+				`\nDone ✅ Successfully created ${requests.length} fixtures\n`,
 			);
 		});
 	});

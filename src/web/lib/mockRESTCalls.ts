@@ -1,11 +1,14 @@
 import fetchMock from 'fetch-mock';
 
-import { mockTab1, responseWithTwoTabs } from '@root/fixtures/mostViewed';
-import { series } from '@root/fixtures/series';
-import { commentCount } from '@root/fixtures/commentCounts';
-import { discussion } from '@root/fixtures/discussion';
-import { storypackage } from '@root/fixtures/storypackage';
-import { matchreport } from '@root/fixtures/matchreport';
+import {
+	mockTab1,
+	responseWithTwoTabs,
+} from '@root/fixtures/manual/mostViewed';
+import { series } from '@root/fixtures/manual/series';
+import { commentCount } from '@root/fixtures/manual/commentCount';
+import { discussion } from '@root/fixtures/manual/discussion';
+import { storypackage } from '@root/fixtures/manual/storypackage';
+import { matchreport } from '@root/fixtures/manual/matchreport';
 
 const richLinkCard = {
 	tags: [

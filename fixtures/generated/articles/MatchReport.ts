@@ -11,13 +11,14 @@
  *    gen-fixtures.ts directly.
  */
 
-export const PrintShop: CAPIType = {
+export const MatchReport: CAPIType = {
 	slotMachineFlags: '',
-	main: '',
+	main:
+		'<figure class="element element-image" data-media-id="cc1d3dc14ab9104587323ef12ac477004b369637"> <img src="https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1000.jpg" alt="André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.</span> <span class="element-image__credit">Photograph: Kieran McManus/BPI/Shutterstock</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/artanddesign/series/guardian-print-shop',
-			title: 'Guardian Print Shop',
+			url: '/football/championship',
+			title: 'Championship',
 		},
 	],
 	commercialProperties: {
@@ -28,32 +29,23 @@ export const PrintShop: CAPIType = {
 					value: 'uk',
 				},
 				{
-					name: 'se',
-					value: ['guardian-print-shop'],
-				},
-				{
 					name: 'url',
 					value:
-						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-				},
-				{
-					name: 'co',
-					value: ['guardian-sport'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'k',
 					value: [
-						'photography',
-						'culture',
+						'norwichcity',
+						'swansea',
+						'championship',
 						'sport',
-						'artanddesign',
 						'football',
-						'england',
 					],
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
@@ -65,39 +57,38 @@ export const PrintShop: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
+					value: 'https://www.theguardian.com/p/gba7d',
+				},
+				{
+					name: 'co',
+					value: ['ben-fisher'],
+				},
+				{
+					name: 'tn',
+					value: ['matchreports'],
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'se',
-					value: ['guardian-print-shop'],
-				},
-				{
 					name: 'url',
 					value:
-						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-				},
-				{
-					name: 'co',
-					value: ['guardian-sport'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'k',
 					value: [
-						'photography',
-						'culture',
+						'norwichcity',
+						'swansea',
+						'championship',
 						'sport',
-						'artanddesign',
 						'football',
-						'england',
 					],
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
@@ -106,46 +97,45 @@ export const PrintShop: CAPIType = {
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/gba7d',
+				},
+				{
+					name: 'co',
+					value: ['ben-fisher'],
 				},
 				{
 					name: 'edition',
 					value: 'us',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
+					name: 'tn',
+					value: ['matchreports'],
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'se',
-					value: ['guardian-print-shop'],
-				},
-				{
 					name: 'url',
 					value:
-						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-				},
-				{
-					name: 'co',
-					value: ['guardian-sport'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'k',
 					value: [
-						'photography',
-						'culture',
+						'norwichcity',
+						'swansea',
+						'championship',
 						'sport',
-						'artanddesign',
 						'football',
-						'england',
 					],
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
@@ -157,7 +147,15 @@ export const PrintShop: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
+					value: 'https://www.theguardian.com/p/gba7d',
+				},
+				{
+					name: 'co',
+					value: ['ben-fisher'],
+				},
+				{
+					name: 'tn',
+					value: ['matchreports'],
 				},
 				{
 					name: 'edition',
@@ -168,17 +166,19 @@ export const PrintShop: CAPIType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'se',
-					value: ['guardian-print-shop'],
-				},
-				{
 					name: 'url',
 					value:
-						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
-					name: 'co',
-					value: ['guardian-sport'],
+					name: 'k',
+					value: [
+						'norwichcity',
+						'swansea',
+						'championship',
+						'sport',
+						'football',
+					],
 				},
 				{
 					name: 'edition',
@@ -187,17 +187,6 @@ export const PrintShop: CAPIType = {
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'photography',
-						'culture',
-						'sport',
-						'artanddesign',
-						'football',
-						'england',
-					],
 				},
 				{
 					name: 'ct',
@@ -209,28 +198,44 @@ export const PrintShop: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
+					value: 'https://www.theguardian.com/p/gba7d',
+				},
+				{
+					name: 'co',
+					value: ['ben-fisher'],
+				},
+				{
+					name: 'tn',
+					value: ['matchreports'],
 				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 17 Dec 2020 14.04 GMT',
+		'Last modified on Sat 6 Feb 2021 05.27 GMT',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
-	publication: 'theguardian.com',
+	publication: 'The Guardian',
 	trailText:
-		'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
+		'André Ayew and Conor Hourihane scored in the 2-0 home win against Norwich to lift Swansea to second, only two points behind the leaders',
 	subMetaKeywordLinks: [
 		{
-			url: '/artanddesign/photography',
-			title: 'Photography',
+			url: '/football/swansea',
+			title: 'Swansea City',
+		},
+		{
+			url: '/football/norwichcity',
+			title: 'Norwich City',
+		},
+		{
+			url: '/tone/matchreports',
+			title: 'match reports',
 		},
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/artanddesign',
+		currentUrl: '/football',
 		pillars: [
 			{
 				title: 'News',
@@ -925,41 +930,75 @@ export const PrintShop: CAPIType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 		],
-		currentNavLinkTitle: 'Art & design',
-		currentPillarTitle: 'Culture',
+		currentNavLinkTitle: 'Football',
+		currentPillarTitle: 'Sport',
 		subNavSections: {
+			parent: {
+				title: 'Football',
+				url: '/football',
+				children: [
+					{
+						title: 'Live scores',
+						url: '/football/live',
+						longTitle: 'football/live',
+					},
+					{
+						title: 'Tables',
+						url: '/football/tables',
+						longTitle: 'football/tables',
+					},
+					{
+						title: 'Fixtures',
+						url: '/football/fixtures',
+						longTitle: 'football/fixtures',
+					},
+					{
+						title: 'Results',
+						url: '/football/results',
+						longTitle: 'football/results',
+					},
+					{
+						title: 'Competitions',
+						url: '/football/competitions',
+						longTitle: 'football/competitions',
+					},
+					{
+						title: 'Clubs',
+						url: '/football/teams',
+						longTitle: 'football/teams',
+					},
+				],
+			},
 			links: [
 				{
-					title: 'Film',
-					url: '/film',
+					title: 'Live scores',
+					url: '/football/live',
+					longTitle: 'football/live',
 				},
 				{
-					title: 'Music',
-					url: '/music',
+					title: 'Tables',
+					url: '/football/tables',
+					longTitle: 'football/tables',
 				},
 				{
-					title: 'TV & radio',
-					url: '/tv-and-radio',
+					title: 'Fixtures',
+					url: '/football/fixtures',
+					longTitle: 'football/fixtures',
 				},
 				{
-					title: 'Books',
-					url: '/books',
+					title: 'Results',
+					url: '/football/results',
+					longTitle: 'football/results',
 				},
 				{
-					title: 'Art & design',
-					url: '/artanddesign',
+					title: 'Competitions',
+					url: '/football/competitions',
+					longTitle: 'football/competitions',
 				},
 				{
-					title: 'Stage',
-					url: '/stage',
-				},
-				{
-					title: 'Games',
-					url: '/games',
-				},
-				{
-					title: 'Classical',
-					url: '/music/classicalmusicandopera',
+					title: 'Clubs',
+					url: '/football/teams',
+					longTitle: 'football/teams',
 				},
 			],
 		},
@@ -1017,51 +1056,55 @@ export const PrintShop: CAPIType = {
 		},
 	},
 	author: {
-		byline: 'Guardian sport',
+		byline: 'Ben Fisher at the Liberty Stadium',
 	},
-	designType: 'Immersive',
+	designType: 'MatchReport',
 	editionId: 'UK',
-	standfirst:
-		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
+	standfirst: '',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-		'article:author': 'https://www.theguardian.com/profile/guardian-sport',
+			'http://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+		'article:author': 'https://www.theguardian.com/profile/ben-fisher',
 		'og:image:height': '720',
 		'og:description':
-			'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
+			'André Ayew and Conor Hourihane scored in the 2-0 home win against Norwich to lift Swansea to second, only two points behind the leaders',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=78a10cbc67fd64bbdff889b85c10b3c3',
+			'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b8519d3db69446bfb443279cd19db7b5',
 		'al:ios:url':
-			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=applinks',
+			'gnmguardian://football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Art and design',
-		'article:published_time': '2020-12-17T09:07:18.000Z',
-		'og:title': 'Buy a classic sport photograph: the immortal Bobby Moore',
+		'article:section': 'Football',
+		'article:published_time': '2021-02-05T22:16:43.000Z',
+		'og:title':
+			'André Ayew sparks Swansea victory over Norwich to close gap at top',
 		'fb:app_id': '180444840287',
-		'article:tag':
-			'England,Football,Sport,Photography,Art and design,Culture',
+		'article:tag': 'Championship,Swansea City,Norwich City,Football,Sport',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-12-17T14:04:58.000Z',
+		'article:modified_time': '2021-02-06T05:27:20.000Z',
 	},
-	sectionUrl: 'football/england',
+	sectionUrl: 'football/championship',
 	pageId:
-		'artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+		'football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	version: 3,
 	tags: [
 		{
-			id: 'artanddesign/series/guardian-print-shop',
-			type: 'Series',
-			title: 'Guardian Print Shop',
+			id: 'football/championship',
+			type: 'Keyword',
+			title: 'Championship',
 		},
 		{
-			id: 'football/england',
+			id: 'football/swansea',
 			type: 'Keyword',
-			title: 'England',
+			title: 'Swansea City',
+		},
+		{
+			id: 'football/norwichcity',
+			type: 'Keyword',
+			title: 'Norwich City',
 		},
 		{
 			id: 'football/football',
@@ -1074,42 +1117,49 @@ export const PrintShop: CAPIType = {
 			title: 'Sport',
 		},
 		{
-			id: 'artanddesign/photography',
-			type: 'Keyword',
-			title: 'Photography',
-		},
-		{
-			id: 'artanddesign/artanddesign',
-			type: 'Keyword',
-			title: 'Art and design',
-		},
-		{
-			id: 'culture/culture',
-			type: 'Keyword',
-			title: 'Culture',
-		},
-		{
 			id: 'type/article',
 			type: 'Type',
 			title: 'Article',
 		},
 		{
-			id: 'profile/guardian-sport',
-			type: 'Contributor',
-			title: 'Guardian sport',
+			id: 'tone/matchreports',
+			type: 'Tone',
+			title: 'Match reports',
 		},
 		{
-			id: 'tracking/commissioningdesk/uk-pictures-guardian-news',
+			id: 'profile/ben-fisher',
+			type: 'Contributor',
+			title: 'Ben Fisher',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/uploads/2017/11/06/Ben_Fisher,_L.png?width=300&quality=85&auto=format&fit=max&s=c7012d74bff5e3b4952656e3a8ceb105',
+		},
+		{
+			id: 'publication/theguardian',
+			type: 'Publication',
+			title: 'The Guardian',
+		},
+		{
+			id: 'theguardian/sport',
+			type: 'NewspaperBook',
+			title: 'Sport',
+		},
+		{
+			id: 'theguardian/sport/news',
+			type: 'NewspaperBookSection',
+			title: 'News & features',
+		},
+		{
+			id: 'tracking/commissioningdesk/uk-sport',
 			type: 'Tracking',
-			title: 'UK Pictures Guardian News',
+			title: 'UK Sport',
 		},
 	],
-	pillar: 'culture',
+	pillar: 'sport',
 	webURL:
-		'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+		'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	showBottomSocialButtons: true,
-	isImmersive: true,
-	sectionLabel: 'England',
+	isImmersive: false,
+	sectionLabel: 'Championship',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1269,20 +1319,20 @@ export const PrintShop: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=4a590bacf9b5ea3e4a18ffb74f152cad',
+			'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=63f5549570734f5edf36122ad2d62b30',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=twitter',
+			'gnmguardian://football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+			'guardian://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 		'twitter:app:url:iphone':
-			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=twitter',
+			'gnmguardian://football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top?contenttype=Article&source=twitter',
 	},
-	sectionName: 'artanddesign',
+	sectionName: 'football',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1294,467 +1344,509 @@ export const PrintShop: CAPIType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
+	matchUrl:
+		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2021/02/05/65/14.json?dcr=true&page=football%2F2021%2Ffeb%2F05%2Fandre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+	headline:
+		'André Ayew sparks Swansea victory over Norwich to close gap at top',
 	guardianBaseURL: 'https://www.theguardian.com',
-	mainMediaElements: [],
-	webPublicationDate: '2020-12-17T09:07:18.000Z',
-	blocks: [
+	mainMediaElements: [
 		{
-			secondaryDateLine: 'Last modified on Thu 17 Dec 2020 14.04 GMT',
-			blockFirstPublishedDisplay: '20.44 GMT',
-			blockLastUpdated: 1608201874000,
-			firstPublishedDisplay: '09.07 GMT',
-			lastUpdatedDisplay: '14.04 GMT',
-			blockCreatedOnDisplay: '17.06 GMT',
-			blockLastUpdatedDisplay: '10.44 GMT',
-			firstPublished: 1608196038000,
-			createdOn: 1572887180000,
-			primaryDateLine: 'Thu 17 Dec 2020 09.07 GMT',
-			blockCreatedOn: 1572887180000,
-			blockFirstPublished: 1607633048000,
-			createdOnDisplay: '17.06 GMT',
-			lastUpdated: 1608213898000,
-			elements: [
+			elementId: 'b0ad2c29-3ddb-4db2-84c9-a91b00e0bf12',
+			role: 'inline',
+			data: {
+				alt:
+					'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
+				caption:
+					'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
+				credit: 'Photograph: Kieran McManus/BPI/Shutterstock',
+			},
+			imageSources: [
 				{
-					elementId: 'de099ad1-f14e-4742-9911-27815634599d',
-					role: 'immersive',
-					data: {
-						alt: 'Bobby Moore in 1973',
-						credit: 'Photograph: Gerry Cranham/Offside',
-					},
-					imageSources: [
+					weighting: 'inline',
+					srcSet: [
 						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=85&auto=format&fit=max&s=bba40694a98781f33e77ee6f38845e5a',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=24dffbbab5032c4a4bad680c98154c03',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=85&auto=format&fit=max&s=b5b98d12bcaa700decb0f558f52b30fa',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=93e2625dfaef1d4f82649f44a0e92eab',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=85&auto=format&fit=max&s=28985b33fa3553745288a43a0ff55f1e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=6abf07f5e1108f9825df71f8ca94474f',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
+							width: 620,
 						},
 						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=140&quality=85&auto=format&fit=max&s=155465e01f55d173c0a61ac1f93199a8',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=9cb3dd42dc185082ab4d4bbc070ddc06',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=120&quality=85&auto=format&fit=max&s=4959a6c49a3f6cbbb1e3353ab5980679',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=48de77b0763df2b7e0bfd3d926102717',
-									width: 240,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
+							width: 1240,
 						},
 						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=380&quality=85&auto=format&fit=max&s=19c4c799a125576e3e6d37ba561e10a9',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=4e621767a8ec32ed6a70648c4566b333',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=300&quality=85&auto=format&fit=max&s=7ad1b96ce128d029b6c86e785eb955bd',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=6f19cd91993e14c0a3873fa25a2e8f49',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=85&auto=format&fit=max&s=bba40694a98781f33e77ee6f38845e5a',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=24dffbbab5032c4a4bad680c98154c03',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=85&auto=format&fit=max&s=b5b98d12bcaa700decb0f558f52b30fa',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=93e2625dfaef1d4f82649f44a0e92eab',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=85&auto=format&fit=max&s=28985b33fa3553745288a43a0ff55f1e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=6abf07f5e1108f9825df71f8ca94474f',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
+							width: 605,
 						},
 						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1020&quality=85&auto=format&fit=max&s=82a3e9ebc6d72eee76a60817eeea3a6b',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d6dfb0a278aece2eef08d0cf73e7a09d',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=940&quality=85&auto=format&fit=max&s=2ba0b2e2b6ca94bab622216e78f3d65e',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=01b35ec4082b385e533b1d45b1e58279',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=85&auto=format&fit=max&s=4c198eeefd44d800fee26ccef91266c5',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=59426683743484a3a8e8bfb785e2e65f',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=85&auto=format&fit=max&s=4c198eeefd44d800fee26ccef91266c5',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=59426683743484a3a8e8bfb785e2e65f',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=660&quality=85&auto=format&fit=max&s=123df7010bb21fa1c962339ebce5a94f',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=20798c142854fd13114526e1b0402887',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=85&auto=format&fit=max&s=2301f0a29faaa49376d15f796d22aef7',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b8363e95989341572c4ef963f865b1ed',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=85&auto=format&fit=max&s=eff47ab66424efca5e4f9060cde815bd',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37d11078a8141f9781d64de9d24e3f27',
-									width: 930,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
+							width: 1210,
 						},
 						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=85&auto=format&fit=max&s=bba40694a98781f33e77ee6f38845e5a',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=24dffbbab5032c4a4bad680c98154c03',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=85&auto=format&fit=max&s=b5b98d12bcaa700decb0f558f52b30fa',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=93e2625dfaef1d4f82649f44a0e92eab',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=85&auto=format&fit=max&s=28985b33fa3553745288a43a0ff55f1e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=6abf07f5e1108f9825df71f8ca94474f',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
+							width: 445,
 						},
 						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1300&quality=85&auto=format&fit=max&s=f22943517ecb09ef5d593158ca8e6887',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ffa5acc4dacac28ad95b0b5a1b3ad65',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1140&quality=85&auto=format&fit=max&s=3cb1674364d60ff9c0d45502c996c291',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=8fe41c8c639def397f828de97f05ee16',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1125&quality=85&auto=format&fit=max&s=c6e34975d70c4eea48031b0ed8b15035',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e5001cbaa7a79cdf4f89597ff5ee4dfb',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=965&quality=85&auto=format&fit=max&s=811aa368d7105f88bb1cc42e4ab44e6c',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a832030abf575f937a313a7fffea68b5',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=725&quality=85&auto=format&fit=max&s=5d61b5b1ef5b7bd9b5ca2d96fd31dc12',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=84dab42384002f7346998d2b57482950',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=85&auto=format&fit=max&s=2301f0a29faaa49376d15f796d22aef7',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b8363e95989341572c4ef963f865b1ed',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=85&auto=format&fit=max&s=eff47ab66424efca5e4f9060cde815bd',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37d11078a8141f9781d64de9d24e3f27',
-									width: 930,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
+							width: 890,
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '2755',
-									width: '3855',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/3855.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '2755',
-									width: '3855',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1429',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '715',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '357',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '100',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/140.jpg',
-							},
-						],
-					},
-					displayCredit: false,
 				},
 				{
-					elementId: 'a1e78ec6-4f8a-49b1-8d29-7f6ae8e1a3ba',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
+					weighting: 'thumbnail',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=140&quality=85&auto=format&fit=max&s=ca1fc952b0b5bfcbfb7a8666c110e597',
+							width: 140,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=9490e2983dc38e7abcc0819d07358e2d',
+							width: 280,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=120&quality=85&auto=format&fit=max&s=fc7bf55b34904547630abb290e07ba2b',
+							width: 120,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7f7b2be69723c4c6571336362b432805',
+							width: 240,
+						},
+					],
 				},
 				{
-					elementId: 'e24b5694-a07e-4748-90a7-948aa9b797a7',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
+					weighting: 'supporting',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=380&quality=85&auto=format&fit=max&s=0b6cd1334b62c2cdf3a69e7b8fb5682e',
+							width: 380,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3ceac779c69416232712bf4c8e99032f',
+							width: 760,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=300&quality=85&auto=format&fit=max&s=ebcc0889e3b990c755a1f2674f55b139',
+							width: 300,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3acf7faad2c14d8fb8ce977dc8d74399',
+							width: 600,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
+							width: 620,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
+							width: 1240,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
+							width: 605,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
+							width: 1210,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
+							width: 445,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
+							width: 890,
+						},
+					],
 				},
 				{
-					elementId: 'c5868a65-b28d-4aad-b0d8-bc49bc32bb17',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><em>Words: Jonny Weeks</em></p>',
+					weighting: 'showcase',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1020&quality=85&auto=format&fit=max&s=218bd7173095566fc62bc0e5b6f19f31',
+							width: 1020,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=921d1bac4fa4864c5834c185c1440596',
+							width: 2040,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=940&quality=85&auto=format&fit=max&s=33cee4387567d8dc5989a2cb74744605',
+							width: 940,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=efe8f8ce7874db475bad461e7e6c37a2',
+							width: 1880,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=85&auto=format&fit=max&s=c26150091859708116bb6f3b1d8e6fd7',
+							width: 700,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5badc76e3ddac60f7166895d09d444e',
+							width: 1400,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=85&auto=format&fit=max&s=c26150091859708116bb6f3b1d8e6fd7',
+							width: 700,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5badc76e3ddac60f7166895d09d444e',
+							width: 1400,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=660&quality=85&auto=format&fit=max&s=8e9b081837d4367f83a7633713e45eee',
+							width: 660,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=2dd8e33f8868179ff7bc099e4170f224',
+							width: 1320,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=85&auto=format&fit=max&s=3137a1577d4433cdf7b6e95fd8d4cf78',
+							width: 645,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=09f4336af469ce67ced5fe9df7c83e5e',
+							width: 1290,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=85&auto=format&fit=max&s=271e6711f51b1c0055793baf2749bd32',
+							width: 465,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d7df199c9bd479a283c3a7afb80736e8',
+							width: 930,
+						},
+					],
 				},
 				{
-					elementId: 'bbee68f3-f797-4567-a2d4-cc0c6fb7c630',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
+					weighting: 'halfwidth',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
+							width: 620,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
+							width: 1240,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
+							width: 605,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
+							width: 1210,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
+							width: 445,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
+							width: 890,
+						},
+					],
 				},
 				{
-					elementId: '8332a5aa-b1ec-4f34-975a-c4e4810ca671',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-				},
-				{
-					elementId: '938c21ea-2300-49c4-a1cd-e759ca4bdbe9',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-				},
-				{
-					elementId: '444ea21f-e568-4a40-96bb-52641b0f03b3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-				},
-				{
-					elementId: '2db12002-e0f5-4b1f-a5de-db4628a38d0e',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
+					weighting: 'immersive',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1300&quality=85&auto=format&fit=max&s=da89361749c2db884b396202fe281df2',
+							width: 1300,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ee884b9c6840d7993cdff8bb5b608e2',
+							width: 2600,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1140&quality=85&auto=format&fit=max&s=73dda51a11db9bc1df0f918c2d0222ef',
+							width: 1140,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=e54589b2000f6314ab8083e69b199edc',
+							width: 2280,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1125&quality=85&auto=format&fit=max&s=b37a0e995403ea1f5e2b9c7a3cd4ec2a',
+							width: 1125,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=d87c09c55375ad9095089dca71189b38',
+							width: 2250,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=965&quality=85&auto=format&fit=max&s=ef553179832fe351026879cd5cca4017',
+							width: 965,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=f7992d9e3a74bca6f832ef8d7156bdf4',
+							width: 1930,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=725&quality=85&auto=format&fit=max&s=474e255381529f0047dff2dd11389d1b',
+							width: 725,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=28c4b267f9038263223f14307704c4fa',
+							width: 1450,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=85&auto=format&fit=max&s=3137a1577d4433cdf7b6e95fd8d4cf78',
+							width: 645,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=09f4336af469ce67ced5fe9df7c83e5e',
+							width: 1290,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=85&auto=format&fit=max&s=271e6711f51b1c0055793baf2749bd32',
+							width: 465,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d7df199c9bd479a283c3a7afb80736e8',
+							width: 930,
+						},
+					],
 				},
 			],
-			id: '5dc05a8c8f0809525b6f5f10',
+			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+			media: {
+				allImages: [
+					{
+						index: 0,
+						fields: {
+							height: '600',
+							width: '1000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1000.jpg',
+					},
+					{
+						index: 1,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/500.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '84',
+							width: '140',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/140.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '1028',
+							width: '1713',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1713.jpg',
+					},
+					{
+						index: 4,
+						fields: {
+							isMaster: 'true',
+							height: '1028',
+							width: '1713',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg',
+					},
+				],
+			},
+			displayCredit: true,
+		},
+	],
+	webPublicationDate: '2021-02-05T22:16:43.000Z',
+	blocks: [
+		{
+			secondaryDateLine: 'Last modified on Sat 6 Feb 2021 05.27 GMT',
+			blockFirstPublishedDisplay: '22.11 GMT',
+			blockLastUpdated: 1612570264000,
+			firstPublishedDisplay: '22.16 GMT',
+			lastUpdatedDisplay: '05.27 GMT',
+			blockCreatedOnDisplay: '19.05 GMT',
+			blockLastUpdatedDisplay: '00.11 GMT',
+			firstPublished: 1612563403000,
+			createdOn: 1612551919000,
+			primaryDateLine: 'Fri 5 Feb 2021 22.16 GMT',
+			blockCreatedOn: 1612551919000,
+			blockFirstPublished: 1612563105000,
+			createdOnDisplay: '19.05 GMT',
+			lastUpdated: 1612589240000,
+			elements: [
+				{
+					elementId: '164cdd7b-17b1-4384-bc13-07b46462a5fa',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
+				},
+				{
+					elementId: 'ccf9eb27-c02c-4495-abc0-7410c7166bf8',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
+				},
+				{
+					elementId: '9cb55493-1b54-4ea4-8041-42d3aa71a2a7',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
+				},
+				{
+					elementId: '7d998450-6054-482b-a056-2183775c50e2',
+					role: 'thumbnail',
+					prefix: 'Related: ',
+					_type:
+						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					text:
+						"Tim Krul: 'The way we play at Norwich is similar to Holland'",
+					url:
+						'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
+				},
+				{
+					elementId: '25571b4a-f61e-4936-aa56-ba0460e6584d',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
+				},
+				{
+					elementId: '21ec5e00-3f37-4622-8e66-5d8353f0b9b6',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
+				},
+				{
+					elementId: 'e959c20f-e08e-449c-aaa3-98b4151120e5',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
+				},
+				{
+					elementId: '212d8ee0-47f2-431d-b2b9-97acf95ad486',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
+				},
+				{
+					elementId: 'e3f08489-48c2-4be8-a043-31cda0b7d41a',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
+				},
+				{
+					elementId: '335be6e2-40e4-4cff-93b6-f4f8532287d7',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
+				},
+				{
+					elementId: '8aeb0b45-4809-4c67-a847-514b8cf5c7b9',
+					isThirdPartyTracking: false,
+					safe: true,
+					alt: 'Fiver',
+					_type:
+						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					html:
+						'<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
+					source: 'The Guardian',
+					sourceDomain: 'theguardian.com',
+					isMandatory: false,
+				},
+				{
+					elementId: 'f524b830-c3f4-47e7-9156-bf360c16209b',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
+				},
+				{
+					elementId: '01186a11-505b-4357-907a-9bc1af8f3d99',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
+				},
+			],
+			id: '601d96ef8f0862592e4b23ca',
 		},
 	],
 	linkedData: [
@@ -1762,7 +1854,7 @@ export const PrintShop: CAPIType = {
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				'https://amp.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1789,43 +1881,43 @@ export const PrintShop: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=78a10cbc67fd64bbdff889b85c10b3c3',
-				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=1d283540d1bcabdc291f244a28e24e13',
-				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=46fe1ba5c74d24c6e88f67de36b4599b',
-				'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/108_211_3538_2124/master/3538.jpg?width=1200&quality=85&auto=format&fit=max&s=f069e124dd33e0ac48fa5d2613f51374',
+				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b8519d3db69446bfb443279cd19db7b5',
+				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4d76500f0c4bff87eb6979e12fc4eaf4',
+				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=4933194a6d7519d92ed3cf410aa9f8a8',
+				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&quality=85&auto=format&fit=max&s=56ea2121d733fa61be9fa2792b52aefa',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Guardian sport',
-					sameAs:
-						'https://www.theguardian.com/profile/guardian-sport',
+					name: 'Ben Fisher',
+					sameAs: 'https://www.theguardian.com/profile/ben-fisher',
 				},
 			],
-			datePublished: '2020-12-17T09:07:18.000Z',
+			datePublished: '2021-02-05T22:16:43.000Z',
 			headline:
-				'Buy a classic sport photograph: the immortal Bobby Moore',
-			dateModified: '2020-12-17T14:04:58.000Z',
+				'André Ayew sparks Swansea victory over Norwich to close gap at top',
+			dateModified: '2021-02-06T05:27:20.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+					'android-app://com.guardian/https/www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Thu 17 Dec 2020 09.07 GMT',
+	webPublicationDateDisplay: 'Fri 5 Feb 2021 22.16 GMT',
 	shouldHideAds: false,
-	webTitle: 'Buy a classic sport photograph: the immortal Bobby Moore',
+	webTitle:
+		'André Ayew sparks Swansea victory over Norwich to close gap at top',
 	isSpecialReport: false,
-	isCommentable: false,
+	isCommentable: true,
 	keyEvents: [],
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',

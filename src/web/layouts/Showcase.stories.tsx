@@ -4,18 +4,18 @@ import {
 	makeGuardianBrowserCAPI,
 	makeGuardianBrowserNav,
 } from '@root/src/model/window-guardian';
-import { Article } from '@root/fixtures/articles/Article';
-import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
-import { Review } from '@root/fixtures/articles/Review';
-import { Analysis } from '@root/fixtures/articles/Analysis';
-import { Feature } from '@root/fixtures/articles/Feature';
-import { Live } from '@root/fixtures/articles/Live';
-import { GuardianView } from '@root/fixtures/articles/GuardianView';
-import { Interview } from '@root/fixtures/articles/Interview';
-import { Quiz } from '@root/fixtures/articles/Quiz';
-import { Recipe } from '@root/fixtures/articles/Recipe';
-import { Comment } from '@root/fixtures/articles/Comment';
-import { MatchReport } from '@root/fixtures/articles/MatchReport';
+import { Article } from '@root/fixtures/generated/articles/Article';
+import { PhotoEssay } from '@root/fixtures/generated/articles/PhotoEssay';
+import { Review } from '@root/fixtures/generated/articles/Review';
+import { Analysis } from '@root/fixtures/generated/articles/Analysis';
+import { Feature } from '@root/fixtures/generated/articles/Feature';
+import { Live } from '@root/fixtures/generated/articles/Live';
+import { GuardianView } from '@root/fixtures/generated/articles/GuardianView';
+import { Interview } from '@root/fixtures/generated/articles/Interview';
+import { Quiz } from '@root/fixtures/generated/articles/Quiz';
+import { Recipe } from '@root/fixtures/generated/articles/Recipe';
+import { Comment } from '@root/fixtures/generated/articles/Comment';
+import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';

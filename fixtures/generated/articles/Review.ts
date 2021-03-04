@@ -57,6 +57,10 @@ export const Review: CAPIType = {
 						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
@@ -67,10 +71,6 @@ export const Review: CAPIType = {
 				{
 					name: 'co',
 					value: ['lucymangan'],
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/d4zdy',
 				},
 				{
 					name: 'p',
@@ -109,6 +109,10 @@ export const Review: CAPIType = {
 						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
@@ -119,10 +123,6 @@ export const Review: CAPIType = {
 				{
 					name: 'co',
 					value: ['lucymangan'],
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/d4zdy',
 				},
 				{
 					name: 'p',
@@ -165,6 +165,10 @@ export const Review: CAPIType = {
 						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
@@ -175,10 +179,6 @@ export const Review: CAPIType = {
 				{
 					name: 'co',
 					value: ['lucymangan'],
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/d4zdy',
 				},
 				{
 					name: 'p',
@@ -225,6 +225,10 @@ export const Review: CAPIType = {
 						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
@@ -235,10 +239,6 @@ export const Review: CAPIType = {
 				{
 					name: 'co',
 					value: ['lucymangan'],
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/d4zdy',
 				},
 				{
 					name: 'p',
@@ -1411,7 +1411,7 @@ export const Review: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'd5e43c5e-c0de-497f-b4d3-b5cec452638b',
+			elementId: '6820b25b-7613-4eb6-8cef-19b20b687904',
 			role: 'showcase',
 			data: {
 				alt: 'Sex Education.',
@@ -1815,14 +1815,14 @@ export const Review: CAPIType = {
 			lastUpdated: 1585651219000,
 			elements: [
 				{
-					elementId: 'd967adfb-e92a-4342-bef2-be46af7505e0',
+					elementId: 'cd9a038e-a34b-4d59-ba9f-188e0762cbd7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
 				},
 				{
-					elementId: 'b37875fb-8d7d-47d6-ba6b-c14661479457',
+					elementId: '0d40cd5f-2cbb-4686-bd5a-54f32e524efb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -1831,7 +1831,7 @@ export const Review: CAPIType = {
 				{
 					embedUrl:
 						'https://www.youtube-nocookie.com/embed/qZhb0Vl_BaM?wmode=opaque&feature=oembed',
-					elementId: '55ba78c5-94d7-459a-82b9-65f8d1bba77c',
+					elementId: 'c550af1c-2fc6-479e-8fa3-fcfe2354ea0c',
 					role: 'inline',
 					isThirdPartyTracking: false,
 					width: 460,
@@ -1844,14 +1844,14 @@ export const Review: CAPIType = {
 					height: 259,
 				},
 				{
-					elementId: 'a2a93635-9b0c-408a-8373-23086450621f',
+					elementId: 'b2f7e702-26c4-4aa8-b6fd-c9cf357c811d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
 				},
 				{
-					elementId: '7434ccfb-3a59-4949-b2d2-74a738270c55',
+					elementId: '95fc040a-c94b-4665-988c-ef507fdd7b53',
 					role: 'inline',
 					data: {
 						alt: 'Gillian Anderson as Jean.',
@@ -2237,14 +2237,14 @@ export const Review: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: '347420b9-7b18-44a8-b055-e89fd2d9eb5f',
+					elementId: 'afa029d9-dd84-4925-8c70-8f669ba9c081',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
 				},
 				{
-					elementId: '27ff2229-6006-4f1d-975f-6a20836aed4a',
+					elementId: 'cee2c2ac-79dd-47b9-9332-ffe894007d3f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:

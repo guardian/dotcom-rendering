@@ -11,67 +11,58 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Comment: CAPIType = {
+export const Analysis: CAPIType = {
 	slotMachineFlags: '',
 	main:
-		'<figure class="element element-image" data-media-id="90f6640a4b3a916602353d2158a042b6a7e63726"> <img src="https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg" alt="A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’</span> <span class="element-image__credit">Photograph: Mark Pinder/The Guardian</span> </figcaption> </figure>',
+		'<figure class="element element-image" data-media-id="59ff93fd27eea2be66feecf0b9a7c0b98d12877a"> \n <img src="https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg" alt="The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters" width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.</span> \n  <span class="element-image__credit">Photograph: Peter Morrison/AP</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/business/austerity',
-			title: 'Austerity',
-		},
-		{
-			url: '/commentisfree/commentisfree',
-			title: 'Opinion',
+			url: '/world/ireland',
+			title: 'Ireland',
 		},
 	],
 	commercialProperties: {
 		UK: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'edition',
 					value: 'uk',
 				},
 				{
+					name: 'tn',
+					value: ['analysis', 'explainers'],
+				},
+				{
 					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
-				},
-				{
-					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					value: 'https://www.theguardian.com/p/d9vgg',
 				},
 				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
+					name: 'url',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				},
+				{
+					name: 'co',
+					value: ['rorycarroll'],
+				},
+				{
+					name: 'k',
+					value: [
+						'sinn-fein',
+						'world',
+						'europe-news',
+						'ireland',
+						'fianna-fail',
+						'fine-gael',
+					],
+				},
+				{
 					name: 'ct',
 					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
 				},
 				{
 					name: 'p',
@@ -82,45 +73,40 @@ export const Comment: CAPIType = {
 		US: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
+					name: 'tn',
+					value: ['analysis', 'explainers'],
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
-				},
-				{
-					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					value: 'https://www.theguardian.com/p/d9vgg',
 				},
 				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
+					name: 'url',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				},
+				{
+					name: 'co',
+					value: ['rorycarroll'],
+				},
+				{
+					name: 'k',
+					value: [
+						'sinn-fein',
+						'world',
+						'europe-news',
+						'ireland',
+						'fianna-fail',
+						'fine-gael',
+					],
+				},
+				{
 					name: 'ct',
 					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
 				},
 				{
 					name: 'p',
@@ -135,45 +121,40 @@ export const Comment: CAPIType = {
 		AU: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
+					name: 'tn',
+					value: ['analysis', 'explainers'],
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
-				},
-				{
-					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					value: 'https://www.theguardian.com/p/d9vgg',
 				},
 				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
+					name: 'url',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				},
+				{
+					name: 'co',
+					value: ['rorycarroll'],
+				},
+				{
+					name: 'k',
+					value: [
+						'sinn-fein',
+						'world',
+						'europe-news',
+						'ireland',
+						'fianna-fail',
+						'fine-gael',
+					],
+				},
+				{
 					name: 'ct',
 					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
 				},
 				{
 					name: 'p',
@@ -188,29 +169,12 @@ export const Comment: CAPIType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
+					name: 'tn',
+					value: ['analysis', 'explainers'],
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
-				},
-				{
-					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					value: 'https://www.theguardian.com/p/d9vgg',
 				},
 				{
 					name: 'edition',
@@ -221,16 +185,28 @@ export const Comment: CAPIType = {
 					value: ['0'],
 				},
 				{
+					name: 'url',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				},
+				{
+					name: 'co',
+					value: ['rorycarroll'],
+				},
+				{
+					name: 'k',
+					value: [
+						'sinn-fein',
+						'world',
+						'europe-news',
+						'ireland',
+						'fianna-fail',
+						'fine-gael',
+					],
+				},
+				{
 					name: 'ct',
 					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
 				},
 				{
 					name: 'p',
@@ -241,33 +217,37 @@ export const Comment: CAPIType = {
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 10 Feb 2020 11.19 GMT',
+		'Last modified on Thu 13 Feb 2020 10.21 GMT',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
-		'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
+		'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
 	subMetaKeywordLinks: [
 		{
-			url: '/business/economics',
-			title: 'Economics',
+			url: '/politics/sinn-fein',
+			title: 'Sinn Féin',
 		},
 		{
-			url: '/politics/conservatives',
-			title: 'Conservatives',
+			url: '/world/fine-gael',
+			title: 'Fine Gael',
 		},
 		{
-			url: '/politics/conservativehome',
-			title: 'ConservativeHome',
+			url: '/world/fianna-fail',
+			title: 'Fianna Fail',
 		},
 		{
-			url: '/tone/comment',
-			title: 'comment',
+			url: '/world/europe-news',
+			title: 'Europe',
+		},
+		{
+			url: '/tone/explainers',
+			title: 'explainers',
 		},
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/business/economics',
+		currentUrl: '/world/europe-news',
 		pillars: [
 			{
 				title: 'News',
@@ -962,115 +942,92 @@ export const Comment: CAPIType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 		],
-		currentNavLinkTitle: 'Economics',
+		currentNavLinkTitle: 'Europe',
 		currentPillarTitle: 'News',
 		subNavSections: {
 			parent: {
-				title: 'Business',
-				url: '/business',
+				title: 'World',
+				url: '/world',
+				longTitle: 'World news',
 				children: [
 					{
-						title: 'Economics',
-						url: '/business/economics',
+						title: 'Europe',
+						url: '/world/europe-news',
 					},
 					{
-						title: 'Banking',
-						url: '/business/banking',
+						title: 'US',
+						url: '/us-news',
+						longTitle: 'US news',
 					},
 					{
-						title: 'Money',
-						url: '/money',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-							},
-						],
+						title: 'Americas',
+						url: '/world/americas',
 					},
 					{
-						title: 'Markets',
-						url: '/business/stock-markets',
+						title: 'Asia',
+						url: '/world/asia',
 					},
 					{
-						title: 'Project Syndicate',
-						url: '/business/series/project-syndicate-economists',
+						title: 'Australia',
+						url: '/australia-news',
+						longTitle: 'Australia news',
 					},
 					{
-						title: 'B2B',
-						url: '/business-to-business',
+						title: 'Middle East',
+						url: '/world/middleeast',
 					},
 					{
-						title: 'Retail',
-						url: '/business/retail',
+						title: 'Africa',
+						url: '/world/africa',
+					},
+					{
+						title: 'Inequality',
+						url: '/inequality',
+					},
+					{
+						title: 'Global development',
+						url: '/global-development',
 					},
 				],
 			},
 			links: [
 				{
-					title: 'Economics',
-					url: '/business/economics',
+					title: 'Europe',
+					url: '/world/europe-news',
 				},
 				{
-					title: 'Banking',
-					url: '/business/banking',
+					title: 'US',
+					url: '/us-news',
+					longTitle: 'US news',
 				},
 				{
-					title: 'Money',
-					url: '/money',
-					children: [
-						{
-							title: 'Property',
-							url: '/money/property',
-						},
-						{
-							title: 'Pensions',
-							url: '/money/pensions',
-						},
-						{
-							title: 'Savings',
-							url: '/money/savings',
-						},
-						{
-							title: 'Borrowing',
-							url: '/money/debt',
-						},
-						{
-							title: 'Careers',
-							url: '/money/work-and-careers',
-						},
-					],
+					title: 'Americas',
+					url: '/world/americas',
 				},
 				{
-					title: 'Markets',
-					url: '/business/stock-markets',
+					title: 'Asia',
+					url: '/world/asia',
 				},
 				{
-					title: 'Project Syndicate',
-					url: '/business/series/project-syndicate-economists',
+					title: 'Australia',
+					url: '/australia-news',
+					longTitle: 'Australia news',
 				},
 				{
-					title: 'B2B',
-					url: '/business-to-business',
+					title: 'Middle East',
+					url: '/world/middleeast',
 				},
 				{
-					title: 'Retail',
-					url: '/business/retail',
+					title: 'Africa',
+					url: '/world/africa',
+				},
+				{
+					title: 'Inequality',
+					url: '/inequality',
+				},
+				{
+					title: 'Global development',
+					url: '/global-development',
 				},
 			],
 		},
@@ -1128,88 +1085,72 @@ export const Comment: CAPIType = {
 		},
 	},
 	author: {
-		byline: 'John Harris',
-		twitterHandle: 'johnharris1969',
+		byline: 'Rory Carroll Ireland correspondent',
+		twitterHandle: 'rorycarroll72',
 	},
-	designType: 'Comment',
+	designType: 'Analysis',
 	editionId: 'UK',
 	standfirst:
-		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
+		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-		'article:author': 'https://www.theguardian.com/profile/johnharris',
+			'http://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+		'article:author': 'https://www.theguardian.com/profile/rorycarroll',
 		'og:image:height': '720',
 		'og:description':
-			'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
+			'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
+			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
 		'al:ios:url':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=applinks',
+			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Opinion',
-		'article:published_time': '2020-02-10T06:00:27.000Z',
-		'og:title':
-			'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+		'article:section': 'World news',
+		'article:published_time': '2020-02-10T12:31:25.000Z',
+		'og:title': 'Irish general election: who won and what happens now?',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Austerity,UK news,Economics,Business,Politics,Conservatives,ConservativeHome',
+			'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-10T11:19:50.000Z',
+		'article:modified_time': '2020-02-13T10:21:28.000Z',
 	},
-	sectionUrl: 'business/austerity',
+	sectionUrl: 'world/ireland',
 	pageId:
-		'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+		'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	version: 3,
 	tags: [
 		{
-			id: 'commentisfree/commentisfree',
-			type: 'Blog',
-			title: 'Opinion',
-		},
-		{
-			id: 'business/austerity',
+			id: 'world/ireland',
 			type: 'Keyword',
-			title: 'Austerity',
+			title: 'Ireland',
 		},
 		{
-			id: 'tone/comment',
-			type: 'Tone',
-			title: 'Comment',
-		},
-		{
-			id: 'uk/uk',
+			id: 'politics/sinn-fein',
 			type: 'Keyword',
-			title: 'UK news',
+			title: 'Sinn Féin',
 		},
 		{
-			id: 'business/economics',
+			id: 'world/fine-gael',
 			type: 'Keyword',
-			title: 'Economics',
+			title: 'Fine Gael',
 		},
 		{
-			id: 'business/business',
+			id: 'world/fianna-fail',
 			type: 'Keyword',
-			title: 'Business',
+			title: 'Fianna Fail',
 		},
 		{
-			id: 'politics/politics',
+			id: 'world/world',
 			type: 'Keyword',
-			title: 'Politics',
+			title: 'World news',
 		},
 		{
-			id: 'politics/conservatives',
+			id: 'world/europe-news',
 			type: 'Keyword',
-			title: 'Conservatives',
-		},
-		{
-			id: 'politics/conservativehome',
-			type: 'Keyword',
-			title: 'ConservativeHome',
+			title: 'Europe',
 		},
 		{
 			id: 'type/article',
@@ -1217,12 +1158,22 @@ export const Comment: CAPIType = {
 			title: 'Article',
 		},
 		{
-			id: 'profile/johnharris',
+			id: 'tone/explainers',
+			type: 'Tone',
+			title: 'Explainers',
+		},
+		{
+			id: 'tone/analysis',
+			type: 'Tone',
+			title: 'Analysis',
+		},
+		{
+			id: 'profile/rorycarroll',
 			type: 'Contributor',
-			title: 'John Harris',
-			twitterHandle: 'johnharris1969',
+			title: 'Rory Carroll',
+			twitterHandle: 'rorycarroll72',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2019/06/26/John_Harris_Next_Gen.png?width=300&quality=85&auto=format&fit=max&s=71554a58d52e35724d1464ab0e413199',
+				'https://i.guim.co.uk/img/uploads/2017/10/09/Rory-Carroll,-L.png?width=300&quality=85&auto=format&fit=max&s=149d14183d07b7c04e04798e0edbc5e4',
 		},
 		{
 			id: 'publication/theguardian',
@@ -1230,27 +1181,27 @@ export const Comment: CAPIType = {
 			title: 'The Guardian',
 		},
 		{
-			id: 'theguardian/journal',
+			id: 'theguardian/mainsection',
 			type: 'NewspaperBook',
-			title: 'Journal',
+			title: 'Main section',
 		},
 		{
-			id: 'theguardian/journal/opinion',
+			id: 'theguardian/mainsection/uknews',
 			type: 'NewspaperBookSection',
-			title: 'Opinion',
+			title: 'UK news',
 		},
 		{
-			id: 'tracking/commissioningdesk/uk-opinion',
+			id: 'tracking/commissioningdesk/uk-foreign',
 			type: 'Tracking',
-			title: 'UK Opinion',
+			title: 'UK Foreign',
 		},
 	],
-	pillar: 'opinion',
+	pillar: 'news',
 	webURL:
-		'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+		'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Austerity',
+	sectionLabel: 'Ireland',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1410,21 +1361,21 @@ export const Comment: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&s=77ef16f3e784adf8d32f1f5724d0559f',
+			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=a8472a00c286382a50660ee970061b0f',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
+			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@johnharris1969',
+		'twitter:creator': '@rorycarroll72',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'guardian://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 		'twitter:app:url:iphone':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
+			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
 	},
-	sectionName: 'commentisfree',
+	sectionName: 'world',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1434,21 +1385,22 @@ export const Comment: CAPIType = {
 		isPreview: false,
 		isSensitive: false,
 	},
-	hasStoryPackage: false,
+	hasStoryPackage: true,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
+	headline: 'Irish general election: who won and what happens now?',
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'd661aa8f-9c30-458e-87d9-3c4295349876',
+			elementId: '0c64b077-51e8-4190-a3fa-8d89d8ebbeb8',
 			role: 'inline',
 			data: {
-				copyright: '©Mark Pinder',
+				copyright:
+					'Copyright 2020 The Associated Press. All rights reserved.',
 				alt:
-					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
+					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
 				caption:
-					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
-				credit: 'Photograph: Mark Pinder/The Guardian',
+					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
+				credit: 'Photograph: Peter Morrison/AP',
 			},
 			imageSources: [
 				{
@@ -1456,32 +1408,32 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=85&auto=format&fit=max&s=cc188c8396f61ae2916c19a4cfa12a05',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=66dd7a4f13d86c97778c9fa7d52e647e',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=85&auto=format&fit=max&s=ac2ee35ac7540f554e180dc5c51b3d2f',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1a3d769852837e2faeec4d379bc82ff5',
 							width: 890,
 						},
 					],
@@ -1491,22 +1443,22 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=85&auto=format&fit=max&s=668c45e6439ce78e74caabc670caae95',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=140&quality=85&auto=format&fit=max&s=e73b198f09a07f44c6adb4d687a455bc',
 							width: 140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=5e94737d27c7a05cbed83892fd012f8a',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=ea9e4f3301aacf1060413139c41e8b9a',
 							width: 280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=85&auto=format&fit=max&s=26ea4d3fe4bdb051075f28ac562d948d',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=120&quality=85&auto=format&fit=max&s=5199bb01f74208dde6aaec45efacc4b4',
 							width: 120,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=85351583559b7e857a2b0025a5840a9f',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=ecc80ab50f005228601b307db36c32ac',
 							width: 240,
 						},
 					],
@@ -1516,52 +1468,52 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=85&auto=format&fit=max&s=8ca054ff212c3cf6081d12e3fb07f48a',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=380&quality=85&auto=format&fit=max&s=aa33e1a591767b4fe57d0fb8c4d6e9db',
 							width: 380,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=835b7e68c3c7dbd3949e979c421ed9f2',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=8b325240bcdb2b6ec9ae37e0644075c4',
 							width: 760,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=85&auto=format&fit=max&s=e82066644d9998c30c539675dd442c80',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=300&quality=85&auto=format&fit=max&s=2dbb1a5fdf930b6697c09e06de34bdde',
 							width: 300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=123b68c0d764968a95bf8f9437c79dcf',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e4fbee8d64bf9dbac96c6bd09f195611',
 							width: 600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=85&auto=format&fit=max&s=cc188c8396f61ae2916c19a4cfa12a05',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=66dd7a4f13d86c97778c9fa7d52e647e',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=85&auto=format&fit=max&s=ac2ee35ac7540f554e180dc5c51b3d2f',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1a3d769852837e2faeec4d379bc82ff5',
 							width: 890,
 						},
 					],
@@ -1571,72 +1523,72 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=85&auto=format&fit=max&s=26a09576dd9b3bac4ab827034f7f91c8',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=85&auto=format&fit=max&s=c57f8ebe5a46216266ad61f68760d728',
 							width: 1020,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=813b6acd761529966116835eff6a8909',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=4caf16ea11bc11f8cd36d708ad693fc7',
 							width: 2040,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=85&auto=format&fit=max&s=3319f7b3832d50285dfb34b7f0fd0c94',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=85&auto=format&fit=max&s=f1fe8cae541632aa81b6bf041c0f0bc8',
 							width: 940,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=b7779aa84cf1776a55a3e7d39689315b',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=2f3ac8a7d5ccde1e6bd97f274cb969e7',
 							width: 1880,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=85&auto=format&fit=max&s=0326f2185bb8e242f4433dc27a3ec922',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
 							width: 660,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1eb4e21b9178b60d2110ac9a0a16cf36',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
 							width: 1320,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
 							width: 930,
 						},
 					],
@@ -1646,32 +1598,32 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=85&auto=format&fit=max&s=cc188c8396f61ae2916c19a4cfa12a05',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=66dd7a4f13d86c97778c9fa7d52e647e',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=85&auto=format&fit=max&s=ac2ee35ac7540f554e180dc5c51b3d2f',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1a3d769852837e2faeec4d379bc82ff5',
 							width: 890,
 						},
 					],
@@ -1681,72 +1633,72 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=85&auto=format&fit=max&s=aa6833bc19ffd820a12ce33c3eb2d63f',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=85&auto=format&fit=max&s=6fe8456e8f8e556969cf0e81b12519c3',
 							width: 1300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=616dca8321ef2cf9feb36b48d349cefa',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8f1f1cd318caa33147a222f2925cffa0',
 							width: 2600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=85&auto=format&fit=max&s=b8a3b1d849822273359f87c045c3aa76',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=85&auto=format&fit=max&s=67cc1c1f38c58d7b7ca441c22f6d3e7e',
 							width: 1140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3e8e7586f1725a997b04a34e2e521b3c',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=837af7b12f2f8f6aca7caa166623628f',
 							width: 2280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=85&auto=format&fit=max&s=8704c5061b3a6f1e0d897580494ac4d7',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1125&quality=85&auto=format&fit=max&s=c2ff0c1478992418065b7ee89e7974da',
 							width: 1125,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4736204e8038bf3a4008c9e184b75956',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=6bc47f54b8ae4326649f76ea1f0111ee',
 							width: 2250,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=85&auto=format&fit=max&s=0f68b28eaa79271f6458ec7c84ea08d7',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=965&quality=85&auto=format&fit=max&s=17e94c96e1acaaf89d725a107fe4c7fa',
 							width: 965,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=cb7abf09cb7946df62726e737d20cc7a',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=be660e54ffcdb8da6552a3f1d21480f8',
 							width: 1930,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=85&auto=format&fit=max&s=1559cec86eaba98a1a38fd2468085622',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=725&quality=85&auto=format&fit=max&s=407a75cc86bc3f46d8901475e3287991',
 							width: 725,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=07d0cecc175e2386725996b5aee44abf',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=1ea0389d8576fdcd9ffa194678b25b47',
 							width: 1450,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
 							width: 930,
 						},
 					],
@@ -1758,27 +1710,16 @@ export const Comment: CAPIType = {
 					{
 						index: 0,
 						fields: {
-							height: '84',
-							width: '140',
+							height: '1200',
+							width: '2000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/140.jpg',
+							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/2000.jpg',
 					},
 					{
 						index: 1,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/500.jpg',
-					},
-					{
-						index: 2,
 						fields: {
 							height: '600',
 							width: '1000',
@@ -1786,168 +1727,224 @@ export const Comment: CAPIType = {
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg',
+							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/500.jpg',
 					},
 					{
 						index: 3,
 						fields: {
-							height: '1200',
-							width: '2000',
+							height: '84',
+							width: '140',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/2000.jpg',
+							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/140.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							height: '1944',
-							width: '3240',
+							height: '4032',
+							width: '6720',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/3240.jpg',
+							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/6720.jpg',
 					},
 					{
 						index: 5,
 						fields: {
 							isMaster: 'true',
-							height: '1944',
-							width: '3240',
+							height: '4032',
+							width: '6720',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg',
+							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
 					},
 				],
 			},
 			displayCredit: true,
 		},
 	],
-	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	webPublicationDate: '2020-02-10T12:31:25.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 11.19 GMT',
-			blockLastUpdated: 1581270178000,
-			firstPublishedDisplay: '06.00 GMT',
-			lastUpdatedDisplay: '11.19 GMT',
-			blockCreatedOnDisplay: '12.12 GMT',
-			blockLastUpdatedDisplay: '17.42 GMT',
-			firstPublished: 1581314427000,
-			createdOn: 1581250344000,
-			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
-			blockCreatedOn: 1581250344000,
-			createdOnDisplay: '12.12 GMT',
-			lastUpdated: 1581333590000,
+			secondaryDateLine: 'Last modified on Thu 13 Feb 2020 10.21 GMT',
+			blockFirstPublishedDisplay: '11.19 GMT',
+			blockLastUpdated: 1581377261000,
+			firstPublishedDisplay: '12.31 GMT',
+			lastUpdatedDisplay: '10.21 GMT',
+			blockCreatedOnDisplay: '11.19 GMT',
+			blockLastUpdatedDisplay: '23.27 GMT',
+			firstPublished: 1581337885000,
+			createdOn: 1581333561000,
+			primaryDateLine: 'Mon 10 Feb 2020 12.31 GMT',
+			blockCreatedOn: 1581333561000,
+			blockFirstPublished: 1581333562000,
+			createdOnDisplay: '11.19 GMT',
+			lastUpdated: 1581589288000,
 			elements: [
 				{
-					elementId: '4f8e92ce-572b-4eca-a737-874ca4350dc7',
+					elementId: 'bfab23a1-9a4d-425b-978b-0b27ff5e0f46',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2>Who won Ireland’s general election?</h2>',
+				},
+				{
+					elementId: 'ad411363-cf9e-408a-b5f6-2aa5274f11d7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
+						'<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
 				},
 				{
-					elementId: '4034fd38-6255-47d8-b7af-fab3f5a446d1',
-					role: 'supporting',
-					isThirdPartyTracking: false,
-					_type:
-						'model.dotcomrendering.pageElements.PullquoteBlockElement',
-					html:
-						'£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
-				},
-				{
-					elementId: 'c7c32bcc-7022-407d-85e7-e201f87ccbfc',
+					elementId: 'ef6cf26b-1770-4700-aaf0-fb9fd5725f5f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
+						'<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
 				},
 				{
-					elementId: 'e6b6428c-8117-473e-97b1-e1109a4455ad',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
-				},
-				{
-					elementId: '270a1616-61e3-44d4-bb55-19e217530c08',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
-				},
-				{
-					elementId: '524ce765-98c9-428f-a392-f981d143e20e',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
-				},
-				{
-					elementId: 'eeb92ed6-67a2-405e-81da-d9f55a970ca3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
-				},
-				{
-					elementId: 'f26cd605-b113-4def-8ca9-889e77af10af',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
-				},
-				{
-					elementId: '2254b183-8244-4f00-8c9d-95635dae64bb',
+					elementId: 'e7cb7d36-f3e5-4f7a-b49b-7fcf3fd6ff17',
 					role: 'thumbnail',
 					prefix: 'Related: ',
 					_type:
 						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						'Tory plans to ‘level up’ the north are laughably inadequate | Polly Toynbee',
+					text: 'Ireland election: latest results',
 					url:
-						'https://www.theguardian.com/commentisfree/2020/feb/06/tory-level-up-north-regional-inequality',
+						'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
 				},
 				{
-					elementId: '13addc5d-2b9e-4ee7-bae2-4ce4d18f2d05',
+					elementId: '68a36202-24fd-4fab-8bf1-255598124bd4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
+						'<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
 				},
 				{
-					elementId: '3e9bb6cd-452e-4fcc-9df1-c200da65dee0',
+					elementId: 'ae242375-f2ba-46be-b2ec-543c93ade328',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2>Was Sinn Féin’s success a surprise?</h2>',
+				},
+				{
+					elementId: '834e9a46-64ab-4500-be4b-02a726adfe2c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
+						'<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
 				},
 				{
-					elementId: '0f1e9d40-c74e-4cff-b3b9-f0d0eac6b566',
+					elementId: 'afb39575-af47-4936-b102-3b3b5f9011bf',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2>Is Varadkar going to lose power?</h2>',
+				},
+				{
+					elementId: 'dbde46f0-f6b0-4151-8e45-87b271fe1561',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
+						'<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
 				},
 				{
-					elementId: 'ef412a91-df6e-4a36-8297-3bfe29928238',
+					elementId: 'd87e543a-4e31-4399-a6dc-9eeebb131554',
+					_type: 'model.dotcomrendering.pageElements.QABlockElement',
+					html:
+						'<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
+					id: '95c8ba09-ecce-4bfa-9140-a262990fbdce',
+					title: 'What are the main political parties in Ireland?',
+					credit: '',
+				},
+				{
+					elementId: 'c1e9e4c3-05a0-4fc9-bbe3-502f435b0e04',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2>Why did Sinn Féin do so well?</h2>',
+				},
+				{
+					elementId: 'a8242859-d234-46bb-a62d-484d2aebc36f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
+						'<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
 				},
 				{
-					elementId: 'de87b5f9-a78b-4d3a-a27e-0c1cbaa01012',
+					elementId: 'd79a8837-4fa0-4777-abc1-8283cd1cc78e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• John Harris is a Guardian columnist</p>',
+					html:
+						'<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
+				},
+				{
+					elementId: '36c097c6-481e-44dc-bde2-d2f91bd0f98c',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2>What happens next?</h2>',
+				},
+				{
+					elementId: 'd274ec9c-96e5-4c81-b739-dfd337c8b747',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
+				},
+				{
+					elementId: 'bd6e4b6b-b6a8-48c7-a65a-2daee0008eb8',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
+				},
+				{
+					elementId: '8ff4519a-fcc0-400c-a05e-8822bf1aab02',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
+				},
+				{
+					elementId: '1f1061fc-a246-4fd3-be37-0d72b8b586fe',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
+				},
+				{
+					elementId: '98e9fb14-50b8-478b-890e-e4ec3edc0bcb',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p>One plausible outcome: deadlock, and another election.</p>',
+				},
+				{
+					elementId: 'a1cfa6b0-de7c-46b5-a9b7-7574a9e53f8a',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Read more</strong></p>',
+				},
+				{
+					elementId: 'e9339bdf-05e1-4952-a1e1-47c51c33a0e9',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					html:
+						'<p><a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald: Sinn Féin leader who may play Dublin kingmaker</a><br><a href="https://www.theguardian.com/world/2020/feb/08/sinn-fein-on-election-day-shane-obrien">‘It’s a sea change’: Sinn Féin dares to dream on election day</a><br><a href="https://www.theguardian.com/commentisfree/2020/jan/31/sinn-fein-ireland-left-election-ira">Opinion: Can Sinn Féin’s young voters finally pull Ireland to the left?</a><br><a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">The Varadkar paradox: feted abroad, can PM arrest polls slump in Ireland?</a></p>',
 				},
 			],
-			id: '6bc6fa8c-a504-4e81-9828-3a7a0a78b052',
+			id: '5e413c398f0811db2faf4cdd',
 		},
 	],
 	linkedData: [
@@ -1955,7 +1952,7 @@ export const Comment: CAPIType = {
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'https://amp.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1982,43 +1979,41 @@ export const Comment: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bd2f2a476abaf5a0bc7c70f1f31dba50',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d3257abb4b456eb86f445acfe8dfcdf3',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&quality=85&auto=format&fit=max&s=3d4a5bbf7513a6d5c91a173d5b4ad0b5',
+				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
+				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=ba485dba18852475fb1d5dd00b53b972',
+				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=6af71c15d6d5a2b9786dba8fbce11dd7',
+				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&quality=85&auto=format&fit=max&s=8bce617f8e49c9291611c693c259264c',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'John Harris',
-					sameAs: 'https://www.theguardian.com/profile/johnharris',
+					name: 'Rory Carroll',
+					sameAs: 'https://www.theguardian.com/profile/rorycarroll',
 				},
 			],
-			datePublished: '2020-02-10T06:00:27.000Z',
-			headline:
-				'Austerity is grinding on – it has cut too deep to ‘level up’',
-			dateModified: '2020-02-10T11:19:50.000Z',
+			datePublished: '2020-02-10T12:31:25.000Z',
+			headline: 'Irish general election: who won and what happens now?',
+			dateModified: '2020-02-13T10:21:28.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					'android-app://com.guardian/https/www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Mon 10 Feb 2020 06.00 GMT',
+	webPublicationDateDisplay: 'Mon 10 Feb 2020 12.31 GMT',
 	shouldHideAds: false,
-	webTitle:
-		'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+	webTitle: 'Irish general election: who won and what happens now?',
 	isSpecialReport: false,
-	isCommentable: true,
+	isCommentable: false,
 	keyEvents: [],
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
