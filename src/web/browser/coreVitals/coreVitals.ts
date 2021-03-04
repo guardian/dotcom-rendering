@@ -36,19 +36,19 @@ export const coreVitals = (): void => {
 	const addToJson = ({ name, value }: CoreVitalsArgs): void => {
 		switch (name) {
 			case 'FCP':
-				jsonData.fcp = value;
+				jsonData.fcp = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'CLS':
-				jsonData.cls = value;
+				jsonData.cls = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'LCP':
-				jsonData.lcp = value;
+				jsonData.lcp = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'FID':
-				jsonData.fid = value;
+				jsonData.fid = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'TTFB':
-				jsonData.ttfb = value;
+				jsonData.ttfb = Math.round(value * 1000000) / 1000000;
 				break;
 		}
 
