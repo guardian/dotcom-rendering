@@ -37,8 +37,7 @@ const stickyStyle = (theme: Theme) => css`
 	top: 0;
 	${getZIndex('stickyNav')}
 	background-color: white;
-	box-shadow: 0 0 transparent, 0 0 transparent,
-		1px 3px 6px ${neutralBorder(theme)};
+	border-bottom: 1px solid ${neutralBorder(theme)};
 `;
 
 const fixedStyle = (theme: Theme, shouldDisplay: boolean) => css`
@@ -47,9 +46,7 @@ const fixedStyle = (theme: Theme, shouldDisplay: boolean) => css`
 	top: 0;
 	${getZIndex('stickyNav')}
 	background-color: white;
-	box-shadow: 0 0 transparent, 0 0 transparent,
-		1px 3px 6px ${neutralBorder(theme)};
-
+	border-bottom: 1px solid ${neutralBorder(theme)};
 	display: ${shouldDisplay ? 'block' : 'none'};
 `;
 
