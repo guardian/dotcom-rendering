@@ -121,12 +121,13 @@ function decideFont(role: string) {
 }
 
 export const PullQuoteBlockComponent: React.FC<{
-	html: string;
+	html?: string;
 	pillar: Theme;
 	design: Design;
 	role: string;
 	attribution?: string;
 }> = ({ html, pillar, design, attribution, role }) => {
+	if (!html) return <></>;
 	switch (design) {
 		case Design.GuardianView:
 		case Design.Comment:
@@ -158,7 +159,10 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					)}
 				>
-					<QuoteIcon colour={pillarPalette[pillar].main} />
+					<QuoteIcon
+						colour={pillarPalette[pillar].main}
+						size="medium"
+					/>
 					<blockquote
 						className={css`
 							display: inline;
@@ -212,16 +216,6 @@ export const PullQuoteBlockComponent: React.FC<{
 					</footer>
 				</aside>
 			);
-		case Design.Feature:
-		case Design.Recipe:
-		case Design.Review:
-		case Design.Media:
-		case Design.MatchReport:
-		case Design.Quiz:
-		case Design.Article:
-		case Design.Live:
-		case Design.Analysis:
-		case Design.Interview:
 		default:
 			return (
 				<aside
@@ -250,7 +244,10 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					)}
 				>
-					<QuoteIcon colour={pillarPalette[pillar].main} />
+					<QuoteIcon
+						colour={pillarPalette[pillar].main}
+						size="medium"
+					/>
 					<blockquote
 						className={css`
 							display: inline;

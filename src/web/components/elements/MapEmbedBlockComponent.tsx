@@ -3,7 +3,6 @@ import { css } from 'emotion';
 
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { Caption } from '@root/src/web/components/Caption';
-import { Display, Design } from '@guardian/types';
 
 export const MapEmbedBlockComponent: React.FC<{
 	embedUrl?: string;
@@ -11,21 +10,10 @@ export const MapEmbedBlockComponent: React.FC<{
 	width: number;
 	title?: string;
 	caption?: string;
-	pillar: Theme;
-	display: Display;
-	design: Design;
+	format: Format;
+	palette: Palette;
 	credit?: string;
-}> = ({
-	embedUrl,
-	title,
-	width,
-	height,
-	caption,
-	pillar,
-	display,
-	design,
-	credit,
-}) => {
+}> = ({ embedUrl, title, width, height, caption, format, palette, credit }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
 	// Constrain iframe embeds with a width to their natural width
 	// rather than stretch them to the container using
@@ -57,9 +45,8 @@ export const MapEmbedBlockComponent: React.FC<{
 			{hasCaption && (
 				<Caption
 					captionText={caption}
-					design={design}
-					pillar={pillar}
-					display={display}
+					format={format}
+					palette={palette}
 					credit={credit}
 				/>
 			)}

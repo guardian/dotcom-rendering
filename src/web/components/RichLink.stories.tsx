@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Pillar, Special } from '@guardian/types';
+import { Design, Display, Pillar, Special } from '@guardian/types';
 
 import { Section } from '@frontend/web/components/Section';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
@@ -37,7 +37,11 @@ export const Article = () => {
 						headlineText="Rich link headline"
 						contentType="article"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -62,7 +66,11 @@ export const Network = () => {
 						headlineText="Rich link headline"
 						contentType="network"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -93,7 +101,11 @@ export const SectionStory = () => {
 						headlineText="Rich link headline"
 						contentType="section"
 						url=""
-						pillar={Pillar.Sport}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Sport,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -121,7 +133,11 @@ export const ImageContent = () => {
 						headlineText="Rich link headline"
 						contentType="imageContent"
 						url=""
-						pillar={Pillar.News}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.News,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -152,7 +168,11 @@ export const Interactive = () => {
 						headlineText="Rich link headline"
 						contentType="interactive"
 						url=""
-						pillar={Pillar.Lifestyle}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Lifestyle,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -182,7 +202,11 @@ export const Gallery = () => {
 						headlineText="Rich link headline"
 						contentType="gallery"
 						url=""
-						pillar={Special.Labs}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Special.Labs,
+						}}
 						tags={[]}
 						sponsorName=""
 						contributorImage={someContributor}
@@ -213,7 +237,11 @@ export const Video = () => {
 						headlineText="Rich link headline"
 						contentType="video"
 						url=""
-						pillar={Pillar.News}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.News,
+						}}
 						tags={[]}
 						sponsorName=""
 						contributorImage={someContributor}
@@ -245,7 +273,11 @@ export const Audio = () => {
 						headlineText="Rich link headline"
 						contentType="audio"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -270,7 +302,11 @@ export const LiveBlog = () => {
 						headlineText="Rich link headline"
 						contentType="liveBlog"
 						url=""
-						pillar={Pillar.Sport}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Sport,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -301,7 +337,11 @@ export const Tag = () => {
 						headlineText="Rich link headline"
 						contentType="tag"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -326,7 +366,11 @@ export const Index = () => {
 						headlineText="Rich link headline"
 						contentType="index"
 						url=""
-						pillar={Pillar.Opinion}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Opinion,
+						}}
 						tags={[
 							{
 								id: '',
@@ -358,7 +402,11 @@ export const Crossword = () => {
 						headlineText="Rich link headline"
 						contentType="crossword"
 						url=""
-						pillar={Pillar.Opinion}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Opinion,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -383,7 +431,11 @@ export const Survey = () => {
 						headlineText="Rich link headline"
 						contentType="survey"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -408,7 +460,11 @@ export const Signup = () => {
 						headlineText="Rich link headline"
 						contentType="signup"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[]}
 						sponsorName=""
 						contributorImage={someContributor}
@@ -434,7 +490,11 @@ export const Userid = () => {
 						headlineText="Rich link headline"
 						contentType="userid"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[]}
 						sponsorName=""
 					/>
@@ -459,7 +519,11 @@ export const PaidFor = () => {
 						headlineText="Rich link headline"
 						contentType="userid"
 						url=""
-						pillar={Pillar.Culture}
+						format={{
+							display: Display.Standard,
+							design: Design.Article,
+							theme: Pillar.Culture,
+						}}
 						tags={[
 							{
 								id: 'tone/advertisement-features',

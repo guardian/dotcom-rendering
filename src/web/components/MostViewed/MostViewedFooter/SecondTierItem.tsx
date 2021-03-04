@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -10,6 +9,7 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { Flex } from '@root/src/web/components/Flex';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const itemStyles = (showRightBorder?: boolean) => css`
 	position: relative;
@@ -89,16 +89,15 @@ export const SecondTierItem = ({
 		isLiveBlog,
 		avatarUrl,
 		image,
-		design,
+		format,
+		palette,
 		byline,
 		showByline,
-		pillar,
 		ageWarning,
 		headline: headlineText,
 	} = trail;
 
 	const avatarToShow = avatarUrl || image;
-	const pilarToUse = design === Design.Comment ? Pillar.Opinion : pillar;
 
 	return (
 		<div className={itemStyles(showRightBorder)}>
@@ -112,17 +111,17 @@ export const SecondTierItem = ({
 						<div className={titleStyles}>{title}</div>
 						{isLiveBlog ? (
 							<LinkHeadline
-								design={design}
 								headlineText={headlineText}
-								pillar={pilarToUse}
+								format={format}
+								palette={palette}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
 						) : (
 							<LinkHeadline
-								design={design}
 								headlineText={headlineText}
-								pillar={pilarToUse}
+								format={format}
+								palette={palette}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -140,7 +139,7 @@ export const SecondTierItem = ({
 									<Avatar
 										imageSrc={avatarToShow}
 										imageAlt=""
-										pillar={pilarToUse}
+										palette={decidePalette(format)}
 									/>
 								</div>
 							</div>

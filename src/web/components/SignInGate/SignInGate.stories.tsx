@@ -1,13 +1,9 @@
 import React from 'react';
 import { Section } from '@frontend/web/components/Section';
+import { SignInGateCopy } from '@root/src/web/components/SignInGate/gateDesigns/types';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
-import { SignInGateDesignOptVar1 } from './gateDesigns/design-opt-test/SignInGateDesignOptVar1';
-import { SignInGateDesignOptVar2 } from './gateDesigns/design-opt-test/SignInGateDesignOptVar2';
-import { SignInGateDesignOptVar3 } from './gateDesigns/design-opt-test/SignInGateDesignOptVar3';
-import { SignInGateDesignOptVar4 } from './gateDesigns/design-opt-test/SignInGateDesignOptVar4';
-import { SignInGateDesignOptVar5 } from './gateDesigns/design-opt-test/SignInGateDesignOptVar5';
-import { SignInGateDesignOptVar6 } from './gateDesigns/design-opt-test/SignInGateDesignOptVar6';
+import { SignInGateCopyOptVar } from './gateDesigns/copy-opt-test/SignInGateCopyOptVar';
 
 export default {
 	component: SignInGateSelector,
@@ -31,86 +27,27 @@ export const mainStandalone = () => {
 };
 mainStandalone.story = { name: 'main_standalone' };
 
-export const designVar1Standalone = () => {
-	return (
-		<Section>
-			<SignInGateDesignOptVar1
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
+const CopyOptExampleText: SignInGateCopy = {
+	header: 'Register to keep reading',
+	subHeader: 'It’s free to do, and it only takes a minute',
+	paragraphs: [
+		'When you register and share your preferences, you’re allowing us to better understand you, ' +
+			'and this will help you to get the most out of The Guardian.',
+		'You’ll always be able to control your own privacy settings and every article will remain free.',
+	],
 };
-designVar1Standalone.story = { name: 'design-var1_standalone' };
 
-export const designVar2Standalone = () => {
+export const copyOptStandalone = () => {
 	return (
 		<Section>
-			<SignInGateDesignOptVar2
+			<SignInGateCopyOptVar
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
+				signInGateCopy={CopyOptExampleText}
 			/>
 		</Section>
 	);
 };
-designVar2Standalone.story = { name: 'design-var2_standalone' };
-
-export const designVar3Standalone = () => {
-	return (
-		<Section>
-			<SignInGateDesignOptVar3
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
-};
-designVar3Standalone.story = { name: 'design-var3_standalone' };
-
-export const designVar4Standalone = () => {
-	return (
-		<Section>
-			<SignInGateDesignOptVar4
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
-};
-designVar4Standalone.story = { name: 'design-var4_standalone' };
-
-export const designVar5Standalone = () => {
-	return (
-		<Section>
-			<SignInGateDesignOptVar5
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
-};
-designVar5Standalone.story = { name: 'design-var5_standalone' };
-
-export const designVar6Standalone = () => {
-	return (
-		<Section>
-			<SignInGateDesignOptVar6
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
-};
-designVar6Standalone.story = { name: 'design-var6_standalone' };
+copyOptStandalone.story = { name: 'copy-var_standalone' };

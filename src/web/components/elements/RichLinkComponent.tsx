@@ -3,7 +3,8 @@ import React from 'react';
 import { RichLink, DefaultRichLink } from '@root/src/web/components/RichLink';
 
 import { useApi } from '@root/src/web/lib/api';
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { Design, Display } from '@guardian/types';
 
 type CardStyle =
 	| 'special-report'
@@ -76,7 +77,11 @@ export const RichLinkComponent: React.FC<{
 			contentType={data.contentType}
 			url={data.url}
 			starRating={data.starRating}
-			pillar={decidePillar({ pillar: data.pillar })}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: decideTheme({ pillar: data.pillar }),
+			}}
 			tags={data.tags}
 			sponsorName={data.sponsorName}
 			contributorImage={data.contributorImage}

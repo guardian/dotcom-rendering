@@ -1,33 +1,34 @@
 import React from 'react';
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
-import { Display, Design } from '@guardian/types';
-
 type Props = {
-	display: Display;
-	design: Design;
+	format: Format;
+	palette: Palette;
 	element: ImageBlockElement;
-	pillar: Theme;
 	hideCaption?: boolean;
 	title?: string;
+	isMainMedia?: boolean;
+	starRating?: number;
 };
 
 export const ImageBlockComponent = ({
-	display,
-	design,
+	format,
+	palette,
 	element,
-	pillar,
 	hideCaption,
 	title,
+	isMainMedia,
+	starRating,
 }: Props) => {
 	const { role } = element;
 	return (
 		<ImageComponent
-			display={display}
-			design={design}
 			element={element}
-			pillar={pillar}
+			format={format}
+			palette={palette}
 			hideCaption={hideCaption}
+			isMainMedia={isMainMedia}
+			starRating={starRating}
 			role={role}
 			title={title}
 		/>

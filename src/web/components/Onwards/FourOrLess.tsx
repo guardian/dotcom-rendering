@@ -39,26 +39,24 @@ export const FourOrLess = ({ content }: Props) => {
 						percentage={percentage}
 					>
 						<Card
-							{...{
-								linkTo: trail.url,
-								pillar: trail.pillar,
-								design: trail.design,
-								headlineText: trail.headline,
-								headlineSize: 'medium',
-								byline: trail.byline,
-								showByline: trail.showByline,
-								showQuotes: trail.design === Design.Comment,
-								webPublicationDate: trail.webPublicationDate,
-								kickerText: trail.kickerText,
-								showPulsingDot: trail.isLiveBlog,
-								showSlash: true,
-								showClock: false,
-								imageUrl: trail.image,
-								mediaType: trail.mediaType,
-								mediaDuration: trail.mediaDuration,
-								commentCount: trail.commentCount,
-								starRating: trail.starRating,
-							}}
+							linkTo={trail.url}
+							format={trail.format}
+							palette={trail.palette}
+							headlineText={trail.headline}
+							headlineSize="medium"
+							byline={trail.byline}
+							showByline={trail.showByline}
+							showQuotes={trail.format.design === Design.Comment}
+							webPublicationDate={trail.webPublicationDate}
+							kickerText={trail.kickerText}
+							showPulsingDot={trail.isLiveBlog}
+							showSlash={true}
+							showClock={false}
+							imageUrl={trail.image}
+							mediaType={trail.mediaType}
+							mediaDuration={trail.mediaDuration}
+							commentCount={trail.commentCount}
+							starRating={trail.starRating}
 						/>
 					</LI>
 				))}

@@ -6,13 +6,15 @@ import { body } from '@guardian/src-foundations/typography';
 
 type Props = {
 	children: string;
+	palette: Palette;
 };
 
-export const StandfirstWrapper = ({ children }: Props) => (
+export const StandfirstWrapper = ({ children, palette }: Props) => (
 	<div
 		className={css`
 			display: flex;
 			flex-direction: column;
+			color: ${palette.text.cardStandfirst};
 
 			${body.small()};
 			font-size: 14px;

@@ -1,15 +1,14 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { palette, space } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import { Display, Design } from '@guardian/types';
 
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
-import { themeToPillar } from '@root/src/web/lib/themeToPillar';
 
 import { Caption } from '@root/src/web/components/Caption';
 
@@ -17,12 +16,11 @@ type Props = {
 	id: string;
 	mediaTitle?: string;
 	altText?: string;
-	display: Display;
-	design: Design;
 	assetId: string;
-	channelId: string;
+	channelId?: string;
 	expired: boolean;
-	pillar: Theme;
+	format: Format;
+	palette: Palette;
 	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
@@ -46,8 +44,8 @@ const expiredOverlayStyles = (overrideImage: string) => css`
 	background-position: 49% 49%;
 	background-repeat: no-repeat;
 	padding-bottom: 56%;
-	color: ${palette.neutral[100]};
-	background-color: ${palette.neutral[20]};
+	color: ${neutral[100]};
+	background-color: ${neutral[20]};
 `;
 
 const expiredTextWrapperStyles = css`
@@ -59,8 +57,8 @@ const expiredTextWrapperStyles = css`
 	padding-bottom: ${space[4]}px;
 	padding-left: ${space[1]}px;
 	padding-right: ${space[12]}px;
-	color: ${palette.neutral[100]};
-	background-color: ${palette.neutral[20]};
+	color: ${neutral[100]};
+	background-color: ${neutral[20]};
 `;
 
 const expiredSVGWrapperStyles = css`
@@ -68,7 +66,7 @@ const expiredSVGWrapperStyles = css`
 	svg {
 		width: ${space[12]}px;
 		height: ${space[12]}px;
-		fill: ${palette.neutral[100]};
+		fill: ${neutral[100]};
 	}
 `;
 
@@ -77,9 +75,8 @@ export const YoutubeBlockComponent = ({
 	assetId,
 	mediaTitle,
 	altText,
-	display,
-	design,
-	pillar,
+	format,
+	palette,
 	hideCaption,
 	overrideImage,
 	posterImage,
@@ -91,7 +88,7 @@ export const YoutubeBlockComponent = ({
 	width = 460,
 	duration,
 	origin,
-}: Props) => {
+}: Props): JSX.Element => {
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -128,10 +125,9 @@ export const YoutubeBlockComponent = ({
 				</div>
 				{!hideCaption && (
 					<Caption
-						display={display}
-						design={design}
+						palette={palette}
 						captionText={mediaTitle || ''}
-						pillar={pillar}
+						format={format}
 						displayCredit={false}
 						shouldLimitWidth={shouldLimitWidth}
 					/>
@@ -195,15 +191,14 @@ export const YoutubeBlockComponent = ({
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
-				pillar={themeToPillar(pillar)}
+				pillar={format.theme}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 			/>
 			{!hideCaption && (
 				<Caption
-					display={display}
-					design={design}
+					palette={palette}
 					captionText={mediaTitle || ''}
-					pillar={pillar}
+					format={format}
 					displayCredit={false}
 					shouldLimitWidth={shouldLimitWidth}
 				/>

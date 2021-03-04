@@ -10,13 +10,12 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Format } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	html: string;
-	pillar: Theme;
-	design: Design;
-	display: Display;
+	format: Format;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 };
@@ -25,7 +24,7 @@ const isLetter = (letter: string) => {
 	return letter.toLowerCase() !== letter.toUpperCase();
 };
 
-const isLongEnough = (html: any) => {
+const isLongEnough = (html: string): boolean => {
 	// Only show a dropcap if the block of text is 200 characters or
 	// longer. But we first need to strip any markup from our html string so
 	// that we accurately measure the length that the reader will see. Eg. remove
@@ -34,58 +33,54 @@ const isLongEnough = (html: any) => {
 	// a good discussion on how this can be done. Of the two approaches, regex and
 	// DOM, both have unikely failure scenarios but the impact for failure with DOM
 	// manipulation carries a potential security risk so we're using a regex.
-	return html.replace(/(<([^>]+)>)/gi, '').length > 199;
+	return html.replace(/(<([^>]+)>)/gi, '').length >= 199;
 };
 
-const decideDropCapLetter = (html: string) => {
+const decideDropCapLetter = (html: string): string => {
 	const first = html.substr(0, 1);
 	if (first === '“') {
 		const second = html.substr(1, 1);
 
 		if (!isLetter(second)) {
-			return false;
+			return '';
 		}
 		return `${first}${second}`;
 	}
 
-	return isLetter(first) && first;
+	return isLetter(first) ? first : '';
 };
 
 const shouldShowDropCap = ({
-	design,
-	display,
+	format,
 	isFirstParagraph,
 	forceDropCap,
 }: {
-	design: Design;
-	display: Display;
+	format: Format;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
-}) => {
-	// Sometimes paragraphs other than the 1st one can have drop caps
-	if (forceDropCap) return true;
-	// Otherwise, we're only interested in marking the first para as a drop cap
-	if (!isFirstParagraph) return false;
-	// If immersive, we show drop caps for the first para
-	if (display === Display.Immersive) return true;
-	// The first para has a drop cap for these design types
-	switch (design) {
-		case Design.Feature:
-		case Design.Comment:
-		case Design.Review:
-		case Design.Interview:
-		case Design.PhotoEssay:
-		case Design.Recipe:
-			return true;
-		case Design.Article:
-		case Design.Media:
-		case Design.Live:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Analysis:
-			return false;
+}): boolean => {
+	function allowsDropCaps(design: Design) {
+		switch (design) {
+			case Design.Feature:
+			case Design.Comment:
+			case Design.Review:
+			case Design.Interview:
+			case Design.PhotoEssay:
+			case Design.Recipe:
+				return true;
+			default:
+				return false;
+		}
 	}
+	if (allowsDropCaps(format.design) || format.display === Display.Immersive) {
+		// When dropcaps are allowed, we always mark the first paragraph as a drop cap
+		if (isFirstParagraph) return true;
+		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
+		// prior to it in the article body (Eg: * * *), causing the forceDropCap flag to
+		// be set
+		if (forceDropCap) return true;
+	}
+	return false;
 };
 
 const sanitiserOptions = {
@@ -93,7 +88,7 @@ const sanitiserOptions = {
 	allowedTags: false, // Leave tags from CAPI alone
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
-		a: (tagName: string, attribs: {}) => ({
+		a: (tagName: string, attribs: { [key: string]: any }) => ({
 			tagName, // Just return anchors as is
 			attribs: {
 				...attribs, // Merge into the existing attributes
@@ -105,14 +100,74 @@ const sanitiserOptions = {
 	},
 };
 
-export const TextBlockComponent: React.FC<Props> = ({
+const paraStyles = (format: Format) => css`
+	margin-bottom: 16px;
+	${body.medium()};
+
+	ul {
+		margin-bottom: 12px;
+	}
+
+	${from.tablet} {
+		ul {
+			margin-bottom: 16px;
+		}
+	}
+
+	li {
+		margin-bottom: 6px;
+		padding-left: 20px;
+
+		p {
+			display: inline;
+		}
+	}
+
+	li:before {
+		display: inline-block;
+		content: '';
+		border-radius: 6px;
+		height: 12px;
+		width: 12px;
+		margin-right: 8px;
+		background-color: ${neutral[86]};
+		margin-left: -20px;
+	}
+
+	/* Subscript and Superscript styles */
+	sub {
+		bottom: -0.25em;
+	}
+
+	sup {
+		top: -0.5em;
+	}
+
+	sub,
+	sup {
+		font-size: 75%;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+
+	[data-dcr-style='bullet'] {
+		display: inline-block;
+		content: '';
+		border-radius: 0.375rem;
+		height: 0.75rem;
+		width: 0.75rem;
+		margin-right: 0.125rem;
+		background-color: ${decidePalette(format).background.bullet};
+	}
+`;
+
+export const TextBlockComponent = ({
 	html,
-	pillar,
-	design,
-	display,
+	format,
 	forceDropCap,
 	isFirstParagraph,
-}: Props) => {
+}: Props): JSX.Element | null => {
 	const {
 		willUnwrap: isUnwrapped,
 		unwrappedHtml,
@@ -133,58 +188,6 @@ export const TextBlockComponent: React.FC<Props> = ({
 		html,
 	});
 
-	const paraStyles = css`
-		margin-bottom: 16px;
-		${body.medium()};
-
-		ul {
-			margin-bottom: 12px;
-		}
-
-		${from.tablet} {
-			ul {
-				margin-bottom: 16px;
-			}
-		}
-
-		li {
-			margin-bottom: 6px;
-			padding-left: 20px;
-
-			p {
-				display: inline;
-			}
-		}
-
-		li:before {
-			display: inline-block;
-			content: '';
-			border-radius: 6px;
-			height: 12px;
-			width: 12px;
-			margin-right: 8px;
-			background-color: ${neutral[86]};
-			margin-left: -20px;
-		}
-
-		/* Subscript and Superscript styles */
-		sub {
-			bottom: -0.25em;
-		}
-
-		sup {
-			top: -0.5em;
-		}
-
-		sub,
-		sup {
-			font-size: 75%;
-			line-height: 0;
-			position: relative;
-			vertical-align: baseline;
-		}
-	`;
-
 	const firstLetter = decideDropCapLetter(unwrappedHtml);
 	const remainingLetters = firstLetter
 		? unwrappedHtml.substr(firstLetter.length)
@@ -192,8 +195,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 
 	if (
 		shouldShowDropCap({
-			design,
-			display,
+			format,
 			isFirstParagraph,
 			forceDropCap,
 		}) &&
@@ -201,12 +203,12 @@ export const TextBlockComponent: React.FC<Props> = ({
 		isLongEnough(remainingLetters)
 	) {
 		return (
-			<p className={paraStyles}>
-				<DropCap letter={firstLetter} pillar={pillar} design={design} />
+			<p className={paraStyles(format)}>
+				<DropCap letter={firstLetter} format={format} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={sanitise(remainingLetters, sanitiserOptions)}
-					elCss={paraStyles}
+					elCss={paraStyles(format)}
 					tagName="span"
 				/>
 			</p>
@@ -217,7 +219,7 @@ export const TextBlockComponent: React.FC<Props> = ({
 		<RewrappedComponent
 			isUnwrapped={isUnwrapped}
 			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles}
+			elCss={paraStyles(format)}
 			tagName={unwrappedElement || 'p'}
 		/>
 	);

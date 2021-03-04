@@ -6,6 +6,7 @@ import { Section } from '@frontend/web/components/Section';
 import {
 	linkAndDescription,
 	withLongDescription,
+	withLink,
 	oneTrail,
 	twoTrails,
 	threeTrails,
@@ -14,7 +15,7 @@ import {
 	sixTrails,
 	sevenTrails,
 	eightTrails,
-} from '@root/fixtures/onwards.mocks';
+} from '@root/fixtures/manual/onwards.mocks';
 import { OnwardsLayout } from './OnwardsLayout';
 
 export default {
@@ -35,6 +36,13 @@ export const withLongDescriptionStory = () => (
 	</Section>
 );
 withLongDescriptionStory.story = { name: 'With long description' };
+
+export const withLinkStory = () => (
+	<Section>
+		<OnwardsLayout {...withLink} />
+	</Section>
+);
+withLinkStory.story = { name: 'With link' };
 
 export const oneTrailStory = () => (
 	<Section>

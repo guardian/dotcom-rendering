@@ -18,15 +18,6 @@ export const headlineBackgroundColour = (design: Design, pillar: Theme) => {
 			return css`
 				background-color: ${pillarPalette[pillar].dark};
 			`;
-		case Design.Article:
-		case Design.Review:
-		case Design.PhotoEssay:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
-		case Design.Feature:
-		case Design.Analysis:
-		case Design.Interview:
 		default:
 			return css`
 				background-color: ${neutral[97]};
@@ -46,15 +37,7 @@ export const headlineColour = (design: Design, pillar: Theme) => {
 		case Design.Media:
 		case Design.Live:
 			return colourStyles(neutral[97]);
-		case Design.Analysis:
-		case Design.PhotoEssay:
-		case Design.Article:
-		case Design.Review:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Comment:
 		default:
+			return undefined;
 	}
 };

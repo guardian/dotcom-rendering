@@ -2,15 +2,22 @@ import { Pillar } from '@guardian/types';
 
 import { enhancePhotoEssay } from './enhance-photoessay';
 import { bodyJSON } from './exampleBodyJSON';
-import { exampleImage as image } from '../../fixtures/exampleImage';
+import { images } from '../../fixtures/generated/images';
 
-const article = JSON.parse(bodyJSON);
+const article: CAPIType = JSON.parse(bodyJSON);
 const photoEssay = {
 	...article,
 	config: {
 		...article.config,
 		isPhotoEssay: true,
 	},
+};
+const image = images[0];
+
+const metaData = {
+	id: '123',
+	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
 };
 
 describe('Enhance Photo Essays', () => {
@@ -21,7 +28,7 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('sets the designType to PhotoEssay when isPhotoEssay is true', () => {
-		const input = {
+		const input: CAPIType = {
 			...article,
 			config: {
 				...article.config,
@@ -41,7 +48,7 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('does not change the designType to PhotoEssay when isPhotoEssay is false', () => {
-		const input = {
+		const input: CAPIType = {
 			...article,
 			config: {
 				...article.config,
@@ -61,15 +68,17 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('sets the caption for an image if the following element is a text element with ul and li tags', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li>Judy, just sitting in the square on her own in Walworth.</li></ul>',
 						},
@@ -78,15 +87,16 @@ describe('Enhance Photo Essays', () => {
 			],
 		};
 
-		const expectedOutput = {
+		const expectedOutput: CAPIType = {
 			...photoEssay,
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							...image,
-							role: 'inline',
+							role: 'showcase',
 							displayCredit: false,
 							data: {
 								...image.data,
@@ -103,14 +113,16 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('creates a multi image element if 2 images in a row are halfWidth', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{ ...image, role: 'halfWidth' },
@@ -118,6 +130,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 						},
@@ -131,15 +144,18 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -166,14 +182,16 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('still creates images inline if roles are not halfWidth', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{ ...image, role: 'inline' },
@@ -181,6 +199,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 						},
@@ -194,10 +213,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{
@@ -225,20 +246,23 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('does not use a multi block element for a single image', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 						},
@@ -252,10 +276,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{
@@ -276,20 +302,23 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('sets the title prop for the previous image element when a h2 caption is found', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example title text</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -302,6 +331,7 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							...image,
@@ -315,6 +345,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -326,31 +357,36 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles when a caption, then a title follow an image, both are used', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -363,10 +399,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -382,6 +420,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -393,31 +432,36 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles when a title, then a caption follow an image, both are used', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -430,10 +474,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -449,6 +495,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -460,31 +507,36 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles if the last image has no caption', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
@@ -498,10 +550,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -517,6 +571,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -536,31 +591,36 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('handles if the last few images are not followed by any caption or title', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{ ...image, role: 'inline' },
@@ -575,10 +635,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -594,6 +656,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -616,16 +679,22 @@ describe('Enhance Photo Essays', () => {
 		expect(enhancePhotoEssay(input)).toEqual(expectedOutput);
 	});
 
+	// Need to ignore TS to check test works for other element types
 	it('will pass through other element types', () => {
-		const input = {
+		// @ts-ignore
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
+							// @ts-ignore
 							_type:
 								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
+							// @ts-ignore
 							pillar: Pillar.News,
 							designType: 'PhotoEssay',
 							role: 'inline',
@@ -634,6 +703,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 					],
@@ -646,10 +716,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
 							pillar: Pillar.News,
 							designType: 'PhotoEssay',
@@ -673,10 +745,11 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('creates two sets of multi image elements when there are 4 halfWidths images in a row', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -685,6 +758,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
@@ -698,10 +772,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -720,6 +796,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -746,10 +823,11 @@ describe('Enhance Photo Essays', () => {
 	});
 
 	it('halfWidth images without an image to be paired with are placed as single images by themselves', () => {
-		const input = {
+		const input: CAPIType = {
 			...photoEssay,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -757,6 +835,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
@@ -770,10 +849,12 @@ describe('Enhance Photo Essays', () => {
 			designType: 'PhotoEssay',
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,

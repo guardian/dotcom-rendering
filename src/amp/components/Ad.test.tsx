@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Ad } from '@root/src/amp/components/Ad';
 
+type ObjectType = { [key: string]: any };
+
 describe('AdComponent', () => {
 	const edition = 'UK';
 	const section = '';
@@ -19,11 +21,11 @@ describe('AdComponent', () => {
 	const permutiveURL =
 		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 	const usPrebidURL =
-		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=7&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
+		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=7&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
 	const auPrebidURL =
-		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=6&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
+		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=6&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
 	const rowPrebidURL =
-		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF';
+		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
 
 	beforeEach(() => {
 		commercialConfig.usePermutive = true;
@@ -47,28 +49,34 @@ describe('AdComponent', () => {
 		expect(ampAdElement).not.toBeNull();
 
 		if (ampAdElement) {
-			const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
-			const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
-			const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
+			const usRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[0].getAttribute('rtc-config') || '{}',
+			);
+			const auRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[1].getAttribute('rtc-config') || '{}',
+			);
+			const rowRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[2].getAttribute('rtc-config') || '{}',
+			);
 
 			expect(usRtcAttribute).not.toBeNull();
 			expect(auRtcAttribute).not.toBeNull();
 			expect(rowRtcAttribute).not.toBeNull();
 
 			if (usRtcAttribute) {
-				expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
+				expect(usRtcAttribute.urls).toMatchObject([
 					usPrebidURL,
 					permutiveURL,
 				]);
 			}
 			if (auRtcAttribute) {
-				expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
+				expect(auRtcAttribute.urls).toMatchObject([
 					auPrebidURL,
 					permutiveURL,
 				]);
 			}
 			if (rowRtcAttribute) {
-				expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
+				expect(rowRtcAttribute.urls).toMatchObject([
 					rowPrebidURL,
 					permutiveURL,
 				]);
@@ -95,28 +103,28 @@ describe('AdComponent', () => {
 		expect(ampAdElement).not.toBeNull();
 
 		if (ampAdElement) {
-			const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
-			const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
-			const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
+			const usRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[0].getAttribute('rtc-config') || '{}',
+			);
+			const auRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[1].getAttribute('rtc-config') || '{}',
+			);
+			const rowRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[2].getAttribute('rtc-config') || '{}',
+			);
 
 			expect(usRtcAttribute).not.toBeNull();
 			expect(auRtcAttribute).not.toBeNull();
 			expect(rowRtcAttribute).not.toBeNull();
 
 			if (usRtcAttribute) {
-				expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
-					usPrebidURL,
-				]);
+				expect(usRtcAttribute.urls).toMatchObject([usPrebidURL]);
 			}
 			if (auRtcAttribute) {
-				expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
-					auPrebidURL,
-				]);
+				expect(auRtcAttribute.urls).toMatchObject([auPrebidURL]);
 			}
 			if (rowRtcAttribute) {
-				expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
-					rowPrebidURL,
-				]);
+				expect(rowRtcAttribute.urls).toMatchObject([rowPrebidURL]);
 			}
 		}
 	});
@@ -140,28 +148,28 @@ describe('AdComponent', () => {
 		expect(ampAdElement).not.toBeNull();
 
 		if (ampAdElement) {
-			const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
-			const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
-			const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
+			const usRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[0].getAttribute('rtc-config') || '{}',
+			);
+			const auRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[1].getAttribute('rtc-config') || '{}',
+			);
+			const rowRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[2].getAttribute('rtc-config') || '{}',
+			);
 
 			expect(usRtcAttribute).not.toBeNull();
 			expect(auRtcAttribute).not.toBeNull();
 			expect(rowRtcAttribute).not.toBeNull();
 
 			if (usRtcAttribute) {
-				expect(JSON.parse(usRtcAttribute).urls).toMatchObject([
-					permutiveURL,
-				]);
+				expect(usRtcAttribute.urls).toMatchObject([permutiveURL]);
 			}
 			if (auRtcAttribute) {
-				expect(JSON.parse(auRtcAttribute).urls).toMatchObject([
-					permutiveURL,
-				]);
+				expect(auRtcAttribute.urls).toMatchObject([permutiveURL]);
 			}
 			if (rowRtcAttribute) {
-				expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([
-					permutiveURL,
-				]);
+				expect(rowRtcAttribute.urls).toMatchObject([permutiveURL]);
 			}
 		}
 	});
@@ -186,22 +194,28 @@ describe('AdComponent', () => {
 		expect(ampAdElement).not.toBeNull();
 
 		if (ampAdElement) {
-			const usRtcAttribute = ampAdElement[0].getAttribute('rtc-config');
-			const auRtcAttribute = ampAdElement[1].getAttribute('rtc-config');
-			const rowRtcAttribute = ampAdElement[2].getAttribute('rtc-config');
+			const usRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[0].getAttribute('rtc-config') || '{}',
+			);
+			const auRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[1].getAttribute('rtc-config') || '{}',
+			);
+			const rowRtcAttribute: ObjectType = JSON.parse(
+				ampAdElement[2].getAttribute('rtc-config') || '{}',
+			);
 
 			expect(usRtcAttribute).not.toBeNull();
 			expect(auRtcAttribute).not.toBeNull();
 			expect(rowRtcAttribute).not.toBeNull();
 
 			if (usRtcAttribute) {
-				expect(JSON.parse(usRtcAttribute).urls).toMatchObject([]);
+				expect(usRtcAttribute.urls).toMatchObject([]);
 			}
 			if (auRtcAttribute) {
-				expect(JSON.parse(auRtcAttribute).urls).toMatchObject([]);
+				expect(auRtcAttribute.urls).toMatchObject([]);
 			}
 			if (rowRtcAttribute) {
-				expect(JSON.parse(rowRtcAttribute).urls).toMatchObject([]);
+				expect(rowRtcAttribute.urls).toMatchObject([]);
 			}
 		}
 	});

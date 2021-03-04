@@ -1,8 +1,11 @@
 import get from 'lodash.get';
+
 import { findPillar } from './find-pillar';
 
+type ObjectType = { [key: string]: any };
+
 const getString = (
-	obj: object,
+	obj: ObjectType,
 	selector: string,
 	fallbackValue?: string,
 ): string => {
@@ -22,7 +25,7 @@ const getString = (
 };
 
 const getArray = <T>(
-	obj: object,
+	obj: ObjectType,
 	selector: string,
 	fallbackValue?: T[],
 ): T[] => {
@@ -42,14 +45,17 @@ const getArray = <T>(
 	);
 };
 
-const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
+const getLink = (
+	data: ObjectType,
+	{ isPillar }: { isPillar: boolean },
+): LinkType => {
 	const title = getString(data, 'title');
 	return {
 		title,
-		longTitle: getString(data, 'longTitle') || title,
+		longTitle: getString(data, 'longTitle', '') || title,
 		url: getString(data, 'url'),
 		pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
-		children: getArray<object>(data, 'children', []).map(
+		children: getArray<ObjectType>(data, 'children', []).map(
 			(l) => getLink(l, { isPillar: false }), // children are never pillars
 		),
 		mobileOnly: false,
@@ -58,7 +64,7 @@ const getLink = (data: {}, { isPillar }: { isPillar: boolean }): LinkType => {
 
 const rrLinkConfig = 'readerRevenueLinks';
 const buildRRLinkCategories = (
-	data: {},
+	data: ObjectType,
 	position: ReaderRevenuePosition,
 ): ReaderRevenueCategories => ({
 	subscribe: getString(data, `${rrLinkConfig}.${position}.subscribe`, ''),
@@ -67,7 +73,7 @@ const buildRRLinkCategories = (
 	gifting: getString(data, `${rrLinkConfig}.${position}.gifting`, ''),
 });
 
-const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
+const buildRRLinkModel = (data: any): ReaderRevenuePositions => ({
 	header: buildRRLinkCategories(data, 'header'),
 	footer: buildRRLinkCategories(data, 'footer'),
 	sideMenu: buildRRLinkCategories(data, 'sideMenu'),
@@ -75,12 +81,13 @@ const buildRRLinkModel = (data: {}): ReaderRevenuePositions => ({
 	ampFooter: buildRRLinkCategories(data, 'ampFooter'),
 });
 
-export const extract = (data: {}): NavType => {
+// TODO refactor now that we know data must be CAPINavType.
+export const extractNAV = (data: any): NavType => {
 	let pillars = getArray<any>(data, 'pillars');
 
 	pillars = pillars.map((link) => getLink(link, { isPillar: true }));
 
-	const subnav = get(data, 'subNavSections');
+	const subnav = get(data, 'subNavSections') as undefined | { parent?: any };
 
 	return {
 		pillars,
@@ -89,22 +96,22 @@ export const extract = (data: {}): NavType => {
 			title: 'More',
 			longTitle: 'More',
 			more: true,
-			children: getArray<object>(data, 'otherLinks', []).map((l) =>
+			children: getArray<ObjectType>(data, 'otherLinks', []).map((l) =>
 				getLink(l, { isPillar: false }),
 			),
 		},
-		brandExtensions: getArray<object>(
+		brandExtensions: getArray<ObjectType>(
 			data,
 			'brandExtensions',
 			[],
 		).map((l) => getLink(l, { isPillar: false })),
-		currentNavLink: getString(data, 'currentNavLink.title', ''),
+		currentNavLink: getString(data, 'currentNavLinkTitle', ''),
 		subNavSections: subnav
 			? {
 					parent: subnav.parent
 						? getLink(subnav.parent, { isPillar: false })
 						: undefined,
-					links: getArray<object>(subnav, 'links').map((l) =>
+					links: getArray<ObjectType>(subnav, 'links').map((l) =>
 						getLink(l, { isPillar: false }),
 					),
 			  }

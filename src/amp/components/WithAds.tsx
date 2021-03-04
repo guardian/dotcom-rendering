@@ -17,12 +17,14 @@ interface AdInfo {
 	section?: string;
 }
 
-export const WithAds: React.SFC<{
-	items: any[];
+type Props = {
+	items: JSX.Element[];
 	adSlots: number[];
 	adClassName: string;
 	adInfo: AdInfo;
-}> = ({ items, adSlots, adClassName, adInfo }) => {
+};
+
+export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
 	const commercialConfig = {
 		usePrebid: adInfo.switches.ampPrebid,
 		usePermutive: adInfo.switches.permutive,
@@ -47,7 +49,7 @@ export const WithAds: React.SFC<{
 			return (
 				<>
 					{item}
-					{ad(`ad-${item.id}`)}
+					{ad(`ad-${i + 1}`)}
 				</>
 			);
 		}

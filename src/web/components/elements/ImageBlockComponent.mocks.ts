@@ -1,5 +1,6 @@
 export const image: ImageBlockElement = {
 	role: 'inline',
+	elementId: 'mockId',
 	data: {
 		copyright: '© Tommy Trenchard / Greenpeace',
 		alt:

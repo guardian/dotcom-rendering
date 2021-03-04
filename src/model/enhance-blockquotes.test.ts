@@ -1,7 +1,13 @@
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { bodyJSON } from './exampleBodyJSON';
 
-const example = JSON.parse(bodyJSON);
+const example: CAPIType = JSON.parse(bodyJSON);
+
+const metaData = {
+	id: '123',
+	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
+};
 
 describe('Enhancing blockquotes', () => {
 	it('creates an identical but new object when no changes are needed', () => {
@@ -10,14 +16,16 @@ describe('Enhancing blockquotes', () => {
 	});
 
 	it('adds the quoted prop when the quoted class was found', () => {
-		const input = {
+		const input: CAPIType = {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quote</blockquote>',
 						},
@@ -30,10 +38,12 @@ describe('Enhancing blockquotes', () => {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quote</blockquote>',
 							quoted: true,
@@ -47,7 +57,7 @@ describe('Enhancing blockquotes', () => {
 	});
 
 	it('transforms simple blockquotes to highlight elements for photo essays', () => {
-		const input = {
+		const input: CAPIType = {
 			...example,
 			config: {
 				...example.config,
@@ -55,10 +65,12 @@ describe('Enhancing blockquotes', () => {
 			},
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is not a quote</blockquote>',
 						},
@@ -75,10 +87,12 @@ describe('Enhancing blockquotes', () => {
 			},
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.HighlightBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is not a quote</blockquote>',
 						},
@@ -91,7 +105,7 @@ describe('Enhancing blockquotes', () => {
 	});
 
 	it("doesn't transform quoted blockquotes to highlight elements for photo essays", () => {
-		const input = {
+		const input: CAPIType = {
 			...example,
 			config: {
 				...example.config,
@@ -99,10 +113,12 @@ describe('Enhancing blockquotes', () => {
 			},
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted blockquote</blockquote>',
 						},
@@ -119,10 +135,12 @@ describe('Enhancing blockquotes', () => {
 			},
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted blockquote</blockquote>',
 							quoted: true,
@@ -136,14 +154,16 @@ describe('Enhancing blockquotes', () => {
 	});
 
 	it('passes through simple blockquotes', () => {
-		const input = {
+		const input: CAPIType = {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html: '<blockquote>This is a quote</blockquote>',
 						},
 					],
@@ -155,10 +175,12 @@ describe('Enhancing blockquotes', () => {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html: '<blockquote>This is a quote</blockquote>',
 						},
 					],
@@ -170,14 +192,16 @@ describe('Enhancing blockquotes', () => {
 	});
 
 	it('ignores blockquotes with other classnames', () => {
-		const input = {
+		const input: CAPIType = {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="somethingelse">This is a simple blockquote</blockquote>',
 						},
@@ -190,10 +214,12 @@ describe('Enhancing blockquotes', () => {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="somethingelse">This is a simple blockquote</blockquote>',
 						},
@@ -206,20 +232,23 @@ describe('Enhancing blockquotes', () => {
 	});
 
 	it('handles both quoted and simple blockquotes in the same array', () => {
-		const input = {
+		const input: CAPIType = {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted quote</blockquote>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is a simple quote</blockquote>',
 						},
@@ -232,10 +261,12 @@ describe('Enhancing blockquotes', () => {
 			...example,
 			blocks: [
 				{
+					...metaData,
 					elements: [
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote class="quoted">This is a quoted quote</blockquote>',
 							quoted: true,
@@ -243,6 +274,7 @@ describe('Enhancing blockquotes', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+							elementId: 'mockId',
 							html:
 								'<blockquote>This is a simple quote</blockquote>',
 						},

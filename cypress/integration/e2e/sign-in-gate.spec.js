@@ -184,7 +184,7 @@ describe('Sign In Gate Tests', function () {
 		});
 	});
 
-	describe('Sign In Gate Design Test', function () {
+	describe('Sign In Gate Copy Test', function () {
 		beforeEach(function () {
 			disableCMP();
 
@@ -192,8 +192,8 @@ describe('Sign In Gate Tests', function () {
 			setArticleCount(3);
 		});
 
-		context('design-opt-control', function () {
-			it('shows the design test control variant', function () {
+		context('copy-opt-control', function () {
+			it('shows the copy test control variant', function () {
 				// 700007 - user in control according to https://ab-tests.netlify.app/
 				// audience 0.2, offset 0.7
 				// 6 variants + control (7 total)
@@ -205,8 +205,8 @@ describe('Sign In Gate Tests', function () {
 			});
 		});
 
-		context('design-opt-variant-1', function () {
-			it('shows the design test no faqs variant', function () {
+		context('copy-opt-variant-1', function () {
+			it('shows the copy test: Transparency 1 - You need to register to keep reading', function () {
 				// 700001 - user in variant-1 according to https://ab-tests.netlify.app/
 				// audience 0.2, offset 0.7
 				// 6 variants + control (7 total)
@@ -214,14 +214,14 @@ describe('Sign In Gate Tests', function () {
 
 				visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-design-opt-variant-1]').should(
+				cy.get('[data-cy=sign-in-gate-copy-opt-variant-1]').should(
 					'be.visible',
 				);
 			});
 		});
 
-		context('design-opt-variant-2', function () {
-			it('shows the design test blue highlight variant', function () {
+		context('copy-opt-variant-2', function () {
+			it('shows the copy test: Transparency 2 - Register to keep reading', function () {
 				// 700002 - user in variant-2 according to https://ab-tests.netlify.app/
 				// audience 0.2, offset 0.7
 				// 6 variants + control (7 total)
@@ -229,14 +229,14 @@ describe('Sign In Gate Tests', function () {
 
 				visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-design-opt-variant-2]').should(
+				cy.get('[data-cy=sign-in-gate-copy-opt-variant-2]').should(
 					'be.visible',
 				);
 			});
 		});
 
-		context('design-opt-variant-3', function () {
-			it('shows the design test less whitespace variant', function () {
+		context('copy-opt-variant-3', function () {
+			it('shows the copy test: Purpose - We’ll keep holding power to account', function () {
 				// 700003 - user in variant-3 according to https://ab-tests.netlify.app/
 				// audience 0.2, offset 0.7
 				// 6 variants + control (7 total)
@@ -244,14 +244,14 @@ describe('Sign In Gate Tests', function () {
 
 				visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-design-opt-variant-3]').should(
+				cy.get('[data-cy=sign-in-gate-copy-opt-variant-3]').should(
 					'be.visible',
 				);
 			});
 		});
 
-		context('design-opt-variant-4', function () {
-			it('shows the design test no line variant', function () {
+		context('copy-opt-variant-4', function () {
+			it('shows the copy test: Petition - Do you believe in independent journalism?', function () {
 				// 700004 - user in variant-4 according to https://ab-tests.netlify.app/
 				// audience 0.2, offset 0.7
 				// 6 variants + control (7 total)
@@ -259,14 +259,14 @@ describe('Sign In Gate Tests', function () {
 
 				visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-design-opt-variant-4]').should(
+				cy.get('[data-cy=sign-in-gate-copy-opt-variant-4]').should(
 					'be.visible',
 				);
 			});
 		});
 
-		context('design-opt-variant-5', function () {
-			it('shows the design test colour variant', function () {
+		context('copy-opt-variant-5', function () {
+			it('shows the copy test: Belonging 1 - Join our mission', function () {
 				// 700005 - user in variant-5 according to https://ab-tests.netlify.app/
 				// audience 0.2, offset 0.7
 				// 6 variants + control (7 total)
@@ -274,14 +274,14 @@ describe('Sign In Gate Tests', function () {
 
 				visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-design-opt-variant-5]').should(
+				cy.get('[data-cy=sign-in-gate-copy-opt-variant-5]').should(
 					'be.visible',
 				);
 			});
 		});
 
-		context('design-opt-variant-6', function () {
-			it('shows the design test button variant', function () {
+		context('copy-opt-variant-6', function () {
+			it('shows the copy test: Belonging 2 - Register to keep reading', function () {
 				// 700006 - user in variant-6 according to https://ab-tests.netlify.app/
 				// audience 0.2, offset 0.7
 				// 6 variants + control (7 total)
@@ -289,7 +289,7 @@ describe('Sign In Gate Tests', function () {
 
 				visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-design-opt-variant-6]').should(
+				cy.get('[data-cy=sign-in-gate-copy-opt-variant-6]').should(
 					'be.visible',
 				);
 			});

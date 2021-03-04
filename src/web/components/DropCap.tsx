@@ -10,11 +10,10 @@ import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
 	letter: string;
-	pillar: Theme;
-	design: Design;
+	format: Format;
 };
 
-const outerStyles = (pillar: Theme, design: Design) => {
+const outerStyles = (format: Format) => {
 	const baseStyles = css`
 		${headline.large({
 			fontWeight: 'light',
@@ -30,35 +29,24 @@ const outerStyles = (pillar: Theme, design: Design) => {
         opinion.dark is much darker so it is forced to keep with similar colour
         tones used on the site(that's my understanding anyway!)
     */
-	switch (design) {
+	switch (format.design) {
 		case Design.GuardianView:
 		case Design.Comment:
 			return css`
 				${baseStyles};
-				color: ${pillar === Pillar.Opinion
+				color: ${format.theme === Pillar.Opinion
 					? opinion[400]
-					: pillarPalette[pillar].dark};
+					: pillarPalette[format.theme].dark};
 			`;
-		case Design.PhotoEssay:
-		case Design.Analysis:
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Article:
-		case Design.Media:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};
-				color: ${pillarPalette[pillar].dark};
+				color: ${pillarPalette[format.theme].dark};
 			`;
 	}
 };
 
-const innerStyles = (design: Design) => {
+const innerStyles = (format: Format) => {
 	const baseStyles = css`
 		${headline.large({ fontWeight: 'bold' })}
 		font-size: 118px;
@@ -68,24 +56,13 @@ const innerStyles = (design: Design) => {
 		margin-right: ${space[1]}px;
 	`;
 
-	switch (design) {
+	switch (format.design) {
 		case Design.GuardianView:
 		case Design.Comment:
 			return css`
 				${baseStyles};
 				font-weight: 200;
 			`;
-		case Design.Analysis:
-		case Design.Feature:
-		case Design.Interview:
-		case Design.Article:
-		case Design.Media:
-		case Design.PhotoEssay:
-		case Design.Review:
-		case Design.Live:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.Quiz:
 		default:
 			return css`
 				${baseStyles};
@@ -94,8 +71,8 @@ const innerStyles = (design: Design) => {
 	}
 };
 
-export const DropCap = ({ letter, pillar, design }: Props) => (
-	<span className={outerStyles(pillar, design)}>
-		<span className={innerStyles(design)}>{letter}</span>
+export const DropCap = ({ letter, format }: Props) => (
+	<span className={outerStyles(format)}>
+		<span className={innerStyles(format)}>{letter}</span>
 	</span>
 );

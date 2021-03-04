@@ -4,7 +4,9 @@ import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '@root
 import { ABProvider } from '@guardian/ab-react';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
-const shouldHideSupportMessaging: any = shouldHideSupportMessaging_;
+const shouldHideSupportMessaging: {
+	[key: string]: any;
+} = shouldHideSupportMessaging_;
 
 jest.mock('@root/src/web/lib/contributions', () => ({
 	shouldHideSupportMessaging: jest.fn(() => true),
@@ -32,42 +34,40 @@ describe('ReaderRevenueLinks', () => {
 	};
 	const edition: Edition = 'UK';
 
-	it('should not render if shouldHideSupportMessaging() returns true and edition is US', async () => {
+	it('should render thank you message if shouldHideSupportMessaging() returns true', async () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
 
-		const { container } = render(
+		const { getByText } = render(
 			<AbProvider>
 				<ReaderRevenueLinks
 					urls={urls}
 					edition="US"
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					pageViewId="1234"
 				/>
 			</AbProvider>,
 		);
 
-		// expect nothing to be rendered
-		await wait(() => expect(container.firstChild).toBeNull());
+		await wait(() => expect(getByText('Thank you')).toBeInTheDocument());
 	});
 
-	it('should render if shouldHideSupportMessaging() returns false', async () => {
+	it('should render support message if shouldHideSupportMessaging() returns false', async () => {
 		shouldHideSupportMessaging.mockReturnValue(false);
 
-		const { container } = render(
+		const { getByText } = render(
 			<AbProvider>
 				<ReaderRevenueLinks
 					urls={urls}
 					edition={edition}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					pageViewId="1234"
 				/>
 				,
 			</AbProvider>,
 		);
 
-		// expect links to be rendered
-		await wait(() => expect(container.firstChild).not.toBeNull());
+		await wait(() =>
+			expect(getByText('Support the Guardian')).toBeInTheDocument(),
+		);
 	});
 });

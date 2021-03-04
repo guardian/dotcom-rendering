@@ -139,19 +139,19 @@ export const makeRelativeDate = (
 		return false;
 	} else if (delta < 55) {
 		// Seconds
-		return delta + getSuffix('s', format, delta);
+		return `${delta}${getSuffix('s', format, delta)}`;
 	} else if (delta < 55 * 60) {
 		// Minutes
 		minutes = Math.round(delta / 60);
-		return minutes + getSuffix('m', format, minutes);
+		return `${minutes}${getSuffix('m', format, minutes)}`;
 	} else if (isToday(then) || (extendedFormatting && isWithin24Hours(then))) {
 		// Hours
 		hours = Math.round(delta / 3600);
-		return hours + getSuffix('h', format, hours);
+		return `${hours}${getSuffix('h', format, hours)}`;
 	} else if (extendedFormatting && isWithinPastWeek(then)) {
 		// Days
 		days = Math.round(delta / 3600 / 24);
-		return days + getSuffix('d', format, days);
+		return `${days}${getSuffix('d', format, days)}`;
 	} else if (isYesterday(then)) {
 		// Yesterday
 		return `Yesterday${withTime(then)}`;

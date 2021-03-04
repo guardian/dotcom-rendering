@@ -22,9 +22,9 @@ import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
-import { CanShowResult } from './bannerPicker';
+import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
-const checkForErrors = (response: any) => {
+const checkForErrors = (response: Response) => {
 	if (!response.ok) {
 		throw Error(
 			response.statusText ||
@@ -88,7 +88,10 @@ const buildPayload = (props: BuildPayloadProps) => {
 };
 
 // TODO replace this with an imported version from the client lib
-const getBanner = (meta: {}, url: string): Promise<Response> => {
+const getBanner = (
+	meta: { [key: string]: any },
+	url: string,
+): Promise<Response> => {
 	const json = JSON.stringify(meta);
 	return fetch(url, {
 		method: 'post',
@@ -155,7 +158,7 @@ export const canShow = async ({
 	)
 		.then(checkForErrors)
 		.then((response) => response.json())
-		.then((json) => {
+		.then((json: { data?: any }) => {
 			if (!json.data) {
 				if (
 					engagementBannerLastClosedAt &&
@@ -174,7 +177,7 @@ export const canShow = async ({
 
 type Props = {
 	meta: any;
-	module: any;
+	module: { url: string; name: string; props: any[] };
 };
 
 export const ReaderRevenueBanner = ({ meta, module }: Props) => {
@@ -200,7 +203,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 
 		window
 			.guardianPolyfilledImport(module.url)
-			.then((bannerModule) => {
+			.then((bannerModule: { [key: string]: JSX.Element }) => {
 				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
 				sendOphanComponentEvent('INSERT', meta);
 			})
@@ -238,6 +241,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Banner
 					{...module.props}
+					// @ts-ignore
 					submitComponentEvent={submitComponentEvent}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}

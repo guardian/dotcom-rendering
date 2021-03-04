@@ -5,8 +5,9 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
 type Props = {
-	role?: RoleType;
 	children: React.ReactNode;
+	isMainMedia?: boolean;
+	role?: RoleType;
 	id?: string;
 };
 
@@ -126,7 +127,20 @@ const decidePosition = (role: RoleType) => {
 	}
 };
 
-export const Figure = ({ role = 'inline', children, id }: Props) => {
+export const Figure = ({
+	role = 'inline',
+	children,
+	id,
+	isMainMedia,
+}: Props) => {
+	if (isMainMedia) {
+		// Don't add in-body styles for main media elements
+		// TODO: If we want to support other element types having role position, such
+		// as showcase twitter embeds, then we should remove the role positioning which
+		// currently lives in ImageComponent and hoist it up to here, the same as we're
+		// doing using decidePosition for in-body elements
+		return <figure id={id}>{children}</figure>;
+	}
 	return (
 		<figure id={id} className={decidePosition(role)}>
 			{children}

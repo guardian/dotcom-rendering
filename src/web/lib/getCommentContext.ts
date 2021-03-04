@@ -1,4 +1,4 @@
-import { joinUrl } from '@root/src/web/lib/joinUrl';
+import { joinUrl } from '@root/src/lib/joinUrl';
 
 // GET http://discussion.guardianapis.com/discussion-api/comment/3519111/context
 // {
@@ -37,7 +37,7 @@ interface FilterOptions {
 	threads: ThreadsType;
 }
 
-const objAsParams = (obj: any): string => {
+const objAsParams = (obj: { [key: string]: any }): string => {
 	const params = Object.keys(obj)
 		.map((key) => {
 			return `${key}=${obj[key]}`;
@@ -48,15 +48,21 @@ const objAsParams = (obj: any): string => {
 };
 
 const initFiltersFromLocalStorage = (): FilterOptions => {
-	let threads;
-	let pageSize;
-	let orderBy;
+	let threads: { [key: string]: ThreadsType } | undefined;
+	let pageSize: { [key: string]: PageSizeType } | undefined;
+	let orderBy: { [key: string]: OrderByType } | undefined;
 
 	try {
 		// Try to read from local storage
-		orderBy = localStorage.getItem('gu.prefs.discussion.order');
-		threads = localStorage.getItem('gu.prefs.discussion.threading');
-		pageSize = localStorage.getItem('gu.prefs.discussion.pagesize');
+		orderBy = JSON.parse(
+			localStorage.getItem('gu.prefs.discussion.order') || '{}',
+		);
+		threads = JSON.parse(
+			localStorage.getItem('gu.prefs.discussion.threading') || '{}',
+		);
+		pageSize = JSON.parse(
+			localStorage.getItem('gu.prefs.discussion.pagesize') || '{}',
+		);
 	} catch (error) {
 		// Sometimes it's not possible to access localStorage, we accept this and don't want to
 		// capture these errors
@@ -69,9 +75,9 @@ const initFiltersFromLocalStorage = (): FilterOptions => {
 
 	// If we found something in LS, use it, otherwise return defaults
 	return {
-		orderBy: orderBy ? JSON.parse(orderBy).value : 'newest',
-		threads: threads ? JSON.parse(threads).value : 'collapsed',
-		pageSize: pageSize ? JSON.parse(pageSize).value : 25,
+		orderBy: orderBy && orderBy.value ? orderBy.value : 'newest',
+		threads: threads && threads.value ? threads.value : 'collapsed',
+		pageSize: pageSize && pageSize.value ? pageSize.value : 25,
 	};
 };
 

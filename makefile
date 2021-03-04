@@ -32,7 +32,7 @@ deploy:
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config scripts/webpack/frontend
+	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
 start: install
 	@make stop
@@ -60,7 +60,7 @@ dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
 	@NODE_ENV=development nodemon scripts/frontend/dev-server
 
-# cypress #####################################
+# tests #####################################
 
 percy: clear clean-dist install
 
@@ -71,6 +71,10 @@ cypress: clear clean-dist install
 ampValidation: clean-dist install
 	$(call log, "starting frontend DEV server for AMP Validation")
 	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'node scripts/test/amp-validation.js'
+
+buildCheck:
+	$(call log, "checking build files")
+	@node ./scripts/test/build-check.js
 
 # quality #########################################
 
@@ -136,7 +140,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@HIDE_BUNDLES=true NODE_ENV=production webpack --config scripts/webpack/frontend
+	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
 check-env: # private
 	$(call log, "checking environment")
@@ -150,6 +154,10 @@ gen-schema:
 	$(call log, "Generating new schema")
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/json-schema.json
+
+gen-fixtures:
+	$(call log, "Generating new article fixture data")
+	@node scripts/test-data/gen-fixtures.js
 
 perf-test:
 	@node scripts/perf/perf-test.js

@@ -15,8 +15,8 @@ import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { AmpExperimentComponent } from '@root/src/amp/components/AmpExperiment';
 import { AmpExperiments } from '@root/src/amp/server/ampExperimentCache';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
-import { decidePillar } from '@root/src/web/lib/decidePillar';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 const backgroundColour = css`
 	background-color: ${palette.neutral[97]};
@@ -53,8 +53,12 @@ export const Article: React.FC<{
 	config: ConfigType;
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
-	const design = decideDesignType(articleData.designType);
-	const pillar = decidePillar({
+	const design = decideDesign(
+		articleData.designType,
+		articleData.tags,
+		config.isLiveBlog,
+	);
+	const pillar = decideTheme({
 		pillar: articleData.pillar,
 		design,
 	});

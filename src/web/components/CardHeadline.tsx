@@ -9,8 +9,21 @@ import { until } from '@guardian/src-foundations/mq';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
-import { pillarPalette } from '@frontend/lib/pillars';
+import { space } from '@guardian/src-foundations';
 
+type Props = {
+	headlineText: string; // The text shown
+	format: Format; // Used to decide when to add type specific styles
+	palette: Palette; // Used to colour the headline and the kicker
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	size?: SmallHeadlineSize;
+	byline?: string;
+	showByline?: boolean;
+	isFullCardImage?: boolean; // Used for carousel AB test
+};
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
 		case 'large':
@@ -67,35 +80,25 @@ const underlinedStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const colourStyles = (colour: string) => css`
-	color: ${colour};
-`;
-
-const headlineStyles = (design: Design, pillar: Theme) => {
-	switch (design) {
-		case Design.Feature:
-		case Design.Interview:
-			return colourStyles(pillarPalette[pillar].dark);
-		case Design.Media:
-		case Design.Live:
-			return colourStyles(neutral[97]);
-		case Design.Analysis:
-		case Design.PhotoEssay:
-		case Design.Article:
-		case Design.Review:
-		case Design.Recipe:
-		case Design.MatchReport:
-		case Design.GuardianView:
-		case Design.Quiz:
-		case Design.Comment:
-		default:
+const fullCardImageTextStyles = css`
+	${headline.xxsmall()};
+	color: ${neutral[100]};
+	background-color: rgba(0, 0, 0, 0.75);
+	box-shadow: -${space[1]}px 0 0 rgba(0, 0, 0, 0.75);
+	/* Box decoration is required to push the box shadow out on Firefox */
+	box-decoration-break: clone;
+	line-height: 1.25;
+	/* white-space: pre-wrap; */
+	padding-right: ${space[1]}px;
+	${until.desktop} {
+		${headline.xxxsmall()};
 	}
-};
+`;
 
 export const CardHeadline = ({
 	headlineText,
-	design,
-	pillar,
+	format,
+	palette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -103,34 +106,49 @@ export const CardHeadline = ({
 	size = 'medium',
 	byline,
 	showByline,
-}: CardHeadlineType) => (
+	isFullCardImage,
+}: Props) => (
 	<>
 		<h4
 			className={cx(
 				fontStyles(size),
-				design === Design.Analysis && underlinedStyles(size),
+				format.design === Design.Analysis && underlinedStyles(size),
+				isFullCardImage &&
+					css`
+						line-height: 1; /* Reset line height in full image carousel */
+					`,
 			)}
 		>
-			{kickerText && (
-				<Kicker
-					text={kickerText}
-					design={design}
-					pillar={pillar}
-					showPulsingDot={showPulsingDot}
-					showSlash={showSlash}
-					inCard={true}
-				/>
-			)}
-			{showQuotes && (
-				<QuoteIcon colour={pillarPalette[pillar].main} size={size} />
-			)}
+			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
+				{kickerText && (
+					<Kicker
+						text={kickerText}
+						palette={palette}
+						showPulsingDot={showPulsingDot}
+						showSlash={showSlash}
+						inCard={true}
+					/>
+				)}
+				{showQuotes && (
+					<QuoteIcon colour={palette.text.cardKicker} size={size} />
+				)}
 
-			<span className={headlineStyles(design, pillar)}>
-				{headlineText}
+				<span
+					className={css`
+						color: ${palette.text.cardHeadline};
+					`}
+				>
+					{headlineText}
+				</span>
 			</span>
 		</h4>
 		{byline && showByline && (
-			<Byline text={byline} design={design} pillar={pillar} size={size} />
+			<Byline
+				text={byline}
+				design={format.design}
+				pillar={format.theme}
+				size={size}
+			/>
 		)}
 	</>
 );

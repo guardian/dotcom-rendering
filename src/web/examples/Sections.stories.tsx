@@ -9,7 +9,7 @@ import { Footer } from '@frontend/web/components/Footer';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Display, Pillar } from '@guardian/types';
+import { Display, Pillar, Design } from '@guardian/types';
 
 import {
 	brandBorder,
@@ -49,7 +49,7 @@ export default {
 	},
 };
 
-export const Sections = () => (
+export const Sections = (): React.ReactNode => (
 	<>
 		<Section
 			showTopBorder={false}
@@ -68,9 +68,12 @@ export const Sections = () => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				pillar={Pillar.News}
+				format={{
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
 				nav={NAV}
-				display={Display.Standard}
 				subscribeUrl=""
 				edition="UK"
 			/>

@@ -1,9 +1,10 @@
 import express from 'express';
-import { extract as extractNAV } from '@root/src/model/extract-nav';
+import { extractNAV } from '@root/src/model/extract-nav';
 
 import { document } from '@root/src/web/server/document';
 import { validateAsCAPIType } from '@root/src/model/validate';
 import { addDividers } from '@root/src/model/add-dividers';
+import { enhanceDots } from '@root/src/model/add-dots';
 import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhancePhotoEssay } from '@root/src/model/enhance-photoessay';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
@@ -19,6 +20,11 @@ class CAPIEnhancer {
 
 	addDividers() {
 		this.capi = addDividers(this.capi);
+		return this;
+	}
+
+	enhanceDots() {
+		this.capi = enhanceDots(this.capi);
 		return this;
 	}
 
@@ -43,14 +49,17 @@ class CAPIEnhancer {
 	}
 }
 
-export const render = ({ body }: express.Request, res: express.Response) => {
+export const render = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
 	try {
 		const CAPI = new CAPIEnhancer(body)
 			.validateAsCAPIType()
 			.addDividers()
 			.enhanceBlockquotes()
+			.enhanceDots()
 			.enhancePhotoEssay().capi;
-
 		const resp = document({
 			data: {
 				CAPI,
@@ -64,11 +73,15 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 
 		res.status(200).send(resp);
 	} catch (e) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		res.status(500).send(`<pre>${e.stack}</pre>`);
 	}
 };
 
-export const renderPerfTest = (req: express.Request, res: express.Response) => {
+export const renderPerfTest = (
+	req: express.Request,
+	res: express.Response,
+): void => {
 	req.body = JSON.parse(bodyJSON);
 	render(req, res);
 };

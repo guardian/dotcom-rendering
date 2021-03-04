@@ -1,12 +1,18 @@
 import path from 'path';
-import { configure, getLogger, addLayout, shutdown } from 'log4js';
+import {
+	configure,
+	getLogger,
+	addLayout,
+	shutdown,
+	LoggingEvent,
+} from 'log4js';
 
 const logLocation =
 	process.env.NODE_ENV === 'production'
 		? '/var/log/dotcom-rendering/dotcom-rendering.log'
 		: `${path.resolve('logs')}/dotcom-rendering.log`;
 
-const logFields = (logEvent: any): any => {
+const logFields = (logEvent: LoggingEvent): any => {
 	return {
 		stack: 'frontend',
 		app: 'dotcom-rendering',

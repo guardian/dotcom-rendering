@@ -1,6 +1,7 @@
 export const fourImages: ImageBlockElement[] = [
 	{
 		role: 'halfWidth',
+		elementId: 'mockId',
 		data: {
 			alt:
 				'26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic.',
@@ -386,6 +387,7 @@ export const fourImages: ImageBlockElement[] = [
 	},
 	{
 		role: 'halfWidth',
+		elementId: 'mockId',
 		data: {
 			alt:
 				'26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic.',
@@ -771,6 +773,7 @@ export const fourImages: ImageBlockElement[] = [
 	},
 	{
 		role: 'halfWidth',
+		elementId: 'mockId',
 		data: {
 			alt:
 				'26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic.',
@@ -1156,6 +1159,7 @@ export const fourImages: ImageBlockElement[] = [
 	},
 	{
 		role: 'halfWidth',
+		elementId: 'mockId',
 		data: {
 			alt:
 				'26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic.',

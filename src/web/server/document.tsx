@@ -3,11 +3,16 @@ import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
-
 import { escapeData } from '@root/src/lib/escapeData';
-import { getDist } from '@root/src/lib/assets';
+import {
+	CDN,
+	getScriptArrayFromFilename,
+	getScriptArrayFromChunkName,
+	loadableManifestJson,
+} from '@root/src/lib/assets';
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
+import { ChunkExtractor } from '@loadable/server';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
@@ -18,30 +23,26 @@ interface RenderToStringResult {
 }
 
 const generateScriptTags = (
-	scripts: Array<{ src: string; module?: boolean }>,
-	scriptAttrs: string = '',
+	scripts: Array<{ src: string; legacy?: boolean }>,
 ) =>
 	scripts.reduce((scriptTags, script) => {
-		if (script.module) {
-			scriptTags.push(
-				`<script ${scriptAttrs} type="module" src="${getDist({
-					path: script.src,
-					legacy: false,
-				})}"></script>`,
-			);
-			scriptTags.push(
-				`<script ${scriptAttrs} nomodule src="${getDist({
-					path: script.src,
-					legacy: true,
-				})}"></script>`,
-			);
-		} else {
-			scriptTags.push(`<script defer src="${script.src}"></script>`);
+		let attrs = 'defer';
+
+		if (Object.prototype.hasOwnProperty.call(script, 'legacy')) {
+			attrs = script.legacy ? 'defer nomodule' : 'type="module"';
 		}
-		return scriptTags;
+
+		return [
+			...scriptTags,
+			`<script ${attrs} src="${script.src}"></script>`,
+		];
 	}, [] as string[]);
 
-export const document = ({ data }: Props) => {
+interface Props {
+	data: DCRServerDocumentData;
+}
+
+export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
 	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
@@ -54,6 +55,107 @@ export const document = ({ data }: Props) => {
 			</CacheProvider>,
 		),
 	);
+
+	// There are docs on loadable in ./docs/loadable-components.md
+	const loadableExtractor = new ChunkExtractor({
+		stats: loadableManifestJson,
+		entrypoints: ['react'],
+	});
+
+	// The lodable-components docs want us to use extractor.collectChunks() but
+	// we don't have the traditional same <App /> rendered on server and client.
+	// Our data structure is vastly different (CAPIType vs CAPIBrowserType) and
+	// our architecture expects src/web/App to be client-side only, therefore
+	// it is difficult for us to use collectChunks to automatically extract the
+	// component splits that we want.
+	// However, this does actually suit our architecture as we can use the CAPI
+	// component reference.
+	const allChunks: LoadableComponents = [
+		{ chunkName: 'EditionDropdown', addWhen: 'always' },
+		{
+			chunkName: 'elements-YoutubeBlockComponent',
+			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
+		},
+		{
+			chunkName: 'elements-RichLinkComponent',
+			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+		},
+		{
+			chunkName: 'elements-InteractiveBlockComponent',
+			addWhen:
+				'model.dotcomrendering.pageElements.InteractiveBlockElement',
+		},
+	];
+	// We want to only insert script tags for the elements or main media elements on this page view
+	// so we need to check what elements we have and use the mapping to the the chunk name
+	const CAPIElements: CAPIElement[] = CAPI.blocks[0]
+		? CAPI.blocks[0].elements
+		: [];
+	const { mainMediaElements } = CAPI;
+	// Filter the chunks defined above by whether
+	// the 'addWhen' value is 'always' or matches
+	// any elements in the body or main media element
+	// arrays for the page request.
+	const chunksForPage = allChunks.filter((chunk) =>
+		[...CAPIElements, ...mainMediaElements].some(
+			(block) =>
+				chunk.addWhen === 'always' || block._type === chunk.addWhen,
+		),
+	);
+	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
+	chunksForPage.forEach((chunk) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		loadableExtractor.addChunk(chunk.chunkName); // addChunk is *undocumented* and not in TS types. It allows manually adding chunks to extractor.
+	});
+
+	let arrayOfLoadableScriptObjects: {
+		src: string;
+		legacy: boolean;
+	}[] = [];
+
+	// Pre assets returns an array of objects structured as:
+	// {
+	//     filename: 'elements-RichLinkComponent.js',
+	//     scriptType: 'script',
+	//     chunk: 'elements-RichLinkComponent',
+	//     url: '/elements-RichLinkComponent.js',
+	//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
+	//     type: 'mainAsset',
+	//     linkType: 'preload'
+	// }
+	//
+
+	const preAssets: {
+		filename: string;
+		scriptType: string;
+		chunk: string;
+		url: string;
+		path: string;
+		type: string;
+		linkType: string;
+	}[] =
+		// PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		loadableExtractor.getPreAssets();
+
+	preAssets.forEach((script) => {
+		arrayOfLoadableScriptObjects = [
+			...arrayOfLoadableScriptObjects,
+			...getScriptArrayFromFilename(script.filename),
+		];
+	});
+
+	// Loadable generates configuration script elements as the first two items
+	// of the script element array. We need to generate the react component version
+	// and then build an array of them, rendering them to string and grabbing
+	// the first two items. The alternative getScriptTags just returns a string
+	// of scripts tags already concatenated, so is not useful in this scenario.
+	const loadableConfigScripts = loadableExtractor
+		.getScriptElements()
+		.map((script) => renderToString(script))
+		.slice(0, 2);
 
 	/**
 	 * Preload the following woff2 font files
@@ -76,6 +178,15 @@ export const document = ({ data }: Props) => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
+	const pageHasInteractiveElements = CAPIElements.some(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	);
+
+	function isDefined<T>(argument: T | boolean): argument is T {
+		return argument !== false;
+	}
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -86,13 +197,16 @@ export const document = ({ data }: Props) => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			{ src: 'ophan.js', module: true },
+			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			{ src: 'sentryLoader.js', module: true },
-			{ src: 'dynamicImport.js', module: true },
-			{ src: 'react.js', module: true },
-		].filter(Boolean),
-		'defer',
+			...getScriptArrayFromChunkName('sentryLoader'),
+			...getScriptArrayFromChunkName('coreVitals'),
+			...getScriptArrayFromChunkName('dynamicImport'),
+			pageHasInteractiveElements && {
+				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
+			},
+			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
+		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);
 
 	/**
@@ -102,26 +216,23 @@ export const document = ({ data }: Props) => {
 	 * *before* the high priority scripts, although this is very
 	 * unlikely.
 	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			{ src: 'ophan.js', module: true },
-			{ src: 'lotame.js', module: true },
-			{ src: 'atomIframe.js', module: true },
-			{ src: 'embedIframe.js', module: true },
-			{ src: 'newsletterEmbedIframe.js', module: true },
-		],
-		'async',
-	);
+	const lowPriorityScriptTags = generateScriptTags([
+		...getScriptArrayFromChunkName('lotame'),
+		...getScriptArrayFromChunkName('atomIframe'),
+		...getScriptArrayFromChunkName('embedIframe'),
+		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
+	]);
 
+	const gaChunk = getScriptArrayFromChunkName('ga');
+	const modernScript = gaChunk.filter(
+		(script) => script && script.legacy === false,
+	)[0];
+	const legacyScript = gaChunk.filter(
+		(script) => script && script.legacy === true,
+	)[0];
 	const gaPath = {
-		modern: getDist({
-			path: 'ga.js',
-			legacy: false,
-		}),
-		legacy: getDist({
-			path: 'ga.js',
-			legacy: true,
-		}),
+		modern: modernScript.src,
+		legacy: legacyScript.src,
 	};
 
 	/**
@@ -144,11 +255,9 @@ export const document = ({ data }: Props) => {
 
 	return htmlTemplate({
 		linkedData,
-
+		loadableConfigScripts,
 		priorityScriptTags,
-
 		lowPriorityScriptTags,
-
 		css,
 		html,
 		fontFiles,

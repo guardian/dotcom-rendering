@@ -1,24 +1,22 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { space, neutral, brandAltBackground } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
 import { Display, Design } from '@guardian/types';
+import { Badge } from '@frontend/web/components/Badge';
 
 type Props = {
-	display: Display;
-	design: Design;
+	format: Format;
+	palette: Palette;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	pillar: Theme;
 	badge?: BadgeType;
-	isSpecial?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -29,9 +27,10 @@ const sectionLabelLink = css`
 `;
 
 const rowBelowLeftCol = css`
-	display: flex;
 	flex-direction: column;
+	display: inline-block;
 	${until.leftCol} {
+		display: flex;
 		flex-direction: row;
 	}
 `;
@@ -40,47 +39,33 @@ const marginBottom = css`
 	margin-bottom: 5px;
 `;
 
-const yellowBackground = css`
-	background-color: ${brandAltBackground.primary};
-	padding-left: 2px;
-`;
-
-const pillarColours = pillarMap(
-	(pillar) =>
-		css`
-			color: ${pillarPalette[pillar].main};
-		`,
-);
-
 const primaryStyle = css`
 	font-weight: 700;
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	${from.leftCol} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
 	}
-
-	padding-right: ${space[2]}px;
+	${until.leftCol} {
+		margin-right: ${space[2]}px;
+	}
 `;
 
-const invertedStyle = (pillar: Theme) => css`
+const invertedStyle = css`
 	font-weight: 700;
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	${from.leftCol} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
 	}
-	color: ${neutral[100]};
-	background-color: ${pillarPalette[pillar].main};
 
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
-	box-shadow: -6px 0 0 ${pillarPalette[pillar].main};
 	box-decoration-break: clone;
 	line-height: 28px;
 	${from.leftCol} {
 		line-height: 28px;
 	}
 
-	padding-right: ${space[3]}px;
+	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
 	padding-left: ${space[3]}px;
@@ -92,17 +77,12 @@ const invertedStyle = (pillar: Theme) => css`
 	}
 `;
 
-const whiteFont = css`
+const fontStyles = css`
 	font-weight: 700;
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	${from.leftCol} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
 	}
-	color: ${neutral[100]};
-`;
-
-const blackText = css`
-	color: ${neutral[0]};
 `;
 
 const secondaryStyle = css`
@@ -110,16 +90,34 @@ const secondaryStyle = css`
 	display: block;
 `;
 
+const titleBadgeWrapper = css`
+	margin-bottom: ${space[1]}px;
+	margin-top: ${space[1]}px;
+	margin-right: ${space[2]}px;
+`;
+
+const immersiveTitleBadgeStyle = (palette: Palette) => css`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-bottom: 0px;
+	max-width: max-content;
+	line-height: 1.15;
+	/* Offset parent container margins when Immersive */
+	margin-bottom: -10px;
+	background-color: ${palette.background.seriesTitle};
+	box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+		6px 0 0 0 ${palette.background.seriesTitle};
+`;
+
 export const SeriesSectionLink = ({
-	display,
-	design,
+	format,
+	palette,
 	tags,
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	pillar,
 	badge,
-	isSpecial,
 }: Props) => {
 	// If we have a tag, use it to show 2 section titles
 	const tag = tags.find(
@@ -131,9 +129,9 @@ export const SeriesSectionLink = ({
 
 	const hasSeriesTag = tag && tag.type === 'Series';
 
-	switch (display) {
+	switch (format.display) {
 		case Display.Immersive: {
-			switch (design) {
+			switch (format.design) {
 				case Design.Comment:
 				case Design.GuardianView: {
 					if (tag) {
@@ -146,7 +144,18 @@ export const SeriesSectionLink = ({
 									className={cx(
 										sectionLabelLink,
 										primaryStyle,
-										whiteFont,
+										fontStyles,
+										css`
+											color: ${palette.text.seriesTitle};
+											background-color: ${palette
+												.background.seriesTitle};
+											box-shadow: -6px 0 0 0
+													${palette.background
+														.seriesTitle},
+												6px 0 0 0
+													${palette.background
+														.seriesTitle};
+										`,
 									)}
 									data-component="series"
 									data-link-name="article series"
@@ -160,7 +169,19 @@ export const SeriesSectionLink = ({
 										className={cx(
 											sectionLabelLink,
 											secondaryStyle,
-											whiteFont,
+											fontStyles,
+											css`
+												color: ${palette.text
+													.sectionTitle};
+												background-color: ${palette
+													.background.sectionTitle};
+												box-shadow: -6px 0 0 0
+														${palette.background
+															.seriesTitle},
+													6px 0 0 0
+														${palette.background
+															.seriesTitle};
+											`,
 										)}
 										data-component="section"
 										data-link-name="article section"
@@ -179,7 +200,18 @@ export const SeriesSectionLink = ({
 								className={cx(
 									sectionLabelLink,
 									primaryStyle,
-									whiteFont,
+									fontStyles,
+									css`
+										color: ${palette.text.sectionTitle};
+										background-color: ${palette.background
+											.sectionTitle};
+										box-shadow: -6px 0 0 0
+												${palette.background
+													.seriesTitle},
+											6px 0 0 0
+												${palette.background
+													.seriesTitle};
+									`,
 								)}
 								data-component="section"
 								data-link-name="article section"
@@ -189,33 +221,47 @@ export const SeriesSectionLink = ({
 						</div>
 					);
 				}
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
 				default: {
 					if (hasSeriesTag) {
 						if (!tag) return null; // Just to keep ts happy
 						return (
-							<a
-								href={`${guardianBaseURL}/${tag.id}`}
+							<div
 								className={cx(
-									sectionLabelLink,
-									pillarColours[pillar],
-									invertedStyle(pillar),
+									badge && immersiveTitleBadgeStyle(palette),
 								)}
-								data-component="series"
-								data-link-name="article series"
 							>
-								<span>{tag.title}</span>
-							</a>
+								{badge && (
+									<div className={titleBadgeWrapper}>
+										<Badge
+											imageUrl={badge.imageUrl}
+											seriesTag={badge.seriesTag}
+										/>
+									</div>
+								)}
+
+								<a
+									className={cx(
+										sectionLabelLink,
+										css`
+											color: ${palette.text.seriesTitle};
+											background-color: ${palette
+												.background.seriesTitle};
+											box-shadow: -6px 0 0 0
+													${palette.background
+														.seriesTitle},
+												6px 0 0 0
+													${palette.background
+														.seriesTitle};
+										`,
+										invertedStyle,
+									)}
+									href={`${guardianBaseURL}/${tag.id}`}
+									data-component="series"
+									data-link-name="article series"
+								>
+									<span>{tag.title}</span>
+								</a>
+							</div>
 						);
 					}
 					// Immersives show nothing at all if there's no series tag
@@ -226,80 +272,74 @@ export const SeriesSectionLink = ({
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
-			switch (design) {
-				case Design.Comment:
-				case Design.GuardianView:
-				case Design.Feature:
-				case Design.Review:
-				case Design.Interview:
-				case Design.Live:
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.Analysis:
-				case Design.Article:
-				case Design.Recipe:
-				case Design.MatchReport:
-				case Design.Quiz:
-				default: {
-					if (tag) {
-						// We have a tag, we're not immersive, show both series and section titles
-						return (
-							// Sometimes the tags/titles are shown inline, sometimes stacked
-							<div className={cx(!badge && rowBelowLeftCol)}>
-								<a
-									href={`${guardianBaseURL}/${tag.id}`}
-									className={cx(
-										sectionLabelLink,
-										design === Design.MatchReport
-											? blackText
-											: pillarColours[pillar],
-										primaryStyle,
-										isSpecial && yellowBackground,
-									)}
-									data-component="series"
-									data-link-name="article series"
-								>
-									<span>{tag.title}</span>
-								</a>
-
-								<Hide when="below" breakpoint="tablet">
-									<a
-										href={`${guardianBaseURL}/${sectionUrl}`}
-										className={cx(
-											sectionLabelLink,
-											design === Design.MatchReport
-												? blackText
-												: pillarColours[pillar],
-											secondaryStyle,
-										)}
-										data-component="section"
-										data-link-name="article section"
-									>
-										<span>{sectionLabel}</span>
-									</a>
-								</Hide>
-							</div>
-						);
-					}
-					// There's no tag so fallback to section title
-					return (
+			if (tag) {
+				// We have a tag, we're not immersive, show both series and section titles
+				return (
+					// Sometimes the tags/titles are shown inline, sometimes stacked
+					<div className={cx(!badge && rowBelowLeftCol)}>
 						<a
-							href={`${guardianBaseURL}/${sectionUrl}`}
+							href={`${guardianBaseURL}/${tag.id}`}
 							className={cx(
 								sectionLabelLink,
-								design === Design.MatchReport
-									? blackText
-									: pillarColours[pillar],
+								css`
+									color: ${palette.text.seriesTitle};
+									background-color: ${palette.background
+										.seriesTitle};
+								`,
 								primaryStyle,
+								css`
+									box-shadow: -6px 0 0 0
+											${palette.background.seriesTitle},
+										6px 0 0 0
+											${palette.background.seriesTitle};
+								`,
 							)}
-							data-component="section"
-							data-link-name="article section"
+							data-component="series"
+							data-link-name="article series"
 						>
-							<span>{sectionLabel}</span>
+							<span>{tag.title}</span>
 						</a>
-					);
-				}
+
+						<Hide when="below" breakpoint="tablet">
+							<a
+								href={`${guardianBaseURL}/${sectionUrl}`}
+								className={cx(
+									sectionLabelLink,
+									css`
+										color: ${palette.text.sectionTitle};
+										background-color: ${palette.background
+											.sectionTitle};
+									`,
+									secondaryStyle,
+								)}
+								data-component="section"
+								data-link-name="article section"
+							>
+								<span>{sectionLabel}</span>
+							</a>
+						</Hide>
+					</div>
+				);
 			}
+			// There's no tag so fallback to section title
+			return (
+				<a
+					href={`${guardianBaseURL}/${sectionUrl}`}
+					className={cx(
+						sectionLabelLink,
+						css`
+							color: ${palette.text.sectionTitle};
+							background-color: ${palette.background
+								.sectionTitle};
+						`,
+						primaryStyle,
+					)}
+					data-component="section"
+					data-link-name="article section"
+				>
+					<span>{sectionLabel}</span>
+				</a>
+			);
 		}
 	}
 };

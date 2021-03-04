@@ -16,7 +16,6 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
-import { themeToPillar } from '@root/src/web/lib/themeToPillar';
 import { Display } from '@guardian/types';
 
 type Props = {
@@ -24,6 +23,7 @@ type Props = {
 	shortUrlId: string;
 	isCommentable: boolean;
 	pillar: Theme;
+	palette: Palette;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
@@ -61,6 +61,7 @@ export const Discussion = ({
 	shortUrlId,
 	isCommentable,
 	pillar,
+	palette,
 	user,
 	discussionD2Uid,
 	discussionApiClientHeader,
@@ -110,7 +111,7 @@ export const Discussion = ({
 		};
 
 		if (isCommentable) {
-			callFetch();
+			callFetch().catch((e) => console.error(`callFetch - error: ${e}`));
 		}
 	}, [discussionApiUrl, shortUrlId, isCommentable]);
 
@@ -119,14 +120,14 @@ export const Discussion = ({
 	// on.
 	useEffect(() => {
 		if (hashCommentId) {
-			getCommentContext(discussionApiUrl, hashCommentId).then(
-				(context) => {
+			getCommentContext(discussionApiUrl, hashCommentId)
+				.then((context) => {
 					setCommentPage(context.page);
 					setCommentPageSize(context.pageSize);
 					setCommentOrderBy(context.orderBy);
 					setIsExpanded(true);
-				},
-			);
+				})
+				.catch((e) => console.error(`getCommentContext - error: ${e}`));
 		}
 	}, [discussionApiUrl, hashCommentId]);
 
@@ -141,11 +142,11 @@ export const Discussion = ({
 	return (
 		<>
 			{commentCount !== undefined && beingHydrated && (
-				<Portal root="comment-count-root">
+				<Portal rootId="comment-count-root">
 					<CommentCount
 						isCommentable={isCommentable}
 						commentCount={commentCount}
-						pillar={pillar}
+						palette={palette}
 						setIsExpanded={setIsExpanded}
 					/>
 				</Portal>
@@ -197,7 +198,7 @@ export const Discussion = ({
 							<Comments
 								user={user}
 								baseUrl={discussionApiUrl}
-								pillar={themeToPillar(pillar)}
+								pillar={pillar}
 								initialPage={commentPage}
 								pageSizeOverride={commentPageSize}
 								isClosedForComments={
@@ -222,7 +223,7 @@ export const Discussion = ({
 								<Comments
 									user={user}
 									baseUrl={discussionApiUrl}
-									pillar={themeToPillar(pillar)}
+									pillar={pillar}
 									initialPage={commentPage}
 									pageSizeOverride={commentPageSize}
 									isClosedForComments={

@@ -3,7 +3,7 @@ import express from 'express';
 import { document } from '@root/src/amp/server/document';
 import { Article } from '@root/src/amp/pages/Article';
 import { extractScripts } from '@root/src/amp/lib/scripts';
-import { extract as extractNAV } from '@root/src/model/extract-nav';
+import { extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
@@ -25,6 +25,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
 
 		const sectionName = CAPI.sectionName || '';
+		const neilsenAPIID = findBySubsection(sectionName).apiID;
 
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
@@ -35,13 +36,14 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			contentType: CAPI.contentType,
 			id: CAPI.pageId,
 			beacon: `${CAPI.beaconURL}/count/pv.gif`,
-			neilsenAPIID: findBySubsection(sectionName).apiID,
+			neilsenAPIID,
 			domain: 'amp.theguardian.com',
 			permutive: {
 				namespace: 'guardian',
 				apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
 				payload: generatePermutivePayload(config),
 			},
+			ipsosSectionName: config.ipsosTag || 'guardian',
 		};
 
 		const metadata = {
@@ -71,6 +73,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		if (e instanceof TypeError) {
 			res.status(400).send(`<pre>${e.message}</pre>`);
 		} else {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			res.status(500).send(`<pre>${e.message}</pre>`);
 		}
 	}

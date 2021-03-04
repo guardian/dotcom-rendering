@@ -5,156 +5,208 @@ import { css } from 'emotion';
 import { border, background } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
-import { Link } from '@guardian/src-link';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
 
-import { Lines } from '@guardian/src-ed-lines';
-
 type Props = {
 	children: React.ReactNode;
-	width: number;
-	height: number;
-	onAccept: Function;
+	role?: RoleType;
+	onAccept?: () => void;
+	isTracking: boolean;
+	isMainMedia?: boolean;
+	source?: string;
+	sourceDomain?: string;
+	abTests: CAPIType['config']['abTests'];
 };
 
-const Container = ({
-	children,
-	width,
-	height,
+const roleTextSize = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase': {
+			return textSans.medium();
+		}
+		case 'halfWidth':
+		case 'supporting':
+		case 'thumbnail': {
+			return textSans.small();
+		}
+	}
+};
+
+const roleHeadlineSize = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase': {
+			return headline.xsmall();
+		}
+		case 'halfWidth':
+		case 'supporting':
+		case 'thumbnail': {
+			return headline.xxsmall();
+		}
+	}
+};
+
+const roleButtonSize = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase': {
+			return 'small';
+		}
+		case 'halfWidth':
+		case 'supporting':
+		case 'thumbnail': {
+			return 'xsmall';
+		}
+	}
+};
+
+const roleButtonText = (role: RoleType) => {
+	switch (role) {
+		case 'immersive':
+		case 'inline':
+		case 'showcase':
+		case 'halfWidth':
+		case 'supporting': {
+			return 'Allow and continue';
+		}
+		case 'thumbnail': {
+			return 'Allow';
+		}
+	}
+};
+
+const shouldDisplayOverlay = ({
+	isTracking,
+	isOverlayClicked,
+	isInABTestVariant,
+	isMainMedia,
 }: {
-	children: React.ReactNode;
-	width: number;
-	height: number;
-}) => (
-	<div
-		className={css`
-			width: ${width}px;
-			height: ${height}px;
-		`}
-	>
-		{children}
-	</div>
-);
+	isTracking: boolean;
+	isOverlayClicked: boolean;
+	isInABTestVariant: boolean;
+	isMainMedia?: boolean;
+}) => {
+	if (isMainMedia || !isTracking) {
+		return false;
+	}
+	if (isOverlayClicked) {
+		return false;
+	}
+	return isInABTestVariant;
+};
 
-const Outer = ({ children }: { children: React.ReactNode }) => (
-	<div
-		className={css`
-			background: ${background.primary};
-			border: 1px solid ${border.primary};
-			height: 100%;
-		`}
-	>
-		{children}
-	</div>
-);
+const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
+	return abTestConfig.clickToViewVariant === 'variant';
+};
 
-const Inner = ({ children }: { children: React.ReactNode }) => (
-	<div
-		className={css`
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			height: calc(100% - 16px);
-			padding: ${space[3]}px;
-		`}
-	>
-		{children}
-	</div>
-);
-
-const Top = ({ children }: { children: React.ReactNode }) => (
-	<div>{children}</div>
-);
-
-const Bottom = ({ children }: { children: React.ReactNode }) => (
-	<div>{children}</div>
-);
-
-const Headline = ({
+export const ClickToView = ({
 	children,
-	width,
-}: {
-	children: React.ReactNode;
-	width: number;
-}) => (
-	<div
-		className={css`
-			${width > 300 ? headline.xsmall() : headline.xxsmall()}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const Body = ({
-	children,
-	width,
-}: {
-	children: React.ReactNode;
-	width: number;
-}) => (
-	<div
-		className={css`
-			${width > 300 ? textSans.small() : textSans.xsmall()}
-			a {
-				${width > 300 ? textSans.small() : textSans.xsmall()}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-export const ClickToView = ({ children, width, height, onAccept }: Props) => {
-	const [showOverlay, setShowOverlay] = useState<boolean>(true);
+	role = 'inline',
+	onAccept,
+	isTracking,
+	isMainMedia,
+	source,
+	sourceDomain = 'unknown',
+	abTests,
+}: Props) => {
+	const [isOverlayClicked, setIsOverlayClicked] = useState<boolean>(false);
 
 	const handleClick = () => {
-		setShowOverlay(false);
-		onAccept();
+		setIsOverlayClicked(true);
+		if (onAccept) {
+			setTimeout(() => onAccept());
+		}
 	};
 
-	if (showOverlay) {
+	const textSize = roleTextSize(role);
+
+	if (
+		shouldDisplayOverlay({
+			isTracking,
+			isOverlayClicked,
+			isInABTestVariant: isInABTestVariant(abTests),
+			isMainMedia,
+		})
+	) {
 		return (
-			<Container width={width} height={height}>
-				<Outer>
-					<Inner>
-						<Top>
-							<Headline width={width}>
-								The colourful beak is very large
-							</Headline>
-							<Body width={width}>
-								Quaerat quaerat ex nihil autem consequatur.
-								Velit rerum at ad dignissimos aut excepturi
-								ratione excepturi. Quaerat ipsam natus totam et
-								aut distinctio eaque voluptatem.
-								<Link href="https://theguardian.com">
-									{' '}
-									Quaerat ipsam
-								</Link>
-							</Body>
-						</Top>
-						<Bottom>
-							<Button
-								priority="primary"
-								size={width > 300 ? 'small' : 'xsmall'}
-								icon={<SvgCheckmark />}
-								iconSide="left"
-								onClick={() => handleClick()}
-							>
-								Click to view
-							</Button>
-						</Bottom>
-					</Inner>
-					<Lines />
-				</Outer>
-			</Container>
+			<div
+				className={css`
+					width: 100%;
+					background: ${background.secondary};
+					border: 1px solid ${border.primary};
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					padding: ${space[3]}px;
+					margin-bottom: 8px;
+				`}
+			>
+				<div
+					className={css`
+						${roleHeadlineSize(role)}
+						margin-bottom: 8px;
+					`}
+				>
+					{source
+						? `Allow ${source} content?`
+						: 'Allow content provided by a third party?'}
+				</div>
+				<div
+					className={css`
+						${textSize}
+						a {
+							${textSize}
+						}
+						p {
+							margin-bottom: 8px;
+						}
+					`}
+				>
+					{source ? (
+						<>
+							<p>
+								This article includes content provided by{' '}
+								{source}. We ask for your permission before
+								anything is loaded, as they may be using cookies
+								and other technologies.
+							</p>
+							<p>
+								To view this content, click &apos;Allow and
+								continue&apos;.
+							</p>
+						</>
+					) : (
+						<>
+							<p>
+								This article includes content hosted on{' '}
+								{sourceDomain}. We ask for your permission
+								before anything is loaded, as the provider may
+								be using cookies and other technologies.
+							</p>
+							<p>
+								To view this content, click &apos;Allow and
+								continue&apos;.
+							</p>
+						</>
+					)}
+				</div>
+				<div>
+					<Button
+						priority="primary"
+						size={roleButtonSize(role)}
+						icon={<SvgCheckmark />}
+						iconSide="left"
+						onClick={() => handleClick()}
+					>
+						{roleButtonText(role)}
+					</Button>
+				</div>
+			</div>
 		);
 	}
-
-	return (
-		<Container width={width} height={height}>
-			{children}
-		</Container>
-	);
+	return <>{children}</>;
 };

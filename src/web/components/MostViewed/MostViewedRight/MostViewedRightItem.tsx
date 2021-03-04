@@ -7,6 +7,7 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
 import { useHover } from '@root/src/web/lib/useHover';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const listItemStyles = css`
 	list-style: none;
@@ -78,16 +79,16 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<Avatar
 								imageSrc={trail.image}
 								imageAlt=""
-								pillar={trail.pillar}
+								palette={decidePalette(trail.format)}
 							/>
 						</div>
 					)}
 					<div className={headlineWrapperStyles}>
 						{trail.isLiveBlog ? (
 							<LinkHeadline
-								design={trail.design}
 								headlineText={trail.headline}
-								pillar={trail.pillar}
+								format={trail.format}
+								palette={trail.palette}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}
@@ -99,9 +100,9 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							/>
 						) : (
 							<LinkHeadline
-								design={trail.design}
 								headlineText={trail.headline}
-								pillar={trail.pillar}
+								format={trail.format}
+								palette={trail.palette}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}

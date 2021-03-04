@@ -95,15 +95,16 @@ export const Onward: React.FC<{
 	);
 
 	const hasSectionMostViewed = sectionID && sectionHasMostViewed(sectionID);
-	const sectionMostViewed = hasSectionMostViewed
-		? container(
-				`${ampBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
-				`most-viewed-in-${sectionID}`,
-		  )
-		: container(
-				`${ampBaseURL}/container/count/1/offset/0/mf2.json`,
-				'most-viewed',
-		  );
+	const sectionMostViewed =
+		sectionID && hasSectionMostViewed
+			? container(
+					`${ampBaseURL}/container/count/1/offset/0/section/${sectionID}/mf2.json`,
+					`most-viewed-in-${sectionID}`,
+			  )
+			: container(
+					`${ampBaseURL}/container/count/1/offset/0/mf2.json`,
+					'most-viewed',
+			  );
 
 	const headlines = container(
 		`${ampBaseURL}/container/count/3/offset/${

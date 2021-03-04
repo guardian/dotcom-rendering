@@ -59,6 +59,7 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 	}) => {
 		enhanced.push({
 			_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+			elementId: images[0].elementId,
 			images,
 			caption,
 		});
@@ -157,7 +158,22 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 				if (nextCaption) elements.splice(i, 1);
 				break;
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
-				if (buffer.length === 0 && !getCaption(element)) {
+				if (buffer.length === 0) {
+					// If there are no images in the buffer, pass it through
+					if (getCaption(element)) {
+						enhanced.push({
+							_type:
+								'model.dotcomrendering.pageElements.CaptionBlockElement',
+							elementId: element.elementId,
+							captionText: element.html,
+						});
+					} else {
+						enhanced.push(element);
+					}
+					break;
+				}
+
+				if (buffer.length === 0 && getCaption(element)) {
 					// If this text block isn't a caption and there are no images
 					// in the buffer, pass it through
 					enhanced.push(element);

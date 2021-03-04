@@ -1,28 +1,19 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
-import { textSans } from '@guardian/src-foundations/typography';
-import { neutral } from '@guardian/src-foundations/palette';
+import { space } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
+import { headline, textSans } from '@guardian/src-foundations/typography';
+import { LinkButton } from '@guardian/src-button';
 
-import { SharingIcons } from '@frontend/web/components/ShareIcons';
-import { SubMetaLinksList } from '@frontend/web/components/SubMetaLinksList';
-import { SyndicationButton } from '@frontend/web/components/SyndicationButton';
+import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
-import { getSharingUrls } from '@frontend/lib/sharing-urls';
 import { until } from '@guardian/src-foundations/mq';
 
-const subMetaLabel = css`
+const labelStyles = (palette: Palette) => css`
 	${textSans.xsmall()};
 	display: block;
-	color: ${neutral[60]};
-`;
-
-const subMetaSharingIcons = css`
-	:after {
-		content: '';
-		display: block;
-		clear: left;
-	}
+	color: ${palette.text.subMetaLabel};
 `;
 
 const badgeWrapper = css`
@@ -31,14 +22,68 @@ const badgeWrapper = css`
 `;
 
 const bottomPadding = css`
-	padding-bottom: 72px;
+	padding-bottom: ${space[9]}px;
 	${until.desktop} {
-		padding-bottom: 58px;
+		padding-bottom: ${space[5]}px;
+	}
+`;
+
+const listStyleNone = css`
+	list-style: none;
+`;
+
+const listWrapper = css`
+	padding-bottom: 12px;
+	margin-bottom: 6px;
+	border-bottom: 1px solid ${border.secondary};
+`;
+
+const listItemStyles = (palette: Palette) => css`
+	margin-right: 5px;
+	display: inline-block;
+	a {
+		position: relative;
+		display: block;
+		padding-right: 5px;
+		text-decoration: none;
+	}
+	a::after {
+		content: '/';
+		position: absolute;
+		pointer-events: none;
+		top: 0;
+		right: -3px;
+		color: ${palette.text.subMetaLink};
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+`;
+
+const linkStyles = (palette: Palette) => css`
+	text-decoration: none;
+	:hover {
+		text-decoration: underline;
+	}
+	color: ${palette.text.subMeta};
+`;
+
+const sectionStyles = css`
+	${headline.xxxsmall()};
+`;
+
+const keywordStyles = css`
+	${textSans.small()};
+`;
+
+const hideSlash = css`
+	a::after {
+		content: '';
 	}
 `;
 
 type Props = {
-	pillar: Theme;
+	palette: Palette;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
 	pageId: string;
@@ -48,8 +93,16 @@ type Props = {
 	badge?: BadgeType;
 };
 
+const syndicationButtonOverrides = (palette: Palette) => css`
+	> a {
+		color: ${palette.text.syndicationButton};
+		border-color: ${palette.border.syndicationButton};
+		font-weight: normal;
+	}
+`;
+
 export const SubMeta = ({
-	pillar,
+	palette,
 	subMetaKeywordLinks,
 	subMetaSectionLinks,
 	pageId,
@@ -58,9 +111,8 @@ export const SubMeta = ({
 	showBottomSocialButtons,
 	badge,
 }: Props) => {
-	const hasSubMetaSectionLinks = subMetaSectionLinks.length > 0;
-	const hasSubMetaKeywordLinks = subMetaKeywordLinks.length > 0;
-	const sharingUrls = getSharingUrls(pageId, webTitle);
+	const hasSectionLinks = subMetaSectionLinks.length > 0;
+	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
 	return (
 		<div data-print-layout="hide" className={bottomPadding}>
 			{badge && (
@@ -71,41 +123,96 @@ export const SubMeta = ({
 					/>
 				</div>
 			)}
-			{(hasSubMetaSectionLinks || hasSubMetaKeywordLinks) && (
-				<span className={subMetaLabel}>Topics</span>
-			)}
-			{hasSubMetaSectionLinks && (
-				<SubMetaLinksList
-					links={subMetaSectionLinks}
-					isSectionLinkList={true}
-					pillar={pillar}
-				/>
-			)}
-			{hasSubMetaKeywordLinks && (
-				<SubMetaLinksList
-					links={subMetaKeywordLinks}
-					isSectionLinkList={false}
-					pillar={pillar}
-				/>
+			{(hasSectionLinks || hasKeywordLinks) && (
+				<>
+					<span className={labelStyles(palette)}>Topics</span>
+					<div className={listWrapper}>
+						{hasSectionLinks && (
+							<ul className={listStyleNone}>
+								{subMetaSectionLinks.map((link, i) => (
+									<li
+										className={cx(
+											listItemStyles(palette),
+											sectionStyles,
+											i ===
+												subMetaSectionLinks.length -
+													1 && hideSlash,
+										)}
+										key={link.url}
+									>
+										<a
+											className={linkStyles(palette)}
+											href={link.url}
+										>
+											{link.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+						{hasKeywordLinks && (
+							<ul className={listStyleNone}>
+								{subMetaKeywordLinks.map((link, i) => (
+									<li
+										className={cx(
+											listItemStyles(palette),
+											keywordStyles,
+											i ===
+												subMetaKeywordLinks.length -
+													1 && hideSlash,
+										)}
+										key={link.url}
+									>
+										<a
+											className={linkStyles(palette)}
+											href={link.url}
+										>
+											{link.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
+				</>
 			)}
 			{showBottomSocialButtons && (
-				<SharingIcons
-					className={subMetaSharingIcons}
-					sharingUrls={sharingUrls}
-					pillar={pillar}
-					displayIcons={[
-						'facebook',
-						'twitter',
-						'email',
-						'linkedIn',
-						'pinterest',
-						'whatsApp',
-						'messenger',
-					]}
-				/>
-			)}
-			{showBottomSocialButtons && (
-				<SyndicationButton webUrl={webUrl} internalPageCode={pageId} />
+				<div
+					className={css`
+						display: flex;
+						justify-content: space-between;
+					`}
+				>
+					<ShareIcons
+						pageId={pageId}
+						webTitle={webTitle}
+						palette={palette}
+						displayIcons={[
+							'facebook',
+							'twitter',
+							'email',
+							'linkedIn',
+							'pinterest',
+							'whatsApp',
+							'messenger',
+						]}
+					/>
+					<div className={syndicationButtonOverrides(palette)}>
+						<LinkButton
+							priority="tertiary"
+							size="xsmall"
+							data-link-name="meta-syndication-article"
+							href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
+								webUrl,
+							)}&type=article&internalpagecode=${pageId}`}
+							target="_blank"
+							rel="noopener"
+							title="Reuse this content"
+						>
+							Reuse this content
+						</LinkButton>
+					</div>
+				</div>
 			)}
 		</div>
 	);

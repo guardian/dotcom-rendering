@@ -21,11 +21,10 @@ describe('Video', function () {
 		});
 		it('should render', function () {
 			cy.visit(`/Article?url=${mainMediaVideo}`);
-			cy.get(`[data-cy="main-media-youtube-atom"]`).should('be.visible');
+			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 		});
 
 		it('should dispatch play to server', function () {
-			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 			cy.get(`[daya-cy="youtube-overlay"]`).click();
 			cy.intercept(
 				{
@@ -57,12 +56,11 @@ describe('Video', function () {
 		});
 		it('should render', function () {
 			cy.visit(`/Article?url=${embedMediaVideo}`);
-			cy.get(`#youtube-block-41`).scrollIntoView();
-			cy.get(`#youtube-block-41`).should('be.visible');
+			cy.get(`[daya-cy="youtube-overlay"]`).scrollIntoView();
+			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 		});
 
 		it('should dispatch play to server', function () {
-			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 			cy.get(`[daya-cy="youtube-overlay"]`).click();
 			cy.intercept(
 				{

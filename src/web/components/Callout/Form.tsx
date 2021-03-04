@@ -38,12 +38,12 @@ const formFieldWrapperStyles = css`
 	flex-direction: column;
 `;
 
-type formData = { [key in string]: any };
+type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
 	formField: CampaignFieldType;
-	formData: formData;
-	setFormData: React.Dispatch<React.SetStateAction<formData>>;
+	formData: FormDataType;
+	setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
 };
 
 const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
@@ -110,7 +110,7 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
 };
 
 type FormProps = {
-	onSubmit: (formData: formData) => void;
+	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	error?: string;
 };

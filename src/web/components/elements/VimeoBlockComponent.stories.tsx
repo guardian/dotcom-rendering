@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Display, Design, Pillar } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
 export default {
@@ -26,14 +27,21 @@ export const smallAspectRatio = () => {
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
-				pillar={Pillar.News}
 				height={250}
 				width={250}
 				caption="blah"
 				credit=""
 				title=""
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 			/>
 			<p>abc</p>
 		</Container>
@@ -47,14 +55,21 @@ export const largeAspectRatio = () => {
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
-				pillar={Pillar.News}
 				height={259}
 				width={460}
 				caption="blah"
 				credit=""
 				title=""
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 			/>
 			<p>abc</p>
 		</Container>
@@ -68,14 +83,21 @@ export const verticalAspectRatio = () => {
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/265111898?app_id=122963"
-				pillar={Pillar.News}
 				height={818}
 				width={460}
 				caption="blah"
 				credit=""
 				title=""
-				display={Display.Standard}
-				design={Design.Article}
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 			/>
 			<p>abc</p>
 		</Container>

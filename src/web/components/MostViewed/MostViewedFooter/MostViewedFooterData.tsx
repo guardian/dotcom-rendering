@@ -6,9 +6,8 @@ import { from, Breakpoint } from '@guardian/src-foundations/mq';
 import { useAB } from '@guardian/ab-react';
 
 import { useApi } from '@root/src/web/lib/api';
-import { joinUrl } from '@root/src/web/lib/joinUrl';
-import { decidePillar } from '@root/src/web/lib/decidePillar';
-import { decideDesignType } from '@root/src/web/lib/decideDesignType';
+import { joinUrl } from '@root/src/lib/joinUrl';
+import { decideTrail } from '@root/src/web/lib/decideTrail';
 
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { SecondTierItem } from './SecondTierItem';
@@ -51,20 +50,10 @@ function buildDeeplyReadUrl(ajaxUrl: string) {
 	return joinUrl([ajaxUrl, 'most-read-deeply-read.json']);
 }
 
-function transformTrail(trail: CAPITrailType): TrailType {
-	const design = decideDesignType(trail.designType);
-	// Converts the CAPI string pillar into an enum
-	return {
-		...trail,
-		pillar: decidePillar({ pillar: trail.pillar, design }),
-		design,
-	};
-}
-
 function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
 	return tabs.map((tab) => ({
 		...tab,
-		trails: tab.trails.map((trail) => transformTrail(trail)),
+		trails: tab.trails.map((trail) => decideTrail(trail)),
 	}));
 }
 
@@ -108,7 +97,7 @@ export const MostViewedFooterData = ({
 				<div className={cx(stackBelow('tablet'), secondTierStyles)}>
 					{'mostCommented' in data && (
 						<SecondTierItem
-							trail={transformTrail(data.mostCommented)}
+							trail={decideTrail(data.mostCommented)}
 							title="Most commented"
 							dataLinkName="comment | group-0 | card-@1" // To match Frontend
 							showRightBorder={true}
@@ -116,7 +105,7 @@ export const MostViewedFooterData = ({
 					)}
 					{'mostShared' in data && (
 						<SecondTierItem
-							trail={transformTrail(data.mostShared)}
+							trail={decideTrail(data.mostShared)}
 							dataLinkName="news | group-0 | card-@1" // To match Frontend
 							title="Most shared"
 						/>

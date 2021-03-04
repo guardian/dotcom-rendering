@@ -52,6 +52,16 @@ module.exports = {
         'react/prop-types': [0],
         'react/jsx-boolean-value': [2, 'always'],
         'import/prefer-default-export': 'off',
+        // TODO: remove
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/restrict-template-expressions': 'off',
+        'no-console': 'off',
+		'no-shadow': 'off',
+
         '@typescript-eslint/explicit-function-return-type': [0],
         '@typescript-eslint/no-inferrable-types': [0],
         // TODO, review these

@@ -3,15 +3,15 @@ import { css } from 'emotion';
 
 import {
 	neutral,
-	background,
 	brandAltBackground,
 	brandBackground,
-	brandLine,
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { Design } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
+import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -28,7 +28,6 @@ import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
-import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
@@ -43,189 +42,187 @@ import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
-	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import {
 	Stuck,
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Display, Design } from '@guardian/types';
-
-const gridTemplateWide = css`
-	grid-template-areas:
-		'title  border  headline     right-column'
-		'.      border  standfirst   right-column'
-		'lines  border  media        right-column'
-		'meta   border  media        right-column'
-		'meta   border  body         right-column'
-		'.      border  .            right-column';
-`;
-
-const gridTemplateWidePreFurnished = css`
-	grid-template-areas:
-		'title  border  preFurniture right-column'
-		'.      border  headline     right-column'
-		'.      border  standfirst   right-column'
-		'lines  border  media        right-column'
-		'meta   border  media        right-column'
-		'meta   border  body         right-column'
-		'.      border  .            right-column';
-`;
-
-const gridTemplateLeftCol = css`
-	grid-template-areas:
-		'preFurniture  right-column'
-		'title         right-column'
-		'headline      right-column'
-		'standfirst    right-column'
-		'media         right-column'
-		'lines         right-column'
-		'meta          right-column'
-		'body          right-column'
-		'.             right-column';
-`;
-
-const gridTemplateLeftColPreFurnished = css`
-	grid-template-areas:
-		'title         right-column'
-		'headline      right-column'
-		'standfirst    right-column'
-		'media         right-column'
-		'lines         right-column'
-		'meta          right-column'
-		'body          right-column'
-		'.             right-column';
-`;
-
-const gridTemplateDesktop = css`
-	grid-template-areas:
-		'title'
-		'headline'
-		'standfirst'
-		'media'
-		'lines'
-		'meta'
-		'body';
-`;
-const gridTemplateDesktopPreFurnished = css`
-	grid-template-areas:
-		'preFurniture'
-		'title'
-		'headline'
-		'standfirst'
-		'media'
-		'lines'
-		'meta'
-		'body';
-`;
-
-const gridTemplateTablet = css`
-	grid-template-areas:
-		'media'
-		'title'
-		'headline'
-		'standfirst'
-		'lines'
-		'meta'
-		'body';
-`;
-const gridTemplateTabletPreFurnished = css`
-	grid-template-areas:
-		'preFurniture'
-		'media'
-		'title'
-		'headline'
-		'standfirst'
-		'lines'
-		'meta'
-		'body';
-`;
-
-const layoutGrid = (hasPreFurniture?: boolean) =>
-	css`
-		/* IE Fallback */
-		display: flex;
-		flex-direction: column;
-		${until.leftCol} {
-			margin-left: 0px;
-		}
-		${from.leftCol} {
-			margin-left: 151px;
-		}
-		${from.wide} {
-			margin-left: 230px;
-		}
-
-		@supports (display: grid) {
-			display: grid;
-			width: 100%;
-			margin-left: 0;
-
-			grid-column-gap: 10px;
-
-			${from.wide} {
-				grid-template-columns:
-					219px /* Left Column (220 - 1px border) */
-					1px /* Vertical grey border */
-					1fr /* Main content */
-					300px; /* Right Column */
-
-				${hasPreFurniture
-					? gridTemplateWidePreFurnished
-					: gridTemplateWide}
-			}
-
-			${until.wide} {
-				grid-template-columns:
-					140px /* Left Column */
-					1px /* Vertical grey border */
-					1fr /* Main content */
-					300px; /* Right Column */
-
-				${hasPreFurniture
-					? gridTemplateWidePreFurnished
-					: gridTemplateWide}
-			}
-
-			${until.leftCol} {
-				grid-template-columns:
-					1fr /* Main content */
-					300px; /* Right Column */
-				${hasPreFurniture
-					? gridTemplateLeftColPreFurnished
-					: gridTemplateLeftCol}
-			}
-
-			${until.desktop} {
-				grid-template-columns: 1fr; /* Main content */
-				${hasPreFurniture
-					? gridTemplateDesktopPreFurnished
-					: gridTemplateDesktop}
-			}
-
-			${until.tablet} {
-				grid-column-gap: 0px;
-
-				grid-template-columns: 1fr; /* Main content */
-				${hasPreFurniture
-					? gridTemplateTabletPreFurnished
-					: gridTemplateTablet}
-			}
-		}
-	`;
+import { NavGroupEager } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
+import { getZIndex } from '../lib/getZIndex';
 
 const StandardGrid = ({
 	children,
-	design,
-	CAPI,
+	isMatchReport,
 }: {
 	children: React.ReactNode;
-	design: Design;
-	CAPI: CAPIType;
+	isMatchReport: boolean;
 }) => (
 	<div
-		className={layoutGrid(design === Design.MatchReport && !!CAPI.matchUrl)}
+		className={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.leftCol} {
+				margin-left: 0px;
+			}
+			${from.leftCol} {
+				margin-left: 151px;
+			}
+			${from.wide} {
+				margin-left: 230px;
+			}
+
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+
+				grid-column-gap: 10px;
+
+				${from.wide} {
+					grid-template-columns:
+						219px /* Left Column (220 - 1px border) */
+						1px /* Vertical grey border */
+						1fr /* Main content */
+						300px; /* Right Column */
+
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'title  border  matchNav     right-column'
+									'.      border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `}
+				}
+
+				${until.wide} {
+					grid-template-columns:
+						140px /* Left Column */
+						1px /* Vertical grey border */
+						1fr /* Main content */
+						300px; /* Right Column */
+
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'title  border  matchNav     right-column'
+									'.      border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `}
+				}
+
+				${until.leftCol} {
+					grid-template-columns:
+						1fr /* Main content */
+						300px; /* Right Column */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav      right-column'
+									'title         right-column'
+									'headline      right-column'
+									'standfirst    right-column'
+									'media         right-column'
+									'lines         right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title         right-column'
+									'headline      right-column'
+									'standfirst    right-column'
+									'media         right-column'
+									'lines         right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+						  `}
+				}
+
+				${until.desktop} {
+					grid-template-columns: 1fr; /* Main content */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav'
+									'title'
+									'headline'
+									'standfirst'
+									'media'
+									'lines'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'standfirst'
+									'media'
+									'lines'
+									'meta'
+									'body';
+						  `}
+				}
+
+				${until.tablet} {
+					grid-column-gap: 0px;
+
+					grid-template-columns: 1fr; /* Main content */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav'
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'lines'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'lines'
+									'meta'
+									'body';
+						  `}
+				}
+			}
+		`}
 	>
 		{children}
 	</div>
@@ -288,21 +285,20 @@ const ageWarningMargins = css`
 	}
 `;
 
+const stickyNavRootStyle = css`
+	display: inline;
+	position: relative;
+	${getZIndex('stickyNavWrapper')}
+`;
+
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	display: Display;
-	design: Design;
-	pillar: Theme;
+	format: Format;
+	palette: Palette;
 }
 
-export const StandardLayout = ({
-	CAPI,
-	NAV,
-	display,
-	design,
-	pillar,
-}: Props) => {
+export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -323,7 +319,8 @@ export const StandardLayout = ({
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showMatchStats = design === Design.MatchReport && CAPI.matchUrl;
+	const isMatchReport =
+		format.design === Design.MatchReport && !!CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -343,7 +340,7 @@ export const StandardLayout = ({
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
-							display={display}
+							display={format.display}
 						/>
 					</Section>
 				</Stuck>
@@ -360,224 +357,220 @@ export const StandardLayout = ({
 							mmaUrl={CAPI.config.mmaUrl}
 						/>
 					</Section>
-
-					<Section
-						showSideBorders={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Nav
-							pillar={getCurrentPillar(CAPI)}
-							nav={NAV}
-							display={display}
-							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
-							}
-							edition={CAPI.editionId}
-						/>
-					</Section>
-
-					{NAV.subNavSections && (
-						<Section
-							backgroundColour={background.primary}
-							padded={false}
-							sectionId="sub-nav-root"
-						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								pillar={pillar}
-							/>
-						</Section>
-					)}
-
-					<Section
-						backgroundColour={background.primary}
-						padded={false}
-						showTopBorder={false}
-					>
-						<GuardianLines count={4} pillar={pillar} />
-					</Section>
 				</SendToBack>
 			</div>
 
-			<Section data-print-layout="hide" showTopBorder={false}>
-				<StandardGrid design={design} CAPI={CAPI}>
-					<GridItem area="title">
-						<ArticleTitle
-							display={display}
-							design={design}
-							tags={CAPI.tags}
-							sectionLabel={CAPI.sectionLabel}
-							sectionUrl={CAPI.sectionUrl}
-							guardianBaseURL={CAPI.guardianBaseURL}
-							pillar={pillar}
-							badge={CAPI.badge}
+			<div>
+				<div id="sticky-nav-root" className={stickyNavRootStyle}>
+					<div data-name="placeholder">
+						<NavGroupEager
+							capiData={CAPI}
+							navData={NAV}
+							palette={palette}
+							format={format}
 						/>
-					</GridItem>
-					<GridItem area="border">
-						<Border />
-					</GridItem>
-					<GridItem area="preFurniture">
-						<div className={maxWidth}>
-							{design === Design.MatchReport && CAPI.matchUrl && (
-								<Placeholder rootId="match-nav" height={230} />
-							)}
-						</div>
-					</GridItem>
-					<GridItem area="headline">
-						<div className={maxWidth}>
-							<ArticleHeadlinePadding design={design}>
-								{age && (
-									<div className={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
-									display={display}
-									headlineString={CAPI.headline}
-									design={design}
-									pillar={pillar}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
-									/>
-								)}
-							</ArticleHeadlinePadding>
-						</div>
-						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div className={starWrapper}>
-								<StarRating
-									rating={CAPI.starRating}
-									size="large"
-								/>
-							</div>
-						) : (
-							<></>
-						)}
-					</GridItem>
-					<GridItem area="standfirst">
-						<ArticleStandfirst
-							display={display}
-							design={design}
-							pillar={pillar}
-							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
-					<GridItem area="media">
-						<div className={maxWidth}>
-							<MainMedia
-								display={display}
-								design={design}
-								elements={CAPI.mainMediaElements}
-								pillar={pillar}
-								adTargeting={adTargeting}
-								host={host}
-							/>
-						</div>
-					</GridItem>
-					<GridItem area="lines">
-						<div className={maxWidth}>
-							<div className={stretchLines}>
-								<GuardianLines
-									count={decideLineCount(design)}
-									pillar={pillar}
-									effect={decideLineEffect(design, pillar)}
-								/>
-							</div>
-						</div>
-					</GridItem>
-					<GridItem area="meta">
-						<div className={maxWidth}>
-							<ArticleMeta
-								branding={branding}
-								display={display}
-								design={design}
-								pillar={pillar}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-								author={CAPI.author}
+					</div>
+				</div>
+
+				<Section
+					backgroundColour={palette.background.article}
+					padded={false}
+					showTopBorder={false}
+				>
+					<GuardianLines count={4} pillar={format.theme} />
+				</Section>
+
+				<Section
+					data-print-layout="hide"
+					showTopBorder={false}
+					backgroundColour={palette.background.article}
+				>
+					<StandardGrid isMatchReport={isMatchReport}>
+						<GridItem area="title">
+							<ArticleTitle
+								format={format}
+								palette={palette}
 								tags={CAPI.tags}
-								primaryDateline={CAPI.blocks[0].primaryDateLine}
-								secondaryDateline={
-									CAPI.blocks[0].secondaryDateLine
-								}
+								sectionLabel={CAPI.sectionLabel}
+								sectionUrl={CAPI.sectionUrl}
+								guardianBaseURL={CAPI.guardianBaseURL}
+								badge={CAPI.badge}
 							/>
-						</div>
-					</GridItem>
-					<GridItem area="body">
-						<ArticleContainer>
-							<main className={articleWidth}>
-								<ArticleBody
-									pillar={pillar}
-									blocks={CAPI.blocks}
-									display={display}
-									design={design}
+						</GridItem>
+						<GridItem area="border">
+							<Border />
+						</GridItem>
+						<GridItem area="matchNav">
+							<div className={maxWidth}>
+								{format.design === Design.MatchReport &&
+									CAPI.matchUrl && (
+										<Placeholder
+											rootId="match-nav"
+											height={230}
+										/>
+									)}
+							</div>
+						</GridItem>
+						<GridItem area="headline">
+							<div className={maxWidth}>
+								<ArticleHeadlinePadding design={format.design}>
+									{age && (
+										<div className={ageWarningMargins}>
+											<AgeWarning age={age} />
+										</div>
+									)}
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										palette={palette}
+									/>
+									{age && (
+										<AgeWarning
+											age={age}
+											isScreenReader={true}
+										/>
+									)}
+								</ArticleHeadlinePadding>
+							</div>
+							{CAPI.starRating || CAPI.starRating === 0 ? (
+								<div className={starWrapper}>
+									<StarRating
+										rating={CAPI.starRating}
+										size="large"
+									/>
+								</div>
+							) : (
+								<></>
+							)}
+						</GridItem>
+						<GridItem area="standfirst">
+							<ArticleStandfirst
+								display={format.display}
+								design={format.design}
+								pillar={format.theme}
+								standfirst={CAPI.standfirst}
+							/>
+						</GridItem>
+						<GridItem area="media">
+							<div className={maxWidth}>
+								<MainMedia
+									format={format}
+									palette={palette}
+									elements={CAPI.mainMediaElements}
 									adTargeting={adTargeting}
 									host={host}
+									abTests={CAPI.config.abTests}
 								/>
-								{showMatchStats && <div id="match-stats" />}
-
-								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									data-print-layout="hide"
-									count={4}
-									pillar={pillar}
-								/>
-								<SubMeta
-									pillar={pillar}
-									subMetaKeywordLinks={
-										CAPI.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										CAPI.subMetaSectionLinks
-									}
+							</div>
+						</GridItem>
+						<GridItem area="lines">
+							<div className={maxWidth}>
+								<div className={stretchLines}>
+									<GuardianLines
+										count={decideLineCount(format.design)}
+										pillar={format.theme}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								</div>
+							</div>
+						</GridItem>
+						<GridItem area="meta">
+							<div className={maxWidth}>
+								<ArticleMeta
+									branding={branding}
+									format={format}
+									palette={palette}
 									pageId={CAPI.pageId}
-									webUrl={CAPI.webURL}
 									webTitle={CAPI.webTitle}
-									showBottomSocialButtons={
-										CAPI.showBottomSocialButtons
+									author={CAPI.author}
+									tags={CAPI.tags}
+									primaryDateline={
+										CAPI.webPublicationDateDisplay
 									}
-									badge={CAPI.badge}
+									secondaryDateline={
+										CAPI.webPublicationSecondaryDateDisplay
+									}
 								/>
-							</main>
-						</ArticleContainer>
-					</GridItem>
-					<GridItem area="right-column">
-						<div
-							className={css`
-								padding-top: 6px;
-								height: 100%;
-								${from.desktop} {
-									/* above 980 */
-									margin-left: 20px;
-									margin-right: -20px;
-								}
-								${from.leftCol} {
-									/* above 1140 */
-									margin-left: 0px;
-									margin-right: 0px;
-								}
-							`}
-						>
-							<RightColumn>
-								<AdSlot position="right" display={display} />
-								{!isPaidContent ? (
-									<MostViewedRightIsland />
-								) : (
-									<></>
-								)}
-							</RightColumn>
-						</div>
-					</GridItem>
-				</StandardGrid>
-			</Section>
+							</div>
+						</GridItem>
+						<GridItem area="body">
+							<ArticleContainer>
+								<main className={articleWidth}>
+									<ArticleBody
+										format={format}
+										palette={palette}
+										blocks={CAPI.blocks}
+										adTargeting={adTargeting}
+										host={host}
+										abTests={CAPI.config.abTests}
+									/>
+									{isMatchReport && <div id="match-stats" />}
+
+									{showBodyEndSlot && (
+										<div id="slot-body-end" />
+									)}
+									<GuardianLines
+										data-print-layout="hide"
+										count={4}
+										pillar={format.theme}
+									/>
+									<SubMeta
+										palette={palette}
+										subMetaKeywordLinks={
+											CAPI.subMetaKeywordLinks
+										}
+										subMetaSectionLinks={
+											CAPI.subMetaSectionLinks
+										}
+										pageId={CAPI.pageId}
+										webUrl={CAPI.webURL}
+										webTitle={CAPI.webTitle}
+										showBottomSocialButtons={
+											CAPI.showBottomSocialButtons
+										}
+										badge={CAPI.badge}
+									/>
+								</main>
+							</ArticleContainer>
+						</GridItem>
+						<GridItem area="right-column">
+							<div
+								className={css`
+									padding-top: 6px;
+									height: 100%;
+									${from.desktop} {
+										/* above 980 */
+										margin-left: 20px;
+										margin-right: -20px;
+									}
+									${from.leftCol} {
+										/* above 1140 */
+										margin-left: 0px;
+										margin-right: 0px;
+									}
+								`}
+							>
+								<RightColumn>
+									<AdSlot
+										position="right"
+										display={format.display}
+									/>
+									{!isPaidContent ? (
+										<MostViewedRightIsland />
+									) : (
+										<></>
+									)}
+								</RightColumn>
+							</div>
+						</GridItem>
+					</StandardGrid>
+				</Section>
+			</div>
 
 			<Section
 				data-print-layout="hide"
@@ -589,7 +582,7 @@ export const StandardLayout = ({
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
-					display={display}
+					display={format.display}
 				/>
 			</Section>
 
@@ -613,7 +606,8 @@ export const StandardLayout = ({
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								isCommentable={CAPI.isCommentable}
-								pillar={pillar}
+								pillar={format.theme}
+								palette={palette}
 								discussionD2Uid={CAPI.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPI.config.discussionApiClientHeader
@@ -622,7 +616,7 @@ export const StandardLayout = ({
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
 								beingHydrated={false}
-								display={display}
+								display={format.display}
 							/>
 						</Section>
 					)}
@@ -653,7 +647,7 @@ export const StandardLayout = ({
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
-				<AdSlot position="merchandising" display={display} />
+				<AdSlot position="merchandising" display={format.display} />
 			</Section>
 
 			{NAV.subNavSections && (
@@ -665,9 +659,9 @@ export const StandardLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						pillar={pillar}
+						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={pillar} />
+					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
 			)}
 
@@ -680,7 +674,7 @@ export const StandardLayout = ({
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={pillar}
+					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
 			</Section>

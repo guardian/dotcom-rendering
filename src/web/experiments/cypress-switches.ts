@@ -13,7 +13,7 @@ const cypressSwitches = {
 	abAbTestTest: true, // Test switch, used for Cypress integration test
 	abSignInGateMainControl: true,
 	abSignInGateMainVariant: true,
-	abSignInGateDesignOpt: true,
+	abSignInGateCopyOpt: true,
 };
 
 // Function to retrieve the switches if running in Cypress

@@ -1,30 +1,20 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
-import { pillarMap, pillarPalette } from '@root/src/lib/pillars';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
 type Props = {
-	pillar: Theme;
-	display: Display;
+	format: Format;
+	palette: Palette;
 	blocks: Block[];
-	design: Design;
 	adTargeting: AdTargeting;
 	host?: string;
+	abTests: CAPIType['config']['abTests'];
 };
-
-const pillarColours = pillarMap(
-	(pillar) =>
-		css`
-			color: ${pillar === Pillar.Opinion || pillar === Pillar.Culture
-				? pillarPalette[pillar].dark
-				: pillarPalette[pillar].main};
-		`,
-);
 
 const bodyStyle = (display: Display) => css`
 	${between.tablet.and.desktop} {
@@ -47,37 +37,36 @@ const bodyStyle = (display: Display) => css`
 	}
 `;
 
-const linkColour = pillarMap(
-	(pillar) => css`
-		a {
-			text-decoration: none;
-			border-bottom: 1px solid ${border.secondary};
-			${pillarColours[pillar]};
+const linkColour = (palette: Palette) => css`
+	a {
+		text-decoration: none;
+		border-bottom: 1px solid ${palette.border.articleLink};
+		color: ${palette.text.articleLink};
 
-			:hover {
-				border-bottom: 1px solid ${pillarPalette[pillar].main};
-			}
+		:hover {
+			color: ${palette.text.articleLinkHover};
+			border-bottom: 1px solid ${palette.border.articleLinkHover};
 		}
-	`,
-);
+	}
+`;
 
 export const ArticleBody = ({
-	pillar,
-	display,
+	format,
+	palette,
 	blocks,
-	design,
 	adTargeting,
 	host,
+	abTests,
 }: Props) => {
 	return (
-		<div className={cx(bodyStyle(display), linkColour[pillar])}>
+		<div className={cx(bodyStyle(format.display), linkColour(palette))}>
 			<ArticleRenderer
-				display={display}
+				format={format}
+				palette={palette}
 				elements={blocks[0] ? blocks[0].elements : []}
-				pillar={pillar}
-				design={design}
 				adTargeting={adTargeting}
 				host={host}
+				abTests={abTests}
 			/>
 		</div>
 	);

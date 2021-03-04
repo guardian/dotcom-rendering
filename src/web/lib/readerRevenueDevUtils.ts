@@ -128,22 +128,26 @@ const changeGeolocation = (
 	asExistingSupporter: boolean = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
-	getCountryCode().then((current) => {
-		/* eslint-disable no-alert */
-		const geo = window.prompt(
-			`Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`,
-		);
-		if (geo === 'UK') {
-			alert(`'UK' is not a valid geolocation - please use 'GB' instead!`);
-		} else if (geo) {
-			setCountryCode(geo);
-			clearCommonReaderRevenueStateAndReload(
-				asExistingSupporter,
-				shouldHideReaderRevenue,
+	getCountryCode()
+		.then((current) => {
+			/* eslint-disable no-alert */
+			const geo = window.prompt(
+				`Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`,
 			);
-		}
-		/* eslint-enable no-alert */
-	});
+			if (geo === 'UK') {
+				alert(
+					`'UK' is not a valid geolocation - please use 'GB' instead!`,
+				);
+			} else if (geo) {
+				setCountryCode(geo);
+				clearCommonReaderRevenueStateAndReload(
+					asExistingSupporter,
+					shouldHideReaderRevenue,
+				);
+			}
+			/* eslint-enable no-alert */
+		})
+		.catch((e) => console.error(`changeGeolocation - error: ${e}`));
 };
 
 type ReaderRevenueDevUtil = (

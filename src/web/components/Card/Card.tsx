@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -11,7 +11,6 @@ import { Flex } from '@frontend/web/components/Flex';
 import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
-import { pillarPalette } from '@frontend/lib/pillars';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 
@@ -25,6 +24,40 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
+
+type Props = {
+	linkTo: string;
+	format: Format;
+	palette: Palette;
+	headlineText: string;
+	headlineSize?: SmallHeadlineSize;
+	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	byline?: string;
+	isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
+	showByline?: boolean;
+	webPublicationDate?: string;
+	imageUrl?: string;
+	imagePosition?: ImagePositionType;
+	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+	isFullCardImage?: boolean; // For use in Carousel until we decide a `Display.Immersive` convention
+	standfirst?: string;
+	avatar?: AvatarType;
+	showClock?: boolean;
+	mediaType?: MediaType;
+	mediaDuration?: number;
+	// Kicker
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	commentCount?: number;
+	starRating?: number;
+	alwaysVertical?: boolean;
+	minWidthInPixels?: number;
+	// Ophan tracking
+	dataLinkName?: string;
+};
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
 type CoveragesType = {
 	image: {
@@ -81,10 +114,16 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	</>
 );
 
+const fullCardImageAgeStyles = css`
+	min-width: 25%;
+	align-self: flex-end;
+	text-align: end;
+`;
+
 export const Card = ({
 	linkTo,
-	pillar,
-	design,
+	format,
+	palette,
 	headlineText,
 	headlineSize,
 	showQuotes,
@@ -94,6 +133,7 @@ export const Card = ({
 	imageUrl,
 	imagePosition,
 	imageSize,
+	isFullCardImage,
 	standfirst,
 	avatar,
 	showClock,
@@ -104,7 +144,10 @@ export const Card = ({
 	showSlash,
 	commentCount,
 	starRating,
-}: CardType) => {
+	alwaysVertical,
+	minWidthInPixels,
+	dataLinkName,
+}: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
 	let contentCoverage: CardPercentageType | undefined;
@@ -119,18 +162,26 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	const pillarToUse =
-		design === Design.Comment && pillar === Pillar.News
-			? Pillar.Opinion
-			: pillar;
-
 	return (
-		<CardLink linkTo={linkTo} design={design} pillar={pillarToUse}>
-			<TopBar topBarColour={pillarPalette[pillarToUse].main}>
-				<CardLayout imagePosition={imagePosition}>
+		<CardLink
+			linkTo={linkTo}
+			format={format}
+			palette={palette}
+			dataLinkName={dataLinkName}
+		>
+			<TopBar palette={palette} isFullCardImage={isFullCardImage}>
+				<CardLayout
+					imagePosition={imagePosition}
+					alwaysVertical={alwaysVertical}
+					minWidthInPixels={minWidthInPixels}
+				>
 					<>
 						{imageUrl && (
-							<ImageWrapper percentage={imageCoverage}>
+							<ImageWrapper
+								percentage={imageCoverage}
+								alwaysVertical={alwaysVertical}
+								isFullCardImage={isFullCardImage}
+							>
 								<img
 									src={imageUrl}
 									alt=""
@@ -145,29 +196,36 @@ export const Card = ({
 								</>
 							</ImageWrapper>
 						)}
-						<ContentWrapper percentage={contentCoverage}>
+						<ContentWrapper
+							percentage={contentCoverage}
+							isFullCardImage={isFullCardImage}
+						>
 							<Flex>
-								<HeadlineWrapper>
+								<HeadlineWrapper
+									isFullCardImage={isFullCardImage}
+								>
 									<CardHeadline
 										headlineText={headlineText}
-										design={design}
-										pillar={pillarToUse}
+										format={format}
+										palette={palette}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
-											design === Design.Live
+											format.design === Design.Live
 												? 'Live'
 												: kickerText
 										}
 										showPulsingDot={
-											design === Design.Live ||
+											format.design === Design.Live ||
 											showPulsingDot
 										}
 										showSlash={
-											design === Design.Live || showSlash
+											format.design === Design.Live ||
+											showSlash
 										}
 										byline={byline}
 										showByline={showByline}
+										isFullCardImage={isFullCardImage}
 									/>
 								</HeadlineWrapper>
 								<>
@@ -177,16 +235,20 @@ export const Card = ({
 												<Avatar
 													imageSrc={avatar.src}
 													imageAlt={avatar.alt}
-													pillar={pillarToUse}
+													palette={palette}
 												/>
 											</AvatarContainer>
 										</Hide>
 									)}
 								</>
 							</Flex>
-							<div>
+							<div
+								className={cx(
+									isFullCardImage && fullCardImageAgeStyles,
+								)}
+							>
 								{standfirst && (
-									<StandfirstWrapper>
+									<StandfirstWrapper palette={palette}>
 										{standfirst}
 									</StandfirstWrapper>
 								)}
@@ -196,18 +258,18 @@ export const Card = ({
 											<Avatar
 												imageSrc={avatar.src}
 												imageAlt={avatar.alt}
-												pillar={pillarToUse}
+												palette={palette}
 											/>
 										</AvatarContainer>
 									</Hide>
 								)}
 								<CardFooter
-									design={design}
+									format={format}
 									age={
 										webPublicationDate ? (
 											<CardAge
-												design={design}
-												pillar={pillarToUse}
+												format={format}
+												palette={palette}
 												webPublicationDate={
 													webPublicationDate
 												}
@@ -215,10 +277,12 @@ export const Card = ({
 											/>
 										) : undefined
 									}
+									isFullCardImage={isFullCardImage}
 									mediaMeta={
-										design === Design.Media && mediaType ? (
+										format.design === Design.Media &&
+										mediaType ? (
 											<MediaMeta
-												pillar={pillarToUse}
+												palette={palette}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -229,8 +293,7 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												design={design}
-												pillar={pillarToUse}
+												palette={palette}
 												long={longCount}
 												short={shortCount}
 											/>

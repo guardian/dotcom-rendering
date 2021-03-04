@@ -126,6 +126,9 @@
                         "$ref": "#/definitions/TweetBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/VineBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/VideoBlockElement"
                     },
                     {
@@ -139,6 +142,9 @@
                     },
                     {
                         "$ref": "#/definitions/YoutubeBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/WitnessTypeBlockElement"
                     }
                 ]
             }
@@ -169,6 +175,9 @@
             "type": "string"
         },
         "webPublicationDateDisplay": {
+            "type": "string"
+        },
+        "webPublicationSecondaryDateDisplay": {
             "type": "string"
         },
         "editionLongForm": {
@@ -241,8 +250,7 @@
             "type": "array",
             "items": {
                 "type": "object",
-                "properties": {},
-                "additionalProperties": true
+                "additionalProperties": {}
             }
         },
         "config": {
@@ -290,7 +298,9 @@
         "badge": {
             "$ref": "#/definitions/BadgeType"
         },
-        "nav": {},
+        "nav": {
+            "$ref": "#/definitions/CAPINavType"
+        },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
         },
@@ -337,6 +347,9 @@
         },
         "matchUrl": {
             "type": "string"
+        },
+        "isSpecialReport": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -357,6 +370,7 @@
         "isAdFreeUser",
         "isCommentable",
         "isImmersive",
+        "isSpecialReport",
         "keyEvents",
         "linkedData",
         "main",
@@ -382,6 +396,7 @@
         "version",
         "webPublicationDate",
         "webPublicationDateDisplay",
+        "webPublicationSecondaryDateDisplay",
         "webTitle",
         "webURL"
     ],
@@ -394,6 +409,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.AudioAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -413,9 +431,6 @@
                 "coverUrl": {
                     "type": "string"
                 },
-                "audioIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -424,6 +439,7 @@
                 "_type",
                 "coverUrl",
                 "duration",
+                "elementId",
                 "id",
                 "kicker",
                 "trackUrl"
@@ -448,10 +464,14 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.AudioBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "elementId"
             ]
         },
         "BlockquoteBlockElement": {
@@ -463,6 +483,9 @@
                         "model.dotcomrendering.pageElements.BlockquoteBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -472,6 +495,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -483,6 +507,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.CaptionBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "captionText": {
                     "type": "string"
@@ -504,7 +531,8 @@
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "elementId"
             ]
         },
         "CalloutBlockElement": {
@@ -515,6 +543,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.CalloutBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -565,9 +596,6 @@
                         ]
                     }
                 },
-                "calloutIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -578,6 +606,7 @@
                 "calloutsUrl",
                 "description",
                 "displayOnSensitive",
+                "elementId",
                 "formFields",
                 "formId",
                 "id",
@@ -891,8 +920,8 @@
                         "model.dotcomrendering.pageElements.ChartAtomBlockElement"
                     ]
                 },
-                "chartIndex": {
-                    "type": "number"
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -918,6 +947,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
                 "id",
                 "url"
@@ -932,15 +962,15 @@
                         "model.dotcomrendering.pageElements.QuizAtomBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "quizType": {
                     "enum": [
                         "knowledge",
                         "personality"
                     ],
                     "type": "string"
-                },
-                "quizIndex": {
-                    "type": "number"
                 },
                 "id": {
                     "type": "string"
@@ -1020,14 +1050,42 @@
                             "title"
                         ]
                     }
+                },
+                "resultGroups": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "shareText": {
+                                "type": "string"
+                            },
+                            "minScore": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "minScore",
+                            "shareText",
+                            "title"
+                        ]
+                    }
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "id",
                 "questions",
                 "quizType",
-                "resultBuckets"
+                "resultBuckets",
+                "resultGroups"
             ]
         },
         "CodeBlockElement": {
@@ -1038,6 +1096,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.CodeBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "code": {
                     "type": "string"
@@ -1052,6 +1113,7 @@
             "required": [
                 "_type",
                 "code",
+                "elementId",
                 "isMandatory"
             ]
         },
@@ -1074,6 +1136,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.CommentBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "body": {
                     "type": "string"
@@ -1102,6 +1167,7 @@
                 "avatarURL",
                 "body",
                 "dateTime",
+                "elementId",
                 "permalink",
                 "profileName",
                 "profileURL"
@@ -1116,13 +1182,17 @@
                         "model.dotcomrendering.pageElements.ContentAtomBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "atomId": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "atomId"
+                "atomId",
+                "elementId"
             ]
         },
         "DisclaimerBlockElement": {
@@ -1134,6 +1204,9 @@
                         "model.dotcomrendering.pageElements.DisclaimerBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -1143,6 +1216,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -1169,6 +1243,9 @@
                         "model.dotcomrendering.pageElements.DocumentBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "embedUrl": {
                     "type": "string"
                 },
@@ -1183,12 +1260,23 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "embedUrl",
                 "height",
+                "isThirdPartyTracking",
                 "width"
             ]
         },
@@ -1201,6 +1289,9 @@
                         "model.dotcomrendering.pageElements.EmbedBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "safe": {
                     "type": "boolean"
                 },
@@ -1210,17 +1301,34 @@
                 "alt": {
                     "type": "string"
                 },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
                 "html": {
                     "type": "string"
                 },
                 "isMandatory": {
                     "type": "boolean"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
-                "isMandatory"
+                "isMandatory",
+                "isThirdPartyTracking"
             ]
         },
         "ExplainerAtomBlockElement": {
@@ -1231,6 +1339,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.ExplainerAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1248,6 +1359,7 @@
             "required": [
                 "_type",
                 "body",
+                "elementId",
                 "id",
                 "title"
             ]
@@ -1260,6 +1372,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.GenericAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "url": {
                     "type": "string"
@@ -1282,6 +1397,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "url"
             ]
         },
@@ -1293,6 +1409,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.GuideAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1312,9 +1431,6 @@
                 "credit": {
                     "type": "string"
                 },
-                "guideIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -1322,6 +1438,7 @@
             "required": [
                 "_type",
                 "credit",
+                "elementId",
                 "html",
                 "id",
                 "label",
@@ -1336,6 +1453,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.GuVideoBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "assets": {
                     "type": "array",
@@ -1354,12 +1474,33 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "imageMedia": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
                 "assets",
                 "caption",
+                "elementId",
                 "html",
                 "source"
             ]
@@ -1372,9 +1513,77 @@
                 },
                 "mimeType": {
                     "type": "string"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "source": {
+                            "type": "string"
+                        },
+                        "embeddable": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
             "required": [
+                "mimeType",
+                "url"
+            ]
+        },
+        "Image": {
+            "type": "object",
+            "properties": {
+                "index": {
+                    "type": "number"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "isMaster": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
+                },
+                "mediaType": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fields",
+                "index",
+                "mediaType",
                 "mimeType",
                 "url"
             ]
@@ -1388,12 +1597,16 @@
                         "model.dotcomrendering.pageElements.HighlightBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -1405,6 +1618,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.ImageBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "media": {
                     "type": "object",
@@ -1456,51 +1672,10 @@
             "required": [
                 "_type",
                 "data",
+                "elementId",
                 "imageSources",
                 "media",
                 "role"
-            ]
-        },
-        "Image": {
-            "type": "object",
-            "properties": {
-                "index": {
-                    "type": "number"
-                },
-                "fields": {
-                    "type": "object",
-                    "properties": {
-                        "height": {
-                            "type": "string"
-                        },
-                        "width": {
-                            "type": "string"
-                        },
-                        "isMaster": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "height",
-                        "width"
-                    ]
-                },
-                "mediaType": {
-                    "type": "string"
-                },
-                "mimeType": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "fields",
-                "index",
-                "mediaType",
-                "mimeType",
-                "url"
             ]
         },
         "ImageSource": {
@@ -1556,6 +1731,9 @@
                         "model.dotcomrendering.pageElements.InstagramBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -1567,12 +1745,23 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "hasCaption",
                 "html",
+                "isThirdPartyTracking",
                 "url"
             ]
         },
@@ -1584,6 +1773,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.InteractiveAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1609,6 +1801,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "id",
                 "js",
                 "url"
@@ -1623,28 +1816,28 @@
                         "model.dotcomrendering.pageElements.InteractiveBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
-                "placeholderUrl": {
+                "isMandatory": {
+                    "type": "boolean"
+                },
+                "scriptUrl": {
                     "type": "string"
                 },
-                "id": {
+                "alt": {
                     "type": "string"
                 },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
                 "_type",
-                "url"
+                "elementId"
             ]
         },
         "MapBlockElement": {
@@ -1656,13 +1849,13 @@
                         "model.dotcomrendering.pageElements.MapBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "embedUrl": {
                     "type": "string"
                 },
                 "originalUrl": {
-                    "type": "string"
-                },
-                "source": {
                     "type": "string"
                 },
                 "title": {
@@ -1679,14 +1872,24 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "embedUrl",
                 "height",
+                "isThirdPartyTracking",
                 "originalUrl",
-                "source",
                 "title",
                 "width"
             ]
@@ -1699,6 +1902,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.MediaAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1737,6 +1943,7 @@
             "required": [
                 "_type",
                 "assets",
+                "elementId",
                 "id"
             ]
         },
@@ -1748,6 +1955,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.MultiImageBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "images": {
                     "type": "array",
@@ -1764,6 +1974,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "images"
             ]
         },
@@ -1775,6 +1986,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.ProfileAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1794,9 +2008,6 @@
                 "credit": {
                     "type": "string"
                 },
-                "profileIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -1804,6 +2015,7 @@
             "required": [
                 "_type",
                 "credit",
+                "elementId",
                 "html",
                 "id",
                 "label",
@@ -1819,6 +2031,9 @@
                         "model.dotcomrendering.pageElements.PullquoteBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -1827,11 +2042,14 @@
                 },
                 "attribution": {
                     "type": "string"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
                 }
             },
             "required": [
                 "_type",
-                "html",
+                "elementId",
                 "role"
             ]
         },
@@ -1843,6 +2061,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.QABlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1859,9 +2080,6 @@
                 "credit": {
                     "type": "string"
                 },
-                "qandaIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -1869,6 +2087,7 @@
             "required": [
                 "_type",
                 "credit",
+                "elementId",
                 "html",
                 "id",
                 "title"
@@ -1883,6 +2102,9 @@
                         "model.dotcomrendering.pageElements.RichLinkBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -1894,13 +2116,11 @@
                 },
                 "role": {
                     "$ref": "#/definitions/Weighting"
-                },
-                "richLinkIndex": {
-                    "type": "number"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "prefix",
                 "text",
                 "url"
@@ -1914,6 +2134,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.SoundcloudBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "html": {
                     "type": "string"
@@ -1929,13 +2152,24 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
                 "id",
                 "isMandatory",
+                "isThirdPartyTracking",
                 "isTrack"
             ]
         },
@@ -1947,6 +2181,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.SpotifyBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "embedUrl": {
                     "type": "string"
@@ -1965,10 +2202,21 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "elementId",
+                "isThirdPartyTracking"
             ]
         },
         "SubheadingBlockElement": {
@@ -1980,12 +2228,16 @@
                         "model.dotcomrendering.pageElements.SubheadingBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -1997,6 +2249,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.TableBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "isMandatory": {
                     "type": "boolean"
@@ -2010,6 +2265,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
                 "isMandatory"
             ]
@@ -2023,6 +2279,9 @@
                         "model.dotcomrendering.pageElements.TextBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "dropCap": {
                     "type": "boolean"
                 },
@@ -2032,6 +2291,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -2043,6 +2303,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.TimelineBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -2059,15 +2322,13 @@
                         "$ref": "#/definitions/TimelineEvent"
                     }
                 },
-                "timelineIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "events",
                 "id",
                 "title"
@@ -2103,6 +2364,9 @@
                         "model.dotcomrendering.pageElements.TweetBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -2117,14 +2381,73 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "hasMedia",
                 "html",
                 "id",
+                "isThirdPartyTracking",
                 "url"
+            ]
+        },
+        "VineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.VineBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "height",
+                "isThirdPartyTracking",
+                "originalUrl",
+                "title",
+                "url",
+                "width"
             ]
         },
         "VideoBlockElement": {
@@ -2136,12 +2459,26 @@
                         "model.dotcomrendering.pageElements.VideoBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "elementId",
+                "isThirdPartyTracking"
             ]
         },
         "VideoFacebookBlockElement": {
@@ -2152,6 +2489,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoFacebookBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "url": {
                     "type": "string"
@@ -2170,11 +2510,22 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "height",
+                "isThirdPartyTracking",
                 "url",
                 "width"
             ]
@@ -2187,6 +2538,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoVimeoBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "embedUrl": {
                     "type": "string"
@@ -2209,13 +2563,27 @@
                 "title": {
                     "type": "string"
                 },
+                "originalUrl": {
+                    "type": "string"
+                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "height",
+                "isThirdPartyTracking",
                 "url",
                 "width"
             ]
@@ -2228,6 +2596,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoYoutubeBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "embedUrl": {
                     "type": "string"
@@ -2255,11 +2626,22 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "height",
+                "isThirdPartyTracking",
                 "originalUrl",
                 "url",
                 "width"
@@ -2273,6 +2655,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.YoutubeBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "assetId": {
                     "type": "string"
@@ -2316,9 +2701,6 @@
                 "altText": {
                     "type": "string"
                 },
-                "youtubeIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -2326,10 +2708,356 @@
             "required": [
                 "_type",
                 "assetId",
-                "channelId",
+                "elementId",
                 "expired",
                 "id",
                 "mediaTitle"
+            ]
+        },
+        "WitnessTypeBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WitnessAssetType"
+                    }
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "witnessTypeData": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataImage"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataVideo"
+                        },
+                        {
+                            "$ref": "#/definitions/WitnessTypeDataText"
+                        }
+                    ]
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "assets",
+                "elementId",
+                "isThirdPartyTracking",
+                "witnessTypeData"
+            ]
+        },
+        "WitnessAssetType": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Image"
+                    ]
+                },
+                "mimeType": {
+                    "type": "string",
+                    "enum": [
+                        "image/jpeg"
+                    ]
+                },
+                "file": {
+                    "type": "string"
+                },
+                "typeData": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                }
+            },
+            "required": [
+                "file",
+                "mimeType",
+                "type",
+                "typeData"
+            ]
+        },
+        "WitnessTypeDataImage": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataImage"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "image"
+                    ]
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "mediaId": {
+                    "type": "string"
+                },
+                "photographer": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "alt",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "caption",
+                "dateCreated",
+                "mediaId",
+                "originalUrl",
+                "photographer",
+                "source",
+                "title",
+                "type",
+                "url",
+                "witnessEmbedType"
+            ]
+        },
+        "WitnessTypeDataVideo": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataVideo"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "video"
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "youtubeHtml": {
+                    "type": "string"
+                },
+                "youtubeDescription": {
+                    "type": "string"
+                },
+                "youtubeUrl": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "youtubeSource": {
+                    "type": "string"
+                },
+                "youtubeAuthorName": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "youtubeTitle": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "dateCreated",
+                "description",
+                "height",
+                "originalUrl",
+                "source",
+                "title",
+                "type",
+                "url",
+                "width",
+                "witnessEmbedType",
+                "youtubeAuthorName",
+                "youtubeDescription",
+                "youtubeHtml",
+                "youtubeSource",
+                "youtubeTitle",
+                "youtubeUrl"
+            ]
+        },
+        "WitnessTypeDataText": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.WitnessTypeDataText"
+                    ]
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "text"
+                    ]
+                },
+                "description": {
+                    "type": "string"
+                },
+                "authorUsername": {
+                    "type": "string"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dateCreated": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                },
+                "authorName": {
+                    "type": "string"
+                },
+                "witnessEmbedType": {
+                    "type": "string"
+                },
+                "authorWitnessProfileUrl": {
+                    "type": "string"
+                },
+                "authorGuardianProfileUrl": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "apiUrl",
+                "authorGuardianProfileUrl",
+                "authorName",
+                "authorUsername",
+                "authorWitnessProfileUrl",
+                "dateCreated",
+                "description",
+                "originalUrl",
+                "source",
+                "title",
+                "type",
+                "url",
+                "witnessEmbedType"
             ]
         },
         "Block": {
@@ -2454,6 +3182,9 @@
                                 "$ref": "#/definitions/TweetBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/VineBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/VideoBlockElement"
                             },
                             {
@@ -2467,6 +3198,9 @@
                             },
                             {
                                 "$ref": "#/definitions/YoutubeBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/WitnessTypeBlockElement"
                             }
                         ]
                     }
@@ -2496,6 +3230,24 @@
                     "type": "string"
                 },
                 "secondaryDateLine": {
+                    "type": "string"
+                },
+                "createdOn": {
+                    "type": "number"
+                },
+                "createdOnDisplay": {
+                    "type": "string"
+                },
+                "lastUpdated": {
+                    "type": "number"
+                },
+                "lastUpdatedDisplay": {
+                    "type": "string"
+                },
+                "firstPublished": {
+                    "type": "number"
+                },
+                "firstPublishedDisplay": {
                     "type": "string"
                 }
             },
@@ -2666,8 +3418,7 @@
                     "anyOf": [
                         {
                             "type": "object",
-                            "properties": {},
-                            "additionalProperties": true
+                            "additionalProperties": {}
                         },
                         {
                             "type": "string"
@@ -2741,65 +3492,481 @@
                 "brazeApiKey": {
                     "type": "string"
                 },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "isLive": {
+                    "type": "boolean"
+                },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "hasYouTubeAtom": {
+                    "type": "boolean"
+                },
+                "inBodyInternalLinkCount": {
+                    "type": "number"
+                },
+                "atomTypes": {
+                    "type": "object",
+                    "properties": {
+                        "guide": {
+                            "type": "boolean"
+                        },
+                        "audio": {
+                            "type": "boolean"
+                        },
+                        "explainer": {
+                            "type": "boolean"
+                        },
+                        "profile": {
+                            "type": "boolean"
+                        },
+                        "chart": {
+                            "type": "boolean"
+                        },
+                        "timeline": {
+                            "type": "boolean"
+                        },
+                        "qanda": {
+                            "type": "boolean"
+                        },
+                        "commonsdivision": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "audio",
+                        "chart",
+                        "commonsdivision",
+                        "explainer",
+                        "guide",
+                        "profile",
+                        "qanda",
+                        "timeline"
+                    ]
+                },
+                "blogIds": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {}
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "hasMultipleVideosInPage": {
+                    "type": "boolean"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "pbIndexSites": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "bp": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "bp",
+                            "id"
+                        ]
+                    }
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "contributorBio": {
+                    "type": "string"
+                },
+                "pageCode": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "hasShowcaseMainElement": {
+                    "type": "boolean"
+                },
+                "isColumn": {
+                    "type": "boolean"
+                },
+                "sectionName": {
+                    "type": "string"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "commentable": {
+                    "type": "boolean"
+                },
+                "commissioningDesks": {
+                    "type": "string"
+                },
+                "inBodyExternalLinkCount": {
+                    "type": "number"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                },
+                "richLink": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "trackingNames": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "string"
+                },
+                "blogs": {
+                    "type": "string"
+                },
+                "hasInlineMerchandise": {
+                    "type": "boolean"
+                },
+                "seriesId": {
+                    "type": "string"
+                },
+                "seriesTags": {
+                    "type": "string"
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "ampIframeUrl": {
+                    "type": "string"
+                },
+                "userAttributesApiUrl": {
+                    "type": "string"
+                },
+                "publication": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "isFront": {
+                    "type": "boolean"
+                },
+                "wordCount": {
+                    "type": "number"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "nonKeywordTagIds": {
+                    "type": "string"
+                },
                 "pageId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "lightboxImages": {},
+                "isImmersive": {
+                    "type": "boolean"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "isContent": {
+                    "type": "boolean"
+                },
+                "contentId": {
+                    "type": "string"
+                },
+                "discussionFrontendUrl": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "atoms": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "minItems": 1,
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                "disableStickyTopBanner": {
+                    "type": "boolean"
+                },
+                "productionOffice": {
+                    "type": "string"
+                },
+                "dfpNonRefreshableLineItemIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "tones": {
+                    "type": "string"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "authorIds": {
                     "type": "string"
                 },
                 "webPublicationDate": {
                     "type": "number"
                 },
-                "headline": {
+                "omnitureAmpAccount": {
                     "type": "string"
                 },
-                "author": {
+                "isHosted": {
+                    "type": "boolean"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "webTitle": {
                     "type": "string"
                 },
-                "keywords": {
+                "weatherapiurl": {
                     "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "isSplash": {
+                    "type": "boolean"
+                },
+                "isNumberedList": {
+                    "type": "boolean"
                 },
                 "series": {
                     "type": "string"
                 },
                 "toneIds": {
                     "type": "string"
-                },
-                "contentType": {
-                    "type": "string"
-                },
-                "ampIframeUrl": {
-                    "type": "string"
                 }
             },
             "required": [
+                "a9PublisherId",
                 "abTests",
                 "adUnit",
                 "ajaxUrl",
+                "allowUserGeneratedContent",
                 "ampIframeUrl",
+                "assetsPath",
+                "author",
+                "authorIds",
+                "avatarApiUrl",
+                "avatarImagesUrl",
+                "beaconUrl",
+                "blogIds",
+                "blogs",
+                "buildNumber",
+                "byline",
+                "calloutsUrl",
+                "campaigns",
+                "cardStyle",
+                "commentable",
                 "commercialBundleUrl",
+                "commissioningDesks",
+                "contentId",
                 "contentType",
+                "contributorBio",
                 "dcrSentryDsn",
                 "dfpAccountId",
+                "dfpAdUnitRoot",
+                "dfpHost",
+                "dfpNonRefreshableLineItemIds",
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",
+                "discussionFrontendUrl",
                 "edition",
+                "externalEmbedHost",
+                "facebookIaAdUnitRoot",
+                "fbAppId",
+                "forecastsapiurl",
                 "frontendAssetsFullURL",
+                "googleSearchId",
+                "googleSearchUrl",
+                "googletagJsUrl",
                 "googletagUrl",
+                "hasInlineMerchandise",
+                "hasMultipleVideosInPage",
+                "hasPageSkin",
+                "hasShowcaseMainElement",
+                "hasYouTubeAtom",
                 "hbImpl",
+                "headline",
                 "idApiUrl",
+                "idOAuthUrl",
+                "idWebAppUrl",
+                "inBodyExternalLinkCount",
+                "inBodyInternalLinkCount",
+                "isColumn",
+                "isContent",
+                "isFront",
+                "isHosted",
+                "isImmersive",
+                "isLive",
+                "isLiveBlog",
+                "isNumberedList",
                 "isPhotoEssay",
+                "isPreview",
+                "isProd",
                 "isSensitive",
+                "isSplash",
                 "keywordIds",
+                "keywords",
+                "lightboxImages",
+                "locationapiurl",
+                "membershipAccess",
+                "membershipUrl",
+                "mobileAppsAdUnitRoot",
+                "nonKeywordTagIds",
+                "omnitureAccount",
+                "omnitureAmpAccount",
+                "onwardWebSocket",
+                "ophanEmbedJsUrl",
+                "ophanJsUrl",
+                "optimizeEpicUrl",
+                "pageCode",
                 "pageId",
+                "pbIndexSites",
+                "pillar",
+                "plistaPublicApiKey",
+                "productionOffice",
+                "publication",
+                "requiresMembershipAccess",
                 "revisionNumber",
+                "richLink",
                 "section",
+                "sectionName",
                 "sentryHost",
                 "sentryPublicApiKey",
                 "sharedAdTargeting",
+                "shortUrl",
                 "shortUrlId",
+                "shouldHideAdverts",
                 "showRelatedContent",
                 "stage",
+                "stripePublicToken",
+                "supportUrl",
                 "switches",
-                "videoDuration"
+                "thirdPartyAppsAccount",
+                "thumbnail",
+                "tones",
+                "trackingNames",
+                "userAttributesApiUrl",
+                "videoDuration",
+                "weatherapiurl",
+                "webPublicationDate",
+                "webTitle",
+                "wordCount"
             ]
         },
         "CAPIDesign": {
@@ -2999,6 +4166,157 @@
             "required": [
                 "imageUrl",
                 "seriesTag"
+            ]
+        },
+        "CAPINavType": {
+            "type": "object",
+            "properties": {
+                "currentUrl": {
+                    "type": "string"
+                },
+                "pillars": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "otherLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "brandExtensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "currentNavLink": {
+                    "$ref": "#/definitions/CAPILinkType"
+                },
+                "currentNavLinkTitle": {
+                    "type": "string"
+                },
+                "currentPillarTitle": {
+                    "type": "string"
+                },
+                "subNavSections": {
+                    "type": "object",
+                    "properties": {
+                        "parent": {
+                            "$ref": "#/definitions/CAPILinkType"
+                        },
+                        "links": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CAPILinkType"
+                            }
+                        }
+                    },
+                    "required": [
+                        "links"
+                    ]
+                },
+                "readerRevenueLinks": {
+                    "$ref": "#/definitions/ReaderRevenuePositions"
+                }
+            },
+            "required": [
+                "brandExtensions",
+                "currentUrl",
+                "otherLinks",
+                "pillars",
+                "readerRevenueLinks"
+            ]
+        },
+        "CAPILinkType": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/CAPIPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "title",
+                "url"
+            ]
+        },
+        "ReaderRevenuePositions": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "footer": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "sideMenu": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampHeader": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampFooter": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                }
+            },
+            "required": [
+                "ampFooter",
+                "ampHeader",
+                "footer",
+                "header",
+                "sideMenu"
+            ]
+        },
+        "ReaderRevenueCategories": {
+            "type": "object",
+            "properties": {
+                "contribute": {
+                    "type": "string"
+                },
+                "subscribe": {
+                    "type": "string"
+                },
+                "support": {
+                    "type": "string"
+                },
+                "gifting": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contribute",
+                "gifting",
+                "subscribe",
+                "support"
             ]
         },
         "FooterType": {

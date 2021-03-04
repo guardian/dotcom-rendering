@@ -1,29 +1,23 @@
 import { JSDOM } from 'jsdom';
 
-const isDividerFlag = (element: CAPIElement): boolean => {
-	// A star flag: <h2><strong>* * *</strong></h2>
+const isDinkus = (element: CAPIElement): boolean => {
+	// Classic dinkus do not trigger dropcaps
 	if (
 		element._type !==
-		'model.dotcomrendering.pageElements.SubheadingBlockElement'
+			'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
+		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
 	)
 		return false;
+
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstChild) return false;
-	return frag.firstChild.nodeName === 'H2' && frag.textContent === '* * *';
-};
-
-const isSubheading = (element: CAPIElement): boolean => {
+	// A dinkus is can be spaced or unspaced
 	return (
-		element._type ===
-		'model.dotcomrendering.pageElements.SubheadingBlockElement'
+		frag.textContent === '***' ||
+		frag.textContent === '* * *' ||
+		frag.textContent === '•••' ||
+		frag.textContent === '• • •'
 	);
-};
-
-const prevElementWasDropCapFlag = (
-	elements: CAPIElement[],
-	i: number,
-): boolean => {
-	return isSubheading(elements[i - 1]) && isDividerFlag(elements[i - 1]);
 };
 
 const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
@@ -33,29 +27,27 @@ const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
 	// set to true
 	const enhanced: CAPIElement[] = [];
 	elements.forEach((element, i) => {
-		switch (element._type) {
-			case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-				if (isDividerFlag(element)) {
-					enhanced.push({
-						_type:
-							'model.dotcomrendering.pageElements.DividerBlockElement',
-					});
-				} else {
-					enhanced.push(element);
-				}
-				break;
-			case 'model.dotcomrendering.pageElements.TextBlockElement':
-				// Always pass first element through
-				if (i === 0) enhanced.push(element);
-				else if (prevElementWasDropCapFlag(elements, i))
-					enhanced.push({
-						...element,
-						dropCap: true,
-					});
-				else enhanced.push(element);
-				break;
-			default:
-				enhanced.push(element);
+		if (i === 0) {
+			// Always pass first element through
+			enhanced.push(element);
+		} else if (isDinkus(element)) {
+			// If this element is a dinkus, replace it with a divider
+			enhanced.push({
+				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
+			});
+		} else if (
+			// If the previous element was a dinkus and this one is a text block, set it's dropCap flag
+			isDinkus(elements[i - 1]) &&
+			element._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement'
+		) {
+			enhanced.push({
+				...element,
+				dropCap: true,
+			});
+		} else {
+			// Otherwise, do nothing
+			enhanced.push(element);
 		}
 	});
 	return enhanced;

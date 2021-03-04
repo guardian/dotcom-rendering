@@ -1,5 +1,5 @@
 import React from 'react';
 
-const SVG: React.SFC<{}> = () => null;
+const SVG: React.FC = () => null;
 
 module.exports = SVG;

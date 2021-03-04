@@ -1,23 +1,37 @@
-import { CAPI } from '@root/fixtures/CAPI/CAPI';
+import { Article } from '@root/fixtures/generated/articles/Article';
 import { extract } from './extract-ga';
 
+const pillar: CAPIPillar = 'news';
 const base = {
-	authorIds: 'profile/rob-davies',
+	authorIds: 'profile/jennifer-rankin',
 	beaconUrl: '//phar.gu-web.net',
-	commissioningDesks: 'ukbusiness',
+	commissioningDesks: 'ukenvironment',
 	contentId:
-		'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+		'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 	contentType: 'article',
 	edition: 'uk',
 	isHosted: 'false',
 	keywordIds:
-		'money/ticket-prices,money/consumer-affairs,money/money,technology/internet,money/viagogo',
-	pillar: 'lifestyle',
-	section: 'money',
+		'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+	pillar,
+	section: 'environment',
 	seriesId: 'testseries',
 	toneIds: 'tone/news',
 	webTitle:
 		"Ticket touts face unlimited fines for using 'bots' to buy in bulk",
+};
+
+const CAPI = {
+	...Article,
+	tags: [
+		...Article.tags,
+		{
+			id: 'testseries',
+			type: 'Series',
+			title: 'This Series',
+		},
+	],
+	...base,
 };
 
 describe('Google Analytics extracts and formats CAPI response correctly', () => {

@@ -429,6 +429,6 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 	}
 };
 
-export const MobileStickyContainer: React.FC<{}> = ({}) => {
+export const MobileStickyContainer: React.FC = () => {
 	return <div className={`mobilesticky-container ${mobileStickyAdStyles}`} />;
 };

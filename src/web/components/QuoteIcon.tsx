@@ -13,6 +13,12 @@ const quoteStyles = (colour?: string) => css`
 `;
 
 const sizeStyles = (size: SmallHeadlineSize) => {
+	const tinySvg = css`
+		svg {
+			height: 13px;
+			width: 7px;
+		}
+	`;
 	const smallSvg = css`
 		svg {
 			height: 16px;
@@ -34,6 +40,10 @@ const sizeStyles = (size: SmallHeadlineSize) => {
 		}
 	`;
 	switch (size) {
+		case 'tiny':
+			return css`
+				${tinySvg}
+			`;
 		case 'small':
 			return css`
 				${smallSvg}
@@ -52,19 +62,15 @@ const sizeStyles = (size: SmallHeadlineSize) => {
 					${mediumSvg}
 				}
 			`;
-		default:
-			return css`
-				${mediumSvg}
-			`;
 	}
 };
 
 type Props = {
-	colour?: string;
-	size?: SmallHeadlineSize;
+	colour: string;
+	size: SmallHeadlineSize;
 };
 
-export const QuoteIcon = ({ colour, size = 'medium' }: Props) => (
+export const QuoteIcon = ({ colour, size }: Props) => (
 	<span className={sizeStyles(size)}>
 		<svg
 			width="70"

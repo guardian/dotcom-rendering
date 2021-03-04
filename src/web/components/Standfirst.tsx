@@ -42,6 +42,16 @@ const nestedStyles = css`
 	strong {
 		font-weight: bold;
 	}
+
+	[data-dcr-style='bullet'] {
+		display: inline-block;
+		content: '';
+		border-radius: 0.375rem;
+		height: 0.75rem;
+		width: 0.75rem;
+		margin-right: 0.125rem;
+		background-color: ${neutral[86]};
+	}
 `;
 
 const standfirstStyles = (design: Design, display: Display) => {
@@ -55,18 +65,6 @@ const standfirstStyles = (design: Design, display: Display) => {
 						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 					`;
-				case Design.Comment:
-				case Design.GuardianView:
-				case Design.Feature:
-				case Design.Recipe:
-				case Design.Review:
-				case Design.Media:
-				case Design.MatchReport:
-				case Design.Quiz:
-				case Design.Article:
-				case Design.Live:
-				case Design.Analysis:
-				case Design.Interview:
 				default:
 					return css`
 						${headline.xsmall({
@@ -98,14 +96,6 @@ const standfirstStyles = (design: Design, display: Display) => {
 						})};
 						margin-bottom: ${space[3]}px;
 					`;
-				case Design.Media:
-				case Design.PhotoEssay:
-				case Design.MatchReport:
-				case Design.Quiz:
-				case Design.Article:
-				case Design.Live:
-				case Design.Analysis:
-				case Design.Interview:
 				default:
 					return css`
 						${headline.xxxsmall({

@@ -4,9 +4,11 @@ import { JsonScript } from './JsonScript';
 const sourcepointDomain = 'sourcepoint.theguardian.com';
 
 const pubData = {
+	authId: 'CLIENT_ID',
+	client_id: 'CLIENT_ID',
 	// Matches ampViewId from https://ophan.theguardian.com/amp.json
-	pageViewId: 'PAGE_VIEW_ID_64',
-	browserId: 'CLIENT_ID',
+	page_view_id: 'PAGE_VIEW_ID',
+	page_view_id_64: 'PAGE_VIEW_ID_64',
 	platform: 'amp',
 };
 
@@ -54,7 +56,7 @@ const clientConfigAus = {
 	},
 };
 
-export const AdConsent: React.FC<{}> = ({}) => {
+export const AdConsent: React.FC = ({}) => {
 	// To debug geolocation in dev, make sure you're on the experimental channel of AMP:
 	// https://cdn.ampproject.org/experiments.html
 	// Then you can load the url with #amp-geo=XX, where XX is the country code
@@ -86,8 +88,8 @@ export const AdConsent: React.FC<{}> = ({}) => {
 					o={{
 						consentRequired: 'remote',
 						consentInstanceId: 'sourcepoint',
-						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp?${queryParams}`,
-						promptUISrc: `https://${sourcepointDomain}/amp/index.html?authId=CLIENT_ID`,
+						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp`,
+						promptUISrc: `https://${sourcepointDomain}/amp/index.html?${queryParams}`,
 						clientConfig,
 						geoOverride: {
 							tcfv2: {
