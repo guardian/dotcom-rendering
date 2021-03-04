@@ -1391,7 +1391,7 @@ export const Analysis: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '626d5533-a7c8-43f0-b5a5-c8cf865c3f73',
+			elementId: '1857c009-eaa9-42c7-8084-1345f0f927de',
 			role: 'inline',
 			data: {
 				copyright:
@@ -1798,27 +1798,27 @@ export const Analysis: CAPIType = {
 			lastUpdated: 1581589288000,
 			elements: [
 				{
-					elementId: 'd274b628-7271-46f9-92b8-5f825c19397c',
+					elementId: 'de2ed6cf-88ec-4121-87b9-cc00bd83c96f',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Who won Ireland’s general election?</h2>',
 				},
 				{
-					elementId: 'dca820e6-2ba3-46d5-9718-7f4187204662',
+					elementId: '4e31b7f9-74c7-4529-9b2c-08336f22274b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
 				},
 				{
-					elementId: 'b555c78c-3bec-4d0e-97a4-6f67513cfa57',
+					elementId: 'c163e519-2224-4373-b150-5d032cf13907',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
 				},
 				{
-					elementId: 'e86e56c4-5f31-427a-87b5-046d2a78e3b4',
+					elementId: '1a585592-d402-4480-9803-150d0f06c1c9',
 					role: 'thumbnail',
 					prefix: 'Related: ',
 					_type:
@@ -1828,40 +1828,40 @@ export const Analysis: CAPIType = {
 						'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
 				},
 				{
-					elementId: '1955ceab-13d8-410b-821e-880779da8d5e',
+					elementId: '9460176f-3493-4adc-b508-0bfc723933af',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
 				},
 				{
-					elementId: '8001da55-fb49-4a94-b86a-1828ccd6893a',
+					elementId: '77cbd7ae-75aa-4eb3-9203-65c8399077af',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Was Sinn Féin’s success a surprise?</h2>',
 				},
 				{
-					elementId: '32daee3e-badf-4a6c-b009-3b4aa5ff4fd7',
+					elementId: 'cc2984ff-8622-4c4d-93b8-f785b416c816',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
 				},
 				{
-					elementId: '36f393a3-024e-461c-88a4-edfa06080080',
+					elementId: 'f70711d2-a1dc-4847-a52c-a3ba493b743e',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Is Varadkar going to lose power?</h2>',
 				},
 				{
-					elementId: '6bd7117d-c52d-4c8b-99f0-90e5e748e66a',
+					elementId: '29689dbf-72a5-4299-aa10-97995410369c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
 				},
 				{
-					elementId: '389f2401-ec04-4246-a59b-f461329c26de',
+					elementId: '30b4cda7-8d3b-4217-bfab-f1cc1947cd72',
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					html:
 						'<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
@@ -1870,74 +1870,74 @@ export const Analysis: CAPIType = {
 					credit: '',
 				},
 				{
-					elementId: 'f783131f-5e4f-4c00-bdd2-2f379c133f98',
+					elementId: 'dbdd7056-518c-4469-86cf-ce81b6454a4a',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Why did Sinn Féin do so well?</h2>',
 				},
 				{
-					elementId: '8533cec0-5fd6-418d-b69c-763989aa4801',
+					elementId: 'e0e829dc-9144-47c2-bc3d-d20cc8e9c0c3',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
 				},
 				{
-					elementId: '46eb639d-db92-4606-bca0-5c405b61827b',
+					elementId: '65749261-d188-4507-bdee-483d9627bcf7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
 				},
 				{
-					elementId: '25c8d26a-414f-4428-8e23-683a505af71f',
+					elementId: '4e9a3e19-97ef-4b67-a0d5-ad76bdabfd6f',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>What happens next?</h2>',
 				},
 				{
-					elementId: '20dbffdb-186f-4cb5-abba-7782d37291ef',
+					elementId: 'f137aa47-e1e8-4b22-b2d1-b097b1b54096',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
 				},
 				{
-					elementId: 'e6df8f15-dcd8-41db-aee1-015285b450f1',
+					elementId: '590191ec-969e-4f93-8a6b-793a3057ed34',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
 				},
 				{
-					elementId: 'e73b98a6-f65b-4653-9ab4-13858a0ca0c4',
+					elementId: '255a68cc-3411-47ee-84e8-2d7d79c646e8',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
 				},
 				{
-					elementId: 'f89a7b60-9bac-4b70-818a-0830f6c72ee3',
+					elementId: 'c69e4110-2213-401c-8ddb-ff17688b8b97',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
 				},
 				{
-					elementId: '411e480f-58b4-46be-9798-1910557d4724',
+					elementId: '2311ce5f-3080-437b-af6d-fb2ea14e6fc8',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>One plausible outcome: deadlock, and another election.</p>',
 				},
 				{
-					elementId: '0604198e-dfa3-4f6b-be67-7bb8408fcc0c',
+					elementId: 'd7a42516-6793-4b58-9dd9-d1e3123e7a0f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Read more</strong></p>',
 				},
 				{
-					elementId: '793d0796-83cc-41ea-8dc3-397c2450465e',
+					elementId: 'da767092-58d1-402c-af18-e605c650c80d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -2019,12 +2019,12 @@ export const Analysis: CAPIType = {
 		avatarApiUrl: 'https://avatar.theguardian.com',
 		references: [],
 		isProd: true,
-		shortUrlId: '/p/4k83z',
+		shortUrlId: '/p/d9vgg',
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
 			prebidTrustx: true,
-			scAdFreeBanner: true,
+			scAdFreeBanner: false,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -2048,7 +2048,7 @@ export const Analysis: CAPIType = {
 			prebidAppnexusInvcode: true,
 			prebidAppnexus: true,
 			enableDiscussionSwitch: true,
-			prebidXaxis: true,
+			prebidXaxis: false,
 			interactiveFullHeaderSwitch: false,
 			discussionAllPageSize: true,
 			prebidUserSync: true,
@@ -2057,6 +2057,7 @@ export const Analysis: CAPIType = {
 			breakingNews: true,
 			externalVideoEmbeds: true,
 			simpleReach: true,
+			abSignInGateCopyOpt: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -2100,7 +2101,7 @@ export const Analysis: CAPIType = {
 			idCookieRefresh: true,
 			sharingComments: true,
 			discussionPageSize: true,
-			smartAppBanner: true,
+			smartAppBanner: false,
 			boostGaUserTimingFidelity: false,
 			historyTags: true,
 			mobileStickyLeaderboard: true,
@@ -2108,35 +2109,6 @@ export const Analysis: CAPIType = {
 			surveys: true,
 			remoteBanner: true,
 			inizio: true,
-			abCommercialCmpCustomise: true,
-			emailSignupLabNotes: true,
-			lotame: true,
-			prebidPangaea: true,
-			idEmailSignInUpsell: false,
-			doubleclickYoutubeAdFree: true,
-			membershipEngagementBannerBlockUs: false,
-			oldTlsSupportDeprecation: true,
-			abContributionsEpicAskFourEarning: true,
-			emailSignupEuRef: true,
-			emailInArticleOutbrain: true,
-			abFebruaryMomentBannerThankYou: false,
-			commercialPageViewAnalytics: true,
-			membershipEngagementBanner: true,
-			membershipEngagementBannerBlockAu: false,
-			plistaAu: true,
-			membershipEngagementBannerBlockUk: false,
-			epicTestsFromGoogleDocs: true,
-			youtubeRelatedVideos: true,
-			abFebruaryMomentBannerCopy: true,
-			abCommercialPrebidSafeframe: true,
-			abAcquisitionsEpicAlwaysAskIfTagged: true,
-			emailInArticleGtoday: true,
-			engagementBannerTestsFromGoogleDocs: false,
-			prebidS2sozone: true,
-			tourismAustralia: true,
-			emailInArticle: true,
-			videojs: true,
-			abCommercialAdVerification: false,
 		},
 		hasYouTubeAtom: false,
 		inBodyInternalLinkCount: 13,
@@ -2150,9 +2122,28 @@ export const Analysis: CAPIType = {
 			qanda: true,
 			commonsdivision: false,
 		},
-		keywordIds: '',
+		keywordIds:
+			'world/ireland,politics/sinn-fein,world/fine-gael,world/fianna-fail,world/world,world/europe-news',
 		blogIds: '',
-		sharedAdTargeting: {},
+		sharedAdTargeting: {
+			ct: 'article',
+			co: ['rorycarroll'],
+			url:
+				'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			su: ['0'],
+			edition: 'uk',
+			tn: ['analysis', 'explainers'],
+			p: 'ng',
+			k: [
+				'sinn-fein',
+				'world',
+				'europe-news',
+				'ireland',
+				'fianna-fail',
+				'fine-gael',
+			],
+			sh: 'https://www.theguardian.com/p/d9vgg',
+		},
 		beaconUrl: '//phar.gu-web.net',
 		campaigns: [],
 		calloutsUrl:
@@ -2187,8 +2178,8 @@ export const Analysis: CAPIType = {
 		pageCode: '7086328',
 		pillar: 'News',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
-		discussionApiClientHeader: 'testClientHeader',
+			'https://assets.guim.co.uk/javascripts/b2d004ec8fca220ad3a7/graun.commercial.dcr.js',
+		discussionApiClientHeader: 'nextgen',
 		membershipUrl: 'https://membership.theguardian.com',
 		cardStyle: 'analysis',
 		shouldHideReaderRevenue: false,
@@ -2204,16 +2195,16 @@ export const Analysis: CAPIType = {
 		sectionName: 'World news',
 		mobileAppsAdUnitRoot: 'beta-guardian-app',
 		dfpAdUnitRoot: 'theguardian.com',
-		headline: '',
+		headline: 'Irish general election: who won and what happens now?',
 		commentable: false,
 		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: false,
+		showRelatedContent: true,
 		commissioningDesks: 'uk-foreign',
 		inBodyExternalLinkCount: 0,
-		adUnit: '/59666047/theguardian.com/film/article/ng',
+		adUnit: '/59666047/theguardian.com/world/article/ng',
 		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
 		videoDuration: 0,
-		stage: 'DEV',
+		stage: 'PROD',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		isSensitive: false,
 		isDev: false,
@@ -2224,23 +2215,23 @@ export const Analysis: CAPIType = {
 		fbAppId: '180444840287',
 		externalEmbedHost: 'https://embed.theguardian.com',
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords: '',
-		revisionNumber: '62cf0d6e4609276d37e09fd596430fbf8b629418',
+		keywords: 'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
+		revisionNumber: 'DEV',
 		blogs: '',
-		section: '',
+		section: 'world',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37539',
+		buildNumber: '37551',
 		isPhotoEssay: false,
 		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
+			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
 		userAttributesApiUrl:
 			'https://members-data-api.theguardian.com/user-attributes',
 		isLive: false,
 		publication: 'The Guardian',
 		host: 'https://www.theguardian.com',
 		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		contentType: '',
+		contentType: 'Article',
 		facebookIaAdUnitRoot: 'facebook-instant-articles',
 		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		idUrl: 'https://profile.theguardian.com',
@@ -2248,11 +2239,12 @@ export const Analysis: CAPIType = {
 			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/500.jpg?quality=85&auto=format&fit=max&s=d73599013846c702aea9bf81761b9f63',
 		isFront: false,
 		wordCount: 944,
-		author: '',
-		dfpAccountId: '',
+		author: 'Rory Carroll',
+		dfpAccountId: '59666047',
 		nonKeywordTagIds:
 			'type/article,tone/explainers,tone/analysis,profile/rorycarroll,publication/theguardian,theguardian/mainsection,theguardian/mainsection/uknews,tracking/commissioningdesk/uk-foreign',
-		pageId: '',
+		pageId:
+			'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 		forecastsapiurl: '/weatherapi/forecast',
 		assetsPath: 'https://assets.guim.co.uk/',
 		lightboxImages: {
@@ -2285,18 +2277,20 @@ export const Analysis: CAPIType = {
 		},
 		isImmersive: false,
 		dfpHost: 'pubads.g.doubleclick.net',
-		googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
+		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		hbImpl: {
-			prebid: false,
-			a9: false,
+			prebid: true,
+			a9: true,
 		},
-		abTests: {},
+		abTests: {
+			dotcomRenderingControl: 'control',
+		},
 		shortUrl: 'https://www.theguardian.com/p/d9vgg',
 		isContent: true,
 		contentId:
 			'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-		edition: '',
+		edition: 'UK',
 		discussionFrontendUrl:
 			'https://assets.guim.co.uk/discussion/discussion-frontend.preact.iife.8bdbd9194e.js',
 		ipsosTag: 'world',
@@ -3742,6 +3736,7 @@ export const Analysis: CAPIType = {
 			5612812553,
 			5612812556,
 			5613900227,
+			5617153347,
 			5617357126,
 			5617560946,
 			5618303037,
@@ -3818,6 +3813,8 @@ export const Analysis: CAPIType = {
 			5633566955,
 			5633735270,
 			5633782264,
+			5634188591,
+			5634188594,
 		],
 		tones: 'Explainers,Analysis',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',
@@ -3827,18 +3824,17 @@ export const Analysis: CAPIType = {
 		allowUserGeneratedContent: false,
 		byline: 'Rory Carroll Ireland correspondent',
 		authorIds: 'profile/rorycarroll',
-		webPublicationDate: 1579185778186,
+		webPublicationDate: 1581337885000,
 		omnitureAmpAccount: 'guardiangu-thirdpartyapps',
 		isHosted: false,
 		hasPageSkin: false,
 		webTitle: 'Irish general election: who won and what happens now?',
-		discussionD2Uid: 'testD2Header',
+		discussionD2Uid: 'zHoBy6HNKsk',
 		weatherapiurl: '/weatherapi/city',
 		googleSearchUrl: '//www.google.co.uk/cse/cse.js',
 		optimizeEpicUrl:
 			'https://support.theguardian.com/epic/control/index.html',
 		isSplash: false,
 		isNumberedList: false,
-		series: '',
 	},
 };
