@@ -2,6 +2,8 @@
 
 import type appboy from '@braze/web-sdk-core';
 
+type SlotName = 'Banner' | 'EndOfArticle';
+
 type Extras = Record<string, string>;
 
 interface BrazeMessagesInterface {
@@ -54,7 +56,7 @@ class BrazeMessages implements BrazeMessagesInterface {
 		this.endOfArticleMessage = this.getMessageForSlot('EndOfArticle');
 	}
 
-	private getMessageForSlot(targetSlotName: string): Promise<BrazeMessage> {
+	private getMessageForSlot(targetSlotName: SlotName): Promise<BrazeMessage> {
 		return new Promise((resolve) => {
 			const callback = (
 				m: appboy.InAppMessage | appboy.ControlMessage,
@@ -85,4 +87,4 @@ class BrazeMessages implements BrazeMessagesInterface {
 	}
 }
 
-export { BrazeMessages, BrazeMessagesInterface, BrazeMessage };
+export { BrazeMessages, BrazeMessagesInterface, BrazeMessage, SlotName };
