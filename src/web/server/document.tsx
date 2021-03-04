@@ -200,6 +200,7 @@ export const document = ({ data }: Props): string => {
 			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			...getScriptArrayFromChunkName('sentryLoader'),
+			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),
 			pageHasInteractiveElements && {
 				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
