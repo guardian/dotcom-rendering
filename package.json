@@ -41,7 +41,7 @@
     "@guardian/bridget": "^1.8.0",
     "@guardian/content-api-models": "^15.10.0",
     "@guardian/content-atom-model": "^3.2.4",
-    "@guardian/discussion-rendering": "^3.2.1",
+    "@guardian/discussion-rendering": "^4.6.1",
     "@guardian/image-rendering": "github:guardian/image-rendering#semver:^5.0.2",
     "@guardian/node-riffraff-artifact": "^0.1.9",
     "@guardian/renditions": "git+https://github.com/guardian/renditions.git#0.1.1",
