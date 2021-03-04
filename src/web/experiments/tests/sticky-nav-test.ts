@@ -1,7 +1,7 @@
 import { ABTest } from '@guardian/ab-core';
 
 export const stickyNavTest: ABTest = {
-	id: 'stickyNavTest',
+	id: 'StickyNavTest',
 	start: '2021-02-10',
 	expiry: '2021-05-03',
 	author: 'nlong',

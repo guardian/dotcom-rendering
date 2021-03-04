@@ -364,11 +364,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	// sticky nav test status
 	const inStickyNavBackscroll = ABTestAPI.isUserInVariant(
-		'stickyNavTest',
+		'StickyNavTest',
 		'sticky-nav-backscroll',
 	);
 	const inStickyNavSimple = ABTestAPI.isUserInVariant(
-		'stickyNavTest',
+		'StickyNavTest',
 		'sticky-nav-simple',
 	);
 
