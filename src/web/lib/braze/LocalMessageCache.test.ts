@@ -121,6 +121,40 @@ describe('LocalMessageCache', () => {
 		});
 	});
 
+	describe('push', () => {
+		it('adds an item to the end of the queue', () => {
+			const store = new FakeStore();
+			const cache = new LocalMessageCache(store);
+			const message1 = JSON.parse(message1Json);
+			const queue = [message1];
+			store.setItem(
+				'gu.brazeMessageCache.EndOfArticle',
+				JSON.stringify(queue),
+			);
+
+			const message2 = JSON.parse(message2Json);
+			cache.push('EndOfArticle', message2);
+
+			const newQueue = JSON.parse(
+				store.getItem('gu.brazeMessageCache.EndOfArticle') as string,
+			) as appboy.InAppMessage[];
+			expect(newQueue).toEqual([message1, message2]);
+		});
+
+		it('lazily creates the queue if not already defined', () => {
+			const store = new FakeStore();
+			const cache = new LocalMessageCache(store);
+			const message = JSON.parse(message1Json);
+
+			cache.push('EndOfArticle', message);
+
+			const newQueue = JSON.parse(
+				store.getItem('gu.brazeMessageCache.EndOfArticle') as string,
+			) as appboy.InAppMessage[];
+			expect(newQueue).toEqual([message]);
+		});
+	});
+
 	describe('clear', () => {
 		it('wipes all queues', () => {
 			const store = new FakeStore();

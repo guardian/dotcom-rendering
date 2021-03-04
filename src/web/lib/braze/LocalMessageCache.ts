@@ -42,14 +42,6 @@ class LocalMessageCache {
 		}
 	}
 
-	unshift(slotName: SlotName, message: Message) {
-		const key = keyFromSlotName(slotName);
-		const queue = this.readQueue(key);
-
-		queue.unshift(message);
-		this.store.setItem(key, JSON.stringify(queue));
-	}
-
 	push(slotName: SlotName, message: Message) {
 		const key = keyFromSlotName(slotName);
 		const queue = this.readQueue(key);
