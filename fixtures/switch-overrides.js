@@ -1,5 +1,5 @@
 module.exports = {
-	switches: {
+	switchOverrides: {
 		abCommercialCmpCustomise: true,
 		prebidAppnexusUkRow: true,
 		prebidTrustx: true,

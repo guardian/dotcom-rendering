@@ -6,7 +6,8 @@ const fetch = require('node-fetch');
 const execa = require('execa');
 const fs = require('fs');
 const { resolve } = require('path');
-const { config } = require('../../fixtures/config');
+const { configOverrides } = require('../../fixtures/config-overrides');
+const { switchOverrides } = require('../../fixtures/switch-overrides');
 
 const root = resolve(__dirname, '..', '..');
 
@@ -118,8 +119,13 @@ try {
 		return fetch(`${article.url}.json?dcr`)
 			.then((res) => res.json())
 			.then((json) => {
-				// Add test config
-				json.config = config;
+				// Override config
+				json.config = { ...json.config, ...configOverrides };
+				// Override switches
+				json.config.switches = {
+					...json.config.switches,
+					...switchOverrides,
+				};
 				// TODO: Remove this when we add in support for CAPI format to DCR
 				delete json.format;
 				// Write the new fixture data

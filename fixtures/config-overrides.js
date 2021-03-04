@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { switches } = require('./switches.js');
-
 module.exports = {
-	config: {
+	configOverrides: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		idApiUrl: 'https://idapi.theguardian.com',
@@ -11,7 +8,6 @@ module.exports = {
 		dcrSentryDsn:
 			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		// Add test switches (see: https://github.com/guardian/dotcom-rendering/pull/1876)
-		switches,
 		shortUrlId: '/p/4k83z',
 		abTests: {},
 		dfpAccountId: '',
