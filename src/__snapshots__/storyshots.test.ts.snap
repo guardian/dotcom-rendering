@@ -4098,12 +4098,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   font-weight: 500;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-11 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-11 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
