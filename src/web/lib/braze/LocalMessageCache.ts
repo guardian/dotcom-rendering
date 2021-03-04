@@ -1,5 +1,5 @@
 import type appboy from '@braze/web-sdk-core';
-import { SlotName } from './BrazeMessages';
+import { SlotName, SlotNames } from './BrazeMessages';
 
 const localStorageKeyBase = 'gu.brazeMessageCache';
 export const millisecondsBeforeExpiry = 1000 * 60 * 60 * 24; // 24 hours: 60 seconds * 60 minutes
@@ -67,11 +67,11 @@ class LocalMessageCache {
 	}
 
 	clear() {
-		const allSlots: SlotName[] = ['Banner', 'EndOfArticle'];
-		allSlots.forEach((s) => {
-			const key = keyFromSlotName(s);
+		// eslint-disable-next-line guard-for-in
+		for (const slotName in SlotNames) {
+			const key = keyFromSlotName(slotName as SlotName);
 			this.store.removeItem(key);
-		});
+		}
 	}
 
 	private readQueue(key: string): CachedMessage[] {

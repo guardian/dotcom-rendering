@@ -2,7 +2,12 @@
 
 import type appboy from '@braze/web-sdk-core';
 
-type SlotName = 'Banner' | 'EndOfArticle';
+enum SlotNames {
+	Banner = 'Banner',
+	EndOfArticle = 'EndOfArticle',
+}
+
+type SlotName = keyof typeof SlotNames;
 
 type Extras = Record<string, string>;
 
@@ -87,4 +92,10 @@ class BrazeMessages implements BrazeMessagesInterface {
 	}
 }
 
-export { BrazeMessages, BrazeMessagesInterface, BrazeMessage, SlotName };
+export {
+	BrazeMessages,
+	BrazeMessagesInterface,
+	BrazeMessage,
+	SlotName,
+	SlotNames,
+};
