@@ -6,11 +6,11 @@ import {
 	analysis,
 	article,
 	comment,
+	editorial,
 	feature,
 	interview,
 	media,
 	review,
-	editorial,
 } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
