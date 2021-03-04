@@ -482,12 +482,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   padding-bottom: 0;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-10 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-10 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
@@ -1678,12 +1672,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   font-weight: 300;
   padding-bottom: 0;
   padding-right: 6rem;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-10 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {
@@ -2946,12 +2934,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
   font-weight: 500;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-10 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-10 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
@@ -4116,12 +4098,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   font-weight: 500;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-11 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-11 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
@@ -5270,12 +5246,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   font-weight: 500;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-10 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-10 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
@@ -6369,12 +6339,6 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   border: 0;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-11 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:740px) {
   .emotion-11 {
     width: 526px;
@@ -7207,12 +7171,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   font-weight: 700;
   margin-left: 0.75rem;
   border: 0;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-11 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {
@@ -8508,12 +8466,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
   font-weight: 700;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-16 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-16 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
@@ -9594,12 +9546,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   font-size: 1.5rem;
   line-height: 1.15;
   font-weight: 700;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {
@@ -12315,12 +12261,6 @@ exports[`Storyshots Editions/Headline Analysis 1`] = `
   padding-bottom: 0;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-1 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
@@ -12368,12 +12308,6 @@ exports[`Storyshots Editions/Headline Comment 1`] = `
   font-weight: 300;
   padding-bottom: 0;
   padding-right: 6rem;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {
@@ -12455,12 +12389,6 @@ exports[`Storyshots Editions/Headline Default 1`] = `
   font-weight: 500;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:375px) {
   .emotion-1 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
@@ -12506,12 +12434,6 @@ exports[`Storyshots Editions/Headline Feature 1`] = `
   font-size: 1.5rem;
   line-height: 1.15;
   font-weight: 500;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {
@@ -12568,12 +12490,6 @@ exports[`Storyshots Editions/Headline Interview 1`] = `
   font-weight: 700;
   margin-left: 0.75rem;
   border: 0;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-2 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {
@@ -12682,12 +12598,6 @@ exports[`Storyshots Editions/Headline Media 1`] = `
   border: 0;
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    color: #DCDCDC;
-  }
-}
-
 @media (min-width:740px) {
   .emotion-1 {
     width: 526px;
@@ -12727,12 +12637,6 @@ exports[`Storyshots Editions/Headline Review 1`] = `
   font-size: 1.5rem;
   line-height: 1.15;
   font-weight: 700;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {
@@ -12780,12 +12684,6 @@ exports[`Storyshots Editions/Headline Showcase 1`] = `
   font-size: 1.5rem;
   line-height: 1.15;
   font-weight: 700;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    color: #DCDCDC;
-  }
 }
 
 @media (min-width:375px) {

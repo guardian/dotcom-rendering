@@ -13,7 +13,7 @@ import type {
 import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
-import { headlineTextColour } from 'editorialStyles';
+import { editionsHeadlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
@@ -118,7 +118,7 @@ const getFontStyles = (
 `;
 
 const getSharedStyles = (format: Format): SerializedStyles => css`
-	${headlineTextColour(format)}
+	${editionsHeadlineTextColour(format)}
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	padding-bottom: ${remSpace[4]};
