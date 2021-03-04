@@ -119,7 +119,7 @@ const NavGroupLazy: React.FC<NavGroupLazyProps> = ({
 			<Section
 				backgroundColour={palette.background.article}
 				padded={false}
-				sectionId="sub-nav-root"
+				sectionId="sub-nav-root-lazy"
 			>
 				<SubNav
 					subNavSections={navData.subNavSections}
