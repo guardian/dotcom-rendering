@@ -120,4 +120,23 @@ describe('LocalMessageCache', () => {
 			expect(m).toBeUndefined();
 		});
 	});
+
+	describe('clear', () => {
+		it('wipes all queues', () => {
+			const store = new FakeStore();
+			const cache = new LocalMessageCache(store);
+			const message1 = JSON.parse(message1Json);
+			const queue = [message1];
+			store.setItem(
+				'gu.brazeMessageCache.EndOfArticle',
+				JSON.stringify(queue),
+			);
+			store.setItem('gu.brazeMessageCache.Banner', JSON.stringify(queue));
+
+			cache.clear();
+
+			expect(cache.peek('EndOfArticle')).toBeUndefined();
+			expect(cache.peek('Banner')).toBeUndefined();
+		});
+	});
 });

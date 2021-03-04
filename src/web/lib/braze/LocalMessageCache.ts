@@ -59,7 +59,11 @@ class LocalMessageCache {
 	}
 
 	clear() {
-		['Banner', 'SlotName'].forEach((s) => this.store.removeItem(s));
+		const allSlots: SlotName[] = ['Banner', 'EndOfArticle'];
+		allSlots.forEach((s) => {
+			const key = keyFromSlotName(s);
+			this.store.removeItem(key);
+		});
 	}
 
 	private readQueue(key: string): Message[] {
