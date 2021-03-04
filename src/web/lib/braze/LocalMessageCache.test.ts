@@ -22,6 +22,18 @@ class FakeStore {
 	removeItem(key: string) {
 		delete this.data[key];
 	}
+
+	get length() {
+		return Object.keys(this.data).length;
+	}
+
+	clear() {
+		this.data = {};
+	}
+
+	key(index: number) {
+		return Object.keys(this.data)[index] || null;
+	}
 }
 
 describe('LocalMessageCache', () => {
