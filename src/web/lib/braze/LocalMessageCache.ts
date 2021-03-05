@@ -23,18 +23,15 @@ class LocalMessageCache {
 		this.store = store;
 	}
 
-	shift(slotName: SlotName): CachedMessage | undefined {
+	shift(slotName: SlotName): Message | undefined {
 		const key = keyFromSlotName(slotName);
 		const queue = this.readQueue(key);
-		const topItem = queue.shift();
+		const unexpiredQueue = queue.filter((i) => hasNotExpired(i));
+		const topItem = unexpiredQueue.shift();
 
 		if (topItem) {
-			const expired = topItem.expires < Date.now();
-			if (expired) {
-				return;
-			}
-			this.store.setItem(key, JSON.stringify(queue));
-			return topItem;
+			this.store.setItem(key, JSON.stringify(unexpiredQueue));
+			return topItem.message;
 		}
 	}
 
@@ -87,4 +84,4 @@ class LocalMessageCache {
 	}
 }
 
-export { LocalMessageCache };
+export { LocalMessageCache, CachedMessage };
