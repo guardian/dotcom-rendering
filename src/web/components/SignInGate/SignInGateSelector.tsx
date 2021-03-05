@@ -176,7 +176,8 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps) => {
-	const [showGate, setShowGate] = useState(false);
+	const [isGateDismissed, setIsGateDismissed] = useState(false);
+	const [canShowGate, setCanShowGate] = useState(false);
 
 	const [currentTest, setCurrentTest] = useState<CurrentABTest>({
 		name: '',
@@ -198,14 +199,14 @@ export const SignInGateSelector = ({
 
 	useEffect(() => {
 		// this hook will fire when the sign in gate is dismissed
-		// which will happen when the showGate state is set to false
+		// which will happen when the isGateDismissed state is set to true
 		// this only happens within the dismissGate method
-		if (showGate === false) {
+		if (isGateDismissed) {
 			document.dispatchEvent(
 				new CustomEvent('dcr:page:article:redisplayed'),
 			);
 		}
-	}, [showGate]);
+	}, [isGateDismissed]);
 
 	// check to see if the test is available on this render cycle
 	// required by the ab test framework, as we have to wait for the above
@@ -221,21 +222,23 @@ export const SignInGateSelector = ({
 
 	if (gateVariant) {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		gateVariant.canShow(CAPI, !!isSignedIn, currentTest).then(setShowGate);
+		gateVariant
+			.canShow(CAPI, !!isSignedIn, currentTest)
+			.then(setCanShowGate);
 	}
 
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{showGate && (
+			{!isGateDismissed && canShowGate ? (
 				<ShowSignInGate
 					CAPI={CAPI}
 					abTest={currentTest}
-					setShowGate={setShowGate}
+					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 				/>
-			)}
+			) : null}
 		</>
 	);
 };
