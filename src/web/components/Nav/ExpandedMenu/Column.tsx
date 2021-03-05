@@ -187,7 +187,11 @@ export const Column = ({
 			<script
 				dangerouslySetInnerHTML={{
 					__html: `document.addEventListener('DOMContentLoaded', function(){
-                        document.getElementById('${collapseColumnInputId}').addEventListener('keydown', function(e){
+                        var columnInput = document.getElementById('${collapseColumnInputId}');
+
+						if (!columnInput) return; // Sticky nav replaces the nav so element no longer exists for users in test.
+
+						columnInput.addEventListener('keydown', function(e){
                             // keyCode: 13 => Enter key | keyCode: 32 => Space key
                             if (e.keyCode === 13 || e.keyCode === 32) {
                                 e.preventDefault()
