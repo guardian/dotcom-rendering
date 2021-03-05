@@ -36,6 +36,16 @@ class FakeStore {
 	}
 }
 
+const anHourAgo = () => {
+	const hourInMilliseconds = 1000 * 60 * 60;
+	return Date.now() - hourInMilliseconds;
+};
+
+const anHourFromNow = () => {
+	const hourInMilliseconds = 1000 * 60 * 60;
+	return Date.now() + hourInMilliseconds;
+};
+
 describe('LocalMessageCache', () => {
 	describe('peek', () => {
 		it('returns the first item on the queue', () => {
@@ -43,7 +53,16 @@ describe('LocalMessageCache', () => {
 			const cache = new LocalMessageCache(store);
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
-			const queue = [message1, message2];
+			const queue = [
+				{
+					expires: anHourFromNow(),
+					message: message1,
+				},
+				{
+					expires: anHourFromNow(),
+					message: message2,
+				},
+			];
 			store.setItem(
 				'gu.brazeMessageCache.EndOfArticle',
 				JSON.stringify(queue),
@@ -82,6 +101,27 @@ describe('LocalMessageCache', () => {
 			const m = cache.peek('EndOfArticle');
 
 			expect(m).toBeUndefined();
+		});
+
+		it('returns the first unexpired message', () => {
+			const store = new FakeStore();
+			const cache = new LocalMessageCache(store);
+			const message1 = JSON.parse(message1Json);
+			const message2 = JSON.parse(message2Json);
+			const expired = {
+				expires: anHourAgo(),
+				message: message1,
+			};
+			const unexpired = {
+				expires: anHourFromNow(),
+				message: message2,
+			};
+			const queue = JSON.stringify([expired, unexpired]);
+			store.setItem('gu.brazeMessageCache.EndOfArticle', queue);
+
+			const m = cache.peek('EndOfArticle');
+
+			expect(m).toEqual(message2);
 		});
 	});
 

@@ -13,6 +13,9 @@ type CachedMessage = {
 const keyFromSlotName = (slotName: SlotName): string =>
 	`${localStorageKeyBase}.${slotName}`;
 
+const hasNotExpired = (cachedMessage: CachedMessage) =>
+	cachedMessage.expires > Date.now();
+
 class LocalMessageCache {
 	store: Storage;
 
@@ -35,19 +38,14 @@ class LocalMessageCache {
 		}
 	}
 
-	peek(slotName: SlotName): CachedMessage | undefined {
+	peek(slotName: SlotName): Message | undefined {
 		const key = keyFromSlotName(slotName);
 		const queue = this.readQueue(key);
-		const topItem = queue.shift();
+		const unexpiredQueue = queue.filter((i) => hasNotExpired(i));
+		const topItem = unexpiredQueue.shift();
 
 		if (topItem) {
-			const expired = topItem.expires < Date.now();
-			if (expired) {
-				this.shift(slotName); // Remove top item
-				return this.peek(slotName); // Re-call this function to check next value
-			}
-
-			return topItem;
+			return topItem.message;
 		}
 	}
 
