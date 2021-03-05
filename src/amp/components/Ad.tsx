@@ -14,9 +14,6 @@ const sizes = [
 
 const adStyle = css`
 	background: ${palette.neutral[93]};
-	background-size: 105px;
-	background-repeat: no-repeat;
-	background-position: center;
 	border-top: 1px solid ${palette.neutral[86]};
 	width: min-content;
 	height: min-content;
