@@ -19,7 +19,7 @@ import {
 	getGuardianConfiguration,
 	GuardianConfiguration,
 } from './aws/aws-parameters';
-import { recordBaselineCloudWatchMetrics } from './aws/metrics-baseline';
+// import { recordBaselineCloudWatchMetrics } from './aws/metrics-baseline';
 import { logger } from './logging';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
@@ -149,11 +149,12 @@ if (process.env.NODE_ENV === 'production') {
 		res.status(500).send(`<pre>${error.stack}</pre>`);
 	});
 
-	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {
+	// TODO re-enable after Graviton testing complete (the diskusage module doesn't work on ARM).
+	/* 	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {
 		setInterval(() => {
 			recordBaselineCloudWatchMetrics();
 		}, 10 * 1000);
-	}
+	} */
 
 	app.listen(port);
 	// eslint-disable-next-line no-console

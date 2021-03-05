@@ -1,4 +1,6 @@
-import os from 'os';
+// TODO re-enable after Graviton testing complete (the diskusage module doesn't work on ARM).
+
+/* import os from 'os';
 import disk from 'diskusage';
 import { BytesMetric, collectAndSendAWSMetrics } from './aws-metrics';
 
@@ -43,4 +45,4 @@ export const recordBaselineCloudWatchMetrics = () => {
 			}
 		}
 	});
-};
+}; */
