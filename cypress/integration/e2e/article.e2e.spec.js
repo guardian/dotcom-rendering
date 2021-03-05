@@ -10,64 +10,58 @@ describe('E2E Page rendering', function () {
 	});
 
 	describe('for WEB', function () {
-		// eslint-disable-next-line mocha/no-setup-in-describe
-		articles.map((article, index) => {
-			const { url: articleUrl, designType, pillar } = article;
-			it(`It should load ${designType} articles under the pillar ${pillar} (${articleUrl})`, function () {
-				const url = setUrlFragment(articleUrl, {
+		it('It should load an article and make the expected ajax calls', function () {
+			const url = setUrlFragment(
+				'https://www.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness',
+				{
 					'ab-CuratedContainerTest2': 'control',
+				},
+			);
+			cy.visit(`/Article?url=${url}`);
+			const roughLoadPositionOfMostView = 1400;
+			cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
+			cy.contains('Lifestyle');
+
+			cy.intercept('GET', '**/most-read-geo**', (req) => {
+				req.reply((res) => {
+					expect(res.body).to.have.property('heading');
+					expect(res.statusCode).to.be.equal(200);
 				});
-				cy.log(`designType: ${designType}, pillar: ${pillar}`);
-				cy.visit(`/Article?url=${url}`);
-				const roughLoadPositionOfMostView = 1400;
-				cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
-				cy.contains('Lifestyle');
-
-				if (!article.hideMostViewed) {
-					cy.intercept('GET', '**/most-read-geo**', (req) => {
-						req.reply((res) => {
-							expect(res.body).to.have.property('heading');
-							expect(res.statusCode).to.be.equal(200);
-						});
-					});
-					cy.contains('Most viewed');
-				}
-
-				cy.scrollTo('bottom', { duration: 500 });
-
-				cy.intercept('POST', '/sharecount/**', (req) => {
-					req.reply((res) => {
-						expect(res.statusCode).to.be.equal(200);
-						expect(res.body).to.have.property('path');
-						expect(res.body).to.have.property('refreshStatus');
-						expect(res.body)
-							.to.have.property('share_count')
-							.that.is.a('number');
-					});
-				});
-
-				if (article.hasRichLinks) {
-					cy.intercept('GET', '/embed/card/**', (req) => {
-						req.reply((res) => {
-							expect(res.statusCode).to.be.equal(200);
-						});
-					});
-					cy.contains('Read more');
-				}
-
-				// We scroll again here because not all the content at the bottom of the page loads
-				// when you first touch bottom, you sometimes need to scroll once more to trigger
-				// lazy loading Most Popular
-				cy.scrollTo('bottom', { duration: 500 });
-
-				cy.intercept('GET', '/most-read/**', (req) => {
-					req.reply((res) => {
-						expect(res.body).to.have.property('tabs');
-						expect(res.statusCode).to.be.equal(200);
-					});
-				});
-				cy.contains('Most commented');
 			});
+			cy.contains('Most viewed');
+
+			cy.scrollTo('bottom', { duration: 500 });
+
+			cy.intercept('POST', '/sharecount/**', (req) => {
+				req.reply((res) => {
+					expect(res.statusCode).to.be.equal(200);
+					expect(res.body).to.have.property('path');
+					expect(res.body).to.have.property('refreshStatus');
+					expect(res.body)
+						.to.have.property('share_count')
+						.that.is.a('number');
+				});
+			});
+
+			cy.intercept('GET', '/embed/card/**', (req) => {
+				req.reply((res) => {
+					expect(res.statusCode).to.be.equal(200);
+				});
+			});
+			cy.contains('Read more');
+
+			// We scroll again here because not all the content at the bottom of the page loads
+			// when you first touch bottom, you sometimes need to scroll once more to trigger
+			// lazy loading Most Popular
+			cy.scrollTo('bottom', { duration: 500 });
+
+			cy.intercept('GET', '/most-read/**', (req) => {
+				req.reply((res) => {
+					expect(res.body).to.have.property('tabs');
+					expect(res.statusCode).to.be.equal(200);
+				});
+			});
+			cy.contains('Most commented');
 		});
 	});
 
