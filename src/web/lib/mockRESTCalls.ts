@@ -5,7 +5,7 @@ import {
 	responseWithTwoTabs,
 } from '@root/fixtures/manual/mostViewed';
 import { series } from '@root/fixtures/generated/series';
-import { related } from '@root/fixtures/manual/related';
+import { related } from '@root/fixtures/generated/related';
 import { commentCount } from '@root/fixtures/manual/commentCount';
 import { discussion } from '@root/fixtures/manual/discussion';
 import { storypackage } from '@root/fixtures/manual/storypackage';
