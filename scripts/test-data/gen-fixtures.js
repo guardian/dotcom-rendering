@@ -190,6 +190,28 @@ try {
 			}),
 	);
 
+	// Series
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/series/tv-and-radio/series/tv-review.json?dcr',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const series = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/series.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created series.ts`);
+			}),
+	);
+
 	Promise.all(requests).finally(() => {
 		console.log('\nFormatting files...');
 		execa('prettier', [
