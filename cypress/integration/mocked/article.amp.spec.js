@@ -1,10 +1,8 @@
-import { getPolyfill } from '../../lib/polyfill';
 import { fixTime } from '../../lib/time';
 import { AMPArticles } from '../../lib/articles.js';
 import { mockApi } from '../../lib/mocks';
 
 describe('For AMP', function () {
-	before(getPolyfill);
 	beforeEach(fixTime, mockApi);
 
 	it(`It should load designType articles under the pillar`, function () {
