@@ -4,7 +4,6 @@ import { mostRead } from '@root/fixtures/generated/most-read';
 import { mostReadGeo } from '@root/fixtures/generated/most-read-geo';
 import { series } from '@root/fixtures/generated/series';
 import { related } from '@root/fixtures/generated/related';
-import { commentCount } from '@root/fixtures/manual/commentCount';
 import { discussion } from '@root/fixtures/manual/discussion';
 import { storyPackage } from '@root/fixtures/generated/story-package';
 import { matchReport } from '@root/fixtures/generated/match-report';
@@ -115,7 +114,14 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/discussion\/comment-counts.*/,
 			{
 				status: 200,
-				body: commentCount,
+				body: {
+					counts: [
+						{
+							id: '/p/4k83z',
+							count: 432,
+						},
+					],
+				},
 			},
 			{ overwriteRoutes: false },
 		)
