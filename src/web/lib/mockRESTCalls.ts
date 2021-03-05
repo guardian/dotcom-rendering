@@ -5,6 +5,7 @@ import {
 	responseWithTwoTabs,
 } from '@root/fixtures/manual/mostViewed';
 import { series } from '@root/fixtures/manual/series';
+import { related } from '@root/fixtures/manual/related';
 import { commentCount } from '@root/fixtures/manual/commentCount';
 import { discussion } from '@root/fixtures/manual/discussion';
 import { storypackage } from '@root/fixtures/manual/storypackage';
@@ -126,6 +127,15 @@ export const mockRESTCalls = (): void => {
 			{
 				status: 200,
 				body: responseWithTwoTabs,
+			},
+			{ overwriteRoutes: false },
+		)
+		// Related
+		.get(
+			/.*api.nextgen.guardianapps.co.uk\/related.*/,
+			{
+				status: 200,
+				body: related,
 			},
 			{ overwriteRoutes: false },
 		)

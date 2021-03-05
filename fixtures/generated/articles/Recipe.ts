@@ -1441,7 +1441,7 @@ export const Recipe: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '891be4da-e989-4a2b-b887-1340ebc72ebb',
+			elementId: '6e6ea91a-c276-4193-a50d-58c64789ec1c',
 			role: 'inline',
 			data: {
 				alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
@@ -1835,83 +1835,83 @@ export const Recipe: CAPIType = {
 			lastUpdated: 1612607438000,
 			elements: [
 				{
-					elementId: 'ff1678e6-3522-42f0-9edb-2ffd1f9f822f',
+					elementId: '2a8a3f94-03af-4b2b-95f6-1999a6358feb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
 				},
 				{
-					elementId: 'e0cc17ef-5cc3-4ea7-9a51-df75b90a49df',
+					elementId: 'c64e189c-302e-4e52-9a55-7253cc9f788b',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
 				},
 				{
-					elementId: 'ae48c5e3-fe54-4b38-9757-cd584aa10d52',
+					elementId: '9b7d26b9-9589-4279-b041-5b37879b5b3b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
 				},
 				{
-					elementId: 'b01dab3e-83c5-44d8-b636-23e18138c36f',
+					elementId: '75ad579c-b43e-4645-a1a2-c153449da304',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
 				},
 				{
-					elementId: '37a3d4e7-b443-4f87-ba75-e0dc1307355f',
+					elementId: 'e1e02072-57dd-4310-a32f-98f7f1c92ce7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
 				},
 				{
-					elementId: '38561927-859a-4dca-93ad-f64972513eb2',
+					elementId: '6bf7cdb2-e673-46a6-ad3b-1d0ac4f11dc9',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
 				},
 				{
-					elementId: '68e97df1-2111-4e86-a32a-0c4f68abbcd4',
+					elementId: '71d39c17-2f39-4caf-a5b2-8dca13e51a98',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
 				},
 				{
-					elementId: 'a2b6361d-bd71-44ea-90f8-9f7c5a5cb6ff',
+					elementId: '48a29c26-6d33-420c-b970-87ca800bbf79',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
 				},
 				{
-					elementId: 'f372d40a-557e-458f-890d-5ae6efe7a627',
+					elementId: 'fc22b9cf-d4e5-4e2e-a27b-f5d93186bdcb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
 				},
 				{
-					elementId: '7f4df88c-1f99-499d-a96d-c52bf0569419',
+					elementId: '61213540-3bdc-48fc-b302-c9e826a52d68',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
 				},
 				{
-					elementId: 'ed11e415-630d-438b-81af-32ee7dd15fcf',
+					elementId: '027d3852-60fe-4f57-b5ca-51cfbb407579',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
 				},
 				{
-					elementId: '65550c22-bd74-4413-bb26-361af0b58f49',
+					elementId: 'ccf97b72-ce09-4de7-b421-4f5ad6f63387',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -2003,12 +2003,12 @@ export const Recipe: CAPIType = {
 			},
 		],
 		isProd: true,
-		shortUrlId: '/p/4k83z',
+		shortUrlId: '/p/fz7hz',
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
 			prebidTrustx: true,
-			scAdFreeBanner: true,
+			scAdFreeBanner: false,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -2032,7 +2032,7 @@ export const Recipe: CAPIType = {
 			prebidAppnexusInvcode: true,
 			prebidAppnexus: true,
 			enableDiscussionSwitch: true,
-			prebidXaxis: true,
+			prebidXaxis: false,
 			interactiveFullHeaderSwitch: false,
 			discussionAllPageSize: true,
 			prebidUserSync: true,
@@ -2041,6 +2041,7 @@ export const Recipe: CAPIType = {
 			breakingNews: true,
 			externalVideoEmbeds: true,
 			simpleReach: true,
+			abSignInGateCopyOpt: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -2084,7 +2085,7 @@ export const Recipe: CAPIType = {
 			idCookieRefresh: true,
 			sharingComments: true,
 			discussionPageSize: true,
-			smartAppBanner: true,
+			smartAppBanner: false,
 			boostGaUserTimingFidelity: false,
 			historyTags: true,
 			mobileStickyLeaderboard: true,
@@ -2092,41 +2093,34 @@ export const Recipe: CAPIType = {
 			surveys: true,
 			remoteBanner: true,
 			inizio: true,
-			abCommercialCmpCustomise: true,
-			emailSignupLabNotes: true,
-			lotame: true,
-			prebidPangaea: true,
-			idEmailSignInUpsell: false,
-			doubleclickYoutubeAdFree: true,
-			membershipEngagementBannerBlockUs: false,
-			oldTlsSupportDeprecation: true,
-			abContributionsEpicAskFourEarning: true,
-			emailSignupEuRef: true,
-			emailInArticleOutbrain: true,
-			abFebruaryMomentBannerThankYou: false,
-			commercialPageViewAnalytics: true,
-			membershipEngagementBanner: true,
-			membershipEngagementBannerBlockAu: false,
-			plistaAu: true,
-			membershipEngagementBannerBlockUk: false,
-			epicTestsFromGoogleDocs: true,
-			youtubeRelatedVideos: true,
-			abFebruaryMomentBannerCopy: true,
-			abCommercialPrebidSafeframe: true,
-			abAcquisitionsEpicAlwaysAskIfTagged: true,
-			emailInArticleGtoday: true,
-			engagementBannerTestsFromGoogleDocs: false,
-			prebidS2sozone: true,
-			tourismAustralia: true,
-			emailInArticle: true,
-			videojs: true,
-			abCommercialAdVerification: false,
 		},
 		hasYouTubeAtom: false,
 		inBodyInternalLinkCount: 0,
-		keywordIds: '',
+		keywordIds:
+			'food/vegan,food/vegetables,food/food,food/chinese,lifeandstyle/lifeandstyle,food/main-course,food/snacks,food/starter',
 		blogIds: '',
-		sharedAdTargeting: {},
+		sharedAdTargeting: {
+			se: ['the-new-vegan'],
+			ct: 'article',
+			co: ['meera-sodha'],
+			url:
+				'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			su: ['0'],
+			edition: 'uk',
+			tn: ['recipes', 'features'],
+			p: 'ng',
+			k: [
+				'vegetables',
+				'main-course',
+				'lifeandstyle',
+				'food',
+				'vegan',
+				'starter',
+				'snacks',
+				'chinese',
+			],
+			sh: 'https://www.theguardian.com/p/fz7hz',
+		},
 		beaconUrl: '//phar.gu-web.net',
 		campaigns: [],
 		calloutsUrl:
@@ -2161,8 +2155,8 @@ export const Recipe: CAPIType = {
 		pageCode: '8449593',
 		pillar: 'Lifestyle',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
-		discussionApiClientHeader: 'testClientHeader',
+			'https://assets.guim.co.uk/javascripts/b2d004ec8fca220ad3a7/graun.commercial.dcr.js',
+		discussionApiClientHeader: 'nextgen',
 		membershipUrl: 'https://membership.theguardian.com',
 		cardStyle: 'feature',
 		shouldHideReaderRevenue: false,
@@ -2178,18 +2172,18 @@ export const Recipe: CAPIType = {
 		sectionName: 'Food',
 		mobileAppsAdUnitRoot: 'beta-guardian-app',
 		dfpAdUnitRoot: 'theguardian.com',
-		headline: '',
+		headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
 		commentable: true,
 		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: false,
+		showRelatedContent: true,
 		commissioningDesks: 'feast',
 		inBodyExternalLinkCount: 5,
-		adUnit: '/59666047/theguardian.com/film/article/ng',
+		adUnit: '/59666047/theguardian.com/food/article/ng',
 		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
 		videoDuration: 0,
-		stage: 'DEV',
+		stage: 'PROD',
 		idOAuthUrl: 'https://oauth.theguardian.com',
-		series: '',
+		series: 'The new vegan',
 		isSensitive: false,
 		isDev: false,
 		thirdPartyAppsAccount: 'guardiangu-thirdpartyapps',
@@ -2200,24 +2194,25 @@ export const Recipe: CAPIType = {
 		fbAppId: '180444840287',
 		externalEmbedHost: 'https://embed.theguardian.com',
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords: '',
-		revisionNumber: '62cf0d6e4609276d37e09fd596430fbf8b629418',
+		keywords:
+			'Vegan food and drink,Vegetables,Food,Chinese food and drink,Life and style,Main course,Snacks,Starter',
+		revisionNumber: 'DEV',
 		blogs: '',
-		section: '',
+		section: 'food',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37539',
+		buildNumber: '37551',
 		isPhotoEssay: false,
 		seriesId: 'food/series/the-new-vegan',
 		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
+			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
 		userAttributesApiUrl:
 			'https://members-data-api.theguardian.com/user-attributes',
 		isLive: false,
 		publication: 'The Guardian',
 		host: 'https://www.theguardian.com',
 		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		contentType: '',
+		contentType: 'Article',
 		facebookIaAdUnitRoot: 'facebook-instant-articles',
 		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		idUrl: 'https://profile.theguardian.com',
@@ -2225,11 +2220,12 @@ export const Recipe: CAPIType = {
 			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/500.jpg?quality=85&auto=format&fit=max&s=65379d8d61b26acfdafcddb11016ad41',
 		isFront: false,
 		wordCount: 605,
-		author: '',
-		dfpAccountId: '',
+		author: 'Meera Sodha',
+		dfpAccountId: '59666047',
 		nonKeywordTagIds:
 			'food/series/the-new-vegan,type/article,tone/recipes,tone/features,profile/meera-sodha,publication/theguardian,theguardian/feast,theguardian/feast/feast,tracking/commissioningdesk/feast',
-		pageId: '',
+		pageId:
+			'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 		forecastsapiurl: '/weatherapi/forecast',
 		assetsPath: 'https://assets.guim.co.uk/',
 		lightboxImages: {
@@ -2264,18 +2260,18 @@ export const Recipe: CAPIType = {
 		seriesTags: 'The new vegan',
 		isImmersive: false,
 		dfpHost: 'pubads.g.doubleclick.net',
-		googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
+		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		hbImpl: {
-			prebid: false,
-			a9: false,
+			prebid: true,
+			a9: true,
 		},
 		abTests: {},
 		shortUrl: 'https://www.theguardian.com/p/fz7hz',
 		isContent: true,
 		contentId:
 			'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-		edition: '',
+		edition: 'UK',
 		discussionFrontendUrl:
 			'https://assets.guim.co.uk/discussion/discussion-frontend.preact.iife.8bdbd9194e.js',
 		ipsosTag: 'food',
@@ -3720,6 +3716,8 @@ export const Recipe: CAPIType = {
 			5612812553,
 			5612812556,
 			5613900227,
+			5616295359,
+			5617153347,
 			5617357126,
 			5617560946,
 			5618303037,
@@ -3796,6 +3794,8 @@ export const Recipe: CAPIType = {
 			5633566955,
 			5633735270,
 			5633782264,
+			5634188591,
+			5634188594,
 		],
 		tones: 'Recipes,Features',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',
@@ -3805,13 +3805,13 @@ export const Recipe: CAPIType = {
 		allowUserGeneratedContent: false,
 		byline: 'Meera Sodha',
 		authorIds: 'profile/meera-sodha',
-		webPublicationDate: 1579185778186,
+		webPublicationDate: 1612607438000,
 		omnitureAmpAccount: 'guardiangu-thirdpartyapps',
 		isHosted: false,
 		hasPageSkin: false,
 		webTitle:
 			'Meera Sodha’s vegan recipe for spring onion pancakes | The new vegan',
-		discussionD2Uid: 'testD2Header',
+		discussionD2Uid: 'zHoBy6HNKsk',
 		weatherapiurl: '/weatherapi/city',
 		googleSearchUrl: '//www.google.co.uk/cse/cse.js',
 		optimizeEpicUrl:
