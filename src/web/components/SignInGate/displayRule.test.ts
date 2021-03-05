@@ -9,9 +9,24 @@ import {
 	isValidSection,
 	isValidTag,
 	isCountry,
+	hasRequiredConsents,
 } from './displayRule';
 
 const CAPI = Article;
+
+let mockOnConsentChangeResult: any;
+jest.mock('@guardian/consent-management-platform', () => ({
+	onConsentChange: (callback: any) => {
+		callback(mockOnConsentChangeResult);
+	},
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+	getConsentFor: jest.requireActual('@guardian/consent-management-platform')
+		.getConsentFor,
+}));
+
+afterEach(() => {
+	mockOnConsentChangeResult = undefined;
+});
 
 describe('SignInGate - displayRule methods', () => {
 	describe('isNPageOrHigherPageView', () => {
@@ -227,6 +242,51 @@ describe('SignInGate - displayRule methods', () => {
 			];
 
 			expect(isValidTag(CAPIBrowser)).toBe(false);
+		});
+	});
+
+	describe('hasRequiredConsents', () => {
+		const googleAnalyticsId = '5e542b3a4cd8884eb41b5a72';
+		const ophanId = '5f203dbeeaaaa8768fd3226a';
+		const sentryId = '5f0f39014effda6e8bbd2006';
+
+		test('returns true when the user has consented to the required vendors', async () => {
+			mockOnConsentChangeResult = {
+				tcfv2: {
+					vendorConsents: {
+						[googleAnalyticsId]: true,
+						[ophanId]: true,
+						[sentryId]: true,
+					},
+				},
+			};
+			await expect(hasRequiredConsents()).resolves.toBe(true);
+		});
+
+		test('returns false when the user has not consented to one of the required vendors', async () => {
+			mockOnConsentChangeResult = {
+				tcfv2: {
+					vendorConsents: {
+						[googleAnalyticsId]: true,
+						[ophanId]: false,
+						[sentryId]: true,
+					},
+				},
+			};
+			await expect(hasRequiredConsents()).resolves.toBe(false);
+		});
+
+		test('returns false when the user has not consented to any of the required vendors', async () => {
+			mockOnConsentChangeResult = {
+				tcfv2: {
+					vendorConsents: {
+						[googleAnalyticsId]: false,
+						[ophanId]: false,
+						[sentryId]: false,
+					},
+				},
+			};
+			await expect(hasRequiredConsents()).resolves.toBe(false);
 		});
 	});
 });

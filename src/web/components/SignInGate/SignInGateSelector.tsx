@@ -27,7 +27,13 @@ import { signInGateComponent as gateCopyOptVar3 } from '@root/src/web/components
 import { signInGateComponent as gateCopyOptVar4 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-4';
 import { signInGateComponent as gateCopyOptVar5 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-5';
 import { signInGateComponent as gateCopyOptVar6 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-6';
+import { signInGateComponent as gateMandatoryVariant } from '@root/src/web/components/SignInGate/gates/mandatory-gate';
 
+import { signInGateMandoryTest } from '@root/src/web/experiments/tests/sign-in-gate-mandatory';
+import {
+	canShow,
+	canShowMandatoryGate,
+} from '@root/src/web/components/SignInGate/displayRule';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,
@@ -73,24 +79,28 @@ const tests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
 	signInGateCopyOpt,
+	signInGateMandoryTest,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
 	'main-control-3': gateMainControl,
-	'main-variant-3': gateMainVariant,
-	'copy-opt-control': gateMainVariant,
+	'main-variant-3': gateMainVariant(canShow),
+	'copy-opt-control': gateMainVariant(canShow),
 	'copy-opt-variant-1': gateCopyOptVar1,
 	'copy-opt-variant-2': gateCopyOptVar2,
 	'copy-opt-variant-3': gateCopyOptVar3,
 	'copy-opt-variant-4': gateCopyOptVar4,
 	'copy-opt-variant-5': gateCopyOptVar5,
 	'copy-opt-variant-6': gateCopyOptVar6,
+	'mandatory-gate-control': gateMainVariant(canShowMandatoryGate),
+	'mandatory-gate-variant': gateMandatoryVariant,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_3',
 	SignInGateMainControl: 'main_control_3',
 	SignInGateCopyOpt: 'copy_opt_test',
+	SignInGateMandatory: 'mandatory_gate_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -166,7 +176,8 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps) => {
-	const [showGate, setShowGate] = useState(true);
+	const [showGate, setShowGate] = useState(false);
+
 	const [currentTest, setCurrentTest] = useState<CurrentABTest>({
 		name: '',
 		variant: '',
@@ -208,19 +219,23 @@ export const SignInGateSelector = ({
 	const gateVariant: SignInGateComponent | null =
 		testVariantToGateMapping?.[currentTest.variant];
 
+	if (gateVariant) {
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		gateVariant.canShow(CAPI, !!isSignedIn, currentTest).then(setShowGate);
+	}
+
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{showGate &&
-				gateVariant?.canShow(CAPI, !!isSignedIn, currentTest) && (
-					<ShowSignInGate
-						CAPI={CAPI}
-						abTest={currentTest}
-						setShowGate={setShowGate}
-						signInUrl={signInUrl}
-						gateVariant={gateVariant}
-					/>
-				)}
+			{showGate && (
+				<ShowSignInGate
+					CAPI={CAPI}
+					abTest={currentTest}
+					setShowGate={setShowGate}
+					signInUrl={signInUrl}
+					gateVariant={gateVariant}
+				/>
+			)}
 		</>
 	);
 };

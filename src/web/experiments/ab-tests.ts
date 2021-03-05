@@ -9,12 +9,14 @@ import {
 	newsletterMerchUnitLighthouseVariants,
 } from '@root/src/web/experiments/tests/newsletter-merch-unit-test';
 import { stickyNavTest } from '@root/src/web/experiments/tests/sticky-nav-test';
+import { signInGateMandoryTest } from '@root/src/web/experiments/tests/sign-in-gate-mandatory';
 
 export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
 	signInGateCopyOpt,
+	signInGateMandoryTest,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	deeplyReadTest,
