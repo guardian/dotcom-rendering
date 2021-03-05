@@ -1,9 +1,7 @@
 import fetchMock from 'fetch-mock';
 
-import {
-	mockTab1,
-	responseWithTwoTabs,
-} from '@root/fixtures/manual/mostViewed';
+import { mostRead } from '@root/fixtures/generated/most-read';
+import { mostReadGeo } from '@root/fixtures/generated/most-read-geo';
 import { series } from '@root/fixtures/generated/series';
 import { related } from '@root/fixtures/generated/related';
 import { commentCount } from '@root/fixtures/manual/commentCount';
@@ -108,7 +106,7 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/most-read-geo.*/,
 			{
 				status: 200,
-				body: mockTab1,
+				body: mostReadGeo,
 			},
 			{ overwriteRoutes: false },
 		)
@@ -126,7 +124,7 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/most-read.*/,
 			{
 				status: 200,
-				body: responseWithTwoTabs,
+				body: mostRead,
 			},
 			{ overwriteRoutes: false },
 		)

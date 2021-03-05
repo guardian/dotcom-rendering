@@ -256,6 +256,50 @@ try {
 			}),
 	);
 
+	// Most read (Most Popular)
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/most-read/science.json?dcr=true',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const mostRead = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/most-read.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created most-read.ts`);
+			}),
+	);
+
+	// Most read geo (Most Viewed)
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const mostReadGeo = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/most-read-geo.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created most-read-geo.ts`);
+			}),
+	);
+
 	Promise.all(requests).finally(() => {
 		console.log('\nFormatting files...');
 		execa('prettier', [
