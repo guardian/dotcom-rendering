@@ -529,6 +529,20 @@ type EventType = {
 	eventType: 'substitution' | 'dismissal' | 'booking';
 };
 
+type MatchReportType = {
+	id: string;
+	isResult: boolean;
+	homeTeam: TeamType;
+	awayTeam: TeamType;
+	competition: {
+		fullName: string;
+	};
+	isLive: boolean;
+	venue: string;
+	comments: string;
+	minByMinUrl: string;
+}
+
 /**
  * Onwards
  */

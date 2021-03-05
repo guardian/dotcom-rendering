@@ -168,6 +168,28 @@ try {
 			}),
 	);
 
+	// MatchReport fixtures
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2021/02/28/29/1006.json?dcr=true&page=football%2F2021%2Ffeb%2F28%2Fleicester-arsenal-premier-league-match-report',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const matchReport: MatchReportType = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/match-report.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created match-report.ts`);
+			}),
+	);
+
 	Promise.all(requests).finally(() => {
 		console.log('\nFormatting files...');
 		execa('prettier', [

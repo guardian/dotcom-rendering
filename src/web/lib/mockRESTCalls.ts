@@ -9,7 +9,7 @@ import { related } from '@root/fixtures/manual/related';
 import { commentCount } from '@root/fixtures/manual/commentCount';
 import { discussion } from '@root/fixtures/manual/discussion';
 import { storypackage } from '@root/fixtures/manual/storypackage';
-import { matchreport } from '@root/fixtures/manual/matchreport';
+import { matchReport } from '@root/fixtures/generated/match-report';
 
 const richLinkCard = {
 	tags: [
@@ -203,7 +203,7 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/football\/api.*/,
 			{
 				status: 200,
-				body: matchreport,
+				body: matchReport,
 			},
 			{ overwriteRoutes: false },
 		);
