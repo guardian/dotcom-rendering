@@ -98,6 +98,7 @@ ArticlePrintStory.parameters = {
 	viewport: {
 		defaultViewport: 'tablet',
 	},
+	chromatic: { viewports: [740] },
 };
 
 export const ReviewStory = (): React.ReactNode => {
