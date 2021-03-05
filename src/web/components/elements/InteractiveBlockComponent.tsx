@@ -1,4 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { css } from 'emotion';
+import { body } from '@guardian/src-foundations/typography';
+import { neutral } from '@guardian/src-foundations/palette';
 
 type Props = {
 	url?: string;
@@ -65,8 +68,29 @@ For the remaining few we dynamically load and AMD loader and support the contrac
 
 */
 
+const wrapperStyle = css`
+	${body.medium()};
+	font-weight: 300;
+	min-height: 350px;
+	position: relative;
+`;
+
+const placeholderStyle = css`
+	background-color: ${neutral[93]};
+	height: 100%;
+	width: 100%;
+	position: absolute;
+`;
+
+const placeholderLinkStyle = css`
+	position: absolute;
+	bottom: 1rem;
+	left: 1rem;
+`;
+
 export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
+	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
 		if (scriptUrl) {
 			// We're going to use curl AMD loader to load the script that the
@@ -89,6 +113,8 @@ export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 					}
 				},
 			);
+
+			setLoaded(true);
 		}
 	}, [scriptUrl]);
 
@@ -96,8 +122,14 @@ export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 		<div
 			data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 			ref={wrapperRef}
+			className={wrapperStyle}
 		>
-			<a data-name="placeholder" href={url}>
+			{!loaded && <div className={placeholderStyle} />}
+			<a
+				data-name="placeholder"
+				className={placeholderLinkStyle}
+				href={url}
+			>
 				{alt}
 			</a>
 		</div>
