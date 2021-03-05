@@ -1441,7 +1441,7 @@ export const Recipe: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '6e6ea91a-c276-4193-a50d-58c64789ec1c',
+			elementId: '6d381085-4687-4192-87b6-b1e83e76b4dd',
 			role: 'inline',
 			data: {
 				alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
@@ -1835,83 +1835,83 @@ export const Recipe: CAPIType = {
 			lastUpdated: 1612607438000,
 			elements: [
 				{
-					elementId: '2a8a3f94-03af-4b2b-95f6-1999a6358feb',
+					elementId: 'eb9fe288-cb64-41ea-a98b-6dd752993ddb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
 				},
 				{
-					elementId: 'c64e189c-302e-4e52-9a55-7253cc9f788b',
+					elementId: '1ecd4739-d052-4169-96cc-189ceaa5139f',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
 				},
 				{
-					elementId: '9b7d26b9-9589-4279-b041-5b37879b5b3b',
+					elementId: '95b973e2-4fe8-42ee-b920-7fdcd1e6ad03',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
 				},
 				{
-					elementId: '75ad579c-b43e-4645-a1a2-c153449da304',
+					elementId: 'df37401c-dd62-4b99-87c5-ffe70dcf94e9',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
 				},
 				{
-					elementId: 'e1e02072-57dd-4310-a32f-98f7f1c92ce7',
+					elementId: '4fbe1387-8e10-4968-96a0-56ce36749c06',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
 				},
 				{
-					elementId: '6bf7cdb2-e673-46a6-ad3b-1d0ac4f11dc9',
+					elementId: '7e80bbba-d1b2-41d3-b533-5298dc58504a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
 				},
 				{
-					elementId: '71d39c17-2f39-4caf-a5b2-8dca13e51a98',
+					elementId: 'fb5c7b08-7cc1-461f-88aa-2485ed859134',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
 				},
 				{
-					elementId: '48a29c26-6d33-420c-b970-87ca800bbf79',
+					elementId: '5ce5f5f5-098c-4dd8-bbf8-9dec27e3da74',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
 				},
 				{
-					elementId: 'fc22b9cf-d4e5-4e2e-a27b-f5d93186bdcb',
+					elementId: '4e251896-90ce-46de-a793-850312fc06ff',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
 				},
 				{
-					elementId: '61213540-3bdc-48fc-b302-c9e826a52d68',
+					elementId: 'a397c870-a0e9-470c-8b0d-b5bbb9c261b1',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
 				},
 				{
-					elementId: '027d3852-60fe-4f57-b5ca-51cfbb407579',
+					elementId: 'dab9074c-35b1-4e7b-9b88-2f296192f749',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
 				},
 				{
-					elementId: 'ccf97b72-ce09-4de7-b421-4f5ad6f63387',
+					elementId: 'e0752d0c-ffa9-4c92-a3bf-7fca339d47bf',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -2009,6 +2009,7 @@ export const Recipe: CAPIType = {
 			clickToView: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
+			abStickyNavTest: true,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -2201,7 +2202,7 @@ export const Recipe: CAPIType = {
 		section: 'food',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37551',
+		buildNumber: '37555',
 		isPhotoEssay: false,
 		seriesId: 'food/series/the-new-vegan',
 		ampIframeUrl:
@@ -2266,7 +2267,9 @@ export const Recipe: CAPIType = {
 			prebid: true,
 			a9: true,
 		},
-		abTests: {},
+		abTests: {
+			dotcomRenderingVariant: 'variant',
+		},
 		shortUrl: 'https://www.theguardian.com/p/fz7hz',
 		isContent: true,
 		contentId:
@@ -3757,6 +3760,8 @@ export const Recipe: CAPIType = {
 			5627400383,
 			5627416481,
 			5627419082,
+			5627510314,
+			5627740002,
 			5627768068,
 			5627946712,
 			5628367142,
@@ -3772,6 +3777,8 @@ export const Recipe: CAPIType = {
 			5630498106,
 			5630926258,
 			5631069021,
+			5631098598,
+			5631098862,
 			5631297107,
 			5631522170,
 			5631715415,
@@ -3786,16 +3793,28 @@ export const Recipe: CAPIType = {
 			5632246513,
 			5632464370,
 			5632497345,
+			5632654007,
 			5632702032,
 			5633274403,
+			5633307960,
 			5633479388,
 			5633559344,
 			5633566793,
 			5633566955,
+			5633620717,
+			5633632965,
 			5633735270,
 			5633782264,
-			5634188591,
-			5634188594,
+			5633848686,
+			5634480439,
+			5634571147,
+			5634602605,
+			5634623455,
+			5634695740,
+			5634696664,
+			5634854126,
+			5635126238,
+			5635356428,
 		],
 		tones: 'Recipes,Features',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',

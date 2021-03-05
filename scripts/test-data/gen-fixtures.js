@@ -168,6 +168,94 @@ try {
 			}),
 	);
 
+	// MatchReport fixtures
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2021/02/28/29/1006.json?dcr=true&page=football%2F2021%2Ffeb%2F28%2Fleicester-arsenal-premier-league-match-report',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const matchReport: MatchReportType = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/match-report.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created match-report.ts`);
+			}),
+	);
+
+	// Series
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/series/tv-and-radio/series/tv-review.json?dcr',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const series = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/series.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created series.ts`);
+			}),
+	);
+
+	// Related
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/related/world/2020/sep/13/shaggy-dog-stories-visit-puppies-before-buying-say-charities.json?dcr=true',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const related = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/related.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created related.ts`);
+			}),
+	);
+
+	// Story package
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/story-package/science/2021/feb/18/life-on-mars-nasa-keeps-looking-with-perseverance-rover-mission.json?dcr=true',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const storyPackage = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/story-package.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created story-package.ts`);
+			}),
+	);
+
 	Promise.all(requests).finally(() => {
 		console.log('\nFormatting files...');
 		execa('prettier', [
