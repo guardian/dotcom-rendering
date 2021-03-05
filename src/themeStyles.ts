@@ -122,4 +122,10 @@ function themeToPillar(theme: Theme): Pillar {
 
 // ----- Exports ----- //
 
-export { ThemeStyles, getThemeStyles, themeFromString, themeToPillarString, themeToPillar };
+export {
+	ThemeStyles,
+	getThemeStyles,
+	themeFromString,
+	themeToPillarString,
+	themeToPillar,
+};

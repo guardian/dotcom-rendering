@@ -39,11 +39,11 @@ import type {
 	Image,
 	Instagram,
 	InteractiveAtom as InteractiveAtomElement,
+	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
 	MediaAtom as MediaAtomElement,
+	PersonalityQuizAtom as PersonalityQuizAtomElement,
 	ProfileAtom as ProfileAtomElement,
 	QandaAtom as QandaAtomElement,
-	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
-	PersonalityQuizAtom as PersonalityQuizAtomElement,
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';

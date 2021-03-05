@@ -149,17 +149,17 @@ interface PersonalityQuizAtom {
 }
 
 type AnswerType = {
-    id: string;
-    text: string;
-    revealText?: string;
-    isCorrect: boolean;
-    answerBuckets: string[];
+	id: string;
+	text: string;
+	revealText?: string;
+	isCorrect: boolean;
+	answerBuckets: string[];
 };
 
 type ResultBucket = {
-    id: string;
-    title: string;
-    description: string;
+	id: string;
+	title: string;
+	description: string;
 };
 
 type QuestionType = {

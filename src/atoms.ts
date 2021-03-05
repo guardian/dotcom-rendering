@@ -310,7 +310,11 @@ function parseAtom(
 			});
 
 			if (atom.data.quiz.quizType === 'knowledge') {
-				return ok({ kind: ElementKind.KnowledgeQuizAtom, id, questions });
+				return ok({
+					kind: ElementKind.KnowledgeQuizAtom,
+					id,
+					questions,
+				});
 			}
 
 			if (atom.data.quiz.quizType === 'personality') {
@@ -318,11 +322,10 @@ function parseAtom(
 					kind: ElementKind.PersonalityQuizAtom,
 					id,
 					questions,
-					resultBuckets: atom.data.quiz.content.resultBuckets?.buckets ?? [],
+					resultBuckets:
+						atom.data.quiz.content.resultBuckets?.buckets ?? [],
 				});
-
 			}
-
 		}
 
 		default: {
