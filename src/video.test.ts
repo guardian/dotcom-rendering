@@ -20,6 +20,11 @@ describe('parseVideo', () => {
 	let atom: Atom;
 	let atomData: AtomData;
 	let mediaAtom: MediaAtom;
+	const atomId = 'atomId2';
+	const posterUrl = 'poster-url';
+	const assetId = 'asset-id';
+	const mediaAtomTitle = 'mediaTitle';
+	const assetVersion = new Int64(2);
 
 	beforeEach(() => {
 		blockElement = {
@@ -30,7 +35,7 @@ describe('parseVideo', () => {
 				},
 			],
 			contentAtomTypeData: {
-				atomId: 'atomId2',
+				atomId,
 				atomType: 'someAtomType',
 			},
 		};
@@ -39,15 +44,15 @@ describe('parseVideo', () => {
 			assets: [
 				{
 					assetType: AssetType.VIDEO,
-					id: 'asset-id',
-					version: new Int64(2),
+					id: assetId,
+					version: assetVersion,
 					platform: Platform.YOUTUBE,
 				},
 			],
-			activeVersion: new Int64(2),
-			title: 'mediaTitle',
+			activeVersion: assetVersion,
+			title: mediaAtomTitle,
 			category: Category.DOCUMENTARY,
-			posterUrl: 'poster-url',
+			posterUrl: posterUrl,
 		};
 
 		atomData = {
@@ -56,7 +61,7 @@ describe('parseVideo', () => {
 		};
 
 		atom = {
-			id: 'atomId2',
+			id: atomId,
 			atomType: AtomType.MEDIA,
 			labels: ['someLabel'],
 			defaultHtml: 'someHtml',
@@ -72,11 +77,11 @@ describe('parseVideo', () => {
 
 	test('returns video', () => {
 		const expected = some({
-			posterUrl: 'poster-url',
-			videoId: 'asset-id',
+			posterUrl: posterUrl,
+			videoId: assetId,
 			duration: undefined,
-			atomId: 'atomId2',
-			title: 'mediaTitle',
+			atomId: atomId,
+			title: mediaAtomTitle,
 		});
 		expect(parseVideo(blockElement, atoms)).toEqual(expected);
 	});
