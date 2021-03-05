@@ -7,6 +7,11 @@ deployments:
       templatePath: cloudformation.yml
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
+      templateStageParameters:
+        CODE:
+          InstanceType: t3.micro
+        PROD:
+          InstanceType: t3.small
       amiParametersToTags:
         AMI:
           Recipe: dotcom-rendering-node14-test
