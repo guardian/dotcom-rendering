@@ -9,14 +9,6 @@ describe('Sign In Gate Tests', function () {
 		setLocalBaseUrl();
 	});
 
-	const cmpIframe = () => {
-		return cy
-			.get('iframe[id^="sp_message_iframe"]')
-			.its('0.contentDocument.body')
-			.should('not.be.empty')
-			.then(cy.wrap);
-	};
-
 	const setArticleCount = (n) => {
 		// set article count for today to be n
 		localStorage.setItem(
@@ -189,40 +181,6 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main_privacy]').click();
 
 			cy.contains('privacy settings');
-		});
-	});
-
-	describe('Sign In Gate Mandatory', function () {
-		it('not render the gate unless the user has consented to CMP banner', function () {
-			setMvtCookie('500001');
-			visitArticleAndScrollToGateForLazyLoad();
-			cy.get('[data-cy=sign-in-gate-mandatory]').should('not.exist');
-		});
-
-		it('should render a gate without a dismiss button', function () {
-			setMvtCookie('500001');
-			visitArticleAndScrollToGateForLazyLoad();
-
-			cmpIframe().contains('Yes, I’m happy').click();
-			Array.from(Array(3)).forEach(visitArticle); // after consenting to CMP the article count is set to 0 and we cannot set the article count manually
-
-			visitArticleAndScrollToGateForLazyLoad();
-
-			cy.get('[data-cy=sign-in-gate-mandatory]').should('be.visible');
-			cy.contains('I’ll do it later').should('not.exist');
-		});
-
-		it('should render a gate with a dismiss button for the control', function () {
-			setMvtCookie('500000');
-			visitArticleAndScrollToGateForLazyLoad();
-
-			cmpIframe().contains('Yes, I’m happy').click();
-			Array.from(Array(3)).forEach(visitArticle);
-
-			visitArticleAndScrollToGateForLazyLoad();
-
-			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-			cy.contains('I’ll do it later').should('be.visible');
 		});
 	});
 
