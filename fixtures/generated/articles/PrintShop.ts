@@ -1316,7 +1316,7 @@ export const PrintShop: CAPIType = {
 			lastUpdated: 1608213898000,
 			elements: [
 				{
-					elementId: '917168de-781a-4c9d-b2bd-3efa820c17b8',
+					elementId: '97dc9b09-47ce-4aa2-9038-f753f42aec51',
 					role: 'immersive',
 					data: {
 						alt: 'Bobby Moore in 1973',
@@ -1700,54 +1700,54 @@ export const PrintShop: CAPIType = {
 					displayCredit: false,
 				},
 				{
-					elementId: '23ade28d-0829-496a-971e-059484332832',
+					elementId: '282ccf20-29c7-46eb-8572-7d1d4cf2a8eb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
 				},
 				{
-					elementId: 'e46962a9-8162-4764-8a25-1192caf96cac',
+					elementId: '72441859-2259-4ea8-9d3e-ad0f8313561b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
 				},
 				{
-					elementId: 'cabc8342-99d3-4d15-a87f-2f371d5fbe3b',
+					elementId: 'e0013127-4aff-40ac-8361-1541c0188b07',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
 				},
 				{
-					elementId: '897fb4fe-a919-49a3-8c0c-1c803d1f90f7',
+					elementId: '2f4a44a1-0cb8-4955-b797-763a3706a517',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
 				},
 				{
-					elementId: '7411bf9f-746f-447c-ae25-9e1677a00384',
+					elementId: '0c0a47dd-560e-43d9-a314-c7cf67022a81',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
 				},
 				{
-					elementId: '7ba5797e-28c7-4f8e-9f9e-5cd4a16e46a1',
+					elementId: 'f0a81b6a-ee2e-44a3-8d0c-8c548289d659',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
 				},
 				{
-					elementId: 'e8e96d42-3211-4a96-8f31-7e5d54dea0df',
+					elementId: 'ef51c258-19d2-4b76-bf5f-c32c290ff8d7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
 				},
 				{
-					elementId: '4c09af79-42a1-43e0-96d7-0660c4606149',
+					elementId: '4724b909-164a-4b85-a664-1bcd1dff986a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -1851,6 +1851,7 @@ export const PrintShop: CAPIType = {
 			clickToView: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
+			abStickyNavTest: true,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -2038,7 +2039,7 @@ export const PrintShop: CAPIType = {
 		section: 'artanddesign',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37551',
+		buildNumber: '37555',
 		isPhotoEssay: false,
 		seriesId: 'artanddesign/series/guardian-print-shop',
 		ampIframeUrl:
@@ -2102,7 +2103,9 @@ export const PrintShop: CAPIType = {
 			prebid: true,
 			a9: true,
 		},
-		abTests: {},
+		abTests: {
+			dotcomRenderingControl: 'control',
+		},
 		shortUrl: 'https://www.theguardian.com/p/fmxze',
 		isContent: true,
 		contentId:
@@ -3593,6 +3596,8 @@ export const PrintShop: CAPIType = {
 			5627400383,
 			5627416481,
 			5627419082,
+			5627510314,
+			5627740002,
 			5627768068,
 			5627946712,
 			5628367142,
@@ -3608,6 +3613,8 @@ export const PrintShop: CAPIType = {
 			5630498106,
 			5630926258,
 			5631069021,
+			5631098598,
+			5631098862,
 			5631297107,
 			5631522170,
 			5631715415,
@@ -3622,16 +3629,28 @@ export const PrintShop: CAPIType = {
 			5632246513,
 			5632464370,
 			5632497345,
+			5632654007,
 			5632702032,
 			5633274403,
+			5633307960,
 			5633479388,
 			5633559344,
 			5633566793,
 			5633566955,
+			5633620717,
+			5633632965,
 			5633735270,
 			5633782264,
-			5634188591,
-			5634188594,
+			5633848686,
+			5634480439,
+			5634571147,
+			5634602605,
+			5634623455,
+			5634695740,
+			5634696664,
+			5634854126,
+			5635126238,
+			5635356428,
 		],
 		tones: '',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',

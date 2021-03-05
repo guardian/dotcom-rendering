@@ -1365,7 +1365,7 @@ export const Article: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'a763b157-6237-48eb-8103-339eaf752d59',
+			elementId: '210442ed-b9dc-451f-8a45-ba6a33b8c55c',
 			role: 'inline',
 			data: {
 				copyright: 'Credit: Alexandre Rotenberg / Alamy Stock Photo',
@@ -1771,70 +1771,70 @@ export const Article: CAPIType = {
 			lastUpdated: 1589470537000,
 			elements: [
 				{
-					elementId: '0545e056-981b-423c-96d2-274f84e1dc95',
+					elementId: '0cce6b7f-93fb-4f5b-8fcd-ee124668eeda',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>A <a href="https://experience.arcgis.com/stemapp/5f6596de6c4445a58aec956532b9813d">series of detailed maps</a> have laid bare the scale of possible forest fires, floods, droughts and deluges that Europe could face by the end of the century without urgent action to adapt to and confront global heating.</p>',
 				},
 				{
-					elementId: 'a11c56a5-b716-4668-96a4-c238df9c460a',
+					elementId: '2e679fff-fe8e-41df-a42c-e11fe21e753e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>An average one-metre rise in sea levels by the end of the century – without any flood prevention action – would mean 90% of the surface of Hull would be under water, according to the European Environment Agency.</p>',
 				},
 				{
-					elementId: '5dc54aea-1d8c-41c8-94bf-4f82a4806bdc',
+					elementId: '976cab51-4e7f-4255-923d-98576a759b8e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>English cities including Norwich, Margate, Southend-on-Sea, Runcorn and Blackpool could also experience flooding covering more than 40% of the urban area.</p>',
 				},
 				{
-					elementId: 'c6d0f01e-5b1d-4fb2-90bd-d4547269195c',
+					elementId: '79e342a7-0553-4bb8-aa87-ad471def5363',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Across the North Sea, Dutch cities including the Hague, Rotterdam and Leiden were predicted to face severe floods from an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels.</p>',
 				},
 				{
-					elementId: '507805c9-35e3-4d2e-a3a9-5f942e00fe84',
+					elementId: '3cad92d7-d708-4409-8643-753ff999d891',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The model does not account for the Netherlands’ extensive flood-prevention measures, although many other countries have not taken such action.</p>',
 				},
 				{
-					elementId: '03d937a4-b009-4069-8501-55c66f1bee99',
+					elementId: 'ee28e12e-6c64-424f-b2dd-4b76f5a4e15b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Meanwhile, large areas of Spain, Portugal and France would be grappling with desertification, with the worst-affected zones experiencing a two and half-fold increase in droughts under the worst-case scenario.</p>',
 				},
 				{
-					elementId: '9626c0f7-efcb-4ea3-a30d-a2ba2ec483cd',
+					elementId: 'e91f6b76-4f20-44c5-85dc-edca7639757d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Hotter summers increase the risk of forest fires, which <a href="https://www.theguardian.com/world/2018/jul/18/sweden-calls-for-help-as-arctic-circle-hit-by-wildfires">hit record levels in Sweden in 2018</a>. If emissions exceed 4C, France, southern Germany, the Balkans and the Arctic Circle could experience a greatly increased fire risk. However, the absolute fire danger would remain highest in southern European countries, which are already prone to blazes.</p>',
 				},
 				{
-					elementId: '66b46568-351b-4ce4-b34d-76c612023de4',
+					elementId: '7a70471e-681d-408d-bd6e-7554b93304d3',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Further north, winters are becoming wetter. Failure to limit global heating below 2C could mean a swath of central and eastern Europe, from Bratislava in the west to Yaroslavl in the east, will be in line for sharp increase in “heavy rain events” during autumn and winter by the end of the century.</p>',
 				},
 				{
-					elementId: '4765cbe3-8f2e-4975-8c87-fbae718a30d2',
+					elementId: '0f93a123-4fa8-4dd5-acc7-e7ed9869573e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>In some areas of central and eastern Europe there is predicted to be a 35% increase in heavy rain events, meaning torrential downpours would be more frequent.</p>',
 				},
 				{
-					elementId: 'e3bde30f-defd-4139-85bd-125082a184a0',
+					elementId: 'e7bd3908-5d84-4ea8-afa5-6afa2041c8ab',
 					role: 'inline',
 					data: {
 						alt: 'Map predicting flood-hit areas.',
@@ -2209,63 +2209,63 @@ export const Article: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: '20e49a03-c839-4d45-921a-22edf898665c',
+					elementId: '0e1ced7b-b40e-4400-8717-1661d90fa09a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>While the climate data has been published before, this is the first time the EU-agency has presented it using detailed maps on one site. Users can zoom in on small areas, for example, to discover that one-third of the London borough of Hammersmith and Fulham could be exposed to flooding by 2071.</p>',
 				},
 				{
-					elementId: '6535a80a-b038-4873-b760-d479fa7b1531',
+					elementId: 'b88384ec-3f92-4a60-982a-449a795ad7ac',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The Copenhagen-based agency hopes the maps will reach decision-makers in governments and EU institutions, who would not usually read a lengthy EEA report on the impact of the climate emergency.</p>',
 				},
 				{
-					elementId: '57578b26-fbb7-4e0e-8c75-8fcf8481cdad',
+					elementId: '341d9b3e-b90a-4531-bc36-cbf0d8cfbff2',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“It’s very urgent and we need to act now,” said Blaž Kurnik, an EEA expert in climate change impacts and adaptation.</p>',
 				},
 				{
-					elementId: '5126a40c-221f-4dfb-881d-a0d33f39b270',
+					elementId: '057cd07b-2527-4777-956e-002d10fda4ea',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Even if countries succeed in restricting global temperature rise, existing CO<strong><sub>2</sub></strong> in the atmosphere would still have an impact, he said.</p>',
 				},
 				{
-					elementId: '9c239e30-671a-4055-893e-ba5ba871e330',
+					elementId: '256a56ae-2d0e-459a-becf-3c1dc9141040',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“The number of extreme events and sea level rise will still continue to increase for the next decades to a century,” Kurnik said. “Sea level rise, especially, can be problematic, because it is still increasing because of past emissions and the current concentration of greenhouse gases.”</p>',
 				},
 				{
-					elementId: '855bbcf2-c816-43b4-b7fd-2e346e68c883',
+					elementId: '3001ba84-4d77-459b-a799-7ab798dafb19',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The agency wants governments to focus on adapting to unavoidable global heating. “Adaptation is crucial in the next decades of the century. Even if we are able to increase the temperature by 2C, adaptation is crucial for the next decades.”</p>',
 				},
 				{
-					elementId: '3689013f-8ad4-4693-b346-689519aee40f',
+					elementId: '535e8579-d5fd-42f6-bc2d-e2b6a9ad9901',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The EEA has concluded it is <a href="https://www.eea.europa.eu/data-and-maps/indicators/atmospheric-greenhouse-gas-concentrations-6/assessment-1">possible to limit the rise in global temperatures to 2C above pre-industrial levels</a>, as long as greenhouse gas concentrations peak during the next 15 to 29 years.</p>',
 				},
 				{
-					elementId: 'd98cc2cc-b819-4ad3-8e70-0beb29629434',
+					elementId: 'b2d07f56-c0e4-4f1d-afdd-885b1a3c472d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Meeting a more demanding<a href="https://www.theguardian.com/environment/2018/oct/08/global-warming-must-not-exceed-15c-warns-landmark-un-report"> 1.5C limit</a> requires concentrations to peak in the next three to 13 years. Under both scenarios, there is a 50% chance of overshooting the temperature.</p>',
 				},
 				{
-					elementId: 'fb09c65d-3de1-4078-9203-0158292274b1',
+					elementId: '6ff4627c-f367-457c-91b2-cb417c0b7e59',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -2361,6 +2361,7 @@ export const Article: CAPIType = {
 			clickToView: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
+			abStickyNavTest: true,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -2553,7 +2554,7 @@ export const Article: CAPIType = {
 		section: 'environment',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37551',
+		buildNumber: '37555',
 		isPhotoEssay: false,
 		ampIframeUrl:
 			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
@@ -4125,6 +4126,8 @@ export const Article: CAPIType = {
 			5627400383,
 			5627416481,
 			5627419082,
+			5627510314,
+			5627740002,
 			5627768068,
 			5627946712,
 			5628367142,
@@ -4140,6 +4143,8 @@ export const Article: CAPIType = {
 			5630498106,
 			5630926258,
 			5631069021,
+			5631098598,
+			5631098862,
 			5631297107,
 			5631522170,
 			5631715415,
@@ -4154,16 +4159,28 @@ export const Article: CAPIType = {
 			5632246513,
 			5632464370,
 			5632497345,
+			5632654007,
 			5632702032,
 			5633274403,
+			5633307960,
 			5633479388,
 			5633559344,
 			5633566793,
 			5633566955,
+			5633620717,
+			5633632965,
 			5633735270,
 			5633782264,
-			5634188591,
-			5634188594,
+			5633848686,
+			5634480439,
+			5634571147,
+			5634602605,
+			5634623455,
+			5634695740,
+			5634696664,
+			5634854126,
+			5635126238,
+			5635356428,
 		],
 		tones: 'News',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',

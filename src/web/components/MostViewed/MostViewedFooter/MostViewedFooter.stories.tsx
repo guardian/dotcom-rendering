@@ -4,12 +4,12 @@ import fetchMock from 'fetch-mock';
 import { Display, Pillar } from '@guardian/types';
 import { ABProvider } from '@guardian/ab-react';
 
+import { Section } from '@frontend/web/components/Section';
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,
 	responseWithMissingImage,
-} from '@root/fixtures/manual/mostViewed';
-import { Section } from '@frontend/web/components/Section';
+} from '../MostViewed.mocks';
 
 import { MostViewedFooter } from './MostViewedFooter';
 
