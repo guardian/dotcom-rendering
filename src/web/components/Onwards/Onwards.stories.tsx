@@ -15,7 +15,7 @@ import {
 	sixTrails,
 	sevenTrails,
 	eightTrails,
-} from '@root/fixtures/manual/onwards.mocks';
+} from './Onwards.mocks';
 import { OnwardsLayout } from './OnwardsLayout';
 
 export default {
