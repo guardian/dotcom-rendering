@@ -71,7 +71,7 @@ For the remaining few we dynamically load and AMD loader and support the contrac
 const wrapperStyle = css`
 	${body.medium()};
 	font-weight: 300;
-	min-height: 350px;
+	min-height: 500px;
 	position: relative;
 `;
 
@@ -88,11 +88,130 @@ const placeholderLinkStyle = css`
 	left: 1rem;
 `;
 
+const debounce = <F extends (...params: any[]) => void>(
+	fn: F,
+	delay: number,
+) => {
+	let timeoutID: number;
+	// eslint-disable-next-line func-names
+	return function (this: any, ...args: any[]) {
+		clearTimeout(timeoutID);
+		timeoutID = window.setTimeout(() => fn.apply(this, args), delay);
+	} as F;
+};
+
+// https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js
+const setupWindowListeners = (iframe: HTMLIFrameElement) => {
+	// Calls func on trailing edge of the wait period
+
+	const postMessage = (message: Record<string, unknown>) => {
+		if (iframe.contentWindow) {
+			iframe.contentWindow.postMessage(JSON.stringify(message), '*');
+		}
+	};
+
+	window.addEventListener(
+		'message',
+		(event) => {
+			if (event.source !== iframe.contentWindow) {
+				return;
+			}
+
+			// IE 8 + 9 only support strings
+			const message: Record<string, unknown> = JSON.parse(event.data);
+
+			const postPositionMessage = (subscribe?: boolean) => {
+				const iframeBox = iframe.getBoundingClientRect();
+				postMessage({
+					id: message.id || '',
+					type: message.type || '',
+					subscribe: !!subscribe,
+					iframeTop: iframeBox.top,
+					iframeRight: iframeBox.right,
+					iframeBottom: iframeBox.bottom,
+					iframeLeft: iframeBox.left,
+					innerHeight: window.innerHeight,
+					innerWidth: window.innerWidth,
+					pageYOffset: window.pageYOffset,
+				});
+			};
+
+			// Actions
+			switch (message.type) {
+				case 'set-height':
+					iframe.height = message.value;
+					break;
+				case 'navigate':
+					document.location.href = message.value;
+					break;
+				case 'scroll-to':
+					window.scrollTo(message.x, message.y);
+					break;
+				case 'get-location':
+					postMessage({
+						id: message.id,
+						type: message.type,
+						hash: window.location.hash,
+						host: window.location.host,
+						hostname: window.location.hostname,
+						href: window.location.href,
+						origin: window.location.origin,
+						pathname: window.location.pathname,
+						port: window.location.port,
+						protocol: window.location.protocol,
+						search: window.location.search,
+					});
+					break;
+				case 'get-position':
+					postPositionMessage();
+					break;
+				case 'monitor-position':
+					// Send initial position
+					postPositionMessage(true);
+
+					// Send updated position on scroll or resize
+					window.addEventListener(
+						'scroll',
+						debounce(() => {
+							postPositionMessage(true);
+						}, 50),
+					);
+					window.addEventListener(
+						'resize',
+						debounce(() => {
+							postPositionMessage(true);
+						}, 50),
+					);
+					break;
+			}
+		},
+		false,
+	);
+};
+
 export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
+	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
-		if (scriptUrl) {
+		if (
+			scriptUrl ===
+				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js' &&
+			url &&
+			placeholderLinkRef.current
+		) {
+			const iframe = document.createElement('iframe');
+			iframe.style.width = '100%';
+			iframe.style.border = 'none';
+			iframe.height = '500'; // default height
+			iframe.src = url;
+
+			setupWindowListeners(iframe);
+
+			wrapperRef.current?.appendChild(iframe);
+
+			setLoaded(true);
+		} else if (scriptUrl) {
 			// We're going to use curl AMD loader to load the script that the
 			// interactive has given us.
 			window.require(
@@ -125,13 +244,16 @@ export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 			className={wrapperStyle}
 		>
 			{!loaded && <div className={placeholderStyle} />}
-			<a
-				data-name="placeholder"
-				className={placeholderLinkStyle}
-				href={url}
-			>
-				{alt}
-			</a>
+			{!loaded && (
+				<a
+					ref={placeholderLinkRef}
+					data-name="placeholder"
+					className={placeholderLinkStyle}
+					href={url}
+				>
+					{alt}
+				</a>
+			)}
 		</div>
 	);
 };
