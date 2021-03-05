@@ -101,6 +101,21 @@ export const Discussion = ({
 		return false;
 	};
 
+	const handleExpanded = (value: number): void => {
+		const { ga } = window;
+
+		if (!ga) {
+			return;
+		}
+
+		ga('allEditorialPropertyTracker.send', 'event', {
+			eventCategory: 'Performance',
+			eventAction: 'DiscussionExpanded',
+			eventValue: Math.round(value),
+			nonInteraction: true,
+		});
+	};
+
 	useEffect(() => {
 		const callFetch = async () => {
 			const response = await getDiscussion(discussionApiUrl, shortUrlId);
@@ -215,6 +230,9 @@ export const Discussion = ({
 								commentToScrollTo={hashCommentId}
 								onPermalinkClick={handlePermalink}
 								apiKey="dotcom-rendering"
+								onExpanded={(value) => {
+									handleExpanded(value);
+								}}
 							/>
 						)}
 
@@ -240,6 +258,9 @@ export const Discussion = ({
 									commentToScrollTo={hashCommentId}
 									onPermalinkClick={handlePermalink}
 									apiKey="dotcom-rendering"
+									onExpanded={(value) => {
+										handleExpanded(value);
+									}}
 								/>
 							</Lazy>
 						)}
