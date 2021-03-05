@@ -234,6 +234,28 @@ try {
 			}),
 	);
 
+	// Story package
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/story-package/science/2021/feb/18/life-on-mars-nasa-keeps-looking-with-perseverance-rover-mission.json?dcr=true',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const storyPackage = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/story-package.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created story-package.ts`);
+			}),
+	);
+
 	Promise.all(requests).finally(() => {
 		console.log('\nFormatting files...');
 		execa('prettier', [

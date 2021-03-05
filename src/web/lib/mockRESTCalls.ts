@@ -8,7 +8,7 @@ import { series } from '@root/fixtures/generated/series';
 import { related } from '@root/fixtures/generated/related';
 import { commentCount } from '@root/fixtures/manual/commentCount';
 import { discussion } from '@root/fixtures/manual/discussion';
-import { storypackage } from '@root/fixtures/manual/storypackage';
+import { storyPackage } from '@root/fixtures/generated/story-package';
 import { matchReport } from '@root/fixtures/generated/match-report';
 
 const richLinkCard = {
@@ -153,7 +153,7 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/story-package.*/,
 			{
 				status: 200,
-				body: storypackage,
+				body: storyPackage,
 			},
 			{ overwriteRoutes: false },
 		)
