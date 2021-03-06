@@ -17,3 +17,8 @@ jobs:
                   wait-on-timeout: 180
                   quiet: true
                   browser: chrome
+									spec: |
+										cypress/integration/e2e/article.*.js
+										cypress/integration/e2e/atom.*.js
+										cypress/integration/e2e/banner.*.js
+										cypress/integration/e2e/commercial.*.js
