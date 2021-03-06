@@ -1,4 +1,4 @@
-name: cypress
+name: cypress-4
 on: [push]
 jobs:
     cypress:
