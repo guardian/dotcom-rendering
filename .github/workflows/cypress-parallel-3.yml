@@ -17,4 +17,4 @@ jobs:
                   wait-on-timeout: 180
                   quiet: true
                   browser: chrome
-									spec: cypress/integration/parallel-3/*.js
+                  spec: cypress/integration/parallel-3/*.js
