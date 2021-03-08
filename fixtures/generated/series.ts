@@ -20,6 +20,30 @@ export const series = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/07/chris-packhams-animal-einsteins-review-a-balm-for-frayed-minds',
+			linkText:
+				"Chris Packham's Animal Einsteins review – a balm for frayed minds",
+			showByline: false,
+			byline: 'Chitra Ramaswamy',
+			image:
+				'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=77976aa8cf98f7db6a039405c2442a52',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=77976aa8cf98f7db6a039405c2442a52',
+				'460':
+					'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=460&quality=85&auto=format&fit=max&s=85bf601a5274ab7574a7438f6f95c447',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			webPublicationDate: '2021-03-07T21:00:12.000Z',
+			headline:
+				"Chris Packham's Animal Einsteins review – a balm for frayed minds",
+			shortUrl: 'https://www.theguardian.com/p/gj6v2',
+			starRating: 3,
+		},
+		{
+			url:
 				'https://www.theguardian.com/tv-and-radio/2021/mar/04/luxury-holidays-how-to-get-away-this-year-review-what-sort-of-masochist-would-watch-this',
 			linkText:
 				'Luxury Holidays: How To Get Away This Year review – what sort of masochist would watch this?',
@@ -233,30 +257,6 @@ export const series = {
 				'Ginny & Georgia review – such perfect trash deserves a special award',
 			shortUrl: 'https://www.theguardian.com/p/ggyqg',
 			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/23/big-sky-review-david-e-kelley-and-disney-deliver-derivative-dross',
-			linkText:
-				'Big Sky review – David E Kelley and Disney deliver derivative dross',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/108c767f64d4b83b1e4d984673e4744fda030af1/0_200_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=938d447180508bf7f5474071575cf495',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/108c767f64d4b83b1e4d984673e4744fda030af1/0_200_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=938d447180508bf7f5474071575cf495',
-				'460':
-					'https://i.guim.co.uk/img/media/108c767f64d4b83b1e4d984673e4744fda030af1/0_200_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=fd7c285616b1cda5731c39d753a90296',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-02-23T14:55:48.000Z',
-			headline:
-				'Big Sky review – David E Kelley and Disney deliver derivative dross',
-			shortUrl: 'https://www.theguardian.com/p/gge7q',
-			starRating: 1,
 		},
 	],
 };
