@@ -326,6 +326,10 @@ function parseAtom(
 						atom.data.quiz.content.resultBuckets?.buckets ?? [],
 				});
 			}
+
+			return err(
+				`Atom quizType '${atom.data.quiz.quizType}' is not supported.`,
+			);
 		}
 
 		default: {
