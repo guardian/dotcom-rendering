@@ -69,7 +69,12 @@ import { isElement, pipe, pipe2 } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
+import {
+	getThemeStyles,
+	themeFromString,
+	themeToPillar,
+	themeToPillarString,
+} from 'themeStyles';
 
 // ----- Renderer ----- //
 
@@ -639,7 +644,7 @@ const audioAtomRenderer = (
 	element: AudioAtomElement,
 ): ReactNode => {
 	const { theme } = format;
-	const pillar = themeFromString('pillar/' + themeToPillar(theme));
+	const pillar = themeFromString('pillar/' + themeToPillarString(theme));
 	const audioAtomStyles = css`
 		figure {
 			margin: 0;
