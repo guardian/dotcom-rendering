@@ -347,6 +347,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 		CAPI.designType,
 		CAPI.tags,
 		CAPI.isLiveBlog,
+		CAPI.isLive,
 	);
 	const pillar = decideTheme({
 		pillar: CAPI.pillar,

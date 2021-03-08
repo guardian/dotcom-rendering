@@ -25,6 +25,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		CAPI.designType,
 		CAPI.tags,
 		CAPI.config.isLiveBlog,
+		CAPI.config.isLive,
 	);
 	const pillar: Pillar = decideTheme({
 		pillar: CAPI.pillar,
@@ -88,7 +89,8 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Standard:
 		default: {
 			switch (design) {
-				case Design.Live:
+				case Design.LiveBlog:
+				case Design.DeadBlog:
 					return (
 						<LiveLayout
 							CAPI={CAPI}

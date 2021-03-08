@@ -660,7 +660,7 @@ export const SpecialReport = () => (
 );
 SpecialReport.story = { name: 'SpecialReport' };
 
-export const Live = () => (
+export const LiveBlog = () => (
 	<Section>
 		<Flex>
 			<LeftColumn>
@@ -668,15 +668,15 @@ export const Live = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when design type is Live"
+					headlineString="This is the headline you see when design type is LiveBlog"
 					palette={decidePalette({
 						display: Display.Standard,
-						design: Design.Live,
+						design: Design.LiveBlog,
 						theme: Pillar.News,
 					})}
 					format={{
 						display: Display.Standard,
-						design: Design.Live,
+						design: Design.LiveBlog,
 						theme: Pillar.News,
 					}}
 					tags={[]}
@@ -685,4 +685,31 @@ export const Live = () => (
 		</Flex>
 	</Section>
 );
-Live.story = { name: 'Live' };
+LiveBlog.story = { name: 'LiveBlog' };
+
+export const DeadBlog = () => (
+	<Section>
+		<Flex>
+			<LeftColumn>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<ArticleHeadline
+					headlineString="This is the headline you see when design type is DeadBlog"
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.DeadBlog,
+						theme: Pillar.News,
+					})}
+					format={{
+						display: Display.Standard,
+						design: Design.DeadBlog,
+						theme: Pillar.News,
+					}}
+					tags={[]}
+				/>
+			</ArticleContainer>
+		</Flex>
+	</Section>
+);
+DeadBlog.story = { name: 'DeadBlog' };

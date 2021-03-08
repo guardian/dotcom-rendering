@@ -75,18 +75,31 @@ export const Review = () => {
 };
 Review.story = { name: 'Review' };
 
-export const Live = () => {
+export const LiveBlog = () => {
 	return (
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design={Design.Live}
-				standfirst="This is how Live standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				design={Design.LiveBlog}
+				standfirst="This is how LiveBlog standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
 	);
 };
-Live.story = { name: 'Live' };
+LiveBlog.story = { name: 'LiveBlog' };
+
+export const DeadBlog = () => {
+	return (
+		<Section>
+			<Standfirst
+				display={Display.Standard}
+				design={Design.DeadBlog}
+				standfirst="This is how DeadBlog standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+			/>
+		</Section>
+	);
+};
+DeadBlog.story = { name: 'DeadBlog' };
 
 export const Interview = () => {
 	return (

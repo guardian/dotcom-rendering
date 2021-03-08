@@ -57,6 +57,7 @@ export const Article: React.FC<{
 		articleData.designType,
 		articleData.tags,
 		config.isLiveBlog,
+		config.isLive,
 	);
 	const pillar = decideTheme({
 		pillar: articleData.pillar,

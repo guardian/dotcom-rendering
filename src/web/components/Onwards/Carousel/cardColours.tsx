@@ -14,7 +14,7 @@ export const headlineBackgroundColour = (design: Design, pillar: Theme) => {
 			return css`
 				background-color: ${neutral[20]};
 			`;
-		case Design.Live:
+		case Design.LiveBlog:
 			return css`
 				background-color: ${pillarPalette[pillar].dark};
 			`;
@@ -35,7 +35,7 @@ export const headlineColour = (design: Design, pillar: Theme) => {
 		case Design.Interview:
 			return colourStyles(pillarPalette[pillar].dark);
 		case Design.Media:
-		case Design.Live:
+		case Design.LiveBlog:
 			return colourStyles(neutral[97]);
 		default:
 			return undefined;
