@@ -179,18 +179,18 @@ export const SpecialReport = () => {
 };
 SpecialReport.story = { name: 'SpecialReport' };
 
-export const GuardianView = () => {
+export const Editorial = () => {
 	return (
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design={Design.GuardianView}
-				standfirst="This is how GuardianView standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				design={Design.Editorial}
+				standfirst="This is how Editorial standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
 	);
 };
-GuardianView.story = { name: 'GuardianView' };
+Editorial.story = { name: 'Editorial' };
 
 export const PhotoEssay = () => {
 	return (

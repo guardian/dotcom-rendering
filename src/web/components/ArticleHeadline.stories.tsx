@@ -579,7 +579,7 @@ export const ImmersiveComment = () => (
 );
 ImmersiveComment.story = { name: 'Immersive opinion piece' };
 
-export const GuardianView = () => (
+export const Editorial = () => (
 	<Section>
 		<Flex>
 			<LeftColumn>
@@ -587,15 +587,15 @@ export const GuardianView = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when design type is GuardianView"
+					headlineString="This is the headline you see when design type is Editorial"
 					palette={decidePalette({
 						display: Display.Standard,
-						design: Design.GuardianView,
+						design: Design.Editorial,
 						theme: Pillar.News,
 					})}
 					format={{
 						display: Display.Standard,
-						design: Design.GuardianView,
+						design: Design.Editorial,
 						theme: Pillar.News,
 					}}
 					tags={[]}
@@ -604,7 +604,7 @@ export const GuardianView = () => (
 		</Flex>
 	</Section>
 );
-GuardianView.story = { name: 'GuardianView' };
+Editorial.story = { name: 'Editorial' };
 
 export const MatchReport = () => (
 	<Section>

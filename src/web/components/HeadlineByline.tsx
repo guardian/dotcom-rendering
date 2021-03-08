@@ -112,7 +112,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 							</div>
 						</div>
 					);
-				case Design.GuardianView:
+				case Design.Editorial:
 				case Design.Comment:
 					return (
 						<div

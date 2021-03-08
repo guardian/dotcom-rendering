@@ -116,12 +116,12 @@ export const News = () => (
 									format={{
 										display: Display.Standard,
 										theme: Pillar.Opinion,
-										design: Design.GuardianView,
+										design: Design.Editorial,
 									}}
 									palette={decidePalette({
 										display: Display.Standard,
 										theme: Pillar.Opinion,
-										design: Design.GuardianView,
+										design: Design.Editorial,
 									})}
 									headlineText={headlines[3]}
 									kickerText="Editorial"

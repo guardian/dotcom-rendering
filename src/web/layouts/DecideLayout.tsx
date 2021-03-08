@@ -42,7 +42,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Immersive: {
 			switch (design) {
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<ImmersiveLayout
 							CAPI={CAPI}
@@ -65,7 +65,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Showcase: {
 			switch (design) {
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
@@ -98,7 +98,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 						/>
 					);
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
