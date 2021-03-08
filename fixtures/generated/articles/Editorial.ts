@@ -11,14 +11,14 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Comment: CAPIType = {
+export const Editorial: CAPIType = {
 	slotMachineFlags: '',
 	main:
-		'<figure class="element element-image" data-media-id="90f6640a4b3a916602353d2158a042b6a7e63726"> <img src="https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg" alt="A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’</span> <span class="element-image__credit">Photograph: Mark Pinder/The Guardian</span> </figcaption> </figure>',
+		'<figure class="element element-image" data-media-id="c8200f3ea53cda44927b11af11e8fc731afc3f34"> <img src="https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg" alt="‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">‘Ministers have said further border measures are required, but cannot say when they will be applied.’</span> <span class="element-image__credit">Photograph: May James/ZUMA Wire/REX/Shutterstock</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/business/austerity',
-			title: 'Austerity',
+			url: '/world/coronavirus-outbreak',
+			title: 'Coronavirus',
 		},
 		{
 			url: '/commentisfree/commentisfree',
@@ -29,12 +29,8 @@ export const Comment: CAPIType = {
 		UK: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/gaj9m',
 				},
 				{
 					name: 'edition',
@@ -43,18 +39,24 @@ export const Comment: CAPIType = {
 				{
 					name: 'url',
 					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+				{
+					name: 'tn',
+					value: ['editorials', 'comment'],
 				},
 				{
 					name: 'k',
 					value: [
+						'health',
 						'politics',
-						'business',
 						'conservatives',
 						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
+						'boris-johnson',
+						'vaccines',
+						'society',
+						'infectiousdiseases',
+						'coronavirus-outbreak',
 					],
 				},
 				{
@@ -64,10 +66,6 @@ export const Comment: CAPIType = {
 				{
 					name: 'ct',
 					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
 				},
 				{
 					name: 'bl',
@@ -77,33 +75,39 @@ export const Comment: CAPIType = {
 					name: 'p',
 					value: 'ng',
 				},
+				{
+					name: 'co',
+					value: ['editorial'],
+				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/gaj9m',
 				},
 				{
 					name: 'url',
 					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+				{
+					name: 'tn',
+					value: ['editorials', 'comment'],
 				},
 				{
 					name: 'k',
 					value: [
+						'health',
 						'politics',
-						'business',
 						'conservatives',
 						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
+						'boris-johnson',
+						'vaccines',
+						'society',
+						'infectiousdiseases',
+						'coronavirus-outbreak',
 					],
 				},
 				{
@@ -113,10 +117,6 @@ export const Comment: CAPIType = {
 				{
 					name: 'ct',
 					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
 				},
 				{
 					name: 'bl',
@@ -130,33 +130,39 @@ export const Comment: CAPIType = {
 					name: 'edition',
 					value: 'us',
 				},
+				{
+					name: 'co',
+					value: ['editorial'],
+				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/gaj9m',
 				},
 				{
 					name: 'url',
 					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+				{
+					name: 'tn',
+					value: ['editorials', 'comment'],
 				},
 				{
 					name: 'k',
 					value: [
+						'health',
 						'politics',
-						'business',
 						'conservatives',
 						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
+						'boris-johnson',
+						'vaccines',
+						'society',
+						'infectiousdiseases',
+						'coronavirus-outbreak',
 					],
 				},
 				{
@@ -168,16 +174,16 @@ export const Comment: CAPIType = {
 					value: 'article',
 				},
 				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
 					name: 'bl',
 					value: ['commentisfree'],
 				},
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'co',
+					value: ['editorial'],
 				},
 				{
 					name: 'edition',
@@ -188,28 +194,30 @@ export const Comment: CAPIType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/gaj9m',
 				},
 				{
 					name: 'url',
 					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+				{
+					name: 'tn',
+					value: ['editorials', 'comment'],
 				},
 				{
 					name: 'k',
 					value: [
+						'health',
 						'politics',
-						'business',
 						'conservatives',
 						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
+						'boris-johnson',
+						'vaccines',
+						'society',
+						'infectiousdiseases',
+						'coronavirus-outbreak',
 					],
 				},
 				{
@@ -225,10 +233,6 @@ export const Comment: CAPIType = {
 					value: 'article',
 				},
 				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
 					name: 'bl',
 					value: ['commentisfree'],
 				},
@@ -236,38 +240,54 @@ export const Comment: CAPIType = {
 					name: 'p',
 					value: 'ng',
 				},
+				{
+					name: 'co',
+					value: ['editorial'],
+				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 10 Feb 2020 11.19 GMT',
+		'Last modified on Thu 4 Feb 2021 05.22 GMT',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
-		'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
+		'<strong>Editorial:</strong> Controlling cross-border transmission of Covid cases is far from easy, but the government appears scarcely to have even tried',
 	subMetaKeywordLinks: [
 		{
-			url: '/business/economics',
-			title: 'Economics',
+			url: '/politics/health',
+			title: 'Health policy',
+		},
+		{
+			url: '/society/vaccines',
+			title: 'Vaccines and immunisation',
+		},
+		{
+			url: '/politics/boris-johnson',
+			title: 'Boris Johnson',
 		},
 		{
 			url: '/politics/conservatives',
 			title: 'Conservatives',
 		},
 		{
-			url: '/politics/conservativehome',
-			title: 'ConservativeHome',
+			url: '/science/infectiousdiseases',
+			title: 'Infectious diseases',
 		},
 		{
-			url: '/tone/comment',
-			title: 'comment',
+			url: '/society/health',
+			title: 'Health',
+		},
+		{
+			url: '/tone/editorials',
+			title: 'editorials',
 		},
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/business/economics',
+		currentUrl: '/commentisfree',
 		pillars: [
 			{
 				title: 'News',
@@ -962,115 +982,29 @@ export const Comment: CAPIType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 		],
-		currentNavLinkTitle: 'Economics',
-		currentPillarTitle: 'News',
+		currentNavLinkTitle: 'Opinion',
+		currentPillarTitle: 'Opinion',
 		subNavSections: {
-			parent: {
-				title: 'Business',
-				url: '/business',
-				children: [
-					{
-						title: 'Economics',
-						url: '/business/economics',
-					},
-					{
-						title: 'Banking',
-						url: '/business/banking',
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-							},
-						],
-					},
-					{
-						title: 'Markets',
-						url: '/business/stock-markets',
-					},
-					{
-						title: 'Project Syndicate',
-						url: '/business/series/project-syndicate-economists',
-					},
-					{
-						title: 'B2B',
-						url: '/business-to-business',
-					},
-					{
-						title: 'Retail',
-						url: '/business/retail',
-					},
-				],
-			},
 			links: [
 				{
-					title: 'Economics',
-					url: '/business/economics',
+					title: 'The Guardian view',
+					url: '/profile/editorial',
 				},
 				{
-					title: 'Banking',
-					url: '/business/banking',
+					title: 'Columnists',
+					url: '/index/contributors',
 				},
 				{
-					title: 'Money',
-					url: '/money',
-					children: [
-						{
-							title: 'Property',
-							url: '/money/property',
-						},
-						{
-							title: 'Pensions',
-							url: '/money/pensions',
-						},
-						{
-							title: 'Savings',
-							url: '/money/savings',
-						},
-						{
-							title: 'Borrowing',
-							url: '/money/debt',
-						},
-						{
-							title: 'Careers',
-							url: '/money/work-and-careers',
-						},
-					],
+					title: 'Cartoons',
+					url: '/cartoons/archive',
 				},
 				{
-					title: 'Markets',
-					url: '/business/stock-markets',
+					title: 'Opinion videos',
+					url: '/type/video+tone/comment',
 				},
 				{
-					title: 'Project Syndicate',
-					url: '/business/series/project-syndicate-economists',
-				},
-				{
-					title: 'B2B',
-					url: '/business-to-business',
-				},
-				{
-					title: 'Retail',
-					url: '/business/retail',
+					title: 'Letters',
+					url: '/tone/letters',
 				},
 			],
 		},
@@ -1128,42 +1062,41 @@ export const Comment: CAPIType = {
 		},
 	},
 	author: {
-		byline: 'John Harris',
-		twitterHandle: 'johnharris1969',
+		byline: 'Editorial',
 	},
-	designType: 'Comment',
+	designType: 'GuardianView',
 	editionId: 'UK',
 	standfirst:
-		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
+		'<p>Controlling cross-border transmission of Covid cases is far from easy, but the government appears scarcely to have even tried</p>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-		'article:author': 'https://www.theguardian.com/profile/johnharris',
+			'http://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+		'article:author': 'https://www.theguardian.com/profile/editorial',
 		'og:image:height': '720',
 		'og:description':
-			'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
+			'Editorial: Controlling cross-border transmission of Covid cases is far from easy, but the government appears scarcely to have even tried',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
+			'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=95a9c39af947732f73b8af9318d3b983',
 		'al:ios:url':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=applinks',
+			'gnmguardian://commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Opinion',
-		'article:published_time': '2020-02-10T06:00:27.000Z',
+		'article:published_time': '2021-02-03T18:54:37.000Z',
 		'og:title':
-			'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+			'The Guardian view on quarantine: an old method and a vital one | Editorial',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Austerity,UK news,Economics,Business,Politics,Conservatives,ConservativeHome',
+			'Coronavirus,Health policy,Vaccines and immunisation,UK news,Boris Johnson,Politics,Conservatives,Infectious diseases,Health,Society',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-10T11:19:50.000Z',
+		'article:modified_time': '2021-02-04T05:22:07.000Z',
 	},
-	sectionUrl: 'business/austerity',
+	sectionUrl: 'world/coronavirus-outbreak',
 	pageId:
-		'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+		'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	version: 3,
 	tags: [
 		{
@@ -1172,14 +1105,19 @@ export const Comment: CAPIType = {
 			title: 'Opinion',
 		},
 		{
-			id: 'business/austerity',
+			id: 'world/coronavirus-outbreak',
 			type: 'Keyword',
-			title: 'Austerity',
+			title: 'Coronavirus',
 		},
 		{
-			id: 'tone/comment',
-			type: 'Tone',
-			title: 'Comment',
+			id: 'politics/health',
+			type: 'Keyword',
+			title: 'Health policy',
+		},
+		{
+			id: 'society/vaccines',
+			type: 'Keyword',
+			title: 'Vaccines and immunisation',
 		},
 		{
 			id: 'uk/uk',
@@ -1187,14 +1125,9 @@ export const Comment: CAPIType = {
 			title: 'UK news',
 		},
 		{
-			id: 'business/economics',
+			id: 'politics/boris-johnson',
 			type: 'Keyword',
-			title: 'Economics',
-		},
-		{
-			id: 'business/business',
-			type: 'Keyword',
-			title: 'Business',
+			title: 'Boris Johnson',
 		},
 		{
 			id: 'politics/politics',
@@ -1207,9 +1140,19 @@ export const Comment: CAPIType = {
 			title: 'Conservatives',
 		},
 		{
-			id: 'politics/conservativehome',
+			id: 'science/infectiousdiseases',
 			type: 'Keyword',
-			title: 'ConservativeHome',
+			title: 'Infectious diseases',
+		},
+		{
+			id: 'society/health',
+			type: 'Keyword',
+			title: 'Health',
+		},
+		{
+			id: 'society/society',
+			type: 'Keyword',
+			title: 'Society',
 		},
 		{
 			id: 'type/article',
@@ -1217,12 +1160,19 @@ export const Comment: CAPIType = {
 			title: 'Article',
 		},
 		{
-			id: 'profile/johnharris',
+			id: 'tone/editorials',
+			type: 'Tone',
+			title: 'Editorials',
+		},
+		{
+			id: 'tone/comment',
+			type: 'Tone',
+			title: 'Comment',
+		},
+		{
+			id: 'profile/editorial',
 			type: 'Contributor',
-			title: 'John Harris',
-			twitterHandle: 'johnharris1969',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2019/06/26/John_Harris_Next_Gen.png?width=300&quality=85&auto=format&fit=max&s=71554a58d52e35724d1464ab0e413199',
+			title: 'Editorial',
 		},
 		{
 			id: 'publication/theguardian',
@@ -1240,17 +1190,17 @@ export const Comment: CAPIType = {
 			title: 'Opinion',
 		},
 		{
-			id: 'tracking/commissioningdesk/uk-opinion',
+			id: 'tracking/commissioningdesk/uk-letters-and-leader-writers',
 			type: 'Tracking',
-			title: 'UK Opinion',
+			title: 'UK Letters and Leader Writers',
 		},
 	],
 	pillar: 'opinion',
 	webURL:
-		'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+		'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Austerity',
+	sectionLabel: 'Coronavirus',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1410,19 +1360,18 @@ export const Comment: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&s=77ef16f3e784adf8d32f1f5724d0559f',
+			'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&s=9fc1862f6fbfa3747354c59cbfb5dad0',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
+			'gnmguardian://commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@johnharris1969',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'guardian://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 		'twitter:app:url:iphone':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
+			'gnmguardian://commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one?contenttype=Article&source=twitter',
 	},
 	sectionName: 'commentisfree',
 	pageType: {
@@ -1436,19 +1385,19 @@ export const Comment: CAPIType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
+	headline:
+		'The Guardian view on quarantine: an old method and a vital one   ',
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '00666ee0-83cc-44ea-a40e-73fea986ac63',
+			elementId: '2f0e6f19-ebac-42b6-a4dc-0219dcd4fac8',
 			role: 'inline',
 			data: {
-				copyright: '©Mark Pinder',
 				alt:
-					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
+					'‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January.',
 				caption:
-					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
-				credit: 'Photograph: Mark Pinder/The Guardian',
+					'‘Ministers have said further border measures are required, but cannot say when they will be applied.’',
+				credit: 'Photograph: May James/ZUMA Wire/REX/Shutterstock',
 			},
 			imageSources: [
 				{
@@ -1456,32 +1405,32 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
 							width: 890,
 						},
 					],
@@ -1491,22 +1440,22 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=85&auto=format&fit=max&s=668c45e6439ce78e74caabc670caae95',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=140&quality=85&auto=format&fit=max&s=df1f0f80da2e008f55dcb719c5b64ae6',
 							width: 140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=5e94737d27c7a05cbed83892fd012f8a',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fa35f2e7edfd2a38f8602ff6b8ccb74b',
 							width: 280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=85&auto=format&fit=max&s=26ea4d3fe4bdb051075f28ac562d948d',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=120&quality=85&auto=format&fit=max&s=ccd00556d1c5bfc364a45233c280e2a7',
 							width: 120,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=85351583559b7e857a2b0025a5840a9f',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=88d49838164e64407f85a773dc746411',
 							width: 240,
 						},
 					],
@@ -1516,52 +1465,52 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=85&auto=format&fit=max&s=8ca054ff212c3cf6081d12e3fb07f48a',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=380&quality=85&auto=format&fit=max&s=e71c7ed5ecc18120fa8773c826f50bd0',
 							width: 380,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=835b7e68c3c7dbd3949e979c421ed9f2',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=fad9d345b3c671c9d3950c0ab5e9034b',
 							width: 760,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=85&auto=format&fit=max&s=e82066644d9998c30c539675dd442c80',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=300&quality=85&auto=format&fit=max&s=b294b19570bb2856d32231ba66285449',
 							width: 300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=123b68c0d764968a95bf8f9437c79dcf',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=844e08da6df3711c5c3eb24928d94728',
 							width: 600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
 							width: 890,
 						},
 					],
@@ -1571,72 +1520,72 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=85&auto=format&fit=max&s=26a09576dd9b3bac4ab827034f7f91c8',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1020&quality=85&auto=format&fit=max&s=be1e5720158f6d4d61cb4f38277d4782',
 							width: 1020,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=813b6acd761529966116835eff6a8909',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=1dfb6c64fbd8a16ab516fec4cc549f5d',
 							width: 2040,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=85&auto=format&fit=max&s=3319f7b3832d50285dfb34b7f0fd0c94',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=940&quality=85&auto=format&fit=max&s=6776a806cfaefb9824e3c64ec11a1de4',
 							width: 940,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=b7779aa84cf1776a55a3e7d39689315b',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c3a074edda4b27e72f5772d4b74b844d',
 							width: 1880,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=85&auto=format&fit=max&s=f3e85030d0bd7b6ebe41958c540f92a1',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cb1815c5d400a2d4c6ce53c257f32a52',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=85&auto=format&fit=max&s=f3e85030d0bd7b6ebe41958c540f92a1',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cb1815c5d400a2d4c6ce53c257f32a52',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=85&auto=format&fit=max&s=0326f2185bb8e242f4433dc27a3ec922',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=660&quality=85&auto=format&fit=max&s=7c0319274ca2269971949422ad5b792f',
 							width: 660,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1eb4e21b9178b60d2110ac9a0a16cf36',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cdcbd6e25a6ad27769f64b94d6b3041a',
 							width: 1320,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=85&auto=format&fit=max&s=dbce27296d3001413277f72b260369c3',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9095b7ef57d1bd6918b75d9757aeea6f',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=85&auto=format&fit=max&s=cebb53a5122ee05421188edfd0e4df61',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a07f0b470e352aa20e8f6c4b3745ef4',
 							width: 930,
 						},
 					],
@@ -1646,32 +1595,32 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
 							width: 890,
 						},
 					],
@@ -1681,72 +1630,72 @@ export const Comment: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=85&auto=format&fit=max&s=aa6833bc19ffd820a12ce33c3eb2d63f',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1300&quality=85&auto=format&fit=max&s=5671d8e875fa661be54c91a44d91f0b4',
 							width: 1300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=616dca8321ef2cf9feb36b48d349cefa',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=28f0acfc3a27ec5048c8850d9cb292c9',
 							width: 2600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=85&auto=format&fit=max&s=b8a3b1d849822273359f87c045c3aa76',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1140&quality=85&auto=format&fit=max&s=d2b0b7dbd62b7bc61e1980b6138f2b0a',
 							width: 1140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3e8e7586f1725a997b04a34e2e521b3c',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=2f6dd56a0e654b7ffc5ddb7206386ca8',
 							width: 2280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=85&auto=format&fit=max&s=8704c5061b3a6f1e0d897580494ac4d7',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1125&quality=85&auto=format&fit=max&s=48d2b1a8faaad907faa3135c23992764',
 							width: 1125,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4736204e8038bf3a4008c9e184b75956',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=3281838687f8b0a5b0389e4899c52b16',
 							width: 2250,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=85&auto=format&fit=max&s=0f68b28eaa79271f6458ec7c84ea08d7',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=965&quality=85&auto=format&fit=max&s=9a8412b45aff53607515fbed23b3f920',
 							width: 965,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=cb7abf09cb7946df62726e737d20cc7a',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=c3438be50fadcc216e63987d53bce318',
 							width: 1930,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=85&auto=format&fit=max&s=1559cec86eaba98a1a38fd2468085622',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=725&quality=85&auto=format&fit=max&s=b3574c3679cd804ad95d3c6e5de467c7',
 							width: 725,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=07d0cecc175e2386725996b5aee44abf',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=bbfff86aca3d0ae3ceaa4bf601cddfc9',
 							width: 1450,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=85&auto=format&fit=max&s=dbce27296d3001413277f72b260369c3',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9095b7ef57d1bd6918b75d9757aeea6f',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=85&auto=format&fit=max&s=cebb53a5122ee05421188edfd0e4df61',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a07f0b470e352aa20e8f6c4b3745ef4',
 							width: 930,
 						},
 					],
@@ -1758,27 +1707,16 @@ export const Comment: CAPIType = {
 					{
 						index: 0,
 						fields: {
-							height: '84',
-							width: '140',
+							height: '1200',
+							width: '2000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/140.jpg',
+							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/2000.jpg',
 					},
 					{
 						index: 1,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/500.jpg',
-					},
-					{
-						index: 2,
 						fields: {
 							height: '600',
 							width: '1000',
@@ -1786,168 +1724,118 @@ export const Comment: CAPIType = {
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg',
+							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/500.jpg',
 					},
 					{
 						index: 3,
 						fields: {
-							height: '1200',
-							width: '2000',
+							height: '84',
+							width: '140',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/2000.jpg',
+							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/140.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							height: '1944',
-							width: '3240',
+							height: '3193',
+							width: '5322',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/3240.jpg',
+							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/5322.jpg',
 					},
 					{
 						index: 5,
 						fields: {
 							isMaster: 'true',
-							height: '1944',
-							width: '3240',
+							height: '3193',
+							width: '5322',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg',
+							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg',
 					},
 				],
 			},
 			displayCredit: true,
 		},
 	],
-	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	webPublicationDate: '2021-02-03T18:54:37.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 11.19 GMT',
-			blockLastUpdated: 1581270178000,
-			firstPublishedDisplay: '06.00 GMT',
-			lastUpdatedDisplay: '11.19 GMT',
-			blockCreatedOnDisplay: '12.12 GMT',
-			blockLastUpdatedDisplay: '17.42 GMT',
-			firstPublished: 1581314427000,
-			createdOn: 1581250344000,
-			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
-			blockCreatedOn: 1581250344000,
-			createdOnDisplay: '12.12 GMT',
-			lastUpdated: 1581333590000,
+			secondaryDateLine: 'Last modified on Thu 4 Feb 2021 05.22 GMT',
+			blockLastUpdated: 1612377832000,
+			firstPublishedDisplay: '18.54 GMT',
+			lastUpdatedDisplay: '05.22 GMT',
+			blockCreatedOnDisplay: '11.52 GMT',
+			blockLastUpdatedDisplay: '18.43 GMT',
+			firstPublished: 1612378477000,
+			createdOn: 1584705172000,
+			primaryDateLine: 'Wed 3 Feb 2021 18.54 GMT',
+			blockCreatedOn: 1584705172000,
+			createdOnDisplay: '11.52 GMT',
+			lastUpdated: 1612416127000,
 			elements: [
 				{
-					elementId: '62aa8a25-110d-4c32-ad41-85bef6da88d3',
+					elementId: '9fd190ca-8812-4029-89c9-c220185ddd42',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
+						'<p>The greatest advances in the battle against the coronavirus have been made by modern science, but before there were vaccines, countries had to rely on older techniques: stopping people mingling; preventing new cases of the disease arriving from overseas. Britain’s record with lockdowns is not great (late to implement, premature in lifting), but with quarantine at the border there is barely even a record to defend. For much of last year there was a notional obligation on travellers from various countries to self-isolate on arrival in the UK, but with a shifting roster of places that qualified for “safe” travel corridors.</p>',
 				},
 				{
-					elementId: 'd2211906-b5dd-478c-9e9e-844748b016e2',
-					role: 'supporting',
-					isThirdPartyTracking: false,
-					_type:
-						'model.dotcomrendering.pageElements.PullquoteBlockElement',
-					html:
-						'£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
-				},
-				{
-					elementId: 'b1ccae1d-9385-43cf-b37d-e236f575f216',
+					elementId: '01276ac7-b5fc-4456-ac05-f7278b52dae1',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
+						'<p>There were many categories of exemption. The regulations were unclear and poorly implemented. <a href="https://www.theguardian.com/world/commentisfree/2021/jan/28/uk-covid-travel-quarantine-hotel" title="">Efforts at enforcement have been patchy</a>. Essentially, self-isolation has been self-policed. Only towards the end of last year, as it became clear that mutant strains of the virus were spreading – and that Britain’s approach was persistently failing – did the government start focusing on <a href="https://www.theguardian.com/world/2021/jan/27/how-quarantine-rules-work-and-what-uk-government-is-planning" title="">quarantine as part of the anti-virus arsenal</a>. More travellers are now required to show proof of a negative Covid test and there are tighter restrictions on arrivals from certain “hotspot” countries. That approach is still flawed. People, and the virus they might carry, do not always travel straight from the heart of an outbreak to the UK. Mutations are dispersed along multiple paths.</p>',
 				},
 				{
-					elementId: '4866038e-fcd8-4be1-a434-b581f95fb927',
+					elementId: 'e60da468-5cd1-4fa0-a18e-4b9f8f9ddcb2',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
+						'<p>Ministers have said further border measures are required, but cannot say when they will be applied. The new regime is expected to involve diverting large numbers of arrivals to government-approved hotels for up to 10 days, with an option of getting out sooner with a negative test. The Department for Transport and the Treasury <a href="https://www.theguardian.com/world/2021/feb/03/grant-shapps-resists-blanket-border-controls-to-stem-covid-in-britain" title="">have been squeamish</a> about the cost of such a regime. Passengers would get a bill, but the whole system would still be expensive and inflict another wound on an already injured aviation sector.</p>',
 				},
 				{
-					elementId: '496864ff-f120-47c6-a9f6-e803379e0d97',
+					elementId: 'a065e985-d948-493e-b136-e5e2c7f36b10',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
+						'<p>But, as has been demonstrated many times in the pandemic, resisting tighter restrictions to avoid an immediate financial burden is a false economy. Delay allows the disease to spread. The onerous measures are still required and have to be in place for longer. That remains true even as the vaccination programme is rolled out. Not enough is yet known about vaccine resilience in the face of recently discovered coronavirus variants, let alone any future mutations. <a href="https://www.theguardian.com/world/2021/jan/22/covid-vaccines-what-are-the-implications-of-new-variants-of-virus" title="">The risk is not negligible.</a></p>',
 				},
 				{
-					elementId: 'd40546bf-e6f4-438e-a5d8-cad0c5ab67b6',
+					elementId: '0e4c60af-8352-4d78-9293-c79a65d5c444',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
+						'<p>Countries with the strongest records against disease have applied the full range of containment measures quickly and thoroughly, including efficient testing, contact tracing, and a presumption that all new arrivals face quarantine (with some flexibility for humanitarian exceptions, naturally). That principle should be the basis for the UK’s regime. A speedy vaccination roll-out has given Boris Johnson <a href="https://www.theguardian.com/society/2021/jan/31/daily-record-as-600000-people-in-the-uk-receive-covid-jabs-on-saturday" title="">cause to celebrate</a> his government’s accomplishments relative to other countries. Ministerial relief at having something to cheer is palpable, but it must not lead to neglect of other fronts in the battle or feed the culture of impatience and denial that causes many Conservative MPs to demand unwarranted easing of restrictions.</p>',
 				},
 				{
-					elementId: 'a35101aa-9f59-44b6-a0ff-40649fd12ffe',
+					elementId: '6c281b44-45bb-4989-aad4-50c83c66857c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
-				},
-				{
-					elementId: '88f19856-3f66-4f43-8589-3466a9f0930b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
-				},
-				{
-					elementId: '54024011-19f6-4b66-9808-0784c3fd2082',
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						'Tory plans to ‘level up’ the north are laughably inadequate | Polly Toynbee',
-					url:
-						'https://www.theguardian.com/commentisfree/2020/feb/06/tory-level-up-north-regional-inequality',
-				},
-				{
-					elementId: '0a482849-b1ad-4942-9230-424a51eccad3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
-				},
-				{
-					elementId: '781415bf-a8ff-4a91-82ad-1fe9f303a4e3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
-				},
-				{
-					elementId: '1b33872d-0d01-4963-a347-3df1fae7f4bf',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
-				},
-				{
-					elementId: '5bfd82d9-c062-4ba1-8ed4-8c4ffc24ee9d',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
-				},
-				{
-					elementId: 'a02dc512-5319-4d48-9a40-a59940876362',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• John Harris is a Guardian columnist</p>',
+						'<p>No one should belittle the social, economic and psychological cost of anti-Covid restrictions. Quarantine, like lockdown, is a harsh instrument to be used only as an emergency resort. But we are now a year into such an emergency. The government’s haphazard approach, justified by a pursuit of short-term economic relief, has only prolonged the ordeal. The vaccine programme illuminates a way out. It would be a tragic squandering of that success if overreliance on new technology were to breed complacency regarding older but no less vital methods of protecting the public.</p>',
 				},
 			],
-			id: '6bc6fa8c-a504-4e81-9828-3a7a0a78b052',
+			id: '5e74ae948f088d75755971e4',
 		},
 	],
 	linkedData: [
@@ -1955,7 +1843,7 @@ export const Comment: CAPIType = {
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'https://amp.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1982,41 +1870,41 @@ export const Comment: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bd2f2a476abaf5a0bc7c70f1f31dba50',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d3257abb4b456eb86f445acfe8dfcdf3',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&quality=85&auto=format&fit=max&s=3d4a5bbf7513a6d5c91a173d5b4ad0b5',
+				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=95a9c39af947732f73b8af9318d3b983',
+				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=aefabb0b00e0f22e6369e0e289b1d699',
+				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=7826af58a1f33eca97d979efbeb2fd0e',
+				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&quality=85&auto=format&fit=max&s=0701f8ecfdb34e888d932a0c334c886e',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'John Harris',
-					sameAs: 'https://www.theguardian.com/profile/johnharris',
+					name: 'Editorial',
+					sameAs: 'https://www.theguardian.com/profile/editorial',
 				},
 			],
-			datePublished: '2020-02-10T06:00:27.000Z',
+			datePublished: '2021-02-03T18:54:37.000Z',
 			headline:
-				'Austerity is grinding on – it has cut too deep to ‘level up’',
-			dateModified: '2020-02-10T11:19:50.000Z',
+				'The Guardian view on quarantine: an old method and a vital one   ',
+			dateModified: '2021-02-04T05:22:07.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Mon 10 Feb 2020 06.00 GMT',
+	webPublicationDateDisplay: 'Wed 3 Feb 2021 18.54 GMT',
 	shouldHideAds: false,
 	webTitle:
-		'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+		'The Guardian view on quarantine: an old method and a vital one | Editorial',
 	isSpecialReport: false,
 	isCommentable: true,
 	keyEvents: [],
@@ -2025,7 +1913,7 @@ export const Comment: CAPIType = {
 		references: [
 			{
 				'rich-link':
-					'https://www.theguardian.com/info/2017/may/16/guardian-business-today-sign-up-financial-news-email',
+					'https://www.theguardian.com/society/2018/jun/20/society-weekly-email-newsletter-sign-up',
 			},
 			{
 				'rich-link':
@@ -2033,7 +1921,7 @@ export const Comment: CAPIType = {
 			},
 		],
 		isProd: true,
-		shortUrlId: '/p/d8n8j',
+		shortUrlId: '/p/gaj9m',
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
@@ -2126,30 +2014,32 @@ export const Comment: CAPIType = {
 			inizio: true,
 		},
 		hasYouTubeAtom: false,
-		inBodyInternalLinkCount: 6,
+		inBodyInternalLinkCount: 5,
 		keywordIds:
-			'business/austerity,uk/uk,business/economics,business/business,politics/politics,politics/conservatives,politics/conservativehome',
+			'world/coronavirus-outbreak,politics/health,society/vaccines,uk/uk,politics/boris-johnson,politics/politics,politics/conservatives,science/infectiousdiseases,society/health,society/society',
 		blogIds: 'commentisfree/commentisfree',
 		sharedAdTargeting: {
 			ct: 'article',
-			co: ['johnharris'],
+			co: ['editorial'],
 			url:
-				'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			su: ['0'],
 			edition: 'uk',
-			tn: ['comment'],
+			tn: ['editorials', 'comment'],
 			bl: ['commentisfree'],
 			p: 'ng',
 			k: [
+				'health',
 				'politics',
-				'business',
 				'conservatives',
 				'uk/uk',
-				'austerity',
-				'conservativehome',
-				'economics',
+				'boris-johnson',
+				'vaccines',
+				'society',
+				'infectiousdiseases',
+				'coronavirus-outbreak',
 			],
-			sh: 'https://www.theguardian.com/p/d8n8j',
+			sh: 'https://www.theguardian.com/p/gaj9m',
 		},
 		beaconUrl: '//phar.gu-web.net',
 		campaigns: [],
@@ -2174,7 +2064,7 @@ export const Comment: CAPIType = {
 				id: 215479,
 			},
 		],
-		toneIds: 'tone/comment',
+		toneIds: 'tone/editorials,tone/comment',
 		dcrSentryDsn:
 			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		idWebAppUrl: 'https://oauth.theguardian.com',
@@ -2182,13 +2072,13 @@ export const Comment: CAPIType = {
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		omnitureAccount: 'guardiangu-network',
 		contributorBio: '',
-		pageCode: '7083199',
+		pageCode: '8714002',
 		pillar: 'Opinion',
 		commercialBundleUrl:
 			'https://assets.guim.co.uk/javascripts/6d699370121c734690ce/graun.commercial.dcr.js',
 		discussionApiClientHeader: 'nextgen',
 		membershipUrl: 'https://membership.theguardian.com',
-		cardStyle: 'comment',
+		cardStyle: 'editorial',
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
 		shouldHideAdverts: false,
@@ -2203,12 +2093,12 @@ export const Comment: CAPIType = {
 		mobileAppsAdUnitRoot: 'beta-guardian-app',
 		dfpAdUnitRoot: 'theguardian.com',
 		headline:
-			'Austerity is grinding on – it has cut too deep to ‘level up’',
+			'The Guardian view on quarantine: an old method and a vital one   ',
 		commentable: true,
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
-		commissioningDesks: 'uk-opinion',
-		inBodyExternalLinkCount: 13,
+		commissioningDesks: 'uk-letters-and-leader-writers',
+		inBodyExternalLinkCount: 0,
 		adUnit: '/59666047/theguardian.com/commentisfree/article/ng',
 		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
 		videoDuration: 0,
@@ -2219,12 +2109,12 @@ export const Comment: CAPIType = {
 		thirdPartyAppsAccount: 'guardiangu-thirdpartyapps',
 		richLink: '/info/2015/dec/08/daily-email-uk',
 		avatarImagesUrl: 'https://avatar.guim.co.uk',
-		trackingNames: 'UK Opinion',
+		trackingNames: 'UK Letters and Leader Writers',
 		fbAppId: '180444840287',
 		externalEmbedHost: 'https://embed.theguardian.com',
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		keywords:
-			'Austerity,UK news,Economics,Business,Politics,Conservatives,ConservativeHome',
+			'Coronavirus,Health policy,Vaccines and immunisation,UK news,Boris Johnson,Politics,Conservatives,Infectious diseases,Health,Society',
 		revisionNumber: 'DEV',
 		blogs: 'Opinion',
 		section: 'commentisfree',
@@ -2245,43 +2135,43 @@ export const Comment: CAPIType = {
 		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		idUrl: 'https://profile.theguardian.com',
 		thumbnail:
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/500.jpg?quality=85&auto=format&fit=max&s=0d26e0c7cdf21c8c0402c7ec0a562731',
+			'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/500.jpg?quality=85&auto=format&fit=max&s=1701f7a79bdee22e463e8f0cf4942e0d',
 		isFront: false,
-		wordCount: 1242,
-		author: 'John Harris',
+		wordCount: 588,
+		author: 'Editorial',
 		dfpAccountId: '59666047',
 		nonKeywordTagIds:
-			'commentisfree/commentisfree,tone/comment,type/article,profile/johnharris,publication/theguardian,theguardian/journal,theguardian/journal/opinion,tracking/commissioningdesk/uk-opinion',
+			'commentisfree/commentisfree,type/article,tone/editorials,tone/comment,profile/editorial,publication/theguardian,theguardian/journal,theguardian/journal/opinion,tracking/commissioningdesk/uk-letters-and-leader-writers',
 		pageId:
-			'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 		forecastsapiurl: '/weatherapi/forecast',
 		assetsPath: 'https://assets.guim.co.uk/',
 		lightboxImages: {
 			id:
-				'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			headline:
-				'Austerity is grinding on – it has cut too deep to ‘level up’',
+				'The Guardian view on quarantine: an old method and a vital one   ',
 			shouldHideAdverts: false,
 			standfirst:
-				'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
+				'<p>Controlling cross-border transmission of Covid cases is far from easy, but the government appears scarcely to have even tried</p>',
 			images: [
 				{
 					caption:
-						'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
-					credit: 'Photograph: Mark Pinder/The Guardian',
+						'‘Ministers have said further border measures are required, but cannot say when they will be applied.’',
+					credit: 'Photograph: May James/ZUMA Wire/REX/Shutterstock',
 					displayCredit: true,
 					src:
-						'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+						'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=85&auto=format&fit=max&s=f3e85030d0bd7b6ebe41958c540f92a1',
 					srcsets:
-						'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1920&quality=85&auto=format&fit=max&s=68e08f1e4eb576635991e4e1fe1bfcc9 1920w, https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1225&quality=85&auto=format&fit=max&s=f71852d758e84d4546b90bfc6ed41eb4 1225w, https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1065&quality=85&auto=format&fit=max&s=798499ffad1b76e005364bd0521dc206 1065w, https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=85&auto=format&fit=max&s=0f68b28eaa79271f6458ec7c84ea08d7 965w, https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=85&auto=format&fit=max&s=1559cec86eaba98a1a38fd2468085622 725w, https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9 645w, https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a 465w',
+						'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1920&quality=85&auto=format&fit=max&s=9c566e75926e310bafeb25489d3de0ae 1920w, https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1225&quality=85&auto=format&fit=max&s=32a46f380a5af109772cfdadc1850dd3 1225w, https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1065&quality=85&auto=format&fit=max&s=9c6104a1c13e0d874fb9805eb17287a2 1065w, https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=965&quality=85&auto=format&fit=max&s=9a8412b45aff53607515fbed23b3f920 965w, https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=725&quality=85&auto=format&fit=max&s=b3574c3679cd804ad95d3c6e5de467c7 725w, https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=85&auto=format&fit=max&s=dbce27296d3001413277f72b260369c3 645w, https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=85&auto=format&fit=max&s=cebb53a5122ee05421188edfd0e4df61 465w',
 					sizes:
 						'(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
-					ratio: 1.6666666666666667,
+					ratio: 1.6667710616974631,
 					role: 'None',
 					parentContentId:
-						'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+						'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 					id:
-						'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+						'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 			],
 		},
@@ -2293,11 +2183,13 @@ export const Comment: CAPIType = {
 			prebid: true,
 			a9: true,
 		},
-		abTests: {},
-		shortUrl: 'https://www.theguardian.com/p/d8n8j',
+		abTests: {
+			dotcomRenderingVariant: 'variant',
+		},
+		shortUrl: 'https://www.theguardian.com/p/gaj9m',
 		isContent: true,
 		contentId:
-			'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 		edition: 'UK',
 		discussionFrontendUrl:
 			'https://assets.guim.co.uk/discussion/discussion-frontend.preact.iife.8bdbd9194e.js',
@@ -3819,20 +3711,20 @@ export const Comment: CAPIType = {
 			5636227163,
 			5636871103,
 		],
-		tones: 'Comment',
+		tones: 'Editorials,Comment',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',
 		isLiveBlog: false,
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 		googleSearchId: '007466294097402385199:m2ealvuxh1i',
 		allowUserGeneratedContent: false,
-		byline: 'John Harris',
-		authorIds: 'profile/johnharris',
-		webPublicationDate: 1581314427000,
+		byline: 'Editorial',
+		authorIds: 'profile/editorial',
+		webPublicationDate: 1612378477000,
 		omnitureAmpAccount: 'guardiangu-thirdpartyapps',
 		isHosted: false,
 		hasPageSkin: false,
 		webTitle:
-			'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+			'The Guardian view on quarantine: an old method and a vital one | Editorial',
 		discussionD2Uid: 'zHoBy6HNKsk',
 		weatherapiurl: '/weatherapi/city',
 		googleSearchUrl: '//www.google.co.uk/cse/cse.js',

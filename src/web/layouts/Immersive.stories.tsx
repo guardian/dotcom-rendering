@@ -12,7 +12,7 @@ import { Review } from '@root/fixtures/generated/articles/Review';
 import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
-import { GuardianView } from '@root/fixtures/generated/articles/GuardianView';
+import { Editorial } from '@root/fixtures/generated/articles/Editorial';
 import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
@@ -180,12 +180,12 @@ export const DeadStory = (): React.ReactNode => {
 };
 DeadStory.story = { name: 'DeadBlog' };
 
-export const GuardianViewStory = (): React.ReactNode => {
-	const ServerCAPI = convertToImmersive(GuardianView);
+export const GEditorialStory = (): React.ReactNode => {
+	const ServerCAPI = convertToImmersive(Editorial);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-GuardianViewStory.story = {
-	name: 'GuardianView',
+GEditorialStory.story = {
+	name: 'Editorial',
 	parameters: {
 		viewport: { defaultViewport: 'leftCol' },
 		chromatic: { viewports: [1140] },

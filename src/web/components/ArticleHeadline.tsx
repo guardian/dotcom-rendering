@@ -211,7 +211,7 @@ export const ArticleHeadline = ({
 						</h1>
 					);
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<>
 							<h1
@@ -282,7 +282,7 @@ export const ArticleHeadline = ({
 						</h1>
 					);
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<>
 							<h1

@@ -38,7 +38,7 @@ const bodyStyle = (display: Display) => css`
 `;
 
 const linkColour = (palette: Palette) => css`
-	a {
+	a:not([data-ignore='global-link-styling']) {
 		text-decoration: none;
 		border-bottom: 1px solid ${palette.border.articleLink};
 		color: ${palette.text.articleLink};

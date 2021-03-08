@@ -53,11 +53,12 @@ export const Article: React.FC<{
 	config: ConfigType;
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
-	const design = decideDesign(
-		articleData.designType,
-		articleData.tags,
-		config.isLiveBlog,
-	);
+	const design = decideDesign({
+		designType: articleData.designType,
+		tags: articleData.tags,
+		isLiveBlog: config.isLiveBlog,
+		isLive: config.isLive,
+	});
 	const pillar = decideTheme({
 		pillar: articleData.pillar,
 		design,

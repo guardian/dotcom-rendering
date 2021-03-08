@@ -52,7 +52,7 @@ const articles = [
 			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
 	{
-		name: 'GuardianView',
+		name: 'Editorial',
 		url:
 			'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	},

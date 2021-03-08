@@ -30,7 +30,7 @@ const outerStyles = (format: Format) => {
         tones used on the site(that's my understanding anyway!)
     */
 	switch (format.design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return css`
 				${baseStyles};
@@ -57,7 +57,7 @@ const innerStyles = (format: Format) => {
 	`;
 
 	switch (format.design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return css`
 				${baseStyles};
