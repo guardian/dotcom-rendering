@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
@@ -645,12 +645,12 @@ export const SpecialReport = () => (
 					palette={decidePalette({
 						display: Display.Standard,
 						design: Design.Article,
-						theme: Pillar.News,
+						theme: Special.SpecialReport,
 					})}
 					format={{
 						display: Display.Standard,
 						design: Design.Article,
-						theme: Pillar.News,
+						theme: Special.SpecialReport,
 					}}
 					tags={[]}
 				/>
