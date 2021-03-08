@@ -111,6 +111,29 @@ function themeToPillar(theme: Theme): string {
 	}
 }
 
+const stringToPillar = (pillar: string): Pillar => {
+	switch (pillar) {
+		case 'news':
+			return Pillar.News;
+		case 'opinion':
+			return Pillar.Opinion;
+		case 'culture':
+			return Pillar.Culture;
+		case 'sport':
+			return Pillar.Sport;
+		case 'lifestyle':
+			return Pillar.Lifestyle;
+		default:
+			return Pillar.News;
+	}
+};
+
 // ----- Exports ----- //
 
-export { ThemeStyles, getThemeStyles, themeFromString, themeToPillar };
+export {
+	ThemeStyles,
+	getThemeStyles,
+	themeFromString,
+	themeToPillar,
+	stringToPillar,
+};
