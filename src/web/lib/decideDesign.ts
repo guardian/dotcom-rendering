@@ -31,7 +31,7 @@ export const decideDesign = (
 		case 'Interview':
 			return Design.Interview;
 		case 'GuardianView':
-			return Design.GuardianView;
+			return Design.Editorial;
 		case 'Quiz':
 			return Design.Quiz;
 		case 'PhotoEssay':

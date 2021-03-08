@@ -266,7 +266,7 @@ const textLinkKicker = (format: Format): string => {
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
-	if (format.design === Design.GuardianView) return opinion[800];
+	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
 	return 'transparent';
 };
@@ -309,7 +309,7 @@ const backgroundAvatar = (format: Format): string => {
 const backgroundCard = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return opinion[800];
 		case Design.Media:

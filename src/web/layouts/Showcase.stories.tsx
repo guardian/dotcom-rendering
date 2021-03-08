@@ -10,7 +10,7 @@ import { Review } from '@root/fixtures/generated/articles/Review';
 import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
-import { GuardianView } from '@root/fixtures/generated/articles/GuardianView';
+import { Editorial } from '@root/fixtures/generated/articles/Editorial';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
@@ -122,11 +122,11 @@ export const DeadStory = (): React.ReactNode => {
 };
 DeadStory.story = { name: 'DeadBlog' };
 
-export const GuardianViewStory = (): React.ReactNode => {
-	const ServerCAPI = convertToShowcase(GuardianView);
+export const EditorialStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Editorial);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-GuardianViewStory.story = { name: 'GuardianView' };
+EditorialStory.story = { name: 'Editorial' };
 
 export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Interview);

@@ -78,13 +78,13 @@ const Showcase = Format(
 	'Showcase',
 );
 
-const GuardianView = Format(
+const Editorial = Format(
 	{
 		display: Display.Standard,
 		theme: Pillar.News,
-		design: Design.GuardianView,
+		design: Design.Editorial,
 	},
-	'GuardianView',
+	'Editorial',
 );
 
 const Interactive = Format(
@@ -159,7 +159,7 @@ export {
 	Article,
 	Immersive,
 	Showcase,
-	GuardianView,
+	Editorial,
 	Interactive,
 	MatchReport,
 	Media,
