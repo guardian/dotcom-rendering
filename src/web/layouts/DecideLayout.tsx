@@ -21,12 +21,12 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign(
-		CAPI.designType,
-		CAPI.tags,
-		CAPI.config.isLiveBlog,
-		CAPI.config.isLive,
-	);
+	const design: Design = decideDesign({
+		designType: CAPI.designType,
+		tags: CAPI.tags,
+		isLiveBlog: CAPI.config.isLiveBlog,
+		isLive: CAPI.config.isLive,
+	});
 	const pillar: Pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,
