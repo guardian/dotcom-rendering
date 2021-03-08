@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
@@ -579,7 +579,7 @@ export const ImmersiveComment = () => (
 );
 ImmersiveComment.story = { name: 'Immersive opinion piece' };
 
-export const GuardianView = () => (
+export const Editorial = () => (
 	<Section>
 		<Flex>
 			<LeftColumn>
@@ -587,15 +587,15 @@ export const GuardianView = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when design type is GuardianView"
+					headlineString="This is the headline you see when design type is Editorial"
 					palette={decidePalette({
 						display: Display.Standard,
-						design: Design.GuardianView,
+						design: Design.Editorial,
 						theme: Pillar.News,
 					})}
 					format={{
 						display: Display.Standard,
-						design: Design.GuardianView,
+						design: Design.Editorial,
 						theme: Pillar.News,
 					}}
 					tags={[]}
@@ -604,7 +604,7 @@ export const GuardianView = () => (
 		</Flex>
 	</Section>
 );
-GuardianView.story = { name: 'GuardianView' };
+Editorial.story = { name: 'Editorial' };
 
 export const MatchReport = () => (
 	<Section>
@@ -645,12 +645,12 @@ export const SpecialReport = () => (
 					palette={decidePalette({
 						display: Display.Standard,
 						design: Design.Article,
-						theme: Pillar.News,
+						theme: Special.SpecialReport,
 					})}
 					format={{
 						display: Display.Standard,
 						design: Design.Article,
-						theme: Pillar.News,
+						theme: Special.SpecialReport,
 					}}
 					tags={[]}
 				/>
@@ -660,7 +660,7 @@ export const SpecialReport = () => (
 );
 SpecialReport.story = { name: 'SpecialReport' };
 
-export const Live = () => (
+export const LiveBlog = () => (
 	<Section>
 		<Flex>
 			<LeftColumn>
@@ -668,15 +668,15 @@ export const Live = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when design type is Live"
+					headlineString="This is the headline you see when design type is LiveBlog"
 					palette={decidePalette({
 						display: Display.Standard,
-						design: Design.Live,
+						design: Design.LiveBlog,
 						theme: Pillar.News,
 					})}
 					format={{
 						display: Display.Standard,
-						design: Design.Live,
+						design: Design.LiveBlog,
 						theme: Pillar.News,
 					}}
 					tags={[]}
@@ -685,4 +685,31 @@ export const Live = () => (
 		</Flex>
 	</Section>
 );
-Live.story = { name: 'Live' };
+LiveBlog.story = { name: 'LiveBlog' };
+
+export const DeadBlog = () => (
+	<Section>
+		<Flex>
+			<LeftColumn>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<ArticleHeadline
+					headlineString="This is the headline you see when design type is DeadBlog"
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.DeadBlog,
+						theme: Pillar.News,
+					})}
+					format={{
+						display: Display.Standard,
+						design: Design.DeadBlog,
+						theme: Pillar.News,
+					}}
+					tags={[]}
+				/>
+			</ArticleContainer>
+		</Flex>
+	</Section>
+);
+DeadBlog.story = { name: 'DeadBlog' };

@@ -5,7 +5,12 @@ import { decidePalette } from './decidePalette';
 
 export const decideTrail = (trail: CAPITrailType): TrailType => {
 	// We don't have tags here so we send an empty array
-	const design = decideDesign(trail.designType, [], trail.isLiveBlog);
+	const design = decideDesign({
+		designType: trail.designType,
+		tags: [],
+		isLiveBlog: trail.isLiveBlog,
+		isLive: true,
+	});
 	const format = {
 		// We don't have enough data from CAPI to know what display should be
 		display: Display.Standard,

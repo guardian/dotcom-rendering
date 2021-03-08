@@ -1,4 +1,3 @@
-import { getPolyfill } from '../../lib/polyfill';
 import { disableCMP } from '../../lib/disableCMP';
 import { skipOn } from '@cypress/skip-test';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';

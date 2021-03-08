@@ -343,11 +343,12 @@ export const App = ({ CAPI, NAV }: Props) => {
 	}, [isSignedIn, CAPI.config.idApiUrl]);
 
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign(
-		CAPI.designType,
-		CAPI.tags,
-		CAPI.isLiveBlog,
-	);
+	const design: Design = decideDesign({
+		designType: CAPI.designType,
+		tags: CAPI.tags,
+		isLiveBlog: CAPI.isLiveBlog,
+		isLive: CAPI.isLive,
+	});
 	const pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,

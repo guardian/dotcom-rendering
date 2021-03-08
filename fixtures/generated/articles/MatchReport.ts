@@ -1351,7 +1351,7 @@ export const MatchReport: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '0aba0e04-7937-400d-bc2a-ca7c783f9d54',
+			elementId: '3a962903-828c-4c9b-ae78-329437f4bf95',
 			role: 'inline',
 			data: {
 				alt:
@@ -1745,28 +1745,28 @@ export const MatchReport: CAPIType = {
 			lastUpdated: 1612589240000,
 			elements: [
 				{
-					elementId: 'ceaa395e-6229-4597-aabc-deaac1da2cb8',
+					elementId: '7354048d-b9d4-4702-8d03-1505eefc1c63',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
 				},
 				{
-					elementId: '81839e28-c8ff-4c5f-ba8e-605fa8297d35',
+					elementId: '78176479-6825-4eb2-a999-660cd291c647',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
 				},
 				{
-					elementId: '5de664a2-ea84-4a26-a643-e9eada75075e',
+					elementId: 'a504cf6b-f2ec-40ce-8bf9-5b095b1cac73',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
 				},
 				{
-					elementId: '1d550a9e-15bb-4392-be7c-fc2990eb4591',
+					elementId: 'eb5d84f2-aab3-4a6b-85b6-8a9360f39dbe',
 					role: 'thumbnail',
 					prefix: 'Related: ',
 					_type:
@@ -1777,49 +1777,49 @@ export const MatchReport: CAPIType = {
 						'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
 				},
 				{
-					elementId: '2435a4ea-15c1-4321-b01e-68dcf5999d03',
+					elementId: '767bd94e-e334-4eed-9ed1-01ddb9105aa5',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
 				},
 				{
-					elementId: '867d8a07-ebc6-47f6-9933-c6e4b332f536',
+					elementId: '909f6741-5b08-414c-8034-5659de6bbeeb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
 				},
 				{
-					elementId: 'b9977441-9bb7-45df-a97b-c8e1f8e519a2',
+					elementId: '360848a9-c4de-4625-94c8-11aa8026c536',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
 				},
 				{
-					elementId: '21ce43fd-9a34-40ec-8b8c-c7c9cd201920',
+					elementId: '44693597-58e4-4b23-9388-efd388e1c3b0',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
 				},
 				{
-					elementId: '148b9d25-d91e-4bd2-8c46-cb632c201a16',
+					elementId: '1e616737-c5e0-49af-9710-67115e9f746a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
 				},
 				{
-					elementId: '3154bdd1-c03a-4349-9f55-3151b27d0379',
+					elementId: '687630ea-aaab-4d84-88a7-7e159233b805',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
 				},
 				{
-					elementId: '0b45a221-e0c8-41e0-b59e-cde3f4688b78',
+					elementId: '7fc3a2ad-d3bd-41e1-ae7a-68b55fdf6998',
 					isThirdPartyTracking: false,
 					safe: true,
 					alt: 'Fiver',
@@ -1832,14 +1832,14 @@ export const MatchReport: CAPIType = {
 					isMandatory: false,
 				},
 				{
-					elementId: '0c7773f8-c47e-46c2-a51f-7a4b3471b85e',
+					elementId: '665d26da-4669-4409-b1a2-5ed4887ffe65',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
 				},
 				{
-					elementId: 'ffcfc536-b72b-48fb-839f-73e56c8df669',
+					elementId: '3a1869f6-7be4-4567-bccc-ca32e12d8216',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -2095,7 +2095,7 @@ export const MatchReport: CAPIType = {
 		pageCode: '8727061',
 		pillar: 'Sport',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/b2d004ec8fca220ad3a7/graun.commercial.dcr.js',
+			'https://assets.guim.co.uk/javascripts/6d699370121c734690ce/graun.commercial.dcr.js',
 		discussionApiClientHeader: 'nextgen',
 		membershipUrl: 'https://membership.theguardian.com',
 		cardStyle: 'news',
@@ -2139,7 +2139,7 @@ export const MatchReport: CAPIType = {
 		section: 'football',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37555',
+		buildNumber: '37557',
 		isPhotoEssay: false,
 		ampIframeUrl:
 			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
@@ -3551,7 +3551,6 @@ export const MatchReport: CAPIType = {
 			5514880750,
 			5516342298,
 			5516696296,
-			5517593017,
 			5519048334,
 			5520152069,
 			5522655965,
@@ -3610,13 +3609,10 @@ export const MatchReport: CAPIType = {
 			5566888543,
 			5570251365,
 			5570403307,
-			5571549803,
 			5571550025,
 			5580798708,
 			5581991484,
 			5582134793,
-			5582190407,
-			5582964950,
 			5584069572,
 			5585724471,
 			5588312812,
@@ -3648,7 +3644,6 @@ export const MatchReport: CAPIType = {
 			5609341878,
 			5609922209,
 			5610406314,
-			5612812553,
 			5612812556,
 			5613900227,
 			5616295359,
@@ -3656,9 +3651,6 @@ export const MatchReport: CAPIType = {
 			5617357126,
 			5617560946,
 			5618303037,
-			5618345881,
-			5618589967,
-			5619100751,
 			5619527905,
 			5620047587,
 			5620070327,
@@ -3667,23 +3659,17 @@ export const MatchReport: CAPIType = {
 			5620891383,
 			5621508639,
 			5621922383,
-			5622055186,
 			5622264429,
 			5622478028,
 			5622532278,
 			5622837268,
-			5623595490,
 			5624650559,
-			5624869673,
-			5624873224,
 			5624983821,
-			5625075546,
 			5625107183,
 			5625223661,
 			5625227978,
 			5625398582,
 			5625487113,
-			5625821955,
 			5625836589,
 			5625971457,
 			5626103406,
@@ -3692,18 +3678,16 @@ export const MatchReport: CAPIType = {
 			5627400383,
 			5627416481,
 			5627419082,
+			5627509177,
 			5627510314,
 			5627740002,
 			5627768068,
-			5627946712,
-			5628367142,
 			5628371464,
-			5628484717,
 			5628688753,
 			5629557118,
 			5629670544,
+			5629689756,
 			5629713588,
-			5629755327,
 			5630010461,
 			5630202171,
 			5630498106,
@@ -3711,7 +3695,7 @@ export const MatchReport: CAPIType = {
 			5631069021,
 			5631098598,
 			5631098862,
-			5631297107,
+			5631099042,
 			5631522170,
 			5631715415,
 			5631748556,
@@ -3719,34 +3703,29 @@ export const MatchReport: CAPIType = {
 			5631955125,
 			5632010289,
 			5632010304,
-			5632167586,
-			5632171830,
-			5632172533,
-			5632246513,
 			5632464370,
 			5632497345,
+			5632645568,
 			5632654007,
 			5632702032,
-			5633274403,
 			5633307960,
 			5633479388,
 			5633559344,
-			5633566793,
-			5633566955,
 			5633620717,
-			5633632965,
-			5633735270,
 			5633782264,
-			5633848686,
+			5634184944,
 			5634480439,
 			5634571147,
 			5634602605,
 			5634623455,
-			5634695740,
-			5634696664,
 			5634854126,
 			5635126238,
+			5635158211,
+			5635350659,
 			5635356428,
+			5636213651,
+			5636227163,
+			5636871103,
 		],
 		tones: 'Match reports',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',

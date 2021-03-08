@@ -1,10 +1,7 @@
-import { getPolyfill } from '../../lib/polyfill';
 import { disableCMP } from '../../lib/disableCMP.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('The web document renders with the correct meta and analytics elements and attributes', function () {
-	before(getPolyfill);
-
 	beforeEach(function () {
 		disableCMP();
 		setLocalBaseUrl();

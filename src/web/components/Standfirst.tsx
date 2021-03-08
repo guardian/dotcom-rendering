@@ -86,7 +86,7 @@ const standfirstStyles = (design: Design, display: Display) => {
 		case Display.Standard: {
 			switch (design) {
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 				case Design.Feature:
 				case Design.Recipe:
 				case Design.Review:

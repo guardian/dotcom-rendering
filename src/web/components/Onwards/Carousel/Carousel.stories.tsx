@@ -54,12 +54,12 @@ const trails: TrailType[] = [
 		format: {
 			display: Display.Standard,
 			theme: Pillar.News,
-			design: Design.Live,
+			design: Design.LiveBlog,
 		},
 		palette: decidePalette({
 			display: Display.Standard,
 			theme: Pillar.News,
-			design: Design.Live,
+			design: Design.LiveBlog,
 		}),
 		webPublicationDate: '2021-02-17T12:45:05.000Z',
 		headline:
