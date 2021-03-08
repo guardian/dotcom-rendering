@@ -28,6 +28,7 @@ import {
 } from 'native/nativeApi';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
+import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 
 // ----- Run ----- //
@@ -175,7 +176,7 @@ function renderComments(): void {
 		const props = {
 			shortUrl,
 			baseUrl: 'https://discussion.theguardian.com/discussion-api',
-			pillar,
+			pillar: stringToPillar(pillar),
 			user,
 			isClosedForComments,
 			additionalHeaders,

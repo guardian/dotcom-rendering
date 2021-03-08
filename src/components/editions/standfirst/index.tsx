@@ -44,6 +44,7 @@ const immersiveStyles = `
 const styles = (kickerColor: string): SerializedStyles => css`
 	${body.medium({ lineHeight: 'tight' })}
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	padding-bottom: ${remSpace[4]};
 	color: ${text.primary};
