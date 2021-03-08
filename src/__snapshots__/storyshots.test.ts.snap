@@ -628,9 +628,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -685,6 +682,16 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 .emotion-17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-18 {
   background: none;
   border: none;
   padding: 0;
@@ -692,53 +699,53 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 144px;
   }
 }
 
-.emotion-19 {
+.emotion-20 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-19 iframe {
+.emotion-20 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-19 figcaption {
+.emotion-20 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-19 p {
+  .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -746,13 +753,13 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-19 {
+  .emotion-20 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-20 {
+.emotion-21 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -761,18 +768,18 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-21 {
+.emotion-22 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-21 {
+  .emotion-22 {
     width: 620px;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -781,26 +788,26 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-22 {
+  .emotion-23 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-22 {
+  .emotion-23 {
     background-color: #333333;
   }
 }
 
-.emotion-25 {
+.emotion-26 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-26 {
+.emotion-27 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -810,20 +817,20 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   position: relative;
 }
 
-.emotion-26 summary {
+.emotion-27 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-26 summary::-webkit-details-marker {
+.emotion-27 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-26 summary:focus {
+.emotion-27 summary:focus {
   outline: none;
 }
 
-.emotion-27 {
+.emotion-28 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -832,7 +839,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   color: #BB3B80;
 }
 
-.emotion-28 {
+.emotion-29 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -841,7 +848,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   line-height: 22px;
 }
 
-.emotion-29 {
+.emotion-30 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -865,11 +872,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   margin: 0;
 }
 
-.emotion-29:hover {
+.emotion-30:hover {
   background: #BB3B80;
 }
 
-.emotion-30 {
+.emotion-31 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -884,7 +891,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   font-weight: 400;
 }
 
-.emotion-31 {
+.emotion-32 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -892,36 +899,36 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   height: 28px;
 }
 
-.emotion-32 {
+.emotion-33 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-32 p {
+.emotion-33 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-32 ol {
+.emotion-33 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul {
+.emotion-33 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul li {
+.emotion-33 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-32 ul li:before {
+.emotion-33 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -932,15 +939,15 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-32 b {
+.emotion-33 b {
   font-weight: 700;
 }
 
-.emotion-32 i {
+.emotion-33 i {
   font-style: italic;
 }
 
-.emotion-32 a {
+.emotion-33 a {
   color: #7D0068;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -949,11 +956,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-32 a:hover {
+.emotion-33 a:hover {
   border-bottom: solid 0.0625rem #BB3B80;
 }
 
-.emotion-33 {
+.emotion-34 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -966,7 +973,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-34 {
+.emotion-35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -981,7 +988,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   font-weight: 400;
 }
 
-.emotion-35 {
+.emotion-36 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -1005,20 +1012,20 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   height: 28px;
 }
 
-.emotion-35:hover {
+.emotion-36:hover {
   background: #BB3B80;
 }
 
-.emotion-35:focus {
+.emotion-36:focus {
   border: none;
 }
 
-.emotion-36 {
+.emotion-37 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-37 {
+.emotion-38 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -1048,15 +1055,15 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-37:hover {
+.emotion-38:hover {
   background: #BB3B80;
 }
 
-.emotion-37:focus {
+.emotion-38:focus {
   border: none;
 }
 
-.emotion-39 {
+.emotion-40 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -1064,7 +1071,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   height: 28px;
 }
 
-.emotion-42 {
+.emotion-43 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -1079,14 +1086,14 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-42 {
+  .emotion-43 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-42:before {
+.emotion-43:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -1098,7 +1105,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-42:after {
+.emotion-43:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -1108,25 +1115,25 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   border-top: 1px solid #BB3B80;
 }
 
-.emotion-43 {
+.emotion-44 {
   margin: 0;
 }
 
-.emotion-44 {
+.emotion-45 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-44 svg {
+.emotion-45 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #BB3B80;
 }
 
-.emotion-45 {
+.emotion-46 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -1236,15 +1243,19 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
           <div
             className="emotion-16"
           >
-            <p>
-              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-            </p>
+            <div
+              className="emotion-17"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
             <span
               className="js-share-button"
               role="button"
             >
               <button
-                className="emotion-17"
+                className="emotion-18"
                 onClick={[Function]}
               >
                 <svg
@@ -1268,16 +1279,16 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
       </section>
     </div>
     <div
-      className="emotion-18"
+      className="emotion-19"
     >
       <section
-        className="emotion-19"
+        className="emotion-20"
       >
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <figure
-          className="emotion-21"
+          className="emotion-22"
         >
           <picture>
             <source
@@ -1291,7 +1302,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-22"
+              className="js-launch-slideshow emotion-23"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -1300,18 +1311,18 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <div
-          className="emotion-25"
+          className="emotion-26"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-26"
+            className="emotion-27"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -1319,23 +1330,23 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-27"
+                className="emotion-28"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-28"
+                className="emotion-29"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-29"
+                className="emotion-30"
               >
                 <span
-                  className="emotion-30"
+                  className="emotion-31"
                 >
                   <span
-                    className="emotion-31"
+                    className="emotion-32"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -1354,7 +1365,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-32"
+                className="emotion-33"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -1363,24 +1374,24 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
               />
             </div>
             <footer
-              className="emotion-33"
+              className="emotion-34"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-34"
+                  className="emotion-35"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-35"
+                    className="emotion-36"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -1390,12 +1401,12 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-37"
+                    className="emotion-38"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -1407,7 +1418,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-39"
+                className="emotion-40"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -1417,19 +1428,19 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
           </details>
         </div>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <aside
-          className="emotion-42"
+          className="emotion-43"
         >
           <blockquote
-            className="emotion-43"
+            className="emotion-44"
           >
             <p
-              className="emotion-44"
+              className="emotion-45"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -1444,17 +1455,17 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-45"
+              className="emotion-46"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
       </section>
     </div>
@@ -1858,9 +1869,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -1915,6 +1923,16 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 .emotion-20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-21 {
   background: none;
   border: none;
   padding: 0;
@@ -1922,53 +1940,53 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-21 {
+  .emotion-22 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-21 {
+  .emotion-22 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-21 {
+  .emotion-22 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-21 {
+  .emotion-22 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-21 {
+  .emotion-22 {
     margin-left: 144px;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-22 iframe {
+.emotion-23 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-22 figcaption {
+.emotion-23 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-22 p {
+  .emotion-23 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -1976,13 +1994,13 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-22 {
+  .emotion-23 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-23 {
+.emotion-24 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -1991,18 +2009,18 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-24 {
+.emotion-25 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-24 {
+  .emotion-25 {
     width: 620px;
   }
 }
 
-.emotion-25 {
+.emotion-26 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #DCDCDC;
@@ -2011,26 +2029,26 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-25 {
+  .emotion-26 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-25 {
+  .emotion-26 {
     background-color: #333333;
   }
 }
 
-.emotion-28 {
+.emotion-29 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-29 {
+.emotion-30 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -2040,20 +2058,20 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   position: relative;
 }
 
-.emotion-29 summary {
+.emotion-30 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-29 summary::-webkit-details-marker {
+.emotion-30 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-29 summary:focus {
+.emotion-30 summary:focus {
   outline: none;
 }
 
-.emotion-30 {
+.emotion-31 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -2062,7 +2080,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   color: #C70000;
 }
 
-.emotion-31 {
+.emotion-32 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -2071,7 +2089,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   line-height: 22px;
 }
 
-.emotion-32 {
+.emotion-33 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -2095,11 +2113,11 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   margin: 0;
 }
 
-.emotion-32:hover {
+.emotion-33:hover {
   background: #C70000;
 }
 
-.emotion-33 {
+.emotion-34 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -2114,7 +2132,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   font-weight: 400;
 }
 
-.emotion-34 {
+.emotion-35 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -2122,36 +2140,36 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   height: 28px;
 }
 
-.emotion-35 {
+.emotion-36 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-35 p {
+.emotion-36 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-35 ol {
+.emotion-36 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-35 ul {
+.emotion-36 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-35 ul li {
+.emotion-36 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-35 ul li:before {
+.emotion-36 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -2162,15 +2180,15 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-35 b {
+.emotion-36 b {
   font-weight: 700;
 }
 
-.emotion-35 i {
+.emotion-36 i {
   font-style: italic;
 }
 
-.emotion-35 a {
+.emotion-36 a {
   color: #AB0613;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -2179,11 +2197,11 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-35 a:hover {
+.emotion-36 a:hover {
   border-bottom: solid 0.0625rem #C70000;
 }
 
-.emotion-36 {
+.emotion-37 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -2196,7 +2214,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-37 {
+.emotion-38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2211,7 +2229,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   font-weight: 400;
 }
 
-.emotion-38 {
+.emotion-39 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -2235,20 +2253,20 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   height: 28px;
 }
 
-.emotion-38:hover {
+.emotion-39:hover {
   background: #C70000;
 }
 
-.emotion-38:focus {
+.emotion-39:focus {
   border: none;
 }
 
-.emotion-39 {
+.emotion-40 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-40 {
+.emotion-41 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -2278,15 +2296,15 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-40:hover {
+.emotion-41:hover {
   background: #C70000;
 }
 
-.emotion-40:focus {
+.emotion-41:focus {
   border: none;
 }
 
-.emotion-42 {
+.emotion-43 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -2294,7 +2312,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   height: 28px;
 }
 
-.emotion-45 {
+.emotion-46 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -2309,14 +2327,14 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-45 {
+  .emotion-46 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-45:before {
+.emotion-46:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -2328,7 +2346,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-45:after {
+.emotion-46:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -2338,25 +2356,25 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   border-top: 1px solid #C70000;
 }
 
-.emotion-46 {
+.emotion-47 {
   margin: 0;
 }
 
-.emotion-47 {
+.emotion-48 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-47 svg {
+.emotion-48 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #C70000;
 }
 
-.emotion-48 {
+.emotion-49 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -2501,15 +2519,19 @@ exports[`Storyshots Editions/Article Comment 1`] = `
           <div
             className="emotion-19"
           >
-            <p>
-              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-            </p>
+            <div
+              className="emotion-20"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
             <span
               className="js-share-button"
               role="button"
             >
               <button
-                className="emotion-20"
+                className="emotion-21"
                 onClick={[Function]}
               >
                 <svg
@@ -2533,16 +2555,16 @@ exports[`Storyshots Editions/Article Comment 1`] = `
       </section>
     </div>
     <div
-      className="emotion-21"
+      className="emotion-22"
     >
       <section
-        className="emotion-22"
+        className="emotion-23"
       >
         <p
-          className="emotion-23"
+          className="emotion-24"
         />
         <figure
-          className="emotion-24"
+          className="emotion-25"
         >
           <picture>
             <source
@@ -2556,7 +2578,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-25"
+              className="js-launch-slideshow emotion-26"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -2565,18 +2587,18 @@ exports[`Storyshots Editions/Article Comment 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-23"
+          className="emotion-24"
         />
         <p
-          className="emotion-23"
+          className="emotion-24"
         />
         <div
-          className="emotion-28"
+          className="emotion-29"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-29"
+            className="emotion-30"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -2584,23 +2606,23 @@ exports[`Storyshots Editions/Article Comment 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-30"
+                className="emotion-31"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-31"
+                className="emotion-32"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-32"
+                className="emotion-33"
               >
                 <span
-                  className="emotion-33"
+                  className="emotion-34"
                 >
                   <span
-                    className="emotion-34"
+                    className="emotion-35"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -2619,7 +2641,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-35"
+                className="emotion-36"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -2628,24 +2650,24 @@ exports[`Storyshots Editions/Article Comment 1`] = `
               />
             </div>
             <footer
-              className="emotion-36"
+              className="emotion-37"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-37"
+                  className="emotion-38"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-38"
+                    className="emotion-39"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-39"
+                      className="emotion-40"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -2655,12 +2677,12 @@ exports[`Storyshots Editions/Article Comment 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-40"
+                    className="emotion-41"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-39"
+                      className="emotion-40"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -2672,7 +2694,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-42"
+                className="emotion-43"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -2682,19 +2704,19 @@ exports[`Storyshots Editions/Article Comment 1`] = `
           </details>
         </div>
         <p
-          className="emotion-23"
+          className="emotion-24"
         />
         <p
-          className="emotion-23"
+          className="emotion-24"
         />
         <aside
-          className="emotion-45"
+          className="emotion-46"
         >
           <blockquote
-            className="emotion-46"
+            className="emotion-47"
           >
             <p
-              className="emotion-47"
+              className="emotion-48"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -2709,17 +2731,17 @@ exports[`Storyshots Editions/Article Comment 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-48"
+              className="emotion-49"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-23"
+          className="emotion-24"
         />
         <p
-          className="emotion-23"
+          className="emotion-24"
         />
       </section>
     </div>
@@ -2967,9 +2989,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -3019,22 +3038,32 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 .emotion-12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-13 {
   box-sizing: border-box;
 }
 
 @media (min-width:740px) {
-  .emotion-12 {
+  .emotion-13 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-12 {
+  .emotion-13 {
     width: 558px;
   }
 }
 
-.emotion-13 {
+.emotion-14 {
   background-image: repeating-linear-gradient( to bottom,#DCDCDC,#DCDCDC 1px,transparent 1px,transparent 0.25rem );
   background-repeat: repeat-x;
   background-position: top;
@@ -3042,7 +3071,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-14 {
+.emotion-15 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -3056,7 +3085,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   margin: 0;
 }
 
-.emotion-14 svg {
+.emotion-15 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -3065,21 +3094,21 @@ exports[`Storyshots Editions/Article Default 1`] = `
   height: 1.875rem;
 }
 
-.emotion-14 svg circle {
+.emotion-15 svg circle {
   stroke: #C70000;
 }
 
-.emotion-14 svg path {
+.emotion-15 svg path {
   fill: #C70000;
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     padding-bottom: 2.25rem;
   }
 }
 
-.emotion-15 {
+.emotion-16 {
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -3088,14 +3117,14 @@ exports[`Storyshots Editions/Article Default 1`] = `
   font-style: normal;
 }
 
-.emotion-16 {
+.emotion-17 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   color: #121212;
 }
 
-.emotion-17 {
+.emotion-18 {
   background: none;
   border: none;
   padding: 0;
@@ -3103,53 +3132,53 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 144px;
   }
 }
 
-.emotion-19 {
+.emotion-20 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-19 iframe {
+.emotion-20 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-19 figcaption {
+.emotion-20 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-19 p {
+  .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -3157,13 +3186,13 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-19 {
+  .emotion-20 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-20 {
+.emotion-21 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -3172,18 +3201,18 @@ exports[`Storyshots Editions/Article Default 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-21 {
+.emotion-22 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-21 {
+  .emotion-22 {
     width: 620px;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -3192,26 +3221,26 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-22 {
+  .emotion-23 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-22 {
+  .emotion-23 {
     background-color: #333333;
   }
 }
 
-.emotion-25 {
+.emotion-26 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-26 {
+.emotion-27 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -3221,20 +3250,20 @@ exports[`Storyshots Editions/Article Default 1`] = `
   position: relative;
 }
 
-.emotion-26 summary {
+.emotion-27 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-26 summary::-webkit-details-marker {
+.emotion-27 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-26 summary:focus {
+.emotion-27 summary:focus {
   outline: none;
 }
 
-.emotion-27 {
+.emotion-28 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -3243,7 +3272,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   color: #C70000;
 }
 
-.emotion-28 {
+.emotion-29 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -3252,7 +3281,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   line-height: 22px;
 }
 
-.emotion-29 {
+.emotion-30 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -3276,11 +3305,11 @@ exports[`Storyshots Editions/Article Default 1`] = `
   margin: 0;
 }
 
-.emotion-29:hover {
+.emotion-30:hover {
   background: #C70000;
 }
 
-.emotion-30 {
+.emotion-31 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -3295,7 +3324,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   font-weight: 400;
 }
 
-.emotion-31 {
+.emotion-32 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -3303,36 +3332,36 @@ exports[`Storyshots Editions/Article Default 1`] = `
   height: 28px;
 }
 
-.emotion-32 {
+.emotion-33 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-32 p {
+.emotion-33 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-32 ol {
+.emotion-33 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul {
+.emotion-33 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul li {
+.emotion-33 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-32 ul li:before {
+.emotion-33 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -3343,15 +3372,15 @@ exports[`Storyshots Editions/Article Default 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-32 b {
+.emotion-33 b {
   font-weight: 700;
 }
 
-.emotion-32 i {
+.emotion-33 i {
   font-style: italic;
 }
 
-.emotion-32 a {
+.emotion-33 a {
   color: #AB0613;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -3360,11 +3389,11 @@ exports[`Storyshots Editions/Article Default 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-32 a:hover {
+.emotion-33 a:hover {
   border-bottom: solid 0.0625rem #C70000;
 }
 
-.emotion-33 {
+.emotion-34 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -3377,7 +3406,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-34 {
+.emotion-35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3392,7 +3421,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   font-weight: 400;
 }
 
-.emotion-35 {
+.emotion-36 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -3416,20 +3445,20 @@ exports[`Storyshots Editions/Article Default 1`] = `
   height: 28px;
 }
 
-.emotion-35:hover {
+.emotion-36:hover {
   background: #C70000;
 }
 
-.emotion-35:focus {
+.emotion-36:focus {
   border: none;
 }
 
-.emotion-36 {
+.emotion-37 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-37 {
+.emotion-38 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -3459,15 +3488,15 @@ exports[`Storyshots Editions/Article Default 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-37:hover {
+.emotion-38:hover {
   background: #C70000;
 }
 
-.emotion-37:focus {
+.emotion-38:focus {
   border: none;
 }
 
-.emotion-39 {
+.emotion-40 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -3475,7 +3504,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   height: 28px;
 }
 
-.emotion-42 {
+.emotion-43 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -3490,14 +3519,14 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-42 {
+  .emotion-43 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-42:before {
+.emotion-43:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -3509,7 +3538,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-42:after {
+.emotion-43:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -3519,25 +3548,25 @@ exports[`Storyshots Editions/Article Default 1`] = `
   border-top: 1px solid #C70000;
 }
 
-.emotion-43 {
+.emotion-44 {
   margin: 0;
 }
 
-.emotion-44 {
+.emotion-45 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-44 svg {
+.emotion-45 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #C70000;
 }
 
-.emotion-45 {
+.emotion-46 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -3624,28 +3653,32 @@ exports[`Storyshots Editions/Article Default 1`] = `
           <div
             className="emotion-11"
           >
-            <p>
-              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-            </p>
+            <div
+              className="emotion-12"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
           </div>
           <div
-            className="emotion-12"
+            className="emotion-13"
           >
             <div
-              className="emotion-13"
+              className="emotion-14"
             />
           </div>
           <div
-            className="emotion-14"
+            className="emotion-15"
           >
             <address>
               <span
-                className="emotion-15"
+                className="emotion-16"
               >
                 Jane Smith
               </span>
               <span
-                className="emotion-16"
+                className="emotion-17"
               >
                  Editor of things
               </span>
@@ -3655,7 +3688,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
               role="button"
             >
               <button
-                className="emotion-17"
+                className="emotion-18"
                 onClick={[Function]}
               >
                 <svg
@@ -3679,16 +3712,16 @@ exports[`Storyshots Editions/Article Default 1`] = `
       </section>
     </div>
     <div
-      className="emotion-18"
+      className="emotion-19"
     >
       <section
-        className="emotion-19"
+        className="emotion-20"
       >
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <figure
-          className="emotion-21"
+          className="emotion-22"
         >
           <picture>
             <source
@@ -3702,7 +3735,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-22"
+              className="js-launch-slideshow emotion-23"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -3711,18 +3744,18 @@ exports[`Storyshots Editions/Article Default 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <div
-          className="emotion-25"
+          className="emotion-26"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-26"
+            className="emotion-27"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -3730,23 +3763,23 @@ exports[`Storyshots Editions/Article Default 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-27"
+                className="emotion-28"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-28"
+                className="emotion-29"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-29"
+                className="emotion-30"
               >
                 <span
-                  className="emotion-30"
+                  className="emotion-31"
                 >
                   <span
-                    className="emotion-31"
+                    className="emotion-32"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -3765,7 +3798,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-32"
+                className="emotion-33"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -3774,24 +3807,24 @@ exports[`Storyshots Editions/Article Default 1`] = `
               />
             </div>
             <footer
-              className="emotion-33"
+              className="emotion-34"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-34"
+                  className="emotion-35"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-35"
+                    className="emotion-36"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -3801,12 +3834,12 @@ exports[`Storyshots Editions/Article Default 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-37"
+                    className="emotion-38"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -3818,7 +3851,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-39"
+                className="emotion-40"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -3828,19 +3861,19 @@ exports[`Storyshots Editions/Article Default 1`] = `
           </details>
         </div>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <aside
-          className="emotion-42"
+          className="emotion-43"
         >
           <blockquote
-            className="emotion-43"
+            className="emotion-44"
           >
             <p
-              className="emotion-44"
+              className="emotion-45"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -3855,17 +3888,17 @@ exports[`Storyshots Editions/Article Default 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-45"
+              className="emotion-46"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
       </section>
     </div>
@@ -4131,9 +4164,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -4183,22 +4213,32 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 .emotion-13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-14 {
   box-sizing: border-box;
 }
 
 @media (min-width:740px) {
-  .emotion-13 {
+  .emotion-14 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-13 {
+  .emotion-14 {
     width: 558px;
   }
 }
 
-.emotion-14 {
+.emotion-15 {
   background-image: repeating-linear-gradient( to bottom,#DCDCDC,#DCDCDC 1px,transparent 1px,transparent 0.25rem );
   background-repeat: repeat-x;
   background-position: top;
@@ -4206,7 +4246,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-15 {
+.emotion-16 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -4220,7 +4260,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   margin: 0;
 }
 
-.emotion-15 svg {
+.emotion-16 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -4229,21 +4269,21 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   height: 1.875rem;
 }
 
-.emotion-15 svg circle {
+.emotion-16 svg circle {
   stroke: #E05E00;
 }
 
-.emotion-15 svg path {
+.emotion-16 svg path {
   fill: #E05E00;
 }
 
 @media (min-width:740px) {
-  .emotion-15 {
+  .emotion-16 {
     padding-bottom: 2.25rem;
   }
 }
 
-.emotion-16 {
+.emotion-17 {
   color: #E05E00;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -4252,14 +4292,14 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   font-style: normal;
 }
 
-.emotion-17 {
+.emotion-18 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   color: #121212;
 }
 
-.emotion-18 {
+.emotion-19 {
   background: none;
   border: none;
   padding: 0;
@@ -4267,53 +4307,53 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-19 {
+  .emotion-20 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-19 {
+  .emotion-20 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-19 {
+  .emotion-20 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-19 {
+  .emotion-20 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-19 {
+  .emotion-20 {
     margin-left: 144px;
   }
 }
 
-.emotion-20 {
+.emotion-21 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-20 iframe {
+.emotion-21 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-20 figcaption {
+.emotion-21 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-20 p {
+  .emotion-21 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -4321,13 +4361,13 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-21 {
+.emotion-22 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -4336,18 +4376,18 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-22 {
+.emotion-23 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-22 {
+  .emotion-23 {
     width: 620px;
   }
 }
 
-.emotion-23 {
+.emotion-24 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -4356,26 +4396,26 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-23 {
+  .emotion-24 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-23 {
+  .emotion-24 {
     background-color: #333333;
   }
 }
 
-.emotion-26 {
+.emotion-27 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-27 {
+.emotion-28 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -4385,20 +4425,20 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   position: relative;
 }
 
-.emotion-27 summary {
+.emotion-28 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-27 summary::-webkit-details-marker {
+.emotion-28 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-27 summary:focus {
+.emotion-28 summary:focus {
   outline: none;
 }
 
-.emotion-28 {
+.emotion-29 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -4407,7 +4447,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   color: #E05E00;
 }
 
-.emotion-29 {
+.emotion-30 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -4416,7 +4456,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   line-height: 22px;
 }
 
-.emotion-30 {
+.emotion-31 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -4440,11 +4480,11 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   margin: 0;
 }
 
-.emotion-30:hover {
+.emotion-31:hover {
   background: #E05E00;
 }
 
-.emotion-31 {
+.emotion-32 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -4459,7 +4499,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   font-weight: 400;
 }
 
-.emotion-32 {
+.emotion-33 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -4467,36 +4507,36 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   height: 28px;
 }
 
-.emotion-33 {
+.emotion-34 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-33 p {
+.emotion-34 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-33 ol {
+.emotion-34 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-33 ul {
+.emotion-34 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-33 ul li {
+.emotion-34 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-33 ul li:before {
+.emotion-34 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -4507,15 +4547,15 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-33 b {
+.emotion-34 b {
   font-weight: 700;
 }
 
-.emotion-33 i {
+.emotion-34 i {
   font-style: italic;
 }
 
-.emotion-33 a {
+.emotion-34 a {
   color: #CB4700;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -4524,11 +4564,11 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-33 a:hover {
+.emotion-34 a:hover {
   border-bottom: solid 0.0625rem #E05E00;
 }
 
-.emotion-34 {
+.emotion-35 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -4541,7 +4581,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-35 {
+.emotion-36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4556,7 +4596,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   font-weight: 400;
 }
 
-.emotion-36 {
+.emotion-37 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -4580,20 +4620,20 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   height: 28px;
 }
 
-.emotion-36:hover {
+.emotion-37:hover {
   background: #E05E00;
 }
 
-.emotion-36:focus {
+.emotion-37:focus {
   border: none;
 }
 
-.emotion-37 {
+.emotion-38 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-38 {
+.emotion-39 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -4623,15 +4663,15 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-38:hover {
+.emotion-39:hover {
   background: #E05E00;
 }
 
-.emotion-38:focus {
+.emotion-39:focus {
   border: none;
 }
 
-.emotion-40 {
+.emotion-41 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -4639,7 +4679,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   height: 28px;
 }
 
-.emotion-43 {
+.emotion-44 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -4654,14 +4694,14 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-43 {
+  .emotion-44 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-43:before {
+.emotion-44:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -4673,7 +4713,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-43:after {
+.emotion-44:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -4683,25 +4723,25 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   border-top: 1px solid #E05E00;
 }
 
-.emotion-44 {
+.emotion-45 {
   margin: 0;
 }
 
-.emotion-45 {
+.emotion-46 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-45 svg {
+.emotion-46 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #E05E00;
 }
 
-.emotion-46 {
+.emotion-47 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -4793,28 +4833,32 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
           <div
             className="emotion-12"
           >
-            <p>
-              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-            </p>
+            <div
+              className="emotion-13"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
           </div>
           <div
-            className="emotion-13"
+            className="emotion-14"
           >
             <div
-              className="emotion-14"
+              className="emotion-15"
             />
           </div>
           <div
-            className="emotion-15"
+            className="emotion-16"
           >
             <address>
               <span
-                className="emotion-16"
+                className="emotion-17"
               >
                 Jane Smith
               </span>
               <span
-                className="emotion-17"
+                className="emotion-18"
               >
                  Editor of things
               </span>
@@ -4824,7 +4868,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
               role="button"
             >
               <button
-                className="emotion-18"
+                className="emotion-19"
                 onClick={[Function]}
               >
                 <svg
@@ -4848,16 +4892,16 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
       </section>
     </div>
     <div
-      className="emotion-19"
+      className="emotion-20"
     >
       <section
-        className="emotion-20"
+        className="emotion-21"
       >
         <p
-          className="emotion-21"
+          className="emotion-22"
         />
         <figure
-          className="emotion-22"
+          className="emotion-23"
         >
           <picture>
             <source
@@ -4871,7 +4915,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-23"
+              className="js-launch-slideshow emotion-24"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -4880,18 +4924,18 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-21"
+          className="emotion-22"
         />
         <p
-          className="emotion-21"
+          className="emotion-22"
         />
         <div
-          className="emotion-26"
+          className="emotion-27"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-27"
+            className="emotion-28"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -4899,23 +4943,23 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-28"
+                className="emotion-29"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-29"
+                className="emotion-30"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-30"
+                className="emotion-31"
               >
                 <span
-                  className="emotion-31"
+                  className="emotion-32"
                 >
                   <span
-                    className="emotion-32"
+                    className="emotion-33"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -4934,7 +4978,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-33"
+                className="emotion-34"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -4943,24 +4987,24 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
               />
             </div>
             <footer
-              className="emotion-34"
+              className="emotion-35"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-35"
+                  className="emotion-36"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-36"
+                    className="emotion-37"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-37"
+                      className="emotion-38"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -4970,12 +5014,12 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-38"
+                    className="emotion-39"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-37"
+                      className="emotion-38"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -4987,7 +5031,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-40"
+                className="emotion-41"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -4997,19 +5041,19 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
           </details>
         </div>
         <p
-          className="emotion-21"
+          className="emotion-22"
         />
         <p
-          className="emotion-21"
+          className="emotion-22"
         />
         <aside
-          className="emotion-43"
+          className="emotion-44"
         >
           <blockquote
-            className="emotion-44"
+            className="emotion-45"
           >
             <p
-              className="emotion-45"
+              className="emotion-46"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -5024,17 +5068,17 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-46"
+              className="emotion-47"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-21"
+          className="emotion-22"
         />
         <p
-          className="emotion-21"
+          className="emotion-22"
         />
       </section>
     </div>
@@ -5282,9 +5326,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -5334,22 +5375,32 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 .emotion-12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-13 {
   box-sizing: border-box;
 }
 
 @media (min-width:740px) {
-  .emotion-12 {
+  .emotion-13 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-12 {
+  .emotion-13 {
     width: 558px;
   }
 }
 
-.emotion-13 {
+.emotion-14 {
   background-image: repeating-linear-gradient( to bottom,#DCDCDC,#DCDCDC 1px,transparent 1px,transparent 0.25rem );
   background-repeat: repeat-x;
   background-position: top;
@@ -5357,7 +5408,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-14 {
+.emotion-15 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -5371,7 +5422,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   margin: 0;
 }
 
-.emotion-14 svg {
+.emotion-15 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -5380,21 +5431,21 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   height: 1.875rem;
 }
 
-.emotion-14 svg circle {
+.emotion-15 svg circle {
   stroke: #0084C6;
 }
 
-.emotion-14 svg path {
+.emotion-15 svg path {
   fill: #0084C6;
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     padding-bottom: 2.25rem;
   }
 }
 
-.emotion-15 {
+.emotion-16 {
   color: #0084C6;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -5403,14 +5454,14 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   font-style: normal;
 }
 
-.emotion-16 {
+.emotion-17 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   color: #121212;
 }
 
-.emotion-17 {
+.emotion-18 {
   background: none;
   border: none;
   padding: 0;
@@ -5418,53 +5469,53 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 144px;
   }
 }
 
-.emotion-19 {
+.emotion-20 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-19 iframe {
+.emotion-20 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-19 figcaption {
+.emotion-20 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-19 p {
+  .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -5472,13 +5523,13 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-19 {
+  .emotion-20 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-20 {
+.emotion-21 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -5487,18 +5538,18 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-21 {
+.emotion-22 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-21 {
+  .emotion-22 {
     width: 620px;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -5507,26 +5558,26 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-22 {
+  .emotion-23 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-22 {
+  .emotion-23 {
     background-color: #333333;
   }
 }
 
-.emotion-25 {
+.emotion-26 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-26 {
+.emotion-27 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -5536,20 +5587,20 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   position: relative;
 }
 
-.emotion-26 summary {
+.emotion-27 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-26 summary::-webkit-details-marker {
+.emotion-27 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-26 summary:focus {
+.emotion-27 summary:focus {
   outline: none;
 }
 
-.emotion-27 {
+.emotion-28 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -5558,7 +5609,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   color: #0084C6;
 }
 
-.emotion-28 {
+.emotion-29 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -5567,7 +5618,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   line-height: 22px;
 }
 
-.emotion-29 {
+.emotion-30 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -5591,11 +5642,11 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   margin: 0;
 }
 
-.emotion-29:hover {
+.emotion-30:hover {
   background: #0084C6;
 }
 
-.emotion-30 {
+.emotion-31 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -5610,7 +5661,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   font-weight: 400;
 }
 
-.emotion-31 {
+.emotion-32 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -5618,36 +5669,36 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   height: 28px;
 }
 
-.emotion-32 {
+.emotion-33 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-32 p {
+.emotion-33 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-32 ol {
+.emotion-33 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul {
+.emotion-33 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul li {
+.emotion-33 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-32 ul li:before {
+.emotion-33 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -5658,15 +5709,15 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-32 b {
+.emotion-33 b {
   font-weight: 700;
 }
 
-.emotion-32 i {
+.emotion-33 i {
   font-style: italic;
 }
 
-.emotion-32 a {
+.emotion-33 a {
   color: #005689;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -5675,11 +5726,11 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-32 a:hover {
+.emotion-33 a:hover {
   border-bottom: solid 0.0625rem #0084C6;
 }
 
-.emotion-33 {
+.emotion-34 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -5692,7 +5743,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-34 {
+.emotion-35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5707,7 +5758,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   font-weight: 400;
 }
 
-.emotion-35 {
+.emotion-36 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -5731,20 +5782,20 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   height: 28px;
 }
 
-.emotion-35:hover {
+.emotion-36:hover {
   background: #0084C6;
 }
 
-.emotion-35:focus {
+.emotion-36:focus {
   border: none;
 }
 
-.emotion-36 {
+.emotion-37 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-37 {
+.emotion-38 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -5774,15 +5825,15 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-37:hover {
+.emotion-38:hover {
   background: #0084C6;
 }
 
-.emotion-37:focus {
+.emotion-38:focus {
   border: none;
 }
 
-.emotion-39 {
+.emotion-40 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -5790,7 +5841,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   height: 28px;
 }
 
-.emotion-42 {
+.emotion-43 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -5805,14 +5856,14 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-42 {
+  .emotion-43 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-42:before {
+.emotion-43:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -5824,7 +5875,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-42:after {
+.emotion-43:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -5834,25 +5885,25 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   border-top: 1px solid #0084C6;
 }
 
-.emotion-43 {
+.emotion-44 {
   margin: 0;
 }
 
-.emotion-44 {
+.emotion-45 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-44 svg {
+.emotion-45 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #0084C6;
 }
 
-.emotion-45 {
+.emotion-46 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -5939,28 +5990,32 @@ exports[`Storyshots Editions/Article Feature 1`] = `
           <div
             className="emotion-11"
           >
-            <p>
-              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-            </p>
+            <div
+              className="emotion-12"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
           </div>
           <div
-            className="emotion-12"
+            className="emotion-13"
           >
             <div
-              className="emotion-13"
+              className="emotion-14"
             />
           </div>
           <div
-            className="emotion-14"
+            className="emotion-15"
           >
             <address>
               <span
-                className="emotion-15"
+                className="emotion-16"
               >
                 Jane Smith
               </span>
               <span
-                className="emotion-16"
+                className="emotion-17"
               >
                  Editor of things
               </span>
@@ -5970,7 +6025,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
               role="button"
             >
               <button
-                className="emotion-17"
+                className="emotion-18"
                 onClick={[Function]}
               >
                 <svg
@@ -5994,16 +6049,16 @@ exports[`Storyshots Editions/Article Feature 1`] = `
       </section>
     </div>
     <div
-      className="emotion-18"
+      className="emotion-19"
     >
       <section
-        className="emotion-19"
+        className="emotion-20"
       >
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <figure
-          className="emotion-21"
+          className="emotion-22"
         >
           <picture>
             <source
@@ -6017,7 +6072,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-22"
+              className="js-launch-slideshow emotion-23"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -6026,18 +6081,18 @@ exports[`Storyshots Editions/Article Feature 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <div
-          className="emotion-25"
+          className="emotion-26"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-26"
+            className="emotion-27"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -6045,23 +6100,23 @@ exports[`Storyshots Editions/Article Feature 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-27"
+                className="emotion-28"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-28"
+                className="emotion-29"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-29"
+                className="emotion-30"
               >
                 <span
-                  className="emotion-30"
+                  className="emotion-31"
                 >
                   <span
-                    className="emotion-31"
+                    className="emotion-32"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -6080,7 +6135,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-32"
+                className="emotion-33"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -6089,24 +6144,24 @@ exports[`Storyshots Editions/Article Feature 1`] = `
               />
             </div>
             <footer
-              className="emotion-33"
+              className="emotion-34"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-34"
+                  className="emotion-35"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-35"
+                    className="emotion-36"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -6116,12 +6171,12 @@ exports[`Storyshots Editions/Article Feature 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-37"
+                    className="emotion-38"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -6133,7 +6188,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-39"
+                className="emotion-40"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -6143,19 +6198,19 @@ exports[`Storyshots Editions/Article Feature 1`] = `
           </details>
         </div>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <aside
-          className="emotion-42"
+          className="emotion-43"
         >
           <blockquote
-            className="emotion-43"
+            className="emotion-44"
           >
             <p
-              className="emotion-44"
+              className="emotion-45"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -6170,17 +6225,17 @@ exports[`Storyshots Editions/Article Feature 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-45"
+              className="emotion-46"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
       </section>
     </div>
@@ -6387,9 +6442,6 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -6443,34 +6495,44 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-15 {
   box-sizing: border-box;
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-14 {
+  .emotion-15 {
     width: 558px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     margin-left: 0;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-14 {
+  .emotion-15 {
     margin-left: 0;
   }
 }
 
-.emotion-15 {
+.emotion-16 {
   background-image: repeating-linear-gradient( to bottom,#DCDCDC,#DCDCDC 1px,transparent 1px,transparent 0.25rem );
   background-repeat: repeat-x;
   background-position: top;
@@ -6478,7 +6540,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-16 {
+.emotion-17 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -6492,7 +6554,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   margin: 0;
 }
 
-.emotion-16 svg {
+.emotion-17 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -6501,33 +6563,33 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   height: 1.875rem;
 }
 
-.emotion-16 svg circle {
+.emotion-17 svg circle {
   stroke: #FFFFFF;
 }
 
-.emotion-16 svg path {
+.emotion-17 svg path {
   fill: #FFFFFF;
 }
 
 @media (min-width:740px) {
-  .emotion-16 {
+  .emotion-17 {
     padding-bottom: 2.25rem;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-16 {
+  .emotion-17 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-16 {
+  .emotion-17 {
     width: 545px;
   }
 }
 
-.emotion-17 {
+.emotion-18 {
   color: #FFFFFF;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -6536,21 +6598,21 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   font-style: normal;
 }
 
-.emotion-18 {
+.emotion-19 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   color: #FFFFFF;
 }
 
-.emotion-19 {
+.emotion-20 {
   background: none;
   border: none;
   padding: 0;
   height: 2.5rem;
 }
 
-.emotion-20 {
+.emotion-21 {
   box-sizing: border-box;
   padding-top: 0.75rem;
   padding-right: 0;
@@ -6559,38 +6621,38 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-20 {
+  .emotion-21 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-20 {
+  .emotion-21 {
     margin-left: 144px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     width: 538px;
     padding-right: 1rem;
     border-right: 1px solid #FFFFFF;
@@ -6598,28 +6660,28 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-20 {
+  .emotion-21 {
     width: 557px;
   }
 }
 
-.emotion-21 {
+.emotion-22 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-21 iframe {
+.emotion-22 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-21 figcaption {
+.emotion-22 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-21 p {
+  .emotion-22 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -6627,26 +6689,26 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-21 {
+  .emotion-22 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   margin: 0 0 1.5rem;
   width: 100%;
   position: relative;
 }
 
 @media (min-width:740px) {
-  .emotion-22 p {
+  .emotion-23 p {
     margin: 0;
     padding: 0;
   }
 }
 
-.emotion-23 {
+.emotion-24 {
   width: 100%;
   height: calc(100% * 0.6666081768731357);
   background-color: #333333;
@@ -6655,7 +6717,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-24 {
+  .emotion-25 {
     position: absolute;
     top: -0.25rem;
     width: 170px;
@@ -6663,7 +6725,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   }
 }
 
-.emotion-25 {
+.emotion-26 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -6674,25 +6736,25 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-25 {
+  .emotion-26 {
     padding: 0;
   }
 
-  .emotion-25 svg {
+  .emotion-26 svg {
     -webkit-transform: translateX(-10%) translateY(-15%) rotateZ(-90deg);
     -ms-transform: translateX(-10%) translateY(-15%) rotateZ(-90deg);
     transform: translateX(-10%) translateY(-15%) rotateZ(-90deg);
   }
 }
 
-.emotion-26 {
+.emotion-27 {
   fill: #C70000;
   height: 0.6875rem;
   width: 0.8125rem;
   padding-right: 0.25rem;
 }
 
-.emotion-27 {
+.emotion-28 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.35;
@@ -6702,7 +6764,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   padding: 0;
 }
 
-.emotion-29 {
+.emotion-30 {
   width: 100%;
   height: calc(100% * 0.6666666666666666);
   background-color: #333333;
@@ -6795,28 +6857,32 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
               <div
                 className="emotion-13"
               >
-                <p>
-                  The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-                </p>
+                <div
+                  className="emotion-14"
+                >
+                  <p>
+                    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+                  </p>
+                </div>
               </div>
               <div
-                className="emotion-14"
+                className="emotion-15"
               >
                 <div
-                  className="emotion-15"
+                  className="emotion-16"
                 />
               </div>
               <div
-                className="emotion-16"
+                className="emotion-17"
               >
                 <address>
                   <span
-                    className="emotion-17"
+                    className="emotion-18"
                   >
                     Jane Smith
                   </span>
                   <span
-                    className="emotion-18"
+                    className="emotion-19"
                   >
                      Editor of things
                   </span>
@@ -6826,7 +6892,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
                   role="button"
                 >
                   <button
-                    className="emotion-19"
+                    className="emotion-20"
                     onClick={[Function]}
                   >
                     <svg
@@ -6852,13 +6918,13 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
       </section>
     </div>
     <div
-      className="emotion-20"
+      className="emotion-21"
     >
       <section
-        className="emotion-21"
+        className="emotion-22"
       >
         <figure
-          className="editions-gallery-figure emotion-22"
+          className="editions-gallery-figure emotion-23"
         >
           <picture>
             <source
@@ -6872,19 +6938,19 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
             />
             <img
               alt="Washington, DC, US Subcommittee chair Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol, during a House Judiciary subcommittee on Crime, Terrorism, and Homeland Security hearing"
-              className="js-launch-slideshow emotion-23"
+              className="js-launch-slideshow emotion-24"
               data-ratio={0.6666081768731357}
               src="https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=500&quality=85&fit=bounds&s=b4c08994b6aad3ffcea8e242793755f3"
             />
           </picture>
           <div
-            className="editions-gallery-caption emotion-24"
+            className="editions-gallery-caption emotion-25"
           >
             <h2
-              className="emotion-25"
+              className="emotion-26"
             >
               <svg
-                className="emotion-26"
+                className="emotion-27"
                 viewBox="0 0 13 11"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -6895,14 +6961,14 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
               Washington DC, US
             </h2>
             <p
-              className="emotion-27"
+              className="emotion-28"
             >
               Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol during a House judiciary subcommittee hearing
             </p>
           </div>
         </figure>
         <figure
-          className="editions-gallery-figure emotion-22"
+          className="editions-gallery-figure emotion-23"
         >
           <picture>
             <source
@@ -6916,19 +6982,19 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
             />
             <img
               alt="Prayagraj, India A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers, during Magh Mela festival"
-              className="js-launch-slideshow emotion-29"
+              className="js-launch-slideshow emotion-30"
               data-ratio={0.6666666666666666}
               src="https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=500&quality=85&fit=bounds&s=6b5da882eaec6ebf16644dedbb902063"
             />
           </picture>
           <div
-            className="editions-gallery-caption emotion-24"
+            className="editions-gallery-caption emotion-25"
           >
             <h2
-              className="emotion-25"
+              className="emotion-26"
             >
               <svg
-                className="emotion-26"
+                className="emotion-27"
                 viewBox="0 0 13 11"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -6939,14 +7005,14 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
               Prayagraj, India
             </h2>
             <p
-              className="emotion-27"
+              className="emotion-28"
             >
               A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers
             </p>
           </div>
         </figure>
         <figure
-          className="editions-gallery-figure emotion-22"
+          className="editions-gallery-figure emotion-23"
         >
           <picture>
             <source
@@ -6960,19 +7026,19 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
             />
             <img
               alt="Hua Hin, Thailand A bird flies over the abandoned sculpture of a Buddhist monk in Cha-am outside Hua Hin, south of Bangkok"
-              className="js-launch-slideshow emotion-29"
+              className="js-launch-slideshow emotion-30"
               data-ratio={0.6666666666666666}
               src="https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=500&quality=85&fit=bounds&s=d824f8198249e9b1b119070023b1850c"
             />
           </picture>
           <div
-            className="editions-gallery-caption emotion-24"
+            className="editions-gallery-caption emotion-25"
           >
             <h2
-              className="emotion-25"
+              className="emotion-26"
             >
               <svg
-                className="emotion-26"
+                className="emotion-27"
                 viewBox="0 0 13 11"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -6983,14 +7049,14 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
               Hua Hin, Thailand
             </h2>
             <p
-              className="emotion-27"
+              className="emotion-28"
             >
               A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok
             </p>
           </div>
         </figure>
         <figure
-          className="editions-gallery-figure emotion-22"
+          className="editions-gallery-figure emotion-23"
         >
           <picture>
             <source
@@ -7004,19 +7070,19 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
             />
             <img
               alt="Mulhouse, France A polar bear cub makes its first steps outside, in an enclosure at the Zoological and Botanical park in eastern France. The cub was born in November 2020"
-              className="js-launch-slideshow emotion-29"
+              className="js-launch-slideshow emotion-30"
               data-ratio={0.6666666666666666}
               src="https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=500&quality=85&fit=bounds&s=3f341f45e1c1ce8c8c0f28d07cdf6867"
             />
           </picture>
           <div
-            className="editions-gallery-caption emotion-24"
+            className="editions-gallery-caption emotion-25"
           >
             <h2
-              className="emotion-25"
+              className="emotion-26"
             >
               <svg
-                className="emotion-26"
+                className="emotion-27"
                 viewBox="0 0 13 11"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -7027,7 +7093,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
               Mulhouse, France
             </h2>
             <p
-              className="emotion-27"
+              className="emotion-28"
             >
               A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park
             </p>
@@ -7262,9 +7328,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -7323,40 +7386,50 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 .emotion-14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-15 {
   box-sizing: border-box;
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-14 {
+  .emotion-15 {
     width: 558px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-14 {
+  .emotion-15 {
     margin-left: 144px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     border-right: 1px solid #DCDCDC;
   }
 }
 
-.emotion-15 {
+.emotion-16 {
   background-image: repeating-linear-gradient( to bottom,#DCDCDC,#DCDCDC 1px,transparent 1px,transparent 0.25rem );
   background-repeat: repeat-x;
   background-position: top;
@@ -7364,7 +7437,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-16 {
+.emotion-17 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -7381,7 +7454,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   border-bottom: 1px solid #DCDCDC;
 }
 
-.emotion-16 svg {
+.emotion-17 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -7390,22 +7463,22 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   height: 1.875rem;
 }
 
-.emotion-16 svg circle {
+.emotion-17 svg circle {
   stroke: #0084C6;
 }
 
-.emotion-16 svg path {
+.emotion-17 svg path {
   fill: #0084C6;
 }
 
 @media (min-width:740px) {
-  .emotion-16 {
+  .emotion-17 {
     padding-bottom: 2.25rem;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-16 {
+  .emotion-17 {
     box-sizing: border-box;
     margin-left: 1.5rem;
     padding-left: 0.75rem;
@@ -7415,24 +7488,24 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-16 {
+  .emotion-17 {
     margin-left: 144px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-16 {
+  .emotion-17 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-16 {
+  .emotion-17 {
     width: 558px;
   }
 }
 
-.emotion-17 {
+.emotion-18 {
   color: #0084C6;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -7441,14 +7514,14 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   font-style: normal;
 }
 
-.emotion-18 {
+.emotion-19 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   color: #121212;
 }
 
-.emotion-19 {
+.emotion-20 {
   background: none;
   border: none;
   padding: 0;
@@ -7456,53 +7529,53 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-20 {
+  .emotion-21 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-20 {
+  .emotion-21 {
     margin-left: 144px;
   }
 }
 
-.emotion-21 {
+.emotion-22 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-21 iframe {
+.emotion-22 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-21 figcaption {
+.emotion-22 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-21 p {
+  .emotion-22 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -7510,13 +7583,13 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-21 {
+  .emotion-22 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -7525,18 +7598,18 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-23 {
+.emotion-24 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-23 {
+  .emotion-24 {
     width: 620px;
   }
 }
 
-.emotion-24 {
+.emotion-25 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -7545,26 +7618,26 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-24 {
+  .emotion-25 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-24 {
+  .emotion-25 {
     background-color: #333333;
   }
 }
 
-.emotion-27 {
+.emotion-28 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-28 {
+.emotion-29 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -7574,20 +7647,20 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   position: relative;
 }
 
-.emotion-28 summary {
+.emotion-29 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-28 summary::-webkit-details-marker {
+.emotion-29 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-28 summary:focus {
+.emotion-29 summary:focus {
   outline: none;
 }
 
-.emotion-29 {
+.emotion-30 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -7596,7 +7669,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   color: #0084C6;
 }
 
-.emotion-30 {
+.emotion-31 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -7605,7 +7678,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   line-height: 22px;
 }
 
-.emotion-31 {
+.emotion-32 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -7629,11 +7702,11 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   margin: 0;
 }
 
-.emotion-31:hover {
+.emotion-32:hover {
   background: #0084C6;
 }
 
-.emotion-32 {
+.emotion-33 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -7648,7 +7721,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   font-weight: 400;
 }
 
-.emotion-33 {
+.emotion-34 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -7656,36 +7729,36 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   height: 28px;
 }
 
-.emotion-34 {
+.emotion-35 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-34 p {
+.emotion-35 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-34 ol {
+.emotion-35 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-34 ul {
+.emotion-35 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-34 ul li {
+.emotion-35 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-34 ul li:before {
+.emotion-35 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -7696,15 +7769,15 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-34 b {
+.emotion-35 b {
   font-weight: 700;
 }
 
-.emotion-34 i {
+.emotion-35 i {
   font-style: italic;
 }
 
-.emotion-34 a {
+.emotion-35 a {
   color: #005689;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -7713,11 +7786,11 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-34 a:hover {
+.emotion-35 a:hover {
   border-bottom: solid 0.0625rem #0084C6;
 }
 
-.emotion-35 {
+.emotion-36 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -7730,7 +7803,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-36 {
+.emotion-37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7745,7 +7818,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   font-weight: 400;
 }
 
-.emotion-37 {
+.emotion-38 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -7769,20 +7842,20 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   height: 28px;
 }
 
-.emotion-37:hover {
+.emotion-38:hover {
   background: #0084C6;
 }
 
-.emotion-37:focus {
+.emotion-38:focus {
   border: none;
 }
 
-.emotion-38 {
+.emotion-39 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-39 {
+.emotion-40 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -7812,15 +7885,15 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-39:hover {
+.emotion-40:hover {
   background: #0084C6;
 }
 
-.emotion-39:focus {
+.emotion-40:focus {
   border: none;
 }
 
-.emotion-41 {
+.emotion-42 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -7828,7 +7901,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   height: 28px;
 }
 
-.emotion-44 {
+.emotion-45 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -7843,14 +7916,14 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-44 {
+  .emotion-45 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-44:before {
+.emotion-45:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -7862,7 +7935,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-44:after {
+.emotion-45:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -7872,25 +7945,25 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   border-top: 1px solid #0084C6;
 }
 
-.emotion-45 {
+.emotion-46 {
   margin: 0;
 }
 
-.emotion-46 {
+.emotion-47 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-46 svg {
+.emotion-47 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #0084C6;
 }
 
-.emotion-47 {
+.emotion-48 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -7985,29 +8058,33 @@ exports[`Storyshots Editions/Article Interview 1`] = `
             <div
               className="emotion-13"
             >
-              <p>
-                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-              </p>
+              <div
+                className="emotion-14"
+              >
+                <p>
+                  The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+                </p>
+              </div>
             </div>
           </div>
           <div
-            className="emotion-14"
+            className="emotion-15"
           >
             <div
-              className="emotion-15"
+              className="emotion-16"
             />
           </div>
           <div
-            className="emotion-16"
+            className="emotion-17"
           >
             <address>
               <span
-                className="emotion-17"
+                className="emotion-18"
               >
                 Jane Smith
               </span>
               <span
-                className="emotion-18"
+                className="emotion-19"
               >
                  Editor of things
               </span>
@@ -8017,7 +8094,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
               role="button"
             >
               <button
-                className="emotion-19"
+                className="emotion-20"
                 onClick={[Function]}
               >
                 <svg
@@ -8041,16 +8118,16 @@ exports[`Storyshots Editions/Article Interview 1`] = `
       </section>
     </div>
     <div
-      className="emotion-20"
+      className="emotion-21"
     >
       <section
-        className="emotion-21"
+        className="emotion-22"
       >
         <p
-          className="emotion-22"
+          className="emotion-23"
         />
         <figure
-          className="emotion-23"
+          className="emotion-24"
         >
           <picture>
             <source
@@ -8064,7 +8141,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-24"
+              className="js-launch-slideshow emotion-25"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -8073,18 +8150,18 @@ exports[`Storyshots Editions/Article Interview 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-22"
+          className="emotion-23"
         />
         <p
-          className="emotion-22"
+          className="emotion-23"
         />
         <div
-          className="emotion-27"
+          className="emotion-28"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-28"
+            className="emotion-29"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -8092,23 +8169,23 @@ exports[`Storyshots Editions/Article Interview 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-29"
+                className="emotion-30"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-30"
+                className="emotion-31"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-31"
+                className="emotion-32"
               >
                 <span
-                  className="emotion-32"
+                  className="emotion-33"
                 >
                   <span
-                    className="emotion-33"
+                    className="emotion-34"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -8127,7 +8204,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-34"
+                className="emotion-35"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -8136,24 +8213,24 @@ exports[`Storyshots Editions/Article Interview 1`] = `
               />
             </div>
             <footer
-              className="emotion-35"
+              className="emotion-36"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-36"
+                  className="emotion-37"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-37"
+                    className="emotion-38"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-38"
+                      className="emotion-39"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -8163,12 +8240,12 @@ exports[`Storyshots Editions/Article Interview 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-39"
+                    className="emotion-40"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-38"
+                      className="emotion-39"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -8180,7 +8257,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-41"
+                className="emotion-42"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -8190,19 +8267,19 @@ exports[`Storyshots Editions/Article Interview 1`] = `
           </details>
         </div>
         <p
-          className="emotion-22"
+          className="emotion-23"
         />
         <p
-          className="emotion-22"
+          className="emotion-23"
         />
         <aside
-          className="emotion-44"
+          className="emotion-45"
         >
           <blockquote
-            className="emotion-45"
+            className="emotion-46"
           >
             <p
-              className="emotion-46"
+              className="emotion-47"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -8217,17 +8294,17 @@ exports[`Storyshots Editions/Article Interview 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-47"
+              className="emotion-48"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-22"
+          className="emotion-23"
         />
         <p
-          className="emotion-22"
+          className="emotion-23"
         />
       </section>
     </div>
@@ -8511,9 +8588,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -8563,22 +8637,32 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 .emotion-18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-19 {
   box-sizing: border-box;
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 558px;
   }
 }
 
-.emotion-19 {
+.emotion-20 {
   background-image: repeating-linear-gradient( to bottom,#DCDCDC,#DCDCDC 1px,transparent 1px,transparent 0.25rem );
   background-repeat: repeat-x;
   background-position: top;
@@ -8586,7 +8670,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-20 {
+.emotion-21 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -8600,7 +8684,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   margin: 0;
 }
 
-.emotion-20 svg {
+.emotion-21 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -8609,21 +8693,21 @@ exports[`Storyshots Editions/Article Review 1`] = `
   height: 1.875rem;
 }
 
-.emotion-20 svg circle {
+.emotion-21 svg circle {
   stroke: #A1845C;
 }
 
-.emotion-20 svg path {
+.emotion-21 svg path {
   fill: #A1845C;
 }
 
 @media (min-width:740px) {
-  .emotion-20 {
+  .emotion-21 {
     padding-bottom: 2.25rem;
   }
 }
 
-.emotion-21 {
+.emotion-22 {
   color: #A1845C;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -8632,14 +8716,14 @@ exports[`Storyshots Editions/Article Review 1`] = `
   font-style: normal;
 }
 
-.emotion-22 {
+.emotion-23 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   color: #121212;
 }
 
-.emotion-23 {
+.emotion-24 {
   background: none;
   border: none;
   padding: 0;
@@ -8647,53 +8731,53 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-24 {
+  .emotion-25 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-24 {
+  .emotion-25 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-24 {
+  .emotion-25 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-24 {
+  .emotion-25 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-24 {
+  .emotion-25 {
     margin-left: 144px;
   }
 }
 
-.emotion-25 {
+.emotion-26 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-25 iframe {
+.emotion-26 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-25 figcaption {
+.emotion-26 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-25 p {
+  .emotion-26 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -8701,13 +8785,13 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-25 {
+  .emotion-26 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-26 {
+.emotion-27 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -8716,18 +8800,18 @@ exports[`Storyshots Editions/Article Review 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-27 {
+.emotion-28 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-27 {
+  .emotion-28 {
     width: 620px;
   }
 }
 
-.emotion-28 {
+.emotion-29 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -8736,26 +8820,26 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-28 {
+  .emotion-29 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-28 {
+  .emotion-29 {
     background-color: #333333;
   }
 }
 
-.emotion-31 {
+.emotion-32 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-32 {
+.emotion-33 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -8765,20 +8849,20 @@ exports[`Storyshots Editions/Article Review 1`] = `
   position: relative;
 }
 
-.emotion-32 summary {
+.emotion-33 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-32 summary::-webkit-details-marker {
+.emotion-33 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-32 summary:focus {
+.emotion-33 summary:focus {
   outline: none;
 }
 
-.emotion-33 {
+.emotion-34 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -8787,7 +8871,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   color: #A1845C;
 }
 
-.emotion-34 {
+.emotion-35 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -8796,7 +8880,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   line-height: 22px;
 }
 
-.emotion-35 {
+.emotion-36 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -8820,11 +8904,11 @@ exports[`Storyshots Editions/Article Review 1`] = `
   margin: 0;
 }
 
-.emotion-35:hover {
+.emotion-36:hover {
   background: #A1845C;
 }
 
-.emotion-36 {
+.emotion-37 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -8839,7 +8923,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   font-weight: 400;
 }
 
-.emotion-37 {
+.emotion-38 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -8847,36 +8931,36 @@ exports[`Storyshots Editions/Article Review 1`] = `
   height: 28px;
 }
 
-.emotion-38 {
+.emotion-39 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-38 p {
+.emotion-39 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-38 ol {
+.emotion-39 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-38 ul {
+.emotion-39 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-38 ul li {
+.emotion-39 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-38 ul li:before {
+.emotion-39 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -8887,15 +8971,15 @@ exports[`Storyshots Editions/Article Review 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-38 b {
+.emotion-39 b {
   font-weight: 700;
 }
 
-.emotion-38 i {
+.emotion-39 i {
   font-style: italic;
 }
 
-.emotion-38 a {
+.emotion-39 a {
   color: #6B5840;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -8904,11 +8988,11 @@ exports[`Storyshots Editions/Article Review 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-38 a:hover {
+.emotion-39 a:hover {
   border-bottom: solid 0.0625rem #A1845C;
 }
 
-.emotion-39 {
+.emotion-40 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -8921,7 +9005,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-40 {
+.emotion-41 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8936,7 +9020,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   font-weight: 400;
 }
 
-.emotion-41 {
+.emotion-42 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -8960,20 +9044,20 @@ exports[`Storyshots Editions/Article Review 1`] = `
   height: 28px;
 }
 
-.emotion-41:hover {
+.emotion-42:hover {
   background: #A1845C;
 }
 
-.emotion-41:focus {
+.emotion-42:focus {
   border: none;
 }
 
-.emotion-42 {
+.emotion-43 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-43 {
+.emotion-44 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -9003,15 +9087,15 @@ exports[`Storyshots Editions/Article Review 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-43:hover {
+.emotion-44:hover {
   background: #A1845C;
 }
 
-.emotion-43:focus {
+.emotion-44:focus {
   border: none;
 }
 
-.emotion-45 {
+.emotion-46 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -9019,7 +9103,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   height: 28px;
 }
 
-.emotion-48 {
+.emotion-49 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -9034,14 +9118,14 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-48 {
+  .emotion-49 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-48:before {
+.emotion-49:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -9053,7 +9137,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-48:after {
+.emotion-49:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -9063,25 +9147,25 @@ exports[`Storyshots Editions/Article Review 1`] = `
   border-top: 1px solid #A1845C;
 }
 
-.emotion-49 {
+.emotion-50 {
   margin: 0;
 }
 
-.emotion-50 {
+.emotion-51 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-50 svg {
+.emotion-51 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #A1845C;
 }
 
-.emotion-51 {
+.emotion-52 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -9242,28 +9326,32 @@ exports[`Storyshots Editions/Article Review 1`] = `
           <div
             className="emotion-17"
           >
-            <p>
-              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-            </p>
+            <div
+              className="emotion-18"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
           </div>
           <div
-            className="emotion-18"
+            className="emotion-19"
           >
             <div
-              className="emotion-19"
+              className="emotion-20"
             />
           </div>
           <div
-            className="emotion-20"
+            className="emotion-21"
           >
             <address>
               <span
-                className="emotion-21"
+                className="emotion-22"
               >
                 Jane Smith
               </span>
               <span
-                className="emotion-22"
+                className="emotion-23"
               >
                  Editor of things
               </span>
@@ -9273,7 +9361,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
               role="button"
             >
               <button
-                className="emotion-23"
+                className="emotion-24"
                 onClick={[Function]}
               >
                 <svg
@@ -9297,16 +9385,16 @@ exports[`Storyshots Editions/Article Review 1`] = `
       </section>
     </div>
     <div
-      className="emotion-24"
+      className="emotion-25"
     >
       <section
-        className="emotion-25"
+        className="emotion-26"
       >
         <p
-          className="emotion-26"
+          className="emotion-27"
         />
         <figure
-          className="emotion-27"
+          className="emotion-28"
         >
           <picture>
             <source
@@ -9320,7 +9408,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-28"
+              className="js-launch-slideshow emotion-29"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -9329,18 +9417,18 @@ exports[`Storyshots Editions/Article Review 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-26"
+          className="emotion-27"
         />
         <p
-          className="emotion-26"
+          className="emotion-27"
         />
         <div
-          className="emotion-31"
+          className="emotion-32"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-32"
+            className="emotion-33"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -9348,23 +9436,23 @@ exports[`Storyshots Editions/Article Review 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-33"
+                className="emotion-34"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-34"
+                className="emotion-35"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-35"
+                className="emotion-36"
               >
                 <span
-                  className="emotion-36"
+                  className="emotion-37"
                 >
                   <span
-                    className="emotion-37"
+                    className="emotion-38"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -9383,7 +9471,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-38"
+                className="emotion-39"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -9392,24 +9480,24 @@ exports[`Storyshots Editions/Article Review 1`] = `
               />
             </div>
             <footer
-              className="emotion-39"
+              className="emotion-40"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-40"
+                  className="emotion-41"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-41"
+                    className="emotion-42"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-42"
+                      className="emotion-43"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -9419,12 +9507,12 @@ exports[`Storyshots Editions/Article Review 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-43"
+                    className="emotion-44"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-42"
+                      className="emotion-43"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -9436,7 +9524,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-45"
+                className="emotion-46"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -9446,19 +9534,19 @@ exports[`Storyshots Editions/Article Review 1`] = `
           </details>
         </div>
         <p
-          className="emotion-26"
+          className="emotion-27"
         />
         <p
-          className="emotion-26"
+          className="emotion-27"
         />
         <aside
-          className="emotion-48"
+          className="emotion-49"
         >
           <blockquote
-            className="emotion-49"
+            className="emotion-50"
           >
             <p
-              className="emotion-50"
+              className="emotion-51"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -9473,17 +9561,17 @@ exports[`Storyshots Editions/Article Review 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-51"
+              className="emotion-52"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-26"
+          className="emotion-27"
         />
         <p
-          className="emotion-26"
+          className="emotion-27"
         />
       </section>
     </div>
@@ -9731,9 +9819,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -9788,22 +9873,32 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 .emotion-12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-13 {
   box-sizing: border-box;
 }
 
 @media (min-width:740px) {
-  .emotion-12 {
+  .emotion-13 {
     width: 539px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-12 {
+  .emotion-13 {
     width: 558px;
   }
 }
 
-.emotion-13 {
+.emotion-14 {
   background-image: repeating-linear-gradient( to bottom,#DCDCDC,#DCDCDC 1px,transparent 1px,transparent 0.25rem );
   background-repeat: repeat-x;
   background-position: top;
@@ -9811,7 +9906,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-14 {
+.emotion-15 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -9826,7 +9921,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   padding-bottom: 1.5rem;
 }
 
-.emotion-14 svg {
+.emotion-15 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -9835,21 +9930,21 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   height: 1.875rem;
 }
 
-.emotion-14 svg circle {
+.emotion-15 svg circle {
   stroke: #C70000;
 }
 
-.emotion-14 svg path {
+.emotion-15 svg path {
   fill: #C70000;
 }
 
 @media (min-width:740px) {
-  .emotion-14 {
+  .emotion-15 {
     padding-bottom: 2.25rem;
   }
 }
 
-.emotion-15 {
+.emotion-16 {
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -9858,14 +9953,14 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   font-style: normal;
 }
 
-.emotion-16 {
+.emotion-17 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   color: #121212;
 }
 
-.emotion-17 {
+.emotion-18 {
   background: none;
   border: none;
   padding: 0;
@@ -9873,53 +9968,53 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 526px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     width: 545px;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width:740px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 24px;
   }
 }
 
 @media (min-width:980px) {
-  .emotion-18 {
+  .emotion-19 {
     margin-left: 144px;
   }
 }
 
-.emotion-19 {
+.emotion-20 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.emotion-19 iframe {
+.emotion-20 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-19 figcaption {
+.emotion-20 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.5rem;
 }
 
 @media (min-width:740px) {
-  .emotion-19 p {
+  .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -9927,13 +10022,13 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 @media (min-width:740px) {
-  .emotion-19 {
+  .emotion-20 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-20 {
+.emotion-21 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -9942,18 +10037,18 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-21 {
+.emotion-22 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width:660px) {
-  .emotion-21 {
+  .emotion-22 {
     width: 620px;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -9962,26 +10057,26 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 @media (min-width:660px) {
-  .emotion-22 {
+  .emotion-23 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme:dark) {
-  .emotion-22 {
+  .emotion-23 {
     background-color: #333333;
   }
 }
 
-.emotion-25 {
+.emotion-26 {
   display: block;
   position: relative;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
 }
 
-.emotion-26 {
+.emotion-27 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -9991,20 +10086,20 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   position: relative;
 }
 
-.emotion-26 summary {
+.emotion-27 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-26 summary::-webkit-details-marker {
+.emotion-27 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-26 summary:focus {
+.emotion-27 summary:focus {
   outline: none;
 }
 
-.emotion-27 {
+.emotion-28 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -10013,7 +10108,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   color: #C70000;
 }
 
-.emotion-28 {
+.emotion-29 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -10022,7 +10117,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   line-height: 22px;
 }
 
-.emotion-29 {
+.emotion-30 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -10046,11 +10141,11 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   margin: 0;
 }
 
-.emotion-29:hover {
+.emotion-30:hover {
   background: #C70000;
 }
 
-.emotion-30 {
+.emotion-31 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -10065,7 +10160,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   font-weight: 400;
 }
 
-.emotion-31 {
+.emotion-32 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -10073,36 +10168,36 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   height: 28px;
 }
 
-.emotion-32 {
+.emotion-33 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-32 p {
+.emotion-33 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-32 ol {
+.emotion-33 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul {
+.emotion-33 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-32 ul li {
+.emotion-33 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-32 ul li:before {
+.emotion-33 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -10113,15 +10208,15 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-32 b {
+.emotion-33 b {
   font-weight: 700;
 }
 
-.emotion-32 i {
+.emotion-33 i {
   font-style: italic;
 }
 
-.emotion-32 a {
+.emotion-33 a {
   color: #AB0613;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -10130,11 +10225,11 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-32 a:hover {
+.emotion-33 a:hover {
   border-bottom: solid 0.0625rem #C70000;
 }
 
-.emotion-33 {
+.emotion-34 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -10147,7 +10242,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-34 {
+.emotion-35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -10162,7 +10257,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   font-weight: 400;
 }
 
-.emotion-35 {
+.emotion-36 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -10186,20 +10281,20 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   height: 28px;
 }
 
-.emotion-35:hover {
+.emotion-36:hover {
   background: #C70000;
 }
 
-.emotion-35:focus {
+.emotion-36:focus {
   border: none;
 }
 
-.emotion-36 {
+.emotion-37 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-37 {
+.emotion-38 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -10229,15 +10324,15 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-37:hover {
+.emotion-38:hover {
   background: #C70000;
 }
 
-.emotion-37:focus {
+.emotion-38:focus {
   border: none;
 }
 
-.emotion-39 {
+.emotion-40 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -10245,7 +10340,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   height: 28px;
 }
 
-.emotion-42 {
+.emotion-43 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -10260,14 +10355,14 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 @media (min-width:980px) {
-  .emotion-42 {
+  .emotion-43 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-42:before {
+.emotion-43:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -10279,7 +10374,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-42:after {
+.emotion-43:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -10289,25 +10384,25 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   border-top: 1px solid #C70000;
 }
 
-.emotion-43 {
+.emotion-44 {
   margin: 0;
 }
 
-.emotion-44 {
+.emotion-45 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-44 svg {
+.emotion-45 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #C70000;
 }
 
-.emotion-45 {
+.emotion-46 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -10394,28 +10489,32 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
           <div
             className="emotion-11"
           >
-            <p>
-              The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-            </p>
+            <div
+              className="emotion-12"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
           </div>
           <div
-            className="emotion-12"
+            className="emotion-13"
           >
             <div
-              className="emotion-13"
+              className="emotion-14"
             />
           </div>
           <div
-            className="emotion-14"
+            className="emotion-15"
           >
             <address>
               <span
-                className="emotion-15"
+                className="emotion-16"
               >
                 Jane Smith
               </span>
               <span
-                className="emotion-16"
+                className="emotion-17"
               >
                  Editor of things
               </span>
@@ -10425,7 +10524,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
               role="button"
             >
               <button
-                className="emotion-17"
+                className="emotion-18"
                 onClick={[Function]}
               >
                 <svg
@@ -10449,16 +10548,16 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
       </section>
     </div>
     <div
-      className="emotion-18"
+      className="emotion-19"
     >
       <section
-        className="emotion-19"
+        className="emotion-20"
       >
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <figure
-          className="emotion-21"
+          className="emotion-22"
         >
           <picture>
             <source
@@ -10472,7 +10571,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-22"
+              className="js-launch-slideshow emotion-23"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -10481,18 +10580,18 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <div
-          className="emotion-25"
+          className="emotion-26"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-26"
+            className="emotion-27"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -10500,23 +10599,23 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-27"
+                className="emotion-28"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-28"
+                className="emotion-29"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-29"
+                className="emotion-30"
               >
                 <span
-                  className="emotion-30"
+                  className="emotion-31"
                 >
                   <span
-                    className="emotion-31"
+                    className="emotion-32"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -10535,7 +10634,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-32"
+                className="emotion-33"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -10544,24 +10643,24 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
               />
             </div>
             <footer
-              className="emotion-33"
+              className="emotion-34"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-34"
+                  className="emotion-35"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-35"
+                    className="emotion-36"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -10571,12 +10670,12 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-37"
+                    className="emotion-38"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-36"
+                      className="emotion-37"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -10588,7 +10687,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-39"
+                className="emotion-40"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -10598,19 +10697,19 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
           </details>
         </div>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <aside
-          className="emotion-42"
+          className="emotion-43"
         >
           <blockquote
-            className="emotion-43"
+            className="emotion-44"
           >
             <p
-              className="emotion-44"
+              className="emotion-45"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -10625,17 +10724,17 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-45"
+              className="emotion-46"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
         <p
-          className="emotion-20"
+          className="emotion-21"
         />
       </section>
     </div>
@@ -12992,9 +13091,6 @@ exports[`Storyshots Editions/Standfirst Analysis 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -13048,12 +13144,26 @@ exports[`Storyshots Editions/Standfirst Analysis 1`] = `
   fill: #C70000;
 }
 
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 <div
   className="emotion-0"
 >
-  <p>
-    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-  </p>
+  <div
+    className="emotion-1"
+  >
+    <p>
+      The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+    </p>
+  </div>
 </div>
 `;
 
@@ -13067,9 +13177,6 @@ exports[`Storyshots Editions/Standfirst Comment 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -13123,12 +13230,26 @@ exports[`Storyshots Editions/Standfirst Comment 1`] = `
   fill: #C70000;
 }
 
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 <div
   className="emotion-0"
 >
-  <p>
-    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-  </p>
+  <div
+    className="emotion-1"
+  >
+    <p>
+      The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+    </p>
+  </div>
 </div>
 `;
 
@@ -13142,9 +13263,6 @@ exports[`Storyshots Editions/Standfirst Default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -13193,12 +13311,26 @@ exports[`Storyshots Editions/Standfirst Default 1`] = `
   fill: #C70000;
 }
 
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 <div
   className="emotion-0"
 >
-  <p>
-    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-  </p>
+  <div
+    className="emotion-1"
+  >
+    <p>
+      The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+    </p>
+  </div>
 </div>
 `;
 
@@ -13212,9 +13344,6 @@ exports[`Storyshots Editions/Standfirst Media 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -13267,6 +13396,16 @@ exports[`Storyshots Editions/Standfirst Media 1`] = `
   fill: #C70000;
 }
 
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 <div
   style={
     Object {
@@ -13277,9 +13416,13 @@ exports[`Storyshots Editions/Standfirst Media 1`] = `
   <div
     className="emotion-0"
   >
-    <p>
-      The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-    </p>
+    <div
+      className="emotion-1"
+    >
+      <p>
+        The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+      </p>
+    </div>
   </div>
 </div>
 `;
@@ -13294,9 +13437,6 @@ exports[`Storyshots Editions/Standfirst Showcase 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -13350,12 +13490,26 @@ exports[`Storyshots Editions/Standfirst Showcase 1`] = `
   fill: #C70000;
 }
 
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 <div
   className="emotion-0"
 >
-  <p>
-    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
-  </p>
+  <div
+    className="emotion-1"
+  >
+    <p>
+      The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+    </p>
+  </div>
 </div>
 `;
 
