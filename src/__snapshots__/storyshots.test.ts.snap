@@ -379,6 +379,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 .emotion-7 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -387,6 +388,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 .emotion-7 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #BB3B80;
   width: 34px;
@@ -1590,6 +1592,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 .emotion-7 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -1598,6 +1601,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 .emotion-7 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #C70000;
   width: 34px;
@@ -2866,6 +2870,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 .emotion-7 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -2874,6 +2879,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 .emotion-7 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #C70000;
   width: 34px;
@@ -4023,6 +4029,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 .emotion-7 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -4031,6 +4038,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 .emotion-7 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #E05E00;
   width: 34px;
@@ -5203,6 +5211,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 .emotion-7 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -5211,6 +5220,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 .emotion-7 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #0084C6;
   width: 34px;
@@ -6291,6 +6301,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-7 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -6301,6 +6312,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-7 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #C70000;
   width: 34px;
@@ -7143,6 +7155,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 .emotion-6 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -7153,6 +7166,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 .emotion-6 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #0084C6;
   width: 34px;
@@ -8429,6 +8443,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 .emotion-7 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -8437,6 +8452,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 .emotion-7 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #A1845C;
   width: 34px;
@@ -9731,6 +9747,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 .emotion-9 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -9739,6 +9756,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 .emotion-9 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #C70000;
   width: 34px;
@@ -11717,6 +11735,7 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
 }
 
 .emotion-2 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -11727,6 +11746,7 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
 }
 
 .emotion-2 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #C70000;
   width: 34px;
@@ -11897,6 +11917,7 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
 }
 
 .emotion-2 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -11905,6 +11926,7 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
 }
 
 .emotion-2 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #C70000;
   width: 34px;
@@ -12116,6 +12138,7 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
 }
 
 .emotion-2 {
+  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -12124,6 +12147,7 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
 }
 
 .emotion-2 summary {
+  pointer-events: auto;
   text-align: center;
   background-color: #A1845C;
   width: 34px;
