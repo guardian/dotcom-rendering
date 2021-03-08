@@ -678,12 +678,10 @@ const quizAtomRenderer = (
 			h(KnowledgeQuizAtom, { ...element }),
 		]);
 	}
-	if (element.kind === ElementKind.PersonalityQuizAtom) {
-		return h('div', { className: 'js-quiz' }, [
-			hydrationParams,
-			h(PersonalityQuizAtom, { ...element }),
-		]);
-	}
+	return h('div', { className: 'js-quiz' }, [
+		hydrationParams,
+		h(PersonalityQuizAtom, { ...element }),
+	]);
 };
 
 const render = (format: Format, excludeStyles = false) => (
