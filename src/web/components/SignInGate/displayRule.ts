@@ -99,20 +99,70 @@ export const canShow = (
 	);
 };
 
+const allCmpConsents: (
+	| 'a9'
+	| 'acast'
+	| 'braze'
+	| 'comscore'
+	| 'facebook-mobile'
+	| 'fb'
+	| 'firebase'
+	| 'google-analytics'
+	| 'google-mobile-ads'
+	| 'google-sign-in'
+	| 'google-tag-manager'
+	| 'googletag'
+	| 'ias'
+	| 'inizio'
+	| 'ipsos'
+	| 'lotame'
+	| 'nielsen'
+	| 'ophan'
+	| 'permutive'
+	| 'prebid'
+	| 'redplanet'
+	| 'remarketing'
+	| 'sentry'
+	| 'teads'
+	| 'twitter'
+	| 'youtube-player'
+)[] = [
+	'a9',
+	'acast',
+	'braze',
+	'comscore',
+	'facebook-mobile',
+	'fb',
+	'firebase',
+	'google-analytics',
+	'google-mobile-ads',
+	'google-sign-in',
+	'google-tag-manager',
+	'googletag',
+	'ias',
+	'inizio',
+	'ipsos',
+	'lotame',
+	'nielsen',
+	'ophan',
+	'permutive',
+	'prebid',
+	'redplanet',
+	'remarketing',
+	'sentry',
+	'teads',
+	'twitter',
+	'youtube-player',
+];
+
 export const hasRequiredConsents = (): Promise<boolean> => {
-	const consentsRequiredFor: ['google-analytics', 'ophan', 'sentry'] = [
-		'google-analytics',
-		'ophan',
-		'sentry',
-	];
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		onConsentChange((state) => {
 			try {
-				resolve(
-					consentsRequiredFor.every((c) => getConsentFor(c, state)),
-				);
-			} catch (e) {
-				reject(e);
+				resolve(allCmpConsents.every((c) => getConsentFor(c, state)));
+			} catch (_) {
+				// we want to ignore errors
+				resolve(false);
 			}
 		});
 	});

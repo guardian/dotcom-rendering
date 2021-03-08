@@ -1,6 +1,7 @@
 import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 import { SignInGateCopy } from '@root/src/web/components/SignInGate/gateDesigns/types';
+import { SignInGateMandatory } from '@root/src/web/components/SignInGate/gateDesigns/SignInGateMandatory';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateCopyOptVar } from './gateDesigns/copy-opt-test/SignInGateCopyOptVar';
@@ -51,3 +52,17 @@ export const copyOptStandalone = () => {
 	);
 };
 copyOptStandalone.story = { name: 'copy-var_standalone' };
+
+export const mandatoryGateStandalone = () => {
+	return (
+		<Section>
+			<SignInGateMandatory
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+			/>
+		</Section>
+	);
+};
+mandatoryGateStandalone.story = { name: 'mandatory_gate_standalone' };
