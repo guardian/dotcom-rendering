@@ -351,7 +351,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		reminderDate.getMonth() + 1
 	)
 		.toString()
-		.padStart(2, '0')}-19 00:00:00`;
+		.padStart(2, '0')}-01`;
 	const epicStateJson = {
 		hideButtons: false,
 		hideReminderWrapper: true,
@@ -362,9 +362,9 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
 	};
 	const supportDotcomComponentsUrl =
-        process.env.GU_STAGE === 'PROD'
-            ? 'https://contributions.guardianapis.com'
-            : 'https://contributions.code.dev-guardianapis.com';
+		process.env.GU_STAGE === 'PROD'
+			? 'https://contributions.guardianapis.com'
+			: 'https://contributions.code.dev-guardianapis.com';
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
 	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
 

@@ -937,6 +937,8 @@ declare module 'dynamic-import-polyfill' {
 declare namespace JSX {
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	interface IntrinsicElements {
+		'amp-state': any;
+		'amp-form': any;
 		'amp-experiment': any;
 		'amp-sidebar': any;
 		'amp-accordion': any;
