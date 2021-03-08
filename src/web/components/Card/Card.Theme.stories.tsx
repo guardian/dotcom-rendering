@@ -114,13 +114,22 @@ const Media = Format(
 	'Media',
 );
 
-const Live = Format(
+const LiveBlog = Format(
 	{
 		display: Display.Standard,
 		theme: Pillar.News,
-		design: Design.Live,
+		design: Design.LiveBlog,
 	},
-	'Live',
+	'LiveBlog',
+);
+
+const DeadBlog = Format(
+	{
+		display: Display.Standard,
+		theme: Pillar.News,
+		design: Design.DeadBlog,
+	},
+	'DeadBlog',
 );
 
 const PrintShop = Format(
@@ -163,7 +172,8 @@ export {
 	Interactive,
 	MatchReport,
 	Media,
-	Live,
+	LiveBlog,
+	DeadBlog,
 	PrintShop,
 	Recipe,
 };

@@ -231,18 +231,18 @@ export const linkStory = () => (
 );
 linkStory.story = { name: 'With linkTo provided' };
 
-export const LiveSizes = () => (
+export const LiveBlogSizes = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -256,12 +256,12 @@ export const LiveSizes = () => (
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -275,12 +275,12 @@ export const LiveSizes = () => (
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -294,12 +294,12 @@ export const LiveSizes = () => (
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -310,7 +310,88 @@ export const LiveSizes = () => (
 		/>
 	</Section>
 );
-LiveSizes.story = { name: 'with various sizes' };
+LiveBlogSizes.story = { name: 'with various sizes' };
+
+export const DeadBlogSizes = () => (
+	<Section showTopBorder={false} showSideBorders={false}>
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Large live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="large"
+		/>
+		<br />
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Medium live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="medium"
+		/>
+		<br />
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Small live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="small"
+		/>
+		<br />
+		<LinkHeadline
+			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			})}
+			showQuotes={true}
+			kickerText="Tiny live"
+			showSlash={true}
+			showPulsingDot={true}
+			size="tiny"
+		/>
+	</Section>
+);
+DeadBlogSizes.story = { name: 'with various sizes' };
 
 export const Updated = () => (
 	<Section showTopBorder={false} showSideBorders={false}>
@@ -318,12 +399,12 @@ export const Updated = () => (
 			headlineText=""
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showPulsingDot={true}

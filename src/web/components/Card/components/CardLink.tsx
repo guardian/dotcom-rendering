@@ -61,7 +61,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 				}
 			`;
 		case Design.Media:
-		case Design.Live:
+		case Design.LiveBlog:
 			return css`
 				${baseLinkStyles};
 				:hover {
