@@ -4070,9 +4070,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   font-size: 1.0625rem;
   padding: 0.25rem 0 0.5rem;
   box-sizing: border-box;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 @media (min-width:740px) {
@@ -12827,9 +12824,6 @@ exports[`Storyshots Editions/Series Default 1`] = `
   font-size: 1.0625rem;
   padding: 0.25rem 0 0.5rem;
   box-sizing: border-box;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 @media (min-width:740px) {
@@ -12856,9 +12850,6 @@ exports[`Storyshots Editions/Series Immersive 1`] = `
   font-size: 1.0625rem;
   padding: 0.25rem 0 0.5rem;
   box-sizing: border-box;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -12892,9 +12883,6 @@ exports[`Storyshots Editions/Series Interview 1`] = `
   font-size: 1.0625rem;
   padding: 0.25rem 0 0.5rem;
   box-sizing: border-box;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   position: absolute;
   left: 0;
   bottom: 0;
