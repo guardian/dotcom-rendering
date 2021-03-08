@@ -226,8 +226,7 @@ export const LiveBlock = ({
 		// it in the header
 		mainElements = block.elements;
 	} else {
-		headerElement = block.elements[0];
-		mainElements = block.elements.slice(1);
+		[headerElement, ...mainElements] = block.elements;
 	}
 
 	// Decide if the block has been updated or not
