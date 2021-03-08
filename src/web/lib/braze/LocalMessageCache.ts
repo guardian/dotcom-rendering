@@ -30,7 +30,7 @@ class LocalMessageCache {
 		const topItem = unexpiredQueue.shift();
 
 		if (topItem) {
-			this.store.setItem(key, JSON.stringify(unexpiredQueue));
+			this.setQueue(slotName, unexpiredQueue);
 			return topItem.message;
 		}
 	}
@@ -58,7 +58,7 @@ class LocalMessageCache {
 
 		queue.push(messageToCache);
 
-		this.store.setItem(key, JSON.stringify(queue));
+		this.setQueue(slotName, queue);
 	}
 
 	clear() {
@@ -67,6 +67,11 @@ class LocalMessageCache {
 			const key = keyFromSlotName(slotName as SlotName);
 			this.store.removeItem(key);
 		}
+	}
+
+	setQueue(slotName: SlotName, queue: CachedMessage[]) {
+		const key = keyFromSlotName(slotName);
+		this.store.setItem(key, JSON.stringify(queue));
 	}
 
 	private readQueue(key: string): CachedMessage[] {

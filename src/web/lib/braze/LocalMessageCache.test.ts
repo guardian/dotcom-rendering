@@ -69,10 +69,7 @@ describe('LocalMessageCache', () => {
 				buildUnexpiredMessage(message1),
 				buildUnexpiredMessage(message2),
 			];
-			store.setItem(
-				'gu.brazeMessageCache.EndOfArticle',
-				JSON.stringify(queue),
-			);
+			cache.setQueue('EndOfArticle', queue);
 
 			const m = cache.peek('EndOfArticle');
 
@@ -88,10 +85,7 @@ describe('LocalMessageCache', () => {
 				buildUnexpiredMessage(message1),
 				buildUnexpiredMessage(message2),
 			];
-			store.setItem(
-				'gu.brazeMessageCache.EndOfArticle',
-				JSON.stringify(queue),
-			);
+			cache.setQueue('EndOfArticle', queue);
 
 			cache.peek('EndOfArticle');
 
@@ -104,8 +98,7 @@ describe('LocalMessageCache', () => {
 		it('returns undefined if the queue is empty', () => {
 			const store = new FakeStore();
 			const cache = new LocalMessageCache(store);
-			const queue = JSON.stringify([]);
-			store.setItem('gu.brazeMessageCache.EndOfArticle', queue);
+			cache.setQueue('EndOfArticle', []);
 
 			const m = cache.peek('EndOfArticle');
 
@@ -117,11 +110,11 @@ describe('LocalMessageCache', () => {
 			const cache = new LocalMessageCache(store);
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
-			const queue = JSON.stringify([
+			const queue = [
 				buildExpiredMessage(message1),
 				buildUnexpiredMessage(message2),
-			]);
-			store.setItem('gu.brazeMessageCache.EndOfArticle', queue);
+			];
+			cache.setQueue('EndOfArticle', queue);
 
 			const m = cache.peek('EndOfArticle');
 
@@ -139,10 +132,7 @@ describe('LocalMessageCache', () => {
 				buildUnexpiredMessage(message1),
 				buildUnexpiredMessage(message2),
 			];
-			store.setItem(
-				'gu.brazeMessageCache.EndOfArticle',
-				JSON.stringify(queue),
-			);
+			cache.setQueue('EndOfArticle', queue);
 
 			const m = cache.shift('EndOfArticle');
 
@@ -158,10 +148,7 @@ describe('LocalMessageCache', () => {
 				buildUnexpiredMessage(message1),
 				buildUnexpiredMessage(message2),
 			];
-			store.setItem(
-				'gu.brazeMessageCache.EndOfArticle',
-				JSON.stringify(queue),
-			);
+			cache.setQueue('EndOfArticle', queue);
 
 			cache.shift('EndOfArticle');
 
@@ -174,9 +161,7 @@ describe('LocalMessageCache', () => {
 		it('returns undefined if the queue is empty', () => {
 			const store = new FakeStore();
 			const cache = new LocalMessageCache(store);
-			const queue = JSON.stringify([]);
-			store.setItem('gu.brazeMessageCache.EndOfArticle', queue);
-
+			cache.setQueue('EndOfArticle', []);
 			const m = cache.shift('EndOfArticle');
 
 			expect(m).toBeUndefined();
@@ -221,17 +206,35 @@ describe('LocalMessageCache', () => {
 			const store = new FakeStore();
 			const cache = new LocalMessageCache(store);
 			const message1 = JSON.parse(message1Json);
-			const queue = [message1];
-			store.setItem(
-				'gu.brazeMessageCache.EndOfArticle',
-				JSON.stringify(queue),
-			);
-			store.setItem('gu.brazeMessageCache.Banner', JSON.stringify(queue));
+			const queue = [buildUnexpiredMessage(message1)];
+			cache.setQueue('EndOfArticle', queue);
 
 			cache.clear();
 
 			expect(cache.peek('EndOfArticle')).toBeUndefined();
 			expect(cache.peek('Banner')).toBeUndefined();
+		});
+	});
+
+	describe('setQueue', () => {
+		it('overwrites an existing queue with a new one', () => {
+			const store = new FakeStore();
+			const cache = new LocalMessageCache(store);
+			const message1 = JSON.parse(message1Json);
+			const queue = [buildUnexpiredMessage(message1)];
+			store.setItem(
+				'gu.brazeMessageCache.EndOfArticle',
+				JSON.stringify(queue),
+			);
+			const message2 = JSON.parse(message2Json);
+			const queue2 = [buildUnexpiredMessage(message2)];
+
+			cache.setQueue('EndOfArticle', queue2);
+
+			const newQueue = JSON.parse(
+				store.getItem('gu.brazeMessageCache.EndOfArticle') as string,
+			) as appboy.InAppMessage[];
+			expect(newQueue.map((i) => i.message)).toEqual([message2]);
 		});
 	});
 });
