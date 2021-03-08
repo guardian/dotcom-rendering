@@ -42,7 +42,7 @@ const Container = ({
 				padding-bottom: ${space[3]}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
-				border-top: 1px solid ${palette.border.subNav};
+				border-top: 1px solid ${palette.border.liveBlock};
 			`}
 		>
 			{children}
