@@ -358,12 +358,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    background-color: #333333;
-  }
-}
-
 @media (min-width:740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
@@ -1568,12 +1562,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   .emotion-6 {
     width: 980px;
     height: calc(980px * 0.6);
-  }
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    background-color: #333333;
   }
 }
 
@@ -2849,12 +2837,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    background-color: #333333;
-  }
-}
-
 @media (min-width:740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
@@ -4005,12 +3987,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   .emotion-6 {
     width: 980px;
     height: calc(980px * 0.6);
-  }
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    background-color: #333333;
   }
 }
 
@@ -5190,12 +5166,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    background-color: #333333;
-  }
-}
-
 @media (min-width:740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
@@ -6294,12 +6264,6 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   height: calc(100vw * 0.6);
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    background-color: #333333;
-  }
-}
-
 .emotion-7 {
   pointer-events: none;
   position: absolute;
@@ -7146,12 +7110,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   display: block;
   width: 100%;
   height: calc(100vw * 0.6);
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-5 {
-    background-color: #333333;
-  }
 }
 
 .emotion-6 {
@@ -8419,12 +8377,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
   .emotion-6 {
     width: 980px;
     height: calc(980px * 0.6);
-  }
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-6 {
-    background-color: #333333;
   }
 }
 
@@ -9723,12 +9675,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   .emotion-8 {
     width: 980px;
     height: calc(980px * 0.6);
-  }
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-8 {
-    background-color: #333333;
   }
 }
 
@@ -11728,12 +11674,6 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   height: calc(100vw * 0.6);
 }
 
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    background-color: #333333;
-  }
-}
-
 .emotion-2 {
   pointer-events: none;
   position: absolute;
@@ -11893,12 +11833,6 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   .emotion-1 {
     width: 980px;
     height: calc(980px * 0.6);
-  }
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    background-color: #333333;
   }
 }
 
@@ -12114,12 +12048,6 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   .emotion-1 {
     width: 980px;
     height: calc(980px * 0.6);
-  }
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-1 {
-    background-color: #333333;
   }
 }
 
