@@ -373,11 +373,29 @@ function hydrateQuizAtoms(): void {
 		const props = atom.querySelector('.js-quiz-params')?.innerHTML;
 		try {
 			if (props) {
-				const quizProps = JSON.parse(props.replace(/&quot;/g, '"'));
+				const quizProps = (JSON.parse(
+					props.replace(/&quot;/g, '"'),
+				) as unknown) as { quizType: string };
 				if (quizProps.quizType === 'personality') {
-					ReactDOM.hydrate(h(PersonalityQuizAtom, quizProps), atom);
+					ReactDOM.hydrate(
+						h(
+							PersonalityQuizAtom,
+							(quizProps as unknown) as React.ComponentProps<
+								typeof PersonalityQuizAtom
+							>,
+						),
+						atom,
+					);
 				} else if (quizProps.quizType === 'knowledge') {
-					ReactDOM.hydrate(h(KnowledgeQuizAtom, quizProps), atom);
+					ReactDOM.hydrate(
+						h(
+							KnowledgeQuizAtom,
+							(quizProps as unknown) as React.ComponentProps<
+								typeof KnowledgeQuizAtom
+							>,
+						),
+						atom,
+					);
 				}
 			}
 		} catch (e) {
