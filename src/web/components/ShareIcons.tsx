@@ -86,7 +86,7 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share on Facebook"
 						target="_blank"
-						data-ignore-global-link-styling={true}
+						data-ignore="global-link-styling"
 					>
 						<span className={iconStyles(palette)}>
 							<FacebookIcon />
@@ -104,7 +104,7 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
-						data-ignore-global-link-styling={true}
+						data-ignore="global-link-styling"
 					>
 						<span className={iconStyles(palette)}>
 							<TwitterIconPadded />
@@ -122,7 +122,7 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
-						data-ignore-global-link-styling={true}
+						data-ignore="global-link-styling"
 					>
 						<span className={iconStyles(palette)}>
 							<EmailIcon />
@@ -140,7 +140,7 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share on LinkedIn"
 						target="_blank"
-						data-ignore-global-link-styling={true}
+						data-ignore="global-link-styling"
 					>
 						<span className={iconStyles(palette)}>
 							<LinkedInIcon />
@@ -158,7 +158,7 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share on Pinterest"
 						target="_blank"
-						data-ignore-global-link-styling={true}
+						data-ignore="global-link-styling"
 					>
 						<span className={iconStyles(palette)}>
 							<PinterestIcon />
@@ -177,7 +177,7 @@ export const ShareIcons: React.FC<{
 							role="button"
 							aria-label="Share on WhatsApp"
 							target="_blank"
-							data-ignore-global-link-styling={true}
+							data-ignore="global-link-styling"
 						>
 							<span className={iconStyles(palette)}>
 								<WhatsAppIcon />
@@ -197,7 +197,7 @@ export const ShareIcons: React.FC<{
 							role="button"
 							aria-label="Share on Messanger>"
 							target="_blank"
-							data-ignore-global-link-styling={true}
+							data-ignore="global-link-styling"
 						>
 							<span className={iconStyles(palette)}>
 								<MessengerIcon />
