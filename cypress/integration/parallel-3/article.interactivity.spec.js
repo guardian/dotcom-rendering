@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-import { getPolyfill } from '../../lib/polyfill';
 import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
@@ -48,7 +47,6 @@ describe('Interactivity', function () {
 				.should('eq', 2);
 		});
 		describe('When most viewed is mocked', function () {
-			before(getPolyfill);
 			beforeEach(mockApi);
 			// it('should change the list of most viewed items when a tab is clicked', function () {
 			//     cy.visit(`/Article?url=${articleUrl}`);
