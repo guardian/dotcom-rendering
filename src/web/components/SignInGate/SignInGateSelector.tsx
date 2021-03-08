@@ -230,7 +230,7 @@ export const SignInGateSelector = ({
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed && canShowGate ? (
+			{!isGateDismissed && canShowGate && (
 				<ShowSignInGate
 					CAPI={CAPI}
 					abTest={currentTest}
@@ -238,7 +238,7 @@ export const SignInGateSelector = ({
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 				/>
-			) : null}
+			)}
 		</>
 	);
 };
