@@ -269,7 +269,6 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 				margin: 0 auto;
 				height: 151px;
 				padding-bottom: 18px;
-				padding-top: 18px;
 				text-align: left;
 				display: table;
 				width: 728px;
