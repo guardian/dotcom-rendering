@@ -13,7 +13,7 @@
 
 export const images: ImageBlockElement[] = [
 	{
-		elementId: 'fd6a4975-8bd4-4916-8a1b-e2b1b2c8a247',
+		elementId: 'e942bd89-1f6d-4cba-bedb-e731d0c3221d',
 		role: 'showcase',
 		data: {
 			alt:
@@ -397,7 +397,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: 'd3d96585-5dbd-4572-9a1d-2bc4128b775e',
+		elementId: '47486f2c-feb9-4fde-a0b3-b52e524a5d0c',
 		role: 'inline',
 		data: {
 			alt: 'Kudhva, architectural hideouts on the north Cornish coast',
@@ -780,7 +780,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '5d3674b4-6a04-4ff4-aaaa-ff7ddee7f50c',
+		elementId: '9e6b4718-1cdf-45ab-b653-bd976edd6e50',
 		role: 'inline',
 		data: {
 			alt:
@@ -1164,7 +1164,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '81bb87fd-4505-4e94-8dd4-1d296fa11a2a',
+		elementId: '64308751-aaa9-4336-a8d9-bb4e69149116',
 		role: 'halfWidth',
 		data: {
 			alt:
@@ -1548,7 +1548,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '04e13048-6214-4c2f-9786-70e88041347a',
+		elementId: 'fc6a2ae9-9e64-4cff-86f7-6f2a23800bde',
 		role: 'halfWidth',
 		data: {
 			alt:
@@ -1932,7 +1932,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: 'ef9e8d7e-13d1-46ea-9ac6-358dbab8661c',
+		elementId: '84600a2e-43c6-4c88-b3d2-10b164cd78ec',
 		role: 'halfWidth',
 		data: {
 			alt:
@@ -2316,7 +2316,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: 'ff2bdc6a-7272-4aca-9a84-1415fbfd131b',
+		elementId: '3ee9d407-dfcb-428c-adfa-a4b350ab3446',
 		role: 'halfWidth',
 		data: {
 			alt:
@@ -2700,7 +2700,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: true,
 	},
 	{
-		elementId: 'b4fa97ba-d07b-460b-b5a8-5f5ef2c63eef',
+		elementId: 'e014c5e8-0880-4ade-b77b-9176f0e70caf',
 		role: 'thumbnail',
 		data: {
 			alt: 'Home. My rig Series 3 Land-Rover',
@@ -3072,7 +3072,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '58fb93d0-37a5-47fc-8067-269dfbdd370d',
+		elementId: '2d40bf56-b50f-42ef-8c7c-888daaf16566',
 		role: 'showcase',
 		data: {
 			alt: 'Commando Ridge, Penwith Peninsular. A climber’s paradise',
@@ -3455,7 +3455,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '420e366f-5d98-46a4-9768-e3d38664d048',
+		elementId: 'aa0a909d-9e94-4d71-ace2-f83aa376577a',
 		role: 'halfWidth',
 		data: {
 			alt:
@@ -3839,7 +3839,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '8bad7244-1404-4bcb-80ec-0109154a60de',
+		elementId: 'fcaef7f2-10c8-4864-bada-54465eefafa8',
 		role: 'halfWidth',
 		data: {
 			alt:
@@ -4223,7 +4223,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '97baaed9-a9b2-4a76-995d-00fe346846f9',
+		elementId: '24235af4-f775-46e4-827d-b3044eb9740c',
 		role: 'inline',
 		data: {
 			alt: '10.The Atlantic Ocean North coast of Cornwall',
@@ -4606,7 +4606,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: true,
 	},
 	{
-		elementId: 'b8628365-e12a-4100-86d0-7561b4f2f522',
+		elementId: 'c2e42d78-71fb-40fc-a9e2-b15c8d44ad7a',
 		role: 'immersive',
 		data: {
 			alt:
@@ -4990,7 +4990,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '200b7587-72a7-43d4-8727-1a58dd8d47c6',
+		elementId: 'deb9f597-d371-496d-a596-47f1c5427e3f',
 		role: 'inline',
 		data: {
 			alt:
@@ -5374,7 +5374,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '48707dbc-fcb2-4338-b5cf-1e24e3a8b025',
+		elementId: 'fb9cc487-2e58-49d4-bf65-467b754fc4fb',
 		role: 'halfWidth',
 		data: {
 			alt: 'Logan Rock, Cornwall',
@@ -5757,7 +5757,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '75a1b83c-0bd8-4d26-88a3-996ff95643ef',
+		elementId: '41335a98-4bd4-429c-aa02-96e73c17ccfe',
 		role: 'halfWidth',
 		data: {
 			alt: 'Logan Rock, Cornwall',
@@ -6141,7 +6141,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '7ec242c1-3ef0-4f8e-9eb1-5caa5b26bccd',
+		elementId: '2d9249b9-96e1-48ec-8c4f-e825dc44863e',
 		role: 'inline',
 		data: {
 			alt:
@@ -6525,7 +6525,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '66ba3c5a-1d3c-4d71-b2ee-6a5947e0cad5',
+		elementId: '5ae7fd3c-90cb-4e4f-ab5e-75eccc1cd19f',
 		role: 'showcase',
 		data: {
 			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
@@ -6908,7 +6908,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '29a98aad-5b36-4d83-8dac-732340a1f565',
+		elementId: '674f082a-4c6b-4378-8917-c819e4bda292',
 		role: 'inline',
 		data: {
 			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
@@ -7291,7 +7291,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '9c8059b3-8ef7-4298-8368-039fc691618d',
+		elementId: 'ae9e2274-15fd-4775-a392-11e9101f3286',
 		role: 'halfWidth',
 		data: {
 			alt: 'Sunrise at Towan Beach',
@@ -7674,7 +7674,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '08d4ac62-997b-4958-b3e7-1be471f3b441',
+		elementId: '443dbd20-2b12-41a3-aa6d-048d95b67820',
 		role: 'halfWidth',
 		data: {
 			alt: 'The full Corn moon, Penwith Heritage coast',
@@ -8057,7 +8057,7 @@ export const images: ImageBlockElement[] = [
 		displayCredit: false,
 	},
 	{
-		elementId: '684f0f6c-ee53-43ce-9153-9a4fd2875a03',
+		elementId: '80e73aa6-c926-4e5f-a758-9421b0a1cd30',
 		role: 'inline',
 		data: {
 			alt: 'Home. My rig Series 3 Land-Rover',

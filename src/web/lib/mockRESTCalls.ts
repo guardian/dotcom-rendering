@@ -1,14 +1,12 @@
 import fetchMock from 'fetch-mock';
 
-import {
-	mockTab1,
-	responseWithTwoTabs,
-} from '@root/fixtures/manual/mostViewed';
-import { series } from '@root/fixtures/manual/series';
-import { commentCount } from '@root/fixtures/manual/commentCount';
+import { mostRead } from '@root/fixtures/manual/most-read';
+import { mostReadGeo } from '@root/fixtures/manual/most-read-geo';
+import { series } from '@root/fixtures/generated/series';
+import { related } from '@root/fixtures/generated/related';
 import { discussion } from '@root/fixtures/manual/discussion';
-import { storypackage } from '@root/fixtures/manual/storypackage';
-import { matchreport } from '@root/fixtures/manual/matchreport';
+import { storyPackage } from '@root/fixtures/generated/story-package';
+import { matchReport } from '@root/fixtures/generated/match-report';
 
 const richLinkCard = {
 	tags: [
@@ -107,7 +105,7 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/most-read-geo.*/,
 			{
 				status: 200,
-				body: mockTab1,
+				body: mostReadGeo,
 			},
 			{ overwriteRoutes: false },
 		)
@@ -116,7 +114,14 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/discussion\/comment-counts.*/,
 			{
 				status: 200,
-				body: commentCount,
+				body: {
+					counts: [
+						{
+							id: '/p/4k83z',
+							count: 432,
+						},
+					],
+				},
 			},
 			{ overwriteRoutes: false },
 		)
@@ -125,7 +130,16 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/most-read.*/,
 			{
 				status: 200,
-				body: responseWithTwoTabs,
+				body: mostRead,
+			},
+			{ overwriteRoutes: false },
+		)
+		// Related
+		.get(
+			/.*api.nextgen.guardianapps.co.uk\/related.*/,
+			{
+				status: 200,
+				body: related,
 			},
 			{ overwriteRoutes: false },
 		)
@@ -143,7 +157,7 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/story-package.*/,
 			{
 				status: 200,
-				body: storypackage,
+				body: storyPackage,
 			},
 			{ overwriteRoutes: false },
 		)
@@ -193,7 +207,7 @@ export const mockRESTCalls = (): void => {
 			/.*api.nextgen.guardianapps.co.uk\/football\/api.*/,
 			{
 				status: 200,
-				body: matchreport,
+				body: matchReport,
 			},
 			{ overwriteRoutes: false },
 		);

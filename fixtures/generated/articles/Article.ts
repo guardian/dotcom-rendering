@@ -1365,7 +1365,7 @@ export const Article: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '6411db4e-6ec3-4f32-979d-444563cd3374',
+			elementId: '210442ed-b9dc-451f-8a45-ba6a33b8c55c',
 			role: 'inline',
 			data: {
 				copyright: 'Credit: Alexandre Rotenberg / Alamy Stock Photo',
@@ -1771,70 +1771,70 @@ export const Article: CAPIType = {
 			lastUpdated: 1589470537000,
 			elements: [
 				{
-					elementId: '7362d922-4bb3-47b9-88a2-43322b745637',
+					elementId: '0cce6b7f-93fb-4f5b-8fcd-ee124668eeda',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>A <a href="https://experience.arcgis.com/stemapp/5f6596de6c4445a58aec956532b9813d">series of detailed maps</a> have laid bare the scale of possible forest fires, floods, droughts and deluges that Europe could face by the end of the century without urgent action to adapt to and confront global heating.</p>',
 				},
 				{
-					elementId: 'dbcb3db8-f54d-48f4-95a9-e2929fdeb575',
+					elementId: '2e679fff-fe8e-41df-a42c-e11fe21e753e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>An average one-metre rise in sea levels by the end of the century – without any flood prevention action – would mean 90% of the surface of Hull would be under water, according to the European Environment Agency.</p>',
 				},
 				{
-					elementId: '3052f3bc-ffd9-44d1-ba4e-8befc83fa74c',
+					elementId: '976cab51-4e7f-4255-923d-98576a759b8e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>English cities including Norwich, Margate, Southend-on-Sea, Runcorn and Blackpool could also experience flooding covering more than 40% of the urban area.</p>',
 				},
 				{
-					elementId: '2c92c0a5-b81e-4ebd-bc1d-1985d0cebc35',
+					elementId: '79e342a7-0553-4bb8-aa87-ad471def5363',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Across the North Sea, Dutch cities including the Hague, Rotterdam and Leiden were predicted to face severe floods from an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels.</p>',
 				},
 				{
-					elementId: '4ddde47a-3004-4c5a-a6dc-84e2676fbd3a',
+					elementId: '3cad92d7-d708-4409-8643-753ff999d891',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The model does not account for the Netherlands’ extensive flood-prevention measures, although many other countries have not taken such action.</p>',
 				},
 				{
-					elementId: '9237ad5a-3cb8-48e7-aa2e-0df4d5e3a7c6',
+					elementId: 'ee28e12e-6c64-424f-b2dd-4b76f5a4e15b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Meanwhile, large areas of Spain, Portugal and France would be grappling with desertification, with the worst-affected zones experiencing a two and half-fold increase in droughts under the worst-case scenario.</p>',
 				},
 				{
-					elementId: 'c0bb7d10-9f85-43bd-836d-0a7565f11335',
+					elementId: 'e91f6b76-4f20-44c5-85dc-edca7639757d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Hotter summers increase the risk of forest fires, which <a href="https://www.theguardian.com/world/2018/jul/18/sweden-calls-for-help-as-arctic-circle-hit-by-wildfires">hit record levels in Sweden in 2018</a>. If emissions exceed 4C, France, southern Germany, the Balkans and the Arctic Circle could experience a greatly increased fire risk. However, the absolute fire danger would remain highest in southern European countries, which are already prone to blazes.</p>',
 				},
 				{
-					elementId: '5d71503e-bd33-47b7-b8b4-9f51070578da',
+					elementId: '7a70471e-681d-408d-bd6e-7554b93304d3',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Further north, winters are becoming wetter. Failure to limit global heating below 2C could mean a swath of central and eastern Europe, from Bratislava in the west to Yaroslavl in the east, will be in line for sharp increase in “heavy rain events” during autumn and winter by the end of the century.</p>',
 				},
 				{
-					elementId: 'be5d8615-275b-4e90-a206-e741cc068141',
+					elementId: '0f93a123-4fa8-4dd5-acc7-e7ed9869573e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>In some areas of central and eastern Europe there is predicted to be a 35% increase in heavy rain events, meaning torrential downpours would be more frequent.</p>',
 				},
 				{
-					elementId: 'cb762a46-b929-4224-adc2-e18fdfa6224c',
+					elementId: 'e7bd3908-5d84-4ea8-afa5-6afa2041c8ab',
 					role: 'inline',
 					data: {
 						alt: 'Map predicting flood-hit areas.',
@@ -2209,63 +2209,63 @@ export const Article: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: '28dde5ba-335f-4443-8f77-22cf5bf2dc00',
+					elementId: '0e1ced7b-b40e-4400-8717-1661d90fa09a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>While the climate data has been published before, this is the first time the EU-agency has presented it using detailed maps on one site. Users can zoom in on small areas, for example, to discover that one-third of the London borough of Hammersmith and Fulham could be exposed to flooding by 2071.</p>',
 				},
 				{
-					elementId: '4df8f00d-e056-46c7-b7ea-2d774b119f25',
+					elementId: 'b88384ec-3f92-4a60-982a-449a795ad7ac',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The Copenhagen-based agency hopes the maps will reach decision-makers in governments and EU institutions, who would not usually read a lengthy EEA report on the impact of the climate emergency.</p>',
 				},
 				{
-					elementId: '43ab523b-65cf-4fc0-8f60-09b8d8dc46b8',
+					elementId: '341d9b3e-b90a-4531-bc36-cbf0d8cfbff2',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“It’s very urgent and we need to act now,” said Blaž Kurnik, an EEA expert in climate change impacts and adaptation.</p>',
 				},
 				{
-					elementId: '2b06429b-96b9-4412-8bb9-d33a657fd4b7',
+					elementId: '057cd07b-2527-4777-956e-002d10fda4ea',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Even if countries succeed in restricting global temperature rise, existing CO<strong><sub>2</sub></strong> in the atmosphere would still have an impact, he said.</p>',
 				},
 				{
-					elementId: '5179f57e-5ecf-4270-b2d6-024e26fadda9',
+					elementId: '256a56ae-2d0e-459a-becf-3c1dc9141040',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“The number of extreme events and sea level rise will still continue to increase for the next decades to a century,” Kurnik said. “Sea level rise, especially, can be problematic, because it is still increasing because of past emissions and the current concentration of greenhouse gases.”</p>',
 				},
 				{
-					elementId: 'b7253038-6c23-4ebf-a6c2-2cda4a4f1a91',
+					elementId: '3001ba84-4d77-459b-a799-7ab798dafb19',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The agency wants governments to focus on adapting to unavoidable global heating. “Adaptation is crucial in the next decades of the century. Even if we are able to increase the temperature by 2C, adaptation is crucial for the next decades.”</p>',
 				},
 				{
-					elementId: '7d984361-c972-460e-9f84-9dd161c25615',
+					elementId: '535e8579-d5fd-42f6-bc2d-e2b6a9ad9901',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The EEA has concluded it is <a href="https://www.eea.europa.eu/data-and-maps/indicators/atmospheric-greenhouse-gas-concentrations-6/assessment-1">possible to limit the rise in global temperatures to 2C above pre-industrial levels</a>, as long as greenhouse gas concentrations peak during the next 15 to 29 years.</p>',
 				},
 				{
-					elementId: 'ae07b37b-7aea-4ca1-aa9b-53dbce19ea5e',
+					elementId: 'b2d07f56-c0e4-4f1d-afdd-885b1a3c472d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Meeting a more demanding<a href="https://www.theguardian.com/environment/2018/oct/08/global-warming-must-not-exceed-15c-warns-landmark-un-report"> 1.5C limit</a> requires concentrations to peak in the next three to 13 years. Under both scenarios, there is a 50% chance of overshooting the temperature.</p>',
 				},
 				{
-					elementId: '5bcd575e-bb20-425d-982f-3192bfbc3ef8',
+					elementId: '6ff4627c-f367-457c-91b2-cb417c0b7e59',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -2355,12 +2355,13 @@ export const Article: CAPIType = {
 			},
 		],
 		isProd: true,
-		shortUrlId: '/p/4k83z',
+		shortUrlId: '/p/d8ex5',
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
 			prebidTrustx: true,
-			scAdFreeBanner: true,
+			scAdFreeBanner: false,
+			abStickyNavTest: true,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -2384,7 +2385,7 @@ export const Article: CAPIType = {
 			prebidAppnexusInvcode: true,
 			prebidAppnexus: true,
 			enableDiscussionSwitch: true,
-			prebidXaxis: true,
+			prebidXaxis: false,
 			interactiveFullHeaderSwitch: false,
 			discussionAllPageSize: true,
 			prebidUserSync: true,
@@ -2393,6 +2394,7 @@ export const Article: CAPIType = {
 			breakingNews: true,
 			externalVideoEmbeds: true,
 			simpleReach: true,
+			abSignInGateCopyOpt: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -2436,7 +2438,7 @@ export const Article: CAPIType = {
 			idCookieRefresh: true,
 			sharingComments: true,
 			discussionPageSize: true,
-			smartAppBanner: true,
+			smartAppBanner: false,
 			boostGaUserTimingFidelity: false,
 			historyTags: true,
 			mobileStickyLeaderboard: true,
@@ -2444,41 +2446,35 @@ export const Article: CAPIType = {
 			surveys: true,
 			remoteBanner: true,
 			inizio: true,
-			abCommercialCmpCustomise: true,
-			emailSignupLabNotes: true,
-			lotame: true,
-			prebidPangaea: true,
-			idEmailSignInUpsell: false,
-			doubleclickYoutubeAdFree: true,
-			membershipEngagementBannerBlockUs: false,
-			oldTlsSupportDeprecation: true,
-			abContributionsEpicAskFourEarning: true,
-			emailSignupEuRef: true,
-			emailInArticleOutbrain: true,
-			abFebruaryMomentBannerThankYou: false,
-			commercialPageViewAnalytics: true,
-			membershipEngagementBanner: true,
-			membershipEngagementBannerBlockAu: false,
-			plistaAu: true,
-			membershipEngagementBannerBlockUk: false,
-			epicTestsFromGoogleDocs: true,
-			youtubeRelatedVideos: true,
-			abFebruaryMomentBannerCopy: true,
-			abCommercialPrebidSafeframe: true,
-			abAcquisitionsEpicAlwaysAskIfTagged: true,
-			emailInArticleGtoday: true,
-			engagementBannerTestsFromGoogleDocs: false,
-			prebidS2sozone: true,
-			tourismAustralia: true,
-			emailInArticle: true,
-			videojs: true,
-			abCommercialAdVerification: false,
 		},
 		hasYouTubeAtom: false,
 		inBodyInternalLinkCount: 2,
-		keywordIds: '',
+		keywordIds:
+			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
 		blogIds: '',
-		sharedAdTargeting: {},
+		sharedAdTargeting: {
+			ct: 'article',
+			co: ['jennifer-rankin'],
+			url:
+				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			su: ['0'],
+			edition: 'uk',
+			tn: ['news'],
+			p: 'ng',
+			k: [
+				'eu',
+				'flooding',
+				'world',
+				'europe-news',
+				'natural-disasters',
+				'science',
+				'environment',
+				'climate-change',
+				'wildfires',
+				'scienceofclimatechange',
+			],
+			sh: 'https://www.theguardian.com/p/d8ex5',
+		},
 		beaconUrl: '//phar.gu-web.net',
 		campaigns: [],
 		calloutsUrl:
@@ -2513,8 +2509,8 @@ export const Article: CAPIType = {
 		pageCode: '7076435',
 		pillar: 'News',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
-		discussionApiClientHeader: 'testClientHeader',
+			'https://assets.guim.co.uk/javascripts/b2d004ec8fca220ad3a7/graun.commercial.dcr.js',
+		discussionApiClientHeader: 'nextgen',
 		membershipUrl: 'https://membership.theguardian.com',
 		cardStyle: 'news',
 		shouldHideReaderRevenue: false,
@@ -2530,16 +2526,17 @@ export const Article: CAPIType = {
 		sectionName: 'Environment',
 		mobileAppsAdUnitRoot: 'beta-guardian-app',
 		dfpAdUnitRoot: 'theguardian.com',
-		headline: '',
+		headline:
+			'Fires and floods: maps of Europe predict scale of climate catastrophe',
 		commentable: false,
 		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: false,
+		showRelatedContent: true,
 		commissioningDesks: 'uk-environment',
 		inBodyExternalLinkCount: 2,
-		adUnit: '/59666047/theguardian.com/film/article/ng',
+		adUnit: '/59666047/theguardian.com/environment/article/ng',
 		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
 		videoDuration: 0,
-		stage: 'DEV',
+		stage: 'PROD',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		isSensitive: false,
 		isDev: false,
@@ -2550,23 +2547,24 @@ export const Article: CAPIType = {
 		fbAppId: '180444840287',
 		externalEmbedHost: 'https://embed.theguardian.com',
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords: '',
-		revisionNumber: '62cf0d6e4609276d37e09fd596430fbf8b629418',
+		keywords:
+			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+		revisionNumber: 'DEV',
 		blogs: '',
-		section: '',
+		section: 'environment',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37539',
+		buildNumber: '37555',
 		isPhotoEssay: false,
 		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
+			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
 		userAttributesApiUrl:
 			'https://members-data-api.theguardian.com/user-attributes',
 		isLive: false,
 		publication: 'theguardian.com',
 		host: 'https://www.theguardian.com',
 		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		contentType: '',
+		contentType: 'Article',
 		facebookIaAdUnitRoot: 'facebook-instant-articles',
 		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		idUrl: 'https://profile.theguardian.com',
@@ -2574,11 +2572,12 @@ export const Article: CAPIType = {
 			'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/500.jpg?quality=85&auto=format&fit=max&s=af6d81c02402c8bebc376fe8e794b40f',
 		isFront: false,
 		wordCount: 730,
-		author: '',
-		dfpAccountId: '',
+		author: 'Jennifer Rankin',
+		dfpAccountId: '59666047',
 		nonKeywordTagIds:
 			'type/article,tone/news,profile/jennifer-rankin,tracking/commissioningdesk/uk-environment',
-		pageId: '',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		forecastsapiurl: '/weatherapi/forecast',
 		assetsPath: 'https://assets.guim.co.uk/',
 		lightboxImages: {
@@ -2630,18 +2629,18 @@ export const Article: CAPIType = {
 		},
 		isImmersive: false,
 		dfpHost: 'pubads.g.doubleclick.net',
-		googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
+		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		hbImpl: {
-			prebid: false,
-			a9: false,
+			prebid: true,
+			a9: true,
 		},
 		abTests: {},
 		shortUrl: 'https://www.theguardian.com/p/d8ex5',
 		isContent: true,
 		contentId:
 			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		edition: '',
+		edition: 'UK',
 		discussionFrontendUrl:
 			'https://assets.guim.co.uk/discussion/discussion-frontend.preact.iife.8bdbd9194e.js',
 		ipsosTag: 'environment',
@@ -4086,6 +4085,8 @@ export const Article: CAPIType = {
 			5612812553,
 			5612812556,
 			5613900227,
+			5616295359,
+			5617153347,
 			5617357126,
 			5617560946,
 			5618303037,
@@ -4125,6 +4126,8 @@ export const Article: CAPIType = {
 			5627400383,
 			5627416481,
 			5627419082,
+			5627510314,
+			5627740002,
 			5627768068,
 			5627946712,
 			5628367142,
@@ -4140,6 +4143,8 @@ export const Article: CAPIType = {
 			5630498106,
 			5630926258,
 			5631069021,
+			5631098598,
+			5631098862,
 			5631297107,
 			5631522170,
 			5631715415,
@@ -4154,14 +4159,28 @@ export const Article: CAPIType = {
 			5632246513,
 			5632464370,
 			5632497345,
+			5632654007,
 			5632702032,
 			5633274403,
+			5633307960,
 			5633479388,
 			5633559344,
 			5633566793,
 			5633566955,
+			5633620717,
+			5633632965,
 			5633735270,
 			5633782264,
+			5633848686,
+			5634480439,
+			5634571147,
+			5634602605,
+			5634623455,
+			5634695740,
+			5634696664,
+			5634854126,
+			5635126238,
+			5635356428,
 		],
 		tones: 'News',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',
@@ -4171,19 +4190,18 @@ export const Article: CAPIType = {
 		allowUserGeneratedContent: false,
 		byline: 'Jennifer Rankin in Brussels',
 		authorIds: 'profile/jennifer-rankin',
-		webPublicationDate: 1579185778186,
+		webPublicationDate: 1581314427000,
 		omnitureAmpAccount: 'guardiangu-thirdpartyapps',
 		isHosted: false,
 		hasPageSkin: false,
 		webTitle:
 			'Fires and floods: maps of Europe predict scale of climate catastrophe',
-		discussionD2Uid: 'testD2Header',
+		discussionD2Uid: 'zHoBy6HNKsk',
 		weatherapiurl: '/weatherapi/city',
 		googleSearchUrl: '//www.google.co.uk/cse/cse.js',
 		optimizeEpicUrl:
 			'https://support.theguardian.com/epic/control/index.html',
 		isSplash: false,
 		isNumberedList: false,
-		series: '',
 	},
 };

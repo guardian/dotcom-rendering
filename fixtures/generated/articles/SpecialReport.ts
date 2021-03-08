@@ -1393,7 +1393,7 @@ export const SpecialReport: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'cd981ff0-682a-4771-98bb-3bf69f4e8ec5',
+			elementId: '77a17066-36ba-4b55-bcfa-11904ca6b4ed',
 			role: 'immersive',
 			data: {
 				alt:
@@ -1798,28 +1798,28 @@ export const SpecialReport: CAPIType = {
 			lastUpdated: 1570905638000,
 			elements: [
 				{
-					elementId: 'eb8ca47b-c51d-473b-81e7-60ce5e935280',
+					elementId: 'eb636dab-ed36-4cfe-9d31-c7a767601d8b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The world’s three largest money managers have built a combined $300bn fossil fuel investment portfolio using money from people’s private savings and pension contributions, the Guardian can reveal.</p>',
 				},
 				{
-					elementId: '562fdee3-479d-4a43-bee3-65d3af8f44cc',
+					elementId: '6cbd3a7c-21ea-4d84-a79b-42d90809805a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP, have continued to grow billion-dollar stakes in some of the most carbon-intensive companies since the Paris agreement, financial data shows.</p>',
 				},
 				{
-					elementId: 'b57ae08f-1b5d-4274-9d1e-c54cd718fe88',
+					elementId: '1d98b7b4-302d-4583-b27a-44b0d3ff9f17',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The two largest asset managers, BlackRock and Vanguard, have also routinely opposed motions at fossil fuel companies that would have forced directors to take more action on climate change, the analysis reveals.</p>',
 				},
 				{
-					elementId: 'a9203ec7-562d-4789-89ca-af2535f46bcf',
+					elementId: 'ff545dfe-4bab-4d8a-af5b-ddb4a03c0849',
 					role: 'inline',
 					data: {
 						alt: 'Fossil fuel holdings: The Vanguard Group',
@@ -2192,28 +2192,28 @@ export const SpecialReport: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: 'c732fa94-f00d-44dc-bd95-27671949e802',
+					elementId: '6bf16cc2-ab38-4da0-91fc-c2f2ad1fc906',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The investment rise is driven by the success in the last decade of tracker funds that use algorithms to follow major stock exchange indices such as the FTSE 100 and S&amp;P 500. </p>',
 				},
 				{
-					elementId: 'ad3fa7f3-2a27-400a-9008-67789584cf50',
+					elementId: 'a6030682-e827-42d3-83c8-fe4e6f70d1db',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The Guardian has worked with the thinktank InfluenceMap and the business data specialists ProxyInsight to analyse the role played by asset managers in the financing and management of some of the world’s biggest fossil fuel companies.</p>',
 				},
 				{
-					elementId: '2e9b1c9f-2c56-46bd-b332-3265e856fb0d',
+					elementId: '585561e4-acfb-4f1c-9927-559d6651d04d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p> Figures compiled by <a href="https://influencemap.org/index.html">InfluenceMap</a> show how Blackrock, Vanguard and State Street – known as the big three – have become crucial climate actors in the financial world. They are the largest money managers in the $74tn industry.</p>',
 				},
 				{
-					elementId: '85e76c80-9703-428f-b9f7-de7c60cf9d50',
+					elementId: 'c11b6f6c-70b9-40af-933f-526eb73ed538',
 					role: 'inline',
 					data: {
 						alt: 'Fossil fuel holdings: BlackRock',
@@ -2586,28 +2586,28 @@ export const SpecialReport: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: '657a30ba-954b-4271-8a21-2607cb7c941b',
+					elementId: 'b244b0b9-415f-474a-84da-f34639173135',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>According to an analysis of the data, their effective thermal coal, oil and gas reserve holdings through the companies they manage have surged 34.8% since 2016.</p>',
 				},
 				{
-					elementId: '25f40714-e5b7-4f94-bff7-3d81ec04e645',
+					elementId: '610aa569-c24e-49bb-9950-ba05424a5f0d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>This means they are now the largest investors in public oil, gas and coal companies, managing funds for large pension funds, university endowments and insurance companies.</p>',
 				},
 				{
-					elementId: 'bcbc9abc-a1ea-4751-8456-bf0d6ae94594',
+					elementId: '323d1520-faf9-4e6f-9e63-cac2eb3a516e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>While asset managers do not own the companies in which they invest, they often exercise shareholders rights on behalf of clients to vote on board members and company policy issues. </p>',
 				},
 				{
-					elementId: 'ba8ca7b6-6419-4cd6-93de-caf8de7ea8d4',
+					elementId: 'b790004d-6c43-46d0-8299-ca96ef063c2b',
 					role: 'inline',
 					data: {
 						alt: 'Fossil fuel holdings: State Street Corporation',
@@ -2980,27 +2980,27 @@ export const SpecialReport: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: '32a980b4-f652-4429-a7ae-6b26674dbe62',
+					elementId: 'f18dbb6f-e856-4944-9fb7-2b2ca815a8d3',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Disclosures for publicly available company reports show that from 2015 to 2019 Vanguard and BlackRock used their votes to frequently oppose efforts to improve climate-related financial disclosures.</p>',
 				},
 				{
-					elementId: 'ed24d357-7bec-4760-99aa-151d4c65aab3',
+					elementId: 'd021888a-1d69-46f0-a389-2dc53d7e62ea',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The investigation by the Guardian has found:</p>',
 				},
 				{
-					elementId: 'b854e36c-6b14-4dda-bc6e-57355a5647d2',
+					elementId: '7ee91a8e-ef27-4fa0-a72c-251fba50e3d0',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<ul> \n <li><p>Vanguard ($161.1bn), BlackRock ($87.3bn) and State Street ($38.3bn) oversee a combined $286.7bn of shares in oil, coal and gas companies through 1,712 funds. Their total combined portfolio is likely to be higher as the calculation excludes direct holdings and non-listed fund holdings.</p></li> \n <li><p>The potential CO<sub>2</sub> emissions from the investments have increased from 10.593 gigatonnes (Gt) to 14.283Gt since the Paris agreement, equivalent to 38% of global fossil fuel CO<sub>2</sub> emissions last year.</p></li> \n <li><p>BlackRock and Vanguard opposed or abstained on more than 80% of climate-related motions at FTSE 100 and S&amp;P 500 fossil fuel companies between 2015 and 2019, according to data provided by <a href="https://www.proxyinsight.com/about/overview/">ProxyInsight</a>.</p></li> \n <li><p>The big three are among a number of asset managers that offer “climate-friendly” and “sustainable” investment funds that have substantial holdings in fossil fuel companies.</p></li> \n</ul>',
 				},
 				{
-					elementId: 'cf4c4b8a-cbfa-4eba-b12f-8e86ae30dd8e',
+					elementId: '9756e49c-3bda-4994-bb76-a4dde837b38a',
 					scriptUrl:
 						'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
 					alt:
@@ -3012,84 +3012,84 @@ export const SpecialReport: CAPIType = {
 					isMandatory: false,
 				},
 				{
-					elementId: '67d13c15-703c-4a48-82c8-0bbea5381fd9',
+					elementId: '86fcdd76-5373-4457-a28b-505f9fae9552',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>BlackRock, Vanguard and State Street did not challenge the findings.</p>',
 				},
 				{
-					elementId: 'cb94fff3-5605-436a-8d87-69b775ff9381',
+					elementId: '872ad701-1ebd-44c4-a308-d01153824f0e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>They told the Guardian they prioritised private engagements with company boards, where the climate crisis was regularly discussed. They said they had increased the size of their teams responsible for investment stewardship, opting to use their votes as a final resort.</p>',
 				},
 				{
-					elementId: 'f19781db-92db-4038-9893-b230c1ef04f5',
+					elementId: '36cc82a5-e455-4cea-ada7-b3f8232f42e2',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Vanguard said it neither managed the companies in which it invested nor sought to influence their business strategy. “As a steward of lifetime savings for more than 20 million people around the world, and a practically permanent investor in more than 10,000 companies, Vanguard is concerned about the long-term impact of climate risk,” a spokesman said.</p>',
 				},
 				{
-					elementId: 'addecca8-0ae4-4f5c-bec2-7f45b436aaa4',
+					elementId: '11a2b2e3-1c3f-42d9-87f5-4343ca247e74',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“While voting at shareholder meetings is important … it is only one part of the larger corporate governance process. We regularly engage with companies on our shareholders’ behalf and believe that engagement and broader advocacy, in addition to voting, can effect meaningful changes that generate long-term value for all shareholders.”</p>',
 				},
 				{
-					elementId: '2737fb87-b2d5-4d0b-b46a-89ecd256ae93',
+					elementId: '1938fbf6-75d7-4699-a737-6f07e68f29bd',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>BlackRock said it “offers investors a wide range of environmentally sustainable investment options … [and] is also a leading investor in renewable power generation globally. Our award-winning climate research helps investors understand and mitigate the impact of climate change on their portfolios.”</p>',
 				},
 				{
-					elementId: '011144b0-e967-41f0-940d-c0dbddfc7311',
+					elementId: '8170baac-9bdb-4ae0-ae4a-0fab2dc4d8ab',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p> State Street said: “If an investor wants to buy an ETF [exchange-traded fund] that tracks the FTSE 100, we would purchase the shares (proportionately) of all the companies in that FTSE 100 index in order to meet the objective of that strategy. That will today undoubtedly include energy companies.</p>',
 				},
 				{
-					elementId: 'fbc7934b-1ee2-46e7-ba1c-210bfab86682',
+					elementId: '007a7571-cbb7-4c7e-9c40-d40d34008afb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“We do not proactively determine whether to exclude a particular company or sector since it would be inconsistent with the stated ETF objective. If an investor did want a strategy that considered climate issues or other ESG [environmental, social and governance] factors, that would be a different product with a different index; we can provide that too.”</p>',
 				},
 				{
-					elementId: 'cfcc14e9-0098-48ad-9060-9603c82da8c2',
+					elementId: '099a9344-1766-4dde-802d-66cacf9d22cd',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Asset managers are increasingly finding themselves at the heart of social and environmental issues, and corporate governance experts have <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3282794">raised concerns</a> about conflicts of interest in their business models.</p>',
 				},
 				{
-					elementId: '63587d09-bf57-4c6d-be33-47f53148638f',
+					elementId: 'ba791656-8071-4ff0-b089-7b0393939e1b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Campaigners are demanding asset managers vote out company directors who are not deemed to be taking sufficient action.</p>',
 				},
 				{
-					elementId: '0b3c80a8-1851-443e-953e-0ddd1713d316',
+					elementId: '4c4829ea-d61a-4efa-8c53-05956f54ca15',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>In June, the London-based Legal &amp; General, formerly a top 20 investor in ExxonMobil, announced it was selling a $300m stake in the company and would use remaining shares to vote against the chief executive, Darren Woods.</p>',
 				},
 				{
-					elementId: '01f51c63-8e33-4cc2-a42c-f28b200292b1',
+					elementId: '5b819417-c617-484a-8fac-a3f9761ad003',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>But environmental shareholder proposals face increasing challenges from the management of fossil fuel companies, which are being sustained by the American regulator, the Securities and Exchange Commission. The SEC declined to comment.</p>',
 				},
 				{
-					elementId: '8087696a-1bef-4042-976e-e499fe67e9a8',
+					elementId: 'ac385d19-4803-4f4b-bfcf-229de065793a',
 					scriptUrl:
 						'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
 					alt: 'Graphs on climate motions making it to a vote.',
@@ -3100,21 +3100,21 @@ export const SpecialReport: CAPIType = {
 					isMandatory: false,
 				},
 				{
-					elementId: 'b1c33dc8-c692-4975-b1a2-e5ce2454433b',
+					elementId: 'c76eb0dc-7cb8-4984-a1d2-a5fd287a85da',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>In April, ExxonMobil shareholders were denied a vote on whether the company should set targets for cutting greenhouse gas emissions by the SEC, which called the proposal an attempt to “micromanage” the company.</p>',
 				},
 				{
-					elementId: 'ee91f193-393e-4876-b9b3-6264e0fbf65e',
+					elementId: 'a065e8db-9871-42f9-8112-e8cf90ef2d6d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Data for the 2019 season of annual general meetings for shareholders, provided by Institutional Shareholder Services, shows that only a quarter of proposals made it to a vote at companies in the US, with 79 of the 105 motions either withdrawn or omitted.</p>',
 				},
 				{
-					elementId: '5ddb0051-4376-4fb8-a4b1-138cc0fe5d3f',
+					elementId: '5cb4fe45-cb64-4acd-a1ec-e356f833ba14',
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					html:
 						'<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
@@ -3123,21 +3123,21 @@ export const SpecialReport: CAPIType = {
 					credit: '',
 				},
 				{
-					elementId: 'd779ca6b-05bc-448f-bc05-1ba16cd4454a',
+					elementId: '92d52950-c53d-47b7-8239-0e7408144945',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Despite setbacks, other proposals and engagements by asset managers have been more successful. In an industry first last year, intense pressure from shareholders forced Royal Dutch Shell to set carbon emission targets linked to executive pay. The decision was backed by Climate Action 100+, a group of $35tn investors who are pushing fossil fuel companies to react to the crisis.</p>',
 				},
 				{
-					elementId: '35a360ba-2ce6-41df-944a-72110a115a6b',
+					elementId: 'd8c12811-d348-47c9-84f9-c622840455cb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Many pension funds and asset managers support schemes to improve information about how climate-critical companies are responding to environmental concerns, including the Transition Pathway Initiative, which grades the boards of fossil fuel, energy and transport companies on their response.</p>',
 				},
 				{
-					elementId: 'ae9e8d4d-666f-4387-a7a0-c686e4d982d6',
+					elementId: 'd03f68a7-4920-43a7-a9cd-512e84a11c3c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -3227,12 +3227,13 @@ export const SpecialReport: CAPIType = {
 			},
 		],
 		isProd: true,
-		shortUrlId: '/p/4k83z',
+		shortUrlId: '/p/ccmyh',
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
 			prebidTrustx: true,
-			scAdFreeBanner: true,
+			scAdFreeBanner: false,
+			abStickyNavTest: true,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -3256,7 +3257,7 @@ export const SpecialReport: CAPIType = {
 			prebidAppnexusInvcode: true,
 			prebidAppnexus: true,
 			enableDiscussionSwitch: true,
-			prebidXaxis: true,
+			prebidXaxis: false,
 			interactiveFullHeaderSwitch: false,
 			discussionAllPageSize: true,
 			prebidUserSync: true,
@@ -3265,7 +3266,7 @@ export const SpecialReport: CAPIType = {
 			breakingNews: true,
 			externalVideoEmbeds: true,
 			simpleReach: true,
-			abSignInGateCopyOpt: false,
+			abSignInGateCopyOpt: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -3309,7 +3310,7 @@ export const SpecialReport: CAPIType = {
 			idCookieRefresh: true,
 			sharingComments: true,
 			discussionPageSize: true,
-			smartAppBanner: true,
+			smartAppBanner: false,
 			boostGaUserTimingFidelity: false,
 			historyTags: true,
 			mobileStickyLeaderboard: true,
@@ -3317,35 +3318,6 @@ export const SpecialReport: CAPIType = {
 			surveys: true,
 			remoteBanner: true,
 			inizio: true,
-			abCommercialCmpCustomise: true,
-			emailSignupLabNotes: true,
-			lotame: true,
-			prebidPangaea: true,
-			idEmailSignInUpsell: false,
-			doubleclickYoutubeAdFree: true,
-			membershipEngagementBannerBlockUs: false,
-			oldTlsSupportDeprecation: true,
-			abContributionsEpicAskFourEarning: true,
-			emailSignupEuRef: true,
-			emailInArticleOutbrain: true,
-			abFebruaryMomentBannerThankYou: false,
-			commercialPageViewAnalytics: true,
-			membershipEngagementBanner: true,
-			membershipEngagementBannerBlockAu: false,
-			plistaAu: true,
-			membershipEngagementBannerBlockUk: false,
-			epicTestsFromGoogleDocs: true,
-			youtubeRelatedVideos: true,
-			abFebruaryMomentBannerCopy: true,
-			abCommercialPrebidSafeframe: true,
-			abAcquisitionsEpicAlwaysAskIfTagged: true,
-			emailInArticleGtoday: true,
-			engagementBannerTestsFromGoogleDocs: false,
-			prebidS2sozone: true,
-			tourismAustralia: true,
-			emailInArticle: true,
-			videojs: true,
-			abCommercialAdVerification: false,
 		},
 		hasYouTubeAtom: false,
 		inBodyInternalLinkCount: 0,
@@ -3359,9 +3331,31 @@ export const SpecialReport: CAPIType = {
 			qanda: true,
 			commonsdivision: false,
 		},
-		keywordIds: '',
+		keywordIds:
+			'environment/fossil-fuels,business/oilandgascompanies,business/business,environment/energy,business/energy-industry,environment/environment,business/corporate-governance',
 		blogIds: '',
-		sharedAdTargeting: {},
+		sharedAdTargeting: {
+			se: ['the-polluters'],
+			ct: 'article',
+			co: ['patrick-greenfield'],
+			url:
+				'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+			su: ['0'],
+			edition: 'uk',
+			ob: 't',
+			tn: ['news'],
+			p: 'ng',
+			k: [
+				'business',
+				'fossil-fuels',
+				'oilandgascompanies',
+				'energy',
+				'energy-industry',
+				'corporate-governance',
+				'environment',
+			],
+			sh: 'https://www.theguardian.com/p/ccmyh',
+		},
 		beaconUrl: '//phar.gu-web.net',
 		campaigns: [
 			{
@@ -3408,8 +3402,8 @@ export const SpecialReport: CAPIType = {
 		pageCode: '6630110',
 		pillar: 'News',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/3d3cbc5f29df7c0cdd65/graun.dotcom-rendering-commercial.js',
-		discussionApiClientHeader: 'testClientHeader',
+			'https://assets.guim.co.uk/javascripts/b2d004ec8fca220ad3a7/graun.commercial.dcr.js',
+		discussionApiClientHeader: 'nextgen',
 		membershipUrl: 'https://membership.theguardian.com',
 		cardStyle: 'special-report',
 		shouldHideReaderRevenue: false,
@@ -3426,18 +3420,19 @@ export const SpecialReport: CAPIType = {
 		mobileAppsAdUnitRoot: 'beta-guardian-app',
 		disableStickyTopBanner: true,
 		dfpAdUnitRoot: 'theguardian.com',
-		headline: '',
+		headline:
+			"World's top three asset managers oversee $300bn fossil fuel investments",
 		commentable: false,
 		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: false,
+		showRelatedContent: true,
 		commissioningDesks: 'uk-investigations',
 		inBodyExternalLinkCount: 6,
-		adUnit: '/59666047/theguardian.com/film/article/ng',
+		adUnit: '/59666047/theguardian.com/environment/article/ng',
 		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
 		videoDuration: 0,
-		stage: 'DEV',
+		stage: 'PROD',
 		idOAuthUrl: 'https://oauth.theguardian.com',
-		series: '',
+		series: 'The polluters',
 		isSensitive: false,
 		isDev: false,
 		thirdPartyAppsAccount: 'guardiangu-thirdpartyapps',
@@ -3447,24 +3442,25 @@ export const SpecialReport: CAPIType = {
 		fbAppId: '180444840287',
 		externalEmbedHost: 'https://embed.theguardian.com',
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords: '',
-		revisionNumber: '62cf0d6e4609276d37e09fd596430fbf8b629418',
+		keywords:
+			'Fossil fuels,Oil and gas companies,Business,Energy,Energy industry,Environment,Corporate governance',
+		revisionNumber: 'DEV',
 		blogs: '',
-		section: '',
+		section: 'environment',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37551',
+		buildNumber: '37555',
 		isPhotoEssay: false,
 		seriesId: 'environment/series/the-polluters',
 		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/a994b749adae30cd58f0e84c8fa28013/amp-iframe.html',
+			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
 		userAttributesApiUrl:
 			'https://members-data-api.theguardian.com/user-attributes',
 		isLive: false,
 		publication: 'The Observer',
 		host: 'https://www.theguardian.com',
 		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		contentType: '',
+		contentType: 'Article',
 		facebookIaAdUnitRoot: 'facebook-instant-articles',
 		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		idUrl: 'https://profile.theguardian.com',
@@ -3472,11 +3468,12 @@ export const SpecialReport: CAPIType = {
 			'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/500.jpg?quality=85&auto=format&fit=max&s=dcc83b9143f40ec972bf56d83e7a41d2',
 		isFront: false,
 		wordCount: 1361,
-		author: '',
-		dfpAccountId: '',
+		author: 'Patrick Greenfield',
+		dfpAccountId: '59666047',
 		nonKeywordTagIds:
 			'environment/series/the-polluters,type/article,tone/news,profile/patrick-greenfield,publication/theobserver,theobserver/news,theobserver/news/uknews,tracking/commissioningdesk/uk-investigations',
-		pageId: '',
+		pageId:
+			'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 		forecastsapiurl: '/weatherapi/forecast',
 		assetsPath: 'https://assets.guim.co.uk/',
 		lightboxImages: {
@@ -3562,18 +3559,18 @@ export const SpecialReport: CAPIType = {
 		seriesTags: 'The polluters',
 		isImmersive: true,
 		dfpHost: 'pubads.g.doubleclick.net',
-		googletagUrl: '//www.googletagservices.com/tag/js/gpt.js',
+		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		hbImpl: {
-			prebid: false,
-			a9: false,
+			prebid: true,
+			a9: true,
 		},
 		abTests: {},
 		shortUrl: 'https://www.theguardian.com/p/ccmyh',
 		isContent: true,
 		contentId:
 			'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-		edition: '',
+		edition: 'UK',
 		discussionFrontendUrl:
 			'https://assets.guim.co.uk/discussion/discussion-frontend.preact.iife.8bdbd9194e.js',
 		ipsosTag: 'environment',
@@ -5019,6 +5016,8 @@ export const SpecialReport: CAPIType = {
 			5612812553,
 			5612812556,
 			5613900227,
+			5616295359,
+			5617153347,
 			5617357126,
 			5617560946,
 			5618303037,
@@ -5058,6 +5057,8 @@ export const SpecialReport: CAPIType = {
 			5627400383,
 			5627416481,
 			5627419082,
+			5627510314,
+			5627740002,
 			5627768068,
 			5627946712,
 			5628367142,
@@ -5073,6 +5074,8 @@ export const SpecialReport: CAPIType = {
 			5630498106,
 			5630926258,
 			5631069021,
+			5631098598,
+			5631098862,
 			5631297107,
 			5631522170,
 			5631715415,
@@ -5087,16 +5090,28 @@ export const SpecialReport: CAPIType = {
 			5632246513,
 			5632464370,
 			5632497345,
+			5632654007,
 			5632702032,
 			5633274403,
+			5633307960,
 			5633479388,
 			5633559344,
 			5633566793,
 			5633566955,
+			5633620717,
+			5633632965,
 			5633735270,
 			5633782264,
-			5634188591,
-			5634188594,
+			5633848686,
+			5634480439,
+			5634571147,
+			5634602605,
+			5634623455,
+			5634695740,
+			5634696664,
+			5634854126,
+			5635126238,
+			5635356428,
 		],
 		tones: 'News',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',
@@ -5106,13 +5121,13 @@ export const SpecialReport: CAPIType = {
 		allowUserGeneratedContent: false,
 		byline: 'Patrick Greenfield',
 		authorIds: 'profile/patrick-greenfield',
-		webPublicationDate: 1579185778186,
+		webPublicationDate: 1570878019000,
 		omnitureAmpAccount: 'guardiangu-thirdpartyapps',
 		isHosted: false,
 		hasPageSkin: false,
 		webTitle:
 			"World's top three asset managers oversee $300bn fossil fuel investments",
-		discussionD2Uid: 'testD2Header',
+		discussionD2Uid: 'zHoBy6HNKsk',
 		weatherapiurl: '/weatherapi/city',
 		googleSearchUrl: '//www.google.co.uk/cse/cse.js',
 		optimizeEpicUrl:

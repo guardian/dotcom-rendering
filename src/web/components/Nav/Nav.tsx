@@ -104,6 +104,9 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
                             firstColLabel.focus()
                           }
                         }
+
+						if (!navInputCheckbox) return; // Sticky nav replaces the nav so element no longer exists for users in test.
+
                         navInputCheckbox.addEventListener('click',function(){
                           if(!navInputCheckbox.checked) {
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
