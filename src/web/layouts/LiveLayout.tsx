@@ -56,14 +56,11 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
-			${until.leftCol} {
+			${until.desktop} {
 				margin-left: 0px;
 			}
-			${from.leftCol} {
-				margin-left: 151px;
-			}
-			${from.wide} {
-				margin-left: 230px;
+			${from.desktop} {
+				margin-left: 320px;
 			}
 
 			@supports (display: grid) {
@@ -73,42 +70,17 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				${from.wide} {
+				${from.desktop} {
 					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
+						309px /* Left Column (220 - 1px border) */
 						1px /* Empty border for spacing */
 						1fr /* Main content */
-						300px; /* Right Column */
+						340px; /* Right Column */
 					grid-template-areas:
 						'lines border media        right-column'
 						'meta  border media        right-column'
 						'meta  border body         right-column'
 						'.     border .            right-column';
-				}
-
-				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column */
-						1px /* Empty border for spacing */
-						1fr /* Main content */
-						300px; /* Right Column */
-					grid-template-areas:
-						'lines border media        right-column'
-						'meta  border media        right-column'
-						'meta  border body         right-column'
-						'.     border .            right-column';
-				}
-
-				${until.leftCol} {
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
-					grid-template-areas:
-						'media         right-column'
-						'lines         right-column'
-						'meta          right-column'
-						'body          right-column'
-						'.             right-column';
 				}
 
 				${until.desktop} {

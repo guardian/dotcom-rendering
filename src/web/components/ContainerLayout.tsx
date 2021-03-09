@@ -111,6 +111,7 @@ export const ContainerLayout = ({
 				showRightBorder={centralBorder === 'full'}
 				borderColour={borderColour}
 				showPartialRightBorder={centralBorder === 'partial'}
+				size="wide"
 			>
 				<>
 					<ContainerTitle
