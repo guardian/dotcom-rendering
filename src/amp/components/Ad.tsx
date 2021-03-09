@@ -170,16 +170,16 @@ export const Ad: React.SFC<{
 	contentType: string;
 	config: CommercialConfig;
 	commercialProperties: CommercialProperties;
-	className: string;
+	dangerouslyOverrideStyles?: string;
 }> = ({
 	edition,
 	section,
 	contentType,
 	config,
 	commercialProperties,
-	className,
+	dangerouslyOverrideStyles,
 }) => (
-	<div className={cx(adStyle, className)}>
+	<div className={cx(adStyle, dangerouslyOverrideStyles)}>
 		{ampAdElem(
 			'US',
 			edition,

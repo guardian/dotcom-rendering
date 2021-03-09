@@ -11,7 +11,7 @@ import { SubMeta } from '@root/src/amp/components/SubMeta';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
-import { WithAds } from '@root/src/amp/components/WithAds';
+import { Ad } from '@root/src/amp/components/Ad';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -92,12 +92,33 @@ export const Body: React.FC<{
 	const elements = data.shouldHideAds ? (
 		<>{elementsWithoutAds}</>
 	) : (
-		<WithAds
-			items={elementsWithoutAds}
-			adSlots={slotIndexes}
-			adClassName={adStyle}
-			adInfo={adInfo}
-		/>
+		<>
+			{elementsWithoutAds.map((item, i) => (
+				<>
+					{slotIndexes.includes(i) && item}
+					<div id={`ad-${i + 1}`} data-sort-time="1">
+						<Ad
+							dangerouslyOverrideStyles={adStyle}
+							edition={adInfo.edition}
+							section={adInfo.section}
+							contentType={adInfo.contentType}
+							config={{
+								usePrebid: adInfo.switches.ampPrebid,
+								usePermutive: adInfo.switches.permutive,
+							}}
+							commercialProperties={adInfo.commercialProperties}
+						/>
+					</div>
+				</>
+			))}
+			<div
+				id="clean-blocks"
+				data-sort-time="1"
+				className={css`
+					clear: both;
+				`}
+			/>
+		</>
 	);
 
 	const epic = data.shouldHideReaderRevenue ? null : (

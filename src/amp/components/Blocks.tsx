@@ -1,12 +1,13 @@
 import React from 'react';
-import { Elements } from '@root/src/amp/components/Elements';
 import { css } from 'emotion';
+
+import { Elements } from '@root/src/amp/components/Elements';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
-import { WithAds } from '@root/src/amp/components/WithAds';
+import { Ad } from '@root/src/amp/components/Ad';
 
 const blockStyle = (pillar: Theme) => css`
 	padding: 6px 10px 12px;
@@ -106,11 +107,29 @@ export const Blocks: React.SFC<{
 
 	return (
 		<>
-			<WithAds
-				items={liveBlogBlocks}
-				adSlots={slotIndexes}
-				adClassName=""
-				adInfo={adInfo}
+			{liveBlogBlocks.map((item, i) => (
+				<>
+					{slotIndexes.includes(i) && item}
+					<div id={`ad-${i + 1}`} data-sort-time="1">
+						<Ad
+							edition={adInfo.edition}
+							section={adInfo.section}
+							contentType={adInfo.contentType}
+							config={{
+								usePrebid: adInfo.switches.ampPrebid,
+								usePermutive: adInfo.switches.permutive,
+							}}
+							commercialProperties={adInfo.commercialProperties}
+						/>
+					</div>
+				</>
+			))}
+			<div
+				id="clean-blocks"
+				data-sort-time="1"
+				className={css`
+					clear: both;
+				`}
 			/>
 		</>
 	);
