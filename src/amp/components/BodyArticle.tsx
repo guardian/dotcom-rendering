@@ -95,7 +95,7 @@ export const Body: React.FC<{
 		<WithAds
 			items={elementsWithoutAds}
 			adSlots={slotIndexes}
-			adCss={adStyle}
+			cssOverrides={adStyle}
 			adInfo={adInfo}
 		/>
 	);
