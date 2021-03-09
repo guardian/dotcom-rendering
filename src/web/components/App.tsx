@@ -141,6 +141,11 @@ const componentEventHandler = (
 	componentType: any,
 	id: any,
 	action: any,
+	value?: string,
+	abTest?: {
+		name: string;
+		variant: string;
+	},
 ) => () => {
 	const componentEvent: OphanComponentEvent = {
 		component: {
@@ -150,6 +155,8 @@ const componentEventHandler = (
 			labels: [],
 		},
 		action,
+		value,
+		abTest,
 	};
 	submitComponentEvent(componentEvent);
 };
@@ -794,6 +801,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={document.source}
 						sourceDomain={document.sourceDomain}
 						abTests={CAPI.config.abTests}
+						onAccept={componentEventHandler(
+							'CLICK_TO_VIEW_EMBED_OVERLAY',
+							document.elementId,
+							'EXPAND',
+							document.sourceDomain,
+							{
+								name: 'clickToViewVariant',
+								variant: 'variant',
+							},
+						)}
 					>
 						<DocumentBlockComponent
 							embedUrl={document.embedUrl}
@@ -813,6 +830,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
 							abTests={CAPI.config.abTests}
+							onAccept={componentEventHandler(
+								'CLICK_TO_VIEW_EMBED_OVERLAY',
+								embed.elementId,
+								'EXPAND',
+								embed.sourceDomain,
+								{
+									name: 'clickToViewVariant',
+									variant: 'variant',
+								},
+							)}
 						>
 							<EmbedBlockComponent
 								html={embed.html}
@@ -826,11 +853,22 @@ export const App = ({ CAPI, NAV }: Props) => {
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
 							abTests={CAPI.config.abTests}
-							onAccept={() =>
+							onAccept={() => {
+								// eslint-disable-next-line @typescript-eslint/no-floating-promises
 								updateIframeHeight(
 									`iframe[name="unsafe-embed-${index}"]`,
-								)
-							}
+								);
+								componentEventHandler(
+									'CLICK_TO_VIEW_EMBED_OVERLAY',
+									embed.elementId,
+									'EXPAND',
+									embed.sourceDomain,
+									{
+										name: 'clickToViewVariant',
+										variant: 'variant',
+									},
+								)();
+							}}
 						>
 							<UnsafeEmbedBlockComponent
 								key={embed.elementId}
@@ -850,11 +888,22 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={insta.source}
 						sourceDomain={insta.sourceDomain}
 						abTests={CAPI.config.abTests}
-						onAccept={() =>
+						onAccept={() => {
+							// eslint-disable-next-line @typescript-eslint/no-floating-promises
 							updateIframeHeight(
 								`iframe[name="instagram-embed-${index}"]`,
-							)
-						}
+							);
+							componentEventHandler(
+								'CLICK_TO_VIEW_EMBED_OVERLAY',
+								insta.elementId,
+								'EXPAND',
+								insta.sourceDomain,
+								{
+									name: 'clickToViewVariant',
+									variant: 'variant',
+								},
+							)();
+						}}
 					>
 						<InstagramBlockComponent
 							element={insta}
@@ -871,6 +920,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={map.source}
 						sourceDomain={map.sourceDomain}
 						abTests={CAPI.config.abTests}
+						onAccept={componentEventHandler(
+							'CLICK_TO_VIEW_EMBED_OVERLAY',
+							map.elementId,
+							'EXPAND',
+							map.sourceDomain,
+							{
+								name: 'clickToViewVariant',
+								variant: 'variant',
+							},
+						)}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -893,6 +952,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={spotify.source}
 						sourceDomain={spotify.sourceDomain}
 						abTests={CAPI.config.abTests}
+						onAccept={componentEventHandler(
+							'CLICK_TO_VIEW_EMBED_OVERLAY',
+							spotify.elementId,
+							'EXPAND',
+							spotify.sourceDomain,
+							{
+								name: 'clickToViewVariant',
+								variant: 'variant',
+							},
+						)}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotify.embedUrl}
@@ -915,6 +984,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={facebookVideo.source}
 						sourceDomain={facebookVideo.sourceDomain}
 						abTests={CAPI.config.abTests}
+						onAccept={componentEventHandler(
+							'CLICK_TO_VIEW_EMBED_OVERLAY',
+							facebookVideo.elementId,
+							'EXPAND',
+							facebookVideo.sourceDomain,
+							{
+								name: 'clickToViewVariant',
+								variant: 'variant',
+							},
+						)}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -939,6 +1018,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={vine.source}
 						sourceDomain={vine.sourceDomain}
 						abTests={CAPI.config.abTests}
+						onAccept={componentEventHandler(
+							'CLICK_TO_VIEW_EMBED_OVERLAY',
+							vine.elementId,
+							'EXPAND',
+							vine.sourceDomain,
+							{
+								name: 'clickToViewVariant',
+								variant: 'variant',
+							},
+						)}
 					>
 						<VineBlockComponent element={vine} />
 					</ClickToView>
