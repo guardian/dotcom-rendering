@@ -2,6 +2,10 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Design, Special } from '@guardian/types';
+import { until } from '@guardian/src-foundations/mq';
+import { text } from '@guardian/src-foundations/palette';
+import { palette } from '@guardian/src-foundations';
+import { textSans } from '@guardian/src-foundations/typography';
 
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { Elements } from '@root/src/amp/components/Elements';
@@ -9,8 +13,6 @@ import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
 import { pillarPalette } from '@root/src/lib/pillars';
-import { palette } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
 import { Ad } from '@root/src/amp/components/Ad';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -54,7 +56,26 @@ const body = (pillar: Pillar, design: Design) => {
 
 const adStyle = css`
 	float: right;
+	background: ${palette.neutral[93]};
+	border-top: 1px solid ${palette.neutral[86]};
+	width: min-content;
+	height: min-content;
+	clear: both;
+	text-align: center;
 	margin: 4px 0 12px 20px;
+
+	:before {
+		content: 'Advertisement';
+		display: block;
+		${textSans.xsmall()};
+		/* Adverts specifcally don't use the GU font branding. */
+		/* stylelint-disable-next-line property-blacklist */
+		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+			sans-serif;
+		padding: 3px 10px;
+		color: ${text.supporting};
+		text-align: right;
+	}
 
 	${until.phablet} {
 		float: none;
@@ -89,6 +110,10 @@ export const Body: React.FC<{
 		},
 	};
 
+	const adConfig = {
+		usePrebid: adInfo.switches.ampPrebid,
+		usePermutive: adInfo.switches.permutive,
+	};
 	const elements = data.shouldHideAds ? (
 		<>{elementsWithoutAds}</>
 	) : (
@@ -96,16 +121,33 @@ export const Body: React.FC<{
 			{elementsWithoutAds.map((item, i) => (
 				<>
 					{slotIndexes.includes(i) && item}
-					<div id={`ad-${i + 1}`} data-sort-time="1">
+					<div
+						id={`ad-${i + 1}`}
+						data-sort-time="1"
+						className={adStyle}
+					>
 						<Ad
-							dangerouslyOverrideStyles={adStyle}
-							edition={adInfo.edition}
-							section={adInfo.section}
+							adRegion="US"
+							edition={data.editionId}
+							section={data.sectionName || ''}
 							contentType={adInfo.contentType}
-							config={{
-								usePrebid: adInfo.switches.ampPrebid,
-								usePermutive: adInfo.switches.permutive,
-							}}
+							config={adConfig}
+							commercialProperties={adInfo.commercialProperties}
+						/>
+						<Ad
+							adRegion="AU"
+							edition={data.editionId}
+							section={data.sectionName || ''}
+							contentType={adInfo.contentType}
+							config={adConfig}
+							commercialProperties={adInfo.commercialProperties}
+						/>
+						<Ad
+							adRegion="ROW"
+							edition={data.editionId}
+							section={data.sectionName || ''}
+							contentType={adInfo.contentType}
+							config={adConfig}
 							commercialProperties={adInfo.commercialProperties}
 						/>
 					</div>

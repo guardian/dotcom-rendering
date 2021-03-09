@@ -1,13 +1,38 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Elements } from '@root/src/amp/components/Elements';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
+
+import { Elements } from '@root/src/amp/components/Elements';
+import { pillarPalette } from '@root/src/lib/pillars';
 import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
 import { Ad } from '@root/src/amp/components/Ad';
+
+const adStyle = css`
+	background: ${palette.neutral[93]};
+	border-top: 1px solid ${palette.neutral[86]};
+	width: min-content;
+	height: min-content;
+	clear: both;
+	text-align: center;
+	margin: 0 auto 12px;
+
+	:before {
+		content: 'Advertisement';
+		display: block;
+		${textSans.xsmall()};
+		/* Adverts specifcally don't use the GU font branding. */
+		/* stylelint-disable-next-line property-blacklist */
+		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+			sans-serif;
+		padding: 3px 10px;
+		color: ${text.supporting};
+		text-align: right;
+	}
+`;
 
 const blockStyle = (pillar: Theme) => css`
 	padding: 6px 10px 12px;
@@ -105,21 +130,43 @@ export const Blocks: React.SFC<{
 		},
 	};
 
+	const adConfig = {
+		usePrebid: adInfo.switches.ampPrebid,
+		usePermutive: adInfo.switches.permutive,
+	};
 	return (
 		<>
 			{liveBlogBlocks.map((item, i) => (
 				<>
 					{slotIndexes.includes(i) && item}
-					<div id={`ad-${i + 1}`} data-sort-time="1">
+					<div
+						id={`ad-${i + 1}`}
+						data-sort-time="1"
+						className={adStyle}
+					>
 						<Ad
-							edition={adInfo.edition}
-							section={adInfo.section}
-							contentType={adInfo.contentType}
-							config={{
-								usePrebid: adInfo.switches.ampPrebid,
-								usePermutive: adInfo.switches.permutive,
-							}}
-							commercialProperties={adInfo.commercialProperties}
+							adRegion="US"
+							edition={edition}
+							section={section || ''}
+							contentType={contentType}
+							config={adConfig}
+							commercialProperties={commercialProperties}
+						/>
+						<Ad
+							adRegion="AU"
+							edition={edition}
+							section={section || ''}
+							contentType={contentType}
+							config={adConfig}
+							commercialProperties={commercialProperties}
+						/>
+						<Ad
+							adRegion="ROW"
+							edition={edition}
+							section={section || ''}
+							contentType={contentType}
+							config={adConfig}
+							commercialProperties={commercialProperties}
 						/>
 					</div>
 				</>
