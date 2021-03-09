@@ -16,6 +16,7 @@ const HeaderImageCaptionStyles = (
 	iconBackgroundColor?: string,
 ): SerializedStyles => css`
 	summary {
+		pointer-events: auto;
 		text-align: center;
 		background-color: ${iconBackgroundColor
 			? iconBackgroundColor
@@ -54,7 +55,7 @@ const HeaderImageCaptionStyles = (
 			padding-left: 9rem;
 		}
 	}
-
+	pointer-events: none;
 	position: absolute;
 	left: 0;
 	right: 0;
