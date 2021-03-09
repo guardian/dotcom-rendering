@@ -69,6 +69,8 @@ class LocalMessageCache {
 		}
 	}
 
+	// setQueue is effectively private, but it's useful to expose it publically
+	// so that we can use it in the tests
 	setQueue(slotName: SlotName, queue: CachedMessage[]) {
 		const key = keyFromSlotName(slotName);
 		this.store.setItem(key, JSON.stringify(queue));
