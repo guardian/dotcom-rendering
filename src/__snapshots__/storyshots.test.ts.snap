@@ -6280,6 +6280,18 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   box-sizing: border-box;
 }
 
+@media (min-width:740px) {
+  .emotion-7 details[open] {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width:980px) {
+  .emotion-7 details[open] {
+    padding-left: 9rem;
+  }
+}
+
 .emotion-8 {
   line-height: 32px;
   font-size: 0;
@@ -7122,6 +7134,18 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
+}
+
+@media (min-width:740px) {
+  .emotion-6 details[open] {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width:980px) {
+  .emotion-6 details[open] {
+    padding-left: 9rem;
+  }
 }
 
 .emotion-7 {
@@ -11666,6 +11690,18 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
+}
+
+@media (min-width:740px) {
+  .emotion-2 details[open] {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width:980px) {
+  .emotion-2 details[open] {
+    padding-left: 9rem;
+  }
 }
 
 .emotion-3 {
