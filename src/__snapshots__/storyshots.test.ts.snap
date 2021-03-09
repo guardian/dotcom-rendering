@@ -799,8 +799,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 .emotion-26 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-27 {
@@ -2036,8 +2034,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 .emotion-29 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-30 {
@@ -3224,8 +3220,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
 .emotion-26 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-27 {
@@ -4395,8 +4389,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 .emotion-27 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-28 {
@@ -5553,8 +5545,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 .emotion-26 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-27 {
@@ -7605,8 +7595,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 .emotion-28 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-29 {
@@ -8803,8 +8791,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
 .emotion-32 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-33 {
@@ -10036,8 +10022,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 .emotion-26 {
   display: block;
   position: relative;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
 }
 
 .emotion-27 {

@@ -7,9 +7,10 @@ import {
 	ChartAtom,
 	ExplainerAtom,
 	GuideAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
 	ProfileAtom,
 	QandaAtom,
-	QuizAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { BodyImage, FigCaption } from '@guardian/image-rendering';
@@ -38,10 +39,11 @@ import type {
 	Image,
 	Instagram,
 	InteractiveAtom as InteractiveAtomElement,
+	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
 	MediaAtom as MediaAtomElement,
+	PersonalityQuizAtom as PersonalityQuizAtomElement,
 	ProfileAtom as ProfileAtomElement,
 	QandaAtom as QandaAtomElement,
-	QuizAtom as QuizAtomElement,
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
@@ -67,7 +69,12 @@ import { isElement, pipe, pipe2 } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
+import {
+	getThemeStyles,
+	themeFromString,
+	themeToPillar,
+	themeToPillarString,
+} from 'themeStyles';
 
 // ----- Renderer ----- //
 
@@ -637,7 +644,7 @@ const audioAtomRenderer = (
 	element: AudioAtomElement,
 ): ReactNode => {
 	const { theme } = format;
-	const pillar = themeFromString('pillar/' + themeToPillar(theme));
+	const pillar = themeFromString('pillar/' + themeToPillarString(theme));
 	const audioAtomStyles = css`
 		figure {
 			margin: 0;
@@ -657,7 +664,7 @@ const audioAtomRenderer = (
 
 const quizAtomRenderer = (
 	format: Format,
-	element: QuizAtomElement,
+	element: KnowledgeQuizAtomElement | PersonalityQuizAtomElement,
 ): ReactNode => {
 	const props = JSON.stringify(element);
 	const hydrationParams = h(
@@ -665,9 +672,15 @@ const quizAtomRenderer = (
 		{ className: 'js-quiz-params', type: 'application/json' },
 		props,
 	);
+	if (element.kind === ElementKind.KnowledgeQuizAtom) {
+		return h('div', { className: 'js-quiz' }, [
+			hydrationParams,
+			h(KnowledgeQuizAtom, { ...element }),
+		]);
+	}
 	return h('div', { className: 'js-quiz' }, [
 		hydrationParams,
-		h(QuizAtom, { ...element }),
+		h(PersonalityQuizAtom, { ...element }),
 	]);
 };
 
@@ -746,7 +759,8 @@ const render = (format: Format, excludeStyles = false) => (
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
 
-		case ElementKind.QuizAtom:
+		case ElementKind.KnowledgeQuizAtom:
+		case ElementKind.PersonalityQuizAtom:
 			return quizAtomRenderer(format, element);
 	}
 };
@@ -813,7 +827,8 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
 
-		case ElementKind.QuizAtom:
+		case ElementKind.KnowledgeQuizAtom:
+		case ElementKind.PersonalityQuizAtom:
 			return quizAtomRenderer(format, element);
 
 		default:
