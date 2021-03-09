@@ -76,8 +76,8 @@ export const Pagination: React.SFC<{
 				</a>
 
 				<a
-					className={cx(
-						paginationLinkStyle(pagination.newest !== undefined),
+					className={paginationLinkStyle(
+						pagination.newest !== undefined,
 					)}
 					href={
 						pagination.newest
@@ -113,8 +113,8 @@ export const Pagination: React.SFC<{
 				</a>
 
 				<a
-					className={cx(
-						paginationLinkStyle(pagination.older !== undefined),
+					className={paginationLinkStyle(
+						pagination.older !== undefined,
 					)}
 					href={
 						pagination.older
