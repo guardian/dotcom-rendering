@@ -163,6 +163,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						styles={getCaptionStyles(format)}
 						iconColor={iconColor}
 						iconBackgroundColor={iconBackgroundColor}
+						isFullWidthImage={isFullWidthImage(format)}
 					/>
 					<StarRating item={item} />
 				</figure>
