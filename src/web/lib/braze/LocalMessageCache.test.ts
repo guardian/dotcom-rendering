@@ -166,6 +166,21 @@ describe('LocalMessageCache', () => {
 
 			expect(m).toBeUndefined();
 		});
+
+		it('returns the first unexpired message', () => {
+			const store = new FakeStore();
+			const cache = new LocalMessageCache(store);
+			const message1 = JSON.parse(message1Json);
+			const message2 = JSON.parse(message2Json);
+			const queue = [
+				buildExpiredMessage(message1),
+				buildUnexpiredMessage(message2),
+			];
+			cache.setQueue('EndOfArticle', queue);
+
+			const m = cache.shift('EndOfArticle');
+			expect(m).toEqual(message2);
+		});
 	});
 
 	describe('push', () => {
