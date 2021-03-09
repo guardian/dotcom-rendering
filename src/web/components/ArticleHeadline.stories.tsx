@@ -1,7 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import { news } from '@guardian/src-foundations';
 import { Display, Design, Pillar, Special } from '@guardian/types';
+
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
@@ -691,7 +693,20 @@ export const LiveBlog = () => (
 		</Flex>
 	</Section>
 );
-LiveBlog.story = { name: 'LiveBlog' };
+LiveBlog.story = {
+	name: 'LiveBlog',
+	parameters: {
+		backgrounds: {
+			default: 'red',
+			values: [
+				{
+					name: 'red',
+					value: news[300],
+				},
+			],
+		},
+	},
+};
 
 export const DeadBlog = () => (
 	<Section>

@@ -37,6 +37,7 @@ const textHeadline = (format: Format): string => {
 				case Design.Feature:
 					return pillarPalette[format.theme].dark;
 				case Design.Interview:
+				case Design.LiveBlog:
 					return WHITE;
 				default:
 					return BLACK;
@@ -55,6 +56,18 @@ const textSeriesTitle = (format: Format): string => {
 		case Display.Showcase:
 		case Display.Standard:
 			switch (format.design) {
+				case Design.LiveBlog:
+					switch (format.theme) {
+						case Pillar.News:
+							return news[600];
+						case Pillar.Sport:
+						case Pillar.Lifestyle:
+						case Pillar.Culture:
+						case Pillar.Opinion:
+						case Special.Labs:
+						default:
+							return WHITE;
+					}
 				case Design.MatchReport:
 					return BLACK;
 				default:
@@ -281,6 +294,8 @@ const textLinkKicker = (format: Format): string => {
 };
 
 const backgroundArticle = (format: Format): string => {
+	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
+		return neutral[93];
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.Editorial) return opinion[800];
@@ -364,10 +379,22 @@ const backgroundBullet = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundHeader = (format: Format): string => {
+	switch (format.design) {
+		case Design.LiveBlog:
+			return pillarPalette[format.theme][400];
+		default:
+			return backgroundArticle(format);
+	}
+};
+
 const backgroundStandfirst = (format: Format): string => {
-	if (format.design === Design.LiveBlog)
-		return pillarPalette[format.theme][300];
-	return 'transparent';
+	switch (format.design) {
+		case Design.LiveBlog:
+			return pillarPalette[format.theme][300];
+		default:
+			return backgroundArticle(format);
+	}
 };
 
 const fillCommentCount = (format: Format): string => {
@@ -455,6 +482,16 @@ const borderStandfirstLink = (format: Format): string => {
 	return border.secondary;
 };
 
+const borderHeadline = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return '#9F2423';
+	return border.secondary;
+};
+
+const borderStandfirst = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return '#8C2222';
+	return border.secondary;
+};
+
 const borderArticleLinkHover = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
@@ -504,6 +541,7 @@ export const decidePalette = (format: Format): Palette => {
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
+			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
 		},
 		fill: {
@@ -518,6 +556,8 @@ export const decidePalette = (format: Format): Palette => {
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
 			standfirstLink: borderStandfirstLink(format),
+			headline: borderHeadline(format),
+			standfirst: borderStandfirst(format),
 		},
 		topBar: {
 			card: topBarCard(format),
