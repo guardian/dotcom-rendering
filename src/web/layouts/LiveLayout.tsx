@@ -9,7 +9,6 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -24,7 +23,7 @@ import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
+import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -32,11 +31,9 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
-import { Placeholder } from '@frontend/web/components/Placeholder';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -53,13 +50,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { ContainerLayout } from '../components/ContainerLayout';
 
-const LiveGrid = ({
-	children,
-	isMatchReport,
-}: {
-	children: React.ReactNode;
-	isMatchReport: boolean;
-}) => (
+const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */
@@ -229,9 +220,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const isMatchReport =
-		format.design === Design.MatchReport && !!CAPI.matchUrl;
-
 	const showComments = CAPI.isCommentable;
 
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
@@ -360,12 +348,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				borderColour="#8C2222"
 				sideBorders={true}
 			>
-				<ArticleStandfirst
-					display={format.display}
-					design={format.design}
-					pillar={format.theme}
-					standfirst={CAPI.standfirst}
-				/>
+				<Standfirst format={format} standfirst={CAPI.standfirst} />
 			</ContainerLayout>
 
 			<ContainerLayout
@@ -379,7 +362,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 			>
-				<LiveGrid isMatchReport={isMatchReport}>
+				<LiveGrid>
 					<GridItem area="media">
 						<div className={maxWidth}>
 							<MainMedia
@@ -434,8 +417,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									host={host}
 									abTests={CAPI.config.abTests}
 								/>
-								{isMatchReport && <div id="match-stats" />}
-
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines
 									data-print-layout="hide"

@@ -65,6 +65,8 @@ type Palette = {
 		cardStandfirst: Colour;
 		cardFooter: Colour;
 		headlineByline: Colour;
+		standfirst: Colour;
+		standfirstLink: Colour;
 	},
 	background: {
 		article: Colour;
@@ -89,6 +91,7 @@ type Palette = {
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
+		standfirstLink: Colour;
 	},
 	topBar: {
 		card: Colour;
