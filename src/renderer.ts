@@ -242,13 +242,13 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
-const textElement = (format: Format, useDarkMode = true) => (
+const textElement = (format: Format, supportsDarkMode = true) => (
 	node: Node,
 	key: number,
 ): ReactNode => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map(
-		textElement(format, useDarkMode),
+		textElement(format, supportsDarkMode),
 	);
 	switch (node.nodeName) {
 		case 'P':
@@ -264,7 +264,7 @@ const textElement = (format: Format, useDarkMode = true) => (
 					href: withDefault('')(getHref(node)),
 					format,
 					key,
-					useDarkMode,
+					supportsDarkMode,
 				},
 				transform(text, format),
 			);
@@ -359,9 +359,9 @@ const noLinksStandfirstTextElement = (format: Format) => (
 const text = (
 	doc: DocumentFragment,
 	format: Format,
-	useDarkMode = true,
+	supportsDarkMode = true,
 ): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format, useDarkMode));
+	Array.from(doc.childNodes).map(textElement(format, supportsDarkMode));
 const standfirstText = (
 	doc: DocumentFragment,
 	format: Format,
@@ -474,11 +474,11 @@ const textRenderer = (
 	format: Format,
 	excludeStyles: boolean,
 	element: Text,
-	useDarkMode?: boolean,
+	supportsDarkMode?: boolean,
 ): ReactNode => {
 	return excludeStyles
 		? Array.from(element.doc.childNodes).map(plainTextElement)
-		: text(element.doc, format, useDarkMode);
+		: text(element.doc, format, supportsDarkMode);
 };
 
 const instagramRenderer = (element: Instagram): ReactNode => {
