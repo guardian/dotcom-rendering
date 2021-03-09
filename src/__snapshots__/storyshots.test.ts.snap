@@ -726,6 +726,8 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 .emotion-20 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -741,6 +743,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-20 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -1961,6 +1968,8 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 .emotion-23 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -1976,6 +1985,11 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-23 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-23 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -3147,6 +3161,8 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 .emotion-20 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -3162,6 +3178,11 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-20 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -4316,6 +4337,8 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 .emotion-21 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -4331,6 +4354,11 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-21 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-21 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -5472,6 +5500,8 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 .emotion-20 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -5487,6 +5517,11 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-20 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -6632,6 +6667,8 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-22 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -6647,6 +6684,11 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-22 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-22 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -7522,6 +7564,8 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 .emotion-22 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -7537,6 +7581,11 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-22 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-22 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -8718,6 +8767,8 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 .emotion-26 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -8733,6 +8784,11 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-26 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-26 p {
     margin: 0;
     padding-top: 0.5rem;
@@ -9949,6 +10005,8 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 .emotion-20 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
@@ -9964,6 +10022,11 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 @media (min-width:740px) {
+  .emotion-20 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .emotion-20 p {
     margin: 0;
     padding-top: 0.5rem;
