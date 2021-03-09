@@ -99,7 +99,7 @@ const embedElement: BodyElement = {
 		source: some('mockSource'),
 		sourceDomain: some('mockSourceDomain'),
 		tracking: EmbedTracksType.DOES_NOT_TRACK,
-	}
+	},
 };
 
 const videoElement: BodyElement = {
@@ -109,7 +109,7 @@ const videoElement: BodyElement = {
 		id: 'mockYoutubeId',
 		height: 300,
 		width: 500,
-	}
+	},
 };
 
 const audioElement: BodyElement = {
@@ -119,7 +119,7 @@ const audioElement: BodyElement = {
 		src: 'https://www.spotify.com/',
 		height: 300,
 		width: 500,
-	}
+	},
 };
 
 const liveEventElement = (): BodyElement => ({
@@ -192,8 +192,8 @@ const chartElement = (): BodyElement => ({
 	js: [],
 });
 
-const quizAtom = (): BodyElement => ({
-	kind: ElementKind.QuizAtom,
+const knowledgeQuizAtom = (): BodyElement => ({
+	kind: ElementKind.KnowledgeQuizAtom,
 	id: '',
 	questions: [],
 });
@@ -349,7 +349,9 @@ describe('Renders different types of elements', () => {
 	test('ElementKind.Embed', () => {
 		const nodes = render(embedElement);
 		const embed = nodes.flat()[0];
-		expect(getHtml(embed)).toContain('<iframe srcDoc=\"&lt;section&gt;Embed&lt;/section&gt;\" title=\"Embed\" height=\"322\"></iframe>');
+		expect(getHtml(embed)).toContain(
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
+		);
 	});
 
 	test('ElementKind.Audio', () => {
@@ -428,8 +430,8 @@ describe('Renders different types of elements', () => {
 		);
 	});
 
-	test('ElementKind.QuizAtom', () => {
-		const nodes = render(quizAtom());
+	test('ElementKind.KnowledgeQuizAtom', () => {
+		const nodes = render(knowledgeQuizAtom());
 		const quiz = nodes.flat()[0];
 		const html = getHtml(quiz);
 		expect(html).toContain('<div class="js-quiz">');
@@ -529,7 +531,9 @@ describe('Renders different types of Editions elements', () => {
 	test('ElementKind.Embed', () => {
 		const nodes = renderEditions(embedElement);
 		const embed = nodes.flat()[0];
-		expect(getHtml(embed)).toContain('<iframe srcDoc=\"&lt;section&gt;Embed&lt;/section&gt;\" title=\"Embed\" height=\"322\"></iframe>');
+		expect(getHtml(embed)).toContain(
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
+		);
 	});
 
 	test('ElementKind.Audio', () => {
@@ -608,8 +612,8 @@ describe('Renders different types of Editions elements', () => {
 		);
 	});
 
-	test('ElementKind.QuizAtom', () => {
-		const nodes = renderEditions(quizAtom());
+	test('ElementKind.KnowledgeQuizAtom', () => {
+		const nodes = renderEditions(knowledgeQuizAtom());
 		const quiz = nodes.flat()[0];
 		const html = getHtml(quiz);
 		expect(html).toContain('<div class="js-quiz">');
