@@ -37,6 +37,7 @@ const textHeadline = (format: Format): string => {
 				case Design.Feature:
 					return pillarPalette[format.theme].dark;
 				case Design.Interview:
+				case Design.LiveBlog:
 					return WHITE;
 				default:
 					return BLACK;
@@ -55,6 +56,8 @@ const textSeriesTitle = (format: Format): string => {
 		case Display.Showcase:
 		case Display.Standard:
 			switch (format.design) {
+				case Design.LiveBlog:
+					return WHITE;
 				case Design.MatchReport:
 					return BLACK;
 				default:
@@ -264,6 +267,8 @@ const textLinkKicker = (format: Format): string => {
 };
 
 const backgroundArticle = (format: Format): string => {
+	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
+		return neutral[93];
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.Editorial) return opinion[800];
@@ -345,6 +350,24 @@ const backgroundHeadlineByline = (format: Format): string => {
 const backgroundBullet = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
+};
+
+const backgroundHeader = (format: Format): string => {
+	switch (format.design) {
+		case Design.LiveBlog:
+			return pillarPalette[format.theme][400];
+		default:
+			return backgroundArticle(format);
+	}
+};
+
+const backgroundStandfirst = (format: Format): string => {
+	switch (format.design) {
+		case Design.LiveBlog:
+			return pillarPalette[format.theme][300];
+		default:
+			return backgroundArticle(format);
+	}
 };
 
 const fillCommentCount = (format: Format): string => {
@@ -473,6 +496,8 @@ export const decidePalette = (format: Format): Palette => {
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
+			header: backgroundHeader(format),
+			standfirst: backgroundStandfirst(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

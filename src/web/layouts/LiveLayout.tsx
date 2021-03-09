@@ -51,6 +51,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { ContainerLayout } from '../components/ContainerLayout';
 
 const LiveGrid = ({
 	children,
@@ -84,143 +85,57 @@ const LiveGrid = ({
 				${from.wide} {
 					grid-template-columns:
 						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
 						1fr /* Main content */
 						300px; /* Right Column */
-
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'lines media        right-column'
+						'meta  media        right-column'
+						'meta  body         right-column'
+						'.     .            right-column';
 				}
 
 				${until.wide} {
 					grid-template-columns:
 						140px /* Left Column */
-						1px /* Vertical grey border */
 						1fr /* Main content */
 						300px; /* Right Column */
-
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'lines media        right-column'
+						'meta  media        right-column'
+						'meta  body         right-column'
+						'.     .            right-column';
 				}
 
 				${until.leftCol} {
 					grid-template-columns:
 						1fr /* Main content */
 						300px; /* Right Column */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav      right-column'
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `}
+					grid-template-areas:
+						'media         right-column'
+						'lines         right-column'
+						'meta          right-column'
+						'body          right-column'
+						'.             right-column';
 				}
 
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'media'
+						'lines'
+						'meta'
+						'body';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
 
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'media'
+						'lines'
+						'meta'
+						'body';
 				}
 			}
 		`}
@@ -396,80 +311,75 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</Section>
 				</SendToBack>
 			</div>
+			<ContainerLayout
+				showTopBorder={false}
+				backgroundColour={palette.background.header}
+				borderColour="#9F2423"
+				sideBorders={true}
+				leftContent={
+					// eslint-disable-next-line react/jsx-wrap-multilines
+					<ArticleTitle
+						format={format}
+						palette={palette}
+						tags={CAPI.tags}
+						sectionLabel={CAPI.sectionLabel}
+						sectionUrl={CAPI.sectionUrl}
+						guardianBaseURL={CAPI.guardianBaseURL}
+						badge={CAPI.badge}
+					/>
+				}
+			>
+				<div className={maxWidth}>
+					<ArticleHeadlinePadding design={format.design}>
+						{age && (
+							<div className={ageWarningMargins}>
+								<AgeWarning age={age} />
+							</div>
+						)}
+						<ArticleHeadline
+							format={format}
+							headlineString={CAPI.headline}
+							tags={CAPI.tags}
+							byline={CAPI.author.byline}
+							palette={palette}
+						/>
+						{age && <AgeWarning age={age} isScreenReader={true} />}
+					</ArticleHeadlinePadding>
+				</div>
+				{CAPI.starRating || CAPI.starRating === 0 ? (
+					<div className={starWrapper}>
+						<StarRating rating={CAPI.starRating} size="large" />
+					</div>
+				) : (
+					<></>
+				)}
+			</ContainerLayout>
+			<ContainerLayout
+				showTopBorder={false}
+				backgroundColour={palette.background.standfirst}
+				borderColour="#8C2222"
+				sideBorders={true}
+			>
+				<ArticleStandfirst
+					display={format.display}
+					design={format.design}
+					pillar={format.theme}
+					standfirst={CAPI.standfirst}
+				/>
+			</ContainerLayout>
+
+			<ContainerLayout
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+				borderColour={neutral[86]}
+				sideBorders={true}
+			/>
 
 			<Section
-				data-print-layout="hide"
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 			>
 				<LiveGrid isMatchReport={isMatchReport}>
-					<GridItem area="title">
-						<ArticleTitle
-							format={format}
-							palette={palette}
-							tags={CAPI.tags}
-							sectionLabel={CAPI.sectionLabel}
-							sectionUrl={CAPI.sectionUrl}
-							guardianBaseURL={CAPI.guardianBaseURL}
-							badge={CAPI.badge}
-						/>
-					</GridItem>
-					<GridItem area="border">
-						<Border />
-					</GridItem>
-					<GridItem area="matchNav">
-						<div className={maxWidth}>
-							{format.design === Design.MatchReport &&
-								CAPI.matchUrl && (
-									<Placeholder
-										rootId="match-nav"
-										height={230}
-									/>
-								)}
-						</div>
-					</GridItem>
-					<GridItem area="headline">
-						<div className={maxWidth}>
-							<ArticleHeadlinePadding design={format.design}>
-								{age && (
-									<div className={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPI.headline}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-									palette={palette}
-								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
-									/>
-								)}
-							</ArticleHeadlinePadding>
-						</div>
-						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div className={starWrapper}>
-								<StarRating
-									rating={CAPI.starRating}
-									size="large"
-								/>
-							</div>
-						) : (
-							<></>
-						)}
-					</GridItem>
-					<GridItem area="standfirst">
-						<ArticleStandfirst
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
-							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
 					<GridItem area="media">
 						<div className={maxWidth}>
 							<MainMedia

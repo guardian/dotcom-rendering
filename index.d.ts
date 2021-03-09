@@ -75,6 +75,8 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		header: Colour;
+		standfirst: Colour;
 	},
 	fill: {
 		commentCount: Colour;
