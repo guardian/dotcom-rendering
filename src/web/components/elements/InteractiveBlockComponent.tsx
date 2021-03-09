@@ -7,6 +7,7 @@ type Props = {
 	url?: string;
 	scriptUrl?: string;
 	alt?: string;
+	role?: string;
 };
 
 /*
@@ -60,18 +61,28 @@ and is sent with all interactive elements in the scriptUrl from CAPI to do a two
 It has not been updated since 2016.
 
 MIGRATION FROM FRONTEND
-- TODO For the standard boot.js, we will re-write the behavior in modern JS to avoid the requirement of an AMD loader
+- For the standard boot.js, we have re-written the behavior in modern JS to avoid the requirement of an AMD loader
 and to avoid loading the boot.js file.
 - For all other files that do not load the standard boot.js, we'll add a AMD loader to the page
 
 For the remaining few we dynamically load and AMD loader and support the contract as defined with curl AMD loader
 
 */
-
-const wrapperStyle = css`
+const supportingMinHeight = 200;
+const inlineMinHeight = 500;
+const getMinHeight = (role: string, loaded: boolean) => {
+	if (loaded) {
+		return `auto`;
+	}
+	return role === 'supporting'
+		? `${supportingMinHeight}px`
+		: `${inlineMinHeight}px`;
+};
+const wrapperStyle = (role: string, loaded: boolean) => css`
 	${body.medium()};
+	background-color: ${neutral[100]};
 	font-weight: 300;
-	min-height: 500px;
+	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
 `;
 
@@ -113,13 +124,15 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 	window.addEventListener(
 		'message',
 		(event) => {
+			console.log(event);
 			if (event.source !== iframe.contentWindow) {
+				console.log('nope');
 				return;
 			}
 
 			// IE 8 + 9 only support strings
 			const message: Record<string, unknown> = JSON.parse(event.data);
-
+			console.log(message);
 			const postPositionMessage = (subscribe?: boolean) => {
 				const iframeBox = iframe.getBoundingClientRect();
 				postMessage({
@@ -139,13 +152,22 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 			// Actions
 			switch (message.type) {
 				case 'set-height':
-					iframe.height = message.value;
+					if (typeof message.value === 'number') {
+						iframe.height = message.value.toString();
+					}
 					break;
 				case 'navigate':
-					document.location.href = message.value;
+					if (typeof message.value === 'string') {
+						document.location.href = message.value;
+					}
 					break;
 				case 'scroll-to':
-					window.scrollTo(message.x, message.y);
+					if (
+						typeof message.x === 'number' &&
+						typeof message.y === 'number'
+					) {
+						window.scrollTo(message.x, message.y);
+					}
 					break;
 				case 'get-location':
 					postMessage({
@@ -189,10 +211,16 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 	);
 };
 
-export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
+export const InteractiveBlockComponent = ({
+	url,
+	scriptUrl,
+	alt,
+	role = 'inline',
+}: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
+	console.log(role);
 	useEffect(() => {
 		if (
 			scriptUrl ===
@@ -203,7 +231,10 @@ export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 			const iframe = document.createElement('iframe');
 			iframe.style.width = '100%';
 			iframe.style.border = 'none';
-			iframe.height = '500'; // default height
+			iframe.height =
+				role === 'supporting'
+					? supportingMinHeight.toString()
+					: inlineMinHeight.toString(); // default height
 			iframe.src = url;
 
 			setupWindowListeners(iframe);
@@ -241,7 +272,7 @@ export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 		<div
 			data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 			ref={wrapperRef}
-			className={wrapperStyle}
+			className={wrapperStyle(role, loaded)}
 		>
 			{!loaded && <div className={placeholderStyle} />}
 			{!loaded && (

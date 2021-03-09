@@ -583,6 +583,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						url={interactiveBlock.url}
 						scriptUrl={interactiveBlock.scriptUrl}
 						alt={interactiveBlock.alt}
+						role={interactiveBlock.role}
 					/>
 				</HydrateOnce>
 			))}
