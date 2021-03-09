@@ -290,6 +290,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.header}
 				borderColour={palette.border.headline}
 				sideBorders={true}
+				leftColSize="wide"
 				leftContent={
 					// eslint-disable-next-line react/jsx-wrap-multilines
 					<ArticleTitle
@@ -333,6 +334,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.standfirst}
 				borderColour={palette.border.standfirst}
 				sideBorders={true}
+				leftColSize="wide"
 			>
 				<Standfirst format={format} standfirst={CAPI.standfirst} />
 			</ContainerLayout>
@@ -342,6 +344,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.article}
 				borderColour={neutral[86]}
 				sideBorders={true}
+				leftColSize="wide"
 			/>
 
 			<Section
