@@ -53,6 +53,8 @@ const headerStyles = css`
 `;
 
 const bodyStyles = css`
+	padding-top: ${remSpace[2]};
+	padding-bottom: ${remSpace[2]};
 	iframe {
 		width: 100%;
 		border: none;
@@ -64,6 +66,9 @@ const bodyStyles = css`
 	}
 
 	${from.tablet} {
+		padding-top: 0;
+		padding-bottom: 0;
+
 		p {
 			margin: 0;
 			padding-top: ${remSpace[2]};
