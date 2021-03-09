@@ -57,7 +57,17 @@ const textSeriesTitle = (format: Format): string => {
 		case Display.Standard:
 			switch (format.design) {
 				case Design.LiveBlog:
-					return WHITE;
+					switch (format.theme) {
+						case Pillar.News:
+							return news[600];
+						case Pillar.Sport:
+						case Pillar.Lifestyle:
+						case Pillar.Culture:
+						case Pillar.Opinion:
+						case Special.Labs:
+						default:
+							return WHITE;
+					}
 				case Design.MatchReport:
 					return BLACK;
 				default:
