@@ -16,6 +16,7 @@ const HeaderImageCaptionStyles = (
 	iconBackgroundColor?: string,
 ): SerializedStyles => css`
 	summary {
+		display: block;
 		pointer-events: auto;
 		text-align: center;
 		background-color: ${iconBackgroundColor
