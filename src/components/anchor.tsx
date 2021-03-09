@@ -17,12 +17,14 @@ interface Props {
 	children?: ReactNode;
 	format: Format;
 	className?: SerializedStyles;
+	useDarkMode?: boolean;
 }
 
-const styles = css`
+const styles = (useDarkMode: boolean) => css`
 	text-decoration: none;
 
-	${darkModeCss`
+	${useDarkMode &&
+	darkModeCss`
         color: ${neutral[86]};
         border-color: ${neutral[46]};
     `}
@@ -53,8 +55,14 @@ const colour = (format: Format): SerializedStyles => {
 	}
 };
 
-const Anchor: FC<Props> = ({ format, children, href, className }: Props) => (
-	<a css={[styles, colour(format), className]} href={href}>
+const Anchor: FC<Props> = ({
+	format,
+	children,
+	href,
+	className,
+	useDarkMode = true,
+}: Props) => (
+	<a css={[styles(useDarkMode), colour(format), className]} href={href}>
 		{children}
 	</a>
 );

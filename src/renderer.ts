@@ -242,12 +242,14 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
-const textElement = (format: Format) => (
+const textElement = (format: Format, useDarkMode = true) => (
 	node: Node,
 	key: number,
 ): ReactNode => {
 	const text = node.textContent ?? '';
-	const children = Array.from(node.childNodes).map(textElement(format));
+	const children = Array.from(node.childNodes).map(
+		textElement(format, useDarkMode),
+	);
 	switch (node.nodeName) {
 		case 'P':
 			return h(Paragraph, { key, format }, children);
@@ -262,6 +264,7 @@ const textElement = (format: Format) => (
 					href: withDefault('')(getHref(node)),
 					format,
 					key,
+					useDarkMode,
 				},
 				transform(text, format),
 			);
@@ -353,9 +356,12 @@ const noLinksStandfirstTextElement = (format: Format) => (
 	}
 };
 
-const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format));
-
+const text = (
+	doc: DocumentFragment,
+	format: Format,
+	useDarkMode = true,
+): ReactNode[] =>
+	Array.from(doc.childNodes).map(textElement(format, useDarkMode));
 const standfirstText = (
 	doc: DocumentFragment,
 	format: Format,
@@ -468,10 +474,11 @@ const textRenderer = (
 	format: Format,
 	excludeStyles: boolean,
 	element: Text,
+	useDarkMode?: boolean,
 ): ReactNode => {
 	return excludeStyles
 		? Array.from(element.doc.childNodes).map(plainTextElement)
-		: text(element.doc, format);
+		: text(element.doc, format, useDarkMode);
 };
 
 const instagramRenderer = (element: Instagram): ReactNode => {
@@ -757,7 +764,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 ): ReactNode => {
 	switch (element.kind) {
 		case ElementKind.Text:
-			return textRenderer(format, excludeStyles, element);
+			return textRenderer(format, excludeStyles, element, false);
 
 		case ElementKind.Image:
 			return format.design === Design.Media
