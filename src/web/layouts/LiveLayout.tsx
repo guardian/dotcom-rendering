@@ -302,7 +302,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			<ContainerLayout
 				showTopBorder={false}
 				backgroundColour={palette.background.header}
-				borderColour="#9F2423"
+				borderColour={palette.border.headline}
 				sideBorders={true}
 				leftContent={
 					// eslint-disable-next-line react/jsx-wrap-multilines
@@ -345,7 +345,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			<ContainerLayout
 				showTopBorder={false}
 				backgroundColour={palette.background.standfirst}
-				borderColour="#8C2222"
+				borderColour={palette.border.standfirst}
 				sideBorders={true}
 			>
 				<Standfirst format={format} standfirst={CAPI.standfirst} />

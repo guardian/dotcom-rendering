@@ -472,6 +472,16 @@ const borderStandfirstLink = (format: Format): string => {
 	return border.secondary;
 };
 
+const borderHeadline = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return '#9F2423';
+	return border.secondary;
+};
+
+const borderStandfirst = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return '#8C2222';
+	return border.secondary;
+};
+
 const borderArticleLinkHover = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
@@ -536,6 +546,8 @@ export const decidePalette = (format: Format): Palette => {
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
 			standfirstLink: borderStandfirstLink(format),
+			headline: borderHeadline(format),
+			standfirst: borderStandfirst(format),
 		},
 		topBar: {
 			card: topBarCard(format),
