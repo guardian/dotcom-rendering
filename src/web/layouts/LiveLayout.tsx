@@ -70,7 +70,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				${from.desktop} {
+				${from.wide} {
 					grid-template-columns:
 						309px /* Left Column (220 - 1px border) */
 						1px /* Empty border for spacing */
@@ -81,6 +81,18 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'meta  border media        right-column'
 						'meta  border body         right-column'
 						'.     border .            right-column';
+				}
+
+				${from.desktop} {
+					grid-template-columns:
+						309px /* Left Column (220 - 1px border) */
+						1px /* Empty border for spacing */
+						1fr /* Main content */;
+					grid-template-areas:
+						'lines border media'
+						'meta  border media'
+						'meta  border body'
+						'.     border .';
 				}
 
 				${until.desktop} {
