@@ -109,7 +109,7 @@ export const Blocks: React.SFC<{
 			<WithAds
 				items={liveBlogBlocks}
 				adSlots={slotIndexes}
-				adCss=""
+				cssOverrides=""
 				adInfo={adInfo}
 			/>
 		</>

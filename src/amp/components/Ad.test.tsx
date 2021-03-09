@@ -40,7 +40,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				adCss=""
+				cssOverrides=""
 			/>,
 		);
 
@@ -94,7 +94,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				adCss=""
+				cssOverrides=""
 			/>,
 		);
 
@@ -139,7 +139,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				adCss=""
+				cssOverrides=""
 			/>,
 		);
 
@@ -185,7 +185,7 @@ describe('AdComponent', () => {
 				contentType={contentType}
 				config={commercialConfig}
 				commercialProperties={commercialProperties}
-				adCss=""
+				cssOverrides=""
 			/>,
 		);
 
