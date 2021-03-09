@@ -24,22 +24,18 @@ class LocalMessageCache {
 	}
 
 	shift(slotName: SlotName): Message | undefined {
-		const key = keyFromSlotName(slotName);
-		const queue = this.readQueue(key);
-		const unexpiredQueue = queue.filter((i) => hasNotExpired(i));
-		const topItem = unexpiredQueue.shift();
+		const queue = this.readQueue(slotName);
+		const topItem = queue.shift();
 
 		if (topItem) {
-			this.setQueue(slotName, unexpiredQueue);
+			this.setQueue(slotName, queue);
 			return topItem.message;
 		}
 	}
 
 	peek(slotName: SlotName): Message | undefined {
-		const key = keyFromSlotName(slotName);
-		const queue = this.readQueue(key);
-		const unexpiredQueue = queue.filter((i) => hasNotExpired(i));
-		const topItem = unexpiredQueue.shift();
+		const queue = this.readQueue(slotName);
+		const topItem = queue.shift();
 
 		if (topItem) {
 			return topItem.message;
@@ -47,8 +43,7 @@ class LocalMessageCache {
 	}
 
 	push(slotName: SlotName, message: Message) {
-		const key = keyFromSlotName(slotName);
-		const queue = this.readQueue(key);
+		const queue = this.readQueue(slotName);
 		const expires = Date.now() + millisecondsBeforeExpiry;
 
 		const messageToCache: CachedMessage = {
@@ -76,7 +71,19 @@ class LocalMessageCache {
 		this.store.setItem(key, JSON.stringify(queue));
 	}
 
-	private readQueue(key: string): CachedMessage[] {
+	private readQueue(slotName: SlotName): CachedMessage[] {
+		const queue = this.deserializeQueue(slotName);
+		const unexpiredQueue = queue.filter((i) => hasNotExpired(i));
+
+		if (queue.length !== unexpiredQueue.length) {
+			this.setQueue(slotName, unexpiredQueue);
+		}
+
+		return unexpiredQueue;
+	}
+
+	private deserializeQueue(slotName: SlotName) {
+		const key = keyFromSlotName(slotName);
 		const q = this.store.getItem(key);
 
 		if (q) {
