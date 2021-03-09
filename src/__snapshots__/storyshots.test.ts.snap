@@ -382,6 +382,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 .emotion-7 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #BB3B80;
@@ -413,18 +414,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-7 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-7 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -1594,6 +1583,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 .emotion-7 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #C70000;
@@ -1625,18 +1615,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-7 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-7 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -2871,6 +2849,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 .emotion-7 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #C70000;
@@ -2902,18 +2881,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-7 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-7 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -4029,6 +3996,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 .emotion-7 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #E05E00;
@@ -4060,18 +4028,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-7 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-7 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -5210,6 +5166,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 .emotion-7 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #0084C6;
@@ -5241,18 +5198,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-7 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-7 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -6301,6 +6246,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-7 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #C70000;
@@ -6332,18 +6278,6 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-7 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-7 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 .emotion-8 {
@@ -7156,6 +7090,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 .emotion-6 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #0084C6;
@@ -7187,18 +7122,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-6 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-6 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 .emotion-7 {
@@ -8441,6 +8364,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 .emotion-7 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #A1845C;
@@ -8472,18 +8396,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-7 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-7 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -9744,6 +9656,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 .emotion-9 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #C70000;
@@ -9775,18 +9688,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-9 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-9 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -11733,6 +11634,7 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
 }
 
 .emotion-2 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #C70000;
@@ -11764,18 +11666,6 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-2 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-2 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 .emotion-3 {
@@ -11907,6 +11797,7 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
 }
 
 .emotion-2 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #C70000;
@@ -11938,18 +11829,6 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-2 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-2 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
@@ -12122,6 +12001,7 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
 }
 
 .emotion-2 summary {
+  display: block;
   pointer-events: auto;
   text-align: center;
   background-color: #A1845C;
@@ -12153,18 +12033,6 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   line-height: 1.5;
   font-weight: 400;
   box-sizing: border-box;
-}
-
-@media (min-width:740px) {
-  .emotion-2 details[open] {
-    padding-left: 1.5rem;
-  }
-}
-
-@media (min-width:980px) {
-  .emotion-2 details[open] {
-    padding-left: 9rem;
-  }
 }
 
 @media (min-width:740px) {
