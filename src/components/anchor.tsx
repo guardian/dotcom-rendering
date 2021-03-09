@@ -20,7 +20,7 @@ interface Props {
 	useDarkMode?: boolean;
 }
 
-const styles = (useDarkMode: boolean): SerializedStyles  => css`
+const styles = (useDarkMode: boolean): SerializedStyles => css`
 	text-decoration: none;
 	${useDarkMode &&
 	darkModeCss`
