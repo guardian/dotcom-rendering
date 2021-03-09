@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import * as emotion from 'emotion';
-import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
+import * as emotion from 'emotion-legacy';
+import * as emotionCore from 'emotion-core-legacy';
+import * as emotionTheming from 'emotion-theming-legacy';
 
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 
