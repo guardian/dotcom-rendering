@@ -34,7 +34,7 @@ export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
 		// data-sort-time and id needed for amp-live-list validation
 		<div id={id} data-sort-time="1">
 			<Ad
-				className={adClassName}
+				adCss={adClassName}
 				edition={adInfo.edition}
 				section={adInfo.section}
 				contentType={adInfo.contentType}
