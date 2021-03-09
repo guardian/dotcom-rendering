@@ -76,25 +76,27 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				${from.wide} {
 					grid-template-columns:
 						219px /* Left Column (220 - 1px border) */
+						1px /* Empty border for spacing */
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'lines media        right-column'
-						'meta  media        right-column'
-						'meta  body         right-column'
-						'.     .            right-column';
+						'lines border media        right-column'
+						'meta  border media        right-column'
+						'meta  border body         right-column'
+						'.     border .            right-column';
 				}
 
 				${until.wide} {
 					grid-template-columns:
 						140px /* Left Column */
+						1px /* Empty border for spacing */
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'lines media        right-column'
-						'meta  media        right-column'
-						'meta  body         right-column'
-						'.     .            right-column';
+						'lines border media        right-column'
+						'meta  border media        right-column'
+						'meta  border body         right-column'
+						'.     border .            right-column';
 				}
 
 				${until.leftCol} {
@@ -374,6 +376,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								abTests={CAPI.config.abTests}
 							/>
 						</div>
+					</GridItem>
+					<GridItem area="border">
+						<></>
 					</GridItem>
 					<GridItem area="lines">
 						<div className={maxWidth}>
