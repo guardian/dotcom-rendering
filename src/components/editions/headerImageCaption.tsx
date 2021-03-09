@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { SvgCamera } from '@guardian/src-icons';
@@ -47,14 +46,6 @@ const HeaderImageCaptionStyles = (
 		color: ${neutral[100]};
 		${textSans.small()};
 		box-sizing: border-box;
-
-		${from.tablet} {
-			padding-left: ${remSpace[6]};
-		}
-
-		${from.desktop} {
-			padding-left: 9rem;
-		}
 	}
 	pointer-events: none;
 	position: absolute;
