@@ -20,11 +20,11 @@ interface AdInfo {
 type Props = {
 	items: JSX.Element[];
 	adSlots: number[];
-	adClassName: string;
+	adCss: string;
 	adInfo: AdInfo;
 };
 
-export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
+export const WithAds = ({ items, adSlots, adCss, adInfo }: Props) => {
 	const commercialConfig = {
 		usePrebid: adInfo.switches.ampPrebid,
 		usePermutive: adInfo.switches.permutive,
@@ -34,7 +34,7 @@ export const WithAds = ({ items, adSlots, adClassName, adInfo }: Props) => {
 		// data-sort-time and id needed for amp-live-list validation
 		<div id={id} data-sort-time="1">
 			<Ad
-				adCss={adClassName}
+				adCss={adCss}
 				edition={adInfo.edition}
 				section={adInfo.section}
 				contentType={adInfo.contentType}
