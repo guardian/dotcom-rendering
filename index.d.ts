@@ -65,6 +65,8 @@ type Palette = {
 		cardStandfirst: Colour;
 		cardFooter: Colour;
 		headlineByline: Colour;
+		standfirst: Colour;
+		standfirstLink: Colour;
 	},
 	background: {
 		article: Colour;
@@ -75,6 +77,7 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		standfirst: Colour;
 	},
 	fill: {
 		commentCount: Colour;
@@ -88,6 +91,7 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		liveBlock: Colour;
+		standfirstLink: Colour;
 	},
 	topBar: {
 		card: Colour;

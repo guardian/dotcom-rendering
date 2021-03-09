@@ -90,6 +90,11 @@ const textHeadlineByline = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const textStandfirst = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return WHITE;
+	return BLACK;
+};
+
 const textTwitterHandle = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
@@ -131,6 +136,18 @@ const textSyndicationButton = (format: Format): string => {
 };
 
 const textArticleLink = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[400];
+	switch (format.theme) {
+		case Pillar.Opinion:
+		case Pillar.Culture:
+			return pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
+const textStandfirstLink = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return WHITE;
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -347,6 +364,12 @@ const backgroundBullet = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundStandfirst = (format: Format): string => {
+	if (format.design === Design.LiveBlog)
+		return pillarPalette[format.theme][300];
+	return 'transparent';
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -430,6 +453,12 @@ const borderArticleLink = (format: Format): string => {
 	return border.secondary;
 };
 
+const borderStandfirstLink = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return WHITE;
+	if (format.theme === Special.SpecialReport) return specialReport[400];
+	return border.secondary;
+};
+
 const borderArticleLinkHover = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
@@ -467,6 +496,8 @@ export const decidePalette = (format: Format): Palette => {
 			cardStandfirst: textCardStandfirst(format),
 			cardFooter: textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
+			standfirst: textStandfirst(format),
+			standfirstLink: textStandfirstLink(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -477,6 +508,7 @@ export const decidePalette = (format: Format): Palette => {
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
+			standfirst: backgroundStandfirst(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -490,6 +522,7 @@ export const decidePalette = (format: Format): Palette => {
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
 			liveBlock: borderLiveBlock(format),
+			standfirstLink: borderStandfirstLink(format),
 		},
 		topBar: {
 			card: topBarCard(format),

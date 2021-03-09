@@ -23,7 +23,7 @@ import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
+import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -446,10 +446,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							)}
 						</GridItem>
 						<GridItem area="standfirst">
-							<ArticleStandfirst
-								display={format.display}
-								design={format.design}
-								pillar={format.theme}
+							<Standfirst
+								format={format}
 								standfirst={CAPI.standfirst}
 							/>
 						</GridItem>
