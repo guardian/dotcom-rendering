@@ -11,6 +11,8 @@ type CachedMessage = {
 	expires: number; // Expiry date in Unix time
 };
 
+const MAX_QUEUE_SIZE = 2;
+
 const keyFromSlotName = (slotName: SlotName): string =>
 	`${localStorageKeyBase}.${slotName}`;
 
@@ -66,18 +68,24 @@ class LocalMessageCache {
 		}
 	}
 
-	static push(slotName: SlotName, message: Message) {
+	static push(slotName: SlotName, message: Message): boolean {
 		const queue = getQueue(slotName);
-		const expires = Date.now() + millisecondsBeforeExpiry;
 
-		const messageToCache: CachedMessage = {
-			message,
-			expires,
-		};
+		if (queue.length < MAX_QUEUE_SIZE) {
+			const expires = Date.now() + millisecondsBeforeExpiry;
 
-		queue.push(messageToCache);
+			const messageToCache: CachedMessage = {
+				message,
+				expires,
+			};
 
-		setQueue(slotName, queue);
+			queue.push(messageToCache);
+
+			setQueue(slotName, queue);
+			return true;
+		}
+
+		return false;
 	}
 
 	static clear() {
