@@ -22,7 +22,7 @@ const ulStyles = css`
 `;
 
 const liStyles = css`
-	padding: 0 3px 6px 0;
+	padding-right: 3px;
 	float: left;
 	min-width: 32px;
 	cursor: pointer;
