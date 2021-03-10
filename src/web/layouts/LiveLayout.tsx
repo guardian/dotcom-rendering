@@ -56,14 +56,11 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
-			${until.leftCol} {
+			${until.desktop} {
 				margin-left: 0px;
 			}
-			${from.leftCol} {
-				margin-left: 151px;
-			}
-			${from.wide} {
-				margin-left: 230px;
+			${from.desktop} {
+				margin-left: 320px;
 			}
 
 			@supports (display: grid) {
@@ -75,10 +72,10 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${from.wide} {
 					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
+						309px /* Left Column (220 - 1px border) */
 						1px /* Empty border for spacing */
 						1fr /* Main content */
-						300px; /* Right Column */
+						340px; /* Right Column */
 					grid-template-areas:
 						'lines border media        right-column'
 						'meta  border media        right-column'
@@ -86,29 +83,16 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.     border .            right-column';
 				}
 
-				${until.wide} {
+				${from.desktop} {
 					grid-template-columns:
-						140px /* Left Column */
+						309px /* Left Column (220 - 1px border) */
 						1px /* Empty border for spacing */
-						1fr /* Main content */
-						300px; /* Right Column */
+						1fr /* Main content */;
 					grid-template-areas:
-						'lines border media        right-column'
-						'meta  border media        right-column'
-						'meta  border body         right-column'
-						'.     border .            right-column';
-				}
-
-				${until.leftCol} {
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
-					grid-template-areas:
-						'media         right-column'
-						'lines         right-column'
-						'meta          right-column'
-						'body          right-column'
-						'.             right-column';
+						'lines border media'
+						'meta  border media'
+						'meta  border body'
+						'.     border .';
 				}
 
 				${until.desktop} {
@@ -306,6 +290,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.header}
 				borderColour={palette.border.headline}
 				sideBorders={true}
+				leftColSize="wide"
 				leftContent={
 					// eslint-disable-next-line react/jsx-wrap-multilines
 					<ArticleTitle
@@ -349,6 +334,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.standfirst}
 				borderColour={palette.border.standfirst}
 				sideBorders={true}
+				leftColSize="wide"
 			>
 				<Standfirst format={format} standfirst={CAPI.standfirst} />
 			</ContainerLayout>
@@ -358,6 +344,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.article}
 				borderColour={neutral[86]}
 				sideBorders={true}
+				leftColSize="wide"
 			/>
 
 			<Section
