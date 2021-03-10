@@ -8,7 +8,7 @@ type CoreWebVitalsPayload = {
 	fid: null | number;
 	cls: null | number;
 	lcp: null | number;
-	fcp: null | number;
+	fcp: null | number; // Report as a DOMHighResTimeStamp
 	ttfb: null | number;
 };
 
@@ -27,6 +27,16 @@ const jsonData: CoreWebVitalsPayload = {
 	ttfb: null,
 };
 
+let hasBeenSent = false;
+
+// Can be tested locally or on prod
+const endpoint =
+	window.location.hostname === 'm.code.dev-theguardian.com' ||
+	window.location.hostname === 'localhost' ||
+	window.location.hostname === 'preview.gutools.co.uk'
+		? 'http://performance-events.code.dev-guardianapis.com/core-web-vitals'
+		: 'https://performance-events.guardianapis.com/core-web-vitals';
+
 export const coreVitals = (): void => {
 	type CoreVitalsArgs = {
 		name: string;
@@ -36,6 +46,7 @@ export const coreVitals = (): void => {
 	const addToJson = ({ name, value }: CoreVitalsArgs): void => {
 		switch (name) {
 			case 'FCP':
+				// We do this calculation as Biq Query only allows 9 numbers
 				jsonData.fcp = Math.round(value * 1000000) / 1000000;
 				break;
 			case 'CLS':
@@ -52,20 +63,16 @@ export const coreVitals = (): void => {
 				break;
 		}
 
-		const endpoint =
-			window.location.hostname === 'm.code.dev-theguardian.com' ||
-			window.location.hostname === 'localhost' ||
-			window.location.hostname === 'preview.gutools.co.uk'
-				? 'http://performance-events.code.dev-guardianapis.com/core-web-vitals'
-				: 'https://performance-events.guardianapis.com/core-web-vitals';
+		// Set page view and browser ID
+		if (window.guardian.config.ophan.browserId && window.guardian.ophan) {
+			jsonData.page_view_id = window.guardian.ophan.pageViewId;
+			jsonData.browser_id = window.guardian.config.ophan.browserId;
+		}
 
-		// If CLS has been calculated
-		if (jsonData.cls !== null) {
-			// Set page view and browser ID
-			if (window.guardian && window.guardian.ophan) {
-				jsonData.page_view_id = window.guardian.ophan.pageViewId;
-				jsonData.browser_id = window.guardian.config.ophan.browserId;
-
+		// Check if POST has been sent
+		if (!hasBeenSent) {
+			// If CLS has been calculated
+			if (jsonData.cls !== null) {
 				fetch(endpoint, {
 					method: 'POST', // *GET, POST, PUT, DELETE, etc.
 					mode: 'cors', // no-cors, *cors, same-origin
@@ -78,6 +85,9 @@ export const coreVitals = (): void => {
 					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
 					body: JSON.stringify(jsonData),
 				}).catch(() => {});
+
+				// Should stop duplicate events being sent
+				hasBeenSent = true;
 			}
 		}
 	};
