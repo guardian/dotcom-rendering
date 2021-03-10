@@ -67,6 +67,7 @@ type Palette = {
 		headlineByline: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
+		branding: Colour;
 	},
 	background: {
 		article: Colour;

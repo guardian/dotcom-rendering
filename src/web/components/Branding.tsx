@@ -3,7 +3,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 
 import { css } from 'emotion';
 import { neutral } from '@guardian/src-foundations';
-import { pillarPalette } from '@root/src/lib/pillars';
 import { until } from '@guardian/src-foundations/mq';
 
 const brandingStyle = css`
@@ -27,8 +26,8 @@ const brandingLogoStyle = css`
 	}
 `;
 
-const brandingAboutLink = (pillar: Theme) => css`
-	color: ${pillarPalette[pillar].main};
+const brandingAboutLink = (palette: Palette) => css`
+	color: ${palette.text.branding};
 	${textSans.xsmall()}
 	display: block;
 	text-decoration: none;
@@ -39,8 +38,8 @@ const brandingAboutLink = (pillar: Theme) => css`
 
 export const Branding: React.FC<{
 	branding: Branding;
-	pillar: Theme;
-}> = ({ branding, pillar }) => {
+	palette: Palette;
+}> = ({ branding, palette }) => {
 	if (!branding) return null;
 	return (
 		<div className={brandingStyle}>
@@ -58,7 +57,7 @@ export const Branding: React.FC<{
 
 			<a
 				href={branding.aboutThisLink}
-				className={brandingAboutLink(pillar)}
+				className={brandingAboutLink(palette)}
 			>
 				About this content
 			</a>

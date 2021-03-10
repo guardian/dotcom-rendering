@@ -171,6 +171,10 @@ const textStandfirstLink = (format: Format): string => {
 	}
 };
 
+const textBranding = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 const textArticleLinkHover = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.theme) {
@@ -531,6 +535,7 @@ export const decidePalette = (format: Format): Palette => {
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
+			branding: textBranding(format),
 		},
 		background: {
 			article: backgroundArticle(format),
