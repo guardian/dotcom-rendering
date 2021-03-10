@@ -8,7 +8,6 @@ import { withDefault } from '@guardian/types';
 import type { Generic } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import React from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
