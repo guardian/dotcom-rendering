@@ -6,6 +6,13 @@ import { useApi } from '@root/src/web/lib/api';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { Design, Display } from '@guardian/types';
 
+type Props = {
+	element: RichLinkBlockElement;
+	pillar: Theme;
+	ajaxEndpoint: string;
+	richLinkIndex: number;
+};
+
 type CardStyle =
 	| 'special-report'
 	| 'live'
@@ -42,12 +49,11 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 	return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
 };
 
-export const RichLinkComponent: React.FC<{
-	element: RichLinkBlockElement;
-	pillar: Theme;
-	ajaxEndpoint: string;
-	richLinkIndex: number;
-}> = ({ element, ajaxEndpoint, richLinkIndex }) => {
+export const RichLinkComponent = ({
+	element,
+	ajaxEndpoint,
+	richLinkIndex,
+}: Props) => {
 	const url = buildUrl(element, ajaxEndpoint);
 	const { data, loading, error } = useApi<CAPIRichLinkType>(url);
 
