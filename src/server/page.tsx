@@ -1,6 +1,9 @@
 // ----- Imports ----- //
 
-import { CacheProvider } from '@emotion/core';
+import { cache } from '@emotion/css';
+import { CacheProvider } from '@emotion/react';
+import { extractCritical } from '@emotion/server';
+import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
 import { Design, Display, map, none, some } from '@guardian/types';
@@ -11,9 +14,6 @@ import { atomCss, atomScript } from 'components/atoms/interactiveAtom';
 import Body from 'components/body';
 import Meta from 'components/meta';
 import Scripts from 'components/scripts';
-import type { EmotionCritical } from 'create-emotion-server';
-import { cache } from 'emotion';
-import { extractCritical } from 'emotion-server';
 import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';

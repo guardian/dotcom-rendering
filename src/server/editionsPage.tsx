@@ -1,6 +1,9 @@
 // ----- Imports ----- //
 
-import { CacheProvider } from '@emotion/core';
+import { cache } from '@emotion/css';
+import { CacheProvider } from '@emotion/react';
+import { extractCritical } from '@emotion/server';
+import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Option } from '@guardian/types';
 import { map, none, some } from '@guardian/types';
@@ -8,9 +11,6 @@ import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import Article from 'components/editions/article';
 import Scripts from 'components/scripts';
-import type { EmotionCritical } from 'create-emotion-server';
-import { cache } from 'emotion';
-import { extractCritical } from 'emotion-server';
 import type { Item } from 'item';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';

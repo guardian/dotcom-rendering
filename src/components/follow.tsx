@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';

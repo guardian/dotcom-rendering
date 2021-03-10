@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { remSpace } from '@guardian/src-foundations';
@@ -13,7 +13,6 @@ import {
 } from '@guardian/src-foundations/palette';
 import { body, headline } from '@guardian/src-foundations/typography';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
-import { ThemeProvider } from 'emotion-theming';
 import { acquisitionsClient } from 'native/nativeApi';
 import { useEffect, useRef, useState } from 'react';
 import { darkModeCss } from 'styles';

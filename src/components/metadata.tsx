@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { Design, Display } from '@guardian/types';
 import Avatar from 'components/avatar';

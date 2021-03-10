@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background } from '@guardian/src-foundations/palette';
 import Headline from 'components/headline';

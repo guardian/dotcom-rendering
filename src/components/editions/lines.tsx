@@ -1,6 +1,6 @@
 // ----- Imports ----- //
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { Lines } from '@guardian/src-ed-lines';
 import type { FC } from 'react';
 import { borderWidthStyles } from './styles';

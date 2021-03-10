@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';

@@ -1,5 +1,5 @@
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { neutral } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { ReactElement } from 'react';
