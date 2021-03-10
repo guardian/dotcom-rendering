@@ -8,7 +8,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until, between } from '@guardian/src-foundations/mq';
-import { Design, Display, Pillar } from '@guardian/types';
+import { Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
@@ -321,38 +321,5 @@ export const RichLink = ({
 				</a>
 			</div>
 		</div>
-	);
-};
-
-type DefaultProps = {
-	index: number;
-	headlineText: string;
-	url: string;
-	isPlaceholder?: boolean;
-};
-
-export const DefaultRichLink: React.FC<DefaultProps> = ({
-	index,
-	headlineText,
-	url,
-	isPlaceholder,
-}) => {
-	return (
-		<RichLink
-			richLinkIndex={index}
-			cardStyle="news"
-			thumbnailUrl=""
-			headlineText={headlineText}
-			contentType="article"
-			url={url}
-			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
-			}}
-			tags={[]}
-			sponsorName=""
-			isPlaceholder={isPlaceholder}
-		/>
 	);
 };

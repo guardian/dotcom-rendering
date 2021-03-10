@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { RichLink, DefaultRichLink } from '@root/src/web/components/RichLink';
+import { RichLink } from '@root/src/web/components/RichLink';
+import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 
 import { useApi } from '@root/src/web/lib/api';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
