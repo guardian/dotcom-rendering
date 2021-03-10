@@ -13,23 +13,8 @@ type Props = {
 	richLinkIndex: number;
 };
 
-type CardStyle =
-	| 'special-report'
-	| 'live'
-	| 'dead'
-	| 'feature'
-	| 'editorial'
-	| 'comment'
-	| 'podcast'
-	| 'media'
-	| 'analysis'
-	| 'review'
-	| 'letters'
-	| 'external'
-	| 'news';
-
 interface CAPIRichLinkType {
-	cardStyle: CardStyle;
+	cardStyle: RichLinkCardType;
 	thumbnailUrl: string;
 	headline: string;
 	contentType: ContentType;

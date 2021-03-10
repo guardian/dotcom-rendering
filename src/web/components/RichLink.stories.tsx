@@ -9,9 +9,6 @@ import { Flex } from '@frontend/web/components/Flex';
 
 import { RichLink } from './RichLink';
 
-// cardStyle = "news" | "special-report" | "live" | "dead" | "feature" | "editorial" | "comment" | "podcast" | "media" | "analysis" | "review" | "letters" | "external"
-// ContentType = "article" | "network" | "section" | "imageContent" | "interactive" | "gallery" | "video" | "audio" | "liveBlog" | "tag" | "index" | "crossword" | "survey" | "signup" | "userid"
-
 const someImage =
 	'https://i.guim.co.uk/img/media/268d42accabbe8168fdbdee51ad31ab2f156b211/137_0_2088_1253/master/2088.jpg?width=460&quality=85&auto=format&fit=max&s=cf5abc39fb2af7a56b10306df21ab8e6';
 const someContributor =

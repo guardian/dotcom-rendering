@@ -20,26 +20,11 @@ import { Hide } from '@root/src/web/components/Hide';
 import { Avatar } from '@frontend/web/components/Avatar';
 import { decidePalette } from '../lib/decidePalette';
 
-type CardStyle =
-	| 'special-report'
-	| 'live'
-	| 'dead'
-	| 'feature'
-	| 'editorial'
-	| 'comment'
-	| 'podcast'
-	| 'media'
-	| 'analysis'
-	| 'review'
-	| 'letters'
-	| 'external'
-	| 'news';
-
 type ColourType = string;
 
 interface Props {
 	richLinkIndex: number;
-	cardStyle: CardStyle;
+	cardStyle: RichLinkCardType;
 	thumbnailUrl: string;
 	headlineText: string;
 	contentType: ContentType;
