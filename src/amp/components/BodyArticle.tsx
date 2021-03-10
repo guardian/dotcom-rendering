@@ -118,41 +118,52 @@ export const Body: React.FC<{
 		<>{elementsWithoutAds}</>
 	) : (
 		<>
-			{elementsWithoutAds.map((item, i) => (
-				<>
-					{slotIndexes.includes(i) && item}
-					<div
-						id={`ad-${i + 1}`}
-						data-sort-time="1"
-						className={adStyle}
-					>
-						<Ad
-							adRegion="US"
-							edition={data.editionId}
-							section={data.sectionName || ''}
-							contentType={adInfo.contentType}
-							config={adConfig}
-							commercialProperties={adInfo.commercialProperties}
-						/>
-						<Ad
-							adRegion="AU"
-							edition={data.editionId}
-							section={data.sectionName || ''}
-							contentType={adInfo.contentType}
-							config={adConfig}
-							commercialProperties={adInfo.commercialProperties}
-						/>
-						<Ad
-							adRegion="ROW"
-							edition={data.editionId}
-							section={data.sectionName || ''}
-							contentType={adInfo.contentType}
-							config={adConfig}
-							commercialProperties={adInfo.commercialProperties}
-						/>
-					</div>
-				</>
-			))}
+			{elementsWithoutAds.map((item, i) => {
+				if (slotIndexes.includes(i)) {
+					return (
+						<>
+							{item}
+							<div
+								id={`ad-${i + 1}`}
+								data-sort-time="1"
+								className={adStyle}
+							>
+								<Ad
+									adRegion="US"
+									edition={data.editionId}
+									section={data.sectionName || ''}
+									contentType={adInfo.contentType}
+									config={adConfig}
+									commercialProperties={
+										adInfo.commercialProperties
+									}
+								/>
+								<Ad
+									adRegion="AU"
+									edition={data.editionId}
+									section={data.sectionName || ''}
+									contentType={adInfo.contentType}
+									config={adConfig}
+									commercialProperties={
+										adInfo.commercialProperties
+									}
+								/>
+								<Ad
+									adRegion="ROW"
+									edition={data.editionId}
+									section={data.sectionName || ''}
+									contentType={adInfo.contentType}
+									config={adConfig}
+									commercialProperties={
+										adInfo.commercialProperties
+									}
+								/>
+							</div>
+						</>
+					);
+				}
+				return item;
+			})}
 			<div
 				id="clean-blocks"
 				data-sort-time="1"

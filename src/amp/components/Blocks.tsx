@@ -136,41 +136,47 @@ export const Blocks: React.SFC<{
 	};
 	return (
 		<>
-			{liveBlogBlocks.map((item, i) => (
-				<>
-					{slotIndexes.includes(i) && item}
-					<div
-						id={`ad-${i + 1}`}
-						data-sort-time="1"
-						className={adStyle}
-					>
-						<Ad
-							adRegion="US"
-							edition={edition}
-							section={section || ''}
-							contentType={contentType}
-							config={adConfig}
-							commercialProperties={commercialProperties}
-						/>
-						<Ad
-							adRegion="AU"
-							edition={edition}
-							section={section || ''}
-							contentType={contentType}
-							config={adConfig}
-							commercialProperties={commercialProperties}
-						/>
-						<Ad
-							adRegion="ROW"
-							edition={edition}
-							section={section || ''}
-							contentType={contentType}
-							config={adConfig}
-							commercialProperties={commercialProperties}
-						/>
-					</div>
-				</>
-			))}
+			{liveBlogBlocks.map((item, i) => {
+				if (slotIndexes.includes(i)) {
+					return (
+						<>
+							{item}
+							<div
+								id={`ad-${i + 1}`}
+								data-sort-time="1"
+								className={adStyle}
+							>
+								<Ad
+									adRegion="US"
+									edition={edition}
+									section={section || ''}
+									contentType={contentType}
+									config={adConfig}
+									commercialProperties={commercialProperties}
+								/>
+								<Ad
+									adRegion="AU"
+									edition={edition}
+									section={section || ''}
+									contentType={contentType}
+									config={adConfig}
+									commercialProperties={commercialProperties}
+								/>
+								<Ad
+									adRegion="ROW"
+									edition={edition}
+									section={section || ''}
+									contentType={contentType}
+									config={adConfig}
+									commercialProperties={commercialProperties}
+								/>
+							</div>
+						</>
+					);
+				}
+
+				return item;
+			})}
 			<div
 				id="clean-blocks"
 				data-sort-time="1"
