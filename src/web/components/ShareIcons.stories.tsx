@@ -30,6 +30,7 @@ export const Medium = () => {
 				design: Design.Article,
 				display: Display.Standard,
 			})}
+			size="medium"
 		/>
 	);
 };

@@ -19,7 +19,7 @@ type Props = {
 	webTitle: string;
 	displayIcons: SharePlatform[];
 	palette: Palette;
-	size?: ShareIconSize;
+	size: ShareIconSize;
 };
 
 const ulStyles = css`
@@ -88,7 +88,7 @@ export const ShareIcons = ({
 	webTitle,
 	displayIcons,
 	palette,
-	size = 'medium',
+	size,
 }: Props) => {
 	return (
 		<ul className={ulStyles}>

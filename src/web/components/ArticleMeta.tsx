@@ -281,6 +281,7 @@ export const ArticleMeta = ({
 							webTitle={webTitle}
 							palette={palette}
 							displayIcons={['facebook', 'twitter', 'email']}
+							size="medium"
 						/>
 					</div>
 					<div className={metaNumbers}>
