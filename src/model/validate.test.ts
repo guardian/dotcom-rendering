@@ -19,17 +19,11 @@ describe('validate', () => {
 
 	urlsToTest.forEach((url) => {
 		it('confirm valid data', () => {
-			return (
-				fetch(url)
-					.then((response) => response.json())
-					// .then(function (theJson) {
-					// 	console.log(theJson);
-					// 	return theJson;
-					// })
-					.then((myJson) => {
-						expect(validateAsCAPIType(myJson)).toBe(myJson);
-					})
-			);
+			return fetch(url)
+				.then((response) => response.json())
+				.then((myJson) => {
+					expect(validateAsCAPIType(myJson)).toBe(myJson);
+				});
 		});
 	});
 });
