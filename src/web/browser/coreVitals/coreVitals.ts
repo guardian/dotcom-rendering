@@ -63,16 +63,19 @@ export const coreVitals = (): void => {
 				break;
 		}
 
-		// Set page view and browser ID
-		if (window.guardian.config.ophan.browserId && window.guardian.ophan) {
-			jsonData.page_view_id = window.guardian.ophan.pageViewId;
-			jsonData.browser_id = window.guardian.config.ophan.browserId;
-		}
-
 		// Check if POST has been sent
 		if (!hasBeenSent) {
 			// If CLS has been calculated
 			if (jsonData.cls !== null) {
+				// Set page view and browser ID
+				if (
+					window.guardian.config.ophan.browserId &&
+					window.guardian.ophan
+				) {
+					jsonData.page_view_id = window.guardian.ophan.pageViewId;
+					jsonData.browser_id =
+						window.guardian.config.ophan.browserId;
+				}
 				fetch(endpoint, {
 					method: 'POST', // *GET, POST, PUT, DELETE, etc.
 					mode: 'cors', // no-cors, *cors, same-origin
