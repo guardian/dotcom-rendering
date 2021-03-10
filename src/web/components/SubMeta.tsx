@@ -196,6 +196,7 @@ export const SubMeta = ({
 							'whatsApp',
 							'messenger',
 						]}
+						size="medium"
 					/>
 					<div className={syndicationButtonOverrides(palette)}>
 						<LinkButton
