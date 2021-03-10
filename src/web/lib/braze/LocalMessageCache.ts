@@ -1,4 +1,5 @@
 import type appboy from '@braze/web-sdk-core';
+import { storage } from '@guardian/libs';
 import { SlotName, SlotNames } from './BrazeMessages';
 
 const localStorageKeyBase = 'gu.brazeMessageCache';
@@ -16,25 +17,48 @@ const keyFromSlotName = (slotName: SlotName): string =>
 const hasNotExpired = (cachedMessage: CachedMessage) =>
 	cachedMessage.expires > Date.now();
 
+// setQueue is effectively private, but it's useful to expose it publicly
+// so that we can use it in the tests
+const setQueue = (slotName: SlotName, queue: CachedMessage[]) => {
+	const key = keyFromSlotName(slotName);
+	storage.local.set(key, queue);
+};
+
+const readQueue = (slotName: SlotName) => {
+	const key = keyFromSlotName(slotName);
+	const queue = storage.local.get(key);
+
+	if (Array.isArray(queue)) {
+		return queue;
+	}
+
+	return [];
+};
+
+const getQueue = (slotName: SlotName): CachedMessage[] => {
+	const queue = readQueue(slotName);
+	const unexpiredQueue = queue.filter((i) => hasNotExpired(i));
+
+	if (queue.length !== unexpiredQueue.length) {
+		setQueue(slotName, unexpiredQueue);
+	}
+
+	return unexpiredQueue;
+};
+
 class LocalMessageCache {
-	store: Storage;
-
-	constructor(store: Storage) {
-		this.store = store;
-	}
-
-	shift(slotName: SlotName): Message | undefined {
-		const queue = this.readQueue(slotName);
+	static shift(slotName: SlotName): Message | undefined {
+		const queue = getQueue(slotName);
 		const topItem = queue.shift();
 
 		if (topItem) {
-			this.setQueue(slotName, queue);
+			setQueue(slotName, queue);
 			return topItem.message;
 		}
 	}
 
-	peek(slotName: SlotName): Message | undefined {
-		const queue = this.readQueue(slotName);
+	static peek(slotName: SlotName): Message | undefined {
+		const queue = getQueue(slotName);
 		const topItem = queue.shift();
 
 		if (topItem) {
@@ -42,8 +66,8 @@ class LocalMessageCache {
 		}
 	}
 
-	push(slotName: SlotName, message: Message) {
-		const queue = this.readQueue(slotName);
+	static push(slotName: SlotName, message: Message) {
+		const queue = getQueue(slotName);
 		const expires = Date.now() + millisecondsBeforeExpiry;
 
 		const messageToCache: CachedMessage = {
@@ -53,49 +77,16 @@ class LocalMessageCache {
 
 		queue.push(messageToCache);
 
-		this.setQueue(slotName, queue);
+		setQueue(slotName, queue);
 	}
 
-	clear() {
+	static clear() {
 		// eslint-disable-next-line guard-for-in
 		for (const slotName in SlotNames) {
 			const key = keyFromSlotName(slotName as SlotName);
-			this.store.removeItem(key);
+			storage.local.remove(key);
 		}
-	}
-
-	// setQueue is effectively private, but it's useful to expose it publically
-	// so that we can use it in the tests
-	setQueue(slotName: SlotName, queue: CachedMessage[]) {
-		const key = keyFromSlotName(slotName);
-		this.store.setItem(key, JSON.stringify(queue));
-	}
-
-	private readQueue(slotName: SlotName): CachedMessage[] {
-		const queue = this.deserializeQueue(slotName);
-		const unexpiredQueue = queue.filter((i) => hasNotExpired(i));
-
-		if (queue.length !== unexpiredQueue.length) {
-			this.setQueue(slotName, unexpiredQueue);
-		}
-
-		return unexpiredQueue;
-	}
-
-	private deserializeQueue(slotName: SlotName) {
-		const key = keyFromSlotName(slotName);
-		const q = this.store.getItem(key);
-
-		if (q) {
-			const queue = JSON.parse(q);
-
-			if (Array.isArray(queue)) {
-				return queue;
-			}
-		}
-
-		return [];
 	}
 }
 
-export { LocalMessageCache, CachedMessage };
+export { LocalMessageCache, CachedMessage, setQueue };
