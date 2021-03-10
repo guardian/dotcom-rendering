@@ -77,6 +77,7 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		header: Colour;
 		standfirst: Colour;
 	},
 	fill: {
@@ -91,6 +92,8 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		standfirstLink: Colour;
+		headline: Colour;
+		standfirst: Colour;
 	},
 	topBar: {
 		card: Colour;

@@ -9,7 +9,6 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -32,11 +31,9 @@ import { Section } from '@root/src/web/components/Section';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
-import { Placeholder } from '@frontend/web/components/Placeholder';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -51,14 +48,9 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { ContainerLayout } from '../components/ContainerLayout';
 
-const LiveGrid = ({
-	children,
-	isMatchReport,
-}: {
-	children: React.ReactNode;
-	isMatchReport: boolean;
-}) => (
+const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
 			/* IE Fallback */
@@ -84,143 +76,59 @@ const LiveGrid = ({
 				${from.wide} {
 					grid-template-columns:
 						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
+						1px /* Empty border for spacing */
 						1fr /* Main content */
 						300px; /* Right Column */
-
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'lines border media        right-column'
+						'meta  border media        right-column'
+						'meta  border body         right-column'
+						'.     border .            right-column';
 				}
 
 				${until.wide} {
 					grid-template-columns:
 						140px /* Left Column */
-						1px /* Vertical grey border */
+						1px /* Empty border for spacing */
 						1fr /* Main content */
 						300px; /* Right Column */
-
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'lines border media        right-column'
+						'meta  border media        right-column'
+						'meta  border body         right-column'
+						'.     border .            right-column';
 				}
 
 				${until.leftCol} {
 					grid-template-columns:
 						1fr /* Main content */
 						300px; /* Right Column */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav      right-column'
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `}
+					grid-template-areas:
+						'media         right-column'
+						'lines         right-column'
+						'meta          right-column'
+						'body          right-column'
+						'.             right-column';
 				}
 
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'media'
+						'lines'
+						'meta'
+						'body';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
 
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'media'
+						'lines'
+						'meta'
+						'body';
 				}
 			}
 		`}
@@ -314,9 +222,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const isMatchReport =
-		format.design === Design.MatchReport && !!CAPI.matchUrl;
-
 	const showComments = CAPI.isCommentable;
 
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
@@ -396,78 +301,70 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</Section>
 				</SendToBack>
 			</div>
+			<ContainerLayout
+				showTopBorder={false}
+				backgroundColour={palette.background.header}
+				borderColour={palette.border.headline}
+				sideBorders={true}
+				leftContent={
+					// eslint-disable-next-line react/jsx-wrap-multilines
+					<ArticleTitle
+						format={format}
+						palette={palette}
+						tags={CAPI.tags}
+						sectionLabel={CAPI.sectionLabel}
+						sectionUrl={CAPI.sectionUrl}
+						guardianBaseURL={CAPI.guardianBaseURL}
+						badge={CAPI.badge}
+					/>
+				}
+			>
+				<div className={maxWidth}>
+					<ArticleHeadlinePadding design={format.design}>
+						{age && (
+							<div className={ageWarningMargins}>
+								<AgeWarning age={age} />
+							</div>
+						)}
+						<ArticleHeadline
+							format={format}
+							headlineString={CAPI.headline}
+							tags={CAPI.tags}
+							byline={CAPI.author.byline}
+							palette={palette}
+						/>
+						{age && <AgeWarning age={age} isScreenReader={true} />}
+					</ArticleHeadlinePadding>
+				</div>
+				{CAPI.starRating || CAPI.starRating === 0 ? (
+					<div className={starWrapper}>
+						<StarRating rating={CAPI.starRating} size="large" />
+					</div>
+				) : (
+					<></>
+				)}
+			</ContainerLayout>
+			<ContainerLayout
+				showTopBorder={false}
+				backgroundColour={palette.background.standfirst}
+				borderColour={palette.border.standfirst}
+				sideBorders={true}
+			>
+				<Standfirst format={format} standfirst={CAPI.standfirst} />
+			</ContainerLayout>
+
+			<ContainerLayout
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+				borderColour={neutral[86]}
+				sideBorders={true}
+			/>
 
 			<Section
-				data-print-layout="hide"
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 			>
-				<LiveGrid isMatchReport={isMatchReport}>
-					<GridItem area="title">
-						<ArticleTitle
-							format={format}
-							palette={palette}
-							tags={CAPI.tags}
-							sectionLabel={CAPI.sectionLabel}
-							sectionUrl={CAPI.sectionUrl}
-							guardianBaseURL={CAPI.guardianBaseURL}
-							badge={CAPI.badge}
-						/>
-					</GridItem>
-					<GridItem area="border">
-						<Border />
-					</GridItem>
-					<GridItem area="matchNav">
-						<div className={maxWidth}>
-							{format.design === Design.MatchReport &&
-								CAPI.matchUrl && (
-									<Placeholder
-										rootId="match-nav"
-										height={230}
-									/>
-								)}
-						</div>
-					</GridItem>
-					<GridItem area="headline">
-						<div className={maxWidth}>
-							<ArticleHeadlinePadding design={format.design}>
-								{age && (
-									<div className={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPI.headline}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-									palette={palette}
-								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
-									/>
-								)}
-							</ArticleHeadlinePadding>
-						</div>
-						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div className={starWrapper}>
-								<StarRating
-									rating={CAPI.starRating}
-									size="large"
-								/>
-							</div>
-						) : (
-							<></>
-						)}
-					</GridItem>
-					<GridItem area="standfirst">
-						<Standfirst
-							format={format}
-							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
+				<LiveGrid>
 					<GridItem area="media">
 						<div className={maxWidth}>
 							<MainMedia
@@ -479,6 +376,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								abTests={CAPI.config.abTests}
 							/>
 						</div>
+					</GridItem>
+					<GridItem area="border">
+						<></>
 					</GridItem>
 					<GridItem area="lines">
 						<div className={maxWidth}>
@@ -522,8 +422,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									host={host}
 									abTests={CAPI.config.abTests}
 								/>
-								{isMatchReport && <div id="match-stats" />}
-
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines
 									data-print-layout="hide"
