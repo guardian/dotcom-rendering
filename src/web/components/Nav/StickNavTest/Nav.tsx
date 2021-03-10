@@ -192,7 +192,7 @@ export const Nav = ({
 				)}
 				role="navigation"
 				aria-label="Guardian sections"
-				data-component="nav2"
+				data-component="stickynav"
 			>
 				{format.display === Display.Immersive && (
 					<Hide when="above" breakpoint="tablet">
