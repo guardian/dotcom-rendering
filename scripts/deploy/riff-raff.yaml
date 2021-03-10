@@ -9,12 +9,12 @@ deployments:
       cloudFormationStackName: rendering
       templateStageParameters:
         CODE:
-          InstanceType: t4g.micro
+          InstanceType: t3.micro
         PROD:
-          InstanceType: t4g.small
+          InstanceType: t3.small
       amiParametersToTags:
         AMI:
-          Recipe: dotcom-rendering-ARM
+          Recipe: dotcom-rendering-node14-test
           BuiltBy: amigo
           AmigoStage: PROD
   rendering:

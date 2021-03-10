@@ -27,6 +27,7 @@ type Props = {
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
 	stretchRight?: boolean;
+	leftColSize?: LeftColSize;
 };
 
 const Container = ({
@@ -97,6 +98,7 @@ export const ContainerLayout = ({
 	children,
 	leftContent,
 	stretchRight = false,
+	leftColSize,
 }: Props) => (
 	<Section
 		sectionId={sectionId}
@@ -111,6 +113,7 @@ export const ContainerLayout = ({
 				showRightBorder={centralBorder === 'full'}
 				borderColour={borderColour}
 				showPartialRightBorder={centralBorder === 'partial'}
+				size={leftColSize}
 			>
 				<>
 					<ContainerTitle
