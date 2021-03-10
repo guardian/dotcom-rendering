@@ -14,6 +14,13 @@ import MessengerIcon from '@frontend/static/icons/messenger.svg';
 
 import { Hide } from './Hide';
 
+type Props = {
+	pageId: string;
+	webTitle: string;
+	displayIcons: SharePlatform[];
+	palette: Palette;
+};
+
 const ulStyles = css`
 	float: left;
 	${from.wide} {
@@ -69,12 +76,12 @@ const encodeUrl = (pageId: string): string => {
 const encodeTitle = (webTitle: string): string => {
 	return encodeURIComponent(webTitle.replace(/Leave.EU/gi, 'Leave. EU'));
 };
-export const ShareIcons: React.FC<{
-	pageId: string;
-	webTitle: string;
-	displayIcons: SharePlatform[];
-	palette: Palette;
-}> = ({ pageId, webTitle, displayIcons, palette }) => {
+export const ShareIcons = ({
+	pageId,
+	webTitle,
+	displayIcons,
+	palette,
+}: Props) => {
 	return (
 		<ul className={ulStyles}>
 			{displayIcons.includes('facebook') && (
