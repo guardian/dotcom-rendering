@@ -7,7 +7,7 @@ import {
 	neutral,
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { from, until, between } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 import { Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
@@ -36,31 +36,6 @@ interface Props {
 	contributorImage?: string;
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
 }
-
-const richLinkContainer = css`
-	/*
-        TODO: avoid this edge case from appearing in editorials
-        edge case:
-        If rich link div is pushed further inline to the page the "margin-left: -240px;" wont work.
-        Using "clear: left;" allows us to igrnore the effects of other elements on the left.
-    */
-	clear: left;
-
-	${until.wide} {
-		width: 140px;
-	}
-	float: left;
-	margin-right: 20px;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	${between.leftCol.and.wide} {
-		margin-left: -160px;
-	}
-	${from.wide} {
-		margin-left: -240px;
-		width: 220px;
-	}
-`;
 
 const neutralBackground = css`
 	background-color: ${neutral[97]};
@@ -244,7 +219,7 @@ export const RichLink = ({
 			className={pillarBackground(format)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div className={cx(richLinkContainer, neutralBackground)}>
+			<div className={cx(neutralBackground)}>
 				<a className={richLinkLink} href={url}>
 					<div className={richLinkTopBorder(format)} />
 					{showImage && (

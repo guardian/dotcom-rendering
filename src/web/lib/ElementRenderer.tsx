@@ -463,14 +463,20 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return (
-				<div key={index} id={element.elementId}>
+				<Figure
+					id={element.elementId}
+					isMainMedia={isMainMedia}
+					key={index}
+					// eslint-disable-next-line jsx-a11y/aria-role
+					role="richLink"
+				>
 					<DefaultRichLink
 						index={index}
 						headlineText={element.text}
 						url={element.url}
 						isPlaceholder={true}
 					/>
-				</div>
+				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
 			return (
