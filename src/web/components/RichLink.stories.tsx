@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
 
 import { Design, Display, Pillar, Special } from '@guardian/types';
@@ -5,6 +6,7 @@ import { Design, Display, Pillar, Special } from '@guardian/types';
 import { Section } from '@frontend/web/components/Section';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
+import { Figure } from '@frontend/web/components/Figure';
 import { Flex } from '@frontend/web/components/Flex';
 
 import { RichLink } from './RichLink';
@@ -27,21 +29,23 @@ export const Article = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="news"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="article"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="news"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="article"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -56,21 +60,23 @@ export const Network = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="special-report"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="network"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="special-report"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="network"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -91,21 +97,23 @@ export const SectionStory = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="live"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="section"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Sport,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="live"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="section"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Sport,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -123,21 +131,23 @@ export const ImageContent = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="dead"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="imageContent"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.News,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="dead"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="imageContent"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.News,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -158,21 +168,23 @@ export const Interactive = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="feature"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="interactive"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Lifestyle,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="feature"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="interactive"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Lifestyle,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -192,22 +204,24 @@ export const Gallery = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="comment"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="gallery"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Special.Labs,
-						}}
-						tags={[]}
-						sponsorName=""
-						contributorImage={someContributor}
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="comment"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="gallery"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Special.Labs,
+							}}
+							tags={[]}
+							sponsorName=""
+							contributorImage={someContributor}
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -227,22 +241,24 @@ export const Video = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="comment"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="video"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.News,
-						}}
-						tags={[]}
-						sponsorName=""
-						contributorImage={someContributor}
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="comment"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="video"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.News,
+							}}
+							tags={[]}
+							sponsorName=""
+							contributorImage={someContributor}
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -263,21 +279,23 @@ export const Audio = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="podcast"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="audio"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="podcast"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="audio"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -292,21 +310,23 @@ export const LiveBlog = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="media"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="liveBlog"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Sport,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="media"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="liveBlog"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Sport,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -327,21 +347,23 @@ export const Tag = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="analysis"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="tag"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="analysis"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="tag"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -356,28 +378,30 @@ export const Index = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="review"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="index"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Opinion,
-						}}
-						tags={[
-							{
-								id: '',
-								type: 'Contributor',
-								title: 'Contributor Name',
-							},
-						]}
-						sponsorName=""
-						starRating={3}
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="review"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="index"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Opinion,
+							}}
+							tags={[
+								{
+									id: '',
+									type: 'Contributor',
+									title: 'Contributor Name',
+								},
+							]}
+							sponsorName=""
+							starRating={3}
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -392,21 +416,23 @@ export const Crossword = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="letters"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="crossword"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Opinion,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="letters"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="crossword"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Opinion,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -421,21 +447,23 @@ export const Survey = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="external"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="survey"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="external"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="survey"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -450,22 +478,24 @@ export const Signup = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="comment"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="signup"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-						contributorImage={someContributor}
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="comment"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="signup"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[]}
+							sponsorName=""
+							contributorImage={someContributor}
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -480,21 +510,23 @@ export const Userid = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="editorial"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="userid"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="editorial"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="userid"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
@@ -509,27 +541,29 @@ export const PaidFor = () => {
 					<p />
 				</LeftColumn>
 				<ArticleContainer>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="news"
-						thumbnailUrl={someImage}
-						headlineText="Rich link headline"
-						contentType="userid"
-						url=""
-						format={{
-							display: Display.Standard,
-							design: Design.Article,
-							theme: Pillar.Culture,
-						}}
-						tags={[
-							{
-								id: 'tone/advertisement-features',
-								type: '',
-								title: '',
-							},
-						]}
-						sponsorName="Sponsor name"
-					/>
+					<Figure role="richLink">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="news"
+							thumbnailUrl={someImage}
+							headlineText="Rich link headline"
+							contentType="userid"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Culture,
+							}}
+							tags={[
+								{
+									id: 'tone/advertisement-features',
+									type: '',
+									title: '',
+								},
+							]}
+							sponsorName="Sponsor name"
+						/>
+					</Figure>
 				</ArticleContainer>
 			</Flex>
 		</Section>
