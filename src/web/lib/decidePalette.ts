@@ -9,6 +9,7 @@ import {
 	sport,
 	brandAltBackground,
 	border,
+	brand,
 	brandAlt,
 } from '@guardian/src-foundations';
 
@@ -157,6 +158,22 @@ const textArticleLink = (format: Format): string => {
 		default:
 			return pillarPalette[format.theme].main;
 	}
+};
+
+const textDisclaimerLink = (format: Format): string =>
+	pillarPalette[format.theme].dark;
+
+const textWitnessIcon = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textWitnessTitle = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textWitnessAuthor = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textPullQuote = (format: Format): string => {
+	return pillarPalette[format.theme].main;
 };
 
 const textStandfirstLink = (format: Format): string => {
@@ -401,6 +418,14 @@ const backgroundStandfirst = (format: Format): string => {
 	}
 };
 
+const backgroundImageTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const backgroundSpeechBubble = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -511,6 +536,53 @@ const hoverHeadlineByline = (format: Format): string => {
 	return pillarPalette[format.theme].dark;
 };
 
+const textRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const borderRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const backgroundRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const fillRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const fillQuoteIcon: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const textSignInLink = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const textCarouselTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const textCalloutHeading = (): string => {
+	return brand[500];
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -536,6 +608,15 @@ export const decidePalette = (format: Format): Palette => {
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			branding: textBranding(format),
+			disclaimerLink: textDisclaimerLink(format),
+			signInLink: textSignInLink(format),
+			richLink: textRichLink(format),
+			pullQuote: textPullQuote(format),
+			witnessIcon: textWitnessIcon(format),
+			witnessAuthor: textWitnessAuthor(format),
+			witnessTitle: textWitnessTitle(format),
+			carouselTitle: textCarouselTitle(format),
+			calloutHeading: textCalloutHeading(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -548,12 +629,17 @@ export const decidePalette = (format: Format): Palette => {
 			bullet: backgroundBullet(format),
 			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
+			richLink: backgroundRichLink(format),
+			imageTitle: backgroundImageTitle(format),
+			speechBubble: backgroundSpeechBubble(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
 			cardIcon: fillCardIcon(format),
+			richLink: fillRichLink(format),
+			quoteIcon: fillQuoteIcon(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),
@@ -563,6 +649,7 @@ export const decidePalette = (format: Format): Palette => {
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			standfirst: borderStandfirst(format),
+			richLink: borderRichLink(format),
 		},
 		topBar: {
 			card: topBarCard(format),

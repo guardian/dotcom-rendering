@@ -1,8 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Section } from '../Section';
 import { Flex } from '../Flex';
 import { LeftColumn } from '../LeftColumn';
@@ -41,7 +42,11 @@ export const Article = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.Article}
-				pillar={Pillar.News}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
@@ -58,7 +63,11 @@ export const Comment = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.Comment}
-				pillar={Pillar.Opinion}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Opinion,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -75,7 +84,11 @@ export const CommentAttr = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.Comment}
-				pillar={Pillar.Opinion}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Opinion,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
@@ -93,7 +106,11 @@ export const PhotoEssay = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.PhotoEssay}
-				pillar={Pillar.Lifestyle}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Lifestyle,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -110,7 +127,11 @@ export const PhotoEssayAttr = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.PhotoEssay}
-				pillar={Pillar.Lifestyle}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Lifestyle,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
@@ -128,7 +149,11 @@ export const PhotoEssayInline = () => {
 		<Container>
 			<PullQuoteBlockComponent
 				design={Design.PhotoEssay}
-				pillar={Pillar.Culture}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Culture,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"

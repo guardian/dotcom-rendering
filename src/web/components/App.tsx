@@ -657,7 +657,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
-					<CalloutBlockComponent callout={callout} pillar={pillar} />
+					<CalloutBlockComponent
+						callout={callout}
+						palette={palette}
+					/>
 				</HydrateOnce>
 			))}
 			{chartAtoms.map((chartAtom) => (

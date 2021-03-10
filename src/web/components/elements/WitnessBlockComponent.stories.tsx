@@ -1,7 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Pillar } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import {
 	WitnessTextBlockComponent,
@@ -124,7 +125,11 @@ export const WitnessImageBlockComponentDefault = () => (
 			authorName="Nick Ellis"
 			dateCreated="2015-08-25T12:20:58Z"
 			alt="Risk - Home Made Space expansion"
-			pillar={Pillar.Sport}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.Sport,
+			})}
 		/>
 	</div>
 );
@@ -142,7 +147,11 @@ export const WitnessVideoBlockComponentDefault = () => (
 			authorName="Gregg Lewis-Qualls"
 			youtubeHtml='<iframe width="440" height="330" src="https://www.youtube.com/embed/N9Cgy-ke5-s?origin=https://www.theguardian.com&widgetid=1&modestbranding=1" frameborder="0" allowfullscreen></iframe>'
 			dateCreated="2015-08-27T13:32:32Z"
-			pillar={Pillar.Sport}
+			palette={decidePalette({
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.Sport,
+			})}
 		/>
 	</div>
 );

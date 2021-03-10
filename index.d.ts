@@ -68,6 +68,15 @@ type Palette = {
 		standfirst: Colour;
 		standfirstLink: Colour;
 		branding: Colour;
+		disclaimerLink: Colour;
+		signInLink: Colour;
+		richLink: Colour;
+		witnessIcon: Colour;
+		witnessAuthor: Colour;
+		witnessTitle: Colour;
+		carouselTitle: Colour;
+		calloutHeading: Colour;
+		pullQuote: Colour;
 	},
 	background: {
 		article: Colour;
@@ -80,12 +89,17 @@ type Palette = {
 		bullet: Colour;
 		header: Colour;
 		standfirst: Colour;
+		richLink: Colour;
+		imageTitle: Colour;
+		speechBubble: Colour;
 	},
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
 		captionTriangle: Colour;
 		cardIcon: Colour;
+		richLink: Colour;
+		quoteIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;
@@ -95,6 +109,8 @@ type Palette = {
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;
+		richLink: Colour;
+
 	},
 	topBar: {
 		card: Colour;

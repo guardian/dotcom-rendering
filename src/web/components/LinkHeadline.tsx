@@ -108,8 +108,8 @@ export const LinkHeadline = ({
 				{byline && (
 					<Byline
 						text={byline}
-						design={format.design}
-						pillar={format.theme}
+						format={format}
+						palette={palette}
 						size={size}
 					/>
 				)}
@@ -118,14 +118,7 @@ export const LinkHeadline = ({
 			// We don't have a link so simply use a span here
 			<>
 				<span>{headlineText}</span>
-				{byline && (
-					<Byline
-						text={byline}
-						design={format.design}
-						pillar={format.theme}
-						size={size}
-					/>
-				)}
+				{byline && <Byline text={byline} size={size} />}
 			</>
 		)}
 	</h4>

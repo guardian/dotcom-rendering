@@ -175,7 +175,7 @@ export const Discussion = ({
 				leftContent={
 					// eslint-disable-next-line react/jsx-wrap-multilines
 					<SignedInAs
-						pillar={pillar}
+						palette={palette}
 						enableDiscussionSwitch={enableDiscussionSwitch}
 						user={user}
 						commentCount={commentCount || 0}
