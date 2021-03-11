@@ -1045,7 +1045,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
-					pillar={pillar}
+					palette={palette}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 					display={display}

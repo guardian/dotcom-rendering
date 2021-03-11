@@ -606,6 +606,10 @@ const backgroundCarouselDotFocus = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundMostViewedTab = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -659,6 +663,7 @@ export const decidePalette = (format: Format): Palette => {
 			carouselDot: backgroundCarouselDot(format),
 			carouselDotFocus: backgroundCarouselDotFocus(format),
 			headlineTag: backgroundHeadlineTag(format),
+			mostViewedTab: backgroundMostViewedTab(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
