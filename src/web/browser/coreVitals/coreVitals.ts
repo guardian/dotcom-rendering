@@ -1,4 +1,5 @@
 import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals';
+import { getCookie } from '../cookie';
 
 type CoreWebVitalsPayload = {
 	page_view_id: string | null;
@@ -57,6 +58,11 @@ export const coreVitals = (): void => {
 		if (window.guardian && window.guardian.ophan) {
 			jsonData.page_view_id = window.guardian.ophan.pageViewId;
 			jsonData.browser_id = window.guardian.config.ophan.browserId;
+		}
+
+		// Fallback to check for browser ID
+		if (getCookie('bwid')) {
+			jsonData.browser_id = getCookie('bwid');
 		}
 
 		const endpoint =
