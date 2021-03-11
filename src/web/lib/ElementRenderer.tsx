@@ -99,7 +99,7 @@ export const ElementRenderer = ({
 				<BlockquoteBlockComponent
 					key={index}
 					html={element.html}
-					pillar={format.theme}
+					palette={palette}
 					quoted={element.quoted}
 				/>
 			);
