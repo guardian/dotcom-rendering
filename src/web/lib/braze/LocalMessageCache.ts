@@ -55,16 +55,6 @@ const getQueue = (slotName: SlotName): CachedMessage[] => {
 };
 
 class LocalMessageCache {
-	static shift(slotName: SlotName): MessageWithId | undefined {
-		const queue = getQueue(slotName);
-		const topItem = queue.shift();
-
-		if (topItem) {
-			setQueue(slotName, queue);
-			return topItem.message;
-		}
-	}
-
 	static peek(slotName: SlotName): MessageWithId | undefined {
 		const queue = getQueue(slotName);
 		const topItem = queue.shift();
@@ -72,6 +62,22 @@ class LocalMessageCache {
 		if (topItem) {
 			return topItem.message;
 		}
+	}
+
+	static remove(slotName: SlotName, id: string): boolean | undefined {
+		const queue = getQueue(slotName);
+		const idx = queue.findIndex((i) => i.message.id === id);
+
+		if (idx >= 0) {
+			const removedItem = queue.splice(idx, 1);
+
+			if (removedItem) {
+				setQueue(slotName, queue);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	static push(slotName: SlotName, message: MessageWithId): boolean {

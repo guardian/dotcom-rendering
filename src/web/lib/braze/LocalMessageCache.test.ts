@@ -123,73 +123,26 @@ describe('LocalMessageCache', () => {
 		});
 	});
 
-	describe('shift', () => {
-		it('returns the first item on the queue', () => {
-			const message1 = JSON.parse(message1Json);
-			const message2 = JSON.parse(message2Json);
-			const queue = [
-				buildUnexpiredMessage(message1, '1'),
-				buildUnexpiredMessage(message2, '2'),
-			];
+	describe('remove', () => {
+		it('removes a message by id', () => {
+			const message1 = buildUnexpiredMessage(
+				JSON.parse(message1Json),
+				'1',
+			);
+			const message2 = buildUnexpiredMessage(
+				JSON.parse(message2Json),
+				'2',
+			);
+			const queue = [message1, message2];
 			setQueue('EndOfArticle', queue);
 
-			const m = LocalMessageCache.shift('EndOfArticle');
-
-			expect(m.message).toEqual(message1);
-		});
-
-		it('removes the item from start of the queue', () => {
-			const message1 = JSON.parse(message1Json);
-			const message2 = JSON.parse(message2Json);
-			const queue = [
-				buildUnexpiredMessage(message1, '1'),
-				buildUnexpiredMessage(message2, '2'),
-			];
-			setQueue('EndOfArticle', queue);
-
-			LocalMessageCache.shift('EndOfArticle');
+			LocalMessageCache.remove('EndOfArticle', '1');
 
 			const newQueue = storage.local.get(
 				'gu.brazeMessageCache.EndOfArticle',
 			) as CachedMessage[];
-			expect(newQueue.map(({ message: m }) => m.message)).toEqual([
-				message2,
-			]);
-		});
 
-		it('returns undefined if the queue is empty', () => {
-			setQueue('EndOfArticle', []);
-			const m = LocalMessageCache.shift('EndOfArticle');
-
-			expect(m).toBeUndefined();
-		});
-
-		it('returns the first unexpired message', () => {
-			const message1 = JSON.parse(message1Json);
-			const message2 = JSON.parse(message2Json);
-			const queue = [
-				buildExpiredMessage(message1, '1'),
-				buildUnexpiredMessage(message2, '2'),
-			];
-			setQueue('EndOfArticle', queue);
-
-			const m = LocalMessageCache.shift('EndOfArticle');
-			expect(m?.message).toEqual(message2);
-		});
-
-		it('removes expired items from the queue', () => {
-			const message1 = JSON.parse(message1Json);
-			const message2 = JSON.parse(message2Json);
-			const queue = [
-				buildExpiredMessage(message1, '1'),
-				buildUnexpiredMessage(message2, '2'),
-			];
-			setQueue('EndOfArticle', queue);
-
-			LocalMessageCache.shift('EndOfArticle');
-
-			const queueSize = getQueueSizeFor('EndOfArticle');
-			expect(queueSize).toEqual(0);
+			expect(newQueue).toEqual([message2]);
 		});
 	});
 
