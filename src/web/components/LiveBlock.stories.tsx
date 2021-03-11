@@ -170,6 +170,47 @@ export const Video = () => {
 };
 Video.story = { name: 'with a video as the second element' };
 
+export const RichLink = () => {
+	const block: Block = {
+		...baseBlock,
+		elements: [
+			{
+				elementId: 'ae950f92-bc9b-4725-bac2-94fce86d8191',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html:
+					'<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun. </p>',
+			},
+			{
+				elementId: 'b49c134e-54d6-4445-a3fe-bb52a1370375',
+				role: 'thumbnail',
+				prefix: 'Related: ',
+				_type:
+					'model.dotcomrendering.pageElements.RichLinkBlockElement',
+				text: 'Ireland election: latest results',
+				url:
+					'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{ adUnit: '', customParams: {} }}
+				format={{
+					theme: Pillar.News,
+					design: Design.LiveBlog,
+					display: Display.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				abTests={{}}
+			/>
+		</Wrapper>
+	);
+};
+RichLink.story = { name: 'with a rich link being forced inline' };
+
 export const FirstImage = () => {
 	const block: Block = {
 		...baseBlock,
