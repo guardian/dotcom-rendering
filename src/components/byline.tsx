@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Design, map, withDefault } from '@guardian/types';
+import { Design, map, Special, withDefault } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
 import { pipe2 } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
@@ -59,7 +59,7 @@ const commentAnchorStyles = (
     `}
 `;
 
-const advertisementFeatureStyles = css`
+const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular' })}
 	color: ${palette.labs[300]};
 
@@ -68,7 +68,7 @@ const advertisementFeatureStyles = css`
     `}
 `;
 
-const advertisementFeatureAnchorStyles = css`
+const labsAnchorStyles = css`
 	font-weight: bold;
 	color: ${palette.labs[300]};
 	font-style: normal;
@@ -82,12 +82,13 @@ const advertisementFeatureAnchorStyles = css`
 const getStyles = (format: Format): SerializedStyles => {
 	const { kicker } = getThemeStyles(format.theme);
 
+	if (format.theme === Special.Labs) {
+		return labsStyles;
+	}
+
 	switch (format.design) {
 		case Design.Comment:
 			return commentStyles(kicker);
-
-		case Design.AdvertisementFeature:
-			return advertisementFeatureStyles;
 
 		default:
 			return styles(kicker);
@@ -96,13 +97,12 @@ const getStyles = (format: Format): SerializedStyles => {
 
 const getAnchorStyles = (format: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
-
+	if (format.theme === Special.Labs) {
+		return labsAnchorStyles;
+	}
 	switch (format.design) {
 		case Design.Comment:
 			return commentAnchorStyles(kicker, inverted);
-
-		case Design.AdvertisementFeature:
-			return advertisementFeatureAnchorStyles;
 
 		default:
 			return anchorStyles(kicker, inverted);

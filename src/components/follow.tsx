@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Design } from '@guardian/types';
+import { Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
@@ -43,7 +43,7 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 	if (
 		isSingleContributor(contributors) &&
 		contributor.apiUrl !== '' &&
-		format.design !== Design.AdvertisementFeature
+		format.theme !== Special.Labs
 	) {
 		return (
 			<button

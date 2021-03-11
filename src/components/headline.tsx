@@ -6,7 +6,7 @@ import { neutral, remSpace } from '@guardian/src-foundations';
 import { between, from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
-import { Design, Display } from '@guardian/types';
+import { Design, Display, Special } from '@guardian/types';
 import StarRating from 'components/starRating';
 import { border } from 'editorialPalette';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
@@ -89,7 +89,7 @@ const commentStyles = css`
 	padding-bottom: ${remSpace[1]};
 `;
 
-const advertisementFeatureStyles = css`
+const labsStyles = css`
     ${textSans.xxxlarge({ lineHeight: 'regular' })}}
 `;
 
@@ -107,11 +107,12 @@ const fontSizeRestriction = css`
 
 const getStyles = (format: Format): SerializedStyles => {
 	if (format.display === Display.Immersive) {
-		const labs =
-			format.design === Design.AdvertisementFeature
-				? immersiveLabs
-				: null;
+		const labs = format.theme === Special.Labs ? immersiveLabs : null;
 		return css(styles(format), immersiveStyles, labs);
+	}
+
+	if (format.theme === Special.Labs) {
+		return css(styles(format), labsStyles, fontSizeRestriction);
 	}
 
 	switch (format.design) {
@@ -127,12 +128,7 @@ const getStyles = (format: Format): SerializedStyles => {
 			return css(styles(format), commentStyles, fontSizeRestriction);
 		case Design.Media:
 			return css(styles(format), mediaStyles, fontSizeRestriction);
-		case Design.AdvertisementFeature:
-			return css(
-				styles(format),
-				advertisementFeatureStyles,
-				fontSizeRestriction,
-			);
+
 		default:
 			return css(styles(format), fontSizeRestriction);
 	}

@@ -75,6 +75,15 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.specialReport[800],
 		cameraIconBackground: palette.specialReport[400],
 	},
+	[Special.Labs]: {
+		kicker: palette.specialReport[400],
+		inverted: palette.specialReport[500],
+		liveblogBackground: palette.specialReport[300],
+		liveblogDarkBackground: palette.specialReport[200],
+		link: palette.specialReport[300],
+		cameraIcon: palette.specialReport[800],
+		cameraIconBackground: palette.specialReport[400],
+	},
 };
 
 const getThemeStyles = (theme: Theme): ThemeStyles => themeColours[theme];

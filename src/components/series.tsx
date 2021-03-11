@@ -7,7 +7,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
-import { Design, Display, map, withDefault } from '@guardian/types';
+import { Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe2 } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -74,7 +74,7 @@ const getLinkStyles = ({
 	theme,
 	design,
 }: Format): SerializedStyles => {
-	const isLabs = design === Design.AdvertisementFeature;
+	const isLabs = theme === Special.Labs;
 
 	if (display === Display.Immersive) {
 		return immersiveLinkStyles(isLabs);
@@ -85,7 +85,7 @@ const getLinkStyles = ({
 
 const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
 	if (display === Display.Immersive) {
-		const isLabs = design === Design.AdvertisementFeature;
+		const isLabs = theme === Special.Labs;
 		return immersiveStyles(getThemeStyles(theme), isLabs);
 	}
 

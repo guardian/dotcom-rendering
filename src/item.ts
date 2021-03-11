@@ -10,7 +10,14 @@ import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import type { Format, Option } from '@guardian/types';
-import { Design, Display, fromNullable, map, Pillar } from '@guardian/types';
+import {
+	Design,
+	Display,
+	fromNullable,
+	map,
+	Pillar,
+	Special,
+} from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import type { Logo } from 'capi';
@@ -52,6 +59,7 @@ interface Fields extends Format {
 	internalShortId: Option<string>;
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
+	logo: Option<Logo>;
 }
 
 interface ResizedRelatedContent extends RelatedContent {
@@ -70,12 +78,6 @@ interface Review extends Fields {
 	starRating: number;
 }
 
-interface AdvertisementFeature extends Fields {
-	design: Design.AdvertisementFeature;
-	body: Body;
-	logo: Option<Logo>;
-}
-
 interface Comment extends Fields {
 	design: Design.Comment;
 	body: Body;
@@ -89,23 +91,11 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-	design: Exclude<
-		Design,
-		| Design.Live
-		| Design.Review
-		| Design.Comment
-		| Design.AdvertisementFeature
-	>;
+	design: Exclude<Design, Design.Live | Design.Review | Design.Comment>;
 	body: Body;
 }
 
-type Item =
-	| Liveblog
-	| Review
-	| Comment
-	| Standard
-	| Interactive
-	| AdvertisementFeature;
+type Item = Liveblog | Review | Comment | Standard | Interactive;
 
 // ----- Convenience Types ----- //
 
@@ -197,6 +187,7 @@ const itemFields = (
 				),
 			})),
 		),
+		logo: paidContentLogo(content.tags),
 	};
 };
 
@@ -259,7 +250,7 @@ const isGuardianView = hasTag('tone/editorials');
 
 const isQuiz = hasTag('tone/quizzes');
 
-const isAdvertisementFeature = hasTag('tone/advertisement-features');
+const isLabs = hasTag('tone/advertisement-features');
 
 const isPicture = hasTag('type/picture');
 
@@ -338,11 +329,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			design: Design.Quiz,
 			...itemFieldsWithBody(context, request),
 		};
-	} else if (isAdvertisementFeature(tags)) {
+	} else if (isLabs(tags)) {
 		return {
-			design: Design.AdvertisementFeature,
+			design: Design.Article,
 			...itemFieldsWithBody(context, request),
-			logo: paidContentLogo(tags),
+			theme: Special.Labs,
 		};
 	}
 
@@ -359,13 +350,12 @@ export {
 	Comment,
 	Liveblog,
 	Review,
-	AdvertisementFeature,
 	Standard,
 	ResizedRelatedContent,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,
-	isAdvertisementFeature,
+	isLabs,
 	isLive,
 	isComment,
 	isAudio,
