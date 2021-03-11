@@ -201,6 +201,7 @@ export const InteractiveBlockComponent = ({
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
+		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 		if (
 			scriptUrl ===
 				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js' &&
