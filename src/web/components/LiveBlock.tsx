@@ -317,6 +317,7 @@ export const LiveBlock = ({
 							webTitle={webTitle}
 							displayIcons={['facebook', 'twitter']}
 							palette={palette}
+							size="small"
 						/>
 						{showLastUpdated &&
 							block.blockLastUpdated &&
