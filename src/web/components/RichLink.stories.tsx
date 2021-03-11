@@ -105,7 +105,7 @@ export const Inline = () => {
 			<Figure role="inline">
 				<RichLink
 					richLinkIndex={1}
-					cardStyle="audio"
+					cardStyle="external"
 					thumbnailUrl={someImage}
 					headlineText="Rich link when inline"
 					contentType="section"
