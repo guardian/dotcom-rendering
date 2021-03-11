@@ -491,7 +491,6 @@ export const ElementRenderer = ({
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-			console.log('isLiveBlog', isLiveBlog);
 			return (
 				<Figure
 					id={element.elementId}
