@@ -998,7 +998,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
 							edition={CAPI.editionId}
-							pillar={pillar}
+							format={format}
 						/>
 					</Suspense>
 				</Lazy>
