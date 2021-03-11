@@ -52,7 +52,7 @@ export const coreVitals = (): void => {
 				break;
 		}
 
-		// Some browser ID's are not caputured (and if they have no cookie there won't be on)
+		// Some browser ID's are not caputured (and if they have no cookie there won't be one)
 		// but there are occassions of reoccuring users without a browser ID being sent
 		if (window.guardian && window.guardian.ophan) {
 			jsonData.page_view_id = window.guardian.ophan.pageViewId;
