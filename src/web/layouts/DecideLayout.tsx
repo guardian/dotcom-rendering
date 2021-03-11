@@ -12,6 +12,7 @@ import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
+import { ImmersiveOpinionLayout } from './ImmersiveOpinionLayout';
 import { LiveLayout } from './LiveLayout';
 
 type Props = {
@@ -45,7 +46,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 				case Design.Comment:
 				case Design.Editorial:
 					return (
-						<ImmersiveLayout
+						<ImmersiveOpinionLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							palette={palette}
