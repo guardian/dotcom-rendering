@@ -343,7 +343,11 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 				.querySelector('[data-callout-tagname]')
 				?.getAttribute('data-callout-tagname');
 
-			if (id && campaigns) {
+			if (id) {
+				if (!campaigns) {
+					return err('No campaign data for this callout');
+				}
+
 				const campaign = campaigns.find(
 					(campaign) => campaign.fields.tagName === id,
 				);
