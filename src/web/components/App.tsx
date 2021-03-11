@@ -1016,7 +1016,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							ajaxUrl={CAPI.config.ajaxUrl}
 							hasStoryPackage={CAPI.hasStoryPackage}
 							tags={CAPI.tags}
-							pillar={pillar}
+							format={format}
 						/>
 					</Suspense>
 				</Lazy>
