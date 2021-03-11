@@ -19,9 +19,9 @@ export const defaultStory = () => {
 		<div className={containerStyles}>
 			<DisclaimerBlockComponent
 				html={
-					'<p>This is a disclaimer and it could have <a href="#">link text in it</a>.</p>'
+					'<p><sup>This is a disclaimer and it could have <a href="#">link text in it</a>.</sup></p>'
 				}
-				pillar={decidePalette({
+				palette={decidePalette({
 					display: Display.Standard,
 					design: Design.Article,
 					theme: Pillar.News,
