@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
+import { Placeholder } from '@root/src/web/components/Placeholder';
 
 type Props = {
 	url?: string;
@@ -84,13 +85,6 @@ const wrapperStyle = (role: string, loaded: boolean) => css`
 	font-weight: 300;
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
-`;
-
-const placeholderStyle = css`
-	background-color: ${neutral[93]};
-	height: 100%;
-	width: 100%;
-	position: absolute;
 `;
 
 const placeholderLinkStyle = css`
@@ -274,7 +268,15 @@ export const InteractiveBlockComponent = ({
 			ref={wrapperRef}
 			className={wrapperStyle(role, loaded)}
 		>
-			{!loaded && <div className={placeholderStyle} />}
+			{!loaded && (
+				<Placeholder
+					height={
+						role === 'supporting'
+							? supportingMinHeight
+							: inlineMinHeight
+					}
+				/>
+			)}
 			{!loaded && (
 				<a
 					ref={placeholderLinkRef}
