@@ -141,6 +141,10 @@ export const SpecialReportStory = (): React.ReactNode => {
 SpecialReportStory.story = {
 	name: 'SpecialReport',
 };
+SpecialReportStory.parameters = {
+	// Wait for the interactives to load
+	chromatic: { delay: 300 },
+};
 
 export const FeatureStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Feature);
