@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Placeholder } from '@root/src/web/components/Placeholder';
+import libDebounce from 'lodash.debounce';
 
 type Props = {
 	url?: string;
@@ -93,18 +94,6 @@ const placeholderLinkStyle = css`
 	left: 1rem;
 `;
 
-const debounce = <F extends (...params: any[]) => void>(
-	fn: F,
-	delay: number,
-) => {
-	let timeoutID: number;
-	// eslint-disable-next-line func-names
-	return function (this: any, ...args: any[]) {
-		clearTimeout(timeoutID);
-		timeoutID = window.setTimeout(() => fn.apply(this, args), delay);
-	} as F;
-};
-
 // https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js
 const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 	// Calls func on trailing edge of the wait period
@@ -188,13 +177,13 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 					// Send updated position on scroll or resize
 					window.addEventListener(
 						'scroll',
-						debounce(() => {
+						libDebounce(() => {
 							postPositionMessage(true);
 						}, 50),
 					);
 					window.addEventListener(
 						'resize',
-						debounce(() => {
+						libDebounce(() => {
 							postPositionMessage(true);
 						}, 50),
 					);
