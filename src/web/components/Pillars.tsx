@@ -4,9 +4,8 @@ import { css, cx } from 'emotion';
 import { brand, brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-
-import { pillarPalette } from '@root/src/lib/pillars';
-import { Display } from '@guardian/types';
+import { Display, Design } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars
@@ -190,9 +189,9 @@ const linkStyle = (display: Display) => css`
 		transform: translateY(4px);
 	}
 `;
-const pillarUnderline = (pillar: Theme) => css`
+const pillarUnderline = (palette: Palette) => css`
 	:after {
-		border-top: 4px solid ${pillarPalette[pillar].bright};
+		border-top: 4px solid ${palette.border.navPillar};
 		left: 0;
 		right: 1px;
 		top: -4px;
@@ -246,7 +245,13 @@ export const Pillars: React.FC<{
 					<a
 						className={cx(
 							linkStyle(display),
-							pillarUnderline(p.pillar),
+							pillarUnderline(
+								decidePalette({
+									display: Display.Standard,
+									design: Design.Feature,
+									theme: p.pillar,
+								}),
+							),
 							isTopNav && showMenuUnderlineStyles,
 							isSelected && forceUnderline,
 							showDivider && pillarDivider,
