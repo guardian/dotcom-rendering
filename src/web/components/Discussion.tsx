@@ -199,7 +199,7 @@ export const Discussion = ({
 								`}
 							>
 								<SignedInAs
-									pillar={pillar}
+									palette={palette}
 									enableDiscussionSwitch={
 										enableDiscussionSwitch
 									}
