@@ -52,6 +52,13 @@ export const coreVitals = (): void => {
 				break;
 		}
 
+		// Some browser ID's are not caputured (and if they have no cookie there won't be on)
+		// but there are occassions of reoccuring users without a browser ID being sent
+		if (window.guardian && window.guardian.ophan) {
+			jsonData.page_view_id = window.guardian.ophan.pageViewId;
+			jsonData.browser_id = window.guardian.config.ophan.browserId;
+		}
+
 		const endpoint =
 			window.location.hostname === 'm.code.dev-theguardian.com' ||
 			window.location.hostname === 'localhost' ||
@@ -62,23 +69,19 @@ export const coreVitals = (): void => {
 		// If CLS has been calculated
 		if (jsonData.cls !== null) {
 			// Set page view and browser ID
-			if (window.guardian && window.guardian.ophan) {
-				jsonData.page_view_id = window.guardian.ophan.pageViewId;
-				jsonData.browser_id = window.guardian.config.ophan.browserId;
 
-				fetch(endpoint, {
-					method: 'POST', // *GET, POST, PUT, DELETE, etc.
-					mode: 'cors', // no-cors, *cors, same-origin
-					cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-					credentials: 'same-origin', // include, *same-origin, omit
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					redirect: 'follow',
-					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
-					body: JSON.stringify(jsonData),
-				}).catch(() => {});
-			}
+			fetch(endpoint, {
+				method: 'POST', // *GET, POST, PUT, DELETE, etc.
+				mode: 'cors', // no-cors, *cors, same-origin
+				cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+				credentials: 'same-origin', // include, *same-origin, omit
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				redirect: 'follow',
+				referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
+				body: JSON.stringify(jsonData),
+			}).catch(() => {});
 		}
 	};
 
