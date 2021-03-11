@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
+import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 import libDebounce from 'lodash.debounce';
@@ -87,15 +88,14 @@ const getMinHeight = (role: RoleType, loaded: boolean) => {
 const wrapperStyle = (role: RoleType, loaded: boolean) => css`
 	${body.medium()};
 	background-color: ${neutral[100]};
-	font-weight: 300;
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
 `;
 
 const placeholderLinkStyle = css`
 	position: absolute;
-	bottom: 1rem;
-	left: 1rem;
+	bottom: ${space[1]}px;
+	left: ${space[1]}px;
 `;
 
 // https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js
