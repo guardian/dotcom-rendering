@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { Display, Design, Pillar } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';
@@ -40,7 +41,11 @@ export const defaultStory = () => {
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
-				pillar={Pillar.News}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.News,
+				})}
 			/>
 			<SomeText />
 		</div>
@@ -54,7 +59,11 @@ export const ShortStory = () => {
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={shortQuoteHtml}
-				pillar={Pillar.Sport}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.Sport,
+				})}
 			/>
 			<SomeText />
 		</div>
@@ -68,7 +77,11 @@ export const QuotedStory = () => {
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
-				pillar={Pillar.Culture}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.Culture,
+				})}
 				quoted={true}
 			/>
 			<SomeText />
@@ -83,7 +96,11 @@ export const ShortQuotedStory = () => {
 			<SomeText />
 			<BlockquoteBlockComponent
 				html={shortQuoteHtml}
-				pillar={Pillar.Lifestyle}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.Lifestyle,
+				})}
 				quoted={true}
 			/>
 			<SomeText />

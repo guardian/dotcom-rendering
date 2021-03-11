@@ -441,6 +441,9 @@ const fillCaptionTriangle = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillBlockquoteIcon = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
 const fillCardIcon = (format: Format): string => {
 	// Setting Card clock colour for immersive cards to all be dark grey
 	if (format.display === Display.Immersive) return neutral[60];
@@ -667,6 +670,7 @@ export const decidePalette = (format: Format): Palette => {
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
+			blockquoteIcon: fillBlockquoteIcon(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),

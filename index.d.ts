@@ -104,6 +104,7 @@ type Palette = {
 		cardIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
+		blockquoteIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;
