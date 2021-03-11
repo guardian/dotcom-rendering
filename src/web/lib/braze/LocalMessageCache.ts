@@ -6,8 +6,14 @@ const localStorageKeyBase = 'gu.brazeMessageCache';
 export const millisecondsBeforeExpiry = 1000 * 60 * 60 * 24; // 24 hours: 60 seconds * 60 minutes
 
 type Message = appboy.InAppMessage;
-type CachedMessage = {
+
+type MessageWithId = {
+	id: string;
 	message: Message;
+};
+
+type CachedMessage = {
+	message: MessageWithId;
 	expires: number; // Expiry date in Unix time
 };
 
@@ -49,7 +55,7 @@ const getQueue = (slotName: SlotName): CachedMessage[] => {
 };
 
 class LocalMessageCache {
-	static shift(slotName: SlotName): Message | undefined {
+	static shift(slotName: SlotName): MessageWithId | undefined {
 		const queue = getQueue(slotName);
 		const topItem = queue.shift();
 
@@ -59,7 +65,7 @@ class LocalMessageCache {
 		}
 	}
 
-	static peek(slotName: SlotName): Message | undefined {
+	static peek(slotName: SlotName): MessageWithId | undefined {
 		const queue = getQueue(slotName);
 		const topItem = queue.shift();
 
@@ -68,7 +74,7 @@ class LocalMessageCache {
 		}
 	}
 
-	static push(slotName: SlotName, message: Message): boolean {
+	static push(slotName: SlotName, message: MessageWithId): boolean {
 		const queue = getQueue(slotName);
 
 		if (queue.length < MAX_QUEUE_SIZE) {

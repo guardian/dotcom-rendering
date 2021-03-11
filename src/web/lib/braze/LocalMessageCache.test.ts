@@ -35,13 +35,22 @@ const anHourFromNow = () => {
 	return Date.now() + hourInMilliseconds;
 };
 
-const buildUnexpiredMessage = (message: Message): CachedMessage => ({
-	message,
+const buildUnexpiredMessage = (
+	message: Message,
+	id: string,
+): CachedMessage => ({
+	message: {
+		id,
+		message,
+	},
 	expires: anHourFromNow(),
 });
 
-const buildExpiredMessage = (message: Message): CachedMessage => ({
-	message,
+const buildExpiredMessage = (message: Message, id: string): CachedMessage => ({
+	message: {
+		id,
+		message,
+	},
 	expires: anHourAgo(),
 });
 
@@ -51,22 +60,22 @@ describe('LocalMessageCache', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildUnexpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildUnexpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
 			const m = LocalMessageCache.peek('EndOfArticle');
 
-			expect(m).toEqual(message1);
+			expect(m?.message).toEqual(message1);
 		});
 
 		it('does not remove items from the queue', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildUnexpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildUnexpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
@@ -88,22 +97,22 @@ describe('LocalMessageCache', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildExpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildExpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
 			const m = LocalMessageCache.peek('EndOfArticle');
 
-			expect(m).toEqual(message2);
+			expect(m?.message).toEqual(message2);
 		});
 
 		it('removes expired items from the queue', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildExpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildExpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
@@ -119,22 +128,22 @@ describe('LocalMessageCache', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildUnexpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildUnexpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
 			const m = LocalMessageCache.shift('EndOfArticle');
 
-			expect(m).toEqual(message1);
+			expect(m.message).toEqual(message1);
 		});
 
 		it('removes the item from start of the queue', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildUnexpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildUnexpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
@@ -143,7 +152,9 @@ describe('LocalMessageCache', () => {
 			const newQueue = storage.local.get(
 				'gu.brazeMessageCache.EndOfArticle',
 			) as CachedMessage[];
-			expect(newQueue.map((i) => i.message)).toEqual([message2]);
+			expect(newQueue.map(({ message: m }) => m.message)).toEqual([
+				message2,
+			]);
 		});
 
 		it('returns undefined if the queue is empty', () => {
@@ -157,21 +168,21 @@ describe('LocalMessageCache', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildExpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildExpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
 			const m = LocalMessageCache.shift('EndOfArticle');
-			expect(m).toEqual(message2);
+			expect(m?.message).toEqual(message2);
 		});
 
 		it('removes expired items from the queue', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildExpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildExpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('EndOfArticle', queue);
 
@@ -185,15 +196,21 @@ describe('LocalMessageCache', () => {
 	describe('push', () => {
 		it('adds an item to the end of the queue', () => {
 			const message1 = JSON.parse(message1Json);
-			LocalMessageCache.push('EndOfArticle', message1);
+			LocalMessageCache.push('EndOfArticle', {
+				message: message1,
+				id: '1',
+			});
 
 			const message2 = JSON.parse(message2Json);
-			LocalMessageCache.push('EndOfArticle', message2);
+			LocalMessageCache.push('EndOfArticle', {
+				message: message2,
+				id: '2',
+			});
 
 			const newQueue = storage.local.get(
 				'gu.brazeMessageCache.EndOfArticle',
 			) as CachedMessage[];
-			expect(newQueue.map((i) => i.message)).toEqual([
+			expect(newQueue.map(({ message: m }) => m.message)).toEqual([
 				message1,
 				message2,
 			]);
@@ -202,7 +219,10 @@ describe('LocalMessageCache', () => {
 		it('returns true when the push is successful', () => {
 			const message1 = JSON.parse(message1Json);
 
-			const result = LocalMessageCache.push('EndOfArticle', message1);
+			const result = LocalMessageCache.push('EndOfArticle', {
+				message: message1,
+				id: '1',
+			});
 
 			expect(result).toEqual(true);
 		});
@@ -210,28 +230,39 @@ describe('LocalMessageCache', () => {
 		it('lazily creates the queue if not already defined', () => {
 			const message = JSON.parse(message1Json);
 
-			LocalMessageCache.push('EndOfArticle', message);
+			LocalMessageCache.push('EndOfArticle', { message, id: '1' });
 
 			const newQueue = storage.local.get(
 				'gu.brazeMessageCache.EndOfArticle',
 			) as CachedMessage[];
-			expect(newQueue.map((i) => i.message)).toEqual([message]);
+			expect(newQueue.map(({ message: m }) => m.message)).toEqual([
+				message,
+			]);
 		});
 
 		it('enforces a two item limit', () => {
 			const message1 = JSON.parse(message1Json);
-			LocalMessageCache.push('EndOfArticle', message1);
+			LocalMessageCache.push('EndOfArticle', {
+				message: message1,
+				id: '1',
+			});
 
 			const message2 = JSON.parse(message2Json);
-			LocalMessageCache.push('EndOfArticle', message2);
+			LocalMessageCache.push('EndOfArticle', {
+				message: message2,
+				id: '2',
+			});
 
 			const message3 = JSON.parse(message3Json);
-			LocalMessageCache.push('EndOfArticle', message3);
+			LocalMessageCache.push('EndOfArticle', {
+				message: message3,
+				id: '3',
+			});
 
 			const newQueue = storage.local.get(
 				'gu.brazeMessageCache.EndOfArticle',
 			) as CachedMessage[];
-			expect(newQueue.map((i) => i.message)).toEqual([
+			expect(newQueue.map(({ message: m }) => m.message)).toEqual([
 				message1,
 				message2,
 			]);
@@ -241,13 +272,16 @@ describe('LocalMessageCache', () => {
 			const message1 = JSON.parse(message1Json);
 			const message2 = JSON.parse(message2Json);
 			const queue = [
-				buildUnexpiredMessage(message1),
-				buildUnexpiredMessage(message2),
+				buildUnexpiredMessage(message1, '1'),
+				buildUnexpiredMessage(message2, '2'),
 			];
 			setQueue('Banner', queue);
 
 			const message3 = JSON.parse(message2Json);
-			const result = LocalMessageCache.push('Banner', message3);
+			const result = LocalMessageCache.push('Banner', {
+				message: message3,
+				id: '3',
+			});
 
 			expect(result).toEqual(false);
 		});
@@ -256,8 +290,8 @@ describe('LocalMessageCache', () => {
 	describe('clear', () => {
 		it('wipes all queues', () => {
 			const message1 = JSON.parse(message1Json);
-			const queue1 = [buildUnexpiredMessage(message1)];
-			const queue2 = [buildUnexpiredMessage(message1)];
+			const queue1 = [buildUnexpiredMessage(message1, '1')];
+			const queue2 = [buildUnexpiredMessage(message1, '1')];
 			setQueue('EndOfArticle', queue1);
 			setQueue('Banner', queue2);
 
