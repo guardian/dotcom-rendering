@@ -5,7 +5,7 @@ import { CalloutBlockComponent } from '@root/src/web/components/elements/Callout
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/elements/CommentBlockComponent';
 import { CodeBlockComponent } from '@root/src/web/components/elements/CodeBlockComponent';
-import { DefaultRichLink } from '@root/src/web/components/RichLink';
+import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
@@ -463,14 +463,20 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return (
-				<div key={index} id={element.elementId}>
+				<Figure
+					id={element.elementId}
+					isMainMedia={isMainMedia}
+					key={index}
+					// eslint-disable-next-line jsx-a11y/aria-role
+					role="richLink"
+				>
 					<DefaultRichLink
 						index={index}
 						headlineText={element.text}
 						url={element.url}
 						isPlaceholder={true}
 					/>
-				</div>
+				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
 			return (

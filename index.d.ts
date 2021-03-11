@@ -904,6 +904,24 @@ interface MostViewedFooterPayloadType {
 	mostShared: CAPITrailType;
 }
 
+// ------------
+// RichLinks //
+// ------------
+type RichLinkCardType =
+	| 'special-report'
+	| 'live'
+	| 'dead'
+	| 'feature'
+	| 'editorial'
+	| 'comment'
+	| 'podcast'
+	| 'media'
+	| 'analysis'
+	| 'review'
+	| 'letters'
+	| 'external'
+	| 'news';
+
 // ----------
 // AdSlots //
 // ----------

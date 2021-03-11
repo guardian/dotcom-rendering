@@ -7,7 +7,7 @@ import { space } from '@guardian/src-foundations';
 type Props = {
 	children: React.ReactNode;
 	isMainMedia?: boolean;
-	role?: RoleType;
+	role?: RoleType | 'richLink';
 	id?: string;
 };
 
@@ -98,6 +98,27 @@ const roleCss = {
 		}
 	`,
 
+	// This is a special use case where we want RichLinks to appear wider when in the left col
+	richLink: css`
+		margin-bottom: ${space[1]}px;
+		float: left;
+		clear: left;
+		width: 140px;
+		margin-right: 20px;
+		${from.tablet} {
+			width: 140px;
+		}
+		${from.leftCol} {
+			position: relative;
+			margin-left: -160px;
+			width: 140px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+			width: 220px;
+		}
+	`,
+
 	halfWidth: css`
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
@@ -108,7 +129,7 @@ const roleCss = {
 	`,
 };
 
-const decidePosition = (role: RoleType) => {
+const decidePosition = (role: RoleType | 'richLink') => {
 	switch (role) {
 		case 'inline':
 			return roleCss.inline;
@@ -120,6 +141,8 @@ const decidePosition = (role: RoleType) => {
 			return roleCss.showcase;
 		case 'thumbnail':
 			return roleCss.thumbnail;
+		case 'richLink':
+			return roleCss.richLink;
 		case 'halfWidth':
 			return roleCss.halfWidth;
 		default:
