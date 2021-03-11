@@ -3,27 +3,50 @@ import { css, cx } from 'emotion';
 import { border } from '@guardian/src-foundations/palette';
 import { from, between, until } from '@guardian/src-foundations/mq';
 
-const leftWidth = css`
-	padding-right: 10px;
-	${until.leftCol} {
-		/* below 1140 */
-		display: none;
-	}
+const leftWidth = (size: LeftColSize) => {
+	switch (size) {
+		case 'wide': {
+			return css`
+				padding-right: 10px;
+				${until.desktop} {
+					/* below 980 */
+					display: none;
+				}
 
-	${between.leftCol.and.wide} {
-		/* above 1140, below 1300 */
-		flex-basis: 151px;
-		flex-grow: 0;
-		flex-shrink: 0;
-	}
+				${from.desktop} {
+					/* above 1300 */
+					flex-basis: 320px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+			`;
+		}
+		case 'compact':
+		default: {
+			return css`
+				padding-right: 10px;
+				${until.leftCol} {
+					/* below 1140 */
+					display: none;
+				}
 
-	${from.wide} {
-		/* above 1300 */
-		flex-basis: 230px;
-		flex-grow: 0;
-		flex-shrink: 0;
+				${between.leftCol.and.wide} {
+					/* above 1140, below 1300 */
+					flex-basis: 151px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+
+				${from.wide} {
+					/* above 1300 */
+					flex-basis: 230px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+			`;
+		}
 	}
-`;
+};
 
 const positionRelative = css`
 	position: relative;
@@ -51,6 +74,7 @@ type Props = {
 	showRightBorder?: boolean;
 	showPartialRightBorder?: boolean;
 	borderColour?: string;
+	size?: LeftColSize;
 };
 
 export const LeftColumn = ({
@@ -58,6 +82,7 @@ export const LeftColumn = ({
 	showRightBorder = true,
 	borderColour = border.secondary,
 	showPartialRightBorder = false,
+	size = 'compact',
 }: Props) => {
 	// Make sure we can never have both borders at the same time
 	const shouldShowPartialBorder = showRightBorder
@@ -68,7 +93,7 @@ export const LeftColumn = ({
 		<section
 			className={cx(
 				positionRelative,
-				leftWidth,
+				leftWidth(size),
 				showRightBorder && rightBorder(borderColour),
 			)}
 		>

@@ -77,6 +77,7 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		header: Colour;
 		standfirst: Colour;
 	},
 	fill: {
@@ -92,6 +93,8 @@ type Palette = {
 		articleLinkHover: Colour;
 		liveBlock: Colour;
 		standfirstLink: Colour;
+		headline: Colour;
+		standfirst: Colour;
 	},
 	topBar: {
 		card: Colour;
@@ -470,6 +473,10 @@ type AvatarType = {
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
+
+type ShareIconSize = 'small' | 'medium';
+
+type LeftColSize = 'compact'|'wide';
 
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
@@ -942,6 +949,8 @@ declare module 'dynamic-import-polyfill' {
 declare namespace JSX {
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	interface IntrinsicElements {
+		'amp-state': any;
+		'amp-form': any;
 		'amp-experiment': any;
 		'amp-sidebar': any;
 		'amp-accordion': any;

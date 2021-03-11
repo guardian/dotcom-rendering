@@ -1,9 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
 
 // Largest size first
@@ -11,29 +8,6 @@ const sizes = [
 	{ width: 300, height: 250 }, // MPU
 	{ width: 250, height: 250 }, // Square
 ];
-
-const adStyle = css`
-	background: ${palette.neutral[93]};
-	border-top: 1px solid ${palette.neutral[86]};
-	width: min-content;
-	height: min-content;
-	clear: both;
-	text-align: center;
-	margin: 0 auto 12px;
-
-	:before {
-		content: 'Advertisement';
-		display: block;
-		${textSans.xsmall()};
-		/* Adverts specifcally don't use the GU font branding. */
-		/* stylelint-disable-next-line property-blacklist */
-		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-			sans-serif;
-		padding: 3px 10px;
-		color: ${text.supporting};
-		text-align: right;
-	}
-`;
 
 const adClass = css`
 	display: none;
@@ -132,14 +106,21 @@ interface CommercialConfig {
 	usePermutive: boolean;
 }
 
-const ampAdElem = (
-	adRegion: AdRegion,
-	edition: Edition,
-	section: string,
-	contentType: string,
-	config: CommercialConfig,
-	commercialProperties: CommercialProperties,
-) => {
+export const Ad = ({
+	adRegion,
+	edition,
+	section,
+	contentType,
+	config,
+	commercialProperties,
+}: {
+	adRegion: AdRegion;
+	edition: Edition;
+	section: string;
+	contentType: string;
+	config: CommercialConfig;
+	commercialProperties: CommercialProperties;
+}) => {
 	const { width, height } = sizes[0]; // Set initial size to MPU
 	const multiSizes = sizes.map((e) => `${e.width}x${e.height}`).join(',');
 	return (
@@ -163,46 +144,3 @@ const ampAdElem = (
 		/>
 	);
 };
-
-export const Ad: React.SFC<{
-	edition: Edition;
-	section?: string;
-	contentType: string;
-	config: CommercialConfig;
-	commercialProperties: CommercialProperties;
-	className: string;
-}> = ({
-	edition,
-	section,
-	contentType,
-	config,
-	commercialProperties,
-	className,
-}) => (
-	<div className={cx(adStyle, className)}>
-		{ampAdElem(
-			'US',
-			edition,
-			section || '',
-			contentType,
-			config,
-			commercialProperties,
-		)}
-		{ampAdElem(
-			'AU',
-			edition,
-			section || '',
-			contentType,
-			config,
-			commercialProperties,
-		)}
-		{ampAdElem(
-			'ROW',
-			edition,
-			section || '',
-			contentType,
-			config,
-			commercialProperties,
-		)}
-	</div>
-);

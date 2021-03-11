@@ -145,6 +145,13 @@ Resources:
             - cloudwatch:*
             - logs:*
             Resource: '*'
+          - Effect: Allow
+            Action:
+            - ec2:DescribeTags
+            - ec2:DescribeInstances
+            - autoscaling:DescribeAutoScalingGroups
+            - autoscaling:DescribeAutoScalingInstances
+            Resource: '*'
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile

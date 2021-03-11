@@ -21,7 +21,7 @@ export const stickyNavTest: ABTest = {
 			test: (): void => {},
 		},
 		{
-			id: 'sticky-nav-simple',
+			id: 'sticky-nav-anchor',
 			test: (): void => {},
 		},
 		{

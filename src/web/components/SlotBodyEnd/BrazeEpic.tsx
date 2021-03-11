@@ -21,14 +21,8 @@ const wrapperMargins = css`
 
 const EPIC_COMPONENT_PATH = '/epic.js';
 
-type NoEpicDataFromBraze = {
-	componentName: 'NoEpic';
-};
-
-type DataFromBraze = EpicDataFromBraze | NoEpicDataFromBraze;
-
 type Meta = {
-	dataFromBraze?: DataFromBraze;
+	dataFromBraze?: EpicDataFromBraze;
 	logImpressionWithBraze: () => void;
 	// logButtonClickWithBraze: (id: number) => void; // TODO: Handle button click tracking
 };
@@ -140,10 +134,7 @@ const BrazeEpic = ({
 
 	if (Epic && meta.dataFromBraze) {
 		// This will come from Braze via the meta from canShow
-		const props = buildEpicProps(
-			meta.dataFromBraze as EpicDataFromBraze,
-			countryCode,
-		);
+		const props = buildEpicProps(meta.dataFromBraze, countryCode);
 
 		if (props) {
 			return (
@@ -157,8 +148,6 @@ const BrazeEpic = ({
 
 	return null;
 };
-
-const NoEpic = () => null;
 
 export const MaybeBrazeEpic = ({
 	contributionsServiceUrl,
@@ -175,10 +164,6 @@ export const MaybeBrazeEpic = ({
 				countryCode={countryCode}
 			/>
 		);
-	}
-
-	if (componentName === 'NoEpic') {
-		return <NoEpic />;
 	}
 
 	return null;

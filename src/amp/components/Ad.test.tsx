@@ -34,14 +34,32 @@ describe('AdComponent', () => {
 
 	it('rtc-config returns correctly formed Permutive and PreBid URLs when usePermutive and usePrebid flags are set to true', () => {
 		const { container } = render(
-			<Ad
-				edition={edition}
-				section={section}
-				contentType={contentType}
-				config={commercialConfig}
-				commercialProperties={commercialProperties}
-				className=""
-			/>,
+			<>
+				<Ad
+					adRegion="US"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="AU"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="ROW"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+			</>,
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
@@ -88,14 +106,32 @@ describe('AdComponent', () => {
 		commercialConfig.usePermutive = false;
 
 		const { container } = render(
-			<Ad
-				edition={edition}
-				section={section}
-				contentType={contentType}
-				config={commercialConfig}
-				commercialProperties={commercialProperties}
-				className=""
-			/>,
+			<>
+				<Ad
+					adRegion="US"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="AU"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="ROW"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+			</>,
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
@@ -133,14 +169,32 @@ describe('AdComponent', () => {
 		commercialConfig.usePrebid = false;
 
 		const { container } = render(
-			<Ad
-				edition={edition}
-				section={section}
-				contentType={contentType}
-				config={commercialConfig}
-				commercialProperties={commercialProperties}
-				className=""
-			/>,
+			<>
+				<Ad
+					adRegion="US"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="AU"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="ROW"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+			</>,
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
@@ -179,14 +233,32 @@ describe('AdComponent', () => {
 		commercialConfig.usePermutive = false;
 
 		const { container } = render(
-			<Ad
-				edition={edition}
-				section={section}
-				contentType={contentType}
-				config={commercialConfig}
-				commercialProperties={commercialProperties}
-				className=""
-			/>,
+			<>
+				<Ad
+					adRegion="US"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="AU"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+				<Ad
+					adRegion="ROW"
+					edition={edition}
+					section={section || ''}
+					contentType={contentType}
+					config={commercialConfig}
+					commercialProperties={commercialProperties}
+				/>
+			</>,
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
