@@ -22,7 +22,6 @@ const styles = (kicker: string): SerializedStyles => css`
 	font-size: 1.0625rem;
 	padding: ${remSpace[1]} 0 ${remSpace[2]};
 	box-sizing: border-box;
-	width: fit-content;
 
 	${from.tablet} {
 		padding-bottom: ${remSpace[3]};

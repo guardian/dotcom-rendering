@@ -76,6 +76,12 @@ const styles = (kickerColor: string): SerializedStyles => css`
 		}
 	}
 `;
+
+const textContainerStyles = css`
+	display: flex;
+	flex-direction: column;
+`;
+
 const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
@@ -109,7 +115,9 @@ const noLinks = true;
 const Standfirst: FC<Props> = ({ item, shareIcon }) => {
 	return maybeRender(item.standfirst, (standfirst) => (
 		<div css={getStyles(item)}>
-			{renderStandfirstText(standfirst, item, noLinks)}
+			<div css={textContainerStyles}>
+				{renderStandfirstText(standfirst, item, noLinks)}
+			</div>
 			{shareIcon && (
 				<span className="js-share-button" role="button">
 					<ShareIcon />

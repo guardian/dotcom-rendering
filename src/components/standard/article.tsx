@@ -36,7 +36,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { getThemeStyles, themeToPillar } from 'themeStyles';
+import { getThemeStyles, themeToPillarString } from 'themeStyles';
 
 // ----- Styles ----- //
 
@@ -108,7 +108,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 						css={onwardStyles}
 						id="comments"
 						data-closed={false}
-						data-pillar={themeToPillar(item.theme)}
+						data-pillar={themeToPillarString(item.theme)}
 						data-short-id={id}
 					></section>
 				)),

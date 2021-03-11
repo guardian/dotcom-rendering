@@ -13,9 +13,12 @@ import type { FC, ReactElement } from 'react';
 const captionId = 'header-image-caption';
 
 const HeaderImageCaptionStyles = (
+	isFullWidthImage: boolean,
 	iconBackgroundColor?: string,
 ): SerializedStyles => css`
 	summary {
+		display: block;
+		pointer-events: auto;
 		text-align: center;
 		background-color: ${iconBackgroundColor
 			? iconBackgroundColor
@@ -46,15 +49,15 @@ const HeaderImageCaptionStyles = (
 		${textSans.small()};
 		box-sizing: border-box;
 
-		${from.tablet} {
+		${isFullWidthImage &&
+		`${from.tablet} {
 			padding-left: ${remSpace[6]};
 		}
-
 		${from.desktop} {
 			padding-left: 9rem;
-		}
+		}`}
 	}
-
+	pointer-events: none;
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -81,6 +84,7 @@ interface Props {
 	styles?: SerializedStyles;
 	iconColor?: string;
 	iconBackgroundColor?: string;
+	isFullWidthImage: boolean;
 }
 
 const HeaderImageCaption: FC<Props> = ({
@@ -89,12 +93,19 @@ const HeaderImageCaption: FC<Props> = ({
 	styles,
 	iconColor,
 	iconBackgroundColor,
+	isFullWidthImage,
 }: Props) =>
 	pipe2(
 		caption,
 		map((cap) => (
 			<figcaption
-				css={[HeaderImageCaptionStyles(iconBackgroundColor), styles]}
+				css={[
+					HeaderImageCaptionStyles(
+						isFullWidthImage,
+						iconBackgroundColor,
+					),
+					styles,
+				]}
 			>
 				<details>
 					<summary>

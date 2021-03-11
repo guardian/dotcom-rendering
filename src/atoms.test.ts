@@ -805,7 +805,7 @@ describe('parseAtom', () => {
 				content: {
 					questions: questionsMock,
 				},
-				quizType: 'quiz type',
+				quizType: 'knowledge',
 			};
 			quiz = {
 				id: atomId,
@@ -839,10 +839,10 @@ describe('parseAtom', () => {
 			);
 		});
 
-		it(`parses quiz atom correctly`, () => {
+		it(`parses knowledge quiz atom correctly`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
 				ok({
-					kind: ElementKind.QuizAtom,
+					kind: ElementKind.KnowledgeQuizAtom,
 					id: atomId,
 					questions: [
 						{
@@ -850,7 +850,8 @@ describe('parseAtom', () => {
 							...questionsMock[0],
 							answers: [
 								{
-									...answerMock,
+									answerBuckets: [],
+									id: answerMock.id,
 									isCorrect: true,
 									text: 'answer text',
 								},

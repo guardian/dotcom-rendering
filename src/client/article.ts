@@ -1,8 +1,11 @@
 // ----- Imports ----- //
 
 import 'regenerator-runtime/runtime.js';
-import { AudioAtom, QuizAtom } from '@guardian/atoms-rendering';
-import type { QuizAtomType } from '@guardian/atoms-rendering/dist/QuizAtom';
+import {
+	AudioAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
+} from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
@@ -25,6 +28,7 @@ import {
 } from 'native/nativeApi';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
+import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 
 // ----- Run ----- //
@@ -172,7 +176,7 @@ function renderComments(): void {
 		const props = {
 			shortUrl,
 			baseUrl: 'https://discussion.theguardian.com/discussion-api',
-			pillar,
+			pillar: stringToPillar(pillar),
 			user,
 			isClosedForComments,
 			additionalHeaders,
@@ -369,10 +373,30 @@ function hydrateQuizAtoms(): void {
 		const props = atom.querySelector('.js-quiz-params')?.innerHTML;
 		try {
 			if (props) {
-				const quizProps: unknown = JSON.parse(
+				const quizProps = (JSON.parse(
 					props.replace(/&quot;/g, '"'),
-				);
-				ReactDOM.hydrate(h(QuizAtom, quizProps as QuizAtomType), atom);
+				) as unknown) as { quizType: string };
+				if (quizProps.quizType === 'personality') {
+					ReactDOM.hydrate(
+						h(
+							PersonalityQuizAtom,
+							(quizProps as unknown) as React.ComponentProps<
+								typeof PersonalityQuizAtom
+							>,
+						),
+						atom,
+					);
+				} else if (quizProps.quizType === 'knowledge') {
+					ReactDOM.hydrate(
+						h(
+							KnowledgeQuizAtom,
+							(quizProps as unknown) as React.ComponentProps<
+								typeof KnowledgeQuizAtom
+							>,
+						),
+						atom,
+					);
+				}
 			}
 		} catch (e) {
 			console.error(e);
