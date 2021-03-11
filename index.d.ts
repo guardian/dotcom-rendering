@@ -116,7 +116,7 @@ type Palette = {
 		headline: Colour;
 		standfirst: Colour;
 		richLink: Colour;
-
+		navPillar: Colour;
 	},
 	topBar: {
 		card: Colour;

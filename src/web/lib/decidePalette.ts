@@ -553,6 +553,9 @@ const borderRichLink: (format: Format) => string = (format) => {
 	return pillarPalette[Pillar.News][400];
 };
 
+const borderNavPillar: (format: Format) => string = (format) =>
+	pillarPalette[format.theme].bright;
+
 const backgroundRichLink: (format: Format) => string = (format) => {
 	if (format) {
 		return pillarPalette[format.theme].main;
@@ -686,6 +689,7 @@ export const decidePalette = (format: Format): Palette => {
 			headline: borderHeadline(format),
 			standfirst: borderStandfirst(format),
 			richLink: borderRichLink(format),
+			navPillar: borderNavPillar(format),
 		},
 		topBar: {
 			card: topBarCard(format),
