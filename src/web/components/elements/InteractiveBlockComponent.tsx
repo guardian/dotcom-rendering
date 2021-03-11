@@ -201,6 +201,11 @@ export const InteractiveBlockComponent = ({
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
+		// Once loaded, we don't touch it.
+		if (loaded) {
+			return;
+		}
+
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 		if (
 			scriptUrl ===
@@ -246,7 +251,7 @@ export const InteractiveBlockComponent = ({
 
 			setLoaded(true);
 		}
-	}, [scriptUrl, role, url]);
+	}, [scriptUrl, role, url, loaded]);
 
 	return (
 		<div
