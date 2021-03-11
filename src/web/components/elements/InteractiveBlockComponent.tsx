@@ -245,7 +245,7 @@ export const InteractiveBlockComponent = ({
 
 			setLoaded(true);
 		}
-	}, [scriptUrl]);
+	}, [scriptUrl, role, url]);
 
 	return (
 		<div
