@@ -246,67 +246,83 @@ describe('SignInGate - displayRule methods', () => {
 	});
 
 	describe('hasRequiredConsents', () => {
-		const generateConstents: () => { [key: string]: boolean } = () => {
+		const generateConsents: () => { [key: string]: boolean } = () => {
 			return {
-				'5f369a02b8e05c308701f829': true,
-				'5f203dcb1f0dea790562e20f': true,
-				'5ed8c49c4b8ce4571c7ad801': true,
-				'5efefe25b8e05c06542b2a77': true,
-				'5e716fc09a0b5040d575080f': true,
-				'5e7e1298b8e05c54a85c52d2': true,
-				'5e68dbc769e7a93e0b25902f': true,
-				'5e542b3a4cd8884eb41b5a72': true,
-				'5f1aada6b8e05c306c0597d7': true,
-				'5e4a5fbf26de4a77922b38a6': true,
-				'5e952f6107d9d20c88e7c975': true,
-				'5e7ced57b8e05c485246ccf3': true,
-				'5e37fc3e56a5e6615502f9c9': true,
-				'5f745ab96f3aae0163740409': true,
-				'5ed6aeb1b8e05c241a63c71f': true,
-				'5ef5c3a5b8e05c69980eaa5b': true,
-				'5f203dbeeaaaa8768fd3226a': true,
-				'5eff0d77969bfa03746427eb': true,
-				'5f22bfd82a6b6c1afd1181a9': true,
-				'5f199c302425a33f3f090f51': true,
-				'5ed0eb688a76503f1016578f': true,
-				'5f0f39014effda6e8bbd2006': true,
-				'5eab3d5ab8e05c2bbe33f399': true,
-				'5e71760b69966540e4554f01': true,
-				'5e7ac3fae30e7d1bc1ebf5e8': true,
+				consentId1: true,
+				consentId2: true,
+				consentId3: true,
+				consentId4: true,
 			};
 		};
 
-		test('returns true when the user has consented to the required vendors', async () => {
-			const consents = generateConstents();
+		test('returns true when the user has consented to all', async () => {
+			const testConsents = generateConsents();
+
 			mockOnConsentChangeResult = {
 				tcfv2: {
-					vendorConsents: consents,
+					vendorConsents: testConsents,
+					consents: testConsents,
 				},
 			};
 			await expect(hasRequiredConsents()).resolves.toBe(true);
 		});
 
-		test('returns false when the user has not consented to one of the required vendors', async () => {
-			const consents = generateConstents();
-			consents['5f203dcb1f0dea790562e20f'] = false;
+		test('returns false when the user has not consented to one of the consents', async () => {
+			const testConsents = generateConsents();
 
 			mockOnConsentChangeResult = {
 				tcfv2: {
-					vendorConsents: consents,
+					vendorConsents: testConsents,
+					consents: { ...testConsents, additionalConsent: false },
+				},
+			};
+			await expect(hasRequiredConsents()).resolves.toBe(false);
+
+			mockOnConsentChangeResult = {
+				tcfv2: {
+					consents: testConsents,
+					vendorConsents: {
+						...testConsents,
+						additionalConsent: false,
+					},
 				},
 			};
 			await expect(hasRequiredConsents()).resolves.toBe(false);
 		});
 
-		test('returns false when the user has not consented to any of the required vendors', async () => {
-			const consents = generateConstents();
-			Object.keys(consents).forEach((key) => {
-				consents[key] = false;
-			});
+		test('returns false when a consents list is empty', async () => {
+			const testConsents = generateConsents();
 
 			mockOnConsentChangeResult = {
 				tcfv2: {
-					vendorConsents: consents,
+					vendorConsents: {},
+					consents: testConsents,
+				},
+			};
+			await expect(hasRequiredConsents()).resolves.toBe(false);
+
+			mockOnConsentChangeResult = {
+				tcfv2: {
+					vendorConsents: testConsents,
+					consents: {},
+				},
+			};
+			await expect(hasRequiredConsents()).resolves.toBe(false);
+		});
+
+		test('returns false when a consents list is undefined', async () => {
+			const testConsents = generateConsents();
+
+			mockOnConsentChangeResult = {
+				tcfv2: {
+					consents: testConsents,
+				},
+			};
+			await expect(hasRequiredConsents()).resolves.toBe(false);
+
+			mockOnConsentChangeResult = {
+				tcfv2: {
+					vendorConsents: testConsents,
 				},
 			};
 			await expect(hasRequiredConsents()).resolves.toBe(false);

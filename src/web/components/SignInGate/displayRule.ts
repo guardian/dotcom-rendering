@@ -6,10 +6,8 @@ import {
 import { getCountryCodeFromLocalStorage } from '@frontend/web/lib/getCountryCode';
 import { CurrentABTest } from '@root/src/web/components/SignInGate/gateDesigns/types';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
-import {
-	getConsentFor,
-	onConsentChange,
-} from '@root/node_modules/@guardian/consent-management-platform';
+import { onConsentChange } from '@root/node_modules/@guardian/consent-management-platform';
+import { ConsentState } from '@root/node_modules/@guardian/consent-management-platform/dist/types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
@@ -99,68 +97,25 @@ export const canShow = (
 	);
 };
 
-const allCmpConsents: (
-	| 'a9'
-	| 'acast'
-	| 'braze'
-	| 'comscore'
-	| 'facebook-mobile'
-	| 'fb'
-	| 'firebase'
-	| 'google-analytics'
-	| 'google-mobile-ads'
-	| 'google-sign-in'
-	| 'google-tag-manager'
-	| 'googletag'
-	| 'ias'
-	| 'inizio'
-	| 'ipsos'
-	| 'lotame'
-	| 'nielsen'
-	| 'ophan'
-	| 'permutive'
-	| 'prebid'
-	| 'redplanet'
-	| 'remarketing'
-	| 'sentry'
-	| 'teads'
-	| 'twitter'
-	| 'youtube-player'
-)[] = [
-	'a9',
-	'acast',
-	'braze',
-	'comscore',
-	'fb',
-	'google-analytics',
-	'google-mobile-ads',
-	'google-tag-manager',
-	'googletag',
-	'ias',
-	'inizio',
-	'ipsos',
-	'lotame',
-	'nielsen',
-	'ophan',
-	'permutive',
-	'prebid',
-	'redplanet',
-	'remarketing',
-	'sentry',
-	'teads',
-	'twitter',
-	'youtube-player',
-];
-
 export const hasRequiredConsents = (): Promise<boolean> => {
+	const hasConsentedToAll = (state: ConsentState) => {
+		const consentFlags = state.tcfv2?.consents
+			? Object.values(state.tcfv2.consents)
+			: [];
+		const vendorConsentFlags = state.tcfv2?.vendorConsents
+			? Object.values(state.tcfv2.vendorConsents)
+			: [];
+		const isEmpty =
+			consentFlags.length === 0 || vendorConsentFlags.length === 0;
+
+		return (
+			!isEmpty && [...consentFlags, ...vendorConsentFlags].every(Boolean)
+		);
+	};
+
 	return new Promise((resolve) => {
 		onConsentChange((state) => {
-			try {
-				resolve(allCmpConsents.every((c) => getConsentFor(c, state)));
-			} catch (_) {
-				// we want to ignore errors
-				resolve(false);
-			}
+			resolve(hasConsentedToAll(state));
 		});
 	});
 };
