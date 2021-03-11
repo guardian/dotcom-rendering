@@ -36,6 +36,7 @@ export const coreVitals = (): void => {
 
 	const addToJson = ({ name, value }: CoreVitalsArgs): void => {
 		switch (name) {
+			// The math functions are to length of number to <= 9
 			case 'FCP':
 				jsonData.fcp = Math.round(value * 1000000) / 1000000;
 				break;
