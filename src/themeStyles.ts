@@ -123,6 +123,7 @@ function themeToPillarString(theme: Theme): string {
 function themeToPillar(theme: Theme): Pillar {
 	switch (theme) {
 		case Special.SpecialReport:
+		case Special.Labs:
 			return Pillar.News;
 		default:
 			return theme;
