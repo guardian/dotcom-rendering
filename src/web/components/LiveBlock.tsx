@@ -277,7 +277,7 @@ export const LiveBlock = ({
 				{mainElements.map((element, index) => {
 					if (typesWeStretch.includes(element._type)) {
 						return (
-							<BlockMedia key={index}>
+							<BlockMedia key={`${element._type}-${index}`}>
 								<ElementRenderer
 									isMainMedia={false}
 									isLiveBlog={true}
@@ -294,7 +294,7 @@ export const LiveBlock = ({
 					}
 
 					return (
-						<BlockText key={index}>
+						<BlockText key={`${element._type}-${index}`}>
 							<ElementRenderer
 								isMainMedia={false}
 								isLiveBlog={true}
