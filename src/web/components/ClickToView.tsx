@@ -202,7 +202,7 @@ export const ClickToView = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={() => handleClick()}
-						data-link-name="accept-button"
+						data-link-name="allow-button"
 					>
 						{roleButtonText(role)}
 					</Button>
