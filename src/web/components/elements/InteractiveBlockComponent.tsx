@@ -107,15 +107,12 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 	window.addEventListener(
 		'message',
 		(event) => {
-			console.log(event);
 			if (event.source !== iframe.contentWindow) {
-				console.log('nope');
 				return;
 			}
 
-			// IE 8 + 9 only support strings
 			const message: Record<string, unknown> = JSON.parse(event.data);
-			console.log(message);
+
 			const postPositionMessage = (subscribe?: boolean) => {
 				const iframeBox = iframe.getBoundingClientRect();
 				postMessage({
@@ -203,7 +200,6 @@ export const InteractiveBlockComponent = ({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
-	console.log(role);
 	useEffect(() => {
 		if (
 			scriptUrl ===
