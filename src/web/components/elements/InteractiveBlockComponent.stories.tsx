@@ -26,13 +26,20 @@ const SomeText = () => (
 	/>
 );
 
+const Container = ({ children }: { children: React.ReactNode }) => (
+	<div
+		className={css`
+			padding-left: 250px;
+			padding-right: 20px;
+		`}
+	>
+		{children}
+	</div>
+);
+
 export const Default = () => {
 	return (
-		<div
-			className={css`
-				padding-left: 250px;
-			`}
-		>
+		<Container>
 			<SomeText />
 			<SomeText />
 			<Figure role="supporting">
@@ -46,18 +53,14 @@ export const Default = () => {
 			<SomeText />
 			<SomeText />
 			<SomeText />
-		</div>
+		</Container>
 	);
 };
 Default.story = { name: 'default' };
 
 export const InlineMap = () => {
 	return (
-		<div
-			className={css`
-				padding-left: 20px;
-			`}
-		>
+		<Container>
 			<SomeText />
 			<SomeText />
 			<Figure role="inline">
@@ -70,18 +73,14 @@ export const InlineMap = () => {
 			</Figure>
 			<SomeText />
 			<SomeText />
-		</div>
+		</Container>
 	);
 };
 InlineMap.story = { name: 'Inline interactive Map' };
 
 export const Showcase = () => {
 	return (
-		<div
-			className={css`
-				padding-left: 20px;
-			`}
-		>
+		<Container>
 			<SomeText />
 			<SomeText />
 			<Figure role="showcase">
@@ -95,18 +94,14 @@ export const Showcase = () => {
 			<SomeText />
 			<SomeText />
 			<SomeText />
-		</div>
+		</Container>
 	);
 };
 Showcase.story = { name: 'Showcase interactive element' };
 
 export const NonBootJs = () => {
 	return (
-		<div
-			className={css`
-				padding-left: 250px;
-			`}
-		>
+		<Container>
 			<SomeText />
 			<SomeText />
 			<Figure role="inline">
@@ -120,7 +115,7 @@ export const NonBootJs = () => {
 			<SomeText />
 			<SomeText />
 			<SomeText />
-		</div>
+		</Container>
 	);
 };
 NonBootJs.story = { name: 'Non-boot.js interactive element' };
