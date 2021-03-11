@@ -78,7 +78,6 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 				{trail.isLiveBlog ? (
 					<LinkHeadline
 						headlineText={trail.headline}
-						format={trail.format}
 						palette={trail.palette}
 						size="small"
 						kickerText="Live"
@@ -89,7 +88,6 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 				) : (
 					<LinkHeadline
 						headlineText={trail.headline}
-						format={trail.format}
 						palette={trail.palette}
 						size="small"
 						showQuotes={trail.format.design === Design.Comment}
