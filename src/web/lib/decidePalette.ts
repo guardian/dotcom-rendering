@@ -595,6 +595,9 @@ const textDropCap = (format: Format): string => {
 	}
 };
 
+const backgroundHeadlineTag = (format: Format): string =>
+	pillarPalette[format.theme].dark;
+
 const backgroundCarouselDot = (format: Format): string => {
 	return pillarPalette[format.theme][400];
 };
@@ -655,6 +658,7 @@ export const decidePalette = (format: Format): Palette => {
 			speechBubble: backgroundSpeechBubble(format),
 			carouselDot: backgroundCarouselDot(format),
 			carouselDotFocus: backgroundCarouselDotFocus(format),
+			headlineTag: backgroundHeadlineTag(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

@@ -95,6 +95,7 @@ type Palette = {
 		speechBubble: Colour;
 		carouselDot: Colour;
 		carouselDotFocus: Colour;
+		headlineTag: Colour;
 	},
 	fill: {
 		commentCount: Colour;
