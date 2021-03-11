@@ -9,7 +9,7 @@ type Props = {
 	url?: string;
 	scriptUrl?: string;
 	alt?: string;
-	role?: string;
+	role?: RoleType;
 };
 
 /*
@@ -70,17 +70,21 @@ and to avoid loading the boot.js file.
 For the remaining few we dynamically load and AMD loader and support the contract as defined with curl AMD loader
 
 */
-const supportingMinHeight = 200;
-const inlineMinHeight = 500;
-const getMinHeight = (role: string, loaded: boolean) => {
+const decideHeight = (role: RoleType) => {
+	switch (role) {
+		case 'supporting':
+			return 200;
+		default:
+			return 500;
+	}
+};
+const getMinHeight = (role: RoleType, loaded: boolean) => {
 	if (loaded) {
 		return `auto`;
 	}
-	return role === 'supporting'
-		? `${supportingMinHeight}px`
-		: `${inlineMinHeight}px`;
+	return `${decideHeight(role)}px`;
 };
-const wrapperStyle = (role: string, loaded: boolean) => css`
+const wrapperStyle = (role: RoleType, loaded: boolean) => css`
 	${body.medium()};
 	background-color: ${neutral[100]};
 	font-weight: 300;
@@ -216,10 +220,7 @@ export const InteractiveBlockComponent = ({
 			const iframe = document.createElement('iframe');
 			iframe.style.width = '100%';
 			iframe.style.border = 'none';
-			iframe.height =
-				role === 'supporting'
-					? supportingMinHeight.toString()
-					: inlineMinHeight.toString(); // default height
+			iframe.height = decideHeight(role).toString();
 			iframe.src = url;
 
 			setupWindowListeners(iframe);
@@ -261,11 +262,7 @@ export const InteractiveBlockComponent = ({
 		>
 			{!loaded && (
 				<Placeholder
-					height={
-						role === 'supporting'
-							? supportingMinHeight
-							: inlineMinHeight
-					}
+					height={decideHeight(role)}
 					shouldShimmer={false}
 				/>
 			)}
