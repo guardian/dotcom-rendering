@@ -266,6 +266,7 @@ export const InteractiveBlockComponent = ({
 							? supportingMinHeight
 							: inlineMinHeight
 					}
+					shouldShimmer={false}
 				/>
 			)}
 			{!loaded && (
