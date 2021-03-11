@@ -161,7 +161,7 @@ export const ElementRenderer = ({
 				<Figure isMainMedia={isMainMedia} role={element.role}>
 					<DisclaimerBlockComponent
 						html={element.html}
-						pillar={format.theme}
+						palette={palette}
 					/>
 				</Figure>
 			);
