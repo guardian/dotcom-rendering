@@ -28,7 +28,7 @@ export const decideDesign = (format: CAPIFormat): Design => {
 		case 'InterviewDesign':
 			return Design.Interview;
 		case 'EditorialDesign':
-			return Design.GuardianView;
+			return Design.Editorial;
 		case 'QuizDesign':
 			return Design.Quiz;
 		case 'InteractiveDesign':

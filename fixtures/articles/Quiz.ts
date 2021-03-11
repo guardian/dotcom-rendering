@@ -38,6 +38,10 @@ export const Quiz: CAPIType = {
 					value: 'uk',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
 					name: 'se',
 					value: ['guardian-sport-network'],
 				},
@@ -69,10 +73,6 @@ export const Quiz: CAPIType = {
 					name: 'k',
 					value: ['sport', 'football'],
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		US: {
@@ -81,6 +81,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -118,10 +122,6 @@ export const Quiz: CAPIType = {
 					name: 'k',
 					value: ['sport', 'football'],
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		AU: {
@@ -130,6 +130,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -167,10 +171,6 @@ export const Quiz: CAPIType = {
 					name: 'edition',
 					value: 'au',
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
-				},
 			],
 		},
 		INT: {
@@ -179,6 +179,10 @@ export const Quiz: CAPIType = {
 					name: 'url',
 					value:
 						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
 				},
 				{
 					name: 'se',
@@ -215,10 +219,6 @@ export const Quiz: CAPIType = {
 				{
 					name: 'k',
 					value: ['sport', 'football'],
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/e3fga',
 				},
 			],
 		},
@@ -850,10 +850,6 @@ export const Quiz: CAPIType = {
 						url: '/crosswords/crossword-blog',
 					},
 					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
-					},
-					{
 						title: 'Quick',
 						url: '/crosswords/series/quick',
 					},
@@ -1064,6 +1060,11 @@ export const Quiz: CAPIType = {
 	},
 	designType: 'Quiz',
 	editionId: 'UK',
+	format: {
+		design: 'QuizDesign',
+		theme: 'SportPillar',
+		display: 'ShowcaseDisplay',
+	},
 	standfirst:
 		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
 	openGraphData: {
@@ -1330,7 +1331,7 @@ export const Quiz: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '6c671ba8-a07e-4865-926b-b4db8661d5ae',
+			elementId: 'cd68f10c-871b-4414-8839-2a09b148fb54',
 			role: 'showcase',
 			data: {
 				alt:
@@ -1736,7 +1737,7 @@ export const Quiz: CAPIType = {
 			lastUpdated: 1591952965000,
 			elements: [
 				{
-					elementId: '1da02ed3-4f82-4149-ad6e-872f5edf9e3f',
+					elementId: '891a1e0f-949a-48eb-9ce2-7a294dc291cd',
 					quizType: 'knowledge',
 					resultBuckets: [],
 					questions: [

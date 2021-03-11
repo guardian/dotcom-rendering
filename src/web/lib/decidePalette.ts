@@ -155,7 +155,7 @@ const textCardHeadline = (format: Format): string => {
 		case Design.Interview:
 			return pillarPalette[format.theme].dark;
 		case Design.Media:
-		case Design.Live:
+		case Design.LiveBlog:
 			return neutral[97];
 		default:
 			return BLACK;
@@ -176,7 +176,7 @@ const textCardKicker = (format: Format): string => {
 	if (format.display === Display.Immersive)
 		return pillarPalette[format.theme].bright;
 	switch (format.design) {
-		case Design.Live:
+		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
 					return news[600];
@@ -216,7 +216,7 @@ const textCardFooter = (format: Format): string => {
 				default:
 					return neutral[60];
 			}
-		case Design.Live:
+		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
 					return '#ffbac8';
@@ -261,7 +261,7 @@ const textLinkKicker = (format: Format): string => {
 const backgroundArticle = (format: Format): string => {
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
-	if (format.design === Design.GuardianView) return opinion[800];
+	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
 	return 'transparent';
 };
@@ -304,12 +304,12 @@ const backgroundAvatar = (format: Format): string => {
 const backgroundCard = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return opinion[800];
 		case Design.Media:
 			return neutral[20];
-		case Design.Live:
+		case Design.LiveBlog:
 			return pillarPalette[format.theme].dark;
 		default:
 			return neutral[97];
@@ -364,7 +364,7 @@ const fillCardIcon = (format: Format): string => {
 				default:
 					return neutral[46];
 			}
-		case Design.Live:
+		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
 					return '#ffbac8';

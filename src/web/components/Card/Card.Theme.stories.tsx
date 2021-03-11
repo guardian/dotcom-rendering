@@ -82,7 +82,7 @@ const GuardianView = Format(
 	{
 		display: Display.Standard,
 		theme: Pillar.News,
-		design: Design.GuardianView,
+		design: Design.Editorial,
 	},
 	'GuardianView',
 );
@@ -118,7 +118,7 @@ const Live = Format(
 	{
 		display: Display.Standard,
 		theme: Pillar.News,
-		design: Design.Live,
+		design: Design.LiveBlog,
 	},
 	'Live',
 );

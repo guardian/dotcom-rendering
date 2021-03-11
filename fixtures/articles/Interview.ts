@@ -12,9 +12,7 @@
  */
 
 export const Interview: CAPIType = {
-	shouldHideReaderRevenue: false,
 	slotMachineFlags: '',
-	isAdFreeUser: false,
 	main:
 		'<figure class="element element-image element--showcase" data-media-id="e193f0cc579ba041293d4616fd9929db9e2b62e8"> <img src="https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/1000.jpg" alt="‘The hijab is part of my identity’: Halima Aden wears dress by yufash.com; headscarf by Halima x Modanisa, modanisa.com; and bracelet by togetherband.org. " width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">‘The hijab is part of my identity’: Halima Aden wears dress by <a href="http://yufash.com">yufash.com</a>; headscarf by Halima x Modanisa, <a href="http://modanisa.com">modanisa.com</a>; and bracelet by <a href="http://togetherband.org">togetherband.org</a>. </span> <span class="element-image__credit">Photograph: Jean-Paul Pietrus/The Observer</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
@@ -40,7 +38,7 @@ export const Interview: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d7nqb',
+					value: 'https://www.theguardian.com/p/d7nqb',
 				},
 				{
 					name: 'url',
@@ -81,7 +79,7 @@ export const Interview: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d7nqb',
+					value: 'https://www.theguardian.com/p/d7nqb',
 				},
 				{
 					name: 'url',
@@ -126,7 +124,7 @@ export const Interview: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d7nqb',
+					value: 'https://www.theguardian.com/p/d7nqb',
 				},
 				{
 					name: 'url',
@@ -171,7 +169,7 @@ export const Interview: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d7nqb',
+					value: 'https://www.theguardian.com/p/d7nqb',
 				},
 				{
 					name: 'url',
@@ -209,192 +207,11 @@ export const Interview: CAPIType = {
 			],
 		},
 	},
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
-		],
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tZGVmYXVsdC5wbmc&s=58f2edd11761f046821831441f318041',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation?contenttype=Article&source=twitter',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
-		'twitter:app:url:iphone':
-			'gnmguardian://global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation?contenttype=Article&source=twitter',
-	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
 		'Last modified on Mon 10 Feb 2020 11.40 GMT',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
-	pageType: {
-		hasShowcaseMainElement: true,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: false,
-	},
-	hasStoryPackage: false,
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	publication: 'The Observer',
 	trailText:
 		'The first model to wear a hijab on the cover of Vogue, the first to wear a burkini in Sports Illustrated… Halima Aden is used to breaking barriers. Here she talks about shattering stereotypes and using fashion as a force for change',
@@ -409,8 +226,6 @@ export const Interview: CAPIType = {
 		},
 	],
 	contentType: 'Article',
-	headline:
-		"‘We all deserve representation': hijab-wearing model Halima Aden on the power of fashion",
 	nav: {
 		currentUrl: '/',
 		pillars: [
@@ -1023,10 +838,6 @@ export const Interview: CAPIType = {
 						url: '/crosswords/crossword-blog',
 					},
 					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
-					},
-					{
 						title: 'Quick',
 						url: '/crosswords/series/quick',
 					},
@@ -1434,10 +1245,306 @@ export const Interview: CAPIType = {
 			},
 		},
 	},
+	author: {
+		byline: 'Elle Hunt',
+	},
+	designType: 'Interview',
+	editionId: 'UK',
+	format: {
+		design: 'FeatureDesign',
+		theme: 'NewsPillar',
+		display: 'ShowcaseDisplay',
+	},
+	standfirst:
+		'<p>The first model to wear a hijab on the cover of Vogue, the first to wear a burkini in Sports Illustrated… Halima Aden is used to breaking barriers. Here she talks about shattering stereotypes and using fashion as a force for change</p>',
+	openGraphData: {
+		'og:url':
+			'http://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+		'article:author': 'https://www.theguardian.com/profile/elle-hunt',
+		'og:image:height': '720',
+		'og:description':
+			'The first model to wear a hijab on the cover of Vogue, the first to wear a burkini in Sports Illustrated… Halima Aden is used to breaking barriers. Here she talks about shattering stereotypes and using fashion as a force for change',
+		'og:image:width': '1200',
+		'og:image':
+			'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tZGVmYXVsdC5wbmc&enable=upscale&s=230905a0218da965d6d144c04f26e08b',
+		'al:ios:url':
+			'gnmguardian://global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation?contenttype=Article&source=applinks',
+		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:type': 'article',
+		'al:ios:app_store_id': '409128287',
+		'article:section': 'Global',
+		'article:published_time': '2020-02-09T11:00:04.000Z',
+		'og:title':
+			"‘We all deserve representation': hijab-wearing model Halima Aden on the power of fashion",
+		'fb:app_id': '180444840287',
+		'article:tag': 'Models,Fashion,Life and style,Women',
+		'al:ios:app_name': 'The Guardian',
+		'og:site_name': 'the Guardian',
+		'article:modified_time': '2020-02-10T11:40:40.000Z',
+	},
+	sectionUrl: 'fashion/models',
+	pageId:
+		'global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+	version: 3,
+	tags: [
+		{
+			id: 'tone/features',
+			type: 'Tone',
+			title: 'Features',
+		},
+		{
+			id: 'tone/interview',
+			type: 'Tone',
+			title: 'Interviews',
+		},
+		{
+			id: 'fashion/models',
+			type: 'Keyword',
+			title: 'Models',
+		},
+		{
+			id: 'fashion/fashion',
+			type: 'Keyword',
+			title: 'Fashion',
+		},
+		{
+			id: 'lifeandstyle/lifeandstyle',
+			type: 'Keyword',
+			title: 'Life and style',
+		},
+		{
+			id: 'lifeandstyle/women',
+			type: 'Keyword',
+			title: 'Women',
+		},
+		{
+			id: 'type/article',
+			type: 'Type',
+			title: 'Article',
+		},
+		{
+			id: 'profile/elle-hunt',
+			type: 'Contributor',
+			title: 'Elle Hunt',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/uploads/2019/09/03/Elle_Hunt,_L.png?width=300&quality=85&auto=format&fit=max&s=2402ba5a4d73a4a175942a401662daa5',
+		},
+		{
+			id: 'publication/theobserver',
+			type: 'Publication',
+			title: 'The Observer',
+		},
+		{
+			id: 'theobserver/magazine',
+			type: 'NewspaperBook',
+			title: 'Observer Magazine',
+		},
+		{
+			id: 'theobserver/magazine/life-and-style',
+			type: 'NewspaperBookSection',
+			title: 'Life & style',
+		},
+		{
+			id: 'tracking/commissioningdesk/observer-magazine',
+			type: 'Tracking',
+			title: 'Observer Magazine',
+		},
+	],
+	pillar: 'news',
+	webURL:
+		'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+	showBottomSocialButtons: true,
+	isImmersive: false,
+	sectionLabel: 'Models',
+	shouldHideReaderRevenue: false,
+	isAdFreeUser: false,
+	pageFooter: {
+		footerLinks: [
+			[
+				{
+					text: 'About us',
+					url: '/about',
+					dataLinkName: 'uk : footer : about us',
+					extraClasses: '',
+				},
+				{
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
+				},
+				{
+					text: 'Complaints & corrections',
+					url: '/info/complaints-and-corrections',
+					dataLinkName: 'complaints',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
+					extraClasses: '',
+				},
+				{
+					text: 'Work for us',
+					url: 'https://workforus.theguardian.com',
+					dataLinkName: 'uk : footer : work for us',
+					extraClasses: '',
+				},
+				{
+					text: 'Privacy policy',
+					url: '/info/privacy',
+					dataLinkName: 'privacy',
+					extraClasses: '',
+				},
+				{
+					text: 'Cookie policy',
+					url: '/info/cookies',
+					dataLinkName: 'cookie',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
+					extraClasses: '',
+				},
+				{
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
+				},
+			],
+			[
+				{
+					text: 'All topics',
+					url: '/index/subjects/a',
+					dataLinkName: 'uk : footer : all topics',
+					extraClasses: '',
+				},
+				{
+					text: 'All writers',
+					url: '/index/contributors',
+					dataLinkName: 'uk : footer : all contributors',
+					extraClasses: '',
+				},
+				{
+					text: 'Modern Slavery Act',
+					url:
+						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Digital newspaper archive',
+					url: 'https://theguardian.newspapers.com',
+					dataLinkName: 'digital newspaper archive',
+					extraClasses: '',
+				},
+				{
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : facebook',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : youtube',
+					extraClasses: '',
+				},
+				{
+					text: 'Instagram',
+					url: 'https://www.instagram.com/guardian',
+					dataLinkName: 'uk : footer : instagram',
+					extraClasses: '',
+				},
+				{
+					text: 'LinkedIn',
+					url: 'https://www.linkedin.com/company/theguardian',
+					dataLinkName: 'uk : footer : linkedin',
+					extraClasses: '',
+				},
+				{
+					text: 'Twitter',
+					url: 'https://twitter.com/guardian',
+					dataLinkName: 'uk: footer : twitter',
+					extraClasses: '',
+				},
+				{
+					text: 'Newsletters',
+					url:
+						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
+					extraClasses: '',
+				},
+			],
+			[
+				{
+					text: 'Advertise with us',
+					url: 'https://advertising.theguardian.com',
+					dataLinkName: 'uk : footer : advertise with us',
+					extraClasses: '',
+				},
+				{
+					text: 'Guardian Labs',
+					url: '/guardian-labs',
+					dataLinkName: 'uk : footer : guardian labs',
+					extraClasses: '',
+				},
+				{
+					text: 'Search jobs',
+					url:
+						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					dataLinkName: 'uk : footer : jobs',
+					extraClasses: '',
+				},
+				{
+					text: 'Patrons',
+					url:
+						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+			],
+		],
+	},
+	twitterData: {
+		'twitter:app:id:iphone': '409128287',
+		'twitter:app:name:googleplay': 'The Guardian',
+		'twitter:app:name:ipad': 'The Guardian',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tZGVmYXVsdC5wbmc&s=58f2edd11761f046821831441f318041',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
+			'gnmguardian://global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation?contenttype=Article&source=twitter',
+		'twitter:card': 'summary_large_image',
+		'twitter:app:name:iphone': 'The Guardian',
+		'twitter:app:id:ipad': '409128287',
+		'twitter:app:id:googleplay': 'com.guardian',
+		'twitter:app:url:googleplay':
+			'guardian://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+		'twitter:app:url:iphone':
+			'gnmguardian://global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation?contenttype=Article&source=twitter',
+	},
+	pageType: {
+		hasShowcaseMainElement: true,
+		isFront: false,
+		isLiveblog: false,
+		isMinuteArticle: false,
+		isPaidContent: false,
+		isPreview: false,
+		isSensitive: false,
+	},
+	hasStoryPackage: false,
+	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	headline:
+		"‘We all deserve representation': hijab-wearing model Halima Aden on the power of fashion",
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '71487442-aac6-4270-ae60-fb771d22b5d2',
+			elementId: '007eb430-84f9-45e5-bd7d-3c01bf932764',
 			role: 'showcase',
 			data: {
 				alt:
@@ -1824,10 +1931,6 @@ export const Interview: CAPIType = {
 		},
 	],
 	webPublicationDate: '2020-02-09T11:00:04.000Z',
-	author: {
-		byline: 'Elle Hunt',
-	},
-	designType: 'Interview',
 	blocks: [
 		{
 			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 11.40 GMT',
@@ -1846,35 +1949,35 @@ export const Interview: CAPIType = {
 			lastUpdated: 1581334840000,
 			elements: [
 				{
-					elementId: 'a194161f-0c7a-4348-901b-3adbbbbc95bd',
+					elementId: 'f986b16c-0707-42b2-95be-b125b1f9f08c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Halima Aden, then aged 19, became the first contestant in the Miss USA 2016 beauty pageant to wear a hijab and burkini, attracting the attention of French fashion legend <a href="https://www.theguardian.com/fashion/carine-roitfeld" title="">Carine Roitfeld</a>. The following year she became the first hijab-wearing model to sign with a global modelling agency, IMG, and then the first to walk at New York fashion week, for Yeezy, the Kanye West brand. She later became the first hijab-wearing model to make the cover of <em>Vogue</em> – twice (first <em>Vogue Arabia</em>, then British <em>Vogue</em>) – and soon afterwards a <em>Sports Illustrated</em> swimsuit shoot followed. By that point she’d already become a Unicef ambassador, and a go-to voice on diversity in the fashion industry. In 2017 she gave the first <a href="https://www.ted.com/talks/halima_aden_how_i_went_from_child_refugee_to_international_model?language=en" title="">TED</a> talk at a refugee camp in Kakuma, Kenya. <em>Teen Vogue</em> went with her.</p>',
 				},
 				{
-					elementId: '4bea0d08-78fb-442b-b002-1ef7661882cd',
+					elementId: '30fd0503-1ee4-477b-9e50-1f9031cd8875',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>When we meet, at a hotel near King’s Cross, I ask if it ever gets tiring, being the first in so many different ways, shouldering the burden of representation. “Somebody needs to,” Aden says. “I want my sister, my little nieces, even my nephews to see representations of somebody who wears a hijab in modern ways, in such a way that they can relate to.” We’re sitting side by side on a window seat, Aden holding court before a little audience of PRs, management and her best friend, Lizeth, who has travelled with her from the US. Though she looks very much the high-fashion figure, all in black – sequins and brocade lace, knee-high stiletto boots – she seems younger than her 22 years, gabbing away in the stream-of-conscious slang and asides of a teenager still starstruck by the turns her life has taken.</p>',
 				},
 				{
-					elementId: '8f583081-c125-44f1-b778-52d22c000cc8',
+					elementId: 'baa46695-d3c1-4351-8e8f-24b399d15e17',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>But on the topics of diversity, representation and sustainability, she speaks with passion and conviction. She has said in the past that, growing up in the US: “The only times I saw somebody dressed like me was on CNN – and they weren’t doing anything I approve of.”</p>',
 				},
 				{
-					elementId: 'bef270dc-853f-40a3-b3b8-3160efb80219',
+					elementId: 'd640b623-d4d1-4b14-b8b5-812f5ecdc9b4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“I feel like we all deserve representation and I didn’t have that,” Aden says now. “I never got to flip through a magazine and see somebody who looks like me.” Lizeth digs out the latest issue of <em>Essence</em> magazine, Aden proud in pink on the cover. Aden takes it from her, somewhat wonderingly. “Sometimes it’s so wild for me,” she says. “I still catch myself… When my friend went and got that from the newsstand, I was like: ‘Oh my God.’”</p>',
 				},
 				{
-					elementId: 'c10b11f6-ab1c-4148-a931-4705af6a5fbd',
+					elementId: '46793a77-836d-4b76-9ade-583f20a13e77',
 					role: 'inline',
 					data: {
 						copyright: '2018 Getty Images',
@@ -2262,35 +2365,35 @@ export const Interview: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: 'd9084c58-4025-4aac-bc7e-84b2d26085fd',
+					elementId: '8c9d471f-c452-449a-9a56-8da1cc44f682',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The fact she has been able to have a global career in fashion at all is proof that the industry is increasingly open to diversity. Aden is 5ft 5in, petite for a model, and a resident of Minnesota, far from the industry capitals of New York, London, Paris or Milan. “And the fact that I’m able to do runway, the fact that I have graced these magazine covers and wear a hijab on top of that, be who I am, have my identity, wear it proudly… I think fashion is doing a beautiful job.”</p>',
 				},
 				{
-					elementId: 'b2a4d154-b9d1-41f7-b988-a1a587948172',
+					elementId: '4931a7b6-bd3d-4d43-829f-ec1060259179',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Aden now has her own 47-piece hijab collection, Halima x Modanisa, and her hijab is stipulated as non-negotiable in her contract with IMG. “It’s a big part of my identity,” she says. “It’s not because I don’t think people are going to listen – it’s more so they know what to expect. I always bring extras – my own set of turbans, turtlenecks, tights – because it’s a collaboration. I also recognise that for a lot of people, in my first year especially, I was the only hijab-wearing girl they’d worked with. So they’re not going to necessarily know 100% what to expect, just like I didn’t know what to expect with fashion, because it’s not the world that I come from.”</p>',
 				},
 				{
-					elementId: '30896ebb-f15f-4811-ad7d-8c46d757ccdd',
+					elementId: '28bc4da6-09aa-4c6c-8815-06a9dbf719e7',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>She does have certain requirements, such as a pop-up tent in which to change backstage at shows, but she says she’s never been uncomfortably set apart, or made to feel othered. She remembers her experience of walking for Yeezy at New York fashion week in 2017, her breakout year, as a watershed moment. The first outfit she was presented with “was just not going to work,” she says, gesturing above her knee – too short. “Even then I knew: walking away when something doesn’t fit is always better than feeling you need to force something.”</p>',
 				},
 				{
-					elementId: 'bbb2ff4c-7f62-423f-bd31-47e5fbbe6fee',
+					elementId: 'd95acf0c-3500-47c3-9ef2-4edf8f687713',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>She returned to her hotel, disappointed but resolute. “And then, without having to say anything, they called back: ‘We have a second option.’ I tried it on and it was perfect. I just knew it was a pivotal moment in my life. The people who you want to work with, they’re willing to work with you just the way you are.”</p>',
 				},
 				{
-					elementId: '98101714-7fe4-40dd-8b77-d6a82a414096',
+					elementId: '1f37df04-30ef-4d19-b067-0c2357ba33f5',
 					role: 'supporting',
 					data: {
 						alt:
@@ -2666,42 +2769,42 @@ export const Interview: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: 'cc0cb88d-bb6d-488e-8408-3791246530ed',
+					elementId: '044e4c51-471f-40be-bebc-f118fa192e8d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>That same year, Aden remembers walking for MaxMara at Milan fashion week in a look that had been designed with her in mind. When she posted it on Instagram, a woman commented: “He keeps you in mind, he keeps us in mind. Now this Muslim shopper will keep MaxMara in mind.” Aden shared it with the brand. “I was like – wink-wink-wink!”</p>',
 				},
 				{
-					elementId: 'b166f587-6985-4df0-9966-a7bfbacea89e',
+					elementId: '00c4616b-6260-48a1-8e5c-41cbf82d1dbd',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>It led to an exclusive capsule collection in the Middle East, for which Aden was the face. “It’s a win for designers when they’re diverse; it’s a win for the brand, it’s a win for everybody – we all want to see a little piece of ourselves reflecting back.” And it makes a difference, she says. The year after Aden became the first contestant to wear a hijab in Miss USA, there were seven others. Last year she was one of two hijabi models on the MaxMara catwalk in Milan, and one of three for her second <em>Vogue Arabia</em> cover.</p>',
 				},
 				{
-					elementId: 'b0e00b0f-f921-4d7f-897a-201988bae6e4',
+					elementId: '8dd6b91e-0de1-4092-b195-752482265064',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>When Aden was seven, she used to pray for rain – the kind of torrential rain that would wash away her new home in the American Midwest. “I remember thinking: ‘Then our neighbours could come out and play,’” she says. Even the structure of her apartment building felt alienating. “I was like, ‘God, everybody is so isolated.’”</p>',
 				},
 				{
-					elementId: 'fa942f57-fd69-4dfd-ad46-3f0b7efebeba',
+					elementId: '896cd74f-4a22-4dff-b47d-37447e46a6d1',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Aden was born a refugee in the United Nations Kakuma camp in northwestern Kenya, where her mother had fled the Somali civil war in 1994. There their house was made of mud, scraps, sticks – anything her mother could find. “It would be normal for me to go to nursery school, come back and find it had washed away,” she says. But then the community would come together to rebuild it, “and then it’s the kids’ time to play around.”</p>',
 				},
 				{
-					elementId: 'e8752cbc-c70c-4eb4-9a35-75d39fdad0d9',
+					elementId: 'a2fa2ece-a95d-4397-93b5-e408fedaa39d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The model remembers her childhood in the camp as being joyful and supportive. “There’s no walls keeping you apart from your neighbour,” she says. In her new home in Missouri, where she was relocated with her family in 2004, before moving to Minnesota, where they live today, the barriers stood strong.</p>',
 				},
 				{
-					elementId: '5f104b51-e66a-4e28-98c8-190b68a37ae3',
+					elementId: '369c9fb3-b8bf-4ae3-a079-632c6aa7fa4a',
 					role: 'inline',
 					data: {
 						copyright: '2018 Getty Images',
@@ -3089,35 +3192,35 @@ export const Interview: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: '30b5f2f1-9787-44a6-a2f6-56314507efec',
+					elementId: 'e0977791-44f4-4daa-a8b5-9ad1de1e23f9',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“Kakuma” translates from Swahili as “middle of nowhere”. “Sometimes, when I’m like, ‘I was born in the middle of nowhere,’ people think I’m joking,” Aden says. “But if you actually look at Google Maps…” People tend to think of a refugee camp as being a temporary settlement. But Kakuma is “more of a city of its own,” says Aden, in both permanence and size. Established by the UN in 1992 with a 70,000-person capacity, it has since ballooned to about 192,000 registered refugees and asylum seekers, the vast majority of whom are never resettled (the global figure is less than 1%).</p>',
 				},
 				{
-					elementId: 'f5576603-0f6e-4283-b8d8-e891a4f2ce2c',
+					elementId: '7575aa24-9aea-40af-a157-2b66ea3f12a5',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>As a child, Aden remembers thriving under the collective care of the community, which was two thirds women and children. She was bright – she spoke Somali and Swahili, sometimes translating for the grown-ups – and popular, roaming the camp with up to 30 playmates of mixed ages and ethnicities. (“If you could keep up, you were in the group.”)</p>',
 				},
 				{
-					elementId: '7264981d-994d-4cad-b0d1-bd37b3ad80fa',
+					elementId: '948a7dd1-0837-4322-bc6b-b3461a9f5d29',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Aden is well aware that her happy stories of childhood challenge the stereotype of the “tragic refugee”, though she credits her mother with working hard to shield her young family from hardship. Aden never knew her father. He was lost during the Somali civil war, and assumed dead by her mother; he made contact after they had moved to the US, but died before Aden could develop a relationship. “It was both the scars and the smiles,” she says. “It was a happy childhood and also, we lived in uncertainty.”</p>',
 				},
 				{
-					elementId: '7c3b5fa1-b2c9-4dd7-a9e2-ebbc96d39233',
+					elementId: '139a777d-ea4a-4aa9-ad21-85a25a8e796b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Symbolic of this limbo was a noticeboard that was updated with the names and destinations of those lucky few bound for resettlement. Aden remembers it as larger than life, “like something out of <em>The Hunger Games</em>”: “It would control your entire future – it was literally the difference between life and death. For parents it meant a brand new life: ‘We’re starting over, we won the lottery.’ But for the kids it is: ‘I’m never seeing my friends again’.”</p>',
 				},
 				{
-					elementId: '74dd4af8-0560-4b45-9b45-8680d908a6a4',
+					elementId: '413d8ad2-c752-46f6-8b54-7d45d6c16c8c',
 					role: 'supporting',
 					data: {
 						alt:
@@ -3493,42 +3596,42 @@ export const Interview: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: 'f1fe7530-b003-46dc-af36-aec2e8a1c7bc',
+					elementId: 'b2d82af9-452b-48ed-9e14-db6c52a336d1',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Another common misconception of being a refugee, Aden says, “is that you get a say where you go”. Her family were relocated to a poverty-stricken, crime-rife neighbourhood in St Louis, Missouri, which – compared to the “nurturing” community of Kakuma – came as a shock. That was when she felt most isolated, when she wished for her house to wash away. It was the first time she’d heard gunshots. “But nonetheless, did I have the fear of malaria? No – so, in a way, it was like trading one obstacle for another.”</p>',
 				},
 				{
-					elementId: '0910bb6b-fd5c-4cbd-ac89-ff1199c558f1',
+					elementId: '8b40c3ec-a57b-4cdd-a631-af7ed10c301b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The biggest hurdle was learning English: Aden’s school in St Louis did not have an English language programme. After two weeks of presenteeism, Aden recalls her mother asking her to read some written English aloud. “I literally started mouthing the words to <a href="https://www.youtube.com/watch?v=8WYHDfJDPDc" title="">Dilemma</a>” – rapper Nelly and Kelly Rowland’s syrupy duet, which she knew from the radio. Aden mimics a haltering recital: “‘No matt-er. Whatido. All I think about. Is you’ – I just couldn’t stand the idea of disappointing her.”</p>',
 				},
 				{
-					elementId: '5a75b2d9-bdfc-49f4-b946-ee7d2d2201cc',
+					elementId: '8f41f3a7-edd4-45e8-8d19-4a93278310bf',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Eventually Aden’s mother decided to relocate the family to St Cloud, Minnesota, where they found a community like the one that they had left at the camp. At first they were heavily reliant on it, living on food stamps and even, for six months, in a women’s shelter. Aden remembers the kindness of neighbours, taking the family to the grocery store during the punishing winters, giving her mother lifts when she couldn’t drive. “It’s why I’m so loyal,” she says. “I love my state.” She lives in St Paul now, closer to the airport, but only 40 minutes from her mother, who’s still in St Cloud. Minnesota is known for high taxes, but Aden says she is happy to pay them. “I relied on welfare when I was little... I think of it as my way of paying back.”</p>',
 				},
 				{
-					elementId: '852ca648-c4a8-426c-8fd6-5a2634d1de26',
+					elementId: 'a866aab3-8c25-458c-9597-db0f2a894796',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Before we meet, Aden’s team is adamant that I don’t ask her about Trump or US politics, so instead I ask her how superficial diversity in fashion tallies with a more fractious, divided world.</p>',
 				},
 				{
-					elementId: '7c4c81a0-4655-49db-9061-2de2de56bfee',
+					elementId: '7722554f-707b-442d-963d-1f8b7acc5cfa',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“I don’t even really avoid politics,” she says, “but it’s not something that I’ve needed in order to connect with people. Once I share my story, there’s always some common ground. It doesn’t have to be: ‘I grew up in a refugee camp.’ I get just as many messages, believe it or not, from parents who are not Muslim, who are not black, who say, ‘Thank you for making modesty look cool and young’.”</p>',
 				},
 				{
-					elementId: '8227482e-e74f-4757-908e-7f618bc43a56',
+					elementId: '9a964962-878e-47ac-9731-ec474d085411',
 					role: 'supporting',
 					data: {
 						alt:
@@ -3904,84 +4007,84 @@ export const Interview: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: 'eceb8487-902d-4689-844a-dac85d6b16fb',
+					elementId: 'a933674f-14bd-42b8-863c-c8a5ed9e11b4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>When she entered the Miss Minnesota USA pageant in 2016, as a freshman at St Cloud State University, Aden told local media that she wanted to represent Muslim women and counter the image that they were oppressed. “The hijab is a symbol we wear on our heads,” she said. “But I want people to know that it is my choice.” Today she says her motivations for entering were less lofty. “College tuition is expensive in the States, muuuuuucho expensive!” And the top 15 at the pageant were offered scholarships. Did Aden think she’d win? “No, God, no.” She laughs. “But top 15? I was like, ‘I think I could do that’.”</p>',
 				},
 				{
-					elementId: '57572f5c-5174-4168-a81a-b3a201630662',
+					elementId: 'ee77ecd7-afaf-4b8a-a8fd-2236ce7d8e50',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Aden’s mother was strongly against her entering the pageant, arguing it would distract from her studies, and that the two-piece burkini was too skimpy. Though they have since been able to find common ground through her advocacy and work with Unicef, it can feel like they are from two different cultures sometimes. She didn’t tell her mum about the <em>Sports Illustrated</em> shoot “until it hit newsstands”.</p>',
 				},
 				{
-					elementId: '6dc162fd-684f-4177-96fc-b19716c27faf',
+					elementId: 'c35c1d67-f200-450f-9ca6-c9374bf8c263',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>She was also criticised by members of the Muslim community who saw modelling as <em>haram – </em>forbidden by Islamic law. “It was scary to put myself out there, because I didn’t know if I would get backlash, or how bad it was going to be,” she says. Two days before the pageant, Aden almost pulled out. But as she told the newspaper at the time: “You don’t let being the first to do it stop you.”</p>',
 				},
 				{
-					elementId: 'eaf1a38d-780e-4c4b-a24d-ab8b39dff928',
+					elementId: '1303e207-fe62-4a0d-bbe5-8dbb893116cf',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>She ended up making the semi-finals, “braces and all. And then IMG came calling – like, ‘Well, well, <em>well</em>… maybe I don’t need school.’” She leans back, for a second jokily triumphant – then seems to feel a chill coming in from across the Atlantic. “I’m kidding. Sorry, Mom!”</p>',
 				},
 				{
-					elementId: 'e53d8d12-60e5-4e89-b645-a5fd45ce4583',
+					elementId: '0059ed2b-fffc-41d1-8f07-34260dc9e12f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The global spotlight on Aden caught the eye of Carine Roitfeld, who flew her to New York to shoot the cover of <em><a href="https://www.crfashionbook.com/" title="">CR Fashion Book</a></em> with <a href="https://www.theguardian.com/fashion/gigi-hadid" title="">Gigi Hadid</a>, Paris Jackson and legendary photographer Mario Sorrenti. Aden agonised about asking for a selfie with Gigi (“So cringy,” she says now). As for Sorrenti, though, she had to Google her later.</p>',
 				},
 				{
-					elementId: '67796503-5407-4a50-b66f-3943b0ac4fda',
+					elementId: '03885ba2-74a9-4a97-b89b-084171c7a355',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>His direction to her was, “Give me sexy”, she seems a little abashed to say. “I didn’t know fashion lingo, I didn’t know photographers. I’m a Minnesota girl – very small town.” Even after signing with IMG, she watched all of Tyra Banks’s outlandish reality series <em>America’s Next Top Model</em> “to practise”. Seven months into her modelling career, she was still working part-time as a housekeeper in St Cloud.</p>',
 				},
 				{
-					elementId: 'ab5526bc-9a59-4a6d-a0a7-557723535ff7',
+					elementId: '09fdb522-76b8-4c9b-b52e-85ee59d9c0f9',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>But rather than asking Aden to change, fashion’s royalty has made room for her as she is. Last week she was back in Kenya for a shoot and “I was just thinking, how crazy is it that, in one lifetime, I’ve gotten to experience both extremes.” Aden says she does not feel angry about the inequality she has seen – partly because she does not find it to be productive. “It’s like when I say: ‘We don’t want your pity.’ Let’s talk about solutions, invite refugees to the table. They’re part of the conversation – no policies should be enacted without their say.”</p>',
 				},
 				{
-					elementId: '815a399b-58a6-4320-b412-eacac7175612',
+					elementId: 'a6ddcd02-5517-43ed-891e-09dee6c62223',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Though she rules out a career in politics (“for now”), in the future she hopes to return to Kakuma with Unicef to inspire hope within the camp for a new life beyond it. “I couldn’t tell you what that would have meant to me as a six or seven-year-old – like, ‘Wait, there’s a life outside these walls?’ Hopefully, it’s not going to be so rare to see kids from the camps grow up and become teachers, lawmakers, presidents and CEOs of Fortune 500 companies. There’s talent everywhere.”</p>',
 				},
 				{
-					elementId: '68f2efd4-cd52-4b14-8fee-a3a6c4b47ac9',
+					elementId: '7f298a87-0c1a-442f-91e0-41c12c751393',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For now Aden is pursuing opportunities in “fashion activism”. This month she was announced as the new face of the British accessories brand <a href="https://bottletop.org/" title="">Bottletop</a>, which was ahead of its time in positioning itself as “sustainable luxury” in 2002. Its handbags and clutches, which are made from sustainable leather and upcycled metal ring pulls, help to alleviate poverty in Brazil, Nepal and Kenya. Aden is optimistic in general, but particularly about the potential for consumer choice to be a force for positive change: “I think we’re at a place where people want to support brands and organisations they know are giving back.” She is also an ambassador for Bottletop’s <a href="https://togetherband.org/" title="">#Togetherband</a> campaign, which is tasked with raising awareness of the <a href="https://www.un.org/sustainabledevelopment/sustainable-development-goals/" title="">UN’s Sustainable Development Goals</a>. Aden is probably one of the few celebrities who can “relate personally” to all 17 of them. She has been assigned the eighth goal: “Decent work and economic growth.” The fact that the Swiss multinational bank UBS is a founding partner seems to suggest which way the wind is blowing.</p>',
 				},
 				{
-					elementId: '2822c845-8ffc-4f30-94e0-593cee6c41c3',
+					elementId: '86177649-9a57-479c-94f0-19449478d499',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“My career in fashion is not just, ‘I want to work with this brand, I want to get on that catwalk’ – we’re not sitting here talking about ‘Buy this heel, because this heel will make you feel sexy.’” She kicks up her stiletto boot, knee-high in black patent leather (admittedly very sexy). “I’m proud that I can say I combined fashion and activism. I can’t do one without the other.”</p>',
 				},
 				{
-					elementId: '3dfff0d2-c2d5-40dd-a4bf-e37e5f242f8f',
+					elementId: '302de0bb-4359-42b3-aa1d-4e01cba2fda0',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Aden sees that her story, from refugee camp to the cover of <em>Vogue</em>, is an unusual one. But she has had to navigate it herself – down to mentioning, at her very first meeting with IMG as a teenager in New York, that she would like to work with Unicef. “I had to learn, in the beginning especially, that maybe I’d never find another model who I could relate to. But I’m making my own path, and it works perfectly for me.”</p>',
 				},
 				{
-					elementId: '94c58cef-3630-4f68-a6e8-b1e298f5c8bb',
+					elementId: 'b114fccd-1b9b-41eb-b96a-4ed1807b29dd',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
@@ -4054,114 +4157,13 @@ export const Interview: CAPIType = {
 			},
 		},
 	],
-	editionId: 'UK',
 	webPublicationDateDisplay: 'Sun 9 Feb 2020 11.00 GMT',
 	shouldHideAds: false,
-	standfirst:
-		'<p>The first model to wear a hijab on the cover of Vogue, the first to wear a burkini in Sports Illustrated… Halima Aden is used to breaking barriers. Here she talks about shattering stereotypes and using fashion as a force for change</p>',
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
-		'article:author': 'https://www.theguardian.com/profile/elle-hunt',
-		'og:image:height': '720',
-		'og:description':
-			'The first model to wear a hijab on the cover of Vogue, the first to wear a burkini in Sports Illustrated… Halima Aden is used to breaking barriers. Here she talks about shattering stereotypes and using fashion as a force for change',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tZGVmYXVsdC5wbmc&enable=upscale&s=230905a0218da965d6d144c04f26e08b',
-		'al:ios:url':
-			'gnmguardian://global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'Global',
-		'article:published_time': '2020-02-09T11:00:04.000Z',
-		'og:title':
-			"‘We all deserve representation': hijab-wearing model Halima Aden on the power of fashion",
-		'fb:app_id': '180444840287',
-		'article:tag': 'Models,Fashion,Life and style,Women',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-10T11:40:40.000Z',
-	},
 	webTitle:
 		"‘We all deserve representation': hijab-wearing model Halima Aden on the power of fashion",
 	isSpecialReport: false,
-	sectionUrl: 'fashion/models',
-	pageId:
-		'global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
-	version: 3,
-	tags: [
-		{
-			id: 'tone/features',
-			type: 'Tone',
-			title: 'Features',
-		},
-		{
-			id: 'tone/interview',
-			type: 'Tone',
-			title: 'Interviews',
-		},
-		{
-			id: 'fashion/models',
-			type: 'Keyword',
-			title: 'Models',
-		},
-		{
-			id: 'fashion/fashion',
-			type: 'Keyword',
-			title: 'Fashion',
-		},
-		{
-			id: 'lifeandstyle/lifeandstyle',
-			type: 'Keyword',
-			title: 'Life and style',
-		},
-		{
-			id: 'lifeandstyle/women',
-			type: 'Keyword',
-			title: 'Women',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'profile/elle-hunt',
-			type: 'Contributor',
-			title: 'Elle Hunt',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2019/09/03/Elle_Hunt,_L.png?width=300&quality=85&auto=format&fit=max&s=2402ba5a4d73a4a175942a401662daa5',
-		},
-		{
-			id: 'publication/theobserver',
-			type: 'Publication',
-			title: 'The Observer',
-		},
-		{
-			id: 'theobserver/magazine',
-			type: 'NewspaperBook',
-			title: 'Observer Magazine',
-		},
-		{
-			id: 'theobserver/magazine/life-and-style',
-			type: 'NewspaperBookSection',
-			title: 'Life & style',
-		},
-		{
-			id: 'tracking/commissioningdesk/observer-magazine',
-			type: 'Tracking',
-			title: 'Observer Magazine',
-		},
-	],
-	pillar: 'news',
 	isCommentable: false,
-	webURL:
-		'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 	keyEvents: [],
-	showBottomSocialButtons: true,
-	isImmersive: false,
 	config: {
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
@@ -4302,5 +4304,4 @@ export const Interview: CAPIType = {
 		isLiveBlog: false,
 		isLive: false,
 	},
-	sectionLabel: 'Models',
 };

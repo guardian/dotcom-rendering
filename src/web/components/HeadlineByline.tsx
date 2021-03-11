@@ -100,7 +100,7 @@ export const HeadlineByline = ({
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
-				case Design.GuardianView:
+				case Design.Editorial:
 				case Design.Comment:
 					return (
 						<div className={cx(opinionStyles(pillar), whiteText)}>
@@ -134,7 +134,7 @@ export const HeadlineByline = ({
 							</div>
 						</div>
 					);
-				case Design.GuardianView:
+				case Design.Editorial:
 				case Design.Comment:
 					return (
 						<div

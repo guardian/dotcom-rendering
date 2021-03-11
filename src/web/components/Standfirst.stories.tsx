@@ -80,7 +80,7 @@ export const Live = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design={Design.Live}
+				design={Design.LiveBlog}
 				standfirst="This is how Live standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>
@@ -184,7 +184,7 @@ export const GuardianView = () => {
 		<Section>
 			<Standfirst
 				display={Display.Standard}
-				design={Design.GuardianView}
+				design={Design.Editorial}
 				standfirst="This is how GuardianView standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
 		</Section>

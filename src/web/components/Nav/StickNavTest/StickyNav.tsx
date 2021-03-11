@@ -7,8 +7,6 @@ import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { brandBackground, brandLine } from '@guardian/src-foundations/palette';
 
 import libDebounce from 'lodash.debounce';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { Nav as LazyNav } from './Nav';
@@ -145,10 +143,7 @@ export const StickyNavSimple: React.FC<BrowserProps> = ({
 	palette,
 	format,
 }: BrowserProps) => {
-	const theme = decideTheme({
-		pillar: capiData.pillar,
-		design: decideDesign(capiData.designType, capiData.tags),
-	});
+	const { theme } = format;
 
 	return (
 		<div className={stickyStyle(theme)}>
@@ -175,10 +170,7 @@ export const StickyNavBackscroll: React.FC<BrowserProps> = ({
 	const initialState = { shouldFix: false, scrollY: 0 };
 	const [state, setState] = useState(initialState);
 
-	const pillar = decideTheme({
-		pillar: capiData.pillar,
-		design: decideDesign(capiData.designType, capiData.tags),
-	});
+	const { theme } = format;
 
 	useEffect(() => {
 		const handle = () => {
@@ -214,7 +206,7 @@ export const StickyNavBackscroll: React.FC<BrowserProps> = ({
 				ID="nav"
 			/>
 
-			<div className={fixedStyle(pillar, state.shouldFix)}>
+			<div className={fixedStyle(theme, state.shouldFix)}>
 				<NavGroupLazy
 					capiData={capiData}
 					navData={navData}

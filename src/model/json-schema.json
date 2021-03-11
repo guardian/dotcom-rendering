@@ -198,8 +198,24 @@
                 "$ref": "#/definitions/TagType"
             }
         },
-        "pillar": {
-            "$ref": "#/definitions/CAPIPillar"
+        "format": {
+            "type": "object",
+            "properties": {
+                "design": {
+                    "$ref": "#/definitions/CAPIDesign"
+                },
+                "theme": {
+                    "$ref": "#/definitions/CAPITheme"
+                },
+                "display": {
+                    "$ref": "#/definitions/CAPIDisplay"
+                }
+            },
+            "required": [
+                "design",
+                "display",
+                "theme"
+            ]
         },
         "isImmersive": {
             "type": "boolean"
@@ -255,9 +271,6 @@
         },
         "config": {
             "$ref": "#/definitions/ConfigType"
-        },
-        "designType": {
-            "$ref": "#/definitions/CAPIDesign"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -360,9 +373,9 @@
         "config",
         "contentType",
         "contributionsServiceUrl",
-        "designType",
         "editionId",
         "editionLongForm",
+        "format",
         "guardianBaseURL",
         "hasRelated",
         "hasStoryPackage",
@@ -380,7 +393,6 @@
         "pageFooter",
         "pageId",
         "pageType",
-        "pillar",
         "publication",
         "sectionLabel",
         "sectionUrl",
@@ -3336,14 +3348,47 @@
                 "type"
             ]
         },
-        "CAPIPillar": {
+        "CAPIDesign": {
             "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
+                "AnalysisDesign",
+                "ArticleDesign",
+                "CommentDesign",
+                "DeadBlogDesign",
+                "EditorialDesign",
+                "FeatureDesign",
+                "InteractiveDesign",
+                "InterviewDesign",
+                "LetterDesign",
+                "LiveBlogDesign",
+                "MatchReportDesign",
+                "MediaDesign",
+                "PhotoEssayDesign",
+                "PrintShopDesign",
+                "QuizDesign",
+                "RecipeDesign",
+                "ReviewDesign"
+            ],
+            "type": "string"
+        },
+        "CAPITheme": {
+            "enum": [
+                "CulturePillar",
+                "Labs",
+                "LifestylePillar",
+                "NewsPillar",
+                "OpinionPillar",
+                "SpecialReportTheme",
+                "SportPillar"
+            ],
+            "type": "string"
+        },
+        "CAPIDisplay": {
+            "enum": [
+                "ColumnDisplay",
+                "ImmersiveDisplay",
+                "NumberedListDisplay",
+                "ShowcaseDisplay",
+                "StandardDisplay"
             ],
             "type": "string"
         },
@@ -3563,28 +3608,6 @@
                 "switches",
                 "videoDuration"
             ]
-        },
-        "CAPIDesign": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",
@@ -3863,6 +3886,17 @@
                 "title",
                 "url"
             ]
+        },
+        "CAPIPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
         },
         "ReaderRevenuePositions": {
             "type": "object",

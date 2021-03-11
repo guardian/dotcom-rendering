@@ -133,7 +133,7 @@ export const SeriesSectionLink = ({
 		case Display.Immersive: {
 			switch (format.design) {
 				case Design.Comment:
-				case Design.GuardianView: {
+				case Design.Editorial: {
 					if (tag) {
 						// We have a tag, we're not immersive, show both series and section titles
 						return (

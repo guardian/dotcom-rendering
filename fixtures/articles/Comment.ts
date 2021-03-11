@@ -33,12 +33,12 @@ export const Comment: CAPIType = {
 					value: ['johnharris'],
 				},
 				{
-					name: 'edition',
-					value: 'uk',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8n8j',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
+					name: 'edition',
+					value: 'uk',
 				},
 				{
 					name: 'url',
@@ -87,7 +87,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/d8n8j',
 				},
 				{
 					name: 'url',
@@ -140,7 +140,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/d8n8j',
 				},
 				{
 					name: 'url',
@@ -193,7 +193,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					name: 'sh',
-					value: 'https://gu.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/d8n8j',
 				},
 				{
 					name: 'url',
@@ -878,10 +878,6 @@ export const Comment: CAPIType = {
 						url: '/crosswords/crossword-blog',
 					},
 					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
-					},
-					{
 						title: 'Quick',
 						url: '/crosswords/series/quick',
 					},
@@ -1133,6 +1129,11 @@ export const Comment: CAPIType = {
 	},
 	designType: 'Comment',
 	editionId: 'UK',
+	format: {
+		design: 'CommentDesign',
+		theme: 'OpinionPillar',
+		display: 'StandardDisplay',
+	},
 	standfirst:
 		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
 	openGraphData: {
@@ -1440,7 +1441,7 @@ export const Comment: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'd661aa8f-9c30-458e-87d9-3c4295349876',
+			elementId: '2ad32678-17fb-48cd-8d28-58b6eb243be4',
 			role: 'inline',
 			data: {
 				copyright: '©Mark Pinder',
@@ -1844,14 +1845,14 @@ export const Comment: CAPIType = {
 			lastUpdated: 1581333590000,
 			elements: [
 				{
-					elementId: '4f8e92ce-572b-4eca-a737-874ca4350dc7',
+					elementId: 'e2266736-af82-4f28-bc4c-a65463cd0177',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
 				},
 				{
-					elementId: '4034fd38-6255-47d8-b7af-fab3f5a446d1',
+					elementId: '464edd68-77c2-423c-936e-01330b3578ba',
 					role: 'supporting',
 					isThirdPartyTracking: false,
 					_type:
@@ -1860,49 +1861,49 @@ export const Comment: CAPIType = {
 						'£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
 				},
 				{
-					elementId: 'c7c32bcc-7022-407d-85e7-e201f87ccbfc',
+					elementId: 'b8266b56-a227-49c3-90f6-f53514c34b7f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
 				},
 				{
-					elementId: 'e6b6428c-8117-473e-97b1-e1109a4455ad',
+					elementId: '91fa1ada-4fdd-48a8-9a99-c2ed7736276b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
 				},
 				{
-					elementId: '270a1616-61e3-44d4-bb55-19e217530c08',
+					elementId: '3ba7bc08-dff0-4554-9469-96e384649a56',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
 				},
 				{
-					elementId: '524ce765-98c9-428f-a392-f981d143e20e',
+					elementId: '71546fc3-a2f1-4e22-9a9f-4337d00a09e1',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
 				},
 				{
-					elementId: 'eeb92ed6-67a2-405e-81da-d9f55a970ca3',
+					elementId: 'bce6dbf3-ae8b-47cf-9ae8-60a7c80030e1',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
 				},
 				{
-					elementId: 'f26cd605-b113-4def-8ca9-889e77af10af',
+					elementId: 'db55b1e2-f704-49f3-984c-6fd34f7aac54',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
 				},
 				{
-					elementId: '2254b183-8244-4f00-8c9d-95635dae64bb',
+					elementId: 'e1779482-a23b-4874-a4df-1b520d6f5a10',
 					role: 'thumbnail',
 					prefix: 'Related: ',
 					_type:
@@ -1913,35 +1914,35 @@ export const Comment: CAPIType = {
 						'https://www.theguardian.com/commentisfree/2020/feb/06/tory-level-up-north-regional-inequality',
 				},
 				{
-					elementId: '13addc5d-2b9e-4ee7-bae2-4ce4d18f2d05',
+					elementId: '9cf14f2f-3503-4937-8f4c-a2fbd7cf8b6c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
 				},
 				{
-					elementId: '3e9bb6cd-452e-4fcc-9df1-c200da65dee0',
+					elementId: 'a799912b-f2ec-45d5-91ba-604b8d605cdb',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
 				},
 				{
-					elementId: '0f1e9d40-c74e-4cff-b3b9-f0d0eac6b566',
+					elementId: '1103549f-a707-4d80-bb3c-0f7086a55688',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
 				},
 				{
-					elementId: 'ef412a91-df6e-4a36-8297-3bfe29928238',
+					elementId: '43ff9bec-96b5-498b-96fe-c641d8dce96c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
 				},
 				{
-					elementId: 'de87b5f9-a78b-4d3a-a27e-0c1cbaa01012',
+					elementId: '82cbdda9-3de1-4044-add8-d16e8d9109f4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• John Harris is a Guardian columnist</p>',

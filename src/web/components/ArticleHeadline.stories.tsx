@@ -590,12 +590,12 @@ export const GuardianView = () => (
 					headlineString="This is the headline you see when design type is GuardianView"
 					palette={decidePalette({
 						display: Display.Standard,
-						design: Design.GuardianView,
+						design: Design.Editorial,
 						theme: Pillar.News,
 					})}
 					format={{
 						display: Display.Standard,
-						design: Design.GuardianView,
+						design: Design.Editorial,
 						theme: Pillar.News,
 					}}
 					tags={[]}
@@ -671,12 +671,12 @@ export const Live = () => (
 					headlineString="This is the headline you see when design type is Live"
 					palette={decidePalette({
 						display: Display.Standard,
-						design: Design.Live,
+						design: Design.LiveBlog,
 						theme: Pillar.News,
 					})}
 					format={{
 						display: Display.Standard,
-						design: Design.Live,
+						design: Design.LiveBlog,
 						theme: Pillar.News,
 					}}
 					tags={[]}

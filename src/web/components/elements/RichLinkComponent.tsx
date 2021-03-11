@@ -3,7 +3,6 @@ import React from 'react';
 import { RichLink, DefaultRichLink } from '@root/src/web/components/RichLink';
 
 import { useApi } from '@root/src/web/lib/api';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { Design, Display } from '@guardian/types';
 
 type CardStyle =
@@ -29,7 +28,7 @@ interface CAPIRichLinkType {
 	url: string;
 	tags: TagType[];
 	sponsorName: string;
-	pillar: CAPIPillar;
+	pillar: LegacyPillar;
 	starRating?: number;
 	contributorImage?: string;
 }
@@ -47,7 +46,7 @@ export const RichLinkComponent: React.FC<{
 	pillar: Theme;
 	ajaxEndpoint: string;
 	richLinkIndex: number;
-}> = ({ element, ajaxEndpoint, richLinkIndex }) => {
+}> = ({ element, pillar, ajaxEndpoint, richLinkIndex }) => {
 	const url = buildUrl(element, ajaxEndpoint);
 	const { data, loading, error } = useApi<CAPIRichLinkType>(url);
 
@@ -80,7 +79,7 @@ export const RichLinkComponent: React.FC<{
 			format={{
 				display: Display.Standard,
 				design: Design.Article,
-				theme: decideTheme({ pillar: data.pillar }),
+				theme: pillar,
 			}}
 			tags={data.tags}
 			sponsorName={data.sponsorName}

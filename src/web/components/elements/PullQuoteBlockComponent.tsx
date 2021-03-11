@@ -129,7 +129,7 @@ export const PullQuoteBlockComponent: React.FC<{
 }> = ({ html, pillar, design, attribution, role }) => {
 	if (!html) return <></>;
 	switch (design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return (
 				<aside

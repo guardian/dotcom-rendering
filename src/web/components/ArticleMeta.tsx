@@ -175,7 +175,7 @@ const shouldShowContributor = (format: Format) => {
 		case Display.Standard: {
 			switch (format.design) {
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return false;
 				default:
 					return true;

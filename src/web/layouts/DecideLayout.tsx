@@ -4,7 +4,7 @@ import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDisplayV2 } from '@root/src/web/lib/decideDisplay';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
-	const display: Display = decideDisplayV2(CAPI.format);
+	const display: Display = decideDisplay(CAPI.format);
 	const design: Design = decideDesign(CAPI.format);
 	const theme: Pillar = decideTheme(CAPI.format);
 	const format: Format = {
@@ -34,7 +34,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Immersive: {
 			switch (design) {
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<ImmersiveLayout
 							CAPI={CAPI}
@@ -57,7 +57,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Showcase: {
 			switch (design) {
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
@@ -80,7 +80,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Standard:
 		default: {
 			switch (design) {
-				case Design.Live:
+				case Design.LiveBlog:
 					return (
 						<LiveLayout
 							CAPI={CAPI}
@@ -90,7 +90,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 						/>
 					);
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<CommentLayout
 							CAPI={CAPI}

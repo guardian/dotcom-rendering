@@ -237,12 +237,12 @@ export const LiveSizes = () => (
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -256,12 +256,12 @@ export const LiveSizes = () => (
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -275,12 +275,12 @@ export const LiveSizes = () => (
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -294,12 +294,12 @@ export const LiveSizes = () => (
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showQuotes={true}
@@ -318,12 +318,12 @@ export const Updated = () => (
 			headlineText=""
 			format={{
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			}}
 			palette={decidePalette({
 				display: Display.Standard,
-				design: Design.Live,
+				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
 			showPulsingDot={true}

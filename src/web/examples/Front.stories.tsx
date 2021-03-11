@@ -181,12 +181,12 @@ export const Front = () => (
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
 									display: Display.Standard,
-									design: Design.GuardianView,
+									design: Design.Editorial,
 									theme: Pillar.Opinion,
 								}}
 								palette={decidePalette({
 									display: Display.Standard,
-									design: Design.GuardianView,
+									design: Design.Editorial,
 									theme: Pillar.Opinion,
 								})}
 								headlineText={headlines[3]}
@@ -317,12 +317,12 @@ export const Front = () => (
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						format={{
 							display: Display.Standard,
-							design: Design.Live,
+							design: Design.LiveBlog,
 							theme: Pillar.News,
 						}}
 						palette={decidePalette({
 							display: Display.Standard,
-							design: Design.Live,
+							design: Design.LiveBlog,
 							theme: Pillar.News,
 						})}
 						headlineText={headlines[7]}
@@ -342,12 +342,12 @@ export const Front = () => (
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						format={{
 							display: Display.Standard,
-							design: Design.Live,
+							design: Design.LiveBlog,
 							theme: Pillar.Sport,
 						}}
 						palette={decidePalette({
 							display: Display.Standard,
-							design: Design.Live,
+							design: Design.LiveBlog,
 							theme: Pillar.Sport,
 						})}
 						headlineText={headlines[8]}

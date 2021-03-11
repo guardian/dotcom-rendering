@@ -6,9 +6,10 @@
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
+// These are partialy kept for Google Analytics purposes
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
-type CAPIPillar = RealPillars | FakePillars;
+type LegacyPillar = RealPillars | FakePillars;
 
 // Themes are used for styling
 // RealPillars have pillar palette colours and have a `Pillar` type in Scala
@@ -323,7 +324,7 @@ interface CAPILinkType {
     longTitle?: string;
     iconName?: string;
     children?: CAPILinkType[];
-    pillar?: CAPIPillar;
+    pillar?: LegacyPillar;
     more?: boolean;
     classList?: string[];
 }
@@ -369,7 +370,14 @@ interface CAPIType {
 	version: number; // TODO: check who uses?
 	tags: TagType[];
 	format: CAPIFormat;
-	pillar: CAPIPillar;
+
+	// Include pillar and designType until we remove them upstream
+	// We type designType as `string` for now so that the field is present,
+	// but we don't care what's in it. Pillar we have a type for so we use it
+	// but it shouldn't be important.
+	designType: string;
+	pillar: LegacyPillar;
+
 	isImmersive: boolean;
 	sectionLabel: string;
 	sectionUrl: string;
@@ -383,9 +391,7 @@ interface CAPIType {
 	webURL: string;
 	linkedData: { [key: string]: any }[];
 	config: ConfigType;
-	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesign but need to allow the type here before then
-	designType: CAPIDesign;
+
 	showBottomSocialButtons: boolean;
 	shouldHideReaderRevenue: boolean;
 
@@ -419,10 +425,7 @@ interface CAPIType {
 // the models above.
 
 type CAPIBrowserType = {
-	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesign but need to allow the type here before then
-	designType: CAPIDesign;
-	pillar: CAPIPillar;
+	format: CAPIFormat;
 	config: ConfigTypeBrowser;
 	editionId: Edition;
 	editionLongForm: string;
@@ -671,7 +674,7 @@ interface ConfigTypeBrowser {
 }
 
 interface GADataType {
-	pillar: CAPIPillar;
+	pillar: LegacyPillar;
 	webTitle: string;
 	section: string;
 	contentType: string;
@@ -774,6 +777,12 @@ interface TrailType extends BaseTrailType {
 
 interface CAPITrailType extends BaseTrailType {
 	format: CAPIFormat;
+	// Include pillar and designType until we remove them upstream
+	// We type designType as `string` for now so that the field is present,
+	// but we don't care what's in it. Pillar we have a type for so we use it
+	// but it shouldn't be important.
+	designType: string;
+	pillar: LegacyPillar;
 }
 
 interface TrailTabType {

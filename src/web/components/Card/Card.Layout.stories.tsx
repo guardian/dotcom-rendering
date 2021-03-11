@@ -116,12 +116,12 @@ export const News = () => (
 									format={{
 										display: Display.Standard,
 										theme: Pillar.Opinion,
-										design: Design.GuardianView,
+										design: Design.Editorial,
 									}}
 									palette={decidePalette({
 										display: Display.Standard,
 										theme: Pillar.Opinion,
-										design: Design.GuardianView,
+										design: Design.Editorial,
 									})}
 									headlineText={headlines[3]}
 									kickerText="Editorial"
@@ -485,12 +485,12 @@ export const Related = () => (
 							format={{
 								display: Display.Standard,
 								theme: Pillar.Sport,
-								design: Design.Live,
+								design: Design.LiveBlog,
 							}}
 							palette={decidePalette({
 								display: Display.Standard,
 								theme: Pillar.Sport,
-								design: Design.Live,
+								design: Design.LiveBlog,
 							})}
 							headlineText={headlines[8]}
 							headlineSize="medium"
@@ -706,12 +706,12 @@ export const Quad = () => (
 							format={{
 								display: Display.Standard,
 								theme: Special.SpecialReport,
-								design: Design.Live,
+								design: Design.LiveBlog,
 							}}
 							palette={decidePalette({
 								display: Display.Standard,
 								theme: Special.SpecialReport,
-								design: Design.Live,
+								design: Design.LiveBlog,
 							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"

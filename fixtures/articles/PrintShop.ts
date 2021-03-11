@@ -41,6 +41,10 @@ export const PrintShop: CAPIType = {
 					value: ['guardian-sport'],
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fmxze',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
@@ -63,10 +67,6 @@ export const PrintShop: CAPIType = {
 					name: 'p',
 					value: 'ng',
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
-				},
 			],
 		},
 		US: {
@@ -83,6 +83,10 @@ export const PrintShop: CAPIType = {
 				{
 					name: 'co',
 					value: ['guardian-sport'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fmxze',
 				},
 				{
 					name: 'su',
@@ -111,10 +115,6 @@ export const PrintShop: CAPIType = {
 					name: 'edition',
 					value: 'us',
 				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
-				},
 			],
 		},
 		AU: {
@@ -131,6 +131,10 @@ export const PrintShop: CAPIType = {
 				{
 					name: 'co',
 					value: ['guardian-sport'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fmxze',
 				},
 				{
 					name: 'su',
@@ -156,10 +160,6 @@ export const PrintShop: CAPIType = {
 					value: 'ng',
 				},
 				{
-					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
-				},
-				{
 					name: 'edition',
 					value: 'au',
 				},
@@ -179,6 +179,10 @@ export const PrintShop: CAPIType = {
 				{
 					name: 'co',
 					value: ['guardian-sport'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fmxze',
 				},
 				{
 					name: 'edition',
@@ -206,10 +210,6 @@ export const PrintShop: CAPIType = {
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://gu.com/p/fmxze',
 				},
 			],
 		},
@@ -841,10 +841,6 @@ export const PrintShop: CAPIType = {
 						url: '/crosswords/crossword-blog',
 					},
 					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
-					},
-					{
 						title: 'Quick',
 						url: '/crosswords/series/quick',
 					},
@@ -1021,6 +1017,11 @@ export const PrintShop: CAPIType = {
 	},
 	designType: 'Immersive',
 	editionId: 'UK',
+	format: {
+		design: 'PrintShopDesign',
+		theme: 'CulturePillar',
+		display: 'ImmersiveDisplay',
+	},
 	standfirst:
 		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
 	openGraphData: {
@@ -1316,7 +1317,7 @@ export const PrintShop: CAPIType = {
 			lastUpdated: 1608213898000,
 			elements: [
 				{
-					elementId: 'de099ad1-f14e-4742-9911-27815634599d',
+					elementId: '3d888d6b-1868-4a7c-9a53-342306cf3d35',
 					role: 'immersive',
 					data: {
 						alt: 'Bobby Moore in 1973',
@@ -1700,54 +1701,54 @@ export const PrintShop: CAPIType = {
 					displayCredit: false,
 				},
 				{
-					elementId: 'a1e78ec6-4f8a-49b1-8d29-7f6ae8e1a3ba',
+					elementId: 'b20c84d6-439d-464b-805f-5e3c9c9e52e6',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
 				},
 				{
-					elementId: 'e24b5694-a07e-4748-90a7-948aa9b797a7',
+					elementId: 'cf0ad499-dcca-43e2-b862-ebbaa7ba5d4a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
 				},
 				{
-					elementId: 'c5868a65-b28d-4aad-b0d8-bc49bc32bb17',
+					elementId: '04c6ec92-2381-45ab-a8ac-565bdb94f41e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
 				},
 				{
-					elementId: 'bbee68f3-f797-4567-a2d4-cc0c6fb7c630',
+					elementId: '64df5e2b-0a25-4d28-a6bc-685247d90c7a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
 				},
 				{
-					elementId: '8332a5aa-b1ec-4f34-975a-c4e4810ca671',
+					elementId: 'd20a2629-c42b-45cc-b7ef-87f19c29f46e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
 				},
 				{
-					elementId: '938c21ea-2300-49c4-a1cd-e759ca4bdbe9',
+					elementId: '8236915c-4a33-4db3-bdfe-8746ce3ca8a3',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
 				},
 				{
-					elementId: '444ea21f-e568-4a40-96bb-52641b0f03b3',
+					elementId: '4eb140d1-d6a3-4114-97a8-60b427b37532',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
 				},
 				{
-					elementId: '2db12002-e0f5-4b1f-a5de-db4628a38d0e',
+					elementId: 'a9a3f719-e514-435c-8e9b-4b7fc496b0c4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:

@@ -48,7 +48,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 	}
 
 	switch (format.design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return css`
 				${baseLinkStyles};
@@ -61,7 +61,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 				}
 			`;
 		case Design.Media:
-		case Design.Live:
+		case Design.LiveBlog:
 			return css`
 				${baseLinkStyles};
 				:hover {

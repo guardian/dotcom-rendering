@@ -33,7 +33,7 @@ type Props = {
 	headlineSize?: SmallHeadlineSize;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	byline?: string;
-	isLiveBlog?: boolean; // When design === Design.Live, this denotes if the liveblog is active or not
+	isLiveBlog?: boolean; // When design === Design.LiveBlog, this denotes if the liveblog is active or not
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
@@ -211,16 +211,16 @@ export const Card = ({
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
-											format.design === Design.Live
+											format.design === Design.LiveBlog
 												? 'Live'
 												: kickerText
 										}
 										showPulsingDot={
-											format.design === Design.Live ||
+											format.design === Design.LiveBlog ||
 											showPulsingDot
 										}
 										showSlash={
-											format.design === Design.Live ||
+											format.design === Design.LiveBlog ||
 											showSlash
 										}
 										byline={byline}
