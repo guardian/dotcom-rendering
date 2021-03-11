@@ -88,9 +88,9 @@ export const document = ({ data }: Props): string => {
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const CAPIElements: CAPIElement[] = CAPI.blocks[0]
-		? CAPI.blocks[0].elements
-		: [];
+	const CAPIElements: CAPIElement[] = CAPI.blocks
+		.map((block) => block.elements)
+		.flat();
 	const { mainMediaElements } = CAPI;
 	// Filter the chunks defined above by whether
 	// the 'addWhen' value is 'always' or matches
