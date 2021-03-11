@@ -9,7 +9,6 @@ import { Byline } from '@root/src/web/components/Byline';
 
 type Props = {
 	headlineText: string; // The text shown
-	format: Format;
 	palette: Palette; // Used to colour the headline and the kicker
 	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
 	kickerText?: string;
@@ -64,7 +63,6 @@ const visitedStyles = (visitedColour: string) => css`
 
 export const LinkHeadline = ({
 	headlineText,
-	format,
 	palette,
 	showUnderline = false,
 	kickerText,
@@ -106,19 +104,16 @@ export const LinkHeadline = ({
 					{headlineText}
 				</a>
 				{byline && (
-					<Byline
-						text={byline}
-						format={format}
-						palette={palette}
-						size={size}
-					/>
+					<Byline text={byline} palette={palette} size={size} />
 				)}
 			</>
 		) : (
 			// We don't have a link so simply use a span here
 			<>
 				<span>{headlineText}</span>
-				{byline && <Byline text={byline} size={size} />}
+				{byline && (
+					<Byline text={byline} size={size} palette={palette} />
+				)}
 			</>
 		)}
 	</h4>
