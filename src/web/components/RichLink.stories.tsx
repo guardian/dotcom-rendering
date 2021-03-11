@@ -123,6 +123,40 @@ SectionStory.story = {
 	name: 'Section',
 };
 
+export const Inline = () => {
+	return (
+		<Section>
+			<Flex>
+				<LeftColumn>
+					<p />
+				</LeftColumn>
+				<ArticleContainer>
+					<Figure role="inline">
+						<RichLink
+							richLinkIndex={1}
+							cardStyle="audio"
+							thumbnailUrl={someImage}
+							headlineText="Rich link when inline"
+							contentType="section"
+							url=""
+							format={{
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.Lifestyle,
+							}}
+							tags={[]}
+							sponsorName=""
+						/>
+					</Figure>
+				</ArticleContainer>
+			</Flex>
+		</Section>
+	);
+};
+Inline.story = {
+	name: 'Inline',
+};
+
 export const ImageContent = () => {
 	return (
 		<Section>
