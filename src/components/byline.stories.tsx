@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar, toOption } from '@guardian/types';
+import { Design, Display, Pillar, Special, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
@@ -50,8 +50,8 @@ const Comment: FC = () => (
 
 const Labs: FC = () => (
 	<Byline
-		theme={selectPillar(Pillar.News)}
-		design={Design.AdvertisementFeature}
+		theme={Special.Labs}
+		design={Design.Article}
 		display={Display.Standard}
 		bylineHtml={mockBylineHtml()}
 	/>
