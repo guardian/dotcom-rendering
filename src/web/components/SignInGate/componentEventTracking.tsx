@@ -4,7 +4,7 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { CurrentABTest } from '@frontend/web/components/SignInGate/gateDesigns/types';
 
-type ABTestVariant = {
+export type ABTestVariant = {
 	name: string;
 	variant: string;
 };
@@ -26,13 +26,13 @@ type ComponentEventWithoutAction = {
 	abTest?: ABTestVariant;
 };
 
-const ophan = window?.guardian?.ophan;
+const ophan = () => window?.guardian?.ophan;
 
 // ophan helper methods
 export const submitComponentEventTracking = (
 	componentEvent: OphanComponentEvent,
 ) => {
-	ophan.record({ componentEvent });
+	ophan().record({ componentEvent });
 };
 
 export const submitViewEventTracking = (

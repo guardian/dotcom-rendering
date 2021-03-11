@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from 'emotion';
 
 import { border, background } from '@guardian/src-foundations/palette';
@@ -7,6 +7,12 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
 import { SvgCheckmark } from '@guardian/src-icons';
 import { space } from '@guardian/src-foundations';
+import { OphanComponentType } from '@root/src/web/browser/ophan/ophan';
+import {
+	submitViewEventTracking,
+	submitClickEventTracking,
+	ABTestVariant,
+} from './SignInGate/componentEventTracking';
 
 type Props = {
 	children: React.ReactNode;
@@ -79,6 +85,13 @@ const roleButtonText = (role: RoleType) => {
 	}
 };
 
+const clickToViewCompnentType: OphanComponentType = 'CLICK_TO_VIEW_EMBED_OVERLAY' as OphanComponentType;
+
+const clickToViewABTestVariant: ABTestVariant = {
+	name: 'clickToViewVariant',
+	variant: 'variant',
+};
+
 const shouldDisplayOverlay = ({
 	isTracking,
 	isOverlayClicked,
@@ -100,7 +113,10 @@ const shouldDisplayOverlay = ({
 };
 
 const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
-	return abTestConfig.clickToViewVariant === 'variant';
+	return (
+		abTestConfig[clickToViewABTestVariant.name] ===
+		clickToViewABTestVariant.variant
+	);
 };
 
 export const ClickToView = ({
@@ -120,18 +136,37 @@ export const ClickToView = ({
 		if (onAccept) {
 			setTimeout(() => onAccept());
 		}
+		submitClickEventTracking({
+			component: {
+				componentType: clickToViewCompnentType,
+				labels: [sourceDomain, source ?? 'unknown'],
+			},
+			abTest: clickToViewABTestVariant,
+		});
 	};
 
 	const textSize = roleTextSize(role);
 
-	if (
-		shouldDisplayOverlay({
-			isTracking,
-			isOverlayClicked,
-			isInABTestVariant: isInABTestVariant(abTests),
-			isMainMedia,
-		})
-	) {
+	const displayOverlay = shouldDisplayOverlay({
+		isTracking,
+		isOverlayClicked,
+		isInABTestVariant: isInABTestVariant(abTests),
+		isMainMedia,
+	});
+
+	useEffect(() => {
+		if (displayOverlay && typeof window !== 'undefined') {
+			submitViewEventTracking({
+				component: {
+					componentType: clickToViewCompnentType,
+					labels: [sourceDomain, source ?? 'unknown'],
+				},
+				abTest: clickToViewABTestVariant,
+			});
+		}
+	}, [source, sourceDomain, displayOverlay]);
+
+	if (displayOverlay) {
 		return (
 			<div
 				className={css`
