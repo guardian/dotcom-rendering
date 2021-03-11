@@ -93,14 +93,14 @@ const mostPopularAdStyle = css`
 
 interface Props {
 	sectionName?: string;
-	pillar: Theme;
+	palette: Palette;
 	ajaxUrl: string;
 	display: Display;
 }
 
 export const MostViewedFooter = ({
 	sectionName,
-	pillar,
+	palette,
 	ajaxUrl,
 	display,
 }: Props) => {
@@ -146,7 +146,7 @@ export const MostViewedFooter = ({
 						<Suspense fallback={<></>}>
 							<MostViewedFooterData
 								sectionName={sectionName}
-								pillar={pillar}
+								palette={palette}
 								ajaxUrl={ajaxUrl}
 							/>
 						</Suspense>
