@@ -6,7 +6,6 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 import { neutral, brandAlt, text } from '@guardian/src-foundations/palette';
-import { pillarPalette } from '@root/src/lib/pillars';
 import { Design, Display } from '@guardian/types';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
@@ -141,11 +140,11 @@ const dotStyle = css`
 `;
 
 const dotActiveStyle = (palette: Palette) => css`
-	background-color: ${pillarPalette[pillar][400]};
+	background-color: ${palette.background.carouselDot};
 
 	&:hover,
 	&:focus {
-		background-color: ${pillarPalette[pillar].main};
+		background-color: ${palette.background.carouselDotFocus};
 	}
 `;
 
@@ -391,7 +390,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 					key={`dot-${i}`}
 					className={cx(
 						dotStyle,
-						i === index && dotActiveStyle(pillar),
+						i === index && dotActiveStyle(palette),
 						adjustNumberOfDotsStyle(
 							i,
 							trails.length,
@@ -411,10 +410,11 @@ export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
 	ophanComponentName,
-	pillar,
+	format,
 	isFullCardImage,
 	isCuratedContent,
 }: OnwardsType) => {
+	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -534,7 +534,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
-					pillar={pillar}
+					palette={palette}
 					index={index}
 					isCuratedContent={isCuratedContent}
 					isFullCardImage={isFullCardImage}
@@ -575,7 +575,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						<HeaderAndNav
 							heading={heading}
 							trails={trails}
-							pillar={pillar}
+							palette={palette}
 							index={index}
 							isCuratedContent={isCuratedContent}
 							isFullCardImage={isFullCardImage}
@@ -617,7 +617,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						const {
 							url: linkTo,
 							headline: headlineText,
-							format,
+							format: trailFormat,
 							palette: trailPalette,
 							webPublicationDate,
 							image: fallbackImageUrl,
@@ -632,7 +632,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<CarouselCard
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
-								format={format}
+								format={trailFormat}
 								trailPalette={trailPalette}
 								linkTo={linkTo}
 								headlineText={headlineText}

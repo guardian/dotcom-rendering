@@ -92,6 +92,8 @@ type Palette = {
 		richLink: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
+		carouselDot: Colour;
+		carouselDotFocus: Colour;
 	},
 	fill: {
 		commentCount: Colour;
@@ -580,9 +582,9 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-    pillar: Theme;
+    format: Format;
 	isCuratedContent?: boolean;
-    isFullCardImage?: boolean
+    isFullCardImage?: boolean;
 };
 
 type OphanComponentName =

@@ -583,6 +583,14 @@ const textCalloutHeading = (): string => {
 	return brand[500];
 };
 
+const backgroundCarouselDot = (format: Format): string => {
+	return pillarPalette[format.theme][400];
+};
+
+const backgroundCarouselDotFocus = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -632,6 +640,8 @@ export const decidePalette = (format: Format): Palette => {
 			richLink: backgroundRichLink(format),
 			imageTitle: backgroundImageTitle(format),
 			speechBubble: backgroundSpeechBubble(format),
+			carouselDot: backgroundCarouselDot(format),
+			carouselDotFocus: backgroundCarouselDotFocus(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
