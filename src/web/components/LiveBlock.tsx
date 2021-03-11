@@ -276,7 +276,7 @@ export const LiveBlock = ({
 				{mainElements.map((element, index) => {
 					if (typesWeStretch.includes(element._type)) {
 						return (
-							<BlockMedia>
+							<BlockMedia key={index}>
 								<ElementRenderer
 									isMainMedia={false}
 									adTargeting={adTargeting}
@@ -292,7 +292,7 @@ export const LiveBlock = ({
 					}
 
 					return (
-						<BlockText>
+						<BlockText key={index}>
 							<ElementRenderer
 								index={index}
 								element={element}
