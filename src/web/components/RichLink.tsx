@@ -219,7 +219,7 @@ export const RichLink = ({
 			className={pillarBackground(format)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div className={cx(neutralBackground)}>
+			<div className={neutralBackground}>
 				<a className={richLinkLink} href={url}>
 					<div className={richLinkTopBorder(format)} />
 					{showImage && (
