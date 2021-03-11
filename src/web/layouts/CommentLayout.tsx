@@ -512,6 +512,8 @@ export const CommentLayout = ({
 									adTargeting={adTargeting}
 									host={host}
 									abTests={CAPI.config.abTests}
+									pageId={CAPI.pageId}
+									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines

@@ -15,6 +15,8 @@ type Props = {
 	adTargeting: AdTargeting;
 	host?: string;
 	abTests: CAPIType['config']['abTests'];
+	pageId: string;
+	webTitle: string;
 };
 
 const globalH2Styles = (display: Display) => css`
@@ -64,6 +66,8 @@ export const ArticleBody = ({
 	adTargeting,
 	host,
 	abTests,
+	pageId,
+	webTitle,
 }: Props) => {
 	if (
 		format.design === Design.LiveBlog ||
@@ -83,8 +87,8 @@ export const ArticleBody = ({
 					adTargeting={adTargeting}
 					host={host}
 					abTests={abTests}
-					pageId=""
-					webTitle=""
+					pageId={pageId}
+					webTitle={webTitle}
 				/>
 			</div>
 		);
