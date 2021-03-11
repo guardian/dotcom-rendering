@@ -768,13 +768,12 @@ interface BaseTrailType {
     linkText?: string;
 }
 interface TrailType extends BaseTrailType {
-		format: Format;
-		palette: Palette;
+	palette: Palette;
+	format: Format;
 }
 
 interface CAPITrailType extends BaseTrailType {
-	designType: CAPIDesign;
-	pillar: CAPIPillar;
+	format: CAPIFormat;
 }
 
 interface TrailTabType {
