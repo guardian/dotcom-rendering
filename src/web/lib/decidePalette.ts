@@ -583,6 +583,18 @@ const textCalloutHeading = (): string => {
 	return brand[500];
 };
 
+const textDropCap = (format: Format): string => {
+	switch (format.design) {
+		case Design.Editorial:
+		case Design.Comment:
+			return format.theme === Pillar.Opinion
+				? opinion[400]
+				: pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].dark;
+	}
+};
+
 const backgroundCarouselDot = (format: Format): string => {
 	return pillarPalette[format.theme][400];
 };
@@ -625,6 +637,7 @@ export const decidePalette = (format: Format): Palette => {
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
 			calloutHeading: textCalloutHeading(),
+			dropCap: textDropCap(format),
 		},
 		background: {
 			article: backgroundArticle(format),

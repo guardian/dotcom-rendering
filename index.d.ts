@@ -77,6 +77,7 @@ type Palette = {
 		carouselTitle: Colour;
 		calloutHeading: Colour;
 		pullQuote: Colour;
+		dropCap: Colour;
 	},
 	background: {
 		article: Colour;
