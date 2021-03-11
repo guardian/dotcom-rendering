@@ -91,6 +91,7 @@ type Palette = {
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
+		liveBlock: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;
