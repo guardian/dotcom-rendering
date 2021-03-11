@@ -143,7 +143,7 @@ SpecialReportStory.story = {
 };
 SpecialReportStory.parameters = {
 	// Wait for the interactives to load
-	chromatic: { delay: 300 },
+	chromatic: { delay: 1000 },
 };
 
 export const FeatureStory = (): React.ReactNode => {
