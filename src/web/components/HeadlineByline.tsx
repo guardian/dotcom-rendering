@@ -88,6 +88,10 @@ type Props = {
 };
 
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
+	if (byline === '') {
+		return null;
+	}
+
 	const palette = decidePalette(format);
 
 	switch (format.display) {
