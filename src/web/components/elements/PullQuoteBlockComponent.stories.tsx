@@ -155,7 +155,7 @@ export const OpinionInline = () => {
 				design={Design.Article}
 				palette={decidePalette({
 					display: Display.Standard,
-					design: Design.Article,
+					design: Design.Comment,
 					theme: Pillar.Opinion,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
@@ -167,7 +167,7 @@ export const OpinionInline = () => {
 	);
 };
 OpinionInline.story = {
-	name: 'Opinion, inline, Article',
+	name: 'Opinion, inline, Comment',
 };
 
 export const SpecialReportInline = () => {
@@ -310,7 +310,7 @@ export const OpinionSupporting = () => {
 				design={Design.Article}
 				palette={decidePalette({
 					display: Display.Standard,
-					design: Design.Article,
+					design: Design.Comment,
 					theme: Pillar.Opinion,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
@@ -322,7 +322,7 @@ export const OpinionSupporting = () => {
 	);
 };
 OpinionSupporting.story = {
-	name: 'Opinion, supporting, Article',
+	name: 'Opinion, supporting, Comment',
 };
 
 export const SpecialReportSupporting = () => {
