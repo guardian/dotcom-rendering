@@ -1,15 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
-import { pillarPalette } from '@frontend/lib/pillars';
 
 type Props = {
 	text: string;
-	design: Design;
-	pillar: Theme;
+	palette: Palette;
 	size: SmallHeadlineSize;
 };
 
@@ -42,17 +39,14 @@ const bylineStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const colourStyles = (design: Design, pillar: Theme) => {
-	switch (design) {
-		default:
-			return css`
-				color: ${pillarPalette[pillar].main};
-			`;
-	}
+const colourStyles = (palette: Palette) => {
+	return css`
+		color: ${palette.text.byline};
+	`;
 };
 
-export const Byline = ({ text, design, pillar, size }: Props) => (
-	<span className={cx(bylineStyles(size), colourStyles(design, pillar))}>
+export const Byline = ({ text, palette, size }: Props) => (
+	<span className={cx(bylineStyles(size), colourStyles(palette))}>
 		{text}
 	</span>
 );

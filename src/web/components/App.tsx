@@ -657,7 +657,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
-					<CalloutBlockComponent callout={callout} pillar={pillar} />
+					<CalloutBlockComponent
+						callout={callout}
+						palette={palette}
+					/>
 				</HydrateOnce>
 			))}
 			{chartAtoms.map((chartAtom) => (
@@ -995,7 +998,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
 							edition={CAPI.editionId}
-							pillar={pillar}
+							format={format}
 						/>
 					</Suspense>
 				</Lazy>
@@ -1013,7 +1016,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							ajaxUrl={CAPI.config.ajaxUrl}
 							hasStoryPackage={CAPI.hasStoryPackage}
 							tags={CAPI.tags}
-							pillar={pillar}
+							format={format}
 						/>
 					</Suspense>
 				</Lazy>
@@ -1042,7 +1045,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
-					pillar={pillar}
+					palette={palette}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 					display={display}

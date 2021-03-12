@@ -8,7 +8,7 @@ type Props = {
 	limit: number; // Limit the number of items shown (the api often returns more)
 	ophanComponentName: OphanComponentName;
 	Container: React.FC<OnwardsType>;
-	pillar: Theme;
+	format: Format;
 	isCuratedContent?: boolean;
 	isFullCardImage?: boolean;
 };
@@ -25,7 +25,7 @@ export const OnwardsData = ({
 	limit,
 	ophanComponentName,
 	Container,
-	pillar,
+	format,
 	isCuratedContent,
 	isFullCardImage,
 }: Props) => {
@@ -45,7 +45,7 @@ export const OnwardsData = ({
 				trails={buildTrails(data.trails, limit)}
 				description={data.description}
 				ophanComponentName={ophanComponentName}
-				pillar={pillar}
+				format={format}
 				isCuratedContent={isCuratedContent}
 				isFullCardImage={isFullCardImage}
 			/>

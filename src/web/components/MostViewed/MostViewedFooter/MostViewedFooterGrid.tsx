@@ -6,7 +6,6 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { useAB } from '@guardian/ab-react';
 
-import { pillarPalette } from '@frontend/lib/pillars';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 const thinGreySolid = `1px solid ${border.secondary}`;
@@ -42,10 +41,9 @@ const listTab = css`
 const firstTab = css`
 	border-right: ${thinGreySolid};
 `;
-
-const selectedListTabStyles = (pillar: Theme) => css`
+const selectedListTabStyles = (palette: Palette) => css`
 	/* TODO: Using a pseudo selector here could be faster? */
-	box-shadow: inset 0px 4px 0px 0px ${pillarPalette[pillar].dark};
+	box-shadow: inset 0px 4px 0px 0px ${palette.background.mostViewedTab};
 	transition: box-shadow 0.3s ease-in-out;
 `;
 
@@ -103,7 +101,7 @@ const gridContainer = css`
 type Props = {
 	data: TrailTabType[];
 	sectionName?: string;
-	pillar: Theme;
+	palette: Palette;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling
@@ -128,7 +126,7 @@ const TabHeading = ({ heading }: { heading: string }) => {
 	}
 };
 
-export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
+export const MostViewedFooterGrid = ({ data, sectionName, palette }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	const ABTestAPI = useAB();
 	const inDeeplyReadTestVariant = ABTestAPI.isUserInVariant(
@@ -144,7 +142,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, pillar }: Props) => {
 						const isFirst = i === 0;
 						const selectedStyles = inDeeplyReadTestVariant
 							? selectedDeeplyListTabStyles
-							: selectedListTabStyles(pillar);
+							: selectedListTabStyles(palette);
 						return (
 							<li
 								className={cx(

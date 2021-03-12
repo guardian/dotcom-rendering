@@ -14,7 +14,7 @@ import { SecondTierItem } from './SecondTierItem';
 
 type Props = {
 	sectionName?: string;
-	pillar: Theme;
+	palette: Palette;
 	ajaxUrl: string;
 };
 
@@ -59,7 +59,7 @@ function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
 
 export const MostViewedFooterData = ({
 	sectionName,
-	pillar,
+	palette,
 	ajaxUrl,
 }: Props) => {
 	const ABTestAPI = useAB();
@@ -92,7 +92,7 @@ export const MostViewedFooterData = ({
 				<MostViewedFooterGrid
 					data={transformTabs(tabs)}
 					sectionName={sectionName}
-					pillar={pillar}
+					palette={palette}
 				/>
 				<div className={cx(stackBelow('tablet'), secondTierStyles)}>
 					{'mostCommented' in data && (

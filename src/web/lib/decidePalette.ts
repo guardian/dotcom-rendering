@@ -9,6 +9,7 @@ import {
 	sport,
 	brandAltBackground,
 	border,
+	brand,
 	brandAlt,
 } from '@guardian/src-foundations';
 
@@ -159,6 +160,22 @@ const textArticleLink = (format: Format): string => {
 	}
 };
 
+const textDisclaimerLink = (format: Format): string =>
+	pillarPalette[format.theme].dark;
+
+const textWitnessIcon = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textWitnessTitle = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textWitnessAuthor = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textPullQuote = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
 const textStandfirstLink = (format: Format): string => {
 	if (format.design === Design.LiveBlog) return WHITE;
 	if (format.theme === Special.SpecialReport) return specialReport[400];
@@ -169,6 +186,10 @@ const textStandfirstLink = (format: Format): string => {
 		default:
 			return pillarPalette[format.theme].main;
 	}
+};
+
+const textBranding = (format: Format): string => {
+	return pillarPalette[format.theme].main;
 };
 
 const textArticleLinkHover = (format: Format): string => {
@@ -397,6 +418,14 @@ const backgroundStandfirst = (format: Format): string => {
 	}
 };
 
+const backgroundImageTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const backgroundSpeechBubble = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 const fillCommentCount = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
@@ -411,6 +440,9 @@ const fillCaptionTriangle = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
+
+const fillBlockquoteIcon = (format: Format): string =>
+	pillarPalette[format.theme].main;
 
 const fillCardIcon = (format: Format): string => {
 	// Setting Card clock colour for immersive cards to all be dark grey
@@ -511,6 +543,86 @@ const hoverHeadlineByline = (format: Format): string => {
 	return pillarPalette[format.theme].dark;
 };
 
+const textRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const borderRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const borderNavPillar: (format: Format) => string = (format) =>
+	pillarPalette[format.theme].bright;
+
+const backgroundRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const fillRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const fillQuoteIcon: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const textPullQuoteAttribution = (format: Format): string =>
+	fillQuoteIcon(format);
+
+const textSignInLink = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
+const textCarouselTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const textCalloutHeading = (): string => {
+	return brand[500];
+};
+
+const textDropCap = (format: Format): string => {
+	switch (format.design) {
+		case Design.Editorial:
+		case Design.Comment:
+			return format.theme === Pillar.Opinion
+				? opinion[400]
+				: pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].dark;
+	}
+};
+
+const backgroundHeadlineTag = (format: Format): string =>
+	pillarPalette[format.theme].dark;
+
+const backgroundCarouselDot = (format: Format): string => {
+	return pillarPalette[format.theme][400];
+};
+
+const backgroundCarouselDotFocus = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const backgroundMostViewedTab = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
 export const decidePalette = (format: Format): Palette => {
 	return {
 		text: {
@@ -535,6 +647,18 @@ export const decidePalette = (format: Format): Palette => {
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
+			branding: textBranding(format),
+			disclaimerLink: textDisclaimerLink(format),
+			signInLink: textSignInLink(format),
+			richLink: textRichLink(format),
+			pullQuote: textPullQuote(format),
+			pullQuoteAttribution: textPullQuoteAttribution(format),
+			witnessIcon: textWitnessIcon(format),
+			witnessAuthor: textWitnessAuthor(format),
+			witnessTitle: textWitnessTitle(format),
+			carouselTitle: textCarouselTitle(format),
+			calloutHeading: textCalloutHeading(),
+			dropCap: textDropCap(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -547,12 +671,22 @@ export const decidePalette = (format: Format): Palette => {
 			bullet: backgroundBullet(format),
 			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
+			richLink: backgroundRichLink(format),
+			imageTitle: backgroundImageTitle(format),
+			speechBubble: backgroundSpeechBubble(format),
+			carouselDot: backgroundCarouselDot(format),
+			carouselDotFocus: backgroundCarouselDotFocus(format),
+			headlineTag: backgroundHeadlineTag(format),
+			mostViewedTab: backgroundMostViewedTab(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
 			cardIcon: fillCardIcon(format),
+			richLink: fillRichLink(format),
+			quoteIcon: fillQuoteIcon(format),
+			blockquoteIcon: fillBlockquoteIcon(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(),
@@ -563,6 +697,8 @@ export const decidePalette = (format: Format): Palette => {
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			standfirst: borderStandfirst(format),
+			richLink: borderRichLink(format),
+			navPillar: borderNavPillar(format),
 		},
 		topBar: {
 			card: topBarCard(format),

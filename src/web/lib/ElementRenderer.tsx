@@ -101,7 +101,7 @@ export const ElementRenderer = ({
 				<BlockquoteBlockComponent
 					key={index}
 					html={element.html}
-					pillar={format.theme}
+					palette={palette}
 					quoted={element.quoted}
 				/>
 			);
@@ -114,7 +114,7 @@ export const ElementRenderer = ({
 				>
 					<CalloutBlockComponent
 						callout={element}
-						pillar={format.theme}
+						palette={palette}
 					/>
 				</Figure>
 			);
@@ -170,10 +170,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 				>
-					<DisclaimerBlockComponent
-						html={element.html}
-						pillar={format.theme}
-					/>
+					<DisclaimerBlockComponent html={element.html} />
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
@@ -444,7 +441,7 @@ export const ElementRenderer = ({
 				<PullQuoteBlockComponent
 					key={index}
 					html={element.html}
-					pillar={format.theme}
+					palette={palette}
 					design={format.design}
 					attribution={element.attribution}
 					role={isLiveBlog ? 'inline' : element.role}
@@ -695,7 +692,7 @@ export const ElementRenderer = ({
 								authorName={witnessTypeDataImage.authorName}
 								dateCreated={witnessTypeDataImage.dateCreated}
 								alt={witnessTypeDataImage.alt}
-								pillar={format.theme}
+								palette={palette}
 							/>
 						</Figure>
 					);
@@ -710,7 +707,7 @@ export const ElementRenderer = ({
 								authorName={witnessTypeDataVideo.authorName}
 								youtubeHtml={witnessTypeDataVideo.youtubeHtml}
 								dateCreated={witnessTypeDataVideo.dateCreated}
-								pillar={format.theme}
+								palette={palette}
 							/>
 						</Figure>
 					);
@@ -724,7 +721,7 @@ export const ElementRenderer = ({
 								description={witnessTypeDataText.description}
 								authorName={witnessTypeDataText.authorName}
 								dateCreated={witnessTypeDataText.dateCreated}
-								pillar={format.theme}
+								palette={palette}
 							/>
 						</Figure>
 					);

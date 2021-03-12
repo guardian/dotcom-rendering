@@ -1,4 +1,4 @@
-import { Display, Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
@@ -154,63 +154,99 @@ export const storyPackageTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails,
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const oneTrail: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 1),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const twoTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 2),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const threeTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 3),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const fourTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 4),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const fiveTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 5),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const sixTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 6),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const sevenTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 7),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const eightTrails: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const linkAndDescription: OnwardsType = {
@@ -220,7 +256,11 @@ export const linkAndDescription: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const withLongDescription: OnwardsType = {
@@ -229,7 +269,11 @@ export const withLongDescription: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };
 
 export const withLink: OnwardsType = {
@@ -238,5 +282,9 @@ export const withLink: OnwardsType = {
 	heading: 'More on this story',
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
-	pillar: Pillar.News,
+	format: {
+		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
 };

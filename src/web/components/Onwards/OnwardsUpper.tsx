@@ -83,7 +83,7 @@ type Props = {
 	contentType: string;
 	tags: TagType[];
 	edition: Edition;
-	pillar: Theme;
+	format: Format;
 };
 
 export const OnwardsUpper = ({
@@ -97,7 +97,7 @@ export const OnwardsUpper = ({
 	keywordIds,
 	contentType,
 	tags,
-	pillar,
+	format,
 }: Props) => {
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
@@ -177,7 +177,7 @@ export const OnwardsUpper = ({
 						limit={8}
 						ophanComponentName={ophanComponentName}
 						Container={OnwardsLayout}
-						pillar={pillar}
+						format={format}
 					/>
 				</Section>
 			)}

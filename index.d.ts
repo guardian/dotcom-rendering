@@ -67,6 +67,18 @@ type Palette = {
 		headlineByline: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
+		branding: Colour;
+		disclaimerLink: Colour;
+		signInLink: Colour;
+		richLink: Colour;
+		witnessIcon: Colour;
+		witnessAuthor: Colour;
+		witnessTitle: Colour;
+		carouselTitle: Colour;
+		calloutHeading: Colour;
+		pullQuote: Colour;
+		pullQuoteAttribution: Colour;
+		dropCap: Colour;
 	},
 	background: {
 		article: Colour;
@@ -79,12 +91,22 @@ type Palette = {
 		bullet: Colour;
 		header: Colour;
 		standfirst: Colour;
+		richLink: Colour;
+		imageTitle: Colour;
+		speechBubble: Colour;
+		carouselDot: Colour;
+		carouselDotFocus: Colour;
+		headlineTag: Colour;
+		mostViewedTab: Colour;
 	},
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
 		captionTriangle: Colour;
 		cardIcon: Colour;
+		richLink: Colour;
+		quoteIcon: Colour;
+		blockquoteIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;
@@ -95,6 +117,8 @@ type Palette = {
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;
+		richLink: Colour;
+		navPillar: Colour;
 	},
 	topBar: {
 		card: Colour;
@@ -564,9 +588,9 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-    pillar: Theme;
+    format: Format;
 	isCuratedContent?: boolean;
-    isFullCardImage?: boolean
+    isFullCardImage?: boolean;
 };
 
 type OphanComponentName =

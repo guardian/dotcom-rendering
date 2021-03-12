@@ -244,9 +244,7 @@ export const ArticleMeta = ({
 	return (
 		<div className={metaContainer(format)}>
 			<div className={cx(meta)}>
-				{branding && (
-					<Branding branding={branding} pillar={format.theme} />
-				)}
+				{branding && <Branding branding={branding} palette={palette} />}
 				<RowBelowLeftCol>
 					<>
 						{showAvatar && bylineImageUrl && (

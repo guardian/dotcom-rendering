@@ -1,141 +1,368 @@
 import React from 'react';
-import { css } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 
-import { Section } from '../Section';
-import { Flex } from '../Flex';
-import { LeftColumn } from '../LeftColumn';
-import { RightColumn } from '../RightColumn';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 
-import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
+import { ContainerLayout } from '../ContainerLayout';
 
 export default {
 	component: PullQuoteBlockComponent,
 	title: 'Components/PullQuoteBlockComponent',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
-	<Section showTopBorder={false}>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<div
-				className={css`
-					width: 620px;
-					padding: 20px;
-				`}
-			>
-				{children}
-			</div>
-			<RightColumn>
-				<></>
-			</RightColumn>
-		</Flex>
-	</Section>
-);
-
-export const Article = () => {
+// Inline
+export const SportInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
-				pillar={Pillar.News}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
-				role="inline"
-			/>
-		</Container>
-	);
-};
-Article.story = {
-	name: 'with design Article - inline',
-};
-
-export const Comment = () => {
-	return (
-		<Container>
-			<PullQuoteBlockComponent
-				design={Design.Comment}
-				pillar={Pillar.Opinion}
-				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
-				role="supporting"
-			/>
-		</Container>
-	);
-};
-Comment.story = {
-	name: 'with design Comment - supporting',
-};
-
-export const CommentAttr = () => {
-	return (
-		<Container>
-			<PullQuoteBlockComponent
-				design={Design.Comment}
-				pillar={Pillar.Opinion}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Sport,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
-CommentAttr.story = {
-	name: 'with design Comment with attribution - inline',
+SportInline.story = {
+	name: 'Sport, inline, Article',
 };
 
-export const PhotoEssay = () => {
+export const LabsInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.PhotoEssay}
-				pillar={Pillar.Lifestyle}
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Special.Labs,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
-				role="supporting"
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
-PhotoEssay.story = {
-	name: 'with design PhotoEssay - supporting',
+LabsInline.story = {
+	name: 'Labs, inline, Article',
 };
 
-export const PhotoEssayAttr = () => {
+export const LifestyleInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.PhotoEssay}
-				pillar={Pillar.Lifestyle}
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Lifestyle,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+LifestyleInline.story = {
+	name: 'Lifestyle, inline, Article',
+};
+
+export const CultureInline = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Culture,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+CultureInline.story = {
+	name: 'Culture, inline, Article',
+};
+
+export const NewsInline = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+NewsInline.story = {
+	name: 'News, inline, Article',
+};
+
+export const OpinionInline = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Comment}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+OpinionInline.story = {
+	name: 'Opinion, inline, Comment',
+};
+
+export const SpecialReportInline = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Special.SpecialReport,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+SpecialReportInline.story = {
+	name: 'SpecialReport, inline, Article',
+};
+
+// Supporting
+export const SportSupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Sport,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
-PhotoEssayAttr.story = {
-	name: 'with design PhotoEssay and attribution - supporting',
+SportSupporting.story = {
+	name: 'Sport, supporting, Article',
 };
 
+export const LabsSupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Special.Labs,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+LabsSupporting.story = {
+	name: 'Labs, supporting, Article',
+};
+
+export const LifestyleSupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Lifestyle,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+LifestyleSupporting.story = {
+	name: 'Lifestyle, supporting, Article',
+};
+
+export const CultureSupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Culture,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+CultureSupporting.story = {
+	name: 'Culture, supporting, Article',
+};
+
+export const NewsSupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+NewsSupporting.story = {
+	name: 'News, supporting, Article',
+};
+
+export const OpinionSupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Comment}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Comment,
+					theme: Pillar.Opinion,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+OpinionSupporting.story = {
+	name: 'Opinion, supporting, Comment',
+};
+
+export const SpecialReportSupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Special.SpecialReport,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+SpecialReportSupporting.story = {
+	name: 'SpecialReport, supporting, Article',
+};
+
+// PhotoEssay
 export const PhotoEssayInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.PhotoEssay}
-				pillar={Pillar.Culture}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.PhotoEssay,
+					theme: Pillar.News,
+				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
+				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 PhotoEssayInline.story = {
-	name: 'with design PhotoEssay - inline',
+	name: 'News, inline, PhotoEssay',
+};
+
+export const PhotoEssaySupporting = () => {
+	return (
+		<ContainerLayout centralBorder="full">
+			<PullQuoteBlockComponent
+				design={Design.PhotoEssay}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.PhotoEssay,
+					theme: Pillar.News,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</ContainerLayout>
+	);
+};
+PhotoEssaySupporting.story = {
+	name: 'News, supporting, PhotoEssay',
 };

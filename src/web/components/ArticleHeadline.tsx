@@ -327,7 +327,7 @@ export const ArticleHeadline = ({
 						>
 							<HeadlineTag
 								tagText="Interview"
-								pillar={format.theme}
+								palette={palette}
 							/>
 							<h1
 								className={cx(

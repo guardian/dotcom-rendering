@@ -4,13 +4,12 @@ import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
-import { pillarPalette } from '@root/src/lib/pillars';
 import { neutral } from '@guardian/src-foundations/palette';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 
 type Props = {
 	html: string;
-	pillar: Theme;
+	palette: Palette;
 	quoted?: boolean;
 };
 
@@ -46,7 +45,7 @@ const quotedBlockquoteStyles = css`
 
 export const BlockquoteBlockComponent: React.FC<Props> = ({
 	html,
-	pillar,
+	palette,
 	quoted,
 }: Props) => {
 	const {
@@ -73,7 +72,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 	if (quoted) {
 		return (
 			<BlockquoteRow>
-				<QuoteIcon colour={pillarPalette[pillar].main} size="medium" />
+				<QuoteIcon colour={palette.fill.blockquoteIcon} size="medium" />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={unwrappedHtml}

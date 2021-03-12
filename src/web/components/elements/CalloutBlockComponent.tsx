@@ -3,13 +3,10 @@ import { css, cx } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
 import { Button } from '@guardian/src-button';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
-
-import { pillarPalette } from '@root/src/lib/pillars';
 
 import { Form } from '../Callout/Form';
 
@@ -75,10 +72,10 @@ const summeryContentWrapper = css`
 	flex-direction: row;
 `;
 
-const speechBubbleStyles = (pillar: Theme) => css`
+const speechBubbleStyles = (palette: Palette) => css`
 	${textSans.medium({ fontWeight: 'bold' })}
 	color: ${neutral[100]};
-	background-color: ${pillarPalette[pillar][400]};
+	background-color: ${palette.background.speechBubble};
 	min-width: 88px;
 	padding-bottom: 6px;
 	padding-left: 10px;
@@ -89,7 +86,7 @@ const speechBubbleStyles = (pillar: Theme) => css`
 		height: 22px;
 		border-bottom-right-radius: 18px;
 		position: absolute;
-		background-color: ${pillarPalette[pillar][400]};
+		background-color: ${palette.background.speechBubble};
 	}
 `;
 
@@ -97,9 +94,9 @@ const headingTextHeaderStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
 `;
 
-const headingTextStyles = css`
+const headingTextStyles = (palette: Palette) => css`
 	a {
-		color: ${palette.brand[500]};
+		color: ${palette.text.calloutHeading};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -128,10 +125,10 @@ type FormDataType = { [key in string]: any };
 
 export const CalloutBlockComponent = ({
 	callout,
-	pillar,
+	palette,
 }: {
 	callout: CalloutBlockElement;
-	pillar: Theme;
+	palette: Palette;
 }) => {
 	let expandFormButtonRef: HTMLButtonElement | null = null;
 	let firstFieldElementRef: HTMLElement | null = null;
@@ -294,11 +291,11 @@ export const CalloutBlockComponent = ({
 					<summary className={summeryStyles}>
 						<div className={summeryContentWrapper}>
 							<div className={speechBubbleWrapperStyles}>
-								<div className={speechBubbleStyles(pillar)}>
+								<div className={speechBubbleStyles(palette)}>
 									<h4>Share your story</h4>
 								</div>
 							</div>
-							<div className={headingTextStyles}>
+							<div className={headingTextStyles(palette)}>
 								<p className={successTextStyles}>
 									Thank you for your contribution
 								</p>
@@ -322,11 +319,11 @@ export const CalloutBlockComponent = ({
 				<summary className={summeryStyles}>
 					<div className={summeryContentWrapper}>
 						<div className={speechBubbleWrapperStyles}>
-							<div className={speechBubbleStyles(pillar)}>
+							<div className={speechBubbleStyles(palette)}>
 								<h4>Share your story</h4>
 							</div>
 						</div>
-						<div className={headingTextStyles}>
+						<div className={headingTextStyles(palette)}>
 							<h4 className={headingTextHeaderStyles}>{title}</h4>
 							{description && (
 								<div
