@@ -74,21 +74,15 @@ const partiallyInline = css`
 		margin-left: -10px;
 	}
 	${from.leftCol} {
-		margin-left: -56px;
+		margin-left: -38px;
 	}
 
 	:after {
-		left: 0;
 		border-radius: 0 0 25px;
+		left: 10px;
 
-		${from.mobileLandscape} {
-			left: 20px;
-		}
 		${from.phablet} {
 			left: 10px;
-		}
-		${from.desktop} {
-			left: 0px;
 		}
 		${from.leftCol} {
 			left: 27px;
