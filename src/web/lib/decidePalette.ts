@@ -11,6 +11,9 @@ import {
 	border,
 	brand,
 	brandAlt,
+	lifestyle,
+	culture,
+	labs,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
@@ -212,7 +215,17 @@ const textCardHeadline = (format: Format): string => {
 			return pillarPalette[format.theme].dark;
 		case Design.Media:
 		case Design.LiveBlog:
-			return neutral[97];
+			switch (format.theme) {
+				case Special.Labs:
+					return BLACK;
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				default:
+					return WHITE;
+			}
 		default:
 			return BLACK;
 	}
@@ -238,8 +251,15 @@ const textCardKicker = (format: Format): string => {
 					return news[600];
 				case Pillar.Sport:
 					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -275,13 +295,20 @@ const textCardFooter = (format: Format): string => {
 		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
 				case Special.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -368,7 +395,17 @@ const backgroundCard = (format: Format): string => {
 		case Design.Media:
 			return neutral[20];
 		case Design.LiveBlog:
-			return pillarPalette[format.theme].dark;
+			switch (format.theme) {
+				case Special.Labs:
+					return labs[400];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				default:
+					return pillarPalette[format.theme][300];
+			}
 		default:
 			return neutral[97];
 	}
@@ -457,16 +494,24 @@ const fillCardIcon = (format: Format): string => {
 				default:
 					return neutral[46];
 			}
+			return lifestyle[500];
 		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
 					return '#ffbac8';
 				case Pillar.Sport:
 					return '#90dcff';
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
 				case Special.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
