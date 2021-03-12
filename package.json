@@ -53,7 +53,6 @@
         "@guardian/src-icons": "^2.7.1",
         "@guardian/src-link": "^2.7.1",
         "@guardian/src-radio": "^2.7.1",
-        "@guardian/src-svgs": "^2.8.2",
         "@guardian/src-text-area": "^2.7.1",
         "@guardian/src-text-input": "^2.7.1",
         "@guardian/types": "^5.0.0",
