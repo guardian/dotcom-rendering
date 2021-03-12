@@ -55,7 +55,7 @@
         "@guardian/src-radio": "^2.7.1",
         "@guardian/src-text-area": "^2.7.1",
         "@guardian/src-text-input": "^2.7.1",
-        "@guardian/types": "^5.0.0",
+        "@guardian/types": "^5.1.0",
         "@hkdobrev/run-if-changed": "^0.3.1",
         "@loadable/component": "^5.14.1",
         "@loadable/server": "^5.14.0",
