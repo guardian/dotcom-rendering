@@ -12,7 +12,7 @@ import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { submitComponentEvent } from 'src/web/browser/ophan/ophan';
+import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 
 const { css } = emotion;
 
