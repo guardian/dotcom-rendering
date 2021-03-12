@@ -579,13 +579,14 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</HydrateOnce>
 			))}
 			{interactiveElements.map((interactiveBlock) => (
-				<Portal rootId={interactiveBlock.elementId}>
+				<HydrateOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent
 						url={interactiveBlock.url}
 						scriptUrl={interactiveBlock.scriptUrl}
 						alt={interactiveBlock.alt}
+						role={interactiveBlock.role}
 					/>
-				</Portal>
+				</HydrateOnce>
 			))}
 			{quizAtoms.map((quizAtom) => (
 				<HydrateOnce rootId={quizAtom.elementId}>

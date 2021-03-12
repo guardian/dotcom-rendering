@@ -363,6 +363,7 @@ export const ElementRenderer = ({
 						url={element.url}
 						scriptUrl={element.scriptUrl}
 						alt={element.alt}
+						role={element.role}
 					/>
 				</Figure>
 			);

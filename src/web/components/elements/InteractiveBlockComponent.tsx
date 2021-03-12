@@ -1,9 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { useOnce } from '@root/src/web/lib/useOnce';
+import { css } from 'emotion';
+import { body } from '@guardian/src-foundations/typography';
+import { space } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
+import { Placeholder } from '@root/src/web/components/Placeholder';
+import libDebounce from 'lodash.debounce';
 
 type Props = {
 	url?: string;
 	scriptUrl?: string;
 	alt?: string;
+	role?: RoleType;
 };
 
 /*
@@ -57,18 +65,178 @@ and is sent with all interactive elements in the scriptUrl from CAPI to do a two
 It has not been updated since 2016.
 
 MIGRATION FROM FRONTEND
-- TODO For the standard boot.js, we will re-write the behavior in modern JS to avoid the requirement of an AMD loader
+- For the standard boot.js, we have re-written the behavior in modern JS to avoid the requirement of an AMD loader
 and to avoid loading the boot.js file.
 - For all other files that do not load the standard boot.js, we'll add a AMD loader to the page
 
 For the remaining few we dynamically load and AMD loader and support the contract as defined with curl AMD loader
 
 */
+const decideHeight = (role: RoleType) => {
+	switch (role) {
+		case 'supporting':
+			return 200;
+		default:
+			return 500;
+	}
+};
+const getMinHeight = (role: RoleType, loaded: boolean) => {
+	if (loaded) {
+		return `auto`;
+	}
+	return `${decideHeight(role)}px`;
+};
+const wrapperStyle = (role: RoleType, loaded: boolean) => css`
+	${body.medium()};
+	background-color: ${neutral[100]};
+	min-height: ${getMinHeight(role, loaded)};
+	position: relative;
+`;
 
-export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
+const placeholderLinkStyle = css`
+	position: absolute;
+	bottom: ${space[1]}px;
+	left: ${space[1]}px;
+`;
+
+// https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js
+const setupWindowListeners = (iframe: HTMLIFrameElement) => {
+	// Calls func on trailing edge of the wait period
+
+	const postMessage = (message: Record<string, unknown>) => {
+		if (iframe.contentWindow) {
+			iframe.contentWindow.postMessage(JSON.stringify(message), '*');
+		}
+	};
+
+	window.addEventListener(
+		'message',
+		(event) => {
+			if (event.source !== iframe.contentWindow) {
+				return;
+			}
+
+			let message: Record<string, unknown> | undefined;
+			try {
+				message = JSON.parse(event.data);
+			} catch (e) {
+				window?.guardian?.modules?.sentry?.reportError(
+					e,
+					'Json parse Failed on in interactiveBlockComponent',
+				);
+			}
+
+			if (message === undefined) {
+				return;
+			}
+
+			const postPositionMessage = (subscribe?: boolean) => {
+				const iframeBox = iframe.getBoundingClientRect();
+				postMessage({
+					id: message?.id || '',
+					type: message?.type || '',
+					subscribe: !!subscribe,
+					iframeTop: iframeBox.top,
+					iframeRight: iframeBox.right,
+					iframeBottom: iframeBox.bottom,
+					iframeLeft: iframeBox.left,
+					innerHeight: window.innerHeight,
+					innerWidth: window.innerWidth,
+					pageYOffset: window.pageYOffset,
+				});
+			};
+
+			// Actions
+			switch (message.type) {
+				case 'set-height':
+					if (typeof message.value === 'number') {
+						iframe.height = message.value.toString();
+					}
+					break;
+				case 'navigate':
+					if (typeof message.value === 'string') {
+						document.location.href = message.value;
+					}
+					break;
+				case 'scroll-to':
+					if (
+						typeof message.x === 'number' &&
+						typeof message.y === 'number'
+					) {
+						window.scrollTo(message.x, message.y);
+					}
+					break;
+				case 'get-location':
+					postMessage({
+						id: message.id,
+						type: message.type,
+						hash: window.location.hash,
+						host: window.location.host,
+						hostname: window.location.hostname,
+						href: window.location.href,
+						origin: window.location.origin,
+						pathname: window.location.pathname,
+						port: window.location.port,
+						protocol: window.location.protocol,
+						search: window.location.search,
+					});
+					break;
+				case 'get-position':
+					postPositionMessage();
+					break;
+				case 'monitor-position':
+					// Send initial position
+					postPositionMessage(true);
+
+					// Send updated position on scroll or resize
+					window.addEventListener(
+						'scroll',
+						libDebounce(() => {
+							postPositionMessage(true);
+						}, 50),
+					);
+					window.addEventListener(
+						'resize',
+						libDebounce(() => {
+							postPositionMessage(true);
+						}, 50),
+					);
+					break;
+			}
+		},
+		false,
+	);
+};
+
+export const InteractiveBlockComponent = ({
+	url,
+	scriptUrl,
+	alt,
+	role = 'inline',
+}: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		if (scriptUrl) {
+	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
+	const [loaded, setLoaded] = useState(false);
+	useOnce(() => {
+		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
+		if (
+			scriptUrl ===
+				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js' &&
+			url &&
+			placeholderLinkRef.current
+		) {
+			const iframe = document.createElement('iframe');
+			iframe.style.width = '100%';
+			iframe.style.border = 'none';
+			iframe.height = decideHeight(role).toString();
+			iframe.src = url;
+
+			setupWindowListeners(iframe);
+
+			wrapperRef.current?.appendChild(iframe);
+
+			setLoaded(true);
+		} else if (scriptUrl) {
 			// We're going to use curl AMD loader to load the script that the
 			// interactive has given us.
 			window.require(
@@ -89,17 +257,33 @@ export const InteractiveBlockComponent = ({ url, scriptUrl, alt }: Props) => {
 					}
 				},
 			);
+
+			setLoaded(true);
 		}
-	}, [scriptUrl]);
+	}, [loaded]);
 
 	return (
 		<div
 			data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 			ref={wrapperRef}
+			className={wrapperStyle(role, loaded)}
 		>
-			<a data-name="placeholder" href={url}>
-				{alt}
-			</a>
+			{!loaded && (
+				<Placeholder
+					height={decideHeight(role)}
+					shouldShimmer={false}
+				/>
+			)}
+			{!loaded && (
+				<a
+					ref={placeholderLinkRef}
+					data-name="placeholder"
+					className={placeholderLinkStyle}
+					href={url}
+				>
+					{alt}
+				</a>
+			)}
 		</div>
 	);
 };

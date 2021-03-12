@@ -178,10 +178,12 @@ export const document = ({ data }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
-	const pageHasInteractiveElements = CAPIElements.some(
+	const pageHasNonBootInteractiveElements = CAPIElements.some(
 		(element) =>
 			element._type ===
-			'model.dotcomrendering.pageElements.InteractiveBlockElement',
+				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+			element.scriptUrl !==
+				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
 	);
 
 	function isDefined<T>(argument: T | boolean): argument is T {
@@ -202,7 +204,7 @@ export const document = ({ data }: Props): string => {
 			...getScriptArrayFromChunkName('sentryLoader'),
 			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),
-			pageHasInteractiveElements && {
+			pageHasNonBootInteractiveElements && {
 				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
