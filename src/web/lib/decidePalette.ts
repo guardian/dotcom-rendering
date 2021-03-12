@@ -498,9 +498,9 @@ const fillCardIcon = (format: Format): string => {
 		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
 				case Pillar.Opinion:
 					return WHITE;
 				case Pillar.Culture:
