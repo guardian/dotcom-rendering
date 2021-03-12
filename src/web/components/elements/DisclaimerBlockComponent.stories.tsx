@@ -21,11 +21,6 @@ export const defaultStory = () => {
 				html={
 					'<p><sup>This is a disclaimer and it could have <a href="#">link text in it</a>.</sup></p>'
 				}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
 			/>
 		</div>
 	);
@@ -39,11 +34,6 @@ export const OpinionStory = () => {
 				html={
 					'<p><sup>This is an Opinion disclaimer and it could have <a href="#">link text in it</a>.</sup></p>'
 				}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Opinion,
-				})}
 			/>
 		</div>
 	);

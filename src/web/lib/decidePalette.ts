@@ -173,7 +173,7 @@ const textWitnessAuthor = (format: Format): string =>
 	pillarPalette[format.theme].main;
 
 const textPullQuote = (format: Format): string => {
-	return pillarPalette[format.theme].main;
+	return pillarPalette[format.theme].dark;
 };
 
 const textStandfirstLink = (format: Format): string => {
@@ -578,7 +578,7 @@ const fillQuoteIcon: (format: Format) => string = (format) => {
 };
 
 const textSignInLink = (format: Format): string => {
-	return pillarPalette[format.theme].main;
+	return pillarPalette[format.theme].dark;
 };
 
 const textCarouselTitle = (format: Format): string => {
