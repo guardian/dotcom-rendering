@@ -1,46 +1,21 @@
 import React from 'react';
-import { css } from 'emotion';
 
 import { Display, Design, Pillar, Special } from '@guardian/types';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { Section } from '../Section';
-import { Flex } from '../Flex';
-import { LeftColumn } from '../LeftColumn';
-import { RightColumn } from '../RightColumn';
+import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 
-import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
+import { ContainerLayout } from '../ContainerLayout';
 
 export default {
 	component: PullQuoteBlockComponent,
 	title: 'Components/PullQuoteBlockComponent',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
-	<Section showTopBorder={false}>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<div
-				className={css`
-					width: 620px;
-					padding: 20px;
-				`}
-			>
-				{children}
-			</div>
-			<RightColumn>
-				<></>
-			</RightColumn>
-		</Flex>
-	</Section>
-);
-
 // Inline
 export const SportInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -53,7 +28,7 @@ export const SportInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 SportInline.story = {
@@ -62,7 +37,7 @@ SportInline.story = {
 
 export const LabsInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -75,7 +50,7 @@ export const LabsInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 LabsInline.story = {
@@ -84,7 +59,7 @@ LabsInline.story = {
 
 export const LifestyleInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -97,7 +72,7 @@ export const LifestyleInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 LifestyleInline.story = {
@@ -106,7 +81,7 @@ LifestyleInline.story = {
 
 export const CultureInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -119,7 +94,7 @@ export const CultureInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 CultureInline.story = {
@@ -128,7 +103,7 @@ CultureInline.story = {
 
 export const NewsInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -141,7 +116,7 @@ export const NewsInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 NewsInline.story = {
@@ -150,9 +125,9 @@ NewsInline.story = {
 
 export const OpinionInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={Design.Comment}
 				palette={decidePalette({
 					display: Display.Standard,
 					design: Design.Comment,
@@ -163,7 +138,7 @@ export const OpinionInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 OpinionInline.story = {
@@ -172,7 +147,7 @@ OpinionInline.story = {
 
 export const SpecialReportInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -185,7 +160,7 @@ export const SpecialReportInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 SpecialReportInline.story = {
@@ -195,7 +170,7 @@ SpecialReportInline.story = {
 // Supporting
 export const SportSupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -208,7 +183,7 @@ export const SportSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 SportSupporting.story = {
@@ -217,7 +192,7 @@ SportSupporting.story = {
 
 export const LabsSupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -230,7 +205,7 @@ export const LabsSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 LabsSupporting.story = {
@@ -239,7 +214,7 @@ LabsSupporting.story = {
 
 export const LifestyleSupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -252,7 +227,7 @@ export const LifestyleSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 LifestyleSupporting.story = {
@@ -261,7 +236,7 @@ LifestyleSupporting.story = {
 
 export const CultureSupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -274,7 +249,7 @@ export const CultureSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 CultureSupporting.story = {
@@ -283,7 +258,7 @@ CultureSupporting.story = {
 
 export const NewsSupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -296,7 +271,7 @@ export const NewsSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 NewsSupporting.story = {
@@ -305,9 +280,9 @@ NewsSupporting.story = {
 
 export const OpinionSupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={Design.Comment}
 				palette={decidePalette({
 					display: Display.Standard,
 					design: Design.Comment,
@@ -318,7 +293,7 @@ export const OpinionSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 OpinionSupporting.story = {
@@ -327,7 +302,7 @@ OpinionSupporting.story = {
 
 export const SpecialReportSupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
 				design={Design.Article}
 				palette={decidePalette({
@@ -340,7 +315,7 @@ export const SpecialReportSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 SpecialReportSupporting.story = {
@@ -350,9 +325,9 @@ SpecialReportSupporting.story = {
 // PhotoEssay
 export const PhotoEssayInline = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={Design.PhotoEssay}
 				palette={decidePalette({
 					display: Display.Standard,
 					design: Design.PhotoEssay,
@@ -363,7 +338,7 @@ export const PhotoEssayInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 PhotoEssayInline.story = {
@@ -372,9 +347,9 @@ PhotoEssayInline.story = {
 
 export const PhotoEssaySupporting = () => {
 	return (
-		<Container>
+		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={Design.PhotoEssay}
 				palette={decidePalette({
 					display: Display.Standard,
 					design: Design.PhotoEssay,
@@ -385,7 +360,7 @@ export const PhotoEssaySupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</Container>
+		</ContainerLayout>
 	);
 };
 PhotoEssaySupporting.story = {
