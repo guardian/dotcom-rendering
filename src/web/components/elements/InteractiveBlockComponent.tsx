@@ -115,13 +115,25 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 				return;
 			}
 
-			const message: Record<string, unknown> = JSON.parse(event.data);
+			let message: Record<string, unknown> | undefined;
+			try {
+				message = JSON.parse(event.data);
+			} catch (e) {
+				window?.guardian?.modules?.sentry?.reportError(
+					e,
+					'Json parse Failed on in interactiveBlockComponent',
+				);
+			}
+
+			if (message === undefined) {
+				return;
+			}
 
 			const postPositionMessage = (subscribe?: boolean) => {
 				const iframeBox = iframe.getBoundingClientRect();
 				postMessage({
-					id: message.id || '',
-					type: message.type || '',
+					id: message?.id || '',
+					type: message?.type || '',
 					subscribe: !!subscribe,
 					iframeTop: iframeBox.top,
 					iframeRight: iframeBox.right,
