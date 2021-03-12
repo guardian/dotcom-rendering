@@ -112,6 +112,7 @@ type Palette = {
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
+		liveBlock: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;
@@ -926,6 +927,24 @@ interface MostViewedFooterPayloadType {
 	mostCommented: CAPITrailType;
 	mostShared: CAPITrailType;
 }
+
+// ------------
+// RichLinks //
+// ------------
+type RichLinkCardType =
+	| 'special-report'
+	| 'live'
+	| 'dead'
+	| 'feature'
+	| 'editorial'
+	| 'comment'
+	| 'podcast'
+	| 'media'
+	| 'analysis'
+	| 'review'
+	| 'letters'
+	| 'external'
+	| 'news';
 
 // ----------
 // AdSlots //

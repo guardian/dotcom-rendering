@@ -130,12 +130,12 @@ const NavGroupLazy: React.FC<NavGroupLazyProps> = ({
 	</div>
 );
 
-// StickyNavSimple is a basic, CSS only, sticky nav. The nav stays at the top of
+// StickyNavAnchor is a basic, CSS only, sticky nav. The nav stays at the top of
 // the viewport as the user scrolls past it's initial placement.
 //
 // *Note:* this uses position:sticky, which only works if the parent element is
 // scrollable and has a fixed height.
-export const StickyNavSimple: React.FC<BrowserProps> = ({
+export const StickyNavAnchor: React.FC<BrowserProps> = ({
 	capiData,
 	navData,
 	palette,
@@ -148,7 +148,7 @@ export const StickyNavSimple: React.FC<BrowserProps> = ({
 				navData={navData}
 				palette={palette}
 				format={format}
-				ID="sticky-nav-simple"
+				ID="sticky-nav-anchor"
 			/>
 		</div>
 	);

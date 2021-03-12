@@ -503,6 +503,10 @@ const borderSubNav = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderLiveBlock = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 const borderArticleLink = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	return border.secondary;
@@ -685,6 +689,7 @@ export const decidePalette = (format: Format): Palette => {
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
+			liveBlock: borderLiveBlock(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			standfirst: borderStandfirst(format),

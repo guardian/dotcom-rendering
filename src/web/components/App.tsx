@@ -68,7 +68,7 @@ import { SpotifyBlockComponent } from '@root/src/web/components/elements/Spotify
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import {
-	StickyNavSimple,
+	StickyNavAnchor,
 	StickyNavBackscroll,
 } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
 import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
@@ -368,9 +368,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 		'StickyNavTest',
 		'sticky-nav-backscroll',
 	);
-	const inStickyNavSimple = ABTestAPI.isUserInVariant(
+	const inStickyNavAnchor = ABTestAPI.isUserInVariant(
 		'StickyNavTest',
-		'sticky-nav-simple',
+		'sticky-nav-anchor',
 	);
 
 	// There are docs on loadable in ./docs/loadable-components.md
@@ -618,9 +618,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</Portal>
 			)}
 
-			{inStickyNavSimple && (
+			{inStickyNavAnchor && (
 				<Portal rootId="sticky-nav-root">
-					<StickyNavSimple
+					<StickyNavAnchor
 						capiData={CAPI}
 						navData={NAV}
 						format={format}
