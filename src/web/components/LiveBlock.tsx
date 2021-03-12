@@ -162,7 +162,7 @@ const FirstPublished = ({
 	return (
 		<a
 			href={blockLink}
-			data-ignore-global-link-styling={true}
+			data-ignore="global-link-styling"
 			// title={publishedDate.toLocaleString()}
 			className={css`
 				${textSans.xsmall({ fontWeight: 'bold' })}
