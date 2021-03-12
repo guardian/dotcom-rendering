@@ -159,10 +159,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 			return (
 				<Figure isMainMedia={isMainMedia} role={element.role}>
-					<DisclaimerBlockComponent
-						html={element.html}
-						palette={palette}
-					/>
+					<DisclaimerBlockComponent html={element.html} />
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
