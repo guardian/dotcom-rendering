@@ -10,7 +10,7 @@ import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
-import { textSans } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const ASIDE_WIDTH = 58;
 const GUTTER = space[3];
@@ -112,6 +112,19 @@ const BlockText = ({ children }: { children: React.ReactNode }) => {
 		>
 			{children}
 		</div>
+	);
+};
+
+const BlockTitle = ({ title }: { title: string }) => {
+	return (
+		<h2
+			className={css`
+				${headline.xxsmall({ fontWeight: 'bold' })}
+				margin-bottom: ${space[3]}px;
+			`}
+		>
+			{title}
+		</h2>
 	);
 };
 
@@ -258,19 +271,22 @@ export const LiveBlock = ({
 						/>
 					)}
 				</aside>
-				{headerElement && (
-					<ElementRenderer
-						isMainMedia={false}
-						isLiveBlog={true}
-						adTargeting={adTargeting}
-						index={0}
-						element={headerElement}
-						format={format}
-						palette={palette}
-						abTests={abTests}
-						host={host}
-					/>
-				)}
+				<span>
+					{block.title && <BlockTitle title={block.title} />}
+					{headerElement && (
+						<ElementRenderer
+							isMainMedia={false}
+							isLiveBlog={true}
+							adTargeting={adTargeting}
+							index={0}
+							element={headerElement}
+							format={format}
+							palette={palette}
+							abTests={abTests}
+							host={host}
+						/>
+					)}
+				</span>
 			</Header>
 			<main>
 				{/* For each element, we decide what margins to set depending on the type */}
