@@ -170,6 +170,28 @@ OpinionInline.story = {
 	name: 'Opinion, inline, Article',
 };
 
+export const SpecialReportInline = () => {
+	return (
+		<Container>
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Special.SpecialReport,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</Container>
+	);
+};
+SpecialReportInline.story = {
+	name: 'SpecialReport, inline, Article',
+};
+
 // Supporting
 export const SportSupporting = () => {
 	return (
@@ -301,6 +323,28 @@ export const OpinionSupporting = () => {
 };
 OpinionSupporting.story = {
 	name: 'Opinion, supporting, Article',
+};
+
+export const SpecialReportSupporting = () => {
+	return (
+		<Container>
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Special.SpecialReport,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="supporting"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</Container>
+	);
+};
+SpecialReportSupporting.story = {
+	name: 'SpecialReport, supporting, Article',
 };
 
 // PhotoEssay
