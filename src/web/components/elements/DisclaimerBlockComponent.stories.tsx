@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Display, Design, Pillar } from '@guardian/types';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { DisclaimerBlockComponent } from '@frontend/web/components/elements/DisclaimerBlockComponent';
+
+import { DisclaimerBlockComponent } from './DisclaimerBlockComponent';
 
 export default {
 	component: DisclaimerBlockComponent,
