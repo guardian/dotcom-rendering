@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { useOnce } from '@root/src/web/lib/useOnce';
 import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -216,12 +217,7 @@ export const InteractiveBlockComponent = ({
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
-	useEffect(() => {
-		// Once loaded, we don't touch it.
-		if (loaded) {
-			return;
-		}
-
+	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 		if (
 			scriptUrl ===
@@ -264,7 +260,7 @@ export const InteractiveBlockComponent = ({
 
 			setLoaded(true);
 		}
-	}, [scriptUrl, role, url, loaded]);
+	}, [loaded]);
 
 	return (
 		<div
