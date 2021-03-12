@@ -248,7 +248,13 @@ export const PullQuoteBlockComponent: React.FC<{
 						}}
 					/>
 					<footer>
-						<cite>{attribution}</cite>
+						<cite
+							className={css`
+								color: ${palette.text.pullQuoteAttribution};
+							`}
+						>
+							{attribution}
+						</cite>
 					</footer>
 				</aside>
 			);

@@ -581,6 +581,9 @@ const fillQuoteIcon: (format: Format) => string = (format) => {
 	return pillarPalette[Pillar.News][400];
 };
 
+const textPullQuoteAttribution = (format: Format): string =>
+	fillQuoteIcon(format);
+
 const textSignInLink = (format: Format): string => {
 	return pillarPalette[format.theme].dark;
 };
@@ -649,6 +652,7 @@ export const decidePalette = (format: Format): Palette => {
 			signInLink: textSignInLink(format),
 			richLink: textRichLink(format),
 			pullQuote: textPullQuote(format),
+			pullQuoteAttribution: textPullQuoteAttribution(format),
 			witnessIcon: textWitnessIcon(format),
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),

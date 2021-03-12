@@ -58,6 +58,50 @@ Article.story = {
 	name: 'with design Article - inline',
 };
 
+export const ArticleAttribution = () => {
+	return (
+		<Container>
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Lifestyle,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</Container>
+	);
+};
+ArticleAttribution.story = {
+	name: 'with design Article - inline and attribution',
+};
+
+export const ArticleAttributionOpinion = () => {
+	return (
+		<Container>
+			<PullQuoteBlockComponent
+				design={Design.Article}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.Opinion,
+				})}
+				html="Even if part of my job is filthy, I still love it – it’s my work"
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
+				attribution="Julie-Lou Dubreuilh"
+			/>
+		</Container>
+	);
+};
+ArticleAttributionOpinion.story = {
+	name: 'with design Article Opinion - inline and attribution',
+};
+
 export const Comment = () => {
 	return (
 		<Container>
