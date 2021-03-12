@@ -34,7 +34,7 @@ const atomCss = `
     
     @media (prefers-color-scheme: dark) {
         body {
-            background: white !important;
+            background: white;
             padding: ${remSpace[2]} !important;
         } 
     }`;
