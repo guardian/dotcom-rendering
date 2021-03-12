@@ -1,3 +1,4 @@
+import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { err, fromNullable, ok } from '@guardian/types';
@@ -175,12 +176,15 @@ function parseAtom(
 			}
 
 			const { title } = atom;
-			const events = atom.data.timeline.events.map((event) => ({
-				title: event.title,
-				date: formatOptionalDate(event.date) ?? '',
-				body: event.body,
-				toDate: formatOptionalDate(event.toDate),
-			}));
+			const events: TimelineEvent[] = atom.data.timeline.events.map(
+				(event) => ({
+					title: event.title,
+					date: formatOptionalDate(event.date) ?? '',
+					body: event.body,
+					toDate: formatOptionalDate(event.toDate),
+					unixDate: event.date.toNumber(),
+				}),
+			);
 
 			const description = atom.data.timeline.description;
 
@@ -314,6 +318,13 @@ function parseAtom(
 					kind: ElementKind.KnowledgeQuizAtom,
 					id,
 					questions,
+					resultGroups:
+						atom.data.quiz.content.resultGroups?.groups.map(
+							(group) => ({
+								...group,
+								shareText: group.share,
+							}),
+						) ?? [],
 				});
 			}
 

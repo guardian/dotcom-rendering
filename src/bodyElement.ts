@@ -139,6 +139,7 @@ interface KnowledgeQuizAtom {
 	kind: ElementKind.KnowledgeQuizAtom;
 	id: string;
 	questions: QuestionType[];
+	resultGroups: ResultGroupsType[];
 }
 
 interface PersonalityQuizAtom {
@@ -167,6 +168,13 @@ type QuestionType = {
 	text: string;
 	answers: AnswerType[];
 	imageUrl?: string;
+};
+
+type ResultGroupsType = {
+	title: string;
+	shareText: string;
+	minScore: number;
+	id: string;
 };
 
 type BodyElement =
