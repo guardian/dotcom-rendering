@@ -16,17 +16,10 @@ import { getCookie } from '@frontend/web/browser/cookie';
 // Sign in Gate A/B Tests
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
-import { signInGateCopyOpt } from '@root/src/web/experiments/tests/sign-in-gate-copy-opt';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
-import { signInGateComponent as gateCopyOptVar1 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-1';
-import { signInGateComponent as gateCopyOptVar2 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-2';
-import { signInGateComponent as gateCopyOptVar3 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-3';
-import { signInGateComponent as gateCopyOptVar4 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-4';
-import { signInGateComponent as gateCopyOptVar5 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-5';
-import { signInGateComponent as gateCopyOptVar6 } from '@root/src/web/components/SignInGate/gates/copy-opt-var-6';
 
 import {
 	ComponentEventParams,
@@ -72,25 +65,16 @@ type GateTestMap = { [name: string]: SignInGateComponent };
 const tests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateCopyOpt,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
 	'main-control-3': gateMainControl,
 	'main-variant-3': gateMainVariant,
-	'copy-opt-control': gateMainVariant,
-	'copy-opt-variant-1': gateCopyOptVar1,
-	'copy-opt-variant-2': gateCopyOptVar2,
-	'copy-opt-variant-3': gateCopyOptVar3,
-	'copy-opt-variant-4': gateCopyOptVar4,
-	'copy-opt-variant-5': gateCopyOptVar5,
-	'copy-opt-variant-6': gateCopyOptVar6,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_3',
 	SignInGateMainControl: 'main_control_3',
-	SignInGateCopyOpt: 'copy_opt_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
