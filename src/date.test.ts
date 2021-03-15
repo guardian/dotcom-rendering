@@ -23,7 +23,7 @@ describe('formatDate', () => {
 describe('isValidDate', () => {
 	test('returns false given the inputted date is not a valid date', () => {
 		const actual = isValidDate(new Date('randomValue'));
-		expect(actual).toBeFalsy();
+		expect(actual).toBe(false);
 	});
 
 	const validDateTestCases = [
@@ -37,11 +37,16 @@ describe('isValidDate', () => {
 	validDateTestCases.forEach((date) => {
 		test('returns true given the inputted date is valid', () => {
 			const actual = isValidDate(date);
-			expect(actual).toBeTruthy();
+			expect(actual).toBe(true);
 		});
 	});
 
-	// TODO: can we cover case for [object Date] line 47
+	test.only(`returns false if the argument is not a Date object`, () => {
+		const fakeDate = (undefined as unknown) as Date;
+		const fakeDate2 = ('some string' as unknown) as Date;
+		expect(isValidDate(fakeDate)).toBe(false);
+		expect(isValidDate(fakeDate2)).toBe(false);
+	});
 });
 
 describe('fromString', () => {
