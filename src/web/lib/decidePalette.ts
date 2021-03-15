@@ -214,6 +214,7 @@ const textCardHeadline = (format: Format): string => {
 		case Design.Interview:
 			return pillarPalette[format.theme].dark;
 		case Design.Media:
+			return WHITE;
 		case Design.LiveBlog:
 			switch (format.theme) {
 				case Special.Labs:
