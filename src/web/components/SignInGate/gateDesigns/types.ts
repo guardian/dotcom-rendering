@@ -14,13 +14,6 @@ export interface SignInGateProps {
 	ophanComponentId: string;
 	isComment?: boolean;
 	abTest?: CurrentABTest;
-	signInGateCopy?: SignInGateCopy;
-}
-
-export interface SignInGateCopy {
-	header: string;
-	subHeader: string;
-	paragraphs: string[];
 }
 
 export type CurrentABTest = {

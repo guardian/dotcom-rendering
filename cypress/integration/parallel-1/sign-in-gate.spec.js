@@ -42,15 +42,15 @@ describe('Sign In Gate Tests', function () {
 	// will be inserted to make it visible
 	// can override position if required
 	const scrollToGateForLazyLoading = (roughPosition = 1000) => {
-		cy.scrollTo(0, roughPosition, { duration: 500 });
+		cy.scrollTo(0, roughPosition, {duration: 500});
 	};
 
 	// we call visit and scroll for most test, so this wrapper combines the two
 	// while preserving the ability to set the parameters if required
 	const visitArticleAndScrollToGateForLazyLoad = ({
-		url,
-		roughPosition,
-	} = {}) => {
+														url,
+														roughPosition,
+													} = {}) => {
 		visitArticle(url);
 		scrollToGateForLazyLoading(roughPosition);
 	};
@@ -84,7 +84,7 @@ describe('Sign In Gate Tests', function () {
 			cy.setCookie(
 				'GU_U',
 				'MCwCFHbDHWevL_GqgH0CcbeDWp4N9kR5AhQ2lD3zMjjbKJAgC7FUDtc18Ac8BA',
-				{ log: true },
+				{log: true},
 			);
 
 			visitArticleAndScrollToGateForLazyLoad();
@@ -181,118 +181,6 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main_privacy]').click();
 
 			cy.contains('privacy settings');
-		});
-	});
-
-	describe('Sign In Gate Copy Test', function () {
-		beforeEach(function () {
-			disableCMP();
-
-			// set article count to be min number to view gate
-			setArticleCount(3);
-		});
-
-		context('copy-opt-control', function () {
-			it('shows the copy test control variant', function () {
-				// 700007 - user in control according to https://ab-tests.netlify.app/
-				// audience 0.2, offset 0.7
-				// 6 variants + control (7 total)
-				setMvtCookie('700007');
-
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-			});
-		});
-
-		context('copy-opt-variant-1', function () {
-			it('shows the copy test: Transparency 1 - You need to register to keep reading', function () {
-				// 700001 - user in variant-1 according to https://ab-tests.netlify.app/
-				// audience 0.2, offset 0.7
-				// 6 variants + control (7 total)
-				setMvtCookie('700001');
-
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-copy-opt-variant-1]').should(
-					'be.visible',
-				);
-			});
-		});
-
-		context('copy-opt-variant-2', function () {
-			it('shows the copy test: Transparency 2 - Register to keep reading', function () {
-				// 700002 - user in variant-2 according to https://ab-tests.netlify.app/
-				// audience 0.2, offset 0.7
-				// 6 variants + control (7 total)
-				setMvtCookie('700002');
-
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-copy-opt-variant-2]').should(
-					'be.visible',
-				);
-			});
-		});
-
-		context('copy-opt-variant-3', function () {
-			it('shows the copy test: Purpose - We’ll keep holding power to account', function () {
-				// 700003 - user in variant-3 according to https://ab-tests.netlify.app/
-				// audience 0.2, offset 0.7
-				// 6 variants + control (7 total)
-				setMvtCookie('700003');
-
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-copy-opt-variant-3]').should(
-					'be.visible',
-				);
-			});
-		});
-
-		context('copy-opt-variant-4', function () {
-			it('shows the copy test: Petition - Do you believe in independent journalism?', function () {
-				// 700004 - user in variant-4 according to https://ab-tests.netlify.app/
-				// audience 0.2, offset 0.7
-				// 6 variants + control (7 total)
-				setMvtCookie('700004');
-
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-copy-opt-variant-4]').should(
-					'be.visible',
-				);
-			});
-		});
-
-		context('copy-opt-variant-5', function () {
-			it('shows the copy test: Belonging 1 - Join our mission', function () {
-				// 700005 - user in variant-5 according to https://ab-tests.netlify.app/
-				// audience 0.2, offset 0.7
-				// 6 variants + control (7 total)
-				setMvtCookie('700005');
-
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-copy-opt-variant-5]').should(
-					'be.visible',
-				);
-			});
-		});
-
-		context('copy-opt-variant-6', function () {
-			it('shows the copy test: Belonging 2 - Register to keep reading', function () {
-				// 700006 - user in variant-6 according to https://ab-tests.netlify.app/
-				// audience 0.2, offset 0.7
-				// 6 variants + control (7 total)
-				setMvtCookie('700006');
-
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-copy-opt-variant-6]').should(
-					'be.visible',
-				);
-			});
 		});
 	});
 });
