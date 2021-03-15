@@ -1,8 +1,13 @@
 // ----- Imports ----- //
 
-//import { act } from 'react-dom/test-utils';
 import { none, some } from '@guardian/types';
-import { formatDate, formatSeconds, fromString, isValidDate } from './date';
+import {
+	formatDate,
+	formatSeconds,
+	fromString,
+	isValidDate,
+	makeRelativeDate,
+} from './date';
 
 // ----- Tests ----- //
 
@@ -71,12 +76,47 @@ describe('formatSeconds', () => {
 		expect(formatSeconds('-10')).toEqual(none);
 	});
 
-    test('returns correct format when given a valid number string', () => {
-        expect(formatSeconds('0')).toEqual(some('00:00'));
-        expect(formatSeconds('30')).toEqual(some('00:30'));
-        expect(formatSeconds('60')).toEqual(some('01:00'));
-        expect(formatSeconds('61')).toEqual(some('01:01'));
-        expect(formatSeconds('3600')).toEqual(some('01:00:00'));
-        expect(formatSeconds('3620.10')).toEqual(some('01:00:20'));
-    });
+	test('returns correct format when given a valid number string', () => {
+		expect(formatSeconds('0')).toEqual(some('0:00'));
+		expect(formatSeconds('30')).toEqual(some('0:30'));
+		expect(formatSeconds('60')).toEqual(some('1:00'));
+		expect(formatSeconds('61')).toEqual(some('1:01'));
+		expect(formatSeconds('3600')).toEqual(some('1:00:00'));
+		expect(formatSeconds('3620.67')).toEqual(some('1:00:20'));
+	});
+});
+
+describe('makeRelativeDate', () => {
+	beforeEach(() => {
+		const fakeCurrentTime = new Date(2019, 2, 16);
+		jest.useFakeTimers('modern');
+		jest.setSystemTime(fakeCurrentTime);
+	});
+
+	afterEach(() => {
+		jest.useRealTimers();
+	});
+
+	test('returns null given a non valid date', () => {
+		expect(makeRelativeDate(('12/2019' as unknown) as Date)).toEqual(null);
+	});
+
+	test('returns null given a date that is before now', () => {
+		expect(makeRelativeDate(new Date(2021, 2, 15, 23, 59))).toEqual(null);
+	});
+
+	test('returns null given a date that is greater than now', () => {
+		const date = new Date(2019, 2, 16, 0, 1);
+		expect(makeRelativeDate(date)).toEqual(null);
+	});
+
+	test('returns number of seconds given a date that is from 0 up to 55 seconds before current time', () => {
+		const date = new Date(2019, 2, 15, 23, 59, 6);
+		expect(makeRelativeDate(date)).toBe('54s');
+	});
+
+	test('returns now given a date that is from 5 up to 0 seconds before current time', () => {
+		const date = new Date(2019, 2, 15, 23, 59, 5);
+		expect(makeRelativeDate(date)).toBe('Now');
+	});
 });
