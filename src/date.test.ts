@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 //import { act } from 'react-dom/test-utils';
-import { some } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { formatDate, formatSeconds, fromString, isValidDate } from './date';
 
 // ----- Tests ----- //
@@ -41,7 +41,7 @@ describe('isValidDate', () => {
 		});
 	});
 
-	test.only(`returns false if the argument is not a Date object`, () => {
+	test(`returns false if the argument is not a Date object`, () => {
 		const fakeDate = (undefined as unknown) as Date;
 		const fakeDate2 = ('some string' as unknown) as Date;
 		expect(isValidDate(fakeDate)).toBe(false);
@@ -56,11 +56,18 @@ describe('fromString', () => {
 		);
 	});
 
-	// TODO: Can we cover case for none?
+	test('returns none given a non valid date string', () => {
+		expect(fromString((undefined as unknown) as string)).toEqual(none);
+		expect(fromString('random')).toEqual(none);
+	});
 });
 
 describe('formatSeconds', () => {
-	test('', () => {
-		expect(formatSeconds('12'));
+	test('returns none given a string is not a number', () => {
+		expect(formatSeconds('randomString')).toEqual(none);
+	});
+
+	test('returns none', () => {
+		expect(formatSeconds('-10')).toEqual(none);
 	});
 });

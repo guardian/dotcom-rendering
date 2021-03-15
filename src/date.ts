@@ -121,7 +121,11 @@ const localMonth = (date: Date): string => months[date.getMonth()];
 
 function fromString(date: string): Option<Date> {
 	try {
-		return some(new Date(date));
+		const maybeDate = new Date(date);
+		if (!isValidDate(maybeDate)) {
+			throw new Error('not a valid date');
+		}
+		return some(maybeDate);
 	} catch (e) {
 		return none;
 	}
@@ -130,7 +134,7 @@ function fromString(date: string): Option<Date> {
 function formatSeconds(seconds: string): Option<string> {
 	const secondsInt = parseInt(seconds);
 
-	if (isNaN(secondsInt)) {
+	if (isNaN(secondsInt) || secondsInt < 0) {
 		return none;
 	}
 
