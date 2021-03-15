@@ -42,15 +42,15 @@ describe('Sign In Gate Tests', function () {
 	// will be inserted to make it visible
 	// can override position if required
 	const scrollToGateForLazyLoading = (roughPosition = 1000) => {
-		cy.scrollTo(0, roughPosition, {duration: 500});
+		cy.scrollTo(0, roughPosition, { duration: 500 });
 	};
 
 	// we call visit and scroll for most test, so this wrapper combines the two
 	// while preserving the ability to set the parameters if required
 	const visitArticleAndScrollToGateForLazyLoad = ({
-														url,
-														roughPosition,
-													} = {}) => {
+		url,
+		roughPosition,
+	} = {}) => {
 		visitArticle(url);
 		scrollToGateForLazyLoading(roughPosition);
 	};
@@ -84,7 +84,7 @@ describe('Sign In Gate Tests', function () {
 			cy.setCookie(
 				'GU_U',
 				'MCwCFHbDHWevL_GqgH0CcbeDWp4N9kR5AhQ2lD3zMjjbKJAgC7FUDtc18Ac8BA',
-				{log: true},
+				{ log: true },
 			);
 
 			visitArticleAndScrollToGateForLazyLoad();
