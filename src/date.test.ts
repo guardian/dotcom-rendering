@@ -70,4 +70,13 @@ describe('formatSeconds', () => {
 	test('returns none', () => {
 		expect(formatSeconds('-10')).toEqual(none);
 	});
+
+    test('returns correct format when given a valid number string', () => {
+        expect(formatSeconds('0')).toEqual(some('00:00'));
+        expect(formatSeconds('30')).toEqual(some('00:30'));
+        expect(formatSeconds('60')).toEqual(some('01:00'));
+        expect(formatSeconds('61')).toEqual(some('01:01'));
+        expect(formatSeconds('3600')).toEqual(some('01:00:00'));
+        expect(formatSeconds('3620.10')).toEqual(some('01:00:20'));
+    });
 });
