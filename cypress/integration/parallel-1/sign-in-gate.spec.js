@@ -233,5 +233,4 @@ describe('Sign In Gate Tests', function () {
 			});
 		});
 	});
-
 });
