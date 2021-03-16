@@ -407,7 +407,7 @@ export const ImmersiveLayout = ({
 						{format.design === Design.PhotoEssay ? (
 							<></>
 						) : (
-							<Border />
+							<Border palette={palette} />
 						)}
 					</GridItem>
 					<GridItem area="title">

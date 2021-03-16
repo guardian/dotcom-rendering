@@ -19,7 +19,7 @@ import {
 import { pillarPalette } from '@root/src/lib/pillars';
 
 const WHITE = neutral[100];
-const BLACK = text.primary;
+const BLACK = neutral[0];
 
 const textHeadline = (format: Format): string => {
 	switch (format.display) {
@@ -53,6 +53,7 @@ const textHeadline = (format: Format): string => {
 };
 
 const textSeriesTitle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
@@ -68,7 +69,6 @@ const textSeriesTitle = (format: Format): string => {
 						case Pillar.Lifestyle:
 						case Pillar.Culture:
 						case Pillar.Opinion:
-						case Special.Labs:
 						default:
 							return WHITE;
 					}
@@ -85,6 +85,7 @@ const textSeriesTitle = (format: Format): string => {
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
@@ -113,6 +114,7 @@ const textStandfirst = (format: Format): string => {
 };
 
 const textTwitterHandle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
@@ -133,26 +135,31 @@ const textCaptionLink = (format: Format): string => {
 };
 
 const textSubMeta = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
 };
 
 const textSubMetaLabel = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
 
 const textSubMetaLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
 
 const textSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return text.supporting;
 };
 
 const textArticleLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -192,10 +199,12 @@ const textStandfirstLink = (format: Format): string => {
 };
 
 const textBranding = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 
 const textArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -349,6 +358,7 @@ const backgroundArticle = (format: Format): string => {
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
+	if (format.theme === Special.Labs) return neutral[86];
 	return 'transparent';
 };
 
@@ -434,6 +444,7 @@ const backgroundHeadlineByline = (format: Format): string => {
 };
 
 const backgroundBullet = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
@@ -465,16 +476,19 @@ const backgroundSpeechBubble = (format: Format): string => {
 };
 
 const fillCommentCount = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
 
 const fillShareIcon = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
 
 const fillCaptionTriangle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
@@ -554,6 +568,7 @@ const borderLiveBlock = (format: Format): string => {
 };
 
 const borderArticleLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return neutral[60];
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	return border.secondary;
 };
@@ -575,6 +590,7 @@ const borderStandfirst = (format: Format): string => {
 };
 
 const borderArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
 };
@@ -605,6 +621,11 @@ const borderRichLink: (format: Format) => string = (format) => {
 
 const borderNavPillar: (format: Format) => string = (format) =>
 	pillarPalette[format.theme].bright;
+
+const borderArticle: (format: Format) => string = (format) => {
+	if (format.theme === Special.Labs) return neutral[60];
+	return border.secondary;
+};
 
 const backgroundRichLink: (format: Format) => string = (format) => {
 	if (format) {
@@ -745,6 +766,7 @@ export const decidePalette = (format: Format): Palette => {
 			standfirst: borderStandfirst(format),
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
+			article: borderArticle(format),
 		},
 		topBar: {
 			card: topBarCard(format),

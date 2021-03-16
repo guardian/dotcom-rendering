@@ -394,7 +394,7 @@ export const CommentLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="border">
-						<Border />
+						<Border palette={palette} />
 					</GridItem>
 					<GridItem area="headline">
 						<div className={maxWidth}>
