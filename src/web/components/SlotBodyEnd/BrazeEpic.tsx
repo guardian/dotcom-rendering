@@ -12,6 +12,7 @@ import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
+import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 
 const { css } = emotion;
 
@@ -127,8 +128,17 @@ const BrazeEpic = ({
 	}, [contributionsServiceUrl, meta]);
 
 	useEffect(() => {
-		if (hasBeenSeen && meta) {
+		if (hasBeenSeen && meta && meta.dataFromBraze) {
 			meta.logImpressionWithBraze();
+
+			// Log VIEW event with Ophan
+			submitComponentEvent({
+				component: {
+					componentType: 'RETENTION_EPIC',
+					id: meta.dataFromBraze.componentName,
+				},
+				action: 'VIEW',
+			});
 		}
 	}, [hasBeenSeen, meta]);
 
