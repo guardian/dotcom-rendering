@@ -17,6 +17,7 @@ import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
+import { Labs } from '@root/fixtures/generated/articles/Labs';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -193,4 +194,12 @@ MatchReportStory.story = {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: { viewports: [1330] },
 	},
+};
+
+export const LabsStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Labs);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LabsStory.story = {
+	name: 'LabsStory',
 };
