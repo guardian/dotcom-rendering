@@ -19,7 +19,7 @@ import {
 import { pillarPalette } from '@root/src/lib/pillars';
 
 const WHITE = neutral[100];
-const BLACK = neutral[0];
+const BLACK = neutral[7];
 
 const textHeadline = (format: Format): string => {
 	switch (format.display) {
