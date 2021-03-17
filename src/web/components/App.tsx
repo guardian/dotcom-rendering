@@ -804,6 +804,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							height={document.height}
 							width={document.width}
 							title={document.title}
+							source={document.source}
 						/>
 					</ClickToView>
 				</HydrateOnce>
