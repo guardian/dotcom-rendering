@@ -74,6 +74,16 @@ export const ReviewStory = (): React.ReactNode => {
 };
 ReviewStory.story = { name: 'Review' };
 
+export const ReviewNoStarStory = (): React.ReactNode => {
+	const ReviewWithoutStars = {
+		...Review,
+		starRating: undefined,
+	};
+	const ServerCAPI = convertToStandard(ReviewWithoutStars);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+ReviewNoStarStory.story = { name: 'Review without stars' };
+
 export const PrintShopStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PrintShop);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
