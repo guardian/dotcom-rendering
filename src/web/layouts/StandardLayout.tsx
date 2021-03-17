@@ -413,7 +413,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</GridItem>
 						<GridItem area="headline">
 							<div className={maxWidth}>
-								<ArticleHeadlinePadding design={format.design}>
+								<ArticleHeadlinePadding design={format.design} starRating={!!CAPI.starRating || CAPI.starRating === 0}>
 									{age && (
 										<div className={ageWarningMargins}>
 											<AgeWarning age={age} />
