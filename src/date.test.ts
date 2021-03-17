@@ -101,10 +101,6 @@ describe('makeRelativeDate', () => {
 		expect(makeRelativeDate(('12/2019' as unknown) as Date)).toEqual(null);
 	});
 
-	test('returns null given a date that is before now', () => {
-		expect(makeRelativeDate(new Date(2021, 2, 15, 23, 59))).toEqual(null);
-	});
-
 	test('returns null given a date that is greater than now', () => {
 		const date = new Date(2019, 2, 16, 0, 1);
 		expect(makeRelativeDate(date)).toEqual(null);
@@ -115,8 +111,18 @@ describe('makeRelativeDate', () => {
 		expect(makeRelativeDate(date)).toBe('54s');
 	});
 
-	test('returns now given a date that is from 5 up to 0 seconds before current time', () => {
+	test('returns now given a date that is from 0 up to 55 seconds before current time', () => {
 		const date = new Date(2019, 2, 15, 23, 59, 5);
 		expect(makeRelativeDate(date)).toBe('Now');
 	});
+
+    test('returns minutes ago when given a date that is greater than 1.5 minute before current time', () => {
+        const date = new Date(2019, 2, 15, 23, 58, 29);
+        expect(makeRelativeDate(date)).toBe('2m ago');
+    });
+
+    test('returns hours ago when given a date that is >= 55 minutes before current time', () => {
+        const date = new Date(2019, 2, 15, 23, 5);
+        expect(makeRelativeDate(date)).toBe('1h ago');
+    });
 });
