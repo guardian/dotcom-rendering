@@ -8,7 +8,7 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -384,6 +384,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
+					borderColour={palette.border.article}
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
 						<GridItem area="title">
@@ -398,7 +399,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border />
+							{format.theme === Special.Labs ? (
+								<></>
+							) : (
+								<Border palette={palette} />
+							)}
 						</GridItem>
 						<GridItem area="matchNav">
 							<div className={maxWidth}>

@@ -338,7 +338,7 @@ export const ShowcaseLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="border">
-						<Border />
+						<Border palette={palette} />
 					</GridItem>
 					<GridItem area="headline">
 						<PositionHeadline design={format.design}>

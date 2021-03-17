@@ -96,6 +96,11 @@ const articles = [
 		url:
 			'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	},
+	{
+		name: 'Labs',
+		url:
+			'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/secret-games-travelling-shows-and-pioneering-players-the-history-of-womens-football',
+	},
 ];
 
 const HEADER = `/**
@@ -126,7 +131,8 @@ try {
 					...json.config.switches,
 					...switchOverrides,
 				};
-				// TODO: Remove this when we add in support for CAPI format to DCR
+				// TODO: Remove these hacks when we add in support for CAPI format to DCR
+				if (json.format.theme === 'Labs') json.pillar = 'labs';
 				delete json.format;
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${

@@ -119,6 +119,7 @@ type Palette = {
 		standfirst: Colour;
 		richLink: Colour;
 		navPillar: Colour;
+		article: Colour;
 	},
 	topBar: {
 		card: Colour;
@@ -705,6 +706,7 @@ interface ConfigType extends CommercialConfigType {
 	hasShowcaseMainElement: boolean;
 	isColumn: boolean;
 	sectionName: string;
+	sponsorshipType?: string;
 	mobileAppsAdUnitRoot: string;
 	dfpAdUnitRoot: string;
 	headline: string;
