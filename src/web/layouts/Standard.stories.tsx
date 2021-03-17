@@ -76,8 +76,8 @@ ReviewStory.story = { name: 'Review' };
 export const ReviewNoStarStory = (): React.ReactNode => {
 	const ReviewWithoutStars = {
 		...Review,
-		starRating: undefined
-	}
+		starRating: undefined,
+	};
 	const ServerCAPI = convertToStandard(ReviewWithoutStars);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
