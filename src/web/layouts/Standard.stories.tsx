@@ -201,5 +201,5 @@ export const LabsStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 LabsStory.story = {
-	name: 'LabsStory',
+	name: 'Labs',
 };
