@@ -101,22 +101,51 @@ describe('makeRelativeDate', () => {
 		expect(makeRelativeDate(('12/2019' as unknown) as Date)).toEqual(null);
 	});
 
-	test('returns null given a date that is before now', () => {
-		expect(makeRelativeDate(new Date(2021, 2, 15, 23, 59))).toEqual(null);
-	});
-
-	test('returns null given a date that is greater than now', () => {
-		const date = new Date(2019, 2, 16, 0, 1);
-		expect(makeRelativeDate(date)).toEqual(null);
+	test('returns null given a date that is after now', () => {
+		expect(makeRelativeDate(new Date(2019, 2, 16, 0, 1))).toEqual(null);
 	});
 
 	test('returns number of seconds given a date that is from 0 up to 55 seconds before current time', () => {
-		const date = new Date(2019, 2, 15, 23, 59, 6);
-		expect(makeRelativeDate(date)).toBe('54s');
+		expect(makeRelativeDate(new Date(2019, 2, 16))).toBe('0s');
+		expect(makeRelativeDate(new Date(2019, 2, 15, 23, 59, 6))).toBe('54s');
 	});
 
-	test('returns now given a date that is from 5 up to 0 seconds before current time', () => {
-		const date = new Date(2019, 2, 15, 23, 59, 5);
-		expect(makeRelativeDate(date)).toBe('Now');
+	test('returns now given a date that is from 55 seconds up to 1.5 minute before current time', () => {
+		expect(makeRelativeDate(new Date(2019, 2, 15, 23, 59, 5))).toBe('Now');
+		expect(makeRelativeDate(new Date(2019, 2, 15, 23, 58, 31))).toBe('Now');
+	});
+
+	test('returns m ago given a date that is from 1.5 minutes up to 55 minute before current time', () => {
+		expect(makeRelativeDate(new Date(2019, 2, 15, 23, 58, 30))).toBe(
+			'2m ago',
+		);
+
+		expect(makeRelativeDate(new Date(2019, 2, 15, 23, 5, 1))).toBe(
+			'55m ago',
+		);
+	});
+
+	test('returns h ago given a date that is from 55 minutes up to 1 day before current time', () => {
+		expect(makeRelativeDate(new Date(2019, 2, 15, 23, 5))).toBe('1h ago');
+		expect(makeRelativeDate(new Date(2019, 2, 15, 0, 1))).toBe('24h ago');
+	});
+
+	test('returns d ago given a date that is from 1 day up to 1 week before current time', () => {
+		expect(makeRelativeDate(new Date(2019, 2, 15, 0, 0))).toBe('1d ago');
+		expect(makeRelativeDate(new Date(2019, 2, 9))).toBe('7d ago');
+	});
+
+	test('returns w ago given a date that is from 1 week up to 1 year before current time', () => {
+		expect(makeRelativeDate(new Date(2019, 2, 8, 23, 59))).toBe('1w ago');
+		expect(makeRelativeDate(new Date(2018, 2, 17))).toBe('52w ago');
+	});
+
+	test('returns y ago given a date that is from 1 year up to 1.5 years before current time', () => {
+		expect(makeRelativeDate(new Date(2018, 2, 16, 23, 59))).toBe('1y ago');
+		expect(makeRelativeDate(new Date(2017, 8, 16, 1, 1))).toBe('1y ago');
+	});
+
+	test('returns 2y ago given a date that is at 1.5 years before current time', () => {
+		expect(makeRelativeDate(new Date(2017, 8, 16, 1, 0))).toBe('2y ago');
 	});
 });
