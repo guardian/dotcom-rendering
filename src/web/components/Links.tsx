@@ -12,7 +12,6 @@ import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import GiftingIcon from '@frontend/static/icons/gifting.svg';
-import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { useOnce } from '@frontend/web/lib/useOnce';
 
@@ -123,8 +122,6 @@ const linksStyles = css`
 	${from.wide} {
 		right: 342px;
 	}
-
-	${getZIndex('headerLinks')}
 `;
 
 export const Links = ({

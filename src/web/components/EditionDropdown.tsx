@@ -4,12 +4,13 @@ import { css } from 'emotion';
 import { Dropdown } from '@root/src/web/components/Dropdown';
 import { brand } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
+import { getZIndex } from '../lib/getZIndex';
 
 const editionDropdown = css`
 	display: flex;
 	position: absolute;
 	right: 11px;
-	z-index: 1072;
+	${getZIndex('dropdown')}
 	transform: translateX(100%);
 
 	:before {
