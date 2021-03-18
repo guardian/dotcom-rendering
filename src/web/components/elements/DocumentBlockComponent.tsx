@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 import { LinkButton } from '@guardian/src-button';
-import { SvgPlus } from '@guardian/src-icons';
 
 const widthOverride = css`
 	iframe {
@@ -44,12 +43,11 @@ export const DocumentBlockComponent: React.FC<{
 			/>
 			{source === 'DocumentCloud' ? (
 				<LinkButton
-					priority="tertiary"
+					priority="subdued"
 					size="small"
 					href={getDocumentCloudAssetUrl(embedUrl)}
 					target="_self"
 					title={title}
-					icon={<SvgPlus />}
 				>
 					View on DocumentCloud
 				</LinkButton>
