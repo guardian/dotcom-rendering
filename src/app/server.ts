@@ -52,7 +52,7 @@ const logRenderTime = responseTime(
 	(req: Request, _: Response, time: number) => {
 		logger.info(
 			JSON.stringify({
-				url: req.url,
+				url: req.originalUrl,
 				renderTime: time,
 			}),
 		);
