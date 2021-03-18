@@ -46,10 +46,10 @@ export const DocumentBlockComponent: React.FC<{
 					priority="subdued"
 					size="small"
 					href={getDocumentCloudAssetUrl(embedUrl)}
-					target="_self"
 					title={title}
+					download={true}
 				>
-					View on DocumentCloud
+					Download original document
 				</LinkButton>
 			) : (
 				<></>
