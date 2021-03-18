@@ -52,7 +52,8 @@ const logRenderTime = responseTime(
 	(req: Request, _: Response, time: number) => {
 		logger.info(
 			JSON.stringify({
-				url: req.originalUrl,
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+				pageId: req.body.pageId,
 				renderTime: time,
 			}),
 		);
