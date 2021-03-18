@@ -43,13 +43,8 @@ import {
 	decideLineCount,
 	decideLineEffect,
 } from '@root/src/web/lib/layoutHelpers';
-import {
-	Stuck,
-	SendToBack,
-	BannerWrapper,
-} from '@root/src/web/layouts/lib/stickiness';
+import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { NavGroupEager } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
-import { getZIndex } from '../lib/getZIndex';
 
 const StandardGrid = ({
 	children,
@@ -288,7 +283,6 @@ const ageWarningMargins = css`
 const stickyNavRootStyle = css`
 	display: inline;
 	position: relative;
-	${getZIndex('stickyNavWrapper')}
 `;
 
 interface Props {
@@ -344,20 +338,18 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Section>
 				</Stuck>
-				<SendToBack>
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
-						/>
-					</Section>
-				</SendToBack>
+				<Section
+					showTopBorder={false}
+					showSideBorders={false}
+					padded={false}
+					backgroundColour={brandBackground.primary}
+				>
+					<Header
+						edition={CAPI.editionId}
+						idUrl={CAPI.config.idUrl}
+						mmaUrl={CAPI.config.mmaUrl}
+					/>
+				</Section>
 			</div>
 
 			<div>
