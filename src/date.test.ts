@@ -153,9 +153,4 @@ describe('makeRelativeDate', () => {
 		const date = new Date(2019, 2, 15, 23, 58, 29);
 		expect(makeRelativeDate(date)).toBe('2m ago');
 	});
-
-	test('returns hours ago when given a date that is >= 55 minutes before current time', () => {
-		const date = new Date(2019, 2, 15, 23, 5);
-		expect(makeRelativeDate(date)).toBe('1h ago');
-	});
 });
