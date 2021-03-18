@@ -26,6 +26,7 @@ const indices = [
 
 	'banner',
 	'dropdown',
+	'burger',
 	'stickyNav',
 
 	// Header
