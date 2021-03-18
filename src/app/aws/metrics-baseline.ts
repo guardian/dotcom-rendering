@@ -1,5 +1,4 @@
-// TODO re-enable disk space checks after Graviton testing complete (the diskusage module doesn't work on ARM).
-
+// TODO replace disk-usage code with an ARM-friendly solution (probably in a separate process)
 import os from 'os';
 // import disk from 'diskusage';
 import { BytesMetric, collectAndSendAWSMetrics } from './aws-metrics';
@@ -18,8 +17,6 @@ const totalPhysicalMemory = BytesMetric(
 	'total-physical-memory',
 );
 
-// transmits metrics to AWS
-
 collectAndSendAWSMetrics(
 	maxHeapMemory,
 	usedHeapMemory,
@@ -28,10 +25,7 @@ collectAndSendAWSMetrics(
 	// freeDiskSpace,
 );
 
-// records system metrics
-
 export const recordBaselineCloudWatchMetrics = () => {
-	// TODO re-enable once ARM testing complete
 	// disk.check('/', (err, diskinfo) => {
 	// 	if (err) {
 	// 		// eslint-disable-next-line no-console
