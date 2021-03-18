@@ -1,6 +1,7 @@
 import * as path from 'path';
 import express, { Request, Response } from 'express';
 import fetch from 'node-fetch';
+import responseTime from 'response-time';
 
 import compression from 'compression';
 
@@ -45,6 +46,19 @@ const buildUrlFromQueryParam = (req: Request) => {
 	return `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 };
 
+// Middleware to track route performance using 'response-time' lib
+// Usage: app.post('/Article', logRenderTime, renderArticle);
+const logRenderTime = responseTime(
+	(req: Request, _: Response, time: number) => {
+		logger.info(
+			JSON.stringify({
+				url: req.url,
+				renderTime: time,
+			}),
+		);
+	},
+);
+
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
 	logger.info('dotcom-rendering is GO.');
@@ -79,8 +93,8 @@ if (process.env.NODE_ENV === 'production') {
 		app.use('/assets', express.static(path.relative(__dirname, dist)));
 	}
 
-	app.post('/Article', renderArticle);
-	app.post('/AMPArticle', renderAMPArticle);
+	app.post('/Article', logRenderTime, renderArticle);
+	app.post('/AMPArticle', logRenderTime, renderAMPArticle);
 
 	app.get('/Article', async (req: Request, res: Response) => {
 		// Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
