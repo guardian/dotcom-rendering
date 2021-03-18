@@ -193,7 +193,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			return;
 		}
 
-		initAutomat()
+		initAutomat();
 
 		window
 			.guardianPolyfilledImport(module.url)
@@ -230,7 +230,10 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
 				ref={setNode}
-				className={css`width: 100%; ${getZIndex('banner')}`}
+				className={css`
+					width: 100%;
+					${getZIndex('banner')}
+				`}
 			>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Banner

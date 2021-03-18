@@ -102,7 +102,7 @@ const BrazeEpic = ({
 	});
 
 	useOnce(() => {
-		initAutomat()
+		initAutomat();
 
 		const componentUrl = joinUrl([
 			contributionsServiceUrl,

@@ -15,7 +15,7 @@ export const DefaultStory = (): ReactElement => {
 	>();
 
 	useEffect(() => {
-		initAutomat()
+		initAutomat();
 
 		import(
 			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'

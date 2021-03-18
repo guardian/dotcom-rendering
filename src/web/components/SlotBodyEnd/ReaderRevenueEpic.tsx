@@ -200,7 +200,7 @@ export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
 	}) as HasBeenSeen;
 
 	useEffect(() => {
-		initAutomat()
+		initAutomat();
 
 		const modulePerf = initPerf('contributions-epic-module');
 		modulePerf.start();

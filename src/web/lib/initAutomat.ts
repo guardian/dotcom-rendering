@@ -3,9 +3,9 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 
-let isInit = false
+let isInit = false;
 export const initAutomat = () => {
-	if(!isInit) {
+	if (!isInit) {
 		window.guardian = window.guardian || {};
 		window.guardian.automat = {
 			react: React,
@@ -14,6 +14,6 @@ export const initAutomat = () => {
 			emotionTheming, // TODO: remove once decoupled from Braze
 			emotion, // TODO: remove in favor of emotionCore
 		};
-		isInit = true
+		isInit = true;
 	}
-}
+};

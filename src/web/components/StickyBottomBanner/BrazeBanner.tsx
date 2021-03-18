@@ -21,10 +21,10 @@ type Props = {
 };
 
 const containerStyles = css`
-    position: fixed;
-    bottom: -1px;
-    width: 100%;
-    ${getZIndex('banner')}
+	position: fixed;
+	bottom: -1px;
+	width: 100%;
+	${getZIndex('banner')}
 `;
 
 const FORCE_BRAZE_ALLOWLIST = [
@@ -160,7 +160,7 @@ export const BrazeBanner = ({ meta }: Props) => {
 
 	useEffect(() => {
 		if (meta) {
-			initAutomat()
+			initAutomat();
 
 			import(
 				/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
