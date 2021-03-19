@@ -117,7 +117,7 @@ describe('makeRelativeDate', () => {
 	});
 
 	test('returns null given a date that is after now', () => {
-		expect(makeRelativeDate(new Date(2019, 2, 16, 0, 1))).toEqual(null);
+		expect(makeRelativeDate(new Date('2019-02-16T00:00:01'))).toEqual(null);
 	});
 
 	test('returns number of seconds given a date that is from 0 up to 55 seconds before current time', () => {
@@ -144,7 +144,7 @@ describe('makeRelativeDate', () => {
 		expect(makeRelativeDate(new Date('2019-02-15T23:05:00'))).toBe(
 			'1h ago',
 		);
-		expect(makeRelativeDate(new Date('2019-02-15T00:01:00'))).toBe(
+		expect(makeRelativeDate(new Date('2019-02-15T00:00:01'))).toBe(
 			'24h ago',
 		);
 	});
@@ -168,11 +168,10 @@ describe('makeRelativeDate', () => {
 	});
 
 	test('returns 1y ago given a date that is from 1 year up to 1.5 years before current time', () => {
-		// expect(makeRelativeDate(new Date(2018, 2, 16, 23, 59))).toBe('1y ago');
 		expect(makeRelativeDate(new Date('2018-02-16T23:59:00'))).toBe(
 			'1y ago',
 		);
-		expect(makeRelativeDate(new Date('2017-08-19T01:01:00'))).toBe(
+		expect(makeRelativeDate(new Date('2017-08-19T01:00:01'))).toBe(
 			'1y ago',
 		);
 	});
