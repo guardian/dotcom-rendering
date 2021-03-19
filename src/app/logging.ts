@@ -32,6 +32,7 @@ const logFields = (logEvent: LoggingEvent): any => {
 		};
 	}
 	return {
+		message: 'DCR Render event',
 		...coreFields,
 		...data,
 	};
