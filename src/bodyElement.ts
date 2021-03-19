@@ -23,7 +23,7 @@ import { parseImage } from 'image';
 import { compose, pipe, pipe2 } from 'lib';
 import type { Context } from 'types/parserContext';
 
-// ---- Types ---- //
+// ----- Types ----- //
 
 const enum ElementKind {
 	Text,
