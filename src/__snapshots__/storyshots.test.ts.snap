@@ -13710,22 +13710,6 @@ exports[`Storyshots Footer Default 1`] = `
   }
 }
 
-.emotion-2 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.35;
-  font-weight: 400;
-  color: #121212;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-@media (prefers-color-scheme:dark) {
-  .emotion-2 {
-    color: #999999;
-  }
-}
-
 <div
   className="emotion-0"
 >
@@ -13741,7 +13725,7 @@ exports[`Storyshots Footer Default 1`] = `
   </a>
    · 
   <a
-    className="emotion-2"
+    className="emotion-1"
     href="https://www.theguardian.com/help/privacy-policy"
   >
     Privacy Policy
