@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
@@ -201,6 +202,25 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			if (!element.safe) {
+				if (isMainMedia) {
+					return (
+						<Figure
+							isMainMedia={isMainMedia}
+							role={isLiveBlog ? 'inline' : element.role}
+							id={element.elementId}
+						>
+							<iframe
+								className={css`
+									width: 100%;
+									height: 100vh;
+								`}
+								title={element.alt || ''}
+								srcDoc={element.html}
+							/>
+						</Figure>
+					);
+				}
+
 				return (
 					<Figure
 						isMainMedia={isMainMedia}
