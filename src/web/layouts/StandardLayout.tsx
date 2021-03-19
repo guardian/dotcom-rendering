@@ -338,18 +338,20 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Section>
 				</Stuck>
-				<Section
-					showTopBorder={false}
-					showSideBorders={false}
-					padded={false}
-					backgroundColour={brandBackground.primary}
-				>
-					<Header
-						edition={CAPI.editionId}
-						idUrl={CAPI.config.idUrl}
-						mmaUrl={CAPI.config.mmaUrl}
-					/>
-				</Section>
+				{format.theme !== Special.Labs && (
+					<Section
+						showTopBorder={false}
+						showSideBorders={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+					>
+						<Header
+							edition={CAPI.editionId}
+							idUrl={CAPI.config.idUrl}
+							mmaUrl={CAPI.config.mmaUrl}
+						/>
+					</Section>
+				)}
 			</div>
 
 			<div>
