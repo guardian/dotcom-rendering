@@ -50,13 +50,15 @@ const buildUrlFromQueryParam = (req: Request) => {
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
 	(req: Request, _: Response, time: number) => {
-		logger.info(
-			JSON.stringify({
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-				pageId: req.body.pageId,
-				renderTime: time,
-			}),
-		);
+		// eslint-disable-next-line prefer-destructuring
+		const body: CAPIType = req.body;
+		logger.info({
+			pageId: body.pageId,
+			webURL: body.webURL,
+			isDev: body.config.isDev,
+			isProd: body.config.isProd,
+			renderTime: time,
+		});
 	},
 );
 
