@@ -227,8 +227,8 @@ function footerInit(): void {
 function isCCPA(): void {
 	userClient
 		.doesCcpaApply()
-		.then((isOptedIn) => {
-			const comp = h(FooterCcpa, { isCcpa: isOptedIn });
+		.then((isCcpa) => {
+			const comp = h(FooterCcpa, { isCcpa });
 			ReactDOM.render(comp, document.getElementById('articleFooter'));
 		})
 		.catch((error) => {
@@ -467,12 +467,12 @@ reportNativeElementPositionChanges();
 topics();
 slideshow();
 formatDates();
+footerInit();
 insertEpic();
 callouts();
 renderComments();
 hasSeenCards();
 initAudioAtoms();
 hydrateQuizAtoms();
-footerInit();
 localDates();
 richLinks();
