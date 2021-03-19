@@ -806,7 +806,13 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -848,9 +854,10 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -962,8 +969,8 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -993,8 +1000,8 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -1030,8 +1037,8 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -1042,6 +1049,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -2043,7 +2051,13 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -2085,9 +2099,10 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -2199,8 +2214,8 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -2230,8 +2245,8 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -2267,8 +2282,8 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -2279,6 +2294,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -3231,7 +3247,13 @@ exports[`Storyshots Editions/Article Default 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -3273,9 +3295,10 @@ exports[`Storyshots Editions/Article Default 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -3387,8 +3410,8 @@ exports[`Storyshots Editions/Article Default 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -3418,8 +3441,8 @@ exports[`Storyshots Editions/Article Default 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -3455,8 +3478,8 @@ exports[`Storyshots Editions/Article Default 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -3467,6 +3490,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -4402,7 +4426,13 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -4444,9 +4474,10 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -4558,8 +4589,8 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -4589,8 +4620,8 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -4626,8 +4657,8 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -4638,6 +4669,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -5560,7 +5592,13 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -5602,9 +5640,10 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -5716,8 +5755,8 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -5747,8 +5786,8 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -5784,8 +5823,8 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -5796,6 +5835,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -7639,7 +7679,13 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -7681,9 +7727,10 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -7795,8 +7842,8 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -7826,8 +7873,8 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -7863,8 +7910,8 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -7875,6 +7922,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -8837,7 +8885,13 @@ exports[`Storyshots Editions/Article Review 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -8879,9 +8933,10 @@ exports[`Storyshots Editions/Article Review 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -8993,8 +9048,8 @@ exports[`Storyshots Editions/Article Review 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -9024,8 +9079,8 @@ exports[`Storyshots Editions/Article Review 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -9061,8 +9116,8 @@ exports[`Storyshots Editions/Article Review 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -9073,6 +9128,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
@@ -10070,7 +10126,13 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   background: #EDEDED;
   color: #121212;
   padding: 0 5px 6px;
-  border-image: repeating-linear-gradient( to bottom, #DCDCDC, #DCDCDC 1px, transparent 1px, transparent 4px ) 13;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
   border-top: 13px solid black;
   position: relative;
 }
@@ -10112,9 +10174,10 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   height: 2rem;
   position: absolute;
   bottom: 0;
-  -webkit-transform: translate(0,50%);
-  -ms-transform: translate(0,50%);
-  transform: translate(0,50%);
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
   padding: 0 15px 0 7px;
   border-radius: 100em;
   cursor: pointer;
@@ -10226,8 +10289,8 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
@@ -10257,8 +10320,8 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -10294,8 +10357,8 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: black;
   color: white;
@@ -10306,6 +10369,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   width: 28px;
   height: 28px;
   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
