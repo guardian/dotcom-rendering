@@ -22,7 +22,7 @@ const logFields = (logEvent: LoggingEvent): any => {
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
 	};
-	// Loagstash uses any[] to type data but we want to coerce it here
+	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
 	const data = (logEvent.data[0] as unknown) as
 		| Record<string, unknown>
