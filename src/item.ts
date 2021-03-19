@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
-import type { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
@@ -26,6 +25,8 @@ import {
 } from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
+import type { MatchScores } from 'football';
+import { parseMatchScores } from 'football';
 import type { MainMedia } from 'headerMedia';
 import type { Image } from 'image';
 import { parseCardImage } from 'image';
@@ -58,7 +59,7 @@ interface Fields extends Format {
 interface MatchReport extends Fields {
 	design: Design.MatchReport;
 	body: Body;
-	football: Option<FootballContent>;
+	football: Option<MatchScores>;
 }
 
 interface ResizedRelatedContent extends RelatedContent {
@@ -356,7 +357,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isMatchReport(tags)) {
 		return {
 			design: Design.MatchReport,
-			football: fromNullable(request.footballContent),
+			football: parseMatchScores(fromNullable(request.footballContent)),
 			...itemFieldsWithBody(context, request),
 		};
 	}

@@ -19,7 +19,6 @@ import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
 import Tags from 'components/shared/tags';
 import Standfirst from 'components/standfirst';
-import { parseMatchScores } from 'football';
 import HeaderMedia from 'headerMedia';
 import type {
 	Item,
@@ -116,8 +115,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 		  )
 		: null;
 
-	const matchScores =
-		'football' in item ? parseMatchScores(item.football) : none;
+	const matchScores = 'football' in item ? item.football : none;
 
 	return (
 		<main css={[Styles, DarkStyles]}>
