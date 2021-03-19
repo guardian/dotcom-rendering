@@ -5,6 +5,10 @@ import {
 	canShow as canShowRRBanner,
 	ReaderRevenueBanner,
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
+import {
+	canShow as canShowPuzzlesBanner,
+	PuzzlesBanner,
+} from '@root/src/web/components/StickyBottomBanner/PuzzlesBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import {
@@ -49,6 +53,30 @@ const buildCmpBannerConfig = (): CandidateConfig => ({
 	},
 	timeoutMillis: null,
 });
+
+const buildPuzzlesBannerConfig = (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+): CandidateConfig => {
+	return {
+		candidate: {
+			id: 'puzzles-banner',
+			canShow: () =>
+				canShowPuzzlesBanner({
+					remoteBannerConfig: CAPI.config.remoteBanner,
+					isSignedIn,
+					contentType: CAPI.contentType,
+					sectionName: CAPI.sectionName,
+					shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
+					tags: CAPI.tags,
+					contributionsServiceUrl: CAPI.contributionsServiceUrl,
+				}),
+			/* eslint-disable-next-line react/jsx-props-no-spreading */
+			show: (meta: any) => () => <PuzzlesBanner {...meta} />,
+		},
+		timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
+	};
+};
 
 const buildReaderRevenueBannerConfig = (
 	CAPI: CAPIBrowserType,
@@ -106,6 +134,10 @@ export const StickyBottomBanner = ({
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
+		const puzzlesBanner = buildPuzzlesBannerConfig(
+			CAPI,
+			isSignedIn as boolean,
+		);
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
@@ -115,7 +147,7 @@ export const StickyBottomBanner = ({
 			brazeMessages as Promise<BrazeMessagesInterface>,
 		);
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, readerRevenue, brazeBanner],
+			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],
 			name: 'banner',
 		};
 

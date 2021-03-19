@@ -33,8 +33,7 @@ const bannerWrapper = css`
 	bottom: 0;
 	${getZIndexImportant('banner')}
 	max-height: 80vh;
-	overflow-y: auto;
-	overflow-x: hidden;
+	overflow: visible; // visible because the puzzles banner has overflow that needs to show
 
 	width: 100% !important;
 	background: none !important;
