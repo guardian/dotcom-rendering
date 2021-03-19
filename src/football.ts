@@ -126,8 +126,8 @@ const parseMatchScores: (
 	const maybeStatus = parseMatchStatus(football.status, football.kickOff);
 	return map2((stadium: string, status: MatchStatus) => ({
 		league: football.competitionDisplayName,
-		stadium: stadium,
-		status: status,
+		stadium,
+		status,
 		homeTeam: football.homeTeam,
 		awayTeam: football.awayTeam,
 	}))(maybeStadium)(maybeStatus);

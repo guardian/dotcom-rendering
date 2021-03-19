@@ -9,12 +9,12 @@ import { TeamLocation } from 'football';
 import type { FC } from 'react';
 import React from 'react';
 
-interface TeamProps {
+interface Props {
 	team: FootballTeam;
 	location: TeamLocation;
 }
 
-const teamScoreStyles = (location: TeamLocation): SerializedStyles => css`
+const styles = (location: TeamLocation): SerializedStyles => css`
 	display: grid;
 	grid-template-columns: auto 1fr;
 	border-top: 1px dotted ${neutral[0]};
@@ -85,8 +85,8 @@ const scorerStyles = (location: TeamLocation): SerializedStyles => css`
 	}
 `;
 
-const TeamScore: FC<TeamProps> = ({ team, location }) => (
-	<section css={teamScoreStyles(location)}>
+const TeamScore: FC<Props> = ({ team, location }) => (
+	<section css={styles(location)}>
 		<h3 css={teamNameStyles(location)}>{team.name}</h3>
 		<div css={scoreStyles(location)}>
 			<div css={scoreNumberStyles}>

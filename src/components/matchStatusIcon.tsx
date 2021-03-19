@@ -7,13 +7,11 @@ import type { MatchStatus } from 'football';
 import type { FC } from 'react';
 import React from 'react';
 
-interface MatchStatusIconProps {
+interface Props {
 	status: MatchStatus;
 }
 
-const matchStatusIconStyles = (
-	status: MatchStatusKind,
-): SerializedStyles => css`
+const styles = (status: MatchStatusKind): SerializedStyles => css`
 	${textSans.small({ fontWeight: 'bold' })}
 	border: 1px dotted ${neutral[0]};
 	border-radius: 100%;
@@ -26,30 +24,30 @@ const matchStatusIconStyles = (
 	${status === MatchStatusKind.KickOff ? 'font-weight: normal;' : ''}
 `;
 
-const MatchStatusIcon: FC<MatchStatusIconProps> = ({ status }) => {
+const matchStatusCopy = (status: MatchStatus): string => {
 	switch (status.kind) {
 		case MatchStatusKind.KickOff:
-			return (
-				<span css={matchStatusIconStyles(status.kind)}>
-					{status.time}
-				</span>
-			);
+			return status.time;
 		case MatchStatusKind.FirstHalf:
-			return <span css={matchStatusIconStyles(status.kind)}>1st</span>;
+			return '1st';
 		case MatchStatusKind.HalfTime:
-			return <span css={matchStatusIconStyles(status.kind)}>HT</span>;
+			return 'HT';
 		case MatchStatusKind.SecondHalf:
-			return <span css={matchStatusIconStyles(status.kind)}>2nd</span>;
+			return '2nd';
 		case MatchStatusKind.FullTime:
-			return <span css={matchStatusIconStyles(status.kind)}>FT</span>;
+			return 'FT';
 		case MatchStatusKind.ExtraTime:
-			return <span css={matchStatusIconStyles(status.kind)}>ET</span>;
+			return 'ET';
 		case MatchStatusKind.Penalties:
-			return <span css={matchStatusIconStyles(status.kind)}>PT</span>;
+			return 'PT';
 		case MatchStatusKind.Suspended:
 		default:
-			return <span css={matchStatusIconStyles(status.kind)}>S</span>;
+			return 'S';
 	}
 };
+
+const MatchStatusIcon: FC<Props> = ({ status }) => (
+	<span css={styles(status.kind)}>{matchStatusCopy(status)}</span>
+);
 
 export { MatchStatusIcon };
