@@ -54,9 +54,6 @@ const logRenderTime = responseTime(
 		const body: CAPIType = req.body;
 		logger.info({
 			pageId: body.pageId,
-			webURL: body.webURL,
-			isDev: body.config.isDev,
-			isProd: body.config.isProd,
 			renderTime: time,
 		});
 	},
