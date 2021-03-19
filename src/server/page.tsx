@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import { cache } from '@emotion/css';
+import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import { extractCritical } from '@emotion/server';
+import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
@@ -17,7 +17,6 @@ import Scripts from 'components/scripts';
 import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
-import { compose } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -123,14 +122,16 @@ function renderHead(
     `;
 }
 
+const cache = createCache({ key: 'ar' });
+const emotionServer = createEmotionServer(cache);
+
 const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
-	compose(
-		extractCritical,
-		renderToString,
-	)(
-		<CacheProvider value={cache}>
-			<Body item={item} shouldHideAds={shouldHideAds(request)} />
-		</CacheProvider>,
+	emotionServer.extractCritical(
+		renderToString(
+			<CacheProvider value={cache}>
+				<Body item={item} shouldHideAds={shouldHideAds(request)} />
+			</CacheProvider>,
+		),
 	);
 
 const buildHtml = (
