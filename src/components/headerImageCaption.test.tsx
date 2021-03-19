@@ -1,6 +1,6 @@
+import { matchers } from '@emotion/jest';
 import { some } from '@guardian/types';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
-import { matchers } from 'jest-emotion';
 import renderer from 'react-test-renderer';
 
 expect.extend(matchers);

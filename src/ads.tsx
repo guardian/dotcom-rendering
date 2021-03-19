@@ -1,6 +1,6 @@
+import { ThemeProvider } from '@emotion/react';
 import { Button, buttonBrandAlt } from '@guardian/src-button';
 import Paragraph from 'components/paragraph';
-import { ThemeProvider } from 'emotion-theming';
 import type { ReactElement, ReactNode } from 'react';
 import { createElement as h, isValidElement } from 'react';
 

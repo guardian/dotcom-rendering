@@ -9,6 +9,7 @@ import {
 	ResultKind,
 	Role,
 	some,
+	Special,
 	toOption,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
@@ -241,6 +242,7 @@ const fields = {
 	internalShortId: none,
 	commentCount: none,
 	relatedContent: none,
+	logo: none,
 };
 
 const article: Item = {
@@ -264,10 +266,10 @@ const review: Review = {
 	...fields,
 };
 
-const advertisementFeature: Item = {
-	design: Design.AdvertisementFeature,
-	logo: none,
+const labs: Item = {
+	design: Design.Article,
 	...fields,
+	theme: Special.Labs,
 };
 
 const comment: Item = {
@@ -298,7 +300,7 @@ export {
 	analysis,
 	feature,
 	review,
-	advertisementFeature,
+	labs,
 	comment,
 	interview,
 	media,

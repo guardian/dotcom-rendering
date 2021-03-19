@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css, jsx as styledH } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css, jsx as styledH } from '@emotion/react';
 import {
 	AudioAtom,
 	ChartAtom,
@@ -27,6 +27,7 @@ import {
 	map,
 	none,
 	some,
+	Special,
 	toOption,
 	withDefault,
 } from '@guardian/types';
@@ -192,7 +193,7 @@ const listItemStyles = (format: Format): SerializedStyles[] => {
 
 const HeadingTwoStyles = (format: Format): SerializedStyles => {
 	const font =
-		format.design === Design.AdvertisementFeature
+		format.theme === Special.Labs
 			? textSans.large({ fontWeight: 'bold' })
 			: headline.xxsmall({ fontWeight: 'bold' });
 
@@ -305,7 +306,7 @@ const textElement = (format: Format, supportsDarkMode = true) => (
 };
 
 const linkColourFromFormat = (format: Format): string => {
-	if (format.design === Design.AdvertisementFeature) {
+	if (format.theme === Special.Labs) {
 		return palette.labs[300];
 	}
 

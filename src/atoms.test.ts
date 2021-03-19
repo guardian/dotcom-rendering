@@ -559,6 +559,7 @@ describe('parseAtom', () => {
 							date: 'Thu Jan 01 1970',
 							title: 'timeline title',
 							toDate: 'Wed Feb 24 2021',
+							unixDate: 1,
 						},
 					],
 					description: 'timeline description',
@@ -858,6 +859,7 @@ describe('parseAtom', () => {
 							],
 						},
 					],
+					resultGroups: [],
 				}),
 			);
 		});

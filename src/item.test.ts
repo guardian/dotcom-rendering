@@ -8,7 +8,18 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
-import { Design, Display, err, none, ok, resultAndThen, resultMap, toOption, withDefault } from '@guardian/types';
+import {
+	Design,
+	Display,
+	err,
+	none,
+	ok,
+	resultAndThen,
+	resultMap,
+	Special,
+	toOption,
+	withDefault,
+} from '@guardian/types';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe2 } from 'lib';
@@ -180,7 +191,11 @@ const getFirstBody = (item: Review | Standard) =>
 	pipe2(
 		item.body[0],
 		toOption,
-		withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '', alt: none }),
+		withDefault<BodyElement>({
+			kind: ElementKind.Interactive,
+			url: '',
+			alt: none,
+		}),
 	);
 
 describe('fromCapi returns correct Item', () => {
@@ -239,9 +254,9 @@ describe('fromCapi returns correct Item', () => {
 		expect(item.design).toBe(Design.Quiz);
 	});
 
-	test('advertisementfeature', () => {
+	test('labs', () => {
 		const item = f(contentWithTag('tone/advertisement-features'));
-		expect(item.design).toBe(Design.AdvertisementFeature);
+		expect(item.theme).toBe(Special.Labs);
 	});
 
 	test('article', () => {
@@ -581,7 +596,11 @@ describe('audio elements', () => {
 		pipe2(
 			item.body[0],
 			resultAndThen((element) =>
-				element.kind === ElementKind.Embed && element.embed.kind === EmbedKind.Spotify ? ok(element.embed) : err('Not an audio embed')),
+				element.kind === ElementKind.Embed &&
+				element.embed.kind === EmbedKind.Spotify
+					? ok(element.embed)
+					: err('Not an audio embed'),
+			),
 			resultMap(({ src, width, height }) => {
 				expect(src).toContain('https://open.spotify.com/embed/track/');
 				expect(width).toBe(300);
@@ -643,7 +662,11 @@ describe('video elements', () => {
 		pipe2(
 			item.body[0],
 			resultAndThen((element) =>
-				element.kind === ElementKind.Embed && element.embed.kind === EmbedKind.YouTube ? ok(element.embed) : err('Not a YouTube embed')),
+				element.kind === ElementKind.Embed &&
+				element.embed.kind === EmbedKind.YouTube
+					? ok(element.embed)
+					: err('Not a YouTube embed'),
+			),
 			resultMap(({ id, width, height }) => {
 				expect(id).toBe('mockVideoId');
 				expect(width).toBe('460');

@@ -1,11 +1,11 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Design, Display, map, withDefault } from '@guardian/types';
+import { Design, Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe2 } from 'lib';
@@ -82,9 +82,11 @@ const advertisementFeature = css`
 
 const getStyles = (item: Item): SerializedStyles => {
 	if (item.display === Display.Immersive) {
-		return item.design === Design.AdvertisementFeature
-			? immersiveLabs
-			: immersive;
+		return item.theme === Special.Labs ? immersiveLabs : immersive;
+	}
+
+	if (item.theme === Special.Labs) {
+		return advertisementFeature;
 	}
 
 	switch (item.design) {
@@ -94,8 +96,6 @@ const getStyles = (item: Item): SerializedStyles => {
 			return css(styles, thinHeadline);
 		case Design.Media:
 			return media;
-		case Design.AdvertisementFeature:
-			return advertisementFeature;
 
 		default:
 			return css(styles, normalHeadline);
