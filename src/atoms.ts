@@ -1,4 +1,4 @@
-import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
+import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { err, fromNullable, ok } from '@guardian/types';
