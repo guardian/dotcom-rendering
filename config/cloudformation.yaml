@@ -10,7 +10,7 @@ Mappings:
       Period: 300
       Threshold: 15
     InstanceType:
-       Value: "t3a.micro"
+       Value: "t4g.micro"
   PROD:
     ScalingUp:
       Period: 300
@@ -19,7 +19,7 @@ Mappings:
       Period: 300
       Threshold: 15
     InstanceType:
-      Value: "t3a.micro"
+      Value: "t4g.micro"
   Constants:
     RunbookCopy:
       Value: <<<Runbook|https://docs.google.com/document/d/1VRYMTYtlb0pYt19S7AZoXttLH3N2MJ41hS5oo2vfVhI>>>
@@ -300,6 +300,8 @@ Resources:
         - !Ref InstanceSecurityGroup
         - Fn::ImportValue: !Sub SecurityGroups-${Stage}-MapiGuardianLondonSSH
         - !Ref DefaultVpcSecurityGroup
+      MetadataOptions:
+          HttpTokens: required
       UserData:
         "Fn::Base64":
           !Sub |
