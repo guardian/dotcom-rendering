@@ -70,12 +70,15 @@ const fontStyles = (format: Format) => css`
 	${format.theme === Special.Labs
 		? textSans.medium({ fontWeight: 'bold' })
 		: headline.xxxsmall({ fontWeight: 'bold' })}
-	line-height: 23px;
 	${from.leftCol} {
 		${format.theme === Special.Labs
 			? textSans.large({ fontWeight: 'bold' })
 			: headline.xxsmall({ fontWeight: 'bold' })}
-		line-height: 20px;
+	}
+
+	${format.theme === Special.Labs && 'line-height: 23px;'}
+	${from.leftCol} {
+		${format.theme === Special.Labs && 'line-height: 20px;'}
 	}
 `;
 
@@ -83,7 +86,8 @@ const secondaryFontStyles = (format: Format) => css`
 	${format.theme === Special.Labs
 		? textSans.medium({ fontWeight: 'regular' })
 		: headline.xxxsmall({ fontWeight: 'regular' })}
-	line-height: 20px;
+
+	${format.theme === Special.Labs && 'line-height: 20px;'}
 `;
 
 const displayBlock = css`
