@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
-import { body } from '@guardian/src-foundations/typography';
+import { body, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
@@ -105,7 +105,7 @@ const sanitiserOptions = {
 
 const paraStyles = (format: Format) => css`
 	margin-bottom: 16px;
-	${body.medium()};
+	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
 
 	ul {
 		margin-bottom: 12px;
