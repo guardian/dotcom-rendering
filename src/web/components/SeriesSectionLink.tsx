@@ -39,24 +39,13 @@ const marginBottom = css`
 	margin-bottom: 5px;
 `;
 
-const primaryStyle = css`
-	font-weight: 700;
-	${headline.xxxsmall({ fontWeight: 'bold' })};
-	${from.leftCol} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
-	}
+const marginRight = css`
 	${until.leftCol} {
 		margin-right: ${space[2]}px;
 	}
 `;
 
 const invertedStyle = css`
-	font-weight: 700;
-	${headline.xxxsmall({ fontWeight: 'bold' })};
-	${from.leftCol} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
-	}
-
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
 	box-decoration-break: clone;
@@ -78,15 +67,17 @@ const invertedStyle = css`
 `;
 
 const fontStyles = css`
-	font-weight: 700;
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	${from.leftCol} {
 		${headline.xxsmall({ fontWeight: 'bold' })};
 	}
 `;
 
-const secondaryStyle = css`
+const secondaryFontStyles = css`
 	${headline.xxxsmall({ fontWeight: 'regular' })};
+`;
+
+const displayBlock = css`
 	display: block;
 `;
 
@@ -143,7 +134,7 @@ export const SeriesSectionLink = ({
 									href={`${guardianBaseURL}/${tag.id}`}
 									className={cx(
 										sectionLabelLink,
-										primaryStyle,
+										marginRight,
 										fontStyles,
 										css`
 											color: ${palette.text.seriesTitle};
@@ -168,8 +159,8 @@ export const SeriesSectionLink = ({
 										href={`${guardianBaseURL}/${sectionUrl}`}
 										className={cx(
 											sectionLabelLink,
-											secondaryStyle,
 											fontStyles,
+											displayBlock,
 											css`
 												color: ${palette.text
 													.sectionTitle};
@@ -199,7 +190,7 @@ export const SeriesSectionLink = ({
 								href={`${guardianBaseURL}/${sectionUrl}`}
 								className={cx(
 									sectionLabelLink,
-									primaryStyle,
+									marginRight,
 									fontStyles,
 									css`
 										color: ${palette.text.sectionTitle};
@@ -242,6 +233,8 @@ export const SeriesSectionLink = ({
 								<a
 									className={cx(
 										sectionLabelLink,
+										invertedStyle,
+										fontStyles,
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
@@ -253,7 +246,6 @@ export const SeriesSectionLink = ({
 													${palette.background
 														.seriesTitle};
 										`,
-										invertedStyle,
 									)}
 									href={`${guardianBaseURL}/${tag.id}`}
 									data-component="series"
@@ -286,7 +278,8 @@ export const SeriesSectionLink = ({
 									background-color: ${palette.background
 										.seriesTitle};
 								`,
-								primaryStyle,
+								marginRight,
+								fontStyles,
 								css`
 									box-shadow: -6px 0 0 0
 											${palette.background.seriesTitle},
@@ -305,12 +298,13 @@ export const SeriesSectionLink = ({
 								href={`${guardianBaseURL}/${sectionUrl}`}
 								className={cx(
 									sectionLabelLink,
+									secondaryFontStyles,
+									displayBlock,
 									css`
 										color: ${palette.text.sectionTitle};
 										background-color: ${palette.background
 											.sectionTitle};
 									`,
-									secondaryStyle,
 								)}
 								data-component="section"
 								data-link-name="article section"
@@ -332,7 +326,8 @@ export const SeriesSectionLink = ({
 							background-color: ${palette.background
 								.sectionTitle};
 						`,
-						primaryStyle,
+						marginRight,
+						fontStyles,
 					)}
 					data-component="section"
 					data-link-name="article section"
