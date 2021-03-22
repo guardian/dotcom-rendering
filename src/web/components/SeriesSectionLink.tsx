@@ -66,29 +66,36 @@ const invertedStyle = css`
 	}
 `;
 
-const fontStyles = (format: Format) => css`
-	${format.theme === Special.Labs
-		? textSans.medium({ fontWeight: 'bold' })
-		: headline.xxxsmall({ fontWeight: 'bold' })}
-	${from.leftCol} {
-		${format.theme === Special.Labs
-			? textSans.large({ fontWeight: 'bold' })
-			: headline.xxsmall({ fontWeight: 'bold' })}
+const fontStyles = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'bold' })}
+			line-height: 23px;
+			${from.leftCol} {
+				${textSans.large({ fontWeight: 'bold' })}
+				line-height: 20px;
+			}
+		`;
 	}
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${from.leftCol} {
+			${headline.xxsmall({ fontWeight: 'bold' })}
+		}
+	`;
+};
 
-	${format.theme === Special.Labs && 'line-height: 23px;'}
-	${from.leftCol} {
-		${format.theme === Special.Labs && 'line-height: 20px;'}
+const secondaryFontStyles = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'regular' })}
+		`;
 	}
-`;
-
-const secondaryFontStyles = (format: Format) => css`
-	${format.theme === Special.Labs
-		? textSans.medium({ fontWeight: 'regular' })
-		: headline.xxxsmall({ fontWeight: 'regular' })}
-
-	${format.theme === Special.Labs && 'line-height: 20px;'}
-`;
+	return css`
+		${headline.xxxsmall({ fontWeight: 'regular' })}
+		line-height: 20px;
+	`;
+};
 
 const displayBlock = css`
 	display: block;
