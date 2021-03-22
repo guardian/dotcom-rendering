@@ -10,7 +10,7 @@ import { ArticleTitle } from './ArticleTitle';
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
-			width: 620px;
+			width: 200px;
 			padding: 20px;
 		`}
 	>
@@ -357,3 +357,62 @@ export const LabsStory = () => {
 	);
 };
 LabsStory.story = { name: 'Labs' };
+
+export const LongStory = () => {
+	return (
+		<Container>
+			<ArticleTitle
+				// eslint-disable-next-line react/jsx-props-no-spreading
+				{...CAPI}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.News,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.News,
+					design: Design.Article,
+				})}
+				tags={[
+					{
+						id: '',
+						title:
+							"Edward Snowden's choice of Hong Kong as haven is a high-stakes gamble",
+						type: 'Series',
+					},
+				]}
+			/>
+		</Container>
+	);
+};
+LongStory.story = { name: 'Long title' };
+
+export const LongWord = () => {
+	return (
+		<Container>
+			<ArticleTitle
+				// eslint-disable-next-line react/jsx-props-no-spreading
+				{...CAPI}
+				format={{
+					display: Display.Standard,
+					theme: Pillar.News,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Pillar.News,
+					design: Design.Article,
+				})}
+				tags={[
+					{
+						id: '',
+						title: 'Antidisestablishmentarianism',
+						type: 'Series',
+					},
+				]}
+			/>
+		</Container>
+	);
+};
+LongWord.story = { name: 'Long word' };
