@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
@@ -17,6 +16,7 @@ import { HighlightBlockComponent } from '@root/src/web/components/elements/Highl
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
+import { MainMediaEmbedBlockComponent } from '@root/src/web/components/elements/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
@@ -209,11 +209,7 @@ export const ElementRenderer = ({
 							role={element.role}
 							id={element.elementId}
 						>
-							<iframe
-								className={css`
-									width: 100%;
-									height: 100vh;
-								`}
+							<MainMediaEmbedBlockComponent
 								title={element.alt || ''}
 								srcDoc={element.html}
 							/>
