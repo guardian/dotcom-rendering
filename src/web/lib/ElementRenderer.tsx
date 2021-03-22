@@ -206,7 +206,7 @@ export const ElementRenderer = ({
 					return (
 						<Figure
 							isMainMedia={isMainMedia}
-							role={isLiveBlog ? 'inline' : element.role}
+							role={element.role}
 							id={element.elementId}
 						>
 							<iframe
