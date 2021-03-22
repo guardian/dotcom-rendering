@@ -977,6 +977,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					tags={CAPI.tags}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					brazeMessages={brazeMessages}
+					idApiUrl={CAPI.config.idApiUrl}
 				/>
 			</Portal>
 			<Portal

@@ -4,8 +4,8 @@ import { css, cx } from 'emotion';
 import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { headline } from '@guardian/src-foundations/typography';
-import { Display, Design } from '@guardian/types';
+import { headline, textSans } from '@guardian/src-foundations/typography';
+import { Display, Design, Special } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -76,9 +76,11 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 				default:
 					return css`
-						${headline.xsmall({
-							fontWeight: 'light',
-						})};
+						${format.theme === Special.Labs
+							? textSans.large()
+							: headline.xsmall({
+									fontWeight: 'light',
+							  })};
 						padding-top: ${space[4]}px;
 
 						max-width: 280px;
@@ -110,9 +112,11 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 				default:
 					return css`
-						${headline.xxxsmall({
-							fontWeight: 'bold',
-						})};
+						${format.theme === Special.Labs
+							? textSans.large()
+							: headline.xxxsmall({
+									fontWeight: 'bold',
+							  })};
 						line-height: 20px;
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;

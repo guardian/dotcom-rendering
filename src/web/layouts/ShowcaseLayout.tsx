@@ -9,7 +9,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -264,18 +264,20 @@ export const ShowcaseLayout = ({
 					</Section>
 				</Stuck>
 				<SendToBack>
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
-						/>
-					</Section>
+					{format.theme !== Special.Labs && (
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							backgroundColour={brandBackground.primary}
+						>
+							<Header
+								edition={CAPI.editionId}
+								idUrl={CAPI.config.idUrl}
+								mmaUrl={CAPI.config.mmaUrl}
+							/>
+						</Section>
+					)}
 
 					<Section
 						showSideBorders={true}
