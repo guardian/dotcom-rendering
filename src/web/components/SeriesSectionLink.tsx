@@ -1,12 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Special } from '@guardian/types';
 import { Badge } from '@frontend/web/components/Badge';
 
 type Props = {
@@ -39,24 +39,13 @@ const marginBottom = css`
 	margin-bottom: 5px;
 `;
 
-const primaryStyle = css`
-	font-weight: 700;
-	${headline.xxxsmall({ fontWeight: 'bold' })};
-	${from.leftCol} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
-	}
+const marginRight = css`
 	${until.leftCol} {
 		margin-right: ${space[2]}px;
 	}
 `;
 
 const invertedStyle = css`
-	font-weight: 700;
-	${headline.xxxsmall({ fontWeight: 'bold' })};
-	${from.leftCol} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
-	}
-
 	/* Handle text wrapping onto a new line */
 	white-space: pre-wrap;
 	box-decoration-break: clone;
@@ -77,16 +66,38 @@ const invertedStyle = css`
 	}
 `;
 
-const fontStyles = css`
-	font-weight: 700;
-	${headline.xxxsmall({ fontWeight: 'bold' })};
-	${from.leftCol} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
+const fontStyles = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'bold' })}
+			line-height: 23px;
+			${from.leftCol} {
+				${textSans.large({ fontWeight: 'bold' })}
+				line-height: 20px;
+			}
+		`;
 	}
-`;
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${from.leftCol} {
+			${headline.xxsmall({ fontWeight: 'bold' })}
+		}
+	`;
+};
 
-const secondaryStyle = css`
-	${headline.xxxsmall({ fontWeight: 'regular' })};
+const secondaryFontStyles = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'regular' })}
+		`;
+	}
+	return css`
+		${headline.xxxsmall({ fontWeight: 'regular' })}
+		line-height: 20px;
+	`;
+};
+
+const displayBlock = css`
 	display: block;
 `;
 
@@ -143,8 +154,8 @@ export const SeriesSectionLink = ({
 									href={`${guardianBaseURL}/${tag.id}`}
 									className={cx(
 										sectionLabelLink,
-										primaryStyle,
-										fontStyles,
+										marginRight,
+										fontStyles(format),
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
@@ -168,8 +179,8 @@ export const SeriesSectionLink = ({
 										href={`${guardianBaseURL}/${sectionUrl}`}
 										className={cx(
 											sectionLabelLink,
-											secondaryStyle,
-											fontStyles,
+											fontStyles(format),
+											displayBlock,
 											css`
 												color: ${palette.text
 													.sectionTitle};
@@ -199,8 +210,8 @@ export const SeriesSectionLink = ({
 								href={`${guardianBaseURL}/${sectionUrl}`}
 								className={cx(
 									sectionLabelLink,
-									primaryStyle,
-									fontStyles,
+									marginRight,
+									fontStyles(format),
 									css`
 										color: ${palette.text.sectionTitle};
 										background-color: ${palette.background
@@ -242,6 +253,8 @@ export const SeriesSectionLink = ({
 								<a
 									className={cx(
 										sectionLabelLink,
+										fontStyles(format),
+										invertedStyle,
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
@@ -253,7 +266,6 @@ export const SeriesSectionLink = ({
 													${palette.background
 														.seriesTitle};
 										`,
-										invertedStyle,
 									)}
 									href={`${guardianBaseURL}/${tag.id}`}
 									data-component="series"
@@ -286,7 +298,8 @@ export const SeriesSectionLink = ({
 									background-color: ${palette.background
 										.seriesTitle};
 								`,
-								primaryStyle,
+								marginRight,
+								fontStyles(format),
 								css`
 									box-shadow: -6px 0 0 0
 											${palette.background.seriesTitle},
@@ -305,12 +318,13 @@ export const SeriesSectionLink = ({
 								href={`${guardianBaseURL}/${sectionUrl}`}
 								className={cx(
 									sectionLabelLink,
+									secondaryFontStyles(format),
+									displayBlock,
 									css`
 										color: ${palette.text.sectionTitle};
 										background-color: ${palette.background
 											.sectionTitle};
 									`,
-									secondaryStyle,
 								)}
 								data-component="section"
 								data-link-name="article section"
@@ -332,7 +346,8 @@ export const SeriesSectionLink = ({
 							background-color: ${palette.background
 								.sectionTitle};
 						`,
-						primaryStyle,
+						marginRight,
+						fontStyles(format),
 					)}
 					data-component="section"
 					data-link-name="article section"

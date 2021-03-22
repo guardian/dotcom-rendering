@@ -328,3 +328,32 @@ export const ArticleNoTags = () => {
 	);
 };
 ArticleNoTags.story = { name: 'Article with no tags' };
+
+export const LabsStory = () => {
+	return (
+		<Container>
+			<ArticleTitle
+				// eslint-disable-next-line react/jsx-props-no-spreading
+				{...CAPI}
+				format={{
+					display: Display.Standard,
+					theme: Special.Labs,
+					design: Design.Article,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					theme: Special.Labs,
+					design: Design.Article,
+				})}
+				tags={[
+					{
+						id: '',
+						title: 'Series title',
+						type: 'Series',
+					},
+				]}
+			/>
+		</Container>
+	);
+};
+LabsStory.story = { name: 'Labs' };
