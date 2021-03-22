@@ -246,8 +246,8 @@ export const SeriesSectionLink = ({
 								<a
 									className={cx(
 										sectionLabelLink,
-										invertedStyle,
 										fontStyles(format),
+										invertedStyle,
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
