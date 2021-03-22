@@ -196,6 +196,7 @@ export const ElementRenderer = ({
 							height={element.height}
 							width={element.width}
 							title={element.title}
+							source={element.source}
 						/>
 					</ClickToView>
 				</Figure>
