@@ -101,6 +101,10 @@ const displayBlock = css`
 	display: block;
 `;
 
+const breakWord = css`
+	word-break: break-word;
+`;
+
 const titleBadgeWrapper = css`
 	margin-bottom: ${space[1]}px;
 	margin-top: ${space[1]}px;
@@ -156,6 +160,7 @@ export const SeriesSectionLink = ({
 										sectionLabelLink,
 										marginRight,
 										fontStyles(format),
+										breakWord,
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
@@ -181,6 +186,7 @@ export const SeriesSectionLink = ({
 											sectionLabelLink,
 											fontStyles(format),
 											displayBlock,
+											breakWord,
 											css`
 												color: ${palette.text
 													.sectionTitle};
@@ -212,6 +218,7 @@ export const SeriesSectionLink = ({
 									sectionLabelLink,
 									marginRight,
 									fontStyles(format),
+									breakWord,
 									css`
 										color: ${palette.text.sectionTitle};
 										background-color: ${palette.background
@@ -255,6 +262,7 @@ export const SeriesSectionLink = ({
 										sectionLabelLink,
 										fontStyles(format),
 										invertedStyle,
+										breakWord,
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
@@ -300,6 +308,7 @@ export const SeriesSectionLink = ({
 								`,
 								marginRight,
 								fontStyles(format),
+								breakWord,
 								css`
 									box-shadow: -6px 0 0 0
 											${palette.background.seriesTitle},
@@ -320,6 +329,7 @@ export const SeriesSectionLink = ({
 									sectionLabelLink,
 									secondaryFontStyles(format),
 									displayBlock,
+									breakWord,
 									css`
 										color: ${palette.text.sectionTitle};
 										background-color: ${palette.background
@@ -348,6 +358,7 @@ export const SeriesSectionLink = ({
 						`,
 						marginRight,
 						fontStyles(format),
+						breakWord,
 					)}
 					data-component="section"
 					data-link-name="article section"
