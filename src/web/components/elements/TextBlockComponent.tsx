@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
-import { body } from '@guardian/src-foundations/typography';
+import { body, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
@@ -10,7 +10,7 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design, Format, Special } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
@@ -50,6 +50,22 @@ const decideDropCapLetter = (html: string): string => {
 	return isLetter(first) ? first : '';
 };
 
+const allowsDropCaps = (format: Format) => {
+	if (format.theme === Special.Labs) return false;
+	if (format.display === Display.Immersive) return true;
+	switch (format.design) {
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Review:
+		case Design.Interview:
+		case Design.PhotoEssay:
+		case Design.Recipe:
+			return true;
+		default:
+			return false;
+	}
+};
+
 const shouldShowDropCap = ({
 	format,
 	isFirstParagraph,
@@ -59,20 +75,7 @@ const shouldShowDropCap = ({
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 }): boolean => {
-	function allowsDropCaps(design: Design) {
-		switch (design) {
-			case Design.Feature:
-			case Design.Comment:
-			case Design.Review:
-			case Design.Interview:
-			case Design.PhotoEssay:
-			case Design.Recipe:
-				return true;
-			default:
-				return false;
-		}
-	}
-	if (allowsDropCaps(format.design) || format.display === Display.Immersive) {
+	if (allowsDropCaps(format)) {
 		// When dropcaps are allowed, we always mark the first paragraph as a drop cap
 		if (isFirstParagraph) return true;
 		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
@@ -102,7 +105,7 @@ const sanitiserOptions = {
 
 const paraStyles = (format: Format) => css`
 	margin-bottom: 16px;
-	${body.medium()};
+	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
 
 	ul {
 		margin-bottom: 12px;

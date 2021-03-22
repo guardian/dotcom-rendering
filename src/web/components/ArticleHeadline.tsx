@@ -4,10 +4,10 @@ import { css, cx } from 'emotion';
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design, Format, Special } from '@guardian/types';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
@@ -28,6 +28,15 @@ const standardFont = css`
 	}
 `;
 
+const labsFont = css`
+	${textSans.xlarge()};
+	line-height: 32px;
+	${from.tablet} {
+		${textSans.xxxlarge()};
+		line-height: 38px;
+	}
+`;
+
 const boldFont = css`
 	${headline.medium({ fontWeight: 'bold' })};
 	${until.tablet} {
@@ -40,6 +49,17 @@ const jumboFont = css`
 	line-height: 56px;
 	${until.desktop} {
 		${headline.medium({ fontWeight: 'bold' })};
+	}
+`;
+
+const jumboLabsFont = css`
+	${textSans.xxxlarge({ fontWeight: 'bold' })};
+	font-size: 50px;
+	line-height: 56px;
+	${until.desktop} {
+		${textSans.xxlarge({ fontWeight: 'bold' })};
+		font-size: 34px;
+		line-height: 38px;
 	}
 `;
 
@@ -249,7 +269,9 @@ export const ArticleHeadline = ({
 						>
 							<span
 								className={cx(
-									jumboFont,
+									format.theme === Special.Labs
+										? jumboLabsFont
+										: jumboFont,
 									maxWidth,
 									invertedStyles(palette),
 									immersiveStyles,
@@ -362,7 +384,9 @@ export const ArticleHeadline = ({
 					return (
 						<h1
 							className={cx(
-								standardFont,
+								format.theme === Special.Labs
+									? labsFont
+									: standardFont,
 								css`
 									color: ${palette.text.headline};
 								`,
