@@ -1,12 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Special } from '@guardian/types';
 import { Badge } from '@frontend/web/components/Badge';
 
 type Props = {
@@ -66,15 +66,24 @@ const invertedStyle = css`
 	}
 `;
 
-const fontStyles = css`
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+const fontStyles = (format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.medium({ fontWeight: 'bold' })
+		: headline.xxxsmall({ fontWeight: 'bold' })}
+	line-height: 23px;
 	${from.leftCol} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
+		${format.theme === Special.Labs
+			? textSans.large({ fontWeight: 'bold' })
+			: headline.xxsmall({ fontWeight: 'bold' })}
+		line-height: 20px;
 	}
 `;
 
-const secondaryFontStyles = css`
-	${headline.xxxsmall({ fontWeight: 'regular' })};
+const secondaryFontStyles = (format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.medium({ fontWeight: 'regular' })
+		: headline.xxxsmall({ fontWeight: 'regular' })}
+	line-height: 20px;
 `;
 
 const displayBlock = css`
@@ -135,7 +144,7 @@ export const SeriesSectionLink = ({
 									className={cx(
 										sectionLabelLink,
 										marginRight,
-										fontStyles,
+										fontStyles(format),
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
@@ -159,7 +168,7 @@ export const SeriesSectionLink = ({
 										href={`${guardianBaseURL}/${sectionUrl}`}
 										className={cx(
 											sectionLabelLink,
-											fontStyles,
+											fontStyles(format),
 											displayBlock,
 											css`
 												color: ${palette.text
@@ -191,7 +200,7 @@ export const SeriesSectionLink = ({
 								className={cx(
 									sectionLabelLink,
 									marginRight,
-									fontStyles,
+									fontStyles(format),
 									css`
 										color: ${palette.text.sectionTitle};
 										background-color: ${palette.background
@@ -234,7 +243,7 @@ export const SeriesSectionLink = ({
 									className={cx(
 										sectionLabelLink,
 										invertedStyle,
-										fontStyles,
+										fontStyles(format),
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
@@ -279,7 +288,7 @@ export const SeriesSectionLink = ({
 										.seriesTitle};
 								`,
 								marginRight,
-								fontStyles,
+								fontStyles(format),
 								css`
 									box-shadow: -6px 0 0 0
 											${palette.background.seriesTitle},
@@ -298,7 +307,7 @@ export const SeriesSectionLink = ({
 								href={`${guardianBaseURL}/${sectionUrl}`}
 								className={cx(
 									sectionLabelLink,
-									secondaryFontStyles,
+									secondaryFontStyles(format),
 									displayBlock,
 									css`
 										color: ${palette.text.sectionTitle};
@@ -327,7 +336,7 @@ export const SeriesSectionLink = ({
 								.sectionTitle};
 						`,
 						marginRight,
-						fontStyles,
+						fontStyles(format),
 					)}
 					data-component="section"
 					data-link-name="article section"
