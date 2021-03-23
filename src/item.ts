@@ -103,13 +103,7 @@ interface Standard extends Fields {
 	body: Body;
 }
 
-type Item =
-	| Liveblog
-	| Review
-	| Comment
-	| Standard
-	| Interactive
-	| MatchReport;
+type Item = Liveblog | Review | Comment | Standard | Interactive | MatchReport;
 
 // ----- Convenience Types ----- //
 
