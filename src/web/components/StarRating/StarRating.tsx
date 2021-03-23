@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Star } from '@frontend/static/icons/Star';
-import { neutral } from '@guardian/src-foundations/palette';
 
 // https://docs.google.com/spreadsheets/d/1QUa5Kh734J4saFc8ERjCYHZu10_-Hj7llNa2rr8urNg/edit?usp=sharing
 // A list style variations for each breakpoint
@@ -12,11 +11,6 @@ const starWrapper = css`
 `;
 
 type SizeType = 'large' | 'medium' | 'small';
-
-const emptyStar = css`
-	fill: transparent;
-	stroke: ${neutral[7]};
-`;
 
 const determineSize = (size: SizeType) => {
 	switch (size) {
