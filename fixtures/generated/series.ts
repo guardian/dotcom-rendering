@@ -20,243 +20,293 @@ export const series = {
 	trails: [
 		{
 			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/07/chris-packhams-animal-einsteins-review-a-balm-for-frayed-minds',
+				'https://www.theguardian.com/tv-and-radio/2021/mar/22/footballs-darkest-secret-review-spare-and-unrelenting',
 			linkText:
-				"Chris Packham's Animal Einsteins review – a balm for frayed minds",
-			showByline: false,
-			byline: 'Chitra Ramaswamy',
-			image:
-				'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=77976aa8cf98f7db6a039405c2442a52',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=77976aa8cf98f7db6a039405c2442a52',
-				'460':
-					'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=460&quality=85&auto=format&fit=max&s=85bf601a5274ab7574a7438f6f95c447',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-07T21:00:12.000Z',
-			headline:
-				"Chris Packham's Animal Einsteins review – a balm for frayed minds",
-			shortUrl: 'https://www.theguardian.com/p/gj6v2',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/04/luxury-holidays-how-to-get-away-this-year-review-what-sort-of-masochist-would-watch-this',
-			linkText:
-				'Luxury Holidays: How To Get Away This Year review – what sort of masochist would watch this?',
-			showByline: false,
-			byline: 'Stuart Heritage',
-			image:
-				'https://i.guim.co.uk/img/media/9463811a563441478360aced92c16a5a4f5eebf4/88_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=b86f1758d624b2ee18a858c4fdebbc9e',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/9463811a563441478360aced92c16a5a4f5eebf4/88_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=b86f1758d624b2ee18a858c4fdebbc9e',
-				'460':
-					'https://i.guim.co.uk/img/media/9463811a563441478360aced92c16a5a4f5eebf4/88_0_3971_2384/master/3971.jpg?width=460&quality=85&auto=format&fit=max&s=258c252bf3adf062f659665ef67fb3ca',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-04T21:00:15.000Z',
-			headline:
-				'Luxury Holidays: How To Get Away This Year review – what sort of masochist would watch this?',
-			shortUrl: 'https://www.theguardian.com/p/gj6xa',
-			starRating: 1,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/04/the-terror-review-an-icy-chiller-with-echoes-of-our-present',
-			linkText:
-				'The Terror review – an icy chiller with echoes of our present',
+				"Football's Darkest Secret review – spare and unrelenting",
 			showByline: false,
 			byline: 'Lucy Mangan',
 			image:
-				'https://i.guim.co.uk/img/media/93db2931499f18919c426759440a81e607299615/0_286_4285_2571/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=bd491a2766251f1e6fc63143187092f4',
+				'https://i.guim.co.uk/img/media/4969fb8962d76157d7f0f1b0973d54df53da77a8/0_0_3828_2298/master/3828.jpg?width=300&quality=85&auto=format&fit=max&s=6f848d276decaabc2d29a31ce8d08501',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/media/93db2931499f18919c426759440a81e607299615/0_286_4285_2571/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=bd491a2766251f1e6fc63143187092f4',
+					'https://i.guim.co.uk/img/media/4969fb8962d76157d7f0f1b0973d54df53da77a8/0_0_3828_2298/master/3828.jpg?width=300&quality=85&auto=format&fit=max&s=6f848d276decaabc2d29a31ce8d08501',
 				'460':
-					'https://i.guim.co.uk/img/media/93db2931499f18919c426759440a81e607299615/0_286_4285_2571/master/4285.jpg?width=460&quality=85&auto=format&fit=max&s=418fea1a914dafc19d833e1bff917d9f',
+					'https://i.guim.co.uk/img/media/4969fb8962d76157d7f0f1b0973d54df53da77a8/0_0_3828_2298/master/3828.jpg?width=460&quality=85&auto=format&fit=max&s=2e830fbb951788f933241c6f436670f4',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Review',
-			webPublicationDate: '2021-03-04T13:30:02.000Z',
-			headline:
-				'The Terror review – an icy chiller with echoes of our present',
-			shortUrl: 'https://www.theguardian.com/p/gj4jk',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/03/the-pandemic-at-no-47-review-paddy-wivell',
-			linkText:
-				'The Pandemic at No 47 review – who lives in a street like this? ',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/d99b75a4a57687eb54cedaa632394a9e64d6d04c/0_428_3803_2284/master/3803.jpg?width=300&quality=85&auto=format&fit=max&s=84c076b1000b148be8ad22ae32840044',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/d99b75a4a57687eb54cedaa632394a9e64d6d04c/0_428_3803_2284/master/3803.jpg?width=300&quality=85&auto=format&fit=max&s=84c076b1000b148be8ad22ae32840044',
-				'460':
-					'https://i.guim.co.uk/img/media/d99b75a4a57687eb54cedaa632394a9e64d6d04c/0_428_3803_2284/master/3803.jpg?width=460&quality=85&auto=format&fit=max&s=1a0e33de3a85cb2571710b0041aa0df4',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
 			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-03T23:00:29.000Z',
+			webPublicationDate: '2021-03-22T22:00:43.000Z',
 			headline:
-				'The Pandemic at No 47 review – who lives in a street like this? ',
-			shortUrl: 'https://www.theguardian.com/p/gthng',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/02/your-honor-review-perfectly-fine-if-you-can-forget-about-breaking-bad',
-			linkText:
-				'Your Honor review: perfectly fine – if you can forget about Breaking Bad',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/b2e00066c133556bf09e196e8d356871fc154fd5/451_1155_5446_3268/master/5446.jpg?width=300&quality=85&auto=format&fit=max&s=2322358cbadbcf2d9f5058381b74a654',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/b2e00066c133556bf09e196e8d356871fc154fd5/451_1155_5446_3268/master/5446.jpg?width=300&quality=85&auto=format&fit=max&s=2322358cbadbcf2d9f5058381b74a654',
-				'460':
-					'https://i.guim.co.uk/img/media/b2e00066c133556bf09e196e8d356871fc154fd5/451_1155_5446_3268/master/5446.jpg?width=460&quality=85&auto=format&fit=max&s=1677b081d8471cd6b944e99d4e5cb8e4',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-02T22:10:04.000Z',
-			headline:
-				'Your Honor review: perfectly fine – if you can forget about Breaking Bad',
-			shortUrl: 'https://www.theguardian.com/p/gtfyh',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/01/max-clifford-the-fall-of-a-tabloid-king-review-scandal-at-the-heart-of-fleet-street',
-			linkText:
-				'Max Clifford: The Fall of a Tabloid King review – scandal at the heart of Fleet Street',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/9d3a0e208a5ac017e7b324f13d6cfe85b16deb3c/0_216_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=e12438b30bc4cbccf22a2de4a87b9080',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/9d3a0e208a5ac017e7b324f13d6cfe85b16deb3c/0_216_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=e12438b30bc4cbccf22a2de4a87b9080',
-				'460':
-					'https://i.guim.co.uk/img/media/9d3a0e208a5ac017e7b324f13d6cfe85b16deb3c/0_216_3355_2014/master/3355.jpg?width=460&quality=85&auto=format&fit=max&s=49459053ee3bd786eb7a9db2b06c3b94',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-01T22:35:31.000Z',
-			headline:
-				'Max Clifford: The Fall of a Tabloid King review – scandal at the heart of Fleet Street',
-			shortUrl: 'https://www.theguardian.com/p/gt7tq',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/28/mcdonald-dodds-series-two-review-far-from-dark-and-all-the-better-for-it',
-			linkText:
-				'McDonald & Dodds series two review: far from dark – and all the better for it',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			image:
-				'https://i.guim.co.uk/img/media/0909aacb0d056bbfc0d3826d7dc52af6afc3667b/0_127_5651_3390/master/5651.jpg?width=300&quality=85&auto=format&fit=max&s=5d2b1f54e59a9dece3f88af18707a397',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/0909aacb0d056bbfc0d3826d7dc52af6afc3667b/0_127_5651_3390/master/5651.jpg?width=300&quality=85&auto=format&fit=max&s=5d2b1f54e59a9dece3f88af18707a397',
-				'460':
-					'https://i.guim.co.uk/img/media/0909aacb0d056bbfc0d3826d7dc52af6afc3667b/0_127_5651_3390/master/5651.jpg?width=460&quality=85&auto=format&fit=max&s=90a0383064fc0e038aff60875112d101',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-02-28T22:00:05.000Z',
-			headline:
-				'McDonald & Dodds series two review: far from dark – and all the better for it',
-			shortUrl: 'https://www.theguardian.com/p/ghb2j',
-			starRating: 4,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/26/graysons-art-club-review-pandemic-version-take-hart-celebrities',
-			linkText:
-				"Grayson's Art Club review – a heartening, lockdown-era tonic",
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/64a223ff900b3a691682d1c6a0be23694476804a/0_94_4000_2401/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=838fca8c1354294e8e6acbff0f73982a',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/64a223ff900b3a691682d1c6a0be23694476804a/0_94_4000_2401/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=838fca8c1354294e8e6acbff0f73982a',
-				'460':
-					'https://i.guim.co.uk/img/media/64a223ff900b3a691682d1c6a0be23694476804a/0_94_4000_2401/master/4000.jpg?width=460&quality=85&auto=format&fit=max&s=e9ff8567fb22ccd481c3e1ab7ce01dbe',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-02-26T21:00:05.000Z',
-			headline:
-				"Grayson's Art Club review – a heartening, lockdown-era tonic",
-			shortUrl: 'https://www.theguardian.com/p/ghbbd',
+				"Football's Darkest Secret review – spare and unrelenting",
+			shortUrl: 'https://www.theguardian.com/p/gzank',
 			starRating: 5,
 		},
 		{
 			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/25/stand-up-deliver-review-will-shaun-ryder-tickle-your-funny-bone',
+				'https://www.theguardian.com/tv-and-radio/2021/mar/21/line-of-duty-review-the-bent-copper-bashers-bbc',
 			linkText:
-				'Stand Up & Deliver review – will Shaun Ryder tickle your funny bone?',
+				'Line of Duty review – bent-copper bashers prepare to suck diesel',
 			showByline: false,
-			byline: 'Rebecca Nicholson',
+			byline: 'Lucy Mangan',
 			image:
-				'https://i.guim.co.uk/img/media/de6745bb9d80150a8996fae583fd92ec566a4dd3/107_409_2222_1333/master/2222.jpg?width=300&quality=85&auto=format&fit=max&s=b2c8855b7b3a3e94a6caad1f85469086',
+				'https://i.guim.co.uk/img/media/14e78645984896c29199e7589d69f7dd490f494b/0_177_4096_2458/master/4096.jpg?width=300&quality=85&auto=format&fit=max&s=4c065696cb52c22ca878fc0d9418d99f',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/media/de6745bb9d80150a8996fae583fd92ec566a4dd3/107_409_2222_1333/master/2222.jpg?width=300&quality=85&auto=format&fit=max&s=b2c8855b7b3a3e94a6caad1f85469086',
+					'https://i.guim.co.uk/img/media/14e78645984896c29199e7589d69f7dd490f494b/0_177_4096_2458/master/4096.jpg?width=300&quality=85&auto=format&fit=max&s=4c065696cb52c22ca878fc0d9418d99f',
 				'460':
-					'https://i.guim.co.uk/img/media/de6745bb9d80150a8996fae583fd92ec566a4dd3/107_409_2222_1333/master/2222.jpg?width=460&quality=85&auto=format&fit=max&s=b9373627f05d22b6fda111e132322ec7',
+					'https://i.guim.co.uk/img/media/14e78645984896c29199e7589d69f7dd490f494b/0_177_4096_2458/master/4096.jpg?width=460&quality=85&auto=format&fit=max&s=cf6d8b2ac492b23c925b0b688f69a380',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Review',
-			webPublicationDate: '2021-02-25T22:05:38.000Z',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-21T22:00:06.000Z',
 			headline:
-				'Stand Up & Deliver review – will Shaun Ryder tickle your funny bone?',
-			shortUrl: 'https://www.theguardian.com/p/gh2qk',
+				'Line of Duty review – bent-copper bashers prepare to suck diesel',
+			shortUrl: 'https://www.theguardian.com/p/gneag',
 			starRating: 4,
 		},
 		{
 			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/24/ginny-and-georgia-review-perfect-trash-netflix',
+				'https://www.theguardian.com/tv-and-radio/2021/mar/19/the-flight-attendant-review-kaley-cuoco',
 			linkText:
-				'Ginny & Georgia review – such perfect trash deserves a special award',
+				'The Flight Attendant review – strap in for a first-class murder mystery',
 			showByline: false,
 			byline: 'Lucy Mangan',
 			image:
-				'https://i.guim.co.uk/img/media/9d9684be35e696c3b8594096eb5e09cc8a0a6e82/109_0_3375_2025/master/3375.jpg?width=300&quality=85&auto=format&fit=max&s=cd90b0e88709713fd764d7ae5e35459a',
+				'https://i.guim.co.uk/img/media/89dff67d7776102d610b4c95e3146cddb577298d/0_0_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=aeed04b5b0f173b787eb43c1de3a1401',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/media/9d9684be35e696c3b8594096eb5e09cc8a0a6e82/109_0_3375_2025/master/3375.jpg?width=300&quality=85&auto=format&fit=max&s=cd90b0e88709713fd764d7ae5e35459a',
+					'https://i.guim.co.uk/img/media/89dff67d7776102d610b4c95e3146cddb577298d/0_0_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=aeed04b5b0f173b787eb43c1de3a1401',
 				'460':
-					'https://i.guim.co.uk/img/media/9d9684be35e696c3b8594096eb5e09cc8a0a6e82/109_0_3375_2025/master/3375.jpg?width=460&quality=85&auto=format&fit=max&s=be5a5d8c8744000937c85c1d2ebc485b',
+					'https://i.guim.co.uk/img/media/89dff67d7776102d610b4c95e3146cddb577298d/0_0_6240_3744/master/6240.jpg?width=460&quality=85&auto=format&fit=max&s=a49441dc5c6390f7acdbf9d680393edb',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Review',
-			webPublicationDate: '2021-02-24T14:00:19.000Z',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-19T22:00:08.000Z',
 			headline:
-				'Ginny & Georgia review – such perfect trash deserves a special award',
-			shortUrl: 'https://www.theguardian.com/p/ggyqg',
+				'The Flight Attendant review – strap in for a first-class murder mystery',
+			shortUrl: 'https://www.theguardian.com/p/gne76',
+			starRating: 5,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/19/sky-rojo-review-spanish-trafficking-drama-revels-in-trashy-glamour',
+			linkText:
+				'Sky Rojo review – Spanish trafficking drama revels in trashy glamour',
+			showByline: false,
+			byline: 'Ellen E Jones',
+			image:
+				'https://i.guim.co.uk/img/media/56c6b0e8c64af5e0ce962823b69b52e3013fe4fd/0_345_7268_4363/master/7268.jpg?width=300&quality=85&auto=format&fit=max&s=dcb14d0a0e179794fb1a645dea6bda34',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/56c6b0e8c64af5e0ce962823b69b52e3013fe4fd/0_345_7268_4363/master/7268.jpg?width=300&quality=85&auto=format&fit=max&s=dcb14d0a0e179794fb1a645dea6bda34',
+				'460':
+					'https://i.guim.co.uk/img/media/56c6b0e8c64af5e0ce962823b69b52e3013fe4fd/0_345_7268_4363/master/7268.jpg?width=460&quality=85&auto=format&fit=max&s=dab1c7ee880072c4f492aff2978fe90f',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-19T09:00:03.000Z',
+			headline:
+				'Sky Rojo review – Spanish trafficking drama revels in trashy glamour',
+			shortUrl: 'https://www.theguardian.com/p/gnx7h',
+			starRating: 4,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/18/the-falcon-and-the-winter-soldier-review-marvel-disney-plus-avengers',
+			linkText:
+				"The Falcon and the Winter Soldier review – sturdy start to Marvel's latest",
+			showByline: false,
+			byline: 'Benjamin Lee',
+			image:
+				'https://i.guim.co.uk/img/media/40d0ed44e1db42043e7357b72edca6a5e970eb54/0_12_4096_2459/master/4096.jpg?width=300&quality=85&auto=format&fit=max&s=5dd08566ba93c5d339a7f7a742851904',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/40d0ed44e1db42043e7357b72edca6a5e970eb54/0_12_4096_2459/master/4096.jpg?width=300&quality=85&auto=format&fit=max&s=5dd08566ba93c5d339a7f7a742851904',
+				'460':
+					'https://i.guim.co.uk/img/media/40d0ed44e1db42043e7357b72edca6a5e970eb54/0_12_4096_2459/master/4096.jpg?width=460&quality=85&auto=format&fit=max&s=5ac87414b413f8c547cbceeb97dbc3cf',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-18T16:02:50.000Z',
+			headline:
+				"The Falcon and the Winter Soldier review – sturdy start to Marvel's latest",
+			shortUrl: 'https://www.theguardian.com/p/gnvx7',
 			starRating: 3,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/17/caroline-flack-her-life-and-death-review-a-compassionate-eulogy-suffused-with-pain',
+			linkText:
+				'Caroline Flack: Her Life and Death review – a compassionate eulogy suffused with pain',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image:
+				'https://i.guim.co.uk/img/media/0618a00e60d94514d86aa8bacc3f498827078ec4/147_109_899_539/master/899.jpg?width=300&quality=85&auto=format&fit=max&s=9cb14ca383df2ff7bc0cf3603f28f979',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/0618a00e60d94514d86aa8bacc3f498827078ec4/147_109_899_539/master/899.jpg?width=300&quality=85&auto=format&fit=max&s=9cb14ca383df2ff7bc0cf3603f28f979',
+				'460':
+					'https://i.guim.co.uk/img/media/0618a00e60d94514d86aa8bacc3f498827078ec4/147_109_899_539/master/899.jpg?width=460&quality=85&auto=format&fit=max&s=92892d17a37644d660a01c4cff78afaa',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-17T22:00:12.000Z',
+			headline:
+				'Caroline Flack: Her Life and Death review – a compassionate eulogy suffused with pain',
+			shortUrl: 'https://www.theguardian.com/p/gmtqh',
+			starRating: 4,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/17/genius-aretha-franklin-review-clunky-franklin-biopic-needs-more-respect',
+			linkText:
+				'Genius: Aretha review – clunky Franklin biopic needs more respect',
+			showByline: false,
+			byline: 'Beatrice Loayza',
+			image:
+				'https://i.guim.co.uk/img/media/75a5ef54c93385d77cf73885afac1e6cc5fb6b40/0_86_6000_3602/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=ffd8a1656e8cd9312004fecb6561f502',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/75a5ef54c93385d77cf73885afac1e6cc5fb6b40/0_86_6000_3602/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=ffd8a1656e8cd9312004fecb6561f502',
+				'460':
+					'https://i.guim.co.uk/img/media/75a5ef54c93385d77cf73885afac1e6cc5fb6b40/0_86_6000_3602/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=5bbfcaed478dc2ac568ce33d4c543fc2',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-17T13:30:55.000Z',
+			headline:
+				'Genius: Aretha review – clunky Franklin biopic needs more respect',
+			shortUrl: 'https://www.theguardian.com/p/gmqph',
+			starRating: 2,
+		},
+		{
+			url:
+				'https://www.theguardian.com/music/2021/mar/17/demi-lovato-dancing-with-the-devil-review-a-pop-music-doc-of-shattering-candour',
+			linkText:
+				'Demi Lovato: Dancing With the Devil review – a pop music doc of shattering candour',
+			showByline: false,
+			byline: 'Alim Kheraj',
+			image:
+				'https://i.guim.co.uk/img/media/00d834829f8e7bd6d187d508109a880a31131f70/0_955_4480_2685/master/4480.jpg?width=300&quality=85&auto=format&fit=max&s=4f0b292e0d1978841d57d7b71fa3c20e',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/00d834829f8e7bd6d187d508109a880a31131f70/0_955_4480_2685/master/4480.jpg?width=300&quality=85&auto=format&fit=max&s=4f0b292e0d1978841d57d7b71fa3c20e',
+				'460':
+					'https://i.guim.co.uk/img/media/00d834829f8e7bd6d187d508109a880a31131f70/0_955_4480_2685/master/4480.jpg?width=460&quality=85&auto=format&fit=max&s=fa496418bd5b8a6352f9f5871f47b12c',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-17T06:30:09.000Z',
+			headline:
+				'Demi Lovato: Dancing With the Devil review – a pop music doc of shattering candour',
+			shortUrl: 'https://www.theguardian.com/p/gmtv4',
+			starRating: 4,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/16/waffles-plus-mochi-review-michelle-obama-netflix',
+			linkText:
+				"Waffles + Mochi review – Michelle Obama's charming puppet series",
+			showByline: false,
+			byline: 'Adrian Horton',
+			image:
+				'https://i.guim.co.uk/img/media/cfbe12705fe3a283639f88dd57c2d1240e9f52af/0_135_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=b25d9176321bf80bbaf9552564fde63d',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/cfbe12705fe3a283639f88dd57c2d1240e9f52af/0_135_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=b25d9176321bf80bbaf9552564fde63d',
+				'460':
+					'https://i.guim.co.uk/img/media/cfbe12705fe3a283639f88dd57c2d1240e9f52af/0_135_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=2955e08226d05dfbe5cdb207939f888b',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-16T07:02:16.000Z',
+			headline:
+				"Waffles + Mochi review – Michelle Obama's charming puppet series",
+			shortUrl: 'https://www.theguardian.com/p/gmdpc',
+			starRating: 4,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/14/grace-review-a-twisty-race-against-time-for-john-simms-fading-detective',
+			linkText:
+				"Grace review – a twisty race against time for John Simm's fading detective",
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image:
+				'https://i.guim.co.uk/img/media/2e6bb08d6c5948dc8c7ac1e39fd500eff63d96bc/0_173_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=b5d20b54fdd3197e59026e67676dc74d',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/2e6bb08d6c5948dc8c7ac1e39fd500eff63d96bc/0_173_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=b5d20b54fdd3197e59026e67676dc74d',
+				'460':
+					'https://i.guim.co.uk/img/media/2e6bb08d6c5948dc8c7ac1e39fd500eff63d96bc/0_173_8256_4954/master/8256.jpg?width=460&quality=85&auto=format&fit=max&s=a281e5ec6106014d57ff415b0c12d4f6',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-14T22:00:43.000Z',
+			headline:
+				"Grace review – a twisty race against time for John Simm's fading detective",
+			shortUrl: 'https://www.theguardian.com/p/gyehz',
+			starRating: 4,
 		},
 	],
 };

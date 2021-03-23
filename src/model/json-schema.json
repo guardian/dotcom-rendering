@@ -217,6 +217,12 @@
                 "theme"
             ]
         },
+        "designType": {
+            "type": "string"
+        },
+        "pillar": {
+            "$ref": "#/definitions/LegacyPillar"
+        },
         "isImmersive": {
             "type": "boolean"
         },
@@ -373,6 +379,7 @@
         "config",
         "contentType",
         "contributionsServiceUrl",
+        "designType",
         "editionId",
         "editionLongForm",
         "format",
@@ -393,6 +400,7 @@
         "pageFooter",
         "pageId",
         "pageType",
+        "pillar",
         "publication",
         "sectionLabel",
         "sectionUrl",
@@ -3392,6 +3400,17 @@
             ],
             "type": "string"
         },
+        "LegacyPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
+        },
         "SimpleLinkType": {
             "type": "object",
             "properties": {
@@ -3546,67 +3565,469 @@
                 "isLive": {
                     "type": "boolean"
                 },
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "hasYouTubeAtom": {
+                    "type": "boolean"
+                },
+                "inBodyInternalLinkCount": {
+                    "type": "number"
+                },
+                "atomTypes": {
+                    "type": "object",
+                    "properties": {
+                        "guide": {
+                            "type": "boolean"
+                        },
+                        "audio": {
+                            "type": "boolean"
+                        },
+                        "explainer": {
+                            "type": "boolean"
+                        },
+                        "profile": {
+                            "type": "boolean"
+                        },
+                        "chart": {
+                            "type": "boolean"
+                        },
+                        "timeline": {
+                            "type": "boolean"
+                        },
+                        "qanda": {
+                            "type": "boolean"
+                        },
+                        "commonsdivision": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "audio",
+                        "chart",
+                        "commonsdivision",
+                        "explainer",
+                        "guide",
+                        "profile",
+                        "qanda",
+                        "timeline"
+                    ]
+                },
+                "blogIds": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "campaigns": {
+                    "type": "array",
+                    "items": {}
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "hasMultipleVideosInPage": {
+                    "type": "boolean"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "pbIndexSites": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "bp": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "bp",
+                            "id"
+                        ]
+                    }
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "contributorBio": {
+                    "type": "string"
+                },
+                "pageCode": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "hasShowcaseMainElement": {
+                    "type": "boolean"
+                },
+                "isColumn": {
+                    "type": "boolean"
+                },
+                "sectionName": {
+                    "type": "string"
+                },
+                "sponsorshipType": {
+                    "type": "string"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "commentable": {
+                    "type": "boolean"
+                },
+                "commissioningDesks": {
+                    "type": "string"
+                },
+                "inBodyExternalLinkCount": {
+                    "type": "number"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                },
+                "richLink": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "trackingNames": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "string"
+                },
+                "blogs": {
+                    "type": "string"
+                },
+                "hasInlineMerchandise": {
+                    "type": "boolean"
+                },
+                "seriesId": {
+                    "type": "string"
+                },
+                "seriesTags": {
+                    "type": "string"
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "ampIframeUrl": {
+                    "type": "string"
+                },
+                "userAttributesApiUrl": {
+                    "type": "string"
+                },
+                "publication": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "isFront": {
+                    "type": "boolean"
+                },
+                "wordCount": {
+                    "type": "number"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "nonKeywordTagIds": {
+                    "type": "string"
+                },
                 "pageId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "lightboxImages": {},
+                "isImmersive": {
+                    "type": "boolean"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "isContent": {
+                    "type": "boolean"
+                },
+                "contentId": {
+                    "type": "string"
+                },
+                "discussionFrontendUrl": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "atoms": {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                "disableStickyTopBanner": {
+                    "type": "boolean"
+                },
+                "productionOffice": {
+                    "type": "string"
+                },
+                "dfpNonRefreshableLineItemIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "tones": {
+                    "type": "string"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "authorIds": {
                     "type": "string"
                 },
                 "webPublicationDate": {
                     "type": "number"
                 },
-                "headline": {
+                "omnitureAmpAccount": {
                     "type": "string"
                 },
-                "author": {
+                "isHosted": {
+                    "type": "boolean"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "webTitle": {
                     "type": "string"
                 },
-                "keywords": {
+                "weatherapiurl": {
                     "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "isSplash": {
+                    "type": "boolean"
+                },
+                "isNumberedList": {
+                    "type": "boolean"
                 },
                 "series": {
                     "type": "string"
                 },
                 "toneIds": {
                     "type": "string"
-                },
-                "contentType": {
-                    "type": "string"
-                },
-                "ampIframeUrl": {
-                    "type": "string"
                 }
             },
             "required": [
+                "a9PublisherId",
                 "abTests",
                 "adUnit",
                 "ajaxUrl",
+                "allowUserGeneratedContent",
                 "ampIframeUrl",
+                "assetsPath",
+                "author",
+                "authorIds",
+                "avatarApiUrl",
+                "avatarImagesUrl",
+                "beaconUrl",
+                "blogIds",
+                "blogs",
+                "buildNumber",
+                "byline",
+                "calloutsUrl",
+                "campaigns",
+                "cardStyle",
+                "commentable",
                 "commercialBundleUrl",
+                "commissioningDesks",
+                "contentId",
                 "contentType",
+                "contributorBio",
                 "dcrSentryDsn",
                 "dfpAccountId",
+                "dfpAdUnitRoot",
+                "dfpHost",
+                "dfpNonRefreshableLineItemIds",
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",
+                "discussionFrontendUrl",
                 "edition",
+                "externalEmbedHost",
+                "facebookIaAdUnitRoot",
+                "fbAppId",
+                "forecastsapiurl",
                 "frontendAssetsFullURL",
+                "googleSearchId",
+                "googleSearchUrl",
+                "googletagJsUrl",
                 "googletagUrl",
+                "hasInlineMerchandise",
+                "hasMultipleVideosInPage",
+                "hasPageSkin",
+                "hasShowcaseMainElement",
+                "hasYouTubeAtom",
                 "hbImpl",
+                "headline",
                 "idApiUrl",
+                "idOAuthUrl",
+                "idWebAppUrl",
+                "inBodyExternalLinkCount",
+                "inBodyInternalLinkCount",
+                "isColumn",
+                "isContent",
+                "isFront",
+                "isHosted",
+                "isImmersive",
                 "isLive",
                 "isLiveBlog",
+                "isNumberedList",
                 "isPhotoEssay",
+                "isPreview",
+                "isProd",
                 "isSensitive",
+                "isSplash",
                 "keywordIds",
+                "keywords",
+                "lightboxImages",
+                "locationapiurl",
+                "membershipAccess",
+                "membershipUrl",
+                "mobileAppsAdUnitRoot",
+                "nonKeywordTagIds",
+                "omnitureAccount",
+                "omnitureAmpAccount",
+                "onwardWebSocket",
+                "ophanEmbedJsUrl",
+                "ophanJsUrl",
+                "optimizeEpicUrl",
+                "pageCode",
                 "pageId",
+                "pbIndexSites",
+                "pillar",
+                "plistaPublicApiKey",
+                "productionOffice",
+                "publication",
+                "requiresMembershipAccess",
                 "revisionNumber",
+                "richLink",
                 "section",
+                "sectionName",
                 "sentryHost",
                 "sentryPublicApiKey",
                 "sharedAdTargeting",
+                "shortUrl",
                 "shortUrlId",
+                "shouldHideAdverts",
                 "showRelatedContent",
                 "stage",
+                "stripePublicToken",
+                "supportUrl",
                 "switches",
-                "videoDuration"
+                "thirdPartyAppsAccount",
+                "thumbnail",
+                "tones",
+                "trackingNames",
+                "userAttributesApiUrl",
+                "videoDuration",
+                "weatherapiurl",
+                "webPublicationDate",
+                "webTitle",
+                "wordCount"
             ]
         },
         "CommercialProperties": {
@@ -3870,7 +4291,7 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/CAPIPillar"
+                    "$ref": "#/definitions/LegacyPillar"
                 },
                 "more": {
                     "type": "boolean"
@@ -3886,17 +4307,6 @@
                 "title",
                 "url"
             ]
-        },
-        "CAPIPillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
         },
         "ReaderRevenuePositions": {
             "type": "object",

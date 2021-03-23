@@ -131,9 +131,6 @@ try {
 					...json.config.switches,
 					...switchOverrides,
 				};
-				// TODO: Remove these hacks when we add in support for CAPI format to DCR
-				if (json.format.theme === 'Labs') json.pillar = 'labs';
-				delete json.format;
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name

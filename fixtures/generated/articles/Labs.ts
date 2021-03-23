@@ -317,7 +317,7 @@ export const Labs: CAPIType = {
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Tue 16 Mar 2021 13.05 GMT',
+		'Last modified on Thu 18 Mar 2021 10.50 GMT',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	publication: 'theguardian.com',
@@ -942,10 +942,6 @@ export const Labs: CAPIType = {
 						url: '/crosswords/crossword-blog',
 					},
 					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
-					},
-					{
 						title: 'Quick',
 						url: '/crosswords/series/quick',
 					},
@@ -1084,6 +1080,11 @@ export const Labs: CAPIType = {
 	},
 	designType: 'AdvertisementFeature',
 	editionId: 'UK',
+	format: {
+		design: 'ArticleDesign',
+		theme: 'Labs',
+		display: 'StandardDisplay',
+	},
 	standfirst:
 		'<p>Banned in Britain for half a century, female footballers had to travel to foreign fields just to compete. But they persisted – and we have them to thank for the success of women’s football today</p>',
 	openGraphData: {
@@ -1104,12 +1105,12 @@ export const Labs: CAPIType = {
 		'article:section': 'With you all the way',
 		'article:published_time': '2021-03-16T13:02:21.000Z',
 		'og:title':
-			'Secret games, travelling shows and pioneering players: the history of women’s football',
+			'Secret matches and pioneering players: a brief history of women’s football',
 		'fb:app_id': '180444840287',
 		'article:tag': 'With you all the way',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2021-03-16T13:05:04.000Z',
+		'article:modified_time': '2021-03-18T10:50:48.000Z',
 	},
 	sectionUrl: 'with-you-all-the-way',
 	pageId:
@@ -1144,7 +1145,7 @@ export const Labs: CAPIType = {
 			title: 'UK Labs',
 		},
 	],
-	pillar: 'labs',
+	pillar: 'news',
 	webURL:
 		'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/secret-games-travelling-shows-and-pioneering-players-the-history-of-womens-football',
 	showBottomSocialButtons: true,
@@ -1335,11 +1336,11 @@ export const Labs: CAPIType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline:
-		'Secret games, travelling shows and pioneering players: the history of women’s football',
+		'Secret matches and pioneering players: a brief history of women’s football',
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '188ab394-7d6b-4cc4-aa94-b3cbe3ec1418',
+			elementId: '7e40f7cb-f46d-494b-af21-c49f42e047e6',
 			role: 'inline',
 			data: {
 				alt:
@@ -1728,44 +1729,44 @@ export const Labs: CAPIType = {
 	webPublicationDate: '2021-03-16T13:02:21.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Tue 16 Mar 2021 13.05 GMT',
+			secondaryDateLine: 'Last modified on Thu 18 Mar 2021 10.50 GMT',
 			blockFirstPublishedDisplay: '11.52 GMT',
-			blockLastUpdated: 1615895359000,
+			blockLastUpdated: 1615983905000,
 			firstPublishedDisplay: '13.02 GMT',
-			lastUpdatedDisplay: '13.05 GMT',
+			lastUpdatedDisplay: '10.50 GMT',
 			blockCreatedOnDisplay: '11.51 GMT',
-			blockLastUpdatedDisplay: '11.49 GMT',
+			blockLastUpdatedDisplay: '12.25 GMT',
 			firstPublished: 1615899741000,
 			createdOn: 1614599498000,
 			primaryDateLine: 'Tue 16 Mar 2021 13.02 GMT',
 			blockCreatedOn: 1614599498000,
 			blockFirstPublished: 1614599557000,
 			createdOnDisplay: '11.51 GMT',
-			lastUpdated: 1615899904000,
+			lastUpdated: 1616064648000,
 			elements: [
 				{
-					elementId: 'fd113f2f-7b3d-4d82-804a-929975f2e3a1',
+					elementId: 'f58c9682-ed5f-4e12-bb66-ea348b06278d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Women’s football has been a travelling show since it began. In the years of its infancy, in the late 19th century, exhibition matches featuring all-female teams were staged all over the UK, from Brighton to Newcastle, Bristol to Edinburgh. They were also hugely popular, drawing crowds of tens of thousands.</p>',
 				},
 				{
-					elementId: '9b848567-0a58-44c4-8712-7a4aad39b432',
+					elementId: 'ace1a651-93a8-4aee-b018-a6564b31791c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Some drew too much attention. The first recorded “international” games took place in 1881 when a team of English players travelled to Scotland and during their second encounter, in Glasgow, heckles turned into a pitch invasion, forcing the women to take shelter in their horse-drawn bus. Not long after that, Scotland banned women from playing, which is another theme that returns frequently in the history of the game across the globe. It’s no small miracle that women’s football is thriving today, given the decades of neglect and opposition it has endured.</p>',
 				},
 				{
-					elementId: 'f22a03d9-5a78-43a1-85d8-3dbd29f855c6',
+					elementId: 'af4b7cf2-3bc7-4b36-aa9e-a44dc10f0c44',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>For no less than half of the 20th century, the English Football Association (FA) refused to allow women to play on any of its grounds. It claimed that the game was damaging to women’s health and many doctors supported its stance. In reality, the ban was a panicked response to the increasing take-up of the game by women during the first world war.</p>',
 				},
 				{
-					elementId: 'a58602e0-f17c-4b7d-b931-5a4c49c9d637',
+					elementId: 'ba4ce07d-e40f-430f-b51a-92273846b8fa',
 					role: 'inline',
 					data: {
 						alt:
@@ -2152,49 +2153,49 @@ export const Labs: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: 'e2bb3768-4527-4e65-831b-ba2df4713c03',
+					elementId: '198c287f-805a-4ca3-8228-7833fb5509be',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>After its Victorian beginnings, it was the social upheaval of war that had established the women’s game in Britain. With the football league cancelled as young men were sent to battle, the women who replaced them at the munitions factories had kickabouts in their break times, and played matches on their days off. Soon, ladies’ tournaments began to take hold. The Dick, Kerr Ladies FC, based in Preston, garnered such a powerful reputation that they played two matches a week, and in 1920 staged a pioneering European fixture when they took on a French team assembled by sporting activist Alice Milliat.</p>',
 				},
 				{
-					elementId: 'b8e6d3bd-6a3d-48d3-8c4c-7d8b06bc850a',
+					elementId: 'd01c46ba-1622-4697-a8ca-c8e3291ef0ef',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>A year later, the FA issued its ban, and levels of participation in the UK collapsed. A few determined souls kept the flame burning. The Manchester Corinthians Ladies – formed in 1949 by Percy Ashley because his daughter Doris wanted a team to play for – became the centre of the game in Britain, but they had to travel to find people to play. Over the next decade, “Dynamite” Doris and her Corinthians teammates would tour Europe, South America and North Africa in their hunt for opposition.</p>',
 				},
 				{
-					elementId: 'ee53ffa0-31ec-4c73-932c-43f95ee0294e',
+					elementId: '51055e06-5b07-4057-b1f6-af66a2b6d7e3',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Plenty of countries had their own bans on women’s football: Norway, France, Brazil and West Germany all outlawed it at various times, and an entire generation of women were relegated to playing in public parks, rugby pitches, and even greyhound tracks. The women’s game developed sporadically as a result, whenever and wherever it could find a home.</p>',
 				},
 				{
-					elementId: '29421b9e-df15-420c-b357-41a9c5b84033',
+					elementId: 'ee1a1b70-77c7-4cb7-b31b-ce3d09ea954e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>It was Italy who took up the baton, hosting the first women’s European tournament in 1969 (the European Competition for Women’s Football) and the first unofficial women’s world cup – sponsored by Italian drinks company Martini &amp; Rossi – a year later. Both events were popular and another “Women’s World Cup” was staged in 1971 – an all-singing, all-dancing affair at the Azteca stadium in Mexico, dressed in pink livery and surrounded by pop-up hair and beauty salons.</p>',
 				},
 				{
-					elementId: '9646942d-bccf-4c20-8c0e-3ccae961cc70',
+					elementId: 'c08a9441-c7c2-41a7-9582-bc4e0fbd0d78',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The English FA’s ban had only just been lifted, and it was an unofficial team, under the management of Harry Batt, who played Mexico and Argentina in the group stages. Despite losing all three of their games, they were received like rock stars by Mexican sports fans – and banned from representative football for three months on their return to England.</p>',
 				},
 				{
-					elementId: '478b7d20-0b84-4ccb-a701-56224bee6e0c',
+					elementId: '381cce4b-d152-4e89-8ba1-e86493e8a2d2',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The first official England women’s team played its debut match against Scotland in 1972; they came back from 2-1 down at half time to win 3-2, Pat “Thunder” Davies scoring the decisive goals. Davies was a member of the Southampton team that had won the first women’s FA Cup the previous year, and which went on to dominate the game throughout the 1970s.</p>',
 				},
 				{
-					elementId: '28d54006-9297-48b7-8737-2631261cdf47',
+					elementId: '8342d21e-69b5-4704-abbf-192d0d0acce1',
 					role: 'inline',
 					data: {
 						alt:
@@ -2582,39 +2583,39 @@ export const Labs: CAPIType = {
 					displayCredit: true,
 				},
 				{
-					elementId: '806fbf43-218b-454b-a42e-104bfeb2d00f',
+					elementId: '359c6cf2-1b44-4612-ac01-a7b7247f42cc',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Sweden, Norway and Denmark were all establishing themselves as powerhouses of the women’s game, and Sweden would become the first ever champions of the European Competition for Women’s Football<strong> </strong>in 1984 (the women’s equivalent of the Uefa <a href="https://en.wikipedia.org/wiki/UEFA_European_Championship" rel="nofollow">European Championship</a>) after beating England on penalties at Kenilworth Road. Throughout the 1980s, England’s players – an eclectic, amateur mix of office workers, sales assistants, civil servants and engineers – were increasingly drawn from the all-conquering Doncaster Rovers Belles, under the leadership of captain Gillian Coultard.</p>',
 				},
 				{
-					elementId: '04ea9935-84c6-4e61-8d96-8c86d4462e85',
+					elementId: '20c479c9-f356-41b2-b533-814cffd37112',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>But other nations were rising, too. It was China who hosted Fifa’s first international championship for women, the Women’s World Cup, in 1991, and the United States that won it, beating Norway 2-1 in the final. That victory marked the beginning of more than 20 years of US excellence, including one of the most memorable and defining moments in women’s football: Brandi Chastain’s left-footed penalty to beat Chinese goalkeeper Gao Hong and win the 1999 World Cup. The picture of her shirt-waving celebration made the cover of Time magazine.</p>',
 				},
 				{
-					elementId: '4ab8e803-0c04-4ac5-b4c4-561ac3f03c85',
+					elementId: '89eae821-9a31-453d-8b04-a45f2664458a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>A subsequent attempt to establish a pioneering professional league in the US was not successful and Women’s United Soccer Association (WUSA) was wound up after three years, in 2003, despite a roster of global talent. But the venture was proof of the game’s new ambition and presaged a 21st-century revolution in women’s sport. More and more footballing superstars followed Chastain into mainstream fame: US striker Mia Hamm, Germany’s Birgit Prinz, Brazil’s Marta Vieira da Silva, England’s Kelly Smith, Japan’s Homare Sawa. By 2015, the women’s World Cup had expanded to 24 teams and was reaching record-breaking audiences.</p>',
 				},
 				{
-					elementId: 'f7dfc35f-1acf-4fc8-8604-7d94efaad3f3',
+					elementId: '9b9294f4-6c4a-4334-bbe9-36633cc6c432',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>And things started getting more legitimate over time – in England, the Women’s Super and Champions leagues finally became full-time, professional affairs. And after an immensely successful Women’s World Cup in 2019 – which included the largest viewership in the game’s history – there are now 34 countries in the world where women play professional football. That number is only set to grow.</p>',
 				},
 				{
-					elementId: '577bc860-b5db-4494-892d-73cc45914fdb',
+					elementId: '0feb1543-7609-4c15-92db-db32ee23bea4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
-						'<p><em>Expedia believes that travel, like football, is better experienced together. That’s why – as the official travel companion of Liverpool FC – Expedia will be with you all the way, as soon as we can travel together again. To get inspiration for your next trip, visit <a href="http://www.withyoualltheway.expedia.co.uk/" rel="nofollow">expedia.co.uk</a></em></p>',
+						'<p><em>Expedia believes that travel, like football, is better experienced together. That’s why – as the official travel companion of Liverpool FC – Expedia will be with you all the way, as soon as we can travel together again. To get inspiration for your next trip, visit <a href="https://withyoualltheway.expedia.co.uk/en/" rel="nofollow">expedia.co.uk</a></em></p>',
 				},
 			],
 			id: '603cd54a8f08be9d080d7a5e',
@@ -2666,8 +2667,8 @@ export const Labs: CAPIType = {
 			],
 			datePublished: '2021-03-16T13:02:21.000Z',
 			headline:
-				'Secret games, travelling shows and pioneering players: the history of women’s football',
-			dateModified: '2021-03-16T13:05:04.000Z',
+				'Secret matches and pioneering players: a brief history of women’s football',
+			dateModified: '2021-03-18T10:50:48.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/secret-games-travelling-shows-and-pioneering-players-the-history-of-womens-football',
 		},
@@ -2686,7 +2687,7 @@ export const Labs: CAPIType = {
 	webPublicationDateDisplay: 'Tue 16 Mar 2021 13.02 GMT',
 	shouldHideAds: false,
 	webTitle:
-		'Secret games, travelling shows and pioneering players: the history of women’s football',
+		'Secret matches and pioneering players: a brief history of women’s football',
 	isSpecialReport: false,
 	isCommentable: false,
 	keyEvents: [],
@@ -2698,6 +2699,7 @@ export const Labs: CAPIType = {
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
+			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
 			abStickyNavTest: true,
@@ -2765,7 +2767,6 @@ export const Labs: CAPIType = {
 			dotcomRendering: true,
 			abSignInGateMainVariant: true,
 			hostedVideoAutoplay: true,
-			applyCreativeTemplate: false,
 			abAdblockAsk: true,
 			prebidPubmatic: true,
 			serverShareCounts: true,
@@ -2837,7 +2838,7 @@ export const Labs: CAPIType = {
 		pageCode: '8863559',
 		pillar: '',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/9364aaa9af842807cf10/graun.commercial.dcr.js',
+			'https://assets.guim.co.uk/javascripts/9ff2076d8add67945529/graun.commercial.dcr.js',
 		discussionApiClientHeader: 'nextgen',
 		membershipUrl: 'https://membership.theguardian.com',
 		cardStyle: 'news',
@@ -2857,7 +2858,7 @@ export const Labs: CAPIType = {
 		disableStickyTopBanner: true,
 		dfpAdUnitRoot: 'theguardian.com',
 		headline:
-			'Secret games, travelling shows and pioneering players: the history of women’s football',
+			'Secret matches and pioneering players: a brief history of women’s football',
 		commentable: false,
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
@@ -2883,7 +2884,7 @@ export const Labs: CAPIType = {
 		section: 'with-you-all-the-way',
 		hasInlineMerchandise: false,
 		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37632',
+		buildNumber: '37724',
 		isPhotoEssay: false,
 		ampIframeUrl:
 			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
@@ -2913,7 +2914,7 @@ export const Labs: CAPIType = {
 			id:
 				'with-you-all-the-way/2021/mar/16/secret-games-travelling-shows-and-pioneering-players-the-history-of-womens-football',
 			headline:
-				'Secret games, travelling shows and pioneering players: the history of women’s football',
+				'Secret matches and pioneering players: a brief history of women’s football',
 			shouldHideAdverts: false,
 			standfirst:
 				'<p>Banned in Britain for half a century, female footballers had to travel to foreign fields just to compete. But they persisted – and we have them to thank for the success of women’s football today</p>',
@@ -2983,9 +2984,7 @@ export const Labs: CAPIType = {
 			prebid: true,
 			a9: true,
 		},
-		abTests: {
-			dotcomRenderingVariant: 'variant',
-		},
+		abTests: {},
 		shortUrl: 'https://www.theguardian.com/p/gt8dq',
 		isContent: true,
 		contentId:
@@ -3326,7 +3325,6 @@ export const Labs: CAPIType = {
 			4700389583,
 			4702727917,
 			4705009339,
-			4706776058,
 			4715712191,
 			4719669541,
 			4739368280,
@@ -4315,6 +4313,7 @@ export const Labs: CAPIType = {
 			5466211677,
 			5466214734,
 			5466531271,
+			5466996369,
 			5466996373,
 			5466996946,
 			5469112465,
@@ -4366,6 +4365,7 @@ export const Labs: CAPIType = {
 			5558529060,
 			5558531448,
 			5558533656,
+			5558534115,
 			5558536716,
 			5558537001,
 			5558758006,
@@ -4386,6 +4386,7 @@ export const Labs: CAPIType = {
 			5559796472,
 			5559799676,
 			5559802297,
+			5559805343,
 			5559815492,
 			5559905222,
 			5563851720,
@@ -4393,13 +4394,10 @@ export const Labs: CAPIType = {
 			5565944093,
 			5566690440,
 			5566888543,
-			5570251365,
 			5570403307,
-			5571550025,
-			5580798708,
 			5581991484,
-			5582134793,
 			5584069572,
+			5584926633,
 			5585724471,
 			5588312812,
 			5589491990,
@@ -4407,7 +4405,6 @@ export const Labs: CAPIType = {
 			5592408199,
 			5592408430,
 			5595197911,
-			5595238291,
 			5596753106,
 			5597229243,
 			5598121671,
@@ -4422,13 +4419,15 @@ export const Labs: CAPIType = {
 			5601407261,
 			5604827229,
 			5604828453,
+			5605259263,
 			5605675396,
 			5608553753,
 			5609341878,
 			5609922209,
 			5610406314,
+			5610930182,
+			5613679619,
 			5613900227,
-			5616295359,
 			5617153347,
 			5617357126,
 			5617560946,
@@ -4439,40 +4438,30 @@ export const Labs: CAPIType = {
 			5620891323,
 			5620891383,
 			5621508639,
-			5621922383,
 			5622264429,
 			5622478028,
 			5622532278,
 			5622837268,
-			5623351083,
 			5624650559,
+			5624869673,
 			5624983821,
+			5625220205,
 			5625487113,
 			5625836589,
 			5625971457,
 			5626103406,
 			5626445497,
-			5627416481,
-			5627419082,
 			5627768068,
 			5628371464,
-			5628688753,
 			5629670544,
 			5629689756,
 			5629713588,
 			5630498106,
 			5630926258,
-			5631062305,
-			5631062542,
-			5631069021,
-			5631099111,
 			5631715415,
-			5631748556,
-			5631899222,
 			5631955125,
 			5632010289,
 			5632010304,
-			5632464370,
 			5632497345,
 			5632645568,
 			5632702032,
@@ -4490,7 +4479,6 @@ export const Labs: CAPIType = {
 			5634623455,
 			5634854126,
 			5635126238,
-			5635350659,
 			5635356428,
 			5636227163,
 			5636871103,
@@ -4507,19 +4495,55 @@ export const Labs: CAPIType = {
 			5640726921,
 			5640728049,
 			5641610599,
-			5641617047,
 			5642322406,
 			5642702396,
-			5642733054,
+			5642789934,
 			5642888630,
 			5642896490,
+			5643491641,
+			5643491644,
+			5643878572,
 			5643912442,
 			5644047726,
 			5644054032,
-			5645056792,
+			5644060074,
+			5644742529,
 			5645069734,
+			5645075982,
+			5645078043,
 			5645537702,
-			5645607521,
+			5645999489,
+			5646019106,
+			5646586974,
+			5646663071,
+			5646669108,
+			5646669114,
+			5646712521,
+			5647393379,
+			5647583483,
+			5647605499,
+			5647692955,
+			5647692958,
+			5647696996,
+			5647697002,
+			5648096848,
+			5648242727,
+			5648811302,
+			5649684958,
+			5649966880,
+			5650233106,
+			5650328869,
+			5650377530,
+			5650634579,
+			5650815089,
+			5650830410,
+			5651010433,
+			5651010436,
+			5651015194,
+			5651241307,
+			5651551370,
+			5651656736,
+			5651668940,
 		],
 		tones: 'Advertisement features',
 		plistaPublicApiKey: '462925f4f131001fd974bebe',
@@ -4534,7 +4558,7 @@ export const Labs: CAPIType = {
 		isHosted: false,
 		hasPageSkin: false,
 		webTitle:
-			'Secret games, travelling shows and pioneering players: the history of women’s football',
+			'Secret matches and pioneering players: a brief history of women’s football',
 		discussionD2Uid: 'zHoBy6HNKsk',
 		weatherapiurl: '/weatherapi/city',
 		googleSearchUrl: '//www.google.co.uk/cse/cse.js',
