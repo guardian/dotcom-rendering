@@ -134,8 +134,7 @@ export const Links = ({
 
 	// show supporter CTA if support messaging isn't shown
 	useEffect(() => {
-		setShowSupporterCTA(true);
-		// setShowSupporterCTA(getCookie('gu_hide_support_messaging') === 'true');
+		setShowSupporterCTA(getCookie('gu_hide_support_messaging') === 'true');
 	}, []);
 
 	// we intentionally re-render here because we know the DOM structure could be different
