@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { css } from 'emotion';
 
 import { border, background } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { textSans } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
 import { SvgCheckmark } from '@guardian/src-icons';
-import { space } from '@guardian/src-foundations';
 
 type Props = {
 	children: React.ReactNode;
@@ -24,12 +23,12 @@ const roleTextSize = (role: RoleType) => {
 		case 'immersive':
 		case 'inline':
 		case 'showcase': {
-			return textSans.medium();
+			return textSans.medium({ lineHeight: 'regular' });
 		}
 		case 'halfWidth':
 		case 'supporting':
 		case 'thumbnail': {
-			return textSans.small();
+			return textSans.small({ lineHeight: 'regular' });
 		}
 	}
 };
@@ -39,12 +38,18 @@ const roleHeadlineSize = (role: RoleType) => {
 		case 'immersive':
 		case 'inline':
 		case 'showcase': {
-			return headline.xsmall();
+			return textSans.large({
+				fontWeight: 'bold',
+				lineHeight: 'regular',
+			});
 		}
 		case 'halfWidth':
 		case 'supporting':
 		case 'thumbnail': {
-			return headline.xxsmall();
+			return textSans.medium({
+				fontWeight: 'bold',
+				lineHeight: 'regular',
+			});
 		}
 	}
 };
@@ -54,10 +59,11 @@ const roleButtonSize = (role: RoleType) => {
 		case 'immersive':
 		case 'inline':
 		case 'showcase': {
-			return 'small';
+			return 'default';
 		}
 		case 'halfWidth':
 		case 'supporting':
+			return 'small';
 		case 'thumbnail': {
 			return 'xsmall';
 		}
@@ -137,19 +143,19 @@ export const ClickToView = ({
 				className={css`
 					width: 100%;
 					background: ${background.secondary};
-					border: 1px solid ${border.primary};
+					border: 1px solid ${border.secondary};
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
-					padding: ${space[3]}px;
-					margin-bottom: 8px;
+					padding: 6px 25px 12px;
+					margin-bottom: 12px;
 				`}
 				data-component={`click-to-view:${sourceDomain}`}
 			>
 				<div
 					className={css`
 						${roleHeadlineSize(role)}
-						margin-bottom: 8px;
+						margin-bottom: 5px;
 					`}
 				>
 					{source
@@ -159,39 +165,34 @@ export const ClickToView = ({
 				<div
 					className={css`
 						${textSize}
-						a {
-							${textSize}
-						}
-						p {
-							margin-bottom: 8px;
+						margin-bottom: 19px;
+						strong {
+							font-weight: bold;
 						}
 					`}
 				>
 					{source ? (
 						<>
-							<p>
-								This article includes content provided by{' '}
-								{source}. We ask for your permission before
-								anything is loaded, as they may be using cookies
-								and other technologies.
-							</p>
-							<p>
-								To view this content, click &apos;Allow and
-								continue&apos;.
-							</p>
+							This article includes content provided by {source}.
+							We ask for your permission before anything is
+							loaded, as they may be using cookies and other
+							technologies. To view this content,{' '}
+							<strong>
+								click &apos;Allow and continue&apos;
+							</strong>
+							.
 						</>
 					) : (
 						<>
-							<p>
-								This article includes content hosted on{' '}
-								{sourceDomain}. We ask for your permission
-								before anything is loaded, as the provider may
-								be using cookies and other technologies.
-							</p>
-							<p>
-								To view this content, click &apos;Allow and
-								continue&apos;.
-							</p>
+							This article includes content hosted on{' '}
+							{sourceDomain}. We ask for your permission before
+							anything is loaded, as the provider may be using
+							cookies and other technologies. To view this
+							content,{' '}
+							<strong>
+								click &apos;Allow and continue&apos;
+							</strong>
+							.
 						</>
 					)}
 				</div>
