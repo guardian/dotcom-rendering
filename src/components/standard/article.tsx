@@ -6,7 +6,8 @@ import { Lines } from '@guardian/src-ed-lines';
 import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { Display, map, withDefault } from '@guardian/types';
+import { Display, map, none, withDefault } from '@guardian/types';
+import FootballScores from 'components/footballScores';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Metadata from 'components/metadata';
@@ -21,10 +22,11 @@ import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
 import type {
 	Item,
+	MatchReport as MatchReportItem,
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
-import { pipe2 } from 'lib';
+import { maybeRender, pipe2 } from 'lib';
 import React from 'react';
 import type { FC, ReactNode } from 'react';
 import {
@@ -85,7 +87,7 @@ const itemStyles = (item: Item): SerializedStyles => {
 };
 
 interface Props {
-	item: StandardItem | ReviewItem;
+	item: StandardItem | ReviewItem | MatchReportItem;
 	children: ReactNode[];
 }
 
@@ -113,9 +115,22 @@ const Standard: FC<Props> = ({ item, children }) => {
 		  )
 		: null;
 
+	const matchScores = 'football' in item ? item.football : none;
+
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
+				{maybeRender(matchScores, (scores) => (
+					<div id="js-football-scores">
+						<FootballScores
+							league={scores.league}
+							stadium={scores.stadium}
+							homeTeam={scores.homeTeam}
+							awayTeam={scores.awayTeam}
+							status={scores.status}
+						/>
+					</div>
+				))}
 				<header>
 					<HeaderMedia item={item} />
 					<Series item={item} />

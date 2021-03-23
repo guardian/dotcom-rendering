@@ -32,6 +32,8 @@ import {
 } from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
+import type { MatchScores } from 'football';
+import { parseMatchScores } from 'football';
 import type { MainMedia } from 'headerMedia';
 import type { Image } from 'image';
 import { parseCardImage } from 'image';
@@ -60,6 +62,12 @@ interface Fields extends Format {
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
+}
+
+interface MatchReport extends Fields {
+	design: Design.MatchReport;
+	body: Body;
+	football: Option<MatchScores>;
 }
 
 interface ResizedRelatedContent extends RelatedContent {
@@ -95,7 +103,7 @@ interface Standard extends Fields {
 	body: Body;
 }
 
-type Item = Liveblog | Review | Comment | Standard | Interactive;
+type Item = Liveblog | Review | Comment | Standard | Interactive | MatchReport;
 
 // ----- Convenience Types ----- //
 
@@ -252,6 +260,7 @@ const isQuiz = hasTag('tone/quizzes');
 
 const isLabs = hasTag('tone/advertisement-features');
 
+const isMatchReport = hasTag('tone/matchreport');
 const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog = (context: Context) => (
@@ -335,6 +344,12 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			...itemFieldsWithBody(context, request),
 			theme: Special.Labs,
 		};
+	} else if (isMatchReport(tags)) {
+		return {
+			design: Design.MatchReport,
+			football: parseMatchScores(fromNullable(request.footballContent)),
+			...itemFieldsWithBody(context, request),
+		};
 	}
 
 	return {
@@ -351,6 +366,7 @@ export {
 	Liveblog,
 	Review,
 	Standard,
+	MatchReport,
 	ResizedRelatedContent,
 	fromCapi,
 	fromCapiLiveBlog,

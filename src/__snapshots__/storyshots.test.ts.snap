@@ -13668,6 +13668,327 @@ exports[`Storyshots Follow Default 1`] = `
 </button>
 `;
 
+exports[`Storyshots FootballScores Default 1`] = `
+.emotion-0 {
+  background-color: #FFE500;
+  padding: 0.5rem;
+}
+
+.emotion-1 {
+  text-indent: -10000px;
+  position: absolute;
+  margin: 0;
+}
+
+.emotion-2 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+@media (min-width: 660px) {
+  .emotion-2 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.emotion-3 {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-3 {
+    grid-column: 2;
+    margin-right: 0;
+  }
+}
+
+.emotion-4 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 700;
+  border: 1px dotted #000000;
+  border-radius: 100%;
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  padding-top: 0.75rem;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+.emotion-5 {
+  grid-column: 2;
+}
+
+@media (min-width: 660px) {
+  .emotion-5 {
+    grid-column: 1;
+  }
+}
+
+.emotion-6 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.emotion-7 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.emotion-8 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  border-top: 1px dotted #000000;
+  padding-top: 0.25rem;
+  margin-top: 0.75rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 660px) {
+  .emotion-8 {
+    display: inline-grid;
+    width: 50%;
+    vertical-align: top;
+    grid-template-columns: 1fr auto;
+    border-right: 1px dotted #000000;
+  }
+}
+
+.emotion-9 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+@media (min-width: 660px) {
+  .emotion-9 {
+    grid-column: 1;
+  }
+}
+
+.emotion-10 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 2.625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  grid-column: 1;
+  grid-row: 1/3;
+  margin-right: 1rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-10 {
+    grid-column: 2;
+  }
+}
+
+.emotion-11 {
+  border: 1px solid #000000;
+  border-radius: 100%;
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  position: relative;
+}
+
+.emotion-12 {
+  position: absolute;
+  top: 7%;
+  left: 29%;
+}
+
+.emotion-13 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+@media (min-width: 660px) {
+  .emotion-13 {
+    grid-column: 1;
+  }
+}
+
+.emotion-14 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  border-top: 1px dotted #000000;
+  padding-top: 0.25rem;
+  margin-top: 0.75rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 660px) {
+  .emotion-14 {
+    display: inline-grid;
+    width: 50%;
+    vertical-align: top;
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.emotion-15 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.emotion-16 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 2.625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  grid-column: 1;
+  grid-row: 1/3;
+  margin-right: 1rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-16 {
+    margin-left: 1rem;
+  }
+}
+
+.emotion-19 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+<section
+  className="emotion-0"
+>
+  <h2
+    className="emotion-1"
+  >
+    Scores
+  </h2>
+  <div
+    className="emotion-2"
+  >
+    <div
+      className="emotion-3"
+    >
+      <span
+        className="emotion-4"
+      >
+        20:00
+      </span>
+    </div>
+    <div
+      className="emotion-5"
+    >
+      <nav
+        className="emotion-6"
+      >
+        Premier League
+      </nav>
+      <address
+        className="emotion-7"
+      >
+        Etihad Stadium
+      </address>
+    </div>
+  </div>
+  <section
+    className="emotion-8"
+  >
+    <h3
+      className="emotion-9"
+    >
+      Arsenal
+    </h3>
+    <div
+      className="emotion-10"
+    >
+      <div
+        className="emotion-11"
+      >
+        <span
+          className="emotion-12"
+        >
+          0
+        </span>
+      </div>
+    </div>
+    <ul
+      className="emotion-13"
+    />
+  </section>
+  <section
+    className="emotion-14"
+  >
+    <h3
+      className="emotion-15"
+    >
+      Man City
+    </h3>
+    <div
+      className="emotion-16"
+    >
+      <div
+        className="emotion-11"
+      >
+        <span
+          className="emotion-12"
+        >
+          2
+        </span>
+      </div>
+    </div>
+    <ul
+      className="emotion-19"
+    >
+      <li>
+        Sterling
+         
+        2
+        '
+         
+        .g
+      </li>
+      <li>
+        Beckham
+         
+        30
+        '
+         
+      </li>
+    </ul>
+  </section>
+</section>
+`;
+
 exports[`Storyshots Footer Default 1`] = `
 .emotion-0 {
   border-width: 0 1px;

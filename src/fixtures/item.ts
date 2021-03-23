@@ -242,6 +242,7 @@ const fields = {
 	internalShortId: none,
 	commentCount: none,
 	relatedContent: none,
+	footballContent: none,
 	logo: none,
 };
 
