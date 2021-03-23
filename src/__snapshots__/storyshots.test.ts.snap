@@ -13685,7 +13685,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   grid-template-columns: auto 1fr;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-2 {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -13698,7 +13698,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   margin-right: 0.5rem;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-3 {
     grid-column: 2;
     margin-right: 0;
@@ -13724,7 +13724,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   grid-column: 2;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-5 {
     grid-column: 1;
   }
@@ -13754,7 +13754,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   box-sizing: border-box;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-8 {
     display: inline-grid;
     width: 50%;
@@ -13774,7 +13774,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   grid-row: 1;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-9 {
     grid-column: 1;
   }
@@ -13790,7 +13790,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   margin-right: 1rem;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-10 {
     grid-column: 2;
   }
@@ -13823,7 +13823,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   grid-row: 2;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-13 {
     grid-column: 1;
   }
@@ -13838,7 +13838,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   box-sizing: border-box;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-14 {
     display: inline-grid;
     width: 50%;
@@ -13867,7 +13867,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   margin-right: 1rem;
 }
 
-@media (min-width:660px) {
+@media (min-width: 660px) {
   .emotion-16 {
     margin-left: 1rem;
   }

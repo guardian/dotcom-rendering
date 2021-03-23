@@ -7,7 +7,6 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { TeamLocation } from 'football';
 import type { FC } from 'react';
-import React from 'react';
 
 interface Props {
 	team: FootballTeam;

@@ -5,7 +5,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { MatchStatusKind } from 'football';
 import type { MatchStatus } from 'football';
 import type { FC } from 'react';
-import React from 'react';
 
 interface Props {
 	status: MatchStatus;
