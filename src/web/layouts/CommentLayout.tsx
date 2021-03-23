@@ -524,6 +524,7 @@ export const CommentLayout = ({
 								/>
 								<SubMeta
 									palette={palette}
+									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}

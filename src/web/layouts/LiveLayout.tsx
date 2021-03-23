@@ -419,6 +419,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 								<SubMeta
 									palette={palette}
+									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
