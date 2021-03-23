@@ -56,7 +56,7 @@ type BuildPayloadProps = BaseProps & {
 
 type CanShowProps = BaseProps & {
 	asyncCountryCode: Promise<string>;
-	remoteBannerConfig: boolean;
+	remotePuzzlesBannerConfig: boolean;
 };
 
 // TODO specify return type (need to update client to provide this first)
@@ -121,7 +121,7 @@ export const canShow = async ({
 		return { result: false };
 	}
 
-	if (isPuzzlesPage) {
+	if (isPuzzlesPage && remotePuzzlesBannerConfig) {
 		// TODO: add check of puzzlesBanner switch when this has been added
 		const countryCode = await asyncCountryCode;
 		const hasConsentedToArticleCounts = await getArticleCountConsent();

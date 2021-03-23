@@ -64,7 +64,7 @@ const buildPuzzlesBannerConfig = (
 			id: 'puzzles-banner',
 			canShow: () =>
 				canShowPuzzlesBanner({
-					remotePuzzlesBannerConfig: CAPI.config.puzzlesBanner,
+					remotePuzzlesBannerConfig: CAPI.config.remoteBanner, // update to puzzlesBanner when implemented
 					isSignedIn,
 					asyncCountryCode,
 					contentType: CAPI.contentType,
