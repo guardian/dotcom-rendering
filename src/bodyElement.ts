@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
+import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
@@ -139,6 +139,7 @@ interface KnowledgeQuizAtom {
 	kind: ElementKind.KnowledgeQuizAtom;
 	id: string;
 	questions: QuestionType[];
+	resultGroups: ResultGroupsType[];
 }
 
 interface PersonalityQuizAtom {
@@ -167,6 +168,13 @@ type QuestionType = {
 	text: string;
 	answers: AnswerType[];
 	imageUrl?: string;
+};
+
+type ResultGroupsType = {
+	title: string;
+	shareText: string;
+	minScore: number;
+	id: string;
 };
 
 type BodyElement =

@@ -13,7 +13,7 @@ import { fromString as dateFromString } from 'date';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
 import { parseImage } from 'image';
-import { isAdvertisementFeature } from 'item';
+import { isLabs } from 'item';
 import { pipe2 } from 'lib';
 import type { Context } from 'types/parserContext';
 import { parseVideo } from 'video';
@@ -53,9 +53,7 @@ const isAnalysis = (content: Content): boolean =>
 	content.tags.some((tag) => tag.id === 'tone/analysis');
 
 const articleSeries = (content: Content): Option<Tag> => {
-	const type = isAdvertisementFeature(content.tags)
-		? TagType.PAID_CONTENT
-		: TagType.SERIES;
+	const type = isLabs(content.tags) ? TagType.PAID_CONTENT : TagType.SERIES;
 	return fromNullable(tagsOfType(type)(content.tags)[0]);
 };
 

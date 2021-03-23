@@ -1,15 +1,15 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
-import { Design, Display, partition } from '@guardian/types';
+import { Design, Display, partition, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
-import AdvertisementFeature from 'components/advertisementFeature/article';
 import Comment from 'components/comment/article';
 import Interactive from 'components/interactive/article';
+import Labs from 'components/labs/article';
 import Media from 'components/media/article';
 import Standard from 'components/standard/article';
 import type { Item } from 'item';
@@ -49,6 +49,10 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 	const body = partition(item.body).oks;
 	const render = renderWithAds(shouldHideAds);
 
+	if (item.theme === Special.Labs) {
+		return <Labs item={item}>{render(item, body)}</Labs>;
+	}
+
 	if (
 		item.design === Design.Interactive &&
 		item.display === Display.Immersive
@@ -81,14 +85,6 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === Design.MatchReport
 	) {
 		return <Standard item={item}>{render(item, body)}</Standard>;
-	}
-
-	if (item.design === Design.AdvertisementFeature) {
-		return (
-			<AdvertisementFeature item={item}>
-				{render(item, body)}
-			</AdvertisementFeature>
-		);
 	}
 
 	return notImplemented;

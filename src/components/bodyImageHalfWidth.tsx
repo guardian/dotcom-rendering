@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { breakpoints, remSpace } from '@guardian/src-foundations';
 import Img from 'components/img';
 import type { BodyImageProps as Props } from 'image';

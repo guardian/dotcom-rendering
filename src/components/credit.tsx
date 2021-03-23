@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';

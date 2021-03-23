@@ -1,15 +1,15 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
-import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { border, neutral } from '@guardian/src-foundations/palette';
-import { headline, titlepiece } from '@guardian/src-foundations/typography';
 import type {
 	FontWeight,
 	LineHeight,
-} from '@guardian/src-foundations/typography/types';
+} from '@guardian/src-foundations/dist/types/typography/types';
+import { from } from '@guardian/src-foundations/mq';
+import { border, neutral } from '@guardian/src-foundations/palette';
+import { headline, titlepiece } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';

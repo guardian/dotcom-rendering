@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css, jsx as styledH } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css, jsx as styledH } from '@emotion/react';
 import { neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
 import { Design, Role, withDefault } from '@guardian/types';

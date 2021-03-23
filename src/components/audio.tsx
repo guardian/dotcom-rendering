@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import type { FC } from 'react';
 
 // ----- Component ----- //

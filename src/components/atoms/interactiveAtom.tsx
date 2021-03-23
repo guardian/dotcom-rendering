@@ -1,5 +1,5 @@
-import type { SerializedStyles } from '@emotion/core';
-import { css, jsx as styledH } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css, jsx as styledH } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import type { Format, Option } from '@guardian/types';

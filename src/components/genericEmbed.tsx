@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -8,7 +8,6 @@ import { withDefault } from '@guardian/types';
 import type { Generic } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import React from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

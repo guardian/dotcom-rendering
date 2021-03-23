@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
