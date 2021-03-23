@@ -10,8 +10,6 @@ import {
 import {
 	shouldHideSupportMessaging,
 	getArticleCountConsent,
-	withinLocalNoBannerCachePeriod,
-	setLocalNoBannerCachePeriod,
 } from '@root/src/web/lib/contributions';
 import {
 	sendOphanComponentEvent,
@@ -21,7 +19,6 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
-import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
 const checkForErrors = (response: Response) => {
@@ -115,14 +112,17 @@ export const canShow = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 }: CanShowProps): Promise<CanShowResult> => {
-	const isPuzzlesPage = window.guardian.config.page.section === "crosswords" ||
-		window.guardian.config.page.series === "Sudoku";
+	const isPuzzlesPage =
+		window.guardian.config.page.section === 'crosswords' ||
+		window.guardian.config.page.series === 'Sudoku';
 
-	if (shouldHideReaderRevenue) { // We never serve Reader Revenue banners in this case
+	if (shouldHideReaderRevenue) {
+		// We never serve Reader Revenue banners in this case
 		return { result: false };
 	}
 
-	if (isPuzzlesPage) { // TODO: add check of puzzlesBanner switch when this has been added
+	if (isPuzzlesPage) {
+		// TODO: add check of puzzlesBanner switch when this has been added
 		const countryCode = await asyncCountryCode;
 		const hasConsentedToArticleCounts = await getArticleCountConsent();
 		const bannerPayload = buildPayload({
@@ -143,18 +143,19 @@ export const canShow = async ({
 		});
 		return getPuzzlesBanner(
 			bannerPayload,
-			`${contributionsServiceUrl}/puzzles`
-		).then(checkForErrors)
-		.then((response) => response.json())
-		.then((json: { data?: any }) => {
-			if (!json.data) {
-				return { result: false };
-			}
+			`${contributionsServiceUrl}/puzzles`,
+		)
+			.then(checkForErrors)
+			.then((response) => response.json())
+			.then((json: { data?: any }) => {
+				if (!json.data) {
+					return { result: false };
+				}
 
-			const { module, meta } = json.data;
+				const { module, meta } = json.data;
 
-			return { result: true, meta: { module, meta } };
-		});
+				return { result: true, meta: { module, meta } };
+			});
 	}
 
 	return { result: false };
