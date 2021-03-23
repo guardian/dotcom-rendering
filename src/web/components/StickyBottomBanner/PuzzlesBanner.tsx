@@ -3,21 +3,32 @@ import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { logView } from '@root/node_modules/@guardian/automat-client';
-import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
+import {
+	getWeeklyArticleHistory,
+	logView,
+} from '@root/node_modules/@guardian/automat-client';
+import {
+	shouldHideSupportMessaging,
+	getArticleCountConsent,
+	withinLocalNoBannerCachePeriod,
+	setLocalNoBannerCachePeriod,
+} from '@root/src/web/lib/contributions';
 import {
 	sendOphanComponentEvent,
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
+import { getCookie } from '@root/src/web/browser/cookie';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
+import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
+import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
 const checkForErrors = (response: Response) => {
 	if (!response.ok) {
 		throw Error(
 			response.statusText ||
-				`SlotPuzzlesBanner | An api call returned HTTP status ${response.status}`,
+				`SlotBanner | An api call returned HTTP status ${response.status}`,
 		);
 	}
 	return response;
@@ -30,8 +41,20 @@ type BaseProps = {
 	contentType: string;
 	sectionName?: string;
 	shouldHideReaderRevenue: boolean;
+	isMinuteArticle: boolean;
+	isPaidContent: boolean;
+	isSensitive: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
+	alreadyVisitedCount: number;
+	engagementBannerLastClosedAt?: string;
+	subscriptionBannerLastClosedAt?: string;
+	weeklyArticleHistory?: WeeklyArticleHistory;
+};
+
+type BuildPayloadProps = BaseProps & {
+	countryCode: string;
+	hasConsentedToArticleCounts: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -39,37 +62,89 @@ type CanShowProps = BaseProps & {
 	remoteBannerConfig: boolean;
 };
 
+// TODO specify return type (need to update client to provide this first)
+const buildPayload = (props: BuildPayloadProps) => {
+	return {
+		tracking: {
+			ophanPageId: window.guardian.config.ophan.pageViewId,
+			platformId: 'GUARDIAN_WEB',
+			clientName: 'dcr',
+			referrerUrl: window.location.origin + window.location.pathname,
+		},
+		targeting: {
+			alreadyVisitedCount: props.alreadyVisitedCount,
+			shouldHideReaderRevenue: props.shouldHideReaderRevenue,
+			isPaidContent: props.isPaidContent,
+			showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn),
+			engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
+			subscriptionBannerLastClosedAt:
+				props.subscriptionBannerLastClosedAt,
+			mvtId: Number(getCookie('GU_mvt_id')),
+			countryCode: props.countryCode,
+			weeklyArticleHistory: getWeeklyArticleHistory(),
+			hasOptedOutOfArticleCount: !props.hasConsentedToArticleCounts,
+		},
+	};
+};
+
 const getPuzzlesBanner = (
+	meta: { [key: string]: any },
 	url: string,
 ): Promise<Response> => {
+	const json = JSON.stringify(meta);
 	return fetch(url, {
 		method: 'post',
 		headers: { 'Content-Type': 'application/json' },
+		body: json,
 	});
 };
 
 export const canShow = async ({
-	remoteBannerConfig,
+	remotePuzzlesBannerConfig,
 	isSignedIn,
+	asyncCountryCode,
 	contentType,
 	sectionName,
 	shouldHideReaderRevenue,
+	isMinuteArticle,
+	isPaidContent,
+	isSensitive,
 	tags,
-	contributionsServiceUrl
+	contributionsServiceUrl,
+	alreadyVisitedCount,
+	engagementBannerLastClosedAt,
+	subscriptionBannerLastClosedAt,
 }: CanShowProps): Promise<CanShowResult> => {
-	if (!remoteBannerConfig) return { result: false };
+	const isPuzzlesPage = window.guardian.config.page.section === "crosswords" ||
+		window.guardian.config.page.series === "Sudoku";
 
-	if (shouldHideReaderRevenue) {
-		// We never serve Reader Revenue banners in this case
+	if (shouldHideReaderRevenue) { // We never serve Reader Revenue banners in this case
 		return { result: false };
 	}
 
-	if (
-		// TODO: check if is in A/B test
-		window.guardian.config.page.section === "crosswords" || window.guardian.config.page.series === "Sudoku"
-	) {
-		return getPuzzlesBanner(`${contributionsServiceUrl}/puzzles`)
-		.then(checkForErrors)
+	if (isPuzzlesPage) { // TODO: add check of puzzlesBanner switch when this has been added
+		const countryCode = await asyncCountryCode;
+		const hasConsentedToArticleCounts = await getArticleCountConsent();
+		const bannerPayload = buildPayload({
+			isSignedIn,
+			countryCode,
+			contentType,
+			sectionName,
+			shouldHideReaderRevenue,
+			isMinuteArticle,
+			isPaidContent,
+			tags,
+			contributionsServiceUrl,
+			isSensitive,
+			alreadyVisitedCount,
+			engagementBannerLastClosedAt,
+			subscriptionBannerLastClosedAt,
+			hasConsentedToArticleCounts,
+		});
+		return getPuzzlesBanner(
+			bannerPayload,
+			`${contributionsServiceUrl}/puzzles`
+		).then(checkForErrors)
 		.then((response) => response.json())
 		.then((json: { data?: any }) => {
 			if (!json.data) {
@@ -82,7 +157,7 @@ export const canShow = async ({
 		});
 	}
 
-		return { result: false };
+	return { result: false };
 };
 
 type Props = {

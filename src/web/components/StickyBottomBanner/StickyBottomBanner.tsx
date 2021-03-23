@@ -57,19 +57,31 @@ const buildCmpBannerConfig = (): CandidateConfig => ({
 const buildPuzzlesBannerConfig = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
+	asyncCountryCode: Promise<string>,
 ): CandidateConfig => {
 	return {
 		candidate: {
 			id: 'puzzles-banner',
 			canShow: () =>
 				canShowPuzzlesBanner({
-					remoteBannerConfig: CAPI.config.remoteBanner,
+					remotePuzzlesBannerConfig: CAPI.config.puzzlesBanner,
 					isSignedIn,
+					asyncCountryCode,
 					contentType: CAPI.contentType,
 					sectionName: CAPI.sectionName,
 					shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
+					isMinuteArticle: CAPI.pageType.isMinuteArticle,
+					isPaidContent: CAPI.pageType.isPaidContent,
+					isSensitive: CAPI.config.isSensitive,
 					tags: CAPI.tags,
 					contributionsServiceUrl: CAPI.contributionsServiceUrl,
+					alreadyVisitedCount: getAlreadyVisitedCount(),
+					engagementBannerLastClosedAt: getBannerLastClosedAt(
+						'engagementBannerLastClosedAt',
+					),
+					subscriptionBannerLastClosedAt: getBannerLastClosedAt(
+						'subscriptionBannerLastClosedAt',
+					),
 				}),
 			/* eslint-disable-next-line react/jsx-props-no-spreading */
 			show: (meta: any) => () => <PuzzlesBanner {...meta} />,
@@ -137,6 +149,7 @@ export const StickyBottomBanner = ({
 		const puzzlesBanner = buildPuzzlesBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
+			asyncCountryCode as Promise<string>,
 		);
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			CAPI,
