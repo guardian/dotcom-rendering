@@ -88,9 +88,9 @@ export const document = ({ data }: Props): string => {
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const CAPIElements: CAPIElement[] = CAPI.blocks[0]
-		? CAPI.blocks[0].elements
-		: [];
+	const CAPIElements: CAPIElement[] = CAPI.blocks
+		.map((block) => block.elements)
+		.flat();
 	const { mainMediaElements } = CAPI;
 	// Filter the chunks defined above by whether
 	// the 'addWhen' value is 'always' or matches
@@ -178,10 +178,12 @@ export const document = ({ data }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
-	const pageHasInteractiveElements = CAPIElements.some(
+	const pageHasNonBootInteractiveElements = CAPIElements.some(
 		(element) =>
 			element._type ===
-			'model.dotcomrendering.pageElements.InteractiveBlockElement',
+				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+			element.scriptUrl !==
+				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
 	);
 
 	function isDefined<T>(argument: T | boolean): argument is T {
@@ -200,8 +202,9 @@ export const document = ({ data }: Props): string => {
 			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			...getScriptArrayFromChunkName('sentryLoader'),
+			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),
-			pageHasInteractiveElements && {
+			pageHasNonBootInteractiveElements && {
 				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point

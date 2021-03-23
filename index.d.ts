@@ -87,6 +87,21 @@ type Palette = {
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
+		headlineByline: Colour;
+		standfirst: Colour;
+		standfirstLink: Colour;
+		branding: Colour;
+		disclaimerLink: Colour;
+		signInLink: Colour;
+		richLink: Colour;
+		witnessIcon: Colour;
+		witnessAuthor: Colour;
+		witnessTitle: Colour;
+		carouselTitle: Colour;
+		calloutHeading: Colour;
+		pullQuote: Colour;
+		pullQuoteAttribution: Colour;
+		dropCap: Colour;
 	},
 	background: {
 		article: Colour;
@@ -95,23 +110,46 @@ type Palette = {
 		avatar: Colour;
 		card: Colour;
 		headline: Colour;
+		headlineByline: Colour;
 		bullet: Colour;
+		header: Colour;
+		standfirst: Colour;
+		richLink: Colour;
+		imageTitle: Colour;
+		speechBubble: Colour;
+		carouselDot: Colour;
+		carouselDotFocus: Colour;
+		headlineTag: Colour;
+		mostViewedTab: Colour;
 	},
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
 		captionTriangle: Colour;
 		cardIcon: Colour;
+		richLink: Colour;
+		quoteIcon: Colour;
+		blockquoteIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
+		liveBlock: Colour;
+		standfirstLink: Colour;
+		headline: Colour;
+		standfirst: Colour;
+		richLink: Colour;
+		navPillar: Colour;
+		article: Colour;
 	},
 	topBar: {
 		card: Colour;
 	},
+	hover: {
+		headlineByline: Colour;
+	}
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
@@ -487,6 +525,10 @@ type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
+type ShareIconSize = 'small' | 'medium';
+
+type LeftColSize = 'compact'|'wide';
+
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
 type HeadlineLink = {
@@ -550,6 +592,20 @@ type EventType = {
 	eventType: 'substitution' | 'dismissal' | 'booking';
 };
 
+type MatchReportType = {
+	id: string;
+	isResult: boolean;
+	homeTeam: TeamType;
+	awayTeam: TeamType;
+	competition: {
+		fullName: string;
+	};
+	isLive: boolean;
+	venue: string;
+	comments: string;
+	minByMinUrl: string;
+}
+
 /**
  * Onwards
  */
@@ -559,9 +615,9 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-    pillar: Theme;
+    format: Format;
 	isCuratedContent?: boolean;
-    isFullCardImage?: boolean
+    isFullCardImage?: boolean;
 };
 
 type OphanComponentName =
@@ -635,6 +691,111 @@ interface ConfigType extends CommercialConfigType {
 	ipsosTag?: string;
 	isLiveBlog: boolean;
 	isLive: boolean;
+	avatarApiUrl: string;
+	isProd: boolean;
+	hasYouTubeAtom: boolean;
+	inBodyInternalLinkCount: number;
+	atomTypes?: {
+		guide: boolean;
+		audio: boolean;
+		explainer: boolean;
+		profile: boolean;
+		chart: boolean;
+		timeline: boolean;
+		qanda: boolean;
+		commonsdivision: boolean;
+	};
+	blogIds: string;
+	beaconUrl: string;
+	campaigns:unknown[];
+	calloutsUrl:string;
+	requiresMembershipAccess: boolean;
+	hasMultipleVideosInPage: boolean;
+	onwardWebSocket:string;
+	a9PublisherId: string;
+	pbIndexSites: {
+		bp: string;
+		id:number;
+	}[];
+	idWebAppUrl: string;
+	omnitureAccount: string;
+	contributorBio: string;
+	pageCode: string;
+	pillar: string;
+	membershipUrl: string;
+	cardStyle: string;
+	shouldHideAdverts: boolean;
+	membershipAccess: string;
+	isPreview: boolean;
+	googletagJsUrl: string;
+	supportUrl: string;
+	hasShowcaseMainElement: boolean;
+	isColumn: boolean;
+	sectionName: string;
+	sponsorshipType?: string;
+	mobileAppsAdUnitRoot: string;
+	dfpAdUnitRoot: string;
+	headline: string;
+	commentable: boolean;
+	commissioningDesks: string;
+	inBodyExternalLinkCount: number;
+	stripePublicToken: string;
+	idOAuthUrl: string;
+	thirdPartyAppsAccount: string;
+	richLink: string;
+	avatarImagesUrl: string;
+	trackingNames: string;
+	fbAppId: string;
+	externalEmbedHost: string;
+	keywords: string;
+	blogs: string;
+	hasInlineMerchandise: boolean;
+	seriesId?: string;
+	seriesTags?: string;
+	locationapiurl: string;
+	buildNumber: string;
+	ampIframeUrl: string;
+	userAttributesApiUrl: string;
+	publication: string;
+	contentType: string;
+	facebookIaAdUnitRoot: string;
+	ophanEmbedJsUrl: string;
+	thumbnail: string;
+	isFront: boolean;
+	wordCount: number;
+	author: string;
+	nonKeywordTagIds: string;
+	pageId: string;
+	forecastsapiurl: string;
+	assetsPath: string;
+	lightboxImages: any;
+	isImmersive: boolean;
+	dfpHost: string;
+	shortUrl: string;
+	isContent: boolean;
+	contentId: string;
+	discussionFrontendUrl: string;
+	ophanJsUrl: string;
+	atoms?: [string],
+	disableStickyTopBanner?: boolean;
+	productionOffice: string;
+	dfpNonRefreshableLineItemIds: number[];
+	tones: string;
+	plistaPublicApiKey: string;
+	googleSearchId: string;
+	allowUserGeneratedContent: boolean,
+	byline: string;
+	authorIds: string;
+	webPublicationDate: number,
+	omnitureAmpAccount: string;
+	isHosted: boolean,
+	hasPageSkin: boolean,
+	webTitle: string;
+	weatherapiurl: string;
+	googleSearchUrl: string;
+	optimizeEpicUrl: string;
+	isSplash: boolean,
+	isNumberedList: boolean,
 }
 
 interface ConfigTypeBrowser {
@@ -801,6 +962,24 @@ interface MostViewedFooterPayloadType {
 	mostShared: CAPITrailType;
 }
 
+// ------------
+// RichLinks //
+// ------------
+type RichLinkCardType =
+	| 'special-report'
+	| 'live'
+	| 'dead'
+	| 'feature'
+	| 'editorial'
+	| 'comment'
+	| 'podcast'
+	| 'media'
+	| 'analysis'
+	| 'review'
+	| 'letters'
+	| 'external'
+	| 'news';
+
 // ----------
 // AdSlots //
 // ----------
@@ -845,6 +1024,8 @@ declare module 'dynamic-import-polyfill' {
 declare namespace JSX {
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	interface IntrinsicElements {
+		'amp-state': any;
+		'amp-form': any;
 		'amp-experiment': any;
 		'amp-sidebar': any;
 		'amp-accordion': any;

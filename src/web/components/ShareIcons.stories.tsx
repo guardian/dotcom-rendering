@@ -11,7 +11,7 @@ export default {
 	title: 'Components/ShareIcons',
 };
 
-export const All = () => {
+export const Medium = () => {
 	return (
 		<ShareIcons
 			pageId=""
@@ -30,7 +30,33 @@ export const All = () => {
 				design: Design.Article,
 				display: Display.Standard,
 			})}
+			size="medium"
 		/>
 	);
 };
-All.story = { name: 'All' };
+Medium.story = { name: 'Medium' };
+
+export const Small = () => {
+	return (
+		<ShareIcons
+			pageId=""
+			webTitle=""
+			displayIcons={[
+				'facebook',
+				'email',
+				'linkedIn',
+				'messenger',
+				'pinterest',
+				'twitter',
+				'whatsApp',
+			]}
+			palette={decidePalette({
+				theme: Pillar.News,
+				design: Design.Article,
+				display: Display.Standard,
+			})}
+			size="small"
+		/>
+	);
+};
+Small.story = { name: 'Small' };

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
-import { neutralBorder } from '@root/src/lib/pillars';
+import libDebounce from 'lodash.debounce';
 
-import { Section } from '@root/src/web/components/Section';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { brandBackground, brandLine } from '@guardian/src-foundations/palette';
 
-import libDebounce from 'lodash.debounce';
+import { neutralBorder } from '@root/src/lib/pillars';
+import { Section } from '@root/src/web/components/Section';
+import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
+
 import { Nav as LazyNav } from './Nav';
 import { Nav } from '../Nav';
 
@@ -35,8 +36,7 @@ const stickyStyle = (theme: Theme) => css`
 	top: 0;
 	${getZIndex('stickyNav')}
 	background-color: white;
-	box-shadow: 0 0 transparent, 0 0 transparent,
-		1px 3px 6px ${neutralBorder(theme)};
+	border-bottom: 1px solid ${neutralBorder(theme)};
 `;
 
 const fixedStyle = (theme: Theme, shouldDisplay: boolean) => css`
@@ -45,9 +45,7 @@ const fixedStyle = (theme: Theme, shouldDisplay: boolean) => css`
 	top: 0;
 	${getZIndex('stickyNav')}
 	background-color: white;
-	box-shadow: 0 0 transparent, 0 0 transparent,
-		1px 3px 6px ${neutralBorder(theme)};
-
+	border-bottom: 1px solid ${neutralBorder(theme)};
 	display: ${shouldDisplay ? 'block' : 'none'};
 `;
 
@@ -120,7 +118,7 @@ const NavGroupLazy: React.FC<NavGroupLazyProps> = ({
 			<Section
 				backgroundColour={palette.background.article}
 				padded={false}
-				sectionId="sub-nav-root"
+				sectionId="sub-nav-root-lazy"
 			>
 				<SubNav
 					subNavSections={navData.subNavSections}
@@ -132,27 +130,25 @@ const NavGroupLazy: React.FC<NavGroupLazyProps> = ({
 	</div>
 );
 
-// StickyNavSimple is a basic, CSS only, sticky nav. The nav stays at the top of
+// StickyNavAnchor is a basic, CSS only, sticky nav. The nav stays at the top of
 // the viewport as the user scrolls past it's initial placement.
 //
 // *Note:* this uses position:sticky, which only works if the parent element is
 // scrollable and has a fixed height.
-export const StickyNavSimple: React.FC<BrowserProps> = ({
+export const StickyNavAnchor: React.FC<BrowserProps> = ({
 	capiData,
 	navData,
 	palette,
 	format,
 }: BrowserProps) => {
-	const { theme } = format;
-
 	return (
-		<div className={stickyStyle(theme)}>
+		<div className={stickyStyle(format.theme)}>
 			<NavGroupLazy
 				capiData={capiData}
 				navData={navData}
 				palette={palette}
 				format={format}
-				ID="sticky-nav-simple"
+				ID="sticky-nav-anchor"
 			/>
 		</div>
 	);
@@ -169,8 +165,6 @@ export const StickyNavBackscroll: React.FC<BrowserProps> = ({
 }: BrowserProps) => {
 	const initialState = { shouldFix: false, scrollY: 0 };
 	const [state, setState] = useState(initialState);
-
-	const { theme } = format;
 
 	useEffect(() => {
 		const handle = () => {
@@ -206,7 +200,7 @@ export const StickyNavBackscroll: React.FC<BrowserProps> = ({
 				ID="nav"
 			/>
 
-			<div className={fixedStyle(theme, state.shouldFix)}>
+			<div className={fixedStyle(format.theme, state.shouldFix)}>
 				<NavGroupLazy
 					capiData={capiData}
 					navData={navData}

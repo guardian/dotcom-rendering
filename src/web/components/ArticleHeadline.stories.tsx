@@ -1,7 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { news } from '@guardian/src-foundations';
+import { Display, Design, Pillar, Special } from '@guardian/types';
+
 import { Section } from './Section';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Flex } from './Flex';
@@ -230,8 +232,11 @@ export const Interview = () => (
 					byline="Byline text"
 				/>
 				<Standfirst
-					display={Display.Standard}
-					design={Design.Interview}
+					format={{
+						display: Display.Standard,
+						design: Design.Interview,
+						theme: Pillar.News,
+					}}
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia
@@ -278,8 +283,11 @@ export const InterviewNoByline = () => (
 					byline=""
 				/>
 				<Standfirst
-					display={Display.Standard}
-					design={Design.Interview}
+					format={{
+						display: Display.Standard,
+						design: Design.Interview,
+						theme: Pillar.News,
+					}}
 					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
 				/>
 				<MainMedia
@@ -579,7 +587,7 @@ export const ImmersiveComment = () => (
 );
 ImmersiveComment.story = { name: 'Immersive opinion piece' };
 
-export const GuardianView = () => (
+export const Editorial = () => (
 	<Section>
 		<Flex>
 			<LeftColumn>
@@ -587,7 +595,7 @@ export const GuardianView = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when design type is GuardianView"
+					headlineString="This is the headline you see when design type is Editorial"
 					palette={decidePalette({
 						display: Display.Standard,
 						design: Design.Editorial,
@@ -604,7 +612,7 @@ export const GuardianView = () => (
 		</Flex>
 	</Section>
 );
-GuardianView.story = { name: 'GuardianView' };
+Editorial.story = { name: 'Editorial' };
 
 export const MatchReport = () => (
 	<Section>
@@ -645,12 +653,12 @@ export const SpecialReport = () => (
 					palette={decidePalette({
 						display: Display.Standard,
 						design: Design.Article,
-						theme: Pillar.News,
+						theme: Special.SpecialReport,
 					})}
 					format={{
 						display: Display.Standard,
 						design: Design.Article,
-						theme: Pillar.News,
+						theme: Special.SpecialReport,
 					}}
 					tags={[]}
 				/>
@@ -660,7 +668,7 @@ export const SpecialReport = () => (
 );
 SpecialReport.story = { name: 'SpecialReport' };
 
-export const Live = () => (
+export const LiveBlog = () => (
 	<Section>
 		<Flex>
 			<LeftColumn>
@@ -668,7 +676,7 @@ export const Live = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<ArticleHeadline
-					headlineString="This is the headline you see when design type is Live"
+					headlineString="This is the headline you see when design type is LiveBlog"
 					palette={decidePalette({
 						display: Display.Standard,
 						design: Design.LiveBlog,
@@ -685,4 +693,44 @@ export const Live = () => (
 		</Flex>
 	</Section>
 );
-Live.story = { name: 'Live' };
+LiveBlog.story = {
+	name: 'LiveBlog',
+	parameters: {
+		backgrounds: {
+			default: 'red',
+			values: [
+				{
+					name: 'red',
+					value: news[300],
+				},
+			],
+		},
+	},
+};
+
+export const DeadBlog = () => (
+	<Section>
+		<Flex>
+			<LeftColumn>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<ArticleHeadline
+					headlineString="This is the headline you see when design type is DeadBlog"
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.DeadBlog,
+						theme: Pillar.News,
+					})}
+					format={{
+						display: Display.Standard,
+						design: Design.DeadBlog,
+						theme: Pillar.News,
+					}}
+					tags={[]}
+				/>
+			</ArticleContainer>
+		</Flex>
+	</Section>
+);
+DeadBlog.story = { name: 'DeadBlog' };

@@ -2,18 +2,10 @@ import React, { Suspense } from 'react';
 import { Lazy } from '@root/src/web/components/Lazy';
 
 import {
+	CanShow,
 	SignInGateComponent,
-	CurrentABTest,
 } from '@frontend/web/components/SignInGate/gateDesigns/types';
-import {
-	isNPageOrHigherPageView,
-	isValidContentType,
-	isValidSection,
-	isValidTag,
-	isIOS9,
-} from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
 
 const SignInGateMain = React.lazy(() => {
 	const { start, end } = initPerf('SignInGateMain');
@@ -26,44 +18,30 @@ const SignInGateMain = React.lazy(() => {
 	});
 });
 
-const canShow = (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentABTest,
-): boolean =>
-	!isSignedIn &&
-	!hasUserDismissedGateMoreThanCount(
-		currentTest.variant,
-		currentTest.name,
-		5,
-	) &&
-	isNPageOrHigherPageView(3) &&
-	isValidContentType(CAPI) &&
-	isValidSection(CAPI) &&
-	isValidTag(CAPI) &&
-	!isIOS9();
-
-export const signInGateComponent: SignInGateComponent = {
-	gate: ({
-		ophanComponentId,
-		dismissGate,
-		guUrl,
-		signInUrl,
-		abTest,
-		isComment,
-	}) => (
-		<Lazy margin={300}>
-			<Suspense fallback={<></>}>
-				<SignInGateMain
-					ophanComponentId={ophanComponentId}
-					dismissGate={dismissGate}
-					guUrl={guUrl}
-					signInUrl={signInUrl}
-					abTest={abTest}
-					isComment={isComment}
-				/>
-			</Suspense>
-		</Lazy>
-	),
-	canShow,
+export const signInGateComponent = (canShow: CanShow) => {
+	const gateComponent: SignInGateComponent = {
+		gate: ({
+			ophanComponentId,
+			dismissGate,
+			guUrl,
+			signInUrl,
+			abTest,
+			isComment,
+		}) => (
+			<Lazy margin={300}>
+				<Suspense fallback={<></>}>
+					<SignInGateMain
+						ophanComponentId={ophanComponentId}
+						dismissGate={dismissGate}
+						guUrl={guUrl}
+						signInUrl={signInUrl}
+						abTest={abTest}
+						isComment={isComment}
+					/>
+				</Suspense>
+			</Lazy>
+		),
+		canShow,
+	};
+	return gateComponent;
 };

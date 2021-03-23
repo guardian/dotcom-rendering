@@ -7,9 +7,14 @@ deployments:
       templatePath: cloudformation.yml
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
+      templateStageParameters:
+        CODE:
+          InstanceType: t4g.micro
+        PROD:
+          InstanceType: t4g.small
       amiParametersToTags:
         AMI:
-          Recipe: dotcom-rendering-node14-test
+          Recipe: dotcom-rendering-ARM
           BuiltBy: amigo
           AmigoStage: PROD
   rendering:

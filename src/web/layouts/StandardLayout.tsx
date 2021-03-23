@@ -8,7 +8,7 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -23,7 +23,7 @@ import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
+import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -43,13 +43,8 @@ import {
 	decideLineCount,
 	decideLineEffect,
 } from '@root/src/web/lib/layoutHelpers';
-import {
-	Stuck,
-	SendToBack,
-	BannerWrapper,
-} from '@root/src/web/layouts/lib/stickiness';
+import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { NavGroupEager } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
-import { getZIndex } from '../lib/getZIndex';
 
 const StandardGrid = ({
 	children,
@@ -288,7 +283,6 @@ const ageWarningMargins = css`
 const stickyNavRootStyle = css`
 	display: inline;
 	position: relative;
-	${getZIndex('stickyNavWrapper')}
 `;
 
 interface Props {
@@ -344,7 +338,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Section>
 				</Stuck>
-				<SendToBack>
+				{format.theme !== Special.Labs && (
 					<Section
 						showTopBorder={false}
 						showSideBorders={false}
@@ -357,7 +351,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							mmaUrl={CAPI.config.mmaUrl}
 						/>
 					</Section>
-				</SendToBack>
+				)}
 			</div>
 
 			<div>
@@ -384,6 +378,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
+					borderColour={palette.border.article}
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
 						<GridItem area="title">
@@ -398,7 +393,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border />
+							{format.theme === Special.Labs ? (
+								<></>
+							) : (
+								<Border palette={palette} />
+							)}
 						</GridItem>
 						<GridItem area="matchNav">
 							<div className={maxWidth}>
@@ -413,7 +412,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</GridItem>
 						<GridItem area="headline">
 							<div className={maxWidth}>
-								<ArticleHeadlinePadding design={format.design}>
+								<ArticleHeadlinePadding
+									design={format.design}
+									starRating={
+										!!CAPI.starRating ||
+										CAPI.starRating === 0
+									}
+								>
 									{age && (
 										<div className={ageWarningMargins}>
 											<AgeWarning age={age} />
@@ -446,10 +451,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							)}
 						</GridItem>
 						<GridItem area="standfirst">
-							<ArticleStandfirst
-								display={format.display}
-								design={format.design}
-								pillar={format.theme}
+							<Standfirst
+								format={format}
 								standfirst={CAPI.standfirst}
 							/>
 						</GridItem>
@@ -508,6 +511,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										adTargeting={adTargeting}
 										host={host}
 										abTests={CAPI.config.abTests}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
 									/>
 									{isMatchReport && <div id="match-stats" />}
 

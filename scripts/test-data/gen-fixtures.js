@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 const fetch = require('node-fetch');
 const execa = require('execa');
+const fs = require('fs');
 const { resolve } = require('path');
-const { config } = require('../../fixtures/config');
+const { configOverrides } = require('../../fixtures/config-overrides');
+const { switchOverrides } = require('../../fixtures/switch-overrides');
 
 const root = resolve(__dirname, '..', '..');
-const fs = require('fs');
 
 /**
  * gen-fixtures.ts
@@ -47,7 +52,7 @@ const articles = [
 			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
 	{
-		name: 'GuardianView',
+		name: 'Editorial',
 		url:
 			'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	},
@@ -91,6 +96,11 @@ const articles = [
 		url:
 			'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	},
+	{
+		name: 'Labs',
+		url:
+			'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/secret-games-travelling-shows-and-pioneering-players-the-history-of-womens-football',
+	},
 ];
 
 const HEADER = `/**
@@ -109,24 +119,148 @@ const HEADER = `/**
 `;
 
 try {
+	// Article fixtures
 	const requests = articles.map((article) => {
 		return fetch(`${article.url}.json?dcr`)
 			.then((res) => res.json())
 			.then((json) => {
-				// Add test config
-				json.config = config;
+				// Override config
+				json.config = { ...json.config, ...configOverrides };
+				// Override switches
+				json.config.switches = {
+					...json.config.switches,
+					...switchOverrides,
+				};
+				// TODO: Remove these hacks when we add in support for CAPI format to DCR
+				if (json.format.theme === 'Labs') json.pillar = 'labs';
+				delete json.format;
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name
 				}: CAPIType = ${JSON.stringify(json, null, 4)}`;
 				fs.writeFileSync(
-					`${root}/fixtures/articles/${article.name}.ts`,
+					`${root}/fixtures/generated/articles/${article.name}.ts`,
 					contents,
 					'utf8',
 				);
 				console.log(`Created ${article.name}.ts`);
 			});
 	});
+	// Images fixture
+	requests.push(
+		fetch(
+			'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton.json?dcr',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				const images = json.blocks[0].elements.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.ImageBlockElement',
+				);
+
+				// Write the new fixture data
+				const contents = `${HEADER}export const images: ImageBlockElement[] = ${JSON.stringify(
+					images,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/images.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created Images.ts`);
+			}),
+	);
+
+	// MatchReport fixtures
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2021/02/28/29/1006.json?dcr=true&page=football%2F2021%2Ffeb%2F28%2Fleicester-arsenal-premier-league-match-report',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const matchReport: MatchReportType = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/match-report.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created match-report.ts`);
+			}),
+	);
+
+	// Series
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/series/tv-and-radio/series/tv-review.json?dcr',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const series = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/series.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created series.ts`);
+			}),
+	);
+
+	// Related
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/related/world/2020/sep/13/shaggy-dog-stories-visit-puppies-before-buying-say-charities.json?dcr=true',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const related = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/related.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created related.ts`);
+			}),
+	);
+
+	// Story package
+	requests.push(
+		fetch(
+			'https://api.nextgen.guardianapps.co.uk/story-package/science/2021/feb/18/life-on-mars-nasa-keeps-looking-with-perseverance-rover-mission.json?dcr=true',
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				// Write the new fixture data
+				const contents = `${HEADER}export const storyPackage = ${JSON.stringify(
+					json,
+					null,
+					4,
+				)}`;
+				fs.writeFileSync(
+					`${root}/fixtures/generated/story-package.ts`,
+					contents,
+					'utf8',
+				);
+				console.log(`Created story-package.ts`);
+			}),
+	);
 
 	Promise.all(requests).finally(() => {
 		console.log('\nFormatting files...');
@@ -137,7 +271,7 @@ try {
 			'error',
 		]).then(() => {
 			console.log(
-				`\nDone ✅ Successfully created ${articles.length} fixtures\n`,
+				`\nDone ✅ Successfully created ${requests.length} fixtures\n`,
 			);
 		});
 	});

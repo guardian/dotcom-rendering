@@ -485,12 +485,12 @@ export const Related = () => (
 							format={{
 								display: Display.Standard,
 								theme: Pillar.Sport,
-								design: Design.LiveBlog,
+								design: Design.DeadBlog,
 							}}
 							palette={decidePalette({
 								display: Display.Standard,
 								theme: Pillar.Sport,
-								design: Design.LiveBlog,
+								design: Design.DeadBlog,
 							})}
 							headlineText={headlines[8]}
 							headlineSize="medium"

@@ -6,20 +6,21 @@ import {
 	makeGuardianBrowserCAPI,
 	makeGuardianBrowserNav,
 } from '@root/src/model/window-guardian';
-import { Article } from '@root/fixtures/articles/Article';
-import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
-import { Review } from '@root/fixtures/articles/Review';
-import { Analysis } from '@root/fixtures/articles/Analysis';
-import { Feature } from '@root/fixtures/articles/Feature';
-import { Live } from '@root/fixtures/articles/Live';
-import { GuardianView } from '@root/fixtures/articles/GuardianView';
-import { SpecialReport } from '@root/fixtures/articles/SpecialReport';
-import { Interview } from '@root/fixtures/articles/Interview';
-import { Quiz } from '@root/fixtures/articles/Quiz';
-import { Recipe } from '@root/fixtures/articles/Recipe';
-import { Comment } from '@root/fixtures/articles/Comment';
-import { MatchReport } from '@root/fixtures/articles/MatchReport';
-import { PrintShop } from '@root/fixtures/articles/PrintShop';
+import { Article } from '@root/fixtures/generated/articles/Article';
+import { PhotoEssay } from '@root/fixtures/generated/articles/PhotoEssay';
+import { Review } from '@root/fixtures/generated/articles/Review';
+import { Analysis } from '@root/fixtures/generated/articles/Analysis';
+import { Feature } from '@root/fixtures/generated/articles/Feature';
+import { Live } from '@root/fixtures/generated/articles/Live';
+import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
+import { Interview } from '@root/fixtures/generated/articles/Interview';
+import { Quiz } from '@root/fixtures/generated/articles/Quiz';
+import { Recipe } from '@root/fixtures/generated/articles/Recipe';
+import { Comment } from '@root/fixtures/generated/articles/Comment';
+import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
+import { PrintShop } from '@root/fixtures/generated/articles/PrintShop';
+import { Labs } from '@root/fixtures/generated/articles/Labs';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -84,6 +85,13 @@ ArticleStory.story = {
 	},
 };
 
+export const ArticleWithNoBylineStory = (): React.ReactNode => {
+	const ServerCAPI = convertToImmersive(Article);
+	ServerCAPI.author.byline = '';
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+ArticleWithNoBylineStory.story = { name: 'Article with no byline' };
+
 export const ReviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Review);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
@@ -141,6 +149,10 @@ export const SpecialReportStory = (): React.ReactNode => {
 SpecialReportStory.story = {
 	name: 'SpecialReport',
 };
+SpecialReportStory.parameters = {
+	// Wait for the interactives to load
+	chromatic: { delay: 1000 },
+};
 
 export const FeatureStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Feature);
@@ -180,12 +192,12 @@ export const DeadStory = (): React.ReactNode => {
 };
 DeadStory.story = { name: 'DeadBlog' };
 
-export const GuardianViewStory = (): React.ReactNode => {
-	const ServerCAPI = convertToImmersive(GuardianView);
+export const GEditorialStory = (): React.ReactNode => {
+	const ServerCAPI = convertToImmersive(Editorial);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-GuardianViewStory.story = {
-	name: 'GuardianView',
+GEditorialStory.story = {
+	name: 'Editorial',
 	parameters: {
 		viewport: { defaultViewport: 'leftCol' },
 		chromatic: { viewports: [1140] },
@@ -221,3 +233,11 @@ export const PrintShopStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 PrintShopStory.story = { name: 'PrintShop' };
+
+export const LabsStory = (): React.ReactNode => {
+	const ServerCAPI = convertToImmersive(Labs);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LabsStory.story = {
+	name: 'Labs',
+};

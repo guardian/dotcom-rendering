@@ -9,7 +9,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -21,7 +21,7 @@ import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightI
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
+import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -264,18 +264,20 @@ export const ShowcaseLayout = ({
 					</Section>
 				</Stuck>
 				<SendToBack>
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
-						/>
-					</Section>
+					{format.theme !== Special.Labs && (
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							backgroundColour={brandBackground.primary}
+						>
+							<Header
+								edition={CAPI.editionId}
+								idUrl={CAPI.config.idUrl}
+								mmaUrl={CAPI.config.mmaUrl}
+							/>
+						</Section>
+					)}
 
 					<Section
 						showSideBorders={true}
@@ -338,7 +340,7 @@ export const ShowcaseLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="border">
-						<Border />
+						<Border palette={palette} />
 					</GridItem>
 					<GridItem area="headline">
 						<PositionHeadline design={format.design}>
@@ -387,10 +389,8 @@ export const ShowcaseLayout = ({
 						</div>
 					</GridItem>
 					<GridItem area="standfirst">
-						<ArticleStandfirst
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
+						<Standfirst
+							format={format}
 							standfirst={CAPI.standfirst}
 						/>
 					</GridItem>
@@ -435,6 +435,8 @@ export const ShowcaseLayout = ({
 									adTargeting={adTargeting}
 									host={host}
 									abTests={CAPI.config.abTests}
+									pageId={CAPI.pageId}
+									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines

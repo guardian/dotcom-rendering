@@ -1,12 +1,12 @@
 import { ABTest } from '@guardian/ab-core';
 
 export const stickyNavTest: ABTest = {
-	id: 'stickyNavTest',
+	id: 'StickyNavTest',
 	start: '2021-02-10',
 	expiry: '2021-05-03',
 	author: 'nlong',
 	description: 'Tests sticky nav behaviour.',
-	audience: 0,
+	audience: 0.01,
 	audienceOffset: 0,
 	successMeasure:
 		'Increased CTR on sticky variant, more visits to fronts, increase in number of pillars visited per user.',
@@ -21,7 +21,7 @@ export const stickyNavTest: ABTest = {
 			test: (): void => {},
 		},
 		{
-			id: 'sticky-nav-simple',
+			id: 'sticky-nav-anchor',
 			test: (): void => {},
 		},
 		{

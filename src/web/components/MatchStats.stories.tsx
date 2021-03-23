@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { game } from '@root/fixtures/game';
+import { matchReport } from '@root/fixtures/generated/match-report';
 
 import { Section } from './Section';
 import { Flex } from './Flex';
@@ -16,7 +16,9 @@ export default {
 };
 
 export const Default = () => {
-	return <MatchStats home={game.homeTeam} away={game.awayTeam} />;
+	return (
+		<MatchStats home={matchReport.homeTeam} away={matchReport.awayTeam} />
+	);
 };
 Default.story = { name: 'default' };
 
@@ -28,7 +30,10 @@ export const InContext = () => {
 					<></>
 				</LeftColumn>
 				<ArticleContainer>
-					<MatchStats home={game.homeTeam} away={game.awayTeam} />
+					<MatchStats
+						home={matchReport.homeTeam}
+						away={matchReport.awayTeam}
+					/>
 				</ArticleContainer>
 				<RightColumn>
 					<></>

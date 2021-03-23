@@ -4,8 +4,8 @@ import libDebounce from 'lodash/debounce';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { palette, space } from '@guardian/src-foundations';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { space } from '@guardian/src-foundations';
+import { neutral, brandAlt, text } from '@guardian/src-foundations/palette';
 import { Design, Display } from '@guardian/types';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
@@ -126,7 +126,7 @@ const dotStyle = css`
 	display: inline-block;
 	height: ${space[3]}px;
 	width: ${space[3]}px;
-	background-color: ${palette.neutral[93]};
+	background-color: ${neutral[93]};
 	border-radius: 100%;
 	border: 0 none;
 	padding: 0;
@@ -134,17 +134,17 @@ const dotStyle = css`
 
 	&:hover,
 	&:focus {
-		background-color: ${palette.neutral[86]};
+		background-color: ${neutral[86]};
 		outline: none;
 	}
 `;
 
-const dotActiveStyle = (pillar: Theme) => css`
-	background-color: ${pillarPalette[pillar][400]};
+const dotActiveStyle = (palette: Palette) => css`
+	background-color: ${palette.background.carouselDot};
 
 	&:hover,
 	&:focus {
-		background-color: ${pillarPalette[pillar].main};
+		background-color: ${palette.background.carouselDotFocus};
 	}
 `;
 
@@ -213,14 +213,14 @@ const buttonStyle = css`
 	cursor: pointer;
 	margin-top: 10px;
 	padding: 0;
-	background-color: ${palette.neutral[0]};
+	background-color: ${neutral[0]};
 
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${palette.brandAlt[400]};
+		background-color: ${brandAlt[400]};
 		svg {
-			fill: ${palette.neutral[7]};
+			fill: ${neutral[7]};
 		}
 	}
 
@@ -229,21 +229,21 @@ const buttonStyle = css`
 	}
 
 	svg {
-		fill: ${palette.neutral[100]};
+		fill: ${neutral[100]};
 		height: 34px;
 	}
 `;
 
 const prevButtonStyle = (index: number) => css`
-	background-color: ${index !== 0 ? palette.neutral[0] : palette.neutral[60]};
+	background-color: ${index !== 0 ? neutral[0] : neutral[60]};
 `;
 
 const nextButtonStyle = (index: number, totalStories: number) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
 	background-color: ${!isLastCardShowing(index, totalStories)
-		? palette.neutral[0]
-		: palette.neutral[60]};
+		? neutral[0]
+		: neutral[60]};
 `;
 
 const headerRowStyles = css`
@@ -261,31 +261,29 @@ const headerRowStyles = css`
 
 const headerStyles = css`
 	${headline.xsmall({ fontWeight: 'bold' })};
-	color: ${palette.text.primary};
+	color: ${text.primary};
 	${headline.xsmall({ fontWeight: 'bold' })};
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
 	margin-left: 0;
 `;
 
-const titleStyle = (pillar: Theme, isCuratedContent?: boolean) => css`
-	color: ${isCuratedContent
-		? pillarPalette[pillar].main
-		: palette.text.primary};
+const titleStyle = (palette: Palette, isCuratedContent?: boolean) => css`
+	color: ${isCuratedContent ? palette.text.carouselTitle : text.primary};
 `;
 
 const Title = ({
 	title,
-	pillar,
+	palette,
 	isCuratedContent,
 }: {
 	title: string;
-	pillar: Theme;
+	palette: Palette;
 	isCuratedContent?: boolean;
 }) => (
 	<h2 className={headerStyles}>
 		{isCuratedContent ? 'More from ' : ''}
-		<span className={titleStyle(pillar, isCuratedContent)}>{title}</span>
+		<span className={titleStyle(palette, isCuratedContent)}>{title}</span>
 	</h2>
 );
 
@@ -359,7 +357,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 type HeaderAndNavProps = {
 	heading: string;
 	trails: TrailType[];
-	pillar: Theme;
+	palette: Palette;
 	index: number;
 	isCuratedContent?: boolean;
 	isFullCardImage?: boolean;
@@ -369,7 +367,7 @@ type HeaderAndNavProps = {
 const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	heading,
 	trails,
-	pillar,
+	palette,
 	index,
 	isCuratedContent,
 	isFullCardImage,
@@ -378,7 +376,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	<div>
 		<Title
 			title={heading}
-			pillar={pillar}
+			palette={palette}
 			isCuratedContent={isCuratedContent}
 		/>
 		<div className={dotsStyle}>
@@ -392,7 +390,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 					key={`dot-${i}`}
 					className={cx(
 						dotStyle,
-						i === index && dotActiveStyle(pillar),
+						i === index && dotActiveStyle(palette),
 						adjustNumberOfDotsStyle(
 							i,
 							trails.length,
@@ -412,10 +410,11 @@ export const Carousel: React.FC<OnwardsType> = ({
 	heading,
 	trails,
 	ophanComponentName,
-	pillar,
+	format,
 	isFullCardImage,
 	isCuratedContent,
 }: OnwardsType) => {
+	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -535,7 +534,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
-					pillar={pillar}
+					palette={palette}
 					index={index}
 					isCuratedContent={isCuratedContent}
 					isFullCardImage={isFullCardImage}
@@ -576,7 +575,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						<HeaderAndNav
 							heading={heading}
 							trails={trails}
-							pillar={pillar}
+							palette={palette}
 							index={index}
 							isCuratedContent={isCuratedContent}
 							isFullCardImage={isFullCardImage}
@@ -618,7 +617,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						const {
 							url: linkTo,
 							headline: headlineText,
-							format,
+							format: trailFormat,
 							palette: trailPalette,
 							webPublicationDate,
 							image: fallbackImageUrl,
@@ -633,7 +632,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<CarouselCard
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
-								format={format}
+								format={trailFormat}
 								trailPalette={trailPalette}
 								linkTo={linkTo}
 								headlineText={headlineText}

@@ -1,27 +1,20 @@
 import React from 'react';
 
-import { RichLink, DefaultRichLink } from '@root/src/web/components/RichLink';
+import { RichLink } from '@root/src/web/components/RichLink';
+import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 
 import { useApi } from '@root/src/web/lib/api';
 import { Design, Display } from '@guardian/types';
 
-type CardStyle =
-	| 'special-report'
-	| 'live'
-	| 'dead'
-	| 'feature'
-	| 'editorial'
-	| 'comment'
-	| 'podcast'
-	| 'media'
-	| 'analysis'
-	| 'review'
-	| 'letters'
-	| 'external'
-	| 'news';
+type Props = {
+	element: RichLinkBlockElement;
+	pillar: Theme;
+	ajaxEndpoint: string;
+	richLinkIndex: number;
+};
 
 interface CAPIRichLinkType {
-	cardStyle: CardStyle;
+	cardStyle: RichLinkCardType;
 	thumbnailUrl: string;
 	headline: string;
 	contentType: ContentType;
@@ -41,12 +34,12 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 	return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
 };
 
-export const RichLinkComponent: React.FC<{
-	element: RichLinkBlockElement;
-	pillar: Theme;
-	ajaxEndpoint: string;
-	richLinkIndex: number;
-}> = ({ element, pillar, ajaxEndpoint, richLinkIndex }) => {
+export const RichLinkComponent = ({
+	element,
+	pillar,
+	ajaxEndpoint,
+	richLinkIndex,
+}: Props) => {
 	const url = buildUrl(element, ajaxEndpoint);
 	const { data, loading, error } = useApi<CAPIRichLinkType>(url);
 

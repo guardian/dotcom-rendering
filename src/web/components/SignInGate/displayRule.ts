@@ -4,6 +4,10 @@ import {
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
 import { getCountryCodeFromLocalStorage } from '@frontend/web/lib/getCountryCode';
+import { CurrentABTest } from '@root/src/web/components/SignInGate/gateDesigns/types';
+import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
+import { onConsentChange } from '@root/node_modules/@guardian/consent-management-platform';
+import { ConsentState } from '@root/node_modules/@guardian/consent-management-platform/dist/types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
@@ -70,5 +74,64 @@ export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
 
 	return !invalidTags.some((invalidTag) =>
 		CAPI.tags.map((tag) => tag.id).includes(invalidTag),
+	);
+};
+
+export const canShow = (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+	currentTest: CurrentABTest,
+): Promise<boolean> => {
+	return Promise.resolve(
+		!isSignedIn &&
+			!hasUserDismissedGateMoreThanCount(
+				currentTest.variant,
+				currentTest.name,
+				5,
+			) &&
+			isNPageOrHigherPageView(3) &&
+			isValidContentType(CAPI) &&
+			isValidSection(CAPI) &&
+			isValidTag(CAPI) &&
+			!isIOS9(),
+	);
+};
+
+export const hasRequiredConsents = (): Promise<boolean> => {
+	const hasConsentedToAll = (state: ConsentState) => {
+		const consentFlags = state.tcfv2?.consents
+			? Object.values(state.tcfv2.consents)
+			: [];
+		const vendorConsentFlags = state.tcfv2?.vendorConsents
+			? Object.values(state.tcfv2.vendorConsents)
+			: [];
+		const isEmpty =
+			consentFlags.length === 0 || vendorConsentFlags.length === 0;
+
+		return (
+			!isEmpty && [...consentFlags, ...vendorConsentFlags].every(Boolean)
+		);
+	};
+
+	return new Promise((resolve) => {
+		onConsentChange((state) => {
+			resolve(hasConsentedToAll(state));
+		});
+	});
+};
+
+export const canShowMandatoryGate: (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+	currentTest: CurrentABTest,
+) => Promise<boolean> = async (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+	currentTest: CurrentABTest,
+) => {
+	return (
+		isCountry('GB') &&
+		(await canShow(CAPI, isSignedIn, currentTest)) &&
+		(await hasRequiredConsents())
 	);
 };

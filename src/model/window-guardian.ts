@@ -27,6 +27,7 @@ export interface WindowGuardianConfig {
 	tests?: { [key: string]: string };
 	ophan: {
 		pageViewId: string;
+		browserId: string;
 	};
 }
 
@@ -62,6 +63,7 @@ const makeWindowGuardianConfig = (
 		tests: config.abTests || {},
 		ophan: {
 			pageViewId: '',
+			browserId: '',
 		},
 	} as WindowGuardianConfig;
 };

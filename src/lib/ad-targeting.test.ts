@@ -1,4 +1,4 @@
-import { Article } from '@root/fixtures/articles/Article';
+import { Article } from '@root/fixtures/generated/articles/Article';
 import { buildAdTargeting } from './ad-targeting';
 
 const CAPI = {

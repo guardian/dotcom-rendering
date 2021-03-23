@@ -1,13 +1,12 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { border } from '@guardian/src-foundations/palette';
 import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { Counts } from '@root/src/web/components/Counts';
 
 import { Branding } from '@root/src/web/components/Branding';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
@@ -54,8 +53,8 @@ const metaFlex = css`
 	flex-wrap: wrap;
 `;
 
-const metaExtras = css`
-	border-top: 1px solid ${border.secondary};
+const metaExtras = (palette: Palette) => css`
+	border-top: 1px solid ${palette.border.article};
 	flex-grow: 1;
 	padding-top: 6px;
 
@@ -74,8 +73,12 @@ const metaExtras = css`
 	}
 `;
 
-const metaNumbers = css`
-	border-top: 1px solid ${border.secondary};
+const contributorTopBorder = (palette: Palette) => css`
+	border-top: 1px solid ${palette.border.article};
+`;
+
+const metaNumbers = (palette: Palette) => css`
+	border-top: 1px solid ${palette.border.article};
 	display: flex;
 	flex-grow: 1;
 
@@ -244,9 +247,7 @@ export const ArticleMeta = ({
 	return (
 		<div className={metaContainer(format)}>
 			<div className={cx(meta)}>
-				{branding && (
-					<Branding branding={branding} pillar={format.theme} />
-				)}
+				{branding && <Branding branding={branding} palette={palette} />}
 				<RowBelowLeftCol>
 					<>
 						{showAvatar && bylineImageUrl && (
@@ -258,7 +259,13 @@ export const ArticleMeta = ({
 								/>
 							</AvatarContainer>
 						)}
-						<div>
+						<div
+							className={
+								format.theme === Special.Labs
+									? contributorTopBorder(palette)
+									: ''
+							}
+						>
 							{shouldShowContributor(format) && (
 								<Contributor
 									author={author}
@@ -275,15 +282,16 @@ export const ArticleMeta = ({
 					</>
 				</RowBelowLeftCol>
 				<div data-print-layout="hide" className={metaFlex}>
-					<div className={metaExtras}>
+					<div className={metaExtras(palette)}>
 						<ShareIcons
 							pageId={pageId}
 							webTitle={webTitle}
 							palette={palette}
 							displayIcons={['facebook', 'twitter', 'email']}
+							size="medium"
 						/>
 					</div>
-					<div className={metaNumbers}>
+					<div className={metaNumbers(palette)}>
 						<Counts>
 							{/* The meta-number classname is needed by Counts.tsx */}
 							<div

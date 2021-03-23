@@ -2,8 +2,10 @@ import React from 'react';
 import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 
-import { Pillar } from '@guardian/types';
-import { calloutCampaign } from '@root/fixtures/calloutCampaign';
+import { Design, Display, Pillar } from '@guardian/types';
+
+import { calloutCampaign } from '@root/fixtures/manual/calloutCampaign';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { CalloutBlockComponent } from './CalloutBlockComponent';
 
@@ -31,7 +33,11 @@ export const Default = () => {
 		>
 			<CalloutBlockComponent
 				callout={calloutCampaign}
-				pillar={Pillar.News}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
 			/>
 		</div>
 	);

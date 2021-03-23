@@ -78,13 +78,13 @@ const Showcase = Format(
 	'Showcase',
 );
 
-const GuardianView = Format(
+const Editorial = Format(
 	{
 		display: Display.Standard,
 		theme: Pillar.News,
 		design: Design.Editorial,
 	},
-	'GuardianView',
+	'Editorial',
 );
 
 const Interactive = Format(
@@ -114,13 +114,22 @@ const Media = Format(
 	'Media',
 );
 
-const Live = Format(
+const LiveBlog = Format(
 	{
 		display: Display.Standard,
 		theme: Pillar.News,
 		design: Design.LiveBlog,
 	},
-	'Live',
+	'LiveBlog',
+);
+
+const DeadBlog = Format(
+	{
+		display: Display.Standard,
+		theme: Pillar.News,
+		design: Design.DeadBlog,
+	},
+	'DeadBlog',
 );
 
 const PrintShop = Format(
@@ -159,11 +168,12 @@ export {
 	Article,
 	Immersive,
 	Showcase,
-	GuardianView,
+	Editorial,
 	Interactive,
 	MatchReport,
 	Media,
-	Live,
+	LiveBlog,
+	DeadBlog,
 	PrintShop,
 	Recipe,
 };

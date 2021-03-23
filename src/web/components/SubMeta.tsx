@@ -2,7 +2,6 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { space } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
 
@@ -32,10 +31,10 @@ const listStyleNone = css`
 	list-style: none;
 `;
 
-const listWrapper = css`
+const listWrapper = (palette: Palette) => css`
 	padding-bottom: 12px;
 	margin-bottom: 6px;
-	border-bottom: 1px solid ${border.secondary};
+	border-bottom: 1px solid ${palette.border.article};
 `;
 
 const listItemStyles = (palette: Palette) => css`
@@ -126,7 +125,7 @@ export const SubMeta = ({
 			{(hasSectionLinks || hasKeywordLinks) && (
 				<>
 					<span className={labelStyles(palette)}>Topics</span>
-					<div className={listWrapper}>
+					<div className={listWrapper(palette)}>
 						{hasSectionLinks && (
 							<ul className={listStyleNone}>
 								{subMetaSectionLinks.map((link, i) => (
@@ -196,6 +195,7 @@ export const SubMeta = ({
 							'whatsApp',
 							'messenger',
 						]}
+						size="medium"
 					/>
 					<div className={syndicationButtonOverrides(palette)}>
 						<LinkButton

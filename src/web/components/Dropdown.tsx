@@ -12,6 +12,7 @@ import {
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import { getZIndex } from '../lib/getZIndex';
 
 export interface DropdownLinkType {
 	url: string;
@@ -28,7 +29,7 @@ interface Props {
 }
 
 const ulStyles = css`
-	z-index: 1072;
+	${getZIndex('dropdown')}
 	list-style: none;
 	background-color: white;
 	padding: 6px 0;

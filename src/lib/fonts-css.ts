@@ -198,6 +198,28 @@ const fontList: FontDisplay[] = [
 		weight: 700,
 		style: 'normal',
 	},
+	{
+		family: 'GuardianTextEgyptian',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
+	},
+	{
+		family: 'Guardian Text Egyptian Web',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
+	},
 	// GuardianTextSans, with legacy family name of Guardian Text Sans Web
 	{
 		family: 'GuardianTextSans',
@@ -264,6 +286,28 @@ const fontList: FontDisplay[] = [
 			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Bold.ttf',
 		weight: 700,
 		style: 'normal',
+	},
+	{
+		family: 'GuardianTextSans',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
+	},
+	{
+		family: 'Guardian Text Sans Web',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
 	},
 ];
 

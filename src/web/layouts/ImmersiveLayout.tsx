@@ -20,7 +20,7 @@ import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleStandfirst } from '@root/src/web/components/ArticleStandfirst';
+import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
@@ -407,7 +407,7 @@ export const ImmersiveLayout = ({
 						{format.design === Design.PhotoEssay ? (
 							<></>
 						) : (
-							<Border />
+							<Border palette={palette} />
 						)}
 					</GridItem>
 					<GridItem area="title">
@@ -453,18 +453,14 @@ export const ImmersiveLayout = ({
 						</>
 					</GridItem>
 					<GridItem area="standfirst">
-						<ArticleStandfirst
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
+						<Standfirst
+							format={format}
 							standfirst={CAPI.standfirst}
 						/>
 					</GridItem>
 					<GridItem area="byline">
 						<HeadlineByline
-							display={format.display}
-							design={format.design}
-							pillar={format.theme}
+							format={format}
 							tags={CAPI.tags}
 							byline={
 								CAPI.author.byline ? CAPI.author.byline : ''
@@ -516,6 +512,8 @@ export const ImmersiveLayout = ({
 									adTargeting={adTargeting}
 									host={host}
 									abTests={CAPI.config.abTests}
+									pageId={CAPI.pageId}
+									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines

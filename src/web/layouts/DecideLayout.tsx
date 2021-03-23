@@ -56,6 +56,16 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		}
 		case Display.Showcase: {
 			switch (design) {
+				case Design.LiveBlog:
+				case Design.DeadBlog:
+					return (
+						<LiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
 				case Design.Comment:
 				case Design.Editorial:
 					return (
@@ -81,6 +91,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		default: {
 			switch (design) {
 				case Design.LiveBlog:
+				case Design.DeadBlog:
 					return (
 						<LiveLayout
 							CAPI={CAPI}

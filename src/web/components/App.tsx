@@ -68,15 +68,17 @@ import { SpotifyBlockComponent } from '@root/src/web/components/elements/Spotify
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import {
-	StickyNavSimple,
+	StickyNavAnchor,
 	StickyNavBackscroll,
 } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
+import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
 import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
+import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -164,6 +166,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 	// executing their canShow logic until countryCode is available):
 	const [asyncCountryCode, setAsyncCountryCode] = useState<
 		Promise<string | void>
+	>();
+
+	const [brazeMessages, setBrazeMessages] = useState<
+		Promise<BrazeMessagesInterface>
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
@@ -332,7 +338,14 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const display: Display = decideDisplay(CAPI.format);
 	const design: Design = decideDesign(CAPI.format);
-	const pillar = decideTheme(CAPI.format);
+	const pillar: Theme = decideTheme(CAPI.format);
+
+	useOnce(() => {
+		setBrazeMessages(
+			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
+		);
+	}, [isSignedIn, CAPI.config.idApiUrl]);
+
 	const format: Format = {
 		display,
 		design,
@@ -344,12 +357,12 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	// sticky nav test status
 	const inStickyNavBackscroll = ABTestAPI.isUserInVariant(
-		'stickyNavTest',
+		'StickyNavTest',
 		'sticky-nav-backscroll',
 	);
-	const inStickyNavSimple = ABTestAPI.isUserInVariant(
-		'stickyNavTest',
-		'sticky-nav-simple',
+	const inStickyNavAnchor = ABTestAPI.isUserInVariant(
+		'StickyNavTest',
+		'sticky-nav-anchor',
 	);
 
 	// There are docs on loadable in ./docs/loadable-components.md
@@ -558,13 +571,14 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</HydrateOnce>
 			))}
 			{interactiveElements.map((interactiveBlock) => (
-				<Portal rootId={interactiveBlock.elementId}>
+				<HydrateOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent
 						url={interactiveBlock.url}
 						scriptUrl={interactiveBlock.scriptUrl}
 						alt={interactiveBlock.alt}
+						role={interactiveBlock.role}
 					/>
-				</Portal>
+				</HydrateOnce>
 			))}
 			{quizAtoms.map((quizAtom) => (
 				<HydrateOnce rootId={quizAtom.elementId}>
@@ -597,9 +611,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 				</Portal>
 			)}
 
-			{inStickyNavSimple && (
+			{inStickyNavAnchor && (
 				<Portal rootId="sticky-nav-root">
-					<StickyNavSimple
+					<StickyNavAnchor
 						capiData={CAPI}
 						navData={NAV}
 						format={format}
@@ -636,7 +650,10 @@ export const App = ({ CAPI, NAV }: Props) => {
 			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
-					<CalloutBlockComponent callout={callout} pillar={pillar} />
+					<CalloutBlockComponent
+						callout={callout}
+						palette={palette}
+					/>
 				</HydrateOnce>
 			))}
 			{chartAtoms.map((chartAtom) => (
@@ -779,6 +796,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							height={document.height}
 							width={document.width}
 							title={document.title}
+							source={document.source}
 						/>
 					</ClickToView>
 				</HydrateOnce>
@@ -950,6 +968,8 @@ export const App = ({ CAPI, NAV }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 					tags={CAPI.tags}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					brazeMessages={brazeMessages}
+					idApiUrl={CAPI.config.idApiUrl}
 				/>
 			</Portal>
 			<Portal
@@ -973,7 +993,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
 							edition={CAPI.editionId}
-							pillar={pillar}
+							format={format}
 						/>
 					</Suspense>
 				</Lazy>
@@ -991,7 +1011,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							ajaxUrl={CAPI.config.ajaxUrl}
 							hasStoryPackage={CAPI.hasStoryPackage}
 							tags={CAPI.tags}
-							pillar={pillar}
+							format={format}
 						/>
 					</Suspense>
 				</Lazy>
@@ -1020,7 +1040,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
-					pillar={pillar}
+					palette={palette}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 					display={display}
@@ -1041,7 +1061,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
 					CAPI={CAPI}
-					idApiUrl={CAPI.config.idApiUrl}
+					brazeMessages={brazeMessages}
 				/>
 			</Portal>
 		</React.StrictMode>

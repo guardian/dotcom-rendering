@@ -342,12 +342,12 @@ export const Front = () => (
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 						format={{
 							display: Display.Standard,
-							design: Design.LiveBlog,
+							design: Design.DeadBlog,
 							theme: Pillar.Sport,
 						}}
 						palette={decidePalette({
 							display: Display.Standard,
-							design: Design.LiveBlog,
+							design: Design.DeadBlog,
 							theme: Pillar.Sport,
 						})}
 						headlineText={headlines[8]}

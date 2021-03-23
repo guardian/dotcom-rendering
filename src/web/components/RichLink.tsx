@@ -7,39 +7,22 @@ import {
 	neutral,
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { from, until, between } from '@guardian/src-foundations/mq';
-import { Design, Display, Pillar } from '@guardian/types';
+import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
-import { pillarPalette } from '@frontend/lib/pillars';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Hide } from '@root/src/web/components/Hide';
 import { Avatar } from '@frontend/web/components/Avatar';
-import { decidePalette } from '../lib/decidePalette';
-
-type CardStyle =
-	| 'special-report'
-	| 'live'
-	| 'dead'
-	| 'feature'
-	| 'editorial'
-	| 'comment'
-	| 'podcast'
-	| 'media'
-	| 'analysis'
-	| 'review'
-	| 'letters'
-	| 'external'
-	| 'news';
 
 type ColourType = string;
 
 interface Props {
 	richLinkIndex: number;
-	cardStyle: CardStyle;
+	cardStyle: RichLinkCardType;
 	thumbnailUrl: string;
 	headlineText: string;
 	contentType: ContentType;
@@ -52,31 +35,6 @@ interface Props {
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
 }
 
-const richLinkContainer = css`
-	/*
-        TODO: avoid this edge case from appearing in editorials
-        edge case:
-        If rich link div is pushed further inline to the page the "margin-left: -240px;" wont work.
-        Using "clear: left;" allows us to igrnore the effects of other elements on the left.
-    */
-	clear: left;
-
-	${until.wide} {
-		width: 140px;
-	}
-	float: left;
-	margin-right: 20px;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	${between.leftCol.and.wide} {
-		margin-left: -160px;
-	}
-	${from.wide} {
-		margin-left: -240px;
-		width: 220px;
-	}
-`;
-
 const neutralBackground = css`
 	background-color: ${neutral[97]};
 	a {
@@ -87,30 +45,23 @@ const neutralBackground = css`
 	}
 `;
 
-const richLinkPillarColour: (format: Format) => ColourType = (format) => {
-	if (format) {
-		return pillarPalette[format.theme].main;
-	}
-	return pillarPalette[Pillar.News][400];
-};
-
-const pillarBackground: (format: Format) => ColourType = (format) => {
+const pillarBackground: (palette: Palette) => ColourType = (palette) => {
 	return css`
-		background-color: ${richLinkPillarColour(format)};
+		background-color: ${palette.background.richLink};
 	`;
 };
 
-const textColour: (format: Format) => ColourType = (format) => {
+const textColour: (palette: Palette) => ColourType = (palette) => {
 	return css`
-		color: ${richLinkPillarColour(format)};
+		color: ${palette.text.richLink};
 	`;
 };
 
-const richLinkTopBorder: (format: Format) => ColourType = (format) => {
+const richLinkTopBorder: (palette: Palette) => ColourType = (palette) => {
 	return css`
 		border-top: 1px;
 		border-top-style: solid;
-		border-top-color: ${richLinkPillarColour(format)};
+		border-top-color: ${palette.border.richLink};
 	`;
 };
 
@@ -142,10 +93,10 @@ const richLinkTitle = css`
 	}
 `;
 
-const richLinkReadMore: (format: Format) => ColourType = (format) => {
+const richLinkReadMore: (palette: Palette) => ColourType = (palette) => {
 	return css`
-		fill: ${richLinkPillarColour(format)};
-		color: ${richLinkPillarColour(format)};
+		fill: ${palette.fill.richLink};
+		color: ${palette.text.richLink};
 		padding-top: 2px;
 	`;
 };
@@ -240,6 +191,7 @@ export const RichLink = ({
 	contributorImage,
 	isPlaceholder,
 }: Props) => {
+	const palette = decidePalette(format);
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
 
@@ -256,12 +208,12 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			className={pillarBackground(format)}
+			className={pillarBackground(palette)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div className={cx(richLinkContainer, neutralBackground)}>
+			<div className={neutralBackground}>
 				<a className={richLinkLink} href={url}>
-					<div className={richLinkTopBorder(format)} />
+					<div className={richLinkTopBorder(palette)} />
 					{showImage && (
 						<div>
 							<img
@@ -278,19 +230,13 @@ export const RichLink = ({
 									<>
 										<Hide when="above" breakpoint="wide">
 											<QuoteIcon
-												colour={
-													pillarPalette[format.theme]
-														.main
-												}
+												colour={palette.fill.quoteIcon}
 												size="small"
 											/>
 										</Hide>
 										<Hide when="below" breakpoint="wide">
 											<QuoteIcon
-												colour={
-													pillarPalette[format.theme]
-														.main
-												}
+												colour={palette.fill.quoteIcon}
 												size="medium"
 											/>
 										</Hide>
@@ -299,7 +245,9 @@ export const RichLink = ({
 								{linkText}
 							</div>
 							{isOpinion && (
-								<div className={cx(byline, textColour(format))}>
+								<div
+									className={cx(byline, textColour(palette))}
+								>
 									{mainContributor}
 								</div>
 							)}
@@ -326,7 +274,7 @@ export const RichLink = ({
 								/>
 							</div>
 						)}
-						<div className={richLinkReadMore(format)}>
+						<div className={richLinkReadMore(palette)}>
 							<ArrowInCircle />
 							<div className={readMoreTextStyle}>
 								{readMoreText(contentType)}
@@ -336,38 +284,5 @@ export const RichLink = ({
 				</a>
 			</div>
 		</div>
-	);
-};
-
-type DefaultProps = {
-	index: number;
-	headlineText: string;
-	url: string;
-	isPlaceholder?: boolean;
-};
-
-export const DefaultRichLink: React.FC<DefaultProps> = ({
-	index,
-	headlineText,
-	url,
-	isPlaceholder,
-}) => {
-	return (
-		<RichLink
-			richLinkIndex={index}
-			cardStyle="news"
-			thumbnailUrl=""
-			headlineText={headlineText}
-			contentType="article"
-			url={url}
-			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
-			}}
-			tags={[]}
-			sponsorName=""
-			isPlaceholder={isPlaceholder}
-		/>
 	);
 };
