@@ -18,8 +18,8 @@ import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { Epic } from '@root/src/amp/components/Epic';
-import { decideDesign } from 'src/web/lib/decideDesign';
-import { decideTheme } from 'src/web/lib/decideTheme';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 const bulletStyle = (pillar: Theme) => css`
 	.bullet {

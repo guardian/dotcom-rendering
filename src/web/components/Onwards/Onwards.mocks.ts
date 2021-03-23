@@ -3,7 +3,7 @@ import { Pillar, Design, Display } from '@guardian/types';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { decideDisplay } from 'src/web/lib/decideDisplay';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 
 const CAPITrails: CAPITrailType[] = [
 	{

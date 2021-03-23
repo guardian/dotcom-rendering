@@ -11,7 +11,7 @@ import { Blocks } from '@root/src/amp/components/Blocks';
 import RefreshIcon from '@frontend/static/icons/refresh.svg';
 import { Pagination } from '@root/src/amp/components/Pagination';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { decideTheme } from 'src/web/lib/decideTheme';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
