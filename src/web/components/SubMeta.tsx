@@ -4,10 +4,11 @@ import { css, cx } from 'emotion';
 import { space } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
+import { Special } from '@guardian/types';
+import { until } from '@guardian/src-foundations/mq';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
-import { until } from '@guardian/src-foundations/mq';
 
 const labelStyles = (palette: Palette) => css`
 	${textSans.xsmall()};
@@ -67,9 +68,17 @@ const linkStyles = (palette: Palette) => css`
 	color: ${palette.text.subMeta};
 `;
 
-const sectionStyles = css`
-	${headline.xxxsmall()};
-`;
+const sectionStyles = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium()}
+			line-height: 19px;
+		`;
+	}
+	return css`
+		${headline.xxxsmall()};
+	`;
+};
 
 const keywordStyles = css`
 	${textSans.small()};
@@ -83,6 +92,7 @@ const hideSlash = css`
 
 type Props = {
 	palette: Palette;
+	format: Format;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
 	pageId: string;
@@ -102,6 +112,7 @@ const syndicationButtonOverrides = (palette: Palette) => css`
 
 export const SubMeta = ({
 	palette,
+	format,
 	subMetaKeywordLinks,
 	subMetaSectionLinks,
 	pageId,
@@ -132,7 +143,7 @@ export const SubMeta = ({
 									<li
 										className={cx(
 											listItemStyles(palette),
-											sectionStyles,
+											sectionStyles(format),
 											i ===
 												subMetaSectionLinks.length -
 													1 && hideSlash,

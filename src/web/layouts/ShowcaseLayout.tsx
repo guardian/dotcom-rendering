@@ -445,6 +445,7 @@ export const ShowcaseLayout = ({
 								/>
 								<SubMeta
 									palette={palette}
+									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}
