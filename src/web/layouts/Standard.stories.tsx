@@ -18,6 +18,7 @@ import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -212,4 +213,12 @@ export const LabsStory = (): React.ReactNode => {
 };
 LabsStory.story = {
 	name: 'Labs',
+};
+
+export const SpecialReportStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
 };
