@@ -41,11 +41,10 @@ export default {
 const convertToImmersive = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: true,
+		format: {
+			...CAPI.format,
+			display: 'ImmersiveDisplay' as CAPIDisplay,
 		},
-		isImmersive: true,
 	};
 };
 
