@@ -55,6 +55,8 @@ type Props = {
 	minWidthInPixels?: number;
 	// Ophan tracking
 	dataLinkName?: string;
+	// Labs
+	badge?: BadgeType;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
