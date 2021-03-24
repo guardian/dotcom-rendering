@@ -32,6 +32,7 @@ const twitterHandleStyles = (palette: Palette) => css`
 
 const bylineStyles = (palette: Palette, format: Format) => css`
 	${format.theme === Special.Labs ? textSans.medium() : headline.xxxsmall()};
+	${format.theme === Special.Labs && 'line-height: 20px;'};
 	color: ${palette.text.byline};
 	padding-bottom: 8px;
 	font-style: italic;
