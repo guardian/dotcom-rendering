@@ -88,6 +88,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<LinkHeadline
 								headlineText={trail.headline}
 								palette={trail.palette}
+								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}
@@ -101,6 +102,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<LinkHeadline
 								headlineText={trail.headline}
 								palette={trail.palette}
+								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}

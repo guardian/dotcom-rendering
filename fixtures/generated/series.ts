@@ -20,6 +20,35 @@ export const series = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/23/kate-garraway-finding-derek-review-devotion-and-honesty-in-the-face-of-covid',
+			linkText:
+				'Kate Garraway: Finding Derek review – devotion and honesty in the face of Covid',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image:
+				'https://i.guim.co.uk/img/media/2664bac97a56087898a40c0287c1981952fd2edc/0_361_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=6737b1ba0fcd380599e43f90d0d9ba5d',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/2664bac97a56087898a40c0287c1981952fd2edc/0_361_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=6737b1ba0fcd380599e43f90d0d9ba5d',
+				'460':
+					'https://i.guim.co.uk/img/media/2664bac97a56087898a40c0287c1981952fd2edc/0_361_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=a459abce502ee515055e8c93a6cc54b2',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-23T22:00:21.000Z',
+			headline:
+				'Kate Garraway: Finding Derek review – devotion and honesty in the face of Covid',
+			shortUrl: 'https://www.theguardian.com/p/gzk23',
+			starRating: 4,
+		},
+		{
+			url:
 				'https://www.theguardian.com/tv-and-radio/2021/mar/22/footballs-darkest-secret-review-spare-and-unrelenting',
 			linkText:
 				"Football's Darkest Secret review – spare and unrelenting",
@@ -82,7 +111,7 @@ export const series = {
 			linkText:
 				'The Flight Attendant review – strap in for a first-class murder mystery',
 			showByline: false,
-			byline: 'Lucy Mangan',
+			byline: 'Ellen E Jones',
 			image:
 				'https://i.guim.co.uk/img/media/89dff67d7776102d610b4c95e3146cddb577298d/0_0_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=aeed04b5b0f173b787eb43c1de3a1401',
 			carouselImages: {
@@ -277,35 +306,6 @@ export const series = {
 			headline:
 				"Waffles + Mochi review – Michelle Obama's charming puppet series",
 			shortUrl: 'https://www.theguardian.com/p/gmdpc',
-			starRating: 4,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/14/grace-review-a-twisty-race-against-time-for-john-simms-fading-detective',
-			linkText:
-				"Grace review – a twisty race against time for John Simm's fading detective",
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/2e6bb08d6c5948dc8c7ac1e39fd500eff63d96bc/0_173_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=b5d20b54fdd3197e59026e67676dc74d',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/2e6bb08d6c5948dc8c7ac1e39fd500eff63d96bc/0_173_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=b5d20b54fdd3197e59026e67676dc74d',
-				'460':
-					'https://i.guim.co.uk/img/media/2e6bb08d6c5948dc8c7ac1e39fd500eff63d96bc/0_173_8256_4954/master/8256.jpg?width=460&quality=85&auto=format&fit=max&s=a281e5ec6106014d57ff415b0c12d4f6',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2021-03-14T22:00:43.000Z',
-			headline:
-				"Grace review – a twisty race against time for John Simm's fading detective",
-			shortUrl: 'https://www.theguardian.com/p/gyehz',
 			starRating: 4,
 		},
 	],
