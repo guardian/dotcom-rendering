@@ -6,6 +6,7 @@ import { border, background } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Button } from '@guardian/src-button';
 import { SvgCheckmark } from '@guardian/src-icons';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
 	children: React.ReactNode;
@@ -147,25 +148,25 @@ export const ClickToView = ({
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
-					padding: 6px 25px 12px;
-					margin-bottom: 12px;
+					padding: 6px ${space[6]}px ${space[3]}px;
+					margin-bottom: ${space[3]}px;
 				`}
 				data-component={`click-to-view:${sourceDomain}`}
 			>
 				<div
 					className={css`
 						${roleHeadlineSize(role)}
-						margin-bottom: 5px;
+						margin-bottom: ${space[1]}px;
 					`}
 				>
 					{source
 						? `Allow ${source} content?`
 						: 'Allow content provided by a third party?'}
 				</div>
-				<div
+				<p
 					className={css`
 						${textSize}
-						margin-bottom: 19px;
+						margin-bottom: ${space[5]}px;
 						strong {
 							font-weight: bold;
 						}
@@ -195,7 +196,7 @@ export const ClickToView = ({
 							.
 						</>
 					)}
-				</div>
+				</p>
 				<div>
 					<Button
 						priority="primary"
