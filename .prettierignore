@@ -14,6 +14,7 @@ node_modules/
 !/src/**/*.ts
 !/src/**/*.tsx
 !/src/**/*.js
+!/src/model/json-schema.json
 !/fixtures/**/*.js
 !/fixtures/**/*.ts
 !/cypress/**/*.js
