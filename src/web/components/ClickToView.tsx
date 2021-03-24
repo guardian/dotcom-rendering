@@ -148,7 +148,7 @@ export const ClickToView = ({
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
-					padding: 6px ${space[6]}px ${space[3]}px;
+					padding: ${space[1]}px ${space[6]}px ${space[3]}px;
 					margin-bottom: ${space[3]}px;
 				`}
 				data-component={`click-to-view:${sourceDomain}`}
