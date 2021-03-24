@@ -107,7 +107,7 @@ const shouldDisplayOverlay = ({
 };
 
 const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
-	return abTestConfig.clickToViewVariant === 'variant';
+	return true || abTestConfig.clickToViewVariant === 'variant';
 };
 
 export const ClickToView = ({
@@ -166,10 +166,6 @@ export const ClickToView = ({
 				<p
 					className={css`
 						${textSize}
-						margin-bottom: ${space[5]}px;
-						strong {
-							font-weight: bold;
-						}
 					`}
 				>
 					{source ? (
@@ -197,7 +193,11 @@ export const ClickToView = ({
 						</>
 					)}
 				</p>
-				<div>
+				<div
+					className={css`
+						margin-top: ${space[5]}px;
+					`}
+				>
 					<Button
 						priority="primary"
 						size={roleButtonSize(role)}
