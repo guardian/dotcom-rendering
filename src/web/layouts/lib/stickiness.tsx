@@ -28,13 +28,13 @@ const headerWrapper = css`
 `;
 
 // The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
+// Overflow is visible because puzzles banner needs it to render correctly
 const bannerWrapper = css`
 	position: fixed !important;
 	bottom: 0;
 	${getZIndexImportant('banner')}
 	max-height: 80vh;
-	overflow: visible; // visible because the puzzles banner has overflow that needs to show
-
+	overflow: visible;
 	width: 100% !important;
 	background: none !important;
 	top: auto !important;
