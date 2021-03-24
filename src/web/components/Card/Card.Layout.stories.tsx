@@ -717,3 +717,125 @@ export const Media = () => (
 	</Section>
 );
 Media.story = { name: 'Media' };
+
+export const Labs = () => (
+	<Section>
+		<Flex>
+			<LeftColumn showRightBorder={false}>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<UL direction="row">
+					<LI percentage="25%" padSides={true}>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							})}
+							headlineText={headlines[11]}
+							headlineSize="medium"
+							webPublicationDate="2019-11-11T09:45:30.000Z"
+							imageUrl={images[0]}
+							imagePosition="top"
+							showClock={true}
+							commentCount={30989}
+							isLiveBlog={true}
+							showPulsingDot={true}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							})}
+							headlineText={headlines[11]}
+							headlineSize="medium"
+							webPublicationDate="2019-11-11T09:45:30.000Z"
+							imageUrl={images[0]}
+							imagePosition="top"
+							showClock={true}
+							commentCount={30989}
+							isLiveBlog={true}
+							showPulsingDot={true}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							})}
+							headlineText={headlines[11]}
+							headlineSize="medium"
+							kickerText={kickers[0]}
+							webPublicationDate="2019-11-11T09:45:30.000Z"
+							imageUrl={images[0]}
+							imagePosition="top"
+							showClock={true}
+							commentCount={0}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							palette={decidePalette({
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							})}
+							headlineText={headlines[11]}
+							headlineSize="medium"
+							kickerText={kickers[2]}
+							webPublicationDate="2019-11-11T09:45:30.000Z"
+							imageUrl={images[0]}
+							imagePosition="top"
+						/>
+					</LI>
+				</UL>
+			</ArticleContainer>
+		</Flex>
+	</Section>
+);
+Labs.story = { name: 'Labs' };
