@@ -474,7 +474,7 @@ export const ImmersiveLayout = ({
 							<div className={maxWidth}>
 								<div className={stretchLines}>
 									<GuardianLines
-										pillar={format.theme}
+										palette={palette}
 										effect={decideLineEffect(
 											Design.Article,
 											format.theme,
@@ -516,10 +516,7 @@ export const ImmersiveLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -645,7 +642,7 @@ export const ImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

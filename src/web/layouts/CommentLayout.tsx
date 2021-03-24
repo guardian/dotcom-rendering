@@ -374,7 +374,7 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={format.theme} />
+						<GuardianLines count={4} palette={palette} />
 					</Section>
 				</SendToBack>
 			</div>
@@ -445,7 +445,7 @@ export const CommentLayout = ({
 									)}
 									<GuardianLines
 										count={8}
-										pillar={format.theme}
+										palette={palette}
 									/>
 								</div>
 							</div>
@@ -453,7 +453,7 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="lines">
 						<div className={pushToBottom}>
-							<GuardianLines count={8} pillar={format.theme} />
+							<GuardianLines count={8} palette={palette} />
 						</div>
 					</GridItem>
 					<GridItem area="standfirst">
@@ -518,10 +518,7 @@ export const CommentLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -642,7 +639,7 @@ export const CommentLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

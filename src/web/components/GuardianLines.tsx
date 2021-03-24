@@ -4,14 +4,12 @@ import { css } from 'emotion';
 import { Lines } from '@guardian/src-ed-lines';
 import { remSpace } from '@guardian/src-foundations';
 
-import { neutralBorder } from '@root/src/lib/pillars';
-
-const linesCssOverwrite = (pillar: Theme) => css`
+const linesCssOverwrite = (palette: Palette) => css`
 	> div {
 		background-image: repeating-linear-gradient(
 			to bottom,
-			${neutralBorder(pillar)},
-			${neutralBorder(pillar)} 1px,
+			${palette.border.lines},
+			${palette.border.lines} 1px,
 			transparent 1px,
 			transparent ${remSpace[1]}
 		);
@@ -19,15 +17,15 @@ const linesCssOverwrite = (pillar: Theme) => css`
 `;
 
 export const GuardianLines = ({
-	pillar,
+	palette,
 	count,
 	effect,
 }: {
-	pillar: Theme;
+	palette: Palette;
 	count: 4 | 8 | undefined;
 	effect?: 'straight' | 'squiggly' | 'dotted';
 }) => (
-	<div className={linesCssOverwrite(pillar)}>
+	<div className={linesCssOverwrite(palette)}>
 		<Lines count={count} effect={effect} />
 	</div>
 );

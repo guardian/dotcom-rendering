@@ -628,6 +628,11 @@ const borderArticle: (format: Format) => string = (format) => {
 	return border.secondary;
 };
 
+const borderLines: (format: Format) => string = (format) => {
+	if (format.theme === Special.Labs) return border.primary;
+	return border.secondary;
+};
+
 const backgroundRichLink: (format: Format) => string = (format) => {
 	if (format) {
 		return pillarPalette[format.theme].main;
@@ -768,6 +773,7 @@ export const decidePalette = (format: Format): Palette => {
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
+			lines: borderLines(format),
 		},
 		topBar: {
 			card: topBarCard(format),

@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { Pillar } from '@guardian/types';
+import { Pillar, Display, Design } from '@guardian/types';
 
 import { useApi as useApi_ } from '@root/src/web/lib/api';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { mockTab1 } from '../MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
@@ -23,7 +24,13 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { asFragment, getAllByText } = render(
-			<MostViewedRight pillar={Pillar.News} />,
+			<MostViewedRight
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+			/>,
 		);
 
 		// Calls api once only
@@ -64,7 +71,14 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { getAllByText } = render(
-			<MostViewedRight pillar={Pillar.News} limitItems={3} />,
+			<MostViewedRight
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				limitItems={3}
+			/>,
 		);
 
 		// Calls api once only
@@ -83,7 +97,15 @@ describe('MostViewedList', () => {
 	it('should show a byline when this property is set to true', async () => {
 		useApi.mockReturnValue(response);
 
-		const { getByText } = render(<MostViewedRight pillar={Pillar.News} />);
+		const { getByText } = render(
+			<MostViewedRight
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+			/>,
+		);
 
 		expect(
 			getByText('Jennifer Rankin and Daniel Boffey'),

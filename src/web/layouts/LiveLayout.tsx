@@ -281,7 +281,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={format.theme} />
+						<GuardianLines count={4} palette={palette} />
 					</Section>
 				</SendToBack>
 			</div>
@@ -372,7 +372,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div className={stretchLines}>
 								<GuardianLines
 									count={decideLineCount(format.design)}
-									pillar={format.theme}
+									palette={palette}
 									effect={decideLineEffect(
 										format.design,
 										format.theme,
@@ -415,7 +415,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<GuardianLines
 									data-print-layout="hide"
 									count={4}
-									pillar={format.theme}
+									palette={palette}
 								/>
 								<SubMeta
 									palette={palette}
@@ -559,7 +559,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

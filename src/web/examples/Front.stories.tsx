@@ -78,7 +78,14 @@ export const Front = () => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines count={4} pillar={Pillar.News} />
+			<GuardianLines
+				count={4}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+			/>
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -630,7 +637,14 @@ export const Front = () => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines count={4} pillar={Pillar.News} />
+			<GuardianLines
+				count={4}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Media,
+					theme: Pillar.Sport,
+				})}
+			/>
 		</Section>
 		<Section
 			padded={false}
