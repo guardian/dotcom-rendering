@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 const execa = require('execa');
 const fs = require('fs');
 const { resolve } = require('path');
+const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
 
@@ -125,7 +126,7 @@ try {
 			.then((res) => res.json())
 			.then((json) => {
 				// Override config
-				json.config = { ...json.config, ...configOverrides };
+				json.config = { ...config, ...configOverrides };
 				// Override switches
 				json.config.switches = {
 					...json.config.switches,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import Star from '@frontend/static/icons/star.svg';
+import { Star } from '@frontend/static/icons/Star';
 import { palette } from '@guardian/src-foundations';
 
 const ratingsWrapper = css`
@@ -24,11 +24,6 @@ const smallSize = css`
 	}
 `;
 
-const emptyStar = css`
-	fill: transparent;
-	stroke: ${palette.neutral[7]};
-`;
-
 export const StarRating: React.FC<{
 	rating: number;
 	size: string;
@@ -37,12 +32,9 @@ export const StarRating: React.FC<{
 	const stars = (n: number) => {
 		return Array(5)
 			.fill(0)
-			.map((el, i) => {
-				if (i < n) {
-					return <Star key={i} />;
-				}
-				return <Star className={emptyStar} key={i} />;
-			});
+			.map((el, i) => (
+				<Star starId={`${size}${i}`} isEmpty={i >= n} key={i} />
+			));
 	};
 	return <div className={cx(ratingsWrapper, sizeClass)}>{stars(rating)}</div>;
 };

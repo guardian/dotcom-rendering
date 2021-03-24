@@ -113,6 +113,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								headlineText={headlineText}
 								palette={palette}
+								format={format}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -120,6 +121,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								headlineText={headlineText}
 								palette={palette}
+								format={format}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>

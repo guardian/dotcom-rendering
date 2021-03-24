@@ -522,6 +522,7 @@ export const ImmersiveLayout = ({
 								/>
 								<SubMeta
 									palette={palette}
+									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
 									}

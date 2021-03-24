@@ -526,6 +526,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									/>
 									<SubMeta
 										palette={palette}
+										format={format}
 										subMetaKeywordLinks={
 											CAPI.subMetaKeywordLinks
 										}

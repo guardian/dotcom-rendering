@@ -555,7 +555,8 @@ const fillCardIcon = (format: Format): string => {
 	}
 };
 
-const borderSyndicationButton = (): string => {
+const borderSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.Labs) return neutral[60];
 	return border.secondary;
 };
 
@@ -756,7 +757,7 @@ export const decidePalette = (format: Format): Palette => {
 			blockquoteIcon: fillBlockquoteIcon(format),
 		},
 		border: {
-			syndicationButton: borderSyndicationButton(),
+			syndicationButton: borderSyndicationButton(format),
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
