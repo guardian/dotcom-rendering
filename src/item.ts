@@ -260,7 +260,7 @@ const isQuiz = hasTag('tone/quizzes');
 
 const isLabs = hasTag('tone/advertisement-features');
 
-const isMatchReport = hasTag('tone/matchreport');
+const isMatchReport = hasTag('tone/matchreports');
 const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog = (context: Context) => (
