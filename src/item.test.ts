@@ -236,7 +236,7 @@ describe('fromCapi returns correct Item', () => {
 
 	test('matchreport', () => {
 		const item = f(contentWithTag('tone/matchreports'));
-		expect(item.design).toBe(Design.Article);
+		expect(item.design).toBe(Design.MatchReport);
 	});
 
 	test('interview', () => {
