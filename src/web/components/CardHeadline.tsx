@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { Design, Special } from '@guardian/types';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 
@@ -47,6 +47,34 @@ const fontStyles = (size: SmallHeadlineSize) => {
 		case 'tiny':
 			return css`
 				${headline.xxxsmall()};
+				font-size: 14px;
+			`;
+	}
+};
+
+const labTextStyles = (size: SmallHeadlineSize) => {
+	switch (size) {
+		case 'large':
+			return css`
+				${textSans.large()};
+				${until.desktop} {
+					${textSans.medium()};
+				}
+			`;
+		case 'medium':
+			return css`
+				${textSans.medium()};
+				${until.desktop} {
+					${textSans.small()};
+				}
+			`;
+		case 'small':
+			return css`
+				${textSans.small()};
+			`;
+		case 'tiny':
+			return css`
+				${textSans.xsmall()};
 				font-size: 14px;
 			`;
 	}
@@ -111,15 +139,13 @@ export const CardHeadline = ({
 	<>
 		<h4
 			className={cx(
-				fontStyles(size),
+				format.theme === Special.Labs
+					? labTextStyles(size)
+					: fontStyles(size),
 				format.design === Design.Analysis && underlinedStyles(size),
 				isFullCardImage &&
 					css`
 						line-height: 1; /* Reset line height in full image carousel */
-					`,
-				format.theme === Special.Labs &&
-					css`
-						${headline.xxsmall({ fontWeight: 'regular' })}
 					`,
 			)}
 		>
