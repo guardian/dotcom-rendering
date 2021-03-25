@@ -94,7 +94,7 @@ export const ShareIcons = ({
 			{displayIcons.includes('facebook') && (
 				<li className={liStyles(size)} key="facebook">
 					<a
-						href={`https://www.facebook.com/dialog/share?app_id=202314643182694&href=${encodeUrl(
+						href={`https://www.facebook.com/dialog/share?app_id=180444840287&href=${encodeUrl(
 							pageId,
 						)}&CMP=share_btn_fb`}
 						role="button"
