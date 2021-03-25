@@ -20,6 +20,35 @@ export const series = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/24/this-is-my-house-review-through-the-keyhole-with-stacey-dooley',
+			linkText:
+				'This Is My House review – through the keyhole with Stacey Dooley',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image:
+				'https://i.guim.co.uk/img/media/20696b46d52bce6f8420ad23fe1c981dc3042a0d/0_81_2400_1440/master/2400.jpg?width=300&quality=85&auto=format&fit=max&s=c37911932e839eade5f7b766dfbd9904',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/20696b46d52bce6f8420ad23fe1c981dc3042a0d/0_81_2400_1440/master/2400.jpg?width=300&quality=85&auto=format&fit=max&s=c37911932e839eade5f7b766dfbd9904',
+				'460':
+					'https://i.guim.co.uk/img/media/20696b46d52bce6f8420ad23fe1c981dc3042a0d/0_81_2400_1440/master/2400.jpg?width=460&quality=85&auto=format&fit=max&s=08a6d8ffbc107caa4157bf2ebce12070',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-24T22:00:09.000Z',
+			headline:
+				'This Is My House review – through the keyhole with Stacey Dooley',
+			shortUrl: 'https://www.theguardian.com/p/gpvap',
+			starRating: 5,
+		},
+		{
+			url:
 				'https://www.theguardian.com/tv-and-radio/2021/mar/23/kate-garraway-finding-derek-review-devotion-and-honesty-in-the-face-of-covid',
 			linkText:
 				'Kate Garraway: Finding Derek review – devotion and honesty in the face of Covid',
@@ -277,35 +306,6 @@ export const series = {
 			headline:
 				'Demi Lovato: Dancing With the Devil review – a pop music doc of shattering candour',
 			shortUrl: 'https://www.theguardian.com/p/gmtv4',
-			starRating: 4,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/16/waffles-plus-mochi-review-michelle-obama-netflix',
-			linkText:
-				"Waffles + Mochi review – Michelle Obama's charming puppet series",
-			showByline: false,
-			byline: 'Adrian Horton',
-			image:
-				'https://i.guim.co.uk/img/media/cfbe12705fe3a283639f88dd57c2d1240e9f52af/0_135_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=b25d9176321bf80bbaf9552564fde63d',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/cfbe12705fe3a283639f88dd57c2d1240e9f52af/0_135_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=b25d9176321bf80bbaf9552564fde63d',
-				'460':
-					'https://i.guim.co.uk/img/media/cfbe12705fe3a283639f88dd57c2d1240e9f52af/0_135_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=2955e08226d05dfbe5cdb207939f888b',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2021-03-16T07:02:16.000Z',
-			headline:
-				"Waffles + Mochi review – Michelle Obama's charming puppet series",
-			shortUrl: 'https://www.theguardian.com/p/gmdpc',
 			starRating: 4,
 		},
 	],

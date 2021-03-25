@@ -1005,53 +1005,63 @@ export const Quiz: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_supporter_cta&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_supporter_cta%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_supporter_cta&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_supporter_cta%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_supporter_cta&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_supporter_cta%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_supporter_cta&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_supporter_cta%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+				gifting:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_supporter_cta&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_supporter_cta%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
 	},
@@ -1326,8 +1336,77 @@ export const Quiz: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'a09e1c9a-d040-4a33-ba0b-aa841f973e3a',
-			role: 'showcase',
+			media: {
+				allImages: [
+					{
+						index: 0,
+						fields: {
+							height: '84',
+							width: '140',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/140.jpg',
+					},
+					{
+						index: 1,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/500.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '600',
+							width: '1000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '1200',
+							width: '2000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/2000.jpg',
+					},
+					{
+						index: 4,
+						fields: {
+							height: '1814',
+							width: '3020',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/3020.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '1814',
+							width: '3020',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+					},
+				],
+			},
 			data: {
 				alt:
 					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
@@ -1336,6 +1415,8 @@ export const Quiz: CAPIType = {
 				credit:
 					'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
 			},
+			displayCredit: true,
+			role: 'showcase',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1639,102 +1720,17 @@ export const Quiz: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/140.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/500.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/2000.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '1814',
-							width: '3020',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/3020.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '1814',
-							width: '3020',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
-					},
-				],
-			},
-			displayCredit: true,
+			elementId: '25dec4e8-be9e-45d4-b42a-193031ed5287',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
-			blockFirstPublishedDisplay: '10.03 BST',
-			blockLastUpdated: 1591917260000,
-			firstPublishedDisplay: '10.09 BST',
-			lastUpdatedDisplay: '10.09 BST',
-			blockCreatedOnDisplay: '10.02 BST',
-			blockLastUpdatedDisplay: '00.14 BST',
-			firstPublished: 1591952964000,
-			createdOn: 1591866131000,
-			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
-			blockCreatedOn: 1591866131000,
-			blockFirstPublished: 1591866202000,
-			createdOnDisplay: '10.02 BST',
-			lastUpdated: 1591952965000,
+			id: '5ee1f3138f0875833522a23a',
 			elements: [
 				{
-					elementId: '1fbeca6e-59f0-47e4-878f-e186f9b7ce49',
+					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 					quizType: 'knowledge',
-					resultBuckets: [],
 					questions: [
 						{
 							id: 'b0342160-7678-417d-85c6-67a60ec4994b',
@@ -2239,9 +2235,7 @@ export const Quiz: CAPIType = {
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
+					resultBuckets: [],
 					resultGroups: [
 						{
 							id: 'f878916e-08c0-4a55-9d77-8da45d37162c',
@@ -2356,9 +2350,25 @@ export const Quiz: CAPIType = {
 							minScore: 2,
 						},
 					],
+					_type:
+						'model.dotcomrendering.pageElements.QuizAtomBlockElement',
+					elementId: '713be130-d1ca-40ed-bd9c-bbf3545f023e',
 				},
 			],
-			id: '5ee1f3138f0875833522a23a',
+			createdOn: 1591866131000,
+			createdOnDisplay: '10.02 BST',
+			blockCreatedOn: 1591866131000,
+			blockCreatedOnDisplay: '10.02 BST',
+			lastUpdated: 1591952965000,
+			lastUpdatedDisplay: '10.09 BST',
+			blockLastUpdated: 1591917260000,
+			blockLastUpdatedDisplay: '00.14 BST',
+			firstPublished: 1591952964000,
+			firstPublishedDisplay: '10.09 BST',
+			blockFirstPublished: 1591866202000,
+			blockFirstPublishedDisplay: '10.03 BST',
+			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
+			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
 		},
 	],
 	linkedData: [
