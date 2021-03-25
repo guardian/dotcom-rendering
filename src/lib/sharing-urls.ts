@@ -34,7 +34,7 @@ export const getSharingUrls = (
 		facebook: {
 			userMessage: 'Share on Facebook',
 			params: {
-				app_id: '202314643182694',
+				app_id: '180444840287',
 				href: articleUrl,
 				CMP: 'share_btn_fb',
 			},
