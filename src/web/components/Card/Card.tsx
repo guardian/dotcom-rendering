@@ -1,8 +1,8 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design } from '@guardian/types';
-import { brandAltBackground } from '@guardian/src-foundations/palette';
+import { Design, Special } from '@guardian/types';
+import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
@@ -14,6 +14,7 @@ import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { formatCount } from '@root/src/web/lib/formatCount';
+import { textSans, headline } from '@guardian/src-foundations/typography';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -101,6 +102,36 @@ const starWrapper = css`
 	margin-top: 2px;
 `;
 
+const labTitleOrNot = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'regular' })}
+		`;
+	}
+	return css`
+		${headline.xxxsmall({ fontWeight: 'regular' })}
+		line-height: 20px;
+	`;
+};
+
+const badgeImageStyle = css`
+	max-height: 3.75rem;
+	margin-left: 0.625rem;
+	vertical-align: middle;
+`;
+
+const badgeStyle = css`
+	font-size: 0.75rem;
+	line-height: 1rem;
+	${textSans.xsmall({ fontWeight: 'regular' })};
+	color: ${neutral[46]};
+	font-weight: bold;
+	margin-top: 0.375rem;
+	padding-right: 0.625rem;
+	padding-bottom: 0.625rem;
+	text-align: right;
+`;
+
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
@@ -148,6 +179,7 @@ export const Card = ({
 	alwaysVertical,
 	minWidthInPixels,
 	dataLinkName,
+	badge,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -221,6 +253,8 @@ export const Card = ({
 									isFullCardImage={isFullCardImage}
 								>
 									<CardHeadline
+										// Try and create parity with frontend, not working at the moment
+										css={labTitleOrNot(format)}
 										headlineText={headlineText}
 										format={format}
 										palette={cardPalette}
@@ -278,6 +312,19 @@ export const Card = ({
 											/>
 										</AvatarContainer>
 									</Hide>
+								)}
+
+								{badge && (
+									<div>
+										<div className={badgeStyle}>
+											<div>Paid for by</div>
+											<img
+												className={badgeImageStyle}
+												alt="test"
+												src="https://static.theguardian.com/commercial/sponsor/24/Jun/2020/c15a28c9-ab71-4819-ac5b-066f04cb41ba-Togetherlogo.png"
+											/>
+										</div>
+									</div>
 								)}
 								<CardFooter
 									format={format}

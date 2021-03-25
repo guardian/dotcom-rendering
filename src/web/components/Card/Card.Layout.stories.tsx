@@ -718,6 +718,12 @@ export const Media = () => (
 );
 Media.story = { name: 'Media' };
 
+const badge: BadgeType = {
+	seriesTag: 'environment/series/the-polluters',
+	imageUrl:
+		'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
+};
+
 export const Labs = () => (
 	<Section>
 		<Flex>
@@ -739,15 +745,11 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							})}
-							headlineText={headlines[11]}
+							headlineText={headlines[12]}
 							headlineSize="medium"
-							webPublicationDate="2019-11-11T09:45:30.000Z"
 							imageUrl={images[0]}
 							imagePosition="top"
-							showClock={true}
-							commentCount={30989}
-							isLiveBlog={true}
-							showPulsingDot={true}
+							badge={badge}
 						/>
 					</LI>
 					<LI
@@ -770,13 +772,9 @@ export const Labs = () => (
 							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
-							webPublicationDate="2019-11-11T09:45:30.000Z"
 							imageUrl={images[0]}
 							imagePosition="top"
-							showClock={true}
-							commentCount={30989}
-							isLiveBlog={true}
-							showPulsingDot={true}
+							badge={badge}
 						/>
 					</LI>
 					<LI
@@ -799,12 +797,9 @@ export const Labs = () => (
 							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
-							kickerText={kickers[0]}
-							webPublicationDate="2019-11-11T09:45:30.000Z"
 							imageUrl={images[0]}
 							imagePosition="top"
-							showClock={true}
-							commentCount={0}
+							badge={badge}
 						/>
 					</LI>
 					<LI
@@ -825,12 +820,11 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							})}
-							headlineText={headlines[11]}
+							headlineText={headlines[12]}
 							headlineSize="medium"
-							kickerText={kickers[2]}
-							webPublicationDate="2019-11-11T09:45:30.000Z"
 							imageUrl={images[0]}
 							imagePosition="top"
+							badge={badge}
 						/>
 					</LI>
 				</UL>

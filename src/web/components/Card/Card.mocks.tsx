@@ -25,6 +25,7 @@ export const headlines = [
 	"'I'm being asked to take bloods while patients are on the floor'",
 	"A&E staff 'despair' as NHS delays are at their worst ever level",
 	'Patients suffer record delays because of pressure at A&E units',
+	'10 practical tips for looking after mental health during lockdown',
 ];
 
 export const standfirsts = [
