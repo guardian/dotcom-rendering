@@ -22,7 +22,7 @@ export const GuardianLines = ({
 	effect,
 }: {
 	palette: Palette;
-	count: 4 | 8 | undefined;
+	count?: 4 | 8;
 	effect?: 'straight' | 'squiggly' | 'dotted';
 }) => (
 	<div className={linesCssOverwrite(palette)}>
