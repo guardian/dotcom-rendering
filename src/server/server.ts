@@ -195,7 +195,7 @@ async function serveEditionsArticlePost(
 	next: NextFunction,
 ): Promise<void> {
 	try {
-		// req.body: should contain a 'Content' object which fetched by the
+		// The "req.body" should contain a 'Content' object which fetched by the
 		// Edition backend from the capi
 		const content = await capiContentDecoder(req.body);
 		const mockedRenderingRequest: RenderingRequest = {
