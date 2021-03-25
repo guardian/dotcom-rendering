@@ -1195,53 +1195,53 @@ export const Interview: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
 			},
 		},
 	},
@@ -1544,8 +1544,77 @@ export const Interview: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '298cfe5b-2a1e-47a8-881e-e01cf61956fa',
-			role: 'showcase',
+			media: {
+				allImages: [
+					{
+						index: 0,
+						fields: {
+							height: '1200',
+							width: '2000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/2000.jpg',
+					},
+					{
+						index: 1,
+						fields: {
+							height: '600',
+							width: '1000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/500.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '84',
+							width: '140',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/140.jpg',
+					},
+					{
+						index: 4,
+						fields: {
+							height: '3288',
+							width: '5480',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/5480.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '3288',
+							width: '5480',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg',
+					},
+				],
+			},
 			data: {
 				alt:
 					'‘The hijab is part of my identity’: Halima Aden wears dress by yufash.com; headscarf by Halima x Modanisa, modanisa.com; and bracelet by togetherband.org. ',
@@ -1553,6 +1622,8 @@ export const Interview: CAPIType = {
 					'‘The hijab is part of my identity’: Halima Aden wears dress by <a href="http://yufash.com">yufash.com</a>; headscarf by Halima x Modanisa, <a href="http://modanisa.com">modanisa.com</a>; and bracelet by <a href="http://togetherband.org">togetherband.org</a>. ',
 				credit: 'Photograph: Jean-Paul Pietrus/The Observer',
 			},
+			displayCredit: true,
+			role: 'showcase',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1856,129 +1927,114 @@ export const Interview: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '3288',
-							width: '5480',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/5480.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '3288',
-							width: '5480',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg',
-					},
-				],
-			},
-			displayCredit: true,
+			elementId: 'ee489ec9-c200-4d51-bdbe-a52a11bf079b',
 		},
 	],
 	webPublicationDate: '2020-02-09T11:00:04.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 11.40 GMT',
-			blockFirstPublishedDisplay: '17.42 GMT',
-			blockLastUpdated: 1581076498000,
-			firstPublishedDisplay: '11.00 GMT',
-			lastUpdatedDisplay: '11.40 GMT',
-			blockCreatedOnDisplay: '17.42 GMT',
-			blockLastUpdatedDisplay: '11.54 GMT',
-			firstPublished: 1581246004000,
-			createdOn: 1580751734000,
-			primaryDateLine: 'Sun 9 Feb 2020 11.00 GMT',
-			blockCreatedOn: 1580751734000,
-			blockFirstPublished: 1580751774000,
-			createdOnDisplay: '17.42 GMT',
-			lastUpdated: 1581334840000,
+			id: '8c447c98-b1ab-43fc-9570-a401998486d3',
 			elements: [
 				{
-					elementId: 'eaf3aeec-ba9a-4983-869e-09a2f2e96ff0',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Halima Aden, then aged 19, became the first contestant in the Miss USA 2016 beauty pageant to wear a hijab and burkini, attracting the attention of French fashion legend <a href="https://www.theguardian.com/fashion/carine-roitfeld" title="">Carine Roitfeld</a>. The following year she became the first hijab-wearing model to sign with a global modelling agency, IMG, and then the first to walk at New York fashion week, for Yeezy, the Kanye West brand. She later became the first hijab-wearing model to make the cover of <em>Vogue</em> – twice (first <em>Vogue Arabia</em>, then British <em>Vogue</em>) – and soon afterwards a <em>Sports Illustrated</em> swimsuit shoot followed. By that point she’d already become a Unicef ambassador, and a go-to voice on diversity in the fashion industry. In 2017 she gave the first <a href="https://www.ted.com/talks/halima_aden_how_i_went_from_child_refugee_to_international_model?language=en" title="">TED</a> talk at a refugee camp in Kakuma, Kenya. <em>Teen Vogue</em> went with her.</p>',
-				},
-				{
-					elementId: '4b73b9ec-0fe4-4540-8c72-23977ea7126d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'aade8f19-9b80-44d8-9545-2456b1d5a974',
+				},
+				{
 					html:
 						'<p>When we meet, at a hotel near King’s Cross, I ask if it ever gets tiring, being the first in so many different ways, shouldering the burden of representation. “Somebody needs to,” Aden says. “I want my sister, my little nieces, even my nephews to see representations of somebody who wears a hijab in modern ways, in such a way that they can relate to.” We’re sitting side by side on a window seat, Aden holding court before a little audience of PRs, management and her best friend, Lizeth, who has travelled with her from the US. Though she looks very much the high-fashion figure, all in black – sequins and brocade lace, knee-high stiletto boots – she seems younger than her 22 years, gabbing away in the stream-of-conscious slang and asides of a teenager still starstruck by the turns her life has taken.</p>',
-				},
-				{
-					elementId: '10150957-cc0f-4a1e-bffd-cf8b7a3545b6',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'd943d079-30c9-4fe0-bdc0-f4d574cda5b5',
+				},
+				{
 					html:
 						'<p>But on the topics of diversity, representation and sustainability, she speaks with passion and conviction. She has said in the past that, growing up in the US: “The only times I saw somebody dressed like me was on CNN – and they weren’t doing anything I approve of.”</p>',
-				},
-				{
-					elementId: '33df3ba4-e522-40be-8604-cbefabc7a27c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“I feel like we all deserve representation and I didn’t have that,” Aden says now. “I never got to flip through a magazine and see somebody who looks like me.” Lizeth digs out the latest issue of <em>Essence</em> magazine, Aden proud in pink on the cover. Aden takes it from her, somewhat wonderingly. “Sometimes it’s so wild for me,” she says. “I still catch myself… When my friend went and got that from the newsstand, I was like: ‘Oh my God.’”</p>',
+					elementId: 'b2f47622-5abf-4216-9f0f-e0d58675fd5e',
 				},
 				{
-					elementId: '97d1e721-cf39-4f1e-befe-23813154c931',
-					role: 'inline',
+					html:
+						'<p>“I feel like we all deserve representation and I didn’t have that,” Aden says now. “I never got to flip through a magazine and see somebody who looks like me.” Lizeth digs out the latest issue of <em>Essence</em> magazine, Aden proud in pink on the cover. Aden takes it from her, somewhat wonderingly. “Sometimes it’s so wild for me,” she says. “I still catch myself… When my friend went and got that from the newsstand, I was like: ‘Oh my God.’”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '4c2fb8d4-ef59-4095-aaa3-4b5c4f41b260',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '2084',
+									width: '3473',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/3473.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '2084',
+									width: '3473',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1200',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '600',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '300',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '84',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/140.jpg',
+							},
+						],
+					},
 					data: {
 						copyright: '2018 Getty Images',
 						alt:
@@ -1987,6 +2043,8 @@ export const Interview: CAPIType = {
 							'Modesty blaze: taking a selfie with Carine Roitfeld and Gigi Hadid at a Business of Fashion event during New York fashion week.',
 						credit: 'Photograph: Dimitrios Kambouris/Getty Images',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2291,110 +2349,97 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'c5f55572-bdde-4c4c-96db-084ac4b1e072',
+				},
+				{
+					html:
+						'<p>The fact she has been able to have a global career in fashion at all is proof that the industry is increasingly open to diversity. Aden is 5ft 5in, petite for a model, and a resident of Minnesota, far from the industry capitals of New York, London, Paris or Milan. “And the fact that I’m able to do runway, the fact that I have graced these magazine covers and wear a hijab on top of that, be who I am, have my identity, wear it proudly… I think fashion is doing a beautiful job.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '7428d44a-a573-47f4-9f8a-4499b48455ae',
+				},
+				{
+					html:
+						'<p>Aden now has her own 47-piece hijab collection, Halima x Modanisa, and her hijab is stipulated as non-negotiable in her contract with IMG. “It’s a big part of my identity,” she says. “It’s not because I don’t think people are going to listen – it’s more so they know what to expect. I always bring extras – my own set of turbans, turtlenecks, tights – because it’s a collaboration. I also recognise that for a lot of people, in my first year especially, I was the only hijab-wearing girl they’d worked with. So they’re not going to necessarily know 100% what to expect, just like I didn’t know what to expect with fashion, because it’s not the world that I come from.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'd95bdd9c-3699-4a0c-a742-cbc09ccc1ce9',
+				},
+				{
+					html:
+						'<p>She does have certain requirements, such as a pop-up tent in which to change backstage at shows, but she says she’s never been uncomfortably set apart, or made to feel othered. She remembers her experience of walking for Yeezy at New York fashion week in 2017, her breakout year, as a watershed moment. The first outfit she was presented with “was just not going to work,” she says, gesturing above her knee – too short. “Even then I knew: walking away when something doesn’t fit is always better than feeling you need to force something.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '57f62a73-455f-4293-9214-42ac39e9b866',
+				},
+				{
+					html:
+						'<p>She returned to her hotel, disappointed but resolute. “And then, without having to say anything, they called back: ‘We have a second option.’ I tried it on and it was perfect. I just knew it was a pivotal moment in my life. The people who you want to work with, they’re willing to work with you just the way you are.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '3cd2e447-9fd1-4331-8023-2eb29ad40c7b',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
-									height: '2084',
-									width: '3473',
+									height: '7420',
+									width: '6176',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/3473.jpg',
+									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/6176.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '2084',
-									width: '3473',
+									height: '7420',
+									width: '6176',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg',
+									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '1200',
-									width: '2000',
+									height: '2000',
+									width: '1665',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/2000.jpg',
+									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/1665.jpg',
 							},
 							{
 								index: 3,
 								fields: {
-									height: '600',
-									width: '1000',
+									height: '1000',
+									width: '832',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/1000.jpg',
+									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/832.jpg',
 							},
 							{
 								index: 4,
 								fields: {
-									height: '300',
-									width: '500',
+									height: '500',
+									width: '416',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/140.jpg',
+									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/416.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: 'bef403ca-a418-4a25-8c5f-011dcdf01ddc',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The fact she has been able to have a global career in fashion at all is proof that the industry is increasingly open to diversity. Aden is 5ft 5in, petite for a model, and a resident of Minnesota, far from the industry capitals of New York, London, Paris or Milan. “And the fact that I’m able to do runway, the fact that I have graced these magazine covers and wear a hijab on top of that, be who I am, have my identity, wear it proudly… I think fashion is doing a beautiful job.”</p>',
-				},
-				{
-					elementId: '64cb9091-cc92-4bbe-b114-4f49b1b71a85',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Aden now has her own 47-piece hijab collection, Halima x Modanisa, and her hijab is stipulated as non-negotiable in her contract with IMG. “It’s a big part of my identity,” she says. “It’s not because I don’t think people are going to listen – it’s more so they know what to expect. I always bring extras – my own set of turbans, turtlenecks, tights – because it’s a collaboration. I also recognise that for a lot of people, in my first year especially, I was the only hijab-wearing girl they’d worked with. So they’re not going to necessarily know 100% what to expect, just like I didn’t know what to expect with fashion, because it’s not the world that I come from.”</p>',
-				},
-				{
-					elementId: '17c555f0-f2fc-47e2-9d84-25c25484f279',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>She does have certain requirements, such as a pop-up tent in which to change backstage at shows, but she says she’s never been uncomfortably set apart, or made to feel othered. She remembers her experience of walking for Yeezy at New York fashion week in 2017, her breakout year, as a watershed moment. The first outfit she was presented with “was just not going to work,” she says, gesturing above her knee – too short. “Even then I knew: walking away when something doesn’t fit is always better than feeling you need to force something.”</p>',
-				},
-				{
-					elementId: '398bafbe-ea80-4426-8665-188497741366',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>She returned to her hotel, disappointed but resolute. “And then, without having to say anything, they called back: ‘We have a second option.’ I tried it on and it was perfect. I just knew it was a pivotal moment in my life. The people who you want to work with, they’re willing to work with you just the way you are.”</p>',
-				},
-				{
-					elementId: 'bc970754-fe60-4a0c-8c04-d7578e408040',
-					role: 'supporting',
 					data: {
 						alt:
 							'My story isn’t just: ‘I grew up in a refugee camp’: Halima Aden wears hoodie by rokit.co.uk; dress by Ssōne, matchesfashion.com; glasses by francisdelara.com; and bag strap, worn as a headband, bottletop.com.',
@@ -2402,6 +2447,8 @@ export const Interview: CAPIType = {
 							'My story isn’t just: ‘I grew up in a refugee camp’: Halima Aden wears hoodie by <a href="http://rokit.co.uk">rokit.co.uk</a>; dress by Ssōne, <a href="http://matchesfashion.com">matchesfashion.com</a>; glasses by <a href="http://francisdelara.com">francisdelara.com</a>; and bag strap, worn as a headband, <a href="http://bottletop.com">bottletop.com</a>.',
 						credit: 'Photograph: Jean-Paul Pietrus/The Observer',
 					},
+					displayCredit: true,
+					role: 'supporting',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2706,106 +2753,115 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'ddc46416-22cc-4428-bc6e-21ede2ce1c72',
+				},
+				{
+					html:
+						'<p>That same year, Aden remembers walking for MaxMara at Milan fashion week in a look that had been designed with her in mind. When she posted it on Instagram, a woman commented: “He keeps you in mind, he keeps us in mind. Now this Muslim shopper will keep MaxMara in mind.” Aden shared it with the brand. “I was like – wink-wink-wink!”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '34fa580e-1e00-4e5c-a41c-10af841b6df8',
+				},
+				{
+					html:
+						'<p>It led to an exclusive capsule collection in the Middle East, for which Aden was the face. “It’s a win for designers when they’re diverse; it’s a win for the brand, it’s a win for everybody – we all want to see a little piece of ourselves reflecting back.” And it makes a difference, she says. The year after Aden became the first contestant to wear a hijab in Miss USA, there were seven others. Last year she was one of two hijabi models on the MaxMara catwalk in Milan, and one of three for her second <em>Vogue Arabia</em> cover.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '564e406f-1623-4443-ae7e-a19bec71a23c',
+				},
+				{
+					html:
+						'<p>When Aden was seven, she used to pray for rain – the kind of torrential rain that would wash away her new home in the American Midwest. “I remember thinking: ‘Then our neighbours could come out and play,’” she says. Even the structure of her apartment building felt alienating. “I was like, ‘God, everybody is so isolated.’”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c10b6694-985d-4fc1-baf4-15c248d72c9c',
+				},
+				{
+					html:
+						'<p>Aden was born a refugee in the United Nations Kakuma camp in northwestern Kenya, where her mother had fled the Somali civil war in 1994. There their house was made of mud, scraps, sticks – anything her mother could find. “It would be normal for me to go to nursery school, come back and find it had washed away,” she says. But then the community would come together to rebuild it, “and then it’s the kids’ time to play around.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a55ade3f-9950-40b4-85ce-c59cc314c5b6',
+				},
+				{
+					html:
+						'<p>The model remembers her childhood in the camp as being joyful and supportive. “There’s no walls keeping you apart from your neighbour,” she says. In her new home in Missouri, where she was relocated with her family in 2004, before moving to Minnesota, where they live today, the barriers stood strong.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '88227e61-ded8-4a3e-a639-c1d59e061146',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
-									height: '7420',
-									width: '6176',
+									height: '1800',
+									width: '3000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/6176.jpg',
+									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/3000.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '7420',
-									width: '6176',
+									height: '1800',
+									width: '3000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg',
+									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '2000',
-									width: '1665',
+									height: '1200',
+									width: '2000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/1665.jpg',
+									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/2000.jpg',
 							},
 							{
 								index: 3,
 								fields: {
-									height: '1000',
-									width: '832',
+									height: '600',
+									width: '1000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/832.jpg',
+									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/1000.jpg',
 							},
 							{
 								index: 4,
 								fields: {
-									height: '500',
-									width: '416',
+									height: '300',
+									width: '500',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/416.jpg',
+									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '84',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/140.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: '2c8a3d6f-1877-46ef-b14e-a8de6f44a34a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>That same year, Aden remembers walking for MaxMara at Milan fashion week in a look that had been designed with her in mind. When she posted it on Instagram, a woman commented: “He keeps you in mind, he keeps us in mind. Now this Muslim shopper will keep MaxMara in mind.” Aden shared it with the brand. “I was like – wink-wink-wink!”</p>',
-				},
-				{
-					elementId: '8b76eeeb-224b-4cc2-9e7d-e857527e6375',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>It led to an exclusive capsule collection in the Middle East, for which Aden was the face. “It’s a win for designers when they’re diverse; it’s a win for the brand, it’s a win for everybody – we all want to see a little piece of ourselves reflecting back.” And it makes a difference, she says. The year after Aden became the first contestant to wear a hijab in Miss USA, there were seven others. Last year she was one of two hijabi models on the MaxMara catwalk in Milan, and one of three for her second <em>Vogue Arabia</em> cover.</p>',
-				},
-				{
-					elementId: '0850dd20-3857-47d9-8d9a-f7282b0160bc',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>When Aden was seven, she used to pray for rain – the kind of torrential rain that would wash away her new home in the American Midwest. “I remember thinking: ‘Then our neighbours could come out and play,’” she says. Even the structure of her apartment building felt alienating. “I was like, ‘God, everybody is so isolated.’”</p>',
-				},
-				{
-					elementId: 'e9eb6f8e-ddd7-497f-9fe8-a72c0e9b4810',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Aden was born a refugee in the United Nations Kakuma camp in northwestern Kenya, where her mother had fled the Somali civil war in 1994. There their house was made of mud, scraps, sticks – anything her mother could find. “It would be normal for me to go to nursery school, come back and find it had washed away,” she says. But then the community would come together to rebuild it, “and then it’s the kids’ time to play around.”</p>',
-				},
-				{
-					elementId: '83ff069f-b125-4b65-8fb1-cdcbc249adcb',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The model remembers her childhood in the camp as being joyful and supportive. “There’s no walls keeping you apart from your neighbour,” she says. In her new home in Missouri, where she was relocated with her family in 2004, before moving to Minnesota, where they live today, the barriers stood strong.</p>',
-				},
-				{
-					elementId: '2dea038b-faa9-49b9-a3f7-134290576bfb',
-					role: 'inline',
 					data: {
 						copyright: '2018 Getty Images',
 						alt:
@@ -2814,6 +2870,8 @@ export const Interview: CAPIType = {
 							'Listen up: speaking at a Teen Vogue summit in 2018.',
 						credit: 'Photograph: Cindy Ord/Getty Images',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3118,110 +3176,97 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'c820e379-4a4d-4452-8be4-65ee60a30062',
+				},
+				{
+					html:
+						'<p>“Kakuma” translates from Swahili as “middle of nowhere”. “Sometimes, when I’m like, ‘I was born in the middle of nowhere,’ people think I’m joking,” Aden says. “But if you actually look at Google Maps…” People tend to think of a refugee camp as being a temporary settlement. But Kakuma is “more of a city of its own,” says Aden, in both permanence and size. Established by the UN in 1992 with a 70,000-person capacity, it has since ballooned to about 192,000 registered refugees and asylum seekers, the vast majority of whom are never resettled (the global figure is less than 1%).</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '1c455fc4-b6cd-49d6-9d3a-dfc01e5dad95',
+				},
+				{
+					html:
+						'<p>As a child, Aden remembers thriving under the collective care of the community, which was two thirds women and children. She was bright – she spoke Somali and Swahili, sometimes translating for the grown-ups – and popular, roaming the camp with up to 30 playmates of mixed ages and ethnicities. (“If you could keep up, you were in the group.”)</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '6fbc9265-87da-4ec4-972a-ad9af87ca0df',
+				},
+				{
+					html:
+						'<p>Aden is well aware that her happy stories of childhood challenge the stereotype of the “tragic refugee”, though she credits her mother with working hard to shield her young family from hardship. Aden never knew her father. He was lost during the Somali civil war, and assumed dead by her mother; he made contact after they had moved to the US, but died before Aden could develop a relationship. “It was both the scars and the smiles,” she says. “It was a happy childhood and also, we lived in uncertainty.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '761a1b5d-eec5-4e25-8d4c-2072fac927a4',
+				},
+				{
+					html:
+						'<p>Symbolic of this limbo was a noticeboard that was updated with the names and destinations of those lucky few bound for resettlement. Aden remembers it as larger than life, “like something out of <em>The Hunger Games</em>”: “It would control your entire future – it was literally the difference between life and death. For parents it meant a brand new life: ‘We’re starting over, we won the lottery.’ But for the kids it is: ‘I’m never seeing my friends again’.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'e2b4c18c-1c55-4cf1-890a-0f0d806a67d3',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
-									height: '1800',
-									width: '3000',
+									height: '8220',
+									width: '7043',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/3000.jpg',
+									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/7043.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '1800',
-									width: '3000',
+									height: '8220',
+									width: '7043',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg',
+									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '1200',
-									width: '2000',
+									height: '2000',
+									width: '1714',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/2000.jpg',
+									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/1714.jpg',
 							},
 							{
 								index: 3,
 								fields: {
-									height: '600',
-									width: '1000',
+									height: '1000',
+									width: '857',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/1000.jpg',
+									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/857.jpg',
 							},
 							{
 								index: 4,
 								fields: {
-									height: '300',
-									width: '500',
+									height: '500',
+									width: '428',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/140.jpg',
+									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/428.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: 'd0796b12-98dd-472a-9d31-eba966342ce9',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“Kakuma” translates from Swahili as “middle of nowhere”. “Sometimes, when I’m like, ‘I was born in the middle of nowhere,’ people think I’m joking,” Aden says. “But if you actually look at Google Maps…” People tend to think of a refugee camp as being a temporary settlement. But Kakuma is “more of a city of its own,” says Aden, in both permanence and size. Established by the UN in 1992 with a 70,000-person capacity, it has since ballooned to about 192,000 registered refugees and asylum seekers, the vast majority of whom are never resettled (the global figure is less than 1%).</p>',
-				},
-				{
-					elementId: 'd597275c-2a0c-4aa9-a852-494716afd94a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>As a child, Aden remembers thriving under the collective care of the community, which was two thirds women and children. She was bright – she spoke Somali and Swahili, sometimes translating for the grown-ups – and popular, roaming the camp with up to 30 playmates of mixed ages and ethnicities. (“If you could keep up, you were in the group.”)</p>',
-				},
-				{
-					elementId: '6abcc6cf-2a4e-42b2-b435-23892c12d855',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Aden is well aware that her happy stories of childhood challenge the stereotype of the “tragic refugee”, though she credits her mother with working hard to shield her young family from hardship. Aden never knew her father. He was lost during the Somali civil war, and assumed dead by her mother; he made contact after they had moved to the US, but died before Aden could develop a relationship. “It was both the scars and the smiles,” she says. “It was a happy childhood and also, we lived in uncertainty.”</p>',
-				},
-				{
-					elementId: 'e720eb8b-a126-42b2-9edf-232a5110d16f',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Symbolic of this limbo was a noticeboard that was updated with the names and destinations of those lucky few bound for resettlement. Aden remembers it as larger than life, “like something out of <em>The Hunger Games</em>”: “It would control your entire future – it was literally the difference between life and death. For parents it meant a brand new life: ‘We’re starting over, we won the lottery.’ But for the kids it is: ‘I’m never seeing my friends again’.”</p>',
-				},
-				{
-					elementId: '65fd1d4a-cce1-4999-83cb-93b54cb7b93a',
-					role: 'supporting',
 					data: {
 						alt:
 							'Fashion meets activism: Halima Aden wears coat by Gabriela Hearst, selfridges.com; top by charlotteknowles.com; belt by varanaworld.com; and bag by bottletop.com.',
@@ -3229,6 +3274,8 @@ export const Interview: CAPIType = {
 							'Fashion meets activism: Halima Aden wears coat by Gabriela Hearst, <a href="http://selfridges.com/">selfridges.com</a>; top by <a href="http://charlotteknowles.com/">charlotteknowles.com</a>; belt by <a href="http://varanaworld.com/">varanaworld.com</a>; and bag by <a href="http://bottletop.com/">bottletop.com</a>.',
 						credit: 'Photograph: Jean-Paul Pietrus/The Observer',
 					},
+					displayCredit: true,
+					role: 'supporting',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3533,106 +3580,104 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '493140ba-1897-4d6d-b150-dbdba39274ce',
+				},
+				{
+					html:
+						'<p>Another common misconception of being a refugee, Aden says, “is that you get a say where you go”. Her family were relocated to a poverty-stricken, crime-rife neighbourhood in St Louis, Missouri, which – compared to the “nurturing” community of Kakuma – came as a shock. That was when she felt most isolated, when she wished for her house to wash away. It was the first time she’d heard gunshots. “But nonetheless, did I have the fear of malaria? No – so, in a way, it was like trading one obstacle for another.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b3c43de6-ab48-4cb7-9662-a4a9fccde947',
+				},
+				{
+					html:
+						'<p>The biggest hurdle was learning English: Aden’s school in St Louis did not have an English language programme. After two weeks of presenteeism, Aden recalls her mother asking her to read some written English aloud. “I literally started mouthing the words to <a href="https://www.youtube.com/watch?v=8WYHDfJDPDc" title="">Dilemma</a>” – rapper Nelly and Kelly Rowland’s syrupy duet, which she knew from the radio. Aden mimics a haltering recital: “‘No matt-er. Whatido. All I think about. Is you’ – I just couldn’t stand the idea of disappointing her.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'af088ad3-2403-45a5-83b9-98119e836867',
+				},
+				{
+					html:
+						'<p>Eventually Aden’s mother decided to relocate the family to St Cloud, Minnesota, where they found a community like the one that they had left at the camp. At first they were heavily reliant on it, living on food stamps and even, for six months, in a women’s shelter. Aden remembers the kindness of neighbours, taking the family to the grocery store during the punishing winters, giving her mother lifts when she couldn’t drive. “It’s why I’m so loyal,” she says. “I love my state.” She lives in St Paul now, closer to the airport, but only 40 minutes from her mother, who’s still in St Cloud. Minnesota is known for high taxes, but Aden says she is happy to pay them. “I relied on welfare when I was little... I think of it as my way of paying back.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '8c2a6a66-089f-44e4-ae69-75a49cb47aef',
+				},
+				{
+					html:
+						'<p>Before we meet, Aden’s team is adamant that I don’t ask her about Trump or US politics, so instead I ask her how superficial diversity in fashion tallies with a more fractious, divided world.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '7e2938f6-a18b-45e5-8383-5d46c098ad30',
+				},
+				{
+					html:
+						'<p>“I don’t even really avoid politics,” she says, “but it’s not something that I’ve needed in order to connect with people. Once I share my story, there’s always some common ground. It doesn’t have to be: ‘I grew up in a refugee camp.’ I get just as many messages, believe it or not, from parents who are not Muslim, who are not black, who say, ‘Thank you for making modesty look cool and young’.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '12db8885-401e-40d3-a61a-83e66ebc410c',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
 									height: '8220',
-									width: '7043',
+									width: '6110',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/7043.jpg',
+									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/6110.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
 									height: '8220',
-									width: '7043',
+									width: '6110',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg',
+									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg',
 							},
 							{
 								index: 2,
 								fields: {
 									height: '2000',
-									width: '1714',
+									width: '1487',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/1714.jpg',
+									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/1487.jpg',
 							},
 							{
 								index: 3,
 								fields: {
 									height: '1000',
-									width: '857',
+									width: '743',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/857.jpg',
+									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/743.jpg',
 							},
 							{
 								index: 4,
 								fields: {
 									height: '500',
-									width: '428',
+									width: '372',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/428.jpg',
+									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/372.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: '01acd620-adba-4ce0-8106-dd4bcb919932',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Another common misconception of being a refugee, Aden says, “is that you get a say where you go”. Her family were relocated to a poverty-stricken, crime-rife neighbourhood in St Louis, Missouri, which – compared to the “nurturing” community of Kakuma – came as a shock. That was when she felt most isolated, when she wished for her house to wash away. It was the first time she’d heard gunshots. “But nonetheless, did I have the fear of malaria? No – so, in a way, it was like trading one obstacle for another.”</p>',
-				},
-				{
-					elementId: '166840f8-9654-427a-aad3-c42971f2cf5a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The biggest hurdle was learning English: Aden’s school in St Louis did not have an English language programme. After two weeks of presenteeism, Aden recalls her mother asking her to read some written English aloud. “I literally started mouthing the words to <a href="https://www.youtube.com/watch?v=8WYHDfJDPDc" title="">Dilemma</a>” – rapper Nelly and Kelly Rowland’s syrupy duet, which she knew from the radio. Aden mimics a haltering recital: “‘No matt-er. Whatido. All I think about. Is you’ – I just couldn’t stand the idea of disappointing her.”</p>',
-				},
-				{
-					elementId: 'c57ee393-9d42-471a-9f8a-f8fb935b77ac',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Eventually Aden’s mother decided to relocate the family to St Cloud, Minnesota, where they found a community like the one that they had left at the camp. At first they were heavily reliant on it, living on food stamps and even, for six months, in a women’s shelter. Aden remembers the kindness of neighbours, taking the family to the grocery store during the punishing winters, giving her mother lifts when she couldn’t drive. “It’s why I’m so loyal,” she says. “I love my state.” She lives in St Paul now, closer to the airport, but only 40 minutes from her mother, who’s still in St Cloud. Minnesota is known for high taxes, but Aden says she is happy to pay them. “I relied on welfare when I was little... I think of it as my way of paying back.”</p>',
-				},
-				{
-					elementId: '74956bca-4ec4-4847-9b11-e673cf0590e3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Before we meet, Aden’s team is adamant that I don’t ask her about Trump or US politics, so instead I ask her how superficial diversity in fashion tallies with a more fractious, divided world.</p>',
-				},
-				{
-					elementId: 'b6f157e4-5288-4d99-832c-0708c1d3cd3a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“I don’t even really avoid politics,” she says, “but it’s not something that I’ve needed in order to connect with people. Once I share my story, there’s always some common ground. It doesn’t have to be: ‘I grew up in a refugee camp.’ I get just as many messages, believe it or not, from parents who are not Muslim, who are not black, who say, ‘Thank you for making modesty look cool and young’.”</p>',
-				},
-				{
-					elementId: '0d2e34ab-3f02-48c1-bd6c-92fb55047dda',
-					role: 'supporting',
 					data: {
 						alt:
 							'‘I want people to see me wearing a hijab in ways they can relate to’: Halima Aden wears jacket, shirt and trousers, all by stellamccartney.com; trainers by Good News, net-a-porter.com; bag and brooches by bottletop.com; and headscarf by Halima x Modanisa, modanisa.com.',
@@ -3640,6 +3685,8 @@ export const Interview: CAPIType = {
 							'‘I want people to see me wearing a hijab in ways they can relate to’: Halima Aden wears jacket, shirt and trousers, all by <a href="http://stellamccartney.com/">stellamccartney.com</a>; trainers by Good News, <a href="http://net-a-porter.com/">net-a-porter.com</a>; bag and brooches by <a href="http://bottletop.com/">bottletop.com</a>; and headscarf by Halima x Modanisa, <a href="http://modanisa.com/">modanisa.com</a>.',
 						credit: 'Photograph: Jean-Paul Pietrus/The Observer',
 					},
+					displayCredit: true,
+					role: 'supporting',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3944,154 +3991,107 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '8220',
-									width: '6110',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/6110.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '8220',
-									width: '6110',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '2000',
-									width: '1487',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/1487.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '1000',
-									width: '743',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/743.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '500',
-									width: '372',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/372.jpg',
-							},
-						],
-					},
-					displayCredit: true,
+					elementId: '969fc68c-dacf-45c7-843c-5bec52f483cf',
 				},
 				{
-					elementId: '57d3f6bc-9881-4c58-8c62-478441b473e0',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>When she entered the Miss Minnesota USA pageant in 2016, as a freshman at St Cloud State University, Aden told local media that she wanted to represent Muslim women and counter the image that they were oppressed. “The hijab is a symbol we wear on our heads,” she said. “But I want people to know that it is my choice.” Today she says her motivations for entering were less lofty. “College tuition is expensive in the States, muuuuuucho expensive!” And the top 15 at the pageant were offered scholarships. Did Aden think she’d win? “No, God, no.” She laughs. “But top 15? I was like, ‘I think I could do that’.”</p>',
-				},
-				{
-					elementId: '9a5d90e8-f8e9-4477-b3ee-6ba91f62bd09',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '451f84fa-f8b9-4f21-a67d-5926811b0c60',
+				},
+				{
 					html:
 						'<p>Aden’s mother was strongly against her entering the pageant, arguing it would distract from her studies, and that the two-piece burkini was too skimpy. Though they have since been able to find common ground through her advocacy and work with Unicef, it can feel like they are from two different cultures sometimes. She didn’t tell her mum about the <em>Sports Illustrated</em> shoot “until it hit newsstands”.</p>',
-				},
-				{
-					elementId: 'f9868bea-cc66-43ae-b9db-236213430d72',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a69230f6-2269-4638-a0b4-362fcb88b855',
+				},
+				{
 					html:
 						'<p>She was also criticised by members of the Muslim community who saw modelling as <em>haram – </em>forbidden by Islamic law. “It was scary to put myself out there, because I didn’t know if I would get backlash, or how bad it was going to be,” she says. Two days before the pageant, Aden almost pulled out. But as she told the newspaper at the time: “You don’t let being the first to do it stop you.”</p>',
-				},
-				{
-					elementId: 'e4d9a4b6-d117-4988-a7f7-a2be56d7c45e',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '41ee47ad-87b1-4755-b942-7c81513310fe',
+				},
+				{
 					html:
 						'<p>She ended up making the semi-finals, “braces and all. And then IMG came calling – like, ‘Well, well, <em>well</em>… maybe I don’t need school.’” She leans back, for a second jokily triumphant – then seems to feel a chill coming in from across the Atlantic. “I’m kidding. Sorry, Mom!”</p>',
-				},
-				{
-					elementId: '88017200-62d1-4130-8a9e-b0d28dfe7ffc',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'cba5811e-cdef-4265-a84b-e84379ffa331',
+				},
+				{
 					html:
 						'<p>The global spotlight on Aden caught the eye of Carine Roitfeld, who flew her to New York to shoot the cover of <em><a href="https://www.crfashionbook.com/" title="">CR Fashion Book</a></em> with <a href="https://www.theguardian.com/fashion/gigi-hadid" title="">Gigi Hadid</a>, Paris Jackson and legendary photographer Mario Sorrenti. Aden agonised about asking for a selfie with Gigi (“So cringy,” she says now). As for Sorrenti, though, she had to Google her later.</p>',
-				},
-				{
-					elementId: 'bfb4dcd6-e937-42e8-b67d-00302ab59a3a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'e26e362a-5193-4ff2-9925-646161ccef65',
+				},
+				{
 					html:
 						'<p>His direction to her was, “Give me sexy”, she seems a little abashed to say. “I didn’t know fashion lingo, I didn’t know photographers. I’m a Minnesota girl – very small town.” Even after signing with IMG, she watched all of Tyra Banks’s outlandish reality series <em>America’s Next Top Model</em> “to practise”. Seven months into her modelling career, she was still working part-time as a housekeeper in St Cloud.</p>',
-				},
-				{
-					elementId: '754342c8-7d55-492f-b155-7bcf359388ba',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '64ecd780-f6db-41b5-a849-77b798456104',
+				},
+				{
 					html:
 						'<p>But rather than asking Aden to change, fashion’s royalty has made room for her as she is. Last week she was back in Kenya for a shoot and “I was just thinking, how crazy is it that, in one lifetime, I’ve gotten to experience both extremes.” Aden says she does not feel angry about the inequality she has seen – partly because she does not find it to be productive. “It’s like when I say: ‘We don’t want your pity.’ Let’s talk about solutions, invite refugees to the table. They’re part of the conversation – no policies should be enacted without their say.”</p>',
-				},
-				{
-					elementId: 'f4927e25-6d44-4428-8080-039b6163df99',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '076b605d-3eef-4624-bf93-e282cdcbe40d',
+				},
+				{
 					html:
 						'<p>Though she rules out a career in politics (“for now”), in the future she hopes to return to Kakuma with Unicef to inspire hope within the camp for a new life beyond it. “I couldn’t tell you what that would have meant to me as a six or seven-year-old – like, ‘Wait, there’s a life outside these walls?’ Hopefully, it’s not going to be so rare to see kids from the camps grow up and become teachers, lawmakers, presidents and CEOs of Fortune 500 companies. There’s talent everywhere.”</p>',
-				},
-				{
-					elementId: '95b9c184-3b44-4586-a2cf-45ac248021e5',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '391fcb0c-3bac-45d3-8da4-4677e3460afb',
+				},
+				{
 					html:
 						'<p>For now Aden is pursuing opportunities in “fashion activism”. This month she was announced as the new face of the British accessories brand <a href="https://bottletop.org/" title="">Bottletop</a>, which was ahead of its time in positioning itself as “sustainable luxury” in 2002. Its handbags and clutches, which are made from sustainable leather and upcycled metal ring pulls, help to alleviate poverty in Brazil, Nepal and Kenya. Aden is optimistic in general, but particularly about the potential for consumer choice to be a force for positive change: “I think we’re at a place where people want to support brands and organisations they know are giving back.” She is also an ambassador for Bottletop’s <a href="https://togetherband.org/" title="">#Togetherband</a> campaign, which is tasked with raising awareness of the <a href="https://www.un.org/sustainabledevelopment/sustainable-development-goals/" title="">UN’s Sustainable Development Goals</a>. Aden is probably one of the few celebrities who can “relate personally” to all 17 of them. She has been assigned the eighth goal: “Decent work and economic growth.” The fact that the Swiss multinational bank UBS is a founding partner seems to suggest which way the wind is blowing.</p>',
-				},
-				{
-					elementId: '68e50485-0670-4acf-8362-aefff1139284',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '8563a208-4aa5-4a3a-a42d-8ac300cff770',
+				},
+				{
 					html:
 						'<p>“My career in fashion is not just, ‘I want to work with this brand, I want to get on that catwalk’ – we’re not sitting here talking about ‘Buy this heel, because this heel will make you feel sexy.’” She kicks up her stiletto boot, knee-high in black patent leather (admittedly very sexy). “I’m proud that I can say I combined fashion and activism. I can’t do one without the other.”</p>',
-				},
-				{
-					elementId: '847fabdf-8023-412d-9db5-51bf234eec00',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '5c9a8f74-1b8f-46d1-8f0b-430e58778ac4',
+				},
+				{
 					html:
 						'<p>Aden sees that her story, from refugee camp to the cover of <em>Vogue</em>, is an unusual one. But she has had to navigate it herself – down to mentioning, at her very first meeting with IMG as a teenager in New York, that she would like to work with Unicef. “I had to learn, in the beginning especially, that maybe I’d never find another model who I could relate to. But I’m making my own path, and it works perfectly for me.”</p>',
-				},
-				{
-					elementId: '33559932-43e4-46f1-abde-8d35abbbb65a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '4f8b4820-2c96-427c-888f-128d24e4618c',
+				},
+				{
 					html:
 						'<p><em>Fashion editor Jo Jones; photographer’s assistant Dan Ross; fashion assistant Lena Young; makeup by Dina at Frank Agency using Dior Forever and Dior Capture Totale C.E.L.L. Energy; nails by Kim Nkosi at Premier Hair and Makeup using Dior Vernis and Miss Dior Hand Cream; shot at Waddington Studios</em></p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '988c88cb-00a6-4b0c-8285-65c435bf0e97',
 				},
 			],
-			id: '8c447c98-b1ab-43fc-9570-a401998486d3',
+			createdOn: 1580751734000,
+			createdOnDisplay: '17.42 GMT',
+			blockCreatedOn: 1580751734000,
+			blockCreatedOnDisplay: '17.42 GMT',
+			lastUpdated: 1581334840000,
+			lastUpdatedDisplay: '11.40 GMT',
+			blockLastUpdated: 1581076498000,
+			blockLastUpdatedDisplay: '11.54 GMT',
+			firstPublished: 1581246004000,
+			firstPublishedDisplay: '11.00 GMT',
+			blockFirstPublished: 1580751774000,
+			blockFirstPublishedDisplay: '17.42 GMT',
+			primaryDateLine: 'Sun 9 Feb 2020 11.00 GMT',
+			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 11.40 GMT',
 		},
 	],
 	linkedData: [

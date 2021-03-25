@@ -1025,53 +1025,53 @@ export const Labs: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
 			},
 		},
 	},
@@ -1340,8 +1340,77 @@ export const Labs: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'd55fb4f2-7af9-4f23-a5d3-3912f399279d',
-			role: 'inline',
+			media: {
+				allImages: [
+					{
+						index: 0,
+						fields: {
+							height: '1200',
+							width: '2000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/2000.jpg',
+					},
+					{
+						index: 1,
+						fields: {
+							height: '600',
+							width: '1000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/500.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '84',
+							width: '140',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/140.jpg',
+					},
+					{
+						index: 4,
+						fields: {
+							height: '1940',
+							width: '3232',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/3232.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '1940',
+							width: '3232',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/master/3232.jpg',
+					},
+				],
+			},
 			data: {
 				alt:
 					'Soccer, C1920.<br>Mandatory Credit: Photo by Granger/Shutterstock (8749037a) Soccer, C1920. Young Women Playing Soccer. Photograph, C1920. Soccer, C1920.',
@@ -1349,6 +1418,8 @@ export const Labs: CAPIType = {
 					'By 1920, women’s football had taken off due to the men’s league being cancelled during the first world war – but a year later the game was banned.',
 				credit: 'Photograph: Granger/Shutterstock',
 			},
+			displayCredit: true,
+			role: 'inline',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1652,122 +1723,107 @@ export const Labs: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '1940',
-							width: '3232',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/3232.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '1940',
-							width: '3232',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/67ccc01256c0eaab4df8cc3bfaada4b2fe5edda8/0_241_3232_1940/master/3232.jpg',
-					},
-				],
-			},
-			displayCredit: true,
+			elementId: 'de7cba88-e268-4056-89fd-ea54309301e1',
 		},
 	],
 	webPublicationDate: '2021-03-16T13:02:21.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Thu 18 Mar 2021 10.50 GMT',
-			blockFirstPublishedDisplay: '11.52 GMT',
-			blockLastUpdated: 1615983905000,
-			firstPublishedDisplay: '13.02 GMT',
-			lastUpdatedDisplay: '10.50 GMT',
-			blockCreatedOnDisplay: '11.51 GMT',
-			blockLastUpdatedDisplay: '12.25 GMT',
-			firstPublished: 1615899741000,
-			createdOn: 1614599498000,
-			primaryDateLine: 'Tue 16 Mar 2021 13.02 GMT',
-			blockCreatedOn: 1614599498000,
-			blockFirstPublished: 1614599557000,
-			createdOnDisplay: '11.51 GMT',
-			lastUpdated: 1616064648000,
+			id: '603cd54a8f08be9d080d7a5e',
 			elements: [
 				{
-					elementId: '1c19638a-d095-4871-b682-e204e0ec874b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Women’s football has been a travelling show since it began. In the years of its infancy, in the late 19th century, exhibition matches featuring all-female teams were staged all over the UK, from Brighton to Newcastle, Bristol to Edinburgh. They were also hugely popular, drawing crowds of tens of thousands.</p>',
-				},
-				{
-					elementId: '21f65119-b479-41df-a702-6f6b007cccf5',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'ef848161-61c9-4281-b335-6c9b42dfd9e7',
+				},
+				{
 					html:
 						'<p>Some drew too much attention. The first recorded “international” games took place in 1881 when a team of English players travelled to Scotland and during their second encounter, in Glasgow, heckles turned into a pitch invasion, forcing the women to take shelter in their horse-drawn bus. Not long after that, Scotland banned women from playing, which is another theme that returns frequently in the history of the game across the globe. It’s no small miracle that women’s football is thriving today, given the decades of neglect and opposition it has endured.</p>',
-				},
-				{
-					elementId: 'c1346d57-db4c-483c-b30d-789f52e7c496',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>For no less than half of the 20th century, the English Football Association (FA) refused to allow women to play on any of its grounds. It claimed that the game was damaging to women’s health and many doctors supported its stance. In reality, the ban was a panicked response to the increasing take-up of the game by women during the first world war.</p>',
+					elementId: '4bd1983e-863d-41f7-8c1c-eb31b7336612',
 				},
 				{
-					elementId: '1b6f3327-603c-4ee0-986e-d507593a15bc',
-					role: 'inline',
+					html:
+						'<p>For no less than half of the 20th century, the English Football Association (FA) refused to allow women to play on any of its grounds. It claimed that the game was damaging to women’s health and many doctors supported its stance. In reality, the ban was a panicked response to the increasing take-up of the game by women during the first world war.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '12ed7c93-af2d-42e0-b58d-1f5a2ea39bac',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '1817',
+									width: '2750',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/2750.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '1817',
+									width: '2750',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/master/2750.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1321',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '661',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '330',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '93',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/140.jpg',
+							},
+						],
+					},
 					data: {
 						alt:
 							'The British Ladies’ Football Club’s North team – Mrs Graham’s XI was a women’s football team formed by Helen Matthews in Edinburgh, Scotland, in 1881. It is considered the first British women’s football team and a pioneering team in the history of the sport.',
@@ -1775,6 +1831,8 @@ export const Labs: CAPIType = {
 							'The British Ladies’ Football Club’s North team – Mrs Graham’s XI was a women’s football team formed by Helen Matthews in Edinburgh, Scotland, in 1881. It is considered the first British women’s football team and a pioneering team in the history of the sport.',
 						credit: 'Photograph: Alamy',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2079,124 +2137,122 @@ export const Labs: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'ef97478c-941b-41da-9c91-c69d9d77910e',
+				},
+				{
+					html:
+						'<p>After its Victorian beginnings, it was the social upheaval of war that had established the women’s game in Britain. With the football league cancelled as young men were sent to battle, the women who replaced them at the munitions factories had kickabouts in their break times, and played matches on their days off. Soon, ladies’ tournaments began to take hold. The Dick, Kerr Ladies FC, based in Preston, garnered such a powerful reputation that they played two matches a week, and in 1920 staged a pioneering European fixture when they took on a French team assembled by sporting activist Alice Milliat.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '694e4165-5a15-4154-8452-6f63a9d6f5a0',
+				},
+				{
+					html:
+						'<p>A year later, the FA issued its ban, and levels of participation in the UK collapsed. A few determined souls kept the flame burning. The Manchester Corinthians Ladies – formed in 1949 by Percy Ashley because his daughter Doris wanted a team to play for – became the centre of the game in Britain, but they had to travel to find people to play. Over the next decade, “Dynamite” Doris and her Corinthians teammates would tour Europe, South America and North Africa in their hunt for opposition.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '959e53ab-fa4c-467b-be0f-cf8d7588c918',
+				},
+				{
+					html:
+						'<p>Plenty of countries had their own bans on women’s football: Norway, France, Brazil and West Germany all outlawed it at various times, and an entire generation of women were relegated to playing in public parks, rugby pitches, and even greyhound tracks. The women’s game developed sporadically as a result, whenever and wherever it could find a home.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '84b3835f-ed07-4fdc-8cde-21e70c96debb',
+				},
+				{
+					html:
+						'<p>It was Italy who took up the baton, hosting the first women’s European tournament in 1969 (the European Competition for Women’s Football) and the first unofficial women’s world cup – sponsored by Italian drinks company Martini &amp; Rossi – a year later. Both events were popular and another “Women’s World Cup” was staged in 1971 – an all-singing, all-dancing affair at the Azteca stadium in Mexico, dressed in pink livery and surrounded by pop-up hair and beauty salons.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '9c5dc80d-049c-4402-9f60-4703a0e58f07',
+				},
+				{
+					html:
+						'<p>The English FA’s ban had only just been lifted, and it was an unofficial team, under the management of Harry Batt, who played Mexico and Argentina in the group stages. Despite losing all three of their games, they were received like rock stars by Mexican sports fans – and banned from representative football for three months on their return to England.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a0c6ced8-a5db-414e-944d-03493e5c6d48',
+				},
+				{
+					html:
+						'<p>The first official England women’s team played its debut match against Scotland in 1972; they came back from 2-1 down at half time to win 3-2, Pat “Thunder” Davies scoring the decisive goals. Davies was a member of the Southampton team that had won the first women’s FA Cup the previous year, and which went on to dominate the game throughout the 1970s.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '22cb620b-e734-488d-86d8-a3711b8ef000',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
-									height: '1817',
-									width: '2750',
+									height: '2660',
+									width: '4431',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/2750.jpg',
+									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/4431.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '1817',
-									width: '2750',
+									height: '2660',
+									width: '4431',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/master/2750.jpg',
+									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/master/4431.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '1321',
+									height: '1200',
 									width: '2000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/2000.jpg',
+									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/2000.jpg',
 							},
 							{
 								index: 3,
 								fields: {
-									height: '661',
+									height: '600',
 									width: '1000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/1000.jpg',
+									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/1000.jpg',
 							},
 							{
 								index: 4,
 								fields: {
-									height: '330',
+									height: '300',
 									width: '500',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/500.jpg',
+									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/500.jpg',
 							},
 							{
 								index: 5,
 								fields: {
-									height: '93',
+									height: '84',
 									width: '140',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/f5afbfd25cd6a3086388fdd5368fe5f3f7c61fd4/0_0_2750_1817/140.jpg',
+									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/140.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: '035722e1-61b3-4154-baec-c354a683620c',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>After its Victorian beginnings, it was the social upheaval of war that had established the women’s game in Britain. With the football league cancelled as young men were sent to battle, the women who replaced them at the munitions factories had kickabouts in their break times, and played matches on their days off. Soon, ladies’ tournaments began to take hold. The Dick, Kerr Ladies FC, based in Preston, garnered such a powerful reputation that they played two matches a week, and in 1920 staged a pioneering European fixture when they took on a French team assembled by sporting activist Alice Milliat.</p>',
-				},
-				{
-					elementId: 'e0dd2ffd-517a-4079-8fb1-55a6ee0e8cda',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>A year later, the FA issued its ban, and levels of participation in the UK collapsed. A few determined souls kept the flame burning. The Manchester Corinthians Ladies – formed in 1949 by Percy Ashley because his daughter Doris wanted a team to play for – became the centre of the game in Britain, but they had to travel to find people to play. Over the next decade, “Dynamite” Doris and her Corinthians teammates would tour Europe, South America and North Africa in their hunt for opposition.</p>',
-				},
-				{
-					elementId: '5c1451b9-df43-4c16-a4c9-94caaa5f1b51',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Plenty of countries had their own bans on women’s football: Norway, France, Brazil and West Germany all outlawed it at various times, and an entire generation of women were relegated to playing in public parks, rugby pitches, and even greyhound tracks. The women’s game developed sporadically as a result, whenever and wherever it could find a home.</p>',
-				},
-				{
-					elementId: '7f5c996b-9b5d-4305-a0a7-756f1e79849b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>It was Italy who took up the baton, hosting the first women’s European tournament in 1969 (the European Competition for Women’s Football) and the first unofficial women’s world cup – sponsored by Italian drinks company Martini &amp; Rossi – a year later. Both events were popular and another “Women’s World Cup” was staged in 1971 – an all-singing, all-dancing affair at the Azteca stadium in Mexico, dressed in pink livery and surrounded by pop-up hair and beauty salons.</p>',
-				},
-				{
-					elementId: '94e619ee-70f0-4674-9a21-87a32b3f02bc',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The English FA’s ban had only just been lifted, and it was an unofficial team, under the management of Harry Batt, who played Mexico and Argentina in the group stages. Despite losing all three of their games, they were received like rock stars by Mexican sports fans – and banned from representative football for three months on their return to England.</p>',
-				},
-				{
-					elementId: '9e4c61b3-6f86-4e0e-9304-18569c31c98c',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The first official England women’s team played its debut match against Scotland in 1972; they came back from 2-1 down at half time to win 3-2, Pat “Thunder” Davies scoring the decisive goals. Davies was a member of the Southampton team that had won the first women’s FA Cup the previous year, and which went on to dominate the game throughout the 1970s.</p>',
-				},
-				{
-					elementId: 'cfbd2da2-2a1c-41ba-b4de-3190b86e5065',
-					role: 'inline',
 					data: {
 						alt:
 							'Liverpool Women v Charlton Athletic Women: FA Women’s ChampionshipBIRKENHEAD, ENGLAND - SEPTEMBER 27: (THE SUN OUT, THE SUN ON SUNDAY OUT) Rachel Furness of Liverpool Women celebrates after scoring the third goal during the FA Women’s Championship match between Liverpool Women and Charlton Athletic Women at Prenton Park on September 27, 2020 in Birkenhead, England. (Photo by Andrew Powell/Liverpool FC via Getty Images)',
@@ -2205,6 +2261,8 @@ export const Labs: CAPIType = {
 						credit:
 							'Photograph: Andrew Powell/Liverpool FC/Getty Images',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2509,116 +2567,58 @@ export const Labs: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '2660',
-									width: '4431',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/4431.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '2660',
-									width: '4431',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/master/4431.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/95fb6d2fb1413f418acaff1b73d50811f5cfbfcd/48_0_4431_2660/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
+					elementId: '503ab846-6fbd-4ede-b24e-0aeba6995844',
 				},
 				{
-					elementId: '36758f21-eef6-4d08-995a-f74958039b89',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Sweden, Norway and Denmark were all establishing themselves as powerhouses of the women’s game, and Sweden would become the first ever champions of the European Competition for Women’s Football<strong> </strong>in 1984 (the women’s equivalent of the Uefa <a href="https://en.wikipedia.org/wiki/UEFA_European_Championship" rel="nofollow">European Championship</a>) after beating England on penalties at Kenilworth Road. Throughout the 1980s, England’s players – an eclectic, amateur mix of office workers, sales assistants, civil servants and engineers – were increasingly drawn from the all-conquering Doncaster Rovers Belles, under the leadership of captain Gillian Coultard.</p>',
-				},
-				{
-					elementId: '7c567531-7acc-4dec-987d-69f913d2ca55',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a6f2df9b-f936-497b-9b23-c06fe9771c65',
+				},
+				{
 					html:
 						'<p>But other nations were rising, too. It was China who hosted Fifa’s first international championship for women, the Women’s World Cup, in 1991, and the United States that won it, beating Norway 2-1 in the final. That victory marked the beginning of more than 20 years of US excellence, including one of the most memorable and defining moments in women’s football: Brandi Chastain’s left-footed penalty to beat Chinese goalkeeper Gao Hong and win the 1999 World Cup. The picture of her shirt-waving celebration made the cover of Time magazine.</p>',
-				},
-				{
-					elementId: '0ef77ebd-0ce5-46b1-a9b9-aa2054835ddf',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a23c5caa-1337-4b00-a39a-493862947d7a',
+				},
+				{
 					html:
 						'<p>A subsequent attempt to establish a pioneering professional league in the US was not successful and Women’s United Soccer Association (WUSA) was wound up after three years, in 2003, despite a roster of global talent. But the venture was proof of the game’s new ambition and presaged a 21st-century revolution in women’s sport. More and more footballing superstars followed Chastain into mainstream fame: US striker Mia Hamm, Germany’s Birgit Prinz, Brazil’s Marta Vieira da Silva, England’s Kelly Smith, Japan’s Homare Sawa. By 2015, the women’s World Cup had expanded to 24 teams and was reaching record-breaking audiences.</p>',
-				},
-				{
-					elementId: '7bcb3222-6418-4142-ad2b-d0cd1db72d95',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c498cfdc-e621-429d-8d29-5ce2e021d971',
+				},
+				{
 					html:
 						'<p>And things started getting more legitimate over time – in England, the Women’s Super and Champions leagues finally became full-time, professional affairs. And after an immensely successful Women’s World Cup in 2019 – which included the largest viewership in the game’s history – there are now 34 countries in the world where women play professional football. That number is only set to grow.</p>',
-				},
-				{
-					elementId: 'ce4d0b13-92ef-4223-badd-6665a2b8999d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c042afc8-e4bb-4e3a-ac6d-2bcd1a730b85',
+				},
+				{
 					html:
 						'<p><em>Expedia believes that travel, like football, is better experienced together. That’s why – as the official travel companion of Liverpool FC – Expedia will be with you all the way, as soon as we can travel together again. To get inspiration for your next trip, visit <a href="https://withyoualltheway.expedia.co.uk/en/" rel="nofollow">expedia.co.uk</a></em></p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '235d2fcd-7b8a-4705-807a-f6738cfe80fa',
 				},
 			],
-			id: '603cd54a8f08be9d080d7a5e',
+			createdOn: 1614599498000,
+			createdOnDisplay: '11.51 GMT',
+			blockCreatedOn: 1614599498000,
+			blockCreatedOnDisplay: '11.51 GMT',
+			lastUpdated: 1616064648000,
+			lastUpdatedDisplay: '10.50 GMT',
+			blockLastUpdated: 1615983905000,
+			blockLastUpdatedDisplay: '12.25 GMT',
+			firstPublished: 1615899741000,
+			firstPublishedDisplay: '13.02 GMT',
+			blockFirstPublished: 1614599557000,
+			blockFirstPublishedDisplay: '11.52 GMT',
+			primaryDateLine: 'Tue 16 Mar 2021 13.02 GMT',
+			secondaryDateLine: 'Last modified on Thu 18 Mar 2021 10.50 GMT',
 		},
 	],
 	linkedData: [

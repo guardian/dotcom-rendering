@@ -973,53 +973,53 @@ export const PhotoEssay: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
 			},
 		},
 	},
@@ -1310,8 +1310,77 @@ export const PhotoEssay: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '6d5d8cb5-bd94-4cb4-a029-e44d959f674c',
-			role: 'immersive',
+			media: {
+				allImages: [
+					{
+						index: 0,
+						fields: {
+							height: '1200',
+							width: '2000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/2000.jpg',
+					},
+					{
+						index: 1,
+						fields: {
+							height: '600',
+							width: '1000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/500.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '84',
+							width: '140',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/140.jpg',
+					},
+					{
+						index: 4,
+						fields: {
+							height: '1632',
+							width: '2719',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/2719.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '1632',
+							width: '2719',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/master/2719.jpg',
+					},
+				],
+			},
 			data: {
 				alt:
 					'Joe Bracegirdle Lanterdan Quarry above Vean Hole Beach, North Coast Shot for Sidetracked Equipped',
@@ -1319,6 +1388,8 @@ export const PhotoEssay: CAPIType = {
 					'Joe Bracegirdle at Lanterdan Quarry, above Vean Hole beach, north Cornwall. All photographs: Cat Vinton/The Guardian',
 				credit: 'Photograph: The Guardian',
 			},
+			displayCredit: false,
+			role: 'immersive',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1622,127 +1693,114 @@ export const PhotoEssay: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '1632',
-							width: '2719',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/2719.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '1632',
-							width: '2719',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/master/2719.jpg',
-					},
-				],
-			},
-			displayCredit: false,
+			elementId: '44294aa1-01b9-4609-b266-e5d05688b9ba',
 		},
 	],
 	webPublicationDate: '2020-12-09T06:30:30.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
-			blockFirstPublishedDisplay: '13.01 GMT',
-			blockLastUpdated: 1607505880000,
-			firstPublishedDisplay: '06.30 GMT',
-			lastUpdatedDisplay: '13.40 GMT',
-			blockCreatedOnDisplay: '13.01 GMT',
-			blockLastUpdatedDisplay: '09.24 GMT',
-			firstPublished: 1607495430000,
-			createdOn: 1606741266000,
-			primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-			blockCreatedOn: 1606741266000,
-			blockFirstPublished: 1606741273000,
-			createdOnDisplay: '13.01 GMT',
-			lastUpdated: 1607521207000,
+			id: '5fc4ed128f08959b167732bd',
 			elements: [
 				{
-					elementId: '300d3a76-54f5-458c-a192-6f30fe1d8214',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The last embers of my fire flicker orange and red in the dark. It has warmed me after my evening swim shared with a grey seal, a curious female at the water’s edge, under the soft pink hues of the setting sun.</p>',
-				},
-				{
-					elementId: '504efed8-1722-4a41-9aa8-86c95013492b',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'd7fc5bbc-b9ec-412f-9345-024d58b109bc',
+				},
+				{
 					html:
 						'<p>The nights are beginning to draw in and the temperature is dropping. Tonight’s home is a magical one: a hidden spot somewhere on the Roseland Heritage coast.</p>',
-				},
-				{
-					elementId: '2db4148e-614d-43d0-a8c1-266ad8703a0c',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>I am curled up in my tiny space with only a canvas shell between me and the elements. Tonight is calm: a beautiful moon path marks the ocean and is my view through the open back of my family’s Land Rover. I drift off to sleep to the sound of waves lapping the shore and the call of tawny owls across the night sky.</p>',
+					elementId: 'cf690292-c493-4f10-8635-273d017f80ed',
 				},
 				{
-					elementId: 'fb50d9b2-9683-4e3a-a654-cfd00e2f5eec',
-					role: 'showcase',
+					html:
+						'<p>I am curled up in my tiny space with only a canvas shell between me and the elements. Tonight is calm: a beautiful moon path marks the ocean and is my view through the open back of my family’s Land Rover. I drift off to sleep to the sound of waves lapping the shore and the call of tawny owls across the night sky.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '2567912a-bcd2-4ad0-bb06-21b125013edc',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '2074',
+									width: '3110',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/3110.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '2074',
+									width: '3110',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/master/3110.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1334',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '667',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '333',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '93',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/140.jpg',
+							},
+						],
+					},
 					data: {
 						alt:
 							'Land Rover parked somewhere on the Roseland Heritage Coast, Cornwall. Image taken at dusk.',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'showcase',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2047,6 +2105,44 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'dff119d0-3fa4-433d-8fe5-02c1ebaef881',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Cat Vinton’s home for the past eight months has been her Land Rover</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'f45c0e5e-4ab1-4a8f-8efe-35e110a27a25',
+				},
+				{
+					html:
+						'<p>For the last few years I’ve not called one place home. Instead, I’ve roamed across the globe – from the High Himalaya to the Arctic Circle, the Gobi Desert to the Andaman Sea<strong> </strong>– weaving my life and work as a photographer, more in tune with a wilder spirit and those who still live connected to nature.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '086137a7-ca87-4cac-829d-0a4c805aba75',
+				},
+				{
+					html:
+						'<p>As the world locked down in March, not only my work but my entire way of life ground to a quiet halt, forcing me to look inward and to grapple with the meaning<em> </em>of “home”.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '120d6326-03f7-4c96-9cb4-7c6b48ef1be6',
+				},
+				{
+					html:
+						'<p>My pull was to the ocean of the south-west of England. Thanks to my friend Louise Middleton, for those three months of lockdown I watched over a wild pocket of the north Cornish coast – an old slate quarry that overlooks the sea at Trebarwith Strand. It is a beautifully curated space, totally off-grid, that Louise has named <a href="https://kudhva.com/">Kudhva</a> (meaning hideout in Cornish). Kudhva is a visionary architectural hideout that draws creative people who thrive on a life connected to the outdoors.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '7669fd26-a356-44c3-99c6-c9d73b4b87a3',
+				},
+				{
+					html:
+						'<p>I became part of a community at Kudhva and my days were spent in fascinating conversation, working on the land with the locals. This is what I do on my projects – immerse myself in a way of life, documenting people who are connected to their land and community around the world. I fell into a way of doing the same on home shores.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '72f05fc1-80a7-46b8-b8e0-0847597d1204',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -2058,7 +2154,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -2070,7 +2166,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -2081,7 +2177,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -2092,7 +2188,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -2103,7 +2199,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -2114,55 +2210,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: 'd4ca2624-e5e1-4fd0-9aa8-d2bbc70cfb36',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Cat Vinton’s home for the past eight months has been her Land Rover</p></li> \n</ul>',
-				},
-				{
-					elementId: '038b191a-b2f6-4960-a70e-a3112c49e9ed',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>For the last few years I’ve not called one place home. Instead, I’ve roamed across the globe – from the High Himalaya to the Arctic Circle, the Gobi Desert to the Andaman Sea<strong> </strong>– weaving my life and work as a photographer, more in tune with a wilder spirit and those who still live connected to nature.</p>',
-				},
-				{
-					elementId: '0516fa21-c1f4-4be2-831e-f0a6f4f3549e',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>As the world locked down in March, not only my work but my entire way of life ground to a quiet halt, forcing me to look inward and to grapple with the meaning<em> </em>of “home”.</p>',
-				},
-				{
-					elementId: '99dc61cc-74ca-4435-b2d5-d7ba9cfbc6e4',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>My pull was to the ocean of the south-west of England. Thanks to my friend Louise Middleton, for those three months of lockdown I watched over a wild pocket of the north Cornish coast – an old slate quarry that overlooks the sea at Trebarwith Strand. It is a beautifully curated space, totally off-grid, that Louise has named <a href="https://kudhva.com/">Kudhva</a> (meaning hideout in Cornish). Kudhva is a visionary architectural hideout that draws creative people who thrive on a life connected to the outdoors.</p>',
-				},
-				{
-					elementId: 'd3f11599-b0be-4826-8fe6-f53cb7d21169',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>I became part of a community at Kudhva and my days were spent in fascinating conversation, working on the land with the locals. This is what I do on my projects – immerse myself in a way of life, documenting people who are connected to their land and community around the world. I fell into a way of doing the same on home shores.</p>',
-				},
-				{
-					elementId: 'd49ac888-9417-4ae2-b93c-4ddcab0cf9a2',
-					role: 'inline',
 					data: {
 						alt:
 							'Kudhva, architectural hideouts on the north Cornish coast',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2467,6 +2525,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'a3433422-d130-42e2-9a66-62dd29087020',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -2478,7 +2539,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -2490,7 +2551,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -2501,7 +2562,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -2512,7 +2573,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -2523,7 +2584,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -2534,20 +2595,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c36af9ca4c805e161ec991df550277db32637f32/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '22c4651a-3113-4fb6-8b50-294b015da495',
-					role: 'inline',
 					data: {
 						alt:
 							'The engine House at Kudhva, built in 1871, at sunset over Gull Rock',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2852,6 +2910,23 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '0aeb1744-2f7e-43b8-bff5-32dc4ddd09b2',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Louise Middleton bought a 45-acre abandoned quarry in 2015 that she named Kudhva, meaning hideout in Cornish</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'bdd4b2d3-7f15-4f8d-a16a-da610eb17aad',
+				},
+				{
+					html:
+						'<p>Sidetracked, an adventure journal which has shared my stories from the remotest corners of the world, joined us as lockdown lifted for some backyard adventures – climbing, biking, cold-water swimming and surfing – with the people who know this land best.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '1da6019c-fc94-4025-95fb-1635639582f4',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -2863,7 +2938,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -2875,7 +2950,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -2886,7 +2961,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -2897,7 +2972,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -2908,7 +2983,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -2919,34 +2994,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1df09c6be2e49d36d388156c65c8de116f6d0d42/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: 'dc7cd571-53d0-4d37-8e14-aed54cab9f22',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Louise Middleton bought a 45-acre abandoned quarry in 2015 that she named Kudhva, meaning hideout in Cornish</p></li> \n</ul>',
-				},
-				{
-					elementId: '54924834-f55e-458a-921d-d8aa1cf78de6',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Sidetracked, an adventure journal which has shared my stories from the remotest corners of the world, joined us as lockdown lifted for some backyard adventures – climbing, biking, cold-water swimming and surfing – with the people who know this land best.</p>',
-				},
-				{
-					elementId: 'bc247d1a-2d74-4745-b9e8-2855e5bf16f5',
-					role: 'halfWidth',
 					data: {
 						alt:
 							'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
 						credit: 'Photograph: Cat Vinton',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3251,6 +3309,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'd84c3624-1bdf-4b23-aec0-6e61d84886ad',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -3262,7 +3323,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -3274,7 +3335,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -3285,7 +3346,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -3296,7 +3357,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -3307,7 +3368,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -3318,20 +3379,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/eb8863effc0e7b50f5d338fe605f2adc83318920/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '6095789a-975e-4077-b76d-433c581181c9',
-					role: 'halfWidth',
 					data: {
 						alt:
 							'Shot at Kudhva and Trebarwith Strand with the locals Jack Stocker',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3636,6 +3694,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '13e7f1e2-bf48-46d1-ac1d-73f01ae8eaec',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -3647,7 +3708,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -3659,7 +3720,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -3670,7 +3731,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -3681,7 +3742,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -3692,7 +3753,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -3703,20 +3764,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/e0fa5bdfa0e6910b9b58ccc98c3247217566bf9f/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: 'b3c5da87-febc-4b73-a1da-46b93b8bbd73',
-					role: 'halfWidth',
 					data: {
 						alt:
 							'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4021,6 +4079,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '1f4e2e6d-0e57-4fd9-bee9-bb53face9042',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -4032,7 +4093,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -4044,7 +4105,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -4055,7 +4116,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -4066,7 +4127,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -4077,7 +4138,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -4088,20 +4149,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/980ac0ba3a3bcc464fcc9642c4fcc03ec8915d76/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '141f881d-39f7-4f8c-bfde-fc6327e9f0f9',
-					role: 'halfWidth',
 					data: {
 						alt:
 							'Shot at Kudhva and Trebarwith Strand with the locals Marcus Rowe',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: true,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4406,93 +4464,82 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'f4d7eab2-aab0-4be7-ae54-351c7e472258',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Backyard adventures in Cornwall with the locals included cold-water swimming, biking and surfing. Shot for Sidetracked magazine at Kudhva and Trebarwith Strand</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '429360a1-d358-4e2e-89d1-864a2df1bec7',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
-									height: '2074',
-									width: '3110',
+									height: '2592',
+									width: '2074',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/2074.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '2074',
-									width: '3110',
+									height: '2592',
+									width: '2074',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/master/2074.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '1334',
-									width: '2000',
+									height: '2000',
+									width: '1600',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/1600.jpg',
 							},
 							{
 								index: 3,
 								fields: {
-									height: '667',
-									width: '1000',
+									height: '1000',
+									width: '800',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/800.jpg',
 							},
 							{
 								index: 4,
 								fields: {
-									height: '333',
-									width: '500',
+									height: '500',
+									width: '400',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '93',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cd6fbd090b8beb8d5a767f48e524cf534283bcbc/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/400.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: 'e6fbb94c-3c81-40af-811a-7373d9c12c37',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Backyard adventures in Cornwall with the locals included cold-water swimming, biking and surfing. Shot for Sidetracked magazine at Kudhva and Trebarwith Strand</p></li> \n</ul>',
-				},
-				{
-					elementId: '9564a910-9980-4b79-a8c9-bf308f79152f',
-					role: 'thumbnail',
 					data: {
 						alt: 'Home. My rig Series 3 Land-Rover',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'thumbnail',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4797,106 +4844,117 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'c175c9df-0215-49d9-a8b5-c3a50b80d44d',
+				},
+				{
+					html:
+						'<p>Then, as the country began to open up again, and Kudhva began to welcome back guests, it was time to move on. I decided this was a gift of time I may never get again. Usually, I’m moving with my work. I had my cameras and a Land Rover that could take me off the beaten track – the perfect companion to explore the Cornish coast and its way of life, and to see if I could still find pockets of solitude, as the tourist floodgates opened.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '570aa4dd-55c5-4402-9c29-895c29831fbd',
+				},
+				{
+					html:
+						'It’s a simple set-up – I’m free, independent and I am happy',
+					role: 'supporting',
+					isThirdPartyTracking: false,
+					_type:
+						'model.dotcomrendering.pageElements.PullquoteBlockElement',
+					elementId: '55c2f683-a5c0-42c9-b978-9f8ad65c0876',
+				},
+				{
+					html:
+						'<p>A small pile of books is stacked between the seats of the Land Rover; a head torch, tide tables, bikini and my knife are at hand. Everything else I need is packed neatly in the open back, covered with a piece of wood that doubles as a table and my bed. It’s simple – I’m free, independent and happy. With no real plan, I set off west along the north coast.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'dec71115-5e17-425d-b44e-3dff2e6d710e',
+				},
+				{
+					html:
+						'<p>Cornwall has always felt like a haven to me, but even more so now with its gift of space, fresh air, ocean and local produce far from the hustle of city life. Slate and granite cliffs, small rocky coves and headlands, sand dunes, reefs, sandy beaches, green pathways and water shape Cornwall’s 400 miles of coastline.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '8dd594fe-3c4f-4deb-9c14-0df2b8b1e783',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
-									height: '2592',
-									width: '2074',
+									height: '2074',
+									width: '3110',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/2074.jpg',
+									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '2592',
-									width: '2074',
+									height: '2074',
+									width: '3110',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/master/2074.jpg',
+									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
 								fields: {
-									height: '2000',
-									width: '1600',
+									height: '1334',
+									width: '2000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/1600.jpg',
+									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
 								fields: {
-									height: '1000',
-									width: '800',
+									height: '667',
+									width: '1000',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/800.jpg',
+									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
 								fields: {
-									height: '500',
-									width: '400',
+									height: '333',
+									width: '500',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/af3f6794965117292e4d54e1388d44daee6519aa/0_499_2074_2592/400.jpg',
+									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '93',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: 'e88b9677-1601-4be6-8f80-967ffc6105a7',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Then, as the country began to open up again, and Kudhva began to welcome back guests, it was time to move on. I decided this was a gift of time I may never get again. Usually, I’m moving with my work. I had my cameras and a Land Rover that could take me off the beaten track – the perfect companion to explore the Cornish coast and its way of life, and to see if I could still find pockets of solitude, as the tourist floodgates opened.</p>',
-				},
-				{
-					elementId: '5ca6c814-65d9-4008-b73d-6da7a4cd3076',
-					role: 'supporting',
-					isThirdPartyTracking: false,
-					_type:
-						'model.dotcomrendering.pageElements.PullquoteBlockElement',
-					html:
-						'It’s a simple set-up – I’m free, independent and I am happy',
-				},
-				{
-					elementId: 'f318bd24-0f68-4abe-817b-3a83211c5126',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>A small pile of books is stacked between the seats of the Land Rover; a head torch, tide tables, bikini and my knife are at hand. Everything else I need is packed neatly in the open back, covered with a piece of wood that doubles as a table and my bed. It’s simple – I’m free, independent and happy. With no real plan, I set off west along the north coast.</p>',
-				},
-				{
-					elementId: 'f0309176-067e-4e2e-97b7-41bb1db30738',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Cornwall has always felt like a haven to me, but even more so now with its gift of space, fresh air, ocean and local produce far from the hustle of city life. Slate and granite cliffs, small rocky coves and headlands, sand dunes, reefs, sandy beaches, green pathways and water shape Cornwall’s 400 miles of coastline.</p>',
-				},
-				{
-					elementId: '7a62903e-a115-4762-a442-b5d858f3bcab',
-					role: 'showcase',
 					data: {
 						alt:
 							'Commando Ridge, Penwith Peninsular. A climber’s paradise',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'showcase',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5201,6 +5259,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'd091601a-e9d1-41a8-83e2-e359f29c86d0',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -5212,7 +5273,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -5224,7 +5285,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -5235,7 +5296,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -5246,7 +5307,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -5257,7 +5318,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -5268,20 +5329,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/8379b1bc5c1dd1c719185c156dba01f867c5bc26/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '1122ec44-1106-4ed8-9b1a-b7d4a0328b7d',
-					role: 'halfWidth',
 					data: {
 						alt:
 							'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5586,6 +5644,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'a2394199-e7ca-4b55-93cd-4150118cb81f',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -5597,7 +5658,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -5609,7 +5670,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -5620,7 +5681,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -5631,7 +5692,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -5642,7 +5703,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -5653,20 +5714,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/9b162ccdd50eced63c5ce5c2d5d9d16ddd69f8d7/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '185cad0c-e766-4cec-849c-05df5d33bf1e',
-					role: 'halfWidth',
 					data: {
 						alt:
 							'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5971,6 +6029,23 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '6bf31ee5-f0b3-4571-ba64-203bf1d53e0e',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Turquoise waters, green pathways and rocky pools shape Cornwall’s 400 miles of coastline</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '421e4320-0817-40f9-b602-96d2060b5cbf',
+				},
+				{
+					html:
+						'<p>As my days slowed, I noticed every detail in the shifting light, the sounds, smells and colours, and tuned into the tidal rhythm, mesmerised by the waves that roll in perfect lines.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '6c9c8307-8054-4cd5-b9d5-000d6745d68e',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -5982,7 +6057,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -5994,7 +6069,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -6005,7 +6080,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -6016,7 +6091,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -6027,7 +6102,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -6038,33 +6113,16 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/bd2b76ad10929bc78238f3d4306812179583da4c/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '0c0e15cf-a748-4e2c-bd63-38a8b0ac7110',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Turquoise waters, green pathways and rocky pools shape Cornwall’s 400 miles of coastline</p></li> \n</ul>',
-				},
-				{
-					elementId: 'c6c4be21-3ebb-41f7-a91d-5c13f8de476a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>As my days slowed, I noticed every detail in the shifting light, the sounds, smells and colours, and tuned into the tidal rhythm, mesmerised by the waves that roll in perfect lines.</p>',
-				},
-				{
-					elementId: '2473f270-934c-4572-99b1-d1c926747527',
-					role: 'inline',
 					data: {
 						alt: '10.The Atlantic Ocean North coast of Cornwall',
 						credit: 'Photograph: Cat Vinton',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -6369,6 +6427,23 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '474ebd3f-cb8a-4049-be68-f18113e39720',
+				},
+				{
+					html:
+						'<p>I weaved my way along the north coast from Trebarwith Strand to the lighthouse on Pendeen Point, almost 100 miles of coast flanked by the Atlantic Ocean. This part of the coast is punctuated with derelict buildings and still-noble chimneys of tin and copper mines that once thrived in a harsh industrial past. Climbers are drawn to the granite cliffs and crags of the Penwith peninsula, and I spent some epic days here, with friends, climbing and exploring the Penwith heritage coast.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '5453d937-89df-48f3-a8a5-62f2d088def5',
+				},
+				{
+					html:
+						'<p>The weather had been mostly kind until late August, but the rumblings of thunder carried a wild energy that stirred up the ocean and I lay awake as lightning lit up the night sky, and wind and driving rain whipped the canvas covering of the Land Rover. For 10 days storms Ellen and Francis raged across the ocean, swirled around the end of land and made me appreciate everything – especially how privileged I am to be able to make the choice to live like this. It’s not the easiest way to live and not what most people would choose – but it’s stripped back, simple and connected. Being immersed in the elements is where I find my energy and my balance, giving me a sense of purpose.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c76c41cd-46af-4a54-8391-66bdb878bdc0',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -6380,7 +6455,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -6392,7 +6467,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -6403,7 +6478,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -6414,7 +6489,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -6425,7 +6500,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -6436,34 +6511,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/03821a741b8e5be05ce7cb9fe6515aaf4df9d9d0/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: 'bc91e305-901d-4954-9b22-b88531e8ae53',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>I weaved my way along the north coast from Trebarwith Strand to the lighthouse on Pendeen Point, almost 100 miles of coast flanked by the Atlantic Ocean. This part of the coast is punctuated with derelict buildings and still-noble chimneys of tin and copper mines that once thrived in a harsh industrial past. Climbers are drawn to the granite cliffs and crags of the Penwith peninsula, and I spent some epic days here, with friends, climbing and exploring the Penwith heritage coast.</p>',
-				},
-				{
-					elementId: 'bf6d94af-e9db-49e8-a108-1855c2e79e3d',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The weather had been mostly kind until late August, but the rumblings of thunder carried a wild energy that stirred up the ocean and I lay awake as lightning lit up the night sky, and wind and driving rain whipped the canvas covering of the Land Rover. For 10 days storms Ellen and Francis raged across the ocean, swirled around the end of land and made me appreciate everything – especially how privileged I am to be able to make the choice to live like this. It’s not the easiest way to live and not what most people would choose – but it’s stripped back, simple and connected. Being immersed in the elements is where I find my energy and my balance, giving me a sense of purpose.</p>',
-				},
-				{
-					elementId: 'f46bf526-f52e-462a-913d-05b73047b6bf',
-					role: 'immersive',
 					data: {
 						alt:
 							'Storm Francis raging across the ocean, 24.08.20, Cornwall, UK.',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'immersive',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -6768,6 +6826,32 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '99847fcf-3c42-4056-bf17-622431cfef71',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Storm Francis raging across the ocean in August</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '7096a311-9cea-4571-b42a-c042843ee52a',
+				},
+				{
+					html:
+						'<p>Every day is different as I move slowly along this stunning coast. I’ve seen pilot whales, dolphins, seals, barn owls, kestrels, peregrines and choughs, met old Cornish fishermen and made new local friends. I have, of course, also seen the hordes of people who’ve flocked here – but I’ve also found so many empty pockets of Kernow magic. The sea mist comes and goes, as do the sun and the clouds. The sea changes every day, every hour, every minute, as do we – our emotions, our energy and our perspectives. It feels like a lesson – a constant reminder that we are part of nature, not separated from it.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c15a9e17-ab4a-4c1a-85d9-108827431d31',
+				},
+				{
+					html:
+						'I’ve seen pilot whales, dolphins, seals, met old Cornish fishermen and made new local friends',
+					role: 'supporting',
+					isThirdPartyTracking: false,
+					_type:
+						'model.dotcomrendering.pageElements.PullquoteBlockElement',
+					elementId: '03061493-ad94-41d4-9663-51fc3d5c1414',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -6779,7 +6863,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -6791,7 +6875,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -6802,7 +6886,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -6813,7 +6897,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -6824,7 +6908,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -6835,43 +6919,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/114fb9bb70b28ad1369dc5f1e1d6695350800635/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '37ee7873-de84-427a-910f-aaabb9f9a007',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Storm Francis raging across the ocean in August</p></li> \n</ul>',
-				},
-				{
-					elementId: '6afd25f7-be30-48a8-bb92-6617a24ba059',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Every day is different as I move slowly along this stunning coast. I’ve seen pilot whales, dolphins, seals, barn owls, kestrels, peregrines and choughs, met old Cornish fishermen and made new local friends. I have, of course, also seen the hordes of people who’ve flocked here – but I’ve also found so many empty pockets of Kernow magic. The sea mist comes and goes, as do the sun and the clouds. The sea changes every day, every hour, every minute, as do we – our emotions, our energy and our perspectives. It feels like a lesson – a constant reminder that we are part of nature, not separated from it.</p>',
-				},
-				{
-					elementId: '0f30481a-9fca-4dc6-9e29-2ea23d83ab20',
-					role: 'supporting',
-					isThirdPartyTracking: false,
-					_type:
-						'model.dotcomrendering.pageElements.PullquoteBlockElement',
-					html:
-						'I’ve seen pilot whales, dolphins, seals, met old Cornish fishermen and made new local friends',
-				},
-				{
-					elementId: 'd4ad18cd-8985-4c2c-a211-90a389396a72',
-					role: 'inline',
 					data: {
 						alt:
 							'White horses carried on the on-shore wind, Dollar Cove, on the Lizard',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -7176,6 +7234,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '62b9fc1c-ada6-43e3-bd18-dfcba61692b4',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -7187,7 +7248,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -7199,7 +7260,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -7210,7 +7271,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -7221,7 +7282,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -7232,7 +7293,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -7243,19 +7304,16 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/6a6b6cb3374b37ebed33c4133c9afd33e81c533f/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '031cdeaf-217c-4528-9680-e5d924e962cb',
-					role: 'halfWidth',
 					data: {
 						alt: 'Logan Rock, Cornwall',
 						credit: 'Photograph: Cat Vinton',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -7560,6 +7618,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'af6117c8-c09c-4638-ab42-54ebe38d1e3b',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -7571,7 +7632,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -7583,7 +7644,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -7594,7 +7655,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -7605,7 +7666,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -7616,7 +7677,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -7627,20 +7688,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/a41021ee5c597ae2935b8580ecb21ab2e1d5110e/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: 'f0cb6900-e6ad-4517-8e7d-cfbdfb3062cc',
-					role: 'halfWidth',
 					data: {
 						alt: 'Logan Rock, Cornwall',
 						caption: 'Logan Rock, Cornwall',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -7945,6 +8003,30 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '73c013ce-9c99-41a2-8917-4d0c17aefa34',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Clockwise from top: White horses carried on the on-shore wind at Dollar Cove, on the Lizard; two different views of Logan Rock</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '978e9079-644b-4db3-8de3-a45c3460099a',
+				},
+				{
+					html:
+						'<p>Friends have joined me, I’ve swum every day, I’ve climbed, explored and watched the days turn to night by a fire on the beach most evenings. I’ve witnessed the change in the coastal palette of the native wildflowers and fallen into the pace of life here. I navigated the coast around the Lizard, up to Falmouth and on to the Roseland Heritage coast; the south coast is gentler, with sheltered beaches, woodland valleys, tree-lined estuaries, tiny winding roads, and picturesque fishing villages scattered along its shores.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '0e4ac3c3-0379-46d7-b14c-abd51af5170f',
+				},
+				{
+					html:
+						'<p>I’ve been drawn to like-minded people, who share the same values, who’ve made a home on this coast and who are passionately driven to protect the ocean and the land. Conversations, ideas and projects are the beginnings of collaborations, now and in the future.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b3806a30-7da4-47ce-9530-a78cdf4c7291',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -7956,7 +8038,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -7968,7 +8050,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -7979,7 +8061,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -7990,7 +8072,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -8001,7 +8083,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -8012,41 +8094,17 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/41f96ec18dd82e6e972afc1b7196a7e265de431c/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '54e7abc0-fc7a-46eb-83ce-6df5f967cf58',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Clockwise from top: White horses carried on the on-shore wind at Dollar Cove, on the Lizard; two different views of Logan Rock</p></li> \n</ul>',
-				},
-				{
-					elementId: '3c8a7495-a183-4b3e-9663-3ae58d6e008b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Friends have joined me, I’ve swum every day, I’ve climbed, explored and watched the days turn to night by a fire on the beach most evenings. I’ve witnessed the change in the coastal palette of the native wildflowers and fallen into the pace of life here. I navigated the coast around the Lizard, up to Falmouth and on to the Roseland Heritage coast; the south coast is gentler, with sheltered beaches, woodland valleys, tree-lined estuaries, tiny winding roads, and picturesque fishing villages scattered along its shores.</p>',
-				},
-				{
-					elementId: '696c1f5b-1e4f-4261-9f9c-be5d1b022b9b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>I’ve been drawn to like-minded people, who share the same values, who’ve made a home on this coast and who are passionately driven to protect the ocean and the land. Conversations, ideas and projects are the beginnings of collaborations, now and in the future.</p>',
-				},
-				{
-					elementId: '3d44ef63-8ca0-42d5-8dca-4cb7d993c758',
-					role: 'inline',
 					data: {
 						alt:
 							'Joya Burrow, The Right to Roam Films Shot for Finisterre, at Kudhva and Trebarwith Strand',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -8351,6 +8409,23 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '76cf964b-05a3-4f37-94ab-1991d86996aa',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Joya Burrow, <a href="https://www.therighttoroam.com/">The Right to Roam Films</a> shot for Finisterre, at Kudhva and Trebarwith Strand</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '8a14e7c5-6aee-4c2d-8ca6-89a1d374a8fa',
+				},
+				{
+					html:
+						'<p>I made it to Mevagissey on the south coast by the beginning of October, with warnings of another storm. I had a commitment to be on Cornwall’s highest point, Brown Willy on Bodmin Moor, by 3 October to photograph an amazing man, explorer <a href="https://www.theguardian.com/travel/2020/oct/14/nature-has-healing-power-britains-covid-heroes-share-their-favourite-outdoor-spaces">Robin Hanbury-Tenison</a> and his family. His story is one of a remarkable recovery from Covid-19, having spent five weeks in an induced coma with little chance of survival. The key moment in his recovery was when he was wheeled into the healing garden of Derriford hospital. Now raising funds for healing gardens across Cornwall, Robin braved the 60mph winds of Storm Alex to reach the summit and fly the Cornish flag of Saint Piran. Another story of the power of nature.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b9c538ef-ce11-4d88-94ef-76c6fa74275b',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -8362,7 +8437,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -8374,7 +8449,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -8385,7 +8460,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -8396,7 +8471,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -8407,7 +8482,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -8418,33 +8493,16 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/07562ba5a568c4ab6780d03fadfbf1a6a500c84c/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '871acb5a-d71a-459e-9a05-616a35ec0ad3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Joya Burrow, <a href="https://www.therighttoroam.com/">The Right to Roam Films</a> shot for Finisterre, at Kudhva and Trebarwith Strand</p></li> \n</ul>',
-				},
-				{
-					elementId: 'cbb19224-3e5b-48b2-9103-722b5ef3e418',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>I made it to Mevagissey on the south coast by the beginning of October, with warnings of another storm. I had a commitment to be on Cornwall’s highest point, Brown Willy on Bodmin Moor, by 3 October to photograph an amazing man, explorer <a href="https://www.theguardian.com/travel/2020/oct/14/nature-has-healing-power-britains-covid-heroes-share-their-favourite-outdoor-spaces">Robin Hanbury-Tenison</a> and his family. His story is one of a remarkable recovery from Covid-19, having spent five weeks in an induced coma with little chance of survival. The key moment in his recovery was when he was wheeled into the healing garden of Derriford hospital. Now raising funds for healing gardens across Cornwall, Robin braved the 60mph winds of Storm Alex to reach the summit and fly the Cornish flag of Saint Piran. Another story of the power of nature.</p>',
-				},
-				{
-					elementId: '209fc689-5a4b-482f-9792-cc7a827fa558',
-					role: 'showcase',
 					data: {
 						alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'showcase',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -8749,6 +8807,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'a02d58c3-7c3f-44c3-ad79-3a0f2678d378',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -8760,7 +8821,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -8772,7 +8833,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -8783,7 +8844,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -8794,7 +8855,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -8805,7 +8866,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -8816,19 +8877,16 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/704dd8c794ee501b2ae4e318fa2948df205ee04c/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '0ae6bc3f-e255-441f-a6b9-0397e6e323bf',
-					role: 'inline',
 					data: {
 						alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -9133,6 +9191,46 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'a991095a-ca6b-4cc5-a614-9dac2612a199',
+				},
+				{
+					html:
+						'<ul> \n <li><p>Explorer and Covid-19 survivor Robin Hanbury-Tenison climbs Brown Willy on Bodmin Moor in October to raise funds for healing gardens across Cornwall</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c1f7f1d6-ebcf-435f-8c5a-308a6c4d139b',
+				},
+				{
+					html:
+						'<p>I’ve been in Cornwall for eight months now. That’s the longest I’ve been in one place for a long time. Cornwall has had my heart for many years, but to have lived through the seasons, entirely off-grid, has connected me more deeply.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b0e9ab7c-c414-4d08-88b1-6036bf42e705',
+				},
+				{
+					html:
+						'There is something incredibly powerful about living so close to nature, in the elements',
+					role: 'supporting',
+					isThirdPartyTracking: false,
+					_type:
+						'model.dotcomrendering.pageElements.PullquoteBlockElement',
+					elementId: 'b72010ee-2b5d-4299-b929-6d920ef93fcf',
+				},
+				{
+					html:
+						'<p>There is something incredibly powerful about living so close to nature, in the elements. I think it’s something we miss living inside closed walls – we are disconnected.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '76d6b061-7639-4ae5-bbf2-74da1b8f31c1',
+				},
+				{
+					html:
+						'<p>As the world of free movent has new rules and the future is unknown and precarious, I think it has forced many of us to rethink our pace of life, our relationship to nature, what we really need to be happy and fulfilled, and how we will live our lives on the other side of this.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '97b7d519-2cc4-4fe1-aa7c-d426910fe097',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -9144,7 +9242,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -9156,7 +9254,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -9167,7 +9265,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -9178,7 +9276,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -9189,7 +9287,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -9200,56 +9298,16 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1d5a04c608124142b1b7263238bb412b49d8d102/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '8ca1e423-6bf8-447e-b1d8-bba49842be0f',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Explorer and Covid-19 survivor Robin Hanbury-Tenison climbs Brown Willy on Bodmin Moor in October to raise funds for healing gardens across Cornwall</p></li> \n</ul>',
-				},
-				{
-					elementId: '272f384c-a911-4c7a-9e30-1490dd320933',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>I’ve been in Cornwall for eight months now. That’s the longest I’ve been in one place for a long time. Cornwall has had my heart for many years, but to have lived through the seasons, entirely off-grid, has connected me more deeply.</p>',
-				},
-				{
-					elementId: 'e89d4379-8ec3-4bfb-9064-4b21b4d5c621',
-					role: 'supporting',
-					isThirdPartyTracking: false,
-					_type:
-						'model.dotcomrendering.pageElements.PullquoteBlockElement',
-					html:
-						'There is something incredibly powerful about living so close to nature, in the elements',
-				},
-				{
-					elementId: '518a38fc-3415-4441-9fb4-9e8e708060d1',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>There is something incredibly powerful about living so close to nature, in the elements. I think it’s something we miss living inside closed walls – we are disconnected.</p>',
-				},
-				{
-					elementId: '7b5c0866-3422-46a7-b228-5bf22a4034cb',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>As the world of free movent has new rules and the future is unknown and precarious, I think it has forced many of us to rethink our pace of life, our relationship to nature, what we really need to be happy and fulfilled, and how we will live our lives on the other side of this.</p>',
-				},
-				{
-					elementId: '2d21cb36-1b97-4cb0-8604-4595537ceaad',
-					role: 'halfWidth',
 					data: {
 						alt: 'Sunrise at Towan Beach',
 						credit: 'Photograph: Cat Vinton',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -9554,6 +9612,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '6d32b626-9d89-4ba2-8ee4-7577dfda7197',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -9565,7 +9626,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -9577,7 +9638,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -9588,7 +9649,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -9599,7 +9660,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -9610,7 +9671,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -9621,19 +9682,16 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/1f54fe2fe151e4cf6be278897eff23413bc95f3e/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: '513fb260-4a53-486a-8486-6a4fbcd331dc',
-					role: 'halfWidth',
 					data: {
 						alt: 'The full Corn moon, Penwith Heritage coast',
 						credit: 'Photograph: Cat Vinton',
 					},
+					displayCredit: false,
+					role: 'halfWidth',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -9938,6 +9996,9 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '8bb425d3-0ddb-416e-8d16-e5c9158c3f78',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -9949,7 +10010,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/3110.jpg',
+									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/3110.jpg',
 							},
 							{
 								index: 1,
@@ -9961,7 +10022,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/master/3110.jpg',
+									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/master/3110.jpg',
 							},
 							{
 								index: 2,
@@ -9972,7 +10033,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/2000.jpg',
+									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/2000.jpg',
 							},
 							{
 								index: 3,
@@ -9983,7 +10044,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/1000.jpg',
+									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/1000.jpg',
 							},
 							{
 								index: 4,
@@ -9994,7 +10055,7 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/500.jpg',
+									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/500.jpg',
 							},
 							{
 								index: 5,
@@ -10005,19 +10066,16 @@ export const PhotoEssay: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/c47638dee4e374a4b64e17fa946b9649fc916ebf/0_0_3110_2074/140.jpg',
+									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/140.jpg',
 							},
 						],
 					},
-					displayCredit: false,
-				},
-				{
-					elementId: 'a1c52910-1d8b-43cf-ab78-1b39ac63cc9d',
-					role: 'inline',
 					data: {
 						alt: 'Home. My rig Series 3 Land-Rover',
 						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
+					displayCredit: false,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -10322,95 +10380,37 @@ export const PhotoEssay: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '2074',
-									width: '3110',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/3110.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '2074',
-									width: '3110',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/master/3110.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1334',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '667',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '333',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '93',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b12f03d86fb2b4d928003e550e4f4ca980368e2c/0_0_3110_2074/140.jpg',
-							},
-						],
-					},
-					displayCredit: false,
+					elementId: '9b018054-b99b-4399-be08-51b8014e62e0',
 				},
 				{
-					elementId: 'a30afd07-14d2-4e03-911a-8e174def951e',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<ul> \n <li><p>Clockwise from top left: Sunrise at Towan Beach, full corn moon on the Penwith Heritage coast and Cat Vinton’s Land Rover parked up on the Cornish coast</p></li> \n</ul>',
-				},
-				{
-					elementId: '2d689579-3242-4a46-957d-91abc0883137',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '4886467c-5778-45b9-ae1d-02979c99c4c7',
+				},
+				{
 					html:
 						'<p>I have learned so much about the importance and the purpose of life – a moral and ethical code – from the nomadic people of the world’s most remote corners. About the fragile connection between people and nature, and that wealth and success are not measured in belongings and status, but in the strength of our human spirit. I feel, more than ever, that we have so much to learn from these people who have never lost those visceral connections.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '5a2a411f-e0fa-4efc-88f6-1bf12ec51324',
 				},
 			],
-			id: '5fc4ed128f08959b167732bd',
+			createdOn: 1606741266000,
+			createdOnDisplay: '13.01 GMT',
+			blockCreatedOn: 1606741266000,
+			blockCreatedOnDisplay: '13.01 GMT',
+			lastUpdated: 1607521207000,
+			lastUpdatedDisplay: '13.40 GMT',
+			blockLastUpdated: 1607505880000,
+			blockLastUpdatedDisplay: '09.24 GMT',
+			firstPublished: 1607495430000,
+			firstPublishedDisplay: '06.30 GMT',
+			blockFirstPublished: 1606741273000,
+			blockFirstPublishedDisplay: '13.01 GMT',
+			primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
+			secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
 		},
 	],
 	linkedData: [
