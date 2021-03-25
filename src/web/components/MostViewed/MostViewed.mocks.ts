@@ -219,8 +219,8 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/6de53bbc2260febc167488209afe81844c47ecaa/0_225_5352_3211/master/5352.jpg?width=300&quality=85&auto=format&fit=max&s=d7da55f1e5f9d6b3a11f0c97237f3992',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
-			pillar: 'news',
+			format: makeCAPIFormat('CulturePillar'),
+			pillar: 'culture',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
 		},

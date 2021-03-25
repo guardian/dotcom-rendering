@@ -1,5 +1,5 @@
 import { Design, Pillar } from '@guardian/types';
-import { decideNavTheme } from './decideTheme';
+import { decideNavTheme } from './decideNavTheme';
 
 export const decideLineEffect = (
 	design: Design,
