@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { titlepiece } from '@guardian/src-foundations/typography';
@@ -22,7 +22,6 @@ const styles = (kicker: string): SerializedStyles => css`
 	font-size: 1.0625rem;
 	padding: ${remSpace[1]} 0 ${remSpace[2]};
 	box-sizing: border-box;
-	width: fit-content;
 
 	${from.tablet} {
 		padding-bottom: ${remSpace[3]};

@@ -16,6 +16,8 @@ import { Design, Display, Format } from '@guardian/types';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode, render as renderDom } from 'react-dom';
+import { EmbedKind } from 'embed';
+import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 
 const mockFormat: Format = {
 	theme: Pillar.News,
@@ -86,25 +88,39 @@ const instagramElement = (): BodyElement => ({
 	html: '<blockquote>Instagram</blockquote>',
 });
 
-const embedElement = (): BodyElement => ({
+const embedElement: BodyElement = {
 	kind: ElementKind.Embed,
-	html: '<section>Embed</section>',
-	alt: none,
-});
+	embed: {
+		kind: EmbedKind.Generic,
+		html: '<section>Embed</section>',
+		height: 300,
+		alt: none,
+		mandatory: false,
+		source: some('mockSource'),
+		sourceDomain: some('mockSourceDomain'),
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
+	},
+};
 
-const videoElement = (): BodyElement => ({
-	kind: ElementKind.Video,
-	src: 'https://www.youtube.com/',
-	height: '300',
-	width: '500',
-});
+const videoElement: BodyElement = {
+	kind: ElementKind.Embed,
+	embed: {
+		kind: EmbedKind.YouTube,
+		id: 'mockYoutubeId',
+		height: 300,
+		width: 500,
+	},
+};
 
-const audioElement = (): BodyElement => ({
-	kind: ElementKind.Audio,
-	src: 'https://www.spotify.com/',
-	height: '300',
-	width: '500',
-});
+const audioElement: BodyElement = {
+	kind: ElementKind.Embed,
+	embed: {
+		kind: EmbedKind.Spotify,
+		src: 'https://www.spotify.com/',
+		height: 300,
+		width: 500,
+	},
+};
 
 const liveEventElement = (): BodyElement => ({
 	kind: ElementKind.LiveEvent,
@@ -157,12 +173,14 @@ const timelineElement = (): BodyElement => ({
 			date: '1 May 2019',
 			body:
 				'<p><a href="https://www.theguardian.com/media/2019/may/01/julian-assange-jailed-for-50-weeks-for-breaching-bail-in-2012">He is jailed for 50 weeks</a>&nbsp;in the UK for breaching his bail conditions back in 2012. An apology letter from Assange is read out in court, but the judge rules that he had engaged in a \'deliberate attempt to evade justice\'. On the following day <a href="https://www.theguardian.com/media/2019/may/02/us-begins-extradition-case-against-julian-assange-in-london">the US extradition proceedings were formally started</a>.&nbsp;</p>',
+			unixDate: 1556732925,
 		},
 		{
 			title: ' ',
 			date: '13 May 2019',
 			body:
 				'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
+			unixDate: 1557769725,
 		},
 	],
 });
@@ -176,10 +194,11 @@ const chartElement = (): BodyElement => ({
 	js: [],
 });
 
-const quizAtom = (): BodyElement => ({
-	kind: ElementKind.QuizAtom,
+const knowledgeQuizAtom = (): BodyElement => ({
+	kind: ElementKind.KnowledgeQuizAtom,
 	id: '',
 	questions: [],
+	resultGroups: [],
 });
 
 const audioAtom = (): BodyElement => ({
@@ -331,13 +350,15 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Embed', () => {
-		const nodes = render(embedElement());
+		const nodes = render(embedElement);
 		const embed = nodes.flat()[0];
-		expect(getHtml(embed)).toContain('<div><section>Embed</section></div>');
+		expect(getHtml(embed)).toContain(
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
+		);
 	});
 
 	test('ElementKind.Audio', () => {
-		const nodes = render(audioElement());
+		const nodes = render(audioElement);
 		const audio = nodes.flat()[0];
 		expect(getHtml(audio)).toContain(
 			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
@@ -345,10 +366,10 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Video', () => {
-		const nodes = render(videoElement());
+		const nodes = render(videoElement);
 		const video = nodes.flat()[0];
 		expect(getHtml(video)).toContain(
-			'src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"',
+			'src="https://www.youtube-nocookie.com/embed/mockYoutubeId?wmode=opaque&amp;feature=oembed" height="300" width="500" allowfullscreen="" title="Video element"',
 		);
 	});
 
@@ -412,8 +433,8 @@ describe('Renders different types of elements', () => {
 		);
 	});
 
-	test('ElementKind.QuizAtom', () => {
-		const nodes = render(quizAtom());
+	test('ElementKind.KnowledgeQuizAtom', () => {
+		const nodes = render(knowledgeQuizAtom());
 		const quiz = nodes.flat()[0];
 		const html = getHtml(quiz);
 		expect(html).toContain('<div class="js-quiz">');
@@ -427,7 +448,7 @@ describe('Renders different types of elements', () => {
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
-			'<div kind="20" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
+			'<div kind="18" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
 		);
 	});
 
@@ -511,13 +532,15 @@ describe('Renders different types of Editions elements', () => {
 	});
 
 	test('ElementKind.Embed', () => {
-		const nodes = renderEditions(embedElement());
+		const nodes = renderEditions(embedElement);
 		const embed = nodes.flat()[0];
-		expect(getHtml(embed)).toContain('<div><section>Embed</section></div>');
+		expect(getHtml(embed)).toContain(
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
+		);
 	});
 
 	test('ElementKind.Audio', () => {
-		const nodes = renderEditions(audioElement());
+		const nodes = renderEditions(audioElement);
 		const audio = nodes.flat()[0];
 		expect(getHtml(audio)).toContain(
 			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
@@ -525,10 +548,10 @@ describe('Renders different types of Editions elements', () => {
 	});
 
 	test('ElementKind.Video', () => {
-		const nodes = renderEditions(videoElement());
+		const nodes = renderEditions(videoElement);
 		const video = nodes.flat()[0];
 		expect(getHtml(video)).toContain(
-			'src="https://www.youtube.com/" height="300" width="500" allowfullscreen="" title="Video element"',
+			'src="https://www.youtube-nocookie.com/embed/mockYoutubeId?wmode=opaque&amp;feature=oembed" height="300" width="500" allowfullscreen="" title="Video element"',
 		);
 	});
 
@@ -592,8 +615,8 @@ describe('Renders different types of Editions elements', () => {
 		);
 	});
 
-	test('ElementKind.QuizAtom', () => {
-		const nodes = renderEditions(quizAtom());
+	test('ElementKind.KnowledgeQuizAtom', () => {
+		const nodes = renderEditions(knowledgeQuizAtom());
 		const quiz = nodes.flat()[0];
 		const html = getHtml(quiz);
 		expect(html).toContain('<div class="js-quiz">');
@@ -607,7 +630,7 @@ describe('Renders different types of Editions elements', () => {
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
-			'<div kind="20" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
+			'<div kind="18" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
 		);
 	});
 

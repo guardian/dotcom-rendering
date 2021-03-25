@@ -1,12 +1,12 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 export interface VideoProps {
 	src: string;
-	width: string;
-	height: string;
+	width: number;
+	height: number;
 }
 
 const videoStyles = css`

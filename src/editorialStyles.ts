@@ -1,20 +1,21 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { Format } from '@guardian/types';
 import type { Colour } from 'editorialPalette';
 import { background, text } from 'editorialPalette';
 
 // ----- Functions ----- //
 
-const textColour = (light: Colour, dark: Colour): SerializedStyles =>
+const textColour = (light: Colour, dark?: Colour): SerializedStyles =>
 	css`
 		color: ${light};
 
-		@media (prefers-color-scheme: dark) {
+		${dark &&
+		`@media (prefers-color-scheme: dark) {
 			color: ${dark};
-		}
+		}`}
 	`;
 
 const backgroundColour = (light: Colour, dark: Colour): SerializedStyles =>
@@ -31,6 +32,10 @@ const headlineTextColour = (format: Format): SerializedStyles =>
 		text.headlinePrimary(format),
 		text.headlinePrimaryInverse(format),
 	);
+
+const editionsHeadlineTextColour = (format: Format): SerializedStyles =>
+	textColour(text.headlinePrimary(format));
+
 const headlineBackgroundColour = (format: Format): SerializedStyles =>
 	backgroundColour(
 		background.headlinePrimary(format),
@@ -39,4 +44,8 @@ const headlineBackgroundColour = (format: Format): SerializedStyles =>
 
 // ----- Exports ----- //
 
-export { headlineTextColour, headlineBackgroundColour };
+export {
+	headlineTextColour,
+	headlineBackgroundColour,
+	editionsHeadlineTextColour,
+};

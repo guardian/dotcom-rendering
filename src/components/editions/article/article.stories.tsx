@@ -1,11 +1,12 @@
 // ----- Imports ----- //
-
+import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { Display, Pillar } from '@guardian/types';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import {
 	analysis,
 	article,
 	comment,
+	editorial,
 	feature,
 	interview,
 	media,
@@ -25,6 +26,16 @@ const isImmersive = (): { display: Display } => {
 	};
 };
 
+const getTag = (id: string, webTitle: string): Tag => ({
+	id,
+	type: 6,
+	webTitle,
+	webUrl: '',
+	apiUrl: '',
+	references: [],
+	internalName: '',
+});
+
 // ----- Stories ----- //
 
 const Default = (): ReactElement => (
@@ -43,6 +54,17 @@ const Analysis = (): ReactElement => (
 			...analysis,
 			...isImmersive(),
 			theme: selectPillar(Pillar.Lifestyle),
+		}}
+	/>
+);
+
+const Editorial = (): ReactElement => (
+	<Article
+		item={{
+			...editorial,
+			tags: [getTag('tone/editorials', 'View from the Guardian ')],
+			...isImmersive(),
+			theme: selectPillar(Pillar.Opinion),
 		}}
 	/>
 );
@@ -96,7 +118,7 @@ const Comment = (): ReactElement => (
 	/>
 );
 
-const Media = (): ReactElement => (
+const Gallery = (): ReactElement => (
 	<Article
 		item={{
 			...media,
@@ -104,6 +126,13 @@ const Media = (): ReactElement => (
 		}}
 	/>
 );
+
+Gallery.parameters = {
+	backgrounds: {
+		default: 'gallery-template-bg',
+		values: [{ name: 'gallery-template-bg', value: '#121212' }],
+	},
+};
 
 // ----- Exports ----- //
 
@@ -122,5 +151,6 @@ export {
 	Showcase,
 	Interview,
 	Comment,
-	Media,
+	Editorial,
+	Gallery,
 };

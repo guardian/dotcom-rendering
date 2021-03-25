@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
-import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { border, neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
@@ -46,7 +46,7 @@ const galleryInnerHeaderStyles = css`
 		padding-left: ${tabletArticleMargin}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		padding-left: ${wideArticleMargin}px;
 	}
 `;
@@ -67,7 +67,7 @@ const galleryLinesStyles = css`
 		margin-left: 0;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: 0;
 	}
 `;
@@ -78,7 +78,7 @@ const galleryHeaderBorderStyles = css`
 		border-right: 1px solid ${neutral[100]};
 		box-sizing: border-box;
 		width: ${tablet}px;
-		${from.wide} {
+		${from.desktop} {
 			width: ${wide}px;
 		}
 	}
@@ -92,7 +92,7 @@ const interviewStyles = (item: Item): SerializedStyles => {
 			padding-left: ${tabletArticleMargin}px;
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			padding-left: ${wideArticleMargin}px;
 		}
 
@@ -115,7 +115,7 @@ const immersiveHeadlineStyles = (item: Item): SerializedStyles => {
 			width: ${tabletImmersiveWidth}px;
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			padding-left: ${wideArticleMargin}px;
 			width: ${wideImmersiveWidth}px;
 		}
@@ -132,7 +132,7 @@ const immersiveStandfirstStyles = css`
 		padding-left: ${tabletArticleMargin}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		padding-left: ${wideArticleMargin}px;
 	}
 `;
@@ -245,14 +245,16 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	// Display.Immersive needs to come before Design.Interview
 	if (item.display === Display.Immersive) {
 		return <ImmersiveHeader item={item} />;
+	} else if (item.design === Design.GuardianView) {
+		return <StandardHeader item={item} />;
 	} else if (item.design === Design.Interview) {
 		return <InterviewHeader item={item} />;
+	} else if (item.design === Design.Comment) {
+		return <CommentHeader item={item} />;
 	} else if (item.display === Display.Showcase) {
 		return <ShowcaseHeader item={item} />;
 	} else if (item.design === Design.Analysis) {
 		return <AnalysisHeader item={item} />;
-	} else if (item.design === Design.Comment) {
-		return <CommentHeader item={item} />;
 	} else if (item.design === Design.Media) {
 		return isPicture(item.tags) ? (
 			<PictureHeader item={item} />

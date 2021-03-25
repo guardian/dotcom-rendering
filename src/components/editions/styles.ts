@@ -1,5 +1,5 @@
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import * as Palette from '@guardian/src-foundations/palette';
@@ -37,7 +37,7 @@ export const borderWidthStyles: SerializedStyles = css`
 		width: ${tabletBorderWidth}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		width: ${wideBorderWidth}px;
 	}
 `;
@@ -47,7 +47,7 @@ export const articleWidthStyles: SerializedStyles = css`
 		width: ${tabletContentWidth}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		width: ${wideContentWidth}px;
 	}
 `;
@@ -57,7 +57,7 @@ export const articleMarginStyles: SerializedStyles = css`
 		margin-left: ${tabletArticleMargin}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: ${wideArticleMargin}px;
 	}
 `;

@@ -1,15 +1,15 @@
 // ----- Imports ----- //
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { border } from '@guardian/src-foundations/palette';
-import { body, headline } from '@guardian/src-foundations/typography';
 import type {
 	FontStyle,
 	FontWeight,
 	LineHeight,
-} from '@guardian/src-foundations/typography/types';
+} from '@guardian/src-foundations/dist/types/typography/types';
+import { from } from '@guardian/src-foundations/mq';
+import { border } from '@guardian/src-foundations/palette';
+import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
@@ -41,7 +41,7 @@ const interviewStyles = css`
 		border-right: 1px solid ${border.secondary};
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: ${wideArticleMargin}px;
 	}
 	${borderWidthStyles}
@@ -61,7 +61,7 @@ const immersiveStyles = css`
 		width: ${tabletImmersiveWidth}px;
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		margin-left: ${wideArticleMargin}px;
 		width: ${wideImmersiveWidth}px;
 	}
@@ -127,7 +127,7 @@ const largeTextStyles = (
 		${headline.small({ fontStyle, fontWeight, lineHeight })};
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		${headline.medium({ fontStyle, fontWeight, lineHeight })};
 	}
 `;

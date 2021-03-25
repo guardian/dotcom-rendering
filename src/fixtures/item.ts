@@ -1,13 +1,28 @@
 // ----- Imports ----- //
 
-import { Design, Display, none, Pillar, some, toOption } from '@guardian/types';
+import {
+	Design,
+	Display,
+	none,
+	OptionKind,
+	Pillar,
+	ResultKind,
+	Role,
+	some,
+	Special,
+	toOption,
+} from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
+import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
+import type { MainMedia } from 'headerMedia';
+import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item, Review } from 'item';
 import { pipe2 } from 'lib';
+import { galleryBody } from './galleryBody';
 
 // ----- Fixture ----- //
 
@@ -53,7 +68,7 @@ const image: Image = {
 	alt: some('image'),
 	width: 550,
 	height: 550,
-	role: 1,
+	role: Role.Standard,
 	caption: none,
 	nativeCaption: none,
 	credit: none,
@@ -68,10 +83,10 @@ const contributors: Contributor[] = [
 	},
 ];
 
-const mainMedia = {
-	kind: 0,
+const mainMedia: Option<MainMedia> = {
+	kind: OptionKind.Some,
 	value: {
-		kind: 0,
+		kind: MainMediaKind.Image,
 		image: {
 			src:
 				'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f',
@@ -79,17 +94,20 @@ const mainMedia = {
 				'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w',
 			dpr2Srcset:
 				'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w',
-			alt: 'image',
+			alt: some('image'),
 			width: 3000,
 			height: 1800,
-			caption: {},
-			credit: { kind: 0, value: 'Photograph: Philip Keith/The Guardian' },
+			caption: none,
+			credit: {
+				kind: OptionKind.Some,
+				value: 'Photograph: Philip Keith/The Guardian',
+			},
 			nativeCaption: {
-				kind: 0,
+				kind: OptionKind.Some,
 				value:
 					'‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
-			role: 0,
+			role: Role.Standard,
 		},
 	},
 };
@@ -98,16 +116,16 @@ const doc = docFixture();
 
 const body: Body = [
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 0,
+			kind: ElementKind.Text,
 			doc,
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 1,
+			kind: ElementKind.Image,
 			src:
 				'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d',
 			srcset:
@@ -115,39 +133,42 @@ const body: Body = [
 			dpr2Srcset:
 				'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w',
 			alt: {
-				kind: 0,
+				kind: OptionKind.Some,
 				value: 'Jane Giddins outside her home in Newton St Loe',
 			},
 			width: 2000,
 			height: 2500,
 			caption: none,
-			credit: { kind: 0, value: 'Photograph: Sam Frost/The Guardian' },
+			credit: {
+				kind: OptionKind.Some,
+				value: 'Photograph: Sam Frost/The Guardian',
+			},
 			nativeCaption: {
-				kind: 0,
+				kind: OptionKind.Some,
 				value:
 					'Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles.',
 			},
-			role: 0,
+			role: Role.Standard,
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 0,
+			kind: ElementKind.Text,
 			doc,
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 0,
+			kind: ElementKind.Text,
 			doc,
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 15,
+			kind: ElementKind.GuideAtom,
 			html:
 				"<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
 			title: "What is Queen's consent?",
@@ -157,40 +178,39 @@ const body: Body = [
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 0,
+			kind: ElementKind.Text,
 			doc,
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 0,
+			kind: ElementKind.Text,
 			doc,
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 2,
+			kind: ElementKind.Pullquote,
 			quote:
 				'Why should the crown be allowed to carry on with a feudal system just because they want to?',
 			attribution: { kind: 0, value: 'Jane Giddins' },
 		},
 	},
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 0,
+			kind: ElementKind.Text,
 			doc,
 		},
 	},
-
 	{
-		kind: 0,
+		kind: ResultKind.Ok,
 		value: {
-			kind: 0,
+			kind: ElementKind.Text,
 			doc,
 		},
 	},
@@ -222,6 +242,8 @@ const fields = {
 	internalShortId: none,
 	commentCount: none,
 	relatedContent: none,
+	footballContent: none,
+	logo: none,
 };
 
 const article: Item = {
@@ -245,14 +267,19 @@ const review: Review = {
 	...fields,
 };
 
-const advertisementFeature: Item = {
-	design: Design.AdvertisementFeature,
-	logo: none,
+const labs: Item = {
+	design: Design.Article,
 	...fields,
+	theme: Special.Labs,
 };
 
 const comment: Item = {
 	design: Design.Comment,
+	...fields,
+};
+
+const editorial: Item = {
+	design: Design.GuardianView,
 	...fields,
 };
 
@@ -264,7 +291,7 @@ const interview: Item = {
 const media: Item = {
 	design: Design.Media,
 	...fields,
-	body: [],
+	body: galleryBody,
 };
 
 // ----- Exports ----- //
@@ -274,8 +301,9 @@ export {
 	analysis,
 	feature,
 	review,
-	advertisementFeature,
+	labs,
 	comment,
 	interview,
 	media,
+	editorial,
 };

@@ -1,7 +1,15 @@
 // ----- Imports ----- //
 
-import type { Option } from '@guardian/types';
-import { fromNullable, map, withDefault } from '@guardian/types';
+import type { Option, Result } from '@guardian/types';
+import {
+	err,
+	fromNullable,
+	map,
+	none,
+	ok,
+	some,
+	withDefault,
+} from '@guardian/types';
 import type { ReactElement } from 'react';
 
 // ----- Functions ----- //
@@ -38,7 +46,7 @@ function memoise<A>(fn: () => A): () => A {
 }
 
 function errorToString(error: unknown, fallback: string): string {
-	if (typeof error === 'object') {
+	if (typeof error === 'object' && !Array.isArray(error)) {
 		return error?.toString() ?? fallback;
 	}
 
@@ -65,6 +73,16 @@ function handleErrors(response: Response): Response | never {
 
 const index = (i: number) => <A>(arr: A[]): Option<A> => fromNullable(arr[i]);
 
+const resultFromNullable = <E>(e: E) => <A>(
+	a: A | null | undefined,
+): Result<E, A> => (a === null || a === undefined ? err(e) : ok(a));
+
+const parseIntOpt = (int: string): Option<number> => {
+	const parsed = parseInt(int);
+
+	return isNaN(parsed) ? none : some(parsed);
+};
+
 // ----- Exports ----- //
 
 export {
@@ -81,4 +99,6 @@ export {
 	maybeRender,
 	handleErrors,
 	index,
+	resultFromNullable,
+	parseIntOpt,
 };

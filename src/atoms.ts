@@ -1,3 +1,4 @@
+import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { err, fromNullable, ok } from '@guardian/types';
@@ -175,12 +176,15 @@ function parseAtom(
 			}
 
 			const { title } = atom;
-			const events = atom.data.timeline.events.map((event) => ({
-				title: event.title,
-				date: formatOptionalDate(event.date) ?? '',
-				body: event.body,
-				toDate: formatOptionalDate(event.toDate),
-			}));
+			const events: TimelineEvent[] = atom.data.timeline.events.map(
+				(event) => ({
+					title: event.title,
+					date: formatOptionalDate(event.date) ?? '',
+					body: event.body,
+					toDate: formatOptionalDate(event.toDate),
+					unixDate: event.date.toNumber(),
+				}),
+			);
 
 			const description = atom.data.timeline.description;
 
@@ -300,15 +304,43 @@ function parseAtom(
 					...question,
 					answers: question.answers.map((answer) => {
 						return {
+							id: answer.id,
 							text: answer.answerText,
 							isCorrect: !!answer.weight,
-							...answer,
+							answerBuckets: answer.bucket ?? [],
 						};
 					}),
 				};
 			});
 
-			return ok({ kind: ElementKind.QuizAtom, id, questions });
+			if (atom.data.quiz.quizType === 'knowledge') {
+				return ok({
+					kind: ElementKind.KnowledgeQuizAtom,
+					id,
+					questions,
+					resultGroups:
+						atom.data.quiz.content.resultGroups?.groups.map(
+							(group) => ({
+								...group,
+								shareText: group.share,
+							}),
+						) ?? [],
+				});
+			}
+
+			if (atom.data.quiz.quizType === 'personality') {
+				return ok({
+					kind: ElementKind.PersonalityQuizAtom,
+					id,
+					questions,
+					resultBuckets:
+						atom.data.quiz.content.resultBuckets?.buckets ?? [],
+				});
+			}
+
+			return err(
+				`Atom quizType '${atom.data.quiz.quizType}' is not supported.`,
+			);
 		}
 
 		default: {
@@ -319,4 +351,4 @@ function parseAtom(
 	}
 }
 
-export { parseAtom };
+export { parseAtom, formatOptionalDate };

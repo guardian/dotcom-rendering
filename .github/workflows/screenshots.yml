@@ -10,7 +10,7 @@ on:
 
 jobs:
     article_screenshots:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-18.04
         strategy:
             matrix:
                 article:
@@ -81,7 +81,7 @@ jobs:
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.CI_IMAGE_UPLOADER_SECRET_ACCESS_KEY }}
 
     comment:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-18.04
         needs: article_screenshots
         strategy:
             max-parallel: 1

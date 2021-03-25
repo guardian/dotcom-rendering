@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
@@ -76,6 +76,12 @@ const styles = (kickerColor: string): SerializedStyles => css`
 		}
 	}
 `;
+
+const textContainerStyles = css`
+	display: flex;
+	flex-direction: column;
+`;
+
 const getStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
@@ -109,7 +115,9 @@ const noLinks = true;
 const Standfirst: FC<Props> = ({ item, shareIcon }) => {
 	return maybeRender(item.standfirst, (standfirst) => (
 		<div css={getStyles(item)}>
-			{renderStandfirstText(standfirst, item, noLinks)}
+			<div css={textContainerStyles}>
+				{renderStandfirstText(standfirst, item, noLinks)}
+			</div>
 			{shareIcon && (
 				<span className="js-share-button" role="button">
 					<ShareIcon />

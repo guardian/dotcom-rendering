@@ -1,22 +1,23 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css, jsx as styledH } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css, jsx as styledH } from '@emotion/react';
 import {
 	AudioAtom,
 	ChartAtom,
 	ExplainerAtom,
 	GuideAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
 	ProfileAtom,
 	QandaAtom,
-	QuizAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { BodyImage, FigCaption } from '@guardian/image-rendering';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
-import { neutral, text as textColour } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import {
 	andThen,
@@ -26,6 +27,7 @@ import {
 	map,
 	none,
 	some,
+	Special,
 	toOption,
 	withDefault,
 } from '@guardian/types';
@@ -34,15 +36,15 @@ import { ElementKind } from 'bodyElement';
 import type {
 	AudioAtom as AudioAtomElement,
 	BodyElement,
-	Embed,
 	GuideAtom as GuideAtomElement,
 	Image,
 	Instagram,
 	InteractiveAtom as InteractiveAtomElement,
+	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
 	MediaAtom as MediaAtomElement,
+	PersonalityQuizAtom as PersonalityQuizAtomElement,
 	ProfileAtom as ProfileAtomElement,
 	QandaAtom as QandaAtomElement,
-	QuizAtom as QuizAtomElement,
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
@@ -51,25 +53,29 @@ import InteractiveAtom, {
 	atomCss,
 	atomScript,
 } from 'components/atoms/interactiveAtom';
-import Audio from 'components/audio';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
+import EmbedComponent from 'components/embed';
 import HorizontalRule from 'components/horizontalRule';
 import Interactive from 'components/interactive';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
 import RichLink from 'components/richLink';
-import Video from 'components/video';
 import { isElement, pipe, pipe2 } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles, themeFromString, themeToPillar } from 'themeStyles';
+import {
+	getThemeStyles,
+	themeFromString,
+	themeToPillar,
+	themeToPillarString,
+} from 'themeStyles';
 
 // ----- Renderer ----- //
 
@@ -187,7 +193,7 @@ const listItemStyles = (format: Format): SerializedStyles[] => {
 
 const HeadingTwoStyles = (format: Format): SerializedStyles => {
 	const font =
-		format.design === Design.AdvertisementFeature
+		format.theme === Special.Labs
 			? textSans.large({ fontWeight: 'bold' })
 			: headline.xxsmall({ fontWeight: 'bold' });
 
@@ -244,12 +250,14 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
-const textElement = (format: Format) => (
+const textElement = (format: Format, supportsDarkMode = true) => (
 	node: Node,
 	key: number,
 ): ReactNode => {
 	const text = node.textContent ?? '';
-	const children = Array.from(node.childNodes).map(textElement(format));
+	const children = Array.from(node.childNodes).map(
+		textElement(format, supportsDarkMode),
+	);
 	switch (node.nodeName) {
 		case 'P':
 			return h(Paragraph, { key, format }, children);
@@ -264,6 +272,7 @@ const textElement = (format: Format) => (
 					href: withDefault('')(getHref(node)),
 					format,
 					key,
+					supportsDarkMode,
 				},
 				transform(text, format),
 			);
@@ -297,7 +306,7 @@ const textElement = (format: Format) => (
 };
 
 const linkColourFromFormat = (format: Format): string => {
-	if (format.design === Design.AdvertisementFeature) {
+	if (format.theme === Special.Labs) {
 		return palette.labs[300];
 	}
 
@@ -355,9 +364,12 @@ const noLinksStandfirstTextElement = (format: Format) => (
 	}
 };
 
-const text = (doc: DocumentFragment, format: Format): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format));
-
+const text = (
+	doc: DocumentFragment,
+	format: Format,
+	supportsDarkMode = true,
+): ReactNode[] =>
+	Array.from(doc.childNodes).map(textElement(format, supportsDarkMode));
 const standfirstText = (
 	doc: DocumentFragment,
 	format: Format,
@@ -470,44 +482,11 @@ const textRenderer = (
 	format: Format,
 	excludeStyles: boolean,
 	element: Text,
+	supportsDarkMode?: boolean,
 ): ReactNode => {
 	return excludeStyles
 		? Array.from(element.doc.childNodes).map(plainTextElement)
-		: text(element.doc, format);
-};
-
-const embedRenderer = (element: Embed): ReactNode => {
-	const props = {
-		dangerouslySetInnerHTML: {
-			__html: element.html,
-		},
-	};
-
-	const figureCss = css`
-		margin: ${remSpace[4]} 0;
-		${darkModeCss`
-			background: white;
-			padding: ${remSpace[2]};
-		`}
-	`;
-	const captionStyles = css`
-		${textSans.xsmall()}
-		color: ${textColour.supporting};
-	`;
-
-	const figure = (alt: string | null): ReactElement => {
-		const children = [
-			h('div', props),
-			styledH('figcaption', { css: captionStyles }, alt),
-		];
-		return styledH('figure', { css: figureCss }, children);
-	};
-
-	return pipe2(
-		element.alt,
-		map((alt) => figure(alt)),
-		withDefault(figure(null)),
-	);
+		: text(element.doc, format, supportsDarkMode);
 };
 
 const instagramRenderer = (element: Instagram): ReactNode => {
@@ -673,7 +652,7 @@ const audioAtomRenderer = (
 	element: AudioAtomElement,
 ): ReactNode => {
 	const { theme } = format;
-	const pillar = themeFromString('pillar/' + themeToPillar(theme));
+	const pillar = themeFromString('pillar/' + themeToPillarString(theme));
 	const audioAtomStyles = css`
 		figure {
 			margin: 0;
@@ -693,7 +672,7 @@ const audioAtomRenderer = (
 
 const quizAtomRenderer = (
 	format: Format,
-	element: QuizAtomElement,
+	element: KnowledgeQuizAtomElement | PersonalityQuizAtomElement,
 ): ReactNode => {
 	const props = JSON.stringify(element);
 	const hydrationParams = h(
@@ -701,9 +680,15 @@ const quizAtomRenderer = (
 		{ className: 'js-quiz-params', type: 'application/json' },
 		props,
 	);
+	if (element.kind === ElementKind.KnowledgeQuizAtom) {
+		return h('div', { className: 'js-quiz' }, [
+			hydrationParams,
+			h(KnowledgeQuizAtom, { ...element }),
+		]);
+	}
 	return h('div', { className: 'js-quiz' }, [
 		hydrationParams,
-		h(QuizAtom, { ...element }),
+		h(PersonalityQuizAtom, { ...element }),
 	]);
 };
 
@@ -742,27 +727,13 @@ const render = (format: Format, excludeStyles = false) => (
 		case ElementKind.Tweet:
 			return h(Tweet, { content: element.content, format, key });
 
-		case ElementKind.Audio:
-			return h(Audio, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
-		case ElementKind.Video:
-			return h(Video, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
 		case ElementKind.Callout: {
 			const { campaign, description } = element;
 			return h(CalloutForm, { campaign, format, description });
 		}
 
 		case ElementKind.Embed:
-			return embedRenderer(element);
+			return h(EmbedComponent, { embed: element.embed });
 
 		case ElementKind.Instagram:
 			return instagramRenderer(element);
@@ -796,7 +767,8 @@ const render = (format: Format, excludeStyles = false) => (
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
 
-		case ElementKind.QuizAtom:
+		case ElementKind.KnowledgeQuizAtom:
+		case ElementKind.PersonalityQuizAtom:
 			return quizAtomRenderer(format, element);
 	}
 };
@@ -807,7 +779,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 ): ReactNode => {
 	switch (element.kind) {
 		case ElementKind.Text:
-			return textRenderer(format, excludeStyles, element);
+			return textRenderer(format, excludeStyles, element, false);
 
 		case ElementKind.Image:
 			return format.design === Design.Media
@@ -825,27 +797,13 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.Tweet:
 			return h(Tweet, { content: element.content, format, key });
 
-		case ElementKind.Audio:
-			return h(Audio, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
-		case ElementKind.Video:
-			return h(Video, {
-				src: element.src,
-				width: element.width,
-				height: element.height,
-			});
-
 		case ElementKind.Callout: {
 			const { campaign, description } = element;
 			return h(CalloutForm, { campaign, format, description });
 		}
 
 		case ElementKind.Embed:
-			return embedRenderer(element);
+			return h(EmbedComponent, { embed: element.embed });
 
 		case ElementKind.Instagram:
 			return instagramRenderer(element);
@@ -877,7 +835,8 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
 
-		case ElementKind.QuizAtom:
+		case ElementKind.KnowledgeQuizAtom:
+		case ElementKind.PersonalityQuizAtom:
 			return quizAtomRenderer(format, element);
 
 		default:

@@ -1,11 +1,11 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -17,12 +17,13 @@ interface Props {
 	children?: ReactNode;
 	format: Format;
 	className?: SerializedStyles;
+	supportsDarkMode?: boolean;
 }
 
-const styles = css`
+const styles = (supportsDarkMode: boolean): SerializedStyles => css`
 	text-decoration: none;
-
-	${darkModeCss`
+	${supportsDarkMode &&
+	darkModeCss`
         color: ${neutral[86]};
         border-color: ${neutral[46]};
     `}
@@ -30,16 +31,17 @@ const styles = css`
 
 const colour = (format: Format): SerializedStyles => {
 	const { link, inverted } = getThemeStyles(format.theme);
-	switch (format.design) {
-		case Design.AdvertisementFeature:
-			return css`
-				color: ${palette.labs[300]};
-				border-bottom: 0.0625rem solid ${neutral[86]};
+	if (format.theme === Special.Labs) {
+		return css`
+			color: ${palette.labs[300]};
+			border-bottom: 0.0625rem solid ${neutral[86]};
 
-				${darkModeCss`
+			${darkModeCss`
                     color: ${neutral[86]};
                 `}
-			`;
+		`;
+	}
+	switch (format.design) {
 		case Design.Media:
 			return css`
 				color: ${inverted};
@@ -53,8 +55,14 @@ const colour = (format: Format): SerializedStyles => {
 	}
 };
 
-const Anchor: FC<Props> = ({ format, children, href, className }: Props) => (
-	<a css={[styles, colour(format), className]} href={href}>
+const Anchor: FC<Props> = ({
+	format,
+	children,
+	href,
+	className,
+	supportsDarkMode = true,
+}: Props) => (
+	<a css={[styles(supportsDarkMode), colour(format), className]} href={href}>
 		{children}
 	</a>
 );

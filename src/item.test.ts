@@ -7,12 +7,24 @@ import { AssetType } from '@guardian/content-api-models/v1/assetType';
 import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
-import { ElementKind, Audio, Video, BodyElement } from 'bodyElement';
-import { Design, Display, none, resultMap, toOption, withDefault } from '@guardian/types';
+import { ElementKind, BodyElement } from 'bodyElement';
+import {
+	Design,
+	Display,
+	err,
+	none,
+	ok,
+	resultAndThen,
+	resultMap,
+	Special,
+	toOption,
+	withDefault,
+} from '@guardian/types';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe2 } from 'lib';
 import { articleContentWith } from 'helperTest';
+import { EmbedKind } from 'embed';
 
 const articleContent = {
 	id: '',
@@ -179,7 +191,11 @@ const getFirstBody = (item: Review | Standard) =>
 	pipe2(
 		item.body[0],
 		toOption,
-		withDefault<BodyElement>({ kind: ElementKind.Interactive, url: '', alt: none }),
+		withDefault<BodyElement>({
+			kind: ElementKind.Interactive,
+			url: '',
+			alt: none,
+		}),
 	);
 
 describe('fromCapi returns correct Item', () => {
@@ -220,7 +236,7 @@ describe('fromCapi returns correct Item', () => {
 
 	test('matchreport', () => {
 		const item = f(contentWithTag('tone/matchreports'));
-		expect(item.design).toBe(Design.Article);
+		expect(item.design).toBe(Design.MatchReport);
 	});
 
 	test('interview', () => {
@@ -238,9 +254,9 @@ describe('fromCapi returns correct Item', () => {
 		expect(item.design).toBe(Design.Quiz);
 	});
 
-	test('advertisementfeature', () => {
+	test('labs', () => {
 		const item = f(contentWithTag('tone/advertisement-features'));
-		expect(item.design).toBe(Design.AdvertisementFeature);
+		expect(item.theme).toBe(Special.Labs);
 	});
 
 	test('article', () => {
@@ -520,6 +536,8 @@ describe('embed elements', () => {
 			assets: [],
 			embedTypeData: {
 				html: '<p>Embed element<p>',
+				source: 'mockSource',
+				sourceDomain: 'mockSourceDomain',
 			},
 		};
 		const item = f(articleContentWith(embedElement)) as Standard;
@@ -571,16 +589,22 @@ describe('audio elements', () => {
 			audioTypeData: {
 				html:
 					"<iframe src='https://open.spotify.com/embed/track/' width='300' height='300' frameborder='0'></iframe>",
+				source: 'Spotify',
 			},
 		};
 		const item = f(articleContentWith(audioElement)) as Standard;
 		pipe2(
 			item.body[0],
-			resultMap<BodyElement, Audio>((element) => element as Audio),
+			resultAndThen((element) =>
+				element.kind === ElementKind.Embed &&
+				element.embed.kind === EmbedKind.Spotify
+					? ok(element.embed)
+					: err('Not an audio embed'),
+			),
 			resultMap(({ src, width, height }) => {
 				expect(src).toContain('https://open.spotify.com/embed/track/');
-				expect(width).toContain('300');
-				expect(height).not.toContain('380');
+				expect(width).toBe(300);
+				expect(height).not.toBe(380);
 			}),
 		);
 	});
@@ -631,14 +655,20 @@ describe('video elements', () => {
 			videoTypeData: {
 				html:
 					"<iframe height='259' width='460' src='https://www.youtube-nocookie.com/embed/' frameborder='0' allowfullscreen ></iframe>",
+				url: 'https://www.youtube.com/watch?v=mockVideoId',
 			},
 		};
 		const item = f(articleContentWith(videoElement)) as Standard;
 		pipe2(
 			item.body[0],
-			resultMap<BodyElement, Video>((element) => element as Video),
-			resultMap(({ src, width, height }) => {
-				expect(src).toBe('https://www.youtube-nocookie.com/embed/');
+			resultAndThen((element) =>
+				element.kind === ElementKind.Embed &&
+				element.embed.kind === EmbedKind.YouTube
+					? ok(element.embed)
+					: err('Not a YouTube embed'),
+			),
+			resultMap(({ id, width, height }) => {
+				expect(id).toBe('mockVideoId');
 				expect(width).toBe('460');
 				expect(height).toBe('259');
 			}),

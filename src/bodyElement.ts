@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-import type { QuestionType } from '@guardian/atoms-rendering/dist/QuizAtom';
-import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types';
+import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
@@ -17,10 +16,12 @@ import {
 } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { formatDate } from 'date';
+import { parseAudio, parseGeneric, parseVideo } from 'embed';
+import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
-import { pipe, pipe2 } from 'lib';
-import type { Context, DocParser } from 'types/parserContext';
+import { compose, pipe, pipe2 } from 'lib';
+import type { Context } from 'types/parserContext';
 
 // ----- Types ----- //
 
@@ -32,11 +33,9 @@ const enum ElementKind {
 	RichLink,
 	Tweet,
 	Instagram,
-	Audio,
 	Embed,
 	Callout,
 	LiveEvent,
-	Video,
 	InteractiveAtom,
 	ExplainerAtom,
 	MediaAtom,
@@ -46,7 +45,8 @@ const enum ElementKind {
 	TimelineAtom,
 	ChartAtom,
 	AudioAtom,
-	QuizAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
 }
 
 type Text = {
@@ -58,32 +58,15 @@ type Image = ImageData & {
 	kind: ElementKind.Image;
 };
 
-type Audio = {
-	kind: ElementKind.Audio;
-	src: string;
-	height: string;
-	width: string;
-};
-
-type Video = {
-	kind: ElementKind.Video;
-	src: string;
-	height: string;
-	width: string;
-};
-
-type Embed = {
+type EmbedElement = {
 	kind: ElementKind.Embed;
-	html: string;
-	alt: Option<string>;
+	embed: Embed;
 };
 
 type Instagram = {
 	kind: ElementKind.Instagram;
 	html: string;
 };
-
-type MediaKind = ElementKind.Audio | ElementKind.Video;
 
 interface InteractiveAtom {
 	kind: ElementKind.InteractiveAtom;
@@ -152,11 +135,47 @@ interface AudioAtom {
 	title: string;
 }
 
-interface QuizAtom {
-	kind: ElementKind.QuizAtom;
+interface KnowledgeQuizAtom {
+	kind: ElementKind.KnowledgeQuizAtom;
 	id: string;
 	questions: QuestionType[];
+	resultGroups: ResultGroupsType[];
 }
+
+interface PersonalityQuizAtom {
+	kind: ElementKind.PersonalityQuizAtom;
+	id: string;
+	questions: QuestionType[];
+	resultBuckets: ResultBucket[];
+}
+
+type AnswerType = {
+	id: string;
+	text: string;
+	revealText?: string;
+	isCorrect: boolean;
+	answerBuckets: string[];
+};
+
+type ResultBucket = {
+	id: string;
+	title: string;
+	description: string;
+};
+
+type QuestionType = {
+	id: string;
+	text: string;
+	answers: AnswerType[];
+	imageUrl?: string;
+};
+
+type ResultGroupsType = {
+	title: string;
+	shareText: string;
+	minScore: number;
+	id: string;
+};
 
 type BodyElement =
 	| Text
@@ -181,8 +200,7 @@ type BodyElement =
 			content: NodeList;
 	  }
 	| Instagram
-	| Audio
-	| Embed
+	| EmbedElement
 	| {
 			kind: ElementKind.Callout;
 			id: string;
@@ -197,7 +215,6 @@ type BodyElement =
 			price?: string;
 			start?: string;
 	  }
-	| Video
 	| InteractiveAtom
 	| ExplainerAtom
 	| MediaAtom
@@ -207,7 +224,8 @@ type BodyElement =
 	| TimelineAtom
 	| ChartAtom
 	| AudioAtom
-	| QuizAtom;
+	| KnowledgeQuizAtom
+	| PersonalityQuizAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -230,24 +248,12 @@ const tweetContent = (
 	);
 };
 
-const parseIframe = (docParser: DocParser) => (
-	html: string,
-	kind: MediaKind,
-): Result<string, Audio | Video> => {
-	const iframe = docParser(html).querySelector('iframe');
-	const src = iframe?.getAttribute('src');
-
-	if (!iframe || !src) {
-		return err('No iframe within html');
-	}
-
-	return ok({
-		kind,
-		src,
-		width: iframe.getAttribute('width') ?? '380',
-		height: iframe.getAttribute('height') ?? '300',
-	});
-};
+const toEmbedElement: (
+	parsed: Result<string, Embed>,
+) => Result<string, BodyElement> = resultMap((embed) => ({
+	kind: ElementKind.Embed,
+	embed,
+}));
 
 const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 	element: BlockElement,
@@ -334,7 +340,7 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 		}
 
 		case ElementType.EMBED: {
-			const { html: embedHtml, alt } = element.embedTypeData ?? {};
+			const { html: embedHtml } = element.embedTypeData ?? {};
 
 			if (!embedHtml) {
 				return err('No html field on embedTypeData');
@@ -345,7 +351,11 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 				.querySelector('[data-callout-tagname]')
 				?.getAttribute('data-callout-tagname');
 
-			if (id && campaigns) {
+			if (id) {
+				if (!campaigns) {
+					return err('No campaign data for this callout');
+				}
+
 				const campaign = campaigns.find(
 					(campaign) => campaign.fields.tagName === id,
 				);
@@ -365,11 +375,10 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 				});
 			}
 
-			return ok({
-				kind: ElementKind.Embed,
-				html: embedHtml,
-				alt: fromNullable(alt),
-			});
+			return compose(
+				toEmbedElement,
+				parseGeneric(context.docParser),
+			)(element);
 		}
 
 		case ElementType.MEMBERSHIP: {
@@ -407,25 +416,14 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 			return ok({ kind: ElementKind.Instagram, html: instagramHtml });
 		}
 
-		case ElementType.AUDIO: {
-			const { html: audioHtml } = element.audioTypeData ?? {};
+		case ElementType.AUDIO:
+			return compose(
+				toEmbedElement,
+				parseAudio(context.docParser),
+			)(element);
 
-			if (!audioHtml) {
-				return err('No html field on audioTypeData');
-			}
-
-			return parseIframe(context.docParser)(audioHtml, ElementKind.Audio);
-		}
-
-		case ElementType.VIDEO: {
-			const { html: videoHtml } = element.videoTypeData ?? {};
-
-			if (!videoHtml) {
-				return err('No html field on videoTypeData');
-			}
-
-			return parseIframe(context.docParser)(videoHtml, ElementKind.Video);
-		}
+		case ElementType.VIDEO:
+			return compose(toEmbedElement, parseVideo)(element);
 
 		case ElementType.CONTENTATOM: {
 			if (!atoms) {
@@ -458,8 +456,6 @@ const parseElements = (
 export {
 	ElementKind,
 	BodyElement,
-	Audio,
-	Video,
 	Body,
 	Image,
 	Text,
@@ -472,6 +468,7 @@ export {
 	ProfileAtom,
 	TimelineAtom,
 	AudioAtom,
-	QuizAtom,
+	KnowledgeQuizAtom,
+	PersonalityQuizAtom,
 	parseElements,
 };

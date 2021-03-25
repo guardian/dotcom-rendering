@@ -75,6 +75,15 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.specialReport[800],
 		cameraIconBackground: palette.specialReport[400],
 	},
+	[Special.Labs]: {
+		kicker: palette.specialReport[400],
+		inverted: palette.specialReport[500],
+		liveblogBackground: palette.specialReport[300],
+		liveblogDarkBackground: palette.specialReport[200],
+		link: palette.specialReport[300],
+		cameraIcon: palette.specialReport[800],
+		cameraIconBackground: palette.specialReport[400],
+	},
 };
 
 const getThemeStyles = (theme: Theme): ThemeStyles => themeColours[theme];
@@ -95,7 +104,7 @@ function themeFromString(theme: string | undefined): Pillar {
 	}
 }
 
-function themeToPillar(theme: Theme): string {
+function themeToPillarString(theme: Theme): string {
 	switch (theme) {
 		case Pillar.Opinion:
 			return 'opinion';
@@ -111,6 +120,39 @@ function themeToPillar(theme: Theme): string {
 	}
 }
 
+function themeToPillar(theme: Theme): Pillar {
+	switch (theme) {
+		case Special.SpecialReport:
+		case Special.Labs:
+			return Pillar.News;
+		default:
+			return theme;
+	}
+}
+const stringToPillar = (pillar: string): Pillar => {
+	switch (pillar) {
+		case 'news':
+			return Pillar.News;
+		case 'opinion':
+			return Pillar.Opinion;
+		case 'culture':
+			return Pillar.Culture;
+		case 'sport':
+			return Pillar.Sport;
+		case 'lifestyle':
+			return Pillar.Lifestyle;
+		default:
+			return Pillar.News;
+	}
+};
+
 // ----- Exports ----- //
 
-export { ThemeStyles, getThemeStyles, themeFromString, themeToPillar };
+export {
+	ThemeStyles,
+	getThemeStyles,
+	themeFromString,
+	themeToPillarString,
+	themeToPillar,
+	stringToPillar,
+};

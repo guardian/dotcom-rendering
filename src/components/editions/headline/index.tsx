@@ -1,19 +1,19 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
-import type { SerializedStyles } from '@emotion/core';
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { border, neutral } from '@guardian/src-foundations/palette';
-import { headline, titlepiece } from '@guardian/src-foundations/typography';
 import type {
 	FontWeight,
 	LineHeight,
-} from '@guardian/src-foundations/typography/types';
+} from '@guardian/src-foundations/dist/types/typography/types';
+import { from } from '@guardian/src-foundations/mq';
+import { border, neutral } from '@guardian/src-foundations/palette';
+import { headline, titlepiece } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
-import { headlineTextColour } from 'editorialStyles';
+import { editionsHeadlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
@@ -118,7 +118,7 @@ const getFontStyles = (
 `;
 
 const getSharedStyles = (format: Format): SerializedStyles => css`
-	${headlineTextColour(format)}
+	${editionsHeadlineTextColour(format)}
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	padding-bottom: ${remSpace[4]};
@@ -171,25 +171,37 @@ const getHeadlineStyles = (
 ): SerializedStyles => {
 	const sharedStyles = getSharedStyles(format);
 
-	// Display.Immersive needs to come before Design.Interview
-	switch (format.display) {
-		case Display.Immersive:
-			return css(
-				sharedStyles,
-				getFontStyles('tight', 'bold'),
-				immersiveStyles,
-			);
-		case Display.Showcase:
-			return css(sharedStyles, getFontStyles('tight', 'bold'));
+	if (format.display === Display.Immersive) {
+		return css(
+			sharedStyles,
+			getFontStyles('tight', 'bold'),
+			immersiveStyles,
+		);
+	}
+
+	// this needs to come before Display.Showcase
+	if (format.design === Design.Comment) {
+		return css(
+			sharedStyles,
+			getFontStyles('regular', 'light'),
+			commentStyles,
+		);
+	}
+
+	// this needs to come before Display.Showcase
+	if (format.design === Design.Interview) {
+		return css(
+			sharedStyles,
+			getFontStyles('tight', 'bold'),
+			interviewStyles,
+		);
+	}
+
+	if (format.display === Display.Showcase) {
+		return css(sharedStyles, getFontStyles('tight', 'bold'));
 	}
 
 	switch (format.design) {
-		case Design.Interview:
-			return css(
-				sharedStyles,
-				getFontStyles('tight', 'bold'),
-				interviewStyles,
-			);
 		case Design.Review:
 			return css(sharedStyles, getFontStyles('tight', 'bold'));
 		case Design.Analysis:
@@ -197,12 +209,6 @@ const getHeadlineStyles = (
 				sharedStyles,
 				getFontStyles('regular', 'light'),
 				analysisStyles(kickerColor),
-			);
-		case Design.Comment:
-			return css(
-				sharedStyles,
-				getFontStyles('regular', 'light'),
-				commentStyles,
 			);
 		case Design.Media:
 			return css(sharedStyles, galleryStyles);

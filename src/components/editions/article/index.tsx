@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { background, border, neutral } from '@guardian/src-foundations/palette';
@@ -53,6 +53,8 @@ const headerStyles = css`
 `;
 
 const bodyStyles = css`
+	padding-top: ${remSpace[2]};
+	padding-bottom: ${remSpace[2]};
 	iframe {
 		width: 100%;
 		border: none;
@@ -64,6 +66,9 @@ const bodyStyles = css`
 	}
 
 	${from.tablet} {
+		padding-top: 0;
+		padding-bottom: 0;
+
 		p {
 			margin: 0;
 			padding-top: ${remSpace[2]};
@@ -95,7 +100,7 @@ export const galleryWrapperStyles = css`
 		border-right: 1px solid ${neutral[100]};
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		width: ${wide}px;
 	}
 `;
@@ -123,7 +128,8 @@ const Article: FC<Props> = ({ item }) => {
 		item.design === Design.Review ||
 		item.design === Design.Interview ||
 		item.design === Design.Feature ||
-		item.design === Design.Media
+		item.design === Design.Media ||
+		item.design === Design.GuardianView
 	) {
 		return (
 			<main css={mainStyles}>

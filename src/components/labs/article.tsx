@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { Lines } from '@guardian/src-ed-lines';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
@@ -13,7 +13,7 @@ import FooterCcpa from 'components/shared/footer';
 import RelatedContent from 'components/shared/relatedContent';
 import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
-import type { AdvertisementFeature as AdvertisementFeatureItem } from 'item';
+import type { Item } from 'item';
 import { pipe2 } from 'lib';
 import type { FC, ReactNode } from 'react';
 import {
@@ -47,11 +47,11 @@ const BorderStyles = css`
 // ----- Component ----- //
 
 interface Props {
-	item: AdvertisementFeatureItem;
+	item: Item;
 	children: ReactNode[];
 }
 
-const AdvertisementFeature: FC<Props> = ({ item, children }) => {
+const Labs: FC<Props> = ({ item, children }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article css={BorderStyles}>
@@ -92,4 +92,4 @@ const AdvertisementFeature: FC<Props> = ({ item, children }) => {
 
 // ----- Exports ----- //
 
-export default AdvertisementFeature;
+export default Labs;

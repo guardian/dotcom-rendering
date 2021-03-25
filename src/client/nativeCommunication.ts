@@ -1,6 +1,6 @@
 import { AdSlot } from '@guardian/bridget/AdSlot';
-import { FrictionScreenReason } from '@guardian/bridget/FrictionScreenReason';
 import { Image } from '@guardian/bridget/Image';
+import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect } from '@guardian/bridget/Rect';
 import { Rect } from '@guardian/bridget/Rect';
 import { VideoSlot } from '@guardian/bridget/VideoSlot';
@@ -117,8 +117,8 @@ function ads(): void {
 				document.querySelectorAll('.ad-labels, .upgrade-banner button'),
 			).forEach((adLabel) => {
 				adLabel.addEventListener('click', () => {
-					void acquisitionsClient.launchFrictionScreen(
-						FrictionScreenReason.hideAds,
+					void acquisitionsClient.launchPurchaseScreen(
+						PurchaseScreenReason.hideAds,
 					);
 				});
 			});

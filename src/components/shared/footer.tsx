@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { breakpoints, neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -49,7 +49,17 @@ const renderContent = (ccpaStatus: boolean): JSX.Element | null => {
 			</>
 		);
 	} else {
-		return null;
+		return (
+			<>
+				<a
+					css={anchor}
+					href="https://www.theguardian.com/help/privacy-settings"
+				>
+					Privacy Settings
+				</a>
+				&nbsp;&#183;&nbsp;
+			</>
+		);
 	}
 };
 

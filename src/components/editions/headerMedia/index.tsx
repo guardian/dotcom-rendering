@@ -1,10 +1,9 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
-import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display, none, some } from '@guardian/types';
@@ -15,17 +14,11 @@ import StarRating from 'components/editions/starRating';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
-import { getFormat, isPicture } from 'item';
+import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
-import {
-	sidePadding,
-	tabletArticleMargin,
-	tabletImageWidth,
-	wideArticleMargin,
-	wideImageWidth,
-} from '../styles';
+import { wideImageWidth } from '../styles';
 
 // ----- Styles ----- //
 
@@ -33,16 +26,8 @@ const styles = css`
 	margin: 0;
 	position: relative;
 
-	${from.tablet} {
-		width: ${tabletImageWidth}px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	${from.wide} {
+	${from.desktop} {
 		width: ${wideImageWidth}px;
-		margin-left: auto;
-		margin-right: auto;
 	}
 `;
 
@@ -54,10 +39,10 @@ const fullWidthStyles = css`
 
 const captionStyles = css`
 	${from.tablet} {
-		width: ${tabletImageWidth}px;
+		width: calc(100vw - 3.75rem);
 	}
 
-	${from.wide} {
+	${from.desktop} {
 		width: ${wideImageWidth}px;
 	}
 `;
@@ -79,26 +64,6 @@ const videoStyles = css`
 const fullWidthCaptionStyles = css`
 	width: 100%;
 	height: 100%;
-
-	${from.tablet} {
-		width: 100%;
-	}
-`;
-
-const pictureStyles: SerializedStyles = css`
-	width: calc(100% - ${remSpace[4]});
-	${sidePadding}
-	${from.tablet} {
-		padding-left: ${tabletArticleMargin}px;
-		padding-right: ${tabletArticleMargin}px;
-		width: calc(100% - ${tabletArticleMargin}px - ${tabletArticleMargin}px);
-	}
-
-	${from.wide} {
-		padding-left: ${wideArticleMargin}px;
-		padding-right: ${wideArticleMargin}px;
-		width: calc(100% - ${wideArticleMargin}px - ${wideArticleMargin}px);
-	}
 `;
 
 const getImageStyle = (
@@ -115,14 +80,13 @@ const getImageStyle = (
 	return css`
 		display: block;
 		width: 100%;
-		height: calc(100vw * ${height / width});
 
 		${from.tablet} {
-			width: ${tabletImageWidth}px;
-			height: ${(tabletImageWidth * height) / width}px;
+			width: calc(100vw - 3.75rem);
+			height: calc((100vw - 3.75rem) * height / width);
 		}
 
-		${from.wide} {
+		${from.desktop} {
 			width: ${wideImageWidth}px;
 			height: ${(wideImageWidth * height) / width}px;
 		}
@@ -180,19 +144,13 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 			} = media;
 
 			return (
-				<figure
-					css={[
-						getStyles(format),
-						isPicture(item.tags) ? pictureStyles : null,
-					]}
-					aria-labelledby={captionId}
-				>
+				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
 					<Img
 						image={image}
 						sizes={getImageSizes(format)}
 						format={item}
 						className={some(getImageStyle(image, format))}
-						supportsDarkMode
+						supportsDarkMode={false}
 						lightbox={some({
 							className: 'js-launch-slideshow js-main-image',
 							caption: none,
@@ -205,6 +163,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						styles={getCaptionStyles(format)}
 						iconColor={iconColor}
 						iconBackgroundColor={iconBackgroundColor}
+						isFullWidthImage={isFullWidthImage(format)}
 					/>
 					<StarRating item={item} />
 				</figure>

@@ -56,7 +56,7 @@ const customViewports = {
 
 export const parameters = {
 	viewport: {
-		defaultViewport: 'mobile',
+		defaultViewport: 'tablet',
 		viewports: customViewports,
 	},
 };

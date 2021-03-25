@@ -38,8 +38,22 @@ lazy val scalaApiModels = project.in(file("api-models") / "scala")
       "com.gu" %% "content-api-models-scala" % contentApiModelsVersion
     ) ++ libraryDeps,
 
-    bintrayOrganization := Some("guardian"),
-    bintrayRepository := "mobile",
+    publishTo := sonatypePublishToBundle.value,
+
+    scmInfo := Some(ScmInfo(
+      url("https://github.com/guardian/apps-rendering"),
+      "scm:git:git@github.com:guardian/apps-rendering.git"
+    )),
+
+    homepage := Some(url("https://github.com/guardian/apps-rendering")),
+
+    developers := List(Developer(
+      id = "Guardian",
+      name = "Guardian",
+      email = null,
+      url = url("https://github.com/guardian")
+    )),
+
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     releaseProcess := Seq[ReleaseStep](
       checkSnapshotDependencies,
@@ -50,7 +64,7 @@ lazy val scalaApiModels = project.in(file("api-models") / "scala")
       commitReleaseVersion,
       tagRelease,
       publishArtifacts,
-      releaseStepTask(bintrayRelease),
+      releaseStepCommand("sonatypeBundleRelease"),
       setNextVersion,
       commitNextVersion,
       pushChanges

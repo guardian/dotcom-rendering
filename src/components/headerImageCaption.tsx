@@ -1,5 +1,5 @@
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
@@ -17,6 +17,7 @@ const HeaderImageCaptionStyles = (
 	iconBackgroundColor?: string,
 ): SerializedStyles => css`
 	summary {
+		display: block;
 		text-align: center;
 		background-color: ${iconBackgroundColor
 			? iconBackgroundColor

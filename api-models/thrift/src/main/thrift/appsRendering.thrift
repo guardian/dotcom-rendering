@@ -86,12 +86,38 @@ struct Campaign {
     7: required Fields fields
 }
 
+struct Scorer {
+    1: required string player
+    2: required i32 timeInMinutes
+    3: optional string additionalInfo
+}
+
+struct FootballTeam {
+    1: required string id
+    2: required string name
+    3: required string shortCode
+    4: required string crestUri
+    5: required i32 score
+    6: required list<Scorer> scorers
+}
+
+struct FootballContent {
+    1: required string id
+    2: required string status
+    4: required string kickOff
+    5: required string competitionDisplayName
+    6: required FootballTeam homeTeam
+    7: required FootballTeam awayTeam
+    8: optional string venue
+}
+
 struct RenderingRequest {
     1: required v1.Content content
-    2: optional i32 commentCount 
+    2: optional i32 commentCount
     3: optional bool specialReport
     4: optional map<string,string> targetingParams
     5: optional Branding branding
     6: optional list<Campaign> campaigns
     7: optional RelatedContent relatedContent
+    8: optional FootballContent footballContent
 }

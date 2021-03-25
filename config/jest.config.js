@@ -46,10 +46,10 @@ module.exports = {
 	},
 	coverageThreshold: {
 		global: {
-			branches: 37,
-			functions: 47,
-			lines: 49,
-			statements: 49,
+			branches: 35,
+			functions: 45,
+			lines: 45,
+			statements: 45,
 		},
 	},
 	coverageReporters: ['text', 'html', 'text-summary'],
@@ -57,4 +57,7 @@ module.exports = {
 	moduleDirectories: ['node_modules', 'src'],
 	snapshotSerializers: ['@emotion/jest/serializer'],
 	transformIgnorePatterns: ['node_modules/(?!@guardian)'],
+	moduleNameMapper: {
+		'preact-render-to-string': 'react-dom/server',
+	},
 };
