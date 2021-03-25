@@ -1720,7 +1720,7 @@ export const Quiz: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '25dec4e8-be9e-45d4-b42a-193031ed5287',
+			elementId: 'b0ca4b83-db49-48fc-b9ca-ef2923ce0a36',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2352,7 +2352,7 @@ export const Quiz: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					elementId: '713be130-d1ca-40ed-bd9c-bbf3545f023e',
+					elementId: '73222fc8-e59c-4b88-b31a-184f4c16d75e',
 				},
 			],
 			createdOn: 1591866131000,
