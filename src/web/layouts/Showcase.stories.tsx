@@ -41,10 +41,6 @@ const convertToShowcase = (CAPI: CAPIType) => {
 			...CAPI.format,
 			display: 'ShowcaseDisplay' as CAPIDisplay,
 		},
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: true,
-		},
 	};
 };
 
