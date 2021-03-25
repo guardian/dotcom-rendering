@@ -39,7 +39,6 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 
 export const RichLinkComponent = ({
 	element,
-	pillar,
 	ajaxEndpoint,
 	richLinkIndex,
 }: Props) => {
