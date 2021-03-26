@@ -999,53 +999,63 @@ export const Feature: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
 	},
@@ -1356,18 +1366,13 @@ export const Feature: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			duration: 207,
-			elementId: 'f773978c-1257-43ce-bffb-d5ee0e029c30',
-			expired: true,
+			id: 'd904f65f-f5c1-4786-8d7a-54fc2a4abe72',
+			assetId: '7z3iv-HkI7o',
+			channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
 			mediaTitle:
 				'Biggest night in Hollywood: key moments from the Oscars – video ',
-			altText:
-				"Press Room - 92nd Academy Awards<br>epa08208148 Joaquin Phoenix poses in the press room with the Oscar for Best Actor for his performance in 'Joker' during the 92nd annual Academy Awards ceremony at the Dolby Theatre in Hollywood, California, USA, 09 February 2020. The Oscars are presented for outstanding individual or collective efforts in filmmaking in 24 categories.  EPA/DAVID SWANSON",
-			assetId: '7z3iv-HkI7o',
-			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 			overrideImage:
 				'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=700&quality=85&auto=format&fit=max&s=676cb4a37f52687006049d3982e07556',
-			id: 'd904f65f-f5c1-4786-8d7a-54fc2a4abe72',
 			posterImage: [
 				{
 					url:
@@ -1395,121 +1400,184 @@ export const Feature: CAPIType = {
 					width: 3500,
 				},
 			],
-			channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
+			expired: true,
+			duration: 207,
+			altText:
+				"Press Room - 92nd Academy Awards<br>epa08208148 Joaquin Phoenix poses in the press room with the Oscar for Best Actor for his performance in 'Joker' during the 92nd annual Academy Awards ceremony at the Dolby Theatre in Hollywood, California, USA, 09 February 2020. The Oscars are presented for outstanding individual or collective efforts in filmmaking in 24 categories.  EPA/DAVID SWANSON",
+			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
+			elementId: '708afa13-01a5-4ecc-8a07-df713ee24a4f',
 		},
 	],
 	webPublicationDate: '2020-02-10T06:59:35.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 09.58 GMT',
-			blockFirstPublishedDisplay: '04.43 GMT',
-			blockLastUpdated: 1581317966000,
-			firstPublishedDisplay: '06.59 GMT',
-			lastUpdatedDisplay: '09.58 GMT',
-			blockCreatedOnDisplay: '04.43 GMT',
-			blockLastUpdatedDisplay: '06.59 GMT',
-			firstPublished: 1581317975000,
-			createdOn: 1581309832000,
-			primaryDateLine: 'Mon 10 Feb 2020 06.59 GMT',
-			blockCreatedOn: 1581309832000,
-			blockFirstPublished: 1581309836000,
-			createdOnDisplay: '04.43 GMT',
-			lastUpdated: 1581328729000,
+			id: '5e40df888f08e133247404c6',
 			elements: [
 				{
-					elementId: '6bceb4d4-7c08-4f0b-b664-95d2b3de0b9f',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html:
 						'<h2>Chris Rock on Jeff Bezos and Marriage Story</h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '9f2664df-bad1-4260-baf1-300c455e8f39',
 				},
 				{
-					elementId: '245797fa-cc14-48f3-ae94-73d1aa278600',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“Bezos is so rich, he got divorced and he is still the richest man in the world. He saw <a href="https://www.theguardian.com/film/2019/nov/15/marriage-story-review-noah-baumbach-adam-driver-scarlett-johansson">Marriage Story</a> and thought it was a comedy.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '735059e9-3f05-4d0d-8fc9-4c0836c31494',
 				},
 				{
-					elementId: '49eb4f1d-b929-4e6e-b18c-0d6869dd0274',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html:
 						'<h2><strong><a href="https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full">Joaquin Phoenix</a> …</strong></h2>',
-				},
-				{
-					elementId: '9516e61d-ad6a-4185-9b07-8517d02f90f3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>… on veganism</strong><strong> and social justice<br></strong>“I think at times we feel or are made to feel that we champion different causes. But for me I see commonality. I think whether we’re talking about gender inequality or racism or queer rights or indigenous rights, or animal rights – we’re talking about the fight against injustice.”</p>',
-				},
-				{
-					elementId: 'ecfa36f1-935d-48e2-8ba4-0ff1719628b9',
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						"Joaquin Phoenix's Oscars speech in full: 'We feel entitled to artificially inseminate a cow and steal her baby'",
-					url:
-						'https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full',
-				},
-				{
-					elementId: '0b5bbcd8-f27e-4d2f-b3ac-6bbb064a0d4b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“We’re talking about the fight against the belief that one nation, one people, one race, one gender, one species has the right to dominate, use and control another with impunity.”</p>',
-				},
-				{
-					elementId: '906fd2da-6ab0-4548-a4cb-ab3e6e8f484d',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>… on dairy products<br></strong>“I think we’ve become very disconnected from the natural world, many of us are guilty of an egocentric worldview and we believe that we’re the centre of the universe. We go into the natural world and we plunder it for its resources, we feel entitled to artificially inseminate a cow and steal her baby even though her cries of anguish are unmistakeable. Then we take her milk intended for her calf and we put it in our coffee and our cereal.”</p>',
-				},
-				{
-					elementId: 'a53bf2c2-5b61-45e5-b13e-261af9fc6a9b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p><strong>… on forgiveness<br></strong>“I have been a scoundrel all my life, I’ve been selfish. I’ve been cruel at times, hard to work with and I’m grateful that so many of you in this room have given me a second chance. I think that’s when we’re at our best: when we support each other. Not when we cancel each other out for our past mistakes, but when we help each other to grow. When we educate each other. When we guide each other to redemption.”</p>',
-				},
-				{
-					elementId: '8c549f59-e859-4918-95b5-48510235c82d',
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						"Parasite's best picture triumph could begin a new era for the Oscars",
-					url:
-						'https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars',
-				},
-				{
-					elementId: 'e2664ec9-b451-4e46-a260-0e661b7acd6f',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html:
-						'<h2><strong>Laura Dern on meeting your heroes</strong></h2>',
+					elementId: '7974efc8-1cb6-48b4-ba03-93e9328e4b5e',
 				},
 				{
-					elementId: '34b633be-0784-432b-8cd1-ba7cd871da14',
+					html:
+						'<p><strong>… on veganism</strong><strong> and social justice<br></strong>“I think at times we feel or are made to feel that we champion different causes. But for me I see commonality. I think whether we’re talking about gender inequality or racism or queer rights or indigenous rights, or animal rights – we’re talking about the fight against injustice.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“Noah [Baumbach] wrote a movie about love and breaching divisions in the name and the honour of family and home and hopefully for our planet. Some say never meet your heroes. I say if you’re really blessed you get them as your parents. I share this with my acting legends Diane Ladd and Bruce Dern. You got game, I love you. Thank you all for this gift. This is the best birthday present ever.”</p>',
+					elementId: 'e8df5db1-a666-4391-bb22-4bb6f205fc1b',
 				},
 				{
-					elementId: 'ce722df6-97c5-4f95-94e1-3de194d0b800',
-					role: 'inline',
+					url:
+						'https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full',
+					text:
+						"Joaquin Phoenix's Oscars speech in full: 'We feel entitled to artificially inseminate a cow and steal her baby'",
+					prefix: 'Related: ',
+					role: 'thumbnail',
+					_type:
+						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					elementId: 'aa4aebf4-9420-49c1-9f48-fb6a2c1d8a49',
+				},
+				{
+					html:
+						'<p>“We’re talking about the fight against the belief that one nation, one people, one race, one gender, one species has the right to dominate, use and control another with impunity.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'fbb00b27-27e7-4278-83f3-fc751f511039',
+				},
+				{
+					html:
+						'<p><strong>… on dairy products<br></strong>“I think we’ve become very disconnected from the natural world, many of us are guilty of an egocentric worldview and we believe that we’re the centre of the universe. We go into the natural world and we plunder it for its resources, we feel entitled to artificially inseminate a cow and steal her baby even though her cries of anguish are unmistakeable. Then we take her milk intended for her calf and we put it in our coffee and our cereal.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '5be10dd7-b68a-4cab-842d-aceb3d0263ca',
+				},
+				{
+					html:
+						'<p><strong>… on forgiveness<br></strong>“I have been a scoundrel all my life, I’ve been selfish. I’ve been cruel at times, hard to work with and I’m grateful that so many of you in this room have given me a second chance. I think that’s when we’re at our best: when we support each other. Not when we cancel each other out for our past mistakes, but when we help each other to grow. When we educate each other. When we guide each other to redemption.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'd9b52a30-8df6-4336-b772-92314bcf6f08',
+				},
+				{
+					url:
+						'https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars',
+					text:
+						"Parasite's best picture triumph could begin a new era for the Oscars",
+					prefix: 'Related: ',
+					role: 'thumbnail',
+					_type:
+						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					elementId: '611ef1dd-9346-4410-80b9-504830ce3a39',
+				},
+				{
+					html:
+						'<h2><strong>Laura Dern on meeting your heroes</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'f3423f4a-b1e7-4372-9f37-9e99371f86fa',
+				},
+				{
+					html:
+						'<p>“Noah [Baumbach] wrote a movie about love and breaching divisions in the name and the honour of family and home and hopefully for our planet. Some say never meet your heroes. I say if you’re really blessed you get them as your parents. I share this with my acting legends Diane Ladd and Bruce Dern. You got game, I love you. Thank you all for this gift. This is the best birthday present ever.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'fdb9d5b1-4e2d-4ec1-a8c1-29e55954b4ce',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '2100',
+									width: '3500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/3500.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '2100',
+									width: '3500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1200',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '600',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '300',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '84',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/140.jpg',
+							},
+						],
+					},
 					data: {
 						alt: 'Taika Waititi.',
 						caption:
 							'‘We can make it here as well’ … Taika Waititi.',
 						credit: 'Photograph: Eric Gaillard/Reuters',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1814,30 +1882,114 @@ export const Feature: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '21039045-d55d-4214-918b-b763a154f9f3',
+				},
+				{
+					html:
+						'<h2><strong>Taika Waititi on far-right extremism and indigenous kids</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '8fb16004-f9d9-41fd-bd52-161ec61a7259',
+				},
+				{
+					html:
+						'<p>Backstage: “If you were a Nazi, you would go to jail. Now you’re a Nazi, feel free to have a rally down in the square with your mates.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '9c799701-2c42-4218-9157-22d561c38c3c',
+				},
+				{
+					html:
+						'<p>On stage he said: “I want to dedicate this to all the indigenous kids in the world who want to do art, we are the original storytellers and we can make it here as well.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '8f2d06b2-9c37-4a2d-b661-6ecc0d5d123c',
+				},
+				{
+					html:
+						'<h2><strong>Brad Pitt on Trump’s impeachment, John Bolton and the Republican party</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '5486ac08-4674-42cd-ab77-0a9b2e497195',
+				},
+				{
+					html:
+						'<p>“Thank you to the Academy for this honour of honours. They told me I only have 45 seconds up here which is 45 more than the Senate gave John Bolton.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '2f96e1ec-07f2-46b8-8e62-51be64617be6',
+				},
+				{
+					url:
+						'https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars',
+					text:
+						"Parasite's best picture triumph could begin a new era for the Oscars",
+					prefix: 'Related: ',
+					role: 'thumbnail',
+					_type:
+						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					elementId: '3200919d-1e1d-4afe-8937-70008a733e35',
+				},
+				{
+					html:
+						'<h2>Bong Joon-Ho on booze and Scorsese and Tarantino</h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'd369bc00-134b-47d9-aff3-5f26b61cc9f5',
+				},
+				{
+					html:
+						'<p>“The [international feature film] category has a new name and I’m so happy to be its first recipient under its new name. I applaud and support the new direction that this change symbolises. I’m ready to drink tonight.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'ac278917-713d-4536-99a9-eea9e36f6823',
+				},
+				{
+					html:
+						'<p>“When I was young and starting in cinema there was a saying that I carved deep into my heart, which is, ‘The most personal is the most creative.’ That quote was from our great Martin Scorsese. When I was in school I studied Scorsese’s films. Just to be nominated was a huge honour, I never felt I would win. When people in the US were not familiar with my films Quentin [Tarantino] would always put my films on his list – Quentin, I love you.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '57beea2d-670a-4644-b3bf-bd34e5f7d130',
+				},
+				{
+					html:
+						'<h2><strong>Hildur Guðnadóttir on female composers</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '7b681fa0-6b79-47e4-b179-32e7ba2620d7',
+				},
+				{
+					html:
+						'<p>“To the girls to the women, to the mothers to the daughters who hear the music bubbling within please speak up – we need to hear your voices.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '8774c486-b60d-4128-a190-def4407e83b3',
+				},
+				{
 					media: {
 						allImages: [
 							{
 								index: 0,
 								fields: {
-									height: '2100',
-									width: '3500',
+									height: '2650',
+									width: '4416',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/3500.jpg',
+									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/4416.jpg',
 							},
 							{
 								index: 1,
 								fields: {
 									isMaster: 'true',
-									height: '2100',
-									width: '3500',
+									height: '2650',
+									width: '4416',
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg',
+									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg',
 							},
 							{
 								index: 2,
@@ -1848,7 +2000,7 @@ export const Feature: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/2000.jpg',
+									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/2000.jpg',
 							},
 							{
 								index: 3,
@@ -1859,7 +2011,7 @@ export const Feature: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/1000.jpg',
+									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/1000.jpg',
 							},
 							{
 								index: 4,
@@ -1870,7 +2022,7 @@ export const Feature: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/500.jpg',
+									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/500.jpg',
 							},
 							{
 								index: 5,
@@ -1881,96 +2033,10 @@ export const Feature: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/140.jpg',
+									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/140.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: '4b48be84-cc3d-4505-aa4d-047a54933692',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html:
-						'<h2><strong>Taika Waititi on far-right extremism and indigenous kids</strong></h2>',
-				},
-				{
-					elementId: 'f2fca125-0d12-4493-a3c9-879f354a5c26',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Backstage: “If you were a Nazi, you would go to jail. Now you’re a Nazi, feel free to have a rally down in the square with your mates.”</p>',
-				},
-				{
-					elementId: '3b6406fa-7b70-44bb-8b35-3d54c7108453',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>On stage he said: “I want to dedicate this to all the indigenous kids in the world who want to do art, we are the original storytellers and we can make it here as well.”</p>',
-				},
-				{
-					elementId: '9608621a-2670-4bed-b4ff-44e1da38f0c9',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html:
-						'<h2><strong>Brad Pitt on Trump’s impeachment, John Bolton and the Republican party</strong></h2>',
-				},
-				{
-					elementId: '3205523d-4d4c-47ef-af3c-7054f5b6c655',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“Thank you to the Academy for this honour of honours. They told me I only have 45 seconds up here which is 45 more than the Senate gave John Bolton.”</p>',
-				},
-				{
-					elementId: '97222575-788e-434e-89d8-9aacb391f096',
-					role: 'thumbnail',
-					prefix: 'Related: ',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					text:
-						"Parasite's best picture triumph could begin a new era for the Oscars",
-					url:
-						'https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars',
-				},
-				{
-					elementId: '7a69a172-5992-4f39-abf4-cdebb0696b3b',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html:
-						'<h2>Bong Joon-Ho on booze and Scorsese and Tarantino</h2>',
-				},
-				{
-					elementId: '83672c1a-f76e-45c6-b60a-ec644fc772e3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“The [international feature film] category has a new name and I’m so happy to be its first recipient under its new name. I applaud and support the new direction that this change symbolises. I’m ready to drink tonight.</p>',
-				},
-				{
-					elementId: '55799d08-2aee-4f97-a1de-51e3121cb445',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“When I was young and starting in cinema there was a saying that I carved deep into my heart, which is, ‘The most personal is the most creative.’ That quote was from our great Martin Scorsese. When I was in school I studied Scorsese’s films. Just to be nominated was a huge honour, I never felt I would win. When people in the US were not familiar with my films Quentin [Tarantino] would always put my films on his list – Quentin, I love you.”</p>',
-				},
-				{
-					elementId: 'b9664061-d7ad-4a6a-9dce-ad321f6bea47',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html:
-						'<h2><strong>Hildur Guðnadóttir on female composers</strong></h2>',
-				},
-				{
-					elementId: '184a0b54-cc0a-4c88-a89b-819f2403d420',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“To the girls to the women, to the mothers to the daughters who hear the music bubbling within please speak up – we need to hear your voices.”</p>',
-				},
-				{
-					elementId: '0ff1f271-2add-4689-9d74-03bad50d7130',
-					role: 'inline',
 					data: {
 						copyright: '2020 Getty Images',
 						alt: 'Brie Larson, Sigourney Weaver, and Gal Gadot.',
@@ -1978,6 +2044,8 @@ export const Feature: CAPIType = {
 							'Brie Larson, Sigourney Weaver, and Gal Gadot.',
 						credit: 'Photograph: Kevin Winter/Getty Images',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2282,130 +2350,72 @@ export const Feature: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '2650',
-									width: '4416',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/4416.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '2650',
-									width: '4416',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
+					elementId: 'c678fa23-9b37-4572-beec-c635f68d5a29',
 				},
 				{
-					elementId: '3c155112-0de3-4f98-8508-6760665ef0d1',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html:
 						'<h2>Sigourney Weaver, Gal Gadot and Brie Larson’s Fight Club</h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '9f94ce58-a0b3-442e-9dd0-84ef7b9bb881',
 				},
 				{
-					elementId: '8692ea7a-cd90-4916-9923-7eebcf6c845b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>“We decided that after the show we’re going to start a fight club. Men are invited but no shirts allowed. The winner will get a lifetime’s supply of deodorant, sushi, and tequila. The loser gets a lifetime of questions about what it’s like as a woman in Hollywood.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c80a0000-8809-48a3-860b-d8189e5db74f',
 				},
 				{
-					elementId: 'e3966a71-9e22-467a-aead-611aaa841a90',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html:
 						'<h2><strong>Ford v Ferrari</strong><strong> sound editor Donald Sylvester</strong><strong> on sharing</strong></h2>',
-				},
-				{
-					elementId: '43124c99-91cc-46d6-aa53-1f2fb45af7a9',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“If I could I would break this off [statuette] and give James [Mangold] the head so he could put it in a jar.”</p>',
-				},
-				{
-					elementId: '41236f52-f3fc-428b-9630-be3d07f8e5e1',
 					_type:
 						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '9ec37762-b300-4e73-b37f-75644c8e5231',
+				},
+				{
+					html:
+						'<p>“If I could I would break this off [statuette] and give James [Mangold] the head so he could put it in a jar.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '477a20de-f01f-43da-a134-1bc732e82b62',
+				},
+				{
 					html:
 						'<h2><strong>Hair Love’s directors on … hair</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '9822f5e3-48b1-455a-a147-d5363f45d4e3',
 				},
 				{
-					elementId: '8769b19c-dcad-45ec-a386-325be411607d',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Matthew A Cherry and Karen Rupert Toliver said their film Hair Love, which won for best animated short, was made because they “wanted to normalise black hair” and make cartoons more diverse. The directors invited black teenager <a href="https://www.theguardian.com/us-news/2020/jan/23/deandre-arnold-texas-school-district-student-dreadlocks">Deandre Arnold</a>, who was told he wouldn’t be able to take part in his graduation if he didn’t cut his dreadlocks, as their guest.</p>',
-				},
-				{
-					elementId: '9581789c-efef-4351-869b-cf7d27447587',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '57188bc9-0ba9-4415-bfea-247320c8066e',
+				},
+				{
 					html:
 						'<p>“We have a firm belief that representation matters deeply, especially in cartoons because in cartoons that’s how we first see our movies and think about how we shape the world,” said Karen Rupert Toliver.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '0bfd5e14-fcd2-4653-ab09-ebe6bbbf4ac9',
 				},
 			],
-			id: '5e40df888f08e133247404c6',
+			createdOn: 1581309832000,
+			createdOnDisplay: '04.43 GMT',
+			blockCreatedOn: 1581309832000,
+			blockCreatedOnDisplay: '04.43 GMT',
+			lastUpdated: 1581328729000,
+			lastUpdatedDisplay: '09.58 GMT',
+			blockLastUpdated: 1581317966000,
+			blockLastUpdatedDisplay: '06.59 GMT',
+			firstPublished: 1581317975000,
+			firstPublishedDisplay: '06.59 GMT',
+			blockFirstPublished: 1581309836000,
+			blockFirstPublishedDisplay: '04.43 GMT',
+			primaryDateLine: 'Mon 10 Feb 2020 06.59 GMT',
+			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 09.58 GMT',
 		},
 	],
 	linkedData: [

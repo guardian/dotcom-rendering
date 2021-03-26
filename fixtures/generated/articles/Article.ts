@@ -1005,53 +1005,63 @@ export const Article: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
 	},
@@ -1361,8 +1371,77 @@ export const Article: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '7c408222-23b4-4714-94c4-f7599c837790',
-			role: 'inline',
+			media: {
+				allImages: [
+					{
+						index: 0,
+						fields: {
+							height: '1200',
+							width: '2000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/2000.jpg',
+					},
+					{
+						index: 1,
+						fields: {
+							height: '600',
+							width: '1000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/500.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '84',
+							width: '140',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/140.jpg',
+					},
+					{
+						index: 4,
+						fields: {
+							height: '2743',
+							width: '4571',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/4571.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '2743',
+							width: '4571',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg',
+					},
+				],
+			},
 			data: {
 				copyright: 'Credit: Alexandre Rotenberg / Alamy Stock Photo',
 				alt:
@@ -1371,6 +1450,8 @@ export const Article: CAPIType = {
 					'A digitally manipulated image showing a flooded Rotterdam.',
 				credit: 'Photograph: Alexandre Rotenberg/Alamy',
 			},
+			displayCredit: true,
+			role: 'inline',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1674,170 +1755,146 @@ export const Article: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '2743',
-							width: '4571',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/4571.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '2743',
-							width: '4571',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg',
-					},
-				],
-			},
-			displayCredit: true,
+			elementId: 'dc14c6d8-5602-4862-96ac-bd55264a69fb',
 		},
 	],
 	webPublicationDate: '2020-02-10T06:00:27.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Thu 14 May 2020 16.35 BST',
-			blockFirstPublishedDisplay: '10.26 GMT',
-			blockLastUpdated: 1589470537000,
-			firstPublishedDisplay: '06.00 GMT',
-			lastUpdatedDisplay: '16.35 BST',
-			blockCreatedOnDisplay: '10.26 GMT',
-			blockLastUpdatedDisplay: '16.35 BST',
-			firstPublished: 1581314427000,
-			createdOn: 1581071176000,
-			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
-			blockCreatedOn: 1581071176000,
-			blockFirstPublished: 1581071177000,
-			createdOnDisplay: '10.26 GMT',
-			lastUpdated: 1589470537000,
+			id: '5e3d3b488f086a28115a74be',
 			elements: [
 				{
-					elementId: 'd6ff8488-64af-4a05-81e2-7b1ad7a6696b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>A <a href="https://experience.arcgis.com/stemapp/5f6596de6c4445a58aec956532b9813d">series of detailed maps</a> have laid bare the scale of possible forest fires, floods, droughts and deluges that Europe could face by the end of the century without urgent action to adapt to and confront global heating.</p>',
-				},
-				{
-					elementId: '3f0c4902-8e3c-4fda-8c2d-506eb25e7746',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a61d51fa-a82c-4344-8738-c13c62191e72',
+				},
+				{
 					html:
 						'<p>An average one-metre rise in sea levels by the end of the century – without any flood prevention action – would mean 90% of the surface of Hull would be under water, according to the European Environment Agency.</p>',
-				},
-				{
-					elementId: 'f73e971c-e429-4208-a9ab-1c69573f4e07',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '3702765b-2e14-4a85-b09d-17d4448e6a9a',
+				},
+				{
 					html:
 						'<p>English cities including Norwich, Margate, Southend-on-Sea, Runcorn and Blackpool could also experience flooding covering more than 40% of the urban area.</p>',
-				},
-				{
-					elementId: 'c815bcdd-b894-41d8-b1d7-075ba4cb1ada',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'd6191ed0-541d-419b-8704-38bd6c1829ef',
+				},
+				{
 					html:
 						'<p>Across the North Sea, Dutch cities including the Hague, Rotterdam and Leiden were predicted to face severe floods from an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels.</p>',
-				},
-				{
-					elementId: 'f9b0941d-895c-4bd5-bf57-376c1f1fb8ba',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '9d6285af-1898-48cd-9306-c335226d3850',
+				},
+				{
 					html:
 						'<p>The model does not account for the Netherlands’ extensive flood-prevention measures, although many other countries have not taken such action.</p>',
-				},
-				{
-					elementId: '369d0db2-38b8-4939-bc83-b4c87b26685a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'fdeadf80-c4a2-4ed1-bf24-18d2d4d8275e',
+				},
+				{
 					html:
 						'<p>Meanwhile, large areas of Spain, Portugal and France would be grappling with desertification, with the worst-affected zones experiencing a two and half-fold increase in droughts under the worst-case scenario.</p>',
-				},
-				{
-					elementId: 'd3c16af3-b87a-49e5-9e94-02a7292d7649',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'f87db4f8-8be8-4fe4-8fbf-343a04386299',
+				},
+				{
 					html:
 						'<p>Hotter summers increase the risk of forest fires, which <a href="https://www.theguardian.com/world/2018/jul/18/sweden-calls-for-help-as-arctic-circle-hit-by-wildfires">hit record levels in Sweden in 2018</a>. If emissions exceed 4C, France, southern Germany, the Balkans and the Arctic Circle could experience a greatly increased fire risk. However, the absolute fire danger would remain highest in southern European countries, which are already prone to blazes.</p>',
-				},
-				{
-					elementId: '95b4020d-863a-4133-b30a-43f91d5c0e08',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '5f1adf43-f8c5-4189-91c4-2078863e3055',
+				},
+				{
 					html:
 						'<p>Further north, winters are becoming wetter. Failure to limit global heating below 2C could mean a swath of central and eastern Europe, from Bratislava in the west to Yaroslavl in the east, will be in line for sharp increase in “heavy rain events” during autumn and winter by the end of the century.</p>',
-				},
-				{
-					elementId: 'e7fc6ed2-8ac8-41e3-8892-0636b87265dc',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In some areas of central and eastern Europe there is predicted to be a 35% increase in heavy rain events, meaning torrential downpours would be more frequent.</p>',
+					elementId: 'f974b491-1e98-4474-ab0d-2167f56f06cf',
 				},
 				{
-					elementId: 'f0cb52a9-e335-4307-b87d-94e5d5b828d4',
-					role: 'inline',
+					html:
+						'<p>In some areas of central and eastern Europe there is predicted to be a 35% increase in heavy rain events, meaning torrential downpours would be more frequent.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '7e0b2e66-9c9b-4664-bac9-2250e7489e3b',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '736',
+									width: '1396',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/1396.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '736',
+									width: '1396',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '527',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/1000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '264',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/500.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '74',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/140.jpg',
+							},
+						],
+					},
 					data: {
 						alt: 'Map predicting flood-hit areas.',
 						caption: 'Map predicting flood-hit areas.',
 						credit:
 							'Photograph: Center for Remote Sensing of Ice Sheets/Eurostat',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2142,133 +2199,86 @@ export const Article: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '736',
-									width: '1396',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/1396.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '736',
-									width: '1396',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '527',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '264',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '74',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
+					elementId: 'e919fba8-17c7-4827-807b-bb75d5a561c8',
 				},
 				{
-					elementId: '61d1aa88-10ce-4e2b-ba68-a0ef2b0bd77e',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>While the climate data has been published before, this is the first time the EU-agency has presented it using detailed maps on one site. Users can zoom in on small areas, for example, to discover that one-third of the London borough of Hammersmith and Fulham could be exposed to flooding by 2071.</p>',
-				},
-				{
-					elementId: '64ab05be-72ea-4e53-85a8-4e9a25b92c30',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '22bd6e86-458b-4c3a-b9af-5392a629424a',
+				},
+				{
 					html:
 						'<p>The Copenhagen-based agency hopes the maps will reach decision-makers in governments and EU institutions, who would not usually read a lengthy EEA report on the impact of the climate emergency.</p>',
-				},
-				{
-					elementId: '1bf48e46-7e13-434b-80a7-38dd80421779',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '4b4d6869-5013-4b08-95e2-9a9853e3f2eb',
+				},
+				{
 					html:
 						'<p>“It’s very urgent and we need to act now,” said Blaž Kurnik, an EEA expert in climate change impacts and adaptation.</p>',
-				},
-				{
-					elementId: '9b3e3e36-c2af-4c1f-bc3a-2739ab07cb8f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b73e404a-30d8-4974-95e7-509bc0ec86d9',
+				},
+				{
 					html:
 						'<p>Even if countries succeed in restricting global temperature rise, existing CO<strong><sub>2</sub></strong> in the atmosphere would still have an impact, he said.</p>',
-				},
-				{
-					elementId: '91cce771-f932-4427-a183-355649ac2146',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'e27af47a-cc47-4c62-8559-4f0da05868e8',
+				},
+				{
 					html:
 						'<p>“The number of extreme events and sea level rise will still continue to increase for the next decades to a century,” Kurnik said. “Sea level rise, especially, can be problematic, because it is still increasing because of past emissions and the current concentration of greenhouse gases.”</p>',
-				},
-				{
-					elementId: 'cc1d377d-44c6-4d9a-99f9-a4d347e0317a',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '9797f528-e5f5-4428-92ae-cefc5fdf7085',
+				},
+				{
 					html:
 						'<p>The agency wants governments to focus on adapting to unavoidable global heating. “Adaptation is crucial in the next decades of the century. Even if we are able to increase the temperature by 2C, adaptation is crucial for the next decades.”</p>',
-				},
-				{
-					elementId: 'e9d1c9a2-2105-48cf-a168-30badda3bafa',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a7fb152c-a791-4da9-9e1c-ef2f4159bae3',
+				},
+				{
 					html:
 						'<p>The EEA has concluded it is <a href="https://www.eea.europa.eu/data-and-maps/indicators/atmospheric-greenhouse-gas-concentrations-6/assessment-1">possible to limit the rise in global temperatures to 2C above pre-industrial levels</a>, as long as greenhouse gas concentrations peak during the next 15 to 29 years.</p>',
-				},
-				{
-					elementId: '4b78b881-90c2-4616-a535-dd99426c4b92',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'f83ee607-cad5-446b-a5b7-cd1b109c25a7',
+				},
+				{
 					html:
 						'<p>Meeting a more demanding<a href="https://www.theguardian.com/environment/2018/oct/08/global-warming-must-not-exceed-15c-warns-landmark-un-report"> 1.5C limit</a> requires concentrations to peak in the next three to 13 years. Under both scenarios, there is a 50% chance of overshooting the temperature.</p>',
-				},
-				{
-					elementId: '1089fded-8b2d-40f8-a637-c418b37121f8',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '62ddaf67-759a-4ce1-90a5-df66939c8a92',
+				},
+				{
 					html:
 						'<p>• This article was amended on 10 February and 14 May 2020. An earlier version said that the EEA concluded “it is possible to keep global temperatures 2C below pre-industrial levels, as long as emissions peak during the next 15 to 29 years”. That meant to say greenhouse gas concentrations, not emissions; and the 2C referred to a rise in temperature above pre-industrial levels, not the temperature below pre-industrial levels. This article was further amended because an earlier version omitted “enough to cause an increase in global temperature of” from the sentence: “… an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels”. This has been corrected.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '46e2168e-a2e9-44c7-a15f-fbb06fbe7262',
 				},
 			],
-			id: '5e3d3b488f086a28115a74be',
+			createdOn: 1581071176000,
+			createdOnDisplay: '10.26 GMT',
+			blockCreatedOn: 1581071176000,
+			blockCreatedOnDisplay: '10.26 GMT',
+			lastUpdated: 1589470537000,
+			lastUpdatedDisplay: '16.35 BST',
+			blockLastUpdated: 1589470537000,
+			blockLastUpdatedDisplay: '16.35 BST',
+			firstPublished: 1581314427000,
+			firstPublishedDisplay: '06.00 GMT',
+			blockFirstPublished: 1581071177000,
+			blockFirstPublishedDisplay: '10.26 GMT',
+			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
+			secondaryDateLine: 'Last modified on Thu 14 May 2020 16.35 BST',
 		},
 	],
 	linkedData: [

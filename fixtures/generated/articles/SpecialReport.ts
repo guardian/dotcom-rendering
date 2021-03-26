@@ -1021,53 +1021,63 @@ export const SpecialReport: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
 	},
@@ -1389,8 +1399,77 @@ export const SpecialReport: CAPIType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: '2e2a7701-2432-41c1-8a34-3b5a8f49bde6',
-			role: 'immersive',
+			media: {
+				allImages: [
+					{
+						index: 0,
+						fields: {
+							height: '1200',
+							width: '2000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/2000.jpg',
+					},
+					{
+						index: 1,
+						fields: {
+							height: '600',
+							width: '1000',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/1000.jpg',
+					},
+					{
+						index: 2,
+						fields: {
+							height: '300',
+							width: '500',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/500.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '84',
+							width: '140',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/140.jpg',
+					},
+					{
+						index: 4,
+						fields: {
+							height: '5792',
+							width: '9653',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/9653.jpg',
+					},
+					{
+						index: 5,
+						fields: {
+							isMaster: 'true',
+							height: '5792',
+							width: '9653',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg',
+					},
+				],
+			},
 			data: {
 				alt:
 					'The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.',
@@ -1398,6 +1477,8 @@ export const SpecialReport: CAPIType = {
 					'The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.',
 				credit: 'Illustration: Guardian Design',
 			},
+			displayCredit: true,
+			role: 'immersive',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1701,126 +1782,102 @@ export const SpecialReport: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '5792',
-							width: '9653',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/9653.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '5792',
-							width: '9653',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg',
-					},
-				],
-			},
-			displayCredit: true,
+			elementId: 'c5aa58dd-a8d8-4b0a-af31-d4e0db54d6f6',
 		},
 	],
 	webPublicationDate: '2019-10-12T11:00:19.000Z',
 	blocks: [
 		{
-			secondaryDateLine: 'Last modified on Sat 12 Oct 2019 19.40 BST',
-			blockFirstPublishedDisplay: '09.05 BST',
-			blockLastUpdated: 1570877166000,
-			firstPublishedDisplay: '12.00 BST',
-			lastUpdatedDisplay: '19.40 BST',
-			blockCreatedOnDisplay: '09.05 BST',
-			blockLastUpdatedDisplay: '11.46 BST',
-			firstPublished: 1570878019000,
-			createdOn: 1569225927000,
-			primaryDateLine: 'Sat 12 Oct 2019 12.00 BST',
-			blockCreatedOn: 1569225927000,
-			blockFirstPublished: 1569225929000,
-			createdOnDisplay: '09.05 BST',
-			lastUpdated: 1570905638000,
+			id: '5d887cc78f0834740f3c0692',
 			elements: [
 				{
-					elementId: 'c0c050e8-68b5-445f-8368-ca08319597e9',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>The world’s three largest money managers have built a combined $300bn fossil fuel investment portfolio using money from people’s private savings and pension contributions, the Guardian can reveal.</p>',
-				},
-				{
-					elementId: '73e46a72-d42b-49ee-85cd-637d41ffe406',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '1536740e-1e8b-4b16-a19e-58a87002a1ea',
+				},
+				{
 					html:
 						'<p>BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP, have continued to grow billion-dollar stakes in some of the most carbon-intensive companies since the Paris agreement, financial data shows.</p>',
-				},
-				{
-					elementId: '649f5b26-7b7d-4de4-98ee-865216a220bd',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The two largest asset managers, BlackRock and Vanguard, have also routinely opposed motions at fossil fuel companies that would have forced directors to take more action on climate change, the analysis reveals.</p>',
+					elementId: '0f41f872-3c90-4106-b30e-09d609c89743',
 				},
 				{
-					elementId: 'fda58d6c-ca3e-4c49-b122-e010aeae6212',
-					role: 'inline',
+					html:
+						'<p>The two largest asset managers, BlackRock and Vanguard, have also routinely opposed motions at fossil fuel companies that would have forced directors to take more action on climate change, the analysis reveals.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'e5a19fbd-2558-4f84-816d-ad829b1e443f',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '1240',
+									width: '1240',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1240.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '1240',
+									width: '1240',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1000',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '500',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/500.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '140',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url:
+									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/140.jpg',
+							},
+						],
+					},
 					data: {
 						alt: 'Fossil fuel holdings: The Vanguard Group',
 						credit: 'Illustration: Guardian Design',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2125,6 +2182,30 @@ export const SpecialReport: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'abaa26cf-fc50-491f-89c0-a5d64cdc1b95',
+				},
+				{
+					html:
+						'<p>The investment rise is driven by the success in the last decade of tracker funds that use algorithms to follow major stock exchange indices such as the FTSE 100 and S&amp;P 500. </p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '5438d065-539b-489f-8439-911a8606891f',
+				},
+				{
+					html:
+						'<p>The Guardian has worked with the thinktank InfluenceMap and the business data specialists ProxyInsight to analyse the role played by asset managers in the financing and management of some of the world’s biggest fossil fuel companies.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '00f0da7f-dcb3-4026-85b7-8e82aebbf66d',
+				},
+				{
+					html:
+						'<p> Figures compiled by <a href="https://influencemap.org/index.html">InfluenceMap</a> show how Blackrock, Vanguard and State Street – known as the big three – have become crucial climate actors in the financial world. They are the largest money managers in the $74tn industry.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '13451d6d-1c44-48c4-b6fc-e9be4d2d3259',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -2136,7 +2217,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1240.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1240.jpg',
 							},
 							{
 								index: 1,
@@ -2148,7 +2229,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg',
 							},
 							{
 								index: 2,
@@ -2159,7 +2240,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1000.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1000.jpg',
 							},
 							{
 								index: 3,
@@ -2170,7 +2251,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/500.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/500.jpg',
 							},
 							{
 								index: 4,
@@ -2181,40 +2262,16 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/140.jpg',
+									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/140.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: 'd9518894-8853-4c72-8f7d-9e00bc700a8f',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The investment rise is driven by the success in the last decade of tracker funds that use algorithms to follow major stock exchange indices such as the FTSE 100 and S&amp;P 500. </p>',
-				},
-				{
-					elementId: '6e2ab8cc-95df-42e1-949e-847278d87eeb',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The Guardian has worked with the thinktank InfluenceMap and the business data specialists ProxyInsight to analyse the role played by asset managers in the financing and management of some of the world’s biggest fossil fuel companies.</p>',
-				},
-				{
-					elementId: '9924e677-7255-4dbd-ad78-20c869a81bb6',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p> Figures compiled by <a href="https://influencemap.org/index.html">InfluenceMap</a> show how Blackrock, Vanguard and State Street – known as the big three – have become crucial climate actors in the financial world. They are the largest money managers in the $74tn industry.</p>',
-				},
-				{
-					elementId: '53ddd4b9-e6d0-413a-91a5-762261aeab78',
-					role: 'inline',
 					data: {
 						alt: 'Fossil fuel holdings: BlackRock',
 						credit: 'Illustration: Guardian Design',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2519,6 +2576,30 @@ export const SpecialReport: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '636878f7-1ed2-4bd7-a17e-69f5f7f135e6',
+				},
+				{
+					html:
+						'<p>According to an analysis of the data, their effective thermal coal, oil and gas reserve holdings through the companies they manage have surged 34.8% since 2016.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '12adeacd-c926-42bd-82ad-7806262ebdff',
+				},
+				{
+					html:
+						'<p>This means they are now the largest investors in public oil, gas and coal companies, managing funds for large pension funds, university endowments and insurance companies.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '511de43f-3956-488c-a031-2a0a378945b0',
+				},
+				{
+					html:
+						'<p>While asset managers do not own the companies in which they invest, they often exercise shareholders rights on behalf of clients to vote on board members and company policy issues. </p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '361e47d4-7adc-41c0-9c32-520ff9fe1925',
+				},
+				{
 					media: {
 						allImages: [
 							{
@@ -2530,7 +2611,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1240.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1240.jpg',
 							},
 							{
 								index: 1,
@@ -2542,7 +2623,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg',
 							},
 							{
 								index: 2,
@@ -2553,7 +2634,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1000.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1000.jpg',
 							},
 							{
 								index: 3,
@@ -2564,7 +2645,7 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/500.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/500.jpg',
 							},
 							{
 								index: 4,
@@ -2575,40 +2656,16 @@ export const SpecialReport: CAPIType = {
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
 								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/140.jpg',
+									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/140.jpg',
 							},
 						],
 					},
-					displayCredit: true,
-				},
-				{
-					elementId: '7bda8033-1d19-4f18-ae0f-f08381f019ae',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>According to an analysis of the data, their effective thermal coal, oil and gas reserve holdings through the companies they manage have surged 34.8% since 2016.</p>',
-				},
-				{
-					elementId: 'c87814cb-e2da-41cf-8d7b-5ed2a01e973d',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>This means they are now the largest investors in public oil, gas and coal companies, managing funds for large pension funds, university endowments and insurance companies.</p>',
-				},
-				{
-					elementId: 'f7b6ee31-061e-45b1-8421-499a878cb8b3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>While asset managers do not own the companies in which they invest, they often exercise shareholders rights on behalf of clients to vote on board members and company policy issues. </p>',
-				},
-				{
-					elementId: '92b12a84-0a7c-4687-ba14-9a7826849f9f',
-					role: 'inline',
 					data: {
 						alt: 'Fossil fuel holdings: State Street Corporation',
 						credit: 'Illustration: Guardian Design',
 					},
+					displayCredit: true,
+					role: 'inline',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2913,234 +2970,187 @@ export const SpecialReport: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1240.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1000',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '500',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '140',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
+					elementId: 'ff5cbb6f-77cb-40da-bee6-1bb2c7fb6f6d',
 				},
 				{
-					elementId: '40146abf-5783-4a6e-830f-ac47500e93d8',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Disclosures for publicly available company reports show that from 2015 to 2019 Vanguard and BlackRock used their votes to frequently oppose efforts to improve climate-related financial disclosures.</p>',
-				},
-				{
-					elementId: '4a13efb1-62aa-4b76-8628-cfe9aa65df7d',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '03e78fc8-a7bc-402c-8907-3f0d94662874',
+				},
+				{
 					html: '<p>The investigation by the Guardian has found:</p>',
-				},
-				{
-					elementId: '0521491f-5902-4e8b-a9f2-aac8fb2143f6',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a2ad94db-ef61-47e9-a98d-856063016499',
+				},
+				{
 					html:
 						'<ul> \n <li><p>Vanguard ($161.1bn), BlackRock ($87.3bn) and State Street ($38.3bn) oversee a combined $286.7bn of shares in oil, coal and gas companies through 1,712 funds. Their total combined portfolio is likely to be higher as the calculation excludes direct holdings and non-listed fund holdings.</p></li> \n <li><p>The potential CO<sub>2</sub> emissions from the investments have increased from 10.593 gigatonnes (Gt) to 14.283Gt since the Paris agreement, equivalent to 38% of global fossil fuel CO<sub>2</sub> emissions last year.</p></li> \n <li><p>BlackRock and Vanguard opposed or abstained on more than 80% of climate-related motions at FTSE 100 and S&amp;P 500 fossil fuel companies between 2015 and 2019, according to data provided by <a href="https://www.proxyinsight.com/about/overview/">ProxyInsight</a>.</p></li> \n <li><p>The big three are among a number of asset managers that offer “climate-friendly” and “sustainable” investment funds that have substantial holdings in fossil fuel companies.</p></li> \n</ul>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b754f55f-fba7-4c62-91c6-c966fa6231eb',
 				},
 				{
-					elementId: 'aee39c24-8408-4fca-9fe6-1d1fd972d03d',
-					scriptUrl:
-						'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
-					alt:
-						'Graph of asset managers voting on climate change resolutions.',
-					_type:
-						'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					url:
 						'https://interactive.guim.co.uk/uploader/embed/2019/10/index-html-2-zip/giv-3902aB667jcgq7fB/',
-					isMandatory: false,
-				},
-				{
-					elementId: '5307634c-b9ff-49bd-9c50-12de7928117d',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>BlackRock, Vanguard and State Street did not challenge the findings.</p>',
-				},
-				{
-					elementId: '5c9115e3-fda4-4266-9cbb-c93f58bb0266',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>They told the Guardian they prioritised private engagements with company boards, where the climate crisis was regularly discussed. They said they had increased the size of their teams responsible for investment stewardship, opting to use their votes as a final resort.</p>',
-				},
-				{
-					elementId: '683282e6-7852-4c26-b7fd-0d85d0696d40',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Vanguard said it neither managed the companies in which it invested nor sought to influence their business strategy. “As a steward of lifetime savings for more than 20 million people around the world, and a practically permanent investor in more than 10,000 companies, Vanguard is concerned about the long-term impact of climate risk,” a spokesman said.</p>',
-				},
-				{
-					elementId: '38ba4bc7-853c-43f0-8a46-e80119a4abeb',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“While voting at shareholder meetings is important … it is only one part of the larger corporate governance process. We regularly engage with companies on our shareholders’ behalf and believe that engagement and broader advocacy, in addition to voting, can effect meaningful changes that generate long-term value for all shareholders.”</p>',
-				},
-				{
-					elementId: '156eba84-6a22-45d4-9bf4-c71a448e11c1',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>BlackRock said it “offers investors a wide range of environmentally sustainable investment options … [and] is also a leading investor in renewable power generation globally. Our award-winning climate research helps investors understand and mitigate the impact of climate change on their portfolios.”</p>',
-				},
-				{
-					elementId: '9a4aa216-1386-41e3-92dd-e17c72742229',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p> State Street said: “If an investor wants to buy an ETF [exchange-traded fund] that tracks the FTSE 100, we would purchase the shares (proportionately) of all the companies in that FTSE 100 index in order to meet the objective of that strategy. That will today undoubtedly include energy companies.</p>',
-				},
-				{
-					elementId: 'e9b58e59-d0e8-48d2-9c85-4186df66bd51',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“We do not proactively determine whether to exclude a particular company or sector since it would be inconsistent with the stated ETF objective. If an investor did want a strategy that considered climate issues or other ESG [environmental, social and governance] factors, that would be a different product with a different index; we can provide that too.”</p>',
-				},
-				{
-					elementId: '36f4880e-7a4a-4608-9115-ddcddc288839',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Asset managers are increasingly finding themselves at the heart of social and environmental issues, and corporate governance experts have <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3282794">raised concerns</a> about conflicts of interest in their business models.</p>',
-				},
-				{
-					elementId: '0ddacda8-7e89-4b02-b8e2-dfec410a61d2',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Campaigners are demanding asset managers vote out company directors who are not deemed to be taking sufficient action.</p>',
-				},
-				{
-					elementId: 'e4caee41-3a9c-48a3-bed1-6111bdba7d7a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In June, the London-based Legal &amp; General, formerly a top 20 investor in ExxonMobil, announced it was selling a $300m stake in the company and would use remaining shares to vote against the chief executive, Darren Woods.</p>',
-				},
-				{
-					elementId: '85238894-2146-4c13-970b-be131ab6da88',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>But environmental shareholder proposals face increasing challenges from the management of fossil fuel companies, which are being sustained by the American regulator, the Securities and Exchange Commission. The SEC declined to comment.</p>',
-				},
-				{
-					elementId: '1f5e9857-6884-4626-bc06-20efa0c3722f',
+					alt:
+						'Graph of asset managers voting on climate change resolutions.',
 					scriptUrl:
 						'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
-					alt: 'Graphs on climate motions making it to a vote.',
+					isMandatory: false,
 					_type:
 						'model.dotcomrendering.pageElements.InteractiveBlockElement',
+					elementId: 'e320a67a-9069-4233-be4d-c69b53923cde',
+				},
+				{
+					html:
+						'<p>BlackRock, Vanguard and State Street did not challenge the findings.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a5bbe40e-6ddf-4479-9206-74b68f04e2e2',
+				},
+				{
+					html:
+						'<p>They told the Guardian they prioritised private engagements with company boards, where the climate crisis was regularly discussed. They said they had increased the size of their teams responsible for investment stewardship, opting to use their votes as a final resort.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '2f8720bd-61b3-43dc-aa56-46afd73b2877',
+				},
+				{
+					html:
+						'<p>Vanguard said it neither managed the companies in which it invested nor sought to influence their business strategy. “As a steward of lifetime savings for more than 20 million people around the world, and a practically permanent investor in more than 10,000 companies, Vanguard is concerned about the long-term impact of climate risk,” a spokesman said.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'bafb1150-cb49-47c4-9f8f-4ad660a7d0ed',
+				},
+				{
+					html:
+						'<p>“While voting at shareholder meetings is important … it is only one part of the larger corporate governance process. We regularly engage with companies on our shareholders’ behalf and believe that engagement and broader advocacy, in addition to voting, can effect meaningful changes that generate long-term value for all shareholders.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '4e218b5e-e5bb-4d08-8f95-13c8ea348331',
+				},
+				{
+					html:
+						'<p>BlackRock said it “offers investors a wide range of environmentally sustainable investment options … [and] is also a leading investor in renewable power generation globally. Our award-winning climate research helps investors understand and mitigate the impact of climate change on their portfolios.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '5863170d-6d23-4e91-8fb3-d114fa34a44f',
+				},
+				{
+					html:
+						'<p> State Street said: “If an investor wants to buy an ETF [exchange-traded fund] that tracks the FTSE 100, we would purchase the shares (proportionately) of all the companies in that FTSE 100 index in order to meet the objective of that strategy. That will today undoubtedly include energy companies.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '25503d1b-0611-487d-8ec4-56397ae15fbd',
+				},
+				{
+					html:
+						'<p>“We do not proactively determine whether to exclude a particular company or sector since it would be inconsistent with the stated ETF objective. If an investor did want a strategy that considered climate issues or other ESG [environmental, social and governance] factors, that would be a different product with a different index; we can provide that too.”</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '1af1f0dc-8494-4275-ab1f-bfdeabf801d4',
+				},
+				{
+					html:
+						'<p>Asset managers are increasingly finding themselves at the heart of social and environmental issues, and corporate governance experts have <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3282794">raised concerns</a> about conflicts of interest in their business models.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '04a42201-f6c2-475b-ae01-64983bc32b04',
+				},
+				{
+					html:
+						'<p>Campaigners are demanding asset managers vote out company directors who are not deemed to be taking sufficient action.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'f8c5082f-d2d4-4e80-a50c-7dad484e652a',
+				},
+				{
+					html:
+						'<p>In June, the London-based Legal &amp; General, formerly a top 20 investor in ExxonMobil, announced it was selling a $300m stake in the company and would use remaining shares to vote against the chief executive, Darren Woods.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '82409fbb-0c3c-4856-8fd4-547c97657845',
+				},
+				{
+					html:
+						'<p>But environmental shareholder proposals face increasing challenges from the management of fossil fuel companies, which are being sustained by the American regulator, the Securities and Exchange Commission. The SEC declined to comment.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '4ad5fe50-8c37-4c2c-9dd7-203d17fde432',
+				},
+				{
 					url:
 						'https://interactive.guim.co.uk/uploader/embed/2019/10/index-html-zip/giv-3902IuFhH1AZI8qy/',
+					alt: 'Graphs on climate motions making it to a vote.',
+					scriptUrl:
+						'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
 					isMandatory: false,
+					_type:
+						'model.dotcomrendering.pageElements.InteractiveBlockElement',
+					elementId: '298b26a4-0592-4de3-95fd-eebbe4200e2c',
 				},
 				{
-					elementId: '35b0eecb-2b40-4f95-b328-d78b6226dd3a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>In April, ExxonMobil shareholders were denied a vote on whether the company should set targets for cutting greenhouse gas emissions by the SEC, which called the proposal an attempt to “micromanage” the company.</p>',
-				},
-				{
-					elementId: '417dc15d-00bb-40aa-9139-14aed894daa9',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'f36ceff6-86d1-47f4-9752-5efafd08bda8',
+				},
+				{
 					html:
 						'<p>Data for the 2019 season of annual general meetings for shareholders, provided by Institutional Shareholder Services, shows that only a quarter of proposals made it to a vote at companies in the US, with 79 of the 105 motions either withdrawn or omitted.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '337000aa-46c5-47e7-994e-221a2228edcc',
 				},
 				{
-					elementId: 'c761eb73-1131-4fa9-91f8-a2ab5fb42950',
-					_type: 'model.dotcomrendering.pageElements.QABlockElement',
-					html:
-						'<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 					id: 'e182ee5f-c378-4474-b7da-79f6b0a671b3',
 					title: 'What is the polluters project?',
+					html:
+						'<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 					credit: '',
+					_type: 'model.dotcomrendering.pageElements.QABlockElement',
+					elementId: '1e7db56c-5d7d-461c-87bc-e439dda0e4f3',
 				},
 				{
-					elementId: 'b3b66d11-1ea4-48ef-932e-641e5e5f0b32',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
 					html:
 						'<p>Despite setbacks, other proposals and engagements by asset managers have been more successful. In an industry first last year, intense pressure from shareholders forced Royal Dutch Shell to set carbon emission targets linked to executive pay. The decision was backed by Climate Action 100+, a group of $35tn investors who are pushing fossil fuel companies to react to the crisis.</p>',
-				},
-				{
-					elementId: '0144ef04-7158-454c-81fb-1e9a0f7b7b0f',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '198a25b8-91db-4bfb-bdb8-378ed7a8fac5',
+				},
+				{
 					html:
 						'<p>Many pension funds and asset managers support schemes to improve information about how climate-critical companies are responding to environmental concerns, including the Transition Pathway Initiative, which grades the boards of fossil fuel, energy and transport companies on their response.</p>',
-				},
-				{
-					elementId: '2980e03c-30d4-4407-b1e9-98d651ed40c4',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'a3638afd-44cd-4791-a24f-f6b9a01e51af',
+				},
+				{
 					html:
 						'<p>BlackRock, Vanguard and State Street are supporters of the Task Force on Climate-related Financial Disclosures, a voluntary scheme chaired by the former New York mayor Michael Bloomberg to improve information.<br></p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'ec9862f6-ba3e-494f-9c05-698ae1374061',
 				},
 			],
-			id: '5d887cc78f0834740f3c0692',
+			createdOn: 1569225927000,
+			createdOnDisplay: '09.05 BST',
+			blockCreatedOn: 1569225927000,
+			blockCreatedOnDisplay: '09.05 BST',
+			lastUpdated: 1570905638000,
+			lastUpdatedDisplay: '19.40 BST',
+			blockLastUpdated: 1570877166000,
+			blockLastUpdatedDisplay: '11.46 BST',
+			firstPublished: 1570878019000,
+			firstPublishedDisplay: '12.00 BST',
+			blockFirstPublished: 1569225929000,
+			blockFirstPublishedDisplay: '09.05 BST',
+			primaryDateLine: 'Sat 12 Oct 2019 12.00 BST',
+			secondaryDateLine: 'Last modified on Sat 12 Oct 2019 19.40 BST',
 		},
 	],
 	linkedData: [

@@ -243,32 +243,32 @@ export const related = {
 		},
 		{
 			url:
-				'https://www.theguardian.com/lifeandstyle/2014/feb/02/pet-hotels-holidays-gourmet-dogs-life',
+				'https://www.theguardian.com/lifeandstyle/2014/dec/21/how-designer-fashion-going-to-dogs-christmas',
 			linkText:
-				'Miniature dogs take the lead  as UK splashes out on its pets',
+				'How designer fashion is going to the dogs this Christmas',
 			showByline: false,
 			byline: 'Sarah Butler',
 			image:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=300&quality=85&auto=format&fit=max&s=c574165954ee448a60d4535b3aa2ea02',
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=300&quality=85&auto=format&fit=max&s=5be6eb25d4ea6b9fcd28347e60ab53e8',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=300&quality=85&auto=format&fit=max&s=c574165954ee448a60d4535b3aa2ea02',
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=300&quality=85&auto=format&fit=max&s=5be6eb25d4ea6b9fcd28347e60ab53e8',
 				'460':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=460&quality=85&auto=format&fit=max&s=7c3fa9a4ac6a2b6366b410c8afc38fe6',
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=460&quality=85&auto=format&fit=max&s=a81a0fe15ffaa4281c6810d54d12c43b',
 			},
-			ageWarning: '7 years',
+			ageWarning: '6 years',
 			isLiveBlog: false,
-			pillar: 'lifestyle',
+			pillar: 'news',
 			designType: 'Article',
 			format: {
 				design: 'ArticleDesign',
-				theme: 'LifestylePillar',
+				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2014-02-02T00:07:01.000Z',
+			webPublicationDate: '2014-12-21T02:21:00.000Z',
 			headline:
-				'Miniature dogs take the lead  as UK splashes out on its pets',
-			shortUrl: 'https://www.theguardian.com/p/3mcf8',
+				'How designer fashion is going to the dogs this Christmas',
+			shortUrl: 'https://www.theguardian.com/p/44c47',
 		},
 		{
 			url:
