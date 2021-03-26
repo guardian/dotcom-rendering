@@ -800,6 +800,7 @@ interface ConfigTypeBrowser {
 	discussionApiClientHeader: string;
 	dcrSentryDsn: string;
 	remoteBanner: boolean;
+	puzzlesBanner: boolean;
 	ausMoment2020Header: boolean;
 	switches: CAPIType['config']['switches'];
 	abTests: CAPIType['config']['abTests'];

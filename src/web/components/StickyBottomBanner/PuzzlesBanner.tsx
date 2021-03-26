@@ -122,7 +122,6 @@ export const canShow = async ({
 	}
 
 	if (isPuzzlesPage && remotePuzzlesBannerConfig) {
-		// TODO: add check of puzzlesBanner switch when this has been added
 		const countryCode = await asyncCountryCode;
 		const hasConsentedToArticleCounts = await getArticleCountConsent();
 		const bannerPayload = buildPayload({
