@@ -20,7 +20,7 @@ const wrapperMargins = css`
 	margin: 18px 0;
 `;
 
-const EPIC_COMPONENT_PATH = '/epic.js';
+const EPIC_COMPONENT_PATH = '/modules/v1/epics/ContributionsEpic.js';
 
 type Meta = {
 	dataFromBraze?: EpicDataFromBraze;
