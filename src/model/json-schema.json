@@ -3945,15 +3945,15 @@
                 "support": {
                     "type": "string"
                 },
-                "gifting": {
+                "supporter": {
                     "type": "string"
                 }
             },
             "required": [
                 "contribute",
-                "gifting",
                 "subscribe",
-                "support"
+                "support",
+                "supporter"
             ]
         },
         "FooterType": {

@@ -530,7 +530,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			</Portal>
 			<HydrateOnce rootId="links-root" waitFor={[user]}>
 				<Links
-					giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
+					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
 					userId={user ? user.userId : undefined}
 					idUrl={CAPI.config.idUrl}
 					mmaUrl={CAPI.config.mmaUrl}
