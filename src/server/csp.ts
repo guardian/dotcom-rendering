@@ -98,9 +98,8 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
 			: ''
 	};
-    script-src 'self' ${assetHashes(scripts)} ${
-		thirdPartyEmbed.instagram ? 'http://www.instagram.com/embed.js' : ''
-	} https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${
+    script-src 'self' ${assetHashes(scripts)} 
+	https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''

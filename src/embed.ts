@@ -20,6 +20,7 @@ import type { DocParser } from 'types/parserContext';
 
 const enum EmbedKind {
 	Generic,
+	Instagram,
 	Spotify,
 	YouTube,
 }
@@ -38,6 +39,12 @@ interface Spotify {
 	height: number;
 }
 
+interface Instagram {
+	kind: EmbedKind.Instagram;
+	id: string;
+	caption: Option<string>;
+}
+
 interface Generic {
 	kind: EmbedKind.Generic;
 	alt: Option<string>;
@@ -52,7 +59,7 @@ interface Generic {
 /**
  * Represents any third-party embed.
  */
-type Embed = Generic | Spotify | YouTube;
+type Embed = Generic | Instagram | Spotify | YouTube;
 
 interface IFrame {
 	src: string;
@@ -138,6 +145,16 @@ const getYoutubeIdParam = (url: URL): Result<string, string> =>
 		`The YouTube 'url' is missing a 'v' parameter: ${url.toString()}`,
 	)(url.searchParams.get('v'));
 
+const extractInstagramUrl = (element: BlockElement): Result<string, string> =>
+	resultFromNullable(
+		"I can't find an 'originalUrl' field for this Instagram embed",
+	)(element.instagramTypeData?.originalUrl);
+
+const getInstagramPostId = (url: URL): Result<string, string> =>
+	resultFromNullable(
+		`The Instagram 'originalUrl' doesn't have an id in the path ${url.toString()}`,
+	)(url.pathname.split('/')[2]);
+
 const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
 	pipe3(
 		extractVideoUrl(element),
@@ -203,6 +220,28 @@ const parseAudio = (parser: DocParser) => (
 	);
 };
 
+const parseInstagram = (element: BlockElement): Result<string, Embed> => {
+	if (element.instagramTypeData === undefined) {
+		return err(
+			"I can't parse this Instagram element, it has no 'instagramTypeData' field",
+		);
+	}
+
+	return pipe3(
+		extractInstagramUrl(element),
+		resultAndThen(parseUrl),
+		resultAndThen(getInstagramPostId),
+		resultMap((id) => ({
+			kind: EmbedKind.Instagram,
+			id,
+			caption: fromNullable(
+				element.instagramTypeData?.caption ??
+					element.instagramTypeData?.alt,
+			),
+		})),
+	);
+};
+
 const parseGeneric = (parser: DocParser) => (
 	element: BlockElement,
 ): Result<string, Embed> => {
@@ -232,4 +271,11 @@ const parseGeneric = (parser: DocParser) => (
 
 export type { Embed, Generic };
 
-export { EmbedKind, parseVideo, parseAudio, parseGeneric, youtubeUrl };
+export {
+	EmbedKind,
+	parseVideo,
+	parseAudio,
+	parseGeneric,
+	parseInstagram,
+	youtubeUrl,
+};

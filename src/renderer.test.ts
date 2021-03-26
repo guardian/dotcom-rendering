@@ -84,8 +84,12 @@ const tweetElement = (): BodyElement => ({
 });
 
 const instagramElement = (): BodyElement => ({
-	kind: ElementKind.Instagram,
-	html: '<blockquote>Instagram</blockquote>',
+	kind: ElementKind.Embed,
+	embed: {
+		kind: EmbedKind.Instagram,
+		id: 'embedId',
+		caption: some('<blockquote>Instagram</blockquote>'),
+	},
 });
 
 const embedElement: BodyElement = {
@@ -345,7 +349,7 @@ describe('Renders different types of elements', () => {
 		const nodes = render(instagramElement());
 		const instagram = nodes.flat()[0];
 		expect(getHtml(instagram)).toBe(
-			'<div><blockquote>Instagram</blockquote></div>',
+			'<iframe src="https://www.instagram.com/p/embedId/embed" height="830" title="&lt;blockquote&gt;Instagram&lt;/blockquote&gt;"></iframe>',
 		);
 	});
 
@@ -448,7 +452,7 @@ describe('Renders different types of elements', () => {
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
-			'<div kind="18" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
+			'<div kind="17" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
 		);
 	});
 
@@ -527,7 +531,7 @@ describe('Renders different types of Editions elements', () => {
 		const nodes = renderEditions(instagramElement());
 		const instagram = nodes.flat()[0];
 		expect(getHtml(instagram)).toBe(
-			'<div><blockquote>Instagram</blockquote></div>',
+			'<iframe src="https://www.instagram.com/p/embedId/embed" height="830" title="&lt;blockquote&gt;Instagram&lt;/blockquote&gt;"></iframe>',
 		);
 	});
 
@@ -630,7 +634,7 @@ describe('Renders different types of Editions elements', () => {
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
-			'<div kind="18" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
+			'<div kind="17" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
 		);
 	});
 

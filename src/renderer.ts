@@ -38,7 +38,6 @@ import type {
 	BodyElement,
 	GuideAtom as GuideAtomElement,
 	Image,
-	Instagram,
 	InteractiveAtom as InteractiveAtomElement,
 	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
 	MediaAtom as MediaAtomElement,
@@ -489,16 +488,6 @@ const textRenderer = (
 		: text(element.doc, format, supportsDarkMode);
 };
 
-const instagramRenderer = (element: Instagram): ReactNode => {
-	const props = {
-		dangerouslySetInnerHTML: {
-			__html: element.html,
-		},
-	};
-
-	return h('div', props);
-};
-
 const guideAtomRenderer = (
 	format: Format,
 	element: GuideAtomElement,
@@ -735,9 +724,6 @@ const render = (format: Format, excludeStyles = false) => (
 		case ElementKind.Embed:
 			return h(EmbedComponent, { embed: element.embed });
 
-		case ElementKind.Instagram:
-			return instagramRenderer(element);
-
 		case ElementKind.ExplainerAtom: {
 			return h(ExplainerAtom, { ...element });
 		}
@@ -804,9 +790,6 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 
 		case ElementKind.Embed:
 			return h(EmbedComponent, { embed: element.embed });
-
-		case ElementKind.Instagram:
-			return instagramRenderer(element);
 
 		case ElementKind.ExplainerAtom:
 			return h(ExplainerAtom, { ...element });

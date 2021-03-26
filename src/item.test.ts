@@ -499,7 +499,7 @@ describe('instagram elements', () => {
 			assets: [],
 			instagramTypeData: {
 				html: '<p>Instagram post<p>',
-				originalUrl: '',
+				originalUrl: 'https://www.instagram.com/p/B9_e-NNlEiC/',
 				title: '',
 				source: '',
 				authorUrl: '',
@@ -508,10 +508,10 @@ describe('instagram elements', () => {
 		};
 		const item = f(articleContentWith(instagramElement)) as Standard;
 		const element = getFirstBody(item);
-		expect(element.kind).toBe(ElementKind.Instagram);
+		expect(element.kind).toBe(ElementKind.Embed);
 	});
 
-	test('filters embed elements without instagramTypeData html', () => {
+	test('filters embed elements with empty instagramTypeData originalUrl', () => {
 		const instagramElement = {
 			type: ElementType.INSTAGRAM,
 			assets: [],
