@@ -14009,13 +14009,7 @@ exports[`Storyshots Footer Default 1`] = `
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .emotion-0 {
-    color: #999999;
-  }
-}
-
-.emotion-1 {
+.emotion-0 a {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.35;
@@ -14026,32 +14020,38 @@ exports[`Storyshots Footer Default 1`] = `
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1 {
+  .emotion-0 {
+    color: #999999;
+  }
+
+  .emotion-0 a {
     color: #999999;
   }
 }
 
-<div
+<footer
   className="emotion-0"
 >
-  © 
-  2021
-   Guardian News and Media Limited or its affiliated companies. All rights reserved.
-  <br />
-  <a
-    className="emotion-1"
-    href="https://www.theguardian.com/help/privacy-settings"
+  <div
+    id="js-footer"
   >
-    Privacy Settings
-  </a>
-   · 
-  <a
-    className="emotion-1"
-    href="https://www.theguardian.com/help/privacy-policy"
-  >
-    Privacy Policy
-  </a>
-</div>
+    © 
+    2021
+     Guardian News and Media Limited or its affiliated companies. All rights reserved.
+    <br />
+    <a
+      href="https://www.theguardian.com/help/privacy-settings"
+    >
+      Privacy Settings
+    </a>
+     · 
+    <a
+      href="https://www.theguardian.com/help/privacy-policy"
+    >
+      Privacy Policy
+    </a>
+  </div>
+</footer>
 `;
 
 exports[`Storyshots Footer With Ccpa 1`] = `
@@ -14074,13 +14074,7 @@ exports[`Storyshots Footer With Ccpa 1`] = `
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .emotion-0 {
-    color: #999999;
-  }
-}
-
-.emotion-1 {
+.emotion-0 a {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.35;
@@ -14091,32 +14085,38 @@ exports[`Storyshots Footer With Ccpa 1`] = `
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1 {
+  .emotion-0 {
+    color: #999999;
+  }
+
+  .emotion-0 a {
     color: #999999;
   }
 }
 
-<div
+<footer
   className="emotion-0"
 >
-  © 
-  2021
-   Guardian News and Media Limited or its affiliated companies. All rights reserved.
-  <br />
-  <a
-    className="emotion-1"
-    href="https://www.theguardian.com/help/privacy-policy"
+  <div
+    id="js-footer"
   >
-    California Residents - Do Not Sell
-  </a>
-   · 
-  <a
-    className="emotion-1"
-    href="https://www.theguardian.com/help/privacy-policy"
-  >
-    Privacy Policy
-  </a>
-</div>
+    © 
+    2021
+     Guardian News and Media Limited or its affiliated companies. All rights reserved.
+    <br />
+    <a
+      href="https://www.theguardian.com/help/privacy-policy"
+    >
+      California Residents - Do Not Sell
+    </a>
+     · 
+    <a
+      href="https://www.theguardian.com/help/privacy-policy"
+    >
+      Privacy Policy
+    </a>
+  </div>
+</footer>
 `;
 
 exports[`Storyshots Headline Analysis 1`] = `

@@ -1,15 +1,19 @@
 // ----- Imports ----- //
+
 import { withKnobs } from '@storybook/addon-knobs';
-import FooterCcpa from 'components/shared/footer';
+import Footer from 'components/footer';
 import type { FC } from 'react';
 
 // ----- Stories ----- //
-const WithCcpa: FC = () => <FooterCcpa isCcpa={true} />;
 
-const Default: FC = () => <FooterCcpa isCcpa={false} />;
+const WithCcpa: FC = () => <Footer isCcpa={true} />;
+
+const Default: FC = () => <Footer isCcpa={false} />;
+
+// ----- Exports ----- //
 
 export default {
-	component: FooterCcpa,
+	component: Footer,
 	title: 'Footer',
 	decorators: [withKnobs],
 };

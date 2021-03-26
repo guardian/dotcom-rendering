@@ -5,11 +5,11 @@ import { Lines } from '@guardian/src-ed-lines';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import { map, withDefault } from '@guardian/types';
+import Footer from 'components/footer';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Series from 'components/series';
 import Body from 'components/shared/articleBody';
-import FooterCcpa from 'components/shared/footer';
 import RelatedContent from 'components/shared/relatedContent';
 import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
@@ -83,9 +83,7 @@ const Labs: FC<Props> = ({ item, children }) => {
 			<section css={onwardStyles}>
 				<RelatedContent content={item.relatedContent} />
 			</section>
-			<div id="articleFooter">
-				<FooterCcpa isCcpa={false} />
-			</div>
+			<Footer isCcpa={false} />
 		</main>
 	);
 };

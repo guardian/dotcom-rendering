@@ -8,13 +8,13 @@ import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import { Display, map, none, withDefault } from '@guardian/types';
 import FootballScores from 'components/footballScores';
+import Footer from 'components/footer';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Metadata from 'components/metadata';
 import Series from 'components/series';
 import Body from 'components/shared/articleBody';
 import Epic from 'components/shared/epic';
-import FooterCcpa from 'components/shared/footer';
 import OptionalLogo from 'components/shared/logo';
 import RelatedContent from 'components/shared/relatedContent';
 import Tags from 'components/shared/tags';
@@ -162,9 +162,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 				<RelatedContent content={item.relatedContent} />
 			</section>
 			{commentContainer}
-			<div id="articleFooter">
-				<FooterCcpa isCcpa={false} />
-			</div>
+			<Footer isCcpa={false} />
 		</main>
 	);
 };
