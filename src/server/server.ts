@@ -198,10 +198,10 @@ async function serveEditionsArticlePost(
 		// The "req.body" should contain a 'Content' object which fetched by the
 		// Edition backend from the capi
 		const content = await capiContentDecoder(req.body);
-		const mockedRenderingRequest: RenderingRequest = {
+		const renderingRequest: RenderingRequest = {
 			content,
 		};
-		void serveArticle(mockedRenderingRequest, res, true);
+		void serveArticle(renderingRequest, res, true);
 	} catch (e) {
 		logger.error('This error occurred', e);
 		next(e);
