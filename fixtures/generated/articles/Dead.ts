@@ -1218,6 +1218,8 @@ export const Dead: CAPIType = {
 					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			footer: {
 				contribute:
@@ -1228,6 +1230,8 @@ export const Dead: CAPIType = {
 					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 			},
 			sideMenu: {
 				contribute:
@@ -1238,6 +1242,8 @@ export const Dead: CAPIType = {
 					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
@@ -1248,6 +1254,8 @@ export const Dead: CAPIType = {
 					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			ampFooter: {
 				contribute:
@@ -1258,6 +1266,8 @@ export const Dead: CAPIType = {
 					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
 	},
@@ -1959,7 +1969,7 @@ export const Dead: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '22daf6d7-84c0-41d3-b3bc-1e01594b1596',
+			elementId: '29e9587e-6ddc-4374-980b-4f159ba61f52',
 		},
 	],
 	webPublicationDate: '2021-02-19T19:41:53.000Z',
@@ -1972,20 +1982,20 @@ export const Dead: CAPIType = {
 						'<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '90a81a3a-bfb6-4552-8a6a-9f8ffc04e612',
+					elementId: '0e5c96b4-c7b5-46a7-8f77-96dbf025669e',
 				},
 				{
 					html: '<p>To recap:</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'd7709e27-3a9a-47cc-b20d-f0c636a37b02',
+					elementId: 'e4e09ee6-d11d-495f-8412-12c5878ed313',
 				},
 				{
 					html:
 						'<ul> \n <li>The rover is “healthy” and undergoing systems testing.</li> \n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li> \n <li>The images include the first color images beamed directly from <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> as opposed to images touched up later.</li> \n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li> \n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li> \n <li>The wheeled rover could begin to move around its new home as early as late February.</li> \n <li>The rover’s mini helicopter could launch as early as April.</li> \n <li>Its broad mission is to stay on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li> \n <li>The point is to determine whether there was life on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> and subsidiary questions.</li> \n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li> \n</ul>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ec5ee99d-35fb-45ec-a592-bb07bd40ea6b',
+					elementId: '85f720fe-4fae-4e12-bd50-0bf7ecff1143',
 				},
 			],
 			createdOn: 1613762399000,
@@ -2010,7 +2020,7 @@ export const Dead: CAPIType = {
 					html: '<p>#TBT</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '02be41fb-7689-42c4-8139-b81b277e679d',
+					elementId: '884c6811-37b9-49f0-af6a-9cfc14f78ac9',
 				},
 				{
 					id: '60606947-4f1f-4343-9bb7-000e91502129',
@@ -2049,7 +2059,7 @@ export const Dead: CAPIType = {
 					duration: 142,
 					_type:
 						'model.dotcomrendering.pageElements.YoutubeBlockElement',
-					elementId: '50e37966-11b6-442c-93e2-3ea35e1651d3',
+					elementId: 'dcb0736b-5688-4611-be27-0c3840755aad',
 				},
 			],
 			createdOn: 1613762355000,
@@ -2074,7 +2084,7 @@ export const Dead: CAPIType = {
 					html: '<p>#FF</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8789c743-e25e-4b2f-a489-bd79f325119f',
+					elementId: '27a9bb13-cb2c-4bae-9f55-de9a8d2cbd06',
 				},
 				{
 					html:
@@ -2088,7 +2098,7 @@ export const Dead: CAPIType = {
 					source: 'Twitter',
 					_type:
 						'model.dotcomrendering.pageElements.TweetBlockElement',
-					elementId: 'dc03570a-c4e4-474a-98e6-5bad37a86736',
+					elementId: '14b6cd7a-f153-4731-a42c-542664d173b2',
 				},
 				{
 					html:
@@ -2102,7 +2112,7 @@ export const Dead: CAPIType = {
 					source: 'Twitter',
 					_type:
 						'model.dotcomrendering.pageElements.TweetBlockElement',
-					elementId: 'cfa1f6fb-db4a-451b-a301-660f38259b15',
+					elementId: '347461e6-1beb-42d6-abd5-389f41f806a2',
 				},
 			],
 			createdOn: 1613761882000,
@@ -2128,7 +2138,7 @@ export const Dead: CAPIType = {
 						'<p>Have you typed “<a href="https://www.google.com/search?q=perseverance&amp;oq=pers&amp;aqs=chrome.0.69i59j69i57j0l3j46j69i60j69i61.1091j0j7&amp;sourceid=chrome&amp;ie=UTF-8">perseverance</a>” into Google today? </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '58aed24b-d709-40db-ad65-de74feaab0f3',
+					elementId: 'ce344bc6-98dd-4e0e-bc30-59195be58c6e',
 				},
 			],
 			createdOn: 1613761671000,
@@ -2154,14 +2164,14 @@ export const Dead: CAPIType = {
 						'<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'cd6428e4-460c-4dfc-9218-7e65aa38e310',
+					elementId: '64254243-cd4f-4dcd-826a-ad13d135f5c5',
 				},
 				{
 					html:
 						'<p>Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life. <br></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '40e4d945-6747-42a1-9cad-7649f12f327d',
+					elementId: '15f7eff9-d909-4bdc-81a7-a940eb829664',
 				},
 			],
 			createdOn: 1613761187000,
@@ -2187,20 +2197,20 @@ export const Dead: CAPIType = {
 						'<p>The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the <a href="https://mars.nasa.gov/mars2020/">Nasa web site</a>.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'f840b0cc-927b-48bd-b7cf-82f61afd0e0f',
+					elementId: 'c5d7ae80-d6e0-4732-9739-e2c1214e353a',
 				},
 				{
 					html: '<p>McGregor signs off:</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'bbf88904-7bda-43a0-b49f-4aeca6262d67',
+					elementId: '1f0346bf-0631-4d88-b794-7e13f5ac54c9',
 				},
 				{
 					html:
 						'<p>“Everyone have a great day, on Earth and on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a>.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '19bf7d54-b6cf-4770-a496-958bf1b205c7',
+					elementId: '4f79c3da-00b9-41a3-ac54-6af56279e34b',
 				},
 			],
 			createdOn: 1613761082000,
@@ -2226,14 +2236,14 @@ export const Dead: CAPIType = {
 						'<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c5d2c88f-103f-41db-80c4-26585a8d9075',
+					elementId: 'ab244e35-7737-4957-93c1-8d2187fef26f',
 				},
 				{
 					html:
 						'<p>After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour! <br></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '2cc7e084-5387-4f33-8a2f-ee79730154a7',
+					elementId: 'c66b7bec-c3eb-4b48-979f-b50c78e43d49',
 				},
 			],
 			createdOn: 1613760877000,
@@ -2259,20 +2269,20 @@ export const Dead: CAPIType = {
 						'<p>Next question: <strong>How did you celebrate?</strong></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'cd5bef28-2fb9-4754-bf53-3d128b4ab672',
+					elementId: '6db7d21d-1028-4c7a-964e-d4eda9b014ff',
 				},
 				{
 					html: '<p>Answers include: </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'b501249c-e41d-42ac-a4dc-dd10c6d537f2',
+					elementId: '22593447-7d78-4df1-8a9a-634a9acbb23a',
 				},
 				{
 					html:
 						'<ul> \n <li>Virtual happy hour</li> \n <li>“Socially distanced consumption of ice cream outdoors”</li> \n <li>“I went home and just passed out from just the excitement of the day”</li> \n <li>“In the coming days I’ll definitely be having a glass of wine”</li> \n <li>“It was super-exciting”</li> \n <li>“We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing”</li> \n <li>“Business as usual for a science team working on a <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> rover”</li> \n</ul>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '448194cf-9a0a-4fbe-ae68-47b7e70b4672',
+					elementId: '2475d3d1-f413-4ed9-a5ea-2a83227dda51',
 				},
 			],
 			createdOn: 1613760692000,
@@ -2298,35 +2308,35 @@ export const Dead: CAPIType = {
 						'<p>Another key question: <strong>When will the rover drive? </strong></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '7e210173-0549-4741-9878-a9e7c8b3fba2',
+					elementId: '32a12986-3def-4ede-a35d-90036aa849ae',
 				},
 				{
 					html:
 						'<p>“We’re anticipating the earliest... would be sol 8 or 9... our current best estimate.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'b1ff0748-07a5-4643-a5cf-09525fdfd08f',
+					elementId: 'c96b2e93-2b93-4c98-b9d2-6993aa17331f',
 				},
 				{
 					html:
 						'<p>“Maybe a short drive just to check everything out...</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '5c8cfb35-3b28-4533-9aa6-98d3b1d1a5e5',
+					elementId: 'aa586af9-1f55-476d-aa74-35d4ce74699d',
 				},
 				{
 					html:
 						'<p>“We’ll also be figuring out the route and direction we need to go.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8562953a-11ca-4db3-8d0a-f8b3b55c2834',
+					elementId: '4a404e9f-b2ce-4d06-b262-7b3af5cd8ec6',
 				},
 				{
 					html:
 						'<p>That means rover could rove before February is out. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '96589aa5-c71c-4835-ab6e-76f74d7d16bb',
+					elementId: '0caddaa5-ac5b-472b-8f7e-4b9408378b5f',
 				},
 			],
 			createdOn: 1613760568000,
@@ -2352,7 +2362,7 @@ export const Dead: CAPIType = {
 						'<p>The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a>. It is unknown whether the holes indicate volcanic or sedimentary rock. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '7b7c4874-0946-4c8e-a286-17d0bc67351d',
+					elementId: '3038d4ae-ed73-49fd-810e-49bf83593f0e',
 				},
 				{
 					media: {
@@ -2739,7 +2749,7 @@ export const Dead: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'a7590842-c18f-4c7a-887c-002f3fcea65a',
+					elementId: 'ce307cda-2755-41aa-986a-137b0f6df653',
 				},
 			],
 			createdOn: 1613760452000,
@@ -2765,14 +2775,14 @@ export const Dead: CAPIType = {
 						'<p>Attached to the rover’s belly is a diminutive helicopter called Ingenuity. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0fcf717f-53fb-4494-b76a-511bbc99937a',
+					elementId: '97c155fe-da99-41d9-aea9-7cc8b88a625f',
 				},
 				{
 					html:
 						'<p>The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity. <br></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ba183482-924e-4aa7-bdcc-c4b0e224377c',
+					elementId: '846ce87e-cc8d-48ed-af41-0d1db71b9d07',
 				},
 				{
 					media: {
@@ -3159,7 +3169,7 @@ export const Dead: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '879abf7f-04c2-47fc-8e30-1ca43e16f2d7',
+					elementId: 'dfd84b95-0d33-45dd-a33b-ce35dec3685a',
 				},
 			],
 			createdOn: 1613760365000,
@@ -3185,14 +3195,14 @@ export const Dead: CAPIType = {
 						'<p>Key question: <strong>how long till they fly the helicopter?</strong> </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e4e9c12e-132c-4541-a20a-62c602cf0588',
+					elementId: 'dd81cefd-2f18-420a-b12c-02212768d1ed',
 				},
 				{
 					html:
 						'<p>“Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e161723d-2d48-467e-a15f-3c3e83757625',
+					elementId: '1a9f2809-4ce0-41ec-9fb5-49145ae07762',
 				},
 			],
 			createdOn: 1613760134000,
@@ -3598,7 +3608,7 @@ export const Dead: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'ed04a226-594e-4e36-b8dd-bbb97e7526d1',
+					elementId: '42087bed-d060-4305-8bea-83dcbe62bebf',
 				},
 			],
 			createdOn: 1613760107000,
@@ -4766,7 +4776,7 @@ export const Dead: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'ddf501ed-4e35-444f-8091-4e6130319844',
+					elementId: 'f66ce908-c29b-49d4-812c-0347299fe791',
 				},
 			],
 			createdOn: 1613758905000,
@@ -4794,14 +4804,14 @@ export const Dead: CAPIType = {
 						'<p>Steltzner is showing some of the most fantastic images from space explorations past, from moonshots to the Hubble telescope. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '41e55db4-e886-4575-bf77-36b8d1e69a27',
+					elementId: 'b54d0860-9834-4be1-950b-1f4d285cb69d',
 				},
 				{
 					html:
 						'<p>He proposes an image of the dangling Perseverance Rover taken yesterday – it looks like a futuristic marionette – as the next entry in this cosmic scrapbook. <br></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8557f805-d5dc-4a77-a447-d6a5ac94a276',
+					elementId: '44dee41e-700b-4657-8ee3-aea35c8d0a5f',
 				},
 			],
 			createdOn: 1613757849000,
@@ -4829,35 +4839,35 @@ export const Dead: CAPIType = {
 						'<p>Members of the National Aeronautics and <a href="https://www.theguardian.com/science/space" data-component="auto-linked-tag">Space</a> Administration (Nasa) team that put a rover on Mars on Thursday are preparing to host a news conference and answer questions about the mission.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'b1a01f5d-528f-4ad1-87b1-63fea5310818',
+					elementId: '834e9b35-a9e3-45de-8770-e605486781b1',
 				},
 				{
 					html:
 						'<p>The rover, called Perseverance or Percy for short, is on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> to search for signs of ancient life and collect samples to be returned by a future mission. About the size of a car, the wheeled rover is equipped with cameras, microphones, drills and even a small helicopter. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '2b32bf13-4c78-45bd-b486-1e79676419f9',
+					elementId: '29c2e378-914d-4d26-a14b-c5e2bbbd0d79',
 				},
 				{
 					html:
 						'<p>Guardian science correspondent Natalie Grover reports of Percy’s mission:</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '65cd4b1d-bbc2-4cb7-9615-defc927405d3',
+					elementId: '00b60f91-1ccd-4f81-abc2-d973a794265f',
 				},
 				{
 					html:
 						'<blockquote class="quoted"> \n <p>Previous Mars missions including <a href="https://viewer.gutools.co.uk/science/2013/jul/28/curiosity-rover-descent-mars-nasa">Curiosity</a> and Opportunity have suggested Mars was once a wet planet with an environment likely to have been supportive of life billions of years ago. Astrobiologists hope this latest mission can offer some evidence to prove whether that was the case.</p> \n</blockquote>',
 					_type:
 						'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-					elementId: 'db871212-1b9a-4bfe-9d68-dfa84bd6c80e',
+					elementId: '9888f078-bfa7-4fd6-8ba8-e5d1ae7f5ab7',
 				},
 				{
 					html:
 						'<p>The <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a> scientists appear to feel they may be tantalizingly close to a discovery that could change the way we see the universe and our home in it. Here was the scene in the control room near Los Angeles just before 1pm local time on Thursday when Percy’s safe touchdown on Mars was confirmed:<br></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '18e25848-769a-4753-8986-b720ef5523dc',
+					elementId: '69b91b97-f83d-4ff7-8b84-04cc4ccd64b9',
 				},
 				{
 					url: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
@@ -4871,20 +4881,20 @@ export const Dead: CAPIType = {
 					source: 'YouTube',
 					_type:
 						'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-					elementId: '82756b57-38f3-4ebc-801f-14e7a34a746e',
+					elementId: '895c493f-8085-444a-b509-f0579ff459f3',
 				},
 				{
 					html:
 						'<p>The robotic vehicle sailed through space for nearly seven months, covering 293m miles (472m km) before piercing the Martian atmosphere at 12,000mph (19,000km/h) to begin its approach to touchdown on the planet’s surface.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8f8af7e3-15d6-4213-bb4a-b5fad563e801',
+					elementId: '6dfe4706-4dd0-43aa-ad5b-9ff6be00c497',
 				},
 				{
 					html: '<p>Thank you for joining our live coverage. </p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '378d0b22-f645-462d-b457-4952361f6e96',
+					elementId: '387a74a2-4104-436f-b7e8-0a211871e665',
 				},
 			],
 			createdOn: 1613746372000,

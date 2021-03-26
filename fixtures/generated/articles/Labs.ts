@@ -1032,6 +1032,8 @@ export const Labs: CAPIType = {
 					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			footer: {
 				contribute:
@@ -1042,6 +1044,8 @@ export const Labs: CAPIType = {
 					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 			},
 			sideMenu: {
 				contribute:
@@ -1052,6 +1056,8 @@ export const Labs: CAPIType = {
 					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
@@ -1062,6 +1068,8 @@ export const Labs: CAPIType = {
 					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			ampFooter: {
 				contribute:
@@ -1072,6 +1080,8 @@ export const Labs: CAPIType = {
 					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
 				gifting:
 					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
 	},
@@ -1723,7 +1733,7 @@ export const Labs: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'de7cba88-e268-4056-89fd-ea54309301e1',
+			elementId: '0d874c98-b15e-46c4-bb32-45341a31eee3',
 		},
 	],
 	webPublicationDate: '2021-03-16T13:02:21.000Z',
@@ -1736,21 +1746,21 @@ export const Labs: CAPIType = {
 						'<p>Women’s football has been a travelling show since it began. In the years of its infancy, in the late 19th century, exhibition matches featuring all-female teams were staged all over the UK, from Brighton to Newcastle, Bristol to Edinburgh. They were also hugely popular, drawing crowds of tens of thousands.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ef848161-61c9-4281-b335-6c9b42dfd9e7',
+					elementId: 'ed2ef009-f10c-406d-8b2d-b58a98a3d1b7',
 				},
 				{
 					html:
 						'<p>Some drew too much attention. The first recorded “international” games took place in 1881 when a team of English players travelled to Scotland and during their second encounter, in Glasgow, heckles turned into a pitch invasion, forcing the women to take shelter in their horse-drawn bus. Not long after that, Scotland banned women from playing, which is another theme that returns frequently in the history of the game across the globe. It’s no small miracle that women’s football is thriving today, given the decades of neglect and opposition it has endured.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '4bd1983e-863d-41f7-8c1c-eb31b7336612',
+					elementId: '8743be0a-0694-4237-90d8-c54e320ba2da',
 				},
 				{
 					html:
 						'<p>For no less than half of the 20th century, the English Football Association (FA) refused to allow women to play on any of its grounds. It claimed that the game was damaging to women’s health and many doctors supported its stance. In reality, the ban was a panicked response to the increasing take-up of the game by women during the first world war.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '12ed7c93-af2d-42e0-b58d-1f5a2ea39bac',
+					elementId: '57e40ec7-1bbf-4e17-ae95-006e70fe65ed',
 				},
 				{
 					media: {
@@ -2137,49 +2147,49 @@ export const Labs: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'ef97478c-941b-41da-9c91-c69d9d77910e',
+					elementId: '2799f2d3-d6b5-428d-bc90-44071f08ba47',
 				},
 				{
 					html:
 						'<p>After its Victorian beginnings, it was the social upheaval of war that had established the women’s game in Britain. With the football league cancelled as young men were sent to battle, the women who replaced them at the munitions factories had kickabouts in their break times, and played matches on their days off. Soon, ladies’ tournaments began to take hold. The Dick, Kerr Ladies FC, based in Preston, garnered such a powerful reputation that they played two matches a week, and in 1920 staged a pioneering European fixture when they took on a French team assembled by sporting activist Alice Milliat.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '694e4165-5a15-4154-8452-6f63a9d6f5a0',
+					elementId: 'be10d7d8-d158-4779-bdeb-f70fde7dd92e',
 				},
 				{
 					html:
 						'<p>A year later, the FA issued its ban, and levels of participation in the UK collapsed. A few determined souls kept the flame burning. The Manchester Corinthians Ladies – formed in 1949 by Percy Ashley because his daughter Doris wanted a team to play for – became the centre of the game in Britain, but they had to travel to find people to play. Over the next decade, “Dynamite” Doris and her Corinthians teammates would tour Europe, South America and North Africa in their hunt for opposition.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '959e53ab-fa4c-467b-be0f-cf8d7588c918',
+					elementId: '5ea6c483-0f14-4520-a908-bf17ec9d886b',
 				},
 				{
 					html:
 						'<p>Plenty of countries had their own bans on women’s football: Norway, France, Brazil and West Germany all outlawed it at various times, and an entire generation of women were relegated to playing in public parks, rugby pitches, and even greyhound tracks. The women’s game developed sporadically as a result, whenever and wherever it could find a home.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '84b3835f-ed07-4fdc-8cde-21e70c96debb',
+					elementId: 'e6e4a002-3fb8-4257-afc9-9db28f31d28f',
 				},
 				{
 					html:
 						'<p>It was Italy who took up the baton, hosting the first women’s European tournament in 1969 (the European Competition for Women’s Football) and the first unofficial women’s world cup – sponsored by Italian drinks company Martini &amp; Rossi – a year later. Both events were popular and another “Women’s World Cup” was staged in 1971 – an all-singing, all-dancing affair at the Azteca stadium in Mexico, dressed in pink livery and surrounded by pop-up hair and beauty salons.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '9c5dc80d-049c-4402-9f60-4703a0e58f07',
+					elementId: 'e19af649-3a60-4997-bacf-250d1da95dfe',
 				},
 				{
 					html:
 						'<p>The English FA’s ban had only just been lifted, and it was an unofficial team, under the management of Harry Batt, who played Mexico and Argentina in the group stages. Despite losing all three of their games, they were received like rock stars by Mexican sports fans – and banned from representative football for three months on their return to England.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a0c6ced8-a5db-414e-944d-03493e5c6d48',
+					elementId: '9e0e9b95-5d86-44e6-a657-d2a7c4c49e7e',
 				},
 				{
 					html:
 						'<p>The first official England women’s team played its debut match against Scotland in 1972; they came back from 2-1 down at half time to win 3-2, Pat “Thunder” Davies scoring the decisive goals. Davies was a member of the Southampton team that had won the first women’s FA Cup the previous year, and which went on to dominate the game throughout the 1970s.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '22cb620b-e734-488d-86d8-a3711b8ef000',
+					elementId: 'ef1c71a6-b904-4725-b9d7-e7f31d0c6200',
 				},
 				{
 					media: {
@@ -2567,42 +2577,42 @@ export const Labs: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '503ab846-6fbd-4ede-b24e-0aeba6995844',
+					elementId: 'c9bce784-bad7-4622-895e-cd39c5f38173',
 				},
 				{
 					html:
 						'<p>Sweden, Norway and Denmark were all establishing themselves as powerhouses of the women’s game, and Sweden would become the first ever champions of the European Competition for Women’s Football<strong> </strong>in 1984 (the women’s equivalent of the Uefa <a href="https://en.wikipedia.org/wiki/UEFA_European_Championship" rel="nofollow">European Championship</a>) after beating England on penalties at Kenilworth Road. Throughout the 1980s, England’s players – an eclectic, amateur mix of office workers, sales assistants, civil servants and engineers – were increasingly drawn from the all-conquering Doncaster Rovers Belles, under the leadership of captain Gillian Coultard.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a6f2df9b-f936-497b-9b23-c06fe9771c65',
+					elementId: 'ee4ebdf7-410a-4084-a074-db6ccb48ad01',
 				},
 				{
 					html:
 						'<p>But other nations were rising, too. It was China who hosted Fifa’s first international championship for women, the Women’s World Cup, in 1991, and the United States that won it, beating Norway 2-1 in the final. That victory marked the beginning of more than 20 years of US excellence, including one of the most memorable and defining moments in women’s football: Brandi Chastain’s left-footed penalty to beat Chinese goalkeeper Gao Hong and win the 1999 World Cup. The picture of her shirt-waving celebration made the cover of Time magazine.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a23c5caa-1337-4b00-a39a-493862947d7a',
+					elementId: '591f2107-91cf-44df-afca-5699fa6e08c7',
 				},
 				{
 					html:
 						'<p>A subsequent attempt to establish a pioneering professional league in the US was not successful and Women’s United Soccer Association (WUSA) was wound up after three years, in 2003, despite a roster of global talent. But the venture was proof of the game’s new ambition and presaged a 21st-century revolution in women’s sport. More and more footballing superstars followed Chastain into mainstream fame: US striker Mia Hamm, Germany’s Birgit Prinz, Brazil’s Marta Vieira da Silva, England’s Kelly Smith, Japan’s Homare Sawa. By 2015, the women’s World Cup had expanded to 24 teams and was reaching record-breaking audiences.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c498cfdc-e621-429d-8d29-5ce2e021d971',
+					elementId: '72cedd4e-8d01-425d-be79-a4607882786d',
 				},
 				{
 					html:
 						'<p>And things started getting more legitimate over time – in England, the Women’s Super and Champions leagues finally became full-time, professional affairs. And after an immensely successful Women’s World Cup in 2019 – which included the largest viewership in the game’s history – there are now 34 countries in the world where women play professional football. That number is only set to grow.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c042afc8-e4bb-4e3a-ac6d-2bcd1a730b85',
+					elementId: 'd4fd94d5-2b44-4a2f-92fb-bc16af066dca',
 				},
 				{
 					html:
 						'<p><em>Expedia believes that travel, like football, is better experienced together. That’s why – as the official travel companion of Liverpool FC – Expedia will be with you all the way, as soon as we can travel together again. To get inspiration for your next trip, visit <a href="https://withyoualltheway.expedia.co.uk/en/" rel="nofollow">expedia.co.uk</a></em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '235d2fcd-7b8a-4705-807a-f6738cfe80fa',
+					elementId: '2bfb2418-cc15-4b7f-b0c5-f6b180f0dc38',
 				},
 			],
 			createdOn: 1614599498000,

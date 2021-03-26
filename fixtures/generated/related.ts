@@ -16,6 +16,34 @@ export const related = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/world/2021/mar/26/buying-lockdown-dogs-whim-trouble-rspca-freddie-seal',
+			linkText:
+				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
+			showByline: false,
+			byline: 'Amelia Hill',
+			image:
+				'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
+				'460':
+					'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=460&quality=85&auto=format&fit=max&s=c7f8b1bb3e034a72180c93bc4964675d',
+			},
+			isLiveBlog: false,
+			pillar: 'news',
+			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-26T12:35:59.000Z',
+			headline:
+				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
+			shortUrl: 'https://www.theguardian.com/p/gpf22',
+		},
+		{
+			url:
 				'https://www.theguardian.com/lifeandstyle/2021/mar/14/as-dog-thefts-soar-owners-and-charities-call-for-tougher-penalties',
 			linkText:
 				' As dog thefts soar, owners and charities call for tougher penalties',
@@ -240,35 +268,6 @@ export const related = {
 			webPublicationDate: '2015-07-04T23:05:04.000Z',
 			headline: 'Throwaway pup trend makes Britons dogs’ worst enemies',
 			shortUrl: 'https://www.theguardian.com/p/4acg9',
-		},
-		{
-			url:
-				'https://www.theguardian.com/lifeandstyle/2014/feb/02/pet-hotels-holidays-gourmet-dogs-life',
-			linkText:
-				'Miniature dogs take the lead  as UK splashes out on its pets',
-			showByline: false,
-			byline: 'Sarah Butler',
-			image:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=300&quality=85&auto=format&fit=max&s=c574165954ee448a60d4535b3aa2ea02',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=300&quality=85&auto=format&fit=max&s=c574165954ee448a60d4535b3aa2ea02',
-				'460':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=460&quality=85&auto=format&fit=max&s=7c3fa9a4ac6a2b6366b410c8afc38fe6',
-			},
-			ageWarning: '7 years',
-			isLiveBlog: false,
-			pillar: 'lifestyle',
-			designType: 'Article',
-			format: {
-				design: 'ArticleDesign',
-				theme: 'LifestylePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2014-02-02T00:07:01.000Z',
-			headline:
-				'Miniature dogs take the lead  as UK splashes out on its pets',
-			shortUrl: 'https://www.theguardian.com/p/3mcf8',
 		},
 		{
 			url:
