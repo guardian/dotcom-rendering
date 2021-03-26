@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { RenderingRequestSerde } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { ContentSerde } from '@guardian/content-api-models/v1/content';
 import { ErrorResponseSerde } from '@guardian/content-api-models/v1/errorResponse';
 import { ItemResponseSerde } from '@guardian/content-api-models/v1/itemResponse';
 import { TBufferedTransport, TCompactProtocol } from 'thrift';
@@ -36,10 +37,11 @@ const decodeContent = <A>(decoder: ThriftDecoder<A>) => async (
 	}
 };
 
+const capiContentDecoder = decodeContent(ContentSerde);
 const capiDecoder = decodeContent(ItemResponseSerde);
 const errorDecoder = decodeContent(ErrorResponseSerde);
 const mapiDecoder = decodeContent(RenderingRequestSerde);
 
 // ----- Exports ----- //
 
-export { capiDecoder, errorDecoder, mapiDecoder };
+export { capiDecoder, capiContentDecoder, errorDecoder, mapiDecoder };

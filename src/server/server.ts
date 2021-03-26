@@ -24,7 +24,12 @@ import { logger } from 'logger';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';
-import { capiDecoder, errorDecoder, mapiDecoder } from 'server/decoders';
+import {
+	capiContentDecoder,
+	capiDecoder,
+	errorDecoder,
+	mapiDecoder,
+} from 'server/decoders';
 import { render as renderEditions } from 'server/editionsPage';
 import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
@@ -184,6 +189,25 @@ async function serveArticlePost(
 	}
 }
 
+async function serveEditionsArticlePost(
+	req: Request,
+	res: ExpressResponse,
+	next: NextFunction,
+): Promise<void> {
+	try {
+		// The "req.body" should contain a 'Content' object which fetched by the
+		// Edition backend from the capi
+		const content = await capiContentDecoder(req.body);
+		const renderingRequest: RenderingRequest = {
+			content,
+		};
+		void serveArticle(renderingRequest, res, true);
+	} catch (e) {
+		logger.error('This error occurred', e);
+		next(e);
+	}
+}
+
 async function serveArticleGet(
 	req: Request,
 	res: ExpressResponse,
@@ -260,6 +284,8 @@ app.get('/rendered-items/*', bodyParser.raw(), serveArticleGet);
 app.get('/*', bodyParser.raw(), serveArticleGet);
 
 app.post('/article', bodyParser.raw(), serveArticlePost);
+
+app.post('/editions-article', bodyParser.raw(), serveEditionsArticlePost);
 
 app.listen(port, () => {
 	if (process.env.NODE_ENV === 'production') {
