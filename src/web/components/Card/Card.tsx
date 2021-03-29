@@ -123,7 +123,6 @@ const badgeImageStyle = css`
 const badgeStyle = css`
 	font-size: 0.75rem;
 	line-height: 1rem;
-	${textSans.xsmall({ fontWeight: 'regular' })};
 	color: ${neutral[46]};
 	font-weight: bold;
 	margin-top: 0.375rem;
