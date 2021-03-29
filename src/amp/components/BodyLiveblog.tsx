@@ -11,7 +11,6 @@ import { Blocks } from '@root/src/amp/components/Blocks';
 import RefreshIcon from '@frontend/static/icons/refresh.svg';
 import { Pagination } from '@root/src/amp/components/Pagination';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
@@ -70,10 +69,10 @@ const updateButtonStyle = css`
 // updates happening. This happens because we don't include new styles on block
 // updates, but only on initial page load.
 export const Body: React.FC<{
+	pillar: Theme;
 	data: ArticleModel;
 	config: ConfigType;
-}> = ({ data, config }) => {
-	const pillar = decideTheme(data.format);
+}> = ({ pillar, data, config }) => {
 	const url = `${data.guardianBaseURL}/${data.pageId}`;
 	const isFirstPage = data.pagination
 		? data.pagination.currentPage === 1

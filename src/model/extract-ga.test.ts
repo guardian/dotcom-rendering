@@ -1,7 +1,7 @@
 import { Article } from '@root/fixtures/generated/articles/Article';
 import { extract } from './extract-ga';
 
-const pillar: LegacyPillar = 'news';
+const pillar: CAPIPillar = 'news';
 const base = {
 	authorIds: 'profile/jennifer-rankin',
 	beaconUrl: '//phar.gu-web.net',

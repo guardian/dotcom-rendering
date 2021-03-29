@@ -1,21 +1,29 @@
-import { Pillar, Special } from '@guardian/types';
+import { Design, Pillar, Special } from '@guardian/types';
 
-export const decideTheme = (format: CAPIFormat): Theme => {
-	const { theme } = format;
-	switch (theme) {
-		case 'NewsPillar':
+export const decideTheme = ({
+	pillar,
+	design,
+	isSpecialReport,
+}: {
+	pillar: CAPIPillar;
+	design?: Design;
+	isSpecialReport?: boolean;
+}): Theme => {
+	if (isSpecialReport) return Special.SpecialReport;
+	// We override the pillar to be opinion on Comment news pieces
+	if (design === Design.Comment && pillar === 'news') return Pillar.Opinion;
+	switch (pillar) {
+		case 'news':
 			return Pillar.News;
-		case 'OpinionPillar':
+		case 'opinion':
 			return Pillar.Opinion;
-		case 'SportPillar':
+		case 'sport':
 			return Pillar.Sport;
-		case 'CulturePillar':
+		case 'culture':
 			return Pillar.Culture;
-		case 'LifestylePillar':
+		case 'lifestyle':
 			return Pillar.Lifestyle;
-		case 'SpecialReportTheme':
-			return Special.SpecialReport;
-		case 'Labs':
+		case 'labs':
 			return Special.Labs;
 		default:
 			return Pillar.News;

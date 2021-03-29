@@ -1,4 +1,5 @@
 // All GA fields should  fall back to default values -
+import { findCAPIPillar } from './find-pillar';
 
 const filterTags = (
 	tags: CAPIType['tags'],
@@ -25,30 +26,13 @@ const getCommissioningDesk = (
 	return (tag && tag.title) || '';
 };
 
-const convertToLegacyPillar = (theme: CAPITheme): LegacyPillar => {
-	switch (theme) {
-		case 'NewsPillar':
-			return 'news';
-		case 'OpinionPillar':
-			return 'opinion';
-		case 'SportPillar':
-			return 'sport';
-		case 'CulturePillar':
-			return 'culture';
-		case 'LifestylePillar':
-			return 'lifestyle';
-		default:
-			return 'news';
-	}
-};
-
 const formatStringForGa = (string: string): string =>
 	string.toLowerCase().split(' ').join('');
 
 // we should not bring down the website if a trackable field is missing!
 export const extract = (data: CAPIType): GADataType => ({
 	webTitle: data.webTitle,
-	pillar: convertToLegacyPillar(data.format.theme),
+	pillar: findCAPIPillar(data.pillar) || 'news',
 	section: data.sectionName || '',
 	contentType: formatStringForGa(data.contentType),
 	commissioningDesks: formatStringForGa(getCommissioningDesk(data.tags)),

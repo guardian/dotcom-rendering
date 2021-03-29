@@ -146,8 +146,8 @@ const ShowSignInGate = ({
 			abTest,
 			ophanComponentId: testIdToComponentId[abTest.id],
 			isComment:
-				CAPI.format.design === 'CommentDesign' ||
-				CAPI.format.design === 'EditorialDesign',
+				CAPI.designType === 'Comment' ||
+				CAPI.designType === 'GuardianView',
 		});
 	}
 	// return nothing if no gate needs to be shown

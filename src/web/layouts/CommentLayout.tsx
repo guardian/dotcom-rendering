@@ -465,7 +465,8 @@ export const CommentLayout = ({
 					<GridItem area="media">
 						<div
 							className={
-								format.display === Display.Showcase
+								format.display === Display.Showcase &&
+								CAPI.pageType.hasShowcaseMainElement
 									? mainMediaWrapper
 									: maxWidth
 							}

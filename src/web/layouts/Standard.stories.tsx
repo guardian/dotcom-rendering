@@ -38,10 +38,11 @@ export default {
 const convertToStandard = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		format: {
-			...CAPI.format,
-			display: 'StandardDisplay' as CAPIDisplay,
+		pageType: {
+			...CAPI.pageType,
+			hasShowcaseMainElement: false,
 		},
+		isImmersive: false,
 	};
 };
 
