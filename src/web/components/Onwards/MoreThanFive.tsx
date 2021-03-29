@@ -148,7 +148,11 @@ export const MoreThanFive = ({ content }: Props) => {
 							format={trail.format}
 							palette={trail.palette}
 							headlineText={trail.headline}
-							headlineSize="small"
+							headlineSize={
+								trail.format.theme === Special.Labs
+									? 'medium'
+									: 'small'
+							}
 							byline={trail.byline}
 							showByline={trail.showByline}
 							showQuotes={trail.format.design === Design.Comment}
