@@ -718,11 +718,8 @@ export const Media = () => (
 );
 Media.story = { name: 'Media' };
 
-const badge: BadgeType = {
-	seriesTag: 'environment/series/the-polluters',
-	imageUrl:
-		'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
-};
+const badge: string =
+	'https://static.theguardian.com/commercial/sponsor/24/Jun/2020/c15a28c9-ab71-4819-ac5b-066f04cb41ba-Togetherlogo.png';
 
 export const Labs = () => (
 	<Section>
