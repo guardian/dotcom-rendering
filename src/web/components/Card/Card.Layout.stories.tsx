@@ -770,7 +770,7 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							})}
-							headlineText={headlines[11]}
+							headlineText={headlines[14]}
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
@@ -795,7 +795,7 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							})}
-							headlineText={headlines[11]}
+							headlineText={headlines[13]}
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
@@ -820,7 +820,7 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							})}
-							headlineText={headlines[12]}
+							headlineText={headlines[15]}
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"

@@ -26,6 +26,8 @@ export const headlines = [
 	"A&E staff 'despair' as NHS delays are at their worst ever level",
 	'Patients suffer record delays because of pressure at A&E units',
 	'10 practical tips for looking after mental health during lockdown',
+	'From a vaccine manufacturer to an RAF clarinettist: meet four of the people working to vaccinate the nation',
+	`It’s vital children get the whole school experience’: why a principal is looking forward to schools reopening fully`,
 ];
 
 export const standfirsts = [

@@ -326,6 +326,7 @@ export const Card = ({
 										</div>
 									</div>
 								)}
+<<<<<<< HEAD
 								<CardFooter
 									format={format}
 									age={
@@ -363,6 +364,49 @@ export const Card = ({
 										) : undefined
 									}
 								/>
+=======
+								{!badge && (
+									<CardFooter
+										format={format}
+										age={
+											webPublicationDate ? (
+												<CardAge
+													format={format}
+													palette={palette}
+													webPublicationDate={
+														webPublicationDate
+													}
+													showClock={showClock}
+												/>
+											) : undefined
+										}
+										isFullCardImage={isFullCardImage}
+										mediaMeta={
+											format.design === Design.Media &&
+											mediaType ? (
+												<MediaMeta
+													palette={palette}
+													mediaType={mediaType}
+													mediaDuration={
+														mediaDuration
+													}
+												/>
+											) : undefined
+										}
+										commentCount={
+											showCommentCount &&
+											longCount &&
+											shortCount ? (
+												<CardCommentCount
+													palette={palette}
+													long={longCount}
+													short={shortCount}
+												/>
+											) : undefined
+										}
+									/>
+								)}
+>>>>>>> bb4e01378 (Mock additions)
 							</div>
 						</ContentWrapper>
 					</>
