@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -157,6 +157,11 @@ export const MoreThanFive = ({ content }: Props) => {
 							showPulsingDot={trail.isLiveBlog}
 							showSlash={true}
 							showClock={false}
+							imageUrl={
+								trail.format.theme === Special.Labs
+									? trail.image
+									: undefined
+							}
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
 							commentCount={trail.commentCount}
