@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { Design, Special } from '@guardian/types';
-import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
+import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
@@ -57,7 +57,7 @@ type Props = {
 	// Ophan tracking
 	dataLinkName?: string;
 	// Labs
-	badge?: BadgeType;
+	badge?: string;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -100,35 +100,6 @@ const starWrapper = css`
 	position: absolute;
 	bottom: 0;
 	margin-top: 2px;
-`;
-
-const labTitleOrNot = (format: Format) => {
-	if (format.theme === Special.Labs) {
-		return css`
-			${textSans.medium({ fontWeight: 'bold' })}
-		`;
-	}
-	return css`
-		${headline.xxxsmall({ fontWeight: 'regular' })}
-		line-height: 20px;
-	`;
-};
-
-const badgeImageStyle = css`
-	max-height: 3.75rem;
-	margin-left: 0.625rem;
-	vertical-align: middle;
-`;
-
-const badgeStyle = css`
-	font-size: 0.75rem;
-	line-height: 1rem;
-	color: ${neutral[46]};
-	font-weight: bold;
-	margin-top: 0.375rem;
-	padding-right: 0.625rem;
-	padding-bottom: 0.625rem;
-	text-align: right;
 `;
 
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
@@ -190,6 +161,17 @@ export const Card = ({
 		imageCoverage = coverages.image[imageSize];
 		contentCoverage = coverages.content[imageSize];
 	}
+	const labTitleOrNot = () => {
+		if (format.theme === Special.Labs) {
+			return css`
+				${textSans.medium({ fontWeight: 'bold' })}
+			`;
+		}
+		return css`
+			${headline.xxxsmall({ fontWeight: 'regular' })}
+			line-height: 20px;
+		`;
+	};
 
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
@@ -253,7 +235,7 @@ export const Card = ({
 								>
 									<CardHeadline
 										// Try and create parity with frontend, not working at the moment
-										css={labTitleOrNot(format)}
+										css={labTitleOrNot()}
 										headlineText={headlineText}
 										format={format}
 										palette={cardPalette}
@@ -312,16 +294,21 @@ export const Card = ({
 										</AvatarContainer>
 									</Hide>
 								)}
-
-								{badge && (
-									<div>
-										<div className={badgeStyle}>
-											<div>Paid for by</div>
-											<img
-												className={badgeImageStyle}
-												alt="test"
-												src="https://static.theguardian.com/commercial/sponsor/24/Jun/2020/c15a28c9-ab71-4819-ac5b-066f04cb41ba-Togetherlogo.png"
+								<CardFooter
+									format={format}
+									badge={badge || undefined}
+									palette={palette}
+									age={
+										webPublicationDate && !badge ? (
+											<CardAge
+												format={format}
+												palette={palette}
+												webPublicationDate={
+													webPublicationDate
+												}
+												showClock={showClock}
 											/>
+<<<<<<< HEAD
 										</div>
 									</div>
 								)}
@@ -338,14 +325,23 @@ export const Card = ({
 												}
 												showClock={showClock}
 											/>
+=======
+>>>>>>> 278fc31e2 (Feedback Changes)
 										) : undefined
 									}
 									isFullCardImage={isFullCardImage}
 									mediaMeta={
 										format.design === Design.Media &&
+<<<<<<< HEAD
 										mediaType ? (
 											<MediaMeta
 												palette={cardPalette}
+=======
+										mediaType &&
+										!badge ? (
+											<MediaMeta
+												palette={palette}
+>>>>>>> 278fc31e2 (Feedback Changes)
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -354,15 +350,23 @@ export const Card = ({
 									commentCount={
 										showCommentCount &&
 										longCount &&
+<<<<<<< HEAD
 										shortCount ? (
 											<CardCommentCount
 												palette={cardPalette}
+=======
+										shortCount &&
+										!badge ? (
+											<CardCommentCount
+												palette={palette}
+>>>>>>> 278fc31e2 (Feedback Changes)
 												long={longCount}
 												short={shortCount}
 											/>
 										) : undefined
 									}
 								/>
+<<<<<<< HEAD
 =======
 								{!badge && (
 									<CardFooter
@@ -406,6 +410,8 @@ export const Card = ({
 									/>
 								)}
 >>>>>>> bb4e01378 (Mock additions)
+=======
+>>>>>>> 278fc31e2 (Feedback Changes)
 							</div>
 						</ContentWrapper>
 					</>

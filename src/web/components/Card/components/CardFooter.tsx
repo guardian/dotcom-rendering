@@ -1,9 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
 import { from } from '@guardian/src-foundations/mq';
+import { textSans } from '@guardian/src-foundations/typography';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
 	format: Format;
@@ -11,6 +13,8 @@ type Props = {
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
 	isFullCardImage?: boolean;
+	badge?: string;
+	palette: Palette;
 };
 
 const spaceBetween = css`
@@ -41,13 +45,42 @@ const linesWrapperStyles = css`
 	margin-top: 5px;
 `;
 
+const badgeImageStyle = css`
+	max-height: ${space[9]}px;
+	margin-left: ${space[3]}px;
+	vertical-align: middle;
+`;
+
+const badgeWrapperStyle = css`
+	margin-top: ${space[6]}px;
+	padding-right: ${space[3]}px;
+	padding-bottom: ${space[3]}px;
+	text-align: right;
+`;
+
 export const CardFooter = ({
 	format,
 	age,
 	mediaMeta,
 	commentCount,
 	isFullCardImage,
+	badge,
+	palette,
 }: Props) => {
+	const paidForStyle = css`
+		color: ${palette.text.branding};
+		${textSans.xsmall({ fontWeight: 'bold' })}
+	`;
+
+	if (format.theme === Special.Labs) {
+		return (
+			<div className={badgeWrapperStyle}>
+				<div className={paidForStyle}>Paid for by</div>
+				<img className={badgeImageStyle} alt="" src={badge} />
+			</div>
+		);
+	}
+
 	if (
 		!isFullCardImage &&
 		(format.design === Design.Comment ||
