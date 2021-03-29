@@ -159,41 +159,30 @@ export const BrazeBanner = ({ meta }: Props) => {
 	>();
 
 	useEffect(() => {
-		if (meta) {
-			// TODO: unify the way we handle sharing these deps (this is
-			// duplicated in SlotBodyEnd). Probably via the automat client
-			// library.
-			window.guardian.automat = {
-				react: React,
-				preact: React,
-				emotionCore,
-				emotionTheming,
-				emotion,
-			};
+		import(
+			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
+		)
+			.then((module) => {
+				setBrazeComponent(() => module.BrazeMessage);
+			})
+			.catch((error) =>
+				window.guardian.modules.sentry.reportError(
+					error,
+					'braze-banner',
+				),
+			);
+	}, []);
 
-			import(
-				/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
-			)
-				.then((module) => {
-					setBrazeComponent(() => module.BrazeMessage);
-				})
-				.catch((error) =>
-					window.guardian.modules.sentry.reportError(
-						error,
-						'braze-banner',
-					),
-				);
-		}
-	}, [meta]);
-
-	if (BrazeComponent && meta) {
-		return (
-			<BrazeBannerWithSatisfiedDependencies
-				BrazeComponent={BrazeComponent}
-				meta={meta}
-			/>
-		);
-	}
-
-	return <div />;
+	return (
+		<>
+			{BrazeComponent ? (
+				<BrazeBannerWithSatisfiedDependencies
+					BrazeComponent={BrazeComponent}
+					meta={meta}
+				/>
+			) : (
+				<div />
+			)}
+		</>
+	);
 };
