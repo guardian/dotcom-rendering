@@ -105,7 +105,7 @@ const starWrapper = css`
 const labTitleOrNot = (format: Format) => {
 	if (format.theme === Special.Labs) {
 		return css`
-			${textSans.medium({ fontWeight: 'regular' })}
+			${textSans.medium({ fontWeight: 'bold' })}
 		`;
 	}
 	return css`
