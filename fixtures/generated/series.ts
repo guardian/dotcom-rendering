@@ -20,6 +20,35 @@ export const series = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/tv-and-radio/2021/mar/25/black-power-a-british-story-of-resistance-review-a-tortuous-fight-for-justice',
+			linkText:
+				'Black Power: A British Story of Resistance review – a tortuous fight for justice',
+			showByline: false,
+			byline: 'Ellen E Jones',
+			image:
+				'https://i.guim.co.uk/img/media/054de2cd08b4cb23bc04d3a2838a2379b5110538/440_189_1560_937/master/1560.jpg?width=300&quality=85&auto=format&fit=max&s=e3450250226a575c3dcfb33ddb71bc36',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/054de2cd08b4cb23bc04d3a2838a2379b5110538/440_189_1560_937/master/1560.jpg?width=300&quality=85&auto=format&fit=max&s=e3450250226a575c3dcfb33ddb71bc36',
+				'460':
+					'https://i.guim.co.uk/img/media/054de2cd08b4cb23bc04d3a2838a2379b5110538/440_189_1560_937/master/1560.jpg?width=460&quality=85&auto=format&fit=max&s=ec8bb2442221a0c9dcc5923c12c6938f',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-25T22:30:26.000Z',
+			headline:
+				'Black Power: A British Story of Resistance review – a tortuous fight for justice',
+			shortUrl: 'https://www.theguardian.com/p/gpxqy',
+			starRating: 5,
+		},
+		{
+			url:
 				'https://www.theguardian.com/tv-and-radio/2021/mar/24/this-is-my-house-review-through-the-keyhole-with-stacey-dooley',
 			linkText:
 				'This Is My House review – through the keyhole with Stacey Dooley',
@@ -278,35 +307,6 @@ export const series = {
 				'Genius: Aretha review – clunky Franklin biopic needs more respect',
 			shortUrl: 'https://www.theguardian.com/p/gmqph',
 			starRating: 2,
-		},
-		{
-			url:
-				'https://www.theguardian.com/music/2021/mar/17/demi-lovato-dancing-with-the-devil-review-a-pop-music-doc-of-shattering-candour',
-			linkText:
-				'Demi Lovato: Dancing With the Devil review – a pop music doc of shattering candour',
-			showByline: false,
-			byline: 'Alim Kheraj',
-			image:
-				'https://i.guim.co.uk/img/media/00d834829f8e7bd6d187d508109a880a31131f70/0_955_4480_2685/master/4480.jpg?width=300&quality=85&auto=format&fit=max&s=4f0b292e0d1978841d57d7b71fa3c20e',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/00d834829f8e7bd6d187d508109a880a31131f70/0_955_4480_2685/master/4480.jpg?width=300&quality=85&auto=format&fit=max&s=4f0b292e0d1978841d57d7b71fa3c20e',
-				'460':
-					'https://i.guim.co.uk/img/media/00d834829f8e7bd6d187d508109a880a31131f70/0_955_4480_2685/master/4480.jpg?width=460&quality=85&auto=format&fit=max&s=fa496418bd5b8a6352f9f5871f47b12c',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2021-03-17T06:30:09.000Z',
-			headline:
-				'Demi Lovato: Dancing With the Devil review – a pop music doc of shattering candour',
-			shortUrl: 'https://www.theguardian.com/p/gmtv4',
-			starRating: 4,
 		},
 	],
 };
