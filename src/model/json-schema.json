@@ -3905,9 +3905,6 @@
                 },
                 "supporter": {
                     "type": "string"
-                },
-                "gifting": {
-                    "type": "string"
                 }
             },
             "required": [

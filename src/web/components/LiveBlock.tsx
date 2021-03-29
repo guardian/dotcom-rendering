@@ -20,7 +20,6 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
 };
@@ -221,7 +220,6 @@ export const LiveBlock = ({
 	block,
 	pageId,
 	webTitle,
-	abTests,
 	adTargeting,
 	host,
 }: Props) => {
@@ -282,7 +280,6 @@ export const LiveBlock = ({
 							element={headerElement}
 							format={format}
 							palette={palette}
-							abTests={abTests}
 							host={host}
 						/>
 					)}
@@ -302,7 +299,6 @@ export const LiveBlock = ({
 									element={element}
 									format={format}
 									palette={palette}
-									abTests={abTests}
 									host={host}
 								/>
 							</BlockMedia>
@@ -318,7 +314,6 @@ export const LiveBlock = ({
 								element={element}
 								format={format}
 								palette={palette}
-								abTests={abTests}
 							/>
 						</BlockText>
 					);

@@ -86,7 +86,6 @@ export const ArticleBody = ({
 					blocks={blocks}
 					adTargeting={adTargeting}
 					host={host}
-					abTests={abTests}
 					pageId={pageId}
 					webTitle={webTitle}
 				/>

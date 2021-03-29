@@ -117,6 +117,13 @@ describe('Elements', function () {
 					.should('not.be.empty')
 					.then(cy.wrap);
 			};
+			const getClickToViewOverlay = () => {
+				return cy
+					.get('div[data-cy="click-to-view"]')
+					.its('0')
+					.should('not.be.empty')
+					.then(cy.wrap);
+			};
 
 			cy.visit(
 				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
