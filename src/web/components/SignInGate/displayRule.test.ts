@@ -9,24 +9,9 @@ import {
 	isValidSection,
 	isValidTag,
 	isCountry,
-	hasRequiredConsents,
 } from './displayRule';
 
 const CAPI = Article;
-
-let mockOnConsentChangeResult: any;
-jest.mock('@guardian/consent-management-platform', () => ({
-	onConsentChange: (callback: any) => {
-		callback(mockOnConsentChangeResult);
-	},
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	getConsentFor: jest.requireActual('@guardian/consent-management-platform')
-		.getConsentFor,
-}));
-
-afterEach(() => {
-	mockOnConsentChangeResult = undefined;
-});
 
 describe('SignInGate - displayRule methods', () => {
 	describe('isNPageOrHigherPageView', () => {
@@ -242,90 +227,6 @@ describe('SignInGate - displayRule methods', () => {
 			];
 
 			expect(isValidTag(CAPIBrowser)).toBe(false);
-		});
-	});
-
-	describe('hasRequiredConsents', () => {
-		const generateConsents: () => { [key: string]: boolean } = () => {
-			return {
-				consentId1: true,
-				consentId2: true,
-				consentId3: true,
-				consentId4: true,
-			};
-		};
-
-		test('returns true when the user has consented to all', async () => {
-			const testConsents = generateConsents();
-
-			mockOnConsentChangeResult = {
-				tcfv2: {
-					vendorConsents: testConsents,
-					consents: testConsents,
-				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(true);
-		});
-
-		test('returns false when the user has not consented to one of the consents', async () => {
-			const testConsents = generateConsents();
-
-			mockOnConsentChangeResult = {
-				tcfv2: {
-					vendorConsents: testConsents,
-					consents: { ...testConsents, additionalConsent: false },
-				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(false);
-
-			mockOnConsentChangeResult = {
-				tcfv2: {
-					consents: testConsents,
-					vendorConsents: {
-						...testConsents,
-						additionalConsent: false,
-					},
-				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(false);
-		});
-
-		test('returns false when a consents list is empty', async () => {
-			const testConsents = generateConsents();
-
-			mockOnConsentChangeResult = {
-				tcfv2: {
-					vendorConsents: {},
-					consents: testConsents,
-				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(false);
-
-			mockOnConsentChangeResult = {
-				tcfv2: {
-					vendorConsents: testConsents,
-					consents: {},
-				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(false);
-		});
-
-		test('returns false when a consents list is undefined', async () => {
-			const testConsents = generateConsents();
-
-			mockOnConsentChangeResult = {
-				tcfv2: {
-					consents: testConsents,
-				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(false);
-
-			mockOnConsentChangeResult = {
-				tcfv2: {
-					vendorConsents: testConsents,
-				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(false);
 		});
 	});
 });
