@@ -94,8 +94,8 @@ interface Props {
 const Standard: FC<Props> = ({ item, children }) => {
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
-		<div css={articleWidthStyles} id="epic-placeholder">
-			<Epic title="" body="" firstButton="" secondButton="" />
+		<div css={articleWidthStyles}>
+			<Epic />
 		</div>
 	);
 
