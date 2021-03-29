@@ -1070,6 +1070,11 @@ export const Quiz: CAPIType = {
 	},
 	designType: 'Quiz',
 	editionId: 'UK',
+	format: {
+		design: 'QuizDesign',
+		theme: 'SportPillar',
+		display: 'ShowcaseDisplay',
+	},
 	standfirst:
 		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
 	openGraphData: {
@@ -1720,7 +1725,7 @@ export const Quiz: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'b0ca4b83-db49-48fc-b9ca-ef2923ce0a36',
+			elementId: 'e2681883-a4c6-49e0-967d-4675ec409513',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2352,7 +2357,7 @@ export const Quiz: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					elementId: '73222fc8-e59c-4b88-b31a-184f4c16d75e',
+					elementId: '2823ea2c-fe7e-460a-a606-f4e902387147',
 				},
 			],
 			createdOn: 1591866131000,
