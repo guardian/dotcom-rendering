@@ -147,7 +147,13 @@ describe('MostViewedFooterData', () => {
 							byline: '',
 							image: '',
 							isLiveBlog: true,
-							pillar: Pillar.News,
+							format: {
+								theme: 'NewsPillar',
+								design: 'ArticleDesign',
+								display: 'StandardDisplay',
+							},
+							pillar: 'news',
+							designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 						},
 					],
 				},
@@ -184,7 +190,13 @@ describe('MostViewedFooterData', () => {
 							byline: '',
 							image: '',
 							isLiveBlog: false,
-							pillar: Pillar.News,
+							format: {
+								theme: 'NewsPillar',
+								design: 'ArticleDesign',
+								display: 'StandardDisplay',
+							},
+							pillar: 'news',
+							designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 						},
 					],
 				},
