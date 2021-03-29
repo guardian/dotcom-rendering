@@ -37,10 +37,11 @@ export default {
 const convertToShowcase = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		format: {
-			...CAPI.format,
-			display: 'ShowcaseDisplay' as CAPIDisplay,
+		pageType: {
+			...CAPI.pageType,
+			hasShowcaseMainElement: true,
 		},
+		isImmersive: false,
 	};
 };
 

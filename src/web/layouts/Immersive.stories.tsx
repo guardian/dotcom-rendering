@@ -41,10 +41,11 @@ export default {
 const convertToImmersive = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		format: {
-			...CAPI.format,
-			display: 'ImmersiveDisplay' as CAPIDisplay,
+		pageType: {
+			...CAPI.pageType,
+			hasShowcaseMainElement: true,
 		},
+		isImmersive: true,
 	};
 };
 
@@ -168,6 +169,10 @@ FeatureStory.story = {
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
+		config: {
+			...Live.config,
+			isLive: true,
+		},
 	};
 	const ServerCAPI = convertToImmersive(LiveBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
@@ -177,6 +182,10 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
+		config: {
+			...Live.config,
+			isLive: false,
+		},
 	};
 	const ServerCAPI = convertToImmersive(DeadBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;

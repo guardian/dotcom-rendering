@@ -147,13 +147,7 @@ describe('MostViewedFooterData', () => {
 							byline: '',
 							image: '',
 							isLiveBlog: true,
-							format: {
-								theme: 'NewsPillar',
-								design: 'ArticleDesign',
-								display: 'StandardDisplay',
-							},
-							pillar: 'news',
-							designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
+							pillar: Pillar.News,
 						},
 					],
 				},
@@ -190,13 +184,7 @@ describe('MostViewedFooterData', () => {
 							byline: '',
 							image: '',
 							isLiveBlog: false,
-							format: {
-								theme: 'NewsPillar',
-								design: 'ArticleDesign',
-								display: 'StandardDisplay',
-							},
-							pillar: 'news',
-							designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
+							pillar: Pillar.News,
 						},
 					],
 				},

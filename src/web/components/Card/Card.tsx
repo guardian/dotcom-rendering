@@ -33,7 +33,7 @@ type Props = {
 	headlineSize?: SmallHeadlineSize;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	byline?: string;
-	isLiveBlog?: boolean; // When design === Design.LiveBlog, this denotes if the liveblog is active or not
+	isLiveBlog?: boolean;
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;

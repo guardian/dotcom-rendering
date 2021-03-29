@@ -53,11 +53,6 @@ const articles = [
 			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
 	{
-		name: 'Dead',
-		url:
-			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-	},
-	{
 		name: 'Editorial',
 		url:
 			'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
@@ -137,11 +132,9 @@ try {
 					...json.config.switches,
 					...switchOverrides,
 				};
-
-				// Manual hack for LiveBlog vs DeadBlog
-				if (article.name === 'Live') {
-					json.format.design = 'LiveBlogDesign';
-				}
+				// TODO: Remove these hacks when we add in support for CAPI format to DCR
+				if (json.format.theme === 'Labs') json.pillar = 'labs';
+				delete json.format;
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name
