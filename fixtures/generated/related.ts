@@ -16,6 +16,34 @@ export const related = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/world/2021/mar/26/buying-lockdown-dogs-whim-trouble-rspca-freddie-seal',
+			linkText:
+				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
+			showByline: false,
+			byline: 'Amelia Hill',
+			image:
+				'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
+				'460':
+					'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=460&quality=85&auto=format&fit=max&s=c7f8b1bb3e034a72180c93bc4964675d',
+			},
+			isLiveBlog: false,
+			pillar: 'news',
+			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-26T12:35:59.000Z',
+			headline:
+				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
+			shortUrl: 'https://www.theguardian.com/p/gpf22',
+		},
+		{
+			url:
 				'https://www.theguardian.com/lifeandstyle/2021/mar/14/as-dog-thefts-soar-owners-and-charities-call-for-tougher-penalties',
 			linkText:
 				' As dog thefts soar, owners and charities call for tougher penalties',
@@ -240,35 +268,6 @@ export const related = {
 			webPublicationDate: '2015-07-04T23:05:04.000Z',
 			headline: 'Throwaway pup trend makes Britons dogs’ worst enemies',
 			shortUrl: 'https://www.theguardian.com/p/4acg9',
-		},
-		{
-			url:
-				'https://www.theguardian.com/lifeandstyle/2014/dec/21/how-designer-fashion-going-to-dogs-christmas',
-			linkText:
-				'How designer fashion is going to the dogs this Christmas',
-			showByline: false,
-			byline: 'Sarah Butler',
-			image:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=300&quality=85&auto=format&fit=max&s=5be6eb25d4ea6b9fcd28347e60ab53e8',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=300&quality=85&auto=format&fit=max&s=5be6eb25d4ea6b9fcd28347e60ab53e8',
-				'460':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=460&quality=85&auto=format&fit=max&s=a81a0fe15ffaa4281c6810d54d12c43b',
-			},
-			ageWarning: '6 years',
-			isLiveBlog: false,
-			pillar: 'news',
-			designType: 'Article',
-			format: {
-				design: 'ArticleDesign',
-				theme: 'NewsPillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2014-12-21T02:21:00.000Z',
-			headline:
-				'How designer fashion is going to the dogs this Christmas',
-			shortUrl: 'https://www.theguardian.com/p/44c47',
 		},
 		{
 			url:

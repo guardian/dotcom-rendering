@@ -2,33 +2,56 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
+
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
+// These are partialy kept for Google Analytics purposes
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
-type CAPIPillar = RealPillars | FakePillars;
+type LegacyPillar = RealPillars | FakePillars;
 
-// CAPIDesign is what CAPI might give us but we only want to use a subset of these (Design)
-// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+// Themes are used for styling
+// RealPillars have pillar palette colours and have a `Pillar` type in Scala
+// FakePillars allow us to make modifications to style based on rules outside of the pillar of an article and have a `Special` type in Scala
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Theme.scala
+type ThemePillar = 'NewsPillar' | 'OpinionPillar' | 'SportPillar' | 'CulturePillar' | 'LifestylePillar';
+type ThemeSpecial = 'SpecialReportTheme' | 'Labs';
+type CAPITheme = ThemePillar | ThemeSpecial;
+
+// CAPIDesign is what CAPI gives us on the Format field
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
-	| 'Article'
-	| 'Media'
-	| 'Review'
-	| 'Analysis'
-	| 'Comment'
-	| 'Feature'
-	| 'Live'
-	| 'Recipe'
-	| 'MatchReport'
-	| 'Interview'
-	| 'GuardianView'
-	| 'Quiz'
-	| 'AdvertisementFeature'
-	| 'PhotoEssay'
-	| 'Immersive'
-	| 'SpecialReport'
-	| 'GuardianLabs';
+	| 'ArticleDesign'
+	| 'MediaDesign'
+	| 'ReviewDesign'
+	| 'AnalysisDesign'
+	| 'CommentDesign'
+	| 'LetterDesign'
+	| 'FeatureDesign'
+	| 'LiveBlogDesign'
+	| 'DeadBlogDesign'
+	| 'RecipeDesign'
+	| 'MatchReportDesign'
+	| 'InterviewDesign'
+	| 'EditorialDesign'
+	| 'QuizDesign'
+	| 'InteractiveDesign'
+	| 'PhotoEssayDesign'
+	| 'PrintShopDesign';
+
+// CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
+type CAPIDisplay = 'StandardDisplay' | 'ImmersiveDisplay' | 'ShowcaseDisplay' | 'NumberedListDisplay' | 'ColumnDisplay';
+
+// CAPIFormat is the stringified version of Format passed through from CAPI.
+// It gets converted to the @guardian/types format on platform
+
+type CAPIFormat = {
+	design: CAPIDesign;
+	theme: CAPITheme;
+	display: CAPIDisplay;
+}
 
 type Display = import('@guardian/types').Display;
 type Design = import('@guardian/types').Design;
@@ -340,7 +363,7 @@ interface CAPILinkType {
     longTitle?: string;
     iconName?: string;
     children?: CAPILinkType[];
-    pillar?: CAPIPillar;
+    pillar?: LegacyPillar;
     more?: boolean;
     classList?: string[];
 }
@@ -385,7 +408,15 @@ interface CAPIType {
 	pageId: string;
 	version: number; // TODO: check who uses?
 	tags: TagType[];
-	pillar: CAPIPillar;
+	format: CAPIFormat;
+
+	// Include pillar and designType until we remove them upstream
+	// We type designType as `string` for now so that the field is present,
+	// but we don't care what's in it. Pillar we have a type for so we use it
+	// but it shouldn't be important.
+	designType: string;
+	pillar: LegacyPillar;
+
 	isImmersive: boolean;
 	sectionLabel: string;
 	sectionUrl: string;
@@ -399,9 +430,7 @@ interface CAPIType {
 	webURL: string;
 	linkedData: { [key: string]: any }[];
 	config: ConfigType;
-	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesign but need to allow the type here before then
-	designType: CAPIDesign;
+
 	showBottomSocialButtons: boolean;
 	shouldHideReaderRevenue: boolean;
 
@@ -435,10 +464,7 @@ interface CAPIType {
 // the models above.
 
 type CAPIBrowserType = {
-	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesign but need to allow the type here before then
-	designType: CAPIDesign;
-	pillar: CAPIPillar;
+	format: CAPIFormat;
 	config: ConfigTypeBrowser;
 	editionId: Edition;
 	editionLongForm: string;
@@ -705,7 +731,7 @@ interface ConfigTypeBrowser {
 }
 
 interface GADataType {
-	pillar: CAPIPillar;
+	pillar: LegacyPillar;
 	webTitle: string;
 	section: string;
 	contentType: string;
@@ -802,13 +828,18 @@ interface BaseTrailType {
     linkText?: string;
 }
 interface TrailType extends BaseTrailType {
-		format: Format;
-		palette: Palette;
+	palette: Palette;
+	format: Format;
 }
 
 interface CAPITrailType extends BaseTrailType {
-	designType: CAPIDesign;
-	pillar: CAPIPillar;
+	format: CAPIFormat;
+	// Include pillar and designType until we remove them upstream
+	// We type designType as `string` for now so that the field is present,
+	// but we don't care what's in it. Pillar we have a type for so we use it
+	// but it shouldn't be important.
+	designType: string;
+	pillar: LegacyPillar;
 }
 
 interface TrailTabType {
