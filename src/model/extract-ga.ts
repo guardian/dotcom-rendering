@@ -25,7 +25,7 @@ const getCommissioningDesk = (
 	return (tag && tag.title) || '';
 };
 
-const convertToCAPIPillar = (theme: CAPITheme): LegacyPillar => {
+const convertToLegacyPillar = (theme: CAPITheme): LegacyPillar => {
 	switch (theme) {
 		case 'NewsPillar':
 			return 'news';
@@ -48,7 +48,7 @@ const formatStringForGa = (string: string): string =>
 // we should not bring down the website if a trackable field is missing!
 export const extract = (data: CAPIType): GADataType => ({
 	webTitle: data.webTitle,
-	pillar: convertToCAPIPillar(data.format.theme),
+	pillar: convertToLegacyPillar(data.format.theme),
 	section: data.sectionName || '',
 	contentType: formatStringForGa(data.contentType),
 	commissioningDesks: formatStringForGa(getCommissioningDesk(data.tags)),
