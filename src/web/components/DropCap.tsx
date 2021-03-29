@@ -1,50 +1,26 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design, Pillar } from '@guardian/types';
+import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
-import { opinion } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
-
-import { pillarPalette } from '@frontend/lib/pillars';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	letter: string;
 	format: Format;
 };
 
-const outerStyles = (format: Format) => {
-	const baseStyles = css`
-		${headline.large({
-			fontWeight: 'light',
-		})}
-		float: left;
-		text-transform: uppercase;
-		box-sizing: border-box;
-		margin-right: ${space[1]}px;
-	`;
-
-	/*
-        The reason pillar type 'opinion' is forced to opinion[400] is that
-        opinion.dark is much darker so it is forced to keep with similar colour
-        tones used on the site(that's my understanding anyway!)
-    */
-	switch (format.design) {
-		case Design.GuardianView:
-		case Design.Comment:
-			return css`
-				${baseStyles};
-				color: ${format.theme === Pillar.Opinion
-					? opinion[400]
-					: pillarPalette[format.theme].dark};
-			`;
-		default:
-			return css`
-				${baseStyles};
-				color: ${pillarPalette[format.theme].dark};
-			`;
-	}
-};
+const outerStyles = (palette: Palette) => css`
+	${headline.large({
+		fontWeight: 'light',
+	})}
+	float: left;
+	text-transform: uppercase;
+	box-sizing: border-box;
+	margin-right: ${space[1]}px;
+	color: ${palette.text.dropCap};
+`;
 
 const innerStyles = (format: Format) => {
 	const baseStyles = css`
@@ -57,7 +33,7 @@ const innerStyles = (format: Format) => {
 	`;
 
 	switch (format.design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return css`
 				${baseStyles};
@@ -71,8 +47,11 @@ const innerStyles = (format: Format) => {
 	}
 };
 
-export const DropCap = ({ letter, format }: Props) => (
-	<span className={outerStyles(format)}>
-		<span className={innerStyles(format)}>{letter}</span>
-	</span>
-);
+export const DropCap = ({ letter, format }: Props) => {
+	const palette = decidePalette(format);
+	return (
+		<span className={outerStyles(palette)}>
+			<span className={innerStyles(format)}>{letter}</span>
+		</span>
+	);
+};

@@ -13,12 +13,15 @@ import {
 	getLastOneOffContributionDate,
 	shouldHideSupportMessaging,
 	getArticleCountConsent,
+	getEmail,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
+	OphanComponentEvent,
 	sendOphanComponentEvent,
+	submitComponentEvent,
 	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { Metadata } from '@guardian/automat-client/dist/types';
@@ -43,10 +46,13 @@ type EpicConfig = {
 		url: string;
 		props: EpicProps;
 	};
+	email?: string;
 };
 
 type EpicProps = {
 	onReminderOpen: () => void;
+	email?: string;
+	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 	// Also anything specified by support-dotcom-components
 };
 
@@ -97,6 +103,7 @@ type Props = {
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
+	idApiUrl: string;
 };
 
 const buildPayload = async (props: Props): Promise<Metadata> => {
@@ -131,7 +138,7 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
 
-export const canShow = ({
+export const canShow = async ({
 	isSignedIn,
 	countryCode,
 	contentType,
@@ -141,6 +148,7 @@ export const canShow = ({
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
+	idApiUrl,
 }: Props): Promise<CanShowResult> => {
 	if (shouldHideReaderRevenue || isPaidContent) {
 		// We never serve Reader Revenue epics in this case
@@ -152,7 +160,7 @@ export const canShow = ({
 	const forcedVariant = getForcedVariant('epic');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
 
-	return buildPayload({
+	const contributionsPayload = await buildPayload({
 		isSignedIn,
 		countryCode,
 		contentType,
@@ -162,37 +170,37 @@ export const canShow = ({
 		isPaidContent,
 		tags,
 		contributionsServiceUrl,
-	})
-		.then((contributionsPayload) =>
-			getBodyEnd(
-				contributionsPayload,
-				`${contributionsServiceUrl}/epic${queryString}`,
-			),
-		)
-		.then((response) => {
-			dataPerf.end();
-			return checkForErrors(response);
-		})
-		.then((response) => response.json())
-		.then((json: { data?: PreEpicConfig }) => {
-			if (!json.data) {
-				return { result: false };
-			}
+		idApiUrl,
+	});
 
-			const { meta, module } = json.data;
+	const response = await getBodyEnd(
+		contributionsPayload,
+		`${contributionsServiceUrl}/epic${queryString}`,
+	);
 
-			return {
-				result: true,
-				meta: {
-					meta,
-					module,
-					onReminderOpen: sendOphanReminderOpenEvent,
-				},
-			};
-		});
+	checkForErrors(response);
+
+	const json: { data?: PreEpicConfig } = await response.json();
+
+	if (!json.data) {
+		return { result: false };
+	}
+
+	const email = isSignedIn ? await getEmail(idApiUrl) : undefined;
+
+	const { meta, module } = json.data;
+	return {
+		result: true,
+		meta: {
+			meta,
+			module,
+			email,
+			onReminderOpen: sendOphanReminderOpenEvent,
+		},
+	};
 };
 
-export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
+export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
 		rootMargin: '-18px',
@@ -237,8 +245,13 @@ export const ReaderRevenueEpic = ({ meta, module }: EpicConfig) => {
 	if (Epic) {
 		return (
 			<div ref={setNode} className={wrapperMargins}>
-				{/* eslint-disable-next-line react/jsx-props-no-spreading */}
-				<Epic {...module.props} />
+				{/* eslint-disable react/jsx-props-no-spreading */}
+				<Epic
+					{...module.props}
+					email={email}
+					submitComponentEvent={submitComponentEvent}
+				/>
+				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
 	}

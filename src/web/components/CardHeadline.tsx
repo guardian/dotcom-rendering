@@ -145,8 +145,8 @@ export const CardHeadline = ({
 		{byline && showByline && (
 			<Byline
 				text={byline}
-				design={format.design}
-				pillar={format.theme}
+				palette={palette}
+				format={format}
 				size={size}
 			/>
 		)}

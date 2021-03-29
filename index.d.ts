@@ -64,6 +64,21 @@ type Palette = {
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
+		headlineByline: Colour;
+		standfirst: Colour;
+		standfirstLink: Colour;
+		branding: Colour;
+		disclaimerLink: Colour;
+		signInLink: Colour;
+		richLink: Colour;
+		witnessIcon: Colour;
+		witnessAuthor: Colour;
+		witnessTitle: Colour;
+		carouselTitle: Colour;
+		calloutHeading: Colour;
+		pullQuote: Colour;
+		pullQuoteAttribution: Colour;
+		dropCap: Colour;
 	},
 	background: {
 		article: Colour;
@@ -72,22 +87,46 @@ type Palette = {
 		avatar: Colour;
 		card: Colour;
 		headline: Colour;
+		headlineByline: Colour;
+		bullet: Colour;
+		header: Colour;
+		standfirst: Colour;
+		richLink: Colour;
+		imageTitle: Colour;
+		speechBubble: Colour;
+		carouselDot: Colour;
+		carouselDotFocus: Colour;
+		headlineTag: Colour;
+		mostViewedTab: Colour;
 	},
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
 		captionTriangle: Colour;
 		cardIcon: Colour;
+		richLink: Colour;
+		quoteIcon: Colour;
+		blockquoteIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;
 		subNav: Colour;
 		articleLink: Colour;
 		articleLinkHover: Colour;
+		liveBlock: Colour;
+		standfirstLink: Colour;
+		headline: Colour;
+		standfirst: Colour;
+		richLink: Colour;
+		navPillar: Colour;
+		article: Colour;
 	},
 	topBar: {
 		card: Colour;
 	},
+	hover: {
+		headlineByline: Colour;
+	}
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
@@ -168,7 +207,8 @@ interface ReaderRevenueCategories {
 	contribute: string;
 	subscribe: string;
 	support: string;
-	gifting: string;
+	supporter: string;
+	gifting?: string;
 }
 
 type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
@@ -192,6 +232,14 @@ interface BaseNavType {
 	brandExtensions: LinkType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
+	readerRevenueLinks: ReaderRevenuePositions;
+}
+
+// TODO rename
+interface SimpleNavType {
+	pillars: PillarType[];
+	otherLinks: MoreType;
+	brandExtensions: LinkType[];
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
@@ -392,7 +440,6 @@ type CAPIBrowserType = {
 	designType: CAPIDesign;
 	pillar: CAPIPillar;
 	config: ConfigTypeBrowser;
-	richLinks: RichLinkBlockElement[];
 	editionId: Edition;
 	editionLongForm: string;
 	contentType: string;
@@ -423,23 +470,7 @@ type CAPIBrowserType = {
 	isLiveBlog: boolean;
 	isLive: boolean;
 	matchUrl?: string;
-	callouts: CalloutBlockElement[];
-	qandaAtoms: QABlockElement[];
-	guideAtoms: GuideAtomBlockElement[];
-	profileAtoms: ProfileAtomBlockElement[];
-	timelineAtoms: TimelineBlockElement[];
-	chartAtoms: ChartAtomBlockElement[];
-	audioAtoms: AudioAtomBlockElement[];
-	youtubeBlockElement: YoutubeBlockElement[];
-	youtubeMainMediaBlockElement: YoutubeBlockElement[];
-	quizAtoms: QuizAtomBlockElement[];
-	documentBlockElements: DocumentBlockElement[];
-	embedBlockElements: EmbedBlockElement[];
-	instagramBlockElements: InstagramBlockElement[];
-	mapBlockElements: MapBlockElement[];
-	spotifyBlockElements: SpotifyBlockElement[];
-	videoFacebookBlockElements: VideoFacebookBlockElement[];
-	vineBlockElements: VineBlockElement[];
+	elementsToHydrate: CAPIElement[];
 };
 
 interface TagType {
@@ -468,6 +499,10 @@ type AvatarType = {
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'squiggly' | 'dotted' | 'straight';
+
+type ShareIconSize = 'small' | 'medium';
+
+type LeftColSize = 'compact'|'wide';
 
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
@@ -532,6 +567,20 @@ type EventType = {
 	eventType: 'substitution' | 'dismissal' | 'booking';
 };
 
+type MatchReportType = {
+	id: string;
+	isResult: boolean;
+	homeTeam: TeamType;
+	awayTeam: TeamType;
+	competition: {
+		fullName: string;
+	};
+	isLive: boolean;
+	venue: string;
+	comments: string;
+	minByMinUrl: string;
+}
+
 /**
  * Onwards
  */
@@ -541,9 +590,9 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-    pillar: Theme;
+    format: Format;
 	isCuratedContent?: boolean;
-    isFullCardImage?: boolean
+    isFullCardImage?: boolean;
 };
 
 type OphanComponentName =
@@ -684,53 +733,20 @@ interface DCRServerDocumentData {
 	linkedData: { [key: string]: any; };
 }
 
+interface BrowserNavType {
+	topLevelPillars: PillarType[];
+	currentNavLink: string;
+	subNavSections?: SubNavType;
+}
+
 interface DCRBrowserDocumentData {
 	page: string;
 	site: string;
 	CAPI: CAPIBrowserType;
-	NAV: SubNavBrowserType;
+	NAV: BrowserNavType;
 	GA: GADataType;
 	linkedData: { [key: string]: any; };
 }
-
-type IslandType =
-	| 'reader-revenue-links-header'
-	| 'sub-nav-root'
-	| 'edition-root'
-	| 'most-viewed-right'
-	| 'share-count-root'
-	| 'comment-count-root'
-	| 'most-viewed-footer'
-	| 'reader-revenue-links-footer'
-	| 'slot-body-end'
-	| 'bottom-banner'
-	| 'onwards-upper-whensignedin'
-	| 'onwards-upper-whensignedout'
-	| 'onwards-lower-whensignedin'
-	| 'onwards-lower-whensignedout'
-	| 'rich-link'
-	| 'links-root'
-	| 'match-nav'
-	| 'match-stats'
-	| 'callout'
-	| 'comments'
-	| 'quiz-atom'
-	| 'qanda-atom'
-	| 'guide-atom'
-	| 'profile-atom'
-	| 'timeline-atom'
-	| 'sign-in-gate'
-	| 'audio-atom'
-	| 'youtube-block'
-	| 'youtube-block-main-media'
-	| 'chart-atom'
-	| 'document-block-element'
-	| 'embed-block-element'
-	| 'instagram-block-element'
-	| 'map-block-element'
-	| 'spotify-block-element'
-	| 'video-facebook-block-element'
-	| 'vine-block-element';
 
 // All Components that are loaded with loadable
 // should be added here, this is the chunk name as
@@ -754,8 +770,13 @@ interface RichLinkBlockLoadable extends ComponentNameChunkMap {
     addWhen: RichLinkBlockElement['_type'];
 }
 
+interface InteractiveBlockLoadaable extends ComponentNameChunkMap {
+    chunkName: 'elements-InteractiveBlockComponent';
+    addWhen: InteractiveBlockElement['_type'];
+}
+
 // There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable]
+type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable, InteractiveBlockLoadaable]
 
 interface CarouselImagesMap {
 	'300'?: string;
@@ -806,6 +827,24 @@ interface MostViewedFooterPayloadType {
 	mostShared: CAPITrailType;
 }
 
+// ------------
+// RichLinks //
+// ------------
+type RichLinkCardType =
+	| 'special-report'
+	| 'live'
+	| 'dead'
+	| 'feature'
+	| 'editorial'
+	| 'comment'
+	| 'podcast'
+	| 'media'
+	| 'analysis'
+	| 'review'
+	| 'letters'
+	| 'external'
+	| 'news';
+
 // ----------
 // AdSlots //
 // ----------
@@ -850,6 +889,8 @@ declare module 'dynamic-import-polyfill' {
 declare namespace JSX {
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	interface IntrinsicElements {
+		'amp-state': any;
+		'amp-form': any;
 		'amp-experiment': any;
 		'amp-sidebar': any;
 		'amp-accordion': any;

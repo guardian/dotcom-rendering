@@ -1,19 +1,9 @@
 import React, { Suspense } from 'react';
 import { Lazy } from '@root/src/web/components/Lazy';
 
-import {
-	SignInGateComponent,
-	CurrentABTest,
-} from '@frontend/web/components/SignInGate/gateDesigns/types';
-import {
-	isNPageOrHigherPageView,
-	isValidContentType,
-	isValidSection,
-	isValidTag,
-	isIOS9,
-} from '@frontend/web/components/SignInGate/displayRule';
+import { SignInGateComponent } from '@frontend/web/components/SignInGate/gateDesigns/types';
+import { canShow } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { hasUserDismissedGateMoreThanCount } from '../dismissGate';
 
 const SignInGateMain = React.lazy(() => {
 	const { start, end } = initPerf('SignInGateMain');
@@ -25,23 +15,6 @@ const SignInGateMain = React.lazy(() => {
 		return { default: module.SignInGateMain };
 	});
 });
-
-const canShow = (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentABTest,
-): boolean =>
-	!isSignedIn &&
-	!hasUserDismissedGateMoreThanCount(
-		currentTest.variant,
-		currentTest.name,
-		5,
-	) &&
-	isNPageOrHigherPageView(3) &&
-	isValidContentType(CAPI) &&
-	isValidSection(CAPI) &&
-	isValidTag(CAPI) &&
-	!isIOS9();
 
 export const signInGateComponent: SignInGateComponent = {
 	gate: ({

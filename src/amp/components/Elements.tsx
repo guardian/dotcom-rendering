@@ -10,6 +10,7 @@ import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideo
 import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/amp/components/elements/InstagramBlockComponent';
 import { InteractiveAtomBlockComponent } from '@root/src/amp/components/elements/InteractiveAtomBlockComponent';
+import { InteractiveBlockComponent } from '@root/src/amp/components/elements/InteractiveBlockComponent';
 import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockComponent';
 import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
 import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
@@ -103,7 +104,12 @@ export const Elements = (
 					/>
 				); // element.placeholderUrl
 			case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds
-				return <InteractiveAtomBlockComponent url={element.url} />;
+				return (
+					<InteractiveBlockComponent
+						url={element.url}
+						isMandatory={element.isMandatory}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.MapBlockElement':
 				return (
 					<MapBlockComponent

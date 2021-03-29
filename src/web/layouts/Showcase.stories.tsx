@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react';
 
-import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
-import { Article } from '@root/fixtures/articles/Article';
-import { PhotoEssay } from '@root/fixtures/articles/PhotoEssay';
-import { Review } from '@root/fixtures/articles/Review';
-import { Analysis } from '@root/fixtures/articles/Analysis';
-import { Feature } from '@root/fixtures/articles/Feature';
-import { Live } from '@root/fixtures/articles/Live';
-import { GuardianView } from '@root/fixtures/articles/GuardianView';
-import { Interview } from '@root/fixtures/articles/Interview';
-import { Quiz } from '@root/fixtures/articles/Quiz';
-import { Recipe } from '@root/fixtures/articles/Recipe';
-import { Comment } from '@root/fixtures/articles/Comment';
-import { MatchReport } from '@root/fixtures/articles/MatchReport';
+import {
+	makeGuardianBrowserCAPI,
+	makeGuardianBrowserNav,
+} from '@root/src/model/window-guardian';
+import { Article } from '@root/fixtures/generated/articles/Article';
+import { PhotoEssay } from '@root/fixtures/generated/articles/PhotoEssay';
+import { Review } from '@root/fixtures/generated/articles/Review';
+import { Analysis } from '@root/fixtures/generated/articles/Analysis';
+import { Feature } from '@root/fixtures/generated/articles/Feature';
+import { Live } from '@root/fixtures/generated/articles/Live';
+import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Interview } from '@root/fixtures/generated/articles/Interview';
+import { Quiz } from '@root/fixtures/generated/articles/Quiz';
+import { Recipe } from '@root/fixtures/generated/articles/Recipe';
+import { Comment } from '@root/fixtures/generated/articles/Comment';
+import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
+import { Labs } from '@root/fixtures/generated/articles/Labs';
 
-import { HydrateApp } from '@root/src/web/components/HydrateApp';
+import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
@@ -49,7 +53,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		HydrateApp({ CAPI, NAV });
+		BootReact({ CAPI, NAV: makeGuardianBrowserNav(NAV) });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);
@@ -119,11 +123,11 @@ export const DeadStory = (): React.ReactNode => {
 };
 DeadStory.story = { name: 'DeadBlog' };
 
-export const GuardianViewStory = (): React.ReactNode => {
-	const ServerCAPI = convertToShowcase(GuardianView);
+export const EditorialStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Editorial);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-GuardianViewStory.story = { name: 'GuardianView' };
+EditorialStory.story = { name: 'Editorial' };
 
 export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Interview);
@@ -166,3 +170,11 @@ export const MatchReportStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
+
+export const LabsStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Labs);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LabsStory.story = {
+	name: 'Labs',
+};

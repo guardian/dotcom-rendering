@@ -4,6 +4,8 @@ import { css } from 'emotion';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
 
+import { isLight } from '@frontend/web/lib/isLight';
+
 type Props = {
 	sections: Section[];
 	percentCutout?: number;
@@ -22,15 +24,15 @@ const unitStyles = css`
 	text-anchor: middle;
 `;
 
-const valueStyles = css`
+const valueStyles = (background: string) => css`
 	${headline.small({ fontWeight: 'bold' })}
-	fill: ${text.ctaPrimary};
+	fill: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 	text-anchor: middle;
 `;
 
-const labelStyles = css`
+const labelStyles = (background: string) => css`
 	${textSans.small()}
-	fill: ${text.ctaPrimary};
+	fill: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 	text-anchor: middle;
 `;
 
@@ -169,10 +171,18 @@ export const Donut = ({
 				<g>
 					<path d={segment.d} fill={segment.color} />
 					<text transform={segment.transform}>
-						<tspan className={labelStyles} x="0" dy="0">
+						<tspan
+							className={labelStyles(segment.color)}
+							x="0"
+							dy="0"
+						>
 							{segment.label}
 						</tspan>
-						<tspan className={valueStyles} x="0" dy=".9em">
+						<tspan
+							className={valueStyles(segment.color)}
+							x="0"
+							dy=".9em"
+						>
 							{segment.value}
 						</tspan>
 					</text>

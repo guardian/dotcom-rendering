@@ -59,6 +59,7 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 	}) => {
 		enhanced.push({
 			_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+			elementId: images[0].elementId,
 			images,
 			caption,
 		});
@@ -163,6 +164,7 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 						enhanced.push({
 							_type:
 								'model.dotcomrendering.pageElements.CaptionBlockElement',
+							elementId: element.elementId,
 							captionText: element.html,
 						});
 					} else {

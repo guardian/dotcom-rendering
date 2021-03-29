@@ -288,7 +288,7 @@ The advantage of this is being able to force yourself into a specific section of
 
 The disadvantage of this method is that it's a bit tricky to work out exactly which mvt_id to set, and if you make changed to the audience and offset, you may have to adjust the value of the cookie too.
 
-**B)** Add the `forcedTestVariant` prop to the `ABProvider` in `HydrateApp.tsx`:
+**B)** Add the `forcedTestVariant` prop to the `ABProvider` in `BootReact.tsx`:
 
 ```tsx
 <ABProvider

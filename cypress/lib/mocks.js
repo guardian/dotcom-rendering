@@ -1,27 +1,10 @@
 export const mockApi = () => {
-	cy.server();
 	// Mock share count
-	cy.route({
-		method: 'GET',
-		url: '/sharecount/**',
-		response: 'fixture:shareCount.json',
-	});
+	cy.intercept('GET', '/sharecount/**', { fixture: 'shareCount.json' });
 	// Mock most-read
-	cy.route({
-		method: 'GET',
-		url: '/most-read/**',
-		response: 'fixture:mostRead.json',
-	});
+	cy.intercept('GET', '/most-read/**', { fixture: 'mostRead.json' });
 	// Mock most-read
-	cy.route({
-		method: 'GET',
-		url: '**/most-read-geo**',
-		response: 'fixture:mostReadGeo.json',
-	});
+	cy.intercept('GET', '**/most-read-geo**', { fixture: 'mostReadGeo.json' });
 	// Mock most-read
-	cy.route({
-		method: 'GET',
-		url: '/embed/card/**',
-		response: 'fixture:richLink.json',
-	});
+	cy.intercept('GET', '/embed/card/**', { fixture: 'richLink.json' });
 };

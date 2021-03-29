@@ -13,10 +13,8 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v1
-            - name: Use Node.js 14.15
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 14.15
+            - name: Install Node
+              uses: guardian/actions-setup-node@main
             - run: make build
             - name: Boot server and run ngrok
               run: |

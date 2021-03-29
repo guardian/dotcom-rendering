@@ -1,5 +1,5 @@
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { Article } from '@root/fixtures/articles/Article';
+import { Article } from '@root/fixtures/generated/articles/Article';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import { setCountryCodeSynchronous } from '@root/src/web/lib/getCountryCode';
 import {

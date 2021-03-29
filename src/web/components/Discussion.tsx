@@ -101,6 +101,21 @@ export const Discussion = ({
 		return false;
 	};
 
+	const handleExpanded = (value: number): void => {
+		const { ga } = window;
+
+		if (!ga) {
+			return;
+		}
+
+		ga('allEditorialPropertyTracker.send', 'event', {
+			eventCategory: 'Performance',
+			eventAction: 'DiscussionExpanded',
+			eventValue: Math.round(value),
+			nonInteraction: true,
+		});
+	};
+
 	useEffect(() => {
 		const callFetch = async () => {
 			const response = await getDiscussion(discussionApiUrl, shortUrlId);
@@ -142,7 +157,7 @@ export const Discussion = ({
 	return (
 		<>
 			{commentCount !== undefined && beingHydrated && (
-				<Portal root="comment-count-root">
+				<Portal rootId="comment-count-root">
 					<CommentCount
 						isCommentable={isCommentable}
 						commentCount={commentCount}
@@ -160,7 +175,7 @@ export const Discussion = ({
 				leftContent={
 					// eslint-disable-next-line react/jsx-wrap-multilines
 					<SignedInAs
-						pillar={pillar}
+						palette={palette}
 						enableDiscussionSwitch={enableDiscussionSwitch}
 						user={user}
 						commentCount={commentCount || 0}
@@ -184,7 +199,7 @@ export const Discussion = ({
 								`}
 							>
 								<SignedInAs
-									pillar={pillar}
+									palette={palette}
 									enableDiscussionSwitch={
 										enableDiscussionSwitch
 									}
@@ -215,6 +230,9 @@ export const Discussion = ({
 								commentToScrollTo={hashCommentId}
 								onPermalinkClick={handlePermalink}
 								apiKey="dotcom-rendering"
+								onExpanded={(value) => {
+									handleExpanded(value);
+								}}
 							/>
 						)}
 
@@ -240,6 +258,9 @@ export const Discussion = ({
 									commentToScrollTo={hashCommentId}
 									onPermalinkClick={handlePermalink}
 									apiKey="dotcom-rendering"
+									onExpanded={(value) => {
+										handleExpanded(value);
+									}}
 								/>
 							</Lazy>
 						)}

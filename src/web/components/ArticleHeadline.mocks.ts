@@ -1,6 +1,7 @@
 export const mainMediaElements: CAPIElement[] = [
 	{
 		role: 'showcase',
+		elementId: 'mockId',
 		data: {
 			alt:
 				'Steve McQueen, at Tate Britain, where his show Year 3 opens next week.',

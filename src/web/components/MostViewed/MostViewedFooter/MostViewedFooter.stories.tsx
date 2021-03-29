@@ -1,15 +1,16 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
 
-import { Display, Pillar } from '@guardian/types';
+import { Display, Design, Pillar } from '@guardian/types';
 import { ABProvider } from '@guardian/ab-react';
 
+import { Section } from '@frontend/web/components/Section';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,
 	responseWithMissingImage,
-} from '@root/fixtures/mostViewed';
-import { Section } from '@frontend/web/components/Section';
+} from '../MostViewed.mocks';
 
 import { MostViewedFooter } from './MostViewedFooter';
 
@@ -45,7 +46,11 @@ export const withTwoTabs = () => {
 		<AbProvider>
 			<Section>
 				<MostViewedFooter
-					pillar={Pillar.News}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					})}
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
@@ -66,7 +71,11 @@ export const withOneTabs = () => {
 		<AbProvider>
 			<Section>
 				<MostViewedFooter
-					pillar={Pillar.News}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					})}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
 				/>
@@ -86,7 +95,11 @@ export const withNoMostSharedImage = () => {
 		<AbProvider>
 			<Section>
 				<MostViewedFooter
-					pillar={Pillar.News}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Pillar.News,
+					})}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
 				/>

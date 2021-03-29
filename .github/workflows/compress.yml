@@ -9,9 +9,7 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: '14.15'
+            - uses: guardian/actions-setup-node@main
             - uses: preactjs/compressed-size-action@v1
               with:
                   repo-token: '${{ secrets.GITHUB_TOKEN }}'

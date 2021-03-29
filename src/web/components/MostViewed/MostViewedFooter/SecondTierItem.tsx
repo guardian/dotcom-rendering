@@ -112,16 +112,16 @@ export const SecondTierItem = ({
 						{isLiveBlog ? (
 							<LinkHeadline
 								headlineText={headlineText}
-								format={format}
 								palette={palette}
+								format={format}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
 						) : (
 							<LinkHeadline
 								headlineText={headlineText}
-								format={format}
 								palette={palette}
+								format={format}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>

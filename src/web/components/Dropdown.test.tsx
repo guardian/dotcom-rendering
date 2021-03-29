@@ -85,9 +85,9 @@ describe('Dropdown', () => {
 
 		const ulElement = container.querySelector('ul');
 
-		expect(ulElement).toHaveStyle('display: none');
+		expect(ulElement).not.toBeVisible();
 		fireEvent.click(getByRole('button'));
-		expect(ulElement).toHaveStyle('display: block');
+		expect(ulElement).toBeVisible();
 	});
 
 	it('should close the expanded menu when they click away', () => {
@@ -103,9 +103,9 @@ describe('Dropdown', () => {
 		const ulElement = container.querySelector('ul');
 
 		fireEvent.click(getByRole('button'));
-		expect(ulElement).toHaveStyle('display: block');
+		expect(ulElement).toBeVisible();
 		container.click();
-		expect(ulElement).toHaveStyle('display: none');
+		expect(ulElement).not.toBeVisible();
 	});
 
 	it('should close the expanded menu when blurred', () => {
@@ -121,8 +121,8 @@ describe('Dropdown', () => {
 		const ulElement = container.querySelector('ul');
 
 		fireEvent.click(getByRole('button'));
-		expect(ulElement).toHaveStyle('display: block');
+		expect(ulElement).toBeVisible();
 		fireEvent.keyDown(container, { key: 'Escape', code: 'Escape' });
-		expect(ulElement).toHaveStyle('display: none');
+		expect(ulElement).not.toBeVisible();
 	});
 });

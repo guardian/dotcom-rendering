@@ -9,6 +9,7 @@ import {
 const getTextBlockElement = (length: number): TextBlockElement => {
 	return {
 		_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+		elementId: 'mockId',
 		html: `${'.'.repeat(length)}`,
 	};
 };
@@ -16,6 +17,7 @@ const getTextBlockElement = (length: number): TextBlockElement => {
 describe('ampadslots', () => {
 	const imageBlockElement: ImageBlockElement = {
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		elementId: 'mockId',
 		media: { allImages: [] },
 		data: { alt: 'img', credit: 'nobody' },
 		imageSources: [],
@@ -37,6 +39,7 @@ describe('ampadslots', () => {
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'mockId',
 					html: `Mr and Mrs Dursley of number 4 privet drive were proud to say${'.'.repeat(
 						700,
 					)}`,
@@ -44,6 +47,7 @@ describe('ampadslots', () => {
 				{
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'mockId',
 					html: `that they were perfectly normal${'.'.repeat(700)}`,
 				},
 			];

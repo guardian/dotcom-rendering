@@ -49,6 +49,9 @@ const RoleStory = ({
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -177,6 +180,7 @@ ThumbnailStory.story = { name: "Click to view in 'thumbnail' role" };
 const Inline: RoleType = 'inline';
 
 const instagramEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Instagram',
 	sourceDomain: 'instagram.com',
 	height: undefined,
@@ -195,6 +199,7 @@ const instagramInstramEmbed: InstagramBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 	html:
 		'<blockquote class="instagram-media" data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/BYJLF9SnA7I/" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Taylor Swift (@taylorswift)</a> on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2017-08-23T16:39:48+00:00">Aug 23, 2017 at 9:39am PDT</time></p></div></blockquote>\n<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>',
+	elementId: 'mockId',
 	source: 'Instagram',
 	sourceDomain: 'platform.instagram.com',
 	url: 'https://www.instagram.com/p/BYJLF9SnA7I/',
@@ -202,6 +207,7 @@ const instagramInstramEmbed: InstagramBlockElement = {
 };
 
 const formStackEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Formstack',
 	sourceDomain: 'formstack.com',
 	height: undefined,
@@ -216,6 +222,7 @@ const formStackEmbed: EmbedBlockElement = {
 };
 
 const facebookEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Facebook',
 	sourceDomain: 'facebook.com',
 	height: 221,
@@ -230,6 +237,7 @@ const facebookEmbed: EmbedBlockElement = {
 };
 
 const vimeoEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Vimeo',
 	sourceDomain: 'vimeo.com',
 	isThirdPartyTracking: false,
@@ -242,6 +250,7 @@ const vimeoEmbedEmbed: EmbedBlockElement = {
 };
 
 const vimeoVideoEmbed: VideoVimeoBlockElement = {
+	elementId: 'mockId',
 	source: 'Vimeo',
 	sourceDomain: 'vimeo.com',
 	embedUrl: 'https://player.vimeo.com/video/21693673?app_id=122963&dnt=true',
@@ -258,6 +267,7 @@ const vimeoVideoEmbed: VideoVimeoBlockElement = {
 };
 
 const scribdDocumentEmbed: DocumentBlockElement = {
+	elementId: 'mockId',
 	source: 'Scribd',
 	sourceDomain: 'scribd.com',
 	embedUrl: 'https://www.scribd.com/embeds/469886680/content',
@@ -269,6 +279,7 @@ const scribdDocumentEmbed: DocumentBlockElement = {
 };
 
 const scribdEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Scribd',
 	sourceDomain: 'scribd.com',
 	isThirdPartyTracking: true,
@@ -281,6 +292,7 @@ const scribdEmbedEmbed: EmbedBlockElement = {
 };
 
 const tiktokEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'TikTok',
 	sourceDomain: 'tiktok.com',
 	isThirdPartyTracking: true,
@@ -293,6 +305,7 @@ const tiktokEmbedEmbed: EmbedBlockElement = {
 };
 
 const soundcloudAudioEmbed: SoundcloudBlockElement = {
+	elementId: 'mockId',
 	source: 'Soundcloud',
 	sourceDomain: 'soundcloud.com',
 	isTrack: true,
@@ -305,6 +318,7 @@ const soundcloudAudioEmbed: SoundcloudBlockElement = {
 };
 
 const soundcloudEmbedEmbed: SoundcloudBlockElement = {
+	elementId: 'mockId',
 	source: 'Soundcloud',
 	sourceDomain: 'soundcloud.com',
 	isTrack: true,
@@ -317,6 +331,7 @@ const soundcloudEmbedEmbed: SoundcloudBlockElement = {
 };
 
 const youtubeEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Youtube',
 	sourceDomain: 'youtube.com',
 	height: 315,
@@ -331,6 +346,7 @@ const youtubeEmbedEmbed: EmbedBlockElement = {
 };
 
 const spotifyAudioEmbed: SpotifyBlockElement = {
+	elementId: 'mockId',
 	source: 'Spotify',
 	sourceDomain: 'spotify.com',
 	embedUrl:
@@ -345,6 +361,7 @@ const spotifyAudioEmbed: SpotifyBlockElement = {
 };
 
 const spotifyEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Spotify',
 	sourceDomain: 'spotify.com',
 	height: 380,
@@ -359,6 +376,7 @@ const spotifyEmbedEmbed: EmbedBlockElement = {
 };
 
 const bandcampEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Bandcamp',
 	sourceDomain: 'bandcamp.com',
 	height: undefined,
@@ -373,6 +391,7 @@ const bandcampEmbedEmbed: EmbedBlockElement = {
 };
 
 const twitterTweetEmbed: TweetBlockElement = {
+	elementId: 'mockId',
 	source: 'Twitter',
 	sourceDomain: 'twitter.com',
 	role: Inline,
@@ -386,6 +405,7 @@ const twitterTweetEmbed: TweetBlockElement = {
 };
 
 const twitterEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'Twitter',
 	sourceDomain: 'twitter.com',
 	height: undefined,
@@ -414,6 +434,7 @@ const ourworldindataEmbedEmbed = {
 };
 
 const bbcEmbedEmbed: EmbedBlockElement = {
+	elementId: 'mockId',
 	source: 'BBC',
 	sourceDomain: 'bbc.co.uk',
 	height: 500,
@@ -438,6 +459,9 @@ export const EmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -606,6 +630,9 @@ export const UnsafeEmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -751,6 +778,9 @@ export const VimeoBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className="para">
@@ -807,6 +837,9 @@ export const DocumentBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -851,6 +884,9 @@ export const SoundCloudBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -911,6 +947,9 @@ export const SpotifyBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -968,6 +1007,9 @@ export const TweetBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -1006,6 +1048,9 @@ export const InstagramBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>

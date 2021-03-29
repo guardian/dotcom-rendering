@@ -1,3 +1,4 @@
+/* eslint-disable */
 const amphtmlValidator = require('amphtml-validator');
 const http = require('http');
 
@@ -62,6 +63,7 @@ amphtmlValidator.getInstance().then((validator) => {
 		'environment/2021/feb/02/sea-level-rise-could-be-worse-than-feared-warn-researchers',
 		'uk-news/2021/feb/02/captain-sir-tom-moore-dies-at-100-after-testing-positive-for-covid',
 		'food/2021/feb/02/the-real-thing-my-battle-to-beat-a-27-year-diet-coke-addiction',
+		'money/2020/may/08/homebuyers-plotting-move-to-country-amid-increased-home-working',
 	].map((url) => {
 		// COPIED DIRECTLY FROM https://www.npmjs.com/package/amphtml-validator
 		http.get(
@@ -74,18 +76,21 @@ amphtmlValidator.getInstance().then((validator) => {
 				res.on('end', function () {
 					const result = validator.validateString(data);
 					console.log(url);
-					(result.status === 'PASS'
-						? console.log
-						: console.error)(result.status);
-					for (let ii = 0; ii < result.errors.length; ii++) {
-						const error = result.errors[ii];
-						let msg = `line ${error.line}, col ${error.col}: ${error.message}`;
-						if (error.specUrl !== null) {
-							msg += ` (see ${error.specUrl})`;
+					if (result.status === 'PASS') {
+						console.log('PASS');
+					} else {
+						console.error('FAIL');
+						for (let ii = 0; ii < result.errors.length; ii++) {
+							const error = result.errors[ii];
+							let msg = `line ${error.line}, col ${error.col}: ${error.message}`;
+							if (error.specUrl !== null) {
+								msg += ` (see ${error.specUrl})`;
+							}
+							(error.severity === 'ERROR'
+								? console.error
+								: console.warn)(msg);
 						}
-						(error.severity === 'ERROR'
-							? console.error
-							: console.warn)(msg);
+						throw new Error('Failed AMP Validation');
 					}
 				});
 			},

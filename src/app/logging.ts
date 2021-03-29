@@ -13,7 +13,7 @@ const logLocation =
 		: `${path.resolve('logs')}/dotcom-rendering.log`;
 
 const logFields = (logEvent: LoggingEvent): any => {
-	return {
+	const coreFields = {
 		stack: 'frontend',
 		app: 'dotcom-rendering',
 		stage: 'CODE',
@@ -21,7 +21,23 @@ const logFields = (logEvent: LoggingEvent): any => {
 		'@version': 1,
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
-		message: logEvent.data.join(','),
+	};
+	// log4js uses any[] to type data but we want to coerce it here
+	// because we now depend on the type to log the result properly
+	const data = (logEvent.data[0] as unknown) as
+		| Record<string, unknown>
+		| string;
+
+	if (typeof data === 'string') {
+		return {
+			...coreFields,
+			message: data,
+		};
+	}
+	return {
+		message: 'DCR Render event',
+		...coreFields,
+		...data,
 	};
 };
 

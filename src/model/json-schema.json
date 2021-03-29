@@ -410,6 +410,9 @@
                         "model.dotcomrendering.pageElements.AudioAtomBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -428,9 +431,6 @@
                 "coverUrl": {
                     "type": "string"
                 },
-                "audioIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -439,6 +439,7 @@
                 "_type",
                 "coverUrl",
                 "duration",
+                "elementId",
                 "id",
                 "kicker",
                 "trackUrl"
@@ -463,10 +464,14 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.AudioBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "elementId"
             ]
         },
         "BlockquoteBlockElement": {
@@ -478,6 +483,9 @@
                         "model.dotcomrendering.pageElements.BlockquoteBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -487,6 +495,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -498,6 +507,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.CaptionBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "captionText": {
                     "type": "string"
@@ -519,7 +531,8 @@
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "elementId"
             ]
         },
         "CalloutBlockElement": {
@@ -530,6 +543,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.CalloutBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -580,9 +596,6 @@
                         ]
                     }
                 },
-                "calloutIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -593,6 +606,7 @@
                 "calloutsUrl",
                 "description",
                 "displayOnSensitive",
+                "elementId",
                 "formFields",
                 "formId",
                 "id",
@@ -906,8 +920,8 @@
                         "model.dotcomrendering.pageElements.ChartAtomBlockElement"
                     ]
                 },
-                "chartIndex": {
-                    "type": "number"
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -933,6 +947,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
                 "id",
                 "url"
@@ -947,15 +962,15 @@
                         "model.dotcomrendering.pageElements.QuizAtomBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "quizType": {
                     "enum": [
                         "knowledge",
                         "personality"
                     ],
                     "type": "string"
-                },
-                "quizIndex": {
-                    "type": "number"
                 },
                 "id": {
                     "type": "string"
@@ -1065,6 +1080,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "id",
                 "questions",
                 "quizType",
@@ -1081,6 +1097,9 @@
                         "model.dotcomrendering.pageElements.CodeBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "code": {
                     "type": "string"
                 },
@@ -1094,6 +1113,7 @@
             "required": [
                 "_type",
                 "code",
+                "elementId",
                 "isMandatory"
             ]
         },
@@ -1116,6 +1136,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.CommentBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "body": {
                     "type": "string"
@@ -1144,6 +1167,7 @@
                 "avatarURL",
                 "body",
                 "dateTime",
+                "elementId",
                 "permalink",
                 "profileName",
                 "profileURL"
@@ -1158,13 +1182,17 @@
                         "model.dotcomrendering.pageElements.ContentAtomBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "atomId": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "atomId"
+                "atomId",
+                "elementId"
             ]
         },
         "DisclaimerBlockElement": {
@@ -1176,6 +1204,9 @@
                         "model.dotcomrendering.pageElements.DisclaimerBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -1185,6 +1216,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -1211,6 +1243,9 @@
                         "model.dotcomrendering.pageElements.DocumentBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "embedUrl": {
                     "type": "string"
                 },
@@ -1226,9 +1261,6 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
-                "documentIndex": {
-                    "type": "number"
-                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1241,6 +1273,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "embedUrl",
                 "height",
                 "isThirdPartyTracking",
@@ -1255,6 +1288,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.EmbedBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "safe": {
                     "type": "boolean"
@@ -1277,9 +1313,6 @@
                 "isMandatory": {
                     "type": "boolean"
                 },
-                "embedIndex": {
-                    "type": "number"
-                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1292,6 +1325,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
                 "isMandatory",
                 "isThirdPartyTracking"
@@ -1305,6 +1339,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.ExplainerAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1322,6 +1359,7 @@
             "required": [
                 "_type",
                 "body",
+                "elementId",
                 "id",
                 "title"
             ]
@@ -1334,6 +1372,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.GenericAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "url": {
                     "type": "string"
@@ -1356,6 +1397,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "url"
             ]
         },
@@ -1367,6 +1409,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.GuideAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1386,9 +1431,6 @@
                 "credit": {
                     "type": "string"
                 },
-                "guideIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -1396,6 +1438,7 @@
             "required": [
                 "_type",
                 "credit",
+                "elementId",
                 "html",
                 "id",
                 "label",
@@ -1410,6 +1453,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.GuVideoBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "assets": {
                     "type": "array",
@@ -1454,6 +1500,7 @@
                 "_type",
                 "assets",
                 "caption",
+                "elementId",
                 "html",
                 "source"
             ]
@@ -1550,12 +1597,16 @@
                         "model.dotcomrendering.pageElements.HighlightBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -1567,6 +1618,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.ImageBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "media": {
                     "type": "object",
@@ -1618,6 +1672,7 @@
             "required": [
                 "_type",
                 "data",
+                "elementId",
                 "imageSources",
                 "media",
                 "role"
@@ -1676,6 +1731,9 @@
                         "model.dotcomrendering.pageElements.InstagramBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -1687,9 +1745,6 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
-                },
-                "instagramIndex": {
-                    "type": "number"
                 },
                 "isThirdPartyTracking": {
                     "type": "boolean"
@@ -1703,6 +1758,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "hasCaption",
                 "html",
                 "isThirdPartyTracking",
@@ -1718,6 +1774,9 @@
                         "model.dotcomrendering.pageElements.InteractiveAtomBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -1742,6 +1801,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "id",
                 "js",
                 "url"
@@ -1756,28 +1816,28 @@
                         "model.dotcomrendering.pageElements.InteractiveBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
-                "placeholderUrl": {
+                "isMandatory": {
+                    "type": "boolean"
+                },
+                "scriptUrl": {
                     "type": "string"
                 },
-                "id": {
+                "alt": {
                     "type": "string"
                 },
-                "html": {
-                    "type": "string"
-                },
-                "css": {
-                    "type": "string"
-                },
-                "js": {
-                    "type": "string"
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
                 "_type",
-                "url"
+                "elementId"
             ]
         },
         "MapBlockElement": {
@@ -1788,6 +1848,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.MapBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "embedUrl": {
                     "type": "string"
@@ -1810,9 +1873,6 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
-                "mapIndex": {
-                    "type": "number"
-                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -1825,6 +1885,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "embedUrl",
                 "height",
                 "isThirdPartyTracking",
@@ -1841,6 +1902,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.MediaAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1879,6 +1943,7 @@
             "required": [
                 "_type",
                 "assets",
+                "elementId",
                 "id"
             ]
         },
@@ -1890,6 +1955,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.MultiImageBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "images": {
                     "type": "array",
@@ -1906,6 +1974,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "images"
             ]
         },
@@ -1917,6 +1986,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.ProfileAtomBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -1936,9 +2008,6 @@
                 "credit": {
                     "type": "string"
                 },
-                "profileIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -1946,6 +2015,7 @@
             "required": [
                 "_type",
                 "credit",
+                "elementId",
                 "html",
                 "id",
                 "label",
@@ -1960,6 +2030,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.PullquoteBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "html": {
                     "type": "string"
@@ -1976,6 +2049,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "role"
             ]
         },
@@ -1987,6 +2061,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.QABlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -2003,9 +2080,6 @@
                 "credit": {
                     "type": "string"
                 },
-                "qandaIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -2013,6 +2087,7 @@
             "required": [
                 "_type",
                 "credit",
+                "elementId",
                 "html",
                 "id",
                 "title"
@@ -2027,6 +2102,9 @@
                         "model.dotcomrendering.pageElements.RichLinkBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -2038,13 +2116,11 @@
                 },
                 "role": {
                     "$ref": "#/definitions/Weighting"
-                },
-                "richLinkIndex": {
-                    "type": "number"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "prefix",
                 "text",
                 "url"
@@ -2058,6 +2134,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.SoundcloudBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "html": {
                     "type": "string"
@@ -2086,6 +2165,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
                 "id",
                 "isMandatory",
@@ -2101,6 +2181,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.SpotifyBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "embedUrl": {
                     "type": "string"
@@ -2120,9 +2203,6 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
-                "spotifyIndex": {
-                    "type": "number"
-                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -2135,6 +2215,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "isThirdPartyTracking"
             ]
         },
@@ -2147,12 +2228,16 @@
                         "model.dotcomrendering.pageElements.SubheadingBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -2164,6 +2249,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.TableBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "isMandatory": {
                     "type": "boolean"
@@ -2177,6 +2265,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html",
                 "isMandatory"
             ]
@@ -2190,6 +2279,9 @@
                         "model.dotcomrendering.pageElements.TextBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "dropCap": {
                     "type": "boolean"
                 },
@@ -2199,6 +2291,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "html"
             ]
         },
@@ -2210,6 +2303,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.TimelineBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -2226,15 +2322,13 @@
                         "$ref": "#/definitions/TimelineEvent"
                     }
                 },
-                "timelineIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "events",
                 "id",
                 "title"
@@ -2270,6 +2364,9 @@
                         "model.dotcomrendering.pageElements.TweetBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "html": {
                     "type": "string"
                 },
@@ -2297,6 +2394,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "hasMedia",
                 "html",
                 "id",
@@ -2313,6 +2411,9 @@
                         "model.dotcomrendering.pageElements.VineBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -2328,9 +2429,6 @@
                 "title": {
                     "type": "string"
                 },
-                "vineBlockIndex": {
-                    "type": "number"
-                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -2343,6 +2441,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "height",
                 "isThirdPartyTracking",
                 "originalUrl",
@@ -2360,6 +2459,9 @@
                         "model.dotcomrendering.pageElements.VideoBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
@@ -2375,6 +2477,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "isThirdPartyTracking"
             ]
         },
@@ -2386,6 +2489,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.VideoFacebookBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "url": {
                     "type": "string"
@@ -2405,9 +2511,6 @@
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
-                "videoFacebookIndex": {
-                    "type": "number"
-                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },
@@ -2420,6 +2523,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "height",
                 "isThirdPartyTracking",
                 "url",
@@ -2435,6 +2539,9 @@
                         "model.dotcomrendering.pageElements.VideoVimeoBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "embedUrl": {
                     "type": "string"
                 },
@@ -2474,6 +2581,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "height",
                 "isThirdPartyTracking",
                 "url",
@@ -2489,6 +2597,9 @@
                         "model.dotcomrendering.pageElements.VideoYoutubeBlockElement"
                     ]
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "embedUrl": {
                     "type": "string"
                 },
@@ -2528,6 +2639,7 @@
             },
             "required": [
                 "_type",
+                "elementId",
                 "height",
                 "isThirdPartyTracking",
                 "originalUrl",
@@ -2543,6 +2655,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.YoutubeBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "assetId": {
                     "type": "string"
@@ -2586,9 +2701,6 @@
                 "altText": {
                     "type": "string"
                 },
-                "youtubeIndex": {
-                    "type": "number"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 }
@@ -2596,6 +2708,7 @@
             "required": [
                 "_type",
                 "assetId",
+                "elementId",
                 "expired",
                 "id",
                 "mediaTitle"
@@ -2609,6 +2722,9 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.WitnessBlockElement"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 },
                 "assets": {
                     "type": "array",
@@ -2642,6 +2758,7 @@
             "required": [
                 "_type",
                 "assets",
+                "elementId",
                 "isThirdPartyTracking",
                 "witnessTypeData"
             ]
@@ -3786,15 +3903,18 @@
                 "support": {
                     "type": "string"
                 },
+                "supporter": {
+                    "type": "string"
+                },
                 "gifting": {
                     "type": "string"
                 }
             },
             "required": [
                 "contribute",
-                "gifting",
                 "subscribe",
-                "support"
+                "support",
+                "supporter"
             ]
         },
         "FooterType": {

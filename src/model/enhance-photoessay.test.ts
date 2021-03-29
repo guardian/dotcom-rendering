@@ -2,7 +2,7 @@ import { Pillar } from '@guardian/types';
 
 import { enhancePhotoEssay } from './enhance-photoessay';
 import { bodyJSON } from './exampleBodyJSON';
-import { exampleImage as image } from '../../fixtures/exampleImage';
+import { images } from '../../fixtures/generated/images';
 
 const article: CAPIType = JSON.parse(bodyJSON);
 const photoEssay = {
@@ -12,6 +12,7 @@ const photoEssay = {
 		isPhotoEssay: true,
 	},
 };
+const image = images[0];
 
 const metaData = {
 	id: '123',
@@ -77,6 +78,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li>Judy, just sitting in the square on her own in Walworth.</li></ul>',
 						},
@@ -94,7 +96,7 @@ describe('Enhance Photo Essays', () => {
 					elements: [
 						{
 							...image,
-							role: 'inline',
+							role: 'showcase',
 							displayCredit: false,
 							data: {
 								...image.data,
@@ -120,6 +122,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{ ...image, role: 'halfWidth' },
@@ -127,6 +130,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 						},
@@ -145,11 +149,13 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -185,6 +191,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{ ...image, role: 'inline' },
@@ -192,6 +199,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 						},
@@ -210,6 +218,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{
@@ -246,12 +255,14 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 						},
@@ -270,6 +281,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example text</h2>',
 						},
 						{
@@ -300,11 +312,13 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>Example title text</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -331,6 +345,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -351,23 +366,27 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -385,6 +404,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -400,6 +420,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -420,23 +441,27 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -454,6 +479,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -469,6 +495,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 					],
@@ -489,23 +516,27 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
@@ -524,6 +555,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -539,6 +571,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -567,23 +600,27 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						image,
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{ ...image, role: 'inline' },
@@ -603,6 +640,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -618,6 +656,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html: '<p>Just some normal text</p>',
 						},
 						{
@@ -653,6 +692,7 @@ describe('Enhance Photo Essays', () => {
 							// @ts-ignore
 							_type:
 								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
 							// @ts-ignore
 							pillar: Pillar.News,
@@ -663,6 +703,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
 					],
@@ -680,6 +721,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
 							pillar: Pillar.News,
 							designType: 'PhotoEssay',
@@ -716,6 +758,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
@@ -734,6 +777,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -752,6 +796,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,
@@ -790,6 +835,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
 							html:
 								'<ul><li><p>This is the caption</p></li></ul>',
 						},
@@ -808,6 +854,7 @@ describe('Enhance Photo Essays', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							elementId: images[0].elementId,
 							images: [
 								{
 									...image,

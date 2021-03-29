@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
@@ -14,6 +13,14 @@ import MessengerIcon from '@frontend/static/icons/messenger.svg';
 
 import { Hide } from './Hide';
 
+type Props = {
+	pageId: string;
+	webTitle: string;
+	displayIcons: SharePlatform[];
+	palette: Palette;
+	size: ShareIconSize;
+};
+
 const ulStyles = css`
 	float: left;
 	${from.wide} {
@@ -21,22 +28,28 @@ const ulStyles = css`
 	}
 `;
 
-const liStyles = css`
-	padding: 0 3px 6px 0;
+const liStyles = (size: ShareIconSize) => css`
+	padding-right: 3px;
 	float: left;
-	min-width: 32px;
+	min-width: ${size === 'small' ? '23px' : '32px'};
 	cursor: pointer;
 `;
 
-const iconStyles = (palette: Palette) => css`
-	border: 1px solid ${border.secondary};
+const iconStyles = ({
+	palette,
+	size,
+}: {
+	palette: Palette;
+	size: ShareIconSize;
+}) => css`
+	border: 1px solid ${palette.border.article};
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	min-width: 32px;
+	min-width: ${size === 'small' ? '23px' : '32px'};
 	max-width: 100%;
 	width: auto;
-	height: 32px;
+	height: ${size === 'small' ? '23px' : '32px'};
 	border-radius: 50%;
 	display: inline-block;
 	vertical-align: middle;
@@ -69,25 +82,27 @@ const encodeUrl = (pageId: string): string => {
 const encodeTitle = (webTitle: string): string => {
 	return encodeURIComponent(webTitle.replace(/Leave.EU/gi, 'Leave. EU'));
 };
-export const ShareIcons: React.FC<{
-	pageId: string;
-	webTitle: string;
-	displayIcons: SharePlatform[];
-	palette: Palette;
-}> = ({ pageId, webTitle, displayIcons, palette }) => {
+export const ShareIcons = ({
+	pageId,
+	webTitle,
+	displayIcons,
+	palette,
+	size,
+}: Props) => {
 	return (
 		<ul className={ulStyles}>
 			{displayIcons.includes('facebook') && (
-				<li className={liStyles} key="facebook">
+				<li className={liStyles(size)} key="facebook">
 					<a
-						href={`https://www.facebook.com/dialog/share?app_id=202314643182694&href=${encodeUrl(
+						href={`https://www.facebook.com/dialog/share?app_id=180444840287&href=${encodeUrl(
 							pageId,
 						)}&CMP=share_btn_fb`}
 						role="button"
 						aria-label="Share on Facebook"
 						target="_blank"
+						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles(palette)}>
+						<span className={iconStyles({ palette, size })}>
 							<FacebookIcon />
 						</span>
 					</a>
@@ -95,7 +110,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('twitter') && (
-				<li className={liStyles} key="twitter">
+				<li className={liStyles(size)} key="twitter">
 					<a
 						href={`https://twitter.com/intent/tweet?text=${encodeTitle(
 							webTitle,
@@ -103,8 +118,9 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
+						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles(palette)}>
+						<span className={iconStyles({ palette, size })}>
 							<TwitterIconPadded />
 						</span>
 					</a>
@@ -112,7 +128,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('email') && (
-				<li className={liStyles} key="email">
+				<li className={liStyles(size)} key="email">
 					<a
 						href={`mailto:?subject=${encodeTitle(
 							webTitle,
@@ -120,8 +136,9 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
+						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles(palette)}>
+						<span className={iconStyles({ palette, size })}>
 							<EmailIcon />
 						</span>
 					</a>
@@ -129,7 +146,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('linkedIn') && (
-				<li className={liStyles} key="linkedIn">
+				<li className={liStyles(size)} key="linkedIn">
 					<a
 						href={`http://www.linkedin.com/shareArticle?title=${encodeTitle(
 							webTitle,
@@ -137,8 +154,9 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share on LinkedIn"
 						target="_blank"
+						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles(palette)}>
+						<span className={iconStyles({ palette, size })}>
 							<LinkedInIcon />
 						</span>
 					</a>
@@ -146,7 +164,7 @@ export const ShareIcons: React.FC<{
 			)}
 
 			{displayIcons.includes('pinterest') && (
-				<li className={liStyles} key="pinterest">
+				<li className={liStyles(size)} key="pinterest">
 					<a
 						href={`http://www.pinterest.com/pin/find/?url=${encodeUrl(
 							pageId,
@@ -154,8 +172,9 @@ export const ShareIcons: React.FC<{
 						role="button"
 						aria-label="Share on Pinterest"
 						target="_blank"
+						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles(palette)}>
+						<span className={iconStyles({ palette, size })}>
 							<PinterestIcon />
 						</span>
 					</a>
@@ -164,7 +183,7 @@ export const ShareIcons: React.FC<{
 
 			{displayIcons.includes('whatsApp') && (
 				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles} key="whatsApp">
+					<li className={liStyles(size)} key="whatsApp">
 						<a
 							href={`whatsapp://send?text="${encodeTitle(
 								webTitle,
@@ -172,8 +191,9 @@ export const ShareIcons: React.FC<{
 							role="button"
 							aria-label="Share on WhatsApp"
 							target="_blank"
+							data-ignore="global-link-styling"
 						>
-							<span className={iconStyles(palette)}>
+							<span className={iconStyles({ palette, size })}>
 								<WhatsAppIcon />
 							</span>
 						</a>
@@ -183,7 +203,7 @@ export const ShareIcons: React.FC<{
 
 			{displayIcons.includes('messenger') && (
 				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles} key="messenger">
+					<li className={liStyles(size)} key="messenger">
 						<a
 							href={`fb-messenger://share?link=${encodeUrl(
 								pageId,
@@ -191,8 +211,9 @@ export const ShareIcons: React.FC<{
 							role="button"
 							aria-label="Share on Messanger>"
 							target="_blank"
+							data-ignore="global-link-styling"
 						>
-							<span className={iconStyles(palette)}>
+							<span className={iconStyles({ palette, size })}>
 								<MessengerIcon />
 							</span>
 						</a>

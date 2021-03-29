@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 
 import { HeadlineByline } from './HeadlineByline';
 
@@ -13,9 +13,11 @@ export default {
 export const interviewStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Interview}
-			pillar={Pillar.Culture}
+			format={{
+				display: Display.Standard,
+				design: Design.Interview,
+				theme: Pillar.Culture,
+			}}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -26,9 +28,11 @@ interviewStory.story = { name: 'Interview' };
 export const commentStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Comment}
-			pillar={Pillar.Sport}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Sport,
+			}}
 			byline="Jane Smith"
 			tags={[]}
 		/>
@@ -36,13 +40,30 @@ export const commentStory = () => {
 };
 commentStory.story = { name: 'Comment' };
 
+export const specialStory = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Special.SpecialReport,
+			}}
+			byline="Jane Smith"
+			tags={[]}
+		/>
+	);
+};
+specialStory.story = { name: 'SpecialReport' };
+
 export const commentWithBylineImageStory = () => {
 	// Not visibly different in storybook but will apply a width
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Comment}
-			pillar={Pillar.Sport}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Sport,
+			}}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -62,9 +83,11 @@ commentWithBylineImageStory.story = { name: 'Comment with byline image' };
 export const immersiveStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Immersive}
-			design={Design.Article}
-			pillar={Pillar.Lifestyle}
+			format={{
+				display: Display.Immersive,
+				design: Design.Article,
+				theme: Pillar.Lifestyle,
+			}}
 			byline="Jane Smith"
 			tags={[
 				{
@@ -87,9 +110,11 @@ export const ImmersiveComment = () => {
 			`}
 		>
 			<HeadlineByline
-				display={Display.Immersive}
-				design={Design.Comment}
-				pillar={Pillar.Lifestyle}
+				format={{
+					display: Display.Immersive,
+					design: Design.Comment,
+					theme: Pillar.Lifestyle,
+				}}
 				byline="Jane Smith"
 				tags={[
 					{
@@ -107,9 +132,11 @@ ImmersiveComment.story = { name: 'Immersive Comment' };
 export const MultipleStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Immersive}
-			design={Design.Article}
-			pillar={Pillar.Lifestyle}
+			format={{
+				display: Display.Immersive,
+				design: Design.Article,
+				theme: Pillar.Lifestyle,
+			}}
 			byline="Jane Smith, John Doe and Nae Bevan"
 			tags={[
 				{
@@ -136,12 +163,77 @@ MultipleStory.story = { name: 'Immersive with multiple contributors' };
 export const noBylineStory = () => {
 	return (
 		<HeadlineByline
-			display={Display.Standard}
-			design={Design.Interview}
-			pillar={Pillar.Culture}
+			format={{
+				display: Display.Standard,
+				design: Design.Interview,
+				theme: Pillar.Culture,
+			}}
 			byline=""
 			tags={[]}
 		/>
 	);
 };
 noBylineStory.story = { name: 'No byline' };
+
+export const LabsImmersive = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Immersive,
+				design: Design.Article,
+				theme: Special.Labs,
+			}}
+			byline="Jane Smith"
+			tags={[
+				{
+					id: '1',
+					type: 'Contributor',
+					title: 'Jane Smith',
+				},
+			]}
+		/>
+	);
+};
+LabsImmersive.story = { name: 'Labs Immersive' };
+
+export const LabsComment = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Special.Labs,
+			}}
+			byline="Jane Smith"
+			tags={[
+				{
+					id: '1',
+					type: 'Contributor',
+					title: 'Jane Smith',
+				},
+			]}
+		/>
+	);
+};
+LabsComment.story = { name: 'Labs Comment' };
+
+export const LabsInterview = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Standard,
+				design: Design.Interview,
+				theme: Special.Labs,
+			}}
+			byline="Jane Smith"
+			tags={[
+				{
+					id: '1',
+					type: 'Contributor',
+					title: 'Jane Smith',
+				},
+			]}
+		/>
+	);
+};
+LabsInterview.story = { name: 'Labs Interview' };

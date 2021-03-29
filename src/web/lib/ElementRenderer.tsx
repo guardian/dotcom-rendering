@@ -5,7 +5,7 @@ import { CalloutBlockComponent } from '@root/src/web/components/elements/Callout
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/elements/CommentBlockComponent';
 import { CodeBlockComponent } from '@root/src/web/components/elements/CodeBlockComponent';
-import { DefaultRichLink } from '@root/src/web/components/RichLink';
+import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/elements/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/elements/DividerBlockComponent';
@@ -15,6 +15,8 @@ import { GuVideoBlockComponent } from '@root/src/web/components/elements/GuVideo
 import { HighlightBlockComponent } from '@root/src/web/components/elements/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
+import { MainMediaEmbedBlockComponent } from '@root/src/web/components/elements/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
@@ -60,6 +62,7 @@ type Props = {
 	index: number;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
+	isLiveBlog?: boolean;
 	starRating?: number;
 };
 
@@ -72,6 +75,7 @@ export const ElementRenderer = ({
 	index,
 	hideCaption,
 	isMainMedia,
+	isLiveBlog,
 	starRating,
 }: Props) => {
 	switch (element._type) {
@@ -79,8 +83,8 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`audio-atom-${index}`}
-					role={element.role}
+					id={element.elementId}
+					role={isLiveBlog ? 'inline' : element.role}
 				>
 					<AudioAtom
 						id={element.id}
@@ -96,7 +100,7 @@ export const ElementRenderer = ({
 				<BlockquoteBlockComponent
 					key={index}
 					html={element.html}
-					pillar={format.theme}
+					palette={palette}
 					quoted={element.quoted}
 				/>
 			);
@@ -104,12 +108,12 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`callout-${index}`}
-					role={element.role}
+					id={element.elementId}
+					role={isLiveBlog ? 'inline' : element.role}
 				>
 					<CalloutBlockComponent
 						callout={element}
-						pillar={format.theme}
+						palette={palette}
 					/>
 				</Figure>
 			);
@@ -129,7 +133,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<ChartAtom id={element.id} html={element.html} />
 				</Figure>
 			);
@@ -142,7 +149,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.CommentBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<CommentBlockComponent
 						body={element.body}
 						avatarURL={element.avatarURL}
@@ -155,11 +165,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
-					<DisclaimerBlockComponent
-						html={element.html}
-						pillar={format.theme}
-					/>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
+					<DisclaimerBlockComponent html={element.html} />
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
@@ -168,11 +178,11 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`document-block-element-${index}`}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<ClickToView
-						role={element.role}
+						role={isLiveBlog ? 'inline' : element.role}
 						isTracking={element.isThirdPartyTracking}
 						isMainMedia={isMainMedia}
 						source={element.source}
@@ -183,21 +193,36 @@ export const ElementRenderer = ({
 							height={element.height}
 							width={element.width}
 							title={element.title}
+							source={element.source}
 						/>
 					</ClickToView>
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			if (!element.safe) {
+				if (isMainMedia) {
+					return (
+						<Figure
+							isMainMedia={isMainMedia}
+							role={element.role}
+							id={element.elementId}
+						>
+							<MainMediaEmbedBlockComponent
+								title={element.alt || ''}
+								srcDoc={element.html}
+							/>
+						</Figure>
+					);
+				}
+
 				return (
 					<Figure
 						isMainMedia={isMainMedia}
-						role={element.role}
-						id={`embed-block-element-${index}`}
-						key={`embed-block-element-${index}`}
+						role={isLiveBlog ? 'inline' : element.role}
+						id={element.elementId}
 					>
 						<ClickToView
-							role={element.role}
+							role={isLiveBlog ? 'inline' : element.role}
 							isTracking={element.isThirdPartyTracking}
 							isMainMedia={isMainMedia}
 							source={element.source}
@@ -216,12 +241,11 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`embed-block-element-${index}`}
-					key={`embed-block-element-${index}`}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<ClickToView
-						role={element.role}
+						role={isLiveBlog ? 'inline' : element.role}
 						isTracking={element.isThirdPartyTracking}
 						isMainMedia={isMainMedia}
 						source={element.source}
@@ -237,7 +261,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<ExplainerAtom
 						key={index}
 						id={element.id}
@@ -250,8 +277,8 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`guide-atom-${index}`}
-					role={element.role}
+					id={element.elementId}
+					role={isLiveBlog ? 'inline' : element.role}
 				>
 					<GuideAtom
 						id={element.id}
@@ -268,7 +295,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<GuVideoBlockComponent
 						html={element.html}
 						format={format}
@@ -282,7 +312,10 @@ export const ElementRenderer = ({
 			return <HighlightBlockComponent key={index} html={element.html} />;
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<ImageBlockComponent
 						format={format}
 						palette={palette}
@@ -299,12 +332,11 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`instagram-block-element-${index}`}
-					key={`instagram-block-element-${index}`}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<ClickToView
-						role={element.role}
+						role={isLiveBlog ? 'inline' : element.role}
 						isTracking={element.isThirdPartyTracking}
 						isMainMedia={isMainMedia}
 						source={element.source}
@@ -320,7 +352,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<InteractiveAtom
 						id={element.id}
 						html={element.html}
@@ -329,16 +364,29 @@ export const ElementRenderer = ({
 					/>
 				</Figure>
 			);
+		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
+			return (
+				<Figure
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
+				>
+					<InteractiveBlockComponent
+						url={element.url}
+						scriptUrl={element.scriptUrl}
+						alt={element.alt}
+						role={element.role}
+					/>
+				</Figure>
+			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`map-block-element-${index}`}
-					key={`map-block-element-${index}`}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<ClickToView
-						role={element.role}
+						role={isLiveBlog ? 'inline' : element.role}
 						isTracking={element.isThirdPartyTracking}
 						isMainMedia={isMainMedia}
 						source={element.source}
@@ -366,7 +414,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<MultiImageBlockComponent
 						format={format}
 						palette={palette}
@@ -380,8 +431,8 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`profile-atom-${index}`}
-					role={element.role}
+					id={element.elementId}
+					role={isLiveBlog ? 'inline' : element.role}
 				>
 					<ProfileAtom
 						id={element.id}
@@ -401,18 +452,18 @@ export const ElementRenderer = ({
 				<PullQuoteBlockComponent
 					key={index}
 					html={element.html}
-					pillar={format.theme}
+					palette={palette}
 					design={format.design}
 					attribution={element.attribution}
-					role={element.role}
+					role={isLiveBlog ? 'inline' : element.role}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					id={`qanda-atom-${index}`}
-					role={element.role}
+					id={element.elementId}
+					role={isLiveBlog ? 'inline' : element.role}
 				>
 					<QandaAtom
 						id={element.id}
@@ -429,7 +480,7 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} id={`quiz-atom-${index}`}>
+				<Figure isMainMedia={isMainMedia} id={element.elementId}>
 					<>
 						{element.quizType === 'personality' && (
 							<PersonalityQuizAtom
@@ -449,21 +500,26 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return (
-				<div key={index} id={`rich-link-${index}`}>
+				<Figure
+					id={element.elementId}
+					isMainMedia={isMainMedia}
+					key={index}
+					role={isLiveBlog ? 'inline' : 'richLink'}
+				>
 					<DefaultRichLink
 						index={index}
 						headlineText={element.text}
 						url={element.url}
 						isPlaceholder={true}
 					/>
-				</div>
+				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
 					key={index}
-					role={element.role}
+					role={isLiveBlog ? 'inline' : element.role}
 				>
 					<SoundcloudBlockComponent element={element} />
 				</Figure>
@@ -472,12 +528,11 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`spotify-block-element-${index}`}
-					key={`spotify-block-element-${index}`}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<ClickToView
-						role={element.role}
+						role={isLiveBlog ? 'inline' : element.role}
 						isTracking={element.isThirdPartyTracking}
 						isMainMedia={isMainMedia}
 						source={element.source}
@@ -500,7 +555,10 @@ export const ElementRenderer = ({
 			return <SubheadingBlockComponent key={index} html={element.html} />;
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<TableBlockComponent element={element} />
 				</Figure>
 			);
@@ -520,8 +578,8 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`timeline-atom-${index}`}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<TimelineAtom
 						id={element.id}
@@ -539,7 +597,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					key={index}
-					role={element.role}
+					role={isLiveBlog ? 'inline' : element.role}
 				>
 					<TweetBlockComponent element={element} />
 				</Figure>
@@ -548,12 +606,11 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={element.role}
-					id={`video-facebook-block-element-${index}`}
-					key={`video-facebook-block-element-${index}`}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<ClickToView
-						role={element.role}
+						role={isLiveBlog ? 'inline' : element.role}
 						isTracking={element.isThirdPartyTracking}
 						isMainMedia={isMainMedia}
 						source={element.source}
@@ -574,7 +631,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<VimeoBlockComponent
 						format={format}
 						palette={palette}
@@ -589,7 +649,10 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} role={element.role}>
+				<Figure
+					isMainMedia={isMainMedia}
+					role={isLiveBlog ? 'inline' : element.role}
+				>
 					<YoutubeEmbedBlockComponent
 						format={format}
 						palette={palette}
@@ -608,8 +671,7 @@ export const ElementRenderer = ({
 					// No role given by CAPI
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
-					id={`vine-block-element-${index}`}
-					key={`vine-block-element-${index}`}
+					id={element.elementId}
 				>
 					<ClickToView
 						// No role given by CAPI
@@ -638,7 +700,7 @@ export const ElementRenderer = ({
 								authorName={witnessTypeDataImage.authorName}
 								dateCreated={witnessTypeDataImage.dateCreated}
 								alt={witnessTypeDataImage.alt}
-								pillar={format.theme}
+								palette={palette}
 							/>
 						</Figure>
 					);
@@ -653,7 +715,7 @@ export const ElementRenderer = ({
 								authorName={witnessTypeDataVideo.authorName}
 								youtubeHtml={witnessTypeDataVideo.youtubeHtml}
 								dateCreated={witnessTypeDataVideo.dateCreated}
-								pillar={format.theme}
+								palette={palette}
 							/>
 						</Figure>
 					);
@@ -667,7 +729,7 @@ export const ElementRenderer = ({
 								description={witnessTypeDataText.description}
 								authorName={witnessTypeDataText.authorName}
 								dateCreated={witnessTypeDataText.dateCreated}
-								pillar={format.theme}
+								palette={palette}
 							/>
 						</Figure>
 					);
@@ -679,13 +741,8 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					key={index}
-					role={element.role}
-					id={
-						isMainMedia
-							? `youtube-block-main-media-${index}`
-							: `youtube-block-${index}`
-					}
+					role={isLiveBlog ? 'inline' : element.role}
+					id={element.elementId}
 				>
 					<YoutubeBlockComponent
 						format={format}

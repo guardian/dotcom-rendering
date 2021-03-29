@@ -9,13 +9,17 @@ import {
 	sport,
 	brandAltBackground,
 	border,
+	brand,
 	brandAlt,
+	lifestyle,
+	culture,
+	labs,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
 
 const WHITE = neutral[100];
-const BLACK = text.primary;
+const BLACK = neutral[7];
 
 const textHeadline = (format: Format): string => {
 	switch (format.display) {
@@ -37,6 +41,7 @@ const textHeadline = (format: Format): string => {
 				case Design.Feature:
 					return pillarPalette[format.theme].dark;
 				case Design.Interview:
+				case Design.LiveBlog:
 					return WHITE;
 				default:
 					return BLACK;
@@ -48,6 +53,7 @@ const textHeadline = (format: Format): string => {
 };
 
 const textSeriesTitle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
@@ -55,6 +61,17 @@ const textSeriesTitle = (format: Format): string => {
 		case Display.Showcase:
 		case Display.Standard:
 			switch (format.design) {
+				case Design.LiveBlog:
+					switch (format.theme) {
+						case Pillar.News:
+							return news[600];
+						case Pillar.Sport:
+						case Pillar.Lifestyle:
+						case Pillar.Culture:
+						case Pillar.Opinion:
+						default:
+							return WHITE;
+					}
 				case Design.MatchReport:
 					return BLACK;
 				default:
@@ -68,6 +85,7 @@ const textSeriesTitle = (format: Format): string => {
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
@@ -85,7 +103,18 @@ const textByline = (format: Format): string => {
 	}
 };
 
+const textHeadlineByline = (format: Format): string => {
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
+const textStandfirst = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return WHITE;
+	return BLACK;
+};
+
 const textTwitterHandle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
@@ -106,26 +135,31 @@ const textCaptionLink = (format: Format): string => {
 };
 
 const textSubMeta = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
 };
 
 const textSubMetaLabel = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
 
 const textSubMetaLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
 
 const textSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return text.supporting;
 };
 
 const textArticleLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -136,7 +170,41 @@ const textArticleLink = (format: Format): string => {
 	}
 };
 
+const textDisclaimerLink = (format: Format): string =>
+	pillarPalette[format.theme].dark;
+
+const textWitnessIcon = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textWitnessTitle = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textWitnessAuthor = (format: Format): string =>
+	pillarPalette[format.theme].main;
+
+const textPullQuote = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
+const textStandfirstLink = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return WHITE;
+	if (format.theme === Special.SpecialReport) return specialReport[400];
+	switch (format.theme) {
+		case Pillar.Opinion:
+		case Pillar.Culture:
+			return pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
+const textBranding = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
+	return pillarPalette[format.theme].main;
+};
+
 const textArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -155,8 +223,19 @@ const textCardHeadline = (format: Format): string => {
 		case Design.Interview:
 			return pillarPalette[format.theme].dark;
 		case Design.Media:
-		case Design.Live:
-			return neutral[97];
+			return WHITE;
+		case Design.LiveBlog:
+			switch (format.theme) {
+				case Special.Labs:
+					return BLACK;
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				default:
+					return WHITE;
+			}
 		default:
 			return BLACK;
 	}
@@ -176,14 +255,21 @@ const textCardKicker = (format: Format): string => {
 	if (format.display === Display.Immersive)
 		return pillarPalette[format.theme].bright;
 	switch (format.design) {
-		case Design.Live:
+		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
 					return news[600];
 				case Pillar.Sport:
 					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -216,16 +302,23 @@ const textCardFooter = (format: Format): string => {
 				default:
 					return neutral[60];
 			}
-		case Design.Live:
+		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
 				case Special.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -259,10 +352,13 @@ const textLinkKicker = (format: Format): string => {
 };
 
 const backgroundArticle = (format: Format): string => {
+	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
+		return neutral[93];
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === Design.Comment) return opinion[800];
-	if (format.design === Design.GuardianView) return opinion[800];
+	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
+	if (format.theme === Special.Labs) return neutral[97];
 	return 'transparent';
 };
 
@@ -304,13 +400,23 @@ const backgroundAvatar = (format: Format): string => {
 const backgroundCard = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return opinion[800];
 		case Design.Media:
 			return neutral[20];
-		case Design.Live:
-			return pillarPalette[format.theme].dark;
+		case Design.LiveBlog:
+			switch (format.theme) {
+				case Special.Labs:
+					return labs[400];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				default:
+					return pillarPalette[format.theme][300];
+			}
 		default:
 			return neutral[97];
 	}
@@ -331,20 +437,64 @@ const backgroundHeadline = (format: Format): string => {
 	}
 };
 
+const backgroundHeadlineByline = (format: Format): string => {
+	if (format.theme === Special.SpecialReport)
+		return brandAltBackground.primary;
+	return 'transparent';
+};
+
+const backgroundBullet = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
+	if (format.theme === Special.SpecialReport) return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
+const backgroundHeader = (format: Format): string => {
+	switch (format.design) {
+		case Design.LiveBlog:
+			return pillarPalette[format.theme][400];
+		default:
+			return backgroundArticle(format);
+	}
+};
+
+const backgroundStandfirst = (format: Format): string => {
+	switch (format.design) {
+		case Design.LiveBlog:
+			return pillarPalette[format.theme][300];
+		default:
+			return backgroundArticle(format);
+	}
+};
+
+const backgroundImageTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const backgroundSpeechBubble = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 const fillCommentCount = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
 
 const fillShareIcon = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
 
 const fillCaptionTriangle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
+
+const fillBlockquoteIcon = (format: Format): string =>
+	pillarPalette[format.theme].main;
 
 const fillCardIcon = (format: Format): string => {
 	// Setting Card clock colour for immersive cards to all be dark grey
@@ -359,16 +509,24 @@ const fillCardIcon = (format: Format): string => {
 				default:
 					return neutral[46];
 			}
-		case Design.Live:
+			return lifestyle[500];
+		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
 				case Special.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -397,7 +555,8 @@ const fillCardIcon = (format: Format): string => {
 	}
 };
 
-const borderSyndicationButton = (): string => {
+const borderSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.Labs) return neutral[60];
 	return border.secondary;
 };
 
@@ -405,12 +564,34 @@ const borderSubNav = (format: Format): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderLiveBlock = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
 const borderArticleLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return neutral[60];
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	return border.secondary;
 };
 
+const borderStandfirstLink = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return WHITE;
+	if (format.theme === Special.SpecialReport) return specialReport[400];
+	return border.secondary;
+};
+
+const borderHeadline = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return '#9F2423';
+	return border.secondary;
+};
+
+const borderStandfirst = (format: Format): string => {
+	if (format.design === Design.LiveBlog) return '#8C2222';
+	return border.secondary;
+};
+
 const borderArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
 };
@@ -419,6 +600,95 @@ const topBarCard = (format: Format): string => {
 	if (format.theme === Special.SpecialReport)
 		return brandAltBackground.primary;
 	return pillarPalette[format.theme].main;
+};
+
+const hoverHeadlineByline = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
+const textRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const borderRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const borderNavPillar: (format: Format) => string = (format) =>
+	pillarPalette[format.theme].bright;
+
+const borderArticle: (format: Format) => string = (format) => {
+	if (format.theme === Special.Labs) return neutral[60];
+	return border.secondary;
+};
+
+const backgroundRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const fillRichLink: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const fillQuoteIcon: (format: Format) => string = (format) => {
+	if (format) {
+		return pillarPalette[format.theme].main;
+	}
+	return pillarPalette[Pillar.News][400];
+};
+
+const textPullQuoteAttribution = (format: Format): string =>
+	fillQuoteIcon(format);
+
+const textSignInLink = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
+const textCarouselTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const textCalloutHeading = (): string => {
+	return brand[500];
+};
+
+const textDropCap = (format: Format): string => {
+	switch (format.design) {
+		case Design.Editorial:
+		case Design.Comment:
+			return format.theme === Pillar.Opinion
+				? opinion[400]
+				: pillarPalette[format.theme].dark;
+		default:
+			return pillarPalette[format.theme].dark;
+	}
+};
+
+const backgroundHeadlineTag = (format: Format): string =>
+	pillarPalette[format.theme].dark;
+
+const backgroundCarouselDot = (format: Format): string => {
+	return pillarPalette[format.theme][400];
+};
+
+const backgroundCarouselDotFocus = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const backgroundMostViewedTab = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
 };
 
 export const decidePalette = (format: Format): Palette => {
@@ -442,6 +712,21 @@ export const decidePalette = (format: Format): Palette => {
 			linkKicker: textLinkKicker(format),
 			cardStandfirst: textCardStandfirst(format),
 			cardFooter: textCardFooter(format),
+			headlineByline: textHeadlineByline(format),
+			standfirst: textStandfirst(format),
+			standfirstLink: textStandfirstLink(format),
+			branding: textBranding(format),
+			disclaimerLink: textDisclaimerLink(format),
+			signInLink: textSignInLink(format),
+			richLink: textRichLink(format),
+			pullQuote: textPullQuote(format),
+			pullQuoteAttribution: textPullQuoteAttribution(format),
+			witnessIcon: textWitnessIcon(format),
+			witnessAuthor: textWitnessAuthor(format),
+			witnessTitle: textWitnessTitle(format),
+			carouselTitle: textCarouselTitle(format),
+			calloutHeading: textCalloutHeading(),
+			dropCap: textDropCap(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -450,21 +735,45 @@ export const decidePalette = (format: Format): Palette => {
 			avatar: backgroundAvatar(format),
 			card: backgroundCard(format),
 			headline: backgroundHeadline(format),
+			headlineByline: backgroundHeadlineByline(format),
+			bullet: backgroundBullet(format),
+			header: backgroundHeader(format),
+			standfirst: backgroundStandfirst(format),
+			richLink: backgroundRichLink(format),
+			imageTitle: backgroundImageTitle(format),
+			speechBubble: backgroundSpeechBubble(format),
+			carouselDot: backgroundCarouselDot(format),
+			carouselDotFocus: backgroundCarouselDotFocus(format),
+			headlineTag: backgroundHeadlineTag(format),
+			mostViewedTab: backgroundMostViewedTab(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
 			cardIcon: fillCardIcon(format),
+			richLink: fillRichLink(format),
+			quoteIcon: fillQuoteIcon(format),
+			blockquoteIcon: fillBlockquoteIcon(format),
 		},
 		border: {
-			syndicationButton: borderSyndicationButton(),
+			syndicationButton: borderSyndicationButton(format),
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
+			liveBlock: borderLiveBlock(format),
+			standfirstLink: borderStandfirstLink(format),
+			headline: borderHeadline(format),
+			standfirst: borderStandfirst(format),
+			richLink: borderRichLink(format),
+			navPillar: borderNavPillar(format),
+			article: borderArticle(format),
 		},
 		topBar: {
 			card: topBarCard(format),
+		},
+		hover: {
+			headlineByline: hoverHeadlineByline(format),
 		},
 	};
 };

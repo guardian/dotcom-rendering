@@ -32,7 +32,7 @@ export const Header = ({ edition, idUrl, mmaUrl }: Props) => (
 		<Logo />
 		<div id="reader-revenue-links-header" />
 		<div id="links-root">
-			<Links giftingURL="" idUrl={idUrl} mmaUrl={mmaUrl} />
+			<Links supporterCTA="" idUrl={idUrl} mmaUrl={mmaUrl} />
 		</div>
 	</header>
 );

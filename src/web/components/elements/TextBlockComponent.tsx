@@ -2,15 +2,16 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
-import { body } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { body, textSans } from '@guardian/src-foundations/typography';
+import { from, until } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design, Format, Special } from '@guardian/types';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	html: string;
@@ -49,6 +50,22 @@ const decideDropCapLetter = (html: string): string => {
 	return isLetter(first) ? first : '';
 };
 
+const allowsDropCaps = (format: Format) => {
+	if (format.theme === Special.Labs) return false;
+	if (format.display === Display.Immersive) return true;
+	switch (format.design) {
+		case Design.Feature:
+		case Design.Comment:
+		case Design.Review:
+		case Design.Interview:
+		case Design.PhotoEssay:
+		case Design.Recipe:
+			return true;
+		default:
+			return false;
+	}
+};
+
 const shouldShowDropCap = ({
 	format,
 	isFirstParagraph,
@@ -58,20 +75,7 @@ const shouldShowDropCap = ({
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 }): boolean => {
-	function allowsDropCaps(design: Design) {
-		switch (design) {
-			case Design.Feature:
-			case Design.Comment:
-			case Design.Review:
-			case Design.Interview:
-			case Design.PhotoEssay:
-			case Design.Recipe:
-				return true;
-			default:
-				return false;
-		}
-	}
-	if (allowsDropCaps(format.design) || format.display === Display.Immersive) {
+	if (allowsDropCaps(format)) {
 		// When dropcaps are allowed, we always mark the first paragraph as a drop cap
 		if (isFirstParagraph) return true;
 		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
@@ -99,9 +103,9 @@ const sanitiserOptions = {
 	},
 };
 
-const paraStyles = css`
+const paraStyles = (format: Format) => css`
 	margin-bottom: 16px;
-	${body.medium()};
+	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
 
 	ul {
 		margin-bottom: 12px;
@@ -149,6 +153,23 @@ const paraStyles = css`
 		position: relative;
 		vertical-align: baseline;
 	}
+
+	[data-dcr-style='bullet'] {
+		display: inline-block;
+		content: '';
+		border-radius: 0.375rem;
+		height: 0.75rem;
+		width: 0.75rem;
+		margin-right: 0.125rem;
+		background-color: ${decidePalette(format).background.bullet};
+	}
+
+	${until.tablet} {
+		/* 	To stop long words going outside of the view port.
+			For compatibility */
+		overflow-wrap: anywhere;
+		word-wrap: break-word;
+	}
 `;
 
 export const TextBlockComponent = ({
@@ -192,12 +213,12 @@ export const TextBlockComponent = ({
 		isLongEnough(remainingLetters)
 	) {
 		return (
-			<p className={paraStyles}>
+			<p className={paraStyles(format)}>
 				<DropCap letter={firstLetter} format={format} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={sanitise(remainingLetters, sanitiserOptions)}
-					elCss={paraStyles}
+					elCss={paraStyles(format)}
 					tagName="span"
 				/>
 			</p>
@@ -208,7 +229,7 @@ export const TextBlockComponent = ({
 		<RewrappedComponent
 			isUnwrapped={isUnwrapped}
 			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles}
+			elCss={paraStyles(format)}
 			tagName={unwrappedElement || 'p'}
 		/>
 	);

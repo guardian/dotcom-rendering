@@ -73,6 +73,60 @@ describe('Dividers and Drop Caps', () => {
 		expect(addDividers(input)).toEqual(expectedOutput);
 	});
 
+	it('handles dot dinkuses as text elements', () => {
+		const input = {
+			...example,
+			blocks: [
+				{
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							html: '<p>I am the first paragraph</p>',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							html: '<p>•••</p>',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							html: '<p>I should become a drop cap.</p>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput = {
+			...example,
+			blocks: [
+				{
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							html: '<p>I am the first paragraph</p>',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							dropCap: true,
+							html: '<p>I should become a drop cap.</p>',
+						},
+					],
+				},
+			],
+		};
+
+		expect(addDividers(input)).toEqual(expectedOutput);
+	});
+
 	it('handles when there are no spaces in the dinkus', () => {
 		const input = {
 			...example,

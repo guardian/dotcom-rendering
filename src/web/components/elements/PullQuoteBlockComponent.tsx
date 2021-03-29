@@ -7,7 +7,6 @@ import { neutral, text } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
-import { pillarPalette } from '@root/src/lib/pillars';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const partiallyLeft = css`
@@ -75,21 +74,15 @@ const partiallyInline = css`
 		margin-left: -10px;
 	}
 	${from.leftCol} {
-		margin-left: -56px;
+		margin-left: -38px;
 	}
 
 	:after {
-		left: 0;
 		border-radius: 0 0 25px;
+		left: 10px;
 
-		${from.mobileLandscape} {
-			left: 20px;
-		}
 		${from.phablet} {
 			left: 10px;
-		}
-		${from.desktop} {
-			left: 0px;
 		}
 		${from.leftCol} {
 			left: 27px;
@@ -122,14 +115,14 @@ function decideFont(role: string) {
 
 export const PullQuoteBlockComponent: React.FC<{
 	html?: string;
-	pillar: Theme;
+	palette: Palette;
 	design: Design;
 	role: string;
 	attribution?: string;
-}> = ({ html, pillar, design, attribution, role }) => {
+}> = ({ html, palette, design, attribution, role }) => {
 	if (!html) return <></>;
 	switch (design) {
-		case Design.GuardianView:
+		case Design.Editorial:
 		case Design.Comment:
 			return (
 				<aside
@@ -159,10 +152,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					)}
 				>
-					<QuoteIcon
-						colour={pillarPalette[pillar].main}
-						size="medium"
-					/>
+					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
 					<blockquote
 						className={css`
 							display: inline;
@@ -184,7 +174,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						decidePosition(role, design),
 						decideFont(role),
 						css`
-							color: ${pillarPalette[pillar].main};
+							color: ${palette.text.pullQuote};
 							line-height: 25px;
 							position: relative;
 							padding-left: 10px;
@@ -195,10 +185,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					)}
 				>
-					<QuoteIcon
-						colour={pillarPalette[pillar].main}
-						size="large"
-					/>
+					<QuoteIcon colour={palette.fill.quoteIcon} size="large" />
 					<blockquote
 						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
@@ -231,7 +218,7 @@ export const PullQuoteBlockComponent: React.FC<{
 							padding-top: 6px;
 							padding-bottom: 12px;
 							margin-bottom: 1.75rem;
-							color: ${pillarPalette[pillar].dark};
+							color: ${palette.text.pullQuote};
 
 							:after {
 								content: '';
@@ -244,10 +231,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					)}
 				>
-					<QuoteIcon
-						colour={pillarPalette[pillar].main}
-						size="medium"
-					/>
+					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
 					<blockquote
 						className={css`
 							display: inline;
@@ -258,7 +242,13 @@ export const PullQuoteBlockComponent: React.FC<{
 						}}
 					/>
 					<footer>
-						<cite>{attribution}</cite>
+						<cite
+							className={css`
+								color: ${palette.text.pullQuoteAttribution};
+							`}
+						>
+							{attribution}
+						</cite>
 					</footer>
 				</aside>
 			);

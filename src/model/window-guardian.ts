@@ -27,6 +27,7 @@ export interface WindowGuardianConfig {
 	tests?: { [key: string]: string };
 	ophan: {
 		pageViewId: string;
+		browserId: string;
 	};
 }
 
@@ -62,39 +63,68 @@ const makeWindowGuardianConfig = (
 		tests: config.abTests || {},
 		ophan: {
 			pageViewId: '',
+			browserId: '',
 		},
 	} as WindowGuardianConfig;
 };
 
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
-	// For some elements it is important to keep thier index in the `elements` array. We do this because
-	// we need a way to tell the client which element to hydrate. Could we do this better? Yes, we could
-	// set an elementId on Frontend and use that to id each element instead.
-	const blockElementWithIndex = <T extends CAPIElement>(
-		blocks: { elements: CAPIElement[] }[],
-		blockElementType: CAPIElement['_type'],
-		indexName: string,
-	): T[] => {
-		if (blocks.length === 0) return [];
-		return blocks[0].elements
-			.map((element: CAPIElement, index: number) => {
-				return {
-					...element,
-					[indexName]: index,
-				};
-			})
-			.filter((element) => element._type === blockElementType) as T[];
+	// We hydrate these elements if they appear on the page
+	const typesThatNeedHydrating: string[] = [
+		'model.dotcomrendering.pageElements.RichLinkBlockElement',
+		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
+		'model.dotcomrendering.pageElements.CalloutBlockElement',
+		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
+		'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+		'model.dotcomrendering.pageElements.InteractiveBlockElement',
+		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
+		'model.dotcomrendering.pageElements.QABlockElement',
+		'model.dotcomrendering.pageElements.QuizAtomBlockElement',
+		'model.dotcomrendering.pageElements.TimelineBlockElement',
+		'model.dotcomrendering.pageElements.YoutubeBlockElement',
+	];
+
+	const typesThatTrack: string[] = [
+		'model.dotcomrendering.pageElements.DocumentBlockElement',
+		'model.dotcomrendering.pageElements.InstagramBlockElement',
+		'model.dotcomrendering.pageElements.MapBlockElement',
+		'model.dotcomrendering.pageElements.SoundcloudBlockElement',
+		'model.dotcomrendering.pageElements.SpotifyBlockElement',
+		'model.dotcomrendering.pageElements.TweetBlockElement',
+		'model.dotcomrendering.pageElements.VideoBlockElement',
+		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
+		'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
+		'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+		'model.dotcomrendering.pageElements.VineBlockElement',
+		'model.dotcomrendering.pageElements.WitnessBlockElement',
+	];
+
+	const typesThatMightTrack: string[] = [
+		'model.dotcomrendering.pageElements.EmbedBlockElement',
+	];
+
+	const isTracking = (element: CAPIElement): boolean => {
+		const trackingElement = element as ThirdPartyEmbeddedContent;
+		return trackingElement.isThirdPartyTracking;
 	};
 
-	// If our element type is one that can contain third party content that can track user, but hasn't been marked
-	// as 'tracking' by the back-end, we remove it from the array of elements that we'll hydrate on the client-side.
-	// https://github.com/guardian/dotcom-rendering/blob/click-to-view-for-all-element-types/docs/architecture/025-click-to-view.md#click-to-view-component
-	const thirdPartyTrackingElementsOnly = <
-		T extends ThirdPartyEmbeddedContent
-	>(
-		elements: T[],
-	): T[] => {
-		return elements.filter((element) => element.isThirdPartyTracking);
+	const needsHydrating = (element: CAPIElement): boolean => {
+		// Always hydrate some elements
+		if (typesThatNeedHydrating.includes(element._type)) {
+			return true;
+		}
+		// We know these elements track so we must hydrate them
+		if (typesThatTrack.includes(element._type)) {
+			return true;
+		}
+		// Only hydrate some tracking elements if they are indeed tracking
+		if (
+			typesThatMightTrack.includes(element._type) &&
+			isTracking(element)
+		) {
+			return true;
+		}
+		return false;
 	};
 
 	return {
@@ -140,11 +170,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			host: CAPI.config.host,
 			idUrl: CAPI.config.idUrl,
 		},
-		richLinks: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.RichLinkBlockElement',
-			'richLinkIndex',
-		),
 		editionId: CAPI.editionId,
 		editionLongForm: CAPI.editionLongForm,
 		contentType: CAPI.contentType,
@@ -175,119 +200,15 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		isLiveBlog: CAPI.config.isLiveBlog,
 		isLive: CAPI.config.isLive,
 		matchUrl: CAPI.matchUrl,
-		callouts: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.CalloutBlockElement',
-			'calloutIndex',
-		),
-		qandaAtoms: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.QABlockElement',
-			'qandaIndex',
-		),
-		guideAtoms: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.GuideAtomBlockElement',
-			'guideIndex',
-		),
-		profileAtoms: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
-			'profileIndex',
-		),
-		timelineAtoms: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.TimelineBlockElement',
-			'timelineIndex',
-		),
-		chartAtoms: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.ChartAtomBlockElement',
-			'chartIndex',
-		),
-		audioAtoms: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.AudioAtomBlockElement',
-			'audioIndex',
-		),
-		quizAtoms: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-			'quizIndex',
-		),
-		youtubeBlockElement: blockElementWithIndex(
-			CAPI.blocks,
-			'model.dotcomrendering.pageElements.YoutubeBlockElement',
-			'youtubeIndex',
-		),
-		youtubeMainMediaBlockElement: CAPI.mainMediaElements.reduce(
-			(
-				acc: CAPIElement[],
-				cur: CAPIElement,
-				index: number,
-			): YoutubeBlockElement[] => {
-				if (
-					cur._type ===
-					'model.dotcomrendering.pageElements.YoutubeBlockElement'
-				) {
-					acc.push({
-						...cur,
-						youtubeIndex: index,
-					});
-				}
-				return acc as YoutubeBlockElement[];
-			},
-			[] as YoutubeBlockElement[],
-		),
-		documentBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.DocumentBlockElement',
-				'documentIndex',
-			),
-		),
-		embedBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.EmbedBlockElement',
-				'embedIndex',
-			),
-		),
-		instagramBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.InstagramBlockElement',
-				'instagramIndex',
-			),
-		),
-		mapBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.MapBlockElement',
-				'mapIndex',
-			),
-		),
-		spotifyBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.SpotifyBlockElement',
-				'spotifyIndex',
-			),
-		),
-		videoFacebookBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-				'videoFacebookIndex',
-			),
-		),
-		vineBlockElements: thirdPartyTrackingElementsOnly(
-			blockElementWithIndex(
-				CAPI.blocks,
-				'model.dotcomrendering.pageElements.VineBlockElement',
-				'vineBlockIndex',
-			),
-		),
+		elementsToHydrate: CAPI.blocks
+			// Get all elements arrays from all blocks -> [[h][h][x]]
+			.map((block) => block.elements)
+			// Flatten them -> [h,h,x]
+			.flat()
+			// Merge in main media elements -> [h,h,x,x]
+			.concat(CAPI.mainMediaElements)
+			// Filter for elements that need hydrating -> [h,h]
+			.filter((element) => needsHydrating(element)),
 	};
 };
 
@@ -314,6 +235,17 @@ export interface WindowGuardian {
 	};
 }
 
+export const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
+	return {
+		topLevelPillars: nav.pillars.map((p) => ({
+			...p,
+			children: undefined,
+		})),
+		currentNavLink: nav.currentNavLink,
+		subNavSections: nav.subNavSections,
+	};
+};
+
 export const makeWindowGuardian = (
 	dcrDocumentData: DCRServerDocumentData,
 	cssIDs: string[],
@@ -323,10 +255,7 @@ export const makeWindowGuardian = (
 			cssIDs,
 			data: {
 				...dcrDocumentData,
-				NAV: {
-					subNavSections: dcrDocumentData.NAV.subNavSections,
-					currentNavLink: dcrDocumentData.NAV.currentNavLink,
-				},
+				NAV: makeGuardianBrowserNav(dcrDocumentData.NAV),
 				CAPI: makeGuardianBrowserCAPI(dcrDocumentData.CAPI),
 			},
 		},

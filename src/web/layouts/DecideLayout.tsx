@@ -21,11 +21,12 @@ type Props = {
 
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign(
-		CAPI.designType,
-		CAPI.tags,
-		CAPI.config.isLiveBlog,
-	);
+	const design: Design = decideDesign({
+		designType: CAPI.designType,
+		tags: CAPI.tags,
+		isLiveBlog: CAPI.config.isLiveBlog,
+		isLive: CAPI.config.isLive,
+	});
 	const pillar: Pillar = decideTheme({
 		pillar: CAPI.pillar,
 		design,
@@ -42,7 +43,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Immersive: {
 			switch (design) {
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<ImmersiveLayout
 							CAPI={CAPI}
@@ -64,8 +65,18 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		}
 		case Display.Showcase: {
 			switch (design) {
+				case Design.LiveBlog:
+				case Design.DeadBlog:
+					return (
+						<LiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
@@ -88,7 +99,8 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Standard:
 		default: {
 			switch (design) {
-				case Design.Live:
+				case Design.LiveBlog:
+				case Design.DeadBlog:
 					return (
 						<LiveLayout
 							CAPI={CAPI}
@@ -98,7 +110,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 						/>
 					);
 				case Design.Comment:
-				case Design.GuardianView:
+				case Design.Editorial:
 					return (
 						<CommentLayout
 							CAPI={CAPI}

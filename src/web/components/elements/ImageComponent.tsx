@@ -3,7 +3,6 @@ import { css, cx } from 'emotion';
 
 import { until, from, between } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { pillarPalette } from '@root/src/lib/pillars';
 import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 
 import { Picture } from '@root/src/web/components/Picture';
@@ -100,7 +99,7 @@ const moreTitlePadding = css`
 	}
 `;
 
-const titleWrapper = (pillar: Theme) => css`
+const titleWrapper = (palette: Palette) => css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -118,7 +117,7 @@ const titleWrapper = (pillar: Theme) => css`
 	background: linear-gradient(transparent, ${neutral[0]});
 
 	:before {
-		background-color: ${pillarPalette[pillar].main};
+		background-color: ${palette.background.imageTitle};
 		display: block;
 		content: '';
 		width: 8.75rem;
@@ -136,22 +135,22 @@ const titleWrapper = (pillar: Theme) => css`
 const ImageTitle: React.FC<{
 	title: string;
 	role: RoleType;
-	pillar: Theme;
-}> = ({ title, role, pillar }) => {
+	palette: Palette;
+}> = ({ title, role, palette }) => {
 	switch (role) {
 		case 'inline':
 		case 'thumbnail':
 		case 'halfWidth':
 		case 'supporting':
 			return (
-				<h2 className={cx(titleWrapper(pillar), basicTitlePadding)}>
+				<h2 className={cx(titleWrapper(palette), basicTitlePadding)}>
 					{title}
 				</h2>
 			);
 		case 'showcase':
 		case 'immersive':
 			return (
-				<h2 className={cx(titleWrapper(pillar), moreTitlePadding)}>
+				<h2 className={cx(titleWrapper(palette), moreTitlePadding)}>
 					{title}
 				</h2>
 			);
@@ -221,8 +220,7 @@ export const ImageComponent = ({
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 	const isNotOpinion =
-		format.design !== Design.Comment &&
-		format.design !== Design.GuardianView;
+		format.design !== Design.Comment && format.design !== Design.Editorial;
 
 	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
 	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
@@ -266,11 +264,7 @@ export const ImageComponent = ({
 				/>
 				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
-					<ImageTitle
-						title={title}
-						role={role}
-						pillar={format.theme}
-					/>
+					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
 		);
@@ -300,11 +294,7 @@ export const ImageComponent = ({
 				/>
 				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
-					<ImageTitle
-						title={title}
-						role={role}
-						pillar={format.theme}
-					/>
+					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
 		);
@@ -372,11 +362,7 @@ export const ImageComponent = ({
 				)}
 				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
-					<ImageTitle
-						title={title}
-						role={role}
-						pillar={format.theme}
-					/>
+					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
 			{isMainMedia ? (

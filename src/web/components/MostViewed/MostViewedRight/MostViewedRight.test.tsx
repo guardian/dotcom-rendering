@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 
 import { Pillar } from '@guardian/types';
 
-import { mockTab1 } from '@root/fixtures/mostViewed';
 import { useApi as useApi_ } from '@root/src/web/lib/api';
 
+import { mockTab1 } from '../MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
 const response = { data: mockTab1 };

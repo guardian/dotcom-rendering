@@ -1,0 +1,28 @@
+name: Bundle Analyser
+on: push
+
+jobs:
+    build_check:
+        name: Bundle Analyser
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
+
+            - name: Install Node
+              uses: guardian/actions-setup-node@main
+
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            - uses: bahmutov/npm-install@v1
+
+            - name: Install
+              run: yarn
+
+            - name: Generate production build
+              run: make build
+
+            - name: Archive code coverage results
+              uses: actions/upload-artifact@v2
+              with:
+                name: bundle-analyser-report
+                path: dist/browser-bundles.html
