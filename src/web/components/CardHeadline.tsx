@@ -63,6 +63,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'medium':
 			return css`
+				line-height: normal;
 				${textSans.medium()};
 				${until.desktop} {
 					${textSans.small()};
