@@ -25,6 +25,7 @@ describe('E2E Page rendering', function () {
 			cy.intercept('GET', '**/most-read-geo**', (req) => {
 				req.reply((res) => {
 					expect(res.body).to.have.property('heading');
+					expect(res.body.trails[0]).to.have.property('format');
 					expect(res.statusCode).to.be.equal(200);
 				});
 			});

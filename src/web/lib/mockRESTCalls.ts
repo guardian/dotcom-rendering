@@ -7,6 +7,7 @@ import { related } from '@root/fixtures/generated/related';
 import { discussion } from '@root/fixtures/manual/discussion';
 import { storyPackage } from '@root/fixtures/generated/story-package';
 import { matchReport } from '@root/fixtures/generated/match-report';
+import { generateShareCounts } from '@root/fixtures/util/generate-share-counts';
 
 const richLinkCard = {
 	tags: [
@@ -187,15 +188,7 @@ export const mockRESTCalls = (): void => {
 		// Article share count
 		.get(
 			/.*api.nextgen.guardianapps.co.uk\/sharecount.*/,
-			{
-				status: 200,
-				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 273,
-					refreshStatus: true,
-				},
-			},
+			generateShareCounts(),
 			{ overwriteRoutes: false },
 		)
 		// Get discussion

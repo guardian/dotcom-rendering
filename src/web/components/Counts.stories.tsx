@@ -4,6 +4,8 @@ import fetchMock from 'fetch-mock';
 
 import { Pillar, Design, Display } from '@guardian/types';
 
+import { generateShareCounts } from '@root/fixtures/util/generate-share-counts';
+
 import { decidePalette } from '../lib/decidePalette';
 
 import { Counts } from './Counts';
@@ -31,15 +33,7 @@ export const Both = () => {
 		// Share count
 		.getOnce(
 			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
-			{
-				status: 200,
-				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 80,
-					refreshStatus: true,
-				},
-			},
+			generateShareCounts(80),
 			{ overwriteRoutes: false },
 		);
 
@@ -76,15 +70,7 @@ export const ShareOnly = () => {
 		// Share count
 		.getOnce(
 			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
-			{
-				status: 200,
-				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 273,
-					refreshStatus: true,
-				},
-			},
+			generateShareCounts(),
 			{ overwriteRoutes: false },
 		);
 
@@ -121,15 +107,7 @@ export const CommentOnly = () => {
 		// Share count
 		.getOnce(
 			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
-			{
-				status: 200,
-				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 0,
-					refreshStatus: true,
-				},
-			},
+			generateShareCounts(0),
 			{ overwriteRoutes: false },
 		);
 
@@ -166,15 +144,7 @@ export const ZeroComments = () => {
 		// Share count
 		.getOnce(
 			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
-			{
-				status: 200,
-				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 60,
-					refreshStatus: true,
-				},
-			},
+			generateShareCounts(60),
 			{ overwriteRoutes: false },
 		);
 
@@ -211,15 +181,7 @@ export const BigNumbers = () => {
 		// Share count
 		.getOnce(
 			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
-			{
-				status: 200,
-				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 204320,
-					refreshStatus: true,
-				},
-			},
+			generateShareCounts(204320),
 			{ overwriteRoutes: false },
 		);
 
