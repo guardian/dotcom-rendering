@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import * as emotion from 'emotion';
-import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
+import { css } from 'emotion';
+
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
@@ -20,11 +19,11 @@ type Props = {
 	meta: Meta;
 };
 
-const containerStyles = emotion.css`
-    position: fixed;
-    bottom: -1px;
-    width: 100%;
-    ${getZIndex('banner')}
+const containerStyles = css`
+	position: fixed;
+	bottom: -1px;
+	width: 100%;
+	${getZIndex('banner')}
 `;
 
 const FORCE_BRAZE_ALLOWLIST = [
