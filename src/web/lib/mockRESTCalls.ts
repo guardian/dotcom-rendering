@@ -143,6 +143,15 @@ export const mockRESTCalls = (): void => {
 			},
 			{ overwriteRoutes: false },
 		)
+		// Popular in tag
+		.get(
+			/.*api.nextgen.guardianapps.co.uk\/popular-in-tag.*/,
+			{
+				status: 200,
+				body: related,
+			},
+			{ overwriteRoutes: false },
+		)
 		// Series
 		.get(
 			/.*api.nextgen.guardianapps.co.uk\/series.*/,
