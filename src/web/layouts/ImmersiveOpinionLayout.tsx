@@ -310,7 +310,10 @@ export const ImmersiveOpinionLayout = ({
 									className={css`
 										position: relative;
 										display: flex;
-										flex-direction: row;
+										flex-direction: column;
+										${from.phablet} {
+											flex-direction: row;
+										}
 									`}
 								>
 									<Hide when="above" breakpoint="leftCol">
