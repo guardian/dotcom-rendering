@@ -318,7 +318,6 @@ type CarouselCardProps = {
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
 	format,
-	trailPalette,
 	linkTo,
 	imageUrl,
 	headlineText,
