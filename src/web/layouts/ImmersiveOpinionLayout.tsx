@@ -148,6 +148,13 @@ const stretchLines = css`
 	}
 `;
 
+const avatarPositionStyles = css`
+	display: flex;
+	justify-content: flex-end;
+
+	margin-bottom: -29px;
+`;
+
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -328,19 +335,24 @@ export const ImmersiveOpinionLayout = ({
 											/>
 										</div>
 									</Hide>
-									<div>
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											palette={palette}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-										/>
-									</div>
-									<ContributorAvatar
-										imageSrc={avatarUrl}
-										imageAlt={CAPI.author.byline || ''}
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										palette={palette}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
 									/>
+
+									{showAvatar && avatarUrl && (
+										<div className={avatarPositionStyles}>
+											<ContributorAvatar
+												imageSrc={avatarUrl}
+												imageAlt={
+													CAPI.author.byline || ''
+												}
+											/>
+										</div>
+									)}
 								</div>
 							</ContainerLayout>
 							<GuardianLines count={8} pillar={format.theme} />
