@@ -29,7 +29,6 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
-import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
@@ -44,6 +43,8 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { ContributorAvatar } from '../components/ContributorAvatar';
+// import { Container } from 'src/amp/components/Container';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -77,7 +78,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
 						'meta       border      body        right-column'
@@ -93,10 +93,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'.          border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
+						'caption    border      standfirst  right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
 						'meta       border      body        right-column'
@@ -110,10 +107,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'title       right-column'
-						'headline    right-column'
 						'standfirst  right-column'
-						'byline      right-column'
 						'caption     right-column'
 						'lines       right-column'
 						'meta        right-column'
@@ -124,10 +118,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'title'
-						'headline'
 						'standfirst'
-						'byline'
 						'caption'
 						'lines'
 						'meta'
@@ -193,6 +184,13 @@ export const ImmersiveOpinionLayout = ({
 	const showBodyEndSlot =
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
 		CAPI.config.switches.slotBodyEnd;
+
+	const contributorTag = CAPI.tags.find((tag) => tag.type === 'Contributor');
+	const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
+	const onlyOneContributor: boolean =
+		CAPI.tags.filter((tag) => tag.type === 'Contributor').length === 1;
+
+	const showAvatar = avatarUrl && onlyOneContributor;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -283,8 +281,11 @@ export const ImmersiveOpinionLayout = ({
 						<>
 							<ContainerLayout
 								verticalMargins={false}
-								padContent={false}
-								padSides={false}
+								padContent={true}
+								centralBorder='full'
+								padSides={true}
+								leftColSize='compact'
+								backgroundColour={palette.background.headline}
 								leftContent={
 									// eslint-disable-next-line react/jsx-wrap-multilines
 									<ArticleTitle
@@ -298,15 +299,44 @@ export const ImmersiveOpinionLayout = ({
 									/>
 								}
 							>
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPI.headline}
-									palette={palette}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-								/>
+								<div className={css`position:relative; display:flex; flex-direction:row;`}>
+									<Hide
+										when='above'
+										breakpoint='leftCol'
+									>
+										<div className={css`position:absolute; top:-30px; left:0; ${getZIndex('articleHeadline')}`}>
+											<ArticleTitle
+												format={format}
+												palette={palette}
+												tags={CAPI.tags}
+												sectionLabel={CAPI.sectionLabel}
+												sectionUrl={CAPI.sectionUrl}
+												guardianBaseURL={CAPI.guardianBaseURL}
+												badge={CAPI.badge}
+											/>
+										</div>
+									</Hide>
+									<div>
+										<ArticleHeadline
+											format={format}
+											headlineString={CAPI.headline}
+											palette={palette}
+											tags={CAPI.tags}
+											byline={CAPI.author.byline}
+										/>
+									</div>
+									<ContributorAvatar
+										imageSrc={avatarUrl}
+										imageAlt={
+											CAPI.author.byline || ''
+										}
+									/>
+								</div>
 							</ContainerLayout>
-							<GuardianLines count={8} pillar={format.theme} />
+							<GuardianLines
+								count={8}
+								pillar={format.theme}
+							/>
 						</>
 					)}
 				</div>
@@ -335,61 +365,10 @@ export const ImmersiveOpinionLayout = ({
 							<Border />
 						)}
 					</GridItem>
-					<GridItem area="title">
-						<>
-							{!mainMedia && (
-								<div
-									className={css`
-										margin-top: -8px;
-										margin-left: -4px;
-										margin-bottom: 12px;
-
-										${until.tablet} {
-											margin-left: -20px;
-										}
-									`}
-								>
-									<ArticleTitle
-										format={format}
-										palette={palette}
-										tags={CAPI.tags}
-										sectionLabel={CAPI.sectionLabel}
-										sectionUrl={CAPI.sectionUrl}
-										guardianBaseURL={CAPI.guardianBaseURL}
-										badge={CAPI.badge}
-									/>
-								</div>
-							)}
-						</>
-					</GridItem>
-					<GridItem area="headline">
-						<>
-							{!mainMedia && (
-								<div className={maxWidth}>
-									<ArticleHeadline
-										format={format}
-										headlineString={CAPI.headline}
-										palette={palette}
-										tags={CAPI.tags}
-										byline={CAPI.author.byline}
-									/>
-								</div>
-							)}
-						</>
-					</GridItem>
 					<GridItem area="standfirst">
 						<Standfirst
 							format={format}
 							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
-					<GridItem area="byline">
-						<HeadlineByline
-							format={format}
-							tags={CAPI.tags}
-							byline={
-								CAPI.author.byline ? CAPI.author.byline : ''
-							}
 						/>
 					</GridItem>
 					<GridItem area="lines">

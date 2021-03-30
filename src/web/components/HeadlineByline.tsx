@@ -63,6 +63,15 @@ const immersiveStyles = css`
 	margin-bottom: ${space[6]}px;
 `;
 
+const immersiveOpinionStyles = (palette: Palette) => css`
+	${headline.medium({
+		fontWeight: 'light',
+		fontStyle:'italic',
+	})}
+	margin-bottom: ${space[6]}px;
+	color: ${palette.text.headlineByline};
+`;
+
 const immersiveLinkStyles = (palette: Palette) => css`
 	a {
 		color: ${palette.text.headlineByline};
@@ -71,6 +80,17 @@ const immersiveLinkStyles = (palette: Palette) => css`
 		:hover {
 			border-bottom: 1px solid ${palette.hover.headlineByline};
 			color: ${palette.hover.headlineByline};
+			text-decoration: none;
+		}
+	}
+`;
+
+const immersiveOpinionLinkStyles = (palette: Palette) => css`
+	a {
+		color: ${palette.text.headlineByline};
+		text-decoration: none;
+		:hover {
+			border-bottom: 1px solid ${palette.text.headlineByline};
 			text-decoration: none;
 		}
 	}
@@ -92,14 +112,27 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 
 	switch (format.display) {
 		case Display.Immersive:
-			return (
-				<div className={immersiveStyles}>
-					by{' '}
-					<span className={immersiveLinkStyles(palette)}>
-						<BylineLink byline={byline} tags={tags} />
-					</span>
-				</div>
-			);
+			switch (format.design) {
+				case Design.Comment:
+				case Design.Editorial:
+					return (
+						<div className={immersiveOpinionStyles(palette)}>
+							by{' '}
+							<span className={immersiveOpinionLinkStyles(palette)}>
+								<BylineLink byline={byline} tags={tags} />
+							</span>
+						</div>
+					);
+				default:
+					return (
+						<div className={immersiveStyles}>
+							by{' '}
+							<span className={immersiveLinkStyles(palette)}>
+								<BylineLink byline={byline} tags={tags} />
+							</span>
+						</div>
+					);
+			}
 		case Display.Showcase:
 		case Display.Standard:
 		default: {

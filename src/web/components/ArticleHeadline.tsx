@@ -218,6 +218,7 @@ export const ArticleHeadline = ({
 								className={cx(
 									lightFont,
 									invertedText,
+									maxWidth,
 									css`
 										color: ${palette.text.headline};
 									`,

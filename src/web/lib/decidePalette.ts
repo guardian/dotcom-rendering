@@ -13,6 +13,7 @@ import {
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
+import { Opinion } from '../components/SignedInAs.stories';
 
 const WHITE = neutral[100];
 const BLACK = text.primary;
@@ -100,7 +101,19 @@ const textByline = (format: Format): string => {
 
 const textHeadlineByline = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
-	return pillarPalette[format.theme].main;
+	switch (format.display) {
+		case Display.Immersive:
+			switch (format.design) {
+				case Design.Editorial:
+				case Design.Comment:
+					return WHITE
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		default:
+			return pillarPalette[format.theme].main;
+	}
+
 };
 
 const textStandfirst = (format: Format): string => {
@@ -356,9 +369,14 @@ const backgroundCard = (format: Format): string => {
 const backgroundHeadline = (format: Format): string => {
 	switch (format.display) {
 		case Display.Immersive:
-			if (format.theme === Special.SpecialReport)
-				return specialReport[300];
-			return BLACK;
+			switch (format.theme) {
+				case Special.SpecialReport:
+					return specialReport[300];
+				case Pillar.Opinion:
+					return opinion[400];
+				default:
+					return BLACK;
+			}
 		case Display.Showcase:
 		case Display.Standard:
 			if (format.design === Design.Interview) return BLACK;
