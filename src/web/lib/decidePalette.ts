@@ -462,6 +462,8 @@ const backgroundStandfirst = (format: Format): string => {
 	switch (format.design) {
 		case Design.LiveBlog:
 			return pillarPalette[format.theme][300];
+		case Design.DeadBlog:
+			return neutral[86];
 		default:
 			return backgroundArticle(format);
 	}
