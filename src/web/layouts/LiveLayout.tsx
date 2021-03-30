@@ -267,6 +267,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
+							borderColour={palette.border.article}
 						>
 							<SubNav
 								subNavSections={NAV.subNavSections}
@@ -280,6 +281,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
+						borderColour={palette.border.article}
 					>
 						<GuardianLines count={4} pillar={format.theme} />
 					</Section>
@@ -342,7 +344,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			<ContainerLayout
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
-				borderColour={neutral[86]}
+				borderColour={palette.border.article}
 				sideBorders={true}
 				leftColSize="wide"
 			/>
@@ -350,6 +352,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			<Section
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
+				borderColour={palette.border.article}
 			>
 				<LiveGrid>
 					<GridItem area="media">
