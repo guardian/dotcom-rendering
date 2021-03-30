@@ -316,35 +316,41 @@ export const ImmersiveOpinionLayout = ({
 										}
 									`}
 								>
-									<Hide when="above" breakpoint="leftCol">
-										<div
-											className={css`
-												position: absolute;
-												top: -30px;
-												left: 0;
-												${getZIndex('articleHeadline')}
-											`}
-										>
-											<ArticleTitle
-												format={format}
-												palette={palette}
-												tags={CAPI.tags}
-												sectionLabel={CAPI.sectionLabel}
-												sectionUrl={CAPI.sectionUrl}
-												guardianBaseURL={
-													CAPI.guardianBaseURL
-												}
-												badge={CAPI.badge}
-											/>
-										</div>
-									</Hide>
-									<ArticleHeadline
-										format={format}
-										headlineString={CAPI.headline}
-										palette={palette}
-										tags={CAPI.tags}
-										byline={CAPI.author.byline}
-									/>
+									<div>
+										<Hide when="above" breakpoint="leftCol">
+											<div
+												className={css`
+													position: absolute;
+													top: -30px;
+													left: 0;
+													${getZIndex(
+														'articleHeadline',
+													)}
+												`}
+											>
+												<ArticleTitle
+													format={format}
+													palette={palette}
+													tags={CAPI.tags}
+													sectionLabel={
+														CAPI.sectionLabel
+													}
+													sectionUrl={CAPI.sectionUrl}
+													guardianBaseURL={
+														CAPI.guardianBaseURL
+													}
+													badge={CAPI.badge}
+												/>
+											</div>
+										</Hide>
+										<ArticleHeadline
+											format={format}
+											headlineString={CAPI.headline}
+											palette={palette}
+											tags={CAPI.tags}
+											byline={CAPI.author.byline}
+										/>
+									</div>
 
 									{showAvatar && avatarUrl && (
 										<div className={avatarPositionStyles}>
