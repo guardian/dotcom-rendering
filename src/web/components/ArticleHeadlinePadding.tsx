@@ -29,9 +29,8 @@ const determinePadding = ({
 			`;
 		case Design.LiveBlog:
 		case Design.DeadBlog:
-			return css`
-				padding-top: ${space[1]}px;
-			`;
+			// Don't add extra padding for live or dead blogs
+			return css``;
 		default:
 			return css`
 				padding-top: ${space[1]}px;
