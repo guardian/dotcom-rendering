@@ -122,9 +122,9 @@ FeatureStory.story = { name: 'Feature' };
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: true,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(LiveBlog);
@@ -135,9 +135,9 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: false,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(DeadBlog);

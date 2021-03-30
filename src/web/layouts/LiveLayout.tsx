@@ -18,7 +18,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
@@ -48,6 +47,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -70,19 +70,6 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				${from.wide} {
-					grid-template-columns:
-						309px /* Left Column (220 - 1px border) */
-						1px /* Empty border for spacing */
-						1fr /* Main content */
-						340px; /* Right Column */
-					grid-template-areas:
-						'lines border media        right-column'
-						'meta  border media        right-column'
-						'meta  border body         right-column'
-						'.     border .            right-column';
-				}
-
 				${from.desktop} {
 					grid-template-columns:
 						309px /* Left Column (220 - 1px border) */
@@ -93,6 +80,19 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'meta  border media'
 						'meta  border body'
 						'.     border .';
+				}
+
+				${from.wide} {
+					grid-template-columns:
+						309px
+						1px
+						1fr
+						340px;
+					grid-template-areas:
+						'lines border media right-column'
+						'meta  border media right-column'
+						'meta  border body  right-column'
+						'.     border .     right-column';
 				}
 
 				${until.desktop} {
@@ -267,6 +267,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
+							borderColour={palette.border.article}
 						>
 							<SubNav
 								subNavSections={NAV.subNavSections}
@@ -280,6 +281,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
+						borderColour={palette.border.article}
 					>
 						<GuardianLines count={4} pillar={format.theme} />
 					</Section>
@@ -335,21 +337,27 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				borderColour={palette.border.standfirst}
 				sideBorders={true}
 				leftColSize="wide"
+				verticalMargins={false}
 			>
 				<Standfirst format={format} standfirst={CAPI.standfirst} />
 			</ContainerLayout>
 
-			<ContainerLayout
+			<Section
 				showTopBorder={false}
+				borderColour={palette.border.article}
 				backgroundColour={palette.background.article}
-				borderColour={neutral[86]}
-				sideBorders={true}
-				leftColSize="wide"
-			/>
+			>
+				<div
+					className={css`
+						height: ${space[4]}px;
+					`}
+				/>
+			</Section>
 
 			<Section
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
+				borderColour={palette.border.article}
 			>
 				<LiveGrid>
 					<GridItem area="media">
@@ -459,11 +467,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									position="right"
 									display={format.display}
 								/>
-								{!isPaidContent ? (
-									<MostViewedRightIsland />
-								) : (
-									<></>
-								)}
 							</RightColumn>
 						</div>
 					</GridItem>
