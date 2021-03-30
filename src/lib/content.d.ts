@@ -62,8 +62,8 @@ interface ChartAtomBlockElement {
 	id: string;
 	url: string;
 	html: string;
-    css?: string;
-    js?: string;
+	css?: string;
+	js?: string;
 	role?: RoleType;
 	placeholderUrl?: string;
 }
@@ -153,12 +153,12 @@ interface ExplainerAtomBlockElement {
 
 interface GenericAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
-    url: string;
-    placeholderUrl?: string;
-    id?: string;
-    html?: string;
-    css?: string;
-    js?: string;
+	url: string;
+	placeholderUrl?: string;
+	id?: string;
+	html?: string;
+	css?: string;
+	js?: string;
 	elementId: string;
 }
 

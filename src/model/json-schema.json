@@ -946,22 +946,22 @@
                 "id": {
                     "type": "string"
                 },
-                "html": {
-                    "type": "string"
-                },
-                "role": {
-                    "$ref": "#/definitions/RoleType"
-                },
                 "url": {
                     "type": "string"
                 },
-                "placeholderUrl": {
+                "html": {
                     "type": "string"
                 },
                 "css": {
                     "type": "string"
                 },
                 "js": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "placeholderUrl": {
                     "type": "string"
                 }
             },
@@ -1393,9 +1393,6 @@
                         "model.dotcomrendering.pageElements.GenericAtomBlockElement"
                     ]
                 },
-                "elementId": {
-                    "type": "string"
-                },
                 "url": {
                     "type": "string"
                 },
@@ -1412,6 +1409,9 @@
                     "type": "string"
                 },
                 "js": {
+                    "type": "string"
+                },
+                "elementId": {
                     "type": "string"
                 }
             },
@@ -1797,6 +1797,9 @@
                 "elementId": {
                     "type": "string"
                 },
+                "url": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -1809,14 +1812,11 @@
                 "css": {
                     "type": "string"
                 },
-                "role": {
-                    "$ref": "#/definitions/RoleType"
-                },
-                "url": {
-                    "type": "string"
-                },
                 "placeholderUrl": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -3946,6 +3946,9 @@
                     "type": "string"
                 },
                 "supporter": {
+                    "type": "string"
+                },
+                "gifting": {
                     "type": "string"
                 }
             },
