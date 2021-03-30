@@ -239,7 +239,7 @@ export const ImageComponent = ({
 			element.media.allImages[0].fields.height) ||
 		'372';
 
-	if (isMainMedia && format.display === Display.Immersive && isNotOpinion) {
+	if (isMainMedia && format.display === Display.Immersive) {
 		return (
 			<div
 				className={css`
