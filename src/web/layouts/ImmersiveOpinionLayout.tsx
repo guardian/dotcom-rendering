@@ -282,9 +282,9 @@ export const ImmersiveOpinionLayout = ({
 							<ContainerLayout
 								verticalMargins={false}
 								padContent={true}
-								centralBorder='full'
+								centralBorder="full"
 								padSides={true}
-								leftColSize='compact'
+								leftColSize="compact"
 								backgroundColour={palette.background.headline}
 								leftContent={
 									// eslint-disable-next-line react/jsx-wrap-multilines
@@ -299,19 +299,31 @@ export const ImmersiveOpinionLayout = ({
 									/>
 								}
 							>
-								<div className={css`position:relative; display:flex; flex-direction:row;`}>
-									<Hide
-										when='above'
-										breakpoint='leftCol'
-									>
-										<div className={css`position:absolute; top:-30px; left:0; ${getZIndex('articleHeadline')}`}>
+								<div
+									className={css`
+										position: relative;
+										display: flex;
+										flex-direction: row;
+									`}
+								>
+									<Hide when="above" breakpoint="leftCol">
+										<div
+											className={css`
+												position: absolute;
+												top: -30px;
+												left: 0;
+												${getZIndex('articleHeadline')}
+											`}
+										>
 											<ArticleTitle
 												format={format}
 												palette={palette}
 												tags={CAPI.tags}
 												sectionLabel={CAPI.sectionLabel}
 												sectionUrl={CAPI.sectionUrl}
-												guardianBaseURL={CAPI.guardianBaseURL}
+												guardianBaseURL={
+													CAPI.guardianBaseURL
+												}
 												badge={CAPI.badge}
 											/>
 										</div>
@@ -327,16 +339,11 @@ export const ImmersiveOpinionLayout = ({
 									</div>
 									<ContributorAvatar
 										imageSrc={avatarUrl}
-										imageAlt={
-											CAPI.author.byline || ''
-										}
+										imageAlt={CAPI.author.byline || ''}
 									/>
 								</div>
 							</ContainerLayout>
-							<GuardianLines
-								count={8}
-								pillar={format.theme}
-							/>
+							<GuardianLines count={8} pillar={format.theme} />
 						</>
 					)}
 				</div>

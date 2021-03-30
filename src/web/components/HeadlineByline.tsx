@@ -66,7 +66,7 @@ const immersiveStyles = css`
 const immersiveOpinionStyles = (palette: Palette) => css`
 	${headline.medium({
 		fontWeight: 'light',
-		fontStyle:'italic',
+		fontStyle: 'italic',
 	})}
 	margin-bottom: ${space[6]}px;
 	color: ${palette.text.headlineByline};
@@ -118,7 +118,9 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 					return (
 						<div className={immersiveOpinionStyles(palette)}>
 							by{' '}
-							<span className={immersiveOpinionLinkStyles(palette)}>
+							<span
+								className={immersiveOpinionLinkStyles(palette)}
+							>
 								<BylineLink byline={byline} tags={tags} />
 							</span>
 						</div>

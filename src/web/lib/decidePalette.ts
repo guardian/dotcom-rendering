@@ -106,14 +106,13 @@ const textHeadlineByline = (format: Format): string => {
 			switch (format.design) {
 				case Design.Editorial:
 				case Design.Comment:
-					return WHITE
+					return WHITE;
 				default:
 					return pillarPalette[format.theme].main;
 			}
 		default:
 			return pillarPalette[format.theme].main;
 	}
-
 };
 
 const textStandfirst = (format: Format): string => {
