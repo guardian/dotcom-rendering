@@ -12,6 +12,7 @@ import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
+import { setAutomat } from '@root/src/web/lib/setAutomat';
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -101,6 +102,8 @@ const BrazeEpic = ({
 	});
 
 	useOnce(() => {
+		setAutomat();
+
 		const componentUrl = joinUrl([
 			contributionsServiceUrl,
 			EPIC_COMPONENT_PATH,
