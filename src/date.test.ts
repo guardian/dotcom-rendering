@@ -69,13 +69,13 @@ describe('fromString', () => {
 });
 
 describe('formatLocal', () => {
-	test('returns correct local time zone', () => {
+	test('returns correct local time zone (local timezone is Europe/London set in TZ global variable)', () => {
 		expect(formatLocal(new Date('2020-03-11T17:25:00'))).toBe(
 			'Wed 11 Mar 2020 17.25 (Greenwich Mean Time)',
 		);
 	});
 
-	test('returns correct local time for non UTC time', () => {
+	test('returns Europe/London local time for non UTC time', () => {
 		expect(formatLocal(new Date('2012/02/10 10:10:30 +0180'))).toBe(
 			'Fri 10 Feb 2012 07.50 (Greenwich Mean Time)',
 		);
