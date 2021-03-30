@@ -12,6 +12,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { formatCount } from '@root/src/web/lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
@@ -162,14 +163,16 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
+	const cardPalette = decidePalette(format);
+
 	return (
 		<CardLink
 			linkTo={linkTo}
 			format={format}
-			palette={palette}
+			palette={cardPalette}
 			dataLinkName={dataLinkName}
 		>
-			<TopBar palette={palette} isFullCardImage={isFullCardImage}>
+			<TopBar palette={cardPalette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}
@@ -207,7 +210,7 @@ export const Card = ({
 									<CardHeadline
 										headlineText={headlineText}
 										format={format}
-										palette={palette}
+										palette={cardPalette}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
@@ -235,7 +238,7 @@ export const Card = ({
 												<Avatar
 													imageSrc={avatar.src}
 													imageAlt={avatar.alt}
-													palette={palette}
+													palette={cardPalette}
 												/>
 											</AvatarContainer>
 										</Hide>
@@ -248,7 +251,7 @@ export const Card = ({
 								)}
 							>
 								{standfirst && (
-									<StandfirstWrapper palette={palette}>
+									<StandfirstWrapper palette={cardPalette}>
 										{standfirst}
 									</StandfirstWrapper>
 								)}
@@ -258,7 +261,7 @@ export const Card = ({
 											<Avatar
 												imageSrc={avatar.src}
 												imageAlt={avatar.alt}
-												palette={palette}
+												palette={cardPalette}
 											/>
 										</AvatarContainer>
 									</Hide>
@@ -269,7 +272,7 @@ export const Card = ({
 										webPublicationDate ? (
 											<CardAge
 												format={format}
-												palette={palette}
+												palette={cardPalette}
 												webPublicationDate={
 													webPublicationDate
 												}
@@ -282,7 +285,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												palette={palette}
+												palette={cardPalette}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -293,7 +296,7 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												palette={palette}
+												palette={cardPalette}
 												long={longCount}
 												short={shortCount}
 											/>
