@@ -2,24 +2,28 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { until } from '@guardian/src-foundations/mq';
-import { Display } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 
 import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
-const mainMedia = css`
+const ieWorkaround = css`
 	min-height: 1px;
 	/*
     Thank you IE11, broken in stasis for all eternity.
 
     https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
     */
+`;
 
+const mobileStyles = css`
 	${until.tablet} {
 		margin: 0;
 		order: 2;
 	}
+`;
 
+const imgStyles = css`
 	img {
 		flex: 0 0 auto; /* IE */
 		width: 100%;
@@ -71,7 +75,11 @@ export const MainMedia: React.FC<{
 }) => (
 	<div
 		className={cx(
-			mainMedia,
+			ieWorkaround,
+			imgStyles,
+			format.display !== Display.Immersive &&
+				format.design !== Design.Comment &&
+				mobileStyles,
 			format.display === Display.Immersive ? immersiveWrapper : noGutters,
 		)}
 	>
