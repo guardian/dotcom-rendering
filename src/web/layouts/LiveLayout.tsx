@@ -48,6 +48,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -341,13 +342,17 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<Standfirst format={format} standfirst={CAPI.standfirst} />
 			</ContainerLayout>
 
-			<ContainerLayout
+			<Section
 				showTopBorder={false}
-				backgroundColour={palette.background.article}
 				borderColour={palette.border.article}
-				sideBorders={true}
-				leftColSize="wide"
-			/>
+				backgroundColour={palette.background.article}
+			>
+				<div
+					className={css`
+						height: ${space[4]}px;
+					`}
+				/>
+			</Section>
 
 			<Section
 				showTopBorder={false}
