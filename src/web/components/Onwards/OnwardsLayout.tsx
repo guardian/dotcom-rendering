@@ -7,6 +7,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { useComments } from '@root/src/web/lib/useComments';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 
+import { Display } from '@guardian/types';
 import { ContainerTitle } from '../ContainerTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';
@@ -35,9 +36,24 @@ const decideLayout = (trails: TrailType[]) => {
 export const OnwardsLayout: React.FC<OnwardsType> = (data: OnwardsType) => {
 	const sections = useComments([data]);
 
+	const sectionsForcedToStandard = sections.map((section) => {
+		return {
+			...section,
+			trails: section.trails.map((trail) => {
+				return {
+					...trail,
+					format: {
+						...trail.format,
+						display: Display.Standard,
+					},
+				};
+			}),
+		};
+	});
+
 	return (
 		<>
-			{sections.map((section, index) => (
+			{sectionsForcedToStandard.map((section, index) => (
 				<Flex key={`${section.heading}-${index}`}>
 					<LeftColumn
 						showRightBorder={false}
