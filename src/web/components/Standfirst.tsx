@@ -117,6 +117,8 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 							fontWeight: 'bold',
 						})};
 						line-height: 20px;
+						margin-top: ${space[1]}px;
+						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 					`;
