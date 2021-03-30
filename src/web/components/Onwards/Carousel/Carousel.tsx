@@ -339,7 +339,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 		<Card
 			linkTo={linkTo}
 			format={format}
-			palette={trailPalette}
 			headlineText={headlineText}
 			webPublicationDate={webPublicationDate}
 			kickerText={kickerText || ''}
