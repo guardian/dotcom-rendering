@@ -7,7 +7,7 @@ const noCaptionStyle = css`
 	margin-bottom: 8px;
 `;
 
-export const MapBlockComponent: React.SFC<{
+export const MapBlockComponent: React.FunctionComponent<{
 	element: MapBlockElement;
 	pillar: Theme;
 }> = ({ element, pillar }) => {

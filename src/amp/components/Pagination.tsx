@@ -48,7 +48,7 @@ const marginRightStyle = css`
 	margin-right: 5px;
 `;
 
-export const Pagination: React.SFC<{
+export const Pagination: React.FunctionComponent<{
 	pagination?: Pagination;
 	guardianURL: string;
 }> = ({ pagination, guardianURL }) => {
