@@ -24,7 +24,6 @@ import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { extractNAV } from '@root/src/model/extract-nav';
-import { Design } from '@guardian/types';
 import { DecideLayout } from './DecideLayout';
 
 mockRESTCalls();
