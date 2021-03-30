@@ -110,6 +110,16 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 					`;
+				case Design.LiveBlog:
+				case Design.DeadBlog:
+					return css`
+						${headline.xxxsmall({
+							fontWeight: 'bold',
+						})};
+						line-height: 20px;
+						max-width: 540px;
+						color: ${palette.text.standfirst};
+					`;
 				default:
 					return css`
 						${format.theme === Special.Labs
