@@ -163,6 +163,19 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
+	/**
+	 * Why are we setting cardPalette like this?
+	 *
+	 * Good question. Basically, we had a production issue and this was the easiest and
+	 * quickest way to fix it rather than fixing Card's properly 😱
+	 *
+	 * Once:
+	 * 1. Cards have been refactored to remove `isFullSizeImage`
+	 * 2. We support the concept of a container type and
+	 * 3. We  and are able to handle Carousels natively - in
+	 *    the model
+	 * Then this should be removed.
+	 */
 	const cardPalette = decidePalette(format);
 
 	return (
