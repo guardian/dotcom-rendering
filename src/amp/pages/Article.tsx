@@ -15,8 +15,6 @@ import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { AmpExperimentComponent } from '@root/src/amp/components/AmpExperiment';
 import { AmpExperiments } from '@root/src/amp/server/ampExperimentCache';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 const backgroundColour = css`
 	background-color: ${palette.neutral[97]};
@@ -24,26 +22,17 @@ const backgroundColour = css`
 
 const Body: React.SFC<{
 	data: ArticleModel;
-	pillar: Theme;
-	design: Design;
 	config: ConfigType;
-}> = ({ data, design, config, pillar }) => {
+}> = ({ data, config }) => {
 	// TODO check if there is a better way to determine if liveblog
 	const isLiveBlog =
-		data.tags.find((tag) => tag.id === 'tone/minutebyminute') !== undefined;
+		data.format.design === 'LiveBlogDesign' ||
+		data.format.design === 'DeadBlogDesign';
 
 	if (isLiveBlog) {
-		return <BodyLiveblog pillar={pillar} data={data} config={config} />;
+		return <BodyLiveblog data={data} config={config} />;
 	}
-
-	return (
-		<BodyArticle
-			pillar={pillar}
-			design={design}
-			data={data}
-			config={config}
-		/>
-	);
+	return <BodyArticle data={data} config={config} />;
 };
 
 export const Article: React.FC<{
@@ -53,17 +42,6 @@ export const Article: React.FC<{
 	config: ConfigType;
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
-	const design = decideDesign({
-		designType: articleData.designType,
-		tags: articleData.tags,
-		isLiveBlog: config.isLiveBlog,
-		isLive: config.isLive,
-	});
-	const pillar = decideTheme({
-		pillar: articleData.pillar,
-		design,
-	});
-
 	return (
 		<>
 			<Analytics key="analytics" analytics={analytics} />
@@ -80,12 +58,7 @@ export const Article: React.FC<{
 						nav={nav}
 						guardianBaseURL={articleData.guardianBaseURL}
 					/>
-					<Body
-						data={articleData}
-						pillar={pillar}
-						design={design}
-						config={config}
-					/>
+					<Body data={articleData} config={config} />
 					<Onward
 						pageID={articleData.pageId}
 						sectionID={articleData.sectionName}

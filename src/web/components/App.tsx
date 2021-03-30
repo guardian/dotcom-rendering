@@ -336,24 +336,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 		});
 	}, []);
 
+	const display: Display = decideDisplay(CAPI.format);
+	const design: Design = decideDesign(CAPI.format);
+	const pillar: Theme = decideTheme(CAPI.format);
+
 	useOnce(() => {
 		setBrazeMessages(
 			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
 		);
 	}, [isSignedIn, CAPI.config.idApiUrl]);
 
-	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign({
-		designType: CAPI.designType,
-		tags: CAPI.tags,
-		isLiveBlog: CAPI.isLiveBlog,
-		isLive: CAPI.isLive,
-	});
-	const pillar = decideTheme({
-		pillar: CAPI.pillar,
-		design,
-		isSpecialReport: CAPI.isSpecialReport,
-	});
 	const format: Format = {
 		display,
 		design,
