@@ -26,6 +26,11 @@ const determinePadding = ({
 					padding-bottom: 36px;
 				}
 			`;
+		case Design.LiveBlog:
+		case Design.DeadBlog:
+			return css`
+				padding-top: 3px;
+			`;
 		default:
 			return css`
 				padding-top: 3px;
