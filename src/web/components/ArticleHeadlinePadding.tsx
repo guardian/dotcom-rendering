@@ -15,29 +15,29 @@ const determinePadding = ({
 	switch (design) {
 		case Design.Interview:
 			return css`
-				${space[1]}px;
+				padding-top: ${space[1]}px;
 			`;
 		case Design.Review:
 			if (starRating) {
 				return '';
 			}
 			return css`
-				${space[6]}px;
+				padding-bottom: ${space[6]}px;
 				${from.tablet} {
-					${space[9]}px;
+					padding-bottom: ${space[9]}px;
 				}
 			`;
 		case Design.LiveBlog:
 		case Design.DeadBlog:
 			return css`
-				${space[1]}px;
+				padding-top: ${space[1]}px;
 			`;
 		default:
 			return css`
-				${space[1]}px;
-				${space[6]}px;
+				padding-top: ${space[1]}px;
+				padding-bottom: ${space[6]}px;
 				${from.tablet} {
-					${space[9]}px;
+					padding-bottom: ${space[9]}px;
 				}
 			`;
 	}
