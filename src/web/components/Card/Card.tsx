@@ -313,6 +313,7 @@ export const Card = ({
 										</AvatarContainer>
 									</Hide>
 								)}
+<<<<<<< HEAD
 
 								{badge && (
 									<div>
@@ -322,6 +323,50 @@ export const Card = ({
 												className={badgeImageStyle}
 												alt="test"
 												src="https://static.theguardian.com/commercial/sponsor/24/Jun/2020/c15a28c9-ab71-4819-ac5b-066f04cb41ba-Togetherlogo.png"
+=======
+								<CardFooter
+									format={format}
+									age={
+										webPublicationDate ? (
+											<CardAge
+												format={format}
+												palette={palette}
+												webPublicationDate={
+													webPublicationDate
+												}
+												showClock={showClock}
+											/>
+										) : undefined
+									}
+									isFullCardImage={isFullCardImage}
+									mediaMeta={
+										format.design === Design.Media &&
+										mediaType ? (
+											<MediaMeta
+												palette={palette}
+												mediaType={mediaType}
+												mediaDuration={mediaDuration}
+											/>
+										) : undefined
+									}
+									commentCount={
+										showCommentCount &&
+										longCount &&
+										shortCount ? (
+											<CardCommentCount
+												palette={palette}
+												long={longCount}
+												short={shortCount}
+											/>
+										) : undefined
+									}
+									labBadge={
+										badge ? (
+											<LabBadge
+												badge={badge}
+												palette={palette}
+												badgeAlt={badgeAlt}
+>>>>>>> d740832d0 (Feedback)
 											/>
 										</div>
 									</div>

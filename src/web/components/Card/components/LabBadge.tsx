@@ -5,7 +5,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 
 type Props = {
 	badge: string;
-	badgeAlt: string;
+	badgeAlt?: string;
 	palette: Palette;
 };
 
@@ -33,6 +33,10 @@ const paidForStyle = (palette: Palette) => {
 export const LabBadge = ({ badge, badgeAlt, palette }: Props) => (
 	<div className={badgeWrapperStyle}>
 		<div className={paidForStyle(palette)}>Paid for by</div>
-		<img className={badgeImageStyle} alt={badgeAlt} src={badge} />
+		<img
+			className={badgeImageStyle}
+			alt={badgeAlt || 'Guardian Labs'}
+			src={badge}
+		/>
 	</div>
 );
