@@ -8,7 +8,6 @@ const nowIso = new Date(now).toISOString();
 const oneMinute = 60 * 1000 * 1;
 const fiveMinutes = 60 * 1000 * 5;
 const oneSecond = 1000 * 1;
-const fourSeconds = 1000 * 4;
 const fiveSeconds = 1000 * 5;
 const forteenSeconds = 1000 * 14;
 const fifteenSeconds = 1000 * 15;
@@ -109,22 +108,8 @@ describe('updateRelativeDates', () => {
 		);
 	});
 
-	it('uses the data-interval value if passed', async () => {
-		document.body.innerHTML = `<time data-testid="1" datetime="${nowIso}" data-relativeformat="med" data-interval="5000">1s ago</time>`;
-		updateRelativeDates();
-		MockDate.set(now + fiveSeconds);
-		jest.advanceTimersByTime(oneSecond);
-		expect(document.querySelector('[data-testid="1"]')).toHaveTextContent(
-			'1s ago',
-		);
-		jest.advanceTimersByTime(fourSeconds);
-		expect(document.querySelector('[data-testid="1"]')).toHaveTextContent(
-			'now',
-		);
-	});
-
 	it('respects if the long format is passed', async () => {
-		document.body.innerHTML = `<time data-testid="1" datetime="${nowIso}" data-relativeformat="long" data-interval="5000">1 second ago</time>`;
+		document.body.innerHTML = `<time data-testid="1" datetime="${nowIso}" data-relativeformat="long">1 second ago</time>`;
 		updateRelativeDates();
 		MockDate.set(now + fifteenSeconds);
 		jest.advanceTimersByTime(fifteenSeconds);
@@ -154,18 +139,6 @@ describe('updateRelativeDates', () => {
 			'1s',
 		);
 		jest.advanceTimersByTime(fiveSeconds);
-		expect(document.querySelector('[data-testid="1"]')).toHaveTextContent(
-			'30s',
-		);
-	});
-
-	it('data-interval values override options.interval', async () => {
-		document.body.innerHTML = `<time data-testid="1" datetime="${nowIso}" data-relativeformat="short" data-interval="5000">1s</time>`;
-		updateRelativeDates({
-			interval: 25000,
-		});
-		MockDate.set(now + thirtySeconds);
-		jest.advanceTimersByTime(twentySeconds);
 		expect(document.querySelector('[data-testid="1"]')).toHaveTextContent(
 			'30s',
 		);

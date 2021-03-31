@@ -19,11 +19,7 @@ export const updateRelativeDates = (options?: Options): number[] => {
 				if (!absoluteTime || !relativeFormat) return [];
 
 				// Decide what interval to use
-				const elementInterval =
-					element.dataset.interval &&
-					parseInt(element.dataset.interval, 10);
-				const interval: number =
-					elementInterval || options?.interval || DEFAULT_INTERVAL;
+				const interval: number = options?.interval || DEFAULT_INTERVAL;
 
 				// Create a new interval for this element
 				intervalIds.push(
