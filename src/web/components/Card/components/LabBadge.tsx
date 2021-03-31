@@ -9,8 +9,9 @@ type Props = {
 	palette: Palette;
 };
 
+// max-height: ${space[12]}px; - Couldn't find a direct replacement in Source
 const badgeImageStyle = css`
-	max-height: ${space[12]}px;
+	max-height: 60px;
 	margin-left: ${space[3]}px;
 	vertical-align: middle;
 `;
