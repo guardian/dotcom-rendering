@@ -143,6 +143,7 @@ type Palette = {
 		richLink: Colour;
 		navPillar: Colour;
 		article: Colour;
+		lines: Colour;
 	},
 	topBar: {
 		card: Colour;

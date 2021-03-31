@@ -318,7 +318,7 @@ export const ShowcaseLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={format.theme} />
+						<GuardianLines count={4} palette={palette} />
 					</Section>
 				</SendToBack>
 			</div>
@@ -399,7 +399,7 @@ export const ShowcaseLayout = ({
 							<div className={stretchLines}>
 								<GuardianLines
 									count={decideLineCount(format.design)}
-									pillar={format.theme}
+									palette={palette}
 									effect={decideLineEffect(
 										format.design,
 										format.theme,
@@ -439,10 +439,7 @@ export const ShowcaseLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -559,7 +556,7 @@ export const ShowcaseLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 
