@@ -5,6 +5,7 @@ import * as emotionTheming from 'emotion-theming';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
+import { getBrazeMetaFromQueryString } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
@@ -26,49 +27,6 @@ const containerStyles = emotion.css`
     width: 100%;
     ${getZIndex('banner')}
 `;
-
-const FORCE_BRAZE_ALLOWLIST = [
-	'preview.gutools.co.uk',
-	'preview.code.dev-gutools.co.uk',
-	'localhost',
-	'm.thegulocal.com',
-];
-
-const getBrazeMetaFromQueryString = (): Meta | null => {
-	if (URLSearchParams) {
-		const qsArg = 'force-braze-message';
-
-		const params = new URLSearchParams(window.location.search);
-		const value = params.get(qsArg);
-		if (value) {
-			if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
-				// eslint-disable-next-line no-console
-				console.log(`${qsArg} is not supported on this domain`);
-				return null;
-			}
-
-			try {
-				const dataFromBraze = JSON.parse(value);
-
-				return {
-					dataFromBraze,
-					logImpressionWithBraze: () => {},
-					logButtonClickWithBraze: () => {},
-				};
-			} catch (e) {
-				const error = e as Error;
-				// Parsing failed. Log a message and fall through.
-				// eslint-disable-next-line no-console
-				console.log(
-					`There was an error with ${qsArg}: `,
-					error.message,
-				);
-			}
-		}
-	}
-
-	return null;
-};
 
 // We can show a Braze banner if:
 // - The Braze switch is on
