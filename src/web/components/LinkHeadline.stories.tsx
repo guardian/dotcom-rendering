@@ -20,6 +20,11 @@ export const xsmallStory = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			size="large"
 		/>
 	</Section>
@@ -35,6 +40,11 @@ export const liveStory = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			kickerText="Live"
 		/>
 	</Section>
@@ -50,6 +60,11 @@ export const noSlash = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			kickerText="Live"
 			showSlash={false}
 		/>
@@ -66,6 +81,11 @@ export const pulsingDot = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
@@ -82,6 +102,11 @@ export const cultureVariant = () => (
 				design: Design.Article,
 				theme: Pillar.Culture,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.Culture,
+			}}
 			kickerText="Art and stuff"
 		/>
 	</Section>
@@ -97,6 +122,11 @@ export const opinionxxxsmall = () => (
 				design: Design.Comment,
 				theme: Pillar.Opinion,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Opinion,
+			}}
 			showQuotes={true}
 			size="small"
 			byline="Comment byline"
@@ -114,6 +144,11 @@ export const OpinionKicker = () => (
 				design: Design.Comment,
 				theme: Pillar.Opinion,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Pillar.Opinion,
+			}}
 			showQuotes={true}
 			kickerText="George Monbiot"
 			showSlash={true}
@@ -131,6 +166,11 @@ export const SpecialReport = () => (
 				design: Design.Comment,
 				theme: Special.SpecialReport,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Special.SpecialReport,
+			}}
 			showQuotes={true}
 			kickerText="Special Report"
 			showSlash={true}
@@ -148,6 +188,11 @@ export const InUnderlinedState = () => (
 				design: Design.Article,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.News,
+			}}
 			showUnderline={true}
 			size="small"
 			kickerText="I am never underlined"
@@ -170,6 +215,11 @@ export const linkStory = () => (
 				design: Design.Article,
 				theme: Pillar.Sport,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.Article,
+				theme: Pillar.Sport,
+			}}
 			kickerText="I am not a link"
 			showSlash={true}
 			link={{
@@ -190,6 +240,11 @@ export const LiveBlogSizes = () => (
 				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.LiveBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Large live"
 			showSlash={true}
@@ -204,6 +259,11 @@ export const LiveBlogSizes = () => (
 				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.LiveBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Medium live"
 			showSlash={true}
@@ -218,6 +278,11 @@ export const LiveBlogSizes = () => (
 				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.LiveBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Small live"
 			showSlash={true}
@@ -232,6 +297,11 @@ export const LiveBlogSizes = () => (
 				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.LiveBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Tiny live"
 			showSlash={true}
@@ -251,6 +321,11 @@ export const DeadBlogSizes = () => (
 				design: Design.DeadBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Large live"
 			showSlash={true}
@@ -265,6 +340,11 @@ export const DeadBlogSizes = () => (
 				design: Design.DeadBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Medium live"
 			showSlash={true}
@@ -279,6 +359,11 @@ export const DeadBlogSizes = () => (
 				design: Design.DeadBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Small live"
 			showSlash={true}
@@ -293,6 +378,11 @@ export const DeadBlogSizes = () => (
 				design: Design.DeadBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.DeadBlog,
+				theme: Pillar.News,
+			}}
 			showQuotes={true}
 			kickerText="Tiny live"
 			showSlash={true}
@@ -312,6 +402,11 @@ export const Updated = () => (
 				design: Design.LiveBlog,
 				theme: Pillar.News,
 			})}
+			format={{
+				display: Display.Standard,
+				design: Design.LiveBlog,
+				theme: Pillar.News,
+			}}
 			showPulsingDot={true}
 			showSlash={false}
 			kickerText="Updated 7m ago"

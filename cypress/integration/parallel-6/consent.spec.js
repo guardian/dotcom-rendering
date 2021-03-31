@@ -1,7 +1,6 @@
 /* eslint-disable mocha/no-setup-in-describe */
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { skipOn } from '@cypress/skip-test';
-import { isRunningInCI } from '../../lib/isRunningInCi';
 
 const firstPage =
 	'https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife';
@@ -39,56 +38,60 @@ describe('Consent tests', function () {
 
 	// Skipping only on CI because, these tests work fine locally but can fail on CI is the server
 	// being used is in the US
-	skipOn(isRunningInCI(), () => {
-		it('should make calls to Google Analytics after the reader consents', function () {
-			cy.visit(`Article?url=${firstPage}`);
-			waitForAnalyticsToInit();
-			cy.window().its('ga').should('not.exist');
-			// Open the Privacy setting dialogue
-			cmpIframe().contains("It's your choice");
-			cmpIframe().find("[title='Manage my cookies']").click();
-			// Accept tracking cookies
-			privacySettingsIframe().contains('Privacy settings');
-			privacySettingsIframe().find("[title='Accept all']").click();
-			// Make a second page load now that we have the CMP cookies set to accept tracking
-			cy.visit(`Article?url=${secondPage}`);
-			// Wait for a call to Google Analytics to be made - we expect this to happen
-			cy.intercept('POST', 'https://www.google-analytics.com/**');
-		});
+	skipOn(
+		Cypress.env('TEAMCITY') === 'true' ||
+			Cypress.env('GITHUB_ACTIONS') === 'true',
+		() => {
+			it('should make calls to Google Analytics after the reader consents', function () {
+				cy.visit(`Article?url=${firstPage}`);
+				waitForAnalyticsToInit();
+				cy.window().its('ga').should('not.exist');
+				// Open the Privacy setting dialogue
+				cmpIframe().contains("It's your choice");
+				cmpIframe().find("[title='Manage my cookies']").click();
+				// Accept tracking cookies
+				privacySettingsIframe().contains('Privacy settings');
+				privacySettingsIframe().find("[title='Accept all']").click();
+				// Make a second page load now that we have the CMP cookies set to accept tracking
+				cy.visit(`Article?url=${secondPage}`);
+				// Wait for a call to Google Analytics to be made - we expect this to happen
+				cy.intercept('POST', 'https://www.google-analytics.com/**');
+			});
 
-		it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
-			cy.visit(`Article?url=${firstPage}`);
-			waitForAnalyticsToInit();
-			cy.window().its('ga').should('not.exist');
-			// Open the Privacy setting dialogue
-			cmpIframe().contains("It's your choice");
-			cmpIframe().find("[title='Manage my cookies']").click();
-			// Reject tracking cookies
-			privacySettingsIframe().contains('Privacy settings');
-			privacySettingsIframe().find("[title='Reject all']").click();
-			// Make a second page load now that we have the CMP cookies set to reject tracking and check
-			// to see if the ga property was set by Google on the window object
-			cy.visit(`Article?url=${secondPage}`);
-			waitForAnalyticsToInit();
-			// We force window.ga to be null on consent rejection to prevent subsequent requests
-			cy.window().its('ga').should('equal', null);
-		});
+			it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
+				cy.visit(`Article?url=${firstPage}`);
+				waitForAnalyticsToInit();
+				cy.window().its('ga').should('not.exist');
+				// Open the Privacy setting dialogue
+				cmpIframe().contains("It's your choice");
+				cmpIframe().find("[title='Manage my cookies']").click();
+				// Reject tracking cookies
+				privacySettingsIframe().contains('Privacy settings');
+				privacySettingsIframe().find("[title='Reject all']").click();
+				// Make a second page load now that we have the CMP cookies set to reject tracking and check
+				// to see if the ga property was set by Google on the window object
+				cy.visit(`Article?url=${secondPage}`);
+				waitForAnalyticsToInit();
+				// We force window.ga to be null on consent rejection to prevent subsequent requests
+				cy.window().its('ga').should('equal', null);
+			});
 
-		it('should add GA tracking scripts onto the window object after the reader accepts consent', function () {
-			cy.visit(`Article?url=${firstPage}`);
-			waitForAnalyticsToInit();
-			cy.window().its('ga').should('not.exist');
-			// Open the Privacy setting dialogue
-			cmpIframe().contains("It's your choice");
-			cmpIframe().find("[title='Manage my cookies']").click();
-			// Reject tracking cookies
-			privacySettingsIframe().contains('Privacy settings');
-			privacySettingsIframe().find("[title='Accept all']").click();
-			// Make a second page load now that we have the CMP cookies set to reject tracking and check
-			// to see if the ga property was set by Google on the window object
-			cy.visit(`Article?url=${secondPage}`);
-			waitForAnalyticsToInit();
-			cy.window().its('ga').should('exist');
-		});
-	});
+			it('should add GA tracking scripts onto the window object after the reader accepts consent', function () {
+				cy.visit(`Article?url=${firstPage}`);
+				waitForAnalyticsToInit();
+				cy.window().its('ga').should('not.exist');
+				// Open the Privacy setting dialogue
+				cmpIframe().contains("It's your choice");
+				cmpIframe().find("[title='Manage my cookies']").click();
+				// Reject tracking cookies
+				privacySettingsIframe().contains('Privacy settings');
+				privacySettingsIframe().find("[title='Accept all']").click();
+				// Make a second page load now that we have the CMP cookies set to reject tracking and check
+				// to see if the ga property was set by Google on the window object
+				cy.visit(`Article?url=${secondPage}`);
+				waitForAnalyticsToInit();
+				cy.window().its('ga').should('exist');
+			});
+		},
+	);
 });

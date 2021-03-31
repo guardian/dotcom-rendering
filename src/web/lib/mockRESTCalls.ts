@@ -95,6 +95,11 @@ const richLinkCard = {
 		'https://i.guim.co.uk/img/uploads/2017/10/06/Ben-Beaumont-Thomas,-L.png?width=173&quality=85&auto=format&fit=max&s=e5b75fdef4eecc5eba2db1966e9b5d93',
 	url: '/music/2018/aug/31/eminem-donald-trump-surprise-album-kamikaze',
 	pillar: 'culture',
+	format: {
+		design: 'ArticleDesign',
+		theme: 'CulturePillar',
+		display: 'StandardDisplay',
+	},
 };
 
 export const mockRESTCalls = (): void => {
@@ -137,6 +142,15 @@ export const mockRESTCalls = (): void => {
 		// Related
 		.get(
 			/.*api.nextgen.guardianapps.co.uk\/related.*/,
+			{
+				status: 200,
+				body: related,
+			},
+			{ overwriteRoutes: false },
+		)
+		// Popular in tag
+		.get(
+			/.*api.nextgen.guardianapps.co.uk\/popular-in-tag.*/,
 			{
 				status: 200,
 				body: related,

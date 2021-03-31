@@ -20,13 +20,7 @@ import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-g
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
-import { signInGateComponent as gateMandatoryVariant } from '@root/src/web/components/SignInGate/gates/mandatory-gate';
 
-import { signInGateMandoryTest } from '@root/src/web/experiments/tests/sign-in-gate-mandatory';
-import {
-	canShow,
-	canShowMandatoryGate,
-} from '@root/src/web/components/SignInGate/displayRule';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,
@@ -71,20 +65,16 @@ type GateTestMap = { [name: string]: SignInGateComponent };
 const tests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateMandoryTest,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
 	'main-control-3': gateMainControl,
-	'main-variant-3': gateMainVariant(canShow),
-	'mandatory-gate-control': gateMainVariant(canShowMandatoryGate),
-	'mandatory-gate-variant': gateMandatoryVariant,
+	'main-variant-3': gateMainVariant,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_3',
 	SignInGateMainControl: 'main_control_3',
-	SignInGateMandatory: 'mandatory_gate_test',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -146,8 +136,8 @@ const ShowSignInGate = ({
 			abTest,
 			ophanComponentId: testIdToComponentId[abTest.id],
 			isComment:
-				CAPI.designType === 'Comment' ||
-				CAPI.designType === 'GuardianView',
+				CAPI.format.design === 'CommentDesign' ||
+				CAPI.format.design === 'EditorialDesign',
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -160,9 +150,7 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps) => {
-	const [isGateDismissed, setIsGateDismissed] = useState(false);
-	const [canShowGate, setCanShowGate] = useState(false);
-
+	const [showGate, setShowGate] = useState(true);
 	const [currentTest, setCurrentTest] = useState<CurrentABTest>({
 		name: '',
 		variant: '',
@@ -183,14 +171,14 @@ export const SignInGateSelector = ({
 
 	useEffect(() => {
 		// this hook will fire when the sign in gate is dismissed
-		// which will happen when the isGateDismissed state is set to true
+		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
-		if (isGateDismissed) {
+		if (showGate === false) {
 			document.dispatchEvent(
 				new CustomEvent('dcr:page:article:redisplayed'),
 			);
 		}
-	}, [isGateDismissed]);
+	}, [showGate]);
 
 	// check to see if the test is available on this render cycle
 	// required by the ab test framework, as we have to wait for the above
@@ -204,25 +192,19 @@ export const SignInGateSelector = ({
 	const gateVariant: SignInGateComponent | null =
 		testVariantToGateMapping?.[currentTest.variant];
 
-	if (gateVariant) {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		gateVariant
-			.canShow(CAPI, !!isSignedIn, currentTest)
-			.then(setCanShowGate);
-	}
-
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed && canShowGate && (
-				<ShowSignInGate
-					CAPI={CAPI}
-					abTest={currentTest}
-					setShowGate={(show) => setIsGateDismissed(!show)}
-					signInUrl={signInUrl}
-					gateVariant={gateVariant}
-				/>
-			)}
+			{showGate &&
+				gateVariant?.canShow(CAPI, !!isSignedIn, currentTest) && (
+					<ShowSignInGate
+						CAPI={CAPI}
+						abTest={currentTest}
+						setShowGate={setShowGate}
+						signInUrl={signInUrl}
+						gateVariant={gateVariant}
+					/>
+				)}
 		</>
 	);
 };

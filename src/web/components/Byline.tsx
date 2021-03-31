@@ -1,41 +1,78 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
+import { Special } from '@guardian/types';
 
 type Props = {
 	text: string;
 	palette: Palette;
+	format: Format;
 	size: SmallHeadlineSize;
 };
 
-const bylineStyles = (size: SmallHeadlineSize) => {
+const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
+	const baseStyles = css`
+		display: block;
+		font-style: italic;
+	`;
+
 	switch (size) {
-		case 'large':
+		case 'large': {
+			if (format.theme === Special.Labs) {
+				return css`
+					${baseStyles};
+					${textSans.large()};
+					font-size: 24px;
+					line-height: 24px;
+					${until.desktop} {
+						${textSans.large()};
+						line-height: 20px;
+					}
+				`;
+			}
 			return css`
-				display: block;
-				font-style: italic;
+				${baseStyles};
 				${headline.xsmall()};
 				${until.desktop} {
 					${headline.xxsmall()};
 				}
 			`;
-		case 'medium':
+		}
+		case 'medium': {
+			if (format.theme === Special.Labs) {
+				return css`
+					${baseStyles};
+					${textSans.large()};
+					line-height: 20px;
+					${until.desktop} {
+						${textSans.medium()};
+						line-height: 18px;
+					}
+				`;
+			}
 			return css`
-				display: block;
-				font-style: italic;
+				${baseStyles};
 				${headline.xxsmall()};
 				${until.desktop} {
 					${headline.xxxsmall()};
 				}
 			`;
-		case 'small':
+		}
+		case 'small': {
+			if (format.theme === Special.Labs) {
+				return css`
+					${baseStyles};
+					${textSans.medium()};
+					line-height: 18px;
+				`;
+			}
 			return css`
-				display: block;
-				font-style: italic;
+				${baseStyles};
 				${headline.xxxsmall()};
 			`;
+		}
 	}
 };
 
@@ -45,8 +82,8 @@ const colourStyles = (palette: Palette) => {
 	`;
 };
 
-export const Byline = ({ text, palette, size }: Props) => (
-	<span className={cx(bylineStyles(size), colourStyles(palette))}>
+export const Byline = ({ text, palette, format, size }: Props) => (
+	<span className={cx(bylineStyles(size, format), colourStyles(palette))}>
 		{text}
 	</span>
 );

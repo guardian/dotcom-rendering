@@ -1,10 +1,8 @@
 import React, { Suspense } from 'react';
 import { Lazy } from '@root/src/web/components/Lazy';
 
-import {
-	CanShow,
-	SignInGateComponent,
-} from '@frontend/web/components/SignInGate/gateDesigns/types';
+import { SignInGateComponent } from '@frontend/web/components/SignInGate/gateDesigns/types';
+import { canShow } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 const SignInGateMain = React.lazy(() => {
@@ -18,30 +16,27 @@ const SignInGateMain = React.lazy(() => {
 	});
 });
 
-export const signInGateComponent = (canShow: CanShow) => {
-	const gateComponent: SignInGateComponent = {
-		gate: ({
-			ophanComponentId,
-			dismissGate,
-			guUrl,
-			signInUrl,
-			abTest,
-			isComment,
-		}) => (
-			<Lazy margin={300}>
-				<Suspense fallback={<></>}>
-					<SignInGateMain
-						ophanComponentId={ophanComponentId}
-						dismissGate={dismissGate}
-						guUrl={guUrl}
-						signInUrl={signInUrl}
-						abTest={abTest}
-						isComment={isComment}
-					/>
-				</Suspense>
-			</Lazy>
-		),
-		canShow,
-	};
-	return gateComponent;
+export const signInGateComponent: SignInGateComponent = {
+	gate: ({
+		ophanComponentId,
+		dismissGate,
+		guUrl,
+		signInUrl,
+		abTest,
+		isComment,
+	}) => (
+		<Lazy margin={300}>
+			<Suspense fallback={<></>}>
+				<SignInGateMain
+					ophanComponentId={ophanComponentId}
+					dismissGate={dismissGate}
+					guUrl={guUrl}
+					signInUrl={signInUrl}
+					abTest={abTest}
+					isComment={isComment}
+				/>
+			</Suspense>
+		</Lazy>
+	),
+	canShow,
 };

@@ -16,6 +16,62 @@ export const related = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/world/2021/mar/26/buying-lockdown-dogs-whim-trouble-rspca-freddie-seal',
+			linkText:
+				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
+			showByline: false,
+			byline: 'Amelia Hill',
+			image:
+				'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
+				'460':
+					'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=460&quality=85&auto=format&fit=max&s=c7f8b1bb3e034a72180c93bc4964675d',
+			},
+			isLiveBlog: false,
+			pillar: 'news',
+			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-26T12:35:59.000Z',
+			headline:
+				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
+			shortUrl: 'https://www.theguardian.com/p/gpf22',
+		},
+		{
+			url:
+				'https://www.theguardian.com/lifeandstyle/2021/mar/14/as-dog-thefts-soar-owners-and-charities-call-for-tougher-penalties',
+			linkText:
+				' As dog thefts soar, owners and charities call for tougher penalties',
+			showByline: false,
+			byline: 'James Tapper',
+			image:
+				'https://i.guim.co.uk/img/media/a2eeedf1de383b1e85a13e98c2e6d5920f6248c7/0_248_5184_3110/master/5184.jpg?width=300&quality=85&auto=format&fit=max&s=c700dc3f559096aa4057309e0d777495',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/a2eeedf1de383b1e85a13e98c2e6d5920f6248c7/0_248_5184_3110/master/5184.jpg?width=300&quality=85&auto=format&fit=max&s=c700dc3f559096aa4057309e0d777495',
+				'460':
+					'https://i.guim.co.uk/img/media/a2eeedf1de383b1e85a13e98c2e6d5920f6248c7/0_248_5184_3110/master/5184.jpg?width=460&quality=85&auto=format&fit=max&s=7aec6f77d955de50056809cfa2bb2cf1',
+			},
+			isLiveBlog: false,
+			pillar: 'lifestyle',
+			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'LifestylePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-03-14T07:15:25.000Z',
+			headline:
+				' As dog thefts soar, owners and charities call for tougher penalties',
+			shortUrl: 'https://www.theguardian.com/p/gyyyv',
+		},
+		{
+			url:
 				'https://www.theguardian.com/lifeandstyle/2020/may/04/dogs-are-for-life-not-just-coronavirus-lockdown-says-charity',
 			linkText:
 				'Dogs are for life, not just coronavirus lockdown, says charity',
@@ -29,10 +85,15 @@ export const related = {
 				'460':
 					'https://i.guim.co.uk/img/media/0afb0e09b42424a28ef37c305c9ab48befe18ead/0_48_1841_1105/master/1841.jpg?width=460&quality=85&auto=format&fit=max&s=5826743b5637dceb53f5445d77f52367',
 			},
-			ageWarning: '9 months',
+			ageWarning: '10 months',
 			isLiveBlog: false,
 			pillar: 'lifestyle',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'LifestylePillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-05-03T23:01:04.000Z',
 			headline:
 				'Dogs are for life, not just coronavirus lockdown, says charity',
@@ -57,6 +118,11 @@ export const related = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-01-30T10:41:59.000Z',
 			headline:
 				'RSPCA urges caution over buying puppies online after spate of deaths',
@@ -80,6 +146,11 @@ export const related = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2018-02-08T11:29:41.000Z',
 			headline: 'Sale of puppies in pet shops may be banned in crackdown',
 			shortUrl: 'https://www.theguardian.com/p/83q8p',
@@ -103,6 +174,11 @@ export const related = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2017-02-02T00:01:15.000Z',
 			headline:
 				'Sale of puppies under eight weeks old to be made illegal',
@@ -127,6 +203,11 @@ export const related = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2016-11-01T13:48:08.000Z',
 			headline:
 				"Michael Heseltine's alsatian-strangling tale was shaggy dog story",
@@ -151,6 +232,11 @@ export const related = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2016-04-23T20:04:12.000Z',
 			headline:
 				'London cat killer mystery deepens as charities investigate 100 animal deaths',
@@ -174,57 +260,14 @@ export const related = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2015-07-04T23:05:04.000Z',
 			headline: 'Throwaway pup trend makes Britons dogs’ worst enemies',
 			shortUrl: 'https://www.theguardian.com/p/4acg9',
-		},
-		{
-			url:
-				'https://www.theguardian.com/lifeandstyle/2014/dec/21/how-designer-fashion-going-to-dogs-christmas',
-			linkText:
-				'How designer fashion is going to the dogs this Christmas',
-			showByline: false,
-			byline: 'Sarah Butler',
-			image:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=300&quality=85&auto=format&fit=max&s=5be6eb25d4ea6b9fcd28347e60ab53e8',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=300&quality=85&auto=format&fit=max&s=5be6eb25d4ea6b9fcd28347e60ab53e8',
-				'460':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/12/20/1419081895093/Dogs-010.jpg?width=460&quality=85&auto=format&fit=max&s=a81a0fe15ffaa4281c6810d54d12c43b',
-			},
-			ageWarning: '6 years',
-			isLiveBlog: false,
-			pillar: 'news',
-			designType: 'Article',
-			webPublicationDate: '2014-12-21T02:21:00.000Z',
-			headline:
-				'How designer fashion is going to the dogs this Christmas',
-			shortUrl: 'https://www.theguardian.com/p/44c47',
-		},
-		{
-			url:
-				'https://www.theguardian.com/lifeandstyle/2014/feb/02/pet-hotels-holidays-gourmet-dogs-life',
-			linkText:
-				'Miniature dogs take the lead  as UK splashes out on its pets',
-			showByline: false,
-			byline: 'Sarah Butler',
-			image:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=300&quality=85&auto=format&fit=max&s=c574165954ee448a60d4535b3aa2ea02',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=300&quality=85&auto=format&fit=max&s=c574165954ee448a60d4535b3aa2ea02',
-				'460':
-					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/2/1/1391283253521/Chihuahua-Yorkshire-mix-d-011.jpg?width=460&quality=85&auto=format&fit=max&s=7c3fa9a4ac6a2b6366b410c8afc38fe6',
-			},
-			ageWarning: '7 years',
-			isLiveBlog: false,
-			pillar: 'lifestyle',
-			designType: 'Article',
-			webPublicationDate: '2014-02-02T00:07:01.000Z',
-			headline:
-				'Miniature dogs take the lead  as UK splashes out on its pets',
-			shortUrl: 'https://www.theguardian.com/p/3mcf8',
 		},
 		{
 			url:
@@ -244,6 +287,11 @@ export const related = {
 			isLiveBlog: false,
 			pillar: 'opinion',
 			designType: 'Comment',
+			format: {
+				design: 'CommentDesign',
+				theme: 'OpinionPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2012-09-21T13:30:01.000Z',
 			headline: 'Battery-farmed puppies are a shame on our nation',
 			shortUrl: 'https://www.theguardian.com/p/3ahmy',

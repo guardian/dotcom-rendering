@@ -592,58 +592,50 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</Section>
 
+			{/* Onwards (when signed OUT) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedout"
+				/>
+			)}
+
+			{!isPaidContent && showComments && (
+				<Section data-print-layout="hide" sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedin"
+				/>
+			)}
+
 			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedout"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedout"
-						/>
-					)}
-
-					{showComments && (
-						<Section data-print-layout="hide" sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedin"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedin"
-						/>
-					)}
-
-					<Section
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-					/>
-				</>
+				<Section
+					data-print-layout="hide"
+					sectionId="most-viewed-footer"
+				/>
 			)}
 
 			<Section

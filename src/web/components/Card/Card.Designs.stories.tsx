@@ -6,7 +6,7 @@ import { Card } from './Card';
 
 export default {
 	component: Card,
-	title: 'Components/Card/Themes',
+	title: 'Components/Card/Designs',
 	parameters: {
 		viewport: {
 			// This has the effect of turning off the viewports addon by default

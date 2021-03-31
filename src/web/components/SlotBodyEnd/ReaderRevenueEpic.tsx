@@ -19,7 +19,9 @@ import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
+	OphanComponentEvent,
 	sendOphanComponentEvent,
+	submitComponentEvent,
 	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { Metadata } from '@guardian/automat-client/dist/types';
@@ -50,6 +52,7 @@ type EpicConfig = {
 type EpicProps = {
 	onReminderOpen: () => void;
 	email?: string;
+	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 	// Also anything specified by support-dotcom-components
 };
 
@@ -242,8 +245,13 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 	if (Epic) {
 		return (
 			<div ref={setNode} className={wrapperMargins}>
-				{/* eslint-disable-next-line react/jsx-props-no-spreading */}
-				<Epic {...module.props} email={email} />
+				{/* eslint-disable react/jsx-props-no-spreading */}
+				<Epic
+					{...module.props}
+					email={email}
+					submitComponentEvent={submitComponentEvent}
+				/>
+				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
 	}

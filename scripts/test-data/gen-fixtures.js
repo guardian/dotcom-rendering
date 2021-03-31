@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 const execa = require('execa');
 const fs = require('fs');
 const { resolve } = require('path');
+const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
 
@@ -48,6 +49,11 @@ const articles = [
 	},
 	{
 		name: 'Live',
+		url:
+			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+	},
+	{
+		name: 'Dead',
 		url:
 			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
@@ -125,15 +131,26 @@ try {
 			.then((res) => res.json())
 			.then((json) => {
 				// Override config
-				json.config = { ...json.config, ...configOverrides };
+				json.config = { ...config, ...configOverrides };
 				// Override switches
 				json.config.switches = {
 					...json.config.switches,
 					...switchOverrides,
 				};
-				// TODO: Remove these hacks when we add in support for CAPI format to DCR
-				if (json.format.theme === 'Labs') json.pillar = 'labs';
-				delete json.format;
+
+				// Override this config property but only for Labs articles
+				// TODO: Remove this once we are fully typing the config property
+				// and no longer need to use a fixed `config.js` object to replace
+				// the live one
+				if (json.format.theme === 'Labs') {
+					json.config.isPaidContent = true;
+				}
+
+				// Manual hack for LiveBlog vs DeadBlog
+				if (article.name === 'Live') {
+					json.format.design = 'LiveBlogDesign';
+				}
+
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name

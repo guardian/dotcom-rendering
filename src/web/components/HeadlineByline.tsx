@@ -1,11 +1,11 @@
 import React from 'react';
 import { css } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design, Format, Special } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const wrapperStyles = css`
@@ -15,11 +15,13 @@ const wrapperStyles = css`
 	z-index: 1;
 `;
 
-const yellowBoxStyles = css`
-	${headline.xxsmall({
-		fontWeight: 'regular',
-		lineHeight: 'loose',
-	})}
+const yellowBoxStyles = (format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.large({ lineHeight: 'regular' })
+		: headline.xxsmall({
+				fontWeight: 'regular',
+				lineHeight: 'loose',
+		  })}
 	font-style: italic;
 	background-color: ${brandAltBackground.primary};
 	box-shadow: 4px 0 0 ${brandAltBackground.primary},
@@ -36,10 +38,12 @@ const yellowBoxStyles = css`
 	}
 `;
 
-const opinionStyles = (palette: Palette) => css`
-	${headline.medium({
-		fontWeight: 'light',
-	})}
+const opinionStyles = (palette: Palette, format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.xxxlarge({ lineHeight: 'loose' })
+		: headline.medium({
+				fontWeight: 'light',
+		  })}
 	line-height: 38px;
 	/* Used to prevent the byline stretching full width */
 	display: inline;
@@ -56,10 +60,12 @@ const opinionStyles = (palette: Palette) => css`
 	}
 `;
 
-const immersiveStyles = css`
-	${headline.xsmall({
-		fontWeight: 'light',
-	})}
+const immersiveStyles = (format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.xlarge({ lineHeight: 'tight' })
+		: headline.xsmall({
+				fontWeight: 'light',
+		  })}
 	margin-bottom: ${space[6]}px;
 `;
 
@@ -97,7 +103,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case Display.Immersive:
 			return (
-				<div className={immersiveStyles}>
+				<div className={immersiveStyles(format)}>
 					by{' '}
 					<span className={immersiveLinkStyles(palette)}>
 						<BylineLink byline={byline} tags={tags} />
@@ -111,7 +117,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case Design.Interview:
 					return (
 						<div className={wrapperStyles}>
-							<div className={yellowBoxStyles}>
+							<div className={yellowBoxStyles(format)}>
 								<BylineLink byline={byline} tags={tags} />
 							</div>
 						</div>
@@ -120,7 +126,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case Design.Comment:
 					return (
 						<div
-							className={`${opinionStyles(palette)} ${
+							className={`${opinionStyles(palette, format)} ${
 								tags.filter((tag) => tag.type === 'Contributor')
 									.length === 1
 									? authorBylineWithImage

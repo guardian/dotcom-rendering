@@ -505,44 +505,40 @@ export const ShowcaseLayout = ({
 				/>
 			</Section>
 
-			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div id="onwards-upper-whensignedout" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedout" />
-					)}
-
-					{showComments && (
-						<Section sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div id="onwards-upper-whensignedin" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedin" />
-					)}
-
-					<Section sectionId="most-viewed-footer" />
-				</>
+			{/* Onwards (when signed OUT) */}
+			<div id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedout" />
 			)}
+
+			{!isPaidContent && showComments && (
+				<Section sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedin" />
+			)}
+
+			{!isPaidContent && <Section sectionId="most-viewed-footer" />}
 
 			<Section
 				padded={false}

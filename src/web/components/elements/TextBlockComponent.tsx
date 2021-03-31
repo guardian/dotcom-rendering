@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { body, textSans } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
@@ -162,6 +162,13 @@ const paraStyles = (format: Format) => css`
 		width: 0.75rem;
 		margin-right: 0.125rem;
 		background-color: ${decidePalette(format).background.bullet};
+	}
+
+	${until.tablet} {
+		/* 	To stop long words going outside of the view port.
+			For compatibility */
+		overflow-wrap: anywhere;
+		word-wrap: break-word;
 	}
 `;
 
