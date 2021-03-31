@@ -17,7 +17,6 @@ const badgeImageStyle = css`
 `;
 
 const badgeWrapperStyle = css`
-	margin-top: ${space[6]}px;
 	padding-right: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 	text-align: right;
