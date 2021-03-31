@@ -75,7 +75,9 @@ export function useComments(onwardsSections: OnwardsType[]) {
 	const [counts, setCounts] = useState<CommentType[]>([]);
 
 	const url = buildUrl(onwardsSections);
-	const { data } = useApi<CommentsType>(url);
+	const { data } = useApi<CommentsType>(url, {
+		pollInterval: 15000,
+	});
 
 	useEffect(() => {
 		setCounts((data && data.counts) || []);
