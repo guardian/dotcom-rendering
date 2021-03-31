@@ -9,6 +9,7 @@ import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Card } from '@frontend/web/components/Card/Card';
 
