@@ -8,7 +8,7 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -43,13 +43,8 @@ import {
 	decideLineCount,
 	decideLineEffect,
 } from '@root/src/web/lib/layoutHelpers';
-import {
-	Stuck,
-	SendToBack,
-	BannerWrapper,
-} from '@root/src/web/layouts/lib/stickiness';
+import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { NavGroupEager } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
-import { getZIndex } from '../lib/getZIndex';
 
 const StandardGrid = ({
 	children,
@@ -288,7 +283,6 @@ const ageWarningMargins = css`
 const stickyNavRootStyle = css`
 	display: inline;
 	position: relative;
-	${getZIndex('stickyNavWrapper')}
 `;
 
 interface Props {
@@ -344,7 +338,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Section>
 				</Stuck>
-				<SendToBack>
+				{format.theme !== Special.Labs && (
 					<Section
 						showTopBorder={false}
 						showSideBorders={false}
@@ -357,7 +351,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							mmaUrl={CAPI.config.mmaUrl}
 						/>
 					</Section>
-				</SendToBack>
+				)}
 			</div>
 
 			<div>
@@ -384,6 +378,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
+					borderColour={palette.border.article}
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
 						<GridItem area="title">
@@ -398,7 +393,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border />
+							{format.theme === Special.Labs ? (
+								<></>
+							) : (
+								<Border palette={palette} />
+							)}
 						</GridItem>
 						<GridItem area="matchNav">
 							<div className={maxWidth}>
@@ -413,7 +412,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</GridItem>
 						<GridItem area="headline">
 							<div className={maxWidth}>
-								<ArticleHeadlinePadding design={format.design}>
+								<ArticleHeadlinePadding
+									design={format.design}
+									starRating={
+										!!CAPI.starRating ||
+										CAPI.starRating === 0
+									}
+								>
 									{age && (
 										<div className={ageWarningMargins}>
 											<AgeWarning age={age} />
@@ -521,6 +526,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									/>
 									<SubMeta
 										palette={palette}
+										format={format}
 										subMetaKeywordLinks={
 											CAPI.subMetaKeywordLinks
 										}
@@ -586,58 +592,50 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</Section>
 
+			{/* Onwards (when signed OUT) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedout"
+				/>
+			)}
+
+			{!isPaidContent && showComments && (
+				<Section data-print-layout="hide" sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedin"
+				/>
+			)}
+
 			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedout"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedout"
-						/>
-					)}
-
-					{showComments && (
-						<Section data-print-layout="hide" sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedin"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedin"
-						/>
-					)}
-
-					<Section
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-					/>
-				</>
+				<Section
+					data-print-layout="hide"
+					sectionId="most-viewed-footer"
+				/>
 			)}
 
 			<Section

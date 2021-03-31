@@ -11,12 +11,15 @@ import {
 	border,
 	brand,
 	brandAlt,
+	lifestyle,
+	culture,
+	labs,
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
 
 const WHITE = neutral[100];
-const BLACK = text.primary;
+const BLACK = neutral[7];
 
 const textHeadline = (format: Format): string => {
 	switch (format.display) {
@@ -50,6 +53,7 @@ const textHeadline = (format: Format): string => {
 };
 
 const textSeriesTitle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
@@ -65,7 +69,6 @@ const textSeriesTitle = (format: Format): string => {
 						case Pillar.Lifestyle:
 						case Pillar.Culture:
 						case Pillar.Opinion:
-						case Special.Labs:
 						default:
 							return WHITE;
 					}
@@ -82,6 +85,7 @@ const textSeriesTitle = (format: Format): string => {
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case Display.Immersive:
@@ -110,6 +114,7 @@ const textStandfirst = (format: Format): string => {
 };
 
 const textTwitterHandle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
@@ -130,26 +135,31 @@ const textCaptionLink = (format: Format): string => {
 };
 
 const textSubMeta = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
 };
 
 const textSubMetaLabel = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
 
 const textSubMetaLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
 
 const textSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return text.supporting;
 };
 
 const textArticleLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -189,10 +199,12 @@ const textStandfirstLink = (format: Format): string => {
 };
 
 const textBranding = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 
 const textArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -211,8 +223,19 @@ const textCardHeadline = (format: Format): string => {
 		case Design.Interview:
 			return pillarPalette[format.theme].dark;
 		case Design.Media:
+			return WHITE;
 		case Design.LiveBlog:
-			return neutral[97];
+			switch (format.theme) {
+				case Special.Labs:
+					return BLACK;
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				default:
+					return WHITE;
+			}
 		default:
 			return BLACK;
 	}
@@ -238,8 +261,15 @@ const textCardKicker = (format: Format): string => {
 					return news[600];
 				case Pillar.Sport:
 					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -275,13 +305,20 @@ const textCardFooter = (format: Format): string => {
 		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
 				case Special.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -321,6 +358,7 @@ const backgroundArticle = (format: Format): string => {
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
+	if (format.theme === Special.Labs) return neutral[97];
 	return 'transparent';
 };
 
@@ -368,7 +406,17 @@ const backgroundCard = (format: Format): string => {
 		case Design.Media:
 			return neutral[20];
 		case Design.LiveBlog:
-			return pillarPalette[format.theme].dark;
+			switch (format.theme) {
+				case Special.Labs:
+					return labs[400];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				default:
+					return pillarPalette[format.theme][300];
+			}
 		default:
 			return neutral[97];
 	}
@@ -396,6 +444,7 @@ const backgroundHeadlineByline = (format: Format): string => {
 };
 
 const backgroundBullet = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
@@ -413,6 +462,8 @@ const backgroundStandfirst = (format: Format): string => {
 	switch (format.design) {
 		case Design.LiveBlog:
 			return pillarPalette[format.theme][300];
+		case Design.DeadBlog:
+			return neutral[86];
 		default:
 			return backgroundArticle(format);
 	}
@@ -427,16 +478,19 @@ const backgroundSpeechBubble = (format: Format): string => {
 };
 
 const fillCommentCount = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
 
 const fillShareIcon = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
 
 const fillCaptionTriangle = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	return pillarPalette[format.theme].main;
 };
@@ -457,16 +511,24 @@ const fillCardIcon = (format: Format): string => {
 				default:
 					return neutral[46];
 			}
+			return lifestyle[500];
 		case Design.LiveBlog:
 			switch (format.theme) {
 				case Pillar.News:
-					return '#ffbac8';
+					return news[600];
 				case Pillar.Sport:
-					return '#90dcff';
+					return sport[600];
+				case Pillar.Opinion:
+					return WHITE;
+				case Pillar.Culture:
+					return culture[600];
+				case Pillar.Lifestyle:
+					return lifestyle[500];
 				case Special.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
+				case Special.Labs:
 				default:
-					return pillarPalette[format.theme].main;
+					return BLACK;
 			}
 		case Design.Media:
 			switch (format.theme) {
@@ -495,7 +557,8 @@ const fillCardIcon = (format: Format): string => {
 	}
 };
 
-const borderSyndicationButton = (): string => {
+const borderSyndicationButton = (format: Format): string => {
+	if (format.theme === Special.Labs) return neutral[60];
 	return border.secondary;
 };
 
@@ -508,6 +571,7 @@ const borderLiveBlock = (format: Format): string => {
 };
 
 const borderArticleLink = (format: Format): string => {
+	if (format.theme === Special.Labs) return neutral[60];
 	if (format.theme === Special.SpecialReport) return specialReport[400];
 	return border.secondary;
 };
@@ -520,15 +584,18 @@ const borderStandfirstLink = (format: Format): string => {
 
 const borderHeadline = (format: Format): string => {
 	if (format.design === Design.LiveBlog) return '#9F2423';
+	if (format.design === Design.DeadBlog) return '#CDCDCD';
 	return border.secondary;
 };
 
 const borderStandfirst = (format: Format): string => {
 	if (format.design === Design.LiveBlog) return '#8C2222';
+	if (format.design === Design.DeadBlog) return '#BDBDBD';
 	return border.secondary;
 };
 
 const borderArticleLinkHover = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	if (format.theme === Special.SpecialReport) return specialReport[100];
 	return pillarPalette[format.theme].main;
 };
@@ -559,6 +626,13 @@ const borderRichLink: (format: Format) => string = (format) => {
 
 const borderNavPillar: (format: Format) => string = (format) =>
 	pillarPalette[format.theme].bright;
+
+const borderArticle: (format: Format) => string = (format) => {
+	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
+		return '#CDCDCD';
+	if (format.theme === Special.Labs) return neutral[60];
+	return border.secondary;
+};
 
 const backgroundRichLink: (format: Format) => string = (format) => {
 	if (format) {
@@ -689,7 +763,7 @@ export const decidePalette = (format: Format): Palette => {
 			blockquoteIcon: fillBlockquoteIcon(format),
 		},
 		border: {
-			syndicationButton: borderSyndicationButton(),
+			syndicationButton: borderSyndicationButton(format),
 			subNav: borderSubNav(format),
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
@@ -699,6 +773,7 @@ export const decidePalette = (format: Format): Palette => {
 			standfirst: borderStandfirst(format),
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
+			article: borderArticle(format),
 		},
 		topBar: {
 			card: topBarCard(format),

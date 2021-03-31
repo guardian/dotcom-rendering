@@ -1,6 +1,7 @@
 import * as path from 'path';
 import express, { Request, Response } from 'express';
 import fetch from 'node-fetch';
+import responseTime from 'response-time';
 
 import compression from 'compression';
 
@@ -45,6 +46,19 @@ const buildUrlFromQueryParam = (req: Request) => {
 	return `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 };
 
+// Middleware to track route performance using 'response-time' lib
+// Usage: app.post('/Article', logRenderTime, renderArticle);
+const logRenderTime = responseTime(
+	(req: Request, _: Response, time: number) => {
+		// eslint-disable-next-line prefer-destructuring
+		const body: CAPIType = req.body;
+		logger.info({
+			pageId: body.pageId,
+			renderTime: time,
+		});
+	},
+);
+
 // this is the actual production server
 if (process.env.NODE_ENV === 'production') {
 	logger.info('dotcom-rendering is GO.');
@@ -79,10 +93,10 @@ if (process.env.NODE_ENV === 'production') {
 		app.use('/assets', express.static(path.relative(__dirname, dist)));
 	}
 
-	app.post('/Article', renderArticle);
-	app.post('/AMPArticle', renderAMPArticle);
+	app.post('/Article', logRenderTime, renderArticle);
+	app.post('/AMPArticle', logRenderTime, renderAMPArticle);
 
-	app.get('/Article', async (req: Request, res: Response) => {
+	app.get('/Article', logRenderTime, async (req: Request, res: Response) => {
 		// Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
 		try {
 			const url = buildUrlFromQueryParam(req);
@@ -98,21 +112,25 @@ if (process.env.NODE_ENV === 'production') {
 		}
 	});
 
-	app.get('/AMPArticle', async (req: Request, res: Response) => {
-		// Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
-		try {
-			const url = buildUrlFromQueryParam(req);
-			const { html, ...config } = await fetch(url).then((article) =>
-				article.json(),
-			);
+	app.get(
+		'/AMPArticle',
+		logRenderTime,
+		async (req: Request, res: Response) => {
+			// Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
+			try {
+				const url = buildUrlFromQueryParam(req);
+				const { html, ...config } = await fetch(url).then((article) =>
+					article.json(),
+				);
 
-			req.body = config;
-			return renderAMPArticle(req, res);
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.error(error);
-		}
-	});
+				req.body = config;
+				return renderAMPArticle(req, res);
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error);
+			}
+		},
+	);
 
 	app.use('/ArticlePerfTest', renderArticlePerfTest);
 	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);

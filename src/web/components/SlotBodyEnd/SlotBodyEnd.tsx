@@ -26,6 +26,7 @@ type Props = {
 	tags: TagType[];
 	contributionsServiceUrl: string;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
+	idApiUrl: string;
 };
 
 const buildReaderRevenueEpicConfig = ({
@@ -38,6 +39,7 @@ const buildReaderRevenueEpicConfig = ({
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
+	idApiUrl,
 }: any): CandidateConfig => {
 	return {
 		candidate: {
@@ -53,6 +55,7 @@ const buildReaderRevenueEpicConfig = ({
 					isPaidContent,
 					tags,
 					contributionsServiceUrl,
+					idApiUrl,
 				}),
 			show: (meta: any) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
@@ -95,6 +98,7 @@ export const SlotBodyEnd = ({
 	tags,
 	contributionsServiceUrl,
 	brazeMessages,
+	idApiUrl,
 }: Props) => {
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -108,6 +112,7 @@ export const SlotBodyEnd = ({
 			isPaidContent,
 			tags,
 			contributionsServiceUrl,
+			idApiUrl,
 		});
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,

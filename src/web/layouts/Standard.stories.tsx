@@ -17,6 +17,7 @@ import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
+import { Labs } from '@root/fixtures/generated/articles/Labs';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -37,11 +38,10 @@ export default {
 const convertToStandard = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: false,
+		format: {
+			...CAPI.format,
+			display: 'StandardDisplay' as CAPIDisplay,
 		},
-		isImmersive: false,
 	};
 };
 
@@ -72,6 +72,16 @@ export const ReviewStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
+
+export const ReviewNoStarStory = (): React.ReactNode => {
+	const ReviewWithoutStars = {
+		...Review,
+		starRating: undefined,
+	};
+	const ServerCAPI = convertToStandard(ReviewWithoutStars);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+ReviewNoStarStory.story = { name: 'Review without stars' };
 
 export const PrintShopStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PrintShop);
@@ -112,9 +122,9 @@ FeatureStory.story = { name: 'Feature' };
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: true,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(LiveBlog);
@@ -125,9 +135,9 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: false,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(DeadBlog);
@@ -193,4 +203,12 @@ MatchReportStory.story = {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: { viewports: [1330] },
 	},
+};
+
+export const LabsStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Labs);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LabsStory.story = {
+	name: 'Labs',
 };

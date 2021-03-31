@@ -143,7 +143,12 @@ export const CardHeadline = ({
 			</span>
 		</h4>
 		{byline && showByline && (
-			<Byline text={byline} palette={palette} size={size} />
+			<Byline
+				text={byline}
+				palette={palette}
+				format={format}
+				size={size}
+			/>
 		)}
 	</>
 );

@@ -29,9 +29,15 @@ export const storyPackage = {
 				'460':
 					'https://i.guim.co.uk/img/media/16d5a2f2b7d8ff8f454b9cf34a21283941b3ae26/0_160_4000_2400/master/4000.jpg?width=460&quality=85&auto=format&fit=max&s=ddade4520902a2c16979500f69c21b95',
 			},
+			ageWarning: '1 month',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2021-02-23T11:45:10.000Z',
 			headline:
 				"'Dare mighty things': hidden message found on Nasa Mars rover parachute",
@@ -52,9 +58,15 @@ export const storyPackage = {
 				'460':
 					'https://i.guim.co.uk/img/media/9fd7f7041490dc6a7974c555b91e102bc1704e33/0_155_4150_2490/master/4150.jpg?width=460&quality=85&auto=format&fit=max&s=29b950b314ce5d89bf583e8652a9edf0',
 			},
+			ageWarning: '1 month',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2021-02-22T20:21:29.000Z',
 			headline:
 				'Nasa releases video of Perseverance rover landing on Mars',
@@ -79,6 +91,11 @@ export const storyPackage = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-07-30T13:07:14.000Z',
 			headline:
 				'Nasa launches Mars mission in search of evidence of ancient life',
@@ -103,6 +120,11 @@ export const storyPackage = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-07-23T08:21:50.000Z',
 			headline:
 				'China launches space rocket in ambitious Mars landing mission',
@@ -123,10 +145,15 @@ export const storyPackage = {
 				'460':
 					'https://i.guim.co.uk/img/media/4f5c3b613611970b89dbc2f797dcc7ac780e2815/0_7_1021_613/master/1021.jpg?width=460&quality=85&auto=format&fit=max&s=4dc109e47f27812d1b004082c3f8048a',
 			},
-			ageWarning: '7 months',
+			ageWarning: '8 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-07-20T01:31:04.000Z',
 			headline:
 				"UAE successfully launches Hope probe, Arab world's first mission to Mars",
@@ -150,6 +177,11 @@ export const storyPackage = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Feature',
+			format: {
+				design: 'FeatureDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-07-12T06:18:06.000Z',
 			headline:
 				"'We are all Martians!': space explorers seek to solve the riddle of life on Mars",
@@ -173,6 +205,11 @@ export const storyPackage = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Feature',
+			format: {
+				design: 'FeatureDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-06-09T04:00:38.000Z',
 			headline:
 				"'It is about our survival': UAE's Mars mission prepares for launch",
@@ -197,6 +234,11 @@ export const storyPackage = {
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			webPublicationDate: '2020-02-24T17:22:52.000Z',
 			headline:
 				"Nasa's InSight lander records hundreds of marsquakes on red planet",

@@ -12,6 +12,7 @@ import {
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import { getZIndex } from '../lib/getZIndex';
 
 export interface DropdownLinkType {
 	url: string;
@@ -25,15 +26,15 @@ interface Props {
 	label: string;
 	links: DropdownLinkType[];
 	dataLinkName: string;
+	children?: React.ReactNode;
 }
 
 const ulStyles = css`
-	z-index: 1072;
+	${getZIndex('dropdown')}
 	list-style: none;
 	background-color: white;
 	padding: 6px 0;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-	display: none;
 
 	${until.tablet} {
 		position: fixed;
@@ -54,8 +55,12 @@ const ulStyles = css`
 	}
 `;
 
-const ulExpanded = css`
+const displayBlock = css`
 	display: block;
+`;
+
+const displayNone = css`
+	display: none;
 `;
 
 const linkStyles = css`
@@ -157,7 +162,13 @@ const buttonExpanded = css`
 	}
 `;
 
-export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
+export const Dropdown = ({
+	id,
+	label,
+	links,
+	dataLinkName,
+	children,
+}: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [noJS, setNoJS] = useState(true);
 
@@ -260,29 +271,29 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
 					>
 						{label}
 					</button>
-					<ul
-						className={cx({
-							[ulStyles]: true,
-							[ulExpanded]: isExpanded,
-						})}
-						data-cy="dropdown-options"
-					>
-						{links.map((l, index) => (
-							<li key={l.title}>
-								<a
-									href={l.url}
-									className={cx({
-										[linkStyles]: true,
-										[linkActive]: !!l.isActive,
-										[linkFirst]: index === 0,
-									})}
-									data-link-name={l.dataLinkName}
-								>
-									{l.title}
-								</a>
-							</li>
-						))}
-					</ul>
+					<div className={isExpanded ? displayBlock : displayNone}>
+						{children ? (
+							<>{children}</>
+						) : (
+							<ul className={ulStyles} data-cy="dropdown-options">
+								{links.map((l, index) => (
+									<li key={l.title}>
+										<a
+											href={l.url}
+											className={cx({
+												[linkStyles]: true,
+												[linkActive]: !!l.isActive,
+												[linkFirst]: index === 0,
+											})}
+											data-link-name={l.dataLinkName}
+										>
+											{l.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
 				</>
 			)}
 		</>

@@ -1,53 +1,41 @@
 import { Design } from '@guardian/types';
 
-export const decideDesign = ({
-	designType,
-	tags,
-	isLiveBlog,
-	isLive,
-}: {
-	designType: CAPIDesign;
-	tags: TagType[];
-	isLiveBlog?: boolean;
-	isLive?: boolean;
-}): Design => {
-	if (
-		tags.find((tag) => tag.id === 'artanddesign/series/guardian-print-shop')
-	) {
-		return Design.PrintShop;
-	}
-	if (isLiveBlog && isLive) return Design.LiveBlog;
-	if (isLiveBlog && !isLive) return Design.DeadBlog;
+export const decideDesign = (format: CAPIFormat): Design => {
+	const designType: CAPIDesign = format.design;
 	switch (designType) {
-		case 'Article':
+		case 'ArticleDesign':
 			return Design.Article;
-		case 'Media':
+		case 'MediaDesign':
 			return Design.Media;
-		case 'Review':
+		case 'ReviewDesign':
 			return Design.Review;
-		case 'Analysis':
+		case 'AnalysisDesign':
 			return Design.Analysis;
-		case 'Comment':
+		case 'CommentDesign':
+		case 'LetterDesign':
 			return Design.Comment;
-		case 'Feature':
+		case 'FeatureDesign':
 			return Design.Feature;
-		case 'Recipe':
+		case 'LiveBlogDesign':
+			return Design.LiveBlog;
+		case 'DeadBlogDesign':
+			return Design.DeadBlog;
+		case 'RecipeDesign':
 			return Design.Recipe;
-		case 'MatchReport':
+		case 'MatchReportDesign':
 			return Design.MatchReport;
-		case 'Interview':
+		case 'InterviewDesign':
 			return Design.Interview;
-		case 'GuardianView':
+		case 'EditorialDesign':
 			return Design.Editorial;
-		case 'Quiz':
+		case 'QuizDesign':
 			return Design.Quiz;
-		case 'PhotoEssay':
+		case 'InteractiveDesign':
+			return Design.Interactive;
+		case 'PhotoEssayDesign':
 			return Design.PhotoEssay;
-		case 'GuardianLabs':
-			return Design.Article;
-		case 'AdvertisementFeature':
-		case 'Immersive':
-		case 'SpecialReport':
+		case 'PrintShopDesign':
+			return Design.PrintShop;
 		default:
 			return Design.Article;
 	}

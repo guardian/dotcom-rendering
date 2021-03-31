@@ -16,6 +16,7 @@ import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
+import { Labs } from '@root/fixtures/generated/articles/Labs';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -36,11 +37,10 @@ export default {
 const convertToShowcase = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: true,
+		format: {
+			...CAPI.format,
+			display: 'ShowcaseDisplay' as CAPIDisplay,
 		},
-		isImmersive: false,
 	};
 };
 
@@ -169,3 +169,11 @@ export const MatchReportStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
+
+export const LabsStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Labs);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LabsStory.story = {
+	name: 'Labs',
+};

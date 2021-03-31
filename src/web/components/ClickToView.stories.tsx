@@ -53,6 +53,9 @@ const RoleStory = ({
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -461,6 +464,9 @@ export const EmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -636,6 +642,9 @@ export const UnsafeEmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -786,6 +795,9 @@ export const VimeoBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className="para">
@@ -843,6 +855,9 @@ export const DocumentBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -888,6 +903,9 @@ export const SoundCloudBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -950,6 +968,9 @@ export const SpotifyBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -1008,6 +1029,9 @@ export const TweetBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -1047,6 +1071,9 @@ export const InstagramBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>

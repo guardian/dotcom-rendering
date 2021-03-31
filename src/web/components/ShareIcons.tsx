@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
@@ -43,7 +42,7 @@ const iconStyles = ({
 	palette: Palette;
 	size: ShareIconSize;
 }) => css`
-	border: 1px solid ${border.secondary};
+	border: 1px solid ${palette.border.article};
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -95,7 +94,7 @@ export const ShareIcons = ({
 			{displayIcons.includes('facebook') && (
 				<li className={liStyles(size)} key="facebook">
 					<a
-						href={`https://www.facebook.com/dialog/share?app_id=202314643182694&href=${encodeUrl(
+						href={`https://www.facebook.com/dialog/share?app_id=180444840287&href=${encodeUrl(
 							pageId,
 						)}&CMP=share_btn_fb`}
 						role="button"
