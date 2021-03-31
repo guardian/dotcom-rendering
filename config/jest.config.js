@@ -23,6 +23,7 @@ module.exports = {
 	collectCoverage: true,
 	preset: 'ts-jest/presets/js-with-ts',
 	rootDir: '../',
+	globalSetup: './config/jestglobalSetup.js',
 	globals: {
 		'ts-jest': {
 			babelConfig: {
