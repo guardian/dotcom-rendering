@@ -17,7 +17,7 @@ import {
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
 import FooterContent from 'components/footerContent';
-import Epic from 'components/shared/epic';
+import EpicContent from 'components/shared/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {
@@ -119,7 +119,7 @@ function formatDates(): void {
 
 // TODO: show epics on opinion articles
 function insertEpic(): void {
-	const epicPlaceholder = document.getElementById('epic-placeholder');
+	const epicPlaceholder = document.getElementById('js-epic-placeholder');
 	if (epicPlaceholder) {
 		epicPlaceholder.innerHTML = '';
 	}
@@ -139,7 +139,7 @@ function insertEpic(): void {
 						firstButton,
 						secondButton,
 					};
-					ReactDOM.render(h(Epic, epicProps), epicPlaceholder);
+					ReactDOM.render(h(EpicContent, epicProps), epicPlaceholder);
 				}
 			})
 			.catch((error) => console.error(error));
