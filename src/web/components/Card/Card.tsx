@@ -25,6 +25,7 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
+import { LabBadge } from '../LabBadge';
 
 type Props = {
 	linkTo: string;
@@ -57,6 +58,7 @@ type Props = {
 	dataLinkName?: string;
 	// Labs
 	badge?: string;
+	badgeAlt?: string;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -149,6 +151,7 @@ export const Card = ({
 	minWidthInPixels,
 	dataLinkName,
 	badge,
+	badgeAlt,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -283,7 +286,6 @@ export const Card = ({
 								)}
 								<CardFooter
 									format={format}
-									badge={badge || undefined}
 									palette={palette}
 									age={
 										webPublicationDate && !badge ? (
@@ -349,6 +351,17 @@ export const Card = ({
 >>>>>>> 278fc31e2 (Feedback Changes)
 												long={longCount}
 												short={shortCount}
+											/>
+										) : undefined
+									}
+									labBadge={
+										badge ? (
+											<LabBadge
+												badge={badge}
+												palette={palette}
+												badgeAlt={
+													badgeAlt || 'Guardian Labs'
+												}
 											/>
 										) : undefined
 									}

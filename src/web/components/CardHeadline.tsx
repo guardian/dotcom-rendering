@@ -52,34 +52,14 @@ const fontStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const labTextStyles = (size: SmallHeadlineSize) => {
-	switch (size) {
-		case 'large':
-			return css`
-				${textSans.large()};
-				${until.desktop} {
-					${textSans.medium()};
-				}
-			`;
-		case 'medium':
-			return css`
-				line-height: normal;
-				${textSans.medium()};
-				${until.desktop} {
-					${textSans.small()};
-				}
-			`;
-		case 'small':
-			return css`
-				${textSans.small()};
-			`;
-		case 'tiny':
-			return css`
-				${textSans.xsmall()};
-				font-size: 14px;
-			`;
+const labTextStyles = css`
+	line-height: normal;
+	${textSans.large({ lineHeight: 'tight' })};
+	${until.desktop} {
+		${textSans.medium({ lineHeight: 'tight' })};
 	}
-};
+	padding-bottom: ${space[1]}px;
+`;
 
 const underlinedStyles = (size: SmallHeadlineSize) => {
 	function generateUnderlinedCss(baseSize: number) {
@@ -141,7 +121,7 @@ export const CardHeadline = ({
 		<h4
 			className={cx(
 				format.theme === Special.Labs
-					? labTextStyles(size)
+					? labTextStyles
 					: fontStyles(size),
 				format.design === Design.Analysis && underlinedStyles(size),
 				isFullCardImage &&
