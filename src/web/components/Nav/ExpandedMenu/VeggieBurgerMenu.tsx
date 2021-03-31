@@ -79,7 +79,6 @@ const veggieBurgerStyles = (display: Display) => css`
 	position: absolute;
 	border: 0;
 	border-radius: 50%;
-	outline: none;
 
 	${getZIndex('burger')}
 
