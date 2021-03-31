@@ -12,9 +12,8 @@ export const decideDesign = (format: CAPIFormat): Design => {
 		case 'AnalysisDesign':
 			return Design.Analysis;
 		case 'CommentDesign':
-			return Design.Comment;
 		case 'LetterDesign':
-			return Design.Letter;
+			return Design.Comment;
 		case 'FeatureDesign':
 			return Design.Feature;
 		case 'LiveBlogDesign':
