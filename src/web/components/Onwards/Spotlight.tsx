@@ -13,7 +13,6 @@ export const Spotlight = ({ content }: Props) => (
 	<Card
 		linkTo={content[0].url}
 		format={content[0].format}
-		palette={content[0].palette}
 		headlineText={content[0].headline}
 		headlineSize="large"
 		byline={content[0].byline}
