@@ -23,22 +23,16 @@ const badgeWrapperStyle = css`
 	flex: auto;
 `;
 
-const paidForStyle = css`
-	${textSans.xsmall({ fontWeight: 'bold' })}
-`;
+const paidForStyle = (palette: Palette) => {
+	return css`
+		${textSans.xsmall({ fontWeight: 'bold' })}
+		color: ${palette.text.cardFooter};
+	`;
+};
 
 export const LabBadge = ({ badge, badgeAlt, palette }: Props) => (
 	<div className={badgeWrapperStyle}>
-		<div
-			className={cx(
-				paidForStyle,
-				css`
-					color: ${palette.text.branding};
-				`,
-			)}
-		>
-			Paid for by
-		</div>
+		<div className={paidForStyle(palette)}>Paid for by</div>
 		<img className={badgeImageStyle} alt={badgeAlt} src={badge} />
 	</div>
 );

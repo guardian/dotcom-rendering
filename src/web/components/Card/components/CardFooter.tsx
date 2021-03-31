@@ -12,7 +12,6 @@ type Props = {
 	commentCount?: JSX.Element;
 	isFullCardImage?: boolean;
 	labBadge?: JSX.Element;
-	palette: Palette;
 };
 
 const spaceBetween = css`
@@ -52,7 +51,7 @@ export const CardFooter = ({
 	labBadge,
 }: Props) => {
 	if (format.theme === Special.Labs && labBadge) {
-		return <footer className={spaceBetween}>{labBadge}</footer>;
+		return <footer>{labBadge}</footer>;
 	}
 
 	if (

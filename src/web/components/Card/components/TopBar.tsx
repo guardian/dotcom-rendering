@@ -12,7 +12,6 @@ export const TopBar = ({ children, palette, isFullCardImage }: Props) => (
 		className={css`
 			display: flex;
 			width: 100%;
-			line-height: 1;
 			/* We absolutely position the 1 pixel top bar below
                so this is required here */
 			position: relative;
