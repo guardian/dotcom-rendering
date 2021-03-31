@@ -44,7 +44,7 @@
         "@guardian/braze-components": "^0.0.19",
         "@guardian/consent-management-platform": "^6.11.2",
         "@guardian/discussion-rendering": "6.1.4-2",
-        "@guardian/libs": "^1.6.3",
+        "@guardian/libs": "^1.7.0",
         "@guardian/shimport": "^1.0.2",
         "@guardian/src-button": "^2.7.1",
         "@guardian/src-checkbox": "^2.7.1",

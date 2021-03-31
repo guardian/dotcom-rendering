@@ -1,4 +1,4 @@
-import { makeRelativeDate } from '@root/src/web/lib/dateTime';
+import { timeAgo } from '@guardian/libs';
 
 const DEFAULT_INTERVAL = 15 * 1000; // 15 seconds
 
@@ -31,26 +31,19 @@ export const updateRelativeDates = (options?: Options): number[] => {
 						let newTime;
 						switch (relativeFormat) {
 							case 'short':
-								newTime = makeRelativeDate(
-									new Date(absoluteTime).getTime(),
-									{
-										format: 'short',
-									},
-								);
-								break;
 							case 'med':
-								newTime = makeRelativeDate(
+								newTime = timeAgo(
 									new Date(absoluteTime).getTime(),
 									{
-										format: 'med',
+										verbose: false,
 									},
 								);
 								break;
 							case 'long':
-								newTime = makeRelativeDate(
+								newTime = timeAgo(
 									new Date(absoluteTime).getTime(),
 									{
-										format: 'long',
+										verbose: true,
 									},
 								);
 								break;

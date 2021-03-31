@@ -119,17 +119,17 @@ describe('updateRelativeDates', () => {
 		);
 		jest.advanceTimersByTime(fourSeconds);
 		expect(document.querySelector('[data-testid="1"]')).toHaveTextContent(
-			'5s ago',
+			'now',
 		);
 	});
 
 	it('respects if the long format is passed', async () => {
 		document.body.innerHTML = `<time data-testid="1" datetime="${nowIso}" data-relativeformat="long" data-interval="5000">1 second ago</time>`;
 		updateRelativeDates();
-		MockDate.set(now + fiveSeconds);
-		jest.advanceTimersByTime(fiveSeconds);
+		MockDate.set(now + fifteenSeconds);
+		jest.advanceTimersByTime(fifteenSeconds);
 		expect(document.querySelector('[data-testid="1"]')).toHaveTextContent(
-			'5 seconds ago',
+			'15 seconds ago',
 		);
 	});
 
