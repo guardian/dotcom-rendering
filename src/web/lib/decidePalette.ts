@@ -462,6 +462,8 @@ const backgroundStandfirst = (format: Format): string => {
 	switch (format.design) {
 		case Design.LiveBlog:
 			return pillarPalette[format.theme][300];
+		case Design.DeadBlog:
+			return neutral[86];
 		default:
 			return backgroundArticle(format);
 	}
@@ -582,11 +584,13 @@ const borderStandfirstLink = (format: Format): string => {
 
 const borderHeadline = (format: Format): string => {
 	if (format.design === Design.LiveBlog) return '#9F2423';
+	if (format.design === Design.DeadBlog) return '#CDCDCD';
 	return border.secondary;
 };
 
 const borderStandfirst = (format: Format): string => {
 	if (format.design === Design.LiveBlog) return '#8C2222';
+	if (format.design === Design.DeadBlog) return '#BDBDBD';
 	return border.secondary;
 };
 
@@ -624,7 +628,14 @@ const borderNavPillar: (format: Format) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
 const borderArticle: (format: Format) => string = (format) => {
+	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
+		return '#CDCDCD';
 	if (format.theme === Special.Labs) return neutral[60];
+	return border.secondary;
+};
+
+const borderLines: (format: Format) => string = (format) => {
+	if (format.theme === Special.Labs) return border.primary;
 	return border.secondary;
 };
 
@@ -768,6 +779,7 @@ export const decidePalette = (format: Format): Palette => {
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
+			lines: borderLines(format),
 		},
 		topBar: {
 			card: topBarCard(format),

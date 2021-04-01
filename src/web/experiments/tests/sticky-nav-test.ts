@@ -6,7 +6,7 @@ export const stickyNavTest: ABTest = {
 	expiry: '2021-05-03',
 	author: 'nlong',
 	description: 'Tests sticky nav behaviour.',
-	audience: 0.01,
+	audience: 0.05,
 	audienceOffset: 0,
 	successMeasure:
 		'Increased CTR on sticky variant, more visits to fronts, increase in number of pillars visited per user.',

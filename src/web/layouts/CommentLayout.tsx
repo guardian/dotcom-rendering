@@ -374,7 +374,7 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={format.theme} />
+						<GuardianLines count={4} palette={palette} />
 					</Section>
 				</SendToBack>
 			</div>
@@ -445,7 +445,7 @@ export const CommentLayout = ({
 									)}
 									<GuardianLines
 										count={8}
-										pillar={format.theme}
+										palette={palette}
 									/>
 								</div>
 							</div>
@@ -453,7 +453,7 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="lines">
 						<div className={pushToBottom}>
-							<GuardianLines count={8} pillar={format.theme} />
+							<GuardianLines count={8} palette={palette} />
 						</div>
 					</GridItem>
 					<GridItem area="standfirst">
@@ -517,10 +517,7 @@ export const CommentLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -586,44 +583,40 @@ export const CommentLayout = ({
 				/>
 			</Section>
 
-			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div id="onwards-upper-whensignedout" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedout" />
-					)}
-
-					{showComments && (
-						<Section sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div id="onwards-upper-whensignedin" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedin" />
-					)}
-
-					<Section sectionId="most-viewed-footer" />
-				</>
+			{/* Onwards (when signed OUT) */}
+			<div id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedout" />
 			)}
+
+			{!isPaidContent && showComments && (
+				<Section sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedin" />
+			)}
+
+			{!isPaidContent && <Section sectionId="most-viewed-footer" />}
 
 			<Section
 				padded={false}
@@ -641,7 +634,7 @@ export const CommentLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

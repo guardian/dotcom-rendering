@@ -1,4 +1,4 @@
-import { Pillar, Design, Display } from '@guardian/types';
+import { Pillar, Design, Display, Special } from '@guardian/types';
 
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
@@ -280,6 +280,25 @@ export const eightTrails: OnwardsType = {
 	ophanComponentName: 'more-on-this-story',
 	format: {
 		theme: Pillar.News,
+		design: Design.Article,
+		display: Display.Standard,
+	},
+};
+
+export const labsTrails: OnwardsType = {
+	heading: 'Paid Content',
+	trails: trails.slice(0, 8).map((trail) => {
+		return {
+			...trail,
+			format: {
+				...trail.format,
+				theme: Special.Labs,
+			},
+		};
+	}),
+	ophanComponentName: 'more-on-this-story',
+	format: {
+		theme: Special.Labs,
 		design: Design.Article,
 		display: Display.Standard,
 	},

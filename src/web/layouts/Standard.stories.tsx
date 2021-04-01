@@ -18,6 +18,7 @@ import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -122,9 +123,9 @@ FeatureStory.story = { name: 'Feature' };
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: true,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(LiveBlog);
@@ -135,9 +136,9 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: false,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(DeadBlog);
@@ -211,4 +212,12 @@ export const LabsStory = (): React.ReactNode => {
 };
 LabsStory.story = {
 	name: 'Labs',
+};
+
+export const SpecialReportStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
 };

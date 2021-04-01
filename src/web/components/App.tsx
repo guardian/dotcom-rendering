@@ -944,7 +944,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper pillar={pillar} />
+						<MostViewedRightWrapper palette={palette} />
 					</Suspense>
 				</Lazy>
 			</Portal>

@@ -20,11 +20,11 @@ const headingStyles = css`
 `;
 
 interface Props {
-	pillar: Theme;
+	palette: Palette;
 	limitItems?: number;
 }
 
-export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
+export const MostViewedRight = ({ palette, limitItems = 5 }: Props) => {
 	const endpointUrl: string =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
 	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
@@ -41,7 +41,7 @@ export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
 			<div className={wrapperStyles} data-component="geo-most-popular">
-				<GuardianLines count={4} pillar={pillar} />
+				<GuardianLines palette={palette} />
 				<h3 className={headingStyles}>Most viewed</h3>
 				<ul data-link-name="Right hand most popular geo GB">
 					{trails.map((trail, index) => (

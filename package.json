@@ -179,7 +179,6 @@
         "babel-plugin-transform-runtime": "^6.23.0",
         "bundlesize": "^0.18.0",
         "chromatic": "^5.6.1",
-        "cypress-localstorage-commands": "^1.4.1",
         "cypress-plugin-tab": "^1.0.5",
         "desvg-loader": "^0.1.0",
         "doctoc": "^1.4.0",

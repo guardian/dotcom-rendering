@@ -138,10 +138,19 @@ try {
 					...switchOverrides,
 				};
 
+				// Override this config property but only for Labs articles
+				// TODO: Remove this once we are fully typing the config property
+				// and no longer need to use a fixed `config.js` object to replace
+				// the live one
+				if (json.format.theme === 'Labs') {
+					json.config.isPaidContent = true;
+				}
+
 				// Manual hack for LiveBlog vs DeadBlog
 				if (article.name === 'Live') {
 					json.format.design = 'LiveBlogDesign';
 				}
+
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name

@@ -20,7 +20,7 @@ const backgroundColour = css`
 	background-color: ${palette.neutral[97]};
 `;
 
-const Body: React.SFC<{
+const Body: React.FunctionComponent<{
 	data: ArticleModel;
 	config: ConfigType;
 }> = ({ data, config }) => {

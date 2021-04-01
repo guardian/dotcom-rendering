@@ -41,7 +41,6 @@ export const FourOrLess = ({ content }: Props) => {
 						<Card
 							linkTo={trail.url}
 							format={trail.format}
-							palette={trail.palette}
 							headlineText={trail.headline}
 							headlineSize="medium"
 							byline={trail.byline}

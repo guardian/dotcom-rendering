@@ -15,16 +15,14 @@ const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
 	currentTest: CurrentABTest,
-): Promise<boolean> =>
-	Promise.resolve(
-		!isSignedIn &&
-			!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
-			isNPageOrHigherPageView(3) &&
-			isValidContentType(CAPI) &&
-			isValidSection(CAPI) &&
-			isValidTag(CAPI) &&
-			!isIOS9(),
-	);
+): boolean =>
+	!isSignedIn &&
+	!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
+	isNPageOrHigherPageView(3) &&
+	isValidContentType(CAPI) &&
+	isValidSection(CAPI) &&
+	isValidTag(CAPI) &&
+	!isIOS9();
 
 export const signInGateComponent: SignInGateComponent = {
 	canShow,

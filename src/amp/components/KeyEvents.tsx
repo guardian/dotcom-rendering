@@ -63,7 +63,7 @@ const listStyle = css`
 	padding: 0.375rem 0.625rem;
 `;
 
-export const KeyEvents: React.SFC<{
+export const KeyEvents: React.FunctionComponent<{
 	events: Block[];
 	url: string;
 }> = ({ events, url }) => {

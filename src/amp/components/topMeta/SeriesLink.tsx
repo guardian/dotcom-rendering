@@ -13,7 +13,7 @@ const seriesStyle = (pillar: Theme) => css`
 `;
 
 // Returns a series link if possible, and attempt to return a section link as a fallback if provided
-export const SeriesLink: React.SFC<{
+export const SeriesLink: React.FunctionComponent<{
 	baseURL: string;
 	tags: TagType[];
 	fallbackToSection: boolean;
