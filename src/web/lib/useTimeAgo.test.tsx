@@ -3,11 +3,11 @@ import MockDate from 'mockdate';
 
 import { render, screen } from '@testing-library/react';
 
-import { useRelativeDates } from './useRelativeDates';
+import { useTimeAgo } from './useTimeAgo';
 
 function setup(html: string, options?: any) {
 	function TestComponent() {
-		useRelativeDates(options);
+		useTimeAgo(options);
 		return <div dangerouslySetInnerHTML={{ __html: html }} />;
 	}
 	return render(<TestComponent />);
@@ -24,7 +24,7 @@ const fifteenSeconds = 1000 * 15;
 const twentySeconds = 20 * 1000;
 const thirtySeconds = 30 * 1000;
 
-describe('useRelativeDates', () => {
+describe('useTimeAgo', () => {
 	beforeEach(() => {
 		jest.useFakeTimers();
 	});

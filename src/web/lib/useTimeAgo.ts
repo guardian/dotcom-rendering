@@ -38,7 +38,7 @@ const updateTimeElements = () => {
 		});
 };
 
-export const useRelativeDates = (options?: Options) => {
+export const useTimeAgo = (options?: Options) => {
 	// Decide what interval to use
 	const interval: number = options?.interval || DEFAULT_INTERVAL;
 
