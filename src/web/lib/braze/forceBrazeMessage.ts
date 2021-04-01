@@ -14,20 +14,28 @@ type Meta = {
 };
 
 export const getBrazeMetaFromQueryString = (): Meta | null => {
-	if (URLSearchParams) {
-		const qsArg = 'force-braze-message';
+	if (window.location.hash) {
+		const key = 'force-braze-message';
 
-		const params = new URLSearchParams(window.location.search);
-		const value = params.get(qsArg);
-		if (value) {
+		const hashString = window.location.hash;
+		const forcedMessage = hashString.slice(
+			hashString.indexOf(`${key}=`) + key.length + 1,
+			hashString.length,
+		);
+
+		if (forcedMessage) {
 			if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
 				// eslint-disable-next-line no-console
-				console.log(`${qsArg} is not supported on this domain`);
+				console.log(`${key} is not supported on this domain`);
 				return null;
 			}
 
 			try {
-				const dataFromBraze = JSON.parse(value);
+				const dataFromBraze = JSON.parse(
+					decodeURIComponent(forcedMessage),
+				);
+
+				console.log(dataFromBraze);
 
 				return {
 					dataFromBraze,
@@ -38,10 +46,7 @@ export const getBrazeMetaFromQueryString = (): Meta | null => {
 				const error = e as Error;
 				// Parsing failed. Log a message and fall through.
 				// eslint-disable-next-line no-console
-				console.log(
-					`There was an error with ${qsArg}: `,
-					error.message,
-				);
+				console.log(`There was an error with ${key}: `, error.message);
 			}
 		}
 	}
