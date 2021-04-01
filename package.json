@@ -178,7 +178,7 @@
         "babel-plugin-transform-runtime": "^6.23.0",
         "bundlesize": "^0.18.0",
         "chromatic": "^5.6.1",
-				"cypress": "6.8.0",
+        "cypress": "6.8.0",
         "cypress-plugin-tab": "^1.0.5",
         "desvg-loader": "^0.1.0",
         "doctoc": "^1.4.0",
@@ -277,7 +277,9 @@
         "react-dom": "^16.13.1"
     },
     "run-if-changed": {
-        "src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
-        "src/lib/index.d.ts": "make gen-schema && make gen-fixtures"
+        "src/lib/content.d.ts": "make gen-fixtures-and-schema",
+        "src/lib/index.d.ts": "make gen-fixtures-and-schema",
+				"scripts/test-data/data/mostReadGeo.json": "make gen-manual-fixtures",
+				"scripts/test-data/data/mostRead.json": "make gen-manual-fixtures"
     }
 }

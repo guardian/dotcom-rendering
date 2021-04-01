@@ -121,7 +121,6 @@ const HEADER = `/**
 * 2. if the latest live data is not what you need, then consider editing
 *    gen-fixtures.ts directly.
 */
-
 `;
 
 try {

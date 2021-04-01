@@ -159,6 +159,14 @@ gen-fixtures:
 	$(call log, "Generating new article fixture data")
 	@node scripts/test-data/gen-fixtures.js
 
+gen-fixtures-and-schema:
+	$(call log, "Generating new article fixture data and new schema")
+	make gen-schema && make gen-fixtures
+
+gen-manual-fixtures:
+	$(call log, "Updating all manual fixture data")
+	@node scripts/test-data/gen-manual-fixtures.js
+
 perf-test:
 	@node scripts/perf/perf-test.js
 

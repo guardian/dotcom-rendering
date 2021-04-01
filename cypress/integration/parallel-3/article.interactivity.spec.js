@@ -49,24 +49,7 @@ describe('Interactivity', function () {
 		// eslint-disable-next-line mocha/no-exclusive-tests
 		describe.only('When most viewed is mocked', function () {
 			// eslint-disable-next-line mocha/no-mocha-arrows
-			beforeEach(() => {
-				// Mock share count
-				cy.intercept('GET', '/sharecount/**', {
-					fixture: 'shareCount.json',
-				}).as('getShareCount');
-				// Mock most-read
-				cy.intercept('GET', '/most-read/**', {
-					fixture: 'mostRead.json',
-				}).as('getMostRead');
-				// Mock most-read
-				cy.intercept('GET', '**/most-read-geo**', {
-					fixture: 'mostReadGeo.json',
-				}).as('getMostReadGeo');
-				// Mock most-read
-				cy.intercept('GET', '/embed/card/**', {
-					fixture: 'richLink.json',
-				}).as('getRichLink');
-			});
+			beforeEach(mockApi);
 			it('should change the list of most viewed items when a tab is clicked', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.contains('Lifestyle');
