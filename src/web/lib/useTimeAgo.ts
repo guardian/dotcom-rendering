@@ -44,10 +44,7 @@ const updateTimeElements = () => {
  * @param {Number} interval - The length of time in-between time being updated
  * */
 export const useTimeAgo = (options?: Options) => {
-	// Decide what interval to use
-	const interval: number = options?.interval || DEFAULT_INTERVAL;
-
 	useInterval(() => {
 		updateTimeElements();
-	}, interval);
+	}, options?.interval || DEFAULT_INTERVAL);
 };
