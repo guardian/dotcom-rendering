@@ -7,6 +7,7 @@ import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
+import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
@@ -121,6 +122,8 @@ const linksStyles = css`
 	${from.wide} {
 		right: 342px;
 	}
+
+	${getZIndex('headerLinks')}
 `;
 
 export const Links = ({
