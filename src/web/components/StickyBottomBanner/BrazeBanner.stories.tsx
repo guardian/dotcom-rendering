@@ -1,4 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
+import * as emotion from 'emotion';
+import * as emotionCore from '@emotion/core';
+import * as emotionTheming from 'emotion-theming';
 
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 
@@ -13,6 +16,15 @@ export const DefaultStory = (): ReactElement => {
 	>();
 
 	useEffect(() => {
+		window.guardian = window.guardian || {};
+		window.guardian.automat = {
+			react: React,
+			preact: React,
+			emotionCore,
+			emotionTheming,
+			emotion,
+		};
+
 		import(
 			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
 		)

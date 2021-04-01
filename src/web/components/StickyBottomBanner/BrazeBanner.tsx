@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'emotion';
-
+import * as emotion from 'emotion';
+import * as emotionCore from '@emotion/core';
+import * as emotionTheming from 'emotion-theming';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
@@ -19,11 +20,11 @@ type Props = {
 	meta: Meta;
 };
 
-const containerStyles = css`
-	position: fixed;
-	bottom: -1px;
-	width: 100%;
-	${getZIndex('banner')}
+const containerStyles = emotion.css`
+    position: fixed;
+    bottom: -1px;
+    width: 100%;
+    ${getZIndex('banner')}
 `;
 
 const FORCE_BRAZE_ALLOWLIST = [
@@ -158,30 +159,41 @@ export const BrazeBanner = ({ meta }: Props) => {
 	>();
 
 	useEffect(() => {
-		import(
-			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
-		)
-			.then((module) => {
-				setBrazeComponent(() => module.BrazeMessage);
-			})
-			.catch((error) =>
-				window.guardian.modules.sentry.reportError(
-					error,
-					'braze-banner',
-				),
-			);
-	}, []);
+		if (meta) {
+			// TODO: unify the way we handle sharing these deps (this is
+			// duplicated in SlotBodyEnd). Probably via the automat client
+			// library.
+			window.guardian.automat = {
+				react: React,
+				preact: React,
+				emotionCore,
+				emotionTheming,
+				emotion,
+			};
 
-	return (
-		<>
-			{BrazeComponent ? (
-				<BrazeBannerWithSatisfiedDependencies
-					BrazeComponent={BrazeComponent}
-					meta={meta}
-				/>
-			) : (
-				<div />
-			)}
-		</>
-	);
+			import(
+				/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
+			)
+				.then((module) => {
+					setBrazeComponent(() => module.BrazeMessage);
+				})
+				.catch((error) =>
+					window.guardian.modules.sentry.reportError(
+						error,
+						'braze-banner',
+					),
+				);
+		}
+	}, [meta]);
+
+	if (BrazeComponent && meta) {
+		return (
+			<BrazeBannerWithSatisfiedDependencies
+				BrazeComponent={BrazeComponent}
+				meta={meta}
+			/>
+		);
+	}
+
+	return <div />;
 };

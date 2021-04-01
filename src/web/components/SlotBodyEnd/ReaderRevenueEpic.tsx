@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'emotion';
-
+import * as emotion from 'emotion';
+import * as emotionCore from '@emotion/core';
+import * as emotionTheming from 'emotion-theming';
 import {
 	getBodyEnd,
 	getViewLog,
@@ -24,9 +25,10 @@ import {
 	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { Metadata } from '@guardian/automat-client/dist/types';
-import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '../../browser/cookie';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
+
+const { css } = emotion;
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
@@ -207,7 +209,13 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 	}) as HasBeenSeen;
 
 	useEffect(() => {
-		setAutomat();
+		window.guardian.automat = {
+			react: React,
+			preact: React, // temp while we deploy newer contributions-service at which point client-lib does this for us
+			emotionCore,
+			emotionTheming,
+			emotion,
+		};
 
 		const modulePerf = initPerf('contributions-epic-module');
 		modulePerf.start();
