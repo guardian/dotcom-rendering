@@ -97,7 +97,8 @@ type Props = {
 	tags: TagType[];
 };
 
-const hasSingleContributor = (tags: TagType[]) => tags.filter((tag) => tag.type === 'Contributor').length === 1
+const hasSingleContributor = (tags: TagType[]) =>
+	tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	if (byline === '') {
@@ -132,7 +133,11 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case Design.Comment:
 					return (
 						<div
-							className={cx(opinionWrapperStyles, { [authorBylineWithImage]: hasSingleContributor(tags) })}
+							className={cx(opinionWrapperStyles, {
+								[authorBylineWithImage]: hasSingleContributor(
+									tags,
+								),
+							})}
 						>
 							<div className={opinionStyles(palette, format)}>
 								<BylineLink byline={byline} tags={tags} />
