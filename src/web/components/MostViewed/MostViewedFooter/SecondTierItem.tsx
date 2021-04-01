@@ -52,6 +52,8 @@ const headlineLink = css`
 	color: ${text.anchorSecondary};
 	font-weight: 500;
 	${headline.xxxsmall()};
+
+	display: block; /* To ensure focus outline works okay */
 `;
 
 const ageWarningStyles = css`

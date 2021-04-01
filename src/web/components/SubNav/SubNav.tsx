@@ -76,6 +76,17 @@ const linkStyle = css`
 	:hover {
 		text-decoration: underline;
 	}
+
+	:focus {
+		line-height: 26px;
+		height: 26px;
+		margin-top: 5px;
+
+		${from.tablet} {
+			height: 32px;
+			line-height: 32px;
+		}
+	}
 `;
 
 const selected = css`
@@ -180,6 +191,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 						className={listItemStyles(palette)}
 					>
 						<a
+							data-src-focus-disabled={true}
 							className={parentLinkStyle}
 							href={subNavSections.parent.url}
 						>
@@ -193,6 +205,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 							className={cx(linkStyle, {
 								[selected]: link.title === currentNavLink,
 							})}
+							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
 								link.url,
