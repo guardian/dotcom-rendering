@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'emotion';
-
+import * as emotion from 'emotion';
+import * as emotionCore from '@emotion/core';
+import * as emotionTheming from 'emotion-theming';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import {
 	getWeeklyArticleHistory,
@@ -22,7 +23,6 @@ import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
-import { setAutomat } from '@root/src/web/lib/setAutomat';
 
 const checkForErrors = (response: Response) => {
 	if (!response.ok) {
@@ -193,7 +193,13 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			return;
 		}
 
-		setAutomat();
+		window.guardian.automat = {
+			react: React,
+			preact: React,
+			emotionCore,
+			emotionTheming,
+			emotion,
+		};
 
 		window
 			.guardianPolyfilledImport(module.url)
@@ -230,10 +236,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
 				ref={setNode}
-				className={css`
-					width: 100%;
-					${getZIndex('banner')}
-				`}
+				className={emotion.css`width: 100%; ${getZIndex('banner')}`}
 			>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Banner

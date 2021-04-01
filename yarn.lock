@@ -2347,15 +2347,16 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.16.tgz#3ef47e7f49e633aea51c67f061d8d313a26fa9bc"
   integrity sha512-SgNU2bgiyQaXNfqanx4SDmxqAhXW6QBCTk4tRnCgV9Ht6noRl7UsDfx4I0u+M4H3TRnK4I/i2mmlJBtnuwhxEg==
 
-"@guardian/braze-components@^0.0.20":
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.20.tgz#6e63a93a598eefa1ebd80c643be0a3087b3fa839"
-  integrity sha512-3KWR9Td2KxvEZ3NDa56aPeyNJ2hFYD5K50IepSB1BxVpICxX1UAYF1CvP8yPashDon4rI/T8VcPiaSw16reyJA==
+"@guardian/braze-components@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-0.0.19.tgz#edca8e113c09e556c492c425a12b04724e13912b"
+  integrity sha512-fDWFc7YSeS2CEcH7ZiZO6RKwclFvB5uy+aAvKER4rFGqRwaK2eBcF8i7SMHDbWNjfafpdrTu9Rdug7nxnj1kbg==
   dependencies:
     "@guardian/src-button" "2.7.1"
     "@guardian/src-foundations" "2.7.1"
     "@guardian/src-grid" "2.7.1"
     "@guardian/src-icons" "2.7.1"
+    emotion-theming "^10.0.19"
 
 "@guardian/consent-management-platform@^6.11.2":
   version "6.11.2"

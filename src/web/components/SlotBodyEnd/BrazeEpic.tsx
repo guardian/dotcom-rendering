@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'emotion';
-
+import * as emotion from 'emotion';
+import * as emotionCore from '@emotion/core';
+import * as emotionTheming from 'emotion-theming';
 import {
 	parseBrazeEpicParams,
 	EpicDataFromBraze,
@@ -12,7 +13,8 @@ import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-import { setAutomat } from '@root/src/web/lib/setAutomat';
+
+const { css } = emotion;
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -102,7 +104,13 @@ const BrazeEpic = ({
 	});
 
 	useOnce(() => {
-		setAutomat();
+		window.guardian.automat = {
+			react: React,
+			preact: React,
+			emotionCore,
+			emotionTheming,
+			emotion,
+		};
 
 		const componentUrl = joinUrl([
 			contributionsServiceUrl,
