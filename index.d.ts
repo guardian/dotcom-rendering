@@ -42,7 +42,7 @@ type CAPIDesign =
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
-type CAPIDisplay = 'StandardDisplay' | 'ImmersiveDisplay' | 'ShowcaseDisplay' | 'NumberedListDisplay' | 'ColumnDisplay';
+type CAPIDisplay = 'StandardDisplay' | 'ImmersiveDisplay' | 'ShowcaseDisplay' | 'NumberedListDisplay';
 
 // CAPIFormat is the stringified version of Format passed through from CAPI.
 // It gets converted to the @guardian/types format on platform

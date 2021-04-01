@@ -11,8 +11,6 @@ export const decideDisplay = (format: CAPIFormat): Display => {
 			return Display.Showcase;
 		case 'NumberedListDisplay':
 			return Display.NumberedList;
-		case 'ColumnDisplay':
-			return Display.Column;
 		default:
 			return Display.Standard;
 	}
