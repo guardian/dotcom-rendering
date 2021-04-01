@@ -11,6 +11,7 @@ import {
 	getArticleCountConsent,
 	withinLocalNoBannerCachePeriod,
 	setLocalNoBannerCachePeriod,
+	MODULES_VERSION,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
@@ -83,6 +84,7 @@ const buildPayload = (props: BuildPayloadProps) => {
 			countryCode: props.countryCode,
 			weeklyArticleHistory: getWeeklyArticleHistory(),
 			hasOptedOutOfArticleCount: !props.hasConsentedToArticleCounts,
+			modulesVersion: MODULES_VERSION,
 		},
 	};
 };
