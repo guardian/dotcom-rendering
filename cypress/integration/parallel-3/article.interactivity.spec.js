@@ -46,23 +46,41 @@ describe('Interactivity', function () {
 				// which case this check should be updated
 				.should('eq', 2);
 		});
-		describe('When most viewed is mocked', function () {
-			beforeEach(mockApi);
-			// it('should change the list of most viewed items when a tab is clicked', function () {
-			//     cy.visit(`/Article?url=${articleUrl}`);
-			//     cy.contains('Lifestyle');
-			//     cy.get('[data-component="most-popular"]').scrollIntoView({
-			//         duration: 300,
-			//         offset: { top: -30 },
-			//     });
-			//     cy.wait('@getMostReadGeo');
-			//     cy.wait('@getMostRead');
-			//     cy.get('[data-cy=tab-body-0]').should('be.visible');
-			//     cy.get('[data-cy=tab-body-1]').should('not.be.visible');
-			//     cy.get('[data-cy=tab-heading-1]').click();
-			//     cy.get('[data-cy=tab-body-0]').should('not.be.visible');
-			//     cy.get('[data-cy=tab-body-1]').should('be.visible');
-			// });
+		// eslint-disable-next-line mocha/no-exclusive-tests
+		describe.only('When most viewed is mocked', function () {
+			// eslint-disable-next-line mocha/no-mocha-arrows
+			beforeEach(() => {
+				// Mock share count
+				cy.intercept('GET', '/sharecount/**', {
+					fixture: 'shareCount.json',
+				}).as('getShareCount');
+				// Mock most-read
+				cy.intercept('GET', '/most-read/**', {
+					fixture: 'mostRead.json',
+				}).as('getMostRead');
+				// Mock most-read
+				cy.intercept('GET', '**/most-read-geo**', {
+					fixture: 'mostReadGeo.json',
+				}).as('getMostReadGeo');
+				// Mock most-read
+				cy.intercept('GET', '/embed/card/**', {
+					fixture: 'richLink.json',
+				}).as('getRichLink');
+			});
+			it('should change the list of most viewed items when a tab is clicked', function () {
+				cy.visit(`/Article?url=${articleUrl}`);
+				cy.contains('Lifestyle');
+				cy.get('[data-component="most-popular"]').scrollIntoView({
+					duration: 300,
+					offset: { top: -30 },
+				});
+				cy.wait(['@getMostReadGeo', '@getMostRead']);
+				cy.get('[data-cy=tab-body-0]').should('be.visible');
+				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
+				cy.get('[data-cy=tab-heading-1]').click();
+				cy.get('[data-cy=tab-body-0]').should('not.be.visible');
+				cy.get('[data-cy=tab-body-1]').should('be.visible');
+			});
 		});
 		it('should render the reader revenue links in the header', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
