@@ -13,8 +13,11 @@ type Meta = {
 	logButtonClickWithBraze: (id: number) => void;
 };
 
-export const getBrazeMetaFromQueryString = (): Meta | null => {
+export const getBrazeMetaFromUrlFragment = (): Meta | null => {
 	if (window.location.hash) {
+		// This is intended for use on development domains for preview purposes.
+		// It won't run in PROD.
+
 		const key = 'force-braze-message';
 
 		const hashString = window.location.hash;
