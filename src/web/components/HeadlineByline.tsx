@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -36,6 +36,10 @@ const yellowBoxStyles = (format: Format) => css`
 			text-decoration: underline;
 		}
 	}
+`;
+
+const opinionWrapperStyles = css`
+	display: inline-block;
 `;
 
 const opinionStyles = (palette: Palette, format: Format) => css`
@@ -93,6 +97,8 @@ type Props = {
 	tags: TagType[];
 };
 
+const hasSingleContributor = (tags: TagType[]) => tags.filter((tag) => tag.type === 'Contributor').length === 1
+
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	if (byline === '') {
 		return null;
@@ -126,14 +132,11 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case Design.Comment:
 					return (
 						<div
-							className={`${opinionStyles(palette, format)} ${
-								tags.filter((tag) => tag.type === 'Contributor')
-									.length === 1
-									? authorBylineWithImage
-									: ''
-							}`}
+							className={cx(opinionWrapperStyles, { [authorBylineWithImage]: hasSingleContributor(tags) })}
 						>
-							<BylineLink byline={byline} tags={tags} />
+							<div className={opinionStyles(palette, format)}>
+								<BylineLink byline={byline} tags={tags} />
+							</div>
 						</div>
 					);
 				default:
