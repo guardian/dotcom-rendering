@@ -5,7 +5,7 @@ import * as emotionTheming from 'emotion-theming';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-import { getBrazeMetaFromQueryString } from '@root/src/web/lib/braze/forceBrazeMessage';
+import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
@@ -42,7 +42,7 @@ const containerStyles = emotion.css`
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 ): Promise<CanShowResult> => {
-	const forcedBrazeMeta = getBrazeMetaFromQueryString();
+	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
 			result: true,
