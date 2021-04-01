@@ -38,8 +38,6 @@ export const getBrazeMetaFromUrlFragment = (): Meta | null => {
 					decodeURIComponent(forcedMessage),
 				);
 
-				console.log(dataFromBraze);
-
 				return {
 					dataFromBraze,
 					logImpressionWithBraze: () => {},
