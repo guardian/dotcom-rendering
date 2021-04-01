@@ -38,6 +38,11 @@ const updateTimeElements = () => {
 		});
 };
 
+/**
+ * Sets up an interval in which the timeAgo function is run against every time element on the
+ * page which has the data-relativeformat attribute set
+ * @param {Number} interval - The length of time in-between time being updated
+ * */
 export const useTimeAgo = (options?: Options) => {
 	// Decide what interval to use
 	const interval: number = options?.interval || DEFAULT_INTERVAL;
