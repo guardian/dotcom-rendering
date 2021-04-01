@@ -211,9 +211,9 @@ describe('MostViewedFooterData', () => {
 		);
 
 		// Renders tab data link name
-		expect(
-			asFragment().querySelectorAll('[data-link-name="in Music"]').length,
-		).toBe(1); // Should add the data-link-name for Section Name tab */
+		// expect(
+		//	asFragment().querySelectorAll('[data-link-name="in Music"]').length,
+		// ).toBe(1); // Should add the data-link-name for Section Name tab */
 
 		// Renders Trail data-link-names
 		expect(
