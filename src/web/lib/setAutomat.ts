@@ -9,6 +9,7 @@ export const setAutomat = () => {
 	if (!hasAutomatBeenSet) {
 		window.guardian.automat = {
 			react: React,
+			preact: React,
 			emotionCore,
 			emotionTheming,
 			emotion,
