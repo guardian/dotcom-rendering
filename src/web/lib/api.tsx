@@ -1,30 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 
-type FetchOptions = {
-	method?:
-		| 'GET'
-		| 'HEAD'
-		| 'POST'
-		| 'PUT'
-		| 'DELETE'
-		| 'CONNECT'
-		| 'OPTIONS'
-		| 'TRACE'
-		| 'PATCH';
-	headers?: {
-		'Content-Type':
-			| 'text/plain'
-			| 'multipart/form-data'
-			| 'application/json'
-			| 'application/x-www-form-urlencoded';
-	};
-	body?: string;
-	credentials?: 'omit' | 'include' | 'same-origin';
-};
-
-interface Options extends FetchOptions {
+type Options = {
 	pollInterval?: number;
-}
+};
 
 function checkForErrors(response: Response) {
 	if (!response.ok) {
@@ -36,8 +14,8 @@ function checkForErrors(response: Response) {
 	return response;
 }
 
-const callApi = (url: string, fetchOptions?: FetchOptions) => {
-	return fetch(url, fetchOptions)
+const callApi = (url: string) => {
+	return fetch(url)
 		.then(checkForErrors)
 		.then((response) => response.json());
 };
@@ -54,10 +32,6 @@ interface ApiResponse<T> {
  * returning { loading, error, data }
  * @param {String} url - The url to fetch
  * @param {Object} options
- * @param {Number} options.method - If supplied, the api will be called using this value
- * @param {Number} options.headers - If supplied, the api will be called using this value
- * @param {Number} options.body - If supplied, the api will be called using this value
- * @param {Number} options.credentials - If supplied, the api will be called using this value
  * @param {Number} options.pollInterval - If supplied, the api will be polled at this interval
  * */
 export const useApi = <T,>(url: string, options?: Options): ApiResponse<T> => {
@@ -73,13 +47,6 @@ export const useApi = <T,>(url: string, options?: Options): ApiResponse<T> => {
 	const pollRef = useRef<number | undefined>();
 
 	useEffect(() => {
-		const fetchOptions = {
-			method: options?.method || 'GET',
-			credentials: options?.credentials,
-			headers: options?.headers,
-			body: options?.body,
-		};
-
 		const handleData = (data: T) => {
 			setRequest({
 				data,
@@ -97,7 +64,7 @@ export const useApi = <T,>(url: string, options?: Options): ApiResponse<T> => {
 		const poll = (delay: number) => {
 			// We use window.setTimeout so we're sure to get a number back (and not the NodeJS.Timeout type)
 			const timeoutId = window.setTimeout(() => {
-				callApi(url, fetchOptions)
+				callApi(url)
 					.then(handleData)
 					.then(() => {
 						// If successfull, enqueue the next poll
@@ -109,7 +76,7 @@ export const useApi = <T,>(url: string, options?: Options): ApiResponse<T> => {
 		};
 
 		if (alreadyFetched.current === false) {
-			callApi(url, fetchOptions).then(handleData).catch(handleError);
+			callApi(url).then(handleData).catch(handleError);
 			alreadyFetched.current = true;
 		}
 
