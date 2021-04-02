@@ -23,8 +23,8 @@ interface ApiResponse<T> {
 
 /**
  * @description
- * A custom hook to make a GET request using the given url
- * returning { loading, error, data }
+ * A custom hook to make a GET request using the given url using the SWR lib (https://swr.vercel.app/)
+ * returns { loading, error, data }
  * @param {String} url - The url to fetch
  * @param {SWRConfiguration} options - The SWR config object - https://swr.vercel.app/docs/options
  * */
