@@ -1,8 +1,4 @@
-import useSWR from 'swr';
-
-type Options = {
-	pollInterval?: number;
-};
+import useSWR, { SWRConfiguration } from 'swr';
 
 function checkForErrors(response: Response) {
 	if (!response.ok) {
@@ -30,13 +26,13 @@ interface ApiResponse<T> {
  * A custom hook to make a GET request using the given url
  * returning { loading, error, data }
  * @param {String} url - The url to fetch
- * @param {Object} options
- * @param {Number} options.pollInterval - If supplied, the api will be polled at this interval
+ * @param {SWRConfiguration} options - The SWR config object - https://swr.vercel.app/docs/options
  * */
-export const useApi = <T,>(url: string, options?: Options): ApiResponse<T> => {
-	const { data, error } = useSWR(url, fetcher, {
-		refreshInterval: options?.pollInterval,
-	});
+export const useApi = <T,>(
+	url: string,
+	options?: SWRConfiguration,
+): ApiResponse<T> => {
+	const { data, error } = useSWR(url, fetcher, options);
 
 	return {
 		data,
