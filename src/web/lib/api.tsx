@@ -36,7 +36,7 @@ function checkForErrors(response: Response) {
 	return response;
 }
 
-export const callApi = (url: string, fetchOptions?: FetchOptions) => {
+const callApi = (url: string, fetchOptions?: FetchOptions) => {
 	return fetch(url, fetchOptions)
 		.then(checkForErrors)
 		.then((response) => response.json());
