@@ -14,9 +14,8 @@ import { Flex } from '@frontend/web/components/Flex';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
+import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
-import { joinUrl } from '@root/src/lib/joinUrl';
-import { useDiscussion } from '@root/src/web/lib/useDiscussion';
 import { Display } from '@guardian/types';
 
 type Props = {
@@ -72,6 +71,10 @@ export const Discussion = ({
 	beingHydrated,
 	display,
 }: Props) => {
+	const [commentCount, setCommentCount] = useState<number>();
+	const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
+		true,
+	);
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
@@ -81,11 +84,6 @@ export const Discussion = ({
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
-
-	const { commentCount, isClosedForComments } = useDiscussion(
-		joinUrl([discussionApiUrl, 'discussion', shortUrlId]),
-	);
-
 	const hasCommentsHash =
 		typeof window !== 'undefined' &&
 		window.location &&
@@ -117,6 +115,20 @@ export const Discussion = ({
 			nonInteraction: true,
 		});
 	};
+
+	useEffect(() => {
+		const callFetch = async () => {
+			const response = await getDiscussion(discussionApiUrl, shortUrlId);
+			setCommentCount(response && response.discussion.commentCount);
+			setIsClosedForComments(
+				response && response.discussion.isClosedForComments,
+			);
+		};
+
+		if (isCommentable) {
+			callFetch().catch((e) => console.error(`callFetch - error: ${e}`));
+		}
+	}, [discussionApiUrl, shortUrlId, isCommentable]);
 
 	// Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
 	// If so, make a call to get the context of this comment so we know what page it is
