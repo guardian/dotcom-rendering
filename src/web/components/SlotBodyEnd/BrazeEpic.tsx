@@ -6,7 +6,7 @@ import {
 	EpicDataFromBraze,
 	Variant,
 } from '@root/src/web/lib/braze/parseBrazeEpicParams';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';
-import { Props as BrazeBannerProps } from '@guardian/braze-components';
+import type { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
 type Meta = {
@@ -162,7 +162,7 @@ export const BrazeBanner = ({ meta }: Props) => {
 			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
 		)
 			.then((module) => {
-				setBrazeComponent(() => module.BrazeMessage);
+				setBrazeComponent(() => module.BrazeMessageComponent);
 			})
 			.catch((error) =>
 				window.guardian.modules.sentry.reportError(

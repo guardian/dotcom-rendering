@@ -8,7 +8,7 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 
-import { BrazeMessagesInterface } from 'src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	ReaderRevenueEpic,
 	canShow as canShowReaderRevenueEpic,

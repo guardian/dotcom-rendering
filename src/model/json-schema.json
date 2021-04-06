@@ -3392,7 +3392,6 @@
         },
         "CAPIDisplay": {
             "enum": [
-                "ColumnDisplay",
                 "ImmersiveDisplay",
                 "NumberedListDisplay",
                 "ShowcaseDisplay",
