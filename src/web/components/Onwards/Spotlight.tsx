@@ -17,7 +17,10 @@ export const Spotlight = ({ content }: Props) => (
 		headlineSize="large"
 		byline={content[0].byline}
 		showByline={content[0].showByline}
-		showQuotes={content[0].format.design === Design.Comment}
+		showQuotes={
+			content[0].format.design === Design.Comment ||
+			content[0].format.design === Design.Letter
+		}
 		webPublicationDate={content[0].webPublicationDate}
 		kickerText={content[0].kickerText}
 		showPulsingDot={content[0].isLiveBlog}

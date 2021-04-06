@@ -346,7 +346,10 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			alwaysVertical={true}
 			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
-			showQuotes={format.design === Design.Comment}
+			showQuotes={
+				format.design === Design.Comment ||
+				format.design === Design.Letter
+			}
 			dataLinkName={dataLinkName}
 		/>
 	</LI>

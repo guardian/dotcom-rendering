@@ -246,7 +246,7 @@ const textCardStandfirst = textCardHeadline;
 const textCardKicker = (format: Format): string => {
 	if (
 		format.theme === Special.SpecialReport &&
-		format.design === Design.Comment
+		(format.design === Design.Comment || format.design === Design.Letter)
 	)
 		// TODO: Pull this in from source as opinion[550]
 		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
@@ -294,6 +294,7 @@ const textCardKicker = (format: Format): string => {
 const textCardFooter = (format: Format): string => {
 	switch (format.design) {
 		case Design.Comment:
+		case Design.Letter:
 			switch (format.theme) {
 				case Special.SpecialReport:
 					// TODO: Pull this in from souce once we see it here:
@@ -355,6 +356,7 @@ const backgroundArticle = (format: Format): string => {
 	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
 		return neutral[93];
 	// Order matters. We want comment special report pieces to have the opinion background
+	if (format.design === Design.Letter) return opinion[800];
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
@@ -401,6 +403,7 @@ const backgroundCard = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return opinion[800];
 		case Design.Media:
@@ -503,6 +506,7 @@ const fillCardIcon = (format: Format): string => {
 	if (format.display === Display.Immersive) return neutral[60];
 	switch (format.design) {
 		case Design.Comment:
+		case Design.Letter:
 			switch (format.theme) {
 				case Special.SpecialReport:
 					// TODO: Pull this in from source once we see it here:
@@ -678,6 +682,7 @@ const textCalloutHeading = (): string => {
 const textDropCap = (format: Format): string => {
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return format.theme === Pillar.Opinion
 				? opinion[400]

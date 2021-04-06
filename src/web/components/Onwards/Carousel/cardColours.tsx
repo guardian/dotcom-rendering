@@ -6,6 +6,7 @@ import { pillarPalette } from '@frontend/lib/pillars';
 export const headlineBackgroundColour = (design: Design, pillar: Theme) => {
 	switch (design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return css`
 				background-color: ${opinion[800]};

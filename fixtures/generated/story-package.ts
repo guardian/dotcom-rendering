@@ -87,7 +87,7 @@ export const storyPackage = {
 				'460':
 					'https://i.guim.co.uk/img/media/5333924754eeb72e956aaa81a54d229f36b09b99/199_417_3159_1896/master/3159.jpg?width=460&quality=85&auto=format&fit=max&s=c7e1a84a64ebcee67a2478299a29e746',
 			},
-			ageWarning: '7 months',
+			ageWarning: '8 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -116,7 +116,7 @@ export const storyPackage = {
 				'460':
 					'https://i.guim.co.uk/img/media/df7b691328f658cdcd2f9153bd07344601ac895f/0_147_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=8f6bd3fe6064e6c60453337969917935',
 			},
-			ageWarning: '7 months',
+			ageWarning: '8 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
