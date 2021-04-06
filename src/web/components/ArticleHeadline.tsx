@@ -232,6 +232,7 @@ export const ArticleHeadline = ({
 					);
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 					return (
 						<>
 							<h1
@@ -305,6 +306,7 @@ export const ArticleHeadline = ({
 					);
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 					return (
 						<>
 							<h1
