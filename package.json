@@ -234,6 +234,9 @@
         "webpack-node-externals": "^2.5.2",
         "webpack-sources": "^2.2.0"
     },
+		"resolutions": {
+			"@types/serve-static": "^1.13.9"
+		},
     "jest": {
         "preset": "ts-jest/presets/js-with-ts",
         "testEnvironment": "jest-environment-jsdom-sixteen",
