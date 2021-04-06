@@ -16,6 +16,34 @@ export const related = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/uk-news/2021/apr/04/if-your-dog-goes-for-my-sheep-then-i-will-shoot-uk-farmers-warn-walkers',
+			linkText:
+				'If your dog goes for my sheep, then I will shoot, UK farmers warn walkers',
+			showByline: false,
+			byline: 'Robyn Vinter',
+			image:
+				'https://i.guim.co.uk/img/media/adf6cb2056b61cc05ae22e38c4f2b975624c612b/0_120_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e42e28a11d514f91623bd6737c055f86',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/adf6cb2056b61cc05ae22e38c4f2b975624c612b/0_120_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e42e28a11d514f91623bd6737c055f86',
+				'460':
+					'https://i.guim.co.uk/img/media/adf6cb2056b61cc05ae22e38c4f2b975624c612b/0_120_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=1d27920bfe7e4bd6f6bc105d48b7b666',
+			},
+			isLiveBlog: false,
+			pillar: 'news',
+			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-04-04T08:30:03.000Z',
+			headline:
+				'If your dog goes for my sheep, then I will shoot, UK farmers warn walkers',
+			shortUrl: 'https://www.theguardian.com/p/hvb2x',
+		},
+		{
+			url:
 				'https://www.theguardian.com/world/2021/mar/26/buying-lockdown-dogs-whim-trouble-rspca-freddie-seal',
 			linkText:
 				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
@@ -127,6 +155,24 @@ export const related = {
 			headline:
 				'RSPCA urges caution over buying puppies online after spate of deaths',
 			shortUrl: 'https://www.theguardian.com/p/d55qg',
+			branding: {
+				brandingType: {
+					name: 'foundation',
+				},
+				sponsorName: 'Animals farmed',
+				logo: {
+					src:
+						'https://static.theguardian.com/commercial/sponsor/16/Feb/2018/464c4fe9-0e97-450c-966c-2e1710914aa9-OPP.jpg',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://www.openphilanthropy.org/',
+					label: 'Animals farmed is supported by',
+				},
+				aboutThisLink:
+					'https://www.theguardian.com/animals-farmed/2018/feb/21/about-animals-farmed-investigating-modern-farming-around-the-world',
+			},
 		},
 		{
 			url:
@@ -212,35 +258,6 @@ export const related = {
 			headline:
 				"Michael Heseltine's alsatian-strangling tale was shaggy dog story",
 			shortUrl: 'https://www.theguardian.com/p/5aad8',
-		},
-		{
-			url:
-				'https://www.theguardian.com/uk-news/2016/apr/23/croydon-cat-killer-mystery-100-animal-deaths',
-			linkText:
-				'London cat killer mystery deepens as charities investigate 100 animal deaths',
-			showByline: false,
-			byline: 'Jamie Doward and Emma Supple',
-			image:
-				'https://i.guim.co.uk/img/media/8154600a7d82a242f5d090899eba6dac35bd72d8/0_19_3000_1799/3000.jpg?width=300&quality=85&auto=format&fit=max&s=dcf81430375b404f4776ca64603ffe3d',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/8154600a7d82a242f5d090899eba6dac35bd72d8/0_19_3000_1799/3000.jpg?width=300&quality=85&auto=format&fit=max&s=dcf81430375b404f4776ca64603ffe3d',
-				'460':
-					'https://i.guim.co.uk/img/media/8154600a7d82a242f5d090899eba6dac35bd72d8/0_19_3000_1799/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c2e053dcffb8988279a7b4216c4bfa9d',
-			},
-			ageWarning: '4 years',
-			isLiveBlog: false,
-			pillar: 'news',
-			designType: 'Article',
-			format: {
-				design: 'ArticleDesign',
-				theme: 'NewsPillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2016-04-23T20:04:12.000Z',
-			headline:
-				'London cat killer mystery deepens as charities investigate 100 animal deaths',
-			shortUrl: 'https://www.theguardian.com/p/4thq9',
 		},
 		{
 			url:

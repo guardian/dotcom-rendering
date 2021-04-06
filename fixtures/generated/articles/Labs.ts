@@ -1733,7 +1733,7 @@ export const Labs: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '0d874c98-b15e-46c4-bb32-45341a31eee3',
+			elementId: '11b4d9c9-693d-496a-a44e-cae31878af79',
 		},
 	],
 	webPublicationDate: '2021-03-16T13:02:21.000Z',
@@ -1746,21 +1746,21 @@ export const Labs: CAPIType = {
 						'<p>Women’s football has been a travelling show since it began. In the years of its infancy, in the late 19th century, exhibition matches featuring all-female teams were staged all over the UK, from Brighton to Newcastle, Bristol to Edinburgh. They were also hugely popular, drawing crowds of tens of thousands.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ed2ef009-f10c-406d-8b2d-b58a98a3d1b7',
+					elementId: 'd6fc02c8-43ff-42f7-99ed-5da10331c9f1',
 				},
 				{
 					html:
 						'<p>Some drew too much attention. The first recorded “international” games took place in 1881 when a team of English players travelled to Scotland and during their second encounter, in Glasgow, heckles turned into a pitch invasion, forcing the women to take shelter in their horse-drawn bus. Not long after that, Scotland banned women from playing, which is another theme that returns frequently in the history of the game across the globe. It’s no small miracle that women’s football is thriving today, given the decades of neglect and opposition it has endured.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8743be0a-0694-4237-90d8-c54e320ba2da',
+					elementId: '66ce097e-e252-4536-9ed8-e47f356dc2c2',
 				},
 				{
 					html:
 						'<p>For no less than half of the 20th century, the English Football Association (FA) refused to allow women to play on any of its grounds. It claimed that the game was damaging to women’s health and many doctors supported its stance. In reality, the ban was a panicked response to the increasing take-up of the game by women during the first world war.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '57e40ec7-1bbf-4e17-ae95-006e70fe65ed',
+					elementId: '376ba00d-e23c-4fb3-b092-b26b502d1dd3',
 				},
 				{
 					media: {
@@ -2147,49 +2147,49 @@ export const Labs: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '2799f2d3-d6b5-428d-bc90-44071f08ba47',
+					elementId: 'd9afb86c-0fe8-4b2d-abea-2a00458c89ed',
 				},
 				{
 					html:
 						'<p>After its Victorian beginnings, it was the social upheaval of war that had established the women’s game in Britain. With the football league cancelled as young men were sent to battle, the women who replaced them at the munitions factories had kickabouts in their break times, and played matches on their days off. Soon, ladies’ tournaments began to take hold. The Dick, Kerr Ladies FC, based in Preston, garnered such a powerful reputation that they played two matches a week, and in 1920 staged a pioneering European fixture when they took on a French team assembled by sporting activist Alice Milliat.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'be10d7d8-d158-4779-bdeb-f70fde7dd92e',
+					elementId: '3e96ca13-7095-4a40-9a1b-9ea71e725d7c',
 				},
 				{
 					html:
 						'<p>A year later, the FA issued its ban, and levels of participation in the UK collapsed. A few determined souls kept the flame burning. The Manchester Corinthians Ladies – formed in 1949 by Percy Ashley because his daughter Doris wanted a team to play for – became the centre of the game in Britain, but they had to travel to find people to play. Over the next decade, “Dynamite” Doris and her Corinthians teammates would tour Europe, South America and North Africa in their hunt for opposition.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '5ea6c483-0f14-4520-a908-bf17ec9d886b',
+					elementId: 'd4241688-3b97-4957-bdda-9991dee4a99b',
 				},
 				{
 					html:
 						'<p>Plenty of countries had their own bans on women’s football: Norway, France, Brazil and West Germany all outlawed it at various times, and an entire generation of women were relegated to playing in public parks, rugby pitches, and even greyhound tracks. The women’s game developed sporadically as a result, whenever and wherever it could find a home.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e6e4a002-3fb8-4257-afc9-9db28f31d28f',
+					elementId: '63644fc9-cbde-4224-a22f-ac8abdc9349a',
 				},
 				{
 					html:
 						'<p>It was Italy who took up the baton, hosting the first women’s European tournament in 1969 (the European Competition for Women’s Football) and the first unofficial women’s world cup – sponsored by Italian drinks company Martini &amp; Rossi – a year later. Both events were popular and another “Women’s World Cup” was staged in 1971 – an all-singing, all-dancing affair at the Azteca stadium in Mexico, dressed in pink livery and surrounded by pop-up hair and beauty salons.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e19af649-3a60-4997-bacf-250d1da95dfe',
+					elementId: '66e47e87-82da-4584-a4c3-fde9c9d81693',
 				},
 				{
 					html:
 						'<p>The English FA’s ban had only just been lifted, and it was an unofficial team, under the management of Harry Batt, who played Mexico and Argentina in the group stages. Despite losing all three of their games, they were received like rock stars by Mexican sports fans – and banned from representative football for three months on their return to England.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '9e0e9b95-5d86-44e6-a657-d2a7c4c49e7e',
+					elementId: 'd353898d-f8b5-4a41-9934-5f187dc900a6',
 				},
 				{
 					html:
 						'<p>The first official England women’s team played its debut match against Scotland in 1972; they came back from 2-1 down at half time to win 3-2, Pat “Thunder” Davies scoring the decisive goals. Davies was a member of the Southampton team that had won the first women’s FA Cup the previous year, and which went on to dominate the game throughout the 1970s.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ef1c71a6-b904-4725-b9d7-e7f31d0c6200',
+					elementId: '2f09b30e-c620-4c1a-b472-516a863f0b37',
 				},
 				{
 					media: {
@@ -2577,42 +2577,42 @@ export const Labs: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'c9bce784-bad7-4622-895e-cd39c5f38173',
+					elementId: '72cca13e-05c0-4b23-8e49-7d8fa0cb47ff',
 				},
 				{
 					html:
 						'<p>Sweden, Norway and Denmark were all establishing themselves as powerhouses of the women’s game, and Sweden would become the first ever champions of the European Competition for Women’s Football<strong> </strong>in 1984 (the women’s equivalent of the Uefa <a href="https://en.wikipedia.org/wiki/UEFA_European_Championship" rel="nofollow">European Championship</a>) after beating England on penalties at Kenilworth Road. Throughout the 1980s, England’s players – an eclectic, amateur mix of office workers, sales assistants, civil servants and engineers – were increasingly drawn from the all-conquering Doncaster Rovers Belles, under the leadership of captain Gillian Coultard.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ee4ebdf7-410a-4084-a074-db6ccb48ad01',
+					elementId: 'feab3b6e-1e1f-4d83-ad30-c4f250c59300',
 				},
 				{
 					html:
 						'<p>But other nations were rising, too. It was China who hosted Fifa’s first international championship for women, the Women’s World Cup, in 1991, and the United States that won it, beating Norway 2-1 in the final. That victory marked the beginning of more than 20 years of US excellence, including one of the most memorable and defining moments in women’s football: Brandi Chastain’s left-footed penalty to beat Chinese goalkeeper Gao Hong and win the 1999 World Cup. The picture of her shirt-waving celebration made the cover of Time magazine.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '591f2107-91cf-44df-afca-5699fa6e08c7',
+					elementId: '097bccf8-7644-4355-9d37-bd184336e4c8',
 				},
 				{
 					html:
 						'<p>A subsequent attempt to establish a pioneering professional league in the US was not successful and Women’s United Soccer Association (WUSA) was wound up after three years, in 2003, despite a roster of global talent. But the venture was proof of the game’s new ambition and presaged a 21st-century revolution in women’s sport. More and more footballing superstars followed Chastain into mainstream fame: US striker Mia Hamm, Germany’s Birgit Prinz, Brazil’s Marta Vieira da Silva, England’s Kelly Smith, Japan’s Homare Sawa. By 2015, the women’s World Cup had expanded to 24 teams and was reaching record-breaking audiences.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '72cedd4e-8d01-425d-be79-a4607882786d',
+					elementId: '3b5e9c40-d20f-4578-be95-4524a41517bf',
 				},
 				{
 					html:
 						'<p>And things started getting more legitimate over time – in England, the Women’s Super and Champions leagues finally became full-time, professional affairs. And after an immensely successful Women’s World Cup in 2019 – which included the largest viewership in the game’s history – there are now 34 countries in the world where women play professional football. That number is only set to grow.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'd4fd94d5-2b44-4a2f-92fb-bc16af066dca',
+					elementId: 'b758cb62-607a-4122-baa2-3a3d3a779ca9',
 				},
 				{
 					html:
 						'<p><em>Expedia believes that travel, like football, is better experienced together. That’s why – as the official travel companion of Liverpool FC – Expedia will be with you all the way, as soon as we can travel together again. To get inspiration for your next trip, visit <a href="https://withyoualltheway.expedia.co.uk/en/" rel="nofollow">expedia.co.uk</a></em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '2bfb2418-cc15-4b7f-b0c5-f6b180f0dc38',
+					elementId: '2bf00a0e-78cf-45f7-a8ac-81f2b1a8f5e6',
 				},
 			],
 			createdOn: 1614599498000,
@@ -2835,7 +2835,7 @@ export const Labs: CAPIType = {
 		discussionApiClientHeader: 'nextgen',
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: false,
+		isPaidContent: true,
 		headline:
 			'Fires and floods: maps of Europe predict scale of climate catastrophe',
 		idApiUrl: 'https://idapi.theguardian.com',
