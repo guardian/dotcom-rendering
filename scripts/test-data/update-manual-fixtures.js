@@ -11,7 +11,7 @@ const root = resolve(__dirname, '..', '..');
 const jsonPath = resolve(root, 'fixtures', 'manual', 'data');
 
 /**
- * gen-manual-fixtures.js
+ * update-manual-fixtures.js
  *
  * A script to automatically copy the most-read and most-read-geo fixture data to the cypress
  * directory as a JSON file.
@@ -19,7 +19,7 @@ const jsonPath = resolve(root, 'fixtures', 'manual', 'data');
  * Should run automatically when the watched files change.
  *
  * Usage
- * $ node scripts/test-data/copy-to-cypress.js
+ * $ node scripts/test-data/update-manual-fixtures.js
  */
 
 const camelToUnderscore = (key) => {
