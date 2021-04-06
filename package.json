@@ -279,7 +279,7 @@
     "run-if-changed": {
         "src/lib/content.d.ts": "make gen-fixtures-and-schema",
         "src/lib/index.d.ts": "make gen-fixtures-and-schema",
-				"scripts/test-data/data/mostReadGeo.json": "make gen-manual-fixtures",
-				"scripts/test-data/data/mostRead.json": "make gen-manual-fixtures"
+				"fixtures/manual/data/mostReadGeo.json": "make update-manual-fixtures",
+				"fixtures/manual/data/mostRead.json": "make update-manual-fixtures"
     }
 }
