@@ -47,7 +47,7 @@ describe('Interactivity', function () {
 				.should('eq', 2);
 		});
 		// eslint-disable-next-line mocha/no-exclusive-tests
-		describe.only('When most viewed is mocked', function () {
+		describe('When most viewed is mocked', function () {
 			// eslint-disable-next-line mocha/no-mocha-arrows
 			beforeEach(mockApi);
 			it('should change the list of most viewed items when a tab is clicked', function () {
