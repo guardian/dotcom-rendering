@@ -1,7 +1,7 @@
 import fetchMock from 'fetch-mock';
 
-import { mostRead } from '@root/fixtures/manual/most-read';
-import { mostReadGeo } from '@root/fixtures/manual/most-read-geo';
+import { mostRead } from '@root/fixtures/generated/most-read';
+import { mostReadGeo } from '@root/fixtures/generated/most-read-geo';
 import { series } from '@root/fixtures/generated/series';
 import { related } from '@root/fixtures/generated/related';
 import { discussion } from '@root/fixtures/manual/discussion';
