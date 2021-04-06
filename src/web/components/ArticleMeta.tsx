@@ -179,7 +179,6 @@ const shouldShowContributor = (format: Format) => {
 			switch (format.design) {
 				case Design.Comment:
 				case Design.Editorial:
-				case Design.Letter:
 					return false;
 				default:
 					return true;

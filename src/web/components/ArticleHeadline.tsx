@@ -306,7 +306,6 @@ export const ArticleHeadline = ({
 					);
 				case Design.Comment:
 				case Design.Editorial:
-				case Design.Letter:
 					return (
 						<>
 							<h1
@@ -326,6 +325,22 @@ export const ArticleHeadline = ({
 									tags={tags}
 								/>
 							)}
+						</>
+					);
+
+				case Design.Letter:
+					return (
+						<>
+							<h1
+								className={cx(
+									lightFont,
+									css`
+										color: ${palette.text.headline};
+									`,
+								)}
+							>
+								{curly(headlineString)}
+							</h1>
 						</>
 					);
 				case Design.Analysis:
