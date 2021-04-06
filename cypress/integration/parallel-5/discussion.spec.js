@@ -17,12 +17,20 @@ describe('Discussion', function () {
 
 	it('should scroll the page to the comments section and expand it when the comment count link is clicked', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
+		cy.task(
+			'log',
+			'Random message because otherwise the test hangs? Have a nice day!',
+		);
 		cy.get('[data-cy=comment-counts]').click();
 		cy.contains('Displaying threads');
 	});
 
 	it('should show a count of the comments', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
+		cy.task(
+			'log',
+			'Random message because otherwise the test hangs? Have a nice day!',
+		);
 		cy.contains(/comments \(\d*\)/);
 	});
 
@@ -38,6 +46,10 @@ describe('Discussion', function () {
 		cy.visit(`/Article?url=${permalink}`);
 		cy.contains(
 			'In the world of human psychology, change is glacially slow',
+		);
+		cy.task(
+			'log',
+			'Random message because otherwise the test hangs? Have a nice day!',
 		);
 	});
 });
