@@ -1,4 +1,4 @@
-import { useApi } from '@root/src/web/lib/api';
+import { joinUrl } from '@root/src/lib/joinUrl';
 
 type DiscussionResponse = {
 	status: string;
@@ -50,17 +50,24 @@ type CommentType = {
 	};
 };
 
-export const useDiscussion = (url: string) => {
-	const { data, loading, error } = useApi<DiscussionResponse>(url);
-
-	if (loading || error)
-		return {
-			commentCount: undefined,
-			isClosedForComments: true,
-		};
-
-	return {
-		commentCount: data?.discussion?.commentCount,
-		isClosedForComments: data?.discussion?.isClosedForComments || true,
-	};
+export const getDiscussion = async (
+	ajaxUrl: string,
+	shortUrl: string,
+): Promise<DiscussionResponse> => {
+	const url = joinUrl([ajaxUrl, 'discussion', shortUrl]);
+	return fetch(url)
+		.then((response) => {
+			if (!response.ok) {
+				throw Error(
+					response.statusText ||
+						`getDiscussion | An api call returned HTTP status ${response.status}`,
+				);
+			}
+			return response;
+		})
+		.then((response) => response.json())
+		.then((json) => json)
+		.catch((error) => {
+			window.guardian.modules.sentry.reportError(error, 'get-discussion');
+		});
 };
