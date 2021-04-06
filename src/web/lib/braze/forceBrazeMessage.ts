@@ -21,17 +21,18 @@ export const getBrazeMetaFromUrlFragment = (): Meta | null => {
 		const key = 'force-braze-message';
 
 		const hashString = window.location.hash;
-		const forcedMessage = hashString.slice(
-			hashString.indexOf(`${key}=`) + key.length + 1,
-			hashString.length,
-		);
 
-		if (forcedMessage) {
+		if (hashString.includes(key)) {
 			if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
 				// eslint-disable-next-line no-console
 				console.log(`${key} is not supported on this domain`);
 				return null;
 			}
+
+			const forcedMessage = hashString.slice(
+				hashString.indexOf(`${key}=`) + key.length + 1,
+				hashString.length,
+			);
 
 			try {
 				const dataFromBraze = JSON.parse(
