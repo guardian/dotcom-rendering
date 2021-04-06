@@ -1,50 +1,91 @@
 {
-    "tags": [
-        {
-            "id": "football/transfer-window",
-            "type": "Keyword",
-            "title": "Transfer window"
-        },
-        {
-            "id": "football/football",
-            "type": "Keyword",
-            "title": "Football"
-        },
-        {
-            "id": "sport/sport",
-            "type": "Keyword",
-            "title": "Sport"
-        },
-        {
-            "id": "type/interactive",
-            "type": "Type",
-            "title": "Interactive"
-        },
-        {
-            "id": "profile/niall-mcveigh",
-            "type": "Contributor",
-            "title": "Niall McVeigh"
-        },
-        {
-            "id": "profile/marcuschristenson",
-            "type": "Contributor",
-            "title": "Marcus Christenson"
-        },
-        {
-            "id": "profile/garry-blight",
-            "type": "Contributor",
-            "title": "Garry Blight"
-        },
-        {
-            "id": "tracking/commissioningdesk/uk-sport",
-            "type": "Tracking",
-            "title": "UK Sport"
-        }
-    ],
-    "cardStyle": "news",
-    "thumbnailUrl": "https://i.guim.co.uk/img/media/169a4d018cf7d86cbbf9bed80d5215f8dcd8780f/0_10_1008_605/master/1008.jpg?width=460&quality=85&auto=format&fit=max&s=d50247642b8e2fc8f4296de25530ccc9",
-    "headline": "Summer transfer window recap – every deal from Europe's top five leagues",
-    "contentType": "Interactive",
-    "url": "/football/ng-interactive/2019/jun/04/football-transfer-window-2019-every-summer-deal-from-europe-top-five-leagues",
-    "pillar": "sport"
+  "tags": [
+    {
+      "id": "world/michel-barnier",
+      "type": "Keyword",
+      "title": "Michel Barnier"
+    },
+    {
+      "id": "politics/eu-referendum",
+      "type": "Keyword",
+      "title": "Brexit"
+    },
+    {
+      "id": "business/internationaltrade",
+      "type": "Keyword",
+      "title": "International trade"
+    },
+    {
+      "id": "world/eu",
+      "type": "Keyword",
+      "title": "European Union"
+    },
+    {
+      "id": "world/europe-news",
+      "type": "Keyword",
+      "title": "Europe"
+    },
+    {
+      "id": "politics/politics",
+      "type": "Keyword",
+      "title": "Politics"
+    },
+    {
+      "id": "politics/foreignpolicy",
+      "type": "Keyword",
+      "title": "Foreign policy"
+    },
+    {
+      "id": "uk/uk",
+      "type": "Keyword",
+      "title": "UK news"
+    },
+    {
+      "id": "type/article",
+      "type": "Type",
+      "title": "Article"
+    },
+    {
+      "id": "tone/news",
+      "type": "Tone",
+      "title": "News"
+    },
+    {
+      "id": "profile/jennifer-rankin",
+      "type": "Contributor",
+      "title": "Jennifer Rankin"
+    },
+    {
+      "id": "publication/theguardian",
+      "type": "Publication",
+      "title": "The Guardian"
+    },
+    {
+      "id": "theguardian/mainsection",
+      "type": "NewspaperBook",
+      "title": "Main section"
+    },
+    {
+      "id": "theguardian/mainsection/uknews",
+      "type": "NewspaperBookSection",
+      "title": "UK news"
+    },
+    {
+      "id": "tracking/commissioningdesk/uk-home-news",
+      "type": "Tracking",
+      "title": "UK Home News"
+    }
+  ],
+  "cardStyle": "news",
+  "thumbnailUrl": "https://i.guim.co.uk/img/media/4d8c85672b7e5d09752b0d1dfe23a6976032197e/0_100_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=f5e48ed68f1dccfedcea7a2fd5b95048",
+  "headline": "Michel Barnier tells UK: ignore EU regulatory standards at your peril",
+  "contentType": "Article",
+  "contributorImage": "https://i.guim.co.uk/img/uploads/2017/12/26/Jennifer_Rankin,_L.png?width=173&quality=85&auto=format&fit=max&s=129bebba84d667d2bc74490d46c10f8f",
+  "url": "/politics/2019/oct/29/michel-barnier-tells-uk-ignore-eu-regulatory-standards-at-your-peril",
+  "pillar": "news",
+  "format": {
+    "design": "ArticleDesign",
+    "theme": "NewsPillar",
+    "display": "StandardDisplay"
+  }
 }

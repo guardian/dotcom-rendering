@@ -18,6 +18,7 @@ node_modules/
 !/fixtures/**/*.ts
 !/cypress/**/*.js
 !/cypress/**/*.ts
+!/cypress/fixtures/*.json
 !/scripts/**/*.js
 !/.storybook/**/*.js
 
