@@ -91,7 +91,7 @@ describe('CommentCount', () => {
 			/>,
 		);
 
-		expect(getByTestId('long-comment-count').innerHTML).toBe('...');
-		expect(getByTestId('short-comment-count').innerHTML).toBe('...');
+		expect(getByTestId('long-comment-count').innerHTML).toBe('…');
+		expect(getByTestId('short-comment-count').innerHTML).toBe('…');
 	});
 });
