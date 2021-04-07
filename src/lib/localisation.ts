@@ -8,7 +8,7 @@
 // ["US", "Film", "Movies"] , means: If the edition is US, then replace "Film" by "Movies"
 // Instructions in the caseInsensitive array must also work in lowecase, therefore replace "film" by "movies"
 
-type TranslationInstruction = [string, string, string];
+type TranslationInstruction = [Edition, string, string];
 
 const caseInsensitive: TranslationInstruction[] = [
 	['US', 'Film', 'Movies'],
