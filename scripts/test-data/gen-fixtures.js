@@ -70,7 +70,7 @@ const articles = [
 	{
 		name: 'SpecialReport',
 		url:
-			'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+			'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	},
 	{
 		name: 'Interview',
