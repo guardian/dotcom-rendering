@@ -240,28 +240,6 @@ try {
 			}),
 	);
 
-	// Related
-	requests.push(
-		fetch(
-			'https://api.nextgen.guardianapps.co.uk/related/world/2020/sep/13/shaggy-dog-stories-visit-puppies-before-buying-say-charities.json?dcr=true',
-		)
-			.then((res) => res.json())
-			.then((json) => {
-				// Write the new fixture data
-				const contents = `${HEADER}export const related = ${JSON.stringify(
-					json,
-					null,
-					4,
-				)}`;
-				fs.writeFileSync(
-					`${root}/fixtures/generated/related.ts`,
-					contents,
-					'utf8',
-				);
-				console.log(`Created related.ts`);
-			}),
-	);
-
 	// Story package
 	requests.push(
 		fetch(
