@@ -215,9 +215,6 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 };
 
 export const enhancePhotoEssay = (data: CAPIType): CAPIType => {
-	// Exit immediately if not a photo essay
-	if (!data.config.isPhotoEssay) return data;
-
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,
