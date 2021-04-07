@@ -202,7 +202,6 @@ export const SubMeta = ({
 							'twitter',
 							'email',
 							'linkedIn',
-							'pinterest',
 							'whatsApp',
 							'messenger',
 						]}

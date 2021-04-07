@@ -160,7 +160,6 @@ type SharePlatform =
 	| 'twitter'
 	| 'email'
 	| 'whatsApp'
-	| 'pinterest'
 	| 'linkedIn'
 	| 'messenger';
 
