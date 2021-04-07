@@ -279,7 +279,7 @@ const comment: Item = {
 };
 
 const editorial: Item = {
-	design: Design.GuardianView,
+	design: Design.Editorial,
 	...fields,
 };
 

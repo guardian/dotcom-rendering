@@ -224,9 +224,9 @@ describe('fromCapi returns correct Item', () => {
 		expect(item.design).toBe(Design.Feature);
 	});
 
-	test('live', () => {
+	test('live blog', () => {
 		const item = f(contentWithTag('tone/minutebyminute'));
-		expect(item.design).toBe(Design.Live);
+		expect(item.design).toBe(Design.LiveBlog);
 	});
 
 	test('recipe', () => {
@@ -244,9 +244,9 @@ describe('fromCapi returns correct Item', () => {
 		expect(item.design).toBe(Design.Interview);
 	});
 
-	test('guardianview', () => {
+	test('editorial', () => {
 		const item = f(contentWithTag('tone/editorials'));
-		expect(item.design).toBe(Design.GuardianView);
+		expect(item.design).toBe(Design.Editorial);
 	});
 
 	test('quiz', () => {

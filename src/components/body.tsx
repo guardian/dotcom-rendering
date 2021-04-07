@@ -42,7 +42,7 @@ const notImplemented = (
 );
 
 const Body: FC<Props> = ({ item, shouldHideAds }) => {
-	if (item.design === Design.Live) {
+	if (item.design === Design.LiveBlog) {
 		return notImplemented;
 	}
 
