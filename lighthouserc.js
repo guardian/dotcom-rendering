@@ -16,7 +16,7 @@ module.exports = {
     assert: {
       includePassedAssertions: true,
       assertions: {
-        "first-contentful-paint": ["warn", {"maxNumericValue": 1000}],
+        "first-contentful-paint": ["warn", {"maxNumericValue": 1500}],
         "largest-contentful-paint": ["warn", {"maxNumericValue": 3000}],
         "interactive": ["warn", {"maxNumericValue": 3500}],
         "cumulative-layout-shift": ["warn", {"maxNumericValue": 0.002}],
