@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
 import { until, from, Breakpoint } from '@guardian/src-foundations/mq';
-import { props } from 'cypress/types/bluebird';
 
 interface Props {
 	children: React.ReactNode;
