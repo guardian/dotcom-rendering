@@ -183,7 +183,7 @@ const listItemStyles = (format: Format): SerializedStyles[] => {
 	switch (format.design) {
 		case Design.Media:
 			return [baseStyles, mediaStyles];
-		case Design.Live:
+		case Design.LiveBlog:
 			return [baseStyles, liveblogStyles];
 		default:
 			return [baseStyles];

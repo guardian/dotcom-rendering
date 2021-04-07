@@ -38,7 +38,7 @@ const docParser = JSDOM.fragment.bind(null);
 
 const scriptName = ({ design, display }: Format): Option<string> => {
 	switch (design) {
-		case Design.Live:
+		case Design.LiveBlog:
 			return some('liveblog.js');
 		case Design.Interactive:
 			return display !== Display.Immersive ? some('article.js') : none;
