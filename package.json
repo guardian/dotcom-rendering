@@ -58,7 +58,7 @@
         "@guardian/types": "^6.0.0",
         "@hkdobrev/run-if-changed": "^0.3.1",
         "@loadable/component": "^5.14.1",
-        "@loadable/server": "^5.14.0",
+        "@loadable/server": "^5.14.2",
         "@sentry/browser": "^5.30.0",
         "@sentry/integrations": "^5.30.0",
         "@types/ajv": "^1.0.0",
