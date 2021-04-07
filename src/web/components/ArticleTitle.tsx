@@ -14,6 +14,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	badge?: BadgeType;
+	editionId?: Edition;
 };
 
 const sectionStyles = css`
@@ -66,6 +67,7 @@ export const ArticleTitle = ({
 	sectionUrl,
 	guardianBaseURL,
 	badge,
+	editionId,
 }: Props) => (
 	<div className={cx(sectionStyles, badge && badgeContainer)}>
 		{badge && format.display !== Display.Immersive && (
@@ -89,6 +91,7 @@ export const ArticleTitle = ({
 				sectionUrl={sectionUrl}
 				guardianBaseURL={guardianBaseURL}
 				badge={badge}
+				editionId={editionId}
 			/>
 		</div>
 	</div>

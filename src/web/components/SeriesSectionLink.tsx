@@ -9,6 +9,8 @@ import { Hide } from '@frontend/web/components/Hide';
 import { Display, Design, Special } from '@guardian/types';
 import { Badge } from '@frontend/web/components/Badge';
 
+import { localise } from '@frontend/lib/localisation';
+
 type Props = {
 	format: Format;
 	palette: Palette;
@@ -17,6 +19,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	badge?: BadgeType;
+	editionId?: Edition;
 };
 
 const sectionLabelLink = css`
@@ -133,6 +136,7 @@ export const SeriesSectionLink = ({
 	sectionUrl,
 	guardianBaseURL,
 	badge,
+	editionId,
 }: Props) => {
 	// If we have a tag, use it to show 2 section titles
 	const tag = tags.find(
@@ -143,6 +147,8 @@ export const SeriesSectionLink = ({
 	);
 
 	const hasSeriesTag = tag && tag.type === 'Series';
+
+	sectionLabel = localise(editionId, sectionLabel);
 
 	switch (format.display) {
 		case Display.Immersive: {

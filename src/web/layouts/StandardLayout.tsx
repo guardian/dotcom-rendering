@@ -390,6 +390,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								sectionUrl={CAPI.sectionUrl}
 								guardianBaseURL={CAPI.guardianBaseURL}
 								badge={CAPI.badge}
+								editionId={CAPI.editionId}
 							/>
 						</GridItem>
 						<GridItem area="border">
