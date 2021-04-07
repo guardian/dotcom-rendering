@@ -163,8 +163,8 @@ export const ShareIcons = ({
 			)}
 
 			{displayIcons.includes('whatsApp') && (
-				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles(size)} key="whatsApp">
+				<Hide when="above" breakpoint="phablet" el="li" key="whatsApp">
+					<span className={liStyles(size)}>
 						<a
 							href={`whatsapp://send?text="${encodeTitle(
 								webTitle,
@@ -178,13 +178,13 @@ export const ShareIcons = ({
 								<WhatsAppIcon />
 							</span>
 						</a>
-					</li>
+					</span>
 				</Hide>
 			)}
 
 			{displayIcons.includes('messenger') && (
-				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles(size)} key="messenger">
+				<Hide when="above" breakpoint="phablet" el="li" key="messenger">
+					<span className={liStyles(size)}>
 						<a
 							href={`fb-messenger://share?link=${encodeUrl(
 								pageId,
@@ -198,7 +198,7 @@ export const ShareIcons = ({
 								<MessengerIcon />
 							</span>
 						</a>
-					</li>
+					</span>
 				</Hide>
 			)}
 		</ul>
