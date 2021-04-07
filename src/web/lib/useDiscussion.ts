@@ -61,6 +61,6 @@ export const useDiscussion = (url: string) => {
 
 	return {
 		commentCount: data?.discussion?.commentCount,
-		isClosedForComments: data?.discussion?.isClosedForComments || true,
+		isClosedForComments: data?.discussion?.isClosedForComments,
 	};
 };
