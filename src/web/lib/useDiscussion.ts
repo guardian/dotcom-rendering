@@ -56,7 +56,7 @@ export const useDiscussion = (url: string) => {
 	if (loading || error)
 		return {
 			commentCount: undefined,
-			isClosedForComments: true,
+			isClosedForComments: undefined,
 		};
 
 	return {
