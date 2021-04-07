@@ -9,7 +9,23 @@ import type {
 	TestMeta,
 } from '@guardian/types';
 
-export const record = (event: { [key: string]: any }): void => {
+export type OphanRecordFunction = (event: { [key: string]: any }) => void;
+
+export const getOphanRecordFunction = (): OphanRecordFunction => {
+	const record =
+		window &&
+		window.guardian &&
+		window.guardian.ophan &&
+		window.guardian.ophan.record;
+
+	if (record) {
+		return record;
+	}
+	console.log('window.guardian.ophan.record is not available');
+	return () => {};
+};
+
+export const record: OphanRecordFunction = (event) => {
 	if (
 		window.guardian &&
 		window.guardian.ophan &&
@@ -23,13 +39,15 @@ export const record = (event: { [key: string]: any }): void => {
 
 export const submitComponentEvent = (
 	componentEvent: OphanComponentEvent,
+	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
 ): void => {
-	record({ componentEvent });
+	ophanRecord({ componentEvent });
 };
 
 export const sendOphanComponentEvent = (
 	action: OphanAction,
 	testMeta: TestMeta,
+	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
 ): void => {
 	const {
 		abTestName,
@@ -53,7 +71,7 @@ export const sendOphanComponentEvent = (
 		action,
 	};
 
-	submitComponentEvent(componentEvent);
+	submitComponentEvent(componentEvent, ophanRecord);
 };
 
 export const abTestPayload = (tests: {
