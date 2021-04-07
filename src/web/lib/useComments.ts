@@ -76,7 +76,7 @@ export function useComments(onwardsSections: OnwardsType[]) {
 
 	const url = buildUrl(onwardsSections);
 	const { data } = useApi<CommentsType>(url, {
-		pollInterval: 15000,
+		refreshInterval: 15000,
 	});
 
 	useEffect(() => {
