@@ -26,13 +26,13 @@ describe('Discussion', function () {
 		cy.contains(/comments \(\d*\)/);
 	});
 
-	// it('should expand the comments when the view more button is clicked', function () {
-	//     cy.visit(`/Article?url=${articleUrl}`);
-	//     const roughLoadPositionOfComments = 4000;
-	//     cy.scrollTo(0, roughLoadPositionOfComments, { duration: 500 });
-	//     cy.contains('View more comments').click();
-	//     cy.contains('Displaying threads');
-	// });
+	it('should expand the comments when the view more button is clicked', function () {
+		cy.visit(`/Article?url=${articleUrl}`);
+		const roughLoadPositionOfComments = 4000;
+		cy.scrollTo(0, roughLoadPositionOfComments, { duration: 500 });
+		cy.contains('View more comments').click();
+		cy.contains('Displaying threads');
+	});
 
 	it('should automatically expand and scroll to a comment if the reader loads a permalink', function () {
 		cy.visit(`/Article?url=${permalink}`);
