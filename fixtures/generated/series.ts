@@ -20,6 +20,35 @@ export const series = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/tv-and-radio/2021/apr/07/the-wedding-coach-review-netflix',
+			linkText:
+				'The Wedding Coach review – extremely loud and incredibly gross',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image:
+				'https://i.guim.co.uk/img/media/17f92d55553597d3cb4d1cca80d9fa90e0aed58e/120_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=2fc11e9c65f94548a1790fef7b9ceed7',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/17f92d55553597d3cb4d1cca80d9fa90e0aed58e/120_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=2fc11e9c65f94548a1790fef7b9ceed7',
+				'460':
+					'https://i.guim.co.uk/img/media/17f92d55553597d3cb4d1cca80d9fa90e0aed58e/120_0_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=eb383b33b78781aaf05627a5ce63aafa',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-04-07T07:00:38.000Z',
+			headline:
+				'The Wedding Coach review – extremely loud and incredibly gross',
+			shortUrl: 'https://www.theguardian.com/p/hxe3z',
+			starRating: 1,
+		},
+		{
+			url:
 				'https://www.theguardian.com/tv-and-radio/2021/apr/05/intruder-review-sally-lindsay-channel-5',
 			linkText:
 				'Intruder review – Sally Lindsay stars in thriller that quickly turns high farce',
@@ -275,35 +304,6 @@ export const series = {
 			headline:
 				'Tina review – celebration of a singer who is simply the best',
 			shortUrl: 'https://www.theguardian.com/p/gpa2n',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/26/hausen-grim-and-grimy-german-horror',
-			linkText:
-				'Hausen – grim and grimy German chiller casts a dark shadow',
-			showByline: false,
-			byline: 'Jack Seale',
-			image:
-				'https://i.guim.co.uk/img/media/89c0ca71f25e2a39bb9982748f9e98a0bc58c646/0_244_6048_3628/master/6048.jpg?width=300&quality=85&auto=format&fit=max&s=a1e7b2f3aa5e400e02fc9f4bd864d223',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/89c0ca71f25e2a39bb9982748f9e98a0bc58c646/0_244_6048_3628/master/6048.jpg?width=300&quality=85&auto=format&fit=max&s=a1e7b2f3aa5e400e02fc9f4bd864d223',
-				'460':
-					'https://i.guim.co.uk/img/media/89c0ca71f25e2a39bb9982748f9e98a0bc58c646/0_244_6048_3628/master/6048.jpg?width=460&quality=85&auto=format&fit=max&s=25296d821759e891684ba54278e68638',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2021-03-26T23:20:00.000Z',
-			headline:
-				'Hausen – grim and grimy German chiller casts a dark shadow',
-			shortUrl: 'https://www.theguardian.com/p/gpfza',
 			starRating: 3,
 		},
 	],
