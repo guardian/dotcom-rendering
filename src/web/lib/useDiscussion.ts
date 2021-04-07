@@ -51,13 +51,7 @@ type CommentType = {
 };
 
 export const useDiscussion = (url: string) => {
-	const { data, loading, error } = useApi<DiscussionResponse>(url);
-
-	if (loading || error)
-		return {
-			commentCount: undefined,
-			isClosedForComments: undefined,
-		};
+	const { data } = useApi<DiscussionResponse>(url);
 
 	return {
 		commentCount: data?.discussion?.commentCount,
