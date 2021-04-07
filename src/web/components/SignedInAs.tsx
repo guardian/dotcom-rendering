@@ -99,7 +99,7 @@ export const SignedInAs = ({
 						color: ${neutral[60]};
 					`}
 				>
-					({commentCount || '...'})
+					({commentCount || '…'})
 				</span>
 			</h2>
 
