@@ -14,7 +14,6 @@ module.exports = {
       target: 'temporary-public-storage',
     },
     assert: {
-      includePassedAssertions: true,
       assertions: {
         "first-contentful-paint": ["warn", {"maxNumericValue": 1500}],
         "largest-contentful-paint": ["warn", {"maxNumericValue": 3000}],
