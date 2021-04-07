@@ -10,7 +10,7 @@ import CommentIcon from '@frontend/static/icons/comment.svg';
 type Props = {
 	palette: Palette;
 	isCommentable: boolean;
-	commentCount: number;
+	commentCount?: number;
 	setIsExpanded: (isExpanded: boolean) => void;
 };
 

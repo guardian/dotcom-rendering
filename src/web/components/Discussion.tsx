@@ -166,7 +166,7 @@ export const Discussion = ({
 						palette={palette}
 						enableDiscussionSwitch={enableDiscussionSwitch}
 						user={user}
-						commentCount={commentCount || 0}
+						commentCount={commentCount}
 						isClosedForComments={isClosedForComments}
 					/>
 				}
