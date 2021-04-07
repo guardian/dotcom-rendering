@@ -1,14 +1,30 @@
 import React from 'react';
 import { css } from 'emotion';
 import { until, from, Breakpoint } from '@guardian/src-foundations/mq';
+import { props } from 'cypress/types/bluebird';
 
-type Props = {
+interface Props {
 	children: React.ReactNode;
 	when: 'above' | 'below';
 	breakpoint: Breakpoint;
-};
+}
 
-export const Hide = ({ children, when, breakpoint }: Props) => {
+interface PropsSpan extends Props {
+	el?: 'span';
+	key?: string;
+}
+interface PropsLi extends Props {
+	el: 'li';
+	key: string;
+}
+
+export const Hide = ({
+	children,
+	when,
+	breakpoint,
+	el,
+	key,
+}: PropsSpan | PropsLi) => {
 	let whenToHide;
 	if (when === 'below') {
 		whenToHide = css`
@@ -23,5 +39,11 @@ export const Hide = ({ children, when, breakpoint }: Props) => {
 			}
 		`;
 	}
-	return <span className={whenToHide}>{children}</span>;
+	return el === 'li' ? (
+		<li className={whenToHide} key={key}>
+			{children}
+		</li>
+	) : (
+		<span className={whenToHide}>{children}</span>
+	);
 };
