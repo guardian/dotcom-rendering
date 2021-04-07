@@ -75,7 +75,7 @@ interface ResizedRelatedContent extends RelatedContent {
 }
 
 interface Liveblog extends Fields {
-	design: Design.Live;
+	design: Design.LiveBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
 }
@@ -99,7 +99,7 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-	design: Exclude<Design, Design.Live | Design.Review | Design.Comment>;
+	design: Exclude<Design, Design.LiveBlog | Design.Review | Design.Comment>;
 	body: Body;
 }
 
@@ -270,7 +270,7 @@ const fromCapiLiveBlog = (context: Context) => (
 	const body = content.blocks?.body?.slice(0, 7) ?? [];
 
 	return {
-		design: Design.Live,
+		design: Design.LiveBlog,
 		blocks: parseLiveBlocks(body)(context),
 		totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
 		...itemFields(context, request),
@@ -330,7 +330,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 		};
 	} else if (isGuardianView(tags)) {
 		return {
-			design: Design.GuardianView,
+			design: Design.Editorial,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isQuiz(tags)) {

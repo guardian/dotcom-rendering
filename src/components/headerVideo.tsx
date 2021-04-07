@@ -45,7 +45,7 @@ const styles = (format: Format): SerializedStyles => css`
 	${from.wide} {
 		padding-bottom: ${videoHeight}px;
 		width: ${wideContentWidth}px;
-		${format.design !== Design.Live ? marginAuto : null}
+		${format.design !== Design.LiveBlog ? marginAuto : null}
 	}
 `;
 
