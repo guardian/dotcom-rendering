@@ -46,7 +46,6 @@ export const ArticleStory = () => (
 );
 ArticleStory.story = { name: 'Article' };
 
-
 export const Feature = () => (
 	<Section>
 		<Flex>
