@@ -71,7 +71,7 @@ import {
 	StickyNavAnchor,
 	StickyNavBackscroll,
 } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -336,24 +336,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 		});
 	}, []);
 
+	const display: Display = decideDisplay(CAPI.format);
+	const design: Design = decideDesign(CAPI.format);
+	const pillar: Theme = decideTheme(CAPI.format);
+
 	useOnce(() => {
 		setBrazeMessages(
 			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
 		);
 	}, [isSignedIn, CAPI.config.idApiUrl]);
 
-	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign({
-		designType: CAPI.designType,
-		tags: CAPI.tags,
-		isLiveBlog: CAPI.isLiveBlog,
-		isLive: CAPI.isLive,
-	});
-	const pillar = decideTheme({
-		pillar: CAPI.pillar,
-		design,
-		isSpecialReport: CAPI.isSpecialReport,
-	});
 	const format: Format = {
 		display,
 		design,
@@ -538,7 +530,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			</Portal>
 			<HydrateOnce rootId="links-root" waitFor={[user]}>
 				<Links
-					giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
+					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
 					userId={user ? user.userId : undefined}
 					idUrl={CAPI.config.idUrl}
 					mmaUrl={CAPI.config.mmaUrl}
@@ -585,6 +577,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 						scriptUrl={interactiveBlock.scriptUrl}
 						alt={interactiveBlock.alt}
 						role={interactiveBlock.role}
+						caption={interactiveBlock.caption}
+						format={format}
+						palette={palette}
 					/>
 				</HydrateOnce>
 			))}
@@ -804,6 +799,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							height={document.height}
 							width={document.width}
 							title={document.title}
+							source={document.source}
 						/>
 					</ClickToView>
 				</HydrateOnce>
@@ -951,7 +947,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper pillar={pillar} />
+						<MostViewedRightWrapper palette={palette} />
 					</Suspense>
 				</Lazy>
 			</Portal>
@@ -976,6 +972,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 					tags={CAPI.tags}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					brazeMessages={brazeMessages}
+					idApiUrl={CAPI.config.idApiUrl}
 				/>
 			</Portal>
 			<Portal

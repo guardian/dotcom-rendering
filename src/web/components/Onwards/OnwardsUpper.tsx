@@ -64,7 +64,7 @@ const firstPopularTag = (
 
 	// For paid content we just return the first tag, otherwise we
 	// filter for the first tag in the whitelist
-	return isPaidContent ? pageTags[0] : firstTagInWhitelist;
+	return isPaidContent ? tags[0] : firstTagInWhitelist;
 };
 
 const onwardsWrapper = css`

@@ -16,6 +16,7 @@ import { HighlightBlockComponent } from '@root/src/web/components/elements/Highl
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
+import { MainMediaEmbedBlockComponent } from '@root/src/web/components/elements/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
@@ -195,12 +196,28 @@ export const ElementRenderer = ({
 							height={element.height}
 							width={element.width}
 							title={element.title}
+							source={element.source}
 						/>
 					</ClickToView>
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			if (!element.safe) {
+				if (isMainMedia) {
+					return (
+						<Figure
+							isMainMedia={isMainMedia}
+							role={element.role}
+							id={element.elementId}
+						>
+							<MainMediaEmbedBlockComponent
+								title={element.alt || ''}
+								srcDoc={element.html}
+							/>
+						</Figure>
+					);
+				}
+
 				return (
 					<Figure
 						isMainMedia={isMainMedia}
@@ -364,6 +381,8 @@ export const ElementRenderer = ({
 						scriptUrl={element.scriptUrl}
 						alt={element.alt}
 						role={element.role}
+						format={format}
+						palette={palette}
 					/>
 				</Figure>
 			);

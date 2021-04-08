@@ -128,8 +128,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 	};
 
 	return {
-		designType: CAPI.designType,
-		pillar: CAPI.pillar,
+		format: CAPI.format,
 		config: {
 			frontendAssetsFullURL: CAPI.config.frontendAssetsFullURL,
 			isDev: process.env.NODE_ENV !== 'production',

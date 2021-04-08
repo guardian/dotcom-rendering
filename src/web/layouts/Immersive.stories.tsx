@@ -13,6 +13,7 @@ import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
 import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Letter } from '@root/fixtures/generated/articles/Letter';
 import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
@@ -20,6 +21,7 @@ import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { PrintShop } from '@root/fixtures/generated/articles/PrintShop';
+import { Labs } from '@root/fixtures/generated/articles/Labs';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -40,11 +42,10 @@ export default {
 const convertToImmersive = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: true,
+		format: {
+			...CAPI.format,
+			display: 'ImmersiveDisplay' as CAPIDisplay,
 		},
-		isImmersive: true,
 	};
 };
 
@@ -168,10 +169,6 @@ FeatureStory.story = {
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: true,
-		},
 	};
 	const ServerCAPI = convertToImmersive(LiveBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
@@ -181,26 +178,30 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: false,
-		},
 	};
 	const ServerCAPI = convertToImmersive(DeadBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 DeadStory.story = { name: 'DeadBlog' };
 
-export const GEditorialStory = (): React.ReactNode => {
+export const EditorialStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Editorial);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-GEditorialStory.story = {
+EditorialStory.story = {
 	name: 'Editorial',
 	parameters: {
 		viewport: { defaultViewport: 'leftCol' },
 		chromatic: { viewports: [1140] },
 	},
+};
+
+export const LetterStory = (): React.ReactNode => {
+	const ServerCAPI = convertToImmersive(Letter);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LetterStory.story = {
+	name: 'Letter',
 };
 
 export const InterviewStory = (): React.ReactNode => {
@@ -232,3 +233,11 @@ export const PrintShopStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 PrintShopStory.story = { name: 'PrintShop' };
+
+export const LabsStory = (): React.ReactNode => {
+	const ServerCAPI = convertToImmersive(Labs);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LabsStory.story = {
+	name: 'Labs',
+};

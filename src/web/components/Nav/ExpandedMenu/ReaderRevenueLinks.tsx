@@ -76,7 +76,7 @@ export const ReaderRevenueLinks: React.FC<{
 	];
 
 	return (
-		<ul className={hideDesktop}>
+		<ul className={hideDesktop} role="menu">
 			{links.map((link) => (
 				<li
 					key={link.title.toLowerCase()}

@@ -52,6 +52,8 @@ const headlineLink = css`
 	color: ${text.anchorSecondary};
 	font-weight: 500;
 	${headline.xxxsmall()};
+
+	display: block; /* To ensure focus outline works okay */
 `;
 
 const ageWarningStyles = css`
@@ -113,6 +115,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								headlineText={headlineText}
 								palette={palette}
+								format={format}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>
@@ -120,6 +123,7 @@ export const SecondTierItem = ({
 							<LinkHeadline
 								headlineText={headlineText}
 								palette={palette}
+								format={format}
 								size="small"
 								byline={showByline ? byline : undefined}
 							/>

@@ -7,16 +7,16 @@ import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
+import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
-import GiftingIcon from '@frontend/static/icons/gifting.svg';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { useOnce } from '@frontend/web/lib/useOnce';
 
 type Props = {
-	giftingURL: string;
+	supporterCTA: string;
 	userId?: string;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -122,20 +122,22 @@ const linksStyles = css`
 	${from.wide} {
 		right: 342px;
 	}
+
+	${getZIndex('headerLinks')}
 `;
 
 export const Links = ({
 	userId,
-	giftingURL,
+	supporterCTA,
 	idUrl: idUrlFromConfig,
 	mmaUrl: mmaUrlFromConfig,
 }: Props) => {
-	const [showGiftingLink, setShowGiftingLink] = useState<boolean>();
+	const [showSupporterCTA, setShowSupporterCTA] = useState<boolean>();
 	const [userIsDefined, setUserIsDefined] = useState<boolean>();
 
-	// show gifting if support messaging isn't shown
+	// show supporter CTA if support messaging isn't shown
 	useEffect(() => {
-		setShowGiftingLink(getCookie('gu_hide_support_messaging') === 'true');
+		setShowSupporterCTA(getCookie('gu_hide_support_messaging') === 'true');
 	}, []);
 
 	// we intentionally re-render here because we know the DOM structure could be different
@@ -187,19 +189,18 @@ export const Links = ({
 	];
 	return (
 		<div data-print-layout="hide" className={linksStyles}>
-			{showGiftingLink && giftingURL !== '' && (
+			{showSupporterCTA && supporterCTA !== '' && (
 				<>
 					<div className={seperatorStyles} />
 					<a
-						href={giftingURL}
+						href={supporterCTA}
 						className={cx(
 							linkTablet({ showAtTablet: false }),
 							linkStyles,
 						)}
-						data-link-name="nav2 : gifting-cta"
+						data-link-name="nav2 : supporter-cta"
 					>
-						<GiftingIcon />
-						Gift options
+						Subscriptions
 					</a>
 				</>
 			)}

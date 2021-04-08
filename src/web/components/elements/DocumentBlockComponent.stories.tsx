@@ -22,14 +22,21 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const documentEmbed = () => {
 	return (
 		<Container>
-			<p>abc</p>
+			<p>Scribd Document</p>
 			<DocumentBlockComponent
 				embedUrl="https://www.scribd.com/embeds/431975393/content"
 				height={613}
 				width={460}
 				title=""
 			/>
-			<p>abc</p>
+			<p>DocumentCloud Document</p>
+			<DocumentBlockComponent
+				embedUrl="https://embed.documentcloud.org/documents/20417938-test-pdf"
+				height={700}
+				width={990}
+				title="TEST PDF (Hosted by DocumentCloud)"
+				source="DocumentCloud"
+			/>
 		</Container>
 	);
 };

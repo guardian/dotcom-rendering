@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { breakpoints } from '@guardian/src-foundations/mq';
+
 import {
 	makeGuardianBrowserCAPI,
 	makeGuardianBrowserNav,
@@ -12,12 +14,14 @@ import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
 import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Letter } from '@root/fixtures/generated/articles/Letter';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -31,18 +35,21 @@ mockRESTCalls();
 export default {
 	title: 'Layouts/Standard',
 	parameters: {
-		chromatic: { viewports: [1300], delay: 800, diffThreshold: 0.2 },
+		chromatic: {
+			viewports: [breakpoints.wide],
+			delay: 800,
+			diffThreshold: 0.2,
+		},
 	},
 };
 
 const convertToStandard = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: false,
+		format: {
+			...CAPI.format,
+			display: 'StandardDisplay' as CAPIDisplay,
 		},
-		isImmersive: false,
 	};
 };
 
@@ -94,7 +101,15 @@ export const CommentStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Comment);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-CommentStory.story = { name: 'Comment' };
+CommentStory.story = {
+	name: 'Comment',
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
+		// Cutout/byline interaction is a specific issue
+		// we look out for on mobile on opinion content
+		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
+	},
+};
 
 export const PhotoEssayStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PhotoEssay);
@@ -109,8 +124,8 @@ export const AnalysisStory = (): React.ReactNode => {
 AnalysisStory.story = {
 	name: 'Analysis',
 	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [480] },
+		viewport: { defaultViewport: 'mobileLandscape' },
+		chromatic: { viewports: [breakpoints.mobileLandscape] },
 	},
 };
 
@@ -123,9 +138,9 @@ FeatureStory.story = { name: 'Feature' };
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: true,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(LiveBlog);
@@ -136,9 +151,9 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: false,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(DeadBlog);
@@ -154,8 +169,16 @@ EditorialStory.story = {
 	name: 'Editorial',
 	parameters: {
 		viewport: { defaultViewport: 'phablet' },
-		chromatic: { viewports: [660] },
+		chromatic: { viewports: [breakpoints.phablet] },
 	},
+};
+
+export const LetterStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Letter);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LetterStory.story = {
+	name: 'Letter',
 };
 
 export const InterviewStory = (): React.ReactNode => {
@@ -166,7 +189,7 @@ InterviewStory.story = {
 	name: 'Interview',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [980] },
+		chromatic: { viewports: [breakpoints.desktop] },
 	},
 };
 
@@ -177,8 +200,7 @@ export const QuizStory = (): React.ReactNode => {
 QuizStory.story = {
 	name: 'Quiz',
 	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [1300] },
+		viewport: { defaultViewport: 'wide' },
 	},
 };
 
@@ -190,7 +212,7 @@ RecipeStory.story = {
 	name: 'Recipe',
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [375] },
+		chromatic: { viewports: [breakpoints.mobileMedium] },
 	},
 };
 
@@ -201,8 +223,7 @@ export const MatchReportStory = (): React.ReactNode => {
 MatchReportStory.story = {
 	name: 'MatchReport',
 	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [1330] },
+		viewport: { defaultViewport: 'wide' },
 	},
 };
 
@@ -212,4 +233,12 @@ export const LabsStory = (): React.ReactNode => {
 };
 LabsStory.story = {
 	name: 'Labs',
+};
+
+export const SpecialReportStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
 };

@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import * as emotion from 'emotion';
-import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
+import { css } from 'emotion';
+
 import {
 	parseBrazeEpicParams,
 	EpicDataFromBraze,
 	Variant,
 } from '@root/src/web/lib/braze/parseBrazeEpicParams';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-
-const { css } = emotion;
+import { setAutomat } from '@root/src/web/lib/setAutomat';
 
 const wrapperMargins = css`
 	margin: 18px 0;
 `;
 
-const EPIC_COMPONENT_PATH = '/epic.js';
+const EPIC_COMPONENT_PATH = '/modules/v1/epics/ContributionsEpic.js';
 
 type Meta = {
 	dataFromBraze?: EpicDataFromBraze;
@@ -51,6 +50,14 @@ type EpicProps = {
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 ): Promise<CanShowResult> => {
+	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
+	if (forcedBrazeMeta) {
+		return {
+			result: true,
+			meta: forcedBrazeMeta,
+		};
+	}
+
 	try {
 		const brazeMessages = await brazeMessagesPromise;
 		const message = await brazeMessages.getMessageForEndOfArticle();
@@ -104,13 +111,7 @@ const BrazeEpic = ({
 	});
 
 	useOnce(() => {
-		window.guardian.automat = {
-			react: React,
-			preact: React,
-			emotionCore,
-			emotionTheming,
-			emotion,
-		};
+		setAutomat();
 
 		const componentUrl = joinUrl([
 			contributionsServiceUrl,
