@@ -6,7 +6,9 @@ const fs = require('fs');
 const program = TJS.getProgramFromFiles([
 	resolve(root + '/src/lib/content.d.ts'),
 	resolve(root + '/index.d.ts'),
-]);
+], {
+    skipLibCheck: true,
+});
 
 const settings = { rejectDateType: true, required: true };
 const schema = TJS.generateSchema(program, 'CAPIType', settings);
