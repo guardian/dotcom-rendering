@@ -179,7 +179,7 @@
         "babel-plugin-px-to-rem": "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0",
         "babel-plugin-transform-runtime": "^6.23.0",
         "bundlesize": "^0.18.1",
-        "chromatic": "^5.6.1",
+        "chromatic": "^5.7.1",
         "cypress-plugin-tab": "^1.0.5",
         "desvg-loader": "^0.1.0",
         "doctoc": "^1.4.0",
