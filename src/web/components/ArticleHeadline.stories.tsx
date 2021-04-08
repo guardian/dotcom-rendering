@@ -46,39 +46,6 @@ export const ArticleStory = () => (
 );
 ArticleStory.story = { name: 'Article' };
 
-export const oldHeadline = () => (
-	<Section>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<ArticleContainer>
-				<ArticleHeadline
-					headlineString="This is an old headline"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					}}
-					tags={[
-						// Age warnings only show for old articles when the tone/news tag is present
-						{
-							id: 'tone/news',
-							type: '',
-							title: '',
-						},
-					]}
-				/>
-			</ArticleContainer>
-		</Flex>
-	</Section>
-);
-oldHeadline.story = { name: 'Article, with age warning' };
 
 export const Feature = () => (
 	<Section>
@@ -339,6 +306,43 @@ export const Comment = () => (
 	</Section>
 );
 Comment.story = { name: 'Comment' };
+
+export const CommentWithBylineAndCutout = () => (
+	<Section>
+		<Flex>
+			<LeftColumn>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<ArticleHeadline
+					headlineString="Yes, the billionaire club is one we really need to shut down"
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Comment,
+						theme: Pillar.Opinion,
+					})}
+					format={{
+						display: Display.Showcase,
+						design: Design.Comment,
+						theme: Pillar.Opinion,
+					}}
+					byline="Marina Hyde"
+					tags={[
+						{
+							id: 'profile/marinahyde',
+							type: 'Contributor',
+							title: 'Marina Hyde',
+							twitterHandle: 'MarinaHyde',
+							bylineImageUrl:
+								'https://i.guim.co.uk/img/uploads/2018/01/10/Marina_Hyde,_L.png?width=300&quality=85&auto=format&fit=max&s=6476202195914952e48ef41aadb116ff',
+						},
+					]}
+				/>
+			</ArticleContainer>
+		</Flex>
+	</Section>
+);
+CommentWithBylineAndCutout.story = { name: 'Comment (with byline and cutout)' };
 
 export const Analysis = () => (
 	<Section>
