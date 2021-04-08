@@ -54,6 +54,9 @@ function resolve(loggerName: string): ResolveOptions {
 			// `react-dom/server`, and for DCR to alias that to `preact-render-to-string`.
 			// Then we can get rid of this line.
 			'preact-render-to-string': 'react-dom/server',
+			// Webpack 5 removed a lot of the nodejs polyfills including Buffer
+			// We rely on Buffer for our thrift client/server
+			Buffer: 'buffer',
 		},
 	};
 }
@@ -152,7 +155,12 @@ export const clientConfig: Configuration = {
 		path: path.resolve(__dirname, 'dist/assets'),
 		filename: '[name].js',
 	},
-	plugins: [new WebpackManifestPlugin({ writeToFileEmit: true })],
+	plugins: [
+		new WebpackManifestPlugin({ writeToFileEmit: true }),
+		new webpack.ProvidePlugin({
+			Buffer: ['buffer', 'Buffer'],
+		}),
+	],
 	resolve: resolve('clientDev'),
 	devServer: {
 		publicPath: '/assets/',

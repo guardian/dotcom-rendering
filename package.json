@@ -62,6 +62,7 @@
     "@types/webpack-node-externals": "^2.5.0",
     "aws-sdk": "^2.822.0",
     "babel-jest": "^26.6.2",
+    "buffer": "^6.0.3",
     "compression": "^1.7.4",
     "core-js": "^3.8.2",
     "create-emotion-server": "^10.0.27",
