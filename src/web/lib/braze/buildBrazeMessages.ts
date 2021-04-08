@@ -5,11 +5,15 @@ import {
 } from '@root/src/web/lib/hasCurrentBrazeUser';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { record } from '@root/src/web/browser/ophan/ophan';
-import { BrazeMessages, BrazeMessagesInterface } from './BrazeMessages';
+import {
+	BrazeMessages,
+	BrazeMessagesInterface,
+	InMemoryCache,
+	LocalMessageCache,
+	NullBrazeMessages,
+} from '@guardian/braze-components/logic';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy, SDK_OPTIONS } from './initialiseAppboy';
-import { NullBrazeMessages } from './NullBrazeMessages';
-import { InMemoryCache, LocalMessageCache } from './LocalMessageCache';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
@@ -77,7 +81,14 @@ export const buildBrazeMessages = async (
 			value: sdkLoadTimeTaken,
 		});
 
-		const brazeMessages = new BrazeMessages(appboy, InMemoryCache);
+		const errorHandler = (error: Error, desc: string) => {
+			window.guardian.modules.sentry.reportError(error, desc);
+		};
+		const brazeMessages = new BrazeMessages(
+			appboy,
+			InMemoryCache,
+			errorHandler,
+		);
 
 		appboy.changeUser(dependenciesResult.data.brazeUuid as string);
 		appboy.openSession();
