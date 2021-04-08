@@ -5,7 +5,6 @@ jobs:
     chromatic:
         name: Chromatic
         runs-on: ubuntu-latest
-        environment: chromatic
         steps:
             - uses: actions/checkout@v1
             - uses: guardian/actions-setup-node@main
