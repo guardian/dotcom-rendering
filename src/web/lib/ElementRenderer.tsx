@@ -387,6 +387,8 @@ export const ElementRenderer = ({
 						scriptUrl={element.scriptUrl}
 						alt={element.alt}
 						role={element.role}
+						format={format}
+						palette={palette}
 					/>
 				</Figure>
 			);
