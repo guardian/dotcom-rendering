@@ -18,6 +18,8 @@ import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { Epic } from '@root/src/amp/components/Epic';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 const bulletStyle = (pillar: Theme) => css`
 	.bullet {
@@ -41,6 +43,7 @@ const decideBackground = (design: Design, pillar: Theme): string => {
 	if (pillar === Special.Labs) return palette.neutral[86];
 	switch (design) {
 		case Design.Comment:
+		case Design.Letter:
 			return palette.opinion[800];
 		default:
 			return palette.neutral[100];
@@ -84,13 +87,13 @@ const adStyle = css`
 `;
 
 export const Body: React.FC<{
-	pillar: Theme;
-	design: Design;
 	data: ArticleModel;
 	config: ConfigType;
-}> = ({ pillar, design, data, config }) => {
+}> = ({ data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
 	const adTargeting = buildAdTargeting(config);
+	const design = decideDesign(data.format);
+	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
 		capiElements,
 		pillar,
@@ -181,9 +184,9 @@ export const Body: React.FC<{
 	return (
 		<InnerContainer className={body(pillar, design)}>
 			<TopMeta
+				data={data}
 				design={design}
 				pillar={pillar}
-				data={data}
 				adTargeting={adTargeting}
 			/>
 

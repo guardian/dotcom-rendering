@@ -50,7 +50,9 @@ export const CardFooter = ({
 }: Props) => {
 	if (
 		!isFullCardImage &&
-		(format.design === Design.Comment || format.design === Design.Editorial)
+		(format.design === Design.Comment ||
+			format.design === Design.Editorial ||
+			format.design === Design.Letter)
 	) {
 		return (
 			<footer className={spaceBetween}>

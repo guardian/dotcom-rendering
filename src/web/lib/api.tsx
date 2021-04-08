@@ -1,30 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-
-type FetchOptions = {
-	method?:
-		| 'GET'
-		| 'HEAD'
-		| 'POST'
-		| 'PUT'
-		| 'DELETE'
-		| 'CONNECT'
-		| 'OPTIONS'
-		| 'TRACE'
-		| 'PATCH';
-	headers?: {
-		'Content-Type':
-			| 'text/plain'
-			| 'multipart/form-data'
-			| 'application/json'
-			| 'application/x-www-form-urlencoded';
-	};
-	body?: string;
-	credentials?: 'omit' | 'include' | 'same-origin';
-};
-
-interface Options extends FetchOptions {
-	pollInterval?: number;
-}
+import useSWR, { SWRConfiguration } from 'swr';
 
 function checkForErrors(response: Response) {
 	if (!response.ok) {
@@ -36,11 +10,10 @@ function checkForErrors(response: Response) {
 	return response;
 }
 
-export const callApi = (url: string, fetchOptions?: FetchOptions) => {
-	return fetch(url, fetchOptions)
+const fetcher = (url: string) =>
+	fetch(url)
 		.then(checkForErrors)
-		.then((response) => response.json());
-};
+		.then((res) => res.json());
 
 interface ApiResponse<T> {
 	loading: boolean;
@@ -50,80 +23,20 @@ interface ApiResponse<T> {
 
 /**
  * @description
- * A custom hook to make a GET request using the given url
- * returning { loading, error, data }
+ * A custom hook to make a GET request using the given url using the SWR lib (https://swr.vercel.app/)
+ * returns { loading, error, data }
  * @param {String} url - The url to fetch
- * @param {Object} options
- * @param {Number} options.method - If supplied, the api will be called using this value
- * @param {Number} options.headers - If supplied, the api will be called using this value
- * @param {Number} options.body - If supplied, the api will be called using this value
- * @param {Number} options.credentials - If supplied, the api will be called using this value
- * @param {Number} options.pollInterval - If supplied, the api will be polled at this interval
+ * @param {SWRConfiguration} options - The SWR config object - https://swr.vercel.app/docs/options
  * */
-export const useApi = <T,>(url: string, options?: Options): ApiResponse<T> => {
-	const [request, setRequest] = useState<{
-		loading: boolean;
-		data?: T;
-		error?: Error;
-	}>({
-		loading: true,
-	});
+export const useApi = <T,>(
+	url: string,
+	options?: SWRConfiguration,
+): ApiResponse<T> => {
+	const { data, error } = useSWR(url, fetcher, options);
 
-	const alreadyFetched = useRef<boolean>(false);
-	const pollRef = useRef<number | undefined>();
-
-	useEffect(() => {
-		const fetchOptions = {
-			method: options?.method || 'GET',
-			credentials: options?.credentials,
-			headers: options?.headers,
-			body: options?.body,
-		};
-
-		const handleData = (data: T) => {
-			setRequest({
-				data,
-				loading: false,
-			});
-		};
-
-		const handleError = (error: Error) => {
-			setRequest({
-				error,
-				loading: false,
-			});
-		};
-
-		const poll = (delay: number) => {
-			// We use window.setTimeout so we're sure to get a number back (and not the NodeJS.Timeout type)
-			const timeoutId = window.setTimeout(() => {
-				callApi(url, fetchOptions)
-					.then(handleData)
-					.then(() => {
-						// If successfull, enqueue the next poll
-						poll(delay);
-					})
-					.catch(handleError);
-			}, delay);
-			pollRef.current = timeoutId;
-		};
-
-		if (alreadyFetched.current === false) {
-			callApi(url, fetchOptions).then(handleData).catch(handleError);
-			alreadyFetched.current = true;
-		}
-
-		if (options?.pollInterval) {
-			const delay = options.pollInterval;
-			poll(delay);
-			return () => {
-				if (pollRef.current) {
-					clearTimeout(pollRef.current);
-					pollRef.current = undefined;
-				}
-			};
-		}
-	}, [url, options]);
-
-	return request;
+	return {
+		data,
+		error,
+		loading: !error && !data,
+	};
 };

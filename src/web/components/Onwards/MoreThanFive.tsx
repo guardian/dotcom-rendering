@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -35,12 +35,14 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[0].url}
 						format={content[0].format}
-						palette={content[0].palette}
 						headlineText={content[0].headline}
 						headlineSize="medium"
 						byline={content[0].byline}
 						showByline={content[0].showByline}
-						showQuotes={content[0].format.design === Design.Comment}
+						showQuotes={
+							content[0].format.design === Design.Comment ||
+							content[0].format.design === Design.Letter
+						}
 						webPublicationDate={content[0].webPublicationDate}
 						kickerText={content[0].kickerText}
 						showPulsingDot={content[0].isLiveBlog}
@@ -62,12 +64,14 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[1].url}
 						format={content[1].format}
-						palette={content[1].palette}
 						headlineText={content[1].headline}
 						headlineSize="medium"
 						byline={content[1].byline}
 						showByline={content[1].showByline}
-						showQuotes={content[1].format.design === Design.Comment}
+						showQuotes={
+							content[1].format.design === Design.Comment ||
+							content[1].format.design === Design.Letter
+						}
 						webPublicationDate={content[1].webPublicationDate}
 						kickerText={content[1].kickerText}
 						showPulsingDot={content[1].isLiveBlog}
@@ -89,12 +93,14 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[2].url}
 						format={content[2].format}
-						palette={content[2].palette}
 						headlineText={content[2].headline}
 						headlineSize="medium"
 						byline={content[2].byline}
 						showByline={content[2].showByline}
-						showQuotes={content[2].format.design === Design.Comment}
+						showQuotes={
+							content[2].format.design === Design.Comment ||
+							content[2].format.design === Design.Letter
+						}
 						webPublicationDate={content[2].webPublicationDate}
 						kickerText={content[2].kickerText}
 						showPulsingDot={content[2].isLiveBlog}
@@ -116,12 +122,14 @@ export const MoreThanFive = ({ content }: Props) => {
 					<Card
 						linkTo={content[3].url}
 						format={content[3].format}
-						palette={content[3].palette}
 						headlineText={content[3].headline}
 						headlineSize="medium"
 						byline={content[3].byline}
 						showByline={content[3].showByline}
-						showQuotes={content[3].format.design === Design.Comment}
+						showQuotes={
+							content[3].format.design === Design.Comment ||
+							content[3].format.design === Design.Letter
+						}
 						webPublicationDate={content[3].webPublicationDate}
 						kickerText={content[3].kickerText}
 						showPulsingDot={content[3].isLiveBlog}
@@ -146,17 +154,28 @@ export const MoreThanFive = ({ content }: Props) => {
 						<Card
 							linkTo={trail.url}
 							format={trail.format}
-							palette={trail.palette}
 							headlineText={trail.headline}
-							headlineSize="small"
+							headlineSize={
+								trail.format.theme === Special.Labs
+									? 'medium'
+									: 'small'
+							}
 							byline={trail.byline}
 							showByline={trail.showByline}
-							showQuotes={trail.format.design === Design.Comment}
+							showQuotes={
+								trail.format.design === Design.Comment ||
+								trail.format.design === Design.Letter
+							}
 							webPublicationDate={trail.webPublicationDate}
 							kickerText={trail.kickerText}
 							showPulsingDot={trail.isLiveBlog}
 							showSlash={true}
 							showClock={false}
+							imageUrl={
+								trail.format.theme === Special.Labs
+									? trail.image
+									: undefined
+							}
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
 							commentCount={trail.commentCount}

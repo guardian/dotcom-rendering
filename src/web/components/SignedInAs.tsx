@@ -8,7 +8,7 @@ import { until } from '@guardian/src-foundations/mq';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
 type Props = {
-	commentCount: number;
+	commentCount?: number;
 	palette: Palette;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
@@ -99,7 +99,7 @@ export const SignedInAs = ({
 						color: ${neutral[60]};
 					`}
 				>
-					({commentCount})
+					({commentCount || '…'})
 				</span>
 			</h2>
 

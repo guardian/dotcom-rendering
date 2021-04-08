@@ -7,7 +7,6 @@ import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
 import EmailIcon from '@frontend/static/icons/email.svg';
 import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
-import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 
@@ -163,27 +162,9 @@ export const ShareIcons = ({
 				</li>
 			)}
 
-			{displayIcons.includes('pinterest') && (
-				<li className={liStyles(size)} key="pinterest">
-					<a
-						href={`http://www.pinterest.com/pin/find/?url=${encodeUrl(
-							pageId,
-						)}`}
-						role="button"
-						aria-label="Share on Pinterest"
-						target="_blank"
-						data-ignore="global-link-styling"
-					>
-						<span className={iconStyles({ palette, size })}>
-							<PinterestIcon />
-						</span>
-					</a>
-				</li>
-			)}
-
 			{displayIcons.includes('whatsApp') && (
-				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles(size)} key="whatsApp">
+				<Hide when="above" breakpoint="phablet" el="li" key="whatsApp">
+					<span className={liStyles(size)}>
 						<a
 							href={`whatsapp://send?text="${encodeTitle(
 								webTitle,
@@ -197,13 +178,13 @@ export const ShareIcons = ({
 								<WhatsAppIcon />
 							</span>
 						</a>
-					</li>
+					</span>
 				</Hide>
 			)}
 
 			{displayIcons.includes('messenger') && (
-				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles(size)} key="messenger">
+				<Hide when="above" breakpoint="phablet" el="li" key="messenger">
+					<span className={liStyles(size)}>
 						<a
 							href={`fb-messenger://share?link=${encodeUrl(
 								pageId,
@@ -217,7 +198,7 @@ export const ShareIcons = ({
 								<MessengerIcon />
 							</span>
 						</a>
-					</li>
+					</span>
 				</Hide>
 			)}
 		</ul>

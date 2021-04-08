@@ -18,7 +18,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
@@ -48,6 +47,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -70,19 +70,6 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				${from.wide} {
-					grid-template-columns:
-						309px /* Left Column (220 - 1px border) */
-						1px /* Empty border for spacing */
-						1fr /* Main content */
-						340px; /* Right Column */
-					grid-template-areas:
-						'lines border media        right-column'
-						'meta  border media        right-column'
-						'meta  border body         right-column'
-						'.     border .            right-column';
-				}
-
 				${from.desktop} {
 					grid-template-columns:
 						309px /* Left Column (220 - 1px border) */
@@ -93,6 +80,19 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'meta  border media'
 						'meta  border body'
 						'.     border .';
+				}
+
+				${from.wide} {
+					grid-template-columns:
+						309px
+						1px
+						1fr
+						340px;
+					grid-template-areas:
+						'lines border media right-column'
+						'meta  border media right-column'
+						'meta  border body  right-column'
+						'.     border .     right-column';
 				}
 
 				${until.desktop} {
@@ -267,6 +267,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
+							borderColour={palette.border.article}
 						>
 							<SubNav
 								subNavSections={NAV.subNavSections}
@@ -280,8 +281,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
+						borderColour={palette.border.article}
 					>
-						<GuardianLines count={4} pillar={format.theme} />
+						<GuardianLines count={4} palette={palette} />
 					</Section>
 				</SendToBack>
 			</div>
@@ -335,21 +337,27 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				borderColour={palette.border.standfirst}
 				sideBorders={true}
 				leftColSize="wide"
+				verticalMargins={false}
 			>
 				<Standfirst format={format} standfirst={CAPI.standfirst} />
 			</ContainerLayout>
 
-			<ContainerLayout
+			<Section
 				showTopBorder={false}
+				borderColour={palette.border.article}
 				backgroundColour={palette.background.article}
-				borderColour={neutral[86]}
-				sideBorders={true}
-				leftColSize="wide"
-			/>
+			>
+				<div
+					className={css`
+						height: ${space[4]}px;
+					`}
+				/>
+			</Section>
 
 			<Section
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
+				borderColour={palette.border.article}
 			>
 				<LiveGrid>
 					<GridItem area="media">
@@ -371,7 +379,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div className={stretchLines}>
 								<GuardianLines
 									count={decideLineCount(format.design)}
-									pillar={format.theme}
+									palette={palette}
 									effect={decideLineEffect(
 										format.design,
 										format.theme,
@@ -414,7 +422,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<GuardianLines
 									data-print-layout="hide"
 									count={4}
-									pillar={format.theme}
+									palette={palette}
 								/>
 								<SubMeta
 									palette={palette}
@@ -458,11 +466,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									position="right"
 									display={format.display}
 								/>
-								{!isPaidContent ? (
-									<MostViewedRightIsland />
-								) : (
-									<></>
-								)}
 							</RightColumn>
 						</div>
 					</GridItem>
@@ -483,58 +486,50 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</Section>
 
+			{/* Onwards (when signed OUT) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedout"
+				/>
+			)}
+
+			{!isPaidContent && showComments && (
+				<Section data-print-layout="hide" sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedin"
+				/>
+			)}
+
 			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedout"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedout"
-						/>
-					)}
-
-					{showComments && (
-						<Section data-print-layout="hide" sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedin"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedin"
-						/>
-					)}
-
-					<Section
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-					/>
-				</>
+				<Section
+					data-print-layout="hide"
+					sectionId="most-viewed-footer"
+				/>
 			)}
 
 			<Section
@@ -558,7 +553,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

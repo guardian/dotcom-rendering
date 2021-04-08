@@ -63,7 +63,7 @@ const clearBoth = css`
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
 // that out and have an Ad element type we match against
-export const Blocks: React.SFC<{
+export const Blocks: React.FunctionComponent<{
 	blocks: Block[];
 	pillar: Theme;
 	edition: Edition;

@@ -4,7 +4,6 @@ import { neutral, border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
-import { useAB } from '@guardian/ab-react';
 
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
@@ -44,12 +43,6 @@ const firstTab = css`
 const selectedListTabStyles = (palette: Palette) => css`
 	/* TODO: Using a pseudo selector here could be faster? */
 	box-shadow: inset 0px 4px 0px 0px ${palette.background.mostViewedTab};
-	transition: box-shadow 0.3s ease-in-out;
-`;
-
-// Used for the deeply read test
-const selectedDeeplyListTabStyles = css`
-	box-shadow: inset 0px 4px 0px 0px ${neutral[46]};
 	transition: box-shadow 0.3s ease-in-out;
 `;
 
@@ -107,8 +100,6 @@ type Props = {
 // To avoid having to handle multiple ways of reducing the capitalisation styling
 const TabHeading = ({ heading }: { heading: string }) => {
 	switch (heading.toLowerCase()) {
-		case 'deeply read':
-			return <span>Deeply read</span>;
 		case 'most popular':
 			return <span>Most popular</span>;
 		default:
@@ -128,11 +119,6 @@ const TabHeading = ({ heading }: { heading: string }) => {
 
 export const MostViewedFooterGrid = ({ data, sectionName, palette }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
-	const ABTestAPI = useAB();
-	const inDeeplyReadTestVariant = ABTestAPI.isUserInVariant(
-		'DeeplyReadTest',
-		'variant',
-	);
 	return (
 		<div>
 			{Array.isArray(data) && data.length > 1 && (
@@ -140,9 +126,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, palette }: Props) => {
 					{data.map((tab: TrailTabType, i: number) => {
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
-						const selectedStyles = inDeeplyReadTestVariant
-							? selectedDeeplyListTabStyles
-							: selectedListTabStyles(palette);
+						const selectedStyles = selectedListTabStyles(palette);
 						return (
 							<li
 								className={cx(

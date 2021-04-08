@@ -99,6 +99,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 			switch (format.design) {
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 				case Design.Feature:
 				case Design.Recipe:
 				case Design.Review:
@@ -106,6 +107,18 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						${headline.xxsmall({
 							fontWeight: 'light',
 						})};
+						margin-bottom: ${space[3]}px;
+						max-width: 540px;
+						color: ${palette.text.standfirst};
+					`;
+				case Design.LiveBlog:
+				case Design.DeadBlog:
+					return css`
+						${headline.xxxsmall({
+							fontWeight: 'bold',
+						})};
+						line-height: 20px;
+						margin-top: ${space[1]}px;
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};

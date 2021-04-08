@@ -473,7 +473,7 @@ export const ImmersiveLayout = ({
 							<div className={maxWidth}>
 								<div className={stretchLines}>
 									<GuardianLines
-										pillar={format.theme}
+										palette={palette}
 										effect={decideLineEffect(
 											Design.Article,
 											format.theme,
@@ -515,10 +515,7 @@ export const ImmersiveLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -589,44 +586,40 @@ export const ImmersiveLayout = ({
 				/>
 			</Section>
 
-			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div id="onwards-upper-whensignedout" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedout" />
-					)}
-
-					{showComments && (
-						<Section sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div id="onwards-upper-whensignedin" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedin" />
-					)}
-
-					<Section sectionId="most-viewed-footer" />
-				</>
+			{/* Onwards (when signed OUT) */}
+			<div id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedout" />
 			)}
+
+			{!isPaidContent && showComments && (
+				<Section sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedin" />
+			)}
+
+			{!isPaidContent && <Section sectionId="most-viewed-footer" />}
 
 			<Section
 				padded={false}
@@ -644,7 +637,7 @@ export const ImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

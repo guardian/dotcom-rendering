@@ -49,6 +49,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return css`
 				${baseLinkStyles};

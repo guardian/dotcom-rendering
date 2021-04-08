@@ -66,13 +66,6 @@ export const getSharingUrls = (
 			},
 			baseUrl: 'whatsapp://send',
 		},
-		pinterest: {
-			userMessage: 'Share on Pinterest',
-			params: {
-				url: articleUrl,
-			},
-			baseUrl: 'http://www.pinterest.com/pin/find/',
-		},
 		linkedIn: {
 			userMessage: 'Share on LinkedIn',
 			params: {

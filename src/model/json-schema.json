@@ -198,8 +198,30 @@
                 "$ref": "#/definitions/TagType"
             }
         },
+        "format": {
+            "type": "object",
+            "properties": {
+                "design": {
+                    "$ref": "#/definitions/CAPIDesign"
+                },
+                "theme": {
+                    "$ref": "#/definitions/CAPITheme"
+                },
+                "display": {
+                    "$ref": "#/definitions/CAPIDisplay"
+                }
+            },
+            "required": [
+                "design",
+                "display",
+                "theme"
+            ]
+        },
+        "designType": {
+            "type": "string"
+        },
         "pillar": {
-            "$ref": "#/definitions/CAPIPillar"
+            "$ref": "#/definitions/LegacyPillar"
         },
         "isImmersive": {
             "type": "boolean"
@@ -255,9 +277,6 @@
         },
         "config": {
             "$ref": "#/definitions/ConfigType"
-        },
-        "designType": {
-            "$ref": "#/definitions/CAPIDesign"
         },
         "showBottomSocialButtons": {
             "type": "boolean"
@@ -363,6 +382,7 @@
         "designType",
         "editionId",
         "editionLongForm",
+        "format",
         "guardianBaseURL",
         "hasRelated",
         "hasStoryPackage",
@@ -926,22 +946,22 @@
                 "id": {
                     "type": "string"
                 },
-                "html": {
-                    "type": "string"
-                },
-                "role": {
-                    "$ref": "#/definitions/RoleType"
-                },
                 "url": {
                     "type": "string"
                 },
-                "placeholderUrl": {
+                "html": {
                     "type": "string"
                 },
                 "css": {
                     "type": "string"
                 },
                 "js": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "placeholderUrl": {
                     "type": "string"
                 }
             },
@@ -1373,9 +1393,6 @@
                         "model.dotcomrendering.pageElements.GenericAtomBlockElement"
                     ]
                 },
-                "elementId": {
-                    "type": "string"
-                },
                 "url": {
                     "type": "string"
                 },
@@ -1392,6 +1409,9 @@
                     "type": "string"
                 },
                 "js": {
+                    "type": "string"
+                },
+                "elementId": {
                     "type": "string"
                 }
             },
@@ -1777,6 +1797,9 @@
                 "elementId": {
                     "type": "string"
                 },
+                "url": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -1789,14 +1812,11 @@
                 "css": {
                     "type": "string"
                 },
-                "role": {
-                    "$ref": "#/definitions/RoleType"
-                },
-                "url": {
-                    "type": "string"
-                },
                 "placeholderUrl": {
                     "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -3336,7 +3356,51 @@
                 "type"
             ]
         },
-        "CAPIPillar": {
+        "CAPIDesign": {
+            "enum": [
+                "AnalysisDesign",
+                "ArticleDesign",
+                "CommentDesign",
+                "DeadBlogDesign",
+                "EditorialDesign",
+                "FeatureDesign",
+                "InteractiveDesign",
+                "InterviewDesign",
+                "LetterDesign",
+                "LiveBlogDesign",
+                "MatchReportDesign",
+                "MediaDesign",
+                "PhotoEssayDesign",
+                "PrintShopDesign",
+                "QuizDesign",
+                "RecipeDesign",
+                "ReviewDesign"
+            ],
+            "type": "string"
+        },
+        "CAPITheme": {
+            "enum": [
+                "CulturePillar",
+                "Labs",
+                "LifestylePillar",
+                "NewsPillar",
+                "OpinionPillar",
+                "SpecialReportTheme",
+                "SportPillar"
+            ],
+            "type": "string"
+        },
+        "CAPIDisplay": {
+            "enum": [
+                "ColumnDisplay",
+                "ImmersiveDisplay",
+                "NumberedListDisplay",
+                "ShowcaseDisplay",
+                "StandardDisplay"
+            ],
+            "type": "string"
+        },
+        "LegacyPillar": {
             "enum": [
                 "culture",
                 "labs",
@@ -3563,28 +3627,6 @@
                 "switches",
                 "videoDuration"
             ]
-        },
-        "CAPIDesign": {
-            "enum": [
-                "AdvertisementFeature",
-                "Analysis",
-                "Article",
-                "Comment",
-                "Feature",
-                "GuardianLabs",
-                "GuardianView",
-                "Immersive",
-                "Interview",
-                "Live",
-                "MatchReport",
-                "Media",
-                "PhotoEssay",
-                "Quiz",
-                "Recipe",
-                "Review",
-                "SpecialReport"
-            ],
-            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",
@@ -3847,7 +3889,7 @@
                     }
                 },
                 "pillar": {
-                    "$ref": "#/definitions/CAPIPillar"
+                    "$ref": "#/definitions/LegacyPillar"
                 },
                 "more": {
                     "type": "boolean"
@@ -3904,6 +3946,9 @@
                     "type": "string"
                 },
                 "supporter": {
+                    "type": "string"
+                },
+                "gifting": {
                     "type": "string"
                 }
             },

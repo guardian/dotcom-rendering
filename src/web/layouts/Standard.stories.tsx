@@ -12,12 +12,14 @@ import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
 import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Letter } from '@root/fixtures/generated/articles/Letter';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -38,11 +40,10 @@ export default {
 const convertToStandard = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: false,
+		format: {
+			...CAPI.format,
+			display: 'StandardDisplay' as CAPIDisplay,
 		},
-		isImmersive: false,
 	};
 };
 
@@ -123,9 +124,9 @@ FeatureStory.story = { name: 'Feature' };
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: true,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(LiveBlog);
@@ -136,9 +137,9 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: false,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(DeadBlog);
@@ -156,6 +157,14 @@ EditorialStory.story = {
 		viewport: { defaultViewport: 'phablet' },
 		chromatic: { viewports: [660] },
 	},
+};
+
+export const LetterStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Letter);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LetterStory.story = {
+	name: 'Letter',
 };
 
 export const InterviewStory = (): React.ReactNode => {
@@ -212,4 +221,12 @@ export const LabsStory = (): React.ReactNode => {
 };
 LabsStory.story = {
 	name: 'Labs',
+};
+
+export const SpecialReportStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
 };

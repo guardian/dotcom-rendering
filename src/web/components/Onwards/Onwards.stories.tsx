@@ -15,6 +15,7 @@ import {
 	sixTrails,
 	sevenTrails,
 	eightTrails,
+	labsTrails,
 } from './Onwards.mocks';
 import { OnwardsLayout } from './OnwardsLayout';
 
@@ -99,3 +100,10 @@ export const eightTrailStory = () => (
 	</Section>
 );
 eightTrailStory.story = { name: 'With eight trails' };
+
+export const labsTrailStory = () => (
+	<Section>
+		<OnwardsLayout {...labsTrails} />
+	</Section>
+);
+labsTrailStory.story = { name: 'With labs trails' };
