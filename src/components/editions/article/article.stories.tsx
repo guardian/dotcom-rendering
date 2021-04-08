@@ -9,6 +9,7 @@ import {
 	editorial,
 	feature,
 	interview,
+	letter,
 	media,
 	review,
 } from 'fixtures/item';
@@ -118,6 +119,16 @@ const Comment = (): ReactElement => (
 	/>
 );
 
+const Letter = (): ReactElement => (
+	<Article
+		item={{
+			...letter,
+			tags: [getTag('tone/letters', 'Letters ')],
+			theme: selectPillar(Pillar.Opinion),
+		}}
+	/>
+);
+
 const Gallery = (): ReactElement => (
 	<Article
 		item={{
@@ -153,4 +164,5 @@ export {
 	Comment,
 	Editorial,
 	Gallery,
+	Letter,
 };
