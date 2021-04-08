@@ -87,6 +87,7 @@ module.exports = {
         'react/jsx-curly-newline': [0],
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
+		'arrow-body-style': [0],
     },
     settings: {
         'import/resolver': {
