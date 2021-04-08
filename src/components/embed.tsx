@@ -6,7 +6,6 @@ import Instagram from 'components/instagram';
 import Video from 'components/video';
 import { EmbedKind, youtubeUrl } from 'embed';
 import type { Embed } from 'embed';
-import React from 'react';
 import type { FC } from 'react';
 
 // ----- Component ----- //

@@ -7,17 +7,20 @@ import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Option } from '@guardian/types';
 import { map, none, some } from '@guardian/types';
-import { getThirdPartyEmbeds } from 'capi';
+import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
+import { atomCss, atomScript } from 'components/atoms/interactiveAtom';
 import Article from 'components/editions/article';
+import Meta from 'components/meta';
 import Scripts from 'components/scripts';
 import type { Item } from 'item';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
 import type { ReactElement } from 'react';
+import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
-import { cspEditions } from 'server/csp';
+import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
 
 // ----- Types ----- //
@@ -34,37 +37,47 @@ const docParser = JSDOM.fragment.bind(null);
 // ----- Functions ----- //
 
 const styles = `
-    ${pageFonts}
+	${pageFonts}
+
 	html {
-		height: 100%;
-	}
-    body {
 		margin: 0;
 		height: 100%;
 		min-height: 100%;
-    }
+	}
 `;
 
-const renderHead = (
+function renderHead(
+	item: Item,
 	request: RenderingRequest,
 	thirdPartyEmbeds: ThirdPartyEmbeds,
 	itemStyles: string,
 	emotionIds: string[],
-): string => {
-	const cspString = cspEditions(
-		{ scripts: [], styles: [styles, itemStyles] },
+	inlineStyles: boolean,
+): string {
+	const generalStyles = styles;
+	const isEditions = true;
+	const cspString = csp(
+		item,
+		{
+			scripts: [atomScript],
+			styles: [generalStyles, itemStyles, atomCss],
+		},
 		thirdPartyEmbeds,
+		inlineStyles,
+		isEditions,
 	);
+	const meta = h(Meta, { title: request.content.webTitle, cspString });
 
 	return `
-		<meta charSet="utf-8" />
-		<title>${request.content.webTitle}</title>
-		<meta name="viewport" content="initial-scale=1" />
-		<meta http-equiv="Content-Security-Policy" content="${cspString}" />
-        <style>${styles}</style>
+        ${renderToString(meta)}
+        <link rel="stylesheet" type="text/css" href="/fontSize.css">
+        <style>${generalStyles}</style>
         <style data-emotion-css="${emotionIds.join(' ')}">${itemStyles}</style>
+        <script id="targeting-params" type="application/json">
+            ${JSON.stringify(request.targetingParams)}
+        </script>
     `;
-};
+}
 
 const renderBody = (item: Item): EmotionCritical =>
 	compose(
@@ -102,7 +115,16 @@ function render(
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 	const body = renderBody(item);
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
-	const head = renderHead(request, thirdPartyEmbeds, body.css, body.ids);
+	const inlineStyles = requiresInlineStyles(request.content);
+
+	const head = renderHead(
+		item,
+		request,
+		thirdPartyEmbeds,
+		body.css,
+		body.ids,
+		inlineStyles,
+	);
 
 	const clientScript = map(getAssetLocation)(some('editions.js'));
 
