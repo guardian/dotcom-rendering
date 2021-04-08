@@ -30,7 +30,7 @@ describe('Discussion', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
 		const roughLoadPositionOfComments = 4000;
 		cy.scrollTo(0, roughLoadPositionOfComments, { duration: 500 });
-		cy.contains('View more comments').click();
+		cy.contains('View more comments').click({ force: true });
 		cy.contains('Displaying threads');
 	});
 
