@@ -611,14 +611,6 @@ describe('Renders different types of Editions elements', () => {
 		testHandlers(timeline);
 	});
 
-	test('ElementKind.ChartAtom', () => {
-		const nodes = renderEditions(chartElement());
-		const chart = nodes.flat()[0];
-		expect(getHtml(chart)).toContain(
-			'srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"',
-		);
-	});
-
 	function testHandlers(node: ReactNode): void {
 		if (isValidElement(node)) {
 			const container = document.createElement('div');

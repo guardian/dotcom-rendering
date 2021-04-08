@@ -801,9 +801,6 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.TimelineAtom:
 			return timelineAtomRenderer(format, element);
 
-		case ElementKind.ChartAtom:
-			return h(ChartAtom, { ...element });
-
 		case ElementKind.InteractiveAtom:
 			return interactiveAtomRenderer(format, element);
 
