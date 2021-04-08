@@ -5,6 +5,7 @@ import { body } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Placeholder } from '@root/src/web/components/Placeholder';
+import { Caption } from '@root/src/web/components/Caption';
 import libDebounce from 'lodash.debounce';
 
 type Props = {
@@ -12,6 +13,9 @@ type Props = {
 	scriptUrl?: string;
 	alt?: string;
 	role?: RoleType;
+	caption?: string;
+	format: Format;
+	palette: Palette;
 };
 
 /*
@@ -213,6 +217,9 @@ export const InteractiveBlockComponent = ({
 	scriptUrl,
 	alt,
 	role = 'inline',
+	caption,
+	format,
+	palette,
 }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
@@ -263,27 +270,36 @@ export const InteractiveBlockComponent = ({
 	}, [loaded]);
 
 	return (
-		<div
-			data-cypress={`interactive-element-${encodeURI(alt || '')}`}
-			ref={wrapperRef}
-			className={wrapperStyle(role, loaded)}
-		>
-			{!loaded && (
-				<Placeholder
-					height={decideHeight(role)}
-					shouldShimmer={false}
+		<>
+			<div
+				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
+				ref={wrapperRef}
+				className={wrapperStyle(role, loaded)}
+			>
+				{!loaded && (
+					<Placeholder
+						height={decideHeight(role)}
+						shouldShimmer={false}
+					/>
+				)}
+				{!loaded && (
+					<a
+						ref={placeholderLinkRef}
+						data-name="placeholder"
+						className={placeholderLinkStyle}
+						href={url}
+					>
+						{alt}
+					</a>
+				)}
+			</div>
+			{caption && (
+				<Caption
+					captionText={caption}
+					format={format}
+					palette={palette}
 				/>
 			)}
-			{!loaded && (
-				<a
-					ref={placeholderLinkRef}
-					data-name="placeholder"
-					className={placeholderLinkStyle}
-					href={url}
-				>
-					{alt}
-				</a>
-			)}
-		</div>
+		</>
 	);
 };
