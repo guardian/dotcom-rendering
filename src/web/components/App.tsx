@@ -577,6 +577,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 						scriptUrl={interactiveBlock.scriptUrl}
 						alt={interactiveBlock.alt}
 						role={interactiveBlock.role}
+						caption={interactiveBlock.caption}
+						format={format}
+						palette={palette}
 					/>
 				</HydrateOnce>
 			))}
