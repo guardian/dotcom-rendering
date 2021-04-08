@@ -95,6 +95,11 @@ export const CommentStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 CommentStory.story = { name: 'Comment' };
+CommentStory.parameters = {
+	// Cutout/byline interaction is a specific issue
+	// we look out for on mobile on opinion content
+	chromatic: { viewports: [320, 1300] }
+};
 
 export const PhotoEssayStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PhotoEssay);
