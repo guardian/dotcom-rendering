@@ -121,8 +121,12 @@ export const SubMeta = ({
 	showBottomSocialButtons,
 	badge,
 }: Props) => {
-	const hasSectionLinks = subMetaSectionLinks.length > 0;
-	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
+	// Filter out any links without titles (sometimes you get blank links which cause slash issues)
+	const filteredSections = subMetaSectionLinks.filter((link) => link.title);
+	const filteredKeywords = subMetaKeywordLinks.filter((link) => link.title);
+	const hasSectionLinks = filteredSections.length > 0;
+	const hasKeywordLinks = filteredKeywords.length > 0;
+
 	return (
 		<div data-print-layout="hide" className={bottomPadding}>
 			{badge && (
@@ -139,14 +143,13 @@ export const SubMeta = ({
 					<div className={listWrapper(palette)}>
 						{hasSectionLinks && (
 							<ul className={listStyleNone}>
-								{subMetaSectionLinks.map((link, i) => (
+								{filteredSections.map((link, i) => (
 									<li
 										className={cx(
 											listItemStyles(palette),
 											sectionStyles(format),
-											i ===
-												subMetaSectionLinks.length -
-													1 && hideSlash,
+											i === filteredSections.length - 1 &&
+												hideSlash,
 										)}
 										key={link.url}
 									>
@@ -162,14 +165,13 @@ export const SubMeta = ({
 						)}
 						{hasKeywordLinks && (
 							<ul className={listStyleNone}>
-								{subMetaKeywordLinks.map((link, i) => (
+								{filteredKeywords.map((link, i) => (
 									<li
 										className={cx(
 											listItemStyles(palette),
 											keywordStyles,
-											i ===
-												subMetaKeywordLinks.length -
-													1 && hideSlash,
+											i === filteredKeywords.length - 1 &&
+												hideSlash,
 										)}
 										key={link.url}
 									>
