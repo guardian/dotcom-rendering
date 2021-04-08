@@ -2044,10 +2044,10 @@
   resolved "https://registry.yarnpkg.com/@base2/pretty-print-object/-/pretty-print-object-1.0.0.tgz#860ce718b0b73f4009e153541faff2cb6b85d047"
   integrity sha512-4Th98KlMHr5+JkxfcoDT//6vY8vM+iSPrLNpHhRyLx2CFYi8e2RfqPLdpbnpo0Q5lQC5hNB79yes07zb02fvCw==
 
-"@braze/web-sdk-core@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@braze/web-sdk-core/-/web-sdk-core-3.1.0.tgz#68bba5ba284dbe082229c0604b8d7e6da401feaa"
-  integrity sha512-Eillspp84rLX4NdjwMF11TJuWgwlrXwnUm2hgEtT8BdBO6CNvqh2mQBBbcgs2Y41CgleTsvwQwvuXI/TFrxDuQ==
+"@braze/web-sdk-core@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk-core/-/web-sdk-core-3.2.0.tgz#9168ffecc9301a3f9bf816050b0937798458235d"
+  integrity sha512-43lBSQGIZnmbA82jm5Y0yhXiWRIX60UmVD94BET82pNnY3zqGv5Az4/JaWq0E7Eq3Xrh20yXt/ZPb9mExH46Og==
 
 "@chromaui/localtunnel@^2.0.2":
   version "2.0.2"

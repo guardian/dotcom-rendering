@@ -34,7 +34,7 @@
         "*": "lint"
     },
     "dependencies": {
-        "@braze/web-sdk-core": "3.1.0",
+        "@braze/web-sdk-core": "3.2.0",
         "@cypress/skip-test": "^2.6.0",
         "@emotion/core": "^10.0.35",
         "@guardian/ab-core": "^2.0.0",
