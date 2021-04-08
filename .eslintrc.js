@@ -11,7 +11,6 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'airbnb-typescript',
         'prettier',
-        'prettier/@typescript-eslint',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
