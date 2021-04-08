@@ -783,11 +783,6 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.Tweet:
 			return h(Tweet, { content: element.content, format, key });
 
-		case ElementKind.Callout: {
-			const { campaign, description } = element;
-			return h(CalloutForm, { campaign, format, description });
-		}
-
 		case ElementKind.Embed:
 			return h(EmbedComponent, { embed: element.embed });
 
