@@ -7,6 +7,7 @@ import {
 	Variant,
 } from '@root/src/web/lib/braze/parseBrazeEpicParams';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { joinUrl } from '@root/src/lib/joinUrl';
@@ -49,6 +50,14 @@ type EpicProps = {
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 ): Promise<CanShowResult> => {
+	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
+	if (forcedBrazeMeta) {
+		return {
+			result: true,
+			meta: forcedBrazeMeta,
+		};
+	}
+
 	try {
 		const brazeMessages = await brazeMessagesPromise;
 		const message = await brazeMessages.getMessageForEndOfArticle();

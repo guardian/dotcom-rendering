@@ -43,6 +43,7 @@ const decideBackground = (design: Design, pillar: Theme): string => {
 	if (pillar === Special.Labs) return palette.neutral[86];
 	switch (design) {
 		case Design.Comment:
+		case Design.Letter:
 			return palette.opinion[800];
 		default:
 			return palette.neutral[100];

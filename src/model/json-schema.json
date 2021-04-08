@@ -1853,6 +1853,9 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
                 }
             },
             "required": [

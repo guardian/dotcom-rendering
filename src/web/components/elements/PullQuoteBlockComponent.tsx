@@ -123,6 +123,7 @@ export const PullQuoteBlockComponent: React.FC<{
 	if (!html) return <></>;
 	switch (design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return (
 				<aside

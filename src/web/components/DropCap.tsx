@@ -34,6 +34,7 @@ const innerStyles = (format: Format) => {
 
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return css`
 				${baseStyles};

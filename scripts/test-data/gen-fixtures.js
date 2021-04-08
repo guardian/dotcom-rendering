@@ -63,9 +63,14 @@ const articles = [
 			'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	},
 	{
+		name: 'Letter',
+		url:
+			'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+	},
+	{
 		name: 'SpecialReport',
 		url:
-			'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+			'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	},
 	{
 		name: 'Interview',
@@ -232,28 +237,6 @@ try {
 					'utf8',
 				);
 				console.log(`Created series.ts`);
-			}),
-	);
-
-	// Related
-	requests.push(
-		fetch(
-			'https://api.nextgen.guardianapps.co.uk/related/world/2020/sep/13/shaggy-dog-stories-visit-puppies-before-buying-say-charities.json?dcr=true',
-		)
-			.then((res) => res.json())
-			.then((json) => {
-				// Write the new fixture data
-				const contents = `${HEADER}export const related = ${JSON.stringify(
-					json,
-					null,
-					4,
-				)}`;
-				fs.writeFileSync(
-					`${root}/fixtures/generated/related.ts`,
-					contents,
-					'utf8',
-				);
-				console.log(`Created related.ts`);
 			}),
 	);
 

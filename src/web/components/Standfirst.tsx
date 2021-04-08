@@ -99,6 +99,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 			switch (format.design) {
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 				case Design.Feature:
 				case Design.Recipe:
 				case Design.Review:

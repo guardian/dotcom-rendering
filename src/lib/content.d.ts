@@ -239,6 +239,7 @@ interface InteractiveBlockElement {
 	scriptUrl?: string;
 	alt?: string;
 	role?: RoleType;
+	caption?: string;
 }
 
 interface MapBlockElement extends ThirdPartyEmbeddedContent {

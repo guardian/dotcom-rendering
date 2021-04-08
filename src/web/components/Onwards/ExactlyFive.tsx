@@ -22,7 +22,10 @@ export const ExactlyFive = ({ content }: Props) => (
 					headlineSize="medium"
 					byline={content[0].byline}
 					showByline={content[0].showByline}
-					showQuotes={content[0].format.design === Design.Comment}
+					showQuotes={
+						content[0].format.design === Design.Comment ||
+						content[0].format.design === Design.Letter
+					}
 					webPublicationDate={content[0].webPublicationDate}
 					kickerText={content[0].kickerText}
 					showPulsingDot={content[0].isLiveBlog}
@@ -48,7 +51,10 @@ export const ExactlyFive = ({ content }: Props) => (
 					headlineSize="medium"
 					byline={content[1].byline}
 					showByline={content[1].showByline}
-					showQuotes={content[1].format.design === Design.Comment}
+					showQuotes={
+						content[1].format.design === Design.Comment ||
+						content[1].format.design === Design.Letter
+					}
 					webPublicationDate={content[1].webPublicationDate}
 					kickerText={content[1].kickerText}
 					showPulsingDot={content[1].isLiveBlog}
@@ -77,7 +83,8 @@ export const ExactlyFive = ({ content }: Props) => (
 							byline={content[2].byline}
 							showByline={content[2].showByline}
 							showQuotes={
-								content[2].format.design === Design.Comment
+								content[2].format.design === Design.Comment ||
+								content[2].format.design === Design.Letter
 							}
 							webPublicationDate={content[2].webPublicationDate}
 							kickerText={content[2].kickerText}
@@ -99,7 +106,8 @@ export const ExactlyFive = ({ content }: Props) => (
 							byline={content[3].byline}
 							showByline={content[3].showByline}
 							showQuotes={
-								content[3].format.design === Design.Comment
+								content[3].format.design === Design.Comment ||
+								content[3].format.design === Design.Letter
 							}
 							webPublicationDate={content[3].webPublicationDate}
 							kickerText={content[3].kickerText}
@@ -121,7 +129,8 @@ export const ExactlyFive = ({ content }: Props) => (
 							byline={content[4].byline}
 							showByline={content[4].showByline}
 							showQuotes={
-								content[4].format.design === Design.Comment
+								content[4].format.design === Design.Comment ||
+								content[4].format.design === Design.Letter
 							}
 							webPublicationDate={content[4].webPublicationDate}
 							kickerText={content[4].kickerText}

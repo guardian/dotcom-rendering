@@ -11,14 +11,14 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Analysis: CAPIType = {
+export const Letter: CAPIType = {
 	slotMachineFlags: '',
 	main:
-		'<figure class="element element-image" data-media-id="59ff93fd27eea2be66feecf0b9a7c0b98d12877a"> \n <img src="https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg" alt="The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters" width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.</span> \n  <span class="element-image__credit">Photograph: Peter Morrison/AP</span> \n </figcaption> \n</figure>',
+		'<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/world/ireland',
-			title: 'Ireland',
+			url: '/world/gender',
+			title: 'Gender',
 		},
 	],
 	commercialProperties: {
@@ -29,36 +29,16 @@ export const Analysis: CAPIType = {
 					value: 'uk',
 				},
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'k',
+					value: ['women', 'family', 'gender'],
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'tn',
+					value: ['letters'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'url',
-					value:
-						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
 				},
 				{
 					name: 'ct',
@@ -68,41 +48,29 @@ export const Analysis: CAPIType = {
 					name: 'p',
 					value: 'ng',
 				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/hx6ty',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'k',
+					value: ['women', 'family', 'gender'],
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'tn',
+					value: ['letters'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'url',
-					value:
-						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
 				},
 				{
 					name: 'ct',
@@ -116,41 +84,29 @@ export const Analysis: CAPIType = {
 					name: 'edition',
 					value: 'us',
 				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/hx6ty',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'k',
+					value: ['women', 'family', 'gender'],
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'tn',
+					value: ['letters'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'url',
-					value:
-						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
 				},
 				{
 					name: 'ct',
@@ -159,6 +115,14 @@ export const Analysis: CAPIType = {
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/hx6ty',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
 				},
 				{
 					name: 'edition',
@@ -169,12 +133,12 @@ export const Analysis: CAPIType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'k',
+					value: ['women', 'family', 'gender'],
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'tn',
+					value: ['letters'],
 				},
 				{
 					name: 'edition',
@@ -185,26 +149,6 @@ export const Analysis: CAPIType = {
 					value: ['0'],
 				},
 				{
-					name: 'url',
-					value:
-						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
-				},
-				{
 					name: 'ct',
 					value: 'article',
 				},
@@ -212,42 +156,42 @@ export const Analysis: CAPIType = {
 					name: 'p',
 					value: 'ng',
 				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/hx6ty',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 13 Feb 2020 10.21 GMT',
+		'Last modified on Mon 5 Apr 2021 18.36 BST',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
-		'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+		'Letters: <strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939',
 	subMetaKeywordLinks: [
 		{
-			url: '/politics/sinn-fein',
-			title: 'Sinn Féin',
+			url: '/lifeandstyle/women',
+			title: 'Women',
 		},
 		{
-			url: '/world/fine-gael',
-			title: 'Fine Gael',
+			url: '/lifeandstyle/family',
+			title: 'Family',
 		},
 		{
-			url: '/world/fianna-fail',
-			title: 'Fianna Fail',
-		},
-		{
-			url: '/world/europe-news',
-			title: 'Europe',
-		},
-		{
-			url: '/tone/explainers',
-			title: 'explainers',
+			url: '/tone/letters',
+			title: 'letters',
 		},
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/world/europe-news',
+		currentUrl: '/lifeandstyle/family',
 		pillars: [
 			{
 				title: 'News',
@@ -938,92 +882,81 @@ export const Analysis: CAPIType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 		],
-		currentNavLinkTitle: 'Europe',
-		currentPillarTitle: 'News',
+		currentNavLinkTitle: 'Family',
+		currentPillarTitle: 'Lifestyle',
 		subNavSections: {
-			parent: {
-				title: 'World',
-				url: '/world',
-				longTitle: 'World news',
-				children: [
-					{
-						title: 'Europe',
-						url: '/world/europe-news',
-					},
-					{
-						title: 'US',
-						url: '/us-news',
-						longTitle: 'US news',
-					},
-					{
-						title: 'Americas',
-						url: '/world/americas',
-					},
-					{
-						title: 'Asia',
-						url: '/world/asia',
-					},
-					{
-						title: 'Australia',
-						url: '/australia-news',
-						longTitle: 'Australia news',
-					},
-					{
-						title: 'Middle East',
-						url: '/world/middleeast',
-					},
-					{
-						title: 'Africa',
-						url: '/world/africa',
-					},
-					{
-						title: 'Inequality',
-						url: '/inequality',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-				],
-			},
 			links: [
 				{
-					title: 'Europe',
-					url: '/world/europe-news',
+					title: 'Fashion',
+					url: '/fashion',
 				},
 				{
-					title: 'US',
-					url: '/us-news',
-					longTitle: 'US news',
+					title: 'Food',
+					url: '/food',
 				},
 				{
-					title: 'Americas',
-					url: '/world/americas',
+					title: 'Recipes',
+					url: '/tone/recipes',
 				},
 				{
-					title: 'Asia',
-					url: '/world/asia',
+					title: 'Love & sex',
+					url: '/lifeandstyle/love-and-sex',
 				},
 				{
-					title: 'Australia',
-					url: '/australia-news',
-					longTitle: 'Australia news',
+					title: 'Home & garden',
+					url: '/lifeandstyle/home-and-garden',
 				},
 				{
-					title: 'Middle East',
-					url: '/world/middleeast',
+					title: 'Health & fitness',
+					url: '/lifeandstyle/health-and-wellbeing',
 				},
 				{
-					title: 'Africa',
-					url: '/world/africa',
+					title: 'Family',
+					url: '/lifeandstyle/family',
 				},
 				{
-					title: 'Inequality',
-					url: '/inequality',
+					title: 'Travel',
+					url: '/travel',
+					children: [
+						{
+							title: 'US',
+							url: '/travel/usa',
+						},
+						{
+							title: 'Europe',
+							url: '/travel/europe',
+						},
+						{
+							title: 'UK',
+							url: '/travel/uk',
+						},
+					],
 				},
 				{
-					title: 'Global development',
-					url: '/global-development',
+					title: 'Money',
+					url: '/money',
+					children: [
+						{
+							title: 'Property',
+							url: '/money/property',
+						},
+						{
+							title: 'Pensions',
+							url: '/money/pensions',
+						},
+						{
+							title: 'Savings',
+							url: '/money/savings',
+						},
+						{
+							title: 'Borrowing',
+							url: '/money/debt',
+						},
+						{
+							title: 'Careers',
+							url: '/money/work-and-careers',
+						},
+					],
 				},
 			],
 		},
@@ -1081,77 +1014,59 @@ export const Analysis: CAPIType = {
 		},
 	},
 	author: {
-		byline: 'Rory Carroll Ireland correspondent',
-		twitterHandle: 'rorycarroll72',
+		byline: 'Letters',
 	},
-	designType: 'Analysis',
+	designType: 'Comment',
 	editionId: 'UK',
 	format: {
-		design: 'AnalysisDesign',
+		design: 'LetterDesign',
 		theme: 'NewsPillar',
 		display: 'StandardDisplay',
 	},
 	standfirst:
-		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
+		'<p><strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939</p>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-		'article:author': 'https://www.theguardian.com/profile/rorycarroll',
+			'http://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+		'article:author': 'Letters',
 		'og:image:height': '720',
 		'og:description':
-			'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+			'Letters: Rosemary Johnson and Margaret Davis reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while Brian Saperia looks back to 1939',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
+			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=dcd621765221570f91e3ac722f3a4b02',
 		'al:ios:url':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=applinks',
+			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'World news',
-		'article:published_time': '2020-02-10T12:31:25.000Z',
-		'og:title': 'Irish general election: who won and what happens now?',
+		'article:published_time': '2021-04-05T16:04:21.000Z',
+		'og:title': 'Why is a woman’s work never done? | Letters',
 		'fb:app_id': '180444840287',
-		'article:tag':
-			'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
+		'article:tag': 'Gender,Women,Family',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-13T10:21:28.000Z',
+		'article:modified_time': '2021-04-05T17:36:25.000Z',
 	},
-	sectionUrl: 'world/ireland',
-	pageId:
-		'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+	sectionUrl: 'world/gender',
+	pageId: 'world/2021/apr/05/why-is-a-womans-work-never-done',
 	version: 3,
 	tags: [
 		{
-			id: 'world/ireland',
+			id: 'world/gender',
 			type: 'Keyword',
-			title: 'Ireland',
+			title: 'Gender',
 		},
 		{
-			id: 'politics/sinn-fein',
+			id: 'lifeandstyle/women',
 			type: 'Keyword',
-			title: 'Sinn Féin',
+			title: 'Women',
 		},
 		{
-			id: 'world/fine-gael',
+			id: 'lifeandstyle/family',
 			type: 'Keyword',
-			title: 'Fine Gael',
-		},
-		{
-			id: 'world/fianna-fail',
-			type: 'Keyword',
-			title: 'Fianna Fail',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
-		},
-		{
-			id: 'world/europe-news',
-			type: 'Keyword',
-			title: 'Europe',
+			title: 'Family',
 		},
 		{
 			id: 'type/article',
@@ -1159,22 +1074,9 @@ export const Analysis: CAPIType = {
 			title: 'Article',
 		},
 		{
-			id: 'tone/explainers',
+			id: 'tone/letters',
 			type: 'Tone',
-			title: 'Explainers',
-		},
-		{
-			id: 'tone/analysis',
-			type: 'Tone',
-			title: 'Analysis',
-		},
-		{
-			id: 'profile/rorycarroll',
-			type: 'Contributor',
-			title: 'Rory Carroll',
-			twitterHandle: 'rorycarroll72',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/10/09/Rory-Carroll,-L.png?width=300&quality=85&auto=format&fit=max&s=149d14183d07b7c04e04798e0edbc5e4',
+			title: 'Letters',
 		},
 		{
 			id: 'publication/theguardian',
@@ -1182,27 +1084,27 @@ export const Analysis: CAPIType = {
 			title: 'The Guardian',
 		},
 		{
-			id: 'theguardian/mainsection',
+			id: 'theguardian/journal',
 			type: 'NewspaperBook',
-			title: 'Main section',
+			title: 'Journal',
 		},
 		{
-			id: 'theguardian/mainsection/uknews',
+			id: 'theguardian/journal/letters',
 			type: 'NewspaperBookSection',
-			title: 'UK news',
+			title: 'Letters',
 		},
 		{
-			id: 'tracking/commissioningdesk/uk-foreign',
+			id: 'tracking/commissioningdesk/uk-letters-and-leader-writers',
 			type: 'Tracking',
-			title: 'UK Foreign',
+			title: 'UK Letters and Leader Writers',
 		},
 	],
 	pillar: 'news',
 	webURL:
-		'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+		'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Ireland',
+	sectionLabel: 'Gender',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1362,19 +1264,18 @@ export const Analysis: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=a8472a00c286382a50660ee970061b0f',
+			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=c2fa1bf478107e8638d4ec680e498e54',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
+			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@rorycarroll72',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'guardian://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 		'twitter:app:url:iphone':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
+			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
 	},
 	sectionName: 'world',
 	pageType: {
@@ -1386,9 +1287,9 @@ export const Analysis: CAPIType = {
 		isPreview: false,
 		isSensitive: false,
 	},
-	hasStoryPackage: true,
+	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Irish general election: who won and what happens now?',
+	headline: 'Why is a woman’s work never done?',
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
@@ -1397,80 +1298,67 @@ export const Analysis: CAPIType = {
 					{
 						index: 0,
 						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
+							height: '797',
 							width: '1000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg',
+							'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg',
 					},
 					{
-						index: 2,
+						index: 1,
 						fields: {
-							height: '300',
+							height: '398',
 							width: '500',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/500.jpg',
+							'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/500.jpg',
 					},
 					{
-						index: 3,
+						index: 2,
 						fields: {
-							height: '84',
+							height: '112',
 							width: '140',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/140.jpg',
+							'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/140.jpg',
+					},
+					{
+						index: 3,
+						fields: {
+							height: '1569',
+							width: '1969',
+						},
+						mediaType: 'Image',
+						mimeType: 'image/jpeg',
+						url:
+							'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1969.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							height: '4032',
-							width: '6720',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/6720.jpg',
-					},
-					{
-						index: 5,
-						fields: {
 							isMaster: 'true',
-							height: '4032',
-							width: '6720',
+							height: '1569',
+							width: '1969',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
+							'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
 					},
 				],
 			},
 			data: {
-				copyright:
-					'Copyright 2020 The Associated Press. All rights reserved.',
 				alt:
-					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
+					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
 				caption:
-					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
-				credit: 'Photograph: Peter Morrison/AP',
+					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
+				credit: 'Photograph: taken from picture library',
 			},
 			displayCredit: true,
 			role: 'inline',
@@ -1480,32 +1368,32 @@ export const Analysis: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=85&auto=format&fit=max&s=cc188c8396f61ae2916c19a4cfa12a05',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=605&quality=85&auto=format&fit=max&s=523408d4a75b2461b54276f9f7c47b51',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=66dd7a4f13d86c97778c9fa7d52e647e',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9cec40a73aab51303b5de42fccc6624f',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=85&auto=format&fit=max&s=ac2ee35ac7540f554e180dc5c51b3d2f',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=445&quality=85&auto=format&fit=max&s=5d923c2dee1cacd4171fd07d292a49a6',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1a3d769852837e2faeec4d379bc82ff5',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0ef67ab59f237c7d3a5c711d2f9b7eb5',
 							width: 890,
 						},
 					],
@@ -1515,22 +1403,22 @@ export const Analysis: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=140&quality=85&auto=format&fit=max&s=e73b198f09a07f44c6adb4d687a455bc',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=140&quality=85&auto=format&fit=max&s=315a58a7e4268057744bbd81fec0faca',
 							width: 140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=ea9e4f3301aacf1060413139c41e8b9a',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b9d41a0f55da571db68c731b18c2a0b1',
 							width: 280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=120&quality=85&auto=format&fit=max&s=5199bb01f74208dde6aaec45efacc4b4',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=120&quality=85&auto=format&fit=max&s=e7efc626212727e051a6d6868bfce282',
 							width: 120,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=ecc80ab50f005228601b307db36c32ac',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=07f8a8608fa333a735355acd28000231',
 							width: 240,
 						},
 					],
@@ -1540,52 +1428,52 @@ export const Analysis: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=380&quality=85&auto=format&fit=max&s=aa33e1a591767b4fe57d0fb8c4d6e9db',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=380&quality=85&auto=format&fit=max&s=55750953e119bd634ae70e82594c00d2',
 							width: 380,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=8b325240bcdb2b6ec9ae37e0644075c4',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=ac5813c3fbd208964c909943713e3a98',
 							width: 760,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=300&quality=85&auto=format&fit=max&s=2dbb1a5fdf930b6697c09e06de34bdde',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=300&quality=85&auto=format&fit=max&s=b1d004fcf4a24193a0a23c9062543884',
 							width: 300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e4fbee8d64bf9dbac96c6bd09f195611',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e394898ac67de3b4032791b3ec26ea33',
 							width: 600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=85&auto=format&fit=max&s=cc188c8396f61ae2916c19a4cfa12a05',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=605&quality=85&auto=format&fit=max&s=523408d4a75b2461b54276f9f7c47b51',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=66dd7a4f13d86c97778c9fa7d52e647e',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9cec40a73aab51303b5de42fccc6624f',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=85&auto=format&fit=max&s=ac2ee35ac7540f554e180dc5c51b3d2f',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=445&quality=85&auto=format&fit=max&s=5d923c2dee1cacd4171fd07d292a49a6',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1a3d769852837e2faeec4d379bc82ff5',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0ef67ab59f237c7d3a5c711d2f9b7eb5',
 							width: 890,
 						},
 					],
@@ -1595,72 +1483,72 @@ export const Analysis: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=85&auto=format&fit=max&s=c57f8ebe5a46216266ad61f68760d728',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=85&auto=format&fit=max&s=01977e915850756ef009921e35451689',
 							width: 1020,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=4caf16ea11bc11f8cd36d708ad693fc7',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=7db29d90d0358e8a4aa7011da6547d92',
 							width: 2040,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=85&auto=format&fit=max&s=f1fe8cae541632aa81b6bf041c0f0bc8',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=85&auto=format&fit=max&s=c54597c69361d189cbea06a6b5bc5e06',
 							width: 940,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=2f3ac8a7d5ccde1e6bd97f274cb969e7',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=4b92d2d3876eacf153fc898762e34892',
 							width: 1880,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
 							width: 700,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
 							width: 1400,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=85&auto=format&fit=max&s=0e27793c5d46a0d77625b8f714dada4f',
 							width: 660,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bdd2ed73acbd2b05e31c5a46086bf6ac',
 							width: 1320,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
 							width: 930,
 						},
 					],
@@ -1670,32 +1558,32 @@ export const Analysis: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
 							width: 620,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
 							width: 1240,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=85&auto=format&fit=max&s=cc188c8396f61ae2916c19a4cfa12a05',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=605&quality=85&auto=format&fit=max&s=523408d4a75b2461b54276f9f7c47b51',
 							width: 605,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=66dd7a4f13d86c97778c9fa7d52e647e',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9cec40a73aab51303b5de42fccc6624f',
 							width: 1210,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=85&auto=format&fit=max&s=ac2ee35ac7540f554e180dc5c51b3d2f',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=445&quality=85&auto=format&fit=max&s=5d923c2dee1cacd4171fd07d292a49a6',
 							width: 445,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1a3d769852837e2faeec4d379bc82ff5',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0ef67ab59f237c7d3a5c711d2f9b7eb5',
 							width: 890,
 						},
 					],
@@ -1705,241 +1593,116 @@ export const Analysis: CAPIType = {
 					srcSet: [
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=85&auto=format&fit=max&s=6fe8456e8f8e556969cf0e81b12519c3',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=85&auto=format&fit=max&s=ae5e780efa6b0cb123859e6ac313bdfe',
 							width: 1300,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8f1f1cd318caa33147a222f2925cffa0',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=f87640448b719826caeb1bc3309f4d3b',
 							width: 2600,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=85&auto=format&fit=max&s=67cc1c1f38c58d7b7ca441c22f6d3e7e',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=85&auto=format&fit=max&s=b8f9a9f85ddb9a2104e438c9a3a573dd',
 							width: 1140,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=837af7b12f2f8f6aca7caa166623628f',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=ced4a9dd31c246dc579f0ad358b8dee8',
 							width: 2280,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1125&quality=85&auto=format&fit=max&s=c2ff0c1478992418065b7ee89e7974da',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1125&quality=85&auto=format&fit=max&s=247a0e51131502fc06ee399293af001d',
 							width: 1125,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=6bc47f54b8ae4326649f76ea1f0111ee',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=f48a34b4c044fd087f143816d638440c',
 							width: 2250,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=965&quality=85&auto=format&fit=max&s=17e94c96e1acaaf89d725a107fe4c7fa',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=965&quality=85&auto=format&fit=max&s=c2609818c8065f564cefa634494ebd6c',
 							width: 965,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=be660e54ffcdb8da6552a3f1d21480f8',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=ad8d80b267e268674f419c786bcd96e9',
 							width: 1930,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=725&quality=85&auto=format&fit=max&s=407a75cc86bc3f46d8901475e3287991',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=725&quality=85&auto=format&fit=max&s=1b8fb7c2fac8b3efedbdc729ff9ca60d',
 							width: 725,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=1ea0389d8576fdcd9ffa194678b25b47',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=c0a82ac6d696a0734089d543b31d643b',
 							width: 1450,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
 							width: 645,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
 							width: 1290,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
 							width: 465,
 						},
 						{
 							src:
-								'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
+								'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
 							width: 930,
 						},
 					],
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'bc18ea1f-c88a-4862-a53f-42ad659a030e',
+			elementId: 'e52636a9-1973-424f-8765-e393e198fb2f',
 		},
 	],
-	webPublicationDate: '2020-02-10T12:31:25.000Z',
+	webPublicationDate: '2021-04-05T16:04:21.000Z',
 	blocks: [
 		{
-			id: '5e413c398f0811db2faf4cdd',
+			id: '5e74b1928f089367b3d0b644',
 			elements: [
 				{
-					html: '<h2>Who won Ireland’s general election?</h2>',
+					html:
+						'<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
 					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					elementId: '818d8da5-34a8-4c28-b3c3-e19acf656100',
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c43eac35-ff08-45b0-924f-d775ec407bd3',
 				},
 				{
 					html:
-						'<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
+						'<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '7bdc0207-50ef-441b-9e4b-acee6227431c',
+					elementId: 'd8e6bfdc-0324-4c75-a140-f1bf7948c800',
 				},
 				{
 					html:
-						'<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
+						'<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ce7ba71a-7048-4d00-b81b-a836d8a069e9',
-				},
-				{
-					url:
-						'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
-					text: 'Ireland election: latest results',
-					prefix: 'Related: ',
-					role: 'thumbnail',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					elementId: 'faa99eb7-91e1-4fd3-8257-7b8853b5a5e8',
-				},
-				{
-					html:
-						'<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0ce13deb-f190-42e6-becd-8cc18e2dbd84',
-				},
-				{
-					html: '<h2>Was Sinn Féin’s success a surprise?</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					elementId: '141d2920-5002-4f90-b679-06c4568183c1',
-				},
-				{
-					html:
-						'<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '16ec555e-c4b4-410d-b66a-402efdb6e664',
-				},
-				{
-					html: '<h2>Is Varadkar going to lose power?</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					elementId: '78cb1bce-7bbd-4ed9-808f-2c1e6500142b',
-				},
-				{
-					html:
-						'<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '15746af6-eba4-4d5d-b1d6-18ba2029a3f7',
-				},
-				{
-					id: '95c8ba09-ecce-4bfa-9140-a262990fbdce',
-					title: 'What are the main political parties in Ireland?',
-					html:
-						'<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
-					credit: '',
-					_type: 'model.dotcomrendering.pageElements.QABlockElement',
-					elementId: 'b3d31d55-1b3d-4af6-966b-b136ba90469f',
-				},
-				{
-					html: '<h2>Why did Sinn Féin do so well?</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					elementId: 'b3156029-5fff-46f9-8f97-aabc19e931fe',
-				},
-				{
-					html:
-						'<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '3e907802-bdfa-435b-9010-bb660e3167c9',
-				},
-				{
-					html:
-						'<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a24f2466-bd09-443d-a2f2-1c420ef32826',
-				},
-				{
-					html: '<h2>What happens next?</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					elementId: '8a5837f4-9fa3-4480-90bd-90ddea78e880',
-				},
-				{
-					html:
-						'<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'beb5dc80-0a70-4aee-ac20-79c378bef870',
-				},
-				{
-					html:
-						'<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '755a0e26-d3d3-49e5-be84-02ba42704f4a',
-				},
-				{
-					html:
-						'<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'cce03a5c-0081-4414-b08b-cfabd79b281b',
-				},
-				{
-					html:
-						'<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'db9efac7-2810-4faf-8501-c8025f0bb325',
-				},
-				{
-					html:
-						'<p>One plausible outcome: deadlock, and another election.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '7907ffec-9296-4551-b1be-c396c126a0f7',
-				},
-				{
-					html: '<p><strong>Read more</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c7c0d365-80b4-415e-83df-a1fa7486a2e3',
-				},
-				{
-					html:
-						'<p><a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald: Sinn Féin leader who may play Dublin kingmaker</a><br><a href="https://www.theguardian.com/world/2020/feb/08/sinn-fein-on-election-day-shane-obrien">‘It’s a sea change’: Sinn Féin dares to dream on election day</a><br><a href="https://www.theguardian.com/commentisfree/2020/jan/31/sinn-fein-ireland-left-election-ira">Opinion: Can Sinn Féin’s young voters finally pull Ireland to the left?</a><br><a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">The Varadkar paradox: feted abroad, can PM arrest polls slump in Ireland?</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'facc6b9f-264e-4776-ba9d-dead42c0be19',
+					elementId: 'a16da90f-e129-4038-9e6b-877a94ac020b',
 				},
 			],
-			blockCreatedOn: 1581333561000,
-			blockCreatedOnDisplay: '11.19 GMT',
-			blockLastUpdated: 1581377261000,
-			blockLastUpdatedDisplay: '23.27 GMT',
-			blockFirstPublished: 1581333562000,
-			blockFirstPublishedDisplay: '11.19 GMT',
-			primaryDateLine: 'Mon 10 Feb 2020 12.31 GMT',
-			secondaryDateLine: 'Last modified on Thu 13 Feb 2020 10.21 GMT',
+			blockCreatedOn: 1584705938000,
+			blockCreatedOnDisplay: '12.05 GMT',
+			blockLastUpdated: 1617631119000,
+			blockLastUpdatedDisplay: '14.58 BST',
+			blockFirstPublished: 1617631111000,
+			blockFirstPublishedDisplay: '14.58 BST',
+			primaryDateLine: 'Mon 5 Apr 2021 17.04 BST',
+			secondaryDateLine: 'Last modified on Mon 5 Apr 2021 18.36 BST',
 		},
 	],
 	linkedData: [
@@ -1947,7 +1710,7 @@ export const Analysis: CAPIType = {
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				'https://amp.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1974,39 +1737,38 @@ export const Analysis: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=ba485dba18852475fb1d5dd00b53b972',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=6af71c15d6d5a2b9786dba8fbce11dd7',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&quality=85&auto=format&fit=max&s=8bce617f8e49c9291611c693c259264c',
+				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=dcd621765221570f91e3ac722f3a4b02',
+				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=39389ef31ece58316e6c3e82452d88f1',
+				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=fe6ceca60281b25ca63d71a1cdd110dd',
+				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&quality=85&auto=format&fit=max&s=962bb541216e2a5117b6b71475778ad8',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Rory Carroll',
-					sameAs: 'https://www.theguardian.com/profile/rorycarroll',
+					name: 'Guardian staff reporter',
 				},
 			],
-			datePublished: '2020-02-10T12:31:25.000Z',
-			headline: 'Irish general election: who won and what happens now?',
-			dateModified: '2020-02-13T10:21:28.000Z',
+			datePublished: '2021-04-05T16:04:21.000Z',
+			headline: 'Why is a woman’s work never done?',
+			dateModified: '2021-04-05T17:36:25.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					'android-app://com.guardian/https/www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Mon 10 Feb 2020 12.31 GMT',
+	webPublicationDateDisplay: 'Mon 5 Apr 2021 17.04 BST',
 	shouldHideAds: false,
-	webTitle: 'Irish general election: who won and what happens now?',
+	webTitle: 'Why is a woman’s work never done? | Letters',
 	isSpecialReport: false,
 	isCommentable: false,
 	keyEvents: [],

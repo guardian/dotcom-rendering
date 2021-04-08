@@ -11,6 +11,7 @@ import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
 import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Letter } from '@root/fixtures/generated/articles/Letter';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
@@ -128,6 +129,12 @@ export const EditorialStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 EditorialStory.story = { name: 'Editorial' };
+
+export const LetterStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Letter);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LetterStory.story = { name: 'Letter' };
 
 export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Interview);

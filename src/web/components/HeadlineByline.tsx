@@ -130,6 +130,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 						</div>
 					);
 				case Design.Editorial:
+				case Design.Letter:
 				case Design.Comment:
 					return (
 						<div
