@@ -810,10 +810,6 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 		case ElementKind.MediaAtom:
 			return mediaAtomRenderer(format, element);
 
-		case ElementKind.KnowledgeQuizAtom:
-		case ElementKind.PersonalityQuizAtom:
-			return quizAtomRenderer(format, element);
-
 		default:
 			return null;
 	}

@@ -619,16 +619,6 @@ describe('Renders different types of Editions elements', () => {
 		);
 	});
 
-	test('ElementKind.KnowledgeQuizAtom', () => {
-		const nodes = renderEditions(knowledgeQuizAtom());
-		const quiz = nodes.flat()[0];
-		const html = getHtml(quiz);
-		expect(html).toContain('<div class="js-quiz">');
-		expect(html).toContain(
-			'<script class="js-quiz-params" type="application/json">',
-		);
-	});
-
 	function testHandlers(node: ReactNode): void {
 		if (isValidElement(node)) {
 			const container = document.createElement('div');
