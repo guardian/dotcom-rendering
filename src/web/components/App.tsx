@@ -790,6 +790,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={document.source}
 						sourceDomain={document.sourceDomain}
 						abTests={CAPI.config.abTests}
+						isPreview={CAPI.config.isPreview}
 					>
 						<DocumentBlockComponent
 							embedUrl={document.embedUrl}
@@ -810,6 +811,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
 							abTests={CAPI.config.abTests}
+							isPreview={CAPI.config.isPreview}
 						>
 							<EmbedBlockComponent
 								html={embed.html}
@@ -828,6 +830,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 									`iframe[name="unsafe-embed-${index}"]`,
 								)
 							}
+							isPreview={CAPI.config.isPreview}
 						>
 							<UnsafeEmbedBlockComponent
 								key={embed.elementId}
@@ -852,6 +855,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 								`iframe[name="instagram-embed-${index}"]`,
 							)
 						}
+						isPreview={CAPI.config.isPreview}
 					>
 						<InstagramBlockComponent
 							element={insta}
@@ -868,6 +872,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={map.source}
 						sourceDomain={map.sourceDomain}
 						abTests={CAPI.config.abTests}
+						isPreview={CAPI.config.isPreview}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -890,6 +895,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={spotify.source}
 						sourceDomain={spotify.sourceDomain}
 						abTests={CAPI.config.abTests}
+						isPreview={CAPI.config.isPreview}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotify.embedUrl}
@@ -912,6 +918,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={facebookVideo.source}
 						sourceDomain={facebookVideo.sourceDomain}
 						abTests={CAPI.config.abTests}
+						isPreview={CAPI.config.isPreview}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -936,6 +943,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 						source={vine.source}
 						sourceDomain={vine.sourceDomain}
 						abTests={CAPI.config.abTests}
+						isPreview={CAPI.config.isPreview}
 					>
 						<VineBlockComponent element={vine} />
 					</ClickToView>

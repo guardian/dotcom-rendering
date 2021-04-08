@@ -65,6 +65,7 @@ type Props = {
 	isMainMedia?: boolean;
 	isLiveBlog?: boolean;
 	starRating?: number;
+	isPreview: boolean;
 };
 
 export const ElementRenderer = ({
@@ -79,6 +80,7 @@ export const ElementRenderer = ({
 	isMainMedia,
 	isLiveBlog,
 	starRating,
+	isPreview,
 }: Props) => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -190,6 +192,7 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
+						isPreview={isPreview}
 					>
 						<DocumentBlockComponent
 							embedUrl={element.embedUrl}
@@ -231,6 +234,7 @@ export const ElementRenderer = ({
 							source={element.source}
 							sourceDomain={element.sourceDomain}
 							abTests={abTests}
+							isPreview={isPreview}
 						>
 							<UnsafeEmbedBlockComponent
 								key={index}
@@ -255,6 +259,7 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
+						isPreview={isPreview}
 					>
 						<EmbedBlockComponent
 							key={index}
@@ -347,6 +352,7 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
+						isPreview={isPreview}
 					>
 						<InstagramBlockComponent
 							key={index}
@@ -398,6 +404,7 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
+						isPreview={isPreview}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -545,6 +552,7 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
+						isPreview={isPreview}
 					>
 						<SpotifyBlockComponent
 							embedUrl={element.embedUrl}
@@ -624,6 +632,7 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
+						isPreview={isPreview}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -690,6 +699,7 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 						abTests={abTests}
+						isPreview={isPreview}
 					>
 						<VineBlockComponent element={element} />
 					</ClickToView>
