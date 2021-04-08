@@ -629,15 +629,6 @@ describe('Renders different types of Editions elements', () => {
 		);
 	});
 
-	test('ElementKind.AudioAtom', () => {
-		const nodes = renderEditions(audioAtom());
-		const audio = nodes.flat()[0];
-		const html = getHtml(audio);
-		expect(html).toContain(
-			'<div kind="17" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
-		);
-	});
-
 	function testHandlers(node: ReactNode): void {
 		if (isValidElement(node)) {
 			const container = document.createElement('div');
