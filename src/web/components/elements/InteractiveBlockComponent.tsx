@@ -277,20 +277,20 @@ export const InteractiveBlockComponent = ({
 				className={wrapperStyle(role, loaded)}
 			>
 				{!loaded && (
-					<Placeholder
-						height={decideHeight(role)}
-						shouldShimmer={false}
-					/>
-				)}
-				{!loaded && (
-					<a
-						ref={placeholderLinkRef}
-						data-name="placeholder"
-						className={placeholderLinkStyle}
-						href={url}
-					>
-						{alt}
-					</a>
+					<>
+						<Placeholder
+							height={decideHeight(role)}
+							shouldShimmer={false}
+						/>
+						<a
+							ref={placeholderLinkRef}
+							data-name="placeholder"
+							className={placeholderLinkStyle}
+							href={url}
+						>
+							{alt}
+						</a>
+					</>
 				)}
 			</div>
 			{caption && (
