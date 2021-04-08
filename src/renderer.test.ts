@@ -543,14 +543,6 @@ describe('Renders different types of Editions elements', () => {
 		);
 	});
 
-	test('ElementKind.Audio', () => {
-		const nodes = renderEditions(audioElement);
-		const audio = nodes.flat()[0];
-		expect(getHtml(audio)).toContain(
-			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
-		);
-	});
-
 	test('ElementKind.Video', () => {
 		const nodes = renderEditions(videoElement);
 		const video = nodes.flat()[0];

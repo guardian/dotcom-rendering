@@ -13,22 +13,23 @@ import type { FC } from 'react';
 
 interface Props {
 	embed: Embed;
+	editions?: boolean;
 }
 
 /**
  * Handles rendering of all third-party embeds.
  * See the `Embed` type for more information.
  */
-const EmbedComponent: FC<Props> = ({ embed }) => {
+const EmbedComponent: FC<Props> = ({ embed, editions }) => {
 	switch (embed.kind) {
 		case EmbedKind.Spotify:
-			return (
+			return !editions ? (
 				<Audio
 					src={embed.src}
 					width={embed.width}
 					height={embed.height}
 				/>
-			);
+			) : null;
 
 		case EmbedKind.YouTube:
 			return (

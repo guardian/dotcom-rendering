@@ -784,7 +784,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 			return h(Tweet, { content: element.content, format, key });
 
 		case ElementKind.Embed:
-			return h(EmbedComponent, { embed: element.embed });
+			return h(EmbedComponent, { embed: element.embed, editions: true });
 
 		case ElementKind.ExplainerAtom:
 			return h(ExplainerAtom, { ...element });
