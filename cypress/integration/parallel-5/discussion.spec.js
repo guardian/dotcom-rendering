@@ -29,9 +29,8 @@ describe('Discussion', function () {
 	it('should expand the comments when the view more button is clicked', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
 		const roughLoadPositionOfComments = 4000;
-		cy.scrollTo(0, roughLoadPositionOfComments, { duration: 3000 });
-		cy.contains('View more comments');
-		cy.contains('View more comments').click();
+		cy.scrollTo(0, roughLoadPositionOfComments, { duration: 500 });
+		cy.contains('View more comments').click({ force: true });
 		cy.contains('Displaying threads');
 	});
 
