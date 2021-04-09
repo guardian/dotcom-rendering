@@ -92,6 +92,7 @@ const getStyles = (item: Item): SerializedStyles => {
 	switch (item.design) {
 		case Design.Review:
 		case Design.Feature:
+		case Design.Letter:
 		case Design.Comment:
 			return css(styles, thinHeadline);
 		case Design.Media:

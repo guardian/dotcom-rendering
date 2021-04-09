@@ -91,6 +91,11 @@ interface Comment extends Fields {
 	body: Body;
 }
 
+interface Letter extends Fields {
+	design: Design.Letter;
+	body: Body;
+}
+
 interface Interactive extends Fields {
 	design: Design.Interactive;
 	body: Body;
@@ -99,11 +104,21 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-	design: Exclude<Design, Design.LiveBlog | Design.Review | Design.Comment>;
+	design: Exclude<
+		Design,
+		Design.LiveBlog | Design.Review | Design.Comment | Design.Letter
+	>;
 	body: Body;
 }
 
-type Item = Liveblog | Review | Comment | Standard | Interactive | MatchReport;
+type Item =
+	| Liveblog
+	| Review
+	| Comment
+	| Standard
+	| Interactive
+	| MatchReport
+	| Letter;
 
 // ----- Convenience Types ----- //
 
@@ -244,7 +259,9 @@ const isReview = hasSomeTag([
 
 const isAnalysis = hasTag('tone/analysis');
 
-const isComment = hasSomeTag(['tone/comment', 'tone/letters']);
+const isLetter = hasTag('tone/letters');
+
+const isComment = hasTag('tone/comment');
 
 const isFeature = hasTag('tone/features');
 
@@ -302,6 +319,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isAnalysis(tags)) {
 		return {
 			design: Design.Analysis,
+			...itemFieldsWithBody(context, request),
+		};
+	} else if (isLetter(tags)) {
+		return {
+			design: Design.Letter,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isComment(tags)) {
@@ -368,6 +390,7 @@ export {
 	Standard,
 	MatchReport,
 	ResizedRelatedContent,
+	Letter,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,

@@ -21,7 +21,7 @@ import RelatedContent from 'components/shared/relatedContent';
 import Tags from 'components/shared/tags';
 import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
-import type { Comment as CommentItem } from 'item';
+import type { Comment as CommentItem, Letter } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -68,7 +68,7 @@ const commentLineStylePosition = css`
 `;
 
 interface Props {
-	item: CommentItem;
+	item: CommentItem | Letter;
 	children: ReactNode[];
 }
 

@@ -124,6 +124,7 @@ const getStyles = (format: Format): SerializedStyles => {
 			);
 		case Design.Feature:
 			return css(styles(format), featureStyles, fontSizeRestriction);
+		case Design.Letter:
 		case Design.Comment:
 			return css(styles(format), commentStyles, fontSizeRestriction);
 		case Design.Media:
