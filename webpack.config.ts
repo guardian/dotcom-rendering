@@ -34,8 +34,11 @@ class LaunchServerPlugin {
 
 // ----- Shared Config ----- //
 
-function resolve(loggerName: string): ResolveOptions {
-	return {
+function resolve(
+	loggerName: string,
+	isClient: boolean = false,
+): ResolveOptions {
+	const resolveOptions: ResolveOptions = {
 		extensions: ['.ts', '.tsx', '.js'],
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
 		alias: {
@@ -54,12 +57,21 @@ function resolve(loggerName: string): ResolveOptions {
 			// `react-dom/server`, and for DCR to alias that to `preact-render-to-string`.
 			// Then we can get rid of this line.
 			'preact-render-to-string': 'react-dom/server',
-			// Webpack 5 removed a lot of the nodejs polyfills including Buffer
-			// We rely on Buffer for our thrift client/server
-			Buffer: 'buffer',
 		},
 	};
+
+	// Webpack 5 removed a lot of the nodejs polyfills including Buffer
+	// We rely on Buffer for our bridget thrift client
+	if (isClient) {
+		resolveOptions.alias = { ...resolveOptions.alias, Buffer: 'buffer' };
+	}
+
+	return resolveOptions;
 }
+
+const serverResolve = resolve('server');
+const clientResolveDev = resolve('clientDev', true);
+const clientResolveProd = resolve('clientProd', true);
 
 // ----- Configs ----- //
 
@@ -102,7 +114,7 @@ const serverConfig = (
 		watchOptions: {
 			ignored: /node_modules/,
 		},
-		resolve: resolve('server'),
+		resolve: serverResolve,
 		plugins: plugins,
 		module: {
 			rules: [
@@ -161,7 +173,7 @@ export const clientConfig: Configuration = {
 			Buffer: ['buffer', 'Buffer'],
 		}),
 	],
-	resolve: resolve('clientDev'),
+	resolve: clientResolveDev,
 	devServer: {
 		publicPath: '/assets/',
 		proxy: {
@@ -250,7 +262,7 @@ const clientConfigProduction = {
 		path: path.resolve(__dirname, 'dist/assets'),
 		filename: '[name].[contenthash].js',
 	},
-	resolve: resolve('clientProd'),
+	resolve: clientResolveProd,
 };
 
 // ----- Exports ----- //
