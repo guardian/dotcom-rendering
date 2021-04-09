@@ -158,9 +158,10 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 				if (nextCaption) elements.splice(i, 1);
 				break;
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
+				const caption = getCaption(element);
 				if (buffer.length === 0) {
 					// If there are no images in the buffer, pass it through
-					if (getCaption(element)) {
+					if (caption) {
 						enhanced.push({
 							_type:
 								'model.dotcomrendering.pageElements.CaptionBlockElement',
@@ -174,12 +175,12 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 				}
 
 				processBuffer({
+					caption,
 					bufferToProcess: buffer,
-					caption: getCaption(element),
 					title: nextTitle,
 				});
 				// If this text block block wasn't a caption, pass it through
-				if (!getCaption(element)) enhanced.push(element);
+				if (!caption) enhanced.push(element);
 				// If we extracted the title from the next element, remove it
 				if (nextTitle) elements.splice(i, 1);
 				break;
