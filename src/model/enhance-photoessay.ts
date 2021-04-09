@@ -1,8 +1,8 @@
 import { JSDOM } from 'jsdom';
 
 const getCaption = (element?: TextBlockElement): string => {
+	// Checks if this element is a 'caption' based on the convention: <ul><li><Caption text</li></ul>
 	if (!element) return '';
-	// An essay caption: <ul><li><Caption text</li></ul>
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstChild || !frag.firstElementChild) return '';
 	const hasULwrapper = frag.firstChild.nodeName === 'UL';
@@ -15,8 +15,8 @@ const getCaption = (element?: TextBlockElement): string => {
 };
 
 const getTitle = (element?: SubheadingBlockElement): string => {
+	// Checks if this element is a 'title' based on the convention: <h2>Title text</h2>
 	if (!element) return '';
-	// An essay title: <h2>Title text</h2>
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstChild) return '';
 	const isH2tag = frag.firstChild.nodeName === 'H2';
