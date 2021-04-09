@@ -173,13 +173,6 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 					break;
 				}
 
-				if (buffer.length === 0 && getCaption(element)) {
-					// If this text block isn't a caption and there are no images
-					// in the buffer, pass it through
-					enhanced.push(element);
-					break;
-				}
-
 				processBuffer({
 					bufferToProcess: buffer,
 					caption: getCaption(element),
