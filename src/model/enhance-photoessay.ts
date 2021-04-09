@@ -27,7 +27,10 @@ const getTitle = (element?: SubheadingBlockElement): string => {
 	return '';
 };
 
-const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
+const enhanceImages = (
+	elements: CAPIElement[],
+	isPhotoEssay: boolean,
+): CAPIElement[] => {
 	let buffer: ImageBlockElement[] = [];
 	const enhanced: CAPIElement[] = [];
 
@@ -82,7 +85,9 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 		}
 		function cleanCaption(image: ImageBlockElement) {
 			// If a standalone caption or title was found we want to strip any existing captions
-			if (caption || title) {
+			// Or if this is article is a photo essay, then we always strip captions, even if that
+			// leaves the image with no caption at all, we want that for photo essays
+			if (caption || title || isPhotoEssay) {
 				return {
 					...image,
 					data: {
@@ -92,7 +97,7 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 					displayCredit: false,
 				};
 			}
-			// No special caption was found so contiinue with this images defaults
+			// No special caption was found so continue with this images defaults
 			return image;
 		}
 
@@ -230,10 +235,12 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 };
 
 export const enhancePhotoEssay = (data: CAPIType): CAPIType => {
+	const isPhotoEssay = data.format.design === 'PhotoEssayDesign';
+
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,
-			elements: enhanceImages(block.elements),
+			elements: enhanceImages(block.elements, isPhotoEssay),
 		};
 	});
 
