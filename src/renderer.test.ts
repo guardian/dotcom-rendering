@@ -543,14 +543,6 @@ describe('Renders different types of Editions elements', () => {
 		);
 	});
 
-	test('ElementKind.Audio', () => {
-		const nodes = renderEditions(audioElement);
-		const audio = nodes.flat()[0];
-		expect(getHtml(audio)).toContain(
-			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
-		);
-	});
-
 	test('ElementKind.Video', () => {
 		const nodes = renderEditions(videoElement);
 		const video = nodes.flat()[0];
@@ -609,33 +601,6 @@ describe('Renders different types of Editions elements', () => {
 			'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
 		);
 		testHandlers(timeline);
-	});
-
-	test('ElementKind.ChartAtom', () => {
-		const nodes = renderEditions(chartElement());
-		const chart = nodes.flat()[0];
-		expect(getHtml(chart)).toContain(
-			'srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"',
-		);
-	});
-
-	test('ElementKind.KnowledgeQuizAtom', () => {
-		const nodes = renderEditions(knowledgeQuizAtom());
-		const quiz = nodes.flat()[0];
-		const html = getHtml(quiz);
-		expect(html).toContain('<div class="js-quiz">');
-		expect(html).toContain(
-			'<script class="js-quiz-params" type="application/json">',
-		);
-	});
-
-	test('ElementKind.AudioAtom', () => {
-		const nodes = renderEditions(audioAtom());
-		const audio = nodes.flat()[0];
-		const html = getHtml(audio);
-		expect(html).toContain(
-			'<div kind="17" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
-		);
 	});
 
 	function testHandlers(node: ReactNode): void {
