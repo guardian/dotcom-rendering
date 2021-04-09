@@ -77,12 +77,6 @@ const enhanceImages = (
 		title?: string;
 		caption?: string;
 	}) => {
-		if (bufferToProcess.length === 1) {
-			// Then we can simply pass the image through
-			addImage({ image: bufferToProcess[0] });
-			buffer = [];
-			return;
-		}
 		function cleanCaption(image: ImageBlockElement) {
 			// If a standalone caption or title was found we want to strip any existing captions
 			// Or if this is article is a photo essay, then we always strip captions, even if that
