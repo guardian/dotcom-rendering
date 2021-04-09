@@ -137,7 +137,6 @@ function cspEditions(
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-	frame-src https://www.theguardian.com 
     frame-src https://www.theguardian.com https://embed.theguardian.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
 	} ${
