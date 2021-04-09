@@ -17,7 +17,7 @@ export const DefaultStory = (): ReactElement => {
 			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
 		)
 			.then((module) => {
-				setBrazeMessage(() => module.BrazeMessage);
+				setBrazeMessage(() => module.BrazeMessageComponent);
 			})
 			.catch((e) =>
 				console.error(`braze-components dynamic import - error: ${e}`),

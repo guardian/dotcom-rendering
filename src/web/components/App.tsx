@@ -71,7 +71,7 @@ import {
 	StickyNavAnchor,
 	StickyNavBackscroll,
 } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -577,6 +577,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 						scriptUrl={interactiveBlock.scriptUrl}
 						alt={interactiveBlock.alt}
 						role={interactiveBlock.role}
+						caption={interactiveBlock.caption}
+						format={format}
+						palette={palette}
 					/>
 				</HydrateOnce>
 			))}

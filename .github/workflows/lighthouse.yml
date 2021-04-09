@@ -14,5 +14,5 @@ jobs:
               env:
                   LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
               run: |
-                  npm install -g puppeteer-core@2.1.0 @lhci/cli@0.4.x
+                  npm install -g puppeteer-core@2.1.0 @lhci/cli@0.7.0
                   lhci autorun
