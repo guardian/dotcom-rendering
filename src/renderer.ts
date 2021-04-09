@@ -722,7 +722,7 @@ const render = (format: Format, excludeStyles = false) => (
 		}
 
 		case ElementKind.Embed:
-			return h(EmbedComponent, { embed: element.embed });
+			return h(EmbedComponent, { embed: element.embed, editions: false });
 
 		case ElementKind.ExplainerAtom: {
 			return h(ExplainerAtom, { ...element });

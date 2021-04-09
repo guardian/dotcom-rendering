@@ -13,7 +13,7 @@ import type { FC } from 'react';
 
 interface Props {
 	embed: Embed;
-	editions?: boolean;
+	editions: boolean;
 }
 
 /**
