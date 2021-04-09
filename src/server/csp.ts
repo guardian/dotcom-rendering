@@ -137,16 +137,13 @@ function cspEditions(
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-	frame-src https://www.theguardian.com ${
-		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
-	};
     frame-src https://www.theguardian.com https://embed.theguardian.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
 	} ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
-	};
+	} ${thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''};
 	`;
 }
 
