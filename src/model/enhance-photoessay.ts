@@ -127,8 +127,13 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 				default:
 					if (endOfBuffer) {
 						addImage({ image, caption, title });
+						// Mop up any dangling halfWidth images that never had a sibling
+						if (prevHalfWidth)
+							addImage({ image: prevHalfWidth, caption, title });
 					} else {
 						addImage({ image });
+						// Mop up any dangling halfWidth images that never had a sibling
+						if (prevHalfWidth) addImage({ image: prevHalfWidth });
 					}
 					break;
 			}
