@@ -13,6 +13,7 @@ import {
 	shouldHideSupportMessaging,
 	getArticleCountConsent,
 	getEmail,
+	MODULES_VERSION,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -132,6 +133,7 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 			hasOptedOutOfArticleCount: !(await getArticleCountConsent()),
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: props.countryCode,
+			modulesVersion: MODULES_VERSION,
 		},
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
