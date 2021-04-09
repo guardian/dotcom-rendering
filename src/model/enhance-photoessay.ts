@@ -74,8 +74,30 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 		title?: string;
 		caption?: string;
 	}) => {
+		if (bufferToProcess.length === 1) {
+			// Then we can simply pass the image through
+			addImage({ image: bufferToProcess[0] });
+			buffer = [];
+			return;
+		}
+		function cleanCaption(image: ImageBlockElement) {
+			// If a standalone caption or title was found we want to strip any existing captions
+			if (caption || title) {
+				return {
+					...image,
+					data: {
+						...image.data,
+						caption: '',
+					},
+					displayCredit: false,
+				};
+			}
+			// No special caption was found so contiinue with this images defaults
+			return image;
+		}
+
 		let prevHalfWidth: ImageBlockElement | null;
-		bufferToProcess.forEach((image, i) => {
+		bufferToProcess.map(cleanCaption).forEach((image, i) => {
 			switch (image.role) {
 				case 'halfWidth':
 					if (!prevHalfWidth) {
@@ -130,15 +152,8 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.ImageBlockElement':
-				// Remove any credit or caption and buffer image in an array for processing later
-				buffer.push({
-					...element,
-					data: {
-						...element.data,
-						caption: '',
-					},
-					displayCredit: false,
-				});
+				// Buffer image in an array for processing later
+				buffer.push(element);
 				break;
 			case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
 				if (buffer.length === 0) {
