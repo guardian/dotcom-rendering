@@ -98,16 +98,17 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 
 		let prevHalfWidth: ImageBlockElement | null;
 		bufferToProcess.map(cleanCaption).forEach((image, i) => {
+			const endOfBuffer = i + 1 === buffer.length;
 			switch (image.role) {
 				case 'halfWidth':
 					if (!prevHalfWidth) {
-						if (i === buffer.length - 1) {
+						if (endOfBuffer) {
 							addImage({ image, caption, title });
 						} else {
 							prevHalfWidth = image;
 						}
 					} else {
-						if (i === buffer.length - 1) {
+						if (endOfBuffer) {
 							addMultiImage({
 								images: [prevHalfWidth, image],
 								caption,
@@ -124,7 +125,7 @@ const enhanceImages = (elements: CAPIElement[]): CAPIElement[] => {
 				case 'supporting':
 				case 'thumbnail':
 				default:
-					if (i === buffer.length - 1) {
+					if (endOfBuffer) {
 						addImage({ image, caption, title });
 					} else {
 						addImage({ image });
