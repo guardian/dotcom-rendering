@@ -151,7 +151,7 @@
         "@types/html-minifier": "^4.0.0",
         "@types/jest": "^26.0.22",
         "@types/jsdom": "^16.2.6",
-        "@types/loadable__component": "^5.13.1",
+        "@types/loadable__component": "^5.13.3",
         "@types/loadable__server": "^5.12.3",
         "@types/lodash.clonedeep": "^4.5.4",
         "@types/lodash.get": "^4.4.4",
