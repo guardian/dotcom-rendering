@@ -1,7 +1,7 @@
+import { Article } from '@root/fixtures/generated/articles/Article';
 import { enhanceDots } from './add-dots';
-import { bodyJSON } from './exampleBodyJSON';
 
-const example = JSON.parse(bodyJSON);
+const example = Article;
 
 describe('Middot Tests', () => {
 	it('Output should not be the same as input as dot has been replaced', () => {

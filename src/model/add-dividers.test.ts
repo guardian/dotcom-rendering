@@ -1,7 +1,7 @@
+import { Article } from '@root/fixtures/generated/articles/Article';
 import { addDividers } from './add-dividers';
-import { bodyJSON } from './exampleBodyJSON';
 
-const example = JSON.parse(bodyJSON);
+const example = Article;
 
 describe('Dividers and Drop Caps', () => {
 	it('creates an identical but new object when no changes are needed', () => {
