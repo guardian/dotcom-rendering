@@ -118,7 +118,7 @@
         "youtube-player": "^5.5.2"
     },
     "devDependencies": {
-        "@babel/core": "^7.12.3",
+        "@babel/core": "^7.13.15",
         "@babel/helper-create-regexp-features-plugin": "^7.12.17",
         "@babel/plugin-proposal-class-properties": "^7.12.1",
         "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.13",
