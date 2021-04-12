@@ -12,12 +12,14 @@ const decideCaption = ({
 	isPhotoEssay,
 	imageBuffer,
 }: {
-	element?: TextBlockElement;
+	element?: CAPIElement;
 	isPhotoEssay: boolean;
 	imageBuffer: ImageBlockElement[];
 }): string => {
 	//  the convention: <ul><li><Caption text</li></ul>
 	if (!element) return '';
+	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
+		return '';
 	// We only set a special caption on non photo essay articles if there are more than two
 	// halfWidth images in the buffer
 	const countOfHalfWidthImages = imageBuffer.filter(
@@ -46,11 +48,16 @@ const decideTitle = ({
 	element,
 	isPhotoEssay,
 }: {
-	element?: SubheadingBlockElement;
+	element?: CAPIElement;
 	isPhotoEssay: boolean;
 }): string => {
 	// Checks if this element is a 'title' based on the convention: <h2>Title text</h2>
 	if (!element) return '';
+	if (
+		element._type !==
+		'model.dotcomrendering.pageElements.SubheadingBlockElement'
+	)
+		return '';
 	if (!isPhotoEssay) return '';
 	// Extract title
 	const frag = JSDOM.fragment(element.html);
@@ -183,7 +190,7 @@ const enhance = (
 				break;
 			case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
 				if (imageBuffer.length > 0) {
-					const nextTextBlock = elements[i + 1] as TextBlockElement;
+					const nextTextBlock = elements[i + 1];
 					const nextCaption = decideCaption({
 						element: nextTextBlock,
 						isPhotoEssay,
@@ -221,9 +228,7 @@ const enhance = (
 				});
 
 				if (caption && imageBuffer.length > 0) {
-					const nextSubheading = elements[
-						i + 1
-					] as SubheadingBlockElement;
+					const nextSubheading = elements[i + 1];
 					const nextTitle = decideTitle({
 						element: nextSubheading,
 						isPhotoEssay,
