@@ -52,6 +52,7 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
+import { Design } from '@guardian/types';
 
 type Props = {
 	format: Format;
@@ -63,7 +64,6 @@ type Props = {
 	index: number;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
-	isLiveBlog?: boolean;
 	starRating?: number;
 	isPreview: boolean;
 };
@@ -78,10 +78,12 @@ export const ElementRenderer = ({
 	index,
 	hideCaption,
 	isMainMedia,
-	isLiveBlog,
 	starRating,
 	isPreview,
 }: Props) => {
+	const isLiveBlog =
+		format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (

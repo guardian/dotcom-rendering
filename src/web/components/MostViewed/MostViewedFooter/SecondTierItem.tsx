@@ -88,7 +88,6 @@ export const SecondTierItem = ({
 }: Props) => {
 	const {
 		url,
-		isLiveBlog,
 		avatarUrl,
 		image,
 		format,
@@ -111,23 +110,14 @@ export const SecondTierItem = ({
 				<Flex>
 					<div className={headlineStyles}>
 						<div className={titleStyles}>{title}</div>
-						{isLiveBlog ? (
-							<LinkHeadline
-								headlineText={headlineText}
-								palette={palette}
-								format={format}
-								size="small"
-								byline={showByline ? byline : undefined}
-							/>
-						) : (
-							<LinkHeadline
-								headlineText={headlineText}
-								palette={palette}
-								format={format}
-								size="small"
-								byline={showByline ? byline : undefined}
-							/>
-						)}
+						<LinkHeadline
+							headlineText={headlineText}
+							palette={palette}
+							format={format}
+							size="small"
+							byline={showByline ? byline : undefined}
+						/>
+
 						{ageWarning && (
 							<div className={ageWarningStyles}>
 								<AgeWarning age={ageWarning} size="small" />
