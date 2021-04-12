@@ -14,6 +14,7 @@ import { ImageElementFields } from '@guardian/content-api-models/v1/imageElement
 import { AssetFields } from '@guardian/content-api-models/v1/assetFields';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
+import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 
 let defaultBlock: Block;
 let defaultBlocks: Blocks;
@@ -21,6 +22,7 @@ let imageAsset: Asset;
 let elementImageTypeData: ImageElementFields;
 let imageAssetTypeData: AssetFields;
 let defaultContent: Content;
+let imageElement: BlockElement;
 
 const createDefaultContent = () => {
 	return {
@@ -32,6 +34,8 @@ const createDefaultContent = () => {
 		tags: [],
 		references: [],
 		isHosted: true,
+		pillarId: 'somePillarId',
+		pillarName: 'somePillarName',
 	};
 };
 
@@ -53,8 +57,8 @@ describe('parseRelatedContent', () => {
 					link: '/contentId',
 					type: RelatedItemType.ARTICLE,
 					pillar: {
-						id: 'pillar/news',
-						name: 'news',
+						id: 'somePillarId',
+						name: 'somePillarName',
 						sectionIds: [],
 					},
 					starRating: undefined,
@@ -63,6 +67,18 @@ describe('parseRelatedContent', () => {
 		};
 
 		expect(actual).toEqual(expected);
+	});
+
+	it('returns default pillar id given undefined content pillar id', () => {
+		defaultContent.pillarId = undefined;
+		const actual = parseRelatedContent([defaultContent]);
+		expect(actual.relatedItems[0].pillar.id).toEqual('pillar/news');
+	});
+
+	it('returns default pillar name given undefined content pillar name', () => {
+		defaultContent.pillarName = undefined;
+		const actual = parseRelatedContent([defaultContent]);
+		expect(actual.relatedItems[0].pillar.name).toEqual('news');
 	});
 
 	it('returns lastModified DateTime in response given content has lastModified field', () => {
@@ -176,6 +192,12 @@ describe('parseRelatedItemType', () => {
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.VIDEO);
 	});
 
+	it('returns Type GALLERY given a content with gallery type tag', () => {
+		addTagToTagsList('type/gallery', TagType.TYPE);
+		const actual = parseRelatedContent([defaultContent]);
+		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.GALLERY);
+	});
+
 	it('returns Type ADVERTISEMENT_FEATURE given a content with advertisement-features tone tag', () => {
 		addTagToTagsList('tone/advertisement-features', TagType.TONE);
 		const actual = parseRelatedContent([defaultContent]);
@@ -213,6 +235,11 @@ describe('parseHeaderImage', () => {
 			typeData: imageAssetTypeData,
 			file: 'filePath',
 		};
+		imageElement = {
+			type: ElementType.IMAGE,
+			assets: [imageAsset],
+			imageTypeData: elementImageTypeData,
+		};
 		defaultBlock = {
 			id: 'blockId',
 			bodyHtml: '<div>some html</div>',
@@ -224,13 +251,7 @@ describe('parseHeaderImage', () => {
 				iso8601: 'iso',
 			},
 			contributors: ['contributor1'],
-			elements: [
-				{
-					type: ElementType.IMAGE,
-					assets: [imageAsset],
-					imageTypeData: elementImageTypeData,
-				},
-			],
+			elements: [imageElement],
 		};
 		defaultBlocks = {
 			main: defaultBlock,
@@ -274,6 +295,12 @@ describe('parseHeaderImage', () => {
 		expect(actual.relatedItems[0].headerImage).toBeUndefined();
 	});
 
+	it('returns undefined header image given the image asset of the content main block with no typeData', () => {
+		imageAsset.typeData = undefined;
+		const actual = parseRelatedContent([defaultContent]);
+		expect(actual.relatedItems[0].headerImage).toBeUndefined();
+	});
+
 	it('returns undefined header image given the image element of the content main block is not master', () => {
 		imageAsset.typeData = { isMaster: false };
 		const actual = parseRelatedContent([defaultContent]);
@@ -296,7 +323,13 @@ describe('parseHeaderImage', () => {
 		expect(actual.relatedItems[0].headerImage?.url).toBe('');
 	});
 
-	it('returns header image with undefined alt given image asset with no file', () => {
+	it('returns header image with undefined alt given no imageTypeData in element', () => {
+		imageElement.imageTypeData = undefined;
+		const actual = parseRelatedContent([defaultContent]);
+		expect(actual.relatedItems[0].headerImage?.altText).toBeUndefined();
+	});
+
+	it('returns header image with undefined alt given no alt in element imageTypeData', () => {
 		elementImageTypeData.alt = undefined;
 		const actual = parseRelatedContent([defaultContent]);
 		expect(actual.relatedItems[0].headerImage?.altText).toBeUndefined();
