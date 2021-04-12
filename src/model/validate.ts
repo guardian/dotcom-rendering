@@ -1,9 +1,9 @@
-import Ajv from 'ajv';
+import Ajv, { Options } from 'ajv';
 import addFormats from 'ajv-formats';
 
 import schema from '@root/src/model/json-schema.json';
 
-const options: Ajv.Options = {
+const options: Options = {
 	verbose: false,
 	allErrors: false,
 	logger: false,
