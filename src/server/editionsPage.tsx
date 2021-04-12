@@ -7,7 +7,7 @@ import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Option } from '@guardian/types';
 import { map, none, some } from '@guardian/types';
-import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
+import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/atoms/interactiveAtom';
 import Article from 'components/editions/article';
@@ -70,12 +70,8 @@ function renderHead(
 
 	return `
         ${renderToString(meta)}
-        <link rel="stylesheet" type="text/css" href="/fontSize.css">
         <style>${generalStyles}</style>
         <style data-emotion-css="${emotionIds.join(' ')}">${itemStyles}</style>
-        <script id="targeting-params" type="application/json">
-            ${JSON.stringify(request.targetingParams)}
-        </script>
     `;
 }
 
@@ -115,7 +111,6 @@ function render(
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 	const body = renderBody(item);
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
-	const inlineStyles = requiresInlineStyles(request.content);
 
 	const head = renderHead(
 		item,
@@ -123,7 +118,7 @@ function render(
 		thirdPartyEmbeds,
 		body.css,
 		body.ids,
-		inlineStyles,
+		false,
 	);
 
 	const clientScript = map(getAssetLocation)(some('editions.js'));
