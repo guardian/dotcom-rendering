@@ -158,7 +158,7 @@ describe('parseRelatedItemType', () => {
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.COMMENT);
 	});
 
-	it.only('returns Type COMMENT given a content with letters tone tag', () => {
+	it('returns Type COMMENT given a content with letters tone tag', () => {
 		addTagToTagsList('tone/letters', TagType.TONE);
 		const actual = parseRelatedContent([defaultContent]);
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.COMMENT);
