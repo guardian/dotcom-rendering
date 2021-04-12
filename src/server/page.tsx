@@ -100,6 +100,7 @@ function renderHead(
 	inlineStyles: boolean,
 ): string {
 	const generalStyles = styles(item);
+	const isEditions = false;
 	const cspString = csp(
 		item,
 		{
@@ -108,6 +109,7 @@ function renderHead(
 		},
 		thirdPartyEmbeds,
 		inlineStyles,
+		isEditions,
 	);
 	const meta = h(Meta, { title: request.content.webTitle, cspString });
 
