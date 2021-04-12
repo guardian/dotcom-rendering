@@ -124,22 +124,15 @@ const processBuffer = ({
 						prevHalfWidth = image;
 					}
 				} else {
-					if (endOfBuffer) {
-						processed.push({
-							_type:
-								'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: prevHalfWidth.elementId,
-							images: [prevHalfWidth, image],
-							caption,
-						});
-					} else {
-						processed.push({
-							_type:
-								'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: prevHalfWidth.elementId,
-							images: [prevHalfWidth, image],
-						});
-					}
+					const multiImage: MultiImageBlockElement = {
+						_type:
+							'model.dotcomrendering.pageElements.MultiImageBlockElement',
+						elementId: prevHalfWidth.elementId,
+						images: [prevHalfWidth, image],
+					};
+					if (endOfBuffer) multiImage.caption = caption;
+					processed.push(multiImage);
+					// Reset
 					prevHalfWidth = null;
 				}
 				break;
