@@ -511,7 +511,6 @@ export const CommentLayout = ({
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									abTests={CAPI.config.abTests}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>

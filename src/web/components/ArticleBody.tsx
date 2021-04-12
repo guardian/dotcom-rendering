@@ -14,7 +14,6 @@ type Props = {
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 	pageId: string;
 	webTitle: string;
 };
@@ -65,7 +64,6 @@ export const ArticleBody = ({
 	blocks,
 	adTargeting,
 	host,
-	abTests,
 	pageId,
 	webTitle,
 }: Props) => {
@@ -108,7 +106,6 @@ export const ArticleBody = ({
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}
-				abTests={abTests}
 			/>
 		</div>
 	);
