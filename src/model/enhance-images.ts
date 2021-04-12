@@ -112,28 +112,28 @@ const processBuffer = ({
 	}
 
 	const processed: CAPIElement[] = [];
-	let prevHalfWidth: ImageBlockElement | null;
+	let prevHalfWidthImage: ImageBlockElement | null;
 	imageBuffer.map(cleanCaption).forEach((image, i) => {
 		const endOfBuffer = i + 1 === imageBuffer.length;
 		switch (image.role) {
 			case 'halfWidth':
-				if (!prevHalfWidth) {
+				if (!prevHalfWidthImage) {
 					if (endOfBuffer) {
 						processed.push(enhanceImage({ image, caption, title }));
 					} else {
-						prevHalfWidth = image;
+						prevHalfWidthImage = image;
 					}
 				} else {
 					const multiImage: MultiImageBlockElement = {
 						_type:
 							'model.dotcomrendering.pageElements.MultiImageBlockElement',
-						elementId: prevHalfWidth.elementId,
-						images: [prevHalfWidth, image],
+						elementId: prevHalfWidthImage.elementId,
+						images: [prevHalfWidthImage, image],
 					};
 					if (endOfBuffer) multiImage.caption = caption;
 					processed.push(multiImage);
 					// Reset
-					prevHalfWidth = null;
+					prevHalfWidthImage = null;
 				}
 				break;
 			case 'inline':
@@ -145,10 +145,10 @@ const processBuffer = ({
 				if (endOfBuffer) {
 					processed.push(enhanceImage({ image, caption, title }));
 					// Mop up any dangling halfWidth images that never had a sibling
-					if (prevHalfWidth)
+					if (prevHalfWidthImage)
 						processed.push(
 							enhanceImage({
-								image: prevHalfWidth,
+								image: prevHalfWidthImage,
 								caption,
 								title,
 							}),
@@ -156,8 +156,10 @@ const processBuffer = ({
 				} else {
 					processed.push(enhanceImage({ image }));
 					// Mop up any dangling halfWidth images that never had a sibling
-					if (prevHalfWidth)
-						processed.push(enhanceImage({ image: prevHalfWidth }));
+					if (prevHalfWidthImage)
+						processed.push(
+							enhanceImage({ image: prevHalfWidthImage }),
+						);
 				}
 				break;
 		}
