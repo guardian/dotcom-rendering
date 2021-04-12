@@ -16,7 +16,8 @@ export const ArticleRenderer: React.FC<{
 	adTargeting?: AdTargeting;
 	host?: string;
 	abTests: CAPIType['config']['abTests'];
-}> = ({ format, palette, elements, adTargeting, host, abTests }) => {
+	isPreview: boolean;
+}> = ({ format, palette, elements, adTargeting, host, abTests, isPreview }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -32,6 +33,7 @@ export const ArticleRenderer: React.FC<{
 			abTests={abTests}
 			index={index}
 			isMainMedia={false}
+			isPreview={isPreview}
 		/>
 	));
 

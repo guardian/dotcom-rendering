@@ -116,6 +116,7 @@ export const ShowcaseInterview = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -166,6 +167,7 @@ export const ShowcaseInterviewNobyline = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -219,6 +221,7 @@ export const Interview = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -270,6 +273,7 @@ export const InterviewNoByline = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>

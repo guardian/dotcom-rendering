@@ -23,6 +23,7 @@ type Props = {
 	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
+	isPreview: boolean;
 };
 
 const Container = ({
@@ -224,6 +225,7 @@ export const LiveBlock = ({
 	abTests,
 	adTargeting,
 	host,
+	isPreview,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -284,6 +286,7 @@ export const LiveBlock = ({
 							palette={palette}
 							abTests={abTests}
 							host={host}
+							isPreview={isPreview}
 						/>
 					)}
 				</span>
@@ -304,6 +307,7 @@ export const LiveBlock = ({
 									palette={palette}
 									abTests={abTests}
 									host={host}
+									isPreview={isPreview}
 								/>
 							</BlockMedia>
 						);
@@ -319,6 +323,7 @@ export const LiveBlock = ({
 								format={format}
 								palette={palette}
 								abTests={abTests}
+								isPreview={isPreview}
 							/>
 						</BlockText>
 					);
