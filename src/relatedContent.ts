@@ -55,7 +55,7 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 					url: asset.file ?? '',
 					height: asset.typeData?.height ?? 360,
 					width: asset.typeData?.width ?? 600,
-					alt: data?.alt,
+					altText: data?.alt,
 				})),
 			);
 		}),
