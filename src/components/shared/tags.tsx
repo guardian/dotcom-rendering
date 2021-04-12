@@ -22,7 +22,7 @@ const tagsStyles = (format: Format): SerializedStyles => {
 		switch (format.design) {
 			case Design.Comment:
 				return neutral[86];
-			case Design.Live:
+			case Design.LiveBlog:
 				return neutral[93];
 			default:
 				return neutral[97];

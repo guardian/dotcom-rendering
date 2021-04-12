@@ -92,7 +92,11 @@ const getStyles = (format: Format): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
-	if (format.design === Design.Analysis || format.design === Design.Comment) {
+	if (
+		format.design === Design.Analysis ||
+		format.design === Design.Comment ||
+		format.design === Design.Letter
+	) {
 		return css(styles(kickerColor), greyTextStyles);
 	}
 	if (format.display === Display.Showcase) {

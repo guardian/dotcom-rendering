@@ -180,7 +180,7 @@ const getHeadlineStyles = (
 	}
 
 	// this needs to come before Display.Showcase
-	if (format.design === Design.Comment) {
+	if (format.design === Design.Comment || format.design === Design.Letter) {
 		return css(
 			sharedStyles,
 			getFontStyles('regular', 'light'),

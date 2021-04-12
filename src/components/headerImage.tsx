@@ -80,7 +80,7 @@ const immersiveImgStyles = css`
 
 const getStyles = ({ design, display }: Format): SerializedStyles => {
 	switch (design) {
-		case Design.Live:
+		case Design.LiveBlog:
 			return css(styles, liveStyles);
 		default:
 			if (display === Display.Immersive) {

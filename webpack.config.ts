@@ -6,11 +6,12 @@ import { createHash } from 'crypto';
 import path from 'path';
 import CleanCSS from 'clean-css';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import type { Compiler, Configuration, Resolve } from 'webpack';
+import type { Compiler, Configuration, ResolveOptions } from 'webpack';
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import nodeExternals from 'webpack-node-externals';
 import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
+import { WebpackPluginInstance } from 'webpack';
 
 // ----- Plugins ----- //
 
@@ -33,8 +34,11 @@ class LaunchServerPlugin {
 
 // ----- Shared Config ----- //
 
-function resolve(loggerName: string): Resolve {
-	return {
+function resolve(
+	loggerName: string,
+	isClient: boolean = false,
+): ResolveOptions {
+	const resolveOptions: ResolveOptions = {
 		extensions: ['.ts', '.tsx', '.js'],
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
 		alias: {
@@ -55,7 +59,19 @@ function resolve(loggerName: string): Resolve {
 			'preact-render-to-string': 'react-dom/server',
 		},
 	};
+
+	// Webpack 5 removed a lot of the nodejs polyfills including Buffer
+	// We rely on Buffer for our bridget thrift client
+	if (isClient) {
+		resolveOptions.alias = { ...resolveOptions.alias, Buffer: 'buffer' };
+	}
+
+	return resolveOptions;
 }
+
+const serverResolve = resolve('server');
+const clientResolveDev = resolve('clientDev', true);
+const clientResolveProd = resolve('clientProd', true);
 
 // ----- Configs ----- //
 
@@ -66,7 +82,9 @@ const serverConfig = (
 	const isWatch = env?.watch;
 	// Does not try to require the 'canvas' package,
 	// an optional dependency of jsdom that we aren't using.
-	const plugins = [new webpack.IgnorePlugin(/^canvas$/)];
+	const plugins: WebpackPluginInstance[] = [
+		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
+	];
 	if (isWatch) {
 		plugins.push(new LaunchServerPlugin());
 	}
@@ -96,7 +114,7 @@ const serverConfig = (
 		watchOptions: {
 			ignored: /node_modules/,
 		},
-		resolve: resolve('server'),
+		resolve: serverResolve,
 		plugins: plugins,
 		module: {
 			rules: [
@@ -149,8 +167,13 @@ export const clientConfig: Configuration = {
 		path: path.resolve(__dirname, 'dist/assets'),
 		filename: '[name].js',
 	},
-	plugins: [new WebpackManifestPlugin({ writeToFileEmit: true })],
-	resolve: resolve('clientDev'),
+	plugins: [
+		new WebpackManifestPlugin({ writeToFileEmit: true }),
+		new webpack.ProvidePlugin({
+			Buffer: ['buffer', 'Buffer'],
+		}),
+	],
+	resolve: clientResolveDev,
 	devServer: {
 		publicPath: '/assets/',
 		proxy: {
@@ -239,7 +262,7 @@ const clientConfigProduction = {
 		path: path.resolve(__dirname, 'dist/assets'),
 		filename: '[name].[contenthash].js',
 	},
-	resolve: resolve('clientProd'),
+	resolve: clientResolveProd,
 };
 
 // ----- Exports ----- //

@@ -278,8 +278,13 @@ const comment: Item = {
 	...fields,
 };
 
+const letter: Item = {
+	design: Design.Letter,
+	...fields,
+};
+
 const editorial: Item = {
-	design: Design.GuardianView,
+	design: Design.Editorial,
 	...fields,
 };
 
@@ -306,4 +311,5 @@ export {
 	interview,
 	media,
 	editorial,
+	letter,
 };

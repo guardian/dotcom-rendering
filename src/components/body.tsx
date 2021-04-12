@@ -42,7 +42,7 @@ const notImplemented = (
 );
 
 const Body: FC<Props> = ({ item, shouldHideAds }) => {
-	if (item.design === Design.Live) {
+	if (item.design === Design.LiveBlog) {
 		return notImplemented;
 	}
 
@@ -60,7 +60,7 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 		return <Interactive>{renderAllWithoutStyles(item, body)}</Interactive>;
 	}
 
-	if (item.design === Design.Comment) {
+	if (item.design === Design.Comment || item.design === Design.Letter) {
 		return <Comment item={item}>{render(item, body)}</Comment>;
 	}
 

@@ -87,6 +87,7 @@ const getStyles = (format: Format): SerializedStyles => {
 	}
 
 	switch (format.design) {
+		case Design.Letter:
 		case Design.Comment:
 			return commentStyles(kicker);
 

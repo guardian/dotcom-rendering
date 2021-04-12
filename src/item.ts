@@ -75,7 +75,7 @@ interface ResizedRelatedContent extends RelatedContent {
 }
 
 interface Liveblog extends Fields {
-	design: Design.Live;
+	design: Design.LiveBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
 }
@@ -91,6 +91,11 @@ interface Comment extends Fields {
 	body: Body;
 }
 
+interface Letter extends Fields {
+	design: Design.Letter;
+	body: Body;
+}
+
 interface Interactive extends Fields {
 	design: Design.Interactive;
 	body: Body;
@@ -99,11 +104,21 @@ interface Interactive extends Fields {
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
-	design: Exclude<Design, Design.Live | Design.Review | Design.Comment>;
+	design: Exclude<
+		Design,
+		Design.LiveBlog | Design.Review | Design.Comment | Design.Letter
+	>;
 	body: Body;
 }
 
-type Item = Liveblog | Review | Comment | Standard | Interactive | MatchReport;
+type Item =
+	| Liveblog
+	| Review
+	| Comment
+	| Standard
+	| Interactive
+	| MatchReport
+	| Letter;
 
 // ----- Convenience Types ----- //
 
@@ -244,7 +259,9 @@ const isReview = hasSomeTag([
 
 const isAnalysis = hasTag('tone/analysis');
 
-const isComment = hasSomeTag(['tone/comment', 'tone/letters']);
+const isLetter = hasTag('tone/letters');
+
+const isComment = hasTag('tone/comment');
 
 const isFeature = hasTag('tone/features');
 
@@ -270,7 +287,7 @@ const fromCapiLiveBlog = (context: Context) => (
 	const body = content.blocks?.body?.slice(0, 7) ?? [];
 
 	return {
-		design: Design.Live,
+		design: Design.LiveBlog,
 		blocks: parseLiveBlocks(body)(context),
 		totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
 		...itemFields(context, request),
@@ -304,6 +321,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			design: Design.Analysis,
 			...itemFieldsWithBody(context, request),
 		};
+	} else if (isLetter(tags)) {
+		return {
+			design: Design.Letter,
+			...itemFieldsWithBody(context, request),
+		};
 	} else if (isComment(tags)) {
 		const item = itemFieldsWithBody(context, request);
 		return {
@@ -330,7 +352,7 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 		};
 	} else if (isGuardianView(tags)) {
 		return {
-			design: Design.GuardianView,
+			design: Design.Editorial,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isQuiz(tags)) {
@@ -368,6 +390,7 @@ export {
 	Standard,
 	MatchReport,
 	ResizedRelatedContent,
+	Letter,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,

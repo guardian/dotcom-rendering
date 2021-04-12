@@ -48,7 +48,7 @@ const extractInteractiveAssets = (elements: BodyElement[]): Assets =>
 	);
 
 const getElements = (item: Item): Array<Result<string, BodyElement>> =>
-	item.design === Design.Live
+	item.design === Design.LiveBlog
 		? item.blocks.flatMap((block) => block.body)
 		: item.body;
 
@@ -120,13 +120,19 @@ const buildCsp = (
     media-src 'self' https://audio.guim.co.uk/
 `.trim();
 
-function cspEditions(
-	{ styles }: Assets,
+function buildCspEditions(
+	{ styles, scripts }: Assets,
 	thirdPartyEmbed: ThirdPartyEmbeds,
 ): string {
 	return `
 	default-src 'self';
-	style-src 'self' ${assetHashes(styles)};
+    style-src ${styleSrc(styles, thirdPartyEmbed.twitter, false)};
+	script-src 'self' ${assetHashes(scripts)}
+	https://interactive.guim.co.uk ${
+		thirdPartyEmbed.twitter
+			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
+			: ''
+	};
 	img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
@@ -137,13 +143,20 @@ function cspEditions(
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-    frame-src https://www.theguardian.com https://embed.theguardian.com https://interactive.guim.co.uk ${
-		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
+	frame-src https://www.theguardian.com ${
+		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
+	} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
+		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''
 	} ${
+		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
+	} https://player.vimeo.com/ ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
 	};
+	font-src 'self' https://interactive.guim.co.uk;
+	connect-src 'self' https://discussion.theguardian.com/discussion-api/ https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
+	media-src 'self' https://audio.guim.co.uk/
 	`;
 }
 
@@ -152,6 +165,7 @@ function csp(
 	additionalAssets: Assets,
 	thirdPartyEmbed: ThirdPartyEmbeds,
 	hasInlineStyles: boolean,
+	isEditions: boolean,
 ): string {
 	const interactives = interactiveAssets(item);
 	const assets = {
@@ -159,9 +173,11 @@ function csp(
 		scripts: [...interactives.scripts, ...additionalAssets.scripts],
 	};
 
-	return buildCsp(assets, thirdPartyEmbed, hasInlineStyles);
+	return isEditions
+		? buildCspEditions(assets, thirdPartyEmbed)
+		: buildCsp(assets, thirdPartyEmbed, hasInlineStyles);
 }
 
 // ----- Exports ----- //
 
-export { assetHashes, csp, cspEditions };
+export { assetHashes, csp };
