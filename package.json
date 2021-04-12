@@ -150,7 +150,7 @@
         "@types/he": "^1.1.1",
         "@types/html-minifier": "^4.0.0",
         "@types/jest": "^26.0.22",
-        "@types/jsdom": "^16.2.6",
+        "@types/jsdom": "^16.2.10",
         "@types/loadable__component": "^5.13.3",
         "@types/loadable__server": "^5.12.3",
         "@types/lodash.clonedeep": "^4.5.4",
