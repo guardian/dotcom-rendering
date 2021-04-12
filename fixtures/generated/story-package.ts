@@ -16,6 +16,34 @@ export const storyPackage = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/science/2021/apr/10/nasa-preparing-to-attempt-first-controlled-flight-on-another-world',
+			linkText:
+				'Nasa preparing to attempt first controlled flight on another world',
+			showByline: false,
+			byline: 'Nadeem Badshah and agency',
+			image:
+				'https://i.guim.co.uk/img/media/16287e459f2539308aa510f4d33719555388f2a2/1_0_3998_2398/master/3998.jpg?width=300&quality=85&auto=format&fit=max&s=3a4e4fff69ced90a9b1d6c89dad9484e',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/16287e459f2539308aa510f4d33719555388f2a2/1_0_3998_2398/master/3998.jpg?width=300&quality=85&auto=format&fit=max&s=3a4e4fff69ced90a9b1d6c89dad9484e',
+				'460':
+					'https://i.guim.co.uk/img/media/16287e459f2539308aa510f4d33719555388f2a2/1_0_3998_2398/master/3998.jpg?width=460&quality=85&auto=format&fit=max&s=2af506c5a96103b70b2a46718ace4754',
+			},
+			isLiveBlog: false,
+			pillar: 'news',
+			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-04-10T21:12:29.000Z',
+			headline:
+				'Nasa preparing to attempt first controlled flight on another world',
+			shortUrl: 'https://www.theguardian.com/p/h3xzz',
+		},
+		{
+			url:
 				'https://www.theguardian.com/science/2021/feb/23/dare-mighty-things-hidden-message-found-on-nasa-mars-rover-parachute',
 			linkText:
 				"'Dare mighty things': hidden message found on Nasa Mars rover parachute",
