@@ -369,6 +369,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								adTargeting={adTargeting}
 								host={host}
 								abTests={CAPI.config.abTests}
+								isPreview={CAPI.pageType.isPreview}
 							/>
 						</div>
 					</GridItem>
@@ -418,6 +419,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									abTests={CAPI.config.abTests}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									isPreview={CAPI.pageType.isPreview}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines
