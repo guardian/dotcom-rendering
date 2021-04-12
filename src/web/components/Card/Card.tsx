@@ -57,7 +57,12 @@ type Props = {
 	// Ophan tracking
 	dataLinkName?: string;
 	// Labs
+<<<<<<< HEAD
 	badge?: BadgeType;
+=======
+	badgeForLab?: string;
+	brandName?: string;
+>>>>>>> 01408f35f (Add visuallyHidden)
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -179,7 +184,12 @@ export const Card = ({
 	alwaysVertical,
 	minWidthInPixels,
 	dataLinkName,
+<<<<<<< HEAD
 	badge,
+=======
+	badgeForLab,
+	brandName,
+>>>>>>> 01408f35f (Add visuallyHidden)
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -361,12 +371,16 @@ export const Card = ({
 										) : undefined
 									}
 									labBadge={
-										badge ? (
+										badgeForLab ? (
 											<LabBadge
-												badge={badge}
+												badgeForLab={badgeForLab}
 												palette={palette}
+<<<<<<< HEAD
 												badgeAlt={badgeAlt}
 >>>>>>> d740832d0 (Feedback)
+=======
+												brandName={brandName}
+>>>>>>> 01408f35f (Add visuallyHidden)
 											/>
 										</div>
 									</div>

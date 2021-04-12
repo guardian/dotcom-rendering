@@ -2,10 +2,11 @@ import React from 'react';
 import { css } from 'emotion';
 import { space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 type Props = {
-	badge: string;
-	badgeAlt?: string;
+	badgeForLab: string;
+	brandName?: string;
 	palette: Palette;
 };
 
@@ -30,13 +31,19 @@ const paidForStyle = (palette: Palette) => {
 	`;
 };
 
-export const LabBadge = ({ badge, badgeAlt, palette }: Props) => (
+export const LabBadge = ({ badgeForLab, brandName, palette }: Props) => (
 	<div className={badgeWrapperStyle}>
 		<div className={paidForStyle(palette)}>Paid for by</div>
-		<img
-			className={badgeImageStyle}
-			alt={badgeAlt || 'Guardian Labs'}
-			src={badge}
-		/>
+		<span
+			className={css`
+				${visuallyHidden};
+			`}
+		>
+			{brandName
+				? `This content was paid for by ${brandName} as part of Guardian labs`
+				: 'This content has been paid for by a sponsor as part of Guardian Labs.'}
+		</span>
+		{/* eslint-disable-next-line jsx-a11y/alt-text */}
+		<img className={badgeImageStyle} src={badgeForLab} />
 	</div>
 );
