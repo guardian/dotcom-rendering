@@ -75,7 +75,7 @@
         "cpy": "^8.1.2",
         "curlyquotes": "^1.5.5",
         "cypress": "^6.1.0",
-        "dompurify": "^2.2.6",
+        "dompurify": "^2.2.7",
         "dynamic-import-polyfill": "^0.1.1",
         "emotion": "^10.0.27",
         "emotion-server": "^10.0.27",
