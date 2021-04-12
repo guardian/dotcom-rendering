@@ -1,9 +1,7 @@
-import Ajv, { Options } from 'ajv';
-import addFormats from 'ajv-formats';
-
+import Ajv from 'ajv';
 import schema from '@root/src/model/json-schema.json';
 
-const options: Options = {
+const options: Ajv.Options = {
 	verbose: false,
 	allErrors: false,
 	logger: false,
@@ -11,7 +9,6 @@ const options: Options = {
 };
 
 const ajv = new Ajv(options);
-addFormats(ajv);
 
 const validate = ajv.compile(schema);
 
