@@ -101,7 +101,7 @@ stylelint: clean-dist install
 
 test: clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose
+	@yarn test:ci --verbose
 	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
