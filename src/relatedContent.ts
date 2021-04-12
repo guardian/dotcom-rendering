@@ -4,7 +4,15 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { andThen, fromNullable, map, OptionKind } from '@guardian/types';
 import { articleMainImage, isAnalysis, isFeature, isReview } from 'capi';
-import { isAudio, isComment, isGallery, isLabs, isLive, isVideo } from 'item';
+import {
+	isAudio,
+	isComment,
+	isGallery,
+	isLabs,
+	isLive,
+	isVideo,
+	isLetter,
+} from 'item';
 import { pipe, pipe2 } from 'lib';
 
 const parseRelatedItemType = (content: Content): RelatedItemType => {
@@ -17,7 +25,7 @@ const parseRelatedItemType = (content: Content): RelatedItemType => {
 		return RelatedItemType.REVIEW;
 	} else if (isAnalysis(content)) {
 		return RelatedItemType.ANALYSIS;
-	} else if (isComment(tags)) {
+	} else if (isComment(tags) || isLetter(tags)) {
 		return RelatedItemType.COMMENT;
 	} else if (isAudio(tags)) {
 		return RelatedItemType.AUDIO;
@@ -47,7 +55,7 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 					url: asset.file ?? '',
 					height: asset.typeData?.height ?? 360,
 					width: asset.typeData?.width ?? 600,
-					altText: data?.alt,
+					alt: data?.alt,
 				})),
 			);
 		}),
