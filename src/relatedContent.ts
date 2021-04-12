@@ -9,9 +9,9 @@ import {
 	isComment,
 	isGallery,
 	isLabs,
+	isLetter,
 	isLive,
 	isVideo,
-	isLetter,
 } from 'item';
 import { pipe, pipe2 } from 'lib';
 
