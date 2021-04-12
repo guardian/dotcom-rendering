@@ -746,7 +746,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badge={badge}
+							badgeForLab={badge}
 						/>
 					</LI>
 					<LI
@@ -771,7 +771,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badge={badge}
+							badgeForLab={badge}
 						/>
 					</LI>
 					<LI
@@ -796,7 +796,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badge="https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png"
+							badgeForLab="https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png"
 						/>
 					</LI>
 					<LI
@@ -821,7 +821,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badge="https://static.theguardian.com/commercial/sponsor/08/Apr/2020/69711204-8068-4d52-904f-705f18987f89-New_VF_Logo_web.png"
+							badgeForLab="https://static.theguardian.com/commercial/sponsor/08/Apr/2020/69711204-8068-4d52-904f-705f18987f89-New_VF_Logo_web.png"
 						/>
 					</LI>
 				</UL>
