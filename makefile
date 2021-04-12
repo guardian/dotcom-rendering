@@ -101,12 +101,12 @@ stylelint: clean-dist install
 
 test: clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose  --runInBand
+	@yarn test --verbose
 	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose  --runInBand --collectCoverage --coverageReporters=lcov
+	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
 bundlesize: clear clean-dist install build
 	@bundlesize
