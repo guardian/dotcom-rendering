@@ -26,8 +26,8 @@ const decideCaption = ({
 	if (!isPhotoEssay && countOfHalfWidthImages < 2) return '';
 	// Extract the caption
 	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstChild || !frag.firstElementChild) return '';
-	const hasULwrapper = frag.firstChild.nodeName === 'UL';
+	if (!frag || !frag.firstElementChild) return '';
+	const hasULwrapper = frag.firstElementChild.nodeName === 'UL';
 	const containsLItags = frag.firstElementChild.outerHTML.includes('<li>');
 	if (hasULwrapper && containsLItags) {
 		// element is an essay caption
@@ -54,8 +54,8 @@ const decideTitle = ({
 	if (!isPhotoEssay) return '';
 	// Extract title
 	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstChild) return '';
-	const isH2tag = frag.firstChild.nodeName === 'H2';
+	if (!frag || !frag.firstElementChild) return '';
+	const isH2tag = frag.firstElementChild.nodeName === 'H2';
 	if (isH2tag) {
 		// element is an essay title
 		return (frag.textContent && frag.textContent.trim()) || '';
