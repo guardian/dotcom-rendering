@@ -9,7 +9,7 @@ import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhancePhotoEssay } from '@root/src/model/enhance-photoessay';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { extract as extractGA } from '@root/src/model/extract-ga';
-import { bodyJSON } from '@root/src/model/exampleBodyJSON';
+import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
 
 class CAPIEnhancer {
 	capi: CAPIType;
@@ -82,6 +82,6 @@ export const renderPerfTest = (
 	req: express.Request,
 	res: express.Response,
 ): void => {
-	req.body = JSON.parse(bodyJSON);
+	req.body = ExampleArticle;
 	render(req, res);
 };

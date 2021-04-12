@@ -11,7 +11,6 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'airbnb-typescript',
         'prettier',
-        'prettier/@typescript-eslint',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -88,6 +87,7 @@ module.exports = {
         'react/jsx-curly-newline': [0],
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
+		'arrow-body-style': [0],
     },
     settings: {
         'import/resolver': {

@@ -1,10 +1,10 @@
 import { Pillar } from '@guardian/types';
+import { Article } from '@root/fixtures/generated/articles/Article';
 
 import { enhancePhotoEssay } from './enhance-photoessay';
-import { bodyJSON } from './exampleBodyJSON';
 import { images } from '../../fixtures/generated/images';
 
-const article: CAPIType = JSON.parse(bodyJSON);
+const article: CAPIType = Article;
 const photoEssay = {
 	...article,
 	config: {
