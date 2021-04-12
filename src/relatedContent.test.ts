@@ -161,7 +161,7 @@ describe('parseRelatedItemType', () => {
 	it('returns Type COMMENT given a content with letters tone tag', () => {
 		addTagToTagsList('tone/letters', TagType.TONE);
 		const actual = parseRelatedContent([defaultContent]);
-		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.COMMENT);
+		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.ARTICLE);
 	});
 
 	it('returns Type AUDIO given a content with audio type tag', () => {
