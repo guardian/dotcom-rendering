@@ -22,6 +22,7 @@ describe('ClickToView', () => {
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
 				abTests={abTests(false)}
+				isPreview={false}
 			>
 				{thirdPartyContent}
 			</ClickToView>,
@@ -37,6 +38,7 @@ describe('ClickToView', () => {
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
 				abTests={abTests(false)}
+				isPreview={false}
 			>
 				<div data-testid="third-party-content" />
 			</ClickToView>,
@@ -52,6 +54,7 @@ describe('ClickToView', () => {
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
 				abTests={abTests(true)}
+				isPreview={false}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,
@@ -71,6 +74,7 @@ describe('ClickToView', () => {
 				isTracking={true}
 				sourceDomain="athirdparty.com"
 				abTests={abTests(true)}
+				isPreview={false}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,
