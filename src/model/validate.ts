@@ -1,4 +1,6 @@
 import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+
 import schema from '@root/src/model/json-schema.json';
 
 const options: Ajv.Options = {
@@ -9,6 +11,7 @@ const options: Ajv.Options = {
 };
 
 const ajv = new Ajv(options);
+addFormats(ajv);
 
 const validate = ajv.compile(schema);
 

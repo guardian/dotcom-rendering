@@ -67,6 +67,7 @@
         "@types/node-fetch": "^2.5.10",
         "@types/sanitize-html": "^1.27.1",
         "ajv": "^8.1.0",
+        "ajv-formats": "^2.0.2",
         "aws-sdk": "^2.804.0",
         "babel-plugin-prismjs": "^2.0.1",
         "chalk": "^4.1.0",
@@ -235,9 +236,9 @@
         "webpack-node-externals": "^2.5.2",
         "webpack-sources": "^2.2.0"
     },
-		"resolutions": {
-			"@types/serve-static": "^1.13.9"
-		},
+    "resolutions": {
+        "@types/serve-static": "^1.13.9"
+    },
     "jest": {
         "preset": "ts-jest/presets/js-with-ts",
         "testEnvironment": "jest-environment-jsdom-sixteen",
