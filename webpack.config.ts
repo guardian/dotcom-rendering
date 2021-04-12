@@ -257,9 +257,13 @@ const clientConfigProduction = {
 				styles: assetsTemplateCss,
 			},
 		}),
+		new webpack.ProvidePlugin({
+			Buffer: ['buffer', 'Buffer'],
+		}),
 	],
 	output: {
 		path: path.resolve(__dirname, 'dist/assets'),
+		publicPath: '',
 		filename: '[name].[contenthash].js',
 	},
 	resolve: clientResolveProd,
