@@ -32,8 +32,6 @@ const indices = [
 	// Header
 	'stickyAdWrapper',
 
-	// Header links (should be above The Guardian svg)
-	'headerLinks',
 	'TheGuardian',
 
 	// Wrapper after nav stuff
