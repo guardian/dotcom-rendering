@@ -718,8 +718,25 @@ export const Media = () => (
 );
 Media.story = { name: 'Media' };
 
-const badge: string =
-	'https://static.theguardian.com/commercial/sponsor/24/Jun/2020/c15a28c9-ab71-4819-ac5b-066f04cb41ba-Togetherlogo.png';
+const labBadge1: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png`,
+};
+
+const labBadge2: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
+};
+
+const labBadge3: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png`,
+};
+
+const labBadge4: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
+};
 
 export const Labs = () => (
 	<Section>
@@ -737,16 +754,11 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
-							})}
 							headlineText={headlines[12]}
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badgeForLab={badge}
+							badge={labBadge1}
 						/>
 					</LI>
 					<LI
@@ -762,16 +774,11 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
-							})}
 							headlineText={headlines[14]}
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badgeForLab={badge}
+							badge={labBadge2}
 						/>
 					</LI>
 					<LI
@@ -787,16 +794,11 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
-							})}
 							headlineText={headlines[13]}
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badgeForLab="https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png"
+							badge={labBadge3}
 						/>
 					</LI>
 					<LI
@@ -812,16 +814,11 @@ export const Labs = () => (
 								theme: Special.Labs,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
-							})}
 							headlineText={headlines[15]}
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badgeForLab="https://static.theguardian.com/commercial/sponsor/08/Apr/2020/69711204-8068-4d52-904f-705f18987f89-New_VF_Logo_web.png"
+							badge={labBadge4}
 						/>
 					</LI>
 				</UL>

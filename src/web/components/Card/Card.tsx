@@ -26,6 +26,7 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
+import { LabBadge } from './components/LabBadge';
 
 type Props = {
 	linkTo: string;
@@ -57,12 +58,7 @@ type Props = {
 	// Ophan tracking
 	dataLinkName?: string;
 	// Labs
-<<<<<<< HEAD
 	badge?: BadgeType;
-=======
-	badgeForLab?: string;
-	brandName?: string;
->>>>>>> 01408f35f (Add visuallyHidden)
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -184,12 +180,7 @@ export const Card = ({
 	alwaysVertical,
 	minWidthInPixels,
 	dataLinkName,
-<<<<<<< HEAD
 	badge,
-=======
-	badgeForLab,
-	brandName,
->>>>>>> 01408f35f (Add visuallyHidden)
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -323,24 +314,13 @@ export const Card = ({
 										</AvatarContainer>
 									</Hide>
 								)}
-<<<<<<< HEAD
-
-								{badge && (
-									<div>
-										<div className={badgeStyle}>
-											<div>Paid for by</div>
-											<img
-												className={badgeImageStyle}
-												alt="test"
-												src="https://static.theguardian.com/commercial/sponsor/24/Jun/2020/c15a28c9-ab71-4819-ac5b-066f04cb41ba-Togetherlogo.png"
-=======
 								<CardFooter
 									format={format}
 									age={
 										webPublicationDate ? (
 											<CardAge
 												format={format}
-												palette={palette}
+												palette={cardPalette}
 												webPublicationDate={
 													webPublicationDate
 												}
@@ -353,7 +333,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												palette={palette}
+												palette={cardPalette}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -364,68 +344,23 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												palette={palette}
+												palette={cardPalette}
 												long={longCount}
 												short={shortCount}
 											/>
 										) : undefined
 									}
 									labBadge={
-										badgeForLab ? (
-											<LabBadge
-												badgeForLab={badgeForLab}
-												palette={palette}
-<<<<<<< HEAD
-												badgeAlt={badgeAlt}
->>>>>>> d740832d0 (Feedback)
-=======
-												brandName={brandName}
->>>>>>> 01408f35f (Add visuallyHidden)
-											/>
-										</div>
-									</div>
-								)}
-								{!badge && (
-									<CardFooter
-										format={format}
-										age={
-											webPublicationDate ? (
-												<CardAge
-													format={format}
-													palette={palette}
-													webPublicationDate={
-														webPublicationDate
-													}
-													showClock={showClock}
+										badge ? (
+											<div>
+												<LabBadge
+													badgeForLab={badge.imageUrl}
+													palette={cardPalette}
 												/>
-											) : undefined
-										}
-										isFullCardImage={isFullCardImage}
-										mediaMeta={
-											format.design === Design.Media &&
-											mediaType ? (
-												<MediaMeta
-													palette={palette}
-													mediaType={mediaType}
-													mediaDuration={
-														mediaDuration
-													}
-												/>
-											) : undefined
-										}
-										commentCount={
-											showCommentCount &&
-											longCount &&
-											shortCount ? (
-												<CardCommentCount
-													palette={palette}
-													long={longCount}
-													short={shortCount}
-												/>
-											) : undefined
-										}
-									/>
-								)}
+											</div>
+										) : undefined
+									}
+								/>
 							</div>
 						</ContentWrapper>
 					</>
