@@ -43,6 +43,6 @@ export const LabBadge = ({ badgeForLab, brandName, palette }: Props) => (
 				: 'This content has been paid for by a sponsor as part of Guardian Labs.'}
 		</span>
 		{/* eslint-disable-next-line jsx-a11y/alt-text */}
-		<img className={badgeImageStyle} src={badgeForLab} />
+		<img className={badgeImageStyle} alt="" src={badgeForLab} />
 	</div>
 );

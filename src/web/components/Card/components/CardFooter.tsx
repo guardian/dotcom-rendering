@@ -51,7 +51,7 @@ export const CardFooter = ({
 	labBadge,
 }: Props) => {
 	if (format.theme === Special.Labs && labBadge) {
-		return labBadge;
+		return <footer>{labBadge}</footer>;
 	}
 
 	if (

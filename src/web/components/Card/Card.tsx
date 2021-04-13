@@ -335,13 +335,11 @@ export const Card = ({
 									}
 									labBadge={
 										badge ? (
-											<div>
-												<LabBadge
-													badgeForLab={badge.imageUrl}
-													palette={cardPalette}
-													brandName={brand}
-												/>
-											</div>
+											<LabBadge
+												badgeForLab={badge.imageUrl}
+												palette={cardPalette}
+												brandName={brand}
+											/>
 										) : undefined
 									}
 								/>
