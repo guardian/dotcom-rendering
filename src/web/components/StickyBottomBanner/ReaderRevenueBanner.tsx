@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
@@ -24,6 +24,7 @@ import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-clien
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
+import { useOnce } from '@root/src/web/lib/useOnce';
 
 const checkForErrors = (response: Response) => {
 	if (!response.ok) {
@@ -34,8 +35,6 @@ const checkForErrors = (response: Response) => {
 	}
 	return response;
 };
-
-type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -61,15 +60,26 @@ type BuildPayloadProps = BaseProps & {
 type CanShowProps = BaseProps & {
 	asyncCountryCode: Promise<string>;
 	remoteBannerConfig: boolean;
-	isPuzzlesPage: boolean;
+	section: string;
 };
 
-type ReaderRevenueComponent = 'ACQUISITIONS_SUBSCRIPTIONS_BANNER' | 'ACQUISITIONS_OTHER'
+type ReaderRevenueComponent =
+	| 'ACQUISITIONS_SUBSCRIPTIONS_BANNER'
+	| 'ACQUISITIONS_OTHER';
 
 export type CanShowFunction = (props: CanShowProps) => Promise<CanShowResult>;
 
 // TODO specify return type (need to update client to provide this first)
-const buildPayload = (props: BuildPayloadProps) => {
+const buildPayload = ({
+	isSignedIn,
+	shouldHideReaderRevenue,
+	isPaidContent,
+	alreadyVisitedCount,
+	engagementBannerLastClosedAt,
+	subscriptionBannerLastClosedAt,
+	countryCode,
+	hasConsentedToArticleCounts,
+}: BuildPayloadProps) => {
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -78,17 +88,16 @@ const buildPayload = (props: BuildPayloadProps) => {
 			referrerUrl: window.location.origin + window.location.pathname,
 		},
 		targeting: {
-			alreadyVisitedCount: props.alreadyVisitedCount,
-			shouldHideReaderRevenue: props.shouldHideReaderRevenue,
-			isPaidContent: props.isPaidContent,
-			showSupportMessaging: !shouldHideSupportMessaging(props.isSignedIn),
-			engagementBannerLastClosedAt: props.engagementBannerLastClosedAt,
-			subscriptionBannerLastClosedAt:
-				props.subscriptionBannerLastClosedAt,
+			alreadyVisitedCount,
+			shouldHideReaderRevenue,
+			isPaidContent,
+			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+			engagementBannerLastClosedAt,
+			subscriptionBannerLastClosedAt,
 			mvtId: Number(getCookie('GU_mvt_id')),
-			countryCode: props.countryCode,
+			countryCode,
 			weeklyArticleHistory: getWeeklyArticleHistory(),
-			hasOptedOutOfArticleCount: !props.hasConsentedToArticleCounts,
+			hasOptedOutOfArticleCount: !hasConsentedToArticleCounts,
 			modulesVersion: MODULES_VERSION,
 		},
 	};
@@ -123,11 +132,11 @@ export const canShowRRBanner: CanShowFunction = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 }) => {
-	if (!remoteBannerConfig) return Promise.resolve({ result: false });
+	if (!remoteBannerConfig) return { result: false };
 
 	if (shouldHideReaderRevenue || isPaidContent) {
 		// We never serve Reader Revenue banners in this case
-		return Promise.resolve({ result: false });
+		return { result: false };
 	}
 
 	if (
@@ -135,7 +144,7 @@ export const canShowRRBanner: CanShowFunction = async ({
 		subscriptionBannerLastClosedAt &&
 		withinLocalNoBannerCachePeriod()
 	) {
-		return Promise.resolve({ result: false });
+		return { result: false };
 	}
 
 	const countryCode = await asyncCountryCode;
@@ -197,8 +206,12 @@ export const canShowPuzzlesBanner: CanShowFunction = async ({
 	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
-	isPuzzlesPage,
+	section,
 }) => {
+	const isPuzzlesPage =
+		section === 'crosswords' ||
+		tags.some((tag) => tag.type === 'Series' && tag.title === 'Sudoku');
+
 	if (shouldHideReaderRevenue) {
 		// We never serve Reader Revenue banners in this case
 		return { result: false };
@@ -223,10 +236,7 @@ export const canShowPuzzlesBanner: CanShowFunction = async ({
 			subscriptionBannerLastClosedAt,
 			hasConsentedToArticleCounts,
 		});
-		return getBanner(
-			bannerPayload,
-			`${contributionsServiceUrl}/puzzles`,
-		)
+		return getBanner(bannerPayload, `${contributionsServiceUrl}/puzzles`)
 			.then(checkForErrors)
 			.then((response) => response.json())
 			.then((json: { data?: any }) => {
@@ -248,16 +258,19 @@ export type BannerProps = {
 	module: { url: string; name: string; props: any[] };
 };
 
-const createReaderRevenueBannerComponent = (componentTypeName: ReaderRevenueComponent, displayEvent: string): React.FC<BannerProps> => {
+const createReaderRevenueBannerComponent = (
+	componentTypeName: ReaderRevenueComponent,
+	displayEvent: string,
+): React.FC<BannerProps> => {
 	return ({ meta, module }: BannerProps) => {
 		const [Banner, setBanner] = useState<React.FC>();
 
 		const [hasBeenSeen, setNode] = useHasBeenSeen({
 			threshold: 0,
 			debounce: true,
-		}) as HasBeenSeen;
+		});
 
-		useEffect(() => {
+		useOnce(() => {
 			if (module === undefined || meta === undefined) {
 				return;
 			}
@@ -270,15 +283,10 @@ const createReaderRevenueBannerComponent = (componentTypeName: ReaderRevenueComp
 					setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
 					sendOphanComponentEvent('INSERT', meta);
 				})
-				.catch((error) =>
-					// eslint-disable-next-line no-console
-					console.log(`banner - error is: ${error}`),
-				);
-			// eslint-disable-next-line react-hooks/exhaustive-deps
+				.catch((error) => console.log(`banner - error is: ${error}`));
 		}, []);
 
-		// Should only run once
-		useEffect(() => {
+		useOnce(() => {
 			if (hasBeenSeen) {
 				const { abTestName, componentType } = meta;
 
@@ -316,75 +324,14 @@ const createReaderRevenueBannerComponent = (componentTypeName: ReaderRevenueComp
 
 		return null;
 	};
-}
-
-export const ReaderRevenueBanner = ({ meta, module }: BannerProps) => {
-	const [Banner, setBanner] = useState<React.FC>();
-
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
-		threshold: 0,
-		debounce: true,
-	}) as HasBeenSeen;
-
-	useEffect(() => {
-		if (module === undefined || meta === undefined) {
-			return;
-		}
-
-		setAutomat();
-
-		window
-			.guardianPolyfilledImport(module.url)
-			.then((bannerModule: { [key: string]: JSX.Element }) => {
-				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
-				sendOphanComponentEvent('INSERT', meta);
-			})
-			.catch((error) =>
-				// eslint-disable-next-line no-console
-				console.log(`banner - error is: ${error}`),
-			);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	// Should only run once
-	useEffect(() => {
-		if (hasBeenSeen && meta) {
-			const { abTestName, componentType } = meta;
-
-			logView(abTestName);
-
-			sendOphanComponentEvent('VIEW', meta);
-
-			// track banner view event in Google Analytics for subscriptions banner
-			if (componentType === 'ACQUISITIONS_SUBSCRIPTIONS_BANNER') {
-				trackNonClickInteraction('subscription-banner : display');
-			}
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [hasBeenSeen]);
-
-	if (Banner) {
-		return (
-			// The css here is necessary to put the container div in view, so that we can track the view
-			<div
-				ref={setNode}
-				className={css`
-					width: 100%;
-					${getZIndex('banner')}
-				`}
-			>
-				{/* eslint-disable react/jsx-props-no-spreading */}
-				<Banner
-					{...module.props}
-					// @ts-ignore
-					submitComponentEvent={submitComponentEvent}
-				/>
-				{/* eslint-enable react/jsx-props-no-spreading */}
-			</div>
-		);
-	}
-
-	return null;
 };
 
-export const PuzzlesBanner = createReaderRevenueBannerComponent('ACQUISITIONS_OTHER', 'puzzles-banner : display');
+export const ReaderRevenueBanner = createReaderRevenueBannerComponent(
+	'ACQUISITIONS_SUBSCRIPTIONS_BANNER',
+	'subscription-banner : display',
+);
+
+export const PuzzlesBanner = createReaderRevenueBannerComponent(
+	'ACQUISITIONS_OTHER',
+	'puzzles-banner : display',
+);

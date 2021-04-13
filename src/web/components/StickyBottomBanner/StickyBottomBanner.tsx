@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
-
 import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
 	ReaderRevenueBanner,
 	PuzzlesBanner,
 	BannerProps,
-	CanShowFunction
+	CanShowFunction,
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 import { useOnce } from '@root/src/web/lib/useOnce';
@@ -32,7 +31,7 @@ type RRBannerConfig = {
 	BannerComponent: React.FC<BannerProps>;
 	canShowFn: CanShowFunction;
 	isEnabled: (switches: CAPIType['config']['switches']) => boolean;
-}
+};
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
 	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
@@ -61,14 +60,17 @@ const buildCmpBannerConfig = (): CandidateConfig => ({
 	timeoutMillis: null,
 });
 
-const buildRRBannerConfigWith = ({ id, BannerComponent, canShowFn, isEnabled }: RRBannerConfig) => {
+const buildRRBannerConfigWith = ({
+	id,
+	BannerComponent,
+	canShowFn,
+	isEnabled,
+}: RRBannerConfig) => {
 	return (
 		CAPI: CAPIBrowserType,
 		isSignedIn: boolean,
 		asyncCountryCode: Promise<string>,
 	): CandidateConfig => {
-		const isPuzzlesPage = CAPI.config.section === 'crosswords' || CAPI.tags.some(tag => tag.type === 'Series' && tag.title === 'Sudoku')
-
 		return {
 			candidate: {
 				id,
@@ -92,29 +94,29 @@ const buildRRBannerConfigWith = ({ id, BannerComponent, canShowFn, isEnabled }: 
 						subscriptionBannerLastClosedAt: getBannerLastClosedAt(
 							'subscriptionBannerLastClosedAt',
 						),
-						isPuzzlesPage,
+						section: CAPI.config.section,
 					}),
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
 				show: (meta: any) => () => <BannerComponent {...meta} />,
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
-	}
-}
+	};
+};
 
 const buildPuzzlesBannerConfig = buildRRBannerConfigWith({
 	id: 'puzzles-banner',
 	BannerComponent: PuzzlesBanner,
 	canShowFn: canShowPuzzlesBanner,
-	isEnabled: (swtiches) => swtiches.puzzlesBanner
+	isEnabled: (swtiches) => swtiches.puzzlesBanner,
 });
 
 const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 	id: 'reader-revenue-banner',
 	BannerComponent: ReaderRevenueBanner,
 	canShowFn: canShowRRBanner,
-	isEnabled: (swtiches) => swtiches.remoteBanner
-})
+	isEnabled: (swtiches) => swtiches.remoteBanner,
+});
 
 const buildBrazeBanner = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
