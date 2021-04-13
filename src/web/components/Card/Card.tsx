@@ -238,7 +238,6 @@ export const Card = ({
 									isFullCardImage={isFullCardImage}
 								>
 									<CardHeadline
-										// Try and create parity with frontend, not working at the moment
 										css={labTitleOrNot(format)}
 										headlineText={headlineText}
 										format={format}

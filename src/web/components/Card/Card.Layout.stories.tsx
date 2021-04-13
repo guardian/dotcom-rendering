@@ -735,7 +735,7 @@ const labBadge3: BadgeType = {
 
 const labBadge4: BadgeType = {
 	seriesTag: 'Tag',
-	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png`,
 };
 
 export const Labs = () => (
@@ -776,7 +776,7 @@ export const Labs = () => (
 							}}
 							headlineText={headlines[14]}
 							headlineSize="medium"
-							imageUrl={images[0]}
+							imageUrl={images[1]}
 							imagePosition="top"
 							badge={labBadge2}
 						/>
@@ -796,7 +796,7 @@ export const Labs = () => (
 							}}
 							headlineText={headlines[13]}
 							headlineSize="medium"
-							imageUrl={images[1]}
+							imageUrl={images[3]}
 							imagePosition="top"
 							badge={labBadge3}
 						/>
@@ -816,7 +816,7 @@ export const Labs = () => (
 							}}
 							headlineText={headlines[15]}
 							headlineSize="medium"
-							imageUrl={images[0]}
+							imageUrl={images[2]}
 							imagePosition="top"
 							badge={labBadge4}
 						/>
