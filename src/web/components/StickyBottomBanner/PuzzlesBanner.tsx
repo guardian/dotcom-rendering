@@ -209,7 +209,7 @@ export const PuzzlesBanner = ({ meta, module }: Props) => {
 			sendOphanComponentEvent('VIEW', meta);
 
 			// track banner view event in Google Analytics for subscriptions banner
-			if (componentType === 'ACQUISITIONS_PUZZLES_BANNER') {
+			if (componentType === 'ACQUISITIONS_OTHER') {
 				trackNonClickInteraction('puzzles-banner : display');
 			}
 		}

@@ -61,7 +61,12 @@ type BuildPayloadProps = BaseProps & {
 type CanShowProps = BaseProps & {
 	asyncCountryCode: Promise<string>;
 	remoteBannerConfig: boolean;
+	isPuzzlesPage: boolean;
 };
+
+type ReaderRevenueComponent = 'ACQUISITIONS_SUBSCRIPTIONS_BANNER' | 'ACQUISITIONS_OTHER'
+
+export type CanShowFunction = (props: CanShowProps) => Promise<CanShowResult>;
 
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = (props: BuildPayloadProps) => {
@@ -102,7 +107,7 @@ const getBanner = (
 	});
 };
 
-export const canShow = async ({
+export const canShowRRBanner: CanShowFunction = async ({
 	remoteBannerConfig,
 	isSignedIn,
 	asyncCountryCode,
@@ -117,7 +122,7 @@ export const canShow = async ({
 	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
-}: CanShowProps): Promise<CanShowResult> => {
+}) => {
 	if (!remoteBannerConfig) return Promise.resolve({ result: false });
 
 	if (shouldHideReaderRevenue || isPaidContent) {
@@ -177,12 +182,143 @@ export const canShow = async ({
 		});
 };
 
-type Props = {
+export const canShowPuzzlesBanner: CanShowFunction = async ({
+	remoteBannerConfig,
+	isSignedIn,
+	asyncCountryCode,
+	contentType,
+	sectionName,
+	shouldHideReaderRevenue,
+	isMinuteArticle,
+	isPaidContent,
+	isSensitive,
+	tags,
+	contributionsServiceUrl,
+	alreadyVisitedCount,
+	engagementBannerLastClosedAt,
+	subscriptionBannerLastClosedAt,
+	isPuzzlesPage,
+}) => {
+	if (shouldHideReaderRevenue) {
+		// We never serve Reader Revenue banners in this case
+		return { result: false };
+	}
+
+	if (isPuzzlesPage && remoteBannerConfig) {
+		const countryCode = await asyncCountryCode;
+		const hasConsentedToArticleCounts = await getArticleCountConsent();
+		const bannerPayload = buildPayload({
+			isSignedIn,
+			countryCode,
+			contentType,
+			sectionName,
+			shouldHideReaderRevenue,
+			isMinuteArticle,
+			isPaidContent,
+			tags,
+			contributionsServiceUrl,
+			isSensitive,
+			alreadyVisitedCount,
+			engagementBannerLastClosedAt,
+			subscriptionBannerLastClosedAt,
+			hasConsentedToArticleCounts,
+		});
+		return getBanner(
+			bannerPayload,
+			`${contributionsServiceUrl}/puzzles`,
+		)
+			.then(checkForErrors)
+			.then((response) => response.json())
+			.then((json: { data?: any }) => {
+				if (!json.data) {
+					return { result: false };
+				}
+
+				const { module, meta } = json.data;
+
+				return { result: true, meta: { module, meta } };
+			});
+	}
+
+	return { result: false };
+};
+
+export type BannerProps = {
 	meta: any;
 	module: { url: string; name: string; props: any[] };
 };
 
-export const ReaderRevenueBanner = ({ meta, module }: Props) => {
+const createReaderRevenueBannerComponent = (componentTypeName: ReaderRevenueComponent, displayEvent: string): React.FC<BannerProps> => {
+	return ({ meta, module }: BannerProps) => {
+		const [Banner, setBanner] = useState<React.FC>();
+
+		const [hasBeenSeen, setNode] = useHasBeenSeen({
+			threshold: 0,
+			debounce: true,
+		}) as HasBeenSeen;
+
+		useEffect(() => {
+			if (module === undefined || meta === undefined) {
+				return;
+			}
+
+			setAutomat();
+
+			window
+				.guardianPolyfilledImport(module.url)
+				.then((bannerModule: { [key: string]: JSX.Element }) => {
+					setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
+					sendOphanComponentEvent('INSERT', meta);
+				})
+				.catch((error) =>
+					// eslint-disable-next-line no-console
+					console.log(`banner - error is: ${error}`),
+				);
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+		}, []);
+
+		// Should only run once
+		useEffect(() => {
+			if (hasBeenSeen) {
+				const { abTestName, componentType } = meta;
+
+				logView(abTestName);
+
+				sendOphanComponentEvent('VIEW', meta);
+
+				// track banner view event in Google Analytics for subscriptions banner
+				if (componentType === componentTypeName) {
+					trackNonClickInteraction(displayEvent);
+				}
+			}
+		}, [hasBeenSeen, meta]);
+
+		if (Banner) {
+			return (
+				// The css here is necessary to put the container div in view, so that we can track the view
+				<div
+					ref={setNode}
+					className={css`
+						width: 100%;
+						${getZIndex('banner')}
+					`}
+				>
+					{/* eslint-disable react/jsx-props-no-spreading */}
+					<Banner
+						{...module.props}
+						// @ts-ignore
+						submitComponentEvent={submitComponentEvent}
+					/>
+					{/* eslint-enable react/jsx-props-no-spreading */}
+				</div>
+			);
+		}
+
+		return null;
+	};
+}
+
+export const ReaderRevenueBanner = ({ meta, module }: BannerProps) => {
 	const [Banner, setBanner] = useState<React.FC>();
 
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
@@ -250,3 +386,5 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 
 	return null;
 };
+
+export const PuzzlesBanner = createReaderRevenueBannerComponent('ACQUISITIONS_OTHER', 'puzzles-banner : display');
