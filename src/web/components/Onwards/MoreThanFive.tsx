@@ -45,7 +45,9 @@ export const MoreThanFive = ({ content }: Props) => {
 						}
 						webPublicationDate={content[0].webPublicationDate}
 						kickerText={content[0].kickerText}
-						showPulsingDot={content[0].isLiveBlog}
+						showPulsingDot={
+							content[0].format.design === Design.LiveBlog
+						}
 						showSlash={true}
 						showClock={false}
 						imageUrl={content[0].image}
@@ -74,7 +76,9 @@ export const MoreThanFive = ({ content }: Props) => {
 						}
 						webPublicationDate={content[1].webPublicationDate}
 						kickerText={content[1].kickerText}
-						showPulsingDot={content[1].isLiveBlog}
+						showPulsingDot={
+							content[1].format.design === Design.LiveBlog
+						}
 						showSlash={true}
 						showClock={false}
 						imageUrl={content[1].image}
@@ -103,7 +107,9 @@ export const MoreThanFive = ({ content }: Props) => {
 						}
 						webPublicationDate={content[2].webPublicationDate}
 						kickerText={content[2].kickerText}
-						showPulsingDot={content[2].isLiveBlog}
+						showPulsingDot={
+							content[2].format.design === Design.LiveBlog
+						}
 						showSlash={true}
 						showClock={false}
 						imageUrl={content[2].image}
@@ -132,7 +138,9 @@ export const MoreThanFive = ({ content }: Props) => {
 						}
 						webPublicationDate={content[3].webPublicationDate}
 						kickerText={content[3].kickerText}
-						showPulsingDot={content[3].isLiveBlog}
+						showPulsingDot={
+							content[3].format.design === Design.LiveBlog
+						}
 						showSlash={true}
 						showClock={false}
 						imageUrl={content[3].image}
@@ -168,7 +176,9 @@ export const MoreThanFive = ({ content }: Props) => {
 							}
 							webPublicationDate={trail.webPublicationDate}
 							kickerText={trail.kickerText}
-							showPulsingDot={trail.isLiveBlog}
+							showPulsingDot={
+								trail.format.design === Design.LiveBlog
+							}
 							showSlash={true}
 							showClock={false}
 							imageUrl={

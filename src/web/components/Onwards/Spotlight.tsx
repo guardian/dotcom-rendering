@@ -23,7 +23,7 @@ export const Spotlight = ({ content }: Props) => (
 		}
 		webPublicationDate={content[0].webPublicationDate}
 		kickerText={content[0].kickerText}
-		showPulsingDot={content[0].isLiveBlog}
+		showPulsingDot={content[0].format.design === Design.LiveBlog}
 		showSlash={true}
 		showClock={false}
 		imageUrl={content[0].image}

@@ -24,12 +24,12 @@ const Body: React.FunctionComponent<{
 	data: ArticleModel;
 	config: ConfigType;
 }> = ({ data, config }) => {
-	// TODO check if there is a better way to determine if liveblog
-	const isLiveBlog =
-		data.format.design === 'LiveBlogDesign' ||
-		data.format.design === 'DeadBlogDesign';
+	const { format } = data;
 
-	if (isLiveBlog) {
+	if (
+		format.design === 'LiveBlogDesign' ||
+		format.design === 'DeadBlogDesign'
+	) {
 		return <BodyLiveblog data={data} config={config} />;
 	}
 	return <BodyArticle data={data} config={config} />;

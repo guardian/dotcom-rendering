@@ -240,7 +240,7 @@ export const mostReadGeo = {
 			},
 			isLiveBlog: true,
 			format: {
-				design: 'ArticleDesign',
+				design: 'LiveBlogDesign',
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
