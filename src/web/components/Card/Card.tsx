@@ -59,6 +59,7 @@ type Props = {
 	dataLinkName?: string;
 	// Labs
 	badge?: BadgeType;
+	brand: string;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -163,6 +164,7 @@ export const Card = ({
 	minWidthInPixels,
 	dataLinkName,
 	badge,
+	brand,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -338,6 +340,7 @@ export const Card = ({
 												<LabBadge
 													badgeForLab={badge.imageUrl}
 													palette={cardPalette}
+													brandName={brand}
 												/>
 											</div>
 										) : undefined
