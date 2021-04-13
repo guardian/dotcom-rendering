@@ -12,6 +12,7 @@ import {
 	galleryClient,
 	userClient,
 	videoClient,
+	analyticsClient,
 } from '../native/nativeApi';
 
 type Slot = AdSlot | VideoSlot;
@@ -264,4 +265,15 @@ function reportNativeElementPositionChanges(): void {
 	}
 }
 
-export { ads, slideshow, videos, reportNativeElementPositionChanges };
+function sendTargetingParams(): void {
+	const targetingParams = getTargetingParams();
+	analyticsClient.sendTargetingParams(targetingParams);
+}
+
+export {
+	ads,
+	slideshow,
+	videos,
+	reportNativeElementPositionChanges,
+	sendTargetingParams,
+};

@@ -14,6 +14,7 @@ import {
 	reportNativeElementPositionChanges,
 	slideshow,
 	videos,
+	sendTargetingParams,
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
 import FooterContent from 'components/footerContent';
@@ -451,6 +452,7 @@ function richLinks(): void {
 }
 
 setup();
+sendTargetingParams();
 ads();
 videos();
 reportNativeElementPositionChanges();
