@@ -4464,10 +4464,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/loadable__server@^5.12.3":
-  version "5.12.3"
-  resolved "https://registry.yarnpkg.com/@types/loadable__server/-/loadable__server-5.12.3.tgz#b8cd4030b9719ea333309f9c566c7f8fcf3b88af"
-  integrity sha512-jqSmFdaxuBNKO3yX9pMIYzXqhu03jv6AT6i4eKEZMbgU+1nvgs2UC14a4DUJPDJVnaUBms0+E3UdD5ipcQPtgg==
+"@types/loadable__server@^5.12.4":
+  version "5.12.4"
+  resolved "https://registry.yarnpkg.com/@types/loadable__server/-/loadable__server-5.12.4.tgz#069e1a74c762a4bb643552c4e816102185e2792f"
+  integrity sha512-EXpvWW5n321o9LfXs4ZFuqvymlTgOGkkywcM9fb04RT/xsEXHmpvV0PTvChKcrs8z+Ab2R2SLV//eKELm6558Q==
   dependencies:
     "@types/react" "*"
 
