@@ -142,8 +142,8 @@ function buildCspEditions(
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
-	};
-	frame-src https://www.theguardian.com ${
+	} ;
+	frame-src https://www.theguardian.com https://embed.theguardian.com ${
 		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
 	} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''

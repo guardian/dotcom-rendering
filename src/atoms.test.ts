@@ -707,6 +707,8 @@ describe('parseAtom', () => {
 					caption: some(frag),
 					duration: some(1000),
 					videoId: 'asset-id',
+					id: atomId,
+					title: '',
 				}),
 			);
 		});

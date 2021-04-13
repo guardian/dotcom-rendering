@@ -58,6 +58,7 @@ import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
+import Video from 'components/editions/video';
 import EmbedComponent from 'components/embed';
 import HorizontalRule from 'components/horizontalRule';
 import Interactive from 'components/interactive';
@@ -594,6 +595,7 @@ const interactiveAtomRenderer = (
 const mediaAtomRenderer = (
 	format: Format,
 	element: MediaAtomElement,
+	isEditions: boolean,
 ): ReactNode => {
 	const { posterUrl, videoId, duration, caption } = element;
 
@@ -631,7 +633,12 @@ const mediaAtomRenderer = (
 		),
 	});
 	return styledH('figure', figureAttributes, [
-		styledH('div', attributes),
+		isEditions
+			? h(Video, {
+					atomId: element.id,
+					title: element.title,
+			  })
+			: styledH('div', attributes),
 		figcaption,
 	]);
 };
@@ -748,7 +755,7 @@ const render = (format: Format, excludeStyles = false) => (
 			return interactiveAtomRenderer(format, element);
 
 		case ElementKind.MediaAtom:
-			return mediaAtomRenderer(format, element);
+			return mediaAtomRenderer(format, element, false);
 
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
@@ -805,7 +812,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 			return interactiveAtomRenderer(format, element);
 
 		case ElementKind.MediaAtom:
-			return mediaAtomRenderer(format, element);
+			return mediaAtomRenderer(format, element, true);
 
 		default:
 			return null;
