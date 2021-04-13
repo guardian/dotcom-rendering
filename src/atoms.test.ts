@@ -529,7 +529,7 @@ describe('parseAtom', () => {
 
 		it(`returns an error if no timeline title or body`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title or body for atom: ${atomId}`),
+				err(`No title for atom: ${atomId}`),
 			);
 		});
 

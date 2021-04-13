@@ -176,6 +176,7 @@ function parseAtom(
 			}
 
 			const { title } = atom;
+
 			const events: TimelineEvent[] = atom.data.timeline.events.map(
 				(event) => ({
 					title: event.title,
@@ -188,8 +189,8 @@ function parseAtom(
 
 			const description = atom.data.timeline.description;
 
-			if (!title || events.length === 0) {
-				return err(`No title or body for atom: ${id}`);
+			if (!title) {
+				return err(`No title for atom: ${id}`);
 			}
 
 			if (events.some((event) => event.date === '')) {
