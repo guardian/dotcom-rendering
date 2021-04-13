@@ -6,7 +6,7 @@ import { validateAsCAPIType } from '@root/src/model/validate';
 import { addDividers } from '@root/src/model/add-dividers';
 import { enhanceDots } from '@root/src/model/add-dots';
 import { setIsDev } from '@root/src/model/set-is-dev';
-import { enhancePhotoEssay } from '@root/src/model/enhance-photoessay';
+import { enhanceImages } from '@root/src/model/enhance-images';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
@@ -28,8 +28,8 @@ class CAPIEnhancer {
 		return this;
 	}
 
-	enhancePhotoEssay() {
-		this.capi = enhancePhotoEssay(this.capi);
+	enhanceImages() {
+		this.capi = enhanceImages(this.capi);
 		return this;
 	}
 
@@ -59,7 +59,7 @@ export const render = (
 			.addDividers()
 			.enhanceBlockquotes()
 			.enhanceDots()
-			.enhancePhotoEssay().capi;
+			.enhanceImages().capi;
 		const resp = document({
 			data: {
 				CAPI,
