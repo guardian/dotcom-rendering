@@ -459,6 +459,8 @@ interface CAPIType {
 
 	matchUrl?: string;
 	isSpecialReport: boolean;
+
+	anniversaryInteractiveAtom?: InteractiveAtomBlockElement; // TEMPORARY, to be removed following 200th anniversary
 }
 
 // Browser data models. Note the CAPI prefix here means something different to
