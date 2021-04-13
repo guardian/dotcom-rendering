@@ -21,6 +21,10 @@ type Props = {
 
 const curly = (x: any) => x;
 
+const topPadding = css`
+	padding-top: ${space[1]}px;
+`;
+
 const standardFont = css`
 	${headline.medium()};
 	${until.tablet} {
@@ -296,6 +300,7 @@ export const ArticleHeadline = ({
 						<h1
 							className={cx(
 								boldFont,
+								topPadding,
 								css`
 									color: ${palette.text.headline};
 								`,
@@ -311,6 +316,7 @@ export const ArticleHeadline = ({
 							<h1
 								className={cx(
 									lightFont,
+									topPadding,
 									css`
 										color: ${palette.text.headline};
 									`,
@@ -334,6 +340,7 @@ export const ArticleHeadline = ({
 							<h1
 								className={cx(
 									lightFont,
+									topPadding,
 									css`
 										color: ${palette.text.headline};
 									`,
@@ -348,6 +355,7 @@ export const ArticleHeadline = ({
 						<h1
 							className={cx(
 								standardFont,
+								topPadding,
 								underlinedStyles,
 								css`
 									color: ${palette.text.headline};
@@ -404,6 +412,7 @@ export const ArticleHeadline = ({
 								format.theme === Special.Labs
 									? labsFont
 									: standardFont,
+								topPadding,
 								css`
 									color: ${palette.text.headline};
 								`,
