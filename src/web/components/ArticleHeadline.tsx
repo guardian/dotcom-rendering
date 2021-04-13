@@ -22,7 +22,9 @@ type Props = {
 const curly = (x: any) => x;
 
 const topPadding = css`
-	padding-top: ${space[1]}px;
+	${from.leftCol} {
+		padding-top: ${space[1]}px;
+	}
 `;
 
 const standardFont = css`
