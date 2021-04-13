@@ -1,9 +1,3 @@
-const makeCAPIFormat = (theme: CAPITheme): CAPIFormat => ({
-	theme,
-	design: 'ArticleDesign',
-	display: 'StandardDisplay',
-});
-
 export const mockTab1: CAPITrailTabType = {
 	heading: 'Across The Guardian',
 	trails: [
@@ -17,7 +11,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/85377038aacd71b2c0e55b0a55478165fe6d3014/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=de2cecf52b21492f01daa4520c4f2a97',
 			isLiveBlog: true,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'LiveBlogDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -31,7 +29,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/579fd19481e46b9d6ed3c69c2a6992483df84478/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=63a6a5c13a8087e607a44ce5c7da2090',
 			isLiveBlog: false,
-			format: makeCAPIFormat('OpinionPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'OpinionPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'opinion',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			ageWarning: '1 year old',
@@ -47,7 +49,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/0df1fc1a2b78aa1772b4b43c2e5ebfc7f43111a8/0_91_5445_3267/master/5445.jpg?width=300&quality=85&auto=format&fit=max&s=3da9f89b54b0126fec2677117e73487e',
 			isLiveBlog: true,
-			format: makeCAPIFormat('SportPillar'),
+			format: {
+				design: 'LiveBlogDesign',
+				theme: 'SportPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'sport',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -62,7 +68,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/57a9a1a56c7d319a8f57a9c8767793ae0481db4c/0_95_4950_2970/master/4950.jpg?width=300&quality=85&auto=format&fit=max&s=77949a713212b69499d0dc6b5bdb2faf',
 			isLiveBlog: true,
-			format: makeCAPIFormat('CulturePillar'),
+			format: {
+				design: 'LiveBlogDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'culture',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -77,7 +87,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/e05185cce0a0c6953e666276caa98f6ea104c989/0_214_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=188a7a9ed42517b9462ae0788fe96a0a',
 			isLiveBlog: false,
-			format: makeCAPIFormat('LifestylePillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'LifestylePillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'lifestyle',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -93,7 +107,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/5792a3b971914e21bd04cb13eed54159463ce90e/0_128_4991_2994/master/4991.jpg?width=300&quality=85&auto=format&fit=max&s=6d4eab73546172d576a1022c29bdbcd2',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -108,7 +126,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/2e87f0ee5f1a6c292cfcfc5f6f99e9a54ba3cc05/0_139_4032_2419/master/4032.jpg?width=300&quality=85&auto=format&fit=max&s=e951b289eda050060201927e978d30ef',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -123,7 +145,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/2d88f2493b6eff49b6b8d6dd35345f03fa2b4af2/0_721_3361_2017/master/3361.jpg?width=300&quality=85&auto=format&fit=max&s=8601a174c9dc594f75318da8e99932bf',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -138,7 +164,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/bceaab691b06c3f3830e7794d24c6ada2b301fad/847_177_2750_1650/master/2750.jpg?width=300&quality=85&auto=format&fit=max&s=3af893de9c01e38a8635c83883ef17ef',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -153,7 +183,11 @@ export const mockTab1: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/bc4e5ed4448eafd6238656aefae98c832cacc148/32_13_1898_1139/master/1898.jpg?width=300&quality=85&auto=format&fit=max&s=a4b8c116c5e580482dfe727d126b57ae',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -174,7 +208,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/eef1ed43631aa9088f26fca4a138f6e4250d9319/0_297_5400_3240/master/5400.jpg?width=300&quality=85&auto=format&fit=max&s=90f779a1a1ca85348a47ff19ccc50b12',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -189,7 +227,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/ff131761ef56456073d4edfb52af4ec8b8b953c2/0_290_6355_3813/master/6355.jpg?width=300&quality=85&auto=format&fit=max&s=6f1d869f447a6389e1e4a05b457c2289',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -204,7 +246,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/1ce9e4ae33c1be975ab83fdabc267fc081c9d73c/0_0_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=16240604b766e11e7d5846fa13c43102',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -219,7 +265,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/6de53bbc2260febc167488209afe81844c47ecaa/0_225_5352_3211/master/5352.jpg?width=300&quality=85&auto=format&fit=max&s=d7da55f1e5f9d6b3a11f0c97237f3992',
 			isLiveBlog: false,
-			format: makeCAPIFormat('CulturePillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'culture',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -234,7 +284,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/5ee2bea12b92b28eff10b84d22e952c2681cb5f5/0_479_2239_1343/master/2239.jpg?width=300&quality=85&auto=format&fit=max&s=7b5cfb46f6a84b663d94a83c35acfe81',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -248,7 +302,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/981e17d90b401754aae355d2e56bfedbe5b359b5/0_1000_2480_1488/master/2480.jpg?width=300&quality=85&auto=format&fit=max&s=facd8591d83abd4b0019370b6031be6e',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -263,7 +321,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/ff17da45e26064e2666106902a90655e4db49ea4/955_135_1467_880/master/1467.jpg?width=300&quality=85&auto=format&fit=max&s=f6c5f055f7614d73f65ec193bb30c054',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -278,7 +340,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/b819ca05b59cdbe5ee59684740d1d9fe181b5a22/0_69_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=2f001df53652440f4be489b695c03ad2',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -293,7 +359,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/1e518e0996861201a7350f91f46d1f573ed2ea9c/0_823_6206_3724/master/6206.jpg?width=300&quality=85&auto=format&fit=max&s=149bde7a6699e526903598c690c214d0',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -308,7 +378,11 @@ export const mockTab2: CAPITrailTabType = {
 			image:
 				'https://i.guim.co.uk/img/media/478dcff6eee2cbd753f1956e420c4caaf7b00fdd/0_1208_8095_4859/master/8095.jpg?width=300&quality=85&auto=format&fit=max&s=44effc5b2ab10b9a588be02c55a0620a',
 			isLiveBlog: false,
-			format: makeCAPIFormat('NewsPillar'),
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
@@ -346,7 +420,11 @@ export const mockMostShared = {
 	image:
 		'https://i.guim.co.uk/img/media/579fd19481e46b9d6ed3c69c2a6992483df84478/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=63a6a5c13a8087e607a44ce5c7da2090',
 	isLiveBlog: false,
-	format: makeCAPIFormat('OpinionPillar'),
+	format: {
+		design: 'ArticleDesign',
+		theme: 'OpinionPillar',
+		display: 'StandardDisplay',
+	},
 	pillar: 'opinion',
 	designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 	ageWarning: '1 year old',

@@ -729,6 +729,7 @@ interface ConfigTypeBrowser {
 	host?: string;
 	idUrl?: string;
 	mmaUrl?: string;
+	isPreview: boolean;
 }
 
 interface GADataType {

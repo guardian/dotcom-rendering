@@ -579,7 +579,6 @@ export const Quad = () => (
 							imagePosition="top"
 							showClock={true}
 							commentCount={30989}
-							isLiveBlog={true}
 							showPulsingDot={true}
 						/>
 					</LI>

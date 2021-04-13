@@ -23,6 +23,7 @@ type Props = {
 	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
+	isPreview: boolean;
 };
 
 const Container = ({
@@ -224,6 +225,7 @@ export const LiveBlock = ({
 	abTests,
 	adTargeting,
 	host,
+	isPreview,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -276,7 +278,6 @@ export const LiveBlock = ({
 					{headerElement && (
 						<ElementRenderer
 							isMainMedia={false}
-							isLiveBlog={true}
 							adTargeting={adTargeting}
 							index={0}
 							element={headerElement}
@@ -284,6 +285,7 @@ export const LiveBlock = ({
 							palette={palette}
 							abTests={abTests}
 							host={host}
+							isPreview={isPreview}
 						/>
 					)}
 				</span>
@@ -296,7 +298,6 @@ export const LiveBlock = ({
 							<BlockMedia key={`${element._type}-${index}`}>
 								<ElementRenderer
 									isMainMedia={false}
-									isLiveBlog={true}
 									adTargeting={adTargeting}
 									index={index}
 									element={element}
@@ -304,6 +305,7 @@ export const LiveBlock = ({
 									palette={palette}
 									abTests={abTests}
 									host={host}
+									isPreview={isPreview}
 								/>
 							</BlockMedia>
 						);
@@ -313,12 +315,12 @@ export const LiveBlock = ({
 						<BlockText key={`${element._type}-${index}`}>
 							<ElementRenderer
 								isMainMedia={false}
-								isLiveBlog={true}
 								index={index}
 								element={element}
 								format={format}
 								palette={palette}
 								abTests={abTests}
+								isPreview={isPreview}
 							/>
 						</BlockText>
 					);

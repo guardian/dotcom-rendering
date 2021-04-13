@@ -95,6 +95,7 @@ export const VideoAsSecond = () => {
 				pageId=""
 				webTitle=""
 				abTests={{}}
+				isPreview={false}
 			/>
 		</Wrapper>
 	);
@@ -139,6 +140,7 @@ export const Title = () => {
 				pageId=""
 				webTitle=""
 				abTests={{}}
+				isPreview={false}
 			/>
 		</Wrapper>
 	);
@@ -208,6 +210,7 @@ export const Video = () => {
 				pageId=""
 				webTitle=""
 				abTests={{}}
+				isPreview={false}
 			/>
 		</Wrapper>
 	);
@@ -249,6 +252,7 @@ export const RichLink = () => {
 				pageId=""
 				webTitle=""
 				abTests={{}}
+				isPreview={false}
 			/>
 		</Wrapper>
 	);
@@ -278,6 +282,7 @@ export const FirstImage = () => {
 				pageId=""
 				webTitle=""
 				abTests={{}}
+				isPreview={false}
 			/>
 		</Wrapper>
 	);
@@ -308,6 +313,7 @@ export const ImaheAndTitle = () => {
 				pageId=""
 				webTitle=""
 				abTests={{}}
+				isPreview={false}
 			/>
 		</Wrapper>
 	);
@@ -334,6 +340,7 @@ export const Updated = () => {
 				pageId=""
 				webTitle=""
 				abTests={{}}
+				isPreview={false}
 			/>
 		</Wrapper>
 	);

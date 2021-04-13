@@ -59,6 +59,7 @@ export const MainMedia: React.FC<{
 	starRating?: number;
 	host?: string;
 	abTests: CAPIType['config']['abTests'];
+	isPreview: boolean;
 }> = ({
 	elements,
 	format,
@@ -68,6 +69,7 @@ export const MainMedia: React.FC<{
 	starRating,
 	host,
 	abTests,
+	isPreview,
 }) => (
 	<div
 		className={cx(
@@ -87,6 +89,7 @@ export const MainMedia: React.FC<{
 				host={host}
 				abTests={abTests}
 				isMainMedia={true}
+				isPreview={isPreview}
 			/>
 		))}
 	</div>
