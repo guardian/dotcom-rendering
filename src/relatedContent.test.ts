@@ -126,13 +126,13 @@ describe('parseRelatedItemType', () => {
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.FEATURE);
 	});
 
-	it('not returns Type LIVE given a content with minutebyminute tone tag but no liveBloggingNow field', () => {
+	it('not returns Type ARTICLE given a content with minutebyminute tone tag but no liveBloggingNow field', () => {
 		addTagToTagsList('tone/minutebyminute', TagType.TONE);
 		const actual = parseRelatedContent([defaultContent]);
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.ARTICLE);
 	});
 
-	it('not returns Type LIVE given a content with minutebyminute tone tag but false liveBloggingNow field', () => {
+	it('not returns Type ARTICLE given a content with minutebyminute tone tag but false liveBloggingNow field', () => {
 		addTagToTagsList('tone/minutebyminute', TagType.TONE);
 		defaultContent.fields = { liveBloggingNow: false };
 		const actual = parseRelatedContent([defaultContent]);
@@ -155,7 +155,7 @@ describe('parseRelatedItemType', () => {
 		expect(actual.relatedItems[0].starRating).toBe('4');
 	});
 
-	it('not returns Type REVIEW given a content field with star rating other than 0-5', () => {
+	it('not returns Type ARTICLE given a content field with star rating other than 0-5', () => {
 		defaultContent.fields = { starRating: 6 };
 		const actual = parseRelatedContent([defaultContent]);
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.ARTICLE);
