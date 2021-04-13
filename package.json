@@ -214,7 +214,7 @@
         "stylelint-processor-styled-components": "^1.10.0",
         "svg-loader": "^0.0.2",
         "ts-jest": "^24.3.0",
-        "ts-loader": "^8.0.14",
+        "ts-loader": "^8.1.0",
         "tslint": "^5.20.1",
         "tslint-config-airbnb": "^5.11.2",
         "tslint-config-prettier": "^1.18.0",
