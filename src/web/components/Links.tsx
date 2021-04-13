@@ -13,6 +13,7 @@ import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { useOnce } from '@frontend/web/lib/useOnce';
+import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
 	supporterCTA: string;
@@ -46,6 +47,11 @@ const linkStyles = css`
 		width: 18px;
 		margin: 3px 4px 0 0;
 	}
+`;
+
+const searchLinkStyles = css`
+	${linkStyles}
+	${getZIndex('searchHeaderLink')}
 `;
 
 const linkTablet = ({ showAtTablet }: { showAtTablet: boolean }) => css`
@@ -235,7 +241,10 @@ export const Links = ({
 			)}
 
 			<Search
-				className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
+				className={cx(
+					linkTablet({ showAtTablet: false }),
+					searchLinkStyles,
+				)}
 				href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 				dataLinkName="nav2 : search"
 			>
