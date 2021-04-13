@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { Design, Special } from '@guardian/types';
-import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
+import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
@@ -114,24 +114,6 @@ const labTitleOrNot = (format: Format) => {
 		line-height: 20px;
 	`;
 };
-
-const badgeImageStyle = css`
-	max-height: 3.75rem;
-	margin-left: 0.625rem;
-	vertical-align: middle;
-`;
-
-const badgeStyle = css`
-	font-size: 0.75rem;
-	line-height: 1rem;
-	${textSans.xsmall({ fontWeight: 'regular' })};
-	color: ${neutral[46]};
-	font-weight: bold;
-	margin-top: 0.375rem;
-	padding-right: 0.625rem;
-	padding-bottom: 0.625rem;
-	text-align: right;
-`;
 
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>

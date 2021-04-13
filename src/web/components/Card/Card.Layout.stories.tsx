@@ -796,7 +796,7 @@ export const Labs = () => (
 							}}
 							headlineText={headlines[13]}
 							headlineSize="medium"
-							imageUrl={images[0]}
+							imageUrl={images[1]}
 							imagePosition="top"
 							badge={labBadge3}
 						/>

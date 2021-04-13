@@ -1,6 +1,6 @@
 export const images = [
 	'https://i.guim.co.uk/img/media/8dafca4a61f8cd8a9a9ec1950da1760345347f16/0_331_6720_4032/master/6720.jpg?width=1140&quality=85&s=c20d3702dc961fbf3730a4666c2a5483',
-	'https://i.guim.co.uk/img/media/885ef584a0d98eb0485e2f0cf4cec16ede9a9455/0_260_5760_3456/master/5760.jpg?width=1140&quality=85&s=e1b5881b43f31a0256acf51b07781f2b',
+	'https://i.guim.co.uk/img/media/43d01a38800bdd521322fb022bfcb545a5964e64/0_197_5906_3543/master/5906.jpg?width=300&quality=85&auto=format&fit=max&s=dc485dae2bae9df154ce471c949565b9',
 	'https://i.guim.co.uk/img/media/7d64a9e2a6825e9354810933d5185305ce670737/0_169_4200_2751/master/4200.jpg?width=1140&quality=85&s=532871569ff5ba6013266967b7c8e8e0',
 	'https://i.guim.co.uk/img/media/b2ae8ca847adfd38de9c08e0e78bfe531c69a095/0_0_4638_3092/master/4638.jpg?width=1140&quality=85&s=30a2b69f09b94ffbcf53769a7208a51a',
 	'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
