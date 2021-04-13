@@ -12,7 +12,9 @@
         "prettier:fix": "prettier . --write",
         "lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
         "tsc": "tsc",
-        "test": "jest",
+        "test": "jest --maxWorkers=50%",
+				"test:watch": "jest --watch --maxWorkers=25%",
+				"test:ci": "jest --runInBand",
         "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
         "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
         "cypress:open": "cypress open",
@@ -114,7 +116,7 @@
         "reset-css": "^5.0.1",
         "sanitize-html": "^2.3.2",
         "swr": "^0.5.5",
-        "web-vitals": "^0.2.4",
+        "web-vitals": "^1.1.1",
         "youtube-player": "^5.5.2"
     },
     "devDependencies": {

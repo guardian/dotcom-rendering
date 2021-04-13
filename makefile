@@ -101,12 +101,12 @@ stylelint: clean-dist install
 
 test: clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose  --runInBand
+	@yarn test:ci --verbose
 	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test --verbose  --runInBand --collectCoverage --coverageReporters=lcov
+	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
 bundlesize: clear clean-dist install build
 	@bundlesize
@@ -115,7 +115,7 @@ validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
 validate-prepush:
-	@run-p tsc prettier:check lint-staged "test -- --verbose  --runInBand --onlyChanged"
+	@run-p tsc prettier:check lint-staged "test:ci -- --verbose --onlyChanged"
 
 validate-ci: install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")
