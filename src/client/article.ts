@@ -12,9 +12,9 @@ import { App } from '@guardian/discussion-rendering/build/App';
 import {
 	ads,
 	reportNativeElementPositionChanges,
+	sendTargetingParams,
 	slideshow,
 	videos,
-	sendTargetingParams,
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
 import FooterContent from 'components/footerContent';

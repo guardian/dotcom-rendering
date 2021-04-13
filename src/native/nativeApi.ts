@@ -1,4 +1,5 @@
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
+import * as Analytics from '@guardian/bridget/Analytics';
 import * as Commercial from '@guardian/bridget/Commercial';
 import * as Discussion from '@guardian/bridget/Discussion';
 import * as Environment from '@guardian/bridget/Environment';
@@ -7,7 +8,6 @@ import * as Metrics from '@guardian/bridget/Metrics';
 import * as Notifications from '@guardian/bridget/Notifications';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
-import * as Analytics from '@guardian/bridget/Analytics';
 import { createAppClient } from './thrift/nativeConnection';
 
 const environmentClient: Environment.Client<void> = createAppClient<

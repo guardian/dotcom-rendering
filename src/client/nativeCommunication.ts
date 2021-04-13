@@ -8,11 +8,11 @@ import { errorToString, isObject, memoise } from 'lib';
 import { logger } from 'logger';
 import {
 	acquisitionsClient,
+	analyticsClient,
 	commercialClient,
 	galleryClient,
 	userClient,
 	videoClient,
-	analyticsClient,
 } from '../native/nativeApi';
 
 type Slot = AdSlot | VideoSlot;
@@ -267,7 +267,7 @@ function reportNativeElementPositionChanges(): void {
 
 function sendTargetingParams(): void {
 	const targetingParams = getTargetingParams();
-	analyticsClient.sendTargetingParams(targetingParams);
+	void analyticsClient.sendTargetingParams(targetingParams);
 }
 
 export {
