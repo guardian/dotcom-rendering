@@ -407,6 +407,20 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
+				case Design.LiveBlog:
+				case Design.DeadBlog:
+					return (
+						<h1
+							className={cx(
+								standardFont,
+								css`
+									color: ${palette.text.headline};
+								`,
+							)}
+						>
+							{curly(headlineString)}
+						</h1>
+					);
 				default:
 					return (
 						<h1
