@@ -59,7 +59,7 @@ type Props = {
 	dataLinkName?: string;
 	// Labs
 	badge?: BadgeType;
-	brand: string;
+	brand?: string;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
