@@ -1,66 +1,46 @@
 import { JSDOM } from 'jsdom';
 
-/**
- * decideCaption
- * Decides if a text element should be used to caption the preceding images
- * @param {TextBlockElement} element - The text element to examine
- * @param {Boolean} isPhotoEssay - We treat photo essays differently
- * @param {ImageBlockElement[]} imageBuffer - We use this to decide if a caption is needed or not
- * */
-const decideCaption = ({
-	element,
-	isPhotoEssay,
-	imageBuffer,
-}: {
-	element?: CAPIElement;
-	isPhotoEssay: boolean;
-	imageBuffer: ImageBlockElement[];
-}): string => {
-	//  the convention: <ul><li><Caption text</li></ul>
-	if (!element) return '';
-	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
-		return '';
-	// We only set a special caption on non photo essay articles if there are more than two
-	// halfWidth images in the buffer
-	const countOfHalfWidthImages = imageBuffer.filter(
-		(image) => image.role === 'halfWidth',
-	).length;
-	if (!isPhotoEssay && countOfHalfWidthImages < 2) return '';
-	// Extract the caption
-	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstElementChild) return '';
-	const hasULwrapper = frag.firstElementChild.nodeName === 'UL';
-	const containsLItags = frag.firstElementChild.outerHTML.includes('<li>');
-	if (hasULwrapper && containsLItags) {
-		// element is an essay caption
-		return element.html;
-	}
-	return '';
+const ishalfWidthImage = (element: CAPIElement): boolean => {
+	if (!element) return false;
+	return (
+		element._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement' &&
+		element.role === 'halfWidth'
+	);
 };
 
-/**
- * decideTitle
- * Decides if a text element should be used to title the preceding image
- * @param {TextBlockElement} element - The text element to examine
- * @param {Boolean} isPhotoEssay - We treat photo essays differently
- * */
-const decideTitle = ({
-	element,
-	isPhotoEssay,
-}: {
-	element?: CAPIElement;
-	isPhotoEssay: boolean;
-}): string => {
+const isMultiImage = (element: CAPIElement): boolean => {
+	if (!element) return false;
+	return (
+		element._type ===
+		'model.dotcomrendering.pageElements.MultiImageBlockElement'
+	);
+};
+
+const isImage = (element: CAPIElement): boolean => {
+	if (!element) return false;
+	return (
+		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
+	);
+};
+
+const isTitle = (element: CAPIElement): boolean => {
+	if (!element) return false;
 	// Checks if this element is a 'title' based on the convention: <h2>Title text</h2>
-	if (!element) return '';
 	if (
 		element._type !==
 		'model.dotcomrendering.pageElements.SubheadingBlockElement'
 	)
-		return '';
-	if (!isPhotoEssay) return '';
-	// Extract title
+		return false;
 	const frag = JSDOM.fragment(element.html);
+	return frag?.firstElementChild?.nodeName === 'H2';
+};
+
+const extractTitle = (element: CAPIElement): string => {
+	// We cast here because we're know this element is a subheading but TS isn't sure
+	const subHeading = element as SubheadingBlockElement;
+	// Extract 'title' based on the convention: <h2>Title text</h2>
+	const frag = JSDOM.fragment(subHeading.html);
 	if (!frag || !frag.firstElementChild) return '';
 	const isH2tag = frag.firstElementChild.nodeName === 'H2';
 	if (isH2tag) {
@@ -70,250 +50,274 @@ const decideTitle = ({
 	return '';
 };
 
-const enhanceImage = ({
-	image,
-	caption,
-	title,
-}: {
-	image: ImageBlockElement;
-	caption?: string;
-	title?: string;
-}): ImageBlockElement => {
-	const enhancedImage = { ...image };
-	if (caption) {
-		enhancedImage.data.caption = caption;
+const isCaption = (element: CAPIElement): boolean => {
+	if (!element) return false;
+	// Checks if this element is a 'caption' based on the convention: <ul><li><Caption text</li></ul>
+	if (
+		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
+	) {
+		return false;
 	}
-	if (title) {
-		enhancedImage.title = title;
-	}
-	return enhancedImage;
+	const frag = JSDOM.fragment(element.html);
+	if (!frag || !frag.firstElementChild) return false;
+	const hasULwrapper = frag.firstElementChild.nodeName === 'UL';
+	const containsLItags = frag.firstElementChild.outerHTML.includes('<li>');
+	return hasULwrapper && containsLItags;
 };
 
-const processBuffer = ({
-	imageBuffer,
-	title,
-	caption,
-	isPhotoEssay,
-}: {
-	imageBuffer: ImageBlockElement[];
-	title?: string;
-	caption?: string;
-	isPhotoEssay?: boolean;
-}): CAPIElement[] => {
-	function cleanCaption(image: ImageBlockElement) {
-		// If a standalone caption was found we want to strip any existing captions
-		// Or if this is article is a photo essay, then we always strip captions, even if that
-		// leaves the image with no caption at all, we want that for photo essays
-		if (caption || isPhotoEssay) {
-			return {
-				...image,
-				data: {
-					...image.data,
-					caption: '',
-				},
-				displayCredit: false,
-			};
-		}
-		// No special caption was found so continue with this images defaults
-		return image;
+const extractCaption = (element: CAPIElement): string => {
+	// Extract 'caption' based on the convention: <ul><li><Caption text</li></ul>
+	// We cast here because we're know this element is a text element but TS isn't sure
+	const textElement = element as TextBlockElement;
+	const frag = JSDOM.fragment(textElement.html);
+	if (!frag || !frag.firstElementChild) return '';
+	const hasULwrapper = frag.firstElementChild.nodeName === 'UL';
+	const containsLItags = frag.firstElementChild.outerHTML.includes('<li>');
+	if (hasULwrapper && containsLItags) {
+		return textElement.html;
 	}
+	return '';
+};
 
-	const processed: CAPIElement[] = [];
-	let prevHalfWidthImage: ImageBlockElement | null;
-	imageBuffer.map(cleanCaption).forEach((image, i) => {
-		const endOfBuffer = i + 1 === imageBuffer.length;
-		switch (image.role) {
-			case 'halfWidth':
-				if (!prevHalfWidthImage) {
-					if (endOfBuffer) {
-						processed.push(enhanceImage({ image, caption, title }));
-					} else {
-						prevHalfWidthImage = image;
-					}
-				} else {
-					const multiImage: MultiImageBlockElement = {
-						_type:
-							'model.dotcomrendering.pageElements.MultiImageBlockElement',
-						elementId: prevHalfWidthImage.elementId,
-						images: [prevHalfWidthImage, image],
-					};
-					if (endOfBuffer) multiImage.caption = caption;
-					processed.push(multiImage);
-					// Reset
-					prevHalfWidthImage = null;
-				}
-				break;
-			case 'inline':
-			case 'immersive':
-			case 'showcase':
-			case 'supporting':
-			case 'thumbnail':
-			default:
-				if (endOfBuffer) {
-					processed.push(enhanceImage({ image, caption, title }));
-					// Mop up any dangling halfWidth images that never had a sibling
-					if (prevHalfWidthImage)
-						processed.push(
-							enhanceImage({
-								image: prevHalfWidthImage,
-								caption,
-								title,
-							}),
-						);
-				} else {
-					processed.push(enhanceImage({ image }));
-					// Mop up any dangling halfWidth images that never had a sibling
-					if (prevHalfWidthImage)
-						processed.push(
-							enhanceImage({ image: prevHalfWidthImage }),
-						);
-				}
-				break;
+const constructMultiImageElement = (
+	thisElement: CAPIElement,
+	nextElement: CAPIElement,
+): MultiImageBlockElement => {
+	// We cast here because we're certain each element is an image (because of the guards we set earlier) but
+	// TS isn't inferring that and needs a little help
+	const first = thisElement as ImageBlockElement;
+	const second = nextElement as ImageBlockElement;
+	return {
+		_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+		elementId: first.elementId,
+		images: [
+			{
+				...first,
+				data: {
+					...first.data,
+					caption: '', // Delete any existing caption (special captions might be added later)
+				},
+			},
+			{
+				...second,
+				data: {
+					...second.data,
+					caption: '', // ibid
+				},
+			},
+		],
+	};
+};
+
+const addMultiImageElements = (elements: CAPIElement[]): CAPIElement[] => {
+	const withMultiImageElements: CAPIElement[] = [];
+	elements.forEach((thisElement, i) => {
+		const nextElement = elements[i + 1];
+		if (ishalfWidthImage(thisElement) && ishalfWidthImage(nextElement)) {
+			// Pair found. Add a multi element and remove the next entry
+			withMultiImageElements.push(
+				constructMultiImageElement(thisElement, nextElement),
+			);
+			// Remove the next element
+			elements.splice(i + 1, 1);
+		} else {
+			// Pass through
+			withMultiImageElements.push(thisElement);
 		}
 	});
-
-	return processed;
+	return withMultiImageElements;
 };
+
+const addTitles = (elements: CAPIElement[]): CAPIElement[] => {
+	const withTitles: CAPIElement[] = [];
+	elements.forEach((thisElement, i) => {
+		const nextElement = elements[i + 1];
+		const subsequentElement = elements[i + 2];
+		if (isImage(thisElement) && isTitle(nextElement)) {
+			// This element is an image and is immediately followed by a title
+			withTitles.push({
+				...thisElement,
+				title: extractTitle(nextElement),
+			} as ImageBlockElement);
+			// Remove the element
+			elements.splice(i + 1, 1);
+		} else if (
+			isImage(thisElement) &&
+			isCaption(nextElement) &&
+			isTitle(subsequentElement)
+		) {
+			// This element is an image, was followed by a caption, and then had a title after it
+			withTitles.push({
+				...thisElement,
+				title: extractTitle(subsequentElement),
+			} as ImageBlockElement);
+			// Remove the element
+			elements.splice(i + 2, 1);
+		} else {
+			// Pass through
+			withTitles.push(thisElement);
+		}
+	});
+	return withTitles;
+};
+
+const addCaptionsToImages = (elements: CAPIElement[]): CAPIElement[] => {
+	const withSpecialCaptions: CAPIElement[] = [];
+	elements.forEach((thisElement, i) => {
+		const nextElement = elements[i + 1];
+		const subsequentElement = elements[i + 2];
+		if (isImage(thisElement) && isCaption(nextElement)) {
+			const thisImage = thisElement as ImageBlockElement;
+			withSpecialCaptions.push({
+				...thisImage,
+				data: {
+					...thisImage.data,
+					caption: extractCaption(nextElement),
+				},
+			} as ImageBlockElement);
+			// Remove the next element
+			elements.splice(i + 1, 1);
+		} else if (
+			isImage(thisElement) &&
+			isTitle(nextElement) &&
+			isCaption(subsequentElement)
+		) {
+			const thisImage = thisElement as ImageBlockElement;
+			withSpecialCaptions.push({
+				...thisImage,
+				data: {
+					...thisImage.data,
+					caption: extractCaption(subsequentElement),
+				},
+			} as ImageBlockElement);
+			// Remove the subsequent element
+			elements.splice(i + 2, 1);
+		} else {
+			// Pass through
+			withSpecialCaptions.push(thisElement);
+		}
+	});
+	return withSpecialCaptions;
+};
+
+const addCaptionsToMultis = (elements: CAPIElement[]): CAPIElement[] => {
+	const withSpecialCaptions: CAPIElement[] = [];
+	elements.forEach((thisElement, i) => {
+		const nextElement = elements[i + 1];
+		const subsequentElement = elements[i + 2];
+		if (isMultiImage(thisElement) && isCaption(nextElement)) {
+			withSpecialCaptions.push({
+				...thisElement,
+				caption: extractCaption(nextElement),
+			} as MultiImageBlockElement);
+			// Remove the next element
+			elements.splice(i + 1, 1);
+		} else if (
+			isMultiImage(thisElement) &&
+			isTitle(nextElement) &&
+			isCaption(subsequentElement)
+		) {
+			withSpecialCaptions.push({
+				...thisElement,
+				caption: extractCaption(subsequentElement),
+			} as MultiImageBlockElement);
+			// Remove the subsequent element
+			elements.splice(i + 2, 1);
+		} else {
+			// Pass through
+			withSpecialCaptions.push(thisElement);
+		}
+	});
+	return withSpecialCaptions;
+};
+
+const stripCaptions = (elements: CAPIElement[]): CAPIElement[] => {
+	// Remove all captions from all images
+	const withoutCaptions: CAPIElement[] = [];
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+		) {
+			// Remove the caption from this image
+			withoutCaptions.push({
+				...thisElement,
+				data: {
+					...thisElement.data,
+					caption: '',
+				},
+			} as ImageBlockElement);
+		} else {
+			// Pass through
+			withoutCaptions.push(thisElement);
+		}
+	});
+	return withoutCaptions;
+};
+
+class Enhancer {
+	elements: CAPIElement[];
+
+	constructor(elements: CAPIElement[]) {
+		this.elements = elements;
+	}
+
+	stripCaptions() {
+		this.elements = stripCaptions(this.elements);
+		return this;
+	}
+
+	addMultiImageElements() {
+		this.elements = addMultiImageElements(this.elements);
+		return this;
+	}
+
+	addTitles() {
+		this.elements = addTitles(this.elements);
+		return this;
+	}
+
+	addCaptionsToMultis() {
+		this.elements = addCaptionsToMultis(this.elements);
+		return this;
+	}
+
+	addCaptionsToImages() {
+		this.elements = addCaptionsToImages(this.elements);
+		return this;
+	}
+}
 
 const enhance = (
 	elements: CAPIElement[],
 	isPhotoEssay: boolean,
 ): CAPIElement[] => {
-	let imageBuffer: ImageBlockElement[] = [];
-	const enhanced: CAPIElement[] = [];
-
-	elements.forEach((element, i) => {
-		switch (element._type) {
-			case 'model.dotcomrendering.pageElements.ImageBlockElement':
-				// Buffer image in an array for processing later
-				imageBuffer.push(element);
-				break;
-			case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-				if (imageBuffer.length > 0) {
-					const nextTextBlock = elements[i + 1];
-					const nextCaption = decideCaption({
-						element: nextTextBlock,
-						isPhotoEssay,
-						imageBuffer,
-					});
-					const title = decideTitle({
-						element,
-						isPhotoEssay,
-					});
-
-					enhanced.push(
-						...processBuffer({
-							imageBuffer,
-							caption: nextCaption,
-							title,
-							isPhotoEssay,
-						}),
-					);
-					imageBuffer = [];
-					// If this subheading block wasn't a title, pass it through
-					if (!title) enhanced.push(element);
-					// If we extracted the caption from the next element, remove it
-					if (nextCaption) elements.splice(i, 1);
-				} else {
-					// If there are no images in the imageBuffer, pass this H2 block through
-					enhanced.push(element);
-				}
-
-				break;
-			case 'model.dotcomrendering.pageElements.TextBlockElement':
-				const caption = decideCaption({
-					element,
-					isPhotoEssay,
-					imageBuffer,
-				});
-
-				if (caption && imageBuffer.length > 0) {
-					const nextSubheading = elements[i + 1];
-					const nextTitle = decideTitle({
-						element: nextSubheading,
-						isPhotoEssay,
-					});
-					// So we have a caption and an imageBuffer too. Process the buffer using
-					// this caption
-					enhanced.push(
-						...processBuffer({
-							caption,
-							imageBuffer,
-							title: nextTitle,
-							isPhotoEssay,
-						}),
-					);
-					imageBuffer = [];
-					// If we extracted the title from the next element, remove it
-					if (nextTitle) elements.splice(i, 1);
-				} else if (caption && imageBuffer.length === 0) {
-					// This text element is a caption but there's no buffer to use it on.
-					if (isPhotoEssay) {
-						// For photo essays we only allow stand alone ul/li elements
-						// as part of an image imageBuffer so delete this element
-						elements.splice(i, 1);
-					} else {
-						// For all other articles, pass this ul li element through untouched
-						enhanced.push(element);
-					}
-					// TODO: Take this ul/li string and use it to overwrite the
-					// caption of the *previous* element. This is how Frontend works
-				} else if (!caption && imageBuffer.length > 0) {
-					const nextSubheading = elements[
-						i + 1
-					] as SubheadingBlockElement;
-					const nextTitle = decideTitle({
-						element: nextSubheading,
-						isPhotoEssay,
-					});
-					// We have a buffer but no caption to use with it
-					enhanced.push(
-						...processBuffer({
-							imageBuffer,
-							title: nextTitle,
-							isPhotoEssay,
-						}),
-					);
-					imageBuffer = [];
-					// If we extracted the title from the next element, remove it
-					if (nextTitle) elements.splice(i, 1);
-					// And we now pass this non caption text through
-					enhanced.push(element);
-				} else if (!caption && imageBuffer.length === 0) {
-					// This text element is not a caption, nor is there any imageBuffer, so just pass it through
-					enhanced.push(element);
-				}
-				break;
-			default:
-				// The element is something other than an image, textblock or subheading. If
-				// we have an image imageBuffer process it without any caption or title and then
-				// pass through this element unchanged
-				if (imageBuffer.length > 0) {
-					enhanced.push(
-						...processBuffer({
-							imageBuffer,
-							isPhotoEssay,
-						}),
-					);
-					imageBuffer = [];
-				}
-
-				enhanced.push(element);
-				break;
-		}
-	});
-	// If imageBuffer still has something in it, add it here. This could happen if the
-	// last element was an image
-	if (imageBuffer.length > 0) {
-		enhanced.push(
-			...processBuffer({
-				imageBuffer,
-				isPhotoEssay,
-			}),
+	if (isPhotoEssay) {
+		return (
+			new Enhancer(elements)
+				// Photo essays by convention have all image captions removed and rely completely on
+				// special captions set using the ul/li trick
+				.stripCaptions()
+				// Replace pairs of halfWidth images with MultiImageBlockElements
+				.addMultiImageElements()
+				// Photo essay have a convention of adding titles to images if the subsequent block is a h2
+				.addTitles()
+				// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
+				// element and use the value for the multi image `caption` prop
+				.addCaptionsToMultis()
+				// In photo essays, we also use ul captions for normal images as well
+				.addCaptionsToImages().elements
 		);
-		imageBuffer = [];
 	}
-	return enhanced;
+
+	return (
+		new Enhancer(elements)
+			// Replace pairs of halfWidth images with MultiImageBlockElements
+			.addMultiImageElements()
+			// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
+			// element and use the value for the multi image `caption` prop
+			.addCaptionsToMultis().elements
+	);
 };
 
 export const enhanceImages = (data: CAPIType): CAPIType => {
