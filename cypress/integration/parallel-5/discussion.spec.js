@@ -17,13 +17,9 @@ describe('Discussion', function () {
 
 	it('should scroll the page to the comments section and expand it when the comment count link is clicked', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
+		cy.contains('comments (');
 		cy.get('[data-cy=comment-counts]').click();
 		cy.contains('Displaying threads');
-	});
-
-	it('should show a count of the comments', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
-		cy.contains('comments (');
 	});
 
 	it('should automatically expand and scroll to a comment if the reader loads a permalink', function () {
