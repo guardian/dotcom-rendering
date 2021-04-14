@@ -26,16 +26,6 @@ import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { useOnce } from '@root/src/web/lib/useOnce';
 
-const checkForErrors = (response: Response) => {
-	if (!response.ok) {
-		throw Error(
-			response.statusText ||
-				`SlotBanner | An api call returned HTTP status ${response.status}`,
-		);
-	}
-	return response;
-};
-
 type BaseProps = {
 	isSignedIn: boolean;
 	contentType: string;
@@ -104,16 +94,23 @@ const buildPayload = ({
 };
 
 // TODO replace this with an imported version from the client lib
-const getBanner = (
-	meta: { [key: string]: any },
-	url: string,
-): Promise<Response> => {
+const getBanner = (meta: { [key: string]: any }, url: string): Promise<any> => {
 	const json = JSON.stringify(meta);
 	return fetch(url, {
 		method: 'post',
 		headers: { 'Content-Type': 'application/json' },
 		body: json,
-	});
+	})
+		.then((response: Response) => {
+			if (!response.ok) {
+				throw Error(
+					response.statusText ||
+						`SlotBanner | An api call returned HTTP status ${response.status}`,
+				);
+			}
+			return response;
+		})
+		.then((response) => response.json());
 };
 
 export const canShowRRBanner: CanShowFunction = async ({
@@ -171,24 +168,21 @@ export const canShowRRBanner: CanShowFunction = async ({
 	return getBanner(
 		bannerPayload,
 		`${contributionsServiceUrl}/banner${queryString}`,
-	)
-		.then(checkForErrors)
-		.then((response) => response.json())
-		.then((json: { data?: any }) => {
-			if (!json.data) {
-				if (
-					engagementBannerLastClosedAt &&
-					subscriptionBannerLastClosedAt
-				) {
-					setLocalNoBannerCachePeriod();
-				}
-				return { result: false };
+	).then((json: { data?: any }) => {
+		if (!json.data) {
+			if (
+				engagementBannerLastClosedAt &&
+				subscriptionBannerLastClosedAt
+			) {
+				setLocalNoBannerCachePeriod();
 			}
+			return { result: false };
+		}
 
-			const { module, meta } = json.data;
+		const { module, meta } = json.data;
 
-			return { result: true, meta: { module, meta } };
-		});
+		return { result: true, meta: { module, meta } };
+	});
 };
 
 export const canShowPuzzlesBanner: CanShowFunction = async ({
@@ -236,18 +230,18 @@ export const canShowPuzzlesBanner: CanShowFunction = async ({
 			subscriptionBannerLastClosedAt,
 			hasConsentedToArticleCounts,
 		});
-		return getBanner(bannerPayload, `${contributionsServiceUrl}/puzzles`)
-			.then(checkForErrors)
-			.then((response) => response.json())
-			.then((json: { data?: any }) => {
-				if (!json.data) {
-					return { result: false };
-				}
+		return getBanner(
+			bannerPayload,
+			`${contributionsServiceUrl}/puzzles`,
+		).then((json: { data?: any }) => {
+			if (!json.data) {
+				return { result: false };
+			}
 
-				const { module, meta } = json.data;
+			const { module, meta } = json.data;
 
-				return { result: true, meta: { module, meta } };
-			});
+			return { result: true, meta: { module, meta } };
+		});
 	}
 
 	return { result: false };
