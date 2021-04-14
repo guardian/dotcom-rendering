@@ -1,4 +1,5 @@
 import React from 'react';
+import * as preact from 'preact';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
 import * as emotionTheming from 'emotion-theming';
@@ -10,7 +11,7 @@ export const setAutomat = () => {
 	if (!hasAutomatBeenSet) {
 		window.guardian.automat = {
 			react: React,
-			preact: React,
+			preact,
 			emotionCore,
 			emotionReact,
 			emotionTheming,

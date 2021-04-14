@@ -206,7 +206,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			})
 			.catch((error) =>
 				// eslint-disable-next-line no-console
-				console.log(`banner - error is: ${error}`),
+				console.error(`banner - error is: ${error}`),
 			);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
