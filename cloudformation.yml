@@ -48,7 +48,7 @@ Parameters:
   ELKStream:
     Type: String
     Description: name of the kinesis stream to use to send logs to the central ELK stack
-    
+
 Conditions:
     HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
 
@@ -102,11 +102,6 @@ Resources:
         ToPort: 9000
         SourceSecurityGroupId:
           Ref: LoadBalancerSecurityGroup
-        # allow SSH access from within the office
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIp: 77.91.248.0/21
       Tags:
       - Key: Stage
         Value:
@@ -220,7 +215,7 @@ Resources:
 
               aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
               unzip -q ${App}.zip -d ${App}
-              
+
               chown -R dotcom-rendering:frontend ${App}
 
               cd ${App}
