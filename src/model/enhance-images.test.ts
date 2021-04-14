@@ -55,6 +55,7 @@ describe('Enhance Images', () => {
 									...image.data,
 									caption:
 										'<ul><li>This new caption replaces the one on the image object.</li></ul>',
+									credit: '',
 								},
 							},
 						],
@@ -101,13 +102,21 @@ describe('Enhance Images', () => {
 										...image,
 										role: 'halfWidth',
 										displayCredit: false,
-										data: { ...image.data, caption: '' },
+										data: {
+											...image.data,
+											caption: '',
+											credit: '',
+										},
 									},
 									{
 										...image,
 										role: 'halfWidth',
 										displayCredit: false,
-										data: { ...image.data, caption: '' },
+										data: {
+											...image.data,
+											caption: '',
+											credit: '',
+										},
 									},
 								],
 								caption:
@@ -152,7 +161,11 @@ describe('Enhance Images', () => {
 								...image,
 								role: 'inline',
 								displayCredit: false,
-								data: { ...image.data, caption: '' },
+								data: {
+									...image.data,
+									caption: '',
+									credit: '',
+								},
 							},
 							{
 								...image,
@@ -162,6 +175,7 @@ describe('Enhance Images', () => {
 									...image.data,
 									caption:
 										'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
+									credit: '',
 								},
 							},
 						],
@@ -206,6 +220,7 @@ describe('Enhance Images', () => {
 									...image.data,
 									caption:
 										'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
+									credit: '',
 								},
 							},
 						],
@@ -247,6 +262,7 @@ describe('Enhance Images', () => {
 								data: {
 									...image.data,
 									caption: '',
+									credit: '',
 								},
 								title: 'Example title text',
 							},
@@ -303,6 +319,7 @@ describe('Enhance Images', () => {
 									...image.data,
 									caption:
 										'<ul><li><p>This is the caption</p></li></ul>',
+									credit: '',
 								},
 								title: 'The title',
 							},
@@ -357,13 +374,21 @@ describe('Enhance Images', () => {
 										...image,
 										role: 'halfWidth',
 										displayCredit: false,
-										data: { ...image.data, caption: '' },
+										data: {
+											...image.data,
+											caption: '',
+											credit: '',
+										},
 									},
 									{
 										...image,
 										role: 'halfWidth',
 										displayCredit: false,
-										data: { ...image.data, caption: '' },
+										data: {
+											...image.data,
+											caption: '',
+											credit: '',
+										},
 									},
 								],
 							},
@@ -375,6 +400,7 @@ describe('Enhance Images', () => {
 									...image.data,
 									caption:
 										'<ul><li><p>This is the caption</p></li></ul>',
+									credit: '',
 								},
 							},
 						],
@@ -430,6 +456,7 @@ describe('Enhance Images', () => {
 									...image.data,
 									caption:
 										'<ul><li><p>This is the caption</p></li></ul>',
+									credit: '',
 								},
 								title: 'The title',
 							},
@@ -470,6 +497,7 @@ describe('Enhance Images', () => {
 								data: {
 									...image.data,
 									caption: '',
+									credit: '',
 								},
 							},
 						],
@@ -526,6 +554,7 @@ describe('Enhance Images', () => {
 									...image.data,
 									caption:
 										'<ul><li><p>This is the caption</p></li></ul>',
+									credit: '',
 								},
 								title: 'The title',
 							},
@@ -539,13 +568,21 @@ describe('Enhance Images', () => {
 								...image,
 								role: 'inline',
 								displayCredit: false,
-								data: { ...image.data, caption: '' },
+								data: {
+									...image.data,
+									caption: '',
+									credit: '',
+								},
 							},
 							{
 								...image,
 								role: 'immersive',
 								displayCredit: false,
-								data: { ...image.data, caption: '' },
+								data: {
+									...image.data,
+									caption: '',
+									credit: '',
+								},
 							},
 						],
 					},
@@ -606,6 +643,7 @@ describe('Enhance Images', () => {
 								data: {
 									...image.data,
 									caption: '',
+									credit: '',
 								},
 								title: 'The title',
 							},

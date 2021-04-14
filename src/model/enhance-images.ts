@@ -255,6 +255,30 @@ const stripCaptions = (elements: CAPIElement[]): CAPIElement[] => {
 	return withoutCaptions;
 };
 
+const removeCredit = (elements: CAPIElement[]): CAPIElement[] => {
+	// Remove credit from all images
+	const withoutCredit: CAPIElement[] = [];
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+		) {
+			// Remove the credit from this image
+			withoutCredit.push({
+				...thisElement,
+				data: {
+					...thisElement.data,
+					credit: '',
+				},
+			} as ImageBlockElement);
+		} else {
+			// Pass through
+			withoutCredit.push(thisElement);
+		}
+	});
+	return withoutCredit;
+};
+
 class Enhancer {
 	elements: CAPIElement[];
 
@@ -286,6 +310,11 @@ class Enhancer {
 		this.elements = addCaptionsToImages(this.elements);
 		return this;
 	}
+
+	removeCredit() {
+		this.elements = removeCredit(this.elements);
+		return this;
+	}
 }
 
 const enhance = (
@@ -298,6 +327,8 @@ const enhance = (
 				// Photo essays by convention have all image captions removed and rely completely on
 				// special captions set using the ul/li trick
 				.stripCaptions()
+				// By convention, photo essays don't include credit for images in the caption
+				.removeCredit()
 				// Replace pairs of halfWidth images with MultiImageBlockElements
 				.addMultiImageElements()
 				// Photo essay have a convention of adding titles to images if the subsequent block is a h2
