@@ -2,43 +2,28 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
-import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display, Design, Pillar } from '@guardian/types';
+import { Display, Design, Pillar, Special } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';
 const blockquoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence that under <a href="https://www.theguardian.com/politics/boris-johnson">Boris Johnson</a> the NHS is on the table and will be up for sale. He tried to cover it up in a secret agenda but today it’s been exposed.</p> \n</blockquote>';
-const textHtml =
-	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
 
 export default {
 	component: BlockquoteBlockComponent,
 	title: 'Components/BlockquoteComponent',
 };
 
-const SomeText = () => (
-	<TextBlockComponent
-		html={textHtml}
-		format={{
-			theme: Pillar.News,
-			design: Design.Article,
-			display: Display.Standard,
-		}}
-		isFirstParagraph={false}
-	/>
-);
-
 const containerStyles = css`
 	max-width: 620px;
 	margin: 20px;
 `;
 
-export const defaultStory = () => {
+export const Unquoted = () => {
 	return (
 		<div className={containerStyles}>
-			<SomeText />
+			<h1>Long</h1>
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
@@ -47,34 +32,44 @@ export const defaultStory = () => {
 					theme: Pillar.News,
 				})}
 			/>
-			<SomeText />
-		</div>
-	);
-};
-defaultStory.story = { name: 'simple' };
-
-export const ShortStory = () => {
-	return (
-		<div className={containerStyles}>
-			<SomeText />
+			<h1>Short</h1>
 			<BlockquoteBlockComponent
 				html={shortQuoteHtml}
 				palette={decidePalette({
 					design: Design.Article,
 					display: Display.Standard,
-					theme: Pillar.Sport,
+					theme: Pillar.News,
 				})}
 			/>
-			<SomeText />
 		</div>
 	);
 };
-ShortStory.story = { name: 'short and simple' };
+Unquoted.story = { name: 'Unquoted' };
 
-export const QuotedStory = () => {
+export const Quoted = () => {
 	return (
 		<div className={containerStyles}>
-			<SomeText />
+			<h1>News</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.News,
+				})}
+				quoted={true}
+			/>
+			<h1>Sport</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.Sport,
+				})}
+				quoted={true}
+			/>
+			<h1>Culture</h1>
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
@@ -84,18 +79,9 @@ export const QuotedStory = () => {
 				})}
 				quoted={true}
 			/>
-			<SomeText />
-		</div>
-	);
-};
-QuotedStory.story = { name: 'quoted' };
-
-export const ShortQuotedStory = () => {
-	return (
-		<div className={containerStyles}>
-			<SomeText />
+			<h1>Lifestyle</h1>
 			<BlockquoteBlockComponent
-				html={shortQuoteHtml}
+				html={blockquoteHtml}
 				palette={decidePalette({
 					design: Design.Article,
 					display: Display.Standard,
@@ -103,8 +89,77 @@ export const ShortQuotedStory = () => {
 				})}
 				quoted={true}
 			/>
-			<SomeText />
+			<h1>Opinion</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.Opinion,
+				})}
+				quoted={true}
+			/>
+			<h1>SpecialReport</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Special.SpecialReport,
+				})}
+				quoted={true}
+			/>
+			<h1>Labs</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Special.Labs,
+				})}
+				quoted={true}
+			/>
+			<h1>LiveBlog News</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.LiveBlog,
+					display: Display.Standard,
+					theme: Pillar.News,
+				})}
+				quoted={true}
+			/>
+			<h1>DeadBlog News</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.DeadBlog,
+					display: Display.Standard,
+					theme: Pillar.News,
+				})}
+				quoted={true}
+			/>
+			<h1>LiveBlog News</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.LiveBlog,
+					display: Display.Standard,
+					theme: Pillar.Sport,
+				})}
+				quoted={true}
+			/>
+			<h1>DeadBlog Sport</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: Design.DeadBlog,
+					display: Display.Standard,
+					theme: Pillar.Sport,
+				})}
+				quoted={true}
+			/>
 		</div>
 	);
 };
-ShortQuotedStory.story = { name: 'A short quote' };
+Quoted.story = { name: 'Quoted' };
