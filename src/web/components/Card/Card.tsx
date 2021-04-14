@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -14,6 +14,7 @@ import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { formatCount } from '@root/src/web/lib/formatCount';
+import { textSans, headline } from '@guardian/src-foundations/typography';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -25,6 +26,7 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
+import { LabBadge } from './components/LabBadge';
 
 type Props = {
 	linkTo: string;
@@ -54,6 +56,9 @@ type Props = {
 	minWidthInPixels?: number;
 	// Ophan tracking
 	dataLinkName?: string;
+	// Labs
+	badge?: BadgeType;
+	brand?: string;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -97,6 +102,18 @@ const starWrapper = css`
 	bottom: 0;
 	margin-top: 2px;
 `;
+
+const labTitleOrNot = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'regular' })}
+		`;
+	}
+	return css`
+		${headline.xxxsmall({ fontWeight: 'regular' })}
+		line-height: 20px;
+	`;
+};
 
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>
@@ -145,6 +162,8 @@ export const Card = ({
 	alwaysVertical,
 	minWidthInPixels,
 	dataLinkName,
+	badge,
+	brand,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -218,6 +237,7 @@ export const Card = ({
 									isFullCardImage={isFullCardImage}
 								>
 									<CardHeadline
+										css={labTitleOrNot(format)}
 										headlineText={headlineText}
 										format={format}
 										palette={cardPalette}
@@ -309,6 +329,15 @@ export const Card = ({
 												palette={cardPalette}
 												long={longCount}
 												short={shortCount}
+											/>
+										) : undefined
+									}
+									labBadge={
+										badge ? (
+											<LabBadge
+												badgeForLab={badge.imageUrl}
+												palette={cardPalette}
+												brandName={brand}
 											/>
 										) : undefined
 									}
