@@ -68,6 +68,16 @@ type Props = {
 	isPreview: boolean;
 };
 
+function decideImageRole(role: RoleType, isLiveBlog: boolean): RoleType {
+	switch (role) {
+		case 'inline':
+		case 'thumbnail':
+			return role;
+		default:
+			return isLiveBlog ? 'inline' : role;
+	}
+}
+
 export const ElementRenderer = ({
 	format,
 	palette,
@@ -326,7 +336,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={isLiveBlog ? 'inline' : element.role}
+					role={decideImageRole(element.role, isLiveBlog)}
 				>
 					<ImageBlockComponent
 						format={format}
