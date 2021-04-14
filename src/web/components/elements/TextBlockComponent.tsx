@@ -157,9 +157,9 @@ const paraStyles = (format: Format) => css`
 	[data-dcr-style='bullet'] {
 		display: inline-block;
 		content: '';
-		border-radius: 0.375rem;
-		height: 0.75rem;
-		width: 0.75rem;
+		border-radius: 100%;
+		height: 0.95rem;
+		width: 0.95rem;
 		margin-right: 0.125rem;
 		background-color: ${decidePalette(format).background.bullet};
 	}
