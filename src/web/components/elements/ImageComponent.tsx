@@ -219,8 +219,6 @@ export const ImageComponent = ({
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
-	const isNotOpinion =
-		format.design !== Design.Comment && format.design !== Design.Editorial;
 
 	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
 	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
