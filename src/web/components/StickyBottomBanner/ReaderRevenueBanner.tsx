@@ -53,11 +53,13 @@ type CanShowProps = BaseProps & {
 	section: string;
 };
 
-type ReaderRevenueComponent =
+type ReaderRevenueComponentType =
 	| 'ACQUISITIONS_SUBSCRIPTIONS_BANNER'
 	| 'ACQUISITIONS_OTHER';
 
-export type CanShowFunction = (props: CanShowProps) => Promise<CanShowResult>;
+export type CanShowFunctionType = (
+	props: CanShowProps,
+) => Promise<CanShowResult>;
 
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = ({
@@ -113,7 +115,7 @@ const getBanner = (meta: { [key: string]: any }, url: string): Promise<any> => {
 		.then((response) => response.json());
 };
 
-export const canShowRRBanner: CanShowFunction = async ({
+export const canShowRRBanner: CanShowFunctionType = async ({
 	remoteBannerConfig,
 	isSignedIn,
 	asyncCountryCode,
@@ -185,7 +187,7 @@ export const canShowRRBanner: CanShowFunction = async ({
 	});
 };
 
-export const canShowPuzzlesBanner: CanShowFunction = async ({
+export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 	remoteBannerConfig,
 	isSignedIn,
 	asyncCountryCode,
@@ -252,80 +254,93 @@ export type BannerProps = {
 	module: { url: string; name: string; props: any[] };
 };
 
-const createReaderRevenueBannerComponent = (
-	componentTypeName: ReaderRevenueComponent,
-	displayEvent: string,
-): React.FC<BannerProps> => {
-	return ({ meta, module }: BannerProps) => {
-		const [Banner, setBanner] = useState<React.FC>();
-
-		const [hasBeenSeen, setNode] = useHasBeenSeen({
-			threshold: 0,
-			debounce: true,
-		});
-
-		useOnce(() => {
-			if (module === undefined || meta === undefined) {
-				return;
-			}
-
-			setAutomat();
-
-			window
-				.guardianPolyfilledImport(module.url)
-				.then((bannerModule: { [key: string]: JSX.Element }) => {
-					setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
-					sendOphanComponentEvent('INSERT', meta);
-				})
-				.catch((error) => console.log(`banner - error is: ${error}`));
-		}, []);
-
-		useOnce(() => {
-			if (hasBeenSeen) {
-				const { abTestName, componentType } = meta;
-
-				logView(abTestName);
-
-				sendOphanComponentEvent('VIEW', meta);
-
-				// track banner view event in Google Analytics for subscriptions banner
-				if (componentType === componentTypeName) {
-					trackNonClickInteraction(displayEvent);
-				}
-			}
-		}, [hasBeenSeen, meta]);
-
-		if (Banner) {
-			return (
-				// The css here is necessary to put the container div in view, so that we can track the view
-				<div
-					ref={setNode}
-					className={css`
-						width: 100%;
-						${getZIndex('banner')}
-					`}
-				>
-					{/* eslint-disable react/jsx-props-no-spreading */}
-					<Banner
-						{...module.props}
-						// @ts-ignore
-						submitComponentEvent={submitComponentEvent}
-					/>
-					{/* eslint-enable react/jsx-props-no-spreading */}
-				</div>
-			);
-		}
-
-		return null;
-	};
+type RemoteBannerProps = BannerProps & {
+	componentTypeName: ReaderRevenueComponentType;
+	displayEvent: string;
 };
 
-export const ReaderRevenueBanner = createReaderRevenueBannerComponent(
-	'ACQUISITIONS_SUBSCRIPTIONS_BANNER',
-	'subscription-banner : display',
+const RemoteBanner = ({
+	componentTypeName,
+	displayEvent,
+	meta,
+	module,
+}: RemoteBannerProps) => {
+	const [Banner, setBanner] = useState<React.FC>();
+
+	const [hasBeenSeen, setNode] = useHasBeenSeen({
+		threshold: 0,
+		debounce: true,
+	});
+
+	useOnce(() => {
+		if (module === undefined || meta === undefined) {
+			return;
+		}
+
+		setAutomat();
+
+		window
+			.guardianPolyfilledImport(module.url)
+			.then((bannerModule: { [key: string]: JSX.Element }) => {
+				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
+				sendOphanComponentEvent('INSERT', meta);
+			})
+			.catch((error) => console.log(`banner - error is: ${error}`));
+	}, []);
+
+	useOnce(() => {
+		if (hasBeenSeen) {
+			const { abTestName, componentType } = meta;
+
+			logView(abTestName);
+
+			sendOphanComponentEvent('VIEW', meta);
+
+			// track banner view event in Google Analytics for subscriptions banner
+			if (componentType === componentTypeName) {
+				trackNonClickInteraction(displayEvent);
+			}
+		}
+	}, [hasBeenSeen, meta]);
+
+	if (Banner) {
+		return (
+			// The css here is necessary to put the container div in view, so that we can track the view
+			<div
+				ref={setNode}
+				className={css`
+					width: 100%;
+					${getZIndex('banner')}
+				`}
+			>
+				{/* eslint-disable react/jsx-props-no-spreading */}
+				<Banner
+					{...module.props}
+					// @ts-ignore
+					submitComponentEvent={submitComponentEvent}
+				/>
+				{/* eslint-enable react/jsx-props-no-spreading */}
+			</div>
+		);
+	}
+
+	return null;
+};
+
+export const ReaderRevenueBanner = ({ meta, module }: BannerProps) => (
+	<RemoteBanner
+		componentTypeName="ACQUISITIONS_SUBSCRIPTIONS_BANNER"
+		displayEvent="subscription-banner : display"
+		meta={meta}
+		module={module}
+	/>
 );
 
-export const PuzzlesBanner = createReaderRevenueBannerComponent(
-	'ACQUISITIONS_OTHER',
-	'puzzles-banner : display',
+export const PuzzlesBanner = ({ meta, module }: BannerProps) => (
+	<RemoteBanner
+		componentTypeName="ACQUISITIONS_OTHER"
+		displayEvent="puzzles-banner : display"
+		meta={meta}
+		module={module}
+	/>
 );

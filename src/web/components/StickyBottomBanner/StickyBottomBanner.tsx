@@ -6,7 +6,7 @@ import {
 	ReaderRevenueBanner,
 	PuzzlesBanner,
 	BannerProps,
-	CanShowFunction,
+	CanShowFunctionType,
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 import { useOnce } from '@root/src/web/lib/useOnce';
@@ -29,7 +29,7 @@ type Props = {
 type RRBannerConfig = {
 	id: string;
 	BannerComponent: React.FC<BannerProps>;
-	canShowFn: CanShowFunction;
+	canShowFn: CanShowFunctionType;
 	isEnabled: (switches: CAPIType['config']['switches']) => boolean;
 };
 
@@ -96,8 +96,9 @@ const buildRRBannerConfigWith = ({
 						),
 						section: CAPI.config.section,
 					}),
-				/* eslint-disable-next-line react/jsx-props-no-spreading */
-				show: (meta: any) => () => <BannerComponent {...meta} />,
+				show: ({ meta, module }: BannerProps) => () => (
+					<BannerComponent meta={meta} module={module} />
+				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
