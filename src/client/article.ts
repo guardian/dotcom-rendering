@@ -232,8 +232,6 @@ function footerLinks(): void {
 }
 
 function footerInit(): void {
-	footerLinks();
-
 	userClient
 		.doesCcpaApply()
 		.then((isCcpa) => {
