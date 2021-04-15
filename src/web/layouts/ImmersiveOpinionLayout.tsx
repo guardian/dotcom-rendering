@@ -282,6 +282,7 @@ export const ImmersiveOpinionLayout = ({
 								verticalMargins={false}
 								padContent={true}
 								centralBorder="full"
+								borderColour={palette.border.headline}
 								padSides={true}
 								leftColSize="compact"
 								backgroundColour={palette.background.headline}

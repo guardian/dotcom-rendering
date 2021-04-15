@@ -1,6 +1,7 @@
 import { Design } from '@guardian/types';
 
 export const decideDesign = (format: CAPIFormat): Design => {
+	return Design.Comment;
 	const designType: CAPIDesign = format.design;
 	switch (designType) {
 		case 'ArticleDesign':

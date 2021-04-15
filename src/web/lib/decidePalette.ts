@@ -380,7 +380,15 @@ const backgroundSeriesTitle = (format: Format): string => {
 		return brandAltBackground.primary;
 	switch (format.display) {
 		case Display.Immersive:
-			return pillarPalette[format.theme].main;
+			switch (format.design) {
+				case Design.Editorial:
+				case Design.Comment:
+				case Design.Letter:
+					return pillarPalette[format.theme][300];
+				default:
+					return pillarPalette[format.theme].main;
+			}
+
 		case Display.Showcase:
 		case Display.Standard:
 		default:
@@ -603,6 +611,16 @@ const borderStandfirstLink = (format: Format): string => {
 };
 
 const borderHeadline = (format: Format): string => {
+	if (format.display === Display.Immersive) {
+		switch (format.design) {
+			case Design.Editorial:
+			case Design.Comment:
+			case Design.Letter:
+				return 'purple';
+			default:
+				return border.secondary;
+		}
+	}
 	if (format.design === Design.LiveBlog) return '#9F2423';
 	if (format.design === Design.DeadBlog) return '#CDCDCD';
 	return border.secondary;

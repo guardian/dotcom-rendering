@@ -64,7 +64,9 @@ const Container = ({
 	`;
 
 	const padding = css`
-		padding: 0 10px;
+		${from.leftCol} {
+			padding: 0 10px;
+		}
 	`;
 
 	return (
