@@ -24,9 +24,9 @@ let imageAssetTypeData: AssetFields;
 let defaultContent: Content;
 let imageElement: BlockElement;
 
-const createDefaultContent = () => {
+const createDefaultContent = (contentId: string = 'contentId') => {
 	return {
-		id: 'contentId',
+		id: contentId,
 		type: ContentType.ARTICLE,
 		webTitle: 'contentTitle',
 		webUrl: 'contentUrl',
@@ -97,20 +97,40 @@ describe('parseRelatedContent', () => {
 	});
 
 	it('returns the first 4 related content given more than 4 content items', () => {
+		const content1 = createDefaultContent('id1');
+		const content2 = createDefaultContent('id2');
+		const content3 = createDefaultContent('id3');
+		const content4 = createDefaultContent('id4');
+		const content5 = createDefaultContent('id5');
+
 		const actual = parseRelatedContent([
-			defaultContent,
-			defaultContent,
-			defaultContent,
-			defaultContent,
-			defaultContent,
-			defaultContent,
+			content1,
+			content2,
+			content3,
+			content4,
+			content5,
 		]);
 
-		expect(actual.relatedItems.length).toEqual(4);
+		expect(actual.relatedItems.length).toBe(4);
+		expect(actual.relatedItems[0].link).toBe('/id1');
+		expect(actual.relatedItems[1].link).toBe('/id2');
+		expect(actual.relatedItems[2].link).toBe('/id3');
+		expect(actual.relatedItems[3].link).toBe('/id4');
 	});
 });
 
 describe('parseRelatedItemType', () => {
+	const addTagToTagsList = (tagId: string, tagType: TagType) => {
+		defaultContent.tags.push({
+			id: tagId,
+			type: tagType,
+			webTitle: '',
+			webUrl: '',
+			apiUrl: '',
+			references: [],
+		});
+	};
+
 	beforeEach(() => {
 		defaultContent = createDefaultContent();
 	});
@@ -213,17 +233,6 @@ describe('parseRelatedItemType', () => {
 		const actual = parseRelatedContent([defaultContent]);
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.FEATURE);
 	});
-
-	const addTagToTagsList = (tagId: string, tagType: TagType) => {
-		defaultContent.tags.push({
-			id: tagId,
-			type: tagType,
-			webTitle: '',
-			webUrl: '',
-			apiUrl: '',
-			references: [],
-		});
-	};
 });
 
 describe('parseHeaderImage', () => {
