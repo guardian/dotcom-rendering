@@ -70,7 +70,7 @@ const refreshAnniversaryAtom = () => {
 		fetchAnniversaryAtom()
 			.then(refreshAnniversaryAtom)
 			.catch((e) => console.log(`fetchAnniversaryAtom - error: ${e}`));
-	}, oneMinute * 2);
+	}, oneMinute);
 };
 
 getGuardianConfiguration('prod')
