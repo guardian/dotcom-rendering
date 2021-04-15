@@ -1,4 +1,5 @@
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
+import * as Analytics from '@guardian/bridget/Analytics';
 import * as Commercial from '@guardian/bridget/Commercial';
 import * as Discussion from '@guardian/bridget/Discussion';
 import * as Environment from '@guardian/bridget/Environment';
@@ -41,6 +42,10 @@ const discussionClient: Discussion.Client<void> = createAppClient<
 	Discussion.Client<void>
 >(Discussion.Client, 'buffered', 'compact');
 
+const analyticsClient: Analytics.Client<void> = createAppClient<
+	Analytics.Client<void>
+>(Analytics.Client, 'buffered', 'compact');
+
 export {
 	environmentClient,
 	commercialClient,
@@ -51,4 +56,5 @@ export {
 	videoClient,
 	metricsClient,
 	discussionClient,
+	analyticsClient,
 };
