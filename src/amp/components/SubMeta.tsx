@@ -170,7 +170,6 @@ export const SubMeta: React.FC<{
 					'twitter',
 					'email',
 					'linkedIn',
-					'pinterest',
 					'whatsApp',
 					'messenger',
 				]}

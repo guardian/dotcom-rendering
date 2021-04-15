@@ -55,6 +55,8 @@ const headlineLink = css`
 	color: ${text.anchorSecondary};
 	font-weight: 500;
 	${headline.xxxsmall()};
+
+	display: block; /* To ensure focus outline works okay */
 `;
 
 const ageWarningStyles = css`
@@ -75,24 +77,27 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 				<BigNumber index={position} />
 			</span>
 			<div className={headlineHeader}>
-				{trail.isLiveBlog ? (
+				{trail.format.design === Design.LiveBlog ? (
 					<LinkHeadline
 						headlineText={trail.headline}
-						format={trail.format}
 						palette={trail.palette}
+						format={trail.format}
 						size="small"
 						kickerText="Live"
 						showSlash={true}
 						showPulsingDot={true}
-						showQuotes={trail.format.design === Design.Comment}
+						showQuotes={false}
 					/>
 				) : (
 					<LinkHeadline
 						headlineText={trail.headline}
-						format={trail.format}
 						palette={trail.palette}
+						format={trail.format}
 						size="small"
-						showQuotes={trail.format.design === Design.Comment}
+						showQuotes={
+							trail.format.design === Design.Comment ||
+							trail.format.design === Design.Letter
+						}
 					/>
 				)}
 			</div>

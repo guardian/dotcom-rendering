@@ -229,12 +229,12 @@ const trails: TrailType[] = [
 		format: {
 			display: Display.Standard,
 			theme: Pillar.News,
-			design: Design.Article,
+			design: Design.LiveBlog,
 		},
 		palette: decidePalette({
 			display: Display.Standard,
 			theme: Pillar.News,
-			design: Design.Article,
+			design: Design.LiveBlog,
 		}),
 		webPublicationDate: '2021-02-16T17:00:15.000Z',
 		headline:
@@ -281,7 +281,11 @@ export const Headlines = () => (
 				heading="More on this story"
 				trails={trails}
 				ophanComponentName="curated-content"
-				pillar={Pillar.News}
+				format={{
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				}}
 			/>
 		</Section>
 		<Section showTopBorder={true}>
@@ -289,7 +293,11 @@ export const Headlines = () => (
 				heading="Sport"
 				trails={trails}
 				ophanComponentName="curated-content"
-				pillar={Pillar.Sport}
+				format={{
+					theme: Pillar.Sport,
+					design: Design.Article,
+					display: Display.Standard,
+				}}
 				isCuratedContent={true}
 			/>
 		</Section>
@@ -305,7 +313,11 @@ export const Immersive = () => (
 				heading="More on this story"
 				trails={immersiveTrails}
 				ophanComponentName="curated-content"
-				pillar={Pillar.News}
+				format={{
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				}}
 				isFullCardImage={true}
 			/>
 		</Section>
@@ -314,7 +326,11 @@ export const Immersive = () => (
 				heading="Sport"
 				trails={immersiveTrails}
 				ophanComponentName="curated-content"
-				pillar={Pillar.Sport}
+				format={{
+					theme: Pillar.Sport,
+					design: Design.Article,
+					display: Display.Standard,
+				}}
 				isFullCardImage={true}
 				isCuratedContent={true}
 			/>

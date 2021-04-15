@@ -14,10 +14,15 @@ Certain article types, such as Features, have the first letter of the first para
 
 In DCR we replicate this using [add-dropcaps.ts](/src/model/add-dropcaps.ts)
 
-### Photo Essays
-The blocks array for Photo essay articles needs a lot of cleaning to achieve the intended designs. They use special caption styles, sometimes have titles overlaying images and position images differently.
+### Images
+There are some conventions that can result in images appearing differently, we need a cleaner to support these while we wait for support for them to be added natively to Composer.
 
-In DCR we replicate these changes using [enhance-photoessays.ts](/src/model/enhance-photoessays.ts)
+Multi images. Consecutive sequences of two halfWidth images will be merged into a MultiImageBlockElement and shown side by side
+Captions. A ul/li tag directly after an image will replace the preoceeding image's caption
+
+In particular, Photo essay articles needs a lot of cleaning to achieve the intended designs. They use special caption styles and can sometimes have titles overlaying images.
+
+In DCR we support these conventions using [enhance-images.ts](/src/model/enhance-images.ts)
 
 ## How remove these enhancement functions
 The construction of these functions has been done  with the goal of removing them in mind. Where changes to elements have been needed they have been done in such  a way as to be generic. For example, the special image titles used in photo essays are available for all images, on all article types. By doing this we create a design language that is more flexible so that if we later improve Composer to support, say, adding drop caps to any paragraph, or adding a title string to an image, then this will just work.

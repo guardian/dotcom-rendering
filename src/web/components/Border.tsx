@@ -1,14 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
-export const Border = () => (
+export const Border = ({ palette }: { palette: Palette }) => (
 	<div
 		className={css`
 			${from.leftCol} {
-				border-left: 1px solid ${border.secondary};
+				border-left: 1px solid ${palette.border.article};
 				height: 100%;
 			}
 		`}

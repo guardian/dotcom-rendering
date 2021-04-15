@@ -8,10 +8,8 @@ import { EmbedBlockComponent } from '@root/src/amp/components/elements/EmbedBloc
 import { Expandable } from '@root/src/amp/components/Expandable';
 import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
-import { InstagramBlockComponent } from '@root/src/amp/components/elements/InstagramBlockComponent';
 import { InteractiveAtomBlockComponent } from '@root/src/amp/components/elements/InteractiveAtomBlockComponent';
 import { InteractiveBlockComponent } from '@root/src/amp/components/elements/InteractiveBlockComponent';
-import { MapBlockComponent } from '@root/src/amp/components/elements/MapBlockComponent';
 import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
 import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/amp/components/elements/SoundcloudBlockComponent';
@@ -19,7 +17,6 @@ import { SubheadingBlockComponent } from '@root/src/amp/components/elements/Subh
 import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
 import { TimelineBlockComponent } from '@root/src/amp/components/elements/TimelineBlockComponent';
 import { TwitterBlockComponent } from '@root/src/amp/components/elements/TwitterBlockComponent';
-import { VideoFacebookBlockComponent } from '@root/src/amp/components/elements/VideoFacebookBlockComponent';
 import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/VideoVimeoBlockComponent';
 import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
@@ -93,8 +90,6 @@ export const Elements = (
 						pillar={pillar}
 					/>
 				);
-			case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-				return <InstagramBlockComponent key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 				return (
 					<InteractiveAtomBlockComponent
@@ -108,14 +103,6 @@ export const Elements = (
 					<InteractiveBlockComponent
 						url={element.url}
 						isMandatory={element.isMandatory}
-					/>
-				);
-			case 'model.dotcomrendering.pageElements.MapBlockElement':
-				return (
-					<MapBlockComponent
-						key={i}
-						element={element}
-						pillar={pillar}
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
@@ -190,14 +177,6 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.TweetBlockElement':
 				return (
 					<TwitterBlockComponent
-						key={i}
-						element={element}
-						pillar={pillar}
-					/>
-				);
-			case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-				return (
-					<VideoFacebookBlockComponent
 						key={i}
 						element={element}
 						pillar={pillar}

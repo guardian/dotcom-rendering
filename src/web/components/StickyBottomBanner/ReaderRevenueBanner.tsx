@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import * as emotion from 'emotion';
-import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
+import { css } from 'emotion';
+
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import {
 	getWeeklyArticleHistory,
@@ -12,6 +11,7 @@ import {
 	getArticleCountConsent,
 	withinLocalNoBannerCachePeriod,
 	setLocalNoBannerCachePeriod,
+	MODULES_VERSION,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
 import {
@@ -23,6 +23,7 @@ import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
+import { setAutomat } from '@root/src/web/lib/setAutomat';
 
 const checkForErrors = (response: Response) => {
 	if (!response.ok) {
@@ -83,6 +84,7 @@ const buildPayload = (props: BuildPayloadProps) => {
 			countryCode: props.countryCode,
 			weeklyArticleHistory: getWeeklyArticleHistory(),
 			hasOptedOutOfArticleCount: !props.hasConsentedToArticleCounts,
+			modulesVersion: MODULES_VERSION,
 		},
 	};
 };
@@ -193,13 +195,7 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			return;
 		}
 
-		window.guardian.automat = {
-			react: React,
-			preact: React,
-			emotionCore,
-			emotionTheming,
-			emotion,
-		};
+		setAutomat();
 
 		window
 			.guardianPolyfilledImport(module.url)
@@ -236,7 +232,10 @@ export const ReaderRevenueBanner = ({ meta, module }: Props) => {
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
 				ref={setNode}
-				className={emotion.css`width: 100%; ${getZIndex('banner')}`}
+				className={css`
+					width: 100%;
+					${getZIndex('banner')}
+				`}
 			>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Banner

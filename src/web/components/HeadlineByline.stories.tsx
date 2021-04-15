@@ -174,3 +174,66 @@ export const noBylineStory = () => {
 	);
 };
 noBylineStory.story = { name: 'No byline' };
+
+export const LabsImmersive = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Immersive,
+				design: Design.Article,
+				theme: Special.Labs,
+			}}
+			byline="Jane Smith"
+			tags={[
+				{
+					id: '1',
+					type: 'Contributor',
+					title: 'Jane Smith',
+				},
+			]}
+		/>
+	);
+};
+LabsImmersive.story = { name: 'Labs Immersive' };
+
+export const LabsComment = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Standard,
+				design: Design.Comment,
+				theme: Special.Labs,
+			}}
+			byline="Jane Smith"
+			tags={[
+				{
+					id: '1',
+					type: 'Contributor',
+					title: 'Jane Smith',
+				},
+			]}
+		/>
+	);
+};
+LabsComment.story = { name: 'Labs Comment' };
+
+export const LabsInterview = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Standard,
+				design: Design.Interview,
+				theme: Special.Labs,
+			}}
+			byline="Jane Smith"
+			tags={[
+				{
+					id: '1',
+					type: 'Contributor',
+					title: 'Jane Smith',
+				},
+			]}
+		/>
+	);
+};
+LabsInterview.story = { name: 'Labs Interview' };

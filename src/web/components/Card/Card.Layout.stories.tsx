@@ -7,7 +7,6 @@ import { Section } from '@frontend/web/components/Section';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Card } from './Card';
 import { UL } from './components/UL';
@@ -41,11 +40,6 @@ export const News = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
-							})}
 							headlineText={headlines[0]}
 							headlineSize="large"
 							kickerText={kickers[4]}
@@ -68,11 +62,6 @@ export const News = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
-							})}
 							headlineText={headlines[1]}
 							headlineSize="large"
 							kickerText={kickers[0]}
@@ -91,11 +80,6 @@ export const News = () => (
 								theme: Pillar.Culture,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Culture,
-								design: Design.Article,
-							})}
 							headlineText={headlines[2]}
 							kickerText={kickers[1]}
 							imageUrl={images[3]}
@@ -118,11 +102,6 @@ export const News = () => (
 										theme: Pillar.Opinion,
 										design: Design.Editorial,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Opinion,
-										design: Design.Editorial,
-									})}
 									headlineText={headlines[3]}
 									kickerText="Editorial"
 									imageUrl={images[6]}
@@ -138,11 +117,6 @@ export const News = () => (
 										theme: Special.SpecialReport,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Special.SpecialReport,
-										design: Design.Article,
-									})}
 									headlineText={headlines[4]}
 									headlineSize="small"
 								/>
@@ -155,11 +129,6 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
-									})}
 									headlineText={headlines[5]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -182,11 +151,6 @@ export const News = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
-									})}
 									headlineText={headlines[6]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -201,11 +165,6 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
-									})}
 									headlineText={headlines[7]}
 									headlineSize="small"
 									kickerText={kickers[1]}
@@ -219,11 +178,6 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
-									})}
 									headlineText={headlines[8]}
 									headlineSize="small"
 									kickerText={kickers[0]}
@@ -237,11 +191,6 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
-									})}
 									headlineText={headlines[9]}
 									headlineSize="small"
 									kickerText={kickers[2]}
@@ -255,11 +204,6 @@ export const News = () => (
 										theme: Pillar.Lifestyle,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Lifestyle,
-										design: Design.Article,
-									})}
 									headlineText={headlines[10]}
 									headlineSize="small"
 									kickerText={kickers[0]}
@@ -273,11 +217,6 @@ export const News = () => (
 										theme: Pillar.News,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
-									})}
 									headlineText={headlines[11]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -311,11 +250,6 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
-									})}
 									headlineText={headlines[6]}
 									headlineSize="medium"
 									kickerText={kickers[4]}
@@ -332,11 +266,6 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
-									})}
 									headlineText={headlines[6]}
 									headlineSize="small"
 									kickerText={kickers[3]}
@@ -354,11 +283,6 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
-									})}
 									headlineText={headlines[6]}
 									headlineSize="small"
 									kickerText={kickers[2]}
@@ -375,11 +299,6 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
-									})}
 									headlineText={headlines[2]}
 									headlineSize="small"
 									kickerText={kickers[1]}
@@ -396,11 +315,6 @@ export const InDepth = () => (
 										theme: Pillar.Sport,
 										design: Design.Article,
 									}}
-									palette={decidePalette({
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
-									})}
 									headlineText={headlines[7]}
 									headlineSize="small"
 									kickerText={kickers[0]}
@@ -424,11 +338,6 @@ export const InDepth = () => (
 								theme: Pillar.Opinion,
 								design: Design.Comment,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Opinion,
-								design: Design.Comment,
-							})}
 							headlineText={headlines[7]}
 							headlineSize="large"
 							kickerText={kickers[0]}
@@ -461,11 +370,6 @@ export const Related = () => (
 								theme: Pillar.Sport,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.Article,
-							})}
 							headlineText={headlines[7]}
 							headlineSize="medium"
 							kickerText={kickers[3]}
@@ -487,11 +391,6 @@ export const Related = () => (
 								theme: Pillar.Sport,
 								design: Design.DeadBlog,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.DeadBlog,
-							})}
 							headlineText={headlines[8]}
 							headlineSize="medium"
 							kickerText={kickers[0]}
@@ -514,11 +413,6 @@ export const Related = () => (
 								theme: Special.SpecialReport,
 								design: Design.Comment,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Special.SpecialReport,
-								design: Design.Comment,
-							})}
 							headlineText={headlines[8]}
 							headlineSize="medium"
 							kickerText={kickers[1]}
@@ -537,11 +431,6 @@ export const Related = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
-							})}
 							headlineText={headlines[9]}
 							headlineSize="small"
 							kickerText={kickers[0]}
@@ -561,11 +450,6 @@ export const Related = () => (
 								theme: Pillar.Sport,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.Article,
-							})}
 							headlineText={headlines[10]}
 							headlineSize="small"
 							kickerText={kickers[2]}
@@ -585,11 +469,6 @@ export const Related = () => (
 								theme: Pillar.Culture,
 								design: Design.Interview,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Culture,
-								design: Design.Interview,
-							})}
 							headlineText={headlines[1]}
 							headlineSize="small"
 							kickerText={kickers[1]}
@@ -609,11 +488,6 @@ export const Related = () => (
 								theme: Pillar.Lifestyle,
 								design: Design.Feature,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Lifestyle,
-								design: Design.Feature,
-							})}
 							headlineText={headlines[3]}
 							headlineSize="small"
 							kickerText={kickers[0]}
@@ -641,11 +515,6 @@ export const Spotlight = () => (
 						theme: Pillar.Sport,
 						design: Design.Feature,
 					}}
-					palette={decidePalette({
-						display: Display.Standard,
-						theme: Pillar.Sport,
-						design: Design.Feature,
-					})}
 					headlineText={headlines[11]}
 					headlineSize="large"
 					kickerText={kickers[1]}
@@ -676,11 +545,6 @@ export const Quad = () => (
 								theme: Pillar.Opinion,
 								design: Design.Comment,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Opinion,
-								design: Design.Comment,
-							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							showQuotes={true}
@@ -708,11 +572,6 @@ export const Quad = () => (
 								theme: Special.SpecialReport,
 								design: Design.LiveBlog,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Special.SpecialReport,
-								design: Design.LiveBlog,
-							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							webPublicationDate="2019-11-11T09:45:30.000Z"
@@ -720,7 +579,6 @@ export const Quad = () => (
 							imagePosition="top"
 							showClock={true}
 							commentCount={30989}
-							isLiveBlog={true}
 							showPulsingDot={true}
 						/>
 					</LI>
@@ -737,11 +595,6 @@ export const Quad = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
-							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[0]}
@@ -765,11 +618,6 @@ export const Quad = () => (
 								theme: Pillar.News,
 								design: Design.Article,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
-							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[2]}
@@ -806,11 +654,6 @@ export const Media = () => (
 								theme: Pillar.Culture,
 								design: Design.Media,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Culture,
-								design: Design.Media,
-							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							webPublicationDate="2019-11-11T09:45:30.000Z"
@@ -833,11 +676,6 @@ export const Media = () => (
 								theme: Pillar.News,
 								design: Design.Media,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Media,
-							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[0]}
@@ -861,11 +699,6 @@ export const Media = () => (
 								theme: Pillar.Sport,
 								design: Design.Media,
 							}}
-							palette={decidePalette({
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.Media,
-							})}
 							headlineText={headlines[11]}
 							headlineSize="medium"
 							kickerText={kickers[1]}
@@ -883,3 +716,113 @@ export const Media = () => (
 	</Section>
 );
 Media.story = { name: 'Media' };
+
+const labBadge1: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png`,
+};
+
+const labBadge2: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
+};
+
+const labBadge3: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png`,
+};
+
+const labBadge4: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png`,
+};
+
+export const Labs = () => (
+	<Section>
+		<Flex>
+			<LeftColumn showRightBorder={false}>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<UL direction="row">
+					<LI percentage="25%" padSides={true}>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[12]}
+							headlineSize="medium"
+							imageUrl={images[0]}
+							imagePosition="top"
+							badge={labBadge1}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[14]}
+							headlineSize="medium"
+							imageUrl={images[1]}
+							imagePosition="top"
+							badge={labBadge2}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[13]}
+							headlineSize="medium"
+							imageUrl={images[3]}
+							imagePosition="top"
+							badge={labBadge3}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[15]}
+							headlineSize="medium"
+							imageUrl={images[2]}
+							imagePosition="top"
+							badge={labBadge4}
+						/>
+					</LI>
+				</UL>
+			</ArticleContainer>
+		</Flex>
+	</Section>
+);
+Labs.story = { name: 'Labs' };

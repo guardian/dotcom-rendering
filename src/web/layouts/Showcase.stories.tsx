@@ -11,11 +11,14 @@ import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
 import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Letter } from '@root/fixtures/generated/articles/Letter';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
+import { Labs } from '@root/fixtures/generated/articles/Labs';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -36,11 +39,10 @@ export default {
 const convertToShowcase = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: true,
+		format: {
+			...CAPI.format,
+			display: 'ShowcaseDisplay' as CAPIDisplay,
 		},
-		isImmersive: false,
 	};
 };
 
@@ -128,6 +130,12 @@ export const EditorialStory = (): React.ReactNode => {
 };
 EditorialStory.story = { name: 'Editorial' };
 
+export const LetterStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Letter);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LetterStory.story = { name: 'Letter' };
+
 export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Interview);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
@@ -169,3 +177,19 @@ export const MatchReportStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 MatchReportStory.story = { name: 'MatchReport' };
+
+export const LabsStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Labs);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LabsStory.story = {
+	name: 'Labs',
+};
+
+export const SpecialReportStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
+};

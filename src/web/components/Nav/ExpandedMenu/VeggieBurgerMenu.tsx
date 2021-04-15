@@ -6,6 +6,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
 import { Display } from '@guardian/types';
+import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`
@@ -78,10 +79,8 @@ const veggieBurgerStyles = (display: Display) => css`
 	position: absolute;
 	border: 0;
 	border-radius: 50%;
-	outline: none;
 
-	/* TODO: we should not use such a hight z-index number  */
-	z-index: 1071;
+	${getZIndex('burger')}
 
 	right: 5px;
 	bottom: 48px;

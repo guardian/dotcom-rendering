@@ -3,7 +3,6 @@ import { css, cx } from 'emotion';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from, Breakpoint } from '@guardian/src-foundations/mq';
-import { useAB } from '@guardian/ab-react';
 
 import { useApi } from '@root/src/web/lib/api';
 import { joinUrl } from '@root/src/lib/joinUrl';
@@ -14,7 +13,7 @@ import { SecondTierItem } from './SecondTierItem';
 
 type Props = {
 	sectionName?: string;
-	pillar: Theme;
+	palette: Palette;
 	ajaxUrl: string;
 };
 
@@ -46,10 +45,6 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 
-function buildDeeplyReadUrl(ajaxUrl: string) {
-	return joinUrl([ajaxUrl, 'most-read-deeply-read.json']);
-}
-
 function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
 	return tabs.map((tab) => ({
 		...tab,
@@ -59,19 +54,10 @@ function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
 
 export const MostViewedFooterData = ({
 	sectionName,
-	pillar,
+	palette,
 	ajaxUrl,
 }: Props) => {
-	const ABTestAPI = useAB();
-
-	const inDeeplyReadTestVariant = ABTestAPI.isUserInVariant(
-		'DeeplyReadTest',
-		'variant',
-	);
-
-	const url = inDeeplyReadTestVariant
-		? buildDeeplyReadUrl(ajaxUrl)
-		: buildSectionUrl(ajaxUrl, sectionName);
+	const url = buildSectionUrl(ajaxUrl, sectionName);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | CAPITrailTabType[]
 	>(url);
@@ -92,7 +78,7 @@ export const MostViewedFooterData = ({
 				<MostViewedFooterGrid
 					data={transformTabs(tabs)}
 					sectionName={sectionName}
-					pillar={pillar}
+					palette={palette}
 				/>
 				<div className={cx(stackBelow('tablet'), secondTierStyles)}>
 					{'mostCommented' in data && (

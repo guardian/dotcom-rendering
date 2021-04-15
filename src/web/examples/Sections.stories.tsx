@@ -21,6 +21,7 @@ import {
 } from '@guardian/src-foundations/palette';
 
 import { NAV, pageFooter } from './Example.mocks';
+import { decidePalette } from '../lib/decidePalette';
 
 const Grey = ({
 	heightInPixels = 400,
@@ -84,7 +85,14 @@ export const Sections = (): React.ReactNode => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines count={4} pillar={Pillar.News} />
+			<GuardianLines
+				count={4}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+			/>
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -131,7 +139,14 @@ export const Sections = (): React.ReactNode => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines count={4} pillar={Pillar.News} />
+			<GuardianLines
+				count={4}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+			/>
 		</Section>
 		<Section
 			padded={false}

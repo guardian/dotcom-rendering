@@ -17,6 +17,7 @@ export const TopMeta: React.FunctionComponent<{
 		return <TopMetaPaidContent articleData={data} pillar={pillar} />;
 	switch (design) {
 		case Design.Comment:
+		case Design.Letter:
 			return <TopMetaOpinion articleData={data} pillar={pillar} />;
 		default:
 			return (

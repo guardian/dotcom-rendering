@@ -1,7 +1,7 @@
+import { Article } from '@root/fixtures/generated/articles/Article';
 import { enhanceBlockquotes } from './enhance-blockquotes';
-import { bodyJSON } from './exampleBodyJSON';
 
-const example: CAPIType = JSON.parse(bodyJSON);
+const example: CAPIType = Article;
 
 const metaData = {
 	id: '123',

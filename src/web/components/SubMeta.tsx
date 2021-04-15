@@ -2,13 +2,13 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { space } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
+import { Special } from '@guardian/types';
+import { until } from '@guardian/src-foundations/mq';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
-import { until } from '@guardian/src-foundations/mq';
 
 const labelStyles = (palette: Palette) => css`
 	${textSans.xsmall()};
@@ -32,10 +32,10 @@ const listStyleNone = css`
 	list-style: none;
 `;
 
-const listWrapper = css`
+const listWrapper = (palette: Palette) => css`
 	padding-bottom: 12px;
 	margin-bottom: 6px;
-	border-bottom: 1px solid ${border.secondary};
+	border-bottom: 1px solid ${palette.border.article};
 `;
 
 const listItemStyles = (palette: Palette) => css`
@@ -68,9 +68,17 @@ const linkStyles = (palette: Palette) => css`
 	color: ${palette.text.subMeta};
 `;
 
-const sectionStyles = css`
-	${headline.xxxsmall()};
-`;
+const sectionStyles = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium()}
+			line-height: 19px;
+		`;
+	}
+	return css`
+		${headline.xxxsmall()};
+	`;
+};
 
 const keywordStyles = css`
 	${textSans.small()};
@@ -84,6 +92,7 @@ const hideSlash = css`
 
 type Props = {
 	palette: Palette;
+	format: Format;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
 	pageId: string;
@@ -103,6 +112,7 @@ const syndicationButtonOverrides = (palette: Palette) => css`
 
 export const SubMeta = ({
 	palette,
+	format,
 	subMetaKeywordLinks,
 	subMetaSectionLinks,
 	pageId,
@@ -126,14 +136,14 @@ export const SubMeta = ({
 			{(hasSectionLinks || hasKeywordLinks) && (
 				<>
 					<span className={labelStyles(palette)}>Topics</span>
-					<div className={listWrapper}>
+					<div className={listWrapper(palette)}>
 						{hasSectionLinks && (
 							<ul className={listStyleNone}>
 								{subMetaSectionLinks.map((link, i) => (
 									<li
 										className={cx(
 											listItemStyles(palette),
-											sectionStyles,
+											sectionStyles(format),
 											i ===
 												subMetaSectionLinks.length -
 													1 && hideSlash,
@@ -192,7 +202,6 @@ export const SubMeta = ({
 							'twitter',
 							'email',
 							'linkedIn',
-							'pinterest',
 							'whatsApp',
 							'messenger',
 						]}

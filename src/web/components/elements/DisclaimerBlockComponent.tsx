@@ -1,14 +1,9 @@
 import React from 'react';
 import { body } from '@guardian/src-foundations/typography';
-import { pillarPalette } from '@root/src/lib/pillars';
 import { css } from 'emotion';
 
-const style = (pillar: Theme) => css`
+const disclaimerStyles = css`
 	${body.small()};
-
-	a {
-		color: ${pillarPalette[pillar].dark};
-	}
 
 	sup {
 		font-size: 85%;
@@ -19,10 +14,9 @@ const style = (pillar: Theme) => css`
 
 export const DisclaimerBlockComponent: React.FC<{
 	html: string;
-	pillar: Theme;
-}> = ({ html, pillar }) => (
+}> = ({ html }) => (
 	<footer
-		className={style(pillar)}
+		className={disclaimerStyles}
 		data-cy="affiliate-disclaimer"
 		dangerouslySetInnerHTML={{
 			__html: html,

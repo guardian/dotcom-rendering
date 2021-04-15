@@ -4,10 +4,10 @@ import { css, cx } from 'emotion';
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design, Format, Special } from '@guardian/types';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
@@ -21,10 +21,25 @@ type Props = {
 
 const curly = (x: any) => x;
 
+const topPadding = css`
+	${from.leftCol} {
+		padding-top: ${space[1]}px;
+	}
+`;
+
 const standardFont = css`
 	${headline.medium()};
 	${until.tablet} {
 		${headline.small()};
+	}
+`;
+
+const labsFont = css`
+	${textSans.xlarge()};
+	line-height: 32px;
+	${from.tablet} {
+		${textSans.xxxlarge()};
+		line-height: 38px;
 	}
 `;
 
@@ -40,6 +55,17 @@ const jumboFont = css`
 	line-height: 56px;
 	${until.desktop} {
 		${headline.medium({ fontWeight: 'bold' })};
+	}
+`;
+
+const jumboLabsFont = css`
+	${textSans.xxxlarge({ fontWeight: 'bold' })};
+	font-size: 50px;
+	line-height: 56px;
+	${until.desktop} {
+		${textSans.xxlarge({ fontWeight: 'bold' })};
+		font-size: 34px;
+		line-height: 38px;
 	}
 `;
 
@@ -212,6 +238,7 @@ export const ArticleHeadline = ({
 					);
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 					return (
 						<>
 							<h1
@@ -250,7 +277,9 @@ export const ArticleHeadline = ({
 						>
 							<span
 								className={cx(
-									jumboFont,
+									format.theme === Special.Labs
+										? jumboLabsFont
+										: jumboFont,
 									maxWidth,
 									invertedStyles(palette),
 									immersiveStyles,
@@ -274,6 +303,7 @@ export const ArticleHeadline = ({
 						<h1
 							className={cx(
 								boldFont,
+								topPadding,
 								css`
 									color: ${palette.text.headline};
 								`,
@@ -289,6 +319,7 @@ export const ArticleHeadline = ({
 							<h1
 								className={cx(
 									lightFont,
+									topPadding,
 									css`
 										color: ${palette.text.headline};
 									`,
@@ -305,11 +336,29 @@ export const ArticleHeadline = ({
 							)}
 						</>
 					);
+
+				case Design.Letter:
+					return (
+						<>
+							<h1
+								className={cx(
+									lightFont,
+									topPadding,
+									css`
+										color: ${palette.text.headline};
+									`,
+								)}
+							>
+								{curly(headlineString)}
+							</h1>
+						</>
+					);
 				case Design.Analysis:
 					return (
 						<h1
 							className={cx(
 								standardFont,
+								topPadding,
 								underlinedStyles,
 								css`
 									color: ${palette.text.headline};
@@ -328,7 +377,7 @@ export const ArticleHeadline = ({
 						>
 							<HeadlineTag
 								tagText="Interview"
-								pillar={format.theme}
+								palette={palette}
 							/>
 							<h1
 								className={cx(
@@ -359,11 +408,28 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
-				default:
+				case Design.LiveBlog:
+				case Design.DeadBlog:
 					return (
 						<h1
 							className={cx(
 								standardFont,
+								css`
+									color: ${palette.text.headline};
+								`,
+							)}
+						>
+							{curly(headlineString)}
+						</h1>
+					);
+				default:
+					return (
+						<h1
+							className={cx(
+								format.theme === Special.Labs
+									? labsFont
+									: standardFont,
+								topPadding,
 								css`
 									color: ${palette.text.headline};
 								`,

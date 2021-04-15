@@ -70,7 +70,7 @@ const buildRRLinkCategories = (
 	subscribe: getString(data, `${rrLinkConfig}.${position}.subscribe`, ''),
 	support: getString(data, `${rrLinkConfig}.${position}.support`, ''),
 	contribute: getString(data, `${rrLinkConfig}.${position}.contribute`, ''),
-	gifting: getString(data, `${rrLinkConfig}.${position}.gifting`, ''),
+	supporter: getString(data, `${rrLinkConfig}.${position}.supporter`, ''),
 });
 
 const buildRRLinkModel = (data: any): ReaderRevenuePositions => ({

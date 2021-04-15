@@ -1,4 +1,4 @@
-import { joinUrl } from '@root/src/lib/joinUrl';
+import { useApi } from '@root/src/web/lib/api';
 
 type DiscussionResponse = {
 	status: string;
@@ -50,24 +50,11 @@ type CommentType = {
 	};
 };
 
-export const getDiscussion = async (
-	ajaxUrl: string,
-	shortUrl: string,
-): Promise<DiscussionResponse> => {
-	const url = joinUrl([ajaxUrl, 'discussion', shortUrl]);
-	return fetch(url)
-		.then((response) => {
-			if (!response.ok) {
-				throw Error(
-					response.statusText ||
-						`getDiscussion | An api call returned HTTP status ${response.status}`,
-				);
-			}
-			return response;
-		})
-		.then((response) => response.json())
-		.then((json) => json)
-		.catch((error) => {
-			window.guardian.modules.sentry.reportError(error, 'get-discussion');
-		});
+export const useDiscussion = (url: string) => {
+	const { data } = useApi<DiscussionResponse>(url);
+
+	return {
+		commentCount: data?.discussion?.commentCount,
+		isClosedForComments: data?.discussion?.isClosedForComments,
+	};
 };

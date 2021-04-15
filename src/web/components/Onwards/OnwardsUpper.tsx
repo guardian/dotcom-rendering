@@ -64,7 +64,7 @@ const firstPopularTag = (
 
 	// For paid content we just return the first tag, otherwise we
 	// filter for the first tag in the whitelist
-	return isPaidContent ? pageTags[0] : firstTagInWhitelist;
+	return isPaidContent ? tags[0] : firstTagInWhitelist;
 };
 
 const onwardsWrapper = css`
@@ -83,7 +83,7 @@ type Props = {
 	contentType: string;
 	tags: TagType[];
 	edition: Edition;
-	pillar: Theme;
+	format: Format;
 };
 
 export const OnwardsUpper = ({
@@ -97,7 +97,7 @@ export const OnwardsUpper = ({
 	keywordIds,
 	contentType,
 	tags,
-	pillar,
+	format,
 }: Props) => {
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
@@ -177,7 +177,7 @@ export const OnwardsUpper = ({
 						limit={8}
 						ophanComponentName={ophanComponentName}
 						Container={OnwardsLayout}
-						pillar={pillar}
+						format={format}
 					/>
 				</Section>
 			)}

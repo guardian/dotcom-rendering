@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
@@ -30,8 +30,9 @@ const twitterHandleStyles = (palette: Palette) => css`
 	}
 `;
 
-const bylineStyles = (palette: Palette) => css`
-	${headline.xxxsmall()};
+const bylineStyles = (palette: Palette, format: Format) => css`
+	${format.theme === Special.Labs ? textSans.medium() : headline.xxxsmall()};
+	${format.theme === Special.Labs && 'line-height: 20px;'};
 	color: ${palette.text.byline};
 	padding-bottom: 8px;
 	font-style: italic;
@@ -67,7 +68,7 @@ export const Contributor: React.FC<{
 			data-link-name="byline"
 		>
 			{format.design !== Design.Interview && (
-				<div className={bylineStyles(palette)}>
+				<div className={bylineStyles(palette, format)}>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>
 			)}

@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import { Pillar } from '@guardian/types';
-
 import { useApi } from '@root/src/web/lib/api';
 
 type CommentType = {
@@ -44,12 +42,8 @@ const withComments = (
 	if (counts.length === 0) return onwardSections;
 	return onwardSections.map((section) => {
 		return {
-			description: section.description,
-			heading: section.heading,
-			url: section.url,
+			...section,
 			trails: updateTrailsWithCounts(section.trails, counts),
-			ophanComponentName: section.ophanComponentName,
-			pillar: Pillar.Opinion,
 		};
 	});
 };
@@ -81,7 +75,9 @@ export function useComments(onwardsSections: OnwardsType[]) {
 	const [counts, setCounts] = useState<CommentType[]>([]);
 
 	const url = buildUrl(onwardsSections);
-	const { data } = useApi<CommentsType>(url);
+	const { data } = useApi<CommentsType>(url, {
+		refreshInterval: 15000,
+	});
 
 	useEffect(() => {
 		setCounts((data && data.counts) || []);

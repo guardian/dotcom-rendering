@@ -66,7 +66,11 @@ describe('buildUrl', () => {
 	it('builds the url as expected', () => {
 		const sections: OnwardsType[] = [
 			{
-				pillar: Pillar.Opinion,
+				format: {
+					display: Display.Standard,
+					theme: Pillar.Opinion,
+					design: Design.Comment,
+				},
 				heading: 'opinion',
 				trails: [
 					{
@@ -131,7 +135,11 @@ describe('buildUrl', () => {
 	it('handles the legacy gu domain', () => {
 		const sections: OnwardsType[] = [
 			{
-				pillar: Pillar.Opinion,
+				format: {
+					display: Display.Standard,
+					theme: Pillar.Opinion,
+					design: Design.Comment,
+				},
 				heading: 'opinion',
 				trails: [
 					{

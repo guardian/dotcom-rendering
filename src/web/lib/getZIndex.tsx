@@ -25,18 +25,19 @@ const indices = [
 	// Modals will go here at the top
 
 	'banner',
-
-	// Stick-nav test
+	'dropdown',
+	'burger',
 	'stickyNav',
 
 	// Header
 	'stickyAdWrapper',
-	'stickyNavWrapper',
-	'headerWrapper',
 
-	// Header links (should be above The Guardian svg)
-	'headerLinks',
+	// Search link should be above The Guardian svg
+	'searchHeaderLink',
 	'TheGuardian',
+
+	// Wrapper after nav stuff
+	'headerWrapper',
 
 	// Article headline (should be above main media)
 	'articleHeadline',

@@ -61,7 +61,7 @@ const getHeight = (html?: string): number => {
 	return defaultInteractiveAtomHeight;
 };
 
-export const InteractiveAtomBlockComponent: React.SFC<{
+export const InteractiveAtomBlockComponent: React.FunctionComponent<{
 	url: string;
 	html?: string;
 	placeholderUrl?: string;

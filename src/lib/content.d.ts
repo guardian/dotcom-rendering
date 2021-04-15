@@ -6,16 +6,6 @@ interface ThirdPartyEmbeddedContent {
 	source?: string;
 	sourceDomain?: string;
 }
-
-interface InteractiveAtomBlockElementBase {
-	url: string;
-	placeholderUrl?: string;
-	id?: string;
-	html?: string;
-	css?: string;
-	js?: string;
-}
-
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
@@ -66,12 +56,16 @@ interface CalloutBlockElement {
 	role?: RoleType;
 }
 
-interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface ChartAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 	elementId: string;
 	id: string;
+	url: string;
 	html: string;
+	css?: string;
+	js?: string;
 	role?: RoleType;
+	placeholderUrl?: string;
 }
 
 interface QuizAtomBlockElement {
@@ -157,8 +151,14 @@ interface ExplainerAtomBlockElement {
 	role?: RoleType;
 }
 
-interface GenericAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface GenericAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
+	url: string;
+	placeholderUrl?: string;
+	id?: string;
+	html?: string;
+	css?: string;
+	js?: string;
 	elementId: string;
 }
 
@@ -218,13 +218,15 @@ interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface InteractiveAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 	elementId: string;
+	url: string;
 	id: string;
 	js: string;
 	html?: string;
 	css?: string;
+	placeholderUrl?: string;
 	role?: RoleType;
 }
 
@@ -237,6 +239,7 @@ interface InteractiveBlockElement {
 	scriptUrl?: string;
 	alt?: string;
 	role?: RoleType;
+	caption?: string;
 }
 
 interface MapBlockElement extends ThirdPartyEmbeddedContent {
