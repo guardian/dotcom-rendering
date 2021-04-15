@@ -64,7 +64,7 @@ const fetchAnniversaryAtom = (): Promise<void> => {
 		});
 };
 
-const oneMinute = 60_00;
+const oneMinute = 60_000;
 const refreshAnniversaryAtom = () => {
 	setTimeout(() => {
 		fetchAnniversaryAtom()
