@@ -61,7 +61,7 @@ const bottomPadding = css`
 	padding-bottom: 72px;
 `;
 
-const BylineMeta: React.SFC<{
+const BylineMeta: React.FunctionComponent<{
 	articleData: ArticleModel;
 	pillar: Theme;
 }> = ({ articleData, pillar }) => {

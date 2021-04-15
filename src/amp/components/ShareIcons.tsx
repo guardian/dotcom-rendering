@@ -4,7 +4,6 @@ import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
 import EmailIcon from '@frontend/static/icons/email.svg';
 import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
-import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -80,7 +79,6 @@ export const ShareIcons: React.FC<{
 		twitter: TwitterIconPadded,
 		email: EmailIcon,
 		linkedIn: LinkedInIcon,
-		pinterest: PinterestIcon,
 		whatsApp: WhatsAppIcon,
 		messenger: MessengerIcon,
 	};

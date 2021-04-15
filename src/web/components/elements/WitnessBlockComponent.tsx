@@ -3,14 +3,6 @@ import { css } from 'emotion';
 
 import { neutral, space } from '@guardian/src-foundations';
 import { headline, body } from '@guardian/src-foundations/typography';
-import { pillarPalette } from '@root/src/lib/pillars';
-
-type WrapperProps = {
-	authorName: string;
-	dateCreated: string;
-	pillar: Theme;
-	children: React.ReactNode;
-};
 
 // Wrapper Styles
 const wrapperStyles = css`
@@ -33,10 +25,10 @@ const witnessIconWrapperStyles = css`
 	padding-bottom: ${space[2]}px;
 `;
 
-const witnessIconStyles = (pillar: Theme) => css`
+const witnessIconStyles = (palette: Palette) => css`
 	padding-left: ${space[1]}px;
 
-	color: ${pillarPalette[pillar].main};
+	color: ${palette.text.witnessIcon};
 	${body.small({ fontWeight: 'bold' })}
 `;
 
@@ -53,9 +45,9 @@ const captionStyles = css`
 	margin-top: ${space[3]}px;
 `;
 
-const titleStyles = (pillar: Theme) => css`
+const titleStyles = (palette: Palette) => css`
 	margin-bottom: ${space[2]}px;
-	color: ${pillarPalette[pillar].main};
+	color: ${palette.text.witnessTitle};
 	${headline.xxxsmall()}
 `;
 
@@ -66,16 +58,23 @@ const witnessDetailsSpacingStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
-const authorNameStyles = (pillar: Theme) => css`
+const authorNameStyles = (palette: Palette) => css`
 	padding-left: 5px;
-	color: ${pillarPalette[pillar].main};
+	color: ${palette.text.witnessAuthor};
 	${body.small({ fontWeight: 'bold' })}
 `;
 
-export const WitnessWrapper = ({
+type WrapperProps = {
+	authorName: string;
+	dateCreated: string;
+	palette: Palette;
+	children: React.ReactNode;
+};
+
+const WitnessWrapper = ({
 	authorName,
 	dateCreated,
-	pillar,
+	palette,
 	children,
 }: WrapperProps): JSX.Element => {
 	return (
@@ -84,7 +83,7 @@ export const WitnessWrapper = ({
 			<footer>
 				<p className={witnessIconWrapperStyles}>
 					Sent via
-					<span className={witnessIconStyles(pillar)}>
+					<span className={witnessIconStyles(palette)}>
 						guardian
 						<span
 							className={css`
@@ -104,7 +103,7 @@ export const WitnessWrapper = ({
 						>
 							By
 							<span
-								className={authorNameStyles(pillar)}
+								className={authorNameStyles(palette)}
 								itemProp="author"
 								itemType="http://schema.org/Person"
 							>
@@ -134,7 +133,7 @@ type ImageProps = {
 	authorName: string;
 	dateCreated: string;
 	alt: string;
-	pillar: Theme;
+	palette: Palette;
 };
 
 export const WitnessImageBlockComponent = ({
@@ -144,7 +143,7 @@ export const WitnessImageBlockComponent = ({
 	authorName,
 	dateCreated,
 	alt,
-	pillar,
+	palette,
 }: ImageProps): JSX.Element => {
 	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
 	// asset in the list
@@ -156,7 +155,7 @@ export const WitnessImageBlockComponent = ({
 		<WitnessWrapper
 			authorName={authorName}
 			dateCreated={dateCreated}
-			pillar={pillar}
+			palette={palette}
 		>
 			<>
 				<img
@@ -169,7 +168,7 @@ export const WitnessImageBlockComponent = ({
 				/>
 				<figcaption className={captionStyles}>
 					<h3
-						className={titleStyles(pillar)}
+						className={titleStyles(palette)}
 						itemProp="name"
 						dangerouslySetInnerHTML={{ __html: title }}
 					/>
@@ -192,7 +191,7 @@ type TextProps = {
 	authorName: string;
 	dateCreated: string;
 	description: string;
-	pillar: Theme;
+	palette: Palette;
 };
 
 export const WitnessTextBlockComponent = ({
@@ -200,16 +199,16 @@ export const WitnessTextBlockComponent = ({
 	authorName,
 	dateCreated,
 	description,
-	pillar,
+	palette,
 }: TextProps): JSX.Element => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}
-		pillar={pillar}
+		palette={palette}
 	>
 		<>
 			<h3
-				className={titleStyles(pillar)}
+				className={titleStyles(palette)}
 				itemProp="name"
 				dangerouslySetInnerHTML={{ __html: title }}
 			/>
@@ -231,7 +230,7 @@ type VideoProps = {
 	authorName: string;
 	youtubeHtml: string;
 	dateCreated: string;
-	pillar: Theme;
+	palette: Palette;
 };
 
 export const WitnessVideoBlockComponent = ({
@@ -240,12 +239,12 @@ export const WitnessVideoBlockComponent = ({
 	authorName,
 	youtubeHtml,
 	dateCreated,
-	pillar,
+	palette,
 }: VideoProps): JSX.Element => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}
-		pillar={pillar}
+		palette={palette}
 	>
 		<>
 			<div
@@ -258,7 +257,7 @@ export const WitnessVideoBlockComponent = ({
 			/>
 			<figcaption className={captionStyles}>
 				<h3
-					className={titleStyles(pillar)}
+					className={titleStyles(palette)}
 					itemProp="name"
 					dangerouslySetInnerHTML={{ __html: title }}
 				/>

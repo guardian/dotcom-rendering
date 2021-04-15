@@ -5,23 +5,37 @@ import {
 } from '@root/src/web/lib/hasCurrentBrazeUser';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { record } from '@root/src/web/browser/ophan/ophan';
-import { BrazeMessages, BrazeMessagesInterface } from './BrazeMessages';
+import {
+	BrazeMessages,
+	BrazeMessagesInterface,
+	InMemoryCache,
+	LocalMessageCache,
+	NullBrazeMessages,
+} from '@guardian/braze-components/logic';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy, SDK_OPTIONS } from './initialiseAppboy';
-import { NullBrazeMessages } from './NullBrazeMessages';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
 	brazeUuid?: null | string,
+	consent?: boolean,
 ): Promise<void> => {
-	if (apiKey && !brazeUuid && hasCurrentBrazeUser()) {
-		const appboy = await getInitialisedAppboy(apiKey);
+	const userHasLoggedOut = !brazeUuid && hasCurrentBrazeUser();
+	const userHasRemovedConsent = !consent && hasCurrentBrazeUser();
 
+	if (userHasLoggedOut || userHasRemovedConsent) {
 		try {
-			appboy.wipeData();
+			if (apiKey) {
+				const appboy = await getInitialisedAppboy(apiKey);
+				appboy.wipeData();
+			}
+			LocalMessageCache.clear();
 			clearHasCurrentBrazeUser();
 		} catch (error) {
-			window.guardian.modules.sentry.reportError(error, 'braze-banner');
+			window.guardian.modules.sentry.reportError(
+				error,
+				'braze-maybeWipeUserData',
+			);
 		}
 	}
 };
@@ -47,6 +61,7 @@ export const buildBrazeMessages = async (
 		await maybeWipeUserData(
 			data.apiKey as string | undefined,
 			data.brazeUuid as string | null | undefined,
+			data.consent as boolean | undefined,
 		);
 
 		return new NullBrazeMessages();
@@ -66,7 +81,14 @@ export const buildBrazeMessages = async (
 			value: sdkLoadTimeTaken,
 		});
 
-		const brazeMessages = new BrazeMessages(appboy);
+		const errorHandler = (error: Error, desc: string) => {
+			window.guardian.modules.sentry.reportError(error, desc);
+		};
+		const brazeMessages = new BrazeMessages(
+			appboy,
+			InMemoryCache,
+			errorHandler,
+		);
 
 		appboy.changeUser(dependenciesResult.data.brazeUuid as string);
 		appboy.openSession();

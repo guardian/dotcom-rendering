@@ -41,15 +41,19 @@ export const FourOrLess = ({ content }: Props) => {
 						<Card
 							linkTo={trail.url}
 							format={trail.format}
-							palette={trail.palette}
 							headlineText={trail.headline}
 							headlineSize="medium"
 							byline={trail.byline}
 							showByline={trail.showByline}
-							showQuotes={trail.format.design === Design.Comment}
+							showQuotes={
+								trail.format.design === Design.Comment ||
+								trail.format.design === Design.Letter
+							}
 							webPublicationDate={trail.webPublicationDate}
 							kickerText={trail.kickerText}
-							showPulsingDot={trail.isLiveBlog}
+							showPulsingDot={
+								trail.format.design === Design.LiveBlog
+							}
 							showSlash={true}
 							showClock={false}
 							imageUrl={trail.image}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -11,6 +11,7 @@ type Props = {
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
 	isFullCardImage?: boolean;
+	labBadge?: JSX.Element;
 };
 
 const spaceBetween = css`
@@ -47,10 +48,17 @@ export const CardFooter = ({
 	mediaMeta,
 	commentCount,
 	isFullCardImage,
+	labBadge,
 }: Props) => {
+	if (format.theme === Special.Labs && labBadge) {
+		return <footer>{labBadge}</footer>;
+	}
+
 	if (
 		!isFullCardImage &&
-		(format.design === Design.Comment || format.design === Design.Editorial)
+		(format.design === Design.Comment ||
+			format.design === Design.Editorial ||
+			format.design === Design.Letter)
 	) {
 		return (
 			<footer className={spaceBetween}>

@@ -21,7 +21,6 @@ export const Medium = () => {
 				'email',
 				'linkedIn',
 				'messenger',
-				'pinterest',
 				'twitter',
 				'whatsApp',
 			]}
@@ -46,7 +45,6 @@ export const Small = () => {
 				'email',
 				'linkedIn',
 				'messenger',
-				'pinterest',
 				'twitter',
 				'whatsApp',
 			]}

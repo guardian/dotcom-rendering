@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 import { neutral, border, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
+import { Design } from '@guardian/types';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
@@ -84,11 +85,11 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 						</div>
 					)}
 					<div className={headlineWrapperStyles}>
-						{trail.isLiveBlog ? (
+						{trail.format.design === Design.LiveBlog ? (
 							<LinkHeadline
 								headlineText={trail.headline}
-								format={trail.format}
 								palette={trail.palette}
+								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}
@@ -101,8 +102,8 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 						) : (
 							<LinkHeadline
 								headlineText={trail.headline}
-								format={trail.format}
 								palette={trail.palette}
+								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}

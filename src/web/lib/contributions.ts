@@ -1,5 +1,9 @@
 import { getCookie } from '@root/src/web/browser/cookie';
 import { onConsentChange } from '@guardian/consent-management-platform';
+import {
+	getIdApiUserData,
+	IdApiUserData,
+} from '@root/src/web/lib/getIdapiUserData';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -19,6 +23,9 @@ export const SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE =
 const DAILY_ARTICLE_COUNT_KEY = 'gu.history.dailyArticleCount';
 const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp'; // timestamp of when we were last told not to show a RR banner
+
+// See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
+export const MODULES_VERSION = 'v1';
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -167,3 +174,12 @@ export const withinLocalNoBannerCachePeriod = (): boolean => {
 
 export const setLocalNoBannerCachePeriod = (): void =>
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
+
+export const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
+	return getIdApiUserData(ajaxUrl)
+		.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
+		.catch((error) => {
+			window.guardian.modules.sentry.reportError(error, 'getEmail');
+			return undefined;
+		});
+};

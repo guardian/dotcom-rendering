@@ -48,21 +48,21 @@ describe('Interactivity', function () {
 		});
 		describe('When most viewed is mocked', function () {
 			beforeEach(mockApi);
-			// it('should change the list of most viewed items when a tab is clicked', function () {
-			//     cy.visit(`/Article?url=${articleUrl}`);
-			//     cy.contains('Lifestyle');
-			//     cy.get('[data-component="most-popular"]').scrollIntoView({
-			//         duration: 300,
-			//         offset: { top: -30 },
-			//     });
-			//     cy.wait('@getMostReadGeo');
-			//     cy.wait('@getMostRead');
-			//     cy.get('[data-cy=tab-body-0]').should('be.visible');
-			//     cy.get('[data-cy=tab-body-1]').should('not.be.visible');
-			//     cy.get('[data-cy=tab-heading-1]').click();
-			//     cy.get('[data-cy=tab-body-0]').should('not.be.visible');
-			//     cy.get('[data-cy=tab-body-1]').should('be.visible');
-			// });
+			it('should change the list of most viewed items when a tab is clicked', function () {
+				cy.visit(`/Article?url=${articleUrl}`);
+				cy.contains('Lifestyle');
+				cy.get('[data-component="most-popular"]').scrollIntoView({
+					duration: 300,
+					offset: { top: -30 },
+				});
+				cy.wait('@getMostReadGeo');
+				cy.wait('@getMostRead');
+				cy.get('[data-cy=tab-body-0]').should('be.visible');
+				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
+				cy.get('[data-cy=tab-heading-1]').click();
+				cy.get('[data-cy=tab-body-0]').should('not.be.visible');
+				cy.get('[data-cy=tab-body-1]').should('be.visible');
+			});
 		});
 		it('should render the reader revenue links in the header', function () {
 			cy.visit(`/Article?url=${articleUrl}`);

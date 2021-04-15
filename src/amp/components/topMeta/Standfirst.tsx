@@ -38,7 +38,7 @@ const labsStyle = css`
 	}
 `;
 
-export const Standfirst: React.SFC<{
+export const Standfirst: React.FunctionComponent<{
 	text: string;
 	pillar: Theme;
 }> = ({ text, pillar }) => {

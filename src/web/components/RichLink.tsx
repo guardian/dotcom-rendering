@@ -8,17 +8,15 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
-import { pillarPalette } from '@frontend/lib/pillars';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Hide } from '@root/src/web/components/Hide';
 import { Avatar } from '@frontend/web/components/Avatar';
-import { decidePalette } from '../lib/decidePalette';
 
 type ColourType = string;
 
@@ -47,30 +45,23 @@ const neutralBackground = css`
 	}
 `;
 
-const richLinkPillarColour: (format: Format) => ColourType = (format) => {
-	if (format) {
-		return pillarPalette[format.theme].main;
-	}
-	return pillarPalette[Pillar.News][400];
-};
-
-const pillarBackground: (format: Format) => ColourType = (format) => {
+const pillarBackground: (palette: Palette) => ColourType = (palette) => {
 	return css`
-		background-color: ${richLinkPillarColour(format)};
+		background-color: ${palette.background.richLink};
 	`;
 };
 
-const textColour: (format: Format) => ColourType = (format) => {
+const textColour: (palette: Palette) => ColourType = (palette) => {
 	return css`
-		color: ${richLinkPillarColour(format)};
+		color: ${palette.text.richLink};
 	`;
 };
 
-const richLinkTopBorder: (format: Format) => ColourType = (format) => {
+const richLinkTopBorder: (palette: Palette) => ColourType = (palette) => {
 	return css`
 		border-top: 1px;
 		border-top-style: solid;
-		border-top-color: ${richLinkPillarColour(format)};
+		border-top-color: ${palette.border.richLink};
 	`;
 };
 
@@ -102,10 +93,10 @@ const richLinkTitle = css`
 	}
 `;
 
-const richLinkReadMore: (format: Format) => ColourType = (format) => {
+const richLinkReadMore: (palette: Palette) => ColourType = (palette) => {
 	return css`
-		fill: ${richLinkPillarColour(format)};
-		color: ${richLinkPillarColour(format)};
+		fill: ${palette.fill.richLink};
+		color: ${palette.text.richLink};
 		padding-top: 2px;
 	`;
 };
@@ -200,6 +191,7 @@ export const RichLink = ({
 	contributorImage,
 	isPlaceholder,
 }: Props) => {
+	const palette = decidePalette(format);
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
 
@@ -216,12 +208,12 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			className={pillarBackground(format)}
+			className={pillarBackground(palette)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
 			<div className={neutralBackground}>
 				<a className={richLinkLink} href={url}>
-					<div className={richLinkTopBorder(format)} />
+					<div className={richLinkTopBorder(palette)} />
 					{showImage && (
 						<div>
 							<img
@@ -238,19 +230,13 @@ export const RichLink = ({
 									<>
 										<Hide when="above" breakpoint="wide">
 											<QuoteIcon
-												colour={
-													pillarPalette[format.theme]
-														.main
-												}
+												colour={palette.fill.quoteIcon}
 												size="small"
 											/>
 										</Hide>
 										<Hide when="below" breakpoint="wide">
 											<QuoteIcon
-												colour={
-													pillarPalette[format.theme]
-														.main
-												}
+												colour={palette.fill.quoteIcon}
 												size="medium"
 											/>
 										</Hide>
@@ -259,7 +245,9 @@ export const RichLink = ({
 								{linkText}
 							</div>
 							{isOpinion && (
-								<div className={cx(byline, textColour(format))}>
+								<div
+									className={cx(byline, textColour(palette))}
+								>
 									{mainContributor}
 								</div>
 							)}
@@ -286,7 +274,7 @@ export const RichLink = ({
 								/>
 							</div>
 						)}
-						<div className={richLinkReadMore(format)}>
+						<div className={richLinkReadMore(palette)}>
 							<ArrowInCircle />
 							<div className={readMoreTextStyle}>
 								{readMoreText(contentType)}

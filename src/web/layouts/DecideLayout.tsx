@@ -8,6 +8,8 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 
+import { injectGlobal } from 'emotion';
+import { focusHalo } from '@guardian/src-foundations/accessibility';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
@@ -20,23 +22,23 @@ type Props = {
 	NAV: NavType;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+injectGlobal`
+	/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
+	/* The not(.src...) selector is to work with Source's FocusStyleManager. */
+	*:focus {
+		${focusHalo}
+	}
+`;
+
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
-	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign({
-		designType: CAPI.designType,
-		tags: CAPI.tags,
-		isLiveBlog: CAPI.config.isLiveBlog,
-		isLive: CAPI.config.isLive,
-	});
-	const pillar: Pillar = decideTheme({
-		pillar: CAPI.pillar,
-		design,
-		isSpecialReport: CAPI.isSpecialReport,
-	});
+	const display: Display = decideDisplay(CAPI.format);
+	const design: Design = decideDesign(CAPI.format);
+	const theme: Pillar = decideTheme(CAPI.format);
 	const format: Format = {
 		display,
 		design,
-		theme: pillar,
+		theme,
 	};
 	const palette = decidePalette(format);
 
@@ -45,6 +47,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 			switch (design) {
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 					return (
 						<ImmersiveOpinionLayout
 							CAPI={CAPI}
@@ -78,6 +81,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 					);
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
@@ -112,6 +116,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 					);
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 					return (
 						<CommentLayout
 							CAPI={CAPI}

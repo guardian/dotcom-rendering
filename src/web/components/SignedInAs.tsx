@@ -5,12 +5,11 @@ import { text, border, neutral, news } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
-import { pillarPalette } from '@frontend/lib/pillars';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
 type Props = {
-	commentCount: number;
-	pillar: Theme;
+	commentCount?: number;
+	palette: Palette;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
 	isClosedForComments?: boolean;
@@ -61,8 +60,8 @@ const usernameStyles = css`
 	color: ${text.primary};
 `;
 
-const linkStyles = (pillar: Theme) => css`
-	color: ${pillarPalette[pillar].dark};
+const linkStyles = (palette: Palette) => css`
+	color: ${palette.text.signInLink};
 	text-decoration: none;
 	border-bottom: 1px solid ${border.secondary};
 	transition: border-color 0.15s ease-out;
@@ -81,7 +80,7 @@ const rowUntilDesktop = css`
 
 export const SignedInAs = ({
 	commentCount,
-	pillar,
+	palette,
 	enableDiscussionSwitch,
 	user,
 	isClosedForComments,
@@ -100,7 +99,7 @@ export const SignedInAs = ({
 						color: ${neutral[60]};
 					`}
 				>
-					({commentCount})
+					({commentCount || '…'})
 				</span>
 			</h2>
 
@@ -110,7 +109,7 @@ export const SignedInAs = ({
 					Commenting has been disabled for this account (
 					<a
 						href="https://www.theguardian.com/community-faqs#321a"
-						className={linkStyles(pillar)}
+						className={linkStyles(palette)}
 					>
 						why?
 					</a>{' '}
@@ -157,7 +156,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						className={linkStyles(pillar)}
+						className={linkStyles(palette)}
 					>
 						Sign in
 					</a>{' '}
@@ -166,7 +165,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						className={linkStyles(pillar)}
+						className={linkStyles(palette)}
 					>
 						create your Guardian account
 					</a>{' '}

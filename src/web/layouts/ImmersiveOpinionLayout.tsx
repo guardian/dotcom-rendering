@@ -274,6 +274,7 @@ export const ImmersiveOpinionLayout = ({
 						host={host}
 						hideCaption={true}
 						abTests={CAPI.config.abTests}
+						isPreview={CAPI.pageType.isPreview}
 					/>
 					{mainMedia && (
 						<>
@@ -355,7 +356,7 @@ export const ImmersiveOpinionLayout = ({
 									)}
 								</div>
 							</ContainerLayout>
-							<GuardianLines count={8} pillar={format.theme} />
+							<GuardianLines count={8} palette={palette} />
 						</>
 					)}
 				</div>
@@ -382,7 +383,7 @@ export const ImmersiveOpinionLayout = ({
 						{format.design === Design.PhotoEssay ? (
 							<></>
 						) : (
-							<Border />
+							<Border palette={palette} />
 						)}
 					</GridItem>
 					<GridItem area="standfirst">
@@ -398,7 +399,7 @@ export const ImmersiveOpinionLayout = ({
 							<div className={maxWidth}>
 								<div className={stretchLines}>
 									<GuardianLines
-										pillar={format.theme}
+										palette={palette}
 										effect={decideLineEffect(
 											Design.Article,
 											format.theme,
@@ -436,13 +437,14 @@ export const ImmersiveOpinionLayout = ({
 									adTargeting={adTargeting}
 									host={host}
 									abTests={CAPI.config.abTests}
+									pageId={CAPI.config.pageId}
+									webTitle={CAPI.webTitle}
+									isPreview={CAPI.pageType.isPreview}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
+									format={format}
 									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -566,7 +568,7 @@ export const ImmersiveOpinionLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

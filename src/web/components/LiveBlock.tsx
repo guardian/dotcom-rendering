@@ -10,7 +10,7 @@ import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
-import { textSans } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const ASIDE_WIDTH = 58;
 const GUTTER = space[3];
@@ -23,6 +23,7 @@ type Props = {
 	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
+	isPreview: boolean;
 };
 
 const Container = ({
@@ -115,6 +116,19 @@ const BlockText = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
+const BlockTitle = ({ title }: { title: string }) => {
+	return (
+		<h2
+			className={css`
+				${headline.xxsmall({ fontWeight: 'bold' })}
+				margin-bottom: ${space[3]}px;
+			`}
+		>
+			{title}
+		</h2>
+	);
+};
+
 const LastUpdated = ({
 	lastUpdatedDisplay,
 	lastUpdated,
@@ -149,7 +163,7 @@ const FirstPublished = ({
 	return (
 		<a
 			href={blockLink}
-			data-ignore-global-link-styling={true}
+			data-ignore="global-link-styling"
 			// title={publishedDate.toLocaleString()}
 			className={css`
 				${textSans.xsmall({ fontWeight: 'bold' })}
@@ -211,6 +225,7 @@ export const LiveBlock = ({
 	abTests,
 	adTargeting,
 	host,
+	isPreview,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -258,25 +273,29 @@ export const LiveBlock = ({
 						/>
 					)}
 				</aside>
-				{headerElement && (
-					<ElementRenderer
-						isMainMedia={false}
-						adTargeting={adTargeting}
-						index={0}
-						element={headerElement}
-						format={format}
-						palette={palette}
-						abTests={abTests}
-						host={host}
-					/>
-				)}
+				<span>
+					{block.title && <BlockTitle title={block.title} />}
+					{headerElement && (
+						<ElementRenderer
+							isMainMedia={false}
+							adTargeting={adTargeting}
+							index={0}
+							element={headerElement}
+							format={format}
+							palette={palette}
+							abTests={abTests}
+							host={host}
+							isPreview={isPreview}
+						/>
+					)}
+				</span>
 			</Header>
 			<main>
 				{/* For each element, we decide what margins to set depending on the type */}
 				{mainElements.map((element, index) => {
 					if (typesWeStretch.includes(element._type)) {
 						return (
-							<BlockMedia>
+							<BlockMedia key={`${element._type}-${index}`}>
 								<ElementRenderer
 									isMainMedia={false}
 									adTargeting={adTargeting}
@@ -286,19 +305,22 @@ export const LiveBlock = ({
 									palette={palette}
 									abTests={abTests}
 									host={host}
+									isPreview={isPreview}
 								/>
 							</BlockMedia>
 						);
 					}
 
 					return (
-						<BlockText>
+						<BlockText key={`${element._type}-${index}`}>
 							<ElementRenderer
+								isMainMedia={false}
 								index={index}
 								element={element}
 								format={format}
 								palette={palette}
 								abTests={abTests}
+								isPreview={isPreview}
 							/>
 						</BlockText>
 					);

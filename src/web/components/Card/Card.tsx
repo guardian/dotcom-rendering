@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -12,7 +12,9 @@ import { Hide } from '@frontend/web/components/Hide';
 import { MediaMeta } from '@frontend/web/components/MediaMeta';
 import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { formatCount } from '@root/src/web/lib/formatCount';
+import { textSans, headline } from '@guardian/src-foundations/typography';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -24,16 +26,15 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
+import { LabBadge } from './components/LabBadge';
 
 type Props = {
 	linkTo: string;
 	format: Format;
-	palette: Palette;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	byline?: string;
-	isLiveBlog?: boolean;
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
@@ -55,6 +56,9 @@ type Props = {
 	minWidthInPixels?: number;
 	// Ophan tracking
 	dataLinkName?: string;
+	// Labs
+	badge?: BadgeType;
+	brand?: string;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -99,6 +103,18 @@ const starWrapper = css`
 	margin-top: 2px;
 `;
 
+const labTitleOrNot = (format: Format) => {
+	if (format.theme === Special.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'regular' })}
+		`;
+	}
+	return css`
+		${headline.xxxsmall({ fontWeight: 'regular' })}
+		line-height: 20px;
+	`;
+};
+
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
@@ -123,7 +139,6 @@ const fullCardImageAgeStyles = css`
 export const Card = ({
 	linkTo,
 	format,
-	palette,
 	headlineText,
 	headlineSize,
 	showQuotes,
@@ -147,6 +162,8 @@ export const Card = ({
 	alwaysVertical,
 	minWidthInPixels,
 	dataLinkName,
+	badge,
+	brand,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -162,14 +179,29 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
+	/**
+	 * Why are we setting cardPalette like this?
+	 *
+	 * Good question. Basically, we had a production issue and this was the easiest and
+	 * quickest way to fix it rather than fixing Card's properly 😱
+	 *
+	 * Once:
+	 * 1. Cards have been refactored to remove `isFullSizeImage`
+	 * 2. We support the concept of a container type and
+	 * 3. We  and are able to handle Carousels natively - in
+	 *    the model
+	 * Then this should be removed.
+	 */
+	const cardPalette = decidePalette(format);
+
 	return (
 		<CardLink
 			linkTo={linkTo}
 			format={format}
-			palette={palette}
+			palette={cardPalette}
 			dataLinkName={dataLinkName}
 		>
-			<TopBar palette={palette} isFullCardImage={isFullCardImage}>
+			<TopBar palette={cardPalette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}
@@ -205,9 +237,10 @@ export const Card = ({
 									isFullCardImage={isFullCardImage}
 								>
 									<CardHeadline
+										css={labTitleOrNot(format)}
 										headlineText={headlineText}
 										format={format}
-										palette={palette}
+										palette={cardPalette}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
@@ -235,7 +268,7 @@ export const Card = ({
 												<Avatar
 													imageSrc={avatar.src}
 													imageAlt={avatar.alt}
-													palette={palette}
+													palette={cardPalette}
 												/>
 											</AvatarContainer>
 										</Hide>
@@ -248,7 +281,7 @@ export const Card = ({
 								)}
 							>
 								{standfirst && (
-									<StandfirstWrapper palette={palette}>
+									<StandfirstWrapper palette={cardPalette}>
 										{standfirst}
 									</StandfirstWrapper>
 								)}
@@ -258,7 +291,7 @@ export const Card = ({
 											<Avatar
 												imageSrc={avatar.src}
 												imageAlt={avatar.alt}
-												palette={palette}
+												palette={cardPalette}
 											/>
 										</AvatarContainer>
 									</Hide>
@@ -269,7 +302,7 @@ export const Card = ({
 										webPublicationDate ? (
 											<CardAge
 												format={format}
-												palette={palette}
+												palette={cardPalette}
 												webPublicationDate={
 													webPublicationDate
 												}
@@ -282,7 +315,7 @@ export const Card = ({
 										format.design === Design.Media &&
 										mediaType ? (
 											<MediaMeta
-												palette={palette}
+												palette={cardPalette}
 												mediaType={mediaType}
 												mediaDuration={mediaDuration}
 											/>
@@ -293,9 +326,18 @@ export const Card = ({
 										longCount &&
 										shortCount ? (
 											<CardCommentCount
-												palette={palette}
+												palette={cardPalette}
 												long={longCount}
 												short={shortCount}
+											/>
+										) : undefined
+									}
+									labBadge={
+										badge ? (
+											<LabBadge
+												badgeForLab={badge.imageUrl}
+												palette={cardPalette}
+												brandName={brand}
 											/>
 										) : undefined
 									}

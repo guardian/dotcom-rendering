@@ -89,6 +89,7 @@ export const CollapseColumnButton: React.FC<{
 		tabIndex={-1}
 		role="menuitem"
 		data-cy={`column-collapse-${title}`}
+		data-link-name={`nav2 : column-toggle-${title}: show`}
 	>
 		{title}
 	</label>

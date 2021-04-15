@@ -53,6 +53,9 @@ const RoleStory = ({
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -71,6 +74,7 @@ const RoleStory = ({
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
 						abTests={abTests}
+						isPreview={false}
 					>
 						{children}
 					</ClickToView>
@@ -461,6 +465,9 @@ export const EmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -476,6 +483,7 @@ export const EmbedBlockComponentStory = () => {
 						sourceDomain={facebookEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -498,6 +506,7 @@ export const EmbedBlockComponentStory = () => {
 						sourceDomain={vimeoEmbedEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -520,6 +529,7 @@ export const EmbedBlockComponentStory = () => {
 						sourceDomain={youtubeEmbedEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -542,6 +552,7 @@ export const EmbedBlockComponentStory = () => {
 						sourceDomain={spotifyEmbedEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -564,6 +575,7 @@ export const EmbedBlockComponentStory = () => {
 						sourceDomain={bandcampEmbedEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -586,6 +598,7 @@ export const EmbedBlockComponentStory = () => {
 						sourceDomain={ourworldindataEmbedEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -608,6 +621,7 @@ export const EmbedBlockComponentStory = () => {
 						sourceDomain={bbcEmbedEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -636,6 +650,9 @@ export const UnsafeEmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -654,6 +671,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 							updateIframeHeight('iframe[name="unsafe-embed-1"]')
 						}
 						abTests={abTests}
+						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="1"
@@ -679,6 +697,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 							updateIframeHeight('iframe[name="unsafe-embed-2"]')
 						}
 						abTests={abTests}
+						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="2"
@@ -705,6 +724,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 							updateIframeHeight('iframe[name="unsafe-embed-3"]')
 						}
 						abTests={abTests}
+						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="3"
@@ -731,6 +751,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 							updateIframeHeight('iframe[name="unsafe-embed-4"]')
 						}
 						abTests={abTests}
+						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="4"
@@ -757,6 +778,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 							updateIframeHeight('iframe[name="unsafe-embed-5"]')
 						}
 						abTests={abTests}
+						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="5"
@@ -786,6 +808,9 @@ export const VimeoBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className="para">
@@ -802,6 +827,7 @@ export const VimeoBlockComponentStory = () => {
 						sourceDomain={vimeoVideoEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<VimeoBlockComponent
 							format={{
@@ -843,6 +869,9 @@ export const DocumentBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -859,6 +888,7 @@ export const DocumentBlockComponentStory = () => {
 						sourceDomain={scribdDocumentEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<DocumentBlockComponent
 							embedUrl={scribdDocumentEmbed.embedUrl}
@@ -888,6 +918,9 @@ export const SoundCloudBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -904,6 +937,7 @@ export const SoundCloudBlockComponentStory = () => {
 						sourceDomain={soundcloudAudioEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudAudioEmbed}
@@ -924,6 +958,7 @@ export const SoundCloudBlockComponentStory = () => {
 						sourceDomain={soundcloudEmbedEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudEmbedEmbed}
@@ -950,6 +985,9 @@ export const SpotifyBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -966,6 +1004,7 @@ export const SpotifyBlockComponentStory = () => {
 						sourceDomain={spotifyAudioEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotifyAudioEmbed.embedUrl}
@@ -1008,6 +1047,9 @@ export const TweetBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -1024,6 +1066,7 @@ export const TweetBlockComponentStory = () => {
 						sourceDomain={twitterTweetEmbed.sourceDomain}
 						role="inline"
 						abTests={abTests}
+						isPreview={false}
 					>
 						<TweetBlockComponent element={twitterTweetEmbed} />
 					</ClickToView>
@@ -1047,6 +1090,9 @@ export const InstagramBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -1068,6 +1114,7 @@ export const InstagramBlockComponentStory = () => {
 								'iframe[name="instagram-embed-1"]',
 							)
 						}
+						isPreview={false}
 					>
 						<InstagramBlockComponent
 							key={1}

@@ -46,40 +46,6 @@ export const ArticleStory = () => (
 );
 ArticleStory.story = { name: 'Article' };
 
-export const oldHeadline = () => (
-	<Section>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<ArticleContainer>
-				<ArticleHeadline
-					headlineString="This is an old headline"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					}}
-					tags={[
-						// Age warnings only show for old articles when the tone/news tag is present
-						{
-							id: 'tone/news',
-							type: '',
-							title: '',
-						},
-					]}
-				/>
-			</ArticleContainer>
-		</Flex>
-	</Section>
-);
-oldHeadline.story = { name: 'Article, with age warning' };
-
 export const Feature = () => (
 	<Section>
 		<Flex>
@@ -150,6 +116,7 @@ export const ShowcaseInterview = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -200,6 +167,7 @@ export const ShowcaseInterviewNobyline = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -253,6 +221,7 @@ export const Interview = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -304,6 +273,7 @@ export const InterviewNoByline = () => (
 					hideCaption={true}
 					elements={mainMediaElements}
 					abTests={{}}
+					isPreview={false}
 				/>
 			</ArticleContainer>
 		</Flex>

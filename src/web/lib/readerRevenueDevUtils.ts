@@ -26,8 +26,12 @@ const readerRevenueCookies = [
 
 const clearEpicViewLog = (): void =>
 	localStorage.removeItem('gu.contributions.views');
-const clearBannerLastClosedAt = (): void =>
-	localStorage.removeItem('engagementBannerLastClosedAt');
+
+const clearBannerLastClosedAt = (): void => {
+	localStorage.removeItem('gu.prefs.engagementBannerLastClosedAt');
+	localStorage.removeItem('gu.prefs.subscriptionBannerLastClosedAt');
+	localStorage.removeItem('gu.noRRBannerTimestamp');
+};
 
 const fakeOneOffContributor = (): void =>
 	addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, Date.now().toString());
@@ -35,7 +39,7 @@ const fakeOneOffContributor = (): void =>
 const MULTIVARIATE_ID_COOKIE = 'GU_mvt_id';
 const MAX_CLIENT_MVT_ID = 1000000;
 const incrementMvtCookie = (): void => {
-	const mvtId = parseInt(getCookie(MULTIVARIATE_ID_COOKIE) || '1', 10);
+	const mvtId = parseInt(getCookie(MULTIVARIATE_ID_COOKIE) || '10', 10);
 	if (mvtId) {
 		if (mvtId === MAX_CLIENT_MVT_ID) {
 			// Wrap back to 1 if it would exceed the max
@@ -46,7 +50,7 @@ const incrementMvtCookie = (): void => {
 	}
 };
 const decrementMvtCookie = (): void => {
-	const mvtId = parseInt(getCookie(MULTIVARIATE_ID_COOKIE) || '1', 10);
+	const mvtId = parseInt(getCookie(MULTIVARIATE_ID_COOKIE) || '10', 10);
 	if (mvtId) {
 		if (mvtId === 0) {
 			// Wrap back to max if it would be less than 0

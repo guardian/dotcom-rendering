@@ -37,7 +37,31 @@ export const StandardStory = () => {
 		</Section>
 	);
 };
-StandardStory.story = { name: 'standard' };
+StandardStory.story = { name: 'News Highlighted' };
+
+export const OpinionStory = () => {
+	return (
+		<Section
+			showSideBorders={true}
+			borderColour={brandBorder.primary}
+			showTopBorder={false}
+			padded={false}
+			backgroundColour={brandBackground.primary}
+		>
+			<Nav
+				format={{
+					theme: Pillar.Opinion,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
+				nav={nav}
+				subscribeUrl=""
+				edition="UK"
+			/>
+		</Section>
+	);
+};
+OpinionStory.story = { name: 'Opinion Highlighted' };
 
 export const ImmersiveStory = () => {
 	return (
@@ -61,4 +85,4 @@ export const ImmersiveStory = () => {
 		</Section>
 	);
 };
-ImmersiveStory.story = { name: 'immersive' };
+ImmersiveStory.story = { name: 'Immersive' };
