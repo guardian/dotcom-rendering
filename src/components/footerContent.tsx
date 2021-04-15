@@ -8,7 +8,10 @@ const PrivacySettings: FC<{ isCcpa: boolean }> = ({ isCcpa }) => {
 	if (isCcpa) {
 		return (
 			<>
-				<a href="https://www.theguardian.com/help/privacy-policy">
+				<a
+					id="ar-privacy-settings"
+					href="https://www.theguardian.com/help/privacy-policy"
+				>
 					California Residents - Do Not Sell
 				</a>
 				&nbsp;&#183;&nbsp;
@@ -17,7 +20,10 @@ const PrivacySettings: FC<{ isCcpa: boolean }> = ({ isCcpa }) => {
 	} else {
 		return (
 			<>
-				<a href="https://www.theguardian.com/help/privacy-settings">
+				<a
+					id="ar-privacy-settings"
+					href="https://www.theguardian.com/help/privacy-settings"
+				>
 					Privacy Settings
 				</a>
 				&nbsp;&#183;&nbsp;
@@ -41,7 +47,10 @@ const FooterContent: FC<Props> = ({ isCcpa }) => {
 			affiliated companies. All rights reserved.
 			<br />
 			<PrivacySettings isCcpa={isCcpa} />
-			<a href="https://www.theguardian.com/help/privacy-policy">
+			<a
+				id="ar-privacy-policy"
+				href="https://www.theguardian.com/help/privacy-policy"
+			>
 				Privacy Policy
 			</a>
 		</div>
