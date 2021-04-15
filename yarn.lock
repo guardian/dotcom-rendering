@@ -4335,10 +4335,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/loadable__server@^5.12.3":
-  version "5.12.3"
-  resolved "https://registry.yarnpkg.com/@types/loadable__server/-/loadable__server-5.12.3.tgz#b8cd4030b9719ea333309f9c566c7f8fcf3b88af"
-  integrity sha512-jqSmFdaxuBNKO3yX9pMIYzXqhu03jv6AT6i4eKEZMbgU+1nvgs2UC14a4DUJPDJVnaUBms0+E3UdD5ipcQPtgg==
+"@types/loadable__server@^5.12.5":
+  version "5.12.5"
+  resolved "https://registry.yarnpkg.com/@types/loadable__server/-/loadable__server-5.12.5.tgz#1db69d361728a9e3dd23020b86c179d8736167ca"
+  integrity sha512-WXCN/j0ATyhY/1PS2uARK4ESNUQicwjlz9UOpwg23KEmlxc2Pb9G2FY6x5IBq3Jl11AS8c5WArlFkaCzdD+HhA==
   dependencies:
     "@types/react" "*"
 
