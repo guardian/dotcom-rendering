@@ -48,9 +48,8 @@ const scriptName = ({ design, display }: Format): Option<string> => {
 		case Design.Review:
 		case Design.Article:
 		case Design.Quiz:
-			return some('article.js');
 		case Design.Media:
-			return some('media.js');
+			return some('article.js');
 		default:
 			return none;
 	}

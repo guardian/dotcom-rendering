@@ -158,7 +158,6 @@ export const clientConfig: Configuration = {
 	mode: 'development',
 	entry: {
 		article: 'client/article.ts',
-		media: 'client/media.ts',
 		editions: 'client/editions.ts',
 	},
 	target: 'web',
