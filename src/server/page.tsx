@@ -14,7 +14,7 @@ import { atomCss, atomScript } from 'components/atoms/interactiveAtom';
 import Body from 'components/body';
 import Meta from 'components/meta';
 import Scripts from 'components/scripts';
-import { fromCapi } from 'item';
+import { fromCapi, getFormat } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
 import { createElement as h } from 'react';
@@ -120,6 +120,9 @@ function renderHead(
         <script id="targeting-params" type="application/json">
             ${JSON.stringify(request.targetingParams)}
         </script>
+		<script id="format" type="application/json">
+			${JSON.stringify(getFormat(item))}
+		</script>
     `;
 }
 
