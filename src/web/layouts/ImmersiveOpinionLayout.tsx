@@ -75,14 +75,9 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'caption    border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'lines      border      body        right-column'
+						'meta       border      standfirst  right-column'
 						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
+						'.          border      body        right-column';
 				}
 
 				${until.wide} {
@@ -93,12 +88,9 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'caption    border      standfirst  right-column'
-						'lines      border      body        right-column'
+						'meta       border      standfirst  right-column'
 						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
+						'.          border      body        right-column';
 				}
 
 				${until.leftCol} {
@@ -109,8 +101,8 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'standfirst  right-column'
 						'caption     right-column'
-						'lines       right-column'
 						'meta        right-column'
+						'.           right-column'
 						'body        right-column';
 				}
 
@@ -151,7 +143,6 @@ const stretchLines = css`
 const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
-
 	margin-bottom: -29px;
 `;
 
@@ -383,6 +374,7 @@ export const ImmersiveOpinionLayout = ({
 								captionText={captionText}
 								format={format}
 								shouldLimitWidth={false}
+								isOverlayed={true}
 							/>
 						</Hide>
 					</GridItem>
