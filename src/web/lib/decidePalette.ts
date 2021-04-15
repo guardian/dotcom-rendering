@@ -17,7 +17,6 @@ import {
 } from '@guardian/src-foundations';
 
 import { pillarPalette } from '@root/src/lib/pillars';
-import { Opinion } from '../components/SignedInAs.stories';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
