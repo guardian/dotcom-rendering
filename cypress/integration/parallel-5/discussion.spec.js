@@ -20,11 +20,10 @@ describe('Discussion', function () {
 		cy.contains('Displaying threads');
 	});
 
-	// Commenting out these tests because they seem to be causing Cypress to hang
-	// it('should automatically expand and scroll to a comment if the reader loads a permalink', function () {
-	// 	cy.visit(`/Article?url=${permalink}`);
-	// 	cy.contains(
-	// 		'In the world of human psychology, change is glacially slow',
-	// 	);
-	// });
+	it('should automatically expand and scroll to a comment if the reader loads a permalink', function () {
+		cy.visit(`/Article?url=${permalink}`);
+		cy.contains(
+			'In the world of human psychology, change is glacially slow',
+		);
+	});
 });
