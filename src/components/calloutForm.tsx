@@ -216,7 +216,11 @@ const CalloutForm: FC<CalloutProps> = (props: CalloutProps) => {
 
 			<form css={formStyles} action="#" method="post">
 				<div>
-					<input name="formId" type="hidden" value={campaign.id} />
+					<input
+						name="formId"
+						type="hidden"
+						value={campaign.fields.formId}
+					/>
 					{campaign.fields.formFields.map(renderField)}
 					<p css={errorStyles} className="js-error-message"></p>
 					<Button
