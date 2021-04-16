@@ -62,8 +62,8 @@ type Props = {
 	host?: string;
 	abTests: CAPIType['config']['abTests'];
 	index: number;
+	isMainMedia: boolean;
 	hideCaption?: boolean;
-	isMainMedia?: boolean;
 	starRating?: number;
 	isPreview: boolean;
 };
