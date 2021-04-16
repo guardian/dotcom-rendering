@@ -9,6 +9,12 @@
 // ***********************************************************
 
 module.exports = (on, config) => {
+	on('task', {
+		log(message) {
+			console.log(message);
+			return null;
+		},
+	});
 	config.env = { ...config.env, ...process.env };
 	return config;
 };
