@@ -14,6 +14,7 @@ describe('parseBrazeEpicParams', () => {
 			highlightedText: 'Example highlighted text',
 			buttonText: 'Button',
 			buttonUrl: 'https://www.example.com',
+			ophanComponentId: 'epic_123',
 		};
 
 		const expected = {
@@ -21,6 +22,7 @@ describe('parseBrazeEpicParams', () => {
 			paragraphs: ['Paragraph 1', 'Paragraph 2', 'Paragraph 3'],
 			highlightedText: 'Example highlighted text',
 			cta: { text: 'Button', baseUrl: 'https://www.example.com' },
+			ophanComponentId: 'epic_123',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
@@ -37,6 +39,7 @@ describe('parseBrazeEpicParams', () => {
 			highlightedText: 'Example highlighted text',
 			buttonText: 'Button',
 			buttonUrl: 'https://www.example.com',
+			ophanComponentId: 'epic_123',
 		};
 
 		const expected = {
@@ -44,6 +47,7 @@ describe('parseBrazeEpicParams', () => {
 			paragraphs: ['First paragraph', 'Another paragraph'],
 			highlightedText: 'Example highlighted text',
 			cta: { text: 'Button', baseUrl: 'https://www.example.com' },
+			ophanComponentId: 'epic_123',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
@@ -59,6 +63,7 @@ describe('parseBrazeEpicParams', () => {
 			highlightedText: 'Example highlighted text',
 			buttonText: 'Button',
 			buttonUrl: 'https://www.example.com',
+			ophanComponentId: 'epic_123',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
@@ -73,6 +78,7 @@ describe('parseBrazeEpicParams', () => {
 			highlightedText: 'Example highlighted text',
 			buttonText: 'Button',
 			buttonUrl: 'https://www.example.com',
+			ophanComponentId: 'epic_123',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
@@ -89,6 +95,7 @@ describe('parseBrazeEpicParams', () => {
 			highlightedText: 'Example highlighted text',
 			buttonText: 'Button',
 			buttonUrl: 'https://www.example.com',
+			ophanComponentId: 'epic_123',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
@@ -104,6 +111,7 @@ describe('parseBrazeEpicParams', () => {
 			paragraph2: 'Paragraph 2',
 			buttonText: 'Button',
 			buttonUrl: 'https://www.example.com',
+			ophanComponentId: 'epic_123',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
@@ -119,6 +127,7 @@ describe('parseBrazeEpicParams', () => {
 			paragraph2: 'Paragraph 2',
 			highlightedText: 'Example highlighted text',
 			buttonUrl: 'https://www.example.com',
+			ophanComponentId: 'epic_123',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
@@ -127,6 +136,22 @@ describe('parseBrazeEpicParams', () => {
 	});
 
 	it('returns null when the buttonUrl is missing', () => {
+		const dataFromBraze: EpicDataFromBraze = {
+			componentName: 'Epic',
+			heading: 'Example Heading',
+			paragraph1: 'Paragraph 1',
+			paragraph2: 'Paragraph 2',
+			highlightedText: 'Example highlighted text',
+			buttonText: 'Button',
+			ophanComponentId: 'epic_123',
+		};
+
+		const got = parseBrazeEpicParams(dataFromBraze);
+
+		expect(got).toBeNull();
+	});
+
+	it('returns null when the trackingId is missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			heading: 'Example Heading',
