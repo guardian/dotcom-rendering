@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable func-names */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
@@ -17,13 +15,9 @@ describe('Discussion', function () {
 
 	it('should scroll the page to the comments section and expand it when the comment count link is clicked', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
+		cy.contains('comments (');
 		cy.get('[data-cy=comment-counts]').click();
 		cy.contains('Displaying threads');
-	});
-
-	it('should show a count of the comments', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
-		cy.contains(/comments \(\d*\)/);
 	});
 
 	it('should automatically expand and scroll to a comment if the reader loads a permalink', function () {

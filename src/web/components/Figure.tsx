@@ -6,7 +6,7 @@ import { space } from '@guardian/src-foundations';
 
 type Props = {
 	children: React.ReactNode;
-	isMainMedia?: boolean;
+	isMainMedia: boolean;
 	role?: RoleType | 'richLink';
 	id?: string;
 };

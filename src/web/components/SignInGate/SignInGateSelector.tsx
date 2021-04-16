@@ -73,8 +73,8 @@ const testVariantToGateMapping: GateTestMap = {
 };
 
 const testIdToComponentId: { [key: string]: string } = {
-	SignInGateMainVariant: 'main_variant_3',
-	SignInGateMainControl: 'main_control_3',
+	SignInGateMainVariant: 'main_variant_4',
+	SignInGateMainControl: 'main_control_4',
 };
 
 // function to generate the profile.theguardian.com url with tracking params
