@@ -62,8 +62,8 @@ type Props = {
 	host?: string;
 	abTests: CAPIType['config']['abTests'];
 	index: number;
+	isMainMedia: boolean;
 	hideCaption?: boolean;
-	isMainMedia?: boolean;
 	starRating?: number;
 	isPreview: boolean;
 };
@@ -391,6 +391,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
 				>
@@ -700,6 +701,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					// No role given by CAPI
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
