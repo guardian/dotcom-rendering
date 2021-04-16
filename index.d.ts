@@ -102,6 +102,7 @@ type Palette = {
 		pullQuote: Colour;
 		pullQuoteAttribution: Colour;
 		dropCap: Colour;
+		blockquote: Colour;
 	},
 	background: {
 		article: Colour;

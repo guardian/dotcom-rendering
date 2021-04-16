@@ -62,11 +62,21 @@ type Props = {
 	host?: string;
 	abTests: CAPIType['config']['abTests'];
 	index: number;
+	isMainMedia: boolean;
 	hideCaption?: boolean;
-	isMainMedia?: boolean;
 	starRating?: number;
 	isPreview: boolean;
 };
+
+function decideImageRole(role: RoleType, isLiveBlog: boolean): RoleType {
+	switch (role) {
+		case 'inline':
+		case 'thumbnail':
+			return role;
+		default:
+			return isLiveBlog ? 'inline' : role;
+	}
+}
 
 export const ElementRenderer = ({
 	format,
@@ -326,7 +336,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={isLiveBlog ? 'inline' : element.role}
+					role={decideImageRole(element.role, isLiveBlog)}
 				>
 					<ImageBlockComponent
 						format={format}
@@ -381,6 +391,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
 				>
@@ -690,6 +701,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					// No role given by CAPI
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
