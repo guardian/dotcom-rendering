@@ -47,9 +47,9 @@ const nestedStyles = (palette: Palette) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 100%;
-		height: 0.95rem;
-		width: 0.95rem;
-		margin-right: 0.125rem;
+		height: 15.2px;
+		width: 15.2px;
+		margin-right: 2px;
 		background-color: ${neutral[86]};
 	}
 
