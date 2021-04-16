@@ -118,7 +118,6 @@ export const VeggieBurgerMenu: React.FC<{
 			tabIndex={0}
 			role="button"
 			data-cy="veggie-burger"
-			data-type="sticky"
 		>
 			<span className={screenReadable}>Show More</span>
 			<span
