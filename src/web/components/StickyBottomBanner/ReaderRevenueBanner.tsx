@@ -289,17 +289,15 @@ const RemoteBanner = ({
 	}, []);
 
 	useOnce(() => {
-		if (hasBeenSeen) {
-			const { abTestName, componentType } = meta;
+		const { abTestName, componentType } = meta;
 
-			logView(abTestName);
+		logView(abTestName);
 
-			sendOphanComponentEvent('VIEW', meta);
+		sendOphanComponentEvent('VIEW', meta);
 
-			// track banner view event in Google Analytics for subscriptions banner
-			if (componentType === componentTypeName) {
-				trackNonClickInteraction(displayEvent);
-			}
+		// track banner view event in Google Analytics for subscriptions banner
+		if (componentType === componentTypeName) {
+			trackNonClickInteraction(displayEvent);
 		}
 	}, [hasBeenSeen, meta]);
 
