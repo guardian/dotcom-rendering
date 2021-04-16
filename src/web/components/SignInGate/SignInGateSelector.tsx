@@ -68,8 +68,8 @@ const tests: ReadonlyArray<ABTest> = [
 ];
 
 const testVariantToGateMapping: GateTestMap = {
-	'main-control-3': gateMainControl,
-	'main-variant-3': gateMainVariant,
+	'main-control-4': gateMainControl,
+	'main-variant-4': gateMainVariant,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
