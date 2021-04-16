@@ -79,7 +79,7 @@ const fontStyles = (format: Format) => {
 	}
 	return css`
 		${headline.xxxsmall({ fontWeight: 'bold' })}
-		${from.leftCol} {
+		${from.wide} {
 			${headline.xxsmall({ fontWeight: 'bold' })}
 		}
 	`;
