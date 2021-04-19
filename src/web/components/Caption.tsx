@@ -131,7 +131,8 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlayed,
 }: Props) => {
-	const noCaption = !captionText;
+	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
+	const noCaption = !captionText?.trim();
 	const noCredit = !credit;
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;

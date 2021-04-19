@@ -28,7 +28,9 @@ export const ExactlyFive = ({ content }: Props) => (
 					}
 					webPublicationDate={content[0].webPublicationDate}
 					kickerText={content[0].kickerText}
-					showPulsingDot={content[0].isLiveBlog}
+					showPulsingDot={
+						content[0].format.design === Design.LiveBlog
+					}
 					showSlash={true}
 					showClock={false}
 					imageUrl={content[0].image}
@@ -57,7 +59,9 @@ export const ExactlyFive = ({ content }: Props) => (
 					}
 					webPublicationDate={content[1].webPublicationDate}
 					kickerText={content[1].kickerText}
-					showPulsingDot={content[1].isLiveBlog}
+					showPulsingDot={
+						content[1].format.design === Design.LiveBlog
+					}
 					showSlash={true}
 					showClock={false}
 					imageUrl={content[1].image}
@@ -88,7 +92,9 @@ export const ExactlyFive = ({ content }: Props) => (
 							}
 							webPublicationDate={content[2].webPublicationDate}
 							kickerText={content[2].kickerText}
-							showPulsingDot={content[2].isLiveBlog}
+							showPulsingDot={
+								content[2].format.design === Design.LiveBlog
+							}
 							showSlash={true}
 							showClock={false}
 							mediaType={content[2].mediaType}
@@ -111,7 +117,9 @@ export const ExactlyFive = ({ content }: Props) => (
 							}
 							webPublicationDate={content[3].webPublicationDate}
 							kickerText={content[3].kickerText}
-							showPulsingDot={content[3].isLiveBlog}
+							showPulsingDot={
+								content[3].format.design === Design.LiveBlog
+							}
 							showSlash={true}
 							showClock={false}
 							mediaType={content[3].mediaType}
@@ -134,7 +142,9 @@ export const ExactlyFive = ({ content }: Props) => (
 							}
 							webPublicationDate={content[4].webPublicationDate}
 							kickerText={content[4].kickerText}
-							showPulsingDot={content[4].isLiveBlog}
+							showPulsingDot={
+								content[4].format.design === Design.LiveBlog
+							}
 							showSlash={true}
 							showClock={false}
 							mediaType={content[4].mediaType}

@@ -579,7 +579,6 @@ export const Quad = () => (
 							imagePosition="top"
 							showClock={true}
 							commentCount={30989}
-							isLiveBlog={true}
 							showPulsingDot={true}
 						/>
 					</LI>
@@ -717,3 +716,113 @@ export const Media = () => (
 	</Section>
 );
 Media.story = { name: 'Media' };
+
+const labBadge1: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png`,
+};
+
+const labBadge2: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
+};
+
+const labBadge3: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png`,
+};
+
+const labBadge4: BadgeType = {
+	seriesTag: 'Tag',
+	imageUrl: `https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png`,
+};
+
+export const Labs = () => (
+	<Section>
+		<Flex>
+			<LeftColumn showRightBorder={false}>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<UL direction="row">
+					<LI percentage="25%" padSides={true}>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[12]}
+							headlineSize="medium"
+							imageUrl={images[0]}
+							imagePosition="top"
+							badge={labBadge1}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[14]}
+							headlineSize="medium"
+							imageUrl={images[1]}
+							imagePosition="top"
+							badge={labBadge2}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[13]}
+							headlineSize="medium"
+							imageUrl={images[3]}
+							imagePosition="top"
+							badge={labBadge3}
+						/>
+					</LI>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						showTopMarginWhenStacked={true}
+					>
+						<Card
+							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
+							format={{
+								display: Display.Standard,
+								theme: Special.Labs,
+								design: Design.Article,
+							}}
+							headlineText={headlines[15]}
+							headlineSize="medium"
+							imageUrl={images[2]}
+							imagePosition="top"
+							badge={labBadge4}
+						/>
+					</LI>
+				</UL>
+			</ArticleContainer>
+		</Flex>
+	</Section>
+);
+Labs.story = { name: 'Labs' };

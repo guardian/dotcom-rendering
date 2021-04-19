@@ -274,7 +274,6 @@ export const LiveBlock = ({
 					{headerElement && (
 						<ElementRenderer
 							isMainMedia={false}
-							isLiveBlog={true}
 							adTargeting={adTargeting}
 							index={0}
 							element={headerElement}
@@ -293,7 +292,6 @@ export const LiveBlock = ({
 							<BlockMedia key={`${element._type}-${index}`}>
 								<ElementRenderer
 									isMainMedia={false}
-									isLiveBlog={true}
 									adTargeting={adTargeting}
 									index={index}
 									element={element}
@@ -309,7 +307,6 @@ export const LiveBlock = ({
 						<BlockText key={`${element._type}-${index}`}>
 							<ElementRenderer
 								isMainMedia={false}
-								isLiveBlog={true}
 								index={index}
 								element={element}
 								format={format}

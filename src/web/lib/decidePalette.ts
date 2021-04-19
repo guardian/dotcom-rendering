@@ -692,6 +692,16 @@ const textDropCap = (format: Format): string => {
 	}
 };
 
+const textBlockquote = (format: Format): string => {
+	switch (format.design) {
+		case Design.LiveBlog:
+		case Design.DeadBlog:
+			return BLACK;
+		default:
+			return neutral[46];
+	}
+};
+
 const backgroundHeadlineTag = (format: Format): string =>
 	pillarPalette[format.theme].dark;
 
@@ -743,6 +753,7 @@ export const decidePalette = (format: Format): Palette => {
 			carouselTitle: textCarouselTitle(format),
 			calloutHeading: textCalloutHeading(),
 			dropCap: textDropCap(format),
+			blockquote: textBlockquote(format),
 		},
 		background: {
 			article: backgroundArticle(format),

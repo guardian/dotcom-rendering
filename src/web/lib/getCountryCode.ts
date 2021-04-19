@@ -33,30 +33,6 @@ export const setCountryCode = (countryCode: string): void => {
 	});
 };
 
-export const setCountryCodeSynchronous = (countryCode: string): void => {
-	if (countryCode) {
-		localStorage.setItem(
-			COUNTRY_CODE_KEY,
-			JSON.stringify({
-				value: countryCode,
-				expires: new Date().getTime() + TEN_DAYS,
-			}),
-		);
-	}
-};
-
-export const getCountryCodeFromLocalStorage = (): string | null => {
-	try {
-		const item = localStorage.getItem(COUNTRY_CODE_KEY);
-		const localCountryCode: { [key: string]: any } = JSON.parse(
-			item || '{}',
-		);
-		return localCountryCode.value || null;
-	} catch (error) {
-		return null;
-	}
-};
-
 export const getCountryCode = async (): Promise<string | void> => {
 	// Read local storage to see if we already have a value
 	let localCountryCode: LocalCountryCodeType | null;

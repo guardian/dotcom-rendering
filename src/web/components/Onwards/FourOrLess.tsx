@@ -51,7 +51,9 @@ export const FourOrLess = ({ content }: Props) => {
 							}
 							webPublicationDate={trail.webPublicationDate}
 							kickerText={trail.kickerText}
-							showPulsingDot={trail.isLiveBlog}
+							showPulsingDot={
+								trail.format.design === Design.LiveBlog
+							}
 							showSlash={true}
 							showClock={false}
 							imageUrl={trail.image}

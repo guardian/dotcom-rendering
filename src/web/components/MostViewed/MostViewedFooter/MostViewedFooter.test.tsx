@@ -125,10 +125,10 @@ describe('MostViewedFooterData', () => {
 							showByline: false,
 							byline: '',
 							image: '',
-							isLiveBlog: true,
+							isLiveBlog: false, // No longer used
 							format: {
 								theme: 'NewsPillar',
-								design: 'ArticleDesign',
+								design: 'LiveBlogDesign',
 								display: 'StandardDisplay',
 							},
 							pillar: 'news',
@@ -154,7 +154,7 @@ describe('MostViewedFooterData', () => {
 		expect(getByText('Live')).toBeInTheDocument();
 	});
 
-	it("should NOT display the text 'Live' when isLiveBlog is false", () => {
+	it("should NOT display the text 'Live' when design is Article is false", () => {
 		useApi.mockReturnValue({
 			data: [
 				{
@@ -166,7 +166,7 @@ describe('MostViewedFooterData', () => {
 							showByline: false,
 							byline: '',
 							image: '',
-							isLiveBlog: false,
+							isLiveBlog: true, // No longer used
 							format: {
 								theme: 'NewsPillar',
 								design: 'ArticleDesign',

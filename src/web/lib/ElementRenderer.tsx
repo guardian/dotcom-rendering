@@ -52,6 +52,7 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
+import { Design } from '@guardian/types';
 
 type Props = {
 	format: Format;
@@ -60,11 +61,20 @@ type Props = {
 	adTargeting?: AdTargeting;
 	host?: string;
 	index: number;
+	isMainMedia: boolean;
 	hideCaption?: boolean;
-	isMainMedia?: boolean;
-	isLiveBlog?: boolean;
 	starRating?: number;
 };
+
+function decideImageRole(role: RoleType, isLiveBlog: boolean): RoleType {
+	switch (role) {
+		case 'inline':
+		case 'thumbnail':
+			return role;
+		default:
+			return isLiveBlog ? 'inline' : role;
+	}
+}
 
 export const ElementRenderer = ({
 	format,
@@ -75,9 +85,11 @@ export const ElementRenderer = ({
 	index,
 	hideCaption,
 	isMainMedia,
-	isLiveBlog,
 	starRating,
 }: Props) => {
+	const isLiveBlog =
+		format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
@@ -314,7 +326,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={isLiveBlog ? 'inline' : element.role}
+					role={decideImageRole(element.role, isLiveBlog)}
 				>
 					<ImageBlockComponent
 						format={format}
@@ -367,6 +379,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
 				>
@@ -670,6 +683,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					// No role given by CAPI
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"

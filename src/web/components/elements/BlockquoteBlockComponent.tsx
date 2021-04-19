@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import { body } from '@guardian/src-foundations/typography';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
-import { neutral } from '@guardian/src-foundations/palette';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 
 type Props = {
@@ -38,9 +37,9 @@ const simpleBlockquoteStyles = css`
 	margin-left: 33px;
 `;
 
-const quotedBlockquoteStyles = css`
+const quotedBlockquoteStyles = (palette: Palette) => css`
 	${baseBlockquoteStyles}
-	color: ${neutral[46]};
+	color: ${palette.text.blockquote};
 `;
 
 export const BlockquoteBlockComponent: React.FC<Props> = ({
@@ -76,7 +75,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={unwrappedHtml}
-					elCss={quotedBlockquoteStyles}
+					elCss={quotedBlockquoteStyles(palette)}
 					tagName={unwrappedElement}
 				/>
 			</BlockquoteRow>
