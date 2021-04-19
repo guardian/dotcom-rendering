@@ -142,7 +142,6 @@ export const ClickToView = ({
 					padding: ${space[1]}px ${space[6]}px ${space[3]}px;
 					margin-bottom: ${space[3]}px;
 				`}
-				data-cy="click-to-view"
 				data-component={`click-to-view:${sourceDomain}`}
 			>
 				<div
