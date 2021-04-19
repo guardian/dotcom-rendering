@@ -129,7 +129,7 @@ export const SignedInAs = ({
 						)}`}
 						className={linkStyles(palette)}
 					>
-						Sign in
+						sign in
 					</a>{' '}
 					or{' '}
 					<a
@@ -190,7 +190,7 @@ export const SignedInAs = ({
 						)}`}
 						className={linkStyles(palette)}
 					>
-						Sign in
+						sign in
 					</a>{' '}
 					or{' '}
 					<a
