@@ -34,7 +34,7 @@ interface NavGroupEagerProps {
 const stickyStyle = (theme: Theme) => css`
 	position: sticky;
 	top: 0;
-	${getZIndex('stickyNav')}
+	${getZIndex('expanded-veggie-menu')}
 	background-color: white;
 	border-bottom: 1px solid ${neutralBorder(theme)};
 `;
@@ -43,7 +43,7 @@ const fixedStyle = (theme: Theme, shouldDisplay: boolean) => css`
 	width: 100%;
 	position: fixed;
 	top: 0;
-	${getZIndex('stickyNav')}
+	${getZIndex('expanded-veggie-menu')}
 	background-color: white;
 	border-bottom: 1px solid ${neutralBorder(theme)};
 	display: ${shouldDisplay ? 'block' : 'none'};

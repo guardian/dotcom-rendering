@@ -90,7 +90,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
                         var showMoreButton = document.getElementById('${showMoreButtonId}')
                         var veggieBurger = document.getElementById('${veggieBurgerId}')
                         var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
-                        var expandedMenu = document.getElementById('expanded-menu')
+                        var expandedMenu = document.getElementById('expanded-menu-root')
 
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')

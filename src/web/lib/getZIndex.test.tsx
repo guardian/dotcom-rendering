@@ -5,7 +5,7 @@ describe('getZIndex', () => {
 		expect(getZIndex('banner')).toBe('z-index: 13;');
 		expect(getZIndex('dropdown')).toBe('z-index: 12;');
 		expect(getZIndex('burger')).toBe('z-index: 11;');
-		expect(getZIndex('stickyNav')).toBe('z-index: 10;');
+		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 10;');
 		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 9;');
 		expect(getZIndex('searchHeaderLink')).toBe('z-index: 8;');
 		expect(getZIndex('TheGuardian')).toBe('z-index: 7;');

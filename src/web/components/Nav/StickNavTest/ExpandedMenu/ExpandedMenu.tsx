@@ -26,7 +26,7 @@ const mainMenuStyles = (ID: string) => css`
 	margin-right: 29px;
 	padding-bottom: 24px;
 	top: 0;
-	${getZIndex('stickyNav')}
+	${getZIndex('expanded-veggie-menu')}
 	overflow: hidden;
 
 	/*

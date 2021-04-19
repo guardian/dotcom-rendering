@@ -5,6 +5,7 @@ import { brandBackground } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
+import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Display } from '@guardian/types';
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
@@ -12,6 +13,8 @@ import { Columns } from './Columns';
 import { navInputCheckboxId } from '../config';
 
 const mainMenuStyles = css`
+	${getZIndex('expanded-veggie-menu')}
+
 	background-color: ${brandBackground.primary};
 	box-sizing: border-box;
 	${textSans.large()};
@@ -19,7 +22,6 @@ const mainMenuStyles = css`
 	margin-right: 29px;
 	padding-bottom: 24px;
 	top: 0;
-	z-index: 1070;
 	overflow: hidden;
 
 	/*
@@ -95,7 +97,7 @@ export const ExpandedMenu: React.FC<{
 	nav: NavType;
 }> = ({ display, nav }) => {
 	return (
-		<div id="expanded-menu">
+		<div id="expanded-menu-root">
 			<ShowMoreMenu display={display} />
 			<VeggieBurgerMenu display={display} />
 			<div

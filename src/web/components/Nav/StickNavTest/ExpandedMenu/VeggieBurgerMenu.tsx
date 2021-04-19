@@ -13,62 +13,59 @@ const screenReadable = css`
 	${visuallyHidden};
 `;
 
-const veggieBurgerIconStyles = (navInputCheckboxID: string) => {
-	const beforeAfterStyles = css`
-		content: '';
-		background-color: currentColor;
-	`;
-	const lineStyles = css`
-		height: 2px;
-		left: 0;
-		position: absolute;
-		width: 20px;
-	`;
-
-	return css`
-		background-color: currentColor;
-		/*
+const beforeAfterStyles = css`
+	content: '';
+	background-color: currentColor;
+`;
+const lineStyles = css`
+	height: 2px;
+	left: 0;
+	position: absolute;
+	width: 20px;
+`;
+const veggieBurgerIconStyles = (navInputCheckboxID: string) => css`
+	background-color: currentColor;
+	/*
             IMPORTANT NOTE:
             we need to specify the adjacent path to the a (current) tag
             to apply styles to the nested tabs due to the fact we use ~
             to support NoJS
         */
+	/* stylelint-disable-next-line selector-type-no-unknown */
+	${`#${navInputCheckboxID}`}:checked ~ div & {
+		background-color: transparent;
+	}
+
+	top: 50%;
+	right: 0;
+	margin-top: -1px;
+	margin-left: auto;
+	margin-right: auto;
+	${lineStyles};
+
+	:before {
+		${lineStyles};
+		${beforeAfterStyles};
+		top: -6px;
+		/* refer to comment above */
 		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${navInputCheckboxID}`}:checked ~ div & {
-			background-color: transparent;
+			top: 0;
+			transform: rotate(-45deg);
 		}
-
-		top: 50%;
-		right: 0;
-		margin-top: -1px;
-		margin-left: auto;
-		margin-right: auto;
+	}
+	:after {
 		${lineStyles};
-
-		:before {
-			${lineStyles};
-			${beforeAfterStyles};
-			top: -6px;
-			/* refer to comment above */
-			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${navInputCheckboxID}`}:checked ~ div & {
-				top: 0;
-				transform: rotate(-45deg);
-			}
+		${beforeAfterStyles};
+		bottom: -6px;
+		/* refer to comment above */
+		/* stylelint-disable-next-line selector-type-no-unknown */
+		${`#${navInputCheckboxID}`}:checked ~ div & {
+			bottom: 0;
+			transform: rotate(45deg);
 		}
-		:after {
-			${lineStyles};
-			${beforeAfterStyles};
-			bottom: -6px;
-			/* refer to comment above */
-			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${navInputCheckboxID}`}:checked ~ div & {
-				bottom: 0;
-				transform: rotate(45deg);
-			}
-		}
-	`;
-};
+	}
+`;
 
 const veggieBurgerStyles = (display: Display) => css`
 	background-color: ${brandAlt[400]};
