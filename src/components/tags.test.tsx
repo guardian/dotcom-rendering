@@ -1,17 +1,19 @@
+// ----- Imports ----- //
+
 import { matchers } from '@emotion/jest';
 import type { Format } from '@guardian/types';
 import { Design, Display, Pillar } from '@guardian/types';
-import Tags from 'components/shared/tags';
+import Tags from 'components/tags';
 import renderer from 'react-test-renderer';
+
+// ----- Setup ----- //
 
 expect.extend(matchers);
 
-const tagsProps = [
-	{
-		webTitle: 'Tag title',
-		webUrl: 'https://mapi.co.uk/tag',
-	},
-];
+const mockTag = {
+	webTitle: 'Tag title',
+	webUrl: 'https://mapi.co.uk/tag',
+};
 
 const mockFormat: Format = {
 	theme: Pillar.News,
@@ -19,10 +21,12 @@ const mockFormat: Format = {
 	display: Display.Standard,
 };
 
+// ----- Tests ----- //
+
 describe('Tags component renders as expected', () => {
 	it('Renders link to tag', () => {
 		const tags = renderer.create(
-			<Tags tags={tagsProps} format={mockFormat} />,
+			<Tags tags={[mockTag]} format={mockFormat} />,
 		);
 		const link = tags.root.findByType('a');
 		expect(link.props.href).toBe('https://mapi.co.uk/tag');
@@ -30,7 +34,7 @@ describe('Tags component renders as expected', () => {
 
 	it('Renders tag title', () => {
 		const tags = renderer.create(
-			<Tags tags={tagsProps} format={mockFormat} />,
+			<Tags tags={[mockTag]} format={mockFormat} />,
 		);
 		expect(tags.root.findByType('a').children.includes('Tag title')).toBe(
 			true,
@@ -39,17 +43,8 @@ describe('Tags component renders as expected', () => {
 
 	it('Renders correct number of tags', () => {
 		const tags = renderer.create(
-			<Tags tags={[...tagsProps, ...tagsProps]} format={mockFormat} />,
+			<Tags tags={[mockTag, mockTag]} format={mockFormat} />,
 		);
 		expect(tags.root.findAllByType('li').length).toBe(2);
-	});
-
-	it('Renders correct background color', () => {
-		const tags = renderer.create(
-			<Tags tags={tagsProps} format={mockFormat} />,
-		);
-		expect(tags.toJSON()).toHaveStyleRule('background-color', '#DCDCDC', {
-			target: 'li a',
-		});
 	});
 });

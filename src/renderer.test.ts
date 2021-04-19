@@ -527,14 +527,6 @@ describe('Renders different types of Editions elements', () => {
 		expect(getHtml(tweet)).toContain('twitter-tweet');
 	});
 
-	test('ElementKind.Instagram', () => {
-		const nodes = renderEditions(instagramElement());
-		const instagram = nodes.flat()[0];
-		expect(getHtml(instagram)).toBe(
-			'<iframe src="https://www.instagram.com/p/embedId/embed" height="830" title="&lt;blockquote&gt;Instagram&lt;/blockquote&gt;"></iframe>',
-		);
-	});
-
 	test('ElementKind.Embed', () => {
 		const nodes = renderEditions(embedElement);
 		const embed = nodes.flat()[0];

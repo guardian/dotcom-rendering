@@ -16023,78 +16023,6 @@ exports[`Storyshots Rich Link Default 1`] = `
 </section>
 `;
 
-exports[`Storyshots Shared Tags 1`] = `
-.emotion-0 {
-  margin-top: 0;
-  margin-bottom: 0;
-  display: block;
-  list-style: none;
-  padding: 0.5rem 0 1rem 0;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-0 li {
-  margin: 0.5rem 0.5rem 0 0;
-  display: inline-block;
-}
-
-.emotion-0 li a {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 6px 16px;
-  border-radius: 30px;
-  text-overflow: ellipsis;
-  max-width: 18.75rem;
-  color: #121212;
-  background-color: #F6F6F6;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-@media (prefers-color-scheme: dark) {
-  .emotion-0 {
-    background: #1A1A1A;
-    color: #DCDCDC;
-  }
-
-  .emotion-0 li a {
-    color: #999999;
-    background-color: #333333;
-  }
-}
-
-<ul
-  className="emotion-0"
->
-  <li>
-    <a
-      href="https://mapi.co.uk/tag"
-    >
-      Tag title
-    </a>
-  </li>
-  <li>
-    <a
-      href="https://mapi.co.uk/tag"
-    >
-      Tag title
-    </a>
-  </li>
-  <li>
-    <a
-      href="https://mapi.co.uk/tag"
-    >
-      Tag title
-    </a>
-  </li>
-</ul>
-`;
-
 exports[`Storyshots Standfirst Comment 1`] = `
 .emotion-0 {
   margin-bottom: 0.5rem;
@@ -16376,3 +16304,86 @@ exports[`Storyshots Star Rating Default 1`] = `
 `;
 
 exports[`Storyshots Star Rating Not Review 1`] = `null`;
+
+exports[`Storyshots Tags Default 1`] = `
+.emotion-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: block;
+  list-style: none;
+  padding: 0.5rem 0 1rem 0;
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-0 {
+    background: #1A1A1A;
+    color: #DCDCDC;
+  }
+}
+
+.emotion-1 {
+  margin: 0.5rem 0.5rem 0 0;
+  display: inline-block;
+}
+
+.emotion-2 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 6px 16px;
+  border-radius: 30px;
+  text-overflow: ellipsis;
+  max-width: 18.75rem;
+  color: #121212;
+  background-color: #F6F6F6;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-2 {
+    color: #999999;
+    background-color: #333333;
+  }
+}
+
+<ul
+  className="emotion-0"
+>
+  <li
+    className="emotion-1"
+  >
+    <a
+      className="emotion-2"
+      href="https://mapi.co.uk/tag"
+    >
+      Tag title
+    </a>
+  </li>
+  <li
+    className="emotion-1"
+  >
+    <a
+      className="emotion-2"
+      href="https://mapi.co.uk/tag"
+    >
+      Tag title
+    </a>
+  </li>
+  <li
+    className="emotion-1"
+  >
+    <a
+      className="emotion-2"
+      href="https://mapi.co.uk/tag"
+    >
+      Tag title
+    </a>
+  </li>
+</ul>
+`;

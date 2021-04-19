@@ -12,6 +12,7 @@ import { App } from '@guardian/discussion-rendering/build/App';
 import {
 	ads,
 	reportNativeElementPositionChanges,
+	sendTargetingParams,
 	slideshow,
 	videos,
 } from 'client/nativeCommunication';
@@ -451,6 +452,7 @@ function richLinks(): void {
 }
 
 setup();
+sendTargetingParams();
 ads();
 videos();
 reportNativeElementPositionChanges();

@@ -8,6 +8,7 @@ import { errorToString, isObject, memoise } from 'lib';
 import { logger } from 'logger';
 import {
 	acquisitionsClient,
+	analyticsClient,
 	commercialClient,
 	galleryClient,
 	userClient,
@@ -264,4 +265,15 @@ function reportNativeElementPositionChanges(): void {
 	}
 }
 
-export { ads, slideshow, videos, reportNativeElementPositionChanges };
+function sendTargetingParams(): void {
+	const targetingParams = getTargetingParams();
+	void analyticsClient.sendTargetingParams(targetingParams);
+}
+
+export {
+	ads,
+	slideshow,
+	videos,
+	reportNativeElementPositionChanges,
+	sendTargetingParams,
+};

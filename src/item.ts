@@ -401,4 +401,5 @@ export {
 	isVideo,
 	isGallery,
 	isPicture,
+	isLetter,
 };
