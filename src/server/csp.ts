@@ -143,7 +143,7 @@ function buildCspEditions(
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-	frame-src https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
+	frame-src https://www.theguardian.com https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''
 	} ${
 		thirdPartyEmbed.youtube ? 'https://www.youtube-nocookie.com' : ''
