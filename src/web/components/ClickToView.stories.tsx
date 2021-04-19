@@ -32,10 +32,6 @@ const paragraphStyle = css`
 	margin-bottom: 8px;
 `;
 
-const abTests: CAPIType['config']['abTests'] = {
-	clickToViewVariant: 'variant',
-};
-
 const RoleStory = ({
 	children,
 	role,
@@ -73,8 +69,6 @@ const RoleStory = ({
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
-						abTests={abTests}
-						isPreview={false}
 					>
 						{children}
 					</ClickToView>
@@ -482,8 +476,6 @@ export const EmbedBlockComponentStory = () => {
 						source={facebookEmbed.source}
 						sourceDomain={facebookEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -505,8 +497,6 @@ export const EmbedBlockComponentStory = () => {
 						source={vimeoEmbedEmbed.source}
 						sourceDomain={vimeoEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -528,8 +518,6 @@ export const EmbedBlockComponentStory = () => {
 						source={youtubeEmbedEmbed.source}
 						sourceDomain={youtubeEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -551,8 +539,6 @@ export const EmbedBlockComponentStory = () => {
 						source={spotifyEmbedEmbed.source}
 						sourceDomain={spotifyEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -574,8 +560,6 @@ export const EmbedBlockComponentStory = () => {
 						source={bandcampEmbedEmbed.source}
 						sourceDomain={bandcampEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -597,8 +581,6 @@ export const EmbedBlockComponentStory = () => {
 						source={ourworldindataEmbedEmbed.source}
 						sourceDomain={ourworldindataEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -620,8 +602,6 @@ export const EmbedBlockComponentStory = () => {
 						source={bbcEmbedEmbed.source}
 						sourceDomain={bbcEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -670,8 +650,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-1"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="1"
@@ -696,8 +674,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-2"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="2"
@@ -723,8 +699,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-3"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="3"
@@ -750,8 +724,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-4"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="4"
@@ -777,8 +749,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-5"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="5"
@@ -826,8 +796,6 @@ export const VimeoBlockComponentStory = () => {
 						source={vimeoVideoEmbed.source}
 						sourceDomain={vimeoVideoEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<VimeoBlockComponent
 							format={{
@@ -887,8 +855,6 @@ export const DocumentBlockComponentStory = () => {
 						source={scribdDocumentEmbed.source}
 						sourceDomain={scribdDocumentEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<DocumentBlockComponent
 							embedUrl={scribdDocumentEmbed.embedUrl}
@@ -936,8 +902,6 @@ export const SoundCloudBlockComponentStory = () => {
 						source={soundcloudAudioEmbed.source}
 						sourceDomain={soundcloudAudioEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudAudioEmbed}
@@ -957,8 +921,6 @@ export const SoundCloudBlockComponentStory = () => {
 						source={soundcloudEmbedEmbed.source}
 						sourceDomain={soundcloudEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudEmbedEmbed}
@@ -1003,8 +965,6 @@ export const SpotifyBlockComponentStory = () => {
 						source={spotifyAudioEmbed.source}
 						sourceDomain={spotifyAudioEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotifyAudioEmbed.embedUrl}
@@ -1065,8 +1025,6 @@ export const TweetBlockComponentStory = () => {
 						source={twitterTweetEmbed.source}
 						sourceDomain={twitterTweetEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<TweetBlockComponent element={twitterTweetEmbed} />
 					</ClickToView>
@@ -1108,13 +1066,11 @@ export const InstagramBlockComponentStory = () => {
 						source={instagramInstramEmbed.source}
 						sourceDomain={instagramInstramEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 						onAccept={() =>
 							updateIframeHeight(
 								'iframe[name="instagram-embed-1"]',
 							)
 						}
-						isPreview={false}
 					>
 						<InstagramBlockComponent
 							key={1}

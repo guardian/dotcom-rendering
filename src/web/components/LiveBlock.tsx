@@ -20,10 +20,8 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
-	isPreview: boolean;
 };
 
 const Container = ({
@@ -222,10 +220,8 @@ export const LiveBlock = ({
 	block,
 	pageId,
 	webTitle,
-	abTests,
 	adTargeting,
 	host,
-	isPreview,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -283,9 +279,7 @@ export const LiveBlock = ({
 							element={headerElement}
 							format={format}
 							palette={palette}
-							abTests={abTests}
 							host={host}
-							isPreview={isPreview}
 						/>
 					)}
 				</span>
@@ -303,9 +297,7 @@ export const LiveBlock = ({
 									element={element}
 									format={format}
 									palette={palette}
-									abTests={abTests}
 									host={host}
-									isPreview={isPreview}
 								/>
 							</BlockMedia>
 						);
@@ -319,8 +311,6 @@ export const LiveBlock = ({
 								element={element}
 								format={format}
 								palette={palette}
-								abTests={abTests}
-								isPreview={isPreview}
 							/>
 						</BlockText>
 					);

@@ -14,10 +14,8 @@ type Props = {
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 	pageId: string;
 	webTitle: string;
-	isPreview: boolean;
 };
 
 const globalH2Styles = (display: Display) => css`
@@ -66,10 +64,8 @@ export const ArticleBody = ({
 	blocks,
 	adTargeting,
 	host,
-	abTests,
 	pageId,
 	webTitle,
-	isPreview,
 }: Props) => {
 	if (
 		format.design === Design.LiveBlog ||
@@ -88,10 +84,8 @@ export const ArticleBody = ({
 					blocks={blocks}
 					adTargeting={adTargeting}
 					host={host}
-					abTests={abTests}
 					pageId={pageId}
 					webTitle={webTitle}
-					isPreview={isPreview}
 				/>
 			</div>
 		);
@@ -112,8 +106,6 @@ export const ArticleBody = ({
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}
-				abTests={abTests}
-				isPreview={isPreview}
 			/>
 		</div>
 	);

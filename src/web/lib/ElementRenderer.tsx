@@ -60,12 +60,10 @@ type Props = {
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 	index: number;
 	isMainMedia: boolean;
 	hideCaption?: boolean;
 	starRating?: number;
-	isPreview: boolean;
 };
 
 function decideImageRole(role: RoleType, isLiveBlog: boolean): RoleType {
@@ -84,12 +82,10 @@ export const ElementRenderer = ({
 	element,
 	adTargeting,
 	host,
-	abTests,
 	index,
 	hideCaption,
 	isMainMedia,
 	starRating,
-	isPreview,
 }: Props) => {
 	const isLiveBlog =
 		format.design === Design.LiveBlog || format.design === Design.DeadBlog;
@@ -203,8 +199,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
-						isPreview={isPreview}
 					>
 						<DocumentBlockComponent
 							embedUrl={element.embedUrl}
@@ -245,8 +239,6 @@ export const ElementRenderer = ({
 							isMainMedia={isMainMedia}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
-							abTests={abTests}
-							isPreview={isPreview}
 						>
 							<UnsafeEmbedBlockComponent
 								key={index}
@@ -270,8 +262,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
-						isPreview={isPreview}
 					>
 						<EmbedBlockComponent
 							key={index}
@@ -363,8 +353,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
-						isPreview={isPreview}
 					>
 						<InstagramBlockComponent
 							key={index}
@@ -418,8 +406,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
-						isPreview={isPreview}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -566,8 +552,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
-						isPreview={isPreview}
 					>
 						<SpotifyBlockComponent
 							embedUrl={element.embedUrl}
@@ -646,8 +630,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
-						isPreview={isPreview}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -714,8 +696,6 @@ export const ElementRenderer = ({
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
-						isPreview={isPreview}
 					>
 						<VineBlockComponent element={element} />
 					</ClickToView>

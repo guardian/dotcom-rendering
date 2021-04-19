@@ -7,10 +7,8 @@ type Props = {
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 	pageId: string;
 	webTitle: string;
-	isPreview: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -18,10 +16,8 @@ export const LiveBlogRenderer = ({
 	blocks,
 	adTargeting,
 	host,
-	abTests,
 	pageId,
 	webTitle,
-	isPreview,
 }: Props) => {
 	return (
 		<>
@@ -32,10 +28,8 @@ export const LiveBlogRenderer = ({
 						block={block}
 						pageId={pageId}
 						webTitle={webTitle}
-						abTests={abTests}
 						adTargeting={adTargeting}
 						host={host}
-						isPreview={isPreview}
 					/>
 				);
 			})}

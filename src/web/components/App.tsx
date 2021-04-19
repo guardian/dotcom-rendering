@@ -792,8 +792,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={document.isThirdPartyTracking}
 						source={document.source}
 						sourceDomain={document.sourceDomain}
-						abTests={CAPI.config.abTests}
-						isPreview={CAPI.config.isPreview}
 					>
 						<DocumentBlockComponent
 							embedUrl={document.embedUrl}
@@ -813,8 +811,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 							isTracking={embed.isThirdPartyTracking}
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
-							abTests={CAPI.config.abTests}
-							isPreview={CAPI.config.isPreview}
 						>
 							<EmbedBlockComponent
 								html={embed.html}
@@ -827,13 +823,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 							isTracking={embed.isThirdPartyTracking}
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
-							abTests={CAPI.config.abTests}
 							onAccept={() =>
 								updateIframeHeight(
 									`iframe[name="unsafe-embed-${index}"]`,
 								)
 							}
-							isPreview={CAPI.config.isPreview}
 						>
 							<UnsafeEmbedBlockComponent
 								key={embed.elementId}
@@ -852,13 +846,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={insta.isThirdPartyTracking}
 						source={insta.source}
 						sourceDomain={insta.sourceDomain}
-						abTests={CAPI.config.abTests}
 						onAccept={() =>
 							updateIframeHeight(
 								`iframe[name="instagram-embed-${index}"]`,
 							)
 						}
-						isPreview={CAPI.config.isPreview}
 					>
 						<InstagramBlockComponent
 							element={insta}
@@ -874,8 +866,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={map.isThirdPartyTracking}
 						source={map.source}
 						sourceDomain={map.sourceDomain}
-						abTests={CAPI.config.abTests}
-						isPreview={CAPI.config.isPreview}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -897,8 +887,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={spotify.isThirdPartyTracking}
 						source={spotify.source}
 						sourceDomain={spotify.sourceDomain}
-						abTests={CAPI.config.abTests}
-						isPreview={CAPI.config.isPreview}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotify.embedUrl}
@@ -920,8 +908,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={facebookVideo.isThirdPartyTracking}
 						source={facebookVideo.source}
 						sourceDomain={facebookVideo.sourceDomain}
-						abTests={CAPI.config.abTests}
-						isPreview={CAPI.config.isPreview}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -945,8 +931,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={vine.isThirdPartyTracking}
 						source={vine.source}
 						sourceDomain={vine.sourceDomain}
-						abTests={CAPI.config.abTests}
-						isPreview={CAPI.config.isPreview}
 					>
 						<VineBlockComponent element={vine} />
 					</ClickToView>
