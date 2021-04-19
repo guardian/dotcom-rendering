@@ -140,7 +140,7 @@ export const SignedInAs = ({
 					>
 						create your Guardian account
 					</a>{' '}
-					to join the discussion when it's back
+					to join the discussion when it&apos;s back
 				</span>
 			</div>
 		);
