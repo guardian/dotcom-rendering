@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 
 import {
 	canShow as canShowRRBanner,
@@ -104,6 +106,8 @@ export const StickyBottomBanner = ({
 	brazeMessages,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
+	const bannerCache = createCache({ key: 'automat-banner' });
+
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const readerRevenue = buildReaderRevenueBannerConfig(
@@ -129,7 +133,11 @@ export const StickyBottomBanner = ({
 	}, [isSignedIn, asyncCountryCode, CAPI, brazeMessages]);
 
 	if (SelectedBanner) {
-		return <SelectedBanner />;
+		return (
+			<CacheProvider value={bannerCache}>
+				<SelectedBanner />
+			</CacheProvider>
+		);
 	}
 
 	return null;
