@@ -30,11 +30,6 @@ describe('Signed in readers', function () {
 		cy.visit(`Article?url=${articleUrl}`);
 		// Mock call to 'profile/me'
 		cy.intercept('GET', '**/profile/me', profileResponse);
-		// Check that the page is showing the reader as signed in
-		cy.contains(
-			// Only signed in users see this text
-			'This discussion is closed',
-		).should('be.visible');
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
 	});
