@@ -27,6 +27,7 @@ const indices = [
 	'banner',
 	'dropdown',
 	'burger',
+	'expanded-veggie-menu-wrapper',
 	'expanded-veggie-menu',
 
 	// Header

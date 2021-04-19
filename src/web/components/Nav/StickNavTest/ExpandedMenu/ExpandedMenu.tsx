@@ -18,16 +18,15 @@ import { Columns } from './Columns';
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
 
-const mainMenuStyles = (ID: string) => css`
-	background-color: ${brandBackground.primary};
-	box-sizing: border-box;
-	${textSans.large()};
+const wrapperMainMenuStyles = (ID: string) => css`
+	background-color: rgba(0, 0, 0, 0.5);
+	${getZIndex('expanded-veggie-menu-wrapper')}
 	left: 0;
-	margin-right: 29px;
-	padding-bottom: 24px;
 	top: 0;
-	${getZIndex('expanded-veggie-menu')}
-	overflow: hidden;
+
+	${from.desktop} {
+		display: none;
+	}
 
 	/*
         IMPORTANT NOTE:
@@ -40,24 +39,6 @@ const mainMenuStyles = (ID: string) => css`
 		${from.desktop} {
 			display: block;
 			overflow: visible;
-		}
-	}
-
-	${from.desktop} {
-		display: none;
-		position: absolute;
-		padding-bottom: 0;
-		padding-top: 0;
-		top: 100%;
-		left: 0;
-		right: 0;
-		width: 100%;
-		@supports (width: 100vw) {
-			left: 50%;
-			right: 50%;
-			width: 100vw;
-			margin-left: -50vw;
-			margin-right: -50vw;
 		}
 	}
 
@@ -80,10 +61,39 @@ const mainMenuStyles = (ID: string) => css`
 		bottom: 0;
 		height: 100%;
 		overflow: auto;
-		padding-top: 6px;
+		/* padding-top: 6px; */
 		position: fixed;
 		right: 0;
 		will-change: transform;
+	}
+`;
+const mainMenuStyles = css`
+	background-color: ${brandBackground.primary};
+	box-sizing: border-box;
+	${textSans.large()};
+	margin-right: 29px;
+	padding-bottom: 24px;
+	left: 0;
+	top: 0;
+	${getZIndex('expanded-veggie-menu')}
+	overflow: hidden;
+
+	${from.desktop} {
+		display: none;
+		position: absolute;
+		padding-bottom: 0;
+		padding-top: 0;
+		top: 100%;
+		left: 0;
+		right: 0;
+		width: 100%;
+		@supports (width: 100vw) {
+			left: 50%;
+			right: 50%;
+			width: 100vw;
+			margin-left: -50vw;
+			margin-right: -50vw;
+		}
 	}
 
 	${from.mobileMedium} {
@@ -127,17 +137,21 @@ export const ExpandedMenu: React.FC<{
 			<VeggieBurgerMenu display={display} ID={ID} />
 			<div
 				id={buildID(ID, 'expanded-menu')}
-				className={mainMenuStyles(ID)}
-				data-testid="expanded-menu"
-				data-cy="expanded-menu"
+				className={wrapperMainMenuStyles(ID)}
 			>
-				{expand && (
-					<ExpandedMenuInner
-						currentNavLinkTitle={currentNavLinkTitle}
-						edition={edition}
-						ajaxUrl={ajaxUrl}
-					/>
-				)}
+				<div
+					className={mainMenuStyles}
+					data-testid="expanded-menu"
+					data-cy="expanded-menu"
+				>
+					{expand && (
+						<ExpandedMenuInner
+							currentNavLinkTitle={currentNavLinkTitle}
+							edition={edition}
+							ajaxUrl={ajaxUrl}
+						/>
+					)}
+				</div>
 			</div>
 		</div>
 	);
