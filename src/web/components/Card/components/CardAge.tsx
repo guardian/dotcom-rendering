@@ -4,10 +4,10 @@ import { css, cx } from 'emotion';
 import { Design, Display } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
+import { timeAgo } from '@guardian/libs';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
-import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
@@ -65,12 +65,7 @@ export const CardAge = ({
 	webPublicationDate,
 	showClock,
 }: Props) => {
-	const displayString = makeRelativeDate(
-		new Date(webPublicationDate).getTime(),
-		{
-			format: 'med',
-		},
-	);
+	const displayString = timeAgo(new Date(webPublicationDate).getTime());
 
 	if (!displayString) {
 		return null;
