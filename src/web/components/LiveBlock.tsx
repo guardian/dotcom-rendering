@@ -3,10 +3,10 @@ import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
+import { timeAgo } from '@guardian/libs';
 
 import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
@@ -184,9 +184,7 @@ const FirstPublished = ({
 					color: ${neutral[20]};
 				`}
 			>
-				{makeRelativeDate(firstPublished, {
-					format: 'med',
-				})}
+				{timeAgo(firstPublished)}
 			</time>
 			<span
 				className={css`
