@@ -75,6 +75,28 @@ const go = () => {
 	);
 
 	app.get(
+		'/ArticleJson',
+		async (req, res, next) => {
+			try {
+				const url = buildUrlFromQueryParam(req);
+				const { html, ...config } = await fetch(url).then((article) =>
+					article.json(),
+				);
+
+				req.body = config;
+				next();
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error);
+			}
+		},
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { json: true },
+		}),
+	);
+
+	app.get(
 		'/AMPArticle',
 		async (req, res, next) => {
 			try {

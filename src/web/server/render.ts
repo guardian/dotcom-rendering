@@ -92,6 +92,36 @@ export const render = (
 	}
 };
 
+export const renderArticleJson = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const CAPI = new CAPIEnhancer(body)
+			.validateAsCAPIType()
+			.addDividers()
+			.enhanceBlockquotes()
+			.enhanceDots()
+			.enhanceImages()
+			.enhanceAnniversaryAtom().capi;
+		const resp = {
+			data: {
+				CAPI,
+				site: 'frontend',
+				page: 'Article',
+				NAV: extractNAV(CAPI.nav),
+				GA: extractGA(CAPI),
+				linkedData: CAPI.linkedData,
+			},
+		};
+
+		res.status(200).send(resp);
+	} catch (e) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
+};
+
 export const renderPerfTest = (
 	req: express.Request,
 	res: express.Response,
