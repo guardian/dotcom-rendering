@@ -151,7 +151,7 @@ describe('parseBrazeEpicParams', () => {
 		expect(got).toBeNull();
 	});
 
-	it('returns null when the trackingId is missing', () => {
+	it('returns null when the ophanComponentId is missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			heading: 'Example Heading',
@@ -159,6 +159,7 @@ describe('parseBrazeEpicParams', () => {
 			paragraph2: 'Paragraph 2',
 			highlightedText: 'Example highlighted text',
 			buttonText: 'Button',
+			buttonUrl: 'https://www.example.com'
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
