@@ -136,7 +136,7 @@ const BrazeEpic = ({
 			submitComponentEvent({
 				component: {
 					componentType: 'RETENTION_EPIC',
-					id: meta.dataFromBraze.componentName,
+					id: meta.dataFromBraze.ophanComponentId,
 				},
 				action: 'VIEW',
 			});
