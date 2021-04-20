@@ -68,7 +68,6 @@ const mainMenuStyles = css`
 	box-sizing: border-box;
 	${textSans.large()};
 	margin-right: 29px;
-	/* padding-bottom: 24px; */
 	left: 0;
 	top: 0;
 	${getZIndex('expanded-veggie-menu')}
