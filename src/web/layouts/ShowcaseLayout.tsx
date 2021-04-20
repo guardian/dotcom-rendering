@@ -521,9 +521,7 @@ export const ShowcaseLayout = ({
 						discussionApiClientHeader={
 							CAPI.config.discussionApiClientHeader
 						}
-						enableDiscussionSwitch={
-							CAPI.config.switches.enableDiscussionSwitch
-						}
+						enableDiscussionSwitch={false}
 						isAdFreeUser={CAPI.isAdFreeUser}
 						shouldHideAds={CAPI.shouldHideAds}
 						beingHydrated={false}

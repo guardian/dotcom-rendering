@@ -611,9 +611,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						discussionApiClientHeader={
 							CAPI.config.discussionApiClientHeader
 						}
-						enableDiscussionSwitch={
-							CAPI.config.switches.enableDiscussionSwitch
-						}
+						enableDiscussionSwitch={false}
 						isAdFreeUser={CAPI.isAdFreeUser}
 						shouldHideAds={CAPI.shouldHideAds}
 						beingHydrated={false}
