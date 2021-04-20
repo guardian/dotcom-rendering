@@ -159,7 +159,7 @@ describe('parseBrazeEpicParams', () => {
 			paragraph2: 'Paragraph 2',
 			highlightedText: 'Example highlighted text',
 			buttonText: 'Button',
-			buttonUrl: 'https://www.example.com'
+			buttonUrl: 'https://www.example.com',
 		};
 
 		const got = parseBrazeEpicParams(dataFromBraze);
