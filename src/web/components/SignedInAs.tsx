@@ -105,15 +105,6 @@ export const SignedInAs = ({
 		user.privateFields &&
 		user.privateFields.canPostComment === false;
 
-	if (!commentCount && commentCount !== 0) {
-		// Hydration has not yet happened
-		return (
-			<div className={containerStyles}>
-				<CommentCount count={commentCount} />
-			</div>
-		);
-	}
-
 	if (enableDiscussionSwitch === false) {
 		// Discussion is disabled sitewide and user is signed in
 		if (user) {
