@@ -25,7 +25,7 @@ interface AtomResponse {
 	};
 }
 
-let InteractiveAtomUrl: string | undefined;
+let InteractiveAtomUrl: string;
 let AnniversaryAtomCache: InteractiveAtomBlockElement | undefined;
 
 export const getAnniversaryAtomCache = ():
@@ -33,10 +33,6 @@ export const getAnniversaryAtomCache = ():
 	| undefined => AnniversaryAtomCache;
 
 const fetchAnniversaryAtom = (): Promise<void> => {
-	if (InteractiveAtomUrl === undefined) {
-		return Promise.reject(new Error('Interactive Atom URL not set'));
-	}
-
 	return fetch(InteractiveAtomUrl)
 		.then((rawResponse) => rawResponse.json())
 		.then((atom: AtomResponse) => {
@@ -76,9 +72,12 @@ const refreshAnniversaryAtom = () => {
 getGuardianConfiguration('prod')
 	.then((config: GuardianConfiguration) => {
 		const key = config.getParameter('anniversaryAtomCAPIKey');
-		if (key) {
-			InteractiveAtomUrl = `https://content.guardianapis.com/atom/interactive/interactives/thrashers/2021/04/g200-article-banner/default?api-key=${key}`;
+		if (!key || key === '') {
+			throw new Error(
+				'Config parameter anniversaryAtomCAPIKey was not available',
+			);
 		}
+		InteractiveAtomUrl = `https://content.guardianapis.com/atom/interactive/interactives/thrashers/2021/04/g200-article-banner/default?api-key=${key}`;
 	})
 	.then(fetchAnniversaryAtom)
 	.then(refreshAnniversaryAtom)
