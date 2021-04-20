@@ -60,6 +60,9 @@ const wrapperMainMenuStyles = css`
 		right: 0;
 		will-change: transform;
 	}
+	${from.desktop} {
+		display: none;
+	}
 `;
 
 const mainMenuStyles = css`
@@ -73,7 +76,6 @@ const mainMenuStyles = css`
 	overflow: hidden;
 
 	${from.desktop} {
-		display: none;
 		position: absolute;
 		padding-bottom: 0;
 		padding-top: 0;
