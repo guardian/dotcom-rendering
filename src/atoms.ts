@@ -258,8 +258,10 @@ function parseAtom(
 
 			return ok({
 				kind: ElementKind.MediaAtom,
+				id,
 				posterUrl,
 				videoId,
+				title,
 				duration: fromNullable(duration?.toNumber()),
 				caption: fromNullable(caption),
 			});

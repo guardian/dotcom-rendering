@@ -91,6 +91,8 @@ interface MediaAtom {
 	videoId: string;
 	duration: Option<number>;
 	caption: Option<DocumentFragment>;
+	id: string;
+	title: string;
 }
 
 interface ExpandableAtom {
