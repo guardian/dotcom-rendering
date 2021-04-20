@@ -105,8 +105,8 @@ describe('Sign In Gate Tests', function () {
 				'gu.prefs.sign-in-gate',
 				`{
                     "value": {
-                        "SignInGateMain-main-variant-3": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateMain-main-variant-3": 6
+                        "SignInGateMain-main-variant-4": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-main-variant-4": 6
                     }
                 }`,
 			);
