@@ -56,7 +56,6 @@ const wrapperMainMenuStyles = css`
 		bottom: 0;
 		height: 100%;
 		overflow: auto;
-		/* padding-top: 6px; */
 		position: fixed;
 		right: 0;
 		will-change: transform;
