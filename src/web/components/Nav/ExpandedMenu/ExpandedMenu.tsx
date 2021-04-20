@@ -7,22 +7,21 @@ import { from, until } from '@guardian/src-foundations/mq';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { Display } from '@guardian/types';
+
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
 import { Columns } from './Columns';
 import { navInputCheckboxId } from '../config';
 
-const mainMenuStyles = css`
-	${getZIndex('expanded-veggie-menu')}
-
-	background-color: ${brandBackground.primary};
-	box-sizing: border-box;
-	${textSans.large()};
+const wrapperMainMenuStyles = css`
+	background-color: rgba(0, 0, 0, 0.5);
+	${getZIndex('expanded-veggie-menu-wrapper')}
 	left: 0;
-	margin-right: 29px;
-	padding-bottom: 24px;
 	top: 0;
-	overflow: hidden;
+
+	${from.desktop} {
+		display: none;
+	}
 
 	/*
         IMPORTANT NOTE:
@@ -35,24 +34,6 @@ const mainMenuStyles = css`
 		${from.desktop} {
 			display: block;
 			overflow: visible;
-		}
-	}
-
-	${from.desktop} {
-		display: none;
-		position: absolute;
-		padding-bottom: 0;
-		padding-top: 0;
-		top: 100%;
-		left: 0;
-		right: 0;
-		width: 100%;
-		@supports (width: 100vw) {
-			left: 50%;
-			right: 50%;
-			width: 100vw;
-			margin-left: -50vw;
-			margin-right: -50vw;
 		}
 	}
 
@@ -75,10 +56,40 @@ const mainMenuStyles = css`
 		bottom: 0;
 		height: 100%;
 		overflow: auto;
-		padding-top: 6px;
 		position: fixed;
 		right: 0;
 		will-change: transform;
+	}
+	${from.desktop} {
+		display: none;
+	}
+`;
+
+const mainMenuStyles = css`
+	background-color: ${brandBackground.primary};
+	box-sizing: border-box;
+	${textSans.large()};
+	margin-right: 29px;
+	left: 0;
+	top: 0;
+	${getZIndex('expanded-veggie-menu')}
+	overflow: hidden;
+
+	${from.desktop} {
+		position: absolute;
+		padding-bottom: 0;
+		padding-top: 0;
+		top: 100%;
+		left: 0;
+		right: 0;
+		width: 100%;
+		@supports (width: 100vw) {
+			left: 50%;
+			right: 50%;
+			width: 100vw;
+			margin-left: -50vw;
+			margin-right: -50vw;
+		}
 	}
 
 	${from.mobileMedium} {
@@ -100,13 +111,14 @@ export const ExpandedMenu: React.FC<{
 		<div id="expanded-menu-root">
 			<ShowMoreMenu display={display} />
 			<VeggieBurgerMenu display={display} />
-			<div
-				id="expanded-menu"
-				className={mainMenuStyles}
-				data-testid="expanded-menu"
-				data-cy="expanded-menu"
-			>
-				<Columns nav={nav} />
+			<div id="expanded-menu" className={wrapperMainMenuStyles}>
+				<div
+					className={mainMenuStyles}
+					data-testid="expanded-menu"
+					data-cy="expanded-menu"
+				>
+					<Columns nav={nav} />
+				</div>
 			</div>
 		</div>
 	);
