@@ -67,10 +67,6 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmb
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
-import {
-	StickyNavAnchor,
-	StickyNavBackscroll,
-} from '@root/src/web/components/Nav/StickNavTest/StickyNav';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	submitComponentEvent,
@@ -355,16 +351,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-	// sticky nav test status
-	const inStickyNavBackscroll = ABTestAPI.isUserInVariant(
-		'StickyNavTest',
-		'sticky-nav-backscroll',
-	);
-	const inStickyNavAnchor = ABTestAPI.isUserInVariant(
-		'StickyNavTest',
-		'sticky-nav-anchor',
-	);
-
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
 		() => {
@@ -602,28 +588,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</>
 				</HydrateOnce>
 			))}
-
-			{inStickyNavBackscroll && (
-				<Portal rootId="sticky-nav-root">
-					<StickyNavBackscroll
-						capiData={CAPI}
-						navData={NAV}
-						format={format}
-						palette={palette}
-					/>
-				</Portal>
-			)}
-
-			{inStickyNavAnchor && (
-				<Portal rootId="sticky-nav-root">
-					<StickyNavAnchor
-						capiData={CAPI}
-						navData={NAV}
-						format={format}
-						palette={palette}
-					/>
-				</Portal>
-			)}
 
 			{NAV.subNavSections && (
 				<HydrateOnce rootId="sub-nav-root">
