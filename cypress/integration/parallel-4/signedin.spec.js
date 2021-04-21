@@ -27,9 +27,9 @@ describe('Signed in readers', function () {
 			// this commercial error from failing this test
 			return false;
 		});
-		cy.visit(`Article?url=${articleUrl}`);
 		// Mock call to 'profile/me'
 		cy.intercept('GET', '**/profile/me', profileResponse);
+		cy.visit(`Article?url=${articleUrl}`);
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
 	});
