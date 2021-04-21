@@ -797,6 +797,10 @@ export const Quiz: CAPIType = {
 						url: '/theguardian/g2',
 					},
 					{
+						title: 'Journal',
+						url: '/theguardian/journal',
+					},
+					{
 						title: 'Weekend',
 						url: '/theguardian/weekend',
 					},
@@ -1715,7 +1719,7 @@ export const Quiz: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'fcf8802c-0e90-44c6-bdc0-1e147bfd70d2',
+			elementId: 'bd1f5ad0-a574-4c37-b794-9a5c8aa05b00',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2347,7 +2351,7 @@ export const Quiz: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					elementId: 'cbccedaa-679b-4a75-9d5c-205be107c344',
+					elementId: 'f7efbe5b-592d-4f52-8dc2-e8cdedda7212',
 				},
 			],
 			blockCreatedOn: 1591866131000,

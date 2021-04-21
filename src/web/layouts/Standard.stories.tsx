@@ -22,6 +22,7 @@ import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
 import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
+import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -241,4 +242,12 @@ export const SpecialReportStory = (): React.ReactNode => {
 };
 SpecialReportStory.story = {
 	name: 'SpecialReport',
+};
+
+export const NumberedListStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(NumberedList);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+NumberedListStory.story = {
+	name: 'NumberedList',
 };

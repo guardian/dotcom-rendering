@@ -6,6 +6,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@root/src/web/experiments/tests/newsletter-merch-unit-test';
+import { remoteRrHeaderLinksTest } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 
 export const tests: ABTest[] = [
 	abTestTest,
@@ -13,4 +14,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
+	remoteRrHeaderLinksTest,
 ];

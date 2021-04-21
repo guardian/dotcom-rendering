@@ -68,6 +68,8 @@ import { SpotifyBlockComponent } from '@root/src/web/components/elements/Spotify
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
+import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -131,26 +133,10 @@ const GetMatchStats = React.lazy(() => {
 type Props = {
 	CAPI: CAPIBrowserType;
 	NAV: BrowserNavType;
+	ophanRecord: OphanRecordFunction;
 };
 
-const componentEventHandler = (
-	componentType: any,
-	id: any,
-	action: any,
-) => () => {
-	const componentEvent: OphanComponentEvent = {
-		component: {
-			componentType,
-			id,
-			products: [],
-			labels: [],
-		},
-		action,
-	};
-	submitComponentEvent(componentEvent);
-};
-
-export const App = ({ CAPI, NAV }: Props) => {
+export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
@@ -169,6 +155,23 @@ export const App = ({ CAPI, NAV }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+
+	const componentEventHandler = (
+		componentType: any,
+		id: any,
+		action: any,
+	) => () => {
+		const componentEvent: OphanComponentEvent = {
+			component: {
+				componentType,
+				id,
+				products: [],
+				labels: [],
+			},
+			action,
+		};
+		submitComponentEvent(componentEvent, ophanRecord);
+	};
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -351,6 +354,11 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
+	const inRemoteModuleTest = ABTestAPI.isUserInVariant(
+		remoteRrHeaderLinksTestName,
+		'remote',
+	);
+
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
 		() => {
@@ -510,8 +518,13 @@ export const App = ({ CAPI, NAV }: Props) => {
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
+					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
+					inRemoteModuleTest={inRemoteModuleTest}
+					pageViewId={pageViewId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					ophanRecord={ophanRecord}
 				/>
 			</Portal>
 			<HydrateOnce rootId="links-root" waitFor={[user]}>
@@ -1010,8 +1023,13 @@ export const App = ({ CAPI, NAV }: Props) => {
 					<ReaderRevenueLinks
 						urls={CAPI.nav.readerRevenueLinks.footer}
 						edition={CAPI.editionId}
+						countryCode={countryCode}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
+						inRemoteModuleTest={false}
+						pageViewId={pageViewId}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						ophanRecord={ophanRecord}
 					/>
 				</Lazy>
 			</Portal>

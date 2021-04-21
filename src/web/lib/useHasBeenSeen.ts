@@ -25,18 +25,20 @@ const useHasBeenSeen = (
 			observer.current.disconnect();
 		}
 
-		observer.current = new window.IntersectionObserver(
-			intersectionCallback,
-			options,
-		);
+		if (window.IntersectionObserver) {
+			observer.current = new window.IntersectionObserver(
+				intersectionCallback,
+				options,
+			);
 
-		const { current: currentObserver } = observer;
+			const { current: currentObserver } = observer;
 
-		if (node) {
-			currentObserver.observe(node);
+			if (node) {
+				currentObserver.observe(node);
+			}
+
+			return () => currentObserver.disconnect();
 		}
-
-		return () => currentObserver.disconnect();
 	}, [node, options, intersectionCallback]);
 
 	return [hasBeenSeen, setNode];

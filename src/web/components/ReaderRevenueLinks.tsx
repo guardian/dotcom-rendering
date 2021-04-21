@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { css, cx } from 'emotion';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
@@ -11,16 +12,31 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
+import { setAutomat } from '@root/src/web/lib/setAutomat';
+import { getCookie } from '@root/src/web/browser/cookie';
+import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
+import type { TestMeta } from '@guardian/types';
+import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
+import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
+import {
+	OphanRecordFunction,
+	sendOphanComponentEvent,
+} from '@root/src/web/browser/ophan/ophan';
 
 type Props = {
 	edition: Edition;
+	countryCode?: string;
+	dataLinkNamePrefix: string;
+	inHeader: boolean;
+	inRemoteModuleTest: boolean;
+	contributionsServiceUrl: string;
+	pageViewId: string;
+	ophanRecord: OphanRecordFunction;
 	urls: {
 		subscribe: string;
 		support: string;
 		contribute: string;
 	};
-	dataLinkNamePrefix: string;
-	inHeader: boolean;
 };
 
 const headerStyles = css`
@@ -117,13 +133,190 @@ const subMessageStyles = css`
 	margin: 5px 0;
 `;
 
-export const ReaderRevenueLinks: React.FC<Props> = ({
+interface Cta {
+	url: string;
+	text: string;
+}
+interface SupportHeaderProps {
+	content: {
+		heading: string;
+		subheading: string;
+		primaryCta?: Cta;
+		secondaryCta?: Cta;
+	};
+	tracking: TestMeta;
+}
+interface SupportHeaderData {
+	module: {
+		url: string;
+		name: string;
+		props: SupportHeaderProps;
+	};
+	meta: TestMeta;
+}
+
+const ReaderRevenueLinksRemote: React.FC<{
+	edition: Edition;
+	countryCode?: string;
+	pageViewId: string;
+	contributionsServiceUrl: string;
+	ophanRecord: OphanRecordFunction;
+}> = ({
 	edition,
-	urls,
+	countryCode,
+	pageViewId,
+	contributionsServiceUrl,
+	ophanRecord,
+}) => {
+	const [
+		supportHeaderResponse,
+		setSupportHeaderResponse,
+	] = useState<SupportHeaderData | null>(null);
+	const [
+		SupportHeader,
+		setSupportHeader,
+	] = useState<React.FC<SupportHeaderProps> | null>(null);
+
+	const [hasBeenSeen, setNode] = useHasBeenSeen({
+		threshold: 0,
+		debounce: true,
+	});
+
+	useEffect(() => {
+		if (hasBeenSeen && supportHeaderResponse) {
+			sendOphanComponentEvent(
+				'VIEW',
+				supportHeaderResponse.meta,
+				ophanRecord,
+			);
+		}
+	}, [hasBeenSeen, supportHeaderResponse, ophanRecord]);
+
+	useEffect((): void => {
+		setAutomat();
+
+		const requestData = {
+			tracking: {
+				ophanPageId: pageViewId,
+				platformId: 'GUARDIAN_WEB',
+				referrerUrl: window.location.origin + window.location.pathname,
+				clientName: 'dcr',
+			},
+			targeting: {
+				showSupportMessaging: !shouldHideSupportMessaging(),
+				edition,
+				countryCode,
+				modulesVersion: 'v1',
+				mvtId: Number(getCookie('GU_mvt_id')),
+			},
+		};
+		fetch(`${contributionsServiceUrl}/header`, {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(requestData),
+		})
+			.then((result) => result.json())
+			.then((response: { data?: SupportHeaderData }) => {
+				if (!response.data) {
+					return null;
+				}
+
+				setSupportHeaderResponse(response.data);
+				const { module, meta } = response.data;
+				return window
+					.guardianPolyfilledImport(module.url)
+					.then(
+						(headerModule: {
+							Header: React.FC<SupportHeaderProps>;
+						}) => {
+							setSupportHeader(() => headerModule.Header);
+							sendOphanComponentEvent(
+								'INSERT',
+								meta,
+								ophanRecord,
+							);
+						},
+					);
+			})
+			.catch((error) => {
+				// TODO - sentry
+				// eslint-disable-next-line no-console
+				console.log(`header module - error is: ${error}`);
+			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	if (SupportHeader && supportHeaderResponse) {
+		return (
+			<div ref={setNode} className={headerStyles}>
+				{/* eslint-disable react/jsx-props-no-spreading */}
+				<SupportHeader {...supportHeaderResponse.module.props} />
+				{/* eslint-enable react/jsx-props-no-spreading */}
+			</div>
+		);
+	}
+
+	return null;
+};
+
+export const ReaderRevenueLinksNative: React.FC<Props> = ({
+	edition,
 	dataLinkNamePrefix,
 	inHeader,
+	urls,
+	ophanRecord,
+	pageViewId,
 }) => {
-	if (shouldHideSupportMessaging()) {
+	const hideSupportMessaging = shouldHideSupportMessaging();
+
+	// Only the header component is in the AB test
+	const testName = inHeader ? remoteRrHeaderLinksTestName : 'RRFooterLinks';
+	const campaignCode = `${testName}_control`;
+	const tracking: TestMeta = {
+		abTestName: testName,
+		abTestVariant: 'control',
+		componentType: inHeader ? 'ACQUISITIONS_HEADER' : 'ACQUISITIONS_FOOTER',
+		campaignCode,
+	};
+
+	const [hasBeenSeen, setNode] = useHasBeenSeen({
+		threshold: 0,
+		debounce: true,
+	});
+
+	useEffect(() => {
+		if (!hideSupportMessaging && inHeader) {
+			sendOphanComponentEvent('INSERT', tracking, ophanRecord);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		if (hasBeenSeen && inHeader) {
+			sendOphanComponentEvent('VIEW', tracking, ophanRecord);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [hasBeenSeen]);
+
+	const getUrl = (rrType: 'contribute' | 'subscribe'): string => {
+		if (inHeader) {
+			return addTrackingCodesToUrl({
+				base: `https://support.theguardian.com/${rrType}`,
+				componentType: 'ACQUISITIONS_HEADER',
+				componentId: campaignCode,
+				campaignCode,
+				abTest: {
+					name: remoteRrHeaderLinksTestName,
+					variant: 'control',
+				},
+				pageViewId,
+				referrerUrl: window.location.origin + window.location.pathname,
+			});
+		}
+		return urls[rrType];
+	};
+
+	if (hideSupportMessaging) {
 		return (
 			<div className={cx(inHeader && headerStyles)}>
 				<div
@@ -139,8 +332,31 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 			</div>
 		);
 	}
+
+	const ContributeButton = () => (
+		<a
+			className={linkStyles}
+			href={getUrl('contribute')}
+			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+		>
+			Contribute <ArrowRightIcon />
+		</a>
+	);
+	const SubscribeButton = () => (
+		<a
+			className={linkStyles}
+			href={getUrl('subscribe')}
+			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+		>
+			Subscribe <ArrowRightIcon />
+		</a>
+	);
+	const PrimaryButton = edition === 'UK' ? SubscribeButton : ContributeButton;
+	const SecondaryButton =
+		edition === 'UK' ? ContributeButton : SubscribeButton;
+
 	return (
-		<div className={cx(inHeader && headerStyles)}>
+		<div ref={setNode} className={cx(inHeader && headerStyles)}>
 			<div
 				className={cx({
 					[hiddenUntilTablet]: inHeader,
@@ -152,20 +368,8 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 				<div className={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
-				<a
-					className={linkStyles}
-					href={urls.contribute}
-					data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-				>
-					Contribute <ArrowRightIcon />
-				</a>
-				<a
-					className={linkStyles}
-					href={urls.subscribe}
-					data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
-				>
-					Subscribe <ArrowRightIcon />
-				</a>
+				<PrimaryButton />
+				<SecondaryButton />
 			</div>
 
 			<div
@@ -174,24 +378,45 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 					[hidden]: !inHeader,
 				})}
 			>
-				{edition === 'UK' ? (
-					<a
-						className={linkStyles}
-						href={urls.subscribe}
-						data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-					>
-						Subscribe <ArrowRightIcon />
-					</a>
-				) : (
-					<a
-						className={linkStyles}
-						href={urls.contribute}
-						data-link-name={`${dataLinkNamePrefix}support-cta`}
-					>
-						Contribute <ArrowRightIcon />
-					</a>
-				)}
+				<PrimaryButton />
 			</div>
 		</div>
+	);
+};
+
+export const ReaderRevenueLinks: React.FC<Props> = ({
+	edition,
+	countryCode,
+	dataLinkNamePrefix,
+	inHeader,
+	inRemoteModuleTest,
+	urls,
+	contributionsServiceUrl,
+	ophanRecord,
+	pageViewId = '',
+}: Props) => {
+	if (inHeader && inRemoteModuleTest) {
+		return (
+			<ReaderRevenueLinksRemote
+				edition={edition}
+				countryCode={countryCode}
+				pageViewId={pageViewId}
+				contributionsServiceUrl={contributionsServiceUrl}
+				ophanRecord={ophanRecord}
+			/>
+		);
+	}
+	return (
+		<ReaderRevenueLinksNative
+			edition={edition}
+			countryCode={countryCode}
+			dataLinkNamePrefix={dataLinkNamePrefix}
+			inHeader={inHeader}
+			inRemoteModuleTest={inRemoteModuleTest}
+			urls={urls}
+			contributionsServiceUrl={contributionsServiceUrl}
+			ophanRecord={ophanRecord}
+			pageViewId={pageViewId}
+		/>
 	);
 };
