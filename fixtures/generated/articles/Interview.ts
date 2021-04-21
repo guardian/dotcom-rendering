@@ -785,6 +785,10 @@ export const Interview: CAPIType = {
 						url: '/theguardian/g2',
 					},
 					{
+						title: 'Journal',
+						url: '/theguardian/journal',
+					},
+					{
 						title: 'Weekend',
 						url: '/theguardian/weekend',
 					},
@@ -1927,7 +1931,7 @@ export const Interview: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'f1767c09-def6-4a58-8277-e35e34869ee8',
+			elementId: 'e9eec13f-a1ee-461a-9bda-96d8f688ccd0',
 		},
 	],
 	webPublicationDate: '2020-02-09T11:00:04.000Z',
@@ -1940,28 +1944,28 @@ export const Interview: CAPIType = {
 						'<p>Halima Aden, then aged 19, became the first contestant in the Miss USA 2016 beauty pageant to wear a hijab and burkini, attracting the attention of French fashion legend <a href="https://www.theguardian.com/fashion/carine-roitfeld" title="">Carine Roitfeld</a>. The following year she became the first hijab-wearing model to sign with a global modelling agency, IMG, and then the first to walk at New York fashion week, for Yeezy, the Kanye West brand. She later became the first hijab-wearing model to make the cover of <em>Vogue</em> – twice (first <em>Vogue Arabia</em>, then British <em>Vogue</em>) – and soon afterwards a <em>Sports Illustrated</em> swimsuit shoot followed. By that point she’d already become a Unicef ambassador, and a go-to voice on diversity in the fashion industry. In 2017 she gave the first <a href="https://www.ted.com/talks/halima_aden_how_i_went_from_child_refugee_to_international_model?language=en" title="">TED</a> talk at a refugee camp in Kakuma, Kenya. <em>Teen Vogue</em> went with her.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '40dcd3a1-cabf-4e17-9380-7e29b3993ef5',
+					elementId: 'de9e7def-8a81-493c-9af2-2963cd057c46',
 				},
 				{
 					html:
 						'<p>When we meet, at a hotel near King’s Cross, I ask if it ever gets tiring, being the first in so many different ways, shouldering the burden of representation. “Somebody needs to,” Aden says. “I want my sister, my little nieces, even my nephews to see representations of somebody who wears a hijab in modern ways, in such a way that they can relate to.” We’re sitting side by side on a window seat, Aden holding court before a little audience of PRs, management and her best friend, Lizeth, who has travelled with her from the US. Though she looks very much the high-fashion figure, all in black – sequins and brocade lace, knee-high stiletto boots – she seems younger than her 22 years, gabbing away in the stream-of-conscious slang and asides of a teenager still starstruck by the turns her life has taken.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'd738f917-5b18-45b4-b079-4921291fabdb',
+					elementId: '87d4dab3-44b9-4b8d-b70f-67c424a5bcff',
 				},
 				{
 					html:
 						'<p>But on the topics of diversity, representation and sustainability, she speaks with passion and conviction. She has said in the past that, growing up in the US: “The only times I saw somebody dressed like me was on CNN – and they weren’t doing anything I approve of.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c3c917d5-92b8-45af-a5be-03d5aa3bec41',
+					elementId: 'fc87eeb8-b89d-4ea7-9739-316639148438',
 				},
 				{
 					html:
 						'<p>“I feel like we all deserve representation and I didn’t have that,” Aden says now. “I never got to flip through a magazine and see somebody who looks like me.” Lizeth digs out the latest issue of <em>Essence</em> magazine, Aden proud in pink on the cover. Aden takes it from her, somewhat wonderingly. “Sometimes it’s so wild for me,” she says. “I still catch myself… When my friend went and got that from the newsstand, I was like: ‘Oh my God.’”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'dec248ac-ca9d-4d05-8582-a43dcd5f6a43',
+					elementId: '87599736-70f0-4c1e-8689-cec07d6279f7',
 				},
 				{
 					media: {
@@ -2349,35 +2353,35 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '1a2ed3d9-c3d5-43bf-ac74-cb4190eaa45d',
+					elementId: 'c7e40374-8b23-4033-a7d4-8161dc8d0c0e',
 				},
 				{
 					html:
 						'<p>The fact she has been able to have a global career in fashion at all is proof that the industry is increasingly open to diversity. Aden is 5ft 5in, petite for a model, and a resident of Minnesota, far from the industry capitals of New York, London, Paris or Milan. “And the fact that I’m able to do runway, the fact that I have graced these magazine covers and wear a hijab on top of that, be who I am, have my identity, wear it proudly… I think fashion is doing a beautiful job.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'b6065bf0-b383-4130-ba5a-c0733cbcec77',
+					elementId: '4f2e6f1e-74b9-432a-a1a4-dd58ad5dd5eb',
 				},
 				{
 					html:
 						'<p>Aden now has her own 47-piece hijab collection, Halima x Modanisa, and her hijab is stipulated as non-negotiable in her contract with IMG. “It’s a big part of my identity,” she says. “It’s not because I don’t think people are going to listen – it’s more so they know what to expect. I always bring extras – my own set of turbans, turtlenecks, tights – because it’s a collaboration. I also recognise that for a lot of people, in my first year especially, I was the only hijab-wearing girl they’d worked with. So they’re not going to necessarily know 100% what to expect, just like I didn’t know what to expect with fashion, because it’s not the world that I come from.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8c0729fc-cdcf-4567-878c-d3c5c37cd0b5',
+					elementId: 'cc366993-621e-410c-85e2-9d2ccacd3925',
 				},
 				{
 					html:
 						'<p>She does have certain requirements, such as a pop-up tent in which to change backstage at shows, but she says she’s never been uncomfortably set apart, or made to feel othered. She remembers her experience of walking for Yeezy at New York fashion week in 2017, her breakout year, as a watershed moment. The first outfit she was presented with “was just not going to work,” she says, gesturing above her knee – too short. “Even then I knew: walking away when something doesn’t fit is always better than feeling you need to force something.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8f71aa9f-9884-44bd-82be-8febc85ad4de',
+					elementId: 'e5ee484c-a870-4d8a-8e13-744d87d4cab4',
 				},
 				{
 					html:
 						'<p>She returned to her hotel, disappointed but resolute. “And then, without having to say anything, they called back: ‘We have a second option.’ I tried it on and it was perfect. I just knew it was a pivotal moment in my life. The people who you want to work with, they’re willing to work with you just the way you are.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'bb11407a-eb8b-421c-a6e5-f4a557008bdd',
+					elementId: '44c63b22-a038-4417-a320-eba86db464bf',
 				},
 				{
 					media: {
@@ -2753,42 +2757,42 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '2bb44144-d875-4904-9add-5df76efeb8f2',
+					elementId: '5bbdaa85-b7b7-45fa-80aa-3a7a2afd65dc',
 				},
 				{
 					html:
 						'<p>That same year, Aden remembers walking for MaxMara at Milan fashion week in a look that had been designed with her in mind. When she posted it on Instagram, a woman commented: “He keeps you in mind, he keeps us in mind. Now this Muslim shopper will keep MaxMara in mind.” Aden shared it with the brand. “I was like – wink-wink-wink!”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '05841d9d-ad72-4012-a903-ed84259d6e12',
+					elementId: 'ccf0ff0c-71cb-4f08-ae2d-087829791d4a',
 				},
 				{
 					html:
 						'<p>It led to an exclusive capsule collection in the Middle East, for which Aden was the face. “It’s a win for designers when they’re diverse; it’s a win for the brand, it’s a win for everybody – we all want to see a little piece of ourselves reflecting back.” And it makes a difference, she says. The year after Aden became the first contestant to wear a hijab in Miss USA, there were seven others. Last year she was one of two hijabi models on the MaxMara catwalk in Milan, and one of three for her second <em>Vogue Arabia</em> cover.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c83c863c-66ac-4071-93f0-45da9caae527',
+					elementId: '415e6b9b-b1b6-4875-8c0e-290d754c794f',
 				},
 				{
 					html:
 						'<p>When Aden was seven, she used to pray for rain – the kind of torrential rain that would wash away her new home in the American Midwest. “I remember thinking: ‘Then our neighbours could come out and play,’” she says. Even the structure of her apartment building felt alienating. “I was like, ‘God, everybody is so isolated.’”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '73da63b3-2903-4b0b-8e9f-4290f7eb1e93',
+					elementId: '336015cd-264b-4f3e-b0d4-2ca86d63997a',
 				},
 				{
 					html:
 						'<p>Aden was born a refugee in the United Nations Kakuma camp in northwestern Kenya, where her mother had fled the Somali civil war in 1994. There their house was made of mud, scraps, sticks – anything her mother could find. “It would be normal for me to go to nursery school, come back and find it had washed away,” she says. But then the community would come together to rebuild it, “and then it’s the kids’ time to play around.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '80dca876-5678-45b8-bf6d-5699c1dd32d8',
+					elementId: 'dc12e8eb-c207-48e4-b065-cd43db4c31f6',
 				},
 				{
 					html:
 						'<p>The model remembers her childhood in the camp as being joyful and supportive. “There’s no walls keeping you apart from your neighbour,” she says. In her new home in Missouri, where she was relocated with her family in 2004, before moving to Minnesota, where they live today, the barriers stood strong.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '16d0040f-9879-4045-be6f-d7a6e4b3fbfa',
+					elementId: '4f2f859c-b36c-4493-954b-9e8fa2513535',
 				},
 				{
 					media: {
@@ -3176,35 +3180,35 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '2a738854-a297-4a04-8d72-6f937d1a59aa',
+					elementId: '6860ca98-d86e-43e6-bd54-c92999234aed',
 				},
 				{
 					html:
 						'<p>“Kakuma” translates from Swahili as “middle of nowhere”. “Sometimes, when I’m like, ‘I was born in the middle of nowhere,’ people think I’m joking,” Aden says. “But if you actually look at Google Maps…” People tend to think of a refugee camp as being a temporary settlement. But Kakuma is “more of a city of its own,” says Aden, in both permanence and size. Established by the UN in 1992 with a 70,000-person capacity, it has since ballooned to about 192,000 registered refugees and asylum seekers, the vast majority of whom are never resettled (the global figure is less than 1%).</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '3dcea70c-bdcc-40fc-be6b-453c318290b5',
+					elementId: '7edaba38-9205-4f93-b0df-6ec52b5f0957',
 				},
 				{
 					html:
 						'<p>As a child, Aden remembers thriving under the collective care of the community, which was two thirds women and children. She was bright – she spoke Somali and Swahili, sometimes translating for the grown-ups – and popular, roaming the camp with up to 30 playmates of mixed ages and ethnicities. (“If you could keep up, you were in the group.”)</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c9cddf5f-c6d8-4ab4-bcd5-c7e6733d07a9',
+					elementId: 'c0705186-00f2-4773-8257-61f0d51d0a7f',
 				},
 				{
 					html:
 						'<p>Aden is well aware that her happy stories of childhood challenge the stereotype of the “tragic refugee”, though she credits her mother with working hard to shield her young family from hardship. Aden never knew her father. He was lost during the Somali civil war, and assumed dead by her mother; he made contact after they had moved to the US, but died before Aden could develop a relationship. “It was both the scars and the smiles,” she says. “It was a happy childhood and also, we lived in uncertainty.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '921247ea-9fcb-40fe-a0b4-9d618e8770bd',
+					elementId: 'f653c491-8cd4-46fa-952c-ef826a61d7bc',
 				},
 				{
 					html:
 						'<p>Symbolic of this limbo was a noticeboard that was updated with the names and destinations of those lucky few bound for resettlement. Aden remembers it as larger than life, “like something out of <em>The Hunger Games</em>”: “It would control your entire future – it was literally the difference between life and death. For parents it meant a brand new life: ‘We’re starting over, we won the lottery.’ But for the kids it is: ‘I’m never seeing my friends again’.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'bc5b2d10-8670-4420-a46f-baca75b9949b',
+					elementId: '029dd485-2748-4409-9444-d65078340c62',
 				},
 				{
 					media: {
@@ -3580,42 +3584,42 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'dac6fd42-e051-4083-bb54-be36f4bf1786',
+					elementId: 'fc77ecb6-5c10-4f0e-ac4a-2fad33001645',
 				},
 				{
 					html:
 						'<p>Another common misconception of being a refugee, Aden says, “is that you get a say where you go”. Her family were relocated to a poverty-stricken, crime-rife neighbourhood in St Louis, Missouri, which – compared to the “nurturing” community of Kakuma – came as a shock. That was when she felt most isolated, when she wished for her house to wash away. It was the first time she’d heard gunshots. “But nonetheless, did I have the fear of malaria? No – so, in a way, it was like trading one obstacle for another.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e40bd6ac-f860-4c28-932b-c9508e8ec572',
+					elementId: '31b7841f-e230-41ca-bc2c-e21345773ad2',
 				},
 				{
 					html:
 						'<p>The biggest hurdle was learning English: Aden’s school in St Louis did not have an English language programme. After two weeks of presenteeism, Aden recalls her mother asking her to read some written English aloud. “I literally started mouthing the words to <a href="https://www.youtube.com/watch?v=8WYHDfJDPDc" title="">Dilemma</a>” – rapper Nelly and Kelly Rowland’s syrupy duet, which she knew from the radio. Aden mimics a haltering recital: “‘No matt-er. Whatido. All I think about. Is you’ – I just couldn’t stand the idea of disappointing her.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '64954140-9532-4a0f-8c5f-efac01953139',
+					elementId: '98ad63d9-8529-47fe-a49f-7f23814941ca',
 				},
 				{
 					html:
 						'<p>Eventually Aden’s mother decided to relocate the family to St Cloud, Minnesota, where they found a community like the one that they had left at the camp. At first they were heavily reliant on it, living on food stamps and even, for six months, in a women’s shelter. Aden remembers the kindness of neighbours, taking the family to the grocery store during the punishing winters, giving her mother lifts when she couldn’t drive. “It’s why I’m so loyal,” she says. “I love my state.” She lives in St Paul now, closer to the airport, but only 40 minutes from her mother, who’s still in St Cloud. Minnesota is known for high taxes, but Aden says she is happy to pay them. “I relied on welfare when I was little... I think of it as my way of paying back.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '1c8579e8-8c72-4745-8ed3-e2126129d9c2',
+					elementId: '584d3eea-ea95-4fb7-8684-c70a2191b879',
 				},
 				{
 					html:
 						'<p>Before we meet, Aden’s team is adamant that I don’t ask her about Trump or US politics, so instead I ask her how superficial diversity in fashion tallies with a more fractious, divided world.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '19f3bba0-7088-4ba9-a057-24473e81e384',
+					elementId: 'c7b15d8d-e4ce-40a3-bea0-fc2a02eeedea',
 				},
 				{
 					html:
 						'<p>“I don’t even really avoid politics,” she says, “but it’s not something that I’ve needed in order to connect with people. Once I share my story, there’s always some common ground. It doesn’t have to be: ‘I grew up in a refugee camp.’ I get just as many messages, believe it or not, from parents who are not Muslim, who are not black, who say, ‘Thank you for making modesty look cool and young’.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a7718d72-df6d-4262-8ce8-caa393b5953c',
+					elementId: '37e69133-70f5-43da-b3e9-39e070f53b67',
 				},
 				{
 					media: {
@@ -3991,91 +3995,91 @@ export const Interview: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '9b38eccb-03de-4c68-a516-bf590b66d118',
+					elementId: 'edb582a8-f6dd-4fd3-a5d5-9df1df7f8f36',
 				},
 				{
 					html:
 						'<p>When she entered the Miss Minnesota USA pageant in 2016, as a freshman at St Cloud State University, Aden told local media that she wanted to represent Muslim women and counter the image that they were oppressed. “The hijab is a symbol we wear on our heads,” she said. “But I want people to know that it is my choice.” Today she says her motivations for entering were less lofty. “College tuition is expensive in the States, muuuuuucho expensive!” And the top 15 at the pageant were offered scholarships. Did Aden think she’d win? “No, God, no.” She laughs. “But top 15? I was like, ‘I think I could do that’.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '08d1dcb7-428d-42cf-8596-f83fe496a5b5',
+					elementId: 'e640b5fa-3812-4b43-9e08-e59321ea9d5b',
 				},
 				{
 					html:
 						'<p>Aden’s mother was strongly against her entering the pageant, arguing it would distract from her studies, and that the two-piece burkini was too skimpy. Though they have since been able to find common ground through her advocacy and work with Unicef, it can feel like they are from two different cultures sometimes. She didn’t tell her mum about the <em>Sports Illustrated</em> shoot “until it hit newsstands”.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'd4377174-0ba4-4b1d-a273-79d516649811',
+					elementId: 'b00c2064-6a43-4b18-92d5-64f6c43b255a',
 				},
 				{
 					html:
 						'<p>She was also criticised by members of the Muslim community who saw modelling as <em>haram – </em>forbidden by Islamic law. “It was scary to put myself out there, because I didn’t know if I would get backlash, or how bad it was going to be,” she says. Two days before the pageant, Aden almost pulled out. But as she told the newspaper at the time: “You don’t let being the first to do it stop you.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'cfb8b82b-8e70-4c84-93bf-4835f04dbf71',
+					elementId: '73927812-305c-4cec-aaab-77df94f37f70',
 				},
 				{
 					html:
 						'<p>She ended up making the semi-finals, “braces and all. And then IMG came calling – like, ‘Well, well, <em>well</em>… maybe I don’t need school.’” She leans back, for a second jokily triumphant – then seems to feel a chill coming in from across the Atlantic. “I’m kidding. Sorry, Mom!”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e58afbb8-1c24-4878-acc8-fa6019afa934',
+					elementId: '11fe2fe1-8e9f-45c6-83c9-a2d01eba986a',
 				},
 				{
 					html:
 						'<p>The global spotlight on Aden caught the eye of Carine Roitfeld, who flew her to New York to shoot the cover of <em><a href="https://www.crfashionbook.com/" title="">CR Fashion Book</a></em> with <a href="https://www.theguardian.com/fashion/gigi-hadid" title="">Gigi Hadid</a>, Paris Jackson and legendary photographer Mario Sorrenti. Aden agonised about asking for a selfie with Gigi (“So cringy,” she says now). As for Sorrenti, though, she had to Google her later.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0e64fe17-765f-44b2-b65f-87036275a9a3',
+					elementId: 'd18bb4bf-d39f-4960-a155-6bf71df83184',
 				},
 				{
 					html:
 						'<p>His direction to her was, “Give me sexy”, she seems a little abashed to say. “I didn’t know fashion lingo, I didn’t know photographers. I’m a Minnesota girl – very small town.” Even after signing with IMG, she watched all of Tyra Banks’s outlandish reality series <em>America’s Next Top Model</em> “to practise”. Seven months into her modelling career, she was still working part-time as a housekeeper in St Cloud.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '20924168-4b0e-412a-b6b9-0ecbe3ec3044',
+					elementId: '8cba1533-41f3-47bf-adb4-76b91531bfa9',
 				},
 				{
 					html:
 						'<p>But rather than asking Aden to change, fashion’s royalty has made room for her as she is. Last week she was back in Kenya for a shoot and “I was just thinking, how crazy is it that, in one lifetime, I’ve gotten to experience both extremes.” Aden says she does not feel angry about the inequality she has seen – partly because she does not find it to be productive. “It’s like when I say: ‘We don’t want your pity.’ Let’s talk about solutions, invite refugees to the table. They’re part of the conversation – no policies should be enacted without their say.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'aef69694-6001-4d48-9b2d-d11c8c0cd93c',
+					elementId: 'f309392e-6bdd-4088-b792-b1bfcb23bfad',
 				},
 				{
 					html:
 						'<p>Though she rules out a career in politics (“for now”), in the future she hopes to return to Kakuma with Unicef to inspire hope within the camp for a new life beyond it. “I couldn’t tell you what that would have meant to me as a six or seven-year-old – like, ‘Wait, there’s a life outside these walls?’ Hopefully, it’s not going to be so rare to see kids from the camps grow up and become teachers, lawmakers, presidents and CEOs of Fortune 500 companies. There’s talent everywhere.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '81bc00d3-5113-413f-9350-125d6eac4c83',
+					elementId: '2b387d1a-0d8f-4fe4-8e14-c895c8e5612c',
 				},
 				{
 					html:
 						'<p>For now Aden is pursuing opportunities in “fashion activism”. This month she was announced as the new face of the British accessories brand <a href="https://bottletop.org/" title="">Bottletop</a>, which was ahead of its time in positioning itself as “sustainable luxury” in 2002. Its handbags and clutches, which are made from sustainable leather and upcycled metal ring pulls, help to alleviate poverty in Brazil, Nepal and Kenya. Aden is optimistic in general, but particularly about the potential for consumer choice to be a force for positive change: “I think we’re at a place where people want to support brands and organisations they know are giving back.” She is also an ambassador for Bottletop’s <a href="https://togetherband.org/" title="">#Togetherband</a> campaign, which is tasked with raising awareness of the <a href="https://www.un.org/sustainabledevelopment/sustainable-development-goals/" title="">UN’s Sustainable Development Goals</a>. Aden is probably one of the few celebrities who can “relate personally” to all 17 of them. She has been assigned the eighth goal: “Decent work and economic growth.” The fact that the Swiss multinational bank UBS is a founding partner seems to suggest which way the wind is blowing.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '5b011bad-cdac-4be8-86ee-1ec1f2276d39',
+					elementId: '86a6d265-3ed1-4f48-b15c-588c939fb9bc',
 				},
 				{
 					html:
 						'<p>“My career in fashion is not just, ‘I want to work with this brand, I want to get on that catwalk’ – we’re not sitting here talking about ‘Buy this heel, because this heel will make you feel sexy.’” She kicks up her stiletto boot, knee-high in black patent leather (admittedly very sexy). “I’m proud that I can say I combined fashion and activism. I can’t do one without the other.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '26725aee-5b99-4671-a19b-c04dc1e9cb18',
+					elementId: '5140b2d9-f26a-4d3e-a668-876fb2322200',
 				},
 				{
 					html:
 						'<p>Aden sees that her story, from refugee camp to the cover of <em>Vogue</em>, is an unusual one. But she has had to navigate it herself – down to mentioning, at her very first meeting with IMG as a teenager in New York, that she would like to work with Unicef. “I had to learn, in the beginning especially, that maybe I’d never find another model who I could relate to. But I’m making my own path, and it works perfectly for me.”</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ea3ad98a-1029-4ea9-ba18-03d63712b495',
+					elementId: 'b2710981-71cc-46f1-9554-1d5d781280f4',
 				},
 				{
 					html:
 						'<p><em>Fashion editor Jo Jones; photographer’s assistant Dan Ross; fashion assistant Lena Young; makeup by Dina at Frank Agency using Dior Forever and Dior Capture Totale C.E.L.L. Energy; nails by Kim Nkosi at Premier Hair and Makeup using Dior Vernis and Miss Dior Hand Cream; shot at Waddington Studios</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'f8b45326-a7d3-4bf6-aa09-a707d5c04ec4',
+					elementId: 'f6d470be-413c-4375-8640-9d51fdfd5252',
 				},
 			],
 			blockCreatedOn: 1580751734000,

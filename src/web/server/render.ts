@@ -7,6 +7,7 @@ import { addDividers } from '@root/src/model/add-dividers';
 import { enhanceDots } from '@root/src/model/add-dots';
 import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhanceImages } from '@root/src/model/enhance-images';
+import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { enhanceAnniversaryAtom } from '@root/src/model/enhance-AnniversaryInteractiveAtom';
 import { extract as extractGA } from '@root/src/model/extract-ga';
@@ -31,6 +32,11 @@ class CAPIEnhancer {
 
 	enhanceImages() {
 		this.capi = enhanceImages(this.capi);
+		return this;
+	}
+
+	enhanceNumberedLists() {
+		this.capi = enhanceNumberedLists(this.capi);
 		return this;
 	}
 
@@ -66,6 +72,7 @@ export const render = (
 			.enhanceBlockquotes()
 			.enhanceDots()
 			.enhanceImages()
+			.enhanceNumberedLists()
 			.enhanceAnniversaryAtom().capi;
 		const resp = document({
 			data: {
