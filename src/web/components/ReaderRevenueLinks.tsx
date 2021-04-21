@@ -332,6 +332,29 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 			</div>
 		);
 	}
+
+	const ContributeButton = () => (
+		<a
+			className={linkStyles}
+			href={getUrl('contribute')}
+			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+		>
+			Contribute <ArrowRightIcon />
+		</a>
+	);
+	const SubscribeButton = () => (
+		<a
+			className={linkStyles}
+			href={getUrl('subscribe')}
+			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+		>
+			Subscribe <ArrowRightIcon />
+		</a>
+	);
+	const PrimaryButton = edition === 'UK' ? SubscribeButton : ContributeButton;
+	const SecondaryButton =
+		edition === 'UK' ? ContributeButton : SubscribeButton;
+
 	return (
 		<div ref={setNode} className={cx(inHeader && headerStyles)}>
 			<div
@@ -345,20 +368,8 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 				<div className={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
-				<a
-					className={linkStyles}
-					href={getUrl('contribute')}
-					data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-				>
-					Contribute <ArrowRightIcon />
-				</a>
-				<a
-					className={linkStyles}
-					href={getUrl('subscribe')}
-					data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
-				>
-					Subscribe <ArrowRightIcon />
-				</a>
+				<PrimaryButton />
+				<SecondaryButton />
 			</div>
 
 			<div
@@ -367,23 +378,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 					[hidden]: !inHeader,
 				})}
 			>
-				{edition === 'UK' ? (
-					<a
-						className={linkStyles}
-						href={getUrl('subscribe')}
-						data-link-name={`${dataLinkNamePrefix}contribute-cta`}
-					>
-						Subscribe <ArrowRightIcon />
-					</a>
-				) : (
-					<a
-						className={linkStyles}
-						href={getUrl('contribute')}
-						data-link-name={`${dataLinkNamePrefix}support-cta`}
-					>
-						Contribute <ArrowRightIcon />
-					</a>
-				)}
+				<PrimaryButton />
 			</div>
 		</div>
 	);
