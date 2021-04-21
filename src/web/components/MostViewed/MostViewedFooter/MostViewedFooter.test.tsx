@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { Design, Display, Pillar } from '@guardian/types';
 
-import { useApi as useApi_ } from '@root/src/web/lib/api';
+import { useApi as useApi_ } from '@root/src/web/lib/useApi';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { responseWithTwoTabs, responseWithOneTab } from '../MostViewed.mocks';

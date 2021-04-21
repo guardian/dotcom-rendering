@@ -13,7 +13,7 @@ import {
 import { extractNAV } from '@root/src/model/extract-nav';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 import { Columns } from './Columns';
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
