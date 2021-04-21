@@ -12,7 +12,7 @@ import { MostViewedFooterData } from './MostViewedFooterData';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../../../lib/api', () => ({
+jest.mock('../../../lib/useApi', () => ({
 	useApi: jest.fn(),
 }));
 

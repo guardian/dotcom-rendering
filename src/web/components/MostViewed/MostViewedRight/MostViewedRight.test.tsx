@@ -12,7 +12,7 @@ import { MostViewedRight } from './MostViewedRight';
 const response = { data: mockTab1 };
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../../../lib/api', () => ({
+jest.mock('../../../lib/useApi', () => ({
 	useApi: jest.fn(),
 }));
 
