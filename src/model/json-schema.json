@@ -1468,11 +1468,7 @@
                             "body": {
                                 "type": "string"
                             }
-                        },
-                        "required": [
-                            "body",
-                            "title"
-                        ]
+                        }
                     }
                 }
             },

@@ -173,8 +173,8 @@ interface GuideAtomBlockElement {
 	credit: string;
 	role?: RoleType;
 	items?: {
-		title: string;
-		body: string;
+		title?: string;
+		body?: string;
 	}[];
 }
 
