@@ -72,7 +72,7 @@ const inlineImages = (elements: CAPIElement[]): CAPIElement[] => {
 const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	/**
 	 * Why not just add H3s in Composer?
-	 * Truth is, you can't. So toget around this there's a convention that says if
+	 * Truth is, you can't. So to get around this there's a convention that says if
 	 * you insert <p><strong>Faux H3!</strong>,</p> then we replace it with a h3 tag
 	 * instead.
 	 *
