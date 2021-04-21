@@ -35,6 +35,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
+import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -85,6 +86,7 @@ const StandardGrid = ({
 					${display === Display.Showcase
 						? css`
 								grid-template-areas:
+									'atom       atom    atom        atom'
 									'title      border  headline    headline'
 									'lines      border  headline    headline'
 									'meta       border  standfirst  standfirst'
@@ -94,6 +96,7 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
+									'atom       atom    atom        atom'
 									'title      border  headline    right-column'
 									'lines      border  headline    right-column'
 									'meta       border  standfirst  right-column'
@@ -113,6 +116,7 @@ const StandardGrid = ({
 					${display === Display.Showcase
 						? css`
 								grid-template-areas:
+									'atom       atom    atom        atom'
 									'title      border  headline    headline'
 									'lines      border  headline    headline'
 									'meta       border  standfirst  standfirst'
@@ -122,6 +126,7 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
+									'atom       atom    atom        atom'
 									'title      border  headline    right-column'
 									'lines      border  headline    right-column'
 									'meta       border  standfirst  right-column'
@@ -136,6 +141,7 @@ const StandardGrid = ({
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
+						'atom       atom'
 						'title      right-column'
 						'headline   right-column'
 						'standfirst right-column'
@@ -149,6 +155,7 @@ const StandardGrid = ({
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
+						'atom'
 						'title'
 						'headline'
 						'standfirst'
@@ -162,6 +169,7 @@ const StandardGrid = ({
 
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
+						'atom'
 						'title'
 						'headline'
 						'standfirst'
@@ -387,6 +395,13 @@ export const CommentLayout = ({
 				backgroundColour={palette.background.article}
 			>
 				<StandardGrid display={format.display}>
+					<GridItem area="atom">
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
+					</GridItem>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}

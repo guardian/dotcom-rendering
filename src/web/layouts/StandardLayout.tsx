@@ -40,6 +40,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
+import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -92,7 +93,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  matchNav     right-column'
 									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -100,8 +101,9 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
+									'atom   atom    atom         atom'
 									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -129,8 +131,9 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
+									'atom   atom    atom         atom'
 									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -157,6 +160,7 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
+									'atom          atom'
 									'title         right-column'
 									'headline      right-column'
 									'standfirst    right-column'
@@ -184,6 +188,7 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
+									'atom'
 									'title'
 									'headline'
 									'standfirst'
@@ -212,6 +217,7 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
+									'atom'
 									'media'
 									'title'
 									'headline'
@@ -424,6 +430,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				borderColour={palette.border.article}
 			>
 				<StandardGrid isMatchReport={isMatchReport}>
+					<GridItem area="atom">
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
+					</GridItem>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}
