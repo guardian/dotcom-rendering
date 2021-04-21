@@ -1,3 +1,49 @@
+import { JSDOM } from 'jsdom';
+
+const isFalseH3 = (element: CAPIElement): boolean => {
+	if (!element) return false;
+	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
+	if (
+		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
+	) {
+		return false;
+	}
+	const frag = JSDOM.fragment(element.html);
+	if (!frag || !frag.firstElementChild) return false;
+	const html = frag.firstElementChild.outerHTML;
+	const text = frag.firstElementChild.textContent;
+	// The following things must be true for an element to be a faux H3
+	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
+	const containsStrongtags = frag.firstElementChild.outerHTML.includes(
+		'<strong>',
+	);
+	const doesNotContainLinks = !frag.firstElementChild.outerHTML.includes(
+		'<a>',
+	);
+	const textLength = text?.length;
+	const htmlLength = html.length;
+	const onlyHasOneStrongTag = textLength === htmlLength - 24;
+	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
+
+	return (
+		hasPwrapper &&
+		containsStrongtags &&
+		doesNotContainLinks &&
+		onlyHasOneStrongTag &&
+		endsStrong
+	);
+};
+
+const extractH3 = (element: CAPIElement): string => {
+	// Extract the text based on the convention: <p><strong><H3 text</strong></p>
+	const textElement = element as TextBlockElement;
+	const frag = JSDOM.fragment(textElement.html);
+	if (isFalseH3(element)) {
+		return frag.firstElementChild?.textContent || '';
+	}
+	return '';
+};
+
 const inlineImages = (elements: CAPIElement[]): CAPIElement[] => {
 	// Inline all images
 	// Why?
@@ -23,6 +69,43 @@ const inlineImages = (elements: CAPIElement[]): CAPIElement[] => {
 	return inlined;
 };
 
+const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
+	/**
+	 * Why not just add H3s in Composer?
+	 * Truth is, you can't. So toget around this there's a convention that says if
+	 * you insert <p><strong>Faux H3!</strong>,</p> then we replace it with a h3 tag
+	 * instead.
+	 *
+	 * Note. H3s don't have any styles so we have to add them. In Frontend, they use
+	 * a 'fauxH3' class for this. In DCR we add `globalH3Styles` which was added at
+	 * the same time as this code.
+	 */
+	const withH3s: CAPIElement[] = [];
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			isFalseH3(thisElement)
+		) {
+			const h3Text = extractH3(thisElement);
+			withH3s.push(
+				{
+					_type:
+						'model.dotcomrendering.pageElements.DividerBlockElement',
+				},
+				{
+					...thisElement,
+					html: `<h3>${h3Text}</h3>`,
+				},
+			);
+		} else {
+			// Pass through
+			withH3s.push(thisElement);
+		}
+	});
+	return withH3s;
+};
+
 class Enhancer {
 	elements: CAPIElement[];
 
@@ -34,11 +117,18 @@ class Enhancer {
 		this.elements = inlineImages(this.elements);
 		return this;
 	}
+
+	addH3s() {
+		this.elements = addH3s(this.elements);
+		return this;
+	}
 }
 
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	return (
 		new Enhancer(elements)
+			// Turn false h3s into real ones
+			.addH3s()
 			// Always use role `inline` for images
 			.inlineImages().elements
 	);
