@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import { until } from '@guardian/src-foundations/mq';
 import { InteractiveAtom } from '@guardian/atoms-rendering';
 
 export const AnniversaryAtomComponent = ({
@@ -14,8 +15,6 @@ export const AnniversaryAtomComponent = ({
 				/* stylelint-disable color-no-hex */
 				background-color: #ffe500;
 				display: ${anniversaryInteractiveAtom ? 'block' : 'none'};
-				height: 145px;
-				margin: 0 -20px 0 -20px;
 			`}
 		>
 			{anniversaryInteractiveAtom && (

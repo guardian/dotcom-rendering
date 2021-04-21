@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import {
 	neutral,
 	brandBackground,
+	brandAltBackground,
 	brandLine,
 	brandBorder,
 	labs,
@@ -82,7 +83,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'atom   atom    atom         atom'
 						'title  border  headline    headline'
 						'lines  border  media       media'
 						'meta   border  media       media'
@@ -98,7 +98,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'atom   atom    atom         atom'
 						'title  border  headline    headline'
 						'lines  border  media       media'
 						'meta   border  media       media'
@@ -112,7 +111,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'atom       atom'
 						'title      right-column'
 						'headline   right-column'
 						'standfirst right-column'
@@ -127,7 +125,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'atom'
 						'title'
 						'headline'
 						'standfirst'
@@ -141,7 +138,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'atom'
 						'media'
 						'title'
 						'headline'
@@ -386,17 +382,21 @@ export const ShowcaseLayout = ({
 			)}
 
 			<Section
+				backgroundColour={brandAltBackground.primary}
+				padded={false}
+				showTopBorder={false}
+				showSideBorders={false}
+			>
+				<AnniversaryAtomComponent
+					anniversaryInteractiveAtom={CAPI.anniversaryInteractiveAtom}
+				/>
+			</Section>
+
+			<Section
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 			>
 				<ShowcaseGrid>
-					<GridItem area="atom">
-						<AnniversaryAtomComponent
-							anniversaryInteractiveAtom={
-								CAPI.anniversaryInteractiveAtom
-							}
-						/>
-					</GridItem>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}

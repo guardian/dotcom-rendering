@@ -101,7 +101,6 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
-									'atom   atom    atom         atom'
 									'title  border  headline     right-column'
 									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
@@ -131,7 +130,6 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
-									'atom   atom    atom         atom'
 									'title  border  headline     right-column'
 									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
@@ -160,7 +158,6 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
-									'atom          atom'
 									'title         right-column'
 									'headline      right-column'
 									'standfirst    right-column'
@@ -188,7 +185,6 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
-									'atom'
 									'title'
 									'headline'
 									'standfirst'
@@ -217,7 +213,6 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
-									'atom'
 									'media'
 									'title'
 									'headline'
@@ -400,13 +395,27 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			)}
 
 			{format.theme !== Special.Labs ? (
-				<Section
-					backgroundColour={palette.background.article}
-					padded={false}
-					showTopBorder={false}
-				>
-					<GuardianLines count={4} palette={palette} />
-				</Section>
+				<>
+					<Section
+						backgroundColour={brandAltBackground.primary}
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+					>
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
+					</Section>
+					<Section
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<GuardianLines count={4} palette={palette} />
+					</Section>
+				</>
 			) : (
 				<Stuck>
 					<Section

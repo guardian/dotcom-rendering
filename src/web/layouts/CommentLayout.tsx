@@ -5,6 +5,7 @@ import {
 	neutral,
 	brandBorder,
 	brandBackground,
+	brandAltBackground,
 	brandLine,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -86,7 +87,6 @@ const StandardGrid = ({
 					${display === Display.Showcase
 						? css`
 								grid-template-areas:
-									'atom       atom    atom        atom'
 									'title      border  headline    headline'
 									'lines      border  headline    headline'
 									'meta       border  standfirst  standfirst'
@@ -96,7 +96,6 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
-									'atom       atom    atom        atom'
 									'title      border  headline    right-column'
 									'lines      border  headline    right-column'
 									'meta       border  standfirst  right-column'
@@ -116,7 +115,6 @@ const StandardGrid = ({
 					${display === Display.Showcase
 						? css`
 								grid-template-areas:
-									'atom       atom    atom        atom'
 									'title      border  headline    headline'
 									'lines      border  headline    headline'
 									'meta       border  standfirst  standfirst'
@@ -126,7 +124,6 @@ const StandardGrid = ({
 						  `
 						: css`
 								grid-template-areas:
-									'atom       atom    atom        atom'
 									'title      border  headline    right-column'
 									'lines      border  headline    right-column'
 									'meta       border  standfirst  right-column'
@@ -141,7 +138,6 @@ const StandardGrid = ({
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'atom       atom'
 						'title      right-column'
 						'headline   right-column'
 						'standfirst right-column'
@@ -155,7 +151,6 @@ const StandardGrid = ({
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'atom'
 						'title'
 						'headline'
 						'standfirst'
@@ -169,7 +164,6 @@ const StandardGrid = ({
 
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'atom'
 						'title'
 						'headline'
 						'standfirst'
@@ -389,19 +383,21 @@ export const CommentLayout = ({
 					</Section>
 				</SendToBack>
 			</div>
-
+			<Section
+				backgroundColour={brandAltBackground.primary}
+				padded={false}
+				showTopBorder={false}
+				showSideBorders={false}
+			>
+				<AnniversaryAtomComponent
+					anniversaryInteractiveAtom={CAPI.anniversaryInteractiveAtom}
+				/>
+			</Section>
 			<Section
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 			>
 				<StandardGrid display={format.display}>
-					<GridItem area="atom">
-						<AnniversaryAtomComponent
-							anniversaryInteractiveAtom={
-								CAPI.anniversaryInteractiveAtom
-							}
-						/>
-					</GridItem>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}
