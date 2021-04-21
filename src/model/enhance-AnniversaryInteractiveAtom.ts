@@ -3,13 +3,21 @@ import { getAnniversaryAtomCache } from '@root/src/web/server/cacheForAnniversar
 export const enhanceAnniversaryAtom = (data: CAPIType): CAPIType => {
 	// TODO Add switch
 	const { anniversaryArticleHeader } = data.config.switches;
+	const {
+		hideAnniversaryAtomVariant,
+		anniversaryAtomVariant,
+	} = data.config.abTests;
 
-	const { hideAnniversaryAtomVariant } = data.config.abTests;
-
-	// If the main anniversaryArticleHeader switch is ON
-	// and the user is NOT in the AB Tests VARIANT.
-	// Users will be opted-in to VARIANT of the AB Test IF THEY HIDE THE BANNER.
-	if (anniversaryArticleHeader && hideAnniversaryAtomVariant !== 'variant') {
+	// If
+	// - the main anniversaryArticleHeader switch is ON
+	// - the user is NOT in the hideAnniversaryAtom test VARIANT
+	// - the user IS in the anniversaryAtom test variant (for test purposes)
+	// Users will be opted-in to VARIANT of the AB Test IF THEY HAVE SEEN THE BANNER.
+	if (
+		anniversaryArticleHeader && // The main switch is set to ON
+		anniversaryAtomVariant === 'variant' && // Opted into the 0% test for testing purposes
+		hideAnniversaryAtomVariant !== 'variant' // Not opted into the 0% A/B test used for hiding the atom
+	) {
 		data.anniversaryInteractiveAtom = getAnniversaryAtomCache();
 	}
 
