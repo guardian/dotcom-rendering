@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from 'emotion';
-import { until } from '@guardian/src-foundations/mq';
 import { InteractiveAtom } from '@guardian/atoms-rendering';
 
 export const AnniversaryAtomComponent = ({
