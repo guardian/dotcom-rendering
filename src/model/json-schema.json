@@ -369,6 +369,9 @@
         },
         "isSpecialReport": {
             "type": "boolean"
+        },
+        "anniversaryInteractiveAtom": {
+            "$ref": "#/definitions/InteractiveAtomBlockElement"
         }
     },
     "required": [
