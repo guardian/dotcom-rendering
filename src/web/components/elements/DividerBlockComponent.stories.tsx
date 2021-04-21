@@ -33,7 +33,7 @@ export const Default = () => {
 				isFirstParagraph={true}
 			/>
 			<DividerBlockComponent />
-			<p>Half (default)</p>
+			<p>Partial (default)</p>
 			<TextBlockComponent
 				html={lorem}
 				format={format}

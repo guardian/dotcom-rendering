@@ -4,9 +4,9 @@ import { css } from 'emotion';
 import { border } from '@guardian/src-foundations/palette';
 
 type Props = {
-	size?: 'full' | 'half';
+	size?: 'full' | 'partial';
 };
-export const DividerBlockComponent = ({ size = 'half' }: Props) => {
+export const DividerBlockComponent = ({ size = 'partial' }: Props) => {
 	switch (size) {
 		case 'full':
 			return (
@@ -22,7 +22,7 @@ export const DividerBlockComponent = ({ size = 'half' }: Props) => {
 					`}
 				/>
 			);
-		case 'half':
+		case 'partial':
 		default:
 			return (
 				<hr
