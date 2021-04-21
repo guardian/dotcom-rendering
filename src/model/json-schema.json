@@ -369,6 +369,9 @@
         },
         "isSpecialReport": {
             "type": "boolean"
+        },
+        "anniversaryInteractiveAtom": {
+            "$ref": "#/definitions/InteractiveAtomBlockElement"
         }
     },
     "required": [
@@ -1453,6 +1456,24 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "body": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "body",
+                            "title"
+                        ]
+                    }
                 }
             },
             "required": [
