@@ -68,7 +68,7 @@ import { SpotifyBlockComponent } from '@root/src/web/components/elements/Spotify
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { remoteRRHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRRHeaderLinksTest';
+import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
 import {
 	submitComponentEvent,
@@ -355,7 +355,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
 	const inRemoteModuleTest = ABTestAPI.isUserInVariant(
-		remoteRRHeaderLinksTestName,
+		remoteRrHeaderLinksTestName,
 		'remote',
 	);
 

@@ -14,7 +14,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '@root/src/web/browser/cookie';
-import { remoteRRHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRRHeaderLinksTest';
+import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import type { TestMeta } from '@guardian/types';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
@@ -270,7 +270,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
 	// Only the header component is in the AB test
-	const testName = inHeader ? remoteRRHeaderLinksTestName : 'RRFooterLinks';
+	const testName = inHeader ? remoteRrHeaderLinksTestName : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
 	const tracking: TestMeta = {
 		abTestName: testName,
@@ -306,7 +306,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 				componentId: campaignCode,
 				campaignCode,
 				abTest: {
-					name: remoteRRHeaderLinksTestName,
+					name: remoteRrHeaderLinksTestName,
 					variant: 'control',
 				},
 				pageViewId,
