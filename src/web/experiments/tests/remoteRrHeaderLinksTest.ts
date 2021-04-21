@@ -1,9 +1,9 @@
 import { ABTest } from '@guardian/ab-core';
 
-export const remoteRRHeaderLinksTestName = 'RemoteRRHeaderLinksTest';
+export const remoteRrHeaderLinksTestName = 'RemoteRrHeaderLinksTest';
 
-export const remoteRRHeaderLinksTest: ABTest = {
-	id: remoteRRHeaderLinksTestName,
+export const remoteRrHeaderLinksTest: ABTest = {
+	id: remoteRrHeaderLinksTestName,
 	start: '2021-04-10',
 	expiry: '2021-12-01',
 	author: 'Tom Forbes',
