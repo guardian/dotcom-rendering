@@ -764,7 +764,6 @@ interface DCRServerDocumentData {
 }
 
 interface BrowserNavType {
-	topLevelPillars: PillarType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
 }
