@@ -60,7 +60,7 @@
                         "$ref": "#/definitions/ExplainerAtomBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/FullReviewElement"
+                        "$ref": "#/definitions/FullReviewBlockElement"
                     },
                     {
                         "$ref": "#/definitions/GenericAtomBlockElement"
@@ -1393,7 +1393,7 @@
                 "title"
             ]
         },
-        "FullReviewElement": {
+        "FullReviewBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -3222,7 +3222,7 @@
                                 "$ref": "#/definitions/ExplainerAtomBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/FullReviewElement"
+                                "$ref": "#/definitions/FullReviewBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/GenericAtomBlockElement"

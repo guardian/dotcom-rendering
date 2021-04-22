@@ -151,7 +151,7 @@ interface ExplainerAtomBlockElement {
 	role?: RoleType;
 }
 
-interface FullReviewElement {
+interface FullReviewBlockElement {
 	_type: 'model.dotcomrendering.pageElements.FullReviewLink';
 	href: string;
 	elementId: string;
@@ -557,7 +557,7 @@ type CAPIElement =
 	| DocumentBlockElement
 	| EmbedBlockElement
 	| ExplainerAtomBlockElement
-	| FullReviewElement
+	| FullReviewBlockElement
 	| GenericAtomBlockElement
 	| GuideAtomBlockElement
 	| GuVideoBlockElement
