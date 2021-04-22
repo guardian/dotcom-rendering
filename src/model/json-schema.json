@@ -60,6 +60,9 @@
                         "$ref": "#/definitions/ExplainerAtomBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/FullReviewElement"
+                    },
+                    {
                         "$ref": "#/definitions/GenericAtomBlockElement"
                     },
                     {
@@ -1387,6 +1390,32 @@
                 "body",
                 "elementId",
                 "id",
+                "title"
+            ]
+        },
+        "FullReviewElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.FullReviewLink"
+                    ]
+                },
+                "href": {
+                    "type": "string"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "href",
                 "title"
             ]
         },
@@ -3191,6 +3220,9 @@
                             },
                             {
                                 "$ref": "#/definitions/ExplainerAtomBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/FullReviewElement"
                             },
                             {
                                 "$ref": "#/definitions/GenericAtomBlockElement"
