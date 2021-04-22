@@ -341,6 +341,13 @@ interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
+interface StarRatingBlockElement {
+	_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement';
+	elementId: string;
+	rating: number;
+	size: RatingSizeType;
+}
+
 interface SubheadingBlockElement {
 	_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement';
 	elementId: string;
@@ -561,6 +568,7 @@ type CAPIElement =
 	| RichLinkBlockElement
 	| SoundcloudBlockElement
 	| SpotifyBlockElement
+	| StarRatingBlockElement
 	| SubheadingBlockElement
 	| TableBlockElement
 	| TextBlockElement
@@ -652,6 +660,8 @@ type Language =
 	| 'markup'
 	| 'scala'
 	| 'elm';
+
+type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------
 // Callout Campaign
