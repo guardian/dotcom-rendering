@@ -198,8 +198,9 @@ const isItemListLink = (element: CAPIElement): boolean => {
 	);
 };
 
-const addItemListLink = (elements: CAPIElement[]): CAPIElement[] =>
-	elements.map((element) => {
+const addItemListLink = (elements: CAPIElement[]): CAPIElement[] => {
+	const updatedElements: CAPIElement[] = [];
+	elements.forEach((element) => {
 		if (
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
@@ -207,15 +208,22 @@ const addItemListLink = (elements: CAPIElement[]): CAPIElement[] =>
 		) {
 			const frag = JSDOM.fragment(element.html);
 			const link = frag.querySelector('a');
-			return {
+			updatedElements.push({
 				_type: 'model.dotcomrendering.pageElements.ItemListLink',
 				elementId: element.elementId,
 				href: link?.href || '',
 				title: link?.textContent || '',
-			};
+			});
+			updatedElements.push({
+				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
+			});
+			return updatedElements;
 		}
+
 		return element;
 	});
+	return updatedElements;
+};
 
 class Enhancer {
 	elements: CAPIElement[];
