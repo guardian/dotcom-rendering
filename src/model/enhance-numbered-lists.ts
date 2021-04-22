@@ -80,26 +80,43 @@ const extractStarCount = (element: CAPIElement): number => {
 	return starCount;
 };
 
+const isImage = (element: CAPIElement): boolean => {
+	return (
+		element?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+	);
+};
+
 const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 	const starified: CAPIElement[] = [];
+	let previousRating: number | undefined;
 	elements.forEach((thisElement, index) => {
-		const previousElement = elements[index - 1];
-		if (
-			thisElement._type ===
-				'model.dotcomrendering.pageElements.ImageBlockElement' &&
-			isStarRating(previousElement)
-		) {
-			const rating = extractStarCount(previousElement);
-			// Add this image using the rating
-			starified.push({
-				...thisElement,
-				starRating: rating,
-			});
-			// Remove the previous element now that we've put the stars on top of the image
-			starified.splice(index - 1, 1);
-		} else {
-			// Pass through
-			starified.push(thisElement);
+		switch (thisElement._type) {
+			case 'model.dotcomrendering.pageElements.TextBlockElement':
+				if (isStarRating(thisElement) && isImage(elements[index + 1])) {
+					// Remember this rating so we can add it to the next element
+					previousRating = extractStarCount(thisElement);
+				} else {
+					// Pass through
+					starified.push(thisElement);
+				}
+				break;
+			case 'model.dotcomrendering.pageElements.ImageBlockElement':
+				if (previousRating !== undefined) {
+					// Add this image using the rating we remembered
+					starified.push({
+						...thisElement,
+						starRating: previousRating,
+					});
+					previousRating = undefined;
+				} else {
+					// Pass through
+					starified.push(thisElement);
+				}
+				break;
+			default:
+				// Pass through
+				starified.push(thisElement);
 		}
 	});
 	return starified;
