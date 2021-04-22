@@ -89,6 +89,7 @@ const instagramElement = (): BodyElement => ({
 		kind: EmbedKind.Instagram,
 		id: 'embedId',
 		caption: some('<blockquote>Instagram</blockquote>'),
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
 	},
 });
 
@@ -113,7 +114,8 @@ const videoElement: BodyElement = {
 		id: 'mockYoutubeId',
 		height: 300,
 		width: 500,
-	},
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
+	}
 };
 
 const audioElement: BodyElement = {
@@ -123,7 +125,8 @@ const audioElement: BodyElement = {
 		src: 'https://www.spotify.com/',
 		height: 300,
 		width: 500,
-	},
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
+	}
 };
 
 const liveEventElement = (): BodyElement => ({

@@ -1,5 +1,4 @@
 // ----- Imports ----- //
-
 import 'regenerator-runtime/runtime.js';
 import {
 	AudioAtom,
@@ -9,6 +8,7 @@ import {
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
+import { either } from '@guardian/types';
 import {
 	ads,
 	reportNativeElementPositionChanges,
@@ -17,6 +17,7 @@ import {
 	videos,
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
+import { createEmbedComponentFromProps } from 'components/embedWrapper';
 import FooterContent from 'components/footerContent';
 import EpicContent from 'components/shared/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
@@ -27,6 +28,7 @@ import {
 	notificationsClient,
 	userClient,
 } from 'native/nativeApi';
+import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
@@ -451,6 +453,23 @@ function richLinks(): void {
 		});
 }
 
+function hydrateClickToView(): void {
+	document
+		.querySelectorAll('.js-click-to-view-container')
+		.forEach((container) =>
+			either(
+				(error: string) => {
+					logger.error(
+						`Failed to create Embed for hydration: ${error}`,
+					);
+				},
+				(embedComponent: ReactElement) => {
+					ReactDOM.hydrate(embedComponent, container);
+				},
+			)(createEmbedComponentFromProps(container)),
+		);
+}
+
 setup();
 sendTargetingParams();
 ads();
@@ -468,3 +487,4 @@ initAudioAtoms();
 hydrateQuizAtoms();
 localDates();
 richLinks();
+hydrateClickToView();

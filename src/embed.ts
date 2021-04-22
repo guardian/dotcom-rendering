@@ -18,11 +18,11 @@ import type { DocParser } from 'types/parserContext';
 
 // ----- Types ----- //
 
-const enum EmbedKind {
-	Generic,
-	Instagram,
-	Spotify,
-	YouTube,
+enum EmbedKind {
+	Generic = 'Generic',
+	Instagram = 'Instagram',
+	Spotify = 'Spotify',
+	YouTube = 'YouTube',
 }
 
 interface YouTube {
@@ -30,6 +30,7 @@ interface YouTube {
 	id: string;
 	width: number;
 	height: number;
+	tracking: EmbedTracksType;
 }
 
 interface Spotify {
@@ -37,12 +38,14 @@ interface Spotify {
 	src: string;
 	width: number;
 	height: number;
+	tracking: EmbedTracksType;
 }
 
 interface Instagram {
 	kind: EmbedKind.Instagram;
 	id: string;
 	caption: Option<string>;
+	tracking: EmbedTracksType;
 }
 
 interface Generic {
@@ -165,6 +168,10 @@ const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
 			id,
 			width: element.videoTypeData?.width ?? 380,
 			height: element.videoTypeData?.height ?? 300,
+			source: fromNullable(element.videoTypeData?.source),
+			sourceDomain: fromNullable(element.videoTypeData?.sourceDomain),
+			tracking:
+				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 		})),
 	);
 
@@ -179,6 +186,10 @@ const parseSpotifyAudio = (parser: DocParser) => (
 			src,
 			width,
 			height,
+			source: fromNullable(element.audioTypeData?.source),
+			sourceDomain: fromNullable(element.audioTypeData?.sourceDomain),
+			tracking:
+				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 		})),
 	);
 
@@ -238,6 +249,10 @@ const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 				element.instagramTypeData?.caption ??
 					element.instagramTypeData?.alt,
 			),
+			source: fromNullable(element.instagramTypeData?.source),
+			sourceDomain: fromNullable(element.instagramTypeData?.sourceDomain),
+			tracking:
+				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 		})),
 	);
 };
@@ -269,7 +284,7 @@ const parseGeneric = (parser: DocParser) => (
 
 // ----- Exports ----- //
 
-export type { Embed, Generic };
+export type { Embed, Generic, Spotify, YouTube, Instagram };
 
 export {
 	EmbedKind,
