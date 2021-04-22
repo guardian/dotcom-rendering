@@ -185,15 +185,12 @@ const isFullReviewLink = (element: CAPIElement): boolean => {
 	const wrapper =
 		frag.firstElementChild?.firstElementChild?.firstElementChild;
 
-	const hasPWrapper = wrapper && wrapper.nodeName === 'P';
-	const containsStrongTags =
-		wrapper && wrapper.outerHTML.includes('<strong>');
-	const containsLinks = wrapper && wrapper.outerHTML.includes('<a ');
+	const hasPWrapper = wrapper?.nodeName === 'P';
+	const containsStrongTags = wrapper?.outerHTML.includes('<strong>');
+	const containsLinks = wrapper?.outerHTML.includes('<a ');
 
 	const hasFullReviewText =
-		wrapper &&
-		wrapper.firstElementChild &&
-		wrapper.firstElementChild.textContent === 'Full review:';
+		wrapper?.firstElementChild?.textContent === 'Full review:';
 
 	return (
 		!!hasULWrapper &&
