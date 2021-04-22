@@ -44,6 +44,67 @@ const extractH3 = (element: CAPIElement): string => {
 	return '';
 };
 
+const isStarRating = (element: CAPIElement): boolean => {
+	const isStar = (charactor: string): boolean => {
+		return charactor === '★' || charactor === '☆';
+	};
+
+	if (!element) return false;
+	// Checks if this element is a 'star rating' based on the convention: <p>★★★★☆</p>
+	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
+		return false;
+	const frag = JSDOM.fragment(element.html);
+	const hasPTags = frag?.firstElementChild?.nodeName === 'P';
+	const text = frag.textContent || '';
+	// Loop the string making sure each letter is a star
+	for (const letter of text) {
+		if (!isStar(letter)) return false;
+	}
+	const hasFiveStars = text.length === 5;
+	return hasPTags && hasFiveStars;
+};
+
+const extractStarCount = (element: CAPIElement): number => {
+	const isSelectedStar = (charactor: string): boolean => {
+		return charactor === '★';
+	};
+	// Returns the count of stars
+	const textElement = element as TextBlockElement;
+	const frag = JSDOM.fragment(textElement.html);
+	const text = frag.textContent || '';
+	// Loop the string counting selected stars
+	let starCount = 0;
+	for (const letter of text) {
+		if (isSelectedStar(letter)) starCount += 1;
+	}
+	return starCount;
+};
+
+const addStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
+	const withStars: CAPIElement[] = [];
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			isStarRating(thisElement)
+		) {
+			const rating = extractStarCount(thisElement);
+			// Inline this image
+			withStars.push({
+				_type:
+					'model.dotcomrendering.pageElements.StarRatingBlockElement',
+				elementId: thisElement.elementId,
+				rating,
+				size: 'large',
+			});
+		} else {
+			// Pass through
+			withStars.push(thisElement);
+		}
+	});
+	return withStars;
+};
+
 const inlineImages = (elements: CAPIElement[]): CAPIElement[] => {
 	// Inline all images
 	// Why?
@@ -186,6 +247,11 @@ class Enhancer {
 		this.elements = addFullReviewLink(this.elements);
 		return this;
 	}
+
+	addStarRatings() {
+		this.elements = addStarRatings(this.elements);
+		return this;
+	}
 }
 
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
@@ -195,6 +261,8 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			.addH3s()
 			// Turn review links into components
 			.addFullReviewLink()
+			// Turn ascii stars into components
+			.addStarRatings()
 			// Always use role `inline` for images
 			.inlineImages().elements
 	);

@@ -189,7 +189,193 @@ describe('Enhance Numbered Lists', () => {
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
 
-	it.only('should create full review elements', () => {
+	it('replaces ★★★★☆ with the StarRating component', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>★★★★☆</p>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.StarRatingBlockElement',
+							elementId: 'mockId',
+							rating: 4,
+							size: 'large',
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('ignores ascii stars when there is other text present', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>I give this 4 ★★★★☆</p>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = input;
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('ignores ascii stars when there are not 5 stars', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>★★☆</p>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = input;
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('ignores ascii stars that are not wrapped in p tags', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<h2>★★★★☆</h2>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = input;
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('can handle zero (selected) stars', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>☆☆☆☆☆</p>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.StarRatingBlockElement',
+							elementId: 'mockId',
+							rating: 0,
+							size: 'large',
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('can handle really good things that have five stars!', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>★★★★★</p>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.StarRatingBlockElement',
+							elementId: 'mockId',
+							rating: 5,
+							size: 'large',
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('should create full review elements', () => {
 		const input: CAPIType = {
 			...NumberedList,
 			blocks: [
