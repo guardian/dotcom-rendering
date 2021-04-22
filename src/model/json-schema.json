@@ -1710,6 +1710,9 @@
                 },
                 "starRating": {
                     "type": "number"
+                },
+                "isAvatar": {
+                    "type": "boolean"
                 }
             },
             "required": [
