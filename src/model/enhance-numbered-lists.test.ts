@@ -11,38 +11,6 @@ const metaData = {
 };
 
 describe('Enhance Numbered Lists', () => {
-	it('sets the role for the image to be inline', () => {
-		const input: CAPIType = {
-			...NumberedList,
-			blocks: [
-				{
-					...metaData,
-					elements: [
-						{
-							...images[0],
-							role: 'thumbnail',
-						},
-					],
-				},
-			],
-		};
-		const expectedOutput: CAPIType = {
-			...NumberedList,
-			blocks: [
-				{
-					...metaData,
-					elements: [
-						{
-							...images[0],
-							role: 'inline',
-						},
-					],
-				},
-			],
-		};
-		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
-	});
-
 	it('does not enhance articles if they are not numbered lists', () => {
 		const input: CAPIType = {
 			...Article,
@@ -403,7 +371,6 @@ describe('Enhance Numbered Lists', () => {
 						{
 							...images[0],
 							starRating: 1,
-							role: 'inline',
 						},
 					],
 				},
@@ -441,8 +408,33 @@ describe('Enhance Numbered Lists', () => {
 						{
 							...images[0],
 							starRating: 0,
-							role: 'inline',
 						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('Sets the isAvatar flag for thumbnail images', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [{ ...images[0], role: 'thumbnail' }],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{ ...images[0], role: 'thumbnail', isAvatar: true },
 					],
 				},
 			],
