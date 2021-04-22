@@ -1,7 +1,6 @@
 import { Pillar, Special } from '@guardian/types';
 
 export const decideTheme = (format: CAPIFormat): Theme => {
-	return Pillar.Opinion;
 	const { theme } = format;
 	switch (theme) {
 		case 'NewsPillar':
