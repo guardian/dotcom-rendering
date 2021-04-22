@@ -32,7 +32,7 @@ import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBloc
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
-import { ItemListLink } from 'src/web/components/elements/ItemListLink';
+import { ItemListLink } from '@root/src/web/components/elements/ItemListLink';
 import {
 	WitnessVideoBlockComponent,
 	WitnessImageBlockComponent,
@@ -289,11 +289,14 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.ItemListLink':
 			return (
-				<ItemListLink
-					href={element.href}
-					title={element.title}
-					pillar={format.theme}
-				/>
+				<>
+					<DividerBlockComponent size="full" />
+					<ItemListLink
+						href={element.href}
+						title={element.title}
+						pillar={format.theme}
+					/>
+				</>
 			);
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return (
