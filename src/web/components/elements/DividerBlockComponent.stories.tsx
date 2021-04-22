@@ -28,16 +28,19 @@ export const Default = () => {
 			`}
 		>
 			<TextBlockComponent
-				html="<p>This is a dinkus</p>"
+				html={lorem}
 				format={format}
 				isFirstParagraph={true}
 			/>
+			<DividerBlockComponent />
+			<p>Partial (default)</p>
 			<TextBlockComponent
 				html={lorem}
 				format={format}
 				isFirstParagraph={false}
 			/>
-			<DividerBlockComponent />
+			<DividerBlockComponent size="full" />
+			<p>Full</p>
 			<TextBlockComponent
 				html={lorem}
 				format={format}
