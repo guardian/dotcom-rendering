@@ -180,12 +180,10 @@ const isFullReviewLink = (element: CAPIElement): boolean => {
 
 	const hasULWrapper = frag.firstElementChild.nodeName === 'UL';
 	const hasLINestedWrapper =
-		frag.firstElementChild.firstElementChild &&
-		frag.firstElementChild.firstElementChild.nodeName === 'LI';
+		frag.firstElementChild?.firstElementChild?.nodeName === 'LI';
 
 	const wrapper =
-		frag.firstElementChild.firstElementChild &&
-		frag.firstElementChild.firstElementChild.firstElementChild;
+		frag.firstElementChild?.firstElementChild?.firstElementChild;
 
 	const hasPWrapper = wrapper && wrapper.nodeName === 'P';
 	const containsStrongTags =
