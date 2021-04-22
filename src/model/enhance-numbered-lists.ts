@@ -189,16 +189,12 @@ const isFullReviewLink = (element: CAPIElement): boolean => {
 	const containsStrongTags = wrapper?.outerHTML.includes('<strong>');
 	const containsLinks = wrapper?.outerHTML.includes('<a ');
 
-	const hasFullReviewText =
-		wrapper?.firstElementChild?.textContent === 'Full review:';
-
 	return (
 		!!hasULWrapper &&
 		!!hasLINestedWrapper &&
 		!!hasPWrapper &&
 		!!containsStrongTags &&
-		!!containsLinks &&
-		!!hasFullReviewText
+		!!containsLinks
 	);
 };
 
