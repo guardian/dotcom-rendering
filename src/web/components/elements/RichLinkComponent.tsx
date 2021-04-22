@@ -3,7 +3,7 @@ import React from 'react';
 import { RichLink } from '@root/src/web/components/RichLink';
 import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';

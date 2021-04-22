@@ -7,7 +7,7 @@ import { between } from '@guardian/src-foundations/mq';
 
 import ShareIcon from '@frontend/static/icons/share.svg';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 import { formatCount } from '@root/src/web/lib/formatCount';
 import { joinUrl } from '@root/src/lib/joinUrl';
 
