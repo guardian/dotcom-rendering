@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Pillar } from '@guardian/types';
 
-import { FullReview } from './FullReview';
+import { ItemListLink } from './ItemListLink';
 
 export default {
-	component: FullReview,
-	title: 'Components/FullReview',
+	component: ItemListLink,
+	title: 'Components/ItemListLink',
 };
 
 export const Default = () => (
-	<FullReview
+	<ItemListLink
 		href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu"
 		title="OnePlus 7T Pro review: the best kind of deja vu"
 		pillar={Pillar.News}

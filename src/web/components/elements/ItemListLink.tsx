@@ -11,10 +11,9 @@ type Props = {
 	title: string;
 	pillar: Pillar;
 };
-export const FullReview = ({ href, title, pillar }: Props) => {
+export const ItemListLink = ({ href, title, pillar }: Props) => {
 	return (
 		<>
-			<hr />
 			<p
 				className={css`
 					${textSans.small()}
