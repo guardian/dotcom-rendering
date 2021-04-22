@@ -106,6 +106,65 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	return withH3s;
 };
 
+const isFullReviewLink = (element: CAPIElement): boolean => {
+	if (!element) return false;
+	// Checks if this element is a 'full review' based on the convention: <ul> <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro review: the best kind of deja vu</a></p></li> </ul>
+	if (
+		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
+	) {
+		return false;
+	}
+	const frag = JSDOM.fragment(element.html);
+	if (!frag || !frag.firstElementChild) return false;
+
+	const hasULWrapper = frag.firstElementChild.nodeName === 'UL';
+	const hasLINestedWrapper =
+		frag.firstElementChild.firstElementChild &&
+		frag.firstElementChild.firstElementChild.nodeName === 'LI';
+
+	const wrapper =
+		frag.firstElementChild.firstElementChild &&
+		frag.firstElementChild.firstElementChild.firstElementChild;
+
+	const hasPWrapper = wrapper && wrapper.nodeName === 'P';
+	const containsStrongTags =
+		wrapper && wrapper.outerHTML.includes('<strong>');
+	const containsLinks = wrapper && wrapper.outerHTML.includes('<a ');
+
+	const hasFullReviewText =
+		wrapper &&
+		wrapper.firstElementChild &&
+		wrapper.firstElementChild.textContent === 'Full review:';
+
+	return (
+		!!hasULWrapper &&
+		!!hasLINestedWrapper &&
+		!!hasPWrapper &&
+		!!containsStrongTags &&
+		!!containsLinks &&
+		!!hasFullReviewText
+	);
+};
+
+const addFullReviewLink = (elements: CAPIElement[]): CAPIElement[] =>
+	elements.map((element) => {
+		if (
+			element._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			isFullReviewLink(element)
+		) {
+			const frag = JSDOM.fragment(element.html);
+			const link = frag.querySelector('a');
+			return {
+				_type: 'model.dotcomrendering.pageElements.FullReviewLink',
+				elementId: element.elementId,
+				href: link?.href || '',
+				title: link?.textContent || '',
+			};
+		}
+		return element;
+	});
+
 class Enhancer {
 	elements: CAPIElement[];
 
@@ -122,6 +181,11 @@ class Enhancer {
 		this.elements = addH3s(this.elements);
 		return this;
 	}
+
+	addFullReviewLink() {
+		this.elements = addFullReviewLink(this.elements);
+		return this;
+	}
 }
 
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
@@ -129,6 +193,8 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 		new Enhancer(elements)
 			// Turn false h3s into real ones
 			.addH3s()
+			// Turn review links into components
+			.addFullReviewLink()
 			// Always use role `inline` for images
 			.inlineImages().elements
 	);

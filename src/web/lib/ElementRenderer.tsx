@@ -32,6 +32,7 @@ import { VimeoBlockComponent } from '@root/src/web/components/elements/VimeoBloc
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/elements/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/elements/YoutubeBlockComponent';
+import { FullReview } from '@root/src/web/components/elements/FullReview';
 import {
 	WitnessVideoBlockComponent,
 	WitnessImageBlockComponent,
@@ -285,6 +286,17 @@ export const ElementRenderer = ({
 						html={element.body}
 					/>
 				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.FullReviewLink':
+			return (
+				<>
+					<FullReview
+						href={element.href}
+						title={element.title}
+						pillar={format.theme}
+					/>
+					<DividerBlockComponent size="full" />
+				</>
 			);
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return (

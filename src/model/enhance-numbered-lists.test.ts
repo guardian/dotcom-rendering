@@ -188,4 +188,45 @@ describe('Enhance Numbered Lists', () => {
 		};
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
+
+	it.only('should create full review elements', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<ul> <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro review: the best kind of deja vu</a></p></li> </ul>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.FullReviewLink',
+							elementId: 'mockId',
+							href:
+								'https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu',
+							title:
+								'OnePlus 7T Pro review: the best kind of deja vu',
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
 });
