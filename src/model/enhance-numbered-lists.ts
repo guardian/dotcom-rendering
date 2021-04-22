@@ -217,10 +217,9 @@ const addItemListLink = (elements: CAPIElement[]): CAPIElement[] => {
 			updatedElements.push({
 				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 			});
-			return updatedElements;
+		} else {
+			updatedElements.push(element);
 		}
-
-		return element;
 	});
 	return updatedElements;
 };
