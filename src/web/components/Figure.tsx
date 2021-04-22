@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -129,13 +129,6 @@ const roleCss = {
 	`,
 };
 
-const round = css`
-	border-radius: 50%;
-	object-fit: cover;
-	height: 100%;
-	width: 100%;
-`;
-
 const decidePosition = (role: RoleType | 'richLink') => {
 	switch (role) {
 		case 'inline':
@@ -172,7 +165,7 @@ export const Figure = ({
 		return <figure id={id}>{children}</figure>;
 	}
 	return (
-		<figure id={id} className={cx(decidePosition(role), round)}>
+		<figure id={id} className={decidePosition(role)}>
 			{children}
 		</figure>
 	);
