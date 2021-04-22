@@ -111,6 +111,9 @@
                         "$ref": "#/definitions/SpotifyBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/StarRatingBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/SubheadingBlockElement"
                     },
                     {
@@ -2259,6 +2262,40 @@
                 "isThirdPartyTracking"
             ]
         },
+        "StarRatingBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.StarRatingBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "rating": {
+                    "type": "number"
+                },
+                "size": {
+                    "$ref": "#/definitions/RatingSizeType"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "rating",
+                "size"
+            ]
+        },
+        "RatingSizeType": {
+            "enum": [
+                "large",
+                "medium",
+                "small"
+            ],
+            "type": "string"
+        },
         "SubheadingBlockElement": {
             "type": "object",
             "properties": {
@@ -3205,6 +3242,9 @@
                             },
                             {
                                 "$ref": "#/definitions/SpotifyBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/StarRatingBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/SubheadingBlockElement"

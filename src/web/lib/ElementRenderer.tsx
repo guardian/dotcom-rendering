@@ -22,6 +22,7 @@ import { MultiImageBlockComponent } from '@root/src/web/components/elements/Mult
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
+import { StarRatingBlockComponent } from '@root/src/web/components/elements/StarRatingBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { TableBlockComponent } from '@root/src/web/components/elements/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
@@ -565,6 +566,14 @@ export const ElementRenderer = ({
 						/>
 					</ClickToView>
 				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.StarRatingBlockElement':
+			return (
+				<StarRatingBlockComponent
+					key={index}
+					rating={element.rating}
+					size={element.size}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
 			return <SubheadingBlockComponent key={index} html={element.html} />;
