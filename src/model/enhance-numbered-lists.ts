@@ -80,9 +80,36 @@ const extractStarCount = (element: CAPIElement): number => {
 	return starCount;
 };
 
-const addStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
+const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
+	const starified: CAPIElement[] = [];
+	elements.forEach((thisElement, index) => {
+		const previousElement = elements[index - 1];
+		if (
+			thisElement._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			isStarRating(previousElement)
+		) {
+			console.log('FOUNNNDDD');
+			const rating = extractStarCount(previousElement);
+			// Add this image using the rating
+			starified.push({
+				...thisElement,
+				starRating: rating,
+			});
+			// Remove the previous element now that we've put the stars on top of the image
+			starified.splice(index - 1, 1);
+		} else {
+			// Pass through
+			starified.push(thisElement);
+		}
+	});
+	return starified;
+};
+
+const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 	const withStars: CAPIElement[] = [];
 	elements.forEach((thisElement) => {
+		console.log('inlineStarRatings', thisElement._type);
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
@@ -184,8 +211,13 @@ class Enhancer {
 		return this;
 	}
 
-	addStarRatings() {
-		this.elements = addStarRatings(this.elements);
+	starifyImages() {
+		this.elements = starifyImages(this.elements);
+		return this;
+	}
+
+	inlineStarRatings() {
+		this.elements = inlineStarRatings(this.elements);
 		return this;
 	}
 }
@@ -195,8 +227,9 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 		new Enhancer(elements)
 			// Turn false h3s into real ones
 			.addH3s()
+			.starifyImages()
 			// Turn ascii stars into components
-			.addStarRatings()
+			.inlineStarRatings()
 			// Always use role `inline` for images
 			.inlineImages().elements
 	);
