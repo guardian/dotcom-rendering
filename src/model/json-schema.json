@@ -1707,6 +1707,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "starRating": {
+                    "type": "number"
                 }
             },
             "required": [
