@@ -3,7 +3,7 @@ import React from 'react';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { css, cx } from 'emotion';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 const figureStyle = css`
@@ -36,13 +36,13 @@ export const Caption: React.FC<{
 	children,
 }) => {
 	const iconStyle = css`
-		fill: ${pillarPalette[pillar].main};
+		fill: ${pillarPalette_DO_NOT_USE[pillar].main};
 		padding-right: 3px;
 	`;
 
 	const captionLink = css`
 		a {
-			color: ${pillarPalette[pillar].main};
+			color: ${pillarPalette_DO_NOT_USE[pillar].main};
 			text-decoration: none;
 		}
 		a:hover {

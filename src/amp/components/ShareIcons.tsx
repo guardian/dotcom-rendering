@@ -7,12 +7,16 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
-import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
+import {
+	pillarMap,
+	pillarPalette_DO_NOT_USE,
+	neutralBorder,
+} from '@root/src/lib/pillars';
 
 const pillarFill = pillarMap(
 	(pillar) =>
 		css`
-			fill: ${pillarPalette[pillar].main};
+			fill: ${pillarPalette_DO_NOT_USE[pillar].main};
 		`,
 );
 
@@ -49,8 +53,8 @@ const shareIcon = (pillar: Theme) => css`
 	}
 
 	:hover {
-		background-color: ${pillarPalette[pillar].main};
-		border-color: ${pillarPalette[pillar].main};
+		background-color: ${pillarPalette_DO_NOT_USE[pillar].main};
+		border-color: ${pillarPalette_DO_NOT_USE[pillar].main};
 		fill: white;
 	}
 `;

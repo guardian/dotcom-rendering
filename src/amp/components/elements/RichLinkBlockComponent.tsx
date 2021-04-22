@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 import { text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
 const richLinkContainer = css`
 	float: left;
@@ -18,7 +18,7 @@ const richLinkContainer = css`
 `;
 
 const pillarColour = (pillar: Theme) => css`
-	color: ${pillarPalette[pillar].dark};
+	color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 `;
 
 const richLink = css`

@@ -16,7 +16,8 @@ import {
 	labs,
 } from '@guardian/src-foundations';
 
-import { pillarPalette } from '@root/src/lib/pillars';
+// Here is the one place where we use `pillarPalette`
+import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
