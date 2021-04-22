@@ -89,7 +89,6 @@ const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 				'model.dotcomrendering.pageElements.ImageBlockElement' &&
 			isStarRating(previousElement)
 		) {
-			console.log('FOUNNNDDD');
 			const rating = extractStarCount(previousElement);
 			// Add this image using the rating
 			starified.push({
@@ -109,7 +108,6 @@ const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 	const withStars: CAPIElement[] = [];
 	elements.forEach((thisElement) => {
-		console.log('inlineStarRatings', thisElement._type);
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
