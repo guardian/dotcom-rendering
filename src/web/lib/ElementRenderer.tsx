@@ -289,14 +289,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.ItemListLink':
 			return (
-				<>
-					<ItemListLink
-						href={element.href}
-						title={element.title}
-						pillar={format.theme}
-					/>
-					<DividerBlockComponent size="full" />
-				</>
+				<ItemListLink
+					href={element.href}
+					title={element.title}
+					pillar={format.theme}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return (
