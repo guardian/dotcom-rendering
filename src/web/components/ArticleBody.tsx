@@ -7,6 +7,7 @@ import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
 import { Design, Display } from '@guardian/types';
 import type { Format } from '@guardian/types';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
 	format: Format;
@@ -25,6 +26,16 @@ const globalH2Styles = (display: Display) => css`
 			: headline.xxsmall({ fontWeight: 'bold' })};
 	}
 `;
+
+const globalH3Styles = (display: Display) => {
+	if (display !== Display.NumberedList) return null;
+	return css`
+		h3 {
+			${headline.xxsmall({ fontWeight: 'bold' })};
+			margin-bottom: ${space[2]}px;
+		}
+	`;
+};
 
 const globalStrongStyles = css`
 	strong {
@@ -95,6 +106,7 @@ export const ArticleBody = ({
 			className={cx(
 				bodyPadding,
 				globalH2Styles(format.display),
+				globalH3Styles(format.display),
 				globalStrongStyles,
 				globalImgStyles,
 				globalLinkStyles(palette),

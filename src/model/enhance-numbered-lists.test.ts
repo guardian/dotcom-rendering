@@ -26,7 +26,6 @@ describe('Enhance Numbered Lists', () => {
 				},
 			],
 		};
-
 		const expectedOutput: CAPIType = {
 			...NumberedList,
 			blocks: [
@@ -41,7 +40,6 @@ describe('Enhance Numbered Lists', () => {
 				},
 			],
 		};
-
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
 
@@ -60,7 +58,6 @@ describe('Enhance Numbered Lists', () => {
 				},
 			],
 		};
-
 		const expectedOutput: CAPIType = {
 			...Article,
 			blocks: [
@@ -75,7 +72,120 @@ describe('Enhance Numbered Lists', () => {
 				},
 			],
 		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
 
+	it('replaces faux h3s with real ones, prefixing them with a divider', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p><strong>Faux H3 text</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<h3>Faux H3 text</h3>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('does not set a h3 if there is more than one strong tag', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p><strong>Strong 1</strong><strong>Strong 2</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p><strong>Strong 1</strong><strong>Strong 2</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('does not set a h3 if there if the html does not end with a strong p tag combo', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p><strong>abc</strong>some other text</p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p><strong>abc</strong>some other text</p>',
+						},
+					],
+				},
+			],
+		};
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
 });
