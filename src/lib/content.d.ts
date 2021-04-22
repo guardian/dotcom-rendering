@@ -152,7 +152,7 @@ interface ExplainerAtomBlockElement {
 }
 
 interface FullReviewBlockElement {
-	_type: 'model.dotcomrendering.pageElements.FullReviewLink';
+	_type: 'model.dotcomrendering.pageElements.ItemListLink';
 	href: string;
 	elementId: string;
 	title: string;

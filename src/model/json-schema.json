@@ -1399,7 +1399,7 @@
                 "_type": {
                     "type": "string",
                     "enum": [
-                        "model.dotcomrendering.pageElements.FullReviewLink"
+                        "model.dotcomrendering.pageElements.ItemListLink"
                     ]
                 },
                 "href": {

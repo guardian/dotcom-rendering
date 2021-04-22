@@ -287,7 +287,7 @@ export const ElementRenderer = ({
 					/>
 				</Figure>
 			);
-		case 'model.dotcomrendering.pageElements.FullReviewLink':
+		case 'model.dotcomrendering.pageElements.ItemListLink':
 			return (
 				<>
 					<FullReview

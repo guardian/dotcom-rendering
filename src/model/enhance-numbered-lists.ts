@@ -167,7 +167,7 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	return withH3s;
 };
 
-const isFullReviewLink = (element: CAPIElement): boolean => {
+const isItemListLink = (element: CAPIElement): boolean => {
 	if (!element) return false;
 	// Checks if this element is a 'full review' based on the convention: <ul> <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro review: the best kind of deja vu</a></p></li> </ul>
 	if (
@@ -198,17 +198,17 @@ const isFullReviewLink = (element: CAPIElement): boolean => {
 	);
 };
 
-const addFullReviewLink = (elements: CAPIElement[]): CAPIElement[] =>
+const addItemListLink = (elements: CAPIElement[]): CAPIElement[] =>
 	elements.map((element) => {
 		if (
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
-			isFullReviewLink(element)
+			isItemListLink(element)
 		) {
 			const frag = JSDOM.fragment(element.html);
 			const link = frag.querySelector('a');
 			return {
-				_type: 'model.dotcomrendering.pageElements.FullReviewLink',
+				_type: 'model.dotcomrendering.pageElements.ItemListLink',
 				elementId: element.elementId,
 				href: link?.href || '',
 				title: link?.textContent || '',
@@ -234,8 +234,8 @@ class Enhancer {
 		return this;
 	}
 
-	addFullReviewLink() {
-		this.elements = addFullReviewLink(this.elements);
+	addItemListLink() {
+		this.elements = addItemListLink(this.elements);
 		return this;
 	}
 
@@ -251,7 +251,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			// Turn false h3s into real ones
 			.addH3s()
 			// Turn review links into components
-			.addFullReviewLink()
+			.addItemListLink()
 			// Turn ascii stars into components
 			.addStarRatings()
 			// Always use role `inline` for images

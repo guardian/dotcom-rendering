@@ -401,7 +401,7 @@ describe('Enhance Numbered Lists', () => {
 					elements: [
 						{
 							_type:
-								'model.dotcomrendering.pageElements.FullReviewLink',
+								'model.dotcomrendering.pageElements.ItemListLink',
 							elementId: 'mockId',
 							href:
 								'https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu',
