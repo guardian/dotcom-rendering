@@ -374,4 +374,80 @@ describe('Enhance Numbered Lists', () => {
 
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
+
+	it('When stars are found ahead of images, it updates the image and then removes the stars', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>★☆☆☆☆</p>',
+						},
+						images[0],
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							...images[0],
+							starRating: 1,
+							role: 'inline',
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('When stars are found ahead of images, it updates the image and then removes the stars, even when rating is zero', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>☆☆☆☆☆</p>',
+						},
+						images[0],
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							...images[0],
+							starRating: 0,
+							role: 'inline',
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
 });

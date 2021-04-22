@@ -336,7 +336,7 @@ export const ElementRenderer = ({
 						element={element}
 						hideCaption={hideCaption}
 						isMainMedia={isMainMedia}
-						starRating={starRating}
+						starRating={starRating || element.starRating}
 						title={element.title}
 					/>
 				</Figure>

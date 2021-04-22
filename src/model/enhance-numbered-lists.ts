@@ -80,7 +80,49 @@ const extractStarCount = (element: CAPIElement): number => {
 	return starCount;
 };
 
-const addStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
+const isImage = (element: CAPIElement): boolean => {
+	return (
+		element?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+	);
+};
+
+const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
+	const starified: CAPIElement[] = [];
+	let previousRating: number | undefined;
+	elements.forEach((thisElement, index) => {
+		switch (thisElement._type) {
+			case 'model.dotcomrendering.pageElements.TextBlockElement':
+				if (isStarRating(thisElement) && isImage(elements[index + 1])) {
+					// Remember this rating so we can add it to the next element
+					previousRating = extractStarCount(thisElement);
+				} else {
+					// Pass through
+					starified.push(thisElement);
+				}
+				break;
+			case 'model.dotcomrendering.pageElements.ImageBlockElement':
+				if (previousRating !== undefined) {
+					// Add this image using the rating we remembered
+					starified.push({
+						...thisElement,
+						starRating: previousRating,
+					});
+					previousRating = undefined;
+				} else {
+					// Pass through
+					starified.push(thisElement);
+				}
+				break;
+			default:
+				// Pass through
+				starified.push(thisElement);
+		}
+	});
+	return starified;
+};
+
+const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 	const withStars: CAPIElement[] = [];
 	elements.forEach((thisElement) => {
 		if (
@@ -184,8 +226,13 @@ class Enhancer {
 		return this;
 	}
 
-	addStarRatings() {
-		this.elements = addStarRatings(this.elements);
+	starifyImages() {
+		this.elements = starifyImages(this.elements);
+		return this;
+	}
+
+	inlineStarRatings() {
+		this.elements = inlineStarRatings(this.elements);
 		return this;
 	}
 }
@@ -195,8 +242,9 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 		new Enhancer(elements)
 			// Turn false h3s into real ones
 			.addH3s()
+			.starifyImages()
 			// Turn ascii stars into components
-			.addStarRatings()
+			.inlineStarRatings()
 			// Always use role `inline` for images
 			.inlineImages().elements
 	);

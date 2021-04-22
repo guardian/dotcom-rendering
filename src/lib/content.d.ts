@@ -211,6 +211,7 @@ interface ImageBlockElement {
 	displayCredit?: boolean;
 	role: RoleType;
 	title?: string;
+	starRating?: number;
 }
 
 interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
