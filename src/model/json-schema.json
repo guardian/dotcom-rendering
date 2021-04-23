@@ -84,6 +84,9 @@
                         "$ref": "#/definitions/InteractiveBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/ItemBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/MapBlockElement"
                     },
                     {
@@ -1899,6 +1902,28 @@
                 "elementId"
             ]
         },
+        "ItemBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.ItemLinkBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "html"
+            ]
+        },
         "MapBlockElement": {
             "type": "object",
             "properties": {
@@ -3320,6 +3345,9 @@
                             },
                             {
                                 "$ref": "#/definitions/InteractiveBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/ItemBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/MapBlockElement"
