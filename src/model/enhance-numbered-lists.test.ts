@@ -469,6 +469,11 @@ describe('Enhance Numbered Lists', () => {
 					elements: [
 						{
 							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+						},
+						{
+							_type:
 								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 							elementId: 'mockId',
 							position: 1,
@@ -528,6 +533,11 @@ describe('Enhance Numbered Lists', () => {
 					elements: [
 						{
 							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+						},
+						{
+							_type:
 								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 							elementId: 'mockId1',
 							position: 1,
@@ -540,11 +550,21 @@ describe('Enhance Numbered Lists', () => {
 						},
 						{
 							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+						},
+						{
+							_type:
 								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 							elementId: 'mockId2',
 							position: 2,
 							html: '<h2>Other text</h2>',
 							format: NumberedList.format,
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
 						},
 						{
 							_type:
