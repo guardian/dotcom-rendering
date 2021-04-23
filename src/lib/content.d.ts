@@ -249,6 +249,12 @@ interface InteractiveBlockElement {
 	caption?: string;
 }
 
+interface ItemBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement';
+	elementId: string;
+	html: string;
+}
+
 interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	elementId: string;
@@ -569,6 +575,7 @@ type CAPIElement =
 	| InstagramBlockElement
 	| InteractiveAtomBlockElement
 	| InteractiveBlockElement
+	| ItemBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
