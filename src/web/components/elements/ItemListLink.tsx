@@ -4,14 +4,11 @@ import { css } from 'emotion';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 
-import { pillarPalette } from '@root/src/lib/pillars';
-
 type Props = {
 	href: string;
 	title: string;
-	pillar: Pillar;
 };
-export const ItemListLink = ({ href, title, pillar }: Props) => {
+export const ItemListLink = ({ href, title }: Props) => {
 	return (
 		<>
 			<p
@@ -24,8 +21,7 @@ export const ItemListLink = ({ href, title, pillar }: Props) => {
 			</p>
 			<a
 				className={css`
-					color: ${pillarPalette[pillar].main};
-					${headline.xxxsmall({ fontWeight: 'bold' })};
+					${headline.xxxsmall({ fontWeight: 'bold' })}
 					text-decoration: none;
 					:hover {
 						text-decoration: underline;
