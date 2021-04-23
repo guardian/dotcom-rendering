@@ -209,13 +209,14 @@ const addItemListLink = (elements: CAPIElement[]): CAPIElement[] => {
 			const frag = JSDOM.fragment(element.html);
 			const link = frag.querySelector('a');
 			updatedElements.push({
+				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
+				size: 'full',
+			});
+			updatedElements.push({
 				_type: 'model.dotcomrendering.pageElements.ItemListLink',
 				elementId: element.elementId,
 				href: link?.href || '',
 				title: link?.textContent || '',
-			});
-			updatedElements.push({
-				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 			});
 		} else {
 			updatedElements.push(element);
