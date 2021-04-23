@@ -8,7 +8,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -33,17 +33,18 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
+import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
+import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import {
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -321,6 +322,12 @@ export const ImmersiveLayout = ({
 							/>
 						</Section>
 					</header>
+
+					{format.theme === Special.Labs && (
+						<Stuck>
+							<LabsHeader />
+						</Stuck>
+					)}
 
 					<MainMedia
 						format={format}

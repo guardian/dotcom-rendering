@@ -33,6 +33,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
+import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -249,22 +250,22 @@ export const ShowcaseLayout = ({
 
 	return (
 		<>
-			<div>
-				<Stuck>
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</Stuck>
-				<SendToBack>
-					{format.theme !== Special.Labs && (
+			{format.theme !== Special.Labs ? (
+				<div>
+					<Stuck>
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+						>
+							<HeaderAdSlot
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+								display={format.display}
+							/>
+						</Section>
+					</Stuck>
+					<SendToBack>
 						<Section
 							showTopBorder={false}
 							showSideBorders={false}
@@ -277,8 +278,53 @@ export const ShowcaseLayout = ({
 								mmaUrl={CAPI.config.mmaUrl}
 							/>
 						</Section>
-					)}
 
+						<Section
+							showSideBorders={true}
+							borderColour={brandLine.primary}
+							showTopBorder={false}
+							padded={false}
+							backgroundColour={brandBackground.primary}
+						>
+							<Nav
+								nav={NAV}
+								format={{
+									...format,
+									theme: getCurrentPillar(CAPI),
+								}}
+								subscribeUrl={
+									CAPI.nav.readerRevenueLinks.header.subscribe
+								}
+								edition={CAPI.editionId}
+							/>
+						</Section>
+
+						{NAV.subNavSections && (
+							<Section
+								backgroundColour={palette.background.article}
+								padded={false}
+								sectionId="sub-nav-root"
+							>
+								<SubNav
+									subNavSections={NAV.subNavSections}
+									currentNavLink={NAV.currentNavLink}
+									palette={palette}
+								/>
+							</Section>
+						)}
+
+						<Section
+							backgroundColour={palette.background.article}
+							padded={false}
+							showTopBorder={false}
+						>
+							<GuardianLines count={4} palette={palette} />
+						</Section>
+					</SendToBack>
+				</div>
+			) : (
+				// Else, this is a labs article so just show Nav and the Labs header
+				<>
 					<Section
 						showSideBorders={true}
 						borderColour={brandLine.primary}
@@ -299,29 +345,11 @@ export const ShowcaseLayout = ({
 						/>
 					</Section>
 
-					{NAV.subNavSections && (
-						<Section
-							backgroundColour={palette.background.article}
-							padded={false}
-							sectionId="sub-nav-root"
-						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								palette={palette}
-							/>
-						</Section>
-					)}
-
-					<Section
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<GuardianLines count={4} palette={palette} />
-					</Section>
-				</SendToBack>
-			</div>
+					<Stuck>
+						<LabsHeader />
+					</Stuck>
+				</>
+			)}
 
 			<Section
 				showTopBorder={false}
