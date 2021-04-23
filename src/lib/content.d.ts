@@ -118,6 +118,7 @@ interface DisclaimerBlockElement {
 
 interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
+	size?: 'full' | 'partial';
 }
 
 interface DocumentBlockElement extends ThirdPartyEmbeddedContent {

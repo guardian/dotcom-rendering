@@ -187,7 +187,7 @@ export const ElementRenderer = ({
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
-			return <DividerBlockComponent />;
+			return <DividerBlockComponent size={element.size} />;
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return (
 				<Figure
@@ -288,16 +288,7 @@ export const ElementRenderer = ({
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.ItemListLink':
-			return (
-				<>
-					<DividerBlockComponent size="full" />
-					<ItemListLink
-						href={element.href}
-						title={element.title}
-						pillar={format.theme}
-					/>
-				</>
-			);
+			return <ItemListLink href={element.href} title={element.title} />;
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return (
 				<Figure
