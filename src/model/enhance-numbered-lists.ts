@@ -354,7 +354,7 @@ const enhance = (
 		new Enhancer(elements, format)
 			// Turn false h3s into real ones
 			.addH3s()
-			// Turn false h3s into real ones
+			// Add item links
 			.addItemLinks()
 			// Add numbered titles
 			.addTitles()
