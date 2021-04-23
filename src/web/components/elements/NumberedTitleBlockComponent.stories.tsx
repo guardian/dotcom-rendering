@@ -7,7 +7,7 @@ export default {
 	title: 'Components/NumberedTitleBlockComponent',
 };
 
-export const Simple = () => (
+export const JustH2 = () => (
 	<div>
 		<NumberedTitleBlockComponent
 			position={1}
@@ -20,7 +20,7 @@ export const Simple = () => (
 		/>
 	</div>
 );
-Simple.story = { name: 'Simple' };
+JustH2.story = { name: 'with just h2 text' };
 
 export const Strong = () => (
 	<div>
@@ -35,9 +35,9 @@ export const Strong = () => (
 		/>
 	</div>
 );
-Strong.story = { name: 'Simple' };
+Strong.story = { name: 'with only strong text' };
 
-export const Both = () => (
+export const Leading = () => (
 	<div>
 		<NumberedTitleBlockComponent
 			position={1}
@@ -50,13 +50,13 @@ export const Both = () => (
 		/>
 	</div>
 );
-Both.story = { name: 'Both' };
+Leading.story = { name: 'with leading strong text' };
 
-export const Other = () => (
+export const Trailing = () => (
 	<div>
 		<NumberedTitleBlockComponent
 			position={1}
-			html={'<h2>Other text<strong>Strong text</strong></h2>'}
+			html={'<h2>Plain H2<strong>Strong text</strong></h2>'}
 			format={{
 				theme: 'LifestylePillar',
 				design: 'ArticleDesign',
@@ -65,4 +65,4 @@ export const Other = () => (
 		/>
 	</div>
 );
-Other.story = { name: 'Other' };
+Trailing.story = { name: 'with trailing strong text' };
