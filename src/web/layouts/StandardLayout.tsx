@@ -36,6 +36,8 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
+import { Nav } from '@frontend/web/components/Nav/Nav';
+import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -46,7 +48,6 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { Nav } from '../components/Nav/Nav';
 
 const StandardGrid = ({
 	children,
@@ -321,33 +322,35 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide">
-				<Stuck>
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						shouldCenter={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</Stuck>
 				{format.theme !== Special.Labs && (
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
-						/>
-					</Section>
+					<>
+						<Stuck>
+							<Section
+								showTopBorder={false}
+								showSideBorders={false}
+								padded={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot
+									isAdFreeUser={CAPI.isAdFreeUser}
+									shouldHideAds={CAPI.shouldHideAds}
+									display={format.display}
+								/>
+							</Section>
+						</Stuck>
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							backgroundColour={brandBackground.primary}
+						>
+							<Header
+								edition={CAPI.editionId}
+								idUrl={CAPI.config.idUrl}
+								mmaUrl={CAPI.config.mmaUrl}
+							/>
+						</Section>
+					</>
 				)}
 			</div>
 
@@ -369,7 +372,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</Section>
 
-			{NAV.subNavSections && (
+			{NAV.subNavSections && format.theme !== Special.Labs && (
 				<Section
 					backgroundColour={palette.background.article}
 					padded={false}
@@ -383,13 +386,19 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</Section>
 			)}
 
-			<Section
-				backgroundColour={palette.background.article}
-				padded={false}
-				showTopBorder={false}
-			>
-				<GuardianLines count={4} palette={palette} />
-			</Section>
+			{format.theme !== Special.Labs ? (
+				<Section
+					backgroundColour={palette.background.article}
+					padded={false}
+					showTopBorder={false}
+				>
+					<GuardianLines count={4} palette={palette} />
+				</Section>
+			) : (
+				<Stuck>
+					<LabsHeader />
+				</Stuck>
+			)}
 
 			<Section
 				data-print-layout="hide"
