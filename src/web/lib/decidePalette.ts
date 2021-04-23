@@ -32,6 +32,7 @@ const textHeadline = (format: Format): string => {
 					return WHITE;
 			}
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard: {
 			if (format.theme === Special.SpecialReport)
 				return specialReport[100];
@@ -59,6 +60,7 @@ const textSeriesTitle = (format: Format): string => {
 		case Display.Immersive:
 			return WHITE;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 			switch (format.design) {
 				case Design.LiveBlog:
