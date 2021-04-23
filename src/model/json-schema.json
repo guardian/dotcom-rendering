@@ -1257,6 +1257,13 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.DividerBlockElement"
                     ]
+                },
+                "size": {
+                    "enum": [
+                        "full",
+                        "partial"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [

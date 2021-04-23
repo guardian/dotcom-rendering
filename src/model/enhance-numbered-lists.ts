@@ -179,23 +179,11 @@ const isItemListLink = (element: CAPIElement): boolean => {
 	if (!frag || !frag.firstElementChild) return false;
 
 	const hasULWrapper = frag.firstElementChild.nodeName === 'UL';
+	const hasOnlyOneChild = frag.firstElementChild.childElementCount === 1;
 	const hasLINestedWrapper =
 		frag.firstElementChild?.firstElementChild?.nodeName === 'LI';
 
-	const wrapper =
-		frag.firstElementChild?.firstElementChild?.firstElementChild;
-
-	const hasPWrapper = wrapper?.nodeName === 'P';
-	const containsStrongTags = wrapper?.outerHTML.includes('<strong>');
-	const containsLinks = wrapper?.outerHTML.includes('<a ');
-
-	return (
-		!!hasULWrapper &&
-		!!hasLINestedWrapper &&
-		!!hasPWrapper &&
-		!!containsStrongTags &&
-		!!containsLinks
-	);
+	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
 };
 
 const addItemListLink = (elements: CAPIElement[]): CAPIElement[] => {
