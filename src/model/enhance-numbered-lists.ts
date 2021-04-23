@@ -212,6 +212,53 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	return withH3s;
 };
 
+const isItemLink = (element: CAPIElement): boolean => {
+	if (!element) return false;
+	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
+	if (
+		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
+	) {
+		return false;
+	}
+	const frag = JSDOM.fragment(element.html);
+	if (!frag || !frag.firstElementChild) return false;
+
+	const hasULWrapper = frag.firstElementChild.nodeName === 'UL';
+	const hasOnlyOneChild = frag.firstElementChild.childElementCount === 1;
+	const hasLINestedWrapper =
+		frag.firstElementChild?.firstElementChild?.nodeName === 'LI';
+
+	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
+};
+
+const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
+	const withItemLink: CAPIElement[] = [];
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			isItemLink(thisElement)
+		) {
+			withItemLink.push(
+				{
+					_type:
+						'model.dotcomrendering.pageElements.DividerBlockElement',
+					size: 'full',
+				},
+				{
+					...thisElement,
+					_type:
+						'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+				},
+			);
+		} else {
+			// Pass through
+			withItemLink.push(thisElement);
+		}
+	});
+	return withItemLink;
+};
+
 const addTitles = (
 	elements: CAPIElement[],
 	format: CAPIFormat,
@@ -283,6 +330,11 @@ class Enhancer {
 		return this;
 	}
 
+	addItemLinks() {
+		this.elements = addItemLinks(this.elements);
+		return this;
+	}
+
 	starifyImages() {
 		this.elements = starifyImages(this.elements);
 		return this;
@@ -302,6 +354,8 @@ const enhance = (
 		new Enhancer(elements, format)
 			// Turn false h3s into real ones
 			.addH3s()
+			// Add item links
+			.addItemLinks()
 			// Add numbered titles
 			.addTitles()
 			// Overlay stars onto images
