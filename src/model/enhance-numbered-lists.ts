@@ -231,7 +231,7 @@ const isItemLink = (element: CAPIElement): boolean => {
 	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
 };
 
-const addItemLink = (elements: CAPIElement[]): CAPIElement[] => {
+const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
 	const withItemLink: CAPIElement[] = [];
 	elements.forEach((thisElement) => {
 		if (
@@ -330,8 +330,8 @@ class Enhancer {
 		return this;
 	}
 
-	addItemLink() {
-		this.elements = addItemLink(this.elements);
+	addItemLinks() {
+		this.elements = addItemLinks(this.elements);
 		return this;
 	}
 
@@ -355,7 +355,7 @@ const enhance = (
 			// Turn false h3s into real ones
 			.addH3s()
 			// Turn false h3s into real ones
-			.addItemLink()
+			.addItemLinks()
 			// Add numbered titles
 			.addTitles()
 			// Overlay stars onto images
