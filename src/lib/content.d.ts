@@ -249,7 +249,7 @@ interface InteractiveBlockElement {
 	caption?: string;
 }
 
-interface ItemBlockElement {
+interface ItemLinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement';
 	elementId: string;
 	html: string;
@@ -575,7 +575,7 @@ type CAPIElement =
 	| InstagramBlockElement
 	| InteractiveAtomBlockElement
 	| InteractiveBlockElement
-	| ItemBlockElement
+	| ItemLinkBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement

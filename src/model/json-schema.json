@@ -84,7 +84,7 @@
                         "$ref": "#/definitions/InteractiveBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/ItemBlockElement"
+                        "$ref": "#/definitions/ItemLinkBlockElement"
                     },
                     {
                         "$ref": "#/definitions/MapBlockElement"
@@ -1902,7 +1902,7 @@
                 "elementId"
             ]
         },
-        "ItemBlockElement": {
+        "ItemLinkBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -3347,7 +3347,7 @@
                                 "$ref": "#/definitions/InteractiveBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/ItemBlockElement"
+                                "$ref": "#/definitions/ItemLinkBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/MapBlockElement"
