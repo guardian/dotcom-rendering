@@ -338,6 +338,7 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						starRating={starRating || element.starRating}
 						title={element.title}
+						isAvatar={element.isAvatar}
 					/>
 				</Figure>
 			);

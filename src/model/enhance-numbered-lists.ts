@@ -80,10 +80,11 @@ const extractStarCount = (element: CAPIElement): number => {
 	return starCount;
 };
 
-const isImage = (element: CAPIElement): boolean => {
+const isStarableImage = (element: CAPIElement): boolean => {
 	return (
 		element?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
+			'model.dotcomrendering.pageElements.ImageBlockElement' &&
+		element.role !== 'thumbnail'
 	);
 };
 
@@ -93,7 +94,10 @@ const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement, index) => {
 		switch (thisElement._type) {
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
-				if (isStarRating(thisElement) && isImage(elements[index + 1])) {
+				if (
+					isStarRating(thisElement) &&
+					isStarableImage(elements[index + 1])
+				) {
 					// Remember this rating so we can add it to the next element
 					previousRating = extractStarCount(thisElement);
 				} else {
@@ -102,7 +106,10 @@ const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 				}
 				break;
 			case 'model.dotcomrendering.pageElements.ImageBlockElement':
-				if (previousRating !== undefined) {
+				if (
+					previousRating !== undefined &&
+					isStarableImage(thisElement)
+				) {
 					// Add this image using the rating we remembered
 					starified.push({
 						...thisElement,
@@ -147,22 +154,18 @@ const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 	return withStars;
 };
 
-const inlineImages = (elements: CAPIElement[]): CAPIElement[] => {
-	// Inline all images
-	// Why?
-	// Because previously, in lagacy times when we used Frontend to render these articles,
-	// we positioned images as thumbnails, off to the left. But more recent designs call for
-	// images to be inline. This enhancer helps with legacy content still using `thumbnail`
+const makeThumbnailsRound = (elements: CAPIElement[]): CAPIElement[] => {
 	const inlined: CAPIElement[] = [];
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement'
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			thisElement.role === 'thumbnail'
 		) {
-			// Inline this image
+			// Make this image round
 			inlined.push({
 				...thisElement,
-				role: 'inline',
+				isAvatar: true,
 			} as ImageBlockElement);
 		} else {
 			// Pass through
@@ -216,8 +219,8 @@ class Enhancer {
 		this.elements = elements;
 	}
 
-	inlineImages() {
-		this.elements = inlineImages(this.elements);
+	makeThumbnailsRound() {
+		this.elements = makeThumbnailsRound(this.elements);
 		return this;
 	}
 
@@ -242,11 +245,12 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 		new Enhancer(elements)
 			// Turn false h3s into real ones
 			.addH3s()
+			// Overlay stars onto images
 			.starifyImages()
 			// Turn ascii stars into components
 			.inlineStarRatings()
-			// Always use role `inline` for images
-			.inlineImages().elements
+			// Thumbnail images should be round
+			.makeThumbnailsRound().elements
 	);
 };
 

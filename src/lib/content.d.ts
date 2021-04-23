@@ -212,6 +212,7 @@ interface ImageBlockElement {
 	role: RoleType;
 	title?: string;
 	starRating?: number;
+	isAvatar?: boolean;
 }
 
 interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
