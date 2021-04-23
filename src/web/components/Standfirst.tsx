@@ -95,7 +95,9 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 			}
 
 		case Display.Showcase:
-		case Display.Standard: {
+		case Display.NumberedList:
+		case Display.Standard:
+		default: {
 			switch (format.design) {
 				case Design.Comment:
 				case Design.Editorial:
