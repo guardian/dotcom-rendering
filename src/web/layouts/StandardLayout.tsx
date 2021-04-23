@@ -7,6 +7,8 @@ import {
 	brandBackground,
 	brandBorder,
 	brandLine,
+	labs,
+	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Special } from '@guardian/types';
@@ -396,7 +398,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</Section>
 			) : (
 				<Stuck>
-					<LabsHeader />
+					<Section
+						showSideBorders={true}
+						showTopBorder={false}
+						backgroundColour={labs[400]}
+						borderColour={border.primary}
+						sectionId="labs-header"
+					>
+						<LabsHeader />
+					</Section>
 				</Stuck>
 			)}
 
