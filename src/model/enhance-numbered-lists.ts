@@ -214,7 +214,7 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 
 const isItemLink = (element: CAPIElement): boolean => {
 	if (!element) return false;
-	// Checks if this element is a 'item link' based on the convention: <ul> <li><p><strong>Title:</strong> <a href="https://www.theguardian.com">Link Name</a></p></li> </ul>
+	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
 	if (
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
 	) {
