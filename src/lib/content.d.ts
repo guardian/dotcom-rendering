@@ -282,6 +282,14 @@ interface MultiImageBlockElement {
 	role?: RoleType;
 }
 
+interface NumberedTitleBlockElement {
+	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
+	elementId: string;
+	position: number;
+	html: string;
+	format: CAPIFormat;
+}
+
 interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
@@ -564,6 +572,7 @@ type CAPIElement =
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
+	| NumberedTitleBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement

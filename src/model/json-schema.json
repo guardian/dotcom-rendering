@@ -93,6 +93,9 @@
                         "$ref": "#/definitions/MultiImageBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/NumberedTitleBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/ProfileAtomBlockElement"
                     },
                     {
@@ -1254,6 +1257,13 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.DividerBlockElement"
                     ]
+                },
+                "size": {
+                    "enum": [
+                        "full",
+                        "partial"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -2026,6 +2036,95 @@
                 "elementId",
                 "images"
             ]
+        },
+        "NumberedTitleBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.NumberedTitleBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "number"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "design": {
+                            "$ref": "#/definitions/CAPIDesign"
+                        },
+                        "theme": {
+                            "$ref": "#/definitions/CAPITheme"
+                        },
+                        "display": {
+                            "$ref": "#/definitions/CAPIDisplay"
+                        }
+                    },
+                    "required": [
+                        "design",
+                        "display",
+                        "theme"
+                    ]
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "format",
+                "html",
+                "position"
+            ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AnalysisDesign",
+                "ArticleDesign",
+                "CommentDesign",
+                "DeadBlogDesign",
+                "EditorialDesign",
+                "FeatureDesign",
+                "InteractiveDesign",
+                "InterviewDesign",
+                "LetterDesign",
+                "LiveBlogDesign",
+                "MatchReportDesign",
+                "MediaDesign",
+                "PhotoEssayDesign",
+                "PrintShopDesign",
+                "QuizDesign",
+                "RecipeDesign",
+                "ReviewDesign"
+            ],
+            "type": "string"
+        },
+        "CAPITheme": {
+            "enum": [
+                "CulturePillar",
+                "Labs",
+                "LifestylePillar",
+                "NewsPillar",
+                "OpinionPillar",
+                "SpecialReportTheme",
+                "SportPillar"
+            ],
+            "type": "string"
+        },
+        "CAPIDisplay": {
+            "enum": [
+                "ImmersiveDisplay",
+                "NumberedListDisplay",
+                "ShowcaseDisplay",
+                "StandardDisplay"
+            ],
+            "type": "string"
         },
         "ProfileAtomBlockElement": {
             "type": "object",
@@ -3232,6 +3331,9 @@
                                 "$ref": "#/definitions/MultiImageBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/NumberedTitleBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/ProfileAtomBlockElement"
                             },
                             {
@@ -3421,49 +3523,6 @@
                 "title",
                 "type"
             ]
-        },
-        "CAPIDesign": {
-            "enum": [
-                "AnalysisDesign",
-                "ArticleDesign",
-                "CommentDesign",
-                "DeadBlogDesign",
-                "EditorialDesign",
-                "FeatureDesign",
-                "InteractiveDesign",
-                "InterviewDesign",
-                "LetterDesign",
-                "LiveBlogDesign",
-                "MatchReportDesign",
-                "MediaDesign",
-                "PhotoEssayDesign",
-                "PrintShopDesign",
-                "QuizDesign",
-                "RecipeDesign",
-                "ReviewDesign"
-            ],
-            "type": "string"
-        },
-        "CAPITheme": {
-            "enum": [
-                "CulturePillar",
-                "Labs",
-                "LifestylePillar",
-                "NewsPillar",
-                "OpinionPillar",
-                "SpecialReportTheme",
-                "SportPillar"
-            ],
-            "type": "string"
-        },
-        "CAPIDisplay": {
-            "enum": [
-                "ImmersiveDisplay",
-                "NumberedListDisplay",
-                "ShowcaseDisplay",
-                "StandardDisplay"
-            ],
-            "type": "string"
         },
         "LegacyPillar": {
             "enum": [

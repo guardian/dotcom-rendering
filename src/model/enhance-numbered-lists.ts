@@ -212,15 +212,69 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	return withH3s;
 };
 
+const addTitles = (
+	elements: CAPIElement[],
+	format: CAPIFormat,
+): CAPIElement[] => {
+	/**
+	 * Why not just add H3s in Composer?
+	 * Truth is, you can't. So to get around this there's a convention that says if
+	 * you insert <p><strong>Faux H3!</strong>,</p> then we replace it with a h3 tag
+	 * instead.
+	 *
+	 * Note. H3s don't have any styles so we have to add them. In Frontend, they use
+	 * a 'fauxH3' class for this. In DCR we add `globalH3Styles` which was added at
+	 * the same time as this code.
+	 */
+	const withTitles: CAPIElement[] = [];
+	let position = 1;
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+			'model.dotcomrendering.pageElements.SubheadingBlockElement'
+		) {
+			const { html } = thisElement;
+			withTitles.push(
+				{
+					_type:
+						'model.dotcomrendering.pageElements.DividerBlockElement',
+					size: 'full',
+				},
+				{
+					_type:
+						'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+					elementId: thisElement.elementId,
+					position,
+					html,
+					format,
+				},
+			);
+			position += 1;
+		} else {
+			// Pass through
+			withTitles.push(thisElement);
+		}
+	});
+	return withTitles;
+};
+
 class Enhancer {
 	elements: CAPIElement[];
 
-	constructor(elements: CAPIElement[]) {
+	format: CAPIFormat;
+
+	constructor(elements: CAPIElement[], format: CAPIFormat) {
 		this.elements = elements;
+		this.format = format;
 	}
 
 	makeThumbnailsRound() {
 		this.elements = makeThumbnailsRound(this.elements);
+		return this;
+	}
+
+	addTitles() {
+		this.elements = addTitles(this.elements, this.format);
 		return this;
 	}
 
@@ -240,11 +294,16 @@ class Enhancer {
 	}
 }
 
-const enhance = (elements: CAPIElement[]): CAPIElement[] => {
+const enhance = (
+	elements: CAPIElement[],
+	format: CAPIFormat,
+): CAPIElement[] => {
 	return (
-		new Enhancer(elements)
+		new Enhancer(elements, format)
 			// Turn false h3s into real ones
 			.addH3s()
+			// Add numbered titles
+			.addTitles()
 			// Overlay stars onto images
 			.starifyImages()
 			// Turn ascii stars into components
@@ -264,7 +323,7 @@ export const enhanceNumberedLists = (data: CAPIType): CAPIType => {
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,
-			elements: enhance(block.elements),
+			elements: enhance(block.elements, data.format),
 		};
 	});
 

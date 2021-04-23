@@ -442,4 +442,144 @@ describe('Enhance Numbered Lists', () => {
 
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
+
+	it('replaces h2s with NumberedTitles', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId',
+							html: '<h2>Some text</h2>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+							elementId: 'mockId',
+							position: 1,
+							html: '<h2>Some text</h2>',
+							format: NumberedList.format,
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('increments the position for multiple h2s', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId1',
+							html: '<h2>Some text</h2>',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p>☆☆☆☆☆</p>',
+						},
+						images[0],
+						{
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId2',
+							html: '<h2>Other text</h2>',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							elementId: 'mockId3',
+							html: '<h2>More text</h2>',
+						},
+					],
+				},
+			],
+		};
+
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+							elementId: 'mockId1',
+							position: 1,
+							html: '<h2>Some text</h2>',
+							format: NumberedList.format,
+						},
+						{
+							...images[0],
+							starRating: 0,
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+							elementId: 'mockId2',
+							position: 2,
+							html: '<h2>Other text</h2>',
+							format: NumberedList.format,
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+
+							elementId: 'mockId3',
+							position: 3,
+							html: '<h2>More text</h2>',
+							format: NumberedList.format,
+						},
+					],
+				},
+			],
+		};
+
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
 });
