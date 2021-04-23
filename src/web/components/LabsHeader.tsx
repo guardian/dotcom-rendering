@@ -164,7 +164,7 @@ export const LabsHeader = () => (
 						label="About"
 						links={[]}
 						id="paidfor"
-						fontColour="black"
+						overrideColor="black"
 						dataLinkName=""
 					>
 						<About />
