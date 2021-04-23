@@ -5,6 +5,8 @@ import {
 	neutral,
 	brandBackground,
 	brandBorder,
+	labs,
+	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -325,7 +327,15 @@ export const ImmersiveLayout = ({
 
 					{format.theme === Special.Labs && (
 						<Stuck>
-							<LabsHeader />
+							<Section
+								showSideBorders={true}
+								showTopBorder={false}
+								backgroundColour={labs[400]}
+								borderColour={border.primary}
+								sectionId="labs-header"
+							>
+								<LabsHeader />
+							</Section>
 						</Stuck>
 					)}
 

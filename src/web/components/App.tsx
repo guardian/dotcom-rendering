@@ -59,6 +59,7 @@ import {
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
+import { LabsHeader } from '@root/src/web/components/LabsHeader';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
@@ -67,6 +68,7 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmb
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
+
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
@@ -540,6 +542,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					edition={CAPI.editionId}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
+			</HydrateOnce>
+			<HydrateOnce rootId="labs-header">
+				<LabsHeader />
 			</HydrateOnce>
 			<Portal rootId="share-count-root">
 				<ShareCount

@@ -6,6 +6,8 @@ import {
 	brandBackground,
 	brandLine,
 	brandBorder,
+	labs,
+	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -325,6 +327,19 @@ export const ShowcaseLayout = ({
 			) : (
 				// Else, this is a labs article so just show Nav and the Labs header
 				<>
+					<Stuck>
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+						>
+							<HeaderAdSlot
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+								display={format.display}
+							/>
+						</Section>
+					</Stuck>
 					<Section
 						showSideBorders={true}
 						borderColour={brandLine.primary}
@@ -346,7 +361,15 @@ export const ShowcaseLayout = ({
 					</Section>
 
 					<Stuck>
-						<LabsHeader />
+						<Section
+							showSideBorders={true}
+							showTopBorder={false}
+							backgroundColour={labs[400]}
+							borderColour={border.primary}
+							sectionId="labs-header"
+						>
+							<LabsHeader />
+						</Section>
 					</Stuck>
 				</>
 			)}
