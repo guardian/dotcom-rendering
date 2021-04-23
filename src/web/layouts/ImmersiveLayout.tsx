@@ -203,13 +203,13 @@ const Box = ({
 	<div
 		className={css`
 			/*
-									This pseudo css shows a black box to the right of the headline
-									so that the black background of the inverted text stretches
-									all the way right. But only from mobileLandscape because below
-									that we want to show a gap. To work properly it needs to wrap
-									the healine so it inherits the correct height based on the length
-									of the headline text
-							*/
+				This pseudo css shows a black box to the right of the headline
+				so that the black background of the inverted text stretches
+				all the way right. But only from mobileLandscape because below
+				that we want to show a gap. To work properly it needs to wrap
+				the healine so it inherits the correct height based on the length
+				of the headline text
+			*/
 			${from.mobileLandscape} {
 				position: relative;
 				:after {
