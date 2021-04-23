@@ -702,6 +702,14 @@ const textBlockquote = (format: Format): string => {
 	}
 };
 
+const textNumberedTitle = (format: Format): string => {
+	return pillarPalette[format.theme].dark;
+};
+
+const textNumberedPosition = (): string => {
+	return text.supporting;
+};
+
 const backgroundHeadlineTag = (format: Format): string =>
 	pillarPalette[format.theme].dark;
 
@@ -754,6 +762,8 @@ export const decidePalette = (format: Format): Palette => {
 			calloutHeading: textCalloutHeading(),
 			dropCap: textDropCap(format),
 			blockquote: textBlockquote(format),
+			numberedTitle: textNumberedTitle(format),
+			numberedPosition: textNumberedPosition(),
 		},
 		background: {
 			article: backgroundArticle(format),

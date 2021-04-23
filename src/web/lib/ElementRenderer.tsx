@@ -17,6 +17,7 @@ import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBloc
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
 import { MainMediaEmbedBlockComponent } from '@root/src/web/components/elements/MainMediaEmbedBlockComponent';
+import { NumberedTitleBlockComponent } from '@root/src/web/components/elements/NumberedTitleBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
@@ -186,7 +187,7 @@ export const ElementRenderer = ({
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
-			return <DividerBlockComponent />;
+			return <DividerBlockComponent size={element.size} />;
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return (
 				<Figure
@@ -441,6 +442,16 @@ export const ElementRenderer = ({
 						key={index}
 						images={element.images}
 						caption={element.caption}
+					/>
+				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
+			return (
+				<Figure isMainMedia={isMainMedia} id={element.elementId}>
+					<NumberedTitleBlockComponent
+						position={element.position}
+						html={element.html}
+						format={element.format}
 					/>
 				</Figure>
 			);

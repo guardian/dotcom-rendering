@@ -118,6 +118,7 @@ interface DisclaimerBlockElement {
 
 interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
+	size?: 'full' | 'partial';
 }
 
 interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
@@ -279,6 +280,14 @@ interface MultiImageBlockElement {
 	images: ImageBlockElement[];
 	caption?: string;
 	role?: RoleType;
+}
+
+interface NumberedTitleBlockElement {
+	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
+	elementId: string;
+	position: number;
+	html: string;
+	format: CAPIFormat;
 }
 
 interface ProfileAtomBlockElement {
@@ -563,6 +572,7 @@ type CAPIElement =
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
+	| NumberedTitleBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement
