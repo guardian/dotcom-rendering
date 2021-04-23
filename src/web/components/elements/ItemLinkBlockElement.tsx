@@ -9,12 +9,10 @@ type Props = {
 
 const itemLinkStyles = css`
 	${textSans.medium()}
-	font-weight: 400;
 	a {
 		${textSans.medium({ fontWeight: 'bold' })}
 	}
 	strong {
-		font-weight: 400; /* Need to override globalStrongStyles */
 		display: block;
 	}
 `;
