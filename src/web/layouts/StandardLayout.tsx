@@ -324,22 +324,22 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide">
-				{format.theme !== Special.Labs && (
-					<>
-						<Stuck>
-							<Section
-								showTopBorder={false}
-								showSideBorders={false}
-								padded={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot
-									isAdFreeUser={CAPI.isAdFreeUser}
-									shouldHideAds={CAPI.shouldHideAds}
-									display={format.display}
-								/>
-							</Section>
-						</Stuck>
+				<>
+					<Stuck>
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+								display={format.display}
+							/>
+						</Section>
+					</Stuck>
+					{format.theme !== Special.Labs && (
 						<Section
 							showTopBorder={false}
 							showSideBorders={false}
@@ -352,8 +352,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								mmaUrl={CAPI.config.mmaUrl}
 							/>
 						</Section>
-					</>
-				)}
+					)}
+				</>
 			</div>
 
 			<Section
