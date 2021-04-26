@@ -42,9 +42,16 @@ interface Props {
 	data: DCRServerDocumentData;
 }
 
+const makeTitle = (CAPI: CAPIType): string => {
+	if (CAPI.pillar === 'opinion' && CAPI.author.byline) {
+		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
+	}
+	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+};
+
 export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
-	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+	const title = makeTitle(CAPI);
 	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
 		renderToString(
 			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
