@@ -61,19 +61,23 @@ class CAPIEnhancer {
 	}
 }
 
+const buildCAPI = (body: CAPIType): CAPIType => {
+	return new CAPIEnhancer(body)
+		.validateAsCAPIType()
+		.addDividers()
+		.enhanceBlockquotes()
+		.enhanceDots()
+		.enhanceImages()
+		.enhanceNumberedLists()
+		.enhanceAnniversaryAtom().capi;
+};
+
 export const render = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = new CAPIEnhancer(body)
-			.validateAsCAPIType()
-			.addDividers()
-			.enhanceBlockquotes()
-			.enhanceDots()
-			.enhanceImages()
-			.enhanceNumberedLists()
-			.enhanceAnniversaryAtom().capi;
+		const CAPI = buildCAPI(body);
 		const resp = document({
 			data: {
 				CAPI,
@@ -84,6 +88,30 @@ export const render = (
 				linkedData: CAPI.linkedData,
 			},
 		});
+
+		res.status(200).send(resp);
+	} catch (e) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
+};
+
+export const renderArticleJson = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const CAPI = buildCAPI(body);
+		const resp = {
+			data: {
+				CAPI,
+				site: 'frontend',
+				page: 'Article',
+				NAV: extractNAV(CAPI.nav),
+				GA: extractGA(CAPI),
+				linkedData: CAPI.linkedData,
+			},
+		};
 
 		res.status(200).send(resp);
 	} catch (e) {
