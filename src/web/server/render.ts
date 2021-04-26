@@ -61,19 +61,23 @@ class CAPIEnhancer {
 	}
 }
 
+const buildCAPI = (body: CAPIType): CAPIType => {
+	return new CAPIEnhancer(body)
+		.validateAsCAPIType()
+		.addDividers()
+		.enhanceBlockquotes()
+		.enhanceDots()
+		.enhanceImages()
+		.enhanceNumberedLists()
+		.enhanceAnniversaryAtom().capi;
+};
+
 export const render = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = new CAPIEnhancer(body)
-			.validateAsCAPIType()
-			.addDividers()
-			.enhanceBlockquotes()
-			.enhanceDots()
-			.enhanceImages()
-			.enhanceNumberedLists()
-			.enhanceAnniversaryAtom().capi;
+		const CAPI = buildCAPI(body);
 		const resp = document({
 			data: {
 				CAPI,
@@ -97,13 +101,7 @@ export const renderArticleJson = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = new CAPIEnhancer(body)
-			.validateAsCAPIType()
-			.addDividers()
-			.enhanceBlockquotes()
-			.enhanceDots()
-			.enhanceImages()
-			.enhanceAnniversaryAtom().capi;
+		const CAPI = buildCAPI(body);
 		const resp = {
 			data: {
 				CAPI,
