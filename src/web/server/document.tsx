@@ -51,7 +51,7 @@ const decideTitle = (CAPI: CAPIType): string => {
 
 export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
-	const title = makeTitle(CAPI);
+	const title = decideTitle(CAPI);
 	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
 		renderToString(
 			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
