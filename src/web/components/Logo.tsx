@@ -6,6 +6,8 @@ import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
+import GuardianAnniversaryLogoSVG from '@frontend/static/logos/guardian-anniversary-logo.svg';
+
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const link = css`
@@ -32,7 +34,7 @@ const link = css`
 	${getZIndex('TheGuardian')}
 `;
 
-const style = css`
+const style = (isAnniversary?: boolean) => css`
 	height: 44px;
 	width: 135px;
 	${from.mobileMedium} {
@@ -49,13 +51,20 @@ const style = css`
 	}
 
 	path {
-		fill: ${brandText.primary};
+		fill: ${isAnniversary ? '' : brandText.primary};
 	}
 `;
 
-const SVG = () => <TheGuardianLogoSVG className={style} />;
+const SVG = ({ isAnniversary }: { isAnniversary?: boolean }) =>
+	isAnniversary ? (
+		<GuardianAnniversaryLogoSVG className={style(isAnniversary)} />
+	) : (
+		<TheGuardianLogoSVG className={style(isAnniversary)} />
+	);
 
-export const Logo: React.FC = () => (
+export const Logo: React.FC<{
+	isAnniversary?: boolean;
+}> = ({ isAnniversary }) => (
 	<a className={link} href="/" data-link-name="nav2 : logo">
 		<span
 			className={css`
@@ -64,6 +73,6 @@ export const Logo: React.FC = () => (
 		>
 			The Guardian - Back to home
 		</span>
-		<SVG />
+		<SVG isAnniversary={isAnniversary} />
 	</a>
 );
