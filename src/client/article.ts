@@ -25,6 +25,7 @@ import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	discussionClient,
+	navigationClient,
 	notificationsClient,
 	userClient,
 } from 'native/nativeApi';
@@ -217,12 +218,28 @@ function renderComments(): void {
 	}
 }
 
+function footerLinks(): void {
+	const privacySettingsLink = document.getElementById('js-privacy-settings');
+	const privacyPolicyLink = document.getElementById('js-privacy-policy');
+
+	privacyPolicyLink?.addEventListener('click', (e) => {
+		e.preventDefault();
+		void navigationClient.openPrivacyPolicy();
+	});
+
+	privacySettingsLink?.addEventListener('click', (e) => {
+		e.preventDefault();
+		void navigationClient.openPrivacySettings();
+	});
+}
+
 function footerInit(): void {
 	userClient
 		.doesCcpaApply()
 		.then((isCcpa) => {
 			const comp = h(FooterContent, { isCcpa });
 			ReactDOM.render(comp, document.getElementById('js-footer'));
+			footerLinks();
 		})
 		.catch((error) => {
 			logger.error(error);
