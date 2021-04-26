@@ -217,8 +217,8 @@ function renderComments(): void {
 }
 
 function footerLinks(): void {
-	const privacySettingsLink = document.getElementById('ar-privacy-settings');
-	const privacyPolicyLink = document.getElementById('ar-privacy-policy');
+	const privacySettingsLink = document.getElementById('js-privacy-settings');
+	const privacyPolicyLink = document.getElementById('js-privacy-policy');
 
 	privacyPolicyLink?.addEventListener('click', (e) => {
 		e.preventDefault();

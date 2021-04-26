@@ -15150,14 +15150,14 @@ exports[`Storyshots Footer Default 1`] = `
     <br />
     <a
       href="https://www.theguardian.com/help/privacy-settings"
-      id="ar-privacy-settings"
+      id="js-privacy-settings"
     >
       Privacy Settings
     </a>
      · 
     <a
       href="https://www.theguardian.com/help/privacy-policy"
-      id="ar-privacy-policy"
+      id="js-privacy-policy"
     >
       Privacy Policy
     </a>
@@ -15217,14 +15217,14 @@ exports[`Storyshots Footer With Ccpa 1`] = `
     <br />
     <a
       href="https://www.theguardian.com/help/privacy-policy"
-      id="ar-privacy-settings"
+      id="js-privacy-settings"
     >
       California Residents - Do Not Sell
     </a>
      · 
     <a
       href="https://www.theguardian.com/help/privacy-policy"
-      id="ar-privacy-policy"
+      id="js-privacy-policy"
     >
       Privacy Policy
     </a>

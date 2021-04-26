@@ -9,7 +9,7 @@ const PrivacySettings: FC<{ isCcpa: boolean }> = ({ isCcpa }) => {
 		return (
 			<>
 				<a
-					id="ar-privacy-settings"
+					id="js-privacy-settings"
 					href="https://www.theguardian.com/help/privacy-policy"
 				>
 					California Residents - Do Not Sell
@@ -21,7 +21,7 @@ const PrivacySettings: FC<{ isCcpa: boolean }> = ({ isCcpa }) => {
 		return (
 			<>
 				<a
-					id="ar-privacy-settings"
+					id="js-privacy-settings"
 					href="https://www.theguardian.com/help/privacy-settings"
 				>
 					Privacy Settings
@@ -48,7 +48,7 @@ const FooterContent: FC<Props> = ({ isCcpa }) => {
 			<br />
 			<PrivacySettings isCcpa={isCcpa} />
 			<a
-				id="ar-privacy-policy"
+				id="js-privacy-policy"
 				href="https://www.theguardian.com/help/privacy-policy"
 			>
 				Privacy Policy
