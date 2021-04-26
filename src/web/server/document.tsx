@@ -42,8 +42,8 @@ interface Props {
 	data: DCRServerDocumentData;
 }
 
-const makeTitle = (CAPI: CAPIType): string => {
-	if (CAPI.pillar === 'opinion' && CAPI.author.byline) {
+const decideTitle = (CAPI: CAPIType): string => {
+	if (format.theme === Pillar.Opinion && CAPI.author.byline) {
 		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
 	}
 	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
