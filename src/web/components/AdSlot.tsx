@@ -69,6 +69,10 @@ const adSlotLabelStyles = css`
 	}
 `;
 
+const outOfPageStyles = css`
+	height:0;
+`;
+
 export const labelStyles = css`
 	.ad-slot__label,
 	.ad-slot__scroll {
@@ -449,6 +453,28 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 						`${Size.empty}`,
 						`${Size.merchandising}`,
 						`${Size.fluid}`,
+					].join('|')}
+					aria-hidden="true"
+				/>
+			);
+		}
+		case 'survey': {
+			return (
+				<div
+					id="dfp-ad--survey"
+					className={cx(
+						'js-ad-slot',
+						'ad-slot',
+						'ad-slot--survey',
+						outOfPageStyles
+					)}
+					data-link-name="ad slot survey"
+					data-name="survey"
+					data-label="false"
+					data-refresh="false"
+					data-out-of-page="true"
+					data-desktop={[
+						`${Size.outOfPage}`
 					].join('|')}
 					aria-hidden="true"
 				/>
