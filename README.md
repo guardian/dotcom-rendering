@@ -6,20 +6,21 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
-  - [Concepts](#concepts)
-  - [Feedback](#feedback)
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Code Quality](#code-quality)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+- [Dotcom Rendering](#dotcom-rendering)
+	- [Quick start](#quick-start)
+		- [Install Node.js](#install-nodejs)
+		- [Running instructions](#running-instructions)
+		- [Detailed Setup](#detailed-setup)
+		- [Technologies](#technologies)
+		- [Architecture Diagram](#architecture-diagram)
+		- [Concepts](#concepts)
+		- [Feedback](#feedback)
+	- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+	- [Code Quality](#code-quality)
+	- [IDE setup](#ide-setup)
+		- [Extensions](#extensions)
+		- [Auto fix on save](#auto-fix-on-save)
+	- [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -46,6 +47,8 @@ $ make dev
 Visit the [root path of the dev server](http://localhost:3030) for some example URLs to visit.
 
 You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
+
+You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to [/ArticleJson](http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
 
 ### Detailed Setup
 
