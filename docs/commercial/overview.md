@@ -31,7 +31,7 @@ config.get('isDotcomRendering', false)
 
 Dotcom rendering has components for the following ad types
 
--   Static ads (top-above, nav, top-right, most-viewed)
+-   Static ads (top-above, nav, top-right, most-viewed, survey)
 -   Dynamic ads (article in-body)
 -   Mechandising slots (such as masterclass below-content onward component) [in progress...]
 

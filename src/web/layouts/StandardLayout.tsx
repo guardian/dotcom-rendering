@@ -410,6 +410,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</Stuck>
 			)}
 
+			{ CAPI.config.switches.surveys && <AdSlot position="survey" display={format.display} /> }
+
 			<Section
 				data-print-layout="hide"
 				showTopBorder={false}

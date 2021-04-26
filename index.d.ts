@@ -890,7 +890,8 @@ type AdSlotType =
 	| 'mostpop'
 	| 'merchandising-high'
 	| 'merchandising'
-	| 'comments';
+	| 'comments'
+	| 'survey';
 
 // ------------------------------
 // 3rd party type declarations //
