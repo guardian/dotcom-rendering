@@ -263,6 +263,9 @@ const convertToAnniversary = (CAPI: CAPIType) => {
 				...CAPI.config.switches,
 				anniversaryHeaderSvg: true,
 			},
+			abTests: {
+				anniversaryAtomVariant: 'variant',
+			},
 		},
 	};
 };
