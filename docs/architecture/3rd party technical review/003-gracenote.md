@@ -7,7 +7,7 @@
 -   Platform concerned: Web & AMP(?)
 
 ## Context
-
+We are due to use a third party, Gracenote, to supply us the data for our Olympics coverage. This tag will have to be included on certain pages, meaning that we need to conduct a review of the tag to ensure we're uncovering any privacy or performance concerns.
 - We will be using Gracenote for both the data and emebedded "core editorial content" around the Olympics. This frees up the visuals team from creating and supporting this content.
 - These will be classed differently to "editorial embeds" since they are supplying core editorial content.
 
