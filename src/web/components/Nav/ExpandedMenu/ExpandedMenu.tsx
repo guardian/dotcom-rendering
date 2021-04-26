@@ -96,7 +96,7 @@ const mainMenuStyles = css`
 		margin-right: 29px;
 	}
 	${from.mobileLandscape} {
-		margin-right: 70px;
+		margin-right: 40px;
 	}
 	${from.tablet} {
 		margin-right: 100px;
