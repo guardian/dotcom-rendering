@@ -14,7 +14,7 @@ We are due to use a third party, Gracenote, to supply us the data for our Olympi
 ## Data privacy engineering review
 
 - Google Tag Manager and google analytics included in tag script.
-- `pixel.gif` request URL with minified query params e.g.
+- `pixel.gif` request URL with minified query params sending a request to `https://widgets.sports.gracenote.com/` e.g.
 	- `c`: 1422
 	- `wid`: 1422-wintergames-medaltable-en_gb
 	- `w`: default-medaltable
