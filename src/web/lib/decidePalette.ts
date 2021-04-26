@@ -705,7 +705,7 @@ const textBlockquote = (format: Format): string => {
 };
 
 const textNumberedTitle = (format: Format): string => {
-	return pillarPalette[format.theme].dark;
+	return pillarPalette[format.theme].main;
 };
 
 const textNumberedPosition = (): string => {
