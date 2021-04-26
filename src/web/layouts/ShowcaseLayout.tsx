@@ -279,7 +279,9 @@ export const ShowcaseLayout = ({
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
 								isAnniversary={
-									CAPI.config.switches.anniversaryHeaderSvg
+									CAPI.config.switches.anniversaryHeaderSvg &&
+									CAPI.config.abTests
+										.anniversaryAtomVariant === 'variant'
 								}
 							/>
 						</Section>
