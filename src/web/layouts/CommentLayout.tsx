@@ -5,6 +5,7 @@ import {
 	neutral,
 	brandBorder,
 	brandBackground,
+	brandAltBackground,
 	brandLine,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -35,6 +36,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
+import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -381,7 +383,16 @@ export const CommentLayout = ({
 					</Section>
 				</SendToBack>
 			</div>
-
+			<Section
+				backgroundColour={brandAltBackground.primary}
+				padded={false}
+				showTopBorder={false}
+				showSideBorders={false}
+			>
+				<AnniversaryAtomComponent
+					anniversaryInteractiveAtom={CAPI.anniversaryInteractiveAtom}
+				/>
+			</Section>
 			<Section
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
