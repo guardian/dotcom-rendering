@@ -331,6 +331,9 @@ export const CommentLayout = ({
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								isAnniversary={
+									CAPI.config.switches.anniversaryHeaderSvg
+								}
 							/>
 						</Section>
 					)}
