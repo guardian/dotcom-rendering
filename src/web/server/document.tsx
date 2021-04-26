@@ -13,8 +13,10 @@ import {
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
+import { Pillar } from '@guardian/types';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
+import { decideTheme } from '../lib/decideTheme';
 
 interface RenderToStringResult {
 	html: string;
@@ -43,7 +45,7 @@ interface Props {
 }
 
 const decideTitle = (CAPI: CAPIType): string => {
-	if (format.theme === Pillar.Opinion && CAPI.author.byline) {
+	if (decideTheme(CAPI.format) === Pillar.Opinion && CAPI.author.byline) {
 		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
 	}
 	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
