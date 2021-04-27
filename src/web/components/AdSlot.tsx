@@ -70,7 +70,7 @@ const adSlotLabelStyles = css`
 `;
 
 const outOfPageStyles = css`
-	height:0;
+	height: 0;
 `;
 
 export const labelStyles = css`
@@ -466,16 +466,14 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 						'js-ad-slot',
 						'ad-slot',
 						'ad-slot--survey',
-						outOfPageStyles
+						outOfPageStyles,
 					)}
 					data-link-name="ad slot survey"
 					data-name="survey"
 					data-label="false"
 					data-refresh="false"
 					data-out-of-page="true"
-					data-desktop={[
-						`${Size.outOfPage}`
-					].join('|')}
+					data-desktop={[`${Size.outOfPage}`].join('|')}
 					aria-hidden="true"
 				/>
 			);

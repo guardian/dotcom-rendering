@@ -3,7 +3,7 @@ import {
 	getGuardianConfiguration,
 	GuardianConfiguration,
 } from '@frontend/app/aws/aws-parameters';
-
+import { logger } from '@root/src/app/logging';
 // WARNING
 // This is a TEMP solution.
 // It is the simplest route to showing the anniversary atom, while being able to then
@@ -65,7 +65,7 @@ const refreshAnniversaryAtom = () => {
 	setTimeout(() => {
 		fetchAnniversaryAtom()
 			.then(refreshAnniversaryAtom)
-			.catch((e) => console.log(`fetchAnniversaryAtom - error: ${e}`));
+			.catch((e) => logger.info(`fetchAnniversaryAtom - error: ${e}`));
 	}, oneMinute);
 };
 
@@ -81,4 +81,4 @@ getGuardianConfiguration('prod')
 	})
 	.then(fetchAnniversaryAtom)
 	.then(refreshAnniversaryAtom)
-	.catch((e) => console.log(`fetchIAnniversaryAtom - error: ${e}`));
+	.catch((e) => logger.info(`fetchAnniversaryAtom - error: ${e}`));

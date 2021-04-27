@@ -38,7 +38,7 @@ import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getCookie } from '@root/src/web/browser/cookie';
+import { getCookie, addCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
@@ -236,6 +236,14 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
 		);
 	}, []);
+
+	// AnniversaryAtom
+	// Add a cookie for the serverside A/B test that is checked to see if we should
+	// show the anniversary atom. This means that this user will not see the atom
+	// on the next and following page views.
+	useEffect(() => {
+		addCookie('X-GU-Experiment-0perc-B', 'true', 10); // 10 days to live for the life of the atom being shown
+	});
 
 	// Ensure the focus state of any buttons/inputs in any of the Source
 	// components are only applied when navigating via keyboard.

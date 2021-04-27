@@ -40,6 +40,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
+import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -92,7 +93,7 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  matchNav     right-column'
 									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -101,7 +102,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -130,7 +131,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -394,13 +395,27 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			)}
 
 			{format.theme !== Special.Labs ? (
-				<Section
-					backgroundColour={palette.background.article}
-					padded={false}
-					showTopBorder={false}
-				>
-					<GuardianLines count={4} palette={palette} />
-				</Section>
+				<>
+					<Section
+						backgroundColour={brandAltBackground.primary}
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+					>
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
+					</Section>
+					<Section
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<GuardianLines count={4} palette={palette} />
+					</Section>
+				</>
 			) : (
 				<Stuck>
 					<Section
@@ -415,7 +430,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</Stuck>
 			)}
 
-			{ CAPI.config.switches.surveys && <AdSlot position="survey" display={format.display} /> }
+			{CAPI.config.switches.surveys && (
+				<AdSlot position="survey" display={format.display} />
+			)}
 
 			<Section
 				data-print-layout="hide"
@@ -424,6 +441,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				borderColour={palette.border.article}
 			>
 				<StandardGrid isMatchReport={isMatchReport}>
+					<GridItem area="atom">
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
+					</GridItem>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}
