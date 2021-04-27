@@ -239,9 +239,13 @@ const ReaderRevenueLinksRemote: React.FC<{
 					);
 			})
 			.catch((error) => {
-				// TODO - sentry
+				const msg = `Error importing RR header links: ${error}`;
 				// eslint-disable-next-line no-console
-				console.log(`header module - error is: ${error}`);
+				console.log(msg);
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-header-links',
+				);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
