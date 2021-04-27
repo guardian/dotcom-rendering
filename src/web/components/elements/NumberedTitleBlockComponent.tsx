@@ -42,12 +42,16 @@ export const NumberedTitleBlockComponent = ({
 	};
 	const palette = decidePalette(dcrFormat);
 	return (
-		<>
+		<div
+			className={css`
+				margin-top: -16px; /* Hack used to align Title number closer to adjacent divider */
+			`}
+		>
 			<div className={numberStyles(palette)}>{position}</div>
 			<div
 				className={titleStyles(palette)}
 				dangerouslySetInnerHTML={{ __html: html }}
 			/>
-		</>
+		</div>
 	);
 };
