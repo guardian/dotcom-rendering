@@ -285,11 +285,14 @@ const RemoteBanner = ({
 				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
 				sendOphanComponentEvent('INSERT', meta);
 			})
-			.catch(error => {
+			.catch((error) => {
 				const msg = `Error importing RR banner: ${error}`;
 				// eslint-disable-next-line no-console
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(new Error(msg), 'rr-banner');
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-banner',
+				);
 			});
 	}, []);
 

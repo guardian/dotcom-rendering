@@ -221,11 +221,14 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 				sendOphanComponentEvent('INSERT', meta);
 			})
-			.catch(error => {
+			.catch((error) => {
 				const msg = `Error importing RR epic: ${error}`;
 				// eslint-disable-next-line no-console
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(new Error(msg), 'rr-epic');
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-epic',
+				);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
