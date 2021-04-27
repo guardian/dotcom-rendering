@@ -44,7 +44,7 @@ export const NumberedTitleBlockComponent = ({
 	return (
 		<div
 			className={css`
-				margin-top: -20px; /* Hack used to align Title number closer to adjacent divider */
+				margin-top: -16px; /* Hack used to align Title number closer to adjacent divider */
 			`}
 		>
 			<div className={numberStyles(palette)}>{position}</div>
