@@ -147,6 +147,13 @@ Resources:
             - autoscaling:DescribeAutoScalingGroups
             - autoscaling:DescribeAutoScalingInstances
             Resource: '*'
+          - Effect: Allow
+            Action:
+              - ssm:GetParametersByPath
+              - ssm:GetParameter
+            Resource:
+              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${App}/${Stage}
+              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${App}/${Stage}/*
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
