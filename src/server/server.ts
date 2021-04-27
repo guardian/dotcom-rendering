@@ -59,9 +59,57 @@ function getPrefetchHeader(resources: string[]): string {
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
 	fetch(capiEndpoint(articleId, key));
 
-// const footballRequest = (articleId: string) => (
-// 	key: string,
-// ): Promise<Response> => fetch(capiEndpoint(articleId, key));
+const getFootballSelectorId = (
+	content: Content,
+	reverseTeamIds: boolean,
+): string => {
+	const webPublicationDate = content.webPublicationDate?.iso8601;
+
+	const tags = content.tags;
+
+	const teams = tags
+		.map((tag) => tag.references)
+		.flat()
+		.filter((tag) => tag.type === 'pa-football-team');
+
+	const ids = teams.map((team) => {
+		const strings = team.id.split('/');
+		return strings[1];
+	});
+
+	const date = webPublicationDate?.split('T')[0];
+
+	const id1 = reverseTeamIds ? 0 : 1;
+	const id2 = reverseTeamIds ? 1 : 0;
+
+	return `${date}_${ids[id1]}_${ids[id2]}`;
+};
+
+const getFootballEndpoint = (selectorId: string): string => {
+	return `https://mobile.guardianapis.com/sport/football/matches?selector=${selectorId}`;
+};
+
+const getFootballContent = async (
+	content: Content,
+	reverseIds: boolean,
+): Promise<FootballContent> => {
+	const selectorId = getFootballSelectorId(content, reverseIds);
+	const footballEndpoint = getFootballEndpoint(selectorId);
+
+	const response = await fetch(footballEndpoint).then((res) => {
+		return res.json();
+	});
+
+	if (response.errorMessage) {
+		logger.error(
+			"Sometimes team ID's appear in reverse order, retrying request with alternative parameters",
+		);
+
+		return getFootballContent(content, true);
+	}
+
+	return response[selectorId];
+};
 
 const parseCapiResponse = (articleId: string) => async (
 	capiResponse: Response,
@@ -118,19 +166,6 @@ const askCapiFor = (articleId: string): CapiReturn =>
 
 		return capiRequest(articleId)(key).then(parseCapiResponse(articleId));
 	});
-
-// const getFootballId = (articleId: string): CapiReturn =>
-// 	getConfigValue('capi.key').then((key) => {
-// 		if (key === undefined) {
-// 			logger.error('Could not get CAPI key');
-
-// 			return err(500);
-// 		}
-
-// 		return footballRequest(articleId)(key).then(
-// 			parseCapiResponse(articleId),
-// 		);
-// 	});
 
 function resourceList(script: Option<string>): string[] {
 	const emptyList: string[] = [];
@@ -226,41 +261,6 @@ async function serveEditionsArticlePost(
 	}
 }
 
-async function parseFootballContent(
-	content: Content,
-	articleId: string,
-): Promise<FootballContent> {
-	const webPublicationDate = content.webPublicationDate?.iso8601;
-
-	const tags = content.tags;
-
-	let teams = [];
-
-	for (const tag of tags) {
-		const ref = tag.references.find(
-			(team) => team.type === 'pa-football-team',
-		);
-
-		if (ref) {
-			teams.push(ref);
-		}
-	}
-
-	const ids = teams.map((team) => {
-		const strings = team.id.split('/');
-		return strings[1];
-	});
-
-	const date = webPublicationDate?.split('T')[0];
-
-	const url = `https://mobile.guardianapis.com/sport/football/matches?selector=${date}_${ids[1]}_${ids[0]}`;
-
-	const res = await fetch(url);
-	console.log(res);
-
-	return res as any;
-}
-
 async function serveArticleGet(
 	req: Request,
 	res: ExpressResponse,
@@ -274,7 +274,12 @@ async function serveArticleGet(
 			(errorStatus: number) => {
 				res.sendStatus(errorStatus);
 			},
-			([content, relatedContent]: [Content, RelatedContent]) => {
+			async ([content, relatedContent]: [Content, RelatedContent]) => {
+				const footballContent = await getFootballContent(
+					content,
+					false,
+				);
+
 				const mockedRenderingRequest: RenderingRequest = {
 					content,
 					targetingParams: {
@@ -283,10 +288,7 @@ async function serveArticleGet(
 					},
 					commentCount: 30,
 					relatedContent,
-					footballContent: parseFootballContent(
-						content,
-						articleId,
-					) as any,
+					footballContent,
 				};
 
 				const richLinkDetails = req.query.richlink === '';
