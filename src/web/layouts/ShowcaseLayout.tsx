@@ -329,6 +329,18 @@ export const ShowcaseLayout = ({
 						>
 							<GuardianLines count={4} palette={palette} />
 						</Section>
+						<Section
+							backgroundColour={brandAltBackground.primary}
+							padded={false}
+							showTopBorder={false}
+							showSideBorders={false}
+						>
+							<AnniversaryAtomComponent
+								anniversaryInteractiveAtom={
+									CAPI.anniversaryInteractiveAtom
+								}
+							/>
+						</Section>
 					</SendToBack>
 				</div>
 			) : (
@@ -380,17 +392,6 @@ export const ShowcaseLayout = ({
 					</Stuck>
 				</>
 			)}
-
-			<Section
-				backgroundColour={brandAltBackground.primary}
-				padded={false}
-				showTopBorder={false}
-				showSideBorders={false}
-			>
-				<AnniversaryAtomComponent
-					anniversaryInteractiveAtom={CAPI.anniversaryInteractiveAtom}
-				/>
-			</Section>
 
 			<Section
 				showTopBorder={false}
