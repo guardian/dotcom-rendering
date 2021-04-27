@@ -69,6 +69,8 @@ describe('Enhance Numbered Lists', () => {
 						{
 							_type:
 								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+							spaceAbove: 'tight',
 						},
 						{
 							_type:
@@ -471,6 +473,7 @@ describe('Enhance Numbered Lists', () => {
 							_type:
 								'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
+							spaceAbove: 'loose',
 						},
 						{
 							_type:
@@ -535,6 +538,7 @@ describe('Enhance Numbered Lists', () => {
 							_type:
 								'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
+							spaceAbove: 'loose',
 						},
 						{
 							_type:
@@ -552,6 +556,7 @@ describe('Enhance Numbered Lists', () => {
 							_type:
 								'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
+							spaceAbove: 'loose',
 						},
 						{
 							_type:
@@ -565,6 +570,7 @@ describe('Enhance Numbered Lists', () => {
 							_type:
 								'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
+							spaceAbove: 'loose',
 						},
 						{
 							_type:

@@ -188,7 +188,12 @@ export const ElementRenderer = ({
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
-			return <DividerBlockComponent size={element.size} />;
+			return (
+				<DividerBlockComponent
+					size={element.size}
+					spaceAbove={element.spaceAbove}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return (
 				<Figure

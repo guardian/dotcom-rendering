@@ -198,6 +198,8 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 				{
 					_type:
 						'model.dotcomrendering.pageElements.DividerBlockElement',
+					size: 'full',
+					spaceAbove: 'tight',
 				},
 				{
 					...thisElement,
@@ -244,6 +246,7 @@ const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
 					_type:
 						'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
+					spaceAbove: 'tight',
 				},
 				{
 					...thisElement,
@@ -286,6 +289,7 @@ const addTitles = (
 					_type:
 						'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
+					spaceAbove: 'loose',
 				},
 				{
 					_type:
