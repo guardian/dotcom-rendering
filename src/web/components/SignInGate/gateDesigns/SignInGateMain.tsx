@@ -9,6 +9,7 @@ import { SignInGateProps } from './types';
 import {
 	actionButtons,
 	bodyBold,
+	bodySeparator,
 	bodyText,
 	faq,
 	firstParagraphOverlay,
@@ -88,7 +89,7 @@ export const SignInGateMain = ({
 				</LinkButton>
 			</div>
 
-			<p className={cx([bodyBold, signInHeader])}>
+			<p className={cx([bodySeparator, bodyBold, signInHeader])}>
 				Have a subscription? Made a contribution? Already registered?
 			</p>
 

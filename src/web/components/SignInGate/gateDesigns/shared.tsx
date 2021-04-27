@@ -9,17 +9,6 @@ export const signInGateContainer = css`
 	${from.desktop} {
 		min-height: 600px;
 	}
-
-	/* This needs to be here because link styles are applied globally to the article body :/ */
-	a {
-		text-decoration: underline;
-		border-bottom: none;
-		color: ${palette.text.primary};
-
-		:hover {
-			border-bottom: none;
-		}
-	}
 `;
 
 export const headingStyles = css`
@@ -33,9 +22,12 @@ export const headingStyles = css`
 	}
 `;
 
+export const bodySeparator = css`
+	border-top: 1px ${palette.line.primary} solid;
+`;
+
 export const bodyBold = css`
 	${textSans.medium({ fontWeight: 'bold' })}
-	border-top: 1px ${palette.line.primary} solid;
 	padding-bottom: 20px;
 	${from.phablet} {
 		padding-right: 130px;
