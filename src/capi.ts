@@ -190,9 +190,21 @@ const capiEndpoint = (articleId: string, key: string): string => {
 		'show-blocks': 'all',
 		'show-elements': 'all',
 		'show-related': 'true',
+		'show-references': 'all',
 	});
 
 	return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
+};
+
+const footballEndpoint = (articleId: string, key: string): string => {
+	// If you need a new field here, MAPI probably also needs updating
+
+	const params = new URLSearchParams({
+		format: 'thrift',
+		'api-key': key,
+	});
+
+	return `https://content.guardianapis.com/football/everton?${params.toString()}`;
 };
 
 const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
@@ -224,4 +236,5 @@ export {
 	articleMainImage,
 	checkForThirdPartyEmbed,
 	requiresInlineStyles,
+	footballEndpoint,
 };

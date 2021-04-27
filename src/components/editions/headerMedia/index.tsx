@@ -11,6 +11,7 @@ import HeaderImageCaption, {
 	captionId,
 } from 'components/editions/headerImageCaption';
 import StarRating from 'components/editions/starRating';
+import FootballScores from 'components/footballScores';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
@@ -130,30 +131,51 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				image: { nativeCaption, credit },
 			} = media;
 
+			const matchScores = 'football' in item ? item.football : none;
+
 			return (
-				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
-					<Img
-						image={image}
-						sizes={getImageSizes(format)}
-						format={item}
-						className={some(getImageStyle(image, format))}
-						supportsDarkMode={false}
-						lightbox={some({
-							className: 'js-launch-slideshow js-main-image',
-							caption: none,
-							credit: none,
-						})}
-					/>
-					<HeaderImageCaption
-						caption={nativeCaption}
-						credit={credit}
-						styles={getCaptionStyles(format)}
-						iconColor={iconColor}
-						iconBackgroundColor={iconBackgroundColor}
-						isFullWidthImage={isFullWidthImage(format)}
-					/>
-					<StarRating item={item} />
-				</figure>
+				<>
+					<figure
+						css={[getStyles(format)]}
+						aria-labelledby={captionId}
+					>
+						{maybeRender(matchScores, (scores) => (
+							<div
+								id="js-football-scores"
+								style={{ width: '100vw' }}
+							>
+								<FootballScores
+									league={scores.league}
+									stadium={scores.stadium}
+									homeTeam={scores.homeTeam}
+									awayTeam={scores.awayTeam}
+									status={scores.status}
+								/>
+							</div>
+						))}
+						<Img
+							image={image}
+							sizes={getImageSizes(format)}
+							format={item}
+							className={some(getImageStyle(image, format))}
+							supportsDarkMode={false}
+							lightbox={some({
+								className: 'js-launch-slideshow js-main-image',
+								caption: none,
+								credit: none,
+							})}
+						/>
+						<HeaderImageCaption
+							caption={nativeCaption}
+							credit={credit}
+							styles={getCaptionStyles(format)}
+							iconColor={iconColor}
+							iconBackgroundColor={iconBackgroundColor}
+							isFullWidthImage={isFullWidthImage(format)}
+						/>
+						<StarRating item={item} />
+					</figure>
+				</>
 			);
 		} else {
 			const {

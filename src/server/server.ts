@@ -5,7 +5,7 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import type { Option, Result } from '@guardian/types';
+import { Option, Result } from '@guardian/types';
 import { either, err, map, ok, OptionKind, withDefault } from '@guardian/types';
 import bodyParser from 'body-parser';
 import { capiEndpoint } from 'capi';
@@ -35,6 +35,7 @@ import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
+import { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
 
 // ----- Setup ----- //
 
@@ -57,6 +58,10 @@ function getPrefetchHeader(resources: string[]): string {
 
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
 	fetch(capiEndpoint(articleId, key));
+
+// const footballRequest = (articleId: string) => (
+// 	key: string,
+// ): Promise<Response> => fetch(capiEndpoint(articleId, key));
 
 const parseCapiResponse = (articleId: string) => async (
 	capiResponse: Response,
@@ -113,6 +118,19 @@ const askCapiFor = (articleId: string): CapiReturn =>
 
 		return capiRequest(articleId)(key).then(parseCapiResponse(articleId));
 	});
+
+// const getFootballId = (articleId: string): CapiReturn =>
+// 	getConfigValue('capi.key').then((key) => {
+// 		if (key === undefined) {
+// 			logger.error('Could not get CAPI key');
+
+// 			return err(500);
+// 		}
+
+// 		return footballRequest(articleId)(key).then(
+// 			parseCapiResponse(articleId),
+// 		);
+// 	});
 
 function resourceList(script: Option<string>): string[] {
 	const emptyList: string[] = [];
@@ -208,6 +226,41 @@ async function serveEditionsArticlePost(
 	}
 }
 
+async function parseFootballContent(
+	content: Content,
+	articleId: string,
+): Promise<FootballContent> {
+	const webPublicationDate = content.webPublicationDate?.iso8601;
+
+	const tags = content.tags;
+
+	let teams = [];
+
+	for (const tag of tags) {
+		const ref = tag.references.find(
+			(team) => team.type === 'pa-football-team',
+		);
+
+		if (ref) {
+			teams.push(ref);
+		}
+	}
+
+	const ids = teams.map((team) => {
+		const strings = team.id.split('/');
+		return strings[1];
+	});
+
+	const date = webPublicationDate?.split('T')[0];
+
+	const url = `https://mobile.guardianapis.com/sport/football/matches?selector=${date}_${ids[1]}_${ids[0]}`;
+
+	const res = await fetch(url);
+	console.log(res);
+
+	return res as any;
+}
+
 async function serveArticleGet(
 	req: Request,
 	res: ExpressResponse,
@@ -230,6 +283,10 @@ async function serveArticleGet(
 					},
 					commentCount: 30,
 					relatedContent,
+					footballContent: parseFootballContent(
+						content,
+						articleId,
+					) as any,
 				};
 
 				const richLinkDetails = req.query.richlink === '';
