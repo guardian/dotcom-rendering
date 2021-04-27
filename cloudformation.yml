@@ -152,8 +152,8 @@ Resources:
               - ssm:GetParametersByPath
               - ssm:GetParameter
             Resource:
-              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${App}/${Stage}
-              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${App}/${Stage}/*
+              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/frontend/${Stage}
+              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/frontend/${Stage}/*
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
