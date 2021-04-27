@@ -54,7 +54,7 @@ describe('parseRelatedContent', () => {
 					title: 'contentTitle',
 					lastModified: undefined,
 					headerImage: undefined,
-					link: '/contentId',
+					link: 'https://theguardian.com/contentId',
 					type: RelatedItemType.ARTICLE,
 					pillar: {
 						id: 'somePillarId',
@@ -112,10 +112,10 @@ describe('parseRelatedContent', () => {
 		]);
 
 		expect(actual.relatedItems.length).toBe(4);
-		expect(actual.relatedItems[0].link).toBe('/id1');
-		expect(actual.relatedItems[1].link).toBe('/id2');
-		expect(actual.relatedItems[2].link).toBe('/id3');
-		expect(actual.relatedItems[3].link).toBe('/id4');
+		expect(actual.relatedItems[0].link).toBe('https://theguardian.com/id1');
+		expect(actual.relatedItems[1].link).toBe('https://theguardian.com/id2');
+		expect(actual.relatedItems[2].link).toBe('https://theguardian.com/id3');
+		expect(actual.relatedItems[3].link).toBe('https://theguardian.com/id4');
 	});
 });
 

@@ -77,7 +77,7 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 					title: content.webTitle,
 					lastModified: content.fields?.lastModified,
 					headerImage: parseHeaderImage(content),
-					link: `/${content.id}`,
+					link: `https://theguardian.com/${content.id}`,
 					type: parseRelatedItemType(content),
 					pillar: {
 						id: content.pillarId ?? 'pillar/news',
