@@ -23,7 +23,7 @@ const sizePartialStyle = css`
 `;
 
 const tightSpaceAboveStyle = css`
-	margin-top: 3px;
+	margin-top: 20px;
 `;
 const looseSpaceAboveStyle = css`
 	margin-top: 48px;
