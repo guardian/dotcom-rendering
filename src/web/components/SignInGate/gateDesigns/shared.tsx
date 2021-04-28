@@ -68,7 +68,7 @@ export const laterButton = css`
 `;
 
 export const signInLink = css`
-	color: ${palette.text.anchorPrimary} !important;
+	color: ${palette.text.anchorSecondary} !important;
 `;
 
 export const faq = css`
@@ -77,13 +77,13 @@ export const faq = css`
 	margin-top: ${space[5]}px;
 
 	& a {
-		color: ${palette.text.primary};
+		color: ${palette.text.anchorSecondary};
 		display: block;
 		margin-bottom: ${space[4]}px;
 	}
 
 	& a:hover {
-		color: ${palette.text.primary};
+		color: ${palette.text.anchorSecondary};
 	}
 `;
 

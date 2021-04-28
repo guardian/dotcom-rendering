@@ -6,8 +6,8 @@ import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { brand, space } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { brand, line, space } from '@guardian/src-foundations';
+import { from, until } from '@guardian/src-foundations/mq';
 import { SignInGateProps } from './types';
 import {
 	actionButtons,
@@ -61,13 +61,63 @@ const bodyPadding = css`
 `;
 
 const iconButton = css`
-	margin: 0 ${space[1]}px;
 	:first-of-type {
-		margin-left: ${space[4]}px;
+		margin-left: 0;
 	}
+	margin-left: ${space[3]}px;
+
+	${until.tablet} {
+		font-weight: normal !important;
+		font-size: 15px !important;
+	}
+
+	${from.tablet} {
+		:first-of-type {
+			margin-left: ${space[4]}px;
+		}
+	}
+
 	svg {
 		width: 20px !important;
 	}
+`;
+
+const hideMobile = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+const showMobile = css`
+	${from.tablet} {
+		display: none;
+	}
+`;
+
+const separator = css`
+	display: flex;
+	align-items: center;
+	text-align: center;
+	margin-bottom: ${space[4]}px;
+
+	:before,
+	:after {
+		content: '';
+		flex: 1;
+		border-bottom: 1px solid ${line.primary};
+	}
+
+	:not(:empty)::before {
+		margin-right: 0.25em;
+	}
+
+	:not(:empty)::after {
+		margin-left: 0.25em;
+	}
+`;
+
+const separatorText = css`
+	${textSans.medium({ lineHeight: 'regular' })}
 `;
 
 const facebookIcon = (
@@ -270,7 +320,10 @@ export const SignInGateFakeSocial = ({
 				</Link>
 			</p>
 			<div className={cx([bodyBold, signInHeader, bodyPadding])}>
-				Or continue with{' '}
+				<div className={cx([separator, separatorText, showMobile])}>
+					or continue with
+				</div>
+				<span className={hideMobile}>Or continue with</span>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_facebook"
 					priority="tertiary"
