@@ -222,8 +222,9 @@ const renderText = (byline: DocumentFragment, format: Format): ReactNode =>
 const hasShareIcon = (format: Format): boolean =>
 	!(format.design === Design.Analysis || format.design === Design.Comment);
 
-const hasAvatar = (format: Format): boolean => format.design === Design.Comment;
-
+const hasAvatar = (item: Item): boolean => {
+	return item.design === Design.Comment && item.contributors.length > 0;
+};
 const ignoreKickerColour = (format: Format): boolean =>
 	format.design === Design.Media || format.display === Display.Immersive;
 
@@ -241,7 +242,7 @@ const Byline: FC<Props> = ({ item }) => {
 					<ShareIcon />
 				</span>
 			)}
-			{hasAvatar(format) && (
+			{hasAvatar(item) && (
 				<div css={avatarWrapperStyles}>
 					<EditionsAvatar item={item} />
 				</div>
