@@ -130,9 +130,7 @@ export const StickyBottomBanner = ({
 	}, [isSignedIn, asyncCountryCode, CAPI, brazeMessages]);
 
 	if (SelectedBanner) {
-		return (
-			<SelectedBanner />
-		);
+		return <SelectedBanner />;
 	}
 
 	return null;
