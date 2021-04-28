@@ -196,17 +196,6 @@ const capiEndpoint = (articleId: string, key: string): string => {
 	return `https://content.guardianapis.com/${articleId}?${params.toString()}`;
 };
 
-const footballEndpoint = (articleId: string, key: string): string => {
-	// If you need a new field here, MAPI probably also needs updating
-
-	const params = new URLSearchParams({
-		format: 'thrift',
-		'api-key': key,
-	});
-
-	return `https://content.guardianapis.com/football/everton?${params.toString()}`;
-};
-
 const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
 	// Thrift definitions define some dates as CapiDateTime but CAPI returns strings
 	dateFromString(date.iso8601);
@@ -236,5 +225,4 @@ export {
 	articleMainImage,
 	checkForThirdPartyEmbed,
 	requiresInlineStyles,
-	footballEndpoint,
 };

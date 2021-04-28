@@ -5,7 +5,7 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { Option, Result } from '@guardian/types';
+import type { Option, Result } from '@guardian/types';
 import { either, err, map, ok, OptionKind, withDefault } from '@guardian/types';
 import bodyParser from 'body-parser';
 import { capiEndpoint } from 'capi';
@@ -62,7 +62,11 @@ const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
 const getFootballSelectorId = (
 	content: Content,
 	reverseTeamIds: boolean,
-): string => {
+): {
+	date?: string;
+	teamA?: string;
+	teamB?: string;
+} => {
 	const webPublicationDate = content.webPublicationDate?.iso8601;
 
 	const tags = content.tags;
@@ -79,10 +83,10 @@ const getFootballSelectorId = (
 
 	const date = webPublicationDate?.split('T')[0];
 
-	const id1 = reverseTeamIds ? 0 : 1;
-	const id2 = reverseTeamIds ? 1 : 0;
+	const teamA = ids[reverseTeamIds ? 0 : 1];
+	const teamB = ids[reverseTeamIds ? 1 : 0];
 
-	return `${date}_${ids[id1]}_${ids[id2]}`;
+	return { date, teamA, teamB };
 };
 
 const getFootballEndpoint = (selectorId: string): string => {
@@ -92,10 +96,15 @@ const getFootballEndpoint = (selectorId: string): string => {
 const getFootballContent = async (
 	content: Content,
 	reverseIds: boolean,
-): Promise<FootballContent> => {
-	const selectorId = getFootballSelectorId(content, reverseIds);
-	const footballEndpoint = getFootballEndpoint(selectorId);
+): Promise<FootballContent | undefined> => {
+	const { date, teamA, teamB } = getFootballSelectorId(content, reverseIds);
 
+	if (!teamA || !teamB || !date) {
+		return undefined;
+	}
+
+	const selectorId = `${date}_${teamA}_${teamB}`;
+	const footballEndpoint = getFootballEndpoint(selectorId);
 	const response = await fetch(footballEndpoint).then((res) => {
 		return res.json();
 	});
@@ -104,7 +113,6 @@ const getFootballContent = async (
 		logger.error(
 			"Sometimes team ID's appear in reverse order, retrying request with alternative parameters",
 		);
-
 		return getFootballContent(content, true);
 	}
 
