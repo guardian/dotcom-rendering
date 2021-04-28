@@ -123,6 +123,120 @@ describe('Enhance Numbered Lists', () => {
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
 
+	it('does not set a h3 if there is text before the strong tag', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p>Some text before <strong>Strong 1</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p>Some text before <strong>Strong 1</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('does not set a h3 if there is text after the strong tag', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p><strong>Strong 1</strong>Some text after</p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p><strong>Strong 1</strong>Some text after</p>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('does not set a h3 if there is text before and after the strong tag', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p>Some text before <strong>Strong 1</strong>Some text after</p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p>Some text before <strong>Strong 1</strong>Some text after</p>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
 	it('does not set a h3 if there if the html does not end with a strong p tag combo', () => {
 		const input: CAPIType = {
 			...NumberedList,
