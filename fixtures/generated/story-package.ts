@@ -16,6 +16,34 @@ export const storyPackage = {
 	trails: [
 		{
 			url:
+				'https://www.theguardian.com/science/2021/apr/19/nasas-mars-helicopter-makes-first-ever-powered-flight-on-another-planet',
+			linkText:
+				'Nasa’s Mars helicopter in first powered, controlled flight on another planet',
+			showByline: false,
+			byline: 'Ian Sample',
+			image:
+				'https://i.guim.co.uk/img/media/905f7c8d468c0487a7b5f94ee5d0038bb9ca0616/0_81_2000_1200/master/2000.jpg?width=300&quality=85&auto=format&fit=max&s=f030cfdfa7715833b09bedbd046fe584',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/905f7c8d468c0487a7b5f94ee5d0038bb9ca0616/0_81_2000_1200/master/2000.jpg?width=300&quality=85&auto=format&fit=max&s=f030cfdfa7715833b09bedbd046fe584',
+				'460':
+					'https://i.guim.co.uk/img/media/905f7c8d468c0487a7b5f94ee5d0038bb9ca0616/0_81_2000_1200/master/2000.jpg?width=460&quality=85&auto=format&fit=max&s=66765e1d8be44a7c827f6645597d6772',
+			},
+			isLiveBlog: false,
+			pillar: 'news',
+			designType: 'Article',
+			format: {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-04-19T16:57:05.000Z',
+			headline:
+				'Nasa’s Mars helicopter in first powered, controlled flight on another planet',
+			shortUrl: 'https://www.theguardian.com/p/h5j4b',
+		},
+		{
+			url:
 				'https://www.theguardian.com/science/2021/apr/10/nasa-preparing-to-attempt-first-controlled-flight-on-another-world',
 			linkText:
 				'Nasa preparing to attempt first controlled flight on another world',
@@ -242,35 +270,6 @@ export const storyPackage = {
 			headline:
 				"'It is about our survival': UAE's Mars mission prepares for launch",
 			shortUrl: 'https://www.theguardian.com/p/e2pm9',
-		},
-		{
-			url:
-				'https://www.theguardian.com/science/2020/feb/24/nasa-insight-lander-records-hundreds-marsquakes-red-planet',
-			linkText:
-				"Nasa's InSight lander records hundreds of marsquakes on red planet",
-			showByline: false,
-			byline: 'Ian Sample Science editor',
-			image:
-				'https://i.guim.co.uk/img/media/8c207a44e9368dbe51b3181debbac9dfdc454cd2/0_111_1016_610/master/1016.jpg?width=300&quality=85&auto=format&fit=max&s=59c1ae077cf7ea9cfeac7f7760541e58',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/8c207a44e9368dbe51b3181debbac9dfdc454cd2/0_111_1016_610/master/1016.jpg?width=300&quality=85&auto=format&fit=max&s=59c1ae077cf7ea9cfeac7f7760541e58',
-				'460':
-					'https://i.guim.co.uk/img/media/8c207a44e9368dbe51b3181debbac9dfdc454cd2/0_111_1016_610/master/1016.jpg?width=460&quality=85&auto=format&fit=max&s=e1244630a79b23fa414a7be03377c66e',
-			},
-			ageWarning: '1 year',
-			isLiveBlog: false,
-			pillar: 'news',
-			designType: 'Article',
-			format: {
-				design: 'ArticleDesign',
-				theme: 'NewsPillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2020-02-24T17:22:52.000Z',
-			headline:
-				"Nasa's InSight lander records hundreds of marsquakes on red planet",
-			shortUrl: 'https://www.theguardian.com/p/dbcdb',
 		},
 	],
 };

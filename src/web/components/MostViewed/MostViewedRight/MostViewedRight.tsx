@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 import { headline } from '@guardian/src-foundations/typography';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 import { decideTrail } from '@root/src/web/lib/decideTrail';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 

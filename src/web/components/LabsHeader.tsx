@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import { from } from '@guardian/src-foundations/mq';
 import { border, labs, space } from '@guardian/src-foundations';
 
-import { Section } from '@frontend/web/components/Section';
 import { Dropdown } from '@root/src/web/components/Dropdown';
 
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
@@ -87,6 +86,7 @@ const Title = () => (
 const AboutDropdown = ({ children }: { children: React.ReactNode }) => (
 	<div
 		className={css`
+			color: black;
 			> button {
 				${textSans.small()};
 				color: black;
@@ -153,33 +153,27 @@ const Logo = () => (
 );
 
 export const LabsHeader = () => (
-	<Section
-		showSideBorders={true}
-		showTopBorder={false}
-		backgroundColour={labs[400]}
-		borderColour={border.primary}
-	>
-		<Container>
-			<Left>
-				<HeaderSection isFirst={true}>
-					<Title />
-				</HeaderSection>
-				<HeaderSection>
-					<AboutDropdown>
-						<Dropdown
-							label="About"
-							links={[]}
-							id="paidfor"
-							dataLinkName=""
-						>
-							<About />
-						</Dropdown>
-					</AboutDropdown>
-				</HeaderSection>
-			</Left>
-			<Right>
-				<Logo />
-			</Right>
-		</Container>
-	</Section>
+	<Container>
+		<Left>
+			<HeaderSection isFirst={true}>
+				<Title />
+			</HeaderSection>
+			<HeaderSection>
+				<AboutDropdown>
+					<Dropdown
+						label="About"
+						links={[]}
+						id="paidfor"
+						overrideColor="black"
+						dataLinkName=""
+					>
+						<About />
+					</Dropdown>
+				</AboutDropdown>
+			</HeaderSection>
+		</Left>
+		<Right>
+			<Logo />
+		</Right>
+	</Container>
 );

@@ -84,6 +84,9 @@
                         "$ref": "#/definitions/InteractiveBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/ItemLinkBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/MapBlockElement"
                     },
                     {
@@ -91,6 +94,9 @@
                     },
                     {
                         "$ref": "#/definitions/MultiImageBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/NumberedTitleBlockElement"
                     },
                     {
                         "$ref": "#/definitions/ProfileAtomBlockElement"
@@ -109,6 +115,9 @@
                     },
                     {
                         "$ref": "#/definitions/SpotifyBlockElement"
+                    },
+                    {
+                        "$ref": "#/definitions/StarRatingBlockElement"
                     },
                     {
                         "$ref": "#/definitions/SubheadingBlockElement"
@@ -369,6 +378,9 @@
         },
         "isSpecialReport": {
             "type": "boolean"
+        },
+        "anniversaryInteractiveAtom": {
+            "$ref": "#/definitions/InteractiveAtomBlockElement"
         }
     },
     "required": [
@@ -1248,6 +1260,13 @@
                     "enum": [
                         "model.dotcomrendering.pageElements.DividerBlockElement"
                     ]
+                },
+                "size": {
+                    "enum": [
+                        "full",
+                        "partial"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -1453,6 +1472,20 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "body": {
+                                "type": "string"
+                            }
+                        }
+                    }
                 }
             },
             "required": [
@@ -1687,6 +1720,12 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "starRating": {
+                    "type": "number"
+                },
+                "isAvatar": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1863,6 +1902,28 @@
                 "elementId"
             ]
         },
+        "ItemLinkBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.ItemLinkBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "html"
+            ]
+        },
         "MapBlockElement": {
             "type": "object",
             "properties": {
@@ -2000,6 +2061,95 @@
                 "elementId",
                 "images"
             ]
+        },
+        "NumberedTitleBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.NumberedTitleBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "number"
+                },
+                "html": {
+                    "type": "string"
+                },
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "design": {
+                            "$ref": "#/definitions/CAPIDesign"
+                        },
+                        "theme": {
+                            "$ref": "#/definitions/CAPITheme"
+                        },
+                        "display": {
+                            "$ref": "#/definitions/CAPIDisplay"
+                        }
+                    },
+                    "required": [
+                        "design",
+                        "display",
+                        "theme"
+                    ]
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "format",
+                "html",
+                "position"
+            ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AnalysisDesign",
+                "ArticleDesign",
+                "CommentDesign",
+                "DeadBlogDesign",
+                "EditorialDesign",
+                "FeatureDesign",
+                "InteractiveDesign",
+                "InterviewDesign",
+                "LetterDesign",
+                "LiveBlogDesign",
+                "MatchReportDesign",
+                "MediaDesign",
+                "PhotoEssayDesign",
+                "PrintShopDesign",
+                "QuizDesign",
+                "RecipeDesign",
+                "ReviewDesign"
+            ],
+            "type": "string"
+        },
+        "CAPITheme": {
+            "enum": [
+                "CulturePillar",
+                "Labs",
+                "LifestylePillar",
+                "NewsPillar",
+                "OpinionPillar",
+                "SpecialReportTheme",
+                "SportPillar"
+            ],
+            "type": "string"
+        },
+        "CAPIDisplay": {
+            "enum": [
+                "ImmersiveDisplay",
+                "NumberedListDisplay",
+                "ShowcaseDisplay",
+                "StandardDisplay"
+            ],
+            "type": "string"
         },
         "ProfileAtomBlockElement": {
             "type": "object",
@@ -2241,6 +2391,40 @@
                 "elementId",
                 "isThirdPartyTracking"
             ]
+        },
+        "StarRatingBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.StarRatingBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "rating": {
+                    "type": "number"
+                },
+                "size": {
+                    "$ref": "#/definitions/RatingSizeType"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "rating",
+                "size"
+            ]
+        },
+        "RatingSizeType": {
+            "enum": [
+                "large",
+                "medium",
+                "small"
+            ],
+            "type": "string"
         },
         "SubheadingBlockElement": {
             "type": "object",
@@ -3163,6 +3347,9 @@
                                 "$ref": "#/definitions/InteractiveBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/ItemLinkBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/MapBlockElement"
                             },
                             {
@@ -3170,6 +3357,9 @@
                             },
                             {
                                 "$ref": "#/definitions/MultiImageBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/NumberedTitleBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/ProfileAtomBlockElement"
@@ -3188,6 +3378,9 @@
                             },
                             {
                                 "$ref": "#/definitions/SpotifyBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/StarRatingBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/SubheadingBlockElement"
@@ -3358,49 +3551,6 @@
                 "title",
                 "type"
             ]
-        },
-        "CAPIDesign": {
-            "enum": [
-                "AnalysisDesign",
-                "ArticleDesign",
-                "CommentDesign",
-                "DeadBlogDesign",
-                "EditorialDesign",
-                "FeatureDesign",
-                "InteractiveDesign",
-                "InterviewDesign",
-                "LetterDesign",
-                "LiveBlogDesign",
-                "MatchReportDesign",
-                "MediaDesign",
-                "PhotoEssayDesign",
-                "PrintShopDesign",
-                "QuizDesign",
-                "RecipeDesign",
-                "ReviewDesign"
-            ],
-            "type": "string"
-        },
-        "CAPITheme": {
-            "enum": [
-                "CulturePillar",
-                "Labs",
-                "LifestylePillar",
-                "NewsPillar",
-                "OpinionPillar",
-                "SpecialReportTheme",
-                "SportPillar"
-            ],
-            "type": "string"
-        },
-        "CAPIDisplay": {
-            "enum": [
-                "ImmersiveDisplay",
-                "NumberedListDisplay",
-                "ShowcaseDisplay",
-                "StandardDisplay"
-            ],
-            "type": "string"
         },
         "LegacyPillar": {
             "enum": [

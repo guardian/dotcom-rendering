@@ -32,6 +32,7 @@ const textHeadline = (format: Format): string => {
 					return WHITE;
 			}
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard: {
 			if (format.theme === Special.SpecialReport)
 				return specialReport[100];
@@ -59,6 +60,7 @@ const textSeriesTitle = (format: Format): string => {
 		case Display.Immersive:
 			return WHITE;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 			switch (format.design) {
 				case Design.LiveBlog:
@@ -702,6 +704,14 @@ const textBlockquote = (format: Format): string => {
 	}
 };
 
+const textNumberedTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const textNumberedPosition = (): string => {
+	return text.supporting;
+};
+
 const backgroundHeadlineTag = (format: Format): string =>
 	pillarPalette[format.theme].dark;
 
@@ -754,6 +764,8 @@ export const decidePalette = (format: Format): Palette => {
 			calloutHeading: textCalloutHeading(),
 			dropCap: textDropCap(format),
 			blockquote: textBlockquote(format),
+			numberedTitle: textNumberedTitle(format),
+			numberedPosition: textNumberedPosition(),
 		},
 		background: {
 			article: backgroundArticle(format),

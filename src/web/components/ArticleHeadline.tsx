@@ -218,6 +218,21 @@ export const ArticleHeadline = ({
 	byline,
 	palette,
 }: Props) => {
+	if (format.display === Display.NumberedList) {
+		return (
+			<h1
+				className={cx(
+					boldFont,
+					topPadding,
+					css`
+						color: ${palette.text.headline};
+					`,
+				)}
+			>
+				{curly(headlineString)}
+			</h1>
+		);
+	}
 	switch (format.display) {
 		case Display.Immersive: {
 			switch (format.design) {

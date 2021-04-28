@@ -13,6 +13,7 @@ export type EpicDataFromBraze = {
 	paragraph7?: string;
 	paragraph8?: string;
 	paragraph9?: string;
+	ophanComponentId?: string;
 };
 
 export type Variant = {
@@ -24,6 +25,7 @@ export type Variant = {
 		text: string;
 		baseUrl: string;
 	};
+	ophanComponentId: string;
 };
 
 const parseParagraphs = (dataFromBraze: EpicDataFromBraze): string[] => {
@@ -45,9 +47,21 @@ const parseParagraphs = (dataFromBraze: EpicDataFromBraze): string[] => {
 export const parseBrazeEpicParams = (
 	dataFromBraze: EpicDataFromBraze,
 ): Variant | null => {
-	const { heading, highlightedText, buttonText, buttonUrl } = dataFromBraze;
+	const {
+		heading,
+		highlightedText,
+		buttonText,
+		buttonUrl,
+		ophanComponentId,
+	} = dataFromBraze;
 
-	if (!heading || !highlightedText || !buttonText || !buttonUrl) {
+	if (
+		!heading ||
+		!highlightedText ||
+		!buttonText ||
+		!buttonUrl ||
+		!ophanComponentId
+	) {
 		console.log('Braze Epic: props missing', dataFromBraze);
 		return null;
 	}
@@ -64,5 +78,6 @@ export const parseBrazeEpicParams = (
 		paragraphs,
 		highlightedText,
 		cta: { text: buttonText, baseUrl: buttonUrl },
+		ophanComponentId,
 	};
 };

@@ -103,6 +103,8 @@ type Palette = {
 		pullQuoteAttribution: Colour;
 		dropCap: Colour;
 		blockquote: Colour;
+		numberedTitle: Colour;
+		numberedPosition: Colour;
 	},
 	background: {
 		article: Colour;
@@ -764,7 +766,6 @@ interface DCRServerDocumentData {
 }
 
 interface BrowserNavType {
-	topLevelPillars: PillarType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
 }
@@ -889,7 +890,8 @@ type AdSlotType =
 	| 'mostpop'
 	| 'merchandising-high'
 	| 'merchandising'
-	| 'comments';
+	| 'comments'
+	| 'survey';
 
 // ------------------------------
 // 3rd party type declarations //

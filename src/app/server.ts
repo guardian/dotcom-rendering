@@ -14,6 +14,7 @@ import {
 import {
 	render as renderArticle,
 	renderPerfTest as renderArticlePerfTest,
+	renderArticleJson,
 } from '@root/src/web/server/render';
 
 import {
@@ -27,6 +28,10 @@ import { logger } from './logging';
 export default (options: any) => {
 	if ('amp' in options) {
 		return renderAMPArticle;
+	}
+
+	if ('json' in options) {
+		return renderArticleJson;
 	}
 
 	return renderArticle;
@@ -134,6 +139,8 @@ if (process.env.NODE_ENV === 'production') {
 
 	app.use('/ArticlePerfTest', renderArticlePerfTest);
 	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
+
+	app.use('/ArticleJson', renderArticleJson);
 
 	app.get('/', (req: Request, res: Response) => {
 		try {

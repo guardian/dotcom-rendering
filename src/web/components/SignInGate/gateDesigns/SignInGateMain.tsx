@@ -36,19 +36,17 @@ export const SignInGateMain = ({
 			<style>{hideElementsCss}</style>
 			<div className={firstParagraphOverlay(!!isComment)} />
 			<h1 className={headingStyles}>
-				Register for free and continue reading
+				You need to register to keep reading
 			</h1>
 			<p className={bodyBold}>
-				It’s important to say this is not a step towards a paywall
+				It’s still free to read - this is not a paywall
 			</p>
 			<p className={bodyText}>
-				Registering is a free and simple way to help us sustain our
-				independent Guardian journalism.
-			</p>
-			<p className={bodyText}>
-				When you register with us we are able to improve our news
-				experience for you and for others. You will always be able to
-				control your own&nbsp;
+				We’re committed to keeping our quality reporting open. By
+				registering and providing us with insight into your preferences,
+				you’re helping us to engage with you more deeply, and that
+				allows us to keep our journalism free for all. You’ll always be
+				able to control your own{' '}
 				<button
 					data-cy="sign-in-gate-main_privacy"
 					className={privacyLink}
@@ -59,7 +57,7 @@ export const SignInGateMain = ({
 				>
 					privacy settings
 				</button>
-				. Thank you.
+				.
 			</p>
 			<div className={actionButtons}>
 				<LinkButton

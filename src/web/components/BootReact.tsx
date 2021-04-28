@@ -8,6 +8,7 @@ import { getCookie } from '@frontend/web/browser/cookie';
 import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
 import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
 import { loadableReady } from '@loadable/component';
+import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -25,11 +26,7 @@ export const BootReact = ({ CAPI, NAV }: Props) => {
 		console.log('There is no MVT ID set, see BootReact.tsx');
 	}
 
-	const ophanRecordFunc =
-		window &&
-		window.guardian &&
-		window.guardian.ophan &&
-		window.guardian.ophan.record;
+	const ophanRecord = getOphanRecordFunction();
 
 	const windowHash = window && window.location && window.location.hash;
 
@@ -48,10 +45,10 @@ export const BootReact = ({ CAPI, NAV }: Props) => {
 				pageIsSensitive={CAPI.config.isSensitive}
 				mvtMaxValue={1000000}
 				mvtId={mvtId}
-				ophanRecord={ophanRecordFunc}
+				ophanRecord={ophanRecord}
 				forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
 			>
-				<App CAPI={CAPI} NAV={NAV} />
+				<App CAPI={CAPI} NAV={NAV} ophanRecord={ophanRecord} />
 			</ABProvider>,
 
 			document.getElementById('react-root'),
