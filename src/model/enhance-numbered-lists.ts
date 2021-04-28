@@ -23,6 +23,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const textLength = text?.length;
 	const htmlLength = html.length;
 	const onlyHasOneStrongTag = textLength === htmlLength - 24;
+	const startStrong = html.substr(0, 11) === '<p><strong>';
 	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
 
 	return (
@@ -30,6 +31,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 		containsStrongtags &&
 		doesNotContainLinks &&
 		onlyHasOneStrongTag &&
+		startStrong &&
 		endsStrong
 	);
 };
