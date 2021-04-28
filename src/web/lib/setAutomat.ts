@@ -1,7 +1,6 @@
 import React from 'react';
 import * as preact from 'preact';
 import * as emotion from 'emotion';
-import * as emotionCache from '@emotion/cache';
 import * as emotionTheming from 'emotion-theming';
 import * as emotionReact from '@emotion/react';
 import * as emotionReactJsxRuntime from '@emotion/react/jsx-runtime';
@@ -14,7 +13,6 @@ export const setAutomat = () => {
 		window.guardian.automat = {
 			react: React,
 			preact,
-			emotionCache,
 			emotionCore,
 			emotionReact,
 			emotionReactJsxRuntime,
