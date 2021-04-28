@@ -6,8 +6,6 @@ import responseTime from 'response-time';
 import compression from 'compression';
 
 import {
-	root,
-	dist,
 	port,
 	siteName,
 	statik,
@@ -22,7 +20,6 @@ import {
 	renderPerfTest as renderArticlePerfTest,
 } from '@root/src/web/server/render';
 
-import fs from 'fs';
 import {
 	getGuardianConfiguration,
 	GuardianConfiguration,
