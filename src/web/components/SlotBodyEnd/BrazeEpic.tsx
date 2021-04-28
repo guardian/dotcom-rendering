@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { css } from 'emotion';
 
 import {
@@ -20,6 +20,7 @@ const wrapperMargins = css`
 `;
 
 const EPIC_COMPONENT_PATH = '/modules/v1/epics/ContributionsEpic.js';
+const COMPONENT_TYPE = 'RETENTION_EPIC';
 
 type Meta = {
 	dataFromBraze?: EpicDataFromBraze;
@@ -110,6 +111,8 @@ const BrazeEpic = ({
 		debounce: true,
 	});
 
+	const epicRef = useRef(null);
+
 	useOnce(() => {
 		setAutomat();
 
@@ -128,6 +131,16 @@ const BrazeEpic = ({
 			});
 	}, [contributionsServiceUrl, meta]);
 
+	useOnce(() => {
+		submitComponentEvent({
+			component: {
+				componentType: COMPONENT_TYPE,
+				id: (meta.dataFromBraze as EpicDataFromBraze).ophanComponentId,
+			},
+			action: 'INSERT',
+		});
+	}, [meta?.dataFromBraze, epicRef.current]);
+
 	useEffect(() => {
 		if (hasBeenSeen && meta && meta.dataFromBraze) {
 			meta.logImpressionWithBraze();
@@ -135,7 +148,7 @@ const BrazeEpic = ({
 			// Log VIEW event with Ophan
 			submitComponentEvent({
 				component: {
-					componentType: 'RETENTION_EPIC',
+					componentType: COMPONENT_TYPE,
 					id: meta.dataFromBraze.ophanComponentId,
 				},
 				action: 'VIEW',
@@ -150,8 +163,10 @@ const BrazeEpic = ({
 		if (props) {
 			return (
 				<div ref={setNode} className={wrapperMargins}>
-					{/* eslint-disable-next-line react/jsx-props-no-spreading */}
-					<Epic {...props} />
+					<div ref={epicRef}>
+						{/* eslint-disable-next-line react/jsx-props-no-spreading */}
+						<Epic {...props} />
+					</div>
 				</div>
 			);
 		}
