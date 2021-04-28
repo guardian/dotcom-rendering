@@ -5,11 +5,7 @@ import responseTime from 'response-time';
 
 import compression from 'compression';
 
-import {
-	port,
-	siteName,
-	statik,
-} from '@root/scripts/frontend/config';
+import { port, siteName, statik } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 import {
 	render as renderAMPArticle,
