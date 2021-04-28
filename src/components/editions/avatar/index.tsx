@@ -29,6 +29,10 @@ const Avatar: FC<Props> = ({ item }) => {
 	const [contributor] = item.contributors;
 	const format = getFormat(item);
 
+	if (!contributor) {
+		return null;
+	}
+
 	return pipe2(
 		contributor.image,
 		map((image) => (
