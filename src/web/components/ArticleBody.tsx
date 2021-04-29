@@ -28,7 +28,7 @@ const globalH2Styles = (display: Display) => css`
 `;
 
 const globalH3Styles = (display: Display) => {
-	// if (display !== Display.NumberedList) return null;
+	if (display !== Display.NumberedList) return null;
 	return css`
 		h3 {
 			${headline.xxsmall({ fontWeight: 'bold' })};
