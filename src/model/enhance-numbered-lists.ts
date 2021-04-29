@@ -11,7 +11,6 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstElementChild) return false;
 	const html = frag.firstElementChild.outerHTML;
-	// const text = frag.firstElementChild.textContent;
 	// The following things must be true for an element to be a faux H3
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
 	const containsStrongtags = frag.firstElementChild.outerHTML.includes(
