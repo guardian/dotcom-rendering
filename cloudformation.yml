@@ -48,6 +48,9 @@ Parameters:
   ELKStream:
     Type: String
     Description: name of the kinesis stream to use to send logs to the central ELK stack
+	FrontendConfigKey:
+    Description: Parameter store KMS key
+    Type: String
 
 Conditions:
     HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -147,6 +150,11 @@ Resources:
             - autoscaling:DescribeAutoScalingGroups
             - autoscaling:DescribeAutoScalingInstances
             Resource: '*'
+					- Resource: !Ref FrontendConfigKey
+          	Effect: Allow
+          	Action:
+            - kms:Decrypt
+            - kms:DescribeKey
           - Effect: Allow
             Action:
               - ssm:GetParametersByPath
