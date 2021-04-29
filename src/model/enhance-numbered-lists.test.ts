@@ -85,7 +85,7 @@ describe('Enhance Numbered Lists', () => {
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
 
-	it('does not set a h3 if there is more than one strong tag', () => {
+	it('does set a h3 if there is more than one strong tag', () => {
 		const input: CAPIType = {
 			...NumberedList,
 			blocks: [
@@ -97,7 +97,7 @@ describe('Enhance Numbered Lists', () => {
 								'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html:
-								'<p><strong>Strong 1</strong><strong>Strong 2</strong></p>',
+								'<p><strong>Strong 1</strong> <strong>Strong 2</strong></p>',
 						},
 					],
 				},
@@ -111,10 +111,15 @@ describe('Enhance Numbered Lists', () => {
 					elements: [
 						{
 							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+							spaceAbove: 'tight',
+						},
+						{
+							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><strong>Strong 1</strong><strong>Strong 2</strong></p>',
+							html: '<h3>Strong 1 Strong 2</h3>',
 						},
 					],
 				},
