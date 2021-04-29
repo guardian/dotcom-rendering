@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import Logo from '@frontend/static/logos/the-guardian.svg';
+import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
 import { pillarPalette } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
@@ -19,6 +19,7 @@ const row = css`
 `;
 
 const logoStyles = css`
+
 	align-self: flex-start;
 	height: 57px;
 	width: 175px;
@@ -37,6 +38,12 @@ const logoStyles = css`
 		margin-right: 52px;
 		margin-top: 9px;
 	}
+
+	svg{
+		max-width:100%;
+		max-height: 100%;
+	}
+
 `;
 
 const pillarListStyles = css`
