@@ -172,7 +172,7 @@ export const Discussion = ({
 				}
 			>
 				<Flex>
-					<div
+					<div>
 						className={css`
 							${from.leftCol} {
 								padding-left: 10px;
@@ -255,22 +255,22 @@ export const Discussion = ({
 						)}
 					</div>
 					<>
-						{!hideAd && (
-							<RightColumn>
-								<div
-									className={css`
-										position: static;
-										height: 100%;
-										padding-left: 20px;
-									`}
-								>
+						<RightColumn>
+							<div
+								className={css`
+									position: static;
+									height: 100%;
+									padding-left: 20px;
+								`}
+							>
+								{!hideAd && (
 									<AdSlot
 										position="comments"
 										display={display}
 									/>
-								</div>
-							</RightColumn>
-						)}
+								)}
+							</div>
+						</RightColumn>
 					</>
 				</Flex>
 			</ContainerLayout>
