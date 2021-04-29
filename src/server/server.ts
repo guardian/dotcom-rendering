@@ -35,7 +35,7 @@ import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
-import { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
+import { getFootballContent } from './footballContent';
 
 // ----- Setup ----- //
 
@@ -58,66 +58,6 @@ function getPrefetchHeader(resources: string[]): string {
 
 const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
 	fetch(capiEndpoint(articleId, key));
-
-const getFootballSelectorId = (
-	content: Content,
-	reverseTeamIds: boolean,
-): {
-	date?: string;
-	teamA?: string;
-	teamB?: string;
-} => {
-	const webPublicationDate = content.webPublicationDate?.iso8601;
-
-	const tags = content.tags;
-
-	const teams = tags
-		.map((tag) => tag.references)
-		.flat()
-		.filter((tag) => tag.type === 'pa-football-team');
-
-	const ids = teams.map((team) => {
-		const strings = team.id.split('/');
-		return strings[1];
-	});
-
-	const date = webPublicationDate?.split('T')[0];
-
-	const teamA = ids[reverseTeamIds ? 0 : 1];
-	const teamB = ids[reverseTeamIds ? 1 : 0];
-
-	return { date, teamA, teamB };
-};
-
-const getFootballEndpoint = (selectorId: string): string => {
-	return `https://mobile.guardianapis.com/sport/football/matches?selector=${selectorId}`;
-};
-
-const getFootballContent = async (
-	content: Content,
-	reverseIds: boolean,
-): Promise<FootballContent | undefined> => {
-	const { date, teamA, teamB } = getFootballSelectorId(content, reverseIds);
-
-	if (!teamA || !teamB || !date) {
-		return undefined;
-	}
-
-	const selectorId = `${date}_${teamA}_${teamB}`;
-	const footballEndpoint = getFootballEndpoint(selectorId);
-	const response = await fetch(footballEndpoint).then((res) => {
-		return res.json();
-	});
-
-	if (response.errorMessage) {
-		logger.error(
-			"Sometimes team ID's appear in reverse order, retrying request with alternative parameters",
-		);
-		return getFootballContent(content, true);
-	}
-
-	return response[selectorId];
-};
 
 const parseCapiResponse = (articleId: string) => async (
 	capiResponse: Response,
@@ -283,10 +223,7 @@ async function serveArticleGet(
 				res.sendStatus(errorStatus);
 			},
 			async ([content, relatedContent]: [Content, RelatedContent]) => {
-				const footballContent = await getFootballContent(
-					content,
-					false,
-				);
+				const footballContent = await getFootballContent(content);
 
 				const mockedRenderingRequest: RenderingRequest = {
 					content,

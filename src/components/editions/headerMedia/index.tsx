@@ -132,7 +132,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 			} = media;
 
 			const matchScores = 'football' in item ? item.football : none;
-
+			console.log(matchScores);
 			return (
 				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
 					{maybeRender(matchScores, (scores) => (
