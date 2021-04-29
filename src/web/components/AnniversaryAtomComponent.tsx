@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from 'emotion';
-import { InteractiveAtom } from '@guardian/atoms-rendering';
 import { from } from '@guardian/src-foundations/mq';
 
 const atomStyles = (
@@ -42,19 +41,40 @@ const atomStyles = (
 		}
 	}
 `;
+
+export const InlineAnniversaryAtom = ({
+	html,
+	atomCss,
+	js,
+}: {
+	html: string | undefined;
+	atomCss: string | undefined;
+	js: string;
+}) => {
+	return (
+		<>
+			{atomCss && <style dangerouslySetInnerHTML={{ __html: atomCss }} />}
+
+			{html && <div dangerouslySetInnerHTML={{ __html: html }} />}
+			<script dangerouslySetInnerHTML={{ __html: js }} />
+		</>
+	);
+};
 export const AnniversaryAtomComponent = ({
 	anniversaryInteractiveAtom,
 }: {
 	anniversaryInteractiveAtom: InteractiveAtomBlockElement | undefined;
 }) => {
 	return (
-		<div className={atomStyles(anniversaryInteractiveAtom)}>
+		<div
+			className={atomStyles(anniversaryInteractiveAtom)}
+			data-visuals-hook="article-anniversary-atom"
+		>
 			{anniversaryInteractiveAtom && (
-				<InteractiveAtom
+				<InlineAnniversaryAtom
 					html={anniversaryInteractiveAtom.html}
 					js={anniversaryInteractiveAtom.js}
-					css={anniversaryInteractiveAtom.css}
-					id={anniversaryInteractiveAtom.id}
+					atomCss={anniversaryInteractiveAtom.css}
 				/>
 			)}
 		</div>
