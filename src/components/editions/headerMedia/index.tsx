@@ -132,20 +132,25 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 			} = media;
 
 			const matchScores = 'football' in item ? item.football : none;
-			console.log(matchScores);
+
 			return (
 				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
-					{maybeRender(matchScores, (scores) => (
-						<div id="js-football-scores" style={{ width: '100vw' }}>
-							<FootballScores
-								league={scores.league}
-								stadium={scores.stadium}
-								homeTeam={scores.homeTeam}
-								awayTeam={scores.awayTeam}
-								status={scores.status}
-							/>
-						</div>
-					))}
+					{maybeRender(matchScores, (scores) => {
+						return (
+							<div
+								id="js-football-scores"
+								style={{ width: '100vw' }}
+							>
+								<FootballScores
+									league={scores.league}
+									stadium={scores.stadium}
+									homeTeam={scores.homeTeam}
+									awayTeam={scores.awayTeam}
+									status={scores.status}
+								/>
+							</div>
+						);
+					})}
 					<Img
 						image={image}
 						sizes={getImageSizes(format)}

@@ -15734,24 +15734,6 @@ exports[`Storyshots FootballScores Default 1`] = `
 }
 
 .emotion-13 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  grid-column: 2;
-  grid-row: 2;
-}
-
-@media (min-width: 660px) {
-  .emotion-13 {
-    grid-column: 1;
-  }
-}
-
-.emotion-14 {
   display: grid;
   grid-template-columns: auto 1fr;
   border-top: 1px dotted #000000;
@@ -15761,7 +15743,7 @@ exports[`Storyshots FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-14 {
+  .emotion-13 {
     display: inline-grid;
     width: 50%;
     vertical-align: top;
@@ -15769,7 +15751,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   }
 }
 
-.emotion-15 {
+.emotion-14 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
@@ -15779,7 +15761,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   grid-row: 1;
 }
 
-.emotion-16 {
+.emotion-15 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
@@ -15790,12 +15772,12 @@ exports[`Storyshots FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-16 {
+  .emotion-15 {
     margin-left: 1rem;
   }
 }
 
-.emotion-19 {
+.emotion-18 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -15863,20 +15845,17 @@ exports[`Storyshots FootballScores Default 1`] = `
         </span>
       </div>
     </div>
-    <ul
-      className="emotion-13"
-    />
   </section>
   <section
-    className="emotion-14"
+    className="emotion-13"
   >
     <h3
-      className="emotion-15"
+      className="emotion-14"
     >
       Man City
     </h3>
     <div
-      className="emotion-16"
+      className="emotion-15"
     >
       <div
         className="emotion-11"
@@ -15889,7 +15868,7 @@ exports[`Storyshots FootballScores Default 1`] = `
       </div>
     </div>
     <ul
-      className="emotion-19"
+      className="emotion-18"
     >
       <li>
         Sterling

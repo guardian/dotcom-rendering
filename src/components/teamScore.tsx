@@ -92,14 +92,16 @@ const TeamScore: FC<Props> = ({ team, location }) => (
 				<span css={scoreInlineStyles}>{team.score}</span>
 			</div>
 		</div>
-		<ul css={scorerStyles(location)}>
-			{team.scorers?.map((scorer) => (
-				<li key={`${scorer.player}`}>
-					{scorer.player} {scorer.timeInMinutes}&apos;{' '}
-					{scorer.additionalInfo}
-				</li>
-			))}
-		</ul>
+		{team.scorers.length > 0 && (
+			<ul css={scorerStyles(location)}>
+				{team.scorers.map((scorer) => (
+					<li key={`${scorer.player}`}>
+						{scorer.player} {scorer.timeInMinutes}&apos;{' '}
+						{scorer.additionalInfo}
+					</li>
+				))}
+			</ul>
+		)}
 	</section>
 );
 

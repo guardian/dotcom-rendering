@@ -56,10 +56,10 @@ const parseFootballResponse = async (
 	selectorId: string,
 ): Promise<Result<string, FootballContent>> => {
 	if (response.status === 200) {
-		const json: FootballResponse = await response.json();
+		const json = (await response.json()) as FootballResponse;
 		return ok(json[selectorId]);
 	} else if (response.status === 400) {
-		const json: FootballError = await response.json();
+		const json = (await response.json()) as FootballError;
 		return err(json.errorMessage);
 	} else {
 		return err('Problem accessing PA API');
@@ -88,7 +88,9 @@ const teamsFromTags = (tags: Tag[]): Option<Teams> => {
 	return none;
 };
 
-const getFootballContent = async (content: Content) => {
+const getFootballContent = async (
+	content: Content,
+): Promise<FootballContent | undefined> => {
 	const teams = teamsFromTags(content.tags);
 
 	if (teams.kind === OptionKind.Some) {
@@ -117,9 +119,13 @@ const getFootballContent = async (content: Content) => {
 					if (footballContent.kind === ResultKind.Ok) {
 						return footballContent.value;
 					}
+					return undefined;
 				}
+				return undefined;
 			}
+			return undefined;
 		}
+		return undefined;
 	}
 	return undefined;
 };
