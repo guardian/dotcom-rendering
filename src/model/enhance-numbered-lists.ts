@@ -11,7 +11,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstElementChild) return false;
 	const html = frag.firstElementChild.outerHTML;
-	const text = frag.firstElementChild.textContent;
+	// const text = frag.firstElementChild.textContent;
 	// The following things must be true for an element to be a faux H3
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
 	const containsStrongtags = frag.firstElementChild.outerHTML.includes(
@@ -20,9 +20,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const doesNotContainLinks = !frag.firstElementChild.outerHTML.includes(
 		'<a>',
 	);
-	const textLength = text?.length;
 	const htmlLength = html.length;
-	const onlyHasOneStrongTag = textLength === htmlLength - 24;
 	const startStrong = html.substr(0, 11) === '<p><strong>';
 	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
 
@@ -30,7 +28,6 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 		hasPwrapper &&
 		containsStrongtags &&
 		doesNotContainLinks &&
-		onlyHasOneStrongTag &&
 		startStrong &&
 		endsStrong
 	);
