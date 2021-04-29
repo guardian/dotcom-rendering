@@ -131,7 +131,8 @@ const Article: FC<Props> = ({ item }) => {
 		item.design === Design.Media ||
 		item.design === Design.Editorial ||
 		item.design === Design.Letter ||
-		item.design === Design.Quiz
+		item.design === Design.Quiz ||
+		item.design === Design.Recipe
 	) {
 		return (
 			<main css={mainStyles}>
