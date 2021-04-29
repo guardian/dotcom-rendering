@@ -16,10 +16,12 @@ import { getCookie } from '@frontend/web/browser/cookie';
 // Sign in Gate A/B Tests
 import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
 import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
+import { signInGateFakeSocial } from '@root/src/web/experiments/tests/sign-in-gate-fake-social';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
+import { signInGateComponent as gateFakeSocialVariant } from '@root/src/web/components/SignInGate/gates/fake-social-variant';
 
 import {
 	ComponentEventParams,
@@ -65,16 +67,20 @@ type GateTestMap = { [name: string]: SignInGateComponent };
 const tests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
+	signInGateFakeSocial,
 ];
 
 const testVariantToGateMapping: GateTestMap = {
 	'main-control-4': gateMainControl,
 	'main-variant-4': gateMainVariant,
+	'fake-social-variant': gateFakeSocialVariant,
+	'fake-social-control': gateMainVariant,
 };
 
 const testIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_4',
 	SignInGateMainControl: 'main_control_4',
+	SignInGateFakeSocial: 'fake_social',
 };
 
 // function to generate the profile.theguardian.com url with tracking params

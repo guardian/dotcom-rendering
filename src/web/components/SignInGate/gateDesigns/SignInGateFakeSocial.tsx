@@ -60,11 +60,23 @@ const bodyPadding = css`
 	}
 `;
 
+const socialBox = css`
+	display: flex;
+	align-items: center;
+`;
+
+const socialBoxText = css`
+	flex: 1 0 auto;
+`;
+
 const iconButton = css`
 	:first-of-type {
 		margin-left: 0;
 	}
 	margin-left: ${space[1]}px;
+
+	flex: 1 1 100%;
+	justify-content: center !important;
 
 	${until.mobileMedium} {
 		padding: 0 12px !important;
@@ -110,7 +122,7 @@ const separator = css`
 	display: flex;
 	align-items: center;
 	text-align: center;
-	margin-bottom: ${space[4]}px;
+	margin-top: ${space[4]}px;
 
 	:before,
 	:after {
@@ -334,11 +346,15 @@ export const SignInGateFakeSocial = ({
 					Sign In
 				</Link>
 			</p>
-			<div className={cx([bodyBold, signInHeader, bodyPadding])}>
-				<div className={cx([separator, separatorText, showMobile])}>
-					or continue with
-				</div>
-				<span className={hideMobile}>Or continue with</span>
+			<div className={cx([separator, separatorText, showMobile])}>
+				or continue with
+			</div>
+			<div
+				className={cx([bodyBold, signInHeader, bodyPadding, socialBox])}
+			>
+				<span className={cx([hideMobile, socialBoxText])}>
+					Or continue with
+				</span>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_facebook"
 					data-ignore="global-link-styling"
