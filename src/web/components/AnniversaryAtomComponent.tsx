@@ -4,7 +4,7 @@ import { InteractiveAtom } from '@guardian/atoms-rendering';
 import { from } from '@guardian/src-foundations/mq';
 
 const atomStyles = (
-	anniversaryInteractiveAtom: interactiveAtomBlockElement | undefined,
+	anniversaryInteractiveAtom: InteractiveAtomBlockElement | undefined,
 ) => css`
 	/* Temporarily support anniversary atom at top of articles */
 	/* stylelint-disable color-no-hex */
