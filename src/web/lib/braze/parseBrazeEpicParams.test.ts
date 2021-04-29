@@ -1,3 +1,4 @@
+import { ok, err } from '@guardian/types';
 import {
 	EpicDataFromBraze,
 	parseBrazeEpicParams,
@@ -17,13 +18,13 @@ describe('parseBrazeEpicParams', () => {
 			ophanComponentId: 'epic_123',
 		};
 
-		const expected = {
+		const expected = ok({
 			heading: 'Example Heading',
 			paragraphs: ['Paragraph 1', 'Paragraph 2', 'Paragraph 3'],
 			highlightedText: 'Example highlighted text',
 			cta: { text: 'Button', baseUrl: 'https://www.example.com' },
 			ophanComponentId: 'epic_123',
-		};
+		});
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
@@ -42,20 +43,20 @@ describe('parseBrazeEpicParams', () => {
 			ophanComponentId: 'epic_123',
 		};
 
-		const expected = {
+		const expected = ok({
 			heading: 'Example Heading',
 			paragraphs: ['First paragraph', 'Another paragraph'],
 			highlightedText: 'Example highlighted text',
 			cta: { text: 'Button', baseUrl: 'https://www.example.com' },
 			ophanComponentId: 'epic_123',
-		};
+		});
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
 		expect(got).toEqual(expected);
 	});
 
-	it('returns null when the heading is missing', () => {
+	it('returns an error message when the heading is missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			paragraph1: 'Paragraph 1',
@@ -68,10 +69,10 @@ describe('parseBrazeEpicParams', () => {
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
-		expect(got).toBeNull();
+		expect(got).toEqual(err('Missing field(s): heading'));
 	});
 
-	it('returns null when the paragraphs are missing', () => {
+	it('returns an error message when the paragraphs are missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			heading: 'Example Heading',
@@ -83,10 +84,10 @@ describe('parseBrazeEpicParams', () => {
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
-		expect(got).toBeNull();
+		expect(got).toEqual(err('Missing paragraphs'));
 	});
 
-	it('returns null when the paragraphs are not truthy', () => {
+	it('returns an error message when the paragraphs are not truthy', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			paragraph1: '',
@@ -100,10 +101,10 @@ describe('parseBrazeEpicParams', () => {
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
-		expect(got).toBeNull();
+		expect(got).toEqual(err('Missing paragraphs'));
 	});
 
-	it('returns null when the highlightedText is missing', () => {
+	it('returns an error message when the highlightedText is missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			heading: 'Example Heading',
@@ -116,10 +117,10 @@ describe('parseBrazeEpicParams', () => {
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
-		expect(got).toBeNull();
+		expect(got).toEqual(err('Missing field(s): highlightedText'));
 	});
 
-	it('returns null when the buttonText is missing', () => {
+	it('returns an error message when the buttonText is missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			heading: 'Example Heading',
@@ -132,10 +133,10 @@ describe('parseBrazeEpicParams', () => {
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
-		expect(got).toBeNull();
+		expect(got).toEqual(err('Missing field(s): buttonText'));
 	});
 
-	it('returns null when the buttonUrl is missing', () => {
+	it('returns an error message when the buttonUrl is missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			heading: 'Example Heading',
@@ -148,10 +149,10 @@ describe('parseBrazeEpicParams', () => {
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
-		expect(got).toBeNull();
+		expect(got).toEqual(err('Missing field(s): buttonUrl'));
 	});
 
-	it('returns null when the ophanComponentId is missing', () => {
+	it('returns an error message when the ophanComponentId is missing', () => {
 		const dataFromBraze: EpicDataFromBraze = {
 			componentName: 'Epic',
 			heading: 'Example Heading',
@@ -164,6 +165,21 @@ describe('parseBrazeEpicParams', () => {
 
 		const got = parseBrazeEpicParams(dataFromBraze);
 
-		expect(got).toBeNull();
+		expect(got).toEqual(err('Missing field(s): ophanComponentId'));
+	});
+
+	it('returns the correct error message when multiple fields missing', () => {
+		const dataFromBraze: EpicDataFromBraze = {
+			componentName: 'Epic',
+			paragraph1: 'Paragraph 1',
+			paragraph2: 'Paragraph 2',
+			highlightedText: 'Example highlighted text',
+			buttonText: 'Button',
+			buttonUrl: 'https://www.example.com',
+		};
+
+		const got = parseBrazeEpicParams(dataFromBraze);
+
+		expect(got).toEqual(err('Missing field(s): heading,ophanComponentId'));
 	});
 });

@@ -1,3 +1,5 @@
+import { Result, ok, err } from '@guardian/types';
+
 export type EpicDataFromBraze = {
 	componentName: 'Epic';
 	heading?: string;
@@ -46,38 +48,35 @@ const parseParagraphs = (dataFromBraze: EpicDataFromBraze): string[] => {
 
 export const parseBrazeEpicParams = (
 	dataFromBraze: EpicDataFromBraze,
-): Variant | null => {
-	const {
-		heading,
-		highlightedText,
-		buttonText,
-		buttonUrl,
-		ophanComponentId,
-	} = dataFromBraze;
+): Result<string, Variant> => {
+	const basicFields: Array<keyof EpicDataFromBraze> = [
+		'heading',
+		'highlightedText',
+		'buttonText',
+		'buttonUrl',
+		'ophanComponentId',
+	];
 
-	if (
-		!heading ||
-		!highlightedText ||
-		!buttonText ||
-		!buttonUrl ||
-		!ophanComponentId
-	) {
-		console.log('Braze Epic: props missing', dataFromBraze);
-		return null;
+	const missingBasicFields = basicFields.filter((key) => !dataFromBraze[key]);
+	if (missingBasicFields.length > 0) {
+		return err(`Missing field(s): ${missingBasicFields}`);
 	}
 
 	const paragraphs = parseParagraphs(dataFromBraze);
 	if (paragraphs.length < 1) {
-		console.log('Braze Epic: no valid paragraphs received', dataFromBraze);
-		return null;
+		return err('Missing paragraphs');
 	}
 
-	return {
-		// name: 'BrazeEpic', // This may be useful for click tracking once we add it
-		heading,
+	const variant = {
+		heading: dataFromBraze.heading,
 		paragraphs,
-		highlightedText,
-		cta: { text: buttonText, baseUrl: buttonUrl },
-		ophanComponentId,
+		highlightedText: dataFromBraze.highlightedText,
+		cta: {
+			text: dataFromBraze.buttonText,
+			baseUrl: dataFromBraze.buttonUrl,
+		},
+		ophanComponentId: dataFromBraze.ophanComponentId,
 	};
+
+	return ok(variant as Variant);
 };
