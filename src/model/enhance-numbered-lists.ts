@@ -374,7 +374,7 @@ const enhance = (
 };
 
 export const enhanceNumberedLists = (data: CAPIType): CAPIType => {
-	const isNumberedList = data.format.display === 'NumberedListDisplay';
+	const isNumberedList = true; // data.format.display === 'NumberedListDisplay';
 
 	if (!isNumberedList) {
 		return data;

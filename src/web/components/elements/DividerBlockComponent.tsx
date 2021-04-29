@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 
 import { border } from '@guardian/src-foundations/palette';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
 	size?: 'full' | 'partial';
@@ -23,10 +24,10 @@ const sizePartialStyle = css`
 `;
 
 const tightSpaceAboveStyle = css`
-	margin-top: 20px;
+	margin-top: ${space[5]}px;
 `;
 const looseSpaceAboveStyle = css`
-	margin-top: 48px;
+	margin-top: ${space[12]}px;
 `;
 
 export const DividerBlockComponent = ({
