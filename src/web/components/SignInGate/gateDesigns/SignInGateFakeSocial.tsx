@@ -64,7 +64,15 @@ const iconButton = css`
 	:first-of-type {
 		margin-left: 0;
 	}
-	margin-left: ${space[3]}px;
+	margin-left: ${space[1]}px;
+
+	${until.mobileMedium} {
+		padding: 0 12px !important;
+	}
+
+	${from.mobileMedium} {
+		margin-left: ${space[3]}px;
+	}
 
 	${until.tablet} {
 		font-weight: normal !important;
@@ -78,7 +86,11 @@ const iconButton = css`
 	}
 
 	svg {
-		width: 20px !important;
+		width: 15px !important;
+
+		${from.mobileMedium} {
+			width: 20px !important;
+		}
 	}
 `;
 
@@ -246,16 +258,16 @@ export const SignInGateFakeSocial = ({
 			<style>{hideElementsCss}</style>
 			<div className={firstParagraphOverlay(!!isComment)} />
 			<h1 className={cx([heading, bodyPadding])}>
-				Register to keep reading
+				You need to register to keep reading
 			</h1>
 			<h2 className={cx([subheading, bodyPadding])}>
-				It will only take a minute - and it’s free
+				It’s still free to read - this is not a paywall
 			</h2>
 			<p className={cx([bodySeparator, bodyBold, bodyPadding])}>
-				It is our mission to keep our reporting free for everyone. By
-				registering and sharing your preferences, you’re helping to
-				sustain progressive journalism that will keep on challenging the
-				status quo.
+				We’re committed to keep our quality reporting open. By
+				registering and providing us with insight into your preferences,
+				you’re helping us to engage with you more deeply, and that allow
+				us to keep our journalism free for all.
 			</p>
 			<p className={cx([bodyText, bodyPadding])}>
 				You’ll always be able to control your own&nbsp;
@@ -268,12 +280,13 @@ export const SignInGateFakeSocial = ({
 					}}
 				>
 					privacy settings
-				</button>
-				.
+				</button>{' '}
+				and every article will remain free.
 			</p>
 			<div className={cx([actionButtons, buttonMargin, bodyPadding])}>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_register"
+					data-ignore="global-link-styling"
 					className={registerButton}
 					priority="primary"
 					size="small"
@@ -287,6 +300,7 @@ export const SignInGateFakeSocial = ({
 
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_dismiss"
+					data-ignore="global-link-styling"
 					className={laterButton}
 					priority="subdued"
 					size="small"
@@ -310,6 +324,7 @@ export const SignInGateFakeSocial = ({
 				Already registered?{' '}
 				<Link
 					data-cy="sign-in-gate-fake-social_signin"
+					data-ignore="global-link-styling"
 					className={cx([signInLink, inlineLink])}
 					href={signInUrl}
 					onClick={() => {
@@ -326,6 +341,7 @@ export const SignInGateFakeSocial = ({
 				<span className={hideMobile}>Or continue with</span>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_facebook"
+					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
 					className={iconButton}
@@ -340,6 +356,7 @@ export const SignInGateFakeSocial = ({
 				</LinkButton>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_google"
+					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
 					className={iconButton}
@@ -354,6 +371,7 @@ export const SignInGateFakeSocial = ({
 				</LinkButton>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_apple"
+					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
 					className={iconButton}
@@ -370,6 +388,7 @@ export const SignInGateFakeSocial = ({
 
 			<div className={faq}>
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'how-link', abTest);
@@ -379,6 +398,7 @@ export const SignInGateFakeSocial = ({
 				</Link>
 
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'why-link', abTest);
@@ -388,6 +408,7 @@ export const SignInGateFakeSocial = ({
 				</Link>
 
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'help-link', abTest);

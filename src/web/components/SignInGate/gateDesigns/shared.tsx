@@ -54,7 +54,12 @@ export const actionButtons = css`
 	margin-bottom: 42px;
 
 	> a {
-		margin-right: ${space[9]}px !important;
+		margin-right: ${space[4]}px !important;
+
+		${from.mobileMedium} {
+			margin-right: ${space[9]}px !important;
+		}
+
 		text-decoration: none !important;
 	}
 `;

@@ -1267,6 +1267,13 @@
                         "partial"
                     ],
                     "type": "string"
+                },
+                "spaceAbove": {
+                    "enum": [
+                        "loose",
+                        "tight"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
