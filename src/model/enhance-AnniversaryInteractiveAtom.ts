@@ -7,7 +7,7 @@ export const enhanceAnniversaryAtom = (data: CAPIType): CAPIType => {
 		hideAnniversaryAtomVariant,
 		anniversaryAtomVariant,
 	} = data.config.abTests;
-	const { editionId } = data;
+	const { editionId, pageType } = data;
 
 	// If
 	// - the main anniversaryArticleHeader switch is ON
@@ -18,7 +18,8 @@ export const enhanceAnniversaryAtom = (data: CAPIType): CAPIType => {
 		anniversaryArticleHeader && // The main switch is set to ON
 		anniversaryAtomVariant === 'variant' && // Opted into the 0% test for testing purposes
 		hideAnniversaryAtomVariant !== 'variant' && // Not opted into the 0% A/B test used for hiding the atom
-		editionId !== 'AU' // Not in the AU edition
+		editionId !== 'AU' && // Not in the AU edition
+		!pageType.isSensitive // The page isn't sensitive
 	) {
 		data.anniversaryInteractiveAtom = getAnniversaryAtomCache();
 	}
