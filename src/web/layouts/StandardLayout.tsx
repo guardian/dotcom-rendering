@@ -397,6 +397,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			{format.theme !== Special.Labs ? (
 				<>
 					<Section
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<GuardianLines count={4} palette={palette} />
+					</Section>
+					<Section
 						backgroundColour={brandAltBackground.primary}
 						padded={false}
 						showTopBorder={false}
@@ -407,13 +414,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								CAPI.anniversaryInteractiveAtom
 							}
 						/>
-					</Section>
-					<Section
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<GuardianLines count={4} palette={palette} />
 					</Section>
 				</>
 			) : (
@@ -441,13 +441,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				borderColour={palette.border.article}
 			>
 				<StandardGrid isMatchReport={isMatchReport}>
-					<GridItem area="atom">
-						<AnniversaryAtomComponent
-							anniversaryInteractiveAtom={
-								CAPI.anniversaryInteractiveAtom
-							}
-						/>
-					</GridItem>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}
