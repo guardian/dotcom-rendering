@@ -361,7 +361,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -1574,7 +1574,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -2854,7 +2854,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -4015,7 +4015,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -5199,7 +5199,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -8444,7 +8444,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 @media (min-width: 740px) {
   .emotion-5 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -9565,7 +9565,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -10871,7 +10871,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 @media (min-width: 740px) {
   .emotion-8 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -13031,7 +13031,7 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
 @media (min-width: 740px) {
   .emotion-1 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -13235,7 +13235,7 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
 @media (min-width: 740px) {
   .emotion-1 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 

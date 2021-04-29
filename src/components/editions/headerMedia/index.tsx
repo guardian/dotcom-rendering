@@ -4,6 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
+import { brandAltBackground } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display, none, some } from '@guardian/types';
@@ -54,6 +55,17 @@ const fullWidthCaptionStyles = css`
 	height: 100%;
 `;
 
+const footballWrapperStyles: SerializedStyles = css`
+	${from.tablet} {
+		width: calc(100vw - 3.75rem);
+		background-color: ${brandAltBackground.primary};
+	}
+
+	${from.desktop} {
+		width: inherit;
+	}
+`;
+
 const getImageStyle = (
 	{ width, height }: Image,
 	format: Format,
@@ -71,7 +83,7 @@ const getImageStyle = (
 
 		${from.tablet} {
 			width: calc(100vw - 3.75rem);
-			height: calc((100vw - 3.75rem) * height / width);
+			height: calc((100vw - 3.75rem) * ${height / width});
 		}
 
 		${from.desktop} {
@@ -137,10 +149,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
 					{maybeRender(matchScores, (scores) => {
 						return (
-							<div
-								id="js-football-scores"
-								style={{ width: '100vw' }}
-							>
+							<div css={footballWrapperStyles}>
 								<FootballScores
 									league={scores.league}
 									stadium={scores.stadium}
