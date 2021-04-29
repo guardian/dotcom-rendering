@@ -11,19 +11,34 @@ const atomStyles = (
 	background-color: #ffe500;
 	display: ${anniversaryInteractiveAtom ? 'block' : 'none'};
 
+	height: 202px;
+	--space-below: 16px;
+
+	${from.phablet} {
+		height: 155px;
+	}
 	${from.tablet} {
-		margin-bottom: 25px;
+		height: 160px;
+		--space-below: 24px;
+	}
+	${from.desktop} {
+		height: 180px;
+	}
+
+	/* IE11 will not have the space below */
+	@supports (--css: variables) {
+		margin-bottom: var(--space-below);
 		position: relative;
 
 		&:after {
 			content: '';
-			height: 25px;
+			height: var(--space-below);
 			background-color: transparent;
 			border-bottom: 1px solid #dcdcdc;
 			width: 100%;
 			display: block;
 			position: absolute;
-			bottom: -25px;
+			bottom: calc(var(--space-below) * -1); /* negate the css var */
 		}
 	}
 `;
