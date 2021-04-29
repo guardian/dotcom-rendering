@@ -19,10 +19,9 @@ export type EpicDataFromBraze = {
 };
 
 export type Variant = {
-	// name: string;
-	heading: string;
+	heading?: string;
 	paragraphs: Array<string>;
-	highlightedText: string;
+	highlightedText?: string;
 	cta: {
 		text: string;
 		baseUrl: string;
@@ -49,15 +48,15 @@ const parseParagraphs = (dataFromBraze: EpicDataFromBraze): string[] => {
 export const parseBrazeEpicParams = (
 	dataFromBraze: EpicDataFromBraze,
 ): Result<string, Variant> => {
-	const basicFields: Array<keyof EpicDataFromBraze> = [
-		'heading',
-		'highlightedText',
+	const requiredBasicFields: Array<keyof EpicDataFromBraze> = [
 		'buttonText',
 		'buttonUrl',
 		'ophanComponentId',
 	];
 
-	const missingBasicFields = basicFields.filter((key) => !dataFromBraze[key]);
+	const missingBasicFields = requiredBasicFields.filter(
+		(key) => !dataFromBraze[key],
+	);
 	if (missingBasicFields.length > 0) {
 		return err(`Missing field(s): ${missingBasicFields}`);
 	}
