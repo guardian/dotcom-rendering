@@ -21,20 +21,20 @@ const row = css`
 const logoStyles = css`
 
 	align-self: flex-start;
-	height: 57px;
+	height: 65px;
 	width: 175px;
 	margin-top: 3px;
 	margin-right: 20px;
-	margin-bottom: 35px;
+	margin-bottom: 20px;
 
 	path {
 		fill: ${palette.neutral[100]};
 	}
 
 	${until.mobileMedium} {
-		height: 44px;
+		height: 54px;
 		width: 135px;
-		margin-bottom: 24px;
+		margin-bottom: 15px;
 		margin-right: 52px;
 		margin-top: 9px;
 	}
