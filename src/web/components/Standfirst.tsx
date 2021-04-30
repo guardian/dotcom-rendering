@@ -112,6 +112,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				case Design.Letter:
 				case Design.Feature:
 				case Design.Recipe:
+				case Design.Review:
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
