@@ -139,6 +139,18 @@ export const htmlTemplate = ({
 
         We are hiring, ever thought about joining us?
         https://workforus.theguardian.com/careers/product-engineering/
+
+
+                                       /^^      /^^                                  /^^
+ /^ /^^       /^^         /^^           /^^    /^^                                   /^^
+/^     /^^  /^^  /^^    /^^  /^^         /^^ /^^      /^^       /^^    /^ /^^^ /^^^^ /^^
+     /^^  /^^     /^^ /^^     /^^          /^^      /^   /^^  /^^  /^^  /^^   /^^    /^ 
+   /^^    /^^      /^^/^^      /^^         /^^     /^^^^^ /^^/^^   /^^  /^^     /^^^ /^ 
+ /^^       /^^    /^^  /^^    /^^          /^^     /^        /^^   /^^  /^^       /^^   
+/^^^^^^^^    /^^^        /^^^              /^^       /^^^^     /^^ /^^^/^^^   /^^ /^^/^^
+                                                                                       
+
+
 --->`;
 
 	return `<!doctype html>
