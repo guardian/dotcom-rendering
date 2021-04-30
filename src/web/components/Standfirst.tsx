@@ -103,6 +103,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				max-width: 540px;
 				color: ${palette.text.standfirst};
 			`;
+
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
