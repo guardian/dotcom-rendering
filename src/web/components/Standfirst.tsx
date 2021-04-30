@@ -94,8 +94,17 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 			}
 
-		case Display.Showcase:
 		case Display.NumberedList:
+			return css`
+				${headline.xxsmall({
+					fontWeight: 'bold',
+				})};
+				margin-bottom: ${space[3]}px;
+				max-width: 540px;
+				color: ${palette.text.standfirst};
+			`;
+
+		case Display.Showcase:
 		case Display.Standard:
 		default: {
 			switch (format.design) {
