@@ -94,8 +94,16 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 			}
 
-		case Display.Showcase:
 		case Display.NumberedList:
+			return css`
+				${headline.xxsmall({
+					fontWeight: 'bold',
+				})};
+				margin-bottom: ${space[3]}px;
+				max-width: 540px;
+				color: ${palette.text.standfirst};
+			`;
+		case Display.Showcase:
 		case Display.Standard:
 		default: {
 			switch (format.design) {
@@ -104,7 +112,6 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				case Design.Letter:
 				case Design.Feature:
 				case Design.Recipe:
-				case Design.Review:
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
