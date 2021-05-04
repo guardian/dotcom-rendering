@@ -125,6 +125,15 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});
 
+		it('should not load the sign in gate if the article is a paid article', function () {
+			visitArticleAndScrollToGateForLazyLoad({
+				url:
+					'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/kettlebells-companionship-and-bedroom-parkour-nine-tips-for-keeping-fit-in-lockdown-or-long-haul',
+			});
+
+			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
+		});
+
 		it('should not load the sign in gate on a device with an ios9 user agent string', function () {
 			// can't use visitArticleAndScrollToGateForLazyLoad for this method as overriding user agent
 			cy.visit(
