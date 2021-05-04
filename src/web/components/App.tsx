@@ -38,7 +38,7 @@ import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getCookie, removeCookie } from '@root/src/web/browser/cookie';
+import { getCookie, addCookie } from '@root/src/web/browser/cookie';
 import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
@@ -242,8 +242,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// show the anniversary atom. This means that this user will not see the atom
 	// on the next and following page views.
 	useEffect(() => {
-		// addCookie('X-GU-Experiment-0perc-B', 'true', 10); // 10 days to live for the life of the atom being shown
-		removeCookie('X-GU-Experiment-0perc-B');
+		if (CAPI.config.switches.anniversaryArticleHeader) {
+			addCookie('X-GU-Experiment-0perc-D', 'true', 2); // 2 days to live means that the atom will show when the switch is on Wednesday AND Saturday
+		}
 	});
 
 	// Ensure the focus state of any buttons/inputs in any of the Source
