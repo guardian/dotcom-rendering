@@ -30,19 +30,22 @@ interface Props {
 	embed: Generic;
 }
 
-const GenericEmbed: FC<Props> = ({ embed }) => (
-	<figure css={styles}>
-		<iframe
-			srcDoc={embed.html}
-			title={withDefault('Embed')(embed.alt)}
-			// Prevents scrollbars: covers body margin and random extra 6px
-			height={embed.height + 22}
-		/>
-		{maybeRender(embed.alt, (alt) => (
-			<figcaption css={captionStyles}>{alt}</figcaption>
-		))}
-	</figure>
-);
+const GenericEmbed: FC<Props> = ({ embed }) => {
+	console.log(embed);
+	return (
+		<figure css={styles}>
+			<iframe
+				srcDoc={embed.html}
+				title={withDefault('Embed')(embed.alt)}
+				// Prevents scrollbars: covers body margin and random extra 6px
+				height={embed.height + 22}
+			/>
+			{maybeRender(embed.alt, (alt) => (
+				<figcaption css={captionStyles}>{alt}</figcaption>
+			))}
+		</figure>
+	);
+};
 
 // ----- Exports ----- //
 
