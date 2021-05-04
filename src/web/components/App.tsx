@@ -38,7 +38,7 @@ import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getCookie, addCookie} from '@root/src/web/browser/cookie';
+import { getCookie, addCookie } from '@root/src/web/browser/cookie';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
