@@ -73,7 +73,9 @@ export const laterButton = css`
 `;
 
 export const signInLink = css`
-	color: ${palette.text.anchorSecondary} !important;
+	color: ${palette.text.anchorPrimary} !important;
+	text-decoration-color: ${palette.line.primary} !important;
+	text-underline-position: under;
 `;
 
 export const faq = css`
@@ -82,18 +84,23 @@ export const faq = css`
 	margin-top: ${space[5]}px;
 
 	& a {
-		color: ${palette.text.anchorSecondary};
+		color: ${palette.text.anchorPrimary};
 		display: block;
 		margin-bottom: ${space[4]}px;
+		text-decoration-color: ${palette.line.primary};
+		text-underline-position: under;
 	}
 
 	& a:hover {
-		color: ${palette.text.anchorSecondary};
+		color: ${palette.text.anchorPrimary};
 	}
 `;
 
 export const privacyLink = css`
+	color: ${palette.text.anchorPrimary};
 	text-decoration: underline;
+	text-decoration-color: ${palette.line.primary};
+	text-underline-position: under;
 	border: 0;
 	background: transparent;
 	font-size: inherit;

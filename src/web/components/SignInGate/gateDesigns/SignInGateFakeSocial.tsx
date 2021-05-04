@@ -6,7 +6,7 @@ import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { brand, line, space } from '@guardian/src-foundations';
+import { line, space } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 import { SignInGateProps } from './types';
 import {
@@ -24,21 +24,15 @@ import {
 	signInLink,
 } from './shared';
 
-export const heading = css`
+const heading = css`
 	${headline.small({ fontWeight: 'bold' })};
 	border-top: 2px black solid;
 	padding-bottom: ${space[3]}px;
 
 	${from.phablet} {
 		padding-right: 160px;
-		${headline.medium({ fontWeight: 'bold' })};
+		margin-bottom: ${space[9]}px;
 	}
-`;
-
-const subheading = css`
-	${textSans.medium({ fontWeight: 'bold' })}
-	color: ${brand[500]};
-	padding-bottom: ${space[6]}px;
 `;
 
 const inlineLink = css`
@@ -47,7 +41,6 @@ const inlineLink = css`
 
 const signInHeader = css`
 	padding-bottom: 0;
-	padding-top: ${space[3]}px;
 `;
 
 const buttonMargin = css`
@@ -63,6 +56,12 @@ const bodyPadding = css`
 const socialBox = css`
 	display: flex;
 	align-items: center;
+	padding-top: ${space[6]}px;
+`;
+
+const fakeSocialSignInLink = css`
+	font-weight: bold !important;
+	margin-left: 0;
 `;
 
 const socialBoxText = css`
@@ -87,7 +86,6 @@ const iconButton = css`
 	}
 
 	${until.tablet} {
-		font-weight: normal !important;
 		font-size: 15px !important;
 	}
 
@@ -272,10 +270,10 @@ export const SignInGateFakeSocial = ({
 			<h1 className={cx([heading, bodyPadding])}>
 				You need to register to keep reading
 			</h1>
-			<h2 className={cx([subheading, bodyPadding])}>
+			<h2 className={cx([bodySeparator, bodyBold, bodyPadding])}>
 				It’s still free to read - this is not a paywall
 			</h2>
-			<p className={cx([bodySeparator, bodyBold, bodyPadding])}>
+			<p className={cx([bodyText, bodyPadding])}>
 				We’re committed to keep our quality reporting open. By
 				registering and providing us with insight into your preferences,
 				you’re helping us to engage with you more deeply, and that allow
@@ -337,7 +335,11 @@ export const SignInGateFakeSocial = ({
 				<Link
 					data-cy="sign-in-gate-fake-social_signin"
 					data-ignore="global-link-styling"
-					className={cx([signInLink, inlineLink])}
+					className={cx([
+						signInLink,
+						inlineLink,
+						fakeSocialSignInLink,
+					])}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'sign-in-link', abTest);
@@ -430,7 +432,7 @@ export const SignInGateFakeSocial = ({
 						trackLink(ophanComponentId, 'help-link', abTest);
 					}}
 				>
-					Get help with registering or signing in
+					Get help with registering or signing in.
 				</Link>
 			</div>
 		</div>
