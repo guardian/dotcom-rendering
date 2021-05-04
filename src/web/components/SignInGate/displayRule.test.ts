@@ -1,7 +1,6 @@
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { Article } from '@root/fixtures/generated/articles/Article';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
-import { overrideCountryCode } from '@root/src/web/lib/getCountryCode';
 import {
 	isNPageOrHigherPageView,
 	isIOS9,
@@ -63,24 +62,6 @@ describe('SignInGate - displayRule methods', () => {
 			const output = isNPageOrHigherPageView(5);
 
 			expect(output).toBe(false);
-		});
-	});
-
-	describe("isCountry('countryCode')", () => {
-		beforeEach(() => {
-			localStorage.clear();
-		});
-		test('geolocation is US', () => {
-			overrideCountryCode('US');
-			expect(isCountry('US')).toBe(true);
-		});
-
-		test('geolocation is not US', () => {
-			overrideCountryCode('GB');
-			expect(isCountry('US')).toBe(false);
-		});
-		test('geolocation is false if not set', () => {
-			expect(isCountry('US')).toBe(false);
 		});
 	});
 
