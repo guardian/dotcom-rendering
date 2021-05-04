@@ -1,7 +1,7 @@
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { Article } from '@root/fixtures/generated/articles/Article';
 import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
-import { setCountryCodeSynchronous } from '@root/src/web/lib/getCountryCode';
+import { overrideCountryCode } from '@root/src/web/lib/getCountryCode';
 import {
 	isNPageOrHigherPageView,
 	isIOS9,
@@ -87,12 +87,12 @@ describe('SignInGate - displayRule methods', () => {
 			localStorage.clear();
 		});
 		test('geolocation is US', () => {
-			setCountryCodeSynchronous('US');
+			overrideCountryCode('US');
 			expect(isCountry('US')).toBe(true);
 		});
 
 		test('geolocation is not US', () => {
-			setCountryCodeSynchronous('GB');
+			overrideCountryCode('GB');
 			expect(isCountry('US')).toBe(false);
 		});
 		test('geolocation is false if not set', () => {

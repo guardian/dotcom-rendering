@@ -3,7 +3,7 @@ import {
 	DailyArticle,
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
-import { getCountryCodeFromLocalStorage } from '@frontend/web/lib/getCountryCode';
+import { getCountryCode } from '@frontend/web/lib/getCountryCode';
 import { CurrentABTest } from '@root/src/web/components/SignInGate/gateDesigns/types';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
 import { onConsentChange } from '@root/node_modules/@guardian/consent-management-platform';
@@ -19,10 +19,10 @@ export const isNPageOrHigherPageView = (n: number = 2): boolean => {
 	return count >= n;
 };
 
-// use gu.location to determine is the browser is in the specified country
+// use `GU_geo_country` cookie or `gu.geo.override` local storage to determine is the browser is in the specified country
 // Note, use country codes specified in guardian/frontend/static/src/javascripts/lib/geolocation.js
 export const isCountry = (countryCode: string): boolean => {
-	const countryCodeFromStorage = getCountryCodeFromLocalStorage();
+	const countryCodeFromStorage = getCountryCode();
 	return countryCodeFromStorage === countryCode;
 };
 

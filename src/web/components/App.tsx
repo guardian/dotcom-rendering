@@ -39,7 +39,7 @@ import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie } from '@root/src/web/browser/cookie';
-import { getCountryCode } from '@frontend/web/lib/getCountryCode';
+import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
@@ -72,6 +72,7 @@ import {
 	StickyNavBackscroll,
 } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
 import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -165,7 +166,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
 	const [asyncCountryCode, setAsyncCountryCode] = useState<
-		Promise<string | void>
+		Promise<CountryCode | null>
 	>();
 
 	const [brazeMessages, setBrazeMessages] = useState<
@@ -205,7 +206,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	useEffect(() => {
 		const callFetch = () => {
-			const countryCodePromise = getCountryCode();
+			const countryCodePromise = getLocaleCode();
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
 				.then((cc) => setCountryCode(cc || ''))

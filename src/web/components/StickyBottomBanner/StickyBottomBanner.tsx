@@ -14,11 +14,12 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
-	asyncCountryCode?: Promise<string | void>;
+	asyncCountryCode?: Promise<CountryCode | null>;
 	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 };
@@ -109,7 +110,7 @@ export const StickyBottomBanner = ({
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
-			asyncCountryCode as Promise<string>,
+			asyncCountryCode as Promise<CountryCode>,
 		);
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
