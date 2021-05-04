@@ -4,6 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
+import { brandAltBackground } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display, none, some } from '@guardian/types';
@@ -11,6 +12,7 @@ import HeaderImageCaption, {
 	captionId,
 } from 'components/editions/headerImageCaption';
 import StarRating from 'components/editions/starRating';
+import FootballScores from 'components/footballScores';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
@@ -53,6 +55,17 @@ const fullWidthCaptionStyles = css`
 	height: 100%;
 `;
 
+const footballWrapperStyles: SerializedStyles = css`
+	${from.tablet} {
+		width: calc(100vw - 3.75rem);
+		background-color: ${brandAltBackground.primary};
+	}
+
+	${from.desktop} {
+		width: inherit;
+	}
+`;
+
 const getImageStyle = (
 	{ width, height }: Image,
 	format: Format,
@@ -70,7 +83,7 @@ const getImageStyle = (
 
 		${from.tablet} {
 			width: calc(100vw - 3.75rem);
-			height: calc((100vw - 3.75rem) * height / width);
+			height: calc((100vw - 3.75rem) * ${height / width});
 		}
 
 		${from.desktop} {
@@ -130,8 +143,23 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				image: { nativeCaption, credit },
 			} = media;
 
+			const matchScores = 'football' in item ? item.football : none;
+
 			return (
 				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
+					{maybeRender(matchScores, (scores) => {
+						return (
+							<div css={footballWrapperStyles}>
+								<FootballScores
+									league={scores.league}
+									stadium={scores.stadium}
+									homeTeam={scores.homeTeam}
+									awayTeam={scores.awayTeam}
+									status={scores.status}
+								/>
+							</div>
+						);
+					})}
 					<Img
 						image={image}
 						sizes={getImageSizes(format)}

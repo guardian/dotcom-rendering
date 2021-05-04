@@ -35,6 +35,7 @@ import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
+import { getFootballContent } from './footballContent';
 
 // ----- Setup ----- //
 
@@ -221,7 +222,9 @@ async function serveArticleGet(
 			(errorStatus: number) => {
 				res.sendStatus(errorStatus);
 			},
-			([content, relatedContent]: [Content, RelatedContent]) => {
+			async ([content, relatedContent]: [Content, RelatedContent]) => {
+				const footballContent = await getFootballContent(content);
+
 				const mockedRenderingRequest: RenderingRequest = {
 					content,
 					targetingParams: {
@@ -230,6 +233,7 @@ async function serveArticleGet(
 					},
 					commentCount: 30,
 					relatedContent,
+					footballContent,
 				};
 
 				const richLinkDetails = req.query.richlink === '';

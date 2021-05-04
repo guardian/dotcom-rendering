@@ -361,7 +361,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -1574,7 +1574,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -2854,7 +2854,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -4015,7 +4015,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -5199,7 +5199,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -8444,7 +8444,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 @media (min-width: 740px) {
   .emotion-5 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -9466,6 +9466,1210 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 </main>
 `;
 
+exports[`Storyshots Editions/Article Match Report 1`] = `
+.emotion-0 {
+  height: 100%;
+}
+
+.emotion-1 {
+  min-height: 100%;
+  background-color: inherit;
+}
+
+.emotion-2 {
+  background-color: #FFFFFF;
+}
+
+.emotion-3 {
+  border-bottom: 1px solid #DCDCDC;
+}
+
+@media (min-width: 740px) {
+  .emotion-3 {
+    width: 526px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-3 {
+    width: 545px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-3 {
+    padding-right: 0.75rem;
+    border-right: 1px solid #DCDCDC;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-3 {
+    margin-left: 24px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-3 {
+    margin-left: 144px;
+  }
+}
+
+.emotion-4 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+@media (min-width: 740px) {
+  .emotion-4 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.emotion-5 {
+  margin: 0;
+  position: relative;
+}
+
+@media (min-width: 980px) {
+  .emotion-5 {
+    width: 750px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-6 {
+    width: calc(100vw - 3.75rem);
+    background-color: #FFE500;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-6 {
+    width: inherit;
+  }
+}
+
+.emotion-7 {
+  background-color: #FFE500;
+  padding: 0.5rem;
+}
+
+.emotion-8 {
+  text-indent: -10000px;
+  position: absolute;
+  margin: 0;
+}
+
+.emotion-9 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+@media (min-width: 660px) {
+  .emotion-9 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.emotion-10 {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-10 {
+    grid-column: 2;
+    margin-right: 0;
+  }
+}
+
+.emotion-11 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 700;
+  border: 1px dotted #000000;
+  border-radius: 100%;
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  padding-top: 0.75rem;
+  box-sizing: border-box;
+}
+
+.emotion-12 {
+  grid-column: 2;
+}
+
+@media (min-width: 660px) {
+  .emotion-12 {
+    grid-column: 1;
+  }
+}
+
+.emotion-13 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.emotion-14 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.emotion-15 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  border-top: 1px dotted #000000;
+  padding-top: 0.25rem;
+  margin-top: 0.75rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 660px) {
+  .emotion-15 {
+    display: inline-grid;
+    width: 50%;
+    vertical-align: top;
+    grid-template-columns: 1fr auto;
+    border-right: 1px dotted #000000;
+  }
+}
+
+.emotion-16 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+@media (min-width: 660px) {
+  .emotion-16 {
+    grid-column: 1;
+  }
+}
+
+.emotion-17 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 2.625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  grid-column: 1;
+  grid-row: 1/3;
+  margin-right: 1rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-17 {
+    grid-column: 2;
+  }
+}
+
+.emotion-18 {
+  border: 1px solid #000000;
+  border-radius: 100%;
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  position: relative;
+}
+
+.emotion-19 {
+  position: absolute;
+  top: 7%;
+  left: 29%;
+}
+
+.emotion-20 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+@media (min-width: 660px) {
+  .emotion-20 {
+    grid-column: 1;
+  }
+}
+
+.emotion-21 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  border-top: 1px dotted #000000;
+  padding-top: 0.25rem;
+  margin-top: 0.75rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 660px) {
+  .emotion-21 {
+    display: inline-grid;
+    width: 50%;
+    vertical-align: top;
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.emotion-22 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.emotion-23 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 2.625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  grid-column: 1;
+  grid-row: 1/3;
+  margin-right: 1rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-23 {
+    margin-left: 1rem;
+  }
+}
+
+.emotion-26 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.emotion-27 {
+  width: 100vw;
+  height: calc(100vw * 0.6);
+  background-color: #F6F6F6;
+  color: #999999;
+  display: block;
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 740px) {
+  .emotion-27 {
+    width: 740px;
+    height: calc(740px * 0.6);
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-27 {
+    width: 980px;
+    height: calc(980px * 0.6);
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-27 {
+    width: calc(100vw - 3.75rem);
+    height: calc((100vw - 3.75rem) * 0.6);
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-27 {
+    width: 750px;
+    height: 450px;
+  }
+}
+
+.emotion-28 {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.emotion-28 summary {
+  display: block;
+  pointer-events: auto;
+  text-align: center;
+  background-color: #0084C6;
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  border-radius: 100%;
+  outline: none;
+}
+
+.emotion-28 summary::-webkit-details-marker {
+  display: none;
+}
+
+.emotion-28 details[open] {
+  min-height: 44px;
+  max-height: 999px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0.5rem;
+  overflow: hidden;
+  padding-right: 3rem;
+  z-index: 1;
+  color: #FFFFFF;
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+@media (min-width: 740px) {
+  .emotion-28 {
+    width: calc(100vw - 3.75rem);
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-28 {
+    width: 750px;
+  }
+}
+
+.emotion-29 {
+  line-height: 32px;
+  font-size: 0;
+}
+
+.emotion-29 svg {
+  width: 75%;
+  height: 75%;
+  margin: 12.5%;
+}
+
+.emotion-29 path {
+  fill: #F1F8FC;
+}
+
+.emotion-30 {
+  box-sizing: border-box;
+  font-family: GT Guardian Titlepiece,Georgia,serif;
+  font-size: 2.625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #0084C6;
+  font-size: 1.0625rem;
+  padding: 0.25rem 0 0.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 740px) {
+  .emotion-30 {
+    padding-bottom: 0.75rem;
+  }
+}
+
+.emotion-31 {
+  position: relative;
+}
+
+.emotion-32 {
+  color: #121212;
+  box-sizing: border-box;
+  border-top: 1px solid #DCDCDC;
+  padding-bottom: 1rem;
+  padding-right: 0.5rem;
+  margin: 0;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+@media (min-width: 375px) {
+  .emotion-32 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-32 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 2.125rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
+}
+
+.emotion-33 {
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.15;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  color: #121212;
+}
+
+@media (min-width: 740px) {
+  .emotion-33 {
+    width: 526px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-33 {
+    width: 545px;
+  }
+}
+
+.emotion-33 p,
+.emotion-33 ul {
+  padding-top: 0.25rem;
+  margin: 0;
+}
+
+.emotion-33 address {
+  font-style: normal;
+}
+
+.emotion-33 svg {
+  -webkit-flex: 0 0 1.875rem;
+  -ms-flex: 0 0 1.875rem;
+  flex: 0 0 1.875rem;
+  margin-top: 0.375rem;
+  padding-left: 0.5rem;
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.emotion-33 svg circle {
+  stroke: #0084C6;
+}
+
+.emotion-33 svg path {
+  fill: #0084C6;
+}
+
+.emotion-34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-35 {
+  box-sizing: border-box;
+}
+
+@media (min-width: 740px) {
+  .emotion-35 {
+    width: 539px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-35 {
+    width: 558px;
+  }
+}
+
+.emotion-36 {
+  background-image: repeating-linear-gradient(
+  		to bottom,
+  		#DCDCDC,
+  		#DCDCDC 1px,
+  		transparent 1px,
+  		transparent 0.25rem
+  	);
+  background-repeat: repeat-x;
+  -webkit-background-position: top;
+  background-position: top;
+  -webkit-background-size: 1px calc(0.25rem * 3 + 1px);
+  background-size: 1px calc(0.25rem * 3 + 1px);
+  height: calc(0.25rem * 3 + 1px);
+}
+
+.emotion-37 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin: 0;
+}
+
+.emotion-37 svg {
+  -webkit-flex: 0 0 1.875rem;
+  -ms-flex: 0 0 1.875rem;
+  flex: 0 0 1.875rem;
+  padding-top: 0.375rem;
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.emotion-37 svg circle {
+  stroke: #0084C6;
+}
+
+.emotion-37 svg path {
+  fill: #0084C6;
+}
+
+@media (min-width: 740px) {
+  .emotion-37 {
+    padding-bottom: 2.25rem;
+  }
+}
+
+.emotion-38 {
+  color: #0084C6;
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.emotion-39 {
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: #121212;
+}
+
+.emotion-40 {
+  background: none;
+  border: none;
+  padding: 0;
+  height: 2.5rem;
+}
+
+@media (min-width: 740px) {
+  .emotion-41 {
+    width: 526px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-41 {
+    width: 545px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-41 {
+    padding-right: 0.75rem;
+    border-right: 1px solid #DCDCDC;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-41 {
+    margin-left: 24px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-41 {
+    margin-left: 144px;
+  }
+}
+
+.emotion-42 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.emotion-42 iframe {
+  width: 100%;
+  border: none;
+}
+
+.emotion-42 figcaption {
+  background: #FFFFFF;
+  padding-bottom: 0.5rem;
+}
+
+@media (min-width: 740px) {
+  .emotion-42 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .emotion-42 p {
+    margin: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-42 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.emotion-43 {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+@media (min-width: 660px) {
+  .emotion-43 {
+    width: 620px;
+  }
+}
+
+.emotion-44 {
+  width: 100%;
+  height: calc(100% * 0.6666081768731357);
+  background-color: #F6F6F6;
+  color: #999999;
+  display: block;
+}
+
+@media (min-width: 660px) {
+  .emotion-44 {
+    width: 620px;
+    height: calc(620px * 0.6666081768731357);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-44 {
+    background-color: #333333;
+  }
+}
+
+.emotion-45 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+  padding-top: 0.5rem;
+  color: #767676;
+}
+
+.emotion-46 {
+  fill: #0084C6;
+  height: 0.8em;
+  padding-right: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-46 {
+    fill: #00B2FF;
+  }
+}
+
+.emotion-48 {
+  width: 100%;
+  height: calc(100% * 0.6666666666666666);
+  background-color: #F6F6F6;
+  color: #999999;
+  display: block;
+}
+
+@media (min-width: 660px) {
+  .emotion-48 {
+    width: 620px;
+    height: calc(620px * 0.6666666666666666);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-48 {
+    background-color: #333333;
+  }
+}
+
+<main
+  className="emotion-0"
+>
+  <article
+    className="emotion-1"
+  >
+    <div
+      className="emotion-2"
+    >
+      <section
+        className="emotion-3"
+      >
+        <header
+          className="emotion-4"
+        >
+          <figure
+            aria-labelledby="header-image-caption"
+            className="emotion-5"
+          >
+            <div
+              className="emotion-6"
+            >
+              <section
+                className="emotion-7"
+              >
+                <h2
+                  className="emotion-8"
+                >
+                  Scores
+                </h2>
+                <div
+                  className="emotion-9"
+                >
+                  <div
+                    className="emotion-10"
+                  >
+                    <span
+                      className="emotion-11"
+                    >
+                      FT
+                    </span>
+                  </div>
+                  <div
+                    className="emotion-12"
+                  >
+                    <nav
+                      className="emotion-13"
+                    >
+                      Premier League
+                    </nav>
+                    <address
+                      className="emotion-14"
+                    >
+                      The King Power Stadium
+                    </address>
+                  </div>
+                </div>
+                <section
+                  className="emotion-15"
+                >
+                  <h3
+                    className="emotion-16"
+                  >
+                    Leicester
+                  </h3>
+                  <div
+                    className="emotion-17"
+                  >
+                    <div
+                      className="emotion-18"
+                    >
+                      <span
+                        className="emotion-19"
+                      >
+                        2
+                      </span>
+                    </div>
+                  </div>
+                  <ul
+                    className="emotion-20"
+                  >
+                    <li>
+                      Castagne
+                       
+                      50
+                      '
+                       
+                    </li>
+                    <li>
+                      Iheanacho
+                       
+                      80
+                      '
+                       
+                    </li>
+                  </ul>
+                </section>
+                <section
+                  className="emotion-21"
+                >
+                  <h3
+                    className="emotion-22"
+                  >
+                    Crystal Palace
+                  </h3>
+                  <div
+                    className="emotion-23"
+                  >
+                    <div
+                      className="emotion-18"
+                    >
+                      <span
+                        className="emotion-19"
+                      >
+                        1
+                      </span>
+                    </div>
+                  </div>
+                  <ul
+                    className="emotion-26"
+                  >
+                    <li>
+                      Zaha
+                       
+                      12
+                      '
+                       
+                    </li>
+                  </ul>
+                </section>
+              </section>
+            </div>
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt="image"
+                className="js-launch-slideshow js-main-image emotion-27"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="emotion-28"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="emotion-29"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+          <nav
+            className="emotion-30"
+          >
+            Sport 
+          </nav>
+          <div
+            className="emotion-31"
+          >
+            <h1
+              className="emotion-32"
+            >
+              Reclaimed lakes and giant airports: how Mexico City might have looked
+            </h1>
+          </div>
+          <div
+            className="emotion-33"
+          >
+            <div
+              className="emotion-34"
+            >
+              <p>
+                The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+              </p>
+            </div>
+          </div>
+          <div
+            className="emotion-35"
+          >
+            <div
+              className="emotion-36"
+            />
+          </div>
+          <div
+            className="emotion-37"
+          >
+            <address>
+              <span
+                className="emotion-38"
+              >
+                Jane Smith
+              </span>
+              <span
+                className="emotion-39"
+              >
+                 Editor of things
+              </span>
+            </address>
+            <span
+              className="js-share-button"
+              role="button"
+            >
+              <button
+                className="emotion-40"
+                onClick={[Function]}
+              >
+                <svg
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="14.5"
+                  />
+                  <path
+                    d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                  />
+                </svg>
+              </button>
+            </span>
+          </div>
+        </header>
+      </section>
+    </div>
+    <div
+      className="emotion-41"
+    >
+      <section
+        className="emotion-42"
+      >
+        <figure
+          className="emotion-43"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=140&quality=45&fit=bounds&s=253ff45edb114b0605b7bce66b7f78f3 140w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=500&quality=45&fit=bounds&s=3be9e2a7e7f1b2ac4efab144d6c07a28 500w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=1000&quality=45&fit=bounds&s=14c3c8f7d54a8d8794664492efc68641 1000w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=1500&quality=45&fit=bounds&s=2745788813a433224e06421647d60b2c 1500w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=2000&quality=45&fit=bounds&s=dcdc2c3d03aee717124c58914a5c39de 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=140&quality=85&fit=bounds&s=c125868b875fa9ec4a8ce180360836e0 140w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=500&quality=85&fit=bounds&s=b4c08994b6aad3ffcea8e242793755f3 500w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=1000&quality=85&fit=bounds&s=dde3e8a919521443e8b0f5fba726fb24 1000w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=1500&quality=85&fit=bounds&s=3b57ebd649babc411c89f62a27bd800a 1500w, https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=2000&quality=85&fit=bounds&s=d0d5bfe2a9ce9000f6d8afc8b864fe92 2000w"
+            />
+            <img
+              alt="Washington, DC, US Subcommittee chair Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol, during a House Judiciary subcommittee on Crime, Terrorism, and Homeland Security hearing"
+              className="js-launch-slideshow emotion-44"
+              data-caption="<strong>Washington DC, US</strong> <br><br>Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol during a House judiciary subcommittee hearing"
+              data-credit="Photograph: Al Drago/Getty Images"
+              data-ratio={0.6666081768731357}
+              src="https://i.guim.co.uk/img/media/2232f7bb9c21692cae8f499c70fde2c599f07b1e/0_0_5699_3799/master/5699.jpg?width=500&quality=85&fit=bounds&s=b4c08994b6aad3ffcea8e242793755f3"
+            />
+          </picture>
+          <figcaption
+            className="emotion-45"
+          >
+            <svg
+              className="emotion-46"
+              viewBox="0 0 10 9"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="0,9 5,0 10,9"
+              />
+            </svg>
+            <span>
+              Washington DC, US
+            </span>
+            <span>
+              Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol during a House judiciary subcommittee hearing
+            </span>
+             
+            Photograph: Al Drago/Getty Images
+          </figcaption>
+        </figure>
+        <figure
+          className="emotion-43"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=140&quality=45&fit=bounds&s=20c42477022d7ce2b2ac2d0b5cb688de 140w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=500&quality=45&fit=bounds&s=dff09e82b640f93f268212b3a0de5b4e 500w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=1000&quality=45&fit=bounds&s=a4e0cdc7de19d34a17c874c3a81a1ebe 1000w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=1500&quality=45&fit=bounds&s=478eaedffbc1085109b5b4e29f2200b9 1500w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=2000&quality=45&fit=bounds&s=e8e63bb3ec8ead5b6607b25fea2cd528 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=140&quality=85&fit=bounds&s=00a782574440af9727bf87616b94d572 140w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=500&quality=85&fit=bounds&s=6b5da882eaec6ebf16644dedbb902063 500w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=1000&quality=85&fit=bounds&s=d4b61df8dc308483ca3b92c7da5de42e 1000w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=1500&quality=85&fit=bounds&s=b9a3f3096a28cadaef022bbbf5322c56 1500w, https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=2000&quality=85&fit=bounds&s=c476519c6a377a16d963a8cf9888713a 2000w"
+            />
+            <img
+              alt="Prayagraj, India A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers, during Magh Mela festival"
+              className="js-launch-slideshow emotion-48"
+              data-caption="<strong>Prayagraj, India</strong> <br><br>A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers"
+              data-credit="Photograph: Rajesh Kumar Singh/AP"
+              data-ratio={0.6666666666666666}
+              src="https://i.guim.co.uk/img/media/00a3f00503f26ab688f32c7b5acaa60fc2e7755f/0_0_5472_3648/master/5472.jpg?width=500&quality=85&fit=bounds&s=6b5da882eaec6ebf16644dedbb902063"
+            />
+          </picture>
+          <figcaption
+            className="emotion-45"
+          >
+            <svg
+              className="emotion-46"
+              viewBox="0 0 10 9"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="0,9 5,0 10,9"
+              />
+            </svg>
+            <span>
+              Prayagraj, India
+            </span>
+            <span>
+              A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers
+            </span>
+             
+            Photograph: Rajesh Kumar Singh/AP
+          </figcaption>
+        </figure>
+        <figure
+          className="emotion-43"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=140&quality=45&fit=bounds&s=b6beebe9a75fe6d5ce9475c0d13e429c 140w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=500&quality=45&fit=bounds&s=1516f1b11f5a186d13bc2e7dc56eecde 500w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=1000&quality=45&fit=bounds&s=665b8f94e20042d415967c7a382cd561 1000w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=1500&quality=45&fit=bounds&s=7bb7869708fa9d17b025aa334ba3a564 1500w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=2000&quality=45&fit=bounds&s=3c40f4ca2a68a4393201f94f025eb68a 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=140&quality=85&fit=bounds&s=7231bc978677afa567b999de7645602a 140w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=500&quality=85&fit=bounds&s=d824f8198249e9b1b119070023b1850c 500w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=1000&quality=85&fit=bounds&s=cdeb3b040ff85ccebaa83f54643c87cb 1000w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=1500&quality=85&fit=bounds&s=61bde3db8713dfa8ab6c9d94d3b53d3e 1500w, https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=2000&quality=85&fit=bounds&s=fe5d0c455c7a8bf71082086f9b24e934 2000w"
+            />
+            <img
+              alt="Hua Hin, Thailand A bird flies over the abandoned sculpture of a Buddhist monk in Cha-am outside Hua Hin, south of Bangkok"
+              className="js-launch-slideshow emotion-48"
+              data-caption="<strong>Hua Hin, Thailand <br><br></strong>A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok"
+              data-credit="Photograph: Mladen Antonov/AFP/Getty Images"
+              data-ratio={0.6666666666666666}
+              src="https://i.guim.co.uk/img/media/0673ebd6b05c437c792a24c375b3be3204fe8283/0_0_4482_2988/master/4482.jpg?width=500&quality=85&fit=bounds&s=d824f8198249e9b1b119070023b1850c"
+            />
+          </picture>
+          <figcaption
+            className="emotion-45"
+          >
+            <svg
+              className="emotion-46"
+              viewBox="0 0 10 9"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="0,9 5,0 10,9"
+              />
+            </svg>
+            <span>
+              Hua Hin, Thailand
+            </span>
+            <span>
+              A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok
+            </span>
+             
+            Photograph: Mladen Antonov/AFP/Getty Images
+          </figcaption>
+        </figure>
+        <figure
+          className="emotion-43"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=140&quality=45&fit=bounds&s=0f3c3dbd3fc24dc38b6a25593933d036 140w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=500&quality=45&fit=bounds&s=3eb9e25c8e38ec8ae5e9b0a7e10c6c67 500w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=1000&quality=45&fit=bounds&s=317b489ad130fde80b1ea52214b0341a 1000w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=1500&quality=45&fit=bounds&s=e0770f452eb0745fa25c47b78cdff4b4 1500w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=2000&quality=45&fit=bounds&s=798fd1d9b81dc6b3fa425022e6201e64 2000w"
+            />
+            <source
+              sizes="(min-width: 660px) 620px, 100%"
+              srcSet="https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=140&quality=85&fit=bounds&s=dc30181295bcbe657a051d55966d119a 140w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=500&quality=85&fit=bounds&s=3f341f45e1c1ce8c8c0f28d07cdf6867 500w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=1000&quality=85&fit=bounds&s=59187d1926376734fedf391885c21c75 1000w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=1500&quality=85&fit=bounds&s=31b6374d30517dca65cbb0d7c0454535 1500w, https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=2000&quality=85&fit=bounds&s=15e40dc6afcdbfefe241ddb4748c8ac5 2000w"
+            />
+            <img
+              alt="Mulhouse, France A polar bear cub makes its first steps outside, in an enclosure at the Zoological and Botanical park in eastern France. The cub was born in November 2020"
+              className="js-launch-slideshow emotion-48"
+              data-caption="<strong>Mulhouse, France</strong> <br><br>A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park"
+              data-credit="Photograph: Sébastien Bozon/AFP/Getty Images"
+              data-ratio={0.6666666666666666}
+              src="https://i.guim.co.uk/img/media/300a7451bd9b52d2a7ec7466619c7108ecba43a7/0_0_3600_2400/master/3600.jpg?width=500&quality=85&fit=bounds&s=3f341f45e1c1ce8c8c0f28d07cdf6867"
+            />
+          </picture>
+          <figcaption
+            className="emotion-45"
+          >
+            <svg
+              className="emotion-46"
+              viewBox="0 0 10 9"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon
+                points="0,9 5,0 10,9"
+              />
+            </svg>
+            <span>
+              Mulhouse, France
+            </span>
+            <span>
+              A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park
+            </span>
+             
+            Photograph: Sébastien Bozon/AFP/Getty Images
+          </figcaption>
+        </figure>
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
 exports[`Storyshots Editions/Article Review 1`] = `
 .emotion-0 {
   height: 100%;
@@ -9565,7 +10769,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 @media (min-width: 740px) {
   .emotion-6 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -10871,7 +12075,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 @media (min-width: 740px) {
   .emotion-8 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -13031,7 +14235,7 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
 @media (min-width: 740px) {
   .emotion-1 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -13235,7 +14439,7 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
 @media (min-width: 740px) {
   .emotion-1 {
     width: calc(100vw - 3.75rem);
-    height: calc((100vw - 3.75rem) * height / width);
+    height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
@@ -15734,24 +16938,6 @@ exports[`Storyshots FootballScores Default 1`] = `
 }
 
 .emotion-13 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  grid-column: 2;
-  grid-row: 2;
-}
-
-@media (min-width: 660px) {
-  .emotion-13 {
-    grid-column: 1;
-  }
-}
-
-.emotion-14 {
   display: grid;
   grid-template-columns: auto 1fr;
   border-top: 1px dotted #000000;
@@ -15761,7 +16947,7 @@ exports[`Storyshots FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-14 {
+  .emotion-13 {
     display: inline-grid;
     width: 50%;
     vertical-align: top;
@@ -15769,7 +16955,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   }
 }
 
-.emotion-15 {
+.emotion-14 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
@@ -15779,7 +16965,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   grid-row: 1;
 }
 
-.emotion-16 {
+.emotion-15 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
@@ -15790,12 +16976,12 @@ exports[`Storyshots FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-16 {
+  .emotion-15 {
     margin-left: 1rem;
   }
 }
 
-.emotion-19 {
+.emotion-18 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -15863,20 +17049,17 @@ exports[`Storyshots FootballScores Default 1`] = `
         </span>
       </div>
     </div>
-    <ul
-      className="emotion-13"
-    />
   </section>
   <section
-    className="emotion-14"
+    className="emotion-13"
   >
     <h3
-      className="emotion-15"
+      className="emotion-14"
     >
       Man City
     </h3>
     <div
-      className="emotion-16"
+      className="emotion-15"
     >
       <div
         className="emotion-11"
@@ -15889,7 +17072,7 @@ exports[`Storyshots FootballScores Default 1`] = `
       </div>
     </div>
     <ul
-      className="emotion-19"
+      className="emotion-18"
     >
       <li>
         Sterling

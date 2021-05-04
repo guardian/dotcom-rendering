@@ -10,6 +10,7 @@ import {
 	feature,
 	interview,
 	letter,
+	matchReport,
 	media,
 	review,
 } from 'fixtures/item';
@@ -128,6 +129,15 @@ const Letter = (): ReactElement => (
 		}}
 	/>
 );
+const MatchReport = (): ReactElement => (
+	<Article
+		item={{
+			...matchReport,
+			tags: [getTag('tone/sport', 'Sport ')],
+			theme: selectPillar(Pillar.Sport),
+		}}
+	/>
+);
 
 const Gallery = (): ReactElement => (
 	<Article
@@ -165,4 +175,5 @@ export {
 	Editorial,
 	Gallery,
 	Letter,
+	MatchReport,
 };

@@ -11,7 +11,6 @@ import { TeamScore } from 'components/teamScore';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { MatchStatus } from 'football';
 import type { FC } from 'react';
-import React from 'react';
 
 // ----- Component ----- //
 
