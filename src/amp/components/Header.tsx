@@ -19,17 +19,12 @@ const row = css`
 `;
 
 const logoStyles = css`
-
 	align-self: flex-start;
 	height: 65px;
 	width: 175px;
 	margin-top: 3px;
 	margin-right: 20px;
 	margin-bottom: 20px;
-
-	path {
-		fill: ${palette.neutral[100]};
-	}
 
 	${until.mobileMedium} {
 		height: 54px;
@@ -39,11 +34,10 @@ const logoStyles = css`
 		margin-top: 9px;
 	}
 
-	svg{
-		max-width:100%;
+	svg {
+		max-width: 100%;
 		max-height: 100%;
 	}
-
 `;
 
 const pillarListStyles = css`
