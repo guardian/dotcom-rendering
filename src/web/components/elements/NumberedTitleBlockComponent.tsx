@@ -14,7 +14,7 @@ type Props = {
 
 const titleStyles = (palette: Palette) => css`
 	h2 {
-		${headline.medium({ fontWeight: 'light' })}
+		${headline.medium({ fontWeight: 'bold' })}
 	}
 
 	strong {
