@@ -26,6 +26,8 @@ interface Props {
 	label: string;
 	links: DropdownLinkType[];
 	dataLinkName: string;
+	overrideColor?: string;
+	children?: React.ReactNode;
 }
 
 const ulStyles = css`
@@ -34,7 +36,6 @@ const ulStyles = css`
 	background-color: white;
 	padding: 6px 0;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-	display: none;
 
 	${until.tablet} {
 		position: fixed;
@@ -55,8 +56,12 @@ const ulStyles = css`
 	}
 `;
 
-const ulExpanded = css`
+const displayBlock = css`
 	display: block;
+`;
+
+const displayNone = css`
+	display: none;
 `;
 
 const linkStyles = css`
@@ -112,7 +117,7 @@ const linkFirst = css`
 	}
 `;
 
-const buttonStyles = css`
+const buttonStyles = (overrideColor?: string) => css`
 	${textSans.medium()};
 	display: block;
 	cursor: pointer;
@@ -120,7 +125,7 @@ const buttonStyles = css`
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
 	line-height: 1.2;
-	color: ${brandText.primary};
+	color: ${overrideColor || brandText.primary};
 	transition: color 80ms ease-out;
 	padding: 0px 10px 6px 5px;
 	margin: 1px 0 0;
@@ -158,7 +163,14 @@ const buttonExpanded = css`
 	}
 `;
 
-export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
+export const Dropdown = ({
+	id,
+	label,
+	links,
+	dataLinkName,
+	overrideColor,
+	children,
+}: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [noJS, setNoJS] = useState(true);
 
@@ -220,7 +232,10 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
 						}
 					`}
 				>
-					<label htmlFor={checkboxID} className={buttonStyles}>
+					<label
+						htmlFor={checkboxID}
+						className={buttonStyles(overrideColor)}
+					>
 						{label}
 					</label>
 					<input
@@ -252,7 +267,7 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
 					<button
 						onClick={handleToggle}
 						className={cx(
-							buttonStyles,
+							buttonStyles(overrideColor),
 							isExpanded && buttonExpanded,
 						)}
 						aria-expanded={isExpanded ? 'true' : 'false'}
@@ -261,29 +276,29 @@ export const Dropdown = ({ id, label, links, dataLinkName }: Props) => {
 					>
 						{label}
 					</button>
-					<ul
-						className={cx({
-							[ulStyles]: true,
-							[ulExpanded]: isExpanded,
-						})}
-						data-cy="dropdown-options"
-					>
-						{links.map((l, index) => (
-							<li key={l.title}>
-								<a
-									href={l.url}
-									className={cx({
-										[linkStyles]: true,
-										[linkActive]: !!l.isActive,
-										[linkFirst]: index === 0,
-									})}
-									data-link-name={l.dataLinkName}
-								>
-									{l.title}
-								</a>
-							</li>
-						))}
-					</ul>
+					<div className={isExpanded ? displayBlock : displayNone}>
+						{children ? (
+							<>{children}</>
+						) : (
+							<ul className={ulStyles} data-cy="dropdown-options">
+								{links.map((l, index) => (
+									<li key={l.title}>
+										<a
+											href={l.url}
+											className={cx({
+												[linkStyles]: true,
+												[linkActive]: !!l.isActive,
+												[linkFirst]: index === 0,
+											})}
+											data-link-name={l.dataLinkName}
+										>
+											{l.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
 				</>
 			)}
 		</>

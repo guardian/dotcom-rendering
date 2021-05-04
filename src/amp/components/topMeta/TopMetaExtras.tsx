@@ -4,20 +4,24 @@ import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { pillarMap, pillarPalette, neutralBorder } from '@root/src/lib/pillars';
+import {
+	pillarMap,
+	pillarPalette_DO_NOT_USE,
+	neutralBorder,
+} from '@root/src/lib/pillars';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
 const pillarColours = pillarMap(
 	(pillar) =>
 		css`
-			color: ${pillarPalette[pillar].main};
+			color: ${pillarPalette_DO_NOT_USE[pillar].main};
 		`,
 );
 
 const pillarFill = pillarMap(
 	(pillar) =>
 		css`
-			fill: ${pillarPalette[pillar].main};
+			fill: ${pillarPalette_DO_NOT_USE[pillar].main};
 		`,
 );
 

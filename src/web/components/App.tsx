@@ -38,7 +38,7 @@ import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getCookie } from '@root/src/web/browser/cookie';
+import { getCookie, addCookie} from '@root/src/web/browser/cookie';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
@@ -59,6 +59,7 @@ import {
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
+import { LabsHeader } from '@root/src/web/components/LabsHeader';
 import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
@@ -67,12 +68,10 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmb
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
-import {
-	StickyNavAnchor,
-	StickyNavBackscroll,
-} from '@root/src/web/components/Nav/StickNavTest/StickyNav';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
 import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
+import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -136,26 +135,10 @@ const GetMatchStats = React.lazy(() => {
 type Props = {
 	CAPI: CAPIBrowserType;
 	NAV: BrowserNavType;
+	ophanRecord: OphanRecordFunction;
 };
 
-const componentEventHandler = (
-	componentType: any,
-	id: any,
-	action: any,
-) => () => {
-	const componentEvent: OphanComponentEvent = {
-		component: {
-			componentType,
-			id,
-			products: [],
-			labels: [],
-		},
-		action,
-	};
-	submitComponentEvent(componentEvent);
-};
-
-export const App = ({ CAPI, NAV }: Props) => {
+export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
@@ -174,6 +157,23 @@ export const App = ({ CAPI, NAV }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+
+	const componentEventHandler = (
+		componentType: any,
+		id: any,
+		action: any,
+	) => () => {
+		const componentEvent: OphanComponentEvent = {
+			component: {
+				componentType,
+				id,
+				products: [],
+				labels: [],
+			},
+			action,
+		};
+		submitComponentEvent(componentEvent, ophanRecord);
+	};
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -236,6 +236,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
 		);
 	}, []);
+
+	// AnniversaryAtom
+	// Add a cookie for the serverside A/B test that is checked to see if we should
+	// show the anniversary atom. This means that this user will not see the atom
+	// on the next and following page views.
+	useEffect(() => {
+		if (CAPI.config.switches.anniversaryArticleHeader) {
+			addCookie('X-GU-Experiment-0perc-D', 'true', 2); // 2 days to live means that the atom will show when the switch is on Wednesday AND Saturday
+		}
+	});
 
 	// Ensure the focus state of any buttons/inputs in any of the Source
 	// components are only applied when navigating via keyboard.
@@ -337,24 +347,16 @@ export const App = ({ CAPI, NAV }: Props) => {
 		});
 	}, []);
 
+	const display: Display = decideDisplay(CAPI.format);
+	const design: Design = decideDesign(CAPI.format);
+	const pillar: Theme = decideTheme(CAPI.format);
+
 	useOnce(() => {
 		setBrazeMessages(
 			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
 		);
 	}, [isSignedIn, CAPI.config.idApiUrl]);
 
-	const display: Display = decideDisplay(CAPI);
-	const design: Design = decideDesign({
-		designType: CAPI.designType,
-		tags: CAPI.tags,
-		isLiveBlog: CAPI.isLiveBlog,
-		isLive: CAPI.isLive,
-	});
-	const pillar = decideTheme({
-		pillar: CAPI.pillar,
-		design,
-		isSpecialReport: CAPI.isSpecialReport,
-	});
 	const format: Format = {
 		display,
 		design,
@@ -364,14 +366,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-	// sticky nav test status
-	const inStickyNavBackscroll = ABTestAPI.isUserInVariant(
-		'StickyNavTest',
-		'sticky-nav-backscroll',
-	);
-	const inStickyNavAnchor = ABTestAPI.isUserInVariant(
-		'StickyNavTest',
-		'sticky-nav-anchor',
+	const inRemoteModuleTest = ABTestAPI.isUserInVariant(
+		remoteRrHeaderLinksTestName,
+		'remote',
 	);
 
 	// There are docs on loadable in ./docs/loadable-components.md
@@ -533,13 +530,18 @@ export const App = ({ CAPI, NAV }: Props) => {
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
+					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
+					inRemoteModuleTest={inRemoteModuleTest}
+					pageViewId={pageViewId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					ophanRecord={ophanRecord}
 				/>
 			</Portal>
 			<HydrateOnce rootId="links-root" waitFor={[user]}>
 				<Links
-					giftingURL={CAPI.nav.readerRevenueLinks.header.gifting}
+					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
 					userId={user ? user.userId : undefined}
 					idUrl={CAPI.config.idUrl}
 					mmaUrl={CAPI.config.mmaUrl}
@@ -550,6 +552,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 					edition={CAPI.editionId}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
+			</HydrateOnce>
+			<HydrateOnce rootId="labs-header">
+				<LabsHeader />
 			</HydrateOnce>
 			<Portal rootId="share-count-root">
 				<ShareCount
@@ -586,6 +591,9 @@ export const App = ({ CAPI, NAV }: Props) => {
 						scriptUrl={interactiveBlock.scriptUrl}
 						alt={interactiveBlock.alt}
 						role={interactiveBlock.role}
+						caption={interactiveBlock.caption}
+						format={format}
+						palette={palette}
 					/>
 				</HydrateOnce>
 			))}
@@ -608,28 +616,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 					</>
 				</HydrateOnce>
 			))}
-
-			{inStickyNavBackscroll && (
-				<Portal rootId="sticky-nav-root">
-					<StickyNavBackscroll
-						capiData={CAPI}
-						navData={NAV}
-						format={format}
-						palette={palette}
-					/>
-				</Portal>
-			)}
-
-			{inStickyNavAnchor && (
-				<Portal rootId="sticky-nav-root">
-					<StickyNavAnchor
-						capiData={CAPI}
-						navData={NAV}
-						format={format}
-						palette={palette}
-					/>
-				</Portal>
-			)}
 
 			{NAV.subNavSections && (
 				<HydrateOnce rootId="sub-nav-root">
@@ -798,7 +784,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={document.isThirdPartyTracking}
 						source={document.source}
 						sourceDomain={document.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<DocumentBlockComponent
 							embedUrl={document.embedUrl}
@@ -818,7 +803,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 							isTracking={embed.isThirdPartyTracking}
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
-							abTests={CAPI.config.abTests}
 						>
 							<EmbedBlockComponent
 								html={embed.html}
@@ -831,7 +815,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 							isTracking={embed.isThirdPartyTracking}
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
-							abTests={CAPI.config.abTests}
 							onAccept={() =>
 								updateIframeHeight(
 									`iframe[name="unsafe-embed-${index}"]`,
@@ -855,7 +838,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={insta.isThirdPartyTracking}
 						source={insta.source}
 						sourceDomain={insta.sourceDomain}
-						abTests={CAPI.config.abTests}
 						onAccept={() =>
 							updateIframeHeight(
 								`iframe[name="instagram-embed-${index}"]`,
@@ -876,7 +858,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={map.isThirdPartyTracking}
 						source={map.source}
 						sourceDomain={map.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -898,7 +879,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={spotify.isThirdPartyTracking}
 						source={spotify.source}
 						sourceDomain={spotify.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotify.embedUrl}
@@ -920,7 +900,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={facebookVideo.isThirdPartyTracking}
 						source={facebookVideo.source}
 						sourceDomain={facebookVideo.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -944,7 +923,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isTracking={vine.isThirdPartyTracking}
 						source={vine.source}
 						sourceDomain={vine.sourceDomain}
-						abTests={CAPI.config.abTests}
 					>
 						<VineBlockComponent element={vine} />
 					</ClickToView>
@@ -953,7 +931,7 @@ export const App = ({ CAPI, NAV }: Props) => {
 			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper pillar={pillar} />
+						<MostViewedRightWrapper palette={palette} />
 					</Suspense>
 				</Lazy>
 			</Portal>
@@ -1060,8 +1038,13 @@ export const App = ({ CAPI, NAV }: Props) => {
 					<ReaderRevenueLinks
 						urls={CAPI.nav.readerRevenueLinks.footer}
 						edition={CAPI.editionId}
+						countryCode={countryCode}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
+						inRemoteModuleTest={false}
+						pageViewId={pageViewId}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						ophanRecord={ophanRecord}
 					/>
 				</Lazy>
 			</Portal>

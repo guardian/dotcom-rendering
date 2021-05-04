@@ -3,9 +3,10 @@ import React from 'react';
 import { RichLink } from '@root/src/web/components/RichLink';
 import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { Design, Display } from '@guardian/types';
 
 type Props = {
 	element: RichLinkBlockElement;
@@ -22,7 +23,8 @@ interface CAPIRichLinkType {
 	url: string;
 	tags: TagType[];
 	sponsorName: string;
-	pillar: CAPIPillar;
+	pillar: LegacyPillar;
+	format: CAPIFormat;
 	starRating?: number;
 	contributorImage?: string;
 }
@@ -70,9 +72,9 @@ export const RichLinkComponent = ({
 			url={data.url}
 			starRating={data.starRating}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: decideTheme({ pillar: data.pillar }),
+				display: decideDisplay(data.format),
+				design: decideDesign(data.format),
+				theme: decideTheme(data.format),
 			}}
 			tags={data.tags}
 			sponsorName={data.sponsorName}

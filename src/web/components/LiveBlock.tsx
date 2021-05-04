@@ -3,10 +3,10 @@ import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
+import { timeAgo } from '@guardian/libs';
 
 import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
@@ -20,7 +20,6 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
 };
@@ -185,9 +184,7 @@ const FirstPublished = ({
 					color: ${neutral[20]};
 				`}
 			>
-				{makeRelativeDate(firstPublished, {
-					format: 'med',
-				})}
+				{timeAgo(firstPublished)}
 			</time>
 			<span
 				className={css`
@@ -221,7 +218,6 @@ export const LiveBlock = ({
 	block,
 	pageId,
 	webTitle,
-	abTests,
 	adTargeting,
 	host,
 }: Props) => {
@@ -276,13 +272,11 @@ export const LiveBlock = ({
 					{headerElement && (
 						<ElementRenderer
 							isMainMedia={false}
-							isLiveBlog={true}
 							adTargeting={adTargeting}
 							index={0}
 							element={headerElement}
 							format={format}
 							palette={palette}
-							abTests={abTests}
 							host={host}
 						/>
 					)}
@@ -296,13 +290,11 @@ export const LiveBlock = ({
 							<BlockMedia key={`${element._type}-${index}`}>
 								<ElementRenderer
 									isMainMedia={false}
-									isLiveBlog={true}
 									adTargeting={adTargeting}
 									index={index}
 									element={element}
 									format={format}
 									palette={palette}
-									abTests={abTests}
 									host={host}
 								/>
 							</BlockMedia>
@@ -313,12 +305,10 @@ export const LiveBlock = ({
 						<BlockText key={`${element._type}-${index}`}>
 							<ElementRenderer
 								isMainMedia={false}
-								isLiveBlog={true}
 								index={index}
 								element={element}
 								format={format}
 								palette={palette}
-								abTests={abTests}
 							/>
 						</BlockText>
 					);

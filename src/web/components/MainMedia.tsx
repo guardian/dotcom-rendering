@@ -58,7 +58,6 @@ export const MainMedia: React.FC<{
 	adTargeting?: AdTargeting;
 	starRating?: number;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 }> = ({
 	elements,
 	format,
@@ -67,7 +66,6 @@ export const MainMedia: React.FC<{
 	adTargeting,
 	starRating,
 	host,
-	abTests,
 }) => (
 	<div
 		className={cx(
@@ -85,7 +83,6 @@ export const MainMedia: React.FC<{
 				adTargeting={adTargeting}
 				starRating={starRating}
 				host={host}
-				abTests={abTests}
 				isMainMedia={true}
 			/>
 		))}

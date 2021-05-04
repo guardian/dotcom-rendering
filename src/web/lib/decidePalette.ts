@@ -16,7 +16,8 @@ import {
 	labs,
 } from '@guardian/src-foundations';
 
-import { pillarPalette } from '@root/src/lib/pillars';
+// Here is the one place where we use `pillarPalette`
+import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -32,6 +33,7 @@ const textHeadline = (format: Format): string => {
 					return WHITE;
 			}
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard: {
 			if (format.theme === Special.SpecialReport)
 				return specialReport[100];
@@ -59,6 +61,7 @@ const textSeriesTitle = (format: Format): string => {
 		case Display.Immersive:
 			return WHITE;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 			switch (format.design) {
 				case Design.LiveBlog:
@@ -246,7 +249,7 @@ const textCardStandfirst = textCardHeadline;
 const textCardKicker = (format: Format): string => {
 	if (
 		format.theme === Special.SpecialReport &&
-		format.design === Design.Comment
+		(format.design === Design.Comment || format.design === Design.Letter)
 	)
 		// TODO: Pull this in from source as opinion[550]
 		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
@@ -294,6 +297,7 @@ const textCardKicker = (format: Format): string => {
 const textCardFooter = (format: Format): string => {
 	switch (format.design) {
 		case Design.Comment:
+		case Design.Letter:
 			switch (format.theme) {
 				case Special.SpecialReport:
 					// TODO: Pull this in from souce once we see it here:
@@ -355,6 +359,7 @@ const backgroundArticle = (format: Format): string => {
 	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
 		return neutral[93];
 	// Order matters. We want comment special report pieces to have the opinion background
+	if (format.design === Design.Letter) return opinion[800];
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
@@ -401,6 +406,7 @@ const backgroundCard = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return opinion[800];
 		case Design.Media:
@@ -462,6 +468,8 @@ const backgroundStandfirst = (format: Format): string => {
 	switch (format.design) {
 		case Design.LiveBlog:
 			return pillarPalette[format.theme][300];
+		case Design.DeadBlog:
+			return neutral[86];
 		default:
 			return backgroundArticle(format);
 	}
@@ -501,6 +509,7 @@ const fillCardIcon = (format: Format): string => {
 	if (format.display === Display.Immersive) return neutral[60];
 	switch (format.design) {
 		case Design.Comment:
+		case Design.Letter:
 			switch (format.theme) {
 				case Special.SpecialReport:
 					// TODO: Pull this in from source once we see it here:
@@ -582,11 +591,13 @@ const borderStandfirstLink = (format: Format): string => {
 
 const borderHeadline = (format: Format): string => {
 	if (format.design === Design.LiveBlog) return '#9F2423';
+	if (format.design === Design.DeadBlog) return '#CDCDCD';
 	return border.secondary;
 };
 
 const borderStandfirst = (format: Format): string => {
 	if (format.design === Design.LiveBlog) return '#8C2222';
+	if (format.design === Design.DeadBlog) return '#BDBDBD';
 	return border.secondary;
 };
 
@@ -624,7 +635,14 @@ const borderNavPillar: (format: Format) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
 const borderArticle: (format: Format) => string = (format) => {
+	if (format.design === Design.LiveBlog || format.design === Design.DeadBlog)
+		return '#CDCDCD';
 	if (format.theme === Special.Labs) return neutral[60];
+	return border.secondary;
+};
+
+const borderLines: (format: Format) => string = (format) => {
+	if (format.theme === Special.Labs) return border.primary;
 	return border.secondary;
 };
 
@@ -667,6 +685,7 @@ const textCalloutHeading = (): string => {
 const textDropCap = (format: Format): string => {
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return format.theme === Pillar.Opinion
 				? opinion[400]
@@ -674,6 +693,24 @@ const textDropCap = (format: Format): string => {
 		default:
 			return pillarPalette[format.theme].dark;
 	}
+};
+
+const textBlockquote = (format: Format): string => {
+	switch (format.design) {
+		case Design.LiveBlog:
+		case Design.DeadBlog:
+			return BLACK;
+		default:
+			return neutral[46];
+	}
+};
+
+const textNumberedTitle = (format: Format): string => {
+	return pillarPalette[format.theme].main;
+};
+
+const textNumberedPosition = (): string => {
+	return text.supporting;
 };
 
 const backgroundHeadlineTag = (format: Format): string =>
@@ -727,6 +764,9 @@ export const decidePalette = (format: Format): Palette => {
 			carouselTitle: textCarouselTitle(format),
 			calloutHeading: textCalloutHeading(),
 			dropCap: textDropCap(format),
+			blockquote: textBlockquote(format),
+			numberedTitle: textNumberedTitle(format),
+			numberedPosition: textNumberedPosition(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -768,6 +808,7 @@ export const decidePalette = (format: Format): Palette => {
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
+			lines: borderLines(format),
 		},
 		topBar: {
 			card: topBarCard(format),

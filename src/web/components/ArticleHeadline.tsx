@@ -21,6 +21,12 @@ type Props = {
 
 const curly = (x: any) => x;
 
+const topPadding = css`
+	${from.leftCol} {
+		padding-top: ${space[1]}px;
+	}
+`;
+
 const standardFont = css`
 	${headline.medium()};
 	${until.tablet} {
@@ -212,6 +218,21 @@ export const ArticleHeadline = ({
 	byline,
 	palette,
 }: Props) => {
+	if (format.display === Display.NumberedList) {
+		return (
+			<h1
+				className={cx(
+					boldFont,
+					topPadding,
+					css`
+						color: ${palette.text.headline};
+					`,
+				)}
+			>
+				{curly(headlineString)}
+			</h1>
+		);
+	}
 	switch (format.display) {
 		case Display.Immersive: {
 			switch (format.design) {
@@ -232,6 +253,7 @@ export const ArticleHeadline = ({
 					);
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 					return (
 						<>
 							<h1
@@ -295,6 +317,7 @@ export const ArticleHeadline = ({
 						<h1
 							className={cx(
 								boldFont,
+								topPadding,
 								css`
 									color: ${palette.text.headline};
 								`,
@@ -310,6 +333,7 @@ export const ArticleHeadline = ({
 							<h1
 								className={cx(
 									lightFont,
+									topPadding,
 									css`
 										color: ${palette.text.headline};
 									`,
@@ -326,11 +350,29 @@ export const ArticleHeadline = ({
 							)}
 						</>
 					);
+
+				case Design.Letter:
+					return (
+						<>
+							<h1
+								className={cx(
+									lightFont,
+									topPadding,
+									css`
+										color: ${palette.text.headline};
+									`,
+								)}
+							>
+								{curly(headlineString)}
+							</h1>
+						</>
+					);
 				case Design.Analysis:
 					return (
 						<h1
 							className={cx(
 								standardFont,
+								topPadding,
 								underlinedStyles,
 								css`
 									color: ${palette.text.headline};
@@ -380,6 +422,20 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
+				case Design.LiveBlog:
+				case Design.DeadBlog:
+					return (
+						<h1
+							className={cx(
+								standardFont,
+								css`
+									color: ${palette.text.headline};
+								`,
+							)}
+						>
+							{curly(headlineString)}
+						</h1>
+					);
 				default:
 					return (
 						<h1
@@ -387,6 +443,7 @@ export const ArticleHeadline = ({
 								format.theme === Special.Labs
 									? labsFont
 									: standardFont,
+								topPadding,
 								css`
 									color: ${palette.text.headline};
 								`,

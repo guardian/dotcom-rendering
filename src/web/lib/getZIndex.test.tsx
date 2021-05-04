@@ -2,12 +2,13 @@ import { getZIndex } from './getZIndex';
 
 describe('getZIndex', () => {
 	it('gets the correct zindex for group and sibling', () => {
-		expect(getZIndex('banner')).toBe('z-index: 13;');
-		expect(getZIndex('dropdown')).toBe('z-index: 12;');
-		expect(getZIndex('burger')).toBe('z-index: 11;');
-		expect(getZIndex('stickyNav')).toBe('z-index: 10;');
+		expect(getZIndex('banner')).toBe('z-index: 14;');
+		expect(getZIndex('dropdown')).toBe('z-index: 13;');
+		expect(getZIndex('burger')).toBe('z-index: 12;');
+		expect(getZIndex('expanded-veggie-menu-wrapper')).toBe('z-index: 11;');
+		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 10;');
 		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 9;');
-		expect(getZIndex('headerLinks')).toBe('z-index: 8;');
+		expect(getZIndex('searchHeaderLink')).toBe('z-index: 8;');
 		expect(getZIndex('TheGuardian')).toBe('z-index: 7;');
 		expect(getZIndex('headerWrapper')).toBe('z-index: 6;');
 		expect(getZIndex('articleHeadline')).toBe('z-index: 5;');

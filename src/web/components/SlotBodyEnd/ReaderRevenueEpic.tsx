@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import * as emotion from 'emotion';
-import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
+import { css } from 'emotion';
+
 import {
 	getBodyEnd,
 	getViewLog,
@@ -14,19 +13,21 @@ import {
 	shouldHideSupportMessaging,
 	getArticleCountConsent,
 	getEmail,
+	MODULES_VERSION,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
+	OphanComponentEvent,
 	sendOphanComponentEvent,
+	submitComponentEvent,
 	TestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { Metadata } from '@guardian/automat-client/dist/types';
+import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '../../browser/cookie';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
-
-const { css } = emotion;
 
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
@@ -50,6 +51,7 @@ type EpicConfig = {
 type EpicProps = {
 	onReminderOpen: () => void;
 	email?: string;
+	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 	// Also anything specified by support-dotcom-components
 };
 
@@ -131,6 +133,7 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 			hasOptedOutOfArticleCount: !(await getArticleCountConsent()),
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: props.countryCode,
+			modulesVersion: MODULES_VERSION,
 		},
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
@@ -206,13 +209,7 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 	}) as HasBeenSeen;
 
 	useEffect(() => {
-		window.guardian.automat = {
-			react: React,
-			preact: React, // temp while we deploy newer contributions-service at which point client-lib does this for us
-			emotionCore,
-			emotionTheming,
-			emotion,
-		};
+		setAutomat();
 
 		const modulePerf = initPerf('contributions-epic-module');
 		modulePerf.start();
@@ -224,8 +221,15 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 				sendOphanComponentEvent('INSERT', meta);
 			})
-			// eslint-disable-next-line no-console
-			.catch((error) => console.log(`epic - error is: ${error}`));
+			.catch((error) => {
+				const msg = `Error importing RR epic: ${error}`;
+				// eslint-disable-next-line no-console
+				console.log(msg);
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-epic',
+				);
+			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -242,8 +246,13 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 	if (Epic) {
 		return (
 			<div ref={setNode} className={wrapperMargins}>
-				{/* eslint-disable-next-line react/jsx-props-no-spreading */}
-				<Epic {...module.props} email={email} />
+				{/* eslint-disable react/jsx-props-no-spreading */}
+				<Epic
+					{...module.props}
+					email={email}
+					submitComponentEvent={submitComponentEvent}
+				/>
+				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
 	}

@@ -13,8 +13,10 @@ import {
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
+import { Pillar } from '@guardian/types';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
+import { decideTheme } from '../lib/decideTheme';
 
 interface RenderToStringResult {
 	html: string;
@@ -42,9 +44,16 @@ interface Props {
 	data: DCRServerDocumentData;
 }
 
+const decideTitle = (CAPI: CAPIType): string => {
+	if (decideTheme(CAPI.format) === Pillar.Opinion && CAPI.author.byline) {
+		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
+	}
+	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+};
+
 export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
-	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+	const title = decideTitle(CAPI);
 	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
 		renderToString(
 			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core

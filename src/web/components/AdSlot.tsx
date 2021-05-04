@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { css, cx } from 'emotion';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { Display } from '@guardian/types';
 
 type Props = {
@@ -46,18 +45,38 @@ enum Size {
 	empty = '2,2',
 }
 
+const adSlotLabelStyles = css`
+	${textSans.xsmall()};
+	position: relative;
+	height: 24px;
+	background-color: ${neutral[97]};
+	padding: 0 8px;
+	border-top: 1px solid ${border.secondary};
+	color: ${text.supporting};
+	text-align: left;
+	box-sizing: border-box;
+	&.visible {
+		visibility: initial;
+	}
+	&.hidden {
+		visibility: hidden;
+	}
+	&.ad-slot__label--toggle {
+		margin: 0 auto;
+		${until.tablet} {
+			display: none;
+		}
+	}
+`;
+
+const outOfPageStyles = css`
+	height: 0;
+`;
+
 export const labelStyles = css`
 	.ad-slot__label,
 	.ad-slot__scroll {
-		${textSans.xsmall()};
-		position: relative;
-		height: 24px;
-		background-color: ${neutral[97]};
-		padding: 0 8px;
-		border-top: 1px solid ${border.secondary};
-		color: ${text.supporting};
-		text-align: left;
-		box-sizing: border-box;
+		${adSlotLabelStyles}
 	}
 
 	.ad-slot__close-button {
@@ -126,6 +145,19 @@ const mobileStickyAdStyles = css`
 		${textSans.xsmall()};
 	}
 `;
+
+const AdSlotLabelToggled: React.FC = () => (
+	<div
+		className={cx(
+			'ad-slot__label',
+			'ad-slot__label--toggle',
+			'hidden',
+			adSlotLabelStyles,
+		)}
+	>
+		Advertisement
+	</div>
+);
 
 export const AdSlot: React.FC<Props> = ({ position, display }) => {
 	switch (position) {
@@ -267,52 +299,55 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 		case 'top-above-nav': {
 			const adSlotAboveNav = css`
 				margin: 0 auto;
-				height: 151px;
+				min-height: 108px;
 				padding-bottom: 18px;
 				text-align: left;
 				display: table;
 				width: 728px;
 			`;
 			return (
-				<div
-					id="dfp-ad--top-above-nav"
-					className={cx(
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--top-above-nav',
-						'ad-slot--mpu-banner-ad',
-						'ad-slot--rendered',
-						css`
-							position: relative;
-						`,
-						labelStyles,
-						adSlotAboveNav,
-					)}
-					data-link-name="ad slot top-above-nav"
-					data-name="top-above-nav"
-					// The sizes here come from two places in the frontend code
-					// 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-					// 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-					data-tablet={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.fabric}`,
-						`${Size.fluid}`,
-						`${Size.leaderboard}`,
-					].join('|')}
-					data-desktop={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.leaderboard}`,
-						`940,230`,
-						`900,250`,
-						`${Size.billboard}`,
-						`${Size.fabric}`,
-						`${Size.fluid}`,
-					].join('|')}
-					// Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-					aria-hidden="true"
-				/>
+				<>
+					<AdSlotLabelToggled />
+					<div
+						id="dfp-ad--top-above-nav"
+						className={cx(
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--top-above-nav',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+							css`
+								position: relative;
+							`,
+							labelStyles,
+							adSlotAboveNav,
+						)}
+						data-link-name="ad slot top-above-nav"
+						data-name="top-above-nav"
+						// The sizes here come from two places in the frontend code
+						// 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
+						// 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+						data-tablet={[
+							`${Size.outOfPage}`,
+							`${Size.empty}`,
+							`${Size.fabric}`,
+							`${Size.fluid}`,
+							`${Size.leaderboard}`,
+						].join('|')}
+						data-desktop={[
+							`${Size.outOfPage}`,
+							`${Size.empty}`,
+							`${Size.leaderboard}`,
+							`940,230`,
+							`900,250`,
+							`${Size.billboard}`,
+							`${Size.fabric}`,
+							`${Size.fluid}`,
+						].join('|')}
+						// Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
+						aria-hidden="true"
+					/>
+				</>
 			);
 		}
 		case 'mostpop': {
@@ -419,6 +454,26 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 						`${Size.merchandising}`,
 						`${Size.fluid}`,
 					].join('|')}
+					aria-hidden="true"
+				/>
+			);
+		}
+		case 'survey': {
+			return (
+				<div
+					id="dfp-ad--survey"
+					className={cx(
+						'js-ad-slot',
+						'ad-slot',
+						'ad-slot--survey',
+						outOfPageStyles,
+					)}
+					data-link-name="ad slot survey"
+					data-name="survey"
+					data-label="false"
+					data-refresh="false"
+					data-out-of-page="true"
+					data-desktop={[`${Size.outOfPage}`].join('|')}
 					aria-hidden="true"
 				/>
 			);

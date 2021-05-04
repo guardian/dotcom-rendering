@@ -83,3 +83,50 @@ export const LargeNumber = () => {
 	);
 };
 LargeNumber.story = { name: 'with a large number' };
+
+export const Zero = () => {
+	return (
+		<div
+			className={css`
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+			`}
+		>
+			<CommentCount
+				isCommentable={true}
+				setIsExpanded={() => {}}
+				commentCount={0}
+				palette={decidePalette({
+					theme: Pillar.Opinion,
+					display: Display.Standard,
+					design: Design.Article,
+				})}
+			/>
+		</div>
+	);
+};
+Zero.story = { name: 'with zero comments' };
+
+export const Undefined = () => {
+	return (
+		<div
+			className={css`
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+			`}
+		>
+			<CommentCount
+				isCommentable={true}
+				setIsExpanded={() => {}}
+				palette={decidePalette({
+					theme: Pillar.Opinion,
+					display: Display.Standard,
+					design: Design.Article,
+				})}
+			/>
+		</div>
+	);
+};
+Undefined.story = { name: 'with count undefined' };

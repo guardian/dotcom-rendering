@@ -318,7 +318,6 @@ type CarouselCardProps = {
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
 	format,
-	trailPalette,
 	linkTo,
 	imageUrl,
 	headlineText,
@@ -339,7 +338,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 		<Card
 			linkTo={linkTo}
 			format={format}
-			palette={trailPalette}
 			headlineText={headlineText}
 			webPublicationDate={webPublicationDate}
 			kickerText={kickerText || ''}
@@ -348,7 +346,10 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			alwaysVertical={true}
 			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
-			showQuotes={format.design === Design.Comment}
+			showQuotes={
+				format.design === Design.Comment ||
+				format.design === Design.Letter
+			}
 			dataLinkName={dataLinkName}
 		/>
 	</LI>

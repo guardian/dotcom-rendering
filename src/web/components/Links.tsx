@@ -11,12 +11,12 @@ import { getCookie } from '@root/src/web/browser/cookie';
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
-import GiftingIcon from '@frontend/static/icons/gifting.svg';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { useOnce } from '@frontend/web/lib/useOnce';
+import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
-	giftingURL: string;
+	supporterCTA: string;
 	userId?: string;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -47,6 +47,11 @@ const linkStyles = css`
 		width: 18px;
 		margin: 3px 4px 0 0;
 	}
+`;
+
+const searchLinkStyles = css`
+	${linkStyles}
+	${getZIndex('searchHeaderLink')}
 `;
 
 const linkTablet = ({ showAtTablet }: { showAtTablet: boolean }) => css`
@@ -126,16 +131,16 @@ const linksStyles = css`
 
 export const Links = ({
 	userId,
-	giftingURL,
+	supporterCTA,
 	idUrl: idUrlFromConfig,
 	mmaUrl: mmaUrlFromConfig,
 }: Props) => {
-	const [showGiftingLink, setShowGiftingLink] = useState<boolean>();
+	const [showSupporterCTA, setShowSupporterCTA] = useState<boolean>();
 	const [userIsDefined, setUserIsDefined] = useState<boolean>();
 
-	// show gifting if support messaging isn't shown
+	// show supporter CTA if support messaging isn't shown
 	useEffect(() => {
-		setShowGiftingLink(getCookie('gu_hide_support_messaging') === 'true');
+		setShowSupporterCTA(getCookie('gu_hide_support_messaging') === 'true');
 	}, []);
 
 	// we intentionally re-render here because we know the DOM structure could be different
@@ -187,19 +192,18 @@ export const Links = ({
 	];
 	return (
 		<div data-print-layout="hide" className={linksStyles}>
-			{showGiftingLink && giftingURL !== '' && (
+			{showSupporterCTA && supporterCTA !== '' && (
 				<>
 					<div className={seperatorStyles} />
 					<a
-						href={giftingURL}
+						href={supporterCTA}
 						className={cx(
 							linkTablet({ showAtTablet: false }),
 							linkStyles,
 						)}
-						data-link-name="nav2 : gifting-cta"
+						data-link-name="nav2 : supporter-cta"
 					>
-						<GiftingIcon />
-						Gift options
+						Subscriptions
 					</a>
 				</>
 			)}
@@ -237,7 +241,10 @@ export const Links = ({
 			)}
 
 			<Search
-				className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
+				className={cx(
+					linkTablet({ showAtTablet: false }),
+					searchLinkStyles,
+				)}
 				href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 				dataLinkName="nav2 : search"
 			>

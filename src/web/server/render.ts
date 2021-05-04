@@ -6,10 +6,12 @@ import { validateAsCAPIType } from '@root/src/model/validate';
 import { addDividers } from '@root/src/model/add-dividers';
 import { enhanceDots } from '@root/src/model/add-dots';
 import { setIsDev } from '@root/src/model/set-is-dev';
-import { enhancePhotoEssay } from '@root/src/model/enhance-photoessay';
+import { enhanceImages } from '@root/src/model/enhance-images';
+import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
+import { enhanceAnniversaryAtom } from '@root/src/model/enhance-AnniversaryInteractiveAtom';
 import { extract as extractGA } from '@root/src/model/extract-ga';
-import { bodyJSON } from '@root/src/model/exampleBodyJSON';
+import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
 
 class CAPIEnhancer {
 	capi: CAPIType;
@@ -28,8 +30,13 @@ class CAPIEnhancer {
 		return this;
 	}
 
-	enhancePhotoEssay() {
-		this.capi = enhancePhotoEssay(this.capi);
+	enhanceImages() {
+		this.capi = enhanceImages(this.capi);
+		return this;
+	}
+
+	enhanceNumberedLists() {
+		this.capi = enhanceNumberedLists(this.capi);
 		return this;
 	}
 
@@ -47,19 +54,30 @@ class CAPIEnhancer {
 		this.capi = setIsDev(this.capi);
 		return this;
 	}
+
+	enhanceAnniversaryAtom() {
+		this.capi = enhanceAnniversaryAtom(this.capi);
+		return this;
+	}
 }
+
+const buildCAPI = (body: CAPIType): CAPIType => {
+	return new CAPIEnhancer(body)
+		.validateAsCAPIType()
+		.addDividers()
+		.enhanceBlockquotes()
+		.enhanceDots()
+		.enhanceImages()
+		.enhanceNumberedLists()
+		.enhanceAnniversaryAtom().capi;
+};
 
 export const render = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = new CAPIEnhancer(body)
-			.validateAsCAPIType()
-			.addDividers()
-			.enhanceBlockquotes()
-			.enhanceDots()
-			.enhancePhotoEssay().capi;
+		const CAPI = buildCAPI(body);
 		const resp = document({
 			data: {
 				CAPI,
@@ -78,10 +96,34 @@ export const render = (
 	}
 };
 
+export const renderArticleJson = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const CAPI = buildCAPI(body);
+		const resp = {
+			data: {
+				CAPI,
+				site: 'frontend',
+				page: 'Article',
+				NAV: extractNAV(CAPI.nav),
+				GA: extractGA(CAPI),
+				linkedData: CAPI.linkedData,
+			},
+		};
+
+		res.status(200).send(resp);
+	} catch (e) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
+};
+
 export const renderPerfTest = (
 	req: express.Request,
 	res: express.Response,
 ): void => {
-	req.body = JSON.parse(bodyJSON);
+	req.body = ExampleArticle;
 	render(req, res);
 };

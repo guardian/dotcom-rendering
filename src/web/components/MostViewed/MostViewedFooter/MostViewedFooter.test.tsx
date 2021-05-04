@@ -2,9 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import { Design, Display, Pillar } from '@guardian/types';
-import { ABProvider } from '@guardian/ab-react';
 
-import { useApi as useApi_ } from '@root/src/web/lib/api';
+import { useApi as useApi_ } from '@root/src/web/lib/useApi';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { responseWithTwoTabs, responseWithOneTab } from '../MostViewed.mocks';
@@ -13,23 +12,9 @@ import { MostViewedFooterData } from './MostViewedFooterData';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../../../lib/api', () => ({
+jest.mock('../../../lib/useApi', () => ({
 	useApi: jest.fn(),
 }));
-
-const AbProvider: React.FC = ({ children }) => {
-	return (
-		<ABProvider
-			mvtMaxValue={1000000}
-			mvtId={1234}
-			pageIsSensitive={false}
-			abTestSwitches={{}}
-			arrayOfTestObjects={[]}
-		>
-			{children}
-		</ABProvider>
-	);
-};
 
 const VISIBLE = 'display: grid';
 const HIDDEN = 'display: none';
@@ -43,17 +28,15 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs });
 
 		const { getByText, getAllByText, getByTestId } = render(
-			<AbProvider>
-				<MostViewedFooterData
-					sectionName="Section Name"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</AbProvider>,
+			<MostViewedFooterData
+				sectionName="Section Name"
+				palette={decidePalette({
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				})}
+				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+			/>,
 		);
 
 		// Calls api once only
@@ -81,17 +64,15 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs });
 
 		const { getByTestId, getByText } = render(
-			<AbProvider>
-				<MostViewedFooterData
-					sectionName="Section Name"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</AbProvider>,
+			<MostViewedFooterData
+				sectionName="Section Name"
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+			/>,
 		);
 
 		const firstHeading = responseWithTwoTabs.tabs[0].heading;
@@ -116,17 +97,15 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithOneTab });
 
 		const { queryByText } = render(
-			<AbProvider>
-				<MostViewedFooterData
-					sectionName="Section Name"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</AbProvider>,
+			<MostViewedFooterData
+				sectionName="Section Name"
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+			/>,
 		);
 
 		expect(
@@ -146,8 +125,14 @@ describe('MostViewedFooterData', () => {
 							showByline: false,
 							byline: '',
 							image: '',
-							isLiveBlog: true,
-							pillar: Pillar.News,
+							isLiveBlog: false, // No longer used
+							format: {
+								theme: 'NewsPillar',
+								design: 'LiveBlogDesign',
+								display: 'StandardDisplay',
+							},
+							pillar: 'news',
+							designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 						},
 					],
 				},
@@ -155,23 +140,21 @@ describe('MostViewedFooterData', () => {
 		});
 
 		const { getByText } = render(
-			<AbProvider>
-				<MostViewedFooterData
-					sectionName="Section Name"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</AbProvider>,
+			<MostViewedFooterData
+				sectionName="Section Name"
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+			/>,
 		);
 
 		expect(getByText('Live')).toBeInTheDocument();
 	});
 
-	it("should NOT display the text 'Live' when isLiveBlog is false", () => {
+	it("should NOT display the text 'Live' when design is Article is false", () => {
 		useApi.mockReturnValue({
 			data: [
 				{
@@ -183,8 +166,14 @@ describe('MostViewedFooterData', () => {
 							showByline: false,
 							byline: '',
 							image: '',
-							isLiveBlog: false,
-							pillar: Pillar.News,
+							isLiveBlog: true, // No longer used
+							format: {
+								theme: 'NewsPillar',
+								design: 'ArticleDesign',
+								display: 'StandardDisplay',
+							},
+							pillar: 'news',
+							designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 						},
 					],
 				},
@@ -192,17 +181,15 @@ describe('MostViewedFooterData', () => {
 		});
 
 		const { queryByText } = render(
-			<AbProvider>
-				<MostViewedFooterData
-					sectionName="Section Name"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</AbProvider>,
+			<MostViewedFooterData
+				sectionName="Section Name"
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+			/>,
 		);
 
 		expect(queryByText('Live')).not.toBeInTheDocument();
@@ -212,24 +199,21 @@ describe('MostViewedFooterData', () => {
 		useApi.mockReturnValue({ data: responseWithTwoTabs });
 
 		const { asFragment } = render(
-			<AbProvider>
-				<MostViewedFooterData
-					sectionName="Section Name"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</AbProvider>,
+			<MostViewedFooterData
+				sectionName="Section Name"
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+			/>,
 		);
 
-		// Disabled while Deeply Test Running
 		// Renders tab data link name
-		/* expect(
-			asFragment().querySelectorAll('[data-link-name="in Music"]').length,
-		).toBe(1); // Should add the data-link-name for Section Name tab */
+		// expect(
+		//	asFragment().querySelectorAll('[data-link-name="in Music"]').length,
+		// ).toBe(1); // Should add the data-link-name for Section Name tab */
 
 		// Renders Trail data-link-names
 		expect(

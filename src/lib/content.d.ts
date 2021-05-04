@@ -6,16 +6,6 @@ interface ThirdPartyEmbeddedContent {
 	source?: string;
 	sourceDomain?: string;
 }
-
-interface InteractiveAtomBlockElementBase {
-	url: string;
-	placeholderUrl?: string;
-	id?: string;
-	html?: string;
-	css?: string;
-	js?: string;
-}
-
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
@@ -66,12 +56,16 @@ interface CalloutBlockElement {
 	role?: RoleType;
 }
 
-interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface ChartAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 	elementId: string;
 	id: string;
+	url: string;
 	html: string;
+	css?: string;
+	js?: string;
 	role?: RoleType;
+	placeholderUrl?: string;
 }
 
 interface QuizAtomBlockElement {
@@ -124,6 +118,8 @@ interface DisclaimerBlockElement {
 
 interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
+	size?: 'full' | 'partial';
+	spaceAbove?: 'tight' | 'loose';
 }
 
 interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
@@ -157,8 +153,14 @@ interface ExplainerAtomBlockElement {
 	role?: RoleType;
 }
 
-interface GenericAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface GenericAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
+	url: string;
+	placeholderUrl?: string;
+	id?: string;
+	html?: string;
+	css?: string;
+	js?: string;
 	elementId: string;
 }
 
@@ -172,6 +174,10 @@ interface GuideAtomBlockElement {
 	html: string;
 	credit: string;
 	role?: RoleType;
+	items?: {
+		title?: string;
+		body?: string;
+	}[];
 }
 
 interface GuVideoBlockElement {
@@ -207,6 +213,8 @@ interface ImageBlockElement {
 	displayCredit?: boolean;
 	role: RoleType;
 	title?: string;
+	starRating?: number;
+	isAvatar?: boolean;
 }
 
 interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
@@ -218,13 +226,15 @@ interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface InteractiveAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 	elementId: string;
+	url: string;
 	id: string;
 	js: string;
 	html?: string;
 	css?: string;
+	placeholderUrl?: string;
 	role?: RoleType;
 }
 
@@ -237,6 +247,13 @@ interface InteractiveBlockElement {
 	scriptUrl?: string;
 	alt?: string;
 	role?: RoleType;
+	caption?: string;
+}
+
+interface ItemLinkBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement';
+	elementId: string;
+	html: string;
 }
 
 interface MapBlockElement extends ThirdPartyEmbeddedContent {
@@ -270,6 +287,14 @@ interface MultiImageBlockElement {
 	images: ImageBlockElement[];
 	caption?: string;
 	role?: RoleType;
+}
+
+interface NumberedTitleBlockElement {
+	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
+	elementId: string;
+	position: number;
+	html: string;
+	format: CAPIFormat;
 }
 
 interface ProfileAtomBlockElement {
@@ -332,6 +357,13 @@ interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 	width?: number;
 	caption?: string;
 	role?: RoleType;
+}
+
+interface StarRatingBlockElement {
+	_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement';
+	elementId: string;
+	rating: number;
+	size: RatingSizeType;
 }
 
 interface SubheadingBlockElement {
@@ -544,9 +576,11 @@ type CAPIElement =
 	| InstagramBlockElement
 	| InteractiveAtomBlockElement
 	| InteractiveBlockElement
+	| ItemLinkBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
+	| NumberedTitleBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement
@@ -554,6 +588,7 @@ type CAPIElement =
 	| RichLinkBlockElement
 	| SoundcloudBlockElement
 	| SpotifyBlockElement
+	| StarRatingBlockElement
 	| SubheadingBlockElement
 	| TableBlockElement
 	| TextBlockElement
@@ -645,6 +680,8 @@ type Language =
 	| 'markup'
 	| 'scala'
 	| 'elm';
+
+type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------
 // Callout Campaign

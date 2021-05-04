@@ -16,12 +16,15 @@ import { HighlightBlockComponent } from '@root/src/web/components/elements/Highl
 import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
+import { ItemLinkBlockElement } from '@root/src/web/components/elements/ItemLinkBlockElement';
 import { MainMediaEmbedBlockComponent } from '@root/src/web/components/elements/MainMediaEmbedBlockComponent';
+import { NumberedTitleBlockComponent } from '@root/src/web/components/elements/NumberedTitleBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { MultiImageBlockComponent } from '@root/src/web/components/elements/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/elements/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
+import { StarRatingBlockComponent } from '@root/src/web/components/elements/StarRatingBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/elements/SubheadingBlockComponent';
 import { TableBlockComponent } from '@root/src/web/components/elements/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
@@ -52,6 +55,7 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
+import { Design } from '@guardian/types';
 
 type Props = {
 	format: Format;
@@ -59,13 +63,21 @@ type Props = {
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 	index: number;
+	isMainMedia: boolean;
 	hideCaption?: boolean;
-	isMainMedia?: boolean;
-	isLiveBlog?: boolean;
 	starRating?: number;
 };
+
+function decideImageRole(role: RoleType, isLiveBlog: boolean): RoleType {
+	switch (role) {
+		case 'inline':
+		case 'thumbnail':
+			return role;
+		default:
+			return isLiveBlog ? 'inline' : role;
+	}
+}
 
 export const ElementRenderer = ({
 	format,
@@ -73,13 +85,14 @@ export const ElementRenderer = ({
 	element,
 	adTargeting,
 	host,
-	abTests,
 	index,
 	hideCaption,
 	isMainMedia,
-	isLiveBlog,
 	starRating,
 }: Props) => {
+	const isLiveBlog =
+		format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return (
@@ -175,7 +188,12 @@ export const ElementRenderer = ({
 				</Figure>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
-			return <DividerBlockComponent />;
+			return (
+				<DividerBlockComponent
+					size={element.size}
+					spaceAbove={element.spaceAbove}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return (
 				<Figure
@@ -189,7 +207,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
 					>
 						<DocumentBlockComponent
 							embedUrl={element.embedUrl}
@@ -230,7 +247,6 @@ export const ElementRenderer = ({
 							isMainMedia={isMainMedia}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
-							abTests={abTests}
 						>
 							<UnsafeEmbedBlockComponent
 								key={index}
@@ -254,7 +270,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={index}
@@ -319,7 +334,7 @@ export const ElementRenderer = ({
 			return (
 				<Figure
 					isMainMedia={isMainMedia}
-					role={isLiveBlog ? 'inline' : element.role}
+					role={decideImageRole(element.role, isLiveBlog)}
 				>
 					<ImageBlockComponent
 						format={format}
@@ -328,8 +343,9 @@ export const ElementRenderer = ({
 						element={element}
 						hideCaption={hideCaption}
 						isMainMedia={isMainMedia}
-						starRating={starRating}
+						starRating={starRating || element.starRating}
 						title={element.title}
+						isAvatar={element.isAvatar}
 					/>
 				</Figure>
 			);
@@ -346,7 +362,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
 					>
 						<InstagramBlockComponent
 							key={index}
@@ -373,6 +388,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
 				>
@@ -381,9 +397,13 @@ export const ElementRenderer = ({
 						scriptUrl={element.scriptUrl}
 						alt={element.alt}
 						role={element.role}
+						format={format}
+						palette={palette}
 					/>
 				</Figure>
 			);
+		case 'model.dotcomrendering.pageElements.ItemLinkBlockElement':
+			return <ItemLinkBlockElement html={element.html} />;
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
 				<Figure
@@ -397,7 +417,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
 					>
 						<MapEmbedBlockComponent
 							format={format}
@@ -431,6 +450,16 @@ export const ElementRenderer = ({
 						key={index}
 						images={element.images}
 						caption={element.caption}
+					/>
+				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
+			return (
+				<Figure isMainMedia={isMainMedia} id={element.elementId}>
+					<NumberedTitleBlockComponent
+						position={element.position}
+						html={element.html}
+						format={element.format}
 					/>
 				</Figure>
 			);
@@ -544,7 +573,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
 					>
 						<SpotifyBlockComponent
 							embedUrl={element.embedUrl}
@@ -558,6 +586,14 @@ export const ElementRenderer = ({
 						/>
 					</ClickToView>
 				</Figure>
+			);
+		case 'model.dotcomrendering.pageElements.StarRatingBlockElement':
+			return (
+				<StarRatingBlockComponent
+					key={index}
+					rating={element.rating}
+					size={element.size}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
 			return <SubheadingBlockComponent key={index} html={element.html} />;
@@ -623,7 +659,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
 					>
 						<VideoFacebookBlockComponent
 							format={format}
@@ -677,6 +712,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return (
 				<Figure
+					isMainMedia={isMainMedia}
 					// No role given by CAPI
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
@@ -689,7 +725,6 @@ export const ElementRenderer = ({
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
-						abTests={abTests}
 					>
 						<VineBlockComponent element={element} />
 					</ClickToView>

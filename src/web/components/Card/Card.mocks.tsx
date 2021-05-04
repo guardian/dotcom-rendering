@@ -1,8 +1,8 @@
 export const images = [
-	'https://i.guim.co.uk/img/media/8dafca4a61f8cd8a9a9ec1950da1760345347f16/0_331_6720_4032/master/6720.jpg?width=1140&quality=85&s=c20d3702dc961fbf3730a4666c2a5483',
-	'https://i.guim.co.uk/img/media/885ef584a0d98eb0485e2f0cf4cec16ede9a9455/0_260_5760_3456/master/5760.jpg?width=1140&quality=85&s=e1b5881b43f31a0256acf51b07781f2b',
-	'https://i.guim.co.uk/img/media/7d64a9e2a6825e9354810933d5185305ce670737/0_169_4200_2751/master/4200.jpg?width=1140&quality=85&s=532871569ff5ba6013266967b7c8e8e0',
-	'https://i.guim.co.uk/img/media/b2ae8ca847adfd38de9c08e0e78bfe531c69a095/0_0_4638_3092/master/4638.jpg?width=1140&quality=85&s=30a2b69f09b94ffbcf53769a7208a51a',
+	'https://i.guim.co.uk/img/media/beae934deb5af64d3462ba5f42b256db2c398915/0_328_8256_4954/master/8256.jpg?width=300&quality=85&auto=format&fit=max&s=8fd18d404222e555a99e0b2610187a80',
+	'https://i.guim.co.uk/img/media/43d01a38800bdd521322fb022bfcb545a5964e64/0_197_5906_3543/master/5906.jpg?width=300&quality=85&auto=format&fit=max&s=dc485dae2bae9df154ce471c949565b9',
+	'https://i.guim.co.uk/img/media/ecb1404b84da810fac91fa89d2b96cb0579de52d/0_389_5531_3320/master/5531.jpg?width=300&quality=85&auto=format&fit=max&s=f11af93a34355fe98b504cdc88b015b8',
+	'https://i.guim.co.uk/img/media/644455b791e9868c71e6edf53e010d210a7b53f7/0_378_5083_3051/master/5083.jpg?width=300&quality=85&auto=format&fit=max&s=6d07810e7bc5485fe0306e1caa7074fd',
 	'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
 	'https://i.guim.co.uk/img/media/bae5559ecc5d757e153d9128c5f880c4ed2a4d93/0_0_3500_2333/master/3500.jpg?width=1140&quality=85&s=39219b29716d935b2cd1896815a9cb80',
 	'https://i.guim.co.uk/img/media/4a8ddeafdc99b38c1d208f20c938cbf5a8bc1527/0_1239_5061_3328/master/5061.jpg?width=1140&quality=85&s=0ff5d6b3f45a4a9d9d72fa4daf470325',
@@ -25,6 +25,9 @@ export const headlines = [
 	"'I'm being asked to take bloods while patients are on the floor'",
 	"A&E staff 'despair' as NHS delays are at their worst ever level",
 	'Patients suffer record delays because of pressure at A&E units',
+	'10 practical tips for looking after mental health during lockdown',
+	'From a vaccine manufacturer to an RAF clarinettist: meet four of the people working to vaccinate the nation',
+	`It’s vital children get the whole school experience’: why a principal is looking forward to schools reopening fully`,
 ];
 
 export const standfirsts = [

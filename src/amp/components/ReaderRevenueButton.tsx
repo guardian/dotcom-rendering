@@ -69,7 +69,7 @@ const rightAlignedIcon = css`
 	top: 0;
 `;
 
-export const ReaderRevenueButton: React.SFC<{
+export const ReaderRevenueButton: React.FunctionComponent<{
 	nav: NavType;
 	linkLabel: string;
 	rrLink: ReaderRevenuePosition;

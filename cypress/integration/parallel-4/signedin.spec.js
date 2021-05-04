@@ -27,14 +27,9 @@ describe('Signed in readers', function () {
 			// this commercial error from failing this test
 			return false;
 		});
-		cy.visit(`Article?url=${articleUrl}`);
 		// Mock call to 'profile/me'
 		cy.intercept('GET', '**/profile/me', profileResponse);
-		// Check that the page is showing the reader as signed in
-		cy.contains(
-			// Only signed in users see this text
-			'This discussion is closed',
-		).should('be.visible');
+		cy.visit(`Article?url=${articleUrl}`);
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
 	});
@@ -42,7 +37,6 @@ describe('Signed in readers', function () {
 	it('should not display signed in texts when users are not signed in', function () {
 		cy.visit(`Article?url=${articleUrl}`);
 		// Check that the page is showing the reader as signed out
-		cy.contains('Sign in or create');
-		cy.contains('Sign in ');
+		cy.contains('sign in or create');
 	});
 });

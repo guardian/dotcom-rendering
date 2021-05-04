@@ -13,15 +13,17 @@ export const Spotlight = ({ content }: Props) => (
 	<Card
 		linkTo={content[0].url}
 		format={content[0].format}
-		palette={content[0].palette}
 		headlineText={content[0].headline}
 		headlineSize="large"
 		byline={content[0].byline}
 		showByline={content[0].showByline}
-		showQuotes={content[0].format.design === Design.Comment}
+		showQuotes={
+			content[0].format.design === Design.Comment ||
+			content[0].format.design === Design.Letter
+		}
 		webPublicationDate={content[0].webPublicationDate}
 		kickerText={content[0].kickerText}
-		showPulsingDot={content[0].isLiveBlog}
+		showPulsingDot={content[0].format.design === Design.LiveBlog}
 		showSlash={true}
 		showClock={false}
 		imageUrl={content[0].image}

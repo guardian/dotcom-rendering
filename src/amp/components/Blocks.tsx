@@ -6,7 +6,7 @@ import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Elements } from '@root/src/amp/components/Elements';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
 import { Ad } from '@root/src/amp/components/Ad';
@@ -37,7 +37,7 @@ const adStyle = css`
 const blockStyle = (pillar: Theme) => css`
 	padding: 6px 10px 12px;
 	background-color: ${palette.neutral[100]};
-	border-top: 1px solid ${pillarPalette[pillar].dark};
+	border-top: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
 	border-bottom: 1px solid ${palette.neutral[93]};
 	margin-bottom: 12px;
 `;
@@ -63,7 +63,7 @@ const clearBoth = css`
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
 // that out and have an Ad element type we match against
-export const Blocks: React.SFC<{
+export const Blocks: React.FunctionComponent<{
 	blocks: Block[];
 	pillar: Theme;
 	edition: Edition;

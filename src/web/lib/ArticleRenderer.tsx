@@ -15,8 +15,7 @@ export const ArticleRenderer: React.FC<{
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
-}> = ({ format, palette, elements, adTargeting, host, abTests }) => {
+}> = ({ format, palette, elements, adTargeting, host }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -29,7 +28,6 @@ export const ArticleRenderer: React.FC<{
 			element={element}
 			adTargeting={adTargeting}
 			host={host}
-			abTests={abTests}
 			index={index}
 			isMainMedia={false}
 		/>

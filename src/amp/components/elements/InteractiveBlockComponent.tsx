@@ -18,7 +18,7 @@ const showMore = css`
 	}
 `;
 
-export const InteractiveBlockComponent: React.SFC<{
+export const InteractiveBlockComponent: React.FunctionComponent<{
 	url?: string;
 	isMandatory?: boolean;
 }> = ({ url, isMandatory }) => {

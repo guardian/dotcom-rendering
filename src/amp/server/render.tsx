@@ -7,7 +7,7 @@ import { extractNAV } from '@root/src/model/extract-nav';
 import { AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
 import { findBySubsection } from '@root/src/model/article-sections';
-import { bodyJSON } from '@root/src/model/exampleBodyJSON';
+import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 import { getAmpExperimentCache } from '@root/src/amp/server/ampExperimentCache';
 
@@ -80,6 +80,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 };
 
 export const renderPerfTest = (req: express.Request, res: express.Response) => {
-	req.body = JSON.parse(bodyJSON);
+	req.body = ExampleArticle;
 	render(req, res);
 };

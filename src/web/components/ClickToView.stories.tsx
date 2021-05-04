@@ -32,10 +32,6 @@ const paragraphStyle = css`
 	margin-bottom: 8px;
 `;
 
-const abTests: CAPIType['config']['abTests'] = {
-	clickToViewVariant: 'variant',
-};
-
 const RoleStory = ({
 	children,
 	role,
@@ -53,6 +49,9 @@ const RoleStory = ({
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -63,14 +62,13 @@ const RoleStory = ({
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<Figure role={role}>
+				<Figure isMainMedia={false} role={role}>
 					<ClickToView
 						role={role}
 						isTracking={true}
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
-						abTests={abTests}
 					>
 						{children}
 					</ClickToView>
@@ -461,6 +459,9 @@ export const EmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -469,13 +470,12 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={facebookEmbed.source}
 						sourceDomain={facebookEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -491,13 +491,12 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vimeoEmbedEmbed.source}
 						sourceDomain={vimeoEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -513,13 +512,12 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={youtubeEmbedEmbed.source}
 						sourceDomain={youtubeEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -535,13 +533,12 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={spotifyEmbedEmbed.source}
 						sourceDomain={spotifyEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -557,13 +554,12 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={bandcampEmbedEmbed.source}
 						sourceDomain={bandcampEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -579,13 +575,12 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={ourworldindataEmbedEmbed.source}
 						sourceDomain={ourworldindataEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -601,13 +596,12 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={bbcEmbedEmbed.source}
 						sourceDomain={bbcEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<EmbedBlockComponent
 							key={1}
@@ -636,6 +630,9 @@ export const UnsafeEmbedBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -644,7 +641,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={instagramEmbedEmbed.source}
@@ -653,7 +650,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-1"]')
 						}
-						abTests={abTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="1"
@@ -669,7 +665,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={formStackEmbed.source}
@@ -678,7 +674,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-2"]')
 						}
-						abTests={abTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="2"
@@ -695,7 +690,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={scribdEmbedEmbed.source}
@@ -704,7 +699,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-3"]')
 						}
-						abTests={abTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="3"
@@ -721,7 +715,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={tiktokEmbedEmbed.source}
@@ -730,7 +724,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-4"]')
 						}
-						abTests={abTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="4"
@@ -747,7 +740,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={twitterEmbedEmbed.source}
@@ -756,7 +749,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-5"]')
 						}
-						abTests={abTests}
 					>
 						<UnsafeEmbedBlockComponent
 							key="5"
@@ -786,6 +778,9 @@ export const VimeoBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className="para">
@@ -795,13 +790,12 @@ export const VimeoBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vimeoVideoEmbed.source}
 						sourceDomain={vimeoVideoEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<VimeoBlockComponent
 							format={{
@@ -843,6 +837,9 @@ export const DocumentBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -852,13 +849,12 @@ export const DocumentBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={scribdDocumentEmbed.source}
 						sourceDomain={scribdDocumentEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<DocumentBlockComponent
 							embedUrl={scribdDocumentEmbed.embedUrl}
@@ -888,6 +884,9 @@ export const SoundCloudBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -897,13 +896,12 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudAudioEmbed.source}
 						sourceDomain={soundcloudAudioEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudAudioEmbed}
@@ -917,13 +915,12 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudEmbedEmbed.source}
 						sourceDomain={soundcloudEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudEmbedEmbed}
@@ -950,6 +947,9 @@ export const SpotifyBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -959,13 +959,12 @@ export const SpotifyBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={spotifyAudioEmbed.source}
 						sourceDomain={spotifyAudioEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotifyAudioEmbed.embedUrl}
@@ -1008,6 +1007,9 @@ export const TweetBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -1017,13 +1019,12 @@ export const TweetBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={twitterTweetEmbed.source}
 						sourceDomain={twitterTweetEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 					>
 						<TweetBlockComponent element={twitterTweetEmbed} />
 					</ClickToView>
@@ -1047,6 +1048,9 @@ export const InstagramBlockComponentStory = () => {
 				className={css`
 					max-width: 620px;
 					clear: left;
+					strong {
+						font-weight: bold;
+					}
 				`}
 			>
 				<p className={paragraphStyle}>
@@ -1056,13 +1060,12 @@ export const InstagramBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={instagramInstramEmbed.source}
 						sourceDomain={instagramInstramEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 						onAccept={() =>
 							updateIframeHeight(
 								'iframe[name="instagram-embed-1"]',

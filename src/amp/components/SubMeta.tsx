@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 
-import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/src-foundations/typography';
@@ -28,7 +28,7 @@ const linkStyle = (pillar: Theme) => css`
 	padding-left: 5px;
 	padding-right: 6px;
 	text-decoration: none;
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${textSans.small()};
 	:after {
 		content: '/';
@@ -63,7 +63,7 @@ const sectionLinkStyle = (pillar: Theme) => css`
 	padding-left: 5px;
 	padding-right: 6px;
 	text-decoration: none;
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${body.medium()};
 	:after {
 		content: '/';
@@ -170,7 +170,6 @@ export const SubMeta: React.FC<{
 					'twitter',
 					'email',
 					'linkedIn',
-					'pinterest',
 					'whatsApp',
 					'messenger',
 				]}
