@@ -334,9 +334,7 @@ export const CommentLayout = ({
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
 								isAnniversary={
-									CAPI.config.switches.anniversaryHeaderSvg &&
-									CAPI.config.abTests
-										.anniversaryAtomVariant === 'variant'
+									CAPI.config.switches.anniversaryHeaderSvg
 								}
 							/>
 						</Section>
