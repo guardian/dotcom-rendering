@@ -172,6 +172,8 @@ const shouldShowAvatar = (format: Format) => {
 
 const shouldShowContributor = (format: Format) => {
 	switch (format.display) {
+		case Display.NumberedList:
+			return true;
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
