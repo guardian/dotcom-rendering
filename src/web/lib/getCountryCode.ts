@@ -24,7 +24,7 @@ export const overrideCountryCode = (countryCode: CountryCode): void => {
 };
 
 /*
-	This method can be used a non async way of getting the country code
+	This method can be used as a non async way of getting the country code
 	after getLocaleCode has been called.
  */
 export const getCountryCode = (): string | null => {
