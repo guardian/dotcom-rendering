@@ -414,15 +414,14 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 		!Number.isNaN(parseInt(relatedItem.starRating))
 			? stars(parseInt(relatedItem.starRating))
 			: null;
-	const articleId = link.slice(1);
 
 	return (
 		<li
 			className="js-card"
-			data-article-id={articleId}
+			data-article-id={link}
 			css={[listStyles(type, format), cardStyles(type, format)]}
 		>
-			<a css={anchorStyles} href={link}>
+			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
 				<section css={headingWrapperStyles}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}

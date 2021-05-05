@@ -356,7 +356,7 @@ function hasSeenCards(): void {
 	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
 		seenArticles.forEach((id) => {
 			document
-				.querySelector(`.js-card[data-article-id='/${id}']`)
+				.querySelector(`.js-card[data-article-id='${id}']`)
 				?.classList.add('fade');
 		});
 	});
