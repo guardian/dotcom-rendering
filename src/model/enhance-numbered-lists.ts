@@ -11,7 +11,6 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag || !frag.firstElementChild) return false;
 	const html = frag.firstElementChild.outerHTML;
-	const text = frag.firstElementChild.textContent;
 	// The following things must be true for an element to be a faux H3
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
 	const containsStrongtags = frag.firstElementChild.outerHTML.includes(
@@ -20,9 +19,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const doesNotContainLinks = !frag.firstElementChild.outerHTML.includes(
 		'<a>',
 	);
-	const textLength = text?.length;
 	const htmlLength = html.length;
-	const onlyHasOneStrongTag = textLength === htmlLength - 24;
 	const startStrong = html.substr(0, 11) === '<p><strong>';
 	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
 
@@ -30,7 +27,6 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 		hasPwrapper &&
 		containsStrongtags &&
 		doesNotContainLinks &&
-		onlyHasOneStrongTag &&
 		startStrong &&
 		endsStrong
 	);
@@ -177,45 +173,6 @@ const makeThumbnailsRound = (elements: CAPIElement[]): CAPIElement[] => {
 	return inlined;
 };
 
-const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
-	/**
-	 * Why not just add H3s in Composer?
-	 * Truth is, you can't. So to get around this there's a convention that says if
-	 * you insert <p><strong>Faux H3!</strong>,</p> then we replace it with a h3 tag
-	 * instead.
-	 *
-	 * Note. H3s don't have any styles so we have to add them. In Frontend, they use
-	 * a 'fauxH3' class for this. In DCR we add `globalH3Styles` which was added at
-	 * the same time as this code.
-	 */
-	const withH3s: CAPIElement[] = [];
-	elements.forEach((thisElement) => {
-		if (
-			thisElement._type ===
-				'model.dotcomrendering.pageElements.TextBlockElement' &&
-			isFalseH3(thisElement)
-		) {
-			const h3Text = extractH3(thisElement);
-			withH3s.push(
-				{
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
-					size: 'full',
-					spaceAbove: 'tight',
-				},
-				{
-					...thisElement,
-					html: `<h3>${h3Text}</h3>`,
-				},
-			);
-		} else {
-			// Pass through
-			withH3s.push(thisElement);
-		}
-	});
-	return withH3s;
-};
-
 const isItemLink = (element: CAPIElement): boolean => {
 	if (!element) return false;
 	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
@@ -233,6 +190,55 @@ const isItemLink = (element: CAPIElement): boolean => {
 		frag.firstElementChild?.firstElementChild?.nodeName === 'LI';
 
 	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
+};
+
+const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
+	/**
+	 * Why not just add H3s in Composer?
+	 * Truth is, you can't. So to get around this there's a convention that says if
+	 * you insert <p><strong>Faux H3!</strong>,</p> then we replace it with a h3 tag
+	 * instead.
+	 *
+	 * Note. H3s don't have any styles so we have to add them. In Frontend, they use
+	 * a 'fauxH3' class for this. In DCR we add `globalH3Styles` which was added at
+	 * the same time as this code.
+	 */
+	const withH3s: CAPIElement[] = [];
+	let previousItem: CAPIElement | undefined;
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			isFalseH3(thisElement)
+		) {
+			const h3Text = extractH3(thisElement);
+
+			// To avoid having to depend on the ordering of the enhancer (which could easily be a source of bugs)
+			// We determin if previous items are `ItemLinkBlockElement` through type and `isItemLink` functions
+			const isPreviousItemLink =
+				previousItem?._type ===
+					'model.dotcomrendering.pageElements.ItemLinkBlockElement' ||
+				(previousItem && isItemLink(previousItem));
+
+			withH3s.push(
+				{
+					_type:
+						'model.dotcomrendering.pageElements.DividerBlockElement',
+					size: 'full',
+					spaceAbove: isPreviousItemLink ? 'loose' : 'tight',
+				},
+				{
+					...thisElement,
+					html: `<h3>${h3Text}</h3>`,
+				},
+			);
+		} else {
+			// Pass through
+			withH3s.push(thisElement);
+		}
+		previousItem = thisElement;
+	});
+	return withH3s;
 };
 
 const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {

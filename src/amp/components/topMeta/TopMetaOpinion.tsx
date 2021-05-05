@@ -2,7 +2,7 @@ import React from 'react';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { css, cx } from 'emotion';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
 import { Byline } from '@root/src/amp/components/topMeta/Byline';
@@ -22,13 +22,13 @@ const headerStyle = css`
 
 const bylineStyle = (pillar: Theme) => css`
 	${headline.small()};
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	font-style: italic;
 	font-weight: 100;
 	padding-top: 3px;
 
 	a {
-		color: ${pillarPalette[pillar].main};
+		color: ${pillarPalette_DO_NOT_USE[pillar].main};
 		text-decoration: none;
 	}
 `;

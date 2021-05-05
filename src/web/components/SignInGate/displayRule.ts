@@ -67,6 +67,10 @@ export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
 	);
 };
 
+// hide the sign in gate on isPaidContent
+export const isPaidContent = (CAPI: CAPIBrowserType): boolean =>
+	CAPI.pageType.isPaidContent;
+
 export const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
@@ -82,4 +86,5 @@ export const canShow = (
 	isValidContentType(CAPI) &&
 	isValidSection(CAPI) &&
 	isValidTag(CAPI) &&
+	!isPaidContent(CAPI) &&
 	!isIOS9();

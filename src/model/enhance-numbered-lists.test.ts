@@ -85,7 +85,7 @@ describe('Enhance Numbered Lists', () => {
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
 
-	it('does not set a h3 if there is more than one strong tag', () => {
+	it('does set a h3 if there is more than one strong tag', () => {
 		const input: CAPIType = {
 			...NumberedList,
 			blocks: [
@@ -97,7 +97,7 @@ describe('Enhance Numbered Lists', () => {
 								'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html:
-								'<p><strong>Strong 1</strong><strong>Strong 2</strong></p>',
+								'<p><strong>Strong 1</strong> <strong>Strong 2</strong></p>',
 						},
 					],
 				},
@@ -111,10 +111,15 @@ describe('Enhance Numbered Lists', () => {
 					elements: [
 						{
 							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+							spaceAbove: 'tight',
+						},
+						{
+							_type:
 								'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><strong>Strong 1</strong><strong>Strong 2</strong></p>',
+							html: '<h3>Strong 1 Strong 2</h3>',
 						},
 					],
 				},
@@ -265,6 +270,116 @@ describe('Enhance Numbered Lists', () => {
 								'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p><strong>abc</strong>some other text</p>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('does set divider `spaceAbove` to `loose` if ItemLinkBlockElement is followed by fauxH3', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+							elementId: 'mockId',
+							html:
+								'<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p><strong>Faux H3 text</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+							elementId: 'mockId',
+							html:
+								'<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+							spaceAbove: 'loose',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<h3>Faux H3 text</h3>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('does set divider `spaceAbove` to `tight` if fauxH3 is not proceeded by ItemLinkBlockElement', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: 'some HTML text',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<p><strong>Faux H3 text</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: 'some HTML text',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+							spaceAbove: 'tight',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html: '<h3>Faux H3 text</h3>',
 						},
 					],
 				},

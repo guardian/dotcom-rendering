@@ -334,9 +334,7 @@ export const CommentLayout = ({
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
 								isAnniversary={
-									CAPI.config.switches.anniversaryHeaderSvg &&
-									CAPI.config.abTests
-										.anniversaryAtomVariant === 'variant'
+									CAPI.config.switches.anniversaryHeaderSvg
 								}
 							/>
 						</Section>
@@ -383,18 +381,21 @@ export const CommentLayout = ({
 					>
 						<GuardianLines count={4} palette={palette} />
 					</Section>
+					<Section
+						backgroundColour={brandAltBackground.primary}
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+					>
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
+					</Section>
 				</SendToBack>
 			</div>
-			<Section
-				backgroundColour={brandAltBackground.primary}
-				padded={false}
-				showTopBorder={false}
-				showSideBorders={false}
-			>
-				<AnniversaryAtomComponent
-					anniversaryInteractiveAtom={CAPI.anniversaryInteractiveAtom}
-				/>
-			</Section>
+
 			<Section
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
