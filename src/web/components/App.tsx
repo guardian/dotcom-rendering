@@ -242,7 +242,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// show the anniversary atom. This means that this user will not see the atom
 	// on the next and following page views.
 	useEffect(() => {
-		addCookie('X-GU-Experiment-0perc-B', 'true', 10); // 10 days to live for the life of the atom being shown
+		if (CAPI.config.switches.anniversaryArticleHeader) {
+			addCookie('X-GU-Experiment-0perc-D', 'true', 2); // 2 days to live means that the atom will show when the switch is on Wednesday AND Saturday
+		}
 	});
 
 	// Ensure the focus state of any buttons/inputs in any of the Source

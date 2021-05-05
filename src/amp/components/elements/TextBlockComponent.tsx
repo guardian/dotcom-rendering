@@ -5,7 +5,7 @@ import { Special } from '@guardian/types';
 import { palette } from '@guardian/src-foundations';
 import { body, textSans } from '@guardian/src-foundations/typography';
 
-import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 // Note, this should only apply basic text styling. It is a case where we want
@@ -35,11 +35,11 @@ export const ListStyle = (iconColour: string) => css`
 
 export const LinkStyle = (pillar: Theme) => css`
 	a {
-		color: ${pillarPalette[pillar].dark};
+		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
 		border-bottom: 1px solid ${neutralBorder(pillar)};
 		:hover {
-			border-bottom: 1px solid ${pillarPalette[pillar].dark};
+			border-bottom: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
 		}
 	}
 `;

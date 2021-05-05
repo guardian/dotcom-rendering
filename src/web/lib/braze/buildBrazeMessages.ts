@@ -8,7 +8,6 @@ import { record } from '@root/src/web/browser/ophan/ophan';
 import {
 	BrazeMessages,
 	BrazeMessagesInterface,
-	InMemoryCache,
 	LocalMessageCache,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
@@ -86,7 +85,7 @@ export const buildBrazeMessages = async (
 		};
 		const brazeMessages = new BrazeMessages(
 			appboy,
-			InMemoryCache,
+			LocalMessageCache,
 			errorHandler,
 		);
 

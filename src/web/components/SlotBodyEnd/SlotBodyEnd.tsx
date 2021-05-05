@@ -83,7 +83,7 @@ const buildBrazeEpicConfig = (
 				/>
 			),
 		},
-		timeoutMillis: null,
+		timeoutMillis: 5000,
 	};
 };
 

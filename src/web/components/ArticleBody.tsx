@@ -43,13 +43,6 @@ const globalStrongStyles = css`
 	}
 `;
 
-const globalImgStyles = css`
-	img {
-		width: 100%;
-		height: auto;
-	}
-`;
-
 const bodyPadding = css`
 	${between.tablet.and.desktop} {
 		padding-right: 80px;
@@ -83,13 +76,7 @@ export const ArticleBody = ({
 		format.design === Design.DeadBlog
 	) {
 		return (
-			<div
-				className={cx(
-					globalStrongStyles,
-					globalImgStyles,
-					globalLinkStyles(palette),
-				)}
-			>
+			<div className={cx(globalStrongStyles, globalLinkStyles(palette))}>
 				<LiveBlogRenderer
 					format={format}
 					blocks={blocks}
@@ -108,7 +95,6 @@ export const ArticleBody = ({
 				globalH2Styles(format.display),
 				globalH3Styles(format.display),
 				globalStrongStyles,
-				globalImgStyles,
 				globalLinkStyles(palette),
 			)}
 		>

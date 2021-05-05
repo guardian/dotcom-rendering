@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import Quote from '@frontend/static/icons/quote.svg';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
 
@@ -10,11 +10,11 @@ const styles = (pillar: Theme) => css`
 	padding: 0.375rem 0.625rem 0.75rem;
 	margin-bottom: 0.75rem;
 	display: block;
-	color: ${pillarPalette[pillar].dark};
+	color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 	${body.medium()};
 
 	svg {
-		fill: ${pillarPalette[pillar].dark};
+		fill: ${pillarPalette_DO_NOT_USE[pillar].dark};
 	}
 `;
 

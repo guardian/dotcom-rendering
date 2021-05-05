@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import InfoIcon from '@frontend/static/icons/info.svg';
 import PlusIcon from '@frontend/static/icons/plus.svg';
 
@@ -70,7 +70,7 @@ const creditStyle = css`
 `;
 
 const pillarColour = (pillar: Theme) => css`
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 `;
 
 const headers = css`
