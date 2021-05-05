@@ -53,10 +53,19 @@ const bodyPadding = css`
 	}
 `;
 
-const socialBox = css`
+const socialBox = (verticalStack = false) => css`
 	display: flex;
 	align-items: center;
-	padding-top: ${space[6]}px;
+	margin-top: ${space[6]}px;
+
+	${verticalStack &&
+	css`
+		${until.tablet} {
+			padding-right: 0 !important;
+			flex-direction: column;
+			margin-top: ${space[5]}px;
+		}
+	`}
 `;
 
 const fakeSocialSignInLink = css`
@@ -68,7 +77,7 @@ const socialBoxText = css`
 	flex: 1 0 auto;
 `;
 
-const iconButton = css`
+const iconButton = (verticalStack = false) => css`
 	:first-of-type {
 		margin-left: 0;
 	}
@@ -102,6 +111,14 @@ const iconButton = css`
 			width: 20px !important;
 		}
 	}
+
+	${verticalStack &&
+	css`
+		${until.tablet} {
+			margin: ${space[1]}px 0;
+			width: 100%;
+		}
+	`}
 `;
 
 const hideMobile = css`
@@ -263,6 +280,9 @@ export const SignInGateFakeSocial = ({
 	ophanComponentId,
 	isComment,
 }: SignInGateProps) => {
+	const verticalButtonStack =
+		abTest?.variant === 'fake-social-variant-vertical';
+
 	return (
 		<div className={signInGateContainer} data-cy="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
@@ -352,7 +372,12 @@ export const SignInGateFakeSocial = ({
 				or continue with
 			</div>
 			<div
-				className={cx([bodyBold, signInHeader, bodyPadding, socialBox])}
+				className={cx([
+					bodyBold,
+					signInHeader,
+					bodyPadding,
+					socialBox(verticalButtonStack),
+				])}
 			>
 				<span className={cx([hideMobile, socialBoxText])}>
 					Or continue with
@@ -362,7 +387,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					className={iconButton}
+					className={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'facebook-button', abTest);
@@ -377,7 +402,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					className={iconButton}
+					className={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'google-button', abTest);
@@ -392,7 +417,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					className={iconButton}
+					className={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'apple-button', abTest);

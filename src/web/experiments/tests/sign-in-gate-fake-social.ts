@@ -23,7 +23,11 @@ export const signInGateFakeSocial: ABTest = {
 			test: (): void => {},
 		},
 		{
-			id: 'fake-social-variant',
+			id: 'fake-social-variant-horizontal',
+			test: (): void => {},
+		},
+		{
+			id: 'fake-social-variant-vertical',
 			test: (): void => {},
 		},
 	],

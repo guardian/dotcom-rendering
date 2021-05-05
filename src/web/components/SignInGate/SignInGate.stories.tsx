@@ -39,3 +39,24 @@ export const fakeSocialStandalone = () => {
 	);
 };
 fakeSocialStandalone.story = { name: 'fake_social_standalone' };
+
+export const fakeSocialStandaloneVertical = () => {
+	return (
+		<Section>
+			<SignInGateFakeSocial
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				abTest={{
+					id: 'fake-social-test',
+					name: 'fake-social-test',
+					variant: 'fake-social-variant-vertical',
+				}}
+			/>
+		</Section>
+	);
+};
+fakeSocialStandaloneVertical.story = {
+	name: 'fake_social_standalone_vertical',
+};

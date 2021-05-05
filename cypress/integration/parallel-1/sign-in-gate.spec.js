@@ -185,7 +185,7 @@ describe('Sign In Gate Tests', function () {
 	});
 
 	describe('SignInGateFakeSocial', function () {
-		describe('fake-social-variant', function () {
+		describe('fake-social-variant-horizontal', function () {
 			beforeEach(function () {
 				disableCMP();
 				// sign in gate fake social runs from 700000-900000 MVT IDs, so 700001 forces user into test variant

@@ -73,7 +73,8 @@ const tests: ReadonlyArray<ABTest> = [
 const testVariantToGateMapping: GateTestMap = {
 	'main-control-4': gateMainControl,
 	'main-variant-4': gateMainVariant,
-	'fake-social-variant': gateFakeSocialVariant,
+	'fake-social-variant-horizontal': gateFakeSocialVariant,
+	'fake-social-variant-vertical': gateFakeSocialVariant,
 	'fake-social-control': gateMainVariant,
 };
 
