@@ -95,8 +95,9 @@ describe('Braze messaging', function () {
 		enableBraze();
 		becomeLoggedIn();
 
-		setCountry()
-			.then(acceptConsents)
+		setCountry();
+
+		acceptConsents()
 			.then(visitArticle)
 			.then(() => {
 				return cy.waitUntil(() => hasCurrentBrazeUser() === true, {
