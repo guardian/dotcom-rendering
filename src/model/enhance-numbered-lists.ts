@@ -37,7 +37,7 @@ const extractH3 = (element: CAPIElement): string => {
 	const textElement = element as TextBlockElement;
 	const frag = JSDOM.fragment(textElement.html);
 	if (isFalseH3(element)) {
-		return frag.firstElementChild?.textContent || '';
+		return frag.firstElementChild?.firstElementChild?.innerHTML || '';
 	}
 	return '';
 };
