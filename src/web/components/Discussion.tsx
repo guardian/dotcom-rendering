@@ -172,14 +172,14 @@ export const Discussion = ({
 				}
 			>
 				<Flex>
-					<div>
-						className=
-						{css`
+					<div
+						className={css`
 							${from.leftCol} {
 								padding-left: 10px;
 							}
 							max-width: 100%;
 						`}
+					>
 						<Hide when="above" breakpoint="leftCol">
 							<div
 								className={css`
@@ -197,6 +197,7 @@ export const Discussion = ({
 								/>
 							</div>
 						</Hide>
+
 						{beingHydrated && isExpanded && (
 							<Comments
 								user={user}
@@ -223,6 +224,7 @@ export const Discussion = ({
 								}}
 							/>
 						)}
+
 						{beingHydrated && !isExpanded && (
 							<Lazy margin={300}>
 								<Comments
@@ -253,22 +255,22 @@ export const Discussion = ({
 						)}
 					</div>
 					<>
-						<RightColumn>
-							<div
-								className={css`
-									position: static;
-									height: 100%;
-									padding-left: 20px;
-								`}
-							>
-								{!hideAd && (
+						{!hideAd && (
+							<RightColumn>
+								<div
+									className={css`
+										position: static;
+										height: 100%;
+										padding-left: 20px;
+									`}
+								>
 									<AdSlot
 										position="comments"
 										display={display}
 									/>
-								)}
-							</div>
-						</RightColumn>
+								</div>
+							</RightColumn>
+						)}
 					</>
 				</Flex>
 			</ContainerLayout>
