@@ -2,7 +2,8 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { breakpoints, palette, remSpace } from '@guardian/src-foundations';
+import { Img } from '@guardian/image-rendering';
+import { palette, remSpace } from '@guardian/src-foundations';
 import {
 	background,
 	neutral,
@@ -16,11 +17,11 @@ import {
 	Display,
 	fromNullable,
 	map,
+	none,
 	OptionKind,
 	withDefault,
 } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
-import Img from 'components/img';
 import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import { border } from 'editorialPalette';
@@ -372,7 +373,6 @@ const cardImage = (
 	image: Option<Image>,
 	relatedItem: RelatedItem,
 ): ReactElement | null => {
-	const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
 	const format = {
 		theme: themeFromString(relatedItem.pillar.id),
 		design: Design.Article,
@@ -384,7 +384,19 @@ const cardImage = (
 		map((img) => {
 			return (
 				<div css={[fullWidthImage, imageWrapperStyles]}>
-					<Img image={img} sizes={sizes} format={format} />
+					<Img
+						image={img}
+						sizes={{
+							mediaQueries: [
+								{ breakpoint: 'phablet', size: '620px' },
+							],
+							default: '100%',
+						}}
+						format={format}
+						className={none}
+						supportsDarkMode
+						lightbox={none}
+					/>
 				</div>
 			);
 		}),
