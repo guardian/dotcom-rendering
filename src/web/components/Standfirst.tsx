@@ -77,7 +77,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				default:
 					return css`
 						${format.theme === Special.Labs
-							? textSans.large()
+							? textSans.medium()
 							: headline.xsmall({
 									fontWeight: 'light',
 							  })};
@@ -137,7 +137,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				default:
 					return css`
 						${format.theme === Special.Labs
-							? textSans.large()
+							? textSans.medium()
 							: headline.xxxsmall({
 									fontWeight: 'bold',
 							  })};
