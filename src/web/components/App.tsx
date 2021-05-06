@@ -68,7 +68,7 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmb
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
-import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
+import type { CountryCode } from '@guardian/libs/dist/esm/types/countries';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';

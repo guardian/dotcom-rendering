@@ -1,9 +1,10 @@
 import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
 import { getCountryCodeSync } from '@root/src/web/lib/getCountryCode';
+import { CountryCode } from "@guardian/libs/dist/esm/types/countries";
 
 const shouldServeLotame = () => {
-	const geo: string | null = getCountryCodeSync();
+	const geo: CountryCode | null = getCountryCodeSync();
 	if (!geo) {
 		return false;
 	}

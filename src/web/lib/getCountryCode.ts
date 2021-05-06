@@ -23,7 +23,7 @@ export const overrideCountryCode = (countryCode: CountryCode): void => {
 	This method can be used as a non async way of getting the country code
 	after getLocaleCode has been called.
  */
-export const getCountryCodeSync = (): string | null => {
+export const getCountryCodeSync = (): CountryCode | null => {
 	return (
 		locale ??
 		storage.local.get(COUNTRY_CODE_KEY_OVERRIDE) ??
