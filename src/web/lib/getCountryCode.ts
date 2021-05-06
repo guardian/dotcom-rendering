@@ -49,8 +49,7 @@ export const getLocaleCode = async (): Promise<CountryCode | null> => {
 				error,
 				'get-country-code',
 			);
-			const stored = getCookie(COUNTRY_CODE_KEY) as CountryCode | null;
-			locale = stored;
-			return stored;
+			locale = getCountryCodeSync();
+			return locale;
 		});
 };
