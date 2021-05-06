@@ -62,11 +62,11 @@ const buildCmpBannerConfig = (): CandidateConfig => ({
 });
 
 const buildRRBannerConfigWith = ({
-									 id,
-									 BannerComponent,
-									 canShowFn,
-									 isEnabled,
-								 }: RRBannerConfig) => {
+	id,
+	BannerComponent,
+	canShowFn,
+	isEnabled,
+}: RRBannerConfig) => {
 	return (
 		CAPI: CAPIBrowserType,
 		isSignedIn: boolean,
@@ -132,11 +132,11 @@ const buildBrazeBanner = (
 });
 
 export const StickyBottomBanner = ({
-									   isSignedIn,
-									   asyncCountryCode,
-									   CAPI,
-									   brazeMessages,
-								   }: Props) => {
+	isSignedIn,
+	asyncCountryCode,
+	CAPI,
+	brazeMessages,
+}: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
