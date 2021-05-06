@@ -11,6 +11,7 @@ import { App } from '@guardian/discussion-rendering/build/App';
 import { either } from '@guardian/types';
 import {
 	ads,
+	getAdSlots,
 	reportNativeElementPositionChanges,
 	sendTargetingParams,
 	slideshow,
@@ -24,6 +25,7 @@ import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
+	commercialClient,
 	discussionClient,
 	navigationClient,
 	notificationsClient,
@@ -459,6 +461,12 @@ function richLinks(): void {
 							);
 							if (placeholder && typeof image === 'string') {
 								const img = document.createElement('img');
+								img.addEventListener('load', (_) => {
+									const currentAdSlots = getAdSlots();
+									void commercialClient.updateAdverts(
+										currentAdSlots,
+									);
+								});
 								img.setAttribute('alt', 'Related article');
 								img.setAttribute('src', image);
 								placeholder.appendChild(img);
