@@ -22,15 +22,15 @@ describe('getCountryCode', () => {
 		localePromise = Promise.resolve('GB');
 		const countryCode = await geo.getLocaleCode();
 		expect(countryCode).toBe('GB');
-		expect(geo.getCountryCode()).toBe('GB');
+		expect(geo.getCountryCodeSync()).toBe('GB');
 	});
 
 	it('should override country code', async () => {
 		localePromise = Promise.resolve('GB');
 		await geo.getLocaleCode();
-		expect(geo.getCountryCode()).toBe('GB');
+		expect(geo.getCountryCodeSync()).toBe('GB');
 		overriddenCountry = 'CY';
 		geo.overrideCountryCode('CY');
-		expect(geo.getCountryCode()).toBe('CY');
+		expect(geo.getCountryCodeSync()).toBe('CY');
 	});
 });

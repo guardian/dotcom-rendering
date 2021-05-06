@@ -1,9 +1,9 @@
 import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
-import { getCountryCode } from '@root/src/web/lib/getCountryCode';
+import { getCountryCodeSync } from '@root/src/web/lib/getCountryCode';
 
 const shouldServeLotame = () => {
-	const geo: string | null = getCountryCode();
+	const geo: string | null = getCountryCodeSync();
 	if (!geo) {
 		return false;
 	}
