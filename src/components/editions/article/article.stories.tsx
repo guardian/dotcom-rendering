@@ -161,7 +161,10 @@ export default {
 	component: Article,
 	title: 'Editions/Article',
 	decorators: [withKnobs],
-	parameters: { layout: 'fullscreen' },
+	parameters: {
+		layout: 'fullscreen',
+		chromatic: { diffThreshold: 0.25 },
+	},
 };
 
 export {
