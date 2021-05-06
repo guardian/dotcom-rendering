@@ -9556,6 +9556,19 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   padding: 0.5rem;
 }
 
+@media (min-width: 740px) {
+  .emotion-7 {
+    width: 531px;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-7 {
+    width: 550px;
+  }
+}
+
 .emotion-8 {
   text-indent: -10000px;
   position: absolute;
@@ -9574,110 +9587,84 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 .emotion-10 {
-  grid-column: 1;
-  grid-row: 1;
-  text-align: center;
-  margin-right: 0.5rem;
+  grid-column: 2;
 }
 
 @media (min-width: 660px) {
   .emotion-10 {
-    grid-column: 2;
-    margin-right: 0;
+    grid-column: 1;
   }
 }
 
 .emotion-11 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 700;
-  border: 1px dotted #000000;
-  border-radius: 100%;
-  display: inline-block;
-  width: 3rem;
-  height: 3rem;
-  padding-top: 0.75rem;
-  box-sizing: border-box;
-}
-
-.emotion-12 {
-  grid-column: 2;
 }
 
 @media (min-width: 660px) {
   .emotion-12 {
-    grid-column: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
 }
 
 .emotion-13 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 700;
-}
-
-.emotion-14 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.emotion-15 {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   border-top: 1px dotted #000000;
   padding-top: 0.25rem;
   margin-top: 0.75rem;
   box-sizing: border-box;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 @media (min-width: 660px) {
-  .emotion-15 {
-    display: inline-grid;
+  .emotion-13 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     width: 50%;
     vertical-align: top;
-    grid-template-columns: 1fr auto;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
     border-right: 1px dotted #000000;
   }
 }
 
-.emotion-16 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.25rem;
-  line-height: 1.15;
-  font-weight: 700;
-  margin: 0;
-  grid-column: 2;
-  grid-row: 1;
-}
-
-@media (min-width: 660px) {
-  .emotion-16 {
-    grid-column: 1;
+@media (min-width: 740px) {
+  .emotion-13 {
+    border-right: 1px dotted #000000;
   }
 }
 
-.emotion-17 {
+.emotion-14 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
   font-weight: 700;
-  grid-column: 1;
-  grid-row: 1/3;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
-@media (min-width: 660px) {
-  .emotion-17 {
-    grid-column: 2;
-  }
-}
-
-.emotion-18 {
+.emotion-15 {
   border: 1px solid #000000;
   border-radius: 100%;
   display: block;
@@ -9686,13 +9673,21 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   position: relative;
 }
 
-.emotion-19 {
+.emotion-16 {
   position: absolute;
   top: 7%;
   left: 29%;
 }
 
-.emotion-20 {
+.emotion-18 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+}
+
+.emotion-19 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -9700,57 +9695,74 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   list-style: none;
   margin: 0;
   padding: 0;
-  grid-column: 2;
-  grid-row: 2;
 }
 
-@media (min-width: 660px) {
-  .emotion-20 {
+@media (min-width: 740px) {
+  .emotion-19 {
     grid-column: 1;
   }
 }
 
-.emotion-21 {
-  display: grid;
-  grid-template-columns: auto 1fr;
+.emotion-20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   border-top: 1px dotted #000000;
   padding-top: 0.25rem;
   margin-top: 0.75rem;
   box-sizing: border-box;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 @media (min-width: 660px) {
-  .emotion-21 {
-    display: inline-grid;
+  .emotion-20 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     width: 50%;
     vertical-align: top;
-    grid-template-columns: 1fr auto;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
   }
 }
 
-.emotion-22 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.25rem;
-  line-height: 1.15;
-  font-weight: 700;
-  margin: 0;
-  grid-column: 2;
-  grid-row: 1;
+@media (min-width: 740px) {
+  .emotion-20 {
+    border-right: 1px dotted #000000;
+  }
 }
 
-.emotion-23 {
+.emotion-21 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
   font-weight: 700;
-  grid-column: 1;
-  grid-row: 1/3;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 @media (min-width: 660px) {
-  .emotion-23 {
-    margin-left: 1rem;
+  .emotion-21 {
+    margin-left: 0.5rem;
+  }
+}
+
+@media (min-width: 660px) {
+  .emotion-24 {
+    margin-left: 0.5rem;
   }
 }
 
@@ -9762,8 +9774,6 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   list-style: none;
   margin: 0;
   padding: 0;
-  grid-column: 2;
-  grid-row: 2;
 }
 
 .emotion-27 {
@@ -10263,100 +10273,98 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                   <div
                     className="emotion-10"
                   >
-                    <span
-                      className="emotion-11"
-                    >
-                      FT
-                    </span>
-                  </div>
-                  <div
-                    className="emotion-12"
-                  >
                     <nav
-                      className="emotion-13"
+                      className="emotion-11"
                     >
                       Premier League
                     </nav>
-                    <address
-                      className="emotion-14"
-                    >
-                      The King Power Stadium
-                    </address>
                   </div>
                 </div>
-                <section
-                  className="emotion-15"
+                <div
+                  className="emotion-12"
                 >
-                  <h3
-                    className="emotion-16"
-                  >
-                    Leicester
-                  </h3>
-                  <div
-                    className="emotion-17"
+                  <section
+                    className="emotion-13"
                   >
                     <div
-                      className="emotion-18"
+                      className="emotion-14"
                     >
-                      <span
+                      <div
+                        className="emotion-15"
+                      >
+                        <span
+                          className="emotion-16"
+                        >
+                          2
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      className="emotion-17"
+                    >
+                      <h3
+                        className="emotion-18"
+                      >
+                        Leicester
+                      </h3>
+                      <ul
                         className="emotion-19"
                       >
-                        2
-                      </span>
+                        <li>
+                          Castagne
+                           
+                          50
+                          '
+                           
+                        </li>
+                        <li>
+                          Iheanacho
+                           
+                          80
+                          '
+                           
+                        </li>
+                      </ul>
                     </div>
-                  </div>
-                  <ul
+                  </section>
+                  <section
                     className="emotion-20"
                   >
-                    <li>
-                      Castagne
-                       
-                      50
-                      '
-                       
-                    </li>
-                    <li>
-                      Iheanacho
-                       
-                      80
-                      '
-                       
-                    </li>
-                  </ul>
-                </section>
-                <section
-                  className="emotion-21"
-                >
-                  <h3
-                    className="emotion-22"
-                  >
-                    Crystal Palace
-                  </h3>
-                  <div
-                    className="emotion-23"
-                  >
                     <div
-                      className="emotion-18"
+                      className="emotion-21"
                     >
-                      <span
-                        className="emotion-19"
+                      <div
+                        className="emotion-15"
                       >
-                        1
-                      </span>
+                        <span
+                          className="emotion-16"
+                        >
+                          1
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <ul
-                    className="emotion-26"
-                  >
-                    <li>
-                      Zaha
-                       
-                      12
-                      '
-                       
-                    </li>
-                  </ul>
-                </section>
+                    <div
+                      className="emotion-24"
+                    >
+                      <h3
+                        className="emotion-18"
+                      >
+                        Crystal Palace
+                      </h3>
+                      <ul
+                        className="emotion-26"
+                      >
+                        <li>
+                          Zaha
+                           
+                          12
+                          '
+                           
+                        </li>
+                      </ul>
+                    </div>
+                  </section>
+                </div>
               </section>
             </div>
             <picture>
@@ -13950,6 +13958,315 @@ exports[`Storyshots Editions/Byline Showcase 1`] = `
     </button>
   </span>
 </div>
+`;
+
+exports[`Storyshots Editions/FootballScores Default 1`] = `
+.emotion-0 {
+  background-color: #FFE500;
+  padding: 0.5rem;
+}
+
+@media (min-width: 740px) {
+  .emotion-0 {
+    width: 531px;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-0 {
+    width: 550px;
+  }
+}
+
+.emotion-1 {
+  text-indent: -10000px;
+  position: absolute;
+  margin: 0;
+}
+
+.emotion-2 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+@media (min-width: 660px) {
+  .emotion-2 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.emotion-3 {
+  grid-column: 2;
+}
+
+@media (min-width: 660px) {
+  .emotion-3 {
+    grid-column: 1;
+  }
+}
+
+.emotion-4 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+@media (min-width: 660px) {
+  .emotion-5 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border-top: 1px dotted #000000;
+  padding-top: 0.25rem;
+  margin-top: 0.75rem;
+  box-sizing: border-box;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+@media (min-width: 660px) {
+  .emotion-6 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 50%;
+    vertical-align: top;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    border-right: 1px dotted #000000;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-6 {
+    border-right: 1px dotted #000000;
+  }
+}
+
+.emotion-7 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 2.625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.emotion-8 {
+  border: 1px solid #000000;
+  border-radius: 100%;
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  position: relative;
+}
+
+.emotion-9 {
+  position: absolute;
+  top: 7%;
+  left: 29%;
+}
+
+.emotion-11 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+}
+
+.emotion-12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border-top: 1px dotted #000000;
+  padding-top: 0.25rem;
+  margin-top: 0.75rem;
+  box-sizing: border-box;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+@media (min-width: 660px) {
+  .emotion-12 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 50%;
+    vertical-align: top;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-12 {
+    border-right: 1px dotted #000000;
+  }
+}
+
+.emotion-13 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 2.625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-13 {
+    margin-left: 0.5rem;
+  }
+}
+
+@media (min-width: 660px) {
+  .emotion-16 {
+    margin-left: 0.5rem;
+  }
+}
+
+.emotion-18 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+<section
+  className="emotion-0"
+>
+  <h2
+    className="emotion-1"
+  >
+    Scores
+  </h2>
+  <div
+    className="emotion-2"
+  >
+    <div
+      className="emotion-3"
+    >
+      <nav
+        className="emotion-4"
+      >
+        Premier League
+      </nav>
+    </div>
+  </div>
+  <div
+    className="emotion-5"
+  >
+    <section
+      className="emotion-6"
+    >
+      <div
+        className="emotion-7"
+      >
+        <div
+          className="emotion-8"
+        >
+          <span
+            className="emotion-9"
+          >
+            0
+          </span>
+        </div>
+      </div>
+      <div
+        className="emotion-10"
+      >
+        <h3
+          className="emotion-11"
+        >
+          Arsenal
+        </h3>
+      </div>
+    </section>
+    <section
+      className="emotion-12"
+    >
+      <div
+        className="emotion-13"
+      >
+        <div
+          className="emotion-8"
+        >
+          <span
+            className="emotion-9"
+          >
+            2
+          </span>
+        </div>
+      </div>
+      <div
+        className="emotion-16"
+      >
+        <h3
+          className="emotion-11"
+        >
+          Man City
+        </h3>
+        <ul
+          className="emotion-18"
+        >
+          <li>
+            Sterling
+             
+            2
+            '
+             
+            .g
+          </li>
+          <li>
+            Aguero
+             
+            30
+            '
+             
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</section>
 `;
 
 exports[`Storyshots Editions/GalleryImage Default 1`] = `
