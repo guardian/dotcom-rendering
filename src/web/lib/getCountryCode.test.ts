@@ -20,19 +20,15 @@ jest.mock('@guardian/libs', () => ({
 describe('getCountryCode', () => {
 	it('get country code from getLocale lib', async () => {
 		localePromise = Promise.resolve('GB');
-		const spy = jest.spyOn(geo, 'setCountryCode');
 		const countryCode = await geo.getLocaleCode();
 		expect(countryCode).toBe('GB');
 		expect(geo.getCountryCode()).toBe('GB');
-		expect(spy).toHaveBeenCalledWith('GB');
 	});
 
 	it('should override country code', async () => {
 		localePromise = Promise.resolve('GB');
-		const spy = jest.spyOn(geo, 'setCountryCode');
 		await geo.getLocaleCode();
 		expect(geo.getCountryCode()).toBe('GB');
-		expect(spy).toHaveBeenCalledWith('GB');
 		overriddenCountry = 'CY';
 		geo.overrideCountryCode('CY');
 		expect(geo.getCountryCode()).toBe('CY');

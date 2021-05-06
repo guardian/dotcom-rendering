@@ -74,13 +74,13 @@ describe('Braze messaging', function () {
 
 	const setCountry = () => {
 		const countryCode = 'GB';
-		window.localStorage.setItem('gu.geo.override', countryCode);
+		localStorage.setItem('gu.geo.override', countryCode);
 	};
 
 	it('records in local storage that the Braze SDK was loaded', function () {
+		setCountry();
 		enableBraze();
 		becomeLoggedIn();
-		setCountry();
 
 		acceptConsents()
 			.then(visitArticle)

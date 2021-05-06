@@ -4,14 +4,10 @@ import { getCookie } from '@frontend/web/browser/cookie';
 
 const COUNTRY_CODE_KEY = 'GU_geo_country';
 const COUNTRY_CODE_KEY_OVERRIDE = 'gu.geo.override';
-let locale: CountryCode | null;
-
 /*
 	Memoizes the location
  */
-export const setCountryCode = (countryCode: CountryCode | null): void => {
-	locale = countryCode;
-};
+let locale: CountryCode | null;
 
 /*
 	Can be used to override country code and sets it in localStorage
@@ -44,7 +40,7 @@ export const getCountryCode = (): string | null => {
 export const getLocaleCode = async (): Promise<CountryCode | null> => {
 	return getLocale()
 		.then((countryCode) => {
-			setCountryCode(countryCode);
+			locale = countryCode;
 			return countryCode;
 		})
 		.catch((error) => {
@@ -54,7 +50,7 @@ export const getLocaleCode = async (): Promise<CountryCode | null> => {
 				'get-country-code',
 			);
 			const stored = getCookie(COUNTRY_CODE_KEY) as CountryCode | null;
-			setCountryCode(stored);
+			locale = stored;
 			return stored;
 		});
 };
