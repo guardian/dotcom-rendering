@@ -39,7 +39,7 @@ import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie, addCookie } from '@root/src/web/browser/cookie';
-import { getCountryCode } from '@frontend/web/lib/getCountryCode';
+import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
@@ -68,7 +68,7 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmb
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
-
+import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
@@ -96,7 +96,7 @@ const MostViewedRightWrapper = React.lazy(() => {
 	start();
 	return import(
 		/* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
-	).then((module) => {
+		).then((module) => {
 		end();
 		return { default: module.MostViewedRightWrapper };
 	});
@@ -106,7 +106,7 @@ const OnwardsUpper = React.lazy(() => {
 	start();
 	return import(
 		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
-	).then((module) => {
+		).then((module) => {
 		end();
 		return { default: module.OnwardsUpper };
 	});
@@ -116,7 +116,7 @@ const OnwardsLower = React.lazy(() => {
 	start();
 	return import(
 		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
-	).then((module) => {
+		).then((module) => {
 		end();
 		return { default: module.OnwardsLower };
 	});
@@ -126,7 +126,7 @@ const GetMatchStats = React.lazy(() => {
 	start();
 	return import(
 		/* webpackChunkName: "GetMatchStats" */ '@frontend/web/components/GetMatchStats'
-	).then((module) => {
+		).then((module) => {
 		end();
 		return { default: module.GetMatchStats };
 	});
@@ -149,12 +149,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
 	const [asyncCountryCode, setAsyncCountryCode] = useState<
-		Promise<string | void>
-	>();
+		Promise<CountryCode | null>
+		>();
 
 	const [brazeMessages, setBrazeMessages] = useState<
 		Promise<BrazeMessagesInterface>
-	>();
+		>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
@@ -206,7 +206,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	useEffect(() => {
 		const callFetch = () => {
-			const countryCodePromise = getCountryCode();
+			const countryCodePromise = getLocaleCode();
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
 				.then((cc) => setCountryCode(cc || ''))
@@ -261,7 +261,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		) =>
 			import(
 				/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
-			)
+				)
 				.then((utils) =>
 					utils[key](
 						asExistingSupporter,
@@ -383,7 +383,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			) {
 				return import(
 					'@frontend/web/components/elements/YoutubeBlockComponent'
-				);
+					);
 			}
 			return Promise.reject();
 		},
@@ -403,7 +403,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			) {
 				return import(
 					'@frontend/web/components/elements/RichLinkComponent'
-				);
+					);
 			}
 			return Promise.reject();
 		},
@@ -423,7 +423,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			) {
 				return import(
 					'@frontend/web/components/elements/InteractiveBlockComponent'
-				);
+					);
 			}
 			return Promise.reject();
 		},

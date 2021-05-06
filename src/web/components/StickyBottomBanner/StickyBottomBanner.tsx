@@ -16,12 +16,13 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
+import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
-	asyncCountryCode?: Promise<string | void>;
+	asyncCountryCode?: Promise<CountryCode | null>;
 	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 };
@@ -61,11 +62,11 @@ const buildCmpBannerConfig = (): CandidateConfig => ({
 });
 
 const buildRRBannerConfigWith = ({
-	id,
-	BannerComponent,
-	canShowFn,
-	isEnabled,
-}: RRBannerConfig) => {
+									 id,
+									 BannerComponent,
+									 canShowFn,
+									 isEnabled,
+								 }: RRBannerConfig) => {
 	return (
 		CAPI: CAPIBrowserType,
 		isSignedIn: boolean,
@@ -131,11 +132,11 @@ const buildBrazeBanner = (
 });
 
 export const StickyBottomBanner = ({
-	isSignedIn,
-	asyncCountryCode,
-	CAPI,
-	brazeMessages,
-}: Props) => {
+									   isSignedIn,
+									   asyncCountryCode,
+									   CAPI,
+									   brazeMessages,
+								   }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
@@ -147,7 +148,7 @@ export const StickyBottomBanner = ({
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
-			asyncCountryCode as Promise<string>,
+			asyncCountryCode as Promise<CountryCode>,
 		);
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
