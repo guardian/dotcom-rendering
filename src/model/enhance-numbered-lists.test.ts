@@ -128,6 +128,94 @@ describe('Enhance Numbered Lists', () => {
 		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
 	});
 
+	it('does set a h3 if there is more than one strong tag', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p><strong>Strong 1</strong> <strong>Strong 2 <a href="example.com">Some Link</a></strong></p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+							spaceAbove: 'tight',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<h3>Strong 1 Strong 2 <a href="example.com">Some Link</a></h3>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
+	it('does set an h3 and extract all text even if it is between stong tages', () => {
+		const input: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<p><strong>Strong 1</strong> some text inbetween <strong>Strong 2</strong></p>',
+						},
+					],
+				},
+			],
+		};
+		const expectedOutput: CAPIType = {
+			...NumberedList,
+			blocks: [
+				{
+					...metaData,
+					elements: [
+						{
+							_type:
+								'model.dotcomrendering.pageElements.DividerBlockElement',
+							size: 'full',
+							spaceAbove: 'tight',
+						},
+						{
+							_type:
+								'model.dotcomrendering.pageElements.TextBlockElement',
+							elementId: 'mockId',
+							html:
+								'<h3>Strong 1 some text inbetween Strong 2</h3>',
+						},
+					],
+				},
+			],
+		};
+		expect(enhanceNumberedLists(input)).toEqual(expectedOutput);
+	});
+
 	it('does not set a h3 if there is text before the strong tag', () => {
 		const input: CAPIType = {
 			...NumberedList,
