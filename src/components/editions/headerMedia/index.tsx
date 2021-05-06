@@ -12,7 +12,6 @@ import HeaderImageCaption, {
 	captionId,
 } from 'components/editions/headerImageCaption';
 import StarRating from 'components/editions/starRating';
-import FootballScores from 'components/footballScores';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
@@ -20,6 +19,7 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
+import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';
 
@@ -152,10 +152,8 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 							<div css={footballWrapperStyles}>
 								<FootballScores
 									league={scores.league}
-									stadium={scores.stadium}
 									homeTeam={scores.homeTeam}
 									awayTeam={scores.awayTeam}
-									status={scores.status}
 								/>
 							</div>
 						);
