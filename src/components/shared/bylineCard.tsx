@@ -59,6 +59,7 @@ const bylineImage = css`
 	background-color: ${opinion[400]};
 	float: right;
 	margin: 0 ${remSpace[2]} 0 0;
+	position: relative;
 
 	img {
 		margin: auto;
