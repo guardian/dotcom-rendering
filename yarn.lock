@@ -2095,10 +2095,10 @@
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
 
-"@guardian/libs@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-1.7.0.tgz#08de4a4cc10871e7c4e5fb32e7f777661c0a3cd8"
-  integrity sha512-U04Ln69YgEVCUFuDGTJt9IU962k1ahxlrFRZIIwcECwmYgyGw68Cm6lYXSEodLQBzmJPjhKpQUrTF7n0oo/j8w==
+"@guardian/libs@^1.8.0":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-1.8.1.tgz#22bccd66be7c5bf70cd5bbb1bf7700d94610ccb7"
+  integrity sha512-Q/JPLhNeYa5XhDPJhw/1+fbZmszopvovWW8I7dGEuFPGWeNUmXAbW8J3kzuonDu7l9/tuFZg8jljbKHZlrFx0A==
 
 "@guardian/prettier@^0.5.0":
   version "0.5.0"
@@ -6212,7 +6212,7 @@ blob-util@2.0.2:
   resolved "https://registry.yarnpkg.com/blob-util/-/blob-util-2.0.2.tgz#3b4e3c281111bb7f11128518006cdc60b403a1eb"
   integrity sha512-T7JQa+zsXXEa6/8ZhHcQEW1UFfVM49Ts65uBkFL6fz2QmrElqmbajIDJvuA0tEhRe5eIjpV9ZF+0RfZR9voJFQ==
 
-bluebird@3.7.2, bluebird@^3.3.5, bluebird@^3.5.5, bluebird@^3.7.2:
+bluebird@3.7.2, bluebird@^3.3.5, bluebird@^3.5.5, bluebird@^3.7.1, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -7737,6 +7737,15 @@ cypress-wait-until@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/cypress-wait-until/-/cypress-wait-until-1.7.1.tgz#3789cd18affdbb848e3cfc1f918353c7ba1de6f8"
   integrity sha512-8DL5IsBTbAxBjfYgCzdbohPq/bY+IKc63fxtso1C8RWhLnQkZbVESyaclNr76jyxfId6uyzX8+Xnt0ZwaXNtkA==
+
+cypress-webpack-preprocessor-v5@^5.0.0-alpha.1:
+  version "5.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/cypress-webpack-preprocessor-v5/-/cypress-webpack-preprocessor-v5-5.0.0-alpha.1.tgz#381cac58c5ff4035c9b0de89379d5e80ee1c16e4"
+  integrity sha512-U5tb21Yxj3j8hofGz/g83NU+dIDNF+yO7DPwrgS5+5TZltc2OOnOpAApiyE23J6dvZyymkUx3bRGyR//Zwrx+A==
+  dependencies:
+    bluebird "^3.7.1"
+    debug "^4.1.1"
+    lodash "^4.17.20"
 
 cypress@^6.8.0:
   version "6.9.1"

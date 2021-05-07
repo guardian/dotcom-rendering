@@ -39,7 +39,7 @@ import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie, addCookie } from '@root/src/web/browser/cookie';
-import { getCountryCode } from '@frontend/web/lib/getCountryCode';
+import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
@@ -68,7 +68,7 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmb
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
-
+import type { CountryCode } from '@guardian/libs/dist/esm/types/countries';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
@@ -149,7 +149,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
 	const [asyncCountryCode, setAsyncCountryCode] = useState<
-		Promise<string | void>
+		Promise<CountryCode | null>
 	>();
 
 	const [brazeMessages, setBrazeMessages] = useState<
@@ -206,7 +206,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	useEffect(() => {
 		const callFetch = () => {
-			const countryCodePromise = getCountryCode();
+			const countryCodePromise = getLocaleCode();
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
 				.then((cc) => setCountryCode(cc || ''))

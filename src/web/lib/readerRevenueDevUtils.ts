@@ -1,6 +1,6 @@
 import {
-	setCountryCode,
-	getCountryCode,
+	getLocaleCode,
+	overrideCountryCode,
 } from '@root/src/web/lib/getCountryCode';
 import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
@@ -15,6 +15,7 @@ import {
 	removeCookie,
 } from '@root/src/web/browser/cookie';
 import { setAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
+import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
 
 const readerRevenueCookies = [
 	HIDE_SUPPORT_MESSAGING_COOKIE,
@@ -132,7 +133,7 @@ const changeGeolocation = (
 	asExistingSupporter: boolean = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
-	getCountryCode()
+	getLocaleCode()
 		.then((current) => {
 			/* eslint-disable no-alert */
 			const geo = window.prompt(
@@ -143,7 +144,7 @@ const changeGeolocation = (
 					`'UK' is not a valid geolocation - please use 'GB' instead!`,
 				);
 			} else if (geo) {
-				setCountryCode(geo);
+				overrideCountryCode(geo as CountryCode);
 				clearCommonReaderRevenueStateAndReload(
 					asExistingSupporter,
 					shouldHideReaderRevenue,
