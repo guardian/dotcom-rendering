@@ -25,9 +25,9 @@ const generateName = (isLegacyJS) => {
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
-const scriptPath = (package) =>
+const scriptPath = (dcrPackage) =>
 	[
-		`./src/web/browser/${package}/init.ts`,
+		`./src/web/browser/${dcrPackage}/init.ts`,
 		DEV &&
 			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
 	].filter(Boolean);
