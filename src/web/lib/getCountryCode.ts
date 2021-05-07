@@ -25,8 +25,8 @@ export const overrideCountryCode = (countryCode: CountryCode): void => {
  */
 export const getCountryCodeSync = (): CountryCode | null => {
 	return (
-		locale ??
-		storage.local.get(COUNTRY_CODE_KEY_OVERRIDE) ??
+		locale ||
+		storage.local.get(COUNTRY_CODE_KEY_OVERRIDE) ||
 		getCookie(COUNTRY_CODE_KEY)
 	);
 };
