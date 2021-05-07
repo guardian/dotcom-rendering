@@ -13,39 +13,8 @@ const webpackPreprocessor = require('cypress-webpack-preprocessor-v5');
 module.exports = (on, config) => {
 	config.env = { ...config.env, ...process.env };
 
-	const webpackConfig = {
-		// override default webpack config
-		// https://github.com/cypress-io/cypress/tree/master/npm/webpack-preprocessor#webpackoptions
-		webpackOptions: {
-			mode: 'development',
-			module: {
-				rules: [
-					{
-						test: /\.[jt]sx?|mjs$/,
-						exclude: {
-							and: [/node_modules/],
-							not: [
-								// Include all @guardian modules, except automat-modules
-								/@guardian\/(?!(automat-modules))/,
-
-								// Include the dynamic-import-polyfill
-								/dynamic-import-polyfill/,
-							],
-						},
-						use: [
-							{
-								loader: 'babel-loader',
-								options: {
-									presets: ['@babel/preset-env'],
-								},
-							},
-						],
-					},
-				],
-			},
-		},
-		watchOptions: {},
-	};
+	const webpackConfig = webpackPreprocessor.defaultOptions;
+	webpackConfig.webpackOptions.module.rules[0].exclude = require('../../scripts/webpack/browser').babelExclude;
 
 	on('file:preprocessor', webpackPreprocessor(webpackConfig));
 	return config;
