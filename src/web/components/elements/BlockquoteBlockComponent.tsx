@@ -12,19 +12,7 @@ type Props = {
 	quoted?: boolean;
 };
 
-const BlockquoteRow = ({ children }: { children: React.ReactNode }) => (
-	<blockquote
-		className={css`
-			display: flex;
-			flex-direction: row;
-		`}
-	>
-		{children}
-	</blockquote>
-);
-
 const baseBlockquoteStyles = css`
-	margin-bottom: 16px;
 	${body.medium()};
 	font-style: italic;
 `;
@@ -70,7 +58,15 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 
 	if (quoted) {
 		return (
-			<BlockquoteRow>
+			<blockquote
+				className={css`
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-top: 8px;
+					margin-bottom: 8px;
+				`}
+			>
 				<QuoteIcon colour={palette.fill.blockquoteIcon} size="medium" />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
@@ -78,7 +74,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 					elCss={quotedBlockquoteStyles(palette)}
 					tagName={unwrappedElement}
 				/>
-			</BlockquoteRow>
+			</blockquote>
 		);
 	}
 	return (
