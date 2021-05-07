@@ -72,7 +72,7 @@ const buildCAPI = (body: CAPIType): CAPIType => {
 		.enhanceAnniversaryAtom().capi;
 };
 
-export const render = (
+export const renderArticle = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
@@ -125,5 +125,29 @@ export const renderPerfTest = (
 	res: express.Response,
 ): void => {
 	req.body = ExampleArticle;
-	render(req, res);
+	renderArticle(req, res);
+};
+
+export const renderInteractive = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const CAPI = buildCAPI(body);
+		const resp = document({
+			data: {
+				CAPI,
+				site: 'frontend',
+				page: 'Interactive',
+				NAV: extractNAV(CAPI.nav),
+				GA: extractGA(CAPI),
+				linkedData: CAPI.linkedData,
+			},
+		});
+
+		res.status(200).send(resp);
+	} catch (e) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
 };
