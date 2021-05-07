@@ -69,10 +69,10 @@ const invertedStyle = css`
 const fontStyles = (format: Format) => {
 	if (format.theme === Special.Labs) {
 		return css`
-			${textSans.medium({ fontWeight: 'bold' })}
+			${textSans.large()}
 			line-height: 23px;
 			${from.leftCol} {
-				${textSans.large({ fontWeight: 'bold' })}
+				${textSans.large()}
 				line-height: 20px;
 			}
 		`;
