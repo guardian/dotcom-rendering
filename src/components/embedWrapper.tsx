@@ -70,6 +70,30 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 				...(embed.tracking && { tracking: embed.tracking.toString() }),
 			};
 		}
+		case EmbedKind.EmailSignup: {
+			return {
+				kind: EmbedKind.EmailSignup,
+				...withDefault({})(
+					map<string, Record<string, string>>((alt) => {
+						return { alt };
+					})(embed.alt),
+				),
+				html: embed.html,
+				height: embed.height.toString(),
+				...(embed.mandatory && { mandatory: 'true' }),
+				...pipe2(
+					embed.source,
+					map((source) => ({ source })),
+					withDefault<Record<string, string>>({}),
+				),
+				...pipe2(
+					embed.sourceDomain,
+					map((sourceDomain) => ({ sourceDomain })),
+					withDefault<Record<string, string>>({}),
+				),
+				...(embed.tracking && { tracking: embed.tracking.toString() }),
+			};
+		}
 		case EmbedKind.Instagram: {
 			return {
 				kind: EmbedKind.Instagram,
@@ -211,7 +235,8 @@ const divElementPropsToEmbedComponentProps = (
 							)(requiredStringParam(elementProps, 'id'))(
 								requiredNumberParam(elementProps, 'width'),
 							)(requiredNumberParam(elementProps, 'height'));
-						case EmbedKind.Generic: {
+						case EmbedKind.Generic:
+						case EmbedKind.EmailSignup: {
 							return resultMap2<string, number, Generic>(
 								(html: string, height: number): Generic => ({
 									kind: EmbedKind.Generic,
@@ -299,6 +324,7 @@ const getSourceDetailsForEmbed = (embed: Embed): SourceDetails => {
 				sourceDomain: some('www.spotify.com'),
 			};
 		case EmbedKind.Generic:
+		case EmbedKind.EmailSignup:
 			return {
 				source: embed.source,
 				sourceDomain: embed.sourceDomain,

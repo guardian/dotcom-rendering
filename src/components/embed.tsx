@@ -44,6 +44,9 @@ const EmbedComponent: FC<Props> = ({ embed, editions }) => {
 				<Instagram id={embed.id} caption={embed.caption} />
 			) : null;
 
+		case EmbedKind.EmailSignup:
+			return !editions ? <GenericEmbed embed={embed} /> : null;
+
 		case EmbedKind.Generic:
 			return <GenericEmbed embed={embed} />;
 
