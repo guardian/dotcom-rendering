@@ -335,6 +335,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={decideImageRole(element.role, isLiveBlog)}
+					customClassName="element--image-block" // tell spacefinder to treat this as 1 block
 				>
 					<ImageBlockComponent
 						format={format}

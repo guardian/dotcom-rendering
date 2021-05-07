@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { cx, css } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -9,6 +9,7 @@ type Props = {
 	isMainMedia: boolean;
 	role?: RoleType | 'richLink';
 	id?: string;
+	customClassName?: string;
 };
 
 const roleCss = {
@@ -155,6 +156,7 @@ export const Figure = ({
 	children,
 	id,
 	isMainMedia,
+	customClassName,
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -165,7 +167,7 @@ export const Figure = ({
 		return <figure id={id}>{children}</figure>;
 	}
 	return (
-		<figure id={id} className={decidePosition(role)}>
+		<figure id={id} className={cx(customClassName, decidePosition(role))}>
 			{children}
 		</figure>
 	);
