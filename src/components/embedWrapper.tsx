@@ -16,7 +16,15 @@ import {
 import { ClickToView } from 'components/ClickToView';
 import EmbedComponent from 'components/embed';
 import { EmbedKind } from 'embed';
-import type { Embed, Generic, Instagram, Spotify, YouTube } from 'embed';
+import type {
+	EmailSignup,
+	Embed,
+	Generic,
+	Instagram,
+	Spotify,
+	TikTok,
+	YouTube,
+} from 'embed';
 import { pipe, pipe2, resultFromNullable, resultMap2, resultMap3 } from 'lib';
 import { createElement as h } from 'react';
 import type { FC, ReactElement } from 'react';
@@ -27,6 +35,30 @@ interface Props {
 	embed: Embed;
 	editions: boolean;
 }
+
+const genericDivProps = (
+	embed: Generic | TikTok | EmailSignup,
+): Record<string, string> => ({
+	...withDefault({})(
+		map<string, Record<string, string>>((alt) => {
+			return { alt };
+		})(embed.alt),
+	),
+	html: embed.html,
+	height: embed.height.toString(),
+	...(embed.mandatory && { mandatory: 'true' }),
+	...pipe2(
+		embed.source,
+		map((source) => ({ source })),
+		withDefault<Record<string, string>>({}),
+	),
+	...pipe2(
+		embed.sourceDomain,
+		map((sourceDomain) => ({ sourceDomain })),
+		withDefault<Record<string, string>>({}),
+	),
+	...(embed.tracking && { tracking: embed.tracking.toString() }),
+});
 
 const embedToDivProps = (embed: Embed): Record<string, string> => {
 	switch (embed.kind) {
@@ -49,49 +81,19 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 		case EmbedKind.Generic: {
 			return {
 				kind: EmbedKind.Generic,
-				...withDefault({})(
-					map<string, Record<string, string>>((alt) => {
-						return { alt };
-					})(embed.alt),
-				),
-				html: embed.html,
-				height: embed.height.toString(),
-				...(embed.mandatory && { mandatory: 'true' }),
-				...pipe2(
-					embed.source,
-					map((source) => ({ source })),
-					withDefault<Record<string, string>>({}),
-				),
-				...pipe2(
-					embed.sourceDomain,
-					map((sourceDomain) => ({ sourceDomain })),
-					withDefault<Record<string, string>>({}),
-				),
-				...(embed.tracking && { tracking: embed.tracking.toString() }),
+				...genericDivProps(embed),
 			};
 		}
 		case EmbedKind.EmailSignup: {
 			return {
 				kind: EmbedKind.EmailSignup,
-				...withDefault({})(
-					map<string, Record<string, string>>((alt) => {
-						return { alt };
-					})(embed.alt),
-				),
-				html: embed.html,
-				height: embed.height.toString(),
-				...(embed.mandatory && { mandatory: 'true' }),
-				...pipe2(
-					embed.source,
-					map((source) => ({ source })),
-					withDefault<Record<string, string>>({}),
-				),
-				...pipe2(
-					embed.sourceDomain,
-					map((sourceDomain) => ({ sourceDomain })),
-					withDefault<Record<string, string>>({}),
-				),
-				...(embed.tracking && { tracking: embed.tracking.toString() }),
+				...genericDivProps(embed),
+			};
+		}
+		case EmbedKind.TikTok: {
+			return {
+				kind: EmbedKind.TikTok,
+				...genericDivProps(embed),
 			};
 		}
 		case EmbedKind.Instagram: {
@@ -235,11 +237,59 @@ const divElementPropsToEmbedComponentProps = (
 							)(requiredStringParam(elementProps, 'id'))(
 								requiredNumberParam(elementProps, 'width'),
 							)(requiredNumberParam(elementProps, 'height'));
-						case EmbedKind.Generic:
-						case EmbedKind.EmailSignup: {
+						case EmbedKind.Generic: {
 							return resultMap2<string, number, Generic>(
 								(html: string, height: number): Generic => ({
 									kind: EmbedKind.Generic,
+									alt: fromNullable(elementProps['alt']),
+									html,
+									height,
+									mandatory:
+										elementProps['mandatory'] === 'true',
+									source: fromNullable(
+										elementProps['source'],
+									),
+									sourceDomain: fromNullable(
+										elementProps['sourceDomain'],
+									),
+									tracking: parseTrackingParam(
+										elementProps['tracking'],
+									),
+								}),
+							)(requiredStringParam(elementProps, 'html'))(
+								requiredNumberParam(elementProps, 'height'),
+							);
+						}
+						case EmbedKind.TikTok: {
+							return resultMap2<string, number, TikTok>(
+								(html: string, height: number): TikTok => ({
+									kind: EmbedKind.TikTok,
+									alt: fromNullable(elementProps['alt']),
+									html,
+									height,
+									mandatory:
+										elementProps['mandatory'] === 'true',
+									source: fromNullable(
+										elementProps['source'],
+									),
+									sourceDomain: fromNullable(
+										elementProps['sourceDomain'],
+									),
+									tracking: parseTrackingParam(
+										elementProps['tracking'],
+									),
+								}),
+							)(requiredStringParam(elementProps, 'html'))(
+								requiredNumberParam(elementProps, 'height'),
+							);
+						}
+						case EmbedKind.EmailSignup: {
+							return resultMap2<string, number, EmailSignup>(
+								(
+									html: string,
+									height: number,
+								): EmailSignup => ({
+									kind: EmbedKind.EmailSignup,
 									alt: fromNullable(elementProps['alt']),
 									html,
 									height,
@@ -324,6 +374,7 @@ const getSourceDetailsForEmbed = (embed: Embed): SourceDetails => {
 				sourceDomain: some('www.spotify.com'),
 			};
 		case EmbedKind.Generic:
+		case EmbedKind.TikTok:
 		case EmbedKind.EmailSignup:
 			return {
 				source: embed.source,
@@ -379,7 +430,6 @@ const EmbedComponentWrapper: FC<Props> = ({ embed, editions }: Props) => {
 		embed.tracking === EmbedTracksType.UNKNOWN
 	) {
 		const sourceDetails = getSourceDetailsForEmbed(embed);
-
 		return h(
 			'div',
 			{
