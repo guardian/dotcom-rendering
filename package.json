@@ -89,7 +89,7 @@
     "@emotion/jest": "^11.2.0",
     "@guardian/eslint-config-typescript": "^0.4.2",
     "@guardian/prettier": "^0.5.0",
-    "@storybook/addon-essentials": "^6.2.4",
+    "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-knobs": "^6.2.4",
     "@storybook/addon-storyshots": "^6.2.4",
     "@storybook/builder-webpack5": "^6.2.4",
