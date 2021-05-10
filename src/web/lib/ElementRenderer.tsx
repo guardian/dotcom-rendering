@@ -335,6 +335,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={decideImageRole(element.role, isLiveBlog)}
+					isImageBlockElement={true}
 				>
 					<ImageBlockComponent
 						format={format}
