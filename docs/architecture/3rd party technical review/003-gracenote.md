@@ -27,9 +27,12 @@ The `referer` field is unlikelt to contain personal information, but sometimes i
 
 While none of the other fields individually contains information [that relates to an identified or identifiable individual](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/key-definitions/what-is-personal-data/), it is worth mentioning that by using a combination of those fields it may be possible to recreate a session identifier. It is difficult to estimate if there will be enough information to potentially identify an individual.
 
+There is a request to a script using https://www.instana.com/. The code suggests that this is for feature switches, but a confirmation on what Instana is, and what data is shared is required.
 ### Recommended mitigations
 1. Request Google Analytics be removed from the script.
-2. Find out what the `pixel.gif` request is doing and what information is being sent.
+2. Remove the universal analytics script from `gns.widget.loader.js` and `gns.widget.initializer.js`
+3. Confirm the usage of https://www.instana.com/
+4. Find out what the `pixel.gif` request is doing and what information is being sent.
 	- Identify how to minimise this.
 
 ### Initially implemented mitigations
@@ -75,11 +78,9 @@ Adding a third party script will have a negative impact on the page performance 
 finally, the script makes a regular call to update data every 10 seconds or so which are 1.5kB in size.
 On the initial load, around 377kB are reansferred and the process takes about 6.8s.
 
-### Recommended mitigations
 
 ### Initially implemented mitigations
 
 
 
 ## Status
-
