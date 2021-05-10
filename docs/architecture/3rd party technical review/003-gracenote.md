@@ -74,9 +74,25 @@ Should the events be sent client-side:
 
 ## Performance engineering review
 
-Adding a third party script will have a negative impact on the page performance wherever it is loaded. The initial script is 25.3kB and this then loads in multiple other scripts, JSON file and SVGs. At least two of the scripts are >30kB with another being 181kB. There are then also around 30 SVGs loaded in which range ins  size from about 1kB to 19.8kB.
-finally, the script makes a regular call to update data every 10 seconds or so which are 1.5kB in size.
-On the initial load, around 377kB are reansferred and the process takes about 6.8s.
+The initial Gracenote script is 25.3kB and this then loads in multiple other scripts, JSON file and SVGs. 
+
+On the initial load, around 377kB are transferred taking 6.8s on an empty cache & fast 3G throttled network.
+
+At least two of the scripts are >30kB with another being 181kB. There are then also around 30 SVGs loaded in which range ins  size from about 1kB to 19.8kB.
+
+Finally, the script makes a regular call to update data every 10 seconds or so which are 1.5kB in size.
+
+### Mitigations
+
+- Remove `https://www.googletagmanager.com/gtag/js?id=UA-xxx` request for 35kb
+- Remove `https://www.google-analytics.com/analytics.js`
+- Some flag SVGs have a large file size. Reviewing a [specific example](https://images.sports.gracenote.com/images/lib/basic/geo/country/flag/SVG/2203.svg), we can use a lossless SVG  compressor, like https://vecta.io/nano, to remove 17.8% of the file size immediately.
+- The SVGs loaded in are 750w x 500h but are used in 42w x 28h containers. There may be potential to reduce complexity of SVGs, and thus file size, for use in small image containers that don't need the high resolution.
+- The CSS attempts to load several font-faces but the URL is defined as ` url("[object Module]#iefix")` in [the CSS](https://widgets.sports.gracenote.com/v2.6.43/widgets/default/medaltable.css). My assumption is that this is currently a bug, but if the widget loads in several fonts then there will be a major asset size increase. We should use system fonts where possible and avoid loading a number of large font assets.
+- There is an object-assign polyfill included in /v2.6.43/widgets/default/medaltable.js that is unlikely to be needed as Object.Assign is widely supported in browsers. If it is required, it also seems to be included twice.
+- The script loads react and react-dom 16. We've had success with Preact X and would recommend seeing if it would meet the needs of the widget for major file-size savings. 37kb+ vs 4kb minified + gzipped.
+
+
 
 
 ### Initially implemented mitigations
