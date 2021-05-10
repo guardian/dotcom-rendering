@@ -170,7 +170,7 @@ export const Figure = ({
 		<figure
 			id={id}
 			className={cx(
-				isImageBlockElement && 'element--image-block',
+				isImageBlockElement && 'element--image-block', // tell spacefinder to treat this as 1 block
 				decidePosition(role),
 			)}
 		>
