@@ -9,6 +9,7 @@ type Props = {
 	isMainMedia: boolean;
 	role?: RoleType | 'richLink';
 	id?: string;
+	isNumberedListTitle?: boolean;
 };
 
 const roleCss = {
@@ -155,6 +156,7 @@ export const Figure = ({
 	children,
 	id,
 	isMainMedia,
+	isNumberedListTitle = false,
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -165,7 +167,13 @@ export const Figure = ({
 		return <figure id={id}>{children}</figure>;
 	}
 	return (
-		<figure id={id} className={decidePosition(role)}>
+		<figure
+			id={id}
+			className={decidePosition(role)}
+			data-spacefinder-ignore={
+				isNumberedListTitle ? 'numbered-list-title' : null
+			}
+		>
 			{children}
 		</figure>
 	);

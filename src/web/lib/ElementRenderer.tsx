@@ -451,7 +451,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} id={element.elementId}>
+				<Figure
+					isNumberedListTitle={true}
+					isMainMedia={isMainMedia}
+					id={element.elementId}
+				>
 					<NumberedTitleBlockComponent
 						position={element.position}
 						html={element.html}
