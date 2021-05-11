@@ -139,6 +139,16 @@ export const htmlTemplate = ({
 
         We are hiring, ever thought about joining us?
         https://workforus.theguardian.com/careers/product-engineering/
+
+
+         GGGGG    GGG     GGG
+        G     G  G   G   G   G     G   G  GGGGGG    GG    GGGGG    GGGG
+              G G     G G     G     G G   G        G  G   G    G  G
+         GGGGG  G     G G     G      G    GGGGG   G    G  G    G   GGGG
+        G       G     G G     G      G    G       GGGGGG  GGGGG        G
+        G        G   G   G   G       G    G       G    G  G   G   G    G
+        GGGGGGG   GGG     GGG        G    GGGGGG  G    G  G    G   GGGG
+
 --->`;
 
 	return `<!doctype html>
