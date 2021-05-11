@@ -39,7 +39,6 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
-import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -404,27 +403,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			)}
 
 			{format.theme !== Special.Labs ? (
-				<>
-					<Section
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<GuardianLines count={4} palette={palette} />
-					</Section>
-					<Section
-						backgroundColour={brandAltBackground.primary}
-						padded={false}
-						showTopBorder={false}
-						showSideBorders={false}
-					>
-						<AnniversaryAtomComponent
-							anniversaryInteractiveAtom={
-								CAPI.anniversaryInteractiveAtom
-							}
-						/>
-					</Section>
-				</>
+				<Section
+					backgroundColour={palette.background.article}
+					padded={false}
+					showTopBorder={false}
+				>
+					<GuardianLines count={4} palette={palette} />
+				</Section>
 			) : (
 				<Stuck>
 					<Section
