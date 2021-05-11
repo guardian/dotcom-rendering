@@ -57,8 +57,7 @@ interface Instagram {
 	tracking: EmbedTracksType;
 }
 
-interface Generic {
-	kind: EmbedKind.Generic;
+interface GenericFields {
 	alt: Option<string>;
 	html: string;
 	height: number;
@@ -68,11 +67,15 @@ interface Generic {
 	tracking: EmbedTracksType;
 }
 
-interface TikTok extends Omit<Generic, 'kind'> {
+interface Generic extends GenericFields {
+	kind: EmbedKind.Generic;
+}
+
+interface TikTok extends GenericFields {
 	kind: EmbedKind.TikTok;
 }
 
-interface EmailSignup extends Omit<Generic, 'kind'> {
+interface EmailSignup extends GenericFields {
 	kind: EmbedKind.EmailSignup;
 }
 
@@ -294,7 +297,7 @@ const parseGenericEmbedKind = (parser: DocParser) => (
 ) => (
 	html: string,
 ): EmbedKind.TikTok | EmbedKind.EmailSignup | EmbedKind.Generic => {
-	if (element.embedTypeData?.source === EmbedKind.TikTok) {
+	if (element.embedTypeData?.source === 'TikTok') {
 		return EmbedKind.TikTok;
 	}
 	if (isEmailSignUp(parser)(html)) {
@@ -335,6 +338,7 @@ export type {
 	Instagram,
 	EmailSignup,
 	TikTok,
+	GenericFields,
 };
 
 export {

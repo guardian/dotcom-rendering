@@ -20,6 +20,7 @@ import type {
 	EmailSignup,
 	Embed,
 	Generic,
+	GenericFields,
 	Instagram,
 	Spotify,
 	TikTok,
@@ -193,6 +194,24 @@ const divElementPropsToEmbedComponentProps = (
 		return err(`'${kindValue ?? 'undefined'}' is not an EmbedKind`);
 	};
 
+	type ElementProps = Record<string, string | undefined>;
+
+	const parseGenericFields = (
+		elementProps: ElementProps,
+	): Result<string, GenericFields> =>
+		resultMap2(
+			(html: string, height: number): GenericFields => ({
+				alt: fromNullable(elementProps['alt']),
+				html,
+				height,
+				mandatory: elementProps['mandatory'] === 'true',
+				source: fromNullable(elementProps['source']),
+				sourceDomain: fromNullable(elementProps['sourceDomain']),
+				tracking: parseTrackingParam(elementProps['tracking']),
+			}),
+		)(requiredStringParam(elementProps, 'html'))(
+			requiredNumberParam(elementProps, 'height'),
+		);
 	const dataAttributesToEmbed = (
 		elementProps: Record<string, string | undefined>,
 	): Result<string, Embed> => {
@@ -237,78 +256,6 @@ const divElementPropsToEmbedComponentProps = (
 							)(requiredStringParam(elementProps, 'id'))(
 								requiredNumberParam(elementProps, 'width'),
 							)(requiredNumberParam(elementProps, 'height'));
-						case EmbedKind.Generic: {
-							return resultMap2<string, number, Generic>(
-								(html: string, height: number): Generic => ({
-									kind: EmbedKind.Generic,
-									alt: fromNullable(elementProps['alt']),
-									html,
-									height,
-									mandatory:
-										elementProps['mandatory'] === 'true',
-									source: fromNullable(
-										elementProps['source'],
-									),
-									sourceDomain: fromNullable(
-										elementProps['sourceDomain'],
-									),
-									tracking: parseTrackingParam(
-										elementProps['tracking'],
-									),
-								}),
-							)(requiredStringParam(elementProps, 'html'))(
-								requiredNumberParam(elementProps, 'height'),
-							);
-						}
-						case EmbedKind.TikTok: {
-							return resultMap2<string, number, TikTok>(
-								(html: string, height: number): TikTok => ({
-									kind: EmbedKind.TikTok,
-									alt: fromNullable(elementProps['alt']),
-									html,
-									height,
-									mandatory:
-										elementProps['mandatory'] === 'true',
-									source: fromNullable(
-										elementProps['source'],
-									),
-									sourceDomain: fromNullable(
-										elementProps['sourceDomain'],
-									),
-									tracking: parseTrackingParam(
-										elementProps['tracking'],
-									),
-								}),
-							)(requiredStringParam(elementProps, 'html'))(
-								requiredNumberParam(elementProps, 'height'),
-							);
-						}
-						case EmbedKind.EmailSignup: {
-							return resultMap2<string, number, EmailSignup>(
-								(
-									html: string,
-									height: number,
-								): EmailSignup => ({
-									kind: EmbedKind.EmailSignup,
-									alt: fromNullable(elementProps['alt']),
-									html,
-									height,
-									mandatory:
-										elementProps['mandatory'] === 'true',
-									source: fromNullable(
-										elementProps['source'],
-									),
-									sourceDomain: fromNullable(
-										elementProps['sourceDomain'],
-									),
-									tracking: parseTrackingParam(
-										elementProps['tracking'],
-									),
-								}),
-							)(requiredStringParam(elementProps, 'html'))(
-								requiredNumberParam(elementProps, 'height'),
-							);
-						}
 						case EmbedKind.Instagram: {
 							return resultMap<string, Instagram>(
 								(id: string): Instagram => ({
@@ -322,6 +269,46 @@ const divElementPropsToEmbedComponentProps = (
 									),
 								}),
 							)(requiredStringParam(elementProps, 'id'));
+						}
+						case EmbedKind.Generic: {
+							return pipe2(
+								elementProps,
+								parseGenericFields,
+								resultMap(
+									(
+										genericFields: GenericFields,
+									): Generic => ({
+										kind: EmbedKind.Generic,
+										...genericFields,
+									}),
+								),
+							);
+						}
+						case EmbedKind.TikTok: {
+							return pipe2(
+								elementProps,
+								parseGenericFields,
+								resultMap(
+									(genericFields: GenericFields): TikTok => ({
+										kind: EmbedKind.TikTok,
+										...genericFields,
+									}),
+								),
+							);
+						}
+						case EmbedKind.EmailSignup: {
+							return pipe2(
+								elementProps,
+								parseGenericFields,
+								resultMap(
+									(
+										genericFields: GenericFields,
+									): EmailSignup => ({
+										kind: EmbedKind.EmailSignup,
+										...genericFields,
+									}),
+								),
+							);
 						}
 					}
 				},
@@ -386,8 +373,15 @@ const getSourceDetailsForEmbed = (embed: Embed): SourceDetails => {
 const isblockedEditionsEmbed = (embed: Embed): boolean =>
 	embed.kind === EmbedKind.TikTok || embed.kind === EmbedKind.Instagram;
 
-const renderOverlay = (embed: Embed, editions: boolean): boolean =>
-	editions && !isblockedEditionsEmbed(embed);
+const renderOverlay = (embed: Embed, editions: boolean): boolean => {
+	if (!editions) {
+		return true;
+	}
+	if (isblockedEditionsEmbed(embed)) {
+		return false;
+	}
+	return true;
+};
 
 interface EmbedComponentInClickToViewProps {
 	embed: Embed;
