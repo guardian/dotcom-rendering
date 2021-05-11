@@ -383,6 +383,12 @@ const getSourceDetailsForEmbed = (embed: Embed): SourceDetails => {
 	}
 };
 
+const isblockedEditionsEmbed = (embed: Embed): boolean =>
+	embed.kind === EmbedKind.TikTok || embed.kind === EmbedKind.Instagram;
+
+const renderOverlay = (embed: Embed, editions: boolean): boolean =>
+	editions && !isblockedEditionsEmbed(embed);
+
 interface EmbedComponentInClickToViewProps {
 	embed: Embed;
 	editions: boolean;
@@ -394,13 +400,15 @@ const EmbedComponentInClickToView: FC<EmbedComponentInClickToViewProps> = ({
 	editions,
 	sourceDetails,
 }) => {
-	return h(ClickToView, {
-		source: sourceDetails.source,
-		sourceDomain: sourceDetails.sourceDomain,
-		children: h(EmbedComponent, { embed, editions }),
-		role: none,
-		onAccept: none,
-	});
+	return renderOverlay(embed, editions)
+		? h(ClickToView, {
+				source: sourceDetails.source,
+				sourceDomain: sourceDetails.sourceDomain,
+				children: h(EmbedComponent, { embed, editions }),
+				role: none,
+				onAccept: none,
+		  })
+		: null;
 };
 
 /**
