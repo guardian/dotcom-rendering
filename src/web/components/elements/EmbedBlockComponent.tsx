@@ -5,6 +5,7 @@ import { css } from 'emotion';
 
 type Props = {
 	html: string;
+	alt?: string;
 };
 
 const embedContainer = css`
@@ -14,7 +15,7 @@ const embedContainer = css`
 	}
 `;
 
-export const EmbedBlockComponent = ({ html }: Props) => {
+export const EmbedBlockComponent = ({ html, alt }: Props) => {
 	return (
 		<div data-cy="embed-block" className={embedContainer}>
 			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
