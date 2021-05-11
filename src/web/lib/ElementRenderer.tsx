@@ -271,7 +271,11 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 					>
-						<EmbedBlockComponent key={index} html={element.html} />
+						<EmbedBlockComponent
+							key={index}
+							html={element.html}
+							alt={element.alt}
+						/>
 					</ClickToView>
 				</Figure>
 			);

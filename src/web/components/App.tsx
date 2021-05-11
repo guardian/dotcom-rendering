@@ -804,7 +804,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
 						>
-							<EmbedBlockComponent html={embed.html} />
+							<EmbedBlockComponent
+								html={embed.html}
+								alt={embed.alt}
+							/>
 						</ClickToView>
 					) : (
 						<ClickToView
