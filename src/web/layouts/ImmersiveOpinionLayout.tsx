@@ -282,8 +282,6 @@ export const ImmersiveOpinionLayout = ({
 						}
 						host={host}
 						hideCaption={true}
-						abTests={CAPI.config.abTests}
-						isPreview={CAPI.pageType.isPreview}
 					/>
 					{mainMedia && (
 						<>
@@ -446,10 +444,8 @@ export const ImmersiveOpinionLayout = ({
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									abTests={CAPI.config.abTests}
 									pageId={CAPI.config.pageId}
 									webTitle={CAPI.webTitle}
-									isPreview={CAPI.pageType.isPreview}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines count={4} palette={palette} />
