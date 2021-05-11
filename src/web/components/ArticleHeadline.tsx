@@ -35,10 +35,10 @@ const standardFont = css`
 `;
 
 const labsFont = css`
-	${textSans.xlarge()};
+	${textSans.xlarge({ fontWeight: 'bold' })};
 	line-height: 32px;
 	${from.tablet} {
-		${textSans.xxxlarge()};
+		${textSans.xxxlarge({ fontWeight: 'bold' })};
 		line-height: 38px;
 	}
 `;
