@@ -143,7 +143,16 @@ const stretchLines = css`
 const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
+	overflow: hidden;
 	margin-bottom: -29px;
+	margin-top: -70px;
+	pointer-events: none;
+
+	${until.phablet} {
+		img {
+			margin-right: -1.85rem;
+		}
+	}
 `;
 
 interface Props {
@@ -301,11 +310,12 @@ export const ImmersiveOpinionLayout = ({
 							>
 								<div
 									className={css`
-										position: relative;
 										display: flex;
 										flex-direction: column;
-										${from.phablet} {
-											flex-direction: row;
+										justify-content: space-between;
+										min-height: 259px;
+										${until.phablet} {
+											min-height: 200px;
 										}
 									`}
 								>
@@ -344,7 +354,6 @@ export const ImmersiveOpinionLayout = ({
 											byline={CAPI.author.byline}
 										/>
 									</div>
-
 									{showAvatar && avatarUrl && (
 										<div className={avatarPositionStyles}>
 											<ContributorAvatar
