@@ -12,7 +12,7 @@ import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { Ad } from '@root/src/amp/components/Ad';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -34,7 +34,7 @@ const bulletStyle = (pillar: Theme) => css`
 		height: 12px;
 		width: 12px;
 		margin-right: 2px;
-		background-color: ${pillarPalette[pillar].main};
+		background-color: ${pillarPalette_DO_NOT_USE[pillar].main};
 		margin-left: 0px;
 	}
 `;

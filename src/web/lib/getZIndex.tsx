@@ -27,7 +27,8 @@ const indices = [
 	'banner',
 	'dropdown',
 	'burger',
-	'stickyNav',
+	'expanded-veggie-menu-wrapper',
+	'expanded-veggie-menu',
 
 	// Header
 	'stickyAdWrapper',

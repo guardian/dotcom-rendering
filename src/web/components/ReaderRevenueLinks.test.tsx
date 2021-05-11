@@ -12,6 +12,11 @@ jest.mock('@root/src/web/lib/contributions', () => ({
 	shouldHideSupportMessaging: jest.fn(() => true),
 }));
 
+const contributionsServiceUrl =
+	'https://contributions.code.dev-guardianapis.com';
+
+const ophanRecord = () => {};
+
 const AbProvider: React.FC = ({ children }) => {
 	return (
 		<ABProvider
@@ -44,6 +49,10 @@ describe('ReaderRevenueLinks', () => {
 					edition="US"
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
+					inRemoteModuleTest={false}
+					pageViewId="page-view-id"
+					contributionsServiceUrl={contributionsServiceUrl}
+					ophanRecord={ophanRecord}
 				/>
 			</AbProvider>,
 		);
@@ -61,6 +70,10 @@ describe('ReaderRevenueLinks', () => {
 					edition={edition}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
+					inRemoteModuleTest={false}
+					pageViewId="page-view-id"
+					contributionsServiceUrl={contributionsServiceUrl}
+					ophanRecord={ophanRecord}
 				/>
 				,
 			</AbProvider>,

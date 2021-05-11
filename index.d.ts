@@ -103,6 +103,8 @@ type Palette = {
 		pullQuoteAttribution: Colour;
 		dropCap: Colour;
 		blockquote: Colour;
+		numberedTitle: Colour;
+		numberedPosition: Colour;
 	},
 	background: {
 		article: Colour;
@@ -459,6 +461,8 @@ interface CAPIType {
 
 	matchUrl?: string;
 	isSpecialReport: boolean;
+
+	anniversaryInteractiveAtom?: InteractiveAtomBlockElement; // TEMPORARY, to be removed following 200th anniversary
 }
 
 // Browser data models. Note the CAPI prefix here means something different to
@@ -723,13 +727,13 @@ interface ConfigTypeBrowser {
 	discussionApiClientHeader: string;
 	dcrSentryDsn: string;
 	remoteBanner: boolean;
+	puzzlesBanner: boolean;
 	ausMoment2020Header: boolean;
 	switches: CAPIType['config']['switches'];
 	abTests: CAPIType['config']['abTests'];
 	host?: string;
 	idUrl?: string;
 	mmaUrl?: string;
-	isPreview: boolean;
 }
 
 interface GADataType {
@@ -762,7 +766,6 @@ interface DCRServerDocumentData {
 }
 
 interface BrowserNavType {
-	topLevelPillars: PillarType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
 }
@@ -887,7 +890,8 @@ type AdSlotType =
 	| 'mostpop'
 	| 'merchandising-high'
 	| 'merchandising'
-	| 'comments';
+	| 'comments'
+	| 'survey';
 
 // ------------------------------
 // 3rd party type declarations //

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import Logo from '@frontend/static/logos/the-guardian.svg';
-import { pillarPalette } from '@root/src/lib/pillars';
+import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -20,22 +20,23 @@ const row = css`
 
 const logoStyles = css`
 	align-self: flex-start;
-	height: 57px;
+	height: 65px;
 	width: 175px;
 	margin-top: 3px;
 	margin-right: 20px;
-	margin-bottom: 35px;
-
-	path {
-		fill: ${palette.neutral[100]};
-	}
+	margin-bottom: 20px;
 
 	${until.mobileMedium} {
-		height: 44px;
+		height: 54px;
 		width: 135px;
-		margin-bottom: 24px;
+		margin-bottom: 15px;
 		margin-right: 52px;
 		margin-top: 9px;
+	}
+
+	svg {
+		max-width: 100%;
+		max-height: 100%;
 	}
 `;
 
@@ -106,7 +107,7 @@ const pillarLinkStyle = (pillar: Theme) => css`
 		left: 0;
 		right: 0;
 		position: absolute;
-		border-top: 4px solid ${pillarPalette[pillar].bright};
+		border-top: 4px solid ${pillarPalette_DO_NOT_USE[pillar].bright};
 		transition: transform 0.3s ease-in-out;
 	}
 `;

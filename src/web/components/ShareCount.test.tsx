@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { useApi as useApi_ } from '@root/src/web/lib/api';
+import { useApi as useApi_ } from '@root/src/web/lib/useApi';
 import { ShareCount } from './ShareCount';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../lib/api', () => ({
+jest.mock('../lib/useApi', () => ({
 	useApi: jest.fn(),
 }));
 

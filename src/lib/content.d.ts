@@ -118,6 +118,8 @@ interface DisclaimerBlockElement {
 
 interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
+	size?: 'full' | 'partial';
+	spaceAbove?: 'tight' | 'loose';
 }
 
 interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
@@ -172,6 +174,10 @@ interface GuideAtomBlockElement {
 	html: string;
 	credit: string;
 	role?: RoleType;
+	items?: {
+		title?: string;
+		body?: string;
+	}[];
 }
 
 interface GuVideoBlockElement {
@@ -207,6 +213,8 @@ interface ImageBlockElement {
 	displayCredit?: boolean;
 	role: RoleType;
 	title?: string;
+	starRating?: number;
+	isAvatar?: boolean;
 }
 
 interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
@@ -242,6 +250,12 @@ interface InteractiveBlockElement {
 	caption?: string;
 }
 
+interface ItemLinkBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement';
+	elementId: string;
+	html: string;
+}
+
 interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	elementId: string;
@@ -273,6 +287,14 @@ interface MultiImageBlockElement {
 	images: ImageBlockElement[];
 	caption?: string;
 	role?: RoleType;
+}
+
+interface NumberedTitleBlockElement {
+	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
+	elementId: string;
+	position: number;
+	html: string;
+	format: CAPIFormat;
 }
 
 interface ProfileAtomBlockElement {
@@ -335,6 +357,13 @@ interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 	width?: number;
 	caption?: string;
 	role?: RoleType;
+}
+
+interface StarRatingBlockElement {
+	_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement';
+	elementId: string;
+	rating: number;
+	size: RatingSizeType;
 }
 
 interface SubheadingBlockElement {
@@ -547,9 +576,11 @@ type CAPIElement =
 	| InstagramBlockElement
 	| InteractiveAtomBlockElement
 	| InteractiveBlockElement
+	| ItemLinkBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
+	| NumberedTitleBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement
@@ -557,6 +588,7 @@ type CAPIElement =
 	| RichLinkBlockElement
 	| SoundcloudBlockElement
 	| SpotifyBlockElement
+	| StarRatingBlockElement
 	| SubheadingBlockElement
 	| TableBlockElement
 	| TextBlockElement
@@ -648,6 +680,8 @@ type Language =
 	| 'markup'
 	| 'scala'
 	| 'elm';
+
+type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------
 // Callout Campaign

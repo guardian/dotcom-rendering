@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { css } from 'emotion';
 
 import {
@@ -14,12 +14,14 @@ import { joinUrl } from '@root/src/lib/joinUrl';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
+import { either } from '@guardian/types';
 
 const wrapperMargins = css`
 	margin: 18px 0;
 `;
 
 const EPIC_COMPONENT_PATH = '/modules/v1/epics/ContributionsEpic.js';
+const COMPONENT_TYPE = 'RETENTION_EPIC';
 
 type Meta = {
 	dataFromBraze?: EpicDataFromBraze;
@@ -80,21 +82,32 @@ const buildEpicProps = (
 	dataFromBraze: EpicDataFromBraze,
 	countryCode: string,
 ): EpicProps | null => {
-	const variant = parseBrazeEpicParams(dataFromBraze);
-	if (variant === null) return null;
+	const variantResult = parseBrazeEpicParams(dataFromBraze);
 
-	const pageTracking = {
-		ophanPageId: window.guardian.config.ophan.pageViewId,
-		platformId: 'GUARDIAN_WEB',
-		clientName: 'dcr',
-		referrerUrl: window.location.origin + window.location.pathname,
-	};
+	return either<string, Variant, EpicProps | null>(
+		(err) => {
+			const msg = `Not rendering Braze epic - there are props missing: ${err}`;
+			window.guardian.modules.sentry.reportError(
+				new Error(msg),
+				'braze-epic',
+			);
+			return null;
+		},
+		(variant) => {
+			const pageTracking = {
+				ophanPageId: window.guardian.config.ophan.pageViewId,
+				platformId: 'GUARDIAN_WEB',
+				clientName: 'dcr',
+				referrerUrl: window.location.origin + window.location.pathname,
+			};
 
-	const tracking = {
-		...pageTracking,
-	};
+			const tracking = {
+				...pageTracking,
+			};
 
-	return { variant, tracking, numArticles: 0, countryCode };
+			return { variant, tracking, numArticles: 0, countryCode };
+		},
+	)(variantResult);
 };
 
 const BrazeEpic = ({
@@ -109,6 +122,8 @@ const BrazeEpic = ({
 		threshold: 0,
 		debounce: true,
 	});
+
+	const epicRef = useRef(null);
 
 	useOnce(() => {
 		setAutomat();
@@ -128,6 +143,16 @@ const BrazeEpic = ({
 			});
 	}, [contributionsServiceUrl, meta]);
 
+	useOnce(() => {
+		submitComponentEvent({
+			component: {
+				componentType: COMPONENT_TYPE,
+				id: (meta.dataFromBraze as EpicDataFromBraze).ophanComponentId,
+			},
+			action: 'INSERT',
+		});
+	}, [meta?.dataFromBraze, epicRef.current]);
+
 	useEffect(() => {
 		if (hasBeenSeen && meta && meta.dataFromBraze) {
 			meta.logImpressionWithBraze();
@@ -135,8 +160,8 @@ const BrazeEpic = ({
 			// Log VIEW event with Ophan
 			submitComponentEvent({
 				component: {
-					componentType: 'RETENTION_EPIC',
-					id: meta.dataFromBraze.componentName,
+					componentType: COMPONENT_TYPE,
+					id: meta.dataFromBraze.ophanComponentId,
 				},
 				action: 'VIEW',
 			});
@@ -150,8 +175,10 @@ const BrazeEpic = ({
 		if (props) {
 			return (
 				<div ref={setNode} className={wrapperMargins}>
-					{/* eslint-disable-next-line react/jsx-props-no-spreading */}
-					<Epic {...props} />
+					<div ref={epicRef}>
+						{/* eslint-disable-next-line react/jsx-props-no-spreading */}
+						<Epic {...props} />
+					</div>
 				</div>
 			);
 		}

@@ -20,6 +20,7 @@ type Props = {
 	isMainMedia?: boolean;
 	starRating?: number;
 	title?: string;
+	isAvatar?: boolean;
 };
 
 const starsWrapper = css`
@@ -215,6 +216,7 @@ export const ImageComponent = ({
 	isMainMedia,
 	starRating,
 	title,
+	isAvatar,
 }: Props) => {
 	const shouldLimitWidth =
 		!isMainMedia &&
@@ -278,6 +280,7 @@ export const ImageComponent = ({
 						height: 100%;
 						width: 100%;
 						object-fit: cover;
+						${isAvatar && 'border-radius: 50%;'}
 					}
 				`}
 			>
@@ -308,6 +311,7 @@ export const ImageComponent = ({
 						height: 100%;
 						width: 100%;
 						object-fit: cover;
+						${isAvatar && 'border-radius: 50%;'}
 					}
 				`}
 			>

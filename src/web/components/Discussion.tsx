@@ -192,7 +192,8 @@ export const Discussion = ({
 										enableDiscussionSwitch
 									}
 									user={user}
-									commentCount={commentCount || 0}
+									commentCount={commentCount}
+									isClosedForComments={isClosedForComments}
 								/>
 							</div>
 						</Hide>

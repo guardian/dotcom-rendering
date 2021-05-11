@@ -3,10 +3,10 @@ import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
+import { timeAgo } from '@guardian/libs';
 
 import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
@@ -20,10 +20,8 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
-	isPreview: boolean;
 };
 
 const Container = ({
@@ -186,9 +184,7 @@ const FirstPublished = ({
 					color: ${neutral[20]};
 				`}
 			>
-				{makeRelativeDate(firstPublished, {
-					format: 'med',
-				})}
+				{timeAgo(firstPublished)}
 			</time>
 			<span
 				className={css`
@@ -222,10 +218,8 @@ export const LiveBlock = ({
 	block,
 	pageId,
 	webTitle,
-	abTests,
 	adTargeting,
 	host,
-	isPreview,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -283,9 +277,7 @@ export const LiveBlock = ({
 							element={headerElement}
 							format={format}
 							palette={palette}
-							abTests={abTests}
 							host={host}
-							isPreview={isPreview}
 						/>
 					)}
 				</span>
@@ -303,9 +295,7 @@ export const LiveBlock = ({
 									element={element}
 									format={format}
 									palette={palette}
-									abTests={abTests}
 									host={host}
-									isPreview={isPreview}
 								/>
 							</BlockMedia>
 						);
@@ -319,8 +309,6 @@ export const LiveBlock = ({
 								element={element}
 								format={format}
 								palette={palette}
-								abTests={abTests}
-								isPreview={isPreview}
 							/>
 						</BlockText>
 					);

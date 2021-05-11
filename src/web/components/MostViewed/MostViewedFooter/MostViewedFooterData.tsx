@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { border } from '@guardian/src-foundations/palette';
 import { from, Breakpoint } from '@guardian/src-foundations/mq';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { decideTrail } from '@root/src/web/lib/decideTrail';
 

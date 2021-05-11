@@ -26,6 +26,7 @@ interface Props {
 	label: string;
 	links: DropdownLinkType[];
 	dataLinkName: string;
+	overrideColor?: string;
 	children?: React.ReactNode;
 }
 
@@ -116,7 +117,7 @@ const linkFirst = css`
 	}
 `;
 
-const buttonStyles = css`
+const buttonStyles = (overrideColor?: string) => css`
 	${textSans.medium()};
 	display: block;
 	cursor: pointer;
@@ -124,7 +125,7 @@ const buttonStyles = css`
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
 	line-height: 1.2;
-	color: ${brandText.primary};
+	color: ${overrideColor || brandText.primary};
 	transition: color 80ms ease-out;
 	padding: 0px 10px 6px 5px;
 	margin: 1px 0 0;
@@ -167,6 +168,7 @@ export const Dropdown = ({
 	label,
 	links,
 	dataLinkName,
+	overrideColor,
 	children,
 }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -230,7 +232,10 @@ export const Dropdown = ({
 						}
 					`}
 				>
-					<label htmlFor={checkboxID} className={buttonStyles}>
+					<label
+						htmlFor={checkboxID}
+						className={buttonStyles(overrideColor)}
+					>
 						{label}
 					</label>
 					<input
@@ -262,7 +267,7 @@ export const Dropdown = ({
 					<button
 						onClick={handleToggle}
 						className={cx(
-							buttonStyles,
+							buttonStyles(overrideColor),
 							isExpanded && buttonExpanded,
 						)}
 						aria-expanded={isExpanded ? 'true' : 'false'}

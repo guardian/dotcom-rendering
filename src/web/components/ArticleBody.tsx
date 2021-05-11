@@ -7,6 +7,7 @@ import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
 import { Design, Display } from '@guardian/types';
 import type { Format } from '@guardian/types';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
 	format: Format;
@@ -14,10 +15,8 @@ type Props = {
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 	pageId: string;
 	webTitle: string;
-	isPreview: boolean;
 };
 
 const globalH2Styles = (display: Display) => css`
@@ -28,16 +27,19 @@ const globalH2Styles = (display: Display) => css`
 	}
 `;
 
+const globalH3Styles = (display: Display) => {
+	if (display !== Display.NumberedList) return null;
+	return css`
+		h3 {
+			${headline.xxsmall({ fontWeight: 'bold' })};
+			margin-bottom: ${space[2]}px;
+		}
+	`;
+};
+
 const globalStrongStyles = css`
 	strong {
 		font-weight: bold;
-	}
-`;
-
-const globalImgStyles = css`
-	img {
-		width: 100%;
-		height: auto;
 	}
 `;
 
@@ -66,32 +68,22 @@ export const ArticleBody = ({
 	blocks,
 	adTargeting,
 	host,
-	abTests,
 	pageId,
 	webTitle,
-	isPreview,
 }: Props) => {
 	if (
 		format.design === Design.LiveBlog ||
 		format.design === Design.DeadBlog
 	) {
 		return (
-			<div
-				className={cx(
-					globalStrongStyles,
-					globalImgStyles,
-					globalLinkStyles(palette),
-				)}
-			>
+			<div className={cx(globalStrongStyles, globalLinkStyles(palette))}>
 				<LiveBlogRenderer
 					format={format}
 					blocks={blocks}
 					adTargeting={adTargeting}
 					host={host}
-					abTests={abTests}
 					pageId={pageId}
 					webTitle={webTitle}
-					isPreview={isPreview}
 				/>
 			</div>
 		);
@@ -101,8 +93,8 @@ export const ArticleBody = ({
 			className={cx(
 				bodyPadding,
 				globalH2Styles(format.display),
+				globalH3Styles(format.display),
 				globalStrongStyles,
-				globalImgStyles,
 				globalLinkStyles(palette),
 			)}
 		>
@@ -112,8 +104,6 @@ export const ArticleBody = ({
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}
-				abTests={abTests}
-				isPreview={isPreview}
 			/>
 		</div>
 	);

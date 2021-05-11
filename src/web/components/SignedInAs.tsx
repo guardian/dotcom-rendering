@@ -78,6 +78,21 @@ const rowUntilDesktop = css`
 	}
 `;
 
+const CommentCount = ({ count }: { count?: number }) => {
+	return (
+		<h2 className={headingStyles}>
+			comments{' '}
+			<span
+				className={css`
+					color: ${neutral[60]};
+				`}
+			>
+				({count || '…'})
+			</span>
+		</h2>
+	);
+};
+
 export const SignedInAs = ({
 	commentCount,
 	palette,
@@ -90,21 +105,52 @@ export const SignedInAs = ({
 		user.privateFields &&
 		user.privateFields.canPostComment === false;
 
-	return (
-		<div className={containerStyles}>
-			<h2 className={headingStyles}>
-				comments{' '}
-				<span
-					className={css`
-						color: ${neutral[60]};
-					`}
-				>
-					({commentCount || '…'})
+	if (enableDiscussionSwitch === false) {
+		// Discussion is disabled sitewide and user is signed in
+		if (user) {
+			return (
+				<div className={containerStyles}>
+					<CommentCount count={commentCount} />
+					<span className={headlineStyles}>
+						Commenting has been disabled at this time
+					</span>
+				</div>
+			);
+		}
+		// Discussion disabled sitewide and user logged out
+		return (
+			<div className={containerStyles}>
+				<CommentCount count={commentCount} />
+				<span className={headlineStyles}>
+					Commenting has been disabled at this time but you can still{' '}
+					<a
+						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
+							'signin_to_comment',
+						)}`}
+						className={linkStyles(palette)}
+					>
+						sign in
+					</a>{' '}
+					or{' '}
+					<a
+						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
+							'register_to_comment',
+						)}`}
+						className={linkStyles(palette)}
+					>
+						create your Guardian account
+					</a>{' '}
+					to join the discussion when it&apos;s back
 				</span>
-			</h2>
+			</div>
+		);
+	}
 
-			{/* User is banned */}
-			{enableDiscussionSwitch && isBanned && (
+	if (isBanned) {
+		// User is banned
+		return (
+			<div className={containerStyles}>
+				<CommentCount count={commentCount} />
 				<span className={headlineStyles}>
 					Commenting has been disabled for this account (
 					<a
@@ -115,42 +161,57 @@ export const SignedInAs = ({
 					</a>{' '}
 					)
 				</span>
-			)}
+			</div>
+		);
+	}
 
-			{/* Discussion is disabled sitewide */}
-			{user && enableDiscussionSwitch === false && (
+	if (user && isClosedForComments) {
+		// The reader is logged in but the discussion is closed
+		return (
+			<div className={containerStyles}>
+				<CommentCount count={commentCount} />
 				<span className={headlineStyles}>
-					Commenting has been disabled at this time
+					This discussion is closed for comments
 				</span>
-			)}
+			</div>
+		);
+	}
 
-			{/* Discussion open and user logged in */}
-			{enableDiscussionSwitch &&
-				user &&
-				!isBanned &&
-				!isClosedForComments && (
-					<div className={rowUntilDesktop}>
-						<div className={imageWrapper}>
-							<img
-								src={
-									user.secureAvatarUrl ||
-									'https://avatar.guim.co.uk/no-user-image.gif'
-								}
-								alt={user.displayName || 'Guardian User'}
-								className={imageStyles}
-							/>
-						</div>
-						<div className={textStyles}>
-							Signed in as
-							<div className={usernameStyles}>
-								{user.displayName || 'Guardian User'}
-							</div>
-						</div>
-					</div>
-				)}
+	if (!user && isClosedForComments) {
+		// The discussion is closed and the reader is not logged in
+		return (
+			<div className={containerStyles}>
+				<CommentCount count={commentCount} />
+				<span className={headlineStyles}>
+					This discussion is now closed for comments but you can still{' '}
+					<a
+						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
+							'signin_to_comment',
+						)}`}
+						className={linkStyles(palette)}
+					>
+						sign in
+					</a>{' '}
+					or{' '}
+					<a
+						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
+							'register_to_comment',
+						)}`}
+						className={linkStyles(palette)}
+					>
+						create your Guardian account
+					</a>{' '}
+					to join the discussion next time
+				</span>
+			</div>
+		);
+	}
 
-			{/* User is logged out (show this even if the discussion is closed) */}
-			{!user && (
+	if (!user) {
+		// The discussion is open but the reader is not logged in
+		return (
+			<div className={containerStyles}>
+				<CommentCount count={commentCount} />
 				<span className={headlineStyles}>
 					<a
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
@@ -169,16 +230,34 @@ export const SignedInAs = ({
 					>
 						create your Guardian account
 					</a>{' '}
-					to join the discussion.
+					to join the discussion
 				</span>
-			)}
+			</div>
+		);
+	}
 
-			{/* The discussion is closed (only appears for logged in users) */}
-			{enableDiscussionSwitch && user && isClosedForComments && (
-				<span className={headlineStyles}>
-					This discussion is closed for comments
-				</span>
-			)}
+	// Discussion open and user logged in
+	return (
+		<div className={containerStyles}>
+			<CommentCount count={commentCount} />
+			<div className={rowUntilDesktop}>
+				<div className={imageWrapper}>
+					<img
+						src={
+							user.secureAvatarUrl ||
+							'https://avatar.guim.co.uk/no-user-image.gif'
+						}
+						alt={user.displayName || 'Guardian User'}
+						className={imageStyles}
+					/>
+				</div>
+				<div className={textStyles}>
+					Signed in as
+					<div className={usernameStyles}>
+						{user.displayName || 'Guardian User'}
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

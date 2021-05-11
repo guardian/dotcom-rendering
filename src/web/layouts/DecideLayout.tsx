@@ -67,6 +67,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 					);
 			}
 		}
+		case Display.NumberedList:
 		case Display.Showcase: {
 			switch (design) {
 				case Design.LiveBlog:

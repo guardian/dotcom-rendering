@@ -1,13 +1,13 @@
 import React from 'react';
 import { css } from 'emotion';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { textSans } from '@guardian/src-foundations/typography';
 
 const style = (pillar: Theme) => css`
 	${textSans.small()};
 
 	a {
-		color: ${pillarPalette[pillar].dark};
+		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 	}
 `;
 

@@ -60,7 +60,6 @@ const makeWindowGuardianConfig = (
 			googletag: config.googletagUrl,
 		},
 		switches: config.switches,
-		tests: config.abTests || {},
 		ophan: {
 			pageViewId: '',
 			browserId: '',
@@ -139,7 +138,6 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			showRelatedContent: CAPI.config.showRelatedContent,
 			keywordIds: CAPI.config.keywordIds,
 			ampIframeUrl: CAPI.config.ampIframeUrl,
-			isPreview: CAPI.pageType.isPreview,
 
 			// switches
 			switches: CAPI.config.switches,
@@ -150,6 +148,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			enableSentryReporting: CAPI.config.switches.enableSentryReporting,
 			enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
 			remoteBanner: CAPI.config.switches.remoteBanner,
+			puzzlesBanner: CAPI.config.switches.puzzlesBanner,
 			ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
 			// used by lib/ad-targeting.ts
@@ -237,10 +236,6 @@ export interface WindowGuardian {
 
 export const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
 	return {
-		topLevelPillars: nav.pillars.map((p) => ({
-			...p,
-			children: undefined,
-		})),
 		currentNavLink: nav.currentNavLink,
 		subNavSections: nav.subNavSections,
 	};

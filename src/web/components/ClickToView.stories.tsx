@@ -32,10 +32,6 @@ const paragraphStyle = css`
 	margin-bottom: 8px;
 `;
 
-const abTests: CAPIType['config']['abTests'] = {
-	clickToViewVariant: 'variant',
-};
-
 const RoleStory = ({
 	children,
 	role,
@@ -66,15 +62,13 @@ const RoleStory = ({
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<Figure role={role}>
+				<Figure isMainMedia={false} role={role}>
 					<ClickToView
 						role={role}
 						isTracking={true}
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
-						abTests={abTests}
-						isPreview={false}
 					>
 						{children}
 					</ClickToView>
@@ -476,19 +470,16 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={facebookEmbed.source}
 						sourceDomain={facebookEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
 							html={facebookEmbed.html}
-							alt={facebookEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -499,19 +490,16 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vimeoEmbedEmbed.source}
 						sourceDomain={vimeoEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
 							html={vimeoEmbedEmbed.html}
-							alt={vimeoEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -522,19 +510,16 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={youtubeEmbedEmbed.source}
 						sourceDomain={youtubeEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
 							html={youtubeEmbedEmbed.html}
-							alt={youtubeEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -545,19 +530,16 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={spotifyEmbedEmbed.source}
 						sourceDomain={spotifyEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
 							html={spotifyEmbedEmbed.html}
-							alt={spotifyEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -568,19 +550,16 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={bandcampEmbedEmbed.source}
 						sourceDomain={bandcampEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
 							html={bandcampEmbedEmbed.html}
-							alt={bandcampEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -591,19 +570,16 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={ourworldindataEmbedEmbed.source}
 						sourceDomain={ourworldindataEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
 							html={ourworldindataEmbedEmbed.html}
-							alt={ourworldindataEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -614,19 +590,16 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={bbcEmbedEmbed.source}
 						sourceDomain={bbcEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<EmbedBlockComponent
 							key={1}
 							html={bbcEmbedEmbed.html}
-							alt={bbcEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -661,7 +634,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={instagramEmbedEmbed.source}
@@ -670,8 +643,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-1"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="1"
@@ -687,7 +658,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={formStackEmbed.source}
@@ -696,8 +667,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-2"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="2"
@@ -714,7 +683,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={scribdEmbedEmbed.source}
@@ -723,8 +692,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-3"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="3"
@@ -741,7 +708,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={tiktokEmbedEmbed.source}
@@ -750,8 +717,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-4"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="4"
@@ -768,7 +733,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={twitterEmbedEmbed.source}
@@ -777,8 +742,6 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						onAccept={() =>
 							updateIframeHeight('iframe[name="unsafe-embed-5"]')
 						}
-						abTests={abTests}
-						isPreview={false}
 					>
 						<UnsafeEmbedBlockComponent
 							key="5"
@@ -820,14 +783,12 @@ export const VimeoBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vimeoVideoEmbed.source}
 						sourceDomain={vimeoVideoEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<VimeoBlockComponent
 							format={{
@@ -881,14 +842,12 @@ export const DocumentBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={scribdDocumentEmbed.source}
 						sourceDomain={scribdDocumentEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<DocumentBlockComponent
 							embedUrl={scribdDocumentEmbed.embedUrl}
@@ -930,14 +889,12 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudAudioEmbed.source}
 						sourceDomain={soundcloudAudioEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudAudioEmbed}
@@ -951,14 +908,12 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudEmbedEmbed.source}
 						sourceDomain={soundcloudEmbedEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudEmbedEmbed}
@@ -997,14 +952,12 @@ export const SpotifyBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={spotifyAudioEmbed.source}
 						sourceDomain={spotifyAudioEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotifyAudioEmbed.embedUrl}
@@ -1059,14 +1012,12 @@ export const TweetBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={twitterTweetEmbed.source}
 						sourceDomain={twitterTweetEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
-						isPreview={false}
 					>
 						<TweetBlockComponent element={twitterTweetEmbed} />
 					</ClickToView>
@@ -1102,19 +1053,17 @@ export const InstagramBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure role="inline">
+				<Figure isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={instagramInstramEmbed.source}
 						sourceDomain={instagramInstramEmbed.sourceDomain}
 						role="inline"
-						abTests={abTests}
 						onAccept={() =>
 							updateIframeHeight(
 								'iframe[name="instagram-embed-1"]',
 							)
 						}
-						isPreview={false}
 					>
 						<InstagramBlockComponent
 							key={1}

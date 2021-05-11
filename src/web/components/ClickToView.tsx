@@ -16,8 +16,6 @@ type Props = {
 	isMainMedia?: boolean;
 	source?: string;
 	sourceDomain?: string;
-	abTests: CAPIType['config']['abTests'];
-	isPreview: boolean;
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -90,15 +88,11 @@ const roleButtonText = (role: RoleType) => {
 const shouldDisplayOverlay = ({
 	isTracking,
 	isOverlayClicked,
-	isInABTestVariant,
 	isMainMedia,
-	isPreview,
 }: {
 	isTracking: boolean;
 	isOverlayClicked: boolean;
-	isInABTestVariant: boolean;
 	isMainMedia?: boolean;
-	isPreview: boolean;
 }) => {
 	if (isMainMedia || !isTracking) {
 		return false;
@@ -106,11 +100,7 @@ const shouldDisplayOverlay = ({
 	if (isOverlayClicked) {
 		return false;
 	}
-	return isInABTestVariant || isPreview;
-};
-
-const isInABTestVariant = (abTestConfig: CAPIType['config']['abTests']) => {
-	return abTestConfig.clickToViewVariant === 'variant';
+	return true;
 };
 
 export const ClickToView = ({
@@ -121,8 +111,6 @@ export const ClickToView = ({
 	isMainMedia,
 	source,
 	sourceDomain = 'unknown',
-	abTests,
-	isPreview,
 }: Props) => {
 	const [isOverlayClicked, setIsOverlayClicked] = useState<boolean>(false);
 
@@ -139,9 +127,7 @@ export const ClickToView = ({
 		shouldDisplayOverlay({
 			isTracking,
 			isOverlayClicked,
-			isInABTestVariant: isInABTestVariant(abTests),
 			isMainMedia,
-			isPreview,
 		})
 	) {
 		return (
@@ -209,6 +195,7 @@ export const ClickToView = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={() => handleClick()}
+						data-cy="click-to-view-button"
 						data-link-name="allow-button"
 					>
 						{roleButtonText(role)}

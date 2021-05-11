@@ -109,7 +109,7 @@ describe('Elements', function () {
 		// 	getIframeBody().contains('View More on Instagram');
 		// });
 
-		it('should render the embed', function () {
+		it('should render the click to view overlay revealing the embed when clicked', function () {
 			const getIframeBody = () => {
 				return cy
 					.get('div[data-cy="embed-block"] > div > iframe')
@@ -121,6 +121,10 @@ describe('Elements', function () {
 			cy.visit(
 				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
+
+			cy.contains('hosted on wnyc.org');
+
+			cy.get('button[data-cy="click-to-view-button"]').click();
 
 			getIframeBody().contains('radiolab');
 		});

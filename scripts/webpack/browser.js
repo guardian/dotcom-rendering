@@ -25,12 +25,23 @@ const generateName = (isLegacyJS) => {
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
-const scriptPath = (package) =>
+const scriptPath = (dcrPackage) =>
 	[
-		`./src/web/browser/${package}/init.ts`,
+		`./src/web/browser/${dcrPackage}/init.ts`,
 		DEV &&
 			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
 	].filter(Boolean);
+
+module.exports.babelExclude = {
+	and: [/node_modules/],
+	not: [
+		// Include all @guardian modules, except automat-modules
+		/@guardian\/(?!(automat-modules))/,
+
+		// Include the dynamic-import-polyfill
+		/dynamic-import-polyfill/,
+	],
+};
 
 module.exports = ({ isLegacyJS }) => ({
 	entry: {
@@ -64,16 +75,7 @@ module.exports = ({ isLegacyJS }) => ({
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: {
-					and: [/node_modules/],
-					not: [
-						// Include all @guardian modules, except automat-modules
-						/@guardian\/(?!(automat-modules))/,
-
-						// Include the dynamic-import-polyfill
-						/dynamic-import-polyfill/,
-					],
-				},
+				exclude: module.exports.babelExclude,
 
 				use: [
 					{

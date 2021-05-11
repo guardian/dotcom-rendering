@@ -105,8 +105,8 @@ describe('Sign In Gate Tests', function () {
 				'gu.prefs.sign-in-gate',
 				`{
                     "value": {
-                        "SignInGateMain-main-variant-3": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateMain-main-variant-3": 6
+                        "SignInGateMain-main-variant-4": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-main-variant-4": 6
                     }
                 }`,
 			);
@@ -120,6 +120,15 @@ describe('Sign In Gate Tests', function () {
 			visitArticleAndScrollToGateForLazyLoad({
 				url:
 					'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
+			});
+
+			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
+		});
+
+		it('should not load the sign in gate if the article is a paid article', function () {
+			visitArticleAndScrollToGateForLazyLoad({
+				url:
+					'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/kettlebells-companionship-and-bedroom-parkour-nine-tips-for-keeping-fit-in-lockdown-or-long-haul',
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');

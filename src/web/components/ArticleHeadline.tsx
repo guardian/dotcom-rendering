@@ -35,10 +35,10 @@ const standardFont = css`
 `;
 
 const labsFont = css`
-	${textSans.xlarge()};
+	${textSans.xlarge({ fontWeight: 'bold' })};
 	line-height: 32px;
 	${from.tablet} {
-		${textSans.xxxlarge()};
+		${textSans.xxxlarge({ fontWeight: 'bold' })};
 		line-height: 38px;
 	}
 `;
@@ -218,6 +218,21 @@ export const ArticleHeadline = ({
 	byline,
 	palette,
 }: Props) => {
+	if (format.display === Display.NumberedList) {
+		return (
+			<h1
+				className={cx(
+					boldFont,
+					topPadding,
+					css`
+						color: ${palette.text.headline};
+					`,
+				)}
+			>
+				{curly(headlineString)}
+			</h1>
+		);
+	}
 	switch (format.display) {
 		case Display.Immersive: {
 			switch (format.design) {

@@ -2,19 +2,10 @@ import React from 'react';
 
 import { unescapeData } from '@root/src/lib/escapeData';
 import { css } from 'emotion';
-import { textSans } from '@guardian/src-foundations/typography';
-import { text } from '@guardian/src-foundations/palette';
 
 type Props = {
 	html: string;
-	alt?: string;
 };
-
-const emailCaptionStyle = css`
-	${textSans.xsmall()};
-	word-break: break-all;
-	color: ${text.supporting};
-`;
 
 const embedContainer = css`
 	iframe {
@@ -23,15 +14,10 @@ const embedContainer = css`
 	}
 `;
 
-export const EmbedBlockComponent = ({ html, alt }: Props) => {
-	// TODO: Email embeds are being turned into atoms, so we can remove this hack when that happens
-	const isEmailEmbed = html.includes('email/form');
+export const EmbedBlockComponent = ({ html }: Props) => {
 	return (
 		<div data-cy="embed-block" className={embedContainer}>
 			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
-			{isEmailEmbed && alt && (
-				<div className={emailCaptionStyle}>{alt}</div>
-			)}
 		</div>
 	);
 };

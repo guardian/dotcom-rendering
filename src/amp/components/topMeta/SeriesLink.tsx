@@ -1,10 +1,10 @@
 import React from 'react';
 import { headline } from '@guardian/src-foundations/typography';
 import { css } from 'emotion';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
 const seriesStyle = (pillar: Theme) => css`
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${headline.xxxsmall()};
 	font-weight: 900;
 	text-decoration: none;

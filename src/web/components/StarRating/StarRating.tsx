@@ -10,9 +10,7 @@ const starWrapper = css`
 	padding: 1px;
 `;
 
-type SizeType = 'large' | 'medium' | 'small';
-
-const determineSize = (size: SizeType) => {
+const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
 			return css`
@@ -43,7 +41,7 @@ const determineSize = (size: SizeType) => {
 
 export const StarRating: React.FC<{
 	rating: number;
-	size: SizeType;
+	size: RatingSizeType;
 }> = ({ rating, size }) => (
 	<div className={determineSize(size)}>
 		<div className={starWrapper}>
