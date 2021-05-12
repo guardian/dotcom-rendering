@@ -33,24 +33,28 @@ export const coreVitals = (): void => {
 		name: string;
 		value: number;
 	};
+	
+	const nineDigitPrecision = (number: number) => {
+		// The math functions are to make sure the length of number is <= 9
+		return Math.round(value * 1_000_000) / 1_000_000;
+	}
 
 	const addToJson = ({ name, value }: CoreVitalsArgs): void => {
 		switch (name) {
-			// The math functions are to make sure the length of number is <= 9
 			case 'FCP':
-				jsonData.fcp = Math.round(value * 1000000) / 1000000;
+				jsonData.fcp = nineDigitPrecision(value);
 				break;
 			case 'CLS':
-				jsonData.cls = Math.round(value * 1000000) / 1000000;
+				jsonData.cls = nineDigitPrecision(value);
 				break;
 			case 'LCP':
-				jsonData.lcp = Math.round(value * 1000000) / 1000000;
+				jsonData.lcp = nineDigitPrecision(value);
 				break;
 			case 'FID':
-				jsonData.fid = Math.round(value * 1000000) / 1000000;
+				jsonData.fid = nineDigitPrecision(value);
 				break;
 			case 'TTFB':
-				jsonData.ttfb = Math.round(value * 1000000) / 1000000;
+				jsonData.ttfb = nineDigitPrecision(value);
 				break;
 		}
 
