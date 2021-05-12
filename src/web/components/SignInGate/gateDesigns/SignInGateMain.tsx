@@ -9,6 +9,7 @@ import { SignInGateProps } from './types';
 import {
 	actionButtons,
 	bodyBold,
+	bodySeparator,
 	bodyText,
 	faq,
 	firstParagraphOverlay,
@@ -61,6 +62,7 @@ export const SignInGateMain = ({
 			<div className={actionButtons}>
 				<LinkButton
 					data-cy="sign-in-gate-main_register"
+					data-ignore="global-link-styling"
 					className={registerButton}
 					priority="primary"
 					size="small"
@@ -74,6 +76,7 @@ export const SignInGateMain = ({
 
 				<LinkButton
 					data-cy="sign-in-gate-main_dismiss"
+					data-ignore="global-link-styling"
 					className={laterButton}
 					priority="subdued"
 					size="small"
@@ -86,12 +89,13 @@ export const SignInGateMain = ({
 				</LinkButton>
 			</div>
 
-			<p className={cx([bodyBold, signInHeader])}>
+			<p className={cx([bodySeparator, bodyBold, signInHeader])}>
 				Have a subscription? Made a contribution? Already registered?
 			</p>
 
 			<Link
 				data-cy="sign-in-gate-main_signin"
+				data-ignore="global-link-styling"
 				className={signInLink}
 				href={signInUrl}
 				onClick={() => {
@@ -103,6 +107,7 @@ export const SignInGateMain = ({
 
 			<div className={faq}>
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'how-link', abTest);
@@ -112,6 +117,7 @@ export const SignInGateMain = ({
 				</Link>
 
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'why-link', abTest);
@@ -121,6 +127,7 @@ export const SignInGateMain = ({
 				</Link>
 
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'help-link', abTest);
