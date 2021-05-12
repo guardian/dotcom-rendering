@@ -82,7 +82,6 @@ type Props = {
 	keywordIds: string | string[];
 	contentType: string;
 	tags: TagType[];
-	edition: Edition;
 	format: Format;
 };
 

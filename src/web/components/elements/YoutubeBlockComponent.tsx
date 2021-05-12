@@ -17,7 +17,6 @@ type Props = {
 	mediaTitle?: string;
 	altText?: string;
 	assetId: string;
-	channelId?: string;
 	expired: boolean;
 	format: Format;
 	palette: Palette;
