@@ -304,15 +304,12 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 type CarouselCardProps = {
 	isFirst: boolean;
 	format: Format;
-	trailPalette: Palette;
-	display?: Display;
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
 	kickerText?: string;
 	imageUrl?: string;
 	isFullCardImage?: boolean;
-	dataComponent?: string;
 	dataLinkName?: string;
 };
 
