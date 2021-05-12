@@ -4,13 +4,6 @@ import { css } from 'emotion';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
-type Props = {
-	children: React.ReactNode;
-	isMainMedia: boolean;
-	role?: RoleType | 'richLink';
-	id?: string;
-};
-
 const roleCss = {
 	inline: css`
 		margin-top: ${space[3]}px;
@@ -129,7 +122,8 @@ const roleCss = {
 	`,
 };
 
-const decidePosition = (role: RoleType | 'richLink') => {
+// Used for vast majority of layouts.
+export const defaultRoleStyles = (role: RoleType | 'richLink') => {
 	switch (role) {
 		case 'inline':
 			return roleCss.inline;
@@ -150,11 +144,23 @@ const decidePosition = (role: RoleType | 'richLink') => {
 	}
 };
 
+type Props = {
+	children: React.ReactNode;
+	isMainMedia: boolean;
+	role?: RoleType | 'richLink';
+	id?: string;
+
+	// Used to style figures based on role type. Parameterised as this varies
+	// (e.g.) on page layout.
+	roleStylesFn?: (role: RoleType | 'richLink') => string;
+};
+
 export const Figure = ({
 	role = 'inline',
 	children,
 	id,
 	isMainMedia,
+	roleStylesFn = defaultRoleStyles,
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -165,7 +171,7 @@ export const Figure = ({
 		return <figure id={id}>{children}</figure>;
 	}
 	return (
-		<figure id={id} className={decidePosition(role)}>
+		<figure id={id} className={roleStylesFn(role)}>
 			{children}
 		</figure>
 	);
