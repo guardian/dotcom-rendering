@@ -34,7 +34,7 @@ export const coreVitals = (): void => {
 		value: number;
 	};
 	
-	const nineDigitPrecision = (number: number) => {
+	const nineDigitPrecision = (value: number) => {
 		// The math functions are to make sure the length of number is <= 9
 		return Math.round(value * 1_000_000) / 1_000_000;
 	}
