@@ -11,7 +11,7 @@ export const JustH2 = () => (
 	<div>
 		<NumberedTitleBlockComponent
 			position={1}
-			html={'<h2>Simple text</h2>'}
+			html="<h2>Simple text</h2>"
 			format={{
 				theme: 'NewsPillar',
 				design: 'ArticleDesign',
@@ -26,7 +26,7 @@ export const Strong = () => (
 	<div>
 		<NumberedTitleBlockComponent
 			position={1}
-			html={'<h2><strong>Strong text</strong></h2>'}
+			html="<h2><strong>Strong text</strong></h2>"
 			format={{
 				theme: 'NewsPillar',
 				design: 'ArticleDesign',
@@ -41,7 +41,7 @@ export const Leading = () => (
 	<div>
 		<NumberedTitleBlockComponent
 			position={1}
-			html={'<h2><strong>Strong text</strong> One Plus 7T Pro</h2>'}
+			html="<h2><strong>Strong text</strong> One Plus 7T Pro</h2>"
 			format={{
 				theme: 'CulturePillar',
 				design: 'ArticleDesign',
@@ -56,7 +56,7 @@ export const Trailing = () => (
 	<div>
 		<NumberedTitleBlockComponent
 			position={1}
-			html={'<h2>Plain H2<strong>Strong text</strong></h2>'}
+			html="<h2>Plain H2<strong>Strong text</strong></h2>"
 			format={{
 				theme: 'LifestylePillar',
 				design: 'ArticleDesign',
