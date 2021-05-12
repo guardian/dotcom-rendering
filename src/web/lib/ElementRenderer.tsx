@@ -789,7 +789,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						id={element.id}
 						assetId={element.assetId}
-						channelId={element.channelId}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
 						posterImage={element.posterImage}

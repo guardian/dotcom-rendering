@@ -560,7 +560,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
-						channelId={youTubeAtom.channelId}
 						expired={youTubeAtom.expired}
 						overrideImage={youTubeAtom.overrideImage}
 						posterImage={youTubeAtom.posterImage}
@@ -645,7 +644,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
 						element={richLink}
-						pillar={pillar}
 						ajaxEndpoint={CAPI.config.ajaxUrl}
 						richLinkIndex={index}
 					/>
@@ -1003,7 +1001,6 @@ export const App = ({ CAPI, NAV }: Props) => {
 							keywordIds={CAPI.config.keywordIds}
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
-							edition={CAPI.editionId}
 							format={format}
 						/>
 					</Suspense>
