@@ -98,7 +98,6 @@ const labsRichLinkTitle = css`
 		${textSans.medium({ fontWeight: 'bold' })}
 	}
 	${textSans.small({ fontWeight: 'bold' })}
-
 `;
 
 const richLinkReadMore: (palette: Palette) => ColourType = (palette) => {
@@ -125,9 +124,9 @@ const readMoreTextStyle = css`
 	text-decoration: none;
 `;
 
-const labsReadMoreTextStyle = css `
-${textSans.medium({fontWeight:'regular'})}
-display: inline-block;
+const labsReadMoreTextStyle = css`
+	${textSans.medium({ fontWeight: 'regular' })}
+	display: inline-block;
 	height: 30px;
 	line-height: 25px;
 	padding-left: 4px;
@@ -221,7 +220,7 @@ export const RichLink = ({
 		: false;
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
-const isLabs = format.theme === Special.Labs;
+	const isLabs = format.theme === Special.Labs;
 
 	return (
 		<div
@@ -245,11 +244,11 @@ const isLabs = format.theme === Special.Labs;
 					)}
 					<div className={richLinkElements}>
 						<div className={richLinkHeader}>
-							<div className={cx(
-									isLabs
-										? labsRichLinkTitle
-										: richLinkTitle,
-								)}>
+							<div
+								className={cx(
+									isLabs ? labsRichLinkTitle : richLinkTitle,
+								)}
+							>
 								{isOpinion && (
 									<>
 										<Hide when="above" breakpoint="wide">
@@ -300,11 +299,13 @@ const isLabs = format.theme === Special.Labs;
 						)}
 						<div className={richLinkReadMore(palette)}>
 							<ArrowInCircle />
-							<div className={cx(
+							<div
+								className={cx(
 									isLabs
 										? labsReadMoreTextStyle
 										: readMoreTextStyle,
-								)}>
+								)}
+							>
 								{readMoreText(contentType)}
 							</div>
 						</div>
