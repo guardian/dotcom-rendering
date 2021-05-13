@@ -34,6 +34,7 @@ const go = () => {
 	const compiler = webpack(webpackConfig);
 
 	const app = express();
+	app.use(express.json());
 
 	app.use(
 		`/static/${siteName}`,
@@ -79,6 +80,14 @@ const go = () => {
 		}),
 	);
 
+	app.post(
+		'/Article',
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/Article' },
+		}),
+	);
+
 	app.get(
 		'/ArticleJson',
 		async (req, res, next) => {
@@ -116,6 +125,14 @@ const go = () => {
 				console.error(error);
 			}
 		},
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/AMPArticle' },
+		}),
+	);
+
+	app.post(
+		'/AMPArticle',
 		webpackHotServerMiddleware(compiler, {
 			chunkName: `${siteName}.server`,
 			serverRendererOptions: { path: '/AMPArticle' },
