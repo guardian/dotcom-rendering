@@ -136,9 +136,6 @@ const removeArticleCountsFromLocalStorage = () => {
 };
 
 export const getArticleCountConsent = (): Promise<boolean> => {
-	if (hasOptedOutOfArticleCount()) {
-		return Promise.resolve(false);
-	}
 	return new Promise((resolve) => {
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
 			if (ccpa || aus) {
@@ -151,7 +148,7 @@ export const getArticleCountConsent = (): Promise<boolean> => {
 				if (!hasRequiredConsents) {
 					removeArticleCountsFromLocalStorage();
 				}
-
+				console.log({hasRequiredConsents})
 				resolve(hasRequiredConsents);
 			}
 		});
