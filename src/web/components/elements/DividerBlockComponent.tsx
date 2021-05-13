@@ -29,6 +29,13 @@ const sizeFullStyle = css`
 `;
 const sizePartialStyle = css`
 	width: 150px;
+	margin-left: 0px;
+	${from.tablet} {
+		margin-left: -20px;
+	}
+	${from.leftCol} {
+		margin-left: -10px;
+	}
 `;
 
 const tightSpaceAboveStyle = css`
