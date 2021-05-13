@@ -45,6 +45,7 @@ const EmbedComponent: FC<Props> = ({ embed, editions }) => {
 			) : null;
 
 		case EmbedKind.EmailSignup:
+		case EmbedKind.TikTok:
 			return !editions ? <GenericEmbed embed={embed} /> : null;
 
 		case EmbedKind.Generic:

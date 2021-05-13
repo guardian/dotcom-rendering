@@ -5,7 +5,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { withDefault } from '@guardian/types';
-import type { EmailSignup, Generic } from 'embed';
+import type { EmailSignup, Generic, TikTok } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -27,7 +27,7 @@ const captionStyles = css`
 `;
 
 interface Props {
-	embed: Generic | EmailSignup;
+	embed: Generic | EmailSignup | TikTok;
 }
 
 const GenericEmbed: FC<Props> = ({ embed }) => (

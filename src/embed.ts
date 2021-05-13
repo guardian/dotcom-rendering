@@ -31,6 +31,7 @@ enum EmbedKind {
 	Spotify = 'Spotify',
 	YouTube = 'YouTube',
 	EmailSignup = 'EmailSignup',
+	TikTok = 'TikTok',
 }
 
 interface YouTube {
@@ -56,8 +57,7 @@ interface Instagram {
 	tracking: EmbedTracksType;
 }
 
-interface Generic {
-	kind: EmbedKind.Generic;
+interface GenericFields {
 	alt: Option<string>;
 	html: string;
 	height: number;
@@ -67,21 +67,22 @@ interface Generic {
 	tracking: EmbedTracksType;
 }
 
-interface EmailSignup {
+interface Generic extends GenericFields {
+	kind: EmbedKind.Generic;
+}
+
+interface TikTok extends GenericFields {
+	kind: EmbedKind.TikTok;
+}
+
+interface EmailSignup extends GenericFields {
 	kind: EmbedKind.EmailSignup;
-	alt: Option<string>;
-	html: string;
-	height: number;
-	mandatory: boolean;
-	source: Option<string>;
-	sourceDomain: Option<string>;
-	tracking: EmbedTracksType;
 }
 
 /**
  * Represents any third-party embed.
  */
-type Embed = Generic | Instagram | Spotify | YouTube | EmailSignup;
+type Embed = Generic | Instagram | Spotify | YouTube | EmailSignup | TikTok;
 
 interface IFrame {
 	src: string;
@@ -291,6 +292,20 @@ const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 	);
 };
 
+const parseGenericEmbedKind = (parser: DocParser) => (
+	element: BlockElement,
+) => (
+	html: string,
+): EmbedKind.TikTok | EmbedKind.EmailSignup | EmbedKind.Generic => {
+	if (element.embedTypeData?.source === 'TikTok') {
+		return EmbedKind.TikTok;
+	}
+	if (isEmailSignUp(parser)(html)) {
+		return EmbedKind.EmailSignup;
+	}
+	return EmbedKind.Generic;
+};
+
 const parseGeneric = (parser: DocParser) => (
 	element: BlockElement,
 ): Result<string, Embed> => {
@@ -300,10 +315,8 @@ const parseGeneric = (parser: DocParser) => (
 		);
 	}
 
-	return resultMap((html: string): Generic | EmailSignup => ({
-		kind: isEmailSignUp(parser)(html)
-			? EmbedKind.EmailSignup
-			: EmbedKind.Generic,
+	return resultMap((html: string): Generic | EmailSignup | TikTok => ({
+		kind: parseGenericEmbedKind(parser)(element)(html),
 		alt: fromNullable(element.embedTypeData?.alt),
 		html,
 		height: genericHeight(parser)(html),
@@ -317,7 +330,16 @@ const parseGeneric = (parser: DocParser) => (
 
 // ----- Exports ----- //
 
-export type { Embed, Generic, Spotify, YouTube, Instagram, EmailSignup };
+export type {
+	Embed,
+	Generic,
+	Spotify,
+	YouTube,
+	Instagram,
+	EmailSignup,
+	TikTok,
+	GenericFields,
+};
 
 export {
 	EmbedKind,
