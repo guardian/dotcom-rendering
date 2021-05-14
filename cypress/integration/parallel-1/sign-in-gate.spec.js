@@ -192,4 +192,25 @@ describe('Sign In Gate Tests', function () {
 			cy.contains('privacy settings');
 		});
 	});
+
+	describe('SignInGateFakeSocial', function () {
+		describe('fake-social-variant-horizontal', function () {
+			beforeEach(function () {
+				disableCMP();
+				// sign in gate fake social runs from 700000-900000 MVT IDs, so 700001 forces user into test variant
+				setMvtCookie('700001');
+
+				// set article count to be min number to view gate
+				setArticleCount(3);
+			});
+
+			it('should load the sign in gate', function () {
+				visitArticleAndScrollToGateForLazyLoad();
+
+				cy.get('[data-cy=sign-in-gate-fake-social]').should(
+					'be.visible',
+				);
+			});
+		});
+	});
 });

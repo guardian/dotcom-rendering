@@ -12,7 +12,6 @@ import { until } from '@guardian/src-foundations/mq';
 import { Hide } from './Hide';
 
 type Props = {
-	format: Format;
 	currentPage: number;
 	totalPages: number;
 	newest?: string;

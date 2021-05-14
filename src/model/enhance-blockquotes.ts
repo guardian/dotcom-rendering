@@ -52,7 +52,7 @@ export const enhanceBlockquotes = (data: CAPIType): CAPIType => {
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,
-			elements: enhance(block.elements, isPhotoEssay),
+			elements: enhance(block.elements, isPhotoEssay || false),
 		};
 	});
 

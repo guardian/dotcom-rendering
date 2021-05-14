@@ -1267,6 +1267,13 @@
                         "partial"
                     ],
                     "type": "string"
+                },
+                "spaceAbove": {
+                    "enum": [
+                        "loose",
+                        "tight"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3762,9 +3769,6 @@
                 "googletagUrl",
                 "hbImpl",
                 "idApiUrl",
-                "isLive",
-                "isLiveBlog",
-                "isPhotoEssay",
                 "isSensitive",
                 "keywordIds",
                 "pageId",
@@ -3776,8 +3780,7 @@
                 "shortUrlId",
                 "showRelatedContent",
                 "stage",
-                "switches",
-                "videoDuration"
+                "switches"
             ]
         },
         "CommercialProperties": {

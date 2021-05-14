@@ -1,25 +1,33 @@
 import { ABTest } from '@guardian/ab-core';
 
-export const signInGateMainVariant: ABTest = {
-	id: 'SignInGateMainVariant',
-	start: '2020-05-20',
-	expiry: '2021-12-01',
+export const signInGateFakeSocial: ABTest = {
+	id: 'SignInGateFakeSocial',
+	start: '2021-05-29',
+	expiry: '2021-06-29',
 	author: 'Mahesh Makani',
 	description:
-		'Show sign in gate to 100% of users on 3rd article view of simple article templates, and show a further 5 times after the first dismissal, with higher priority over banners and epic. Main/Variant Audience.',
-	audience: 0.7,
-	audienceOffset: 0.0,
+		'We believe that if we show email input and/or social buttons on the gate, it will make the sign in process appear quicker and increase sign in conversion. ',
+	audience: 0.2,
+	audienceOffset: 0.7,
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
-	dataLinkNames: 'SignInGateMain',
+	dataLinkNames: 'SignInGateFakeSocial',
 	idealOutcome:
 		'Increase the number of users signed in whilst running at a reasonable scale',
 	showForSensitive: false,
 	canRun: () => true,
 	variants: [
 		{
-			id: 'main-variant-4',
+			id: 'fake-social-control',
+			test: (): void => {},
+		},
+		{
+			id: 'fake-social-variant-horizontal',
+			test: (): void => {},
+		},
+		{
+			id: 'fake-social-variant-vertical',
 			test: (): void => {},
 		},
 	],

@@ -574,7 +574,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
-						channelId={youTubeAtom.channelId}
 						expired={youTubeAtom.expired}
 						overrideImage={youTubeAtom.overrideImage}
 						posterImage={youTubeAtom.posterImage}
@@ -637,7 +636,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
 						element={richLink}
-						pillar={pillar}
 						ajaxEndpoint={CAPI.config.ajaxUrl}
 						richLinkIndex={index}
 					/>
@@ -804,7 +802,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
 						>
-							<EmbedBlockComponent html={embed.html} />
+							<EmbedBlockComponent
+								html={embed.html}
+								alt={embed.alt}
+							/>
 						</ClickToView>
 					) : (
 						<ClickToView
@@ -976,7 +977,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							keywordIds={CAPI.config.keywordIds}
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
-							edition={CAPI.editionId}
 							format={format}
 						/>
 					</Suspense>

@@ -363,7 +363,9 @@ const backgroundArticle = (format: Format): string => {
 	if (format.design === Design.Comment) return opinion[800];
 	if (format.design === Design.Editorial) return opinion[800];
 	if (format.theme === Special.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
-	if (format.theme === Special.Labs) return neutral[97];
+	if (format.theme === Special.Labs && format.display !== Display.Immersive)
+		return neutral[97];
+
 	return 'transparent';
 };
 

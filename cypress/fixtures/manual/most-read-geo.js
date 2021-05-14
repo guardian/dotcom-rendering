@@ -11,10 +11,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/1a3fa166bf70489f78d3370e51f5be6cb22445c6/0_78_2782_1670/master/2782.jpg?width=300&quality=85&auto=format&fit=max&s=7fd1a158a9b21f04e789ac2c633536f6',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/1a3fa166bf70489f78d3370e51f5be6cb22445c6/0_78_2782_1670/master/2782.jpg?width=300&quality=85&auto=format&fit=max&s=7fd1a158a9b21f04e789ac2c633536f6',
-				'460':
-					'https://i.guim.co.uk/img/media/1a3fa166bf70489f78d3370e51f5be6cb22445c6/0_78_2782_1670/master/2782.jpg?width=460&quality=85&auto=format&fit=max&s=1c84d9085d45b3a49aebcd534e083928',
+				300: 'https://i.guim.co.uk/img/media/1a3fa166bf70489f78d3370e51f5be6cb22445c6/0_78_2782_1670/master/2782.jpg?width=300&quality=85&auto=format&fit=max&s=7fd1a158a9b21f04e789ac2c633536f6',
+				460: 'https://i.guim.co.uk/img/media/1a3fa166bf70489f78d3370e51f5be6cb22445c6/0_78_2782_1670/master/2782.jpg?width=460&quality=85&auto=format&fit=max&s=1c84d9085d45b3a49aebcd534e083928',
 			},
 			isLiveBlog: false,
 			format: {
@@ -38,10 +36,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/7f69f6efcf2891af0ed4b4028ed1eebccb27d462/202_449_3014_1806/master/3014.jpg?width=300&quality=85&auto=format&fit=max&s=2418cbd6deadebf6067586f4afc929c4',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/7f69f6efcf2891af0ed4b4028ed1eebccb27d462/202_449_3014_1806/master/3014.jpg?width=300&quality=85&auto=format&fit=max&s=2418cbd6deadebf6067586f4afc929c4',
-				'460':
-					'https://i.guim.co.uk/img/media/7f69f6efcf2891af0ed4b4028ed1eebccb27d462/202_449_3014_1806/master/3014.jpg?width=460&quality=85&auto=format&fit=max&s=a7b8525d2b5b73c7fed683badb1443b7',
+				300: 'https://i.guim.co.uk/img/media/7f69f6efcf2891af0ed4b4028ed1eebccb27d462/202_449_3014_1806/master/3014.jpg?width=300&quality=85&auto=format&fit=max&s=2418cbd6deadebf6067586f4afc929c4',
+				460: 'https://i.guim.co.uk/img/media/7f69f6efcf2891af0ed4b4028ed1eebccb27d462/202_449_3014_1806/master/3014.jpg?width=460&quality=85&auto=format&fit=max&s=a7b8525d2b5b73c7fed683badb1443b7',
 			},
 			isLiveBlog: true,
 			format: {
@@ -65,10 +61,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/8dccf2b65260495fea5cdafbf636aa4181a05a1d/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=b506035a066bc0afa79ea8a33c649726',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/8dccf2b65260495fea5cdafbf636aa4181a05a1d/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=b506035a066bc0afa79ea8a33c649726',
-				'460':
-					'https://i.guim.co.uk/img/media/8dccf2b65260495fea5cdafbf636aa4181a05a1d/0_0_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=3e710efd1c5f3ebbfa4f0ca203473c98',
+				300: 'https://i.guim.co.uk/img/media/8dccf2b65260495fea5cdafbf636aa4181a05a1d/0_0_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=b506035a066bc0afa79ea8a33c649726',
+				460: 'https://i.guim.co.uk/img/media/8dccf2b65260495fea5cdafbf636aa4181a05a1d/0_0_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=3e710efd1c5f3ebbfa4f0ca203473c98',
 			},
 			isLiveBlog: true,
 			format: {
@@ -93,10 +87,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/c56c6217f8fa306d89320cc7915161203b5017b1/0_166_5000_3002/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=0d205d08639b4ad6e1b86758ab451abb',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/c56c6217f8fa306d89320cc7915161203b5017b1/0_166_5000_3002/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=0d205d08639b4ad6e1b86758ab451abb',
-				'460':
-					'https://i.guim.co.uk/img/media/c56c6217f8fa306d89320cc7915161203b5017b1/0_166_5000_3002/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=34b9f8290dcdf0ff8a8fd85bf7ba1ca2',
+				300: 'https://i.guim.co.uk/img/media/c56c6217f8fa306d89320cc7915161203b5017b1/0_166_5000_3002/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=0d205d08639b4ad6e1b86758ab451abb',
+				460: 'https://i.guim.co.uk/img/media/c56c6217f8fa306d89320cc7915161203b5017b1/0_166_5000_3002/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=34b9f8290dcdf0ff8a8fd85bf7ba1ca2',
 			},
 			isLiveBlog: true,
 			format: {
@@ -121,10 +113,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/e3f86cc18510079a8b0b6f4de816abdc23593913/0_193_5259_3155/master/5259.jpg?width=300&quality=85&auto=format&fit=max&s=d4ee101d0ad2e942801027daec2a7351',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/e3f86cc18510079a8b0b6f4de816abdc23593913/0_193_5259_3155/master/5259.jpg?width=300&quality=85&auto=format&fit=max&s=d4ee101d0ad2e942801027daec2a7351',
-				'460':
-					'https://i.guim.co.uk/img/media/e3f86cc18510079a8b0b6f4de816abdc23593913/0_193_5259_3155/master/5259.jpg?width=460&quality=85&auto=format&fit=max&s=35cb900f5b3346d32649bc4cb96eef95',
+				300: 'https://i.guim.co.uk/img/media/e3f86cc18510079a8b0b6f4de816abdc23593913/0_193_5259_3155/master/5259.jpg?width=300&quality=85&auto=format&fit=max&s=d4ee101d0ad2e942801027daec2a7351',
+				460: 'https://i.guim.co.uk/img/media/e3f86cc18510079a8b0b6f4de816abdc23593913/0_193_5259_3155/master/5259.jpg?width=460&quality=85&auto=format&fit=max&s=35cb900f5b3346d32649bc4cb96eef95',
 			},
 			isLiveBlog: false,
 			format: {
@@ -149,10 +139,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/77cb7a07a7255b870c674897644bfd53c97a3c7e/0_178_1848_1108/master/1848.jpg?width=300&quality=85&auto=format&fit=max&s=cf6b8f4f31666b76028cbce58065dfb9',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/77cb7a07a7255b870c674897644bfd53c97a3c7e/0_178_1848_1108/master/1848.jpg?width=300&quality=85&auto=format&fit=max&s=cf6b8f4f31666b76028cbce58065dfb9',
-				'460':
-					'https://i.guim.co.uk/img/media/77cb7a07a7255b870c674897644bfd53c97a3c7e/0_178_1848_1108/master/1848.jpg?width=460&quality=85&auto=format&fit=max&s=a7f29dfdcfc8a74d89d84ff4b401c174',
+				300: 'https://i.guim.co.uk/img/media/77cb7a07a7255b870c674897644bfd53c97a3c7e/0_178_1848_1108/master/1848.jpg?width=300&quality=85&auto=format&fit=max&s=cf6b8f4f31666b76028cbce58065dfb9',
+				460: 'https://i.guim.co.uk/img/media/77cb7a07a7255b870c674897644bfd53c97a3c7e/0_178_1848_1108/master/1848.jpg?width=460&quality=85&auto=format&fit=max&s=a7f29dfdcfc8a74d89d84ff4b401c174',
 			},
 			isLiveBlog: false,
 			format: {
@@ -177,10 +165,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/b30fa8d6c8001fbdbad4d913f52c3505b1a9d7f5/0_50_1710_1025/master/1710.jpg?width=300&quality=85&auto=format&fit=max&s=269a18afd309bee9555aa45da9d736d8',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/b30fa8d6c8001fbdbad4d913f52c3505b1a9d7f5/0_50_1710_1025/master/1710.jpg?width=300&quality=85&auto=format&fit=max&s=269a18afd309bee9555aa45da9d736d8',
-				'460':
-					'https://i.guim.co.uk/img/media/b30fa8d6c8001fbdbad4d913f52c3505b1a9d7f5/0_50_1710_1025/master/1710.jpg?width=460&quality=85&auto=format&fit=max&s=cd32255052d2823e68eb28b73df83382',
+				300: 'https://i.guim.co.uk/img/media/b30fa8d6c8001fbdbad4d913f52c3505b1a9d7f5/0_50_1710_1025/master/1710.jpg?width=300&quality=85&auto=format&fit=max&s=269a18afd309bee9555aa45da9d736d8',
+				460: 'https://i.guim.co.uk/img/media/b30fa8d6c8001fbdbad4d913f52c3505b1a9d7f5/0_50_1710_1025/master/1710.jpg?width=460&quality=85&auto=format&fit=max&s=cd32255052d2823e68eb28b73df83382',
 			},
 			isLiveBlog: false,
 			format: {
@@ -205,10 +191,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/6d9dfedeef6b41eb714379ac90eff55b61bcc78d/0_162_2447_1469/master/2447.jpg?width=300&quality=85&auto=format&fit=max&s=5f5bf2b6cbeac62fded0d5cdc4e6453f',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/6d9dfedeef6b41eb714379ac90eff55b61bcc78d/0_162_2447_1469/master/2447.jpg?width=300&quality=85&auto=format&fit=max&s=5f5bf2b6cbeac62fded0d5cdc4e6453f',
-				'460':
-					'https://i.guim.co.uk/img/media/6d9dfedeef6b41eb714379ac90eff55b61bcc78d/0_162_2447_1469/master/2447.jpg?width=460&quality=85&auto=format&fit=max&s=c7c8f93101acf05fe5e12bcf20fa4d98',
+				300: 'https://i.guim.co.uk/img/media/6d9dfedeef6b41eb714379ac90eff55b61bcc78d/0_162_2447_1469/master/2447.jpg?width=300&quality=85&auto=format&fit=max&s=5f5bf2b6cbeac62fded0d5cdc4e6453f',
+				460: 'https://i.guim.co.uk/img/media/6d9dfedeef6b41eb714379ac90eff55b61bcc78d/0_162_2447_1469/master/2447.jpg?width=460&quality=85&auto=format&fit=max&s=c7c8f93101acf05fe5e12bcf20fa4d98',
 			},
 			isLiveBlog: false,
 			format: {
@@ -233,10 +217,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/63dab0fc0f30b6f746a81fd61541ea33db326341/0_126_5400_3240/master/5400.jpg?width=300&quality=85&auto=format&fit=max&s=d7e4b07a789dbfa24ddbf6591c8afa1a',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/63dab0fc0f30b6f746a81fd61541ea33db326341/0_126_5400_3240/master/5400.jpg?width=300&quality=85&auto=format&fit=max&s=d7e4b07a789dbfa24ddbf6591c8afa1a',
-				'460':
-					'https://i.guim.co.uk/img/media/63dab0fc0f30b6f746a81fd61541ea33db326341/0_126_5400_3240/master/5400.jpg?width=460&quality=85&auto=format&fit=max&s=f32e50b9d3d6450151aa28580d117b6b',
+				300: 'https://i.guim.co.uk/img/media/63dab0fc0f30b6f746a81fd61541ea33db326341/0_126_5400_3240/master/5400.jpg?width=300&quality=85&auto=format&fit=max&s=d7e4b07a789dbfa24ddbf6591c8afa1a',
+				460: 'https://i.guim.co.uk/img/media/63dab0fc0f30b6f746a81fd61541ea33db326341/0_126_5400_3240/master/5400.jpg?width=460&quality=85&auto=format&fit=max&s=f32e50b9d3d6450151aa28580d117b6b',
 			},
 			isLiveBlog: true,
 			format: {
@@ -261,10 +243,8 @@ export const mostReadGeo = {
 			image:
 				'https://i.guim.co.uk/img/media/f844b7ea61cf0586ced5c91ba8189b6b7eecf4b0/0_205_4644_2786/master/4644.jpg?width=300&quality=85&auto=format&fit=max&s=b05e72a55a12f38dfe36102a3855eaeb',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/f844b7ea61cf0586ced5c91ba8189b6b7eecf4b0/0_205_4644_2786/master/4644.jpg?width=300&quality=85&auto=format&fit=max&s=b05e72a55a12f38dfe36102a3855eaeb',
-				'460':
-					'https://i.guim.co.uk/img/media/f844b7ea61cf0586ced5c91ba8189b6b7eecf4b0/0_205_4644_2786/master/4644.jpg?width=460&quality=85&auto=format&fit=max&s=360ec9746c56a777a222dc9fd830168c',
+				300: 'https://i.guim.co.uk/img/media/f844b7ea61cf0586ced5c91ba8189b6b7eecf4b0/0_205_4644_2786/master/4644.jpg?width=300&quality=85&auto=format&fit=max&s=b05e72a55a12f38dfe36102a3855eaeb',
+				460: 'https://i.guim.co.uk/img/media/f844b7ea61cf0586ced5c91ba8189b6b7eecf4b0/0_205_4644_2786/master/4644.jpg?width=460&quality=85&auto=format&fit=max&s=360ec9746c56a777a222dc9fd830168c',
 			},
 			isLiveBlog: false,
 			format: {

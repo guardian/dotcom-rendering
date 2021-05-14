@@ -40,7 +40,7 @@ import {
 	WitnessTextBlockComponent,
 } from '@root/src/web/components/elements/WitnessBlockComponent';
 import { ClickToView } from '@root/src/web/components/ClickToView';
-import { Figure } from '@root/src/web/components/Figure';
+import { Figure, defaultRoleStyles } from '@root/src/web/components/Figure';
 
 import {
 	AudioAtom,
@@ -67,6 +67,7 @@ type Props = {
 	isMainMedia: boolean;
 	hideCaption?: boolean;
 	starRating?: number;
+	roleStylesFn?: (role: RoleType | 'richLink') => string;
 };
 
 function decideImageRole(role: RoleType, isLiveBlog: boolean): RoleType {
@@ -89,6 +90,7 @@ export const ElementRenderer = ({
 	hideCaption,
 	isMainMedia,
 	starRating,
+	roleStylesFn = defaultRoleStyles,
 }: Props) => {
 	const isLiveBlog =
 		format.design === Design.LiveBlog || format.design === Design.DeadBlog;
@@ -100,6 +102,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					id={element.elementId}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<AudioAtom
 						id={element.id}
@@ -125,6 +128,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					id={element.elementId}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<CalloutBlockComponent
 						callout={element}
@@ -151,6 +155,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<ChartAtom id={element.id} html={element.html} />
 				</Figure>
@@ -167,6 +172,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<CommentBlockComponent
 						body={element.body}
@@ -183,6 +189,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<DisclaimerBlockComponent html={element.html} />
 				</Figure>
@@ -200,6 +207,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<ClickToView
 						role={isLiveBlog ? 'inline' : element.role}
@@ -226,6 +234,7 @@ export const ElementRenderer = ({
 							isMainMedia={isMainMedia}
 							role={element.role}
 							id={element.elementId}
+							roleStylesFn={roleStylesFn}
 						>
 							<MainMediaEmbedBlockComponent
 								title={element.alt || ''}
@@ -240,6 +249,7 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						role={isLiveBlog ? 'inline' : element.role}
 						id={element.elementId}
+						roleStylesFn={roleStylesFn}
 					>
 						<ClickToView
 							role={isLiveBlog ? 'inline' : element.role}
@@ -263,6 +273,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<ClickToView
 						role={isLiveBlog ? 'inline' : element.role}
@@ -271,7 +282,11 @@ export const ElementRenderer = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 					>
-						<EmbedBlockComponent key={index} html={element.html} />
+						<EmbedBlockComponent
+							key={index}
+							html={element.html}
+							alt={element.alt}
+						/>
 					</ClickToView>
 				</Figure>
 			);
@@ -280,6 +295,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<ExplainerAtom
 						key={index}
@@ -295,6 +311,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					id={element.elementId}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<GuideAtom
 						id={element.id}
@@ -314,6 +331,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<GuVideoBlockComponent
 						html={element.html}
@@ -331,6 +349,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={decideImageRole(element.role, isLiveBlog)}
+					roleStylesFn={roleStylesFn}
 				>
 					<ImageBlockComponent
 						format={format}
@@ -351,6 +370,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<ClickToView
 						role={isLiveBlog ? 'inline' : element.role}
@@ -372,6 +392,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<InteractiveAtom
 						id={element.id}
@@ -387,6 +408,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<InteractiveBlockComponent
 						url={element.url}
@@ -406,6 +428,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<ClickToView
 						role={isLiveBlog ? 'inline' : element.role}
@@ -439,6 +462,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<MultiImageBlockComponent
 						format={format}
@@ -455,6 +479,7 @@ export const ElementRenderer = ({
 					isNumberedListTitle={true}
 					isMainMedia={isMainMedia}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<NumberedTitleBlockComponent
 						position={element.position}
@@ -469,6 +494,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					id={element.elementId}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<ProfileAtom
 						id={element.id}
@@ -500,6 +526,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					id={element.elementId}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<QandaAtom
 						id={element.id}
@@ -516,7 +543,11 @@ export const ElementRenderer = ({
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return (
-				<Figure isMainMedia={isMainMedia} id={element.elementId}>
+				<Figure
+					isMainMedia={isMainMedia}
+					id={element.elementId}
+					roleStylesFn={roleStylesFn}
+				>
 					<>
 						{element.quizType === 'personality' && (
 							<PersonalityQuizAtom
@@ -541,6 +572,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					key={index}
 					role={isLiveBlog ? 'inline' : 'richLink'}
+					roleStylesFn={roleStylesFn}
 				>
 					<DefaultRichLink
 						index={index}
@@ -556,6 +588,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					key={index}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<SoundcloudBlockComponent element={element} />
 				</Figure>
@@ -566,6 +599,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<ClickToView
 						role={isLiveBlog ? 'inline' : element.role}
@@ -602,6 +636,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<TableBlockComponent element={element} />
 				</Figure>
@@ -624,6 +659,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<TimelineAtom
 						id={element.id}
@@ -642,6 +678,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					key={index}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<TweetBlockComponent element={element} />
 				</Figure>
@@ -652,6 +689,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<ClickToView
 						role={isLiveBlog ? 'inline' : element.role}
@@ -678,6 +716,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<VimeoBlockComponent
 						format={format}
@@ -696,6 +735,7 @@ export const ElementRenderer = ({
 				<Figure
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
+					roleStylesFn={roleStylesFn}
 				>
 					<YoutubeEmbedBlockComponent
 						format={format}
@@ -717,6 +757,7 @@ export const ElementRenderer = ({
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<ClickToView
 						// No role given by CAPI
@@ -737,7 +778,10 @@ export const ElementRenderer = ({
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataImage = element.witnessTypeData as WitnessTypeDataImage;
 					return (
-						<Figure isMainMedia={isMainMedia}>
+						<Figure
+							isMainMedia={isMainMedia}
+							roleStylesFn={roleStylesFn}
+						>
 							<WitnessImageBlockComponent
 								assets={element.assets}
 								caption={witnessTypeDataImage.caption}
@@ -753,7 +797,10 @@ export const ElementRenderer = ({
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataVideo = element.witnessTypeData as WitnessTypeDataVideo;
 					return (
-						<Figure isMainMedia={isMainMedia}>
+						<Figure
+							isMainMedia={isMainMedia}
+							roleStylesFn={roleStylesFn}
+						>
 							<WitnessVideoBlockComponent
 								title={witnessTypeDataVideo.title}
 								description={witnessTypeDataVideo.description}
@@ -768,7 +815,10 @@ export const ElementRenderer = ({
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataText = element.witnessTypeData as WitnessTypeDataText;
 					return (
-						<Figure isMainMedia={isMainMedia}>
+						<Figure
+							isMainMedia={isMainMedia}
+							roleStylesFn={roleStylesFn}
+						>
 							<WitnessTextBlockComponent
 								title={witnessTypeDataText.title}
 								description={witnessTypeDataText.description}
@@ -788,6 +838,7 @@ export const ElementRenderer = ({
 					isMainMedia={isMainMedia}
 					role={isLiveBlog ? 'inline' : element.role}
 					id={element.elementId}
+					roleStylesFn={roleStylesFn}
 				>
 					<YoutubeBlockComponent
 						format={format}
@@ -800,7 +851,6 @@ export const ElementRenderer = ({
 						isMainMedia={isMainMedia}
 						id={element.id}
 						assetId={element.assetId}
-						channelId={element.channelId}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
 						posterImage={element.posterImage}
