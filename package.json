@@ -269,9 +269,7 @@
         "moduleNameMapper": {
             "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
             "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
-            "^@root(.*)$": "<rootDir>$1",
-            "^@frontend(.*)$": "<rootDir>/src$1",
-            "^@guardian/src-foundations/(.*)(?<!cjs)$": "@guardian/src-foundations/$1/cjs"
+            "^@frontend(.*)$": "<rootDir>/src$1"
         },
         "testResultsProcessor": "jest-teamcity-reporter",
         "transformIgnorePatterns": [
