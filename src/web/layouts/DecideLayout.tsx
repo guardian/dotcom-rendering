@@ -15,6 +15,7 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
+import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
@@ -41,30 +42,28 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	};
 	const palette = decidePalette(format);
 
+	// TODO we can probably better express this as data
 	switch (display) {
 		case Display.Immersive: {
-			switch (design) {
-				case Design.Comment:
-				case Design.Editorial:
-				case Design.Letter:
-					return (
-						<ImmersiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							palette={palette}
-							format={format}
-						/>
-					);
-				default:
-					return (
-						<ImmersiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							palette={palette}
-							format={format}
-						/>
-					);
+			if (design === Design.Interactive) {
+				return (
+					<InteractiveImmersiveLayout
+						CAPI={CAPI}
+						NAV={NAV}
+						format={format}
+						palette={palette}
+					/>
+				);
 			}
+
+			return (
+				<ImmersiveLayout
+					CAPI={CAPI}
+					NAV={NAV}
+					palette={palette}
+					format={format}
+				/>
+			);
 		}
 		case Display.NumberedList:
 		case Display.Showcase: {
