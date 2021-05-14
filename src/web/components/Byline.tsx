@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
+import { Special } from '@guardian/types';
 
 type Props = {
 	text: string;
@@ -18,20 +18,17 @@ const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
 		font-style: italic;
 	`;
 
-	if (format.theme === Special.Labs && format.design === Design.PhotoEssay) {
-		textSans.large();
-	}
-
 	switch (size) {
 		case 'large': {
 			if (format.theme === Special.Labs) {
 				return css`
 					${baseStyles};
 					${textSans.large()};
-					line-height: 22px;
+					font-size: 24px;
+					line-height: 24px;
 					${until.desktop} {
 						${textSans.large()};
-						line-height: 22px;
+						line-height: 20px;
 					}
 				`;
 			}
@@ -48,9 +45,9 @@ const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
 				return css`
 					${baseStyles};
 					${textSans.large()};
-					line-height: 22px;
+					line-height: 20px;
 					${until.desktop} {
-						${textSans.large()};
+						${textSans.medium()};
 						line-height: 18px;
 					}
 				`;
@@ -67,7 +64,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
 			if (format.theme === Special.Labs) {
 				return css`
 					${baseStyles};
-					${textSans.large()};
+					${textSans.medium()};
 					line-height: 18px;
 				`;
 			}
