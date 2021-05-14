@@ -66,7 +66,7 @@ const opinionStyles = (palette: Palette, format: Format) => css`
 
 const immersiveStyles = (format: Format) => css`
 	${format.theme === Special.Labs
-		? textSans.xlarge({ lineHeight: 'tight' })
+		? textSans.large({ lineHeight: 'tight' })
 		: headline.xsmall({
 				fontWeight: 'light',
 		  })}

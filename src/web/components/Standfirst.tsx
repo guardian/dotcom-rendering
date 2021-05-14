@@ -8,7 +8,6 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Display, Design, Special } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';
-import { Format } from './Card/Card.Format.stories';
 
 type Props = {
 	format: Format;
@@ -75,7 +74,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 						${format.theme === Special.Labs
-							? textSans.large()
+							? textSans.large({ lineHeight: 'tight' })
 							: headline.xsmall({
 									fontWeight: 'light',
 							  })};
