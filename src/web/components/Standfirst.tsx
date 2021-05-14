@@ -73,11 +73,9 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						line-height: 22px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
-						${format.theme === Special.Labs
-							? textSans.large({ lineHeight: 'tight' })
-							: headline.xsmall({
-									fontWeight: 'light',
-							  })};
+						${format.theme === Special.Labs} {
+							${textSans.large({ lineHeight: 'tight' })};
+						}
 					`;
 				default:
 					return css`
