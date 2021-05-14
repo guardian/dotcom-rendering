@@ -149,6 +149,7 @@ type Props = {
 	isMainMedia: boolean;
 	role?: RoleType | 'richLink';
 	id?: string;
+	isNumberedListTitle?: boolean;
 
 	// Used to style figures based on role type. Parameterised as this varies
 	// (e.g.) on page layout.
@@ -160,6 +161,7 @@ export const Figure = ({
 	children,
 	id,
 	isMainMedia,
+	isNumberedListTitle = false,
 	roleStylesFn = defaultRoleStyles,
 }: Props) => {
 	if (isMainMedia) {
@@ -171,7 +173,13 @@ export const Figure = ({
 		return <figure id={id}>{children}</figure>;
 	}
 	return (
-		<figure id={id} className={roleStylesFn(role)}>
+		<figure
+			id={id}
+			className={roleStylesFn(role)}
+			data-spacefinder-ignore={
+				isNumberedListTitle ? 'numbered-list-title' : null
+			}
+		>
 			{children}
 		</figure>
 	);

@@ -476,6 +476,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
 				<Figure
+					isNumberedListTitle={true}
 					isMainMedia={isMainMedia}
 					id={element.elementId}
 					roleStylesFn={roleStylesFn}
