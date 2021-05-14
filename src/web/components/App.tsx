@@ -610,6 +610,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							<KnowledgeQuizAtom
 								id={quizAtom.id}
 								questions={quizAtom.questions}
+								resultGroups={quizAtom.resultGroups}
 							/>
 						)}
 					</>

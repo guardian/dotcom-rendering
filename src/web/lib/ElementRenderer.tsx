@@ -396,9 +396,9 @@ export const ElementRenderer = ({
 				>
 					<InteractiveAtom
 						id={element.id}
-						html={element.html}
-						js={element.js}
-						css={element.css}
+						elementHtml={element.html}
+						elementJs={element.js}
+						elementCss={element.css}
 					/>
 				</Figure>
 			);
@@ -560,6 +560,7 @@ export const ElementRenderer = ({
 							<KnowledgeQuizAtom
 								id={element.id}
 								questions={element.questions}
+								resultGroups={element.resultGroups}
 							/>
 						)}
 					</>
