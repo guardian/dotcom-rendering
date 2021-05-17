@@ -28,7 +28,7 @@ import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
-import { ElementRenderer } from '../lib/ElementRenderer';
+import { renderElement } from '../lib/renderElement';
 
 const hasMainMediaStyles = css`
 	height: 100vh;
@@ -114,18 +114,21 @@ const Renderer: React.FC<{
 	// );
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
-	const output = elements.map((element, index) => (
-		<ElementRenderer
-			format={format}
-			palette={palette}
-			element={element}
-			adTargeting={undefined}
-			host={host}
-			index={index}
-			isMainMedia={false}
-			roleStylesFn={() => ''} // no custom styling per role for immersive interactives!
-		/>
-	));
+	const output = elements.map((element, index) => {
+		const [ok, el] = renderElement({
+			format,
+			palette,
+			element,
+			adTargeting: undefined,
+			host,
+			index,
+			isMainMedia: false,
+		});
+
+		return ok ? (
+			<figure id={'id' in element ? element.id : undefined}>{el}</figure>
+		) : null;
+	});
 
 	return <div>{output}</div>;
 };

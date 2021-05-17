@@ -612,7 +612,8 @@ type Weighting =
 	| 'supporting'
 	| 'showcase'
 	| 'halfwidth'
-	| 'immersive';
+	| 'immersive'
+	| 'richLink'; // Note, 'richLink' is used internally but does not exist upstream.
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
 // in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
