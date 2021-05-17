@@ -674,6 +674,7 @@ interface Switches {
 
 // Used for CodeBlockElement
 type Language =
+	| 'text'
 	| 'typescript'
 	| 'javascript'
 	| 'css'
