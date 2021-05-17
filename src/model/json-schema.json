@@ -1144,8 +1144,8 @@
             },
             "required": [
                 "_type",
-                "html",
                 "elementId",
+                "html",
                 "isMandatory"
             ]
         },
