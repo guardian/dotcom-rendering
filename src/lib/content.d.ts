@@ -86,7 +86,7 @@ interface QuizAtomBlockElement {
 interface CodeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CodeBlockElement';
 	elementId: string;
-	code: string;
+	html: string;
 	isMandatory: boolean;
 	language?: Language;
 }
