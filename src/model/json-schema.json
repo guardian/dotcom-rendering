@@ -1132,7 +1132,7 @@
                 "elementId": {
                     "type": "string"
                 },
-                "code": {
+                "html": {
                     "type": "string"
                 },
                 "isMandatory": {
@@ -1144,8 +1144,8 @@
             },
             "required": [
                 "_type",
-                "code",
                 "elementId",
+                "html",
                 "isMandatory"
             ]
         },

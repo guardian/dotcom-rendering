@@ -163,7 +163,7 @@ export const ElementRenderer = ({
 		case 'model.dotcomrendering.pageElements.CodeBlockElement':
 			return (
 				<CodeBlockComponent
-					code={element.code}
+					code={element.html}
 					language={element.language}
 				/>
 			);
