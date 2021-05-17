@@ -1,7 +1,6 @@
 import React from 'react';
 import * as emotion from 'emotion';
 import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
 import * as emotionReact from '@emotion/react';
 import * as emotionReactJsxRuntime from '@emotion/react/jsx-runtime';
 
@@ -15,7 +14,7 @@ export const setAutomat = () => {
 			emotionCore,
 			emotionReact,
 			emotionReactJsxRuntime,
-			emotionTheming,
+			emotionTheming: emotionReact, // TODO: remove, theming has been moved into emotionReact
 			emotion,
 		};
 		hasAutomatBeenSet = true;

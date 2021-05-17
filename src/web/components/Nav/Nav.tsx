@@ -6,8 +6,8 @@ import { Pillars } from '@root/src/web/components/Pillars';
 import { GuardianRoundel } from '@root/src/web/components/GuardianRoundel';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
-import { ThemeProvider } from 'emotion-theming';
-import { Button, buttonReaderRevenueBrand } from '@guardian/src-button';
+import { ThemeProvider } from '@emotion/react';
+import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
 
 import { Hide } from '@frontend/web/components/Hide';
@@ -171,7 +171,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 			>
 				{format.display === Display.Immersive && (
 					<Hide when="above" breakpoint="tablet">
-						<ThemeProvider theme={buttonReaderRevenueBrand}>
+						<ThemeProvider theme={buttonReaderRevenue}>
 							<PositionButton>
 								<Button
 									priority="primary"
