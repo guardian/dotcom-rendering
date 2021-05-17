@@ -33,11 +33,11 @@ export const coreVitals = (): void => {
 		name: string;
 		value: number;
 	};
-	
+
 	const nineDigitPrecision = (value: number) => {
 		// The math functions are to make sure the length of number is <= 9
 		return Math.round(value * 1_000_000) / 1_000_000;
-	}
+	};
 
 	const addToJson = ({ name, value }: CoreVitalsArgs): void => {
 		switch (name) {
@@ -59,7 +59,7 @@ export const coreVitals = (): void => {
 		}
 
 		// Some browser ID's are not caputured (and if they have no cookie there won't be one)
-		// but there are occassions of reoccuring users without a browser ID being sent
+		// but there are occassions of reoccuring users without a browser ID being sent.
 		if (window.guardian && window.guardian.ophan) {
 			jsonData.page_view_id = window.guardian.ophan.pageViewId;
 			jsonData.browser_id = window.guardian.config.ophan.browserId;
