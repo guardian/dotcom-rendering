@@ -20,6 +20,7 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { Epic } from '@root/src/amp/components/Epic';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { StickyAd } from './StickyAd';
 
 const bulletStyle = (pillar: Theme) => css`
 	.bullet {
@@ -191,6 +192,17 @@ export const Body: React.FC<{
 			/>
 
 			{elements}
+
+			<StickyAd>
+				<Ad
+					adRegion="US"
+					edition={data.editionId}
+					section={data.sectionName || ''}
+					contentType={adInfo.contentType}
+					config={adConfig}
+					commercialProperties={adInfo.commercialProperties}
+				/>
+			</StickyAd>
 
 			{epic}
 
