@@ -2,7 +2,7 @@
 // stylelint-disable color-no-hex
 import React from 'react';
 import { css } from 'emotion';
-import Prism from 'prismjs';
+// import Prism from 'prismjs';
 
 import { space } from '@guardian/src-foundations';
 
@@ -117,18 +117,25 @@ const codeStyles = css`
 
 export const CodeBlockComponent = ({
 	code,
+	// Igoring language, while Prism.highlight is being fixed.
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	language = 'typescript',
 }: Props) => {
+
+	/*
+	Not using Prism.highlight for the moment because it's broken. Will fix shortly.
+
 	const highlighted = Prism.highlight(
 		code,
 		Prism.languages[language],
 		language,
 	);
+	*/
 
 	return (
 		<pre className={codeStyles}>
 			<code>
-				<div dangerouslySetInnerHTML={{ __html: highlighted }} />
+				<div dangerouslySetInnerHTML={{ __html: code }} />
 			</code>
 		</pre>
 	);
