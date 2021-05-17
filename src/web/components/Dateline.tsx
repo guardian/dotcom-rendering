@@ -6,7 +6,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
 const captionFont = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	color: ${text.supporting};
 `;
 

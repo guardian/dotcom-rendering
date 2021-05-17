@@ -24,7 +24,7 @@ const metaLink = css`
 	border-bottom: 1px solid ${palette.neutral[86]};
 	color: ${palette.news[400]};
 	text-decoration: none;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 `;
 
 const bodyCSS = css`

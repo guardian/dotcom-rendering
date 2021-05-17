@@ -43,7 +43,7 @@ const headingStyles = css`
 const textStyles = css`
 	${textSans.small()}
 	${until.desktop} {
-		${textSans.xsmall()}
+		${textSans.xxsmall()}
 	}
 	color: ${text.supporting};
 	padding-bottom: ${space[1]}px;
