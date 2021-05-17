@@ -1156,6 +1156,7 @@
                 "javascript",
                 "markup",
                 "scala",
+                "text",
                 "typescript"
             ],
             "type": "string"
