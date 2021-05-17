@@ -121,7 +121,6 @@ export const CodeBlockComponent = ({
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	language = 'typescript',
 }: Props) => {
-
 	/*
 	Not using Prism.highlight for the moment because it's broken. Will fix shortly.
 
