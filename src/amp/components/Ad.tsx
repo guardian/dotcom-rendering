@@ -9,6 +9,9 @@ const sizes = [
 	{ width: 250, height: 250 }, // Square
 ];
 
+// Note: amp-sticky-ad has max height of 100
+const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
+
 const adClass = css`
 	display: none;
 `;
@@ -107,6 +110,7 @@ interface CommercialConfig {
 }
 
 export const Ad = ({
+	isSticky,
 	adRegion,
 	edition,
 	section,
@@ -114,6 +118,7 @@ export const Ad = ({
 	config,
 	commercialProperties,
 }: {
+	isSticky?: boolean;
 	adRegion: AdRegion;
 	edition: Edition;
 	section: string;
@@ -121,8 +126,18 @@ export const Ad = ({
 	config: CommercialConfig;
 	commercialProperties: CommercialProperties;
 }) => {
-	const { width, height } = sizes[0]; // Set initial size to MPU
-	const multiSizes = sizes.map((e) => `${e.width}x${e.height}`).join(',');
+	let width;
+	let height;
+	let multiSizes;
+
+	if (isSticky) {
+		[{ width, height }] = stickySizes; // Set initial size to Mobile Leaderboard
+		multiSizes = stickySizes.map((e) => `${e.width}x${e.height}`).join(',');
+	} else {
+		[{ width, height }] = sizes; // Set initial size to MPU
+		multiSizes = sizes.map((e) => `${e.width}x${e.height}`).join(',');
+	}
+
 	return (
 		<amp-ad
 			class={cx(adClass, adRegionClasses[adRegion])}

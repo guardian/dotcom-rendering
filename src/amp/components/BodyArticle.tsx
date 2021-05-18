@@ -195,6 +195,7 @@ export const Body: React.FC<{
 
 			<StickyAd>
 				<Ad
+					isSticky={true}
 					adRegion="US"
 					edition={data.editionId}
 					section={data.sectionName || ''}
