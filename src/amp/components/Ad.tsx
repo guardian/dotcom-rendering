@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
 
 // Largest size first
-const sizes = [
+const inlineSizes = [
 	{ width: 300, height: 250 }, // MPU
 	{ width: 250, height: 250 }, // Square
 ];
@@ -126,17 +126,9 @@ export const Ad = ({
 	config: CommercialConfig;
 	commercialProperties: CommercialProperties;
 }) => {
-	let width;
-	let height;
-	let multiSizes;
-
-	if (isSticky) {
-		[{ width, height }] = stickySizes; // Set initial size to Mobile Leaderboard
-		multiSizes = stickySizes.map((e) => `${e.width}x${e.height}`).join(',');
-	} else {
-		[{ width, height }] = sizes; // Set initial size to MPU
-		multiSizes = sizes.map((e) => `${e.width}x${e.height}`).join(',');
-	}
+	const adSizes = isSticky ? stickySizes : inlineSizes;
+	const [{ width, height }] = adSizes; // Set initial size as first element (should be the largest)
+	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	return (
 		<amp-ad
