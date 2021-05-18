@@ -4,8 +4,6 @@ import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect } from '@guardian/bridget/Rect';
 import { Rect } from '@guardian/bridget/Rect';
 import { VideoSlot } from '@guardian/bridget/VideoSlot';
-import type { Format, Option } from '@guardian/types';
-import { none, some } from '@guardian/types';
 import { errorToString, isObject, memoise } from 'lib';
 import { logger } from 'logger';
 import {
@@ -50,22 +48,6 @@ function getRect(slotPosition: DOMRect): Rect {
 		height: slotPosition.height,
 	});
 }
-
-const getFormat: () => Option<Format> = () => {
-	const format = document.getElementById('format')?.innerHTML;
-	if (!format) {
-		return none;
-	}
-	try {
-		const parsed = (JSON.parse(format) as unknown) as Format;
-		if (!isObject(parsed)) {
-			return none;
-		}
-		return some(parsed);
-	} catch (e) {
-		return none;
-	}
-};
 
 const getTargetingParams: () => Map<string, string> = memoise(() => {
 	const content =
@@ -289,7 +271,6 @@ function sendTargetingParams(): void {
 }
 
 export {
-	getFormat,
 	ads,
 	slideshow,
 	videos,

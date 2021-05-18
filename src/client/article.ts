@@ -9,11 +9,8 @@ import {
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
-import type { Format } from '@guardian/types';
-import { Design, map, withDefault } from '@guardian/types';
 import {
 	ads,
-	getFormat,
 	reportNativeElementPositionChanges,
 	sendTargetingParams,
 	slideshow,
@@ -23,7 +20,7 @@ import setup from 'client/setup';
 import FooterContent from 'components/footerContent';
 import EpicContent from 'components/shared/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
-import { handleErrors, isObject, pipe2 } from 'lib';
+import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	discussionClient,
@@ -455,39 +452,23 @@ function richLinks(): void {
 }
 
 const init = (): void => {
-	const format = pipe2(
-		getFormat(),
-		map((format) => format),
-		withDefault<Format | null>(null),
-	);
-
-	if (format === null) {
-		return;
-	}
-
-	if (format.design === Design.Media) {
-		sendTargetingParams();
-		ads();
-		slideshow();
-	} else {
-		setup();
-		sendTargetingParams();
-		ads();
-		videos();
-		reportNativeElementPositionChanges();
-		topics();
-		slideshow();
-		formatDates();
-		footerInit();
-		insertEpic();
-		callouts();
-		renderComments();
-		hasSeenCards();
-		initAudioAtoms();
-		hydrateQuizAtoms();
-		localDates();
-		richLinks();
-	}
+	setup();
+	sendTargetingParams();
+	ads();
+	videos();
+	reportNativeElementPositionChanges();
+	topics();
+	slideshow();
+	formatDates();
+	footerInit();
+	insertEpic();
+	callouts();
+	renderComments();
+	hasSeenCards();
+	initAudioAtoms();
+	hydrateQuizAtoms();
+	localDates();
+	richLinks();
 };
 
 init();
