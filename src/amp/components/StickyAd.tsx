@@ -1,14 +1,26 @@
-import React, { ReactChild } from 'react';
+import React from 'react';
+import { Ad } from './Ad';
+import type { AdProps } from './Ad';
 
-/* A wrapper component for <Ad /> which makes the ad show in a sticky footer
-   Add to article like this:
-	<StickyAd>
-		<Ad
-			isSticky={true}
-			...
-		/>
-	</StickyAd>
-*/
-export const StickyAd = ({ children }: { children: ReactChild }) => {
-	return <amp-sticky-ad layout="nodisplay">{children}</amp-sticky-ad>;
+export const StickyAd = ({
+	adRegion,
+	edition,
+	section,
+	contentType,
+	config,
+	commercialProperties,
+}: AdProps) => {
+	return (
+		<amp-sticky-ad layout="nodisplay">
+			<Ad
+				isSticky={true}
+				adRegion={adRegion}
+				edition={edition}
+				section={section}
+				contentType={contentType}
+				config={config}
+				commercialProperties={commercialProperties}
+			/>
+		</amp-sticky-ad>
+	);
 };

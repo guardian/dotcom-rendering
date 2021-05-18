@@ -109,6 +109,16 @@ interface CommercialConfig {
 	usePermutive: boolean;
 }
 
+export interface AdProps {
+	isSticky?: boolean;
+	adRegion: AdRegion;
+	edition: Edition;
+	section: string;
+	contentType: string;
+	config: CommercialConfig;
+	commercialProperties: CommercialProperties;
+}
+
 export const Ad = ({
 	isSticky,
 	adRegion,
@@ -117,15 +127,7 @@ export const Ad = ({
 	contentType,
 	config,
 	commercialProperties,
-}: {
-	isSticky?: boolean;
-	adRegion: AdRegion;
-	edition: Edition;
-	section: string;
-	contentType: string;
-	config: CommercialConfig;
-	commercialProperties: CommercialProperties;
-}) => {
+}: AdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
 	const [{ width, height }] = adSizes; // Set initial size as first element (should be the largest)
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
