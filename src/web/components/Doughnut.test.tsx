@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Donut } from './Donut';
+import { Doughnut } from './Doughnut';
 
 const mockSections = [
 	{
@@ -15,9 +15,9 @@ const mockSections = [
 	},
 ];
 
-describe('Donut', () => {
+describe('Doughnut', () => {
 	it('should display the given labels', () => {
-		const { getByText } = render(<Donut sections={mockSections} />);
+		const { getByText } = render(<Doughnut sections={mockSections} />);
 
 		expect(getByText(mockSections[0].label)).toBeInTheDocument();
 		expect(getByText(mockSections[1].label)).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe('Donut', () => {
 
 	it('should display the given labels when sizing is customised', () => {
 		const { getByText } = render(
-			<Donut
+			<Doughnut
 				sections={mockSections}
 				percentCutout={20}
 				width={200}
@@ -38,14 +38,14 @@ describe('Donut', () => {
 	});
 
 	it('should return null if only one section is passed', () => {
-		const { container } = render(<Donut sections={[mockSections[0]]} />);
+		const { container } = render(<Doughnut sections={[mockSections[0]]} />);
 
 		expect(container.firstChild).toBeNull();
 	});
 
 	it('should handle if a section has a zero value', () => {
 		const { container, queryByText } = render(
-			<Donut
+			<Doughnut
 				sections={[
 					...mockSections,
 					{
