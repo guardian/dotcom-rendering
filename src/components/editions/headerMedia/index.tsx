@@ -4,6 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
+import { brandAltBackground } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display, none, some } from '@guardian/types';
@@ -18,7 +19,9 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
+import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
+import Video from '../video';
 
 // ----- Styles ----- //
 
@@ -47,23 +50,20 @@ const captionStyles = css`
 	}
 `;
 
-const videoWrapperStyles = css`
-	width: 100%;
-	position: relative;
-	padding-bottom: 56.25%;
-`;
-
-const videoStyles = css`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-`;
-
 const fullWidthCaptionStyles = css`
 	width: 100%;
 	height: 100%;
+`;
+
+const footballWrapperStyles: SerializedStyles = css`
+	${from.tablet} {
+		width: calc(100vw - 3.75rem);
+		background-color: ${brandAltBackground.primary};
+	}
+
+	${from.desktop} {
+		width: inherit;
+	}
 `;
 
 const getImageStyle = (
@@ -83,7 +83,7 @@ const getImageStyle = (
 
 		${from.tablet} {
 			width: calc(100vw - 3.75rem);
-			height: calc((100vw - 3.75rem) * height / width);
+			height: calc((100vw - 3.75rem) * ${height / width});
 		}
 
 		${from.desktop} {
@@ -143,8 +143,21 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				image: { nativeCaption, credit },
 			} = media;
 
+			const matchScores = 'football' in item ? item.football : none;
+
 			return (
 				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
+					{maybeRender(matchScores, (scores) => {
+						return (
+							<div css={footballWrapperStyles}>
+								<FootballScores
+									league={scores.league}
+									homeTeam={scores.homeTeam}
+									awayTeam={scores.awayTeam}
+								/>
+							</div>
+						);
+					})}
 					<Img
 						image={image}
 						sizes={getImageSizes(format)}
@@ -172,18 +185,8 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 			const {
 				video: { title, atomId },
 			} = media;
-			return (
-				<div css={videoWrapperStyles}>
-					<iframe
-						title={title}
-						css={videoStyles}
-						frameBorder="0"
-						scrolling="no"
-						allowFullScreen
-						src={`https://embed.theguardian.com/embed/atom/media/${atomId}#noadsaf`}
-					></iframe>
-				</div>
-			);
+
+			return <Video atomId={atomId} title={title} />;
 		}
 	});
 };

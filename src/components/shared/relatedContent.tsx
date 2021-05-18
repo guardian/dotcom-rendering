@@ -43,6 +43,10 @@ const RelatedContent: FC<Props> = ({ content }) => {
 	return pipe2(
 		content,
 		map(({ title, relatedItems, resizedImages }) => {
+			if (relatedItems.length === 0) {
+				return null;
+			}
+
 			return (
 				<section>
 					<h2 css={headingStyles}>{title}</h2>

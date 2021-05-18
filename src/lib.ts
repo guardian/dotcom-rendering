@@ -7,6 +7,7 @@ import {
 	map,
 	none,
 	ok,
+	ResultKind,
 	some,
 	withDefault,
 } from '@guardian/types';
@@ -61,8 +62,7 @@ const isObject = (a: unknown): a is Record<string, unknown> =>
 const maybeRender = <A>(
 	oa: Option<A>,
 	f: (a: A) => ReactElement | null,
-): ReactElement | null =>
-	pipe2(oa, map(f), withDefault<ReactElement | null>(null));
+): ReactElement | null => fold(f, null)(oa);
 
 function handleErrors(response: Response): Response | never {
 	if (!response.ok) {
@@ -83,6 +83,41 @@ const parseIntOpt = (int: string): Option<number> => {
 	return isNaN(parsed) ? none : some(parsed);
 };
 
+const resultMap3 = <A, B, C, D>(f: (a: A, b: B, c: C) => D) => <E>(
+	resultA: Result<E, A>,
+) => (resultB: Result<E, B>) => (resultC: Result<E, C>): Result<E, D> => {
+	if (resultA.kind === ResultKind.Err) {
+		return resultA;
+	}
+
+	if (resultB.kind === ResultKind.Err) {
+		return resultB;
+	}
+
+	if (resultC.kind === ResultKind.Err) {
+		return resultC;
+	}
+
+	return ok(f(resultA.value, resultB.value, resultC.value));
+};
+
+const resultMap2 = <A, B, C>(f: (a: A, b: B) => C) => <E>(
+	resultA: Result<E, A>,
+) => (resultB: Result<E, B>): Result<E, C> => {
+	if (resultA.kind === ResultKind.Err) {
+		return resultA;
+	}
+
+	if (resultB.kind === ResultKind.Err) {
+		return resultB;
+	}
+
+	return ok(f(resultA.value, resultB.value));
+};
+
+const fold = <A, B>(f: (value: A) => B, ifNone: B) => (opt: Option<A>): B => {
+	return withDefault(ifNone)(map(f)(opt));
+};
 // ----- Exports ----- //
 
 export {
@@ -101,4 +136,7 @@ export {
 	index,
 	resultFromNullable,
 	parseIntOpt,
+	resultMap2,
+	resultMap3,
+	fold,
 };

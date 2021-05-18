@@ -13,16 +13,25 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option, Result } from '@guardian/types';
-import { compose, parseIntOpt, pipe2, pipe3, resultFromNullable } from 'lib';
+import {
+	compose,
+	parseIntOpt,
+	pipe,
+	pipe2,
+	pipe3,
+	resultFromNullable,
+} from 'lib';
 import type { DocParser } from 'types/parserContext';
 
 // ----- Types ----- //
 
-const enum EmbedKind {
-	Generic,
-	Instagram,
-	Spotify,
-	YouTube,
+enum EmbedKind {
+	Generic = 'Generic',
+	Instagram = 'Instagram',
+	Spotify = 'Spotify',
+	YouTube = 'YouTube',
+	EmailSignup = 'EmailSignup',
+	TikTok = 'TikTok',
 }
 
 interface YouTube {
@@ -30,6 +39,7 @@ interface YouTube {
 	id: string;
 	width: number;
 	height: number;
+	tracking: EmbedTracksType;
 }
 
 interface Spotify {
@@ -37,16 +47,17 @@ interface Spotify {
 	src: string;
 	width: number;
 	height: number;
+	tracking: EmbedTracksType;
 }
 
 interface Instagram {
 	kind: EmbedKind.Instagram;
 	id: string;
 	caption: Option<string>;
+	tracking: EmbedTracksType;
 }
 
-interface Generic {
-	kind: EmbedKind.Generic;
+interface GenericFields {
 	alt: Option<string>;
 	html: string;
 	height: number;
@@ -56,15 +67,28 @@ interface Generic {
 	tracking: EmbedTracksType;
 }
 
+interface Generic extends GenericFields {
+	kind: EmbedKind.Generic;
+}
+
+interface TikTok extends GenericFields {
+	kind: EmbedKind.TikTok;
+}
+
+interface EmailSignup extends GenericFields {
+	kind: EmbedKind.EmailSignup;
+}
+
 /**
  * Represents any third-party embed.
  */
-type Embed = Generic | Instagram | Spotify | YouTube;
+type Embed = Generic | Instagram | Spotify | YouTube | EmailSignup | TikTok;
 
 interface IFrame {
 	src: string;
 	width: number;
 	height: number;
+	component: string;
 }
 
 // ----- Setup ----- //
@@ -85,8 +109,12 @@ const youtubeUrl = (id: string): string => {
 const getNumericAttribute = (attr: string) => (elem: Element): Option<number> =>
 	pipe2(elem.getAttribute(attr), fromNullable, andThen(parseIntOpt));
 
+const getAttribute = (attr: string) => (elem: Element): Option<string> =>
+	pipe(elem.getAttribute(attr), fromNullable);
+
 const getWidth = getNumericAttribute('width');
 const getHeight = getNumericAttribute('height');
+const getComponent = getAttribute('data-component');
 
 const iframeAttributes = (iframe: HTMLIFrameElement): Result<string, IFrame> =>
 	pipe2(
@@ -96,6 +124,7 @@ const iframeAttributes = (iframe: HTMLIFrameElement): Result<string, IFrame> =>
 			src,
 			width: withDefault(380)(getWidth(iframe)),
 			height: withDefault(300)(getHeight(iframe)),
+			component: withDefault('generic')(getComponent(iframe)),
 		})),
 	);
 
@@ -115,6 +144,15 @@ const genericHeight = (parser: DocParser): ((html: string) => number) =>
 		either(
 			(_) => 300,
 			(attrs: IFrame) => attrs.height,
+		),
+		parseIframe(parser),
+	);
+
+const isEmailSignUp = (parser: DocParser): ((html: string) => boolean) =>
+	compose(
+		either(
+			(_) => false,
+			(attrs: IFrame) => attrs.component.includes('email-embed'),
 		),
 		parseIframe(parser),
 	);
@@ -165,6 +203,10 @@ const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
 			id,
 			width: element.videoTypeData?.width ?? 380,
 			height: element.videoTypeData?.height ?? 300,
+			source: fromNullable(element.videoTypeData?.source),
+			sourceDomain: fromNullable(element.videoTypeData?.sourceDomain),
+			tracking:
+				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 		})),
 	);
 
@@ -179,6 +221,10 @@ const parseSpotifyAudio = (parser: DocParser) => (
 			src,
 			width,
 			height,
+			source: fromNullable(element.audioTypeData?.source),
+			sourceDomain: fromNullable(element.audioTypeData?.sourceDomain),
+			tracking:
+				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 		})),
 	);
 
@@ -238,8 +284,26 @@ const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 				element.instagramTypeData?.caption ??
 					element.instagramTypeData?.alt,
 			),
+			source: fromNullable(element.instagramTypeData?.source),
+			sourceDomain: fromNullable(element.instagramTypeData?.sourceDomain),
+			tracking:
+				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 		})),
 	);
+};
+
+const parseGenericEmbedKind = (parser: DocParser) => (
+	element: BlockElement,
+) => (
+	html: string,
+): EmbedKind.TikTok | EmbedKind.EmailSignup | EmbedKind.Generic => {
+	if (element.embedTypeData?.source === 'TikTok') {
+		return EmbedKind.TikTok;
+	}
+	if (isEmailSignUp(parser)(html)) {
+		return EmbedKind.EmailSignup;
+	}
+	return EmbedKind.Generic;
 };
 
 const parseGeneric = (parser: DocParser) => (
@@ -251,25 +315,31 @@ const parseGeneric = (parser: DocParser) => (
 		);
 	}
 
-	return resultMap(
-		(html: string): Generic => ({
-			kind: EmbedKind.Generic,
-			alt: fromNullable(element.embedTypeData?.alt),
-			html,
-			height: genericHeight(parser)(html),
-			mandatory: element.embedTypeData?.isMandatory ?? false,
-			source: fromNullable(element.embedTypeData?.source),
-			sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
-			// If there's no tracking information the embed does not track
-			tracking:
-				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-		}),
-	)(extractGenericHtml(element));
+	return resultMap((html: string): Generic | EmailSignup | TikTok => ({
+		kind: parseGenericEmbedKind(parser)(element)(html),
+		alt: fromNullable(element.embedTypeData?.alt),
+		html,
+		height: genericHeight(parser)(html),
+		mandatory: element.embedTypeData?.isMandatory ?? false,
+		source: fromNullable(element.embedTypeData?.source),
+		sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
+		// If there's no tracking information the embed does not track
+		tracking: element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
+	}))(extractGenericHtml(element));
 };
 
 // ----- Exports ----- //
 
-export type { Embed, Generic };
+export type {
+	Embed,
+	Generic,
+	Spotify,
+	YouTube,
+	Instagram,
+	EmailSignup,
+	TikTok,
+	GenericFields,
+};
 
 export {
 	EmbedKind,

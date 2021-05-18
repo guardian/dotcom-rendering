@@ -1,5 +1,4 @@
 // ----- Imports ----- //
-
 import 'regenerator-runtime/runtime.js';
 import {
 	AudioAtom,
@@ -9,24 +8,30 @@ import {
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
+import { either } from '@guardian/types';
 import {
 	ads,
+	getAdSlots,
 	reportNativeElementPositionChanges,
 	sendTargetingParams,
 	slideshow,
 	videos,
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
+import { createEmbedComponentFromProps } from 'components/embedWrapper';
 import FooterContent from 'components/footerContent';
 import EpicContent from 'components/shared/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
+	commercialClient,
 	discussionClient,
+	navigationClient,
 	notificationsClient,
 	userClient,
 } from 'native/nativeApi';
+import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
@@ -215,12 +220,28 @@ function renderComments(): void {
 	}
 }
 
+function footerLinks(): void {
+	const privacySettingsLink = document.getElementById('js-privacy-settings');
+	const privacyPolicyLink = document.getElementById('js-privacy-policy');
+
+	privacyPolicyLink?.addEventListener('click', (e) => {
+		e.preventDefault();
+		void navigationClient.openPrivacyPolicy();
+	});
+
+	privacySettingsLink?.addEventListener('click', (e) => {
+		e.preventDefault();
+		void navigationClient.openPrivacySettings();
+	});
+}
+
 function footerInit(): void {
 	userClient
 		.doesCcpaApply()
 		.then((isCcpa) => {
 			const comp = h(FooterContent, { isCcpa });
 			ReactDOM.render(comp, document.getElementById('js-footer'));
+			footerLinks();
 		})
 		.catch((error) => {
 			logger.error(error);
@@ -337,7 +358,7 @@ function hasSeenCards(): void {
 	void userClient.filterSeenArticles(articleIds).then((seenArticles) => {
 		seenArticles.forEach((id) => {
 			document
-				.querySelector(`.js-card[data-article-id='/${id}']`)
+				.querySelector(`.js-card[data-article-id='${id}']`)
 				?.classList.add('fade');
 		});
 	});
@@ -440,6 +461,12 @@ function richLinks(): void {
 							);
 							if (placeholder && typeof image === 'string') {
 								const img = document.createElement('img');
+								img.addEventListener('load', (_) => {
+									const currentAdSlots = getAdSlots();
+									void commercialClient.updateAdverts(
+										currentAdSlots,
+									);
+								});
 								img.setAttribute('alt', 'Related article');
 								img.setAttribute('src', image);
 								placeholder.appendChild(img);
@@ -451,24 +478,38 @@ function richLinks(): void {
 		});
 }
 
-const init = (): void => {
-	setup();
-	sendTargetingParams();
-	ads();
-	videos();
-	reportNativeElementPositionChanges();
-	topics();
-	slideshow();
-	formatDates();
-	footerInit();
-	insertEpic();
-	callouts();
-	renderComments();
-	hasSeenCards();
-	initAudioAtoms();
-	hydrateQuizAtoms();
-	localDates();
-	richLinks();
-};
+function hydrateClickToView(): void {
+	document
+		.querySelectorAll('.js-click-to-view-container')
+		.forEach((container) =>
+			either(
+				(error: string) => {
+					logger.error(
+						`Failed to create Embed for hydration: ${error}`,
+					);
+				},
+				(embedComponent: ReactElement) => {
+					ReactDOM.hydrate(embedComponent, container);
+				},
+			)(createEmbedComponentFromProps(container)),
+		);
+}
 
-init();
+setup();
+sendTargetingParams();
+ads();
+videos();
+reportNativeElementPositionChanges();
+topics();
+slideshow();
+formatDates();
+footerInit();
+insertEpic();
+callouts();
+renderComments();
+hasSeenCards();
+initAudioAtoms();
+hydrateQuizAtoms();
+localDates();
+richLinks();
+hydrateClickToView();

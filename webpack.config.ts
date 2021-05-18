@@ -122,21 +122,6 @@ const serverConfig = (
 					test: /\.tsx?$/,
 					use: [
 						{
-							loader: 'babel-loader',
-							options: {
-								presets: [
-									[
-										'@babel/preset-react',
-										{
-											runtime: 'automatic',
-											importSource: '@emotion/core',
-										},
-									],
-								],
-								plugins: ['@emotion'],
-							},
-						},
-						{
 							loader: 'ts-loader',
 							options: {
 								configFile: 'config/tsconfig.server.json',
@@ -189,14 +174,6 @@ export const clientConfig: Configuration = {
 						options: {
 							presets: [
 								[
-									'@babel/preset-react',
-									{
-										runtime: 'automatic',
-										importSource: '@emotion/core',
-									},
-								],
-
-								[
 									'@babel/preset-env',
 									{
 										// Babel recommends installing corejs as a peer dependency
@@ -211,7 +188,6 @@ export const clientConfig: Configuration = {
 									},
 								],
 							],
-							plugins: ['@emotion'],
 						},
 					},
 					{

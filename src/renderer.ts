@@ -58,7 +58,8 @@ import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
-import EmbedComponent from 'components/embed';
+import Video from 'components/editions/video';
+import { EmbedComponentWrapper } from 'components/embedWrapper';
 import HorizontalRule from 'components/horizontalRule';
 import Interactive from 'components/interactive';
 import LiveEventLink from 'components/liveEventLink';
@@ -594,6 +595,7 @@ const interactiveAtomRenderer = (
 const mediaAtomRenderer = (
 	format: Format,
 	element: MediaAtomElement,
+	isEditions: boolean,
 ): ReactNode => {
 	const { posterUrl, videoId, duration, caption } = element;
 
@@ -631,7 +633,12 @@ const mediaAtomRenderer = (
 		),
 	});
 	return styledH('figure', figureAttributes, [
-		styledH('div', attributes),
+		isEditions
+			? h(Video, {
+					atomId: element.id,
+					title: element.title,
+			  })
+			: styledH('div', attributes),
 		figcaption,
 	]);
 };
@@ -722,7 +729,10 @@ const render = (format: Format, excludeStyles = false) => (
 		}
 
 		case ElementKind.Embed:
-			return h(EmbedComponent, { embed: element.embed, editions: false });
+			return h(EmbedComponentWrapper, {
+				embed: element.embed,
+				editions: false,
+			});
 
 		case ElementKind.ExplainerAtom: {
 			return h(ExplainerAtom, { ...element });
@@ -748,7 +758,7 @@ const render = (format: Format, excludeStyles = false) => (
 			return interactiveAtomRenderer(format, element);
 
 		case ElementKind.MediaAtom:
-			return mediaAtomRenderer(format, element);
+			return mediaAtomRenderer(format, element, false);
 
 		case ElementKind.AudioAtom:
 			return audioAtomRenderer(format, element);
@@ -784,7 +794,10 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 			return h(Tweet, { content: element.content, format, key });
 
 		case ElementKind.Embed:
-			return h(EmbedComponent, { embed: element.embed, editions: true });
+			return h(EmbedComponentWrapper, {
+				embed: element.embed,
+				editions: true,
+			});
 
 		case ElementKind.ExplainerAtom:
 			return h(ExplainerAtom, { ...element });
@@ -805,7 +818,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 			return interactiveAtomRenderer(format, element);
 
 		case ElementKind.MediaAtom:
-			return mediaAtomRenderer(format, element);
+			return mediaAtomRenderer(format, element, true);
 
 		default:
 			return null;

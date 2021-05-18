@@ -59,6 +59,7 @@ const bylineImage = css`
 	background-color: ${opinion[400]};
 	float: right;
 	margin: 0 ${remSpace[2]} 0 0;
+	position: relative;
 
 	img {
 		margin: auto;
@@ -189,17 +190,16 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 	};
 
 	const img = cardImage(relatedItem);
-	const articleId = link.slice(1);
 	const date = lastModified
 		? relativeFirstPublished(fromNullable(new Date(lastModified.iso8601)))
 		: null;
 	return (
 		<li
 			className="js-card"
-			data-article-id={articleId}
+			data-article-id={link}
 			css={[listStyles(format), cardStyles]}
 		>
-			<a css={anchorStyles} href={relatedItem.link}>
+			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
 				<section css={headingWrapperStyles}>
 					<h3 css={headingStyles}>
 						<span css={commentIconStyle}>

@@ -89,6 +89,7 @@ const instagramElement = (): BodyElement => ({
 		kind: EmbedKind.Instagram,
 		id: 'embedId',
 		caption: some('<blockquote>Instagram</blockquote>'),
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
 	},
 });
 
@@ -113,7 +114,8 @@ const videoElement: BodyElement = {
 		id: 'mockYoutubeId',
 		height: 300,
 		width: 500,
-	},
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
+	}
 };
 
 const audioElement: BodyElement = {
@@ -123,7 +125,8 @@ const audioElement: BodyElement = {
 		src: 'https://www.spotify.com/',
 		height: 300,
 		width: 500,
-	},
+		tracking: EmbedTracksType.DOES_NOT_TRACK,
+	}
 };
 
 const liveEventElement = (): BodyElement => ({
@@ -525,14 +528,6 @@ describe('Renders different types of Editions elements', () => {
 		const nodes = renderEditions(tweetElement());
 		const tweet = nodes.flat()[0];
 		expect(getHtml(tweet)).toContain('twitter-tweet');
-	});
-
-	test('ElementKind.Instagram', () => {
-		const nodes = renderEditions(instagramElement());
-		const instagram = nodes.flat()[0];
-		expect(getHtml(instagram)).toBe(
-			'<iframe src="https://www.instagram.com/p/embedId/embed" height="830" title="&lt;blockquote&gt;Instagram&lt;/blockquote&gt;"></iframe>',
-		);
 	});
 
 	test('ElementKind.Embed', () => {

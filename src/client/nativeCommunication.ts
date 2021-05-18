@@ -276,4 +276,5 @@ export {
 	videos,
 	reportNativeElementPositionChanges,
 	sendTargetingParams,
+	getAdSlots,
 };

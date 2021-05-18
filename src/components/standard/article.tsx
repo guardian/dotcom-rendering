@@ -27,7 +27,6 @@ import type {
 	Standard as StandardItem,
 } from 'item';
 import { maybeRender, pipe2 } from 'lib';
-import React from 'react';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,

@@ -17,6 +17,7 @@ import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
+import type { MatchScores } from 'football';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
@@ -216,6 +217,33 @@ const body: Body = [
 	},
 ];
 
+const matchScores: MatchScores = {
+	league: 'Premier League',
+	stadium: 'The King Power Stadium',
+	status: { kind: 4 },
+	homeTeam: {
+		id: '29',
+		name: 'Leicester',
+		shortCode: 'LEI',
+		crestUri:
+			'https://i.guim.co.uk/img/sport/football/crests/29.png?w=#{width}&h=#{height}&q=#{quality}&fit=bounds&sig-ignores-params=true&s=39ec5ce46e761b69ac55204fa6c0999a',
+		score: 2,
+		scorers: [
+			{ player: 'Castagne', timeInMinutes: 50 },
+			{ player: 'Iheanacho', timeInMinutes: 80 },
+		],
+	},
+	awayTeam: {
+		id: '5',
+		name: 'Crystal Palace',
+		shortCode: 'CRY',
+		crestUri:
+			'https://i.guim.co.uk/img/sport/football/crests/5.png?w=#{width}&h=#{height}&q=#{quality}&fit=bounds&sig-ignores-params=true&s=7fd29a0f99425f2f4b0c40165b4ed23b',
+		score: 1,
+		scorers: [{ player: 'Zaha', timeInMinutes: 12 }],
+	},
+};
+
 const fields = {
 	theme: Pillar.News,
 	display: Display.Standard,
@@ -299,6 +327,13 @@ const media: Item = {
 	body: galleryBody,
 };
 
+const matchReport: Item = {
+	design: Design.MatchReport,
+	football: some(matchScores),
+	...fields,
+	body: galleryBody,
+};
+
 // ----- Exports ----- //
 
 export {
@@ -312,4 +347,5 @@ export {
 	media,
 	editorial,
 	letter,
+	matchReport,
 };
