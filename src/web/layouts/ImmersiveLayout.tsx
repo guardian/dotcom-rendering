@@ -279,6 +279,7 @@ export const ImmersiveLayout = ({
 				captionText={captionText}
 				format={format}
 				shouldLimitWidth={true}
+				isLeftCol={true}
 			/>
 		</div>
 	);
