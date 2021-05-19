@@ -76,7 +76,7 @@ export const updateRole = (el: CAPIElement, format: Format): CAPIElement => {
 
 	switch (el._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
-			if (isLiveBlog && el.role !== 'inline' && el.role !== 'thumbnail') {
+			if (isLiveBlog && el.role !== 'thumbnail') {
 				el.role = 'inline';
 			}
 
