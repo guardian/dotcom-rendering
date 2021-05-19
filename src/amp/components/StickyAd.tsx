@@ -11,7 +11,7 @@ amp-sticky-ad:before {
 	content: 'Advertisement';
 	display: block;
 	${textSans.xsmall()};
-	font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif !important;
+	font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
 	padding: 3px 10px;
 	color: ${text.supporting};
 	text-align: right;
