@@ -5,7 +5,6 @@ import { CacheProvider } from '@emotion/core';
 import { cache } from 'emotion';
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { stickyAdLabel } from '@root/src/amp/components/StickyAd';
 import he from 'he';
 
 interface RenderToStringResult {
@@ -93,7 +92,6 @@ export const document = ({
         ${getFontsCss()}
         ${resetCSS}
         ${css}
-		${stickyAdLabel}
     </style>
 
     </head>
