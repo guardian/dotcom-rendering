@@ -686,6 +686,20 @@ export const renderElement = ({
 	}
 };
 
+// bareElements is the set of element types that don't get wrapped in a Figure
+// for most article types.
+const bareElements = new Set([
+	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+	'model.dotcomrendering.pageElements.CaptionBlockElement',
+	'model.dotcomrendering.pageElements.CodeBlockElement',
+	'model.dotcomrendering.pageElements.DividerBlockElement',
+	'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+	'model.dotcomrendering.pageElements.PullquoteBlockElement',
+	'model.dotcomrendering.pageElements.StarRatingBlockElement',
+	'model.dotcomrendering.pageElements.SubheadingBlockElement',
+	'model.dotcomrendering.pageElements.TextBlockElement',
+]);
+
 // renderArticleElement is a wrapper for renderElement that wraps elements in a
 // Figure and adds metadata and (role-) styling appropriate for most article
 // types.
@@ -712,7 +726,13 @@ export const renderArticleElement = ({
 		starRating,
 	});
 
-	return ok ? (
+	if (!ok) {
+		return <></>;
+	}
+
+	const needsFigure = !bareElements.has(element._type);
+
+	return needsFigure ? (
 		<Figure
 			isMainMedia={isMainMedia}
 			id={'elementId' in element ? element.elementId : undefined}
@@ -721,6 +741,6 @@ export const renderArticleElement = ({
 			{el}
 		</Figure>
 	) : (
-		<></>
+		el
 	);
 };
