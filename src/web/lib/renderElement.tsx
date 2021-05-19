@@ -714,10 +714,12 @@ export const renderArticleElement = ({
 	isMainMedia,
 	starRating,
 }: Props): JSX.Element => {
+	const withUpdatedRole = updateRole(element, format);
+
 	const [ok, el] = renderElement({
 		format,
 		palette,
-		element,
+		element: withUpdatedRole,
 		adTargeting,
 		host,
 		index,
