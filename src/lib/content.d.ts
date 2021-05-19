@@ -86,9 +86,9 @@ interface QuizAtomBlockElement {
 interface CodeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CodeBlockElement';
 	elementId: string;
-	code: string;
+	html: string;
 	isMandatory: boolean;
-	language?: Language;
+	language?: string;
 }
 
 interface CommentBlockElement {
@@ -612,7 +612,8 @@ type Weighting =
 	| 'supporting'
 	| 'showcase'
 	| 'halfwidth'
-	| 'immersive';
+	| 'immersive'
+	| 'richLink'; // Note, 'richLink' is used internally but does not exist upstream.
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
 // in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
@@ -673,15 +674,6 @@ interface TimelineEvent {
 interface Switches {
 	[key: string]: boolean;
 }
-
-// Used for CodeBlockElement
-type Language =
-	| 'typescript'
-	| 'javascript'
-	| 'css'
-	| 'markup'
-	| 'scala'
-	| 'elm';
 
 type RatingSizeType = 'large' | 'medium' | 'small';
 

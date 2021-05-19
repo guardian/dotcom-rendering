@@ -214,7 +214,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 export interface WindowGuardian {
 	// The app contains only data that we require for app hydration
 	// NOTE: there is a divergence between DCRBrowserDocumentData and DCRServerDocumentData
-	// for perfomance reasons
+	// for performance reasons
 	app: {
 		data: DCRBrowserDocumentData;
 		cssIDs: string[];
