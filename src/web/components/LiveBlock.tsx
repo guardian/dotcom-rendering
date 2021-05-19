@@ -5,7 +5,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
 import { timeAgo } from '@guardian/libs';
 
-import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
+import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Hide } from '@root/src/web/components/Hide';
@@ -269,17 +269,16 @@ export const LiveBlock = ({
 				</aside>
 				<span>
 					{block.title && <BlockTitle title={block.title} />}
-					{headerElement && (
-						<ElementRenderer
-							isMainMedia={false}
-							adTargeting={adTargeting}
-							index={0}
-							element={headerElement}
-							format={format}
-							palette={palette}
-							host={host}
-						/>
-					)}
+					{headerElement &&
+						renderArticleElement({
+							format,
+							palette,
+							element: headerElement,
+							isMainMedia: false,
+							host,
+							adTargeting,
+							index: 0,
+						})}
 				</span>
 			</Header>
 			<main>
@@ -288,28 +287,28 @@ export const LiveBlock = ({
 					if (typesWeStretch.includes(element._type)) {
 						return (
 							<BlockMedia key={`${element._type}-${index}`}>
-								<ElementRenderer
-									isMainMedia={false}
-									adTargeting={adTargeting}
-									index={index}
-									element={element}
-									format={format}
-									palette={palette}
-									host={host}
-								/>
+								{renderArticleElement({
+									format,
+									palette,
+									element,
+									adTargeting,
+									host,
+									index,
+									isMainMedia: false,
+								})}
 							</BlockMedia>
 						);
 					}
 
 					return (
 						<BlockText key={`${element._type}-${index}`}>
-							<ElementRenderer
-								isMainMedia={false}
-								index={index}
-								element={element}
-								format={format}
-								palette={palette}
-							/>
+							{renderArticleElement({
+								format,
+								palette,
+								element,
+								isMainMedia: false,
+								index,
+							})}
 						</BlockText>
 					);
 				})}
