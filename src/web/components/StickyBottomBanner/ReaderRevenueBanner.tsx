@@ -51,6 +51,7 @@ type CanShowProps = BaseProps & {
 	asyncCountryCode: Promise<string>;
 	remoteBannerConfig: boolean;
 	section: string;
+	isPreview: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -130,10 +131,11 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
+	isPreview,
 }) => {
 	if (!remoteBannerConfig) return { result: false };
 
-	if (shouldHideReaderRevenue || isPaidContent) {
+	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
 		// We never serve Reader Revenue banners in this case
 		return { result: false };
 	}
