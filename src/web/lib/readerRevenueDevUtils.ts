@@ -15,7 +15,7 @@ import {
 	removeCookie,
 } from '@root/src/web/browser/cookie';
 import { setAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
-import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
+import { CountryCode } from '@guardian/types';
 
 const readerRevenueCookies = [
 	HIDE_SUPPORT_MESSAGING_COOKIE,

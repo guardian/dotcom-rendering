@@ -16,7 +16,7 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
-import { CountryCode } from '@guardian/libs/dist/esm/types/countries';
+import { CountryCode } from '@guardian/types';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
