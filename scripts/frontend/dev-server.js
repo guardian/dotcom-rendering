@@ -8,6 +8,8 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
+const bodyParser = require('body-parser');
+
 const { siteName, root } = require('./config');
 
 const defaultArticleURL =
@@ -34,7 +36,7 @@ const go = () => {
 	const compiler = webpack(webpackConfig);
 
 	const app = express();
-	app.use(express.json());
+	app.use(bodyParser.json({ limit: '10mb' }));
 
 	app.use(
 		`/static/${siteName}`,
