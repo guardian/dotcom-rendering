@@ -1139,7 +1139,7 @@
                     "type": "boolean"
                 },
                 "language": {
-                    "$ref": "#/definitions/Language"
+                    "type": "string"
                 }
             },
             "required": [
@@ -1148,18 +1148,6 @@
                 "html",
                 "isMandatory"
             ]
-        },
-        "Language": {
-            "enum": [
-                "css",
-                "elm",
-                "javascript",
-                "markup",
-                "scala",
-                "text",
-                "typescript"
-            ],
-            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",

@@ -88,7 +88,7 @@ interface CodeBlockElement {
 	elementId: string;
 	html: string;
 	isMandatory: boolean;
-	language?: Language;
+	language?: string;
 }
 
 interface CommentBlockElement {
@@ -671,16 +671,6 @@ interface TimelineEvent {
 interface Switches {
 	[key: string]: boolean;
 }
-
-// Used for CodeBlockElement
-type Language =
-	| 'text'
-	| 'typescript'
-	| 'javascript'
-	| 'css'
-	| 'markup'
-	| 'scala'
-	| 'elm';
 
 type RatingSizeType = 'large' | 'medium' | 'small';
 

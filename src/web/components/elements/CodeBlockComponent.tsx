@@ -8,7 +8,7 @@ import { space } from '@guardian/src-foundations';
 
 type Props = {
 	code: string;
-	language?: Language;
+	language?: string;
 };
 
 const codeStyles = css`
