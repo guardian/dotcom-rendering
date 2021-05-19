@@ -1,19 +1,19 @@
 import React from 'react';
-import { Ad } from './Ad';
-import type { AdProps } from './Ad';
 
-// This CSS is added to global styles in document.tsx, to add the Advertisment label to the sticky
-export const stickyAdLabel = `
+import { text } from '@guardian/src-foundations/palette';
+import { textSans } from '@guardian/src-foundations/typography';
+import type { AdProps } from './Ad';
+import { Ad } from './Ad';
+
+// This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisment label to the sticky
+export const stickyAdLabelCss = `
 amp-sticky-ad:before {
 	content: 'Advertisement';
 	display: block;
-	font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-	font-size: 0.75rem;
-	line-height: 1.5;
-	font-weight: 400;
-	font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
+	${textSans.xsmall()};
+	font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif !important;
 	padding: 3px 10px;
-	color: #767676;
+	color: ${text.supporting};
 	text-align: right;
 }`;
 
