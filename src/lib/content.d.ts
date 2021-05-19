@@ -86,9 +86,9 @@ interface QuizAtomBlockElement {
 interface CodeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CodeBlockElement';
 	elementId: string;
-	code: string;
+	html: string;
 	isMandatory: boolean;
-	language?: Language;
+	language?: string;
 }
 
 interface CommentBlockElement {
@@ -671,15 +671,6 @@ interface TimelineEvent {
 interface Switches {
 	[key: string]: boolean;
 }
-
-// Used for CodeBlockElement
-type Language =
-	| 'typescript'
-	| 'javascript'
-	| 'css'
-	| 'markup'
-	| 'scala'
-	| 'elm';
 
 type RatingSizeType = 'large' | 'medium' | 'small';
 

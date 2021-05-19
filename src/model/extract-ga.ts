@@ -2,7 +2,7 @@
 
 const filterTags = (
 	tags: CAPIType['tags'],
-	tagType: 'Contributor' | 'Keyword' | 'Tone' | 'Series', // Lets make a decision to keep this tag getter small and well defined, we don't really want to use tags
+	tagType: 'Contributor' | 'Keyword' | 'Tone' | 'Series', // Let’s make a decision to keep this tag getter small and well defined, we don't really want to use tags
 ): TagType['id'] | '' => {
 	const tagArr = tags.filter((tag) => tag.type === tagType);
 	const arrOfvalues =
@@ -15,7 +15,7 @@ const filterTags = (
 	return (arrOfvalues && arrOfvalues.join(',')) || '';
 };
 
-// Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that seprate
+// Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that separately
 const getCommissioningDesk = (
 	tags: CAPIType['tags'],
 ): TagType['title'] | '' => {
