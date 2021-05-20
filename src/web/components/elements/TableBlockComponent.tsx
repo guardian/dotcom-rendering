@@ -20,7 +20,7 @@ const tableEmbed = css`
 			padding: 0.5rem;
 		}
 		tr {
-			${textSans.xsmall()};
+			${textSans.xxsmall()};
 		}
 		thead {
 			tr {

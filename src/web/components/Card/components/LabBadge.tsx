@@ -25,7 +25,7 @@ const badgeWrapperStyle = css`
 
 const paidForStyle = (palette: Palette) => {
 	return css`
-		${textSans.xsmall({ fontWeight: 'bold' })}
+		${textSans.xxsmall({ fontWeight: 'bold' })}
 		color: ${palette.text.cardFooter};
 	`;
 };

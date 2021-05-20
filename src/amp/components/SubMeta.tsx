@@ -82,7 +82,7 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	color: ${text.supporting};
 	display: block;
 	margin-bottom: -3px;

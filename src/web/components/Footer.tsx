@@ -147,7 +147,7 @@ const readerRevenueLinks = css`
 `;
 
 const copyright = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	padding-left: 20px;
 	padding-right: 12px;
 	padding-top: 12px;

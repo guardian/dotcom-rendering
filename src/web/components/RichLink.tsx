@@ -162,7 +162,7 @@ const contributorImageWrapper = css`
 `;
 
 const paidForBranding = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	font-weight: bold;
 	color: ${text.supporting};
 `;
