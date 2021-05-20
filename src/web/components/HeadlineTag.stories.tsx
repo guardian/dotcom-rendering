@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Special, Pillar, Design, Display } from '@guardian/types';
 
@@ -42,7 +42,7 @@ longTagNameStory.story = { name: 'With a longer tag name' };
 export const wrappedTagNameStory = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				max-width: 400px;
 			`}
 		>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Display, Pillar } from '@guardian/types';
 
@@ -37,7 +37,7 @@ const baseBlock: Block = {
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
-			className={css`
+			css={css`
 				padding: 20px;
 				max-width: 620px;
 			`}

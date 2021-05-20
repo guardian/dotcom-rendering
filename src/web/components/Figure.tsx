@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -170,7 +170,7 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			className={defaultRoleStyles(role)}
+			css={defaultRoleStyles(role)}
 			data-spacefinder-ignore={
 				isNumberedListTitle ? 'numbered-list-title' : null
 			}

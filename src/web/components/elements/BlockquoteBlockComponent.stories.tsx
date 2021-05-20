@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
 import { Display, Design, Pillar, Special } from '@guardian/types';
@@ -22,7 +22,7 @@ const containerStyles = css`
 
 export const Unquoted = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<h1>Long</h1>
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
@@ -48,7 +48,7 @@ Unquoted.story = { name: 'Unquoted' };
 
 export const Quoted = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<h1>News</h1>
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}

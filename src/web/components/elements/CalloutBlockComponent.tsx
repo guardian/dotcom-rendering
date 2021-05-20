@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -282,21 +282,21 @@ export const CalloutBlockComponent = ({
 
 	if (submissionSuccess) {
 		return (
-			<figure data-print-layout="hide" className={wrapperStyles}>
+			<figure data-print-layout="hide" css={wrapperStyles}>
 				<details
-					className={cx(calloutDetailsStyles, backgroundColorStyle)}
+					css={[calloutDetailsStyles, backgroundColorStyle]}
 					aria-hidden={true}
 					open={isExpanded}
 				>
-					<summary className={summeryStyles}>
-						<div className={summeryContentWrapper}>
-							<div className={speechBubbleWrapperStyles}>
-								<div className={speechBubbleStyles(palette)}>
+					<summary css={summeryStyles}>
+						<div css={summeryContentWrapper}>
+							<div css={speechBubbleWrapperStyles}>
+								<div css={speechBubbleStyles(palette)}>
 									<h4>Share your story</h4>
 								</div>
 							</div>
-							<div className={headingTextStyles(palette)}>
-								<p className={successTextStyles}>
+							<div css={headingTextStyles(palette)}>
+								<p css={successTextStyles}>
 									Thank you for your contribution
 								</p>
 							</div>
@@ -308,23 +308,21 @@ export const CalloutBlockComponent = ({
 	}
 
 	return (
-		<figure data-print-layout="hide" className={wrapperStyles}>
+		<figure data-print-layout="hide" css={wrapperStyles}>
 			<details
-				className={cx(calloutDetailsStyles, {
-					[backgroundColorStyle]: isExpanded,
-				})}
+				css={[calloutDetailsStyles, isExpanded && backgroundColorStyle]}
 				aria-hidden={true}
 				open={isExpanded}
 			>
-				<summary className={summeryStyles}>
-					<div className={summeryContentWrapper}>
-						<div className={speechBubbleWrapperStyles}>
-							<div className={speechBubbleStyles(palette)}>
+				<summary css={summeryStyles}>
+					<div css={summeryContentWrapper}>
+						<div css={speechBubbleWrapperStyles}>
+							<div css={speechBubbleStyles(palette)}>
 								<h4>Share your story</h4>
 							</div>
 						</div>
-						<div className={headingTextStyles(palette)}>
-							<h4 className={headingTextHeaderStyles}>{title}</h4>
+						<div css={headingTextStyles(palette)}>
+							<h4 css={headingTextHeaderStyles}>{title}</h4>
 							{description && (
 								<div
 									dangerouslySetInnerHTML={{
@@ -335,12 +333,9 @@ export const CalloutBlockComponent = ({
 						</div>
 					</div>
 					{!isExpanded && (
-						<span
-							className={buttonWrapperStyles}
-							aria-hidden="true"
-						>
+						<span css={buttonWrapperStyles} aria-hidden="true">
 							<Button
-								className={css`
+								css={css`
 									/* TODO: need to find an nicer way of dynamically setting svg dimensions */
 									svg {
 										width: 15px !important;
@@ -366,7 +361,7 @@ export const CalloutBlockComponent = ({
 					error={error}
 				/>
 
-				<span className={buttonWrapperStyles} aria-hidden="true">
+				<span css={buttonWrapperStyles} aria-hidden="true">
 					{isExpanded && (
 						<Button
 							iconSide="left"

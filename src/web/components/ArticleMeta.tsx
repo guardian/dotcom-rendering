@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
@@ -191,7 +191,7 @@ const shouldShowContributor = (format: Format) => {
 
 const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 140px;
 			height: 140px;
 			margin-top: 6px;
@@ -215,7 +215,7 @@ const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
 
 const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: column;
 
@@ -247,8 +247,8 @@ export const ArticleMeta = ({
 
 	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
 	return (
-		<div className={metaContainer(format)}>
-			<div className={cx(meta)}>
+		<div css={metaContainer(format)}>
+			<div css={meta}>
 				{branding && <Branding branding={branding} palette={palette} />}
 				<RowBelowLeftCol>
 					<>
@@ -262,7 +262,7 @@ export const ArticleMeta = ({
 							</AvatarContainer>
 						)}
 						<div
-							className={
+							css={
 								format.theme === Special.Labs
 									? contributorTopBorder(palette)
 									: ''
@@ -283,8 +283,8 @@ export const ArticleMeta = ({
 						</div>
 					</>
 				</RowBelowLeftCol>
-				<div data-print-layout="hide" className={metaFlex}>
-					<div className={metaExtras(palette)}>
+				<div data-print-layout="hide" css={metaFlex}>
+					<div css={metaExtras(palette)}>
 						<ShareIcons
 							pageId={pageId}
 							webTitle={webTitle}
@@ -293,7 +293,7 @@ export const ArticleMeta = ({
 							size="medium"
 						/>
 					</div>
-					<div className={metaNumbers(palette)}>
+					<div css={metaNumbers(palette)}>
 						<Counts>
 							{/* The meta-number classname is needed by Counts.tsx */}
 							<div

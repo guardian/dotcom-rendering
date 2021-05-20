@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
 import { ABProvider } from '@guardian/ab-react';
@@ -38,7 +38,7 @@ const ophanRecord = () => {};
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			margin: 40px;
 			padding-top: 20px;
 			padding-left: 20px;

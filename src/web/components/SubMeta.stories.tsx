@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { Design, Display, Pillar, Special } from '@guardian/types';
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { decidePalette } from '../lib/decidePalette';
 
 import { SubMeta } from './SubMeta';
@@ -13,7 +13,7 @@ export default {
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 620px;
 			padding: 20px;
 		`}

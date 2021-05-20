@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 const contributorImage = css`
 	border-radius: 100%;
@@ -22,7 +22,7 @@ export const Avatar: React.FC<{
 		<img
 			src={imageSrc}
 			alt={imageAlt}
-			className={cx(backgroundStyles(palette), contributorImage)}
+			css={[backgroundStyles(palette), contributorImage]}
 		/>
 	);
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { LinkButton } from '@guardian/src-button';
 
 const widthOverride = css`
@@ -32,7 +32,7 @@ export const DocumentBlockComponent: React.FC<{
 	source?: string;
 }> = ({ embedUrl, title, width, height, source }) => {
 	return (
-		<div className={widthOverride}>
+		<div css={widthOverride}>
 			<iframe
 				src={embedUrl}
 				title={title}

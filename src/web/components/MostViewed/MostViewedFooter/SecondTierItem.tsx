@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -101,15 +101,11 @@ export const SecondTierItem = ({
 	const avatarToShow = avatarUrl || image;
 
 	return (
-		<div className={itemStyles(showRightBorder)}>
-			<a
-				className={headlineLink}
-				href={url}
-				data-link-name={dataLinkName}
-			>
+		<div css={itemStyles(showRightBorder)}>
+			<a css={headlineLink} href={url} data-link-name={dataLinkName}>
 				<Flex>
-					<div className={headlineStyles}>
-						<div className={titleStyles}>{title}</div>
+					<div css={headlineStyles}>
+						<div css={titleStyles}>{title}</div>
 						<LinkHeadline
 							headlineText={headlineText}
 							palette={palette}
@@ -119,15 +115,15 @@ export const SecondTierItem = ({
 						/>
 
 						{ageWarning && (
-							<div className={ageWarningStyles}>
+							<div css={ageWarningStyles}>
 								<AgeWarning age={ageWarning} size="small" />
 							</div>
 						)}
 					</div>
 					<>
 						{avatarToShow && (
-							<div className={avatarContainerStyles}>
-								<div className={avatarSizeStyles}>
+							<div css={avatarContainerStyles}>
+								<div css={avatarSizeStyles}>
 									<Avatar
 										imageSrc={avatarToShow}
 										imageAlt=""

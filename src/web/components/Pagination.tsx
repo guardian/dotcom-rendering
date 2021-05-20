@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
@@ -24,7 +24,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 	<nav
 		// Used to scroll the page to this point when using permalinks
 		id="liveblog-navigation"
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -36,7 +36,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 const Section = ({ children }: { children: React.ReactNode }) => (
 	<section
-		className={css`
+		css={css`
 			display: flex;
 			align-items: center;
 		`}
@@ -47,7 +47,7 @@ const Section = ({ children }: { children: React.ReactNode }) => (
 
 const Bold = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			font-weight: bold;
 		`}
 	>
@@ -57,7 +57,7 @@ const Bold = ({ children }: { children: React.ReactNode }) => (
 
 const Position = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 			${textSans.small()}
@@ -71,7 +71,7 @@ const Of = () => <span>&nbsp;of&nbsp;</span>;
 
 const Space = () => (
 	<div
-		className={css`
+		css={css`
 			${until.phablet} {
 				width: ${space[2]}px;
 			}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import fetchMock from 'fetch-mock';
 
 import { Design, Display, Pillar } from '@guardian/types';
@@ -26,7 +26,7 @@ export const Default = () => {
 		);
 	return (
 		<div
-			className={css`
+			css={css`
 				width: 630px;
 				padding: 15px;
 			`}

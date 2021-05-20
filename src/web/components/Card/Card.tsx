@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Special } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
@@ -118,12 +118,12 @@ const labTitleOrNot = (format: Format) => {
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
-			<div className={starWrapper}>
+			<div css={starWrapper}>
 				<StarRating rating={rating} size="small" />
 			</div>
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<div className={starWrapper}>
+			<div css={starWrapper}>
 				<StarRating rating={rating} size="medium" />
 			</div>
 		</Hide>
@@ -276,9 +276,7 @@ export const Card = ({
 								</>
 							</Flex>
 							<div
-								className={cx(
-									isFullCardImage && fullCardImageAgeStyles,
-								)}
+								css={isFullCardImage && fullCardImageAgeStyles}
 							>
 								{standfirst && (
 									<StandfirstWrapper palette={cardPalette}>

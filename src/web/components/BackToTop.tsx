@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import {
 	brandBackground,
 	brandText,
@@ -58,10 +58,10 @@ const textStyles = css`
 `;
 
 export const BackToTop: React.FC = () => (
-	<a className={link} href="#top">
-		<span className={textStyles}>Back to top</span>
-		<span className={cx('icon-container', iconContainer)}>
-			<i className={icon} />
+	<a css={link} href="#top">
+		<span css={textStyles}>Back to top</span>
+		<span css={['icon-container', iconContainer]}>
+			<i css={icon} />
 		</span>
 	</a>
 );

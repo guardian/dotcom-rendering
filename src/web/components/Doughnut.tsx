@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
@@ -171,25 +171,17 @@ export const Doughnut = ({
 				<g>
 					<path d={segment.d} fill={segment.color} />
 					<text transform={segment.transform}>
-						<tspan
-							className={labelStyles(segment.color)}
-							x="0"
-							dy="0"
-						>
+						<tspan css={labelStyles(segment.color)} x="0" dy="0">
 							{segment.label}
 						</tspan>
-						<tspan
-							className={valueStyles(segment.color)}
-							x="0"
-							dy=".9em"
-						>
+						<tspan css={valueStyles(segment.color)} x="0" dy=".9em">
 							{segment.value}
 						</tspan>
 					</text>
 				</g>
 			))}
 			<text
-				className={unitStyles}
+				css={unitStyles}
 				transform={`translate(${center.x}, ${center.y})`}
 				dy="0.4em"
 			>

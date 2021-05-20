@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
@@ -50,12 +50,12 @@ export const DividerBlockComponent = ({
 	spaceAbove = 'loose',
 }: Props) => (
 	<hr
-		className={cx(
+		css={[
 			baseStyles,
 			size === 'partial' ? sizePartialStyle : sizeFullStyle,
 			spaceAbove === 'loose'
 				? looseSpaceAboveStyle
 				: tightSpaceAboveStyle,
-		)}
+		]}
 	/>
 );

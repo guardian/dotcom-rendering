@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { Caption } from '@root/src/web/components/Caption';
 
 const responsiveAspectRatio = (height: number, width: number) => css`
@@ -40,8 +40,8 @@ export const VimeoBlockComponent: React.FC<{
 	`;
 
 	return (
-		<div className={embedContainer}>
-			<div className={responsiveAspectRatio(height, width)}>
+		<div css={embedContainer}>
+			<div css={responsiveAspectRatio(height, width)}>
 				<iframe
 					src={embedUrl}
 					title={title}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { neutral } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
@@ -42,9 +42,9 @@ export const Branding: React.FC<{
 }> = ({ branding, palette }) => {
 	if (!branding) return null;
 	return (
-		<div className={brandingStyle}>
-			<div className={brandingLabelStyle}>{branding.logo.label}</div>
-			<div className={brandingLogoStyle}>
+		<div css={brandingStyle}>
+			<div css={brandingLabelStyle}>{branding.logo.label}</div>
+			<div css={brandingLogoStyle}>
 				<a
 					href={branding.logo.link}
 					data-sponsor={branding.sponsorName.toLowerCase()}
@@ -55,10 +55,7 @@ export const Branding: React.FC<{
 				</a>
 			</div>
 
-			<a
-				href={branding.aboutThisLink}
-				className={brandingAboutLink(palette)}
-			>
+			<a href={branding.aboutThisLink} css={brandingAboutLink(palette)}>
 				About this content
 			</a>
 		</div>

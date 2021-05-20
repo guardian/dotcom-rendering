@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
 import { CommentCount } from '@frontend/web/components/CommentCount';
@@ -173,7 +173,7 @@ export const Discussion = ({
 			>
 				<Flex>
 					<div
-						className={css`
+						css={css`
 							${from.leftCol} {
 								padding-left: 10px;
 							}
@@ -182,7 +182,7 @@ export const Discussion = ({
 					>
 						<Hide when="above" breakpoint="leftCol">
 							<div
-								className={css`
+								css={css`
 									padding-bottom: ${space[2]}px;
 								`}
 							>
@@ -258,7 +258,7 @@ export const Discussion = ({
 						{!hideAd && (
 							<RightColumn>
 								<div
-									className={css`
+									css={css`
 										position: static;
 										height: 100%;
 										padding-left: 20px;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { Star } from '@frontend/static/icons/Star';
 
 // https://docs.google.com/spreadsheets/d/1QUa5Kh734J4saFc8ERjCYHZu10_-Hj7llNa2rr8urNg/edit?usp=sharing
@@ -43,20 +43,20 @@ export const StarRating: React.FC<{
 	rating: number;
 	size: RatingSizeType;
 }> = ({ rating, size }) => (
-	<div className={determineSize(size)}>
-		<div className={starWrapper}>
+	<div css={determineSize(size)}>
+		<div css={starWrapper}>
 			<Star starId={`${size}1`} isEmpty={rating < 1} />
 		</div>
-		<div className={starWrapper}>
+		<div css={starWrapper}>
 			<Star starId={`${size}2`} isEmpty={rating < 2} />
 		</div>
-		<div className={starWrapper}>
+		<div css={starWrapper}>
 			<Star starId={`${size}3`} isEmpty={rating < 3} />
 		</div>
-		<div className={starWrapper}>
+		<div css={starWrapper}>
 			<Star starId={`${size}4`} isEmpty={rating < 4} />
 		</div>
-		<div className={starWrapper}>
+		<div css={starWrapper}>
 			<Star starId={`${size}5`} isEmpty={rating < 5} />
 		</div>
 	</div>

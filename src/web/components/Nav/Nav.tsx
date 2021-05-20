@@ -1,12 +1,12 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css, ThemeProvider } from '@emotion/react';
 
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { Pillars } from '@root/src/web/components/Pillars';
 import { GuardianRoundel } from '@root/src/web/components/GuardianRoundel';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
-import { ThemeProvider } from '@emotion/react';
+
 import { Button, buttonReaderRevenue } from '@guardian/src-button';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
 
@@ -41,7 +41,7 @@ const minHeight = css`
 
 const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			margin-top: 3px;
 			z-index: 2;
 
@@ -58,7 +58,7 @@ const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
 
 const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			margin-top: ${space[1]}px;
 			margin-left: ${space[2]}px;
 		`}
@@ -69,7 +69,7 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 
 export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 	return (
-		<div className={rowStyles}>
+		<div css={rowStyles}>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
@@ -160,11 +160,11 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 				}}
 			/>
 			<nav
-				className={cx(
+				css={[
 					clearFixStyle,
 					rowStyles,
 					format.display === Display.Immersive && minHeight,
-				)}
+				]}
 				role="navigation"
 				aria-label="Guardian sections"
 				data-component="nav2"
@@ -199,7 +199,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
             */}
 				<input
 					type="checkbox"
-					className={css`
+					css={css`
 						${visuallyHidden};
 					`}
 					id={navInputCheckboxId}

@@ -1,7 +1,7 @@
 // We don't want to build our own theme from the GU palette so disable this rule
 // stylelint-disable color-no-hex
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { space } from '@guardian/src-foundations';
 
 type Props = {
@@ -51,7 +51,7 @@ export const CodeBlockComponent = ({
 	language = 'text',
 }: Props) => {
 	return (
-		<pre className={codeStyles}>
+		<pre css={codeStyles}>
 			<code>
 				<div dangerouslySetInnerHTML={{ __html: code }} />
 			</code>

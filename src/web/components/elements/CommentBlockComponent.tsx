@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { textSans } from '@guardian/src-foundations/typography';
 import { palette, space } from '@guardian/src-foundations';
@@ -79,23 +79,25 @@ export const CommentBlockComponent = ({
 	permalink,
 }: Props) => {
 	return (
-		<div className={commentWrapperStyles}>
+		<div css={commentWrapperStyles}>
 			<div
-				className={bodyContentStyles}
+				css={bodyContentStyles}
 				dangerouslySetInnerHTML={{ __html: unescapeData(body) }}
 			/>
-			<div className={profileWrapperStyles}>
+			<div css={profileWrapperStyles}>
 				<a
 					// TODO: remove avatarLink
-					className={`${avatarStyles} avatarLink`}
+					css={`
+						${avatarStyles} avatarLink
+					`}
 					href={profileURL}
 					aria-hidden="true"
 				>
-					<img className={imageStyles} src={avatarURL} alt="avatar" />
+					<img css={imageStyles} src={avatarURL} alt="avatar" />
 				</a>
-				<div className={usernameWrapperStyles}>
+				<div css={usernameWrapperStyles}>
 					<a
-						className={css`
+						css={css`
 							${textSans.medium({ fontWeight: 'bold' })};
 							width: max-content;
 						`}
@@ -106,7 +108,7 @@ export const CommentBlockComponent = ({
 					{/* TODO: remove permalink */}
 					<a href={permalink} className="permalink">
 						<time
-							className={css`
+							css={css`
 								${textSans.small()};
 							`}
 						>

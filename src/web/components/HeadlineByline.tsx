@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -110,9 +110,9 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case Display.Immersive:
 			return (
-				<div className={immersiveStyles(format)}>
+				<div css={immersiveStyles(format)}>
 					by{' '}
-					<span className={immersiveLinkStyles(palette)}>
+					<span css={immersiveLinkStyles(palette)}>
 						<BylineLink byline={byline} tags={tags} />
 					</span>
 				</div>
@@ -123,8 +123,8 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 			switch (format.design) {
 				case Design.Interview:
 					return (
-						<div className={wrapperStyles}>
-							<div className={yellowBoxStyles(format)}>
+						<div css={wrapperStyles}>
+							<div css={yellowBoxStyles(format)}>
 								<BylineLink byline={byline} tags={tags} />
 							</div>
 						</div>
@@ -134,13 +134,13 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case Design.Comment:
 					return (
 						<div
-							className={cx(opinionWrapperStyles, {
-								[authorBylineWithImage]: hasSingleContributor(
-									tags,
-								),
-							})}
+							css={[
+								opinionWrapperStyles,
+								hasSingleContributor(tags) &&
+									authorBylineWithImage,
+							]}
 						>
-							<div className={opinionStyles(palette, format)}>
+							<div css={opinionStyles(palette, format)}>
 								<BylineLink byline={byline} tags={tags} />
 							</div>
 						</div>

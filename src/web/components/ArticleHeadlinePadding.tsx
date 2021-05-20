@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design } from '@guardian/types';
 import { from } from '@guardian/src-foundations/mq';
@@ -43,5 +43,5 @@ export const ArticleHeadlinePadding: React.FC<{
 	design: Design;
 	starRating?: boolean;
 }> = ({ children, design, starRating }) => (
-	<div className={determinePadding({ design, starRating })}>{children}</div>
+	<div css={determinePadding({ design, starRating })}>{children}</div>
 );

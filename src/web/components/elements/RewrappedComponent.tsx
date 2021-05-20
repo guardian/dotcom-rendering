@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, SerializedStyles } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 // Ideally we want to want to avoid an unnecessary 'span' wrapper,
@@ -13,12 +13,12 @@ import { unescapeData } from '@root/src/lib/escapeData';
 export const RewrappedComponent = ({
 	isUnwrapped,
 	html,
-	elCss = '',
+	elCss = css``,
 	tagName,
 }: {
 	isUnwrapped: boolean;
 	html: string;
-	elCss?: string;
+	elCss?: SerializedStyles;
 	tagName: string;
 }) => {
 	const element = isUnwrapped ? tagName : 'span';

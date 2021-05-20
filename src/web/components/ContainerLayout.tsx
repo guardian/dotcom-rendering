@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Section } from '@root/src/web/components/Section';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
@@ -69,12 +69,12 @@ const Container = ({
 
 	return (
 		<div
-			className={cx(
+			css={[
 				containerStyles,
 				padded && padding,
 				verticalMargins && margins,
 				!stretchRight && rightMargin,
-			)}
+			]}
 		>
 			{children}
 		</div>

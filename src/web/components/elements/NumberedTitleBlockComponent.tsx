@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { headline } from '@guardian/src-foundations/typography';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
@@ -43,13 +43,13 @@ export const NumberedTitleBlockComponent = ({
 	const palette = decidePalette(dcrFormat);
 	return (
 		<div
-			className={css`
+			css={css`
 				margin-top: -16px; /* Hack used to align Title number closer to adjacent divider */
 			`}
 		>
-			<div className={numberStyles(palette)}>{position}</div>
+			<div css={numberStyles(palette)}>{position}</div>
 			<div
-				className={titleStyles(palette)}
+				css={titleStyles(palette)}
 				dangerouslySetInnerHTML={{ __html: html }}
 			/>
 		</div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
@@ -12,5 +12,5 @@ const stretchWrapperHeight = css`
 `;
 
 export const MostViewedRightIsland = () => (
-	<div id="most-viewed-right" className={stretchWrapperHeight} />
+	<div id="most-viewed-right" css={stretchWrapperHeight} />
 );

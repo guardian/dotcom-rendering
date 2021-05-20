@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
@@ -76,17 +76,15 @@ export const ReaderRevenueLinks: React.FC<{
 	];
 
 	return (
-		<ul className={hideDesktop} role="menu">
+		<ul css={hideDesktop} role="menu">
 			{links.map((link) => (
 				<li
 					key={link.title.toLowerCase()}
-					className={cx(mainMenuLinkStyle, {
-						[hideDesktop]: !!link.mobileOnly,
-					})}
+					css={[mainMenuLinkStyle, !!link.mobileOnly && hideDesktop]}
 					role="none"
 				>
 					<a
-						className={cx('selectableMenuItem', columnLinkTitle)}
+						css={['selectableMenuItem', columnLinkTitle]}
 						href={link.url}
 						role="menuitem"
 						data-link-name={`nav2 : secondary : ${link.longTitle}`}

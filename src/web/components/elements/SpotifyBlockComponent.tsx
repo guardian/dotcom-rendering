@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { Caption } from '@root/src/web/components/Caption';
 
 export const SpotifyBlockComponent: React.FC<{
@@ -22,7 +22,7 @@ export const SpotifyBlockComponent: React.FC<{
 	return (
 		<>
 			{embedUrl && title && width && height && (
-				<div className={embedContainer} data-cy="spotify-embed">
+				<div css={embedContainer} data-cy="spotify-embed">
 					<iframe
 						src={embedUrl}
 						title={title}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -148,12 +148,12 @@ const mobileStickyAdStyles = css`
 
 const AdSlotLabelToggled: React.FC = () => (
 	<div
-		className={cx(
+		css={[
 			'ad-slot__label',
 			'ad-slot__label--toggle',
 			'hidden',
 			adSlotLabelStyles,
-		)}
+		]}
 	>
 		Advertisement
 	</div>
@@ -168,7 +168,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					return (
 						<div
 							id="dfp-ad--right"
-							className={cx(
+							css={[
 								'js-ad-slot',
 								'ad-slot',
 								'ad-slot--right',
@@ -176,7 +176,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 								'ad-slot--rendered',
 								'js-sticky-mpu',
 								labelStyles,
-							)}
+							]}
 							data-link-name="ad slot right"
 							data-name="right"
 							// mark: 01303e88-ef1f-462d-9b6e-242419435cec
@@ -196,14 +196,14 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					const MOSTVIEWED_STICKY_HEIGHT = 1059;
 					return (
 						<div
-							className={css`
+							css={css`
 								position: static;
 								height: ${MOSTVIEWED_STICKY_HEIGHT}px;
 							`}
 						>
 							<div
 								id="dfp-ad--right"
-								className={cx(
+								css={[
 									'js-ad-slot',
 									'ad-slot',
 									'ad-slot--right',
@@ -215,7 +215,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 										top: 0;
 									`,
 									labelStyles,
-								)}
+								]}
 								data-link-name="ad slot right"
 								data-name="right"
 								// mark: 01303e88-ef1f-462d-9b6e-242419435cec
@@ -238,14 +238,14 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 		case 'comments': {
 			return (
 				<div
-					className={css`
+					css={css`
 						position: static;
 						height: 100%;
 					`}
 				>
 					<div
 						id="dfp-ad--comments"
-						className={cx(
+						css={[
 							'js-ad-slot',
 							'ad-slot',
 							'ad-slot--comments',
@@ -257,7 +257,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 								top: 0;
 							`,
 							labelStyles,
-						)}
+						]}
 						data-link-name="ad slot comments"
 						data-name="comments"
 						data-mobile={[
@@ -310,7 +310,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					<AdSlotLabelToggled />
 					<div
 						id="dfp-ad--top-above-nav"
-						className={cx(
+						css={[
 							'js-ad-slot',
 							'ad-slot',
 							'ad-slot--top-above-nav',
@@ -321,7 +321,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							`,
 							labelStyles,
 							adSlotAboveNav,
-						)}
+						]}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
 						// The sizes here come from two places in the frontend code
@@ -354,7 +354,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			return (
 				<div
 					id="dfp-ad--mostpop"
-					className={cx(
+					css={[
 						'js-ad-slot',
 						'ad-slot',
 						'ad-slot--mostpop',
@@ -364,7 +364,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							position: relative;
 						`,
 						labelStyles,
-					)}
+					]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
 					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
@@ -410,7 +410,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			return (
 				<div
 					id="dfp-ad--merchandising-high"
-					className={cx(
+					css={[
 						'js-ad-slot',
 						'ad-slot',
 						'ad-slot--merchandising-high',
@@ -418,7 +418,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							position: relative;
 						`,
 						labelStyles,
-					)}
+					]}
 					data-link-name="ad slot merchandising-high"
 					data-name="merchandising-high"
 					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
@@ -436,7 +436,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			return (
 				<div
 					id="dfp-ad--merchandising"
-					className={cx(
+					css={[
 						'js-ad-slot',
 						'ad-slot',
 						'ad-slot--merchandising',
@@ -444,7 +444,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							position: relative;
 						`,
 						labelStyles,
-					)}
+					]}
 					data-link-name="ad slot merchandising"
 					data-name="merchandising"
 					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
@@ -462,12 +462,12 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			return (
 				<div
 					id="dfp-ad--survey"
-					className={cx(
+					css={[
 						'js-ad-slot',
 						'ad-slot',
 						'ad-slot--survey',
 						outOfPageStyles,
-					)}
+					]}
 					data-link-name="ad slot survey"
 					data-name="survey"
 					data-label="false"
@@ -484,5 +484,5 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 };
 
 export const MobileStickyContainer: React.FC = () => {
-	return <div className={`mobilesticky-container ${mobileStickyAdStyles}`} />;
+	return <div css={`mobilesticky-container ${mobileStickyAdStyles}`} />;
 };

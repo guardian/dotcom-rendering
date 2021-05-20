@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 
@@ -25,7 +25,7 @@ export const HeadlineTag = ({
 	tagText: string;
 	palette: Palette;
 }) => (
-	<div className={headlineTagWrapper}>
-		<div className={headlineTagStyles(palette)}>{tagText}</div>
+	<div css={headlineTagWrapper}>
+		<div css={headlineTagStyles(palette)}>{tagText}</div>
 	</div>
 );

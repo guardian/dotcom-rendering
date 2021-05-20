@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 
 const titleStyle = css`
@@ -17,7 +17,7 @@ export const VineBlockComponent: React.FC<{
 		<>
 			{element.url && element.width && element.height && (
 				<div>
-					<div className={titleStyle}>
+					<div css={titleStyle}>
 						<p>{element.title}</p>
 					</div>
 

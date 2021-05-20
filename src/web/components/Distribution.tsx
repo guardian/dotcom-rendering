@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
@@ -18,7 +18,7 @@ type Section = {
 
 const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 		`}
@@ -39,7 +39,7 @@ const Bar = ({
 	width: number;
 }) => (
 	<div
-		className={css`
+		css={css`
 			${headline.medium({ fontWeight: 'bold' })}
 			color: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 			background: ${background};

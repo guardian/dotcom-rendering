@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
@@ -51,14 +51,14 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => {
 			<FieldLabel formField={formField} />
 			<input
 				data-testid={`form-field-${formField.id}`}
-				className={fileUploadInputStyles}
+				css={fileUploadInputStyles}
 				type="file"
 				accept="image/*, .pdf"
 				required={formField.required}
 				onChange={onSelectFile}
 			/>
 			<p>We accept images and pdfs. Maximum total file size: 6MB</p>
-			{error && <div className={errorMessagesStyles}>{error}</div>}
+			{error && <div css={errorMessagesStyles}>{error}</div>}
 		</>
 	);
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -82,7 +82,7 @@ export const ShowMoreMenu = ({ display }: { display: Display }) => (
     // @ts-ignore */}
 		<label
 			id={showMoreButtonId}
-			className={openExpandedMenuStyles(display)}
+			css={openExpandedMenuStyles(display)}
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
@@ -92,8 +92,8 @@ export const ShowMoreMenu = ({ display }: { display: Display }) => (
 			role="button"
 			data-cy="nav-show-more-button"
 		>
-			<span className={screenReadable}>Show</span>
-			<span className={showMoreTextStyles}>More</span>
+			<span css={screenReadable}>Show</span>
+			<span css={showMoreTextStyles}>More</span>
 		</label>
 		{/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */}
 	</>

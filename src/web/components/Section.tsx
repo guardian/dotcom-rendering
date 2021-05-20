@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
@@ -69,19 +69,15 @@ export const Section = ({
 	shouldCenter = true,
 	children,
 }: Props) => (
-	<section
-		className={cx(
-			backgroundColour && setBackgroundColour(backgroundColour),
-		)}
-	>
+	<section css={backgroundColour && setBackgroundColour(backgroundColour)}>
 		<div
 			id={sectionId}
-			className={cx(
+			css={[
 				shouldCenter && center,
 				showSideBorders && sideBorders(borderColour),
 				showTopBorder && topBorder(borderColour),
 				padded && padding,
-			)}
+			]}
 		>
 			{children && children}
 		</div>

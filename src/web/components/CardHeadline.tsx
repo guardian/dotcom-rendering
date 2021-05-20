@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Special } from '@guardian/types';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -139,7 +139,7 @@ export const CardHeadline = ({
 }: Props) => (
 	<>
 		<h4
-			className={cx(
+			css={[
 				format.theme === Special.Labs
 					? labTextStyles(size)
 					: fontStyles(size),
@@ -148,9 +148,9 @@ export const CardHeadline = ({
 					css`
 						line-height: 1; /* Reset line height in full image carousel */
 					`,
-			)}
+			]}
 		>
-			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
+			<span css={[isFullCardImage && fullCardImageTextStyles]}>
 				{kickerText && (
 					<Kicker
 						text={kickerText}
@@ -165,7 +165,7 @@ export const CardHeadline = ({
 				)}
 
 				<span
-					className={css`
+					css={css`
 						color: ${palette.text.cardHeadline};
 					`}
 				>

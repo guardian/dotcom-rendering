@@ -92,7 +92,7 @@ render(
 const myComponent = css`
     color: red;
 `;
-render(<div className={myComponent} />);
+render(<div css={myComponent} />);
 ```
 
 ### Extract CSS into a variable rather than defining it inline in a component
@@ -103,7 +103,7 @@ render(<div className={myComponent} />);
 // bad
 render(
     <div
-        className={css`
+        css={css`
             color: red;
         `}
     />,
@@ -113,7 +113,7 @@ render(
 const myComponent = css`
     color: red;
 `;
-render(<div className={myComponent} />);
+render(<div css={myComponent} />);
 ```
 
 ### Extract dynamic styles into a function that takes `props`
@@ -124,7 +124,7 @@ render(<div className={myComponent} />);
 // bad
 const MyComponent = ({ fontColor }) => (
     <div
-        className={css`
+        css={css`
             color: ${fontColor};
         `}
     />
@@ -135,7 +135,7 @@ const myComponent = fontColor => css`
     color: ${fontColor};
 `;
 const MyComponent = ({ fontColor }) => (
-    <div className={myComponent(fontColor)} />
+    <div css={myComponent(fontColor)} />
 );
 ```
 
@@ -169,7 +169,7 @@ const myList = css`
     }
 `;
 render(
-    <ul className={myList}>
+    <ul css={myList}>
         <li>
             <a href="#">Click me</a>
         </li>
@@ -183,7 +183,7 @@ const myLink = css`
 render(
     <ul>
         <li>
-            <a className={myLink} href="#">
+            <a css={myLink} href="#">
                 Click me
             </a>
         </li>
@@ -206,7 +206,7 @@ const activeLink = css`
     color: red;
 `;
 const MyLink = ({ isActive }) => (
-    <a className={isActive ? activeLink : link}>Click me</a>
+    <a css={isActive ? activeLink : link}>Click me</a>
 );
 
 // good
@@ -218,6 +218,6 @@ const activeLink = css`
     color: red;
 `;
 const MyLink = ({ isActive }) => (
-    <a className={cx({ [activeLink]: isActive }, link)}>Click Me</a>
+    <a css={[{ [activeLink]: isActive }, link]}>Click Me</a>
 );
 ```

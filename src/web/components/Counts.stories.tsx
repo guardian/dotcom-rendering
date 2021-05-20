@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import fetchMock from 'fetch-mock';
 
 import { Pillar, Design, Display } from '@guardian/types';
@@ -17,7 +17,7 @@ export default {
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			margin: 40px;
 		`}
 	>

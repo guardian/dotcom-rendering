@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { border } from '@guardian/src-foundations/palette';
 import { from, between, until } from '@guardian/src-foundations/mq';
 
@@ -91,16 +91,16 @@ export const LeftColumn = ({
 
 	return (
 		<section
-			className={cx(
+			css={[
 				positionRelative,
 				leftWidth(size),
 				showRightBorder && rightBorder(borderColour),
-			)}
+			]}
 		>
 			<div
-				className={cx(
+				css={[
 					shouldShowPartialBorder && partialRightBorder(borderColour),
-				)}
+				]}
 			>
 				{children}
 			</div>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { Caption } from '@root/src/web/components/Caption';
 
@@ -20,7 +20,7 @@ export const GuVideoBlockComponent: React.FC<{
 	`;
 
 	return (
-		<div className={embedContainer}>
+		<div css={embedContainer}>
 			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 
 			{caption && (

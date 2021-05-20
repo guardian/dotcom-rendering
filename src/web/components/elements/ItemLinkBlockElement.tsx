@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 
@@ -19,9 +19,6 @@ const itemLinkStyles = css`
 
 export const ItemLinkBlockElement = ({ html }: Props) => {
 	return (
-		<div
-			className={itemLinkStyles}
-			dangerouslySetInnerHTML={{ __html: html }}
-		/>
+		<div css={itemLinkStyles} dangerouslySetInnerHTML={{ __html: html }} />
 	);
 };
