@@ -327,9 +327,7 @@ const parseGenericEmbedKind = (parser: DocParser) => (
 
 const extractIdFromInstagramUrl = (url: string): string => {
 	const splitUrl = url.split('/');
-	const pIndex = splitUrl.indexOf('p');
-
-	return splitUrl[pIndex + 1];
+	return splitUrl[splitUrl.length - 2];
 };
 
 const extractInstagramId = (parser: DocParser) => (
