@@ -174,10 +174,6 @@ interface GuideAtomBlockElement {
 	html: string;
 	credit: string;
 	role?: RoleType;
-	items?: {
-		title?: string;
-		body?: string;
-	}[];
 }
 
 interface GuVideoBlockElement {
