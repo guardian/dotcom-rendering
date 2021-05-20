@@ -10,12 +10,12 @@ const brandingStyle = (pillar: Theme) => css`
 	a, a:hover {
 		display: block;
 		border-bottom: none;
-		${textSans.xxsmall()}
+		${textSans.xsmall()}
 	}
 `;
 
 const brandingLabelStyle = css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 `;
 
 const brandingLogoStyle = css`

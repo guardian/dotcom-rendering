@@ -11,7 +11,7 @@ import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
 
 const labelStyles = (palette: Palette) => css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	display: block;
 	color: ${palette.text.subMetaLabel};
 `;

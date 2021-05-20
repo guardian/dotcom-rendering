@@ -15,7 +15,7 @@ type Props = {
 const containerStyles = (palette: Palette) => css`
 	display: flex;
 	flex-direction: row;
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	padding-left: 5px;
 	padding-right: 5px;
 	color: ${palette.text.cardFooter};

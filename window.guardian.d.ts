@@ -43,8 +43,6 @@ declare global {
                 preact: any;
                 emotion: any;
                 emotionCore: any;
-				emotionReact: any;
-				emotionReactJsxRuntime: any;
                 emotionTheming: any;
             };
             readerRevenue: ReaderRevenueDevUtils;

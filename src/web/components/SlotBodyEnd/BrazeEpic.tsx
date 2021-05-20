@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { css } from 'emotion';
 
-import { either } from '@guardian/types';
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-
 import {
 	parseBrazeEpicParams,
 	EpicDataFromBraze,
 	Variant,
 } from '@root/src/web/lib/braze/parseBrazeEpicParams';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { useOnce } from '@root/src/web/lib/useOnce';
@@ -16,13 +14,13 @@ import { joinUrl } from '@root/src/lib/joinUrl';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
-import { MODULES_VERSION } from '@root/src/web/lib/contributions';
+import { either } from '@guardian/types';
 
 const wrapperMargins = css`
 	margin: 18px 0;
 `;
 
-const EPIC_COMPONENT_PATH = `/modules/${MODULES_VERSION}/epics/ContributionsEpic.js`;
+const EPIC_COMPONENT_PATH = '/modules/v1/epics/ContributionsEpic.js';
 const COMPONENT_TYPE = 'RETENTION_EPIC';
 
 type Meta = {

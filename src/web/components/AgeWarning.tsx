@@ -18,7 +18,7 @@ type Props = {
 };
 
 const ageWarningStyles = (isSmall: boolean) => css`
-	${isSmall ? textSans.xxsmall() : textSans.medium()};
+	${isSmall ? textSans.xsmall() : textSans.medium()};
 	color: ${brandAltText.primary};
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;

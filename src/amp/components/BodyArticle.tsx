@@ -70,8 +70,8 @@ const adStyle = css`
 	:before {
 		content: 'Advertisement';
 		display: block;
-		${textSans.xxsmall()};
-		/* Adverts specifcally don't use the GU font branding. */
+		${textSans.xsmall()};
+		/* Adverts specifically don't use the GU font branding. */
 		/* stylelint-disable-next-line property-blacklist */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
 			sans-serif;

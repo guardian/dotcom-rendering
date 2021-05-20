@@ -31,7 +31,7 @@ const richLink = css`
 		text-decoration: underline;
 	}
 	::before {
-		${textSans.xxsmall()};
+		${textSans.xsmall()};
 		content: 'More on this topic';
 		display: block;
 		color: ${text.supporting};

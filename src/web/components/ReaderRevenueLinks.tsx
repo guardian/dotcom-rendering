@@ -11,10 +11,7 @@ import {
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import {
-	MODULES_VERSION,
-	shouldHideSupportMessaging,
-} from '@root/src/web/lib/contributions';
+import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '@root/src/web/browser/cookie';
 import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
@@ -209,7 +206,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 				showSupportMessaging: !shouldHideSupportMessaging(),
 				edition,
 				countryCode,
-				modulesVersion: MODULES_VERSION,
+				modulesVersion: 'v1',
 				mvtId: Number(getCookie('GU_mvt_id')),
 			},
 		};

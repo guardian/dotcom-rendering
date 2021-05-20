@@ -10,7 +10,7 @@ import { BylineLink } from '@frontend/web/components/BylineLink';
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
 const twitterHandleStyles = (palette: Palette) => css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	font-weight: bold;
 	color: ${palette.text.twitterHandle};
 

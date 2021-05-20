@@ -11,7 +11,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
 	padding-top: 10px;
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	word-wrap: break-word;
 	color: ${text.supporting};
 `;

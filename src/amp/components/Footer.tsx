@@ -70,7 +70,7 @@ const copyrightContainer = css`
 `;
 
 const copyright = css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 `;
 
 const iconContainer = css`

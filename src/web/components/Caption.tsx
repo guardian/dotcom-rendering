@@ -20,9 +20,9 @@ type Props = {
 };
 
 const captionStyle = (palette: Palette) => css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	padding-top: 6px;
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	word-wrap: break-word;
 	color: ${palette.text.caption};
 `;
@@ -143,7 +143,7 @@ export const Caption = ({
 				<figcaption
 					className={cx(
 						css`
-							${textSans.xxsmall({ lineHeight: 'tight' })};
+							${textSans.xsmall({ lineHeight: 'tight' })};
 							color: ${palette.text.caption};
 							width: 100%;
 							margin-top: ${space[3]}px;

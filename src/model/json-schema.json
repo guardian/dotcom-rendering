@@ -2547,23 +2547,16 @@
                 "date": {
                     "type": "string"
                 },
-                "unixDate": {
-                    "type": "number"
-                },
                 "body": {
                     "type": "string"
                 },
                 "toDate": {
                     "type": "string"
-                },
-                "toUnixDate": {
-                    "type": "number"
                 }
             },
             "required": [
                 "date",
-                "title",
-                "unixDate"
+                "title"
             ]
         },
         "TweetBlockElement": {

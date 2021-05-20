@@ -332,9 +332,9 @@ export const renderElement = ({
 				true,
 				<InteractiveAtom
 					id={element.id}
-					elementHtml={element.html}
-					elementJs={element.js}
-					elementCss={element.css}
+					html={element.html}
+					js={element.js}
+					css={element.css}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
@@ -458,7 +458,6 @@ export const renderElement = ({
 						<KnowledgeQuizAtom
 							id={element.id}
 							questions={element.questions}
-							resultGroups={element.resultGroups}
 						/>
 					)}
 				</>,

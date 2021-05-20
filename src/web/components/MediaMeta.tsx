@@ -33,7 +33,7 @@ const iconWrapperStyles = (mediaType: MediaType, palette: Palette) => css`
 
 const durationStyles = (palette: Palette) => css`
 	color: ${palette.text.cardFooter};
-	${textSans.xxsmall({ fontWeight: `bold` })}
+	${textSans.xsmall({ fontWeight: `bold` })}
 `;
 
 const wrapperStyles = css`

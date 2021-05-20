@@ -26,7 +26,7 @@ const pillarFill = pillarMap(
 );
 
 const ageWarningCss = css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	display: inline-block;
 	margin-bottom: 12px;
 	width: 100%;
@@ -54,7 +54,7 @@ type SharingURLs = {
 
 const metaStyle = css`
 	display: block;
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
 	color: ${text.supporting};
 	padding-top: 2px;
 	margin-bottom: 6px;
