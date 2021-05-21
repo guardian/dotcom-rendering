@@ -199,7 +199,7 @@ exports[`Storyshots CommentCount Default 1`] = `
   border: none;
   background: none;
   border-left: 1px solid #DCDCDC;
-  padding-top: 0.5rem;
+  padding-top: 0.75rem;
   color: #C70000;
 }
 
@@ -312,8 +312,8 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -404,7 +404,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -452,7 +452,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -719,10 +719,10 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 .emotion-20 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-20 iframe {
@@ -732,7 +732,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 .emotion-20 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -743,8 +743,8 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
   .emotion-20 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -1525,8 +1525,8 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -1617,7 +1617,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -1665,7 +1665,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -1964,10 +1964,10 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 .emotion-23 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-23 iframe {
@@ -1977,7 +1977,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 .emotion-23 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -1988,8 +1988,8 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
   .emotion-23 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -2805,8 +2805,8 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -2897,7 +2897,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -2945,7 +2945,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -3160,10 +3160,10 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 .emotion-20 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-20 iframe {
@@ -3173,7 +3173,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
 .emotion-20 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -3184,8 +3184,8 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
   .emotion-20 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -3966,8 +3966,8 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -4058,7 +4058,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -4105,7 +4105,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   font-weight: 700;
   color: #E05E00;
   font-size: 1.0625rem;
-  padding: 0.25rem 0 0.5rem;
+  padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
 
@@ -4124,7 +4124,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -4339,10 +4339,10 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 .emotion-21 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-21 iframe {
@@ -4352,7 +4352,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 
 .emotion-21 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -4363,8 +4363,8 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 
   .emotion-21 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -5150,8 +5150,8 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -5242,7 +5242,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -5290,7 +5290,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -5505,10 +5505,10 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 .emotion-20 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-20 iframe {
@@ -5518,7 +5518,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
 .emotion-20 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -5529,8 +5529,8 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
   .emotion-20 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -6336,7 +6336,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -6376,8 +6376,8 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-9 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -6408,7 +6408,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GT Guardian Titlepiece,Georgia,serif;
   font-size: 2.625rem;
@@ -6687,10 +6687,10 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-22 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-22 iframe {
@@ -6700,7 +6700,7 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 
 .emotion-22 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -6711,8 +6711,8 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 
   .emotion-22 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -7199,7 +7199,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -7270,7 +7270,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -7359,8 +7359,8 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   justify-content: space-between;
   padding-bottom: 1rem;
   color: #121212;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -7481,8 +7481,8 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   justify-content: space-between;
   padding-bottom: 1rem;
   margin: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   border-bottom: 1px solid #DCDCDC;
 }
 
@@ -7592,10 +7592,10 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 .emotion-22 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-22 iframe {
@@ -7605,7 +7605,7 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 
 .emotion-22 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -7616,8 +7616,8 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 
   .emotion-22 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -8487,7 +8487,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -8534,7 +8534,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   font-weight: 700;
   color: #E05E00;
   font-size: 1.0625rem;
-  padding: 0.25rem 0 0.5rem;
+  padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
 
@@ -8553,7 +8553,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -8723,10 +8723,10 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 .emotion-17 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-17 iframe {
@@ -8736,7 +8736,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
 .emotion-17 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -8747,8 +8747,8 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
   .emotion-17 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -9516,8 +9516,8 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -9553,7 +9553,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 .emotion-7 {
   background-color: #FFE500;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -9661,7 +9661,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   font-size: 2.625rem;
   line-height: 1.15;
   font-weight: 700;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 .emotion-15 {
@@ -9751,18 +9751,18 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   font-size: 2.625rem;
   line-height: 1.15;
   font-weight: 700;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 @media (min-width: 660px) {
   .emotion-21 {
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
   }
 }
 
 @media (min-width: 660px) {
   .emotion-24 {
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
   }
 }
 
@@ -9846,7 +9846,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -9893,7 +9893,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   font-weight: 700;
   color: #0084C6;
   font-size: 1.0625rem;
-  padding: 0.25rem 0 0.5rem;
+  padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
 
@@ -9912,7 +9912,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -10127,10 +10127,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 .emotion-42 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-42 iframe {
@@ -10140,7 +10140,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 .emotion-42 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -10151,8 +10151,8 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
   .emotion-42 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -10728,8 +10728,8 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -10820,7 +10820,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -10904,7 +10904,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -11119,10 +11119,10 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 .emotion-26 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-26 iframe {
@@ -11132,7 +11132,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
 .emotion-26 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -11143,8 +11143,8 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
   .emotion-26 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -11999,8 +11999,8 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 .emotion-4 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -12019,7 +12019,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -12126,7 +12126,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -12360,10 +12360,10 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 .emotion-20 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .emotion-20 iframe {
@@ -12373,7 +12373,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
 .emotion-20 figcaption {
   background: #FFFFFF;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -12384,8 +12384,8 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
   .emotion-20 p {
     margin: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -13634,8 +13634,8 @@ exports[`Storyshots Editions/Byline Interview 1`] = `
   justify-content: space-between;
   padding-bottom: 1rem;
   margin: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   border-bottom: 1px solid #DCDCDC;
 }
 
@@ -13963,7 +13963,7 @@ exports[`Storyshots Editions/Byline Showcase 1`] = `
 exports[`Storyshots Editions/FootballScores Default 1`] = `
 .emotion-0 {
   background-color: #FFE500;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -14071,7 +14071,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
   font-size: 2.625rem;
   line-height: 1.15;
   font-weight: 700;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 .emotion-8 {
@@ -14145,18 +14145,18 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
   font-size: 2.625rem;
   line-height: 1.15;
   font-weight: 700;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 @media (min-width: 660px) {
   .emotion-13 {
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
   }
 }
 
 @media (min-width: 660px) {
   .emotion-16 {
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
   }
 }
 
@@ -14420,7 +14420,7 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -14595,7 +14595,7 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -14799,7 +14799,7 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   max-height: 999px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem;
+  padding: 0.75rem;
   overflow: hidden;
   padding-right: 3rem;
   z-index: 1;
@@ -15012,7 +15012,7 @@ exports[`Storyshots Editions/Headline Analysis 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -15064,7 +15064,7 @@ exports[`Storyshots Editions/Headline Comment 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -15145,7 +15145,7 @@ exports[`Storyshots Editions/Headline Default 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -15192,7 +15192,7 @@ exports[`Storyshots Editions/Headline Feature 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -15246,7 +15246,7 @@ exports[`Storyshots Editions/Headline Interview 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -15349,7 +15349,7 @@ exports[`Storyshots Editions/Headline Media 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GT Guardian Titlepiece,Georgia,serif;
   font-size: 2.625rem;
@@ -15395,7 +15395,7 @@ exports[`Storyshots Editions/Headline Review 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -15442,7 +15442,7 @@ exports[`Storyshots Editions/Headline Showcase 1`] = `
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
   padding-bottom: 1rem;
-  padding-right: 0.5rem;
+  padding-right: 0.75rem;
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
@@ -15589,7 +15589,7 @@ exports[`Storyshots Editions/Series Default 1`] = `
   font-weight: 700;
   color: #C70000;
   font-size: 1.0625rem;
-  padding: 0.25rem 0 0.5rem;
+  padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
 
@@ -15615,7 +15615,7 @@ exports[`Storyshots Editions/Series Immersive 1`] = `
   font-weight: 700;
   color: #C70000;
   font-size: 1.0625rem;
-  padding: 0.25rem 0 0.5rem;
+  padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
   position: absolute;
   left: 0;
@@ -15623,7 +15623,7 @@ exports[`Storyshots Editions/Series Immersive 1`] = `
   border: 0;
   color: #FFFFFF;
   background-color: #C70000;
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -15648,7 +15648,7 @@ exports[`Storyshots Editions/Series Interview 1`] = `
   font-weight: 700;
   color: #A1845C;
   font-size: 1.0625rem;
-  padding: 0.25rem 0 0.5rem;
+  padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
   position: absolute;
   left: 0;
@@ -15656,7 +15656,7 @@ exports[`Storyshots Editions/Series Interview 1`] = `
   border: 0;
   color: #FFFFFF;
   background-color: #A1845C;
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem 0.75rem;
 }
 
 @media (min-width: 740px) {
@@ -16408,7 +16408,7 @@ html:not(.src-focus-disabled) .emotion-4:focus {
 @media (prefers-color-scheme: dark) {
   .emotion-5 {
     background: white;
-    padding: 0.5rem;
+    padding: 0.75rem;
   }
 }
 
@@ -17114,7 +17114,7 @@ exports[`Storyshots Follow Default 1`] = `
 exports[`Storyshots FootballScores Default 1`] = `
 .emotion-0 {
   background-color: #FFE500;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .emotion-1 {
@@ -17138,7 +17138,7 @@ exports[`Storyshots FootballScores Default 1`] = `
   grid-column: 1;
   grid-row: 1;
   text-align: center;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 @media (min-width: 660px) {
@@ -17418,8 +17418,8 @@ exports[`Storyshots Footer Default 1`] = `
   font-size: 0.9375rem;
   line-height: 1.35;
   font-weight: 400;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
   padding-top: 1rem;
   padding-bottom: 1.5rem;
 }
@@ -17485,8 +17485,8 @@ exports[`Storyshots Footer With Ccpa 1`] = `
   font-size: 0.9375rem;
   line-height: 1.35;
   font-weight: 400;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
   padding-top: 1rem;
   padding-bottom: 1.5rem;
 }
@@ -17555,8 +17555,8 @@ exports[`Storyshots Headline Analysis 1`] = `
   background-color: #FFFFFF;
   padding-bottom: 2.25rem;
   margin: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.125rem;
   line-height: 1.35;
@@ -17625,8 +17625,8 @@ exports[`Storyshots Headline Default 1`] = `
   background-color: #FFFFFF;
   padding-bottom: 2.25rem;
   margin: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   font-size: 34px;
 }
 
@@ -17680,8 +17680,8 @@ exports[`Storyshots Headline Feature 1`] = `
   background-color: #FFFFFF;
   padding-bottom: 2.25rem;
   margin: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.125rem;
   line-height: 1.15;
@@ -17739,8 +17739,8 @@ exports[`Storyshots Headline Labs 1`] = `
   background-color: #FFFFFF;
   padding-bottom: 2.25rem;
   margin: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 2.125rem;
   line-height: 1.35;
@@ -17798,8 +17798,8 @@ exports[`Storyshots Headline Review 1`] = `
   background-color: #FFFFFF;
   padding-bottom: 2.25rem;
   margin: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   font-size: 34px;
 }
 
@@ -18027,13 +18027,13 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 .emotion-1 {
   background: #F6F6F6;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-top: solid 1px #999999;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   float: left;
   clear: left;
-  margin: 0.5rem 1rem 0.5rem 0;
+  margin: 0.75rem 1rem 0.75rem 0;
   width: 8.75rem;
 }
 
@@ -18209,7 +18209,7 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 .emotion-1 .js-image img {
   width: calc(100% + 1rem);
-  margin: -0.5rem 0 0 -0.5rem;
+  margin: -0.75rem 0 0 -0.75rem;
 }
 
 .emotion-1 button {
@@ -18235,7 +18235,7 @@ exports[`Storyshots Rich Link Default 1`] = `
   border: solid 1px #121212;
   padding: 4px;
   display: inline-block;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
@@ -18313,7 +18313,7 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 exports[`Storyshots Standfirst Comment 1`] = `
 .emotion-0 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #121212;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -18323,7 +18323,7 @@ exports[`Storyshots Standfirst Comment 1`] = `
 
 .emotion-0 p,
 .emotion-0 ul {
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
 }
 
 .emotion-0 address {
@@ -18353,7 +18353,7 @@ exports[`Storyshots Standfirst Comment 1`] = `
 
 exports[`Storyshots Standfirst Default 1`] = `
 .emotion-0 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #121212;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -18364,7 +18364,7 @@ exports[`Storyshots Standfirst Default 1`] = `
 
 .emotion-0 p,
 .emotion-0 ul {
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
 }
 
 .emotion-0 address {
@@ -18394,7 +18394,7 @@ exports[`Storyshots Standfirst Default 1`] = `
 
 exports[`Storyshots Standfirst Feature 1`] = `
 .emotion-0 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #121212;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -18404,7 +18404,7 @@ exports[`Storyshots Standfirst Feature 1`] = `
 
 .emotion-0 p,
 .emotion-0 ul {
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
 }
 
 .emotion-0 address {
@@ -18434,7 +18434,7 @@ exports[`Storyshots Standfirst Feature 1`] = `
 
 exports[`Storyshots Standfirst Review 1`] = `
 .emotion-0 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #121212;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -18444,7 +18444,7 @@ exports[`Storyshots Standfirst Review 1`] = `
 
 .emotion-0 p,
 .emotion-0 ul {
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
 }
 
 .emotion-0 address {
@@ -18599,7 +18599,7 @@ exports[`Storyshots Tags Default 1`] = `
   margin-bottom: 0;
   display: block;
   list-style: none;
-  padding: 0.5rem 0 1rem 0;
+  padding: 0.75rem 0 1rem 0;
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -18614,7 +18614,7 @@ exports[`Storyshots Tags Default 1`] = `
 }
 
 .emotion-1 {
-  margin: 0.5rem 0.5rem 0 0;
+  margin: 0.75rem 0.75rem 0 0;
   display: inline-block;
 }
 

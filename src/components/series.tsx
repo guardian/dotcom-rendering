@@ -25,7 +25,7 @@ const immersiveStyles = (
 	{ kicker }: ThemeStyles,
 	isLabs: boolean,
 ): SerializedStyles => css`
-	padding: ${remSpace[1]} ${remSpace[2]};
+	padding: ${remSpace[1]} ${remSpace[3]};
 	background-color: ${isLabs ? palette.labs[300] : kicker};
 	position: absolute;
 	left: 0;
@@ -39,7 +39,7 @@ const immersiveStyles = (
 
 	${from.wide} {
 		margin-left: calc(
-			((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]}
+			((100% - ${wideContentWidth}px) / 2) - ${remSpace[3]}
 		);
 	}
 `;

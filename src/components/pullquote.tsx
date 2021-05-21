@@ -24,7 +24,7 @@ const quoteStyles = (format: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
 
 	return css`
-		margin: ${remSpace[4]} 0 ${remSpace[2]} 0;
+		margin: ${remSpace[4]} 0 ${remSpace[3]} 0;
 
 		svg {
 			margin-bottom: -0.6rem;

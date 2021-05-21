@@ -52,10 +52,10 @@ const BorderStyles = css`
 
 const topBorder = css`
 	border-top: solid 1px ${neutral[86]};
-	margin-top: ${remSpace[2]};
+	margin-top: ${remSpace[3]};
 
 	${from.wide} {
-		margin-top: ${remSpace[2]};
+		margin-top: ${remSpace[3]};
 	}
 
 	${darkModeCss`

@@ -21,7 +21,7 @@ const styles = css`
 
 	+ .halfWidth,
 	+ .halfWidth + .halfWidth + .halfWidth {
-		margin-left: ${remSpace[2]};
+		margin-left: ${remSpace[3]};
 	}
 
 	+ .halfWidth + .halfWidth {

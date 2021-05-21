@@ -23,8 +23,8 @@ export const tabletImmersiveWidth = tabletBorderWidth;
 export const wideImmersiveWidth = wideBorderWidth;
 
 export const sidePadding = css`
-	padding-left: ${remSpace[2]};
-	padding-right: ${remSpace[2]};
+	padding-left: ${remSpace[3]};
+	padding-right: ${remSpace[3]};
 
 	${from.tablet} {
 		padding-left: 0;

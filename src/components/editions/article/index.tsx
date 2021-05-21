@@ -53,8 +53,8 @@ const headerStyles = css`
 `;
 
 const bodyStyles = css`
-	padding-top: ${remSpace[2]};
-	padding-bottom: ${remSpace[2]};
+	padding-top: ${remSpace[3]};
+	padding-bottom: ${remSpace[3]};
 	iframe {
 		width: 100%;
 		border: none;
@@ -62,7 +62,7 @@ const bodyStyles = css`
 
 	figcaption {
 		background: ${background.primary};
-		padding-bottom: ${remSpace[2]};
+		padding-bottom: ${remSpace[3]};
 	}
 
 	${from.tablet} {
@@ -71,8 +71,8 @@ const bodyStyles = css`
 
 		p {
 			margin: 0;
-			padding-top: ${remSpace[2]};
-			padding-bottom: ${remSpace[2]};
+			padding-top: ${remSpace[3]};
+			padding-bottom: ${remSpace[3]};
 		}
 	}
 

@@ -25,7 +25,7 @@ const ArticleBodyDarkStyles = ({
     }
     p:last-child {
         margin-bottom: 0;
-        padding-bottom: ${remSpace[2]};
+        padding-bottom: ${remSpace[3]};
     }
 `;
 

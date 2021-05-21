@@ -47,10 +47,10 @@ const teamNameStyles = css`
 
 const scoreStyles = (location: TeamLocation): SerializedStyles => css`
 	${headline.large({ fontWeight: 'bold' })}
-	margin-right: ${remSpace[2]};
+	margin-right: ${remSpace[3]};
 
 	${from.phablet} {
-		${location === TeamLocation.Away ? `margin-left: ${remSpace[2]};` : ''}
+		${location === TeamLocation.Away ? `margin-left: ${remSpace[3]};` : ''}
 	}
 `;
 
@@ -71,7 +71,7 @@ const scoreInlineStyles = css`
 
 const infoStyles = (location: TeamLocation): SerializedStyles => css`
 	${from.phablet} {
-		${location === TeamLocation.Away ? `margin-left: ${remSpace[2]};` : ''}
+		${location === TeamLocation.Away ? `margin-left: ${remSpace[3]};` : ''}
 	}
 `;
 

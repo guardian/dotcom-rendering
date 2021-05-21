@@ -41,7 +41,7 @@ const HeaderImageCaptionStyles = (
 		max-height: 999px;
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.8);
-		padding: ${remSpace[2]};
+		padding: ${remSpace[3]};
 		overflow: hidden;
 		padding-right: ${remSpace[12]};
 		z-index: 1;

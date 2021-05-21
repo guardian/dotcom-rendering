@@ -30,8 +30,8 @@ import {
 // ----- Template Specific Styles ----- //
 
 const interviewStyles = css`
-	padding-left: ${remSpace[2]};
-	padding-right: ${remSpace[2]};
+	padding-left: ${remSpace[3]};
+	padding-right: ${remSpace[3]};
 
 	${from.tablet} {
 		box-sizing: border-box;
@@ -49,14 +49,14 @@ const interviewStyles = css`
 `;
 
 const immersiveStyles = css`
-	padding-left: ${remSpace[2]};
-	padding-right: ${remSpace[2]};
+	padding-left: ${remSpace[3]};
+	padding-right: ${remSpace[3]};
 	box-sizing: border-box;
 	background-color: ${neutral[7]};
 
 	${from.tablet} {
 		padding-left: 0;
-		padding-right: ${remSpace[2]};
+		padding-right: ${remSpace[3]};
 		margin-left: ${remSpace[6]};
 		width: ${tabletImmersiveWidth}px;
 	}

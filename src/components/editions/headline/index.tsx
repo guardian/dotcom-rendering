@@ -52,7 +52,7 @@ const headlineWrapperStyles = css`
 
 const immersiveStyles = css`
 	border: 0;
-	padding-left: ${remSpace[2]};
+	padding-left: ${remSpace[3]};
 	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[6]};
 	background-color: ${neutral[7]};
@@ -122,7 +122,7 @@ const getSharedStyles = (format: Format): SerializedStyles => css`
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	padding-bottom: ${remSpace[4]};
-	padding-right: ${remSpace[2]};
+	padding-right: ${remSpace[3]};
 	margin: 0;
 `;
 

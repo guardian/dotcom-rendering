@@ -33,7 +33,7 @@ const styles = (format: Format): SerializedStyles => css`
 const immersiveStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
 	font-weight: 700;
-	padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
+	padding: ${remSpace[1]} ${remSpace[3]} ${remSpace[6]} ${remSpace[3]};
 	margin: calc(80vh - 5rem) 0 0;
 	position: relative;
 	display: inline-block;
@@ -52,9 +52,9 @@ const immersiveStyles = css`
 	${from.wide} {
 		width: 100%;
 		margin-left: calc(
-			((100% - ${wideContentWidth}px) / 2) - ${remSpace[2]}
+			((100% - ${wideContentWidth}px) / 2) - ${remSpace[3]}
 		);
-		padding-left: ${remSpace[2]};
+		padding-left: ${remSpace[3]};
 
 		span {
 			display: block;

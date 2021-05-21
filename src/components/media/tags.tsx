@@ -11,18 +11,18 @@ const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
 
 	display: block;
 	list-style: none;
-	padding: ${remSpace[2]} 0 ${remSpace[3]} 0;
+	padding: ${remSpace[3]} 0 ${remSpace[3]} 0;
 	${textSans.medium()}
 
 	li {
-		margin: ${remSpace[2]} ${remSpace[2]} ${remSpace[1]} 0;
+		margin: ${remSpace[3]} ${remSpace[3]} ${remSpace[1]} 0;
 		display: inline-block;
 		padding: ${remSpace[1]} 0;
 
 		a {
 			text-decoration: none;
 			white-space: nowrap;
-			padding: ${remSpace[2]} ${remSpace[3]};
+			padding: ${remSpace[3]} ${remSpace[3]};
 			border-radius: 30px;
 			text-overflow: ellipsis;
 			max-width: 18.75rem;

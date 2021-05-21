@@ -21,7 +21,7 @@ interface Props {
 
 const styles = css`
 	background-color: ${brandAltBackground.primary};
-	padding: ${remSpace[2]};
+	padding: ${remSpace[3]};
 
 	${from.tablet} {
 		width: ${tabletContentWidth + 5}px;

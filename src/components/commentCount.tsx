@@ -24,7 +24,7 @@ const styles = (colour: string): SerializedStyles => css`
 	border: none;
 	background: none;
 	border-left: 1px solid ${border.secondary};
-	padding-top: ${remSpace[2]};
+	padding-top: ${remSpace[3]};
 	color: ${colour};
 	${darkModeCss`
         border-left: 1px solid ${neutral[20]};

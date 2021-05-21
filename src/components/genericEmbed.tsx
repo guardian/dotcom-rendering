@@ -17,7 +17,7 @@ const styles = css`
 
 	${darkModeCss`
         background: white;
-        padding: ${remSpace[2]};
+        padding: ${remSpace[3]};
     `}
 `;
 

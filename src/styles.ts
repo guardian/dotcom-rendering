@@ -13,8 +13,8 @@ import { Design, map, none, some, withDefault } from '@guardian/types';
 import { pipe2 } from 'lib';
 
 export const sidePadding = css`
-	padding-left: ${remSpace[2]};
-	padding-right: ${remSpace[2]};
+	padding-left: ${remSpace[3]};
+	padding-right: ${remSpace[3]};
 
 	${from.wide} {
 		padding-left: 0;
@@ -88,7 +88,7 @@ export const lineStyles = css`
 
 export const onwardStyles: SerializedStyles = css`
 	background: ${neutral[97]};
-	margin: ${remSpace[2]};
+	margin: ${remSpace[3]};
 
 	${darkModeCss`
         background: ${background.inverse};
@@ -127,7 +127,7 @@ export const adStyles = (format: Format): SerializedStyles => {
 
 			.ad-labels {
 				${textSans.xsmall()}
-				padding: ${remSpace[2]};
+				padding: ${remSpace[3]};
 				float: left;
 				width: calc(100% - ${remSpace[4]});
 
@@ -149,7 +149,7 @@ export const adStyles = (format: Format): SerializedStyles => {
 			}
 
 			.upgrade-banner {
-				padding: ${remSpace[2]};
+				padding: ${remSpace[3]};
 				background-color: ${brandAltBackground.primary};
 
 				h1 {
@@ -163,7 +163,7 @@ export const adStyles = (format: Format): SerializedStyles => {
 			}
 
 			${until.phablet} {
-				margin: 1em -${remSpace[2]};
+				margin: 1em -${remSpace[3]};
 			}
 
 			${from.desktop} {

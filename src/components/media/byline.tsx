@@ -18,7 +18,7 @@ import { renderText } from '../../renderer';
 
 const styles: SerializedStyles = css`
 	.author {
-		margin: ${remSpace[2]} 0 ${remSpace[3]} 0;
+		margin: ${remSpace[3]} 0 ${remSpace[3]} 0;
 		color: ${neutral[86]};
 
 		.follow,

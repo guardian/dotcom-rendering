@@ -133,7 +133,7 @@ const transform = (text: string, format: Format): ReactElement | string => {
 
 const listStyles: SerializedStyles = css`
 	list-style: none;
-	margin: ${remSpace[2]} 0;
+	margin: ${remSpace[3]} 0;
 	padding-left: 0;
 	clear: both;
 `;
@@ -149,7 +149,7 @@ const listItemStyles = (format: Format): SerializedStyles[] => {
 			border-radius: 0.5rem;
 			height: 1rem;
 			width: 1rem;
-			margin-right: ${remSpace[2]};
+			margin-right: ${remSpace[3]};
 			background-color: ${neutral[86]};
 			margin-left: -${remSpace[6]};
 			vertical-align: middle;

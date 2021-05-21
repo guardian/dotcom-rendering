@@ -58,7 +58,7 @@ const bylineImage = css`
 	contain: paint;
 	background-color: ${opinion[400]};
 	float: right;
-	margin: 0 ${remSpace[2]} 0 0;
+	margin: 0 ${remSpace[3]} 0 0;
 	position: relative;
 
 	img {
@@ -81,13 +81,13 @@ const anchorStyles = css`
 `;
 
 const headingWrapperStyles = css`
-	padding: ${remSpace[2]};
+	padding: ${remSpace[3]};
 	min-height: 10rem;
 `;
 
 const headingStyles: SerializedStyles = css`
 	${headline.xxsmall()}
-	margin: 0 0 ${remSpace[2]} 0;
+	margin: 0 0 ${remSpace[3]} 0;
 `;
 
 const cardStyles: SerializedStyles = css`
@@ -143,7 +143,7 @@ const dateStyles = css`
 	display: inline-block;
 	vertical-align: top;
 	float: right;
-	margin-right: ${remSpace[2]};
+	margin-right: ${remSpace[3]};
 	align-self: flex-end;
 `;
 
@@ -159,7 +159,7 @@ const lineStyles = css`
 	background-size: 1px calc(0.75rem + 1px);
 	height: calc(0.75rem + 1px);
 	flex-grow: 1;
-	margin-right: ${remSpace[2]};
+	margin-right: ${remSpace[3]};
 	align-self: flex-end;
 	${darkModeCss`
         background-image: repeating-linear-gradient(${neutral[20]}, ${neutral[20]} 1px, transparent 1px, transparent 0.25rem);

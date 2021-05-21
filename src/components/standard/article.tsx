@@ -72,7 +72,7 @@ const itemStyles = (item: Item): SerializedStyles => {
 					display: inline-block;
 					font-weight: 900;
 					float: left;
-					margin-right: ${remSpace[2]};
+					margin-right: ${remSpace[3]};
 
 					${darkModeCss`
                         color: ${inverted};

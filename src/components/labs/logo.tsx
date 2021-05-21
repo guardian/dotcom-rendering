@@ -22,7 +22,7 @@ const styles = css`
 	${darkModeCss`
         color: ${neutral[60]};
         img {
-            padding: ${remSpace[2]};
+            padding: ${remSpace[3]};
             background: ${neutral[86]};
         }
 

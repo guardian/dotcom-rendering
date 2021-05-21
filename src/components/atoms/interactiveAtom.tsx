@@ -35,7 +35,7 @@ const atomCss = `
     @media (prefers-color-scheme: dark) {
         body {
             background: white;
-            padding: ${remSpace[2]} !important;
+            padding: ${remSpace[3]} !important;
         } 
     }`;
 const atomScript = `

@@ -14,8 +14,8 @@ import { darkModeCss } from 'styles';
 const styles = css`
 	border-width: 0 1px;
 	${textSans.small({ lineHeight: 'regular' })};
-	margin-left: ${remSpace[2]};
-	margin-right: ${remSpace[2]};
+	margin-left: ${remSpace[3]};
+	margin-right: ${remSpace[3]};
 	padding-top: ${remSpace[4]};
 	padding-bottom: ${remSpace[6]};
 

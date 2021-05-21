@@ -34,7 +34,7 @@ interface Props {
 const notImplemented = (
 	<p
 		css={css`
-			padding: 0 ${remSpace[2]};
+			padding: 0 ${remSpace[3]};
 		`}
 	>
 		Content format not implemented yet
