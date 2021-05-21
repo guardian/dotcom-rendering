@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 
 import {

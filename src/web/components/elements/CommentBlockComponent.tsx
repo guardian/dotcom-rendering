@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { textSans } from '@guardian/src-foundations/typography';

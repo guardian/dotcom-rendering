@@ -23,8 +23,6 @@
     "React wrapper component": {
         "prefix": "rw",
         "body": [
-            "import React from 'react';",
-            "",
             "type Props = {",
             "  children: React.ReactNode;",
             "}",

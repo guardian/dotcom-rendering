@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';

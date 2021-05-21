@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 
 import { CodeBlockComponent } from './CodeBlockComponent';

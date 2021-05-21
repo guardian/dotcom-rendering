@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { Design, Display, Pillar, Special } from '@guardian/types';
-import React from 'react';
+
 import { css } from 'emotion';
 import { decidePalette } from '../lib/decidePalette';
 

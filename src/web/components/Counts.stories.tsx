@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import fetchMock from 'fetch-mock';
 

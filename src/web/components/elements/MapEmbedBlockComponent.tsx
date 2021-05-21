@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';

@@ -1,5 +1,4 @@
 import { border, labs } from '@guardian/src-foundations';
-import React from 'react';
 
 import { LabsHeader } from './LabsHeader';
 import { Section } from './Section';

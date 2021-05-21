@@ -1,4 +1,3 @@
-import React from 'react';
 import fetchMock from 'fetch-mock';
 
 import { Design, Display, Pillar } from '@guardian/types';
