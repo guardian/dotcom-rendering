@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { text, border, neutral, news } from '@guardian/src-foundations/palette';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { NumberedTitleBlockComponent } from './NumberedTitleBlockComponent';
 
 export default {

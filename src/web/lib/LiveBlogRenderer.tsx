@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { LiveBlock } from '../components/LiveBlock';
 
 type Props = {

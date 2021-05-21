@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 import { between, from, until } from '@guardian/src-foundations/mq';
 import { Contributor } from '@root/src/web/components/Contributor';

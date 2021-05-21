@@ -1,5 +1,5 @@
 import { Design, Display, Pillar, Special } from '@guardian/types';
-import React from 'react';
+
 import { decidePalette } from '../lib/decidePalette';
 
 import { GuardianLines } from './GuardianLines';

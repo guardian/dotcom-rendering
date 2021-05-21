@@ -1,6 +1,6 @@
 // We don't want to build our own theme from the GU palette so disable this rule
 // stylelint-disable color-no-hex
-import React from 'react';
+
 import { css } from 'emotion';
 import { space } from '@guardian/src-foundations';
 

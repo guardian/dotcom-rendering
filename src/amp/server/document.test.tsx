@@ -1,5 +1,4 @@
 import validator from 'amphtml-validator';
-import React from 'react';
 import { Article as CAPI } from '@root/fixtures/generated/articles/Article';
 import { Article } from '@root/src/amp/pages/Article';
 import { extractNAV } from '@root/src/model/extract-nav';

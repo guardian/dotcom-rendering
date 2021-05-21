@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';

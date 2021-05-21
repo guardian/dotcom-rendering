@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { TextArea as SourceTextArea } from '@guardian/src-text-area';

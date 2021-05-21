@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
 import {
 	canShowRRBanner,

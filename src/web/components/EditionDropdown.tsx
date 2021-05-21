@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { Dropdown } from '@root/src/web/components/Dropdown';

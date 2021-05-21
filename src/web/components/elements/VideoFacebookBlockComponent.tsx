@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { Caption } from '@root/src/web/components/Caption';
