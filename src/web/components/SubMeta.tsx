@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import { space } from '@guardian/src-foundations';
@@ -11,7 +10,7 @@ import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
 
 const labelStyles = (palette: Palette) => css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	display: block;
 	color: ${palette.text.subMetaLabel};
 `;

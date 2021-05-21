@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -66,7 +65,7 @@ const opinionStyles = (palette: Palette, format: Format) => css`
 
 const immersiveStyles = (format: Format) => css`
 	${format.theme === Special.Labs
-		? textSans.xlarge({ lineHeight: 'tight' })
+		? textSans.large({ lineHeight: 'tight' })
 		: headline.xsmall({
 				fontWeight: 'light',
 		  })}

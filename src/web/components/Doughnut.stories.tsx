@@ -1,11 +1,10 @@
-import React from 'react';
 import { css } from 'emotion';
 
-import { Donut } from './Donut';
+import { Doughnut } from './Doughnut';
 
 export default {
-	component: Donut,
-	title: 'Components/Donut',
+	component: Doughnut,
+	title: 'Components/Doughnut',
 };
 
 const ninetyNineToOne = [
@@ -66,7 +65,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const NinetyNineToOne = () => {
 	return (
 		<Container>
-			<Donut sections={ninetyNineToOne} />
+			<Doughnut sections={ninetyNineToOne} />
 		</Container>
 	);
 };
@@ -75,7 +74,7 @@ NinetyNineToOne.story = { name: 'with one section at 99 and the other at 1' };
 export const Two = () => {
 	return (
 		<Container>
-			<Donut sections={twoSections} />
+			<Doughnut sections={twoSections} />
 		</Container>
 	);
 };
@@ -84,7 +83,7 @@ Two.story = { name: 'with two sections' };
 export const Three = () => {
 	return (
 		<Container>
-			<Donut sections={threeSections} />
+			<Doughnut sections={threeSections} />
 		</Container>
 	);
 };
@@ -93,7 +92,7 @@ Three.story = { name: 'with three sections' };
 export const Smaller = () => {
 	return (
 		<Container>
-			<Donut
+			<Doughnut
 				sections={twoSections}
 				percentCutout={20}
 				width={200}

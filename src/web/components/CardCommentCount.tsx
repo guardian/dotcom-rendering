@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
@@ -15,7 +14,7 @@ type Props = {
 const containerStyles = (palette: Palette) => css`
 	display: flex;
 	flex-direction: row;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	padding-left: 5px;
 	padding-right: 5px;
 	color: ${palette.text.cardFooter};

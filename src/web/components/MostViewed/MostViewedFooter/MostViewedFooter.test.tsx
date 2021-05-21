@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import { Design, Display, Pillar } from '@guardian/types';

@@ -51,7 +51,7 @@ const updateButtonStyle = css`
 		background-color: ${palette.news[400]};
 		color: ${palette.neutral[100]};
 		font-weight: bold;
-		${textSans.xsmall()};
+		${textSans.xxsmall()};
 
 		display: flex;
 		justify-content: space-between;

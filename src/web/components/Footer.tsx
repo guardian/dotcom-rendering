@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import {
@@ -147,7 +146,7 @@ const readerRevenueLinks = css`
 `;
 
 const copyright = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	padding-left: 20px;
 	padding-right: 12px;
 	padding-top: 12px;

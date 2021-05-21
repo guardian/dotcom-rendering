@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { space } from '@guardian/src-foundations';
@@ -12,7 +11,6 @@ import { until } from '@guardian/src-foundations/mq';
 import { Hide } from './Hide';
 
 type Props = {
-	format: Format;
 	currentPage: number;
 	totalPages: number;
 	newest?: string;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
@@ -9,7 +8,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Hide } from '@root/src/web/components/Hide';
 
-import { Donut } from '@frontend/web/components/Donut';
+import { Doughnut } from '@frontend/web/components/Doughnut';
 import { Distribution } from '@frontend/web/components/Distribution';
 import { GoalAttempts } from '@frontend/web/components/GoalAttempts';
 import { Lineup } from '@frontend/web/components/Lineup';
@@ -191,7 +190,7 @@ export const MatchStats = ({ home, away }: Props) => (
 				<RightBorder>
 					<H4>Possession</H4>
 					<Center>
-						<Donut
+						<Doughnut
 							sections={[
 								{
 									value: home.possession,

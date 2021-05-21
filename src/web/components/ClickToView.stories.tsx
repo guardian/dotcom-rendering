@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React from 'react';
+
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Display, Design, Pillar } from '@guardian/types';
@@ -480,6 +480,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={facebookEmbed.html}
+							alt={facebookEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -500,6 +501,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={vimeoEmbedEmbed.html}
+							alt={vimeoEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -520,6 +522,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={youtubeEmbedEmbed.html}
+							alt={youtubeEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -540,6 +543,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={spotifyEmbedEmbed.html}
+							alt={spotifyEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -560,6 +564,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={bandcampEmbedEmbed.html}
+							alt={bandcampEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -580,6 +585,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={ourworldindataEmbedEmbed.html}
+							alt={ourworldindataEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -600,6 +606,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={bbcEmbedEmbed.html}
+							alt={bbcEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>

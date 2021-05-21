@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import { space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -25,7 +24,7 @@ const badgeWrapperStyle = css`
 
 const paidForStyle = (palette: Palette) => {
 	return css`
-		${textSans.xsmall({ fontWeight: 'bold' })}
+		${textSans.xxsmall({ fontWeight: 'bold' })}
 		color: ${palette.text.cardFooter};
 	`;
 };

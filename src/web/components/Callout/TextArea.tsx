@@ -1,10 +1,11 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { TextArea as SourceTextArea } from '@guardian/src-text-area';
+import { space } from '@guardian/src-foundations';
 
 const textAreaStyles = css`
 	width: 100%;
+	margin-top: ${space[2]}px;
 `;
 
 type Props = {

@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Section } from '@frontend/web/components/Section';
@@ -424,7 +423,7 @@ export const Front = () => (
 						showQuotes={true}
 						byline="George Monbiot"
 						kickerText={kickers[3]}
-						webPublicationDate={'2019-11-11T09={45={30.000Z'}
+						webPublicationDate="2019-11-14T06:00:31Z"
 						avatar={{
 							src:
 								'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
@@ -447,7 +446,7 @@ export const Front = () => (
 						}}
 						headlineText={headlines[11]}
 						headlineSize="medium"
-						webPublicationDate={'2019-11-11T09={45={30.000Z'}
+						webPublicationDate="2019-11-14T06:00:31Z"
 						imageUrl={images[0]}
 						imagePosition="top"
 						showClock={true}
@@ -469,7 +468,7 @@ export const Front = () => (
 						headlineText={headlines[11]}
 						headlineSize="medium"
 						kickerText={kickers[0]}
-						webPublicationDate={'2019-11-11T09={45={30.000Z'}
+						webPublicationDate="2019-11-14T06:00:31Z"
 						imageUrl={images[0]}
 						imagePosition="top"
 						showClock={true}
@@ -491,7 +490,7 @@ export const Front = () => (
 						headlineText={headlines[11]}
 						headlineSize="medium"
 						kickerText={kickers[2]}
-						webPublicationDate={'2019-11-11T09={45={30.000Z'}
+						webPublicationDate="2019-11-14T06:00:31Z"
 						imageUrl={images[0]}
 						imagePosition="top"
 						showClock={true}
@@ -520,7 +519,7 @@ export const Front = () => (
 					headlineText={headlines[11]}
 					headlineSize="large"
 					kickerText={kickers[1]}
-					webPublicationDate={'2019-11-11T09={45={30.000Z'}
+					webPublicationDate="2019-11-14T06:00:31Z"
 					imageUrl={images[0]}
 					imagePosition="right"
 					imageSize="jumbo"

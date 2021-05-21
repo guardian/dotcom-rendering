@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Props = { [key: string]: any };
 
 export const HeadlinesContainer: React.FC<Props> = ({}: Props) => {

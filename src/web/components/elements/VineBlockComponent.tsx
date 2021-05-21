@@ -1,4 +1,3 @@
-import React from 'react';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';

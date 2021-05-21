@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -39,14 +38,14 @@ const labelStyles = (background: string) => css`
 const withoutZeroSections = (sections: Section[]) =>
 	sections.filter((section) => section.value !== 0);
 
-export const Donut = ({
+export const Doughnut = ({
 	sections,
 	percentCutout = 35,
 	width = 300,
 	height = 300,
 }: Props) => {
 	if (withoutZeroSections(sections).length === 1) {
-		// The Donut component requires at least 2 sections
+		// The Doughnut component requires at least 2 sections
 		// TODO: Support showing 100% for a single section
 		return null;
 	}

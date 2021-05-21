@@ -8,6 +8,8 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
+const bodyParser = require('body-parser');
+
 const { siteName, root } = require('./config');
 
 const defaultArticleURL =
@@ -34,6 +36,7 @@ const go = () => {
 	const compiler = webpack(webpackConfig);
 
 	const app = express();
+	app.use(bodyParser.json({ limit: '10mb' }));
 
 	app.use(
 		`/static/${siteName}`,
@@ -79,6 +82,14 @@ const go = () => {
 		}),
 	);
 
+	app.post(
+		'/Article',
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/Article' },
+		}),
+	);
+
 	app.get(
 		'/ArticleJson',
 		async (req, res, next) => {
@@ -116,6 +127,14 @@ const go = () => {
 				console.error(error);
 			}
 		},
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/AMPArticle' },
+		}),
+	);
+
+	app.post(
+		'/AMPArticle',
 		webpackHotServerMiddleware(compiler, {
 			chunkName: `${siteName}.server`,
 			serverRendererOptions: { path: '/AMPArticle' },

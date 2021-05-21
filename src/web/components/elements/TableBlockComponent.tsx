@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { palette, border } from '@guardian/src-foundations';
@@ -20,7 +19,7 @@ const tableEmbed = css`
 			padding: 0.5rem;
 		}
 		tr {
-			${textSans.xsmall()};
+			${textSans.xxsmall()};
 		}
 		thead {
 			tr {

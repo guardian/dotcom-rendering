@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Lines } from '@guardian/src-ed-lines';
 
 export const GuardianLines = ({
@@ -7,6 +5,7 @@ export const GuardianLines = ({
 	count,
 	effect,
 }: {
+	// eslint-disable-next-line react/no-unused-prop-types
 	palette: Palette;
 	count?: 4 | 8;
 	effect?: 'straight' | 'squiggly' | 'dotted';

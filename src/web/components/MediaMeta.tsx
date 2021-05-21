@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { textSans } from '@guardian/src-foundations/typography';
@@ -33,7 +32,7 @@ const iconWrapperStyles = (mediaType: MediaType, palette: Palette) => css`
 
 const durationStyles = (palette: Palette) => css`
 	color: ${palette.text.cardFooter};
-	${textSans.xsmall({ fontWeight: `bold` })}
+	${textSans.xxsmall({ fontWeight: `bold` })}
 `;
 
 const wrapperStyles = css`

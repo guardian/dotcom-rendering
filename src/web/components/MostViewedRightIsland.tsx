@@ -1,10 +1,9 @@
-import React from 'react';
 import { css } from 'emotion';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
-// Styling the data island root so it stetches to cover the full height available in the container.
-// Requires us to subtract the height of its sibbling in the container (StickyAd).
+// Styling the data island root so it stretches to cover the full height available in the container.
+// Requires us to subtract the height of its sibling in the container (StickyAd).
 const stretchWrapperHeight = css`
 	display: flex;
 	flex-direction: column;

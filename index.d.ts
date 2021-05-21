@@ -675,7 +675,7 @@ interface ConfigType extends CommercialConfigType {
 	hbImpl: { [key: string]: any } | string;
 	adUnit: string;
 	isSensitive: boolean;
-	videoDuration: number;
+	videoDuration?: number;
 	edition: string;
 	section: string;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -688,15 +688,15 @@ interface ConfigType extends CommercialConfigType {
 	discussionApiUrl: string;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
-	isPhotoEssay: boolean;
+	isPhotoEssay?: boolean;
 	references?: { [key: string]: string }[];
 	host?: string;
 	idUrl?: string;
 	mmaUrl?: string;
 	brazeApiKey?: string;
 	ipsosTag?: string;
-	isLiveBlog: boolean;
-	isLive: boolean;
+	isLiveBlog?: boolean;
+	isLive?: boolean;
 }
 
 interface ConfigTypeBrowser {
@@ -943,6 +943,7 @@ declare namespace JSX {
 		'amp-analytics': any;
 		'amp-pixel': any;
 		'amp-ad': any;
+		'amp-sticky-ad': any;
 		'amp-youtube': any;
 		'amp-geo': any;
 		'amp-consent': any;

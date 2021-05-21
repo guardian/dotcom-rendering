@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { space } from '@guardian/src-foundations';
@@ -17,7 +16,6 @@ type Props = {
 	mediaTitle?: string;
 	altText?: string;
 	assetId: string;
-	channelId?: string;
 	expired: boolean;
 	format: Format;
 	palette: Palette;

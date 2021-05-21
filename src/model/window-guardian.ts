@@ -153,7 +153,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 
 			// used by lib/ad-targeting.ts
 			isSensitive: CAPI.config.isSensitive,
-			videoDuration: CAPI.config.videoDuration,
+			videoDuration: CAPI.config.videoDuration || 0,
 			edition: CAPI.config.edition,
 			section: CAPI.config.section,
 			sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
@@ -194,10 +194,10 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		},
 		contributionsServiceUrl: CAPI.contributionsServiceUrl,
 		isImmersive: CAPI.isImmersive,
-		isPhotoEssay: CAPI.config.isPhotoEssay,
+		isPhotoEssay: CAPI.config.isPhotoEssay || false,
 		isSpecialReport: CAPI.isSpecialReport,
-		isLiveBlog: CAPI.config.isLiveBlog,
-		isLive: CAPI.config.isLive,
+		isLiveBlog: CAPI.config.isLiveBlog || false,
+		isLive: CAPI.config.isLive || false,
 		matchUrl: CAPI.matchUrl,
 		elementsToHydrate: CAPI.blocks
 			// Get all elements arrays from all blocks -> [[h][h][x]]
@@ -214,7 +214,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 export interface WindowGuardian {
 	// The app contains only data that we require for app hydration
 	// NOTE: there is a divergence between DCRBrowserDocumentData and DCRServerDocumentData
-	// for perfomance reasons
+	// for performance reasons
 	app: {
 		data: DCRBrowserDocumentData;
 		cssIDs: string[];

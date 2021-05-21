@@ -1,4 +1,3 @@
-import React from 'react';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { css } from 'emotion';
@@ -10,7 +9,7 @@ const brandingStyle = css`
 `;
 
 const brandingLabelStyle = css`
-	${textSans.xsmall({ fontWeight: 'bold' })};
+	${textSans.xxsmall({ fontWeight: 'bold' })};
 	color: ${neutral[46]};
 `;
 
@@ -28,7 +27,7 @@ const brandingLogoStyle = css`
 
 const brandingAboutLink = (palette: Palette) => css`
 	color: ${palette.text.branding};
-	${textSans.xsmall()}
+	${textSans.xxsmall()}
 	display: block;
 	text-decoration: none;
 	&:hover {

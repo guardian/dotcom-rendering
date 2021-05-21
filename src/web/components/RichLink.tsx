@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import {
@@ -8,7 +7,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
+import { Format, Special } from '@guardian/types';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
@@ -93,6 +92,13 @@ const richLinkTitle = css`
 	}
 `;
 
+const labsRichLinkTitle = css`
+	${from.wide} {
+		${textSans.medium({ fontWeight: 'bold' })}
+	}
+	${textSans.small({ fontWeight: 'bold' })}
+`;
+
 const richLinkReadMore: (palette: Palette) => ColourType = (palette) => {
 	return css`
 		fill: ${palette.fill.richLink};
@@ -115,6 +121,17 @@ const readMoreTextStyle = css`
 	vertical-align: top;
 	font-weight: 500;
 	text-decoration: none;
+`;
+
+const labsReadMoreTextStyle = css`
+	${textSans.medium({ fontWeight: 'regular' })}
+	display: inline-block;
+	height: 30px;
+	line-height: 25px;
+	padding-left: 4px;
+	vertical-align: top;
+	text-decoration: none;
+	color: ${neutral[7]};
 `;
 
 const byline = css`
@@ -144,7 +161,7 @@ const contributorImageWrapper = css`
 `;
 
 const paidForBranding = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	font-weight: bold;
 	color: ${text.supporting};
 `;
@@ -202,6 +219,7 @@ export const RichLink = ({
 		: false;
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
+	const isLabs = format.theme === Special.Labs;
 
 	return (
 		<div
@@ -225,7 +243,11 @@ export const RichLink = ({
 					)}
 					<div className={richLinkElements}>
 						<div className={richLinkHeader}>
-							<div className={richLinkTitle}>
+							<div
+								className={cx(
+									isLabs ? labsRichLinkTitle : richLinkTitle,
+								)}
+							>
 								{isOpinion && (
 									<>
 										<Hide when="above" breakpoint="wide">
@@ -276,7 +298,13 @@ export const RichLink = ({
 						)}
 						<div className={richLinkReadMore(palette)}>
 							<ArrowInCircle />
-							<div className={readMoreTextStyle}>
+							<div
+								className={cx(
+									isLabs
+										? labsReadMoreTextStyle
+										: readMoreTextStyle,
+								)}
+							>
 								{readMoreText(contentType)}
 							</div>
 						</div>

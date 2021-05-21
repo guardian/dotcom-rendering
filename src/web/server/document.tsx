@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 import { cache } from 'emotion';
@@ -58,9 +58,9 @@ export const document = ({ data }: Props): string => {
 		renderToString(
 			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
 			<CacheProvider value={cache}>
-				<React.StrictMode>
+				<StrictMode>
 					<DecideLayout CAPI={CAPI} NAV={NAV} />
-				</React.StrictMode>
+				</StrictMode>
 			</CacheProvider>,
 		),
 	);
@@ -228,7 +228,6 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromChunkName('lotame'),
 		...getScriptArrayFromChunkName('atomIframe'),
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),

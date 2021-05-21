@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';

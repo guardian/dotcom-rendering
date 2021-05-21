@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { from } from '@guardian/src-foundations/mq';
@@ -190,7 +189,7 @@ export const ShareIcons = ({
 								pageId,
 							)}&app_id=180444840287&CMP=share_btn_me`}
 							role="button"
-							aria-label="Share on Messanger>"
+							aria-label="Share on Messenger>"
 							target="_blank"
 							data-ignore="global-link-styling"
 						>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
@@ -46,7 +45,7 @@ enum Size {
 }
 
 const adSlotLabelStyles = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	position: relative;
 	height: 24px;
 	background-color: ${neutral[97]};
@@ -142,7 +141,7 @@ const mobileStickyAdStyles = css`
 		color: ${neutral[60]};
 		text-align: left;
 		box-sizing: border-box;
-		${textSans.xsmall()};
+		${textSans.xxsmall()};
 	}
 `;
 

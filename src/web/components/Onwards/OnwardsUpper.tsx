@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { css } from 'emotion';
 import { Section } from '@root/src/web/components/Section';
@@ -82,7 +80,6 @@ type Props = {
 	keywordIds: string | string[];
 	contentType: string;
 	tags: TagType[];
-	edition: Edition;
 	format: Format;
 };
 

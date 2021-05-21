@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import { Design, Special } from '@guardian/types';
@@ -75,7 +74,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'tiny':
 			return css`
-				${textSans.xsmall()};
+				${textSans.xxsmall()};
 				font-size: 14px;
 			`;
 	}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 
 import { neutral } from '@guardian/src-foundations/palette';
@@ -66,6 +65,16 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 		case Display.Immersive:
 			switch (format.design) {
 				case Design.PhotoEssay:
+					if (format.theme === Special.Labs) {
+						return css`
+							${textSans.large({})};
+							margin-top: ${space[2]}px;
+							margin-bottom: ${space[3]}px;
+							line-height: 22px;
+							max-width: 540px;
+							color: ${palette.text.standfirst};
+						`;
+					}
 					return css`
 						${headline.xxxsmall({})};
 						margin-top: ${space[2]}px;

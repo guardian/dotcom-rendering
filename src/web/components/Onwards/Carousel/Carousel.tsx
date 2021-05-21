@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import libDebounce from 'lodash/debounce';
 
@@ -304,15 +304,12 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 type CarouselCardProps = {
 	isFirst: boolean;
 	format: Format;
-	trailPalette: Palette;
-	display?: Display;
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
 	kickerText?: string;
 	imageUrl?: string;
 	isFullCardImage?: boolean;
-	dataComponent?: string;
 	dataLinkName?: string;
 };
 
@@ -619,7 +616,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 							url: linkTo,
 							headline: headlineText,
 							format: trailFormat,
-							palette: trailPalette,
 							webPublicationDate,
 							image: fallbackImageUrl,
 							carouselImages,
@@ -634,7 +630,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
 								format={trailFormat}
-								trailPalette={trailPalette}
 								linkTo={linkTo}
 								headlineText={headlineText}
 								webPublicationDate={webPublicationDate}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StarRatingBlockComponent } from '@root/src/web/components/elements/StarRatingBlockComponent';
 
 export default {

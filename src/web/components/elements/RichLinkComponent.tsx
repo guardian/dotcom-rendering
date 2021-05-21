@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { RichLink } from '@root/src/web/components/RichLink';
 import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 
@@ -10,7 +8,6 @@ import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 type Props = {
 	element: RichLinkBlockElement;
-	pillar: Theme;
 	ajaxEndpoint: string;
 	richLinkIndex: number;
 };
@@ -23,7 +20,6 @@ interface CAPIRichLinkType {
 	url: string;
 	tags: TagType[];
 	sponsorName: string;
-	pillar: LegacyPillar;
 	format: CAPIFormat;
 	starRating?: number;
 	contributorImage?: string;

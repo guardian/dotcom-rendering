@@ -1,7 +1,4 @@
-import React from 'react';
 import { css } from 'emotion';
-
-import { Design, Display, Pillar } from '@guardian/types';
 
 import { Pagination } from './Pagination';
 
@@ -23,15 +20,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const defaultStory = () => {
 	return (
 		<Container>
-			<Pagination
-				format={{
-					display: Display.Standard,
-					design: Design.LiveBlog,
-					theme: Pillar.News,
-				}}
-				currentPage={2}
-				totalPages={6}
-			/>
+			<Pagination currentPage={2} totalPages={6} />
 		</Container>
 	);
 };

@@ -1,8 +1,8 @@
-import React from 'react';
 import { css } from 'emotion';
 
-import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
+import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
+import { Format } from '@guardian/types';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -16,23 +16,23 @@ export const ArticleRenderer: React.FC<{
 	adTargeting?: AdTargeting;
 	host?: string;
 }> = ({ format, palette, elements, adTargeting, host }) => {
+	const output = elements.map((element, index) => {
+		return renderArticleElement({
+			format,
+			palette,
+			element,
+			adTargeting,
+			host,
+			index,
+			isMainMedia: false,
+		});
+	});
+
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
-	const output = elements.map((element, index) => (
-		<ElementRenderer
-			format={format}
-			palette={palette}
-			element={element}
-			adTargeting={adTargeting}
-			host={host}
-			index={index}
-			isMainMedia={false}
-		/>
-	));
-
 	return (
 		<div
 			className={`article-body-commercial-selector ${commercialPosition} article-body-viewer-selector`}
