@@ -10,7 +10,7 @@ const showMore = css`
 	color: ${palette.neutral[7]};
 	padding: 0 10px;
 	${textSans.small()};
-	/* Design System: Ideally we want a centering primative that we can use in these situations */
+	/* Design System: Ideally we want a centring primitive that we can use in these situations */
 	line-height: 34px;
 	height: 36px;
 	font-weight: bold;

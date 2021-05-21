@@ -20,7 +20,7 @@ type Props = {
 
 const ageStyles = (format: Format, palette: Palette) => {
 	return css`
-		${textSans.xsmall()};
+		${textSans.xxsmall()};
 		color: ${palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
@@ -40,7 +40,7 @@ const ageStyles = (format: Format, palette: Palette) => {
 		}
 
 		> time {
-			${textSans.xsmall({
+			${textSans.xxsmall({
 				fontWeight: format.design === Design.Media ? `bold` : `regular`,
 			})};
 		}

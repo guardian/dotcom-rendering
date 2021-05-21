@@ -220,7 +220,7 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 			const h3Text = extractH3(thisElement);
 
 			// To avoid having to depend on the ordering of the enhancer (which could easily be a source of bugs)
-			// We determin if previous items are `ItemLinkBlockElement` through type and `isItemLink` functions
+			// We determine if previous items are `ItemLinkBlockElement` through type and `isItemLink` functions
 			const isPreviousItemLink =
 				previousItem?._type ===
 					'model.dotcomrendering.pageElements.ItemLinkBlockElement' ||

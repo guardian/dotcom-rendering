@@ -88,7 +88,7 @@ interface CodeBlockElement {
 	elementId: string;
 	html: string;
 	isMandatory: boolean;
-	language?: Language;
+	language?: string;
 }
 
 interface CommentBlockElement {
@@ -612,7 +612,8 @@ type Weighting =
 	| 'supporting'
 	| 'showcase'
 	| 'halfwidth'
-	| 'immersive';
+	| 'immersive'
+	| 'richLink'; // Note, 'richLink' is used internally but does not exist upstream.
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
 // in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
@@ -664,23 +665,15 @@ interface VideoAssets {
 interface TimelineEvent {
 	title: string;
 	date: string;
+	unixDate: number;
 	body?: string;
 	toDate?: string;
+	toUnixDate?: number;
 }
 
 interface Switches {
 	[key: string]: boolean;
 }
-
-// Used for CodeBlockElement
-type Language =
-	| 'text'
-	| 'typescript'
-	| 'javascript'
-	| 'css'
-	| 'markup'
-	| 'scala'
-	| 'elm';
 
 type RatingSizeType = 'large' | 'medium' | 'small';
 

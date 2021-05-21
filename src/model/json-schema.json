@@ -1139,7 +1139,7 @@
                     "type": "boolean"
                 },
                 "language": {
-                    "$ref": "#/definitions/Language"
+                    "type": "string"
                 }
             },
             "required": [
@@ -1148,18 +1148,6 @@
                 "html",
                 "isMandatory"
             ]
-        },
-        "Language": {
-            "enum": [
-                "css",
-                "elm",
-                "javascript",
-                "markup",
-                "scala",
-                "text",
-                "typescript"
-            ],
-            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",
@@ -1768,6 +1756,7 @@
                 "halfwidth",
                 "immersive",
                 "inline",
+                "richLink",
                 "showcase",
                 "supporting",
                 "thumbnail"
@@ -2558,16 +2547,23 @@
                 "date": {
                     "type": "string"
                 },
+                "unixDate": {
+                    "type": "number"
+                },
                 "body": {
                     "type": "string"
                 },
                 "toDate": {
                     "type": "string"
+                },
+                "toUnixDate": {
+                    "type": "number"
                 }
             },
             "required": [
                 "date",
-                "title"
+                "title",
+                "unixDate"
             ]
         },
         "TweetBlockElement": {

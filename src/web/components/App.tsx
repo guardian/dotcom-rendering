@@ -435,7 +435,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
-	// guarenteed but TS isn't so sure and needs assurance
+	// guaranteed but TS isn't so sure and needs assurance
 	const elementsByType = <T extends CAPIElement>(
 		elements: CAPIElement[],
 		type: string,
@@ -610,6 +610,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							<KnowledgeQuizAtom
 								id={quizAtom.id}
 								questions={quizAtom.questions}
+								resultGroups={quizAtom.resultGroups}
 							/>
 						)}
 					</>

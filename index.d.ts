@@ -943,6 +943,7 @@ declare namespace JSX {
 		'amp-analytics': any;
 		'amp-pixel': any;
 		'amp-ad': any;
+		'amp-sticky-ad': any;
 		'amp-youtube': any;
 		'amp-geo': any;
 		'amp-consent': any;

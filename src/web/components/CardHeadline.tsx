@@ -75,7 +75,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'tiny':
 			return css`
-				${textSans.xsmall()};
+				${textSans.xxsmall()};
 				font-size: 14px;
 			`;
 	}
