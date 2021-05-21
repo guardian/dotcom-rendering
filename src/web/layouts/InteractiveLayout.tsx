@@ -11,7 +11,7 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
+import { Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
@@ -35,13 +35,11 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
-import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
 	decideLineCount,
@@ -218,22 +216,11 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-	const showBodyEndSlot =
-		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-		CAPI.config.switches.slotBodyEnd;
-
-	// TODO:
-	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
-	// 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
-
 	const seriesTag = CAPI.tags.find(
 		(tag) => tag.type === 'Series' || tag.type === 'Blog',
 	);
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
-
-	const isMatchReport =
-		format.design === Design.MatchReport && !!CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -375,17 +362,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<Border palette={palette} />
 						)}
 					</GridItem>
-					<GridItem area="matchNav">
-						<div className={maxWidth}>
-							{format.design === Design.MatchReport &&
-								CAPI.matchUrl && (
-									<Placeholder
-										rootId="match-nav"
-										height={230}
-									/>
-								)}
-						</div>
-					</GridItem>
 					<GridItem area="headline">
 						<div className={maxWidth}>
 							<ArticleHeadlinePadding
@@ -485,9 +461,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
-								{isMatchReport && <div id="match-stats" />}
-
-								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines
 									data-print-layout="hide"
 									count={4}
