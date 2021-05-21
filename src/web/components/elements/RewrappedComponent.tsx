@@ -1,6 +1,6 @@
 // @ts-ignore
 import { jsx as _jsx } from 'react/jsx-runtime';
-import { css, ClassNames, SerializedStyles } from '@emotion/react';
+import { ClassNames } from '@emotion/react';
 
 import { unescapeData } from '@root/src/lib/escapeData';
 
@@ -15,21 +15,21 @@ import { unescapeData } from '@root/src/lib/escapeData';
 export const RewrappedComponent = ({
 	isUnwrapped,
 	html,
-	elCss = css``,
+	elCss = '',
 	tagName,
 }: {
 	isUnwrapped: boolean;
 	html: string;
-	elCss?: SerializedStyles;
+	elCss?: string;
 	tagName: string;
 }) => (
 	<ClassNames>
-		{({ css: _css }) => {
+		{({ css }) => {
 			const element = isUnwrapped ? tagName : 'span';
 
 			// If we implement a span, we want to apply the CSS to the inner element
 			// to ensure we still style correctly
-			const innerElCss = _css`
+			const innerElCss = css`
 				${tagName} {
 					${elCss}
 				}
