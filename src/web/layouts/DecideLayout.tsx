@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
@@ -16,6 +14,7 @@ import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
+import { InteractiveLayout } from './InteractiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
@@ -103,6 +102,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Standard:
 		default: {
 			switch (design) {
+				case Design.Interactive:
+					return (
+						<InteractiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
 				case Design.LiveBlog:
 				case Design.DeadBlog:
 					return (

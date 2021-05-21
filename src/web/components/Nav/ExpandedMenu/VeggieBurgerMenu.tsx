@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';

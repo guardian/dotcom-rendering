@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { OnwardsData } from './OnwardsData';
 import { OnwardsLayout } from './OnwardsLayout';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { BlockquoteBlockComponent } from '@root/src/web/components/elements/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { CaptionBlockComponent } from '@root/src/web/components/elements/CaptionBlockComponent';

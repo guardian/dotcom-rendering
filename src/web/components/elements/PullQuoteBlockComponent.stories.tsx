@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Display, Design, Pillar, Special } from '@guardian/types';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';

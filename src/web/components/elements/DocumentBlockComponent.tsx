@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import { LinkButton } from '@guardian/src-button';
 

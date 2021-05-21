@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import { from } from '@guardian/src-foundations/mq';
 

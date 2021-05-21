@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import libDebounce from 'lodash/debounce';
 

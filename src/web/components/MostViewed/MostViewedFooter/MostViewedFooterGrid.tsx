@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { css, cx } from 'emotion';
 import { neutral, border } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';

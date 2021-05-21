@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { DividerBlockComponent } from '@frontend/web/components/elements/DividerBlockComponent';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Eight = (): JSX.Element => (
 	<svg width="29" height="40" xmlns="http://www.w3.org/2000/svg">
 		<path

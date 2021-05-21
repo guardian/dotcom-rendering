@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, RefObject } from 'react';
+import { useRef, useState, useEffect, RefObject } from 'react';
 import { css } from 'emotion';
 
 import { MostViewedRight } from './MostViewedRight';

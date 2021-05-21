@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';

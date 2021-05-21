@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import { headline } from '@guardian/src-foundations/typography';
 import { decidePalette } from '@root/src/web/lib/decidePalette';

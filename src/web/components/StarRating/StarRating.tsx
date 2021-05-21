@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 import { Star } from '@frontend/static/icons/Star';
 
