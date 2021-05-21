@@ -6,7 +6,7 @@ import {
 	Platform,
 } from '@guardian/renditions';
 import type { FC, ReactElement } from 'react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const usePlatform = (defaultPlatform: Platform): Platform => {
 	const [platform, setPlatform] = useState(defaultPlatform);
