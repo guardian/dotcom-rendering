@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
-import { space, news, neutral } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 import { Display, Design, Special } from '@guardian/types';
 
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
