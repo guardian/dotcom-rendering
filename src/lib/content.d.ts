@@ -665,8 +665,10 @@ interface VideoAssets {
 interface TimelineEvent {
 	title: string;
 	date: string;
+	unixDate: number;
 	body?: string;
 	toDate?: string;
+	toUnixDate?: number;
 }
 
 interface Switches {

@@ -49,7 +49,6 @@ module.exports = ({ isLegacyJS }) => ({
 		ga: scriptPath('ga'),
 		ophan: scriptPath('ophan'),
 		react: scriptPath('react'),
-		lotame: scriptPath('lotame'),
 		dynamicImport: scriptPath('dynamicImport'),
 		atomIframe: scriptPath('atomIframe'),
 		coreVitals: scriptPath('coreVitals'),

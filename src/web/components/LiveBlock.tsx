@@ -139,7 +139,7 @@ const LastUpdated = ({
 			className={css`
 				display: flex;
 				align-items: flex-end;
-				${textSans.xsmall()};
+				${textSans.xxsmall()};
 				color: ${neutral[46]};
 			`}
 		>
@@ -164,7 +164,7 @@ const FirstPublished = ({
 			data-ignore="global-link-styling"
 			// title={publishedDate.toLocaleString()}
 			className={css`
-				${textSans.xsmall({ fontWeight: 'bold' })}
+				${textSans.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[1]}px;
 				padding-top: ${space[1]}px;
 				display: flex;
@@ -188,7 +188,7 @@ const FirstPublished = ({
 			</time>
 			<span
 				className={css`
-					${textSans.xsmall()};
+					${textSans.xxsmall()};
 					color: ${neutral[46]};
 				`}
 			>

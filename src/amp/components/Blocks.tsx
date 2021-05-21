@@ -23,8 +23,8 @@ const adStyle = css`
 	:before {
 		content: 'Advertisement';
 		display: block;
-		${textSans.xsmall()};
-		/* Adverts specifically don't use the GU font branding. */
+		${textSans.xxsmall()};
+		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-blacklist */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
 			sans-serif;
@@ -47,11 +47,11 @@ const firstPublishedStyle = css`
 	margin-bottom: 10px;
 	text-decoration: none;
 	font-weight: bold;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 `;
 
 const lastUpdatedStyle = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	color: ${palette.neutral[60]};
 	text-align: right;
 	padding-right: 15px;

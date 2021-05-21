@@ -228,7 +228,6 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromChunkName('lotame'),
 		...getScriptArrayFromChunkName('atomIframe'),
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),

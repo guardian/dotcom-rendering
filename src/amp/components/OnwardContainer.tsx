@@ -92,7 +92,7 @@ const quoteIconCSS = css`
 const ageWarning = css`
 	color: ${palette.neutral[20]};
 	fill: ${palette.neutral[20]};
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 `;
 const showMore = css`
 	background-color: ${palette.neutral[100]};

@@ -10,7 +10,7 @@ import ChevronLeftSingle from '@frontend/static/icons/chevron-left-single.svg';
 import ChevronLeftDouble from '@frontend/static/icons/chevron-left-double.svg';
 
 const paginationStyle = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	font-weight: bold;
 
 	display: flex;
