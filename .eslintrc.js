@@ -89,6 +89,8 @@ module.exports = {
         'react-hooks/exhaustive-deps': 'warn',
 		'arrow-body-style': [0],
 		'react/require-default-props': [0],
+		"react/jsx-uses-react": "off",
+    	"react/react-in-jsx-scope": "off",
     },
     settings: {
         'import/resolver': {

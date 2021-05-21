@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';

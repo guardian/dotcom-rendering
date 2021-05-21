@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { css } from 'emotion';
 import { Section } from '@root/src/web/components/Section';

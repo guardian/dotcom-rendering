@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ContainerTitle } from './ContainerTitle';
 
 export default {

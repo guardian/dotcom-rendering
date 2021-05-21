@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { matchReport } from '@root/fixtures/generated/match-report';
 
 import { Section } from './Section';

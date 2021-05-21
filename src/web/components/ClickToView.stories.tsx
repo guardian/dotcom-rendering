@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React from 'react';
+
 import { css } from 'emotion';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Display, Design, Pillar } from '@guardian/types';

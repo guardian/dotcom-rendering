@@ -1,4 +1,3 @@
-import React from 'react';
 import { css, cx } from 'emotion';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';

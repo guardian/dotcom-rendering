@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+
 import { css } from 'emotion';
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';

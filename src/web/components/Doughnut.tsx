@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';

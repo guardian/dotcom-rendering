@@ -1,4 +1,3 @@
-import React from 'react';
 import { Section } from '@frontend/web/components/Section';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';

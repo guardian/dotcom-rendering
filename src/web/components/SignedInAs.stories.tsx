@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { Design, Display, Pillar } from '@guardian/types';

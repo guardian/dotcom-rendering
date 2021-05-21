@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FieldLabel } from './FieldLabel';
 
 type Props = {

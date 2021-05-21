@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { css } from 'emotion';
 
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';

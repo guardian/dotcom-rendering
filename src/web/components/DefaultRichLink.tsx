@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Design, Display, Pillar } from '@guardian/types';
 
 import { RichLink } from '@root/src/web/components/RichLink';

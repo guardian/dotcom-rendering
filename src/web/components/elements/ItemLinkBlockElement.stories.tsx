@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ItemLinkBlockElement } from './ItemLinkBlockElement';
 
 export default {

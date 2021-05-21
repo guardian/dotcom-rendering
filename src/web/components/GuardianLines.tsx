@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Lines } from '@guardian/src-ed-lines';
 
 export const GuardianLines = ({

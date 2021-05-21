@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;

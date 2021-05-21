@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from 'emotion';
 
 import { TextInput as SourceTextInput } from '@guardian/src-text-input';

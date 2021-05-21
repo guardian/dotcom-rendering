@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { AdProps } from './Ad';
