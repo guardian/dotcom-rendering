@@ -160,6 +160,7 @@ export const InteractiveImmersiveLayout = ({
 				captionText={captionText}
 				format={format}
 				shouldLimitWidth={true}
+				isLeftCol={true}
 			/>
 		</div>
 	);
