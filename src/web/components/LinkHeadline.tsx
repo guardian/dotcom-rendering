@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
 
@@ -74,7 +74,7 @@ export const LinkHeadline = ({
 	link,
 	byline,
 }: Props) => (
-	<h4 className={fontStyles(size)}>
+	<h4 css={fontStyles(size)}>
 		{kickerText && (
 			<Kicker
 				text={kickerText}
@@ -90,12 +90,12 @@ export const LinkHeadline = ({
 			// We were passed a link object so headline should be a link, with link styling
 			<>
 				<a
-					className={cx(
+					css={[
 						// Composed styles - order matters for colours
 						linkStyles,
 						showUnderline && textDecorationUnderline,
 						link.visitedColour && visitedStyles(link.visitedColour),
-					)}
+					]}
 					href={link.to}
 					// If link.preventFocus is true, set tabIndex to -1 to ensure this
 					// link is not tabbed to. Useful if there is an outer link to the same

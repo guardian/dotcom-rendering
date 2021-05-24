@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import SearchIcon from '@frontend/static/icons/search.svg';
 
@@ -91,17 +91,19 @@ const seperatorHideStyles = css`
 `;
 
 const Search = ({
-	className,
 	children,
 	href,
 	dataLinkName,
 }: {
-	className?: string;
 	children: React.ReactNode;
 	href: string;
 	dataLinkName: string;
 }) => (
-	<a href={href} className={className} data-link-name={dataLinkName}>
+	<a
+		href={href}
+		css={[linkTablet({ showAtTablet: false }), searchLinkStyles]}
+		data-link-name={dataLinkName}
+	>
 		{children}
 	</a>
 );
@@ -191,16 +193,13 @@ export const Links = ({
 		},
 	];
 	return (
-		<div data-print-layout="hide" className={linksStyles}>
+		<div data-print-layout="hide" css={linksStyles}>
 			{showSupporterCTA && supporterCTA !== '' && (
 				<>
-					<div className={seperatorStyles} />
+					<div css={seperatorStyles} />
 					<a
 						href={supporterCTA}
-						className={cx(
-							linkTablet({ showAtTablet: false }),
-							linkStyles,
-						)}
+						css={[linkTablet({ showAtTablet: false }), linkStyles]}
 						data-link-name="nav2 : supporter-cta"
 					>
 						Subscriptions
@@ -208,18 +207,18 @@ export const Links = ({
 				</>
 			)}
 
-			<div className={seperatorStyles} />
+			<div css={seperatorStyles} />
 			<a
 				href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
-				className={cx(linkTablet({ showAtTablet: false }), linkStyles)}
+				css={[linkTablet({ showAtTablet: false }), linkStyles]}
 				data-link-name="nav2 : job-cta"
 			>
 				Search jobs
 			</a>
-			<div className={seperatorHideStyles} />
+			<div css={seperatorHideStyles} />
 
 			{userIsDefined ? (
-				<div className={linkStyles}>
+				<div css={linkStyles}>
 					<ProfileIcon />
 					<Dropdown
 						label="My account"
@@ -230,7 +229,7 @@ export const Links = ({
 				</div>
 			) : (
 				<a
-					className={linkStyles}
+					css={linkStyles}
 					href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 						'guardian_signin_header',
 					)}`}
@@ -241,10 +240,6 @@ export const Links = ({
 			)}
 
 			<Search
-				className={cx(
-					linkTablet({ showAtTablet: false }),
-					searchLinkStyles,
-				)}
 				href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 				dataLinkName="nav2 : search"
 			>

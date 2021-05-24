@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -50,11 +50,11 @@ export const ContentWrapper = ({
 	isFullCardImage,
 }: Props) => (
 	<div
-		className={cx(
+		css={[
 			sizingStyles,
 			coverageStyles(percentage),
 			isFullCardImage && fullCardImageStyles,
-		)}
+		]}
 	>
 		{children}
 	</div>

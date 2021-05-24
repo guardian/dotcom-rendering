@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
@@ -75,7 +75,7 @@ export const ArticleBody = ({
 		format.design === Design.DeadBlog
 	) {
 		return (
-			<div className={cx(globalStrongStyles, globalLinkStyles(palette))}>
+			<div css={[globalStrongStyles, globalLinkStyles(palette)]}>
 				<LiveBlogRenderer
 					format={format}
 					blocks={blocks}
@@ -89,13 +89,13 @@ export const ArticleBody = ({
 	}
 	return (
 		<div
-			className={cx(
+			css={[
 				bodyPadding,
 				globalH2Styles(format.display),
 				globalH3Styles(format.display),
 				globalStrongStyles,
 				globalLinkStyles(palette),
-			)}
+			]}
 		>
 			<ArticleRenderer
 				format={format}

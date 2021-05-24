@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Display } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -71,12 +71,12 @@ export const CardAge = ({
 	}
 
 	return (
-		<span className={cx(ageStyles(format, palette))}>
+		<span css={ageStyles(format, palette)}>
 			<span
-				className={cx(
+				css={
 					format.display === Display.Immersive &&
-						fullCardImageTextStyles,
-				)}
+					fullCardImageTextStyles
+				}
 			>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate}>{displayString}</time>
