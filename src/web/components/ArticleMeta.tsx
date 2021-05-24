@@ -70,6 +70,10 @@ const metaExtras = (palette: Palette) => css`
 		padding-left: 10px;
 		padding-right: 10px;
 	}
+
+	${between.leftCol.and.wide} {
+		padding-bottom: 6px;
+	}
 `;
 
 const contributorTopBorder = (palette: Palette) => css`
