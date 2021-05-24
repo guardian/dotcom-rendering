@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
@@ -54,7 +54,7 @@ import {
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -75,12 +75,16 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
 						'lines  border  media       media'
@@ -91,11 +95,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
 						'lines  border  media       media'
@@ -105,10 +105,14 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  .           right-column';
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content
+					Right Column
+				*/
 				${until.leftCol} {
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 1fr 300px;
 					grid-template-areas:
 						'title      right-column'
 						'headline   right-column'
@@ -184,17 +188,17 @@ const PositionHeadline = ({
 		case Design.Interview:
 			return (
 				<div
-					className={css`
+					css={css`
 						${from.leftCol} {
 							margin-bottom: -100px;
 						}
 					`}
 				>
-					<div className={maxWidth}>{children}</div>
+					<div css={maxWidth}>{children}</div>
 				</div>
 			);
 		default:
-			return <div className={maxWidth}>{children}</div>;
+			return <div css={maxWidth}>{children}</div>;
 	}
 };
 
@@ -412,12 +416,12 @@ export const ShowcaseLayout = ({
 					<GridItem area="headline">
 						<PositionHeadline design={format.design}>
 							<div
-								className={css`
+								css={css`
 									padding-bottom: 24px;
 								`}
 							>
 								{age && (
-									<div className={ageWarningMargins}>
+									<div css={ageWarningMargins}>
 										<AgeWarning age={age} />
 									</div>
 								)}
@@ -438,7 +442,7 @@ export const ShowcaseLayout = ({
 						</PositionHeadline>
 					</GridItem>
 					<GridItem area="media">
-						<div className={mainMediaWrapper}>
+						<div css={mainMediaWrapper}>
 							<MainMedia
 								format={format}
 								palette={palette}
@@ -461,8 +465,8 @@ export const ShowcaseLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="lines">
-						<div className={maxWidth}>
-							<div className={stretchLines}>
+						<div css={maxWidth}>
+							<div css={stretchLines}>
 								<GuardianLines
 									count={decideLineCount(format.design)}
 									palette={palette}
@@ -475,7 +479,7 @@ export const ShowcaseLayout = ({
 						</div>
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -493,7 +497,7 @@ export const ShowcaseLayout = ({
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={maxWidth}>
+							<main css={maxWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -527,7 +531,7 @@ export const ShowcaseLayout = ({
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {

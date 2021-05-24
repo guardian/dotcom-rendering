@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
@@ -59,7 +59,7 @@ const StandardGrid = ({
 	isMatchReport: boolean;
 }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -80,12 +80,16 @@ const StandardGrid = ({
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 
 					${isMatchReport
 						? css`
@@ -109,12 +113,16 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 
 					${isMatchReport
 						? css`
@@ -138,10 +146,14 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content
+					Right Column
+				*/
 				${until.leftCol} {
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 1fr 300px;
 					${isMatchReport
 						? css`
 								grid-template-areas:
@@ -457,7 +469,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						)}
 					</GridItem>
 					<GridItem area="matchNav">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							{format.design === Design.MatchReport &&
 								CAPI.matchUrl && (
 									<Placeholder
@@ -468,7 +480,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 					<GridItem area="headline">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleHeadlinePadding
 								design={format.design}
 								starRating={
@@ -476,7 +488,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								}
 							>
 								{age && (
-									<div className={ageWarningMargins}>
+									<div css={ageWarningMargins}>
 										<AgeWarning age={age} />
 									</div>
 								)}
@@ -496,7 +508,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</ArticleHeadlinePadding>
 						</div>
 						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div className={starWrapper}>
+							<div css={starWrapper}>
 								<StarRating
 									rating={CAPI.starRating}
 									size="large"
@@ -513,7 +525,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</GridItem>
 					<GridItem area="media">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<MainMedia
 								format={format}
 								palette={palette}
@@ -524,8 +536,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 					<GridItem area="lines">
-						<div className={maxWidth}>
-							<div className={stretchLines}>
+						<div css={maxWidth}>
+							<div css={stretchLines}>
 								<GuardianLines
 									count={decideLineCount(format.design)}
 									palette={palette}
@@ -538,7 +550,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -556,7 +568,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={articleWidth}>
+							<main css={articleWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -596,7 +608,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {

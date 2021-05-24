@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
@@ -51,7 +51,7 @@ import { ContainerLayout } from '../components/ContainerLayout';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -69,11 +69,15 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content 
+					Empty border for spacing
+					Right Column
+				*/
 				${from.desktop} {
-					grid-template-columns:
-						309px /* Left Column (220 - 1px border) */
-						1px /* Empty border for spacing */
-						1fr /* Main content */;
+					grid-template-columns: 309px 1px 1fr;
 					grid-template-areas:
 						'lines border media'
 						'meta  border media'
@@ -82,11 +86,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${from.wide} {
-					grid-template-columns:
-						309px
-						1px
-						1fr
-						340px;
+					grid-template-columns: 309px 1px 1fr 340px;
 					grid-template-areas:
 						'lines border media right-column'
 						'meta  border media right-column'
@@ -310,10 +310,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				}
 			>
-				<div className={maxWidth}>
+				<div css={maxWidth}>
 					<ArticleHeadlinePadding design={format.design}>
 						{age && (
-							<div className={ageWarningMargins}>
+							<div css={ageWarningMargins}>
 								<AgeWarning age={age} />
 							</div>
 						)}
@@ -328,7 +328,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</ArticleHeadlinePadding>
 				</div>
 				{CAPI.starRating || CAPI.starRating === 0 ? (
-					<div className={starWrapper}>
+					<div css={starWrapper}>
 						<StarRating rating={CAPI.starRating} size="large" />
 					</div>
 				) : (
@@ -352,7 +352,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.article}
 			>
 				<div
-					className={css`
+					css={css`
 						height: ${space[4]}px;
 					`}
 				/>
@@ -365,7 +365,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			>
 				<LiveGrid>
 					<GridItem area="media">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<MainMedia
 								format={format}
 								palette={palette}
@@ -379,8 +379,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<></>
 					</GridItem>
 					<GridItem area="lines">
-						<div className={maxWidth}>
-							<div className={stretchLines}>
+						<div css={maxWidth}>
+							<div css={stretchLines}>
 								<GuardianLines
 									count={decideLineCount(format.design)}
 									palette={palette}
@@ -393,7 +393,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -411,7 +411,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={articleWidth}>
+							<main css={articleWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -449,7 +449,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {

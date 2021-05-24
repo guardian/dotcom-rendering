@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
@@ -50,7 +50,7 @@ import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -71,11 +71,15 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+				*/
 				${from.wide} {
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr; /* Main content */
+					grid-template-columns: 219px 1px 1fr;
 
 					grid-template-areas:
 						'title  border  headline'
@@ -86,11 +90,15 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  .';
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+				*/
 				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column */
-						1px /* Vertical grey border */
-						1fr; /* Main content */
+					grid-template-columns: 140px 1px 1fr;
 
 					grid-template-areas:
 						'title  border  headline'
@@ -363,7 +371,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						)}
 					</GridItem>
 					<GridItem area="headline">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleHeadlinePadding
 								design={format.design}
 								starRating={
@@ -371,7 +379,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								}
 							>
 								{age && (
-									<div className={ageWarningMargins}>
+									<div css={ageWarningMargins}>
 										<AgeWarning age={age} />
 									</div>
 								)}
@@ -391,7 +399,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</ArticleHeadlinePadding>
 						</div>
 						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div className={starWrapper}>
+							<div css={starWrapper}>
 								<StarRating
 									rating={CAPI.starRating}
 									size="large"
@@ -408,7 +416,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</GridItem>
 					<GridItem area="media">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<MainMedia
 								format={format}
 								palette={palette}
@@ -419,8 +427,8 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 					<GridItem area="lines">
-						<div className={maxWidth}>
-							<div className={stretchLines}>
+						<div css={maxWidth}>
+							<div css={stretchLines}>
 								<GuardianLines
 									count={decideLineCount(format.design)}
 									palette={palette}
@@ -433,7 +441,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -451,7 +459,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={articleWidth}>
+							<main css={articleWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
