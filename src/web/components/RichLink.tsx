@@ -289,11 +289,11 @@ export const RichLink = ({
 						<div css={richLinkReadMore(palette)}>
 							<ArrowInCircle />
 							<div
-								css={cx(
+								css={
 									isLabs
 										? labsReadMoreTextStyle
 										: readMoreTextStyle,
-								)}
+								}
 							>
 								{readMoreText(contentType)}
 							</div>

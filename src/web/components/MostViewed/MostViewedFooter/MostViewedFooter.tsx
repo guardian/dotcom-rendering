@@ -124,7 +124,7 @@ export const MostViewedFooter = ({
 			css={adSlotUnspecifiedWidth}
 		>
 			<div
-				css={cx(stackBelow('leftCol'), mostPopularAdStyle)}
+				css={[stackBelow('leftCol'), mostPopularAdStyle]}
 				data-link-name="most-popular"
 				data-component="most-popular"
 				data-cy-ab-user-in-variant={abTestCypressDataAttr}

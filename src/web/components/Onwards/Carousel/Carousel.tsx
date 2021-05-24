@@ -577,7 +577,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={prev}
 								aria-label="Move carousel backwards"
-								css={cx(buttonStyle, prevButtonStyle(index))}
+								css={[buttonStyle, prevButtonStyle(index)]}
 								data-link-name={`${arrowName}-prev`}
 							>
 								<SvgChevronLeftSingle />
@@ -585,10 +585,10 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={next}
 								aria-label="Move carousel forwards"
-								css={cx(
+								css={[
 									buttonStyle,
 									nextButtonStyle(index, trails.length),
-								)}
+								]}
 								data-link-name={`${arrowName}-next`}
 							>
 								<SvgChevronRightSingle />

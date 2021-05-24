@@ -359,7 +359,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 		edition === 'UK' ? ContributeButton : SubscribeButton;
 
 	return (
-		<div ref={setNode} css={cx(inHeader && headerStyles)}>
+		<div ref={setNode} css={inHeader && headerStyles}>
 			<div css={inHeader && hiddenUntilTablet}>
 				<div css={messageStyles(false)}>
 					<span>Support the&nbsp;Guardian</span>
