@@ -3,6 +3,9 @@ import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
 import { cache } from 'emotion';
 import { CacheProvider } from '@emotion/core';
+import { Global, css } from '@emotion/react';
+import { focusHalo } from '@guardian/src-foundations/accessibility';
+
 import { escapeData } from '@root/src/lib/escapeData';
 import {
 	CDN,
@@ -54,11 +57,24 @@ const decideTitle = (CAPI: CAPIType): string => {
 export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = decideTitle(CAPI);
-	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
+	const {
+		html,
+		css: extractedCss,
+		ids: cssIDs,
+	}: RenderToStringResult = extractCritical(
 		renderToString(
 			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
 			<CacheProvider value={cache}>
 				<StrictMode>
+					<Global
+						styles={css`
+							/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
+							/* The not(.src...) selector is to work with Source's FocusStyleManager. */
+							*:focus {
+								${focusHalo}
+							}
+						`}
+					/>
 					<DecideLayout CAPI={CAPI} NAV={NAV} />
 				</StrictMode>
 			</CacheProvider>,
@@ -268,7 +284,7 @@ export const document = ({ data }: Props): string => {
 		loadableConfigScripts,
 		priorityScriptTags,
 		lowPriorityScriptTags,
-		css,
+		css: extractedCss,
 		html,
 		fontFiles,
 		title,

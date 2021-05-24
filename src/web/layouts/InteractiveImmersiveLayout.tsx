@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	brandBackground,
@@ -73,7 +73,7 @@ const Box = ({
 	children: React.ReactNode;
 }) => (
 	<div
-		className={css`
+		css={css`
 			/*
 				This pseudo css shows a black box to the right of the headline
 				so that the black background of the inverted text stretches
@@ -149,7 +149,7 @@ export const InteractiveImmersiveLayout = ({
 
 	const LeftColCaption = () => (
 		<div
-			className={css`
+			css={css`
 				margin-top: ${HEADLINE_OFFSET}px;
 				position: absolute;
 				margin-left: 20px;
@@ -168,12 +168,12 @@ export const InteractiveImmersiveLayout = ({
 	return (
 		<>
 			<div
-				className={css`
+				css={css`
 					background-color: ${palette.background.article};
 				`}
 			>
 				<div
-					className={cx(
+					css={cx(
 						mainMedia && hasMainMediaStyles,
 						css`
 							display: flex;
@@ -182,7 +182,7 @@ export const InteractiveImmersiveLayout = ({
 					)}
 				>
 					<header
-						className={css`
+						css={css`
 							${getZIndex('headerWrapper')}
 							order: 0;
 						`}
@@ -238,7 +238,7 @@ export const InteractiveImmersiveLayout = ({
 				{mainMedia && (
 					<>
 						<div
-							className={css`
+							css={css`
 								margin-top: -${HEADLINE_OFFSET}px;
 								/*
                         This z-index is what ensures the headline title text shows above main media. For
