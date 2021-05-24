@@ -121,6 +121,7 @@ export const renderElement = ({
 					trackUrl={element.trackUrl}
 					kicker={element.kicker}
 					title={element.title}
+					duration={element.duration}
 					pillar={format.theme}
 				/>,
 			];
