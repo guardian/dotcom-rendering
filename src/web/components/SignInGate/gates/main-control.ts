@@ -9,6 +9,7 @@ import {
 	isValidTag,
 	isIOS9,
 	isPaidContent,
+	isPreview,
 } from '@frontend/web/components/SignInGate/displayRule';
 import { hasUserDismissedGate } from '../dismissGate';
 
@@ -24,6 +25,7 @@ const canShow = (
 	isValidSection(CAPI) &&
 	isValidTag(CAPI) &&
 	!isPaidContent(CAPI) &&
+	!isPreview(CAPI) &&
 	!isIOS9();
 
 export const signInGateComponent: SignInGateComponent = {
