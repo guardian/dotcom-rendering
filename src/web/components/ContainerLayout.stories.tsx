@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { breakpoints } from '@guardian/src-foundations/mq';
 import {
@@ -22,7 +22,7 @@ export default {
 
 const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 	<div
-		className={css`
+		css={css`
 			background-color: lightgrey;
 			width: 100%;
 			height: ${heightInPixels}px;

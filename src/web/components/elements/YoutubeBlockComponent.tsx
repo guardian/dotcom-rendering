@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -94,22 +94,18 @@ export const YoutubeBlockComponent = ({
 	if (expired) {
 		return (
 			<figure
-				className={css`
+				css={css`
 					margin-top: 16px;
 					margin-bottom: 16px;
 				`}
 			>
-				<div
-					className={
-						overrideImage && expiredOverlayStyles(overrideImage)
-					}
-				>
-					<div className={expiredTextWrapperStyles}>
-						<div className={expiredSVGWrapperStyles}>
+				<div css={overrideImage && expiredOverlayStyles(overrideImage)}>
+					<div css={expiredTextWrapperStyles}>
+						<div css={expiredSVGWrapperStyles}>
 							<SvgAlertRound />
 						</div>
 						<p
-							className={css`
+							css={css`
 								${body.medium({
 									lineHeight: 'tight',
 								})}

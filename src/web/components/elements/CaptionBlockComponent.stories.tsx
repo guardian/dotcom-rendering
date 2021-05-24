@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
@@ -35,7 +35,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</LeftColumn>
 			<div
-				className={css`
+				css={css`
 					width: 620px;
 					padding: 20px;
 					flex-grow: 1;

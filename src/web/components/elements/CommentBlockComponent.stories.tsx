@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { CommentBlockComponent } from '@frontend/web/components/elements/CommentBlockComponent';
 
@@ -10,7 +10,7 @@ export default {
 export const defaultStory = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				padding: 20px;
 			`}
 		>

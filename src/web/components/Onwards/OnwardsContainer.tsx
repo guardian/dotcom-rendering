@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 
@@ -14,7 +14,7 @@ export const OnwardsContainer = ({
 	dataLinkName,
 }: Props) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-grow: 1;
 			flex-direction: column;

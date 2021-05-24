@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { from } from '@guardian/src-foundations/mq';
 
 const badgeSizingStyles = css`
@@ -31,9 +31,9 @@ type Props = {
 export const Badge = ({ imageUrl, seriesTag }: Props) => {
 	const urlPath = `/${seriesTag}`;
 	return (
-		<div className={badgeWrapper}>
-			<a href={urlPath} className={badgeLink} role="button">
-				<img className={imageStyles} src={imageUrl} alt="" />
+		<div css={badgeWrapper}>
+			<a href={urlPath} css={badgeLink} role="button">
+				<img css={imageStyles} src={imageUrl} alt="" />
 			</a>
 		</div>
 	);

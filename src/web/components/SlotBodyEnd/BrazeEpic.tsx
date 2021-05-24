@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { either } from '@guardian/types';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
@@ -176,7 +176,7 @@ const BrazeEpic = ({
 
 		if (props) {
 			return (
-				<div ref={setNode} className={wrapperMargins}>
+				<div ref={setNode} css={wrapperMargins}>
 					<div ref={epicRef}>
 						{/* eslint-disable-next-line react/jsx-props-no-spreading */}
 						<Epic {...props} />

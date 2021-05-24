@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -30,7 +30,7 @@ const ieFallback = css`
 
 const SideBySideGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			${ieFallback}
 			@supports (display: grid) {
 				margin-left: 0;
@@ -50,7 +50,7 @@ const SideBySideGrid = ({ children }: { children: React.ReactNode }) => (
 
 const OneAboveTwoGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			${ieFallback}
 			@supports (display: grid) {
 				margin-left: 0;
@@ -72,7 +72,7 @@ const OneAboveTwoGrid = ({ children }: { children: React.ReactNode }) => (
 
 const GridOfFour = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			${ieFallback}
 			@supports (display: grid) {
 				margin-left: 0;
@@ -104,7 +104,7 @@ export const MultiImageBlockComponent = ({
 		case 1:
 			return (
 				<div
-					className={css`
+					css={css`
 						margin-top: 12px;
 						margin-bottom: 12px;
 						img {
@@ -133,7 +133,7 @@ export const MultiImageBlockComponent = ({
 		case 2:
 			return (
 				<div
-					className={css`
+					css={css`
 						margin-top: 12px;
 						margin-bottom: 12px;
 
@@ -176,7 +176,7 @@ export const MultiImageBlockComponent = ({
 		case 3:
 			return (
 				<div
-					className={css`
+					css={css`
 						margin-top: 12px;
 						margin-bottom: 12px;
 
@@ -228,7 +228,7 @@ export const MultiImageBlockComponent = ({
 		case 4:
 			return (
 				<div
-					className={css`
+					css={css`
 						margin-top: 12px;
 						margin-bottom: 12px;
 						img {

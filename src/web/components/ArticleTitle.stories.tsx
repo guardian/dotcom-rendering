@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar, Special } from '@guardian/types';
 
@@ -8,7 +8,7 @@ import { ArticleTitle } from './ArticleTitle';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 200px;
 			padding: 20px;
 		`}
@@ -102,7 +102,7 @@ beyondTheBlade.story = { name: 'Beyond the blade badge' };
 export const immersiveComment = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				background-color: lightgray;
 				padding: 20px;
 			`}
@@ -129,7 +129,7 @@ immersiveComment.story = { name: 'Immersive comment piece' };
 export const immersiveCommentTag = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				background-color: lightgray;
 				padding: 20px;
 			`}

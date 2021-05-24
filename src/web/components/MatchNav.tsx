@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	brandAlt,
@@ -20,7 +20,7 @@ type Props = {
 
 const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 		`}
@@ -31,7 +31,7 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 
 const CrestRow = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 			align-items: flex-end;
@@ -43,7 +43,7 @@ const CrestRow = ({ children }: { children: React.ReactNode }) => (
 
 const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
@@ -73,7 +73,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 
 const Column = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
@@ -85,7 +85,7 @@ const Column = ({ children }: { children: React.ReactNode }) => (
 
 const TeamName = ({ name }: { name: string }) => (
 	<h2
-		className={css`
+		css={css`
 			${headline.xxsmall({ fontWeight: 'bold' })}
 		`}
 	>
@@ -95,14 +95,14 @@ const TeamName = ({ name }: { name: string }) => (
 
 const Scorers = ({ scorers }: { scorers: string[] }) => (
 	<ul
-		className={css`
+		css={css`
 			margin-top: ${space[1]}px;
 			margin-bottom: ${space[3]}px;
 		`}
 	>
 		{scorers.map((player) => (
 			<li
-				className={css`
+				css={css`
 					${textSans.small()}
 				`}
 			>
@@ -114,7 +114,7 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
 
 const Crest = ({ crest }: { crest: string }) => (
 	<div
-		className={css`
+		css={css`
 			position: relative;
 			width: 3.75rem;
 			height: 3.75rem;
@@ -124,7 +124,7 @@ const Crest = ({ crest }: { crest: string }) => (
 		`}
 	>
 		<img
-			className={css`
+			css={css`
 				position: absolute;
 				left: 0.5rem;
 				right: 0.5rem;
@@ -153,7 +153,7 @@ const TeamNav = ({
 	scorers: string[];
 }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-grow: 1;
 			flex-basis: 50%;
@@ -161,7 +161,7 @@ const TeamNav = ({
 	>
 		<Column>
 			<div
-				className={css`
+				css={css`
 					display: flex;
 					flex-direction: column;
 					flex-grow: 1;
@@ -173,7 +173,7 @@ const TeamNav = ({
 			<CrestRow>
 				<Crest crest={crest} />
 				<div
-					className={css`
+					css={css`
 						margin-left: -${space[2]}px;
 					`}
 				>
@@ -186,7 +186,7 @@ const TeamNav = ({
 
 const Comments = ({ comments }: { comments: string }) => (
 	<div
-		className={css`
+		css={css`
 			${textSans.small()}
 			margin-top: ${space[2]}px;
 			padding-top: ${space[1]}px;
@@ -201,7 +201,7 @@ const Comments = ({ comments }: { comments: string }) => (
 
 const YellowBorder = () => (
 	<div
-		className={css`
+		css={css`
 			/* stylelint-disable-next-line color-no-hex */
 			border-left: 1px solid #d0bb04;
 			margin-left: ${space[1]}px;
@@ -214,7 +214,7 @@ const thinGreySolid = `1px solid ${border.secondary}`;
 
 const GreyBorder = () => (
 	<div
-		className={css`
+		css={css`
 			/* stylelint-disable-next-line color-no-hex */
 			border-left: ${thinGreySolid};
 			margin-left: ${space[1]}px;
@@ -261,18 +261,14 @@ const tabLabel = css`
 
 const MatchTabs = ({ minByMinUrl }: { minByMinUrl?: string }) => (
 	<div>
-		<ul className={tabsContainer}>
-			<li className={tab}>
-				<span className={tabLabel}>Report</span>
+		<ul css={tabsContainer}>
+			<li css={tab}>
+				<span css={tabLabel}>Report</span>
 			</li>
 			<GreyBorder />
-			<li className={tab}>
-				<a
-					href={minByMinUrl}
-					data-link-name="Min-by-min"
-					className={tabLink}
-				>
-					<span className={tabLabel}>Min-by-min</span>
+			<li css={tab}>
+				<a href={minByMinUrl} data-link-name="Min-by-min" css={tabLink}>
+					<span css={tabLabel}>Min-by-min</span>
 				</a>
 			</li>
 		</ul>

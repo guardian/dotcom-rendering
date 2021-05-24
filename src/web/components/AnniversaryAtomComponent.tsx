@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { from } from '@guardian/src-foundations/mq';
 
 const atomStyles = (
@@ -66,7 +66,7 @@ export const AnniversaryAtomComponent = ({
 }) => {
 	return (
 		<div
-			className={atomStyles(anniversaryInteractiveAtom)}
+			css={atomStyles(anniversaryInteractiveAtom)}
 			data-visuals-hook="article-anniversary-atom"
 		>
 			{anniversaryInteractiveAtom && (

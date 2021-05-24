@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
@@ -30,10 +30,10 @@ const paidForStyle = (palette: Palette) => {
 };
 
 export const LabBadge = ({ badgeForLab, brandName, palette }: Props) => (
-	<div className={badgeWrapperStyle}>
-		<div className={paidForStyle(palette)}>Paid for by</div>
+	<div css={badgeWrapperStyle}>
+		<div css={paidForStyle(palette)}>Paid for by</div>
 		<span
-			className={css`
+			css={css`
 				${visuallyHidden};
 			`}
 		>
@@ -42,6 +42,6 @@ export const LabBadge = ({ badgeForLab, brandName, palette }: Props) => (
 				: 'This content has been paid for by a sponsor as part of Guardian Labs.'}
 		</span>
 		{/* eslint-disable-next-line jsx-a11y/alt-text */}
-		<img className={badgeImageStyle} alt="" src={badgeForLab} />
+		<img css={badgeImageStyle} alt="" src={badgeForLab} />
 	</div>
 );

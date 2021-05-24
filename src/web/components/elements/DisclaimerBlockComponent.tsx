@@ -1,5 +1,5 @@
 import { body } from '@guardian/src-foundations/typography';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const disclaimerStyles = css`
 	${body.small()};
@@ -15,7 +15,7 @@ export const DisclaimerBlockComponent: React.FC<{
 	html: string;
 }> = ({ html }) => (
 	<footer
-		className={disclaimerStyles}
+		css={disclaimerStyles}
 		data-cy="affiliate-disclaimer"
 		dangerouslySetInnerHTML={{
 			__html: html,

@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Pillar, Display } from '@guardian/types';
 
@@ -12,7 +12,7 @@ export default {
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			margin: 40px;
 		`}
 	>

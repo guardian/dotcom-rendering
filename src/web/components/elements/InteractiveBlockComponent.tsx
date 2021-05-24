@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { body } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -274,7 +274,7 @@ export const InteractiveBlockComponent = ({
 			<div
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 				ref={wrapperRef}
-				className={wrapperStyle(role, loaded)}
+				css={wrapperStyle(role, loaded)}
 			>
 				{!loaded && (
 					<>
@@ -285,7 +285,7 @@ export const InteractiveBlockComponent = ({
 						<a
 							ref={placeholderLinkRef}
 							data-name="placeholder"
-							className={placeholderLinkStyle}
+							css={placeholderLinkStyle}
 							href={url}
 						>
 							{alt}

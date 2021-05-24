@@ -1,10 +1,10 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Lineup } from './Lineup';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 340px;
 			padding: 20px;
 			/* stylelint-disable-next-line color-no-hex */

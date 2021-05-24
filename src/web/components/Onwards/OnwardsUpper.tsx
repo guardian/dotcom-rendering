@@ -1,5 +1,6 @@
+import { css } from '@emotion/react';
+
 import { joinUrl } from '@root/src/lib/joinUrl';
-import { css } from 'emotion';
 import { Section } from '@root/src/web/components/Section';
 
 import { OnwardsData } from './OnwardsData';
@@ -166,7 +167,7 @@ export const OnwardsUpper = ({
 	}
 
 	return (
-		<div className={onwardsWrapper}>
+		<div css={onwardsWrapper}>
 			{url && (
 				<Section>
 					<OnwardsData

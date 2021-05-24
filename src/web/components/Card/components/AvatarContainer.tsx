@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -37,8 +37,8 @@ const sizingStyles = css`
 
 export const AvatarContainer = ({ children }: Props) => {
 	return (
-		<div className={containerStyles}>
-			<div className={sizingStyles}>{children}</div>
+		<div css={containerStyles}>
+			<div css={sizingStyles}>{children}</div>
 		</div>
 	);
 };
