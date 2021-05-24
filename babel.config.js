@@ -49,7 +49,7 @@ module.exports = {
                     '@emotion',
                     {
                         sourceMap: true,
-                        autoLabel: true,
+                        autoLabel: 'dev-only',
                     },
                 ],
             ],
