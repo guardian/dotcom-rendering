@@ -1,9 +1,10 @@
 import { StrictMode } from 'react';
-import { extractCritical } from 'emotion-server';
 import { renderToString } from 'react-dom/server';
-import { cache } from 'emotion';
-import { CacheProvider } from '@emotion/core';
-import { Global, css } from '@emotion/react';
+
+import createEmotionServer from '@emotion/server/create-instance';
+import createCache from '@emotion/cache';
+import { CacheProvider, Global, css } from '@emotion/react';
+
 import { focusHalo } from '@guardian/src-foundations/accessibility';
 
 import { escapeData } from '@root/src/lib/escapeData';
@@ -57,13 +58,17 @@ const decideTitle = (CAPI: CAPIType): string => {
 export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = decideTitle(CAPI);
+	const key = 'dcr';
+	const cache = createCache({ key });
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCritical } = createEmotionServer(cache);
+
 	const {
 		html,
 		css: extractedCss,
 		ids: cssIDs,
 	}: RenderToStringResult = extractCritical(
 		renderToString(
-			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
 			<CacheProvider value={cache}>
 				<StrictMode>
 					<Global
