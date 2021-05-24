@@ -173,13 +173,13 @@ export const InteractiveImmersiveLayout = ({
 				`}
 			>
 				<div
-					css={cx(
+					css={[
 						mainMedia && hasMainMediaStyles,
 						css`
 							display: flex;
 							flex-direction: column;
 						`,
-					)}
+					]}
 				>
 					<header
 						css={css`
