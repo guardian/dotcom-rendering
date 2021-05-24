@@ -5,7 +5,7 @@ import { unescapeData } from '@root/src/lib/escapeData';
 
 // fallback styling for when JS is disabled
 const noJSStyling = css`
-	.twitter-tweet :not(.twitter-tweet-rendered) {
+	.twitter-tweet:not(.twitter-tweet-rendered) {
 		border: 1px solid ${border.secondary};
 		border-radius: 4px;
 		padding: 20px;
@@ -28,7 +28,7 @@ export const TweetBlockComponent: React.FC<{
 	element: TweetBlockElement;
 }> = ({ element }) => {
 	return (
-		<div>
+		<>
 			<div
 				css={noJSStyling}
 				dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
@@ -37,6 +37,6 @@ export const TweetBlockComponent: React.FC<{
 				async={true}
 				src="https://platform.twitter.com/widgets.js"
 			/>
-		</div>
+		</>
 	);
 };
