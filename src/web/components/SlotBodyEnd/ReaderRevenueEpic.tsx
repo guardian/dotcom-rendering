@@ -245,7 +245,7 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 	}, [hasBeenSeen, meta]);
 	if (Epic) {
 		return (
-			<div ref={setNode} className={wrapperMargins}>
+			<div ref={setNode} css={wrapperMargins}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Epic
 					{...module.props}
