@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
@@ -29,7 +29,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 	`;
 
 	return (
-		<div className={embedContainer}>
+		<div css={embedContainer}>
 			<MaintainAspectRatio height={height} width={width}>
 				<iframe
 					src={embedUrl}

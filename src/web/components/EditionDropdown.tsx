@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Dropdown } from '@root/src/web/components/Dropdown';
 import { brand } from '@guardian/src-foundations/palette';
@@ -69,9 +69,9 @@ export const EditionDropdown: React.FC<{
 	linksToDisplay.unshift(activeLink);
 
 	return (
-		<div className={editionDropdown}>
+		<div css={editionDropdown}>
 			<div
-				className={css`
+				css={css`
 					padding-top: 7px;
 				`}
 			>

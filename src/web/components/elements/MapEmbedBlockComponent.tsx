@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { Caption } from '@root/src/web/components/Caption';
@@ -31,7 +31,7 @@ export const MapEmbedBlockComponent: React.FC<{
 	`;
 
 	return (
-		<div className={embedContainer}>
+		<div css={embedContainer}>
 			<MaintainAspectRatio height={height} width={width}>
 				<iframe
 					src={embedUrl}

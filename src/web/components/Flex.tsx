@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 type Props = {
 	children: React.ReactNode;
@@ -12,7 +12,7 @@ export const Flex = ({
 	justify = 'space-between',
 }: Props) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: ${direction};
 			justify-content: ${justify};

@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
@@ -37,5 +37,5 @@ const gridAreaStyles = (area: string) => {
 };
 
 export const GridItem = ({ children, area }: Props) => (
-	<div className={gridAreaStyles(area)}>{children}</div>
+	<div css={gridAreaStyles(area)}>{children}</div>
 );

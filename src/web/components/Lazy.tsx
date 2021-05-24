@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 
@@ -32,7 +32,7 @@ export const Lazy = ({ children, margin }: Props) => {
 	// use for visual regression
 	const renderChildren = hasBeenSeen || Lazy.disabled;
 	return (
-		<div ref={setRef} className={flexGrowStyles}>
+		<div ref={setRef} css={flexGrowStyles}>
 			{renderChildren && <>{children}</>}
 		</div>
 	);

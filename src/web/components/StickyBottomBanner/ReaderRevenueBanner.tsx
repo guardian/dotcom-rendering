@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import {
@@ -316,7 +316,7 @@ const RemoteBanner = ({
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
 				ref={setNode}
-				className={css`
+				css={css`
 					width: 100%;
 					${getZIndex('banner')}
 				`}

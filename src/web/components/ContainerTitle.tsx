@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -65,15 +65,15 @@ export const ContainerTitle = ({
 	return (
 		<>
 			{url ? (
-				<a className={linkStyles} href={url}>
-					<h2 className={headerStyles(fontColour)}>{title}</h2>
+				<a css={linkStyles} href={url}>
+					<h2 css={headerStyles(fontColour)}>{title}</h2>
 				</a>
 			) : (
-				<h2 className={headerStyles(fontColour)}>{title}</h2>
+				<h2 css={headerStyles(fontColour)}>{title}</h2>
 			)}
 			{description && (
 				<p
-					className={descriptionStyles(fontColour)}
+					css={descriptionStyles(fontColour)}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
 			)}

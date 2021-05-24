@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, RefObject } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { MostViewedRight } from './MostViewedRight';
 
@@ -43,7 +43,7 @@ export const MostViewedRightWrapper = ({ palette, limitItems }: Props) => {
 	}, [heightIsAvailable]);
 
 	return (
-		<div ref={bodyRef} className={flexGrow}>
+		<div ref={bodyRef} css={flexGrow}>
 			{heightIsAvailable ? (
 				<MostViewedRight palette={palette} limitItems={limitItems} />
 			) : null}

@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 type Props = {
 	height: number;
@@ -9,7 +9,7 @@ type Props = {
 export const MaintainAspectRatio = ({ height, width, children }: Props) => (
 	/* https://css-tricks.com/aspect-ratio-boxes/ */
 	<div
-		className={css`
+		css={css`
 			/* position relative to contain the absolutely positioned iframe plus any Overlay image */
 			position: relative;
 			padding-bottom: ${(height / width) * 100}%;

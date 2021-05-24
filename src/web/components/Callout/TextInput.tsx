@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { TextInput as SourceTextInput } from '@guardian/src-text-input';
 import { space } from '@guardian/src-foundations';
@@ -15,7 +15,7 @@ type Props = {
 
 export const TextInput = ({ formField, formData, setFormData }: Props) => (
 	<SourceTextInput
-		className={textInputStyles}
+		css={textInputStyles}
 		data-testid={`form-field-${formField.id}`}
 		type={formField.type}
 		label={formField.label}

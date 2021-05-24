@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Format, Special } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -95,7 +95,7 @@ export const CardLink = ({
 }: Props) => (
 	<a
 		href={linkTo}
-		className={linkStyles(format, palette)}
+		css={linkStyles(format, palette)}
 		data-link-name={dataLinkName}
 	>
 		{children}

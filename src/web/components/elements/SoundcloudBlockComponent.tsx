@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const widthOverride = css`
@@ -12,7 +12,7 @@ export const SoundcloudBlockComponent: React.FC<{
 	element: SoundcloudBlockElement;
 }> = ({ element }) => {
 	return (
-		<div className={widthOverride}>
+		<div css={widthOverride}>
 			<div
 				data-cy="soundcloud-embed"
 				dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}

@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	calloutCampaign,
@@ -14,7 +14,7 @@ export default {
 export const Default = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				width: 630px;
 				padding: 15px;
 			`}
@@ -28,7 +28,7 @@ Default.story = { name: 'default' };
 export const WithOnlyTwoRadio = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				width: 630px;
 				padding: 15px;
 			`}
@@ -45,7 +45,7 @@ WithOnlyTwoRadio.story = { name: 'with only two radio' };
 export const WithError = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				width: 630px;
 				padding: 15px;
 			`}
