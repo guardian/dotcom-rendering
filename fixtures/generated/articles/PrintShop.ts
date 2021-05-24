@@ -1689,61 +1689,61 @@ export const PrintShop: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'f387361f-7f52-4ece-ace3-a0918befabba',
+					elementId: '0048a741-5db8-419c-b35c-3d46ed830ba7',
 				},
 				{
 					html:
 						'<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '59a658b3-cd07-4cf7-9c89-1f1d4432a257',
+					elementId: '0dd0f9d1-c7ae-40e6-8f3b-c829eb92ea26',
 				},
 				{
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '9f1e678e-0fa4-4288-9a2e-47e993d7448b',
+					elementId: '67a3fe31-b7ee-41b0-889f-eabe8769cd9f',
 				},
 				{
 					html: '<p><em>Words: Jonny Weeks</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'd349740f-227c-4af1-82b2-1d52087c20a3',
+					elementId: '0e9dad8b-ab0e-4830-b149-ca4a9eef48ce',
 				},
 				{
 					html:
 						'<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '7af35289-832e-435b-8f29-ad328ae45551',
+					elementId: '4feb2ead-2525-44be-aa54-730cc8fdf425',
 				},
 				{
 					html:
 						'<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '7ba35d3b-47b6-437a-8cfa-be60ec0dcb2a',
+					elementId: '0179b32c-40d3-42f4-b695-c0318c488fd4',
 				},
 				{
 					html:
 						'<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0a5422ba-a73d-457a-9625-d47885ad9599',
+					elementId: '43d7293a-10c5-4442-82dc-ec468450b3b8',
 				},
 				{
 					html:
 						'<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '022b9f53-1601-4f38-90ba-e18295f0e25c',
+					elementId: 'e1bdfcf1-2fcc-4122-813f-cd1f2ad2e8f3',
 				},
 				{
 					html:
 						'<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '49a0b978-c165-404b-830d-ba16f283903c',
+					elementId: 'b83a90c7-d2cd-4f06-9233-ae37bc07c7b4',
 				},
 			],
 			blockCreatedOn: 1572887180000,
@@ -1840,7 +1840,6 @@ export const PrintShop: CAPIType = {
 			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
-			abStickyNavTest: true,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
