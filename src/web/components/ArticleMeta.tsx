@@ -299,8 +299,14 @@ export const ArticleMeta = ({
 					<div css={metaNumbers(palette)}>
 						<Counts>
 							{/* The meta-number css is needed by Counts.tsx */}
-							<div css="meta-number" id="share-count-root" />
-							<div css="meta-number" id="comment-count-root" />
+							<div
+								className="meta-number"
+								id="share-count-root"
+							/>
+							<div
+								className="meta-number"
+								id="comment-count-root"
+							/>
 						</Counts>
 					</div>
 				</div>
