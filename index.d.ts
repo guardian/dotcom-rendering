@@ -502,6 +502,7 @@ type CAPIBrowserType = {
 	isLive: boolean;
 	matchUrl?: string;
 	elementsToHydrate: CAPIElement[];
+	isPreview?: boolean;
 };
 
 interface TagType {
@@ -697,6 +698,7 @@ interface ConfigType extends CommercialConfigType {
 	ipsosTag?: string;
 	isLiveBlog?: boolean;
 	isLive?: boolean;
+	isPreview?: boolean;
 }
 
 interface ConfigTypeBrowser {
