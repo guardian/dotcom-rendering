@@ -12,9 +12,8 @@ const fullWidthStyles = css`
 
 export const UnsafeEmbedBlockComponent = ({ html, alt, index }: Props) => (
 	<iframe
-		css={`
-			${fullWidthStyles} js-embed__iframe
-		`}
+		css={fullWidthStyles}
+		className="js-embed__iframe"
 		title={alt}
 		// name is used to identify each unique iframe on the page to resize
 		// we therefore use the "unsafe-embed-" prefix followed by index to

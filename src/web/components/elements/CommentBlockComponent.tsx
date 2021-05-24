@@ -85,10 +85,9 @@ export const CommentBlockComponent = ({
 			/>
 			<div css={profileWrapperStyles}>
 				<a
+					css={avatarStyles}
 					// TODO: remove avatarLink
-					css={`
-						${avatarStyles} avatarLink
-					`}
+					className="avatarLink"
 					href={profileURL}
 					aria-hidden="true"
 				>
@@ -105,7 +104,7 @@ export const CommentBlockComponent = ({
 						{profileName}
 					</a>
 					{/* TODO: remove permalink */}
-					<a href={permalink} css="permalink">
+					<a href={permalink} className="permalink">
 						<time
 							css={css`
 								${textSans.small()};

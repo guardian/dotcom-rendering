@@ -15,7 +15,8 @@ export const InstagramBlockComponent: React.FC<{
 }> = ({ element, index }) => {
 	return (
 		<iframe
-			css={[fullWidthStyles, 'js-embed__iframe']}
+			css={fullWidthStyles}
+			className="js-embed__iframe"
 			name={`instagram-embed-${index}`}
 			data-cy="instagram-embed"
 			title={`Instagram Post ${index}`}
