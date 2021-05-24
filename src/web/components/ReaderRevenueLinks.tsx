@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import {
@@ -255,7 +255,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 
 	if (SupportHeader && supportHeaderResponse) {
 		return (
-			<div ref={setNode} className={headerStyles}>
+			<div ref={setNode} css={headerStyles}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<SupportHeader {...supportHeaderResponse.module.props} />
 				{/* eslint-enable react/jsx-props-no-spreading */}
@@ -325,14 +325,10 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 
 	if (hideSupportMessaging) {
 		return (
-			<div className={cx(inHeader && headerStyles)}>
-				<div
-					className={cx({
-						[hiddenUntilTablet]: inHeader,
-					})}
-				>
-					<div className={messageStyles(true)}> Thank you </div>
-					<div className={subMessageStyles}>
+			<div css={inHeader && headerStyles}>
+				<div css={inHeader && hiddenUntilTablet}>
+					<div css={messageStyles(true)}> Thank you </div>
+					<div css={subMessageStyles}>
 						Your support powers our independent journalism
 					</div>
 				</div>
@@ -342,7 +338,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 
 	const ContributeButton = () => (
 		<a
-			className={linkStyles}
+			css={linkStyles}
 			href={getUrl('contribute')}
 			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 		>
@@ -351,7 +347,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 	);
 	const SubscribeButton = () => (
 		<a
-			className={linkStyles}
+			css={linkStyles}
 			href={getUrl('subscribe')}
 			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
 		>
@@ -363,28 +359,19 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 		edition === 'UK' ? ContributeButton : SubscribeButton;
 
 	return (
-		<div ref={setNode} className={cx(inHeader && headerStyles)}>
-			<div
-				className={cx({
-					[hiddenUntilTablet]: inHeader,
-				})}
-			>
-				<div className={messageStyles(false)}>
+		<div ref={setNode} css={cx(inHeader && headerStyles)}>
+			<div css={inHeader && hiddenUntilTablet}>
+				<div css={messageStyles(false)}>
 					<span>Support the&nbsp;Guardian</span>
 				</div>
-				<div className={subMessageStyles}>
+				<div css={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
 				<PrimaryButton />
 				<SecondaryButton />
 			</div>
 
-			<div
-				className={cx({
-					[hiddenFromTablet]: inHeader,
-					[hidden]: !inHeader,
-				})}
-			>
+			<div css={inHeader ? hiddenFromTablet : hidden}>
 				<PrimaryButton />
 			</div>
 		</div>

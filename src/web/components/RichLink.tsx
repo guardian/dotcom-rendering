@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	text,
@@ -16,8 +16,6 @@ import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Hide } from '@root/src/web/components/Hide';
 import { Avatar } from '@frontend/web/components/Avatar';
-
-type ColourType = string;
 
 interface Props {
 	richLinkIndex: number;
@@ -44,19 +42,19 @@ const neutralBackground = css`
 	}
 `;
 
-const pillarBackground: (palette: Palette) => ColourType = (palette) => {
+const pillarBackground = (palette: Palette) => {
 	return css`
 		background-color: ${palette.background.richLink};
 	`;
 };
 
-const textColour: (palette: Palette) => ColourType = (palette) => {
+const textColour = (palette: Palette) => {
 	return css`
 		color: ${palette.text.richLink};
 	`;
 };
 
-const richLinkTopBorder: (palette: Palette) => ColourType = (palette) => {
+const richLinkTopBorder = (palette: Palette) => {
 	return css`
 		border-top: 1px;
 		border-top-style: solid;
@@ -99,7 +97,7 @@ const labsRichLinkTitle = css`
 	${textSans.small({ fontWeight: 'bold' })}
 `;
 
-const richLinkReadMore: (palette: Palette) => ColourType = (palette) => {
+const richLinkReadMore = (palette: Palette) => {
 	return css`
 		fill: ${palette.fill.richLink};
 		color: ${palette.text.richLink};
@@ -226,27 +224,21 @@ export const RichLink = ({
 			data-print-layout="hide"
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
-			className={pillarBackground(palette)}
+			css={pillarBackground(palette)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div className={neutralBackground}>
-				<a className={richLinkLink} href={url}>
-					<div className={richLinkTopBorder(palette)} />
+			<div css={neutralBackground}>
+				<a css={richLinkLink} href={url}>
+					<div css={richLinkTopBorder(palette)} />
 					{showImage && (
 						<div>
-							<img
-								className={imageStyles}
-								src={thumbnailUrl}
-								alt=""
-							/>
+							<img css={imageStyles} src={thumbnailUrl} alt="" />
 						</div>
 					)}
-					<div className={richLinkElements}>
-						<div className={richLinkHeader}>
+					<div css={richLinkElements}>
+						<div css={richLinkHeader}>
 							<div
-								className={cx(
-									isLabs ? labsRichLinkTitle : richLinkTitle,
-								)}
+								css={isLabs ? labsRichLinkTitle : richLinkTitle}
 							>
 								{isOpinion && (
 									<>
@@ -267,14 +259,12 @@ export const RichLink = ({
 								{linkText}
 							</div>
 							{isOpinion && (
-								<div
-									className={cx(byline, textColour(palette))}
-								>
+								<div css={[byline, textColour(palette)]}>
 									{mainContributor}
 								</div>
 							)}
 							{starRating && starRating > 0 && (
-								<div className={starWrapper}>
+								<div css={starWrapper}>
 									<StarRating
 										rating={starRating}
 										size="medium"
@@ -282,13 +272,13 @@ export const RichLink = ({
 								</div>
 							)}
 							{isPaidContent && sponsorName && (
-								<div className={paidForBranding}>
+								<div css={paidForBranding}>
 									Paid for by {sponsorName}
 								</div>
 							)}
 						</div>
 						{isOpinion && contributorImage && (
-							<div className={contributorImageWrapper}>
+							<div css={contributorImageWrapper}>
 								<Avatar
 									imageSrc={contributorImage}
 									imageAlt={mainContributor}
@@ -296,10 +286,10 @@ export const RichLink = ({
 								/>
 							</div>
 						)}
-						<div className={richLinkReadMore(palette)}>
+						<div css={richLinkReadMore(palette)}>
 							<ArrowInCircle />
 							<div
-								className={cx(
+								css={cx(
 									isLabs
 										? labsReadMoreTextStyle
 										: readMoreTextStyle,

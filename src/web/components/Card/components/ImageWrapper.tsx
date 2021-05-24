@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 
@@ -38,7 +38,7 @@ export const ImageWrapper = ({
 }: Props) => {
 	return (
 		<div
-			className={cx(
+			css={[
 				isFullCardImage && cardHeight,
 				css`
 					/* position relative is required here to bound the image overlay */
@@ -61,7 +61,7 @@ export const ImageWrapper = ({
 						object-fit: ${isFullCardImage && 'cover'};
 					}
 				`,
-			)}
+			]}
 		>
 			<>
 				{children}

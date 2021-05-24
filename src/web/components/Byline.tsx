@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
@@ -82,7 +82,7 @@ const colourStyles = (palette: Palette) => {
 };
 
 export const Byline = ({ text, palette, format, size }: Props) => (
-	<span className={cx(bylineStyles(size, format), colourStyles(palette))}>
+	<span css={[bylineStyles(size, format), colourStyles(palette)]}>
 		{text}
 	</span>
 );

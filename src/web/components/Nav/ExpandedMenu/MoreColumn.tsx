@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -171,29 +171,26 @@ export const MoreColumn: React.FC<{
 	};
 	return (
 		<li
-			className={cx(columnStyle, pillarDivider, pillarDividerExtended)}
+			css={[columnStyle, pillarDivider, pillarDividerExtended]}
 			role="none"
 		>
 			<ul
-				className={cx(columnLinks, {
-					[pillarColumnLinks]: !!moreColumn.pillar,
-				})}
+				css={[columnLinks, !!moreColumn.pillar && pillarColumnLinks]}
 				role="menu"
 				id={subNavId}
 			>
 				{(moreColumn.children || []).map((link) => (
 					<li
 						key={link.title.toLowerCase()}
-						className={cx(mainMenuLinkStyle, {
-							[hideDesktop]: !!link.mobileOnly,
-						})}
+						css={[
+							mainMenuLinkStyle,
+							!!link.mobileOnly && hideDesktop,
+						]}
 						role="none"
 					>
 						<a
-							className={cx(
-								'selectableMenuItem',
-								columnLinkTitle,
-							)}
+							className="selectableMenuItem"
+							css={columnLinkTitle}
 							href={link.url}
 							role="menuitem"
 							data-link-name={`nav2 : secondary : ${link.longTitle}`}
