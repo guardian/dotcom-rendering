@@ -292,7 +292,7 @@ export const RichLink = ({
 								css={
 									isLabs
 										? labsReadMoreTextStyle
-										: readMoreTextStyle,
+										: readMoreTextStyle
 								}
 							>
 								{readMoreText(contentType)}
