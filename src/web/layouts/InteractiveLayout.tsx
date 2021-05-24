@@ -71,11 +71,15 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+				*/
 				${from.wide} {
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr; /* Main content */
+					grid-template-columns: 219px 1px 1fr;
 
 					grid-template-areas:
 						'title  border  headline'
@@ -86,11 +90,15 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  .';
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+				*/
 				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column */
-						1px /* Vertical grey border */
-						1fr; /* Main content */
+					grid-template-columns: 140px 1px 1fr;
 
 					grid-template-areas:
 						'title  border  headline'

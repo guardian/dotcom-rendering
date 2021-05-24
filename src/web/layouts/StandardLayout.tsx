@@ -80,12 +80,16 @@ const StandardGrid = ({
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 
 					${isMatchReport
 						? css`
@@ -109,12 +113,16 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 
 					${isMatchReport
 						? css`
@@ -138,10 +146,14 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content
+					Right Column
+				*/
 				${until.leftCol} {
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 1fr 300px;
 					${isMatchReport
 						? css`
 								grid-template-areas:

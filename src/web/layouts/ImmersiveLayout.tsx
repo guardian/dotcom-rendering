@@ -68,13 +68,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 					grid-template-areas:
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
@@ -87,13 +91,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns:
-						140px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
@@ -106,11 +114,15 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content 
+					Right Column
+				*/
 				${until.leftCol} {
+					grid-template-columns: 1fr 300px;
 					grid-column-gap: 20px;
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
 					grid-template-areas:
 						'title       right-column'
 						'headline    right-column'

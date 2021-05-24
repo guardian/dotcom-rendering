@@ -69,11 +69,15 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content 
+					Empty border for spacing
+					Right Column
+				*/
 				${from.desktop} {
-					grid-template-columns:
-						309px /* Left Column (220 - 1px border) */
-						1px /* Empty border for spacing */
-						1fr /* Main content */;
+					grid-template-columns: 309px 1px 1fr;
 					grid-template-areas:
 						'lines border media'
 						'meta  border media'
@@ -82,11 +86,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${from.wide} {
-					grid-template-columns:
-						309px
-						1px
-						1fr
-						340px;
+					grid-template-columns: 309px 1px 1fr 340px;
 					grid-template-areas:
 						'lines border media right-column'
 						'meta  border media right-column'
