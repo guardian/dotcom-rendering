@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 import type { Tag } from '@guardian/content-api-models/v1/tag';
+import { breakpoints } from '@guardian/src-foundations';
 import { Display, Pillar } from '@guardian/types';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import {
@@ -163,7 +164,10 @@ export default {
 	decorators: [withKnobs],
 	parameters: {
 		layout: 'fullscreen',
-		chromatic: { diffThreshold: 0.25 },
+		chromatic: {
+			diffThreshold: 0.25,
+			viewports: [breakpoints.mobile, breakpoints.tablet],
+		},
 	},
 };
 
