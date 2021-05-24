@@ -36,7 +36,7 @@ module.exports = {
         production: {
             plugins: [
                 [
-                    'emotion',
+                    '@emotion',
                     {
                         sourceMap: false,
                     },
@@ -46,7 +46,7 @@ module.exports = {
         development: {
             plugins: [
                 [
-                    'emotion',
+                    '@emotion',
                     {
                         sourceMap: true,
                         autoLabel: true,
