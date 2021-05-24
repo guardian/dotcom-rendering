@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
@@ -35,7 +35,11 @@ export const ArticleRenderer: React.FC<{
 	//    But should be soon.
 	return (
 		<div
-			className={`article-body-commercial-selector ${commercialPosition} article-body-viewer-selector`}
+			className={[
+				'article-body-commercial-selector',
+				'article-body-viewer-selector',
+			].join(' ')}
+			css={commercialPosition}
 		>
 			{/* Insert the placeholder for the sign in gate on the 2nd article element */}
 			{withSignInGateSlot(output)}
