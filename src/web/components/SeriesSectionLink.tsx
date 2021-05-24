@@ -143,6 +143,8 @@ export const SeriesSectionLink = ({
 
 	const hasSeriesTag = tag && tag.type === 'Series';
 
+	const isLabs = format.theme === Special.Labs;
+
 	switch (format.display) {
 		case Display.Immersive: {
 			switch (format.design) {
@@ -240,8 +242,9 @@ export const SeriesSectionLink = ({
 					);
 				}
 				default: {
-					if (hasSeriesTag) {
-						if (!tag) return null; // Just to keep ts happy
+					if (hasSeriesTag || isLabs) {
+						const title = tag?.title ? tag.title : sectionLabel;
+						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (
 							<div
 								css={badge && immersiveTitleBadgeStyle(palette)}
@@ -273,11 +276,11 @@ export const SeriesSectionLink = ({
 														.seriesTitle};
 										`,
 									]}
-									href={`${guardianBaseURL}/${tag.id}`}
+									href={`${guardianBaseURL}/${linkExt}`}
 									data-component="series"
 									data-link-name="article series"
 								>
-									<span>{tag.title}</span>
+									<span>{title}</span>
 								</a>
 							</div>
 						);
