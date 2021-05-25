@@ -10,7 +10,7 @@ import {
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { Design, map, none, some, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 
 export const sidePadding = css`
 	padding-left: ${remSpace[2]};
@@ -190,12 +190,12 @@ export const fontFace = (
 ): string => `
   @font-face {
     font-family: ${family};
-    ${pipe2(
+    ${pipe(
 		style,
 		map((s: string) => `font-style: ${s};`),
 		withDefault(''),
 	)}
-    ${pipe2(
+    ${pipe(
 		weight,
 		map((w: number | string) => `font-weight: ${w};`),
 		withDefault(''),

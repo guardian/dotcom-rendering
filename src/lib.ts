@@ -41,15 +41,6 @@ function pipe<A, B, C, D>(
 	return f(a);
 }
 
-const pipe2 = <A, B, C>(a: A, f: (_a: A) => B, g: (_b: B) => C): C =>
-	pipe(a, f, g);
-const pipe3 = <A, B, C, D>(
-	a: A,
-	f: (_a: A) => B,
-	g: (_b: B) => C,
-	h: (_c: C) => D,
-): D => pipe(a, f, g, h);
-
 const identity = <A>(a: A): A => a;
 
 // The nodeType for ELEMENT_NODE has the value 1.
@@ -147,8 +138,6 @@ const fold = <A, B>(f: (value: A) => B, ifNone: B) => (opt: Option<A>): B => {
 export {
 	compose,
 	pipe,
-	pipe2,
-	pipe3,
 	identity,
 	isElement,
 	toArray,

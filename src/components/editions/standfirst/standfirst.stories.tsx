@@ -5,7 +5,7 @@ import type { Option } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import { analysis, article, comment, media } from 'fixtures/item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Standfirst from '.';
@@ -15,7 +15,7 @@ import Standfirst from '.';
 const parser = new DOMParser();
 const parseStandfirst = parse(parser);
 
-const standfirst: Option<DocumentFragment> = pipe2(
+const standfirst: Option<DocumentFragment> = pipe(
 	'<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>',
 	parseStandfirst,
 	toOption,

@@ -8,7 +8,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Design, Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
@@ -113,7 +113,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
 		item.byline !== '' && standfirst.textContent?.includes(item.byline);
 
 	if (item.display === Display.Immersive && !bylineInStandfirst) {
-		return pipe2(
+		return pipe(
 			item.bylineHtml,
 			map((byline) => (
 				<>
@@ -131,7 +131,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
 }
 
 const Standfirst: FC<Props> = ({ item }) =>
-	pipe2(
+	pipe(
 		item.standfirst,
 		map((standfirst) => (
 			<div css={getStyles(item)}>{content(standfirst, item)}</div>

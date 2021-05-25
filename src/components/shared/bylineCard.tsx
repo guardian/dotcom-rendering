@@ -14,7 +14,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import { makeRelativeDate } from 'date';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
@@ -112,7 +112,7 @@ const bylineStyles: SerializedStyles = css`
 `;
 
 const byline = (relatedItem: RelatedItem): ReactElement | null => {
-	return pipe2(
+	return pipe(
 		fromNullable(relatedItem.byline),
 		map((byline) => {
 			return <div css={bylineStyles}>{byline}</div>;
@@ -167,7 +167,7 @@ const lineStyles = css`
 `;
 
 const relativeFirstPublished = (date: Option<Date>): ReactElement | null =>
-	pipe2(
+	pipe(
 		date,
 		map((date) => <time css={dateStyles}>{makeRelativeDate(date)}</time>),
 		withDefault<ReactElement | null>(null),

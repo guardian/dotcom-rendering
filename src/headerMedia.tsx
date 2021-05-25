@@ -4,7 +4,7 @@ import HeaderVideo from 'components/headerVideo';
 import type { Image as ImageData } from 'image';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC } from 'react';
 import type { Video as VideoData } from 'video';
 
@@ -23,7 +23,7 @@ interface HeaderMediaProps {
 
 const HeaderMedia: FC<HeaderMediaProps> = ({ item }) => {
 	const format = getFormat(item);
-	return pipe2(
+	return pipe(
 		item.mainMedia,
 		map((media) => {
 			if (media.kind === MainMediaKind.Image) {

@@ -14,7 +14,7 @@ import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
 import { parseImage } from 'image';
 import { isLabs } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { Context } from 'types/parserContext';
 import { parseVideo } from 'video';
 
@@ -78,7 +78,7 @@ const articleMainMedia = (
 	context: Context,
 ): Option<MainMedia> => {
 	return (content.blocks?.main?.elements.filter(isImage) ?? [])[0]
-		? pipe2(
+		? pipe(
 				articleMainImage(content),
 				andThen(parseImage(context)),
 				map((image) => ({
@@ -86,7 +86,7 @@ const articleMainMedia = (
 					image,
 				})),
 		  )
-		: pipe2(
+		: pipe(
 				articleMainVideo(content),
 				andThen((blockElement) =>
 					parseVideo(blockElement, content.atoms),
@@ -213,7 +213,7 @@ const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
 	dateFromString(date.iso8601);
 
 const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
-	pipe2(date, fromNullable, andThen(capiDateTimeToDate));
+	pipe(date, fromNullable, andThen(capiDateTimeToDate));
 
 // ----- Exports ----- //
 

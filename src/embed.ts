@@ -13,14 +13,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option, Result } from '@guardian/types';
-import {
-	compose,
-	parseIntOpt,
-	pipe,
-	pipe2,
-	pipe3,
-	resultFromNullable,
-} from 'lib';
+import { compose, parseIntOpt, pipe, resultFromNullable } from 'lib';
 import type { DocParser } from 'types/parserContext';
 
 // ----- Types ----- //
@@ -107,7 +100,7 @@ const youtubeUrl = (id: string): string => {
 };
 
 const getNumericAttribute = (attr: string) => (elem: Element): Option<number> =>
-	pipe2(elem.getAttribute(attr), fromNullable, andThen(parseIntOpt));
+	pipe(elem.getAttribute(attr), fromNullable, andThen(parseIntOpt));
 
 const getAttribute = (attr: string) => (elem: Element): Option<string> =>
 	pipe(elem.getAttribute(attr), fromNullable);
@@ -123,7 +116,7 @@ const getPermalink = (blockquote: HTMLElement): Result<string, string> =>
 const parseInstagramHTML = (parser: DocParser) => (
 	html: string,
 ): Result<string, string> =>
-	pipe2(
+	pipe(
 		parser(html).querySelector('blockquote'),
 		resultFromNullable(
 			"I couldn't find a blockquote in the html for this embed",
@@ -136,7 +129,7 @@ const getHeight = getNumericAttribute('height');
 const getComponent = getAttribute('data-component');
 
 const iframeAttributes = (iframe: HTMLIFrameElement): Result<string, IFrame> =>
-	pipe2(
+	pipe(
 		iframe.getAttribute('src'),
 		resultFromNullable("This iframe didn't have a 'src' attribute"),
 		resultMap((src) => ({
@@ -150,7 +143,7 @@ const iframeAttributes = (iframe: HTMLIFrameElement): Result<string, IFrame> =>
 const parseIframe = (parser: DocParser) => (
 	html: string,
 ): Result<string, IFrame> =>
-	pipe2(
+	pipe(
 		parser(html).querySelector('iframe'),
 		resultFromNullable(
 			"I couldn't find an iframe in the html for this embed",
@@ -213,7 +206,7 @@ const getInstagramPostId = (url: URL): Result<string, string> =>
 	)(url.pathname.split('/')[2]);
 
 const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
-	pipe3(
+	pipe(
 		extractVideoUrl(element),
 		resultAndThen(parseUrl),
 		resultAndThen(getYoutubeIdParam),
@@ -232,7 +225,7 @@ const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
 const parseSpotifyAudio = (parser: DocParser) => (
 	element: BlockElement,
 ): Result<string, Spotify> =>
-	pipe2(
+	pipe(
 		extractAudioHtml(element),
 		resultAndThen(parseIframe(parser)),
 		resultMap(({ src, width, height }) => ({
@@ -292,7 +285,7 @@ const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 		);
 	}
 
-	return pipe3(
+	return pipe(
 		extractInstagramUrl(element),
 		resultAndThen(parseUrl),
 		resultAndThen(getInstagramPostId),
@@ -333,7 +326,7 @@ const extractIdFromInstagramUrl = (url: string): string => {
 const extractInstagramId = (parser: DocParser) => (
 	html: string,
 ): Result<string, string> =>
-	pipe2(
+	pipe(
 		html,
 		parseInstagramHTML(parser),
 		resultMap(extractIdFromInstagramUrl),
@@ -342,7 +335,7 @@ const extractInstagramId = (parser: DocParser) => (
 const parseGenericInstagram = (parser: DocParser) => (
 	element: BlockElement,
 ): Result<string, Instagram> =>
-	pipe3(
+	pipe(
 		element,
 		extractGenericHtml,
 		resultAndThen(extractInstagramId(parser)),

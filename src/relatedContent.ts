@@ -13,7 +13,7 @@ import {
 	isLive,
 	isVideo,
 } from 'item';
-import { pipe, pipe2 } from 'lib';
+import { pipe } from 'lib';
 
 const parseRelatedItemType = (content: Content): RelatedItemType => {
 	const { tags } = content;
@@ -48,7 +48,7 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 				(asset) => asset.typeData?.isMaster,
 			);
 			const data = element.imageTypeData;
-			return pipe2(
+			return pipe(
 				masterAsset,
 				fromNullable,
 				map((asset) => ({

@@ -14,7 +14,7 @@ import RelatedContent from 'components/shared/relatedContent';
 import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
 import type { Item } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -69,7 +69,7 @@ const Labs: FC<Props> = ({ item, children }) => {
 					</div>
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
-						{pipe2(
+						{pipe(
 							item.logo,
 							map((props) => <Logo logo={props} />),
 							withDefault(<></>),

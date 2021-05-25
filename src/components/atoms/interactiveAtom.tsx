@@ -4,7 +4,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import type { Format, Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { pageFonts } from 'styles';
@@ -52,7 +52,7 @@ const InteractiveAtom: FC<InteractiveAtomProps> = (
 	const { html, styles, js, format } = props;
 	const pillarStyles = getThemeStyles(format.theme);
 	const style = h('style', { dangerouslySetInnerHTML: { __html: styles } });
-	const script = pipe2(
+	const script = pipe(
 		js,
 		map((jsString) =>
 			h('script', { dangerouslySetInnerHTML: { __html: jsString } }),

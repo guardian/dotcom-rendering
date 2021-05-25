@@ -4,7 +4,7 @@ import { Design, Display, Pillar, Special, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Byline from './byline';
@@ -22,7 +22,7 @@ const byline = (): string => text('Byline', 'Jane Smith');
 const job = (): string => text('Job Title', 'Editor of things');
 
 const mockBylineHtml = (): Option<DocumentFragment> =>
-	pipe2(
+	pipe(
 		`<a href="${profileLink()}">${byline()}</a> ${job()}`,
 		parseByline,
 		toOption,

@@ -26,7 +26,7 @@ import type {
 	TikTok,
 	YouTube,
 } from 'embed';
-import { pipe, pipe2, resultFromNullable, resultMap2, resultMap3 } from 'lib';
+import { pipe, resultFromNullable, resultMap2, resultMap3 } from 'lib';
 import { createElement as h } from 'react';
 import type { FC, ReactElement } from 'react';
 
@@ -48,12 +48,12 @@ const genericDivProps = (
 	html: embed.html,
 	height: embed.height.toString(),
 	...(embed.mandatory && { mandatory: 'true' }),
-	...pipe2(
+	...pipe(
 		embed.source,
 		map((source) => ({ source })),
 		withDefault<Record<string, string>>({}),
 	),
-	...pipe2(
+	...pipe(
 		embed.sourceDomain,
 		map((sourceDomain) => ({ sourceDomain })),
 		withDefault<Record<string, string>>({}),
@@ -101,7 +101,7 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 			return {
 				kind: EmbedKind.Instagram,
 				id: embed.id,
-				...pipe2(
+				...pipe(
 					embed.caption,
 					map((caption) => ({ caption: caption })),
 					withDefault<Record<string, string>>({}),
@@ -271,7 +271,7 @@ const divElementPropsToEmbedComponentProps = (
 							)(requiredStringParam(elementProps, 'id'));
 						}
 						case EmbedKind.Generic: {
-							return pipe2(
+							return pipe(
 								elementProps,
 								parseGenericFields,
 								resultMap(
@@ -285,7 +285,7 @@ const divElementPropsToEmbedComponentProps = (
 							);
 						}
 						case EmbedKind.TikTok: {
-							return pipe2(
+							return pipe(
 								elementProps,
 								parseGenericFields,
 								resultMap(
@@ -297,7 +297,7 @@ const divElementPropsToEmbedComponentProps = (
 							);
 						}
 						case EmbedKind.EmailSignup: {
-							return pipe2(
+							return pipe(
 								elementProps,
 								parseGenericFields,
 								resultMap(

@@ -66,7 +66,7 @@ import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
 import RichLink from 'components/richLink';
-import { isElement, pipe, pipe2 } from 'lib';
+import { isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
@@ -92,7 +92,7 @@ const transformHref = (href: string): string => {
 		'invalid url',
 	);
 
-	return pipe2(
+	return pipe(
 		toOption(url),
 		map((url) => {
 			const path = url.pathname.split('/');
@@ -114,7 +114,7 @@ const getHref = (node: Node): Option<string> =>
 	pipe(
 		getAttrs(node),
 		andThen((attrs) =>
-			pipe2(
+			pipe(
 				attrs.getNamedItem('href'),
 				fromNullable,
 				map((attr) => transformHref(attr.value)),

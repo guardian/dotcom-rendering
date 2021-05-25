@@ -8,7 +8,7 @@ import { map, withDefault } from '@guardian/types';
 import Anchor from 'components/anchor';
 import { getFormat } from 'item';
 import type { Item } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -60,7 +60,7 @@ const styles = (
 };
 
 const OptionalLogo = (item: Item): JSX.Element =>
-	pipe2(
+	pipe(
 		item.branding,
 		map((branding) => (
 			<Logo branding={branding} format={getFormat(item)} />

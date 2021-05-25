@@ -7,7 +7,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { SvgCamera } from '@guardian/src-icons';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 
@@ -95,7 +95,7 @@ const HeaderImageCaption: FC<Props> = ({
 	iconColor,
 	iconBackgroundColor,
 }: Props) =>
-	pipe2(
+	pipe(
 		caption,
 		map((cap) => (
 			<figcaption

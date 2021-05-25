@@ -7,7 +7,7 @@ import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';
 import type { Item } from 'item';
-import { compose, pipe2 } from 'lib';
+import { compose, pipe } from 'lib';
 
 // ----- Types ----- //
 
@@ -27,7 +27,7 @@ const extractInteractiveAssets = (elements: BodyElement[]): Assets =>
 			if (elem.kind === ElementKind.InteractiveAtom) {
 				return {
 					styles: [...styles, elem.css],
-					scripts: pipe2(
+					scripts: pipe(
 						elem.js,
 						map((js) => [...scripts, js]),
 						withDefault(scripts),

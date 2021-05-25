@@ -20,7 +20,7 @@ import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
-import { compose, pipe, pipe2 } from 'lib';
+import { compose, pipe } from 'lib';
 import type { Context } from 'types/parserContext';
 
 // ----- Types ----- //
@@ -265,7 +265,7 @@ const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
 		}
 
 		case ElementType.IMAGE:
-			return pipe2(
+			return pipe(
 				parseImage(context)(element),
 				map<ImageData, Result<string, Image>>((image) =>
 					ok({

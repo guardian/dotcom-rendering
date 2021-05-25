@@ -8,7 +8,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
-import { maybeRender, pipe2 } from 'lib';
+import { maybeRender, pipe } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 
@@ -66,7 +66,7 @@ const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 			return details;
 		}, details);
 
-	return pipe2(
+	return pipe(
 		oDoc,
 		map(parseCaptionNode),
 		withDefault<CaptionDetails>(details),

@@ -6,7 +6,7 @@ import { neutral, palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Design, map, Special, withDefault } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -133,7 +133,7 @@ const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
 const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
-	pipe2(
+	pipe(
 		bylineHtml,
 		map((byline) => (
 			<address css={getStyles(format)}>

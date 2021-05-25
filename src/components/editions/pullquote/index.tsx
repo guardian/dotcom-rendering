@@ -5,7 +5,7 @@ import { headline } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
 import type { Format, Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 
@@ -96,7 +96,7 @@ const Pullquote: FC<Props> = ({ quote, attribution, format }) => {
 			{quote}
 		</p>
 	);
-	const children = pipe2(
+	const children = pipe(
 		attribution,
 		map((attribution) => [
 			quoteElement,

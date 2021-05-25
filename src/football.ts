@@ -4,7 +4,7 @@ import type { FootballContent } from '@guardian/apps-rendering-api-models/footba
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
 import { andThen, fromNullable, map, map2, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 
 // ----- Types ----- //
 
@@ -103,12 +103,12 @@ const parseTime = (time: unknown): Option<string> => {
 };
 
 const parseMatchStatus = (status: string, time: string): Option<MatchStatus> =>
-	pipe2(
+	pipe(
 		status,
 		parseStatus,
 		andThen<MatchStatusKind, MatchStatus>((s) => {
 			if (s === MatchStatusKind.KickOff) {
-				return pipe2(
+				return pipe(
 					time,
 					parseTime,
 					map((t) => ({ kind: s, time: t })),

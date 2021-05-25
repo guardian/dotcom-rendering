@@ -1,6 +1,6 @@
 import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import { App, Stack, Stage } from './appIdentity';
 import { ssm } from './aws';
 
@@ -44,7 +44,7 @@ async function getState(): Promise<Config> {
 }
 
 async function fetchConfig(): Promise<Config> {
-	return pipe2(
+	return pipe(
 		state,
 		map((s) => Promise.resolve(s)),
 		withDefault(getState()),

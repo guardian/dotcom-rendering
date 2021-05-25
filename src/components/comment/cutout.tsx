@@ -7,7 +7,7 @@ import { map, withDefault } from '@guardian/types';
 import Img from 'components/img';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -45,7 +45,7 @@ const Cutout: FC<Props> = ({ contributors, className, format }) => {
 		return null;
 	}
 
-	return pipe2(
+	return pipe(
 		contributor.image,
 		map((image) => (
 			<div css={[className, styles]}>

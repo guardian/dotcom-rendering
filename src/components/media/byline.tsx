@@ -10,7 +10,7 @@ import type { Option } from '@guardian/types';
 import Dateline from 'components/dateline';
 import { getFormat } from 'item';
 import type { Item } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { renderText } from '../../renderer';
 
@@ -47,7 +47,7 @@ interface Props {
 }
 
 const Byline: FC<Props> = ({ publicationDate, className, item }) => {
-	const byline = pipe2(
+	const byline = pipe(
 		item.bylineHtml,
 		map((html) => <address>{renderText(html, getFormat(item))}</address>),
 		withDefault<ReactNode>(null),

@@ -7,7 +7,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import type { Option, Theme } from '@guardian/types';
 import { map, Pillar, withDefault } from '@guardian/types';
 import { formatDate } from 'date';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss as darkMode } from 'styles';
 
@@ -46,7 +46,7 @@ const getDatelineStyles = (theme: Theme): SerializedStyles => {
 };
 
 const Dateline: FC<Props> = ({ date, theme }) =>
-	pipe2(
+	pipe(
 		date,
 		map((d) => (
 			<time

@@ -22,7 +22,7 @@ import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item, Review } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import { galleryBody } from './galleryBody';
 
 // ----- Fixture ----- //
@@ -33,13 +33,13 @@ const parseHtml = parse(parser);
 const headline =
 	'Reclaimed lakes and giant airports: how Mexico City might have looked';
 
-const standfirst: Option<DocumentFragment> = pipe2(
+const standfirst: Option<DocumentFragment> = pipe(
 	'<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>',
 	parseHtml,
 	toOption,
 );
 
-const bylineHtml: Option<DocumentFragment> = pipe2(
+const bylineHtml: Option<DocumentFragment> = pipe(
 	'<a href="https://theguardian.com">Jane Smith</a> Editor of things',
 	parseHtml,
 	toOption,

@@ -6,7 +6,7 @@ import type { Image as ImageData } from '@guardian/image-rendering';
 import { Dpr, src, srcsets } from '@guardian/image-rendering';
 import type { Format, Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, Role, some } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { ReactNode } from 'react';
 import type { Context } from 'types/parserContext';
 
@@ -30,7 +30,7 @@ const parseCredit = (
 	displayCredit: boolean | undefined,
 	credit: string | undefined,
 ): Option<string> =>
-	pipe2(
+	pipe(
 		displayCredit,
 		fromNullable,
 		andThen((display) => (display ? fromNullable(credit) : none)),
@@ -55,7 +55,7 @@ const parseImage = ({ docParser, salt }: Context) => (
 	);
 	const data = element.imageTypeData;
 
-	return pipe2(
+	return pipe(
 		masterAsset,
 		fromNullable,
 		andThen((asset) => {
@@ -79,7 +79,7 @@ const parseImage = ({ docParser, salt }: Context) => (
 				alt: fromNullable(data?.alt),
 				width: asset.typeData.width,
 				height: asset.typeData.height,
-				caption: pipe2(data?.caption, fromNullable, map(docParser)),
+				caption: pipe(data?.caption, fromNullable, map(docParser)),
 				credit: parseCredit(data?.displayCredit, data?.credit),
 				nativeCaption: fromNullable(data?.caption),
 				role: parseRole(data?.role),

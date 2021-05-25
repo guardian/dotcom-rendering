@@ -7,7 +7,7 @@ import type { Option } from '@guardian/types';
 import { fromNullable, map, none, Role } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 
 // ------ Types ----- //
 
@@ -30,7 +30,7 @@ const tagToContributor = (salt: string) => (
 	id: contributorTag.id,
 	apiUrl: contributorTag.apiUrl,
 	name: contributorTag.webTitle,
-	image: pipe2(
+	image: pipe(
 		contributorTag.bylineLargeImageUrl,
 		fromNullable,
 		map((url) => ({

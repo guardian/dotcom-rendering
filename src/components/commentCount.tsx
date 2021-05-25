@@ -7,7 +7,7 @@ import { border, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -55,7 +55,7 @@ const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {
 		return null;
 	}
 
-	return pipe2(
+	return pipe(
 		count,
 		map((count: number) => (
 			<button css={getStyles(format)}>

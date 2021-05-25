@@ -26,7 +26,7 @@ import type {
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
-import { maybeRender, pipe2 } from 'lib';
+import { maybeRender, pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -99,7 +99,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 	);
 
 	const commentContainer = item.commentable
-		? pipe2(
+		? pipe(
 				item.internalShortId,
 				map((id) => (
 					<section

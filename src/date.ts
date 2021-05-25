@@ -2,7 +2,7 @@
 
 import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 
 // ----- Setup ----- //
 
@@ -153,7 +153,7 @@ function formatSeconds(seconds: string): Option<string> {
 }
 
 const dateToString = (date: Option<Date>): string =>
-	pipe2(
+	pipe(
 		date,
 		map((d) => d.toISOString()),
 		withDefault(''),

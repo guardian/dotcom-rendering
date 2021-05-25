@@ -2,7 +2,7 @@
 
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 
 // ----- Sub-Components ----- //
@@ -12,7 +12,7 @@ interface ClientJsProps {
 }
 
 const ClientJs: FC<ClientJsProps> = ({ src }) =>
-	pipe2(
+	pipe(
 		src,
 		map((s) => <script src={s}></script>),
 		withDefault<ReactElement | null>(null),

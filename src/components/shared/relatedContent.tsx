@@ -7,7 +7,7 @@ import { map, withDefault } from '@guardian/types';
 import BylineCard from 'components/shared/bylineCard';
 import Card from 'components/shared/card';
 import type { ResizedRelatedContent } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -40,7 +40,7 @@ const listStyles = css`
 const COMMENT = RelatedItemType.COMMENT;
 
 const RelatedContent: FC<Props> = ({ content }) => {
-	return pipe2(
+	return pipe(
 		content,
 		map(({ title, relatedItems, resizedImages }) => {
 			if (relatedItems.length === 0) {

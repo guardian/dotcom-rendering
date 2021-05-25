@@ -19,7 +19,7 @@ import express from 'express';
 import { MainMediaKind } from 'headerMedia';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
-import { pipe2, toArray } from 'lib';
+import { pipe, toArray } from 'lib';
 import { logger } from 'logger';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
@@ -117,7 +117,7 @@ const askCapiFor = (articleId: string): CapiReturn =>
 
 function resourceList(script: Option<string>): string[] {
 	const emptyList: string[] = [];
-	return pipe2(script, map(toArray), withDefault(emptyList));
+	return pipe(script, map(toArray), withDefault(emptyList));
 }
 
 async function serveArticle(

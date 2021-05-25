@@ -8,7 +8,7 @@ import { map, withDefault } from '@guardian/types';
 import Img from 'components/img';
 import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { getThemeStyles } from 'themeStyles';
 
@@ -44,7 +44,7 @@ const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
 		return null;
 	}
 
-	return pipe2(
+	return pipe(
 		contributor.image,
 		map((image) => (
 			<Img

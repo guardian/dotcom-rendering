@@ -37,7 +37,7 @@ import { parseMatchScores } from 'football';
 import type { MainMedia } from 'headerMedia';
 import type { Image } from 'image';
 import { parseCardImage } from 'image';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
 import { themeFromString } from 'themeStyles';
@@ -178,13 +178,13 @@ const itemFields = (
 		theme: themeFromString(content.pillarId),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
-		standfirst: pipe2(
+		standfirst: pipe(
 			content.fields?.standfirst,
 			fromNullable,
 			map(context.docParser),
 		),
 		byline: content.fields?.byline ?? '',
-		bylineHtml: pipe2(
+		bylineHtml: pipe(
 			content.fields?.bylineHtml,
 			fromNullable,
 			map(context.docParser),
@@ -200,7 +200,7 @@ const itemFields = (
 		branding: fromNullable(branding),
 		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
-		relatedContent: pipe2(
+		relatedContent: pipe(
 			relatedContent,
 			fromNullable,
 			map((relatedContent) => ({

@@ -6,7 +6,7 @@ import { Img } from '@guardian/image-rendering';
 import { map, none, some, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 
 // ----- Component ----- //
@@ -29,7 +29,7 @@ const Avatar: FC<Props> = ({ item }) => {
 	const [contributor] = item.contributors;
 	const format = getFormat(item);
 
-	return pipe2(
+	return pipe(
 		contributor.image,
 		map((image) => (
 			<Img

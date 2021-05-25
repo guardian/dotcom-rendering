@@ -26,7 +26,7 @@ import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import { border } from 'editorialPalette';
 import type { Image } from 'image';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
@@ -153,7 +153,7 @@ const relativeFirstPublished = (
 	date: Option<Date>,
 	type: RelatedItemType,
 ): JSX.Element | null =>
-	pipe2(
+	pipe(
 		date,
 		map((date) => (
 			<time css={[timeStyles(type), dateStyles]}>
@@ -334,7 +334,7 @@ const durationMedia = (
 	duration: Option<string>,
 	type: RelatedItemType,
 ): ReactElement | null => {
-	return pipe2(
+	return pipe(
 		duration,
 		map((length) => {
 			const seconds = formatSeconds(length);
@@ -360,7 +360,7 @@ const cardByline = (
 		return null;
 	}
 
-	return pipe2(
+	return pipe(
 		fromNullable(byline),
 		map((byline) => {
 			return <div css={bylineStyles}>{byline}</div>;
@@ -379,7 +379,7 @@ const cardImage = (
 		display: Display.Standard,
 	};
 
-	return pipe2(
+	return pipe(
 		image,
 		map((img) => {
 			return (

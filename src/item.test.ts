@@ -22,7 +22,7 @@ import {
 } from '@guardian/types';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import { articleContentWith } from 'helperTest';
 import { EmbedKind } from 'embed';
 
@@ -188,7 +188,7 @@ const f = (content: Content) =>
 	fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' })({ content });
 
 const getFirstBody = (item: Review | Standard) =>
-	pipe2(
+	pipe(
 		item.body[0],
 		toOption,
 		withDefault<BodyElement>({
@@ -347,7 +347,7 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = pipe2(
+		const element = pipe(
 			item.body[0],
 			toOption,
 			withDefault<BodyElement>({
@@ -368,7 +368,7 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = pipe2(
+		const element = pipe(
 			item.body[0],
 			toOption,
 			withDefault<BodyElement>({
@@ -593,7 +593,7 @@ describe('audio elements', () => {
 			},
 		};
 		const item = f(articleContentWith(audioElement)) as Standard;
-		pipe2(
+		pipe(
 			item.body[0],
 			resultAndThen((element) =>
 				element.kind === ElementKind.Embed &&
@@ -659,7 +659,7 @@ describe('video elements', () => {
 			},
 		};
 		const item = f(articleContentWith(videoElement)) as Standard;
-		pipe2(
+		pipe(
 			item.body[0],
 			resultAndThen((element) =>
 				element.kind === ElementKind.Embed &&

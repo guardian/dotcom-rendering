@@ -9,7 +9,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
-import { pipe2 } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -93,7 +93,7 @@ const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
 };
 
 const Series: FC<Props> = ({ item }: Props) =>
-	pipe2(
+	pipe(
 		item.series,
 		map((series) => (
 			<nav css={getStyles(item)}>
