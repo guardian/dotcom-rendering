@@ -1,23 +1,7 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import { ClassNames } from '@emotion/react';
 
 import { ShowMoreButton } from '@root/src/amp/components/ShowMoreButton';
-
-const styles = (height: number) => css`
-	height: ${height}px;
-	width: 100%;
-	margin-top: 16px;
-	margin-bottom: 12px;
-`;
-
-const showMore = css`
-	&[overflow] {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-	}
-`;
 
 // We look in the html field of the atom for a hint for the height of the atom
 // We look for an html comment <!-- MobileHeight: 100 --> and if we find it use
@@ -77,26 +61,48 @@ export const InteractiveAtomBlockComponent: React.FunctionComponent<{
 	}
 
 	return (
-		<amp-iframe
-			class={styles(getHeight(html))}
-			src={url}
-			layout="responsive"
-			sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups"
-			height="1"
-			width="1"
-			resizable=""
-			data-cy="atom-embed-url"
-		>
-			{placeholderUrl && (
-				<amp-img
-					placeholder={true}
-					layout="fill"
-					src={placeholderUrl}
-				/>
-			)}
-			<div overflow="" css={showMore}>
-				<ShowMoreButton />
-			</div>
-		</amp-iframe>
+		<ClassNames>
+			{({ css }) => {
+				const styles = (height: number) => css`
+					height: ${height}px;
+					width: 100%;
+					margin-top: 16px;
+					margin-bottom: 12px;
+				`;
+
+				const showMore = css`
+					&[overflow] {
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						right: 0;
+					}
+				`;
+
+				return (
+					<amp-iframe
+						class={styles(getHeight(html))}
+						src={url}
+						layout="responsive"
+						sandbox="allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups"
+						height="1"
+						width="1"
+						resizable=""
+						data-cy="atom-embed-url"
+					>
+						{placeholderUrl && (
+							<amp-img
+								placeholder={true}
+								layout="fill"
+								src={placeholderUrl}
+							/>
+						)}
+						<div overflow="" className={showMore}>
+							<ShowMoreButton />
+						</div>
+					</amp-iframe>
+				);
+			}}
+		</ClassNames>
 	);
 };
