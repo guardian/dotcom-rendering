@@ -81,22 +81,22 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 -   Dynamic imports
 -   [EnhanceCAPI](docs/patterns/enhance-capi.md)
 -   Data generated in Frontend
+
 ### Feedback
 
 After completing this setup guide, we would greatly appreciate it if you could complete our [dotcom-rendering setup
 questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSdwFc05qejwW_Gtl3pyW4N22KqmY5zXoDKAUAjrkOwb2uXNcQ/viewform?vc=0&c=0&w=1). It should only take 3 minutes and will help us improve this documentation and the setup process in the future. Thank you! 🙏
+
+
 ## Where can I see Dotcom Rendering in Production?
 
-Add `?dcr` to the URL of a Production (or CODE) article to see it rendered with Dotcom Rendering:
-
-```
-https://www.theguardian.com/info/developer-blog/2016/dec/14/mirrors-lights-sawdust-lasers?dcr
-```
+As of April 2021, most articles are rendered with Dotcom Rendering.
 
 You can force DCR on or off explicitly with
 [`?dcr=true` or `?dcr=false`](https://github.com/guardian/frontend/pull/21753).
 
 One way to verify whether the article you're looking at is being rendered by DCR or not is to look for `(modern)` in the footer after the copyright notice.
+
 ## Code Quality
 
 You can ensure your code passes code quality tests by running:
@@ -150,10 +150,10 @@ We recommend you update your workspace settings to automatically fix formatting 
 
 If you prefer not to use an editor like VSCode then you can use the following commands to manage formatting:
 
-`yarn prettier:check` // Checks for prettier issues
-`yarn prettier:fix` // Checks and fixes prettier issues
-`yarn lint` // Checks for linting issues
-`yarn lint --fix` // Checks and fixes linting issues
+- `yarn prettier:check` &rarr; Checks for prettier issues
+- `yarn prettier:fix` &rarr; Checks and fixes prettier issues
+- `yarn lint` &rarr; Checks for linting issues
+- `yarn lint --fix` &rarr; Checks and fixes linting issues
 
 ## Thanks
 
