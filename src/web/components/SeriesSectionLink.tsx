@@ -66,22 +66,36 @@ const invertedStyle = css`
 `;
 
 const fontStyles = (format: Format) => {
-	if (format.theme === Special.Labs) {
-		return css`
-			${textSans.large()}
-			line-height: 23px;
-			${from.leftCol} {
-				${textSans.large()}
-				line-height: 20px;
+	switch (format.theme) {
+		case Special.Labs:
+			switch (format.display) {
+				case Display.Immersive:
+					return css`
+						${textSans.xlarge()}
+						line-height: 23px;
+						${from.leftCol} {
+							${textSans.large()}
+							line-height: 20px;
+						}
+					`;
+				default:
+					return css`
+						${textSans.large()}
+						line-height: 23px;
+						${from.leftCol} {
+							${textSans.large()}
+							line-height: 20px;
+						}
+					`;
 			}
-		`;
+		default:
+			return css`
+				${headline.xxxsmall({ fontWeight: 'bold' })}
+				${from.wide} {
+					${headline.xxsmall({ fontWeight: 'bold' })}
+				}
+			`;
 	}
-	return css`
-		${headline.xxxsmall({ fontWeight: 'bold' })}
-		${from.wide} {
-			${headline.xxsmall({ fontWeight: 'bold' })}
-		}
-	`;
 };
 
 const secondaryFontStyles = (format: Format) => {
