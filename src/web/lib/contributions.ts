@@ -148,7 +148,7 @@ export const getArticleCountConsent = (): Promise<boolean> => {
 				if (!hasRequiredConsents) {
 					removeArticleCountsFromLocalStorage();
 				}
-				console.log({hasRequiredConsents})
+				console.log({ hasRequiredConsents });
 				resolve(hasRequiredConsents);
 			}
 		});
