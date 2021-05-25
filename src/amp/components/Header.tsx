@@ -1,11 +1,13 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+
+import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`
@@ -167,11 +169,11 @@ const navRow = css`
 
 const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
 	<nav>
-		<ul className={pillarListStyles}>
+		<ul css={pillarListStyles}>
 			{pillars.map((p) => (
-				<li className={pillarListItemStyle} key={p.title}>
+				<li css={pillarListItemStyle} key={p.title}>
 					<a
-						className={pillarLinkStyle(p.pillar)}
+						css={pillarLinkStyle(p.pillar)}
 						href={`${guardianBaseURL}${p.url}`}
 					>
 						{p.title}
@@ -186,8 +188,8 @@ export const Header: React.FC<{
 	nav: NavType;
 	guardianBaseURL: string;
 }> = ({ nav, guardianBaseURL }) => (
-	<header className={headerStyles}>
-		<div className={row}>
+	<header css={headerStyles}>
+		<div css={row}>
 			<ReaderRevenueButton
 				nav={nav}
 				rrLink="ampHeader"
@@ -195,9 +197,9 @@ export const Header: React.FC<{
 				linkLabel="Subscribe"
 			/>
 
-			<a className={logoStyles} href={guardianBaseURL}>
+			<a css={logoStyles} href={guardianBaseURL}>
 				<span
-					className={css`
+					css={css`
 						${visuallyHidden};
 					`}
 				>
@@ -207,16 +209,16 @@ export const Header: React.FC<{
 			</a>
 		</div>
 
-		<div className={cx(row, navRow)}>
+		<div css={[row, navRow]}>
 			{pillarLinks(nav.pillars, guardianBaseURL)}
 
 			{/* Note, the actual sidebar lives directly in the body as AMP requires this :( */}
 			<button
-				className={veggieStyles}
+				css={veggieStyles}
 				aria-label="Toggle main menu"
 				on="tap:sidebar1.toggle"
 			>
-				<span className={pattyStyles} />
+				<span css={pattyStyles} />
 			</button>
 		</div>
 	</header>

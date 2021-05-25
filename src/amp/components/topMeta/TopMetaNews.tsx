@@ -48,10 +48,10 @@ const Headline: React.FC<{
 }> = ({ headlineText, starRating }) => {
 	return (
 		<div>
-			<h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
+			<h1 css={headerStyle}>{curly(headlineText)}</h1>
 
 			{starRating !== undefined && (
-				<div className={starRatingWrapper}>
+				<div css={starRatingWrapper}>
 					<StarRating rating={starRating} size="large" />
 				</div>
 			)}
