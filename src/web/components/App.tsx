@@ -556,12 +556,14 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
-			<Portal rootId="share-count-root">
-				<ShareCount
-					ajaxUrl={CAPI.config.ajaxUrl}
-					pageId={CAPI.pageId}
-				/>
-			</Portal>
+			{CAPI.config.switches.serverShareCounts && (
+				<Portal rootId="share-count-root">
+					<ShareCount
+						ajaxUrl={CAPI.config.ajaxUrl}
+						pageId={CAPI.pageId}
+					/>
+				</Portal>
+			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
