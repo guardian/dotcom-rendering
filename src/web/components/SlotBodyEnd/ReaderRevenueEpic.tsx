@@ -182,7 +182,7 @@ export const canShow = async ({
 
 	const response = await getBodyEnd(
 		contributionsPayload,
-		`http://localhost:8082/epic${queryString}`,
+		`${contributionsServiceUrl}/epic${queryString}`,
 	);
 
 	checkForErrors(response);
