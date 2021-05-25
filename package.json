@@ -24,8 +24,8 @@
     "build:client": "webpack --config webpack.config.ts --config-name client",
     "build:server:prod": "webpack --config webpack.config.ts --config-name server --env production",
     "build:client:prod": "webpack --config webpack.config.ts --config-name clientProduction",
-    "storybook": "start-storybook -s ./ -p 8181 --ci",
-    "build-storybook": "build-storybook -o dist",
+    "storybook": "start-storybook -s ./assets -p 8181 --ci",
+    "build-storybook": "build-storybook -o dist -s ./assets",
     "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
   },
   "author": "",
