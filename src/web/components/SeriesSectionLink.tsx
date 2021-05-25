@@ -71,10 +71,9 @@ const fontStyles = (format: Format) => {
 			switch (format.display) {
 				case Display.Immersive:
 					return css`
-						${textSans.xlarge()}
+						${textSans.large({ fontWeight: 'bold' })}
 						line-height: 23px;
 						${from.leftCol} {
-							${textSans.large()}
 							line-height: 20px;
 						}
 					`;
@@ -83,7 +82,6 @@ const fontStyles = (format: Format) => {
 						${textSans.large()}
 						line-height: 23px;
 						${from.leftCol} {
-							${textSans.large()}
 							line-height: 20px;
 						}
 					`;
