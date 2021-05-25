@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design, Special } from '@guardian/types';
+import { Design } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -13,7 +13,6 @@ import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { formatCount } from '@root/src/web/lib/formatCount';
-import { textSans, headline } from '@guardian/src-foundations/typography';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
