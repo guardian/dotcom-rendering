@@ -2,7 +2,18 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { LinkStyle } from '@root/src/amp/components/elements/TextBlockComponent';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
+
+const LinkStyle = (pillar: Theme) => css`
+	a {
+		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
+		text-decoration: none;
+		border-bottom: 1px solid ${neutralBorder(pillar)};
+		:hover {
+			border-bottom: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
+		}
+	}
+`;
 
 const brandingStyle = (pillar: Theme) => css`
 	padding: 10px 0;

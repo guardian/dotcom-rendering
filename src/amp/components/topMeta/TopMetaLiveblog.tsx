@@ -10,9 +10,29 @@ import { MainMedia } from '@root/src/amp/components/MainMedia';
 import { Byline } from '@root/src/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
-import { ListStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
+
+const ListStyle = (iconColour: string) => css`
+	li {
+		margin-bottom: 6px;
+		padding-left: 20px;
+		p {
+			display: inline;
+		}
+	}
+
+	li:before {
+		display: inline-block;
+		content: '';
+		border-radius: 6px;
+		height: 12px;
+		width: 12px;
+		margin-right: 8px;
+		background-color: ${iconColour};
+		margin-left: -20px;
+	}
+`;
 
 const headerStyle = (pillar: Theme) => css`
 	${headline.small()};
