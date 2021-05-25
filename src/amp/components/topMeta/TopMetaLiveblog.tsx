@@ -1,35 +1,57 @@
 import React from 'react';
+import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
-import { css } from 'emotion';
-import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
+
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
 import { Byline } from '@root/src/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
-import { ListStyle } from '@root/src/amp/components/elements/TextBlockComponent';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
+
+const ListStyle = (iconColour: string) => css`
+	li {
+		margin-bottom: 6px;
+		padding-left: 20px;
+		p {
+			display: inline;
+		}
+	}
+
+	li:before {
+		display: inline-block;
+		content: '';
+		border-radius: 6px;
+		height: 12px;
+		width: 12px;
+		margin-right: 8px;
+		background-color: ${iconColour};
+		margin-left: -20px;
+	}
+`;
 
 const headerStyle = (pillar: Theme) => css`
 	${headline.small()};
 	font-weight: 500;
 	padding: 3px 10px 24px;
 	color: ${palette.neutral[100]};
-	background-color: ${pillarPalette[pillar].main};
+	background-color: ${pillarPalette_DO_NOT_USE[pillar].main};
 `;
 
 const bylineStyle = (pillar: Theme) => css`
 	${headline.xxxsmall()};
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	padding-top: 3px;
 	padding-bottom: 8px;
 	font-style: italic;
 
 	a {
 		font-weight: 700;
-		color: ${pillarPalette[pillar].main};
+		color: ${pillarPalette_DO_NOT_USE[pillar].main};
 		text-decoration: none;
 		font-style: normal;
 	}
@@ -38,7 +60,7 @@ const bylineStyle = (pillar: Theme) => css`
 const standfirstStyle = (pillar: Theme) => css`
 	${headline.xxxsmall()};
 	color: ${palette.neutral[100]};
-	background-color: ${pillarPalette[pillar].dark};
+	background-color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 	font-weight: bold;
 	padding: 3px 10px 12px;
 
@@ -67,10 +89,10 @@ const Headline: React.FC<{
 	starRating?: number;
 }> = ({ headlineText, pillar, standfirst }) => {
 	return (
-		<div className={fullWidth}>
-			<h1 className={headerStyle(pillar)}>{curly(headlineText)}</h1>
+		<div css={fullWidth}>
+			<h1 css={headerStyle(pillar)}>{curly(headlineText)}</h1>
 			<div
-				className={standfirstStyle(pillar)}
+				css={standfirstStyle(pillar)}
 				dangerouslySetInnerHTML={{
 					__html: standfirst,
 				}}
@@ -95,13 +117,13 @@ export const TopMetaLiveblog: React.FC<{
 			<MainMedia key={i} element={element} pillar={pillar} />
 		))}
 
-		<Byline
-			byline={articleData.author.byline}
-			tags={articleData.tags}
-			pillar={pillar}
-			guardianBaseURL={articleData.guardianBaseURL}
-			className={bylineStyle(pillar)}
-		/>
+		<div css={bylineStyle(pillar)}>
+			<Byline
+				byline={articleData.author.byline}
+				tags={articleData.tags}
+				guardianBaseURL={articleData.guardianBaseURL}
+			/>
+		</div>
 
 		<TopMetaExtras
 			sharingUrls={getSharingUrls(

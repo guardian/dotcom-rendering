@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -52,6 +51,8 @@ const headlineLink = css`
 	color: ${text.anchorSecondary};
 	font-weight: 500;
 	${headline.xxxsmall()};
+
+	display: block; /* To ensure focus outline works okay */
 `;
 
 const ageWarningStyles = css`
@@ -86,7 +87,6 @@ export const SecondTierItem = ({
 }: Props) => {
 	const {
 		url,
-		isLiveBlog,
 		avatarUrl,
 		image,
 		format,
@@ -100,40 +100,29 @@ export const SecondTierItem = ({
 	const avatarToShow = avatarUrl || image;
 
 	return (
-		<div className={itemStyles(showRightBorder)}>
-			<a
-				className={headlineLink}
-				href={url}
-				data-link-name={dataLinkName}
-			>
+		<div css={itemStyles(showRightBorder)}>
+			<a css={headlineLink} href={url} data-link-name={dataLinkName}>
 				<Flex>
-					<div className={headlineStyles}>
-						<div className={titleStyles}>{title}</div>
-						{isLiveBlog ? (
-							<LinkHeadline
-								headlineText={headlineText}
-								palette={palette}
-								size="small"
-								byline={showByline ? byline : undefined}
-							/>
-						) : (
-							<LinkHeadline
-								headlineText={headlineText}
-								palette={palette}
-								size="small"
-								byline={showByline ? byline : undefined}
-							/>
-						)}
+					<div css={headlineStyles}>
+						<div css={titleStyles}>{title}</div>
+						<LinkHeadline
+							headlineText={headlineText}
+							palette={palette}
+							format={format}
+							size="small"
+							byline={showByline ? byline : undefined}
+						/>
+
 						{ageWarning && (
-							<div className={ageWarningStyles}>
+							<div css={ageWarningStyles}>
 								<AgeWarning age={ageWarning} size="small" />
 							</div>
 						)}
 					</div>
 					<>
 						{avatarToShow && (
-							<div className={avatarContainerStyles}>
-								<div className={avatarSizeStyles}>
+							<div css={avatarContainerStyles}>
+								<div css={avatarSizeStyles}>
 									<Avatar
 										imageSrc={avatarToShow}
 										imageAlt=""

@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
@@ -10,7 +9,7 @@ import CommentIcon from '@frontend/static/icons/comment.svg';
 type Props = {
 	palette: Palette;
 	isCommentable: boolean;
-	commentCount: number;
+	commentCount?: number;
 	setIsExpanded: (isExpanded: boolean) => void;
 };
 
@@ -77,26 +76,26 @@ export const CommentCount = ({
 	const { short, long } = formatCount(commentCount);
 
 	return (
-		<div className={containerStyles(palette)} data-cy="comment-counts">
+		<div css={containerStyles(palette)} data-cy="comment-counts">
 			<a
 				href="#comments"
-				className={linkStyles}
+				css={linkStyles}
 				aria-label={`${short} Comments`}
 				onClick={() => setIsExpanded(true)}
 			>
-				<div className={iconContainerStyles}>
-					<CommentIcon className={iconStyles(palette)} />
+				<div css={iconContainerStyles}>
+					<CommentIcon css={iconStyles(palette)} />
 				</div>
 				<div
 					data-testid="long-comment-count"
-					className={longStyles}
+					css={longStyles}
 					aria-hidden="true"
 				>
 					{long}
 				</div>
 				<div
 					data-testid="short-comment-count"
-					className={shortStyles}
+					css={shortStyles}
 					aria-hidden="true"
 				>
 					{short}

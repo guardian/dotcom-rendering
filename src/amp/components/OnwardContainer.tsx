@@ -1,4 +1,7 @@
 import React from 'react';
+import { css } from '@emotion/react';
+import { palette } from '@guardian/src-foundations';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import {
 	MoustacheSection,
@@ -6,15 +9,11 @@ import {
 	MoustacheTemplate,
 	moustacheVariable,
 } from '@root/src/amp/components/moustache';
-import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-
 import VideoIcon from '@frontend/static/icons/video-icon.svg';
 import Camera from '@frontend/static/icons/camera.svg';
 import VolumeHigh from '@frontend/static/icons/volume-high.svg';
 import Quote from '@frontend/static/icons/quote.svg';
 import Clock from '@frontend/static/icons/clock.svg';
-import { css } from 'emotion';
 import { ShowMoreButton } from '@root/src/amp/components/ShowMoreButton';
 
 const inner = css`
@@ -92,7 +91,7 @@ const quoteIconCSS = css`
 const ageWarning = css`
 	color: ${palette.neutral[20]};
 	fill: ${palette.neutral[20]};
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 `;
 const showMore = css`
 	background-color: ${palette.neutral[100]};
@@ -118,15 +117,17 @@ export const OnwardContainer: React.FC<{
 		<MoustacheTemplate>
 			<MoustacheSection name="showContent">
 				<div
-					className={`${inner} js-has-click-event`}
+					css={`
+						${inner} js-has-click-event
+					`}
 					data-vars-component={componentName}
 				>
-					<div className={header}>
+					<div css={header}>
 						<MoustacheVariable name="displayName" />
 					</div>
 					<MoustacheSection name="description">
 						{/*  Don't show if there is not description WHAT STYLES HERE */}
-						<div className={description}>
+						<div css={description}>
 							<MoustacheVariable name="description" />
 						</div>
 					</MoustacheSection>
@@ -134,8 +135,8 @@ export const OnwardContainer: React.FC<{
 					<MoustacheSection name="content">
 						<MoustacheSection name="headline">
 							{/* Don't show if headline is empty */}
-							<div className={item}>
-								<div className={imageContainer}>
+							<div css={item}>
+								<div css={imageContainer}>
 									<amp-img
 										src={moustacheVariable('thumbnail')}
 										layout="fixed"
@@ -143,10 +144,10 @@ export const OnwardContainer: React.FC<{
 										height="75"
 									/>
 								</div>
-								<div className={itemContent}>
+								<div css={itemContent}>
 									<div>
-										<h2 className={headlineCSS}>
-											<span className={iconCSS}>
+										<h2 css={headlineCSS}>
+											<span css={iconCSS}>
 												<MoustacheSection name="isVideo">
 													<VideoIcon />
 												</MoustacheSection>
@@ -157,7 +158,7 @@ export const OnwardContainer: React.FC<{
 													<VolumeHigh />
 												</MoustacheSection>
 											</span>
-											<span className={quoteIconCSS}>
+											<span css={quoteIconCSS}>
 												<MoustacheSection name="isComment">
 													<Quote />
 												</MoustacheSection>
@@ -170,7 +171,7 @@ export const OnwardContainer: React.FC<{
 											</div>
 										</MoustacheSection>
 									</div>
-									<aside className={ageWarning}>
+									<aside css={ageWarning}>
 										<time>
 											<MoustacheSection name="showWebPublicationDate">
 												<Clock />{' '}
@@ -180,7 +181,7 @@ export const OnwardContainer: React.FC<{
 									</aside>
 								</div>
 								<a
-									className={link}
+									css={link}
 									href={
 										guardianBaseURL +
 										moustacheVariable('url')
@@ -194,7 +195,7 @@ export const OnwardContainer: React.FC<{
 				</div>
 			</MoustacheSection>
 		</MoustacheTemplate>
-		<div overflow="" className={showMore}>
+		<div overflow="" css={showMore}>
 			<ShowMoreButton />
 		</div>
 	</amp-list>

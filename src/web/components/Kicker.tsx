@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { PulsingDot } from '@root/src/web/components/PulsingDot';
 
@@ -37,9 +36,9 @@ export const Kicker = ({
 		? palette.text.cardKicker
 		: palette.text.linkKicker;
 	return (
-		<span className={kickerStyles(kickerColour)}>
+		<span css={kickerStyles(kickerColour)}>
 			{showPulsingDot && <PulsingDot colour={kickerColour} />}
-			<span className={cx(showSlash && slashStyles)}>{text}</span>
+			<span css={showSlash && slashStyles}>{text}</span>
 		</span>
 	);
 };

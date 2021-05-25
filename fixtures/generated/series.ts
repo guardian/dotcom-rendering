@@ -20,242 +20,290 @@ export const series = {
 	trails: [
 		{
 			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/07/chris-packhams-animal-einsteins-review-a-balm-for-frayed-minds',
+				'https://www.theguardian.com/tv-and-radio/2021/may/21/solos-review-black-mirror-amazon-helen-mirren-morgan-freeman',
 			linkText:
-				"Chris Packham's Animal Einsteins review – a balm for frayed minds",
+				'Solos review – a dystopian dud even Anne Hathaway can’t rescue',
+			showByline: false,
+			byline: 'Jack Seale',
+			image:
+				'https://i.guim.co.uk/img/media/54e88a45502cda9e2aeeba97ea12740d55d0c459/0_96_3600_2159/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=4b052c4f90af268d3bb1c8637157859d',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/54e88a45502cda9e2aeeba97ea12740d55d0c459/0_96_3600_2159/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=4b052c4f90af268d3bb1c8637157859d',
+				'460':
+					'https://i.guim.co.uk/img/media/54e88a45502cda9e2aeeba97ea12740d55d0c459/0_96_3600_2159/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=60b4a1af3c6ecf71f6179222e00611aa',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-21T15:00:34.000Z',
+			headline:
+				'Solos review – a dystopian dud even Anne Hathaway can’t rescue',
+			shortUrl: 'https://www.theguardian.com/p/hfqeg',
+			starRating: 2,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/may/21/the-me-you-cant-see-review-prince-harry-oprah-winfrey-mental-health-apple-tv',
+			linkText:
+				'The Me You Can’t See review – Oprah, Harry and the perils of A-list activism',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image:
+				'https://i.guim.co.uk/img/media/d77d7d6b1441166cbd620dba0aa9eb6f8e23488b/0_2_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=1d6b2ec78f11a012e8784a6be99d2b6e',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/d77d7d6b1441166cbd620dba0aa9eb6f8e23488b/0_2_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=1d6b2ec78f11a012e8784a6be99d2b6e',
+				'460':
+					'https://i.guim.co.uk/img/media/d77d7d6b1441166cbd620dba0aa9eb6f8e23488b/0_2_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=246d25522f8c9d49133a6c6c37a36b75',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-21T12:00:16.000Z',
+			headline:
+				'The Me You Can’t See review – Oprah, Harry and the perils of A-list activism',
+			shortUrl: 'https://www.theguardian.com/p/hfq4a',
+			starRating: 2,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/may/20/we-are-lady-parts-review-give-it-up-for-tvs-fearless-muslim-riot-grrrls',
+			linkText:
+				'We Are Lady Parts review – give it up for TV’s fearless Muslim riot grrrls ',
 			showByline: false,
 			byline: 'Chitra Ramaswamy',
 			image:
-				'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=77976aa8cf98f7db6a039405c2442a52',
+				'https://i.guim.co.uk/img/media/1edb67d735337dfb736038e09c8c19981945d0be/0_219_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=915af200eaa434cacf6c5b56e452f890',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=77976aa8cf98f7db6a039405c2442a52',
+					'https://i.guim.co.uk/img/media/1edb67d735337dfb736038e09c8c19981945d0be/0_219_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=915af200eaa434cacf6c5b56e452f890',
 				'460':
-					'https://i.guim.co.uk/img/media/c04e11c74cf7e1f4f1869829532dba4df8c27496/0_72_4281_2568/master/4281.jpg?width=460&quality=85&auto=format&fit=max&s=85bf601a5274ab7574a7438f6f95c447',
+					'https://i.guim.co.uk/img/media/1edb67d735337dfb736038e09c8c19981945d0be/0_219_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=2156a75ed5eca522b77fd6ecc52438d4',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Review',
-			webPublicationDate: '2021-03-07T21:00:12.000Z',
-			headline:
-				"Chris Packham's Animal Einsteins review – a balm for frayed minds",
-			shortUrl: 'https://www.theguardian.com/p/gj6v2',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/04/luxury-holidays-how-to-get-away-this-year-review-what-sort-of-masochist-would-watch-this',
-			linkText:
-				'Luxury Holidays: How To Get Away This Year review – what sort of masochist would watch this?',
-			showByline: false,
-			byline: 'Stuart Heritage',
-			image:
-				'https://i.guim.co.uk/img/media/9463811a563441478360aced92c16a5a4f5eebf4/88_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=b86f1758d624b2ee18a858c4fdebbc9e',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/9463811a563441478360aced92c16a5a4f5eebf4/88_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=b86f1758d624b2ee18a858c4fdebbc9e',
-				'460':
-					'https://i.guim.co.uk/img/media/9463811a563441478360aced92c16a5a4f5eebf4/88_0_3971_2384/master/3971.jpg?width=460&quality=85&auto=format&fit=max&s=258c252bf3adf062f659665ef67fb3ca',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
 			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-04T21:00:15.000Z',
+			webPublicationDate: '2021-05-20T21:30:49.000Z',
 			headline:
-				'Luxury Holidays: How To Get Away This Year review – what sort of masochist would watch this?',
-			shortUrl: 'https://www.theguardian.com/p/gj6xa',
-			starRating: 1,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/04/the-terror-review-an-icy-chiller-with-echoes-of-our-present',
-			linkText:
-				'The Terror review – an icy chiller with echoes of our present',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/93db2931499f18919c426759440a81e607299615/0_286_4285_2571/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=bd491a2766251f1e6fc63143187092f4',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/93db2931499f18919c426759440a81e607299615/0_286_4285_2571/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=bd491a2766251f1e6fc63143187092f4',
-				'460':
-					'https://i.guim.co.uk/img/media/93db2931499f18919c426759440a81e607299615/0_286_4285_2571/master/4285.jpg?width=460&quality=85&auto=format&fit=max&s=418fea1a914dafc19d833e1bff917d9f',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-04T13:30:02.000Z',
-			headline:
-				'The Terror review – an icy chiller with echoes of our present',
-			shortUrl: 'https://www.theguardian.com/p/gj4jk',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/03/the-pandemic-at-no-47-review-paddy-wivell',
-			linkText:
-				'The Pandemic at No 47 review – who lives in a street like this? ',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/d99b75a4a57687eb54cedaa632394a9e64d6d04c/0_428_3803_2284/master/3803.jpg?width=300&quality=85&auto=format&fit=max&s=84c076b1000b148be8ad22ae32840044',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/d99b75a4a57687eb54cedaa632394a9e64d6d04c/0_428_3803_2284/master/3803.jpg?width=300&quality=85&auto=format&fit=max&s=84c076b1000b148be8ad22ae32840044',
-				'460':
-					'https://i.guim.co.uk/img/media/d99b75a4a57687eb54cedaa632394a9e64d6d04c/0_428_3803_2284/master/3803.jpg?width=460&quality=85&auto=format&fit=max&s=1a0e33de3a85cb2571710b0041aa0df4',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-03T23:00:29.000Z',
-			headline:
-				'The Pandemic at No 47 review – who lives in a street like this? ',
-			shortUrl: 'https://www.theguardian.com/p/gthng',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/02/your-honor-review-perfectly-fine-if-you-can-forget-about-breaking-bad',
-			linkText:
-				'Your Honor review: perfectly fine – if you can forget about Breaking Bad',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/b2e00066c133556bf09e196e8d356871fc154fd5/451_1155_5446_3268/master/5446.jpg?width=300&quality=85&auto=format&fit=max&s=2322358cbadbcf2d9f5058381b74a654',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/b2e00066c133556bf09e196e8d356871fc154fd5/451_1155_5446_3268/master/5446.jpg?width=300&quality=85&auto=format&fit=max&s=2322358cbadbcf2d9f5058381b74a654',
-				'460':
-					'https://i.guim.co.uk/img/media/b2e00066c133556bf09e196e8d356871fc154fd5/451_1155_5446_3268/master/5446.jpg?width=460&quality=85&auto=format&fit=max&s=1677b081d8471cd6b944e99d4e5cb8e4',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-02T22:10:04.000Z',
-			headline:
-				'Your Honor review: perfectly fine – if you can forget about Breaking Bad',
-			shortUrl: 'https://www.theguardian.com/p/gtfyh',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/mar/01/max-clifford-the-fall-of-a-tabloid-king-review-scandal-at-the-heart-of-fleet-street',
-			linkText:
-				'Max Clifford: The Fall of a Tabloid King review – scandal at the heart of Fleet Street',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/9d3a0e208a5ac017e7b324f13d6cfe85b16deb3c/0_216_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=e12438b30bc4cbccf22a2de4a87b9080',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/9d3a0e208a5ac017e7b324f13d6cfe85b16deb3c/0_216_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=e12438b30bc4cbccf22a2de4a87b9080',
-				'460':
-					'https://i.guim.co.uk/img/media/9d3a0e208a5ac017e7b324f13d6cfe85b16deb3c/0_216_3355_2014/master/3355.jpg?width=460&quality=85&auto=format&fit=max&s=49459053ee3bd786eb7a9db2b06c3b94',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-03-01T22:35:31.000Z',
-			headline:
-				'Max Clifford: The Fall of a Tabloid King review – scandal at the heart of Fleet Street',
-			shortUrl: 'https://www.theguardian.com/p/gt7tq',
-			starRating: 3,
-		},
-		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/28/mcdonald-dodds-series-two-review-far-from-dark-and-all-the-better-for-it',
-			linkText:
-				'McDonald & Dodds series two review: far from dark – and all the better for it',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			image:
-				'https://i.guim.co.uk/img/media/0909aacb0d056bbfc0d3826d7dc52af6afc3667b/0_127_5651_3390/master/5651.jpg?width=300&quality=85&auto=format&fit=max&s=5d2b1f54e59a9dece3f88af18707a397',
-			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/0909aacb0d056bbfc0d3826d7dc52af6afc3667b/0_127_5651_3390/master/5651.jpg?width=300&quality=85&auto=format&fit=max&s=5d2b1f54e59a9dece3f88af18707a397',
-				'460':
-					'https://i.guim.co.uk/img/media/0909aacb0d056bbfc0d3826d7dc52af6afc3667b/0_127_5651_3390/master/5651.jpg?width=460&quality=85&auto=format&fit=max&s=90a0383064fc0e038aff60875112d101',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			webPublicationDate: '2021-02-28T22:00:05.000Z',
-			headline:
-				'McDonald & Dodds series two review: far from dark – and all the better for it',
-			shortUrl: 'https://www.theguardian.com/p/ghb2j',
+				'We Are Lady Parts review – give it up for TV’s fearless Muslim riot grrrls ',
+			shortUrl: 'https://www.theguardian.com/p/hfxz8',
 			starRating: 4,
 		},
 		{
 			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/26/graysons-art-club-review-pandemic-version-take-hart-celebrities',
+				'https://www.theguardian.com/tv-and-radio/2021/may/20/subnormal-a-british-scandal-review-racist-nightmare-steve-mcqueen',
 			linkText:
-				"Grayson's Art Club review – a heartening, lockdown-era tonic",
+				'Subnormal: A British Scandal review – the racist nightmare that scarred black children for life',
 			showByline: false,
-			byline: 'Lucy Mangan',
+			byline: 'Rebecca Nicholson',
 			image:
-				'https://i.guim.co.uk/img/media/64a223ff900b3a691682d1c6a0be23694476804a/0_94_4000_2401/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=838fca8c1354294e8e6acbff0f73982a',
+				'https://i.guim.co.uk/img/media/9fe3b13033868f65fbe4065d0f73da545401c093/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=9f644b7d3a8a25ee7549c73327070516',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/media/64a223ff900b3a691682d1c6a0be23694476804a/0_94_4000_2401/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=838fca8c1354294e8e6acbff0f73982a',
+					'https://i.guim.co.uk/img/media/9fe3b13033868f65fbe4065d0f73da545401c093/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=9f644b7d3a8a25ee7549c73327070516',
 				'460':
-					'https://i.guim.co.uk/img/media/64a223ff900b3a691682d1c6a0be23694476804a/0_94_4000_2401/master/4000.jpg?width=460&quality=85&auto=format&fit=max&s=e9ff8567fb22ccd481c3e1ab7ce01dbe',
+					'https://i.guim.co.uk/img/media/9fe3b13033868f65fbe4065d0f73da545401c093/60_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=9e216baeba4bf405169396597e9833ca',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Review',
-			webPublicationDate: '2021-02-26T21:00:05.000Z',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-20T21:00:49.000Z',
 			headline:
-				"Grayson's Art Club review – a heartening, lockdown-era tonic",
-			shortUrl: 'https://www.theguardian.com/p/ghbbd',
+				'Subnormal: A British Scandal review – the racist nightmare that scarred black children for life',
+			shortUrl: 'https://www.theguardian.com/p/hf9ax',
 			starRating: 5,
 		},
 		{
 			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/25/stand-up-deliver-review-will-shaun-ryder-tickle-your-funny-bone',
+				'https://www.theguardian.com/tv-and-radio/2021/may/19/the-psychedelic-drug-trial-review-a-mind-bending-magic-mushroom-mission',
 			linkText:
-				'Stand Up & Deliver review – will Shaun Ryder tickle your funny bone?',
+				'The Psychedelic Drug Trial review – a mind-bending magic mushroom mission',
 			showByline: false,
-			byline: 'Rebecca Nicholson',
+			byline: 'Lucy Mangan',
 			image:
-				'https://i.guim.co.uk/img/media/de6745bb9d80150a8996fae583fd92ec566a4dd3/107_409_2222_1333/master/2222.jpg?width=300&quality=85&auto=format&fit=max&s=b2c8855b7b3a3e94a6caad1f85469086',
+				'https://i.guim.co.uk/img/media/3bbd4c092f8dc6acccbef0092b703f33458441e2/0_200_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=21450c666ff02a2ab9374f5eb71ca8a2',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/media/de6745bb9d80150a8996fae583fd92ec566a4dd3/107_409_2222_1333/master/2222.jpg?width=300&quality=85&auto=format&fit=max&s=b2c8855b7b3a3e94a6caad1f85469086',
+					'https://i.guim.co.uk/img/media/3bbd4c092f8dc6acccbef0092b703f33458441e2/0_200_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=21450c666ff02a2ab9374f5eb71ca8a2',
 				'460':
-					'https://i.guim.co.uk/img/media/de6745bb9d80150a8996fae583fd92ec566a4dd3/107_409_2222_1333/master/2222.jpg?width=460&quality=85&auto=format&fit=max&s=b9373627f05d22b6fda111e132322ec7',
+					'https://i.guim.co.uk/img/media/3bbd4c092f8dc6acccbef0092b703f33458441e2/0_200_4284_2570/master/4284.jpg?width=460&quality=85&auto=format&fit=max&s=ddc76b763c04cb50632107a0be27f3e9',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Review',
-			webPublicationDate: '2021-02-25T22:05:38.000Z',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-19T21:00:19.000Z',
 			headline:
-				'Stand Up & Deliver review – will Shaun Ryder tickle your funny bone?',
-			shortUrl: 'https://www.theguardian.com/p/gh2qk',
+				'The Psychedelic Drug Trial review – a mind-bending magic mushroom mission',
+			shortUrl: 'https://www.theguardian.com/p/hfvnd',
+			starRating: 3,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/may/18/extra-life-a-short-history-of-living-longer-review-the-gobsmacking-truth-about-vaccines',
+			linkText:
+				'Extra Life: A Short History of Living Longer review – the gobsmacking truth about vaccines',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image:
+				'https://i.guim.co.uk/img/media/f9a7c62f0f007080474c1ea0a7450cedf42ab490/23_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=9b422d426b4a5978866cba13750a5cd9',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/f9a7c62f0f007080474c1ea0a7450cedf42ab490/23_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=9b422d426b4a5978866cba13750a5cd9',
+				'460':
+					'https://i.guim.co.uk/img/media/f9a7c62f0f007080474c1ea0a7450cedf42ab490/23_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=5211ab365d2d7c46e664bbc461a8b59c',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-18T22:00:10.000Z',
+			headline:
+				'Extra Life: A Short History of Living Longer review – the gobsmacking truth about vaccines',
+			shortUrl: 'https://www.theguardian.com/p/hejxm',
 			starRating: 4,
 		},
 		{
 			url:
-				'https://www.theguardian.com/tv-and-radio/2021/feb/24/ginny-and-georgia-review-perfect-trash-netflix',
+				'https://www.theguardian.com/tv-and-radio/2021/may/17/the-nevers-review-not-even-magical-aliens-can-save-this-cursed-mess',
 			linkText:
-				'Ginny & Georgia review – such perfect trash deserves a special award',
+				'The Nevers review – not even magical aliens can save this cursed mess',
 			showByline: false,
 			byline: 'Lucy Mangan',
 			image:
-				'https://i.guim.co.uk/img/media/9d9684be35e696c3b8594096eb5e09cc8a0a6e82/109_0_3375_2025/master/3375.jpg?width=300&quality=85&auto=format&fit=max&s=cd90b0e88709713fd764d7ae5e35459a',
+				'https://i.guim.co.uk/img/media/ecb83ebdc17de5064c2e2c1ed61a781cc14f6d74/64_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=0e307ed98416560f55b9a3c0d4f1262f',
 			carouselImages: {
 				'300':
-					'https://i.guim.co.uk/img/media/9d9684be35e696c3b8594096eb5e09cc8a0a6e82/109_0_3375_2025/master/3375.jpg?width=300&quality=85&auto=format&fit=max&s=cd90b0e88709713fd764d7ae5e35459a',
+					'https://i.guim.co.uk/img/media/ecb83ebdc17de5064c2e2c1ed61a781cc14f6d74/64_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=0e307ed98416560f55b9a3c0d4f1262f',
 				'460':
-					'https://i.guim.co.uk/img/media/9d9684be35e696c3b8594096eb5e09cc8a0a6e82/109_0_3375_2025/master/3375.jpg?width=460&quality=85&auto=format&fit=max&s=be5a5d8c8744000937c85c1d2ebc485b',
+					'https://i.guim.co.uk/img/media/ecb83ebdc17de5064c2e2c1ed61a781cc14f6d74/64_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=a96b3e2f0812feaeedb498ebb9b2f609',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Review',
-			webPublicationDate: '2021-02-24T14:00:19.000Z',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-17T22:20:35.000Z',
 			headline:
-				'Ginny & Georgia review – such perfect trash deserves a special award',
-			shortUrl: 'https://www.theguardian.com/p/ggyqg',
+				'The Nevers review – not even magical aliens can save this cursed mess',
+			shortUrl: 'https://www.theguardian.com/p/hetvm',
+			starRating: 3,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/may/17/the-pact-review-waless-big-little-lies-will-have-you-on-tenterhooks',
+			linkText:
+				'The Pact review – Wales’s Big Little Lies will have you on tenterhooks',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			image:
+				'https://i.guim.co.uk/img/media/f668a06d1ede9993e09e324819c88c9838f38aae/28_108_1649_989/master/1649.jpg?width=300&quality=85&auto=format&fit=max&s=86c2626f74bb77b434aa09c71a261465',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/f668a06d1ede9993e09e324819c88c9838f38aae/28_108_1649_989/master/1649.jpg?width=300&quality=85&auto=format&fit=max&s=86c2626f74bb77b434aa09c71a261465',
+				'460':
+					'https://i.guim.co.uk/img/media/f668a06d1ede9993e09e324819c88c9838f38aae/28_108_1649_989/master/1649.jpg?width=460&quality=85&auto=format&fit=max&s=5d0ceae09ebe309b29d0d2982514fb80',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-17T21:00:34.000Z',
+			headline:
+				'The Pact review – Wales’s Big Little Lies will have you on tenterhooks',
+			shortUrl: 'https://www.theguardian.com/p/het72',
+			starRating: 3,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/may/16/delia-derbyshire-the-myths-and-the-legendary-tapes-review-playful-paean-to-a-musical-pioneer',
+			linkText:
+				'Delia Derbyshire: The Myths and the Legendary Tapes review – playful paean to a musical pioneer',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			image:
+				'https://i.guim.co.uk/img/media/a161f2c6047b52db46ad38459aeb8752f736e92f/148_0_4369_2624/master/4369.jpg?width=300&quality=85&auto=format&fit=max&s=bac0cfcb1a2c2059fccdad3b7a7f2de8',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/a161f2c6047b52db46ad38459aeb8752f736e92f/148_0_4369_2624/master/4369.jpg?width=300&quality=85&auto=format&fit=max&s=bac0cfcb1a2c2059fccdad3b7a7f2de8',
+				'460':
+					'https://i.guim.co.uk/img/media/a161f2c6047b52db46ad38459aeb8752f736e92f/148_0_4369_2624/master/4369.jpg?width=460&quality=85&auto=format&fit=max&s=fba1fb23876ad5f281fd04252cebf940',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-16T21:30:06.000Z',
+			headline:
+				'Delia Derbyshire: The Myths and the Legendary Tapes review – playful paean to a musical pioneer',
+			shortUrl: 'https://www.theguardian.com/p/hd43t',
+			starRating: 4,
+		},
+		{
+			url:
+				'https://www.theguardian.com/tv-and-radio/2021/may/14/halston-review-ewan-mcgregor-netflix-fashion',
+			linkText: 'Halston review – sex, cocaine and Ewan McGregor',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			image:
+				'https://i.guim.co.uk/img/media/89fb3427e45cb0d7d1fb8923313f9d7271b7e96a/504_535_3048_1829/master/3048.jpg?width=300&quality=85&auto=format&fit=max&s=4edc1f247a49fc54efa2c04df4bdc8c6',
+			carouselImages: {
+				'300':
+					'https://i.guim.co.uk/img/media/89fb3427e45cb0d7d1fb8923313f9d7271b7e96a/504_535_3048_1829/master/3048.jpg?width=300&quality=85&auto=format&fit=max&s=4edc1f247a49fc54efa2c04df4bdc8c6',
+				'460':
+					'https://i.guim.co.uk/img/media/89fb3427e45cb0d7d1fb8923313f9d7271b7e96a/504_535_3048_1829/master/3048.jpg?width=460&quality=85&auto=format&fit=max&s=9c9c066c94a8482d12c725ed0082ba81',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2021-05-14T09:00:53.000Z',
+			headline: 'Halston review – sex, cocaine and Ewan McGregor',
+			shortUrl: 'https://www.theguardian.com/p/hdaza',
 			starRating: 3,
 		},
 	],

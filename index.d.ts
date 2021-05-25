@@ -2,33 +2,56 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
+
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
+// These are partialy kept for Google Analytics purposes
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
-type CAPIPillar = RealPillars | FakePillars;
+type LegacyPillar = RealPillars | FakePillars;
 
-// CAPIDesign is what CAPI might give us but we only want to use a subset of these (Design)
-// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/DesignType.scala
+// Themes are used for styling
+// RealPillars have pillar palette colours and have a `Pillar` type in Scala
+// FakePillars allow us to make modifications to style based on rules outside of the pillar of an article and have a `Special` type in Scala
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Theme.scala
+type ThemePillar = 'NewsPillar' | 'OpinionPillar' | 'SportPillar' | 'CulturePillar' | 'LifestylePillar';
+type ThemeSpecial = 'SpecialReportTheme' | 'Labs';
+type CAPITheme = ThemePillar | ThemeSpecial;
+
+// CAPIDesign is what CAPI gives us on the Format field
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
-	| 'Article'
-	| 'Media'
-	| 'Review'
-	| 'Analysis'
-	| 'Comment'
-	| 'Feature'
-	| 'Live'
-	| 'Recipe'
-	| 'MatchReport'
-	| 'Interview'
-	| 'GuardianView'
-	| 'Quiz'
-	| 'AdvertisementFeature'
-	| 'PhotoEssay'
-	| 'Immersive'
-	| 'SpecialReport'
-	| 'GuardianLabs';
+	| 'ArticleDesign'
+	| 'MediaDesign'
+	| 'ReviewDesign'
+	| 'AnalysisDesign'
+	| 'CommentDesign'
+	| 'LetterDesign'
+	| 'FeatureDesign'
+	| 'LiveBlogDesign'
+	| 'DeadBlogDesign'
+	| 'RecipeDesign'
+	| 'MatchReportDesign'
+	| 'InterviewDesign'
+	| 'EditorialDesign'
+	| 'QuizDesign'
+	| 'InteractiveDesign'
+	| 'PhotoEssayDesign'
+	| 'PrintShopDesign';
+
+// CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
+// https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
+type CAPIDisplay = 'StandardDisplay' | 'ImmersiveDisplay' | 'ShowcaseDisplay' | 'NumberedListDisplay';
+
+// CAPIFormat is the stringified version of Format passed through from CAPI.
+// It gets converted to the @guardian/types format on platform
+
+type CAPIFormat = {
+	design: CAPIDesign;
+	theme: CAPITheme;
+	display: CAPIDisplay;
+}
 
 type Display = import('@guardian/types').Display;
 type Design = import('@guardian/types').Design;
@@ -79,6 +102,9 @@ type Palette = {
 		pullQuote: Colour;
 		pullQuoteAttribution: Colour;
 		dropCap: Colour;
+		blockquote: Colour;
+		numberedTitle: Colour;
+		numberedPosition: Colour;
 	},
 	background: {
 		article: Colour;
@@ -120,6 +146,7 @@ type Palette = {
 		richLink: Colour;
 		navPillar: Colour;
 		article: Colour;
+		lines: Colour;
 	},
 	topBar: {
 		card: Colour;
@@ -136,7 +163,6 @@ type SharePlatform =
 	| 'twitter'
 	| 'email'
 	| 'whatsApp'
-	| 'pinterest'
 	| 'linkedIn'
 	| 'messenger';
 
@@ -207,7 +233,8 @@ interface ReaderRevenueCategories {
 	contribute: string;
 	subscribe: string;
 	support: string;
-	gifting: string;
+	supporter: string;
+	gifting?: string;
 }
 
 type ReaderRevenueCategory = 'contribute' | 'subscribe' | 'support';
@@ -339,7 +366,7 @@ interface CAPILinkType {
     longTitle?: string;
     iconName?: string;
     children?: CAPILinkType[];
-    pillar?: CAPIPillar;
+    pillar?: LegacyPillar;
     more?: boolean;
     classList?: string[];
 }
@@ -384,7 +411,15 @@ interface CAPIType {
 	pageId: string;
 	version: number; // TODO: check who uses?
 	tags: TagType[];
-	pillar: CAPIPillar;
+	format: CAPIFormat;
+
+	// Include pillar and designType until we remove them upstream
+	// We type designType as `string` for now so that the field is present,
+	// but we don't care what's in it. Pillar we have a type for so we use it
+	// but it shouldn't be important.
+	designType: string;
+	pillar: LegacyPillar;
+
 	isImmersive: boolean;
 	sectionLabel: string;
 	sectionUrl: string;
@@ -398,9 +433,7 @@ interface CAPIType {
 	webURL: string;
 	linkedData: { [key: string]: any }[];
 	config: ConfigType;
-	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesign but need to allow the type here before then
-	designType: CAPIDesign;
+
 	showBottomSocialButtons: boolean;
 	shouldHideReaderRevenue: boolean;
 
@@ -428,16 +461,15 @@ interface CAPIType {
 
 	matchUrl?: string;
 	isSpecialReport: boolean;
+
+	anniversaryInteractiveAtom?: InteractiveAtomBlockElement; // TEMPORARY, to be removed following 200th anniversary
 }
 
 // Browser data models. Note the CAPI prefix here means something different to
 // the models above.
 
 type CAPIBrowserType = {
-	// The CAPI object sent from frontend can have designType Immersive. We force this to be Article
-	// in decideDesign but need to allow the type here before then
-	designType: CAPIDesign;
-	pillar: CAPIPillar;
+	format: CAPIFormat;
 	config: ConfigTypeBrowser;
 	editionId: Edition;
 	editionLongForm: string;
@@ -470,6 +502,7 @@ type CAPIBrowserType = {
 	isLive: boolean;
 	matchUrl?: string;
 	elementsToHydrate: CAPIElement[];
+	isPreview?: boolean;
 };
 
 interface TagType {
@@ -643,7 +676,7 @@ interface ConfigType extends CommercialConfigType {
 	hbImpl: { [key: string]: any } | string;
 	adUnit: string;
 	isSensitive: boolean;
-	videoDuration: number;
+	videoDuration?: number;
 	edition: string;
 	section: string;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -656,120 +689,16 @@ interface ConfigType extends CommercialConfigType {
 	discussionApiUrl: string;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
-	isPhotoEssay: boolean;
+	isPhotoEssay?: boolean;
 	references?: { [key: string]: string }[];
 	host?: string;
 	idUrl?: string;
 	mmaUrl?: string;
 	brazeApiKey?: string;
 	ipsosTag?: string;
-	isLiveBlog: boolean;
-	isLive: boolean;
-	avatarApiUrl: string;
-	isProd: boolean;
-	hasYouTubeAtom: boolean;
-	inBodyInternalLinkCount: number;
-	atomTypes?: {
-		guide: boolean;
-		audio: boolean;
-		explainer: boolean;
-		profile: boolean;
-		chart: boolean;
-		timeline: boolean;
-		qanda: boolean;
-		commonsdivision: boolean;
-	};
-	blogIds: string;
-	beaconUrl: string;
-	campaigns:unknown[];
-	calloutsUrl:string;
-	requiresMembershipAccess: boolean;
-	hasMultipleVideosInPage: boolean;
-	onwardWebSocket:string;
-	a9PublisherId: string;
-	pbIndexSites: {
-		bp: string;
-		id:number;
-	}[];
-	idWebAppUrl: string;
-	omnitureAccount: string;
-	contributorBio: string;
-	pageCode: string;
-	pillar: string;
-	membershipUrl: string;
-	cardStyle: string;
-	shouldHideAdverts: boolean;
-	membershipAccess: string;
-	isPreview: boolean;
-	googletagJsUrl: string;
-	supportUrl: string;
-	hasShowcaseMainElement: boolean;
-	isColumn: boolean;
-	sectionName: string;
-	sponsorshipType?: string;
-	mobileAppsAdUnitRoot: string;
-	dfpAdUnitRoot: string;
-	headline: string;
-	commentable: boolean;
-	commissioningDesks: string;
-	inBodyExternalLinkCount: number;
-	stripePublicToken: string;
-	idOAuthUrl: string;
-	thirdPartyAppsAccount: string;
-	richLink: string;
-	avatarImagesUrl: string;
-	trackingNames: string;
-	fbAppId: string;
-	externalEmbedHost: string;
-	keywords: string;
-	blogs: string;
-	hasInlineMerchandise: boolean;
-	seriesId?: string;
-	seriesTags?: string;
-	locationapiurl: string;
-	buildNumber: string;
-	ampIframeUrl: string;
-	userAttributesApiUrl: string;
-	publication: string;
-	contentType: string;
-	facebookIaAdUnitRoot: string;
-	ophanEmbedJsUrl: string;
-	thumbnail: string;
-	isFront: boolean;
-	wordCount: number;
-	author: string;
-	nonKeywordTagIds: string;
-	pageId: string;
-	forecastsapiurl: string;
-	assetsPath: string;
-	lightboxImages: any;
-	isImmersive: boolean;
-	dfpHost: string;
-	shortUrl: string;
-	isContent: boolean;
-	contentId: string;
-	discussionFrontendUrl: string;
-	ophanJsUrl: string;
-	atoms?: [string],
-	disableStickyTopBanner?: boolean;
-	productionOffice: string;
-	dfpNonRefreshableLineItemIds: number[];
-	tones: string;
-	plistaPublicApiKey: string;
-	googleSearchId: string;
-	allowUserGeneratedContent: boolean,
-	byline: string;
-	authorIds: string;
-	webPublicationDate: number,
-	omnitureAmpAccount: string;
-	isHosted: boolean,
-	hasPageSkin: boolean,
-	webTitle: string;
-	weatherapiurl: string;
-	googleSearchUrl: string;
-	optimizeEpicUrl: string;
-	isSplash: boolean,
-	isNumberedList: boolean,
+	isLiveBlog?: boolean;
+	isLive?: boolean;
+	isPreview?: boolean;
 }
 
 interface ConfigTypeBrowser {
@@ -800,6 +729,7 @@ interface ConfigTypeBrowser {
 	discussionApiClientHeader: string;
 	dcrSentryDsn: string;
 	remoteBanner: boolean;
+	puzzlesBanner: boolean;
 	ausMoment2020Header: boolean;
 	switches: CAPIType['config']['switches'];
 	abTests: CAPIType['config']['abTests'];
@@ -809,7 +739,7 @@ interface ConfigTypeBrowser {
 }
 
 interface GADataType {
-	pillar: CAPIPillar;
+	pillar: LegacyPillar;
 	webTitle: string;
 	section: string;
 	contentType: string;
@@ -838,7 +768,6 @@ interface DCRServerDocumentData {
 }
 
 interface BrowserNavType {
-	topLevelPillars: PillarType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
 }
@@ -906,13 +835,18 @@ interface BaseTrailType {
     linkText?: string;
 }
 interface TrailType extends BaseTrailType {
-		format: Format;
-		palette: Palette;
+	palette: Palette;
+	format: Format;
 }
 
 interface CAPITrailType extends BaseTrailType {
-	designType: CAPIDesign;
-	pillar: CAPIPillar;
+	format: CAPIFormat;
+	// Include pillar and designType until we remove them upstream
+	// We type designType as `string` for now so that the field is present,
+	// but we don't care what's in it. Pillar we have a type for so we use it
+	// but it shouldn't be important.
+	designType: string;
+	pillar: LegacyPillar;
 }
 
 interface TrailTabType {
@@ -958,15 +892,13 @@ type AdSlotType =
 	| 'mostpop'
 	| 'merchandising-high'
 	| 'merchandising'
-	| 'comments';
+	| 'comments'
+	| 'survey';
 
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
 /* eslint-disable @typescript-eslint/no-explicit-any */
-declare module 'emotion-server' {
-	export const extractCritical: any;
-}
 declare module 'dompurify' {
 	const createDOMPurify: any;
 	export default createDOMPurify;
@@ -1010,6 +942,7 @@ declare namespace JSX {
 		'amp-analytics': any;
 		'amp-pixel': any;
 		'amp-ad': any;
+		'amp-sticky-ad': any;
 		'amp-youtube': any;
 		'amp-geo': any;
 		'amp-consent': any;

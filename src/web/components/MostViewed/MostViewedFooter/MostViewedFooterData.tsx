@@ -1,11 +1,9 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from, Breakpoint } from '@guardian/src-foundations/mq';
-import { useAB } from '@guardian/ab-react';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { decideTrail } from '@root/src/web/lib/decideTrail';
 
@@ -46,10 +44,6 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 
-function buildDeeplyReadUrl(ajaxUrl: string) {
-	return joinUrl([ajaxUrl, 'most-read-deeply-read.json']);
-}
-
 function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
 	return tabs.map((tab) => ({
 		...tab,
@@ -62,16 +56,7 @@ export const MostViewedFooterData = ({
 	palette,
 	ajaxUrl,
 }: Props) => {
-	const ABTestAPI = useAB();
-
-	const inDeeplyReadTestVariant = ABTestAPI.isUserInVariant(
-		'DeeplyReadTest',
-		'variant',
-	);
-
-	const url = inDeeplyReadTestVariant
-		? buildDeeplyReadUrl(ajaxUrl)
-		: buildSectionUrl(ajaxUrl, sectionName);
+	const url = buildSectionUrl(ajaxUrl, sectionName);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | CAPITrailTabType[]
 	>(url);
@@ -85,7 +70,7 @@ export const MostViewedFooterData = ({
 		const tabs = 'tabs' in data ? data.tabs : data;
 		return (
 			<div
-				className={css`
+				css={css`
 					width: 100%;
 				`}
 			>
@@ -94,7 +79,7 @@ export const MostViewedFooterData = ({
 					sectionName={sectionName}
 					palette={palette}
 				/>
-				<div className={cx(stackBelow('tablet'), secondTierStyles)}>
+				<div css={[stackBelow('tablet'), secondTierStyles]}>
 					{'mostCommented' in data && (
 						<SecondTierItem
 							trail={decideTrail(data.mostCommented)}

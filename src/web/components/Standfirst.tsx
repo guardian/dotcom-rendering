@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
@@ -46,10 +45,10 @@ const nestedStyles = (palette: Palette) => css`
 	[data-dcr-style='bullet'] {
 		display: inline-block;
 		content: '';
-		border-radius: 0.375rem;
-		height: 0.75rem;
-		width: 0.75rem;
-		margin-right: 0.125rem;
+		border-radius: 100%;
+		height: 15.2px;
+		width: 15.2px;
+		margin-right: 2px;
 		background-color: ${neutral[86]};
 	}
 
@@ -66,6 +65,16 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 		case Display.Immersive:
 			switch (format.design) {
 				case Design.PhotoEssay:
+					if (format.theme === Special.Labs) {
+						return css`
+							${textSans.large({})};
+							margin-top: ${space[2]}px;
+							margin-bottom: ${space[3]}px;
+							line-height: 22px;
+							max-width: 540px;
+							color: ${palette.text.standfirst};
+						`;
+					}
 					return css`
 						${headline.xxxsmall({})};
 						margin-top: ${space[2]}px;
@@ -77,7 +86,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				default:
 					return css`
 						${format.theme === Special.Labs
-							? textSans.large()
+							? textSans.medium()
 							: headline.xsmall({
 									fontWeight: 'light',
 							  })};
@@ -94,11 +103,23 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 			}
 
+		case Display.NumberedList:
+			return css`
+				${headline.xxsmall({
+					fontWeight: 'bold',
+				})};
+				margin-bottom: ${space[3]}px;
+				max-width: 540px;
+				color: ${palette.text.standfirst};
+			`;
+
 		case Display.Showcase:
-		case Display.Standard: {
+		case Display.Standard:
+		default: {
 			switch (format.design) {
 				case Design.Comment:
 				case Design.Editorial:
+				case Design.Letter:
 				case Design.Feature:
 				case Design.Recipe:
 				case Design.Review:
@@ -110,18 +131,38 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 					`;
-				default:
+				case Design.LiveBlog:
+				case Design.DeadBlog:
 					return css`
-						${format.theme === Special.Labs
-							? textSans.large()
-							: headline.xxxsmall({
-									fontWeight: 'bold',
-							  })};
+						${headline.xxxsmall({
+							fontWeight: 'bold',
+						})};
 						line-height: 20px;
+						margin-top: ${space[1]}px;
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 					`;
+				default:
+					switch (format.theme) {
+						case Special.Labs:
+							return css`
+								${textSans.medium()}
+								margin-bottom: ${space[3]}px;
+								max-width: 540px;
+								color: ${palette.text.standfirst};
+							`;
+						default:
+							return css`
+								${headline.xxxsmall({
+									fontWeight: 'bold',
+								})};
+								line-height: 20px;
+								margin-bottom: ${space[3]}px;
+								max-width: 540px;
+								color: ${palette.text.standfirst};
+							`;
+					}
 			}
 		}
 	}
@@ -133,10 +174,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 	return (
 		<div
 			data-print-layout="hide"
-			className={cx(
-				nestedStyles(palette),
-				standfirstStyles(format, palette),
-			)}
+			css={[nestedStyles(palette), standfirstStyles(format, palette)]}
 			// eslint-disable-next-line react/no-danger
 			dangerouslySetInnerHTML={{
 				__html: sanitise(standfirst, {

@@ -1,8 +1,7 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
-import { headline } from '@guardian/src-foundations/typography';
+import { Design, Special } from '@guardian/types';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 
@@ -47,6 +46,35 @@ const fontStyles = (size: SmallHeadlineSize) => {
 		case 'tiny':
 			return css`
 				${headline.xxxsmall()};
+				font-size: 14px;
+			`;
+	}
+};
+
+const labTextStyles = (size: SmallHeadlineSize) => {
+	switch (size) {
+		case 'large':
+			return css`
+				${textSans.large()};
+				${until.desktop} {
+					${textSans.medium()};
+				}
+			`;
+		case 'medium':
+			return css`
+				${textSans.large({ lineHeight: 'tight' })};
+				${until.desktop} {
+					${textSans.medium({ lineHeight: 'tight' })};
+				}
+				padding-bottom: ${space[1]}px;
+			`;
+		case 'small':
+			return css`
+				${textSans.small()};
+			`;
+		case 'tiny':
+			return css`
+				${textSans.xxsmall()};
 				font-size: 14px;
 			`;
 	}
@@ -110,16 +138,18 @@ export const CardHeadline = ({
 }: Props) => (
 	<>
 		<h4
-			className={cx(
-				fontStyles(size),
+			css={[
+				format.theme === Special.Labs
+					? labTextStyles(size)
+					: fontStyles(size),
 				format.design === Design.Analysis && underlinedStyles(size),
 				isFullCardImage &&
 					css`
 						line-height: 1; /* Reset line height in full image carousel */
 					`,
-			)}
+			]}
 		>
-			<span className={cx(isFullCardImage && fullCardImageTextStyles)}>
+			<span css={isFullCardImage && fullCardImageTextStyles}>
 				{kickerText && (
 					<Kicker
 						text={kickerText}
@@ -134,7 +164,7 @@ export const CardHeadline = ({
 				)}
 
 				<span
-					className={css`
+					css={css`
 						color: ${palette.text.cardHeadline};
 					`}
 				>
@@ -143,7 +173,12 @@ export const CardHeadline = ({
 			</span>
 		</h4>
 		{byline && showByline && (
-			<Byline text={byline} palette={palette} size={size} />
+			<Byline
+				text={byline}
+				palette={palette}
+				format={format}
+				size={size}
+			/>
 		)}
 	</>
 );

@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
@@ -12,7 +11,7 @@ export default {
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			max-width: 620px;
 			padding: 20px;
 		`}

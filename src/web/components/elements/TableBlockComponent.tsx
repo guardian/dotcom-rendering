@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
 import { palette, border } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -20,7 +19,7 @@ const tableEmbed = css`
 			padding: 0.5rem;
 		}
 		tr {
-			${textSans.xsmall()};
+			${textSans.xxsmall()};
 		}
 		thead {
 			tr {
@@ -44,7 +43,7 @@ export const TableBlockComponent: React.FC<{
 }> = ({ element }) => {
 	return (
 		<div
-			className={tableEmbed}
+			css={tableEmbed}
 			data-cy="football-table-embed"
 			dangerouslySetInnerHTML={{ __html: unescapeData(element.html) }}
 		/>

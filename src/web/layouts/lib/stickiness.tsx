@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 
@@ -28,29 +27,28 @@ const headerWrapper = css`
 `;
 
 // The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
+// Overflow is visible because puzzles banner needs it to render correctly
 const bannerWrapper = css`
 	position: fixed !important;
 	bottom: 0;
 	${getZIndexImportant('banner')}
 	max-height: 80vh;
-	overflow-y: auto;
-	overflow-x: hidden;
-
+	overflow: visible;
 	width: 100% !important;
 	background: none !important;
 	top: auto !important;
 `;
 
 export const Stuck = ({ children }: Props) => (
-	<div className={stickyAdWrapper}>{children}</div>
+	<div css={stickyAdWrapper}>{children}</div>
 );
 
 export const SendToBack = ({ children }: Props) => (
-	<div className={headerWrapper}>{children}</div>
+	<div css={headerWrapper}>{children}</div>
 );
 
 export const BannerWrapper = ({ children }: Props) => (
-	<div id="bottom-banner" className={bannerWrapper}>
+	<div id="bottom-banner" css={bannerWrapper}>
 		{children}
 	</div>
 );

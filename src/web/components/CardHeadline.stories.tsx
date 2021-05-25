@@ -1,11 +1,10 @@
-import React from 'react';
-
 import { Design, Display, Pillar, Special } from '@guardian/types';
 
 import { Section } from '@frontend/web/components/Section';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { CardHeadline } from '@frontend/web/components/CardHeadline';
+import { specialReport } from '@guardian/src-foundations';
 
 export default {
 	component: CardHeadline,
@@ -281,3 +280,138 @@ export const Busy = () => (
 	</Section>
 );
 Busy.story = { name: 'Lifestyle opinion' };
+
+export const Byline = () => (
+	<>
+		<Section showTopBorder={true} showSideBorders={false}>
+			<CardHeadline
+				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.Labs,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.Labs,
+				})}
+				byline="Labs byline"
+				showByline={true}
+			/>
+		</Section>
+		<br />
+		<Section showTopBorder={true} showSideBorders={false}>
+			<CardHeadline
+				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.News,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.News,
+				})}
+				byline="News byline"
+				showByline={true}
+			/>
+		</Section>
+		<br />
+		<Section showTopBorder={true} showSideBorders={false}>
+			<CardHeadline
+				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Sport,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Sport,
+				})}
+				byline="Sport byline"
+				showByline={true}
+			/>
+		</Section>
+		<br />
+		<Section showTopBorder={true} showSideBorders={false}>
+			<CardHeadline
+				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Culture,
+				})}
+				byline="Culture byline"
+				showByline={true}
+			/>
+		</Section>
+		<br />
+		<Section showTopBorder={true} showSideBorders={false}>
+			<CardHeadline
+				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Lifestyle,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Lifestyle,
+				})}
+				byline="Lifestyle byline"
+				showByline={true}
+			/>
+		</Section>
+		<br />
+		<Section showTopBorder={true} showSideBorders={false}>
+			<CardHeadline
+				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Opinion,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Pillar.Opinion,
+				})}
+				byline="Opinion byline"
+				showByline={true}
+			/>
+		</Section>
+		<br />
+		<Section
+			showTopBorder={true}
+			showSideBorders={false}
+			backgroundColour={specialReport[300]}
+		>
+			<CardHeadline
+				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
+				format={{
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.SpecialReport,
+				}}
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Feature,
+					theme: Special.SpecialReport,
+				})}
+				byline="SpecialReport byline"
+				showByline={true}
+			/>
+		</Section>
+	</>
+);
+Byline.story = { name: 'With byline' };

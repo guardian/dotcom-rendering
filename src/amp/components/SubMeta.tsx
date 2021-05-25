@@ -1,10 +1,11 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
-import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
 import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
 import { textSans, body } from '@guardian/src-foundations/typography';
+
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
+import { palette } from '@guardian/src-foundations';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
@@ -28,7 +29,7 @@ const linkStyle = (pillar: Theme) => css`
 	padding-left: 5px;
 	padding-right: 6px;
 	text-decoration: none;
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${textSans.small()};
 	:after {
 		content: '/';
@@ -63,7 +64,7 @@ const sectionLinkStyle = (pillar: Theme) => css`
 	padding-left: 5px;
 	padding-right: 6px;
 	text-decoration: none;
-	color: ${pillarPalette[pillar].main};
+	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${body.medium()};
 	:after {
 		content: '/';
@@ -82,7 +83,7 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	color: ${text.supporting};
 	display: block;
 	margin-bottom: -3px;
@@ -133,9 +134,9 @@ export const SubMeta: React.FC<{
 	guardianBaseURL,
 }) => {
 	const sectionListItems = sections.map((link) => (
-		<li className={itemStyle} key={link.url}>
+		<li css={itemStyle} key={link.url}>
 			<a
-				className={sectionLinkStyle(pillar)}
+				css={sectionLinkStyle(pillar)}
 				href={`${guardianBaseURL}${link.url}`}
 			>
 				{link.title}
@@ -144,11 +145,8 @@ export const SubMeta: React.FC<{
 	));
 
 	const keywordListItems = keywords.map((link) => (
-		<li className={itemStyle} key={link.url}>
-			<a
-				className={linkStyle(pillar)}
-				href={`${guardianBaseURL}${link.url}`}
-			>
+		<li css={itemStyle} key={link.url}>
+			<a css={linkStyle(pillar)} href={`${guardianBaseURL}${link.url}`}>
 				{link.title}
 			</a>
 		</li>
@@ -156,39 +154,36 @@ export const SubMeta: React.FC<{
 
 	return (
 		<>
-			<div className={guardianLines(pillar)}>
-				<span className={labelStyle}>Topics</span>
-				<ul className={sectionListStyle}>{sectionListItems}</ul>
-				<ul className={keywordListStyle(pillar)}>{keywordListItems}</ul>
+			<div css={guardianLines(pillar)}>
+				<span css={labelStyle}>Topics</span>
+				<ul css={sectionListStyle}>{sectionListItems}</ul>
+				<ul css={keywordListStyle(pillar)}>{keywordListItems}</ul>
 			</div>
-			<ShareIcons
-				className={shareIcons}
-				sharingUrls={sharingURLs}
-				pillar={pillar}
-				displayIcons={[
-					'facebook',
-					'twitter',
-					'email',
-					'linkedIn',
-					'pinterest',
-					'whatsApp',
-					'messenger',
-				]}
-			/>
+			<ul css={shareIcons}>
+				<ShareIcons
+					sharingUrls={sharingURLs}
+					pillar={pillar}
+					displayIcons={[
+						'facebook',
+						'twitter',
+						'email',
+						'linkedIn',
+						'whatsApp',
+						'messenger',
+					]}
+				/>
+			</ul>
 			{/* TODO link to actual (non-AMP) site here. Also handle comment count behaviour. */}
-			<div className={cx(guardianLines(pillar), siteLinks)}>
+			<div css={[guardianLines(pillar), siteLinks]}>
 				{isCommentable && (
 					<a
-						className={siteLinkStyle}
+						css={siteLinkStyle}
 						href={`${guardianBaseURL}/${pageID}#comments`}
 					>
-						<CommentIcon className={commentIcon} /> View comments
+						<CommentIcon css={commentIcon} /> View comments
 					</a>
 				)}
-				<a
-					className={siteLinkStyle}
-					href={`${guardianBaseURL}/${pageID}`}
-				>
+				<a css={siteLinkStyle} href={`${guardianBaseURL}/${pageID}`}>
 					View on theguardian.com
 				</a>
 			</div>

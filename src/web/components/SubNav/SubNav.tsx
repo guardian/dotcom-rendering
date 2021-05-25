@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { css, cx } from 'emotion';
+import { useState, useRef, useEffect } from 'react';
+import { css } from '@emotion/react';
 
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -11,7 +11,7 @@ type Props = {
 	currentNavLink: string;
 };
 
-const wrapperCollapsed = css`
+const wrapperCollapsedStyles = css`
 	height: 36px;
 	overflow: hidden;
 
@@ -75,6 +75,17 @@ const linkStyle = css`
 
 	:hover {
 		text-decoration: underline;
+	}
+
+	:focus {
+		line-height: 26px;
+		height: 26px;
+		margin-top: 5px;
+
+		${from.tablet} {
+			height: 32px;
+			line-height: 32px;
+		}
 	}
 `;
 
@@ -160,27 +171,22 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 	return (
 		<div
 			data-print-layout="hide"
-			className={cx(
-				{ [wrapperCollapsed]: collapseWrapper },
-				spaceBetween,
-			)}
+			css={[collapseWrapper && wrapperCollapsedStyles, spaceBetween]}
 			data-cy="sub-nav"
 			data-component="sub-nav"
 		>
 			<ul
 				ref={ulRef}
-				className={cx({
-					[collapsedStyles]: !expandSubNav,
-					[expandedStyles]: expandSubNav,
-				})}
+				css={[expandSubNav ? expandedStyles : collapsedStyles]}
 			>
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
-						className={listItemStyles(palette)}
+						css={listItemStyles(palette)}
 					>
 						<a
-							className={parentLinkStyle}
+							data-src-focus-disabled={true}
+							css={parentLinkStyle}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -190,9 +196,11 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 				{subNavSections.links.map((link) => (
 					<li key={link.url}>
 						<a
-							className={cx(linkStyle, {
-								[selected]: link.title === currentNavLink,
-							})}
+							css={[
+								linkStyle,
+								link.title === currentNavLink && selected,
+							]}
+							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
 								link.url,
@@ -206,7 +214,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 			{showMore && (
 				<button
 					onClick={() => setIsExpanded(!isExpanded)}
-					className={showMoreStyle}
+					css={showMoreStyle}
 					data-link-name="nav2 : subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}

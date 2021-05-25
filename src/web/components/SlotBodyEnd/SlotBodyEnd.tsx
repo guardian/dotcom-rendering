@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 
 import {
@@ -8,7 +8,7 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 
-import { BrazeMessagesInterface } from 'src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	ReaderRevenueEpic,
 	canShow as canShowReaderRevenueEpic,
@@ -83,7 +83,7 @@ const buildBrazeEpicConfig = (
 				/>
 			),
 		},
-		timeoutMillis: null,
+		timeoutMillis: 5000,
 	};
 };
 

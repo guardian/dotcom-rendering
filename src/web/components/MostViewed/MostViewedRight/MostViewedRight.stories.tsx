@@ -1,13 +1,13 @@
-import React from 'react';
 import fetchMock from 'fetch-mock';
 
-import { Pillar } from '@guardian/types';
+import { Design, Display, Pillar } from '@guardian/types';
 
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { Section } from '@frontend/web/components/Section';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { mockTab1 } from '../MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
@@ -44,7 +44,13 @@ export const defaultStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight pillar={Pillar.News} />
+						<MostViewedRight
+							palette={decidePalette({
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.News,
+							})}
+						/>
 					</Section>
 				</RightColumn>
 			</Flex>
@@ -74,7 +80,14 @@ export const limitItemsStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight pillar={Pillar.News} limitItems={3} />
+						<MostViewedRight
+							palette={decidePalette({
+								display: Display.Standard,
+								design: Design.Article,
+								theme: Pillar.News,
+							})}
+							limitItems={3}
+						/>
 					</Section>
 				</RightColumn>
 			</Flex>
@@ -91,7 +104,13 @@ export const outsideContextStory = () => {
 
 	return (
 		<Section>
-			<MostViewedRight pillar={Pillar.News} />
+			<MostViewedRight
+				palette={decidePalette({
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Pillar.News,
+				})}
+			/>
 		</Section>
 	);
 };

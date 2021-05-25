@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { Hide } from '@root/src/web/components/Hide';
@@ -17,10 +16,11 @@ type Props = {
 	edition: Edition;
 	idUrl?: string;
 	mmaUrl?: string;
+	isAnniversary?: boolean; // Temporary for G200 anniversary
 };
 
-export const Header = ({ edition, idUrl, mmaUrl }: Props) => (
-	<header className={headerStyles}>
+export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
+	<header css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
 			<div id="edition-root">
 				<EditionDropdown
@@ -29,10 +29,10 @@ export const Header = ({ edition, idUrl, mmaUrl }: Props) => (
 				/>
 			</div>
 		</Hide>
-		<Logo />
+		<Logo isAnniversary={isAnniversary} />
 		<div id="reader-revenue-links-header" />
 		<div id="links-root">
-			<Links giftingURL="" idUrl={idUrl} mmaUrl={mmaUrl} />
+			<Links supporterCTA="" idUrl={idUrl} mmaUrl={mmaUrl} />
 		</div>
 	</header>
 );

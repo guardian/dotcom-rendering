@@ -1,11 +1,10 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
-import { Display, Design, Format } from '@guardian/types';
+import { Display, Design, Format, Special } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const wrapperStyles = css`
@@ -15,11 +14,13 @@ const wrapperStyles = css`
 	z-index: 1;
 `;
 
-const yellowBoxStyles = css`
-	${headline.xxsmall({
-		fontWeight: 'regular',
-		lineHeight: 'loose',
-	})}
+const yellowBoxStyles = (format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.large({ lineHeight: 'regular' })
+		: headline.xxsmall({
+				fontWeight: 'regular',
+				lineHeight: 'loose',
+		  })}
 	font-style: italic;
 	background-color: ${brandAltBackground.primary};
 	box-shadow: 4px 0 0 ${brandAltBackground.primary},
@@ -36,10 +37,16 @@ const yellowBoxStyles = css`
 	}
 `;
 
-const opinionStyles = (palette: Palette) => css`
-	${headline.medium({
-		fontWeight: 'light',
-	})}
+const opinionWrapperStyles = css`
+	display: inline-block;
+`;
+
+const opinionStyles = (palette: Palette, format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.xxxlarge({ lineHeight: 'loose' })
+		: headline.medium({
+				fontWeight: 'light',
+		  })}
 	line-height: 38px;
 	/* Used to prevent the byline stretching full width */
 	display: inline;
@@ -56,10 +63,12 @@ const opinionStyles = (palette: Palette) => css`
 	}
 `;
 
-const immersiveStyles = css`
-	${headline.xsmall({
-		fontWeight: 'light',
-	})}
+const immersiveStyles = (format: Format) => css`
+	${format.theme === Special.Labs
+		? textSans.large({ lineHeight: 'tight' })
+		: headline.xsmall({
+				fontWeight: 'light',
+		  })}
 	margin-bottom: ${space[6]}px;
 `;
 
@@ -87,6 +96,9 @@ type Props = {
 	tags: TagType[];
 };
 
+const hasSingleContributor = (tags: TagType[]) =>
+	tags.filter((tag) => tag.type === 'Contributor').length === 1;
+
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	if (byline === '') {
 		return null;
@@ -97,9 +109,9 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case Display.Immersive:
 			return (
-				<div className={immersiveStyles}>
+				<div css={immersiveStyles(format)}>
 					by{' '}
-					<span className={immersiveLinkStyles(palette)}>
+					<span css={immersiveLinkStyles(palette)}>
 						<BylineLink byline={byline} tags={tags} />
 					</span>
 				</div>
@@ -110,24 +122,26 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 			switch (format.design) {
 				case Design.Interview:
 					return (
-						<div className={wrapperStyles}>
-							<div className={yellowBoxStyles}>
+						<div css={wrapperStyles}>
+							<div css={yellowBoxStyles(format)}>
 								<BylineLink byline={byline} tags={tags} />
 							</div>
 						</div>
 					);
 				case Design.Editorial:
+				case Design.Letter:
 				case Design.Comment:
 					return (
 						<div
-							className={`${opinionStyles(palette)} ${
-								tags.filter((tag) => tag.type === 'Contributor')
-									.length === 1
-									? authorBylineWithImage
-									: ''
-							}`}
+							css={[
+								opinionWrapperStyles,
+								hasSingleContributor(tags) &&
+									authorBylineWithImage,
+							]}
 						>
-							<BylineLink byline={byline} tags={tags} />
+							<div css={opinionStyles(palette, format)}>
+								<BylineLink byline={byline} tags={tags} />
+							</div>
 						</div>
 					);
 				default:

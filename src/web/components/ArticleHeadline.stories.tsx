@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { news } from '@guardian/src-foundations';
 import { Display, Design, Pillar, Special } from '@guardian/types';
@@ -46,40 +45,6 @@ export const ArticleStory = () => (
 );
 ArticleStory.story = { name: 'Article' };
 
-export const oldHeadline = () => (
-	<Section>
-		<Flex>
-			<LeftColumn>
-				<></>
-			</LeftColumn>
-			<ArticleContainer>
-				<ArticleHeadline
-					headlineString="This is an old headline"
-					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					})}
-					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
-					}}
-					tags={[
-						// Age warnings only show for old articles when the tone/news tag is present
-						{
-							id: 'tone/news',
-							type: '',
-							title: '',
-						},
-					]}
-				/>
-			</ArticleContainer>
-		</Flex>
-	</Section>
-);
-oldHeadline.story = { name: 'Article, with age warning' };
-
 export const Feature = () => (
 	<Section>
 		<Flex>
@@ -115,7 +80,7 @@ export const ShowcaseInterview = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>
@@ -149,7 +114,6 @@ export const ShowcaseInterview = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
-					abTests={{}}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -165,7 +129,7 @@ export const ShowcaseInterviewNobyline = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>
@@ -199,7 +163,6 @@ export const ShowcaseInterviewNobyline = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
-					abTests={{}}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -252,7 +215,6 @@ export const Interview = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
-					abTests={{}}
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -303,7 +265,6 @@ export const InterviewNoByline = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
-					abTests={{}}
 				/>
 			</ArticleContainer>
 		</Flex>

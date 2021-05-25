@@ -1,9 +1,8 @@
-import React from 'react';
-import { css } from 'emotion';
+import { ClassNames } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { body, textSans } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
@@ -103,127 +102,141 @@ const sanitiserOptions = {
 	},
 };
 
-const paraStyles = (format: Format) => css`
-	margin-bottom: 16px;
-	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
-
-	ul {
-		margin-bottom: 12px;
-	}
-
-	${from.tablet} {
-		ul {
-			margin-bottom: 16px;
-		}
-	}
-
-	li {
-		margin-bottom: 6px;
-		padding-left: 20px;
-
-		p {
-			display: inline;
-		}
-	}
-
-	li:before {
-		display: inline-block;
-		content: '';
-		border-radius: 6px;
-		height: 12px;
-		width: 12px;
-		margin-right: 8px;
-		background-color: ${neutral[86]};
-		margin-left: -20px;
-	}
-
-	/* Subscript and Superscript styles */
-	sub {
-		bottom: -0.25em;
-	}
-
-	sup {
-		top: -0.5em;
-	}
-
-	sub,
-	sup {
-		font-size: 75%;
-		line-height: 0;
-		position: relative;
-		vertical-align: baseline;
-	}
-
-	[data-dcr-style='bullet'] {
-		display: inline-block;
-		content: '';
-		border-radius: 0.375rem;
-		height: 0.75rem;
-		width: 0.75rem;
-		margin-right: 0.125rem;
-		background-color: ${decidePalette(format).background.bullet};
-	}
-`;
-
 export const TextBlockComponent = ({
 	html,
 	format,
 	forceDropCap,
 	isFirstParagraph,
-}: Props): JSX.Element | null => {
-	const {
-		willUnwrap: isUnwrapped,
-		unwrappedHtml,
-		unwrappedElement,
-	} = unwrapHtml({
-		fixes: [
-			{
-				unwrappedElement: 'p',
-				prefix: '<p>',
-				suffix: '</p>',
-			},
-			{
-				unwrappedElement: 'ul',
-				prefix: '<ul>',
-				suffix: '</ul>',
-			},
-		],
-		html,
-	});
+}: Props): JSX.Element | null => (
+	<ClassNames>
+		{({ css }) => {
+			const paraStyles = css`
+				margin-bottom: 16px;
+				${format.theme === Special.Labs
+					? textSans.medium()
+					: body.medium()};
 
-	const firstLetter = decideDropCapLetter(unwrappedHtml);
-	const remainingLetters = firstLetter
-		? unwrappedHtml.substr(firstLetter.length)
-		: unwrappedHtml;
+				ul {
+					margin-bottom: 12px;
+				}
 
-	if (
-		shouldShowDropCap({
-			format,
-			isFirstParagraph,
-			forceDropCap,
-		}) &&
-		firstLetter &&
-		isLongEnough(remainingLetters)
-	) {
-		return (
-			<p className={paraStyles(format)}>
-				<DropCap letter={firstLetter} format={format} />
+				${from.tablet} {
+					ul {
+						margin-bottom: 16px;
+					}
+				}
+
+				li {
+					margin-bottom: 6px;
+					padding-left: 20px;
+
+					p {
+						display: inline;
+					}
+				}
+
+				li:before {
+					display: inline-block;
+					content: '';
+					border-radius: 6px;
+					height: 12px;
+					width: 12px;
+					margin-right: 8px;
+					background-color: ${neutral[86]};
+					margin-left: -20px;
+				}
+
+				/* Subscript and Superscript styles */
+				sub {
+					bottom: -0.25em;
+				}
+
+				sup {
+					top: -0.5em;
+				}
+
+				sub,
+				sup {
+					font-size: 75%;
+					line-height: 0;
+					position: relative;
+					vertical-align: baseline;
+				}
+
+				[data-dcr-style='bullet'] {
+					display: inline-block;
+					content: '';
+					border-radius: 100%;
+					height: 15.2px;
+					width: 15.2px;
+					margin-right: 0.2px;
+					background-color: ${decidePalette(format).background
+						.bullet};
+				}
+
+				${until.tablet} {
+					/* 	To stop long words going outside of the view port.
+					For compatibility */
+					overflow-wrap: anywhere;
+					word-wrap: break-word;
+				}
+			`;
+
+			const {
+				willUnwrap: isUnwrapped,
+				unwrappedHtml,
+				unwrappedElement,
+			} = unwrapHtml({
+				fixes: [
+					{
+						unwrappedElement: 'p',
+						prefix: '<p>',
+						suffix: '</p>',
+					},
+					{
+						unwrappedElement: 'ul',
+						prefix: '<ul>',
+						suffix: '</ul>',
+					},
+				],
+				html,
+			});
+
+			const firstLetter = decideDropCapLetter(unwrappedHtml);
+			const remainingLetters = firstLetter
+				? unwrappedHtml.substr(firstLetter.length)
+				: unwrappedHtml;
+
+			if (
+				shouldShowDropCap({
+					format,
+					isFirstParagraph,
+					forceDropCap,
+				}) &&
+				firstLetter &&
+				isLongEnough(remainingLetters)
+			) {
+				return (
+					<p css={paraStyles}>
+						<DropCap letter={firstLetter} format={format} />
+						<RewrappedComponent
+							isUnwrapped={isUnwrapped}
+							html={sanitise(remainingLetters, sanitiserOptions)}
+							elCss={paraStyles}
+							tagName="span"
+						/>
+					</p>
+				);
+			}
+
+			return (
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
-					html={sanitise(remainingLetters, sanitiserOptions)}
-					elCss={paraStyles(format)}
-					tagName="span"
+					html={sanitise(unwrappedHtml, sanitiserOptions)}
+					elCss={paraStyles}
+					tagName={unwrappedElement || 'p'}
 				/>
-			</p>
-		);
-	}
-
-	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles(format)}
-			tagName={unwrappedElement || 'p'}
-		/>
-	);
-};
+			);
+		}}
+	</ClassNames>
+);

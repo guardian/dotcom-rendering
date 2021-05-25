@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Display, Pillar } from '@guardian/types';
 
@@ -19,6 +18,8 @@ const badMarkup =
 	'<html>\n <head></head>\n <body>\n  <p>In its <a href="https://www.admiral.com/magazine/guides/home/the-jargon-free-guide-to-bicycle-insurance" title="">guide to protecting your bike</a>, the insurer Admiral cites the Kryptonite New York M18 U-lock as being good quality. It costs <a href="http://go.theguardian.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.wiggle.co.uk%2Fkryptonite-new-york-m18-u-lock&amp;sref=https://www.theguardian.com/money/2020/jul/18/bike-theft-uk-cycle-sales-best-locks-insurance-bicycle.json?dcr" title="">£82.99 at Wiggle.co.uk</a>. Add a <a href="http://go.theguardian.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.wiggle.co.uk%2Fkryptonite-kryptoflex-7-foot-cable-bike-lock%2F&amp;sref=https://www.theguardian.com/money/2020/jul/18/bike-theft-uk-cycle-sales-best-locks-insurance-bicycle.json?dcr" title="">cable</a> for another tenner, so you can loop it through the wheels and secure them, too.</p>\n </body>\n</html>';
 const htmlWithDot =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit.<br><span data-dcr-style="bullet"></span> Etiam porta mauris nec sagittis luctus.</p>';
+const longWords =
+	'<p>Test In Mobile Modes</p><br><p>This is to test whether extremely long edge case words are wrapped when in mobile portrait. Word one: Pneumonoultramicroscopicsilicovolcanoconiosis. Word two: Hippopotomonstrosesquippedaliophobia. Word three: Pseudopseudohypoparathyroidism. Link test: https://www.theguardian.com/commentisfree/2021/mar/24/trust-britain-covid-vaccine-compromise?dcr</p>';
 
 const containerStyles = css`
 	max-width: 620px;
@@ -32,7 +33,7 @@ export default {
 
 export const defaultStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
 				format={{
@@ -49,7 +50,7 @@ defaultStory.story = { name: 'default' };
 
 export const DropCap = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
 				forceDropCap={true}
@@ -67,7 +68,7 @@ DropCap.story = { name: 'with drop cap' };
 
 export const QuotedDropCap = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={quotedHtml}
 				forceDropCap={false}
@@ -85,7 +86,7 @@ QuotedDropCap.story = { name: 'with quoted drop cap' };
 
 export const ShortText = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={shortHtml}
 				forceDropCap={true}
@@ -103,7 +104,7 @@ ShortText.story = { name: 'with text less than 200 characters' };
 
 export const NoTags = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={differentWrapperTags}
 				forceDropCap={true}
@@ -121,7 +122,7 @@ NoTags.story = { name: 'with no p tags' };
 
 export const FeatureDropCap = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
 				forceDropCap={false}
@@ -139,7 +140,7 @@ FeatureDropCap.story = { name: 'with design of Feature' };
 
 export const AList = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={aListHtml}
 				forceDropCap={true}
@@ -157,7 +158,7 @@ AList.story = { name: 'with a list' };
 
 export const BadMarkup = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={badMarkup}
 				forceDropCap={false}
@@ -175,11 +176,9 @@ BadMarkup.story = { name: 'with a bad markup' };
 
 export const SubSupscript = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
-				html={
-					'<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>'
-				}
+				html="<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>"
 				forceDropCap={false}
 				format={{
 					theme: Pillar.News,
@@ -195,7 +194,7 @@ SubSupscript.story = { name: 'with a sub and sup' };
 
 export const dotStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<TextBlockComponent
 				html={htmlWithDot}
 				format={{
@@ -209,3 +208,20 @@ export const dotStory = () => {
 	);
 };
 dotStory.story = { name: 'With Dot' };
+
+export const longWordStory = () => {
+	return (
+		<div css={containerStyles}>
+			<TextBlockComponent
+				html={longWords}
+				format={{
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				}}
+				isFirstParagraph={false}
+			/>
+		</div>
+	);
+};
+longWordStory.story = { name: 'Long Words' };

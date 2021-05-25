@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -10,7 +10,7 @@ const showMore = css`
 	color: ${palette.neutral[7]};
 	padding: 0 10px;
 	${textSans.small()};
-	/* Design System: Ideally we want a centering primative that we can use in these situations */
+	/* Design System: Ideally we want a centring primitive that we can use in these situations */
 	line-height: 34px;
 	height: 36px;
 	font-weight: bold;
@@ -41,7 +41,7 @@ const showMore = css`
 `;
 
 export const ShowMoreButton: React.FC = () => (
-	<div className={showMore} aria-label="Show more">
+	<div css={showMore} aria-label="Show more">
 		<PlusIcon />
 		Show more
 	</div>

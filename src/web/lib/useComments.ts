@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 
 type CommentType = {
 	id: string;
@@ -75,7 +75,9 @@ export function useComments(onwardsSections: OnwardsType[]) {
 	const [counts, setCounts] = useState<CommentType[]>([]);
 
 	const url = buildUrl(onwardsSections);
-	const { data } = useApi<CommentsType>(url);
+	const { data } = useApi<CommentsType>(url, {
+		refreshInterval: 15000,
+	});
 
 	useEffect(() => {
 		setCounts((data && data.counts) || []);

@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design } from '@guardian/types';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
@@ -55,6 +54,8 @@ const headlineLink = css`
 	color: ${text.anchorSecondary};
 	font-weight: 500;
 	${headline.xxxsmall()};
+
+	display: block; /* To ensure focus outline works okay */
 `;
 
 const ageWarningStyles = css`
@@ -69,33 +70,38 @@ type Props = {
 };
 
 export const MostViewedFooterItem = ({ trail, position }: Props) => (
-	<li className={gridItem(position)} data-link-name={`${position} | text`}>
-		<a className={headlineLink} href={trail.url} data-link-name="article">
-			<span className={bigNumber}>
+	<li css={gridItem(position)} data-link-name={`${position} | text`}>
+		<a css={headlineLink} href={trail.url} data-link-name="article">
+			<span css={bigNumber}>
 				<BigNumber index={position} />
 			</span>
-			<div className={headlineHeader}>
-				{trail.isLiveBlog ? (
+			<div css={headlineHeader}>
+				{trail.format.design === Design.LiveBlog ? (
 					<LinkHeadline
 						headlineText={trail.headline}
 						palette={trail.palette}
+						format={trail.format}
 						size="small"
 						kickerText="Live"
 						showSlash={true}
 						showPulsingDot={true}
-						showQuotes={trail.format.design === Design.Comment}
+						showQuotes={false}
 					/>
 				) : (
 					<LinkHeadline
 						headlineText={trail.headline}
 						palette={trail.palette}
+						format={trail.format}
 						size="small"
-						showQuotes={trail.format.design === Design.Comment}
+						showQuotes={
+							trail.format.design === Design.Comment ||
+							trail.format.design === Design.Letter
+						}
 					/>
 				)}
 			</div>
 			{trail.ageWarning && (
-				<div className={ageWarningStyles}>
+				<div css={ageWarningStyles}>
 					<AgeWarning age={trail.ageWarning} size="small" />
 				</div>
 			)}

@@ -8,12 +8,18 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
+const bodyParser = require('body-parser');
+
 const { siteName, root } = require('./config');
 
-function buildUrlFromQueryParam(req) {
-	const DEFAULT_URL =
-		'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
-	const url = new URL(req.query.url || DEFAULT_URL);
+const defaultArticleURL =
+	'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
+
+const defaultInteractiveURL =
+	'https://www.theguardian.com/environment/ng-interactive/2021/feb/23/beneath-the-blue-dive-into-a-dazzling-ocean-under-threat-interactive';
+
+function buildUrlFromQueryParam(req, defaultURL) {
+	const url = new URL(req.query.url || defaultURL);
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams && url.searchParams.toString();
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
@@ -30,6 +36,7 @@ const go = () => {
 	const compiler = webpack(webpackConfig);
 
 	const app = express();
+	app.use(bodyParser.json({ limit: '10mb' }));
 
 	app.use(
 		`/static/${siteName}`,
@@ -57,7 +64,7 @@ const go = () => {
 		'/Article',
 		async (req, res, next) => {
 			try {
-				const url = buildUrlFromQueryParam(req);
+				const url = buildUrlFromQueryParam(req, defaultArticleURL);
 				const { html, ...config } = await fetch(url).then((article) =>
 					article.json(),
 				);
@@ -71,6 +78,37 @@ const go = () => {
 		},
 		webpackHotServerMiddleware(compiler, {
 			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/Article' },
+		}),
+	);
+
+	app.post(
+		'/Article',
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/Article' },
+		}),
+	);
+
+	app.get(
+		'/ArticleJson',
+		async (req, res, next) => {
+			try {
+				const url = buildUrlFromQueryParam(req, defaultArticleURL);
+				const { html, ...config } = await fetch(url).then((article) =>
+					article.json(),
+				);
+
+				req.body = config;
+				next();
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error);
+			}
+		},
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/ArticleJson' },
 		}),
 	);
 
@@ -78,7 +116,7 @@ const go = () => {
 		'/AMPArticle',
 		async (req, res, next) => {
 			try {
-				const url = buildUrlFromQueryParam(req);
+				const url = buildUrlFromQueryParam(req, defaultArticleURL);
 				const { html, ...config } = await fetch(
 					ampifyUrl(url),
 				).then((article) => article.json());
@@ -91,7 +129,37 @@ const go = () => {
 		},
 		webpackHotServerMiddleware(compiler, {
 			chunkName: `${siteName}.server`,
-			serverRendererOptions: { amp: true },
+			serverRendererOptions: { path: '/AMPArticle' },
+		}),
+	);
+
+	app.post(
+		'/AMPArticle',
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/AMPArticle' },
+		}),
+	);
+
+	app.get(
+		'/Interactive',
+		async (req, res, next) => {
+			try {
+				const url = buildUrlFromQueryParam(req, defaultInteractiveURL);
+				const { html, ...config } = await fetch(
+					url,
+				).then((interactive) => interactive.json());
+
+				req.body = config;
+				next();
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error);
+			}
+		},
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/Interactive' },
 		}),
 	);
 

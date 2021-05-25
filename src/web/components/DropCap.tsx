@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
@@ -34,6 +33,7 @@ const innerStyles = (format: Format) => {
 
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return css`
 				${baseStyles};
@@ -50,8 +50,8 @@ const innerStyles = (format: Format) => {
 export const DropCap = ({ letter, format }: Props) => {
 	const palette = decidePalette(format);
 	return (
-		<span className={outerStyles(palette)}>
-			<span className={innerStyles(format)}>{letter}</span>
+		<span css={outerStyles(palette)}>
+			<span css={innerStyles(format)}>{letter}</span>
 		</span>
 	);
 };

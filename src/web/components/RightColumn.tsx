@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 
 const hideBelowDesktop = css`
@@ -23,5 +22,5 @@ type Props = {
 };
 
 export const RightColumn = ({ children }: Props) => {
-	return <section className={cx(hideBelowDesktop)}>{children}</section>;
+	return <section css={hideBelowDesktop}>{children}</section>;
 };

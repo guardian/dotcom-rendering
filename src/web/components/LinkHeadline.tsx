@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
 
@@ -10,6 +9,7 @@ import { Byline } from '@root/src/web/components/Byline';
 type Props = {
 	headlineText: string; // The text shown
 	palette: Palette; // Used to colour the headline and the kicker
+	format: Format;
 	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
 	kickerText?: string;
 	showPulsingDot?: boolean;
@@ -64,6 +64,7 @@ const visitedStyles = (visitedColour: string) => css`
 export const LinkHeadline = ({
 	headlineText,
 	palette,
+	format,
 	showUnderline = false,
 	kickerText,
 	showPulsingDot,
@@ -73,7 +74,7 @@ export const LinkHeadline = ({
 	link,
 	byline,
 }: Props) => (
-	<h4 className={fontStyles(size)}>
+	<h4 css={fontStyles(size)}>
 		{kickerText && (
 			<Kicker
 				text={kickerText}
@@ -89,12 +90,12 @@ export const LinkHeadline = ({
 			// We were passed a link object so headline should be a link, with link styling
 			<>
 				<a
-					className={cx(
+					css={[
 						// Composed styles - order matters for colours
 						linkStyles,
 						showUnderline && textDecorationUnderline,
 						link.visitedColour && visitedStyles(link.visitedColour),
-					)}
+					]}
 					href={link.to}
 					// If link.preventFocus is true, set tabIndex to -1 to ensure this
 					// link is not tabbed to. Useful if there is an outer link to the same
@@ -104,7 +105,12 @@ export const LinkHeadline = ({
 					{headlineText}
 				</a>
 				{byline && (
-					<Byline text={byline} palette={palette} size={size} />
+					<Byline
+						text={byline}
+						palette={palette}
+						format={format}
+						size={size}
+					/>
 				)}
 			</>
 		) : (
@@ -112,7 +118,12 @@ export const LinkHeadline = ({
 			<>
 				<span>{headlineText}</span>
 				{byline && (
-					<Byline text={byline} size={size} palette={palette} />
+					<Byline
+						text={byline}
+						size={size}
+						palette={palette}
+						format={format}
+					/>
 				)}
 			</>
 		)}

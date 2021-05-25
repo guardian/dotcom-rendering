@@ -1,13 +1,12 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Display } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
+import { timeAgo } from '@guardian/libs';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
-import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
@@ -20,7 +19,7 @@ type Props = {
 
 const ageStyles = (format: Format, palette: Palette) => {
 	return css`
-		${textSans.xsmall()};
+		${textSans.xxsmall()};
 		color: ${palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
@@ -40,7 +39,7 @@ const ageStyles = (format: Format, palette: Palette) => {
 		}
 
 		> time {
-			${textSans.xsmall({
+			${textSans.xxsmall({
 				fontWeight: format.design === Design.Media ? `bold` : `regular`,
 			})};
 		}
@@ -65,24 +64,19 @@ export const CardAge = ({
 	webPublicationDate,
 	showClock,
 }: Props) => {
-	const displayString = makeRelativeDate(
-		new Date(webPublicationDate).getTime(),
-		{
-			format: 'med',
-		},
-	);
+	const displayString = timeAgo(new Date(webPublicationDate).getTime());
 
 	if (!displayString) {
 		return null;
 	}
 
 	return (
-		<span className={cx(ageStyles(format, palette))}>
+		<span css={ageStyles(format, palette)}>
 			<span
-				className={cx(
+				css={
 					format.display === Display.Immersive &&
-						fullCardImageTextStyles,
-				)}
+					fullCardImageTextStyles
+				}
 			>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate}>{displayString}</time>

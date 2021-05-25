@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import {
 	makeGuardianBrowserCAPI,
@@ -11,12 +11,15 @@ import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
 import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Letter } from '@root/fixtures/generated/articles/Letter';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
+import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -37,11 +40,10 @@ export default {
 const convertToShowcase = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: true,
+		format: {
+			...CAPI.format,
+			display: 'ShowcaseDisplay' as CAPIDisplay,
 		},
-		isImmersive: false,
 	};
 };
 
@@ -129,6 +131,12 @@ export const EditorialStory = (): React.ReactNode => {
 };
 EditorialStory.story = { name: 'Editorial' };
 
+export const LetterStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Letter);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LetterStory.story = { name: 'Letter' };
+
 export const InterviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Interview);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
@@ -177,4 +185,212 @@ export const LabsStory = (): React.ReactNode => {
 };
 LabsStory.story = {
 	name: 'Labs',
+};
+
+export const SpecialReportStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
+};
+
+export const NumberedListStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(NumberedList);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+NumberedListStory.story = {
+	name: 'NumberedList',
+};
+
+// Anniversary stuff (Delete once event is over)
+
+const convertToAnniversary = (CAPI: CAPIType) => {
+	return {
+		...CAPI,
+		config: {
+			...CAPI.config,
+			switches: {
+				...CAPI.config.switches,
+				anniversaryHeaderSvg: true,
+			},
+			abTests: {
+				anniversaryAtomVariant: 'variant',
+			},
+		},
+	};
+};
+
+export const ArticleAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Article);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+ArticleAnniversaryStory.story = { name: 'ArticleAnniversary' };
+
+export const ReviewAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Review);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+ReviewAnniversaryStory.story = { name: 'ReviewAnniversary' };
+
+export const ReviewNoStarAnniversaryStory = (): React.ReactNode => {
+	const ReviewWithoutStars = {
+		...Review,
+		starRating: undefined,
+	};
+	const ServerCAPI = convertToShowcase(ReviewWithoutStars);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+ReviewNoStarAnniversaryStory.story = {
+	name: 'ReviewAnniversary without stars',
+};
+
+export const CommentAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Comment);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+CommentAnniversaryStory.story = {
+	name: 'CommentAnniversary',
+};
+
+export const PhotoEssayAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(PhotoEssay);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+PhotoEssayAnniversaryStory.story = { name: 'PhotoEssayAnniversary' };
+
+export const AnalysisAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Analysis);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+AnalysisAnniversaryStory.story = {
+	name: 'AnalysisAnniversary',
+};
+
+export const FeatureAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Feature);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+FeatureAnniversaryStory.story = { name: 'FeatureAnniversary' };
+
+export const LiveAnniversaryStory = (): React.ReactNode => {
+	const LiveBlog = {
+		...Live,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
+		},
+	};
+	const ServerCAPI = convertToShowcase(LiveBlog);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+LiveAnniversaryStory.story = { name: 'LiveBlogAnniversary' };
+
+export const DeadAnniversaryStory = (): React.ReactNode => {
+	const DeadBlog = {
+		...Live,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
+		},
+	};
+	const ServerCAPI = convertToShowcase(DeadBlog);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+DeadAnniversaryStory.story = { name: 'DeadBlogAnniversary' };
+
+export const EditorialAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Editorial);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+EditorialAnniversaryStory.story = {
+	name: 'EditorialAnniversary',
+};
+
+export const LetterAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Letter);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+LetterAnniversaryStory.story = {
+	name: 'LetterAnniversary',
+};
+
+export const InterviewAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Interview);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+InterviewAnniversaryStory.story = {
+	name: 'InterviewAnniversary',
+};
+
+export const QuizAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Quiz);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+QuizAnniversaryStory.story = {
+	name: 'QuizAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'wide' },
+	},
+};
+
+export const RecipeAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Recipe);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+RecipeAnniversaryStory.story = {
+	name: 'RecipeAnniversary',
+};
+
+export const MatchReportAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(MatchReport);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+MatchReportAnniversaryStory.story = {
+	name: 'MatchReportAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'wide' },
+	},
+};
+
+export const LabsAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(Labs);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+LabsAnniversaryStory.story = {
+	name: 'LabsAnniversary',
+};
+
+export const SpecialReportAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(SpecialReport);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+SpecialReportAnniversaryStory.story = {
+	name: 'SpecialReportAnniversary',
+};
+
+export const NumberedListAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToShowcase(NumberedList);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+NumberedListAnniversaryStory.story = {
+	name: 'NumberedListAnniversary',
 };

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
-
 import {
-	canShow as canShowRRBanner,
+	canShowRRBanner,
+	canShowPuzzlesBanner,
 	ReaderRevenueBanner,
+	PuzzlesBanner,
+	BannerProps,
+	CanShowFunctionType,
 } from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
 import { useOnce } from '@root/src/web/lib/useOnce';
@@ -13,14 +16,23 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import { CountryCode } from '@guardian/types';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
-	asyncCountryCode?: Promise<string | void>;
+	asyncCountryCode?: Promise<CountryCode | null>;
 	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
+	isPreview: boolean;
+};
+
+type RRBannerConfig = {
+	id: string;
+	BannerComponent: React.FC<BannerProps>;
+	canShowFn: CanShowFunctionType;
+	isEnabled: (switches: CAPIType['config']['switches']) => boolean;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
@@ -50,41 +62,66 @@ const buildCmpBannerConfig = (): CandidateConfig => ({
 	timeoutMillis: null,
 });
 
-const buildReaderRevenueBannerConfig = (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	asyncCountryCode: Promise<string>,
-): CandidateConfig => {
-	return {
-		candidate: {
-			id: 'reader-revenue-banner',
-			canShow: () =>
-				canShowRRBanner({
-					remoteBannerConfig: CAPI.config.remoteBanner,
-					isSignedIn,
-					asyncCountryCode,
-					contentType: CAPI.contentType,
-					sectionName: CAPI.sectionName,
-					shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
-					isMinuteArticle: CAPI.pageType.isMinuteArticle,
-					isPaidContent: CAPI.pageType.isPaidContent,
-					isSensitive: CAPI.config.isSensitive,
-					tags: CAPI.tags,
-					contributionsServiceUrl: CAPI.contributionsServiceUrl,
-					alreadyVisitedCount: getAlreadyVisitedCount(),
-					engagementBannerLastClosedAt: getBannerLastClosedAt(
-						'engagementBannerLastClosedAt',
-					),
-					subscriptionBannerLastClosedAt: getBannerLastClosedAt(
-						'subscriptionBannerLastClosedAt',
-					),
-				}),
-			/* eslint-disable-next-line react/jsx-props-no-spreading */
-			show: (meta: any) => () => <ReaderRevenueBanner {...meta} />,
-		},
-		timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
+const buildRRBannerConfigWith = ({
+	id,
+	BannerComponent,
+	canShowFn,
+	isEnabled,
+}: RRBannerConfig) => {
+	return (
+		CAPI: CAPIBrowserType,
+		isSignedIn: boolean,
+		asyncCountryCode: Promise<string>,
+		isPreview: boolean,
+	): CandidateConfig => {
+		return {
+			candidate: {
+				id,
+				canShow: () =>
+					canShowFn({
+						remoteBannerConfig: isEnabled(CAPI.config.switches),
+						isSignedIn,
+						asyncCountryCode,
+						contentType: CAPI.contentType,
+						sectionName: CAPI.sectionName,
+						shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
+						isMinuteArticle: CAPI.pageType.isMinuteArticle,
+						isPaidContent: CAPI.pageType.isPaidContent,
+						isSensitive: CAPI.config.isSensitive,
+						tags: CAPI.tags,
+						contributionsServiceUrl: CAPI.contributionsServiceUrl,
+						alreadyVisitedCount: getAlreadyVisitedCount(),
+						engagementBannerLastClosedAt: getBannerLastClosedAt(
+							'engagementBannerLastClosedAt',
+						),
+						subscriptionBannerLastClosedAt: getBannerLastClosedAt(
+							'subscriptionBannerLastClosedAt',
+						),
+						section: CAPI.config.section,
+						isPreview,
+					}),
+				show: ({ meta, module }: BannerProps) => () => (
+					<BannerComponent meta={meta} module={module} />
+				),
+			},
+			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
+		};
 	};
 };
+
+const buildPuzzlesBannerConfig = buildRRBannerConfigWith({
+	id: 'puzzles-banner',
+	BannerComponent: PuzzlesBanner,
+	canShowFn: canShowPuzzlesBanner,
+	isEnabled: (switches) => switches.puzzlesBanner,
+});
+
+const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
+	id: 'reader-revenue-banner',
+	BannerComponent: ReaderRevenueBanner,
+	canShowFn: canShowRRBanner,
+	isEnabled: (switches) => switches.remoteBanner,
+});
 
 const buildBrazeBanner = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
@@ -102,20 +139,28 @@ export const StickyBottomBanner = ({
 	asyncCountryCode,
 	CAPI,
 	brazeMessages,
+	isPreview,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
-		const readerRevenue = buildReaderRevenueBannerConfig(
+		const puzzlesBanner = buildPuzzlesBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<string>,
+			isPreview,
+		);
+		const readerRevenue = buildReaderRevenueBannerConfig(
+			CAPI,
+			isSignedIn as boolean,
+			asyncCountryCode as Promise<CountryCode>,
+			isPreview,
 		);
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
 		);
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, readerRevenue, brazeBanner],
+			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],
 			name: 'banner',
 		};
 

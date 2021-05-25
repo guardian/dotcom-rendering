@@ -1,14 +1,13 @@
-import React from 'react';
-import { cx } from 'emotion';
-
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
+
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from './types';
 import {
 	actionButtons,
 	bodyBold,
+	bodySeparator,
 	bodyText,
 	faq,
 	firstParagraphOverlay,
@@ -31,26 +30,22 @@ export const SignInGateMain = ({
 	isComment,
 }: SignInGateProps) => {
 	return (
-		<div className={signInGateContainer} data-cy="sign-in-gate-main">
+		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
-			<div className={firstParagraphOverlay(!!isComment)} />
-			<h1 className={headingStyles}>
-				Register for free and continue reading
-			</h1>
-			<p className={bodyBold}>
-				It’s important to say this is not a step towards a paywall
+			<div css={firstParagraphOverlay(!!isComment)} />
+			<h1 css={headingStyles}>You need to register to keep reading</h1>
+			<p css={bodyBold}>
+				It’s still free to read - this is not a paywall
 			</p>
-			<p className={bodyText}>
-				Registering is a free and simple way to help us sustain our
-				independent Guardian journalism.
-			</p>
-			<p className={bodyText}>
-				When you register with us we are able to improve our news
-				experience for you and for others. You will always be able to
-				control your own&nbsp;
+			<p css={bodyText}>
+				We’re committed to keeping our quality reporting open. By
+				registering and providing us with insight into your preferences,
+				you’re helping us to engage with you more deeply, and that
+				allows us to keep our journalism free for all. You’ll always be
+				able to control your own{' '}
 				<button
 					data-cy="sign-in-gate-main_privacy"
-					className={privacyLink}
+					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
@@ -58,12 +53,13 @@ export const SignInGateMain = ({
 				>
 					privacy settings
 				</button>
-				. Thank you.
+				.
 			</p>
-			<div className={actionButtons}>
+			<div css={actionButtons}>
 				<LinkButton
 					data-cy="sign-in-gate-main_register"
-					className={registerButton}
+					data-ignore="global-link-styling"
+					css={registerButton}
 					priority="primary"
 					size="small"
 					href={signInUrl}
@@ -76,7 +72,8 @@ export const SignInGateMain = ({
 
 				<LinkButton
 					data-cy="sign-in-gate-main_dismiss"
-					className={laterButton}
+					data-ignore="global-link-styling"
+					css={laterButton}
 					priority="subdued"
 					size="small"
 					onClick={() => {
@@ -88,13 +85,14 @@ export const SignInGateMain = ({
 				</LinkButton>
 			</div>
 
-			<p className={cx([bodyBold, signInHeader])}>
+			<p css={[bodySeparator, bodyBold, signInHeader]}>
 				Have a subscription? Made a contribution? Already registered?
 			</p>
 
 			<Link
 				data-cy="sign-in-gate-main_signin"
-				className={signInLink}
+				data-ignore="global-link-styling"
+				css={signInLink}
 				href={signInUrl}
 				onClick={() => {
 					trackLink(ophanComponentId, 'sign-in-link', abTest);
@@ -103,8 +101,9 @@ export const SignInGateMain = ({
 				Sign In
 			</Link>
 
-			<div className={faq}>
+			<div css={faq}>
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'how-link', abTest);
@@ -114,6 +113,7 @@ export const SignInGateMain = ({
 				</Link>
 
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'why-link', abTest);
@@ -123,6 +123,7 @@ export const SignInGateMain = ({
 				</Link>
 
 				<Link
+					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
 						trackLink(ophanComponentId, 'help-link', abTest);

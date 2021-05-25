@@ -12,8 +12,10 @@ import {
 	renderPerfTest as renderAMPArticlePerfTest,
 } from '@root/src/amp/server/render';
 import {
-	render as renderArticle,
+	renderArticle,
 	renderPerfTest as renderArticlePerfTest,
+	renderArticleJson,
+	renderInteractive,
 } from '@root/src/web/server/render';
 
 import {
@@ -25,8 +27,16 @@ import { logger } from './logging';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
 export default (options: any) => {
-	if ('amp' in options) {
-		return renderAMPArticle;
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+	switch (options.path) {
+		case '/Article':
+			return renderArticle;
+		case '/ArticleJson':
+			return renderArticleJson;
+		case '/AMPArticle':
+			return renderAMPArticle;
+		case '/Interactive':
+			return renderInteractive;
 	}
 
 	return renderArticle;
@@ -134,6 +144,8 @@ if (process.env.NODE_ENV === 'production') {
 
 	app.use('/ArticlePerfTest', renderArticlePerfTest);
 	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
+	app.use('/ArticleJson', renderArticleJson);
+	app.use('/Interactive', renderInteractive);
 
 	app.get('/', (req: Request, res: Response) => {
 		try {

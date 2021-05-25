@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import * as emotion from 'emotion';
-import * as emotionCore from '@emotion/core';
-import * as emotionTheming from 'emotion-theming';
+import { useEffect, useState } from 'react';
+import { css } from '@emotion/react';
+
 import { getZIndex } from '@root/src/web/lib/getZIndex';
-import { Props as BrazeBannerProps } from '@guardian/braze-components';
+import type { Props as BrazeBannerProps } from '@guardian/braze-components';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-import { BrazeMessagesInterface } from '@root/src/web/lib/braze/BrazeMessages';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
 type Meta = {
@@ -20,55 +20,12 @@ type Props = {
 	meta: Meta;
 };
 
-const containerStyles = emotion.css`
-    position: fixed;
-    bottom: -1px;
-    width: 100%;
-    ${getZIndex('banner')}
+const containerStyles = css`
+	position: fixed;
+	bottom: -1px;
+	width: 100%;
+	${getZIndex('banner')}
 `;
-
-const FORCE_BRAZE_ALLOWLIST = [
-	'preview.gutools.co.uk',
-	'preview.code.dev-gutools.co.uk',
-	'localhost',
-	'm.thegulocal.com',
-];
-
-const getBrazeMetaFromQueryString = (): Meta | null => {
-	if (URLSearchParams) {
-		const qsArg = 'force-braze-message';
-
-		const params = new URLSearchParams(window.location.search);
-		const value = params.get(qsArg);
-		if (value) {
-			if (!FORCE_BRAZE_ALLOWLIST.includes(window.location.hostname)) {
-				// eslint-disable-next-line no-console
-				console.log(`${qsArg} is not supported on this domain`);
-				return null;
-			}
-
-			try {
-				const dataFromBraze = JSON.parse(value);
-
-				return {
-					dataFromBraze,
-					logImpressionWithBraze: () => {},
-					logButtonClickWithBraze: () => {},
-				};
-			} catch (e) {
-				const error = e as Error;
-				// Parsing failed. Log a message and fall through.
-				// eslint-disable-next-line no-console
-				console.log(
-					`There was an error with ${qsArg}: `,
-					error.message,
-				);
-			}
-		}
-	}
-
-	return null;
-};
 
 // We can show a Braze banner if:
 // - The Braze switch is on
@@ -84,7 +41,7 @@ const getBrazeMetaFromQueryString = (): Meta | null => {
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 ): Promise<CanShowResult> => {
-	const forcedBrazeMeta = getBrazeMetaFromQueryString();
+	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
 			result: true,
@@ -142,7 +99,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	}, []);
 
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
 				submitComponentEvent={submitComponentEvent}
@@ -159,41 +116,30 @@ export const BrazeBanner = ({ meta }: Props) => {
 	>();
 
 	useEffect(() => {
-		if (meta) {
-			// TODO: unify the way we handle sharing these deps (this is
-			// duplicated in SlotBodyEnd). Probably via the automat client
-			// library.
-			window.guardian.automat = {
-				react: React,
-				preact: React,
-				emotionCore,
-				emotionTheming,
-				emotion,
-			};
+		import(
+			/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
+		)
+			.then((module) => {
+				setBrazeComponent(() => module.BrazeMessageComponent);
+			})
+			.catch((error) =>
+				window.guardian.modules.sentry.reportError(
+					error,
+					'braze-banner',
+				),
+			);
+	}, []);
 
-			import(
-				/* webpackChunkName: "guardian-braze-components" */ '@guardian/braze-components'
-			)
-				.then((module) => {
-					setBrazeComponent(() => module.BrazeMessage);
-				})
-				.catch((error) =>
-					window.guardian.modules.sentry.reportError(
-						error,
-						'braze-banner',
-					),
-				);
-		}
-	}, [meta]);
-
-	if (BrazeComponent && meta) {
-		return (
-			<BrazeBannerWithSatisfiedDependencies
-				BrazeComponent={BrazeComponent}
-				meta={meta}
-			/>
-		);
-	}
-
-	return <div />;
+	return (
+		<>
+			{BrazeComponent ? (
+				<BrazeBannerWithSatisfiedDependencies
+					BrazeComponent={BrazeComponent}
+					meta={meta}
+				/>
+			) : (
+				<div />
+			)}
+		</>
+	);
 };

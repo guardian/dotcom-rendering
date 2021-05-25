@@ -1,11 +1,12 @@
 import React from 'react';
-import { extractCritical } from 'emotion-server';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { CacheProvider } from '@emotion/core';
-import { cache } from 'emotion';
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import createCache from '@emotion/cache';
+import he from 'he';
+
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import he from 'he';
 
 interface RenderToStringResult {
 	html: string;
@@ -30,6 +31,10 @@ export const document = ({
 	scripts: string[];
 	metadata: Metadata;
 }) => {
+	const key = 'dcr-amp';
+	const cache = createCache({ key });
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCritical } = createEmotionServer(cache);
 	const { html, css }: RenderToStringResult = extractCritical(
 		// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
 		renderToStaticMarkup(
@@ -76,6 +81,7 @@ export const document = ({
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async custom-element="amp-geo" src="https://cdn.ampproject.org/v0/amp-geo-0.1.js"></script>
     <script async custom-element="amp-consent" src="https://cdn.ampproject.org/v0/amp-consent-0.1.js"></script>
+	<script async custom-element="amp-sticky-ad" src="https://cdn.ampproject.org/v0/amp-sticky-ad-1.0.js"></script>
 
     <!-- AMP element which is specific to the live blog -->
     <script async custom-element="amp-live-list" src="https://cdn.ampproject.org/v0/amp-live-list-0.1.js"></script>

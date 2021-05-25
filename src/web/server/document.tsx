@@ -1,8 +1,12 @@
-import React from 'react';
-import { extractCritical } from 'emotion-server';
+import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
-import { cache } from 'emotion';
-import { CacheProvider } from '@emotion/core';
+
+import createEmotionServer from '@emotion/server/create-instance';
+import createCache from '@emotion/cache';
+import { CacheProvider, Global, css } from '@emotion/react';
+
+import { focusHalo } from '@guardian/src-foundations/accessibility';
+
 import { escapeData } from '@root/src/lib/escapeData';
 import {
 	CDN,
@@ -13,8 +17,10 @@ import {
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
+import { Pillar } from '@guardian/types';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
+import { decideTheme } from '../lib/decideTheme';
 
 interface RenderToStringResult {
 	html: string;
@@ -42,16 +48,40 @@ interface Props {
 	data: DCRServerDocumentData;
 }
 
+const decideTitle = (CAPI: CAPIType): string => {
+	if (decideTheme(CAPI.format) === Pillar.Opinion && CAPI.author.byline) {
+		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
+	}
+	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+};
+
 export const document = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
-	const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
-	const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
+	const title = decideTitle(CAPI);
+	const key = 'dcr';
+	const cache = createCache({ key });
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCritical } = createEmotionServer(cache);
+
+	const {
+		html,
+		css: extractedCss,
+		ids: cssIDs,
+	}: RenderToStringResult = extractCritical(
 		renderToString(
-			// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
 			<CacheProvider value={cache}>
-				<React.StrictMode>
+				<StrictMode>
+					<Global
+						styles={css`
+							/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
+							/* The not(.src...) selector is to work with Source's FocusStyleManager. */
+							*:focus {
+								${focusHalo}
+							}
+						`}
+					/>
 					<DecideLayout CAPI={CAPI} NAV={NAV} />
-				</React.StrictMode>
+				</StrictMode>
 			</CacheProvider>,
 		),
 	);
@@ -219,7 +249,6 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromChunkName('lotame'),
 		...getScriptArrayFromChunkName('atomIframe'),
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
@@ -260,7 +289,7 @@ export const document = ({ data }: Props): string => {
 		loadableConfigScripts,
 		priorityScriptTags,
 		lowPriorityScriptTags,
-		css,
+		css: extractedCss,
 		html,
 		fontFiles,
 		title,

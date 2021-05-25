@@ -1,9 +1,8 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
 
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 import { decideTrail } from '@root/src/web/lib/decideTrail';
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 
@@ -20,11 +19,11 @@ const headingStyles = css`
 `;
 
 interface Props {
-	pillar: Theme;
+	palette: Palette;
 	limitItems?: number;
 }
 
-export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
+export const MostViewedRight = ({ palette, limitItems = 5 }: Props) => {
 	const endpointUrl: string =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
 	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
@@ -40,9 +39,9 @@ export const MostViewedRight = ({ pillar, limitItems = 5 }: Props) => {
 			.slice(0, limitItems);
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
-			<div className={wrapperStyles} data-component="geo-most-popular">
-				<GuardianLines count={4} pillar={pillar} />
-				<h3 className={headingStyles}>Most viewed</h3>
+			<div css={wrapperStyles} data-component="geo-most-popular">
+				<GuardianLines palette={palette} />
+				<h3 css={headingStyles}>Most viewed</h3>
 				<ul data-link-name="Right hand most popular geo GB">
 					{trails.map((trail, index) => (
 						<MostViewedRightItem

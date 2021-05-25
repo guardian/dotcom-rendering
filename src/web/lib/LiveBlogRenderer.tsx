@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { LiveBlock } from '../components/LiveBlock';
 
 type Props = {
@@ -7,7 +5,6 @@ type Props = {
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;
-	abTests: CAPIType['config']['abTests'];
 	pageId: string;
 	webTitle: string;
 };
@@ -17,7 +14,6 @@ export const LiveBlogRenderer = ({
 	blocks,
 	adTargeting,
 	host,
-	abTests,
 	pageId,
 	webTitle,
 }: Props) => {
@@ -30,7 +26,6 @@ export const LiveBlogRenderer = ({
 						block={block}
 						pageId={pageId}
 						webTitle={webTitle}
-						abTests={abTests}
 						adTargeting={adTargeting}
 						host={host}
 					/>

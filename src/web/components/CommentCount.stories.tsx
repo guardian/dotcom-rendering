@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React from 'react';
-import { css } from 'emotion';
+
+import { css } from '@emotion/react';
 
 import { Design, Display, Pillar, Special } from '@guardian/types';
 
@@ -15,7 +15,7 @@ export default {
 export const SpecialReportStory = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				display: flex;
 				flex-direction: row;
 				align-items: flex-start;
@@ -39,7 +39,7 @@ SpecialReportStory.story = { name: 'with theme SpecialReport' };
 export const NewsStory = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				display: flex;
 				flex-direction: row;
 				align-items: flex-start;
@@ -63,7 +63,7 @@ NewsStory.story = { name: 'with theme News' };
 export const LargeNumber = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				display: flex;
 				flex-direction: row;
 				align-items: flex-start;
@@ -83,3 +83,50 @@ export const LargeNumber = () => {
 	);
 };
 LargeNumber.story = { name: 'with a large number' };
+
+export const Zero = () => {
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+			`}
+		>
+			<CommentCount
+				isCommentable={true}
+				setIsExpanded={() => {}}
+				commentCount={0}
+				palette={decidePalette({
+					theme: Pillar.Opinion,
+					display: Display.Standard,
+					design: Design.Article,
+				})}
+			/>
+		</div>
+	);
+};
+Zero.story = { name: 'with zero comments' };
+
+export const Undefined = () => {
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: row;
+				align-items: flex-start;
+			`}
+		>
+			<CommentCount
+				isCommentable={true}
+				setIsExpanded={() => {}}
+				palette={decidePalette({
+					theme: Pillar.Opinion,
+					display: Display.Standard,
+					design: Design.Article,
+				})}
+			/>
+		</div>
+	);
+};
+Undefined.story = { name: 'with count undefined' };

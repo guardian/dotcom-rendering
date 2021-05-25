@@ -58,13 +58,9 @@ type LabsPalette = {
 	800: ColourType;
 };
 
-// pillarPalette exposes a convenience object for deciding ColourType
-//
-// Usage:
-// `pillarPalette[Pillar.Opinion][300]`
-// or
-// `pillarPalette[Pillar.Opinion].dark`
-export const pillarPalette: Record<
+// pillarPalette_DO_NOT_USE should no longer be used. Use palette from  decidePalette instead
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const pillarPalette_DO_NOT_USE: Record<
 	Theme,
 	PillarPalette | SpecialPalette | LabsPalette
 > = {

@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 
 import { Section } from '@frontend/web/components/Section';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Display, Pillar, Special } from '@guardian/types';
 
 import { Card } from './Card';
@@ -25,10 +23,6 @@ export const Format = (format: Format, title: string) => () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{ ...format, theme: Pillar.News }}
-							palette={decidePalette({
-								...format,
-								theme: Pillar.News,
-							})}
 							headlineText="News"
 							standfirst={
 								format.display === Display.Immersive
@@ -56,10 +50,6 @@ export const Format = (format: Format, title: string) => () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{ ...format, theme: Pillar.Culture }}
-							palette={decidePalette({
-								...format,
-								theme: Pillar.Culture,
-							})}
 							headlineText="Culture"
 							standfirst={
 								format.display === Display.Immersive
@@ -87,10 +77,6 @@ export const Format = (format: Format, title: string) => () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{ ...format, theme: Pillar.Sport }}
-							palette={decidePalette({
-								...format,
-								theme: Pillar.Sport,
-							})}
 							headlineText="Sport"
 							standfirst={
 								format.display === Display.Immersive
@@ -118,10 +104,6 @@ export const Format = (format: Format, title: string) => () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{ ...format, theme: Pillar.Opinion }}
-							palette={decidePalette({
-								...format,
-								theme: Pillar.Opinion,
-							})}
 							headlineText="Opinion"
 							standfirst={
 								format.display === Display.Immersive
@@ -146,10 +128,6 @@ export const Format = (format: Format, title: string) => () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{ ...format, theme: Pillar.Lifestyle }}
-							palette={decidePalette({
-								...format,
-								theme: Pillar.Lifestyle,
-							})}
 							headlineText="Lifestyle"
 							standfirst={
 								format.display === Display.Immersive
@@ -177,10 +155,6 @@ export const Format = (format: Format, title: string) => () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{ ...format, theme: Special.Labs }}
-							palette={decidePalette({
-								...format,
-								theme: Special.Labs,
-							})}
 							headlineText="Labs"
 							standfirst={
 								format.display === Display.Immersive
@@ -208,10 +182,6 @@ export const Format = (format: Format, title: string) => () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{ ...format, theme: Special.SpecialReport }}
-							palette={decidePalette({
-								...format,
-								theme: Special.SpecialReport,
-							})}
 							headlineText="SpecialReport"
 							standfirst={
 								format.display === Display.Immersive

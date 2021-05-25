@@ -1,12 +1,11 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
+import { timeAgo } from '@guardian/libs';
 
-import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
+import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { makeRelativeDate } from '@root/src/web/lib/dateTime';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
@@ -20,7 +19,6 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	abTests: CAPIType['config']['abTests'];
 	adTargeting: AdTargeting;
 	host?: string;
 };
@@ -37,7 +35,7 @@ const Container = ({
 	return (
 		<div
 			id={`block-${id}`}
-			className={css`
+			css={css`
 				padding-top: ${space[2]}px;
 				padding-bottom: ${space[3]}px;
 				margin-bottom: ${space[3]}px;
@@ -53,7 +51,7 @@ const Container = ({
 const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<header
-			className={css`
+			css={css`
 				padding-right: ${GUTTER}px;
 				display: flex;
 				flex-direction: column;
@@ -70,7 +68,7 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 const Footer = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<footer
-			className={css`
+			css={css`
 				margin-left: ${ASIDE_WIDTH}px;
 				padding-left: ${GUTTER}px;
 				padding-right: ${GUTTER}px;
@@ -86,7 +84,7 @@ const BlockMedia = ({ children }: { children: React.ReactNode }) => {
 		// Don't set side margins, causing content to flow to the edges (but
 		// we do set margins on any figcaption)
 		<div
-			className={css`
+			css={css`
 				& figcaption {
 					margin-left: ${ASIDE_WIDTH}px;
 					padding-left: ${GUTTER}px;
@@ -104,7 +102,7 @@ const BlockText = ({ children }: { children: React.ReactNode }) => {
 		// Set a left margin the same with as the left aside column plus
 		// padding gutters on both sides
 		<div
-			className={css`
+			css={css`
 				margin-left: ${ASIDE_WIDTH}px;
 				padding-left: ${GUTTER}px;
 				padding-right: ${GUTTER}px;
@@ -118,7 +116,7 @@ const BlockText = ({ children }: { children: React.ReactNode }) => {
 const BlockTitle = ({ title }: { title: string }) => {
 	return (
 		<h2
-			className={css`
+			css={css`
 				${headline.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[3]}px;
 			`}
@@ -137,10 +135,10 @@ const LastUpdated = ({
 }) => {
 	return (
 		<div
-			className={css`
+			css={css`
 				display: flex;
 				align-items: flex-end;
-				${textSans.xsmall()};
+				${textSans.xxsmall()};
 				color: ${neutral[46]};
 			`}
 		>
@@ -164,8 +162,8 @@ const FirstPublished = ({
 			href={blockLink}
 			data-ignore="global-link-styling"
 			// title={publishedDate.toLocaleString()}
-			className={css`
-				${textSans.xsmall({ fontWeight: 'bold' })}
+			css={css`
+				${textSans.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[1]}px;
 				padding-top: ${space[1]}px;
 				display: flex;
@@ -181,17 +179,15 @@ const FirstPublished = ({
 		>
 			<time
 				dateTime={publishedDate.toISOString()}
-				className={css`
+				css={css`
 					color: ${neutral[20]};
 				`}
 			>
-				{makeRelativeDate(firstPublished, {
-					format: 'med',
-				})}
+				{timeAgo(firstPublished)}
 			</time>
 			<span
-				className={css`
-					${textSans.xsmall()};
+				css={css`
+					${textSans.xxsmall()};
 					color: ${neutral[46]};
 				`}
 			>
@@ -221,7 +217,6 @@ export const LiveBlock = ({
 	block,
 	pageId,
 	webTitle,
-	abTests,
 	adTargeting,
 	host,
 }: Props) => {
@@ -253,7 +248,7 @@ export const LiveBlock = ({
 		<Container id={block.id} palette={palette}>
 			<Header>
 				<aside
-					className={css`
+					css={css`
 						${from.phablet} {
 							/* Yes, we do need both */
 							min-width: ${ASIDE_WIDTH + GUTTER}px;
@@ -273,19 +268,16 @@ export const LiveBlock = ({
 				</aside>
 				<span>
 					{block.title && <BlockTitle title={block.title} />}
-					{headerElement && (
-						<ElementRenderer
-							isMainMedia={false}
-							isLiveBlog={true}
-							adTargeting={adTargeting}
-							index={0}
-							element={headerElement}
-							format={format}
-							palette={palette}
-							abTests={abTests}
-							host={host}
-						/>
-					)}
+					{headerElement &&
+						renderArticleElement({
+							format,
+							palette,
+							element: headerElement,
+							isMainMedia: false,
+							host,
+							adTargeting,
+							index: 0,
+						})}
 				</span>
 			</Header>
 			<main>
@@ -294,32 +286,28 @@ export const LiveBlock = ({
 					if (typesWeStretch.includes(element._type)) {
 						return (
 							<BlockMedia key={`${element._type}-${index}`}>
-								<ElementRenderer
-									isMainMedia={false}
-									isLiveBlog={true}
-									adTargeting={adTargeting}
-									index={index}
-									element={element}
-									format={format}
-									palette={palette}
-									abTests={abTests}
-									host={host}
-								/>
+								{renderArticleElement({
+									format,
+									palette,
+									element,
+									adTargeting,
+									host,
+									index,
+									isMainMedia: false,
+								})}
 							</BlockMedia>
 						);
 					}
 
 					return (
 						<BlockText key={`${element._type}-${index}`}>
-							<ElementRenderer
-								isMainMedia={false}
-								isLiveBlog={true}
-								index={index}
-								element={element}
-								format={format}
-								palette={palette}
-								abTests={abTests}
-							/>
+							{renderArticleElement({
+								format,
+								palette,
+								element,
+								isMainMedia: false,
+								index,
+							})}
 						</BlockText>
 					);
 				})}
@@ -327,7 +315,7 @@ export const LiveBlock = ({
 			<Footer>
 				<Hide when="below" breakpoint="phablet">
 					<div
-						className={css`
+						css={css`
 							display: flex;
 							justify-content: space-between;
 						`}

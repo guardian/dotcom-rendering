@@ -28,14 +28,15 @@ module.exports = {
         ["prismjs", {
             // This list should match those defined in typescript type Language
             "languages": ["typescript", "javascript", "css", "markup", "scala", "elm"]
-        }]
+		}],
+		'@emotion/babel-plugin'
     ],
 
     env: {
         production: {
             plugins: [
                 [
-                    'emotion',
+                    '@emotion',
                     {
                         sourceMap: false,
                     },
@@ -45,10 +46,10 @@ module.exports = {
         development: {
             plugins: [
                 [
-                    'emotion',
+                    '@emotion',
                     {
                         sourceMap: true,
-                        autoLabel: true,
+                        autoLabel: 'dev-only',
                     },
                 ],
             ],

@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
@@ -15,7 +14,7 @@ type Props = {
 const containerStyles = (palette: Palette) => css`
 	display: flex;
 	flex-direction: row;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	padding-left: 5px;
 	padding-right: 5px;
 	color: ${palette.text.cardFooter};
@@ -49,17 +48,14 @@ const shortStyles = css`
 
 export const CardCommentCount = ({ palette, short, long }: Props) => {
 	return (
-		<div
-			className={containerStyles(palette)}
-			aria-label={`${short} Comments`}
-		>
-			<div className={svgStyles(palette)}>
+		<div css={containerStyles(palette)} aria-label={`${short} Comments`}>
+			<div css={svgStyles(palette)}>
 				<CommentIcon />
 			</div>
-			<div className={longStyles} aria-hidden="true">
+			<div css={longStyles} aria-hidden="true">
 				{long}
 			</div>
-			<div className={shortStyles} aria-hidden="true">
+			<div css={shortStyles} aria-hidden="true">
 				{short}
 			</div>
 		</div>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { Hide } from '@frontend/web/components/Hide';
@@ -7,6 +5,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { useComments } from '@root/src/web/lib/useComments';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 
+import { Display } from '@guardian/types';
 import { ContainerTitle } from '../ContainerTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';
@@ -35,9 +34,40 @@ const decideLayout = (trails: TrailType[]) => {
 export const OnwardsLayout: React.FC<OnwardsType> = (data: OnwardsType) => {
 	const sections = useComments([data]);
 
+	/**
+	 * Why are we overriding display like this?
+	 *
+	 * Good question. Basically, we had a production issue and this was the easiest and
+	 * quickest way to fix it rather than fixing Card's properly 😱
+	 *
+	 * Carousels use display.Immersive to change some Card styles and this was bleeding
+	 * into normal onwards cards that linked through to Immersive articles.
+	 *
+	 * Once:
+	 * 1. Cards have been refactored to remove `isFullSizeImage`
+	 * 2. We support the concept of a container type and
+	 * 3. We  and are able to handle Carousels natively - in
+	 *    the model
+	 * Then this should be removed.
+	 */
+	const sectionsForcedToStandard = sections.map((section) => {
+		return {
+			...section,
+			trails: section.trails.map((trail) => {
+				return {
+					...trail,
+					format: {
+						...trail.format,
+						display: Display.Standard,
+					},
+				};
+			}),
+		};
+	});
+
 	return (
 		<>
-			{sections.map((section, index) => (
+			{sectionsForcedToStandard.map((section, index) => (
 				<Flex key={`${section.heading}-${index}`}>
 					<LeftColumn
 						showRightBorder={false}

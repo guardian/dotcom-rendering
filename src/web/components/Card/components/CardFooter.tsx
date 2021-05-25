@@ -1,7 +1,6 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
 import { from } from '@guardian/src-foundations/mq';
 
@@ -11,6 +10,7 @@ type Props = {
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
 	isFullCardImage?: boolean;
+	labBadge?: JSX.Element;
 };
 
 const spaceBetween = css`
@@ -47,15 +47,22 @@ export const CardFooter = ({
 	mediaMeta,
 	commentCount,
 	isFullCardImage,
+	labBadge,
 }: Props) => {
+	if (format.theme === Special.Labs && labBadge) {
+		return <footer>{labBadge}</footer>;
+	}
+
 	if (
 		!isFullCardImage &&
-		(format.design === Design.Comment || format.design === Design.Editorial)
+		(format.design === Design.Comment ||
+			format.design === Design.Editorial ||
+			format.design === Design.Letter)
 	) {
 		return (
-			<footer className={spaceBetween}>
+			<footer css={spaceBetween}>
 				{age}
-				<div className={linesWrapperStyles}>
+				<div css={linesWrapperStyles}>
 					<Lines count={4} />
 				</div>
 				{commentCount}
@@ -65,7 +72,7 @@ export const CardFooter = ({
 
 	if (format.design === Design.Media) {
 		return (
-			<footer className={spaceBetween}>
+			<footer css={spaceBetween}>
 				{mediaMeta}
 				{/* Show age if we have it otherwise try for commentCount */}
 				{age || commentCount}
@@ -75,9 +82,7 @@ export const CardFooter = ({
 
 	if (age) {
 		return (
-			<footer
-				className={isFullCardImage ? fullCardImageLayout : spaceBetween}
-			>
+			<footer css={isFullCardImage ? fullCardImageLayout : spaceBetween}>
 				{age}
 				{commentCount}
 			</footer>
@@ -85,7 +90,7 @@ export const CardFooter = ({
 	}
 
 	return (
-		<footer className={flexEnd}>
+		<footer css={flexEnd}>
 			<>{commentCount}</>
 		</footer>
 	);

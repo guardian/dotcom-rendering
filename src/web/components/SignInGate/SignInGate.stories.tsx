@@ -1,8 +1,7 @@
-import React from 'react';
 import { Section } from '@frontend/web/components/Section';
-import { SignInGateMandatory } from '@root/src/web/components/SignInGate/gateDesigns/SignInGateMandatory';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
+import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 
 export default {
 	component: SignInGateSelector,
@@ -26,10 +25,10 @@ export const mainStandalone = () => {
 };
 mainStandalone.story = { name: 'main_standalone' };
 
-export const mandatoryGateStandalone = () => {
+export const fakeSocialStandalone = () => {
 	return (
 		<Section>
-			<SignInGateMandatory
+			<SignInGateFakeSocial
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
@@ -38,4 +37,25 @@ export const mandatoryGateStandalone = () => {
 		</Section>
 	);
 };
-mandatoryGateStandalone.story = { name: 'mandatory_gate_standalone' };
+fakeSocialStandalone.story = { name: 'fake_social_standalone' };
+
+export const fakeSocialStandaloneVertical = () => {
+	return (
+		<Section>
+			<SignInGateFakeSocial
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				abTest={{
+					id: 'fake-social-test',
+					name: 'fake-social-test',
+					variant: 'fake-social-variant-vertical',
+				}}
+			/>
+		</Section>
+	);
+};
+fakeSocialStandaloneVertical.story = {
+	name: 'fake_social_standalone_vertical',
+};

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React from 'react';
-import { css } from 'emotion';
+
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
@@ -29,7 +29,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</LeftColumn>
 			<div
-				className={css`
+				css={css`
 					max-width: 620px;
 					padding: 20px;
 					flex-grow: 1;
@@ -57,7 +57,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const StandardArticle = () => {
 	return (
 		<Container>
-			<Figure role="inline">
+			<Figure isMainMedia={false} role="inline">
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -82,7 +82,7 @@ StandardArticle.story = {
 export const Immersive = () => {
 	return (
 		<Container>
-			<Figure role="immersive">
+			<Figure isMainMedia={false} role="immersive">
 				<ImageBlockComponent
 					element={{ ...image, role: 'immersive' }}
 					format={{
@@ -107,7 +107,7 @@ Immersive.story = {
 export const Showcase = () => {
 	return (
 		<Container>
-			<Figure role="showcase">
+			<Figure isMainMedia={false} role="showcase">
 				<ImageBlockComponent
 					element={{ ...image, role: 'showcase' }}
 					format={{
@@ -132,7 +132,7 @@ Showcase.story = {
 export const Thumbnail = () => {
 	return (
 		<Container>
-			<Figure role="thumbnail">
+			<Figure isMainMedia={false} role="thumbnail">
 				<ImageBlockComponent
 					element={{ ...image, role: 'thumbnail' }}
 					format={{
@@ -157,7 +157,7 @@ Thumbnail.story = {
 export const Supporting = () => {
 	return (
 		<Container>
-			<Figure role="supporting">
+			<Figure isMainMedia={false} role="supporting">
 				<ImageBlockComponent
 					element={{ ...image, role: 'supporting' }}
 					format={{
@@ -182,7 +182,7 @@ Supporting.story = {
 export const HideCaption = () => {
 	return (
 		<Container>
-			<Figure role="inline">
+			<Figure isMainMedia={false} role="inline">
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -208,7 +208,7 @@ HideCaption.story = {
 export const InlineTitle = () => {
 	return (
 		<Container>
-			<Figure role="inline">
+			<Figure isMainMedia={false} role="inline">
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -239,7 +239,7 @@ InlineTitle.story = {
 export const InlineTitleMobile = () => {
 	return (
 		<Container>
-			<Figure role="inline">
+			<Figure isMainMedia={false} role="inline">
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -270,7 +270,7 @@ InlineTitleMobile.story = {
 export const ImmersiveTitle = () => {
 	return (
 		<Container>
-			<Figure role="immersive">
+			<Figure isMainMedia={false} role="immersive">
 				<ImageBlockComponent
 					element={{ ...image, role: 'immersive' }}
 					format={{
@@ -297,7 +297,7 @@ ImmersiveTitle.story = {
 export const ShowcaseTitle = () => {
 	return (
 		<Container>
-			<Figure role="showcase">
+			<Figure isMainMedia={false} role="showcase">
 				<ImageBlockComponent
 					element={{ ...image, role: 'showcase' }}
 					format={{
@@ -348,7 +348,7 @@ export const HalfWidth = () => {
 				cupidatat non proident, sunt in culpa qui officia deserunt
 				mollit anim id est laborum.
 			</p>
-			<Figure role="halfWidth">
+			<Figure isMainMedia={false} role="halfWidth">
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
@@ -413,7 +413,7 @@ export const HalfWidthMobile = () => {
 				cupidatat non proident, sunt in culpa qui officia deserunt
 				mollit anim id est laborum.
 			</p>
-			<Figure role="halfWidth">
+			<Figure isMainMedia={false} role="halfWidth">
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
@@ -478,7 +478,7 @@ export const HalfWidthWide = () => {
 				sint occaecat cupidatat non proident, sunt in culpa qui officia
 				deserunt mollit anim id est laborum.
 			</p>
-			<Figure role="halfWidth">
+			<Figure isMainMedia={false} role="halfWidth">
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{

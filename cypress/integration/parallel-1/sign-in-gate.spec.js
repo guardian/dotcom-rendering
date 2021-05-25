@@ -1,7 +1,5 @@
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { skipOn } from '@cypress/skip-test';
-import { isRunningInCI } from '../../lib/isRunningInCi';
 
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
@@ -11,16 +9,9 @@ describe('Sign In Gate Tests', function () {
 		setLocalBaseUrl();
 	});
 
-	const findCmpIframe = () => {
-		return cy
-			.get('iframe[id^="sp_message_iframe"]')
-			.its('0.contentDocument.body')
-			.should('not.be.empty')
-			.then(cy.wrap);
-	};
-
 	const setArticleCount = (n) => {
-		cy.setLocalStorage(
+		// set article count for today to be n
+		localStorage.setItem(
 			'gu.history.dailyArticleCount',
 			JSON.stringify({
 				value: [
@@ -114,8 +105,8 @@ describe('Sign In Gate Tests', function () {
 				'gu.prefs.sign-in-gate',
 				`{
                     "value": {
-                        "SignInGateMain-main-variant-3": "2020-07-22T08:25:05.567Z",
-                        "gate-dismissed-count-SignInGateMain-main-variant-3": 6
+                        "SignInGateMain-main-variant-4": "2020-07-22T08:25:05.567Z",
+                        "gate-dismissed-count-SignInGateMain-main-variant-4": 6
                     }
                 }`,
 			);
@@ -129,6 +120,15 @@ describe('Sign In Gate Tests', function () {
 			visitArticleAndScrollToGateForLazyLoad({
 				url:
 					'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
+			});
+
+			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
+		});
+
+		it('should not load the sign in gate if the article is a paid article', function () {
+			visitArticleAndScrollToGateForLazyLoad({
+				url:
+					'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/kettlebells-companionship-and-bedroom-parkour-nine-tips-for-keeping-fit-in-lockdown-or-long-haul',
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
@@ -193,43 +193,23 @@ describe('Sign In Gate Tests', function () {
 		});
 	});
 
-	/* eslint-disable mocha/no-setup-in-describe */
-	// Tests fail when running on US servers due to CMP banner
-	skipOn(isRunningInCI(), () => {
-		describe('Sign In Gate Mandatory', function () {
-			it('not render the gate unless the user has consented to CMP banner for variant', function () {
-				setMvtCookie('890001');
-				visitArticleAndScrollToGateForLazyLoad();
-				cy.get('[data-cy=sign-in-gate-mandatory]').should('not.exist');
-			});
+	describe('SignInGateFakeSocial', function () {
+		describe('fake-social-variant-horizontal', function () {
+			beforeEach(function () {
+				disableCMP();
+				// sign in gate fake social runs from 700000-900000 MVT IDs, so 700001 forces user into test variant
+				setMvtCookie('700001');
 
-			it('not render the gate unless the user has consented to CMP banner for control', function () {
-				setMvtCookie('890002');
-				visitArticleAndScrollToGateForLazyLoad();
-				cy.get('[data-cy=sign-in-gate-mandatory]').should('not.exist');
-			});
-
-			it('should render a gate without a dismiss button', function () {
-				setMvtCookie('890001');
-				visitArticleAndScrollToGateForLazyLoad();
-				findCmpIframe().contains('Yes, I’m happy').click();
+				// set article count to be min number to view gate
 				setArticleCount(3);
-				visitArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-mandatory]').should('be.visible');
-				cy.contains('I’ll do it later').should('not.exist');
 			});
 
-			it('should render a gate with a dismiss button for the control', function () {
-				setMvtCookie('890002');
-				visitArticleAndScrollToGateForLazyLoad();
-				findCmpIframe().contains('Yes, I’m happy').click();
-				setArticleCount(3);
-
+			it('should load the sign in gate', function () {
 				visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.contains('I’ll do it later').should('be.visible');
+				cy.get('[data-cy=sign-in-gate-fake-social]').should(
+					'be.visible',
+				);
 			});
 		});
 	});

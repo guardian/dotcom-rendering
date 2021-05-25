@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { from } from '@guardian/src-foundations/mq';
@@ -13,62 +12,60 @@ const screenReadable = css`
 	${visuallyHidden};
 `;
 
-const veggieBurgerIconStyles = () => {
-	const beforeAfterStyles = css`
-		content: '';
-		background-color: currentColor;
-	`;
-	const lineStyles = css`
-		height: 2px;
-		left: 0;
-		position: absolute;
-		width: 20px;
-	`;
+const beforeAfterStyles = css`
+	content: '';
+	background-color: currentColor;
+`;
 
-	return css`
-		background-color: currentColor;
-		/*
+const lineStyles = css`
+	height: 2px;
+	left: 0;
+	position: absolute;
+	width: 20px;
+`;
+const veggieBurgerIconStyles = css`
+	background-color: currentColor;
+	/*
             IMPORTANT NOTE:
             we need to specify the adjacent path to the a (current) tag
             to apply styles to the nested tabs due to the fact we use ~
             to support NoJS
         */
+	/* stylelint-disable-next-line selector-type-no-unknown */
+	${`#${navInputCheckboxId}`}:checked ~ div & {
+		background-color: transparent;
+	}
+
+	top: 50%;
+	right: 0;
+	margin-top: -1px;
+	margin-left: auto;
+	margin-right: auto;
+	${lineStyles};
+
+	:before {
+		${lineStyles};
+		${beforeAfterStyles};
+		top: -6px;
+		/* refer to comment above */
 		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${navInputCheckboxId}`}:checked ~ div & {
-			background-color: transparent;
+			top: 0;
+			transform: rotate(-45deg);
 		}
-
-		top: 50%;
-		right: 0;
-		margin-top: -1px;
-		margin-left: auto;
-		margin-right: auto;
+	}
+	:after {
 		${lineStyles};
-
-		:before {
-			${lineStyles};
-			${beforeAfterStyles};
-			top: -6px;
-			/* refer to comment above */
-			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${navInputCheckboxId}`}:checked ~ div & {
-				top: 0;
-				transform: rotate(-45deg);
-			}
+		${beforeAfterStyles};
+		bottom: -6px;
+		/* refer to comment above */
+		/* stylelint-disable-next-line selector-type-no-unknown */
+		${`#${navInputCheckboxId}`}:checked ~ div & {
+			bottom: 0;
+			transform: rotate(45deg);
 		}
-		:after {
-			${lineStyles};
-			${beforeAfterStyles};
-			bottom: -6px;
-			/* refer to comment above */
-			/* stylelint-disable-next-line selector-type-no-unknown */
-			${`#${navInputCheckboxId}`}:checked ~ div & {
-				bottom: 0;
-				transform: rotate(45deg);
-			}
-		}
-	`;
-};
+	}
+`;
 
 const veggieBurgerStyles = (display: Display) => css`
 	background-color: ${brandAlt[400]};
@@ -79,7 +76,6 @@ const veggieBurgerStyles = (display: Display) => css`
 	position: absolute;
 	border: 0;
 	border-radius: 50%;
-	outline: none;
 
 	${getZIndex('burger')}
 
@@ -100,7 +96,7 @@ const veggieBurgerStyles = (display: Display) => css`
 	}
 
 	:focus {
-		outline: 5px auto -webkit-focus-ring-color;
+		outline: none;
 	}
 `;
 
@@ -112,7 +108,7 @@ export const VeggieBurgerMenu: React.FC<{
 		// @ts-ignore
 		<label
 			id={veggieBurgerId}
-			className={veggieBurgerStyles(display)}
+			css={veggieBurgerStyles(display)}
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
@@ -122,8 +118,8 @@ export const VeggieBurgerMenu: React.FC<{
 			role="button"
 			data-cy="veggie-burger"
 		>
-			<span className={screenReadable}>Show More</span>
-			<span className={veggieBurgerIconStyles()} />
+			<span css={screenReadable}>Show More</span>
+			<span css={veggieBurgerIconStyles} />
 		</label>
 		/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
 	);

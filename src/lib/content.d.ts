@@ -6,16 +6,6 @@ interface ThirdPartyEmbeddedContent {
 	source?: string;
 	sourceDomain?: string;
 }
-
-interface InteractiveAtomBlockElementBase {
-	url: string;
-	placeholderUrl?: string;
-	id?: string;
-	html?: string;
-	css?: string;
-	js?: string;
-}
-
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
@@ -66,12 +56,16 @@ interface CalloutBlockElement {
 	role?: RoleType;
 }
 
-interface ChartAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface ChartAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 	elementId: string;
 	id: string;
+	url: string;
 	html: string;
+	css?: string;
+	js?: string;
 	role?: RoleType;
+	placeholderUrl?: string;
 }
 
 interface QuizAtomBlockElement {
@@ -92,9 +86,9 @@ interface QuizAtomBlockElement {
 interface CodeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CodeBlockElement';
 	elementId: string;
-	code: string;
+	html: string;
 	isMandatory: boolean;
-	language?: Language;
+	language?: string;
 }
 
 interface CommentBlockElement {
@@ -124,6 +118,8 @@ interface DisclaimerBlockElement {
 
 interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
+	size?: 'full' | 'partial';
+	spaceAbove?: 'tight' | 'loose';
 }
 
 interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
@@ -157,8 +153,14 @@ interface ExplainerAtomBlockElement {
 	role?: RoleType;
 }
 
-interface GenericAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface GenericAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
+	url: string;
+	placeholderUrl?: string;
+	id?: string;
+	html?: string;
+	css?: string;
+	js?: string;
 	elementId: string;
 }
 
@@ -207,6 +209,8 @@ interface ImageBlockElement {
 	displayCredit?: boolean;
 	role: RoleType;
 	title?: string;
+	starRating?: number;
+	isAvatar?: boolean;
 }
 
 interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
@@ -218,13 +222,15 @@ interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface InteractiveAtomBlockElement extends InteractiveAtomBlockElementBase {
+interface InteractiveAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 	elementId: string;
+	url: string;
 	id: string;
 	js: string;
 	html?: string;
 	css?: string;
+	placeholderUrl?: string;
 	role?: RoleType;
 }
 
@@ -237,6 +243,13 @@ interface InteractiveBlockElement {
 	scriptUrl?: string;
 	alt?: string;
 	role?: RoleType;
+	caption?: string;
+}
+
+interface ItemLinkBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement';
+	elementId: string;
+	html: string;
 }
 
 interface MapBlockElement extends ThirdPartyEmbeddedContent {
@@ -270,6 +283,14 @@ interface MultiImageBlockElement {
 	images: ImageBlockElement[];
 	caption?: string;
 	role?: RoleType;
+}
+
+interface NumberedTitleBlockElement {
+	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
+	elementId: string;
+	position: number;
+	html: string;
+	format: CAPIFormat;
 }
 
 interface ProfileAtomBlockElement {
@@ -332,6 +353,13 @@ interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 	width?: number;
 	caption?: string;
 	role?: RoleType;
+}
+
+interface StarRatingBlockElement {
+	_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement';
+	elementId: string;
+	rating: number;
+	size: RatingSizeType;
 }
 
 interface SubheadingBlockElement {
@@ -544,9 +572,11 @@ type CAPIElement =
 	| InstagramBlockElement
 	| InteractiveAtomBlockElement
 	| InteractiveBlockElement
+	| ItemLinkBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
+	| NumberedTitleBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement
@@ -554,6 +584,7 @@ type CAPIElement =
 	| RichLinkBlockElement
 	| SoundcloudBlockElement
 	| SpotifyBlockElement
+	| StarRatingBlockElement
 	| SubheadingBlockElement
 	| TableBlockElement
 	| TextBlockElement
@@ -577,7 +608,8 @@ type Weighting =
 	| 'supporting'
 	| 'showcase'
 	| 'halfwidth'
-	| 'immersive';
+	| 'immersive'
+	| 'richLink'; // Note, 'richLink' is used internally but does not exist upstream.
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
 // in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
@@ -629,22 +661,17 @@ interface VideoAssets {
 interface TimelineEvent {
 	title: string;
 	date: string;
+	unixDate: number;
 	body?: string;
 	toDate?: string;
+	toUnixDate?: number;
 }
 
 interface Switches {
 	[key: string]: boolean;
 }
 
-// Used for CodeBlockElement
-type Language =
-	| 'typescript'
-	| 'javascript'
-	| 'css'
-	| 'markup'
-	| 'scala'
-	| 'elm';
+type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------
 // Callout Campaign

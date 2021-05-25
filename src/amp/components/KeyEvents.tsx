@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -63,7 +63,7 @@ const listStyle = css`
 	padding: 0.375rem 0.625rem;
 `;
 
-export const KeyEvents: React.SFC<{
+export const KeyEvents: React.FunctionComponent<{
 	events: Block[];
 	url: string;
 }> = ({ events, url }) => {
@@ -72,10 +72,10 @@ export const KeyEvents: React.SFC<{
 	}
 
 	const lis = events.map((event) => (
-		<li className={listItemStyle} key={event.id}>
-			<a className={eventLinkStyle} href={blockLink(url, event.id)}>
-				<span className={timeStyle}>{event.blockCreatedOnDisplay}</span>
-				<span className={listTitleStyle}>{event.title || ''}</span>
+		<li css={listItemStyle} key={event.id}>
+			<a css={eventLinkStyle} href={blockLink(url, event.id)}>
+				<span css={timeStyle}>{event.blockCreatedOnDisplay}</span>
+				<span css={listTitleStyle}>{event.title || ''}</span>
 			</a>
 		</li>
 	));
@@ -83,13 +83,13 @@ export const KeyEvents: React.SFC<{
 	return (
 		<amp-accordion class={wrapper}>
 			<section>
-				<h2 className={headingStyle}>
+				<h2 css={headingStyle}>
 					Key events{' '}
 					<span>
 						<DownArrow />
 					</span>
 				</h2>
-				<ul className={listStyle}>{lis}</ul>
+				<ul css={listStyle}>{lis}</ul>
 			</section>
 		</amp-accordion>
 	);

@@ -1,5 +1,4 @@
-import { useApi } from '@root/src/web/lib/api';
-import React from 'react';
+import { useApi } from '@root/src/web/lib/useApi';
 
 import { decideTrail } from '@root/src/web/lib/decideTrail';
 

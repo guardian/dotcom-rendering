@@ -1,14 +1,15 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
 	brandBackground,
 	brandBorder,
+	labs,
+	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Design } from '@guardian/types';
+import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -33,21 +34,22 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
+import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { parse } from '@frontend/lib/slot-machine-flags';
 
+import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import {
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -66,13 +68,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 					grid-template-areas:
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
@@ -85,13 +91,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns:
-						140px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
@@ -104,11 +114,15 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content 
+					Right Column
+				*/
 				${until.leftCol} {
+					grid-template-columns: 1fr 300px;
 					grid-column-gap: 20px;
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
 					grid-template-areas:
 						'title       right-column'
 						'headline    right-column'
@@ -201,15 +215,15 @@ const Box = ({
 	children: React.ReactNode;
 }) => (
 	<div
-		className={css`
+		css={css`
 			/*
-									This pseudo css shows a black box to the right of the headline
-									so that the black background of the inverted text stretches
-									all the way right. But only from mobileLandscape because below
-									that we want to show a gap. To work properly it needs to wrap
-									the healine so it inherits the correct height based on the length
-									of the headline text
-							*/
+				This pseudo css shows a black box to the right of the headline
+				so that the black background of the inverted text stretches
+				all the way right. But only from mobileLandscape because below
+				that we want to show a gap. To work properly it needs to wrap
+				the healine so it inherits the correct height based on the length
+				of the headline text
+			*/
 			${from.mobileLandscape} {
 				position: relative;
 				:after {
@@ -265,7 +279,7 @@ export const ImmersiveLayout = ({
 
 	const LeftColCaption = () => (
 		<div
-			className={css`
+			css={css`
 				margin-top: ${HEADLINE_OFFSET}px;
 				position: absolute;
 				margin-left: 20px;
@@ -276,6 +290,7 @@ export const ImmersiveLayout = ({
 				captionText={captionText}
 				format={format}
 				shouldLimitWidth={true}
+				isLeftCol={true}
 			/>
 		</div>
 	);
@@ -283,21 +298,21 @@ export const ImmersiveLayout = ({
 	return (
 		<>
 			<div
-				className={css`
+				css={css`
 					background-color: ${palette.background.article};
 				`}
 			>
 				<div
-					className={cx(
+					css={[
 						mainMedia && hasMainMediaStyles,
 						css`
 							display: flex;
 							flex-direction: column;
 						`,
-					)}
+					]}
 				>
 					<header
-						className={css`
+						css={css`
 							${getZIndex('headerWrapper')}
 							order: 0;
 						`}
@@ -322,6 +337,20 @@ export const ImmersiveLayout = ({
 						</Section>
 					</header>
 
+					{format.theme === Special.Labs && (
+						<Stuck>
+							<Section
+								showSideBorders={true}
+								showTopBorder={false}
+								backgroundColour={labs[400]}
+								borderColour={border.primary}
+								sectionId="labs-header"
+							>
+								<LabsHeader />
+							</Section>
+						</Stuck>
+					)}
+
 					<MainMedia
 						format={format}
 						palette={palette}
@@ -334,13 +363,12 @@ export const ImmersiveLayout = ({
 						}
 						host={host}
 						hideCaption={true}
-						abTests={CAPI.config.abTests}
 					/>
 				</div>
 				{mainMedia && (
 					<>
 						<div
-							className={css`
+							css={css`
 								margin-top: -${HEADLINE_OFFSET}px;
 								/*
                         This z-index is what ensures the headline title text shows above main media. For
@@ -414,7 +442,7 @@ export const ImmersiveLayout = ({
 						<>
 							{!mainMedia && (
 								<div
-									className={css`
+									css={css`
 										margin-top: -8px;
 										margin-left: -4px;
 										margin-bottom: 12px;
@@ -440,7 +468,7 @@ export const ImmersiveLayout = ({
 					<GridItem area="headline">
 						<>
 							{!mainMedia && (
-								<div className={maxWidth}>
+								<div css={maxWidth}>
 									<ArticleHeadline
 										format={format}
 										headlineString={CAPI.headline}
@@ -471,10 +499,10 @@ export const ImmersiveLayout = ({
 						{format.design === Design.PhotoEssay ? (
 							<></>
 						) : (
-							<div className={maxWidth}>
-								<div className={stretchLines}>
+							<div css={maxWidth}>
+								<div css={stretchLines}>
 									<GuardianLines
-										pillar={format.theme}
+										palette={palette}
 										effect={decideLineEffect(
 											Design.Article,
 											format.theme,
@@ -486,7 +514,7 @@ export const ImmersiveLayout = ({
 						)}
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -504,22 +532,18 @@ export const ImmersiveLayout = ({
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={maxWidth}>
+							<main css={maxWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									abTests={CAPI.config.abTests}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -542,7 +566,7 @@ export const ImmersiveLayout = ({
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {
@@ -561,7 +585,7 @@ export const ImmersiveLayout = ({
 								<>
 									{mainMedia && (
 										<div
-											className={css`
+											css={css`
 												margin-top: ${space[4]}px;
 											`}
 										>
@@ -590,44 +614,40 @@ export const ImmersiveLayout = ({
 				/>
 			</Section>
 
-			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div id="onwards-upper-whensignedout" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedout" />
-					)}
-
-					{showComments && (
-						<Section sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div id="onwards-upper-whensignedin" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedin" />
-					)}
-
-					<Section sectionId="most-viewed-footer" />
-				</>
+			{/* Onwards (when signed OUT) */}
+			<div id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedout" />
 			)}
+
+			{!isPaidContent && showComments && (
+				<Section sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedin" />
+			)}
+
+			{!isPaidContent && <Section sectionId="most-viewed-footer" />}
 
 			<Section
 				padded={false}
@@ -645,7 +665,7 @@ export const ImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

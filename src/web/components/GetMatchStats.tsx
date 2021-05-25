@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { useApi } from '@root/src/web/lib/api';
+import { useApi } from '@root/src/web/lib/useApi';
 
 import { Placeholder } from '@root/src/web/components/Placeholder';
 

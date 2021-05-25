@@ -1,10 +1,10 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
 	brandBorder,
 	brandBackground,
+	brandAltBackground,
 	brandLine,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -35,6 +35,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
+import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -54,7 +55,7 @@ const StandardGrid = ({
 	display: Display;
 }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -75,12 +76,16 @@ const StandardGrid = ({
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 
 					${display === Display.Showcase
 						? css`
@@ -103,12 +108,16 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 
 					${display === Display.Showcase
 						? css`
@@ -131,10 +140,14 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content 
+					Right Column
+				*/
 				${until.leftCol} {
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 1fr 300px;
 					grid-template-areas:
 						'title      right-column'
 						'headline   right-column'
@@ -331,6 +344,9 @@ export const CommentLayout = ({
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								isAnniversary={
+									CAPI.config.switches.anniversaryHeaderSvg
+								}
 							/>
 						</Section>
 					)}
@@ -374,7 +390,19 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} pillar={format.theme} />
+						<GuardianLines count={4} palette={palette} />
+					</Section>
+					<Section
+						backgroundColour={brandAltBackground.primary}
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+					>
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
 					</Section>
 				</SendToBack>
 			</div>
@@ -399,21 +427,17 @@ export const CommentLayout = ({
 						<Border palette={palette} />
 					</GridItem>
 					<GridItem area="headline">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<div
-								className={cx(
+								css={[
 									avatarHeadlineWrapper,
 									showAvatar && minHeightWithAvatar,
-								)}
+								]}
 							>
 								{/* TOP - we use divs here to position content in groups using flex */}
-								<div
-									className={cx(
-										!showAvatar && headlinePadding,
-									)}
-								>
+								<div css={!showAvatar && headlinePadding}>
 									{age && (
-										<div className={ageWarningMargins}>
+										<div css={ageWarningMargins}>
 											<AgeWarning age={age} />
 										</div>
 									)}
@@ -434,7 +458,7 @@ export const CommentLayout = ({
 								{/* BOTTOM */}
 								<div>
 									{showAvatar && avatarUrl && (
-										<div className={avatarPositionStyles}>
+										<div css={avatarPositionStyles}>
 											<ContributorAvatar
 												imageSrc={avatarUrl}
 												imageAlt={
@@ -445,15 +469,15 @@ export const CommentLayout = ({
 									)}
 									<GuardianLines
 										count={8}
-										pillar={format.theme}
+										palette={palette}
 									/>
 								</div>
 							</div>
 						</div>
 					</GridItem>
 					<GridItem area="lines">
-						<div className={pushToBottom}>
-							<GuardianLines count={8} pillar={format.theme} />
+						<div css={pushToBottom}>
+							<GuardianLines count={8} palette={palette} />
 						</div>
 					</GridItem>
 					<GridItem area="standfirst">
@@ -464,9 +488,8 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="media">
 						<div
-							className={
-								format.display === Display.Showcase &&
-								CAPI.pageType.hasShowcaseMainElement
+							css={
+								format.display === Display.Showcase
 									? mainMediaWrapper
 									: maxWidth
 							}
@@ -483,12 +506,11 @@ export const CommentLayout = ({
 										: undefined
 								}
 								host={host}
-								abTests={CAPI.config.abTests}
 							/>
 						</div>
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -506,22 +528,18 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={maxWidth}>
+							<main css={maxWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									abTests={CAPI.config.abTests}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<GuardianLines count={4} palette={palette} />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -544,7 +562,7 @@ export const CommentLayout = ({
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {
@@ -587,44 +605,40 @@ export const CommentLayout = ({
 				/>
 			</Section>
 
-			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div id="onwards-upper-whensignedout" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedout" />
-					)}
-
-					{showComments && (
-						<Section sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div id="onwards-upper-whensignedin" />
-					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedin" />
-					)}
-
-					<Section sectionId="most-viewed-footer" />
-				</>
+			{/* Onwards (when signed OUT) */}
+			<div id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedout" />
 			)}
+
+			{!isPaidContent && showComments && (
+				<Section sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section sectionId="onwards-lower-whensignedin" />
+			)}
+
+			{!isPaidContent && <Section sectionId="most-viewed-footer" />}
 
 			<Section
 				padded={false}
@@ -642,7 +656,7 @@ export const CommentLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

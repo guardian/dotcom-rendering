@@ -1,12 +1,12 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Elements } from '@root/src/amp/components/Elements';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
 import { Ad } from '@root/src/amp/components/Ad';
@@ -23,7 +23,7 @@ const adStyle = css`
 	:before {
 		content: 'Advertisement';
 		display: block;
-		${textSans.xsmall()};
+		${textSans.xxsmall()};
 		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-blacklist */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
@@ -37,7 +37,7 @@ const adStyle = css`
 const blockStyle = (pillar: Theme) => css`
 	padding: 6px 10px 12px;
 	background-color: ${palette.neutral[100]};
-	border-top: 1px solid ${pillarPalette[pillar].dark};
+	border-top: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
 	border-bottom: 1px solid ${palette.neutral[93]};
 	margin-bottom: 12px;
 `;
@@ -47,11 +47,11 @@ const firstPublishedStyle = css`
 	margin-bottom: 10px;
 	text-decoration: none;
 	font-weight: bold;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 `;
 
 const lastUpdatedStyle = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	color: ${palette.neutral[60]};
 	text-align: right;
 	padding-right: 15px;
@@ -63,7 +63,7 @@ const clearBoth = css`
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
 // that out and have an Ad element type we match against
-export const Blocks: React.SFC<{
+export const Blocks: React.FunctionComponent<{
 	blocks: Block[];
 	pillar: Theme;
 	edition: Edition;
@@ -91,11 +91,11 @@ export const Blocks: React.SFC<{
 				id={block.id}
 				data-sort-time={block.blockFirstPublished}
 				key={block.id}
-				className={blockStyle(pillar)}
+				css={blockStyle(pillar)}
 			>
 				{block.blockFirstPublishedDisplay && (
 					<a
-						className={firstPublishedStyle}
+						css={firstPublishedStyle}
 						href={blockLink(url, block.id)}
 					>
 						{block.blockFirstPublishedDisplay}
@@ -104,9 +104,9 @@ export const Blocks: React.SFC<{
 				{block.title && <h2>{block.title}</h2>}
 				{Elements(block.elements, pillar, false)}
 				{/* Some elements float (e.g. rich links) */}
-				<div className={clearBoth} />{' '}
+				<div css={clearBoth} />{' '}
 				{block.blockLastUpdatedDisplay && (
-					<div className={lastUpdatedStyle}>
+					<div css={lastUpdatedStyle}>
 						Updated at {block.blockLastUpdatedDisplay}
 					</div>
 				)}
@@ -144,7 +144,7 @@ export const Blocks: React.SFC<{
 							<div
 								id={`ad-${i + 1}`}
 								data-sort-time="1"
-								className={adStyle}
+								css={adStyle}
 							>
 								<Ad
 									adRegion="US"
@@ -180,7 +180,7 @@ export const Blocks: React.SFC<{
 			<div
 				id="clean-blocks"
 				data-sort-time="1"
-				className={css`
+				css={css`
 					clear: both;
 				`}
 			/>

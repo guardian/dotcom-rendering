@@ -14,8 +14,12 @@
 export const SpecialReport: CAPIType = {
 	slotMachineFlags: '',
 	main:
-		'<figure class="element element-image" data-media-id="d8da03945736194ce74fe635c925b11e1aaa2625"> \n <img src="https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/1000.jpg" alt="The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.</span> \n  <span class="element-image__credit">Illustration: Guardian Design</span> \n </figcaption> \n</figure>',
+		'<figure class="element element-image" data-media-id="d302a26f2229a71ab1dfa231208cefc9ae72e3e8"> \n <img src="https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg" alt="Lindsey oil refinery in north Lincolnshire." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Lindsey oil refinery in north Lincolnshire.</span> \n  <span class="element-image__credit">Photograph: Christopher Furlong/Getty Images</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
+		{
+			url: '/environment/environment',
+			title: 'Environment',
+		},
 		{
 			url: '/environment/series/the-polluters',
 			title: 'The polluters',
@@ -29,13 +33,30 @@ export const SpecialReport: CAPIType = {
 					value: 'uk',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/ccmyh',
-				},
-				{
 					name: 'url',
 					value:
-						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+				{
+					name: 'co',
+					value: [
+						'patrick-greenfield',
+						'jonathanwatts',
+						'damiancarrington',
+						'fiona-harvey',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
 				},
 				{
 					name: 'k',
@@ -45,25 +66,19 @@ export const SpecialReport: CAPIType = {
 						'oilandgascompanies',
 						'energy',
 						'energy-industry',
-						'corporate-governance',
+						'carbon-capture-and-storage',
+						'carbon-tax',
 						'environment',
+						'climate-change',
+						'renewableenergy',
+						'coal',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
 					],
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
@@ -73,22 +88,35 @@ export const SpecialReport: CAPIType = {
 					name: 'p',
 					value: 'ng',
 				},
-				{
-					name: 'ob',
-					value: 't',
-				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/ccmyh',
-				},
-				{
 					name: 'url',
 					value:
-						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+				{
+					name: 'co',
+					value: [
+						'patrick-greenfield',
+						'jonathanwatts',
+						'damiancarrington',
+						'fiona-harvey',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
 				},
 				{
 					name: 'k',
@@ -98,25 +126,19 @@ export const SpecialReport: CAPIType = {
 						'oilandgascompanies',
 						'energy',
 						'energy-industry',
-						'corporate-governance',
+						'carbon-capture-and-storage',
+						'carbon-tax',
 						'environment',
+						'climate-change',
+						'renewableenergy',
+						'coal',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
 					],
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
@@ -130,22 +152,35 @@ export const SpecialReport: CAPIType = {
 					name: 'edition',
 					value: 'us',
 				},
-				{
-					name: 'ob',
-					value: 't',
-				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/ccmyh',
-				},
-				{
 					name: 'url',
 					value:
-						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+				{
+					name: 'co',
+					value: [
+						'patrick-greenfield',
+						'jonathanwatts',
+						'damiancarrington',
+						'fiona-harvey',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
 				},
 				{
 					name: 'k',
@@ -155,25 +190,19 @@ export const SpecialReport: CAPIType = {
 						'oilandgascompanies',
 						'energy',
 						'energy-industry',
-						'corporate-governance',
+						'carbon-capture-and-storage',
+						'carbon-tax',
 						'environment',
+						'climate-change',
+						'renewableenergy',
+						'coal',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
 					],
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
 				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
@@ -182,10 +211,6 @@ export const SpecialReport: CAPIType = {
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'ob',
-					value: 't',
 				},
 				{
 					name: 'edition',
@@ -196,13 +221,34 @@ export const SpecialReport: CAPIType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/ccmyh',
-				},
-				{
 					name: 'url',
 					value:
-						'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+				{
+					name: 'co',
+					value: [
+						'patrick-greenfield',
+						'jonathanwatts',
+						'damiancarrington',
+						'fiona-harvey',
+					],
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
+				},
+				{
+					name: 'edition',
+					value: 'int',
 				},
 				{
 					name: 'k',
@@ -212,29 +258,19 @@ export const SpecialReport: CAPIType = {
 						'oilandgascompanies',
 						'energy',
 						'energy-industry',
-						'corporate-governance',
+						'carbon-capture-and-storage',
+						'carbon-tax',
 						'environment',
+						'climate-change',
+						'renewableenergy',
+						'coal',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
 					],
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
-				},
-				{
-					name: 'edition',
-					value: 'int',
 				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['patrick-greenfield'],
 				},
 				{
 					name: 'ct',
@@ -244,46 +280,50 @@ export const SpecialReport: CAPIType = {
 					name: 'p',
 					value: 'ng',
 				},
-				{
-					name: 'ob',
-					value: 't',
-				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Sat 12 Oct 2019 19.40 BST',
+		'Last modified on Mon 14 Oct 2019 16.25 BST',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
-	publication: 'The Observer',
+	publication: 'theguardian.com',
 	trailText:
-		'Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis',
+		'Individual action alone won’t solve the climate crisis. So what legal and policy changes might help?',
 	subMetaKeywordLinks: [
+		{
+			url: '/environment/climate-change',
+			title: 'Climate change',
+		},
 		{
 			url: '/business/oilandgascompanies',
 			title: 'Oil and gas companies',
-		},
-		{
-			url: '/environment/energy',
-			title: 'Energy',
 		},
 		{
 			url: '/business/energy-industry',
 			title: 'Energy industry',
 		},
 		{
-			url: '/business/corporate-governance',
-			title: 'Corporate governance',
+			url: '/environment/fossil-fuels',
+			title: 'Fossil fuels',
 		},
 		{
-			url: '/tone/news',
-			title: 'news',
+			url: '/environment/carbon-capture-and-storage',
+			title: 'Carbon capture and storage (CCS)',
+		},
+		{
+			url: '/environment/carbon-emissions',
+			title: 'Greenhouse gas emissions',
+		},
+		{
+			url: '/tone/analysis',
+			title: 'analysis',
 		},
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/environment/energy',
+		currentUrl: '/environment/climate-change',
 		pillars: [
 			{
 				title: 'News',
@@ -841,6 +881,10 @@ export const SpecialReport: CAPIType = {
 						url: '/theguardian/g2',
 					},
 					{
+						title: 'Journal',
+						url: '/theguardian/journal',
+					},
+					{
 						title: 'Weekend',
 						url: '/theguardian/weekend',
 					},
@@ -892,10 +936,6 @@ export const SpecialReport: CAPIType = {
 					{
 						title: 'Blog',
 						url: '/crosswords/crossword-blog',
-					},
-					{
-						title: 'Editor',
-						url: '/crosswords/series/crossword-editor-update',
 					},
 					{
 						title: 'Quick',
@@ -978,7 +1018,7 @@ export const SpecialReport: CAPIType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 		],
-		currentNavLinkTitle: 'Energy',
+		currentNavLinkTitle: 'Climate change',
 		currentPillarTitle: 'News',
 		subNavSections: {
 			parent: {
@@ -1025,94 +1065,99 @@ export const SpecialReport: CAPIType = {
 		readerRevenueLinks: {
 			header: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			footer: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 			},
 			sideMenu: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 			},
 			ampFooter: {
 				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
 				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
 				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22,%22source%22:%22GUARDIAN_WEB%22%7D',
-				gifting:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_gifting&acquisitionData=%7B%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_gifting%22,%22source%22:%22GUARDIAN_WEB%22%7D',
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
 	},
 	author: {
-		byline: 'Patrick Greenfield',
-		twitterHandle: 'pgreenfielduk',
+		byline:
+			'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
 	},
-	designType: 'Immersive',
+	designType: 'Analysis',
 	editionId: 'UK',
+	format: {
+		design: 'AnalysisDesign',
+		theme: 'SpecialReportTheme',
+		display: 'StandardDisplay',
+	},
 	standfirst:
-		'<p>Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis</p>',
+		'<p>Individual action alone won’t solve the climate crisis. So what political changes might help?</p>\n<ul>\n <li><a href="https://www.theguardian.com/environment/2019/oct/14/rise-renewables-oil-firms-decades-earlier-think">Renewables may see off oil firms decades earlier than they think</a></li>\n</ul>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+			'http://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 		'article:author':
-			'https://www.theguardian.com/profile/patrick-greenfield',
+			'https://www.theguardian.com/profile/fiona-harvey,https://www.theguardian.com/profile/damiancarrington,https://www.theguardian.com/profile/patrick-greenfield,https://www.theguardian.com/profile/jonathanwatts',
 		'og:image:height': '720',
 		'og:description':
-			'Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis',
+			'Individual action alone won’t solve the climate crisis. So what legal and policy changes might help?',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tYWdlLTIwMTkucG5n&enable=upscale&s=679ee83cd2271fb0b26b2cd135be6411',
+			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=ddc1915c083b39e79506d0683a0f0d66',
 		'al:ios:url':
-			'gnmguardian://environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments?contenttype=Article&source=applinks',
+			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Environment',
-		'article:published_time': '2019-10-12T11:00:19.000Z',
+		'article:published_time': '2019-10-14T15:23:44.000Z',
 		'og:title':
-			"World's top three asset managers oversee $300bn fossil fuel investments",
+			'How do we rein in the fossil fuel industry? Here are eight ideas',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Fossil fuels,Oil and gas companies,Business,Energy,Energy industry,Environment,Corporate governance',
+			'Environment,Climate change,Oil and gas companies,Business,Energy industry,Fossil fuels,Carbon capture and storage (CCS),Greenhouse gas emissions,Coal,Energy,Carbon tax,Fossil fuel divestment,Renewable energy',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2019-10-12T18:40:38.000Z',
+		'article:modified_time': '2019-10-14T15:25:06.000Z',
 	},
-	sectionUrl: 'environment/fossil-fuels',
+	sectionUrl: 'environment/environment',
 	pageId:
-		'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+		'environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	version: 3,
 	tags: [
 		{
@@ -1121,9 +1166,14 @@ export const SpecialReport: CAPIType = {
 			title: 'The polluters',
 		},
 		{
-			id: 'environment/fossil-fuels',
+			id: 'environment/environment',
 			type: 'Keyword',
-			title: 'Fossil fuels',
+			title: 'Environment',
+		},
+		{
+			id: 'environment/climate-change',
+			type: 'Keyword',
+			title: 'Climate change',
 		},
 		{
 			id: 'business/oilandgascompanies',
@@ -1136,24 +1186,49 @@ export const SpecialReport: CAPIType = {
 			title: 'Business',
 		},
 		{
-			id: 'environment/energy',
-			type: 'Keyword',
-			title: 'Energy',
-		},
-		{
 			id: 'business/energy-industry',
 			type: 'Keyword',
 			title: 'Energy industry',
 		},
 		{
-			id: 'environment/environment',
+			id: 'environment/fossil-fuels',
 			type: 'Keyword',
-			title: 'Environment',
+			title: 'Fossil fuels',
 		},
 		{
-			id: 'business/corporate-governance',
+			id: 'environment/carbon-capture-and-storage',
 			type: 'Keyword',
-			title: 'Corporate governance',
+			title: 'Carbon capture and storage (CCS)',
+		},
+		{
+			id: 'environment/carbon-emissions',
+			type: 'Keyword',
+			title: 'Greenhouse gas emissions',
+		},
+		{
+			id: 'environment/coal',
+			type: 'Keyword',
+			title: 'Coal',
+		},
+		{
+			id: 'environment/energy',
+			type: 'Keyword',
+			title: 'Energy',
+		},
+		{
+			id: 'environment/carbon-tax',
+			type: 'Keyword',
+			title: 'Carbon tax',
+		},
+		{
+			id: 'environment/fossil-fuel-divestment',
+			type: 'Keyword',
+			title: 'Fossil fuel divestment',
+		},
+		{
+			id: 'environment/renewableenergy',
+			type: 'Keyword',
+			title: 'Renewable energy',
 		},
 		{
 			id: 'type/article',
@@ -1161,9 +1236,24 @@ export const SpecialReport: CAPIType = {
 			title: 'Article',
 		},
 		{
-			id: 'tone/news',
+			id: 'tone/analysis',
 			type: 'Tone',
-			title: 'News',
+			title: 'Analysis',
+		},
+		{
+			id: 'profile/fiona-harvey',
+			type: 'Contributor',
+			title: 'Fiona Harvey',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/uploads/2017/12/27/Fiona_Harvey,_R.png?width=300&quality=85&auto=format&fit=max&s=66d72d42d428ea06f97eff3debe1ee6a',
+		},
+		{
+			id: 'profile/damiancarrington',
+			type: 'Contributor',
+			title: 'Damian Carrington',
+			twitterHandle: 'dpcarrington',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/uploads/2017/10/06/Damian-Carrington,-R.png?width=300&quality=85&auto=format&fit=max&s=75b7d649b6c8fc8d90d98a3ae15d3724',
 		},
 		{
 			id: 'profile/patrick-greenfield',
@@ -1172,19 +1262,10 @@ export const SpecialReport: CAPIType = {
 			twitterHandle: 'pgreenfielduk',
 		},
 		{
-			id: 'publication/theobserver',
-			type: 'Publication',
-			title: 'The Observer',
-		},
-		{
-			id: 'theobserver/news',
-			type: 'NewspaperBook',
-			title: 'Main section',
-		},
-		{
-			id: 'theobserver/news/uknews',
-			type: 'NewspaperBookSection',
-			title: 'News',
+			id: 'profile/jonathanwatts',
+			type: 'Contributor',
+			title: 'Jonathan Watts',
+			twitterHandle: 'jonathanwatts',
 		},
 		{
 			id: 'tracking/commissioningdesk/uk-investigations',
@@ -1199,10 +1280,10 @@ export const SpecialReport: CAPIType = {
 	},
 	pillar: 'news',
 	webURL:
-		'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+		'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	showBottomSocialButtons: true,
-	isImmersive: true,
-	sectionLabel: 'Fossil fuels',
+	isImmersive: false,
+	sectionLabel: 'Environment',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1362,19 +1443,18 @@ export const SpecialReport: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tYWdlLTIwMTkucG5n&s=6878a1ac84f1229012571b662f77e65b',
+			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=e9d0d42da8d00418e0640814442f5814',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments?contenttype=Article&source=twitter',
+			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@pgreenfielduk',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+			'guardian://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 		'twitter:app:url:iphone':
-			'gnmguardian://environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments?contenttype=Article&source=twitter',
+			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=twitter',
 	},
 	sectionName: 'environment',
 	pageType: {
@@ -1389,322 +1469,10 @@ export const SpecialReport: CAPIType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline:
-		"World's top three asset managers oversee $300bn fossil fuel investments",
+		'How do we rein in the fossil fuel industry? Here are eight ideas',
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
-			elementId: 'a7544433-64b2-4436-a141-bd8019aec362',
-			role: 'immersive',
-			data: {
-				alt:
-					'The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.',
-				caption:
-					'The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.',
-				credit: 'Illustration: Guardian Design',
-			},
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=85&auto=format&fit=max&s=539379ffe774750050bc08b8529a78a5',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3af65f26cb8d39edf9819eaf6b299d3b',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=85&auto=format&fit=max&s=978256ab83845be3b66eef5d93ef9aa7',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=807b33c44ed85ec151f4b28c0bf28c4b',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=85&auto=format&fit=max&s=bca6039053ac235a51c3e236de208d07',
-							width: 445,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=d22fa73c1857c58451b1f57450db2e42',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=140&quality=85&auto=format&fit=max&s=c5c13cf293e82bb1518bc39e9dbc0685',
-							width: 140,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=3155dc7521cda659dedc8307a918a898',
-							width: 280,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=120&quality=85&auto=format&fit=max&s=0e7831ef862663d5361bb58a00dfcf2a',
-							width: 120,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7c1f26635ac3fb0d139456e21a5f7401',
-							width: 240,
-						},
-					],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=380&quality=85&auto=format&fit=max&s=c98dc7a78646f25bc46cd43d0002f989',
-							width: 380,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=88f5924e96baca96b4c486b90e40fef2',
-							width: 760,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=300&quality=85&auto=format&fit=max&s=fe30519165df165b58d79942b3ba4914',
-							width: 300,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8e0bb76c4eb79d5a46091807e15d8d9d',
-							width: 600,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=85&auto=format&fit=max&s=539379ffe774750050bc08b8529a78a5',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3af65f26cb8d39edf9819eaf6b299d3b',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=85&auto=format&fit=max&s=978256ab83845be3b66eef5d93ef9aa7',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=807b33c44ed85ec151f4b28c0bf28c4b',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=85&auto=format&fit=max&s=bca6039053ac235a51c3e236de208d07',
-							width: 445,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=d22fa73c1857c58451b1f57450db2e42',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1020&quality=85&auto=format&fit=max&s=2fa4f2a29f1c6897ec41c3ecd91ccfa8',
-							width: 1020,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b536244811017897ed50a11566d30a26',
-							width: 2040,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=940&quality=85&auto=format&fit=max&s=3fa3f795a94f8513bf5258cb6b8edbd2',
-							width: 940,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d473dd4763268cebdbd1fd61b0685c3e',
-							width: 1880,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=85&auto=format&fit=max&s=2271f9bc101d521731c8576abcd25071',
-							width: 700,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=61222a2385b6948f8ede60707de969cf',
-							width: 1400,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=85&auto=format&fit=max&s=2271f9bc101d521731c8576abcd25071',
-							width: 700,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=61222a2385b6948f8ede60707de969cf',
-							width: 1400,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=660&quality=85&auto=format&fit=max&s=2b456ed69359199a1874428117c3d8f6',
-							width: 660,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=20e88af6045563546227b785a35e78ee',
-							width: 1320,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=85&auto=format&fit=max&s=b2e1f22986fd04d12de11d3b8d7819dc',
-							width: 645,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=8510b1acce1680cfedade6710df80be5',
-							width: 1290,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=85&auto=format&fit=max&s=153fa0a2e6746719754b8fcd13f4e48d',
-							width: 465,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=c8ae3698f8dc74a9ac8d6b83e7f166f0',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=85&auto=format&fit=max&s=539379ffe774750050bc08b8529a78a5',
-							width: 620,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3af65f26cb8d39edf9819eaf6b299d3b',
-							width: 1240,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=85&auto=format&fit=max&s=978256ab83845be3b66eef5d93ef9aa7',
-							width: 605,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=807b33c44ed85ec151f4b28c0bf28c4b',
-							width: 1210,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=85&auto=format&fit=max&s=bca6039053ac235a51c3e236de208d07',
-							width: 445,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=d22fa73c1857c58451b1f57450db2e42',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1300&quality=85&auto=format&fit=max&s=99e5eee1aa72493f0a45b38fdea3a7b7',
-							width: 1300,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=5b7119d2931acb6342a89ea0a968732b',
-							width: 2600,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1140&quality=85&auto=format&fit=max&s=858dc52fed3b9b4ff420795345c7b6a7',
-							width: 1140,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=85f10bad48e065766790ddd8c27a3f61',
-							width: 2280,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1125&quality=85&auto=format&fit=max&s=c6fd2064654315719333843c588640e9',
-							width: 1125,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=c6cba2820e922c1562d52646ec55aea3',
-							width: 2250,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=965&quality=85&auto=format&fit=max&s=3c220076ab9721f8350b3466b8beed61',
-							width: 965,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=8213fad02e7f29c529852541c42e1d43',
-							width: 1930,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=725&quality=85&auto=format&fit=max&s=0472dc64e585660aa70dc877443011df',
-							width: 725,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=304d245ad06736f6ffb06ecf7e897961',
-							width: 1450,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=85&auto=format&fit=max&s=b2e1f22986fd04d12de11d3b8d7819dc',
-							width: 645,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=8510b1acce1680cfedade6710df80be5',
-							width: 1290,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=85&auto=format&fit=max&s=153fa0a2e6746719754b8fcd13f4e48d',
-							width: 465,
-						},
-						{
-							src:
-								'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=c8ae3698f8dc74a9ac8d6b83e7f166f0',
-							width: 930,
-						},
-					],
-				},
-			],
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 			media: {
 				allImages: [
 					{
@@ -1716,7 +1484,7 @@ export const SpecialReport: CAPIType = {
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/2000.jpg',
+							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/2000.jpg',
 					},
 					{
 						index: 1,
@@ -1727,7 +1495,7 @@ export const SpecialReport: CAPIType = {
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/1000.jpg',
+							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg',
 					},
 					{
 						index: 2,
@@ -1738,7 +1506,7 @@ export const SpecialReport: CAPIType = {
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/500.jpg',
+							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/500.jpg',
 					},
 					{
 						index: 3,
@@ -1749,1402 +1517,473 @@ export const SpecialReport: CAPIType = {
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/140.jpg',
+							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/140.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							height: '5792',
-							width: '9653',
+							height: '1800',
+							width: '3000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/9653.jpg',
+							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/3000.jpg',
 					},
 					{
 						index: 5,
 						fields: {
 							isMaster: 'true',
-							height: '5792',
-							width: '9653',
+							height: '1800',
+							width: '3000',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
 						url:
-							'https://media.guim.co.uk/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg',
+							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg',
 					},
 				],
 			},
+			data: {
+				copyright: '2009 Getty Images',
+				alt: 'Lindsey oil refinery in north Lincolnshire.',
+				caption: 'Lindsey oil refinery in north Lincolnshire.',
+				credit: 'Photograph: Christopher Furlong/Getty Images',
+			},
 			displayCredit: true,
-		},
-	],
-	webPublicationDate: '2019-10-12T11:00:19.000Z',
-	blocks: [
-		{
-			secondaryDateLine: 'Last modified on Sat 12 Oct 2019 19.40 BST',
-			blockFirstPublishedDisplay: '09.05 BST',
-			blockLastUpdated: 1570877166000,
-			firstPublishedDisplay: '12.00 BST',
-			lastUpdatedDisplay: '19.40 BST',
-			blockCreatedOnDisplay: '09.05 BST',
-			blockLastUpdatedDisplay: '11.46 BST',
-			firstPublished: 1570878019000,
-			createdOn: 1569225927000,
-			primaryDateLine: 'Sat 12 Oct 2019 12.00 BST',
-			blockCreatedOn: 1569225927000,
-			blockFirstPublished: 1569225929000,
-			createdOnDisplay: '09.05 BST',
-			lastUpdated: 1570905638000,
-			elements: [
+			role: 'inline',
+			imageSources: [
 				{
-					elementId: 'ae1846ad-a7ab-4bc7-a7a6-658246bd1b9b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The world’s three largest money managers have built a combined $300bn fossil fuel investment portfolio using money from people’s private savings and pension contributions, the Guardian can reveal.</p>',
-				},
-				{
-					elementId: 'b5c1ddd2-5d38-477d-bfd4-5be0a7e13c64',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP, have continued to grow billion-dollar stakes in some of the most carbon-intensive companies since the Paris agreement, financial data shows.</p>',
-				},
-				{
-					elementId: '39deb1f6-a128-47b5-a15a-262ff8b45884',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The two largest asset managers, BlackRock and Vanguard, have also routinely opposed motions at fossil fuel companies that would have forced directors to take more action on climate change, the analysis reveals.</p>',
-				},
-				{
-					elementId: 'f077b032-0757-478f-a796-cf11d164d1e3',
-					role: 'inline',
-					data: {
-						alt: 'Fossil fuel holdings: The Vanguard Group',
-						credit: 'Illustration: Guardian Design',
-					},
-					imageSources: [
+					weighting: 'inline',
+					srcSet: [
 						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=98efdde243642befa76fac1686774ecd',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1cf2343891cecac0245ca45f5e612b7f',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=f871ea37934f666118aeaf701cf3c4ec',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=da40f96cff3f32f9628d21e2e6e9e67e',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=c302e4e1c5c97fc671763480205e6e2e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=89bf2d9cb0e2a933fce30d3352b66778',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
+							width: 620,
 						},
 						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=140&quality=85&auto=format&fit=max&s=fd36c8cc7f83b5c315291623cede52a6',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=ca9e3eca1b80b7907a3e2306e8a9a531',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=120&quality=85&auto=format&fit=max&s=f597fd58aec086a6a4e3c19f9540b996',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1972cb39961d4bde92363b8cb0b3411f',
-									width: 240,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
+							width: 1240,
 						},
 						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=380&quality=85&auto=format&fit=max&s=ba975413314da94d9db76138a997e153',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=c01090ff367515d4480e84ffc580d144',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=300&quality=85&auto=format&fit=max&s=c3d16f00410d1518ce7e23f27dc97b39',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3b2ce36d7413cf378450a3ac41348a1c',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=98efdde243642befa76fac1686774ecd',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1cf2343891cecac0245ca45f5e612b7f',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=f871ea37934f666118aeaf701cf3c4ec',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=da40f96cff3f32f9628d21e2e6e9e67e',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=c302e4e1c5c97fc671763480205e6e2e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=89bf2d9cb0e2a933fce30d3352b66778',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
+							width: 605,
 						},
 						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1020&quality=85&auto=format&fit=max&s=c9d5fbc6d9173eb15f2fe56e9ff3e9b0',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=3bf32c16a68d40bcda9880ae3485efe5',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=940&quality=85&auto=format&fit=max&s=d19b850e5dbf3c840b6149d7a2187c4b',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=ee05143a6a79c1b1b851e871e90dde64',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=92e99d9d86258afc4e6fbd49b830e4bd',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8cc4c62f1bd79891cacf2a8743f37c20',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=92e99d9d86258afc4e6fbd49b830e4bd',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8cc4c62f1bd79891cacf2a8743f37c20',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=660&quality=85&auto=format&fit=max&s=ee3a4566b3c551e89cf5d7dae94456fc',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f37c221ffe4a9807b54c4e497d656ccf',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=fe238500f09366fa51ca99dc311d12f0',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=53fcf19f7b4d7bf82bac202bd0ee05c6',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0870fa508c7a327c8bf973c3000b5b0b',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=079bf138715302318881b11fa3661e83',
-									width: 930,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
+							width: 1210,
 						},
 						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=98efdde243642befa76fac1686774ecd',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1cf2343891cecac0245ca45f5e612b7f',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=f871ea37934f666118aeaf701cf3c4ec',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=da40f96cff3f32f9628d21e2e6e9e67e',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=c302e4e1c5c97fc671763480205e6e2e',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=89bf2d9cb0e2a933fce30d3352b66778',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
+							width: 445,
 						},
 						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1300&quality=85&auto=format&fit=max&s=007bd870327e2cc846a8f45ade884e8e',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0e795df9225cc50b7cc54cbfc312e5eb',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1140&quality=85&auto=format&fit=max&s=0bc0b765bcf72596d880483583f96c37',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7e13f3b492695c936b5eefcefd01e982',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1125&quality=85&auto=format&fit=max&s=b3aecf87e9d29b65b15db29a779d3617',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=826526e825ee8eba5ecd523adb9df881',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=6d7433ad20ce7e8964633b229d93b6dc',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=263fdaa2f19c5271aecccb5f833b265f',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=6b7d46f74979690902f7c53c8a17d7d8',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=3cac0ad47084abbe4f9ee1a09b2ef2fd',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=fe238500f09366fa51ca99dc311d12f0',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=53fcf19f7b4d7bf82bac202bd0ee05c6',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0870fa508c7a327c8bf973c3000b5b0b',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=079bf138715302318881b11fa3661e83',
-									width: 930,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
+							width: 890,
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1240.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1000',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '500',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '140',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
 				},
 				{
-					elementId: '9d983b92-4bd2-4a6e-8870-836972480980',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The investment rise is driven by the success in the last decade of tracker funds that use algorithms to follow major stock exchange indices such as the FTSE 100 and S&amp;P 500. </p>',
-				},
-				{
-					elementId: 'b8d0bece-fa9c-4b7e-811b-7f2cac668667',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>The Guardian has worked with the thinktank InfluenceMap and the business data specialists ProxyInsight to analyse the role played by asset managers in the financing and management of some of the world’s biggest fossil fuel companies.</p>',
-				},
-				{
-					elementId: '1b31f46c-c88b-42da-bf19-2adf7b2aeeae',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p> Figures compiled by <a href="https://influencemap.org/index.html">InfluenceMap</a> show how Blackrock, Vanguard and State Street – known as the big three – have become crucial climate actors in the financial world. They are the largest money managers in the $74tn industry.</p>',
-				},
-				{
-					elementId: 'ba5c832c-2bfe-425f-8bbe-937e744cfc4a',
-					role: 'inline',
-					data: {
-						alt: 'Fossil fuel holdings: BlackRock',
-						credit: 'Illustration: Guardian Design',
-					},
-					imageSources: [
+					weighting: 'thumbnail',
+					srcSet: [
 						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=f719159212de69ebe1d53bc304a8f441',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=80b97228bea784224c7925438135acb1',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=0be0871ebe9c3b8beeed32631ed571f5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=40fc0c64402158b73cd74f664f6fdc5b',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=8c5a197a7a8f6c5b2044a673ad0c5e22',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=15821094bc233207e5279ba183f5c775',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=140&quality=85&auto=format&fit=max&s=70205fdfe62edc25a65689b97e44613c',
+							width: 140,
 						},
 						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=140&quality=85&auto=format&fit=max&s=b91dbfa5bd204c08e651961c9a7ba10f',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=8730ff58cd2b99fc5ac6287ee897cf6e',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=120&quality=85&auto=format&fit=max&s=db122e40ffd8d0b5b9d7d9d3e8d6f038',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=4a0baa8d53550a46f5b363b074dcaeb0',
-									width: 240,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=99fc530c0107bb5e0a33f7da588d6f87',
+							width: 280,
 						},
 						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=380&quality=85&auto=format&fit=max&s=62c54a704f615267efc753c8cb4359c8',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=32af55ddc1bfad17ea4b146fe8248bf2',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=300&quality=85&auto=format&fit=max&s=92ba4e3bbed2ce0bd6f12628fdf445e6',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=1ce71d776ce9b09761d3e35231bb4740',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=f719159212de69ebe1d53bc304a8f441',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=80b97228bea784224c7925438135acb1',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=0be0871ebe9c3b8beeed32631ed571f5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=40fc0c64402158b73cd74f664f6fdc5b',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=8c5a197a7a8f6c5b2044a673ad0c5e22',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=15821094bc233207e5279ba183f5c775',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=120&quality=85&auto=format&fit=max&s=7f20aae6b9fcd742667a84d4deadf765',
+							width: 120,
 						},
 						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1020&quality=85&auto=format&fit=max&s=83246cbd1174b5058b78ba7e2a400ae8',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=4784ad24cbb07cc6b717416ba01901a8',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=940&quality=85&auto=format&fit=max&s=d73d2246f176954f0e7240f1ec5aca63',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=5d3f1b2f54d7ee673fb08f7bc2771275',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=95712b1476a748f227b045b38ec55fc7',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d855714acde61fd13968b059f4d8c644',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=95712b1476a748f227b045b38ec55fc7',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d855714acde61fd13968b059f4d8c644',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=660&quality=85&auto=format&fit=max&s=fcc82bdf60c2a8de9778b17acd70d803',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ae2439c61786b1f40faa4f7fba44f42f',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=5d42ec283036d849acd23124a8770936',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f8c62e68ab25f5a2a74c795f56db2cd5',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=945ceb6684c56e81be99320aa8d500bf',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=487451129c4fd88a85910d3e460af3fd',
-									width: 930,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=f719159212de69ebe1d53bc304a8f441',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=80b97228bea784224c7925438135acb1',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=0be0871ebe9c3b8beeed32631ed571f5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=40fc0c64402158b73cd74f664f6fdc5b',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=8c5a197a7a8f6c5b2044a673ad0c5e22',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=15821094bc233207e5279ba183f5c775',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1300&quality=85&auto=format&fit=max&s=c501c6f5058e4780e3ae22f2286c76c0',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=f51fb8df0b7afeea3cd3d4c62f722248',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1140&quality=85&auto=format&fit=max&s=eb16047b2b7bb0eee47a89b491691669',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3806aa7c549558e56a5289602fbb1181',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1125&quality=85&auto=format&fit=max&s=15ea3ab49be5aeec72c0a6673f52050e',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=919105b62e3435f44c4a2a28b18a3a9c',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=b9b73527199fffb6bce54a9553d682f3',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a895f191e51d8a266c8daf817374a88f',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=09427239b898eb09b7dabf596cf547e5',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=a8a7cdf4f959187c74b92373bf44f483',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=5d42ec283036d849acd23124a8770936',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f8c62e68ab25f5a2a74c795f56db2cd5',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=945ceb6684c56e81be99320aa8d500bf',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=487451129c4fd88a85910d3e460af3fd',
-									width: 930,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=581f83d7eb61e021ecd47dd2a6c16b46',
+							width: 240,
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1240.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1000',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '500',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '140',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
 				},
 				{
-					elementId: 'bbc76797-3da6-479c-a7ff-91003294da92',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>According to an analysis of the data, their effective thermal coal, oil and gas reserve holdings through the companies they manage have surged 34.8% since 2016.</p>',
-				},
-				{
-					elementId: '4d8abb46-5f82-42b8-ba96-f1832d499a8d',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>This means they are now the largest investors in public oil, gas and coal companies, managing funds for large pension funds, university endowments and insurance companies.</p>',
-				},
-				{
-					elementId: '77167220-e31c-465d-8741-5c93104a5691',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>While asset managers do not own the companies in which they invest, they often exercise shareholders rights on behalf of clients to vote on board members and company policy issues. </p>',
-				},
-				{
-					elementId: 'f58280c3-ba92-418d-8269-bf795bede73a',
-					role: 'inline',
-					data: {
-						alt: 'Fossil fuel holdings: State Street Corporation',
-						credit: 'Illustration: Guardian Design',
-					},
-					imageSources: [
+					weighting: 'supporting',
+					srcSet: [
 						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=fc5a68494bb19069f16892bb53da486d',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=488ffd425fb6c864e7bd1a85f117e750',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=00057343f4b441f17ec4fd3ded31c6c5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9a13bd1f3d4d38e746d4d516b9585090',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=f4e783ef0074f593857cb9d93fc1322b',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3ef331dc12ebbd221f869988ebfa5c74',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=380&quality=85&auto=format&fit=max&s=b098f9e33de232b0a1b54e011d5c993c',
+							width: 380,
 						},
 						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=140&quality=85&auto=format&fit=max&s=d72b77c46196bfdfab147497f85c3e59',
-									width: 140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=4cd08f1b10a940b7de42aad0ea8295e8',
-									width: 280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=120&quality=85&auto=format&fit=max&s=9d8c16a53c595e23e399f079b2aefeb5',
-									width: 120,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=131040d4b8496151b01c292472e119d4',
-									width: 240,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=2ffc1cbedd6ac26601102635c29c92ec',
+							width: 760,
 						},
 						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=380&quality=85&auto=format&fit=max&s=1b0bbfb6ec6cf3039230f9e78d09438e',
-									width: 380,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=57c017b6e8745043e5f2f5a90ed7259b',
-									width: 760,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=300&quality=85&auto=format&fit=max&s=82b8f9f19a6dec9fe4da101eb36b9acc',
-									width: 300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=549610c66ab3ac6fc7d97d8ff524fc46',
-									width: 600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=fc5a68494bb19069f16892bb53da486d',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=488ffd425fb6c864e7bd1a85f117e750',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=00057343f4b441f17ec4fd3ded31c6c5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9a13bd1f3d4d38e746d4d516b9585090',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=f4e783ef0074f593857cb9d93fc1322b',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3ef331dc12ebbd221f869988ebfa5c74',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=f712108623dcbd22d996e16b9cea3f69',
+							width: 300,
 						},
 						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1020&quality=85&auto=format&fit=max&s=4143a8e44d3eb5c9415d9ac193a5f604',
-									width: 1020,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=8961bc23a493c4a83069dbdaea5ab81c',
-									width: 2040,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=940&quality=85&auto=format&fit=max&s=d098e3468a4f85556060d92c6f15a7bb',
-									width: 940,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=7a665b23c20e3c7b2c6e014cd2b682cf',
-									width: 1880,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=c12e8c67b39c59b45e501c52830e09ae',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d947a94b22e035b407823a2c1a4558a2',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=c12e8c67b39c59b45e501c52830e09ae',
-									width: 700,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d947a94b22e035b407823a2c1a4558a2',
-									width: 1400,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=660&quality=85&auto=format&fit=max&s=2b3eabd2c4f6ca196d0b09b71cb45f4a',
-									width: 660,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=7c049c1d46dbcdaba79ad4a5a3067fb3',
-									width: 1320,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=2629105dc9f1018d66b6f81b88e5c7bc',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=737e01f4d9e32d8f051d98996090d4ae',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0d05938976befd23759effb3a5abbca4',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7cf97d29f1cf315ee0bc977ea687571a',
-									width: 930,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=503a99b41488ec5de3c007dc7c4ed0f1',
+							width: 600,
 						},
 						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=85&auto=format&fit=max&s=fc5a68494bb19069f16892bb53da486d',
-									width: 620,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=488ffd425fb6c864e7bd1a85f117e750',
-									width: 1240,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=85&auto=format&fit=max&s=00057343f4b441f17ec4fd3ded31c6c5',
-									width: 605,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9a13bd1f3d4d38e746d4d516b9585090',
-									width: 1210,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=85&auto=format&fit=max&s=f4e783ef0074f593857cb9d93fc1322b',
-									width: 445,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3ef331dc12ebbd221f869988ebfa5c74',
-									width: 890,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
+							width: 620,
 						},
 						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1300&quality=85&auto=format&fit=max&s=256cb4d8eafdaf73f24c1242b81783b4',
-									width: 1300,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b82dcaa95f09de44ec229acb9e1cadcf',
-									width: 2600,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1140&quality=85&auto=format&fit=max&s=b0505c1d0badb5209e78d8c5d888b48c',
-									width: 1140,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=1130f62482c8562afdf25d1a55664fbb',
-									width: 2280,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1125&quality=85&auto=format&fit=max&s=45e3f142ea816c1d10fc761c54684641',
-									width: 1125,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e6c6a635f9cb30d93ea46616f578d8e6',
-									width: 2250,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=564ccad06ad32b498e00e8b57c52ba14',
-									width: 965,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=c7a44faee96fa295f58aa5550bfa1df6',
-									width: 1930,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=a3f28bf3250d77cf6cbc7083378d9330',
-									width: 725,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=56b3be840b7a7ca33d80f003838e329b',
-									width: 1450,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=2629105dc9f1018d66b6f81b88e5c7bc',
-									width: 645,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=737e01f4d9e32d8f051d98996090d4ae',
-									width: 1290,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0d05938976befd23759effb3a5abbca4',
-									width: 465,
-								},
-								{
-									src:
-										'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7cf97d29f1cf315ee0bc977ea687571a',
-									width: 930,
-								},
-							],
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
+							width: 1240,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
+							width: 605,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
+							width: 1210,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
+							width: 445,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
+							width: 890,
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1240.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1240',
-									width: '1240',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1000',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '500',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '140',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/140.jpg',
-							},
-						],
-					},
-					displayCredit: true,
 				},
 				{
-					elementId: '1754cf73-bded-45fc-9540-71e4a5fa5d28',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Disclosures for publicly available company reports show that from 2015 to 2019 Vanguard and BlackRock used their votes to frequently oppose efforts to improve climate-related financial disclosures.</p>',
+					weighting: 'showcase',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1020&quality=85&auto=format&fit=max&s=0982b6a823df0e46c0fdfeb699ea1fe8',
+							width: 1020,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a36d661ce81f02614a05e9693575fcfc',
+							width: 2040,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=940&quality=85&auto=format&fit=max&s=bc95fef71fc9867e945b64fc31425603',
+							width: 940,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=611615dd9e8ee0335c3dbd4a1f8039cd',
+							width: 1880,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=262a77a9c547545846653a4cc223bc3c',
+							width: 700,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=4db8fd681abda4bef594a655908fd117',
+							width: 1400,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=262a77a9c547545846653a4cc223bc3c',
+							width: 700,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=4db8fd681abda4bef594a655908fd117',
+							width: 1400,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=075cd46658e868d4040ede59a5dbbc7f',
+							width: 660,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=8eb91af65932330c6eb02ee82304638d',
+							width: 1320,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=fdd5c31dbfab51be235a2d0005dfad44',
+							width: 645,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=d4d28132dd7be4d139087267cf5f3e3b',
+							width: 1290,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=e729d78e1811b164096c67fdcacc0d8d',
+							width: 465,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=04642cd32d5bcd6951c531e516aa746a',
+							width: 930,
+						},
+					],
 				},
 				{
-					elementId: 'e18924ca-bb82-44ea-8f0d-3759f1832ad6',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The investigation by the Guardian has found:</p>',
+					weighting: 'halfwidth',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
+							width: 620,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
+							width: 1240,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
+							width: 605,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
+							width: 1210,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
+							width: 445,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
+							width: 890,
+						},
+					],
 				},
 				{
-					elementId: 'da358599-7f81-4822-b0f7-6392134d16ae',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<ul> \n <li><p>Vanguard ($161.1bn), BlackRock ($87.3bn) and State Street ($38.3bn) oversee a combined $286.7bn of shares in oil, coal and gas companies through 1,712 funds. Their total combined portfolio is likely to be higher as the calculation excludes direct holdings and non-listed fund holdings.</p></li> \n <li><p>The potential CO<sub>2</sub> emissions from the investments have increased from 10.593 gigatonnes (Gt) to 14.283Gt since the Paris agreement, equivalent to 38% of global fossil fuel CO<sub>2</sub> emissions last year.</p></li> \n <li><p>BlackRock and Vanguard opposed or abstained on more than 80% of climate-related motions at FTSE 100 and S&amp;P 500 fossil fuel companies between 2015 and 2019, according to data provided by <a href="https://www.proxyinsight.com/about/overview/">ProxyInsight</a>.</p></li> \n <li><p>The big three are among a number of asset managers that offer “climate-friendly” and “sustainable” investment funds that have substantial holdings in fossil fuel companies.</p></li> \n</ul>',
-				},
-				{
-					elementId: '51b29db4-31f5-4748-a412-6973f1c9f247',
-					scriptUrl:
-						'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
-					alt:
-						'Graph of asset managers voting on climate change resolutions.',
-					_type:
-						'model.dotcomrendering.pageElements.InteractiveBlockElement',
-					url:
-						'https://interactive.guim.co.uk/uploader/embed/2019/10/index-html-2-zip/giv-3902aB667jcgq7fB/',
-					isMandatory: false,
-				},
-				{
-					elementId: 'f5fcb4bf-ffe9-4065-8916-d9659fca8d07',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>BlackRock, Vanguard and State Street did not challenge the findings.</p>',
-				},
-				{
-					elementId: '55ef0a35-fbf2-421b-a6df-5b50861469e4',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>They told the Guardian they prioritised private engagements with company boards, where the climate crisis was regularly discussed. They said they had increased the size of their teams responsible for investment stewardship, opting to use their votes as a final resort.</p>',
-				},
-				{
-					elementId: '286b851c-2dd5-4e91-9953-ba66625e6993',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Vanguard said it neither managed the companies in which it invested nor sought to influence their business strategy. “As a steward of lifetime savings for more than 20 million people around the world, and a practically permanent investor in more than 10,000 companies, Vanguard is concerned about the long-term impact of climate risk,” a spokesman said.</p>',
-				},
-				{
-					elementId: '65e55f27-984b-4878-a5fa-4b3bd6f0fa4b',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“While voting at shareholder meetings is important … it is only one part of the larger corporate governance process. We regularly engage with companies on our shareholders’ behalf and believe that engagement and broader advocacy, in addition to voting, can effect meaningful changes that generate long-term value for all shareholders.”</p>',
-				},
-				{
-					elementId: 'dfdc7579-0da1-4e1b-8c60-4a412724044c',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>BlackRock said it “offers investors a wide range of environmentally sustainable investment options … [and] is also a leading investor in renewable power generation globally. Our award-winning climate research helps investors understand and mitigate the impact of climate change on their portfolios.”</p>',
-				},
-				{
-					elementId: 'fadb8fe6-8e7e-4391-b5ed-5a60f5789dfd',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p> State Street said: “If an investor wants to buy an ETF [exchange-traded fund] that tracks the FTSE 100, we would purchase the shares (proportionately) of all the companies in that FTSE 100 index in order to meet the objective of that strategy. That will today undoubtedly include energy companies.</p>',
-				},
-				{
-					elementId: 'cbb69b60-9141-4043-acd4-12f2b11ec386',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>“We do not proactively determine whether to exclude a particular company or sector since it would be inconsistent with the stated ETF objective. If an investor did want a strategy that considered climate issues or other ESG [environmental, social and governance] factors, that would be a different product with a different index; we can provide that too.”</p>',
-				},
-				{
-					elementId: '5a6e1559-4c58-426d-b07f-a1523ed2577a',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Asset managers are increasingly finding themselves at the heart of social and environmental issues, and corporate governance experts have <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3282794">raised concerns</a> about conflicts of interest in their business models.</p>',
-				},
-				{
-					elementId: '2d656cd4-d663-4069-adf7-1bb84f5412d7',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Campaigners are demanding asset managers vote out company directors who are not deemed to be taking sufficient action.</p>',
-				},
-				{
-					elementId: '56bb9552-e53b-4c69-a8a2-b3e315471258',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In June, the London-based Legal &amp; General, formerly a top 20 investor in ExxonMobil, announced it was selling a $300m stake in the company and would use remaining shares to vote against the chief executive, Darren Woods.</p>',
-				},
-				{
-					elementId: '2fe7ef7f-607b-4cd5-a5c8-0abae0bbd5e1',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>But environmental shareholder proposals face increasing challenges from the management of fossil fuel companies, which are being sustained by the American regulator, the Securities and Exchange Commission. The SEC declined to comment.</p>',
-				},
-				{
-					elementId: '2a8e9f29-4420-449b-b3d0-c58fb97496d4',
-					scriptUrl:
-						'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
-					alt: 'Graphs on climate motions making it to a vote.',
-					_type:
-						'model.dotcomrendering.pageElements.InteractiveBlockElement',
-					url:
-						'https://interactive.guim.co.uk/uploader/embed/2019/10/index-html-zip/giv-3902IuFhH1AZI8qy/',
-					isMandatory: false,
-				},
-				{
-					elementId: '5c6cb035-574b-4b09-b1ec-fa219332bbe3',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>In April, ExxonMobil shareholders were denied a vote on whether the company should set targets for cutting greenhouse gas emissions by the SEC, which called the proposal an attempt to “micromanage” the company.</p>',
-				},
-				{
-					elementId: 'ee74cfc2-acd1-4efd-83e3-39e0f03c45ee',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Data for the 2019 season of annual general meetings for shareholders, provided by Institutional Shareholder Services, shows that only a quarter of proposals made it to a vote at companies in the US, with 79 of the 105 motions either withdrawn or omitted.</p>',
-				},
-				{
-					elementId: 'd8298464-163c-4997-8844-207cbe606505',
-					_type: 'model.dotcomrendering.pageElements.QABlockElement',
-					html:
-						'<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
-					id: 'e182ee5f-c378-4474-b7da-79f6b0a671b3',
-					title: 'What is the polluters project?',
-					credit: '',
-				},
-				{
-					elementId: 'd6017d47-3b09-4277-a1db-d3c60927e321',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Despite setbacks, other proposals and engagements by asset managers have been more successful. In an industry first last year, intense pressure from shareholders forced Royal Dutch Shell to set carbon emission targets linked to executive pay. The decision was backed by Climate Action 100+, a group of $35tn investors who are pushing fossil fuel companies to react to the crisis.</p>',
-				},
-				{
-					elementId: 'ee0542ab-98b9-4c83-b1cc-7162c105e77e',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>Many pension funds and asset managers support schemes to improve information about how climate-critical companies are responding to environmental concerns, including the Transition Pathway Initiative, which grades the boards of fossil fuel, energy and transport companies on their response.</p>',
-				},
-				{
-					elementId: '9224497b-c3a6-417d-8a01-63408f2d5710',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
-					html:
-						'<p>BlackRock, Vanguard and State Street are supporters of the Task Force on Climate-related Financial Disclosures, a voluntary scheme chaired by the former New York mayor Michael Bloomberg to improve information.<br></p>',
+					weighting: 'immersive',
+					srcSet: [
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1300&quality=85&auto=format&fit=max&s=9b43c6dcdf51698e660b190e70e6b1bd',
+							width: 1300,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=1ad0b7861c0639e03a8a0eef924a529f',
+							width: 2600,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1140&quality=85&auto=format&fit=max&s=a2e1fb061bb2919de67a662f9b3177a7',
+							width: 1140,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=74ea7cd8a3b3c6e29adc9888507715bd',
+							width: 2280,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1125&quality=85&auto=format&fit=max&s=6a7479bc71ed7fa7067ad904ffc06f7f',
+							width: 1125,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=94e79e14befc958842657cc4f361dd88',
+							width: 2250,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=965&quality=85&auto=format&fit=max&s=fb9c11ded4e499512674f3a73ba9ba2b',
+							width: 965,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=fdd2d99a951121b7bfbec0bffc88e66f',
+							width: 1930,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=725&quality=85&auto=format&fit=max&s=5daba6333bd0613bc2d1b1d0cbd4011e',
+							width: 725,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=c0c70e37a1ba504b58c8de38d227a989',
+							width: 1450,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=fdd5c31dbfab51be235a2d0005dfad44',
+							width: 645,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=d4d28132dd7be4d139087267cf5f3e3b',
+							width: 1290,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=e729d78e1811b164096c67fdcacc0d8d',
+							width: 465,
+						},
+						{
+							src:
+								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=04642cd32d5bcd6951c531e516aa746a',
+							width: 930,
+						},
+					],
 				},
 			],
-			id: '5d887cc78f0834740f3c0692',
+			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+			elementId: 'f5e82ccd-b0ce-4885-9851-40ab10f845b3',
+		},
+	],
+	webPublicationDate: '2019-10-14T15:23:44.000Z',
+	blocks: [
+		{
+			id: '5d97218b8f08fbb0c1720cfa',
+			elements: [
+				{
+					html:
+						'<h2><strong>Put climate on the ballot paper</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '875715e3-d462-47a5-b625-9f82592bf8e4',
+				},
+				{
+					html:
+						'<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '72e42f42-6fb0-47e6-9d42-68aac4966095',
+				},
+				{
+					html:
+						'<h2><strong>End</strong><strong> fossil fuel subsidies</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'aa6682ee-0546-4189-a2ef-113c7ca54e2f',
+				},
+				{
+					html:
+						'<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '51f79ee4-12b9-4f83-9052-64030474d543',
+				},
+				{
+					id: 'e182ee5f-c378-4474-b7da-79f6b0a671b3',
+					title: 'What is the polluters project?',
+					html:
+						'<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
+					credit: '',
+					_type: 'model.dotcomrendering.pageElements.QABlockElement',
+					elementId: 'be8e5f66-dc6d-4b1c-ae8b-40edc22e58c6',
+				},
+				{
+					html: '<h2><strong>Put a price on carbon</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '993a73b8-2f96-4d72-9ace-8cc9efdcfff0',
+				},
+				{
+					html:
+						'<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b1665c05-1ab5-4ddc-bad4-d638bad08a75',
+				},
+				{
+					html:
+						'<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '2ca85750-5b60-4a79-9edb-549e5c57859e',
+				},
+				{
+					html: '<h2><strong>Stop flaring</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '68dbe99b-a762-49a2-9137-6bd2d0ecbd46',
+				},
+				{
+					html:
+						'<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>. </p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b02cdc93-3cb8-499f-b6b8-96367d99dc35',
+				},
+				{
+					html:
+						'<h2><strong>Roll out large scale carbon capture and storage</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '522afc65-b5a7-4a95-b931-0ddcb0a9fcb0',
+				},
+				{
+					html:
+						'<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'c52e778f-f27d-48b7-ad3b-93dcab3ff1f3',
+				},
+				{
+					html:
+						'<h2><strong>Halt investment in fossil fuels</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'a14d430a-912f-4a44-a26e-02a8bf6e0019',
+				},
+				{
+					html:
+						'<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b90e8c7d-d2f7-4495-a5a3-935aacc237ff',
+				},
+				{
+					html:
+						'<h2><strong>Establish market metrics on climate change</strong></h2>',
+					_type:
+						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '3a74c518-1a9a-40af-9b68-432a3e467dd4',
+				},
+				{
+					html:
+						'<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
+					_type:
+						'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '8aec6d63-b1e7-4c03-9853-59ccaf42dc35',
+				},
+			],
+			blockCreatedOn: 1570185611000,
+			blockCreatedOnDisplay: '11.40 BST',
+			blockLastUpdated: 1571065395000,
+			blockLastUpdatedDisplay: '16.03 BST',
+			blockFirstPublished: 1570185619000,
+			blockFirstPublishedDisplay: '11.40 BST',
+			primaryDateLine: 'Mon 14 Oct 2019 16.23 BST',
+			secondaryDateLine: 'Last modified on Mon 14 Oct 2019 16.25 BST',
 		},
 	],
 	linkedData: [
@@ -3152,7 +1991,7 @@ export const SpecialReport: CAPIType = {
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://amp.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+				'https://amp.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -3179,61 +2018,75 @@ export const SpecialReport: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdG8tYWdlLTIwMTkucG5n&enable=upscale&s=679ee83cd2271fb0b26b2cd135be6411',
-				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4bb041a9a5874018d06418523b32ec8c',
-				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=4a0656b66d5e6b573815a54af1b5573a',
-				'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1200&quality=85&auto=format&fit=max&s=20ed795fcb0bd75efe4651fb31411c08',
+				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=ddc1915c083b39e79506d0683a0f0d66',
+				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bc4a7dc47c140a706d377f0fc0adf209',
+				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=371a03ac29737cecdd87eef843b0492c',
+				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&quality=85&auto=format&fit=max&s=265c2f3e1501c89984f9e3b003aa9c1c',
 			],
 			author: [
+				{
+					'@type': 'Person',
+					name: 'Fiona Harvey',
+					sameAs: 'https://www.theguardian.com/profile/fiona-harvey',
+				},
+				{
+					'@type': 'Person',
+					name: 'Damian Carrington',
+					sameAs:
+						'https://www.theguardian.com/profile/damiancarrington',
+				},
 				{
 					'@type': 'Person',
 					name: 'Patrick Greenfield',
 					sameAs:
 						'https://www.theguardian.com/profile/patrick-greenfield',
 				},
+				{
+					'@type': 'Person',
+					name: 'Jonathan Watts',
+					sameAs: 'https://www.theguardian.com/profile/jonathanwatts',
+				},
 			],
-			datePublished: '2019-10-12T11:00:19.000Z',
+			datePublished: '2019-10-14T15:23:44.000Z',
 			headline:
-				"World's top three asset managers oversee $300bn fossil fuel investments",
-			dateModified: '2019-10-12T18:40:38.000Z',
+				'How do we rein in the fossil fuel industry? Here are eight ideas',
+			dateModified: '2019-10-14T15:25:06.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+				'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
 			'@id':
-				'https://www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+				'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			potentialAction: {
 				'@type': 'ViewAction',
 				target:
-					'android-app://com.guardian/https/www.theguardian.com/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+					'android-app://com.guardian/https/www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Sat 12 Oct 2019 12.00 BST',
+	webPublicationDateDisplay: 'Mon 14 Oct 2019 16.23 BST',
 	shouldHideAds: false,
 	webTitle:
-		"World's top three asset managers oversee $300bn fossil fuel investments",
+		'How do we rein in the fossil fuel industry? Here are eight ideas',
 	isSpecialReport: true,
 	isCommentable: false,
 	keyEvents: [],
 	config: {
-		avatarApiUrl: 'https://avatar.theguardian.com',
 		references: [
 			{
 				'rich-link':
 					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
 			},
 		],
-		isProd: true,
-		shortUrlId: '/p/ccmyh',
+		shortUrlId: '/p/d8ex5',
 		switches: {
 			prebidAppnexusUkRow: true,
 			clickToView: true,
+			abPuzzlesBanner: true,
 			prebidTrustx: true,
 			scAdFreeBanner: false,
-			abStickyNavTest: true,
 			compareVariantDecision: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
@@ -3257,7 +2110,7 @@ export const SpecialReport: CAPIType = {
 			prebidAppnexusInvcode: true,
 			prebidAppnexus: true,
 			enableDiscussionSwitch: true,
-			prebidXaxis: false,
+			prebidXaxis: true,
 			interactiveFullHeaderSwitch: false,
 			discussionAllPageSize: true,
 			prebidUserSync: true,
@@ -3266,7 +2119,6 @@ export const SpecialReport: CAPIType = {
 			breakingNews: true,
 			externalVideoEmbeds: true,
 			simpleReach: true,
-			abSignInGateCopyOpt: true,
 			carrotTrafficDriver: true,
 			geoMostPopular: true,
 			weAreHiring: true,
@@ -3303,12 +2155,12 @@ export const SpecialReport: CAPIType = {
 			prebidPubmatic: true,
 			serverShareCounts: true,
 			autoRefresh: true,
-			abCuratedContent3Carousel: true,
 			enhanceTweets: true,
 			prebidIndexExchange: true,
 			prebidOpenx: true,
 			idCookieRefresh: true,
 			sharingComments: true,
+			abSignInGateMandatory: true,
 			discussionPageSize: true,
 			smartAppBanner: false,
 			boostGaUserTimingFidelity: false,
@@ -3319,246 +2171,68 @@ export const SpecialReport: CAPIType = {
 			remoteBanner: true,
 			inizio: true,
 		},
-		hasYouTubeAtom: false,
-		inBodyInternalLinkCount: 0,
-		atomTypes: {
-			guide: false,
-			audio: false,
-			explainer: false,
-			profile: false,
-			chart: false,
-			timeline: false,
-			qanda: true,
-			commonsdivision: false,
-		},
 		keywordIds:
-			'environment/fossil-fuels,business/oilandgascompanies,business/business,environment/energy,business/energy-industry,environment/environment,business/corporate-governance',
-		blogIds: '',
+			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
 		sharedAdTargeting: {
-			se: ['the-polluters'],
 			ct: 'article',
-			co: ['patrick-greenfield'],
+			co: ['jennifer-rankin'],
 			url:
-				'/environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
+				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
-			ob: 't',
 			tn: ['news'],
 			p: 'ng',
 			k: [
-				'business',
-				'fossil-fuels',
-				'oilandgascompanies',
-				'energy',
-				'energy-industry',
-				'corporate-governance',
+				'eu',
+				'flooding',
+				'world',
+				'europe-news',
+				'natural-disasters',
+				'science',
 				'environment',
+				'climate-change',
+				'wildfires',
+				'scienceofclimatechange',
 			],
-			sh: 'https://www.theguardian.com/p/ccmyh',
+			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
-		beaconUrl: '//phar.gu-web.net',
-		campaigns: [
-			{
-				id: '5ecfd10f-4aac-459b-a060-d4b113b4b772',
-				name: 'The Polluters',
-				rules: [],
-				priority: 0,
-				displayOnSensitive: false,
-				fields: {
-					campaignId: 'ThePolluters',
-					_type: 'report',
-				},
-			},
-		],
-		calloutsUrl:
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-		requiresMembershipAccess: false,
-		hasMultipleVideosInPage: false,
-		onwardWebSocket:
-			'ws://api.nextgen.guardianapps.co.uk/recently-published',
-		a9PublisherId: '3722',
-		pbIndexSites: [
-			{
-				bp: 'D',
-				id: 208264,
-			},
-			{
-				bp: 'M',
-				id: 213535,
-			},
-			{
-				bp: 'T',
-				id: 215470,
-			},
-		],
 		toneIds: 'tone/news',
 		dcrSentryDsn:
 			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		idWebAppUrl: 'https://oauth.theguardian.com',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		omnitureAccount: 'guardiangu-network',
-		contributorBio: '',
-		pageCode: '6630110',
-		pillar: 'News',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/6d699370121c734690ce/graun.commercial.dcr.js',
+			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
 		discussionApiClientHeader: 'nextgen',
-		membershipUrl: 'https://membership.theguardian.com',
-		cardStyle: 'special-report',
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
-		shouldHideAdverts: false,
-		membershipAccess: '',
-		isPreview: false,
-		googletagJsUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		supportUrl: 'https://support.theguardian.com',
-		hasShowcaseMainElement: false,
-		isColumn: false,
 		isPaidContent: false,
-		sectionName: 'Environment',
-		mobileAppsAdUnitRoot: 'beta-guardian-app',
-		disableStickyTopBanner: true,
-		dfpAdUnitRoot: 'theguardian.com',
 		headline:
-			"World's top three asset managers oversee $300bn fossil fuel investments",
-		commentable: false,
+			'Fires and floods: maps of Europe predict scale of climate catastrophe',
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
-		commissioningDesks: 'uk-investigations',
-		inBodyExternalLinkCount: 6,
 		adUnit: '/59666047/theguardian.com/environment/article/ng',
-		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
 		videoDuration: 0,
 		stage: 'PROD',
-		idOAuthUrl: 'https://oauth.theguardian.com',
-		series: 'The polluters',
 		isSensitive: false,
 		isDev: false,
-		thirdPartyAppsAccount: 'guardiangu-thirdpartyapps',
-		richLink: '/environment/2015/oct/19/sign-up-to-the-green-light-email',
-		avatarImagesUrl: 'https://avatar.guim.co.uk',
-		trackingNames: 'UK Investigations ',
-		fbAppId: '180444840287',
-		externalEmbedHost: 'https://embed.theguardian.com',
 		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		keywords:
-			'Fossil fuels,Oil and gas companies,Business,Energy,Energy industry,Environment,Corporate governance',
+			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
 		revisionNumber: 'DEV',
-		blogs: '',
 		section: 'environment',
-		hasInlineMerchandise: false,
-		locationapiurl: '/weatherapi/locations?query=',
-		buildNumber: '37557',
 		isPhotoEssay: false,
-		seriesId: 'environment/series/the-polluters',
 		ampIframeUrl:
 			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
-		userAttributesApiUrl:
-			'https://members-data-api.theguardian.com/user-attributes',
 		isLive: false,
-		publication: 'The Observer',
 		host: 'https://www.theguardian.com',
 		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
 		contentType: 'Article',
-		facebookIaAdUnitRoot: 'facebook-instant-articles',
-		ophanEmbedJsUrl: '//j.ophan.co.uk/ophan.embed',
 		idUrl: 'https://profile.theguardian.com',
-		thumbnail:
-			'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/500.jpg?quality=85&auto=format&fit=max&s=dcc83b9143f40ec972bf56d83e7a41d2',
-		isFront: false,
-		wordCount: 1361,
-		author: 'Patrick Greenfield',
+		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		nonKeywordTagIds:
-			'environment/series/the-polluters,type/article,tone/news,profile/patrick-greenfield,publication/theobserver,theobserver/news,theobserver/news/uknews,tracking/commissioningdesk/uk-investigations',
 		pageId:
-			'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-		forecastsapiurl: '/weatherapi/forecast',
-		assetsPath: 'https://assets.guim.co.uk/',
-		lightboxImages: {
-			id:
-				'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-			headline:
-				"World's top three asset managers oversee $300bn fossil fuel investments",
-			shouldHideAdverts: false,
-			standfirst:
-				'<p>Data reveals crucial role of BlackRock, State Street and Vanguard in climate crisis</p>',
-			images: [
-				{
-					caption:
-						'The CEOs of BlackRock, Vanguard and State Street, which together oversee assets worth more than China’s entire GDP.',
-					credit: 'Illustration: Guardian Design',
-					displayCredit: true,
-					src:
-						'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=700&quality=85&auto=format&fit=max&s=2271f9bc101d521731c8576abcd25071',
-					srcsets:
-						'https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1920&quality=85&auto=format&fit=max&s=43a2e1452f51488d9e3b0131399fa743 1920w, https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1225&quality=85&auto=format&fit=max&s=bd5d2b694b8ed94ff22065b89ed65825 1225w, https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=1065&quality=85&auto=format&fit=max&s=84af39bc4df18d7b6f428544d04a5d43 1065w, https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=965&quality=85&auto=format&fit=max&s=3c220076ab9721f8350b3466b8beed61 965w, https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=725&quality=85&auto=format&fit=max&s=0472dc64e585660aa70dc877443011df 725w, https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=645&quality=85&auto=format&fit=max&s=b2e1f22986fd04d12de11d3b8d7819dc 645w, https://i.guim.co.uk/img/media/d8da03945736194ce74fe635c925b11e1aaa2625/0_0_9653_5792/master/9653.jpg?width=465&quality=85&auto=format&fit=max&s=153fa0a2e6746719754b8fcd13f4e48d 465w',
-					sizes:
-						'(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
-					ratio: 1.6666091160220995,
-					role: 'None',
-					parentContentId:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-					id:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-				},
-				{
-					caption: '',
-					credit: 'Illustration: Guardian Design',
-					displayCredit: true,
-					src:
-						'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=92e99d9d86258afc4e6fbd49b830e4bd',
-					srcsets:
-						'https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1920&quality=85&auto=format&fit=max&s=51b48cbd7366604fdfc39805cc0e07db 1920w, https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1225&quality=85&auto=format&fit=max&s=82aa7db1194420956d73413ff4e191a1 1225w, https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=1065&quality=85&auto=format&fit=max&s=2e3f149e54bb2b3c98d7d4b10cae942c 1065w, https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=6d7433ad20ce7e8964633b229d93b6dc 965w, https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=6b7d46f74979690902f7c53c8a17d7d8 725w, https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=fe238500f09366fa51ca99dc311d12f0 645w, https://i.guim.co.uk/img/media/cfa3ce636fa36ab336488866e8f23fd98446d936/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0870fa508c7a327c8bf973c3000b5b0b 465w',
-					sizes:
-						'(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
-					ratio: 1,
-					role: 'None',
-					parentContentId:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-					id:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-				},
-				{
-					caption: '',
-					credit: 'Illustration: Guardian Design',
-					displayCredit: true,
-					src:
-						'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=95712b1476a748f227b045b38ec55fc7',
-					srcsets:
-						'https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1920&quality=85&auto=format&fit=max&s=c3b59086316df7d04aa94683bf260ce5 1920w, https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1225&quality=85&auto=format&fit=max&s=de2a1277aedf7f92371640da1b136112 1225w, https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=1065&quality=85&auto=format&fit=max&s=35d1e0526ce1cb32b27f1c2cee3c481d 1065w, https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=b9b73527199fffb6bce54a9553d682f3 965w, https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=09427239b898eb09b7dabf596cf547e5 725w, https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=5d42ec283036d849acd23124a8770936 645w, https://i.guim.co.uk/img/media/31277473f9d9c50e3603ef5b728c7a23cecad74f/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=945ceb6684c56e81be99320aa8d500bf 465w',
-					sizes:
-						'(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
-					ratio: 1,
-					role: 'None',
-					parentContentId:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-					id:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-				},
-				{
-					caption: '',
-					credit: 'Illustration: Guardian Design',
-					displayCredit: true,
-					src:
-						'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=700&quality=85&auto=format&fit=max&s=c12e8c67b39c59b45e501c52830e09ae',
-					srcsets:
-						'https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1920&quality=85&auto=format&fit=max&s=b752025bed4fc58de6c4fc257df7a309 1920w, https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1225&quality=85&auto=format&fit=max&s=f2f3f076ffa298a945cec05a49c2c6c1 1225w, https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=1065&quality=85&auto=format&fit=max&s=7bae9e63e64e9c30b2aab7f7334423b9 1065w, https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=965&quality=85&auto=format&fit=max&s=564ccad06ad32b498e00e8b57c52ba14 965w, https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=725&quality=85&auto=format&fit=max&s=a3f28bf3250d77cf6cbc7083378d9330 725w, https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=645&quality=85&auto=format&fit=max&s=2629105dc9f1018d66b6f81b88e5c7bc 645w, https://i.guim.co.uk/img/media/e62b690941f4c84d237d2eae674929ebdc688563/0_0_1240_1240/master/1240.jpg?width=465&quality=85&auto=format&fit=max&s=0d05938976befd23759effb3a5abbca4 465w',
-					sizes:
-						'(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px',
-					ratio: 1,
-					role: 'None',
-					parentContentId:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-					id:
-						'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
-				},
-			],
-		},
-		seriesTags: 'The polluters',
-		isImmersive: true,
-		dfpHost: 'pubads.g.doubleclick.net',
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		hbImpl: {
@@ -3566,1552 +2240,11 @@ export const SpecialReport: CAPIType = {
 			a9: true,
 		},
 		abTests: {},
-		shortUrl: 'https://www.theguardian.com/p/ccmyh',
-		isContent: true,
-		contentId:
-			'environment/2019/oct/12/top-three-asset-managers-fossil-fuel-investments',
 		edition: 'UK',
-		discussionFrontendUrl:
-			'https://assets.guim.co.uk/discussion/discussion-frontend.preact.iife.8bdbd9194e.js',
 		ipsosTag: 'environment',
-		ophanJsUrl: '//j.ophan.co.uk/ophan.ng',
-		atoms: ['e182ee5f-c378-4474-b7da-79f6b0a671b3'],
-		productionOffice: 'Uk',
-		dfpNonRefreshableLineItemIds: [
-			68842407,
-			70516407,
-			70931847,
-			71342607,
-			72502287,
-			72503607,
-			73773207,
-			73829127,
-			74480367,
-			74823567,
-			74824167,
-			75586767,
-			75588207,
-			76352007,
-			76437927,
-			76443087,
-			76443567,
-			76603287,
-			77324247,
-			77504847,
-			77546367,
-			77561007,
-			77590287,
-			77622207,
-			77747367,
-			78316047,
-			78455967,
-			78470967,
-			78507807,
-			78713607,
-			79009167,
-			79094487,
-			80502447,
-			80568087,
-			80568207,
-			80568327,
-			80568447,
-			80569047,
-			81002967,
-			82211367,
-			82339767,
-			82879287,
-			82881807,
-			83178927,
-			85253487,
-			85558287,
-			85961247,
-			86814567,
-			87004887,
-			87191607,
-			87726207,
-			87852807,
-			87878367,
-			88153527,
-			88333647,
-			88420407,
-			88526727,
-			88621527,
-			88861167,
-			89035647,
-			89035887,
-			89036607,
-			89084607,
-			89084967,
-			89141967,
-			89356167,
-			89743047,
-			89793087,
-			90159687,
-			90323007,
-			90359967,
-			90935367,
-			91095807,
-			91118247,
-			91732647,
-			91985967,
-			92216007,
-			92355087,
-			92436807,
-			92506887,
-			92681487,
-			92948847,
-			93121767,
-			93550767,
-			93717567,
-			93784887,
-			93785607,
-			93930207,
-			94193007,
-			94674927,
-			94822527,
-			95840847,
-			95931207,
-			96296367,
-			97980687,
-			98151207,
-			98165247,
-			98610447,
-			98671647,
-			98893047,
-			101192247,
-			101476527,
-			101684007,
-			101999127,
-			102061647,
-			102066567,
-			102344847,
-			102790767,
-			102792207,
-			102892767,
-			102894687,
-			102895167,
-			102895647,
-			103062327,
-			104218407,
-			106736607,
-			107115927,
-			107235087,
-			107509047,
-			107955087,
-			108799287,
-			108893967,
-			109638687,
-			109648167,
-			109761807,
-			109831287,
-			111055527,
-			111057567,
-			112799127,
-			112882647,
-			112888527,
-			112950567,
-			113374647,
-			113880927,
-			114906327,
-			115133247,
-			116149647,
-			117980727,
-			118236687,
-			118631847,
-			118934247,
-			119632887,
-			119737767,
-			121592967,
-			122583687,
-			123487167,
-			123873927,
-			123978567,
-			123996567,
-			123996927,
-			123997527,
-			124001247,
-			125878047,
-			126003687,
-			126004167,
-			130630407,
-			130630647,
-			130686687,
-			130686807,
-			130693287,
-			130777407,
-			130840767,
-			131115447,
-			131135007,
-			131652687,
-			132065367,
-			132325287,
-			132348327,
-			132758367,
-			133502127,
-			133852047,
-			133854327,
-			133989327,
-			134130087,
-			134567967,
-			134876607,
-			134979567,
-			135278007,
-			135292767,
-			135353727,
-			135773007,
-			135776847,
-			135826887,
-			135841887,
-			135850407,
-			136120767,
-			136236207,
-			136278807,
-			136455207,
-			136550247,
-			137025927,
-			137200287,
-			137382567,
-			140711127,
-			141827967,
-			142466367,
-			142883847,
-			143109567,
-			144237927,
-			146321007,
-			146324607,
-			146326287,
-			146339727,
-			146355567,
-			147500367,
-			147801807,
-			148446687,
-			148454487,
-			152119407,
-			153546927,
-			154108047,
-			154108167,
-			154112007,
-			154112367,
-			154113087,
-			154113207,
-			154114887,
-			154125567,
-			154126407,
-			154290807,
-			154290927,
-			154291287,
-			154291407,
-			154291527,
-			154291887,
-			154295007,
-			154295967,
-			154297527,
-			154303287,
-			154303527,
-			154332087,
-			154386087,
-			154387407,
-			154391247,
-			154391967,
-			154392927,
-			154394847,
-			154540527,
-			154544247,
-			154693287,
-			154793967,
-			154794087,
-			155010327,
-			155010447,
-			160437567,
-			163112127,
-			163372647,
-			165575127,
-			4345086236,
-			4345095356,
-			4345169885,
-			4345177565,
-			4345182855,
-			4345186250,
-			4349172433,
-			4360612711,
-			4360793649,
-			4371265570,
-			4371369115,
-			4393832120,
-			4400994377,
-			4428613611,
-			4443205897,
-			4451525654,
-			4480779579,
-			4498662865,
-			4512645730,
-			4516493673,
-			4516698376,
-			4517304218,
-			4517378559,
-			4517379732,
-			4517380203,
-			4539078702,
-			4548855586,
-			4549107258,
-			4552894255,
-			4555165414,
-			4555183615,
-			4555236856,
-			4555635725,
-			4555650690,
-			4555674903,
-			4555684517,
-			4555688577,
-			4556153989,
-			4556285026,
-			4556324359,
-			4556326294,
-			4556648082,
-			4556678787,
-			4557241378,
-			4557634755,
-			4557708173,
-			4557762374,
-			4557783054,
-			4557975570,
-			4558001894,
-			4558957661,
-			4559094602,
-			4559618101,
-			4560130208,
-			4579011086,
-			4579746196,
-			4584262791,
-			4586005424,
-			4586012639,
-			4598413679,
-			4608554346,
-			4612781170,
-			4613725167,
-			4652061785,
-			4659761500,
-			4666709965,
-			4671027724,
-			4671116147,
-			4680579583,
-			4680686606,
-			4684616813,
-			4688643082,
-			4689828177,
-			4698081076,
-			4698085906,
-			4698483837,
-			4698485673,
-			4698836785,
-			4700389583,
-			4702727917,
-			4705009339,
-			4706776058,
-			4715712191,
-			4719669541,
-			4739368280,
-			4741268540,
-			4741269263,
-			4752748306,
-			4770577846,
-			4794336160,
-			4795460127,
-			4813434715,
-			4814193728,
-			4816151238,
-			4818099525,
-			4843101319,
-			4843259745,
-			4843534303,
-			4843660002,
-			4851611473,
-			4900192015,
-			4907479084,
-			4950965688,
-			4953561994,
-			4956216414,
-			4956359904,
-			4957449531,
-			4957639563,
-			4961380948,
-			4963865755,
-			4972816526,
-			4974150367,
-			4974378154,
-			4974421332,
-			4974425718,
-			4974440616,
-			4974909599,
-			4974917942,
-			4979472123,
-			4979611347,
-			4986877832,
-			4986883844,
-			4988662283,
-			4995359684,
-			4995363299,
-			4995664790,
-			5000134545,
-			5000531182,
-			5000790614,
-			5004234716,
-			5008428214,
-			5008745198,
-			5014861653,
-			5015013326,
-			5017538127,
-			5017618519,
-			5017627117,
-			5017870049,
-			5017880045,
-			5017883228,
-			5017885847,
-			5018142683,
-			5022785722,
-			5025139359,
-			5030227901,
-			5031882476,
-			5033068546,
-			5033399504,
-			5043072122,
-			5048369906,
-			5048446713,
-			5048474394,
-			5048578765,
-			5048623579,
-			5048855939,
-			5048896271,
-			5050809297,
-			5051271119,
-			5051862705,
-			5052565344,
-			5058276148,
-			5058861737,
-			5060861401,
-			5080503991,
-			5084422705,
-			5084769575,
-			5086430628,
-			5088761690,
-			5089439429,
-			5094408955,
-			5095477169,
-			5095911984,
-			5100382690,
-			5106137416,
-			5106578097,
-			5108771973,
-			5108801259,
-			5108834289,
-			5109414149,
-			5109477985,
-			5112760220,
-			5114958382,
-			5115460784,
-			5119369095,
-			5119589887,
-			5119608376,
-			5119622833,
-			5120038706,
-			5122977293,
-			5124775878,
-			5133611676,
-			5133616221,
-			5135185825,
-			5135800503,
-			5135919817,
-			5136222120,
-			5138121327,
-			5138315476,
-			5138858096,
-			5139829373,
-			5140474550,
-			5146213631,
-			5154348200,
-			5154699509,
-			5168480847,
-			5168728930,
-			5168743192,
-			5168757037,
-			5168769787,
-			5168772901,
-			5168778655,
-			5168970951,
-			5169221645,
-			5169233267,
-			5169331108,
-			5169776357,
-			5170070115,
-			5174441005,
-			5176804734,
-			5179364348,
-			5182269069,
-			5188336066,
-			5189431118,
-			5189548223,
-			5189828618,
-			5191810924,
-			5192098697,
-			5193340753,
-			5194618937,
-			5198567242,
-			5199544925,
-			5199894385,
-			5202346462,
-			5202735047,
-			5203815492,
-			5214574966,
-			5221774258,
-			5225354826,
-			5235889561,
-			5237536072,
-			5240124892,
-			5240125189,
-			5246856420,
-			5247376316,
-			5255393980,
-			5266175458,
-			5266175890,
-			5266307404,
-			5266581080,
-			5277318463,
-			5277410634,
-			5278753376,
-			5281116862,
-			5281772778,
-			5287997419,
-			5288243957,
-			5292326384,
-			5294756358,
-			5295990867,
-			5296142792,
-			5298193115,
-			5301069538,
-			5307038116,
-			5308699342,
-			5308761803,
-			5310716113,
-			5311015892,
-			5311315855,
-			5313231081,
-			5314388147,
-			5317639803,
-			5317639806,
-			5317639815,
-			5317639824,
-			5317639827,
-			5317642026,
-			5317642029,
-			5317642032,
-			5317642035,
-			5317642038,
-			5317642041,
-			5317642044,
-			5317642047,
-			5317642050,
-			5317642215,
-			5317642218,
-			5317642221,
-			5317642224,
-			5317642227,
-			5317642230,
-			5317642233,
-			5317642236,
-			5317642239,
-			5317642287,
-			5317642293,
-			5317642296,
-			5317642299,
-			5317642302,
-			5317642305,
-			5317642308,
-			5317642311,
-			5317642314,
-			5317642500,
-			5317642506,
-			5317642509,
-			5317643991,
-			5317643994,
-			5317643997,
-			5317646859,
-			5317646862,
-			5317646865,
-			5317646868,
-			5317646871,
-			5317646874,
-			5317647027,
-			5317647030,
-			5317647033,
-			5317647036,
-			5317647039,
-			5317647042,
-			5317647078,
-			5317647081,
-			5317647084,
-			5317647087,
-			5317647090,
-			5317647093,
-			5317647117,
-			5317647240,
-			5317647243,
-			5317648032,
-			5317648035,
-			5317648038,
-			5317648065,
-			5317648068,
-			5317648074,
-			5317648077,
-			5317648212,
-			5317648215,
-			5317648218,
-			5317648230,
-			5317649196,
-			5317649199,
-			5317649202,
-			5317650693,
-			5317650696,
-			5317650699,
-			5317650702,
-			5317650705,
-			5317650708,
-			5317650711,
-			5317650714,
-			5317650717,
-			5317650888,
-			5317650891,
-			5317650894,
-			5317650897,
-			5317650900,
-			5317650903,
-			5317650906,
-			5317650909,
-			5317650945,
-			5317650948,
-			5317650951,
-			5317650954,
-			5317650957,
-			5317651080,
-			5317651083,
-			5317651086,
-			5317651089,
-			5317651110,
-			5317651113,
-			5317651116,
-			5317651119,
-			5317828458,
-			5317828461,
-			5317828464,
-			5317841238,
-			5317841241,
-			5317841244,
-			5317841247,
-			5317841277,
-			5317841400,
-			5317841403,
-			5317841406,
-			5317841409,
-			5317841412,
-			5317841436,
-			5317841439,
-			5317841442,
-			5317841445,
-			5317841448,
-			5317841721,
-			5317841727,
-			5317841730,
-			5317841733,
-			5317841736,
-			5317841739,
-			5317841742,
-			5317841745,
-			5317841748,
-			5317841901,
-			5317841904,
-			5317841907,
-			5317841910,
-			5317841913,
-			5317841916,
-			5317841919,
-			5317841922,
-			5317841925,
-			5317841958,
-			5317841961,
-			5317841964,
-			5317841967,
-			5317841970,
-			5317841973,
-			5317841976,
-			5317841997,
-			5317842120,
-			5317842690,
-			5317842693,
-			5317842696,
-			5317842699,
-			5317842702,
-			5317842705,
-			5317842708,
-			5317842849,
-			5317842852,
-			5317842855,
-			5317842858,
-			5317842861,
-			5317842864,
-			5317842867,
-			5317842909,
-			5317842912,
-			5317842915,
-			5317842918,
-			5317843080,
-			5317843083,
-			5317843086,
-			5317843089,
-			5317843092,
-			5317843110,
-			5317843113,
-			5317843116,
-			5317843119,
-			5317843137,
-			5317843140,
-			5317843143,
-			5317843146,
-			5317843149,
-			5317843155,
-			5317844526,
-			5317844529,
-			5317844544,
-			5317844547,
-			5317844556,
-			5317844559,
-			5317845060,
-			5317845063,
-			5317845066,
-			5317845069,
-			5317845072,
-			5317845075,
-			5317845078,
-			5317845081,
-			5317845084,
-			5317845087,
-			5317845090,
-			5317845093,
-			5317845096,
-			5317845270,
-			5317845273,
-			5317845276,
-			5317845279,
-			5317845282,
-			5317845285,
-			5317845288,
-			5317845291,
-			5317845294,
-			5317845297,
-			5317845300,
-			5317845303,
-			5317845306,
-			5317845324,
-			5317845327,
-			5317845330,
-			5317875310,
-			5317962891,
-			5318531695,
-			5318531698,
-			5318531701,
-			5318531704,
-			5318531707,
-			5318531710,
-			5318531713,
-			5318531716,
-			5318531719,
-			5318531722,
-			5318531896,
-			5318531899,
-			5318531902,
-			5318531905,
-			5318531908,
-			5318531911,
-			5318531914,
-			5318531917,
-			5318531956,
-			5318531959,
-			5318531962,
-			5318531965,
-			5318531968,
-			5318531971,
-			5318531974,
-			5318531977,
-			5318531980,
-			5318532124,
-			5318532127,
-			5318532130,
-			5318532883,
-			5318532886,
-			5318532898,
-			5318532901,
-			5318532913,
-			5318532916,
-			5318535796,
-			5318535799,
-			5318535802,
-			5318535805,
-			5318535808,
-			5318535811,
-			5318535814,
-			5318535817,
-			5318535982,
-			5318535985,
-			5318535988,
-			5318535991,
-			5318535994,
-			5318535997,
-			5318536000,
-			5318536003,
-			5318536057,
-			5318536060,
-			5318536063,
-			5318536078,
-			5318537953,
-			5318537956,
-			5318537959,
-			5318537962,
-			5318537965,
-			5318537968,
-			5318538121,
-			5318538124,
-			5318538127,
-			5318538130,
-			5318538133,
-			5318538136,
-			5318538172,
-			5318538175,
-			5318538178,
-			5318538181,
-			5318538184,
-			5318538208,
-			5318538610,
-			5318538613,
-			5318538616,
-			5318538622,
-			5318538625,
-			5318538628,
-			5318538631,
-			5318538634,
-			5318538670,
-			5318538673,
-			5318538676,
-			5318538679,
-			5318538682,
-			5318538685,
-			5318538688,
-			5318538691,
-			5318538694,
-			5318538841,
-			5318538844,
-			5318538847,
-			5318540599,
-			5318540602,
-			5318540605,
-			5318540608,
-			5318540611,
-			5318540614,
-			5318540617,
-			5318540620,
-			5318540776,
-			5318540779,
-			5318540782,
-			5318540785,
-			5318540788,
-			5318540791,
-			5318540794,
-			5318540797,
-			5318540839,
-			5318540842,
-			5318540845,
-			5318540848,
-			5318540851,
-			5318540854,
-			5318540857,
-			5318540860,
-			5318541097,
-			5318541100,
-			5318541103,
-			5318541106,
-			5318541109,
-			5318541112,
-			5318541115,
-			5318541118,
-			5318541241,
-			5318541280,
-			5318541283,
-			5318541289,
-			5318541292,
-			5318541295,
-			5318541298,
-			5318541301,
-			5318541304,
-			5318541349,
-			5318541352,
-			5318541355,
-			5318541358,
-			5318541481,
-			5318541484,
-			5318541487,
-			5318541490,
-			5318541493,
-			5318541517,
-			5318541520,
-			5318541523,
-			5318541778,
-			5318541781,
-			5318541784,
-			5318541799,
-			5318541802,
-			5318541805,
-			5318541808,
-			5318541823,
-			5318541826,
-			5318541835,
-			5318543272,
-			5318543275,
-			5318731807,
-			5318731810,
-			5318739007,
-			5318739010,
-			5318739013,
-			5318739016,
-			5318739019,
-			5318739022,
-			5318739055,
-			5318739058,
-			5318739061,
-			5318739064,
-			5318739067,
-			5318739070,
-			5318739094,
-			5318739097,
-			5318739100,
-			5318739103,
-			5318739106,
-			5318739109,
-			5318739112,
-			5318739250,
-			5318741269,
-			5318741272,
-			5318741275,
-			5318741278,
-			5318741401,
-			5318741425,
-			5318741428,
-			5318741431,
-			5318741434,
-			5318741437,
-			5318741473,
-			5318741476,
-			5318741479,
-			5318741482,
-			5318741485,
-			5318741488,
-			5318741491,
-			5318741494,
-			5318741503,
-			5318742385,
-			5318742388,
-			5318742391,
-			5318742394,
-			5318742397,
-			5318742400,
-			5318742403,
-			5318742406,
-			5318742451,
-			5318742454,
-			5318742457,
-			5318742460,
-			5318742463,
-			5318742466,
-			5318743129,
-			5318743132,
-			5318743135,
-			5318743138,
-			5318743141,
-			5318743162,
-			5318743165,
-			5318743168,
-			5318743192,
-			5318743195,
-			5318743198,
-			5318743321,
-			5318743324,
-			5318743327,
-			5318743339,
-			5318743426,
-			5318743429,
-			5318743432,
-			5318743435,
-			5318743438,
-			5318743561,
-			5318743564,
-			5318743567,
-			5318743603,
-			5318743606,
-			5318743609,
-			5318743612,
-			5318743615,
-			5318743618,
-			5318743621,
-			5318743624,
-			5318743627,
-			5318743630,
-			5318743648,
-			5318743651,
-			5318744077,
-			5318744080,
-			5318744083,
-			5318744086,
-			5318744116,
-			5318744119,
-			5318744122,
-			5318744125,
-			5318744128,
-			5318744155,
-			5318744158,
-			5318744281,
-			5318744284,
-			5318744287,
-			5318744293,
-			5318864639,
-			5318864762,
-			5318864765,
-			5318864768,
-			5318864771,
-			5318864774,
-			5318864777,
-			5318864780,
-			5318864816,
-			5318864819,
-			5318864822,
-			5318864825,
-			5318864828,
-			5318864831,
-			5318864834,
-			5318864837,
-			5318864840,
-			5318864843,
-			5318864846,
-			5318865008,
-			5318865011,
-			5318865014,
-			5318865017,
-			5318865020,
-			5318865023,
-			5318865026,
-			5318865029,
-			5318865032,
-			5318865050,
-			5318865053,
-			5318865056,
-			5318865059,
-			5318866262,
-			5318866265,
-			5318866268,
-			5318866271,
-			5318866274,
-			5318866277,
-			5318866280,
-			5318866283,
-			5318866286,
-			5318866451,
-			5318866454,
-			5318866457,
-			5318866460,
-			5318866463,
-			5318866466,
-			5318866469,
-			5318866472,
-			5318866475,
-			5318866529,
-			5318866532,
-			5318867009,
-			5318867012,
-			5318867018,
-			5318867039,
-			5318867162,
-			5318867165,
-			5318867186,
-			5318867189,
-			5318867192,
-			5318867195,
-			5318867198,
-			5318867201,
-			5318867204,
-			5318867207,
-			5318867210,
-			5318867213,
-			5318867270,
-			5318867279,
-			5318867405,
-			5318867411,
-			5318868881,
-			5318868884,
-			5318868887,
-			5318868890,
-			5318868896,
-			5318868899,
-			5318868902,
-			5318868905,
-			5318868908,
-			5318869082,
-			5318869085,
-			5318869088,
-			5318869091,
-			5318869094,
-			5318869097,
-			5318869100,
-			5318869103,
-			5318869106,
-			5318869163,
-			5318869166,
-			5318869169,
-			5318869172,
-			5318869175,
-			5318869178,
-			5318869181,
-			5318869184,
-			5318869325,
-			5318869328,
-			5318869331,
-			5318869334,
-			5318869337,
-			5318869340,
-			5318869370,
-			5318869373,
-			5318869376,
-			5318871548,
-			5318871551,
-			5318871554,
-			5318871557,
-			5318871560,
-			5318871563,
-			5318871566,
-			5318871569,
-			5318873177,
-			5318873180,
-			5318873183,
-			5318873186,
-			5318873189,
-			5318873192,
-			5318873195,
-			5318873198,
-			5318873234,
-			5318873237,
-			5318873240,
-			5318873243,
-			5318873246,
-			5318873249,
-			5318873252,
-			5318873255,
-			5318873420,
-			5318873423,
-			5318873426,
-			5318873429,
-			5318873432,
-			5318873435,
-			5318873441,
-			5318873444,
-			5318873447,
-			5318926492,
-			5319064274,
-			5319064277,
-			5319068810,
-			5319068813,
-			5319068816,
-			5319068819,
-			5319068822,
-			5319068825,
-			5319068828,
-			5319068855,
-			5319068858,
-			5319068861,
-			5319068864,
-			5319068867,
-			5319068870,
-			5319069017,
-			5319069020,
-			5319069023,
-			5319069026,
-			5319069029,
-			5319069047,
-			5319069050,
-			5319069248,
-			5319069251,
-			5319069254,
-			5319069257,
-			5319069260,
-			5319069263,
-			5319069266,
-			5319069299,
-			5319069302,
-			5319069305,
-			5319069308,
-			5319069311,
-			5319069314,
-			5319069317,
-			5319069320,
-			5319069356,
-			5319069359,
-			5319069482,
-			5319069485,
-			5319069488,
-			5319069491,
-			5319069494,
-			5319069497,
-			5319069521,
-			5319071465,
-			5319071468,
-			5319071483,
-			5319072671,
-			5319072674,
-			5319072677,
-			5319072710,
-			5319072713,
-			5319072716,
-			5319072719,
-			5319072842,
-			5319072845,
-			5319072848,
-			5319072866,
-			5319073331,
-			5319073334,
-			5319073337,
-			5319073340,
-			5319073346,
-			5319073349,
-			5319074633,
-			5319074636,
-			5319074639,
-			5319074762,
-			5319074765,
-			5319074768,
-			5319074771,
-			5319074774,
-			5319074777,
-			5319074780,
-			5319074783,
-			5319074846,
-			5319074849,
-			5319074852,
-			5319074855,
-			5319074876,
-			5319074879,
-			5319075014,
-			5319075017,
-			5319075020,
-			5319075023,
-			5319075029,
-			5319076067,
-			5319076070,
-			5319076073,
-			5319076076,
-			5319076079,
-			5319076202,
-			5319076205,
-			5319076208,
-			5319076211,
-			5319076214,
-			5319076217,
-			5319076220,
-			5319076223,
-			5319076226,
-			5324801169,
-			5329152860,
-			5330307720,
-			5330401363,
-			5330589013,
-			5338315860,
-			5339353594,
-			5340782318,
-			5341957914,
-			5342605889,
-			5344079902,
-			5344710145,
-			5345043263,
-			5345055992,
-			5345151767,
-			5352937640,
-			5353508550,
-			5354239380,
-			5356142370,
-			5357019739,
-			5357314970,
-			5357322221,
-			5357425331,
-			5357751081,
-			5358515412,
-			5358530526,
-			5358739382,
-			5359317792,
-			5359326660,
-			5359665347,
-			5360464781,
-			5363926759,
-			5368112341,
-			5368613457,
-			5370206536,
-			5370867504,
-			5372009946,
-			5372952707,
-			5381567907,
-			5381932514,
-			5387477683,
-			5389110394,
-			5389507817,
-			5394024873,
-			5395089503,
-			5395094296,
-			5395167785,
-			5398639115,
-			5402290248,
-			5414399009,
-			5418142465,
-			5423511818,
-			5423958631,
-			5424105011,
-			5424316299,
-			5426052636,
-			5428101561,
-			5428238577,
-			5437125968,
-			5441046622,
-			5441386781,
-			5443815241,
-			5445787189,
-			5452334545,
-			5452537381,
-			5454590081,
-			5457737962,
-			5457900371,
-			5459157095,
-			5461672778,
-			5465040945,
-			5466211677,
-			5466214734,
-			5466531271,
-			5466996373,
-			5466996946,
-			5469112465,
-			5469250311,
-			5471332305,
-			5472367436,
-			5473663887,
-			5478754708,
-			5479129658,
-			5479433266,
-			5483205317,
-			5483607329,
-			5492374239,
-			5498289762,
-			5501407883,
-			5501408349,
-			5507589986,
-			5509683030,
-			5514880750,
-			5516342298,
-			5516696296,
-			5519048334,
-			5520152069,
-			5522655965,
-			5523426655,
-			5527580296,
-			5528615963,
-			5532729331,
-			5534958866,
-			5536818852,
-			5537333007,
-			5538360938,
-			5539423093,
-			5543293170,
-			5544242098,
-			5545361453,
-			5545606755,
-			5545773485,
-			5545851295,
-			5548613451,
-			5548613664,
-			5549679783,
-			5552092245,
-			5553648922,
-			5554381329,
-			5558515143,
-			5558518443,
-			5558523552,
-			5558527566,
-			5558529060,
-			5558531448,
-			5558533656,
-			5558537001,
-			5558758006,
-			5559666853,
-			5559668044,
-			5559671971,
-			5559672454,
-			5559673918,
-			5559683413,
-			5559691654,
-			5559692581,
-			5559692584,
-			5559791415,
-			5559795497,
-			5559795962,
-			5559796472,
-			5559799676,
-			5559802297,
-			5559905222,
-			5563851720,
-			5564201933,
-			5565381780,
-			5565381786,
-			5565944093,
-			5566690440,
-			5566888543,
-			5570251365,
-			5570403307,
-			5571550025,
-			5580798708,
-			5581991484,
-			5582134793,
-			5584069572,
-			5585724471,
-			5588312812,
-			5588625820,
-			5589491990,
-			5592102428,
-			5592408199,
-			5592408430,
-			5595197911,
-			5595238291,
-			5595241649,
-			5596753106,
-			5597229243,
-			5598121671,
-			5598604034,
-			5598718487,
-			5598921509,
-			5599404146,
-			5599430842,
-			5600807700,
-			5600944001,
-			5601302339,
-			5601407261,
-			5604827229,
-			5604828453,
-			5605259263,
-			5605675396,
-			5608553753,
-			5609341878,
-			5609922209,
-			5610406314,
-			5612812556,
-			5613900227,
-			5616295359,
-			5617153347,
-			5617357126,
-			5617560946,
-			5618303037,
-			5619527905,
-			5620047587,
-			5620070327,
-			5620776237,
-			5620891323,
-			5620891383,
-			5621508639,
-			5621922383,
-			5622264429,
-			5622478028,
-			5622532278,
-			5622837268,
-			5624650559,
-			5624983821,
-			5625107183,
-			5625223661,
-			5625227978,
-			5625398582,
-			5625487113,
-			5625836589,
-			5625971457,
-			5626103406,
-			5626445497,
-			5627115043,
-			5627400383,
-			5627416481,
-			5627419082,
-			5627509177,
-			5627510314,
-			5627740002,
-			5627768068,
-			5628371464,
-			5628688753,
-			5629557118,
-			5629670544,
-			5629689756,
-			5629713588,
-			5630010461,
-			5630202171,
-			5630498106,
-			5630926258,
-			5631069021,
-			5631098598,
-			5631098862,
-			5631099042,
-			5631522170,
-			5631715415,
-			5631748556,
-			5631899222,
-			5631955125,
-			5632010289,
-			5632010304,
-			5632464370,
-			5632497345,
-			5632645568,
-			5632654007,
-			5632702032,
-			5633307960,
-			5633479388,
-			5633559344,
-			5633620717,
-			5633782264,
-			5634184944,
-			5634480439,
-			5634571147,
-			5634602605,
-			5634623455,
-			5634854126,
-			5635126238,
-			5635158211,
-			5635350659,
-			5635356428,
-			5636213651,
-			5636227163,
-			5636871103,
-		],
-		tones: 'News',
-		plistaPublicApiKey: '462925f4f131001fd974bebe',
 		isLiveBlog: false,
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-		googleSearchId: '007466294097402385199:m2ealvuxh1i',
-		allowUserGeneratedContent: false,
-		byline: 'Patrick Greenfield',
-		authorIds: 'profile/patrick-greenfield',
-		webPublicationDate: 1570878019000,
-		omnitureAmpAccount: 'guardiangu-thirdpartyapps',
-		isHosted: false,
-		hasPageSkin: false,
-		webTitle:
-			"World's top three asset managers oversee $300bn fossil fuel investments",
+		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
-		weatherapiurl: '/weatherapi/city',
-		googleSearchUrl: '//www.google.co.uk/cse/cse.js',
-		optimizeEpicUrl:
-			'https://support.theguardian.com/epic/control/index.html',
-		isSplash: false,
-		isNumberedList: false,
 	},
 };

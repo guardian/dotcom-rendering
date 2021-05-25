@@ -2,9 +2,10 @@ import fetchMock from 'fetch-mock';
 
 import { mostRead } from '@root/fixtures/manual/most-read';
 import { mostReadGeo } from '@root/fixtures/manual/most-read-geo';
-import { series } from '@root/fixtures/generated/series';
-import { related } from '@root/fixtures/generated/related';
+import { related } from '@root/fixtures/manual/related';
 import { discussion } from '@root/fixtures/manual/discussion';
+
+import { series } from '@root/fixtures/generated/series';
 import { storyPackage } from '@root/fixtures/generated/story-package';
 import { matchReport } from '@root/fixtures/generated/match-report';
 
@@ -95,6 +96,11 @@ const richLinkCard = {
 		'https://i.guim.co.uk/img/uploads/2017/10/06/Ben-Beaumont-Thomas,-L.png?width=173&quality=85&auto=format&fit=max&s=e5b75fdef4eecc5eba2db1966e9b5d93',
 	url: '/music/2018/aug/31/eminem-donald-trump-surprise-album-kamikaze',
 	pillar: 'culture',
+	format: {
+		design: 'ArticleDesign',
+		theme: 'CulturePillar',
+		display: 'StandardDisplay',
+	},
 };
 
 export const mockRESTCalls = (): void => {
@@ -137,6 +143,15 @@ export const mockRESTCalls = (): void => {
 		// Related
 		.get(
 			/.*api.nextgen.guardianapps.co.uk\/related.*/,
+			{
+				status: 200,
+				body: related,
+			},
+			{ overwriteRoutes: false },
+		)
+		// Popular in tag
+		.get(
+			/.*api.nextgen.guardianapps.co.uk\/popular-in-tag.*/,
 			{
 				status: 200,
 				body: related,

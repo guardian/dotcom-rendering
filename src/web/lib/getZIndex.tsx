@@ -27,13 +27,14 @@ const indices = [
 	'banner',
 	'dropdown',
 	'burger',
-	'stickyNav',
+	'expanded-veggie-menu-wrapper',
+	'expanded-veggie-menu',
 
 	// Header
 	'stickyAdWrapper',
 
-	// Header links (should be above The Guardian svg)
-	'headerLinks',
+	// Search link should be above The Guardian svg
+	'searchHeaderLink',
 	'TheGuardian',
 
 	// Wrapper after nav stuff

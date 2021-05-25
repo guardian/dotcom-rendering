@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { css } from 'emotion';
+import { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
 import { CommentCount } from '@frontend/web/components/CommentCount';
@@ -14,8 +14,9 @@ import { Flex } from '@frontend/web/components/Flex';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
-import { getDiscussion } from '@root/src/web/lib/getDiscussion';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
+import { joinUrl } from '@root/src/lib/joinUrl';
+import { useDiscussion } from '@root/src/web/lib/useDiscussion';
 import { Display } from '@guardian/types';
 
 type Props = {
@@ -71,10 +72,6 @@ export const Discussion = ({
 	beingHydrated,
 	display,
 }: Props) => {
-	const [commentCount, setCommentCount] = useState<number>();
-	const [isClosedForComments, setIsClosedForComments] = useState<boolean>(
-		true,
-	);
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
@@ -84,6 +81,11 @@ export const Discussion = ({
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
+
+	const { commentCount, isClosedForComments } = useDiscussion(
+		joinUrl([discussionApiUrl, 'discussion', shortUrlId]),
+	);
+
 	const hasCommentsHash =
 		typeof window !== 'undefined' &&
 		window.location &&
@@ -115,20 +117,6 @@ export const Discussion = ({
 			nonInteraction: true,
 		});
 	};
-
-	useEffect(() => {
-		const callFetch = async () => {
-			const response = await getDiscussion(discussionApiUrl, shortUrlId);
-			setCommentCount(response && response.discussion.commentCount);
-			setIsClosedForComments(
-				response && response.discussion.isClosedForComments,
-			);
-		};
-
-		if (isCommentable) {
-			callFetch().catch((e) => console.error(`callFetch - error: ${e}`));
-		}
-	}, [discussionApiUrl, shortUrlId, isCommentable]);
 
 	// Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
 	// If so, make a call to get the context of this comment so we know what page it is
@@ -178,14 +166,14 @@ export const Discussion = ({
 						palette={palette}
 						enableDiscussionSwitch={enableDiscussionSwitch}
 						user={user}
-						commentCount={commentCount || 0}
+						commentCount={commentCount}
 						isClosedForComments={isClosedForComments}
 					/>
 				}
 			>
 				<Flex>
 					<div
-						className={css`
+						css={css`
 							${from.leftCol} {
 								padding-left: 10px;
 							}
@@ -194,7 +182,7 @@ export const Discussion = ({
 					>
 						<Hide when="above" breakpoint="leftCol">
 							<div
-								className={css`
+								css={css`
 									padding-bottom: ${space[2]}px;
 								`}
 							>
@@ -204,7 +192,8 @@ export const Discussion = ({
 										enableDiscussionSwitch
 									}
 									user={user}
-									commentCount={commentCount || 0}
+									commentCount={commentCount}
+									isClosedForComments={isClosedForComments}
 								/>
 							</div>
 						</Hide>
@@ -269,7 +258,7 @@ export const Discussion = ({
 						{!hideAd && (
 							<RightColumn>
 								<div
-									className={css`
+									css={css`
 										position: static;
 										height: 100%;
 										padding-left: 20px;

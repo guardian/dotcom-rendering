@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import ArrowRight from '@frontend/static/icons/arrow-right.svg';
 import { palette } from '@guardian/src-foundations';
@@ -69,7 +69,7 @@ const rightAlignedIcon = css`
 	top: 0;
 `;
 
-export const ReaderRevenueButton: React.SFC<{
+export const ReaderRevenueButton: React.FunctionComponent<{
 	nav: NavType;
 	linkLabel: string;
 	rrLink: ReaderRevenuePosition;
@@ -85,18 +85,10 @@ export const ReaderRevenueButton: React.SFC<{
 	const isAmpHeader = rrLink === 'ampHeader';
 
 	return (
-		<div
-			className={cx([
-				isAmpHeader ? supportHeaderStyles : supportFooterStyles,
-			])}
-		>
-			<a className={supportLinkStyles} href={url}>
+		<div css={isAmpHeader ? supportHeaderStyles : supportFooterStyles}>
+			<a css={supportLinkStyles} href={url}>
 				{linkLabel}
-				<span
-					className={cx({
-						[rightAlignedIcon]: !!rightAlignIcon,
-					})}
-				>
+				<span css={!!rightAlignIcon && rightAlignedIcon}>
 					<ArrowRight />
 				</span>
 			</a>

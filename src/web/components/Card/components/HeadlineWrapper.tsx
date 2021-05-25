@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 type Props = {
 	children: React.ReactNode;
@@ -8,7 +7,7 @@ type Props = {
 
 export const HeadlineWrapper = ({ children, isFullCardImage }: Props) => (
 	<div
-		className={css`
+		css={css`
 			padding-bottom: ${isFullCardImage ? 0 : 8}px;
 			padding-left: ${isFullCardImage ? 0 : 5}px;
 			padding-right: 5px;

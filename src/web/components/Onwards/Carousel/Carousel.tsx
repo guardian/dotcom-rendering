@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { css, cx } from 'emotion';
+import { useRef, useState, useEffect } from 'react';
+import { css } from '@emotion/react';
 import libDebounce from 'lodash/debounce';
 
 import { headline } from '@guardian/src-foundations/typography';
@@ -281,9 +281,9 @@ const Title = ({
 	palette: Palette;
 	isCuratedContent?: boolean;
 }) => (
-	<h2 className={headerStyles}>
+	<h2 css={headerStyles}>
 		{isCuratedContent ? 'More from ' : ''}
-		<span className={titleStyle(palette, isCuratedContent)}>{title}</span>
+		<span css={titleStyle(palette, isCuratedContent)}>{title}</span>
 	</h2>
 );
 
@@ -304,21 +304,17 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 type CarouselCardProps = {
 	isFirst: boolean;
 	format: Format;
-	trailPalette: Palette;
-	display?: Display;
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
 	kickerText?: string;
 	imageUrl?: string;
 	isFullCardImage?: boolean;
-	dataComponent?: string;
 	dataLinkName?: string;
 };
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
 	format,
-	trailPalette,
 	linkTo,
 	imageUrl,
 	headlineText,
@@ -339,7 +335,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 		<Card
 			linkTo={linkTo}
 			format={format}
-			palette={trailPalette}
 			headlineText={headlineText}
 			webPublicationDate={webPublicationDate}
 			kickerText={kickerText || ''}
@@ -348,7 +343,10 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			alwaysVertical={true}
 			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
-			showQuotes={format.design === Design.Comment}
+			showQuotes={
+				format.design === Design.Comment ||
+				format.design === Design.Letter
+			}
 			dataLinkName={dataLinkName}
 		/>
 	</LI>
@@ -379,8 +377,8 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 			palette={palette}
 			isCuratedContent={isCuratedContent}
 		/>
-		<div className={dotsStyle}>
-			{trails.map((value, i) => (
+		<div css={dotsStyle}>
+			{trails.map((_, i) => (
 				<span
 					onClick={() => goToIndex(i)}
 					// This button is not particularly useful for keyboard users as the stories
@@ -388,7 +386,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 					// not available to keyboard
 					aria-hidden="true"
 					key={`dot-${i}`}
-					className={cx(
+					css={[
 						dotStyle,
 						i === index && dotActiveStyle(palette),
 						adjustNumberOfDotsStyle(
@@ -396,7 +394,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 							trails.length,
 							isFullCardImage,
 						),
-					)}
+					]}
 					data-link-name={`${
 						isFullCardImage ? 'carousel-large' : 'carousel-small'
 					}-nav-dot-${i}`}
@@ -526,10 +524,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	if (isFullCardImage) trails = convertToImmersive(trails);
 
 	return (
-		<div
-			className={wrapperStyle}
-			data-link-name={formatAttrString(heading)}
-		>
+		<div css={wrapperStyle} data-link-name={formatAttrString(heading)}>
 			<LeftColumn showRightBorder={false} showPartialRightBorder={true}>
 				<HeaderAndNav
 					heading={heading}
@@ -541,37 +536,34 @@ export const Carousel: React.FC<OnwardsType> = ({
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div className={cx(buttonContainerStyle, prevButtonContainerStyle)}>
+			<div css={[buttonContainerStyle, prevButtonContainerStyle]}>
 				<button
 					onClick={prev}
 					aria-label="Move carousel backwards"
-					className={cx(buttonStyle, prevButtonStyle(index))}
+					css={[buttonStyle, prevButtonStyle(index)]}
 					data-link-name={`${arrowName}-prev`}
 				>
 					<SvgChevronLeftSingle />
 				</button>
 			</div>
 
-			<div className={cx(buttonContainerStyle, nextButtonContainerStyle)}>
+			<div css={[buttonContainerStyle, nextButtonContainerStyle]}>
 				<button
 					onClick={next}
 					aria-label="Move carousel forwards"
-					className={cx(
-						buttonStyle,
-						nextButtonStyle(index, trails.length),
-					)}
+					css={[buttonStyle, nextButtonStyle(index, trails.length)]}
 					data-link-name={`${arrowName}-next`}
 				>
 					<SvgChevronRightSingle />
 				</button>
 			</div>
 			<div
-				className={containerStyles}
+				css={containerStyles}
 				data-component={ophanComponentName}
 				data-link={formatAttrString(heading)}
 			>
 				<Hide when="above" breakpoint="leftCol">
-					<div className={headerRowStyles}>
+					<div css={headerRowStyles}>
 						<HeaderAndNav
 							heading={heading}
 							trails={trails}
@@ -585,10 +577,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={prev}
 								aria-label="Move carousel backwards"
-								className={cx(
-									buttonStyle,
-									prevButtonStyle(index),
-								)}
+								css={[buttonStyle, prevButtonStyle(index)]}
 								data-link-name={`${arrowName}-prev`}
 							>
 								<SvgChevronLeftSingle />
@@ -596,10 +585,10 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<button
 								onClick={next}
 								aria-label="Move carousel forwards"
-								className={cx(
+								css={[
 									buttonStyle,
 									nextButtonStyle(index, trails.length),
-								)}
+								]}
 								data-link-name={`${arrowName}-next`}
 							>
 								<SvgChevronRightSingle />
@@ -609,7 +598,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</Hide>
 
 				<ul
-					className={carouselStyle(isFullCardImage)}
+					css={carouselStyle(isFullCardImage)}
 					ref={carouselRef}
 					data-component={`${variantComponentName} | maxIndex-${maxIndex}`}
 				>
@@ -618,7 +607,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 							url: linkTo,
 							headline: headlineText,
 							format: trailFormat,
-							palette: trailPalette,
 							webPublicationDate,
 							image: fallbackImageUrl,
 							carouselImages,
@@ -633,7 +621,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
 								format={trailFormat}
-								trailPalette={trailPalette}
 								linkTo={linkTo}
 								headlineText={headlineText}
 								webPublicationDate={webPublicationDate}

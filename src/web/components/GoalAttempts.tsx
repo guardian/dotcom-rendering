@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
@@ -24,7 +23,7 @@ const svgBackground = encodeURIComponent(
 
 const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 		`}
@@ -47,7 +46,7 @@ const Side = ({
 	backgroundColour: string;
 }) => (
 	<div
-		className={css`
+		css={css`
 			position: relative;
 			${headline.medium({ fontWeight: 'bold' })}
 			color: ${isLight(teamColours)
@@ -74,7 +73,7 @@ const Side = ({
 	>
 		{offTarget}
 		<div
-			className={css`
+			css={css`
 				${textSans.small()}
 				padding-top: 4px;
 			`}
@@ -82,7 +81,7 @@ const Side = ({
 			{position === 'left' && 'Off target'}
 		</div>
 		<div
-			className={css`
+			css={css`
 				position: absolute;
 				bottom: 0;
 				left: ${position === 'right' && 0};
@@ -107,7 +106,7 @@ const Side = ({
 		>
 			{onTarget}
 			<div
-				className={css`
+				css={css`
 					${textSans.small()}
 					padding-top: 4px;
 				`}

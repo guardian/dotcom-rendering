@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Design, Display, Pillar } from '@guardian/types';
 import { breakpoints } from '@guardian/src-foundations/mq';
 import { Section } from '@root/src/web/components/Section';
@@ -229,12 +227,12 @@ const trails: TrailType[] = [
 		format: {
 			display: Display.Standard,
 			theme: Pillar.News,
-			design: Design.Article,
+			design: Design.LiveBlog,
 		},
 		palette: decidePalette({
 			display: Display.Standard,
 			theme: Pillar.News,
-			design: Design.Article,
+			design: Design.LiveBlog,
 		}),
 		webPublicationDate: '2021-02-16T17:00:15.000Z',
 		headline:

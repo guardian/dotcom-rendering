@@ -1,18 +1,18 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Special } from '@guardian/types';
 import { palette } from '@guardian/src-foundations';
 import { body, textSans } from '@guardian/src-foundations/typography';
 
-import { pillarPalette, neutralBorder } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 // Note, this should only apply basic text styling. It is a case where we want
 // to re-use styling, but generally we should avoid this as it couples
 // components.
 
-export const ListStyle = (iconColour: string) => css`
+const ListStyle = (iconColour: string) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -33,18 +33,18 @@ export const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-export const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: Theme) => css`
 	a {
-		color: ${pillarPalette[pillar].dark};
+		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
 		border-bottom: 1px solid ${neutralBorder(pillar)};
 		:hover {
-			border-bottom: 1px solid ${pillarPalette[pillar].dark};
+			border-bottom: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
 		}
 	}
 `;
 
-export const TextStyle = (pillar: Theme) => css`
+const TextStyle = (pillar: Theme) => css`
 	strong {
 		font-weight: 700;
 	}
@@ -79,9 +79,9 @@ export const TextBlockComponent: React.FC<{
 	pillar: Theme;
 }> = ({ html, pillar }) => (
 	<span
-		className={
+		css={
 			pillar === Special.Labs
-				? cx(TextStyle(pillar), textStyleLabs)
+				? [TextStyle(pillar), textStyleLabs]
 				: TextStyle(pillar)
 		}
 		dangerouslySetInnerHTML={{

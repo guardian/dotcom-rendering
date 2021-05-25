@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Design, Display, Pillar } from '@guardian/types';
 
 import { decidePalette } from '../lib/decidePalette';
@@ -21,7 +19,6 @@ export const Medium = () => {
 				'email',
 				'linkedIn',
 				'messenger',
-				'pinterest',
 				'twitter',
 				'whatsApp',
 			]}
@@ -46,7 +43,6 @@ export const Small = () => {
 				'email',
 				'linkedIn',
 				'messenger',
-				'pinterest',
 				'twitter',
 				'whatsApp',
 			]}

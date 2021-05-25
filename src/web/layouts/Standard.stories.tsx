@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+
+import { breakpoints } from '@guardian/src-foundations/mq';
 
 import {
 	makeGuardianBrowserCAPI,
@@ -12,12 +14,15 @@ import { Analysis } from '@root/fixtures/generated/articles/Analysis';
 import { Feature } from '@root/fixtures/generated/articles/Feature';
 import { Live } from '@root/fixtures/generated/articles/Live';
 import { Editorial } from '@root/fixtures/generated/articles/Editorial';
+import { Letter } from '@root/fixtures/generated/articles/Letter';
 import { Interview } from '@root/fixtures/generated/articles/Interview';
 import { Quiz } from '@root/fixtures/generated/articles/Quiz';
 import { Recipe } from '@root/fixtures/generated/articles/Recipe';
 import { Comment } from '@root/fixtures/generated/articles/Comment';
 import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
+import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
+import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
@@ -31,18 +36,21 @@ mockRESTCalls();
 export default {
 	title: 'Layouts/Standard',
 	parameters: {
-		chromatic: { viewports: [1300], delay: 800, diffThreshold: 0.2 },
+		chromatic: {
+			viewports: [breakpoints.wide],
+			delay: 800,
+			diffThreshold: 0.2,
+		},
 	},
 };
 
 const convertToStandard = (CAPI: CAPIType) => {
 	return {
 		...CAPI,
-		pageType: {
-			...CAPI.pageType,
-			hasShowcaseMainElement: false,
+		format: {
+			...CAPI.format,
+			display: 'StandardDisplay' as CAPIDisplay,
 		},
-		isImmersive: false,
 	};
 };
 
@@ -94,7 +102,15 @@ export const CommentStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Comment);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-CommentStory.story = { name: 'Comment' };
+CommentStory.story = {
+	name: 'Comment',
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
+		// Cutout/byline interaction is a specific issue
+		// we look out for on mobile on opinion content
+		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
+	},
+};
 
 export const PhotoEssayStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PhotoEssay);
@@ -109,8 +125,8 @@ export const AnalysisStory = (): React.ReactNode => {
 AnalysisStory.story = {
 	name: 'Analysis',
 	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [480] },
+		viewport: { defaultViewport: 'mobileLandscape' },
+		chromatic: { viewports: [breakpoints.mobileLandscape] },
 	},
 };
 
@@ -123,9 +139,9 @@ FeatureStory.story = { name: 'Feature' };
 export const LiveStory = (): React.ReactNode => {
 	const LiveBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: true,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(LiveBlog);
@@ -136,9 +152,9 @@ LiveStory.story = { name: 'LiveBlog' };
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
 		...Live,
-		config: {
-			...Live.config,
-			isLive: false,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
 		},
 	};
 	const ServerCAPI = convertToStandard(DeadBlog);
@@ -154,8 +170,16 @@ EditorialStory.story = {
 	name: 'Editorial',
 	parameters: {
 		viewport: { defaultViewport: 'phablet' },
-		chromatic: { viewports: [660] },
+		chromatic: { viewports: [breakpoints.phablet] },
 	},
+};
+
+export const LetterStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Letter);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+LetterStory.story = {
+	name: 'Letter',
 };
 
 export const InterviewStory = (): React.ReactNode => {
@@ -166,7 +190,7 @@ InterviewStory.story = {
 	name: 'Interview',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [980] },
+		chromatic: { viewports: [breakpoints.desktop] },
 	},
 };
 
@@ -177,8 +201,7 @@ export const QuizStory = (): React.ReactNode => {
 QuizStory.story = {
 	name: 'Quiz',
 	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [1300] },
+		viewport: { defaultViewport: 'wide' },
 	},
 };
 
@@ -190,7 +213,7 @@ RecipeStory.story = {
 	name: 'Recipe',
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [375] },
+		chromatic: { viewports: [breakpoints.mobileMedium] },
 	},
 };
 
@@ -201,8 +224,7 @@ export const MatchReportStory = (): React.ReactNode => {
 MatchReportStory.story = {
 	name: 'MatchReport',
 	parameters: {
-		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [1330] },
+		viewport: { defaultViewport: 'wide' },
 	},
 };
 
@@ -212,4 +234,241 @@ export const LabsStory = (): React.ReactNode => {
 };
 LabsStory.story = {
 	name: 'Labs',
+};
+
+export const SpecialReportStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(SpecialReport);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+SpecialReportStory.story = {
+	name: 'SpecialReport',
+};
+
+export const NumberedListStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(NumberedList);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+NumberedListStory.story = {
+	name: 'NumberedList',
+};
+
+// Anniversary stuff (Delete once event is over)
+
+const convertToAnniversary = (CAPI: CAPIType) => {
+	return {
+		...CAPI,
+		config: {
+			...CAPI.config,
+			switches: {
+				...CAPI.config.switches,
+				anniversaryHeaderSvg: true,
+			},
+			abTests: {
+				anniversaryAtomVariant: 'variant',
+			},
+		},
+	};
+};
+
+export const ArticleAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Article);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+ArticleAnniversaryStory.story = { name: 'ArticleAnniversary' };
+
+export const ReviewAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Review);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+ReviewAnniversaryStory.story = { name: 'ReviewAnniversary' };
+
+export const ReviewNoStarAnniversaryStory = (): React.ReactNode => {
+	const ReviewWithoutStars = {
+		...Review,
+		starRating: undefined,
+	};
+	const ServerCAPI = convertToStandard(ReviewWithoutStars);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+ReviewNoStarAnniversaryStory.story = {
+	name: 'ReviewAnniversary without stars',
+};
+
+export const PrintShopAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(PrintShop);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+PrintShopAnniversaryStory.story = { name: 'PrintShopAnniversary' };
+
+export const CommentAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Comment);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+CommentAnniversaryStory.story = {
+	name: 'CommentAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
+		// Cutout/byline interaction is a specific issue
+		// we look out for on mobile on opinion content
+		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
+	},
+};
+
+export const PhotoEssayAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(PhotoEssay);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+PhotoEssayAnniversaryStory.story = { name: 'PhotoEssayAnniversary' };
+
+export const AnalysisAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Analysis);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+AnalysisAnniversaryStory.story = {
+	name: 'AnalysisAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'mobileLandscape' },
+		chromatic: { viewports: [breakpoints.mobileLandscape] },
+	},
+};
+
+export const FeatureAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Feature);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+FeatureAnniversaryStory.story = { name: 'FeatureAnniversary' };
+
+export const LiveAnniversaryStory = (): React.ReactNode => {
+	const LiveBlog = {
+		...Live,
+		format: {
+			...Live.format,
+			design: 'LiveBlogDesign' as CAPIDesign,
+		},
+	};
+	const ServerCAPI = convertToStandard(LiveBlog);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+LiveAnniversaryStory.story = { name: 'LiveBlogAnniversary' };
+
+export const DeadAnniversaryStory = (): React.ReactNode => {
+	const DeadBlog = {
+		...Live,
+		format: {
+			...Live.format,
+			design: 'DeadBlogDesign' as CAPIDesign,
+		},
+	};
+	const ServerCAPI = convertToStandard(DeadBlog);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+DeadAnniversaryStory.story = { name: 'DeadBlogAnniversary' };
+
+export const EditorialAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Editorial);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+EditorialAnniversaryStory.story = {
+	name: 'EditorialAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'phablet' },
+		chromatic: { viewports: [breakpoints.phablet] },
+	},
+};
+
+export const LetterAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Letter);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+LetterAnniversaryStory.story = {
+	name: 'LetterAnniversary',
+};
+
+export const InterviewAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Interview);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+InterviewAnniversaryStory.story = {
+	name: 'InterviewAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'desktop' },
+		chromatic: { viewports: [breakpoints.desktop] },
+	},
+};
+
+export const QuizAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Quiz);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+QuizAnniversaryStory.story = {
+	name: 'QuizAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'wide' },
+	},
+};
+
+export const RecipeAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Recipe);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+RecipeAnniversaryStory.story = {
+	name: 'RecipeAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
+		chromatic: { viewports: [breakpoints.mobileMedium] },
+	},
+};
+
+export const MatchReportAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(MatchReport);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+MatchReportAnniversaryStory.story = {
+	name: 'MatchReportAnniversary',
+	parameters: {
+		viewport: { defaultViewport: 'wide' },
+	},
+};
+
+export const LabsAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Labs);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+LabsAnniversaryStory.story = {
+	name: 'LabsAnniversary',
+};
+
+export const SpecialReportAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(SpecialReport);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+SpecialReportAnniversaryStory.story = {
+	name: 'SpecialReportAnniversary',
+};
+
+export const NumberedListAnniversaryStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(NumberedList);
+	const AnniversaryCAPI = convertToAnniversary(ServerCAPI);
+	return <HydratedLayout ServerCAPI={AnniversaryCAPI} />;
+};
+NumberedListAnniversaryStory.story = {
+	name: 'NumberedListAnniversary',
 };

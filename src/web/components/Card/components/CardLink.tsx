@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Format, Special } from '@guardian/types';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -49,6 +48,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 
 	switch (format.design) {
 		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return css`
 				${baseLinkStyles};
@@ -95,7 +95,7 @@ export const CardLink = ({
 }: Props) => (
 	<a
 		href={linkTo}
-		className={linkStyles(format, palette)}
+		css={linkStyles(format, palette)}
 		data-link-name={dataLinkName}
 	>
 		{children}

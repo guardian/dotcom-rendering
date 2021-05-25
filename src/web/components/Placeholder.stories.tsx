@@ -1,11 +1,10 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Placeholder } from './Placeholder';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 620px;
 			padding: 20px;
 		`}
@@ -16,7 +15,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 		`}
@@ -27,7 +26,7 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 
 const Column = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: column;
 		`}

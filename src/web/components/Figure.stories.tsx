@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React from 'react';
-import { css } from 'emotion';
+
+import { css } from '@emotion/react';
 
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -31,7 +31,7 @@ const SomeText = () => (
 
 const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 	<div
-		className={css`
+		css={css`
 			background-color: grey;
 			width: 100%;
 			height: ${heightInPixels}px;
@@ -67,7 +67,7 @@ export const InlineStory = () => {
 				</LeftColumn>
 				<ArticleContainer>
 					<SomeText />
-					<Figure>
+					<Figure isMainMedia={false}>
 						<Grey />
 					</Figure>
 					<SomeText />
@@ -91,7 +91,7 @@ export const SupportingStory = () => {
 				<ArticleContainer>
 					<SomeText />
 					<SomeText />
-					<Figure role="supporting">
+					<Figure isMainMedia={false} role="supporting">
 						<Grey heightInPixels={500} />
 					</Figure>
 					<SomeText />
@@ -118,7 +118,7 @@ export const ImmersiveStory = () => {
 				</LeftColumn>
 				<ArticleContainer>
 					<SomeText />
-					<Figure role="immersive">
+					<Figure isMainMedia={false} role="immersive">
 						<Grey heightInPixels={700} />
 					</Figure>
 					<SomeText />
@@ -141,7 +141,7 @@ export const ThumbnailStory = () => {
 				</LeftColumn>
 				<ArticleContainer>
 					<SomeText />
-					<Figure role="thumbnail">
+					<Figure isMainMedia={false} role="thumbnail">
 						<Grey heightInPixels={200} />
 					</Figure>
 					<SomeText />
@@ -165,7 +165,7 @@ export const ShowcaseStory = () => {
 				</LeftColumn>
 				<ArticleContainer>
 					<SomeText />
-					<Figure role="showcase">
+					<Figure isMainMedia={false} role="showcase">
 						<Grey heightInPixels={500} />
 					</Figure>
 					<SomeText />
@@ -188,7 +188,7 @@ export const HalfWidthStory = () => {
 				</LeftColumn>
 				<ArticleContainer>
 					<SomeText />
-					<Figure role="halfWidth">
+					<Figure isMainMedia={false} role="halfWidth">
 						<Grey />
 					</Figure>
 					<SomeText />

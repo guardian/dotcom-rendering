@@ -1,11 +1,13 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
 	brandAltBackground,
 	brandBackground,
 	brandBorder,
+	brandLine,
+	labs,
+	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Special } from '@guardian/types';
@@ -35,6 +37,9 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
+import { Nav } from '@frontend/web/components/Nav/Nav';
+import { LabsHeader } from '@frontend/web/components/LabsHeader';
+import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -42,9 +47,9 @@ import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
+	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { NavGroupEager } from '@root/src/web/components/Nav/StickNavTest/StickyNav';
 
 const StandardGrid = ({
 	children,
@@ -54,7 +59,7 @@ const StandardGrid = ({
 	isMatchReport: boolean;
 }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -75,19 +80,23 @@ const StandardGrid = ({
 
 				grid-column-gap: 10px;
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
 									'title  border  matchNav     right-column'
 									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -96,7 +105,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -104,12 +113,16 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Left Column
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
-					grid-template-columns:
-						140px /* Left Column */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 
 					${isMatchReport
 						? css`
@@ -125,7 +138,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
+									'.      border  standfirst    right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -133,10 +146,14 @@ const StandardGrid = ({
 						  `}
 				}
 
+				/* 
+					Explanation of each unit of grid-template-columns
+
+					Main content
+					Right Column
+				*/
 				${until.leftCol} {
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 1fr 300px;
 					${isMatchReport
 						? css`
 								grid-template-areas:
@@ -280,11 +297,6 @@ const ageWarningMargins = css`
 	}
 `;
 
-const stickyNavRootStyle = css`
-	display: inline;
-	position: relative;
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -324,259 +336,308 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide">
-				<Stuck>
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						shouldCenter={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</Stuck>
-				{format.theme !== Special.Labs && (
-					<Section
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
-						/>
-					</Section>
-				)}
+				<>
+					<Stuck>
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+								display={format.display}
+							/>
+						</Section>
+					</Stuck>
+					{format.theme !== Special.Labs && (
+						<Section
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							backgroundColour={brandBackground.primary}
+						>
+							<Header
+								edition={CAPI.editionId}
+								idUrl={CAPI.config.idUrl}
+								mmaUrl={CAPI.config.mmaUrl}
+								isAnniversary={
+									CAPI.config.switches.anniversaryHeaderSvg
+								}
+							/>
+						</Section>
+					)}
+				</>
 			</div>
 
-			<div>
-				<div id="sticky-nav-root" className={stickyNavRootStyle}>
-					<div data-name="placeholder">
-						<NavGroupEager
-							capiData={CAPI}
-							navData={NAV}
-							palette={palette}
-							format={format}
-						/>
-					</div>
-				</div>
+			<Section
+				showSideBorders={true}
+				borderColour={brandLine.primary}
+				showTopBorder={false}
+				padded={false}
+				backgroundColour={brandBackground.primary}
+			>
+				<Nav
+					nav={NAV}
+					format={{
+						...format,
+						theme: getCurrentPillar(CAPI),
+					}}
+					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+					edition={CAPI.editionId}
+				/>
+			</Section>
 
+			{NAV.subNavSections && format.theme !== Special.Labs && (
 				<Section
 					backgroundColour={palette.background.article}
 					padded={false}
-					showTopBorder={false}
+					sectionId="sub-nav-root"
 				>
-					<GuardianLines count={4} pillar={format.theme} />
+					<SubNav
+						subNavSections={NAV.subNavSections}
+						currentNavLink={NAV.currentNavLink}
+						palette={palette}
+					/>
 				</Section>
+			)}
 
-				<Section
-					data-print-layout="hide"
-					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
-				>
-					<StandardGrid isMatchReport={isMatchReport}>
-						<GridItem area="title">
-							<ArticleTitle
+			{format.theme !== Special.Labs ? (
+				<>
+					<Section
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<GuardianLines count={4} palette={palette} />
+					</Section>
+					<Section
+						backgroundColour={brandAltBackground.primary}
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+					>
+						<AnniversaryAtomComponent
+							anniversaryInteractiveAtom={
+								CAPI.anniversaryInteractiveAtom
+							}
+						/>
+					</Section>
+				</>
+			) : (
+				<Stuck>
+					<Section
+						showSideBorders={true}
+						showTopBorder={false}
+						backgroundColour={labs[400]}
+						borderColour={border.primary}
+						sectionId="labs-header"
+					>
+						<LabsHeader />
+					</Section>
+				</Stuck>
+			)}
+
+			{CAPI.config.switches.surveys && (
+				<AdSlot position="survey" display={format.display} />
+			)}
+
+			<Section
+				data-print-layout="hide"
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+				borderColour={palette.border.article}
+			>
+				<StandardGrid isMatchReport={isMatchReport}>
+					<GridItem area="title">
+						<ArticleTitle
+							format={format}
+							palette={palette}
+							tags={CAPI.tags}
+							sectionLabel={CAPI.sectionLabel}
+							sectionUrl={CAPI.sectionUrl}
+							guardianBaseURL={CAPI.guardianBaseURL}
+							badge={CAPI.badge}
+						/>
+					</GridItem>
+					<GridItem area="border">
+						{format.theme === Special.Labs ? (
+							<></>
+						) : (
+							<Border palette={palette} />
+						)}
+					</GridItem>
+					<GridItem area="matchNav">
+						<div css={maxWidth}>
+							{format.design === Design.MatchReport &&
+								CAPI.matchUrl && (
+									<Placeholder
+										rootId="match-nav"
+										height={230}
+									/>
+								)}
+						</div>
+					</GridItem>
+					<GridItem area="headline">
+						<div css={maxWidth}>
+							<ArticleHeadlinePadding
+								design={format.design}
+								starRating={
+									!!CAPI.starRating || CAPI.starRating === 0
+								}
+							>
+								{age && (
+									<div css={ageWarningMargins}>
+										<AgeWarning age={age} />
+									</div>
+								)}
+								<ArticleHeadline
+									format={format}
+									headlineString={CAPI.headline}
+									tags={CAPI.tags}
+									byline={CAPI.author.byline}
+									palette={palette}
+								/>
+								{age && (
+									<AgeWarning
+										age={age}
+										isScreenReader={true}
+									/>
+								)}
+							</ArticleHeadlinePadding>
+						</div>
+						{CAPI.starRating || CAPI.starRating === 0 ? (
+							<div css={starWrapper}>
+								<StarRating
+									rating={CAPI.starRating}
+									size="large"
+								/>
+							</div>
+						) : (
+							<></>
+						)}
+					</GridItem>
+					<GridItem area="standfirst">
+						<Standfirst
+							format={format}
+							standfirst={CAPI.standfirst}
+						/>
+					</GridItem>
+					<GridItem area="media">
+						<div css={maxWidth}>
+							<MainMedia
 								format={format}
 								palette={palette}
-								tags={CAPI.tags}
-								sectionLabel={CAPI.sectionLabel}
-								sectionUrl={CAPI.sectionUrl}
-								guardianBaseURL={CAPI.guardianBaseURL}
-								badge={CAPI.badge}
+								elements={CAPI.mainMediaElements}
+								adTargeting={adTargeting}
+								host={host}
 							/>
-						</GridItem>
-						<GridItem area="border">
-							{format.theme === Special.Labs ? (
-								<></>
-							) : (
-								<Border palette={palette} />
-							)}
-						</GridItem>
-						<GridItem area="matchNav">
-							<div className={maxWidth}>
-								{format.design === Design.MatchReport &&
-									CAPI.matchUrl && (
-										<Placeholder
-											rootId="match-nav"
-											height={230}
-										/>
+						</div>
+					</GridItem>
+					<GridItem area="lines">
+						<div css={maxWidth}>
+							<div css={stretchLines}>
+								<GuardianLines
+									count={decideLineCount(format.design)}
+									palette={palette}
+									effect={decideLineEffect(
+										format.design,
+										format.theme,
 									)}
+								/>
 							</div>
-						</GridItem>
-						<GridItem area="headline">
-							<div className={maxWidth}>
-								<ArticleHeadlinePadding
-									design={format.design}
-									starRating={
-										!!CAPI.starRating ||
-										CAPI.starRating === 0
-									}
-								>
-									{age && (
-										<div className={ageWarningMargins}>
-											<AgeWarning age={age} />
-										</div>
-									)}
-									<ArticleHeadline
-										format={format}
-										headlineString={CAPI.headline}
-										tags={CAPI.tags}
-										byline={CAPI.author.byline}
-										palette={palette}
-									/>
-									{age && (
-										<AgeWarning
-											age={age}
-											isScreenReader={true}
-										/>
-									)}
-								</ArticleHeadlinePadding>
-							</div>
-							{CAPI.starRating || CAPI.starRating === 0 ? (
-								<div className={starWrapper}>
-									<StarRating
-										rating={CAPI.starRating}
-										size="large"
-									/>
-								</div>
-							) : (
-								<></>
-							)}
-						</GridItem>
-						<GridItem area="standfirst">
-							<Standfirst
+						</div>
+					</GridItem>
+					<GridItem area="meta">
+						<div css={maxWidth}>
+							<ArticleMeta
+								branding={branding}
 								format={format}
-								standfirst={CAPI.standfirst}
+								palette={palette}
+								pageId={CAPI.pageId}
+								webTitle={CAPI.webTitle}
+								author={CAPI.author}
+								tags={CAPI.tags}
+								primaryDateline={CAPI.webPublicationDateDisplay}
+								secondaryDateline={
+									CAPI.webPublicationSecondaryDateDisplay
+								}
 							/>
-						</GridItem>
-						<GridItem area="media">
-							<div className={maxWidth}>
-								<MainMedia
+						</div>
+					</GridItem>
+					<GridItem area="body">
+						<ArticleContainer>
+							<main css={articleWidth}>
+								<ArticleBody
 									format={format}
 									palette={palette}
-									elements={CAPI.mainMediaElements}
+									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									abTests={CAPI.config.abTests}
-								/>
-							</div>
-						</GridItem>
-						<GridItem area="lines">
-							<div className={maxWidth}>
-								<div className={stretchLines}>
-									<GuardianLines
-										count={decideLineCount(format.design)}
-										pillar={format.theme}
-										effect={decideLineEffect(
-											format.design,
-											format.theme,
-										)}
-									/>
-								</div>
-							</div>
-						</GridItem>
-						<GridItem area="meta">
-							<div className={maxWidth}>
-								<ArticleMeta
-									branding={branding}
-									format={format}
-									palette={palette}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
-									author={CAPI.author}
-									tags={CAPI.tags}
-									primaryDateline={
-										CAPI.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										CAPI.webPublicationSecondaryDateDisplay
-									}
 								/>
-							</div>
-						</GridItem>
-						<GridItem area="body">
-							<ArticleContainer>
-								<main className={articleWidth}>
-									<ArticleBody
-										format={format}
-										palette={palette}
-										blocks={CAPI.blocks}
-										adTargeting={adTargeting}
-										host={host}
-										abTests={CAPI.config.abTests}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-									/>
-									{isMatchReport && <div id="match-stats" />}
+								{isMatchReport && <div id="match-stats" />}
 
-									{showBodyEndSlot && (
-										<div id="slot-body-end" />
-									)}
-									<GuardianLines
-										data-print-layout="hide"
-										count={4}
-										pillar={format.theme}
-									/>
-									<SubMeta
-										palette={palette}
-										format={format}
-										subMetaKeywordLinks={
-											CAPI.subMetaKeywordLinks
-										}
-										subMetaSectionLinks={
-											CAPI.subMetaSectionLinks
-										}
-										pageId={CAPI.pageId}
-										webUrl={CAPI.webURL}
-										webTitle={CAPI.webTitle}
-										showBottomSocialButtons={
-											CAPI.showBottomSocialButtons
-										}
-										badge={CAPI.badge}
-									/>
-								</main>
-							</ArticleContainer>
-						</GridItem>
-						<GridItem area="right-column">
-							<div
-								className={css`
-									padding-top: 6px;
-									height: 100%;
-									${from.desktop} {
-										/* above 980 */
-										margin-left: 20px;
-										margin-right: -20px;
+								{showBodyEndSlot && <div id="slot-body-end" />}
+								<GuardianLines
+									data-print-layout="hide"
+									count={4}
+									palette={palette}
+								/>
+								<SubMeta
+									palette={palette}
+									format={format}
+									subMetaKeywordLinks={
+										CAPI.subMetaKeywordLinks
 									}
-									${from.leftCol} {
-										/* above 1140 */
-										margin-left: 0px;
-										margin-right: 0px;
+									subMetaSectionLinks={
+										CAPI.subMetaSectionLinks
 									}
-								`}
-							>
-								<RightColumn>
-									<AdSlot
-										position="right"
-										display={format.display}
-									/>
-									{!isPaidContent ? (
-										<MostViewedRightIsland />
-									) : (
-										<></>
-									)}
-								</RightColumn>
-							</div>
-						</GridItem>
-					</StandardGrid>
-				</Section>
-			</div>
+									pageId={CAPI.pageId}
+									webUrl={CAPI.webURL}
+									webTitle={CAPI.webTitle}
+									showBottomSocialButtons={
+										CAPI.showBottomSocialButtons
+									}
+									badge={CAPI.badge}
+								/>
+							</main>
+						</ArticleContainer>
+					</GridItem>
+					<GridItem area="right-column">
+						<div
+							css={css`
+								padding-top: 6px;
+								height: 100%;
+								${from.desktop} {
+									/* above 980 */
+									margin-left: 20px;
+									margin-right: -20px;
+								}
+								${from.leftCol} {
+									/* above 1140 */
+									margin-left: 0px;
+									margin-right: 0px;
+								}
+							`}
+						>
+							<RightColumn>
+								<AdSlot
+									position="right"
+									display={format.display}
+								/>
+								{!isPaidContent ? (
+									<MostViewedRightIsland />
+								) : (
+									<></>
+								)}
+							</RightColumn>
+						</div>
+					</GridItem>
+				</StandardGrid>
+			</Section>
 
 			<Section
 				data-print-layout="hide"
@@ -592,58 +653,50 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</Section>
 
+			{/* Onwards (when signed OUT) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedout"
+				/>
+			)}
+
+			{!isPaidContent && showComments && (
+				<Section data-print-layout="hide" sectionId="comments">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</Section>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<div data-print-layout="hide" id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<Section
+					data-print-layout="hide"
+					sectionId="onwards-lower-whensignedin"
+				/>
+			)}
+
 			{!isPaidContent && (
-				<>
-					{/* Onwards (when signed OUT) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedout"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedout"
-						/>
-					)}
-
-					{showComments && (
-						<Section data-print-layout="hide" sectionId="comments">
-							<Discussion
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								isCommentable={CAPI.isCommentable}
-								pillar={format.theme}
-								palette={palette}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={false}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
-								display={format.display}
-							/>
-						</Section>
-					)}
-
-					{/* Onwards (when signed IN) */}
-					<div
-						data-print-layout="hide"
-						id="onwards-upper-whensignedin"
-					/>
-					{showOnwardsLower && (
-						<Section
-							data-print-layout="hide"
-							sectionId="onwards-lower-whensignedin"
-						/>
-					)}
-
-					<Section
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-					/>
-				</>
+				<Section
+					data-print-layout="hide"
+					sectionId="most-viewed-footer"
+				/>
 			)}
 
 			<Section
@@ -667,7 +720,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<GuardianLines count={4} palette={palette} />
 				</Section>
 			)}
 

@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
@@ -18,7 +17,7 @@ type Props = {
 };
 
 const ageWarningStyles = (isSmall: boolean) => css`
-	${isSmall ? textSans.xsmall() : textSans.medium()};
+	${isSmall ? textSans.xxsmall() : textSans.medium()};
 	color: ${brandAltText.primary};
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;
@@ -51,13 +50,11 @@ export const AgeWarning = ({ age, isScreenReader, size = 'medium' }: Props) => {
 	const ageOld = ensureOldText(age);
 
 	if (isScreenReader) {
-		return (
-			<div className={ageWarningScreenReader}>{warningPrefix + age}</div>
-		);
+		return <div css={ageWarningScreenReader}>{warningPrefix + age}</div>;
 	}
 
 	return (
-		<div className={ageWarningStyles(isSmall)} aria-hidden="true">
+		<div css={ageWarningStyles(isSmall)} aria-hidden="true">
 			<ClockIcon /> {warningPrefix}
 			<strong>{ageOld}</strong>
 		</div>

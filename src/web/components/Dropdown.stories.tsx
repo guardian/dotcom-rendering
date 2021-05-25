@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brandBackground } from '@guardian/src-foundations/palette';
 
@@ -7,7 +6,7 @@ import { Dropdown } from '@frontend/web/components/Dropdown';
 
 const Header = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			height: 300px;
 			width: 100%;
 			background-color: ${brandBackground.primary};
@@ -19,7 +18,7 @@ const Header = ({ children }: { children: React.ReactNode }) => (
 
 const Nav = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			height: 20px;
 			position: absolute;
 			top: 10px;

@@ -3,11 +3,8 @@ import {
 	DailyArticle,
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
-import { getCountryCodeFromLocalStorage } from '@frontend/web/lib/getCountryCode';
 import { CurrentABTest } from '@root/src/web/components/SignInGate/gateDesigns/types';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
-import { onConsentChange } from '@root/node_modules/@guardian/consent-management-platform';
-import { ConsentState } from '@root/node_modules/@guardian/consent-management-platform/dist/types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
@@ -17,13 +14,6 @@ export const isNPageOrHigherPageView = (n: number = 2): boolean => {
 	const { count = 0 } = dailyCount;
 
 	return count >= n;
-};
-
-// use gu.location to determine is the browser is in the specified country
-// Note, use country codes specified in guardian/frontend/static/src/javascripts/lib/geolocation.js
-export const isCountry = (countryCode: string): boolean => {
-	const countryCodeFromStorage = getCountryCodeFromLocalStorage();
-	return countryCodeFromStorage === countryCode;
 };
 
 // determine if the useragent is running iOS 9 (known to be buggy for sign in flow)
@@ -77,61 +67,28 @@ export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
 	);
 };
 
+// hide the sign in gate on isPaidContent
+export const isPaidContent = (CAPI: CAPIBrowserType): boolean =>
+	CAPI.pageType.isPaidContent;
+
+export const isPreview = (CAPI: CAPIBrowserType): boolean =>
+	CAPI.isPreview || false;
+
 export const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
 	currentTest: CurrentABTest,
-): Promise<boolean> => {
-	return Promise.resolve(
-		!isSignedIn &&
-			!hasUserDismissedGateMoreThanCount(
-				currentTest.variant,
-				currentTest.name,
-				5,
-			) &&
-			isNPageOrHigherPageView(3) &&
-			isValidContentType(CAPI) &&
-			isValidSection(CAPI) &&
-			isValidTag(CAPI) &&
-			!isIOS9(),
-	);
-};
-
-export const hasRequiredConsents = (): Promise<boolean> => {
-	const hasConsentedToAll = (state: ConsentState) => {
-		const consentFlags = state.tcfv2?.consents
-			? Object.values(state.tcfv2.consents)
-			: [];
-		const vendorConsentFlags = state.tcfv2?.vendorConsents
-			? Object.values(state.tcfv2.vendorConsents)
-			: [];
-		const isEmpty =
-			consentFlags.length === 0 || vendorConsentFlags.length === 0;
-
-		return (
-			!isEmpty && [...consentFlags, ...vendorConsentFlags].every(Boolean)
-		);
-	};
-
-	return new Promise((resolve) => {
-		onConsentChange((state) => {
-			resolve(hasConsentedToAll(state));
-		});
-	});
-};
-
-export const canShowMandatoryGate: (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentABTest,
-) => Promise<boolean> = async (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentABTest,
-) => {
-	return (
-		isCountry('GB') &&
-		(await canShow(CAPI, isSignedIn, currentTest)) &&
-		(await hasRequiredConsents())
-	);
-};
+): boolean =>
+	!isSignedIn &&
+	!hasUserDismissedGateMoreThanCount(
+		currentTest.variant,
+		currentTest.name,
+		5,
+	) &&
+	isNPageOrHigherPageView(3) &&
+	isValidContentType(CAPI) &&
+	isValidSection(CAPI) &&
+	isValidTag(CAPI) &&
+	!isPaidContent(CAPI) &&
+	!isPreview(CAPI) &&
+	!isIOS9();

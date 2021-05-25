@@ -1,15 +1,43 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Special } from '@guardian/types';
 
-import { neutralBorder } from '@root/src/lib/pillars';
-import {
-	ListStyle,
-	LinkStyle,
-} from '@root/src/amp/components/elements/TextBlockComponent';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
+
+const ListStyle = (iconColour: string) => css`
+	li {
+		margin-bottom: 6px;
+		padding-left: 20px;
+		p {
+			display: inline;
+		}
+	}
+
+	li:before {
+		display: inline-block;
+		content: '';
+		border-radius: 6px;
+		height: 12px;
+		width: 12px;
+		margin-right: 8px;
+		background-color: ${iconColour};
+		margin-left: -20px;
+	}
+`;
+
+const LinkStyle = (pillar: Theme) => css`
+	a {
+		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
+		text-decoration: none;
+		border-bottom: 1px solid ${neutralBorder(pillar)};
+		:hover {
+			border-bottom: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
+		}
+	}
+`;
 
 const standfirstCss = (pillar: Theme) => css`
 	${headline.xxxsmall()};
@@ -38,16 +66,16 @@ const labsStyle = css`
 	}
 `;
 
-export const Standfirst: React.SFC<{
+export const Standfirst: React.FunctionComponent<{
 	text: string;
 	pillar: Theme;
 }> = ({ text, pillar }) => {
 	return (
 		<div
 			data-print-layout="hide"
-			className={
+			css={
 				pillar === Special.Labs
-					? cx(standfirstCss(pillar), labsStyle)
+					? [standfirstCss(pillar), labsStyle]
 					: standfirstCss(pillar)
 			}
 			dangerouslySetInnerHTML={{

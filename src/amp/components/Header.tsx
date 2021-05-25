@@ -1,11 +1,13 @@
 import React from 'react';
-import { css, cx } from 'emotion';
-import Logo from '@frontend/static/logos/the-guardian.svg';
-import { pillarPalette } from '@root/src/lib/pillars';
+import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+
+import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';
 
 const headerStyles = css`
@@ -20,22 +22,23 @@ const row = css`
 
 const logoStyles = css`
 	align-self: flex-start;
-	height: 57px;
+	height: 65px;
 	width: 175px;
 	margin-top: 3px;
 	margin-right: 20px;
-	margin-bottom: 35px;
-
-	path {
-		fill: ${palette.neutral[100]};
-	}
+	margin-bottom: 20px;
 
 	${until.mobileMedium} {
-		height: 44px;
+		height: 54px;
 		width: 135px;
-		margin-bottom: 24px;
+		margin-bottom: 15px;
 		margin-right: 52px;
 		margin-top: 9px;
+	}
+
+	svg {
+		max-width: 100%;
+		max-height: 100%;
 	}
 `;
 
@@ -106,7 +109,7 @@ const pillarLinkStyle = (pillar: Theme) => css`
 		left: 0;
 		right: 0;
 		position: absolute;
-		border-top: 4px solid ${pillarPalette[pillar].bright};
+		border-top: 4px solid ${pillarPalette_DO_NOT_USE[pillar].bright};
 		transition: transform 0.3s ease-in-out;
 	}
 `;
@@ -166,11 +169,11 @@ const navRow = css`
 
 const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
 	<nav>
-		<ul className={pillarListStyles}>
+		<ul css={pillarListStyles}>
 			{pillars.map((p) => (
-				<li className={pillarListItemStyle} key={p.title}>
+				<li css={pillarListItemStyle} key={p.title}>
 					<a
-						className={pillarLinkStyle(p.pillar)}
+						css={pillarLinkStyle(p.pillar)}
 						href={`${guardianBaseURL}${p.url}`}
 					>
 						{p.title}
@@ -185,8 +188,8 @@ export const Header: React.FC<{
 	nav: NavType;
 	guardianBaseURL: string;
 }> = ({ nav, guardianBaseURL }) => (
-	<header className={headerStyles}>
-		<div className={row}>
+	<header css={headerStyles}>
+		<div css={row}>
 			<ReaderRevenueButton
 				nav={nav}
 				rrLink="ampHeader"
@@ -194,9 +197,9 @@ export const Header: React.FC<{
 				linkLabel="Subscribe"
 			/>
 
-			<a className={logoStyles} href={guardianBaseURL}>
+			<a css={logoStyles} href={guardianBaseURL}>
 				<span
-					className={css`
+					css={css`
 						${visuallyHidden};
 					`}
 				>
@@ -206,16 +209,16 @@ export const Header: React.FC<{
 			</a>
 		</div>
 
-		<div className={cx(row, navRow)}>
+		<div css={[row, navRow]}>
 			{pillarLinks(nav.pillars, guardianBaseURL)}
 
 			{/* Note, the actual sidebar lives directly in the body as AMP requires this :( */}
 			<button
-				className={veggieStyles}
+				css={veggieStyles}
 				aria-label="Toggle main menu"
 				on="tap:sidebar1.toggle"
 			>
-				<span className={pattyStyles} />
+				<span css={pattyStyles} />
 			</button>
 		</div>
 	</header>

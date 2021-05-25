@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 
@@ -7,7 +6,6 @@ import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
 import EmailIcon from '@frontend/static/icons/email.svg';
 import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
-import PinterestIcon from '@frontend/static/icons/pinterest.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 
@@ -90,11 +88,11 @@ export const ShareIcons = ({
 	size,
 }: Props) => {
 	return (
-		<ul className={ulStyles}>
+		<ul css={ulStyles}>
 			{displayIcons.includes('facebook') && (
-				<li className={liStyles(size)} key="facebook">
+				<li css={liStyles(size)} key="facebook">
 					<a
-						href={`https://www.facebook.com/dialog/share?app_id=202314643182694&href=${encodeUrl(
+						href={`https://www.facebook.com/dialog/share?app_id=180444840287&href=${encodeUrl(
 							pageId,
 						)}&CMP=share_btn_fb`}
 						role="button"
@@ -102,7 +100,7 @@ export const ShareIcons = ({
 						target="_blank"
 						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, size })}>
 							<FacebookIcon />
 						</span>
 					</a>
@@ -110,7 +108,7 @@ export const ShareIcons = ({
 			)}
 
 			{displayIcons.includes('twitter') && (
-				<li className={liStyles(size)} key="twitter">
+				<li css={liStyles(size)} key="twitter">
 					<a
 						href={`https://twitter.com/intent/tweet?text=${encodeTitle(
 							webTitle,
@@ -120,7 +118,7 @@ export const ShareIcons = ({
 						target="_blank"
 						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, size })}>
 							<TwitterIconPadded />
 						</span>
 					</a>
@@ -128,7 +126,7 @@ export const ShareIcons = ({
 			)}
 
 			{displayIcons.includes('email') && (
-				<li className={liStyles(size)} key="email">
+				<li css={liStyles(size)} key="email">
 					<a
 						href={`mailto:?subject=${encodeTitle(
 							webTitle,
@@ -138,7 +136,7 @@ export const ShareIcons = ({
 						target="_blank"
 						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, size })}>
 							<EmailIcon />
 						</span>
 					</a>
@@ -146,7 +144,7 @@ export const ShareIcons = ({
 			)}
 
 			{displayIcons.includes('linkedIn') && (
-				<li className={liStyles(size)} key="linkedIn">
+				<li css={liStyles(size)} key="linkedIn">
 					<a
 						href={`http://www.linkedin.com/shareArticle?title=${encodeTitle(
 							webTitle,
@@ -156,34 +154,16 @@ export const ShareIcons = ({
 						target="_blank"
 						data-ignore="global-link-styling"
 					>
-						<span className={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, size })}>
 							<LinkedInIcon />
 						</span>
 					</a>
 				</li>
 			)}
 
-			{displayIcons.includes('pinterest') && (
-				<li className={liStyles(size)} key="pinterest">
-					<a
-						href={`http://www.pinterest.com/pin/find/?url=${encodeUrl(
-							pageId,
-						)}`}
-						role="button"
-						aria-label="Share on Pinterest"
-						target="_blank"
-						data-ignore="global-link-styling"
-					>
-						<span className={iconStyles({ palette, size })}>
-							<PinterestIcon />
-						</span>
-					</a>
-				</li>
-			)}
-
 			{displayIcons.includes('whatsApp') && (
-				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles(size)} key="whatsApp">
+				<Hide when="above" breakpoint="phablet" el="li" key="whatsApp">
+					<span css={liStyles(size)}>
 						<a
 							href={`whatsapp://send?text="${encodeTitle(
 								webTitle,
@@ -193,31 +173,31 @@ export const ShareIcons = ({
 							target="_blank"
 							data-ignore="global-link-styling"
 						>
-							<span className={iconStyles({ palette, size })}>
+							<span css={iconStyles({ palette, size })}>
 								<WhatsAppIcon />
 							</span>
 						</a>
-					</li>
+					</span>
 				</Hide>
 			)}
 
 			{displayIcons.includes('messenger') && (
-				<Hide when="above" breakpoint="phablet">
-					<li className={liStyles(size)} key="messenger">
+				<Hide when="above" breakpoint="phablet" el="li" key="messenger">
+					<span css={liStyles(size)}>
 						<a
 							href={`fb-messenger://share?link=${encodeUrl(
 								pageId,
 							)}&app_id=180444840287&CMP=share_btn_me`}
 							role="button"
-							aria-label="Share on Messanger>"
+							aria-label="Share on Messenger>"
 							target="_blank"
 							data-ignore="global-link-styling"
 						>
-							<span className={iconStyles({ palette, size })}>
+							<span css={iconStyles({ palette, size })}>
 								<MessengerIcon />
 							</span>
 						</a>
-					</li>
+					</span>
 				</Hide>
 			)}
 		</ul>
