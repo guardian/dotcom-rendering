@@ -1,13 +1,15 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
+import { string as curly } from 'curlyquotes';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
+
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
 import { Byline } from '@root/src/amp/components/topMeta/Byline';
-import { string as curly } from 'curlyquotes';
 import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@root/src/amp/components/topMeta/SeriesLink';
@@ -73,12 +75,10 @@ const Headline: React.FC<{
 }> = ({ headlineText, starRating }) => {
 	return (
 		<div>
-			<h1 className={cx(headerStyle, underlinedStyles)}>
-				{curly(headlineText)}
-			</h1>
+			<h1 css={[headerStyle, underlinedStyles]}>{curly(headlineText)}</h1>
 
 			{starRating !== undefined && (
-				<div className={starRatingWrapper}>
+				<div css={starRatingWrapper}>
 					<StarRating rating={starRating} size="large" />
 				</div>
 			)}
@@ -126,13 +126,13 @@ export const TopMetaAnalysis: React.FC<{
 
 			{branding && <Branding branding={branding} pillar={pillar} />}
 
-			<Byline
-				byline={articleData.author.byline}
-				tags={articleData.tags}
-				pillar={pillar}
-				guardianBaseURL={articleData.guardianBaseURL}
-				className={bylineStyle(pillar)}
-			/>
+			<div css={bylineStyle(pillar)}>
+				<Byline
+					byline={articleData.author.byline}
+					tags={articleData.tags}
+					guardianBaseURL={articleData.guardianBaseURL}
+				/>
+			</div>
 
 			<TopMetaExtras
 				sharingUrls={getSharingUrls(

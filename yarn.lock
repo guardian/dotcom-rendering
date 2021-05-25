@@ -1658,10 +1658,10 @@
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
 
-"@guardian/libs@^1.8.0":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-1.8.1.tgz#22bccd66be7c5bf70cd5bbb1bf7700d94610ccb7"
-  integrity sha512-Q/JPLhNeYa5XhDPJhw/1+fbZmszopvovWW8I7dGEuFPGWeNUmXAbW8J3kzuonDu7l9/tuFZg8jljbKHZlrFx0A==
+"@guardian/libs@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-2.0.0.tgz#8582703eb510df2e1c29b4b57aa81213dd63fd6f"
+  integrity sha512-rcl6BnePEh/ecp1Vgd8lA2ZANLjLSiHyG4F7RnlLNsr+G0U756/YJpLZRZ5HevALLLrU+g02c51yiSEqpDXFZw==
 
 "@guardian/prettier@^0.5.0":
   version "0.5.0"
@@ -1793,10 +1793,10 @@
     "@guardian/src-helpers" "^3.5.0"
     "@guardian/src-icons" "^3.5.0"
 
-"@guardian/types@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-6.0.0.tgz#65f4001e390fc8c22f196676742121b89ff28651"
-  integrity sha512-HAYOUfy+Xm1WodByJ7fUH4emSSzVh3YW8euJx1r4TopsG/tIsI94IntOI38s6kwtsClY90gFKG25UiasKJL/Jw==
+"@guardian/types@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-6.1.0.tgz#5189c34c5cc4da1e549f70706c78276fa69ef7d3"
+  integrity sha512-CP1bmqOutfG/hLQrAzBaqj9EitCNPJQ1qTyHfiCAElFsWKofYuEzMgHYM2ut5nSrkSC+n0AhXUt3qItl+2A3eQ==
 
 "@hapi/hoek@^9.0.0":
   version "9.1.0"
@@ -7103,16 +7103,6 @@ create-ecdh@^4.0.0:
     bn.js "^4.1.0"
     elliptic "^6.0.0"
 
-create-emotion-server@10.0.27:
-  version "10.0.27"
-  resolved "https://registry.yarnpkg.com/create-emotion-server/-/create-emotion-server-10.0.27.tgz#24b135d9ef3bca32b6812c0b670feb675edd17e3"
-  integrity sha512-1EbZgdjiho9ue1BSTpAez8SIdfbTXomtz0bg+LPOEvf/5OV7xqCGJaoSCDCB+y7kZ73hwoEhLsoPmqKSGIQMXg==
-  dependencies:
-    "@emotion/utils" "0.11.3"
-    html-tokenize "^2.0.0"
-    multipipe "^1.0.2"
-    through "^2.3.8"
-
 create-emotion@^10.0.27:
   version "10.0.27"
   resolved "https://registry.yarnpkg.com/create-emotion/-/create-emotion-10.0.27.tgz#cb4fa2db750f6ca6f9a001a33fbf1f6c46789503"
@@ -8113,13 +8103,6 @@ emojis-list@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
   integrity sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==
-
-emotion-server@10.0.27:
-  version "10.0.27"
-  resolved "https://registry.yarnpkg.com/emotion-server/-/emotion-server-10.0.27.tgz#ea654342fdf9f5d8cd1793f5a6594159485a3806"
-  integrity sha512-ypISBMkgZD7dgP6Y0QhZlqazxffpowcEWlZHKLADVazdxY5iXjZbd1UvovdpfDRjbj4EBxwKkltog3NzuSBavA==
-  dependencies:
-    create-emotion-server "10.0.27"
 
 emotion-theming@^10.0.27:
   version "10.0.27"

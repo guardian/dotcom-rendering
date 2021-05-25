@@ -144,17 +144,25 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						color: ${palette.text.standfirst};
 					`;
 				default:
-					return css`
-						${format.theme === Special.Labs
-							? textSans.medium()
-							: headline.xxxsmall({
+					switch (format.theme) {
+						case Special.Labs:
+							return css`
+								${textSans.medium()}
+								margin-bottom: ${space[3]}px;
+								max-width: 540px;
+								color: ${palette.text.standfirst};
+							`;
+						default:
+							return css`
+								${headline.xxxsmall({
 									fontWeight: 'bold',
-							  })};
-						line-height: 20px;
-						margin-bottom: ${space[3]}px;
-						max-width: 540px;
-						color: ${palette.text.standfirst};
-					`;
+								})};
+								line-height: 20px;
+								margin-bottom: ${space[3]}px;
+								max-width: 540px;
+								color: ${palette.text.standfirst};
+							`;
+					}
 			}
 		}
 	}

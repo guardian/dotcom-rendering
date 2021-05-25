@@ -44,7 +44,7 @@ import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { Display, Design } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import type { Format, CountryCode } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
@@ -68,7 +68,7 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmb
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
-import type { CountryCode } from '@guardian/libs/dist/esm/types/countries';
+
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
@@ -556,12 +556,14 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
-			<Portal rootId="share-count-root">
-				<ShareCount
-					ajaxUrl={CAPI.config.ajaxUrl}
-					pageId={CAPI.pageId}
-				/>
-			</Portal>
+			{CAPI.config.switches.serverShareCounts && (
+				<Portal rootId="share-count-root">
+					<ShareCount
+						ajaxUrl={CAPI.config.ajaxUrl}
+						pageId={CAPI.pageId}
+					/>
+				</Portal>
+			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent

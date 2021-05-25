@@ -66,22 +66,34 @@ const invertedStyle = css`
 `;
 
 const fontStyles = (format: Format) => {
-	if (format.theme === Special.Labs) {
-		return css`
-			${textSans.large()}
-			line-height: 23px;
-			${from.leftCol} {
-				${textSans.large()}
-				line-height: 20px;
+	switch (format.theme) {
+		case Special.Labs:
+			switch (format.display) {
+				case Display.Immersive:
+					return css`
+						${textSans.large({ fontWeight: 'bold' })}
+						line-height: 23px;
+						${from.leftCol} {
+							line-height: 20px;
+						}
+					`;
+				default:
+					return css`
+						${textSans.large()}
+						line-height: 23px;
+						${from.leftCol} {
+							line-height: 20px;
+						}
+					`;
 			}
-		`;
+		default:
+			return css`
+				${headline.xxxsmall({ fontWeight: 'bold' })}
+				${from.wide} {
+					${headline.xxsmall({ fontWeight: 'bold' })}
+				}
+			`;
 	}
-	return css`
-		${headline.xxxsmall({ fontWeight: 'bold' })}
-		${from.wide} {
-			${headline.xxsmall({ fontWeight: 'bold' })}
-		}
-	`;
 };
 
 const secondaryFontStyles = (format: Format) => {
@@ -142,6 +154,8 @@ export const SeriesSectionLink = ({
 	);
 
 	const hasSeriesTag = tag && tag.type === 'Series';
+
+	const isLabs = format.theme === Special.Labs;
 
 	switch (format.display) {
 		case Display.Immersive: {
@@ -240,8 +254,9 @@ export const SeriesSectionLink = ({
 					);
 				}
 				default: {
-					if (hasSeriesTag) {
-						if (!tag) return null; // Just to keep ts happy
+					if (hasSeriesTag || isLabs) {
+						const title = tag?.title ? tag.title : sectionLabel;
+						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (
 							<div
 								css={badge && immersiveTitleBadgeStyle(palette)}
@@ -273,11 +288,11 @@ export const SeriesSectionLink = ({
 														.seriesTitle};
 										`,
 									]}
-									href={`${guardianBaseURL}/${tag.id}`}
+									href={`${guardianBaseURL}/${linkExt}`}
 									data-component="series"
 									data-link-name="article series"
 								>
-									<span>{tag.title}</span>
+									<span>{title}</span>
 								</a>
 							</div>
 						);

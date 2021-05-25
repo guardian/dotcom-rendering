@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Special } from '@guardian/types';
 import { palette } from '@guardian/src-foundations';
@@ -12,7 +12,7 @@ import { sanitise } from '@frontend/lib/sanitise-html';
 // to re-use styling, but generally we should avoid this as it couples
 // components.
 
-export const ListStyle = (iconColour: string) => css`
+const ListStyle = (iconColour: string) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -33,7 +33,7 @@ export const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-export const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
@@ -44,7 +44,7 @@ export const LinkStyle = (pillar: Theme) => css`
 	}
 `;
 
-export const TextStyle = (pillar: Theme) => css`
+const TextStyle = (pillar: Theme) => css`
 	strong {
 		font-weight: 700;
 	}
@@ -79,9 +79,9 @@ export const TextBlockComponent: React.FC<{
 	pillar: Theme;
 }> = ({ html, pillar }) => (
 	<span
-		className={
+		css={
 			pillar === Special.Labs
-				? cx(TextStyle(pillar), textStyleLabs)
+				? [TextStyle(pillar), textStyleLabs]
 				: TextStyle(pillar)
 		}
 		dangerouslySetInnerHTML={{
