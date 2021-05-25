@@ -36,7 +36,6 @@ export const document = ({
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCritical } = createEmotionServer(cache);
 	const { html, css }: RenderToStringResult = extractCritical(
-		// TODO: CacheProvider can be removed when we've moved over to using @emotion/core
 		renderToStaticMarkup(
 			<CacheProvider value={cache}>{body}</CacheProvider>,
 		),
