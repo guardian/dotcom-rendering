@@ -1,4 +1,6 @@
 import React from 'react';
+import { css } from '@emotion/react';
+
 import { Footer } from '@root/src/amp/components/Footer';
 import { Container } from '@root/src/amp/components/Container';
 import { Body as BodyArticle } from '@root/src/amp/components/BodyArticle';
@@ -6,7 +8,6 @@ import { Body as BodyLiveblog } from '@root/src/amp/components/BodyLiveblog';
 import { Header } from '@root/src/amp/components/Header';
 import { Onward } from '@root/src/amp/components/Onward';
 import { AdConsent } from '@root/src/amp/components/AdConsent';
-import { css } from 'emotion';
 import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
@@ -52,7 +53,7 @@ export const Article: React.FC<{
 			)}
 
 			{/* /TODO change to gray bgcolor */}
-			<div key="main" className={backgroundColour}>
+			<div key="main" css={backgroundColour}>
 				<Container>
 					<Header
 						nav={nav}

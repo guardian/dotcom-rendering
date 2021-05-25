@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 const prebidImg =
 	'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
@@ -12,7 +12,7 @@ const prebidIframeStyle = css`
 export const AnalyticsIframe: React.FC<{ url: string }> = ({ url }) => {
 	return (
 		<amp-iframe
-			class={prebidIframeStyle}
+			css={prebidIframeStyle}
 			data-block-on-consent="_till_accepted"
 			title="Analytics Iframe"
 			height="1"

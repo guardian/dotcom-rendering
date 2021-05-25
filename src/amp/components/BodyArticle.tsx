@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Special } from '@guardian/types';
 import { until } from '@guardian/src-foundations/mq';
@@ -129,7 +129,7 @@ export const Body: React.FC<{
 							<div
 								id={`ad-${i + 1}`}
 								data-sort-time="1"
-								className={adStyle}
+								css={adStyle}
 							>
 								<Ad
 									adRegion="US"
@@ -170,7 +170,7 @@ export const Body: React.FC<{
 			<div
 				id="clean-blocks"
 				data-sort-time="1"
-				className={css`
+				css={css`
 					clear: both;
 				`}
 			/>
@@ -182,7 +182,7 @@ export const Body: React.FC<{
 	);
 
 	return (
-		<InnerContainer className={body(pillar, design)}>
+		<InnerContainer css={body(pillar, design)}>
 			<TopMeta
 				data={data}
 				design={design}

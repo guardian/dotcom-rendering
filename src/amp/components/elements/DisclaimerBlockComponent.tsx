@@ -1,7 +1,8 @@
 import React from 'react';
-import { css } from 'emotion';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
+import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
+
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
 const style = (pillar: Theme) => css`
 	${textSans.small()};
@@ -16,7 +17,7 @@ export const DisclaimerBlockComponent: React.FC<{
 	pillar: Theme;
 }> = ({ html, pillar }) => (
 	<span
-		className={style(pillar)}
+		css={style(pillar)}
 		dangerouslySetInnerHTML={{
 			__html: html,
 		}}

@@ -1,7 +1,9 @@
 import React from 'react';
+import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
-import { css } from 'emotion';
+
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
@@ -67,10 +69,10 @@ const Headline: React.FC<{
 	starRating?: number;
 }> = ({ headlineText, pillar, standfirst }) => {
 	return (
-		<div className={fullWidth}>
-			<h1 className={headerStyle(pillar)}>{curly(headlineText)}</h1>
+		<div css={fullWidth}>
+			<h1 css={headerStyle(pillar)}>{curly(headlineText)}</h1>
 			<div
-				className={standfirstStyle(pillar)}
+				css={standfirstStyle(pillar)}
 				dangerouslySetInnerHTML={{
 					__html: standfirst,
 				}}
@@ -100,7 +102,7 @@ export const TopMetaLiveblog: React.FC<{
 			tags={articleData.tags}
 			pillar={pillar}
 			guardianBaseURL={articleData.guardianBaseURL}
-			className={bylineStyle(pillar)}
+			css={bylineStyle(pillar)}
 		/>
 
 		<TopMetaExtras

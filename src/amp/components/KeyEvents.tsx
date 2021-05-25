@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -72,10 +72,10 @@ export const KeyEvents: React.FunctionComponent<{
 	}
 
 	const lis = events.map((event) => (
-		<li className={listItemStyle} key={event.id}>
-			<a className={eventLinkStyle} href={blockLink(url, event.id)}>
-				<span className={timeStyle}>{event.blockCreatedOnDisplay}</span>
-				<span className={listTitleStyle}>{event.title || ''}</span>
+		<li css={listItemStyle} key={event.id}>
+			<a css={eventLinkStyle} href={blockLink(url, event.id)}>
+				<span css={timeStyle}>{event.blockCreatedOnDisplay}</span>
+				<span css={listTitleStyle}>{event.title || ''}</span>
 			</a>
 		</li>
 	));
@@ -83,13 +83,13 @@ export const KeyEvents: React.FunctionComponent<{
 	return (
 		<amp-accordion class={wrapper}>
 			<section>
-				<h2 className={headingStyle}>
+				<h2 css={headingStyle}>
 					Key events{' '}
 					<span>
 						<DownArrow />
 					</span>
 				</h2>
-				<ul className={listStyle}>{lis}</ul>
+				<ul css={listStyle}>{lis}</ul>
 			</section>
 		</amp-accordion>
 	);

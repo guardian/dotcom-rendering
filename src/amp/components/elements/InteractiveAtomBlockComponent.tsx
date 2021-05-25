@@ -1,5 +1,6 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
+
 import { ShowMoreButton } from '@root/src/amp/components/ShowMoreButton';
 
 const styles = (height: number) => css`
@@ -93,7 +94,7 @@ export const InteractiveAtomBlockComponent: React.FunctionComponent<{
 					src={placeholderUrl}
 				/>
 			)}
-			<div overflow="" className={showMore}>
+			<div overflow="" css={showMore}>
 				<ShowMoreButton />
 			</div>
 		</amp-iframe>

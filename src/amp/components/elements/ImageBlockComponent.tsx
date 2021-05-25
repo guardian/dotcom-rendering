@@ -1,8 +1,9 @@
 import React from 'react';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { css } from 'emotion';
+
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
@@ -54,7 +55,7 @@ export const ImageBlockComponent: React.FC<{
 	}
 
 	return (
-		<figure className={figureStyle}>
+		<figure css={figureStyle}>
 			<amp-img
 				src={image.src}
 				alt={element.data.alt}
@@ -65,8 +66,8 @@ export const ImageBlockComponent: React.FC<{
 			/>
 			{(element.data.caption ||
 				(element.data.credit && element.displayCredit)) && (
-				<figcaption className={captionStyle}>
-					<span className={iconStyle}>
+				<figcaption css={captionStyle}>
+					<span css={iconStyle}>
 						<TriangleIcon />
 					</span>
 					{/*
@@ -74,7 +75,7 @@ export const ImageBlockComponent: React.FC<{
                         Update: 16th October (Pascal): guui has been decommissioned.
                     */}
 					<span
-						className={captionLink}
+						css={captionLink}
 						dangerouslySetInnerHTML={{
 							__html: element.data.caption || '',
 						}}

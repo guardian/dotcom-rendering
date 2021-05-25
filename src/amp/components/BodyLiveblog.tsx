@@ -1,6 +1,6 @@
 import React from 'react';
 import { InnerContainer } from '@root/src/amp/components/InnerContainer';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaLiveblog } from '@root/src/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
@@ -80,7 +80,7 @@ export const Body: React.FC<{
 		: false;
 
 	return (
-		<InnerContainer className={bodyStyle}>
+		<InnerContainer css={bodyStyle}>
 			<TopMetaLiveblog articleData={data} pillar={pillar} />
 			<KeyEvents events={data.keyEvents} url={url} />
 
@@ -92,7 +92,7 @@ export const Body: React.FC<{
 				id="live-blog-entries-main"
 				data-max-items-per-page="20" // TODO confirm if this should be dynamic
 			>
-				<div update="" className={updateButtonStyle}>
+				<div update="" css={updateButtonStyle}>
 					<button on="tap:live-blog-entries-main.update">
 						<RefreshIcon />
 						<span>You have updates</span>
