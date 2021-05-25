@@ -102,18 +102,6 @@ const starWrapper = css`
 	margin-top: 2px;
 `;
 
-const labTitleOrNot = (format: Format) => {
-	if (format.theme === Special.Labs) {
-		return css`
-			${textSans.medium({ fontWeight: 'regular' })}
-		`;
-	}
-	return css`
-		${headline.xxxsmall({ fontWeight: 'regular' })}
-		line-height: 20px;
-	`;
-};
-
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
@@ -236,7 +224,6 @@ export const Card = ({
 									isFullCardImage={isFullCardImage}
 								>
 									<CardHeadline
-										css={labTitleOrNot(format)}
 										headlineText={headlineText}
 										format={format}
 										palette={cardPalette}
