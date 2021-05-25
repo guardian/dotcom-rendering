@@ -17,14 +17,38 @@ import type { ReactElement } from 'react';
 
 const compose = <A, B, C>(f: (_b: B) => C, g: (_a: A) => B) => (a: A): C =>
 	f(g(a));
-const pipe = <A, B>(a: A, f: (_a: A) => B): B => f(a);
-const pipe2 = <A, B, C>(a: A, f: (_a: A) => B, g: (_b: B) => C): C => g(f(a));
+
+function pipe<A, B>(a: A, f: (_a: A) => B): B;
+function pipe<A, B, C>(a: A, f: (_a: A) => B, g: (_b: B) => C): C;
+function pipe<A, B, C, D>(
+	a: A,
+	f: (_a: A) => B,
+	g: (_b: B) => C,
+	h: (_c: C) => D,
+): D;
+function pipe<A, B, C, D>(
+	a: A,
+	f: (_a: A) => B,
+	g?: (_b: B) => C,
+	h?: (_c: C) => D,
+): unknown {
+	if (g !== undefined && h !== undefined) {
+		return h(g(f(a)));
+	} else if (g !== undefined) {
+		return g(f(a));
+	}
+
+	return f(a);
+}
+
+const pipe2 = <A, B, C>(a: A, f: (_a: A) => B, g: (_b: B) => C): C =>
+	pipe(a, f, g);
 const pipe3 = <A, B, C, D>(
 	a: A,
 	f: (_a: A) => B,
 	g: (_b: B) => C,
 	h: (_c: C) => D,
-): D => h(g(f(a)));
+): D => pipe(a, f, g, h);
 
 const identity = <A>(a: A): A => a;
 

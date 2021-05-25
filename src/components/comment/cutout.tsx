@@ -23,6 +23,7 @@ const imageStyles = css`
 	right: 0;
 	top: -48px;
 	background: none;
+	pointer-events: none;
 
 	${darkModeCss`
         background: none;

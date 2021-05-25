@@ -112,6 +112,25 @@ const getNumericAttribute = (attr: string) => (elem: Element): Option<number> =>
 const getAttribute = (attr: string) => (elem: Element): Option<string> =>
 	pipe(elem.getAttribute(attr), fromNullable);
 
+const getPermalink = (blockquote: HTMLElement): Result<string, string> =>
+	pipe(
+		blockquote.getAttribute('data-instgrm-permalink'),
+		resultFromNullable(
+			"This blockquote didn't have a 'instgrm-permalink' attribute",
+		),
+	);
+
+const parseInstagramHTML = (parser: DocParser) => (
+	html: string,
+): Result<string, string> =>
+	pipe2(
+		parser(html).querySelector('blockquote'),
+		resultFromNullable(
+			"I couldn't find a blockquote in the html for this embed",
+		),
+		resultAndThen(getPermalink),
+	);
+
 const getWidth = getNumericAttribute('width');
 const getHeight = getNumericAttribute('height');
 const getComponent = getAttribute('data-component');
@@ -306,6 +325,38 @@ const parseGenericEmbedKind = (parser: DocParser) => (
 	return EmbedKind.Generic;
 };
 
+const extractIdFromInstagramUrl = (url: string): string => {
+	const splitUrl = url.split('/');
+	return splitUrl[splitUrl.length - 2];
+};
+
+const extractInstagramId = (parser: DocParser) => (
+	html: string,
+): Result<string, string> =>
+	pipe2(
+		html,
+		parseInstagramHTML(parser),
+		resultMap(extractIdFromInstagramUrl),
+	);
+
+const parseGenericInstagram = (parser: DocParser) => (
+	element: BlockElement,
+): Result<string, Instagram> =>
+	pipe3(
+		element,
+		extractGenericHtml,
+		resultAndThen(extractInstagramId(parser)),
+		resultMap(
+			(id: string): Instagram => ({
+				kind: EmbedKind.Instagram,
+				id,
+				caption: fromNullable(element.embedTypeData?.alt),
+				tracking:
+					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
+			}),
+		),
+	);
+
 const parseGeneric = (parser: DocParser) => (
 	element: BlockElement,
 ): Result<string, Embed> => {
@@ -313,6 +364,10 @@ const parseGeneric = (parser: DocParser) => (
 		return err(
 			"I can't parse this generic embed, it has no 'embedTypeData' field",
 		);
+	}
+
+	if (element.embedTypeData.source === 'Instagram') {
+		return parseGenericInstagram(parser)(element);
 	}
 
 	return resultMap((html: string): Generic | EmailSignup | TikTok => ({

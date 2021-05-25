@@ -112,11 +112,23 @@ const noThirdPartyEmbeds: ThirdPartyEmbeds = {
 	spotify: false,
 };
 
+const getGenericThirdPartyEmbeds = (
+	thirdPartyEmbeds: ThirdPartyEmbeds,
+	element: BlockElement,
+): ThirdPartyEmbeds => {
+	if (element.embedTypeData?.source === 'Instagram') {
+		return { ...thirdPartyEmbeds, instagram: true };
+	}
+	return thirdPartyEmbeds;
+};
+
 const checkForThirdPartyEmbed = (
 	thirdPartyEmbeds: ThirdPartyEmbeds,
 	element: BlockElement,
 ): ThirdPartyEmbeds => {
 	switch (element.type) {
+		case ElementType.EMBED:
+			return getGenericThirdPartyEmbeds(thirdPartyEmbeds, element);
 		case ElementType.INSTAGRAM:
 			return { ...thirdPartyEmbeds, instagram: true };
 		case ElementType.TWEET:

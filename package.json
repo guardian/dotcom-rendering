@@ -24,8 +24,8 @@
     "build:client": "webpack --config webpack.config.ts --config-name client",
     "build:server:prod": "webpack --config webpack.config.ts --config-name server --env production",
     "build:client:prod": "webpack --config webpack.config.ts --config-name clientProduction",
-    "storybook": "start-storybook -s ./ -p 8181 --ci",
-    "build-storybook": "build-storybook -o dist",
+    "storybook": "start-storybook -s ./assets -p 8181 --ci",
+    "build-storybook": "build-storybook -o dist -s ./assets",
     "deploy-storybook": "storybook-to-ghpages && ./.storybook/pushFonts.sh"
   },
   "author": "",
@@ -45,7 +45,7 @@
     "@guardian/discussion-rendering": "^4.6.1",
     "@guardian/image-rendering": "github:guardian/image-rendering#1167f8bc",
     "@guardian/node-riffraff-artifact": "^0.2.0",
-    "@guardian/renditions": "git+https://github.com/guardian/renditions.git#0.1.1",
+    "@guardian/renditions": "^0.1.4",
     "@guardian/src-brand": "^3.3.0",
     "@guardian/src-button": "^3.5.0",
     "@guardian/src-ed-lines": "^3.3.0",
@@ -79,7 +79,7 @@
     "regenerator-runtime": "^0.13.5",
     "source-map-support": "^0.5.19",
     "thrift": "^0.12.0",
-    "typescript": "^4.1.3"
+    "typescript": "^4.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

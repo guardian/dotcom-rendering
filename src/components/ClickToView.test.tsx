@@ -1,6 +1,5 @@
 import { Button } from '@guardian/src-button';
 import { none, some } from '@guardian/types';
-import React from 'react';
 import renderer from 'react-test-renderer';
 import { ClickToView } from './ClickToView';
 
