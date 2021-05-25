@@ -150,10 +150,10 @@ We recommend you update your workspace settings to automatically fix formatting 
 
 If you prefer not to use an editor like VSCode then you can use the following commands to manage formatting:
 
-`yarn prettier:check` // Checks for prettier issues
-`yarn prettier:fix` // Checks and fixes prettier issues
-`yarn lint` // Checks for linting issues
-`yarn lint --fix` // Checks and fixes linting issues
+- `yarn prettier:check` &rarr; Checks for prettier issues
+- `yarn prettier:fix` &rarr; Checks and fixes prettier issues
+- `yarn lint` &rarr; Checks for linting issues
+- `yarn lint --fix` &rarr; Checks and fixes linting issues
 
 ## Thanks
 
