@@ -1,5 +1,5 @@
 import { getLocale, storage } from '@guardian/libs';
-import type { CountryCode } from '@guardian/libs/dist/esm/types/countries';
+import type { CountryCode } from '@guardian/types';
 import { getCookie } from '@frontend/web/browser/cookie';
 
 const COUNTRY_CODE_KEY = 'GU_geo_country';
