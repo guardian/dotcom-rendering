@@ -9,7 +9,7 @@ const editionDropdown = css`
 	display: flex;
 	position: absolute;
 	right: 11px;
-	${getZIndex('dropdown')}
+	${getZIndex('editionDropdown')}
 	transform: translateX(100%);
 
 	:before {
