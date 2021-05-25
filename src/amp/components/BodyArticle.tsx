@@ -13,6 +13,7 @@ import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { Ad } from '@root/src/amp/components/Ad';
+import { StickyAd } from '@root/src/amp/components/StickyAd';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -197,6 +198,15 @@ export const Body: React.FC<{
 			{elements}
 
 			{epic}
+
+			<StickyAd
+				adRegion="US"
+				edition={data.editionId}
+				section={data.sectionName || ''}
+				contentType={adInfo.contentType}
+				config={adConfig}
+				commercialProperties={adInfo.commercialProperties}
+			/>
 
 			<SubMeta
 				sections={data.subMetaSectionLinks}

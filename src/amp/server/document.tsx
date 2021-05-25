@@ -7,6 +7,7 @@ import he from 'he';
 
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
+import { stickyAdLabelCss } from '@root/src/amp/components/StickyAd';
 
 interface RenderToStringResult {
 	html: string;
@@ -97,6 +98,7 @@ export const document = ({
         ${getFontsCss()}
         ${resetCSS}
         ${css}
+		${stickyAdLabelCss}
     </style>
 
     </head>
