@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 
@@ -21,7 +21,7 @@ type Props = {
 export const Score = ({ score }: Props) => {
 	const ScoreStyles = ({ children }: { children: React.ReactNode }) => (
 		<div
-			className={css`
+			css={css`
 				position: relative;
 				width: 3.75rem;
 				height: 3.75rem;

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border, background } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -132,7 +132,7 @@ export const ClickToView = ({
 	) {
 		return (
 			<div
-				className={css`
+				css={css`
 					width: 100%;
 					background: ${background.secondary};
 					border: 1px solid ${border.secondary};
@@ -145,7 +145,7 @@ export const ClickToView = ({
 				data-component={`click-to-view:${sourceDomain}`}
 			>
 				<div
-					className={css`
+					css={css`
 						${roleHeadlineSize(role)}
 						margin-bottom: ${space[1]}px;
 					`}
@@ -155,7 +155,7 @@ export const ClickToView = ({
 						: 'Allow content provided by a third party?'}
 				</div>
 				<p
-					className={css`
+					css={css`
 						${textSize}
 					`}
 				>
@@ -185,7 +185,7 @@ export const ClickToView = ({
 					)}
 				</p>
 				<div
-					className={css`
+					css={css`
 						margin-top: ${space[5]}px;
 					`}
 				>

@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -22,7 +22,7 @@ const BACKGROUND_COLOUR = '#d9edf6';
 
 const StatsGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -73,7 +73,7 @@ const StatsGrid = ({ children }: { children: React.ReactNode }) => (
 
 const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			clear: left;
 			position: relative;
 			flex-grow: 1;
@@ -109,7 +109,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 
 const ShiftLeft = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			${from.leftCol} {
 				position: absolute;
 				left: -160px;
@@ -126,7 +126,7 @@ const ShiftLeft = ({ children }: { children: React.ReactNode }) => (
 
 const Center = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			justify-content: center;
 		`}
@@ -137,7 +137,7 @@ const Center = ({ children }: { children: React.ReactNode }) => (
 
 const RightBorder = ({ children }: { children: React.ReactNode }) => (
 	<h4
-		className={css`
+		css={css`
 			${from.phablet} {
 				border-right: 1px solid ${border.secondary};
 			}
@@ -151,7 +151,7 @@ const RightBorder = ({ children }: { children: React.ReactNode }) => (
 
 const H3 = ({ children }: { children: React.ReactNode }) => (
 	<h3
-		className={css`
+		css={css`
 			${headline.xxsmall({ fontWeight: 'bold' })}
 		`}
 	>
@@ -161,7 +161,7 @@ const H3 = ({ children }: { children: React.ReactNode }) => (
 
 const H4 = ({ children }: { children: React.ReactNode }) => (
 	<h4
-		className={css`
+		css={css`
 			${textSans.small()}
 		`}
 	>

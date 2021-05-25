@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brand, brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -234,15 +234,15 @@ export const Pillars: React.FC<{
 	showLastPillarDivider = true,
 	dataLinkName,
 }) => (
-	<ul data-testid="pillar-list" className={pillarsStyles(display)}>
+	<ul data-testid="pillar-list" css={pillarsStyles(display)}>
 		{pillars.map((p, i) => {
 			const isSelected = p.pillar === pillar;
 			const showDivider =
 				showLastPillarDivider || isNotLastPillar(i, pillars.length);
 			return (
-				<li key={p.title} className={pillarStyle}>
+				<li key={p.title} css={pillarStyle}>
 					<a
-						className={cx(
+						css={[
 							linkStyle(display),
 							pillarUnderline(
 								decidePalette({
@@ -254,7 +254,7 @@ export const Pillars: React.FC<{
 							isTopNav && showMenuUnderlineStyles,
 							isSelected && forceUnderline,
 							showDivider && pillarDivider,
-						)}
+						]}
 						href={p.url}
 						data-link-name={`${dataLinkName} : primary : ${p.title}`}
 					>

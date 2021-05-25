@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
@@ -35,7 +35,7 @@ const Container = ({
 	return (
 		<div
 			id={`block-${id}`}
-			className={css`
+			css={css`
 				padding-top: ${space[2]}px;
 				padding-bottom: ${space[3]}px;
 				margin-bottom: ${space[3]}px;
@@ -51,7 +51,7 @@ const Container = ({
 const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<header
-			className={css`
+			css={css`
 				padding-right: ${GUTTER}px;
 				display: flex;
 				flex-direction: column;
@@ -68,7 +68,7 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 const Footer = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<footer
-			className={css`
+			css={css`
 				margin-left: ${ASIDE_WIDTH}px;
 				padding-left: ${GUTTER}px;
 				padding-right: ${GUTTER}px;
@@ -84,7 +84,7 @@ const BlockMedia = ({ children }: { children: React.ReactNode }) => {
 		// Don't set side margins, causing content to flow to the edges (but
 		// we do set margins on any figcaption)
 		<div
-			className={css`
+			css={css`
 				& figcaption {
 					margin-left: ${ASIDE_WIDTH}px;
 					padding-left: ${GUTTER}px;
@@ -102,7 +102,7 @@ const BlockText = ({ children }: { children: React.ReactNode }) => {
 		// Set a left margin the same with as the left aside column plus
 		// padding gutters on both sides
 		<div
-			className={css`
+			css={css`
 				margin-left: ${ASIDE_WIDTH}px;
 				padding-left: ${GUTTER}px;
 				padding-right: ${GUTTER}px;
@@ -116,7 +116,7 @@ const BlockText = ({ children }: { children: React.ReactNode }) => {
 const BlockTitle = ({ title }: { title: string }) => {
 	return (
 		<h2
-			className={css`
+			css={css`
 				${headline.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[3]}px;
 			`}
@@ -135,7 +135,7 @@ const LastUpdated = ({
 }) => {
 	return (
 		<div
-			className={css`
+			css={css`
 				display: flex;
 				align-items: flex-end;
 				${textSans.xxsmall()};
@@ -162,7 +162,7 @@ const FirstPublished = ({
 			href={blockLink}
 			data-ignore="global-link-styling"
 			// title={publishedDate.toLocaleString()}
-			className={css`
+			css={css`
 				${textSans.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[1]}px;
 				padding-top: ${space[1]}px;
@@ -179,14 +179,14 @@ const FirstPublished = ({
 		>
 			<time
 				dateTime={publishedDate.toISOString()}
-				className={css`
+				css={css`
 					color: ${neutral[20]};
 				`}
 			>
 				{timeAgo(firstPublished)}
 			</time>
 			<span
-				className={css`
+				css={css`
 					${textSans.xxsmall()};
 					color: ${neutral[46]};
 				`}
@@ -248,7 +248,7 @@ export const LiveBlock = ({
 		<Container id={block.id} palette={palette}>
 			<Header>
 				<aside
-					className={css`
+					css={css`
 						${from.phablet} {
 							/* Yes, we do need both */
 							min-width: ${ASIDE_WIDTH + GUTTER}px;
@@ -315,7 +315,7 @@ export const LiveBlock = ({
 			<Footer>
 				<Hide when="below" breakpoint="phablet">
 					<div
-						className={css`
+						css={css`
 							display: flex;
 							justify-content: space-between;
 						`}

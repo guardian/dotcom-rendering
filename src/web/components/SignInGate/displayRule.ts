@@ -71,6 +71,9 @@ export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
 export const isPaidContent = (CAPI: CAPIBrowserType): boolean =>
 	CAPI.pageType.isPaidContent;
 
+export const isPreview = (CAPI: CAPIBrowserType): boolean =>
+	CAPI.isPreview || false;
+
 export const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
@@ -87,4 +90,5 @@ export const canShow = (
 	isValidSection(CAPI) &&
 	isValidTag(CAPI) &&
 	!isPaidContent(CAPI) &&
+	!isPreview(CAPI) &&
 	!isIOS9();

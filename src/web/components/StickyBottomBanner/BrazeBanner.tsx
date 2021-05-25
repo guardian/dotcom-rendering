@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import type { Props as BrazeBannerProps } from '@guardian/braze-components';
@@ -99,7 +99,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	}, []);
 
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
 				submitComponentEvent={submitComponentEvent}

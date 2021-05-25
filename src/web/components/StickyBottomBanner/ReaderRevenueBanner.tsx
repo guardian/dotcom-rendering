@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import {
@@ -51,6 +51,7 @@ type CanShowProps = BaseProps & {
 	asyncCountryCode: Promise<string>;
 	remoteBannerConfig: boolean;
 	section: string;
+	isPreview: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -130,10 +131,11 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
+	isPreview,
 }) => {
 	if (!remoteBannerConfig) return { result: false };
 
-	if (shouldHideReaderRevenue || isPaidContent) {
+	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
 		// We never serve Reader Revenue banners in this case
 		return { result: false };
 	}
@@ -314,7 +316,7 @@ const RemoteBanner = ({
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
 				ref={setNode}
-				className={css`
+				css={css`
 					width: 100%;
 					${getZIndex('banner')}
 				`}

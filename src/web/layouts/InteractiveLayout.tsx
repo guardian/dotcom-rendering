@@ -1,3 +1,4 @@
+import React from 'react';
 import { css } from '@emotion/react';
 
 import {
@@ -10,17 +11,15 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
+import { Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
@@ -36,13 +35,11 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
-import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
 	decideLineCount,
@@ -51,13 +48,7 @@ import {
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 
-const StandardGrid = ({
-	children,
-	isMatchReport,
-}: {
-	children: React.ReactNode;
-	isMatchReport: boolean;
-}) => (
+const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -86,152 +77,74 @@ const StandardGrid = ({
 					Left Column (220 - 1px border)
 					Vertical grey border
 					Main content
-					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 1fr;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst    right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'title  border  headline'
+						'.      border  standfirst'
+						'lines  border  media'
+						'meta   border  media'
+						'meta   border  body'
+						'.      border  .';
 				}
 
 				/* 
 					Explanation of each unit of grid-template-columns
 
-					Left Column
+					Left Column (220 - 1px border)
 					Vertical grey border
 					Main content
-					Right Column
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 1fr;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'title  border  headline'
+						'.      border  standfirst'
+						'lines  border  media'
+						'meta   border  media'
+						'meta   border  body'
+						'.      border  .';
 				}
 
-				/* 
-					Explanation of each unit of grid-template-columns
-
-					Main content
-					Right Column
-				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav      right-column'
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `}
+					grid-template-columns: 1fr; /* Main content */
+					grid-template-areas:
+						'title'
+						'headline'
+						'standfirst'
+						'media'
+						'lines'
+						'meta'
+						'body'
+						'.';
 				}
 
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'title'
+						'headline'
+						'standfirst'
+						'media'
+						'lines'
+						'meta'
+						'body';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'media'
+						'title'
+						'headline'
+						'standfirst'
+						'lines'
+						'meta'
+						'body';
 				}
 			}
 		`}
@@ -304,29 +217,18 @@ interface Props {
 	palette: Palette;
 }
 
-export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-	const showBodyEndSlot =
-		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-		CAPI.config.switches.slotBodyEnd;
-
-	// TODO:
-	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
-	// 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
-
 	const seriesTag = CAPI.tags.find(
 		(tag) => tag.type === 'Series' || tag.type === 'Blog',
 	);
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
-
-	const isMatchReport =
-		format.design === Design.MatchReport && !!CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -449,7 +351,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.article}
 				borderColour={palette.border.article}
 			>
-				<StandardGrid isMatchReport={isMatchReport}>
+				<InteractiveGrid>
 					<GridItem area="title">
 						<ArticleTitle
 							format={format}
@@ -467,17 +369,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						) : (
 							<Border palette={palette} />
 						)}
-					</GridItem>
-					<GridItem area="matchNav">
-						<div css={maxWidth}>
-							{format.design === Design.MatchReport &&
-								CAPI.matchUrl && (
-									<Placeholder
-										rootId="match-nav"
-										height={230}
-									/>
-								)}
-						</div>
 					</GridItem>
 					<GridItem area="headline">
 						<div css={maxWidth}>
@@ -578,9 +469,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
-								{isMatchReport && <div id="match-stats" />}
-
-								{showBodyEndSlot && <div id="slot-body-end" />}
 								<GuardianLines
 									data-print-layout="hide"
 									count={4}
@@ -606,37 +494,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</main>
 						</ArticleContainer>
 					</GridItem>
-					<GridItem area="right-column">
-						<div
-							css={css`
-								padding-top: 6px;
-								height: 100%;
-								${from.desktop} {
-									/* above 980 */
-									margin-left: 20px;
-									margin-right: -20px;
-								}
-								${from.leftCol} {
-									/* above 1140 */
-									margin-left: 0px;
-									margin-right: 0px;
-								}
-							`}
-						>
-							<RightColumn>
-								<AdSlot
-									position="right"
-									display={format.display}
-								/>
-								{!isPaidContent ? (
-									<MostViewedRightIsland />
-								) : (
-									<></>
-								)}
-							</RightColumn>
-						</div>
-					</GridItem>
-				</StandardGrid>
+				</InteractiveGrid>
 			</Section>
 
 			<Section

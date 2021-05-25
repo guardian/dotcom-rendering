@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Distribution } from './Distribution';
 
@@ -9,7 +9,7 @@ export default {
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 300px;
 			padding: 20px;
 			background: lightgray;

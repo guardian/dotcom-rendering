@@ -1468,20 +1468,6 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
-                },
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {
-                                "type": "string"
-                            },
-                            "body": {
-                                "type": "string"
-                            }
-                        }
-                    }
                 }
             },
             "required": [
@@ -3719,6 +3705,9 @@
                     "type": "boolean"
                 },
                 "isLive": {
+                    "type": "boolean"
+                },
+                "isPreview": {
                     "type": "boolean"
                 },
                 "pageId": {

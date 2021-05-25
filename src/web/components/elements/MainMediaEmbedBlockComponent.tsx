@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 type Props = {
 	title: string;
@@ -7,7 +7,7 @@ type Props = {
 
 export const MainMediaEmbedBlockComponent = ({ title, srcDoc }: Props) => (
 	<iframe
-		className={css`
+		css={css`
 			width: 100%;
 			height: 100vh;
 		`}

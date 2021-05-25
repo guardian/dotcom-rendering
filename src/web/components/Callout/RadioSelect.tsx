@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { RadioGroup, Radio } from '@guardian/src-radio';
 import { FieldLabel } from './FieldLabel';
@@ -17,7 +17,7 @@ export const RadioSelect = ({
 	// work around to enforce `display: flex;` to `RadioGroup`'s fieldset tag
 	// https://github.com/guardian/source/issues/580
 	<div
-		className={css`
+		css={css`
 			fieldset {
 				display: flex;
 			}

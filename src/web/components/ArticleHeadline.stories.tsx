@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { news } from '@guardian/src-foundations';
 import { Display, Design, Pillar, Special } from '@guardian/types';
@@ -80,7 +80,7 @@ export const ShowcaseInterview = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>
@@ -129,7 +129,7 @@ export const ShowcaseInterviewNobyline = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>

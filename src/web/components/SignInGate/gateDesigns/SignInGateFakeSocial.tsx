@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
@@ -283,26 +283,26 @@ export const SignInGateFakeSocial = ({
 		abTest?.variant === 'fake-social-variant-vertical';
 
 	return (
-		<div className={signInGateContainer} data-cy="sign-in-gate-fake-social">
+		<div css={signInGateContainer} data-cy="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
-			<div className={firstParagraphOverlay(!!isComment)} />
-			<h1 className={cx([heading, bodyPadding])}>
+			<div css={firstParagraphOverlay(!!isComment)} />
+			<h1 css={[heading, bodyPadding]}>
 				You need to register to keep reading
 			</h1>
-			<h2 className={cx([bodySeparator, bodyBold, bodyPadding])}>
+			<h2 css={[bodySeparator, bodyBold, bodyPadding]}>
 				It’s still free to read - this is not a paywall
 			</h2>
-			<p className={cx([bodyText, bodyPadding])}>
+			<p css={[bodyText, bodyPadding]}>
 				We’re committed to keep our quality reporting open. By
 				registering and providing us with insight into your preferences,
 				you’re helping us to engage with you more deeply, and that allow
 				us to keep our journalism free for all.
 			</p>
-			<p className={cx([bodyText, bodyPadding])}>
+			<p css={[bodyText, bodyPadding]}>
 				You’ll always be able to control your own&nbsp;
 				<button
 					data-cy="sign-in-gate-fake-social_privacy"
-					className={privacyLink}
+					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
@@ -312,11 +312,11 @@ export const SignInGateFakeSocial = ({
 				</button>{' '}
 				and every article will remain free.
 			</p>
-			<div className={cx([actionButtons, buttonMargin, bodyPadding])}>
+			<div css={[actionButtons, buttonMargin, bodyPadding]}>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_register"
 					data-ignore="global-link-styling"
-					className={registerButton}
+					css={registerButton}
 					priority="primary"
 					size="small"
 					href={signInUrl}
@@ -330,7 +330,7 @@ export const SignInGateFakeSocial = ({
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_dismiss"
 					data-ignore="global-link-styling"
-					className={laterButton}
+					css={laterButton}
 					priority="subdued"
 					size="small"
 					onClick={() => {
@@ -342,23 +342,12 @@ export const SignInGateFakeSocial = ({
 				</LinkButton>
 			</div>
 
-			<p
-				className={cx([
-					bodySeparator,
-					bodyBold,
-					signInHeader,
-					bodyPadding,
-				])}
-			>
+			<p css={[bodySeparator, bodyBold, signInHeader, bodyPadding]}>
 				Already registered?{' '}
 				<Link
 					data-cy="sign-in-gate-fake-social_signin"
 					data-ignore="global-link-styling"
-					className={cx([
-						signInLink,
-						inlineLink,
-						fakeSocialSignInLink,
-					])}
+					css={[signInLink, inlineLink, fakeSocialSignInLink]}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'sign-in-link', abTest);
@@ -367,26 +356,24 @@ export const SignInGateFakeSocial = ({
 					Sign In
 				</Link>
 			</p>
-			<div className={cx([separator, separatorText, showMobile])}>
+			<div css={[separator, separatorText, showMobile]}>
 				or continue with
 			</div>
 			<div
-				className={cx([
+				css={[
 					bodyBold,
 					signInHeader,
 					bodyPadding,
 					socialBox(verticalButtonStack),
-				])}
+				]}
 			>
-				<span className={cx([hideMobile, socialBoxText])}>
-					Or continue with
-				</span>
+				<span css={[hideMobile, socialBoxText]}>Or continue with</span>
 				<LinkButton
 					data-cy="sign-in-gate-fake-social_facebook"
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					className={iconButton(verticalButtonStack)}
+					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'facebook-button', abTest);
@@ -401,7 +388,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					className={iconButton(verticalButtonStack)}
+					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'google-button', abTest);
@@ -416,7 +403,7 @@ export const SignInGateFakeSocial = ({
 					data-ignore="global-link-styling"
 					priority="tertiary"
 					size="small"
-					className={iconButton(verticalButtonStack)}
+					css={iconButton(verticalButtonStack)}
 					href={signInUrl}
 					onClick={() => {
 						trackLink(ophanComponentId, 'apple-button', abTest);
@@ -428,7 +415,7 @@ export const SignInGateFakeSocial = ({
 				</LinkButton>
 			</div>
 
-			<div className={faq}>
+			<div css={faq}>
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}

@@ -1,9 +1,9 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
-import { Display, Design } from '@guardian/types';
+import { Display, Design, Special } from '@guardian/types';
 
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
@@ -16,6 +16,7 @@ type Props = {
 	displayCredit?: boolean;
 	shouldLimitWidth?: boolean;
 	isOverlayed?: boolean;
+	isLeftCol?: boolean;
 };
 
 const captionStyle = (palette: Palette) => css`
@@ -129,6 +130,7 @@ export const Caption = ({
 	displayCredit = true,
 	shouldLimitWidth = false,
 	isOverlayed,
+	isLeftCol,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -136,11 +138,47 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
+	const defaultCaption = (
+		<figcaption
+			css={[
+				captionStyle(palette),
+				shouldLimitWidth && limitedWidth,
+				!isOverlayed && bottomMargin,
+				isOverlayed && overlayedStyles,
+				padCaption && captionPadding,
+			]}
+		>
+			<span
+				css={[
+					iconStyle(palette),
+					format.display === Display.Immersive &&
+						hideIconBelowLeftCol,
+				]}
+			>
+				<TriangleIcon />
+			</span>
+			{captionText && (
+				<span
+					css={captionLink(palette)}
+					// eslint-disable-next-line react/no-danger
+					dangerouslySetInnerHTML={{
+						__html: captionText || '',
+					}}
+					key="caption"
+				/>
+			)}
+			{credit && displayCredit && ` ${credit}`}
+		</figcaption>
+	);
+
 	switch (format.design) {
 		case Design.PhotoEssay:
+			if (format.theme === Special.Labs && isLeftCol) {
+				return defaultCaption;
+			}
 			return (
 				<figcaption
-					className={cx(
+					css={[
 						css`
 							${textSans.xxsmall({ lineHeight: 'tight' })};
 							color: ${palette.text.caption};
@@ -158,11 +196,11 @@ export const Caption = ({
 						padCaption && captionPadding,
 						shouldLimitWidth && veryLimitedWidth,
 						shouldLimitWidth && bigLeftMargin,
-					)}
+					]}
 				>
 					{captionText && (
 						<span
-							className={captionLink(palette)}
+							css={captionLink(palette)}
 							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',
@@ -174,39 +212,6 @@ export const Caption = ({
 				</figcaption>
 			);
 		default:
-			return (
-				<figcaption
-					className={cx(
-						captionStyle(palette),
-						shouldLimitWidth && limitedWidth,
-						!isOverlayed && bottomMargin,
-						isOverlayed && overlayedStyles,
-						{
-							[captionPadding]: padCaption,
-						},
-					)}
-				>
-					<span
-						className={cx(
-							iconStyle(palette),
-							format.display === Display.Immersive &&
-								hideIconBelowLeftCol,
-						)}
-					>
-						<TriangleIcon />
-					</span>
-					{captionText && (
-						<span
-							className={captionLink(palette)}
-							// eslint-disable-next-line react/no-danger
-							dangerouslySetInnerHTML={{
-								__html: captionText || '',
-							}}
-							key="caption"
-						/>
-					)}
-					{credit && displayCredit && ` ${credit}`}
-				</figcaption>
-			);
+			return defaultCaption;
 	}
 };

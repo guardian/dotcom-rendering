@@ -1,8 +1,7 @@
-import { cx } from 'emotion';
-
 import { LinkButton } from '@guardian/src-button';
 import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
+
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from './types';
 import {
@@ -31,16 +30,14 @@ export const SignInGateMain = ({
 	isComment,
 }: SignInGateProps) => {
 	return (
-		<div className={signInGateContainer} data-cy="sign-in-gate-main">
+		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
-			<div className={firstParagraphOverlay(!!isComment)} />
-			<h1 className={headingStyles}>
-				You need to register to keep reading
-			</h1>
-			<p className={bodyBold}>
+			<div css={firstParagraphOverlay(!!isComment)} />
+			<h1 css={headingStyles}>You need to register to keep reading</h1>
+			<p css={bodyBold}>
 				It’s still free to read - this is not a paywall
 			</p>
-			<p className={bodyText}>
+			<p css={bodyText}>
 				We’re committed to keeping our quality reporting open. By
 				registering and providing us with insight into your preferences,
 				you’re helping us to engage with you more deeply, and that
@@ -48,7 +45,7 @@ export const SignInGateMain = ({
 				able to control your own{' '}
 				<button
 					data-cy="sign-in-gate-main_privacy"
-					className={privacyLink}
+					css={privacyLink}
 					onClick={() => {
 						cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
@@ -58,11 +55,11 @@ export const SignInGateMain = ({
 				</button>
 				.
 			</p>
-			<div className={actionButtons}>
+			<div css={actionButtons}>
 				<LinkButton
 					data-cy="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
-					className={registerButton}
+					css={registerButton}
 					priority="primary"
 					size="small"
 					href={signInUrl}
@@ -76,7 +73,7 @@ export const SignInGateMain = ({
 				<LinkButton
 					data-cy="sign-in-gate-main_dismiss"
 					data-ignore="global-link-styling"
-					className={laterButton}
+					css={laterButton}
 					priority="subdued"
 					size="small"
 					onClick={() => {
@@ -88,14 +85,14 @@ export const SignInGateMain = ({
 				</LinkButton>
 			</div>
 
-			<p className={cx([bodySeparator, bodyBold, signInHeader])}>
+			<p css={[bodySeparator, bodyBold, signInHeader]}>
 				Have a subscription? Made a contribution? Already registered?
 			</p>
 
 			<Link
 				data-cy="sign-in-gate-main_signin"
 				data-ignore="global-link-styling"
-				className={signInLink}
+				css={signInLink}
 				href={signInUrl}
 				onClick={() => {
 					trackLink(ophanComponentId, 'sign-in-link', abTest);
@@ -104,7 +101,7 @@ export const SignInGateMain = ({
 				Sign In
 			</Link>
 
-			<div className={faq}>
+			<div css={faq}>
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}

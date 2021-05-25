@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
@@ -10,7 +10,7 @@ type Props = {
 
 export const StandfirstWrapper = ({ children, palette }: Props) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: column;
 			color: ${palette.text.cardStandfirst};

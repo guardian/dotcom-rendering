@@ -6,28 +6,18 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 
-import { injectGlobal } from 'emotion';
-import { focusHalo } from '@guardian/src-foundations/accessibility';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
+import { InteractiveLayout } from './InteractiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
 	NAV: NavType;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-injectGlobal`
-	/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-	/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-	*:focus {
-		${focusHalo}
-	}
-`;
 
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	const display: Display = decideDisplay(CAPI.format);
@@ -101,6 +91,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Standard:
 		default: {
 			switch (design) {
+				case Design.Interactive:
+					return (
+						<InteractiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
 				case Design.LiveBlog:
 				case Design.DeadBlog:
 					return (

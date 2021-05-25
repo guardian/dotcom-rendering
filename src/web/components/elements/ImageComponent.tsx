@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { until, from, between } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
@@ -50,7 +50,7 @@ const starsWrapper = css`
 `;
 
 const PositionStarRating: React.FC<{ rating: number }> = ({ rating }) => (
-	<div className={starsWrapper}>
+	<div css={starsWrapper}>
 		<StarRating rating={rating} size="large" />
 	</div>
 );
@@ -143,23 +143,21 @@ const ImageTitle: React.FC<{
 		case 'halfWidth':
 		case 'supporting':
 			return (
-				<h2 className={cx(titleWrapper(palette), basicTitlePadding)}>
+				<h2 css={[titleWrapper(palette), basicTitlePadding]}>
 					{title}
 				</h2>
 			);
 		case 'showcase':
 		case 'immersive':
 			return (
-				<h2 className={cx(titleWrapper(palette), moreTitlePadding)}>
-					{title}
-				</h2>
+				<h2 css={[titleWrapper(palette), moreTitlePadding]}>{title}</h2>
 			);
 	}
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 		`}
@@ -173,7 +171,7 @@ const CaptionToggle = () => (
 		{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 		<label
 			htmlFor="the-checkbox"
-			className={css`
+			css={css`
 				position: absolute;
 				right: 5px;
 				width: 32px;
@@ -242,7 +240,7 @@ export const ImageComponent = ({
 	if (isMainMedia && format.display === Display.Immersive && isNotOpinion) {
 		return (
 			<div
-				className={css`
+				css={css`
 					/* These styles depend on the containing layout component wrapping the main media
                     with a div set to 100vh. This is the case for ImmersiveLayout which should
                     always be used if display === 'immersive' */
@@ -274,7 +272,7 @@ export const ImageComponent = ({
 	if (hideCaption) {
 		return (
 			<div
-				className={css`
+				css={css`
 					position: relative;
 
 					img {
@@ -305,7 +303,7 @@ export const ImageComponent = ({
 	return (
 		<>
 			<div
-				className={css`
+				css={css`
 					position: relative;
 
 					img {
@@ -331,7 +329,7 @@ export const ImageComponent = ({
 					<Hide when="above" breakpoint="tablet">
 						<Row>
 							<div
-								className={css`
+								css={css`
 									#the-checkbox {
 										/* Never show the input */
 										display: none;

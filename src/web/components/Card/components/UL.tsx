@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
 
@@ -33,11 +33,11 @@ export const UL = ({
 }: Props) => {
 	return (
 		<ul
-			className={cx(
+			css={[
 				ulStyles(direction),
 				showDivider && verticalDivider,
 				bottomMargin && marginBottomStyles,
-			)}
+			]}
 		>
 			{children}
 		</ul>

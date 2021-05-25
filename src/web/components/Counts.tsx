@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 
@@ -21,7 +21,7 @@ const containerStyles = css`
 `;
 
 export const Counts = ({ children }: Props) => (
-	<div className={containerStyles}>
+	<div css={containerStyles}>
 		{/* The containerStyles css is expecting children to be two divs with the
             'meta-number' class */}
 		{children}

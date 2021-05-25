@@ -1,11 +1,11 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brand, neutral } from '@guardian/src-foundations/palette';
 
 export const GuardianRoundel = () => {
 	return (
 		<div
-			className={css`
+			css={css`
 				height: 42px;
 				width: 42px;
 			`}

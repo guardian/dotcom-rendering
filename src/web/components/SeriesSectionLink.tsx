@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -153,10 +153,10 @@ export const SeriesSectionLink = ({
 						// We have a tag, we're not immersive, show both series and section titles
 						return (
 							// Sometimes the tags/titles are shown inline, sometimes stacked
-							<div className={cx(!badge && rowBelowLeftCol)}>
+							<div css={!badge && rowBelowLeftCol}>
 								<a
 									href={`${guardianBaseURL}/${tag.id}`}
-									className={cx(
+									css={[
 										sectionLabelLink,
 										marginRight,
 										fontStyles(format),
@@ -172,7 +172,7 @@ export const SeriesSectionLink = ({
 													${palette.background
 														.seriesTitle};
 										`,
-									)}
+									]}
 									data-component="series"
 									data-link-name="article series"
 								>
@@ -182,7 +182,7 @@ export const SeriesSectionLink = ({
 								<Hide when="below" breakpoint="tablet">
 									<a
 										href={`${guardianBaseURL}/${sectionUrl}`}
-										className={cx(
+										css={[
 											sectionLabelLink,
 											fontStyles(format),
 											displayBlock,
@@ -199,7 +199,7 @@ export const SeriesSectionLink = ({
 														${palette.background
 															.seriesTitle};
 											`,
-										)}
+										]}
 										data-component="section"
 										data-link-name="article section"
 									>
@@ -211,10 +211,10 @@ export const SeriesSectionLink = ({
 					}
 					// There's no tag so fallback to section title
 					return (
-						<div className={marginBottom}>
+						<div css={marginBottom}>
 							<a
 								href={`${guardianBaseURL}/${sectionUrl}`}
-								className={cx(
+								css={[
 									sectionLabelLink,
 									marginRight,
 									fontStyles(format),
@@ -230,7 +230,7 @@ export const SeriesSectionLink = ({
 												${palette.background
 													.seriesTitle};
 									`,
-								)}
+								]}
 								data-component="section"
 								data-link-name="article section"
 							>
@@ -244,12 +244,10 @@ export const SeriesSectionLink = ({
 						if (!tag) return null; // Just to keep ts happy
 						return (
 							<div
-								className={cx(
-									badge && immersiveTitleBadgeStyle(palette),
-								)}
+								css={badge && immersiveTitleBadgeStyle(palette)}
 							>
 								{badge && (
-									<div className={titleBadgeWrapper}>
+									<div css={titleBadgeWrapper}>
 										<Badge
 											imageUrl={badge.imageUrl}
 											seriesTag={badge.seriesTag}
@@ -258,7 +256,7 @@ export const SeriesSectionLink = ({
 								)}
 
 								<a
-									className={cx(
+									css={[
 										sectionLabelLink,
 										fontStyles(format),
 										invertedStyle,
@@ -274,7 +272,7 @@ export const SeriesSectionLink = ({
 													${palette.background
 														.seriesTitle};
 										`,
-									)}
+									]}
 									href={`${guardianBaseURL}/${tag.id}`}
 									data-component="series"
 									data-link-name="article series"
@@ -296,10 +294,10 @@ export const SeriesSectionLink = ({
 				// We have a tag, we're not immersive, show both series and section titles
 				return (
 					// Sometimes the tags/titles are shown inline, sometimes stacked
-					<div className={cx(!badge && rowBelowLeftCol)}>
+					<div css={!badge && rowBelowLeftCol}>
 						<a
 							href={`${guardianBaseURL}/${tag.id}`}
-							className={cx(
+							css={[
 								sectionLabelLink,
 								css`
 									color: ${palette.text.seriesTitle};
@@ -315,7 +313,7 @@ export const SeriesSectionLink = ({
 										6px 0 0 0
 											${palette.background.seriesTitle};
 								`,
-							)}
+							]}
 							data-component="series"
 							data-link-name="article series"
 						>
@@ -325,7 +323,7 @@ export const SeriesSectionLink = ({
 						<Hide when="below" breakpoint="tablet">
 							<a
 								href={`${guardianBaseURL}/${sectionUrl}`}
-								className={cx(
+								css={[
 									sectionLabelLink,
 									secondaryFontStyles(format),
 									displayBlock,
@@ -335,7 +333,7 @@ export const SeriesSectionLink = ({
 										background-color: ${palette.background
 											.sectionTitle};
 									`,
-								)}
+								]}
 								data-component="section"
 								data-link-name="article section"
 							>
@@ -349,7 +347,7 @@ export const SeriesSectionLink = ({
 			return (
 				<a
 					href={`${guardianBaseURL}/${sectionUrl}`}
-					className={cx(
+					css={[
 						sectionLabelLink,
 						css`
 							color: ${palette.text.sectionTitle};
@@ -359,7 +357,7 @@ export const SeriesSectionLink = ({
 						marginRight,
 						fontStyles(format),
 						breakWord,
-					)}
+					]}
 					data-component="section"
 					data-link-name="article section"
 				>

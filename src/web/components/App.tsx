@@ -662,6 +662,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						trackUrl={audioAtom.trackUrl}
 						kicker={audioAtom.kicker}
 						title={audioAtom.title}
+						duration={audioAtom.duration}
 						pillar={pillar}
 						contentIsNotSensitive={!CAPI.config.isSensitive}
 						aCastisEnabled={CAPI.config.switches.acast}
@@ -1052,6 +1053,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					asyncCountryCode={asyncCountryCode}
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
+					isPreview={!!CAPI.isPreview}
 				/>
 			</Portal>
 		</React.StrictMode>

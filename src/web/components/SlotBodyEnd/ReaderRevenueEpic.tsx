@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	getBodyEnd,
@@ -258,7 +258,7 @@ export const ReaderRevenueEpic = ({
 	}, [hasBeenSeen, meta]);
 	if (Epic) {
 		return (
-			<div ref={setNode} className={wrapperMargins}>
+			<div ref={setNode} css={wrapperMargins}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Epic
 					{...module.props}
