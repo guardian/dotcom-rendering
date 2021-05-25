@@ -103,13 +103,13 @@ export const TopMetaPaidContent: React.FC<{
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-			<Byline
-				byline={articleData.author.byline}
-				tags={articleData.tags}
-				pillar={pillar}
-				guardianBaseURL={articleData.guardianBaseURL}
-				css={bylineStyle}
-			/>
+			<div css={bylineStyle}>
+				<Byline
+					byline={articleData.author.byline}
+					tags={articleData.tags}
+					guardianBaseURL={articleData.guardianBaseURL}
+				/>
+			</div>
 
 			<TopMetaExtras
 				sharingUrls={getSharingUrls(

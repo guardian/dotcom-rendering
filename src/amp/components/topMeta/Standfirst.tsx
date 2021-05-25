@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -45,9 +45,9 @@ export const Standfirst: React.FunctionComponent<{
 	return (
 		<div
 			data-print-layout="hide"
-			className={
+			css={
 				pillar === Special.Labs
-					? cx(standfirstCss(pillar), labsStyle)
+					? [standfirstCss(pillar), labsStyle]
 					: standfirstCss(pillar)
 			}
 			dangerouslySetInnerHTML={{

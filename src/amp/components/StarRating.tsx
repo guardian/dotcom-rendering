@@ -1,7 +1,8 @@
 import React from 'react';
-import { css, cx } from 'emotion';
-import { Star } from '@frontend/static/icons/Star';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
+
+import { Star } from '@frontend/static/icons/Star';
 
 const ratingsWrapper = css`
 	background-color: ${palette.brandAlt[400]};
@@ -32,9 +33,9 @@ export const StarRating: React.FC<{
 	const stars = (n: number) => {
 		return Array(5)
 			.fill(0)
-			.map((el, i) => (
+			.map((_, i) => (
 				<Star starId={`${size}${i}`} isEmpty={i >= n} key={i} />
 			));
 	};
-	return <div className={cx(ratingsWrapper, sizeClass)}>{stars(rating)}</div>;
+	return <div css={[ratingsWrapper, sizeClass]}>{stars(rating)}</div>;
 };

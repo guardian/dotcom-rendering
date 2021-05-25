@@ -97,13 +97,13 @@ export const TopMetaLiveblog: React.FC<{
 			<MainMedia key={i} element={element} pillar={pillar} />
 		))}
 
-		<Byline
-			byline={articleData.author.byline}
-			tags={articleData.tags}
-			pillar={pillar}
-			guardianBaseURL={articleData.guardianBaseURL}
-			css={bylineStyle(pillar)}
-		/>
+		<div css={bylineStyle(pillar)}>
+			<Byline
+				byline={articleData.author.byline}
+				tags={articleData.tags}
+				guardianBaseURL={articleData.guardianBaseURL}
+			/>
+		</div>
 
 		<TopMetaExtras
 			sharingUrls={getSharingUrls(

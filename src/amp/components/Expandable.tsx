@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import InfoIcon from '@frontend/static/icons/info.svg';
 import PlusIcon from '@frontend/static/icons/plus.svg';

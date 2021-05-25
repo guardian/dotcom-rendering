@@ -1,12 +1,16 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { OnwardContainer } from '@root/src/amp/components/OnwardContainer';
 
 const wrapper = css`
 	background-color: white;
 	padding-top: 24px;
+`;
+
+const innerContainerStyles = css`
+	padding-left: 10px;
+	padding-right: 10px;
 `;
 
 const sectionHasMostViewed = (sectionID: string): boolean => {
@@ -122,5 +126,5 @@ export const Onward: React.FC<{
 		headlines,
 	);
 
-	return <InnerContainer css={wrapper}>{containers}</InnerContainer>;
+	return <div css={[wrapper, innerContainerStyles]}>{containers}</div>;
 };

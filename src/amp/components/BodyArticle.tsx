@@ -7,7 +7,6 @@ import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 
-import { InnerContainer } from '@root/src/amp/components/InnerContainer';
 import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
@@ -20,6 +19,11 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { Epic } from '@root/src/amp/components/Epic';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
+
+const innerContainerStyles = css`
+	padding-left: 10px;
+	padding-right: 10px;
+`;
 
 const bulletStyle = (pillar: Theme) => css`
 	.bullet {
@@ -182,7 +186,7 @@ export const Body: React.FC<{
 	);
 
 	return (
-		<InnerContainer css={body(pillar, design)}>
+		<div css={[body(pillar, design), innerContainerStyles]}>
 			<TopMeta
 				data={data}
 				design={design}
@@ -203,6 +207,6 @@ export const Body: React.FC<{
 				isCommentable={data.isCommentable}
 				guardianBaseURL={data.guardianBaseURL}
 			/>
-		</InnerContainer>
+		</div>
 	);
 };

@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
 
@@ -133,7 +133,7 @@ export const Ad = ({
 
 	return (
 		<amp-ad
-			class={cx(adClass, adRegionClasses[adRegion])}
+			css={[adClass, adRegionClasses[adRegion]]}
 			data-block-on-consent=""
 			width={width}
 			height={height}
