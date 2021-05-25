@@ -1,13 +1,14 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
+import { Special } from '@guardian/types';
+
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { Special } from '@guardian/types';
 
 const headerStyle = css`
 	display: flex;
@@ -104,38 +105,31 @@ const iconStyle = css`
 `;
 
 export const PaidForBand: React.FC = () => (
-	<header className={headerStyle}>
-		<div className={metaStyle}>
+	<header css={headerStyle}>
+		<div css={metaStyle}>
 			<span>Paid content</span>
-			<div className={aboutStyle}>
+			<div css={aboutStyle}>
 				<button
-					className={cx(
-						aboutButtonStyle,
-						aboutButtonIcon,
-						focusColor,
-					)}
+					css={[aboutButtonStyle, aboutButtonIcon, focusColor]}
 					on="tap:popup.toggleVisibility"
 				>
 					About
 				</button>
-				<div id="popup" className={popUpStyle} hidden={true}>
+				<div id="popup" css={popUpStyle} hidden={true}>
 					<div>
 						Paid content is paid for and controlled by an advertiser
 						and produced by the Guardian Labs team.
 					</div>
 					<a
-						className={cx(aStyle, focusColor)}
+						css={[aStyle, focusColor]}
 						href="https://www.theguardian.com/content-funding"
 					>
 						Learn more about Guardian Labs content{' '}
-						<ArrowRightIcon
-							className={iconStyle}
-							role="presentation"
-						/>
+						<ArrowRightIcon css={iconStyle} role="presentation" />
 					</a>
 				</div>
 			</div>
 		</div>
-		<LabsLogo className={logoStyle} />
+		<LabsLogo css={logoStyle} />
 	</header>
 );

@@ -1,13 +1,12 @@
-import React from 'react';
 import { bylineTokens } from '@root/src/amp/lib/byline-tokens';
 
-export const Byline: React.FC<{
+type Props = {
 	byline?: string;
 	tags: TagType[];
-	pillar: Theme;
 	guardianBaseURL: string;
-	className?: string;
-}> = ({ byline, tags, guardianBaseURL, className }) => {
+};
+
+export const Byline = ({ byline, tags, guardianBaseURL }: Props) => {
 	if (!byline) {
 		return null;
 	}
@@ -32,5 +31,5 @@ export const Byline: React.FC<{
 		return token;
 	});
 
-	return <div className={className}>{linkedByline}</div>;
+	return <>{linkedByline}</>;
 };

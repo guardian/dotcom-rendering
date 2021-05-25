@@ -1,7 +1,9 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
+
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
@@ -46,10 +48,10 @@ const Headline: React.FC<{
 }> = ({ headlineText, starRating }) => {
 	return (
 		<div>
-			<h1 className={cx(headerStyle)}>{curly(headlineText)}</h1>
+			<h1 css={headerStyle}>{curly(headlineText)}</h1>
 
 			{starRating !== undefined && (
-				<div className={starRatingWrapper}>
+				<div css={starRatingWrapper}>
 					<StarRating rating={starRating} size="large" />
 				</div>
 			)}
@@ -97,13 +99,13 @@ export const TopMetaNews: React.FC<{
 
 			{branding && <Branding branding={branding} pillar={pillar} />}
 
-			<Byline
-				byline={articleData.author.byline}
-				tags={articleData.tags}
-				pillar={pillar}
-				guardianBaseURL={articleData.guardianBaseURL}
-				className={bylineStyle(pillar)}
-			/>
+			<div css={bylineStyle(pillar)}>
+				<Byline
+					byline={articleData.author.byline}
+					tags={articleData.tags}
+					guardianBaseURL={articleData.guardianBaseURL}
+				/>
+			</div>
 
 			<TopMetaExtras
 				sharingUrls={getSharingUrls(

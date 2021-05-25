@@ -1,6 +1,5 @@
 import React from 'react';
-import { InnerContainer } from '@root/src/amp/components/InnerContainer';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaLiveblog } from '@root/src/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
@@ -15,6 +14,11 @@ import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
+
+const innerContainerStyles = css`
+	padding-left: 10px;
+	padding-right: 10px;
+`;
 
 const bodyStyle = css`
 	background-color: ${palette.neutral[97]};
@@ -80,7 +84,7 @@ export const Body: React.FC<{
 		: false;
 
 	return (
-		<InnerContainer className={bodyStyle}>
+		<div css={[bodyStyle, innerContainerStyles]}>
 			<TopMetaLiveblog articleData={data} pillar={pillar} />
 			<KeyEvents events={data.keyEvents} url={url} />
 
@@ -92,7 +96,7 @@ export const Body: React.FC<{
 				id="live-blog-entries-main"
 				data-max-items-per-page="20" // TODO confirm if this should be dynamic
 			>
-				<div update="" className={updateButtonStyle}>
+				<div update="" css={updateButtonStyle}>
 					<button on="tap:live-blog-entries-main.update">
 						<RefreshIcon />
 						<span>You have updates</span>
@@ -125,6 +129,6 @@ export const Body: React.FC<{
 				isCommentable={data.isCommentable}
 				guardianBaseURL={data.guardianBaseURL}
 			/>
-		</InnerContainer>
+		</div>
 	);
 };

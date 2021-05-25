@@ -1,7 +1,8 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { css } from '@emotion/react';
+
 import { Expandable } from '@root/src/amp/components/Expandable';
-import { css, cx } from 'emotion';
 import { palette } from '@guardian/src-foundations';
 
 const eventsWrapper = css`
@@ -39,16 +40,16 @@ const headingStyle = css`
 
 const getHTML = (events: TimelineEvent[], description?: string): string => {
 	const eventMarkup = events.map((e) => (
-		<li className={eventStyle} key={e.title}>
-			<time className={cx(eventIconStyle, highlight)}>{e.date}</time>
+		<li css={eventStyle} key={e.title}>
+			<time css={[eventIconStyle, highlight]}>{e.date}</time>
 			{e.toDate && (
 				<>
 					{' '}
-					- <time className={highlight}>{e.toDate}</time>
+					- <time css={highlight}>{e.toDate}</time>
 				</>
 			)}
 			<div>
-				<h3 className={headingStyle}>{e.title}</h3>
+				<h3 css={headingStyle}>{e.title}</h3>
 				<div
 					dangerouslySetInnerHTML={{
 						__html: e.body || '',
@@ -59,7 +60,7 @@ const getHTML = (events: TimelineEvent[], description?: string): string => {
 	));
 
 	const eventString = renderToStaticMarkup(
-		<ul className={eventsWrapper}>{eventMarkup}</ul>,
+		<ul css={eventsWrapper}>{eventMarkup}</ul>,
 	);
 
 	return (description || '') + eventString;

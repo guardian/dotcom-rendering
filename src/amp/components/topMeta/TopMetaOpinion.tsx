@@ -1,7 +1,9 @@
 import React from 'react';
+import { css } from '@emotion/react';
+
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
-import { css, cx } from 'emotion';
+
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
@@ -76,16 +78,14 @@ const BylineMeta: React.FunctionComponent<{
 		: null;
 
 	return (
-		<div className={bylineWrapper}>
-			<Byline
-				byline={articleData.author.byline}
-				tags={articleData.tags}
-				pillar={pillar}
-				guardianBaseURL={articleData.guardianBaseURL}
-				className={cx(bylineStyle(pillar), {
-					[bottomPadding]: !bylineImageUrl,
-				})}
-			/>
+		<div css={bylineWrapper}>
+			<div css={[bylineStyle(pillar), !bylineImageUrl && bottomPadding]}>
+				<Byline
+					byline={articleData.author.byline}
+					tags={articleData.tags}
+					guardianBaseURL={articleData.guardianBaseURL}
+				/>
+			</div>
 
 			{contributorTag && bylineImageUrl && contributorCount === 1 && (
 				<amp-img
@@ -121,7 +121,7 @@ export const TopMetaOpinion: React.FC<{
 				fallbackToSection={false}
 			/>
 
-			<h1 className={headerStyle}>{articleData.headline}</h1>
+			<h1 css={headerStyle}>{articleData.headline}</h1>
 
 			{branding && <Branding branding={branding} pillar={pillar} />}
 
