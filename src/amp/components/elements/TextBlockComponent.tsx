@@ -12,7 +12,7 @@ import { sanitise } from '@frontend/lib/sanitise-html';
 // to re-use styling, but generally we should avoid this as it couples
 // components.
 
-export const ListStyle = (iconColour: string) => css`
+const ListStyle = (iconColour: string) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -33,7 +33,7 @@ export const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-export const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
@@ -44,7 +44,7 @@ export const LinkStyle = (pillar: Theme) => css`
 	}
 `;
 
-export const TextStyle = (pillar: Theme) => css`
+const TextStyle = (pillar: Theme) => css`
 	strong {
 		font-weight: 700;
 	}
