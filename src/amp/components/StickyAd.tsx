@@ -10,9 +10,11 @@ amp-sticky-ad:before {
 	display: block;
 	${textSans.xsmall()};
 	font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
-	padding: 3px 10px;
+	padding: 3px 10px 0;
 	color: ${text.supporting};
 	text-align: right;
+	line-height: 1;
+	font-size: 0.75rem;
 }`;
 
 export const StickyAd = ({
