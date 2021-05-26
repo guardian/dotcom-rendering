@@ -173,7 +173,10 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 		`${contributionsServiceUrl}/banner${queryString}`,
 	).then((json: { data?: any }) => {
 		if (!json.data) {
-			if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
+			if (
+				engagementBannerLastClosedAt &&
+				subscriptionBannerLastClosedAt
+			) {
 				setLocalNoBannerCachePeriod();
 			}
 			return { result: false };
@@ -229,17 +232,18 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 			subscriptionBannerLastClosedAt,
 			optedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		});
-		return getBanner(bannerPayload, `${contributionsServiceUrl}/puzzles`).then(
-			(json: { data?: any }) => {
-				if (!json.data) {
-					return { result: false };
-				}
+		return getBanner(
+			bannerPayload,
+			`${contributionsServiceUrl}/puzzles`,
+		).then((json: { data?: any }) => {
+			if (!json.data) {
+				return { result: false };
+			}
 
-				const { module, meta } = json.data;
+			const { module, meta } = json.data;
 
-				return { result: true, meta: { module, meta } };
-			},
-		);
+			return { result: true, meta: { module, meta } };
+		});
 	}
 
 	return { result: false };
@@ -285,7 +289,10 @@ const RemoteBanner = ({
 				const msg = `Error importing RR banner: ${error}`;
 				// eslint-disable-next-line no-console
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(new Error(msg), 'rr-banner');
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-banner',
+				);
 			});
 	}, []);
 
