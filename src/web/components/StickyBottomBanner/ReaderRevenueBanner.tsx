@@ -8,7 +8,6 @@ import {
 } from '@root/node_modules/@guardian/automat-client';
 import {
 	shouldHideSupportMessaging,
-	hasCmpConsentForArticleCount,
 	withinLocalNoBannerCachePeriod,
 	setLocalNoBannerCachePeriod,
 	MODULES_VERSION,
@@ -45,7 +44,7 @@ type BaseProps = {
 
 type BuildPayloadProps = BaseProps & {
 	countryCode: string;
-	hasConsentedToArticleCounts: boolean;
+	optedOutOfArticleCount: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -72,7 +71,7 @@ const buildPayload = ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	countryCode,
-	hasConsentedToArticleCounts,
+	optedOutOfArticleCount,
 }: BuildPayloadProps) => {
 	return {
 		tracking: {
@@ -91,7 +90,7 @@ const buildPayload = ({
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode,
 			weeklyArticleHistory: getWeeklyArticleHistory(),
-			hasOptedOutOfArticleCount: !hasConsentedToArticleCounts,
+			optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 		},
 	};
@@ -150,7 +149,6 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 	}
 
 	const countryCode = await asyncCountryCode;
-	const hasConsentedToArticleCounts = await hasCmpConsentForArticleCount();
 	const bannerPayload = buildPayload({
 		isSignedIn,
 		countryCode,
@@ -165,7 +163,7 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 		alreadyVisitedCount,
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
-		hasConsentedToArticleCounts,
+		optedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 	});
 	const forcedVariant = getForcedVariant('banner');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
@@ -175,10 +173,7 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 		`${contributionsServiceUrl}/banner${queryString}`,
 	).then((json: { data?: any }) => {
 		if (!json.data) {
-			if (
-				engagementBannerLastClosedAt &&
-				subscriptionBannerLastClosedAt
-			) {
+			if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
 				setLocalNoBannerCachePeriod();
 			}
 			return { result: false };
@@ -218,7 +213,6 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 
 	if (isPuzzlesPage && remoteBannerConfig) {
 		const countryCode = await asyncCountryCode;
-		const hasConsentedToArticleCounts = !(await hasOptedOutOfArticleCount());
 		const bannerPayload = buildPayload({
 			isSignedIn,
 			countryCode,
@@ -233,20 +227,19 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 			alreadyVisitedCount,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
-			hasConsentedToArticleCounts,
+			optedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		});
-		return getBanner(
-			bannerPayload,
-			`${contributionsServiceUrl}/puzzles`,
-		).then((json: { data?: any }) => {
-			if (!json.data) {
-				return { result: false };
-			}
+		return getBanner(bannerPayload, `${contributionsServiceUrl}/puzzles`).then(
+			(json: { data?: any }) => {
+				if (!json.data) {
+					return { result: false };
+				}
 
-			const { module, meta } = json.data;
+				const { module, meta } = json.data;
 
-			return { result: true, meta: { module, meta } };
-		});
+				return { result: true, meta: { module, meta } };
+			},
+		);
 	}
 
 	return { result: false };
@@ -292,10 +285,7 @@ const RemoteBanner = ({
 				const msg = `Error importing RR banner: ${error}`;
 				// eslint-disable-next-line no-console
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'rr-banner',
-				);
+				window.guardian.modules.sentry.reportError(new Error(msg), 'rr-banner');
 			});
 	}, []);
 
