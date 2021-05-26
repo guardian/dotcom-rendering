@@ -154,10 +154,10 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 	});
 };
 
-export const hasOptedOutOfArticleCount = async(): Promise<boolean> => {
+export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
 	const hasCmpConsent = await hasCmpConsentForArticleCount();
 	return !hasCmpConsent || hasArticleCountOptOutCookie();
-}
+};
 
 const twentyMins = 20 * 60000;
 export const withinLocalNoBannerCachePeriod = (): boolean => {

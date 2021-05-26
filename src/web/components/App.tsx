@@ -210,7 +210,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
 				.then((cc) => setCountryCode(cc || ''))
-				.catch((e) => console.error(`countryCodePromise - error: ${e}`));
+				.catch((e) =>
+					console.error(`countryCodePromise - error: ${e}`),
+				);
 		};
 		callFetch();
 	}, []);
@@ -261,7 +263,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
 			)
 				.then((utils) =>
-					utils[key](asExistingSupporter, CAPI.shouldHideReaderRevenue),
+					utils[key](
+						asExistingSupporter,
+						CAPI.shouldHideReaderRevenue,
+					),
 				)
 				/* eslint-disable no-console */
 				.catch((error) =>
@@ -299,8 +304,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			onConsentChange(() => {
 				if (!recordedConsentTime) {
 					recordedConsentTime = true;
-					cmp
-						.willShowPrivacyMessage()
+					cmp.willShowPrivacyMessage()
 						.then((willShow) => {
 							trackPerformance(
 								'consent',
@@ -309,7 +313,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							);
 						})
 						.catch((e) =>
-							console.error(`CMP willShowPrivacyMessage - error: ${e}`),
+							console.error(
+								`CMP willShowPrivacyMessage - error: ${e}`,
+							),
 						);
 				}
 			});
@@ -395,7 +401,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.RichLinkBlockElement',
 				).length > 0
 			) {
-				return import('@frontend/web/components/elements/RichLinkComponent');
+				return import(
+					'@frontend/web/components/elements/RichLinkComponent'
+				);
 			}
 			return Promise.reject();
 		},
@@ -638,7 +646,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
-					<CalloutBlockComponent callout={callout} palette={palette} />
+					<CalloutBlockComponent
+						callout={callout}
+						palette={palette}
+					/>
 				</HydrateOnce>
 			))}
 			{chartAtoms.map((chartAtom) => (
@@ -795,7 +806,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
 						>
-							<EmbedBlockComponent html={embed.html} alt={embed.alt} />
+							<EmbedBlockComponent
+								html={embed.html}
+								alt={embed.alt}
+							/>
 						</ClickToView>
 					) : (
 						<ClickToView
@@ -804,7 +818,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							source={embed.source}
 							sourceDomain={embed.sourceDomain}
 							onAccept={() =>
-								updateIframeHeight(`iframe[name="unsafe-embed-${index}"]`)
+								updateIframeHeight(
+									`iframe[name="unsafe-embed-${index}"]`,
+								)
 							}
 						>
 							<UnsafeEmbedBlockComponent
@@ -825,10 +841,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						source={insta.source}
 						sourceDomain={insta.sourceDomain}
 						onAccept={() =>
-							updateIframeHeight(`iframe[name="instagram-embed-${index}"]`)
+							updateIframeHeight(
+								`iframe[name="instagram-embed-${index}"]`,
+							)
 						}
 					>
-						<InstagramBlockComponent element={insta} index={index} />
+						<InstagramBlockComponent
+							element={insta}
+							index={index}
+						/>
 					</ClickToView>
 				</HydrateOnce>
 			))}
@@ -995,7 +1016,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					palette={palette}
 					user={user || undefined}
 					discussionD2Uid={CAPI.config.discussionD2Uid}
-					discussionApiClientHeader={CAPI.config.discussionApiClientHeader}
+					discussionApiClientHeader={
+						CAPI.config.discussionApiClientHeader
+					}
 					enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
 					isAdFreeUser={CAPI.isAdFreeUser}
 					shouldHideAds={CAPI.shouldHideAds}

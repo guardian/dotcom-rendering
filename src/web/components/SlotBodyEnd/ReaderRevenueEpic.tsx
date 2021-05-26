@@ -129,7 +129,9 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 			showSupportMessaging: !shouldHideSupportMessaging(
 				props.isSignedIn || false,
 			),
-			isRecurringContributor: isRecurringContributor(props.isSignedIn || false),
+			isRecurringContributor: isRecurringContributor(
+				props.isSignedIn || false,
+			),
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			epicViewLog: getViewLog(),
 			weeklyArticleHistory: getWeeklyArticleHistory(),
@@ -240,7 +242,10 @@ export const ReaderRevenueEpic = ({
 				const msg = `Error importing RR epic: ${error}`;
 				// eslint-disable-next-line no-console
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(new Error(msg), 'rr-epic');
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-epic',
+				);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
