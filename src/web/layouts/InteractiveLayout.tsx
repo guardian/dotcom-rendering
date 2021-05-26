@@ -71,7 +71,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
@@ -84,13 +84,15 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title  border  headline'
 						'.      border  standfirst'
-						'lines  border  media'
-						'meta   border  media'
-						'meta   border  body'
+						'.      border  media'
+						'.      border  media'
+						'.      border  lines'
+						'.      border  meta'
+						'.      border  body'
 						'.      border  .';
 				}
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
@@ -103,9 +105,11 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title  border  headline'
 						'.      border  standfirst'
-						'lines  border  media'
-						'meta   border  media'
-						'meta   border  body'
+						'.      border  media'
+						'.      border  media'
+						'.      border  lines'
+						'.      border  meta'
+						'.      border  body'
 						'.      border  .';
 				}
 
