@@ -137,6 +137,9 @@ const removeArticleCountsFromLocalStorage = () => {
 
 export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 	return new Promise((resolve) => {
+		if (getCookie('gu-cmp-disabled')) {
+			resolve(true);
+		}
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
 			if (ccpa || aus) {
 				resolve(true);

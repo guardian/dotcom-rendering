@@ -149,6 +149,7 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 	}
 
 	const countryCode = await asyncCountryCode;
+	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = buildPayload({
 		isSignedIn,
 		countryCode,
@@ -163,7 +164,7 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 		alreadyVisitedCount,
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
-		optedOutOfArticleCount: await hasOptedOutOfArticleCount(),
+		optedOutOfArticleCount,
 	});
 	const forcedVariant = getForcedVariant('banner');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
@@ -216,6 +217,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 
 	if (isPuzzlesPage && remoteBannerConfig) {
 		const countryCode = await asyncCountryCode;
+		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 		const bannerPayload = buildPayload({
 			isSignedIn,
 			countryCode,
@@ -230,7 +232,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 			alreadyVisitedCount,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
-			optedOutOfArticleCount: await hasOptedOutOfArticleCount(),
+			optedOutOfArticleCount,
 		});
 		return getBanner(
 			bannerPayload,
