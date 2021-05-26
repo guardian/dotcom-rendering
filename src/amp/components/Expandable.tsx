@@ -171,10 +171,10 @@ export const Expandable: React.FC<{
 	type: string;
 	title: string;
 	img?: string;
-	html: string;
 	credit?: string;
 	pillar: Theme;
-}> = ({ id, type, title, img, html, credit, pillar }) => (
+	children: React.ReactNode;
+}> = ({ id, type, title, img, children, credit, pillar }) => (
 	<aside css={wrapper(pillar)}>
 		<div css={headers}>
 			<span css={[headerStyle, pillarColour(pillar)]}>{type}</span>
@@ -192,11 +192,7 @@ export const Expandable: React.FC<{
 					height="100"
 				/>
 			)}
-			<div
-				dangerouslySetInnerHTML={{
-					__html: html,
-				}}
-			/>
+			{children}
 			{credit && (
 				<span css={creditStyle}>
 					<span css={iconStyle}>
