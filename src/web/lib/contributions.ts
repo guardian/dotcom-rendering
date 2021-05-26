@@ -127,7 +127,7 @@ export const shouldHideSupportMessaging = (
 
 const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 
-export const hasOptedOutOfArticleCount = (): boolean =>
+export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
@@ -135,7 +135,7 @@ const removeArticleCountsFromLocalStorage = () => {
 	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
-export const getArticleCountConsent = (): Promise<boolean> => {
+export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 	return new Promise((resolve) => {
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
 			if (ccpa || aus) {
@@ -153,6 +153,11 @@ export const getArticleCountConsent = (): Promise<boolean> => {
 		});
 	});
 };
+
+export const hasOptedOutOfArticleCount = async(): Promise<boolean> => {
+	const hasCmpConsent = await hasCmpConsentForArticleCount();
+	return !hasCmpConsent || hasArticleCountOptOutCookie();
+}
 
 const twentyMins = 20 * 60000;
 export const withinLocalNoBannerCachePeriod = (): boolean => {
