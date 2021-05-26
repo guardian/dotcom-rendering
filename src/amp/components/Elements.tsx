@@ -66,11 +66,16 @@ export const Elements = (
 						id={element.id}
 						type={element.label}
 						title={element.title}
-						html={element.html}
 						img={element.img}
 						credit={element.credit}
 						pillar={pillar}
-					/>
+					>
+						<div
+							dangerouslySetInnerHTML={{
+								__html: element.html,
+							}}
+						/>
+					</Expandable>
 				);
 			case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 				return (
@@ -109,11 +114,16 @@ export const Elements = (
 						id={element.id}
 						type={element.label}
 						title={element.title}
-						html={element.html}
 						img={element.img}
 						credit={element.credit}
 						pillar={pillar}
-					/>
+					>
+						<div
+							dangerouslySetInnerHTML={{
+								__html: element.html,
+							}}
+						/>
+					</Expandable>
 				);
 			case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 				return (
@@ -129,11 +139,16 @@ export const Elements = (
 						id={element.id}
 						type="Q&A"
 						title={element.title}
-						html={element.html}
 						img={element.img}
 						credit={element.credit}
 						pillar={pillar}
-					/>
+					>
+						<div
+							dangerouslySetInnerHTML={{
+								__html: element.html,
+							}}
+						/>
+					</Expandable>
 				);
 			case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 				return (
