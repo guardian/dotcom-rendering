@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -41,7 +41,7 @@ const showMore = css`
 `;
 
 export const ShowMoreButton: React.FC = () => (
-	<div className={showMore} aria-label="Show more">
+	<div css={showMore} aria-label="Show more">
 		<PlusIcon />
 		Show more
 	</div>

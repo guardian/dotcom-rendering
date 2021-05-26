@@ -1,5 +1,9 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
+
+import { text } from '@guardian/src-foundations/palette';
+import { palette } from '@guardian/src-foundations';
+import { textSans, body } from '@guardian/src-foundations/typography';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';
@@ -8,9 +12,6 @@ import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
 import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
 import { PaidForBand } from '@root/src/amp/components/topMeta/PaidForBand';
 
-import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
-import { textSans, body } from '@guardian/src-foundations/typography';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 
@@ -57,8 +58,8 @@ const PaidForByLogo: React.FC<{
 	const { logo, sponsorName } = branding;
 
 	return (
-		<div className={paidForLogoStyle}>
-			<div className={paidForLogoLabelStyle}>Paid for by</div>
+		<div css={paidForLogoStyle}>
+			<div css={paidForLogoLabelStyle}>Paid for by</div>
 			<a
 				href={logo.link}
 				data-sponsor={sponsorName.toLowerCase()}
@@ -78,7 +79,7 @@ const PaidForByLogo: React.FC<{
 
 const Headline: React.FC<{
 	headlineText: string;
-}> = ({ headlineText }) => <h1 className={headerStyle}>{headlineText}</h1>;
+}> = ({ headlineText }) => <h1 css={headerStyle}>{headlineText}</h1>;
 
 export const TopMetaPaidContent: React.FC<{
 	articleData: ArticleModel;
@@ -102,13 +103,13 @@ export const TopMetaPaidContent: React.FC<{
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-			<Byline
-				byline={articleData.author.byline}
-				tags={articleData.tags}
-				pillar={pillar}
-				guardianBaseURL={articleData.guardianBaseURL}
-				className={bylineStyle}
-			/>
+			<div css={bylineStyle}>
+				<Byline
+					byline={articleData.author.byline}
+					tags={articleData.tags}
+					guardianBaseURL={articleData.guardianBaseURL}
+				/>
+			</div>
 
 			<TopMetaExtras
 				sharingUrls={getSharingUrls(

@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 
@@ -41,7 +41,7 @@ const bodyCSS = css`
 export const CommentBlockComponent: React.FC<{
 	element: CommentBlockElement;
 }> = ({ element }) => (
-	<div className={wrapper}>
+	<div css={wrapper}>
 		<amp-img
 			class={avatar}
 			layout="fixed"
@@ -50,20 +50,17 @@ export const CommentBlockComponent: React.FC<{
 			src={element.avatarURL}
 		/>
 		<div>
-			<a className={metaLink} href={element.profileURL}>
+			<a css={metaLink} href={element.profileURL}>
 				{element.profileName}
 			</a>
 		</div>
 
 		<div>
-			<a className={metaLink} href={element.permalink}>
+			<a css={metaLink} href={element.permalink}>
 				{element.dateTime}
 			</a>
 		</div>
 
-		<div
-			className={bodyCSS}
-			dangerouslySetInnerHTML={{ __html: element.body }}
-		/>
+		<div css={bodyCSS} dangerouslySetInnerHTML={{ __html: element.body }} />
 	</div>
 );

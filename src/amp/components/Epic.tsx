@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	MoustacheSection,
@@ -328,19 +328,6 @@ const getReminderDate = (date: Date = new Date()): Date => {
 	return reminderDate;
 };
 
-const arrowSvg = (className: string) => (
-	<svg
-		className={className}
-		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 20 17.89"
-		preserveAspectRatio="xMinYMid"
-		aria-hidden="true"
-		focusable="false"
-	>
-		<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
-	</svg>
-);
-
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const reminderDate = getReminderDate();
 	const reminderMonth = reminderDate.toLocaleString('default', {
@@ -387,36 +374,34 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 				items="."
 			>
 				<MoustacheTemplate>
-					<div className={epicStyle}>
+					<div css={epicStyle}>
 						<MoustacheSection name="ticker">
-							<div className={tickerWrapperStyle}>
-								<div className={tickerInfoStyle}>
-									<div className={leftStyle}>
-										<p className={topLeftStyle}>
+							<div css={tickerWrapperStyle}>
+								<div css={tickerInfoStyle}>
+									<div css={leftStyle}>
+										<p css={topLeftStyle}>
 											{moustacheVariable('topLeft')}
 										</p>
-										<p className={labelStyle}>
+										<p css={labelStyle}>
 											{moustacheVariable('bottomLeft')}
 										</p>
 									</div>
-									<div className={rightStyle}>
-										<p className={topRightStyle}>
+									<div css={rightStyle}>
+										<p css={topRightStyle}>
 											{moustacheVariable('topRight')}
 										</p>
-										<p className={labelStyle}>
+										<p css={labelStyle}>
 											{moustacheVariable('bottomRight')}
 										</p>
 									</div>
 								</div>
 
 								<div>
-									<div className={tickerBackgroundStyle}>
+									<div css={tickerBackgroundStyle}>
 										<MoustacheSection name="goalExceededMarkerPercentage">
 											<div
 												id="goal-exceeded-marker"
-												className={
-													goalExceededMarkerStyle
-												}
+												css={goalExceededMarkerStyle}
 												style={{
 													left: `${moustacheVariable(
 														'goalExceededMarkerPercentage',
@@ -427,7 +412,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 
 										<div
 											id="ticker-progress"
-											className={tickerProgressStyle}
+											css={tickerProgressStyle}
 											style={{
 												width: `${moustacheVariable(
 													'percentage',
@@ -438,23 +423,23 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</div>
 							</div>
 						</MoustacheSection>
-						<h2 className={epicHeaderStyle}>
+						<h2 css={epicHeaderStyle}>
 							<MoustacheVariable name="heading" />
 						</h2>
 						<MoustacheSection name="paragraphs">
-							<p className={epicParagraphStyle}>
+							<p css={epicParagraphStyle}>
 								<MoustacheVariable name="." />
 							</p>
 						</MoustacheSection>
-						<span className={highlightedTextStyle}>
+						<span css={highlightedTextStyle}>
 							<MoustacheVariable name="highlightedText" />
 						</span>
 						<br />
 						<div
-							className="buttonsWrapper"
+							css="buttonsWrapper"
 							data-amp-bind-hidden="epicState.hideButtons"
 						>
-							<div className={buttonsStyle}>
+							<div css={buttonsStyle}>
 								<div>
 									<MoustacheSection name="cta">
 										<a
@@ -476,23 +461,32 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 													),
 												},
 											)}
-											className={yellowButtonStyle}
+											css={yellowButtonStyle}
 										>
 											<MoustacheVariable name="text" />
-											{arrowSvg(darkArrowStyle)}
+											<svg
+												css={darkArrowStyle}
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 20 17.89"
+												preserveAspectRatio="xMinYMid"
+												aria-hidden="true"
+												focusable="false"
+											>
+												<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+											</svg>
 										</a>
 									</MoustacheSection>
 								</div>
 								<div data-amp-bind-hidden="epicState.hideReminderCta">
 									<button
-										className={transparentButtonStyle}
+										css={transparentButtonStyle}
 										on="tap:AMP.setState({epicState:{hideReminderWrapper: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
 									>
 										Remind me in {reminderMonth}
 									</button>
 								</div>
 							</div>
-							<div className={acceptedPaymentMethodsWrapperStyle}>
+							<div css={acceptedPaymentMethodsWrapperStyle}>
 								<amp-img
 									layout="fixed"
 									height="25px"
@@ -504,17 +498,17 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 						</div>
 
 						<div
-							className={reminderWrapperStyle}
+							css={reminderWrapperStyle}
 							data-amp-bind-hidden="epicState.hideReminderWrapper"
 						>
-							<div className={quadLineStyle} />
-							<div className={reminderFormTopStyle}>
+							<div css={quadLineStyle} />
+							<div css={reminderFormTopStyle}>
 								<div
-									className={epicHeaderStyle}
+									css={epicHeaderStyle}
 									data-amp-bind-text="epicState.headerText"
 								/>
 								<button
-									className={closeButtonStyle}
+									css={closeButtonStyle}
 									on="tap:AMP.setState({epicState:{hideReminderWrapper: true, hideButtons: false}}),reminderForm.clear"
 								>
 									<svg
@@ -539,16 +533,14 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								encType="application/x-www-form-urlencoded"
 								on="submit-success:AMP.setState({epicState:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}});submit-error:AMP.setState({epicState:{hideFailureMessage:false}})"
 							>
-								<div className={inputLabelStyle}>
-									Email address
-								</div>
+								<div css={inputLabelStyle}>Email address</div>
 								<div
 									visible-when-invalid="typeMismatch"
-									className={invalidInputLabelStyle}
+									css={invalidInputLabelStyle}
 									validation-for="email"
 								>
 									<svg
-										className={invalidInputSvgStyle}
+										css={invalidInputSvgStyle}
 										viewBox="0 0 30 30"
 										xmlns="http://www.w3.org/2000/svg"
 									>
@@ -562,13 +554,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</div>
 								<div
 									visible-when-invalid="valueMissing"
-									className={invalidInputLabelStyle}
+									css={invalidInputLabelStyle}
 									validation-for="email"
 								>
 									<svg
 										viewBox="0 0 30 30"
 										xmlns="http://www.w3.org/2000/svg"
-										className={invalidInputSvgStyle}
+										css={invalidInputSvgStyle}
 									>
 										<path
 											fillRule="evenodd"
@@ -589,27 +581,36 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									value={reminderDateString}
 								/>
 								<input
-									className={emailInputStyle}
+									css={emailInputStyle}
 									id="email"
 									name="email"
 									type="email"
 									required={true}
 								/>
 								<button
-									className={blueButtonStyle}
+									css={blueButtonStyle}
 									on="tap:reminderForm.submit"
 								>
 									Set a reminder
-									{arrowSvg(lightArrowStyle)}
+									<svg
+										css={lightArrowStyle}
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 20 17.89"
+										preserveAspectRatio="xMinYMid"
+										aria-hidden="true"
+										focusable="false"
+									>
+										<path d="M20 9.35l-9.08 8.54-.86-.81 6.54-7.31H0V8.12h16.6L10.06.81l.86-.81L20 8.51v.84z" />
+									</svg>
 								</button>
 								<div
-									className={reminderErrorStyle}
+									css={reminderErrorStyle}
 									data-amp-bind-hidden="epicState.hideFailureMessage"
 								>
 									Sorry we couldn&apos;t set a reminder for
 									you this time. Please try again later.
 								</div>
-								<div className={reminderTermsStyle}>
+								<div css={reminderTermsStyle}>
 									We will send you a maximum of two emails in{' '}
 									{reminderMonth} {reminderYear}. To find out
 									what personal data we collect and how we use
@@ -624,7 +625,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</div>
 							</form>
 							<div
-								className={successMessageStyle}
+								css={successMessageStyle}
 								data-amp-bind-hidden="epicState.hideSuccessMessage"
 							>
 								We will be in touch to remind you to contribute.

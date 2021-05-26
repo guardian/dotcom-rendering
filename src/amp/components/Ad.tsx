@@ -1,4 +1,4 @@
-import { css, cx } from 'emotion';
+import { ClassNames } from '@emotion/react';
 
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
 
@@ -10,37 +10,6 @@ const inlineSizes = [
 
 // Note: amp-sticky-ad has max height of 100
 const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
-
-const adClass = css`
-	display: none;
-`;
-
-const usAdRegionClass = css`
-	.amp-geo-group-us & {
-		display: block;
-	}
-`;
-
-const auAdRegionClass = css`
-	.amp-geo-group-au & {
-		display: block;
-	}
-`;
-
-const rowAdRegionClass = css`
-	.amp-geo-group-eea & {
-		display: block;
-	}
-	.amp-geo-no-group & {
-		display: block;
-	}
-`;
-
-const adRegionClasses = {
-	US: usAdRegionClass,
-	AU: auAdRegionClass,
-	ROW: rowAdRegionClass,
-};
 
 type AdRegion = 'US' | 'AU' | 'ROW';
 
@@ -132,23 +101,62 @@ export const Ad = ({
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	return (
-		<amp-ad
-			class={cx(adClass, adRegionClasses[adRegion])}
-			data-block-on-consent=""
-			width={width}
-			height={height}
-			data-multi-size={multiSizes}
-			data-npa-on-unknown-consent={true}
-			data-loading-strategy="prefer-viewability-over-views"
-			layout="fixed"
-			type="doubleclick"
-			json={stringify(adJson(commercialProperties[edition].adTargeting))}
-			data-slot={ampData(section, contentType)}
-			rtc-config={realTimeConfig(
-				adRegion,
-				config.usePrebid,
-				config.usePermutive,
-			)}
-		/>
+		<ClassNames>
+			{({ css, cx }) => {
+				const adClass = css`
+					display: none;
+				`;
+
+				const usAdRegionClass = css`
+					.amp-geo-group-us & {
+						display: block;
+					}
+				`;
+
+				const auAdRegionClass = css`
+					.amp-geo-group-au & {
+						display: block;
+					}
+				`;
+
+				const rowAdRegionClass = css`
+					.amp-geo-group-eea & {
+						display: block;
+					}
+					.amp-geo-no-group & {
+						display: block;
+					}
+				`;
+
+				const adRegionClasses = {
+					US: usAdRegionClass,
+					AU: auAdRegionClass,
+					ROW: rowAdRegionClass,
+				};
+
+				return (
+					<amp-ad
+						class={cx(adClass, adRegionClasses[adRegion])}
+						data-block-on-consent=""
+						width={width}
+						height={height}
+						data-multi-size={multiSizes}
+						data-npa-on-unknown-consent={true}
+						data-loading-strategy="prefer-viewability-over-views"
+						layout="fixed"
+						type="doubleclick"
+						json={stringify(
+							adJson(commercialProperties[edition].adTargeting),
+						)}
+						data-slot={ampData(section, contentType)}
+						rtc-config={realTimeConfig(
+							adRegion,
+							config.usePrebid,
+							config.usePermutive,
+						)}
+					/>
+				);
+			}}
+		</ClassNames>
 	);
 };

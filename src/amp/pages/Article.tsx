@@ -1,12 +1,12 @@
 import React from 'react';
+import { css } from '@emotion/react';
+
 import { Footer } from '@root/src/amp/components/Footer';
-import { Container } from '@root/src/amp/components/Container';
 import { Body as BodyArticle } from '@root/src/amp/components/BodyArticle';
 import { Body as BodyLiveblog } from '@root/src/amp/components/BodyLiveblog';
 import { Header } from '@root/src/amp/components/Header';
 import { Onward } from '@root/src/amp/components/Onward';
 import { AdConsent } from '@root/src/amp/components/AdConsent';
-import { css } from 'emotion';
 import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
@@ -15,6 +15,11 @@ import { palette } from '@guardian/src-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { AmpExperimentComponent } from '@root/src/amp/components/AmpExperiment';
 import { AmpExperiments } from '@root/src/amp/server/ampExperimentCache';
+
+const containerStyles = css`
+	margin: auto;
+	max-width: 600px;
+`;
 
 const backgroundColour = css`
 	background-color: ${palette.neutral[97]};
@@ -52,26 +57,21 @@ export const Article: React.FC<{
 			)}
 
 			{/* /TODO change to gray bgcolor */}
-			<div key="main" className={backgroundColour}>
-				<Container>
-					<Header
-						nav={nav}
-						guardianBaseURL={articleData.guardianBaseURL}
-					/>
-					<Body data={articleData} config={config} />
-					<Onward
-						pageID={articleData.pageId}
-						sectionID={articleData.sectionName}
-						hasRelated={articleData.hasRelated}
-						hasStoryPackage={articleData.hasStoryPackage}
-						seriesTags={filterForTagsOfType(
-							articleData.tags,
-							'Series',
-						)}
-						guardianBaseURL={articleData.guardianBaseURL}
-					/>
-					<Footer nav={nav} />
-				</Container>
+			<div key="main" css={[backgroundColour, containerStyles]}>
+				<Header
+					nav={nav}
+					guardianBaseURL={articleData.guardianBaseURL}
+				/>
+				<Body data={articleData} config={config} />
+				<Onward
+					pageID={articleData.pageId}
+					sectionID={articleData.sectionName}
+					hasRelated={articleData.hasRelated}
+					hasStoryPackage={articleData.hasStoryPackage}
+					seriesTags={filterForTagsOfType(articleData.tags, 'Series')}
+					guardianBaseURL={articleData.guardianBaseURL}
+				/>
+				<Footer nav={nav} />
 			</div>
 
 			{/* The sidebar has to live here unfortunately to be valid AMP

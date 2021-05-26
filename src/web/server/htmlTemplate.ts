@@ -99,7 +99,12 @@ export const htmlTemplate = ({
 		`https://support.theguardian.com`,
 	];
 
-	const preconnectTags = staticPreconnectUrls.map(
+	const allStaticPreconnectUrls =
+		process.env.NODE_ENV === 'production'
+			? [...staticPreconnectUrls, 'https://sourcepoint.theguardian.com']
+			: staticPreconnectUrls;
+
+	const preconnectTags = allStaticPreconnectUrls.map(
 		(src) => `<link rel="preconnect" href="${src}">`,
 	);
 
