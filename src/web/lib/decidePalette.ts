@@ -108,6 +108,7 @@ const textByline = (format: Format): string => {
 
 const textHeadlineByline = (format: Format): string => {
 	if (format.theme === Special.SpecialReport) return specialReport[300];
+	if (format.theme === Special.Labs) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 
@@ -618,6 +619,7 @@ const topBarCard = (format: Format): string => {
 };
 
 const hoverHeadlineByline = (format: Format): string => {
+	if (format.theme === Special.Labs) return BLACK;
 	return pillarPalette[format.theme].dark;
 };
 

@@ -92,9 +92,9 @@ const richLinkTitle = css`
 
 const labsRichLinkTitle = css`
 	${from.wide} {
-		${textSans.medium({ fontWeight: 'bold' })}
+		${textSans.medium({ fontWeight: 'bold', lineHeight: 'regular' })}
 	}
-	${textSans.small({ fontWeight: 'bold' })}
+	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })}
 `;
 
 const richLinkReadMore = (palette: Palette) => {
