@@ -30,7 +30,7 @@ module.exports = {
             {
                 allowedImports: [
                     'react',
-                    'emotion',
+                    '@emotion/react',
                     'jsdom',
                     'curlyquotes',
                     'react-dom',

@@ -23,6 +23,7 @@ type Props = {
 	showByline?: boolean;
 	isFullCardImage?: boolean; // Used for carousel AB test
 };
+
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
 		case 'large':
