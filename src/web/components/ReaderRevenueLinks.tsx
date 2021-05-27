@@ -17,12 +17,13 @@ import {
 } from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '@root/src/web/browser/cookie';
-import type { TestMeta } from '@guardian/types';
+import type { OphanComponentEvent, TestMeta } from '@guardian/types';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
 import {
 	OphanRecordFunction,
 	sendOphanComponentEvent,
+	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 
 type Props = {
@@ -147,6 +148,7 @@ interface SupportHeaderProps {
 		secondaryCta?: Cta;
 	};
 	tracking: TestMeta;
+	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 }
 interface SupportHeaderData {
 	module: {
@@ -179,21 +181,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 		setSupportHeader,
 	] = useState<React.FC<SupportHeaderProps> | null>(null);
 
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
-		threshold: 0,
-		debounce: true,
-	});
-
-	useEffect(() => {
-		if (hasBeenSeen && supportHeaderResponse) {
-			sendOphanComponentEvent(
-				'VIEW',
-				supportHeaderResponse.meta,
-				ophanRecord,
-			);
-		}
-	}, [hasBeenSeen, supportHeaderResponse, ophanRecord]);
-
 	useEffect((): void => {
 		setAutomat();
 
@@ -224,7 +211,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 				}
 
 				setSupportHeaderResponse(response.data);
-				const { module, meta } = response.data;
+				const { module } = response.data;
 				return window
 					.guardianPolyfilledImport(module.url)
 					.then(
@@ -232,11 +219,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 							Header: React.FC<SupportHeaderProps>;
 						}) => {
 							setSupportHeader(() => headerModule.Header);
-							sendOphanComponentEvent(
-								'INSERT',
-								meta,
-								ophanRecord,
-							);
 						},
 					);
 			})
@@ -254,9 +236,14 @@ const ReaderRevenueLinksRemote: React.FC<{
 
 	if (SupportHeader && supportHeaderResponse) {
 		return (
-			<div ref={setNode} css={headerStyles}>
+			<div css={headerStyles}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
-				<SupportHeader {...supportHeaderResponse.module.props} />
+				<SupportHeader
+					submitComponentEvent={(componentEvent) =>
+						submitComponentEvent(componentEvent, ophanRecord)
+					}
+					{...supportHeaderResponse.module.props}
+				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
