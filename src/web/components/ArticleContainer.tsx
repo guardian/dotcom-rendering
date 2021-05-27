@@ -52,6 +52,9 @@ const articleAdStyles = css`
 		@media print {
 			display: none !important;
 		}
+		&.ad-slot--collapse {
+			display: none;
+		}
 	}
 	.ad-slot--mostpop {
 		${from.desktop} {
