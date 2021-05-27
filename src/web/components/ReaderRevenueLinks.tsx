@@ -17,7 +17,6 @@ import {
 } from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '@root/src/web/browser/cookie';
-import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import type { TestMeta } from '@guardian/types';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
@@ -31,7 +30,7 @@ type Props = {
 	countryCode?: string;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
-	inRemoteModuleTest: boolean;
+	remoteHeaderEnabled: boolean;
 	contributionsServiceUrl: string;
 	pageViewId: string;
 	ophanRecord: OphanRecordFunction;
@@ -277,7 +276,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
 	// Only the header component is in the AB test
-	const testName = inHeader ? remoteRrHeaderLinksTestName : 'RRFooterLinks';
+	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
 	const tracking: TestMeta = {
 		abTestName: testName,
@@ -313,7 +312,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 				componentId: campaignCode,
 				campaignCode,
 				abTest: {
-					name: remoteRrHeaderLinksTestName,
+					name: testName,
 					variant: 'control',
 				},
 				pageViewId,
@@ -383,13 +382,13 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	countryCode,
 	dataLinkNamePrefix,
 	inHeader,
-	inRemoteModuleTest,
+	remoteHeaderEnabled,
 	urls,
 	contributionsServiceUrl,
 	ophanRecord,
 	pageViewId = '',
 }: Props) => {
-	if (inHeader && inRemoteModuleTest) {
+	if (inHeader && remoteHeaderEnabled) {
 		return (
 			<ReaderRevenueLinksRemote
 				edition={edition}
@@ -406,7 +405,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 			countryCode={countryCode}
 			dataLinkNamePrefix={dataLinkNamePrefix}
 			inHeader={inHeader}
-			inRemoteModuleTest={inRemoteModuleTest}
+			remoteHeaderEnabled={remoteHeaderEnabled}
 			urls={urls}
 			contributionsServiceUrl={contributionsServiceUrl}
 			ophanRecord={ophanRecord}

@@ -148,6 +148,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			enableSentryReporting: CAPI.config.switches.enableSentryReporting,
 			enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
 			remoteBanner: CAPI.config.switches.remoteBanner,
+			remoteHeader: CAPI.config.switches.remoteHeader,
 			puzzlesBanner: CAPI.config.switches.puzzlesBanner,
 			ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
