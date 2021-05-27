@@ -144,6 +144,38 @@ const ShowSignInGate = ({
 	return <></>;
 };
 
+// custom hook can be used by other parts of DCR to determine if the sign in gate will or will not show
+export const useSignInGateWillShow = ({
+	isSignedIn,
+	CAPI,
+}: SignInGateSelectorProps): boolean => {
+	const ab = useAB();
+
+	const test: Runnable | null = ab.firstRunnableTest(tests);
+
+	if (!test) {
+		return false;
+	}
+
+	const currentTest: CurrentABTest = {
+		name: test.dataLinkNames || test.id,
+		variant: test.variantToRun.id,
+		id: test.id,
+	};
+
+	const gateVariant: SignInGateComponent | null =
+		testVariantToGateMapping?.[currentTest.variant];
+
+	if (!gateVariant) {
+		return false;
+	}
+
+	return (
+		gateVariant.canShow(CAPI, !!isSignedIn, currentTest) &&
+		!!gateVariant.gate
+	);
+};
+
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
 export const SignInGateSelector = ({
