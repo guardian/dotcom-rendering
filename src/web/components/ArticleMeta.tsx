@@ -122,22 +122,24 @@ const metaContainer = (format: Format) => {
 		case Display.Standard: {
 			switch (format.design) {
 				case Design.PhotoEssay:
-					return format.theme === Special.Labs ? defaultMargins : css`
-						${until.phablet} {
-							margin-left: -20px;
-							margin-right: -20px;
-						}
-						${until.mobileLandscape} {
-							margin-left: -10px;
-							margin-right: -10px;
-						}
-						${from.leftCol} {
-							margin-left: 20px;
-						}
-						${from.wide} {
-							margin-left: 40px;
-						}
-					`;
+					return format.theme === Special.Labs
+						? defaultMargins
+						: css`
+								${until.phablet} {
+									margin-left: -20px;
+									margin-right: -20px;
+								}
+								${until.mobileLandscape} {
+									margin-left: -10px;
+									margin-right: -10px;
+								}
+								${from.leftCol} {
+									margin-left: 20px;
+								}
+								${from.wide} {
+									margin-left: 40px;
+								}
+						  `;
 				default:
 					return defaultMargins;
 			}
