@@ -3,7 +3,7 @@ export type SignInGateComponent = {
 	canShow: (
 		CAPI: CAPIBrowserType,
 		isSignedIn: boolean,
-		currentTest: CurrentABTest,
+		currentTest: CurrentSignInGateABTest,
 	) => boolean;
 };
 
@@ -13,11 +13,18 @@ export interface SignInGateProps {
 	dismissGate: () => void;
 	ophanComponentId: string;
 	isComment?: boolean;
-	abTest?: CurrentABTest;
+	abTest?: CurrentSignInGateABTest;
 }
 
-export type CurrentABTest = {
+export type CurrentSignInGateABTest = {
 	name: string;
 	variant: string;
 	id: string;
 };
+
+export interface SignInGateSelectorProps {
+	isSignedIn?: boolean;
+	CAPI: CAPIBrowserType;
+}
+
+export type SignInGateTestMap = { [name: string]: SignInGateComponent };

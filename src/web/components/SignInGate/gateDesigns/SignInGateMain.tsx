@@ -3,7 +3,7 @@ import { Link } from '@guardian/src-link';
 import { cmp } from '@guardian/consent-management-platform';
 
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from './types';
+import { SignInGateProps } from '@frontend/web/components/SignInGate/types';
 import {
 	actionButtons,
 	bodyBold,
