@@ -107,7 +107,9 @@ const Renderer: React.FC<{
 	palette: Palette;
 	elements: CAPIElement[];
 	host?: string;
-}> = ({ format, palette, elements, host }) => {
+	pageId: string;
+	webTitle: string;
+}> = ({ format, palette, elements, host, pageId, webTitle }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -122,6 +124,8 @@ const Renderer: React.FC<{
 			host,
 			index,
 			isMainMedia: false,
+			pageId,
+			webTitle,
 		});
 
 		return ok ? (
@@ -233,6 +237,8 @@ export const InteractiveImmersiveLayout = ({
 						}
 						host={host}
 						hideCaption={true}
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
 					/>
 				</div>
 				{mainMedia && (
@@ -297,6 +303,8 @@ export const InteractiveImmersiveLayout = ({
 						palette={palette}
 						elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
 						host={host}
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
 					/>
 				</main>
 			</Section>

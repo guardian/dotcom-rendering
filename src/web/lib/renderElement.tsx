@@ -37,6 +37,7 @@ import {
 	WitnessImageBlockComponent,
 	WitnessTextBlockComponent,
 } from '@root/src/web/components/elements/WitnessBlockComponent';
+import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import {
 	AudioAtom,
@@ -65,6 +66,8 @@ type Props = {
 	isMainMedia: boolean;
 	hideCaption?: boolean;
 	starRating?: number;
+	pageId: string;
+	webTitle: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -112,6 +115,8 @@ export const renderElement = ({
 	hideCaption,
 	isMainMedia,
 	starRating,
+	pageId,
+	webTitle,
 }: Props): [boolean, JSX.Element] => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -463,6 +468,7 @@ export const renderElement = ({
 							id={element.id}
 							questions={element.questions}
 							resultBuckets={element.resultBuckets}
+							sharingUrls={getSharingUrls(pageId, webTitle)}
 						/>
 					)}
 					{element.quizType === 'knowledge' && (
@@ -470,6 +476,7 @@ export const renderElement = ({
 							id={element.id}
 							questions={element.questions}
 							resultGroups={element.resultGroups}
+							sharingUrls={getSharingUrls(pageId, webTitle)}
 						/>
 					)}
 				</>,
@@ -725,6 +732,8 @@ export const renderArticleElement = ({
 	hideCaption,
 	isMainMedia,
 	starRating,
+	pageId,
+	webTitle,
 }: Props): JSX.Element => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -738,6 +747,8 @@ export const renderArticleElement = ({
 		isMainMedia,
 		hideCaption,
 		starRating,
+		pageId,
+		webTitle,
 	});
 
 	if (!ok) {

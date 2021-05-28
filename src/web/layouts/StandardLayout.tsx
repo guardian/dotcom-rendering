@@ -80,7 +80,7 @@ const StandardGrid = ({
 
 				grid-column-gap: 10px;
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
@@ -113,7 +113,7 @@ const StandardGrid = ({
 						  `}
 				}
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column
@@ -146,7 +146,7 @@ const StandardGrid = ({
 						  `}
 				}
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
@@ -532,6 +532,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								host={host}
+								pageId={CAPI.pageId}
+								webTitle={CAPI.webTitle}
 							/>
 						</div>
 					</GridItem>

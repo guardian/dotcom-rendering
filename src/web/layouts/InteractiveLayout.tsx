@@ -427,6 +427,8 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								host={host}
+								pageId={CAPI.pageId}
+								webTitle={CAPI.webTitle}
 							/>
 						</div>
 					</GridItem>

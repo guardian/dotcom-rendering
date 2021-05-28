@@ -57,6 +57,8 @@ export const MainMedia: React.FC<{
 	adTargeting?: AdTargeting;
 	starRating?: number;
 	host?: string;
+	pageId: string;
+	webTitle: string;
 }> = ({
 	elements,
 	format,
@@ -65,6 +67,8 @@ export const MainMedia: React.FC<{
 	adTargeting,
 	starRating,
 	host,
+	pageId,
+	webTitle,
 }) => (
 	<div
 		css={[
@@ -83,6 +87,8 @@ export const MainMedia: React.FC<{
 				isMainMedia: true,
 				starRating,
 				hideCaption,
+				pageId,
+				webTitle,
 			}),
 		)}
 	</div>

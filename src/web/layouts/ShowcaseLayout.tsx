@@ -75,7 +75,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
@@ -105,7 +105,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  .           right-column';
 				}
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
@@ -455,6 +455,8 @@ export const ShowcaseLayout = ({
 										: undefined
 								}
 								host={host}
+								pageId={CAPI.pageId}
+								webTitle={CAPI.webTitle}
 							/>
 						</div>
 					</GridItem>

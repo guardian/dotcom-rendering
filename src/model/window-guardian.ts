@@ -188,6 +188,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		shouldHideAds: CAPI.shouldHideAds,
 		isAdFreeUser: CAPI.isAdFreeUser,
 		pageId: CAPI.pageId,
+		webTitle: CAPI.webTitle,
 		tags: CAPI.tags,
 		isCommentable: CAPI.isCommentable,
 		nav: {
