@@ -72,10 +72,13 @@ const immersiveStyles = (format: Format) => css`
 	margin-bottom: ${space[6]}px;
 `;
 
-const immersiveLinkStyles = (palette: Palette) => css`
+const immersiveLinkStyles = (palette: Palette, format: Format) => css`
 	a {
 		color: ${palette.text.headlineByline};
-		border-bottom: 1px solid ${palette.text.headlineByline};
+		border-bottom: 1px solid
+			${format.theme === Special.Labs
+				? palette.border.articleLink
+				: palette.text.headlineByline};
 		text-decoration: none;
 		:hover {
 			border-bottom: 1px solid ${palette.hover.headlineByline};
@@ -111,7 +114,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 			return (
 				<div css={immersiveStyles(format)}>
 					by{' '}
-					<span css={immersiveLinkStyles(palette)}>
+					<span css={immersiveLinkStyles(palette, format)}>
 						<BylineLink byline={byline} tags={tags} />
 					</span>
 				</div>

@@ -99,9 +99,14 @@ const buildRRBannerConfigWith = ({
 						),
 						section: CAPI.config.section,
 						isPreview,
+						idApiUrl: CAPI.config.idApiUrl,
 					}),
-				show: ({ meta, module }: BannerProps) => () => (
-					<BannerComponent meta={meta} module={module} />
+				show: ({ meta, module, email }: BannerProps) => () => (
+					<BannerComponent
+						meta={meta}
+						module={module}
+						email={email}
+					/>
 				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,

@@ -43,6 +43,7 @@ import {
 	ChartAtom,
 	ExplainerAtom,
 	InteractiveAtom,
+	InteractiveLayoutAtom,
 	QandaAtom,
 	GuideAtom,
 	ProfileAtom,
@@ -327,6 +328,17 @@ export const renderElement = ({
 				</ClickToView>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+			if (format.design === Design.Interactive) {
+				return [
+					true,
+					<InteractiveLayoutAtom
+						id={element.id}
+						elementHtml={element.html}
+						elementJs={element.js}
+						elementCss={element.css}
+					/>,
+				];
+			}
 			return [
 				true,
 				<InteractiveAtom

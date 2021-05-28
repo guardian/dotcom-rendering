@@ -106,39 +106,42 @@ const metaNumbers = (palette: Palette) => css`
 `;
 
 const metaContainer = (format: Format) => {
+	const defaultMargins = css`
+		${until.phablet} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+	`;
 	switch (format.display) {
 		case Display.Immersive:
 		case Display.Showcase:
 		case Display.Standard: {
 			switch (format.design) {
 				case Design.PhotoEssay:
-					return css`
-						${until.phablet} {
-							margin-left: -20px;
-							margin-right: -20px;
-						}
-						${until.mobileLandscape} {
-							margin-left: -10px;
-							margin-right: -10px;
-						}
-						${from.leftCol} {
-							margin-left: 20px;
-						}
-						${from.wide} {
-							margin-left: 40px;
-						}
-					`;
+					return format.theme === Special.Labs
+						? defaultMargins
+						: css`
+								${until.phablet} {
+									margin-left: -20px;
+									margin-right: -20px;
+								}
+								${until.mobileLandscape} {
+									margin-left: -10px;
+									margin-right: -10px;
+								}
+								${from.leftCol} {
+									margin-left: 20px;
+								}
+								${from.wide} {
+									margin-left: 40px;
+								}
+						  `;
 				default:
-					return css`
-						${until.phablet} {
-							margin-left: -20px;
-							margin-right: -20px;
-						}
-						${until.mobileLandscape} {
-							margin-left: -10px;
-							margin-right: -10px;
-						}
-					`;
+					return defaultMargins;
 			}
 		}
 	}
