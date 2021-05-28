@@ -126,9 +126,8 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		return false;
 	};
 
-	const contributionsServiceUrl = process?.env?.SDC_URL
-		? process.env.SDC_URL
-		: CAPI.contributionsServiceUrl;
+	const contributionsServiceUrl =
+		process?.env?.SDC_URL ?? CAPI.contributionsServiceUrl;
 
 	return {
 		format: CAPI.format,
