@@ -17,13 +17,13 @@ import {
 } from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '@root/src/web/browser/cookie';
-import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
-import type { TestMeta } from '@guardian/types';
+import type { OphanComponentEvent, TestMeta } from '@guardian/types';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
 import {
 	OphanRecordFunction,
 	sendOphanComponentEvent,
+	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 
 type Props = {
@@ -31,7 +31,7 @@ type Props = {
 	countryCode?: string;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
-	inRemoteModuleTest: boolean;
+	remoteHeaderEnabled: boolean;
 	contributionsServiceUrl: string;
 	pageViewId: string;
 	ophanRecord: OphanRecordFunction;
@@ -148,6 +148,7 @@ interface SupportHeaderProps {
 		secondaryCta?: Cta;
 	};
 	tracking: TestMeta;
+	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 }
 interface SupportHeaderData {
 	module: {
@@ -180,21 +181,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 		setSupportHeader,
 	] = useState<React.FC<SupportHeaderProps> | null>(null);
 
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
-		threshold: 0,
-		debounce: true,
-	});
-
-	useEffect(() => {
-		if (hasBeenSeen && supportHeaderResponse) {
-			sendOphanComponentEvent(
-				'VIEW',
-				supportHeaderResponse.meta,
-				ophanRecord,
-			);
-		}
-	}, [hasBeenSeen, supportHeaderResponse, ophanRecord]);
-
 	useEffect((): void => {
 		setAutomat();
 
@@ -225,7 +211,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 				}
 
 				setSupportHeaderResponse(response.data);
-				const { module, meta } = response.data;
+				const { module } = response.data;
 				return window
 					.guardianPolyfilledImport(module.url)
 					.then(
@@ -233,11 +219,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 							Header: React.FC<SupportHeaderProps>;
 						}) => {
 							setSupportHeader(() => headerModule.Header);
-							sendOphanComponentEvent(
-								'INSERT',
-								meta,
-								ophanRecord,
-							);
 						},
 					);
 			})
@@ -255,9 +236,14 @@ const ReaderRevenueLinksRemote: React.FC<{
 
 	if (SupportHeader && supportHeaderResponse) {
 		return (
-			<div ref={setNode} css={headerStyles}>
+			<div css={headerStyles}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
-				<SupportHeader {...supportHeaderResponse.module.props} />
+				<SupportHeader
+					submitComponentEvent={(componentEvent) =>
+						submitComponentEvent(componentEvent, ophanRecord)
+					}
+					{...supportHeaderResponse.module.props}
+				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
@@ -277,7 +263,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
 	// Only the header component is in the AB test
-	const testName = inHeader ? remoteRrHeaderLinksTestName : 'RRFooterLinks';
+	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
 	const tracking: TestMeta = {
 		abTestName: testName,
@@ -313,7 +299,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 				componentId: campaignCode,
 				campaignCode,
 				abTest: {
-					name: remoteRrHeaderLinksTestName,
+					name: testName,
 					variant: 'control',
 				},
 				pageViewId,
@@ -383,13 +369,13 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	countryCode,
 	dataLinkNamePrefix,
 	inHeader,
-	inRemoteModuleTest,
+	remoteHeaderEnabled,
 	urls,
 	contributionsServiceUrl,
 	ophanRecord,
 	pageViewId = '',
 }: Props) => {
-	if (inHeader && inRemoteModuleTest) {
+	if (inHeader && remoteHeaderEnabled) {
 		return (
 			<ReaderRevenueLinksRemote
 				edition={edition}
@@ -406,7 +392,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 			countryCode={countryCode}
 			dataLinkNamePrefix={dataLinkNamePrefix}
 			inHeader={inHeader}
-			inRemoteModuleTest={inRemoteModuleTest}
+			remoteHeaderEnabled={remoteHeaderEnabled}
 			urls={urls}
 			contributionsServiceUrl={contributionsServiceUrl}
 			ophanRecord={ophanRecord}
