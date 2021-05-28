@@ -4,11 +4,11 @@
 
 1. Create AB test switch in [guardian/frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala), [docs](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch)
 2. Add test definition to `src/web/experiments/tests` folder, and import test in the `src/web/experiments/ab-tests.ts` file. Variant name in test definition must be unique.
-3. Import test definition in the `tests` array in the `SignInGateSelector.tsx`
+3. Import test definition in the `signInGateTests` array in the `signInGate.ts`
 4. If the test needs a design, make it in the `gateDesigns` folder
 5. Set up individual variants in the `gates` folder, exports the `SignInGateComponent` type. Display rules defined here in the `canShow` method. Helpers in `displayRule.ts`.
-6. Import the `SignInGateComponent` in `SignInGateSelector.tsx` by mapping the variant name to the `SignInGateComponent` in the `testVariantToGateMapping` array.
-7. Add a value for the new test to `testIdToComponentId` map (for tracking).
+6. Import the `SignInGateComponent` in `SignInGateSelector.tsx` by mapping the variant name to the `SignInGateComponent` in the `signInGateTestVariantToGateMapping` array in `signInGate.ts`.
+7. Add a value for the new test to `signInGateTestIdToComponentId` map (for tracking) in `signInGate.ts`.
 8. If there is a new gate design, add the component to Storybook by modifying `SignInGate.stories.tsx`
 9. Update Cypress tests in the `cypress/integration/e2e/sign-in-gate.spec.js`, and any unit tests e.g. `displayRule.test.ts`
 
@@ -147,6 +147,7 @@ The ideal way to view/develop the design is to use Storybook. See "Storybook" in
 In the `src/web/components/SignInGate/gates` folder, we have a file for each unique variant. Each file exports a `SignInGateComponent` type which is defined as:
 
 ```ts
+// src/web/components/SignInGate/types.ts
 type SignInGateComponent = {
     gate?: (props: SignInGateProps) => JSX.Element;
     canShow: (
@@ -226,21 +227,21 @@ export const signInGateComponent: SignInGateComponent = {
 
 Now that the required components have been set up, the AB tests must be matched to the SignInGateComponent that we've created.
 
-All of the following section happens in the `SignInGateSelector.tsx` file.
+All of the following section happens in the `src/web/components/SignInGate/signInGate.ts` file.
 
 #### AB Tests
 
-In `SignInGateSelector.tsx`, you'll first need to make sure that the AB test definition is imported into the `tests` array.
+In `signInGate.ts`, you'll first need to make sure that the AB test definition is imported into the `signInGateTests` array.
 
 This is because we use this array to determine which sign in gate test the user is in, and then determine which one to show by finding the test and (more importantly) the unique variant that the user has been assigned to.
 
 #### Test Variant to Gate Component
 
-Now that we know which variant the user is in, we need to determine which `SignInGateComponent` to show. We do this in the `testVariantToGateMapping` object, where we map the key (variant name) to the value (the `SignInGateComponent`). This is used to find the display rules/gate that should run/be displayed.
+Now that we know which variant the user is in, we need to determine which `SignInGateComponent` to show. We do this in the `signInGateTestVariantToGateMapping` object, where we map the key (variant name) to the value (the `SignInGateComponent`). This is used to find the display rules/gate that should run/be displayed.
 
 #### Test ID to Ophan Component ID
 
-Finally we map the AB Test definition `id` to a `string` in the `testIdToComponentId` object, which is the Ophan Component ID, this let's us determine in analysis which version of the gate was used. This can be any value, but ideally should be the same as the `ophanComponentId` property from the `frontend` test definition.
+Finally we map the AB Test definition `id` to a `string` in the `signInGateTestIdToComponentId` object, which is the Ophan Component ID, this let's us determine in analysis which version of the gate was used. This can be any value, but ideally should be the same as the `ophanComponentId` property from the `frontend` test definition.
 
 ### Testing The Gate
 

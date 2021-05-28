@@ -9,6 +9,11 @@ import {
 	signInGateTestVariantToGateMapping,
 } from '@frontend/web/components/SignInGate/signInGate';
 
+/**
+ * @description
+ * A custom hook to make which selects the sign in gate (component and ab test)
+ * to be displayed on the current page
+ * */
 export const useSignInGateSelector = ():
 	| [SignInGateComponent, CurrentSignInGateABTest]
 	| null => {

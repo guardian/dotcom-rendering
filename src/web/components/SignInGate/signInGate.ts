@@ -13,7 +13,9 @@ import { SignInGateTestMap } from './types';
 export const componentName = 'sign-in-gate';
 
 /* When adding a new test, you need to add the test name to the tests array below,
-   and add a entry for each variant that maps it to a SignInGateComponent in testVariantToGateMapping, and in turn match each test id to an component id in testIdToComponentId
+   and add a entry for each variant that maps it to a SignInGateComponent in
+   signInGateTestVariantToGateMapping, and in turn match each test id to an component
+   id in signInGateTestIdToComponentId
 */
 export const signInGateTests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
