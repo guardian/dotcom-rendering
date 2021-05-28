@@ -50,6 +50,7 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+import { getSharingUrls } from '@root/src/lib/sharing-urls';
 
 import {
 	cmp,
@@ -600,6 +601,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 								id={quizAtom.id}
 								questions={quizAtom.questions}
 								resultBuckets={quizAtom.resultBuckets}
+								sharingUrls={getSharingUrls(
+									CAPI.pageId,
+									CAPI.webTitle,
+								)}
 							/>
 						)}
 						{quizAtom.quizType === 'knowledge' && (
@@ -607,6 +612,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 								id={quizAtom.id}
 								questions={quizAtom.questions}
 								resultGroups={quizAtom.resultGroups}
+								sharingUrls={getSharingUrls(
+									CAPI.pageId,
+									CAPI.webTitle,
+								)}
 							/>
 						)}
 					</>

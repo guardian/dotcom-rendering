@@ -503,6 +503,7 @@ type CAPIBrowserType = {
 	matchUrl?: string;
 	elementsToHydrate: CAPIElement[];
 	isPreview?: boolean;
+	webTitle: string;
 };
 
 interface TagType {
