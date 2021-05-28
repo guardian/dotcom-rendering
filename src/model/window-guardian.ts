@@ -126,6 +126,10 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		return false;
 	};
 
+	const contributionsServiceUrl = process?.env?.SDC
+		? process.env.SDC
+		: CAPI.contributionsServiceUrl;
+
 	return {
 		format: CAPI.format,
 		config: {
@@ -192,7 +196,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 				header: CAPI.nav.readerRevenueLinks.header,
 			},
 		},
-		contributionsServiceUrl: CAPI.contributionsServiceUrl,
+		contributionsServiceUrl,
 		isImmersive: CAPI.isImmersive,
 		isPhotoEssay: CAPI.config.isPhotoEssay || false,
 		isSpecialReport: CAPI.isSpecialReport,
