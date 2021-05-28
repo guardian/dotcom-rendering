@@ -69,10 +69,10 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				grid-column-gap: 10px;
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
-					Main content 
+					Main content
 					Empty border for spacing
 					Right Column
 				*/
@@ -372,6 +372,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								host={host}
+								pageId={CAPI.pageId}
+								webTitle={CAPI.webTitle}
 							/>
 						</div>
 					</GridItem>

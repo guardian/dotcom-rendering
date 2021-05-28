@@ -68,7 +68,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
@@ -91,7 +91,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column (220 - 1px border)
@@ -114,10 +114,10 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
-				/* 
+				/*
 					Explanation of each unit of grid-template-columns
 
-					Main content 
+					Main content
 					Right Column
 				*/
 				${until.leftCol} {
@@ -363,6 +363,8 @@ export const ImmersiveLayout = ({
 						}
 						host={host}
 						hideCaption={true}
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
 					/>
 				</div>
 				{mainMedia && (

@@ -277,6 +277,8 @@ export const LiveBlock = ({
 							host,
 							adTargeting,
 							index: 0,
+							pageId,
+							webTitle,
 						})}
 				</span>
 			</Header>
@@ -294,6 +296,8 @@ export const LiveBlock = ({
 									host,
 									index,
 									isMainMedia: false,
+									pageId,
+									webTitle,
 								})}
 							</BlockMedia>
 						);
@@ -307,6 +311,8 @@ export const LiveBlock = ({
 								element,
 								isMainMedia: false,
 								index,
+								pageId,
+								webTitle,
 							})}
 						</BlockText>
 					);

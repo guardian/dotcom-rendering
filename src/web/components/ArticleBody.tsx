@@ -103,6 +103,8 @@ export const ArticleBody = ({
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}
+				pageId={pageId}
+				webTitle={webTitle}
 			/>
 		</div>
 	);
