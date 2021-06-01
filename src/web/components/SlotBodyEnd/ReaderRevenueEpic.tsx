@@ -11,9 +11,10 @@ import {
 	isRecurringContributor,
 	getLastOneOffContributionDate,
 	shouldHideSupportMessaging,
-	getArticleCountConsent,
+	hasCmpConsentForArticleCount,
 	getEmail,
 	MODULES_VERSION,
+	hasOptedOutOfArticleCount,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -26,6 +27,7 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { Metadata } from '@guardian/automat-client/dist/types';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
+import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '../../browser/cookie';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 
@@ -46,12 +48,15 @@ type EpicConfig = {
 		props: EpicProps;
 	};
 	email?: string;
+	hasConsentForArticleCount: boolean;
 };
 
 type EpicProps = {
 	onReminderOpen: () => void;
 	email?: string;
 	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
+	openCmp: () => void;
+	hasConsentForArticleCount: boolean;
 	// Also anything specified by support-dotcom-components
 };
 
@@ -130,7 +135,7 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			epicViewLog: getViewLog(),
 			weeklyArticleHistory: getWeeklyArticleHistory(),
-			hasOptedOutOfArticleCount: !(await getArticleCountConsent()),
+			hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: props.countryCode,
 			modulesVersion: MODULES_VERSION,
@@ -188,6 +193,8 @@ export const canShow = async ({
 
 	const email = isSignedIn ? await getEmail(idApiUrl) : undefined;
 
+	const hasConsentForArticleCount = await hasCmpConsentForArticleCount();
+
 	const { meta, module } = json.data;
 	return {
 		result: true,
@@ -195,18 +202,28 @@ export const canShow = async ({
 			meta,
 			module,
 			email,
+			hasConsentForArticleCount,
 			onReminderOpen: sendOphanReminderOpenEvent,
 		},
 	};
 };
 
-export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
+export const ReaderRevenueEpic = ({
+	meta,
+	module,
+	email,
+	hasConsentForArticleCount,
+}: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
 		rootMargin: '-18px',
 		threshold: 0,
 		debounce: true,
 	}) as HasBeenSeen;
+
+	const openCmp = () => {
+		cmp.showPrivacyManager();
+	};
 
 	useEffect(() => {
 		setAutomat();
@@ -251,6 +268,8 @@ export const ReaderRevenueEpic = ({ meta, module, email }: EpicConfig) => {
 					{...module.props}
 					email={email}
 					submitComponentEvent={submitComponentEvent}
+					openCmp={openCmp}
+					hasConsentForArticleCount={hasConsentForArticleCount}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>

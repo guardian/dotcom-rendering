@@ -127,7 +127,7 @@ export const shouldHideSupportMessaging = (
 
 const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 
-export const hasOptedOutOfArticleCount = (): boolean =>
+export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
@@ -135,11 +135,11 @@ const removeArticleCountsFromLocalStorage = () => {
 	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
-export const getArticleCountConsent = (): Promise<boolean> => {
-	if (hasOptedOutOfArticleCount()) {
-		return Promise.resolve(false);
-	}
+export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 	return new Promise((resolve) => {
+		if (getCookie('gu-cmp-disabled')) {
+			resolve(true);
+		}
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
 			if (ccpa || aus) {
 				resolve(true);
@@ -151,11 +151,15 @@ export const getArticleCountConsent = (): Promise<boolean> => {
 				if (!hasRequiredConsents) {
 					removeArticleCountsFromLocalStorage();
 				}
-
 				resolve(hasRequiredConsents);
 			}
 		});
 	});
+};
+
+export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
+	const hasCmpConsent = await hasCmpConsentForArticleCount();
+	return !hasCmpConsent || hasArticleCountOptOutCookie();
 };
 
 const twentyMins = 20 * 60000;
