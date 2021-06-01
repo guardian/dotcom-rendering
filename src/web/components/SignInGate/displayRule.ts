@@ -3,8 +3,8 @@ import {
 	DailyArticle,
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
-import { CurrentABTest } from '@root/src/web/components/SignInGate/gateDesigns/types';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
+import { CurrentSignInGateABTest } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
@@ -77,7 +77,7 @@ export const isPreview = (CAPI: CAPIBrowserType): boolean =>
 export const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
-	currentTest: CurrentABTest,
+	currentTest: CurrentSignInGateABTest,
 ): boolean =>
 	!isSignedIn &&
 	!hasUserDismissedGateMoreThanCount(

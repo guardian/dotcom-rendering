@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Lazy } from '@root/src/web/components/Lazy';
 
-import { SignInGateComponent } from '@frontend/web/components/SignInGate/gateDesigns/types';
+import { SignInGateComponent } from '@frontend/web/components/SignInGate/types';
 import { canShow } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 

@@ -7,7 +7,7 @@ import { trackLink } from '@frontend/web/components/SignInGate/componentEventTra
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { line, space } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
-import { SignInGateProps } from './types';
+import { SignInGateProps } from '@frontend/web/components/SignInGate/types';
 import {
 	actionButtons,
 	bodyBold,

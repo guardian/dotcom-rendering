@@ -1,22 +1,22 @@
+import { hasUserDismissedGate } from '@frontend/web/components/SignInGate/dismissGate';
 import {
+	CurrentSignInGateABTest,
 	SignInGateComponent,
-	CurrentABTest,
-} from '@frontend/web/components/SignInGate/gateDesigns/types';
+} from '@frontend/web/components/SignInGate/types';
 import {
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
 	isValidTag,
-	isIOS9,
 	isPaidContent,
 	isPreview,
+	isIOS9,
 } from '@frontend/web/components/SignInGate/displayRule';
-import { hasUserDismissedGate } from '../dismissGate';
 
 const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
-	currentTest: CurrentABTest,
+	currentTest: CurrentSignInGateABTest,
 ): boolean =>
 	!isSignedIn &&
 	!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
