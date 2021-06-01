@@ -12,6 +12,8 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
+import { Lines } from '@guardian/src-ed-lines';
+import { space } from '@guardian/src-foundations';
 
 import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -540,14 +542,26 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="lines">
 						<div css={maxWidth}>
 							<div css={stretchLines}>
-								<GuardianLines
-									count={decideLineCount(format.design)}
-									palette={palette}
-									effect={decideLineEffect(
-										format.design,
-										format.theme,
-									)}
-								/>
+								{format.theme === Special.Labs ? (
+									<>
+										<Lines count={1} effect="straight" />
+										<div
+											css={css`
+												height: ${space[2]}px;
+											`}
+										/>
+										<Lines count={1} effect="dotted" />
+									</>
+								) : (
+									<GuardianLines
+										count={decideLineCount(format.design)}
+										palette={palette}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								)}
 							</div>
 						</div>
 					</GridItem>
