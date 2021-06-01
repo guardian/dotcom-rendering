@@ -126,6 +126,9 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		return false;
 	};
 
+	const contributionsServiceUrl =
+		process?.env?.SDC_URL ?? CAPI.contributionsServiceUrl;
+
 	return {
 		format: CAPI.format,
 		config: {
@@ -148,6 +151,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			enableSentryReporting: CAPI.config.switches.enableSentryReporting,
 			enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
 			remoteBanner: CAPI.config.switches.remoteBanner,
+			remoteHeader: CAPI.config.switches.remoteHeader,
 			puzzlesBanner: CAPI.config.switches.puzzlesBanner,
 			ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
@@ -184,6 +188,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		shouldHideAds: CAPI.shouldHideAds,
 		isAdFreeUser: CAPI.isAdFreeUser,
 		pageId: CAPI.pageId,
+		webTitle: CAPI.webTitle,
 		tags: CAPI.tags,
 		isCommentable: CAPI.isCommentable,
 		nav: {
@@ -192,7 +197,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 				header: CAPI.nav.readerRevenueLinks.header,
 			},
 		},
-		contributionsServiceUrl: CAPI.contributionsServiceUrl,
+		contributionsServiceUrl,
 		isImmersive: CAPI.isImmersive,
 		isPhotoEssay: CAPI.config.isPhotoEssay || false,
 		isSpecialReport: CAPI.isSpecialReport,

@@ -503,6 +503,7 @@ type CAPIBrowserType = {
 	matchUrl?: string;
 	elementsToHydrate: CAPIElement[];
 	isPreview?: boolean;
+	webTitle: string;
 };
 
 interface TagType {
@@ -729,6 +730,7 @@ interface ConfigTypeBrowser {
 	discussionApiClientHeader: string;
 	dcrSentryDsn: string;
 	remoteBanner: boolean;
+	remoteHeader: boolean;
 	puzzlesBanner: boolean;
 	ausMoment2020Header: boolean;
 	switches: CAPIType['config']['switches'];

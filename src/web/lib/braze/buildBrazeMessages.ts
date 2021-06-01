@@ -11,6 +11,7 @@ import {
 	LocalMessageCache,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
+import { isLocalStorageAvailable } from '@root/src/web/lib/isLocalStorageAvailable';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy, SDK_OPTIONS } from './initialiseAppboy';
 
@@ -43,6 +44,10 @@ export const buildBrazeMessages = async (
 	isSignedIn: boolean,
 	idApiUrl: string,
 ): Promise<BrazeMessagesInterface> => {
+	if (!isLocalStorageAvailable()) {
+		return new NullBrazeMessages();
+	}
+
 	const dependenciesResult = await checkBrazeDependencies(
 		isSignedIn,
 		idApiUrl,
@@ -89,9 +94,9 @@ export const buildBrazeMessages = async (
 			errorHandler,
 		);
 
+		setHasCurrentBrazeUser();
 		appboy.changeUser(dependenciesResult.data.brazeUuid as string);
 		appboy.openSession();
-		setHasCurrentBrazeUser();
 
 		return brazeMessages;
 	} catch {

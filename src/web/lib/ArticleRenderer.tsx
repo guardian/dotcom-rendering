@@ -15,7 +15,9 @@ export const ArticleRenderer: React.FC<{
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ format, palette, elements, adTargeting, host }) => {
+	pageId: string;
+	webTitle: string;
+}> = ({ format, palette, elements, adTargeting, host, pageId, webTitle }) => {
 	const output = elements.map((element, index) => {
 		return renderArticleElement({
 			format,
@@ -25,6 +27,8 @@ export const ArticleRenderer: React.FC<{
 			host,
 			index,
 			isMainMedia: false,
+			pageId,
+			webTitle,
 		});
 	});
 

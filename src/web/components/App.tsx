@@ -50,6 +50,7 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+import { getSharingUrls } from '@root/src/lib/sharing-urls';
 
 import {
 	cmp,
@@ -70,7 +71,6 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
 import {
 	submitComponentEvent,
@@ -367,11 +367,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-	const inRemoteModuleTest = ABTestAPI.isUserInVariant(
-		remoteRrHeaderLinksTestName,
-		'remote',
-	);
-
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
 		() => {
@@ -534,7 +529,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					inRemoteModuleTest={inRemoteModuleTest}
+					remoteHeaderEnabled={CAPI.config.remoteHeader}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					ophanRecord={ophanRecord}
@@ -607,6 +602,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 								id={quizAtom.id}
 								questions={quizAtom.questions}
 								resultBuckets={quizAtom.resultBuckets}
+								sharingUrls={getSharingUrls(
+									CAPI.pageId,
+									CAPI.webTitle,
+								)}
 							/>
 						)}
 						{quizAtom.quizType === 'knowledge' && (
@@ -614,6 +613,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 								id={quizAtom.id}
 								questions={quizAtom.questions}
 								resultGroups={quizAtom.resultGroups}
+								sharingUrls={getSharingUrls(
+									CAPI.pageId,
+									CAPI.webTitle,
+								)}
 							/>
 						)}
 					</>
@@ -1043,7 +1046,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						countryCode={countryCode}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
-						inRemoteModuleTest={false}
+						remoteHeaderEnabled={false}
 						pageViewId={pageViewId}
 						contributionsServiceUrl={CAPI.contributionsServiceUrl}
 						ophanRecord={ophanRecord}
