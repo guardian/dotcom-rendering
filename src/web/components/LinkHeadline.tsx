@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
+import { QuoteIcon } from '@guardian/src-ed-quote-icon';
 
-import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
 
@@ -15,12 +15,12 @@ type Props = {
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
 	showQuotes?: boolean; // When true the QuoteIcon is shown
-	size?: SmallHeadlineSize;
+	size?: HeadlineSizeType;
 	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
 	byline?: string;
 };
 
-const fontStyles = (size: SmallHeadlineSize) => {
+const fontStyles = (size: HeadlineSizeType) => {
 	switch (size) {
 		case 'large':
 			return css`
@@ -34,7 +34,7 @@ const fontStyles = (size: SmallHeadlineSize) => {
 			return css`
 				${headline.xxxsmall()};
 			`;
-		case 'tiny':
+		case 'xsmall':
 			return css`
 				${headline.xxxsmall()};
 				font-size: 14px;
@@ -83,9 +83,7 @@ export const LinkHeadline = ({
 				showSlash={showSlash}
 			/>
 		)}
-		{showQuotes && (
-			<QuoteIcon colour={palette.text.linkKicker} size={size} />
-		)}
+		{showQuotes && <QuoteIcon format={format} size={size} />}
 		{link ? (
 			// We were passed a link object so headline should be a link, with link styling
 			<>

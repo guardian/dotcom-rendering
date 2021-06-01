@@ -131,8 +131,6 @@ type Palette = {
 		captionTriangle: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
-		quoteIcon: Colour;
-		blockquoteIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;
@@ -522,7 +520,7 @@ interface BadgeType {
 
 type ImagePositionType = 'left' | 'top' | 'right';
 
-type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
+type HeadlineSizeType = 'xsmall' | 'small' | 'medium' | 'large';
 
 type AvatarType = {
 	src: string;

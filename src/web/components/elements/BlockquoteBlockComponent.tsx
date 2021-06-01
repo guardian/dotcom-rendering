@@ -1,20 +1,23 @@
 import { ClassNames } from '@emotion/react';
 
 import { body } from '@guardian/src-foundations/typography';
+import { QuoteIcon } from '@guardian/src-ed-quote-icon';
+
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
-import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 
 type Props = {
 	html: string;
 	palette: Palette;
 	quoted?: boolean;
+	format: Format;
 };
 
 export const BlockquoteBlockComponent: React.FC<Props> = ({
 	html,
 	palette,
 	quoted,
+	format,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -68,10 +71,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 							margin-bottom: 8px;
 						`}
 					>
-						<QuoteIcon
-							colour={palette.fill.blockquoteIcon}
-							size="medium"
-						/>
+						<QuoteIcon format={format} size="medium" />
 						<RewrappedComponent
 							isUnwrapped={isUnwrapped}
 							html={unwrappedHtml}

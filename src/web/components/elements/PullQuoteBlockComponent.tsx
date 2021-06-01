@@ -4,8 +4,8 @@ import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { QuoteIcon } from '@guardian/src-ed-quote-icon';
 
-import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const partiallyLeft = css`
@@ -112,13 +112,22 @@ function decideFont(role: string) {
 	`;
 }
 
-export const PullQuoteBlockComponent: React.FC<{
+type Props = {
 	html?: string;
 	palette: Palette;
 	design: Design;
 	role: string;
 	attribution?: string;
-}> = ({ html, palette, design, attribution, role }) => {
+	format: Format;
+};
+export const PullQuoteBlockComponent = ({
+	html,
+	palette,
+	design,
+	attribution,
+	role,
+	format,
+}: Props) => {
 	if (!html) return <></>;
 	switch (design) {
 		case Design.Editorial:
@@ -152,7 +161,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					]}
 				>
-					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
+					<QuoteIcon format={format} size="medium" />
 					<blockquote
 						css={css`
 							display: inline;
@@ -185,7 +194,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					]}
 				>
-					<QuoteIcon colour={palette.fill.quoteIcon} size="large" />
+					<QuoteIcon format={format} size="large" />
 					<blockquote
 						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
@@ -231,7 +240,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					]}
 				>
-					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
+					<QuoteIcon format={format} size="medium" />
 					<blockquote
 						css={css`
 							display: inline;
