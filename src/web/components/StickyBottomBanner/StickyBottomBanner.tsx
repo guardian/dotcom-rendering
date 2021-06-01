@@ -74,7 +74,7 @@ const buildRRBannerConfigWith = ({
 		isSignedIn: boolean,
 		asyncCountryCode: Promise<string>,
 		isPreview: boolean,
-		signInGateWillShow?: boolean,
+		signInGateWillShow: boolean = false,
 	): CandidateConfig => {
 		return {
 			candidate: {
@@ -104,16 +104,13 @@ const buildRRBannerConfigWith = ({
 						idApiUrl: CAPI.config.idApiUrl,
 						signInGateWillShow,
 					}),
-				show:
-					({ meta, module, email }: BannerProps) =>
-					() =>
-						(
-							<BannerComponent
-								meta={meta}
-								module={module}
-								email={email}
-							/>
-						),
+				show: ({ meta, module, email }: BannerProps) => () => (
+					<BannerComponent
+						meta={meta}
+						module={module}
+						email={email}
+					/>
+				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
