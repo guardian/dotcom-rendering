@@ -10,6 +10,7 @@ import { enhanceImages } from '@root/src/model/enhance-images';
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { enhanceAnniversaryAtom } from '@root/src/model/enhance-AnniversaryInteractiveAtom';
+import { enhanceEmbeds } from '@root/src/model/enhance-embeds';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
 
@@ -45,6 +46,11 @@ class CAPIEnhancer {
 		return this;
 	}
 
+	enhanceEmbeds() {
+		this.capi = enhanceEmbeds(this.capi);
+		return this;
+	}
+
 	validateAsCAPIType() {
 		this.capi = validateAsCAPIType(this.capi);
 		return this;
@@ -69,10 +75,11 @@ const buildCAPI = (body: CAPIType): CAPIType => {
 		.enhanceDots()
 		.enhanceImages()
 		.enhanceNumberedLists()
+		.enhanceEmbeds()
 		.enhanceAnniversaryAtom().capi;
 };
 
-export const render = (
+export const renderArticle = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
@@ -125,5 +132,29 @@ export const renderPerfTest = (
 	res: express.Response,
 ): void => {
 	req.body = ExampleArticle;
-	render(req, res);
+	renderArticle(req, res);
+};
+
+export const renderInteractive = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const CAPI = buildCAPI(body);
+		const resp = document({
+			data: {
+				CAPI,
+				site: 'frontend',
+				page: 'Interactive',
+				NAV: extractNAV(CAPI.nav),
+				GA: extractGA(CAPI),
+				linkedData: CAPI.linkedData,
+			},
+		});
+
+		res.status(200).send(resp);
+	} catch (e) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
 };

@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
@@ -67,19 +66,19 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	badge,
 }: Props) => (
-	<div className={cx(sectionStyles, badge && badgeContainer)}>
+	<div css={[sectionStyles, badge && badgeContainer]}>
 		{badge && format.display !== Display.Immersive && (
-			<div className={titleBadgeWrapper}>
+			<div css={titleBadgeWrapper}>
 				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
 			</div>
 		)}
 		<div
-			className={cx(
+			css={[
 				badge && marginTop,
 				format.display === Display.Immersive &&
 					format.design !== Design.PrintShop &&
 					immersiveMargins,
-			)}
+			]}
 		>
 			<SeriesSectionLink
 				format={format}

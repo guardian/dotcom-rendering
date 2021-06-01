@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design, Display, Pillar } from '@guardian/types';
 import { body } from '@guardian/src-foundations/typography';
@@ -13,7 +12,7 @@ export default {
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 620px;
 			padding: 20px;
 		`}
@@ -26,7 +25,7 @@ export const Article = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>
@@ -56,7 +55,7 @@ export const OpinionArticle = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>
@@ -86,7 +85,7 @@ export const Feature = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>
@@ -116,7 +115,7 @@ export const PhotoEssay = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>
@@ -146,7 +145,7 @@ export const Interview = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>
@@ -176,7 +175,7 @@ export const Comment = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>
@@ -206,7 +205,7 @@ export const CommentSport = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>
@@ -236,7 +235,7 @@ export const CommentCulture = () => {
 	return (
 		<Container>
 			<p
-				className={css`
+				css={css`
 					${body.medium()};
 				`}
 			>

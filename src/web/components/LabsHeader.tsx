@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
 import { border, labs, space } from '@guardian/src-foundations';
@@ -14,7 +13,7 @@ import { Link } from '@guardian/src-link';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			position: relative;
 			height: 55px;
 			display: flex;
@@ -27,7 +26,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 const Left = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 		`}
 	>
@@ -37,7 +36,7 @@ const Left = ({ children }: { children: React.ReactNode }) => (
 
 const Right = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			padding: ${space[1]}px 0;
 		`}
@@ -54,7 +53,7 @@ const HeaderSection = ({
 	isFirst?: boolean;
 }) => (
 	<div
-		className={css`
+		css={css`
 			border-right: 1px solid ${border.primary};
 			height: 100%;
 			display: flex;
@@ -74,7 +73,7 @@ const HeaderSection = ({
 
 const Title = () => (
 	<div
-		className={css`
+		css={css`
 			${textSans.small({ fontWeight: 'bold' })};
 			margin-bottom: 4px;
 		`}
@@ -85,7 +84,7 @@ const Title = () => (
 
 const AboutDropdown = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			color: black;
 			> button {
 				${textSans.small()};
@@ -102,7 +101,7 @@ const AboutDropdown = ({ children }: { children: React.ReactNode }) => (
 
 const About = () => (
 	<div
-		className={css`
+		css={css`
 			${textSans.small()};
 			position: absolute;
 			top: 55px;

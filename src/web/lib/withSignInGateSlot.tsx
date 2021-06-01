@@ -1,5 +1,3 @@
-import React from 'react';
-
 // This placeholder p is used by the SignInGate component to insert the sign in gate into the appropriate location within body of an article,
 // if the SignInGateSelector determines a gate should be rendered.
 

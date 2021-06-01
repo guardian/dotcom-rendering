@@ -1,8 +1,8 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
-import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
+import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
+import { Format } from '@guardian/types';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -15,27 +15,35 @@ export const ArticleRenderer: React.FC<{
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
-}> = ({ format, palette, elements, adTargeting, host }) => {
+	pageId: string;
+	webTitle: string;
+}> = ({ format, palette, elements, adTargeting, host, pageId, webTitle }) => {
+	const output = elements.map((element, index) => {
+		return renderArticleElement({
+			format,
+			palette,
+			element,
+			adTargeting,
+			host,
+			index,
+			isMainMedia: false,
+			pageId,
+			webTitle,
+		});
+	});
+
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
-	const output = elements.map((element, index) => (
-		<ElementRenderer
-			format={format}
-			palette={palette}
-			element={element}
-			adTargeting={adTargeting}
-			host={host}
-			index={index}
-			isMainMedia={false}
-		/>
-	));
-
 	return (
 		<div
-			className={`article-body-commercial-selector ${commercialPosition} article-body-viewer-selector`}
+			className={[
+				'article-body-commercial-selector',
+				'article-body-viewer-selector',
+			].join(' ')}
+			css={commercialPosition}
 		>
 			{/* Insert the placeholder for the sign in gate on the 2nd article element */}
 			{withSignInGateSlot(output)}

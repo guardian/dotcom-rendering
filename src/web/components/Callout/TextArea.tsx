@@ -1,10 +1,11 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { TextArea as SourceTextArea } from '@guardian/src-text-area';
+import { space } from '@guardian/src-foundations';
 
 const textAreaStyles = css`
 	width: 100%;
+	margin-top: ${space[2]}px;
 `;
 
 type Props = {
@@ -18,7 +19,7 @@ export const TextArea = ({ formField, formData, setFormData }: Props) => (
 		<SourceTextArea
 			data-testid={`form-field-${formField.id}`}
 			label={formField.label}
-			className={textAreaStyles}
+			css={textAreaStyles}
 			optional={!formField.required}
 			value={formField.id in formData ? formData[formField.id] : ''}
 			onChange={(e) =>

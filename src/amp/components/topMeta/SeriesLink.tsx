@@ -1,6 +1,7 @@
 import React from 'react';
+import { css } from '@emotion/react';
 import { headline } from '@guardian/src-foundations/typography';
-import { css } from 'emotion';
+
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
 const seriesStyle = (pillar: Theme) => css`
@@ -37,7 +38,7 @@ export const SeriesLink: React.FunctionComponent<{
 	if (!tag && sectionLabel && sectionUrl) {
 		return (
 			<a
-				className={seriesStyle(pillar)}
+				css={seriesStyle(pillar)}
 				href={`https://www.theguardian.com/${sectionUrl}`}
 				data-link-name="article section"
 			>
@@ -48,7 +49,7 @@ export const SeriesLink: React.FunctionComponent<{
 
 	if (tag) {
 		return (
-			<a href={`${baseURL}/${tag.id}`} className={seriesStyle(pillar)}>
+			<a href={`${baseURL}/${tag.id}`} css={seriesStyle(pillar)}>
 				{tag.title}
 			</a>
 		);

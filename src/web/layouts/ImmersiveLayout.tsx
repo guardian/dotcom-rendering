@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
@@ -50,7 +49,7 @@ import {
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -69,13 +68,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
+				/*
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns:
-						219px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 219px 1px 1fr 300px;
 					grid-template-areas:
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
@@ -88,13 +91,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
+				/*
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+					Right Column
+				*/
 				${until.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns:
-						140px /* Left Column (220 - 1px border) */
-						1px /* Vertical grey border */
-						1fr /* Main content */
-						300px; /* Right Column */
+					grid-template-columns: 140px 1px 1fr 300px;
 					grid-template-areas:
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
@@ -107,11 +114,15 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      .           right-column';
 				}
 
+				/*
+					Explanation of each unit of grid-template-columns
+
+					Main content
+					Right Column
+				*/
 				${until.leftCol} {
+					grid-template-columns: 1fr 300px;
 					grid-column-gap: 20px;
-					grid-template-columns:
-						1fr /* Main content */
-						300px; /* Right Column */
 					grid-template-areas:
 						'title       right-column'
 						'headline    right-column'
@@ -204,7 +215,7 @@ const Box = ({
 	children: React.ReactNode;
 }) => (
 	<div
-		className={css`
+		css={css`
 			/*
 				This pseudo css shows a black box to the right of the headline
 				so that the black background of the inverted text stretches
@@ -268,7 +279,7 @@ export const ImmersiveLayout = ({
 
 	const LeftColCaption = () => (
 		<div
-			className={css`
+			css={css`
 				margin-top: ${HEADLINE_OFFSET}px;
 				position: absolute;
 				margin-left: 20px;
@@ -279,6 +290,7 @@ export const ImmersiveLayout = ({
 				captionText={captionText}
 				format={format}
 				shouldLimitWidth={true}
+				isLeftCol={true}
 			/>
 		</div>
 	);
@@ -286,21 +298,21 @@ export const ImmersiveLayout = ({
 	return (
 		<>
 			<div
-				className={css`
+				css={css`
 					background-color: ${palette.background.article};
 				`}
 			>
 				<div
-					className={cx(
+					css={[
 						mainMedia && hasMainMediaStyles,
 						css`
 							display: flex;
 							flex-direction: column;
 						`,
-					)}
+					]}
 				>
 					<header
-						className={css`
+						css={css`
 							${getZIndex('headerWrapper')}
 							order: 0;
 						`}
@@ -351,12 +363,14 @@ export const ImmersiveLayout = ({
 						}
 						host={host}
 						hideCaption={true}
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
 					/>
 				</div>
 				{mainMedia && (
 					<>
 						<div
-							className={css`
+							css={css`
 								margin-top: -${HEADLINE_OFFSET}px;
 								/*
                         This z-index is what ensures the headline title text shows above main media. For
@@ -430,7 +444,7 @@ export const ImmersiveLayout = ({
 						<>
 							{!mainMedia && (
 								<div
-									className={css`
+									css={css`
 										margin-top: -8px;
 										margin-left: -4px;
 										margin-bottom: 12px;
@@ -456,7 +470,7 @@ export const ImmersiveLayout = ({
 					<GridItem area="headline">
 						<>
 							{!mainMedia && (
-								<div className={maxWidth}>
+								<div css={maxWidth}>
 									<ArticleHeadline
 										format={format}
 										headlineString={CAPI.headline}
@@ -487,8 +501,8 @@ export const ImmersiveLayout = ({
 						{format.design === Design.PhotoEssay ? (
 							<></>
 						) : (
-							<div className={maxWidth}>
-								<div className={stretchLines}>
+							<div css={maxWidth}>
+								<div css={stretchLines}>
 									<GuardianLines
 										palette={palette}
 										effect={decideLineEffect(
@@ -502,7 +516,7 @@ export const ImmersiveLayout = ({
 						)}
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -520,7 +534,7 @@ export const ImmersiveLayout = ({
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={maxWidth}>
+							<main css={maxWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -554,7 +568,7 @@ export const ImmersiveLayout = ({
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {
@@ -573,7 +587,7 @@ export const ImmersiveLayout = ({
 								<>
 									{mainMedia && (
 										<div
-											className={css`
+											css={css`
 												margin-top: ${space[4]}px;
 											`}
 										>

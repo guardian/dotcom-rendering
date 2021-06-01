@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AudioAtom } from '@guardian/atoms-rendering';
 import {
 	onConsentChange,
@@ -10,6 +10,7 @@ type Props = {
 	trackUrl: string;
 	kicker: string;
 	title?: string | undefined;
+	duration: number;
 	pillar: Theme;
 	contentIsNotSensitive: boolean;
 	aCastisEnabled: boolean;
@@ -22,6 +23,7 @@ export const AudioAtomWrapper = ({
 	kicker,
 	title,
 	pillar,
+	duration,
 	contentIsNotSensitive,
 	aCastisEnabled,
 	readerCanBeShownAds,
@@ -54,6 +56,7 @@ export const AudioAtomWrapper = ({
 			kicker={kicker}
 			title={title}
 			pillar={pillar}
+			duration={duration}
 			shouldUseAcast={shouldUseAcast}
 		/>
 	);

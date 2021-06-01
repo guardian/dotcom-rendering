@@ -39,17 +39,18 @@ import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getCookie, addCookie } from '@root/src/web/browser/cookie';
-import { getCountryCode } from '@frontend/web/lib/getCountryCode';
+import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
 import { Display, Design } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import type { Format, CountryCode } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { getArticleCountConsent } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+import { getSharingUrls } from '@root/src/lib/sharing-urls';
 
 import {
 	cmp,
@@ -70,7 +71,6 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
 import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
 import {
 	submitComponentEvent,
@@ -149,7 +149,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
 	const [asyncCountryCode, setAsyncCountryCode] = useState<
-		Promise<string | void>
+		Promise<CountryCode | null>
 	>();
 
 	const [brazeMessages, setBrazeMessages] = useState<
@@ -206,7 +206,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	useEffect(() => {
 		const callFetch = () => {
-			const countryCodePromise = getCountryCode();
+			const countryCodePromise = getLocaleCode();
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
 				.then((cc) => setCountryCode(cc || ''))
@@ -366,11 +366,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
 
-	const inRemoteModuleTest = ABTestAPI.isUserInVariant(
-		remoteRrHeaderLinksTestName,
-		'remote',
-	);
-
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
 		() => {
@@ -435,7 +430,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
-	// guarenteed but TS isn't so sure and needs assurance
+	// guaranteed but TS isn't so sure and needs assurance
 	const elementsByType = <T extends CAPIElement>(
 		elements: CAPIElement[],
 		type: string,
@@ -533,7 +528,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					inRemoteModuleTest={inRemoteModuleTest}
+					remoteHeaderEnabled={CAPI.config.remoteHeader}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					ophanRecord={ophanRecord}
@@ -556,12 +551,14 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
-			<Portal rootId="share-count-root">
-				<ShareCount
-					ajaxUrl={CAPI.config.ajaxUrl}
-					pageId={CAPI.pageId}
-				/>
-			</Portal>
+			{CAPI.config.switches.serverShareCounts && (
+				<Portal rootId="share-count-root">
+					<ShareCount
+						ajaxUrl={CAPI.config.ajaxUrl}
+						pageId={CAPI.pageId}
+					/>
+				</Portal>
+			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
@@ -574,7 +571,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
-						channelId={youTubeAtom.channelId}
 						expired={youTubeAtom.expired}
 						overrideImage={youTubeAtom.overrideImage}
 						posterImage={youTubeAtom.posterImage}
@@ -605,12 +601,21 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 								id={quizAtom.id}
 								questions={quizAtom.questions}
 								resultBuckets={quizAtom.resultBuckets}
+								sharingUrls={getSharingUrls(
+									CAPI.pageId,
+									CAPI.webTitle,
+								)}
 							/>
 						)}
 						{quizAtom.quizType === 'knowledge' && (
 							<KnowledgeQuizAtom
 								id={quizAtom.id}
 								questions={quizAtom.questions}
+								resultGroups={quizAtom.resultGroups}
+								sharingUrls={getSharingUrls(
+									CAPI.pageId,
+									CAPI.webTitle,
+								)}
 							/>
 						)}
 					</>
@@ -637,7 +642,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
 						element={richLink}
-						pillar={pillar}
 						ajaxEndpoint={CAPI.config.ajaxUrl}
 						richLinkIndex={index}
 					/>
@@ -663,6 +667,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						trackUrl={audioAtom.trackUrl}
 						kicker={audioAtom.kicker}
 						title={audioAtom.title}
+						duration={audioAtom.duration}
 						pillar={pillar}
 						contentIsNotSensitive={!CAPI.config.isSensitive}
 						aCastisEnabled={CAPI.config.switches.acast}
@@ -979,7 +984,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							keywordIds={CAPI.config.keywordIds}
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
-							edition={CAPI.editionId}
 							format={format}
 						/>
 					</Suspense>
@@ -1041,7 +1045,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						countryCode={countryCode}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
-						inRemoteModuleTest={false}
+						remoteHeaderEnabled={false}
 						pageViewId={pageViewId}
 						contributionsServiceUrl={CAPI.contributionsServiceUrl}
 						ophanRecord={ophanRecord}
@@ -1054,6 +1058,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					asyncCountryCode={asyncCountryCode}
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
+					isPreview={!!CAPI.isPreview}
 				/>
 			</Portal>
 		</React.StrictMode>

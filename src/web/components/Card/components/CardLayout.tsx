@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
 
@@ -61,13 +60,13 @@ export const CardLayout = ({
 	minWidthInPixels,
 }: Props) => (
 	<div
-		className={cx(
+		css={[
 			css`
 				display: flex;
 			`,
 			decideWidth(minWidthInPixels),
 			decidePosition(imagePosition, alwaysVertical),
-		)}
+		]}
 	>
 		{children}
 	</div>

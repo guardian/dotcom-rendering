@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { ClassNames } from '@emotion/react';
 
 import { body } from '@guardian/src-foundations/typography';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
@@ -12,77 +11,84 @@ type Props = {
 	quoted?: boolean;
 };
 
-const baseBlockquoteStyles = css`
-	${body.medium()};
-	font-style: italic;
-`;
-
-const simpleBlockquoteStyles = css`
-	${baseBlockquoteStyles}
-	margin-top: 16px;
-	margin-right: 0;
-	margin-bottom: 16px;
-	margin-left: 33px;
-`;
-
-const quotedBlockquoteStyles = (palette: Palette) => css`
-	${baseBlockquoteStyles}
-	color: ${palette.text.blockquote};
-`;
-
 export const BlockquoteBlockComponent: React.FC<Props> = ({
 	html,
 	palette,
 	quoted,
-}: Props) => {
-	const {
-		willUnwrap: isUnwrapped,
-		unwrappedHtml,
-		unwrappedElement,
-	} = unwrapHtml({
-		fixes: [
-			{ prefix: '<p>', suffix: '</p>', unwrappedElement: 'p' },
-			{
-				prefix: '<blockquote>',
-				suffix: '</blockquote>',
-				unwrappedElement: 'blockquote',
-			},
-			{
-				prefix: '<blockquote class="quoted">',
-				suffix: '</blockquote>',
-				unwrappedElement: 'div',
-			},
-		],
-		html,
-	});
+}: Props) => (
+	<ClassNames>
+		{({ css }) => {
+			const baseBlockquoteStyles = css`
+				${body.medium()};
+				font-style: italic;
+			`;
 
-	if (quoted) {
-		return (
-			<blockquote
-				className={css`
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					margin-top: 8px;
-					margin-bottom: 8px;
-				`}
-			>
-				<QuoteIcon colour={palette.fill.blockquoteIcon} size="medium" />
+			const simpleBlockquoteStyles = css`
+				${baseBlockquoteStyles}
+				margin-top: 16px;
+				margin-right: 0;
+				margin-bottom: 16px;
+				margin-left: 33px;
+			`;
+
+			const quotedBlockquoteStyles = css`
+				${baseBlockquoteStyles}
+				color: ${palette.text.blockquote};
+			`;
+
+			const {
+				willUnwrap: isUnwrapped,
+				unwrappedHtml,
+				unwrappedElement,
+			} = unwrapHtml({
+				fixes: [
+					{ prefix: '<p>', suffix: '</p>', unwrappedElement: 'p' },
+					{
+						prefix: '<blockquote>',
+						suffix: '</blockquote>',
+						unwrappedElement: 'blockquote',
+					},
+					{
+						prefix: '<blockquote class="quoted">',
+						suffix: '</blockquote>',
+						unwrappedElement: 'div',
+					},
+				],
+				html,
+			});
+
+			if (quoted) {
+				return (
+					<blockquote
+						css={css`
+							display: flex;
+							flex-direction: row;
+							align-items: center;
+							margin-top: 8px;
+							margin-bottom: 8px;
+						`}
+					>
+						<QuoteIcon
+							colour={palette.fill.blockquoteIcon}
+							size="medium"
+						/>
+						<RewrappedComponent
+							isUnwrapped={isUnwrapped}
+							html={unwrappedHtml}
+							elCss={quotedBlockquoteStyles}
+							tagName={unwrappedElement}
+						/>
+					</blockquote>
+				);
+			}
+			return (
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
 					html={unwrappedHtml}
-					elCss={quotedBlockquoteStyles(palette)}
+					elCss={simpleBlockquoteStyles}
 					tagName={unwrappedElement}
 				/>
-			</blockquote>
-		);
-	}
-	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={unwrappedHtml}
-			elCss={simpleBlockquoteStyles}
-			tagName={unwrappedElement}
-		/>
-	);
-};
+			);
+		}}
+	</ClassNames>
+);

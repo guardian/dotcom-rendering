@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
 
@@ -49,7 +48,7 @@ type Props = {
 export const QuoteIcon = ({ colour, size }: Props) => (
 	<svg
 		viewBox="0 0 70 50"
-		className={cx(quoteBaseStyles(colour), sizeStyles(size))}
+		css={[quoteBaseStyles(colour), sizeStyles(size)]}
 		data-testid="quote-icon"
 	>
 		<path d="M69.587.9c-1.842 15.556-3.89 31.316-4.708 48.1H37.043c3.07-16.784 8.391-32.544 17.602-48.1h14.942zM32.949.9c-2.047 15.556-4.094 31.316-4.912 48.1H.2C3.066 32.216 8.592 16.456 17.598.9h15.35z" />

@@ -1,44 +1,15 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { ClassNames } from '@emotion/react';
 
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
 
 // Largest size first
-const sizes = [
+const inlineSizes = [
 	{ width: 300, height: 250 }, // MPU
 	{ width: 250, height: 250 }, // Square
 ];
 
-const adClass = css`
-	display: none;
-`;
-
-const usAdRegionClass = css`
-	.amp-geo-group-us & {
-		display: block;
-	}
-`;
-
-const auAdRegionClass = css`
-	.amp-geo-group-au & {
-		display: block;
-	}
-`;
-
-const rowAdRegionClass = css`
-	.amp-geo-group-eea & {
-		display: block;
-	}
-	.amp-geo-no-group & {
-		display: block;
-	}
-`;
-
-const adRegionClasses = {
-	US: usAdRegionClass,
-	AU: auAdRegionClass,
-	ROW: rowAdRegionClass,
-};
+// Note: amp-sticky-ad has max height of 100
+const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
 
 type AdRegion = 'US' | 'AU' | 'ROW';
 
@@ -106,41 +77,86 @@ interface CommercialConfig {
 	usePermutive: boolean;
 }
 
-export const Ad = ({
-	adRegion,
-	edition,
-	section,
-	contentType,
-	config,
-	commercialProperties,
-}: {
+export interface AdProps {
+	isSticky?: boolean;
 	adRegion: AdRegion;
 	edition: Edition;
 	section: string;
 	contentType: string;
 	config: CommercialConfig;
 	commercialProperties: CommercialProperties;
-}) => {
-	const { width, height } = sizes[0]; // Set initial size to MPU
-	const multiSizes = sizes.map((e) => `${e.width}x${e.height}`).join(',');
+}
+
+export const Ad = ({
+	isSticky,
+	adRegion,
+	edition,
+	section,
+	contentType,
+	config,
+	commercialProperties,
+}: AdProps) => {
+	const adSizes = isSticky ? stickySizes : inlineSizes;
+	const [{ width, height }] = adSizes; // Set initial size as first element (should be the largest)
+	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
+
 	return (
-		<amp-ad
-			class={cx(adClass, adRegionClasses[adRegion])}
-			data-block-on-consent=""
-			width={width}
-			height={height}
-			data-multi-size={multiSizes}
-			data-npa-on-unknown-consent={true}
-			data-loading-strategy="prefer-viewability-over-views"
-			layout="fixed"
-			type="doubleclick"
-			json={stringify(adJson(commercialProperties[edition].adTargeting))}
-			data-slot={ampData(section, contentType)}
-			rtc-config={realTimeConfig(
-				adRegion,
-				config.usePrebid,
-				config.usePermutive,
-			)}
-		/>
+		<ClassNames>
+			{({ css, cx }) => {
+				const adClass = css`
+					display: none;
+				`;
+
+				const usAdRegionClass = css`
+					.amp-geo-group-us & {
+						display: block;
+					}
+				`;
+
+				const auAdRegionClass = css`
+					.amp-geo-group-au & {
+						display: block;
+					}
+				`;
+
+				const rowAdRegionClass = css`
+					.amp-geo-group-eea & {
+						display: block;
+					}
+					.amp-geo-no-group & {
+						display: block;
+					}
+				`;
+
+				const adRegionClasses = {
+					US: usAdRegionClass,
+					AU: auAdRegionClass,
+					ROW: rowAdRegionClass,
+				};
+
+				return (
+					<amp-ad
+						class={cx(adClass, adRegionClasses[adRegion])}
+						data-block-on-consent=""
+						width={width}
+						height={height}
+						data-multi-size={multiSizes}
+						data-npa-on-unknown-consent={true}
+						data-loading-strategy="prefer-viewability-over-views"
+						layout="fixed"
+						type="doubleclick"
+						json={stringify(
+							adJson(commercialProperties[edition].adTargeting),
+						)}
+						data-slot={ampData(section, contentType)}
+						rtc-config={realTimeConfig(
+							adRegion,
+							config.usePrebid,
+							config.usePermutive,
+						)}
+					/>
+				);
+			}}
+		</ClassNames>
 	);
 };

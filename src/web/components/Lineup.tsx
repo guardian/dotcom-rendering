@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 
@@ -9,7 +8,7 @@ type Props = {
 
 const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			flex-direction: row;
 			position: relative;
@@ -34,7 +33,7 @@ const Event = ({
 		case 'dismissal':
 			return (
 				<i
-					className={css`
+					css={css`
 						display: inline-block;
 						background-color: ${BackgroundRed};
 						background-position: 0 0;
@@ -48,7 +47,7 @@ const Event = ({
 		case 'booking':
 			return (
 				<i
-					className={css`
+					css={css`
 						display: inline-block;
 						background-color: ${BackgroundYellow};
 						background-position: 0 0;
@@ -69,20 +68,20 @@ export const Lineup = ({ players }: Props) => {
 		<ul>
 			{players.map((player) => (
 				<li
-					className={css`
+					css={css`
 						${textSans.small()}
 					`}
 				>
 					<Row>
 						<div
-							className={css`
+							css={css`
 								font-weight: bold;
 							`}
 						>
 							{player.shirtNumber}
 						</div>
 						<div
-							className={css`
+							css={css`
 								position: absolute;
 								left: 40px;
 							`}
@@ -91,7 +90,7 @@ export const Lineup = ({ players }: Props) => {
 								{player.name}
 								{player.events.map((event: EventType) => (
 									<div
-										className={css`
+										css={css`
 											margin-left: 4px;
 										`}
 									>

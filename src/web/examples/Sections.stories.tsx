@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { css } from 'emotion';
+
+import { css } from '@emotion/react';
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Section } from '@frontend/web/components/Section';
@@ -31,7 +31,7 @@ const Grey = ({
 	padded?: boolean;
 }) => (
 	<div
-		className={css`
+		css={css`
 			background-color: ${neutral[93]};
 			width: 100%;
 			height: ${heightInPixels}px;

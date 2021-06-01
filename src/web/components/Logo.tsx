@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brandText } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -62,17 +61,17 @@ const style = (isAnniversary?: boolean) => css`
 
 const SVG = ({ isAnniversary }: { isAnniversary?: boolean }) =>
 	isAnniversary ? (
-		<GuardianAnniversaryLogoSVG className={style(isAnniversary)} />
+		<GuardianAnniversaryLogoSVG css={style(isAnniversary)} />
 	) : (
-		<TheGuardianLogoSVG className={style(isAnniversary)} />
+		<TheGuardianLogoSVG css={style(isAnniversary)} />
 	);
 
 export const Logo: React.FC<{
 	isAnniversary?: boolean;
 }> = ({ isAnniversary }) => (
-	<a className={link(isAnniversary)} href="/" data-link-name="nav2 : logo">
+	<a css={link(isAnniversary)} href="/" data-link-name="nav2 : logo">
 		<span
-			className={css`
+			css={css`
 				${visuallyHidden};
 			`}
 		>

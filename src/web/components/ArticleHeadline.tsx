@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
@@ -35,10 +34,10 @@ const standardFont = css`
 `;
 
 const labsFont = css`
-	${textSans.xlarge()};
+	${textSans.xlarge({ fontWeight: 'bold' })};
 	line-height: 32px;
 	${from.tablet} {
-		${textSans.xxxlarge()};
+		${textSans.xxxlarge({ fontWeight: 'bold' })};
 		line-height: 38px;
 	}
 `;
@@ -221,13 +220,13 @@ export const ArticleHeadline = ({
 	if (format.display === Display.NumberedList) {
 		return (
 			<h1
-				className={cx(
+				css={[
 					boldFont,
 					topPadding,
 					css`
 						color: ${palette.text.headline};
 					`,
-				)}
+				]}
 			>
 				{curly(headlineString)}
 			</h1>
@@ -240,13 +239,13 @@ export const ArticleHeadline = ({
 					return (
 						// Immersive headlines have two versions, with main media, and (this one) without
 						<h1
-							className={cx(
+							css={[
 								jumboFont,
 								maxWidth,
 								immersiveStyles,
 								displayBlock,
 								reducedBottomPadding,
-							)}
+							]}
 						>
 							{curly(headlineString)}
 						</h1>
@@ -257,13 +256,13 @@ export const ArticleHeadline = ({
 					return (
 						<>
 							<h1
-								className={cx(
+								css={[
 									lightFont,
 									invertedText,
 									css`
 										color: ${palette.text.headline};
 									`,
-								)}
+								]}
 							>
 								{curly(headlineString)}
 							</h1>
@@ -281,16 +280,16 @@ export const ArticleHeadline = ({
 						// Immersive headlines with main media present, are large and inverted with
 						// a black background
 						<h1
-							className={cx(
+							css={[
 								immersiveWrapper,
 								darkBackground(palette),
 								css`
 									color: ${palette.text.headline};
 								`,
-							)}
+							]}
 						>
 							<span
-								className={cx(
+								css={[
 									format.theme === Special.Labs
 										? jumboLabsFont
 										: jumboFont,
@@ -298,7 +297,7 @@ export const ArticleHeadline = ({
 									invertedStyles(palette),
 									immersiveStyles,
 									displayBlock,
-								)}
+								]}
 							>
 								{curly(headlineString)}
 							</span>
@@ -315,13 +314,13 @@ export const ArticleHeadline = ({
 				case Design.Feature:
 					return (
 						<h1
-							className={cx(
+							css={[
 								boldFont,
 								topPadding,
 								css`
 									color: ${palette.text.headline};
 								`,
-							)}
+							]}
 						>
 							{curly(headlineString)}
 						</h1>
@@ -331,13 +330,13 @@ export const ArticleHeadline = ({
 					return (
 						<>
 							<h1
-								className={cx(
+								css={[
 									lightFont,
 									topPadding,
 									css`
 										color: ${palette.text.headline};
 									`,
-								)}
+								]}
 							>
 								{curly(headlineString)}
 							</h1>
@@ -355,13 +354,13 @@ export const ArticleHeadline = ({
 					return (
 						<>
 							<h1
-								className={cx(
+								css={[
 									lightFont,
 									topPadding,
 									css`
 										color: ${palette.text.headline};
 									`,
-								)}
+								]}
 							>
 								{curly(headlineString)}
 							</h1>
@@ -370,14 +369,14 @@ export const ArticleHeadline = ({
 				case Design.Analysis:
 					return (
 						<h1
-							className={cx(
+							css={[
 								standardFont,
 								topPadding,
 								underlinedStyles,
 								css`
 									color: ${palette.text.headline};
 								`,
-							)}
+							]}
 						>
 							{curly(headlineString)}
 						</h1>
@@ -386,29 +385,27 @@ export const ArticleHeadline = ({
 					return (
 						// Inverted headlines have a wrapper div for positioning
 						// and a black background (only for the text)
-						<div
-							className={cx(shiftSlightly, maxWidth, displayFlex)}
-						>
+						<div css={[shiftSlightly, maxWidth, displayFlex]}>
 							<HeadlineTag
 								tagText="Interview"
 								palette={palette}
 							/>
 							<h1
-								className={cx(
+								css={[
 									invertedFont,
 									invertedWrapper,
 									zIndex,
 									css`
 										color: ${palette.text.headline};
 									`,
-								)}
+								]}
 							>
 								<span
-									className={cx(
+									css={[
 										darkBackground(palette),
 										invertedStyles(palette),
 										displayInline,
-									)}
+									]}
 								>
 									{curly(headlineString)}
 								</span>
@@ -426,12 +423,12 @@ export const ArticleHeadline = ({
 				case Design.DeadBlog:
 					return (
 						<h1
-							className={cx(
+							css={[
 								standardFont,
 								css`
 									color: ${palette.text.headline};
 								`,
-							)}
+							]}
 						>
 							{curly(headlineString)}
 						</h1>
@@ -439,7 +436,7 @@ export const ArticleHeadline = ({
 				default:
 					return (
 						<h1
-							className={cx(
+							css={[
 								format.theme === Special.Labs
 									? labsFont
 									: standardFont,
@@ -447,7 +444,7 @@ export const ArticleHeadline = ({
 								css`
 									color: ${palette.text.headline};
 								`,
-							)}
+							]}
 						>
 							{curly(headlineString)}
 						</h1>

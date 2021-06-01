@@ -1,10 +1,10 @@
-import { getCountryCode } from '@frontend/web/lib/getCountryCode';
+import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 
 let frameworks: undefined | Record<string, boolean>;
 
 export const getPrivacyFramework = async () => {
 	if (typeof frameworks === 'undefined') {
-		const isInUS = (await getCountryCode()) === 'US';
+		const isInUS = (await getLocaleCode()) === 'US';
 
 		frameworks = {
 			ccpa: isInUS,

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { css } from 'emotion';
+import { useState } from 'react';
+import { css } from '@emotion/react';
 
 import { Link } from '@guardian/src-link';
 import { Button } from '@guardian/src-button';
@@ -123,7 +123,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 		<form
 			action="/formstack-campaign/submit"
 			method="post"
-			className={formStyles}
+			css={formStyles}
 			onSubmit={(e) => {
 				e.preventDefault();
 				onSubmit(formData);
@@ -131,7 +131,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 		>
 			{formFields.map((formField, index) => (
 				<div
-					className={formFieldWrapperStyles}
+					css={formFieldWrapperStyles}
 					// we use custom-guardian to find 1st field for accessibility
 					// ideally we should useRef but need to wait for Source to
 					// support React references
@@ -148,7 +148,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 
 			{/* this element is a H O N £ Y - P 0 T */}
 			<div
-				className={css`
+				css={css`
 					position: absolute;
 					left: -62.5rem;
 				`}
@@ -164,13 +164,13 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 					onChange={(e) => setTwitterHandle(e.target.value)}
 				/>
 			</div>
-			{error && <div className={errorMessagesStyles}>{error}</div>}
-			<div className={footerPaddingStyles}>
+			{error && <div css={errorMessagesStyles}>{error}</div>}
+			<div css={footerPaddingStyles}>
 				<Button priority="secondary" size="xsmall" type="submit">
 					Share with the Guardian
 				</Button>
 				<div
-					className={css`
+					css={css`
 						a,
 						a:hover {
 							border: 0;

@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { opinion, palette, space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -8,17 +8,6 @@ export const signInGateContainer = css`
 
 	${from.desktop} {
 		min-height: 600px;
-	}
-
-	/* This needs to be here because link styles are applied globally to the article body :/ */
-	a {
-		text-decoration: underline;
-		border-bottom: none;
-		color: ${palette.text.primary};
-
-		:hover {
-			border-bottom: none;
-		}
 	}
 `;
 
@@ -33,9 +22,12 @@ export const headingStyles = css`
 	}
 `;
 
+export const bodySeparator = css`
+	border-top: 1px ${palette.line.primary} solid;
+`;
+
 export const bodyBold = css`
 	${textSans.medium({ fontWeight: 'bold' })}
-	border-top: 1px ${palette.line.primary} solid;
 	padding-bottom: 20px;
 	${from.phablet} {
 		padding-right: 130px;
@@ -62,7 +54,12 @@ export const actionButtons = css`
 	margin-bottom: 42px;
 
 	> a {
-		margin-right: ${space[9]}px !important;
+		margin-right: ${space[4]}px !important;
+
+		${from.mobileMedium} {
+			margin-right: ${space[9]}px !important;
+		}
+
 		text-decoration: none !important;
 	}
 `;
@@ -77,6 +74,8 @@ export const laterButton = css`
 
 export const signInLink = css`
 	color: ${palette.text.anchorPrimary} !important;
+	text-decoration-color: ${palette.line.primary} !important;
+	text-underline-position: under;
 `;
 
 export const faq = css`
@@ -85,18 +84,23 @@ export const faq = css`
 	margin-top: ${space[5]}px;
 
 	& a {
-		color: ${palette.text.primary};
+		color: ${palette.text.anchorPrimary};
 		display: block;
 		margin-bottom: ${space[4]}px;
+		text-decoration-color: ${palette.line.primary};
+		text-underline-position: under;
 	}
 
 	& a:hover {
-		color: ${palette.text.primary};
+		color: ${palette.text.anchorPrimary};
 	}
 `;
 
 export const privacyLink = css`
+	color: ${palette.text.anchorPrimary};
 	text-decoration: underline;
+	text-decoration-color: ${palette.line.primary};
+	text-underline-position: under;
 	border: 0;
 	background: transparent;
 	font-size: inherit;

@@ -1,12 +1,14 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
+
+import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
 import EmailIcon from '@frontend/static/icons/email.svg';
 import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import {
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
@@ -76,8 +78,7 @@ export const ShareIcons: React.FC<{
 	};
 	displayIcons: SharePlatform[];
 	pillar: Theme;
-	className?: string;
-}> = ({ sharingUrls, displayIcons, pillar, className }) => {
+}> = ({ sharingUrls, displayIcons, pillar }) => {
 	const icons: { [K in SharePlatform]?: React.ComponentType } = {
 		facebook: FacebookIcon,
 		twitter: TwitterIconPadded,
@@ -107,32 +108,27 @@ export const ShareIcons: React.FC<{
 	}, []);
 
 	return (
-		<ul className={className}>
+		<>
 			{shareList.map((shareListItem) => {
 				const { Icon, id, url, userMessage } = shareListItem;
 
 				return (
-					<li className={shareIconsListItem} key={`${id}Share`}>
+					<li css={shareIconsListItem} key={`${id}Share`}>
 						<a href={url} role="button">
 							<span
-								className={css`
+								css={css`
 									${visuallyHidden};
 								`}
 							>
 								{userMessage}
 							</span>
-							<span
-								className={cx(
-									shareIcon(pillar),
-									pillarFill[pillar],
-								)}
-							>
+							<span css={[shareIcon(pillar), pillarFill[pillar]]}>
 								<Icon />
 							</span>
 						</a>
 					</li>
 				);
 			})}
-		</ul>
+		</>
 	);
 };

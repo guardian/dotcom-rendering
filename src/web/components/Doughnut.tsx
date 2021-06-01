@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { text } from '@guardian/src-foundations/palette';
@@ -39,14 +38,14 @@ const labelStyles = (background: string) => css`
 const withoutZeroSections = (sections: Section[]) =>
 	sections.filter((section) => section.value !== 0);
 
-export const Donut = ({
+export const Doughnut = ({
 	sections,
 	percentCutout = 35,
 	width = 300,
 	height = 300,
 }: Props) => {
 	if (withoutZeroSections(sections).length === 1) {
-		// The Donut component requires at least 2 sections
+		// The Doughnut component requires at least 2 sections
 		// TODO: Support showing 100% for a single section
 		return null;
 	}
@@ -171,25 +170,17 @@ export const Donut = ({
 				<g>
 					<path d={segment.d} fill={segment.color} />
 					<text transform={segment.transform}>
-						<tspan
-							className={labelStyles(segment.color)}
-							x="0"
-							dy="0"
-						>
+						<tspan css={labelStyles(segment.color)} x="0" dy="0">
 							{segment.label}
 						</tspan>
-						<tspan
-							className={valueStyles(segment.color)}
-							x="0"
-							dy=".9em"
-						>
+						<tspan css={valueStyles(segment.color)} x="0" dy=".9em">
 							{segment.value}
 						</tspan>
 					</text>
 				</g>
 			))}
 			<text
-				className={unitStyles}
+				css={unitStyles}
 				transform={`translate(${center.x}, ${center.y})`}
 				dy="0.4em"
 			>

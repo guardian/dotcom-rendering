@@ -1,5 +1,3 @@
-import React from 'react';
-// import { css } from 'emotion';
 import { Caption } from '@frontend/web/components/Caption';
 
 type Props = {

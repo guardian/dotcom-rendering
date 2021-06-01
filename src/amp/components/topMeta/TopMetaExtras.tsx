@@ -1,9 +1,11 @@
 import React from 'react';
-import { css, cx } from 'emotion';
-import ClockIcon from '@frontend/static/icons/clock.svg';
-import { ShareIcons } from '@root/src/amp/components/ShareIcons';
+import { css } from '@emotion/react';
+
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
+
+import ClockIcon from '@frontend/static/icons/clock.svg';
+import { ShareIcons } from '@root/src/amp/components/ShareIcons';
 import {
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
@@ -26,7 +28,7 @@ const pillarFill = pillarMap(
 );
 
 const ageWarningCss = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	display: inline-block;
 	margin-bottom: 12px;
 	width: 100%;
@@ -54,7 +56,7 @@ type SharingURLs = {
 
 const metaStyle = css`
 	display: block;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	color: ${text.supporting};
 	padding-top: 2px;
 	margin-bottom: 6px;
@@ -70,7 +72,7 @@ const twitterIcon = css`
 
 const WebPublicationDate: React.FC<{
 	date: string;
-}> = ({ date }) => <div className={metaStyle}>{date}</div>;
+}> = ({ date }) => <div css={metaStyle}>{date}</div>;
 
 const AgeWarning: React.FC<{
 	warning?: string;
@@ -81,13 +83,7 @@ const AgeWarning: React.FC<{
 	}
 
 	return (
-		<div
-			className={cx(
-				ageWarningCss,
-				pillarColours[pillar],
-				pillarFill[pillar],
-			)}
-		>
+		<div css={[ageWarningCss, pillarColours[pillar], pillarFill[pillar]]}>
 			<ClockIcon /> {warning}
 		</div>
 	);
@@ -101,8 +97,8 @@ const TwitterHandle: React.FC<{
 	}
 
 	return (
-		<a className={metaStyle} href={`https://twitter.com/${handle}`}>
-			<TwitterIcon className={twitterIcon} /> @{handle}
+		<a css={metaStyle} href={`https://twitter.com/${handle}`}>
+			<TwitterIcon css={twitterIcon} /> @{handle}
 		</a>
 	);
 };
@@ -120,16 +116,18 @@ export const TopMetaExtras: React.FC<{
 	ageWarning,
 	twitterHandle,
 }) => (
-	<div className={metaExtras}>
+	<div css={metaExtras}>
 		<TwitterHandle handle={twitterHandle} />
 		<WebPublicationDate date={webPublicationDate} />
 
-		<div className={borders(pillar)}>
-			<ShareIcons
-				sharingUrls={sharingUrls}
-				pillar={pillar}
-				displayIcons={['facebook', 'twitter', 'email']}
-			/>
+		<div css={borders(pillar)}>
+			<ul>
+				<ShareIcons
+					sharingUrls={sharingUrls}
+					pillar={pillar}
+					displayIcons={['facebook', 'twitter', 'email']}
+				/>
+			</ul>
 			<AgeWarning warning={ageWarning} pillar={pillar} />
 		</div>
 	</div>

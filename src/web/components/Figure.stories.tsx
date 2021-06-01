@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React from 'react';
-import { css } from 'emotion';
+
+import { css } from '@emotion/react';
 
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -31,7 +31,7 @@ const SomeText = () => (
 
 const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 	<div
-		className={css`
+		css={css`
 			background-color: grey;
 			width: 100%;
 			height: ${heightInPixels}px;

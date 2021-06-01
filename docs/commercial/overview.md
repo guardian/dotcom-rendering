@@ -14,7 +14,7 @@ Among other tasks performed by the commercial modules we have
 -   Consent management
 -   Place dynamic ad slots
 -   Populate ad slots (dynamic and static ones)
--   Load tracking scripts (such as Lotame)
+-   Load tracking scripts
 
 ## Working within Frontend, shared libraries
 
@@ -49,8 +49,6 @@ To introduce some terms, we use:
 
 ## Tracking
 
--   [Lotame](https://www.lotame.com/)
-
 There are several more trackers on the site. A good way to visualise these is: [http://requestmap.webperf.tools/](http://requestmap.webperf.tools/).
 
 ## Development change checklist
@@ -60,4 +58,3 @@ Currently we do not have good automated tests covering the commercial stack in d
 -   Are the ad slots loading normaly when visually checking a page. Check the static slots as well as the inbody dynamic ones.
 -   Are there any obvious console errors?
 -   The Data & Insight team, can identify any widespread anomolies. Usually with a lag of a day or more.
--   Is Lotame segmentation working? (instructions coming soon)

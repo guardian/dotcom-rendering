@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { css } from 'emotion';
+import { useEffect } from 'react';
+import { css } from '@emotion/react';
 
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 
@@ -20,7 +20,7 @@ export const DefaultStory = () => {
 
 	return (
 		<div
-			className={css`
+			css={css`
 				padding-left: 40px;
 			`}
 		>

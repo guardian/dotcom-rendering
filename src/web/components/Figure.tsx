@@ -1,15 +1,7 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-
-type Props = {
-	children: React.ReactNode;
-	isMainMedia: boolean;
-	role?: RoleType | 'richLink';
-	id?: string;
-};
 
 const roleCss = {
 	inline: css`
@@ -129,7 +121,8 @@ const roleCss = {
 	`,
 };
 
-const decidePosition = (role: RoleType | 'richLink') => {
+// Used for vast majority of layouts.
+export const defaultRoleStyles = (role: RoleType | 'richLink') => {
 	switch (role) {
 		case 'inline':
 			return roleCss.inline;
@@ -150,11 +143,20 @@ const decidePosition = (role: RoleType | 'richLink') => {
 	}
 };
 
+type Props = {
+	children: React.ReactNode;
+	isMainMedia: boolean;
+	role?: RoleType | 'richLink';
+	id?: string;
+	isNumberedListTitle?: boolean;
+};
+
 export const Figure = ({
 	role = 'inline',
 	children,
 	id,
 	isMainMedia,
+	isNumberedListTitle = false,
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -165,7 +167,13 @@ export const Figure = ({
 		return <figure id={id}>{children}</figure>;
 	}
 	return (
-		<figure id={id} className={decidePosition(role)}>
+		<figure
+			id={id}
+			css={defaultRoleStyles(role)}
+			data-spacefinder-ignore={
+				isNumberedListTitle ? 'numbered-list-title' : null
+			}
+		>
 			{children}
 		</figure>
 	);

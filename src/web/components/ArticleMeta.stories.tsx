@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Display, Design, Pillar, Special } from '@guardian/types';
 import { ArticleMeta } from './ArticleMeta';
@@ -7,7 +6,7 @@ import { decidePalette } from '../lib/decidePalette';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			width: 220px;
 			padding: 20px;
 		`}

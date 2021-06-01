@@ -8,7 +8,14 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
+const webpackPreprocessor = require('cypress-webpack-preprocessor-v5');
+
 module.exports = (on, config) => {
 	config.env = { ...config.env, ...process.env };
+
+	const webpackConfig = webpackPreprocessor.defaultOptions;
+	webpackConfig.webpackOptions.module.rules[0].exclude = require('../../scripts/webpack/browser').babelExclude;
+
+	on('file:preprocessor', webpackPreprocessor(webpackConfig));
 	return config;
 };

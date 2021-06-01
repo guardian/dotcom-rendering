@@ -126,6 +126,9 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		return false;
 	};
 
+	const contributionsServiceUrl =
+		process?.env?.SDC_URL ?? CAPI.contributionsServiceUrl;
+
 	return {
 		format: CAPI.format,
 		config: {
@@ -148,12 +151,13 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			enableSentryReporting: CAPI.config.switches.enableSentryReporting,
 			enableDiscussionSwitch: CAPI.config.switches.enableDiscussionSwitch,
 			remoteBanner: CAPI.config.switches.remoteBanner,
+			remoteHeader: CAPI.config.switches.remoteHeader,
 			puzzlesBanner: CAPI.config.switches.puzzlesBanner,
 			ausMoment2020Header: CAPI.config.switches.ausMoment2020Header,
 
 			// used by lib/ad-targeting.ts
 			isSensitive: CAPI.config.isSensitive,
-			videoDuration: CAPI.config.videoDuration,
+			videoDuration: CAPI.config.videoDuration || 0,
 			edition: CAPI.config.edition,
 			section: CAPI.config.section,
 			sharedAdTargeting: CAPI.config.sharedAdTargeting, // missing type definition
@@ -184,6 +188,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		shouldHideAds: CAPI.shouldHideAds,
 		isAdFreeUser: CAPI.isAdFreeUser,
 		pageId: CAPI.pageId,
+		webTitle: CAPI.webTitle,
 		tags: CAPI.tags,
 		isCommentable: CAPI.isCommentable,
 		nav: {
@@ -192,12 +197,13 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 				header: CAPI.nav.readerRevenueLinks.header,
 			},
 		},
-		contributionsServiceUrl: CAPI.contributionsServiceUrl,
+		contributionsServiceUrl,
 		isImmersive: CAPI.isImmersive,
-		isPhotoEssay: CAPI.config.isPhotoEssay,
+		isPhotoEssay: CAPI.config.isPhotoEssay || false,
 		isSpecialReport: CAPI.isSpecialReport,
-		isLiveBlog: CAPI.config.isLiveBlog,
-		isLive: CAPI.config.isLive,
+		isLiveBlog: CAPI.config.isLiveBlog || false,
+		isLive: CAPI.config.isLive || false,
+		isPreview: CAPI.config.isPreview,
 		matchUrl: CAPI.matchUrl,
 		elementsToHydrate: CAPI.blocks
 			// Get all elements arrays from all blocks -> [[h][h][x]]
@@ -214,7 +220,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 export interface WindowGuardian {
 	// The app contains only data that we require for app hydration
 	// NOTE: there is a divergence between DCRBrowserDocumentData and DCRServerDocumentData
-	// for perfomance reasons
+	// for performance reasons
 	app: {
 		data: DCRBrowserDocumentData;
 		cssIDs: string[];

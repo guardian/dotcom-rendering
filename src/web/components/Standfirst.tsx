@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
@@ -66,6 +65,16 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 		case Display.Immersive:
 			switch (format.design) {
 				case Design.PhotoEssay:
+					if (format.theme === Special.Labs) {
+						return css`
+							${textSans.large({})};
+							margin-top: ${space[2]}px;
+							margin-bottom: ${space[3]}px;
+							line-height: 22px;
+							max-width: 540px;
+							color: ${palette.text.standfirst};
+						`;
+					}
 					return css`
 						${headline.xxxsmall({})};
 						margin-top: ${space[2]}px;
@@ -77,7 +86,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				default:
 					return css`
 						${format.theme === Special.Labs
-							? textSans.large()
+							? textSans.medium()
 							: headline.xsmall({
 									fontWeight: 'light',
 							  })};
@@ -135,17 +144,25 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						color: ${palette.text.standfirst};
 					`;
 				default:
-					return css`
-						${format.theme === Special.Labs
-							? textSans.large()
-							: headline.xxxsmall({
+					switch (format.theme) {
+						case Special.Labs:
+							return css`
+								${textSans.medium()}
+								margin-bottom: ${space[3]}px;
+								max-width: 540px;
+								color: ${palette.text.standfirst};
+							`;
+						default:
+							return css`
+								${headline.xxxsmall({
 									fontWeight: 'bold',
-							  })};
-						line-height: 20px;
-						margin-bottom: ${space[3]}px;
-						max-width: 540px;
-						color: ${palette.text.standfirst};
-					`;
+								})};
+								line-height: 20px;
+								margin-bottom: ${space[3]}px;
+								max-width: 540px;
+								color: ${palette.text.standfirst};
+							`;
+					}
 			}
 		}
 	}
@@ -157,10 +174,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 	return (
 		<div
 			data-print-layout="hide"
-			className={cx(
-				nestedStyles(palette),
-				standfirstStyles(format, palette),
-			)}
+			css={[nestedStyles(palette), standfirstStyles(format, palette)]}
 			// eslint-disable-next-line react/no-danger
 			dangerouslySetInnerHTML={{
 				__html: sanitise(standfirst, {

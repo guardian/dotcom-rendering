@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -66,17 +65,20 @@ const opinionStyles = (palette: Palette, format: Format) => css`
 
 const immersiveStyles = (format: Format) => css`
 	${format.theme === Special.Labs
-		? textSans.xlarge({ lineHeight: 'tight' })
+		? textSans.large({ lineHeight: 'tight' })
 		: headline.xsmall({
 				fontWeight: 'light',
 		  })}
 	margin-bottom: ${space[6]}px;
 `;
 
-const immersiveLinkStyles = (palette: Palette) => css`
+const immersiveLinkStyles = (palette: Palette, format: Format) => css`
 	a {
 		color: ${palette.text.headlineByline};
-		border-bottom: 1px solid ${palette.text.headlineByline};
+		border-bottom: 1px solid
+			${format.theme === Special.Labs
+				? palette.border.articleLink
+				: palette.text.headlineByline};
 		text-decoration: none;
 		:hover {
 			border-bottom: 1px solid ${palette.hover.headlineByline};
@@ -110,9 +112,9 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case Display.Immersive:
 			return (
-				<div className={immersiveStyles(format)}>
+				<div css={immersiveStyles(format)}>
 					by{' '}
-					<span className={immersiveLinkStyles(palette)}>
+					<span css={immersiveLinkStyles(palette, format)}>
 						<BylineLink byline={byline} tags={tags} />
 					</span>
 				</div>
@@ -123,8 +125,8 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 			switch (format.design) {
 				case Design.Interview:
 					return (
-						<div className={wrapperStyles}>
-							<div className={yellowBoxStyles(format)}>
+						<div css={wrapperStyles}>
+							<div css={yellowBoxStyles(format)}>
 								<BylineLink byline={byline} tags={tags} />
 							</div>
 						</div>
@@ -134,13 +136,13 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case Design.Comment:
 					return (
 						<div
-							className={cx(opinionWrapperStyles, {
-								[authorBylineWithImage]: hasSingleContributor(
-									tags,
-								),
-							})}
+							css={[
+								opinionWrapperStyles,
+								hasSingleContributor(tags) &&
+									authorBylineWithImage,
+							]}
 						>
-							<div className={opinionStyles(palette, format)}>
+							<div css={opinionStyles(palette, format)}>
 								<BylineLink byline={byline} tags={tags} />
 							</div>
 						</div>

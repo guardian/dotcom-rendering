@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAB } from '@guardian/ab-react';
 import { ABTest, Runnable } from '@guardian/ab-core';
 import { constructQuery } from '@root/src/lib/querystring';

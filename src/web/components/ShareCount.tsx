@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -74,23 +73,23 @@ export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
 
 	return (
 		<div
-			className={containerStyles}
+			css={containerStyles}
 			aria-label={`${short} Shares`}
 			data-cy="share-counts"
 		>
-			<div className={iconContainerStyles}>
-				<ShareIcon className={iconStyles} />
+			<div css={iconContainerStyles}>
+				<ShareIcon css={iconStyles} />
 			</div>
 			<div
 				data-testid="long-share-count"
-				className={longStyles}
+				css={longStyles}
 				aria-hidden="true"
 			>
 				{long}
 			</div>
 			<div
 				data-testid="short-share-count"
-				className={shortStyles}
+				css={shortStyles}
 				aria-hidden="true"
 			>
 				{short}

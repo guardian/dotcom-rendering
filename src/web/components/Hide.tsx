@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 import { until, from, Breakpoint } from '@guardian/src-foundations/mq';
 
 interface Props {
@@ -39,10 +38,10 @@ export const Hide = ({
 		`;
 	}
 	return el === 'li' ? (
-		<li className={whenToHide} key={key}>
+		<li css={whenToHide} key={key}>
 			{children}
 		</li>
 	) : (
-		<span className={whenToHide}>{children}</span>
+		<span css={whenToHide}>{children}</span>
 	);
 };

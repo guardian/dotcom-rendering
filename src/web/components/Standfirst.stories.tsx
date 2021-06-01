@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { news } from '@guardian/src-foundations';
 import { Display, Design, Pillar, Special } from '@guardian/types';
 import { Section } from './Section';

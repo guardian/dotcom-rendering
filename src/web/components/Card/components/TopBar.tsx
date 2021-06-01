@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 type Props = {
 	children: React.ReactNode;
@@ -9,7 +8,7 @@ type Props = {
 
 export const TopBar = ({ children, palette, isFullCardImage }: Props) => (
 	<div
-		className={css`
+		css={css`
 			display: flex;
 			width: 100%;
 			/* We absolutely position the 1 pixel top bar below

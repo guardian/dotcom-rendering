@@ -1,8 +1,9 @@
 import React from 'react';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { css, cx } from 'emotion';
+
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
@@ -11,7 +12,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
 	padding-top: 10px;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	word-wrap: break-word;
 	color: ${text.supporting};
 `;
@@ -56,7 +57,7 @@ export const Caption: React.FC<{
 	const getCaptionHtml = () => {
 		return (
 			<span
-				className={captionLink}
+				css={captionLink}
 				dangerouslySetInnerHTML={{
 					__html: captionText || '',
 				}}
@@ -66,16 +67,14 @@ export const Caption: React.FC<{
 	};
 
 	return (
-		<figure className={figureStyle}>
+		<figure css={figureStyle}>
 			{children}
 			{captionText && (
 				<>
 					<figcaption
-						className={cx(captionStyle, {
-							[captionPadding]: padCaption,
-						})}
+						css={[captionStyle, padCaption && captionPadding]}
 					>
-						<span className={iconStyle}>
+						<span css={iconStyle}>
 							<TriangleIcon />
 						</span>
 						{getCaptionHtml()} {displayCredit && credit}

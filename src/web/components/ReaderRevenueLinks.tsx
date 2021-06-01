@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import {
@@ -11,16 +11,19 @@ import {
 import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { shouldHideSupportMessaging } from '@root/src/web/lib/contributions';
+import {
+	MODULES_VERSION,
+	shouldHideSupportMessaging,
+} from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '@root/src/web/browser/cookie';
-import { remoteRrHeaderLinksTestName } from '@root/src/web/experiments/tests/remoteRrHeaderLinksTest';
-import type { TestMeta } from '@guardian/types';
+import type { OphanComponentEvent, TestMeta } from '@guardian/types';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
 import {
 	OphanRecordFunction,
 	sendOphanComponentEvent,
+	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 
 type Props = {
@@ -28,7 +31,7 @@ type Props = {
 	countryCode?: string;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
-	inRemoteModuleTest: boolean;
+	remoteHeaderEnabled: boolean;
 	contributionsServiceUrl: string;
 	pageViewId: string;
 	ophanRecord: OphanRecordFunction;
@@ -145,6 +148,7 @@ interface SupportHeaderProps {
 		secondaryCta?: Cta;
 	};
 	tracking: TestMeta;
+	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 }
 interface SupportHeaderData {
 	module: {
@@ -177,21 +181,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 		setSupportHeader,
 	] = useState<React.FC<SupportHeaderProps> | null>(null);
 
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
-		threshold: 0,
-		debounce: true,
-	});
-
-	useEffect(() => {
-		if (hasBeenSeen && supportHeaderResponse) {
-			sendOphanComponentEvent(
-				'VIEW',
-				supportHeaderResponse.meta,
-				ophanRecord,
-			);
-		}
-	}, [hasBeenSeen, supportHeaderResponse, ophanRecord]);
-
 	useEffect((): void => {
 		setAutomat();
 
@@ -206,7 +195,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 				showSupportMessaging: !shouldHideSupportMessaging(),
 				edition,
 				countryCode,
-				modulesVersion: 'v1',
+				modulesVersion: MODULES_VERSION,
 				mvtId: Number(getCookie('GU_mvt_id')),
 			},
 		};
@@ -222,7 +211,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 				}
 
 				setSupportHeaderResponse(response.data);
-				const { module, meta } = response.data;
+				const { module } = response.data;
 				return window
 					.guardianPolyfilledImport(module.url)
 					.then(
@@ -230,11 +219,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 							Header: React.FC<SupportHeaderProps>;
 						}) => {
 							setSupportHeader(() => headerModule.Header);
-							sendOphanComponentEvent(
-								'INSERT',
-								meta,
-								ophanRecord,
-							);
 						},
 					);
 			})
@@ -252,9 +236,14 @@ const ReaderRevenueLinksRemote: React.FC<{
 
 	if (SupportHeader && supportHeaderResponse) {
 		return (
-			<div ref={setNode} className={headerStyles}>
+			<div css={headerStyles}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
-				<SupportHeader {...supportHeaderResponse.module.props} />
+				<SupportHeader
+					submitComponentEvent={(componentEvent) =>
+						submitComponentEvent(componentEvent, ophanRecord)
+					}
+					{...supportHeaderResponse.module.props}
+				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
@@ -274,7 +263,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
 	// Only the header component is in the AB test
-	const testName = inHeader ? remoteRrHeaderLinksTestName : 'RRFooterLinks';
+	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
 	const tracking: TestMeta = {
 		abTestName: testName,
@@ -310,7 +299,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 				componentId: campaignCode,
 				campaignCode,
 				abTest: {
-					name: remoteRrHeaderLinksTestName,
+					name: testName,
 					variant: 'control',
 				},
 				pageViewId,
@@ -322,14 +311,10 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 
 	if (hideSupportMessaging) {
 		return (
-			<div className={cx(inHeader && headerStyles)}>
-				<div
-					className={cx({
-						[hiddenUntilTablet]: inHeader,
-					})}
-				>
-					<div className={messageStyles(true)}> Thank you </div>
-					<div className={subMessageStyles}>
+			<div css={inHeader && headerStyles}>
+				<div css={inHeader && hiddenUntilTablet}>
+					<div css={messageStyles(true)}> Thank you </div>
+					<div css={subMessageStyles}>
 						Your support powers our independent journalism
 					</div>
 				</div>
@@ -339,7 +324,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 
 	const ContributeButton = () => (
 		<a
-			className={linkStyles}
+			css={linkStyles}
 			href={getUrl('contribute')}
 			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 		>
@@ -348,7 +333,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 	);
 	const SubscribeButton = () => (
 		<a
-			className={linkStyles}
+			css={linkStyles}
 			href={getUrl('subscribe')}
 			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
 		>
@@ -360,28 +345,19 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 		edition === 'UK' ? ContributeButton : SubscribeButton;
 
 	return (
-		<div ref={setNode} className={cx(inHeader && headerStyles)}>
-			<div
-				className={cx({
-					[hiddenUntilTablet]: inHeader,
-				})}
-			>
-				<div className={messageStyles(false)}>
+		<div ref={setNode} css={inHeader && headerStyles}>
+			<div css={inHeader && hiddenUntilTablet}>
+				<div css={messageStyles(false)}>
 					<span>Support the&nbsp;Guardian</span>
 				</div>
-				<div className={subMessageStyles}>
+				<div css={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
 				<PrimaryButton />
 				<SecondaryButton />
 			</div>
 
-			<div
-				className={cx({
-					[hiddenFromTablet]: inHeader,
-					[hidden]: !inHeader,
-				})}
-			>
+			<div css={inHeader ? hiddenFromTablet : hidden}>
 				<PrimaryButton />
 			</div>
 		</div>
@@ -393,13 +369,13 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	countryCode,
 	dataLinkNamePrefix,
 	inHeader,
-	inRemoteModuleTest,
+	remoteHeaderEnabled,
 	urls,
 	contributionsServiceUrl,
 	ophanRecord,
 	pageViewId = '',
 }: Props) => {
-	if (inHeader && inRemoteModuleTest) {
+	if (inHeader && remoteHeaderEnabled) {
 		return (
 			<ReaderRevenueLinksRemote
 				edition={edition}
@@ -416,7 +392,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 			countryCode={countryCode}
 			dataLinkNamePrefix={dataLinkNamePrefix}
 			inHeader={inHeader}
-			inRemoteModuleTest={inRemoteModuleTest}
+			remoteHeaderEnabled={remoteHeaderEnabled}
 			urls={urls}
 			contributionsServiceUrl={contributionsServiceUrl}
 			ophanRecord={ophanRecord}

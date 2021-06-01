@@ -502,6 +502,8 @@ type CAPIBrowserType = {
 	isLive: boolean;
 	matchUrl?: string;
 	elementsToHydrate: CAPIElement[];
+	isPreview?: boolean;
+	webTitle: string;
 };
 
 interface TagType {
@@ -675,7 +677,7 @@ interface ConfigType extends CommercialConfigType {
 	hbImpl: { [key: string]: any } | string;
 	adUnit: string;
 	isSensitive: boolean;
-	videoDuration: number;
+	videoDuration?: number;
 	edition: string;
 	section: string;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -688,15 +690,16 @@ interface ConfigType extends CommercialConfigType {
 	discussionApiUrl: string;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
-	isPhotoEssay: boolean;
+	isPhotoEssay?: boolean;
 	references?: { [key: string]: string }[];
 	host?: string;
 	idUrl?: string;
 	mmaUrl?: string;
 	brazeApiKey?: string;
 	ipsosTag?: string;
-	isLiveBlog: boolean;
-	isLive: boolean;
+	isLiveBlog?: boolean;
+	isLive?: boolean;
+	isPreview?: boolean;
 }
 
 interface ConfigTypeBrowser {
@@ -727,6 +730,7 @@ interface ConfigTypeBrowser {
 	discussionApiClientHeader: string;
 	dcrSentryDsn: string;
 	remoteBanner: boolean;
+	remoteHeader: boolean;
 	puzzlesBanner: boolean;
 	ausMoment2020Header: boolean;
 	switches: CAPIType['config']['switches'];
@@ -897,9 +901,6 @@ type AdSlotType =
 // 3rd party type declarations //
 // ------------------------------
 /* eslint-disable @typescript-eslint/no-explicit-any */
-declare module 'emotion-server' {
-	export const extractCritical: any;
-}
 declare module 'dompurify' {
 	const createDOMPurify: any;
 	export default createDOMPurify;
@@ -943,6 +944,7 @@ declare namespace JSX {
 		'amp-analytics': any;
 		'amp-pixel': any;
 		'amp-ad': any;
+		'amp-sticky-ad': any;
 		'amp-youtube': any;
 		'amp-geo': any;
 		'amp-consent': any;

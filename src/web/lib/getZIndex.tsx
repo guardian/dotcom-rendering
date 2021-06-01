@@ -33,6 +33,9 @@ const indices = [
 	// Header
 	'stickyAdWrapper',
 
+	// Edition selector in nav - needs to be below stickyAdWrapper
+	'editionDropdown',
+
 	// Search link should be above The Guardian svg
 	'searchHeaderLink',
 	'TheGuardian',

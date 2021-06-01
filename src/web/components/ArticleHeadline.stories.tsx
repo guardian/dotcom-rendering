@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { news } from '@guardian/src-foundations';
 import { Display, Design, Pillar, Special } from '@guardian/types';
@@ -81,7 +80,7 @@ export const ShowcaseInterview = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>
@@ -115,6 +114,8 @@ export const ShowcaseInterview = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
+					pageId="testID"
+					webTitle="story article"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -130,7 +131,7 @@ export const ShowcaseInterviewNobyline = () => (
 			</LeftColumn>
 			<ArticleContainer>
 				<div
-					className={css`
+					css={css`
 						margin-bottom: -100px;
 					`}
 				>
@@ -164,6 +165,8 @@ export const ShowcaseInterviewNobyline = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
+					pageId="testID"
+					webTitle="story article"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -216,6 +219,8 @@ export const Interview = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
+					pageId="testID"
+					webTitle="story article"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -266,6 +271,8 @@ export const InterviewNoByline = () => (
 					})}
 					hideCaption={true}
 					elements={mainMediaElements}
+					pageId="testID"
+					webTitle="story article"
 				/>
 			</ArticleContainer>
 		</Flex>

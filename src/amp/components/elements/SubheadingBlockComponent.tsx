@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Special } from '@guardian/types';
 import { palette } from '@guardian/src-foundations';
@@ -47,13 +47,13 @@ export const SubheadingBlockComponent: React.FC<{
 	isImmersive: boolean;
 }> = ({ html, pillar, isImmersive }) => (
 	<span
-		className={
+		css={
 			pillar === Special.Labs
-				? cx(
+				? [
 						style(pillar),
 						isImmersive && immersiveBodyStyle,
 						subHeadingStyleLabs,
-				  )
+				  ]
 				: style(pillar)
 		}
 		dangerouslySetInnerHTML={{

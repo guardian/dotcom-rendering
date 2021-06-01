@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral, border, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -70,13 +69,13 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 
 	return (
 		<li
-			className={listItemStyles}
+			css={listItemStyles}
 			data-link-name={`trail | ${mostViewedItemIndex + 1}`}
 		>
-			<a className={linkTagStyles} href={trail.url} ref={hoverRef}>
-				<div className={lineWrapperStyles}>
+			<a css={linkTagStyles} href={trail.url} ref={hoverRef}>
+				<div css={lineWrapperStyles}>
 					{trail.image && (
-						<div className={imageWrapperStyles}>
+						<div css={imageWrapperStyles}>
 							<Avatar
 								imageSrc={trail.image}
 								imageAlt=""
@@ -84,7 +83,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							/>
 						</div>
 					)}
-					<div className={headlineWrapperStyles}>
+					<div css={headlineWrapperStyles}>
 						{trail.format.design === Design.LiveBlog ? (
 							<LinkHeadline
 								headlineText={trail.headline}
@@ -112,7 +111,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								}
 							/>
 						)}
-						<div className={marginTopStyles}>
+						<div css={marginTopStyles}>
 							{trail.ageWarning && (
 								<AgeWarning
 									age={trail.ageWarning}

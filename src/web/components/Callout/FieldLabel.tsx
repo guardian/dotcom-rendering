@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
@@ -19,14 +18,12 @@ const optionalTextStyles = css`
 `;
 
 export const FieldLabel = ({ formField }: { formField: CampaignField }) => (
-	<label className={fieldLabelStyles} htmlFor={formField.name}>
+	<label css={fieldLabelStyles} htmlFor={formField.name}>
 		{formField.label}
-		{!formField.required && (
-			<span className={optionalTextStyles}>Optional</span>
-		)}
+		{!formField.required && <span css={optionalTextStyles}>Optional</span>}
 		{formField.description && (
 			<div>
-				<span className={fieldDescription}>
+				<span css={fieldDescription}>
 					{`(${formField.description})`}
 				</span>
 			</div>

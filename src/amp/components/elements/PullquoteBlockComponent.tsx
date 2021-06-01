@@ -1,9 +1,10 @@
 import React from 'react';
-import { css } from 'emotion';
-import Quote from '@frontend/static/icons/quote.svg';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
+import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { body } from '@guardian/src-foundations/typography';
+
+import Quote from '@frontend/static/icons/quote.svg';
+import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
 const styles = (pillar: Theme) => css`
 	background-color: ${palette.neutral[97]};
@@ -24,7 +25,7 @@ export const PullquoteBlockComponent: React.FC<{
 }> = ({ html, pillar }) => {
 	if (!html) return <></>;
 	return (
-		<aside className={styles(pillar)}>
+		<aside css={styles(pillar)}>
 			<Quote />{' '}
 			<span
 				dangerouslySetInnerHTML={{

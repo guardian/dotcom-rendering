@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text, border, neutral, news } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -43,7 +42,7 @@ const headingStyles = css`
 const textStyles = css`
 	${textSans.small()}
 	${until.desktop} {
-		${textSans.xsmall()}
+		${textSans.xxsmall()}
 	}
 	color: ${text.supporting};
 	padding-bottom: ${space[1]}px;
@@ -80,10 +79,10 @@ const rowUntilDesktop = css`
 
 const CommentCount = ({ count }: { count?: number }) => {
 	return (
-		<h2 className={headingStyles}>
+		<h2 css={headingStyles}>
 			comments{' '}
 			<span
-				className={css`
+				css={css`
 					color: ${neutral[60]};
 				`}
 			>
@@ -109,9 +108,9 @@ export const SignedInAs = ({
 		// Discussion is disabled sitewide and user is signed in
 		if (user) {
 			return (
-				<div className={containerStyles}>
+				<div css={containerStyles}>
 					<CommentCount count={commentCount} />
-					<span className={headlineStyles}>
+					<span css={headlineStyles}>
 						Commenting has been disabled at this time
 					</span>
 				</div>
@@ -119,15 +118,15 @@ export const SignedInAs = ({
 		}
 		// Discussion disabled sitewide and user logged out
 		return (
-			<div className={containerStyles}>
+			<div css={containerStyles}>
 				<CommentCount count={commentCount} />
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					Commenting has been disabled at this time but you can still{' '}
 					<a
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						className={linkStyles(palette)}
+						css={linkStyles(palette)}
 					>
 						sign in
 					</a>{' '}
@@ -136,7 +135,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						className={linkStyles(palette)}
+						css={linkStyles(palette)}
 					>
 						create your Guardian account
 					</a>{' '}
@@ -149,13 +148,13 @@ export const SignedInAs = ({
 	if (isBanned) {
 		// User is banned
 		return (
-			<div className={containerStyles}>
+			<div css={containerStyles}>
 				<CommentCount count={commentCount} />
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					Commenting has been disabled for this account (
 					<a
 						href="https://www.theguardian.com/community-faqs#321a"
-						className={linkStyles(palette)}
+						css={linkStyles(palette)}
 					>
 						why?
 					</a>{' '}
@@ -168,9 +167,9 @@ export const SignedInAs = ({
 	if (user && isClosedForComments) {
 		// The reader is logged in but the discussion is closed
 		return (
-			<div className={containerStyles}>
+			<div css={containerStyles}>
 				<CommentCount count={commentCount} />
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					This discussion is closed for comments
 				</span>
 			</div>
@@ -180,15 +179,15 @@ export const SignedInAs = ({
 	if (!user && isClosedForComments) {
 		// The discussion is closed and the reader is not logged in
 		return (
-			<div className={containerStyles}>
+			<div css={containerStyles}>
 				<CommentCount count={commentCount} />
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					This discussion is now closed for comments but you can still{' '}
 					<a
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						className={linkStyles(palette)}
+						css={linkStyles(palette)}
 					>
 						sign in
 					</a>{' '}
@@ -197,7 +196,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						className={linkStyles(palette)}
+						css={linkStyles(palette)}
 					>
 						create your Guardian account
 					</a>{' '}
@@ -210,14 +209,14 @@ export const SignedInAs = ({
 	if (!user) {
 		// The discussion is open but the reader is not logged in
 		return (
-			<div className={containerStyles}>
+			<div css={containerStyles}>
 				<CommentCount count={commentCount} />
-				<span className={headlineStyles}>
+				<span css={headlineStyles}>
 					<a
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
 							'signin_to_comment',
 						)}`}
-						className={linkStyles(palette)}
+						css={linkStyles(palette)}
 					>
 						Sign in
 					</a>{' '}
@@ -226,7 +225,7 @@ export const SignedInAs = ({
 						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 							'register_to_comment',
 						)}`}
-						className={linkStyles(palette)}
+						css={linkStyles(palette)}
 					>
 						create your Guardian account
 					</a>{' '}
@@ -238,22 +237,22 @@ export const SignedInAs = ({
 
 	// Discussion open and user logged in
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<CommentCount count={commentCount} />
-			<div className={rowUntilDesktop}>
-				<div className={imageWrapper}>
+			<div css={rowUntilDesktop}>
+				<div css={imageWrapper}>
 					<img
 						src={
 							user.secureAvatarUrl ||
 							'https://avatar.guim.co.uk/no-user-image.gif'
 						}
 						alt={user.displayName || 'Guardian User'}
-						className={imageStyles}
+						css={imageStyles}
 					/>
 				</div>
-				<div className={textStyles}>
+				<div css={textStyles}>
 					Signed in as
-					<div className={usernameStyles}>
+					<div css={usernameStyles}>
 						{user.displayName || 'Guardian User'}
 					</div>
 				</div>

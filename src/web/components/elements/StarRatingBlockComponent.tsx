@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
@@ -16,7 +15,7 @@ const starsWrapper = css`
 `;
 
 export const StarRatingBlockComponent = ({ rating, size }: Props) => (
-	<div className={starsWrapper}>
+	<div css={starsWrapper}>
 		<StarRating rating={rating} size={size} />
 	</div>
 );

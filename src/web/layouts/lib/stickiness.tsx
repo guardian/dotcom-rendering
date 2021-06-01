@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 
@@ -33,7 +32,7 @@ const bannerWrapper = css`
 	position: fixed !important;
 	bottom: 0;
 	${getZIndexImportant('banner')}
-	max-height: 80vh;
+	max-height: 100vh;
 	overflow: visible;
 	width: 100% !important;
 	background: none !important;
@@ -41,15 +40,15 @@ const bannerWrapper = css`
 `;
 
 export const Stuck = ({ children }: Props) => (
-	<div className={stickyAdWrapper}>{children}</div>
+	<div css={stickyAdWrapper}>{children}</div>
 );
 
 export const SendToBack = ({ children }: Props) => (
-	<div className={headerWrapper}>{children}</div>
+	<div css={headerWrapper}>{children}</div>
 );
 
 export const BannerWrapper = ({ children }: Props) => (
-	<div id="bottom-banner" className={bannerWrapper}>
+	<div id="bottom-banner" css={bannerWrapper}>
 		{children}
 	</div>
 );

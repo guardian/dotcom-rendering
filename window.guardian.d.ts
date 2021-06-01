@@ -40,10 +40,8 @@ declare global {
             // TODO expose as type from Automat client lib
             automat: {
                 react: any;
-                preact: any;
-                emotion: any;
-                emotionCore: any;
-                emotionTheming: any;
+				emotionReact: any;
+				emotionReactJsxRuntime: any;
             };
             readerRevenue: ReaderRevenueDevUtils;
             gaPath:  string;

@@ -1,10 +1,9 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
 import { Display } from '@guardian/types';
 
-import { ElementRenderer } from '@root/src/web/lib/ElementRenderer';
+import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
@@ -58,6 +57,8 @@ export const MainMedia: React.FC<{
 	adTargeting?: AdTargeting;
 	starRating?: number;
 	host?: string;
+	pageId: string;
+	webTitle: string;
 }> = ({
 	elements,
 	format,
@@ -66,25 +67,29 @@ export const MainMedia: React.FC<{
 	adTargeting,
 	starRating,
 	host,
+	pageId,
+	webTitle,
 }) => (
 	<div
-		className={cx(
+		css={[
 			mainMedia,
 			format.display === Display.Immersive ? immersiveWrapper : noGutters,
-		)}
+		]}
 	>
-		{elements.map((element, index) => (
-			<ElementRenderer
-				element={element}
-				format={format}
-				palette={palette}
-				index={index}
-				hideCaption={hideCaption}
-				adTargeting={adTargeting}
-				starRating={starRating}
-				host={host}
-				isMainMedia={true}
-			/>
-		))}
+		{elements.map((element, index) =>
+			renderArticleElement({
+				format,
+				palette,
+				element,
+				adTargeting,
+				host,
+				index,
+				isMainMedia: true,
+				starRating,
+				hideCaption,
+				pageId,
+				webTitle,
+			}),
+		)}
 	</div>
 );

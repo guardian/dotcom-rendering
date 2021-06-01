@@ -1132,33 +1132,22 @@
                 "elementId": {
                     "type": "string"
                 },
-                "code": {
+                "html": {
                     "type": "string"
                 },
                 "isMandatory": {
                     "type": "boolean"
                 },
                 "language": {
-                    "$ref": "#/definitions/Language"
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "code",
                 "elementId",
+                "html",
                 "isMandatory"
             ]
-        },
-        "Language": {
-            "enum": [
-                "css",
-                "elm",
-                "javascript",
-                "markup",
-                "scala",
-                "typescript"
-            ],
-            "type": "string"
         },
         "CommentBlockElement": {
             "type": "object",
@@ -1265,6 +1254,13 @@
                     "enum": [
                         "full",
                         "partial"
+                    ],
+                    "type": "string"
+                },
+                "spaceAbove": {
+                    "enum": [
+                        "loose",
+                        "tight"
                     ],
                     "type": "string"
                 }
@@ -1472,20 +1468,6 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
-                },
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {
-                                "type": "string"
-                            },
-                            "body": {
-                                "type": "string"
-                            }
-                        }
-                    }
                 }
             },
             "required": [
@@ -1760,6 +1742,7 @@
                 "halfwidth",
                 "immersive",
                 "inline",
+                "richLink",
                 "showcase",
                 "supporting",
                 "thumbnail"
@@ -2550,16 +2533,23 @@
                 "date": {
                     "type": "string"
                 },
+                "unixDate": {
+                    "type": "number"
+                },
                 "body": {
                     "type": "string"
                 },
                 "toDate": {
                     "type": "string"
+                },
+                "toUnixDate": {
+                    "type": "number"
                 }
             },
             "required": [
                 "date",
-                "title"
+                "title",
+                "unixDate"
             ]
         },
         "TweetBlockElement": {
@@ -3717,6 +3707,9 @@
                 "isLive": {
                     "type": "boolean"
                 },
+                "isPreview": {
+                    "type": "boolean"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -3762,9 +3755,6 @@
                 "googletagUrl",
                 "hbImpl",
                 "idApiUrl",
-                "isLive",
-                "isLiveBlog",
-                "isPhotoEssay",
                 "isSensitive",
                 "keywordIds",
                 "pageId",
@@ -3776,23 +3766,22 @@
                 "shortUrlId",
                 "showRelatedContent",
                 "stage",
-                "switches",
-                "videoDuration"
+                "switches"
             ]
         },
         "CommercialProperties": {
             "type": "object",
             "properties": {
-                "UK": {
+                "AU": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
                 "US": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "INT": {
+                "UK": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "AU": {
+                "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },

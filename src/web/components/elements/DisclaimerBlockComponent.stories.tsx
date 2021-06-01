@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { DisclaimerBlockComponent } from './DisclaimerBlockComponent';
 
@@ -15,7 +14,7 @@ const containerStyles = css`
 
 export const defaultStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<DisclaimerBlockComponent
 				html={
 					'<p><sup>This is a disclaimer and it could have <a href="#">link text in it</a>.</sup></p>'
@@ -28,7 +27,7 @@ defaultStory.story = { name: 'Default Disclaimer' };
 
 export const OpinionStory = () => {
 	return (
-		<div className={containerStyles}>
+		<div css={containerStyles}>
 			<DisclaimerBlockComponent
 				html={
 					'<p><sup>This is an Opinion disclaimer and it could have <a href="#">link text in it</a>.</sup></p>'

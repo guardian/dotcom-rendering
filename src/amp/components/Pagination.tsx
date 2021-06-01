@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { neutral } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -10,7 +10,7 @@ import ChevronLeftSingle from '@frontend/static/icons/chevron-left-single.svg';
 import ChevronLeftDouble from '@frontend/static/icons/chevron-left-double.svg';
 
 const paginationStyle = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	font-weight: bold;
 
 	display: flex;
@@ -57,13 +57,13 @@ export const Pagination: React.FunctionComponent<{
 	}
 
 	return (
-		<div className={paginationStyle}>
+		<div css={paginationStyle}>
 			<p>
 				<a
-					className={cx(
+					css={[
 						paginationLinkStyle(pagination.newest !== undefined),
 						marginRightStyle,
-					)}
+					]}
 					href={
 						pagination.newest
 							? `${guardianURL}${pagination.newest}`
@@ -76,9 +76,7 @@ export const Pagination: React.FunctionComponent<{
 				</a>
 
 				<a
-					className={paginationLinkStyle(
-						pagination.newest !== undefined,
-					)}
+					css={paginationLinkStyle(pagination.newest !== undefined)}
 					href={
 						pagination.newest
 							? `${guardianURL}${pagination.newest}`
@@ -97,10 +95,10 @@ export const Pagination: React.FunctionComponent<{
 
 			<p>
 				<a
-					className={cx(
+					css={[
 						paginationLinkStyle(pagination.older !== undefined),
 						marginRightStyle,
-					)}
+					]}
 					href={
 						pagination.older
 							? `${guardianURL}${pagination.older}`
@@ -113,9 +111,7 @@ export const Pagination: React.FunctionComponent<{
 				</a>
 
 				<a
-					className={paginationLinkStyle(
-						pagination.older !== undefined,
-					)}
+					css={paginationLinkStyle(pagination.older !== undefined)}
 					href={
 						pagination.older
 							? `${guardianURL}${pagination.older}`

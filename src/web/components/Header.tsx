@@ -1,5 +1,4 @@
-import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { Hide } from '@root/src/web/components/Hide';
@@ -21,7 +20,7 @@ type Props = {
 };
 
 export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
-	<header className={headerStyles}>
+	<header css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
 			<div id="edition-root">
 				<EditionDropdown

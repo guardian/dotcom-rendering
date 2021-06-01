@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/react';
 
 import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -23,7 +23,7 @@ const adStyle = css`
 	:before {
 		content: 'Advertisement';
 		display: block;
-		${textSans.xsmall()};
+		${textSans.xxsmall()};
 		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-blacklist */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
@@ -47,11 +47,11 @@ const firstPublishedStyle = css`
 	margin-bottom: 10px;
 	text-decoration: none;
 	font-weight: bold;
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 `;
 
 const lastUpdatedStyle = css`
-	${textSans.xsmall()};
+	${textSans.xxsmall()};
 	color: ${palette.neutral[60]};
 	text-align: right;
 	padding-right: 15px;
@@ -91,11 +91,11 @@ export const Blocks: React.FunctionComponent<{
 				id={block.id}
 				data-sort-time={block.blockFirstPublished}
 				key={block.id}
-				className={blockStyle(pillar)}
+				css={blockStyle(pillar)}
 			>
 				{block.blockFirstPublishedDisplay && (
 					<a
-						className={firstPublishedStyle}
+						css={firstPublishedStyle}
 						href={blockLink(url, block.id)}
 					>
 						{block.blockFirstPublishedDisplay}
@@ -104,9 +104,9 @@ export const Blocks: React.FunctionComponent<{
 				{block.title && <h2>{block.title}</h2>}
 				{Elements(block.elements, pillar, false)}
 				{/* Some elements float (e.g. rich links) */}
-				<div className={clearBoth} />{' '}
+				<div css={clearBoth} />{' '}
 				{block.blockLastUpdatedDisplay && (
-					<div className={lastUpdatedStyle}>
+					<div css={lastUpdatedStyle}>
 						Updated at {block.blockLastUpdatedDisplay}
 					</div>
 				)}
@@ -144,7 +144,7 @@ export const Blocks: React.FunctionComponent<{
 							<div
 								id={`ad-${i + 1}`}
 								data-sort-time="1"
-								className={adStyle}
+								css={adStyle}
 							>
 								<Ad
 									adRegion="US"
@@ -180,7 +180,7 @@ export const Blocks: React.FunctionComponent<{
 			<div
 				id="clean-blocks"
 				data-sort-time="1"
-				className={css`
+				css={css`
 					clear: both;
 				`}
 			/>

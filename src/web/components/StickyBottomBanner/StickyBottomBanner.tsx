@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
 import {
 	canShowRRBanner,
@@ -16,14 +16,16 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
+import { CountryCode } from '@guardian/types';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
-	asyncCountryCode?: Promise<string | void>;
+	asyncCountryCode?: Promise<CountryCode | null>;
 	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
+	isPreview: boolean;
 };
 
 type RRBannerConfig = {
@@ -70,6 +72,7 @@ const buildRRBannerConfigWith = ({
 		CAPI: CAPIBrowserType,
 		isSignedIn: boolean,
 		asyncCountryCode: Promise<string>,
+		isPreview: boolean,
 	): CandidateConfig => {
 		return {
 			candidate: {
@@ -95,9 +98,15 @@ const buildRRBannerConfigWith = ({
 							'subscriptionBannerLastClosedAt',
 						),
 						section: CAPI.config.section,
+						isPreview,
+						idApiUrl: CAPI.config.idApiUrl,
 					}),
-				show: ({ meta, module }: BannerProps) => () => (
-					<BannerComponent meta={meta} module={module} />
+				show: ({ meta, module, email }: BannerProps) => () => (
+					<BannerComponent
+						meta={meta}
+						module={module}
+						email={email}
+					/>
 				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
@@ -109,14 +118,14 @@ const buildPuzzlesBannerConfig = buildRRBannerConfigWith({
 	id: 'puzzles-banner',
 	BannerComponent: PuzzlesBanner,
 	canShowFn: canShowPuzzlesBanner,
-	isEnabled: (swtiches) => swtiches.puzzlesBanner,
+	isEnabled: (switches) => switches.puzzlesBanner,
 });
 
 const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 	id: 'reader-revenue-banner',
 	BannerComponent: ReaderRevenueBanner,
 	canShowFn: canShowRRBanner,
-	isEnabled: (swtiches) => swtiches.remoteBanner,
+	isEnabled: (switches) => switches.remoteBanner,
 });
 
 const buildBrazeBanner = (
@@ -135,6 +144,7 @@ export const StickyBottomBanner = ({
 	asyncCountryCode,
 	CAPI,
 	brazeMessages,
+	isPreview,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -143,11 +153,13 @@ export const StickyBottomBanner = ({
 			CAPI,
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<string>,
+			isPreview,
 		);
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
-			asyncCountryCode as Promise<string>,
+			asyncCountryCode as Promise<CountryCode>,
+			isPreview,
 		);
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Design, Display, Pillar, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 

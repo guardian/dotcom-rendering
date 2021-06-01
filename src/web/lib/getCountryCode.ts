@@ -1,76 +1,55 @@
-type LocalCountryCodeType = {
-	value: string;
-	expires: number;
+import { getLocale, storage } from '@guardian/libs';
+import type { CountryCode } from '@guardian/types';
+import { getCookie } from '@frontend/web/browser/cookie';
+
+const COUNTRY_CODE_KEY = 'GU_geo_country';
+const COUNTRY_CODE_KEY_OVERRIDE = 'gu.geo.override';
+/*
+	Memoizes the location
+ */
+let locale: CountryCode | null;
+
+/*
+	Can be used to override country code and sets it in localStorage
+ */
+export const overrideCountryCode = (countryCode: CountryCode): void => {
+	if (countryCode) {
+		storage.local.set(COUNTRY_CODE_KEY_OVERRIDE, countryCode);
+		locale = countryCode;
+	}
 };
 
-const COUNTRY_CODE_KEY = 'gu.geolocation';
-const TEN_DAYS = 60 * 60 * 24 * 10;
-
-function hasExpired(whenItExpires: number) {
-	return new Date().getTime() > whenItExpires;
-}
-
-export const setCountryCode = (countryCode: string): void => {
-	// What's this setTimeout business?
-	// localStorage calls are syncronous and we don't need to wait for this
-	// one so we use setTimeout to put this step on the end of the event queue
-	// for later, letting the thread continue
-	setTimeout(() => {
-		if (countryCode) {
-			try {
-				localStorage.setItem(
-					COUNTRY_CODE_KEY,
-					JSON.stringify({
-						value: countryCode,
-						expires: new Date().getTime() + TEN_DAYS,
-					}),
-				);
-			} catch (error) {
-				// We tried, it failed. Often local storage is not available and we
-				// need to live with that
-			}
-		}
-	});
+/*
+	This method can be used as a non async way of getting the country code
+	after getLocaleCode has been called.
+ */
+export const getCountryCodeSync = (): CountryCode | null => {
+	return (
+		locale ||
+		storage.local.get(COUNTRY_CODE_KEY_OVERRIDE) ||
+		getCookie(COUNTRY_CODE_KEY)
+	);
 };
 
-export const getCountryCode = async (): Promise<string | void> => {
-	// Read local storage to see if we already have a value
-	let localCountryCode: LocalCountryCodeType | null;
-	try {
-		const item = localStorage.getItem(COUNTRY_CODE_KEY);
-		localCountryCode = item ? JSON.parse(item) : null;
-	} catch (error) {
-		localCountryCode = null;
-	}
-
-	if (!localCountryCode || hasExpired(localCountryCode.expires)) {
-		const countryCode = await fetch(
-			'https://api.nextgen.guardianapps.co.uk/geolocation',
-		)
-			.then((response) => {
-				if (!response.ok) {
-					throw Error(
-						response.statusText ||
-							`getCountryCode | An api call returned HTTP status ${response.status}`,
-					);
-				}
-				return response;
-			})
-			.then((response) => response.json())
-			.then((json: { country: string }) => json.country)
-			.catch((error) => {
-				window.guardian.modules.sentry.reportError(
-					error,
-					'get-country-code',
-				);
-			});
-
-		if (countryCode) {
-			setCountryCode(countryCode);
-		}
-		// Return the country value that we got from our fetch call
-		return countryCode;
-	}
-	// THere was no need to fetch, return the local value
-	return localCountryCode.value;
+/*
+	This method returns the location of the user from guardian/libs getLocale
+	It will return fastly's 'GU_geo_country' if it exists,
+	or an overridden geolocation from 'gu.geo.override' localStorage
+	or if none of those exists, it will call the geo endpoint to fetch it and set it in `GU_geo_country`
+ */
+export const getLocaleCode = async (): Promise<CountryCode | null> => {
+	return getLocale()
+		.then((countryCode) => {
+			locale = countryCode;
+			return countryCode;
+		})
+		.catch((error) => {
+			console.log(`Error getting location from libs/getLocale`);
+			window.guardian.modules.sentry.reportError(
+				error,
+				'get-country-code',
+			);
+			locale = getCountryCodeSync();
+			return locale;
+		});
 };

@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
@@ -127,7 +126,7 @@ export const PullQuoteBlockComponent: React.FC<{
 		case Design.Comment:
 			return (
 				<aside
-					className={cx(
+					css={[
 						decidePosition(role, design),
 						css`
 							${headline.xxsmall({ fontWeight: 'light' })};
@@ -151,11 +150,11 @@ export const PullQuoteBlockComponent: React.FC<{
 								background-color: #fbe6d5;
 							}
 						`,
-					)}
+					]}
 				>
 					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
 					<blockquote
-						className={css`
+						css={css`
 							display: inline;
 						`}
 						// eslint-disable-next-line react/no-danger
@@ -171,7 +170,7 @@ export const PullQuoteBlockComponent: React.FC<{
 		case Design.PhotoEssay:
 			return (
 				<aside
-					className={cx(
+					css={[
 						decidePosition(role, design),
 						decideFont(role),
 						css`
@@ -184,7 +183,7 @@ export const PullQuoteBlockComponent: React.FC<{
 							padding-bottom: 12px;
 							margin-bottom: 16px;
 						`,
-					)}
+					]}
 				>
 					<QuoteIcon colour={palette.fill.quoteIcon} size="large" />
 					<blockquote
@@ -195,7 +194,7 @@ export const PullQuoteBlockComponent: React.FC<{
 					/>
 					<footer>
 						<cite
-							className={css`
+							css={css`
 								color: ${text.supporting};
 							`}
 						>
@@ -207,7 +206,7 @@ export const PullQuoteBlockComponent: React.FC<{
 		default:
 			return (
 				<aside
-					className={cx(
+					css={[
 						decidePosition(role, design),
 						css`
 							${headline.xxsmall({ fontWeight: 'bold' })};
@@ -230,11 +229,11 @@ export const PullQuoteBlockComponent: React.FC<{
 								background-color: ${neutral[97]};
 							}
 						`,
-					)}
+					]}
 				>
 					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
 					<blockquote
-						className={css`
+						css={css`
 							display: inline;
 						`}
 						// eslint-disable-next-line react/no-danger
@@ -244,7 +243,7 @@ export const PullQuoteBlockComponent: React.FC<{
 					/>
 					<footer>
 						<cite
-							className={css`
+							css={css`
 								color: ${palette.text.pullQuoteAttribution};
 							`}
 						>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
-import React from 'react';
-import { css } from 'emotion';
+
+import { css } from '@emotion/react';
 
 import { InteractiveBlockComponent } from '@frontend/web/components/elements/InteractiveBlockComponent';
 import { Figure } from '@frontend/web/components/Figure';
@@ -29,7 +29,7 @@ const SomeText = () => (
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			padding-left: 250px;
 			padding-right: 20px;
 		`}

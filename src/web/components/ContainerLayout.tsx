@@ -1,5 +1,4 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import { Section } from '@root/src/web/components/Section';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
@@ -30,6 +29,32 @@ type Props = {
 	leftColSize?: LeftColSize;
 };
 
+const containerStyles = css`
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	width: 100%;
+`;
+
+const margins = css`
+	margin-top: ${space[2]}px;
+	/*
+   Keep spacing at the bottom of the container consistent at 36px, regardless of
+   breakpoint, based on chat with Harry Fisher
+*/
+	margin-bottom: ${space[9]}px;
+`;
+
+const rightMargin = css`
+	${from.wide} {
+		margin-right: 68px;
+	}
+`;
+
+const padding = css`
+	padding: 0 10px;
+`;
+
 const Container = ({
 	children,
 	padded,
@@ -40,46 +65,18 @@ const Container = ({
 	padded: boolean;
 	verticalMargins: boolean;
 	stretchRight: boolean;
-}) => {
-	const containerStyles = css`
-		display: flex;
-		flex-grow: 1;
-		flex-direction: column;
-		width: 100%;
-	`;
-
-	const margins = css`
-		margin-top: ${space[2]}px;
-		/*
-           Keep spacing at the bottom of the container consistent at 36px, regardless of
-           breakpoint, based on chat with Harry Fisher
-        */
-		margin-bottom: ${space[9]}px;
-	`;
-
-	const rightMargin = css`
-		${from.wide} {
-			margin-right: 68px;
-		}
-	`;
-
-	const padding = css`
-		padding: 0 10px;
-	`;
-
-	return (
-		<div
-			className={cx(
-				containerStyles,
-				padded && padding,
-				verticalMargins && margins,
-				!stretchRight && rightMargin,
-			)}
-		>
-			{children}
-		</div>
-	);
-};
+}) => (
+	<div
+		css={[
+			containerStyles,
+			padded && padding,
+			verticalMargins && margins,
+			!stretchRight && rightMargin,
+		]}
+	>
+		{children}
+	</div>
+);
 
 export const ContainerLayout = ({
 	title,

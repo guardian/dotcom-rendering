@@ -1,5 +1,5 @@
-import { mostRead } from '../../fixtures/manual/most-read';
-import { mostReadGeo } from '../../fixtures/manual/most-read-geo';
+import { mostRead } from 'cypress/fixtures/manual/most-read';
+import { mostReadGeo } from 'cypress/fixtures/manual/most-read-geo';
 
 export const mockApi = () => {
 	// Mock share count

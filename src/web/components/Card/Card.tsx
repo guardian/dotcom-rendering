@@ -1,7 +1,6 @@
-import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
-import { Design, Special } from '@guardian/types';
+import { Design } from '@guardian/types';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -14,7 +13,6 @@ import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { formatCount } from '@root/src/web/lib/formatCount';
-import { textSans, headline } from '@guardian/src-foundations/typography';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -103,27 +101,15 @@ const starWrapper = css`
 	margin-top: 2px;
 `;
 
-const labTitleOrNot = (format: Format) => {
-	if (format.theme === Special.Labs) {
-		return css`
-			${textSans.medium({ fontWeight: 'regular' })}
-		`;
-	}
-	return css`
-		${headline.xxxsmall({ fontWeight: 'regular' })}
-		line-height: 20px;
-	`;
-};
-
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
-			<div className={starWrapper}>
+			<div css={starWrapper}>
 				<StarRating rating={rating} size="small" />
 			</div>
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<div className={starWrapper}>
+			<div css={starWrapper}>
 				<StarRating rating={rating} size="medium" />
 			</div>
 		</Hide>
@@ -237,7 +223,6 @@ export const Card = ({
 									isFullCardImage={isFullCardImage}
 								>
 									<CardHeadline
-										css={labTitleOrNot(format)}
 										headlineText={headlineText}
 										format={format}
 										palette={cardPalette}
@@ -276,9 +261,7 @@ export const Card = ({
 								</>
 							</Flex>
 							<div
-								className={cx(
-									isFullCardImage && fullCardImageAgeStyles,
-								)}
+								css={isFullCardImage && fullCardImageAgeStyles}
 							>
 								{standfirst && (
 									<StandfirstWrapper palette={cardPalette}>

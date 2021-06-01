@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, wait } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '@root/src/web/lib/contributions';
 import { ABProvider } from '@guardian/ab-react';
@@ -49,7 +48,7 @@ describe('ReaderRevenueLinks', () => {
 					edition="US"
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					inRemoteModuleTest={false}
+					remoteHeaderEnabled={false}
 					pageViewId="page-view-id"
 					contributionsServiceUrl={contributionsServiceUrl}
 					ophanRecord={ophanRecord}
@@ -70,7 +69,7 @@ describe('ReaderRevenueLinks', () => {
 					edition={edition}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					inRemoteModuleTest={false}
+					remoteHeaderEnabled={false}
 					pageViewId="page-view-id"
 					contributionsServiceUrl={contributionsServiceUrl}
 					ophanRecord={ophanRecord}
