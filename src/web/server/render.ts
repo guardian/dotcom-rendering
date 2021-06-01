@@ -9,7 +9,6 @@ import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhanceImages } from '@root/src/model/enhance-images';
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
-import { enhanceAnniversaryAtom } from '@root/src/model/enhance-AnniversaryInteractiveAtom';
 import { enhanceEmbeds } from '@root/src/model/enhance-embeds';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
@@ -60,11 +59,6 @@ class CAPIEnhancer {
 		this.capi = setIsDev(this.capi);
 		return this;
 	}
-
-	enhanceAnniversaryAtom() {
-		this.capi = enhanceAnniversaryAtom(this.capi);
-		return this;
-	}
 }
 
 const buildCAPI = (body: CAPIType): CAPIType => {
@@ -75,8 +69,7 @@ const buildCAPI = (body: CAPIType): CAPIType => {
 		.enhanceDots()
 		.enhanceImages()
 		.enhanceNumberedLists()
-		.enhanceEmbeds()
-		.enhanceAnniversaryAtom().capi;
+		.enhanceEmbeds().capi;
 };
 
 export const renderArticle = (
