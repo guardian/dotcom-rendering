@@ -8,10 +8,10 @@ import {
 } from '@root/node_modules/@guardian/automat-client';
 import {
 	shouldHideSupportMessaging,
-	getArticleCountConsent,
 	withinLocalNoBannerCachePeriod,
 	setLocalNoBannerCachePeriod,
 	MODULES_VERSION,
+	hasOptedOutOfArticleCount,
 	getEmail,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
@@ -45,7 +45,7 @@ type BaseProps = {
 
 type BuildPayloadProps = BaseProps & {
 	countryCode: string;
-	hasConsentedToArticleCounts: boolean;
+	optedOutOfArticleCount: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -73,7 +73,7 @@ const buildPayload = ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	countryCode,
-	hasConsentedToArticleCounts,
+	optedOutOfArticleCount,
 }: BuildPayloadProps) => {
 	return {
 		tracking: {
@@ -92,7 +92,7 @@ const buildPayload = ({
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode,
 			weeklyArticleHistory: getWeeklyArticleHistory(),
-			hasOptedOutOfArticleCount: !hasConsentedToArticleCounts,
+			optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 		},
 	};
@@ -152,7 +152,7 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 	}
 
 	const countryCode = await asyncCountryCode;
-	const hasConsentedToArticleCounts = await getArticleCountConsent();
+	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = buildPayload({
 		isSignedIn,
 		countryCode,
@@ -167,7 +167,7 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 		alreadyVisitedCount,
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
-		hasConsentedToArticleCounts,
+		optedOutOfArticleCount,
 	});
 	const forcedVariant = getForcedVariant('banner');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
@@ -218,7 +218,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 
 	if (isPuzzlesPage && remoteBannerConfig) {
 		const countryCode = await asyncCountryCode;
-		const hasConsentedToArticleCounts = await getArticleCountConsent();
+		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 		const bannerPayload = buildPayload({
 			isSignedIn,
 			countryCode,
@@ -233,7 +233,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 			alreadyVisitedCount,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
-			hasConsentedToArticleCounts,
+			optedOutOfArticleCount,
 		});
 		return getBanner(
 			bannerPayload,

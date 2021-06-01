@@ -47,7 +47,7 @@ import { Display, Design } from '@guardian/types';
 import type { Format, CountryCode } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { getArticleCountConsent } from '@frontend/web/lib/contributions';
+import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -227,7 +227,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// article pages when other pages are supported by DCR.
 	useEffect(() => {
 		const incrementArticleCountsIfConsented = async () => {
-			if (await getArticleCountConsent()) {
+			const hasOptedOut = await hasOptedOutOfArticleCount();
+			if (!hasOptedOut) {
 				incrementDailyArticleCount();
 				incrementWeeklyArticleCount();
 			}
