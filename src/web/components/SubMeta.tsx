@@ -29,6 +29,14 @@ const bottomPadding = css`
 
 const listStyleNone = css`
 	list-style: none;
+	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
+	li::before {
+		content: '\\200B'; /* Zero width space */
+		display: block;
+		height: 0;
+		width: 0;
+	}
 `;
 
 const listWrapper = (palette: Palette) => css`
