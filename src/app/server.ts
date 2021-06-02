@@ -37,6 +37,8 @@ export default (options: any) => {
 			return renderAMPArticle;
 		case '/Interactive':
 			return renderInteractive;
+		case '/AMPInteractive':
+			return renderAMPArticle;
 	}
 
 	return renderArticle;

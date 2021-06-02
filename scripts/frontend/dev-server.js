@@ -18,6 +18,9 @@ const defaultArticleURL =
 const defaultInteractiveURL =
 	'https://www.theguardian.com/environment/ng-interactive/2021/feb/23/beneath-the-blue-dive-into-a-dazzling-ocean-under-threat-interactive';
 
+const defaultAmpInteractiveURL =
+	'https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide';
+
 function buildUrlFromQueryParam(req, defaultURL) {
 	const url = new URL(req.query.url || defaultURL);
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
@@ -160,6 +163,38 @@ const go = () => {
 		webpackHotServerMiddleware(compiler, {
 			chunkName: `${siteName}.server`,
 			serverRendererOptions: { path: '/Interactive' },
+		}),
+	);
+
+	app.get(
+		'/AMPInteractive',
+		async (req, res, next) => {
+			try {
+				const url = buildUrlFromQueryParam(
+					req,
+					defaultAmpInteractiveURL,
+				);
+				const { html, ...config } = await fetch(
+					ampifyUrl(url),
+				).then((article) => article.json());
+				req.body = config;
+				next();
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error);
+			}
+		},
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/AMPInteractive' },
+		}),
+	);
+
+	app.post(
+		'/AMPInteractive',
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/AMPInteractive' },
 		}),
 	);
 
