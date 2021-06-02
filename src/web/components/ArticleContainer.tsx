@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { labelStyles } from '@root/src/web/components/AdSlot';
@@ -15,6 +16,25 @@ const articleContainer = css`
     To mitigate we use z-index
     TODO: find a cleaner solution */
 	z-index: 1;
+`;
+
+const carrotStyles = css`
+	.ad-slot--carrot {
+		float: left;
+		clear: both;
+		width: 140px;
+		margin-right: 20px;
+		margin-bottom: ${space[1]}px;
+		${from.leftCol} {
+			position: relative;
+			margin-left: -160px;
+			width: 140px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+			width: 220px;
+		}
+	}
 `;
 
 const articleAdStyles = css`
@@ -73,6 +93,7 @@ const articleAdStyles = css`
 			}
 		}
 	}
+	${carrotStyles}
 	${labelStyles};
 `;
 
