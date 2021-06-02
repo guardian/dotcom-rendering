@@ -8,25 +8,9 @@
         "**/target": true
     },
     "workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#648fff",
-        "titleBar.activeForeground": "#15202b",
-        "activityBar.activeBackground": "#97b4ff",
-        "activityBar.activeBorder": "#df003e",
-        "activityBar.background": "#97b4ff",
-        "activityBar.foreground": "#15202b",
-        "activityBar.inactiveForeground": "#15202b99",
-        "activityBarBadge.background": "#df003e",
-        "activityBarBadge.foreground": "#e7e7e7",
-        "statusBar.background": "#648fff",
-        "statusBar.foreground": "#15202b",
-        "statusBarItem.hoverBackground": "#316aff",
-        "titleBar.inactiveBackground": "#648fff99",
-        "titleBar.inactiveForeground": "#15202b99"
+        "titleBar.activeBackground": "#648FFF",
+        "titleBar.activeForeground": "#000000"
     },
     "typescript.tsdk": "node_modules/typescript/lib",
-    "gitlens.advanced.blame.customArguments": [
-        "--ignore-revs-file",
-        ".git-blame-ignore-revs"
-    ],
-    "peacock.color": "#648FFF"
+    "gitlens.advanced.blame.customArguments": ["--ignore-revs-file", ".git-blame-ignore-revs"]
 }
