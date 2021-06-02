@@ -41,18 +41,12 @@ type PreEpicConfig = {
 	};
 };
 
-type EpicConfig = {
-	meta: TestMeta;
-	module: {
-		url: string;
-		props: EpicProps;
-	};
+export type EpicConfig = PreEpicConfig & {
 	email?: string;
 	hasConsentForArticleCount: boolean;
 };
 
 type EpicProps = {
-	onReminderOpen: () => void;
 	email?: string;
 	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 	openCmp: () => void;
@@ -70,34 +64,11 @@ const checkForErrors = (response: Response) => {
 	return response;
 };
 
-const sendOphanReminderEvent = (componentId: string): void => {
-	const componentEvent = {
-		component: {
-			componentType: 'ACQUISITIONS_OTHER',
-			id: componentId,
-		},
-		action: 'CLICK',
-	};
-
-	window.guardian.ophan.record({ componentEvent });
-};
-
-interface OpenProps {
-	buttonCopyAsString: string;
-}
-
-const sendOphanReminderOpenEvent = ({ buttonCopyAsString }: OpenProps) => {
-	sendOphanReminderEvent('precontribution-reminder-prompt-clicked');
-	sendOphanReminderEvent(
-		`precontribution-reminder-prompt-copy-${buttonCopyAsString}`,
-	);
-};
-
 const wrapperMargins = css`
 	margin: 18px 0;
 `;
 
-type Props = {
+export type CanShowData = {
 	isSignedIn?: boolean;
 	countryCode?: string;
 	contentType: string;
@@ -110,7 +81,7 @@ type Props = {
 	idApiUrl: string;
 };
 
-const buildPayload = async (props: Props): Promise<Metadata> => {
+const buildPayload = async (props: CanShowData): Promise<Metadata> => {
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -143,21 +114,20 @@ const buildPayload = async (props: Props): Promise<Metadata> => {
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
 
-export const canShow = async ({
-	isSignedIn,
-	countryCode,
-	contentType,
-	sectionName,
-	shouldHideReaderRevenue,
-	isMinuteArticle,
-	isPaidContent,
-	tags,
-	contributionsServiceUrl,
-	idApiUrl,
-}: Props): Promise<CanShowResult> => {
+export const canShow = async (
+	data: CanShowData,
+): Promise<CanShowResult<EpicConfig>> => {
+	const {
+		isSignedIn,
+		shouldHideReaderRevenue,
+		isPaidContent,
+		contributionsServiceUrl,
+		idApiUrl,
+	} = data;
+
 	if (shouldHideReaderRevenue || isPaidContent) {
 		// We never serve Reader Revenue epics in this case
-		return Promise.resolve({ result: false });
+		return Promise.resolve({ show: false });
 	}
 	const dataPerf = initPerf('contributions-epic-data');
 	dataPerf.start();
@@ -165,18 +135,7 @@ export const canShow = async ({
 	const forcedVariant = getForcedVariant('epic');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
 
-	const contributionsPayload = await buildPayload({
-		isSignedIn,
-		countryCode,
-		contentType,
-		sectionName,
-		shouldHideReaderRevenue,
-		isMinuteArticle,
-		isPaidContent,
-		tags,
-		contributionsServiceUrl,
-		idApiUrl,
-	});
+	const contributionsPayload = await buildPayload(data);
 
 	const response = await getBodyEnd(
 		contributionsPayload,
@@ -188,7 +147,7 @@ export const canShow = async ({
 	const json: { data?: PreEpicConfig } = await response.json();
 
 	if (!json.data) {
-		return { result: false };
+		return { show: false };
 	}
 
 	const email = isSignedIn ? await getEmail(idApiUrl) : undefined;
@@ -197,13 +156,12 @@ export const canShow = async ({
 
 	const { meta, module } = json.data;
 	return {
-		result: true,
+		show: true,
 		meta: {
 			meta,
 			module,
 			email,
 			hasConsentForArticleCount,
-			onReminderOpen: sendOphanReminderOpenEvent,
 		},
 	};
 };
