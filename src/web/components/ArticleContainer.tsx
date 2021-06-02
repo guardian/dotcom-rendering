@@ -18,6 +18,10 @@ const articleContainer = css`
 	z-index: 1;
 `;
 
+/**
+ * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
+ * These styles come mostly from RichLink in DCR.
+ */
 const carrotAdStyles = css`
 	.ad-slot--carrot {
 		float: left;
