@@ -15,7 +15,7 @@ export default {
 };
 
 /*
-    type CanShowData = {
+    type Props = {
         display: Display;
         design: Design;
         captionText?: string;

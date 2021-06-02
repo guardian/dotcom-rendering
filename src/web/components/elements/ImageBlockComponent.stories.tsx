@@ -45,7 +45,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 );
 
 /**
- type CanShowData = {
+ type Props = {
     display: Display;
     design: Design;
     element: ImageBlockElement;
