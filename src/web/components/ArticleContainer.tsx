@@ -18,7 +18,7 @@ const articleContainer = css`
 	z-index: 1;
 `;
 
-const carrotStyles = css`
+const carrotAdStyles = css`
 	.ad-slot--carrot {
 		float: left;
 		clear: both;
@@ -93,7 +93,7 @@ const articleAdStyles = css`
 			}
 		}
 	}
-	${carrotStyles}
+	${carrotAdStyles}
 	${labelStyles};
 `;
 
