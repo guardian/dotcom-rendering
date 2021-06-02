@@ -107,6 +107,8 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 			display: inline-block;
 			text-decoration: none;
 			color: ${neutral[7]};
+			max-width: 100%;
+			word-wrap: break-word;
 
 			h1 {
 				margin: 0 0 ${remSpace[4]} 0;
