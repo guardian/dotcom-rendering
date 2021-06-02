@@ -49,6 +49,7 @@ type EpicConfig = {
 	};
 	email?: string;
 	hasConsentForArticleCount: boolean;
+	stage: string;
 };
 
 type EpicProps = {
@@ -203,6 +204,7 @@ export const ReaderRevenueEpic = ({
 	module,
 	email,
 	hasConsentForArticleCount,
+	stage,
 }: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
@@ -260,6 +262,7 @@ export const ReaderRevenueEpic = ({
 					submitComponentEvent={submitComponentEvent}
 					openCmp={openCmp}
 					hasConsentForArticleCount={hasConsentForArticleCount}
+					stage={stage}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
