@@ -27,7 +27,7 @@ const liveEventLinkStyles: SerializedStyles = css`
 		div {
 			background: #b84376;
 			color: white;
-			padding: ${remSpace[2]} ${remSpace[9]} ${remSpace[2]} ${remSpace[2]};
+			padding: ${remSpace[3]} ${remSpace[9]} ${remSpace[3]} ${remSpace[3]};
 
 			svg {
 				fill: currentColor;
@@ -39,11 +39,11 @@ const liveEventLinkStyles: SerializedStyles = css`
 		}
 
 		section {
-			padding: ${remSpace[2]};
+			padding: ${remSpace[3]};
 			${textSans.xsmall()};
 
 			h1 {
-				margin: 0 0 ${remSpace[2]} 0;
+				margin: 0 0 ${remSpace[3]} 0;
 				${headline.xxxsmall({ fontWeight: 'bold' })}
 				hyphens: auto;
 			}
@@ -68,7 +68,7 @@ const liveEventLinkStyles: SerializedStyles = css`
 
 	float: left;
 	clear: left;
-	margin: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} 0;
+	margin: ${remSpace[3]} ${remSpace[4]} ${remSpace[3]} 0;
 
 	width: ${richLinkWidth};
 

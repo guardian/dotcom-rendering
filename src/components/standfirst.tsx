@@ -30,12 +30,12 @@ const darkStyles: SerializedStyles = darkMode`
 `;
 
 const styles: SerializedStyles = css`
-	margin-bottom: ${remSpace[2]};
+	margin-bottom: ${remSpace[3]};
 	color: ${text.primary};
 
 	p,
 	ul {
-		margin: ${remSpace[2]} 0;
+		margin: ${remSpace[3]} 0;
 	}
 
 	address {

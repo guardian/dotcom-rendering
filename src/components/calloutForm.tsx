@@ -80,7 +80,7 @@ const descriptionStyles = css`
 
 	p {
 		${body.small({ lineHeight: 'tight' })};
-		margin: ${remSpace[2]} 0;
+		margin: ${remSpace[3]} 0;
 	}
 `;
 
@@ -111,7 +111,7 @@ const speechBubbleStyles = (kicker: string): SerializedStyles => css`
 `;
 
 const formStyles = css`
-	margin: ${remSpace[4]} ${remSpace[2]} ${remSpace[9]} ${remSpace[2]};
+	margin: ${remSpace[4]} ${remSpace[3]} ${remSpace[9]} ${remSpace[3]};
 `;
 
 const formAnchor = (kicker: string): SerializedStyles => css`
@@ -119,8 +119,8 @@ const formAnchor = (kicker: string): SerializedStyles => css`
 	text-decoration: none;
 	${textSans.small()};
 	position: absolute;
-	bottom: ${remSpace[2]};
-	right: ${remSpace[2]};
+	bottom: ${remSpace[3]};
+	right: ${remSpace[3]};
 `;
 
 const renderField = ({

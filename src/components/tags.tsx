@@ -28,7 +28,7 @@ const styles = css`
 	margin-bottom: 0;
 	display: block;
 	list-style: none;
-	padding: ${remSpace[2]} 0 ${remSpace[4]} 0;
+	padding: ${remSpace[3]} 0 ${remSpace[4]} 0;
 	${textSans.medium()}
 
 	${darkModeCss`
@@ -38,7 +38,7 @@ const styles = css`
 `;
 
 const tagStyles = css`
-	margin: ${remSpace[2]} ${remSpace[2]} 0 0;
+	margin: ${remSpace[3]} ${remSpace[3]} 0 0;
 	display: inline-block;
 `;
 

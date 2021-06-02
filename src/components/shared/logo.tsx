@@ -31,7 +31,7 @@ const styles = (
 		img {
 			content: url('${lightModeImage}');
 			display: block;
-			margin: ${remSpace[2]} 0;
+			margin: ${remSpace[3]} 0;
 			max-height: 60px;
 		}
 

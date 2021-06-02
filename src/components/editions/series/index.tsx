@@ -20,7 +20,7 @@ const styles = (kicker: string): SerializedStyles => css`
 	${titlepiece.small()}
 	color: ${kicker};
 	font-size: 1.0625rem;
-	padding: ${remSpace[1]} 0 ${remSpace[2]};
+	padding: ${remSpace[1]} 0 ${remSpace[3]};
 	box-sizing: border-box;
 
 	${from.tablet} {
@@ -35,7 +35,7 @@ const interviewStyles = (kicker: string): SerializedStyles => css`
 	border: 0;
 	color: ${neutral[100]};
 	background-color: ${kicker};
-	padding: ${remSpace[2]} ${remSpace[3]};
+	padding: ${remSpace[3]} ${remSpace[3]};
 `;
 
 interface Props {

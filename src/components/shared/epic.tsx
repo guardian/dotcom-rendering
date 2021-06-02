@@ -17,12 +17,12 @@ import { darkModeCss } from 'styles';
 const styles: SerializedStyles = css`
 	& > div {
 		${from.wide} {
-			margin: ${remSpace[2]} 0;
+			margin: ${remSpace[3]} 0;
 		}
 
 		border-top: 1px solid ${brandAltBackground.primary};
 		background: ${neutral[97]};
-		padding: ${remSpace[2]};
+		padding: ${remSpace[3]};
 		${body.medium()}
 		clear: left;
 	}
@@ -33,7 +33,7 @@ const styles: SerializedStyles = css`
 	}
 
 	button {
-		margin: 0 ${remSpace[2]} ${remSpace[2]} 0;
+		margin: 0 ${remSpace[3]} ${remSpace[3]} 0;
 	}
 
 	.button-container {
@@ -84,7 +84,7 @@ const styles: SerializedStyles = css`
 		background-color: #ffe500;
 		color: #052962;
 
-		margin: 0 ${remSpace[2]} ${remSpace[2]} 0;
+		margin: 0 ${remSpace[3]} ${remSpace[3]} 0;
 	}
 `;
 

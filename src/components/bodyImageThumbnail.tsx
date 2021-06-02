@@ -22,7 +22,7 @@ const styles = css`
 	margin: 0 ${remSpace[3]} 0 0;
 
 	${from.wide} {
-		margin-left: calc(-${size} - ${remSpace[3]} - ${remSpace[2]});
+		margin-left: calc(-${size} - ${remSpace[3]} - ${remSpace[3]});
 		margin-right: 0;
 		padding: 0;
 	}

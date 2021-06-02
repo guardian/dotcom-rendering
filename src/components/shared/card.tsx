@@ -106,7 +106,7 @@ const timeStyles = (type: RelatedItemType): SerializedStyles => {
 };
 
 const durationStyles = css`
-	margin-left: ${remSpace[2]};
+	margin-left: ${remSpace[3]};
 `;
 
 const dateStyles = css`
@@ -122,7 +122,7 @@ const anchorStyles = css`
 `;
 
 const headingWrapperStyles = css`
-	padding: ${remSpace[2]};
+	padding: ${remSpace[3]};
 	min-height: 10rem;
 `;
 
@@ -130,12 +130,12 @@ const headingStyles = (type: RelatedItemType): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
 		return css`
 			${textSans.medium({ lineHeight: 'regular' })}
-			margin: 0 0 ${remSpace[2]} 0;
+			margin: 0 0 ${remSpace[3]} 0;
 		`;
 	} else {
 		return css`
 			${headline.xxsmall()}
-			margin: 0 0 ${remSpace[2]} 0;
+			margin: 0 0 ${remSpace[3]} 0;
 		`;
 	}
 };
@@ -322,7 +322,7 @@ const quotationComment = (
 };
 
 const metadataStyles: SerializedStyles = css`
-	padding: 0 ${remSpace[2]};
+	padding: 0 ${remSpace[3]};
 	min-height: 2rem;
 `;
 

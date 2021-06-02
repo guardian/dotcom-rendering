@@ -54,7 +54,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 	return css`
 		background: ${backgroundColor};
-		padding: ${remSpace[2]};
+		padding: ${remSpace[3]};
 		border-top: solid 1px ${neutral[60]};
 		transition: all 0.2s ease;
 
@@ -80,7 +80,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 		.js-image img {
 			width: calc(100% + ${remSpace[4]});
-			margin: -${remSpace[2]} 0 0 -${remSpace[2]};
+			margin: -${remSpace[3]} 0 0 -${remSpace[3]};
 		}
 
 		button {
@@ -99,7 +99,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 			border: solid 1px ${neutral[7]};
 			padding: 4px;
 			display: inline-block;
-			margin-right: ${remSpace[2]};
+			margin-right: ${remSpace[3]};
 			transition: all 0.2s ease;
 		}
 
@@ -117,7 +117,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 		float: left;
 		clear: left;
-		margin: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} 0;
+		margin: ${remSpace[3]} ${remSpace[4]} ${remSpace[3]} 0;
 
 		width: ${richLinkWidth};
 		${from.wide} {

@@ -37,7 +37,7 @@ const Caption: FC<CaptionProps> = ({ format, image }: CaptionProps) => {
 // ----- Component ----- //
 
 const styles = css`
-	margin: 0 0 ${remSpace[2]} 0;
+	margin: 0 0 ${remSpace[3]} 0;
 	position: relative;
 
 	${from.wide} {

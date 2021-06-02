@@ -24,7 +24,7 @@ interface Props {
 
 const styles = css`
 	background-color: ${brandAltBackground.primary};
-	padding: ${remSpace[2]};
+	padding: ${remSpace[3]};
 `;
 
 const matchInfoStyles = css`
@@ -40,7 +40,7 @@ const matchStatusStyles = css`
 	grid-column: 1;
 	grid-row: 1;
 	text-align: center;
-	margin-right: ${remSpace[2]};
+	margin-right: ${remSpace[3]};
 
 	${from.phablet} {
 		grid-column: 2;

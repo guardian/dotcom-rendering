@@ -31,7 +31,7 @@ const backgroundColour = (format: Format): string => {
 };
 
 const styles = (format: Format): SerializedStyles => css`
-	margin: 0 0 ${remSpace[2]} 0;
+	margin: 0 0 ${remSpace[3]} 0;
 	position: relative;
 	display: block;
 	width: 100%;
