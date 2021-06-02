@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { labelStyles } from '@root/src/web/components/AdSlot';
+import {
+	labelStyles,
+	carrotAdStyles,
+	fluidAdStyles,
+} from '@root/src/web/components/AdSlot';
 
 const articleContainer = css`
 	${until.leftCol} {
@@ -16,29 +19,6 @@ const articleContainer = css`
     To mitigate we use z-index
     TODO: find a cleaner solution */
 	z-index: 1;
-`;
-
-/**
- * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
- * These styles come mostly from RichLink in DCR.
- */
-const carrotAdStyles = css`
-	.ad-slot--carrot {
-		float: left;
-		clear: both;
-		width: 140px;
-		margin-right: 20px;
-		margin-bottom: ${space[1]}px;
-		${from.leftCol} {
-			position: relative;
-			margin-left: -160px;
-			width: 140px;
-		}
-		${from.wide} {
-			margin-left: -240px;
-			width: 220px;
-		}
-	}
 `;
 
 const articleAdStyles = css`
@@ -97,6 +77,7 @@ const articleAdStyles = css`
 			}
 		}
 	}
+	${fluidAdStyles};
 	${carrotAdStyles}
 	${labelStyles};
 `;

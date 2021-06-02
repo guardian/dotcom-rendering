@@ -4,6 +4,7 @@ import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { Display } from '@guardian/types';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
 	display: Display;
@@ -86,6 +87,52 @@ export const labelStyles = css`
 		position: fixed;
 		bottom: 0;
 		width: 100%;
+	}
+`;
+
+/**
+ * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
+ * These styles come mostly from RichLink in DCR.
+ */
+export const carrotAdStyles = css`
+	.ad-slot--carrot {
+		float: left;
+		clear: both;
+		width: 140px;
+		margin-right: 20px;
+		margin-bottom: ${space[1]}px;
+		${from.leftCol} {
+			position: relative;
+			margin-left: -160px;
+			width: 140px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+			width: 220px;
+		}
+	}
+`;
+
+/**
+ * For CSS in Frontend, see mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
+ */
+export const fluidAdStyles = css`
+	.ad-slot--fluid {
+		min-height: 250px;
+		line-height: 10px;
+		padding: 0;
+		margin: 0;
+
+		&:not(.ad-slot--im):not(.ad-slot--carrot):not(.ad-slot--offset-right) {
+			width: 100%;
+		}
+
+		&.ad-slot--commercial-component-high {
+			&,
+			& > .ad-slot__content > iframe {
+				transition: height 1s;
+			}
+		}
 	}
 `;
 
