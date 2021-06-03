@@ -15,6 +15,6 @@ export const discussionNoTopComments = {
 		title: 'Stevie Nicks to release double album of songs from her past',
 		webUrl:
 			'https://www.theguardian.com/music/2014/jul/25/stevie-nicks-ro-release-double-album-of-songs-from-her-past',
-		comments: []
+		comments: [],
 	},
 };

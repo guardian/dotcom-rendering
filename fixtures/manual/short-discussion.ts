@@ -37,7 +37,8 @@ export const shortDiscussion = {
 					userId: '12173512',
 					webUrl: 'https://profile.theguardian.com/user/id/12173512',
 				},
-				webUrl: 'https://discussion.theguardian.com/comment-permalink/38591122',
+				webUrl:
+					'https://discussion.theguardian.com/comment-permalink/38591122',
 			},
 			{
 				apiUrl:
@@ -59,7 +60,8 @@ export const shortDiscussion = {
 					userId: '4431346',
 					webUrl: 'https://profile.theguardian.com/user/id/4431346',
 				},
-				webUrl: 'https://discussion.theguardian.com/comment-permalink/38649787',
+				webUrl:
+					'https://discussion.theguardian.com/comment-permalink/38649787',
 			},
 		],
 	},
