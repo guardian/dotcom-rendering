@@ -66,7 +66,7 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 						css={css`
 							display: flex;
 							flex-direction: row;
-							align-items: center;
+							align-items: flex-start;
 							margin-top: 8px;
 							margin-bottom: 8px;
 						`}
