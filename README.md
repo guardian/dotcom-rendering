@@ -47,7 +47,9 @@ Visit the [root path of the dev server](http://localhost:3030) for some example 
 
 You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
 
-You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to [/ArticleJson](http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
+You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to 
+
+http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
 ### Detailed Setup
 
