@@ -1,4 +1,4 @@
-// import { css } from '@emotion/react';
+import { Design, Display, Pillar } from '@guardian/types';
 import { decidePalette } from '../lib/decidePalette';
 
 import { Discussion } from './Discussion';
@@ -15,7 +15,11 @@ export const Basic = () => {
 				shortUrlId="/p/4v8kk"
 				isCommentable={true}
 				pillar={3}
-				palette={decidePalette({ design: 0, display: 0, theme: 3 })}
+				palette={decidePalette({
+					design: Design.Article,
+					display: Display.Standard,
+					theme: Pillar.Culture,
+				})}
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"
 				enableDiscussionSwitch={true}
