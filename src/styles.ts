@@ -129,7 +129,7 @@ export const adStyles = (format: Format): SerializedStyles => {
 				${textSans.xsmall()}
 				padding: ${remSpace[3]};
 				float: left;
-				width: calc(100% - ${remSpace[4]});
+				width: calc(100% - ${remSpace[3]} - ${remSpace[3]});
 
 				h1 {
 					margin: 0;
