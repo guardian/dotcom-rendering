@@ -12,17 +12,8 @@ const bodyParser = require('body-parser');
 
 const { siteName, root } = require('./config');
 
-const defaultArticleURL =
-	'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
-
-const defaultInteractiveURL =
-	'https://www.theguardian.com/environment/ng-interactive/2021/feb/23/beneath-the-blue-dive-into-a-dazzling-ocean-under-threat-interactive';
-
-const defaultAmpInteractiveURL =
-	'https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide';
-
-function buildUrlFromQueryParam(req, defaultURL) {
-	const url = new URL(req.query.url || defaultURL);
+function buildUrlFromQueryParam(req) {
+	const url = new URL(req.query.url);
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams && url.searchParams.toString();
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
@@ -67,7 +58,7 @@ const go = () => {
 		'/Article',
 		async (req, res, next) => {
 			try {
-				const url = buildUrlFromQueryParam(req, defaultArticleURL);
+				const url = buildUrlFromQueryParam(req);
 				const { html, ...config } = await fetch(url).then((article) =>
 					article.json(),
 				);
@@ -97,7 +88,7 @@ const go = () => {
 		'/ArticleJson',
 		async (req, res, next) => {
 			try {
-				const url = buildUrlFromQueryParam(req, defaultArticleURL);
+				const url = buildUrlFromQueryParam(req);
 				const { html, ...config } = await fetch(url).then((article) =>
 					article.json(),
 				);
@@ -119,7 +110,7 @@ const go = () => {
 		'/AMPArticle',
 		async (req, res, next) => {
 			try {
-				const url = buildUrlFromQueryParam(req, defaultArticleURL);
+				const url = buildUrlFromQueryParam(req);
 				const { html, ...config } = await fetch(
 					ampifyUrl(url),
 				).then((article) => article.json());
