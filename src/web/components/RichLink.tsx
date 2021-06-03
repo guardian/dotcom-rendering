@@ -8,10 +8,10 @@ import {
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 import { Format, Special } from '@guardian/types';
-import { QuoteIcon } from '@guardian/src-ed-quote-icon';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
+import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { Hide } from '@root/src/web/components/Hide';
@@ -245,12 +245,14 @@ export const RichLink = ({
 										<Hide when="above" breakpoint="wide">
 											<QuoteIcon
 												format={format}
+												colour={palette.fill.quoteIcon}
 												size="small"
 											/>
 										</Hide>
 										<Hide when="below" breakpoint="wide">
 											<QuoteIcon
 												format={format}
+												colour={palette.fill.quoteIcon}
 												size="medium"
 											/>
 										</Hide>

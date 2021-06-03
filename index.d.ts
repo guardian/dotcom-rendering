@@ -131,6 +131,8 @@ type Palette = {
 		captionTriangle: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
+		quoteIcon: Colour;
+		blockquoteIcon: Colour;
 	},
 	border: {
 		syndicationButton: Colour;

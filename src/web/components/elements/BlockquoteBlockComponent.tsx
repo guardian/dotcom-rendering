@@ -1,8 +1,8 @@
 import { ClassNames } from '@emotion/react';
 
 import { body } from '@guardian/src-foundations/typography';
-import { QuoteIcon } from '@guardian/src-ed-quote-icon';
 
+import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
@@ -71,7 +71,11 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 							margin-bottom: 8px;
 						`}
 					>
-						<QuoteIcon format={format} size="medium" />
+						<QuoteIcon
+							format={format}
+							colour={palette.fill.blockquoteIcon}
+							size="medium"
+						/>
 						<RewrappedComponent
 							isUnwrapped={isUnwrapped}
 							html={unwrappedHtml}

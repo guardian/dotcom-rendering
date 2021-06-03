@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 
 import { headline } from '@guardian/src-foundations/typography';
-import { QuoteIcon } from '@guardian/src-ed-quote-icon';
 
+import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
 
@@ -83,7 +83,13 @@ export const LinkHeadline = ({
 				showSlash={showSlash}
 			/>
 		)}
-		{showQuotes && <QuoteIcon format={format} size={size} />}
+		{showQuotes && (
+			<QuoteIcon
+				format={format}
+				colour={palette.text.linkKicker}
+				size={size}
+			/>
+		)}
 		{link ? (
 			// We were passed a link object so headline should be a link, with link styling
 			<>

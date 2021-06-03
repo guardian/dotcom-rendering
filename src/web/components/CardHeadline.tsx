@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 
-import { QuoteIcon } from '@guardian/src-ed-quote-icon';
 import { Design, Special } from '@guardian/types';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
+import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
 import { Byline } from '@root/src/web/components/Byline';
 
@@ -160,7 +160,13 @@ export const CardHeadline = ({
 						inCard={true}
 					/>
 				)}
-				{showQuotes && <QuoteIcon format={format} size={size} />}
+				{showQuotes && (
+					<QuoteIcon
+						format={format}
+						colour={palette.text.cardKicker}
+						size={size}
+					/>
+				)}
 
 				<span
 					css={css`

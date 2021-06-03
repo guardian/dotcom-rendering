@@ -4,8 +4,8 @@ import { Design } from '@guardian/types';
 import { headline } from '@guardian/src-foundations/typography';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { QuoteIcon } from '@guardian/src-ed-quote-icon';
 
+import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 const partiallyLeft = css`
@@ -161,7 +161,11 @@ export const PullQuoteBlockComponent = ({
 						`,
 					]}
 				>
-					<QuoteIcon format={format} size="medium" />
+					<QuoteIcon
+						format={format}
+						colour={palette.fill.quoteIcon}
+						size="medium"
+					/>
 					<blockquote
 						css={css`
 							display: inline;
@@ -194,7 +198,11 @@ export const PullQuoteBlockComponent = ({
 						`,
 					]}
 				>
-					<QuoteIcon format={format} size="large" />
+					<QuoteIcon
+						format={format}
+						colour={palette.fill.quoteIcon}
+						size="large"
+					/>
 					<blockquote
 						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
@@ -240,7 +248,11 @@ export const PullQuoteBlockComponent = ({
 						`,
 					]}
 				>
-					<QuoteIcon format={format} size="medium" />
+					<QuoteIcon
+						format={format}
+						colour={palette.fill.quoteIcon}
+						size="medium"
+					/>
 					<blockquote
 						css={css`
 							display: inline;
