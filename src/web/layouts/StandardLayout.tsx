@@ -39,6 +39,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
+import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -524,16 +525,20 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="lines">
 						<div css={maxWidth}>
-							<div css={stretchLines}>
-								<GuardianLines
-									count={decideLineCount(format.design)}
-									palette={palette}
-									effect={decideLineEffect(
-										format.design,
-										format.theme,
-									)}
-								/>
-							</div>
+							{format.theme === Special.Labs ? (
+								<GuardianLabsLines />
+							) : (
+								<div css={stretchLines}>
+									<GuardianLines
+										count={decideLineCount(format.design)}
+										palette={palette}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								</div>
+							)}
 						</div>
 					</GridItem>
 					<GridItem area="meta">

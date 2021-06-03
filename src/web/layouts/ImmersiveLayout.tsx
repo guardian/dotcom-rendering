@@ -35,6 +35,7 @@ import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
+import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -498,19 +499,26 @@ export const ImmersiveLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="lines">
-						{format.design === Design.PhotoEssay ? (
+						{format.design === Design.PhotoEssay &&
+						format.theme !== Special.Labs ? (
 							<></>
 						) : (
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<GuardianLines
-										palette={palette}
-										effect={decideLineEffect(
-											Design.Article,
-											format.theme,
-										)}
-										count={decideLineCount(Design.Article)}
-									/>
+									{format.theme === Special.Labs ? (
+										<GuardianLabsLines />
+									) : (
+										<GuardianLines
+											palette={palette}
+											effect={decideLineEffect(
+												Design.Article,
+												format.theme,
+											)}
+											count={decideLineCount(
+												Design.Article,
+											)}
+										/>
+									)}
 								</div>
 							</div>
 						)}
