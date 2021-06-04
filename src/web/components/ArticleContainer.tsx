@@ -78,7 +78,7 @@ const articleAdStyles = css`
 		}
 	}
 	${fluidAdStyles};
-	${carrotAdStyles}
+	${carrotAdStyles};
 	${labelStyles};
 `;
 
