@@ -24,7 +24,7 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
-import { LabBadge } from './components/LabBadge';
+import { CardBranding } from './components/CardBranding';
 
 type Props = {
 	linkTo: string;
@@ -317,7 +317,7 @@ export const Card = ({
 									}
 									labBadge={
 										badge ? (
-											<LabBadge
+											<CardBranding
 												badgeForLab={badge.imageUrl}
 												palette={cardPalette}
 												brandName={brand}

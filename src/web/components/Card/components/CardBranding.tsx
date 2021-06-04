@@ -29,7 +29,7 @@ const paidForStyle = (palette: Palette) => {
 	`;
 };
 
-export const LabBadge = ({ badgeForLab, brandName, palette }: Props) => (
+export const CardBranding = ({ branding, palette }: Props) => (
 	<div css={badgeWrapperStyle}>
 		<div css={paidForStyle(palette)}>Paid for by</div>
 		<span
