@@ -153,33 +153,6 @@ Padded.story = {
 	name: 'when padded',
 };
 
-export const WidthLimited = () => {
-	return (
-		<Container>
-			<CaptionBlockComponent
-				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
-				format={{
-					display: Display.Standard,
-					design: Design.Review,
-					theme: Pillar.Culture,
-				}}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Review,
-					theme: Pillar.Culture,
-				})}
-				padCaption={false}
-				credit="Credit text"
-				displayCredit={false}
-				isOverlayed={false}
-			/>
-		</Container>
-	);
-};
-WidthLimited.story = {
-	name: 'with width limited',
-};
-
 export const Credited = () => {
 	return (
 		<Container>
