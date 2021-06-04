@@ -18,6 +18,7 @@ import {
 } from '@root/src/web/lib/messagePicker';
 import { CountryCode } from '@guardian/types';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
@@ -73,6 +74,7 @@ const buildRRBannerConfigWith = ({
 		isSignedIn: boolean,
 		asyncCountryCode: Promise<string>,
 		isPreview: boolean,
+		signInGateWillShow: boolean = false,
 	): CandidateConfig => {
 		return {
 			candidate: {
@@ -100,6 +102,7 @@ const buildRRBannerConfigWith = ({
 						section: CAPI.config.section,
 						isPreview,
 						idApiUrl: CAPI.config.idApiUrl,
+						signInGateWillShow,
 					}),
 				show: ({ meta, module, email }: BannerProps) => () => (
 					<BannerComponent
@@ -147,6 +150,7 @@ export const StickyBottomBanner = ({
 	isPreview,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
+	const signInGateWillShow = useSignInGateWillShow({ isSignedIn, CAPI });
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig(
@@ -160,6 +164,7 @@ export const StickyBottomBanner = ({
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<CountryCode>,
 			isPreview,
+			signInGateWillShow,
 		);
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
