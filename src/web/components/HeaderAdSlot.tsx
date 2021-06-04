@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Display } from '@guardian/types';
 
-import { AdSlot } from '@root/src/web/components/AdSlot';
+import { AdSlot, fluidAdStyles } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';
 
 const headerWrapper = css`
@@ -31,6 +31,7 @@ export const HeaderAdSlot: React.FC<{
 			<div
 				css={[
 					headerAdWrapper,
+					fluidAdStyles,
 					(isAdFreeUser || shouldHideAds) && headerAdWrapperHidden,
 				]}
 			>
