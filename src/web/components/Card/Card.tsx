@@ -315,12 +315,11 @@ export const Card = ({
 											/>
 										) : undefined
 									}
-									labBadge={
+									cardBranding={
 										badge ? (
 											<CardBranding
-												badgeForLab={badge.imageUrl}
+												branding={branding}
 												palette={cardPalette}
-												brandName={brand}
 											/>
 										) : undefined
 									}
