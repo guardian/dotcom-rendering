@@ -54,6 +54,7 @@ type CanShowProps = BaseProps & {
 	section: string;
 	isPreview: boolean;
 	idApiUrl: string;
+	signInGateWillShow: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -135,10 +136,16 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 	subscriptionBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
+	signInGateWillShow,
 }) => {
 	if (!remoteBannerConfig) return { result: false };
 
-	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
+	if (
+		shouldHideReaderRevenue ||
+		isPaidContent ||
+		isPreview ||
+		signInGateWillShow
+	) {
 		// We never serve Reader Revenue banners in this case
 		return { result: false };
 	}
