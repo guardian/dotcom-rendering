@@ -8,4 +8,10 @@ export const interactiveGlobalStyles = css`
 	.gs-container {
 		${center}
 	}
+
+	*,
+	::before,
+	::after {
+		box-sizing: content-box;
+	}
 `;
