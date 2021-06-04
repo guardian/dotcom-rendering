@@ -18245,6 +18245,8 @@ exports[`Storyshots Rich Link Default 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   color: #121212;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 .emotion-1 a h1 {
