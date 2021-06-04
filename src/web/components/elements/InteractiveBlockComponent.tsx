@@ -16,6 +16,7 @@ type Props = {
 	caption?: string;
 	format: Format;
 	palette: Palette;
+	isMainMedia?: boolean;
 };
 
 /*
@@ -220,6 +221,7 @@ export const InteractiveBlockComponent = ({
 	caption,
 	format,
 	palette,
+	isMainMedia,
 }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
@@ -269,6 +271,10 @@ export const InteractiveBlockComponent = ({
 		}
 	}, [loaded]);
 
+	const shouldLimitWidth =
+		!isMainMedia &&
+		(role === 'showcase' || role === 'supporting' || role === 'immersive');
+
 	return (
 		<>
 			<div
@@ -298,6 +304,7 @@ export const InteractiveBlockComponent = ({
 					captionText={caption}
 					format={format}
 					palette={palette}
+					shouldLimitWidth={shouldLimitWidth}
 				/>
 			)}
 		</>

@@ -370,6 +370,7 @@ export const renderElement = ({
 					role={element.role}
 					format={format}
 					palette={palette}
+					isMainMedia={isMainMedia}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ItemLinkBlockElement':
