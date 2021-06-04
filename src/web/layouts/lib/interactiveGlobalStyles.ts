@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { center } from '@root/src/web/components/Section';
+import { center } from '@root/src/web/lib/center';
 
 // Styles expected by interactives from the Frontend days. These shouldn't be
 // used for new interactives though.
