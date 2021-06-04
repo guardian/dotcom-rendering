@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 
-const center = css`
+export const center = css`
 	position: relative;
 	margin: auto;
 
