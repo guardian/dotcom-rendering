@@ -555,9 +555,6 @@
                 "displayCredit": {
                     "type": "boolean"
                 },
-                "shouldLimitWidth": {
-                    "type": "boolean"
-                },
                 "isOverlayed": {
                     "type": "boolean"
                 }
@@ -3772,16 +3769,16 @@
         "CommercialProperties": {
             "type": "object",
             "properties": {
-                "UK": {
+                "AU": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
                 "US": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "INT": {
+                "UK": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "AU": {
+                "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
