@@ -23,7 +23,6 @@ export default {
         padCaption?: boolean;
         credit?: string;
         displayCredit?: boolean;
-        shouldLimitWidth?: boolean;
         isOverlayed?: boolean;
     };
  */
@@ -91,7 +90,6 @@ export const PhotoEssay = () => {
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
-				shouldLimitWidth={false}
 				isOverlayed={false}
 			/>
 		</Container>
@@ -119,7 +117,6 @@ export const PhotoEssayHTML = () => {
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
-				shouldLimitWidth={false}
 				isOverlayed={false}
 			/>
 		</Container>
@@ -147,7 +144,6 @@ export const Padded = () => {
 				padCaption={true}
 				credit="Credit text"
 				displayCredit={false}
-				shouldLimitWidth={false}
 				isOverlayed={false}
 			/>
 		</Container>
@@ -175,7 +171,6 @@ export const WidthLimited = () => {
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
-				shouldLimitWidth={true}
 				isOverlayed={false}
 			/>
 		</Container>
@@ -203,7 +198,6 @@ export const Credited = () => {
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={true}
-				shouldLimitWidth={false}
 				isOverlayed={false}
 			/>
 		</Container>
@@ -231,7 +225,6 @@ export const Overlayed = () => {
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
-				shouldLimitWidth={false}
 				isOverlayed={true}
 			/>
 		</Container>
