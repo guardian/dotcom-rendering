@@ -8,6 +8,7 @@ import { enhanceDots } from '@root/src/model/add-dots';
 import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhanceImages } from '@root/src/model/enhance-images';
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
+import { enhanceInteractiveAtomElements } from '@root/src/model/enhance-interactive-atom-elements';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { enhanceEmbeds } from '@root/src/model/enhance-embeds';
 import { extract as extractGA } from '@root/src/model/extract-ga';
@@ -27,6 +28,11 @@ class CAPIEnhancer {
 
 	enhanceDots() {
 		this.capi = enhanceDots(this.capi);
+		return this;
+	}
+
+	enhanceInteractiveElements() {
+		this.capi = enhanceInteractiveAtomElements(this.capi);
 		return this;
 	}
 
@@ -67,6 +73,7 @@ const buildCAPI = (body: CAPIType): CAPIType => {
 		.addDividers()
 		.enhanceBlockquotes()
 		.enhanceDots()
+		.enhanceInteractiveElements()
 		.enhanceImages()
 		.enhanceNumberedLists()
 		.enhanceEmbeds().capi;

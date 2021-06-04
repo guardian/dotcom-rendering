@@ -54,7 +54,6 @@ import {
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { Design, Format } from '@guardian/types';
-import { sanitiseHTML } from '@root/src/model/clean';
 import { Figure } from '../components/Figure';
 
 type Props = {
@@ -334,19 +333,12 @@ export const renderElement = ({
 				</ClickToView>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-			// Some interactives contain HTML with unclosed tags etc. To
-			// preserve (approximate) parity with Frontend we perform some basic
-			// cleaning.
-			const cleanHTML = element.html
-				? sanitiseHTML(element.html)
-				: element.html;
-
 			if (format.design === Design.Interactive) {
 				return [
 					true,
 					<InteractiveLayoutAtom
 						id={element.id}
-						elementHtml={cleanHTML}
+						elementHtml={element.html}
 						elementJs={element.js}
 						elementCss={element.css}
 					/>,
@@ -356,7 +348,7 @@ export const renderElement = ({
 				true,
 				<InteractiveAtom
 					id={element.id}
-					elementHtml={cleanHTML}
+					elementHtml={element.html}
 					elementJs={element.js}
 					elementCss={element.css}
 				/>,
