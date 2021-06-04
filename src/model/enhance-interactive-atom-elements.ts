@@ -7,12 +7,12 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.map((element) => {
 		if (
 			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
+			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
 		)
 			element.html = element.html
 				? sanitiseHTML(element.html)
 				: element.html;
-		return element
+		return element;
 	});
 
 	return elements;
