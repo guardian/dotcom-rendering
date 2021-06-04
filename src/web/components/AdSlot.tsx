@@ -161,7 +161,8 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 		case 'right':
 			switch (display) {
 				case Display.Immersive:
-				case Display.Showcase: {
+				case Display.Showcase:
+				case Display.NumberedList: {
 					return (
 						<div
 							id="dfp-ad--right"

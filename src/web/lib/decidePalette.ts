@@ -94,6 +94,7 @@ const textByline = (format: Format): string => {
 		case Display.Immersive:
 			return WHITE;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 			switch (format.design) {
 				case Design.Interview:
@@ -379,6 +380,7 @@ const backgroundSeriesTitle = (format: Format): string => {
 		case Display.Immersive:
 			return pillarPalette[format.theme].main;
 		case Display.Showcase:
+		case Display.NumbneredList:
 		case Display.Standard:
 		default:
 			return 'transparent';
@@ -390,6 +392,7 @@ const backgroundSectionTitle = (format: Format): string => {
 		case Display.Immersive:
 			return pillarPalette[format.theme].main;
 		case Display.Showcase:
+		case Display.NumbneredList:
 		case Display.Standard:
 		default:
 			return 'transparent';
@@ -440,6 +443,7 @@ const backgroundHeadline = (format: Format): string => {
 				return specialReport[300];
 			return BLACK;
 		case Display.Showcase:
+		case Display.NumbneredList:
 		case Display.Standard:
 			if (format.design === Design.Interview) return BLACK;
 			return 'transparent';
