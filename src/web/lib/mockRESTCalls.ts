@@ -4,6 +4,8 @@ import { mostRead } from '@root/fixtures/manual/most-read';
 import { mostReadGeo } from '@root/fixtures/manual/most-read-geo';
 import { related } from '@root/fixtures/manual/related';
 import { discussion } from '@root/fixtures/manual/discussion';
+import { shortDiscussion } from '@root/fixtures/manual/short-discussion';
+import { discussionNoTopComments } from '@root/fixtures/manual/discussion-no-top-comments';
 
 import { series } from '@root/fixtures/generated/series';
 import { storyPackage } from '@root/fixtures/generated/story-package';
@@ -196,6 +198,24 @@ export const mockRESTCalls = (): void => {
 					share_count: 273,
 					refreshStatus: true,
 				},
+			},
+			{ overwriteRoutes: false },
+		)
+		// Get 'short' discussion - top comments
+		.get(
+			/.*discussion.theguardian.com\/discussion-api\/discussion\/p\/4v8kk\/topcomments/,
+			{
+				status: 200,
+				body: discussionNoTopComments,
+			},
+			{ overwriteRoutes: false },
+		)
+		// Get 'short' discussion
+		.get(
+			/.*discussion.theguardian.com\/discussion-api\/discussion\/p\/4v8kk/,
+			{
+				status: 200,
+				body: shortDiscussion,
 			},
 			{ overwriteRoutes: false },
 		)

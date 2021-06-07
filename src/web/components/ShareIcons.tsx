@@ -33,6 +33,10 @@ const liStyles = (size: ShareIconSize) => css`
 	cursor: pointer;
 `;
 
+const topMarginStlyes = css`
+	margin-top: 3px;
+`;
+
 const iconStyles = ({
 	palette,
 	size,
@@ -163,7 +167,7 @@ export const ShareIcons = ({
 
 			{displayIcons.includes('whatsApp') && (
 				<Hide when="above" breakpoint="phablet" el="li" key="whatsApp">
-					<span css={liStyles(size)}>
+					<span css={[liStyles(size), topMarginStlyes]}>
 						<a
 							href={`whatsapp://send?text="${encodeTitle(
 								webTitle,
@@ -183,7 +187,7 @@ export const ShareIcons = ({
 
 			{displayIcons.includes('messenger') && (
 				<Hide when="above" breakpoint="phablet" el="li" key="messenger">
-					<span css={liStyles(size)}>
+					<span css={[liStyles(size), topMarginStlyes]}>
 						<a
 							href={`fb-messenger://share?link=${encodeUrl(
 								pageId,

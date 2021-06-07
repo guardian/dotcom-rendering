@@ -94,6 +94,7 @@ const textByline = (format: Format): string => {
 		case Display.Immersive:
 			return WHITE;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 			switch (format.design) {
 				case Design.Interview:
@@ -379,6 +380,7 @@ const backgroundSeriesTitle = (format: Format): string => {
 		case Display.Immersive:
 			return pillarPalette[format.theme].main;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 		default:
 			return 'transparent';
@@ -390,6 +392,7 @@ const backgroundSectionTitle = (format: Format): string => {
 		case Display.Immersive:
 			return pillarPalette[format.theme].main;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 		default:
 			return 'transparent';
@@ -408,6 +411,7 @@ const backgroundAvatar = (format: Format): string => {
 };
 
 const backgroundCard = (format: Format): string => {
+	// This should be kept in sync with backgroundCardUseInvertedLogo below
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.design) {
 		case Design.Editorial:
@@ -433,6 +437,29 @@ const backgroundCard = (format: Format): string => {
 	}
 };
 
+const backgroundCardInvertLogo = (format: Format): boolean => {
+	// See backgroundCard above for background colours, this should be kept in sync
+	if (format.theme === Special.SpecialReport) return true;
+	switch (format.design) {
+		case Design.Media:
+			return true;
+		case Design.LiveBlog:
+			switch (format.theme) {
+				case Special.Labs:
+					return false;
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+				case Pillar.Lifestyle:
+				case Pillar.Culture:
+				default:
+					return true;
+			}
+		default:
+			return false;
+	}
+};
+
 const backgroundHeadline = (format: Format): string => {
 	switch (format.display) {
 		case Display.Immersive:
@@ -440,6 +467,7 @@ const backgroundHeadline = (format: Format): string => {
 				return specialReport[300];
 			return BLACK;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 			if (format.design === Design.Interview) return BLACK;
 			return 'transparent';
@@ -780,6 +808,7 @@ export const decidePalette = (format: Format): Palette => {
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
 			card: backgroundCard(format),
+			cardInvertLogo: backgroundCardInvertLogo(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),

@@ -74,7 +74,7 @@ export const coreVitals = (): void => {
 			window.location.hostname === 'm.code.dev-theguardian.com' ||
 			window.location.hostname === 'localhost' ||
 			window.location.hostname === 'preview.gutools.co.uk'
-				? 'http://performance-events.code.dev-guardianapis.com/core-web-vitals'
+				? 'https://performance-events.code.dev-guardianapis.com/core-web-vitals'
 				: 'https://performance-events.guardianapis.com/core-web-vitals';
 
 		// Browser support
@@ -98,7 +98,12 @@ export const coreVitals = (): void => {
 			redirect: 'follow',
 			referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
 			body: JSON.stringify(jsonData),
-		}).catch(() => {});
+		}).catch((error) =>
+			window.guardian.modules.sentry.reportError(
+				error,
+				'core-web-vitals-dcr',
+			),
+		);
 	};
 
 	getCLS(addToJson, false);

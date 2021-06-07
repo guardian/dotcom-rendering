@@ -7,6 +7,7 @@ import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 const mainMedia = css`
+	height: 100%;
 	min-height: 1px;
 	/*
     Thank you IE11, broken in stasis for all eternity.

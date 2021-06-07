@@ -60,6 +60,7 @@ export const FourOrLess = ({ content }: Props) => {
 							mediaDuration={trail.mediaDuration}
 							commentCount={trail.commentCount}
 							starRating={trail.starRating}
+							branding={trail.branding}
 						/>
 					</LI>
 				))}

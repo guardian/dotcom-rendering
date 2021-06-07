@@ -347,6 +347,7 @@ export const renderElement = ({
 			return [
 				true,
 				<InteractiveAtom
+					isMainMedia={isMainMedia}
 					id={element.id}
 					elementHtml={element.html}
 					elementJs={element.js}

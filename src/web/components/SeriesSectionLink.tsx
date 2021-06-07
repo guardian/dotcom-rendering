@@ -303,6 +303,7 @@ export const SeriesSectionLink = ({
 			}
 		}
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 		default: {
 			if (tag) {
