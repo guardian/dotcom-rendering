@@ -71,18 +71,12 @@ const interviewStyles = css`
 
 const interviewFontStyles = css`
 	${headline.xsmall({ lineHeight: 'regular' })}
-	font-weight: 400;
-
 	${from.mobileMedium} {
 		${headline.small({ lineHeight: 'regular' })}
-		font-weight: 400;
 	}
-
 	${from.tablet} {
 		${headline.medium({ lineHeight: 'regular' })}
-		font-weight: 400;
 	}
-
 	background-color: ${neutral[7]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;

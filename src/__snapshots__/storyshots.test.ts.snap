@@ -7315,7 +7315,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   font-size: 1.5rem;
   line-height: 1.35;
   font-weight: 500;
-  font-weight: 400;
   background-color: #121212;
   color: #FFFFFF;
   white-space: pre-wrap;
@@ -7331,7 +7330,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
     font-size: 1.75rem;
     line-height: 1.35;
     font-weight: 500;
-    font-weight: 400;
   }
 }
 
@@ -7341,7 +7339,6 @@ exports[`Storyshots Editions/Article Interview 1`] = `
     font-size: 2.125rem;
     line-height: 1.35;
     font-weight: 500;
-    font-weight: 400;
   }
 }
 
@@ -15291,7 +15288,6 @@ exports[`Storyshots Editions/Headline Interview 1`] = `
   font-size: 1.5rem;
   line-height: 1.35;
   font-weight: 500;
-  font-weight: 400;
   background-color: #121212;
   color: #FFFFFF;
   white-space: pre-wrap;
@@ -15307,7 +15303,6 @@ exports[`Storyshots Editions/Headline Interview 1`] = `
     font-size: 1.75rem;
     line-height: 1.35;
     font-weight: 500;
-    font-weight: 400;
   }
 }
 
@@ -15317,7 +15312,6 @@ exports[`Storyshots Editions/Headline Interview 1`] = `
     font-size: 2.125rem;
     line-height: 1.35;
     font-weight: 500;
-    font-weight: 400;
   }
 }
 
