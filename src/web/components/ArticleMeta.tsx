@@ -7,6 +7,7 @@ import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { Counts } from '@root/src/web/components/Counts';
 import { Branding } from '@root/src/web/components/Branding';
+import { Lines } from '@guardian/src-ed-lines';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 
@@ -52,6 +53,17 @@ const metaFlex = css`
 	flex-wrap: wrap;
 `;
 
+const stretchLines = css`
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+`;
+
 const metaExtras = (palette: Palette) => css`
 	border-top: 1px solid ${palette.border.article};
 	flex-grow: 1;
@@ -74,10 +86,6 @@ const metaExtras = (palette: Palette) => css`
 	${between.leftCol.and.wide} {
 		padding-bottom: 6px;
 	}
-`;
-
-const contributorTopBorder = (palette: Palette) => css`
-	border-top: 1px solid ${palette.border.article};
 `;
 
 const metaNumbers = (palette: Palette) => css`
@@ -256,6 +264,13 @@ export const ArticleMeta = ({
 		<div css={metaContainer(format)}>
 			<div css={meta}>
 				{branding && <Branding branding={branding} palette={palette} />}
+				{format.theme === Special.Labs ? (
+					<div css={stretchLines}>
+						<Lines count={1} effect="straight" />
+					</div>
+				) : (
+					''
+				)}
 				<RowBelowLeftCol>
 					<>
 						{showAvatar && bylineImageUrl && (
@@ -267,13 +282,8 @@ export const ArticleMeta = ({
 								/>
 							</AvatarContainer>
 						)}
-						<div
-							css={
-								format.theme === Special.Labs
-									? contributorTopBorder(palette)
-									: ''
-							}
-						>
+
+						<div>
 							{shouldShowContributor(format) && (
 								<Contributor
 									author={author}
