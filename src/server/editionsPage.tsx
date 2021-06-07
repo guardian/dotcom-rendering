@@ -6,7 +6,7 @@ import { extractCritical } from '@emotion/server';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Option } from '@guardian/types';
-import { map, none, some } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/atoms/interactiveAtom';
@@ -21,7 +21,7 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
-import { pageFonts } from 'styles';
+import { editionsPageFonts } from 'styles';
 
 // ----- Types ----- //
 
@@ -37,7 +37,7 @@ const docParser = JSDOM.fragment.bind(null);
 // ----- Functions ----- //
 
 const styles = `
-	${pageFonts}
+	${editionsPageFonts}
 
 	html {
 		margin: 0;
@@ -106,11 +106,7 @@ const buildHtml = (
     </html>
 `;
 
-function render(
-	imageSalt: string,
-	request: RenderingRequest,
-	getAssetLocation: (assetName: string) => string,
-): Page {
+function render(imageSalt: string, request: RenderingRequest): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 	const body = renderBody(item);
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
@@ -124,7 +120,7 @@ function render(
 		false,
 	);
 
-	const clientScript = map(getAssetLocation)(some('editions.js'));
+	const clientScript = some('editions.js');
 
 	const scripts = (
 		<Scripts
