@@ -719,43 +719,48 @@ Media.story = { name: 'Media' };
 const labsBranding1: Branding = {
 	sponsorName: 'Saint Agur',
 	logo: {
-		src: 'https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png',
+		src:
+			'https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png',
 		link: 'https://en.wikipedia.org/wiki/Saint_Agur_Blue',
 		label: 'Paid for by',
 		dimensions: {
 			width: 280,
-			height: 180
+			height: 180,
 		},
 	},
-	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
-}
+	aboutThisLink:
+		'https://www.theguardian.com/info/2016/jan/25/content-funding',
+};
 
 const labsBranding2: Branding = {
-	sponsorName: 'Lindeman\'s',
+	sponsorName: "Lindeman's",
 	logo: {
 		src: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
 		link: 'https://www.lindemans.com/en-gb',
 		label: 'Paid for by',
 		dimensions: {
 			width: 280,
-			height: 180
+			height: 180,
 		},
 	},
-	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
+	aboutThisLink:
+		'https://www.theguardian.com/info/2016/jan/25/content-funding',
 };
 
 const labsBranding3: Branding = {
 	sponsorName: 'DfE',
 	logo: {
 		src: `https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png`,
-		link: 'https://www.gov.uk/government/organisations/department-for-education',
+		link:
+			'https://www.gov.uk/government/organisations/department-for-education',
 		label: 'Paid for by',
 		dimensions: {
 			width: 280,
-			height: 180
+			height: 180,
 		},
 	},
-	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
+	aboutThisLink:
+		'https://www.theguardian.com/info/2016/jan/25/content-funding',
 };
 
 const labsBranding4: Branding = {
@@ -766,10 +771,11 @@ const labsBranding4: Branding = {
 		label: 'Paid for by',
 		dimensions: {
 			width: 280,
-			height: 180
+			height: 180,
 		},
 	},
-	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
+	aboutThisLink:
+		'https://www.theguardian.com/info/2016/jan/25/content-funding',
 };
 
 export const Labs = () => (

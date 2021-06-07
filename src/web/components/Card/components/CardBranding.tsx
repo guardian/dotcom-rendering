@@ -12,6 +12,8 @@ const logoImageStyle = css`
 	max-height: 60px;
 	margin-left: ${space[3]}px;
 	vertical-align: middle;
+	height: auto;
+	width: auto;
 `;
 
 const brandingWrapperStyle = css`
@@ -46,7 +48,13 @@ export const CardBranding = ({ branding, palette }: Props) => (
 			rel="nofollow"
 			aria-label={`Visit the ${branding.sponsorName} website`}
 		>
-			<img css={logoImageStyle} src={branding.logo.src} alt={branding.sponsorName} />
+			<img
+				css={logoImageStyle}
+				src={branding.logo.src}
+				alt={branding.sponsorName}
+				width={branding.logo.dimensions.width}
+				height={branding.logo.dimensions.height}
+			/>
 		</a>
 	</div>
 );
