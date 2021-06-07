@@ -716,24 +716,60 @@ export const Media = () => (
 );
 Media.story = { name: 'Media' };
 
-const labBadge1: BadgeType = {
-	seriesTag: 'Tag',
-	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png`,
+const labsBranding1: Branding = {
+	sponsorName: 'Saint Agur',
+	logo: {
+		src: 'https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png',
+		link: 'https://en.wikipedia.org/wiki/Saint_Agur_Blue',
+		label: 'Paid for by',
+		dimensions: {
+			width: 280,
+			height: 180
+		},
+	},
+	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
+}
+
+const labsBranding2: Branding = {
+	sponsorName: 'Lindeman\'s',
+	logo: {
+		src: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
+		link: 'https://www.lindemans.com/en-gb',
+		label: 'Paid for by',
+		dimensions: {
+			width: 280,
+			height: 180
+		},
+	},
+	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
 };
 
-const labBadge2: BadgeType = {
-	seriesTag: 'Tag',
-	imageUrl: `https://static.theguardian.com/commercial/sponsor/22/Mar/2021/16adc23f-5a54-4c16-b5a8-85110bb3d6ec-Lindeman's_New_Badge_Brandmark_Gold.png`,
+const labsBranding3: Branding = {
+	sponsorName: 'DfE',
+	logo: {
+		src: `https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png`,
+		link: 'https://www.gov.uk/government/organisations/department-for-education',
+		label: 'Paid for by',
+		dimensions: {
+			width: 280,
+			height: 180
+		},
+	},
+	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
 };
 
-const labBadge3: BadgeType = {
-	seriesTag: 'Tag',
-	imageUrl: `https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png`,
-};
-
-const labBadge4: BadgeType = {
-	seriesTag: 'Tag',
-	imageUrl: `https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png`,
+const labsBranding4: Branding = {
+	sponsorName: 'Thatchers',
+	logo: {
+		src: `https://static.theguardian.com/commercial/sponsor/23/Mar/2021/45593146-7e57-4713-8314-2bca9674212b-Thatchers_strap.png`,
+		link: 'https://www.thatcherscider.co.uk/',
+		label: 'Paid for by',
+		dimensions: {
+			width: 280,
+			height: 180
+		},
+	},
+	aboutThisLink: 'https://www.theguardian.com/info/2016/jan/25/content-funding',
 };
 
 export const Labs = () => (
@@ -756,7 +792,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[0]}
 							imagePosition="top"
-							badge={labBadge1}
+							branding={labsBranding1}
 						/>
 					</LI>
 					<LI
@@ -776,7 +812,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[1]}
 							imagePosition="top"
-							badge={labBadge2}
+							branding={labsBranding2}
 						/>
 					</LI>
 					<LI
@@ -796,7 +832,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[3]}
 							imagePosition="top"
-							badge={labBadge3}
+							branding={labsBranding3}
 						/>
 					</LI>
 					<LI
@@ -816,7 +852,7 @@ export const Labs = () => (
 							headlineSize="medium"
 							imageUrl={images[2]}
 							imagePosition="top"
-							badge={labBadge4}
+							branding={labsBranding4}
 						/>
 					</LI>
 				</UL>
