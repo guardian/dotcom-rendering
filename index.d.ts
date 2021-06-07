@@ -112,6 +112,7 @@ type Palette = {
 		sectionTitle: Colour;
 		avatar: Colour;
 		card: Colour;
+		cardInvertLogo: boolean;
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
@@ -195,22 +196,19 @@ interface EditionCommercialProperties {
 
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
+type BrandingLogo = {
+	src: string;
+	link: string;
+	label: string;
+	dimensions: { width: number; height: number };
+}
+
 interface Branding {
 	brandingType?: { name: string };
 	sponsorName: string;
-	logo: {
-		src: string;
-		link: string;
-		label: string;
-		dimensions: { width: number; height: number };
-	};
+	logo: BrandingLogo;
 	aboutThisLink: string;
-	logoForDarkBackground?: {
-		src: string;
-		dimensions: { width: number; height: number };
-		link: string;
-		label: string;
-	};
+	logoForDarkBackground?: BrandingLogo;
 }
 
 interface LinkType extends SimpleLinkType {

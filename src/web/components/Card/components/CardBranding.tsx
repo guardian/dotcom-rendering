@@ -25,36 +25,45 @@ const brandingWrapperStyle = css`
 
 const labelStyle = (palette: Palette) => {
 	return css`
-		${textSans.xxsmall({ fontWeight: 'bold' })}
+		${textSans.xxsmall()}
 		color: ${palette.text.cardFooter};
 	`;
 };
 
-export const CardBranding = ({ branding, palette }: Props) => (
-	<div css={brandingWrapperStyle}>
-		<div css={labelStyle(palette)}>{branding.logo.label}</div>
-		<span
-			css={css`
-				${visuallyHidden};
-			`}
-		>
-			{branding.sponsorName
-				? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
-				: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
-		</span>
-		<a
-			href={branding.logo.link}
-			data-sponsor={branding.sponsorName.toLowerCase()}
-			rel="nofollow"
-			aria-label={`Visit the ${branding.sponsorName} website`}
-		>
-			<img
-				css={logoImageStyle}
-				src={branding.logo.src}
-				alt={branding.sponsorName}
-				width={branding.logo.dimensions.width}
-				height={branding.logo.dimensions.height}
-			/>
-		</a>
-	</div>
-);
+const pickLogo = (branding: Branding, palette: Palette): BrandingLogo => {
+	return palette.background.cardInvertLogo && branding.logoForDarkBackground
+		? branding.logoForDarkBackground
+		: branding.logo;
+};
+
+export const CardBranding = ({ branding, palette }: Props) => {
+	const logo = pickLogo(branding, palette);
+	return (
+		<div css={brandingWrapperStyle}>
+			<div css={labelStyle(palette)}>{logo.label}</div>
+			<span
+				css={css`
+					${visuallyHidden};
+				`}
+			>
+				{branding.sponsorName
+					? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
+					: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
+			</span>
+			<a
+				href={logo.link}
+				data-sponsor={branding.sponsorName.toLowerCase()}
+				rel="nofollow"
+				aria-label={`Visit the ${branding.sponsorName} website`}
+			>
+				<img
+					css={logoImageStyle}
+					src={logo.src}
+					alt={branding.sponsorName}
+					width={logo.dimensions.width}
+					height={logo.dimensions.height}
+				/>
+			</a>
+		</div>
+	);
+};
