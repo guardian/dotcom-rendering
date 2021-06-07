@@ -645,7 +645,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
-  color: #767676;
+  color: #333333;
 }
 
 @media (min-width: 740px) {
@@ -15764,7 +15764,7 @@ exports[`Storyshots Editions/Standfirst Analysis 1`] = `
   font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
-  color: #767676;
+  color: #333333;
 }
 
 @media (min-width: 740px) {
