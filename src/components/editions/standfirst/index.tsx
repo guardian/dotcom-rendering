@@ -39,6 +39,11 @@ const immersiveStyles = `
 	color: ${neutral[100]};
 `;
 
+const analysisStyles = `
+	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })};
+	color: ${neutral[20]};
+`;
+
 // ----- Headline Component Styles ----- //
 
 const styles = (kickerColor: string): SerializedStyles => css`
@@ -92,11 +97,10 @@ const getStyles = (format: Format): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
-	if (
-		format.design === Design.Analysis ||
-		format.design === Design.Comment ||
-		format.design === Design.Letter
-	) {
+	if (format.design === Design.Analysis) {
+		return css(styles(kickerColor), analysisStyles);
+	}
+	if (format.design === Design.Comment || format.design === Design.Letter) {
 		return css(styles(kickerColor), greyTextStyles);
 	}
 	if (format.display === Display.Showcase) {
