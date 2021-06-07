@@ -170,6 +170,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
+		<Series item={item} />
 		<Headline item={item} />
 		<Byline item={item} />
 		<Lines />

@@ -56,6 +56,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			...isImmersive(),
+			tags: [getTag('tone/analysis', 'View from the Guardian ')],
 			theme: selectPillar(Pillar.Lifestyle),
 		}}
 	/>
