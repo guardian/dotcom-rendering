@@ -4,25 +4,24 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 type Props = {
-	badgeForLab: string;
-	brandName?: string;
+	branding: Branding;
 	palette: Palette;
 };
 
-const badgeImageStyle = css`
+const logoImageStyle = css`
 	max-height: 60px;
 	margin-left: ${space[3]}px;
 	vertical-align: middle;
 `;
 
-const badgeWrapperStyle = css`
+const brandingWrapperStyle = css`
 	padding-right: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 	text-align: right;
 	flex: auto;
 `;
 
-const paidForStyle = (palette: Palette) => {
+const labelStyle = (palette: Palette) => {
 	return css`
 		${textSans.xxsmall({ fontWeight: 'bold' })}
 		color: ${palette.text.cardFooter};
@@ -30,18 +29,24 @@ const paidForStyle = (palette: Palette) => {
 };
 
 export const CardBranding = ({ branding, palette }: Props) => (
-	<div css={badgeWrapperStyle}>
-		<div css={paidForStyle(palette)}>Paid for by</div>
+	<div css={brandingWrapperStyle}>
+		<div css={labelStyle(palette)}>{branding.logo.label}</div>
 		<span
 			css={css`
 				${visuallyHidden};
 			`}
 		>
-			{brandName
-				? `This content was paid for by ${brandName} as part of Guardian labs`
-				: 'This content has been paid for by a sponsor as part of Guardian Labs.'}
+			{branding.sponsorName
+				? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
+				: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
 		</span>
-		{/* eslint-disable-next-line jsx-a11y/alt-text */}
-		<img css={badgeImageStyle} alt="" src={badgeForLab} />
+		<a
+			href={branding.logo.link}
+			data-sponsor={branding.sponsorName.toLowerCase()}
+			rel="nofollow"
+			aria-label={`Visit the ${branding.sponsorName} website`}
+		>
+			<img css={logoImageStyle} src={branding.logo.src} alt={branding.sponsorName} />
+		</a>
 	</div>
 );
