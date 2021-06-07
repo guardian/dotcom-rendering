@@ -98,7 +98,12 @@ export const coreVitals = (): void => {
 			redirect: 'follow',
 			referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
 			body: JSON.stringify(jsonData),
-		}).catch(() => {});
+		}).catch((error) =>
+			window.guardian.modules.sentry.reportError(
+				error,
+				'core-web-vitals-dcr',
+			),
+		);
 	};
 
 	getCLS(addToJson, false);
