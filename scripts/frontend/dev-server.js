@@ -145,7 +145,7 @@ const go = () => {
 		'/Interactive',
 		async (req, res, next) => {
 			try {
-				const url = buildUrlFromQueryParam(req, defaultInteractiveURL);
+				const url = buildUrlFromQueryParam(req);
 				const { html, ...config } = await fetch(
 					url,
 				).then((interactive) => interactive.json());
