@@ -98,7 +98,6 @@ const buildHtml = (
     <html lang="en">
         <head>
             ${head}
-            <style>${styles}</style>
         </head>
         <body>
 			${body}
