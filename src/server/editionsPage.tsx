@@ -106,11 +106,7 @@ const buildHtml = (
     </html>
 `;
 
-function render(
-	imageSalt: string,
-	request: RenderingRequest,
-	getAssetLocation: (assetName: string) => string,
-): Page {
+function render(imageSalt: string, request: RenderingRequest): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 	const body = renderBody(item);
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
@@ -124,7 +120,7 @@ function render(
 		false,
 	);
 
-	const clientScript = map(getAssetLocation)(some('editions.js'));
+	const clientScript = some('editions.js');
 
 	const scripts = (
 		<Scripts
