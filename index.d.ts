@@ -835,6 +835,7 @@ interface BaseTrailType {
     commentCount?: number;
     starRating?: number;
     linkText?: string;
+	branding?: Branding
 }
 interface TrailType extends BaseTrailType {
 	palette: Palette;
