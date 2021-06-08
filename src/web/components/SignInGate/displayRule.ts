@@ -3,6 +3,8 @@ import {
 	DailyArticle,
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
+import { onConsentChange } from '@guardian/consent-management-platform';
+import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
 import { CurrentSignInGateABTest } from './types';
@@ -76,6 +78,42 @@ export const isPaidContent = (CAPI: CAPIBrowserType): boolean =>
 export const isPreview = (CAPI: CAPIBrowserType): boolean =>
 	CAPI.isPreview || false;
 
+export const hasRequiredConsents = (): Promise<boolean> => {
+	const hasConsentedToAll = (state: ConsentState) => {
+		const consentFlags = state.tcfv2?.consents
+			? Object.values(state.tcfv2.consents)
+			: [];
+		const vendorConsentFlags = state.tcfv2?.vendorConsents
+			? Object.values(state.tcfv2.vendorConsents)
+			: [];
+		const isEmpty =
+			consentFlags.length === 0 || vendorConsentFlags.length === 0;
+
+		return (
+			!isEmpty && [...consentFlags, ...vendorConsentFlags].every(Boolean)
+		);
+	};
+
+	return new Promise((resolve) => {
+		onConsentChange((state) => {
+			if (state.tcfv2) {
+				return resolve(hasConsentedToAll(state));
+			}
+
+			if (state.ccpa) {
+				return resolve(state.ccpa.doNotSell === false);
+			}
+
+			if (state.aus) {
+				return resolve(state.aus.personalisedAdvertising);
+			}
+
+			// this shouldn't ever be hit, but this is here as safety
+			return resolve(false);
+		});
+	});
+};
+
 export const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
@@ -108,6 +146,7 @@ export const canShowMandatoryAus: (
 ) => {
 	return (
 		(await getLocale()) === 'AU' &&
+		(await hasRequiredConsents()) &&
 		(await canShow(CAPI, isSignedIn, currentTest))
 	);
 };

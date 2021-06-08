@@ -8,6 +8,8 @@ import { signInGateAusMandatory } from '@root/src/web/experiments/tests/sign-in-
 // Sign in Gate Types
 import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
 import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
+import { signInGateComponent as gateAusMandatoryVariant } from '@root/src/web/components/SignInGate/gates/aus-mandatory-variant';
+import { signInGateComponent as gateAusMandatoryControl } from '@root/src/web/components/SignInGate/gates/aus-mandatory-control';
 import { SignInGateTestMap } from './types';
 
 // component name, should always be sign-in-gate
@@ -27,8 +29,8 @@ export const signInGateTests: ReadonlyArray<ABTest> = [
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-4': gateMainControl,
 	'main-variant-4': gateMainVariant,
-	'aus-mandatory-gate-control': gateMainVariant,
-	'aus-mandatory-gate-variant': gateMainVariant,
+	'aus-mandatory-gate-control': gateAusMandatoryControl,
+	'aus-mandatory-gate-variant': gateAusMandatoryVariant,
 };
 
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
