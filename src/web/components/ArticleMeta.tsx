@@ -10,6 +10,7 @@ import { Branding } from '@root/src/web/components/Branding';
 import { Lines } from '@guardian/src-ed-lines';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
+import { border, space } from '@guardian/src-foundations';
 
 type Props = {
 	format: Format;
@@ -266,7 +267,16 @@ export const ArticleMeta = ({
 				{branding && <Branding branding={branding} palette={palette} />}
 				{format.theme === Special.Labs ? (
 					<div css={stretchLines}>
-						<Lines count={1} effect="straight" />
+						<div
+							css={css`
+								height: ${space[1]}px;
+							`}
+						/>
+						<Lines
+							count={1}
+							effect="straight"
+							color={border.primary}
+						/>
 					</div>
 				) : (
 					''
