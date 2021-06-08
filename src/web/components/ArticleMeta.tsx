@@ -267,15 +267,15 @@ export const ArticleMeta = ({
 				{branding && <Branding branding={branding} palette={palette} />}
 				{format.theme === Special.Labs ? (
 					<div css={stretchLines}>
-						<div
-							css={css`
-								height: ${space[1]}px;
-							`}
-						/>
 						<Lines
 							count={1}
 							effect="straight"
 							color={border.primary}
+						/>
+						<div
+							css={css`
+								height: ${space[0]}px;
+							`}
 						/>
 					</div>
 				) : (
