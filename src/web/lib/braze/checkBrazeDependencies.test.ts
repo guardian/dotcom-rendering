@@ -14,13 +14,6 @@ jest.mock('./hasRequiredConsents', () => ({
 	},
 }));
 
-let mockHideSupportMessaging: boolean;
-jest.mock('./hideSupportMessaging', () => ({
-	hideSupportMessaging: () => {
-		return mockHideSupportMessaging;
-	},
-}));
-
 describe('checkBrazeDependecies', () => {
 	let windowSpy: jest.SpyInstance<any>;
 
@@ -58,7 +51,6 @@ describe('checkBrazeDependecies', () => {
 		});
 		mockBrazeUuid = 'fake-uuid';
 		mockConsentsPromise = Promise.resolve(true);
-		mockHideSupportMessaging = true;
 
 		const isSignedIn = true;
 		const idApiUrl = 'https://idapi.example.com';
@@ -71,7 +63,6 @@ describe('checkBrazeDependecies', () => {
 			consent: true,
 			isNotPaidContent: true,
 			brazeUuid: 'fake-uuid',
-			userIsGuSupporter: true,
 		});
 	});
 
@@ -91,7 +82,6 @@ describe('checkBrazeDependecies', () => {
 		});
 		mockBrazeUuid = 'fake-uuid';
 		mockConsentsPromise = Promise.resolve(true);
-		mockHideSupportMessaging = true;
 
 		const isSignedIn = true;
 		const idApiUrl = 'https://idapi.example.com';
@@ -122,7 +112,6 @@ describe('checkBrazeDependecies', () => {
 		});
 		mockBrazeUuid = 'fake-uuid';
 		mockConsentsPromise = Promise.resolve(true);
-		mockHideSupportMessaging = true;
 
 		const isSignedIn = true;
 		const idApiUrl = 'https://idapi.example.com';
@@ -155,7 +144,6 @@ describe('checkBrazeDependecies', () => {
 		});
 		mockBrazeUuid = null;
 		mockConsentsPromise = Promise.resolve(true);
-		mockHideSupportMessaging = true;
 
 		const isSignedIn = true;
 		const idApiUrl = 'https://idapi.example.com';
@@ -189,7 +177,6 @@ describe('checkBrazeDependecies', () => {
 		});
 		mockBrazeUuid = 'fake-uuid';
 		mockConsentsPromise = Promise.resolve(false);
-		mockHideSupportMessaging = true;
 
 		const isSignedIn = true;
 		const idApiUrl = 'https://idapi.example.com';
@@ -204,42 +191,6 @@ describe('checkBrazeDependecies', () => {
 		// Condition to keep TypeScript happy
 		if (!got.isSuccessful) {
 			expect(got.failure.field).toEqual('consent');
-			expect(got.failure.data).toEqual(false);
-		}
-	});
-
-	it('fails if support messaging is not hidden', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
-				},
-			},
-		});
-		mockBrazeUuid = 'fake-uuid';
-		mockConsentsPromise = Promise.resolve(true);
-		mockHideSupportMessaging = false;
-
-		const isSignedIn = true;
-		const idApiUrl = 'https://idapi.example.com';
-		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
-
-		expect(got.isSuccessful).toEqual(false);
-		expect(got.data).toEqual({
-			brazeSwitch: true,
-			apiKey: 'fake-api-key',
-			consent: true,
-			brazeUuid: 'fake-uuid',
-		});
-		// Condition to keep TypeScript happy
-		if (!got.isSuccessful) {
-			expect(got.failure.field).toEqual('userIsGuSupporter');
 			expect(got.failure.data).toEqual(false);
 		}
 	});
@@ -260,7 +211,6 @@ describe('checkBrazeDependecies', () => {
 		});
 		mockBrazeUuid = 'fake-uuid';
 		mockConsentsPromise = Promise.resolve(true);
-		mockHideSupportMessaging = true;
 
 		const isSignedIn = true;
 		const idApiUrl = 'https://idapi.example.com';
@@ -272,7 +222,6 @@ describe('checkBrazeDependecies', () => {
 			apiKey: 'fake-api-key',
 			consent: true,
 			brazeUuid: 'fake-uuid',
-			userIsGuSupporter: true,
 		});
 		// Condition to keep TypeScript happy
 		if (!got.isSuccessful) {
@@ -297,7 +246,6 @@ describe('checkBrazeDependecies', () => {
 		});
 		mockBrazeUuid = 'fake-uuid';
 		mockConsentsPromise = Promise.reject(new Error('something went wrong'));
-		mockHideSupportMessaging = true;
 
 		const isSignedIn = true;
 		const idApiUrl = 'https://idapi.example.com';
