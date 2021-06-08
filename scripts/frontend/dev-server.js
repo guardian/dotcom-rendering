@@ -167,10 +167,7 @@ const go = () => {
 		'/AMPInteractive',
 		async (req, res, next) => {
 			try {
-				const url = buildUrlFromQueryParam(
-					req,
-					defaultAmpInteractiveURL,
-				);
+				const url = buildUrlFromQueryParam(req);
 				const { html, ...config } = await fetch(
 					ampifyUrl(url),
 				).then((article) => article.json());
