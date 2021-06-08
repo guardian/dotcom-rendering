@@ -21,7 +21,7 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
-import { editionsPageFonts } from 'styles';
+import { editionsPageFonts, pageFonts } from 'styles';
 
 // ----- Types ----- //
 
@@ -37,7 +37,7 @@ const docParser = JSDOM.fragment.bind(null);
 // ----- Functions ----- //
 
 const styles = `
-	${editionsPageFonts}
+	${process.env.NODE_ENV === 'production' ? editionsPageFonts : pageFonts}
 
 	html {
 		margin: 0;
