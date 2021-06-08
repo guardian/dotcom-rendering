@@ -120,6 +120,12 @@ export const SignInGateSelector = ({
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
+	const [gateVariant, setGateVariant] = useState<
+		SignInGateComponent | undefined
+	>(undefined);
+	const [currentTest, setCurrentTest] = useState<
+		CurrentSignInGateABTest | undefined
+	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
@@ -134,13 +140,27 @@ export const SignInGateSelector = ({
 		}
 	}, [isGateDismissed]);
 
-	if (!gateSelector) {
+	useOnce(() => {
+		const [gateSelectorVariant, gateSelectorTest] = gateSelector;
+		if (gateSelectorVariant && gateSelectorTest) {
+			setGateVariant(gateSelectorVariant);
+			setCurrentTest(gateSelectorTest);
+		}
+	}, [gateSelector]);
+
+	useOnce(() => {
+		if (gateVariant && currentTest) {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			gateVariant
+				?.canShow(CAPI, !!isSignedIn, currentTest)
+				.then(setCanShowGate);
+		}
+	}, [currentTest, gateVariant]);
+
+	if (!currentTest || !gateVariant) {
 		return null;
 	}
 
-	const [gateVariant, currentTest] = gateSelector;
-	// eslint-disable-next-line @typescript-eslint/no-floating-promises
-	gateVariant?.canShow(CAPI, !!isSignedIn, currentTest).then(setCanShowGate);
 	const signInUrl = generateSignInUrl(CAPI, currentTest);
 
 	return (
