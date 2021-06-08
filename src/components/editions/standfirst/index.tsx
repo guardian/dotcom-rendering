@@ -3,6 +3,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
+import type {
+	FontWeight,
+	LineHeight,
+} from '@guardian/src-foundations/dist/types/typography/types';
+import { from } from '@guardian/src-foundations/mq';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -19,31 +24,19 @@ import { articleWidthStyles, sidePadding } from '../styles';
 const interviewStyles = css`
 	${sidePadding}
 `;
-const showcaseStyles = css`
-	${headline.xxsmall({ lineHeight: 'tight' })}
-	color: ${neutral[20]}
-`;
 
-const galleryStyles = css`
-	${headline.xxsmall({ lineHeight: 'tight', fontWeight: 'regular' })}
-	color: ${neutral[100]};
-`;
+const getFontStyles = (
+	fontColor: string,
+	lineHeight?: LineHeight,
+	fontWeight?: FontWeight,
+): SerializedStyles => css`
+	${headline.xxxsmall({ lineHeight, fontWeight })}
 
-const greyTextStyles = css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${neutral[46]}
+	${from.mobileMedium} {
+		${headline.xxsmall({ lineHeight, fontWeight })}
+	}
+	color: ${fontColor};
 `;
-
-const immersiveStyles = `
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })};
-	color: ${neutral[100]};
-`;
-
-const analysisStyles = `
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })};
-	color: ${neutral[20]};
-`;
-
 // ----- Headline Component Styles ----- //
 
 const styles = (kickerColor: string): SerializedStyles => css`
@@ -92,22 +85,30 @@ const getStyles = (format: Format): SerializedStyles => {
 
 	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
-		return css(styles(kickerColor), immersiveStyles);
+		return css(
+			styles(kickerColor),
+			getFontStyles(neutral[100], 'tight', 'bold'),
+		);
 	}
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
 	if (format.design === Design.Analysis) {
-		return css(styles(kickerColor), analysisStyles);
+		return css(
+			styles(kickerColor),
+			getFontStyles(neutral[20], 'tight', 'bold'),
+		);
 	}
-	if (format.design === Design.Comment || format.design === Design.Letter) {
-		return css(styles(kickerColor), greyTextStyles);
+	if (
+		format.design === Design.Comment ||
+		format.design === Design.Letter ||
+		format.display === Display.Showcase
+	) {
+		return css(styles(kickerColor), getFontStyles(neutral[20], 'tight'));
 	}
-	if (format.display === Display.Showcase) {
-		return css(styles(kickerColor), showcaseStyles);
-	}
+
 	if (format.design === Design.Media) {
-		return css(styles(kickerColor), galleryStyles);
+		return css(styles(kickerColor), getFontStyles(neutral[100], 'tight'));
 	}
 	return styles(kickerColor);
 };
