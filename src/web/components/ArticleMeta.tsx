@@ -274,7 +274,7 @@ export const ArticleMeta = ({
 						/>
 						<div
 							css={css`
-								height: ${space[0]}px;
+								height: ${space[1]}px;
 							`}
 						/>
 					</div>
