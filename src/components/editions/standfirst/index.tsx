@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -30,8 +31,11 @@ const galleryStyles = css`
 `;
 
 const greyTextStyles = css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${neutral[46]}
+	${headline.xxxsmall({ lineHeight: 'tight' })}
+	${from.mobileMedium} {
+		${headline.xxsmall({ lineHeight: 'tight' })}
+	}
+	color: ${neutral[20]};
 `;
 
 const immersiveStyles = `

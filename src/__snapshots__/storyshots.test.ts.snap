@@ -1894,8 +1894,8 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
-  font-weight: 700;
-  color: #767676;
+  font-weight: 500;
+  color: #333333;
 }
 
 @media (min-width: 740px) {
@@ -1936,6 +1936,15 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 .emotion-19 svg path {
   fill: #C70000;
+}
+
+@media (min-width: 375px) {
+  .emotion-19 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 1.25rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
 }
 
 .emotion-20 {
@@ -8650,8 +8659,8 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
-  font-weight: 700;
-  color: #767676;
+  font-weight: 500;
+  color: #333333;
 }
 
 @media (min-width: 740px) {
@@ -8692,6 +8701,15 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
 .emotion-13 svg path {
   fill: #E05E00;
+}
+
+@media (min-width: 375px) {
+  .emotion-13 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 1.25rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
 }
 
 .emotion-14 {
@@ -15842,8 +15860,8 @@ exports[`Storyshots Editions/Standfirst Comment 1`] = `
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
-  font-weight: 700;
-  color: #767676;
+  font-weight: 500;
+  color: #333333;
 }
 
 @media (min-width: 740px) {
@@ -15884,6 +15902,15 @@ exports[`Storyshots Editions/Standfirst Comment 1`] = `
 
 .emotion-0 svg path {
   fill: #C70000;
+}
+
+@media (min-width: 375px) {
+  .emotion-0 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 1.25rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
 }
 
 .emotion-1 {
