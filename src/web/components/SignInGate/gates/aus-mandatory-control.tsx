@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Lazy } from '@root/src/web/components/Lazy';
 
 import { SignInGateComponent } from '@frontend/web/components/SignInGate/types';
-import { canShow } from '@frontend/web/components/SignInGate/displayRule';
+import { canShowMandatoryAus } from '@frontend/web/components/SignInGate/displayRule';
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 const SignInGateMain = React.lazy(() => {
@@ -38,5 +38,5 @@ export const signInGateComponent: SignInGateComponent = {
 			</Suspense>
 		</Lazy>
 	),
-	canShow,
+	canShow: canShowMandatoryAus,
 };

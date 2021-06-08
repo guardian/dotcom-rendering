@@ -116,40 +116,42 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps) => {
-	const [showGate, setShowGate] = useState(true);
+	const [isGateDismissed, setIsGateDismissed] = useState(false);
+	const [canShowGate, setCanShowGate] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
 	useEffect(() => {
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
-		if (showGate === false) {
+		if (isGateDismissed) {
 			document.dispatchEvent(
 				new CustomEvent('dcr:page:article:redisplayed'),
 			);
 		}
-	}, [showGate]);
+	}, [isGateDismissed]);
 
 	if (!gateSelector) {
 		return null;
 	}
 
 	const [gateVariant, currentTest] = gateSelector;
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises
+	gateVariant?.canShow(CAPI, !!isSignedIn, currentTest).then(setCanShowGate);
 	const signInUrl = generateSignInUrl(CAPI, currentTest);
 
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{showGate &&
-				gateVariant?.canShow(CAPI, !!isSignedIn, currentTest) && (
-					<ShowSignInGate
-						CAPI={CAPI}
-						abTest={currentTest}
-						setShowGate={setShowGate}
-						signInUrl={signInUrl}
-						gateVariant={gateVariant}
-					/>
-				)}
+			{!isGateDismissed && canShowGate && (
+				<ShowSignInGate
+					CAPI={CAPI}
+					abTest={currentTest}
+					setShowGate={(show) => setIsGateDismissed(!show)}
+					signInUrl={signInUrl}
+					gateVariant={gateVariant}
+				/>
+			)}
 		</>
 	);
 };

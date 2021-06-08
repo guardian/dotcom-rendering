@@ -3,6 +3,7 @@ import {
 	DailyArticle,
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
+import { getLocale } from '@guardian/libs';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
 import { CurrentSignInGateABTest } from './types';
 
@@ -71,6 +72,7 @@ export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
 export const isPaidContent = (CAPI: CAPIBrowserType): boolean =>
 	CAPI.pageType.isPaidContent;
 
+// hide the sign in gate on internal tools preview
 export const isPreview = (CAPI: CAPIBrowserType): boolean =>
 	CAPI.isPreview || false;
 
@@ -78,17 +80,34 @@ export const canShow = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
 	currentTest: CurrentSignInGateABTest,
-): boolean =>
-	!isSignedIn &&
-	!hasUserDismissedGateMoreThanCount(
-		currentTest.variant,
-		currentTest.name,
-		5,
-	) &&
-	isNPageOrHigherPageView(3) &&
-	isValidContentType(CAPI) &&
-	isValidSection(CAPI) &&
-	isValidTag(CAPI) &&
-	!isPaidContent(CAPI) &&
-	!isPreview(CAPI) &&
-	!isIOS9();
+): Promise<boolean> =>
+	Promise.resolve(
+		!isSignedIn &&
+			!hasUserDismissedGateMoreThanCount(
+				currentTest.variant,
+				currentTest.name,
+				5,
+			) &&
+			isNPageOrHigherPageView(3) &&
+			isValidContentType(CAPI) &&
+			isValidSection(CAPI) &&
+			isValidTag(CAPI) &&
+			!isPaidContent(CAPI) &&
+			!isPreview(CAPI) &&
+			!isIOS9(),
+	);
+
+export const canShowMandatoryAus: (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+	currentTest: CurrentSignInGateABTest,
+) => Promise<boolean> = async (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+	currentTest: CurrentSignInGateABTest,
+) => {
+	return (
+		(await getLocale()) === 'AU' &&
+		(await canShow(CAPI, isSignedIn, currentTest))
+	);
+};

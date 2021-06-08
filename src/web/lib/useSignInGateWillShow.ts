@@ -1,4 +1,5 @@
 import { SignInGateSelectorProps } from '@frontend/web/components/SignInGate/types';
+import { useState } from 'react';
 import { useSignInGateSelector } from './useSignInGateSelector';
 
 /**
@@ -11,6 +12,7 @@ export const useSignInGateWillShow = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps): boolean => {
+	const [canShowGate, setCanShowGate] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
 	if (!gateSelector) {
@@ -19,8 +21,8 @@ export const useSignInGateWillShow = ({
 
 	const [gateVariant, currentTest] = gateSelector;
 
-	return (
-		gateVariant.canShow(CAPI, !!isSignedIn, currentTest) &&
-		!!gateVariant.gate
-	);
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises
+	gateVariant?.canShow(CAPI, !!isSignedIn, currentTest).then(setCanShowGate);
+
+	return canShowGate && !!gateVariant.gate;
 };
