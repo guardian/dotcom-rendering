@@ -120,7 +120,7 @@ function render(imageSalt: string, request: RenderingRequest): Page {
 		false,
 	);
 
-	const clientScript = some('editions.js');
+	const clientScript = some('assets/js/editions.js');
 
 	const scripts = (
 		<Scripts
