@@ -8,6 +8,7 @@ import {
 import { getCookie } from '@frontend/web/browser/cookie';
 import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
+import { useOnce } from '@frontend/web/lib/useOnce';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,
@@ -116,11 +117,13 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps) => {
-	const [isGateDismissed, setIsGateDismissed] = useState(false);
+	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
+		undefined,
+	);
 	const [canShowGate, setCanShowGate] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
-	useEffect(() => {
+	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
