@@ -2,7 +2,7 @@ import { ABTest } from '@guardian/ab-core';
 
 export const signInGateMainVariant: ABTest = {
 	id: 'SignInGateMainVariant',
-	start: '2020-05-20',
+	start: '2020-06-09',
 	expiry: '2021-12-01',
 	author: 'Mahesh Makani',
 	description:
