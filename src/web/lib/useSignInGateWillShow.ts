@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
@@ -32,14 +32,14 @@ export const useSignInGateWillShow = ({
 		setCurrentTest(gateSelectorTest);
 	}, [gateSelector]);
 
-	useOnce(() => {
+	useEffect(() => {
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
 				?.canShow(CAPI, !!isSignedIn, currentTest)
 				.then(setCanShowGate);
 		}
-	}, [currentTest, gateVariant]);
+	}, [currentTest, gateVariant, CAPI, isSignedIn]);
 
 	return canShowGate && !!gateVariant && !!gateVariant.gate;
 };

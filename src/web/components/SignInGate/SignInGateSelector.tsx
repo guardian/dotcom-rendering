@@ -148,14 +148,14 @@ export const SignInGateSelector = ({
 		}
 	}, [gateSelector]);
 
-	useOnce(() => {
+	useEffect(() => {
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
 				?.canShow(CAPI, !!isSignedIn, currentTest)
 				.then(setCanShowGate);
 		}
-	}, [currentTest, gateVariant]);
+	}, [currentTest, gateVariant, CAPI, isSignedIn]);
 
 	if (!currentTest || !gateVariant) {
 		return null;
