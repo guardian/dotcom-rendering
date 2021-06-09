@@ -25,6 +25,54 @@ export const mainStandalone = () => {
 };
 mainStandalone.story = { name: 'main_standalone' };
 
+export const mainStandaloneComment = () => {
+	return (
+		<Section>
+			<SignInGateMain
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				isComment={true}
+			/>
+		</Section>
+	);
+};
+mainStandaloneComment.story = { name: 'main_standalone_comment' };
+
+export const mainStandaloneMandatory = () => {
+	return (
+		<Section>
+			<SignInGateMain
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				isMandatory={true}
+			/>
+		</Section>
+	);
+};
+mainStandaloneMandatory.story = { name: 'main_standalone_mandatory' };
+
+export const mainStandaloneMandatoryComment = () => {
+	return (
+		<Section>
+			<SignInGateMain
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				isMandatory={true}
+				isComment={true}
+			/>
+		</Section>
+	);
+};
+mainStandaloneMandatoryComment.story = {
+	name: 'main_standalone_mandatory_comment',
+};
+
 export const fakeSocialStandalone = () => {
 	return (
 		<Section>
