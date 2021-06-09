@@ -126,13 +126,6 @@ export const fluidAdStyles = css`
 		&:not(.ad-slot--im):not(.ad-slot--carrot):not(.ad-slot--offset-right) {
 			width: 100%;
 		}
-
-		&.ad-slot--commercial-component-high {
-			&,
-			& > .ad-slot__content > iframe {
-				transition: height 1s;
-			}
-		}
 	}
 `;
 
