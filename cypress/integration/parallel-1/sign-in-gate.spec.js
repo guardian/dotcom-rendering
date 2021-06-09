@@ -128,7 +128,7 @@ describe('Sign In Gate Tests', function () {
 		it('should not load the sign in gate if the article is a paid article', function () {
 			visitArticleAndScrollToGateForLazyLoad({
 				url:
-					'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/kettlebells-companionship-and-bedroom-parkour-nine-tips-for-keeping-fit-in-lockdown-or-long-haul',
+					'https://www.theguardian.com/defining-moment/2016/jun/29/challenges-opportunities-life-coach-goals-empower-proactive',
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
