@@ -10,7 +10,7 @@ type Props = {
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
 	isFullCardImage?: boolean;
-	labBadge?: JSX.Element;
+	cardBranding?: JSX.Element;
 };
 
 const spaceBetween = css`
@@ -47,10 +47,10 @@ export const CardFooter = ({
 	mediaMeta,
 	commentCount,
 	isFullCardImage,
-	labBadge,
+	cardBranding,
 }: Props) => {
-	if (format.theme === Special.Labs && labBadge) {
-		return <footer>{labBadge}</footer>;
+	if (format.theme === Special.Labs && cardBranding) {
+		return <footer>{cardBranding}</footer>;
 	}
 
 	if (

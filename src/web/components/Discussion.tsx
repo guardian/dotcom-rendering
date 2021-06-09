@@ -177,6 +177,7 @@ export const Discussion = ({
 							${from.leftCol} {
 								padding-left: 10px;
 							}
+							width: 100%;
 							max-width: 100%;
 						`}
 					>
@@ -226,7 +227,7 @@ export const Discussion = ({
 						)}
 
 						{beingHydrated && !isExpanded && (
-							<Lazy margin={300}>
+							<Lazy margin={300} disableFlexStyles={true}>
 								<Comments
 									user={user}
 									baseUrl={discussionApiUrl}

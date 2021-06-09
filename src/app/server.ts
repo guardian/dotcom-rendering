@@ -107,7 +107,10 @@ if (process.env.NODE_ENV === 'production') {
 
 	app.post('/Article', logRenderTime, renderArticle);
 	app.post('/AMPArticle', logRenderTime, renderAMPArticle);
+	app.post('/Interactive', logRenderTime, renderInteractive);
+	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
 
+	// These GET's are for checking any given URL directly from PROD
 	app.get('/Article', logRenderTime, async (req: Request, res: Response) => {
 		// Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
 		try {
@@ -147,7 +150,6 @@ if (process.env.NODE_ENV === 'production') {
 	app.use('/ArticlePerfTest', renderArticlePerfTest);
 	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
 	app.use('/ArticleJson', renderArticleJson);
-	app.use('/Interactive', renderInteractive);
 
 	app.get('/', (req: Request, res: Response) => {
 		try {

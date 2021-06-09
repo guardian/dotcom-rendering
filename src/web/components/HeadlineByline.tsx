@@ -120,6 +120,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				</div>
 			);
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard:
 		default: {
 			switch (format.design) {

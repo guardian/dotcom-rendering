@@ -5,6 +5,7 @@ import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 type Props = {
 	children: JSX.Element;
 	margin: number;
+	disableFlexStyles?: boolean;
 };
 
 // Ensure the ref wrapper expands. This is used for componenents like
@@ -14,7 +15,7 @@ const flexGrowStyles = css`
 	flex-grow: 1;
 `;
 
-export const Lazy = ({ children, margin }: Props) => {
+export const Lazy = ({ children, margin, disableFlexStyles }: Props) => {
 	const [hasBeenSeen, setRef] = useHasBeenSeen({
 		rootMargin: `${margin}px`,
 	});
@@ -32,7 +33,7 @@ export const Lazy = ({ children, margin }: Props) => {
 	// use for visual regression
 	const renderChildren = hasBeenSeen || Lazy.disabled;
 	return (
-		<div ref={setRef} css={flexGrowStyles}>
+		<div ref={setRef} css={!disableFlexStyles && flexGrowStyles}>
 			{renderChildren && <>{children}</>}
 		</div>
 	);

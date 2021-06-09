@@ -1,6 +1,5 @@
 import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { hasRequiredConsents } from './hasRequiredConsents';
-import { hideSupportMessaging } from './hideSupportMessaging';
 
 type SuccessResult = {
 	isSuccessful: true;
@@ -53,10 +52,6 @@ const buildDependencies = (
 		{
 			name: 'consent',
 			value: hasRequiredConsents(),
-		},
-		{
-			name: 'userIsGuSupporter',
-			value: Promise.resolve(hideSupportMessaging()),
 		},
 		{
 			name: 'isNotPaidContent',

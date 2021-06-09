@@ -128,6 +128,7 @@ const metaContainer = (format: Format) => {
 	switch (format.display) {
 		case Display.Immersive:
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard: {
 			switch (format.design) {
 				case Design.PhotoEssay:
@@ -171,6 +172,7 @@ const shouldShowAvatar = (format: Format) => {
 		case Display.Immersive:
 			return false;
 		case Display.Showcase:
+		case Display.NumberedList:
 		case Display.Standard: {
 			switch (format.design) {
 				case Design.Feature:

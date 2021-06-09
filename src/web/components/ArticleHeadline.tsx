@@ -217,21 +217,6 @@ export const ArticleHeadline = ({
 	byline,
 	palette,
 }: Props) => {
-	if (format.display === Display.NumberedList) {
-		return (
-			<h1
-				css={[
-					boldFont,
-					topPadding,
-					css`
-						color: ${palette.text.headline};
-					`,
-				]}
-			>
-				{curly(headlineString)}
-			</h1>
-		);
-	}
 	switch (format.display) {
 		case Display.Immersive: {
 			switch (format.design) {
@@ -305,6 +290,20 @@ export const ArticleHeadline = ({
 					);
 			}
 		}
+		case Display.NumberedList:
+			return (
+				<h1
+					css={[
+						boldFont,
+						topPadding,
+						css`
+							color: ${palette.text.headline};
+						`,
+					]}
+				>
+					{curly(headlineString)}
+				</h1>
+			);
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
