@@ -10,7 +10,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Display, Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { Lines } from '@guardian/src-ed-lines';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -388,7 +388,7 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} palette={palette} />
+						<Lines count={4} effect="straight" />
 					</Section>
 				</SendToBack>
 			</div>
@@ -453,17 +453,14 @@ export const CommentLayout = ({
 											/>
 										</div>
 									)}
-									<GuardianLines
-										count={8}
-										palette={palette}
-									/>
+									<Lines count={8} effect="straight" />
 								</div>
 							</div>
 						</div>
 					</GridItem>
 					<GridItem area="lines">
 						<div css={pushToBottom}>
-							<GuardianLines count={8} palette={palette} />
+							<Lines count={8} effect="straight" />
 						</div>
 					</GridItem>
 					<GridItem area="standfirst">
@@ -527,7 +524,7 @@ export const CommentLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} palette={palette} />
+								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -644,7 +641,7 @@ export const CommentLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

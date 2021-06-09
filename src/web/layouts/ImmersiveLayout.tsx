@@ -16,7 +16,6 @@ import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -47,6 +46,7 @@ import {
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+import { Lines } from '@guardian/src-ed-lines';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -508,8 +508,7 @@ export const ImmersiveLayout = ({
 									{format.theme === Special.Labs ? (
 										<GuardianLabsLines />
 									) : (
-										<GuardianLines
-											palette={palette}
+										<Lines
 											effect={decideLineEffect(
 												Design.Article,
 												format.theme,
@@ -553,7 +552,7 @@ export const ImmersiveLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} palette={palette} />
+								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -675,7 +674,7 @@ export const ImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 
