@@ -16,6 +16,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
   - [Feedback](#feedback)
 - [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
 - [Code Quality](#code-quality)
+  - [Snyk Code Scanning](#snyk-code-scanning)
 - [IDE setup](#ide-setup)
   - [Extensions](#extensions)
   - [Auto fix on save](#auto-fix-on-save)
