@@ -128,7 +128,7 @@ describe('Sign In Gate Tests', function () {
 		it('should not load the sign in gate if the article is a paid article', function () {
 			visitArticleAndScrollToGateForLazyLoad({
 				url:
-					'https://www.theguardian.com/defining-moment/2016/jun/29/challenges-opportunities-life-coach-goals-empower-proactive',
+					'https://www.theguardian.com/100-teachers/2021/jan/28/a-day-in-the-life-of-one-of-the-uks-youngest-headteachers',
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
