@@ -1,11 +1,5 @@
-import { useState } from 'react';
-import {
-	CurrentSignInGateABTest,
-	SignInGateComponent,
-	SignInGateSelectorProps,
-} from '@frontend/web/components/SignInGate/types';
-import { useOnce } from '@frontend/web/lib/useOnce';
-import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
+import { SignInGateSelectorProps } from '@frontend/web/components/SignInGate/types';
+import { useSignInGateSelector } from './useSignInGateSelector';
 
 /**
  * @description
@@ -16,30 +10,17 @@ import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 export const useSignInGateWillShow = ({
 	isSignedIn,
 	CAPI,
-}: SignInGateSelectorProps): boolean | undefined => {
-	const [gateVariant, setGateVariant] = useState<
-		SignInGateComponent | null | undefined
-	>(undefined);
-	const [currentTest, setCurrentTest] = useState<
-		CurrentSignInGateABTest | null | undefined
-	>(undefined);
-	const [canShowGate, setCanShowGate] = useState(false);
+}: SignInGateSelectorProps): boolean => {
 	const gateSelector = useSignInGateSelector();
 
-	useOnce(() => {
-		const [gateSelectorVariant, gateSelectorTest] = gateSelector;
-		setGateVariant(gateSelectorVariant);
-		setCurrentTest(gateSelectorTest);
-	}, [gateSelector]);
+	if (!gateSelector) {
+		return false;
+	}
 
-	useOnce(() => {
-		if (gateVariant && currentTest) {
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			gateVariant
-				?.canShow(CAPI, !!isSignedIn, currentTest)
-				.then(setCanShowGate);
-		}
-	}, [currentTest, gateVariant]);
+	const [gateVariant, currentTest] = gateSelector;
 
-	return canShowGate && !!gateVariant && !!gateVariant.gate;
+	return (
+		gateVariant.canShow(CAPI, !!isSignedIn, currentTest) &&
+		!!gateVariant.gate
+	);
 };

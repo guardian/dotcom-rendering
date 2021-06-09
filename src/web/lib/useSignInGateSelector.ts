@@ -14,16 +14,15 @@ import {
  * A custom hook to make which selects the sign in gate (component and ab test)
  * to be displayed on the current page
  * */
-export const useSignInGateSelector = (): [
-	SignInGateComponent | null,
-	CurrentSignInGateABTest | null,
-] => {
+export const useSignInGateSelector = ():
+	| [SignInGateComponent, CurrentSignInGateABTest]
+	| null => {
 	const ab = useAB();
 
 	const test: Runnable | null = ab.firstRunnableTest(signInGateTests);
 
 	if (!test) {
-		return [null, null];
+		return null;
 	}
 
 	const currentTest: CurrentSignInGateABTest = {
@@ -36,7 +35,7 @@ export const useSignInGateSelector = (): [
 		signInGateTestVariantToGateMapping?.[currentTest.variant];
 
 	if (!gateVariant) {
-		return [null, null];
+		return null;
 	}
 
 	return [gateVariant, currentTest];

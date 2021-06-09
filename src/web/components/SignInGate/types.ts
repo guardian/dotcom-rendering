@@ -4,7 +4,7 @@ export type SignInGateComponent = {
 		CAPI: CAPIBrowserType,
 		isSignedIn: boolean,
 		currentTest: CurrentSignInGateABTest,
-	) => Promise<boolean>;
+	) => boolean;
 };
 
 export interface SignInGateProps {
@@ -14,7 +14,6 @@ export interface SignInGateProps {
 	ophanComponentId: string;
 	isComment?: boolean;
 	abTest?: CurrentSignInGateABTest;
-	isMandatory?: boolean;
 }
 
 export type CurrentSignInGateABTest = {

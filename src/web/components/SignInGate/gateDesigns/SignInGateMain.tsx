@@ -28,7 +28,6 @@ export const SignInGateMain = ({
 	abTest,
 	ophanComponentId,
 	isComment,
-	isMandatory = false,
 }: SignInGateProps) => {
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
@@ -70,21 +69,20 @@ export const SignInGateMain = ({
 				>
 					Register for free
 				</LinkButton>
-				{!isMandatory && (
-					<LinkButton
-						data-cy="sign-in-gate-main_dismiss"
-						data-ignore="global-link-styling"
-						css={laterButton}
-						priority="subdued"
-						size="small"
-						onClick={() => {
-							dismissGate();
-							trackLink(ophanComponentId, 'not-now', abTest);
-						}}
-					>
-						I’ll do it later
-					</LinkButton>
-				)}
+
+				<LinkButton
+					data-cy="sign-in-gate-main_dismiss"
+					data-ignore="global-link-styling"
+					css={laterButton}
+					priority="subdued"
+					size="small"
+					onClick={() => {
+						dismissGate();
+						trackLink(ophanComponentId, 'not-now', abTest);
+					}}
+				>
+					I’ll do it later
+				</LinkButton>
 			</div>
 
 			<p css={[bodySeparator, bodyBold, signInHeader]}>
