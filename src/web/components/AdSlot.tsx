@@ -116,8 +116,8 @@ export const carrotAdStyles = css`
 /**
  * For CSS in Frontend, see mark: 9473ae05-a901-4a8d-a51d-1b9c894d6e1f
  */
-export const fluidAdStyles = css`
-	.ad-slot--fluid {
+const fluidAdStyles = css`
+	&.ad-slot--fluid {
 		min-height: 250px;
 		line-height: 10px;
 		padding: 0;
@@ -214,7 +214,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 								'ad-slot--rendered',
 								'js-sticky-mpu',
 							].join(' ')}
-							css={labelStyles}
+							css={[labelStyles, fluidAdStyles]}
 							data-link-name="ad slot right"
 							data-name="right"
 							// mark: 01303e88-ef1f-462d-9b6e-242419435cec
@@ -255,6 +255,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 										top: 0;
 									`,
 									labelStyles,
+									fluidAdStyles,
 								]}
 								data-link-name="ad slot right"
 								data-name="right"
@@ -299,6 +300,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 								top: 0;
 							`,
 							labelStyles,
+							fluidAdStyles,
 						]}
 						data-link-name="ad slot comments"
 						data-name="comments"
@@ -340,6 +342,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 		}
 		case 'top-above-nav': {
 			const adSlotAboveNav = css`
+				position: relative;
 				margin: 0 auto;
 				min-height: 108px;
 				padding-bottom: 18px;
@@ -359,13 +362,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[
-							css`
-								position: relative;
-							`,
-							labelStyles,
-							adSlotAboveNav,
-						]}
+						css={[labelStyles, fluidAdStyles, adSlotAboveNav]}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
 						// The sizes here come from two places in the frontend code
@@ -410,6 +407,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							position: relative;
 						`,
 						labelStyles,
+						fluidAdStyles,
 					]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
@@ -466,6 +464,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							position: relative;
 						`,
 						labelStyles,
+						fluidAdStyles,
 					]}
 					data-link-name="ad slot merchandising-high"
 					data-name="merchandising-high"
@@ -494,6 +493,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							position: relative;
 						`,
 						labelStyles,
+						fluidAdStyles,
 					]}
 					data-link-name="ad slot merchandising"
 					data-name="merchandising"
