@@ -8,9 +8,9 @@ import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
+import { Lines } from '@guardian/src-ed-lines';
 import { Display, Pillar, Design } from '@guardian/types';
 
 import {
@@ -23,7 +23,6 @@ import {
 import { headline } from '@guardian/src-foundations/typography';
 
 import { NAV, pageFooter } from './Example.mocks';
-import { decidePalette } from '../lib/decidePalette';
 
 const Grey = ({
 	heightInPixels = 400,
@@ -100,14 +99,7 @@ export const Writers = (): React.ReactNode => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines
-				count={4}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-			/>
+			<Lines count={4} effect="straight" />
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -262,14 +254,7 @@ export const Writers = (): React.ReactNode => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines
-				count={4}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-			/>
+			<Lines count={4} effect="straight" />
 		</Section>
 		<Section
 			padded={false}
