@@ -1,6 +1,9 @@
 const path = require('path');
 
 module.exports = {
+	core: {
+		builder: 'webpack5',
+	},
 	stories: ['../src/**/*.stories.@(tsx)'],
 	addons: ['@storybook/addon-essentials'],
 	webpackFinal: async (config) => {
@@ -11,15 +14,7 @@ module.exports = {
 		// https://storybook.js.org/docs/configurations/typescript-config/
 		rules.push({
 			test: /\.[jt]sx?|mjs$/,
-			exclude: [
-				{
-					test: /node_modules/,
-					exclude: [
-						/@guardian\/(?!(automat-modules))/,
-						/dynamic-import-polyfill/,
-					],
-				},
-			],
+			exclude: require('../scripts/webpack/browser').babelExclude,
 			use: [
 				{
 					loader: 'babel-loader',

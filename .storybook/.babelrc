@@ -1,0 +1,5 @@
+// This file is needed as storybook does not respect root babel.config.js configs.
+
+{
+    "extends": "../babel.config.js"
+}

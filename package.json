@@ -137,6 +137,8 @@
         "@loadable/babel-plugin": "^5.13.2",
         "@loadable/webpack-plugin": "^5.14.2",
         "@storybook/addon-essentials": "^6.2.8",
+        "@storybook/builder-webpack5": "^6.2.9",
+        "@storybook/manager-webpack5": "^6.3.0-alpha.37",
         "@storybook/react": "^6.2.9",
         "@testing-library/dom": "^7.27.1",
         "@testing-library/react": "^11.2.6",
