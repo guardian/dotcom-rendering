@@ -2,9 +2,11 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import { decideLogo } from '@root/src/web/lib/decideLogo';
 
 type Props = {
 	branding: Branding;
+	format: Format;
 	palette: Palette;
 };
 
@@ -30,14 +32,8 @@ const labelStyle = (palette: Palette) => {
 	`;
 };
 
-const pickLogo = (branding: Branding, palette: Palette): BrandingLogo => {
-	return palette.background.cardInvertLogo && branding.logoForDarkBackground
-		? branding.logoForDarkBackground
-		: branding.logo;
-};
-
-export const CardBranding = ({ branding, palette }: Props) => {
-	const logo = pickLogo(branding, palette);
+export const CardBranding = ({ branding, format, palette }: Props) => {
+	const logo = decideLogo(format, branding);
 	return (
 		<div css={brandingWrapperStyle}>
 			<div css={labelStyle(palette)}>{logo.label}</div>
