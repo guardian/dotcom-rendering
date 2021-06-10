@@ -76,6 +76,9 @@ const articleAdStyles = css`
 			}
 		}
 	}
+	.ad-slot--fluid {
+		width: 100%;
+	}
 	${carrotAdStyles};
 	${labelStyles};
 `;
