@@ -83,6 +83,7 @@ function getAdSlots(): AdSlot[] {
 		return new AdSlot({
 			rect: getRect(slotPosition),
 			targetingParams,
+			isSquare: false,
 		});
 	});
 }
