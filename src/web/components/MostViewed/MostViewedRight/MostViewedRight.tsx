@@ -39,7 +39,7 @@ export const MostViewedRight = ({ limitItems = 5 }: Props) => {
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
 			<div css={wrapperStyles} data-component="geo-most-popular">
-				<Lines count={1} effect="straight" />
+				<Lines count={4} effect="straight" />
 				<h3 css={headingStyles}>Most viewed</h3>
 				<ul data-link-name="Right hand most popular geo GB">
 					{trails.map((trail, index) => (
