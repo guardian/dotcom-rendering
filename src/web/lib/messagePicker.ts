@@ -1,30 +1,34 @@
 import { record } from '@root/src/web/browser/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
-type ShowMessage = (meta?: any) => MaybeFC;
+type ShowMessage<T> = (meta: T) => MaybeFC;
 
-export type CanShowResult = {
-	result: boolean;
-	meta?: any;
-};
+interface ShouldShow<T> {
+	show: true;
+	meta: T;
+}
+interface ShouldNotShow {
+	show: false;
+}
+export type CanShowResult<T> = ShouldShow<T> | ShouldNotShow;
 
-export type Candidate = {
+export type Candidate<T> = {
 	id: string;
-	show: ShowMessage;
-	canShow: () => Promise<CanShowResult>;
+	show: ShowMessage<T>;
+	canShow: () => Promise<CanShowResult<T>>;
 };
 
-export type CandidateConfig = {
-	candidate: Candidate;
+export type CandidateConfig<T> = {
+	candidate: Candidate<T>;
 	timeoutMillis: number | null;
 };
 
-type CandidateConfigWithTimeout = CandidateConfig & {
+type CandidateConfigWithTimeout<T> = CandidateConfig<T> & {
 	cancelTimeout: () => void;
 };
 
 export type SlotConfig = {
-	candidates: CandidateConfig[];
+	candidates: CandidateConfig<any>[];
 	name: string;
 };
 
@@ -34,13 +38,13 @@ const recordMessageTimeoutInOphan = (messageId: string, slotName: string) =>
 		value: messageId,
 	});
 
-const timeoutify = (
-	candidateConfig: CandidateConfig,
+const timeoutify = <T>(
+	candidateConfig: CandidateConfig<T>,
 	slotName: string,
-): CandidateConfigWithTimeout => {
+): CandidateConfigWithTimeout<T> => {
 	let timer: number | undefined;
 
-	const canShow = (): Promise<CanShowResult> =>
+	const canShow = (): Promise<CanShowResult<T>> =>
 		new Promise((resolve) => {
 			if (candidateConfig.timeoutMillis) {
 				timer = window.setTimeout(() => {
@@ -48,7 +52,7 @@ const timeoutify = (
 						candidateConfig.candidate.id,
 						slotName,
 					);
-					resolve({ result: false });
+					resolve({ show: false });
 				}, candidateConfig.timeoutMillis);
 			}
 
@@ -72,15 +76,20 @@ const timeoutify = (
 	};
 };
 
-const clearAllTimeouts = (messages: CandidateConfigWithTimeout[]) =>
+const clearAllTimeouts = (messages: CandidateConfigWithTimeout<any>[]) =>
 	messages.map((m) => m.cancelTimeout());
 
 const defaultShow = () => null;
 
-type WinningMessage = {
-	idx: number;
-	meta?: any;
-};
+interface PendingMessage<T> {
+	candidateConfig: CandidateConfigWithTimeout<T>;
+	canShow: Promise<CanShowResult<T>>;
+}
+
+interface WinningMessage<T> {
+	meta: T;
+	candidate: Candidate<T>;
+}
 
 export const pickMessage = ({
 	candidates,
@@ -90,39 +99,42 @@ export const pickMessage = ({
 		const candidateConfigsWithTimeout = candidates.map((c) =>
 			timeoutify(c, name),
 		);
-		const results = candidateConfigsWithTimeout.map((c) =>
-			c.candidate.canShow(),
+		const results: PendingMessage<any>[] = candidateConfigsWithTimeout.map(
+			(candidateConfig) => ({
+				candidateConfig,
+				canShow: candidateConfig.candidate.canShow(),
+			}),
 		);
 
-		const winner: Promise<WinningMessage> = results.reduce(
-			async (winningMessageSoFar, canShow, idx) => {
-				const runningIdx = (await winningMessageSoFar).idx;
-				if (runningIdx >= 0) {
-					return winningMessageSoFar;
-				}
-
-				const result = await canShow;
-				candidateConfigsWithTimeout[idx].cancelTimeout();
-				if (result.result) {
-					return { idx, meta: result.meta };
-				}
-
+		const winnerResult = results.reduce<
+			Promise<WinningMessage<any> | null>
+		>(async (winningMessageSoFar, { candidateConfig, canShow }) => {
+			if (await winningMessageSoFar) {
 				return winningMessageSoFar;
-			},
-			Promise.resolve({ idx: -1 }),
-		);
+			}
 
-		winner
-			.then(({ idx, meta }: WinningMessage) => {
+			const result = await canShow;
+			candidateConfig.cancelTimeout();
+			if (result.show) {
+				return {
+					candidate: candidateConfig.candidate,
+					meta: result.meta,
+				};
+			}
+
+			return winningMessageSoFar;
+		}, Promise.resolve(null));
+
+		winnerResult
+			.then((winner) => {
 				clearAllTimeouts(candidateConfigsWithTimeout);
-				resolve(
-					idx === -1
-						? defaultShow
-						: () =>
-								candidateConfigsWithTimeout[idx].candidate.show(
-									meta,
-								),
-				);
+
+				if (winner === null) {
+					resolve(defaultShow);
+				} else {
+					const { candidate, meta } = winner;
+					resolve(() => candidate.show(meta));
+				}
 			})
 			.catch((e) => console.error(`pickMessage winner - error: ${e}`));
 	});
