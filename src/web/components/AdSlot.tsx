@@ -379,7 +379,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[adSlotAboveNav, adStyles, fluidFullWidthAdStyles]}
+						css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
 						// The sizes here come from two places in the frontend code
