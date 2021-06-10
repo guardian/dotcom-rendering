@@ -47,10 +47,12 @@ const convertToImmersive = (CAPI: CAPIType) => {
 			...CAPI.format,
 			display: 'ImmersiveDisplay' as CAPIDisplay,
 		},
-		mainMediaElements: [{
-			...CAPI.mainMediaElements[0],
-			role: 'immersive',
-		}],
+		mainMediaElements: [
+			{
+				...CAPI.mainMediaElements[0],
+				role: 'immersive',
+			},
+		],
 	};
 };
 
