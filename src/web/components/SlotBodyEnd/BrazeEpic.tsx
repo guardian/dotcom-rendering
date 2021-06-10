@@ -53,11 +53,11 @@ type EpicProps = {
 
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
-): Promise<CanShowResult> => {
+): Promise<CanShowResult<any>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
-			result: true,
+			show: true,
 			meta: forcedBrazeMeta,
 		};
 	}
@@ -67,7 +67,7 @@ export const canShow = async (
 		const message = await brazeMessages.getMessageForEndOfArticle();
 
 		return {
-			result: true,
+			show: true,
 			meta: {
 				dataFromBraze: message.extras,
 				logImpressionWithBraze: () => {
@@ -76,7 +76,7 @@ export const canShow = async (
 			},
 		};
 	} catch (e) {
-		return { result: false };
+		return { show: false };
 	}
 };
 

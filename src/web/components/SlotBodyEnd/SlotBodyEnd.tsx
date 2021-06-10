@@ -12,6 +12,8 @@ import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	ReaderRevenueEpic,
 	canShow as canShowReaderRevenueEpic,
+	CanShowData as RRCanShowData,
+	EpicConfig as RREpicConfig,
 } from './ReaderRevenueEpic';
 import { MaybeBrazeEpic, canShow as canShowBrazeEpic } from './BrazeEpic';
 
@@ -40,7 +42,7 @@ const buildReaderRevenueEpicConfig = ({
 	tags,
 	contributionsServiceUrl,
 	idApiUrl,
-}: any): CandidateConfig => {
+}: RRCanShowData): CandidateConfig<RREpicConfig> => {
 	return {
 		candidate: {
 			id: 'reader-revenue-banner',
@@ -57,7 +59,7 @@ const buildReaderRevenueEpicConfig = ({
 					contributionsServiceUrl,
 					idApiUrl,
 				}),
-			show: (meta: any) => () => {
+			show: (meta: RREpicConfig) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
 				return <ReaderRevenueEpic {...meta} />;
 			},
@@ -70,7 +72,7 @@ const buildBrazeEpicConfig = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
 	contributionsServiceUrl: string,
 	countryCode: string,
-): CandidateConfig => {
+): CandidateConfig<any> => {
 	return {
 		candidate: {
 			id: 'braze-epic',

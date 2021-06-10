@@ -16,6 +16,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
   - [Feedback](#feedback)
 - [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
 - [Code Quality](#code-quality)
+  - [Snyk Code Scanning](#snyk-code-scanning)
 - [IDE setup](#ide-setup)
   - [Extensions](#extensions)
   - [Auto fix on save](#auto-fix-on-save)
@@ -47,7 +48,7 @@ Visit the [root path of the dev server](http://localhost:3030) for some example 
 
 You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
 
-You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to 
+You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to
 
 http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
@@ -127,6 +128,9 @@ $ make fix
 See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/makefile) for the full list.
 
 [Read about testing tools and testing strategy](docs/testing.md).
+
+### Snyk Code Scanning
+There's a Github action set up on the repository to scan for vulnerabilities. This is set to "continue on error" and so will show a green tick regardless. In order to check the vulnerabilities we can use the Github code scanning feature in the security tab and this will list all vulnerabilities for a given branch etc. You should use this if adding/removing/updating packages to see if there are any vulnerabilities.
 
 ## IDE setup
 
