@@ -12,6 +12,12 @@ const padding = css`
 	}
 `;
 
+const adStyles = css`
+	& .ad-slot.ad-slot--collapse {
+		display: none;
+	}
+`;
+
 const sideBorders = (colour: string) => css`
 	${from.tablet} {
 		border-left: 1px solid ${colour};
@@ -48,7 +54,12 @@ export const Section = ({
 	shouldCenter = true,
 	children,
 }: Props) => (
-	<section css={backgroundColour && setBackgroundColour(backgroundColour)}>
+	<section
+		css={[
+			adStyles,
+			backgroundColour && setBackgroundColour(backgroundColour),
+		]}
+	>
 		<div
 			id={sectionId}
 			css={[

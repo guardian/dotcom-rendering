@@ -525,10 +525,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="lines">
 						<div css={maxWidth}>
-							{format.theme === Special.Labs ? (
-								<GuardianLabsLines />
-							) : (
-								<div css={stretchLines}>
+							<div css={stretchLines}>
+								{format.theme === Special.Labs ? (
+									<GuardianLabsLines />
+								) : (
 									<GuardianLines
 										count={decideLineCount(format.design)}
 										palette={palette}
@@ -537,8 +537,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											format.theme,
 										)}
 									/>
-								</div>
-							)}
+								)}
+							</div>
 						</div>
 					</GridItem>
 					<GridItem area="meta">
