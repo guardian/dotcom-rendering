@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 
 const liStyles = css`
 	border-top: 1px solid ${neutral[86]};
@@ -10,7 +10,7 @@ const liStyles = css`
 	border-top-style: solid;
 	border-top-color: ${neutral[86]};
 	:hover {
-		background-color: ${neutral[86]};
+		background-color: ${neutral[93]};
 	}
 `;
 
@@ -23,12 +23,12 @@ const borderRightStyles = css`
 
 const linkStyles = css`
 	display: flex;
-	${textSans.medium()}
+	${headline.xxsmall()}
 
-	padding-top: ${space[1]}px;
-	padding-bottom: ${space[1]}px;
-	padding-left: ${space[2]}px;
-	padding-right: ${space[2]}px;
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
+	padding-left: ${space[3]}px;
+	padding-right: ${space[3]}px;
 
 	/* remove a tag link styling */
 	text-decoration: inherit;
@@ -36,8 +36,8 @@ const linkStyles = css`
 `;
 
 const numberStyles = css`
-	padding-right: ${space[1]}px;
-	${textSans.medium({ fontWeight: 'bold' })}
+	padding-right: ${space[2]}px;
+	${headline.xxsmall({ fontWeight: 'bold' })}
 `;
 
 type Props = {
@@ -45,8 +45,9 @@ type Props = {
 };
 
 const headerStyles = css`
-	${textSans.large({ fontWeight: 'bold' })}
-	padding-left: ${space[2]}px;
+	${headline.medium({ fontWeight: 'bold' })}
+	padding-left: ${space[3]}px;
+	padding-bottom: ${space[3]}px;
 `;
 
 const olStyles = css`
@@ -54,10 +55,17 @@ const olStyles = css`
 	grid-template-columns: 1fr 1fr;
 `;
 
+const wrapperStyles = css`
+	margin-left: -10px;
+	width: calc(100% + 10px);
+`;
+
 export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 	return (
-		<>
-			<h2 css={headerStyles}>Contents</h2>
+		<div css={wrapperStyles}>
+			<h2 css={headerStyles} data-ignore="global-h2-styling">
+				Contents
+			</h2>
 			<ol css={olStyles}>
 				{subheadingLinks.map((subheadingLink, index) => {
 					// this isnt a perfect solution, but we need to extract the inner text
@@ -88,6 +96,6 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 					);
 				})}
 			</ol>
-		</>
+		</div>
 	);
 };
