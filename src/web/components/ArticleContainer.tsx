@@ -76,8 +76,9 @@ const articleAdStyles = css`
 			}
 		}
 	}
-	${carrotAdStyles};
-	${labelStyles};
+	.ad-slot--fluid {
+		width: 100%;
+	}
 `;
 
 type Props = {
@@ -85,5 +86,16 @@ type Props = {
 };
 
 export const ArticleContainer = ({ children }: Props) => {
-	return <main css={[articleContainer, articleAdStyles]}>{children}</main>;
+	return (
+		<main
+			css={[
+				articleContainer,
+				articleAdStyles,
+				carrotAdStyles,
+				labelStyles,
+			]}
+		>
+			{children}
+		</main>
+	);
 };
