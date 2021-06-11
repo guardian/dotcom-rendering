@@ -41,19 +41,13 @@ type PreEpicConfig = {
 	};
 };
 
-type EpicConfig = {
-	meta: TestMeta;
-	module: {
-		url: string;
-		props: EpicProps;
-	};
+export type EpicConfig = PreEpicConfig & {
 	email?: string;
 	hasConsentForArticleCount: boolean;
 	stage: string;
 };
 
 type EpicProps = {
-	onReminderOpen: () => void;
 	email?: string;
 	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 	openCmp: () => void;
@@ -70,29 +64,6 @@ const checkForErrors = (response: Response) => {
 		);
 	}
 	return response;
-};
-
-const sendOphanReminderEvent = (componentId: string): void => {
-	const componentEvent = {
-		component: {
-			componentType: 'ACQUISITIONS_OTHER',
-			id: componentId,
-		},
-		action: 'CLICK',
-	};
-
-	window.guardian.ophan.record({ componentEvent });
-};
-
-interface OpenProps {
-	buttonCopyAsString: string;
-}
-
-const sendOphanReminderOpenEvent = ({ buttonCopyAsString }: OpenProps) => {
-	sendOphanReminderEvent('precontribution-reminder-prompt-clicked');
-	sendOphanReminderEvent(
-		`precontribution-reminder-prompt-copy-${buttonCopyAsString}`,
-	);
 };
 
 const wrapperMargins = css`
@@ -146,7 +117,9 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
 
-export const canShow = async (data: CanShowData): Promise<CanShowResult> => {
+export const canShow = async (
+	data: CanShowData,
+): Promise<CanShowResult<EpicConfig>> => {
 	const {
 		isSignedIn,
 		shouldHideReaderRevenue,
@@ -158,7 +131,7 @@ export const canShow = async (data: CanShowData): Promise<CanShowResult> => {
 
 	if (shouldHideReaderRevenue || isPaidContent) {
 		// We never serve Reader Revenue epics in this case
-		return Promise.resolve({ result: false });
+		return Promise.resolve({ show: false });
 	}
 	const dataPerf = initPerf('contributions-epic-data');
 	dataPerf.start();
@@ -178,7 +151,7 @@ export const canShow = async (data: CanShowData): Promise<CanShowResult> => {
 	const json: { data?: PreEpicConfig } = await response.json();
 
 	if (!json.data) {
-		return { result: false };
+		return { show: false };
 	}
 
 	const email = isSignedIn ? await getEmail(idApiUrl) : undefined;
@@ -187,13 +160,12 @@ export const canShow = async (data: CanShowData): Promise<CanShowResult> => {
 
 	const { meta, module } = json.data;
 	return {
-		result: true,
+		show: true,
 		meta: {
 			meta,
 			module,
 			email,
 			hasConsentForArticleCount,
-			onReminderOpen: sendOphanReminderOpenEvent,
 			stage,
 		},
 	};

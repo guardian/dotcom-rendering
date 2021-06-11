@@ -24,7 +24,7 @@ import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
-import { LabBadge } from './components/LabBadge';
+import { CardBranding } from './components/CardBranding';
 
 type Props = {
 	linkTo: string;
@@ -55,8 +55,7 @@ type Props = {
 	// Ophan tracking
 	dataLinkName?: string;
 	// Labs
-	badge?: BadgeType;
-	brand?: string;
+	branding?: Branding;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -148,8 +147,7 @@ export const Card = ({
 	alwaysVertical,
 	minWidthInPixels,
 	dataLinkName,
-	badge,
-	brand,
+	branding,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -315,12 +313,11 @@ export const Card = ({
 											/>
 										) : undefined
 									}
-									labBadge={
-										badge ? (
-											<LabBadge
-												badgeForLab={badge.imageUrl}
+									cardBranding={
+										branding ? (
+											<CardBranding
+												branding={branding}
 												palette={cardPalette}
-												brandName={brand}
 											/>
 										) : undefined
 									}

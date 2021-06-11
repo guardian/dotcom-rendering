@@ -71,7 +71,7 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
+import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,

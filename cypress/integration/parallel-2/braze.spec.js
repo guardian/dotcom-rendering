@@ -7,10 +7,11 @@ const handleGuCookieError = () => {
 	cy.on('uncaught:exception', (err, runnable) => {
 		// When we set the `GU_U` cookie this is causing the commercial bundle to try and do
 		// something with the url which is failing in Cypress with a malformed URI error
-		expect(err.message).to.include('URI malformed');
-		// This error is unrelated to the test in question so return  false to prevent
-		// this commercial error from failing this test
-		return false;
+		if (err.message.includes('URI malformed')) {
+			// This error is unrelated to the test in question so return  false to prevent
+			// this commercial error from failing this test
+			return false;
+		}
 	});
 };
 
@@ -22,7 +23,7 @@ describe('Braze messaging', function () {
 	});
 
 	const url =
-		'https://m.code.dev-theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview';
+		'https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview';
 	const visitArticle = () => {
 		return cy.visit(`/Article?url=${url}`);
 	};

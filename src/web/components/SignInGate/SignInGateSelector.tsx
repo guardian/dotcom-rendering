@@ -8,6 +8,7 @@ import {
 import { getCookie } from '@frontend/web/browser/cookie';
 import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
+import { useOnce } from '@frontend/web/lib/useOnce';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,
@@ -116,40 +117,64 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps) => {
-	const [showGate, setShowGate] = useState(true);
+	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
+		undefined,
+	);
+	const [gateVariant, setGateVariant] = useState<
+		SignInGateComponent | undefined
+	>(undefined);
+	const [currentTest, setCurrentTest] = useState<
+		CurrentSignInGateABTest | undefined
+	>(undefined);
+	const [canShowGate, setCanShowGate] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
-	useEffect(() => {
+	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
-		if (showGate === false) {
+		if (isGateDismissed) {
 			document.dispatchEvent(
 				new CustomEvent('dcr:page:article:redisplayed'),
 			);
 		}
-	}, [showGate]);
+	}, [isGateDismissed]);
 
-	if (!gateSelector) {
+	useOnce(() => {
+		const [gateSelectorVariant, gateSelectorTest] = gateSelector;
+		if (gateSelectorVariant && gateSelectorTest) {
+			setGateVariant(gateSelectorVariant);
+			setCurrentTest(gateSelectorTest);
+		}
+	}, [gateSelector]);
+
+	useEffect(() => {
+		if (gateVariant && currentTest) {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			gateVariant
+				?.canShow(CAPI, !!isSignedIn, currentTest)
+				.then(setCanShowGate);
+		}
+	}, [currentTest, gateVariant, CAPI, isSignedIn]);
+
+	if (!currentTest || !gateVariant) {
 		return null;
 	}
 
-	const [gateVariant, currentTest] = gateSelector;
 	const signInUrl = generateSignInUrl(CAPI, currentTest);
 
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{showGate &&
-				gateVariant?.canShow(CAPI, !!isSignedIn, currentTest) && (
-					<ShowSignInGate
-						CAPI={CAPI}
-						abTest={currentTest}
-						setShowGate={setShowGate}
-						signInUrl={signInUrl}
-						gateVariant={gateVariant}
-					/>
-				)}
+			{!isGateDismissed && canShowGate && (
+				<ShowSignInGate
+					CAPI={CAPI}
+					abTest={currentTest}
+					setShowGate={(show) => setIsGateDismissed(!show)}
+					signInUrl={signInUrl}
+					gateVariant={gateVariant}
+				/>
+			)}
 		</>
 	);
 };

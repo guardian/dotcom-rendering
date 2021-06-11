@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 
-import { labelStyles } from '@root/src/web/components/AdSlot';
+import { labelStyles, carrotAdStyles } from '@root/src/web/components/AdSlot';
 
 const articleContainer = css`
 	${until.leftCol} {
@@ -27,6 +27,9 @@ const articleAdStyles = css`
 		position: relative;
 		@media print {
 			display: none !important;
+		}
+		&.ad-slot--collapse {
+			display: none;
 		}
 	}
 	.ad-slot--mostpop {
@@ -73,6 +76,7 @@ const articleAdStyles = css`
 			}
 		}
 	}
+	${carrotAdStyles};
 	${labelStyles};
 `;
 

@@ -54,15 +54,16 @@ type CanShowProps = BaseProps & {
 	section: string;
 	isPreview: boolean;
 	idApiUrl: string;
+	signInGateWillShow: boolean;
 };
 
 type ReaderRevenueComponentType =
 	| 'ACQUISITIONS_SUBSCRIPTIONS_BANNER'
 	| 'ACQUISITIONS_OTHER';
 
-export type CanShowFunctionType = (
+export type CanShowFunctionType<T> = (
 	props: CanShowProps,
-) => Promise<CanShowResult>;
+) => Promise<CanShowResult<T>>;
 
 // TODO specify return type (need to update client to provide this first)
 const buildPayload = ({
@@ -118,7 +119,7 @@ const getBanner = (meta: { [key: string]: any }, url: string): Promise<any> => {
 		.then((response) => response.json());
 };
 
-export const canShowRRBanner: CanShowFunctionType = async ({
+export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
 	asyncCountryCode,
@@ -135,12 +136,18 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 	subscriptionBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
+	signInGateWillShow,
 }) => {
-	if (!remoteBannerConfig) return { result: false };
+	if (!remoteBannerConfig) return { show: false };
 
-	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
+	if (
+		shouldHideReaderRevenue ||
+		isPaidContent ||
+		isPreview ||
+		signInGateWillShow
+	) {
 		// We never serve Reader Revenue banners in this case
-		return { result: false };
+		return { show: false };
 	}
 
 	if (
@@ -148,7 +155,7 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 		subscriptionBannerLastClosedAt &&
 		withinLocalNoBannerCachePeriod()
 	) {
-		return { result: false };
+		return { show: false };
 	}
 
 	const countryCode = await asyncCountryCode;
@@ -180,17 +187,17 @@ export const canShowRRBanner: CanShowFunctionType = async ({
 		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
 			setLocalNoBannerCachePeriod();
 		}
-		return { result: false };
+		return { show: false };
 	}
 
 	const { module, meta } = json.data;
 
 	const email = isSignedIn ? await getEmail(idApiUrl) : undefined;
 
-	return { result: true, meta: { module, meta, email } };
+	return { show: true, meta: { module, meta, email } };
 };
 
-export const canShowPuzzlesBanner: CanShowFunctionType = async ({
+export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	remoteBannerConfig,
 	isSignedIn,
 	asyncCountryCode,
@@ -213,7 +220,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 
 	if (shouldHideReaderRevenue) {
 		// We never serve Reader Revenue banners in this case
-		return { result: false };
+		return { show: false };
 	}
 
 	if (isPuzzlesPage && remoteBannerConfig) {
@@ -240,16 +247,16 @@ export const canShowPuzzlesBanner: CanShowFunctionType = async ({
 			`${contributionsServiceUrl}/puzzles`,
 		).then((json: { data?: any }) => {
 			if (!json.data) {
-				return { result: false };
+				return { show: false };
 			}
 
 			const { module, meta } = json.data;
 
-			return { result: true, meta: { module, meta } };
+			return { show: true, meta: { module, meta } };
 		});
 	}
 
-	return { result: false };
+	return { show: false };
 };
 
 export type BannerProps = {

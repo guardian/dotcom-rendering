@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 
 import {
 	neutral,
@@ -47,6 +47,7 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { interactiveGlobalStyles } from './lib/interactiveGlobalStyles';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -242,6 +243,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide">
+				<Global styles={interactiveGlobalStyles} />
 				<>
 					<Stuck>
 						<Section

@@ -28,7 +28,7 @@ describe('Video', function () {
 			cy.get(`[daya-cy="youtube-overlay"]`).click();
 			cy.intercept(
 				{
-					url: 'http://ophan.theguardian.com/img/2',
+					url: 'http://ophan.theguardian.com/img/2?*',
 					query: {
 						video: /(.*)eventType\":\"video:content:play(.*)/,
 					},
@@ -64,7 +64,7 @@ describe('Video', function () {
 			cy.get(`[daya-cy="youtube-overlay"]`).click();
 			cy.intercept(
 				{
-					url: 'http://ophan.theguardian.com/img/2',
+					url: 'http://ophan.theguardian.com/img/2?*',
 					query: {
 						video: /(.*)eventType\":\"video:content:play(.*)/,
 					},
