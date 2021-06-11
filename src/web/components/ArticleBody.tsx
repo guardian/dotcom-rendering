@@ -19,7 +19,7 @@ type Props = {
 };
 
 const globalH2Styles = (display: Display) => css`
-	h2 {
+	h2:not([data-ignore='global-h2-styling']) {
 		${display === Display.Immersive
 			? headline.medium({ fontWeight: 'light' })
 			: headline.xxsmall({ fontWeight: 'bold' })};
