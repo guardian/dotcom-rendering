@@ -501,6 +501,7 @@ type CAPIBrowserType = {
 	elementsToHydrate: CAPIElement[];
 	isPreview?: boolean;
 	webTitle: string;
+	stage: string;
 };
 
 interface TagType {
