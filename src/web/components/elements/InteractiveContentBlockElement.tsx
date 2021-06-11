@@ -40,12 +40,6 @@ const numberStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
 `;
 
-const stripOutHtml = (html: string) => {
-	const tempDiv = document.createElement('div');
-	tempDiv.innerHTML = html;
-	return tempDiv.textContent || tempDiv.innerText || '';
-};
-
 type Props = {
 	subheadingLinks: SubheadingBlockElement[];
 };
@@ -66,7 +60,14 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 			<h2 css={headerStyles}>Contents</h2>
 			<ol css={olStyles}>
 				{subheadingLinks.map((subheadingLink, index) => {
-					const title = stripOutHtml(subheadingLink.html);
+					// this isnt a perfect solution, but we need to extract the inner text
+					// and we cannot use document.createElement solution (which is simpler)
+					//  as we are SSR this component
+					// https://stackoverflow.com/a/5002161/7378674
+					const title = subheadingLink.html.replace(
+						/<\/?[^>]+(>|$)/g,
+						'',
+					);
 					return (
 						<li
 							css={[
