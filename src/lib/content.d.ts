@@ -293,6 +293,12 @@ interface NumberedTitleBlockElement {
 	format: CAPIFormat;
 }
 
+interface InteractiveContentBlockElement {
+	_type: 'model.dotcomrendering.pageElements.InteractiveContentBlockElement';
+	elementId: string;
+	subheadingLinks: SubheadingBlockElement[];
+}
+
 interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
@@ -571,6 +577,7 @@ type CAPIElement =
 	| ImageBlockElement
 	| InstagramBlockElement
 	| InteractiveAtomBlockElement
+	| InteractiveContentBlockElement
 	| InteractiveBlockElement
 	| ItemLinkBlockElement
 	| MapBlockElement

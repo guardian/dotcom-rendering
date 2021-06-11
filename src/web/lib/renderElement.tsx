@@ -15,6 +15,7 @@ import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBloc
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
 import { ItemLinkBlockElement } from '@root/src/web/components/elements/ItemLinkBlockElement';
+import { InteractiveContentBlockElement } from '@root/src/web/components/elements/InteractiveContentBlockElement';
 import { MainMediaEmbedBlockComponent } from '@root/src/web/components/elements/MainMediaEmbedBlockComponent';
 import { NumberedTitleBlockComponent } from '@root/src/web/components/elements/NumberedTitleBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
@@ -368,6 +369,13 @@ export const renderElement = ({
 			];
 		case 'model.dotcomrendering.pageElements.ItemLinkBlockElement':
 			return [true, <ItemLinkBlockElement html={element.html} />];
+		case 'model.dotcomrendering.pageElements.InteractiveContentBlockElement':
+			return [
+				true,
+				<InteractiveContentBlockElement
+					subheadingLinks={element.subheadingLinks}
+				/>,
+			];
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return [
 				true,
