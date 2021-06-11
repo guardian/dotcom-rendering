@@ -112,7 +112,6 @@ type Palette = {
 		sectionTitle: Colour;
 		avatar: Colour;
 		card: Colour;
-		cardInvertLogo: boolean;
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
