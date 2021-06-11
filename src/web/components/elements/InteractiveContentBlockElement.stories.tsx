@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
 import { enhanceInteractiveContentElements } from '@root/src/model/enhance-interactive-content-elements';
 
@@ -18,7 +20,13 @@ export default {
 };
 
 export const Default = () => (
-	<InteractiveContentBlockElement
-		subheadingLinks={interactiveContentBlock.subheadingLinks}
-	/>
+	<div
+		css={css`
+			margin: 20px;
+		`}
+	>
+		<InteractiveContentBlockElement
+			subheadingLinks={interactiveContentBlock.subheadingLinks}
+		/>
+	</div>
 );
