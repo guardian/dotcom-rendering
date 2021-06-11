@@ -42,7 +42,7 @@ export const RadioSelect = ({
 						value={option.value}
 						name={`${formField.id}`}
 						checked={!!isRadioChecked}
-						onClick={() =>
+						onChange={() =>
 							setFormData({
 								...formData,
 								[formField.id]: option.value,
