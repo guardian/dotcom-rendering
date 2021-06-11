@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 
+import { from } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
@@ -15,10 +16,12 @@ const liStyles = css`
 `;
 
 const borderRightStyles = css`
-	border-right: 1px solid ${neutral[86]};
-	border-right-width: 1px;
-	border-right-style: solid;
-	border-right-color: ${neutral[86]};
+	${from.mobileLandscape} {
+		border-right: 1px solid ${neutral[86]};
+		border-right-width: 1px;
+		border-right-style: solid;
+		border-right-color: ${neutral[86]};
+	}
 `;
 
 const linkStyles = css`
@@ -51,13 +54,21 @@ const headerStyles = css`
 `;
 
 const olStyles = css`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+	${from.mobileLandscape} {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
 `;
 
 const wrapperStyles = css`
-	margin-left: -10px;
-	width: calc(100% + 10px);
+	${from.tablet} {
+		margin-left: -20px;
+		width: calc(100% + 20px);
+	}
+	${from.leftCol} {
+		margin-left: -10px;
+		width: calc(100% + 10px);
+	}
 `;
 
 export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
