@@ -372,9 +372,12 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveContentBlockElement':
 			return [
 				true,
-				<InteractiveContentBlockElement
-					subheadingLinks={element.subheadingLinks}
-				/>,
+				<>
+					<DividerBlockComponent size="full" />
+					<InteractiveContentBlockElement
+						subheadingLinks={element.subheadingLinks}
+					/>
+				</>,
 			];
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return [
