@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
 	core: {
@@ -60,6 +61,14 @@ module.exports = {
 			'@root': path.resolve(__dirname, '..'),
 			'@frontend': path.resolve(__dirname, '../src'),
 		};
+
+		// Required as otherwise 'process' will not be defined when included on its own (without .env)
+		// e.g process?.env?.SOME_VAR
+		config.plugins.push(
+			new webpack.DefinePlugin({
+				process: '{}',
+			}),
+		);
 
 		return config;
 	},
