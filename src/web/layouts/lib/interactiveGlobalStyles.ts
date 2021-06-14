@@ -9,13 +9,7 @@ export const interactiveGlobalStyles = css`
 		${center}
 	}
 
-	*,
-	::before,
-	::after {
-		box-sizing: content-box;
-	}
-
-	/* There is room for better solution where we don't have to load global  styles onto the body.
+	/* There is room for better solution where we don't have to load global styles onto the body.
 		For now this works, but we shouldn't support for it for newly made interactives. */
 	body {
 		margin-bottom: 1rem;
