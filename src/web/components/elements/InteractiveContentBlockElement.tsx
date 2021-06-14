@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react';
 import { css } from '@emotion/react';
 
 import { from } from '@guardian/src-foundations/mq';
@@ -43,10 +44,6 @@ const numberStyles = css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 `;
 
-type Props = {
-	subheadingLinks: SubheadingBlockElement[];
-};
-
 const headerStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
 	padding-left: ${space[3]}px;
@@ -71,9 +68,20 @@ const wrapperStyles = css`
 	}
 `;
 
+type Props = {
+	subheadingLinks: SubheadingBlockElement[];
+};
+
 export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
+	// set the height explicitly of the container as to make sure that when we detach
+	// list elements we do not effect the page height
+	const [height, setHeight] = useState<number>();
+	const divRef = useCallback((node: HTMLDivElement | null) => {
+		if (node) setHeight(node?.getBoundingClientRect().height);
+	}, []);
+
 	return (
-		<div css={wrapperStyles}>
+		<div ref={divRef} css={wrapperStyles} style={height ? { height } : {}}>
 			<h2 css={headerStyles} data-ignore="global-h2-styling">
 				Contents
 			</h2>
@@ -89,6 +97,7 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 					);
 					return (
 						<li
+							id={subheadingLink.elementId}
 							css={[
 								liStyles,
 								index % 2 === 0 && borderRightStyles,
