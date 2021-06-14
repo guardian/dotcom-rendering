@@ -444,7 +444,16 @@ const captionElement = (format: Format) => (
 				children,
 			);
 		case '#text':
-			return h('span', { key }, text);
+			return styledH(
+				'span',
+				{
+					css: css`
+						${textSans.xxsmall()}
+					`,
+					key,
+				},
+				text,
+			);
 		default:
 			return textElement(format)(node, key);
 	}
@@ -459,7 +468,6 @@ const imageRenderer = (
 	key: number,
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
-
 	return h(BodyImage, {
 		caption: map<DocumentFragment, ReactNode>((cap) => [
 			renderCaption(cap, format),
