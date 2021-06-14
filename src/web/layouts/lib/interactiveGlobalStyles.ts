@@ -19,8 +19,12 @@ export const interactiveGlobalStyles = css`
 		For now this works, but we shouldn't support for it for newly made interactives. */
 	body {
 		margin-bottom: 1rem;
+
+		/* stylelint-disable */
 		font-family: GuardianTextEgyptian, Guardian Text Egyptian Web, Georgia,
-			serif; /* stylelint-disable-line */
+			serif;
+		/* stylelint-enable */
+
 		font-size: 1.0625rem;
 		line-height: 1.5;
 		font-weight: 400;
