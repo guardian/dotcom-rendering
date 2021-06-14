@@ -27,7 +27,7 @@ const borderRightStyles = css`
 
 const linkStyles = css`
 	display: flex;
-	${headline.xxsmall()}
+	${headline.xxsmall({ fontWeight: 'light' })}
 
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
@@ -58,6 +58,8 @@ const olStyles = css`
 `;
 
 const wrapperStyles = css`
+	margin-top: -5px; /* a hack to get tighter margin between interactive element and Divider */
+
 	${from.tablet} {
 		margin-left: -20px;
 		width: calc(100% + 20px);
@@ -97,7 +99,6 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 					);
 					return (
 						<li
-							id={subheadingLink.elementId}
 							css={[
 								liStyles,
 								index % 2 === 0 && borderRightStyles,
