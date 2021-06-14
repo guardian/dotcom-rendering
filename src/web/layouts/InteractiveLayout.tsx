@@ -167,12 +167,6 @@ const maxWidth = css`
 	}
 `;
 
-/* const articleWidth = css`
-	${from.desktop} {
-		width: 620px;
-	}
-`; */
-
 const stretchLines = css`
 	${until.phablet} {
 		margin-left: -20px;
@@ -476,7 +470,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer>
-								<main /* css={articleWidth} */>
+								<main>
 									<ArticleBody
 										format={format}
 										palette={palette}
