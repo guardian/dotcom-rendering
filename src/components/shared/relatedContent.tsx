@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { neutral, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
@@ -39,12 +40,18 @@ const listStyles = css`
 	.js-android & {
 		display: grid;
 		column-gap: ${remSpace[3]};
-		grid-template-columns: minmax(auto, 15rem) minmax(auto, 15rem);
+		grid-template-columns: repeat(2, minmax(auto, 15rem));
 		li {
 			margin-right: 0;
 		}
 		li:nth-child(n + 3) {
 			display: none;
+		}
+		${from.tablet} {
+			grid-template-columns: repeat(4, minmax(auto, 15rem));
+			li:nth-child(n + 3) {
+				display: flex;
+			}
 		}
 	}
 `;
