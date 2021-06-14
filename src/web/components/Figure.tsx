@@ -169,7 +169,7 @@ export const Figure = ({
 		// currently lives in ImageComponent and hoist it up to here, the same as we're
 		// doing using decidePosition for in-body elements
 		return (
-			<figure id={id} css={mainMediaFigureStyles}>
+			<figure id={id} key={id} css={mainMediaFigureStyles}>
 				{children}
 			</figure>
 		);
