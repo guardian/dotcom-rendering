@@ -47,7 +47,10 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { interactiveGlobalStyles } from './lib/interactiveGlobalStyles';
+import {
+	interactiveGlobalStyles,
+	interactiveLegacyClasses,
+} from './lib/interactiveLegacyStyling';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -89,8 +92,8 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  media'
 						'.      border  lines'
 						'.      border  meta'
-						'.      border  body'
-						'.      border  .';
+						'body   body    body'
+						'.      .       .';
 				}
 
 				/*
@@ -110,8 +113,8 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  media'
 						'.      border  lines'
 						'.      border  meta'
-						'.      border  body'
-						'.      border  .';
+						'body   body    body'
+						'.      .       .';
 				}
 
 				${until.leftCol} {
@@ -164,11 +167,11 @@ const maxWidth = css`
 	}
 `;
 
-const articleWidth = css`
+/* const articleWidth = css`
 	${from.desktop} {
 		width: 620px;
 	}
-`;
+`; */
 
 const stretchLines = css`
 	${until.phablet} {
@@ -357,152 +360,159 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.article}
 				borderColour={palette.border.article}
 			>
-				<InteractiveGrid>
-					<GridItem area="title">
-						<ArticleTitle
-							format={format}
-							palette={palette}
-							tags={CAPI.tags}
-							sectionLabel={CAPI.sectionLabel}
-							sectionUrl={CAPI.sectionUrl}
-							guardianBaseURL={CAPI.guardianBaseURL}
-							badge={CAPI.badge}
-						/>
-					</GridItem>
-					<GridItem area="border">
-						{format.theme === Special.Labs ? (
-							<></>
-						) : (
-							<Border palette={palette} />
-						)}
-					</GridItem>
-					<GridItem area="headline">
-						<div css={maxWidth}>
-							<ArticleHeadlinePadding
-								design={format.design}
-								starRating={
-									!!CAPI.starRating || CAPI.starRating === 0
-								}
-							>
-								{age && (
-									<div css={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
+				<div className={interactiveLegacyClasses.contentInteractive}>
+					<InteractiveGrid>
+						<GridItem area="title">
+							<div className="content__labels content__labels--not-immersive">
+								<ArticleTitle
 									format={format}
-									headlineString={CAPI.headline}
+									palette={palette}
 									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-									palette={palette}
-								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
-									/>
-								)}
-							</ArticleHeadlinePadding>
-						</div>
-						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div css={starWrapper}>
-								<StarRating
-									rating={CAPI.starRating}
-									size="large"
+									sectionLabel={CAPI.sectionLabel}
+									sectionUrl={CAPI.sectionUrl}
+									guardianBaseURL={CAPI.guardianBaseURL}
+									badge={CAPI.badge}
 								/>
 							</div>
-						) : (
-							<></>
-						)}
-					</GridItem>
-					<GridItem area="standfirst">
-						<Standfirst
-							format={format}
-							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
-					<GridItem area="media">
-						<div css={maxWidth}>
-							<MainMedia
-								format={format}
-								palette={palette}
-								elements={CAPI.mainMediaElements}
-								adTargeting={adTargeting}
-								host={host}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-							/>
-						</div>
-					</GridItem>
-					<GridItem area="lines">
-						<div css={maxWidth}>
-							<div css={stretchLines}>
-								<GuardianLines
-									count={decideLineCount(format.design)}
-									palette={palette}
-									effect={decideLineEffect(
-										format.design,
-										format.theme,
+						</GridItem>
+						<GridItem area="border">
+							{format.theme === Special.Labs ? (
+								<></>
+							) : (
+								<Border palette={palette} />
+							)}
+						</GridItem>
+						<GridItem area="headline">
+							<div css={maxWidth}>
+								<ArticleHeadlinePadding
+									design={format.design}
+									starRating={
+										!!CAPI.starRating ||
+										CAPI.starRating === 0
+									}
+								>
+									{age && (
+										<div css={ageWarningMargins}>
+											<AgeWarning age={age} />
+										</div>
 									)}
-								/>
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										palette={palette}
+									/>
+									{age && (
+										<AgeWarning
+											age={age}
+											isScreenReader={true}
+										/>
+									)}
+								</ArticleHeadlinePadding>
 							</div>
-						</div>
-					</GridItem>
-					<GridItem area="meta">
-						<div css={maxWidth}>
-							<ArticleMeta
-								branding={branding}
+							{CAPI.starRating || CAPI.starRating === 0 ? (
+								<div css={starWrapper}>
+									<StarRating
+										rating={CAPI.starRating}
+										size="large"
+									/>
+								</div>
+							) : (
+								<></>
+							)}
+						</GridItem>
+						<GridItem area="standfirst">
+							<Standfirst
 								format={format}
-								palette={palette}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-								author={CAPI.author}
-								tags={CAPI.tags}
-								primaryDateline={CAPI.webPublicationDateDisplay}
-								secondaryDateline={
-									CAPI.webPublicationSecondaryDateDisplay
-								}
+								standfirst={CAPI.standfirst}
 							/>
-						</div>
-					</GridItem>
-					<GridItem area="body">
-						<ArticleContainer>
-							<main css={articleWidth}>
-								<ArticleBody
+						</GridItem>
+						<GridItem area="media">
+							<div css={maxWidth}>
+								<MainMedia
 									format={format}
 									palette={palette}
-									blocks={CAPI.blocks}
+									elements={CAPI.mainMediaElements}
 									adTargeting={adTargeting}
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
-								<GuardianLines
-									data-print-layout="hide"
-									count={4}
-									palette={palette}
-								/>
-								<SubMeta
-									palette={palette}
+							</div>
+						</GridItem>
+						<GridItem area="lines">
+							<div css={maxWidth}>
+								<div css={stretchLines}>
+									<GuardianLines
+										count={decideLineCount(format.design)}
+										palette={palette}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								</div>
+							</div>
+						</GridItem>
+						<GridItem area="meta">
+							<div css={maxWidth}>
+								<ArticleMeta
+									branding={branding}
 									format={format}
-									subMetaKeywordLinks={
-										CAPI.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										CAPI.subMetaSectionLinks
-									}
+									palette={palette}
 									pageId={CAPI.pageId}
-									webUrl={CAPI.webURL}
 									webTitle={CAPI.webTitle}
-									showBottomSocialButtons={
-										CAPI.showBottomSocialButtons
+									author={CAPI.author}
+									tags={CAPI.tags}
+									primaryDateline={
+										CAPI.webPublicationDateDisplay
 									}
-									badge={CAPI.badge}
+									secondaryDateline={
+										CAPI.webPublicationSecondaryDateDisplay
+									}
 								/>
-							</main>
-						</ArticleContainer>
-					</GridItem>
-				</InteractiveGrid>
+							</div>
+						</GridItem>
+						<GridItem area="body">
+							<ArticleContainer>
+								<main /* css={articleWidth} */>
+									<ArticleBody
+										format={format}
+										palette={palette}
+										blocks={CAPI.blocks}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
+									/>
+									<GuardianLines
+										data-print-layout="hide"
+										count={4}
+										palette={palette}
+									/>
+									<SubMeta
+										palette={palette}
+										format={format}
+										subMetaKeywordLinks={
+											CAPI.subMetaKeywordLinks
+										}
+										subMetaSectionLinks={
+											CAPI.subMetaSectionLinks
+										}
+										pageId={CAPI.pageId}
+										webUrl={CAPI.webURL}
+										webTitle={CAPI.webTitle}
+										showBottomSocialButtons={
+											CAPI.showBottomSocialButtons
+										}
+										badge={CAPI.badge}
+									/>
+								</main>
+							</ArticleContainer>
+						</GridItem>
+					</InteractiveGrid>
+				</div>
 			</Section>
 
 			<Section

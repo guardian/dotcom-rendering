@@ -24,3 +24,10 @@ export const interactiveGlobalStyles = css`
 		font-weight: 400;
 	}
 `;
+
+// Classes present in Frontend that we add for legacy interactives.
+export const interactiveLegacyClasses = {
+	contentInteractive: 'content--interactive',
+	headline: 'content__headline',
+	labelLink: 'content__label__link',
+};
