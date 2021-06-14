@@ -65,6 +65,7 @@ import { DocumentBlockComponent } from '@root/src/web/components/elements/Docume
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
+import { InteractiveContentBlockElement } from '@root/src/web/components/elements/InteractiveContentBlockElement';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
@@ -509,6 +510,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
+	const interactiveContentElement = elementsByType<InteractiveContentBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
+	);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -591,6 +596,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						caption={interactiveBlock.caption}
 						format={format}
 						palette={palette}
+					/>
+				</HydrateOnce>
+			))}
+			{interactiveContentElement.map((interactiveBlock) => (
+				<HydrateOnce rootId={interactiveBlock.elementId}>
+					<InteractiveContentBlockElement
+						subheadingLinks={interactiveBlock.subheadingLinks}
 					/>
 				</HydrateOnce>
 			))}
