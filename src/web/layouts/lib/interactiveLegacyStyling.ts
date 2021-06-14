@@ -23,6 +23,21 @@ export const interactiveGlobalStyles = css`
 		line-height: 1.5;
 		font-weight: 400;
 	}
+
+	button,
+	input,
+	optgroup,
+	select,
+	textarea {
+		color: inherit;
+	}
+
+	button,
+	html input[type='button'],
+	input[type='reset'],
+	input[type='submit'] {
+		cursor: pointer;
+	}
 `;
 
 // Classes present in Frontend that we add for legacy interactives.
