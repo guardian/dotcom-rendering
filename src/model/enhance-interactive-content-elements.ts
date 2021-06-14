@@ -1,6 +1,5 @@
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
-	let updatedElements: CAPIElement[] = elements;
-
+	const updatedElements: CAPIElement[] = [];
 	const hasInteractiveContentBlockElement = elements.find((element) => {
 		if (
 			element._type ===
@@ -16,41 +15,50 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	if (hasInteractiveContentBlockElement) {
 		// We want to record all `SubheadingBlockElement` to construct the interactive content block
 		const subheadingLinks: SubheadingBlockElement[] = [];
-		updatedElements = elements.map((thisElement) => {
-			if (
-				thisElement._type ===
-				'model.dotcomrendering.pageElements.SubheadingBlockElement'
-			) {
-				const enhancedSubheading = {
-					...thisElement,
-					html: thisElement.html.replace(
-						'<h2>',
-						// add ID to H2 element
-						`<h2 id='${thisElement.elementId}'>`,
-					),
-				};
-				subheadingLinks.push(enhancedSubheading);
-				return enhancedSubheading;
-			}
-			return thisElement;
-		});
+		const withUpdatedSubheadings: CAPIElement[] = elements.map(
+			(thisElement) => {
+				if (
+					thisElement._type ===
+					'model.dotcomrendering.pageElements.SubheadingBlockElement'
+				) {
+					const enhancedSubheading = {
+						...thisElement,
+						html: thisElement.html.replace(
+							'<h2>',
+							// add ID to H2 element
+							`<h2 id='${thisElement.elementId}'>`,
+						),
+					};
+					subheadingLinks.push(enhancedSubheading);
+					return enhancedSubheading;
+				}
+				return thisElement;
+			},
+		);
 
 		// replace interactive content block
-		updatedElements = updatedElements.map((element) => {
+		withUpdatedSubheadings.forEach((element) => {
 			if (
 				element._type ===
 					'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
 				element?.scriptUrl ===
 					'https://uploads.guim.co.uk/2019/03/20/boot.js'
 			) {
-				return {
+				updatedElements.push({
+					_type:
+						'model.dotcomrendering.pageElements.DividerBlockElement',
+					size: 'full',
+					spaceAbove: 'tight',
+				});
+				updatedElements.push({
 					_type:
 						'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
 					elementId: element.elementId,
 					subheadingLinks,
-				};
+				});
+			} else {
+				updatedElements.push(element);
 			}
-			return element;
 		});
 
 		return updatedElements;
