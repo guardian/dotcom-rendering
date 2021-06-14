@@ -27,10 +27,22 @@ function performanceMetrics(): void {
 	);
 }
 
+function platformCSS(): void {
+	const getPlatformClass = (): string => {
+		const ua = navigator.userAgent;
+		if (/android/i.test(ua)) {
+			return 'js-android';
+		}
+		return 'js-ios';
+	};
+	document.body.classList.add(getPlatformClass());
+}
+
 function setup(): void {
 	performanceMetrics();
 	interactives();
 	twitter();
+	platformCSS();
 }
 
 // ----- Exports ----- //

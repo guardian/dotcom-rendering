@@ -35,6 +35,18 @@ const listStyles = css`
 	&::-webkit-scrollbar {
 		display: none;
 	}
+
+	.js-android & {
+		display: grid;
+		column-gap: ${remSpace[3]};
+		grid-template-columns: minmax(auto, 15rem) minmax(auto, 15rem);
+		li {
+			margin-right: 0;
+		}
+		li:nth-child(n + 3) {
+			display: none;
+		}
+	}
 `;
 
 const COMMENT = RelatedItemType.COMMENT;
