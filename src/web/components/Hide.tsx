@@ -9,11 +9,9 @@ interface Props {
 
 interface PropsSpan extends Props {
 	el?: 'span';
-	key?: string;
 }
 interface PropsLi extends Props {
 	el: 'li';
-	key: string;
 }
 
 export const Hide = ({
@@ -21,7 +19,6 @@ export const Hide = ({
 	when,
 	breakpoint,
 	el,
-	key,
 }: PropsSpan | PropsLi) => {
 	let whenToHide;
 	if (when === 'below') {
@@ -38,9 +35,7 @@ export const Hide = ({
 		`;
 	}
 	return el === 'li' ? (
-		<li css={whenToHide} key={key}>
-			{children}
-		</li>
+		<li css={whenToHide}>{children}</li>
 	) : (
 		<span css={whenToHide}>{children}</span>
 	);
