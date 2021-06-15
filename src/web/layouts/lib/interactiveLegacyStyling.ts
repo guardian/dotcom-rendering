@@ -21,7 +21,7 @@ export const interactiveGlobalStyles = css`
 
 	/* There is room for better solution where we don't have to load global styles onto the body.
 		For now this works, but we shouldn't support for it for newly made interactives. */
-	${interactiveLegacyClasses.contentInteractive} {
+	.${interactiveLegacyClasses.contentInteractive} {
 		margin-bottom: 1rem;
 
 		/* stylelint-disable */
