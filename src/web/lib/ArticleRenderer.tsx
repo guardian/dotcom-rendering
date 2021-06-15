@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
-import { Format } from '@guardian/types';
+import { Design, Format } from '@guardian/types';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -42,6 +43,12 @@ export const ArticleRenderer: React.FC<{
 			className={[
 				'article-body-commercial-selector',
 				'article-body-viewer-selector',
+
+				// Note, this class MUST be on the *direct parent* of the
+				// elements for some legacy interactive styling to work.
+				format.design === Design.Interactive
+					? interactiveLegacyClasses.contentMainColumn
+					: '',
 			].join(' ')}
 			css={commercialPosition}
 		>

@@ -473,21 +473,16 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<GridItem area="body">
 							<ArticleContainer>
 								<main>
-									<div
-										className={
-											interactiveLegacyClasses.contentMainColumn
-										}
-									>
-										<ArticleBody
-											format={format}
-											palette={palette}
-											blocks={CAPI.blocks}
-											adTargeting={adTargeting}
-											host={host}
-											pageId={CAPI.pageId}
-											webTitle={CAPI.webTitle}
-										/>
-									</div>
+									<ArticleBody
+										format={format}
+										palette={palette}
+										blocks={CAPI.blocks}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
+									/>
+
 									<Lines data-print-layout="hide" count={4} />
 									<SubMeta
 										palette={palette}
