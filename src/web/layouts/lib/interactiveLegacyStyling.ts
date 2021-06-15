@@ -43,6 +43,9 @@ export const interactiveGlobalStyles = css`
 // Classes present in Frontend that we add for legacy interactives.
 export const interactiveLegacyClasses = {
 	contentInteractive: 'content--interactive',
+	contentLabels: 'content__labels',
+	contentLabelsNotImmersive: 'content__labels--not-immersive',
+	contentMainColumn: 'content__main-column--interactive',
 	headline: 'content__headline',
 	labelLink: 'content__label__link',
 };

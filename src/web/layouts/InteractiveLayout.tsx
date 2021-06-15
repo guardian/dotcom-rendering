@@ -357,7 +357,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<div className={interactiveLegacyClasses.contentInteractive}>
 					<InteractiveGrid>
 						<GridItem area="title">
-							<div className="content__labels content__labels--not-immersive">
+							<div
+								className={`${interactiveLegacyClasses.contentLabels} ${interactiveLegacyClasses.contentLabelsNotImmersive}`}
+							>
 								<ArticleTitle
 									format={format}
 									palette={palette}
@@ -471,15 +473,21 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<GridItem area="body">
 							<ArticleContainer>
 								<main>
-									<ArticleBody
-										format={format}
-										palette={palette}
-										blocks={CAPI.blocks}
-										adTargeting={adTargeting}
-										host={host}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-									/>
+									<div
+										className={
+											interactiveLegacyClasses.contentMainColumn
+										}
+									>
+										<ArticleBody
+											format={format}
+											palette={palette}
+											blocks={CAPI.blocks}
+											adTargeting={adTargeting}
+											host={host}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+										/>
+									</div>
 									<GuardianLines
 										data-print-layout="hide"
 										count={4}
