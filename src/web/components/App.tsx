@@ -963,6 +963,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
+					stage={CAPI.stage}
 				/>
 			</Portal>
 			<Portal

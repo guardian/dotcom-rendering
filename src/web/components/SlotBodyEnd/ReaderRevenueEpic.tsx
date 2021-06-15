@@ -44,6 +44,7 @@ type PreEpicConfig = {
 export type EpicConfig = PreEpicConfig & {
 	email?: string;
 	hasConsentForArticleCount: boolean;
+	stage: string;
 };
 
 type EpicProps = {
@@ -51,6 +52,7 @@ type EpicProps = {
 	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 	openCmp: () => void;
 	hasConsentForArticleCount: boolean;
+	stage: string;
 	// Also anything specified by support-dotcom-components
 };
 
@@ -79,9 +81,10 @@ export type CanShowData = {
 	tags: TagType[];
 	contributionsServiceUrl: string;
 	idApiUrl: string;
+	stage: string;
 };
 
-const buildPayload = async (props: CanShowData): Promise<Metadata> => {
+const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -91,24 +94,24 @@ const buildPayload = async (props: CanShowData): Promise<Metadata> => {
 			referrerUrl: window.location.origin + window.location.pathname,
 		},
 		targeting: {
-			contentType: props.contentType,
-			sectionName: props.sectionName || '', // TODO update client to reflect that this is optional
-			shouldHideReaderRevenue: props.shouldHideReaderRevenue,
-			isMinuteArticle: props.isMinuteArticle,
-			isPaidContent: props.isPaidContent,
-			tags: props.tags,
+			contentType: data.contentType,
+			sectionName: data.sectionName || '', // TODO update client to reflect that this is optional
+			shouldHideReaderRevenue: data.shouldHideReaderRevenue,
+			isMinuteArticle: data.isMinuteArticle,
+			isPaidContent: data.isPaidContent,
+			tags: data.tags,
 			showSupportMessaging: !shouldHideSupportMessaging(
-				props.isSignedIn || false,
+				data.isSignedIn || false,
 			),
 			isRecurringContributor: isRecurringContributor(
-				props.isSignedIn || false,
+				data.isSignedIn || false,
 			),
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			epicViewLog: getViewLog(),
 			weeklyArticleHistory: getWeeklyArticleHistory(),
 			hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 			mvtId: Number(getCookie('GU_mvt_id')),
-			countryCode: props.countryCode,
+			countryCode: data.countryCode,
 			modulesVersion: MODULES_VERSION,
 		},
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
@@ -123,6 +126,7 @@ export const canShow = async (
 		isPaidContent,
 		contributionsServiceUrl,
 		idApiUrl,
+		stage,
 	} = data;
 
 	if (shouldHideReaderRevenue || isPaidContent) {
@@ -162,6 +166,7 @@ export const canShow = async (
 			module,
 			email,
 			hasConsentForArticleCount,
+			stage,
 		},
 	};
 };
@@ -171,6 +176,7 @@ export const ReaderRevenueEpic = ({
 	module,
 	email,
 	hasConsentForArticleCount,
+	stage,
 }: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
@@ -228,6 +234,7 @@ export const ReaderRevenueEpic = ({
 					submitComponentEvent={submitComponentEvent}
 					openCmp={openCmp}
 					hasConsentForArticleCount={hasConsentForArticleCount}
+					stage={stage}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>

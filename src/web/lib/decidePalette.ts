@@ -411,7 +411,6 @@ const backgroundAvatar = (format: Format): string => {
 };
 
 const backgroundCard = (format: Format): string => {
-	// This should be kept in sync with backgroundCardUseInvertedLogo below
 	if (format.theme === Special.SpecialReport) return specialReport[300];
 	switch (format.design) {
 		case Design.Editorial:
@@ -434,29 +433,6 @@ const backgroundCard = (format: Format): string => {
 			}
 		default:
 			return neutral[97];
-	}
-};
-
-const backgroundCardInvertLogo = (format: Format): boolean => {
-	// See backgroundCard above for background colours, this should be kept in sync
-	if (format.theme === Special.SpecialReport) return true;
-	switch (format.design) {
-		case Design.Media:
-			return true;
-		case Design.LiveBlog:
-			switch (format.theme) {
-				case Special.Labs:
-					return false;
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Lifestyle:
-				case Pillar.Culture:
-				default:
-					return true;
-			}
-		default:
-			return false;
 	}
 };
 
@@ -808,7 +784,6 @@ export const decidePalette = (format: Format): Palette => {
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
 			card: backgroundCard(format),
-			cardInvertLogo: backgroundCardInvertLogo(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),

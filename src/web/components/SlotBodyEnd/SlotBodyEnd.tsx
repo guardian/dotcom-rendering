@@ -29,6 +29,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	idApiUrl: string;
+	stage: string;
 };
 
 const buildReaderRevenueEpicConfig = ({
@@ -42,6 +43,7 @@ const buildReaderRevenueEpicConfig = ({
 	tags,
 	contributionsServiceUrl,
 	idApiUrl,
+	stage,
 }: RRCanShowData): CandidateConfig<RREpicConfig> => {
 	return {
 		candidate: {
@@ -58,6 +60,7 @@ const buildReaderRevenueEpicConfig = ({
 					tags,
 					contributionsServiceUrl,
 					idApiUrl,
+					stage,
 				}),
 			show: (meta: RREpicConfig) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
@@ -101,6 +104,7 @@ export const SlotBodyEnd = ({
 	contributionsServiceUrl,
 	brazeMessages,
 	idApiUrl,
+	stage,
 }: Props) => {
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -115,6 +119,7 @@ export const SlotBodyEnd = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
+			stage,
 		});
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,

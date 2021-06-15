@@ -25,7 +25,7 @@ import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { interactiveGlobalStyles } from './lib/interactiveGlobalStyles';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 
 interface Props {
 	CAPI: CAPIType;
@@ -61,7 +61,9 @@ const Renderer: React.FC<{
 		});
 
 		return ok ? (
-			<figure id={'id' in element ? element.id : undefined}>{el}</figure>
+			<figure id={'id' in element ? element.id : undefined} key={index}>
+				{el}
+			</figure>
 		) : null;
 	});
 
