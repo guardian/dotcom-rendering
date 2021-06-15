@@ -8,8 +8,8 @@ import {
 	brandLine,
 } from '@guardian/src-foundations/palette';
 import { Display, Format, Special } from '@guardian/types';
+import { Lines } from '@guardian/src-ed-lines';
 
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
@@ -247,7 +247,7 @@ export const InteractiveImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

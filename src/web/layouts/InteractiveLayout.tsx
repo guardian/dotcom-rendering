@@ -14,7 +14,8 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { Lines } from '@guardian/src-ed-lines';
+
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -315,7 +316,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						padded={false}
 						showTopBorder={false}
 					>
-						<GuardianLines count={4} palette={palette} />
+						<Lines count={4} effect="straight" />
 					</Section>
 					<Section
 						backgroundColour={brandAltBackground.primary}
@@ -440,9 +441,8 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<GuardianLines
+									<Lines
 										count={decideLineCount(format.design)}
-										palette={palette}
 										effect={decideLineEffect(
 											format.design,
 											format.theme,
@@ -488,11 +488,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											webTitle={CAPI.webTitle}
 										/>
 									</div>
-									<GuardianLines
-										data-print-layout="hide"
-										count={4}
-										palette={palette}
-									/>
+									<Lines data-print-layout="hide" count={4} />
 									<SubMeta
 										palette={palette}
 										format={format}
@@ -598,7 +594,8 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

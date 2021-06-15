@@ -1,9 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Pillar, Display, Design } from '@guardian/types';
-
 import { useApi as useApi_ } from '@root/src/web/lib/useApi';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { mockTab1 } from '../MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
@@ -22,15 +19,7 @@ describe('MostViewedList', () => {
 	it('should call the api and render the response as expected', () => {
 		useApi.mockReturnValue(response);
 
-		const { asFragment, getAllByText } = render(
-			<MostViewedRight
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-			/>,
-		);
+		const { asFragment, getAllByText } = render(<MostViewedRight />);
 
 		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
@@ -69,16 +58,7 @@ describe('MostViewedList', () => {
 	it('should implement a limit on the number of items', () => {
 		useApi.mockReturnValue(response);
 
-		const { getAllByText } = render(
-			<MostViewedRight
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-				limitItems={3}
-			/>,
-		);
+		const { getAllByText } = render(<MostViewedRight limitItems={3} />);
 
 		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
@@ -96,15 +76,7 @@ describe('MostViewedList', () => {
 	it('should show a byline when this property is set to true', async () => {
 		useApi.mockReturnValue(response);
 
-		const { getByText } = render(
-			<MostViewedRight
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-			/>,
-		);
+		const { getByText } = render(<MostViewedRight />);
 
 		expect(
 			getByText('Jennifer Rankin and Daniel Boffey'),

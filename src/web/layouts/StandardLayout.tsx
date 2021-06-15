@@ -13,7 +13,6 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -50,6 +49,7 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { Lines } from '@guardian/src-ed-lines';
 
 const StandardGrid = ({
 	children,
@@ -409,7 +409,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					padded={false}
 					showTopBorder={false}
 				>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			) : (
 				<Stuck>
@@ -529,9 +529,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								{format.theme === Special.Labs ? (
 									<GuardianLabsLines />
 								) : (
-									<GuardianLines
+									<Lines
 										count={decideLineCount(format.design)}
-										palette={palette}
 										effect={decideLineEffect(
 											format.design,
 											format.theme,
@@ -573,10 +572,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								{isMatchReport && <div id="match-stats" />}
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
+								<Lines
 									data-print-layout="hide"
 									count={4}
-									palette={palette}
+									effect="straight"
 								/>
 								<SubMeta
 									palette={palette}
@@ -712,7 +711,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 
