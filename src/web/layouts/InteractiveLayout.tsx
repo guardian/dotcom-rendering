@@ -488,10 +488,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											webTitle={CAPI.webTitle}
 										/>
 									</div>
-									<Lines
-										data-print-layout="hide"
-										count={4}
-									/>
+									<Lines data-print-layout="hide" count={4} />
 									<SubMeta
 										palette={palette}
 										format={format}
