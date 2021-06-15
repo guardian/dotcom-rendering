@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import { MostViewedRight } from './MostViewedRight';
 
 type Props = {
-	palette: Palette;
 	limitItems?: number;
 };
 
@@ -16,7 +15,7 @@ const flexGrow = css`
 `;
 
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
-export const MostViewedRightWrapper = ({ palette, limitItems }: Props) => {
+export const MostViewedRightWrapper = ({ limitItems }: Props) => {
 	const bodyRef = useRef<HTMLDivElement>(null);
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
@@ -45,7 +44,7 @@ export const MostViewedRightWrapper = ({ palette, limitItems }: Props) => {
 	return (
 		<div ref={bodyRef} css={flexGrow}>
 			{heightIsAvailable ? (
-				<MostViewedRight palette={palette} limitItems={limitItems} />
+				<MostViewedRight limitItems={limitItems} />
 			) : null}
 		</div>
 	);

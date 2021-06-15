@@ -6,12 +6,10 @@ import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
-
 import { Card } from '@frontend/web/components/Card/Card';
 
+import { Lines } from '@guardian/src-ed-lines';
 import { Display, Design, Pillar } from '@guardian/types';
 
 import {
@@ -77,14 +75,7 @@ export const Front = () => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines
-				count={4}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-			/>
+			<Lines count={4} effect="straight" />
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -531,14 +522,7 @@ export const Front = () => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines
-				count={4}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Media,
-					theme: Pillar.Sport,
-				})}
-			/>
+			<Lines count={4} effect="straight" />
 		</Section>
 		<Section
 			padded={false}
