@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/src-foundations/mq';
 
 import { center } from '@root/src/web/lib/center';
 
@@ -47,5 +48,11 @@ export const interactiveGlobalStyles = css`
 	input[type='reset'],
 	input[type='submit'] {
 		cursor: pointer;
+	}
+
+	${from.tablet} {
+		.mobile-only {
+			display: none;
+		}
 	}
 `;
