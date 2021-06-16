@@ -15,9 +15,13 @@ interface Props {
 	format: Format;
 }
 
-const styles = css`
+const mediaStyles = css`
 	${textSans.xsmall()}
 	margin: ${remSpace[1]} 0;
+`;
+
+const defaultStyles = css`
+	${textSans.xxsmall()}
 `;
 
 const Credit: FC<Props> = ({ format, credit }) =>
@@ -26,9 +30,9 @@ const Credit: FC<Props> = ({ format, credit }) =>
 		map((cred) => {
 			switch (format.design) {
 				case Design.Media:
-					return <p css={styles}>{cred}</p>;
+					return <p css={mediaStyles}>{cred}</p>;
 				default:
-					return <> {cred}</>;
+					return <span css={defaultStyles}> {cred}</span>;
 			}
 		}),
 		withDefault<ReactElement | null>(null),
