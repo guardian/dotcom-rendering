@@ -61,7 +61,10 @@ const Renderer: React.FC<{
 		});
 
 		return ok ? (
-			<figure id={'id' in element ? element.id : undefined} key={index}>
+			<figure
+				id={'elementId' in element ? element.elementId : undefined}
+				key={index}
+			>
 				{el}
 			</figure>
 		) : null;
