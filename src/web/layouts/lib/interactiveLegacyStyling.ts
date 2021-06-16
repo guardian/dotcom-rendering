@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 import { center } from '@root/src/web/lib/center';
 
@@ -33,6 +33,11 @@ export const interactiveGlobalStyles = css`
 		font-size: 1.0625rem;
 		line-height: 1.5;
 		font-weight: 400;
+
+		::before,
+		::after {
+			box-sizing: content-box;
+		}
 	}
 
 	button,
@@ -48,6 +53,13 @@ export const interactiveGlobalStyles = css`
 	input[type='reset'],
 	input[type='submit'] {
 		cursor: pointer;
+	}
+
+	/* Typically required for ad display. */
+	${until.tablet} {
+		.hide-until-tablet {
+			display: none;
+		}
 	}
 
 	${from.tablet} {
