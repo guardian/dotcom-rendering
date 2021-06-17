@@ -70,6 +70,8 @@ export const ArticleBody = ({
 	pageId,
 	webTitle,
 }: Props) => {
+	const isInteractive = format.design === Design.Interactive;
+
 	if (
 		format.design === Design.LiveBlog ||
 		format.design === Design.DeadBlog
@@ -90,7 +92,7 @@ export const ArticleBody = ({
 	return (
 		<div
 			css={[
-				bodyPadding,
+				isInteractive ? null : bodyPadding,
 				globalH2Styles(format.display),
 				globalH3Styles(format.display),
 				globalStrongStyles,
