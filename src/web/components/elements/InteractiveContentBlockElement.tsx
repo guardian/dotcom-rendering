@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
+import libDebounce from 'lodash.debounce';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
@@ -171,7 +172,7 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 	] = useState<null | EnhancedSubheadingType>(null);
 
 	useEffect(() => {
-		const onScroll = () => {
+		const onScroll = libDebounce(() => {
 			const firstElementTop = enhancedSubheadings[
 				enhancedSubheadings.length - 1
 			]?.ref?.getBoundingClientRect().top;
@@ -204,7 +205,7 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 				});
 				setStickyNavCurrentHeader(newSubheading || null);
 			}
-		};
+		}, 200);
 		window.addEventListener('scroll', onScroll);
 		return () => window.removeEventListener('scroll', onScroll);
 	}, [enhancedSubheadings, setStickyNavCurrentHeader]);
