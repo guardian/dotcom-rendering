@@ -48,4 +48,68 @@ export const interactiveGlobalStyles = css`
 	input[type='submit'] {
 		cursor: pointer;
 	}
+
+
+	/* Start social icon support */
+	.meta__social {
+		padding-top: 0.375rem;
+	}
+
+	.social__item {
+		float: left;
+		min-width: 2rem;
+		padding: 0 0.1875rem 0.375rem 0;
+		cursor: pointer;
+
+		.inline-icon__fallback {
+			display: none;
+		}
+
+		.inline-icon {
+			background-color: transparent;
+			border: 1px solid #dcdcdc;
+			transition: fill .3s ease,background-color .3s ease;
+		}
+
+		.social-icon {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			border: 0;
+			min-width: 2rem;
+			max-width: 100%;
+			width: auto;
+			height: 2rem;
+			svg {
+				height: 88%;
+				width: 88%;
+			}
+		}
+
+		.rounded-icon {
+			border-radius: 62.5rem;
+			display: inline-block;
+			vertical-align: middle;
+			position: relative;
+		}
+
+		.centered-icon svg {
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			margin: auto;
+			position: absolute;
+		}
+	}
+
+	.content__dateline {
+		font-size: 0.75rem;
+		line-height: 1rem;
+		position: relative;
+		box-sizing: border-box;
+		padding-top: 0.125rem;
+		margin-bottom: 0.375rem;
+	}
+	/* End social icon support */
 `;
