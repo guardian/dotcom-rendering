@@ -68,7 +68,7 @@ export const isRecurringContributor = (isSignedIn: boolean): boolean => {
 // SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE (support cookie, when making one-off contribution)
 // Get the date of the latest one-off contribution by looking at the two relevant cookies
 // and returning a Unix epoch string of the latest date found.
-export const getLastOneOffContributionDate = (): number | undefined => {
+export const getLastOneOffContributionTimestamp = (): number | undefined => {
 	// Attributes cookie - expects YYYY-MM-DD
 	const contributionDateFromAttributes = getCookie(
 		ONE_OFF_CONTRIBUTION_DATE_COOKIE,
@@ -100,6 +100,21 @@ export const getLastOneOffContributionDate = (): number | undefined => {
 	return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
 };
 
+export const getLastOneOffContributionDate = (): string | undefined => {
+	const timestamp = getLastOneOffContributionTimestamp();
+
+	if (timestamp === undefined) {
+		return undefined;
+	}
+
+	const date = new Date(timestamp);
+	const year = date.getFullYear();
+	const month = (date.getMonth() + 1).toString().padStart(2, '0');
+	const day = date.getDate().toString().padStart(2, '0');
+
+	return `${year}-${month}-${day}`;
+};
+
 const dateDiffDays = (from: number, to: number): number => {
 	const oneDayMs = 1000 * 60 * 60 * 24;
 	const diffMs = to - from;
@@ -109,7 +124,7 @@ const dateDiffDays = (from: number, to: number): number => {
 const AskPauseDays = 90;
 
 export const isRecentOneOffContributor = () => {
-	const lastContributionDate = getLastOneOffContributionDate();
+	const lastContributionDate = getLastOneOffContributionTimestamp();
 	if (lastContributionDate) {
 		const now = Date.now();
 		return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
