@@ -119,7 +119,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.leftCol} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -132,7 +132,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -145,7 +145,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'media'
 						'title'
