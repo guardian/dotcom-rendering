@@ -205,6 +205,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		isLiveBlog: CAPI.config.isLiveBlog || false,
 		isLive: CAPI.config.isLive || false,
 		isPreview: CAPI.config.isPreview,
+		stage: CAPI.config.stage,
 		matchUrl: CAPI.matchUrl,
 		elementsToHydrate: CAPI.blocks
 			// Get all elements arrays from all blocks -> [[h][h][x]]

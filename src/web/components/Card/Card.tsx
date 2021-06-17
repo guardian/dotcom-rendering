@@ -318,6 +318,7 @@ export const Card = ({
 											<CardBranding
 												branding={branding}
 												palette={cardPalette}
+												format={format}
 											/>
 										) : undefined
 									}

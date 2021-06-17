@@ -32,7 +32,7 @@ type Props = {
 type RRBannerConfig = {
 	id: string;
 	BannerComponent: React.FC<BannerProps>;
-	canShowFn: CanShowFunctionType;
+	canShowFn: CanShowFunctionType<BannerProps>;
 	isEnabled: (switches: CAPIType['config']['switches']) => boolean;
 };
 
@@ -47,13 +47,15 @@ const getBannerLastClosedAt = (key: string): string | undefined => {
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
 
-const buildCmpBannerConfig = (): CandidateConfig => ({
+const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 	candidate: {
 		id: 'cmpUi',
 		canShow: () =>
 			cmp
 				.willShowPrivacyMessage()
-				.then((result) => ({ result: !!result })),
+				.then((result) =>
+					result ? { show: true, meta: undefined } : { show: false },
+				),
 		show: () => {
 			// New CMP is not a react component and is shown outside of react's world
 			// so render nothing if it will show
@@ -75,7 +77,7 @@ const buildRRBannerConfigWith = ({
 		asyncCountryCode: Promise<string>,
 		isPreview: boolean,
 		signInGateWillShow: boolean = false,
-	): CandidateConfig => {
+	): CandidateConfig<BannerProps> => {
 		return {
 			candidate: {
 				id,
@@ -133,7 +135,7 @@ const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 
 const buildBrazeBanner = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
-): CandidateConfig => ({
+): CandidateConfig<any> => ({
 	candidate: {
 		id: 'braze-banner',
 		canShow: () => canShowBrazeBanner(brazeMessages),

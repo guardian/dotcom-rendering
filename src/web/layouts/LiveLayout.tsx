@@ -9,8 +9,8 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
+import { Lines } from '@guardian/src-ed-lines';
 
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -287,7 +287,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						showTopBorder={false}
 						borderColour={palette.border.article}
 					>
-						<GuardianLines count={4} palette={palette} />
+						<Lines count={4} effect="straight" />
 					</Section>
 				</SendToBack>
 			</div>
@@ -383,9 +383,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="lines">
 						<div css={maxWidth}>
 							<div css={stretchLines}>
-								<GuardianLines
+								<Lines
 									count={decideLineCount(format.design)}
-									palette={palette}
 									effect={decideLineEffect(
 										format.design,
 										format.theme,
@@ -424,10 +423,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
+								<Lines
 									data-print-layout="hide"
 									count={4}
-									palette={palette}
+									effect="straight"
 								/>
 								<SubMeta
 									palette={palette}
@@ -558,7 +557,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

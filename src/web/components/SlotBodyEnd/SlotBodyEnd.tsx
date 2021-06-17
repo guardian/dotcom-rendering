@@ -12,6 +12,8 @@ import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	ReaderRevenueEpic,
 	canShow as canShowReaderRevenueEpic,
+	CanShowData as RRCanShowData,
+	EpicConfig as RREpicConfig,
 } from './ReaderRevenueEpic';
 import { MaybeBrazeEpic, canShow as canShowBrazeEpic } from './BrazeEpic';
 
@@ -27,6 +29,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	idApiUrl: string;
+	stage: string;
 };
 
 const buildReaderRevenueEpicConfig = ({
@@ -40,7 +43,8 @@ const buildReaderRevenueEpicConfig = ({
 	tags,
 	contributionsServiceUrl,
 	idApiUrl,
-}: any): CandidateConfig => {
+	stage,
+}: RRCanShowData): CandidateConfig<RREpicConfig> => {
 	return {
 		candidate: {
 			id: 'reader-revenue-banner',
@@ -56,8 +60,9 @@ const buildReaderRevenueEpicConfig = ({
 					tags,
 					contributionsServiceUrl,
 					idApiUrl,
+					stage,
 				}),
-			show: (meta: any) => () => {
+			show: (meta: RREpicConfig) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
 				return <ReaderRevenueEpic {...meta} />;
 			},
@@ -70,7 +75,7 @@ const buildBrazeEpicConfig = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
 	contributionsServiceUrl: string,
 	countryCode: string,
-): CandidateConfig => {
+): CandidateConfig<any> => {
 	return {
 		candidate: {
 			id: 'braze-epic',
@@ -99,6 +104,7 @@ export const SlotBodyEnd = ({
 	contributionsServiceUrl,
 	brazeMessages,
 	idApiUrl,
+	stage,
 }: Props) => {
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -113,6 +119,7 @@ export const SlotBodyEnd = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
+			stage,
 		});
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,

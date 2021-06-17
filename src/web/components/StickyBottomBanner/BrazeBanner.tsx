@@ -40,11 +40,11 @@ const containerStyles = css`
 // - The force-braze-message query string arg is passed
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
-): Promise<CanShowResult> => {
+): Promise<CanShowResult<any>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
-			result: true,
+			show: true,
 			meta: forcedBrazeMeta,
 		};
 	}
@@ -68,9 +68,9 @@ export const canShow = async (
 			logButtonClickWithBraze,
 		};
 
-		return { result: true, meta };
+		return { show: true, meta };
 	} catch (e) {
-		return { result: false };
+		return { show: false };
 	}
 };
 
