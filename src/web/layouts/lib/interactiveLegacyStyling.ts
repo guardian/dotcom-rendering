@@ -49,7 +49,6 @@ export const interactiveGlobalStyles = css`
 		cursor: pointer;
 	}
 
-
 	/* Start social icon support */
 	.meta__social {
 		padding-top: 0.375rem;
@@ -68,7 +67,7 @@ export const interactiveGlobalStyles = css`
 		.inline-icon {
 			background-color: transparent;
 			border: 1px solid #dcdcdc;
-			transition: fill .3s ease,background-color .3s ease;
+			transition: fill 0.3s ease, background-color 0.3s ease;
 		}
 
 		.social-icon {
