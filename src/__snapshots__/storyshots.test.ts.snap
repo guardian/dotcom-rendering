@@ -10267,7 +10267,21 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   }
 }
 
-.emotion-48 {
+.emotion-47 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-49 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-51 {
   width: 100%;
   height: calc(100% * 0.6666666666666666);
   background-color: #F6F6F6;
@@ -10276,14 +10290,14 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-48 {
+  .emotion-51 {
     width: 620px;
     height: calc(620px * 0.6666666666666666);
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-48 {
+  .emotion-51 {
     background-color: #333333;
   }
 }
@@ -10581,14 +10595,22 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                 points="0,9 5,0 10,9"
               />
             </svg>
-            <span>
+            <span
+              className="emotion-47"
+            >
               Washington DC, US
             </span>
-            <span>
+            <span
+              className="emotion-47"
+            >
               Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol during a House judiciary subcommittee hearing
             </span>
-             
-            Photograph: Al Drago/Getty Images
+            <span
+              className="emotion-49"
+            >
+               
+              Photograph: Al Drago/Getty Images
+            </span>
           </figcaption>
         </figure>
         <figure
@@ -10606,7 +10628,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
             <img
               alt="Prayagraj, India A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers, during Magh Mela festival"
-              className="js-launch-slideshow emotion-48"
+              className="js-launch-slideshow emotion-51"
               data-caption="<strong>Prayagraj, India</strong> <br><br>A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers"
               data-credit="Photograph: Rajesh Kumar Singh/AP"
               data-ratio={0.6666666666666666}
@@ -10625,14 +10647,22 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                 points="0,9 5,0 10,9"
               />
             </svg>
-            <span>
+            <span
+              className="emotion-47"
+            >
               Prayagraj, India
             </span>
-            <span>
+            <span
+              className="emotion-47"
+            >
               A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers
             </span>
-             
-            Photograph: Rajesh Kumar Singh/AP
+            <span
+              className="emotion-49"
+            >
+               
+              Photograph: Rajesh Kumar Singh/AP
+            </span>
           </figcaption>
         </figure>
         <figure
@@ -10650,7 +10680,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
             <img
               alt="Hua Hin, Thailand A bird flies over the abandoned sculpture of a Buddhist monk in Cha-am outside Hua Hin, south of Bangkok"
-              className="js-launch-slideshow emotion-48"
+              className="js-launch-slideshow emotion-51"
               data-caption="<strong>Hua Hin, Thailand <br><br></strong>A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok"
               data-credit="Photograph: Mladen Antonov/AFP/Getty Images"
               data-ratio={0.6666666666666666}
@@ -10669,14 +10699,22 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                 points="0,9 5,0 10,9"
               />
             </svg>
-            <span>
+            <span
+              className="emotion-47"
+            >
               Hua Hin, Thailand
             </span>
-            <span>
+            <span
+              className="emotion-47"
+            >
               A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok
             </span>
-             
-            Photograph: Mladen Antonov/AFP/Getty Images
+            <span
+              className="emotion-49"
+            >
+               
+              Photograph: Mladen Antonov/AFP/Getty Images
+            </span>
           </figcaption>
         </figure>
         <figure
@@ -10694,7 +10732,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
             <img
               alt="Mulhouse, France A polar bear cub makes its first steps outside, in an enclosure at the Zoological and Botanical park in eastern France. The cub was born in November 2020"
-              className="js-launch-slideshow emotion-48"
+              className="js-launch-slideshow emotion-51"
               data-caption="<strong>Mulhouse, France</strong> <br><br>A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park"
               data-credit="Photograph: Sébastien Bozon/AFP/Getty Images"
               data-ratio={0.6666666666666666}
@@ -10713,14 +10751,22 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                 points="0,9 5,0 10,9"
               />
             </svg>
-            <span>
+            <span
+              className="emotion-47"
+            >
               Mulhouse, France
             </span>
-            <span>
+            <span
+              className="emotion-47"
+            >
               A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park
             </span>
-             
-            Photograph: Sébastien Bozon/AFP/Getty Images
+            <span
+              className="emotion-49"
+            >
+               
+              Photograph: Sébastien Bozon/AFP/Getty Images
+            </span>
           </figcaption>
         </figure>
       </section>
