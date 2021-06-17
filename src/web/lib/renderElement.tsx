@@ -372,9 +372,11 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveContentBlockElement':
 			return [
 				true,
-				<InteractiveContentBlockElement
-					subheadingLinks={element.subheadingLinks}
-				/>,
+				<div id={element.elementId}>
+					<InteractiveContentBlockElement
+						subheadingLinks={element.subheadingLinks}
+					/>
+				</div>,
 			];
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return [
@@ -726,6 +728,7 @@ const bareElements = new Set([
 	'model.dotcomrendering.pageElements.StarRatingBlockElement',
 	'model.dotcomrendering.pageElements.SubheadingBlockElement',
 	'model.dotcomrendering.pageElements.TextBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
 ]);
 
 // renderArticleElement is a wrapper for renderElement that wraps elements in a
