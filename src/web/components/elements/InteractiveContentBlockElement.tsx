@@ -140,10 +140,10 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 		false,
 	);
 
+	// Loop through subheadingLinks and add a reference + reverse each object
 	const [enhancedSubheadings, setEnhancedSubheadings] = useState<
 		EnhancedSubheadingType[]
 	>([]);
-
 	useEffect(() => {
 		setEnhancedSubheadings(
 			subheadingLinks
@@ -166,11 +166,15 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 		if (node) setHeight(node?.getBoundingClientRect().height);
 	}, []);
 
+	// The sticky header needs to be based on the section of the article that is being view
+	// We accomplish this by
+	// -> determine coordinates of each subheadingLink
+	// -> check current page scroll using `window.scrollY`
+	// -> set sticky Nav object based on scroll
 	const [
 		stickyNavCurrentHeader,
 		setStickyNavCurrentHeader,
 	] = useState<null | EnhancedSubheadingType>(null);
-
 	useEffect(() => {
 		const onScroll = libDebounce(() => {
 			const firstElementTop = enhancedSubheadings[
@@ -185,11 +189,11 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 				// stickyNavCurrentHeader should be null if we are before the 1st element on the page
 				(firstElementTop &&
 					window.scrollY <
-						firstElementTop + window.pageYOffset - 10) ||
+						firstElementTop + window.pageYOffset - 10) || // we use - 10 to add some slack to the heading
 				// stickyNavCurrentHeader should be null if we are past the bottom of the article
 				(articleBodyBottom &&
 					window.scrollY >
-						articleBodyBottom + window.pageYOffset - 10)
+						articleBodyBottom + window.pageYOffset - 10) // we use - 10 to add some slack to the heading
 			) {
 				setStickyNavCurrentHeader(null);
 			} else {
@@ -200,7 +204,7 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 					return (
 						topOfSubheading &&
 						window.scrollY >
-							topOfSubheading + window.pageYOffset - 10
+							topOfSubheading + window.pageYOffset - 10 // we use - 10 to add some slack to the heading
 					);
 				});
 				setStickyNavCurrentHeader(newSubheading || null);
@@ -215,6 +219,7 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 			<h2 css={headerStyles} data-ignore="global-h2-styling">
 				Contents
 			</h2>
+			{/* only show sticky nav header if defined */}
 			{stickyNavCurrentHeader && (
 				<button
 					css={[stickyNavBaseStyles, stickyNavCurrentHeaderStyles]}
@@ -234,6 +239,8 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 			<ol
 				css={[
 					olStyles,
+					// we detach `ol` from the container when `stickyNavCurrentHeader` is defined
+					// this allows us to reuse the list without redefining it
 					stickyNavCurrentHeader &&
 						stickyOlStyles(showStickyNavOption),
 				]}
