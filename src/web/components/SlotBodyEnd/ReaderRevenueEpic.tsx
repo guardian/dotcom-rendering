@@ -9,7 +9,7 @@ import {
 } from '@guardian/automat-client';
 import {
 	isRecurringContributor,
-	getLastOneOffContributionDate,
+	getLastOneOffContributionTimestamp,
 	shouldHideSupportMessaging,
 	hasCmpConsentForArticleCount,
 	getEmail,
@@ -106,7 +106,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 			isRecurringContributor: isRecurringContributor(
 				data.isSignedIn || false,
 			),
-			lastOneOffContributionDate: getLastOneOffContributionDate(),
+			lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 			epicViewLog: getViewLog(),
 			weeklyArticleHistory: getWeeklyArticleHistory(),
 			hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),

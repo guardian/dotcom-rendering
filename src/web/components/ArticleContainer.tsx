@@ -19,12 +19,6 @@ const articleContainer = css`
 
 const articleAdStyles = css`
 	.ad-slot {
-		width: 300px;
-		margin: 12px auto;
-		min-width: 160px;
-		min-height: 274px;
-		text-align: center;
-		position: relative;
 		@media print {
 			display: none !important;
 		}
@@ -39,6 +33,12 @@ const articleAdStyles = css`
 		}
 	}
 	.ad-slot--inline {
+		width: 300px;
+		margin: 12px auto;
+		min-width: 160px;
+		min-height: 274px;
+		text-align: center;
+
 		${from.tablet} {
 			margin-right: -100px;
 			width: auto;

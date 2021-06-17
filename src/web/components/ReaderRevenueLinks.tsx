@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
+import { space } from '@guardian/src-foundations';
 import {
 	brandText,
 	brandAlt,
@@ -12,6 +13,7 @@ import { textSans, headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import {
+	getLastOneOffContributionDate,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '@root/src/web/lib/contributions';
@@ -43,17 +45,22 @@ type Props = {
 };
 
 const headerStyles = css`
-	${until.mobileLandscape} {
-		padding-left: 10px;
-	}
-	${until.tablet} {
-		padding-top: 33px;
-	}
+	padding-top: 33px;
+	padding-left: 10px;
+	max-width: 310px;
+
 	${from.mobileLandscape} {
-		padding-left: 20px;
+		padding-left: ${space[5]}px;
 	}
-	${until.desktop} {
-		max-width: 310px;
+
+	${from.tablet} {
+		padding-top: ${space[1]}px;
+		padding-bottom: ${space[5]}px;
+		padding-left: ${space[5]}px;
+	}
+
+	${from.desktop} {
+		max-width: none;
 	}
 `;
 
@@ -197,6 +204,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(getCookie('GU_mvt_id')),
+				lastOneOffContributionDate: getLastOneOffContributionDate(),
 			},
 		};
 		fetch(`${contributionsServiceUrl}/header`, {
