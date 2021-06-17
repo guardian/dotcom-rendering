@@ -1,6 +1,10 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
+	core: {
+		builder: 'webpack5',
+	},
 	stories: ['../src/**/*.stories.@(tsx)'],
 	addons: ['@storybook/addon-essentials'],
 	webpackFinal: async (config) => {
@@ -11,15 +15,7 @@ module.exports = {
 		// https://storybook.js.org/docs/configurations/typescript-config/
 		rules.push({
 			test: /\.[jt]sx?|mjs$/,
-			exclude: [
-				{
-					test: /node_modules/,
-					exclude: [
-						/@guardian\/(?!(automat-modules))/,
-						/dynamic-import-polyfill/,
-					],
-				},
-			],
+			exclude: require('../scripts/webpack/browser').babelExclude,
 			use: [
 				{
 					loader: 'babel-loader',
@@ -65,6 +61,14 @@ module.exports = {
 			'@root': path.resolve(__dirname, '..'),
 			'@frontend': path.resolve(__dirname, '../src'),
 		};
+
+		// Required as otherwise 'process' will not be defined when included on its own (without .env)
+		// e.g process?.env?.SOME_VAR
+		config.plugins.push(
+			new webpack.DefinePlugin({
+				process: '{}',
+			}),
+		);
 
 		return config;
 	},

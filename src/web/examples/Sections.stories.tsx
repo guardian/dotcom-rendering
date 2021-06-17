@@ -6,9 +6,9 @@ import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Section } from '@frontend/web/components/Section';
 import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
+import { Lines } from '@guardian/src-ed-lines';
 import { Display, Pillar, Design } from '@guardian/types';
 
 import {
@@ -21,7 +21,6 @@ import {
 } from '@guardian/src-foundations/palette';
 
 import { NAV, pageFooter } from './Example.mocks';
-import { decidePalette } from '../lib/decidePalette';
 
 const Grey = ({
 	heightInPixels = 400,
@@ -85,14 +84,7 @@ export const Sections = (): React.ReactNode => (
 			showTopBorder={false}
 			showSideBorders={true}
 		>
-			<GuardianLines
-				count={4}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-			/>
+			<Lines count={4} effect="straight" />
 		</Section>
 		<ContainerLayout
 			showTopBorder={false}
@@ -139,14 +131,7 @@ export const Sections = (): React.ReactNode => (
 			padded={false}
 			showTopBorder={false}
 		>
-			<GuardianLines
-				count={4}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-			/>
+			<Lines count={4} effect="straight" />
 		</Section>
 		<Section
 			padded={false}

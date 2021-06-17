@@ -40,15 +40,28 @@ export default {
 	},
 };
 
-const convertToImmersive = (CAPI: CAPIType) => {
-	return {
-		...CAPI,
-		format: {
-			...CAPI.format,
-			display: 'ImmersiveDisplay' as CAPIDisplay,
-		},
-	};
-};
+function isImageBlockElement(block: CAPIElement): block is ImageBlockElement {
+	return (
+		block._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
+	);
+}
+
+const convertToImmersive = (CAPI: CAPIType) => ({
+	...CAPI,
+	format: {
+		...CAPI.format,
+		display: 'ImmersiveDisplay' as CAPIDisplay,
+	},
+	mainMediaElements: CAPI.mainMediaElements.map((el) => {
+		if (isImageBlockElement(el)) {
+			return {
+				...el,
+				role: 'immersive' as RoleType,
+			};
+		}
+		return el;
+	}),
+});
 
 // HydratedLayout is used here to simulated the hydration that happens after we init react on
 // the client. We need a separate component so that we can make use of useEffect to ensure

@@ -7,6 +7,7 @@ import { space } from '@guardian/src-foundations';
 import { Hide } from '@frontend/web/components/Hide';
 import { Display, Design, Special } from '@guardian/types';
 import { Badge } from '@frontend/web/components/Badge';
+import { interactiveLegacyClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	format: Format;
@@ -376,6 +377,7 @@ export const SeriesSectionLink = ({
 					]}
 					data-component="section"
 					data-link-name="article section"
+					className={interactiveLegacyClasses.labelLink}
 				>
 					<span>{sectionLabel}</span>
 				</a>

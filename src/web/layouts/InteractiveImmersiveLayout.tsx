@@ -8,8 +8,8 @@ import {
 	brandLine,
 } from '@guardian/src-foundations/palette';
 import { Display, Format, Special } from '@guardian/types';
+import { Lines } from '@guardian/src-ed-lines';
 
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { Section } from '@root/src/web/components/Section';
@@ -25,7 +25,7 @@ import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { interactiveGlobalStyles } from './lib/interactiveGlobalStyles';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 
 interface Props {
 	CAPI: CAPIType;
@@ -61,7 +61,12 @@ const Renderer: React.FC<{
 		});
 
 		return ok ? (
-			<figure id={'id' in element ? element.id : undefined}>{el}</figure>
+			<figure
+				id={'elementId' in element ? element.elementId : undefined}
+				key={index}
+			>
+				{el}
+			</figure>
 		) : null;
 	});
 
@@ -245,7 +250,7 @@ export const InteractiveImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

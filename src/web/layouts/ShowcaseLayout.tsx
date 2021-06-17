@@ -9,7 +9,6 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
@@ -49,6 +48,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { Lines } from '@guardian/src-ed-lines';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -326,7 +326,7 @@ export const ShowcaseLayout = ({
 							padded={false}
 							showTopBorder={false}
 						>
-							<GuardianLines count={4} palette={palette} />
+							<Lines count={4} effect="straight" />
 						</Section>
 					</SendToBack>
 				</div>
@@ -455,9 +455,8 @@ export const ShowcaseLayout = ({
 					<GridItem area="lines">
 						<div css={maxWidth}>
 							<div css={stretchLines}>
-								<GuardianLines
+								<Lines
 									count={decideLineCount(format.design)}
-									palette={palette}
 									effect={decideLineEffect(
 										format.design,
 										format.theme,
@@ -496,7 +495,7 @@ export const ShowcaseLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} palette={palette} />
+								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -613,7 +612,7 @@ export const ShowcaseLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 
