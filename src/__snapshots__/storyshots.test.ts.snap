@@ -6328,17 +6328,53 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   margin: 0;
   position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 .emotion-6 {
-  width: 100vw;
-  height: calc(100vw * 0.6);
+  width: 740px;
+  height: calc(740px * 0.6);
   background-color: #333333;
   color: #999999;
   display: block;
-  display: block;
-  width: 100%;
-  height: calc(100vw * 0.6);
+  height: 414px;
+  width: 690px;
+}
+
+@media (min-width: 320px) {
+  .emotion-6 {
+    width: 980px;
+    height: calc(980px * 0.6);
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-6 {
+    width: 100vw;
+    height: calc(100vw * 0.6);
+  }
+}
+
+width:@media (min-width: 320px) {
+  .emotion-6 {
+    height: 536;
+    width: 893.3333333333334px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-6 {
+    height: calc(100vw / 1.6666666666666667);
+    max-width: 100%;
+  }
 }
 
 .emotion-7 {
@@ -6870,11 +6906,11 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="100vw"
+                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="100vw"
+                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -7199,17 +7235,53 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   margin: 0;
   position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 .emotion-5 {
-  width: 100vw;
-  height: calc(100vw * 0.6);
+  width: 740px;
+  height: calc(740px * 0.6);
   background-color: #F6F6F6;
   color: #999999;
   display: block;
-  display: block;
-  width: 100%;
-  height: calc(100vw * 0.6);
+  height: 414px;
+  width: 690px;
+}
+
+@media (min-width: 320px) {
+  .emotion-5 {
+    width: 980px;
+    height: calc(980px * 0.6);
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-5 {
+    width: 100vw;
+    height: calc(100vw * 0.6);
+  }
+}
+
+width:@media (min-width: 320px) {
+  .emotion-5 {
+    height: 536;
+    width: 893.3333333333334px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-5 {
+    height: calc(100vw / 1.6666666666666667);
+    max-width: 100%;
+  }
 }
 
 .emotion-6 {
@@ -8080,11 +8152,11 @@ exports[`Storyshots Editions/Article Interview 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="100vw"
+                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="100vw"
+                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -14477,17 +14549,53 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   margin: 0;
   position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 .emotion-1 {
-  width: 100vw;
-  height: calc(100vw * 0.6);
+  width: 740px;
+  height: calc(740px * 0.6);
   background-color: #F6F6F6;
   color: #999999;
   display: block;
-  display: block;
-  width: 100%;
-  height: calc(100vw * 0.6);
+  height: 414px;
+  width: 690px;
+}
+
+@media (min-width: 320px) {
+  .emotion-1 {
+    width: 980px;
+    height: calc(980px * 0.6);
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-1 {
+    width: 100vw;
+    height: calc(100vw * 0.6);
+  }
+}
+
+width:@media (min-width: 320px) {
+  .emotion-1 {
+    height: 536;
+    width: 893.3333333333334px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-1 {
+    height: calc(100vw / 1.6666666666666667);
+    max-width: 100%;
+  }
 }
 
 .emotion-2 {
@@ -14570,11 +14678,11 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   <picture>
     <source
       media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-      sizes="100vw"
+      sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
     />
     <source
-      sizes="100vw"
+      sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
     />
     <img

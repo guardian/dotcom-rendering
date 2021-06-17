@@ -38,6 +38,9 @@ const fullWidthStyles = css`
 	margin: 0;
 	position: relative;
 	width: 100%;
+	display: flex;
+	justify-content: center;
+	overflow-x: hidden;
 `;
 
 const captionStyles = css`
@@ -70,11 +73,24 @@ const getImageStyle = (
 	{ width, height }: Image,
 	format: Format,
 ): SerializedStyles => {
+	const aspectRatio = width / height;
+	const fixedSmMobileHeight = 414;
+	const fixedLgMobileHeight = 536;
+
 	if (isFullWidthImage(format)) {
 		return css`
-			display: block;
-			width: 100%;
-			height: calc(100vw * ${height / width});
+			height: ${fixedSmMobileHeight}px;
+			width: ${fixedSmMobileHeight * aspectRatio}px;
+
+			width: ${from.mobile} {
+				height: ${fixedLgMobileHeight};
+				width: ${fixedLgMobileHeight * aspectRatio}px;
+			}
+
+			${from.tablet} {
+				height: calc(100vw / ${aspectRatio});
+				max-width: 100%;
+			}
 		`;
 	}
 	return css`
@@ -125,8 +141,11 @@ const sizes: Sizes = {
 };
 
 const fullWidthSizes: Sizes = {
-	mediaQueries: [],
-	default: '100vw',
+	mediaQueries: [
+		{ breakpoint: 'mobile', size: '980px' },
+		{ breakpoint: 'tablet', size: '100vw' },
+	],
+	default: '740px',
 };
 
 const HeaderMedia: FC<Props> = ({ item }) => {
