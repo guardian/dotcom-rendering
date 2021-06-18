@@ -64,7 +64,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 		return updatedElements;
 	}
 
-	return updatedElements;
+	return updatedElements.length ? updatedElements : elements;
 };
 
 export const enhanceInteractiveContentElements = (data: CAPIType): CAPIType => {
