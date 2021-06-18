@@ -72,7 +72,7 @@ export const interactiveGlobalStyles = css`
 
 		.inline-icon {
 			background-color: transparent;
-			border: 1px solid #dcdcdc;
+			border: 1px solid #dcdcdc; /* stylelint-disable-line */
 			transition: fill 0.3s ease, background-color 0.3s ease;
 		}
 
