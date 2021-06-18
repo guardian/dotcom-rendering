@@ -87,7 +87,7 @@ const avatarWrapperStyles = css`
 
 // ----- Byline Component Styles ----- //
 
-const styles = (kickerColor: string): SerializedStyles => {
+const styles = (iconColor: string): SerializedStyles => {
 	return css`
 		position: relative;
 		display: flex;
@@ -99,11 +99,11 @@ const styles = (kickerColor: string): SerializedStyles => {
 			height: 1.875rem;
 
 			circle {
-				stroke: ${kickerColor};
+				stroke: ${iconColor};
 			}
 
 			path {
-				fill: ${kickerColor};
+				fill: ${iconColor};
 			}
 		}
 
@@ -141,7 +141,7 @@ const standardTextStyles = (
 
 const bylinePrimaryStyles = (format: Format): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
-	const color = ignoreKickerColour(format) ? neutral[100] : kickerColor;
+	const color = ignoreTextColour(format) ? neutral[100] : kickerColor;
 
 	if (format.design === Design.Analysis || format.design === Design.Comment) {
 		return css`
@@ -157,7 +157,7 @@ const bylinePrimaryStyles = (format: Format): SerializedStyles => {
 };
 
 const bylineSecondaryStyles = (format: Format): SerializedStyles => {
-	const color = ignoreKickerColour(format) ? neutral[100] : neutral[7];
+	const color = ignoreTextColour(format) ? neutral[100] : neutral[7];
 
 	if (format.design === Design.Analysis || format.design === Design.Comment) {
 		return css`
@@ -173,25 +173,25 @@ const bylineSecondaryStyles = (format: Format): SerializedStyles => {
 
 const getBylineStyles = (
 	format: Format,
-	kickerColor: string,
+	iconColor: string,
 ): SerializedStyles => {
 	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
-		return css(styles(kickerColor), immersiveStyles);
+		return css(styles(iconColor), immersiveStyles);
 	}
 	if (format.design === Design.Interview) {
-		return css(styles(kickerColor), interviewStyles);
+		return css(styles(iconColor), interviewStyles);
 	}
 	if (format.design === Design.Comment) {
-		return css(styles(kickerColor), commentStyles);
+		return css(styles(iconColor), commentStyles);
 	}
 	if (format.display === Display.Showcase) {
-		return css(styles(kickerColor), showcaseStyles);
+		return css(styles(iconColor), showcaseStyles);
 	}
 	if (format.design === Design.Media) {
-		return css(styles(kickerColor), galleryStyles);
+		return css(styles(iconColor), galleryStyles);
 	}
-	return styles(kickerColor);
+	return styles(iconColor);
 };
 
 // ----- Component ----- //
@@ -225,17 +225,20 @@ const hasShareIcon = (format: Format): boolean =>
 const hasAvatar = (item: Item): boolean => {
 	return item.design === Design.Comment && item.contributors.length > 0;
 };
-const ignoreKickerColour = (format: Format): boolean =>
+const ignoreIconColour = (format: Format): boolean =>
+	format.design === Design.Media;
+
+const ignoreTextColour = (format: Format): boolean =>
 	format.design === Design.Media || format.display === Display.Immersive;
 
 const Byline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
-	const bylineColor = ignoreKickerColour(format) ? neutral[100] : kickerColor;
+	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getBylineStyles(format, bylineColor)}>
+		<div css={getBylineStyles(format, iconColor)}>
 			<address>{renderText(byline, format)}</address>
 			{hasShareIcon(format) && (
 				<span className="js-share-button" role="button">
