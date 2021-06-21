@@ -122,7 +122,7 @@ const anchorStyles = css`
 `;
 
 const headingWrapperStyles = css`
-	padding: ${remSpace[3]};
+	padding: 2px ${remSpace[2]} ${remSpace[3]};
 	min-height: 10rem;
 `;
 
