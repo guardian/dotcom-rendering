@@ -333,6 +333,12 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const formatForNav = format.theme === Special.Labs ? format : {
+		...format,
+		theme: getCurrentPillar(CAPI),
+	}
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -380,10 +386,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			>
 				<Nav
 					nav={NAV}
-					format={{
-						...format,
-						theme: getCurrentPillar(CAPI),
-					}}
+					format={formatForNav}
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
 				/>
