@@ -88,13 +88,13 @@ export const lineStyles = css`
 
 export const onwardStyles: SerializedStyles = css`
 	background: ${neutral[97]};
-	margin: 0 ${remSpace[3]} ${remSpace[3]};
+	margin: 0 ${remSpace[3]};
 
 	${darkModeCss`
         background: ${background.inverse};
     `};
 
-	padding: 2px 0 ${remSpace[6]} 0;
+	padding: 2px 0 0;
 	${from.wide} {
 		width: 1300px;
 		margin-left: auto;

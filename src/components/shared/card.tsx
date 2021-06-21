@@ -92,6 +92,7 @@ const timeStyles = (type: RelatedItemType): SerializedStyles => {
 				text-align: right;
 				display: inline-block;
 				vertical-align: top;
+				font-weight: 700;
 			`;
 		}
 		default:
@@ -101,6 +102,7 @@ const timeStyles = (type: RelatedItemType): SerializedStyles => {
 				text-align: right;
 				display: inline-block;
 				vertical-align: top;
+				font-weight: 700;
 			`;
 	}
 };
@@ -322,8 +324,7 @@ const quotationComment = (
 };
 
 const metadataStyles: SerializedStyles = css`
-	padding: 0 ${remSpace[3]};
-	min-height: 2rem;
+	padding: 0 ${remSpace[2]} ${remSpace[1]};
 `;
 
 const bylineStyles: SerializedStyles = css`
