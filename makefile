@@ -164,3 +164,6 @@ perf-test:
 
 arch-diagram:
 	@npx arkit
+
+snyk:
+	@snyk wizard

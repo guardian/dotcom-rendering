@@ -20,6 +20,7 @@ node_modules/
 !/cypress/**/*.ts
 !/scripts/**/*.js
 !/.storybook/**/*.js
+!package.json
 
 # Ignore specific files
 /**/*/curl-with-js-and-domReady.js
