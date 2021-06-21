@@ -334,10 +334,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
-	const formatForNav = format.theme === Special.Labs ? format : {
-		...format,
-		theme: getCurrentPillar(CAPI),
-	}
+	const formatForNav =
+		format.theme === Special.Labs
+			? format
+			: {
+					...format,
+					theme: getCurrentPillar(CAPI),
+			  };
 
 	return (
 		<>
