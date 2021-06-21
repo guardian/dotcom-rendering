@@ -54,7 +54,10 @@ const makeWindowGuardianConfig = (
 			adUnit: config.adUnit,
 			showRelatedContent: true,
 			ajaxUrl: config.ajaxUrl,
-			hbImpl: config.hbImpl,
+			hbImpl: {
+				prebid: config.switches.prebidHeaderBidding,
+				a9: config.switches.a9HeaderBidding,
+			},
 		}),
 		libs: {
 			googletag: config.googletagUrl,

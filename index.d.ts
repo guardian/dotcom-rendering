@@ -672,7 +672,6 @@ interface ConfigType extends CommercialConfigType {
 	googletagUrl: string;
 	stage: string;
 	frontendAssetsFullURL: string;
-	hbImpl: { [key: string]: any } | string;
 	adUnit: string;
 	isSensitive: boolean;
 	videoDuration?: number;
