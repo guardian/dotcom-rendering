@@ -91,6 +91,7 @@ export const Writers = (): React.ReactNode => (
 				nav={NAV}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>
 		</Section>
 		<Section

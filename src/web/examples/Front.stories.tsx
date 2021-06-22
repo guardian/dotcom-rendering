@@ -67,6 +67,7 @@ export const Front = () => (
 				nav={NAV}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>
 		</Section>
 		<Section

@@ -32,6 +32,7 @@ export const StandardStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>
 		</Section>
 	);
@@ -56,6 +57,7 @@ export const OpinionStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>
 		</Section>
 	);
@@ -80,6 +82,7 @@ export const ImmersiveStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>
 		</Section>
 	);

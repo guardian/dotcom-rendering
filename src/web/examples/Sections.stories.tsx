@@ -76,6 +76,7 @@ export const Sections = (): React.ReactNode => (
 				nav={NAV}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>
 		</Section>
 		<Section

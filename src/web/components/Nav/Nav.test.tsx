@@ -15,6 +15,7 @@ describe('Nav', () => {
 				}}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>,
 		);
 		const list = within(getByTestId('pillar-list'));
@@ -36,6 +37,7 @@ describe('Nav', () => {
 				nav={nav}
 				subscribeUrl=""
 				edition="UK"
+				pillar={Pillar.News}
 			/>,
 		);
 
