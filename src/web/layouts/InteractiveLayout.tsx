@@ -238,6 +238,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const pillar = getCurrentPillar(CAPI);
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -286,12 +289,10 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			>
 				<Nav
 					nav={NAV}
-					format={{
-						...format,
-						theme: getCurrentPillar(CAPI),
-					}}
+					format={format}
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
+					pillar={pillar}
 				/>
 			</Section>
 
@@ -537,7 +538,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
 						isCommentable={CAPI.isCommentable}
-						pillar={format.theme}
+						pillar={pillar}
 						palette={palette}
 						discussionD2Uid={CAPI.config.discussionD2Uid}
 						discussionApiClientHeader={
@@ -603,7 +604,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={format.theme}
+					pillar={pillar}
 					pillars={NAV.pillars}
 				/>
 			</Section>

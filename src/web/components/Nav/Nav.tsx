@@ -21,6 +21,7 @@ type Props = {
 	nav: NavType;
 	subscribeUrl: string;
 	edition: Edition;
+	pillar: Pillar;
 };
 
 const clearFixStyle = css`
@@ -65,7 +66,7 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
+export const Nav = ({ format, nav, subscribeUrl, edition, pillar }: Props) => {
 	const displayRoundel =
 		format.display === Display.Immersive || format.theme === Special.Labs;
 
@@ -209,7 +210,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 				<Pillars
 					display={format.display}
 					pillars={nav.pillars}
-					pillar={format.theme}
+					pillar={pillar}
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>

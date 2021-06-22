@@ -334,13 +334,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
-	const formatForNav =
-		format.theme === Special.Labs
-			? format
-			: {
-					...format,
-					theme: getCurrentPillar(CAPI),
-			  };
+	const pillar = getCurrentPillar(CAPI);
 
 	return (
 		<>
@@ -389,9 +383,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			>
 				<Nav
 					nav={NAV}
-					format={formatForNav}
+					format={format}
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
+					pillar={pillar}
 				/>
 			</Section>
 
@@ -665,7 +660,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
 						isCommentable={CAPI.isCommentable}
-						pillar={format.theme}
+						pillar={pillar}
 						palette={palette}
 						discussionD2Uid={CAPI.config.discussionD2Uid}
 						discussionApiClientHeader={
@@ -730,7 +725,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={format.theme}
+					pillar={pillar}
 					pillars={NAV.pillars}
 				/>
 			</Section>

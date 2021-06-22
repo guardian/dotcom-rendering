@@ -296,6 +296,8 @@ export const ImmersiveLayout = ({
 		</div>
 	);
 
+	const pillar = getCurrentPillar(CAPI);
+
 	return (
 		<>
 			<div
@@ -325,15 +327,13 @@ export const ImmersiveLayout = ({
 							backgroundColour={brandBackground.primary}
 						>
 							<Nav
-								format={{
-									...format,
-									theme: getCurrentPillar(CAPI),
-								}}
+								format={format}
 								nav={NAV}
 								subscribeUrl={
 									CAPI.nav.readerRevenueLinks.header.subscribe
 								}
 								edition={CAPI.editionId}
+								pillar={pillar}
 							/>
 						</Section>
 					</header>
@@ -635,7 +635,7 @@ export const ImmersiveLayout = ({
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
 						isCommentable={CAPI.isCommentable}
-						pillar={format.theme}
+						pillar={pillar}
 						palette={palette}
 						discussionD2Uid={CAPI.config.discussionD2Uid}
 						discussionApiClientHeader={
@@ -686,7 +686,7 @@ export const ImmersiveLayout = ({
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={format.theme}
+					pillar={pillar}
 					pillars={NAV.pillars}
 				/>
 			</Section>
