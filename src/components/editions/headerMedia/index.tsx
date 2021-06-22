@@ -89,7 +89,7 @@ const getImageStyle = (
 
 			${from.tablet} {
 				height: calc(100vw / ${aspectRatio});
-				max-width: 100%;
+				width: 100vw;
 			}
 		`;
 	}
@@ -122,8 +122,18 @@ const getCaptionStyles = (format: Format): SerializedStyles => {
 	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
 };
 
-const getImageSizes = (format: Format): Sizes => {
-	return isFullWidthImage(format) ? fullWidthSizes : sizes;
+const getImageSizes = (format: Format, image: Image): Sizes => {
+	if (isFullWidthImage(format)) {
+		return {
+			mediaQueries: [],
+			default: `${(100 * image.width) / image.height}vh `,
+		};
+	}
+
+	return {
+		mediaQueries: [{ breakpoint: 'wide', size: '620px' }],
+		default: '100vw',
+	};
 };
 
 // ----- Component ----- //
@@ -131,22 +141,6 @@ const getImageSizes = (format: Format): Sizes => {
 interface Props {
 	item: Item;
 }
-
-const sizes: Sizes = {
-	mediaQueries: [
-		{ breakpoint: 'tablet', size: '740px' },
-		{ breakpoint: 'wide', size: '980px' },
-	],
-	default: '100vw',
-};
-
-const fullWidthSizes: Sizes = {
-	mediaQueries: [
-		{ breakpoint: 'mobile', size: '980px' },
-		{ breakpoint: 'tablet', size: '100vw' },
-	],
-	default: '740px',
-};
 
 const HeaderMedia: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
@@ -179,7 +173,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 					})}
 					<Img
 						image={image}
-						sizes={getImageSizes(format)}
+						sizes={getImageSizes(format, image)}
 						format={item}
 						className={some(getImageStyle(image, format))}
 						supportsDarkMode={false}
