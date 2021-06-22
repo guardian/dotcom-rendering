@@ -7,7 +7,7 @@ import {
 	border,
 	brandLine,
 } from '@guardian/src-foundations/palette';
-import { Display, Format, Special } from '@guardian/types';
+import { Format, Special } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
 
 import { Footer } from '@root/src/web/components/Footer';
@@ -80,6 +80,8 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !CAPI.config.switches.interactiveFullHeaderSwitch;
 
+	const pillar = getCurrentPillar(CAPI);
+
 	if (isSlimNav) {
 		return (
 			<header
@@ -96,16 +98,13 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					backgroundColour={brandBackground.primary}
 				>
 					<Nav
-						format={{
-							display: format.display,
-							design: format.design,
-							theme: getCurrentPillar(CAPI),
-						}}
+						format={format}
 						nav={NAV}
 						subscribeUrl={
 							CAPI.nav.readerRevenueLinks.header.subscribe
 						}
 						edition={CAPI.editionId}
+						pillar={pillar}
 					/>
 				</Section>
 			</header>
@@ -156,14 +155,11 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 				backgroundColour={brandBackground.primary}
 			>
 				<Nav
-					format={{
-						display: Display.Standard,
-						design: format.design,
-						theme: getCurrentPillar(CAPI),
-					}}
+					format={format}
 					nav={NAV}
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
+					pillar={pillar}
 				/>
 			</Section>
 
@@ -193,6 +189,8 @@ export const InteractiveImmersiveLayout = ({
 	const {
 		config: { host },
 	} = CAPI;
+
+	const pillar = getCurrentPillar(CAPI);
 
 	return (
 		<>
@@ -262,7 +260,7 @@ export const InteractiveImmersiveLayout = ({
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}
-					pillar={format.theme}
+					pillar={pillar}
 					pillars={NAV.pillars}
 				/>
 			</Section>
