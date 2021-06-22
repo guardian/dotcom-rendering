@@ -55,7 +55,6 @@ const listStyles = (
 		background: white;
 		margin-right: ${remSpace[3]};
 		flex: 0 0 15rem;
-		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -121,23 +120,26 @@ const anchorStyles = css`
 	${darkModeCss`
         color: ${neutral[86]};
     `}
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 `;
 
 const headingWrapperStyles = css`
-	padding: 2px ${remSpace[2]} ${remSpace[3]};
-	min-height: 10rem;
+	padding: 2px ${remSpace[2]} ${remSpace[4]};
+	flex-grow: 1;
 `;
 
 const headingStyles = (type: RelatedItemType): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
 		return css`
 			${textSans.medium({ lineHeight: 'regular' })}
-			margin: 0 0 ${remSpace[3]} 0;
+			margin: 0;
 		`;
 	} else {
 		return css`
 			${headline.xxsmall()}
-			margin: 0 0 ${remSpace[3]} 0;
+			margin: 0;
 		`;
 	}
 };
@@ -252,6 +254,7 @@ const cardStyles = (
 
 const parentIconStyles: SerializedStyles = css`
 	display: inline-block;
+	line-height: 1;
 	svg {
 		width: 1rem;
 		height: auto;
