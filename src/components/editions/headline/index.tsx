@@ -9,7 +9,7 @@ import type {
 } from '@guardian/src-foundations/dist/types/typography/types';
 import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
-import { headline, titlepiece } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
 import { Design, Display } from '@guardian/types';
@@ -19,7 +19,14 @@ import { getFormat } from 'item';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import Series from '../series';
-import { articleWidthStyles } from '../styles';
+import {
+	articleWidthStyles,
+	tabletContentWidth,
+	wideContentWidth,
+} from '../styles';
+
+const wide = wideContentWidth + 12;
+const tablet = tabletContentWidth + 12;
 
 // ----- Template Format Specific Styles ----- //
 
@@ -36,14 +43,24 @@ const commentStyles = css`
 `;
 
 const galleryStyles = css`
-	${titlepiece.small()}
-	font-size: 2rem;
-	line-height: 1.2;
+	${headline.xsmall()}
+	box-sizing: border-box;
 	padding-bottom: ${remSpace[6]};
 	background-color: ${neutral[7]};
-	border: 0;
+	border: none;
+	${from.mobileMedium} {
+		${headline.medium()}
+	}
+	${from.tablet} {
+		${headline.large()}
+		width: ${tablet}px;
+		padding-right: ${remSpace[4]};
+		border-right: 1px solid ${neutral[100]};
+	}
 
-	${articleWidthStyles}
+	${from.desktop} {
+		width: ${wide}px;
+	}
 `;
 
 const headlineWrapperStyles = css`
