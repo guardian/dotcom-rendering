@@ -273,6 +273,7 @@ const iconStyles = (format: Format): SerializedStyles => {
 		display: inline-block;
 		background-color: ${inverted};
 		border-radius: 50%;
+		margin-top: -4px;
 	`;
 };
 
@@ -328,6 +329,7 @@ const quotationComment = (
 
 const metadataStyles: SerializedStyles = css`
 	padding: 0 ${remSpace[2]} ${remSpace[1]};
+	height: ${remSpace[6]};
 `;
 
 const bylineStyles: SerializedStyles = css`
