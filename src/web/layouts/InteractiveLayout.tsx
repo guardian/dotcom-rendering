@@ -49,7 +49,7 @@ import {
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import {
-	interactiveGlobalStyles,
+	interactiveLegacyGlobalStyles,
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
 
@@ -242,7 +242,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		<>
 			<div data-print-layout="hide">
 				{CAPI.isLegacyInteractive && (
-					<Global styles={interactiveGlobalStyles} />
+					<Global styles={interactiveLegacyGlobalStyles} />
 				)}
 				<>
 					<Stuck>

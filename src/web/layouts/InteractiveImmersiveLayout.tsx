@@ -25,7 +25,7 @@ import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
+import { interactiveLegacyGlobalStyles } from './lib/interactiveLegacyStyling';
 
 interface Props {
 	CAPI: CAPIType;
@@ -197,7 +197,7 @@ export const InteractiveImmersiveLayout = ({
 	return (
 		<>
 			{CAPI.isLegacyInteractive && (
-				<Global styles={interactiveGlobalStyles} />
+				<Global styles={interactiveLegacyGlobalStyles} />
 			)}
 			<div
 				css={css`
