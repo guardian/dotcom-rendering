@@ -243,7 +243,7 @@ const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const LetterHeader: FC<HeaderProps> = ({ item }) => (
-	<header>
+	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Series item={item} />
 		<Headline item={item} />
