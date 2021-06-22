@@ -344,17 +344,10 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -1192,11 +1185,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -1589,17 +1582,10 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -2449,11 +2435,11 @@ exports[`Storyshots Editions/Article Comment 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -2876,17 +2862,10 @@ exports[`Storyshots Editions/Article Default 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -3645,11 +3624,11 @@ exports[`Storyshots Editions/Article Default 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -4037,17 +4016,10 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -4824,11 +4796,11 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -5221,17 +5193,10 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -5990,11 +5955,11 @@ exports[`Storyshots Editions/Article Feature 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -6340,27 +6305,13 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 }
 
 .emotion-6 {
-  width: 740px;
-  height: calc(740px * 0.6);
+  width: 166.66666666666666vh;
+  height: calc(166.66666666666666vh  * 0.6);
   background-color: #333333;
   color: #999999;
   display: block;
   height: 414px;
   width: 690px;
-}
-
-@media (min-width: 320px) {
-  .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
-  }
-}
-
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 100vw;
-    height: calc(100vw * 0.6);
-  }
 }
 
 width:@media (min-width: 320px) {
@@ -6373,7 +6324,7 @@ width:@media (min-width: 320px) {
 @media (min-width: 740px) {
   .emotion-6 {
     height: calc(100vw / 1.6666666666666667);
-    max-width: 100%;
+    width: 100vw;
   }
 }
 
@@ -6922,11 +6873,11 @@ width:@media (min-width: 320px) {
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -7263,27 +7214,13 @@ exports[`Storyshots Editions/Article Interview 1`] = `
 }
 
 .emotion-5 {
-  width: 740px;
-  height: calc(740px * 0.6);
+  width: 166.66666666666666vh;
+  height: calc(166.66666666666666vh  * 0.6);
   background-color: #F6F6F6;
   color: #999999;
   display: block;
   height: 414px;
   width: 690px;
-}
-
-@media (min-width: 320px) {
-  .emotion-5 {
-    width: 980px;
-    height: calc(980px * 0.6);
-  }
-}
-
-@media (min-width: 740px) {
-  .emotion-5 {
-    width: 100vw;
-    height: calc(100vw * 0.6);
-  }
 }
 
 width:@media (min-width: 320px) {
@@ -7296,7 +7233,7 @@ width:@media (min-width: 320px) {
 @media (min-width: 740px) {
   .emotion-5 {
     height: calc(100vw / 1.6666666666666667);
-    max-width: 100%;
+    width: 100vw;
   }
 }
 
@@ -8168,11 +8105,11 @@ width:@media (min-width: 320px) {
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -8571,17 +8508,10 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -9320,11 +9250,11 @@ exports[`Storyshots Editions/Article Letter 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -9939,17 +9869,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-27 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-27 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -10537,11 +10460,11 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -10959,17 +10882,10 @@ exports[`Storyshots Editions/Article Review 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -11764,11 +11680,11 @@ exports[`Storyshots Editions/Article Review 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -12265,17 +12181,10 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-8 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-8 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -13021,11 +12930,11 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -14591,27 +14500,13 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
 }
 
 .emotion-1 {
-  width: 740px;
-  height: calc(740px * 0.6);
+  width: 166.66666666666666vh;
+  height: calc(166.66666666666666vh  * 0.6);
   background-color: #F6F6F6;
   color: #999999;
   display: block;
   height: 414px;
   width: 690px;
-}
-
-@media (min-width: 320px) {
-  .emotion-1 {
-    width: 980px;
-    height: calc(980px * 0.6);
-  }
-}
-
-@media (min-width: 740px) {
-  .emotion-1 {
-    width: 100vw;
-    height: calc(100vw * 0.6);
-  }
 }
 
 width:@media (min-width: 320px) {
@@ -14624,7 +14519,7 @@ width:@media (min-width: 320px) {
 @media (min-width: 740px) {
   .emotion-1 {
     height: calc(100vw / 1.6666666666666667);
-    max-width: 100%;
+    width: 100vw;
   }
 }
 
@@ -14708,11 +14603,11 @@ width:@media (min-width: 320px) {
   <picture>
     <source
       media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-      sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
+      sizes="166.66666666666666vh "
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
     />
     <source
-      sizes="(min-width: 320px) 980px, (min-width: 740px) 100vw, 740px"
+      sizes="166.66666666666666vh "
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
     />
     <img
@@ -14777,17 +14672,10 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-1 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-1 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -14883,11 +14771,11 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   <picture>
     <source
       media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
     />
     <source
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
     />
     <img
@@ -14981,17 +14869,10 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-1 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-1 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -15123,11 +15004,11 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   <picture>
     <source
       media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
     />
     <source
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
     />
     <img
