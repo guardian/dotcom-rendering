@@ -53,12 +53,16 @@ const listStyles = (
 ): SerializedStyles => {
 	return css`
 		background: white;
-		margin-right: ${remSpace[3]};
+		margin-right: ${remSpace[2]};
 		flex: 0 0 42vw;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		border-top: ${borderColor(type, format)};
+
+		&:last-of-type {
+			margin-right: 0;
+		}
 
 		&.fade {
 			opacity: 0.7;
