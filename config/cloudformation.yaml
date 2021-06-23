@@ -182,7 +182,8 @@ Resources:
           PropagateAtLaunch: true
           Value: !Ref App
       # VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-Subnets]
-      VPCZoneIdentifier: subnet-bf5ba6da
+      VPCZoneIdentifier:
+        - subnet-bf5ba6da
 
   DistributionInstanceProfile:
     Type: AWS::IAM::InstanceProfile
