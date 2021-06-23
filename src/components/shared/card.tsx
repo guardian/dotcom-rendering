@@ -71,12 +71,11 @@ const listStyles = (
         `}
 
 		${from.tablet} {
-			flex-basis: 160px;
 			margin-right: ${remSpace[5]};
 		}
 
 		${from.desktop} {
-			flex-basis: 220px;
+			max-width: 220px;
 		}
 
 		&:last-of-type {

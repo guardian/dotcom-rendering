@@ -40,6 +40,7 @@ const listStyles = css`
 	.js-android & {
 		li {
 			flex: 1 1 50%;
+			max-width: initial;
 		}
 		li:nth-child(n + 3) {
 			display: none;
