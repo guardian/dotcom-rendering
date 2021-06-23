@@ -60,6 +60,7 @@ const listStyles = (
 		flex-direction: column;
 		justify-content: space-between;
 		border-top: ${borderColor(type, format)};
+		max-width: 160px;
 
 		&.fade {
 			opacity: 0.7;
