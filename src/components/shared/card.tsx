@@ -154,8 +154,12 @@ const headingStyles = (type: RelatedItemType): SerializedStyles => {
 		`;
 	} else {
 		return css`
-			${headline.xxsmall()}
+			${headline.xxxsmall()}
 			margin: 0;
+
+			${from.tablet} {
+				${headline.xxsmall()}
+			}
 		`;
 	}
 };
