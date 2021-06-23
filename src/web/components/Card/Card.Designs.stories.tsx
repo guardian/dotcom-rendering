@@ -159,6 +159,15 @@ const Recipe = Format(
 	'Recipe',
 );
 
+const Analysis = Format(
+	{
+		display: Display.Standard,
+		theme: Pillar.News,
+		design: Design.Analysis,
+	},
+	'Analysis',
+);
+
 export {
 	Review,
 	Interview,
@@ -176,4 +185,5 @@ export {
 	DeadBlog,
 	PrintShop,
 	Recipe,
+	Analysis,
 };
