@@ -110,7 +110,7 @@ const articles = [
 	{
 		name: 'Labs',
 		url:
-			'https://www.theguardian.com/with-you-all-the-way/2021/mar/16/secret-games-travelling-shows-and-pioneering-players-the-history-of-womens-football',
+			'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 	},
 	{
 		name: 'NumberedList',
