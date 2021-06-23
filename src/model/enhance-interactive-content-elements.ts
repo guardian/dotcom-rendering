@@ -55,7 +55,6 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 							html: stripHTML(subheading.html),
 						})),
 					});
-
 			} else {
 				updatedElements.push(element);
 			}
