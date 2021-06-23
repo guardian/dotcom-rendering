@@ -233,7 +233,7 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 					>
 						<SvgChevronDownSingle />
 					</span>
-					{stickyNavCurrentHeader.html.replace(/<\/?[^>]+(>|$)/g, '')}
+					{stickyNavCurrentHeader.html}
 				</button>
 			)}
 			<ol
@@ -246,14 +246,6 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 				]}
 			>
 				{subheadingLinks.map((subheadingLink, index) => {
-					// this isnt a perfect solution, but we need to extract the inner text
-					// and we cannot use document.createElement solution (which is simpler)
-					//  as we are SSR this component
-					// https://stackoverflow.com/a/5002161/7378674
-					const title = subheadingLink.html.replace(
-						/<\/?[^>]+(>|$)/g,
-						'',
-					);
 					return (
 						<li
 							css={[
@@ -265,11 +257,11 @@ export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
 								data-ignore="global-link-styling"
 								css={linkStyles}
 								href={`#${subheadingLink.elementId}`}
-								data-title={title}
+								data-title={subheadingLink.html}
 								onClick={() => setShowStickyNavOption(false)}
 							>
 								<span css={numberStyles}>{index + 1}</span>
-								{title}
+								{subheadingLink.html}
 							</a>
 						</li>
 					);
