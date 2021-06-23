@@ -5,6 +5,7 @@ import {
 } from '@frontend/web/lib/dailyArticleCount';
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import { getLocale } from '@guardian/libs';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
 import { CurrentSignInGateABTest } from './types';
 
@@ -133,3 +134,19 @@ export const canShow = (
 			!isPreview(CAPI) &&
 			!isIOS9(),
 	);
+
+export const canShowMandatoryUs: (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+	currentTest: CurrentSignInGateABTest,
+) => Promise<boolean> = async (
+	CAPI: CAPIBrowserType,
+	isSignedIn: boolean,
+	currentTest: CurrentSignInGateABTest,
+) => {
+	return (
+		(await getLocale()) === 'US' &&
+		(await hasRequiredConsents()) &&
+		(await canShow(CAPI, isSignedIn, currentTest))
+	);
+};
