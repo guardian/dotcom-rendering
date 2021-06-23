@@ -95,6 +95,7 @@ Resources:
         - !Ref LoadBalancerToEc2SecurityGroup
       Subnets:
         - subnet-bf5ba6da
+        - subnet-80544cf4
 #      Subnets: !Split [ ',', !ImportValue MobileAppsApiVPC-Subnets]
       Tags:
         - Key: App
