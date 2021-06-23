@@ -17,7 +17,7 @@ const styles = css`
 	margin-left: ${remSpace[3]};
 	margin-right: ${remSpace[3]};
 	padding-top: ${remSpace[4]};
-	padding-bottom: ${remSpace[6]};
+	padding-bottom: ${remSpace[4]};
 
 	${from.wide} {
 		width: ${breakpoints.wide}px;
