@@ -38,19 +38,43 @@ const listStyles = css`
 	}
 
 	.js-android & {
-		display: grid;
-		column-gap: ${remSpace[3]};
-		grid-template-columns: repeat(2, minmax(auto, 15rem));
 		li {
-			margin-right: 0;
+			flex: 1 1 50%;
 		}
 		li:nth-child(n + 3) {
 			display: none;
 		}
+		li {
+			margin-right: 0;
+			margin-left: ${remSpace[2]};
+		}
+
+		li:first-of-type {
+			margin-left: 0;
+		}
+
+		${from.mobileLandscape} {
+			li {
+				flex: 1 1 33.33%;
+			}
+			li:nth-child(3) {
+				display: flex;
+			}
+		}
 		${from.tablet} {
-			grid-template-columns: repeat(4, minmax(auto, 15rem));
+			li {
+				flex: 0 0 160px;
+			}
 			li:nth-child(n + 3) {
 				display: flex;
+			}
+			li:nth-child(n + 2) {
+				margin-left: 20px;
+			}
+		}
+		${from.desktop} {
+			li {
+				flex: 0 0 220px;
 			}
 		}
 	}

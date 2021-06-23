@@ -54,7 +54,7 @@ const listStyles = (
 ): SerializedStyles => {
 	return css`
 		background: white;
-		margin-right: ${remSpace[3]};
+		margin-right: ${remSpace[2]};
 		flex: 0 0 42vw;
 		display: flex;
 		flex-direction: column;
@@ -71,10 +71,15 @@ const listStyles = (
 
 		${from.tablet} {
 			flex-basis: 160px;
+			margin-right: ${remSpace[5]};
 		}
 
 		${from.desktop} {
 			flex-basis: 220px;
+		}
+
+		&:last-of-type {
+			margin-right: 0;
 		}
 	`;
 };
