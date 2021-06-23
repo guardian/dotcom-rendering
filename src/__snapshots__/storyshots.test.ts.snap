@@ -17588,7 +17588,7 @@ exports[`Storyshots Footer Default 1`] = `
   margin-left: 0.75rem;
   margin-right: 0.75rem;
   padding-top: 1rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 @media (min-width: 1300px) {
@@ -17655,7 +17655,7 @@ exports[`Storyshots Footer With Ccpa 1`] = `
   margin-left: 0.75rem;
   margin-right: 0.75rem;
   padding-top: 1rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 @media (min-width: 1300px) {
