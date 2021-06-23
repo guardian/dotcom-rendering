@@ -60,22 +60,22 @@ const Article = Format(
 	'Article',
 );
 
-const Immersive = Format(
+const Letter = Format(
 	{
-		display: Display.Immersive,
+		display: Display.Standard,
 		theme: Pillar.News,
-		design: Design.Article,
+		design: Design.Letter,
 	},
-	'Immersive',
+	'Letter',
 );
 
-const Showcase = Format(
+const Quiz = Format(
 	{
-		display: Display.Showcase,
+		display: Display.Standard,
 		theme: Pillar.News,
-		design: Design.Article,
+		design: Design.Quiz,
 	},
-	'Showcase',
+	'Quiz',
 );
 
 const Editorial = Format(
@@ -166,8 +166,8 @@ export {
 	PhotoEssay,
 	Feature,
 	Article,
-	Immersive,
-	Showcase,
+	Letter,
+	Quiz,
 	Editorial,
 	Interactive,
 	MatchReport,
