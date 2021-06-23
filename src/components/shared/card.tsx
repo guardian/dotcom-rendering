@@ -4,6 +4,7 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { Img } from '@guardian/image-rendering';
 import { palette, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import {
 	background,
 	neutral,
@@ -53,16 +54,12 @@ const listStyles = (
 ): SerializedStyles => {
 	return css`
 		background: white;
-		margin-right: ${remSpace[2]};
+		margin-right: ${remSpace[3]};
 		flex: 0 0 42vw;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		border-top: ${borderColor(type, format)};
-
-		&:last-of-type {
-			margin-right: 0;
-		}
 
 		&.fade {
 			opacity: 0.7;
@@ -71,12 +68,26 @@ const listStyles = (
 		${darkModeCss`
             background: ${neutral[7]};
         `}
+
+		${from.tablet} {
+			flex-basis: 160px;
+		}
+
+		${from.desktop} {
+			flex-basis: 220px;
+		}
 	`;
 };
 
 const fullWidthImage = css`
 	img {
 		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		position: relative;
 	}
 `;
 
@@ -143,6 +154,10 @@ const headingStyles = (type: RelatedItemType): SerializedStyles => {
 		`;
 	}
 };
+
+const imageWrapperStyles = css`
+	position: relative;
+`;
 
 const imageBackground = css`
 	background: ${neutral[86]};
@@ -384,7 +399,7 @@ const cardImage = (
 		image,
 		map((img) => {
 			return (
-				<div css={[fullWidthImage]}>
+				<div css={[fullWidthImage, imageWrapperStyles]}>
 					<Img
 						image={img}
 						sizes={{
@@ -401,7 +416,9 @@ const cardImage = (
 				</div>
 			);
 		}),
-		withDefault<ReactElement | null>(<div css={[imageBackground]}></div>),
+		withDefault<ReactElement | null>(
+			<div css={[imageWrapperStyles, imageBackground]}></div>,
+		),
 	);
 };
 
