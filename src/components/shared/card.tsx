@@ -54,7 +54,7 @@ const listStyles = (
 	return css`
 		background: white;
 		margin-right: ${remSpace[3]};
-		flex: 0 0 15rem;
+		flex: 0 0 42vw;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -73,10 +73,6 @@ const listStyles = (
 const fullWidthImage = css`
 	img {
 		width: 100%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
 	}
 `;
 
@@ -143,11 +139,6 @@ const headingStyles = (type: RelatedItemType): SerializedStyles => {
 		`;
 	}
 };
-
-const imageWrapperStyles = css`
-	padding-bottom: 8.25rem;
-	position: relative;
-`;
 
 const imageBackground = css`
 	background: ${neutral[86]};
@@ -389,7 +380,7 @@ const cardImage = (
 		image,
 		map((img) => {
 			return (
-				<div css={[fullWidthImage, imageWrapperStyles]}>
+				<div css={[fullWidthImage]}>
 					<Img
 						image={img}
 						sizes={{
@@ -406,9 +397,7 @@ const cardImage = (
 				</div>
 			);
 		}),
-		withDefault<ReactElement | null>(
-			<div css={[imageWrapperStyles, imageBackground]}></div>,
-		),
+		withDefault<ReactElement | null>(<div css={[imageBackground]}></div>),
 	);
 };
 
