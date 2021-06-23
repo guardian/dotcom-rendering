@@ -20,6 +20,7 @@ export const htmlTemplate = ({
 	openGraphData,
 	twitterData,
 	keywords,
+	accessibilityLink,
 }: {
 	title?: string;
 	description: string;
@@ -36,6 +37,7 @@ export const htmlTemplate = ({
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
 	keywords: string;
+	accessibilityLink: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -286,6 +288,7 @@ export const htmlTemplate = ({
             </head>
 
             <body>
+				${accessibilityLink}
                 <div id="react-root"></div>
                 ${html}
                 ${[...lowPriorityScriptTags].join('\n')}
