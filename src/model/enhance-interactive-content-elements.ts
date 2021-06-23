@@ -1,6 +1,6 @@
 import { stripHTML } from '@root/src/model/strip-html';
 
-const isInteractiveContentBlockElement = (element: CAPIElement) =>
+const isInteractiveContentBlockElement = (element: CAPIElement): boolean =>
 	element._type ===
 		'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
 	element?.scriptUrl === 'https://uploads.guim.co.uk/2019/03/20/boot.js';
@@ -10,8 +10,6 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const hasInteractiveContentBlockElement = elements.some((element) =>
 		isInteractiveContentBlockElement(element),
 	);
-
-	console.log(`hasInteractiveContentBlockElement: ${  hasInteractiveContentBlockElement}`)
 
 	if (hasInteractiveContentBlockElement) {
 		// We want to record all `SubheadingBlockElement` to construct the interactive content block
@@ -46,16 +44,17 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 					size: 'full',
 					spaceAbove: 'tight',
 				});
-				updatedElements.push({
-					_type:
-						'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
-					elementId: element.elementId,
-					// Strip the HTML from the subheading links for use as titles within the element
-					subheadingLinks: subheadingLinks.map((subheading) => ({
-						...subheading,
-						html: stripHTML(subheading.html),
-					})),
-				});
+				if ('elementId' in element)
+					updatedElements.push({
+						_type:
+							'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
+						elementId: element.elementId,
+						// Strip the HTML from the subheading links for use as titles within the element
+						subheadingLinks: subheadingLinks.map((subheading) => ({
+							...subheading,
+							html: stripHTML(subheading.html),
+						})),
+					});
 
 			} else {
 				updatedElements.push(element);
