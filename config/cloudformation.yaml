@@ -93,10 +93,7 @@ Resources:
       SecurityGroups:
         - !Ref DefaultVpcSecurityGroup
         - !Ref LoadBalancerToEc2SecurityGroup
-      Subnets:
-        - subnet-bf5ba6da
-        - subnet-80544cf4
-#      Subnets: !Split [ ',', !ImportValue MobileAppsApiVPC-Subnets]
+      Subnets: !Split [ ',', !ImportValue MobileAppsApiVPC-PublicSubnets]
       Tags:
         - Key: App
           Value: !Ref App
@@ -156,9 +153,7 @@ Resources:
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      # AvailabilityZones: !GetAZs
-      AvailabilityZones:
-        - eu-west-1a
+      AvailabilityZones: !GetAZs
       HealthCheckGracePeriod: 300
       HealthCheckType: ELB
       LaunchConfigurationName: !Ref LaunchConfig
@@ -181,9 +176,7 @@ Resources:
         - Key: App
           PropagateAtLaunch: true
           Value: !Ref App
-      # VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-Subnets]
-      VPCZoneIdentifier:
-        - subnet-bf5ba6da
+      VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-PublicSubnets]
 
   DistributionInstanceProfile:
     Type: AWS::IAM::InstanceProfile
