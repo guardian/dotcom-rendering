@@ -93,7 +93,7 @@ Resources:
       SecurityGroups:
         - !Ref DefaultVpcSecurityGroup
         - !Ref LoadBalancerToEc2SecurityGroup
-      Subnets: !Split [ ',', !ImportValue MobileAppsApiVPC-Subnets]
+      Subnets: !Split [ ',', !ImportValue MobileAppsApiVPC-PublicSubnets]
       Tags:
         - Key: App
           Value: !Ref App
@@ -176,7 +176,7 @@ Resources:
         - Key: App
           PropagateAtLaunch: true
           Value: !Ref App
-      VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-Subnets]
+      VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-PublicSubnets]
 
   DistributionInstanceProfile:
     Type: AWS::IAM::InstanceProfile

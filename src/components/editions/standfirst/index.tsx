@@ -24,6 +24,13 @@ import { articleWidthStyles, sidePadding } from '../styles';
 const interviewStyles = css`
 	${sidePadding}
 `;
+const galleryStyles = css`
+	${body.medium({ lineHeight: 'tight', fontWeight: 'bold' })}
+	${from.mobileMedium} {
+		${body.medium({ lineHeight: 'tight' })}
+	}
+	color: ${neutral[100]};
+`;
 
 const getFontStyles = (
 	fontColor: string,
@@ -108,7 +115,7 @@ const getStyles = (format: Format): SerializedStyles => {
 	}
 
 	if (format.design === Design.Media) {
-		return css(styles(kickerColor), getFontStyles(neutral[100], 'tight'));
+		return css(styles(kickerColor), galleryStyles);
 	}
 	return styles(kickerColor);
 };

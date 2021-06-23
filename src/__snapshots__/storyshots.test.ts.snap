@@ -344,17 +344,10 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -1192,11 +1185,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -1589,17 +1582,10 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -2449,11 +2435,11 @@ exports[`Storyshots Editions/Article Comment 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -2876,17 +2862,10 @@ exports[`Storyshots Editions/Article Default 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -3645,11 +3624,11 @@ exports[`Storyshots Editions/Article Default 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -4037,17 +4016,10 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -4824,11 +4796,11 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -5221,17 +5193,10 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -5990,11 +5955,11 @@ exports[`Storyshots Editions/Article Feature 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -6328,17 +6293,39 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   margin: 0;
   position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 .emotion-6 {
-  width: 100vw;
-  height: calc(100vw * 0.6);
+  width: 166.66666666666666vh;
+  height: calc(166.66666666666666vh  * 0.6);
   background-color: #333333;
   color: #999999;
   display: block;
-  display: block;
-  width: 100%;
-  height: calc(100vw * 0.6);
+  height: 414px;
+  width: 690px;
+}
+
+width:@media (min-width: 320px) {
+  .emotion-6 {
+    height: 536;
+    width: 893.3333333333334px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-6 {
+    height: calc(100vw / 1.6666666666666667);
+    width: 100vw;
+  }
 }
 
 .emotion-7 {
@@ -6449,26 +6436,40 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   padding-bottom: 1rem;
   padding-right: 0.75rem;
   margin: 0;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.5rem;
   line-height: 1.15;
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.2;
+  font-weight: 500;
+  box-sizing: border-box;
   padding-bottom: 1.5rem;
   background-color: #121212;
-  border: 0;
+  border: none;
+}
+
+@media (min-width: 375px) {
+  .emotion-11 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 2.125rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
 }
 
 @media (min-width: 740px) {
   .emotion-11 {
-    width: 526px;
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 2.625rem;
+    line-height: 1.15;
+    font-weight: 500;
+    width: 538px;
+    padding-right: 1rem;
+    border-right: 1px solid #FFFFFF;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-11 {
-    width: 545px;
+    width: 557px;
   }
 }
 
@@ -6501,9 +6502,10 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
   justify-content: space-between;
   padding-bottom: 1rem;
   color: #121212;
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
+  font-weight: 700;
   color: #FFFFFF;
 }
 
@@ -6549,9 +6551,10 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
 
 @media (min-width: 375px) {
   .emotion-13 {
-    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-    font-size: 1.25rem;
+    font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+    font-size: 1.0625rem;
     line-height: 1.15;
+    font-weight: 400;
   }
 }
 
@@ -6870,11 +6873,11 @@ exports[`Storyshots Editions/Article Gallery 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="100vw"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="100vw"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -7199,17 +7202,39 @@ exports[`Storyshots Editions/Article Interview 1`] = `
   margin: 0;
   position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 .emotion-5 {
-  width: 100vw;
-  height: calc(100vw * 0.6);
+  width: 166.66666666666666vh;
+  height: calc(166.66666666666666vh  * 0.6);
   background-color: #F6F6F6;
   color: #999999;
   display: block;
-  display: block;
-  width: 100%;
-  height: calc(100vw * 0.6);
+  height: 414px;
+  width: 690px;
+}
+
+width:@media (min-width: 320px) {
+  .emotion-5 {
+    height: 536;
+    width: 893.3333333333334px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-5 {
+    height: calc(100vw / 1.6666666666666667);
+    width: 100vw;
+  }
 }
 
 .emotion-6 {
@@ -8080,11 +8105,11 @@ exports[`Storyshots Editions/Article Interview 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="100vw"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="100vw"
+                sizes="166.66666666666666vh "
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -8451,17 +8476,29 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 .emotion-4 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+@media (min-width: 740px) {
+  .emotion-4 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.emotion-5 {
   margin: 0;
   position: relative;
 }
 
 @media (min-width: 980px) {
-  .emotion-4 {
+  .emotion-5 {
     width: 750px;
   }
 }
 
-.emotion-5 {
+.emotion-6 {
   width: 100vw;
   height: calc(100vw * 0.6);
   background-color: #F6F6F6;
@@ -8471,35 +8508,28 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-5 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
-  .emotion-5 {
-    width: 980px;
-    height: calc(980px * 0.6);
+  .emotion-6 {
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
 @media (min-width: 740px) {
-  .emotion-5 {
+  .emotion-6 {
     width: calc(100vw - 3.75rem);
     height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-5 {
+  .emotion-6 {
     width: 750px;
     height: 450px;
   }
 }
 
-.emotion-6 {
+.emotion-7 {
   pointer-events: none;
   position: absolute;
   left: 0;
@@ -8508,7 +8538,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   top: 0;
 }
 
-.emotion-6 summary {
+.emotion-7 summary {
   display: block;
   pointer-events: auto;
   text-align: center;
@@ -8522,11 +8552,11 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   outline: none;
 }
 
-.emotion-6 summary::-webkit-details-marker {
+.emotion-7 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-6 details[open] {
+.emotion-7 details[open] {
   min-height: 44px;
   max-height: 999px;
   height: 100%;
@@ -8544,33 +8574,33 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-6 {
+  .emotion-7 {
     width: calc(100vw - 3.75rem);
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-6 {
+  .emotion-7 {
     width: 750px;
   }
 }
 
-.emotion-7 {
+.emotion-8 {
   line-height: 32px;
   font-size: 0;
 }
 
-.emotion-7 svg {
+.emotion-8 svg {
   width: 75%;
   height: 75%;
   margin: 12.5%;
 }
 
-.emotion-7 path {
+.emotion-8 path {
   fill: #FEF9F5;
 }
 
-.emotion-8 {
+.emotion-9 {
   box-sizing: border-box;
   font-family: GT Guardian Titlepiece,Georgia,serif;
   font-size: 2.625rem;
@@ -8583,16 +8613,16 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-8 {
+  .emotion-9 {
     padding-bottom: 0.75rem;
   }
 }
 
-.emotion-9 {
+.emotion-10 {
   position: relative;
 }
 
-.emotion-10 {
+.emotion-11 {
   color: #121212;
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
@@ -8608,7 +8638,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 375px) {
-  .emotion-10 {
+  .emotion-11 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 1.75rem;
     line-height: 1.35;
@@ -8617,7 +8647,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-10 {
+  .emotion-11 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
     line-height: 1.35;
@@ -8625,23 +8655,23 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   }
 }
 
-.emotion-11 {
+.emotion-12 {
   box-sizing: border-box;
 }
 
 @media (min-width: 740px) {
-  .emotion-11 {
+  .emotion-12 {
     width: 539px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-11 {
+  .emotion-12 {
     width: 558px;
   }
 }
 
-.emotion-12 {
+.emotion-13 {
   background-image: repeating-linear-gradient(
   		to bottom,
   		#DCDCDC,
@@ -8657,7 +8687,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-13 {
+.emotion-14 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -8678,28 +8708,28 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-13 {
+  .emotion-14 {
     width: 526px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-13 {
+  .emotion-14 {
     width: 545px;
   }
 }
 
-.emotion-13 p,
-.emotion-13 ul {
+.emotion-14 p,
+.emotion-14 ul {
   padding-top: 0.25rem;
   margin: 0;
 }
 
-.emotion-13 address {
+.emotion-14 address {
   font-style: normal;
 }
 
-.emotion-13 svg {
+.emotion-14 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -8709,23 +8739,23 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   height: 1.875rem;
 }
 
-.emotion-13 svg circle {
+.emotion-14 svg circle {
   stroke: #E05E00;
 }
 
-.emotion-13 svg path {
+.emotion-14 svg path {
   fill: #E05E00;
 }
 
 @media (min-width: 375px) {
-  .emotion-13 {
+  .emotion-14 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 1.25rem;
     line-height: 1.15;
   }
 }
 
-.emotion-14 {
+.emotion-15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8735,7 +8765,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   flex-direction: column;
 }
 
-.emotion-15 {
+.emotion-16 {
   background: none;
   border: none;
   padding: 0;
@@ -8743,60 +8773,60 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-16 {
+  .emotion-17 {
     width: 526px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-16 {
+  .emotion-17 {
     width: 545px;
   }
 }
 
 @media (min-width: 740px) {
-  .emotion-16 {
+  .emotion-17 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width: 740px) {
-  .emotion-16 {
+  .emotion-17 {
     margin-left: 24px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-16 {
+  .emotion-17 {
     margin-left: 144px;
   }
 }
 
-.emotion-17 {
+.emotion-18 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
 
-.emotion-17 iframe {
+.emotion-18 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-17 figcaption {
+.emotion-18 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
-  .emotion-17 {
+  .emotion-18 {
     padding-top: 0;
     padding-bottom: 0;
   }
 
-  .emotion-17 p {
+  .emotion-18 p {
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
@@ -8804,13 +8834,13 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-17 {
+  .emotion-18 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-18 {
+.emotion-19 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -8819,18 +8849,18 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   margin: 0 0 0.75rem;
 }
 
-.emotion-19 {
+.emotion-20 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width: 660px) {
-  .emotion-19 {
+  .emotion-20 {
     width: 620px;
   }
 }
 
-.emotion-20 {
+.emotion-21 {
   width: 100%;
   height: calc(100% * 1.25);
   background-color: #F6F6F6;
@@ -8839,24 +8869,24 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-20 {
+  .emotion-21 {
     width: 620px;
     height: calc(620px * 1.25);
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-20 {
+  .emotion-21 {
     background-color: #333333;
   }
 }
 
-.emotion-23 {
+.emotion-24 {
   display: block;
   position: relative;
 }
 
-.emotion-24 {
+.emotion-25 {
   margin: 16px 0 36px;
   background: #EDEDED;
   color: #121212;
@@ -8872,20 +8902,20 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   position: relative;
 }
 
-.emotion-24 summary {
+.emotion-25 summary {
   list-style: none;
   margin: 0 0 16px;
 }
 
-.emotion-24 summary::-webkit-details-marker {
+.emotion-25 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-24 summary:focus {
+.emotion-25 summary:focus {
   outline: none;
 }
 
-.emotion-25 {
+.emotion-26 {
   display: block;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -8894,7 +8924,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   color: #E05E00;
 }
 
-.emotion-26 {
+.emotion-27 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -8903,7 +8933,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   line-height: 22px;
 }
 
-.emotion-27 {
+.emotion-28 {
   background: #121212;
   color: #FFFFFF;
   height: 2rem;
@@ -8928,11 +8958,11 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   margin: 0;
 }
 
-.emotion-27:hover {
+.emotion-28:hover {
   background: #E05E00;
 }
 
-.emotion-28 {
+.emotion-29 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -8947,7 +8977,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   font-weight: 400;
 }
 
-.emotion-29 {
+.emotion-30 {
   margin-right: 12px;
   margin-bottom: 6px;
   width: 33px;
@@ -8955,36 +8985,36 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   height: 28px;
 }
 
-.emotion-30 {
+.emotion-31 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.emotion-30 p {
+.emotion-31 p {
   margin-bottom: 0.5rem;
 }
 
-.emotion-30 ol {
+.emotion-31 ol {
   list-style: decimal;
   list-style-position: inside;
   margin-bottom: 1rem;
 }
 
-.emotion-30 ul {
+.emotion-31 ul {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
   margin-bottom: 1rem;
 }
 
-.emotion-30 ul li {
+.emotion-31 ul li {
   margin-bottom: 0.375rem;
   padding-left: 1.25rem;
 }
 
-.emotion-30 ul li:before {
+.emotion-31 ul li:before {
   display: inline-block;
   content: '';
   border-radius: 0.375rem;
@@ -8995,15 +9025,15 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   margin-left: -1.25rem;
 }
 
-.emotion-30 b {
+.emotion-31 b {
   font-weight: 700;
 }
 
-.emotion-30 i {
+.emotion-31 i {
   font-style: italic;
 }
 
-.emotion-30 a {
+.emotion-31 a {
   color: #CB4700;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -9012,11 +9042,11 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   transition: border-color 0.15s ease-out;
 }
 
-.emotion-30 a:hover {
+.emotion-31 a:hover {
   border-bottom: solid 0.0625rem #E05E00;
 }
 
-.emotion-31 {
+.emotion-32 {
   font-size: 13px;
   line-height: 16px;
   display: -webkit-box;
@@ -9029,7 +9059,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-32 {
+.emotion-33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9044,7 +9074,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   font-weight: 400;
 }
 
-.emotion-33 {
+.emotion-34 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -9068,20 +9098,20 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   height: 28px;
 }
 
-.emotion-33:hover {
+.emotion-34:hover {
   background: #E05E00;
 }
 
-.emotion-33:focus {
+.emotion-34:focus {
   border: none;
 }
 
-.emotion-34 {
+.emotion-35 {
   width: 16px;
   height: 16px;
 }
 
-.emotion-35 {
+.emotion-36 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -9112,15 +9142,15 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   -o-transform: rotate(180deg);
 }
 
-.emotion-35:hover {
+.emotion-36:hover {
   background: #E05E00;
 }
 
-.emotion-35:focus {
+.emotion-36:focus {
   border: none;
 }
 
-.emotion-37 {
+.emotion-38 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -9128,7 +9158,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   height: 28px;
 }
 
-.emotion-40 {
+.emotion-41 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -9143,14 +9173,14 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-40 {
+  .emotion-41 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-40:before {
+.emotion-41:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -9162,7 +9192,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-40:after {
+.emotion-41:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -9172,25 +9202,25 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   border-top: 1px solid #E05E00;
 }
 
-.emotion-41 {
+.emotion-42 {
   margin: 0;
 }
 
-.emotion-42 {
+.emotion-43 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-42 svg {
+.emotion-43 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #E05E00;
 }
 
-.emotion-43 {
+.emotion-44 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -9210,35 +9240,37 @@ exports[`Storyshots Editions/Article Letter 1`] = `
       <section
         className="emotion-3"
       >
-        <header>
+        <header
+          className="emotion-4"
+        >
           <figure
             aria-labelledby="header-image-caption"
-            className="emotion-4"
+            className="emotion-5"
           >
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
                 alt="image"
-                className="js-launch-slideshow js-main-image emotion-5"
+                className="js-launch-slideshow js-main-image emotion-6"
                 data-ratio={0.6}
                 src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
               />
             </picture>
             <figcaption
-              className="emotion-6"
+              className="emotion-7"
             >
               <details>
                 <summary>
                   <span
-                    className="emotion-7"
+                    className="emotion-8"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -9264,31 +9296,31 @@ exports[`Storyshots Editions/Article Letter 1`] = `
             </figcaption>
           </figure>
           <nav
-            className="emotion-8"
+            className="emotion-9"
           >
             Letters 
           </nav>
           <div
-            className="emotion-9"
+            className="emotion-10"
           >
             <h1
-              className="emotion-10"
+              className="emotion-11"
             >
               Reclaimed lakes and giant airports: how Mexico City might have looked
             </h1>
           </div>
           <div
-            className="emotion-11"
+            className="emotion-12"
           >
             <div
-              className="emotion-12"
+              className="emotion-13"
             />
           </div>
           <div
-            className="emotion-13"
+            className="emotion-14"
           >
             <div
-              className="emotion-14"
+              className="emotion-15"
             >
               <p>
                 The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
@@ -9299,7 +9331,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
               role="button"
             >
               <button
-                className="emotion-15"
+                className="emotion-16"
                 onClick={[Function]}
               >
                 <svg
@@ -9323,16 +9355,16 @@ exports[`Storyshots Editions/Article Letter 1`] = `
       </section>
     </div>
     <div
-      className="emotion-16"
+      className="emotion-17"
     >
       <section
-        className="emotion-17"
+        className="emotion-18"
       >
         <p
-          className="emotion-18"
+          className="emotion-19"
         />
         <figure
-          className="emotion-19"
+          className="emotion-20"
         >
           <picture>
             <source
@@ -9346,7 +9378,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
             />
             <img
               alt="Jane Giddins outside her home in Newton St Loe"
-              className="js-launch-slideshow emotion-20"
+              className="js-launch-slideshow emotion-21"
               data-caption="Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles."
               data-credit="Photograph: Sam Frost/The Guardian"
               data-ratio={1.25}
@@ -9355,18 +9387,18 @@ exports[`Storyshots Editions/Article Letter 1`] = `
           </picture>
         </figure>
         <p
-          className="emotion-18"
+          className="emotion-19"
         />
         <p
-          className="emotion-18"
+          className="emotion-19"
         />
         <div
-          className="emotion-23"
+          className="emotion-24"
           data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
           data-atom-type="guide"
         >
           <details
-            className="emotion-24"
+            className="emotion-25"
             data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
             data-snippet-type="guide"
           >
@@ -9374,23 +9406,23 @@ exports[`Storyshots Editions/Article Letter 1`] = `
               onClick={[Function]}
             >
               <span
-                className="emotion-25"
+                className="emotion-26"
               >
                 Quick Guide
               </span>
               <h4
-                className="emotion-26"
+                className="emotion-27"
               >
                 What is Queen's consent?
               </h4>
               <span
-                className="emotion-27"
+                className="emotion-28"
               >
                 <span
-                  className="emotion-28"
+                  className="emotion-29"
                 >
                   <span
-                    className="emotion-29"
+                    className="emotion-30"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -9409,7 +9441,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
             </summary>
             <div>
               <div
-                className="emotion-30"
+                className="emotion-31"
                 dangerouslySetInnerHTML={
                   Object {
                     "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
@@ -9418,24 +9450,24 @@ exports[`Storyshots Editions/Article Letter 1`] = `
               />
             </div>
             <footer
-              className="emotion-31"
+              className="emotion-32"
             >
               <div
                 hidden={false}
               >
                 <div
-                  className="emotion-32"
+                  className="emotion-33"
                 >
                   <div>
                     Was this helpful?
                   </div>
                   <button
-                    className="emotion-33"
+                    className="emotion-34"
                     data-testid="like"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-34"
+                      className="emotion-35"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -9445,12 +9477,12 @@ exports[`Storyshots Editions/Article Letter 1`] = `
                     </svg>
                   </button>
                   <button
-                    className="emotion-35"
+                    className="emotion-36"
                     data-testid="dislike"
                     onClick={[Function]}
                   >
                     <svg
-                      className="emotion-34"
+                      className="emotion-35"
                       viewBox="0 0 40 40"
                     >
                       <path
@@ -9462,7 +9494,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
                 </div>
               </div>
               <div
-                className="emotion-37"
+                className="emotion-38"
                 data-testid="feedback"
                 hidden={true}
               >
@@ -9472,19 +9504,19 @@ exports[`Storyshots Editions/Article Letter 1`] = `
           </details>
         </div>
         <p
-          className="emotion-18"
+          className="emotion-19"
         />
         <p
-          className="emotion-18"
+          className="emotion-19"
         />
         <aside
-          className="emotion-40"
+          className="emotion-41"
         >
           <blockquote
-            className="emotion-41"
+            className="emotion-42"
           >
             <p
-              className="emotion-42"
+              className="emotion-43"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -9499,17 +9531,17 @@ exports[`Storyshots Editions/Article Letter 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-43"
+              className="emotion-44"
             >
               Jane Giddins
             </cite>
           </blockquote>
         </aside>
         <p
-          className="emotion-18"
+          className="emotion-19"
         />
         <p
-          className="emotion-18"
+          className="emotion-19"
         />
       </section>
     </div>
@@ -9837,17 +9869,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-27 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-27 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -10435,11 +10460,11 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -10857,17 +10882,10 @@ exports[`Storyshots Editions/Article Review 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-6 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-6 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -11662,11 +11680,11 @@ exports[`Storyshots Editions/Article Review 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -12163,17 +12181,10 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-8 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-8 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -12919,11 +12930,11 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
             <picture>
               <source
                 media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
               />
               <source
-                sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+                sizes="(min-width: 1300px) 620px, 100vw"
                 srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
               />
               <img
@@ -14477,17 +14488,39 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   margin: 0;
   position: relative;
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 .emotion-1 {
-  width: 100vw;
-  height: calc(100vw * 0.6);
+  width: 166.66666666666666vh;
+  height: calc(166.66666666666666vh  * 0.6);
   background-color: #F6F6F6;
   color: #999999;
   display: block;
-  display: block;
-  width: 100%;
-  height: calc(100vw * 0.6);
+  height: 414px;
+  width: 690px;
+}
+
+width:@media (min-width: 320px) {
+  .emotion-1 {
+    height: 536;
+    width: 893.3333333333334px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-1 {
+    height: calc(100vw / 1.6666666666666667);
+    width: 100vw;
+  }
 }
 
 .emotion-2 {
@@ -14570,11 +14603,11 @@ exports[`Storyshots Editions/HeaderMedia Full Screen 1`] = `
   <picture>
     <source
       media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-      sizes="100vw"
+      sizes="166.66666666666666vh "
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
     />
     <source
-      sizes="100vw"
+      sizes="166.66666666666666vh "
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
     />
     <img
@@ -14639,17 +14672,10 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-1 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-1 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -14745,11 +14771,11 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
   <picture>
     <source
       media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
     />
     <source
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
     />
     <img
@@ -14843,17 +14869,10 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   width: 100%;
 }
 
-@media (min-width: 740px) {
-  .emotion-1 {
-    width: 740px;
-    height: calc(740px * 0.6);
-  }
-}
-
 @media (min-width: 1300px) {
   .emotion-1 {
-    width: 980px;
-    height: calc(980px * 0.6);
+    width: 620px;
+    height: calc(620px * 0.6);
   }
 }
 
@@ -14985,11 +15004,11 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
   <picture>
     <source
       media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
     />
     <source
-      sizes="(min-width: 740px) 740px, (min-width: 1300px) 980px, 100vw"
+      sizes="(min-width: 1300px) 620px, 100vw"
       srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
     />
     <img
@@ -15452,26 +15471,40 @@ exports[`Storyshots Editions/Headline Media 1`] = `
   padding-bottom: 1rem;
   padding-right: 0.75rem;
   margin: 0;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.5rem;
   line-height: 1.15;
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.2;
+  font-weight: 500;
+  box-sizing: border-box;
   padding-bottom: 1.5rem;
   background-color: #121212;
-  border: 0;
+  border: none;
+}
+
+@media (min-width: 375px) {
+  .emotion-1 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 2.125rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
 }
 
 @media (min-width: 740px) {
   .emotion-1 {
-    width: 526px;
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 2.625rem;
+    line-height: 1.15;
+    font-weight: 500;
+    width: 538px;
+    padding-right: 1rem;
+    border-right: 1px solid #FFFFFF;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-1 {
-    width: 545px;
+    width: 557px;
   }
 }
 
@@ -16104,9 +16137,10 @@ exports[`Storyshots Editions/Standfirst Media 1`] = `
   justify-content: space-between;
   padding-bottom: 1rem;
   color: #121212;
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
+  font-weight: 700;
   color: #FFFFFF;
 }
 
@@ -16152,9 +16186,10 @@ exports[`Storyshots Editions/Standfirst Media 1`] = `
 
 @media (min-width: 375px) {
   .emotion-0 {
-    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-    font-size: 1.25rem;
+    font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+    font-size: 1.0625rem;
     line-height: 1.15;
+    font-weight: 400;
   }
 }
 
