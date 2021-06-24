@@ -157,7 +157,7 @@ const headingStyles = (type: RelatedItemType): SerializedStyles => {
 			${headline.xxxsmall()}
 			margin: 0;
 
-			${from.tablet} {
+			${from.desktop} {
 				${headline.xxsmall()}
 			}
 		`;
