@@ -133,7 +133,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 		float: left;
 		clear: left;
-		margin: ${remSpace[3]} ${remSpace[4]} ${remSpace[3]} 0;
+		margin: 0.375rem ${remSpace[4]} ${remSpace[3]} 0;
 
 		width: ${richLinkWidth};
 		${from.wide} {
