@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { neutral, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
@@ -34,6 +35,49 @@ const listStyles = css`
 
 	&::-webkit-scrollbar {
 		display: none;
+	}
+
+	.js-android & {
+		li {
+			flex: 1 1 50%;
+			max-width: initial;
+		}
+		li:nth-child(n + 3) {
+			display: none;
+		}
+		li {
+			margin-right: 0;
+			margin-left: ${remSpace[2]};
+		}
+
+		li:first-of-type {
+			margin-left: 0;
+		}
+
+		${from.mobileLandscape} {
+			li {
+				flex: 1 1 33.33%;
+			}
+			li:nth-child(3) {
+				display: flex;
+			}
+		}
+		${from.tablet} {
+			li {
+				flex: 0 0 10rem;
+			}
+			li:nth-child(n + 3) {
+				display: flex;
+			}
+			li:nth-child(n + 2) {
+				margin-left: ${remSpace[5]};
+			}
+		}
+		${from.desktop} {
+			li {
+				flex: 0 0 13.75rem;
+			}
+		}
 	}
 `;
 

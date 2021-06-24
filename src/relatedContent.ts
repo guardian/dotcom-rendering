@@ -70,7 +70,7 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 
 const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 	return {
-		title: 'Related Stories',
+		title: 'Related stories',
 		relatedItems: relatedContent
 			.map((content) => {
 				return {

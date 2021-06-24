@@ -4,6 +4,7 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { Img } from '@guardian/image-rendering';
 import { palette, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import {
 	background,
 	neutral,
@@ -53,13 +54,13 @@ const listStyles = (
 ): SerializedStyles => {
 	return css`
 		background: white;
-		margin-right: ${remSpace[3]};
-		flex: 0 0 15rem;
-		height: 100%;
+		margin-right: ${remSpace[2]};
+		flex: 0 0 42vw;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		border-top: ${borderColor(type, format)};
+		max-width: 10rem;
 
 		&.fade {
 			opacity: 0.7;
@@ -68,6 +69,18 @@ const listStyles = (
 		${darkModeCss`
             background: ${neutral[7]};
         `}
+
+		${from.tablet} {
+			margin-right: ${remSpace[5]};
+		}
+
+		${from.desktop} {
+			max-width: 13.75rem;
+		}
+
+		&:last-of-type {
+			margin-right: 0;
+		}
 	`;
 };
 
@@ -78,6 +91,8 @@ const fullWidthImage = css`
 		position: absolute;
 		top: 0;
 		left: 0;
+
+		position: relative;
 	}
 `;
 
@@ -92,6 +107,7 @@ const timeStyles = (type: RelatedItemType): SerializedStyles => {
 				text-align: right;
 				display: inline-block;
 				vertical-align: top;
+				font-weight: 700;
 			`;
 		}
 		default:
@@ -101,6 +117,7 @@ const timeStyles = (type: RelatedItemType): SerializedStyles => {
 				text-align: right;
 				display: inline-block;
 				vertical-align: top;
+				font-weight: 700;
 			`;
 	}
 };
@@ -119,29 +136,35 @@ const anchorStyles = css`
 	${darkModeCss`
         color: ${neutral[86]};
     `}
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 `;
 
 const headingWrapperStyles = css`
-	padding: ${remSpace[3]};
-	min-height: 10rem;
+	padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
+	flex-grow: 1;
 `;
 
 const headingStyles = (type: RelatedItemType): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
 		return css`
 			${textSans.medium({ lineHeight: 'regular' })}
-			margin: 0 0 ${remSpace[3]} 0;
+			margin: 0;
 		`;
 	} else {
 		return css`
-			${headline.xxsmall()}
-			margin: 0 0 ${remSpace[3]} 0;
+			${headline.xxxsmall()}
+			margin: 0;
+
+			${from.desktop} {
+				${headline.xxsmall()}
+			}
 		`;
 	}
 };
 
 const imageWrapperStyles = css`
-	padding-bottom: 8.25rem;
 	position: relative;
 `;
 
@@ -250,6 +273,7 @@ const cardStyles = (
 
 const parentIconStyles: SerializedStyles = css`
 	display: inline-block;
+	line-height: 1;
 	svg {
 		width: 1rem;
 		height: auto;
@@ -268,6 +292,7 @@ const iconStyles = (format: Format): SerializedStyles => {
 		display: inline-block;
 		background-color: ${inverted};
 		border-radius: 50%;
+		margin-top: -${remSpace[1]};
 	`;
 };
 
@@ -322,8 +347,8 @@ const quotationComment = (
 };
 
 const metadataStyles: SerializedStyles = css`
-	padding: 0 ${remSpace[3]};
-	min-height: 2rem;
+	padding: 0 ${remSpace[2]} ${remSpace[1]};
+	height: ${remSpace[6]};
 `;
 
 const bylineStyles: SerializedStyles = css`
