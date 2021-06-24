@@ -65,7 +65,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 
 	return css`
 		background: ${backgroundColor};
-		padding: ${remSpace[3]};
+		padding: ${remSpace[3]} ${remSpace[3]} ${remSpace[2]};
 		border-top: solid 1px ${neutral[60]};
 		transition: all 0.2s ease;
 
