@@ -17256,7 +17256,7 @@ exports[`Storyshots Follow Default 1`] = `
   border: none;
   background: none;
   margin-left: 0;
-  margin-top: 4px;
+  margin-top: 0.25rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17271,22 +17271,40 @@ exports[`Storyshots Follow Default 1`] = `
   margin-bottom: -0.375rem;
 }
 
-.emotion-1 circle {
-  fill: #C70000;
-}
-
-.emotion-1 path {
-  fill: #fff;
-}
-
 @media (prefers-color-scheme: dark) {
-  .emotion-1 circle {
+  .emotion-1.js-follow-icon circle {
     fill: #FF5943;
   }
 
-  .emotion-1 path {
+  .emotion-1.js-follow-icon path {
     fill: #121212;
   }
+}
+
+.emotion-1.js-follow-icon circle {
+  fill: #C70000;
+}
+
+.emotion-1.js-follow-icon path {
+  fill: #fff;
+}
+
+.emotion-1.js-following-icon {
+  fill: #C70000;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-1.js-following-icon {
+    fill: #FF5943;
+  }
+}
+
+.js-status-follow .emotion-1.js-following-icon {
+  display: none;
+}
+
+.js-status-following .emotion-1.js-follow-icon {
+  display: none;
 }
 
 <button
@@ -17295,10 +17313,20 @@ exports[`Storyshots Follow Default 1`] = `
   data-id="profile/janesmith"
 >
   <span
-    className="js-status"
+    className="js-status js-status-follow"
   >
     <svg
-      className="emotion-1"
+      className="js-following-icon emotion-1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12zm2.159-17.027c0 1.667-1.518 3.034-2.806 3.034-1.147 0-2.788-1.367-2.788-3.034 0-1.666 1.023-2.633 2.788-2.633s2.806.967 2.806 2.633zm2.012 3.667l-.76.7.795.75.741.716L20 9.924l-.741-.716-2.312 2.183-.776-.75zm-2.683.867a12.282 12.282 0 00-2.135-.167c-1.553 0-2.824.2-4.235.65l-.724.683-1.394 5 .688.667h11.294l.724-.667-.777-2.733c-1.8-.3-3.247-1.7-3.44-3.433z"
+        fillRule="evenodd"
+      />
+    </svg>
+    <svg
+      className="js-follow-icon emotion-1"
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle
@@ -17312,7 +17340,12 @@ exports[`Storyshots Follow Default 1`] = `
         fillRule="evenodd"
       />
     </svg>
-     Follow
+     
+    <span
+      className="js-follow-label"
+    >
+      Follow
+    </span>
      
   </span>
   Jane Smith
