@@ -17728,7 +17728,7 @@ exports[`Storyshots Headline Analysis 1`] = `
   font-size: 2.125rem;
   line-height: 1.35;
   font-weight: 300;
-  font-size: 34px;
+  font-size: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17773,6 +17773,12 @@ exports[`Storyshots Headline Analysis 1`] = `
   }
 }
 
+@media (min-width: 740px) {
+  .emotion-0 {
+    font-size: 34px;
+  }
+}
+
 <h1
   className="emotion-0"
 >
@@ -17794,7 +17800,7 @@ exports[`Storyshots Headline Default 1`] = `
   margin: 0;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  font-size: 34px;
+  font-size: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17825,6 +17831,12 @@ exports[`Storyshots Headline Default 1`] = `
 @media (min-width: 660px) {
   .emotion-0 {
     width: 620px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-0 {
+    font-size: 34px;
   }
 }
 
@@ -17853,7 +17865,7 @@ exports[`Storyshots Headline Feature 1`] = `
   font-size: 2.125rem;
   line-height: 1.15;
   font-weight: 700;
-  font-size: 34px;
+  font-size: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17884,6 +17896,12 @@ exports[`Storyshots Headline Feature 1`] = `
 @media (min-width: 660px) {
   .emotion-0 {
     width: 620px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-0 {
+    font-size: 34px;
   }
 }
 
@@ -17912,7 +17930,7 @@ exports[`Storyshots Headline Labs 1`] = `
   font-size: 2.125rem;
   line-height: 1.35;
   font-weight: 400;
-  font-size: 34px;
+  font-size: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17943,6 +17961,12 @@ exports[`Storyshots Headline Labs 1`] = `
 @media (min-width: 660px) {
   .emotion-0 {
     width: 620px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-0 {
+    font-size: 34px;
   }
 }
 
@@ -17967,7 +17991,7 @@ exports[`Storyshots Headline Review 1`] = `
   margin: 0;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  font-size: 34px;
+  font-size: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17998,6 +18022,12 @@ exports[`Storyshots Headline Review 1`] = `
 @media (min-width: 660px) {
   .emotion-0 {
     width: 620px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-0 {
+    font-size: 34px;
   }
 }
 
