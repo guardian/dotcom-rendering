@@ -102,7 +102,10 @@ const immersiveLabs = css`
 
 // stop headlines from growing in size with font resizer
 const fontSizeRestriction = css`
-	font-size: 34px;
+	font-size: 28px;
+	${from.tablet} {
+		font-size: 34px;
+	}
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
