@@ -61,19 +61,17 @@ export const ElementContainer = ({
 	<ClassNames>
 		{({ css }) => {
 			const child = (
-				<section>
-					<div
-						id={sectionId}
-						css={[
-							shouldCenter && center,
-							showSideBorders && sideBorders(borderColour),
-							showTopBorder && topBorder(borderColour),
-							padded && padding,
-						]}
-					>
-						{children && children}
-					</div>
-				</section>
+				<div
+					id={sectionId}
+					css={[
+						shouldCenter && center,
+						showSideBorders && sideBorders(borderColour),
+						showTopBorder && topBorder(borderColour),
+						padded && padding,
+					]}
+				>
+					{children && children}
+				</div>
 			);
 			const style = css`
 				${adStyles}
