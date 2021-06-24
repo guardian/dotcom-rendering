@@ -48,7 +48,7 @@ describe('parseRelatedContent', () => {
 		const actual = parseRelatedContent([defaultContent]);
 
 		const expected: RelatedContent = {
-			title: 'Related Stories',
+			title: 'Related stories',
 			relatedItems: [
 				{
 					title: 'contentTitle',
