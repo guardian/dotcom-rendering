@@ -14,7 +14,7 @@ import { getThemeStyles } from 'themeStyles';
 
 export const richLinkWidth = '8.75rem';
 
-const richLinkPillarStyles = (kicker: string): string => {
+const richLinkPillarStyles = (kicker: string, inverted: string): string => {
 	return `
 		border-top: solid 1px ${kicker};
 
@@ -27,16 +27,16 @@ const richLinkPillarStyles = (kicker: string): string => {
 			background: ${kicker};
 			border-color: ${kicker};
 			${darkModeStyles`
-				border-color: ${neutral[60]};
-				background: ${neutral[20]};
-				fill: ${neutral[60]};
+				border-color: ${inverted};
+				background: ${inverted};
+				fill: ${neutral[7]};
 			`}
 		}
 
 		button {
 			color: ${kicker};
 			${darkModeStyles`
-				color: ${neutral[60]};
+				color: ${neutral[86]};
 			`}
 		}
 	`;
@@ -46,11 +46,22 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 	const backgroundColor =
 		format.design === Design.Comment ? neutral[86] : neutral[97];
 
-	const { kicker: newsKicker } = getThemeStyles(Pillar.News);
-	const { kicker: opinionKicker } = getThemeStyles(Pillar.Opinion);
-	const { kicker: sportKicker } = getThemeStyles(Pillar.Sport);
-	const { kicker: cultureKicker } = getThemeStyles(Pillar.Culture);
-	const { kicker: lifestyleKicker } = getThemeStyles(Pillar.Lifestyle);
+	const { kicker: newsKicker, inverted: newsInverted } = getThemeStyles(
+		Pillar.News,
+	);
+	const { kicker: opinionKicker, inverted: opinionInverted } = getThemeStyles(
+		Pillar.Opinion,
+	);
+	const { kicker: sportKicker, inverted: sportInverted } = getThemeStyles(
+		Pillar.Sport,
+	);
+	const { kicker: cultureKicker, inverted: cultureInverted } = getThemeStyles(
+		Pillar.Culture,
+	);
+	const {
+		kicker: lifestyleKicker,
+		inverted: lifestyleInverted,
+	} = getThemeStyles(Pillar.Lifestyle);
 
 	return css`
 		background: ${backgroundColor};
@@ -59,23 +70,23 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		transition: all 0.2s ease;
 
 		&.js-news {
-			${richLinkPillarStyles(newsKicker)}
+			${richLinkPillarStyles(newsKicker, newsInverted)}
 		}
 
 		&.js-opinion {
-			${richLinkPillarStyles(opinionKicker)}
+			${richLinkPillarStyles(opinionKicker, opinionInverted)}
 		}
 
 		&.js-sport {
-			${richLinkPillarStyles(sportKicker)}
+			${richLinkPillarStyles(sportKicker, sportInverted)}
 		}
 
 		&.js-culture {
-			${richLinkPillarStyles(cultureKicker)}
+			${richLinkPillarStyles(cultureKicker, cultureInverted)}
 		}
 
 		&.js-lifestyle {
-			${richLinkPillarStyles(lifestyleKicker)}
+			${richLinkPillarStyles(lifestyleKicker, lifestyleInverted)}
 		}
 
 		.js-image img {
@@ -114,6 +125,9 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 				margin: 0 0 ${remSpace[4]} 0;
 				${headline.xxxsmall({ fontWeight: 'bold' })}
 				hyphens: auto;
+				${darkModeStyles`
+					color: ${neutral[86]};
+				`}
 			}
 		}
 
