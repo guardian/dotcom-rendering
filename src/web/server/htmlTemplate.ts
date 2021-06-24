@@ -176,7 +176,11 @@ export const htmlTemplate = ({
                 </script>
 
                 <!-- TODO make this conditional when we support more content types -->
-                ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
+                ${
+					ampLink && ampLink.includes('ng-interactive')
+						? `<link rel="amphtml" href="${ampLink}">`
+						: ''
+				}
 
                 ${fontPreloadTags.join('\n')}
 
