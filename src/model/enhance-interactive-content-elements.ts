@@ -1,9 +1,15 @@
 import { stripHTML } from '@root/src/model/strip-html';
 
+const scriptUrls = [
+	'https://interactive.guim.co.uk/page-enhancers/nav/boot.js',
+	'https://uploads.guim.co.uk/2019/03/20/boot.js',
+	'https://uploads.guim.co.uk/2019/12/11/boot.js',
+];
+
 const isInteractiveContentBlockElement = (element: CAPIElement): boolean =>
 	element._type ===
 		'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
-	element?.scriptUrl === 'https://uploads.guim.co.uk/2019/03/20/boot.js';
+	scriptUrls.indexOf(element?.scriptUrl || '') !== -1;
 
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const updatedElements: CAPIElement[] = [];

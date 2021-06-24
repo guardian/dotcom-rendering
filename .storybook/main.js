@@ -11,6 +11,13 @@ module.exports = {
 		const rules = config.module.rules;
 		const { extensions } = config.resolve;
 
+		// Mock JSDOM for storybook - it relies on native node.js packages
+		// Allows us to use enhancers in stories for better testing of compoenents & full articles
+		config.resolve.alias.jsdom$ = path.resolve(
+			__dirname,
+			'./mocks/jsdom.js',
+		);
+
 		// Support typescript in Storybook
 		// https://storybook.js.org/docs/configurations/typescript-config/
 		rules.push({
