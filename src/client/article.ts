@@ -39,8 +39,8 @@ import { logger } from '../logger';
 
 // ----- Run ----- //
 
-const followText = 'Follow ';
-const followingText = 'Following ';
+const followText = 'Follow';
+const followingText = 'Following';
 
 interface FontFaceSet {
 	readonly ready: Promise<FontFaceSet>;
@@ -71,20 +71,26 @@ function getTopic(follow: Element | null): Topic | null {
 function topicClick(e: Event): void {
 	const follow = document.querySelector('.js-follow');
 	const status = follow?.querySelector('.js-status');
-	const statusText = status?.textContent;
+	const label = status?.querySelector('.js-follow-label');
+	const labelText = label?.textContent;
 	const topic = getTopic(follow);
 
 	if (topic) {
-		if (statusText && statusText === followText) {
+		if (labelText && labelText === followText) {
 			void notificationsClient.follow(topic).then((success) => {
-				if (status?.textContent && success) {
-					status.textContent = followingText;
+				if (label?.textContent && success) {
+					label.textContent = followingText;
+					status?.classList.remove('js-status-follow');
+					status?.classList.add('js-status-following');
 				}
 			});
 		} else {
 			void notificationsClient.unfollow(topic).then((success) => {
-				if (status?.textContent && success) {
-					status.textContent = followText;
+				if (label?.textContent && success) {
+					label.textContent = followText;
+
+					status?.classList.remove('js-status-following');
+					status?.classList.add('js-status-follow');
 				}
 			});
 		}
@@ -95,12 +101,15 @@ function topics(): void {
 	const follow = document.querySelector('.js-follow');
 	const status = follow?.querySelector('.js-status');
 	const topic = getTopic(follow);
+	const label = status?.querySelector('.js-follow-label');
 
 	if (topic) {
 		follow?.addEventListener('click', topicClick);
 		void notificationsClient.isFollowing(topic).then((following) => {
-			if (following && status?.textContent) {
-				status.textContent = followingText;
+			if (following && label?.textContent) {
+				label.textContent = followingText;
+				status?.classList.remove('js-status-follow');
+				status?.classList.add('js-status-following');
 			}
 		});
 	}
