@@ -333,6 +333,7 @@ export const ShowcaseLayout = ({
 			) : (
 				// Else, this is a labs article so just show Nav and the Labs header
 				<>
+<<<<<<< HEAD
 					<div>
 						<Stuck zIndex="stickyAdWrapper">
 							<ElementContainer
@@ -371,6 +372,42 @@ export const ShowcaseLayout = ({
 						</Stuck>
 					</div>
 					<Stuck zIndex="stickyAdWrapperLabsHeader">
+=======
+					<Stuck>
+						<ElementContainer
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+						>
+							<HeaderAdSlot
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+								display={format.display}
+							/>
+						</ElementContainer>
+					</Stuck>
+					<ElementContainer
+						showSideBorders={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+					>
+						<Nav
+							nav={NAV}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
+							subscribeUrl={
+								CAPI.nav.readerRevenueLinks.header.subscribe
+							}
+							edition={CAPI.editionId}
+						/>
+					</ElementContainer>
+
+					<Stuck>
+>>>>>>> Rename Section to ElementContainer
 						<ElementContainer
 							showSideBorders={true}
 							showTopBorder={false}
