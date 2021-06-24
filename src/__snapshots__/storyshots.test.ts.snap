@@ -18224,13 +18224,13 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 .emotion-1 {
   background: #F6F6F6;
-  padding: 0.75rem;
+  padding: 0.75rem 0.75rem 0.5rem;
   border-top: solid 1px #999999;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   float: left;
   clear: left;
-  margin: 0.75rem 1rem 0.75rem 0;
+  margin: 0.375rem 1rem 0.75rem 0;
   width: 8.75rem;
 }
 
@@ -18252,9 +18252,9 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-news svg {
-    border-color: #999999;
-    background: #333333;
-    fill: #999999;
+    border-color: #FF5943;
+    background: #FF5943;
+    fill: #121212;
   }
 }
 
@@ -18264,7 +18264,7 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-news button {
-    color: #999999;
+    color: #DCDCDC;
   }
 }
 
@@ -18286,9 +18286,9 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-opinion svg {
-    border-color: #999999;
-    background: #333333;
-    fill: #999999;
+    border-color: #FF7F0F;
+    background: #FF7F0F;
+    fill: #121212;
   }
 }
 
@@ -18298,7 +18298,7 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-opinion button {
-    color: #999999;
+    color: #DCDCDC;
   }
 }
 
@@ -18320,9 +18320,9 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-sport svg {
-    border-color: #999999;
-    background: #333333;
-    fill: #999999;
+    border-color: #00B2FF;
+    background: #00B2FF;
+    fill: #121212;
   }
 }
 
@@ -18332,41 +18332,47 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-sport button {
-    color: #999999;
+    color: #DCDCDC;
   }
 }
 
-.emotion-1.js-culture {
+.emotion-1.js-culture,
+.emotion-1.js-arts {
   border-top: solid 1px #A1845C;
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1.js-culture {
+  .emotion-1.js-culture,
+  .emotion-1.js-arts {
     border-top: solid 1px #999999;
   }
 }
 
-.emotion-1.js-culture svg {
+.emotion-1.js-culture svg,
+.emotion-1.js-arts svg {
   fill: white;
   background: #A1845C;
   border-color: #A1845C;
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1.js-culture svg {
-    border-color: #999999;
-    background: #333333;
-    fill: #999999;
+  .emotion-1.js-culture svg,
+  .emotion-1.js-arts svg {
+    border-color: #EACCA0;
+    background: #EACCA0;
+    fill: #121212;
   }
 }
 
-.emotion-1.js-culture button {
+.emotion-1.js-culture button,
+.emotion-1.js-arts button {
   color: #A1845C;
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1.js-culture button {
-    color: #999999;
+  .emotion-1.js-culture button,
+  .emotion-1.js-arts button {
+    color: #DCDCDC;
   }
 }
 
@@ -18388,9 +18394,9 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-lifestyle svg {
-    border-color: #999999;
-    background: #333333;
-    fill: #999999;
+    border-color: #FFABDB;
+    background: #FFABDB;
+    fill: #121212;
   }
 }
 
@@ -18400,12 +18406,12 @@ exports[`Storyshots Rich Link Default 1`] = `
 
 @media (prefers-color-scheme: dark) {
   .emotion-1.js-lifestyle button {
-    color: #999999;
+    color: #DCDCDC;
   }
 }
 
 .emotion-1 .js-image img {
-  width: calc(100% + 1rem);
+  width: calc(100% + 1.5rem);
   margin: -0.75rem 0 0 -0.75rem;
 }
 
@@ -18456,6 +18462,12 @@ exports[`Storyshots Rich Link Default 1`] = `
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-1 a h1 {
+    color: #DCDCDC;
+  }
 }
 
 @media (min-width: 1300px) {
