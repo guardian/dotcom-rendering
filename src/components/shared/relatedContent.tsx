@@ -64,18 +64,18 @@ const listStyles = css`
 		}
 		${from.tablet} {
 			li {
-				flex: 0 0 160px;
+				flex: 0 0 10rem;
 			}
 			li:nth-child(n + 3) {
 				display: flex;
 			}
 			li:nth-child(n + 2) {
-				margin-left: 20px;
+				margin-left: ${remSpace[5]};
 			}
 		}
 		${from.desktop} {
 			li {
-				flex: 0 0 220px;
+				flex: 0 0 13.75rem;
 			}
 		}
 	}

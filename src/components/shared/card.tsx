@@ -60,7 +60,7 @@ const listStyles = (
 		flex-direction: column;
 		justify-content: space-between;
 		border-top: ${borderColor(type, format)};
-		max-width: 160px;
+		max-width: 10rem;
 
 		&.fade {
 			opacity: 0.7;
@@ -75,7 +75,7 @@ const listStyles = (
 		}
 
 		${from.desktop} {
-			max-width: 220px;
+			max-width: 13.75rem;
 		}
 
 		&:last-of-type {
@@ -142,7 +142,7 @@ const anchorStyles = css`
 `;
 
 const headingWrapperStyles = css`
-	padding: 2px ${remSpace[2]} ${remSpace[4]};
+	padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
 	flex-grow: 1;
 `;
 
@@ -292,7 +292,7 @@ const iconStyles = (format: Format): SerializedStyles => {
 		display: inline-block;
 		background-color: ${inverted};
 		border-radius: 50%;
-		margin-top: -4px;
+		margin-top: -${remSpace[1]};
 	`;
 };
 
