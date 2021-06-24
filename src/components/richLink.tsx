@@ -90,7 +90,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		}
 
 		.js-image img {
-			width: calc(100% + ${remSpace[4]});
+			width: calc(100% + ${remSpace[6]});
 			margin: -${remSpace[3]} 0 0 -${remSpace[3]};
 		}
 
