@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { joinUrl } from '@root/src/lib/joinUrl';
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 
 import { OnwardsData } from './OnwardsData';
 import { OnwardsLayout } from './OnwardsLayout';
@@ -169,7 +169,7 @@ export const OnwardsUpper = ({
 	return (
 		<div css={onwardsWrapper}>
 			{url && (
-				<Section>
+				<ElementContainer>
 					<OnwardsData
 						url={url}
 						limit={8}
@@ -177,7 +177,7 @@ export const OnwardsUpper = ({
 						Container={OnwardsLayout}
 						format={format}
 					/>
-				</Section>
+				</ElementContainer>
 			)}
 		</div>
 	);

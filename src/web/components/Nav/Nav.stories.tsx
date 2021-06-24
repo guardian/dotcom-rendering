@@ -3,7 +3,7 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
 import { Design, Display, Pillar } from '@guardian/types';
 import { nav } from './Nav.mock';
@@ -16,7 +16,7 @@ export default {
 
 export const StandardStory = () => {
 	return (
-		<Section
+		<ElementContainer
 			showSideBorders={true}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
@@ -33,14 +33,14 @@ export const StandardStory = () => {
 				subscribeUrl=""
 				edition="UK"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 StandardStory.story = { name: 'News Highlighted' };
 
 export const OpinionStory = () => {
 	return (
-		<Section
+		<ElementContainer
 			showSideBorders={true}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
@@ -57,14 +57,14 @@ export const OpinionStory = () => {
 				subscribeUrl=""
 				edition="UK"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 OpinionStory.story = { name: 'Opinion Highlighted' };
 
 export const ImmersiveStory = () => {
 	return (
-		<Section
+		<ElementContainer
 			showSideBorders={false}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
@@ -81,7 +81,7 @@ export const ImmersiveStory = () => {
 				subscribeUrl=""
 				edition="UK"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 ImmersiveStory.story = { name: 'Immersive' };

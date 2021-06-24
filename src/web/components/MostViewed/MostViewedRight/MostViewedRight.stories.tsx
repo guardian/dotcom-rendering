@@ -4,7 +4,7 @@ import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
 import { mockTab1 } from '../MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
@@ -24,7 +24,7 @@ export const defaultStory = () => {
 	});
 
 	return (
-		<Section>
+		<ElementContainer>
 			<Flex>
 				<LeftColumn
 					showPartialRightBorder={true}
@@ -36,16 +36,16 @@ export const defaultStory = () => {
 					<></>
 				</ArticleContainer>
 				<RightColumn>
-					<Section
+					<ElementContainer
 						showSideBorders={false}
 						showTopBorder={false}
 						padded={false}
 					>
 						<MostViewedRight />
-					</Section>
+					</ElementContainer>
 				</RightColumn>
 			</Flex>
-		</Section>
+		</ElementContainer>
 	);
 };
 defaultStory.story = { name: 'default' };
@@ -57,7 +57,7 @@ export const limitItemsStory = () => {
 	});
 
 	return (
-		<Section>
+		<ElementContainer>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -66,16 +66,16 @@ export const limitItemsStory = () => {
 					<></>
 				</ArticleContainer>
 				<RightColumn>
-					<Section
+					<ElementContainer
 						showSideBorders={false}
 						showTopBorder={false}
 						padded={false}
 					>
 						<MostViewedRight limitItems={3} />
-					</Section>
+					</ElementContainer>
 				</RightColumn>
 			</Flex>
-		</Section>
+		</ElementContainer>
 	);
 };
 limitItemsStory.story = { name: 'with a limit of 3 items' };
@@ -87,9 +87,9 @@ export const outsideContextStory = () => {
 	});
 
 	return (
-		<Section>
+		<ElementContainer>
 			<MostViewedRight />
-		</Section>
+		</ElementContainer>
 	);
 };
 outsideContextStory.story = {

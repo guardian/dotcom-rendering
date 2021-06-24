@@ -23,7 +23,7 @@ import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
@@ -318,7 +318,7 @@ export const ImmersiveLayout = ({
 							order: 0;
 						`}
 					>
-						<Section
+						<ElementContainer
 							showSideBorders={false}
 							showTopBorder={false}
 							padded={false}
@@ -335,12 +335,12 @@ export const ImmersiveLayout = ({
 								}
 								edition={CAPI.editionId}
 							/>
-						</Section>
+						</ElementContainer>
 					</header>
 
 					{format.theme === Special.Labs && (
 						<Stuck>
-							<Section
+							<ElementContainer
 								showSideBorders={true}
 								showTopBorder={false}
 								backgroundColour={labs[400]}
@@ -348,7 +348,7 @@ export const ImmersiveLayout = ({
 								sectionId="labs-header"
 							>
 								<LabsHeader />
-							</Section>
+							</ElementContainer>
 						</Stuck>
 					)}
 
@@ -417,7 +417,7 @@ export const ImmersiveLayout = ({
 					</>
 				)}
 			</div>
-			<Section
+			<ElementContainer
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={palette.background.article}
@@ -609,9 +609,9 @@ export const ImmersiveLayout = ({
 						</div>
 					</GridItem>
 				</ImmersiveGrid>
-			</Section>
+			</ElementContainer>
 
-			<Section
+			<ElementContainer
 				padded={false}
 				showTopBorder={false}
 				showSideBorders={false}
@@ -621,16 +621,16 @@ export const ImmersiveLayout = ({
 					position="merchandising-high"
 					display={format.display}
 				/>
-			</Section>
+			</ElementContainer>
 
 			{/* Onwards (when signed OUT) */}
 			<div id="onwards-upper-whensignedout" />
 			{showOnwardsLower && (
-				<Section sectionId="onwards-lower-whensignedout" />
+				<ElementContainer sectionId="onwards-lower-whensignedout" />
 			)}
 
 			{!isPaidContent && showComments && (
-				<Section sectionId="comments">
+				<ElementContainer sectionId="comments">
 					<Discussion
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
@@ -647,38 +647,40 @@ export const ImmersiveLayout = ({
 						beingHydrated={false}
 						display={format.display}
 					/>
-				</Section>
+				</ElementContainer>
 			)}
 
 			{/* Onwards (when signed IN) */}
 			<div id="onwards-upper-whensignedin" />
 			{showOnwardsLower && (
-				<Section sectionId="onwards-lower-whensignedin" />
+				<ElementContainer sectionId="onwards-lower-whensignedin" />
 			)}
 
-			{!isPaidContent && <Section sectionId="most-viewed-footer" />}
+			{!isPaidContent && (
+				<ElementContainer sectionId="most-viewed-footer" />
+			)}
 
-			<Section
+			<ElementContainer
 				padded={false}
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
 				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			</ElementContainer>
 
 			{NAV.subNavSections && (
-				<Section padded={false} sectionId="sub-nav-root">
+				<ElementContainer padded={false} sectionId="sub-nav-root">
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
 					<Lines count={4} effect="straight" />
-				</Section>
+				</ElementContainer>
 			)}
 
-			<Section
+			<ElementContainer
 				padded={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
@@ -689,7 +691,7 @@ export const ImmersiveLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
-			</Section>
+			</ElementContainer>
 
 			<BannerWrapper />
 			<MobileStickyContainer />

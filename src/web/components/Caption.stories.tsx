@@ -1,4 +1,4 @@
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Caption } from '@frontend/web/components/Caption';
 import { Display, Design, Pillar, Special } from '@guardian/types';
 import { decidePalette } from '../lib/decidePalette';
@@ -21,7 +21,7 @@ export default {
  */
 
 export const Article = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
 			format={{
@@ -35,12 +35,12 @@ export const Article = () => (
 				theme: Pillar.News,
 			})}
 		/>
-	</Section>
+	</ElementContainer>
 );
 Article.story = { name: 'Article' };
 
 export const Analysis = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Analysis caption looks"
 			format={{
@@ -54,12 +54,12 @@ export const Analysis = () => (
 				theme: Pillar.News,
 			})}
 		/>
-	</Section>
+	</ElementContainer>
 );
 Analysis.story = { name: 'Analysis' };
 
 export const PhotoEssay = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
 			format={{
@@ -73,12 +73,12 @@ export const PhotoEssay = () => (
 				theme: Pillar.News,
 			})}
 		/>
-	</Section>
+	</ElementContainer>
 );
 PhotoEssay.story = { name: 'PhotoEssay' };
 
 export const SpecialReport = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a SpecialReport caption looks"
 			format={{
@@ -92,12 +92,12 @@ export const SpecialReport = () => (
 				theme: Special.SpecialReport,
 			})}
 		/>
-	</Section>
+	</ElementContainer>
 );
 SpecialReport.story = { name: 'SpecialReport' };
 
 export const PhotoEssayLimitedWidth = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
 			format={{
@@ -112,12 +112,12 @@ export const PhotoEssayLimitedWidth = () => (
 			})}
 			shouldLimitWidth={true}
 		/>
-	</Section>
+	</ElementContainer>
 );
 PhotoEssayLimitedWidth.story = { name: 'PhotoEssay with width limited' };
 
 export const Credit = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a Feature caption looks with credit showing"
 			format={{
@@ -133,12 +133,12 @@ export const Credit = () => (
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
-	</Section>
+	</ElementContainer>
 );
 Credit.story = { name: 'with credit' };
 
 export const WidthLimited = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks with width limited"
 			format={{
@@ -153,12 +153,12 @@ export const WidthLimited = () => (
 			})}
 			shouldLimitWidth={true}
 		/>
-	</Section>
+	</ElementContainer>
 );
 WidthLimited.story = { name: 'with width limited' };
 
 export const Padded = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks when padded"
 			format={{
@@ -173,6 +173,6 @@ export const Padded = () => (
 			})}
 			padCaption={true}
 		/>
-	</Section>
+	</ElementContainer>
 );
 Padded.story = { name: 'when padded' };

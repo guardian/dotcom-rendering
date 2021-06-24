@@ -3,7 +3,7 @@ import fetchMock from 'fetch-mock';
 import { Display, Design, Pillar } from '@guardian/types';
 import { ABProvider } from '@guardian/ab-react';
 
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import {
 	responseWithTwoTabs,
@@ -43,7 +43,7 @@ export const withTwoTabs = () => {
 
 	return (
 		<AbProvider>
-			<Section>
+			<ElementContainer>
 				<MostViewedFooter
 					palette={decidePalette({
 						display: Display.Standard,
@@ -54,7 +54,7 @@ export const withTwoTabs = () => {
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
 				/>
-			</Section>
+			</ElementContainer>
 		</AbProvider>
 	);
 };
@@ -68,7 +68,7 @@ export const withOneTabs = () => {
 
 	return (
 		<AbProvider>
-			<Section>
+			<ElementContainer>
 				<MostViewedFooter
 					palette={decidePalette({
 						display: Display.Standard,
@@ -78,7 +78,7 @@ export const withOneTabs = () => {
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
 				/>
-			</Section>
+			</ElementContainer>
 		</AbProvider>
 	);
 };
@@ -92,7 +92,7 @@ export const withNoMostSharedImage = () => {
 
 	return (
 		<AbProvider>
-			<Section>
+			<ElementContainer>
 				<MostViewedFooter
 					palette={decidePalette({
 						display: Display.Standard,
@@ -102,7 +102,7 @@ export const withNoMostSharedImage = () => {
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					display={Display.Standard}
 				/>
-			</Section>
+			</ElementContainer>
 		</AbProvider>
 	);
 };

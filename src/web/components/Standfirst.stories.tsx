@@ -1,6 +1,6 @@
 import { news } from '@guardian/src-foundations';
 import { Display, Design, Pillar, Special } from '@guardian/types';
-import { Section } from './Section';
+import { ElementContainer } from './ElementContainer';
 
 import { Standfirst } from './Standfirst';
 
@@ -11,7 +11,7 @@ export default {
 
 export const Article = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -20,14 +20,14 @@ export const Article = () => {
 				}}
 				standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Article.story = { name: 'Article' };
 
 export const Comment = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -36,14 +36,14 @@ export const Comment = () => {
 				}}
 				standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Comment.story = { name: 'Comment' };
 
 export const Feature = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -52,14 +52,14 @@ export const Feature = () => {
 				}}
 				standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Feature.story = { name: 'Feature' };
 
 export const Immersive = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Immersive,
@@ -68,14 +68,14 @@ export const Immersive = () => {
 				}}
 				standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Immersive.story = { name: 'Immersive' };
 
 export const Review = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -84,14 +84,14 @@ export const Review = () => {
 				}}
 				standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Review.story = { name: 'Review' };
 
 export const LiveBlog = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -100,7 +100,7 @@ export const LiveBlog = () => {
 				}}
 				standfirst="This is how LiveBlog standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 LiveBlog.story = {
@@ -120,7 +120,7 @@ LiveBlog.story = {
 
 export const DeadBlog = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -129,14 +129,14 @@ export const DeadBlog = () => {
 				}}
 				standfirst="This is how DeadBlog standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 DeadBlog.story = { name: 'DeadBlog' };
 
 export const Interview = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -145,14 +145,14 @@ export const Interview = () => {
 				}}
 				standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Interview.story = { name: 'Interview' };
 
 export const Analysis = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -161,14 +161,14 @@ export const Analysis = () => {
 				}}
 				standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Analysis.story = { name: 'Analysis' };
 
 export const Media = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -177,14 +177,14 @@ export const Media = () => {
 				}}
 				standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Media.story = { name: 'Media' };
 
 export const Recipe = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -193,14 +193,14 @@ export const Recipe = () => {
 				}}
 				standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Recipe.story = { name: 'Recipe' };
 
 export const MatchReport = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -209,14 +209,14 @@ export const MatchReport = () => {
 				}}
 				standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 MatchReport.story = { name: 'MatchReport' };
 
 export const Quiz = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -225,14 +225,14 @@ export const Quiz = () => {
 				}}
 				standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Quiz.story = { name: 'Quiz' };
 
 export const SpecialReport = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -241,14 +241,14 @@ export const SpecialReport = () => {
 				}}
 				standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 SpecialReport.story = { name: 'SpecialReport' };
 
 export const Editorial = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -257,14 +257,14 @@ export const Editorial = () => {
 				}}
 				standfirst="This is how Editorial standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 Editorial.story = { name: 'Editorial' };
 
 export const PhotoEssay = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Standfirst
 				format={{
 					display: Display.Standard,
@@ -273,7 +273,7 @@ export const PhotoEssay = () => {
 				}}
 				standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 PhotoEssay.story = { name: 'PhotoEssay' };
