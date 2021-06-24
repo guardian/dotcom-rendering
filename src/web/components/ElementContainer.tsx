@@ -3,8 +3,9 @@ import { ClassNames, css as emoCss } from '@emotion/react';
 import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { center } from '@root/src/web/lib/center';
-
+// @ts-ignore-start
 import { jsx as _jsx } from 'react/jsx-runtime';
+// @ts-ignore-end
 
 const padding = emoCss`
 	padding: 0 10px;
