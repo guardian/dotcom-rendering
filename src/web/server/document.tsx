@@ -274,7 +274,11 @@ export const document = ({ data }: Props): string => {
 		JSON.stringify(makeWindowGuardian(data, cssIDs)),
 	);
 
-	const ampLink = `https://amp.theguardian.com/${data.CAPI.pageId}`;
+	// We do not yet support AMP for interactives.
+	const ampLink =
+		CAPI.format.design !== 'InteractiveDesign'
+			? `https://amp.theguardian.com/${data.CAPI.pageId}`
+			: undefined;
 
 	const { openGraphData } = CAPI;
 	const { twitterData } = CAPI;
