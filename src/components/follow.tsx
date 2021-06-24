@@ -31,7 +31,7 @@ const styles = (kicker: string, inverted: string): SerializedStyles => css`
 	border: none;
 	background: none;
 	margin-left: 0;
-	margin-top: 4px;
+	margin-top: ${remSpace[1]};
 
 	${darkModeCss`
         color: ${inverted};
