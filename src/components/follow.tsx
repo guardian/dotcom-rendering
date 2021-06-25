@@ -108,6 +108,15 @@ const FollowIcon: FC<IconProps> = ({ format, isFollowing }) => {
 	);
 };
 
+const FollowStatus: FC<IconProps> = ({ format, isFollowing }) => {
+	return (
+		<span>
+			<FollowIcon format={format} isFollowing={isFollowing} />{' '}
+			<span>{isFollowing ? 'Following' : 'Follow'}</span>{' '}
+		</span>
+	);
+};
+
 const Follow: FC<Props> = ({ contributors, ...format }) => {
 	const [contributor] = contributors;
 
@@ -123,10 +132,7 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 				data-id={contributor.id}
 				data-display-name={contributor.name}
 			>
-				<span className="js-status js-status-follow">
-					<FollowIcon format={format} isFollowing={false} />{' '}
-					<span className="js-follow-label">Follow</span>{' '}
-				</span>
+				<FollowStatus format={format} isFollowing={false} />
 				{contributor.name}
 			</button>
 		);
