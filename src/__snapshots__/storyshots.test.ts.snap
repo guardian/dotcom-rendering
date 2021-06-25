@@ -18336,42 +18336,36 @@ exports[`Storyshots Rich Link Default 1`] = `
   }
 }
 
-.emotion-1.js-culture,
-.emotion-1.js-arts {
+.emotion-1.js-culture {
   border-top: solid 1px #A1845C;
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1.js-culture,
-  .emotion-1.js-arts {
+  .emotion-1.js-culture {
     border-top: solid 1px #999999;
   }
 }
 
-.emotion-1.js-culture svg,
-.emotion-1.js-arts svg {
+.emotion-1.js-culture svg {
   fill: white;
   background: #A1845C;
   border-color: #A1845C;
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1.js-culture svg,
-  .emotion-1.js-arts svg {
+  .emotion-1.js-culture svg {
     border-color: #EACCA0;
     background: #EACCA0;
     fill: #121212;
   }
 }
 
-.emotion-1.js-culture button,
-.emotion-1.js-arts button {
+.emotion-1.js-culture button {
   color: #A1845C;
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1.js-culture button,
-  .emotion-1.js-arts button {
+  .emotion-1.js-culture button {
     color: #DCDCDC;
   }
 }
