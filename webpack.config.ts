@@ -64,6 +64,7 @@ function resolve(
 	// We rely on Buffer for our bridget thrift client
 	if (isClient) {
 		resolveOptions.alias = { ...resolveOptions.alias, Buffer: 'buffer' };
+		resolveOptions.fallback = { crypto: false };
 	}
 
 	return resolveOptions;

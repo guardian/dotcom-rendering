@@ -20,7 +20,6 @@ interface Props extends Format {
 }
 
 interface IconProps {
-	format: Format;
 	isFollowing: boolean;
 }
 
@@ -45,44 +44,13 @@ function getStyles({ theme }: Format): SerializedStyles {
 	return styles(kicker, inverted);
 }
 
-const FollowIcon: FC<IconProps> = ({ format, isFollowing }) => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
-	const commonStyles = css`
-		width: ${remSpace[6]};
-		height: ${remSpace[6]};
-		margin-bottom: -0.375rem;
-	`;
-	const followIconStyles = css`
-		circle {
-			fill: ${kicker};
-		}
-		path {
-			fill: #fff;
-		}
-
-		${darkModeCss`
-				circle {
-					fill: ${inverted};
-				}
-				path {
-					fill: ${neutral[7]};
-				}
-			`}
-	`;
-
-	const followingIconStyles = css`
-		fill: ${kicker};
-		${darkModeCss`
-		fill: ${inverted};
-	`}
-	`;
-
+const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 	return (
 		<>
 			{isFollowing && (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					css={[commonStyles, followingIconStyles]}
+					className="following-icon"
 				>
 					<path
 						fillRule="evenodd"
@@ -92,10 +60,7 @@ const FollowIcon: FC<IconProps> = ({ format, isFollowing }) => {
 				</svg>
 			)}
 			{!isFollowing && (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					css={[commonStyles, followIconStyles]}
-				>
+				<svg xmlns="http://www.w3.org/2000/svg" className="follow-icon">
 					<circle cx="12" cy="12" r="12" />
 					<path
 						fillRule="evenodd"
@@ -108,13 +73,48 @@ const FollowIcon: FC<IconProps> = ({ format, isFollowing }) => {
 	);
 };
 
-const FollowStatus: FC<IconProps> = ({ format, isFollowing }) => {
+export const FollowStatus: FC<IconProps> = ({ isFollowing }) => {
 	return (
 		<span>
-			<FollowIcon format={format} isFollowing={isFollowing} />{' '}
+			<FollowIcon isFollowing={isFollowing} />{' '}
 			<span>{isFollowing ? 'Following' : 'Follow'}</span>{' '}
 		</span>
 	);
+};
+
+const iconStyles = ({ theme }: Format): SerializedStyles => {
+	const { kicker, inverted } = getThemeStyles(theme);
+	return css`
+		svg {
+			width: ${remSpace[6]};
+			height: ${remSpace[6]};
+			margin-bottom: -0.375rem;
+
+			&.follow-icon {
+				circle {
+					fill: ${kicker};
+				}
+				path {
+					fill: #fff;
+				}
+
+				${darkModeCss`
+				circle {
+					fill: ${inverted};
+				}
+				path {
+					fill: ${neutral[7]};
+				}
+			`}
+			}
+			&.following-icon {
+				fill: ${kicker};
+				${darkModeCss`
+		fill: ${inverted};
+	`}
+			}
+		}
+	`;
 };
 
 const Follow: FC<Props> = ({ contributors, ...format }) => {
@@ -132,7 +132,10 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 				data-id={contributor.id}
 				data-display-name={contributor.name}
 			>
-				<FollowStatus format={format} isFollowing={false} />
+				<span className="js-follow-status" css={iconStyles(format)}>
+					<FollowStatus isFollowing={false} />
+				</span>
+
 				{contributor.name}
 			</button>
 		);

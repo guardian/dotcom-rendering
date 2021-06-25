@@ -19,6 +19,7 @@ import {
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
 import { createEmbedComponentFromProps } from 'components/embedWrapper';
+import { FollowStatus } from 'components/follow';
 import FooterContent from 'components/footerContent';
 import EpicContent from 'components/shared/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
@@ -38,9 +39,6 @@ import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 
 // ----- Run ----- //
-
-const followText = 'Follow';
-const followingText = 'Following';
 
 interface FontFaceSet {
 	readonly ready: Promise<FontFaceSet>;
@@ -68,48 +66,51 @@ function getTopic(follow: Element | null): Topic | null {
 	return new Topic({ id, displayName, type: 'tag-contributor' });
 }
 
+function followToggle(topic: Topic): void {
+	const followStatus = document.querySelector('.js-follow-status');
+	if (!followStatus) return;
+	void notificationsClient.isFollowing(topic).then((following) => {
+		if (following) {
+			void notificationsClient.unfollow(topic).then((success) => {
+				ReactDOM.render(
+					h(FollowStatus, { isFollowing: false }),
+					followStatus,
+				);
+			});
+		} else {
+			void notificationsClient.follow(topic).then((success) => {
+				ReactDOM.render(
+					h(FollowStatus, { isFollowing: true }),
+					followStatus,
+				);
+			});
+		}
+	});
+}
+
 function topicClick(e: Event): void {
 	const follow = document.querySelector('.js-follow');
-	const status = follow?.querySelector('.js-status');
-	const label = status?.querySelector('.js-follow-label');
-	const labelText = label?.textContent;
 	const topic = getTopic(follow);
 
 	if (topic) {
-		if (labelText && labelText === followText) {
-			void notificationsClient.follow(topic).then((success) => {
-				if (label?.textContent && success) {
-					label.textContent = followingText;
-					status?.classList.remove('js-status-follow');
-					status?.classList.add('js-status-following');
-				}
-			});
-		} else {
-			void notificationsClient.unfollow(topic).then((success) => {
-				if (label?.textContent && success) {
-					label.textContent = followText;
-
-					status?.classList.remove('js-status-following');
-					status?.classList.add('js-status-follow');
-				}
-			});
-		}
+		followToggle(topic);
 	}
 }
 
 function topics(): void {
 	const follow = document.querySelector('.js-follow');
-	const status = follow?.querySelector('.js-status');
 	const topic = getTopic(follow);
-	const label = status?.querySelector('.js-follow-label');
+
+	const followStatus = document.querySelector('.js-follow-status');
 
 	if (topic) {
 		follow?.addEventListener('click', topicClick);
 		void notificationsClient.isFollowing(topic).then((following) => {
-			if (following && label?.textContent) {
-				label.textContent = followingText;
-				status?.classList.remove('js-status-follow');
-				status?.classList.add('js-status-following');
+			if (following && followStatus) {
+				ReactDOM.render(
+					h(FollowStatus, { isFollowing: true }),
+					followStatus,
+				);
 			}
 		});
 	}
