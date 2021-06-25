@@ -81,8 +81,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 			${richLinkPillarStyles(sportKicker, sportInverted)}
 		}
 
-		&.js-culture,
-		&.js-arts {
+		&.js-culture {
 			${richLinkPillarStyles(cultureKicker, cultureInverted)}
 		}
 
