@@ -164,7 +164,14 @@ async function serveRichLinkDetails(
 			  }
 			: {};
 
-	const response = { pillar: renderingRequest.content.pillarName, ...image };
+	// We need this for legacy reasons where Culture pillar used be Arts
+	// We use this pillar sometimes for styling reasons like the rich link
+	const pillar = renderingRequest.content.pillarName?.replace(
+		'Arts',
+		'Culture',
+	);
+
+	const response = { pillar, ...image };
 
 	res.status(200).json(response);
 }
