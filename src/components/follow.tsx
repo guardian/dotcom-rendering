@@ -7,12 +7,12 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
+import FollowStatus from 'components/followStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
-import FollowStatus from 'components/followStatus';
 
 // ----- Component ----- //
 
@@ -37,7 +37,7 @@ const styles = ({ theme }: Format): SerializedStyles => {
 			color: ${inverted};
 		`}
 	`;
-}
+};
 
 const statusStyles = ({ theme }: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(theme);

@@ -5,7 +5,7 @@ import type { FC } from 'react';
 // ----- Component ----- //
 
 interface Props {
-    isFollowing: boolean;
+	isFollowing: boolean;
 }
 
 type IconProps = Props;
@@ -39,11 +39,12 @@ const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 	);
 };
 
-const FollowStatus: FC<Props> = ({ isFollowing }) =>
-    <>
-        <FollowIcon isFollowing={isFollowing} />{' '}
-        <span>{isFollowing ? 'Following' : 'Follow'}</span>{' '}
-    </>
+const FollowStatus: FC<Props> = ({ isFollowing }) => (
+	<>
+		<FollowIcon isFollowing={isFollowing} />{' '}
+		<span>{isFollowing ? 'Following' : 'Follow'}</span>{' '}
+	</>
+);
 
 // ----- Exports ----- //
 
