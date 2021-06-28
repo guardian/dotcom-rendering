@@ -26,7 +26,7 @@ const backgroundColour = (format: Format): string => {
 const styles = css`
 	margin-top: 0;
 	margin-bottom: 0;
-	display: block;
+	display: flex;
 	list-style: none;
 	padding: ${remSpace[3]} 0 ${remSpace[4]} 0;
 	${textSans.medium()}
@@ -38,7 +38,6 @@ const styles = css`
 `;
 
 const tagStyles = css`
-	margin: ${remSpace[3]} ${remSpace[3]} 0 0;
 	display: inline-block;
 `;
 
