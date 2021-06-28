@@ -149,7 +149,7 @@ const listItemStyles = (format: Format): SerializedStyles[] => {
 			border-radius: 0.5rem;
 			height: 1rem;
 			width: 1rem;
-			margin-right: ${remSpace[3]};
+			margin-right: ${remSpace[2]};
 			background-color: ${neutral[86]};
 			margin-left: -${remSpace[6]};
 			vertical-align: middle;
