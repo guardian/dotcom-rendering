@@ -18802,9 +18802,16 @@ exports[`Storyshots Tags Default 1`] = `
 .emotion-0 {
   margin-top: 0;
   margin-bottom: 0;
-  display: block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   list-style: none;
-  padding: 0.75rem 0 1rem 0;
+  padding: 0.75rem 0 0.5rem 0;
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 1.0625rem;
   line-height: 1.5;
@@ -18819,8 +18826,9 @@ exports[`Storyshots Tags Default 1`] = `
 }
 
 .emotion-1 {
-  margin: 0.75rem 0.75rem 0 0;
-  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  line-height: 0;
 }
 
 .emotion-2 {
@@ -18836,6 +18844,7 @@ exports[`Storyshots Tags Default 1`] = `
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
+  line-height: 1;
 }
 
 @media (prefers-color-scheme: dark) {
