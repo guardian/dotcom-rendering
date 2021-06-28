@@ -12,6 +12,7 @@ import { either } from '@guardian/types';
 import {
 	ads,
 	getAdSlots,
+	iframes,
 	reportNativeElementPositionChanges,
 	sendTargetingParams,
 	slideshow,
@@ -499,6 +500,7 @@ setup();
 sendTargetingParams();
 ads();
 videos();
+iframes();
 reportNativeElementPositionChanges();
 topics();
 slideshow();
