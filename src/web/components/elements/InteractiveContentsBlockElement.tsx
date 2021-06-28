@@ -135,7 +135,7 @@ interface EnhancedSubheadingType extends SubheadingBlockElement {
 	ref?: HTMLElement | null;
 }
 
-export const InteractiveContentBlockElement = ({ subheadingLinks }: Props) => {
+export const InteractiveContentsBlockElement = ({ subheadingLinks }: Props) => {
 	const [showStickyNavOption, setShowStickyNavOption] = useState<boolean>(
 		false,
 	);

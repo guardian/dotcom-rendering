@@ -76,7 +76,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
 		'model.dotcomrendering.pageElements.GuideAtomBlockElement',
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
-		'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
+		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
 		'model.dotcomrendering.pageElements.QABlockElement',
 		'model.dotcomrendering.pageElements.QuizAtomBlockElement',

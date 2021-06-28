@@ -6,18 +6,19 @@ const scriptUrls = [
 	'https://uploads.guim.co.uk/2019/12/11/boot.js',
 ];
 
-const isInteractiveContentBlockElement = (element: CAPIElement): boolean =>
+const isInteractiveContentsBlockElement = (element: CAPIElement): boolean =>
 	element._type ===
 		'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
-	scriptUrls.indexOf(element?.scriptUrl || '') !== -1;
+	!!element.scriptUrl &&
+	scriptUrls.indexOf(element.scriptUrl) !== -1;
 
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const updatedElements: CAPIElement[] = [];
-	const hasInteractiveContentBlockElement = elements.some((element) =>
-		isInteractiveContentBlockElement(element),
+	const hasInteractiveContentsBlockElement = elements.some((element) =>
+		isInteractiveContentsBlockElement(element),
 	);
 
-	if (hasInteractiveContentBlockElement) {
+	if (hasInteractiveContentsBlockElement) {
 		// We want to record all `SubheadingBlockElement` to construct the interactive content block
 		const subheadingLinks: SubheadingBlockElement[] = [];
 		const withUpdatedSubheadings: CAPIElement[] = elements.map(
@@ -43,7 +44,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 
 		// replace interactive content block
 		withUpdatedSubheadings.forEach((element) => {
-			if (isInteractiveContentBlockElement(element)) {
+			if (isInteractiveContentsBlockElement(element)) {
 				updatedElements.push({
 					_type:
 						'model.dotcomrendering.pageElements.DividerBlockElement',
@@ -53,7 +54,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 				if ('elementId' in element)
 					updatedElements.push({
 						_type:
-							'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
+							'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 						elementId: element.elementId,
 						// Strip the HTML from the subheading links for use as titles within the element
 						subheadingLinks: subheadingLinks.map((subheading) => ({
@@ -72,7 +73,9 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	return updatedElements.length ? updatedElements : elements;
 };
 
-export const enhanceInteractiveContentElements = (data: CAPIType): CAPIType => {
+export const enhanceInteractiveContentsElements = (
+	data: CAPIType,
+): CAPIType => {
 	const enhancedBlocks = data.blocks.map((block: Block) => {
 		return {
 			...block,

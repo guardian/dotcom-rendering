@@ -92,7 +92,7 @@ export const ArticleBody = ({
 	return (
 		<div
 			// Used this to determine the dimensions of the article body
-			// Currently used to hide stick top nav on InteractiveContentBlockElement.tsx
+			// Currently used to hide stick top nav on InteractiveContentsBlockElement.tsx
 			id="article-body"
 			css={[
 				isInteractive ? null : bodyPadding,

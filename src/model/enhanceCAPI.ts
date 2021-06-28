@@ -3,7 +3,7 @@ import { addDividers } from '@root/src/model/add-dividers';
 import { enhanceDots } from '@root/src/model/add-dots';
 import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhanceImages } from '@root/src/model/enhance-images';
-import { enhanceInteractiveContentElements } from '@root/src/model/enhance-interactive-content-elements';
+import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
 import { enhanceInteractiveAtomElements } from '@root/src/model/enhance-interactive-atom-elements';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
@@ -31,8 +31,8 @@ class CAPIEnhancer {
 		return this;
 	}
 
-	enhanceInteractiveContentElements() {
-		this.capi = enhanceInteractiveContentElements(this.capi);
+	enhanceInteractiveContentsElements() {
+		this.capi = enhanceInteractiveContentsElements(this.capi);
 		return this;
 	}
 
@@ -74,7 +74,7 @@ export const enhanceCAPI = (body: CAPIType): CAPIType => {
 	return new CAPIEnhancer(body)
 		.validateAsCAPIType()
 		.addDividers()
-		.enhanceInteractiveContentElements()
+		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
 		.enhanceDots()
 		.enhanceInteractiveAtomElements()

@@ -65,7 +65,7 @@ import { DocumentBlockComponent } from '@root/src/web/components/elements/Docume
 import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
-import { InteractiveContentBlockElement } from '@root/src/web/components/elements/InteractiveContentBlockElement';
+import { InteractiveContentsBlockElement } from '@root/src/web/components/elements/InteractiveContentsBlockElement';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
 import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
@@ -510,9 +510,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
-	const interactiveContentElement = elementsByType<InteractiveContentBlockElement>(
+	const interactiveContentsElement = elementsByType<InteractiveContentsBlockElement>(
 		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.InteractiveContentBlockElement',
+		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	);
 
 	return (
@@ -599,9 +599,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{interactiveContentElement.map((interactiveBlock) => (
+			{interactiveContentsElement.map((interactiveBlock) => (
 				<HydrateOnce rootId={interactiveBlock.elementId}>
-					<InteractiveContentBlockElement
+					<InteractiveContentsBlockElement
 						subheadingLinks={interactiveBlock.subheadingLinks}
 					/>
 				</HydrateOnce>
