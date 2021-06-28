@@ -35,6 +35,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
+import { MainContentIndicator } from '@root/src/web/components/MainContentIndicator';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -539,6 +540,7 @@ export const ImmersiveLayout = ({
 							/>
 						</div>
 					</GridItem>
+					<MainContentIndicator />
 					<GridItem area="body">
 						<ArticleContainer>
 							<main css={maxWidth}>

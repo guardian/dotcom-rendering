@@ -39,6 +39,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
+import { MainContentIndicator } from '@root/src/web/components/MainContentIndicator';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getAgeWarning } from '@root/src/lib/age-warning';
@@ -470,6 +471,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</div>
 						</GridItem>
+						<MainContentIndicator />
 						<GridItem area="body">
 							<ArticleContainer>
 								<main>
