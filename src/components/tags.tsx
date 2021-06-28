@@ -27,8 +27,9 @@ const styles = css`
 	margin-top: 0;
 	margin-bottom: 0;
 	display: flex;
+	flex-wrap: wrap;
 	list-style: none;
-	padding: ${remSpace[3]} 0 ${remSpace[4]} 0;
+	padding: ${remSpace[3]} 0 ${remSpace[2]} 0;
 	${textSans.medium()}
 
 	${darkModeCss`
@@ -38,7 +39,9 @@ const styles = css`
 `;
 
 const tagStyles = css`
-	display: inline-block;
+	margin-right: 1rem;
+	margin-bottom: 1rem;
+	line-height: 0;
 `;
 
 const anchorStyles = (format: Format): SerializedStyles => css`
@@ -53,6 +56,7 @@ const anchorStyles = (format: Format): SerializedStyles => css`
 	display: inline-block;
 	white-space: nowrap;
 	overflow: hidden;
+	line-height: 1;
 
 	${darkModeCss`
 		color: ${neutral[60]};
