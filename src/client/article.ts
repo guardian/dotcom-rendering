@@ -19,7 +19,7 @@ import {
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
 import { createEmbedComponentFromProps } from 'components/embedWrapper';
-import { FollowStatus } from 'components/follow';
+import FollowStatus from 'components/followStatus';
 import FooterContent from 'components/footerContent';
 import EpicContent from 'components/shared/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
@@ -71,14 +71,14 @@ function followToggle(topic: Topic): void {
 	if (!followStatus) return;
 	void notificationsClient.isFollowing(topic).then((following) => {
 		if (following) {
-			void notificationsClient.unfollow(topic).then((success) => {
+			void notificationsClient.unfollow(topic).then((_) => {
 				ReactDOM.render(
 					h(FollowStatus, { isFollowing: false }),
 					followStatus,
 				);
 			});
 		} else {
-			void notificationsClient.follow(topic).then((success) => {
+			void notificationsClient.follow(topic).then((_) => {
 				ReactDOM.render(
 					h(FollowStatus, { isFollowing: true }),
 					followStatus,
