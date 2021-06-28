@@ -17,6 +17,7 @@ export const matchReport: MatchReportType = {
 	homeTeam: {
 		id: '29',
 		name: 'Leicester',
+		codename: 'LEI',
 		players: [
 			{
 				id: '284907',
@@ -257,6 +258,7 @@ export const matchReport: MatchReportType = {
 	awayTeam: {
 		id: '1006',
 		name: 'Arsenal',
+		codename: 'ARS',
 		players: [
 			{
 				id: '438917',
