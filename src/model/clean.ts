@@ -16,7 +16,6 @@ export const clean = compose(
 	(s: string) =>
 		minify(s, {
 			collapseWhitespace: true,
-			removeEmptyElements: true,
 			minifyCSS: true,
 			minifyJS: true,
 		}),
