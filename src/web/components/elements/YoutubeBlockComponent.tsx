@@ -32,8 +32,6 @@ type Props = {
 	width?: number;
 	duration?: number; // in seconds
 	origin?: string;
-	// eslint-disable-next-line react/no-unused-prop-types
-	embedHandler?: () => void;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
@@ -150,7 +148,7 @@ export const YoutubeBlockComponent = ({
 	};
 
 	return (
-		<div data-chromatic="ignore">
+		<div data-chromatic="ignore" data-component="Youtube_Embed">
 			<YoutubeAtom
 				assetId={assetId}
 				overrideImage={

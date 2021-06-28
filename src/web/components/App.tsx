@@ -578,11 +578,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						duration={youTubeAtom.duration}
 						mediaTitle={youTubeAtom.mediaTitle}
 						altText={youTubeAtom.altText}
-						/* embedHandler={componentEventHandler(
-							'QANDA_ATOM',
-							qandaAtom.id,
-							'DISLIKE',
-						)} */
 					/>
 				</HydrateOnce>
 			))}
