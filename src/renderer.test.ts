@@ -115,7 +115,7 @@ const videoElement: BodyElement = {
 		height: 300,
 		width: 500,
 		tracking: EmbedTracksType.DOES_NOT_TRACK,
-	}
+	},
 };
 
 const audioElement: BodyElement = {
@@ -126,7 +126,7 @@ const audioElement: BodyElement = {
 		height: 300,
 		width: 500,
 		tracking: EmbedTracksType.DOES_NOT_TRACK,
-	}
+	},
 };
 
 const liveEventElement = (): BodyElement => ({
@@ -360,7 +360,7 @@ describe('Renders different types of elements', () => {
 		const nodes = render(embedElement);
 		const embed = nodes.flat()[0];
 		expect(getHtml(embed)).toContain(
-			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322" class=""></iframe>',
 		);
 	});
 
@@ -534,7 +534,7 @@ describe('Renders different types of Editions elements', () => {
 		const nodes = renderEditions(embedElement);
 		const embed = nodes.flat()[0];
 		expect(getHtml(embed)).toContain(
-			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322" class=""></iframe>',
 		);
 	});
 
