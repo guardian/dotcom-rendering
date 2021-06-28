@@ -6,11 +6,13 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@frontend/web/experiments/tests/newsletter-merch-unit-test';
+import { signInGateUsMandatory } from '@root/src/web/experiments/tests/sign-in-gate-us-mandatory';
 
 export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
+	signInGateUsMandatory,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 ];
