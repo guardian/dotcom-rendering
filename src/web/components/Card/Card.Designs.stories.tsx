@@ -24,6 +24,16 @@ const Review = Format(
 	'Review',
 );
 
+const ReviewWithStars = Format(
+	{
+		display: Display.Standard,
+		theme: Pillar.News,
+		design: Design.Review,
+	},
+	'Review',
+	0, // star rating
+);
+
 const Interview = Format(
 	{
 		display: Display.Standard,
@@ -170,6 +180,7 @@ const Analysis = Format(
 
 export {
 	Review,
+	ReviewWithStars,
 	Interview,
 	Comment,
 	PhotoEssay,
