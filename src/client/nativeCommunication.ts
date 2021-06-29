@@ -271,23 +271,10 @@ function sendTargetingParams(): void {
 	void analyticsClient.sendTargetingParams(targetingParams);
 }
 
-function iframes(): void {
-	const emailSignupIframe = document.querySelector(
-		'iframe.js-email-signup',
-	) as HTMLIFrameElement;
-	const innerIframe = emailSignupIframe.contentDocument?.querySelector(
-		'iframe',
-	);
-	if (innerIframe) {
-		innerIframe.style.width = '100%';
-	}
-}
-
 export {
 	ads,
 	slideshow,
 	videos,
-	iframes,
 	reportNativeElementPositionChanges,
 	sendTargetingParams,
 	getAdSlots,

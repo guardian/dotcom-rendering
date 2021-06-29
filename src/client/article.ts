@@ -12,7 +12,6 @@ import { either } from '@guardian/types';
 import {
 	ads,
 	getAdSlots,
-	iframes,
 	reportNativeElementPositionChanges,
 	sendTargetingParams,
 	slideshow,
@@ -496,11 +495,23 @@ function hydrateClickToView(): void {
 		);
 }
 
+function resizeEmailSignups(): void {
+	const emailSignupIframe = document.querySelector(
+		'iframe.js-email-signup',
+	) as HTMLIFrameElement;
+	const innerIframe = emailSignupIframe.contentDocument?.querySelector(
+		'iframe',
+	);
+	if (innerIframe) {
+		innerIframe.style.width = '100%';
+	}
+}
+
 setup();
 sendTargetingParams();
 ads();
 videos();
-iframes();
+resizeEmailSignups();
 reportNativeElementPositionChanges();
 topics();
 slideshow();
