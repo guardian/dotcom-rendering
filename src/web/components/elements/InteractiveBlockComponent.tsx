@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { css } from '@emotion/react';
 import { body, textSans } from '@guardian/src-foundations/typography';
-import { Special } from '@guardian/types'
+import { Special } from '@guardian/types';
 import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Placeholder } from '@root/src/web/components/Placeholder';
@@ -92,9 +92,7 @@ const getMinHeight = (role: RoleType, loaded: boolean) => {
 	return `${decideHeight(role)}px`;
 };
 const wrapperStyle = (format: Format, role: RoleType, loaded: boolean) => css`
-	${format.theme === Special.Labs
-		? textSans.medium()
-		: body.medium()};
+	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
 	background-color: ${neutral[100]};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
