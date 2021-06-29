@@ -11,7 +11,7 @@ import { UL } from './components/UL';
 import { LI } from './components/LI';
 import { images, standfirsts } from './Card.mocks';
 
-export const Format = (format: Format, title: string) => () => (
+export const Format = (format: Format, title: string, starRating?: number) => () => (
 	<Section>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
@@ -39,6 +39,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -66,6 +67,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -93,6 +95,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -120,6 +123,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 				</UL>
@@ -144,6 +148,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -171,6 +176,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -198,6 +204,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 				</UL>
