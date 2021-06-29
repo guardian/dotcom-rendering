@@ -274,7 +274,9 @@ export const document = ({ data }: Props): string => {
 		JSON.stringify(makeWindowGuardian(data, cssIDs)),
 	);
 
-	const hasAmpInteractiveTag = CAPI.tags.some((tag) => tag.id === 'tracking/platformfunctional/ampinteractive')
+	const hasAmpInteractiveTag = CAPI.tags.some(
+		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
+	);
 
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
 	const ampLink =
