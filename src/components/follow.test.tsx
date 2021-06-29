@@ -38,7 +38,7 @@ describe('Follow component renders as expected', () => {
 			);
 		});
 
-		expect(container.textContent).toBe('Follow George Monbiot');
+		expect(container.textContent).toBe(' Follow George Monbiot');
 
 		unmountComponentAtNode(container);
 		container.remove();

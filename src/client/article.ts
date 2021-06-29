@@ -19,6 +19,7 @@ import {
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
 import { createEmbedComponentFromProps } from 'components/embedWrapper';
+import FollowStatus from 'components/followStatus';
 import FooterContent from 'components/footerContent';
 import EpicContent from 'components/shared/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
@@ -38,9 +39,6 @@ import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 
 // ----- Run ----- //
-
-const followText = 'Follow ';
-const followingText = 'Following ';
 
 interface FontFaceSet {
 	readonly ready: Promise<FontFaceSet>;
@@ -68,39 +66,51 @@ function getTopic(follow: Element | null): Topic | null {
 	return new Topic({ id, displayName, type: 'tag-contributor' });
 }
 
+function followToggle(topic: Topic): void {
+	const followStatus = document.querySelector('.js-follow-status');
+	if (!followStatus) return;
+	void notificationsClient.isFollowing(topic).then((following) => {
+		if (following) {
+			void notificationsClient.unfollow(topic).then((_) => {
+				ReactDOM.render(
+					h(FollowStatus, { isFollowing: false }),
+					followStatus,
+				);
+			});
+		} else {
+			void notificationsClient.follow(topic).then((_) => {
+				ReactDOM.render(
+					h(FollowStatus, { isFollowing: true }),
+					followStatus,
+				);
+			});
+		}
+	});
+}
+
 function topicClick(e: Event): void {
 	const follow = document.querySelector('.js-follow');
-	const status = follow?.querySelector('.js-status');
-	const statusText = status?.textContent;
 	const topic = getTopic(follow);
 
 	if (topic) {
-		if (statusText && statusText === followText) {
-			void notificationsClient.follow(topic).then((success) => {
-				if (status?.textContent && success) {
-					status.textContent = followingText;
-				}
-			});
-		} else {
-			void notificationsClient.unfollow(topic).then((success) => {
-				if (status?.textContent && success) {
-					status.textContent = followText;
-				}
-			});
-		}
+		followToggle(topic);
 	}
 }
 
 function topics(): void {
 	const follow = document.querySelector('.js-follow');
-	const status = follow?.querySelector('.js-status');
 	const topic = getTopic(follow);
+
+	const followStatus = document.querySelector('.js-follow-status');
 
 	if (topic) {
 		follow?.addEventListener('click', topicClick);
 		void notificationsClient.isFollowing(topic).then((following) => {
-			if (following && status?.textContent) {
-				status.textContent = followingText;
+			if (following && followStatus) {
+				ReactDOM.render(
+					h(FollowStatus, { isFollowing: true }),
+					followStatus,
+				);
 			}
 		});
 	}

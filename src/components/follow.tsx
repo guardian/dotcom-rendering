@@ -2,9 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { remSpace } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
+import FollowStatus from 'components/followStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import type { FC } from 'react';
@@ -17,25 +20,64 @@ interface Props extends Format {
 	contributors: Contributor[];
 }
 
-const styles = (kicker: string, inverted: string): SerializedStyles => css`
-	${textSans.small()}
-	color: ${kicker};
-	display: block;
-	padding: 0;
-	border: none;
-	background: none;
-	margin-left: 0;
-
-	${darkModeCss`
-        color: ${inverted};
-    `}
-`;
-
-function getStyles({ theme }: Format): SerializedStyles {
+const styles = ({ theme }: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(theme);
 
-	return styles(kicker, inverted);
-}
+	return css`
+		${textSans.small()}
+		color: ${kicker};
+		display: block;
+		padding: 0;
+		border: none;
+		background: none;
+		margin-left: 0;
+		margin-top: ${remSpace[1]};
+
+		${darkModeCss`
+			color: ${inverted};
+		`}
+	`;
+};
+
+const statusStyles = ({ theme }: Format): SerializedStyles => {
+	const { kicker, inverted } = getThemeStyles(theme);
+
+	return css`
+		svg {
+			width: ${remSpace[6]};
+			height: ${remSpace[6]};
+			margin-bottom: -0.375rem;
+		}
+
+		.follow-icon {
+			circle {
+				fill: ${kicker};
+			}
+
+			path {
+				fill: #fff;
+			}
+
+			${darkModeCss`
+				circle {
+					fill: ${inverted};
+				}
+
+				path {
+					fill: ${neutral[7]};
+				}
+			`}
+		}
+
+		.following-icon {
+			fill: ${kicker};
+
+			${darkModeCss`
+				fill: ${inverted};
+			`}
+		}
+	`;
+};
 
 const Follow: FC<Props> = ({ contributors, ...format }) => {
 	const [contributor] = contributors;
@@ -48,11 +90,14 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 		return (
 			<button
 				className="js-follow"
-				css={getStyles(format)}
+				css={styles(format)}
 				data-id={contributor.id}
 				data-display-name={contributor.name}
 			>
-				<span className="js-status">Follow </span>
+				<span className="js-follow-status" css={statusStyles(format)}>
+					<FollowStatus isFollowing={false} />
+				</span>
+
 				{contributor.name}
 			</button>
 		);
