@@ -204,11 +204,11 @@ export const Card = ({
 									role="presentation"
 								/>
 								<>
-									{starRating && (
+									{starRating !== undefined ? (
 										<StarRatingComponent
 											rating={starRating}
 										/>
-									)}
+									): null}
 								</>
 							</ImageWrapper>
 						)}
