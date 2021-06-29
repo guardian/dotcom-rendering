@@ -32,5 +32,11 @@ export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
 		end();
 	});
 	setAlreadyHydrated(true);
+	// @ts-ignore
+	if (window.STORYBOOK_ENV) {
+		window.addEventListener('storybook:reset', () =>
+			setAlreadyHydrated(false),
+		);
+	}
 	return null;
 };
