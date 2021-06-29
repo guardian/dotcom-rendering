@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
+import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -73,6 +74,7 @@ import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockC
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import { log } from '@guardian/libs';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -328,6 +330,32 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			});
 		}
 	}, [countryCode, CAPI.config.switches.consentManagement, pageViewId]);
+
+	// ************************
+	// *      Commercial      *
+	// ************************
+	useEffect(() => {
+		if (!window.guardian.config.switches.commercialMetrics) return;
+		if (!window.guardian.config.ophan) return;
+
+		const shouldForceMetrics = ABTestAPI.allRunnableTests(
+			tests,
+		).some((test) => test.id.startsWith('Commercial'));
+
+		const userIsInSamplingGroup = Math.random() <= 1 / 100;
+
+		log('commercial', { shouldForceMetrics, userIsInSamplingGroup });
+
+		const { isDev } = window.guardian.config.page;
+
+		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
+			// we’re doing this twice
+			const browserId = getCookie('bwid') || undefined;
+
+			// TODO: only send them once, using the return value of sendBeacon
+			sendCommercialMetrics(pageViewId, browserId, Boolean(isDev));
+		}
+	}, [ABTestAPI, pageViewId]);
 
 	// ************************
 	// *   Google Analytics   *
