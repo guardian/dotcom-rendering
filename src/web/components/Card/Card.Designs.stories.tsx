@@ -31,7 +31,7 @@ const ReviewWithStars = Format(
 		design: Design.Review,
 	},
 	'Review',
-	0 // star rating
+	0, // star rating
 );
 
 const Interview = Format(

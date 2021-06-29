@@ -208,7 +208,7 @@ export const Card = ({
 										<StarRatingComponent
 											rating={starRating}
 										/>
-									): null}
+									) : null}
 								</>
 							</ImageWrapper>
 						)}

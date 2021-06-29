@@ -11,7 +11,11 @@ import { UL } from './components/UL';
 import { LI } from './components/LI';
 import { images, standfirsts } from './Card.mocks';
 
-export const Format = (format: Format, title: string, starRating?: number) => () => (
+export const Format = (
+	format: Format,
+	title: string,
+	starRating?: number,
+) => () => (
 	<Section>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
