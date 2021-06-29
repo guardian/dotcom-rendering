@@ -505,10 +505,27 @@ function hydrateClickToView(): void {
 		);
 }
 
+function resizeEmailSignups(): void {
+	const isIframe = (elem: Element): elem is HTMLIFrameElement =>
+		elem.tagName === 'IFRAME';
+	const emailSignupIframes = document.querySelectorAll('.js-email-signup');
+	Array.from(emailSignupIframes).forEach((emailSignupIframe) => {
+		if (isIframe(emailSignupIframe)) {
+			const innerIframe = emailSignupIframe.contentDocument?.querySelector(
+				'iframe',
+			);
+			if (innerIframe) {
+				innerIframe.style.width = '100%';
+			}
+		}
+	});
+}
+
 setup();
 sendTargetingParams();
 ads();
 videos();
+resizeEmailSignups();
 reportNativeElementPositionChanges();
 topics();
 slideshow();
