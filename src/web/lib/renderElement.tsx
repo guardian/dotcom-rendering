@@ -123,8 +123,8 @@ export const renderElement = ({
 			return [
 				true,
 				<AudioAtom
-					id={element.id}
 					trackUrl={element.trackUrl}
+					id={element.id}
 					kicker={element.kicker}
 					title={element.title}
 					duration={element.duration}
