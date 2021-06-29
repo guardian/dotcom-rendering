@@ -274,9 +274,11 @@ export const document = ({ data }: Props): string => {
 		JSON.stringify(makeWindowGuardian(data, cssIDs)),
 	);
 
-	// We do not yet support AMP for interactives.
+	const hasAmpInteractiveTag = CAPI.tags.some((tag) => tag.id === 'tracking/platformfunctional/ampinteractive')
+
+	// Only include AMP link for interactives which have the 'ampinteractive' tag
 	const ampLink =
-		CAPI.format.design !== 'InteractiveDesign'
+		CAPI.format.design !== 'InteractiveDesign' || hasAmpInteractiveTag
 			? `https://amp.theguardian.com/${data.CAPI.pageId}`
 			: undefined;
 
