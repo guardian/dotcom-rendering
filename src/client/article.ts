@@ -496,14 +496,16 @@ function hydrateClickToView(): void {
 }
 
 function resizeEmailSignups(): void {
-	const emailSignupIframe = document.querySelector(
-		'iframe.js-email-signup',
-	) as HTMLIFrameElement;
-	const innerIframe = emailSignupIframe.contentDocument?.querySelector(
-		'iframe',
-	);
-	if (innerIframe) {
-		innerIframe.style.width = '100%';
+	const isIframe = (elem: Element): elem is HTMLIFrameElement =>
+		elem.tagName === 'IFRAME';
+	const emailSignupIframe = document.querySelector('.js-email-signup');
+	if (emailSignupIframe && isIframe(emailSignupIframe)) {
+		const innerIframe = emailSignupIframe.contentDocument?.querySelector(
+			'iframe',
+		);
+		if (innerIframe) {
+			innerIframe.style.width = '100%';
+		}
 	}
 }
 
