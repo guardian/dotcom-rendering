@@ -52,9 +52,14 @@ describe('Interactivity', function () {
 			it('should change the list of most viewed items when a tab is clicked', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.contains('Lifestyle');
+				// Double up the scrollIntoView to reduce flakiness
+				// with things loading in the meantime
 				cy.get('[data-component="most-popular"]').scrollIntoView({
 					duration: 300,
-					offset: { top: 50 },
+					offset: { top: 100 },
+				});
+				cy.get('[data-component="most-popular"]').scrollIntoView({
+					offset: { top: 0 },
 				});
 				cy.wait('@getMostReadGeo');
 				cy.wait('@getMostRead');
