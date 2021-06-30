@@ -8,7 +8,7 @@ const scriptUrls = [
 
 const isInteractiveContentsBlockElement = (element: CAPIElement): boolean =>
 	element._type ===
-	'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+		'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
 	!!element.scriptUrl &&
 	scriptUrls.indexOf(element.scriptUrl) !== -1;
 
@@ -70,7 +70,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 						})),
 						endDocumentElementId:
 							endDocumentElement &&
-								'elementId' in endDocumentElement
+							'elementId' in endDocumentElement
 								? endDocumentElement.elementId
 								: undefined,
 					});
