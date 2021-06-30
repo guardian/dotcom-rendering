@@ -82,6 +82,7 @@ import {
 import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
+import { commercialPartner } from '../experiments/tests/commercial-partner';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -340,7 +341,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(
 			tests,
-		).some((test) => test.id.startsWith('Commercial'));
+		).some((test) =>
+			[commercialPartner].map((t) => t.id).includes(test.id),
+		);
 
 		const userIsInSamplingGroup = Math.random() <= 1 / 100;
 
