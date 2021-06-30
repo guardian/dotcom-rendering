@@ -73,6 +73,7 @@ import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockC
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
+import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -333,7 +334,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// *   Google Analytics   *
 	// ************************
 	useEffect(() => {
-		onConsentChange((state: any) => {
+		onConsentChange((state: ConsentState) => {
 			const consentGiven = getConsentFor('google-analytics', state);
 			if (consentGiven) {
 				Promise.all([

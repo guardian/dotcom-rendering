@@ -12,7 +12,7 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { clearFix } from '@root/src/lib/mixins';
 
-import { Display } from '@guardian/types';
+import { Display, Special } from '@guardian/types';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
@@ -66,6 +66,9 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
+	const displayRoundel =
+		format.display === Display.Immersive || format.theme === Special.Labs;
+
 	return (
 		<div css={rowStyles}>
 			{/*
@@ -212,7 +215,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 				/>
 				<ExpandedMenu nav={nav} display={format.display} />
 			</nav>
-			{format.display === Display.Immersive && (
+			{displayRoundel && (
 				<PositionRoundel>
 					<GuardianRoundel />
 				</PositionRoundel>

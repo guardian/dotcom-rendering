@@ -6,6 +6,7 @@ import {
 	labs,
 	border,
 	brandLine,
+	neutral,
 } from '@guardian/src-foundations/palette';
 import { Display, Format, Special } from '@guardian/types';
 import { Lines } from '@guardian/src-ed-lines';
@@ -169,7 +170,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 
 			{NAV.subNavSections && format.theme !== Special.Labs && (
 				<Section
-					backgroundColour={palette.background.article}
+					backgroundColour={neutral[100]}
 					padded={false}
 					sectionId="sub-nav-root"
 				>
@@ -244,7 +245,11 @@ export const InteractiveImmersiveLayout = ({
 			</Section>
 
 			{NAV.subNavSections && (
-				<Section padded={false} sectionId="sub-nav-root">
+				<Section
+					padded={false}
+					sectionId="sub-nav-root"
+					backgroundColour={neutral[100]}
+				>
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}

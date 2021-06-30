@@ -29,7 +29,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 	`;
 
 	return (
-		<div css={embedContainer}>
+		<div css={embedContainer} data-component="youtube-embed">
 			<MaintainAspectRatio height={height} width={width}>
 				<iframe
 					src={embedUrl}

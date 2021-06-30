@@ -570,6 +570,7 @@ type UserProfile = {
 type TeamType = {
 	id: string;
 	name: string;
+	codename: string;
 	players: PlayerType[];
 	possession: number;
 	shotsOn: number;

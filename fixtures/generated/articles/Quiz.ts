@@ -416,6 +416,10 @@ export const Quiz: CAPIType = {
 						url: '/football',
 						children: [
 							{
+								title: 'Euro 2020',
+								url: '/football/euro-2020',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -552,9 +556,17 @@ export const Quiz: CAPIType = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'Euro 2020',
+						url: '/football/euro-2020',
+					},
+					{
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: 'Euro 2020',
+								url: '/football/euro-2020',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -942,6 +954,10 @@ export const Quiz: CAPIType = {
 				url: '/football',
 				children: [
 					{
+						title: 'Euro 2020',
+						url: '/football/euro-2020',
+					},
+					{
 						title: 'Live scores',
 						url: '/football/live',
 						longTitle: 'football/live',
@@ -974,6 +990,10 @@ export const Quiz: CAPIType = {
 				],
 			},
 			links: [
+				{
+					title: 'Euro 2020',
+					url: '/football/euro-2020',
+				},
 				{
 					title: 'Live scores',
 					url: '/football/live',
@@ -1719,7 +1739,7 @@ export const Quiz: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '597369b9-7860-4bd8-9cba-ca9b1261e8a9',
+			elementId: '4feb46aa-7c65-4d22-9bd9-e49237d91b19',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2351,7 +2371,7 @@ export const Quiz: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					elementId: 'c17d66c2-9530-4b81-9135-559c93eafed3',
+					elementId: '82d255ab-597f-4146-a424-bb02eb50be9a',
 				},
 			],
 			blockCreatedOn: 1591866131000,

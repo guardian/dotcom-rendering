@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { css } from '@emotion/react';
-import { body } from '@guardian/src-foundations/typography';
+import { body, textSans } from '@guardian/src-foundations/typography';
+import { Special } from '@guardian/types';
 import { space } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { Placeholder } from '@root/src/web/components/Placeholder';
@@ -90,8 +91,8 @@ const getMinHeight = (role: RoleType, loaded: boolean) => {
 	}
 	return `${decideHeight(role)}px`;
 };
-const wrapperStyle = (role: RoleType, loaded: boolean) => css`
-	${body.medium()};
+const wrapperStyle = (format: Format, role: RoleType, loaded: boolean) => css`
+	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
 	background-color: ${neutral[100]};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
@@ -274,7 +275,7 @@ export const InteractiveBlockComponent = ({
 			<div
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 				ref={wrapperRef}
-				css={wrapperStyle(role, loaded)}
+				css={wrapperStyle(format, role, loaded)}
 			>
 				{!loaded && (
 					<>
