@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import libDebounce from 'lodash.debounce';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
