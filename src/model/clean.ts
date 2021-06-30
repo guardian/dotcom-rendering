@@ -16,10 +16,12 @@ export const clean = compose(
 	(s: string) =>
 		minify(s, {
 			collapseWhitespace: true,
-			removeEmptyElements: true,
 			minifyCSS: true,
 			minifyJS: true,
 		}),
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	DOMPurify.sanitize,
 );
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+export const sanitiseHTML = (html: string): string => DOMPurify.sanitize(html);

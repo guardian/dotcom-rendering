@@ -17,7 +17,6 @@ export interface WindowGuardianConfig {
 		adUnit: string;
 		showRelatedContent: boolean;
 		ajaxUrl: string;
-		hbImpl: { [key: string]: any } | string;
 		shouldHideReaderRevenue: boolean;
 	} & ConfigType;
 	libs: {
@@ -54,7 +53,6 @@ const makeWindowGuardianConfig = (
 			adUnit: config.adUnit,
 			showRelatedContent: true,
 			ajaxUrl: config.ajaxUrl,
-			hbImpl: config.hbImpl,
 		}),
 		libs: {
 			googletag: config.googletagUrl,
@@ -204,6 +202,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 		isLiveBlog: CAPI.config.isLiveBlog || false,
 		isLive: CAPI.config.isLive || false,
 		isPreview: CAPI.config.isPreview,
+		stage: CAPI.config.stage,
 		matchUrl: CAPI.matchUrl,
 		elementsToHydrate: CAPI.blocks
 			// Get all elements arrays from all blocks -> [[h][h][x]]

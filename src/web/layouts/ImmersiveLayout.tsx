@@ -16,7 +16,6 @@ import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -35,6 +34,7 @@ import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
+import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -46,6 +46,7 @@ import {
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
+import { Lines } from '@guardian/src-ed-lines';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -498,19 +499,25 @@ export const ImmersiveLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="lines">
-						{format.design === Design.PhotoEssay ? (
+						{format.design === Design.PhotoEssay &&
+						format.theme !== Special.Labs ? (
 							<></>
 						) : (
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<GuardianLines
-										palette={palette}
-										effect={decideLineEffect(
-											Design.Article,
-											format.theme,
-										)}
-										count={decideLineCount(Design.Article)}
-									/>
+									{format.theme === Special.Labs ? (
+										<GuardianLabsLines />
+									) : (
+										<Lines
+											effect={decideLineEffect(
+												Design.Article,
+												format.theme,
+											)}
+											count={decideLineCount(
+												Design.Article,
+											)}
+										/>
+									)}
 								</div>
 							</div>
 						)}
@@ -545,7 +552,7 @@ export const ImmersiveLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} palette={palette} />
+								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -667,7 +674,7 @@ export const ImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

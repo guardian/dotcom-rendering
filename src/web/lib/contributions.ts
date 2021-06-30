@@ -68,7 +68,7 @@ export const isRecurringContributor = (isSignedIn: boolean): boolean => {
 // SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE (support cookie, when making one-off contribution)
 // Get the date of the latest one-off contribution by looking at the two relevant cookies
 // and returning a Unix epoch string of the latest date found.
-export const getLastOneOffContributionDate = (): number | undefined => {
+export const getLastOneOffContributionTimestamp = (): number | undefined => {
 	// Attributes cookie - expects YYYY-MM-DD
 	const contributionDateFromAttributes = getCookie(
 		ONE_OFF_CONTRIBUTION_DATE_COOKIE,
@@ -100,6 +100,21 @@ export const getLastOneOffContributionDate = (): number | undefined => {
 	return parsedDateFromSupport || undefined; // This guards against 'parsedDateFromSupport' being NaN
 };
 
+export const getLastOneOffContributionDate = (): string | undefined => {
+	const timestamp = getLastOneOffContributionTimestamp();
+
+	if (timestamp === undefined) {
+		return undefined;
+	}
+
+	const date = new Date(timestamp);
+	const year = date.getFullYear();
+	const month = (date.getMonth() + 1).toString().padStart(2, '0');
+	const day = date.getDate().toString().padStart(2, '0');
+
+	return `${year}-${month}-${day}`;
+};
+
 const dateDiffDays = (from: number, to: number): number => {
 	const oneDayMs = 1000 * 60 * 60 * 24;
 	const diffMs = to - from;
@@ -109,7 +124,7 @@ const dateDiffDays = (from: number, to: number): number => {
 const AskPauseDays = 90;
 
 export const isRecentOneOffContributor = () => {
-	const lastContributionDate = getLastOneOffContributionDate();
+	const lastContributionDate = getLastOneOffContributionTimestamp();
 	if (lastContributionDate) {
 		const now = Date.now();
 		return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
@@ -127,7 +142,7 @@ export const shouldHideSupportMessaging = (
 
 const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 
-export const hasOptedOutOfArticleCount = (): boolean =>
+export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
@@ -135,11 +150,11 @@ const removeArticleCountsFromLocalStorage = () => {
 	window.localStorage.removeItem(WEEKLY_ARTICLE_COUNT_KEY);
 };
 
-export const getArticleCountConsent = (): Promise<boolean> => {
-	if (hasOptedOutOfArticleCount()) {
-		return Promise.resolve(false);
-	}
+export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 	return new Promise((resolve) => {
+		if (getCookie('gu-cmp-disabled')) {
+			resolve(true);
+		}
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
 			if (ccpa || aus) {
 				resolve(true);
@@ -151,11 +166,15 @@ export const getArticleCountConsent = (): Promise<boolean> => {
 				if (!hasRequiredConsents) {
 					removeArticleCountsFromLocalStorage();
 				}
-
 				resolve(hasRequiredConsents);
 			}
 		});
 	});
+};
+
+export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
+	const hasCmpConsent = await hasCmpConsentForArticleCount();
+	return !hasCmpConsent || hasArticleCountOptOutCookie();
 };
 
 const twentyMins = 20 * 60000;

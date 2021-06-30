@@ -3,14 +3,12 @@ import { css } from '@emotion/react';
 import {
 	neutral,
 	brandBackground,
-	brandAltBackground,
 	brandLine,
 	brandBorder,
 	labs,
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
@@ -36,7 +34,6 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
-import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -51,6 +48,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import { Lines } from '@guardian/src-ed-lines';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -328,19 +326,7 @@ export const ShowcaseLayout = ({
 							padded={false}
 							showTopBorder={false}
 						>
-							<GuardianLines count={4} palette={palette} />
-						</Section>
-						<Section
-							backgroundColour={brandAltBackground.primary}
-							padded={false}
-							showTopBorder={false}
-							showSideBorders={false}
-						>
-							<AnniversaryAtomComponent
-								anniversaryInteractiveAtom={
-									CAPI.anniversaryInteractiveAtom
-								}
-							/>
+							<Lines count={4} effect="straight" />
 						</Section>
 					</SendToBack>
 				</div>
@@ -469,9 +455,8 @@ export const ShowcaseLayout = ({
 					<GridItem area="lines">
 						<div css={maxWidth}>
 							<div css={stretchLines}>
-								<GuardianLines
+								<Lines
 									count={decideLineCount(format.design)}
-									palette={palette}
 									effect={decideLineEffect(
 										format.design,
 										format.theme,
@@ -510,7 +495,7 @@ export const ShowcaseLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} palette={palette} />
+								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
 									format={format}
@@ -627,7 +612,7 @@ export const ShowcaseLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

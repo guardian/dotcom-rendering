@@ -13,7 +13,6 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -39,7 +38,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
-import { AnniversaryAtomComponent } from '@frontend/web/components/AnniversaryAtomComponent';
+import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -50,6 +49,7 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { Lines } from '@guardian/src-ed-lines';
 
 const StandardGrid = ({
 	children,
@@ -333,6 +333,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const formatForNav =
+		format.theme === Special.Labs
+			? format
+			: {
+					...format,
+					theme: getCurrentPillar(CAPI),
+			  };
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -380,10 +389,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			>
 				<Nav
 					nav={NAV}
-					format={{
-						...format,
-						theme: getCurrentPillar(CAPI),
-					}}
+					format={formatForNav}
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
 				/>
@@ -404,27 +410,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			)}
 
 			{format.theme !== Special.Labs ? (
-				<>
-					<Section
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<GuardianLines count={4} palette={palette} />
-					</Section>
-					<Section
-						backgroundColour={brandAltBackground.primary}
-						padded={false}
-						showTopBorder={false}
-						showSideBorders={false}
-					>
-						<AnniversaryAtomComponent
-							anniversaryInteractiveAtom={
-								CAPI.anniversaryInteractiveAtom
-							}
-						/>
-					</Section>
-				</>
+				<Section
+					backgroundColour={palette.background.article}
+					padded={false}
+					showTopBorder={false}
+				>
+					<Lines count={4} effect="straight" />
+				</Section>
 			) : (
 				<Stuck>
 					<Section
@@ -540,14 +532,17 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="lines">
 						<div css={maxWidth}>
 							<div css={stretchLines}>
-								<GuardianLines
-									count={decideLineCount(format.design)}
-									palette={palette}
-									effect={decideLineEffect(
-										format.design,
-										format.theme,
-									)}
-								/>
+								{format.theme === Special.Labs ? (
+									<GuardianLabsLines />
+								) : (
+									<Lines
+										count={decideLineCount(format.design)}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								)}
 							</div>
 						</div>
 					</GridItem>
@@ -583,10 +578,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								{isMatchReport && <div id="match-stats" />}
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
+								<Lines
 									data-print-layout="hide"
 									count={4}
-									palette={palette}
+									effect="straight"
 								/>
 								<SubMeta
 									palette={palette}
@@ -722,7 +717,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<Lines count={4} effect="straight" />
 				</Section>
 			)}
 

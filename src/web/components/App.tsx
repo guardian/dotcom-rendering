@@ -47,7 +47,7 @@ import { Display, Design } from '@guardian/types';
 import type { Format, CountryCode } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { getArticleCountConsent } from '@frontend/web/lib/contributions';
+import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -71,7 +71,8 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/V
 import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { OphanRecordFunction } from '@root/node_modules/@guardian/ab-core/dist/types';
+import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
+import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -227,7 +228,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// article pages when other pages are supported by DCR.
 	useEffect(() => {
 		const incrementArticleCountsIfConsented = async () => {
-			if (await getArticleCountConsent()) {
+			const hasOptedOut = await hasOptedOutOfArticleCount();
+			if (!hasOptedOut) {
 				incrementDailyArticleCount();
 				incrementWeeklyArticleCount();
 			}
@@ -331,7 +333,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// *   Google Analytics   *
 	// ************************
 	useEffect(() => {
-		onConsentChange((state: any) => {
+		onConsentChange((state: ConsentState) => {
 			const consentGiven = getConsentFor('google-analytics', state);
 			if (consentGiven) {
 				Promise.all([
@@ -605,6 +607,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 									CAPI.pageId,
 									CAPI.webTitle,
 								)}
+								theme={format.theme}
 							/>
 						)}
 						{quizAtom.quizType === 'knowledge' && (
@@ -616,6 +619,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 									CAPI.pageId,
 									CAPI.webTitle,
 								)}
+								theme={format.theme}
 							/>
 						)}
 					</>
@@ -936,7 +940,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper palette={palette} />
+						<MostViewedRightWrapper />
 					</Suspense>
 				</Lazy>
 			</Portal>
@@ -962,6 +966,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
+					stage={CAPI.stage}
 				/>
 			</Portal>
 			<Portal

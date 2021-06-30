@@ -1,6 +1,6 @@
 import { addCookie } from '../browser/cookie';
 import {
-	getLastOneOffContributionDate,
+	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
 	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
@@ -24,7 +24,7 @@ describe('getLastOneOffContributionDate', () => {
 	it('returns date from attributes cookie if only cookie found', () => {
 		const somePastDate = '2020-01-28';
 		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, somePastDate);
-		const lastOneOffContributionDate = getLastOneOffContributionDate();
+		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 
 		// Our function will convert YYYY-MM-DD into a timestamp
 		const somePastDateToTimestamp = Date.parse(somePastDate);
@@ -34,7 +34,7 @@ describe('getLastOneOffContributionDate', () => {
 	it('returns a support cookie date if only cookie found', () => {
 		const somePastDate = 1582567969093;
 		addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, String(somePastDate));
-		const lastOneOffContributionDate = getLastOneOffContributionDate();
+		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 		expect(lastOneOffContributionDate).toBe(somePastDate);
 	});
 
@@ -45,7 +45,7 @@ describe('getLastOneOffContributionDate', () => {
 		const notSoLongAgo = 1582567969093;
 		addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, String(notSoLongAgo));
 
-		const lastOneOffContributionDate = getLastOneOffContributionDate();
+		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 		expect(lastOneOffContributionDate).toBe(notSoLongAgo);
 	});
 
@@ -53,12 +53,12 @@ describe('getLastOneOffContributionDate', () => {
 		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, 'CANT_TOUCH_THIS');
 		addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, 'OR_THIS');
 
-		const lastOneOffContributionDate = getLastOneOffContributionDate();
+		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 		expect(lastOneOffContributionDate).toBeUndefined();
 	});
 
 	it('returns an empty string if no one-off contribution found', () => {
-		const lastOneOffContributionDate = getLastOneOffContributionDate();
+		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 		expect(lastOneOffContributionDate).toBeUndefined();
 	});
 });

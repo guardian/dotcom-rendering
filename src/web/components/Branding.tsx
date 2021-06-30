@@ -9,8 +9,8 @@ const brandingStyle = css`
 `;
 
 const brandingLabelStyle = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })};
-	color: ${neutral[46]};
+	${textSans.xxsmall()};
+	color: ${neutral[20]};
 `;
 
 const brandingLogoStyle = css`

@@ -74,26 +74,36 @@ export const coreVitals = (): void => {
 			window.location.hostname === 'm.code.dev-theguardian.com' ||
 			window.location.hostname === 'localhost' ||
 			window.location.hostname === 'preview.gutools.co.uk'
-				? 'http://performance-events.code.dev-guardianapis.com/core-web-vitals'
+				? 'https://performance-events.code.dev-guardianapis.com/core-web-vitals'
 				: 'https://performance-events.guardianapis.com/core-web-vitals';
 
-		// If CLS has been calculated
-		if (jsonData.cls !== null) {
-			// Set page view and browser ID
+		// Browser support
+		// getCLS(): Chromium,
+		// getFCP(): Chromium, Firefox, Safari Technology Preview
+		// getFID(): Chromium, Firefox, Safari, Internet Explorer (with the polyfill)
+		// getLCP(): Chromium
+		// getTTFB(): Chromium, Firefox, Safari, Internet Explorer
 
-			fetch(endpoint, {
-				method: 'POST', // *GET, POST, PUT, DELETE, etc.
-				mode: 'cors', // no-cors, *cors, same-origin
-				cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-				credentials: 'same-origin', // include, *same-origin, omit
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				redirect: 'follow',
-				referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
-				body: JSON.stringify(jsonData),
-			}).catch(() => {});
-		}
+		// We will send all data whenever any update. This means `null` values will appear in the lake
+		// and need handling.
+
+		fetch(endpoint, {
+			method: 'POST', // *GET, POST, PUT, DELETE, etc.
+			mode: 'cors', // no-cors, *cors, same-origin
+			cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+			credentials: 'same-origin', // include, *same-origin, omit
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			redirect: 'follow',
+			referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-w
+			body: JSON.stringify(jsonData),
+		}).catch((error) =>
+			window.guardian.modules.sentry.reportError(
+				error,
+				'core-web-vitals-dcr',
+			),
+		);
 	};
 
 	getCLS(addToJson, false);

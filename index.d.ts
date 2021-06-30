@@ -195,22 +195,19 @@ interface EditionCommercialProperties {
 
 type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
 
+type BrandingLogo = {
+	src: string;
+	link: string;
+	label: string;
+	dimensions: { width: number; height: number };
+}
+
 interface Branding {
 	brandingType?: { name: string };
 	sponsorName: string;
-	logo: {
-		src: string;
-		link: string;
-		label: string;
-		dimensions: { width: number; height: number };
-	};
+	logo: BrandingLogo;
 	aboutThisLink: string;
-	logoForDarkBackground?: {
-		src: string;
-		dimensions: { width: number; height: number };
-		link: string;
-		label: string;
-	};
+	logoForDarkBackground?: BrandingLogo;
 }
 
 interface LinkType extends SimpleLinkType {
@@ -504,6 +501,7 @@ type CAPIBrowserType = {
 	elementsToHydrate: CAPIElement[];
 	isPreview?: boolean;
 	webTitle: string;
+	stage: string;
 };
 
 interface TagType {
@@ -572,6 +570,7 @@ type UserProfile = {
 type TeamType = {
 	id: string;
 	name: string;
+	codename: string;
 	players: PlayerType[];
 	possession: number;
 	shotsOn: number;
@@ -674,7 +673,6 @@ interface ConfigType extends CommercialConfigType {
 	googletagUrl: string;
 	stage: string;
 	frontendAssetsFullURL: string;
-	hbImpl: { [key: string]: any } | string;
 	adUnit: string;
 	isSensitive: boolean;
 	videoDuration?: number;
@@ -835,6 +833,7 @@ interface BaseTrailType {
     commentCount?: number;
     starRating?: number;
     linkText?: string;
+	branding?: Branding
 }
 interface TrailType extends BaseTrailType {
 	palette: Palette;

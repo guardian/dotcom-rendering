@@ -194,12 +194,12 @@ export const MatchStats = ({ home, away }: Props) => (
 							sections={[
 								{
 									value: home.possession,
-									label: home.name.slice(0, 3).toUpperCase(),
+									label: home.codename,
 									color: home.colours,
 								},
 								{
 									value: away.possession,
-									label: away.name.slice(0, 3).toUpperCase(),
+									label: away.codename,
 									color: away.colours,
 								},
 							].reverse()}

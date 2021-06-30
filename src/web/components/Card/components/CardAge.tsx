@@ -23,7 +23,7 @@ const ageStyles = (format: Format, palette: Palette) => {
 		color: ${palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
-    between any sibings (like GuardianLines) */
+    between any sibings (like Lines) */
 		padding-left: 5px;
 		padding-right: 5px;
 		${until.tablet} {

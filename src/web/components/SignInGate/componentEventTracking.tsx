@@ -2,7 +2,7 @@ import {
 	OphanComponent,
 	OphanComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
-import { CurrentABTest } from '@frontend/web/components/SignInGate/gateDesigns/types';
+import { CurrentSignInGateABTest } from 'src/web/components/SignInGate/types';
 
 type ABTestVariant = {
 	name: string;
@@ -61,7 +61,7 @@ export const withComponentId: (id: string) => OphanComponent = (
 export const trackLink = (
 	componentId: string,
 	value: string,
-	abTest?: CurrentABTest,
+	abTest?: CurrentSignInGateABTest,
 ): void => {
 	const component = withComponentId(componentId);
 

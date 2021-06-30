@@ -8,6 +8,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 import { Display, Design, Format, Special } from '@guardian/types';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { interactiveLegacyClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	headlineString: string;
@@ -217,21 +218,6 @@ export const ArticleHeadline = ({
 	byline,
 	palette,
 }: Props) => {
-	if (format.display === Display.NumberedList) {
-		return (
-			<h1
-				css={[
-					boldFont,
-					topPadding,
-					css`
-						color: ${palette.text.headline};
-					`,
-				]}
-			>
-				{curly(headlineString)}
-			</h1>
-		);
-	}
 	switch (format.display) {
 		case Display.Immersive: {
 			switch (format.design) {
@@ -305,6 +291,20 @@ export const ArticleHeadline = ({
 					);
 			}
 		}
+		case Display.NumberedList:
+			return (
+				<h1
+					css={[
+						boldFont,
+						topPadding,
+						css`
+							color: ${palette.text.headline};
+						`,
+					]}
+				>
+					{curly(headlineString)}
+				</h1>
+			);
 		case Display.Showcase:
 		case Display.Standard:
 		default: {
@@ -432,6 +432,27 @@ export const ArticleHeadline = ({
 						>
 							{curly(headlineString)}
 						</h1>
+					);
+				case Design.Interactive:
+					return (
+						<div
+							css={css`
+								position: relative;
+							`}
+						>
+							<h1
+								className={interactiveLegacyClasses.headline}
+								css={[
+									standardFont,
+									topPadding,
+									css`
+										color: ${palette.text.headline};
+									`,
+								]}
+							>
+								{curly(headlineString)}
+							</h1>
+						</div>
 					);
 				default:
 					return (

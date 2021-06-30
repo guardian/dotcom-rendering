@@ -1,5 +1,5 @@
 import { record } from '@root/src/web/browser/ophan/ophan';
-import { pickMessage, CanShowResult } from './messagePicker';
+import { pickMessage, CanShowResult, SlotConfig } from './messagePicker';
 
 jest.mock('@root/src/web/browser/ophan/ophan', () => ({
 	record: jest.fn(),
@@ -21,13 +21,13 @@ describe('pickMessage', () => {
 	it('resolves with the highest priority message which can show', async () => {
 		const MockComponent = () => <div />;
 		const ChosenMockComponent = () => <div />;
-		const config = {
+		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
 				{
 					candidate: {
 						id: 'banner-1',
-						canShow: () => Promise.resolve({ result: false }),
+						canShow: () => Promise.resolve({ show: false }),
 						show: () => MockComponent,
 					},
 					timeoutMillis: null,
@@ -35,7 +35,8 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-2',
-						canShow: () => Promise.resolve({ result: true }),
+						canShow: () =>
+							Promise.resolve({ show: true, meta: undefined }),
 						show: () => ChosenMockComponent,
 					},
 					timeoutMillis: null,
@@ -43,7 +44,8 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-3',
-						canShow: () => Promise.resolve({ result: true }),
+						canShow: () =>
+							Promise.resolve({ show: true, meta: undefined }),
 						show: () => MockComponent,
 					},
 					timeoutMillis: null,
@@ -59,13 +61,13 @@ describe('pickMessage', () => {
 	it('resolves with null if no messages can show', async () => {
 		const MockComponent = () => <div />;
 
-		const config = {
+		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
 				{
 					candidate: {
 						id: 'banner-1',
-						canShow: () => Promise.resolve({ result: false }),
+						canShow: () => Promise.resolve({ show: false }),
 						show: () => MockComponent,
 					},
 					timeoutMillis: null,
@@ -73,7 +75,7 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-2',
-						canShow: () => Promise.resolve({ result: false }),
+						canShow: () => Promise.resolve({ show: false }),
 						show: () => MockComponent,
 					},
 					timeoutMillis: null,
@@ -89,16 +91,20 @@ describe('pickMessage', () => {
 	it('falls through to a lower priority message when a higher one times out', async () => {
 		const MockComponent = () => <div />;
 		const ChosenMockComponent = () => <div />;
-		const config = {
+		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
 				{
 					candidate: {
 						id: 'banner-1',
-						canShow: (): Promise<CanShowResult> =>
+						canShow: (): Promise<CanShowResult<void>> =>
 							new Promise((resolve) =>
 								setTimeout(
-									() => resolve({ result: true }),
+									() =>
+										resolve({
+											show: true,
+											meta: undefined,
+										}),
 									500,
 								),
 							),
@@ -109,7 +115,8 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-2',
-						canShow: () => Promise.resolve({ result: true }),
+						canShow: () =>
+							Promise.resolve({ show: true, meta: undefined }),
 						show: () => ChosenMockComponent,
 					},
 					timeoutMillis: null,
@@ -128,16 +135,20 @@ describe('pickMessage', () => {
 		const MockComponent = () => <div />;
 		let timer1;
 		let timer2;
-		const config = {
+		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
 				{
 					candidate: {
 						id: 'banner-1',
-						canShow: (): Promise<CanShowResult> =>
+						canShow: (): Promise<CanShowResult<void>> =>
 							new Promise((resolve) => {
 								timer1 = setTimeout(
-									() => resolve({ result: true }),
+									() =>
+										resolve({
+											show: true,
+											meta: undefined,
+										}),
 									500,
 								);
 							}),
@@ -148,10 +159,14 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-2',
-						canShow: (): Promise<CanShowResult> =>
+						canShow: (): Promise<CanShowResult<void>> =>
 							new Promise((resolve) => {
 								timer2 = setTimeout(
-									() => resolve({ result: true }),
+									() =>
+										resolve({
+											show: true,
+											meta: undefined,
+										}),
 									500,
 								);
 							}),
@@ -175,7 +190,7 @@ describe('pickMessage', () => {
 	it('passes metadata returned by canShow to show', async () => {
 		const renderComponent = jest.fn(() => () => <div />);
 		const meta = { extra: 'info' };
-		const config = {
+		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
 				{
@@ -183,7 +198,7 @@ describe('pickMessage', () => {
 						id: 'banner-1',
 						canShow: () =>
 							Promise.resolve({
-								result: true,
+								show: true,
 								meta,
 							}),
 						show: renderComponent,
@@ -202,16 +217,20 @@ describe('pickMessage', () => {
 	it('sends a message to ophan when a message canShow times out', async () => {
 		const MockComponent = () => <div />;
 		let timer;
-		const config = {
+		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
 				{
 					candidate: {
 						id: 'example-banner',
-						canShow: (): Promise<CanShowResult> =>
+						canShow: (): Promise<CanShowResult<void>> =>
 							new Promise((resolve) => {
 								timer = setTimeout(
-									() => resolve({ result: true }),
+									() =>
+										resolve({
+											show: true,
+											meta: undefined,
+										}),
 									300,
 								);
 							}),

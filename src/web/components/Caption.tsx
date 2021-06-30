@@ -25,6 +25,10 @@ const captionStyle = (palette: Palette) => css`
 	${textSans.xxsmall()};
 	word-wrap: break-word;
 	color: ${palette.text.caption};
+	${until.tablet} {
+		padding-left: ${space[2]}px;
+		padding-right: ${space[2]}px;
+	}
 `;
 
 const bottomMargin = css`

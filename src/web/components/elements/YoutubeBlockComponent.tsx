@@ -148,7 +148,7 @@ export const YoutubeBlockComponent = ({
 	};
 
 	return (
-		<div data-chromatic="ignore">
+		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
 				assetId={assetId}
 				overrideImage={

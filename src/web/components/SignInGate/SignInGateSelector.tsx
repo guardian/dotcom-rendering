@@ -1,45 +1,30 @@
 import { useState, useEffect } from 'react';
-import { useAB } from '@guardian/ab-react';
-import { ABTest, Runnable } from '@guardian/ab-core';
 import { constructQuery } from '@root/src/lib/querystring';
 
 import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from '@frontend/web/components/SignInGate/dismissGate';
-import {
-	SignInGateComponent,
-	CurrentABTest,
-} from '@frontend/web/components/SignInGate/gateDesigns/types';
 import { getCookie } from '@frontend/web/browser/cookie';
+import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
-// Sign in Gate A/B Tests
-import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
-import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
-
-// Sign in Gate Types
-import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
-import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
-
+import { useOnce } from '@frontend/web/lib/useOnce';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,
 	withComponentId,
 } from './componentEventTracking';
-
-// component name, should always be sign-in-gate
-export const componentName = 'sign-in-gate';
-
-// interface for the sign in gate selector component
-interface SignInGateSelectorProps {
-	isSignedIn?: boolean;
-	CAPI: CAPIBrowserType;
-}
+import { signInGateTestIdToComponentId } from './signInGate';
+import {
+	CurrentSignInGateABTest,
+	SignInGateComponent,
+	SignInGateSelectorProps,
+} from './types';
 
 // interface for the component which shows the sign in gate
 interface ShowSignInGateProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
-	abTest: CurrentABTest;
+	abTest: CurrentSignInGateABTest;
 	CAPI: CAPIBrowserType;
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
@@ -47,7 +32,7 @@ interface ShowSignInGateProps {
 
 const dismissGate = (
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>,
-	currentAbTestValue: CurrentABTest,
+	currentAbTestValue: CurrentSignInGateABTest,
 ) => {
 	setShowGate(false);
 	setUserDismissedGate(currentAbTestValue.variant, currentAbTestValue.name);
@@ -57,31 +42,11 @@ const dismissGate = (
 	);
 };
 
-type GateTestMap = { [name: string]: SignInGateComponent };
-
-/* When adding a new test, you need to add the test name to the tests array below,
-   and add a entry for each variant that maps it to a SignInGateComponent in testVariantToGateMapping, and in turn match each test id to an component id in testIdToComponentId
-*/
-const tests: ReadonlyArray<ABTest> = [
-	signInGateMainVariant,
-	signInGateMainControl,
-];
-
-const testVariantToGateMapping: GateTestMap = {
-	'main-control-4': gateMainControl,
-	'main-variant-4': gateMainVariant,
-};
-
-const testIdToComponentId: { [key: string]: string } = {
-	SignInGateMainVariant: 'main_variant_4',
-	SignInGateMainControl: 'main_control_4',
-};
-
 // function to generate the profile.theguardian.com url with tracking params
 // and the return url (link to current article page)
 const generateSignInUrl = (
 	CAPI: CAPIBrowserType,
-	currentTest: CurrentABTest,
+	currentTest: CurrentSignInGateABTest,
 ) => {
 	// url of the article, return user here after sign in/registration
 	const returnUrl = `${CAPI.config.host}/${CAPI.pageId}`;
@@ -89,7 +54,7 @@ const generateSignInUrl = (
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
 		componentType: 'signingate',
-		componentId: testIdToComponentId[currentTest.id],
+		componentId: signInGateTestIdToComponentId[currentTest.id],
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
 		viewId: window.guardian.ophan.viewId,
@@ -117,7 +82,9 @@ const ShowSignInGate = ({
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
 		submitViewEventTracking({
-			component: withComponentId(testIdToComponentId[abTest.id]),
+			component: withComponentId(
+				signInGateTestIdToComponentId[abTest.id],
+			),
 			abTest,
 		});
 	}, [abTest]);
@@ -134,7 +101,7 @@ const ShowSignInGate = ({
 				dismissGate(setShowGate, abTest);
 			},
 			abTest,
-			ophanComponentId: testIdToComponentId[abTest.id],
+			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
 			isComment:
 				CAPI.format.design === 'CommentDesign' ||
 				CAPI.format.design === 'EditorialDesign',
@@ -150,61 +117,64 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 }: SignInGateSelectorProps) => {
-	const [showGate, setShowGate] = useState(true);
-	const [currentTest, setCurrentTest] = useState<CurrentABTest>({
-		name: '',
-		variant: '',
-		id: '',
-	});
+	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
+		undefined,
+	);
+	const [gateVariant, setGateVariant] = useState<
+		SignInGateComponent | undefined
+	>(undefined);
+	const [currentTest, setCurrentTest] = useState<
+		CurrentSignInGateABTest | undefined
+	>(undefined);
+	const [canShowGate, setCanShowGate] = useState(false);
+	const gateSelector = useSignInGateSelector();
 
-	const ab = useAB();
-
-	useEffect(() => {
-		const test: Runnable | null = ab.firstRunnableTest(tests);
-
-		setCurrentTest({
-			name: test?.dataLinkNames || test?.id || '',
-			variant: test?.variantToRun.id || '',
-			id: test?.id || '',
-		});
-	}, [ab]);
-
-	useEffect(() => {
+	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
-		if (showGate === false) {
+		if (isGateDismissed) {
 			document.dispatchEvent(
 				new CustomEvent('dcr:page:article:redisplayed'),
 			);
 		}
-	}, [showGate]);
+	}, [isGateDismissed]);
 
-	// check to see if the test is available on this render cycle
-	// required by the ab test framework, as we have to wait for the above
-	// useEffect hook to determine which test to run
-	if (currentTest.name === '' || currentTest.variant === '') {
+	useOnce(() => {
+		const [gateSelectorVariant, gateSelectorTest] = gateSelector;
+		if (gateSelectorVariant && gateSelectorTest) {
+			setGateVariant(gateSelectorVariant);
+			setCurrentTest(gateSelectorTest);
+		}
+	}, [gateSelector]);
+
+	useEffect(() => {
+		if (gateVariant && currentTest) {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			gateVariant
+				?.canShow(CAPI, !!isSignedIn, currentTest)
+				.then(setCanShowGate);
+		}
+	}, [currentTest, gateVariant, CAPI, isSignedIn]);
+
+	if (!currentTest || !gateVariant) {
 		return null;
 	}
 
 	const signInUrl = generateSignInUrl(CAPI, currentTest);
 
-	const gateVariant: SignInGateComponent | null =
-		testVariantToGateMapping?.[currentTest.variant];
-
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{showGate &&
-				gateVariant?.canShow(CAPI, !!isSignedIn, currentTest) && (
-					<ShowSignInGate
-						CAPI={CAPI}
-						abTest={currentTest}
-						setShowGate={setShowGate}
-						signInUrl={signInUrl}
-						gateVariant={gateVariant}
-					/>
-				)}
+			{!isGateDismissed && canShowGate && (
+				<ShowSignInGate
+					CAPI={CAPI}
+					abTest={currentTest}
+					setShowGate={(show) => setIsGateDismissed(!show)}
+					signInUrl={signInUrl}
+					gateVariant={gateVariant}
+				/>
+			)}
 		</>
 	);
 };

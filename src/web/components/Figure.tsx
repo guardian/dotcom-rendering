@@ -151,6 +151,10 @@ type Props = {
 	isNumberedListTitle?: boolean;
 };
 
+const mainMediaFigureStyles = css`
+	height: 100%;
+`;
+
 export const Figure = ({
 	role = 'inline',
 	children,
@@ -164,7 +168,11 @@ export const Figure = ({
 		// as showcase twitter embeds, then we should remove the role positioning which
 		// currently lives in ImageComponent and hoist it up to here, the same as we're
 		// doing using decidePosition for in-body elements
-		return <figure id={id}>{children}</figure>;
+		return (
+			<figure id={id} key={id} css={mainMediaFigureStyles}>
+				{children}
+			</figure>
+		);
 	}
 	return (
 		<figure

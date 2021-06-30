@@ -3620,17 +3620,6 @@
                 "frontendAssetsFullURL": {
                     "type": "string"
                 },
-                "hbImpl": {
-                    "anyOf": [
-                        {
-                            "type": "object",
-                            "additionalProperties": {}
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ]
-                },
                 "adUnit": {
                     "type": "string"
                 },
@@ -3753,7 +3742,6 @@
                 "edition",
                 "frontendAssetsFullURL",
                 "googletagUrl",
-                "hbImpl",
                 "idApiUrl",
                 "isSensitive",
                 "keywordIds",
@@ -3895,6 +3883,12 @@
                         "src": {
                             "type": "string"
                         },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
                         "dimensions": {
                             "type": "object",
                             "properties": {
@@ -3909,12 +3903,6 @@
                                 "height",
                                 "width"
                             ]
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
                         }
                     },
                     "required": [

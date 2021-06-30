@@ -8,6 +8,7 @@ import { MatchNav } from './MatchNav';
 
 const homeTeam: TeamType = {
 	name: 'Liverpool',
+	codename: 'LIV',
 	id: '9',
 	score: 2,
 	crest: 'https://sport.guim.co.uk/football/crests/120/9.png',
@@ -23,6 +24,7 @@ const homeTeam: TeamType = {
 
 const awayTeam: TeamType = {
 	name: 'Atlético',
+	codename: 'ATL',
 	id: '26305',
 	score: 3,
 	crest: 'https://sport.guim.co.uk/football/crests/120/26305.png',
