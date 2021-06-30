@@ -82,6 +82,7 @@ import {
 import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
+import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { commercialPartner } from '../experiments/tests/commercial-partner';
 
 // *******************************
@@ -161,6 +162,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+	const [browserId, setBrowserId] = useState<string>();
+	useEffect(() => {
+		// TODO: can the browserId actually be null?
+		setBrowserId(getCookie('bwid') ?? undefined);
+	}, []);
 
 	const componentEventHandler = (
 		componentType: any,
@@ -298,7 +304,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		if (CAPI.config.switches.consentManagement && countryCode) {
 			const pubData = {
 				platform: 'next-gen',
-				browserId: getCookie('bwid') || undefined,
+				browserId,
 				pageViewId,
 			};
 			injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
@@ -330,35 +336,49 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				pubData,
 			});
 		}
-	}, [countryCode, CAPI.config.switches.consentManagement, pageViewId]);
+	}, [
+		countryCode,
+		CAPI.config.switches.consentManagement,
+		pageViewId,
+		browserId,
+	]);
 
 	// ************************
 	// *      Commercial      *
 	// ************************
+	const [sentCommercialMetrics, setSentCommercialMetrics] = useState<boolean>(
+		false,
+	);
+	const visibilityState = useDocumentVisibilityState();
 	useEffect(() => {
 		if (!window.guardian.config.switches.commercialMetrics) return;
 		if (!window.guardian.config.ophan) return;
+		log('commercial', 'document.visibilityState:', visibilityState);
+		if (visibilityState !== 'hidden') return;
+		if (sentCommercialMetrics === true) return;
 
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(
 			tests,
 		).some((test) =>
 			[commercialPartner].map((t) => t.id).includes(test.id),
 		);
-
 		const userIsInSamplingGroup = Math.random() <= 1 / 100;
-
-		log('commercial', { shouldForceMetrics, userIsInSamplingGroup });
-
 		const { isDev } = window.guardian.config.page;
 
-		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
-			// we’re doing this twice
-			const browserId = getCookie('bwid') || undefined;
+		log('commercial', { isDev, shouldForceMetrics, userIsInSamplingGroup });
 
-			// TODO: only send them once, using the return value of sendBeacon
-			sendCommercialMetrics(pageViewId, browserId, Boolean(isDev));
+		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
+			setSentCommercialMetrics(
+				sendCommercialMetrics(pageViewId, browserId, Boolean(isDev)),
+			);
 		}
-	}, [ABTestAPI, pageViewId]);
+	}, [
+		ABTestAPI,
+		pageViewId,
+		browserId,
+		sentCommercialMetrics,
+		visibilityState,
+	]);
 
 	// ************************
 	// *   Google Analytics   *
