@@ -622,6 +622,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 									CAPI.pageId,
 									CAPI.webTitle,
 								)}
+								theme={format.theme}
 							/>
 						)}
 						{quizAtom.quizType === 'knowledge' && (
@@ -633,6 +634,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 									CAPI.pageId,
 									CAPI.webTitle,
 								)}
+								theme={format.theme}
 							/>
 						)}
 					</>
