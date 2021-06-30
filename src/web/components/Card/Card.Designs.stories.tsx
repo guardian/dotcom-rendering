@@ -171,7 +171,6 @@ const Analysis = Format(
 
 export {
 	Review,
-	ReviewWithStars,
 	Interview,
 	Comment,
 	PhotoEssay,
