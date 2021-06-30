@@ -297,6 +297,7 @@ interface InteractiveContentsBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement';
 	elementId: string;
 	subheadingLinks: SubheadingBlockElement[];
+	endDocumentElementId?: string;
 }
 
 interface ProfileAtomBlockElement {

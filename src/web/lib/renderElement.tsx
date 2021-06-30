@@ -375,6 +375,7 @@ export const renderElement = ({
 				<div id={element.elementId}>
 					<InteractiveContentsBlockElement
 						subheadingLinks={element.subheadingLinks}
+						endDocumentElementId={element.endDocumentElementId}
 					/>
 				</div>,
 			];

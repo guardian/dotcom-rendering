@@ -8,7 +8,7 @@ const scriptUrls = [
 
 const isInteractiveContentsBlockElement = (element: CAPIElement): boolean =>
 	element._type ===
-		'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+	'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
 	!!element.scriptUrl &&
 	scriptUrls.indexOf(element.scriptUrl) !== -1;
 
@@ -42,6 +42,13 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			},
 		);
 
+		// Get the last element with an 'elementId'
+		// Using .slice() allows us to avoid mutating the original array
+		const endDocumentElement = withUpdatedSubheadings
+			.slice()
+			.reverse()
+			.find((element) => 'elementId' in element);
+
 		// replace interactive content block
 		withUpdatedSubheadings.forEach((element) => {
 			if (isInteractiveContentsBlockElement(element)) {
@@ -61,6 +68,11 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 							...subheading,
 							html: stripHTML(subheading.html),
 						})),
+						endDocumentElementId:
+							endDocumentElement &&
+								'elementId' in endDocumentElement
+								? endDocumentElement.elementId
+								: undefined,
 					});
 			} else {
 				updatedElements.push(element);

@@ -99,7 +99,7 @@
                         "$ref": "#/definitions/NumberedTitleBlockElement"
                     },
                     {
-                        "$ref": "#/definitions/InteractiveContentBlockElement"
+                        "$ref": "#/definitions/InteractiveContentsBlockElement"
                     },
                     {
                         "$ref": "#/definitions/ProfileAtomBlockElement"
@@ -2137,13 +2137,13 @@
             ],
             "type": "string"
         },
-        "InteractiveContentBlockElement": {
+        "InteractiveContentsBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
                     "enum": [
-                        "model.dotcomrendering.pageElements.InteractiveContentBlockElement"
+                        "model.dotcomrendering.pageElements.InteractiveContentsBlockElement"
                     ]
                 },
                 "elementId": {
@@ -2154,6 +2154,9 @@
                     "items": {
                         "$ref": "#/definitions/SubheadingBlockElement"
                     }
+                },
+                "endDocumentElementId": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -3380,7 +3383,7 @@
                                 "$ref": "#/definitions/NumberedTitleBlockElement"
                             },
                             {
-                                "$ref": "#/definitions/InteractiveContentBlockElement"
+                                "$ref": "#/definitions/InteractiveContentsBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/ProfileAtomBlockElement"

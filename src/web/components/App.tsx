@@ -603,6 +603,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<HydrateOnce rootId={interactiveBlock.elementId}>
 					<InteractiveContentsBlockElement
 						subheadingLinks={interactiveBlock.subheadingLinks}
+						endDocumentElementId={
+							interactiveBlock.endDocumentElementId
+						}
 					/>
 				</HydrateOnce>
 			))}

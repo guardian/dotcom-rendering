@@ -129,13 +129,17 @@ const SVGTransitionStyles = css`
 
 type Props = {
 	subheadingLinks: SubheadingBlockElement[];
+	endDocumentElementId?: string;
 };
 
 interface EnhancedSubheadingType extends SubheadingBlockElement {
 	ref?: HTMLElement | null;
 }
 
-export const InteractiveContentsBlockElement = ({ subheadingLinks }: Props) => {
+export const InteractiveContentsBlockElement = ({
+	subheadingLinks,
+	endDocumentElementId,
+}: Props) => {
 	const [showStickyNavOption, setShowStickyNavOption] = useState<boolean>(
 		false,
 	);
@@ -146,16 +150,10 @@ export const InteractiveContentsBlockElement = ({ subheadingLinks }: Props) => {
 	>([]);
 	useEffect(() => {
 		setEnhancedSubheadings(
-			subheadingLinks
-				.map((subheadingLink) => {
-					return {
-						...subheadingLink,
-						ref: document.getElementById(subheadingLink.elementId),
-					};
-				})
-				// we reverse the list to make it easier to find the first element lowest down the page
-				// the first match will always be the one lowest down the page
-				.reverse(),
+			subheadingLinks.map((subheadingLink) => ({
+				...subheadingLink,
+				ref: document.getElementById(subheadingLink.elementId),
+			})),
 		);
 	}, [subheadingLinks, setEnhancedSubheadings]);
 
@@ -163,56 +161,110 @@ export const InteractiveContentsBlockElement = ({ subheadingLinks }: Props) => {
 	// list elements we do not effect the page height
 	const [height, setHeight] = useState<number>();
 	const divRef = useCallback((node: HTMLDivElement | null) => {
-		if (node) setHeight(node?.getBoundingClientRect().height);
+		if (node) setHeight(node.getBoundingClientRect().height);
 	}, []);
 
-	// The sticky header needs to be based on the section of the article that is being view
-	// We accomplish this by
-	// -> determine coordinates of each subheadingLink
-	// -> check current page scroll using `window.scrollY`
-	// -> set sticky Nav object based on scroll
 	const [
 		stickyNavCurrentHeader,
 		setStickyNavCurrentHeader,
 	] = useState<null | EnhancedSubheadingType>(null);
+
+	// The sticky header needs to be based on the section of the article that is being view
+	// We accomplish this by
+	// -> Watching each of the elements with an intersection observer
+	// -> If we've reached the 'endDocument' element stop displaying
+	// -> If we stop intersecting with the current element, and its in view > show the preview element
+	// -> If we're intersecting with an element set that to the active one
+	// -> If the end element is in view, but the last element is not > show the last element
 	useEffect(() => {
-		const onScroll = libDebounce(() => {
-			const firstElementTop = enhancedSubheadings[
-				enhancedSubheadings.length - 1
-			]?.ref?.getBoundingClientRect().top;
+		if ('IntersectionObserver' in window) {
+			const getSubheadingIndexById = (id: string): number =>
+				enhancedSubheadings.findIndex((item) => item.ref?.id === id);
 
-			const articleBodyBottom = document
-				.getElementById('article-body')
-				?.getBoundingClientRect().bottom;
+			const onObserve = (entries: Array<IntersectionObserverEntry>) => {
+				// Check if we've reached the end of the document
+				const endElement = endDocumentElementId
+					? entries.find(
+							(entry) => entry.target.id === endDocumentElementId,
+					  )
+					: undefined;
 
-			if (
-				// stickyNavCurrentHeader should be null if we are before the 1st element on the page
-				(firstElementTop &&
-					window.scrollY <
-						firstElementTop + window.pageYOffset - 10) || // we use - 10 to add some slack to the heading
-				// stickyNavCurrentHeader should be null if we are past the bottom of the article
-				(articleBodyBottom &&
-					window.scrollY >
-						articleBodyBottom + window.pageYOffset - 10) // we use - 10 to add some slack to the heading
-			) {
-				setStickyNavCurrentHeader(null);
-			} else {
-				// Note: enhancedSubheadings is in reverse order
-				const newSubheading = enhancedSubheadings.find((subHead) => {
-					const topOfSubheading = subHead?.ref?.getBoundingClientRect()
-						?.top;
-					return (
-						topOfSubheading &&
-						window.scrollY >
-							topOfSubheading + window.pageYOffset - 10 // we use - 10 to add some slack to the heading
+				if (endElement && endElement.isIntersecting)
+					return setStickyNavCurrentHeader(null);
+
+				// Check if the current element is in this update
+				const currentElement = entries.find(
+					(entry) =>
+						entry.target.id === stickyNavCurrentHeader?.elementId,
+				);
+
+				// If we're no longer intersecting with the current element &
+				// it's still on the screen, switch to the preview element
+				if (
+					currentElement &&
+					!currentElement.isIntersecting &&
+					currentElement.boundingClientRect.y > 0
+				) {
+					const index = getSubheadingIndexById(
+						currentElement.target.id,
 					);
-				});
-				setStickyNavCurrentHeader(newSubheading || null);
+					if (index > 0)
+						return setStickyNavCurrentHeader(
+							enhancedSubheadings[index - 1],
+						);
+					// We've scrolled back past the top element
+					return setStickyNavCurrentHeader(null);
+				}
+
+				// Check for entry of new element
+				const element = entries.find((entry) => entry.isIntersecting);
+				if (element && element.target.id)
+					return setStickyNavCurrentHeader(
+						enhancedSubheadings[
+							getSubheadingIndexById(element.target.id)
+						],
+					);
+
+				// Check if we're scrolling up past the end of the document and set sticky nav to the last element
+				const lastElement =
+					enhancedSubheadings[enhancedSubheadings.length - 1];
+				if (
+					endElement &&
+					endElement.boundingClientRect.y > 0 &&
+					lastElement.ref &&
+					lastElement.ref.getBoundingClientRect().y < 0
+				) {
+					return setStickyNavCurrentHeader(
+						enhancedSubheadings[enhancedSubheadings.length - 1],
+					);
+				}
+			};
+
+			const observer = new IntersectionObserver(onObserve, {
+				// Move the 'observation area' to the top of the page
+				rootMargin: `0px 0px -100% 0px`,
+			});
+
+			enhancedSubheadings.forEach(
+				(item) => item.ref && observer.observe(item.ref),
+			);
+
+			if (endDocumentElementId) {
+				const endDocumentRef = document.getElementById(
+					endDocumentElementId,
+				);
+				if (endDocumentRef) observer.observe(endDocumentRef);
 			}
-		}, 200);
-		window.addEventListener('scroll', onScroll);
-		return () => window.removeEventListener('scroll', onScroll);
-	}, [enhancedSubheadings, setStickyNavCurrentHeader]);
+
+			// Disable the observer
+			return () => observer.disconnect();
+		}
+	}, [
+		enhancedSubheadings,
+		setStickyNavCurrentHeader,
+		stickyNavCurrentHeader,
+		endDocumentElementId,
+	]);
 
 	return (
 		<div ref={divRef} css={wrapperStyles} style={height ? { height } : {}}>
