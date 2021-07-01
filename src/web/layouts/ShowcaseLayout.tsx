@@ -333,40 +333,44 @@ export const ShowcaseLayout = ({
 			) : (
 				// Else, this is a labs article so just show Nav and the Labs header
 				<>
-					<Stuck>
-						<Section
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								display={format.display}
-							/>
-						</Section>
-					</Stuck>
-					<Section
-						showSideBorders={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Nav
-							nav={NAV}
-							format={{
-								...format,
-								theme: getCurrentPillar(CAPI),
-							}}
-							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
-							}
-							edition={CAPI.editionId}
-						/>
-					</Section>
-
-					<Stuck>
+					<div>
+						<Stuck zIndex="stickyAdWrapper">
+							<Section
+								showTopBorder={false}
+								showSideBorders={false}
+								padded={false}
+							>
+								<HeaderAdSlot
+									isAdFreeUser={CAPI.isAdFreeUser}
+									shouldHideAds={CAPI.shouldHideAds}
+									display={format.display}
+								/>
+							</Section>
+						</Stuck>
+						<Stuck zIndex="stickyAdWrapperNav">
+							<Section
+								showSideBorders={true}
+								borderColour={brandLine.primary}
+								showTopBorder={false}
+								padded={false}
+								backgroundColour={brandBackground.primary}
+							>
+								<Nav
+									nav={NAV}
+									format={{
+										...format,
+										theme: getCurrentPillar(CAPI),
+									}}
+									subscribeUrl={
+										CAPI.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									edition={CAPI.editionId}
+								/>
+							</Section>
+						</Stuck>
+					</div>
+					<Stuck zIndex="stickyAdWrapperLabsHeader">
 						<Section
 							showSideBorders={true}
 							showTopBorder={false}
