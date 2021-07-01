@@ -138,11 +138,6 @@ function buildCspEditions(
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
 			: ''
 	};
-    script-src 'self' https://interactive.guim.co.uk ${
-		thirdPartyEmbed.twitter
-			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
-			: ''
-	} ;
 	frame-src https://www.theguardian.com https://embed.theguardian.com https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''
 	} ${
