@@ -122,6 +122,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 						showSideBorders={false}
 						padded={false}
 						shouldCenter={false}
+						element="aside"
 					>
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
@@ -231,6 +232,7 @@ export const InteractiveImmersiveLayout = ({
 				shouldCenter={false}
 				padded={false}
 				backgroundColour={palette.background.article}
+				element="article"
 			>
 				<main>
 					<Renderer
@@ -249,6 +251,7 @@ export const InteractiveImmersiveLayout = ({
 					padded={false}
 					sectionId="sub-nav-root"
 					backgroundColour={neutral[100]}
+					element="nav"
 				>
 					<SubNav
 						subNavSections={NAV.subNavSections}

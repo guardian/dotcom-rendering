@@ -719,7 +719,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					data-print-layout="hide"
 					padded={false}
 					sectionId="sub-nav-root"
-					element="aside"
+					element="nav"
 				>
 					<SubNav
 						subNavSections={NAV.subNavSections}

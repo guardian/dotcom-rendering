@@ -219,6 +219,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						showSideBorders={false}
 						padded={false}
 						shouldCenter={false}
+						element="aside"
 					>
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
@@ -272,6 +273,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							padded={false}
 							sectionId="sub-nav-root"
 							borderColour={palette.border.article}
+							element="nav"
 						>
 							<SubNav
 								subNavSections={NAV.subNavSections}
@@ -362,6 +364,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 				borderColour={palette.border.article}
+				element="article"
 			>
 				<LiveGrid>
 					<GridItem area="media">
@@ -482,6 +485,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
+				element="aside"
 			>
 				<AdSlot
 					data-print-layout="hide"
@@ -491,16 +495,21 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			</ElementContainer>
 
 			{/* Onwards (when signed OUT) */}
-			<div data-print-layout="hide" id="onwards-upper-whensignedout" />
+			<aside data-print-layout="hide" id="onwards-upper-whensignedout" />
 			{showOnwardsLower && (
 				<ElementContainer
 					data-print-layout="hide"
 					sectionId="onwards-lower-whensignedout"
+					element="aside"
 				/>
 			)}
 
 			{!isPaidContent && showComments && (
-				<ElementContainer data-print-layout="hide" sectionId="comments">
+				<ElementContainer
+					data-print-layout="hide"
+					sectionId="comments"
+					element="aside"
+				>
 					<Discussion
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
@@ -521,11 +530,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			)}
 
 			{/* Onwards (when signed IN) */}
-			<div data-print-layout="hide" id="onwards-upper-whensignedin" />
+			<aside data-print-layout="hide" id="onwards-upper-whensignedin" />
 			{showOnwardsLower && (
 				<ElementContainer
 					data-print-layout="hide"
 					sectionId="onwards-lower-whensignedin"
+					element="aside"
 				/>
 			)}
 
@@ -533,6 +543,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<ElementContainer
 					data-print-layout="hide"
 					sectionId="most-viewed-footer"
+					element="aside"
 				/>
 			)}
 
@@ -542,6 +553,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
+				element="aside"
 			>
 				<AdSlot position="merchandising" display={format.display} />
 			</ElementContainer>
@@ -551,6 +563,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					data-print-layout="hide"
 					padded={false}
 					sectionId="sub-nav-root"
+					element="nav"
 				>
 					<SubNav
 						subNavSections={NAV.subNavSections}
