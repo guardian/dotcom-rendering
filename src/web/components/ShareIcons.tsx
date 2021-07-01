@@ -102,6 +102,7 @@ export const ShareIcons = ({
 						role="button"
 						aria-label="Share on Facebook"
 						target="_blank"
+						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
 						<span css={iconStyles({ palette, size })}>
@@ -120,6 +121,7 @@ export const ShareIcons = ({
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
+						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
 						<span css={iconStyles({ palette, size })}>
@@ -156,6 +158,7 @@ export const ShareIcons = ({
 						role="button"
 						aria-label="Share on LinkedIn"
 						target="_blank"
+						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
 						<span css={iconStyles({ palette, size })}>
@@ -175,6 +178,7 @@ export const ShareIcons = ({
 							role="button"
 							aria-label="Share on WhatsApp"
 							target="_blank"
+							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
 							<span css={iconStyles({ palette, size })}>
@@ -195,6 +199,7 @@ export const ShareIcons = ({
 							role="button"
 							aria-label="Share on Messenger>"
 							target="_blank"
+							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
 							<span css={iconStyles({ palette, size })}>
