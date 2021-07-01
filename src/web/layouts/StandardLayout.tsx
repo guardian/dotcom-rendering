@@ -28,7 +28,7 @@ import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
@@ -347,7 +347,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			<div data-print-layout="hide">
 				<>
 					<Stuck>
-						<Section
+						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
 							padded={false}
@@ -358,10 +358,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								shouldHideAds={CAPI.shouldHideAds}
 								display={format.display}
 							/>
-						</Section>
+						</ElementContainer>
 					</Stuck>
 					{format.theme !== Special.Labs && (
-						<Section
+						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
 							padded={false}
@@ -375,12 +375,12 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
 							/>
-						</Section>
+						</ElementContainer>
 					)}
 				</>
 			</div>
 
-			<Section
+			<ElementContainer
 				showSideBorders={true}
 				borderColour={brandLine.primary}
 				showTopBorder={false}
@@ -393,10 +393,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
 				/>
-			</Section>
+			</ElementContainer>
 
 			{NAV.subNavSections && format.theme !== Special.Labs && (
-				<Section
+				<ElementContainer
 					backgroundColour={palette.background.article}
 					padded={false}
 					sectionId="sub-nav-root"
@@ -406,20 +406,20 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-				</Section>
+				</ElementContainer>
 			)}
 
 			{format.theme !== Special.Labs ? (
-				<Section
+				<ElementContainer
 					backgroundColour={palette.background.article}
 					padded={false}
 					showTopBorder={false}
 				>
 					<Lines count={4} effect="straight" />
-				</Section>
+				</ElementContainer>
 			) : (
 				<Stuck>
-					<Section
+					<ElementContainer
 						showSideBorders={true}
 						showTopBorder={false}
 						backgroundColour={labs[400]}
@@ -427,7 +427,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						sectionId="labs-header"
 					>
 						<LabsHeader />
-					</Section>
+					</ElementContainer>
 				</Stuck>
 			)}
 
@@ -435,7 +435,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<Section
+			<ElementContainer
 				data-print-layout="hide"
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
@@ -634,9 +634,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 				</StandardGrid>
-			</Section>
+			</ElementContainer>
 
-			<Section
+			<ElementContainer
 				data-print-layout="hide"
 				padded={false}
 				showTopBorder={false}
@@ -648,19 +648,19 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					position="merchandising-high"
 					display={format.display}
 				/>
-			</Section>
+			</ElementContainer>
 
 			{/* Onwards (when signed OUT) */}
 			<div data-print-layout="hide" id="onwards-upper-whensignedout" />
 			{showOnwardsLower && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					sectionId="onwards-lower-whensignedout"
 				/>
 			)}
 
 			{!isPaidContent && showComments && (
-				<Section data-print-layout="hide" sectionId="comments">
+				<ElementContainer data-print-layout="hide" sectionId="comments">
 					<Discussion
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
@@ -677,26 +677,26 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						beingHydrated={false}
 						display={format.display}
 					/>
-				</Section>
+				</ElementContainer>
 			)}
 
 			{/* Onwards (when signed IN) */}
 			<div data-print-layout="hide" id="onwards-upper-whensignedin" />
 			{showOnwardsLower && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					sectionId="onwards-lower-whensignedin"
 				/>
 			)}
 
 			{!isPaidContent && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					sectionId="most-viewed-footer"
 				/>
 			)}
 
-			<Section
+			<ElementContainer
 				data-print-layout="hide"
 				padded={false}
 				showTopBorder={false}
@@ -704,10 +704,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={neutral[93]}
 			>
 				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			</ElementContainer>
 
 			{NAV.subNavSections && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					padded={false}
 					sectionId="sub-nav-root"
@@ -718,10 +718,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						palette={palette}
 					/>
 					<Lines count={4} effect="straight" />
-				</Section>
+				</ElementContainer>
 			)}
 
-			<Section
+			<ElementContainer
 				data-print-layout="hide"
 				padded={false}
 				backgroundColour={brandBackground.primary}
@@ -733,7 +733,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
-			</Section>
+			</ElementContainer>
 
 			<BannerWrapper data-print-layout="hide" />
 			<MobileStickyContainer data-print-layout="hide" />

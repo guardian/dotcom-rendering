@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ContainerTitle } from '@root/src/web/components/ContainerTitle';
 import { Hide } from '@root/src/web/components/Hide';
@@ -97,7 +97,7 @@ export const ContainerLayout = ({
 	stretchRight = false,
 	leftColSize,
 }: Props) => (
-	<Section
+	<ElementContainer
 		sectionId={sectionId}
 		showSideBorders={sideBorders}
 		showTopBorder={showTopBorder}
@@ -138,5 +138,5 @@ export const ContainerLayout = ({
 				{children}
 			</Container>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );

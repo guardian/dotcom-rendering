@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
@@ -16,7 +16,7 @@ export const Format = (
 	title: string,
 	starRating?: number,
 ) => () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -214,5 +214,5 @@ export const Format = (
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );

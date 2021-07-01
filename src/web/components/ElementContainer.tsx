@@ -44,7 +44,7 @@ type Props = {
 	shouldCenter?: boolean;
 };
 
-export const Section = ({
+export const ElementContainer = ({
 	sectionId,
 	showSideBorders = true,
 	showTopBorder = true,

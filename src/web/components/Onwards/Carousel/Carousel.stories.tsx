@@ -1,6 +1,6 @@
 import { Design, Display, Pillar } from '@guardian/types';
 import { breakpoints } from '@guardian/src-foundations/mq';
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
@@ -274,7 +274,7 @@ const immersiveTrails = convertToImmersive(trails);
 
 export const Headlines = () => (
 	<>
-		<Section showTopBorder={true}>
+		<ElementContainer showTopBorder={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails}
@@ -285,8 +285,8 @@ export const Headlines = () => (
 					display: Display.Standard,
 				}}
 			/>
-		</Section>
-		<Section showTopBorder={true}>
+		</ElementContainer>
+		<ElementContainer showTopBorder={true}>
 			<Carousel
 				heading="Sport"
 				trails={trails}
@@ -298,7 +298,7 @@ export const Headlines = () => (
 				}}
 				isCuratedContent={true}
 			/>
-		</Section>
+		</ElementContainer>
 	</>
 );
 
@@ -306,7 +306,7 @@ Headlines.story = 'Headlines carousel';
 
 export const Immersive = () => (
 	<>
-		<Section showTopBorder={true}>
+		<ElementContainer showTopBorder={true}>
 			<Carousel
 				heading="More on this story"
 				trails={immersiveTrails}
@@ -318,8 +318,8 @@ export const Immersive = () => (
 				}}
 				isFullCardImage={true}
 			/>
-		</Section>
-		<Section showTopBorder={true}>
+		</ElementContainer>
+		<ElementContainer showTopBorder={true}>
 			<Carousel
 				heading="Sport"
 				trails={immersiveTrails}
@@ -332,7 +332,7 @@ export const Immersive = () => (
 				isFullCardImage={true}
 				isCuratedContent={true}
 			/>
-		</Section>
+		</ElementContainer>
 	</>
 );
 
