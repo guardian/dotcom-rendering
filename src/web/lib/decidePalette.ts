@@ -35,7 +35,10 @@ const textHeadline = (format: Format): string => {
 		case Display.Showcase:
 		case Display.NumberedList:
 		case Display.Standard: {
-			if (format.theme === Special.SpecialReport)
+			if (
+				format.theme === Special.SpecialReport &&
+				format.design !== Design.Interview
+			)
 				return specialReport[100];
 			switch (format.design) {
 				case Design.Review:
