@@ -228,6 +228,60 @@ export const Interview = () => (
 );
 Interview.story = { name: 'Interview (without showcase)' };
 
+export const InterviewSpecialReport = () => (
+	<ElementContainer>
+		<Flex>
+			<LeftColumn>
+				<></>
+			</LeftColumn>
+			<ArticleContainer>
+				<ArticleHeadline
+					headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Interview,
+						theme: Special.SpecialReport,
+					})}
+					format={{
+						display: Display.Standard,
+						design: Design.Interview,
+						theme: Special.SpecialReport,
+					}}
+					tags={[]}
+					byline="Byline text"
+				/>
+				<Standfirst
+					format={{
+						display: Display.Standard,
+						design: Design.Interview,
+						theme: Special.SpecialReport,
+					}}
+					standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
+				/>
+				<MainMedia
+					format={{
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Special.SpecialReport,
+					}}
+					palette={decidePalette({
+						display: Display.Standard,
+						design: Design.Article,
+						theme: Special.SpecialReport,
+					})}
+					hideCaption={true}
+					elements={mainMediaElements}
+					pageId="testID"
+					webTitle="story article"
+				/>
+			</ArticleContainer>
+		</Flex>
+	</ElementContainer>
+);
+InterviewSpecialReport.story = {
+	name: 'Interview Special Report (without showcase)',
+};
+
 export const InterviewNoByline = () => (
 	<ElementContainer>
 		<Flex>
