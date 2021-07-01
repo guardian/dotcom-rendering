@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, SetStateAction } from 'react';
 import ReactDOM from 'react-dom';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
@@ -11,6 +11,29 @@ type Props = {
 
 const isReady = (dependencies: unknown[]): boolean => {
 	return dependencies.every((dep) => dep !== undefined);
+};
+
+const resetHydrationStateEventName = 'resetHydrationState';
+
+// HOF required to enable removeEventListener
+const setAlreadyHydratedToFalse = () => (
+	setAlreadyHydrated: (value: SetStateAction<boolean>) => void,
+) => {
+	setAlreadyHydrated(false);
+};
+
+// For use in storybook for clicking between components
+export const fireAndResetHydrationState = () => {
+	const event = document.createEvent('HTMLEvents');
+	event.initEvent(resetHydrationStateEventName, true, true);
+	window.dispatchEvent(event);
+	// Remove the event listener, it'll be added again
+	// once hydration has happened
+	window.removeEventListener(
+		resetHydrationStateEventName,
+		setAlreadyHydratedToFalse,
+		false,
+	);
 };
 
 /**
@@ -32,5 +55,11 @@ export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
 		end();
 	});
 	setAlreadyHydrated(true);
+	// @ts-ignore
+	if (window.STORYBOOK_ENV) {
+		window.addEventListener(resetHydrationStateEventName, () =>
+			setAlreadyHydratedToFalse()(setAlreadyHydrated),
+		);
+	}
 	return null;
 };
