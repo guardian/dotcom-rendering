@@ -76,7 +76,11 @@ export const CommentCount = ({
 	const { short, long } = formatCount(commentCount);
 
 	return (
-		<div css={containerStyles(palette)} data-cy="comment-counts">
+		<data
+			css={containerStyles(palette)}
+			data-cy="comment-counts"
+			value={`${long} comments on this article`}
+		>
 			<a
 				href="#comments"
 				css={linkStyles}
@@ -101,6 +105,6 @@ export const CommentCount = ({
 					{short}
 				</div>
 			</a>
-		</div>
+		</data>
 	);
 };
