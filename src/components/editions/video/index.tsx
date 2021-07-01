@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
 import type { FC } from 'react';
+import Placeholder from '../placeholder';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 // ----- Styles ----- //
 
@@ -26,7 +28,11 @@ interface Props {
 }
 
 const Video: FC<Props> = ({ title, atomId }) => {
-	return (
+	const online = useOnlineStatus();
+	const text =
+		'Sorry, we couldn’t load this video. Please ensure you’re online in order to watch it.';
+
+	return online ? (
 		<div css={videoWrapperStyles}>
 			<iframe
 				title={title}
@@ -37,6 +43,8 @@ const Video: FC<Props> = ({ title, atomId }) => {
 				src={`https://embed.theguardian.com/embed/atom/media/${atomId}#noadsaf`}
 			></iframe>
 		</div>
+	) : (
+		<Placeholder text={text} />
 	);
 };
 
