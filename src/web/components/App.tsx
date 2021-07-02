@@ -75,6 +75,7 @@ import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { log } from '@guardian/libs';
+import { ABTest } from '@guardian/ab-core';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -357,10 +358,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		if (visibilityState !== 'hidden') return;
 		if (sentCommercialMetrics) return;
 
+		const testsToForceMetrics: ABTest[] = [commercialPartner];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(
 			tests,
 		).some((test) =>
-			[commercialPartner].map((t) => t.id).includes(test.id),
+			testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
 		const userIsInSamplingGroup = Math.random() <= 1 / 100;
 		const { isDev } = window.guardian.config.page;
