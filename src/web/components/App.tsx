@@ -364,7 +364,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
 		const userIsInSamplingGroup = Math.random() <= 1 / 100;
-		const { isDev } = window.guardian.config.page;
+		const isDev =
+			window.guardian.config.page.isDev ||
+			window.location.hostname.includes('localhost');
 
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
 			setSentCommercialMetrics(
