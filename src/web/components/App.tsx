@@ -354,7 +354,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	useEffect(() => {
 		if (!window.guardian.config.switches.commercialMetrics) return;
 		if (!window.guardian.config.ophan) return;
-		log('commercial', 'document.visibilityState:', visibilityState);
 		if (visibilityState !== 'hidden') return;
 		if (sentCommercialMetrics) return;
 
@@ -366,8 +365,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		);
 		const userIsInSamplingGroup = Math.random() <= 1 / 100;
 		const { isDev } = window.guardian.config.page;
-
-		log('commercial', { isDev, shouldForceMetrics, userIsInSamplingGroup });
 
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
 			setSentCommercialMetrics(

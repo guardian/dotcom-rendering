@@ -20,7 +20,7 @@ export function useDocumentVisibilityState(): VisibilityState {
 				onVisibilityChange,
 			);
 		};
-	});
+	}, []);
 
 	return visibilityState;
 }
