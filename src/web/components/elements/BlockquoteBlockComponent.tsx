@@ -71,9 +71,12 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 							margin-bottom: 8px;
 						`}
 					>
-						<div css={css`margin-top: 3px;`}>
+						<div
+							css={css`
+								margin-top: 3px;
+							`}
+						>
 							<QuoteIcon
-
 								format={format}
 								colour={palette.fill.blockquoteIcon}
 								size="medium"
