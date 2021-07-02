@@ -71,11 +71,14 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 							margin-bottom: 8px;
 						`}
 					>
-						<QuoteIcon
-							format={format}
-							colour={palette.fill.blockquoteIcon}
-							size="medium"
-						/>
+						<div css={css`margin-top: 3px;`}>
+							<QuoteIcon
+
+								format={format}
+								colour={palette.fill.blockquoteIcon}
+								size="medium"
+							/>
+						</div>
 						<RewrappedComponent
 							isUnwrapped={isUnwrapped}
 							html={unwrappedHtml}
