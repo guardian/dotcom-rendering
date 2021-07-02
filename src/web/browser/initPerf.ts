@@ -7,8 +7,8 @@ export const initPerf = (
 	const startKey = `${name}-start`;
 	const endKey = `${name}-end`;
 
-	if (!perf) {
-		// Return noops if window.performance does not exist
+	if (!perf || !perf.getEntriesByName) {
+		// Return noops if window.performance or the required functions don't exist
 		return {
 			start: () => {},
 			end: () => 0,
