@@ -1,3 +1,5 @@
+import { log } from '@guardian/libs';
+
 export const initPerf = (
 	name: string,
 ): { start: () => void; end: () => number; clear: () => void } => {
@@ -25,7 +27,7 @@ export const initPerf = (
 		perf.measure(name, startKey, endKey);
 
 		// eslint-disable-next-line no-console
-		console.log(JSON.stringify(perf.getEntriesByName(name)));
+		log('dotcom', JSON.stringify(perf.getEntriesByName(name)));
 
 		const measureEntries = perf.getEntriesByName(name, 'measure');
 		const timeTakenFloat =
