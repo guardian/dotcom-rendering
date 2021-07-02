@@ -74,7 +74,6 @@ import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockC
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { log } from '@guardian/libs';
 import { ABTest } from '@guardian/ab-core';
 import {
 	submitComponentEvent,
