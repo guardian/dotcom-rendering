@@ -355,7 +355,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		if (!window.guardian.config.ophan) return;
 		log('commercial', 'document.visibilityState:', visibilityState);
 		if (visibilityState !== 'hidden') return;
-		if (sentCommercialMetrics === true) return;
+		if (sentCommercialMetrics) return;
 
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(
 			tests,
