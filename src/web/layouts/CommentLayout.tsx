@@ -396,6 +396,7 @@ export const CommentLayout = ({
 			<ElementContainer
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
+				element="article"
 			>
 				<StandardGrid display={format.display}>
 					<GridItem area="title">
@@ -583,6 +584,7 @@ export const CommentLayout = ({
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
+				element="aside"
 			>
 				<AdSlot
 					position="merchandising-high"
@@ -593,11 +595,14 @@ export const CommentLayout = ({
 			{/* Onwards (when signed OUT) */}
 			<div id="onwards-upper-whensignedout" />
 			{showOnwardsLower && (
-				<ElementContainer sectionId="onwards-lower-whensignedout" />
+				<ElementContainer
+					sectionId="onwards-lower-whensignedout"
+					element="aside"
+				/>
 			)}
 
 			{!isPaidContent && showComments && (
-				<ElementContainer sectionId="comments">
+				<ElementContainer sectionId="comments" element="aside">
 					<Discussion
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
@@ -618,13 +623,19 @@ export const CommentLayout = ({
 			)}
 
 			{/* Onwards (when signed IN) */}
-			<div id="onwards-upper-whensignedin" />
+			<aside id="onwards-upper-whensignedin" />
 			{showOnwardsLower && (
-				<ElementContainer sectionId="onwards-lower-whensignedin" />
+				<ElementContainer
+					sectionId="onwards-lower-whensignedin"
+					element="aside"
+				/>
 			)}
 
 			{!isPaidContent && (
-				<ElementContainer sectionId="most-viewed-footer" />
+				<ElementContainer
+					sectionId="most-viewed-footer"
+					element="aside"
+				/>
 			)}
 
 			<ElementContainer
@@ -632,12 +643,17 @@ export const CommentLayout = ({
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
+				element="aside"
 			>
 				<AdSlot position="merchandising" display={format.display} />
 			</ElementContainer>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} sectionId="sub-nav-root">
+				<ElementContainer
+					padded={false}
+					sectionId="sub-nav-root"
+					element="nav"
+				>
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}

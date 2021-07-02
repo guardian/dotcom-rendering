@@ -1,10 +1,13 @@
-import { css } from '@emotion/react';
+import { ClassNames, css as emoCss } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
 import { from } from '@guardian/src-foundations/mq';
 import { center } from '@root/src/web/lib/center';
+// @ts-ignore-start
+import { jsx as _jsx } from 'react/jsx-runtime';
+// @ts-ignore-end
 
-const padding = css`
+const padding = emoCss`
 	padding: 0 10px;
 
 	${from.mobileLandscape} {
@@ -12,24 +15,24 @@ const padding = css`
 	}
 `;
 
-const adStyles = css`
+const adStyles = emoCss`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
 	}
 `;
 
-const sideBorders = (colour: string) => css`
+const sideBorders = (colour: string) => emoCss`
 	${from.tablet} {
 		border-left: 1px solid ${colour};
 		border-right: 1px solid ${colour};
 	}
 `;
 
-const topBorder = (colour: string) => css`
+const topBorder = (colour: string) => emoCss`
 	border-top: 1px solid ${colour};
 `;
 
-const setBackgroundColour = (colour: string) => css`
+const setBackgroundColour = (colour: string) => emoCss`
 	background-color: ${colour};
 `;
 
@@ -42,6 +45,7 @@ type Props = {
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
+	element?: 'div' | 'article' | 'aside' | 'nav'; // ElementContainer is generally a top-level wrapper
 };
 
 export const ElementContainer = ({
@@ -53,23 +57,33 @@ export const ElementContainer = ({
 	backgroundColour,
 	shouldCenter = true,
 	children,
+	element = 'div',
 }: Props) => (
-	<section
-		css={[
-			adStyles,
-			backgroundColour && setBackgroundColour(backgroundColour),
-		]}
-	>
-		<div
-			id={sectionId}
-			css={[
-				shouldCenter && center,
-				showSideBorders && sideBorders(borderColour),
-				showTopBorder && topBorder(borderColour),
-				padded && padding,
-			]}
-		>
-			{children && children}
-		</div>
-	</section>
+	<ClassNames>
+		{({ css }) => {
+			const child = (
+				<div
+					id={sectionId}
+					css={[
+						shouldCenter && center,
+						showSideBorders && sideBorders(borderColour),
+						showTopBorder && topBorder(borderColour),
+						padded && padding,
+					]}
+				>
+					{children && children}
+				</div>
+			);
+			const style = css`
+				${adStyles}
+				${backgroundColour && setBackgroundColour(backgroundColour)}
+			`;
+			// Create a react element from the tagName passed in OR
+			// default to <div>
+			return _jsx(`${element}`, {
+				className: style,
+				children: child,
+			});
+		}}
+	</ClassNames>
 );
