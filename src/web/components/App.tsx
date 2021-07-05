@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
-import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
@@ -74,7 +73,6 @@ import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockC
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { ABTest } from '@guardian/ab-core';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -82,8 +80,7 @@ import {
 import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
-import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
-import { commercialPartner } from '../experiments/tests/commercial-partner';
+import { CommercialMetrics } from './CommercialMetrics';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -163,7 +160,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 	const [browserId, setBrowserId] = useState<string>();
-	useEffect(() => {
+	useOnce(() => {
 		// TODO: can the browserId actually be null?
 		setBrowserId(getCookie('bwid') ?? undefined);
 	}, []);
@@ -297,7 +294,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [CAPI.shouldHideReaderRevenue]);
 
 	// kick off the CMP...
-	useEffect(() => {
+	useOnce(() => {
 		// the UI is injected automatically into the page,
 		// and is not a react component, so it's
 		// handled in here.
@@ -341,43 +338,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		CAPI.config.switches.consentManagement,
 		pageViewId,
 		browserId,
-	]);
-
-	// ************************
-	// *      Commercial      *
-	// ************************
-	const [sentCommercialMetrics, setSentCommercialMetrics] = useState<boolean>(
-		false,
-	);
-	const visibilityState = useDocumentVisibilityState();
-	useEffect(() => {
-		if (!window.guardian.config.switches.commercialMetrics) return;
-		if (!window.guardian.config.ophan) return;
-		if (visibilityState !== 'hidden') return;
-		if (sentCommercialMetrics) return;
-
-		const testsToForceMetrics: ABTest[] = [commercialPartner];
-		const shouldForceMetrics = ABTestAPI.allRunnableTests(
-			tests,
-		).some((test) =>
-			testsToForceMetrics.map((t) => t.id).includes(test.id),
-		);
-		const userIsInSamplingGroup = Math.random() <= 1 / 100;
-		const isDev =
-			window.guardian.config.page.isDev ||
-			window.location.hostname.includes('localhost');
-
-		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
-			setSentCommercialMetrics(
-				sendCommercialMetrics(pageViewId, browserId, Boolean(isDev)),
-			);
-		}
-	}, [
-		ABTestAPI,
-		pageViewId,
-		browserId,
-		sentCommercialMetrics,
-		visibilityState,
 	]);
 
 	// ************************
@@ -574,6 +534,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
+			{[
+				CAPI.config.switches.commercialMetrics,
+				window.guardian.config.ophan !== undefined,
+			].every(Boolean) && (
+				<CommercialMetrics
+					browserId={browserId}
+					pageViewId={pageViewId}
+				/>
+			)}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
