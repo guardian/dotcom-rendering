@@ -7,7 +7,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { background, border, neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
 import { Design, Display, partition } from '@guardian/types';
-import type { Item } from 'item';
+import { isPicture, Item } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
 import { getThemeStyles } from 'themeStyles';
@@ -89,6 +89,11 @@ const bodyWrapperStyles = css`
 	}
 `;
 
+const extendedBodyStyles = css`
+	height: 100vh;
+	background-color: ${neutral[7]};
+`;
+
 export const galleryWrapperStyles = css`
 	box-sizing: border-box;
 	padding-top: ${remSpace[3]};
@@ -147,6 +152,7 @@ const getSectionStyles = (item: Format): SerializedStyles[] => {
 };
 
 const Article: FC<Props> = ({ item }) => {
+	console.log(item);
 	if (
 		item.design === Design.Analysis ||
 		item.design === Design.Article ||
@@ -174,6 +180,7 @@ const Article: FC<Props> = ({ item }) => {
 						css={[
 							bodyWrapperStyles,
 							articleStyles,
+							isPicture(item.tags) && extendedBodyStyles,
 							item.design === Design.Media
 								? galleryWrapperStyles
 								: null,
