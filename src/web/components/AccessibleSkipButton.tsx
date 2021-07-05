@@ -18,7 +18,6 @@ export const AccessibleSkipButton = () => {
 				display: block;
 				text-align: center;
 				margin: 0;
-				overflow: hidden;
 				text-decoration: none;
 				&:focus,
 				&:active {
