@@ -24,6 +24,10 @@ export const AccessibleSkipButton = () => {
 					border: 5px solid ${border.focusHalo};
 					position: static;
 				}
+				&:visited,
+				&:active {
+					color: ${neutral[0]};
+				}
 			`}
 		>
 			Skip to main content
