@@ -7,7 +7,8 @@ import { from } from '@guardian/src-foundations/mq';
 import { background, border, neutral } from '@guardian/src-foundations/palette';
 import type { Format } from '@guardian/types';
 import { Design, Display, partition } from '@guardian/types';
-import { isPicture, Item } from 'item';
+import type { Item } from 'item';
+import { isPicture } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
 import { getThemeStyles } from 'themeStyles';
@@ -152,7 +153,6 @@ const getSectionStyles = (item: Format): SerializedStyles[] => {
 };
 
 const Article: FC<Props> = ({ item }) => {
-	console.log(item);
 	if (
 		item.design === Design.Analysis ||
 		item.design === Design.Article ||

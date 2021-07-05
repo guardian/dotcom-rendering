@@ -15,7 +15,7 @@ import StarRating from 'components/editions/starRating';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
-import { getFormat } from 'item';
+import { isPicture as checkIfPicture, getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
@@ -72,10 +72,23 @@ const footballWrapperStyles: SerializedStyles = css`
 const getImageStyle = (
 	{ width, height }: Image,
 	format: Format,
+	isPicture: boolean,
 ): SerializedStyles => {
 	const aspectRatio = width / height;
 	const fixedSmMobileHeight = 414;
 	const fixedLgMobileHeight = 536;
+
+	if (isPicture) {
+		return css`
+			display: block;
+			width: 100%;
+
+			${from.tablet} {
+				height: calc(100vw / ${aspectRatio});
+				width: 100vw;
+			}
+		`;
+	}
 
 	if (isFullWidthImage(format)) {
 		return css`
@@ -114,16 +127,20 @@ const isFullWidthImage = (format: Format): boolean =>
 	format.design === Design.Interview ||
 	format.design === Design.Media;
 
-const getStyles = (format: Format): SerializedStyles => {
-	return isFullWidthImage(format) ? fullWidthStyles : styles;
+const getStyles = (format: Format, isPicture: boolean): SerializedStyles => {
+	return isFullWidthImage(format) && !isPicture ? fullWidthStyles : styles;
 };
 
 const getCaptionStyles = (format: Format): SerializedStyles => {
 	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
 };
 
-const getImageSizes = (format: Format, image: Image): Sizes => {
-	if (isFullWidthImage(format)) {
+const getImageSizes = (
+	format: Format,
+	image: Image,
+	isPicture: boolean,
+): Sizes => {
+	if (isFullWidthImage(format) && !isPicture) {
 		return {
 			mediaQueries: [],
 			default: `${(100 * image.width) / image.height}vh `,
@@ -144,6 +161,7 @@ interface Props {
 
 const HeaderMedia: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
+	const isPicture = checkIfPicture(item.tags);
 	const {
 		cameraIcon: iconColor,
 		cameraIconBackground: iconBackgroundColor,
@@ -159,7 +177,10 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 			const matchScores = 'football' in item ? item.football : none;
 
 			return (
-				<figure css={[getStyles(format)]} aria-labelledby={captionId}>
+				<figure
+					css={[getStyles(format, isPicture)]}
+					aria-labelledby={captionId}
+				>
 					{maybeRender(matchScores, (scores) => {
 						return (
 							<div css={footballWrapperStyles}>
@@ -173,9 +194,11 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 					})}
 					<Img
 						image={image}
-						sizes={getImageSizes(format, image)}
+						sizes={getImageSizes(format, image, isPicture)}
 						format={item}
-						className={some(getImageStyle(image, format))}
+						className={some(
+							getImageStyle(image, format, isPicture),
+						)}
 						supportsDarkMode={false}
 						lightbox={some({
 							className: 'js-launch-slideshow js-main-image',
