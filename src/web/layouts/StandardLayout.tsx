@@ -39,7 +39,6 @@ import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
-import { MainContentIndicator } from '@root/src/web/components/MainContentIndicator';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -565,7 +564,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</div>
 					</GridItem>
-					<MainContentIndicator />
 					<GridItem area="body">
 						<ArticleContainer>
 							<main css={articleWidth}>

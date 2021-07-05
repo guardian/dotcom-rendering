@@ -31,7 +31,6 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { MainContentIndicator } from '@root/src/web/components/MainContentIndicator';
 import { Discussion } from '@frontend/web/components/Discussion';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -414,7 +413,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</div>
 					</GridItem>
-					<MainContentIndicator />
 					<GridItem area="body">
 						<ArticleContainer>
 							<main css={articleWidth}>

@@ -33,7 +33,6 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { MainContentIndicator } from '@root/src/web/components/MainContentIndicator';
 import { Discussion } from '@frontend/web/components/Discussion';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -513,7 +512,6 @@ export const CommentLayout = ({
 							/>
 						</div>
 					</GridItem>
-					<MainContentIndicator />
 					<GridItem area="body">
 						<ArticleContainer>
 							<main css={maxWidth}>

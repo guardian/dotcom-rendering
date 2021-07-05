@@ -34,7 +34,6 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
-import { MainContentIndicator } from '@root/src/web/components/MainContentIndicator';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -488,7 +487,6 @@ export const ShowcaseLayout = ({
 							/>
 						</div>
 					</GridItem>
-					<MainContentIndicator />
 					<GridItem area="body">
 						<ArticleContainer>
 							<main css={maxWidth}>
