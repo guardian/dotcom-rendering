@@ -44,9 +44,13 @@ export const submitComponentEvent = (
 	ophanRecord({ componentEvent });
 };
 
+export interface SdcTestMeta extends TestMeta {
+	labels?: string[];
+}
+
 export const sendOphanComponentEvent = (
 	action: OphanAction,
-	testMeta: TestMeta,
+	testMeta: SdcTestMeta,
 	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
 ): void => {
 	const {
@@ -55,6 +59,7 @@ export const sendOphanComponentEvent = (
 		componentType,
 		products = [],
 		campaignCode,
+		labels,
 	} = testMeta;
 
 	const componentEvent: OphanComponentEvent = {
@@ -63,6 +68,7 @@ export const sendOphanComponentEvent = (
 			products,
 			campaignCode,
 			id: testMeta.campaignId || testMeta.campaignCode,
+			labels,
 		},
 		abTest: {
 			name: abTestName,

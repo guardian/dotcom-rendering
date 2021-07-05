@@ -23,7 +23,7 @@ import {
 	OphanComponentEvent,
 	sendOphanComponentEvent,
 	submitComponentEvent,
-	TestMeta,
+	SdcTestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import { Metadata } from '@guardian/automat-client/dist/types';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
@@ -34,7 +34,7 @@ import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 type PreEpicConfig = {
-	meta: TestMeta;
+	meta: SdcTestMeta;
 	module: {
 		url: string;
 		props: { [key: string]: any };
