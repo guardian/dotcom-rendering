@@ -56,7 +56,7 @@
     "@guardian/src-svgs": "^2.8.2",
     "@guardian/src-text-area": "^3.3.0",
     "@guardian/src-text-input": "^3.3.0",
-    "@guardian/types": "^6.0.0",
+    "@guardian/types": "^7.0.0",
     "@types/jsdom": "^16.2.10",
     "@types/uuid": "^8.3.0",
     "@types/webpack-node-externals": "^2.5.0",
