@@ -92,6 +92,23 @@ const richLinkCard = {
 	cardStyle: 'news',
 	thumbnailUrl:
 		'https://i.guim.co.uk/img/media/0847eccb8898d4e91499f8a68c4cfdb454f91382/101_177_3650_2191/master/3650.jpg?width=460&quality=85&auto=format&fit=max&s=ca06880ab92aee625f7b6f691bf3e8c5',
+	imageAsset: {
+		index: 2,
+		fields: {
+			displayCredit: 'true',
+			source: 'RMV/REX/Shutterstock',
+			photographer: 'RMV/REX/Shutterstock',
+			isMaster: 'true',
+			altText: 'Eminem performing at Bonnaroo festival in June.',
+			height: '2191',
+			credit: 'Photograph: RMV/REX/Shutterstock',
+			mediaId: '0847eccb8898d4e91499f8a68c4cfdb454f91382',
+			width: '3650',
+		},
+		mediaType: 'Image',
+		url:
+			'https://media.guim.co.uk/0847eccb8898d4e91499f8a68c4cfdb454f91382/101_177_3650_2191/master/3650.jpg',
+	},
 	headline: 'Eminem attacks Donald Trump on surprise album Kamikaze',
 	contentType: 'Article',
 	contributorImage:

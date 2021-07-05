@@ -2,7 +2,7 @@
 
 import { Design, Display, Pillar, Special } from '@guardian/types';
 
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
@@ -24,7 +24,7 @@ export default {
 };
 
 export const News = () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -227,12 +227,12 @@ export const News = () => (
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );
 News.story = { name: 'News' };
 
 export const InDepth = () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -349,12 +349,12 @@ export const InDepth = () => (
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );
 InDepth.story = { name: 'In Depth' };
 
 export const Related = () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -496,12 +496,12 @@ export const Related = () => (
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );
 Related.story = { name: 'Related Stories' };
 
 export const Spotlight = () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -524,12 +524,12 @@ export const Spotlight = () => (
 				/>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );
 Spotlight.story = { name: 'Spotlight' };
 
 export const Quad = () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -629,12 +629,12 @@ export const Quad = () => (
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );
 Quad.story = { name: 'Four with image top' };
 
 export const Media = () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -712,7 +712,7 @@ export const Media = () => (
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );
 Media.story = { name: 'Media' };
 
@@ -779,7 +779,7 @@ const labsBranding4: Branding = {
 };
 
 export const Labs = () => (
-	<Section>
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -864,6 +864,6 @@ export const Labs = () => (
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );
 Labs.story = { name: 'Labs' };

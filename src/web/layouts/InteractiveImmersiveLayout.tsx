@@ -13,7 +13,7 @@ import { Lines } from '@guardian/src-ed-lines';
 
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
@@ -89,7 +89,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					order: 0;
 				`}
 			>
-				<Section
+				<ElementContainer
 					showSideBorders={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
@@ -108,7 +108,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 						}
 						edition={CAPI.editionId}
 					/>
-				</Section>
+				</ElementContainer>
 			</header>
 		);
 	}
@@ -117,21 +117,22 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 		<div>
 			<div data-print-layout="hide">
 				<Stuck>
-					<Section
+					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
 						padded={false}
 						shouldCenter={false}
+						element="aside"
 					>
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
 							display={format.display}
 						/>
-					</Section>
+					</ElementContainer>
 				</Stuck>
 				{format.theme !== Special.Labs && (
-					<Section
+					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
 						padded={false}
@@ -145,11 +146,11 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
 						/>
-					</Section>
+					</ElementContainer>
 				)}
 			</div>
 
-			<Section
+			<ElementContainer
 				showSideBorders={true}
 				borderColour={brandLine.primary}
 				showTopBorder={false}
@@ -166,10 +167,10 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
 				/>
-			</Section>
+			</ElementContainer>
 
 			{NAV.subNavSections && format.theme !== Special.Labs && (
-				<Section
+				<ElementContainer
 					backgroundColour={neutral[100]}
 					padded={false}
 					sectionId="sub-nav-root"
@@ -179,7 +180,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-				</Section>
+				</ElementContainer>
 			)}
 		</div>
 	);
@@ -212,7 +213,7 @@ export const InteractiveImmersiveLayout = ({
 
 				{format.theme === Special.Labs && (
 					<Stuck>
-						<Section
+						<ElementContainer
 							showSideBorders={true}
 							showTopBorder={false}
 							backgroundColour={labs[400]}
@@ -220,17 +221,18 @@ export const InteractiveImmersiveLayout = ({
 							sectionId="labs-header"
 						>
 							<LabsHeader />
-						</Section>
+						</ElementContainer>
 					</Stuck>
 				)}
 			</div>
 
-			<Section
+			<ElementContainer
 				showTopBorder={false}
 				showSideBorders={false}
 				shouldCenter={false}
 				padded={false}
 				backgroundColour={palette.background.article}
+				element="article"
 			>
 				<main>
 					<Renderer
@@ -242,13 +244,14 @@ export const InteractiveImmersiveLayout = ({
 						webTitle={CAPI.webTitle}
 					/>
 				</main>
-			</Section>
+			</ElementContainer>
 
 			{NAV.subNavSections && (
-				<Section
+				<ElementContainer
 					padded={false}
 					sectionId="sub-nav-root"
 					backgroundColour={neutral[100]}
+					element="nav"
 				>
 					<SubNav
 						subNavSections={NAV.subNavSections}
@@ -256,10 +259,10 @@ export const InteractiveImmersiveLayout = ({
 						palette={palette}
 					/>
 					<Lines count={4} effect="straight" />
-				</Section>
+				</ElementContainer>
 			)}
 
-			<Section
+			<ElementContainer
 				padded={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
@@ -270,7 +273,7 @@ export const InteractiveImmersiveLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
-			</Section>
+			</ElementContainer>
 
 			<BannerWrapper />
 			<MobileStickyContainer />

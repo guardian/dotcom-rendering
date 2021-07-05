@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
@@ -11,8 +11,12 @@ import { UL } from './components/UL';
 import { LI } from './components/LI';
 import { images, standfirsts } from './Card.mocks';
 
-export const Format = (format: Format, title: string) => () => (
-	<Section>
+export const Format = (
+	format: Format,
+	title: string,
+	starRating?: number,
+) => () => (
+	<ElementContainer>
 		<Flex>
 			<LeftColumn showRightBorder={false}>
 				<></>
@@ -39,6 +43,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -66,6 +71,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -93,6 +99,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -120,6 +127,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 				</UL>
@@ -144,6 +152,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -171,6 +180,7 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 					<LI
@@ -198,10 +208,11 @@ export const Format = (format: Format, title: string) => () => (
 							isFullCardImage={
 								format.display === Display.Immersive
 							}
+							starRating={starRating}
 						/>
 					</LI>
 				</UL>
 			</ArticleContainer>
 		</Flex>
-	</Section>
+	</ElementContainer>
 );

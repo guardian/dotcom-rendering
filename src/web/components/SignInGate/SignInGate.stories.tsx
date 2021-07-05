@@ -1,4 +1,4 @@
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
@@ -13,21 +13,21 @@ export default {
 
 export const mainStandalone = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 mainStandalone.story = { name: 'main_standalone' };
 
 export const mainStandaloneComment = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -35,14 +35,14 @@ export const mainStandaloneComment = () => {
 				ophanComponentId="test"
 				isComment={true}
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 mainStandaloneComment.story = { name: 'main_standalone_comment' };
 
 export const mainStandaloneMandatory = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -50,14 +50,14 @@ export const mainStandaloneMandatory = () => {
 				ophanComponentId="test"
 				isMandatory={true}
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 mainStandaloneMandatory.story = { name: 'main_standalone_mandatory' };
 
 export const mainStandaloneMandatoryComment = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -66,7 +66,7 @@ export const mainStandaloneMandatoryComment = () => {
 				isMandatory={true}
 				isComment={true}
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 mainStandaloneMandatoryComment.story = {
@@ -75,21 +75,21 @@ mainStandaloneMandatoryComment.story = {
 
 export const fakeSocialStandalone = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<SignInGateFakeSocial
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 fakeSocialStandalone.story = { name: 'fake_social_standalone' };
 
 export const fakeSocialStandaloneVertical = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<SignInGateFakeSocial
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -101,7 +101,7 @@ export const fakeSocialStandaloneVertical = () => {
 					variant: 'fake-social-variant-vertical',
 				}}
 			/>
-		</Section>
+		</ElementContainer>
 	);
 };
 fakeSocialStandaloneVertical.story = {

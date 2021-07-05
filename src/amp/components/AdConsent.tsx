@@ -47,7 +47,7 @@ const clientConfigAus = {
 	propertyId: 14327,
 	privacyManagerId: '5f859e174ed5055e72ce26a6',
 	isCCPA: true,
-	siteHref: 'http://amp.au.theguardian.com',
+	siteHref: 'https://amp.au.theguardian.com',
 	getDnsMsgMms: true,
 	alwaysDisplayDns: false,
 	showNoticeUntilAction: true,

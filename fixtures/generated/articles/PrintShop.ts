@@ -407,6 +407,10 @@ export const PrintShop: CAPIType = {
 						url: '/football',
 						children: [
 							{
+								title: 'Euro 2020',
+								url: '/football/euro-2020',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -543,9 +547,17 @@ export const PrintShop: CAPIType = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'Euro 2020',
+						url: '/football/euro-2020',
+					},
+					{
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: 'Euro 2020',
+								url: '/football/euro-2020',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1689,61 +1701,61 @@ export const PrintShop: CAPIType = {
 					],
 					_type:
 						'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '0048a741-5db8-419c-b35c-3d46ed830ba7',
+					elementId: 'b6574d3a-0285-4c7e-90ed-994b78741adc',
 				},
 				{
 					html:
 						'<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0dd0f9d1-c7ae-40e6-8f3b-c829eb92ea26',
+					elementId: '3a20347f-c3cf-46e9-b3c1-3d374778bc1d',
 				},
 				{
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '67a3fe31-b7ee-41b0-889f-eabe8769cd9f',
+					elementId: '82362883-6c90-4a4f-8de3-d561f07a641e',
 				},
 				{
 					html: '<p><em>Words: Jonny Weeks</em></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0e9dad8b-ab0e-4830-b149-ca4a9eef48ce',
+					elementId: 'c7180f54-ea48-4117-aadf-272c26a43aeb',
 				},
 				{
 					html:
 						'<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '4feb2ead-2525-44be-aa54-730cc8fdf425',
+					elementId: '14f4f99a-2c30-4f20-8688-ea22446cc5e8',
 				},
 				{
 					html:
 						'<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0179b32c-40d3-42f4-b695-c0318c488fd4',
+					elementId: '57d4ed99-80d5-410b-b8bc-3ed8df81ab15',
 				},
 				{
 					html:
 						'<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '43d7293a-10c5-4442-82dc-ec468450b3b8',
+					elementId: 'f8c5bd4d-ad17-4e14-a67c-2660efd58574',
 				},
 				{
 					html:
 						'<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e1bdfcf1-2fcc-4122-813f-cd1f2ad2e8f3',
+					elementId: '72429e15-61a8-406e-84a3-214206a5cc33',
 				},
 				{
 					html:
 						'<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
 					_type:
 						'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'b83a90c7-d2cd-4f06-9233-ae37bc07c7b4',
+					elementId: '1f4982ba-dcbb-4ca4-9fc9-adbdd7098b75',
 				},
 			],
 			blockCreatedOn: 1572887180000,
@@ -1923,6 +1935,8 @@ export const PrintShop: CAPIType = {
 			surveys: true,
 			remoteBanner: true,
 			inizio: true,
+			prebidHeaderBidding: true,
+			a9HeaderBidding: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
@@ -1988,10 +2002,6 @@ export const PrintShop: CAPIType = {
 			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
-		hbImpl: {
-			prebid: true,
-			a9: true,
-		},
 		abTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',

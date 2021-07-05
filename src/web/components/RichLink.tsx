@@ -20,7 +20,7 @@ import { Avatar } from '@frontend/web/components/Avatar';
 interface Props {
 	richLinkIndex: number;
 	cardStyle: RichLinkCardType;
-	thumbnailUrl: string;
+	imageData: RichLinkImageData;
 	headlineText: string;
 	contentType: ContentType;
 	url: string;
@@ -30,6 +30,12 @@ interface Props {
 	sponsorName: string;
 	contributorImage?: string;
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
+}
+export interface RichLinkImageData {
+	thumbnailUrl: string;
+	altText: string;
+	width: string;
+	height: string;
 }
 
 const neutralBackground = css`
@@ -195,7 +201,7 @@ const imageStyles = css`
 export const RichLink = ({
 	richLinkIndex,
 	cardStyle,
-	thumbnailUrl,
+	imageData,
 	headlineText,
 	contentType,
 	url,
@@ -211,7 +217,10 @@ export const RichLink = ({
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
 
 	const imageCardStyles = ['news', 'letters', 'media', 'feature'];
-	const showImage = thumbnailUrl && imageCardStyles.includes(cardStyle);
+	const showImage =
+		imageData &&
+		imageData.thumbnailUrl &&
+		imageCardStyles.includes(cardStyle);
 	const isPaidContent = tags
 		? tags.filter((t) => t.id === 'tone/advertisement-features').length > 0
 		: false;
@@ -232,7 +241,13 @@ export const RichLink = ({
 					<div css={richLinkTopBorder(palette)} />
 					{showImage && (
 						<div>
-							<img css={imageStyles} src={thumbnailUrl} alt="" />
+							<img
+								css={imageStyles}
+								src={imageData.thumbnailUrl}
+								alt={imageData.altText}
+								width={imageData.width}
+								height={imageData.height}
+							/>
 						</div>
 					)}
 					<div css={richLinkElements}>

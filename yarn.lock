@@ -1622,10 +1622,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^14.2.1":
-  version "14.2.1"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-14.2.1.tgz#bf540614112d9ce55870ae8e7d37fd6f06585f87"
-  integrity sha512-RoXQfhjOwBZf2sIihTyQm+aMHmFOvaxuKsTfLOKhtOnM2QG6c9U3k8y3oEvNUtP+GPbhETbO+NnodyZsZKHP2g==
+"@guardian/atoms-rendering@^16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-16.0.0.tgz#ebcd09cb3fc631fc69f9c466215702c567300612"
+  integrity sha512-Li1rHM2ERvPngPTjqCb26XeIcbxNuk0UV6n5qqz//rZlqbPmnuywzHl9QhsnAFV7dPZhnMbxPILz2mdZOtZNPQ==
   dependencies:
     youtube-player "^5.5.2"
 
@@ -1643,10 +1643,12 @@
     "@guardian/src-foundations" "3.3.0"
     "@guardian/src-icons" "3.3.0"
 
-"@guardian/consent-management-platform@^6.11.3":
-  version "6.11.3"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.11.3.tgz#92a7a6221587bcd86851e6a90198ad618f51b1e9"
-  integrity sha512-xKocfioFtkq5v9MuupT1ugo290NfSD4yIMl7m89xek6W+7B2fKjh0cAMHj4u2LQSXmEoyQ76vs2IaB3w5+98ZQ==
+"@guardian/consent-management-platform@~6.11.5":
+  version "6.11.5"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-6.11.5.tgz#93681cbf61de0fadb4b65d835d7fc445cb847b31"
+  integrity sha512-ap7b09qk8I/EfoWB3NR8kT63hBpm4ATFGpRicCQ61DLMw2PgCWunMvizdbSmo5wNCQKPFgmX9cfRT5IGfPneKw==
+  dependencies:
+    "@guardian/libs" "^1"
 
 "@guardian/discussion-rendering@^7.0.0":
   version "7.0.0"
@@ -1657,6 +1659,11 @@
     customize-cra "^1.0.0"
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
+
+"@guardian/libs@^1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-1.8.1.tgz#22bccd66be7c5bf70cd5bbb1bf7700d94610ccb7"
+  integrity sha512-Q/JPLhNeYa5XhDPJhw/1+fbZmszopvovWW8I7dGEuFPGWeNUmXAbW8J3kzuonDu7l9/tuFZg8jljbKHZlrFx0A==
 
 "@guardian/libs@^2.0.0":
   version "2.0.0"
@@ -1732,6 +1739,11 @@
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-3.6.0.tgz#f093cd554f928e189e4d6ac069c6c7b5e65558ff"
   integrity sha512-2j8TrRFyFbFBYGBdfL6ExCh0Bqgga0coi7H40tb3flV4UazyQqAGYuUb2r8Z38MJfTpotcPLxkA0uU6LY7VP7w==
+
+"@guardian/src-icons@^3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-3.7.0.tgz#580688167d00d9eed601044867d67dcd48b210c6"
+  integrity sha512-5tm8YlQpVGpuBN5hJ2Fi9xWkgCAvfX1IrzpLtLg4pLa6UmP1CIvwjlQocDBWRx2BItifU5UKtEpqiEvJdusK1g==
 
 "@guardian/src-label@^3.6.0":
   version "3.6.0"

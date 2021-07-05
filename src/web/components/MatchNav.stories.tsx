@@ -1,4 +1,4 @@
-import { Section } from './Section';
+import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
@@ -8,6 +8,7 @@ import { MatchNav } from './MatchNav';
 
 const homeTeam: TeamType = {
 	name: 'Liverpool',
+	codename: 'LIV',
 	id: '9',
 	score: 2,
 	crest: 'https://sport.guim.co.uk/football/crests/120/9.png',
@@ -23,6 +24,7 @@ const homeTeam: TeamType = {
 
 const awayTeam: TeamType = {
 	name: 'Atlético',
+	codename: 'ATL',
 	id: '26305',
 	score: 3,
 	crest: 'https://sport.guim.co.uk/football/crests/120/26305.png',
@@ -82,7 +84,7 @@ NoComments.story = { name: 'with no comments' };
 
 export const InContext = () => {
 	return (
-		<Section padded={false}>
+		<ElementContainer padded={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -99,7 +101,7 @@ export const InContext = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</Section>
+		</ElementContainer>
 	);
 };
 InContext.story = { name: 'when placed in article context' };

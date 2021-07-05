@@ -135,7 +135,7 @@ export const canShow = (
 			!isIOS9(),
 	);
 
-export const canShowMandatoryAus: (
+export const canShowMandatoryUs: (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
 	currentTest: CurrentSignInGateABTest,
@@ -145,7 +145,7 @@ export const canShowMandatoryAus: (
 	currentTest: CurrentSignInGateABTest,
 ) => {
 	return (
-		(await getLocale()) === 'AU' &&
+		(await getLocale()) === 'US' &&
 		(await hasRequiredConsents()) &&
 		(await canShow(CAPI, isSignedIn, currentTest))
 	);
