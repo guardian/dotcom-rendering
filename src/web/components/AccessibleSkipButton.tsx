@@ -1,30 +1,29 @@
 import { css } from '@emotion/react';
-
-import { brand } from '@guardian/src-foundations/palette';
+import { textSans } from '@guardian/src-foundations/typography';
+import { neutral, border } from '@guardian/src-foundations/palette';
 
 export const AccessibleSkipButton = () => {
 	return (
 		<a
 			href="#maincontent"
 			css={css`
-				border: 0;
-				clip: rect(0 0 0 0);
-				height: 0.0625rem;
-				margin: -0.0625rem;
+				${textSans.xlarge()}
+				height: 65px;
+				top: -65px;
+				line-height: 55px;
 				overflow: hidden;
 				padding: 0;
 				position: absolute;
-				width: 0.0625rem;
+				background: ${neutral[100]};
+				display: block;
+				text-align: center;
+				margin: 0;
+				overflow: hidden;
+				text-decoration: none;
 				&:focus,
 				&:active {
-					font-size: 80%;
-					display: block;
-					color: ${brand[300]};
-					text-decoration: none;
+					border: 5px solid ${border.focusHalo};
 					position: static;
-					width: 100%;
-					height: 1.125rem;
-					text-align: center;
 				}
 			`}
 		>
