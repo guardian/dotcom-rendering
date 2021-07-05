@@ -17335,6 +17335,7 @@ exports[`Storyshots Follow Default 1`] = `
   background: none;
   margin-left: 0;
   margin-top: 0.25rem;
+  min-height: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17387,6 +17388,7 @@ exports[`Storyshots Follow Default 1`] = `
   >
     <svg
       className="follow-icon"
+      viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle

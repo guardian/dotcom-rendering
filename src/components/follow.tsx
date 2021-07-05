@@ -32,6 +32,7 @@ const styles = ({ theme }: Format): SerializedStyles => {
 		background: none;
 		margin-left: 0;
 		margin-top: ${remSpace[1]};
+		min-height: 1.5rem;
 
 		${darkModeCss`
 			color: ${inverted};

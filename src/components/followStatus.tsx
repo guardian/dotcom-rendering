@@ -13,7 +13,11 @@ type IconProps = Props;
 const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 	if (isFollowing) {
 		return (
-			<svg xmlns="http://www.w3.org/2000/svg" className="following-icon">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				className="following-icon"
+				viewBox="0 0 24 24"
+			>
 				<path
 					fillRule="evenodd"
 					clipRule="evenodd"
@@ -23,7 +27,11 @@ const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 		);
 	} else {
 		return (
-			<svg xmlns="http://www.w3.org/2000/svg" className="follow-icon">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				className="follow-icon"
+				viewBox="0 0 24 24"
+			>
 				<circle cx="12" cy="12" r="12" />
 				<path
 					fillRule="evenodd"
