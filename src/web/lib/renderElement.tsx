@@ -556,6 +556,7 @@ export const renderElement = ({
 					title={element.title}
 					pillar={format.theme}
 					events={element.events}
+					description={element.description}
 					likeHandler={() => {}}
 					dislikeHandler={() => {}}
 					expandCallback={() => {}}
