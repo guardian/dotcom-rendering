@@ -98,7 +98,7 @@ const linkStyle = css`
 `;
 
 const selected = css`
-	font-weight: 700;
+	font-weight: 700 !important;
 `;
 
 const spaceBetween = css`
