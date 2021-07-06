@@ -803,13 +803,73 @@ interface RichLinkBlockLoadable extends ComponentNameChunkMap {
     addWhen: RichLinkBlockElement['_type'];
 }
 
-interface InteractiveBlockLoadaable extends ComponentNameChunkMap {
+interface InteractiveBlockLoadable extends ComponentNameChunkMap {
     chunkName: 'elements-InteractiveBlockComponent';
     addWhen: InteractiveBlockElement['_type'];
 }
 
+interface CalloutBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-CalloutBlockComponent';
+    addWhen: CalloutBlockElement['_type'];
+}
+
+interface QABlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-QABlockComponent';
+    addWhen: QABlockElement['_type'];
+}
+
+interface TimelineBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-TimelineBlockComponent';
+    addWhen: TimelineBlockElement['_type'];
+}
+
+interface DocumentBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-DocumentBlockComponent';
+    addWhen: DocumentBlockElement['_type'];
+}
+interface EmbedBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-EmbedBlockComponent';
+    addWhen: EmbedBlockElement['_type'];
+}
+
+interface InstagramBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-InstagramBlockComponent';
+    addWhen: InstagramBlockElement['_type'];
+}
+interface MapBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-MapBlockComponent';
+    addWhen: MapBlockElement['_type'];
+}
+
+interface SpotifyBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-SpotifyBlockComponent';
+    addWhen: SpotifyBlockElement['_type'];
+}
+
+interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-FacebookVideoBlockComponent';
+    addWhen: VideoFacebookBlockElement['_type'];
+}
+interface VineBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-VineBlockComponent';
+    addWhen: VineBlockElement['_type'];
+}
+
 // There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable, InteractiveBlockLoadaable]
+type LoadableComponents = [
+	EditionDropdownLoadable,
+	YoutubeBlockLoadable,
+	RichLinkBlockLoadable,
+	InteractiveBlockLoadable,
+	CalloutBlockLoadable,
+	DocumentBlockLoadable,
+	EmbedBlockLoadable,
+	InstagramBlockLoadable,
+	MapBlockLoadable,
+	SpotifyBlockLoadable,
+	FacebookVideoBlockLoadable,
+	VineBlockLoadable,
+]
 
 interface CarouselImagesMap {
 	'300'?: string;
