@@ -294,7 +294,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [CAPI.shouldHideReaderRevenue]);
 
 	// kick off the CMP...
-	useOnce(() => {
+	useEffect(() => {
 		// the UI is injected automatically into the page,
 		// and is not a react component, so it's
 		// handled in here.
