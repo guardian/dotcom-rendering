@@ -15,6 +15,8 @@ import {
 	videoClient,
 } from '../native/nativeApi';
 
+const TEADS_ENABLED = true;
+
 type Slot = AdSlot | VideoSlot;
 
 function areRectsEqual(rectA: IRect, rectB: IRect): boolean {
@@ -78,12 +80,19 @@ function getAdSlots(): AdSlot[] {
 		return [];
 	}
 
-	return Array.from(advertSlots).map((adSlot) => {
+	return Array.from(advertSlots).map((adSlot, idx) => {
+		// To easily turn teads square ads on, we can use the TEADS_ENABLED boolean flag above
+		// Therefore we need to disable a rule for unnecessary conditions.
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- explained above.
+		const isSquare = TEADS_ENABLED && idx === 0;
+		if (isSquare) {
+			adSlot.classList.add('ad-slot-square');
+		}
 		const slotPosition = adSlot.getBoundingClientRect();
 		return new AdSlot({
 			rect: getRect(slotPosition),
 			targetingParams,
-			isSquare: false,
+			isSquare,
 		});
 	});
 }
