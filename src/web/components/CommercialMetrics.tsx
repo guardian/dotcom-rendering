@@ -10,8 +10,6 @@ export const CommercialMetrics: React.FC<{
 	pageViewId: string;
 	browserId: string | undefined;
 }> = ({ pageViewId, browserId }) => {
-	// Example usage of AB Tests
-	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB();
 	const visibilityState = useDocumentVisibilityState();
 
@@ -45,5 +43,7 @@ export const CommercialMetrics: React.FC<{
 		visibilityState,
 		sentCommercialMetrics,
 	]);
+
+	// We don’t render anything
 	return null;
 };
