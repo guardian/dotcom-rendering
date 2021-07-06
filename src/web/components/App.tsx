@@ -159,7 +159,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	const [browserId, setBrowserId] = useState<string>();
+	const [browserId, setBrowserId] = useState<string | undefined>(undefined);
 	useOnce(() => {
 		// TODO: can the browserId actually be null?
 		setBrowserId(getCookie('bwid') ?? undefined);
