@@ -74,6 +74,7 @@ const invertedFont = css`
 	line-height: 42px;
 	${until.tablet} {
 		${headline.small({ fontWeight: 'bold' })};
+		line-height: 35px;
 	}
 `;
 
