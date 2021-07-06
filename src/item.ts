@@ -101,12 +101,21 @@ interface Interactive extends Fields {
 	body: Body;
 }
 
+interface Obituary extends Fields {
+	design: Design.Obituary;
+	body: Body;
+}
+
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
 	design: Exclude<
 		Design,
-		Design.LiveBlog | Design.Review | Design.Comment | Design.Letter
+		| Design.LiveBlog
+		| Design.Review
+		| Design.Comment
+		| Design.Letter
+		| Design.Obituary
 	>;
 	body: Body;
 }
@@ -118,7 +127,8 @@ type Item =
 	| Standard
 	| Interactive
 	| MatchReport
-	| Letter;
+	| Letter
+	| Obituary;
 
 // ----- Convenience Types ----- //
 
@@ -174,6 +184,9 @@ const itemFields = (
 	request: RenderingRequest,
 ): ItemFields => {
 	const { content, branding, commentCount, relatedContent } = request;
+	console.log('1, standfirst', content.fields?.standfirst)
+
+
 	return {
 		theme: themeFromString(content.pillarId),
 		display: getDisplay(content),
@@ -271,6 +284,8 @@ const isRecipe = hasTag('tone/recipes');
 
 const isInterview = hasTag('tone/interview');
 
+const isObituary = hasTag('tone/obituaries');
+
 const isGuardianView = hasTag('tone/editorials');
 
 const isQuiz = hasTag('tone/quizzes');
@@ -324,6 +339,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isLetter(tags)) {
 		return {
 			design: Design.Letter,
+			...itemFieldsWithBody(context, request),
+		};
+	} else if (isObituary(tags)) {
+		return {
+			design: Design.Obituary,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isComment(tags)) {
@@ -402,4 +422,5 @@ export {
 	isGallery,
 	isPicture,
 	isLetter,
+	isObituary,
 };
