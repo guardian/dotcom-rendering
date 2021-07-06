@@ -990,6 +990,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
 							format={format}
+							pillar={pillar}
+							edition={CAPI.editionId}
 						/>
 					</Suspense>
 				</Lazy>
