@@ -80,6 +80,7 @@ import {
 import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
+import { CommercialMetrics } from './CommercialMetrics';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -158,6 +159,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+	const [browserId, setBrowserId] = useState<string | undefined>(undefined);
+	useOnce(() => {
+		// TODO: can the browserId actually be null?
+		setBrowserId(getCookie('bwid') ?? undefined);
+	}, []);
 
 	const componentEventHandler = (
 		componentType: any,
@@ -295,7 +301,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		if (CAPI.config.switches.consentManagement && countryCode) {
 			const pubData = {
 				platform: 'next-gen',
-				browserId: getCookie('bwid') || undefined,
+				browserId,
 				pageViewId,
 			};
 			injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
@@ -327,7 +333,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				pubData,
 			});
 		}
-	}, [countryCode, CAPI.config.switches.consentManagement, pageViewId]);
+	}, [
+		countryCode,
+		CAPI.config.switches.consentManagement,
+		pageViewId,
+		browserId,
+	]);
 
 	// ************************
 	// *   Google Analytics   *
@@ -523,6 +534,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
+			{[
+				CAPI.config.switches.commercialMetrics,
+				window.guardian.config.ophan !== undefined,
+			].every(Boolean) && (
+				<CommercialMetrics
+					browserId={browserId}
+					pageViewId={pageViewId}
+				/>
+			)}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
