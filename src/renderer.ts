@@ -62,6 +62,8 @@ import Video from 'components/editions/video';
 import { EmbedComponentWrapper } from 'components/embedWrapper';
 import HorizontalRule from 'components/horizontalRule';
 import Interactive from 'components/interactive';
+import List from 'components/list';
+import ListItem from 'components/listItem';
 import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
@@ -129,66 +131,6 @@ const transform = (text: string, format: Format): ReactElement | string => {
 		return h(HorizontalRule, null, null);
 	}
 	return text;
-};
-
-const listStyles: SerializedStyles = css`
-	list-style: none;
-	margin: ${remSpace[3]} 0;
-	padding-left: 0;
-	clear: both;
-`;
-
-const listItemStyles = (format: Format): SerializedStyles[] => {
-	const baseStyles = css`
-		padding-left: ${remSpace[6]};
-		padding-bottom: 0.375rem;
-
-		&::before {
-			display: inline-block;
-			content: '';
-			border-radius: 0.5rem;
-			height: 1rem;
-			width: 1rem;
-			margin-right: ${remSpace[2]};
-			background-color: ${neutral[86]};
-			margin-left: -${remSpace[6]};
-			vertical-align: middle;
-		}
-
-		> p:first-of-type {
-			display: inline;
-			padding: 0;
-		}
-
-		${darkModeCss`
-            &::before {
-                background-color: ${neutral[46]};
-            }
-        `}
-	`;
-
-	const mediaStyles = css`
-		&::before {
-			background-color: ${neutral[46]};
-		}
-	`;
-
-	const liveblogStyles = css`
-		${darkModeCss`
-            &::before {
-                background-color: ${neutral[86]};
-            }
-        `}
-	`;
-
-	switch (format.design) {
-		case Design.Media:
-			return [baseStyles, mediaStyles];
-		case Design.LiveBlog:
-			return [baseStyles, liveblogStyles];
-		default:
-			return [baseStyles];
-	}
 };
 
 const HeadingTwoStyles = (format: Format): SerializedStyles => {
@@ -295,9 +237,9 @@ const textElement = (format: Format, supportsDarkMode = true) => (
 		case 'BR':
 			return h('br', { key }, null);
 		case 'UL':
-			return styledH('ul', { css: listStyles }, children);
+			return h(List, { children });
 		case 'LI':
-			return styledH('li', { css: listItemStyles(format) }, children);
+			return h(ListItem, { format, children });
 		case 'MARK':
 			return styledH('mark', { key }, children);
 		default:
@@ -327,9 +269,9 @@ const standfirstTextElement = (format: Format) => (
 		case 'STRONG':
 			return h('strong', { key }, children);
 		case 'UL':
-			return styledH('ul', { css: listStyles }, children);
+			return h(List, { children });
 		case 'LI':
-			return styledH('li', { css: listItemStyles(format) }, children);
+			return h(ListItem, { format, children });
 		case 'A': {
 			const colour = linkColourFromFormat(format);
 			const styles = css`

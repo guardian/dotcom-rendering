@@ -18311,6 +18311,99 @@ exports[`Storyshots HorizontalRule Default 1`] = `
 />
 `;
 
+exports[`Storyshots List Default 1`] = `
+.emotion-0 {
+  list-style: none;
+  margin: 0.75rem 0;
+  padding-left: 0;
+  clear: both;
+}
+
+.emotion-1 {
+  padding-left: 1.5rem;
+  padding-bottom: 0.375rem;
+}
+
+.emotion-1::before {
+  display: inline-block;
+  content: '';
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+  background-color: #DCDCDC;
+  margin-left: -1.5rem;
+  vertical-align: middle;
+}
+
+.emotion-1>p:first-of-type {
+  display: inline;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-1::before {
+    background-color: #767676;
+  }
+}
+
+<ul
+  className="emotion-0"
+>
+  <li
+    className="emotion-1"
+  >
+    A bullet point
+  </li>
+  <li
+    className="emotion-1"
+  >
+    A bullet point
+  </li>
+  <li
+    className="emotion-1"
+  >
+    A bullet point
+  </li>
+</ul>
+`;
+
+exports[`Storyshots ListItem Default 1`] = `
+.emotion-0 {
+  padding-left: 1.5rem;
+  padding-bottom: 0.375rem;
+}
+
+.emotion-0::before {
+  display: inline-block;
+  content: '';
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+  background-color: #DCDCDC;
+  margin-left: -1.5rem;
+  vertical-align: middle;
+}
+
+.emotion-0>p:first-of-type {
+  display: inline;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .emotion-0::before {
+    background-color: #767676;
+  }
+}
+
+<li
+  className="emotion-0"
+>
+  A bullet point
+</li>
+`;
+
 exports[`Storyshots Paragraph Default 1`] = `
 .emotion-0 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
