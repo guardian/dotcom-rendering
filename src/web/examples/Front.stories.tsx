@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -42,7 +42,7 @@ export default {
 
 export const Front = () => (
 	<>
-		<Section
+		<ElementContainer
 			showTopBorder={false}
 			showSideBorders={true}
 			borderColour={brandLine.primary}
@@ -50,8 +50,8 @@ export const Front = () => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Header edition="UK" />
-		</Section>
-		<Section
+		</ElementContainer>
+		<ElementContainer
 			showSideBorders={true}
 			borderColour={brandLine.primary}
 			showTopBorder={false}
@@ -68,15 +68,15 @@ export const Front = () => (
 				subscribeUrl=""
 				edition="UK"
 			/>
-		</Section>
-		<Section
+		</ElementContainer>
+		<ElementContainer
 			backgroundColour={background.primary}
 			padded={false}
 			showTopBorder={false}
 			showSideBorders={true}
 		>
 			<Lines count={4} effect="straight" />
-		</Section>
+		</ElementContainer>
 		<ContainerLayout
 			showTopBorder={false}
 			title="Headlines"
@@ -517,14 +517,14 @@ export const Front = () => (
 				/>
 			</LI>
 		</ContainerLayout>
-		<Section
+		<ElementContainer
 			backgroundColour={background.primary}
 			padded={false}
 			showTopBorder={false}
 		>
 			<Lines count={4} effect="straight" />
-		</Section>
-		<Section
+		</ElementContainer>
+		<ElementContainer
 			padded={false}
 			backgroundColour={brandBackground.primary}
 			borderColour={brandBorder.primary}
@@ -535,7 +535,7 @@ export const Front = () => (
 				pillar={Pillar.News}
 				pillars={NAV.pillars}
 			/>
-		</Section>
+		</ElementContainer>
 	</>
 );
 Front.story = { name: 'Example front' };

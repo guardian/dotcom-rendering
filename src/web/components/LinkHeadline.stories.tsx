@@ -1,5 +1,5 @@
 import { Design, Display, Pillar, Special } from '@guardian/types';
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
 import { LinkHeadline } from '@frontend/web/components/LinkHeadline';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
@@ -10,7 +10,7 @@ export default {
 };
 
 export const xsmallStory = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a large headline link looks"
 			palette={decidePalette({
@@ -25,12 +25,12 @@ export const xsmallStory = () => (
 			}}
 			size="large"
 		/>
-	</Section>
+	</ElementContainer>
 );
 xsmallStory.story = { name: 'Size | large' };
 
 export const liveStory = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with a live kicker looks"
 			palette={decidePalette({
@@ -45,12 +45,12 @@ export const liveStory = () => (
 			}}
 			kickerText="Live"
 		/>
-	</Section>
+	</ElementContainer>
 );
 liveStory.story = { name: 'With Live kicker' };
 
 export const noSlash = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with no kicker slash looks"
 			palette={decidePalette({
@@ -66,12 +66,12 @@ export const noSlash = () => (
 			kickerText="Live"
 			showSlash={false}
 		/>
-	</Section>
+	</ElementContainer>
 );
 noSlash.story = { name: 'With Live kicker but no slash' };
 
 export const pulsingDot = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with a pulsing dot looks"
 			palette={decidePalette({
@@ -87,12 +87,12 @@ export const pulsingDot = () => (
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
-	</Section>
+	</ElementContainer>
 );
 pulsingDot.story = { name: 'With pulsing dot' };
 
 export const cultureVariant = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with the culture pillar looks"
 			palette={decidePalette({
@@ -107,12 +107,12 @@ export const cultureVariant = () => (
 			}}
 			kickerText="Art and stuff"
 		/>
-	</Section>
+	</ElementContainer>
 );
 cultureVariant.story = { name: 'With a culture kicker' };
 
 export const opinionxxxsmall = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how small links to opinion articles look"
 			palette={decidePalette({
@@ -129,12 +129,12 @@ export const opinionxxxsmall = () => (
 			size="small"
 			byline="Comment byline"
 		/>
-	</Section>
+	</ElementContainer>
 );
 opinionxxxsmall.story = { name: 'Quotes | small' };
 
 export const OpinionKicker = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how an opinion headline with a kicker looks"
 			palette={decidePalette({
@@ -151,12 +151,12 @@ export const OpinionKicker = () => (
 			kickerText="George Monbiot"
 			showSlash={true}
 		/>
-	</Section>
+	</ElementContainer>
 );
 OpinionKicker.story = { name: 'With an opinion kicker' };
 
 export const SpecialReport = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a Special Report headline with a kicker looks"
 			palette={decidePalette({
@@ -173,12 +173,12 @@ export const SpecialReport = () => (
 			kickerText="Special Report"
 			showSlash={true}
 		/>
-	</Section>
+	</ElementContainer>
 );
 SpecialReport.story = { name: 'when Special Report' };
 
 export const InUnderlinedState = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is the underlined state when showUnderline is true"
 			palette={decidePalette({
@@ -200,12 +200,12 @@ export const InUnderlinedState = () => (
 					'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
 		/>
-	</Section>
+	</ElementContainer>
 );
 InUnderlinedState.story = { name: 'With showUnderline true' };
 
 export const linkStory = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline looks as a link"
 			palette={decidePalette({
@@ -225,12 +225,12 @@ export const linkStory = () => (
 					'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
 		/>
-	</Section>
+	</ElementContainer>
 );
 linkStory.story = { name: 'With linkTo provided' };
 
 export const LiveBlogSizes = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
@@ -306,12 +306,12 @@ export const LiveBlogSizes = () => (
 			showPulsingDot={true}
 			size="tiny"
 		/>
-	</Section>
+	</ElementContainer>
 );
 LiveBlogSizes.story = { name: 'with various sizes' };
 
 export const DeadBlogSizes = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
@@ -387,12 +387,12 @@ export const DeadBlogSizes = () => (
 			showPulsingDot={true}
 			size="tiny"
 		/>
-	</Section>
+	</ElementContainer>
 );
 DeadBlogSizes.story = { name: 'with various sizes' };
 
 export const Updated = () => (
-	<Section showTopBorder={false} showSideBorders={false}>
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText=""
 			palette={decidePalette({
@@ -410,6 +410,6 @@ export const Updated = () => (
 			kickerText="Updated 7m ago"
 			size="tiny"
 		/>
-	</Section>
+	</ElementContainer>
 );
 Updated.story = { name: 'Last updated' };

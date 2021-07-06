@@ -25,7 +25,7 @@ import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
@@ -214,21 +214,22 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		<>
 			<div data-print-layout="hide">
 				<Stuck>
-					<Section
+					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
 						padded={false}
 						shouldCenter={false}
+						element="aside"
 					>
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
 							display={format.display}
 						/>
-					</Section>
+					</ElementContainer>
 				</Stuck>
 				<SendToBack>
-					<Section
+					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
 						padded={false}
@@ -244,9 +245,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									'variant'
 							}
 						/>
-					</Section>
+					</ElementContainer>
 
-					<Section
+					<ElementContainer
 						showSideBorders={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
@@ -264,31 +265,32 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							}
 							edition={CAPI.editionId}
 						/>
-					</Section>
+					</ElementContainer>
 
 					{NAV.subNavSections && (
-						<Section
+						<ElementContainer
 							backgroundColour={palette.background.article}
 							padded={false}
 							sectionId="sub-nav-root"
 							borderColour={palette.border.article}
+							element="nav"
 						>
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
 								palette={palette}
 							/>
-						</Section>
+						</ElementContainer>
 					)}
 
-					<Section
+					<ElementContainer
 						backgroundColour={palette.background.article}
 						padded={false}
 						showTopBorder={false}
 						borderColour={palette.border.article}
 					>
 						<Lines count={4} effect="straight" />
-					</Section>
+					</ElementContainer>
 				</SendToBack>
 			</div>
 			<ContainerLayout
@@ -346,7 +348,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<Standfirst format={format} standfirst={CAPI.standfirst} />
 			</ContainerLayout>
 
-			<Section
+			<ElementContainer
 				showTopBorder={false}
 				borderColour={palette.border.article}
 				backgroundColour={palette.background.article}
@@ -356,12 +358,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						height: ${space[4]}px;
 					`}
 				/>
-			</Section>
+			</ElementContainer>
 
-			<Section
+			<ElementContainer
 				showTopBorder={false}
 				backgroundColour={palette.background.article}
 				borderColour={palette.border.article}
+				element="article"
 			>
 				<LiveGrid>
 					<GridItem area="media">
@@ -474,33 +477,39 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</div>
 					</GridItem>
 				</LiveGrid>
-			</Section>
+			</ElementContainer>
 
-			<Section
+			<ElementContainer
 				data-print-layout="hide"
 				padded={false}
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
+				element="aside"
 			>
 				<AdSlot
 					data-print-layout="hide"
 					position="merchandising-high"
 					display={format.display}
 				/>
-			</Section>
+			</ElementContainer>
 
 			{/* Onwards (when signed OUT) */}
-			<div data-print-layout="hide" id="onwards-upper-whensignedout" />
+			<aside data-print-layout="hide" id="onwards-upper-whensignedout" />
 			{showOnwardsLower && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					sectionId="onwards-lower-whensignedout"
+					element="aside"
 				/>
 			)}
 
 			{!isPaidContent && showComments && (
-				<Section data-print-layout="hide" sectionId="comments">
+				<ElementContainer
+					data-print-layout="hide"
+					sectionId="comments"
+					element="aside"
+				>
 					<Discussion
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
@@ -517,40 +526,44 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						beingHydrated={false}
 						display={format.display}
 					/>
-				</Section>
+				</ElementContainer>
 			)}
 
 			{/* Onwards (when signed IN) */}
-			<div data-print-layout="hide" id="onwards-upper-whensignedin" />
+			<aside data-print-layout="hide" id="onwards-upper-whensignedin" />
 			{showOnwardsLower && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					sectionId="onwards-lower-whensignedin"
+					element="aside"
 				/>
 			)}
 
 			{!isPaidContent && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					sectionId="most-viewed-footer"
+					element="aside"
 				/>
 			)}
 
-			<Section
+			<ElementContainer
 				data-print-layout="hide"
 				padded={false}
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
+				element="aside"
 			>
 				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			</ElementContainer>
 
 			{NAV.subNavSections && (
-				<Section
+				<ElementContainer
 					data-print-layout="hide"
 					padded={false}
 					sectionId="sub-nav-root"
+					element="nav"
 				>
 					<SubNav
 						subNavSections={NAV.subNavSections}
@@ -558,10 +571,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						palette={palette}
 					/>
 					<Lines count={4} effect="straight" />
-				</Section>
+				</ElementContainer>
 			)}
 
-			<Section
+			<ElementContainer
 				data-print-layout="hide"
 				padded={false}
 				backgroundColour={brandBackground.primary}
@@ -573,7 +586,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
-			</Section>
+			</ElementContainer>
 
 			<BannerWrapper data-print-layout="hide" />
 			<MobileStickyContainer data-print-layout="hide" />

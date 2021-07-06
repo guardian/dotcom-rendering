@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
 import {
 	linkAndDescription,
@@ -24,85 +24,85 @@ export default {
 };
 
 export const linkAndDescriptionStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...linkAndDescription} />
-	</Section>
+	</ElementContainer>
 );
 linkAndDescriptionStory.story = { name: 'With link and description' };
 
 export const withLongDescriptionStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...withLongDescription} />
-	</Section>
+	</ElementContainer>
 );
 withLongDescriptionStory.story = { name: 'With long description' };
 
 export const withLinkStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...withLink} />
-	</Section>
+	</ElementContainer>
 );
 withLinkStory.story = { name: 'With link' };
 
 export const oneTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...oneTrail} />
-	</Section>
+	</ElementContainer>
 );
 oneTrailStory.story = { name: 'With one trail' };
 
 export const twoTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...twoTrails} />
-	</Section>
+	</ElementContainer>
 );
 twoTrailStory.story = { name: 'With two trails' };
 
 export const threeTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...threeTrails} />
-	</Section>
+	</ElementContainer>
 );
 threeTrailStory.story = { name: 'With three trails' };
 
 export const fourTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...fourTrails} />
-	</Section>
+	</ElementContainer>
 );
 fourTrailStory.story = { name: 'With four trails' };
 
 export const exactlyFiveStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...fiveTrails} />
-	</Section>
+	</ElementContainer>
 );
 exactlyFiveStory.story = { name: 'with five trails' };
 
 export const sixTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...sixTrails} />
-	</Section>
+	</ElementContainer>
 );
 sixTrailStory.story = { name: 'With six trails' };
 
 export const sevenTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...sevenTrails} />
-	</Section>
+	</ElementContainer>
 );
 sevenTrailStory.story = { name: 'With seven trails' };
 
 export const eightTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...eightTrails} />
-	</Section>
+	</ElementContainer>
 );
 eightTrailStory.story = { name: 'With eight trails' };
 
 export const labsTrailStory = () => (
-	<Section>
+	<ElementContainer>
 		<OnwardsLayout {...labsTrails} />
-	</Section>
+	</ElementContainer>
 );
 labsTrailStory.story = { name: 'With labs trails' };

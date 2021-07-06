@@ -1,4 +1,4 @@
-import { RichLink } from '@root/src/web/components/RichLink';
+import { RichLink, RichLinkImageData } from '@root/src/web/components/RichLink';
 import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
 
 import { useApi } from '@root/src/web/lib/useApi';
@@ -23,6 +23,24 @@ interface CAPIRichLinkType {
 	format: CAPIFormat;
 	starRating?: number;
 	contributorImage?: string;
+	imageAsset: ImageAsset;
+}
+interface ImageAsset {
+	index: number;
+	fields: ImageAssetFields;
+	mediaType: string;
+	url: string;
+}
+interface ImageAssetFields {
+	displayCredit: string;
+	source: string;
+	photographer: string;
+	isMaster: string;
+	altText: string;
+	height: string;
+	credit: string;
+	mediaId: string;
+	width: string;
 }
 
 const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
@@ -58,11 +76,19 @@ export const RichLinkComponent = ({
 		// Only render once data is available
 		return null;
 	}
+
+	const richLinkImageData: RichLinkImageData = {
+		thumbnailUrl: data.thumbnailUrl,
+		altText: data.imageAsset.fields.altText,
+		width: data.imageAsset.fields.width,
+		height: data.imageAsset.fields.height,
+	};
+
 	return (
 		<RichLink
 			richLinkIndex={richLinkIndex}
 			cardStyle={data.cardStyle}
-			thumbnailUrl={data.thumbnailUrl}
+			imageData={richLinkImageData}
 			headlineText={data.headline}
 			contentType={data.contentType}
 			url={data.url}

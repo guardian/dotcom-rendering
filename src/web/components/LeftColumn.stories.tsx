@@ -1,7 +1,7 @@
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
 import { LeftColumn } from './LeftColumn';
 import { Placeholder } from './Placeholder';
@@ -13,7 +13,7 @@ export default {
 
 export const PartialRightBorder = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Flex>
 				<LeftColumn
 					showPartialRightBorder={true}
@@ -35,14 +35,14 @@ export const PartialRightBorder = () => {
 					<>Right column content</>
 				</RightColumn>
 			</Flex>
-		</Section>
+		</ElementContainer>
 	);
 };
 PartialRightBorder.story = { name: 'Partial right border' };
 
 export const RightBorder = () => {
 	return (
-		<Section>
+		<ElementContainer>
 			<Flex>
 				<LeftColumn>
 					<>The border to my right should stretch the whole height</>
@@ -58,7 +58,7 @@ export const RightBorder = () => {
 					<>Right column content</>
 				</RightColumn>
 			</Flex>
-		</Section>
+		</ElementContainer>
 	);
 };
 RightBorder.story = { name: 'Full right border' };

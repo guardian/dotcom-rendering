@@ -27,6 +27,7 @@ import {
 	sendOphanComponentEvent,
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
+import { useOnce } from '@root/src/web/lib/useOnce';
 
 type Props = {
 	edition: Edition;
@@ -188,7 +189,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 		setSupportHeader,
 	] = useState<React.FC<SupportHeaderProps> | null>(null);
 
-	useEffect((): void => {
+	useOnce((): void => {
 		setAutomat();
 
 		const requestData = {
@@ -240,7 +241,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 				);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [countryCode]);
 
 	if (SupportHeader && supportHeaderResponse) {
 		return (

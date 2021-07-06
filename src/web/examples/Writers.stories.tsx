@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
-import { Section } from '@frontend/web/components/Section';
+import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -66,7 +66,7 @@ export default {
 
 export const Writers = (): React.ReactNode => (
 	<>
-		<Section
+		<ElementContainer
 			showTopBorder={false}
 			showSideBorders={true}
 			borderColour={brandLine.primary}
@@ -74,8 +74,8 @@ export const Writers = (): React.ReactNode => (
 			backgroundColour={brandBackground.primary}
 		>
 			<Header edition="UK" />
-		</Section>
-		<Section
+		</ElementContainer>
+		<ElementContainer
 			showSideBorders={true}
 			borderColour={brandLine.primary}
 			showTopBorder={false}
@@ -92,15 +92,15 @@ export const Writers = (): React.ReactNode => (
 				subscribeUrl=""
 				edition="UK"
 			/>
-		</Section>
-		<Section
+		</ElementContainer>
+		<ElementContainer
 			backgroundColour={background.primary}
 			padded={false}
 			showTopBorder={false}
 			showSideBorders={true}
 		>
 			<Lines count={4} effect="straight" />
-		</Section>
+		</ElementContainer>
 		<ContainerLayout
 			showTopBorder={false}
 			title="Columnists"
@@ -249,14 +249,14 @@ export const Writers = (): React.ReactNode => (
 				</LI>
 			</UL>
 		</ContainerLayout>
-		<Section
+		<ElementContainer
 			backgroundColour={background.primary}
 			padded={false}
 			showTopBorder={false}
 		>
 			<Lines count={4} effect="straight" />
-		</Section>
-		<Section
+		</ElementContainer>
+		<ElementContainer
 			padded={false}
 			backgroundColour={brandBackground.primary}
 			borderColour={brandBorder.primary}
@@ -267,7 +267,7 @@ export const Writers = (): React.ReactNode => (
 				pillar={Pillar.News}
 				pillars={NAV.pillars}
 			/>
-		</Section>
+		</ElementContainer>
 	</>
 );
 Writers.story = { name: 'Example writers page' };

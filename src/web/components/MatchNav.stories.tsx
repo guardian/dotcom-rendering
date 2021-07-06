@@ -1,4 +1,4 @@
-import { Section } from './Section';
+import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
@@ -84,7 +84,7 @@ NoComments.story = { name: 'with no comments' };
 
 export const InContext = () => {
 	return (
-		<Section padded={false}>
+		<ElementContainer padded={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -101,7 +101,7 @@ export const InContext = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</Section>
+		</ElementContainer>
 	);
 };
 InContext.story = { name: 'when placed in article context' };
