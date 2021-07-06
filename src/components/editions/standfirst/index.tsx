@@ -126,13 +126,13 @@ interface Props {
 	shareIcon?: boolean;
 }
 
-const noLinks = true;
+const isEditions = true;
 
 const Standfirst: FC<Props> = ({ item, shareIcon }) => {
 	return maybeRender(item.standfirst, (standfirst) => (
 		<div css={getStyles(item)}>
 			<div css={textContainerStyles}>
-				{renderStandfirstText(standfirst, item, noLinks)}
+				{renderStandfirstText(standfirst, item, isEditions)}
 			</div>
 			{shareIcon && (
 				<span className="js-share-button" role="button">

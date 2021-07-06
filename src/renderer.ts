@@ -289,39 +289,27 @@ const standfirstTextElement = (format: Format) => (
 	}
 };
 
-const noLinksStandfirstTextElement = (format: Format) => (
-	node: Node,
-	key: number,
-): ReactNode => {
-	const children = Array.from(node.childNodes).map(
-		standfirstTextElement(format),
-	);
-	switch (node.nodeName) {
-		case 'P':
-			return h('p', { key }, children);
-		case 'STRONG':
-			return h('strong', { key }, children);
-		default:
-			return null;
-	}
-};
-
 const text = (
 	doc: DocumentFragment,
 	format: Format,
 	supportsDarkMode = true,
 ): ReactNode[] =>
 	Array.from(doc.childNodes).map(textElement(format, supportsDarkMode));
+
+const editionsStandfirstFilter = (node: Node): boolean =>
+	!['UL', 'LI', 'A'].includes(node.nodeName);
+
 const standfirstText = (
 	doc: DocumentFragment,
 	format: Format,
-	noLinks?: boolean,
-): ReactNode[] =>
-	Array.from(doc.childNodes).map(
-		noLinks
-			? noLinksStandfirstTextElement(format)
-			: standfirstTextElement(format),
-	);
+	isEditions?: boolean,
+): ReactNode[] => {
+	const nodes = Array.from(doc.childNodes);
+	const filteredNodes = isEditions
+		? nodes.filter(editionsStandfirstFilter)
+		: nodes;
+	return filteredNodes.map(standfirstTextElement(format));
+};
 
 const Tweet = (props: {
 	content: NodeList;
