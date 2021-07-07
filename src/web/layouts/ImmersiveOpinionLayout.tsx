@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css } from '@emotion/react';
 
 import {
 	neutral,
@@ -15,7 +15,7 @@ import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '@root/src/web/components/GuardianLines';
+import { GuardianLines } from '/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -29,6 +29,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
+import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
@@ -43,12 +44,12 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { ContributorAvatar } from '../components/ContributorAvatar';
-// import { Container } from 'src/amp/components/Container';
+
+// css={[stackBelow('leftCol'), mostPopularAdStyle]}
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={css`
+		css={css`
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
@@ -75,9 +76,15 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'meta       border      standfirst  right-column'
+						'caption    border      title       right-column'
+						'.          border      headline    right-column'
+						'.          border      standfirst  right-column'
+						'.          border      byline      right-column'
+						'lines      border      body        right-column'
 						'meta       border      body        right-column'
-						'.          border      body        right-column';
+						'meta       border      body        right-column'
+						'.          border      body        right-column'
+						'.          border      .           right-column';
 				}
 
 				${until.wide} {
@@ -88,9 +95,15 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'meta       border      standfirst  right-column'
+						'.          border      title       right-column'
+						'.          border      headline    right-column'
+						'.          border      standfirst  right-column'
+						'.          border      byline      right-column'
+						'lines      border      body        right-column'
 						'meta       border      body        right-column'
-						'.          border      body        right-column';
+						'meta       border      body        right-column'
+						'.          border      body        right-column'
+						'.          border      .           right-column';
 				}
 
 				${until.leftCol} {
@@ -99,10 +112,13 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
+						'title       right-column'
+						'headline    right-column'
 						'standfirst  right-column'
+						'byline      right-column'
 						'caption     right-column'
+						'lines       right-column'
 						'meta        right-column'
-						'.           right-column'
 						'body        right-column';
 				}
 
@@ -110,7 +126,10 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
+						'title'
+						'headline'
 						'standfirst'
+						'byline'
 						'caption'
 						'lines'
 						'meta'
@@ -137,21 +156,6 @@ const stretchLines = css`
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
-	}
-`;
-
-const avatarPositionStyles = css`
-	display: flex;
-	justify-content: flex-end;
-	overflow: hidden;
-	margin-bottom: -29px;
-	margin-top: -70px;
-	pointer-events: none;
-
-	${until.phablet} {
-		img {
-			margin-right: -1.85rem;
-		}
 	}
 `;
 
@@ -192,13 +196,6 @@ export const ImmersiveOpinionLayout = ({
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
 		CAPI.config.switches.slotBodyEnd;
 
-	const contributorTag = CAPI.tags.find((tag) => tag.type === 'Contributor');
-	const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
-	const onlyOneContributor: boolean =
-		CAPI.tags.filter((tag) => tag.type === 'Contributor').length === 1;
-
-	const showAvatar = avatarUrl && onlyOneContributor;
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
@@ -217,12 +214,12 @@ export const ImmersiveOpinionLayout = ({
 	return (
 		<>
 			<div
-				className={css`
+				css={css`
 					background-color: ${palette.background.article};
 				`}
 			>
 				<div
-					className={cx(
+					css={[
 						mainMedia &&
 							css`
 								height: 100vh;
@@ -242,10 +239,10 @@ export const ImmersiveOpinionLayout = ({
 							display: flex;
 							flex-direction: column;
 						`,
-					)}
+					]}
 				>
 					<header
-						className={css`
+						css={css`
 							${getZIndex('headerWrapper')}
 							order: 0;
 						`}
@@ -282,17 +279,15 @@ export const ImmersiveOpinionLayout = ({
 						}
 						host={host}
 						hideCaption={true}
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
 					/>
 					{mainMedia && (
 						<>
 							<ContainerLayout
 								verticalMargins={false}
-								padContent={true}
-								centralBorder="full"
-								borderColour={palette.border.headline}
-								padSides={true}
-								leftColSize="compact"
-								backgroundColour={palette.background.headline}
+								padContent={false}
+								padSides={false}
 								leftContent={
 									// eslint-disable-next-line react/jsx-wrap-multilines
 									<ArticleTitle
@@ -306,65 +301,15 @@ export const ImmersiveOpinionLayout = ({
 									/>
 								}
 							>
-								<div
-									className={css`
-										display: flex;
-										flex-direction: column;
-										justify-content: space-between;
-										min-height: 259px;
-										${until.phablet} {
-											min-height: 200px;
-										}
-									`}
-								>
-									<div>
-										<Hide when="above" breakpoint="leftCol">
-											<div
-												className={css`
-													position: absolute;
-													top: -30px;
-													left: 0;
-													${getZIndex(
-														'articleHeadline',
-													)}
-												`}
-											>
-												<ArticleTitle
-													format={format}
-													palette={palette}
-													tags={CAPI.tags}
-													sectionLabel={
-														CAPI.sectionLabel
-													}
-													sectionUrl={CAPI.sectionUrl}
-													guardianBaseURL={
-														CAPI.guardianBaseURL
-													}
-													badge={CAPI.badge}
-												/>
-											</div>
-										</Hide>
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											palette={palette}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-										/>
-									</div>
-									{showAvatar && avatarUrl && (
-										<div className={avatarPositionStyles}>
-											<ContributorAvatar
-												imageSrc={avatarUrl}
-												imageAlt={
-													CAPI.author.byline || ''
-												}
-											/>
-										</div>
-									)}
-								</div>
+								<ArticleHeadline
+									format={format}
+									headlineString={CAPI.headline}
+									palette={palette}
+									tags={CAPI.tags}
+									byline={CAPI.author.byline}
+								/>
 							</ContainerLayout>
-							<GuardianLines count={8} palette={palette} />
+							<GuardianLines count={8} pillar={format.theme} />
 						</>
 					)}
 				</div>
@@ -383,7 +328,6 @@ export const ImmersiveOpinionLayout = ({
 								captionText={captionText}
 								format={format}
 								shouldLimitWidth={false}
-								isOverlayed={true}
 							/>
 						</Hide>
 					</GridItem>
@@ -394,20 +338,71 @@ export const ImmersiveOpinionLayout = ({
 							<Border palette={palette} />
 						)}
 					</GridItem>
+					<GridItem area="title">
+						<>
+							{!mainMedia && (
+								<div
+									css={css`
+										margin-top: -8px;
+										margin-left: -4px;
+										margin-bottom: 12px;
+
+										${until.tablet} {
+											margin-left: -20px;
+										}
+									`}
+								>
+									<ArticleTitle
+										format={format}
+										palette={palette}
+										tags={CAPI.tags}
+										sectionLabel={CAPI.sectionLabel}
+										sectionUrl={CAPI.sectionUrl}
+										guardianBaseURL={CAPI.guardianBaseURL}
+										badge={CAPI.badge}
+									/>
+								</div>
+							)}
+						</>
+					</GridItem>
+					<GridItem area="headline">
+						<>
+							{!mainMedia && (
+								<div css={maxWidth}>
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										palette={palette}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+									/>
+								</div>
+							)}
+						</>
+					</GridItem>
 					<GridItem area="standfirst">
 						<Standfirst
 							format={format}
 							standfirst={CAPI.standfirst}
 						/>
 					</GridItem>
+					<GridItem area="byline">
+						<HeadlineByline
+							format={format}
+							tags={CAPI.tags}
+							byline={
+								CAPI.author.byline ? CAPI.author.byline : ''
+							}
+						/>
+					</GridItem>
 					<GridItem area="lines">
 						{format.design === Design.PhotoEssay ? (
 							<></>
 						) : (
-							<div className={maxWidth}>
-								<div className={stretchLines}>
+							<div css={maxWidth}>
+								<div css={stretchLines}>
 									<GuardianLines
-										palette={palette}
+										pillar={format.theme}
 										effect={decideLineEffect(
 											Design.Article,
 											format.theme,
@@ -419,7 +414,7 @@ export const ImmersiveOpinionLayout = ({
 						)}
 					</GridItem>
 					<GridItem area="meta">
-						<div className={maxWidth}>
+						<div css={maxWidth}>
 							<ArticleMeta
 								branding={branding}
 								format={format}
@@ -437,20 +432,22 @@ export const ImmersiveOpinionLayout = ({
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>
-							<main className={maxWidth}>
+							<main css={maxWidth}>
 								<ArticleBody
 									format={format}
 									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									pageId={CAPI.config.pageId}
+									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines count={4} palette={palette} />
+								<GuardianLines
+									count={4}
+									pillar={format.theme}
+								/>
 								<SubMeta
-									format={format}
 									palette={palette}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -465,13 +462,14 @@ export const ImmersiveOpinionLayout = ({
 										CAPI.showBottomSocialButtons
 									}
 									badge={CAPI.badge}
+									format={format}
 								/>
 							</main>
 						</ArticleContainer>
 					</GridItem>
 					<GridItem area="right-column">
 						<div
-							className={css`
+							css={css`
 								padding-top: 6px;
 								height: 100%;
 								${from.desktop} {
@@ -490,7 +488,7 @@ export const ImmersiveOpinionLayout = ({
 								<>
 									{mainMedia && (
 										<div
-											className={css`
+											css={css`
 												margin-top: ${space[4]}px;
 											`}
 										>
@@ -574,7 +572,7 @@ export const ImmersiveOpinionLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} palette={palette} />
+					<GuardianLines count={4} pillar={format.theme} />
 				</Section>
 			)}
 

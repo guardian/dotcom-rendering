@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { injectGlobal } from '@emotion/css';
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 

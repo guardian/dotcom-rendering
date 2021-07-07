@@ -1267,6 +1267,13 @@
                         "partial"
                     ],
                     "type": "string"
+                },
+                "spaceAbove": {
+                    "enum": [
+                        "loose",
+                        "tight"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3783,16 +3790,16 @@
         "CommercialProperties": {
             "type": "object",
             "properties": {
-                "UK": {
+                "AU": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
                 "US": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "INT": {
+                "UK": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "AU": {
+                "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
