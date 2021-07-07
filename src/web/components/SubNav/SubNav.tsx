@@ -126,13 +126,6 @@ const showMoreStyle = css`
 	}
 `;
 
-const parentLinkStyle = css`
-	.li {
-		font-weight: 700;
-	}
-	${linkStyle};
-`;
-
 const listItemStyles = (palette: Palette) => css`
 	:after {
 		content: '';
@@ -196,7 +189,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 					>
 						<a
 							data-src-focus-disabled={true}
-							css={parentLinkStyle}
+							css={linkStyle}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
