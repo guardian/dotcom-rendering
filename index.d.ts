@@ -813,16 +813,6 @@ interface CalloutBlockLoadable extends ComponentNameChunkMap {
     addWhen: CalloutBlockElement['_type'];
 }
 
-interface QABlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-QABlockComponent';
-    addWhen: QABlockElement['_type'];
-}
-
-interface TimelineBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-TimelineBlockComponent';
-    addWhen: TimelineBlockElement['_type'];
-}
-
 interface DocumentBlockLoadable extends ComponentNameChunkMap {
     chunkName: 'elements-DocumentBlockComponent';
     addWhen: DocumentBlockElement['_type'];
