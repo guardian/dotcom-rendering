@@ -98,7 +98,7 @@ const linkStyle = css`
 `;
 
 const selected = css`
-	font-weight: 700 !important;
+	font-weight: 700;
 `;
 
 const spaceBetween = css`
@@ -127,8 +127,10 @@ const showMoreStyle = css`
 `;
 
 const parentLinkStyle = css`
+	.li {
+		font-weight: 700;
+	}
 	${linkStyle};
-	font-weight: 700;
 `;
 
 const listItemStyles = (palette: Palette) => css`
@@ -204,17 +206,18 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 				{subNavSections.links.map((link) => (
 					<li key={link.url}>
 						<a
-							css={[
-								linkStyle,
-								link.title === currentNavLink && selected,
-							]}
+							css={linkStyle}
 							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
 								link.url,
 							)}`}
 						>
-							{link.title}
+							{link.title === currentNavLink ? (
+								<span css={selected}>{link.title}</span>
+							) : (
+								link.title
+							)}
 						</a>
 					</li>
 				))}
