@@ -10,7 +10,8 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
 		)
 			element.html = element.html
-				? sanitiseHTML(element.html)
+				? // Allow iframes, this is for youtube embeds in interactives, etc
+				  sanitiseHTML(element.html, { ADD_TAGS: ['iframe'] })
 				: element.html;
 		return element;
 	});
