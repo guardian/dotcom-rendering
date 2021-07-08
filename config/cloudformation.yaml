@@ -176,7 +176,7 @@ Resources:
         - Key: App
           PropagateAtLaunch: true
           Value: !Ref App
-      VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-PublicSubnets]
+      VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-PrivateSubnets]
 
   DistributionInstanceProfile:
     Type: AWS::IAM::InstanceProfile
