@@ -447,7 +447,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			return Promise.reject();
 		},
 		{
-			resolveComponent: (module) => module.InteractiveContentsBlockElement,
+			resolveComponent: (module) =>
+				module.InteractiveContentsBlockElement,
 		},
 	);
 
