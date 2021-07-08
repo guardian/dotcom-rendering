@@ -60,7 +60,6 @@ import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettin
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
-import { InteractiveContentsBlockElement } from '@root/src/web/components/elements/InteractiveContentsBlockElement';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
@@ -429,6 +428,26 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		},
 		{
 			resolveComponent: (module) => module.InteractiveBlockComponent,
+		},
+	);
+
+	const InteractiveContentsBlockElement = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/InteractiveContentsBlockElement'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.InteractiveContentsBlockElement,
 		},
 	);
 
