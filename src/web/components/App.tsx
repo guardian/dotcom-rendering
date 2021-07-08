@@ -732,7 +732,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		<React.StrictMode>
 			{[
 				CAPI.config.switches.commercialMetrics,
-				window.guardian.config.ophan !== undefined,
+				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
 				<CommercialMetrics
 					browserId={browserId}
