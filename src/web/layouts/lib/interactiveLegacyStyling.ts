@@ -16,6 +16,7 @@ export const interactiveLegacyClasses = {
 // Styles expected by interactives from the Frontend days. These shouldn't be
 // used for new interactives though.
 export const interactiveGlobalStyles = css`
+	.fc-container__inner,
 	.gs-container {
 		${center}
 	}
