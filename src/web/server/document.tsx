@@ -133,7 +133,7 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 		},
 		{
-			chunkName: 'elements-MapBlockComponent',
+			chunkName: 'elements-MapEmbedBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
 		},
 		{

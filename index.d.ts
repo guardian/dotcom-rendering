@@ -827,7 +827,7 @@ interface InstagramBlockLoadable extends ComponentNameChunkMap {
     addWhen: InstagramBlockElement['_type'];
 }
 interface MapBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-MapBlockComponent';
+    chunkName: 'elements-MapEmbedBlockComponent';
     addWhen: MapBlockElement['_type'];
 }
 
