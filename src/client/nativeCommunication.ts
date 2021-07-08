@@ -81,9 +81,9 @@ function getAdSlots(): AdSlot[] {
 	}
 
 	return Array.from(advertSlots).map((adSlot, idx) => {
-		// To easily turn teads square ads on, we can use the TEADS_ENABLED boolean flag above
-		// Therefore we need to disable a rule for unnecessary conditions.
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- explained above.
+		/* eslint-disable @typescript-eslint/no-unnecessary-condition --
+		To easily turn teads square ads on, we can use the TEADS_ENABLED boolean flag above
+		Therefore we need to disable a rule for unnecessary conditions. */
 		const isSquare = TEADS_ENABLED && idx === 0;
 		if (isSquare) {
 			adSlot.classList.add('ad-slot-square');
@@ -94,6 +94,7 @@ function getAdSlots(): AdSlot[] {
 			targetingParams,
 			isSquare,
 		});
+		/* eslint-enable @typescript-eslint/no-unnecessary-condition */
 	});
 }
 
