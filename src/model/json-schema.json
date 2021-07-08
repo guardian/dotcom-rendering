@@ -99,6 +99,9 @@
                         "$ref": "#/definitions/NumberedTitleBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/InteractiveContentsBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/ProfileAtomBlockElement"
                     },
                     {
@@ -2134,6 +2137,56 @@
             ],
             "type": "string"
         },
+        "InteractiveContentsBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.InteractiveContentsBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "subheadingLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubheadingBlockElement"
+                    }
+                },
+                "endDocumentElementId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "subheadingLinks"
+            ]
+        },
+        "SubheadingBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.SubheadingBlockElement"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "html"
+            ]
+        },
         "ProfileAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -2408,28 +2461,6 @@
                 "small"
             ],
             "type": "string"
-        },
-        "SubheadingBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "enum": [
-                        "model.dotcomrendering.pageElements.SubheadingBlockElement"
-                    ]
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "html"
-            ]
         },
         "TableBlockElement": {
             "type": "object",
@@ -3352,6 +3383,9 @@
                                 "$ref": "#/definitions/NumberedTitleBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/InteractiveContentsBlockElement"
+                            },
+                            {
                                 "$ref": "#/definitions/ProfileAtomBlockElement"
                             },
                             {
@@ -3760,16 +3794,16 @@
         "CommercialProperties": {
             "type": "object",
             "properties": {
-                "UK": {
+                "AU": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
                 "US": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "INT": {
+                "UK": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "AU": {
+                "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
@@ -3883,6 +3917,12 @@
                         "src": {
                             "type": "string"
                         },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
                         "dimensions": {
                             "type": "object",
                             "properties": {
@@ -3897,12 +3937,6 @@
                                 "height",
                                 "width"
                             ]
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
                         }
                     },
                     "required": [

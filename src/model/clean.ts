@@ -23,5 +23,6 @@ export const clean = compose(
 	DOMPurify.sanitize,
 );
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-export const sanitiseHTML = (html: string): string => DOMPurify.sanitize(html);
+export const sanitiseHTML = (html: string, opts?: any): string =>
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+	DOMPurify.sanitize(html, opts);
