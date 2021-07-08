@@ -15,7 +15,7 @@ import {
 	videoClient,
 } from '../native/nativeApi';
 
-const TEADS_ENABLED = true;
+const TEADS_ENABLED = false;
 
 type Slot = AdSlot | VideoSlot;
 
