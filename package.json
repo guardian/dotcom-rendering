@@ -60,7 +60,7 @@
     "@guardian/src-radio": "^3.6.0",
     "@guardian/src-text-area": "^3.6.0",
     "@guardian/src-text-input": "^3.6.0",
-    "@guardian/types": "^6.1.0",
+    "@guardian/types": "^7.0.0",
     "@hkdobrev/run-if-changed": "^0.3.1",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.2",

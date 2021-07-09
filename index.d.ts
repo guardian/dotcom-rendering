@@ -38,7 +38,8 @@ type CAPIDesign =
 	| 'QuizDesign'
 	| 'InteractiveDesign'
 	| 'PhotoEssayDesign'
-	| 'PrintShopDesign';
+	| 'PrintShopDesign'
+	| 'ObituaryDesign';
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
