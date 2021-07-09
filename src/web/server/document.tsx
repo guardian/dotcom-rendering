@@ -146,7 +146,7 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
 		},
 		{
-			chunkName: 'elements-FacebookVideoBlockComponent',
+			chunkName: 'elements-VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
 		},

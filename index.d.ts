@@ -843,7 +843,7 @@ interface SpotifyBlockLoadable extends ComponentNameChunkMap {
 }
 
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-FacebookVideoBlockComponent';
+    chunkName: 'elements-VideoFacebookBlockComponent';
     addWhen: VideoFacebookBlockElement['_type'];
 }
 interface VineBlockLoadable extends ComponentNameChunkMap {
