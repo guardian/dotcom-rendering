@@ -26,6 +26,10 @@ Parameters:
   AMI:
     Description: AMI to use for instances
     Type: AWS::EC2::Image::Id
+  NotificationAlarmAction:
+    Type: CommaDelimitedList
+    Description: (Optional) ARN of action to execute when notification alarms change state
+    Default: ''
   LatencyAlarmThreshold:
     Type: String
     Description: (Optional) Latency Threshold in seconds
@@ -38,9 +42,17 @@ Parameters:
     Type: String
     Description: (Optional) Number of periods over which the latency is compared to the threshold before to scale up
     Default: '1'
-  LatencyNotificationEvaluationPeriods:
+  Backend5XXAlarmThreshold:
     Type: String
-    Description: (Optional) Number of periods over which the latency is compared to the threshold before to send a notification
+    Description: (Optional) Max number of errors before the 5XX alarm is triggered
+    Default: '100'
+  Backend5XXAlarmPeriod:
+    Type: String
+    Description: (Optional) Duration in seconds before 5XX alarm is triggered
+    Default: '60'
+  Backend5XXConsecutivePeriod:
+    Type: String
+    Description: (Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered
     Default: '5'
   InstanceType:
     Type: String
@@ -54,6 +66,7 @@ Parameters:
 
 Conditions:
     HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
+    HasBackend5XXAlarm: !Equals [!Ref Stage, 'CODE']
 
 Mappings:
   Constants:
@@ -309,6 +322,25 @@ Resources:
       AlarmActions:
       - !Ref ScaleUpPolicy
     Type: AWS::CloudWatch::Alarm
+
+  Backend5xxAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Condition: HasBackend5XXAlarm
+    Properties:
+      AlarmDescription: !Sub |
+        Alarm if 5XX backend errors are greater than ${Backend5XXAlarmThreshold} over last ${Backend5XXAlarmPeriod} seconds
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      Dimensions:
+      - Name: LoadBalancerName
+        Value: !Ref LoadBalancer
+      MetricName: HTTPCode_Backend_5XX
+      Namespace: AWS/ELB
+      EvaluationPeriods: !Ref Backend5XXConsecutivePeriod
+      Period: !Ref Backend5XXAlarmPeriod
+      Statistic: Sum
+      Threshold: !Ref Backend5XXAlarmThreshold
+      AlarmActions: !Ref NotificationAlarmAction
+      OKActions: !Ref NotificationAlarmAction
 
 Outputs:
   LoadBalancerUrl:
