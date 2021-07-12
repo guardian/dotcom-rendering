@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectGlobal } from '@emotion/css';
+import { injectGlobal } from 'emotion';
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
@@ -8,7 +8,6 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 
-import { injectGlobal } from 'emotion';
 import { focusHalo } from '@guardian/src-foundations/accessibility';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';

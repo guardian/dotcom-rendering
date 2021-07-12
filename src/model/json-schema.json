@@ -3790,16 +3790,16 @@
         "CommercialProperties": {
             "type": "object",
             "properties": {
-                "AU": {
+                "UK": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
                 "US": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "UK": {
+                "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "INT": {
+                "AU": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
