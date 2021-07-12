@@ -4,7 +4,6 @@ import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { CalloutBlockComponent } from '@root/src/web/components/elements/CalloutBlockComponent';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
@@ -61,14 +60,6 @@ import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettin
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
-import { DocumentBlockComponent } from '@root/src/web/components/elements/DocumentBlockComponent';
-import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
-import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
-import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
-import { SpotifyBlockComponent } from '@root/src/web/components/elements/SpotifyBlockComponent';
-import { VideoFacebookBlockComponent } from '@root/src/web/components/elements/VideoFacebookBlockComponent';
-import { VineBlockComponent } from '@root/src/web/components/elements/VineBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
@@ -80,6 +71,7 @@ import {
 import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
+import { CommercialMetrics } from './CommercialMetrics';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -158,6 +150,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+	const [browserId, setBrowserId] = useState<string | undefined>(undefined);
+	useOnce(() => {
+		// TODO: can the browserId actually be null?
+		setBrowserId(getCookie('bwid') ?? undefined);
+	}, []);
 
 	const componentEventHandler = (
 		componentType: any,
@@ -295,7 +292,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		if (CAPI.config.switches.consentManagement && countryCode) {
 			const pubData = {
 				platform: 'next-gen',
-				browserId: getCookie('bwid') || undefined,
+				browserId,
 				pageViewId,
 			};
 			injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
@@ -327,7 +324,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				pubData,
 			});
 		}
-	}, [countryCode, CAPI.config.switches.consentManagement, pageViewId]);
+	}, [
+		countryCode,
+		CAPI.config.switches.consentManagement,
+		pageViewId,
+		browserId,
+	]);
 
 	// ************************
 	// *   Google Analytics   *
@@ -429,6 +431,207 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		},
 	);
 
+	const InteractiveContentsBlockElement = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/InteractiveContentsBlockElement'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) =>
+				module.InteractiveContentsBlockElement,
+		},
+	);
+
+	const CalloutBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.CalloutBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/CalloutBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.CalloutBlockComponent,
+		},
+	);
+
+	const DocumentBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.DocumentBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/DocumentBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.DocumentBlockComponent,
+		},
+	);
+
+	const EmbedBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.EmbedBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/EmbedBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.EmbedBlockComponent,
+		},
+	);
+
+	const UnsafeEmbedBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.EmbedBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/UnsafeEmbedBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.UnsafeEmbedBlockComponent,
+		},
+	);
+
+	const InstagramBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.InstagramBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/InstagramBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.InstagramBlockComponent,
+		},
+	);
+
+	const MapEmbedBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.MapBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/MapEmbedBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.MapEmbedBlockComponent,
+		},
+	);
+
+	const SpotifyBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.SpotifyBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/SpotifyBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.SpotifyBlockComponent,
+		},
+	);
+
+	const VideoFacebookBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/VideoFacebookBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.VideoFacebookBlockComponent,
+		},
+	);
+
+	const VineBlockComponent = loadable(
+		() => {
+			if (
+				CAPI.elementsToHydrate.filter(
+					(element) =>
+						element._type ===
+						'model.dotcomrendering.pageElements.VineBlockElement',
+				).length > 0
+			) {
+				return import(
+					'@frontend/web/components/elements/VineBlockComponent'
+				);
+			}
+			return Promise.reject();
+		},
+		{
+			resolveComponent: (module) => module.VineBlockComponent,
+		},
+	);
+
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -510,6 +713,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
+	const interactiveContentsElement = elementsByType<InteractiveContentsBlockElement>(
+		CAPI.elementsToHydrate,
+		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+	);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -523,6 +730,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
+			{[
+				CAPI.config.switches.commercialMetrics,
+				window.guardian.config?.ophan !== undefined,
+			].every(Boolean) && (
+				<CommercialMetrics
+					browserId={browserId}
+					pageViewId={pageViewId}
+				/>
+			)}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
@@ -592,6 +808,16 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						caption={interactiveBlock.caption}
 						format={format}
 						palette={palette}
+					/>
+				</HydrateOnce>
+			))}
+			{interactiveContentsElement.map((interactiveBlock) => (
+				<HydrateOnce rootId={interactiveBlock.elementId}>
+					<InteractiveContentsBlockElement
+						subheadingLinks={interactiveBlock.subheadingLinks}
+						endDocumentElementId={
+							interactiveBlock.endDocumentElementId
+						}
 					/>
 				</HydrateOnce>
 			))}

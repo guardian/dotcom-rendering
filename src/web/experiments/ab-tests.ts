@@ -7,9 +7,13 @@ import {
 	newsletterMerchUnitLighthouseVariants,
 } from '@frontend/web/experiments/tests/newsletter-merch-unit-test';
 import { signInGateUsMandatory } from '@root/src/web/experiments/tests/sign-in-gate-us-mandatory';
+import { commercialPartner } from './tests/commercial-partner';
 
+// keep in sync with ab-tests in frontend
+// https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
 export const tests: ABTest[] = [
 	abTestTest,
+	commercialPartner,
 	signInGateMainVariant,
 	signInGateMainControl,
 	signInGateUsMandatory,

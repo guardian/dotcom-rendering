@@ -113,6 +113,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: data.countryCode,
 			modulesVersion: MODULES_VERSION,
+			url: window.location.origin + window.location.pathname,
 		},
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };

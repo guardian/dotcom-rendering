@@ -38,7 +38,8 @@ type CAPIDesign =
 	| 'QuizDesign'
 	| 'InteractiveDesign'
 	| 'PhotoEssayDesign'
-	| 'PrintShopDesign';
+	| 'PrintShopDesign'
+	| 'ObituaryDesign';
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
@@ -803,13 +804,69 @@ interface RichLinkBlockLoadable extends ComponentNameChunkMap {
     addWhen: RichLinkBlockElement['_type'];
 }
 
-interface InteractiveBlockLoadaable extends ComponentNameChunkMap {
+interface InteractiveBlockLoadable extends ComponentNameChunkMap {
     chunkName: 'elements-InteractiveBlockComponent';
     addWhen: InteractiveBlockElement['_type'];
 }
 
+interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-InteractiveContentsBlockComponent';
+    addWhen: InteractiveContentsBlockElement['_type'];
+}
+
+interface CalloutBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-CalloutBlockComponent';
+    addWhen: CalloutBlockElement['_type'];
+}
+
+interface DocumentBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-DocumentBlockComponent';
+    addWhen: DocumentBlockElement['_type'];
+}
+interface EmbedBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-EmbedBlockComponent';
+    addWhen: EmbedBlockElement['_type'];
+}
+
+interface InstagramBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-InstagramBlockComponent';
+    addWhen: InstagramBlockElement['_type'];
+}
+interface MapBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-MapEmbedBlockComponent';
+    addWhen: MapBlockElement['_type'];
+}
+
+interface SpotifyBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-SpotifyBlockComponent';
+    addWhen: SpotifyBlockElement['_type'];
+}
+
+interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-VideoFacebookBlockComponent';
+    addWhen: VideoFacebookBlockElement['_type'];
+}
+interface VineBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-VineBlockComponent';
+    addWhen: VineBlockElement['_type'];
+}
+
 // There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [EditionDropdownLoadable, YoutubeBlockLoadable, RichLinkBlockLoadable, InteractiveBlockLoadaable]
+type LoadableComponents = [
+	EditionDropdownLoadable,
+	YoutubeBlockLoadable,
+	RichLinkBlockLoadable,
+	InteractiveBlockLoadable,
+	InteractiveContentsBlockLoadable,
+	CalloutBlockLoadable,
+	DocumentBlockLoadable,
+	EmbedBlockLoadable,
+	InstagramBlockLoadable,
+	MapBlockLoadable,
+	SpotifyBlockLoadable,
+	FacebookVideoBlockLoadable,
+	VineBlockLoadable,
+]
 
 interface CarouselImagesMap {
 	'300'?: string;
