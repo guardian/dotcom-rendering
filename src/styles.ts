@@ -148,6 +148,14 @@ export const adStyles = (format: Format): SerializedStyles => {
 				padding-bottom: ${adHeight};
 			}
 
+			.ad-slot-square {
+				height: 344px;
+				width: 320px;
+				margin-left: auto;
+				margin-right: auto;
+				padding-bottom: 0;
+			}
+
 			.upgrade-banner {
 				padding: ${remSpace[3]};
 				background-color: ${brandAltBackground.primary};
