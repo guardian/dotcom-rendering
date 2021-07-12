@@ -6,7 +6,6 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@frontend/web/experiments/tests/newsletter-merch-unit-test';
-import { signInGateUsMandatory } from '@root/src/web/experiments/tests/sign-in-gate-us-mandatory';
 import { commercialPartner } from './tests/commercial-partner';
 
 // keep in sync with ab-tests in frontend
@@ -16,7 +15,6 @@ export const tests: ABTest[] = [
 	commercialPartner,
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateUsMandatory,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 ];
