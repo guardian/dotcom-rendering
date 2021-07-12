@@ -23,7 +23,7 @@ import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
-import { Section } from '@root/src/web/components/Section';
+import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
@@ -255,7 +255,7 @@ export const ImmersiveOpinionLayout = ({
 							order: 0;
 						`}
 					>
-						<Section
+						<ElementContainer
 							showSideBorders={false}
 							showTopBorder={false}
 							padded={false}
@@ -272,7 +272,7 @@ export const ImmersiveOpinionLayout = ({
 								}
 								edition={CAPI.editionId}
 							/>
-						</Section>
+						</ElementContainer>
 					</header>
 
 					<MainMedia
@@ -287,6 +287,8 @@ export const ImmersiveOpinionLayout = ({
 						}
 						host={host}
 						hideCaption={true}
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
 					/>
 					{mainMedia && (
 						<>
@@ -365,7 +367,7 @@ export const ImmersiveOpinionLayout = ({
 					)}
 				</div>
 			</div>
-			<Section
+			<ElementContainer
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={palette.background.article}
@@ -499,9 +501,9 @@ export const ImmersiveOpinionLayout = ({
 						</div>
 					</GridItem>
 				</ImmersiveGrid>
-			</Section>
+			</ElementContainer>
 
-			<Section
+			<ElementContainer
 				padded={false}
 				showTopBorder={false}
 				showSideBorders={false}
@@ -511,18 +513,18 @@ export const ImmersiveOpinionLayout = ({
 					position="merchandising-high"
 					display={format.display}
 				/>
-			</Section>
+			</ElementContainer>
 
 			{!isPaidContent && (
 				<>
 					{/* Onwards (when signed OUT) */}
 					<div id="onwards-upper-whensignedout" />
 					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedout" />
+						<ElementContainer sectionId="onwards-lower-whensignedout" />
 					)}
 
 					{showComments && (
-						<Section sectionId="comments">
+						<ElementContainer sectionId="comments">
 							<Discussion
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
@@ -539,40 +541,40 @@ export const ImmersiveOpinionLayout = ({
 								beingHydrated={false}
 								display={format.display}
 							/>
-						</Section>
+						</ElementContainer>
 					)}
 
 					{/* Onwards (when signed IN) */}
 					<div id="onwards-upper-whensignedin" />
 					{showOnwardsLower && (
-						<Section sectionId="onwards-lower-whensignedin" />
+						<ElementContainer sectionId="onwards-lower-whensignedin" />
 					)}
 
-					<Section sectionId="most-viewed-footer" />
+					<ElementContainer sectionId="most-viewed-footer" />
 				</>
 			)}
 
-			<Section
+			<ElementContainer
 				padded={false}
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={neutral[93]}
 			>
 				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			</ElementContainer>
 
 			{NAV.subNavSections && (
-				<Section padded={false} sectionId="sub-nav-root">
+				<ElementContainer padded={false} sectionId="sub-nav-root">
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
 					<Lines count={4} />
-				</Section>
+				</ElementContainer>
 			)}
 
-			<Section
+			<ElementContainer
 				padded={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
@@ -583,7 +585,7 @@ export const ImmersiveOpinionLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 				/>
-			</Section>
+			</ElementContainer>
 
 			<BannerWrapper />
 			<MobileStickyContainer />
