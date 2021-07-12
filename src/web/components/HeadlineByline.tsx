@@ -82,6 +82,15 @@ const immersiveOpinionStyles = (palette: Palette) => css`
 	color: ${palette.text.headlineByline};
 `;
 
+const immersiveOpinionStyles = (palette: Palette) => css`
+	${headline.medium({
+		fontWeight: 'light',
+		fontStyle:'italic',
+	})}
+	margin-bottom: ${space[6]}px;
+	color: ${palette.text.headlineByline};
+`;
+
 const immersiveLinkStyles = (palette: Palette) => css`
 	a {
 		color: ${palette.text.headlineByline};
@@ -135,16 +144,24 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 					return (
 						<div className={immersiveOpinionStyles(palette)}>
 							by{' '}
+<<<<<<< HEAD
 							<span
 								className={immersiveOpinionLinkStyles(palette)}
 							>
+=======
+							<span className={immersiveOpinionLinkStyles(palette)}>
+>>>>>>> 8119c9e43 (updates)
 								<BylineLink byline={byline} tags={tags} />
 							</span>
 						</div>
 					);
 				default:
 					return (
+<<<<<<< HEAD
 						<div className={immersiveStyles(format)}>
+=======
+						<div className={immersiveStyles}>
+>>>>>>> 8119c9e43 (updates)
 							by{' '}
 							<span className={immersiveLinkStyles(palette)}>
 								<BylineLink byline={byline} tags={tags} />

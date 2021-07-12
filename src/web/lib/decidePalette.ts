@@ -16,8 +16,13 @@ import {
 	labs,
 } from '@guardian/src-foundations';
 
+<<<<<<< HEAD
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars';
+=======
+import { pillarPalette } from '@root/src/lib/pillars';
+import { Opinion } from '../components/SignedInAs.stories';
+>>>>>>> 8119c9e43 (updates)
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -113,13 +118,21 @@ const textHeadlineByline = (format: Format): string => {
 			switch (format.design) {
 				case Design.Editorial:
 				case Design.Comment:
+<<<<<<< HEAD
 					return WHITE;
+=======
+					return WHITE
+>>>>>>> 8119c9e43 (updates)
 				default:
 					return pillarPalette[format.theme].main;
 			}
 		default:
 			return pillarPalette[format.theme].main;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8119c9e43 (updates)
 };
 
 const textStandfirst = (format: Format): string => {

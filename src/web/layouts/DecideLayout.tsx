@@ -1,5 +1,3 @@
-import React from 'react';
-import { injectGlobal } from 'emotion';
 import { Display, Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
 
@@ -8,27 +6,18 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 
-import { focusHalo } from '@guardian/src-foundations/accessibility';
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
-import { ImmersiveOpinionLayout } from './ImmersiveOpinionLayout';
 import { LiveLayout } from './LiveLayout';
+import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
+import { InteractiveLayout } from './InteractiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
 	NAV: NavType;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-injectGlobal`
-	/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-	/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-	*:focus {
-		${focusHalo}
-	}
-`;
 
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	const display: Display = decideDisplay(CAPI.format);
@@ -41,30 +30,28 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	};
 	const palette = decidePalette(format);
 
+	// TODO we can probably better express this as data
 	switch (display) {
 		case Display.Immersive: {
-			switch (design) {
-				case Design.Comment:
-				case Design.Editorial:
-				case Design.Letter:
-					return (
-						<ImmersiveOpinionLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							palette={palette}
-							format={format}
-						/>
-					);
-				default:
-					return (
-						<ImmersiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							palette={palette}
-							format={format}
-						/>
-					);
+			if (design === Design.Interactive) {
+				return (
+					<InteractiveImmersiveLayout
+						CAPI={CAPI}
+						NAV={NAV}
+						format={format}
+						palette={palette}
+					/>
+				);
 			}
+
+			return (
+				<ImmersiveLayout
+					CAPI={CAPI}
+					NAV={NAV}
+					palette={palette}
+					format={format}
+				/>
+			);
 		}
 		case Display.NumberedList:
 		case Display.Showcase: {
@@ -104,6 +91,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case Display.Standard:
 		default: {
 			switch (design) {
+				case Design.Interactive:
+					return (
+						<InteractiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
 				case Design.LiveBlog:
 				case Design.DeadBlog:
 					return (

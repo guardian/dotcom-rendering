@@ -10,12 +10,12 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 import { Design } from '@guardian/types';
 import type { Format } from '@guardian/types';
+import { Lines } from '@guardian/src-ed-lines';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { GuardianLines } from '/src/web/components/GuardianLines';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
@@ -29,7 +29,6 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
-import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
@@ -44,6 +43,8 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { ContributorAvatar } from '../components/ContributorAvatar';
+// import { Container } from 'src/amp/components/Container';
 
 // css={[stackBelow('leftCol'), mostPopularAdStyle]}
 
@@ -79,7 +80,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
 						'meta       border      body        right-column'
@@ -95,10 +95,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'.          border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
+						'caption    border      standfirst  right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
 						'meta       border      body        right-column'
@@ -112,10 +109,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						1fr /* Main content */
 						300px; /* Right Column */
 					grid-template-areas:
-						'title       right-column'
-						'headline    right-column'
 						'standfirst  right-column'
-						'byline      right-column'
 						'caption     right-column'
 						'lines       right-column'
 						'meta        right-column'
@@ -126,10 +120,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'title'
-						'headline'
 						'standfirst'
-						'byline'
 						'caption'
 						'lines'
 						'meta'
@@ -156,6 +147,20 @@ const stretchLines = css`
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
+	}
+`;
+
+const avatarPositionStyles = css`
+	display: flex;
+	justify-content: flex-end;
+	overflow: hidden;
+	margin-bottom: -29px;
+	margin-top: -70px;
+	pointer-events: none;
+	${until.phablet} {
+		img {
+			margin-right: -1.85rem;
+		}
 	}
 `;
 
@@ -195,6 +200,9 @@ export const ImmersiveOpinionLayout = ({
 	const showBodyEndSlot =
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
 		CAPI.config.switches.slotBodyEnd;
+
+	const contributorTag = CAPI.tags.find((tag) => tag.type === 'Contributor');
+	const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -279,15 +287,16 @@ export const ImmersiveOpinionLayout = ({
 						}
 						host={host}
 						hideCaption={true}
-						pageId={CAPI.pageId}
-						webTitle={CAPI.webTitle}
 					/>
 					{mainMedia && (
 						<>
 							<ContainerLayout
 								verticalMargins={false}
-								padContent={false}
-								padSides={false}
+								padContent={true}
+								centralBorder="full"
+								padSides={true}
+								leftColSize="compact"
+								backgroundColour={palette.background.headline}
 								leftContent={
 									// eslint-disable-next-line react/jsx-wrap-multilines
 									<ArticleTitle
@@ -301,15 +310,57 @@ export const ImmersiveOpinionLayout = ({
 									/>
 								}
 							>
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPI.headline}
-									palette={palette}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-								/>
+								<div
+									css={css`
+										position: relative;
+										display: flex;
+										flex-direction: row;
+									`}
+								>
+									<Hide when="above" breakpoint="leftCol">
+										<div
+											css={css`
+												position: absolute;
+												top: -30px;
+												left: 0;
+												${getZIndex('articleHeadline')}
+											`}
+										>
+											<ArticleTitle
+												format={format}
+												palette={palette}
+												tags={CAPI.tags}
+												sectionLabel={CAPI.sectionLabel}
+												sectionUrl={CAPI.sectionUrl}
+												guardianBaseURL={
+													CAPI.guardianBaseURL
+												}
+												badge={CAPI.badge}
+											/>
+										</div>
+									</Hide>
+									<div>
+										<ArticleHeadline
+											format={format}
+											headlineString={CAPI.headline}
+											palette={palette}
+											tags={CAPI.tags}
+											byline={CAPI.author.byline}
+										/>
+									</div>
+									{avatarUrl && (
+										<div css={avatarPositionStyles}>
+											<ContributorAvatar
+												imageSrc={avatarUrl}
+												imageAlt={
+													CAPI.author.byline || ''
+												}
+											/>
+										</div>
+									)}
+								</div>
 							</ContainerLayout>
-							<GuardianLines count={8} pillar={format.theme} />
+							<Lines count={8} />
 						</>
 					)}
 				</div>
@@ -338,61 +389,10 @@ export const ImmersiveOpinionLayout = ({
 							<Border palette={palette} />
 						)}
 					</GridItem>
-					<GridItem area="title">
-						<>
-							{!mainMedia && (
-								<div
-									css={css`
-										margin-top: -8px;
-										margin-left: -4px;
-										margin-bottom: 12px;
-
-										${until.tablet} {
-											margin-left: -20px;
-										}
-									`}
-								>
-									<ArticleTitle
-										format={format}
-										palette={palette}
-										tags={CAPI.tags}
-										sectionLabel={CAPI.sectionLabel}
-										sectionUrl={CAPI.sectionUrl}
-										guardianBaseURL={CAPI.guardianBaseURL}
-										badge={CAPI.badge}
-									/>
-								</div>
-							)}
-						</>
-					</GridItem>
-					<GridItem area="headline">
-						<>
-							{!mainMedia && (
-								<div css={maxWidth}>
-									<ArticleHeadline
-										format={format}
-										headlineString={CAPI.headline}
-										palette={palette}
-										tags={CAPI.tags}
-										byline={CAPI.author.byline}
-									/>
-								</div>
-							)}
-						</>
-					</GridItem>
 					<GridItem area="standfirst">
 						<Standfirst
 							format={format}
 							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
-					<GridItem area="byline">
-						<HeadlineByline
-							format={format}
-							tags={CAPI.tags}
-							byline={
-								CAPI.author.byline ? CAPI.author.byline : ''
-							}
 						/>
 					</GridItem>
 					<GridItem area="lines">
@@ -401,8 +401,7 @@ export const ImmersiveOpinionLayout = ({
 						) : (
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<GuardianLines
-										pillar={format.theme}
+									<Lines
 										effect={decideLineEffect(
 											Design.Article,
 											format.theme,
@@ -443,10 +442,7 @@ export const ImmersiveOpinionLayout = ({
 									webTitle={CAPI.webTitle}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
-								<GuardianLines
-									count={4}
-									pillar={format.theme}
-								/>
+								<Lines count={4} />
 								<SubMeta
 									palette={palette}
 									subMetaKeywordLinks={
@@ -572,7 +568,7 @@ export const ImmersiveOpinionLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<GuardianLines count={4} pillar={format.theme} />
+					<Lines count={4} />
 				</Section>
 			)}
 
