@@ -19,6 +19,7 @@ describe('parseBrazeEpicParams', () => {
 		};
 
 		const expected = ok({
+			name: 'CONTROL',
 			heading: 'Example Heading',
 			paragraphs: ['Paragraph 1', 'Paragraph 2', 'Paragraph 3'],
 			highlightedText: 'Example highlighted text',
@@ -44,6 +45,7 @@ describe('parseBrazeEpicParams', () => {
 		};
 
 		const expected = ok({
+			name: 'CONTROL',
 			heading: 'Example Heading',
 			paragraphs: ['First paragraph', 'Another paragraph'],
 			highlightedText: 'Example highlighted text',
@@ -68,6 +70,7 @@ describe('parseBrazeEpicParams', () => {
 		};
 
 		const expected = ok({
+			name: 'CONTROL',
 			paragraphs: ['Paragraph 1', 'Paragraph 2', 'Paragraph 3'],
 			cta: { text: 'Button', baseUrl: 'https://www.example.com' },
 			ophanComponentId: 'epic_123',
