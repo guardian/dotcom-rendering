@@ -27,6 +27,7 @@ export type Variant = {
 		baseUrl: string;
 	};
 	ophanComponentId: string;
+	name: string;
 };
 
 const parseParagraphs = (dataFromBraze: EpicDataFromBraze): string[] => {
@@ -67,6 +68,7 @@ export const parseBrazeEpicParams = (
 	}
 
 	const variant = {
+		name: 'CONTROL', // A name is required by the ContributionsEpic component
 		heading: dataFromBraze.heading,
 		paragraphs,
 		highlightedText: dataFromBraze.highlightedText,

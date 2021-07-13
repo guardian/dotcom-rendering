@@ -44,10 +44,15 @@ type Tracking = {
 	referrerUrl: string;
 };
 
+type ArticleCounts = {
+	for52Weeks: number;
+	forTargetedWeeks: number;
+};
+
 type EpicProps = {
 	variant: Variant;
 	tracking: Tracking;
-	numArticles: number;
+	articleCounts: ArticleCounts;
 	countryCode: string;
 };
 
@@ -101,13 +106,29 @@ const buildEpicProps = (
 				platformId: 'GUARDIAN_WEB',
 				clientName: 'dcr',
 				referrerUrl: window.location.origin + window.location.pathname,
+
+				// We need to pass these props in order to pass the
+				// ContributionsEpic validation. This doesn't feel
+				// great, so I think a better solution will be to create our own
+				// epic component, with the same look and feel, in
+				// @guardian/braze-components which doesn't have the same prop
+				// requirements.
+				abTestName: '',
+				abTestVariant: '',
+				campaignCode: '',
+				componentType: 'ACQUISITIONS_EPIC',
 			};
 
 			const tracking = {
 				...pageTracking,
 			};
 
-			return { variant, tracking, numArticles: 0, countryCode };
+			const articleCounts = {
+				for52Weeks: 0,
+				forTargetedWeeks: 0,
+			};
+
+			return { variant, tracking, articleCounts, countryCode };
 		},
 	)(variantResult);
 };
