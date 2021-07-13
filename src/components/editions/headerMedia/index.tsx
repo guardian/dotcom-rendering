@@ -199,7 +199,11 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				video: { title, atomId },
 			} = media;
 
-			return <Video atomId={atomId} title={title} />;
+			return (
+				<div className="js-video-container">
+					<Video atomId={atomId} title={title} />
+				</div>
+			);
 		}
 	});
 };
