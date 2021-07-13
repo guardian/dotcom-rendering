@@ -101,7 +101,7 @@ const buildEpicProps = (
 			return null;
 		},
 		(variant) => {
-			const pageTracking = {
+			const tracking = {
 				ophanPageId: window.guardian.config.ophan.pageViewId,
 				platformId: 'GUARDIAN_WEB',
 				clientName: 'dcr',
@@ -117,10 +117,6 @@ const buildEpicProps = (
 				abTestVariant: '',
 				campaignCode: '',
 				componentType: 'ACQUISITIONS_EPIC',
-			};
-
-			const tracking = {
-				...pageTracking,
 			};
 
 			const articleCounts = {
