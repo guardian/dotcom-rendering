@@ -232,6 +232,7 @@ interface InteractiveAtomBlockElement {
 	css?: string;
 	placeholderUrl?: string;
 	role?: RoleType;
+	height?: number;
 }
 
 // Can't guarantee anything in interactiveBlockElement :shrug:

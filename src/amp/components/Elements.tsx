@@ -59,7 +59,12 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 				return <EmbedBlockComponent key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-				return <InteractiveAtomBlockComponent url={element.url} />;
+				return (
+					<InteractiveAtomBlockComponent
+						url={element.url}
+						height={element.height}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 				return (
 					<Expandable
@@ -99,6 +104,7 @@ export const Elements = (
 						url={element.url}
 						html={element.html}
 						placeholderUrl={element.placeholderUrl}
+						height={element.height}
 					/>
 				); // element.placeholderUrl
 			case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds

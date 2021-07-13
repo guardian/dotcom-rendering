@@ -10,11 +10,12 @@ import { findBySubsection } from '@root/src/model/article-sections';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 import { getAmpExperimentCache } from '@root/src/amp/server/ampExperimentCache';
+import { enhanceCAPI } from '@root/src/model/enhanceCAPI';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
 	try {
 		// TODO remove when migrated to v2
-		const CAPI = validateV2(body);
+		const CAPI = validateV2(enhanceCAPI(body));
 		const { linkedData } = CAPI;
 		const { config } = CAPI;
 		const blockElements = CAPI.blocks.map((block) => block.elements);
