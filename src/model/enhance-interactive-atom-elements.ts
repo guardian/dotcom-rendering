@@ -11,7 +11,10 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 		)
 			element.html = element.html
 				? // Allow iframes, this is for youtube embeds in interactives, etc
-				  sanitiseHTML(element.html, { ADD_TAGS: ['iframe'] })
+				  sanitiseHTML(element.html, {
+						ADD_TAGS: ['iframe', '#comment'],
+						FORCE_BODY: true,
+				  })
 				: element.html;
 		return element;
 	});
