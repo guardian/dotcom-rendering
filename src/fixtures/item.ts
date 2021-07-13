@@ -330,6 +330,7 @@ const media: Item = {
 const cartoon: Item = {
 	design: Design.Media,
 	...fields,
+	body: [],
 };
 
 const matchReport: Item = {
