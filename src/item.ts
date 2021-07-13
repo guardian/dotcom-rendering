@@ -111,11 +111,7 @@ interface Obituary extends Fields {
 interface Standard extends Fields {
 	design: Exclude<
 		Design,
-		| Design.LiveBlog
-		| Design.Review
-		| Design.Comment
-		| Design.Letter
-		| Design.Obituary
+		Design.LiveBlog | Design.Review | Design.Comment | Design.Letter
 	>;
 	body: Body;
 }
@@ -184,8 +180,6 @@ const itemFields = (
 	request: RenderingRequest,
 ): ItemFields => {
 	const { content, branding, commentCount, relatedContent } = request;
-	console.log('1, standfirst', content.fields?.standfirst)
-
 
 	return {
 		theme: themeFromString(content.pillarId),
