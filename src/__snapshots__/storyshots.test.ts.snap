@@ -1500,6 +1500,1233 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 </main>
 `;
 
+exports[`Storyshots Editions/Article Cartoon 1`] = `
+.emotion-0 {
+  height: 100%;
+}
+
+.emotion-1 {
+  min-height: 100%;
+  background-color: #121212;
+}
+
+.emotion-2 {
+  background-color: #121212;
+}
+
+.emotion-4 {
+  border: none;
+}
+
+.emotion-5 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+@media (min-width: 740px) {
+  .emotion-5 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-5 {
+    padding-left: 24px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-5 {
+    padding-left: 144px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-6 {
+    border-bottom: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    width: 538px;
+  }
+
+  @media (min-width: 980px) {
+    .emotion-6 {
+      width: 557px;
+    }
+  }
+}
+
+.emotion-7 {
+  position: relative;
+}
+
+.emotion-8 {
+  color: #FFFFFF;
+  box-sizing: border-box;
+  border-top: 1px solid #DCDCDC;
+  padding-bottom: 1rem;
+  padding-right: 0.75rem;
+  margin: 0;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  font-weight: 500;
+  box-sizing: border-box;
+  padding-bottom: 1.5rem;
+  background-color: #121212;
+  border: none;
+}
+
+@media (min-width: 375px) {
+  .emotion-8 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 2.125rem;
+    line-height: 1.15;
+    font-weight: 500;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-8 {
+    font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+    font-size: 2.625rem;
+    line-height: 1.15;
+    font-weight: 500;
+    width: 538px;
+    padding-right: 1rem;
+    border-right: 1px solid #FFFFFF;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-8 {
+    width: 557px;
+  }
+}
+
+.emotion-9 {
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.15;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  color: #121212;
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+@media (min-width: 740px) {
+  .emotion-9 {
+    width: 526px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-9 {
+    width: 545px;
+  }
+}
+
+.emotion-9 p,
+.emotion-9 ul {
+  padding-top: 0.25rem;
+  margin: 0;
+}
+
+.emotion-9 address {
+  font-style: normal;
+}
+
+.emotion-9 svg {
+  -webkit-flex: 0 0 1.875rem;
+  -ms-flex: 0 0 1.875rem;
+  flex: 0 0 1.875rem;
+  margin-top: 0.375rem;
+  padding-left: 0.5rem;
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.emotion-9 svg circle {
+  stroke: #C70000;
+}
+
+.emotion-9 svg path {
+  fill: #C70000;
+}
+
+@media (min-width: 375px) {
+  .emotion-9 {
+    font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+    font-size: 1.0625rem;
+    line-height: 1.15;
+    font-weight: 400;
+  }
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-11 {
+  box-sizing: border-box;
+}
+
+@media (min-width: 740px) {
+  .emotion-11 {
+    width: 539px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-11 {
+    width: 558px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-11 {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-11 {
+    margin-left: 0;
+  }
+}
+
+.emotion-12 {
+  background-image: repeating-linear-gradient(
+  		to bottom,
+  		#DCDCDC,
+  		#DCDCDC 1px,
+  		transparent 1px,
+  		transparent 0.25rem
+  	);
+  background-repeat: repeat-x;
+  -webkit-background-position: top;
+  background-position: top;
+  -webkit-background-size: 1px calc(0.25rem * 3 + 1px);
+  background-size: 1px calc(0.25rem * 3 + 1px);
+  height: calc(0.25rem * 3 + 1px);
+}
+
+.emotion-13 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin: 0;
+}
+
+.emotion-13 svg {
+  -webkit-flex: 0 0 1.875rem;
+  -ms-flex: 0 0 1.875rem;
+  flex: 0 0 1.875rem;
+  padding-top: 0.375rem;
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.emotion-13 svg circle {
+  stroke: #FFFFFF;
+}
+
+.emotion-13 svg path {
+  fill: #FFFFFF;
+}
+
+@media (min-width: 740px) {
+  .emotion-13 {
+    padding-bottom: 2.25rem;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-13 {
+    width: 526px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-13 {
+    width: 545px;
+  }
+}
+
+.emotion-14 {
+  color: #FFFFFF;
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.emotion-15 {
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+
+.emotion-16 {
+  background: none;
+  border: none;
+  padding: 0;
+  height: 2.5rem;
+}
+
+.emotion-17 {
+  margin: 0;
+  position: relative;
+}
+
+@media (min-width: 980px) {
+  .emotion-17 {
+    width: 750px;
+  }
+}
+
+.emotion-18 {
+  width: 100vw;
+  height: calc(100vw * 0.6);
+  background-color: #333333;
+  color: #999999;
+  display: block;
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 1300px) {
+  .emotion-18 {
+    width: 620px;
+    height: calc(620px * 0.6);
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-18 {
+    height: calc(100vw / 1.6666666666666667);
+    width: 100vw;
+  }
+}
+
+.emotion-19 {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.emotion-19 summary {
+  display: block;
+  pointer-events: auto;
+  text-align: center;
+  background-color: #C70000;
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  border-radius: 100%;
+  outline: none;
+}
+
+.emotion-19 summary::-webkit-details-marker {
+  display: none;
+}
+
+.emotion-19 details[open] {
+  min-height: 44px;
+  max-height: 999px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0.75rem;
+  overflow: hidden;
+  padding-right: 3rem;
+  z-index: 1;
+  color: #FFFFFF;
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+@media (min-width: 740px) {
+  .emotion-19 details[open] {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-19 details[open] {
+    padding-left: 9rem;
+  }
+}
+
+.emotion-20 {
+  line-height: 32px;
+  font-size: 0;
+}
+
+.emotion-20 svg {
+  width: 75%;
+  height: 75%;
+  margin: 12.5%;
+}
+
+.emotion-20 path {
+  fill: #FFF4F2;
+}
+
+.emotion-21 {
+  height: 100vh;
+  background-color: #121212;
+  box-sizing: border-box;
+  padding-top: 0.75rem;
+  padding-right: 0;
+  padding-left: 0;
+  border: none;
+}
+
+@media (min-width: 740px) {
+  .emotion-21 {
+    width: 526px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-21 {
+    width: 545px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-21 {
+    padding-right: 0.75rem;
+    border-right: 1px solid #DCDCDC;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-21 {
+    margin-left: 24px;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-21 {
+    margin-left: 144px;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-21 {
+    width: 538px;
+    padding-right: 1rem;
+    border-right: 1px solid #FFFFFF;
+  }
+}
+
+@media (min-width: 980px) {
+  .emotion-21 {
+    width: 557px;
+  }
+}
+
+.emotion-22 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.emotion-22 iframe {
+  width: 100%;
+  border: none;
+}
+
+.emotion-22 figcaption {
+  background: #FFFFFF;
+  padding-bottom: 0.75rem;
+}
+
+@media (min-width: 740px) {
+  .emotion-22 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .emotion-22 p {
+    margin: 0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 740px) {
+  .emotion-22 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.emotion-23 {
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 400;
+  overflow-wrap: break-word;
+  margin: 0 0 0.75rem;
+}
+
+.emotion-24 {
+  margin: 0 0 1.5rem;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-width: 740px) {
+  .emotion-24 p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.emotion-25 {
+  width: 100%;
+  height: calc(100% * 1.25);
+  background-color: #333333;
+  color: #999999;
+  display: block;
+}
+
+@media (min-width: 740px) {
+  .emotion-26 {
+    position: absolute;
+    top: -0.25rem;
+    width: 170px;
+    right: calc(-170px - 2rem);
+  }
+}
+
+.emotion-29 {
+  display: block;
+  position: relative;
+}
+
+.emotion-30 {
+  margin: 16px 0 36px;
+  background: #EDEDED;
+  color: #121212;
+  padding: 0 5px 6px;
+  border-image: repeating-linear-gradient(
+              to bottom,
+              #DCDCDC,
+              #DCDCDC 1px,
+              transparent 1px,
+              transparent 4px
+          ) 13;
+  border-top: 13px solid black;
+  position: relative;
+}
+
+.emotion-30 summary {
+  list-style: none;
+  margin: 0 0 16px;
+}
+
+.emotion-30 summary::-webkit-details-marker {
+  display: none;
+}
+
+.emotion-30 summary:focus {
+  outline: none;
+}
+
+.emotion-31 {
+  display: block;
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #C70000;
+}
+
+.emotion-32 {
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.15;
+  font-weight: 500;
+  margin: 0;
+  line-height: 22px;
+}
+
+.emotion-33 {
+  background: #121212;
+  color: #FFFFFF;
+  height: 2rem;
+  position: absolute;
+  bottom: 0;
+  -webkit-transform: translate(0, 50%);
+  -moz-transform: translate(0, 50%);
+  -ms-transform: translate(0, 50%);
+  transform: translate(0, 50%);
+  padding: 0 15px 0 7px;
+  border-radius: 100em;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 0;
+  margin: 0;
+}
+
+.emotion-33:hover {
+  background: #C70000;
+}
+
+.emotion-34 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-35 {
+  margin-right: 12px;
+  margin-bottom: 6px;
+  width: 33px;
+  fill: white;
+  height: 28px;
+}
+
+.emotion-36 {
+  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-36 p {
+  margin-bottom: 0.5rem;
+}
+
+.emotion-36 ol {
+  list-style: decimal;
+  list-style-position: inside;
+  margin-bottom: 1rem;
+}
+
+.emotion-36 ul {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.emotion-36 ul li {
+  margin-bottom: 0.375rem;
+  padding-left: 1.25rem;
+}
+
+.emotion-36 ul li:before {
+  display: inline-block;
+  content: '';
+  border-radius: 0.375rem;
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-right: 0.5rem;
+  background-color: #DCDCDC;
+  margin-left: -1.25rem;
+}
+
+.emotion-36 b {
+  font-weight: 700;
+}
+
+.emotion-36 i {
+  font-style: italic;
+}
+
+.emotion-36 a {
+  color: #AB0613;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  border-bottom: 0.0625rem solid #DCDCDC;
+  -webkit-transition: border-color 0.15s ease-out;
+  transition: border-color 0.15s ease-out;
+}
+
+.emotion-36 a:hover {
+  border-bottom: solid 0.0625rem #C70000;
+}
+
+.emotion-37 {
+  font-size: 13px;
+  line-height: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+
+.emotion-38 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.emotion-39 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: black;
+  color: white;
+  border-style: hidden;
+  border-radius: 100%;
+  margin: 0 0 0 5px;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+}
+
+.emotion-39:hover {
+  background: #C70000;
+}
+
+.emotion-39:focus {
+  border: none;
+}
+
+.emotion-40 {
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-41 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: black;
+  color: white;
+  border-style: hidden;
+  border-radius: 100%;
+  margin: 0 0 0 5px;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+
+.emotion-41:hover {
+  background: #C70000;
+}
+
+.emotion-41:focus {
+  border: none;
+}
+
+.emotion-43 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+  height: 28px;
+}
+
+.emotion-46 {
+  width: 10.875rem;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 0.5rem 1.5rem 0.5rem;
+  margin: 0.375rem 1rem calc(1rem + 1.5rem) 0;
+  color: #C70000;
+  border: 1px solid #C70000;
+  border-top: 0.75rem solid #C70000;
+  border-bottom: none;
+  float: left;
+  clear: left;
+}
+
+@media (min-width: 980px) {
+  .emotion-46 {
+    float: right;
+    clear: right;
+    margin-right: calc(-10.875rem - 2.5rem);
+  }
+}
+
+.emotion-46:before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #C70000;
+  border-top: none;
+  border-radius: 0 0 100% 0;
+}
+
+.emotion-46:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: calc(1.5rem + 1px);
+  width: calc(100% - 1.5rem);
+  height: 1px;
+  border-top: 1px solid #C70000;
+}
+
+.emotion-47 {
+  margin: 0;
+}
+
+.emotion-48 {
+  margin: 0;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+
+.emotion-48 svg {
+  margin-bottom: -0.6rem;
+  height: 2rem;
+  margin-left: -0.3rem;
+  fill: #C70000;
+}
+
+.emotion-49 {
+  font-style: normal;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+<main
+  className="emotion-0"
+>
+  <article
+    className="emotion-1"
+  >
+    <div
+      className="emotion-2"
+    >
+      <section
+        className="emotion-3"
+      >
+        <header
+          className="emotion-4"
+        >
+          <div
+            className="emotion-5"
+          >
+            <div
+              className="emotion-6"
+            >
+              <div
+                className="emotion-7"
+              >
+                <h1
+                  className="emotion-8"
+                >
+                  Reclaimed lakes and giant airports: how Mexico City might have looked
+                </h1>
+              </div>
+              <div
+                className="emotion-9"
+              >
+                <div
+                  className="emotion-10"
+                >
+                  <p>
+                    The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
+                  </p>
+                </div>
+              </div>
+              <div
+                className="emotion-11"
+              >
+                <div
+                  className="emotion-12"
+                />
+              </div>
+              <div
+                className="emotion-13"
+              >
+                <address>
+                  <span
+                    className="emotion-14"
+                  >
+                    Jane Smith
+                  </span>
+                  <span
+                    className="emotion-15"
+                  >
+                     Editor of things
+                  </span>
+                </address>
+                <span
+                  className="js-share-button"
+                  role="button"
+                >
+                  <button
+                    className="emotion-16"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      fill="none"
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="15"
+                        cy="15"
+                        r="14.5"
+                      />
+                      <path
+                        d="M14.2727 8.83636V15.1818H15.7273V8.83636L18.3273 10.8182L18.9818 10.1818L15.2545 6.45455H14.7455L11.0364 10.1818L11.6727 10.8182L14.2727 8.83636ZM21.5455 13.7273V19.5455H8.45455V13.7273L7.72727 13H7V20.2545L7.70909 21H22.2545L23 20.2545V13H22.2727L21.5455 13.7273Z"
+                      />
+                    </svg>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <figure
+            aria-labelledby="header-image-caption"
+            className="emotion-17"
+          >
+            <picture>
+              <source
+                media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+                sizes="(min-width: 1300px) 620px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w"
+              />
+              <source
+                sizes="(min-width: 1300px) 620px, 100vw"
+                srcSet="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w"
+              />
+              <img
+                alt="image"
+                className="js-launch-slideshow js-main-image emotion-18"
+                data-ratio={0.6}
+                src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
+              />
+            </picture>
+            <figcaption
+              className="emotion-19"
+            >
+              <details>
+                <summary>
+                  <span
+                    className="emotion-20"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M25.9999 9.99999V20.9749L24.5249 22.5249H5.49999L4 21.0499V9.99999L5.49999 8.49999H10.475L12.975 6H17L19.4999 8.49999H24.5249L25.9999 9.99999ZM15 19.75C17.5 19.75 19.5249 17.75 19.5249 15.275C19.5249 12.775 17.5 10.775 15 10.775C12.5 10.775 10.5 12.775 10.5 15.275C10.5 17.75 12.5 19.75 15 19.75Z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    Click to see figure caption
+                  </span>
+                </summary>
+                <span
+                  id="header-image-caption"
+                >
+                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                   
+                  Photograph: Philip Keith/The Guardian
+                </span>
+              </details>
+            </figcaption>
+          </figure>
+        </header>
+      </section>
+    </div>
+    <div
+      className="emotion-21"
+    >
+      <section
+        className="emotion-22"
+      >
+        <p
+          className="emotion-23"
+        />
+        <figure
+          className="editions-gallery-figure emotion-24"
+        >
+          <picture>
+            <source
+              media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
+              sizes="100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w"
+            />
+            <source
+              sizes="100%"
+              srcSet="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w"
+            />
+            <img
+              alt="Jane Giddins outside her home in Newton St Loe"
+              className="js-launch-slideshow emotion-25"
+              data-ratio={1.25}
+              src="https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d"
+            />
+          </picture>
+          <div
+            className="editions-gallery-caption emotion-26"
+          />
+        </figure>
+        <p
+          className="emotion-23"
+        />
+        <p
+          className="emotion-23"
+        />
+        <div
+          className="emotion-29"
+          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+          data-atom-type="guide"
+        >
+          <details
+            className="emotion-30"
+            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
+            data-snippet-type="guide"
+          >
+            <summary
+              onClick={[Function]}
+            >
+              <span
+                className="emotion-31"
+              >
+                Quick Guide
+              </span>
+              <h4
+                className="emotion-32"
+              >
+                What is Queen's consent?
+              </h4>
+              <span
+                className="emotion-33"
+              >
+                <span
+                  className="emotion-34"
+                >
+                  <span
+                    className="emotion-35"
+                  >
+                    <svg
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Show
+                </span>
+              </span>
+            </summary>
+            <div>
+              <div
+                className="emotion-36"
+                dangerouslySetInnerHTML={
+                  Object {
+                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+                  }
+                }
+              />
+            </div>
+            <footer
+              className="emotion-37"
+            >
+              <div
+                hidden={false}
+              >
+                <div
+                  className="emotion-38"
+                >
+                  <div>
+                    Was this helpful?
+                  </div>
+                  <button
+                    className="emotion-39"
+                    data-testid="like"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="emotion-40"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="emotion-41"
+                    data-testid="dislike"
+                    onClick={[Function]}
+                  >
+                    <svg
+                      className="emotion-40"
+                      viewBox="0 0 40 40"
+                    >
+                      <path
+                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
+                        fill="#FFF"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                className="emotion-43"
+                data-testid="feedback"
+                hidden={true}
+              >
+                Thank you for your feedback.
+              </div>
+            </footer>
+          </details>
+        </div>
+        <p
+          className="emotion-23"
+        />
+        <p
+          className="emotion-23"
+        />
+        <aside
+          className="emotion-46"
+        >
+          <blockquote
+            className="emotion-47"
+          >
+            <p
+              className="emotion-48"
+            >
+              <svg
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z"
+                  fillRule="evenodd"
+                />
+              </svg>
+              Why should the crown be allowed to carry on with a feudal system just because they want to?
+            </p>
+            <cite
+              className="emotion-49"
+            >
+              Jane Giddins
+            </cite>
+          </blockquote>
+        </aside>
+        <p
+          className="emotion-23"
+        />
+        <p
+          className="emotion-23"
+        />
+      </section>
+    </div>
+  </article>
+</main>
+`;
+
 exports[`Storyshots Editions/Article Comment 1`] = `
 .emotion-0 {
   height: 100%;

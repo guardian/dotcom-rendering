@@ -6,6 +6,7 @@ import { boolean, withKnobs } from '@storybook/addon-knobs';
 import {
 	analysis,
 	article,
+	cartoon,
 	comment,
 	editorial,
 	feature,
@@ -141,6 +142,15 @@ const MatchReport = (): ReactElement => (
 	/>
 );
 
+const Cartoon = (): ReactElement => (
+	<Article
+		item={{
+			...cartoon,
+			tags: [getTag('type/picture', 'cartoon')],
+		}}
+	/>
+);
+
 const Gallery = (): ReactElement => (
 	<Article
 		item={{
@@ -184,4 +194,5 @@ export {
 	Gallery,
 	Letter,
 	MatchReport,
+	Cartoon,
 };
