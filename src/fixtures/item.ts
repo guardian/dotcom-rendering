@@ -327,6 +327,12 @@ const media: Item = {
 	body: galleryBody,
 };
 
+const cartoon: Item = {
+	design: Design.Media,
+	...fields,
+	body: [],
+};
+
 const matchReport: Item = {
 	design: Design.MatchReport,
 	football: some(matchScores),
@@ -348,4 +354,5 @@ export {
 	editorial,
 	letter,
 	matchReport,
+	cartoon,
 };
