@@ -692,7 +692,7 @@ export const ImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<Lines count={4} effect="straight" />
+					<Lines count={1} effect="straight" />
 				</ElementContainer>
 			)}
 
