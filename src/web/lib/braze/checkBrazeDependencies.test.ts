@@ -161,6 +161,38 @@ describe('checkBrazeDependecies', () => {
 		}
 	});
 
+	it('fails when the user is not signed in', async () => {
+		setWindow({
+			guardian: {
+				config: {
+					switches: {
+						brazeSwitch: true,
+					},
+					page: {
+						brazeApiKey: 'fake-api-key',
+						isPaidContent: false,
+					},
+				},
+			},
+		});
+		mockConsentsPromise = Promise.resolve(true);
+
+		const isSignedIn = false;
+		const idApiUrl = 'https://idapi.example.com';
+		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+
+		expect(got.isSuccessful).toEqual(false);
+		expect(got.data).toEqual({
+			brazeSwitch: true,
+			apiKey: 'fake-api-key',
+		});
+		// Condition to keep TypeScript happy
+		if (!got.isSuccessful) {
+			expect(got.failure.field).toEqual('brazeUuid');
+			expect(got.failure.data).toEqual(null);
+		}
+	});
+
 	it('fails if the required consents are not given', async () => {
 		setWindow({
 			guardian: {
