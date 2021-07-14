@@ -587,8 +587,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-
-					<Lines count={1} effect="straight" />
 				</ElementContainer>
 			)}
 

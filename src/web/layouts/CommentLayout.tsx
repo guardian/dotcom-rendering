@@ -659,7 +659,6 @@ export const CommentLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<Lines count={1} effect="straight" />
 				</ElementContainer>
 			)}
 
