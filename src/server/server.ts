@@ -6,7 +6,18 @@ import type { RelatedContent } from '@guardian/apps-rendering-api-models/related
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Option, Result, Theme } from '@guardian/types';
-import { either, err, map, ok, OptionKind, withDefault } from '@guardian/types';
+import {
+	either,
+	err,
+	map,
+	none,
+	ok,
+	OptionKind,
+	Pillar,
+	some,
+	Special,
+	withDefault,
+} from '@guardian/types';
 import bodyParser from 'body-parser';
 import { capiEndpoint } from 'capi';
 import compression from 'compression';
@@ -48,6 +59,27 @@ const port = 3040;
 type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
 // ----- Functions ----- //
+
+function themeFromUnknown(a: unknown): Option<Theme> {
+	switch (a) {
+		case 0:
+			return some(Pillar.News);
+		case 1:
+			return some(Pillar.Opinion);
+		case 2:
+			return some(Pillar.Sport);
+		case 3:
+			return some(Pillar.Culture);
+		case 4:
+			return some(Pillar.Lifestyle);
+		case 5:
+			return some(Special.SpecialReport);
+		case 6:
+			return some(Special.Labs);
+		default:
+			return none;
+	}
+}
 
 function getPrefetchHeader(resources: string[]): string {
 	return resources.reduce(
@@ -124,7 +156,7 @@ function serveArticleSwitch(
 	renderingRequest: RenderingRequest,
 	res: ExpressResponse,
 	isEditions: boolean,
-	themeOverride?: Theme,
+	themeOverride: Option<Theme>,
 ): Promise<void> {
 	if (isEditions) {
 		return serveEditionsArticle(renderingRequest, res, themeOverride);
@@ -152,7 +184,7 @@ async function serveArticle(
 async function serveEditionsArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
-	themeOverride?: Theme,
+	themeOverride: Option<Theme>,
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
@@ -213,7 +245,7 @@ async function serveArticlePost(
 		const renderingRequest = await mapiDecoder(req.body);
 		const richLinkDetails = req.query.richlink === '';
 		const isEditions = req.query.editions === '';
-		const themeOverride = req.query.theme as Theme | undefined;
+		const themeOverride = themeFromUnknown(req.query.theme);
 
 		if (richLinkDetails) {
 			void serveRichLinkDetails(renderingRequest, res);
@@ -239,11 +271,11 @@ async function serveEditionsArticlePost(
 	try {
 		// The "req.body" should contain a 'Content' object which fetched by the
 		// Edition backend from the capi
-		const themeOverride = req.query.theme as Theme | undefined;
 		const content = await capiContentDecoder(req.body);
 		const renderingRequest: RenderingRequest = {
 			content,
 		};
+		const themeOverride = themeFromUnknown(req.query.theme);
 		void serveEditionsArticle(renderingRequest, res, themeOverride);
 	} catch (e) {
 		logger.error('This error occurred', e);
@@ -279,7 +311,7 @@ async function serveArticleGet(
 				};
 
 				const richLinkDetails = req.query.richlink === '';
-				const themeOverride = req.query.theme as Theme | undefined;
+				const themeOverride = themeFromUnknown(req.query.theme);
 
 				if (richLinkDetails) {
 					void serveRichLinkDetails(mockedRenderingRequest, res);
