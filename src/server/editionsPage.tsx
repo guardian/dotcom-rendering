@@ -5,7 +5,7 @@ import { CacheProvider } from '@emotion/react';
 import { extractCritical } from '@emotion/server';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import type { Option } from '@guardian/types';
+import type { Option, Theme } from '@guardian/types';
 import { none, some } from '@guardian/types';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
@@ -106,9 +106,19 @@ const buildHtml = (
     </html>
 `;
 
-function render(imageSalt: string, request: RenderingRequest): Page {
+function render(
+	imageSalt: string,
+	request: RenderingRequest,
+	themeOverride?: Theme,
+): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
-	const body = renderBody(item);
+
+	const newItem = {
+		...item,
+		theme: themeOverride ?? item.theme,
+	};
+
+	const body = renderBody(newItem);
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 
 	const head = renderHead(

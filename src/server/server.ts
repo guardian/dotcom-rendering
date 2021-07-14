@@ -5,7 +5,7 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import type { Option, Result } from '@guardian/types';
+import type { Option, Result, Theme } from '@guardian/types';
 import { either, err, map, ok, OptionKind, withDefault } from '@guardian/types';
 import bodyParser from 'body-parser';
 import { capiEndpoint } from 'capi';
@@ -120,10 +120,21 @@ function resourceList(script: Option<string>): string[] {
 	return pipe(script, map(toArray), withDefault(emptyList));
 }
 
+function serveArticleSwitch(
+	renderingRequest: RenderingRequest,
+	res: ExpressResponse,
+	isEditions: boolean,
+	themeOverride?: Theme,
+): Promise<void> {
+	if (isEditions) {
+		return serveEditionsArticle(renderingRequest, res, themeOverride);
+	}
+	return serveArticle(renderingRequest, res);
+}
+
 async function serveArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
-	isEditions = false,
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
@@ -131,11 +142,28 @@ async function serveArticle(
 		throw new Error('Could not get image salt');
 	}
 
-	const renderer = isEditions ? renderEditions : render;
-	const { html, clientScript } = renderer(
+	const { html, clientScript } = render(imageSalt, request, getAssetLocation);
+
+	res.set('Link', getPrefetchHeader(resourceList(clientScript)));
+	res.write(html);
+	res.end();
+}
+
+async function serveEditionsArticle(
+	request: RenderingRequest,
+	res: ExpressResponse,
+	themeOverride?: Theme,
+): Promise<void> {
+	const imageSalt = await getConfigValue('apis.img.salt');
+
+	if (imageSalt === undefined) {
+		throw new Error('Could not get image salt');
+	}
+
+	const { html, clientScript } = renderEditions(
 		imageSalt,
 		request,
-		getAssetLocation,
+		themeOverride,
 	);
 
 	res.set('Link', getPrefetchHeader(resourceList(clientScript)));
@@ -185,11 +213,17 @@ async function serveArticlePost(
 		const renderingRequest = await mapiDecoder(req.body);
 		const richLinkDetails = req.query.richlink === '';
 		const isEditions = req.query.editions === '';
+		const themeOverride = req.query.theme as Theme | undefined;
 
 		if (richLinkDetails) {
 			void serveRichLinkDetails(renderingRequest, res);
 		} else {
-			void serveArticle(renderingRequest, res, isEditions);
+			void serveArticleSwitch(
+				renderingRequest,
+				res,
+				isEditions,
+				themeOverride,
+			);
 		}
 	} catch (e) {
 		logger.error(`This error occurred`, e);
@@ -205,11 +239,12 @@ async function serveEditionsArticlePost(
 	try {
 		// The "req.body" should contain a 'Content' object which fetched by the
 		// Edition backend from the capi
+		const themeOverride = req.query.theme as Theme | undefined;
 		const content = await capiContentDecoder(req.body);
 		const renderingRequest: RenderingRequest = {
 			content,
 		};
-		void serveArticle(renderingRequest, res, true);
+		void serveEditionsArticle(renderingRequest, res, themeOverride);
 	} catch (e) {
 		logger.error('This error occurred', e);
 		next(e);
@@ -244,11 +279,17 @@ async function serveArticleGet(
 				};
 
 				const richLinkDetails = req.query.richlink === '';
+				const themeOverride = req.query.theme as Theme | undefined;
 
 				if (richLinkDetails) {
 					void serveRichLinkDetails(mockedRenderingRequest, res);
 				} else {
-					void serveArticle(mockedRenderingRequest, res, isEditions);
+					void serveArticleSwitch(
+						mockedRenderingRequest,
+						res,
+						isEditions,
+						themeOverride,
+					);
 				}
 			},
 		)(capiContent);
