@@ -59,12 +59,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 				return <EmbedBlockComponent key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-				return (
-					<InteractiveAtomBlockComponent
-						url={element.url}
-						height={element.height}
-					/>
-				);
+				return <InteractiveAtomBlockComponent url={element.url} />;
 			case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 				return (
 					<Expandable
