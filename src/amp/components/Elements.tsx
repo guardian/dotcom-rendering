@@ -19,7 +19,7 @@ import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/Vide
 import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
 
-import { clean } from '@root/src/model/clean';
+import { clean, sanitiseHTML } from '@root/src/model/clean';
 
 export const Elements = (
 	elements: CAPIElement[],
@@ -28,7 +28,17 @@ export const Elements = (
 	adTargeting?: AdTargeting,
 ): JSX.Element[] => {
 	const cleanedElements = elements.map((element) =>
-		'html' in element ? { ...element, html: clean(element.html) } : element,
+		'html' in element
+			? {
+					...element,
+					html: clean(
+						sanitiseHTML(element.html, {
+							ADD_TAGS: ['#comment'],
+							FORCE_BODY: true,
+						}),
+					),
+			  }
+			: element,
 	);
 	const output = cleanedElements.map((element, i) => {
 		switch (element._type) {
