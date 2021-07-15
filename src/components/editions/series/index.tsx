@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { titlepiece } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -17,9 +17,8 @@ import { kickerPicker } from '../kickerPicker';
 
 const styles = (kicker: string): SerializedStyles => css`
 	box-sizing: border-box;
-	${titlepiece.small()}
+	${headline.xxxsmall({ fontWeight: 'bold' })}
 	color: ${kicker};
-	font-size: 1.0625rem;
 	padding: ${remSpace[1]} 0 ${remSpace[3]};
 	box-sizing: border-box;
 
