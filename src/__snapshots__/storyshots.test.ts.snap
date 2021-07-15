@@ -15490,20 +15490,16 @@ exports[`Storyshots Editions/HeaderMedia Video 1`] = `
 }
 
 <div
-  className="js-video-container"
+  className="emotion-0"
 >
-  <div
-    className="emotion-0"
-  >
-    <iframe
-      allowFullScreen={true}
-      className="emotion-1"
-      frameBorder="0"
-      scrolling="no"
-      src="https://embed.theguardian.com/embed/atom/media/26401ff7-24d0-4ba5-8882-2c32c2b379f0#noadsaf"
-      title="Super Bowl LV: Tom Brady MVP as Buccaneers beat Chiefs 31-9 – video report"
-    />
-  </div>
+  <iframe
+    allowFullScreen={true}
+    className="emotion-1"
+    frameBorder="0"
+    scrolling="no"
+    src="https://embed.theguardian.com/embed/atom/media/26401ff7-24d0-4ba5-8882-2c32c2b379f0#noadsaf"
+    title="Super Bowl LV: Tom Brady MVP as Buccaneers beat Chiefs 31-9 – video report"
+  />
 </div>
 `;
 

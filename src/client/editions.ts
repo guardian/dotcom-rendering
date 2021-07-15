@@ -4,7 +4,6 @@ import {
 	pingEditionsNative,
 } from '@guardian/renditions';
 import ShareIcon from 'components/editions/shareIcon';
-import Video from 'components/editions/video';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import interactives from './interactives';
@@ -61,4 +60,3 @@ adjustGalleryImages();
 interactives();
 
 ReactDOM.render(h(ShareIcon), document.querySelector('.js-share-button'));
-ReactDOM.render(h(Video), document.querySelector('.js-video-container'));
