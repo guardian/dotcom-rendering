@@ -244,11 +244,18 @@ async function serveArticlePost(
 	try {
 		const renderingRequest = await mapiDecoder(req.body);
 		const richLinkDetails = req.query.richlink === '';
+		const isEditions = req.query.editions === '';
+		const themeOverride = themeFromUnknown(req.query.theme);
 
 		if (richLinkDetails) {
 			void serveRichLinkDetails(renderingRequest, res);
 		} else {
-			void serveArticle(renderingRequest, res);
+			void serveArticleSwitch(
+				renderingRequest,
+				res,
+				isEditions,
+				themeOverride,
+			);
 		}
 	} catch (e) {
 		logger.error(`This error occurred`, e);
