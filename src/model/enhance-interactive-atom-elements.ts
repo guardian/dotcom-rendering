@@ -4,19 +4,18 @@ import { sanitiseHTML } from '@root/src/model/clean';
 // preserve (approximate) parity with Frontend we perform some basic
 // cleaning.
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
-	elements.map((element) => {
+	return elements.map((element) => {
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
-		)
+		) {
 			element.html = element.html
-				? // Allow iframes, this is for youtube embeds in interactives, etc
-				  sanitiseHTML(element.html, { ADD_TAGS: ['iframe'] })
+				? sanitiseHTML(element.html, { ADD_TAGS: ['iframe', 'script'] })
 				: element.html;
+		}
+
 		return element;
 	});
-
-	return elements;
 };
 
 export const enhanceInteractiveAtomElements = (data: CAPIType): CAPIType => {
