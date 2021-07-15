@@ -62,19 +62,19 @@ type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
 function themeFromUnknown(a: unknown): Option<Theme> {
 	switch (a) {
-		case 0:
+		case '0':
 			return some(Pillar.News);
-		case 1:
+		case '1':
 			return some(Pillar.Opinion);
-		case 2:
+		case '2':
 			return some(Pillar.Sport);
-		case 3:
+		case '3':
 			return some(Pillar.Culture);
-		case 4:
+		case '4':
 			return some(Pillar.Lifestyle);
-		case 5:
+		case '5':
 			return some(Special.SpecialReport);
-		case 6:
+		case '6':
 			return some(Special.Labs);
 		default:
 			return none;
