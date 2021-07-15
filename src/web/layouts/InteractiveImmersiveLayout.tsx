@@ -9,7 +9,6 @@ import {
 	neutral,
 } from '@guardian/src-foundations/palette';
 import { Display, Format, Special } from '@guardian/types';
-import { Lines } from '@guardian/src-ed-lines';
 
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -258,7 +257,6 @@ export const InteractiveImmersiveLayout = ({
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
 					/>
-					<Lines count={4} effect="straight" />
 				</ElementContainer>
 			)}
 
