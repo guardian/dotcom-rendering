@@ -89,7 +89,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 			${richLinkPillarStyles(lifestyleKicker, lifestyleInverted)}
 		}
 
-		.js-image img {
+		img {
 			width: calc(100% + ${remSpace[6]});
 			margin: -${remSpace[3]} 0 0 -${remSpace[3]};
 		}
@@ -136,6 +136,14 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		margin: 0.375rem ${remSpace[4]} ${remSpace[3]} 0;
 
 		width: ${richLinkWidth};
+		@media (max-width: 23.4rem) {
+			width: 100%;
+			box-sizing: border-box;
+
+			img {
+				display: none;
+			}
+		}
 		${from.wide} {
 			margin-left: calc(
 				-${richLinkWidth} - ${remSpace[4]} - ${remSpace[6]}

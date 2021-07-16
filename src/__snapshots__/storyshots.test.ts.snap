@@ -19280,7 +19280,7 @@ exports[`Storyshots Rich Link Default 1`] = `
   }
 }
 
-.emotion-1 .js-image img {
+.emotion-1 img {
   width: calc(100% + 1.5rem);
   margin: -0.75rem 0 0 -0.75rem;
 }
@@ -19337,6 +19337,17 @@ exports[`Storyshots Rich Link Default 1`] = `
 @media (prefers-color-scheme: dark) {
   .emotion-1 a h1 {
     color: #DCDCDC;
+  }
+}
+
+@media (max-width: 23.4rem) {
+  .emotion-1 {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .emotion-1 img {
+    display: none;
   }
 }
 
