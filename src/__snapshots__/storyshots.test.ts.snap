@@ -438,12 +438,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 .emotion-9 {
   box-sizing: border-box;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
   color: #BB3B80;
-  font-size: 1.0625rem;
   padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
@@ -4766,12 +4765,11 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 
 .emotion-9 {
   box-sizing: border-box;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
   color: #E05E00;
-  font-size: 1.0625rem;
   padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
@@ -9258,12 +9256,11 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
 .emotion-9 {
   box-sizing: border-box;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
   color: #E05E00;
-  font-size: 1.0625rem;
   padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
@@ -10619,12 +10616,11 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 .emotion-30 {
   box-sizing: border-box;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
   color: #0084C6;
-  font-size: 1.0625rem;
   padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
@@ -16451,12 +16447,11 @@ exports[`Storyshots Editions/PullQuote Default 1`] = `
 exports[`Storyshots Editions/Series Default 1`] = `
 .emotion-0 {
   box-sizing: border-box;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
   color: #C70000;
-  font-size: 1.0625rem;
   padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
 }
@@ -16477,12 +16472,11 @@ exports[`Storyshots Editions/Series Default 1`] = `
 exports[`Storyshots Editions/Series Immersive 1`] = `
 .emotion-0 {
   box-sizing: border-box;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
   color: #C70000;
-  font-size: 1.0625rem;
   padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
   position: absolute;
@@ -16510,12 +16504,11 @@ exports[`Storyshots Editions/Series Immersive 1`] = `
 exports[`Storyshots Editions/Series Interview 1`] = `
 .emotion-0 {
   box-sizing: border-box;
-  font-family: GT Guardian Titlepiece,Georgia,serif;
-  font-size: 2.625rem;
+  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
+  font-size: 1.0625rem;
   line-height: 1.15;
   font-weight: 700;
   color: #A1845C;
-  font-size: 1.0625rem;
   padding: 0.25rem 0 0.75rem;
   box-sizing: border-box;
   position: absolute;
