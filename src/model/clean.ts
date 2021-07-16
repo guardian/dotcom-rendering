@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import compose from 'compose-function';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
@@ -12,7 +11,7 @@ export const bigBullets = (s: string) =>
 const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
 
-export const clean = compose(bigBullets, (s: string) =>
+export const minimise = compose(bigBullets, (s: string) =>
 	minify(s, {
 		collapseWhitespace: true,
 		minifyCSS: true,
@@ -20,6 +19,6 @@ export const clean = compose(bigBullets, (s: string) =>
 	}),
 );
 
-export const sanitiseHTML = (html: string | ReactNode, opts?: any): string =>
+export const sanitiseHTML = (html: string, opts?: any): string =>
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	DOMPurify.sanitize(html, opts);
