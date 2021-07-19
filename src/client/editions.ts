@@ -4,6 +4,7 @@ import {
 	pingEditionsNative,
 } from '@guardian/renditions';
 import ShareIcon from 'components/editions/shareIcon';
+import Video from 'components/editions/video';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import interactives from './interactives';
@@ -55,6 +56,20 @@ const adjustGalleryImages = (): void => {
 	});
 };
 
+const videoPlayer = (): void => {
+	Array.from(document.querySelectorAll('.js-video-container')).forEach(
+		(video) => {
+			const title = video.getAttribute('data-title');
+			const atomId = video.getAttribute('data-atom-id');
+
+			if (title && atomId) {
+				return ReactDOM.hydrate(h(Video, { title, atomId }), video);
+			}
+		},
+	);
+};
+
+videoPlayer();
 initLightbox();
 adjustGalleryImages();
 interactives();

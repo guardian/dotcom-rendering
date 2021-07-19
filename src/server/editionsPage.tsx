@@ -6,7 +6,7 @@ import { extractCritical } from '@emotion/server';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Option, Theme } from '@guardian/types';
-import { none, some, withDefault } from '@guardian/types';
+import { map, none, some, withDefault } from '@guardian/types';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/atoms/interactiveAtom';
@@ -109,6 +109,7 @@ const buildHtml = (
 function render(
 	imageSalt: string,
 	request: RenderingRequest,
+	getAssetLocation: (assetName: string) => string,
 	themeOverride: Option<Theme>,
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
@@ -130,7 +131,10 @@ function render(
 		false,
 	);
 
-	const clientScript = some('assets/js/editions.js');
+	const clientScript =
+		process.env.NODE_ENV !== 'production'
+			? map(getAssetLocation)(some('editions.js'))
+			: some('assets/js/editions.js');
 
 	const scripts = (
 		<Scripts
