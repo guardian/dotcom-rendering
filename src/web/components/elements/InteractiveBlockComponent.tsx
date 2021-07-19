@@ -90,12 +90,17 @@ const getMinHeight = (role: RoleType, loaded: boolean) => {
 	}
 	return `${decideHeight(role)}px`;
 };
-const wrapperStyle = (
-	format: Format,
-	role: RoleType,
-	loaded: boolean,
-	palette: Palette,
-) => css`
+const wrapperStyle = ({
+	format,
+	role,
+	loaded,
+	palette,
+}: {
+	format: Format;
+	role: RoleType;
+	loaded: boolean;
+	palette: Palette;
+}) => css`
 	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
 	background-color: ${palette.background.article};
 	min-height: ${getMinHeight(role, loaded)};
@@ -279,7 +284,7 @@ export const InteractiveBlockComponent = ({
 			<div
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 				ref={wrapperRef}
-				css={wrapperStyle(format, role, loaded, palette)}
+				css={wrapperStyle({ format, role, loaded, palette })}
 			>
 				{!loaded && (
 					<>
