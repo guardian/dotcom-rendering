@@ -25,7 +25,10 @@ import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
+import {
+	interactiveGlobalStyles,
+	interactiveLegacyFigureClasses,
+} from './lib/interactiveLegacyStyling';
 
 interface Props {
 	CAPI: CAPIType;
@@ -64,6 +67,9 @@ const Renderer: React.FC<{
 			<figure
 				id={'elementId' in element ? element.elementId : undefined}
 				key={index}
+				className={
+					interactiveLegacyFigureClasses.get(element._type) || ''
+				}
 			>
 				{el}
 			</figure>
