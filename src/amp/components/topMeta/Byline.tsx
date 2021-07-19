@@ -14,11 +14,18 @@ export const Byline = ({ byline, tags, guardianBaseURL }: Props) => {
 	const contributorTags = tags.filter((tag) => tag.type === 'Contributor');
 	const tokens = bylineTokens(byline, contributorTags);
 
-	const linkedByline = tokens.map((token) => {
-		const matchedTag = contributorTags.find((tag) => tag.title === token);
+	const [linkedByline] = tokens.reduce(
+		([bylines, remainingTags], token) => {
+			const matchedTagIndex = remainingTags.findIndex(
+				(tag) => tag.title === token,
+			);
 
-		if (matchedTag) {
-			return (
+			if (matchedTagIndex === -1) {
+				return [bylines.concat(token), remainingTags];
+			}
+
+			const matchedTag = remainingTags[matchedTagIndex];
+			const bylineElement = (
 				<a
 					key={matchedTag.id}
 					href={`${guardianBaseURL}/${matchedTag.id}`}
@@ -26,10 +33,14 @@ export const Byline = ({ byline, tags, guardianBaseURL }: Props) => {
 					{matchedTag.title}
 				</a>
 			);
-		}
 
-		return token;
-	});
+			// We've used this tag, so remove it from the list of possible tags.
+			remainingTags.splice(matchedTagIndex, 1);
+
+			return [bylines.concat(bylineElement), remainingTags];
+		},
+		[[] as (JSX.Element | string)[], tags],
+	);
 
 	return <>{linkedByline}</>;
 };
