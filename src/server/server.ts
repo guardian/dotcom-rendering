@@ -195,6 +195,7 @@ async function serveEditionsArticle(
 	const { html, clientScript } = renderEditions(
 		imageSalt,
 		request,
+		getAssetLocation,
 		themeOverride,
 	);
 
