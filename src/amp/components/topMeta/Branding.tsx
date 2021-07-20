@@ -48,7 +48,7 @@ const brandingLogoStyle = css`
 	padding: 10px 0;
 `;
 
-export const Branding: React.FC<{
+export const BrandingItem: React.FC<{
 	branding: Branding;
 	pillar: Theme;
 }> = ({ branding, pillar }) => {
@@ -75,3 +75,19 @@ export const Branding: React.FC<{
 		</div>
 	);
 };
+
+export const Branding: React.FC<{
+	commercialProperties: CommercialProperties;
+	pillar: Theme;
+}> = ({ commercialProperties, pillar }) => (
+	<>
+		{Object.keys(commercialProperties).map((editionId) => {
+			const { branding } = commercialProperties[editionId as Edition];
+			return branding !== undefined ? (
+				<div className={`branding branding-${editionId.toLowerCase()}`}>
+					<BrandingItem branding={branding} pillar={pillar} />
+				</div>
+			) : null;
+		})}
+	</>
+);

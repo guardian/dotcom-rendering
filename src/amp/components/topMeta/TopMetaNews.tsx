@@ -93,18 +93,10 @@ export const TopMetaNews: React.FC<{
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-			{Object.keys(articleData.commercialProperties).map((editionId) => {
-				const { branding } = articleData.commercialProperties[
-					editionId as Edition
-				];
-				return branding !== undefined ? (
-					<div
-						className={`branding branding-${editionId.toLowerCase()}`}
-					>
-						<Branding branding={branding} pillar={pillar} />
-					</div>
-				) : null;
-			})}
+			<Branding
+				commercialProperties={articleData.commercialProperties}
+				pillar={pillar}
+			/>
 
 			<div css={bylineStyle(pillar)}>
 				<Byline

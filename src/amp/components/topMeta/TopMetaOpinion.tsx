@@ -104,10 +104,6 @@ export const TopMetaOpinion: React.FC<{
 	articleData: ArticleModel;
 	pillar: Theme;
 }> = ({ articleData, pillar }) => {
-	const { branding } = articleData.commercialProperties[
-		articleData.editionId
-	];
-
 	return (
 		<header>
 			{articleData.mainMediaElements.map((element, i) => (
@@ -123,7 +119,10 @@ export const TopMetaOpinion: React.FC<{
 
 			<h1 css={headerStyle}>{articleData.headline}</h1>
 
-			{branding && <Branding branding={branding} pillar={pillar} />}
+			<Branding
+				commercialProperties={articleData.commercialProperties}
+				pillar={pillar}
+			/>
 
 			<BylineMeta articleData={articleData} pillar={pillar} />
 

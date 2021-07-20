@@ -91,10 +91,6 @@ export const TopMetaAnalysis: React.FC<{
 	adTargeting?: AdTargeting;
 	pillar: Theme;
 }> = ({ articleData, adTargeting, pillar }) => {
-	const { branding } = articleData.commercialProperties[
-		articleData.editionId
-	];
-
 	return (
 		<header>
 			{articleData.mainMediaElements.map((element, i) => (
@@ -124,7 +120,10 @@ export const TopMetaAnalysis: React.FC<{
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-			{branding && <Branding branding={branding} pillar={pillar} />}
+			<Branding
+				commercialProperties={articleData.commercialProperties}
+				pillar={pillar}
+			/>
 
 			<div css={bylineStyle(pillar)}>
 				<Byline
