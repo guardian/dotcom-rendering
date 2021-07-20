@@ -14,14 +14,13 @@ describe('Byline', () => {
 			},
 		];
 
-		const { container, debug } = render(
+		const { container } = render(
 			<Byline
 				byline={byline}
 				guardianBaseURL={guardianBaseURL}
 				tags={tags}
 			/>,
 		);
-		debug();
 
 		const links = container.querySelectorAll('a');
 
