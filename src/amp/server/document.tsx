@@ -8,6 +8,7 @@ import he from 'he';
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { stickyAdLabelCss } from '@root/src/amp/components/StickyAd';
+import { brandingCss } from '../components/topMeta/Branding';
 
 interface RenderToStringResult {
 	html: string;
@@ -98,6 +99,7 @@ export const document = ({
         ${resetCSS}
         ${css}
 		${stickyAdLabelCss}
+		${brandingCss}
     </style>
 
     </head>

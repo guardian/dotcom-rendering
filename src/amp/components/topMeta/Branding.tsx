@@ -4,6 +4,20 @@ import { textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 
+export const brandingCss = `
+	.branding-uk, .branding-us, .branding-au, .branding-int {
+		display: none;
+	}
+
+	.amp-iso-country-gb .branding-uk,
+	.amp-iso-country-us .branding-us,
+	.amp-iso-country-au .branding-au,
+	.amp-geo-group-eea:not(.amp-iso-country-gb) .branding-int,
+	.amp-geo-no-group .branding-int {
+		display: block;
+	}
+`;
+
 const LinkStyle = (pillar: Theme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
