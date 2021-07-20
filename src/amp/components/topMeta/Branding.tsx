@@ -69,7 +69,7 @@ export const Branding: React.FC<{
 	const brandingStyles = css`
 		display: none;
 	`;
-	const gbStyles = css`
+	const ukStyles = css`
 		.amp-iso-country-gb & {
 			display: block;
 		}
@@ -91,7 +91,7 @@ export const Branding: React.FC<{
 		}
 	`;
 	const editionStyles: Record<Edition, SerializedStyles> = {
-		UK: gbStyles,
+		UK: ukStyles,
 		US: usStyles,
 		AU: auStyles,
 		INT: intStyles,
