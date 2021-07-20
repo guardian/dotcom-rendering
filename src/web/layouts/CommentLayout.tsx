@@ -379,6 +379,7 @@ export const CommentLayout = ({
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
 								palette={palette}
+								format={format}
 							/>
 						</ElementContainer>
 					)}
@@ -658,6 +659,7 @@ export const CommentLayout = ({
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}
