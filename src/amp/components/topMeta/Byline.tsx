@@ -1,4 +1,5 @@
 import { bylineTokens } from '@root/src/amp/lib/byline-tokens';
+import { getBylineComponentsFromTokens } from '@root/src/lib/byline';
 
 type Props = {
 	byline?: string;
@@ -14,21 +15,20 @@ export const Byline = ({ byline, tags, guardianBaseURL }: Props) => {
 	const contributorTags = tags.filter((tag) => tag.type === 'Contributor');
 	const tokens = bylineTokens(byline, contributorTags);
 
-	const linkedByline = tokens.map((token) => {
-		const matchedTag = contributorTags.find((tag) => tag.title === token);
+	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 
-		if (matchedTag) {
-			return (
-				<a
-					key={matchedTag.id}
-					href={`${guardianBaseURL}/${matchedTag.id}`}
-				>
-					{matchedTag.title}
-				</a>
-			);
+	const linkedByline = bylineComponents.map((bylineComponent) => {
+		if (typeof bylineComponent === 'string') {
+			return bylineComponent;
 		}
-
-		return token;
+		return (
+			<a
+				key={bylineComponent.tag.id}
+				href={`${guardianBaseURL}/${bylineComponent.tag.id}`}
+			>
+				{bylineComponent.tag.title}
+			</a>
+		);
 	});
 
 	return <>{linkedByline}</>;
