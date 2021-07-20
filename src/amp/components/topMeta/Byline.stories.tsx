@@ -2,6 +2,11 @@ import { Byline } from './Byline';
 
 const guardianBaseURL = 'https://theguardian.com';
 
+export default {
+	component: Byline,
+	title: 'AMP/Components/topMeta/Byline',
+};
+
 export const SingleByline = () => (
 	<Byline
 		byline="Eva Smith and friends"
@@ -39,9 +44,9 @@ export const MultipleByline = () => (
 
 MultipleByline.story = { name: 'Byline with multiple contributors' };
 
-const MultipleDuplicateByline = () => (
+export const MultipleDuplicateByline = () => (
 	<Byline
-		byline="Eva Smith and Duncan Campbell"
+		byline="Duncan Campbell and Duncan Campbell"
 		guardianBaseURL={guardianBaseURL}
 		tags={[
 			{
