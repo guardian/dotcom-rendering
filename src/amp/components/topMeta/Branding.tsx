@@ -34,7 +34,7 @@ const brandingLogoStyle = css`
 	padding: 10px 0;
 `;
 
-export const BrandingItem: React.FC<{
+const BrandingItem: React.FC<{
 	branding: Branding;
 	pillar: Theme;
 }> = ({ branding, pillar }) => {
