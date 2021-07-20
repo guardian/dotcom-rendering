@@ -206,7 +206,7 @@ export const SubNav = ({
 				{subNavSections.links.map((link) => (
 					<li key={link.url}>
 						<a
-							css={[linkStyle(format)]}
+							css={linkStyle(format)}
 							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
