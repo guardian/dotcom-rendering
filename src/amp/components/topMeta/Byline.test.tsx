@@ -30,7 +30,7 @@ describe('Byline', () => {
 	});
 
 	it('should link multiple tags by linking name tokens with Contributor tag titles', () => {
-		const byline = 'Eva Smith and Duncan Porter';
+		const byline = 'Eva Smith and Duncan Campbell';
 		const tags = [
 			{
 				id: 'eva-smith',
@@ -38,9 +38,9 @@ describe('Byline', () => {
 				title: 'Eva Smith',
 			},
 			{
-				id: 'duncan-porter',
+				id: 'duncan-campbell',
 				type: 'Contributor',
-				title: 'Duncan Porter',
+				title: 'Duncan Campbell',
 			},
 		];
 		const { container } = render(
@@ -57,22 +57,22 @@ describe('Byline', () => {
 		expect(links.length).toBe(2);
 		expect(links.item(0).href).toBe('https://theguardian.com/eva-smith');
 		expect(links.item(1).href).toBe(
-			'https://theguardian.com/duncan-porter',
+			'https://theguardian.com/duncan-campbell',
 		);
 	});
 
 	it('should not reuse a contributor tag, to successfully disambiguate identical names', () => {
-		const byline = 'Duncan Porter and Duncan Porter';
+		const byline = 'Duncan Campbell and Duncan Campbell';
 		const tags = [
 			{
-				id: 'duncan-porter',
+				id: 'duncan-campbell',
 				type: 'Contributor',
-				title: 'Duncan Porter',
+				title: 'Duncan Campbell',
 			},
 			{
-				id: 'duncan-porter-1',
+				id: 'duncan-campbell-1',
 				type: 'Contributor',
-				title: 'Duncan Porter',
+				title: 'Duncan Campbell',
 			},
 		];
 
@@ -89,10 +89,10 @@ describe('Byline', () => {
 		expect(container).toHaveTextContent(byline);
 		expect(links.length).toBe(2);
 		expect(links.item(0).href).toBe(
-			'https://theguardian.com/duncan-porter',
+			'https://theguardian.com/duncan-campbell',
 		);
 		expect(links.item(1).href).toBe(
-			'https://theguardian.com/duncan-porter-1',
+			'https://theguardian.com/duncan-campbell-1',
 		);
 	});
 });

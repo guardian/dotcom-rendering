@@ -167,17 +167,17 @@ export const MultipleDuplicateStory = () => {
 				design: Design.Article,
 				theme: Pillar.Lifestyle,
 			}}
-			byline="Duncan Porter and Duncan Porter"
+			byline="Duncan Campbell and Duncan Campbell"
 			tags={[
 				{
 					id: '1',
 					type: 'Contributor',
-					title: 'Duncan Porter',
+					title: 'Duncan Campbell',
 				},
 				{
 					id: '2',
 					type: 'Contributor',
-					title: 'Duncan Porter',
+					title: 'Duncan Campbell',
 				},
 			]}
 		/>

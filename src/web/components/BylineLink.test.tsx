@@ -89,10 +89,9 @@ describe('BylineLink', () => {
 			},
 		];
 
-		const { container, debug } = render(
+		const { container } = render(
 			<BylineLink byline={byline} tags={tags} />,
 		);
-		debug();
 
 		const links = container.querySelectorAll('a');
 
@@ -102,7 +101,7 @@ describe('BylineLink', () => {
 	});
 
 	it('should link multiple tags by linking name tokens with Contributor tag titles', () => {
-		const byline = 'Eva Smith and Duncan Porter';
+		const byline = 'Eva Smith and Duncan Campbell';
 		const tags = [
 			{
 				id: 'eva-smith',
@@ -110,9 +109,9 @@ describe('BylineLink', () => {
 				title: 'Eva Smith',
 			},
 			{
-				id: 'duncan-porter',
+				id: 'duncan-campbell',
 				type: 'Contributor',
-				title: 'Duncan Porter',
+				title: 'Duncan Campbell',
 			},
 		];
 		const { container } = render(
@@ -128,17 +127,17 @@ describe('BylineLink', () => {
 	});
 
 	it('should not reuse a contributor tag, to successfully disambiguate identical names', () => {
-		const byline = 'Duncan Porter and Duncan Porter';
+		const byline = 'Duncan Campbell and Duncan Campbell';
 		const tags = [
 			{
-				id: 'duncan-porter',
+				id: 'duncan-campbell',
 				type: 'Contributor',
-				title: 'Duncan Porter',
+				title: 'Duncan Campbell',
 			},
 			{
-				id: 'duncan-porter-1',
+				id: 'duncan-campbell-1',
 				type: 'Contributor',
-				title: 'Duncan Porter',
+				title: 'Duncan Campbell',
 			},
 		];
 
