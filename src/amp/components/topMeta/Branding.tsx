@@ -1,22 +1,8 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
-
-export const brandingCss = `
-	.branding-uk, .branding-us, .branding-au, .branding-int {
-		display: none;
-	}
-
-	.amp-iso-country-gb .branding-uk,
-	.amp-iso-country-us .branding-us,
-	.amp-iso-country-au .branding-au,
-	.amp-geo-group-eea:not(.amp-iso-country-gb) .branding-int,
-	.amp-geo-no-group .branding-int {
-		display: block;
-	}
-`;
 
 const LinkStyle = (pillar: Theme) => css`
 	a {
@@ -79,15 +65,52 @@ export const BrandingItem: React.FC<{
 export const Branding: React.FC<{
 	commercialProperties: CommercialProperties;
 	pillar: Theme;
-}> = ({ commercialProperties, pillar }) => (
-	<>
-		{Object.keys(commercialProperties).map((editionId) => {
-			const { branding } = commercialProperties[editionId as Edition];
-			return branding !== undefined ? (
-				<div className={`branding branding-${editionId.toLowerCase()}`}>
-					<BrandingItem branding={branding} pillar={pillar} />
-				</div>
-			) : null;
-		})}
-	</>
-);
+}> = ({ commercialProperties, pillar }) => {
+	const brandingStyles = css`
+		display: none;
+	`;
+	const gbStyles = css`
+		.amp-iso-country-gb & {
+			display: block;
+		}
+	`;
+	const usStyles = css`
+		.amp-iso-country-us & {
+			display: block;
+		}
+	`;
+	const auStyles = css`
+		.amp-iso-country-au & {
+			display: block;
+		}
+	`;
+	const intStyles = css`
+		.amp-geo-group-eea:not(.amp-iso-country-gb) &,
+		.amp-geo-no-group & {
+			display: block;
+		}
+	`;
+	const editionStyles: Record<Edition, SerializedStyles> = {
+		UK: gbStyles,
+		US: usStyles,
+		AU: auStyles,
+		INT: intStyles,
+	};
+	return (
+		<>
+			{Object.keys(commercialProperties).map((editionId) => {
+				const { branding } = commercialProperties[editionId as Edition];
+				return branding !== undefined ? (
+					<div
+						css={[
+							brandingStyles,
+							editionStyles[editionId as Edition],
+						]}
+					>
+						<BrandingItem branding={branding} pillar={pillar} />
+					</div>
+				) : null;
+			})}
+		</>
+	);
+};
