@@ -1,9 +1,6 @@
 import { render } from '@testing-library/react';
-import {
-	bylineAsTokens,
-	BylineLink,
-	getContributorTagsForToken,
-} from './BylineLink';
+import { getContributorTagsForToken } from '@root/src/lib/byline';
+import { bylineAsTokens, BylineLink } from './BylineLink';
 
 describe('bylineAsTokens', () => {
 	it('Correctly performs the standard one contributor case', () => {

@@ -1,4 +1,5 @@
 import { bylineTokens } from '@root/src/amp/lib/byline-tokens';
+import { getBylineComponentsFromTokens } from '@root/src/lib/byline';
 
 type Props = {
 	byline?: string;
@@ -14,33 +15,21 @@ export const Byline = ({ byline, tags, guardianBaseURL }: Props) => {
 	const contributorTags = tags.filter((tag) => tag.type === 'Contributor');
 	const tokens = bylineTokens(byline, contributorTags);
 
-	const [linkedByline] = tokens.reduce(
-		([bylines, remainingTags], token) => {
-			const matchedTagIndex = remainingTags.findIndex(
-				(tag) => tag.title === token,
-			);
+	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 
-			if (matchedTagIndex === -1) {
-				return [bylines.concat(token), remainingTags];
-			}
-
-			const matchedTag = remainingTags[matchedTagIndex];
-			const bylineElement = (
-				<a
-					key={matchedTag.id}
-					href={`${guardianBaseURL}/${matchedTag.id}`}
-				>
-					{matchedTag.title}
-				</a>
-			);
-
-			// We've used this tag, so remove it from the list of possible tags.
-			remainingTags.splice(matchedTagIndex, 1);
-
-			return [bylines.concat(bylineElement), remainingTags];
-		},
-		[[] as (JSX.Element | string)[], tags],
-	);
+	const linkedByline = bylineComponents.map((bylineComponent) => {
+		if (typeof bylineComponent === 'string') {
+			return bylineComponent;
+		}
+		return (
+			<a
+				key={bylineComponent.tag.id}
+				href={`${guardianBaseURL}/${bylineComponent.tag.id}`}
+			>
+				{bylineComponent.tag.title}
+			</a>
+		);
+	});
 
 	return <>{linkedByline}</>;
 };

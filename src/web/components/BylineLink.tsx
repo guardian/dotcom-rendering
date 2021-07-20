@@ -1,19 +1,11 @@
-import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import {
+	getBylineComponentsFromTokens,
+	getContributorTags,
+} from '@root/src/lib/byline';
 
 type Props = {
 	byline: string;
 	tags: TagType[];
-};
-
-const getContributorTags = (tags: TagType[]): TagType[] => {
-	return tags.filter((t) => t.type === 'Contributor');
-};
-
-export const getContributorTagsForToken = (
-	tags: TagType[],
-	token: string,
-): TagType[] => {
-	return getContributorTags(tags).filter((t) => t.title === token);
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -84,35 +76,20 @@ const ContributorLink: React.FC<{
 export const BylineLink = ({ byline, tags }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 
-	const [renderedTokens] = tokens.reduce(
-		([bylines, remainingTags], token) => {
-			const [firstContributorTag] = getContributorTagsForToken(
-				remainingTags,
-				token,
-			);
-			if (!firstContributorTag) {
-				return [bylines.concat(token), remainingTags];
-			}
+	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 
-			const bylineElement = (
-				<ContributorLink
-					contributor={token}
-					contributorTagId={firstContributorTag.id}
-					key={firstContributorTag.id}
-				/>
-			);
-
-			// We've used this tag, so remove it from the list of possible tags.
-			// This ensures we don't use the same contributor tag when two identical
-			// names with different contributor tags are used.
-			const newRemainingTags = remainingTags.filter(
-				(tag) => !(tag.id === firstContributorTag.id),
-			);
-
-			return [bylines.concat(bylineElement), newRemainingTags];
-		},
-		[[], tags] as [(EmotionJSX.Element | string)[], TagType[]],
-	);
+	const renderedTokens = bylineComponents.map((bylineComponent) => {
+		if (typeof bylineComponent === 'string') {
+			return bylineComponent;
+		}
+		return (
+			<ContributorLink
+				contributor={bylineComponent.token}
+				contributorTagId={bylineComponent.tag.id}
+				key={bylineComponent.tag.id}
+			/>
+		);
+	});
 
 	return <>{renderedTokens}</>;
 };
