@@ -195,6 +195,7 @@ async function serveEditionsArticle(
 	const { html, clientScript } = renderEditions(
 		imageSalt,
 		request,
+		res,
 		getAssetLocation,
 		themeOverride,
 	);
@@ -277,6 +278,7 @@ async function serveEditionsArticlePost(
 			content,
 		};
 		const themeOverride = themeFromUnknown(req.query.theme);
+
 		void serveEditionsArticle(renderingRequest, res, themeOverride);
 	} catch (e) {
 		logger.error('This error occurred', e);
