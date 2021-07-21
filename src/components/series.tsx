@@ -93,7 +93,7 @@ const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
 };
 
 const seriesStyles: SerializedStyles = css`
-    padding-top: ${remSpace[1]};
+	padding-top: ${remSpace[1]};
 `;
 
 const Series: FC<Props> = ({ item }: Props) =>
