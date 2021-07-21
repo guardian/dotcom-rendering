@@ -317,6 +317,7 @@ export const ShowcaseLayout = ({
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
 									palette={palette}
+									format={format}
 								/>
 							</ElementContainer>
 						)}
@@ -633,6 +634,7 @@ export const ShowcaseLayout = ({
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}

@@ -4,11 +4,13 @@ import { css } from '@emotion/react';
 import { text, news, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	subNavSections: SubNavType;
 	palette: Palette;
 	currentNavLink: string;
+	format: Format;
 };
 
 const wrapperCollapsedStyles = css`
@@ -76,13 +78,13 @@ const fontStyle = css`
 	}
 `;
 
-const linkStyle = css`
+const linkStyle = (format: Format) => css`
 	${fontStyle};
 	float: left;
 	text-decoration: none;
 
 	:hover {
-		text-decoration: underline;
+		color: ${decidePalette(format).text.articleLinkHover};
 	}
 
 	:focus {
@@ -148,7 +150,12 @@ const listItemStyles = (palette: Palette) => css`
 const trimLeadingSlash = (url: string): string =>
 	url.substr(0, 1) === '/' ? url.slice(1) : url;
 
-export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
+export const SubNav = ({
+	subNavSections,
+	palette,
+	currentNavLink,
+	format,
+}: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ulRef = useRef<HTMLUListElement>(null);
@@ -189,7 +196,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 					>
 						<a
 							data-src-focus-disabled={true}
-							css={linkStyle}
+							css={linkStyle(format)}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -199,7 +206,7 @@ export const SubNav = ({ subNavSections, palette, currentNavLink }: Props) => {
 				{subNavSections.links.map((link) => (
 					<li key={link.url}>
 						<a
-							css={linkStyle}
+							css={linkStyle(format)}
 							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
