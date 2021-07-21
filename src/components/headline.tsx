@@ -24,7 +24,7 @@ const styles = (format: Format): SerializedStyles => css`
 	${headline.medium()}
 	${headlineTextColour(format)}
     ${headlineBackgroundColour(format)}
-    padding-bottom: ${remSpace[9]};
+    padding-bottom: ${remSpace[6]};
 	margin: 0;
 
 	${articleWidthStyles}
