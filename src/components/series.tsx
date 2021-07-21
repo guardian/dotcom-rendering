@@ -92,11 +92,15 @@ const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
 	return articleWidthStyles;
 };
 
+const seriesStyles: SerializedStyles = css`
+    padding-top: ${remSpace[1]};
+`;
+
 const Series: FC<Props> = ({ item }: Props) =>
 	pipe(
 		item.series,
 		map((series) => (
-			<nav css={getStyles(item)}>
+			<nav css={[getStyles(item), seriesStyles]}>
 				<a css={getLinkStyles(item)} href={series.webUrl}>
 					{series.webTitle}
 				</a>
