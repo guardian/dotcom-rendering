@@ -18535,7 +18535,7 @@ exports[`Storyshots Headline Analysis 1`] = `
   font-weight: 500;
   color: #121212;
   background-color: #FFFFFF;
-  padding-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
   margin: 0;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -18611,7 +18611,7 @@ exports[`Storyshots Headline Default 1`] = `
   font-weight: 500;
   color: #121212;
   background-color: #FFFFFF;
-  padding-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
   margin: 0;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -18672,7 +18672,7 @@ exports[`Storyshots Headline Feature 1`] = `
   font-weight: 500;
   color: #AB0613;
   background-color: #FFFFFF;
-  padding-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
   margin: 0;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -18737,7 +18737,7 @@ exports[`Storyshots Headline Labs 1`] = `
   font-weight: 500;
   color: #121212;
   background-color: #FFFFFF;
-  padding-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
   margin: 0;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -18802,7 +18802,7 @@ exports[`Storyshots Headline Review 1`] = `
   font-weight: 500;
   color: #AB0613;
   background-color: #FFFFFF;
-  padding-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
   margin: 0;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
