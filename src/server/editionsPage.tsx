@@ -31,30 +31,14 @@ interface Page {
 	clientScript: Option<string>;
 }
 
-enum EditionsEnv {
-	Dev,
-	Prod,
-	Browser,
-}
-
 // ----- Setup ----- //
 
 const docParser = JSDOM.fragment.bind(null);
 
 // ----- Functions ----- //
 
-const getEditionsEnv = (path?: string): EditionsEnv => {
-	if (process.env.NODE_ENV !== 'production') {
-		return EditionsEnv.Dev;
-	} else if (path === '/editions-article') {
-		return EditionsEnv.Prod;
-	} else {
-		return EditionsEnv.Browser;
-	}
-};
-
-const getStyles = (env: EditionsEnv): string => `
-	${env === EditionsEnv.Prod ? editionsPageFonts : pageFonts}
+const styles = `
+ 	${process.env.NODE_ENV === 'production' ? editionsPageFonts : pageFonts}
 
 	html {
 		margin: 0;
@@ -74,9 +58,8 @@ function renderHead(
 	itemStyles: string,
 	emotionIds: string[],
 	inlineStyles: boolean,
-	enviroment: EditionsEnv,
 ): string {
-	const generalStyles = getStyles(enviroment);
+	const generalStyles = styles;
 	const isEditions = true;
 	const cspString = csp(
 		item,
@@ -131,10 +114,6 @@ function render(
 	getAssetLocation: (assetName: string) => string,
 	themeOverride: Option<Theme>,
 ): Page {
-	const path = res.req?.path;
-
-	const environment = getEditionsEnv(path);
-
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
 	const newItem = {
@@ -152,11 +131,10 @@ function render(
 		body.css,
 		body.ids,
 		false,
-		environment,
 	);
 
 	const clientScript =
-		environment !== EditionsEnv.Prod
+		process.env.NODE_ENV !== 'production'
 			? map(getAssetLocation)(some('editions.js'))
 			: some('assets/js/editions.js');
 
