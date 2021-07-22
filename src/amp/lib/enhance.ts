@@ -1,15 +1,11 @@
 import compose from 'compose-function';
-import createDOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
 import { minify } from 'html-minifier';
+import { sanitiseHTML } from '@root/src/model/sanitise';
 
-// We don't represent lists in in copy, so things will just come across with bullet characters.
+// We don't represent lists in InCopy, so things will just come across with bullet characters.
 // These may also be used for emphasis, so bullet characters don't mean list.
 export const bigBullets = (s: string) =>
 	s.replace(/•/g, '<span class="bullet">&bull;</span>');
-
-const { window } = new JSDOM('');
-const DOMPurify = createDOMPurify(window);
 
 export const minimise = compose(bigBullets, (s: string) =>
 	minify(s, {
@@ -19,10 +15,6 @@ export const minimise = compose(bigBullets, (s: string) =>
 	}),
 );
 
-export const sanitiseHTML = (html: string, opts?: any): string =>
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	DOMPurify.sanitize(html, opts);
-
 export const clean = (html: string) =>
 	minimise(
 		sanitiseHTML(html, {
@@ -30,3 +22,15 @@ export const clean = (html: string) =>
 			FORCE_BODY: true,
 		}),
 	);
+
+export const enhance = (elements: CAPIElement[]): CAPIElement[] => {
+	return elements.map((element) => {
+		if (
+			element._type ===
+			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
+		) {
+			element.html = element.html ? clean(element.html) : element.html;
+		}
+		return element;
+	});
+};

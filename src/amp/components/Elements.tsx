@@ -19,7 +19,7 @@ import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/Vide
 import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
 
-import { enhance } from '@root/src/model/enhance-interactive-atom-elements';
+import { enhance } from '@root/src/amp/lib/enhance';
 
 export const Elements = (
 	elements: CAPIElement[],
@@ -27,7 +27,7 @@ export const Elements = (
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
 ): JSX.Element[] => {
-	const cleanedElements = enhance(elements, true);
+	const cleanedElements = enhance(elements);
 	const output = cleanedElements.map((element, i) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
