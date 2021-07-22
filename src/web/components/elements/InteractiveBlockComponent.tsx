@@ -285,6 +285,7 @@ export const InteractiveBlockComponent = ({
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 				ref={wrapperRef}
 				css={wrapperStyle({ format, role, loaded, palette })}
+				data-alt={alt} // for compatibility with custom boot scripts
 			>
 				{!loaded && (
 					<>
