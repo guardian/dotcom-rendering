@@ -19,15 +19,7 @@ import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/Vide
 import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
 
-import { minimise, sanitiseHTML } from '@root/src/model/clean';
-
-const clean = (html: string) =>
-	minimise(
-		sanitiseHTML(html, {
-			ADD_TAGS: ['#comment'],
-			FORCE_BODY: true,
-		}),
-	);
+import { enhance } from '@root/src/model/enhance-interactive-atom-elements';
 
 export const Elements = (
 	elements: CAPIElement[],
@@ -35,15 +27,7 @@ export const Elements = (
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
 ): JSX.Element[] => {
-	const cleanedElements = elements.map((element) => {
-		if (
-			element._type ===
-			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
-		) {
-			element.html = element.html ? clean(element.html) : element.html;
-		}
-		return element;
-	});
+	const cleanedElements = enhance(elements, true);
 	const output = cleanedElements.map((element, i) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
