@@ -304,6 +304,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}
@@ -586,6 +587,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}

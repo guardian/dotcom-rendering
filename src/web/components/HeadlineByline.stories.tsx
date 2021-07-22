@@ -159,6 +159,35 @@ export const MultipleStory = () => {
 };
 MultipleStory.story = { name: 'Immersive with multiple contributors' };
 
+export const MultipleDuplicateStory = () => {
+	return (
+		<HeadlineByline
+			format={{
+				display: Display.Immersive,
+				design: Design.Article,
+				theme: Pillar.Lifestyle,
+			}}
+			byline="Duncan Campbell and Duncan Campbell"
+			tags={[
+				{
+					id: '1',
+					type: 'Contributor',
+					title: 'Duncan Campbell',
+				},
+				{
+					id: '2',
+					type: 'Contributor',
+					title: 'Duncan Campbell',
+				},
+			]}
+		/>
+	);
+};
+MultipleDuplicateStory.story = {
+	name:
+		'Immersive with multiple contributors with distinct tags but identical names',
+};
+
 export const noBylineStory = () => {
 	return (
 		<HeadlineByline

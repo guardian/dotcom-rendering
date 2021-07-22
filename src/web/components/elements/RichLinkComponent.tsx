@@ -79,9 +79,9 @@ export const RichLinkComponent = ({
 
 	const richLinkImageData: RichLinkImageData = {
 		thumbnailUrl: data.thumbnailUrl,
-		altText: data.imageAsset.fields.altText,
-		width: data.imageAsset.fields.width,
-		height: data.imageAsset.fields.height,
+		altText: data.imageAsset?.fields.altText,
+		width: data.imageAsset?.fields.width,
+		height: data.imageAsset?.fields.height,
 	};
 
 	return (

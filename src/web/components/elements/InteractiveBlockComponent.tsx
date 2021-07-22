@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import { body, textSans } from '@guardian/src-foundations/typography';
 import { Special } from '@guardian/types';
 import { space } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 import { Caption } from '@root/src/web/components/Caption';
 import libDebounce from 'lodash.debounce';
@@ -91,9 +90,19 @@ const getMinHeight = (role: RoleType, loaded: boolean) => {
 	}
 	return `${decideHeight(role)}px`;
 };
-const wrapperStyle = (format: Format, role: RoleType, loaded: boolean) => css`
+const wrapperStyle = ({
+	format,
+	role,
+	loaded,
+	palette,
+}: {
+	format: Format;
+	role: RoleType;
+	loaded: boolean;
+	palette: Palette;
+}) => css`
 	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
-	background-color: ${neutral[100]};
+	background-color: ${palette.background.article};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
 `;
@@ -275,7 +284,7 @@ export const InteractiveBlockComponent = ({
 			<div
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 				ref={wrapperRef}
-				css={wrapperStyle(format, role, loaded)}
+				css={wrapperStyle({ format, role, loaded, palette })}
 			>
 				{!loaded && (
 					<>
