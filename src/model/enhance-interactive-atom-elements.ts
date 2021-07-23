@@ -1,4 +1,4 @@
-import { sanitiseHTML } from '@root/src/model/clean';
+import { sanitiseHTML } from '@root/src/model/sanitise';
 
 // Some interactives contain HTML with unclosed tags etc. To
 // preserve (approximate) parity with Frontend we perform some basic
@@ -15,7 +15,6 @@ export const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 				  })
 				: element.html;
 		}
-
 		return element;
 	});
 };
