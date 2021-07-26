@@ -609,6 +609,7 @@ const quizAtomRenderer = (
 	element: KnowledgeQuizAtomElement | PersonalityQuizAtomElement,
 ): ReactNode => {
 	const props = JSON.stringify(element);
+	const { theme } = format;
 	const hydrationParams = h(
 		'script',
 		{ className: 'js-quiz-params', type: 'application/json' },
@@ -617,12 +618,12 @@ const quizAtomRenderer = (
 	if (element.kind === ElementKind.KnowledgeQuizAtom) {
 		return h('div', { className: 'js-quiz' }, [
 			hydrationParams,
-			h(KnowledgeQuizAtom, { ...element }),
+			h(KnowledgeQuizAtom, { ...element, theme, sharingUrls: {} }),
 		]);
 	}
 	return h('div', { className: 'js-quiz' }, [
 		hydrationParams,
-		h(PersonalityQuizAtom, { ...element }),
+		h(PersonalityQuizAtom, { ...element, theme, sharingUrls: {} }),
 	]);
 };
 
