@@ -34,7 +34,7 @@ const brandingLogoStyle = css`
 	padding: 10px 0;
 `;
 
-const BrandingItem: React.FC<{
+export const Branding: React.FC<{
 	branding: Branding;
 	pillar: Theme;
 }> = ({ branding, pillar }) => {
@@ -62,10 +62,10 @@ const BrandingItem: React.FC<{
 	);
 };
 
-export const Branding: React.FC<{
+export const BrandingRegionContainer: React.FC<{
+	children: (branding: Branding) => React.ReactNode;
 	commercialProperties: CommercialProperties;
-	pillar: Theme;
-}> = ({ commercialProperties, pillar }) => {
+}> = ({ children, commercialProperties }) => {
 	const brandingStyles = css`
 		display: none;
 	`;
@@ -107,7 +107,7 @@ export const Branding: React.FC<{
 							editionStyles[editionId as Edition],
 						]}
 					>
-						<BrandingItem branding={branding} pillar={pillar} />
+						{children(branding)}
 					</div>
 				) : null;
 			})}

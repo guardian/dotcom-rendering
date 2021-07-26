@@ -15,7 +15,10 @@ import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@root/src/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
-import { Branding } from '@root/src/amp/components/topMeta/Branding';
+import {
+	Branding,
+	BrandingRegionContainer,
+} from '@root/src/amp/components/topMeta/Branding';
 import { StarRating } from '@root/src/amp/components/StarRating';
 
 const headerStyle = css`
@@ -120,10 +123,11 @@ export const TopMetaAnalysis: React.FC<{
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-			<Branding
+			<BrandingRegionContainer
 				commercialProperties={articleData.commercialProperties}
-				pillar={pillar}
-			/>
+			>
+				{(branding) => <Branding branding={branding} pillar={pillar} />}
+			</BrandingRegionContainer>
 
 			<div css={bylineStyle(pillar)}>
 				<Byline

@@ -14,6 +14,7 @@ import { PaidForBand } from '@root/src/amp/components/topMeta/PaidForBand';
 
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
+import { BrandingRegionContainer } from './Branding';
 
 const headerStyle = css`
 	${textSans.xlarge()};
@@ -84,46 +85,44 @@ const Headline: React.FC<{
 export const TopMetaPaidContent: React.FC<{
 	articleData: ArticleModel;
 	pillar: Theme;
-}> = ({ articleData, pillar }) => {
-	const { branding } = articleData.commercialProperties[
-		articleData.editionId
-	];
+}> = ({ articleData, pillar }) => (
+	<header>
+		<PaidForBand />
 
-	return (
-		<header>
-			<PaidForBand />
+		{articleData.mainMediaElements.map((element, i) => (
+			<MainMedia key={i} element={element} pillar={pillar} />
+		))}
 
-			{articleData.mainMediaElements.map((element, i) => (
-				<MainMedia key={i} element={element} pillar={pillar} />
-			))}
+		<Headline headlineText={articleData.headline} />
 
-			<Headline headlineText={articleData.headline} />
+		<BrandingRegionContainer
+			commercialProperties={articleData.commercialProperties}
+		>
+			{(branding) => <PaidForByLogo branding={branding} />}
+		</BrandingRegionContainer>
 
-			{!!branding && <PaidForByLogo branding={branding} />}
+		<Standfirst text={articleData.standfirst} pillar={pillar} />
 
-			<Standfirst text={articleData.standfirst} pillar={pillar} />
-
-			<div css={bylineStyle}>
-				<Byline
-					byline={articleData.author.byline}
-					tags={articleData.tags}
-					guardianBaseURL={articleData.guardianBaseURL}
-				/>
-			</div>
-
-			<TopMetaExtras
-				sharingUrls={getSharingUrls(
-					articleData.pageId,
-					articleData.webTitle,
-				)}
-				pillar={pillar}
-				ageWarning={getAgeWarning(
-					articleData.tags,
-					articleData.webPublicationDate,
-				)}
-				webPublicationDate={articleData.webPublicationDateDisplay}
-				twitterHandle={articleData.author.twitterHandle}
+		<div css={bylineStyle}>
+			<Byline
+				byline={articleData.author.byline}
+				tags={articleData.tags}
+				guardianBaseURL={articleData.guardianBaseURL}
 			/>
-		</header>
-	);
-};
+		</div>
+
+		<TopMetaExtras
+			sharingUrls={getSharingUrls(
+				articleData.pageId,
+				articleData.webTitle,
+			)}
+			pillar={pillar}
+			ageWarning={getAgeWarning(
+				articleData.tags,
+				articleData.webPublicationDate,
+			)}
+			webPublicationDate={articleData.webPublicationDateDisplay}
+			twitterHandle={articleData.author.twitterHandle}
+		/>
+	</header>
+);
