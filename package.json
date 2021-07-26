@@ -56,6 +56,7 @@
     "@guardian/src-ed-lines": "^3.6.0-rc.0",
     "@guardian/src-foundations": "^3.6.0",
     "@guardian/src-icons": "^3.7.0",
+    "@guardian/src-layout": "^3.8.0",
     "@guardian/src-link": "^3.6.0",
     "@guardian/src-radio": "^3.6.0",
     "@guardian/src-text-area": "^3.6.0",
