@@ -21,7 +21,8 @@ import { Pillar } from '@guardian/types';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 import { decideTheme } from '../lib/decideTheme';
-import { AccessibleSkipButton } from '../components/AccessibleSkipButton';
+import { SkipToMainContent } from '../components/SkipToMainContent';
+import { SkipToNavigation } from '../components/SkipToNavigation';
 
 interface RenderToStringResult {
 	html: string;
@@ -331,7 +332,8 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	const accessibilityLink = renderToString(<AccessibleSkipButton />);
+	const skipToMainContent = renderToString(<SkipToMainContent />);
+	const skipToNavigation = renderToString(<SkipToNavigation />);
 
 	return htmlTemplate({
 		linkedData,
@@ -349,6 +351,7 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
-		accessibilityLink,
+		skipToMainContent,
+		skipToNavigation,
 	});
 };

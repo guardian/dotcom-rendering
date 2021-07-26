@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, border } from '@guardian/src-foundations/palette';
 
-export const AccessibleSkipButton = () => {
+export const SkipToMainContent = () => {
 	return (
 		<a
 			href="#maincontent"
