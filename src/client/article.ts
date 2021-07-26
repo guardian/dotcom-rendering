@@ -381,9 +381,11 @@ function initAudioAtoms(): void {
 		const kicker = atom.getAttribute('kicker');
 		const title = atom.getAttribute('title');
 		const pillar = parseInt(atom.getAttribute('pillar') ?? '0');
+		// Work required to provide the audio atom duration server side.
+		const duration = parseInt(atom.getAttribute('duration') ?? '0');
 		if (id && trackUrl && kicker && title && pillar) {
 			ReactDOM.hydrate(
-				h(AudioAtom, { id, trackUrl, pillar, kicker, title }),
+				h(AudioAtom, { id, trackUrl, pillar, kicker, title, duration }),
 				atom,
 			);
 		}

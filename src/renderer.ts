@@ -600,7 +600,7 @@ const audioAtomRenderer = (
 			className: 'js-audio-atom',
 			css: audioAtomStyles,
 		},
-		h(AudioAtom, { ...element, pillar }),
+		h(AudioAtom, { ...element, pillar, duration: 0 }),
 	);
 };
 
