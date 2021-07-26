@@ -48,14 +48,14 @@ export const InlineAnniversaryAtom = ({
 }: {
 	html: string | undefined;
 	atomCss: string | undefined;
-	js: string;
+	js: string | undefined;
 }) => {
 	return (
 		<>
 			{atomCss && <style dangerouslySetInnerHTML={{ __html: atomCss }} />}
 
 			{html && <div dangerouslySetInnerHTML={{ __html: html }} />}
-			<script dangerouslySetInnerHTML={{ __html: js }} />
+			{js && <script dangerouslySetInnerHTML={{ __html: js }} />}
 		</>
 	);
 };
