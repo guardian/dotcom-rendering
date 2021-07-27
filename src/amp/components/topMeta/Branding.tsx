@@ -1,6 +1,10 @@
 import React from 'react';
-import { css, SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
+import {
+	noDisplayClass,
+	regionClasses,
+} from '@root/src/amp/lib/region-classes';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 
@@ -65,52 +69,17 @@ export const Branding: React.FC<{
 export const BrandingRegionContainer: React.FC<{
 	children: (branding: Branding) => React.ReactNode;
 	commercialProperties: CommercialProperties;
-}> = ({ children, commercialProperties }) => {
-	const brandingStyles = css`
-		display: none;
-	`;
-	const ukStyles = css`
-		.amp-iso-country-gb & {
-			display: block;
-		}
-	`;
-	const usStyles = css`
-		.amp-iso-country-us & {
-			display: block;
-		}
-	`;
-	const auStyles = css`
-		.amp-iso-country-au & {
-			display: block;
-		}
-	`;
-	const intStyles = css`
-		.amp-geo-group-eea:not(.amp-iso-country-gb) &,
-		.amp-geo-no-group & {
-			display: block;
-		}
-	`;
-	const editionStyles: Record<Edition, SerializedStyles> = {
-		UK: ukStyles,
-		US: usStyles,
-		AU: auStyles,
-		INT: intStyles,
-	};
-	return (
-		<>
-			{Object.keys(commercialProperties).map((editionId) => {
-				const { branding } = commercialProperties[editionId as Edition];
-				return branding !== undefined ? (
-					<div
-						css={[
-							brandingStyles,
-							editionStyles[editionId as Edition],
-						]}
-					>
-						{children(branding)}
-					</div>
-				) : null;
-			})}
-		</>
-	);
-};
+}> = ({ children, commercialProperties }) => (
+	<>
+		{Object.keys(commercialProperties).map((editionId) => {
+			const { branding } = commercialProperties[editionId as Edition];
+			return branding !== undefined ? (
+				<div
+					css={[noDisplayClass, regionClasses[editionId as Edition]]}
+				>
+					{children(branding)}
+				</div>
+			) : null;
+		})}
+	</>
+);
