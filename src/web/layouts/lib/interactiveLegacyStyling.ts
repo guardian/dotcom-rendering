@@ -7,7 +7,7 @@ import { center } from '@root/src/web/lib/center';
 export const interactiveLegacyFigureClasses = new Map([
 	[
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
-		'element-interactive',
+		'element-interactive element interactive',
 	],
 ]);
 
