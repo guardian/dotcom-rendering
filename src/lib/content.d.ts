@@ -227,7 +227,7 @@ interface InteractiveAtomBlockElement {
 	elementId: string;
 	url: string;
 	id: string;
-	js: string;
+	js?: string;
 	html?: string;
 	css?: string;
 	placeholderUrl?: string;
