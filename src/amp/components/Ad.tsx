@@ -1,6 +1,10 @@
 import { ClassNames } from '@emotion/react';
 
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
+import {
+	noDisplayClass,
+	regionClasses,
+} from '@root/src/amp/lib/region-classes';
 
 // Largest size first
 const inlineSizes = [
@@ -102,61 +106,35 @@ export const Ad = ({
 
 	return (
 		<ClassNames>
-			{({ css, cx }) => {
-				const adClass = css`
-					display: none;
-				`;
-
-				const usAdRegionClass = css`
-					.amp-geo-group-us & {
-						display: block;
-					}
-				`;
-
-				const auAdRegionClass = css`
-					.amp-geo-group-au & {
-						display: block;
-					}
-				`;
-
-				const rowAdRegionClass = css`
-					.amp-geo-group-eea & {
-						display: block;
-					}
-					.amp-geo-no-group & {
-						display: block;
-					}
-				`;
-
-				const adRegionClasses = {
-					US: usAdRegionClass,
-					AU: auAdRegionClass,
-					ROW: rowAdRegionClass,
-				};
-
-				return (
-					<amp-ad
-						class={cx(adClass, adRegionClasses[adRegion])}
-						data-block-on-consent=""
-						width={width}
-						height={height}
-						data-multi-size={multiSizes}
-						data-npa-on-unknown-consent={true}
-						data-loading-strategy="prefer-viewability-over-views"
-						layout="fixed"
-						type="doubleclick"
-						json={stringify(
-							adJson(commercialProperties[edition].adTargeting),
-						)}
-						data-slot={ampData(section, contentType)}
-						rtc-config={realTimeConfig(
-							adRegion,
-							config.usePrebid,
-							config.usePermutive,
-						)}
-					/>
-				);
-			}}
+			{({ css, cx }) => (
+				<amp-ad
+					class={cx(
+						css`
+							${noDisplayClass.styles}
+						`,
+						css`
+							${regionClasses[adRegion].styles}
+						`,
+					)}
+					data-block-on-consent=""
+					width={width}
+					height={height}
+					data-multi-size={multiSizes}
+					data-npa-on-unknown-consent={true}
+					data-loading-strategy="prefer-viewability-over-views"
+					layout="fixed"
+					type="doubleclick"
+					json={stringify(
+						adJson(commercialProperties[edition].adTargeting),
+					)}
+					data-slot={ampData(section, contentType)}
+					rtc-config={realTimeConfig(
+						adRegion,
+						config.usePrebid,
+						config.usePermutive,
+					)}
+				/>
+			)}
 		</ClassNames>
 	);
 };
