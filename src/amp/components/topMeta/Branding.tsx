@@ -3,6 +3,7 @@ import { css, SerializedStyles } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
+import { isEdition } from '@root/src/amp/lib/edition';
 
 const LinkStyle = (pillar: Theme) => css`
 	a {
@@ -98,19 +99,16 @@ export const BrandingRegionContainer: React.FC<{
 	};
 	return (
 		<>
-			{Object.keys(commercialProperties).map((editionId) => {
-				const { branding } = commercialProperties[editionId as Edition];
-				return branding !== undefined ? (
-					<div
-						css={[
-							brandingStyles,
-							editionStyles[editionId as Edition],
-						]}
-					>
-						{children(branding)}
-					</div>
-				) : null;
-			})}
+			{Object.keys(commercialProperties)
+				.filter(isEdition)
+				.map((editionId) => {
+					const { branding } = commercialProperties[editionId];
+					return branding !== undefined ? (
+						<div css={[brandingStyles, editionStyles[editionId]]}>
+							{children(branding)}
+						</div>
+					) : null;
+				})}
 		</>
 	);
 };
