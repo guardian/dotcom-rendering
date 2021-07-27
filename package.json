@@ -5,7 +5,7 @@
   "main": "server/server.ts",
   "browserslist": [
     "android >= 5",
-    "ios >= 11"
+    "ios >= 12"
   ],
   "scripts": {
     "postinstall": "is-ci || husky install",
@@ -82,8 +82,8 @@
     "typescript": "^4.2.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
     "@emotion/jest": "^11.2.0",
     "@guardian/eslint-config-typescript": "^0.4.2",
     "@guardian/prettier": "^0.5.0",
