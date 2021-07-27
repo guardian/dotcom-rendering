@@ -191,7 +191,7 @@ const getHeadlineStyles = (
 	}
 
 	// this needs to come before Display.Showcase
-	if (format.design === Design.Comment || format.design === Design.Letter) {
+	if (format.design === Design.Comment) {
 		return css(
 			sharedStyles,
 			getFontStyles('regular', 'light'),
@@ -215,6 +215,8 @@ const getHeadlineStyles = (
 	switch (format.design) {
 		case Design.Review:
 			return css(sharedStyles, getFontStyles('tight', 'bold'));
+		case Design.Letter:
+			return css(sharedStyles, getFontStyles('tight', 'light'));
 		case Design.Analysis:
 			return css(
 				sharedStyles,
