@@ -22,7 +22,7 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
-import { editionsPageFonts, pageFonts } from 'styles';
+import { pageFonts as devFonts, editionsPageFonts as prodFonts } from 'styles';
 
 // ----- Types ----- //
 
@@ -31,14 +31,30 @@ interface Page {
 	clientScript: Option<string>;
 }
 
+enum EditionsEnv {
+	Dev,
+	Prod,
+	Browser,
+}
+
 // ----- Setup ----- //
 
 const docParser = JSDOM.fragment.bind(null);
 
 // ----- Functions ----- //
 
-const styles = `
- 	${process.env.NODE_ENV === 'production' ? editionsPageFonts : pageFonts}
+const getEditionsEnv = (path?: string): EditionsEnv => {
+	if (process.env.NODE_ENV !== 'production') {
+		return EditionsEnv.Dev;
+	} else if (path === '/editions-article') {
+		return EditionsEnv.Prod;
+	} else {
+		return EditionsEnv.Browser;
+	}
+};
+
+const getStyles = (env: EditionsEnv): string => `
+	${env === EditionsEnv.Dev || env === EditionsEnv.Browser ? devFonts : prodFonts}
 
 	html {
 		margin: 0;
@@ -58,8 +74,9 @@ function renderHead(
 	itemStyles: string,
 	emotionIds: string[],
 	inlineStyles: boolean,
+	enviroment: EditionsEnv,
 ): string {
-	const generalStyles = styles;
+	const generalStyles = getStyles(enviroment);
 	const isEditions = true;
 	const cspString = csp(
 		item,
@@ -114,6 +131,10 @@ function render(
 	getAssetLocation: (assetName: string) => string,
 	themeOverride: Option<Theme>,
 ): Page {
+	const path = res.req?.path;
+
+	const environment = getEditionsEnv(path);
+
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
 	const newItem = {
@@ -131,12 +152,16 @@ function render(
 		body.css,
 		body.ids,
 		false,
+		environment,
 	);
 
+	const devScript = map(getAssetLocation)(some('editions.js'));
+	const prodScript = some('assets/js/editions.js');
+
 	const clientScript =
-		process.env.NODE_ENV !== 'production'
-			? map(getAssetLocation)(some('editions.js'))
-			: some('assets/js/editions.js');
+		environment === EditionsEnv.Dev || environment === EditionsEnv.Browser
+			? devScript
+			: prodScript;
 
 	const scripts = (
 		<Scripts
