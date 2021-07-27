@@ -5,7 +5,7 @@
   "main": "server/server.ts",
   "browserslist": [
     "android >= 5",
-    "ios >= 11"
+    "ios >= 12"
   ],
   "scripts": {
     "postinstall": "is-ci || husky install",
