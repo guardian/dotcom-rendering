@@ -5,10 +5,10 @@ export const SkipToNavigation = () => {
 	return (
 		<>
 			<Hide above="desktop">
-				<SkipTo id="#veggie-burger" label="Skip to navigation" />
+				<SkipTo id="#navigation" label="Skip to navigation" />
 			</Hide>
 			<Hide below="desktop">
-				<SkipTo id="#show-more-button" label="Skip to navigation" />
+				<SkipTo id="#navigation" label="Skip to navigation" />
 			</Hide>
 		</>
 	);

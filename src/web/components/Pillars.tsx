@@ -263,6 +263,8 @@ export const Pillars: React.FC<{
 							isSelected && forceUnderline,
 							showDivider && pillarDivider,
 						]}
+						id={i === 0 ? 'navigation' : undefined}
+						aria-label={i === 0 ? 'Navigation' : undefined}
 						href={p.url}
 						data-link-name={`${dataLinkName} : primary : ${p.title}`}
 					>
