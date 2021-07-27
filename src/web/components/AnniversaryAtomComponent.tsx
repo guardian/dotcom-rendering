@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/src-foundations/mq';
 
 const atomStyles = (
-	anniversaryInteractiveAtom: InteractiveAtomBlockElement | undefined,
+	anniversaryInteractiveAtom?: InteractiveAtomBlockElement,
 ) => css`
 	/* Temporarily support anniversary atom at top of articles */
 	/* stylelint-disable color-no-hex */
@@ -46,9 +46,9 @@ export const InlineAnniversaryAtom = ({
 	atomCss,
 	js,
 }: {
-	html: string | undefined;
-	atomCss: string | undefined;
-	js: string | undefined;
+	html?: string;
+	atomCss?: string;
+	js?: string;
 }) => {
 	return (
 		<>
@@ -62,7 +62,7 @@ export const InlineAnniversaryAtom = ({
 export const AnniversaryAtomComponent = ({
 	anniversaryInteractiveAtom,
 }: {
-	anniversaryInteractiveAtom: InteractiveAtomBlockElement | undefined;
+	anniversaryInteractiveAtom?: InteractiveAtomBlockElement;
 }) => {
 	return (
 		<div
