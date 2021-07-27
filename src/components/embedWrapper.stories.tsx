@@ -126,7 +126,7 @@ const Instagram: FC = () => (
 		<EmbedComponentWrapper
 			embed={{
 				kind: EmbedKind.Instagram,
-				id: 'BwwONCplEyj',
+				id: 'B-uYh7FBWU5',
 				caption: some('a caption'),
 				tracking: EmbedTracksType.TRACKS,
 			}}
@@ -139,7 +139,7 @@ const Instagram: FC = () => (
 		<EmbedComponentWrapper
 			embed={{
 				kind: EmbedKind.Instagram,
-				id: 'BwwONCplEyj',
+				id: 'B-uYh7FBWU5',
 				caption: some('a caption'),
 				tracking: EmbedTracksType.DOES_NOT_TRACK,
 			}}
