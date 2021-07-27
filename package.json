@@ -82,7 +82,7 @@
     "typescript": "^4.2.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.12.1",
     "@emotion/jest": "^11.2.0",
     "@guardian/eslint-config-typescript": "^0.4.2",
