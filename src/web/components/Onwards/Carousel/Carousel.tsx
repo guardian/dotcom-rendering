@@ -56,7 +56,7 @@ const wrapperStyle = css`
 	display: flex;
 	justify-content: space-between;
 	overflow: hidden;
-	${from.tablet} {
+	${from.desktop} {
 		padding-right: 40px;
 	}
 `;
