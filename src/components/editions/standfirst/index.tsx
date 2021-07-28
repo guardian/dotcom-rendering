@@ -100,15 +100,14 @@ const getStyles = (format: Format): SerializedStyles => {
 	if (format.design === Design.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
-	if (format.design === Design.Analysis) {
+	if (format.design === Design.Analysis || format.design === Design.Letter) {
 		return css(
 			styles(kickerColor),
-			getFontStyles(neutral[20], 'tight', 'bold'),
+			getFontStyles(neutral[46], 'tight', 'bold'),
 		);
 	}
 	if (
 		format.design === Design.Comment ||
-		format.design === Design.Letter ||
 		format.display === Display.Showcase
 	) {
 		return css(styles(kickerColor), getFontStyles(neutral[20], 'tight'));
