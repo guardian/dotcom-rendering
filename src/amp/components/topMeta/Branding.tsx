@@ -68,16 +68,16 @@ export const BrandingRegionContainer: React.FC<{
 	children: (branding: Branding) => React.ReactNode;
 	commercialProperties: CommercialProperties;
 }> = ({ children, commercialProperties }) => (
-  <>
-    {Object.keys(commercialProperties)
-      .filter(isEdition)
-      .map((editionId) => {
-        const { branding } = commercialProperties[editionId];
-        return branding !== undefined ? (
-          <div css={[brandingStyles, editionStyles[editionId]]}>
-            {children(branding)}
-          </div>
-        ) : null;
-      })}
-  </>
+	<>
+		{Object.keys(commercialProperties)
+			.filter(isEdition)
+			.map((editionId) => {
+				const { branding } = commercialProperties[editionId];
+				return branding !== undefined ? (
+					<div css={regionClasses[editionId]}>
+						{children(branding)}
+					</div>
+				) : null;
+			})}
+	</>
 );
