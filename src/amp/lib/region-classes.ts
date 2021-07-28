@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
  * from Great Britain
  */
 const ukRegionClass = css`
+	display: none;
 	.amp-iso-country-gb & {
 		display: block;
 	}
@@ -14,6 +15,7 @@ const ukRegionClass = css`
  * Class that will display an element if the user accesses the AMP page from US
  */
 const usRegionClass = css`
+	display: none;
 	.amp-iso-country-us & {
 		display: block;
 	}
@@ -24,6 +26,7 @@ const usRegionClass = css`
  * from Australia
  */
 const auRegionClass = css`
+	display: none;
 	.amp-iso-country-au & {
 		display: block;
 	}
@@ -38,6 +41,7 @@ const auRegionClass = css`
  *
  */
 const rowRegionClass = css`
+	display: none;
 	.amp-geo-group-eea & {
 		display: block;
 	}
@@ -54,18 +58,11 @@ const rowRegionClass = css`
  * Area EXCEPT Great Britain or where no AMP geo group is assigned
  */
 const internationalRegionClass = css`
+	display: none;
 	.amp-geo-group-eea:not(.amp-iso-country-gb) &,
 	.amp-geo-no-group & {
 		display: block;
 	}
-`;
-
-/**
- * Class that can be applied to all regions to ensure that when not in the
- * correct AMP region all other regions aren't displayed
- */
-export const noDisplayClass = css`
-	display: none;
 `;
 
 /** Dictionary mapping region code to the associated AMP region style */

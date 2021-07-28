@@ -1,10 +1,7 @@
 import { ClassNames } from '@emotion/react';
 
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
-import {
-	noDisplayClass,
-	regionClasses,
-} from '@root/src/amp/lib/region-classes';
+import { regionClasses } from '@root/src/amp/lib/region-classes';
 
 // Largest size first
 const inlineSizes = [
@@ -109,9 +106,6 @@ export const Ad = ({
 			{({ css, cx }) => (
 				<amp-ad
 					class={cx(
-						css`
-							${noDisplayClass.styles}
-						`,
 						css`
 							${regionClasses[adRegion].styles}
 						`,

@@ -1,10 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
-import {
-	noDisplayClass,
-	regionClasses,
-} from '@root/src/amp/lib/region-classes';
+import { regionClasses } from '@root/src/amp/lib/region-classes';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 
@@ -74,9 +71,7 @@ export const BrandingRegionContainer: React.FC<{
 		{Object.keys(commercialProperties).map((editionId) => {
 			const { branding } = commercialProperties[editionId as Edition];
 			return branding !== undefined ? (
-				<div
-					css={[noDisplayClass, regionClasses[editionId as Edition]]}
-				>
+				<div css={regionClasses[editionId as Edition]}>
 					{children(branding)}
 				</div>
 			) : null;
