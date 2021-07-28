@@ -89,7 +89,6 @@ const buildBrazeEpicConfig = (
 			),
 		},
 		timeoutMillis: 5000,
-		reportTiming: true,
 	};
 };
 
