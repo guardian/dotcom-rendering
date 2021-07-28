@@ -340,6 +340,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			design: Design.Obituary,
 			...itemFieldsWithBody(context, request),
 		};
+	} else if (isGuardianView(tags)) {
+		return {
+			design: Design.Editorial,
+			...itemFieldsWithBody(context, request),
+		};
 	} else if (isComment(tags)) {
 		const item = itemFieldsWithBody(context, request);
 		return {
@@ -362,11 +367,6 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isRecipe(tags)) {
 		return {
 			design: Design.Recipe,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isGuardianView(tags)) {
-		return {
-			design: Design.Editorial,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isQuiz(tags)) {
