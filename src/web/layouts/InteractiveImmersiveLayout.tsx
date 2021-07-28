@@ -184,6 +184,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}
@@ -262,6 +263,7 @@ export const InteractiveImmersiveLayout = ({
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}

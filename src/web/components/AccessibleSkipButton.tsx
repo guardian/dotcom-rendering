@@ -7,10 +7,10 @@ export const AccessibleSkipButton = () => {
 		<a
 			href="#maincontent"
 			css={css`
-				${textSans.xlarge()}
-				height: 65px;
-				top: -65px;
-				line-height: 55px;
+				${textSans.medium()}
+				height: 40px;
+				top: -40px;
+				line-height: 30px;
 				overflow: hidden;
 				padding: 0;
 				position: absolute;
@@ -19,6 +19,7 @@ export const AccessibleSkipButton = () => {
 				text-align: center;
 				margin: 0;
 				text-decoration: none;
+				color: ${neutral[0]};
 				&:focus,
 				&:active {
 					border: 5px solid ${border.focusHalo};

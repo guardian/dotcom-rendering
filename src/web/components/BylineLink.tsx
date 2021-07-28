@@ -1,17 +1,11 @@
+import {
+	getBylineComponentsFromTokens,
+	getContributorTags,
+} from '@root/src/lib/byline';
+
 type Props = {
 	byline: string;
 	tags: TagType[];
-};
-
-const getContributorTags = (tags: TagType[]): TagType[] => {
-	return tags.filter((t) => t.type === 'Contributor');
-};
-
-export const getContributorTagsForToken = (
-	tags: TagType[],
-	token: string,
-): TagType[] => {
-	return getContributorTags(tags).filter((t) => t.title === token);
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -80,18 +74,21 @@ const ContributorLink: React.FC<{
 );
 
 export const BylineLink = ({ byline, tags }: Props) => {
-	const renderedTokens = bylineAsTokens(byline, tags).map((token, i) => {
-		const contributorTags = getContributorTagsForToken(tags, token);
-		if (contributorTags.length > 0) {
-			return (
-				<ContributorLink
-					contributor={token}
-					contributorTagId={contributorTags[0].id}
-					key={i}
-				/>
-			);
+	const tokens = bylineAsTokens(byline, tags);
+
+	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
+
+	const renderedTokens = bylineComponents.map((bylineComponent) => {
+		if (typeof bylineComponent === 'string') {
+			return bylineComponent;
 		}
-		return token;
+		return (
+			<ContributorLink
+				contributor={bylineComponent.token}
+				contributorTagId={bylineComponent.tag.id}
+				key={bylineComponent.tag.id}
+			/>
+		);
 	});
 
 	return <>{renderedTokens}</>;

@@ -691,6 +691,7 @@ export const ImmersiveLayout = ({
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
 						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}

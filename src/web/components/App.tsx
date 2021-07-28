@@ -859,6 +859,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							palette={palette}
+							format={format}
 						/>
 					</>
 				</HydrateOnce>
