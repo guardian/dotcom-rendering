@@ -65,7 +65,12 @@ const internationalRegionClass = css`
 	}
 `;
 
-/** Dictionary mapping region code to the associated AMP region style */
+/**
+ * Dictionary mapping region code to the associated AMP region style
+ *
+ * E.g. Applying `regionClasses["US"]` to an element will only display the
+ * element if the user is accessing the AMP page from the US
+ * */
 export const regionClasses = {
 	UK: ukRegionClass,
 	US: usRegionClass,
