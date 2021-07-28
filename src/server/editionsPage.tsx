@@ -43,8 +43,8 @@ const docParser = JSDOM.fragment.bind(null);
 
 // ----- Functions ----- //
 
-const getEditionsEnv = (path?: string): EditionsEnv => {
-	if (process.env.NODE_ENV !== 'production') {
+const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
+	if (process.env.NODE_ENV !== 'production' || isPreview) {
 		return EditionsEnv.Dev;
 	} else if (path === '/editions-article') {
 		return EditionsEnv.Prod;
@@ -132,8 +132,9 @@ function render(
 	themeOverride: Option<Theme>,
 ): Page {
 	const path = res.req?.path;
+	const isPreview = res.req?.query.isPreview === 'true';
 
-	const environment = getEditionsEnv(path);
+	const environment = getEditionsEnv(isPreview, path);
 
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
