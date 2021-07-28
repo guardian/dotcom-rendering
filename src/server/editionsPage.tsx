@@ -44,13 +44,14 @@ const docParser = JSDOM.fragment.bind(null);
 // ----- Functions ----- //
 
 const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
-	if (process.env.NODE_ENV !== 'production' || isPreview) {
-		return EditionsEnv.Dev;
-	} else if (path === '/editions-article') {
-		return EditionsEnv.Prod;
-	} else {
-		return EditionsEnv.Browser;
-	}
+	// if (process.env.NODE_ENV !== 'production' || isPreview) {
+	// 	return EditionsEnv.Dev;
+	// } else if (path === '/editions-article') {
+	// 	return EditionsEnv.Prod;
+	// } else {
+	// 	return EditionsEnv.Browser;
+	// }
+	return EditionsEnv.Dev;
 };
 
 const getStyles = (env: EditionsEnv): string => `
@@ -133,9 +134,9 @@ function render(
 ): Page {
 	const path = res.req?.path;
 	const isPreview = res.req?.query.isPreview === 'true';
-
+	console.log(isPreview);
 	const environment = getEditionsEnv(isPreview, path);
-
+	console.log(environment);
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
 	const newItem = {
