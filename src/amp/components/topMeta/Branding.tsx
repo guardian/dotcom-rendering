@@ -4,6 +4,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { regionClasses } from '@root/src/amp/lib/region-classes';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
+import { isEdition } from '@root/src/amp/lib/edition';
 
 const LinkStyle = (pillar: Theme) => css`
 	a {
@@ -67,14 +68,16 @@ export const BrandingRegionContainer: React.FC<{
 	children: (branding: Branding) => React.ReactNode;
 	commercialProperties: CommercialProperties;
 }> = ({ children, commercialProperties }) => (
-	<>
-		{Object.keys(commercialProperties).map((editionId) => {
-			const { branding } = commercialProperties[editionId as Edition];
-			return branding !== undefined ? (
-				<div css={regionClasses[editionId as Edition]}>
-					{children(branding)}
-				</div>
-			) : null;
-		})}
-	</>
+  <>
+    {Object.keys(commercialProperties)
+      .filter(isEdition)
+      .map((editionId) => {
+        const { branding } = commercialProperties[editionId];
+        return branding !== undefined ? (
+          <div css={[brandingStyles, editionStyles[editionId]]}>
+            {children(branding)}
+          </div>
+        ) : null;
+      })}
+  </>
 );
