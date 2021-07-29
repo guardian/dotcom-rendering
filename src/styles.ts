@@ -464,7 +464,7 @@ export const editionsPageFonts = `
 
 `;
 
-const rootPath = `https://editions.code.dev-guardianapis.com/`;
+const rootPath = `https://editions-preview.code.dev-guardianapis.com/`;
 
 export const previewPageFonts = `
     ${fontFace(
