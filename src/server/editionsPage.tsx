@@ -22,11 +22,7 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
-import {
-	pageFonts as devFonts,
-	previewPageFonts,
-	editionsPageFonts as prodFonts,
-} from 'styles';
+import { pageFonts as devFonts, editionsPageFonts as prodFonts } from 'styles';
 
 // ----- Types ----- //
 
