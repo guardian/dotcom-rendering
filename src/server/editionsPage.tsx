@@ -59,7 +59,7 @@ const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
 const getFonts = (env: EditionsEnv): string => {
 	switch (env) {
 		case EditionsEnv.Preview:
-			return prodFonts;
+			return devFonts;
 		case EditionsEnv.Prod:
 			return prodFonts;
 		case EditionsEnv.Dev:
@@ -175,7 +175,7 @@ function render(
 
 	const devScript = map(getAssetLocation)(some('editions.js'));
 	const prodScript = some('assets/js/editions.js');
-	const previewScript = some('assets/js/editions.js');
+	const previewScript = map(getAssetLocation)(some('editions.js'));
 
 	const getClientScript = (env: EditionsEnv): Option<string> => {
 		switch (env) {
