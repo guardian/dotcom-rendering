@@ -22,7 +22,11 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
-import { pageFonts as devFonts, editionsPageFonts as prodFonts } from 'styles';
+import {
+	pageFonts as devFonts,
+	previewPageFonts,
+	editionsPageFonts as prodFonts,
+} from 'styles';
 
 // ----- Types ----- //
 
@@ -35,6 +39,7 @@ enum EditionsEnv {
 	Dev,
 	Prod,
 	Browser,
+	Preview,
 }
 
 // ----- Setup ----- //
@@ -44,7 +49,9 @@ const docParser = JSDOM.fragment.bind(null);
 // ----- Functions ----- //
 
 const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
-	if (process.env.NODE_ENV !== 'production' || isPreview) {
+	if (isPreview) {
+		return EditionsEnv.Preview;
+	} else if (process.env.NODE_ENV !== 'production') {
 		return EditionsEnv.Dev;
 	} else if (path === '/editions-article') {
 		return EditionsEnv.Prod;
@@ -53,8 +60,21 @@ const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
 	}
 };
 
-const getStyles = (env: EditionsEnv): string => `
-	${env === EditionsEnv.Dev || env === EditionsEnv.Browser ? devFonts : prodFonts}
+const getFonts = (env: EditionsEnv): string => {
+	switch (env) {
+		case EditionsEnv.Preview:
+			return previewPageFonts;
+		case EditionsEnv.Prod:
+			return prodFonts;
+		case EditionsEnv.Dev:
+		case EditionsEnv.Browser:
+		default:
+			return devFonts;
+	}
+};
+
+const getStyles = (fonts: string): string => `
+	${fonts}
 
 	html {
 		margin: 0;
@@ -76,7 +96,8 @@ function renderHead(
 	inlineStyles: boolean,
 	enviroment: EditionsEnv,
 ): string {
-	const generalStyles = getStyles(enviroment);
+	const fonts = getFonts(enviroment);
+	const generalStyles = getStyles(fonts);
 	const isEditions = true;
 	const cspString = csp(
 		item,
@@ -133,9 +154,9 @@ function render(
 ): Page {
 	const path = res.req?.path;
 	const isPreview = res.req?.query.isPreview === 'true';
-
+	console.log(isPreview);
 	const environment = getEditionsEnv(isPreview, path);
-
+	console.log(environment);
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
 	const newItem = {
@@ -158,11 +179,24 @@ function render(
 
 	const devScript = map(getAssetLocation)(some('editions.js'));
 	const prodScript = some('assets/js/editions.js');
+	const previewScript = some(
+		'https://editions.guardianapis.com/assets/js/editions.js',
+	);
 
-	const clientScript =
-		environment === EditionsEnv.Dev || environment === EditionsEnv.Browser
-			? devScript
-			: prodScript;
+	const getClientScript = (env: EditionsEnv): Option<string> => {
+		switch (env) {
+			case EditionsEnv.Preview:
+				return previewScript;
+			case EditionsEnv.Prod:
+				return prodScript;
+			case EditionsEnv.Dev:
+			case EditionsEnv.Browser:
+			default:
+				return devScript;
+		}
+	};
+
+	const clientScript = getClientScript(environment);
 
 	const scripts = (
 		<Scripts
