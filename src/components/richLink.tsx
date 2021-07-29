@@ -5,11 +5,11 @@ import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
-import { Design, Pillar } from '@guardian/types';
+import { Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
-import { darkModeCss, darkModeStyles } from 'styles';
+import { backgroundColor, darkModeCss, darkModeStyles } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 export const richLinkWidth = '8.75rem';
@@ -43,9 +43,6 @@ const richLinkPillarStyles = (kicker: string, inverted: string): string => {
 };
 
 const richLinkStyles = (format: Format): SerializedStyles => {
-	const backgroundColor =
-		format.design === Design.Comment ? neutral[86] : neutral[97];
-
 	const { kicker: newsKicker, inverted: newsInverted } = getThemeStyles(
 		Pillar.News,
 	);
@@ -64,7 +61,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 	} = getThemeStyles(Pillar.Lifestyle);
 
 	return css`
-		background: ${backgroundColor};
+		background: ${backgroundColor(format)};
 		padding: ${remSpace[3]} ${remSpace[3]} ${remSpace[2]};
 		border-top: solid 1px ${neutral[60]};
 		transition: all 0.2s ease;

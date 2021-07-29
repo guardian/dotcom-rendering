@@ -96,6 +96,11 @@ interface Letter extends Fields {
 	body: Body;
 }
 
+interface Editorial extends Fields {
+	design: Design.Editorial;
+	body: Body;
+}
+
 interface Interactive extends Fields {
 	design: Design.Interactive;
 	body: Body;
@@ -111,7 +116,11 @@ interface Obituary extends Fields {
 interface Standard extends Fields {
 	design: Exclude<
 		Design,
-		Design.LiveBlog | Design.Review | Design.Comment | Design.Letter
+		| Design.LiveBlog
+		| Design.Review
+		| Design.Comment
+		| Design.Letter
+		| Design.Editorial
 	>;
 	body: Body;
 }
@@ -124,7 +133,8 @@ type Item =
 	| Interactive
 	| MatchReport
 	| Letter
-	| Obituary;
+	| Obituary
+	| Editorial;
 
 // ----- Convenience Types ----- //
 
@@ -340,6 +350,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 			design: Design.Obituary,
 			...itemFieldsWithBody(context, request),
 		};
+	} else if (isGuardianView(tags)) {
+		return {
+			design: Design.Editorial,
+			...itemFieldsWithBody(context, request),
+		};
 	} else if (isComment(tags)) {
 		const item = itemFieldsWithBody(context, request);
 		return {
@@ -362,11 +377,6 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isRecipe(tags)) {
 		return {
 			design: Design.Recipe,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isGuardianView(tags)) {
-		return {
-			design: Design.Editorial,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isQuiz(tags)) {
@@ -405,6 +415,7 @@ export {
 	MatchReport,
 	ResizedRelatedContent,
 	Letter,
+	Editorial,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,

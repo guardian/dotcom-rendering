@@ -60,7 +60,11 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 		return <Interactive>{renderAllWithoutStyles(item, body)}</Interactive>;
 	}
 
-	if (item.design === Design.Comment || item.design === Design.Letter) {
+	if (
+		item.design === Design.Comment ||
+		item.design === Design.Letter ||
+		item.design === Design.Editorial
+	) {
 		return <Comment item={item}>{render(item, body)}</Comment>;
 	}
 

@@ -104,10 +104,14 @@ export const onwardStyles: SerializedStyles = css`
 
 const adHeight = '258px';
 
-export const adStyles = (format: Format): SerializedStyles => {
-	const backgroundColour =
-		format.design === Design.Comment ? neutral[86] : neutral[97];
+export const backgroundColor = (format: Format): string =>
+	format.design === Design.Comment ||
+	format.design === Design.Letter ||
+	format.design === Design.Editorial
+		? neutral[86]
+		: neutral[97];
 
+export const adStyles = (format: Format): SerializedStyles => {
 	return css`
 		.ad-placeholder {
 			margin: ${remSpace[4]} 0;
@@ -117,7 +121,7 @@ export const adStyles = (format: Format): SerializedStyles => {
 			}
 
 			color: ${neutral[20]};
-			background: ${backgroundColour};
+			background: ${backgroundColor(format)};
 
 			${darkModeCss`
             background-color: ${neutral[20]};

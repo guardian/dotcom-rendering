@@ -14,6 +14,8 @@ import { darkModeCss } from 'styles';
 
 const backgroundColour = (format: Format): string => {
 	switch (format.design) {
+		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return neutral[86];
 		case Design.LiveBlog:

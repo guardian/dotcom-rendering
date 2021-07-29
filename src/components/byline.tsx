@@ -87,10 +87,10 @@ const getStyles = (format: Format): SerializedStyles => {
 	}
 
 	switch (format.design) {
+		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
 			return commentStyles(kicker);
-
 		default:
 			return styles(kicker);
 	}
@@ -102,6 +102,8 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 		return labsAnchorStyles;
 	}
 	switch (format.design) {
+		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 			return commentAnchorStyles(kicker, inverted);
 
