@@ -71,7 +71,7 @@ import RichLink from 'components/richLink';
 import { isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
-import { darkModeCss } from 'styles';
+import { backgroundColor, darkModeCss } from 'styles';
 import {
 	getThemeStyles,
 	themeFromString,
@@ -536,9 +536,6 @@ const mediaAtomRenderer = (
 	isEditions: boolean,
 ): ReactNode => {
 	const { posterUrl, videoId, duration, caption } = element;
-
-	const backgroundColor = (format: Format): string =>
-		format.design === Design.Comment ? neutral[86] : neutral[97];
 
 	const styles = css`
 		width: 100%;
