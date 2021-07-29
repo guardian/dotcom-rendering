@@ -130,14 +130,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
 		},
 		{
-			chunkName: 'elements-EmbedBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.EmbedBlockElement',
-		},
-		{
-			chunkName: 'elements-InstagramBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
-		},
-		{
 			chunkName: 'elements-MapEmbedBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
 		},

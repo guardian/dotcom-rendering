@@ -60,6 +60,9 @@ import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettin
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
+import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
+import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
@@ -489,66 +492,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		},
 		{
 			resolveComponent: (module) => module.DocumentBlockComponent,
-		},
-	);
-
-	const EmbedBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/EmbedBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.EmbedBlockComponent,
-		},
-	);
-
-	const UnsafeEmbedBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/UnsafeEmbedBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.UnsafeEmbedBlockComponent,
-		},
-	);
-
-	const InstagramBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.InstagramBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/InstagramBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.InstagramBlockComponent,
 		},
 	);
 
