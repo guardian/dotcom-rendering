@@ -22,7 +22,11 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
-import { pageFonts as devFonts, editionsPageFonts as prodFonts } from 'styles';
+import {
+	pageFonts as devFonts,
+	previewPageFonts,
+	editionsPageFonts as prodFonts,
+} from 'styles';
 
 // ----- Types ----- //
 
@@ -150,9 +154,7 @@ function render(
 ): Page {
 	const path = res.req?.path;
 	const isPreview = res.req?.query.isPreview === 'true';
-	console.log(isPreview);
 	const environment = getEditionsEnv(isPreview, path);
-	console.log(environment);
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
 	const newItem = {
