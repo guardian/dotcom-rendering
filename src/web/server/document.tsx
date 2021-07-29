@@ -146,6 +146,10 @@ export const document = ({ data }: Props): string => {
 			chunkName: 'elements-VineBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
 		},
+		{
+			chunkName: 'elements-InstagramBlockComponent',
+			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
+		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
