@@ -62,7 +62,8 @@ const Metadata: FC<Props> = (props: Props) => {
 	if (
 		display === Display.Immersive ||
 		design === Design.Comment ||
-		design === Design.Letter
+		design === Design.Letter || 
+		design === Design.Editorial
 	) {
 		return <ShortMetadata {...props} />;
 	}
