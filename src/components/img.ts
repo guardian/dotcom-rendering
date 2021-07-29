@@ -24,6 +24,8 @@ const styles = (role: Role, format: Format): SerializedStyles => {
 		switch (format.design) {
 			case Design.Media:
 				return neutral[20];
+			case Design.Editorial:
+			case Design.Letter:
 			case Design.Comment:
 				return neutral[86];
 			default:

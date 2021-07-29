@@ -42,6 +42,8 @@ const scriptName = ({ design, display }: Format): Option<string> => {
 			return some('liveblog.js');
 		case Design.Interactive:
 			return display !== Display.Immersive ? some('article.js') : none;
+		case Design.Editorial:
+		case Design.Letter:
 		case Design.Comment:
 		case Design.Feature:
 		case Design.Analysis:
