@@ -5,7 +5,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
-import { Design, Pillar } from '@guardian/types';
+import { Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
