@@ -22,11 +22,7 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
-import {
-	pageFonts as devFonts,
-	previewPageFonts,
-	editionsPageFonts as prodFonts,
-} from 'styles';
+import { pageFonts as devFonts, editionsPageFonts as prodFonts } from 'styles';
 
 // ----- Types ----- //
 
@@ -62,12 +58,8 @@ const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
 
 const getFonts = (env: EditionsEnv): string => {
 	switch (env) {
-		case EditionsEnv.Preview:
-			return devFonts;
 		case EditionsEnv.Prod:
 			return prodFonts;
-		case EditionsEnv.Dev:
-		case EditionsEnv.Browser:
 		default:
 			return devFonts;
 	}
@@ -177,16 +169,12 @@ function render(
 
 	const devScript = map(getAssetLocation)(some('editions.js'));
 	const prodScript = some('assets/js/editions.js');
-	const previewScript = map(getAssetLocation)(some('editions.js'));
+	// const previewScript = map(getAssetLocation)(some('editions.js'));
 
 	const getClientScript = (env: EditionsEnv): Option<string> => {
 		switch (env) {
-			case EditionsEnv.Preview:
-				return previewScript;
 			case EditionsEnv.Prod:
 				return prodScript;
-			case EditionsEnv.Dev:
-			case EditionsEnv.Browser:
 			default:
 				return devScript;
 		}
