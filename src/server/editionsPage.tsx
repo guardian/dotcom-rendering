@@ -180,7 +180,7 @@ function render(
 	const devScript = map(getAssetLocation)(some('editions.js'));
 	const prodScript = some('assets/js/editions.js');
 	const previewScript = some(
-		'https://editions.guardianapis.com/assets/js/editions.js',
+		'https://editions.code.dev-guardianapis.com/assets/js/editions.js',
 	);
 
 	const getClientScript = (env: EditionsEnv): Option<string> => {
