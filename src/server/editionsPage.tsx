@@ -169,12 +169,14 @@ function render(
 
 	const devScript = map(getAssetLocation)(some('editions.js'));
 	const prodScript = some('assets/js/editions.js');
-	// const previewScript = map(getAssetLocation)(some('editions.js'));
+	const previewScript = some('/assets/js/editions.js');
 
 	const getClientScript = (env: EditionsEnv): Option<string> => {
 		switch (env) {
 			case EditionsEnv.Prod:
 				return prodScript;
+			case EditionsEnv.Preview:
+				return previewScript;
 			default:
 				return devScript;
 		}
