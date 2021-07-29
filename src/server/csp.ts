@@ -147,7 +147,7 @@ function buildCspEditions(
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
 	};
-	font-src 'self' https://interactive.guim.co.uk;
+	font-src 'self' https://interactive.guim.co.uk https://editions.guardianapis.com;
 	connect-src 'self' https://discussion.theguardian.com/discussion-api/ https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
 	media-src 'self' https://audio.guim.co.uk/
 	`;
