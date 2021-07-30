@@ -46,7 +46,7 @@ const docParser = JSDOM.fragment.bind(null);
 
 const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
 	if (isPreview) {
-		return EditionsEnv.Preview
+		return EditionsEnv.Preview;
 	} else if (process.env.NODE_ENV !== 'production') {
 		return EditionsEnv.Dev;
 	} else if (path === '/editions-article') {
@@ -56,8 +56,17 @@ const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
 	}
 };
 
-const getStyles = (env: EditionsEnv): string => `
-	${env === EditionsEnv.Dev || env === EditionsEnv.Browser || env === EditionsEnv.Preview ? devFonts : prodFonts}
+const getFonts = (env: EditionsEnv): string => {
+	switch (env) {
+		case EditionsEnv.Prod:
+			return prodFonts;
+		default:
+			return devFonts;
+	}
+};
+
+const getStyles = (fonts: string): string => `
+	${fonts}
 
 	html {
 		margin: 0;
@@ -79,7 +88,8 @@ function renderHead(
 	inlineStyles: boolean,
 	enviroment: EditionsEnv,
 ): string {
-	const generalStyles = getStyles(enviroment);
+	const fonts = getFonts(enviroment);
+	const generalStyles = getStyles(fonts);
 	const isEditions = true;
 	const cspString = csp(
 		item,
@@ -136,10 +146,7 @@ function render(
 ): Page {
 	const path = res.req?.path;
 	const isPreview = res.req?.query.isPreview === 'true';
-	console.log('Preview: ' + isPreview);
-	console.log('Query: ' + JSON.stringify(res.req?.query));
 	const environment = getEditionsEnv(isPreview, path);
-	console.log('Env:' + environment);
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
 	const newItem = {
@@ -161,15 +168,21 @@ function render(
 	);
 
 	const devScript = map(getAssetLocation)(some('editions.js'));
-	const prodScript = isPreview ? some('/assets/js/editions.js') : some('assets/js/editions.js');
+	const prodScript = some('assets/js/editions.js');
+	const previewScript = some('/assets/js/editions.js');
 
-	const tt = environment === EditionsEnv.Dev || environment === EditionsEnv.Browser
-	console.log('Is Dev: ' + tt)
-	console.log(JSON.stringify(devScript))
-	const clientScript =
-		environment === EditionsEnv.Dev || environment === EditionsEnv.Browser
-			? devScript
-			: prodScript;
+	const getClientScript = (env: EditionsEnv): Option<string> => {
+		switch (env) {
+			case EditionsEnv.Prod:
+				return prodScript;
+			case EditionsEnv.Preview:
+				return previewScript;
+			default:
+				return devScript;
+		}
+	};
+
+	const clientScript = getClientScript(environment);
 
 	const scripts = (
 		<Scripts
