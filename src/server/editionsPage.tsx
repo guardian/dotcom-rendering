@@ -36,6 +36,7 @@ enum EditionsEnv {
 	Prod,
 	Preview,
 	Browser,
+	Preview,
 }
 
 // ----- Setup ----- //
