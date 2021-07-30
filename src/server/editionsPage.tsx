@@ -36,7 +36,6 @@ enum EditionsEnv {
 	Prod,
 	Preview,
 	Browser,
-	Preview,
 }
 
 // ----- Setup ----- //
@@ -52,7 +51,7 @@ const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
 		return EditionsEnv.Dev;
 	} else if (path === '/editions-article') {
 		return EditionsEnv.Prod;
-	}  else {
+	} else {
 		return EditionsEnv.Browser;
 	}
 };
