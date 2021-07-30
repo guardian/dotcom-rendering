@@ -34,6 +34,7 @@ interface Page {
 enum EditionsEnv {
 	Dev,
 	Prod,
+	Preview,
 	Browser,
 }
 
@@ -44,18 +45,19 @@ const docParser = JSDOM.fragment.bind(null);
 // ----- Functions ----- //
 
 const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
-	// if (process.env.NODE_ENV !== 'production' || isPreview) {
-	// 	return EditionsEnv.Dev;
-	// } else if (path === '/editions-article') {
-	// 	return EditionsEnv.Prod;
-	// } else {
-	// 	return EditionsEnv.Browser;
-	// }
-	return EditionsEnv.Dev;
+	if (isPreview) {
+		return EditionsEnv.Preview
+	} else if (process.env.NODE_ENV !== 'production') {
+		return EditionsEnv.Dev;
+	} else if (path === '/editions-article') {
+		return EditionsEnv.Prod;
+	}  else {
+		return EditionsEnv.Browser;
+	}
 };
 
 const getStyles = (env: EditionsEnv): string => `
-	${env === EditionsEnv.Dev || env === EditionsEnv.Browser ? devFonts : prodFonts}
+	${env === EditionsEnv.Dev || env === EditionsEnv.Browser || env === EditionsEnv.Preview ? devFonts : prodFonts}
 
 	html {
 		margin: 0;
@@ -134,9 +136,10 @@ function render(
 ): Page {
 	const path = res.req?.path;
 	const isPreview = res.req?.query.isPreview === 'true';
-	console.log(isPreview);
+	console.log('Preview: ' + isPreview);
+	console.log('Query: ' + JSON.stringify(res.req?.query));
 	const environment = getEditionsEnv(isPreview, path);
-	console.log(environment);
+	console.log('Env:' + environment);
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
 	const newItem = {
@@ -158,8 +161,11 @@ function render(
 	);
 
 	const devScript = map(getAssetLocation)(some('editions.js'));
-	const prodScript = some('assets/js/editions.js');
+	const prodScript = isPreview ? some('/assets/js/editions.js') : some('assets/js/editions.js');
 
+	const tt = environment === EditionsEnv.Dev || environment === EditionsEnv.Browser
+	console.log('Is Dev: ' + tt)
+	console.log(JSON.stringify(devScript))
 	const clientScript =
 		environment === EditionsEnv.Dev || environment === EditionsEnv.Browser
 			? devScript
