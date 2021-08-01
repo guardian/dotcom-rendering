@@ -7,6 +7,8 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
+import { WhenAdBlockInUse } from '@frontend/web/components/WhenAdBlockInUse';
+import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { Discussion } from '@frontend/web/components/Discussion';
@@ -831,6 +833,25 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
 				</Portal>
 			)}
+			{/*
+				Rules for when to show <ContributionSlot />:
+				1. shouldHideReaderRevenue is false ("Prevent membership/contribution appeals" is not checked in Composer)
+				2. The article is not paid content
+				3. The reader is not signed in
+				4. An ad blocker has been detected
+
+				Note. We specifically say isSignedIn === false so that we prevent render until the cookie has been
+				checked to avoid flashing this content
+			*/}
+			{!CAPI.shouldHideReaderRevenue &&
+				!CAPI.pageType.isPaidContent &&
+				isSignedIn === false && (
+					<WhenAdBlockInUse>
+						<Portal rootId="top-right-ad-slot">
+							<ContributionSlot />
+						</Portal>
+					</WhenAdBlockInUse>
+				)}
 			{richLinks.map((richLink, index) => (
 				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
@@ -1129,7 +1150,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper />
+						<MostViewedRightWrapper isSignedIn={isSignedIn} />
 					</Suspense>
 				</Lazy>
 			</Portal>
