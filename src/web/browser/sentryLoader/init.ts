@@ -1,7 +1,7 @@
 import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
 
-import { isAdBlockInUse } from './detectAdBlocker';
+import { isAdBlockInUse } from '@root/src/web/lib/detectAdBlocker';
 
 const init = async (): Promise<void> => {
 	// Sentry lets you configure sampleRate to reduce the volume of events sent
