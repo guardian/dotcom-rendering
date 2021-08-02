@@ -1314,7 +1314,7 @@ export const PrintShop: CAPIType = {
 	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [],
-	webPublicationDate: '2020-12-17T09:07:18.000Z',
+	webPublicationDateDeprecated: '2020-12-17T09:07:18.000Z',
 	blocks: [
 		{
 			id: '5dc05a8c8f0809525b6f5f10',

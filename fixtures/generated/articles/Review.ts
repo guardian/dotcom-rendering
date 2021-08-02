@@ -1813,7 +1813,7 @@ export const Review: CAPIType = {
 			elementId: '42f731cb-5341-49f3-ad17-15eee1e74e0e',
 		},
 	],
-	webPublicationDate: '2020-01-17T12:00:05.000Z',
+	webPublicationDateDeprecated: '2020-01-17T12:00:05.000Z',
 	blocks: [
 		{
 			id: '5e1df3f28f08d66fcfaa3e49',

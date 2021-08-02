@@ -1796,7 +1796,7 @@ export const Analysis: CAPIType = {
 			elementId: '2e19fdc4-4c9a-4826-bc94-3cceb9f583cb',
 		},
 	],
-	webPublicationDate: '2020-02-10T12:31:25.000Z',
+	webPublicationDateDeprecated: '2020-02-10T12:31:25.000Z',
 	blocks: [
 		{
 			id: '5e413c398f0811db2faf4cdd',
