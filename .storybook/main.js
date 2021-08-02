@@ -6,7 +6,16 @@ module.exports = {
 		builder: 'webpack5',
 	},
 	stories: ['../src/**/*.stories.@(tsx)'],
-	addons: ['@storybook/addon-essentials'],
+	addons: [
+		'@storybook/addon-essentials',
+		'storybook-addon-turbo-build',
+		{
+			name: 'storybook-addon-turbo-build',
+			options: {
+				optimizationLevel: 1,
+			},
+		},
+	],
 	webpackFinal: async (config) => {
 		const rules = config.module.rules;
 		const { extensions } = config.resolve;
