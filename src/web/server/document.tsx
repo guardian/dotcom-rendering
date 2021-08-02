@@ -328,10 +328,10 @@ export const document = ({ data }: Props): string => {
 			: CAPI.config.keywords;
 
 	const skipToMainContent = renderToString(
-		<SkipTo id="#maincontent" label="Skip to main content" />,
+		<SkipTo id="maincontent" label="Skip to main content" />,
 	);
 	const skipToNavigation = renderToString(
-		<SkipTo id="#navigation" label="Skip to navigation" />,
+		<SkipTo id="navigation" label="Skip to navigation" />,
 	);
 
 	return htmlTemplate({
