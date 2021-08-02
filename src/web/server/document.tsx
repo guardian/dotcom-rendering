@@ -21,7 +21,7 @@ import { Pillar } from '@guardian/types';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 import { decideTheme } from '../lib/decideTheme';
-import { SkipTo } from '../components/SkipTo';
+import { Identifier, SkipTo } from '../components/SkipTo';
 
 interface RenderToStringResult {
 	html: string;
@@ -328,10 +328,10 @@ export const document = ({ data }: Props): string => {
 			: CAPI.config.keywords;
 
 	const skipToMainContent = renderToString(
-		<SkipTo id="#maincontent" label="Skip to main content" />,
+		<SkipTo id={Identifier.MainContent} label="Skip to main content" />,
 	);
 	const skipToNavigation = renderToString(
-		<SkipTo id="#navigation" label="Skip to navigation" />,
+		<SkipTo id={Identifier.Navigation} label="Skip to navigation" />,
 	);
 
 	return htmlTemplate({

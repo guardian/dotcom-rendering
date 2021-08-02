@@ -7,6 +7,7 @@ import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
 import { Design, Display } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { space } from '@guardian/src-foundations';
+import { Identifier } from './SkipTo';
 
 type Props = {
 	format: Format;
@@ -93,7 +94,7 @@ export const ArticleBody = ({
 		<div
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 			tabIndex={0}
-			id="maincontent"
+			id={Identifier.MainContent}
 			css={[
 				isInteractive ? null : bodyPadding,
 				globalH2Styles(format.display),

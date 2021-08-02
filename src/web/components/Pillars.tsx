@@ -6,6 +6,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Display, Design } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
+import { Identifier } from './SkipTo';
 
 // CSS Vars
 
@@ -263,7 +264,11 @@ export const Pillars: React.FC<{
 							isSelected && forceUnderline,
 							showDivider && pillarDivider,
 						]}
-						id={isTopNav && i === 0 ? 'navigation' : undefined}
+						id={
+							isTopNav && i === 0
+								? Identifier.Navigation
+								: undefined
+						}
 						aria-label={i === 0 ? 'Navigation' : undefined}
 						href={p.url}
 						data-link-name={`${dataLinkName} : primary : ${p.title}`}

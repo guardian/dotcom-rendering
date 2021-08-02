@@ -2,15 +2,20 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, border } from '@guardian/src-foundations/palette';
 
+export enum Identifier {
+	Navigation = 'navigation',
+	MainContent = 'maincontent',
+}
+
 type Props = {
-	id: string;
+	id: Identifier;
 	label: string;
 };
 
 export const SkipTo = ({ id, label }: Props) => {
 	return (
 		<a
-			href={id}
+			href={`#${id}`}
 			css={css`
 				${textSans.medium()}
 				height: 40px;
