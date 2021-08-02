@@ -13,7 +13,10 @@ import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
 import { SeriesLink } from '@root/src/amp/components/topMeta/SeriesLink';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { getAgeWarning } from '@root/src/lib/age-warning';
-import { Branding } from '@root/src/amp/components/topMeta/Branding';
+import {
+	Branding,
+	BrandingRegionContainer,
+} from '@root/src/amp/components/topMeta/Branding';
 
 const headerStyle = css`
 	${headline.small()};
@@ -119,10 +122,11 @@ export const TopMetaOpinion: React.FC<{
 
 			<h1 css={headerStyle}>{articleData.headline}</h1>
 
-			<Branding
+			<BrandingRegionContainer
 				commercialProperties={articleData.commercialProperties}
-				pillar={pillar}
-			/>
+			>
+				{(branding) => <Branding branding={branding} pillar={pillar} />}
+			</BrandingRegionContainer>
 
 			<BylineMeta articleData={articleData} pillar={pillar} />
 

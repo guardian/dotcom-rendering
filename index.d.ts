@@ -823,15 +823,7 @@ interface DocumentBlockLoadable extends ComponentNameChunkMap {
     chunkName: 'elements-DocumentBlockComponent';
     addWhen: DocumentBlockElement['_type'];
 }
-interface EmbedBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-EmbedBlockComponent';
-    addWhen: EmbedBlockElement['_type'];
-}
 
-interface InstagramBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-InstagramBlockComponent';
-    addWhen: InstagramBlockElement['_type'];
-}
 interface MapBlockLoadable extends ComponentNameChunkMap {
     chunkName: 'elements-MapEmbedBlockComponent';
     addWhen: MapBlockElement['_type'];
@@ -851,6 +843,11 @@ interface VineBlockLoadable extends ComponentNameChunkMap {
     addWhen: VineBlockElement['_type'];
 }
 
+interface InstagramBlockLoadable extends ComponentNameChunkMap {
+    chunkName: 'elements-InstagramBlockComponent';
+    addWhen: InstagramBlockElement['_type'];
+}
+
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
 	EditionDropdownLoadable,
@@ -860,12 +857,11 @@ type LoadableComponents = [
 	InteractiveContentsBlockLoadable,
 	CalloutBlockLoadable,
 	DocumentBlockLoadable,
-	EmbedBlockLoadable,
-	InstagramBlockLoadable,
 	MapBlockLoadable,
 	SpotifyBlockLoadable,
 	FacebookVideoBlockLoadable,
 	VineBlockLoadable,
+	InstagramBlockLoadable,
 ]
 
 interface CarouselImagesMap {

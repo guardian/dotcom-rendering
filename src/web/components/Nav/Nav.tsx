@@ -166,8 +166,6 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 					rowStyles,
 					format.display === Display.Immersive && minHeight,
 				]}
-				role="navigation"
-				aria-label="Guardian sections"
 				data-component="nav2"
 			>
 				{format.display === Display.Immersive && (

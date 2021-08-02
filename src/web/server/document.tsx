@@ -21,7 +21,7 @@ import { Pillar } from '@guardian/types';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 import { decideTheme } from '../lib/decideTheme';
-import { AccessibleSkipButton } from '../components/AccessibleSkipButton';
+import { SkipTo } from '../components/SkipTo';
 
 interface RenderToStringResult {
 	html: string;
@@ -130,14 +130,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
 		},
 		{
-			chunkName: 'elements-EmbedBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.EmbedBlockElement',
-		},
-		{
-			chunkName: 'elements-InstagramBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
-		},
-		{
 			chunkName: 'elements-MapEmbedBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
 		},
@@ -153,6 +145,10 @@ export const document = ({ data }: Props): string => {
 		{
 			chunkName: 'elements-VineBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
+		},
+		{
+			chunkName: 'elements-InstagramBlockComponent',
+			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -331,7 +327,12 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	const accessibilityLink = renderToString(<AccessibleSkipButton />);
+	const skipToMainContent = renderToString(
+		<SkipTo id="#maincontent" label="Skip to main content" />,
+	);
+	const skipToNavigation = renderToString(
+		<SkipTo id="#navigation" label="Skip to navigation" />,
+	);
 
 	return htmlTemplate({
 		linkedData,
@@ -349,6 +350,7 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
-		accessibilityLink,
+		skipToMainContent,
+		skipToNavigation,
 	});
 };

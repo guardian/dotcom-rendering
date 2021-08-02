@@ -73,7 +73,6 @@ const buildReaderRevenueEpicConfig = ({
 
 const buildBrazeEpicConfig = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
-	contributionsServiceUrl: string,
 	countryCode: string,
 ): CandidateConfig<any> => {
 	return {
@@ -81,15 +80,10 @@ const buildBrazeEpicConfig = (
 			id: 'braze-epic',
 			canShow: () => canShowBrazeEpic(brazeMessages),
 			show: (meta: any) => () => (
-				<MaybeBrazeEpic
-					meta={meta}
-					contributionsServiceUrl={contributionsServiceUrl}
-					countryCode={countryCode}
-				/>
+				<MaybeBrazeEpic meta={meta} countryCode={countryCode} />
 			),
 		},
 		timeoutMillis: 5000,
-		reportTiming: true,
 	};
 };
 
@@ -124,7 +118,6 @@ export const SlotBodyEnd = ({
 		});
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,
-			contributionsServiceUrl,
 			countryCode as string,
 		);
 		const epicConfig: SlotConfig = {
