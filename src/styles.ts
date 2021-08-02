@@ -11,6 +11,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { Design, map, none, some, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
+import { Stage } from 'server/appIdentity';
 
 export const sidePadding = css`
 	padding-left: ${remSpace[3]};
@@ -463,129 +464,130 @@ export const editionsPageFonts = `
 	)}
 `;
 
-const rootUrl = `https://editions-published-code.s3.eu-west-1.amazonaws.com`;
+const stage = Stage === 'CODE' ? 'code' : 'prod';
+const s3Path = `https://editions-published-${stage}.s3.eu-west-1.amazonaws.com`;
 
 export const editionsPreviewFonts = `
     ${fontFace(
 		'Guardian Text Egyptian Web',
 		some(400),
 		none,
-		`${rootUrl}/assets/fonts/GuardianTextEgyptian-Reg.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextEgyptian-Reg.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Egyptian Web',
 		some(400),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GuardianTextEgyptian-RegItalic.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextEgyptian-RegItalic.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Egyptian Web',
 		some(700),
 		none,
-		`${rootUrl}/assets/fonts/GuardianTextEgyptian-Bold.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextEgyptian-Bold.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Egyptian Web',
 		some(700),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Egyptian Web',
 		some('bold'),
 		none,
-		`${rootUrl}/assets/fonts/GuardianTextEgyptian-Bold.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextEgyptian-Bold.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Egyptian Web',
 		some('bold'),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextEgyptian-BoldItalic.ttf`,
 	)}
 
     ${fontFace(
 		'Guardian Text Sans Web',
 		some(400),
 		none,
-		`${rootUrl}/assets/fonts/GuardianTextSans-Regular.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextSans-Regular.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Sans Web',
 		some(400),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GuardianTextSans-RegularItalic.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextSans-RegularItalic.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Sans Web',
 		some(700),
 		none,
-		`${rootUrl}/assets/fonts/GuardianTextSans-Bold.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextSans-Bold.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Sans Web',
 		some(700),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GuardianTextSans-BoldItalic.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextSans-BoldItalic.ttf`,
 	)}
 
     ${fontFace(
 		'GH Guardian Headline',
 		some(300),
 		none,
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-Light.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-Light.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(300),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-LightItalic.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-LightItalic.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(400),
 		none,
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-Regular.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-Regular.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(400),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-RegularItalic.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-RegularItalic.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(500),
 		none,
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-Medium.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-Medium.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(500),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-MediumItalic.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-MediumItalic.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(600),
 		none,
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-Semibold.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-Semibold.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(600),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-SemiboldItalic.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-SemiboldItalic.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(700),
 		none,
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-Bold.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-Bold.ttf`,
 	)}
     ${fontFace(
 		'GH Guardian Headline',
 		some(700),
 		some('italic'),
-		`${rootUrl}/assets/fonts/GHGuardianHeadline-BoldItalic.ttf`,
+		`${s3Path}/assets/fonts/GHGuardianHeadline-BoldItalic.ttf`,
 	)}
 `;

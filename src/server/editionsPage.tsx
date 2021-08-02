@@ -27,6 +27,7 @@ import {
 	editionsPreviewFonts as previewFonts,
 	editionsPageFonts as prodFonts,
 } from 'styles';
+import { Stage } from './appIdentity';
 
 // ----- Types ----- //
 
@@ -176,7 +177,8 @@ function render(
 	const devScript = map(getAssetLocation)(some('editions.js'));
 	const prodScript = some('assets/js/editions.js');
 
-	const s3Path = `https://editions-published-code.s3.eu-west-1.amazonaws.com`;
+	const stage = Stage === 'CODE' ? 'code' : 'prod';
+	const s3Path = `https://editions-published-${stage}.s3.eu-west-1.amazonaws.com`;
 	const previewScript = some(`${s3Path}/assets/js/editions.js`);
 
 	const getClientScript = (env: EditionsEnv): Option<string> => {
