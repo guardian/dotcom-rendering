@@ -2,10 +2,15 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
 import { neutral, border } from '@guardian/src-foundations/palette';
 
-export const AccessibleSkipButton = () => {
+type Props = {
+	id: string;
+	label: string;
+};
+
+export const SkipTo = ({ id, label }: Props) => {
 	return (
 		<a
-			href="#maincontent"
+			href={id}
 			css={css`
 				${textSans.medium()}
 				height: 40px;
@@ -31,7 +36,7 @@ export const AccessibleSkipButton = () => {
 				}
 			`}
 		>
-			Skip to main content
+			{label}
 		</a>
 	);
 };
