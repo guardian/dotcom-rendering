@@ -3,26 +3,41 @@ import React from 'react';
 import { Caption } from '@root/src/amp/components/Caption';
 import { constructQuery } from '@root/src/lib/querystring';
 
-interface EmbedConfig {
-	adsConfig: {
-		adTagParameters: {
-			iu: string;
-			cust_params: string;
-		};
-	};
-}
+type EmbedConfig = {
+	adsConfig:
+		| {
+				adTagParameters: {
+					iu: string;
+					cust_params: string;
+				};
+				disableAds?: false;
+		  }
+		| {
+				disableAds: true;
+		  };
+};
 
 const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
-	return {
-		adsConfig: {
-			adTagParameters: {
-				iu: `${adTargeting.adUnit || ''}`,
-				cust_params: encodeURIComponent(
-					constructQuery(adTargeting.customParams),
-				),
-			},
-		},
-	};
+	switch (adTargeting.disableAds) {
+		case true:
+			return {
+				adsConfig: {
+					disableAds: true,
+				},
+			};
+		case false:
+		case undefined:
+			return {
+				adsConfig: {
+					adTagParameters: {
+						iu: `${adTargeting.adUnit || ''}`,
+						cust_params: encodeURIComponent(
+							constructQuery(adTargeting.customParams || {}),
+						),
+					},
+				},
+			};
+	}
 };
 
 export const YoutubeBlockComponent: React.FC<{

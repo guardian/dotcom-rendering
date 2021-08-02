@@ -255,7 +255,7 @@ export const ImmersiveLayout = ({
 		config: { isPaidContent, host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
 
 	const showBodyEndSlot =
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||

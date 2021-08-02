@@ -96,7 +96,10 @@ export const Body: React.FC<{
 	config: ConfigType;
 }> = ({ data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-	const adTargeting = buildAdTargeting(config);
+	const adTargeting = buildAdTargeting({
+		isAdFreeUser: data.isAdFreeUser,
+		config,
+	});
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
