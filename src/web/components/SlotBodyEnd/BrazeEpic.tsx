@@ -116,6 +116,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 									id: newsletterId,
 									subscribed: true,
 								}),
+								credentials: 'include',
 							});
 							console.log(
 								'Subscribed to newsletter with id ',
