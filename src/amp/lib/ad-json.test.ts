@@ -59,6 +59,7 @@ const paramSet: AdTargetParam[] = [
 ];
 
 describe('ampadslots', () => {
+	// @ts-ignore
 	it('should set platform to amp', () => {
 		const res = adJson(paramSet);
 		const p = res.targeting.find((param) => param.name === 'p');
@@ -69,6 +70,7 @@ describe('ampadslots', () => {
 		expect(p.value).toBe('amp');
 	});
 
+	// @ts-ignore
 	it('should set rendering platform to dotcom-rendering', () => {
 		const res = adJson(paramSet);
 		const renderingPlatform = res.targeting.find(
@@ -80,6 +82,7 @@ describe('ampadslots', () => {
 		expect(renderingPlatform.value).toBe('dotcom-rendering');
 	});
 
+	// @ts-ignore
 	it('should set values to a comma-separated string', () => {
 		const res = adJson(paramSet);
 		const p = res.targeting.find((param) => param.name === 'su');
