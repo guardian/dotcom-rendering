@@ -1,5 +1,8 @@
 name: Run Lighthouse CI
-on: [push]
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 jobs:
     lhci:
         name: Lighthouse
@@ -10,7 +13,9 @@ jobs:
             - name: Install Node
               uses: guardian/actions-setup-node@main
             - run: make build
+              working-directory: dotcom-rendering
             - name: Install and run Lighthouse CI
+              working-directory: dotcom-rendering
               env:
                   LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
               run: |

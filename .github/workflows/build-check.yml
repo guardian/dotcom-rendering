@@ -1,5 +1,8 @@
 name: Build Check
-on: push
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
     build_check:
@@ -14,12 +17,17 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: dotcom-rendering
 
             - name: Install
               run: yarn
+              working-directory: dotcom-rendering
 
             - name: Generate production build
               run: make build
+              working-directory: dotcom-rendering
 
             - name: Validate Build
               run: make buildCheck
+              working-directory: dotcom-rendering
