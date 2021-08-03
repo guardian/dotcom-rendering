@@ -111,6 +111,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 						brazeMessageProps={meta.dataFromBraze}
 						subscribeToNewsletter={async (newsletterId) => {
 							await fetch(`${idApiUrl}/users/me/newsletters`, {
+								method: 'PATCH',
 								body: JSON.stringify({
 									id: newsletterId,
 									subscribed: true,
