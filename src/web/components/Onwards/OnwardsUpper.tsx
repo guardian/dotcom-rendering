@@ -6,6 +6,7 @@ import { Pillar } from '@guardian/types';
 
 import { OnwardsData } from './OnwardsData';
 import { Carousel } from './Carousel/Carousel';
+import { OnwardsLayout } from './OnwardsLayout';
 
 type PillarForContainer =
 	| 'headlines'
@@ -191,10 +192,6 @@ export const OnwardsUpper = ({
 	pillar,
 	edition,
 }: Props) => {
-	if (isPaidContent) {
-		return null;
-	}
-
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
 	// Related content can be a collection of articles based on
@@ -274,21 +271,23 @@ export const OnwardsUpper = ({
 						url={url}
 						limit={8}
 						ophanComponentName={ophanComponentName}
-						Container={Carousel}
+						Container={isPaidContent ? OnwardsLayout : Carousel}
 						format={format}
 					/>
 				</ElementContainer>
 			)}
-			<ElementContainer showTopBorder={true}>
-				<OnwardsData
-					url={curatedDataUrl}
-					limit={8}
-					ophanComponentName="curated-content"
-					Container={Carousel}
-					isCuratedContent={true}
-					format={format}
-				/>
-			</ElementContainer>
+			{!isPaidContent && (
+				<ElementContainer showTopBorder={true}>
+					<OnwardsData
+						url={curatedDataUrl}
+						limit={8}
+						ophanComponentName="curated-content"
+						Container={Carousel}
+						isCuratedContent={true}
+						format={format}
+					/>
+				</ElementContainer>
+			)}
 		</div>
 	);
 };
