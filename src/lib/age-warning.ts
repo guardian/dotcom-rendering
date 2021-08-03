@@ -4,6 +4,7 @@ export const getAgeWarning = (
 ): string | undefined => {
 	const isNews = tags.some((t) => t.id === 'tone/news');
 	const isOpinion = tags.some((t) => t.id === 'tone/comment');
+	let message;
 
 	// Only show an age warning for news or opinion pieces
 	if (isNews || isOpinion) {
@@ -25,7 +26,6 @@ export const getAgeWarning = (
 			const diffDays = diffHours / 24;
 			const diffMonths = diffDays / 31;
 			const diffYears = diffDays / 365;
-			let message;
 
 			if (diffYears >= 2) {
 				message = `${Math.floor(diffYears)} years old`;
@@ -40,4 +40,5 @@ export const getAgeWarning = (
 			return message;
 		}
 	}
+	return message;
 };

@@ -2,7 +2,6 @@
 // CAPIType and its subtypes //
 // ------------------------- //
 
-
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
@@ -15,7 +14,12 @@ type LegacyPillar = RealPillars | FakePillars;
 // RealPillars have pillar palette colours and have a `Pillar` type in Scala
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article and have a `Special` type in Scala
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Theme.scala
-type ThemePillar = 'NewsPillar' | 'OpinionPillar' | 'SportPillar' | 'CulturePillar' | 'LifestylePillar';
+type ThemePillar =
+	| 'NewsPillar'
+	| 'OpinionPillar'
+	| 'SportPillar'
+	| 'CulturePillar'
+	| 'LifestylePillar';
 type ThemeSpecial = 'SpecialReportTheme' | 'Labs';
 type CAPITheme = ThemePillar | ThemeSpecial;
 
@@ -43,7 +47,11 @@ type CAPIDesign =
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
-type CAPIDisplay = 'StandardDisplay' | 'ImmersiveDisplay' | 'ShowcaseDisplay' | 'NumberedListDisplay';
+type CAPIDisplay =
+	| 'StandardDisplay'
+	| 'ImmersiveDisplay'
+	| 'ShowcaseDisplay'
+	| 'NumberedListDisplay';
 
 // CAPIFormat is the stringified version of Format passed through from CAPI.
 // It gets converted to the @guardian/types format on platform
@@ -52,7 +60,7 @@ type CAPIFormat = {
 	design: CAPIDesign;
 	theme: CAPITheme;
 	display: CAPIDisplay;
-}
+};
 
 type Display = import('@guardian/types').Display;
 type Design = import('@guardian/types').Design;
@@ -106,7 +114,7 @@ type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
-	},
+	};
 	background: {
 		article: Colour;
 		seriesTitle: Colour;
@@ -125,7 +133,7 @@ type Palette = {
 		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-	},
+	};
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
@@ -134,7 +142,7 @@ type Palette = {
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
-	},
+	};
 	border: {
 		syndicationButton: Colour;
 		subNav: Colour;
@@ -148,13 +156,13 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
-	},
+	};
 	topBar: {
 		card: Colour;
-	},
+	};
 	hover: {
 		headlineByline: Colour;
-	}
+	};
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
@@ -201,7 +209,7 @@ type BrandingLogo = {
 	link: string;
 	label: string;
 	dimensions: { width: number; height: number };
-}
+};
 
 interface Branding {
 	brandingType?: { name: string };
@@ -359,29 +367,29 @@ type PageTypeType = {
 // misleading - the model is *not* the same as the Content API content models.
 
 interface CAPILinkType {
-    url: string;
-    title: string;
-    longTitle?: string;
-    iconName?: string;
-    children?: CAPILinkType[];
-    pillar?: LegacyPillar;
-    more?: boolean;
-    classList?: string[];
+	url: string;
+	title: string;
+	longTitle?: string;
+	iconName?: string;
+	children?: CAPILinkType[];
+	pillar?: LegacyPillar;
+	more?: boolean;
+	classList?: string[];
 }
 
 interface CAPINavType {
-    currentUrl: string;
-    pillars: CAPILinkType[];
-    otherLinks: CAPILinkType[];
-    brandExtensions: CAPILinkType[];
-    currentNavLink?: CAPILinkType;
-    currentNavLinkTitle?: string;
-    currentPillarTitle?: string;
-    subNavSections?: {
-        parent?: CAPILinkType;
-        links: CAPILinkType[];
-    };
-    readerRevenueLinks: ReaderRevenuePositions;
+	currentUrl: string;
+	pillars: CAPILinkType[];
+	otherLinks: CAPILinkType[];
+	brandExtensions: CAPILinkType[];
+	currentNavLink?: CAPILinkType;
+	currentNavLinkTitle?: string;
+	currentPillarTitle?: string;
+	subNavSections?: {
+		parent?: CAPILinkType;
+		links: CAPILinkType[];
+	};
+	readerRevenueLinks: ReaderRevenuePositions;
 }
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
@@ -534,7 +542,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 type ShareIconSize = 'small' | 'medium';
 
-type LeftColSize = 'compact'|'wide';
+type LeftColSize = 'compact' | 'wide';
 
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 
@@ -612,7 +620,7 @@ type MatchReportType = {
 	venue: string;
 	comments: string;
 	minByMinUrl: string;
-}
+};
 
 /**
  * Onwards
@@ -623,9 +631,9 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-    format: Format;
+	format: Format;
 	isCuratedContent?: boolean;
-    isFullCardImage?: boolean;
+	isFullCardImage?: boolean;
 };
 
 type OphanComponentName =
@@ -765,7 +773,7 @@ interface DCRServerDocumentData {
 	CAPI: CAPIType;
 	NAV: NavType;
 	GA: GADataType;
-	linkedData: { [key: string]: any; };
+	linkedData: { [key: string]: any };
 }
 
 interface BrowserNavType {
@@ -779,7 +787,7 @@ interface DCRBrowserDocumentData {
 	CAPI: CAPIBrowserType;
 	NAV: BrowserNavType;
 	GA: GADataType;
-	linkedData: { [key: string]: any; };
+	linkedData: { [key: string]: any };
 }
 
 // All Components that are loaded with loadable
@@ -787,65 +795,65 @@ interface DCRBrowserDocumentData {
 // defined in loadable-manifest-browser.json
 type BlockElementType = string;
 interface ComponentNameChunkMap {
-    chunkName: string;
-    addWhen: BlockElementType | 'always';
+	chunkName: string;
+	addWhen: BlockElementType | 'always';
 }
-interface EditionDropdownLoadable extends ComponentNameChunkMap{
-    chunkName: 'EditionDropdown';
-    addWhen: 'always';
+interface EditionDropdownLoadable extends ComponentNameChunkMap {
+	chunkName: 'EditionDropdown';
+	addWhen: 'always';
 }
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-YoutubeBlockComponent';
-    addWhen: YoutubeBlockElement['_type'];
+	chunkName: 'elements-YoutubeBlockComponent';
+	addWhen: YoutubeBlockElement['_type'];
 }
 
 interface RichLinkBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-RichLinkComponent';
-    addWhen: RichLinkBlockElement['_type'];
+	chunkName: 'elements-RichLinkComponent';
+	addWhen: RichLinkBlockElement['_type'];
 }
 
 interface InteractiveBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-InteractiveBlockComponent';
-    addWhen: InteractiveBlockElement['_type'];
+	chunkName: 'elements-InteractiveBlockComponent';
+	addWhen: InteractiveBlockElement['_type'];
 }
 
 interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-InteractiveContentsBlockComponent';
-    addWhen: InteractiveContentsBlockElement['_type'];
+	chunkName: 'elements-InteractiveContentsBlockComponent';
+	addWhen: InteractiveContentsBlockElement['_type'];
 }
 
 interface CalloutBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-CalloutBlockComponent';
-    addWhen: CalloutBlockElement['_type'];
+	chunkName: 'elements-CalloutBlockComponent';
+	addWhen: CalloutBlockElement['_type'];
 }
 
 interface DocumentBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-DocumentBlockComponent';
-    addWhen: DocumentBlockElement['_type'];
+	chunkName: 'elements-DocumentBlockComponent';
+	addWhen: DocumentBlockElement['_type'];
 }
 
 interface MapBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-MapEmbedBlockComponent';
-    addWhen: MapBlockElement['_type'];
+	chunkName: 'elements-MapEmbedBlockComponent';
+	addWhen: MapBlockElement['_type'];
 }
 
 interface SpotifyBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-SpotifyBlockComponent';
-    addWhen: SpotifyBlockElement['_type'];
+	chunkName: 'elements-SpotifyBlockComponent';
+	addWhen: SpotifyBlockElement['_type'];
 }
 
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-VideoFacebookBlockComponent';
-    addWhen: VideoFacebookBlockElement['_type'];
+	chunkName: 'elements-VideoFacebookBlockComponent';
+	addWhen: VideoFacebookBlockElement['_type'];
 }
 interface VineBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-VineBlockComponent';
-    addWhen: VineBlockElement['_type'];
+	chunkName: 'elements-VineBlockComponent';
+	addWhen: VineBlockElement['_type'];
 }
 
 interface InstagramBlockLoadable extends ComponentNameChunkMap {
-    chunkName: 'elements-InstagramBlockComponent';
-    addWhen: InstagramBlockElement['_type'];
+	chunkName: 'elements-InstagramBlockComponent';
+	addWhen: InstagramBlockElement['_type'];
 }
 
 // There are docs on loadable in ./docs/loadable-components.md
@@ -862,31 +870,31 @@ type LoadableComponents = [
 	FacebookVideoBlockLoadable,
 	VineBlockLoadable,
 	InstagramBlockLoadable,
-]
+];
 
 interface CarouselImagesMap {
 	'300'?: string;
 	'460'?: string;
 }
 interface BaseTrailType {
-    url: string;
-    headline: string;
-    isLiveBlog: boolean;
-    webPublicationDate: string;
-    image?: string;
+	url: string;
+	headline: string;
+	isLiveBlog: boolean;
+	webPublicationDate: string;
+	image?: string;
 	carouselImages?: CarouselImagesMap;
-    avatarUrl?: string;
-    mediaType?: MediaType;
-    mediaDuration?: number;
-    ageWarning?: string;
-    byline?: string;
-    showByline?: boolean;
-    kickerText?: string;
-    shortUrl?: string;
-    commentCount?: number;
-    starRating?: number;
-    linkText?: string;
-	branding?: Branding
+	avatarUrl?: string;
+	mediaType?: MediaType;
+	mediaDuration?: number;
+	ageWarning?: string;
+	byline?: string;
+	showByline?: boolean;
+	kickerText?: string;
+	shortUrl?: string;
+	commentCount?: number;
+	starRating?: number;
+	linkText?: string;
+	branding?: Branding;
 }
 interface TrailType extends BaseTrailType {
 	palette: Palette;
