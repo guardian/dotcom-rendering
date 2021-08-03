@@ -1,5 +1,8 @@
 name: typescript 🕵‍♀
-on: [push]
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
     typescript:
@@ -11,9 +14,13 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: dotcom-rendering
 
             - name: Install
               run: yarn
+              working-directory: dotcom-rendering
 
             - name: Check typescript
               run: yarn tsc
+              working-directory: dotcom-rendering
