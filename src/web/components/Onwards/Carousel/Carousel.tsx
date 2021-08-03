@@ -628,7 +628,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 						const {
 							url: linkTo,
 							headline: headlineText,
-							format: trailFormat,
 							webPublicationDate,
 							image: fallbackImageUrl,
 							carouselImages,
@@ -642,7 +641,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<CarouselCard
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
-								format={trailFormat}
+								format={format}
 								linkTo={linkTo}
 								headlineText={headlineText}
 								webPublicationDate={webPublicationDate}

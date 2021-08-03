@@ -263,28 +263,30 @@ export const OnwardsUpper = ({
 	const curatedDataUrl = getContainerDataUrl(pillar, edition, ajaxUrl);
 
 	return (
-		<div css={onwardsWrapper}>
-			{url && (
-				<ElementContainer>
+		!isPaidContent && (
+			<div css={onwardsWrapper}>
+				{url && (
+					<ElementContainer>
+						<OnwardsData
+							url={url}
+							limit={8}
+							ophanComponentName={ophanComponentName}
+							Container={Carousel}
+							format={format}
+						/>
+					</ElementContainer>
+				)}
+				<ElementContainer showTopBorder={true}>
 					<OnwardsData
-						url={url}
+						url={curatedDataUrl}
 						limit={8}
-						ophanComponentName={ophanComponentName}
+						ophanComponentName="curated-content"
 						Container={Carousel}
+						isCuratedContent={true}
 						format={format}
 					/>
 				</ElementContainer>
-			)}
-			<ElementContainer showTopBorder={true}>
-				<OnwardsData
-					url={curatedDataUrl}
-					limit={8}
-					ophanComponentName="curated-content"
-					Container={Carousel}
-					isCuratedContent={true}
-					format={format}
-				/>
-			</ElementContainer>
-		</div>
+			</div>
+		)
 	);
 };
