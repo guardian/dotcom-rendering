@@ -192,7 +192,7 @@ export const OnwardsUpper = ({
 	edition,
 }: Props) => {
 	if (isPaidContent) {
-		return undefined;
+		return null;
 	}
 
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
