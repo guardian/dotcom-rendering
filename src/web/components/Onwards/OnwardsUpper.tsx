@@ -280,7 +280,7 @@ export const OnwardsUpper = ({
 				<ElementContainer showTopBorder={true}>
 					<OnwardsData
 						url={curatedDataUrl}
-						limit={8}
+						limit={20}
 						ophanComponentName="curated-content"
 						Container={Carousel}
 						isCuratedContent={true}
