@@ -191,6 +191,10 @@ export const OnwardsUpper = ({
 	pillar,
 	edition,
 }: Props) => {
+	if (isPaidContent) {
+		return;
+	}
+
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
 	// Related content can be a collection of articles based on
@@ -263,30 +267,28 @@ export const OnwardsUpper = ({
 	const curatedDataUrl = getContainerDataUrl(pillar, edition, ajaxUrl);
 
 	return (
-		!isPaidContent && (
-			<div css={onwardsWrapper}>
-				{url && (
-					<ElementContainer>
-						<OnwardsData
-							url={url}
-							limit={8}
-							ophanComponentName={ophanComponentName}
-							Container={Carousel}
-							format={format}
-						/>
-					</ElementContainer>
-				)}
-				<ElementContainer showTopBorder={true}>
+		<div css={onwardsWrapper}>
+			{url && (
+				<ElementContainer>
 					<OnwardsData
-						url={curatedDataUrl}
+						url={url}
 						limit={8}
-						ophanComponentName="curated-content"
+						ophanComponentName={ophanComponentName}
 						Container={Carousel}
-						isCuratedContent={true}
 						format={format}
 					/>
 				</ElementContainer>
-			</div>
-		)
+			)}
+			<ElementContainer showTopBorder={true}>
+				<OnwardsData
+					url={curatedDataUrl}
+					limit={8}
+					ophanComponentName="curated-content"
+					Container={Carousel}
+					isCuratedContent={true}
+					format={format}
+				/>
+			</ElementContainer>
+		</div>
 	);
 };
