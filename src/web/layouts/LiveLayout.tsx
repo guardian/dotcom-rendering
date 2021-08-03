@@ -207,7 +207,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showComments = CAPI.isCommentable;
 
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDate);
+	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (

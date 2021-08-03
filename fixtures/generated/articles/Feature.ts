@@ -1419,7 +1419,7 @@ export const Feature: CAPIType = {
 			elementId: '99c8f3db-b5d8-4b07-acf4-6c3754c4a16f',
 		},
 	],
-	webPublicationDate: '2020-02-10T06:59:35.000Z',
+	webPublicationDateDeprecated: '2020-02-10T06:59:35.000Z',
 	blocks: [
 		{
 			id: '5e40df888f08e133247404c6',

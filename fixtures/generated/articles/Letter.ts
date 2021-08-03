@@ -1684,7 +1684,7 @@ export const Letter: CAPIType = {
 			elementId: '0f04e547-c9d7-4252-a82d-1bb2779ed413',
 		},
 	],
-	webPublicationDate: '2021-04-05T16:04:21.000Z',
+	webPublicationDateDeprecated: '2021-04-05T16:04:21.000Z',
 	blocks: [
 		{
 			id: '5e74b1928f089367b3d0b644',

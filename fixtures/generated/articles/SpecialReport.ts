@@ -1870,7 +1870,7 @@ export const SpecialReport: CAPIType = {
 			elementId: 'bcff359a-2441-43c5-804a-672b64ca368a',
 		},
 	],
-	webPublicationDate: '2019-10-14T15:23:44.000Z',
+	webPublicationDateDeprecated: '2019-10-14T15:23:44.000Z',
 	blocks: [
 		{
 			id: '5d97218b8f08fbb0c1720cfa',

@@ -1983,7 +1983,7 @@ export const Live: CAPIType = {
 			elementId: '368b9dc2-e5f3-41b7-99ec-87d6ac92a886',
 		},
 	],
-	webPublicationDate: '2021-02-19T19:41:53.000Z',
+	webPublicationDateDeprecated: '2021-02-19T19:41:53.000Z',
 	blocks: [
 		{
 			id: '60300f5f8f08ad21ea60071e',

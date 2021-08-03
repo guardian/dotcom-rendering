@@ -2055,7 +2055,7 @@ export const NumberedList: CAPIType = {
 			elementId: 'c7d7e097-2c87-407e-bdef-ad54731ecc4d',
 		},
 	],
-	webPublicationDate: '2019-12-17T07:00:44.000Z',
+	webPublicationDateDeprecated: '2019-12-17T07:00:44.000Z',
 	blocks: [
 		{
 			id: '5df7a00b8f087e8308e5f0ea',

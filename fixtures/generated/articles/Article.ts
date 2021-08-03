@@ -1769,7 +1769,7 @@ export const Article: CAPIType = {
 			elementId: '61ed6463-adc6-4583-9f3c-a6d53a470f6c',
 		},
 	],
-	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	webPublicationDateDeprecated: '2020-02-10T06:00:27.000Z',
 	blocks: [
 		{
 			id: '5e3d3b488f086a28115a74be',

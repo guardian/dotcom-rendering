@@ -182,7 +182,7 @@
         "author": {
             "$ref": "#/definitions/AuthorType"
         },
-        "webPublicationDate": {
+        "webPublicationDateDeprecated": {
             "format": "date-time",
             "type": "string"
         },
@@ -429,7 +429,7 @@
         "trailText",
         "twitterData",
         "version",
-        "webPublicationDate",
+        "webPublicationDateDeprecated",
         "webPublicationDateDisplay",
         "webPublicationSecondaryDateDisplay",
         "webTitle",
