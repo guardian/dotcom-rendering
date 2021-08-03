@@ -1742,7 +1742,7 @@ export const Quiz: CAPIType = {
 			elementId: 'af46fef8-e15c-44c6-a36b-291497ac3ec8',
 		},
 	],
-	webPublicationDate: '2020-06-12T09:09:24.000Z',
+	webPublicationDateDeprecated: '2020-06-12T09:09:24.000Z',
 	blocks: [
 		{
 			id: '5ee1f3138f0875833522a23a',

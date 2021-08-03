@@ -19,7 +19,7 @@ describe('validate', () => {
 
 	urlsToTest.forEach((url) => {
 		it('confirm valid data', () => {
-			return fetch(url)
+			return fetch(`${url}&purge=${Date.now()}`)
 				.then((response) => response.json())
 				.then((myJson) => {
 					expect(validateAsCAPIType(myJson)).toBe(myJson);
