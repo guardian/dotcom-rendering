@@ -58,7 +58,7 @@ export const CardAge = ({
 
 	return (
 		<span css={ageStyles(format, palette)}>
-			<span			>
+			<span>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate}>{displayString}</time>
 			</span>
