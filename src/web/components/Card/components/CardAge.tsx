@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
 
-import { Design, Display } from '@guardian/types';
-import { neutral } from '@guardian/src-foundations/palette';
+import { Design } from '@guardian/types';
 import { textSans } from '@guardian/src-foundations/typography';
 import { timeAgo } from '@guardian/libs';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
-import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
@@ -46,18 +44,6 @@ const ageStyles = (format: Format, palette: Palette) => {
 	`;
 };
 
-const fullCardImageTextStyles = css`
-	color: ${neutral[100]};
-	background-color: rgba(0, 0, 0, 0.75);
-	box-shadow: -${space[1]}px 0 0 rgba(0, 0, 0, 0.75);
-	/* Box decoration is required to push the box shadow out on Firefox */
-	box-decoration-break: clone;
-	line-height: 1;
-	white-space: pre-wrap;
-	padding-left: ${space[1]}px;
-	padding-right: ${space[1]}px;
-`;
-
 export const CardAge = ({
 	format,
 	palette,
@@ -72,12 +58,7 @@ export const CardAge = ({
 
 	return (
 		<span css={ageStyles(format, palette)}>
-			<span
-				css={
-					format.display === Display.Immersive &&
-					fullCardImageTextStyles
-				}
-			>
+			<span			>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate}>{displayString}</time>
 			</span>
