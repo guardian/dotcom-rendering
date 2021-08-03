@@ -24,6 +24,7 @@ type Meta = {
 type EpicConfig = {
 	meta: Meta;
 	countryCode: string;
+	idApiUrl: string;
 };
 
 export const canShow = async (
@@ -59,12 +60,14 @@ type InnerProps = {
 	meta: Meta;
 	countryCode: string;
 	BrazeComponent: React.FC<CommonEndOfArticleComponentProps>;
+	idApiUrl: string;
 };
 
 const BrazeEpicWithSatisfiedDependencies = ({
 	BrazeComponent,
 	meta,
 	countryCode,
+	idApiUrl,
 }: InnerProps) => {
 	const [hasBeenSeen, setNode] = useHasBeenSeen({
 		rootMargin: '-18px',
@@ -106,9 +109,17 @@ const BrazeEpicWithSatisfiedDependencies = ({
 					<BrazeComponent
 						componentName={meta.dataFromBraze.componentName}
 						brazeMessageProps={meta.dataFromBraze}
-						// TODO: Add real implementation for subscribeToNewsletter
-						subscribeToNewsletter={() => {
-							return Promise.resolve();
+						subscribeToNewsletter={async (newsletterId) => {
+							await fetch(`${idApiUrl}/users/me/newsletters`, {
+								body: JSON.stringify({
+									id: newsletterId,
+									subscribed: true,
+								}),
+							});
+							console.log(
+								'Subscribed to newsletter with id ',
+								newsletterId,
+							);
 						}}
 						countryCode={countryCode}
 					/>
@@ -120,7 +131,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	return null;
 };
 
-export const MaybeBrazeEpic = ({ meta, countryCode }: EpicConfig) => {
+export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
 	const [BrazeComponent, setBrazeComponent] = useState<
 		React.FC<CommonEndOfArticleComponentProps>
 	>();
@@ -144,6 +155,7 @@ export const MaybeBrazeEpic = ({ meta, countryCode }: EpicConfig) => {
 					BrazeComponent={BrazeComponent}
 					meta={meta}
 					countryCode={countryCode}
+					idApiUrl={idApiUrl}
 				/>
 			) : (
 				<div />
