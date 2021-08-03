@@ -108,7 +108,11 @@ function renderHead(
 		inlineStyles,
 		isEditions,
 	);
-	const meta = h(Meta, { title: request.content.webTitle, cspString });
+	const meta = h(Meta, {
+		title: request.content.webTitle,
+		cspString,
+		isEditions: true,
+	});
 
 	return `
         ${renderToString(meta)}
