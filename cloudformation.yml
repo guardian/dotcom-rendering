@@ -1,6 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Frontend rendering service
-
 Parameters:
   Subnets:
     Description: The subnets where rendering instances will run
@@ -58,7 +57,7 @@ Parameters:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
 	VPCIpBlock:
-    Type: String
+		Type: String
     Description: CIDR block for IP addresses inside this VPC
     Default: 10.248.136.0/22
   ELKStream:
