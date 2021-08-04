@@ -63,6 +63,10 @@ Parameters:
   FrontendConfigKey:
     Description: Parameter store KMS key
     Type: String
+	VPCIpBlock:
+    Type: String
+    Description: CIDR block for IP addresses inside this VPC
+    Default: 10.248.136.0/22
 
 Conditions:
     HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
