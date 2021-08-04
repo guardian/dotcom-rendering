@@ -106,11 +106,13 @@ const styles = (iconColor: string): SerializedStyles => {
 				fill: ${iconColor};
 			}
 		}
+		min-height: ${remSpace[12]};
 
 		padding-bottom: ${remSpace[4]};
 		margin: 0;
 
 		${from.tablet} {
+			min-height: ${remSpace[9]};
 			padding-bottom: ${remSpace[9]};
 		}
 	`;
@@ -236,11 +238,12 @@ const Byline: FC<Props> = ({ item }) => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
+	const showShareIcon = hasShareIcon(format) && item.webUrl;
 
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={getBylineStyles(format, iconColor)}>
 			<address>{renderText(byline, format)}</address>
-			{hasShareIcon(format) && (
+			{showShareIcon && (
 				<span className="js-share-button" role="button">
 					<ShareIcon />
 				</span>

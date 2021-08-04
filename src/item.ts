@@ -62,6 +62,7 @@ interface Fields extends Format {
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
+	webUrl: string;
 }
 
 interface MatchReport extends Fields {
@@ -180,7 +181,6 @@ const itemFields = (
 	request: RenderingRequest,
 ): ItemFields => {
 	const { content, branding, commentCount, relatedContent } = request;
-
 	return {
 		theme: themeFromString(content.pillarId),
 		display: getDisplay(content),
@@ -218,6 +218,7 @@ const itemFields = (
 			})),
 		),
 		logo: paidContentLogo(content.tags),
+		webUrl: content.webUrl,
 	};
 };
 

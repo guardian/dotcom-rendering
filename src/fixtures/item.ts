@@ -272,6 +272,7 @@ const fields = {
 	relatedContent: none,
 	footballContent: none,
 	logo: none,
+	webUrl: '',
 };
 
 const article: Item = {
