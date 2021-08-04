@@ -56,7 +56,7 @@ Parameters:
   InstanceType:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
-	VPCIpBlock:
+  VPCIpBlock:
 		Type: String
     Description: CIDR block for IP addresses inside this VPC
     Default: 10.248.136.0/22
