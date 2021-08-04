@@ -175,6 +175,10 @@ export const InteractiveContentsBlockElement = ({
 	// -> If we stop intersecting with the current element, and its in view > show the preview element
 	// -> If we're intersecting with an element set that to the active one
 	// -> If the end element is in view, but the last element is not > show the last element
+	// Because useEffect is used for performing side-effects with an optional cleanup function
+	// it doesn't deal with returning values, so no types are necessary. For more info see:
+	// https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks/#useeffect--uselayouteffect
+	// Given this, it seems reasoable to ask typescript to ignore this.
 	// @ts-ignore
 	useEffect(() => {
 		if ('IntersectionObserver' in window) {

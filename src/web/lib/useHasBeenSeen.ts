@@ -20,6 +20,10 @@ const useHasBeenSeen = (
 		? libDebounce(intersectionFn, 200)
 		: intersectionFn;
 
+	// Because useEffect is used for performing side-effects with an optional cleanup function
+	// it doesn't deal with returning values, so no types are necessary. For more info see:
+	// https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks/#useeffect--uselayouteffect
+	// Given this, it seems reasoable to ask typescript to ignore this.
 	// @ts-ignore
 	useEffect(() => {
 		if (observer.current) {
