@@ -246,54 +246,53 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							}
 						/>
 					</ElementContainer>
-
-					<ElementContainer
-						showSideBorders={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Nav
-							nav={NAV}
-							format={{
-								...format,
-								theme: getCurrentPillar(CAPI),
-							}}
-							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
-							}
-							edition={CAPI.editionId}
-						/>
-					</ElementContainer>
-
-					{NAV.subNavSections && (
-						<ElementContainer
-							backgroundColour={palette.background.article}
-							padded={false}
-							sectionId="sub-nav-root"
-							borderColour={palette.border.article}
-							element="nav"
-						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								palette={palette}
-								format={format}
-							/>
-						</ElementContainer>
-					)}
-
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-						borderColour={palette.border.article}
-					>
-						<Lines count={4} effect="straight" />
-					</ElementContainer>
 				</SendToBack>
 			</div>
+
+			<ElementContainer
+				showSideBorders={true}
+				borderColour={brandLine.primary}
+				showTopBorder={false}
+				padded={false}
+				backgroundColour={brandBackground.primary}
+			>
+				<Nav
+					nav={NAV}
+					format={{
+						...format,
+						theme: getCurrentPillar(CAPI),
+					}}
+					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+					edition={CAPI.editionId}
+				/>
+			</ElementContainer>
+
+			{NAV.subNavSections && (
+				<ElementContainer
+					backgroundColour={palette.background.article}
+					padded={false}
+					sectionId="sub-nav-root"
+					borderColour={palette.border.article}
+					element="nav"
+				>
+					<SubNav
+						subNavSections={NAV.subNavSections}
+						currentNavLink={NAV.currentNavLink}
+						palette={palette}
+						format={format}
+					/>
+				</ElementContainer>
+			)}
+
+			<ElementContainer
+				backgroundColour={palette.background.article}
+				padded={false}
+				showTopBorder={false}
+				borderColour={palette.border.article}
+			>
+				<Lines count={4} effect="straight" />
+			</ElementContainer>
+
 			<ContainerLayout
 				showTopBorder={false}
 				backgroundColour={palette.background.header}
