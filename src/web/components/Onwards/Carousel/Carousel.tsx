@@ -56,7 +56,7 @@ const wrapperStyle = css`
 	display: flex;
 	justify-content: space-between;
 	overflow: hidden;
-	${from.desktop} {
+	${from.tablet} {
 		padding-right: 40px;
 	}
 `;
@@ -236,16 +236,6 @@ const buttonStyle = css`
 
 const prevButtonStyle = (index: number) => css`
 	background-color: ${index !== 0 ? neutral[0] : neutral[60]};
-	cursor: ${index !== 0 ? 'pointer' : 'default'};
-
-	&:hover,
-	&:focus {
-		background-color: ${index !== 0 ? brandAlt[400] : neutral[60]};
-
-		svg {
-			fill: ${neutral[100]};
-		}
-	}
 `;
 
 const nextButtonStyle = (index: number, totalStories: number) => css`
@@ -254,18 +244,6 @@ const nextButtonStyle = (index: number, totalStories: number) => css`
 	background-color: ${!isLastCardShowing(index, totalStories)
 		? neutral[0]
 		: neutral[60]};
-	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
-
-	&:hover,
-	&:focus {
-		background-color: ${!isLastCardShowing(index, totalStories)
-			? brandAlt[400]
-			: neutral[60]};
-
-		svg {
-			fill: ${neutral[100]};
-		}
-	}
 `;
 
 const headerRowStyles = css`
@@ -628,6 +606,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						const {
 							url: linkTo,
 							headline: headlineText,
+							format: trailFormat,
 							webPublicationDate,
 							image: fallbackImageUrl,
 							carouselImages,
@@ -641,7 +620,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							<CarouselCard
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
-								format={format}
+								format={trailFormat}
 								linkTo={linkTo}
 								headlineText={headlineText}
 								webPublicationDate={webPublicationDate}
