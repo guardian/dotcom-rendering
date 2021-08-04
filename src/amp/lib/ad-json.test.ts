@@ -65,7 +65,8 @@ describe('ampadslots', () => {
 		if (p === undefined) {
 			return fail();
 		}
-
+		// These expect statements are returned to keep typescript happy
+		// Otherwise it complains that not all code paths return a value
 		return expect(p.value).toBe('amp');
 	});
 
@@ -77,6 +78,8 @@ describe('ampadslots', () => {
 		if (renderingPlatform === undefined) {
 			return fail();
 		}
+		// These expect statements are returned to keep typescript happy
+		// Otherwise it complains that not all code paths return a value
 		return expect(renderingPlatform.value).toBe('dotcom-rendering');
 	});
 
@@ -86,6 +89,8 @@ describe('ampadslots', () => {
 		if (p === undefined) {
 			return fail();
 		}
+		// These expect statements are returned to keep typescript happy
+		// Otherwise it complains that not all code paths return a value
 		return expect(p.value).toBe('4,5,1,2,3');
 	});
 });
