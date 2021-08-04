@@ -36,8 +36,6 @@ export const getAgeWarning = (
 			} else if (diffMonths > 1) {
 				message = '1 month old';
 			}
-
-			return message;
 		}
 	}
 	return message;
