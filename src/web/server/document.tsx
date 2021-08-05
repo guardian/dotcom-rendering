@@ -241,7 +241,7 @@ export const document = ({ data }: Props): string => {
 	];
 
 	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const pageHasNonBootInteractiveElements = CAPIElements.some(
 		(element) =>
@@ -328,10 +328,10 @@ export const document = ({ data }: Props): string => {
 			: CAPI.config.keywords;
 
 	const skipToMainContent = renderToString(
-		<SkipTo id="#maincontent" label="Skip to main content" />,
+		<SkipTo id="maincontent" label="Skip to main content" />,
 	);
 	const skipToNavigation = renderToString(
-		<SkipTo id="#navigation" label="Skip to navigation" />,
+		<SkipTo id="navigation" label="Skip to navigation" />,
 	);
 
 	return htmlTemplate({

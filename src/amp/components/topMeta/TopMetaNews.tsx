@@ -118,7 +118,7 @@ export const TopMetaNews: React.FC<{
 				pillar={pillar}
 				ageWarning={getAgeWarning(
 					articleData.tags,
-					articleData.webPublicationDate,
+					articleData.webPublicationDateDeprecated,
 				)}
 				webPublicationDate={articleData.webPublicationDateDisplay}
 				twitterHandle={articleData.author.twitterHandle}

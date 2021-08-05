@@ -1661,7 +1661,7 @@ export const Labs: CAPIType = {
 			elementId: '6818c6d3-0c81-4e93-a66f-295ee3c0cd70',
 		},
 	],
-	webPublicationDate: '2018-10-11T13:30:08.000Z',
+	webPublicationDateDeprecated: '2018-10-11T13:30:08.000Z',
 	blocks: [
 		{
 			id: '5ba15482e4b0f675819f3d0d',

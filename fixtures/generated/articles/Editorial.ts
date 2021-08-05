@@ -1793,7 +1793,7 @@ export const Editorial: CAPIType = {
 			elementId: 'aa132cb0-c65c-4e44-b078-cbaccee39944',
 		},
 	],
-	webPublicationDate: '2021-02-03T18:54:37.000Z',
+	webPublicationDateDeprecated: '2021-02-03T18:54:37.000Z',
 	blocks: [
 		{
 			id: '5e74ae948f088d75755971e4',

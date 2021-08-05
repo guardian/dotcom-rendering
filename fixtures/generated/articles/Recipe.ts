@@ -1833,7 +1833,7 @@ export const Recipe: CAPIType = {
 			elementId: 'b814107e-e394-4291-bd8d-989e8c1f5190',
 		},
 	],
-	webPublicationDate: '2021-02-06T10:30:38.000Z',
+	webPublicationDateDeprecated: '2021-02-06T10:30:38.000Z',
 	blocks: [
 		{
 			id: '5ee89b118f089a4ae3aff6e7',

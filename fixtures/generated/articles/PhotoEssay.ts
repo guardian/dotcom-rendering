@@ -1712,7 +1712,7 @@ export const PhotoEssay: CAPIType = {
 			elementId: '8c318ebc-3550-416d-a4ff-4448be097aa6',
 		},
 	],
-	webPublicationDate: '2020-12-09T06:30:30.000Z',
+	webPublicationDateDeprecated: '2020-12-09T06:30:30.000Z',
 	blocks: [
 		{
 			id: '5fc4ed128f08959b167732bd',

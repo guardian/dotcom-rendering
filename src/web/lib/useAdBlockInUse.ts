@@ -7,7 +7,7 @@ import { isAdBlockInUse } from '@root/src/web/lib/detectAdBlocker';
  * useAdBlockInUse provides a custom hook to integrate the isAdBlockInUse
  * promise into a react component
  * */
- export const useAdBlockInUse = () => {
+export const useAdBlockInUse = () => {
 	const [isInUse, setIsInUse] = useState<boolean | undefined>();
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises

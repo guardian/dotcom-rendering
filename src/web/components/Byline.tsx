@@ -72,6 +72,8 @@ const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
 				${headline.xxxsmall()};
 			`;
 		}
+		default:
+			return css``;
 	}
 };
 

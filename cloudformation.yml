@@ -1,6 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Frontend rendering service
-
 Parameters:
   Subnets:
     Description: The subnets where rendering instances will run
@@ -57,6 +56,10 @@ Parameters:
   InstanceType:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
+  VPCIpBlock:
+    Type: String
+    Description: CIDR block for IP addresses inside this VPC
+    Default: 10.248.136.0/22
   ELKStream:
     Type: String
     Description: name of the kinesis stream to use to send logs to the central ELK stack
@@ -105,6 +108,32 @@ Resources:
         Value:
           Fn::FindInMap: [ Constants, App, Value ]
 
+  InternalLoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allows HTTP and HTTPS inbound connections from within the VPC
+      VpcId:
+        Ref: VpcId
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '80'
+        ToPort: '80'
+        CidrIp: !Ref VPCIpBlock
+      - IpProtocol: tcp
+        FromPort: '443'
+        ToPort: '443'
+        CidrIp: !Ref VPCIpBlock
+      Tags:
+      - Key: Stage
+        Value:
+          Ref: Stage
+      - Key: Stack
+        Value:
+          Fn::FindInMap: [ Constants, Stack, Value ]
+      - Key: App
+        Value:
+          Fn::FindInMap: [ Constants, App, Value ]
+
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -118,6 +147,12 @@ Resources:
         ToPort: 9000
         SourceSecurityGroupId:
           Ref: LoadBalancerSecurityGroup
+        # allow ELB to talk to instance
+      - IpProtocol: tcp
+        FromPort: 9000
+        ToPort: 9000
+        SourceSecurityGroupId:
+          Ref: InternalLoadBalancerSecurityGroup
       Tags:
       - Key: Stage
         Value:
@@ -220,6 +255,47 @@ Resources:
         Value:
           Fn::FindInMap: [ Constants, App, Value ]
 
+  InternalLoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      Scheme: internal
+      LoadBalancerName: !Sub '${Stack}-${Stage}-${App}-ELB'
+      Listeners:
+      - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
+      CrossZone: true
+      HealthCheck:
+        Target: HTTP:9000/_healthcheck
+        HealthyThreshold: 2
+        UnhealthyThreshold: 10
+        Interval: 30
+        Timeout: 10
+      Subnets:
+        Ref: Subnets
+      SecurityGroups:
+      - Ref: InternalLoadBalancerSecurityGroup
+      AccessLoggingPolicy:
+        EmitInterval: 5
+        Enabled: true
+        S3BucketName: gu-elb-logs
+        S3BucketPrefix:
+          Fn::Join:
+          - "/"
+          - - ELBLogs
+            - Fn::FindInMap: [ Constants, Stack, Value ]
+            - Fn::FindInMap: [ Constants, App, Value ]
+            - Ref: Stage
+      Tags:
+      - Key: Stage
+        Value:
+          Ref: Stage
+      - Key: Stack
+        Value:
+          Fn::FindInMap: [ Constants, Stack, Value ]
+      - Key: App
+        Value:
+          Fn::FindInMap: [ Constants, App, Value ]
+
+
   LaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
@@ -272,6 +348,7 @@ Resources:
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
       - Ref: LoadBalancer
+      - Ref: InternalLoadBalancer
       Tags:
       - Key: Stage
         Value:
