@@ -318,8 +318,8 @@ Resources:
       AlarmDescription: !Sub |
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
       Dimensions:
-      - Name: InternalLoadBalancer
-        Value: !Ref InternalLoadBalancerSecurityGroup
+      - Name: InternalLoadBalancerName
+        Value: !Ref InternalLoadBalancer
       EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
       MetricName: Latency
       Namespace: AWS/ELB
