@@ -341,6 +341,10 @@ const matchReport: Item = {
 	body: galleryBody,
 };
 
+const correction: Item = {
+	design: Design.Correction,
+	...fields,
+};
 // ----- Exports ----- //
 
 export {
@@ -356,4 +360,5 @@ export {
 	letter,
 	matchReport,
 	cartoon,
+	correction,
 };
