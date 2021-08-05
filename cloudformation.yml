@@ -386,8 +386,8 @@ Resources:
         Alarm if 5XX backend errors are greater than ${Backend5XXAlarmThreshold} over last ${Backend5XXAlarmPeriod} seconds
       ComparisonOperator: GreaterThanOrEqualToThreshold
       Dimensions:
-      - Name: LoadBalancerName
-        Value: !Ref LoadBalancer
+      - Name: InternalLoadBalancerSecurityGroupName
+        Value: !Ref InternalLoadBalancerSecurityGroup
       MetricName: HTTPCode_Backend_5XX
       Namespace: AWS/ELB
       EvaluationPeriods: !Ref Backend5XXConsecutivePeriod
