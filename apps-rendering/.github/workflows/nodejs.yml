@@ -1,0 +1,34 @@
+name: Validate
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    validate:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/setup-node@v2.1.5
+              with:
+                  node-version: 12
+            - uses: actions/cache@v2
+              with:
+                  path: ~/.npm
+                  key: node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: node-
+            - name: install
+              run: npm ci
+            - name: lint
+              run: npm run lint
+            - name: test
+              run: npm run test
+            - name: compile client
+              run: npm run build:client:prod
+            - name: compile server
+              run: npm run build:server:prod
