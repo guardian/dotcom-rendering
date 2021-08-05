@@ -189,44 +189,6 @@ Resources:
       Roles:
       - Ref: InstanceRole
 
-  LoadBalancer:
-    Type: AWS::ElasticLoadBalancing::LoadBalancer
-    Properties:
-      Listeners:
-      - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
-      CrossZone: true
-      HealthCheck:
-        Target: HTTP:9000/_healthcheck
-        HealthyThreshold: 2
-        UnhealthyThreshold: 10
-        Interval: 30
-        Timeout: 10
-      Subnets:
-        Ref: Subnets
-      SecurityGroups:
-      - Ref: InternalLoadBalancerSecurityGroup
-      AccessLoggingPolicy:
-        EmitInterval: 5
-        Enabled: true
-        S3BucketName: gu-elb-logs
-        S3BucketPrefix:
-          Fn::Join:
-          - "/"
-          - - ELBLogs
-            - Fn::FindInMap: [ Constants, Stack, Value ]
-            - Fn::FindInMap: [ Constants, App, Value ]
-            - Ref: Stage
-      Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
-
   InternalLoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
@@ -319,8 +281,7 @@ Resources:
       HealthCheckType: ELB
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
-      - Ref: LoadBalancer
-      - Ref: InternalLoadBalancer
+      - Ref: InternalLoadBalancerSecurityGroup
       Tags:
       - Key: Stage
         Value:
@@ -358,7 +319,7 @@ Resources:
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
       Dimensions:
       - Name: LoadBalancerName
-        Value: !Ref LoadBalancer
+        Value: !Ref InternalLoadBalancerSecurityGroup
       EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
       MetricName: Latency
       Namespace: AWS/ELB
