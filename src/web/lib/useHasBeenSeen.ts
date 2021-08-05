@@ -20,7 +20,7 @@ const useHasBeenSeen = (
 		? libDebounce(intersectionFn, 200)
 		: intersectionFn;
 
-	useEffect(() => {
+	useEffect((): any => {
 		if (observer.current) {
 			observer.current.disconnect();
 		}

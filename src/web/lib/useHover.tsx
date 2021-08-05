@@ -19,6 +19,7 @@ export function useHover<T>(): [MutableRefObject<T>, boolean] {
 				node.removeEventListener('mouseout', handleMouseOut);
 			};
 		}
+		return () => {};
 	}, []);
 
 	return [ref, value];
