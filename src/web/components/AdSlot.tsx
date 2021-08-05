@@ -253,6 +253,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					const MOSTVIEWED_STICKY_HEIGHT = 1059;
 					return (
 						<div
+							id="top-right-ad-slot"
 							css={css`
 								position: static;
 								height: ${MOSTVIEWED_STICKY_HEIGHT}px;
