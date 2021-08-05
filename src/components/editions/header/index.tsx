@@ -252,6 +252,15 @@ const LetterHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
+const CorrectionsHeader: FC<HeaderProps> = ({ item }) => (
+	<header css={headerStyles}>
+		<HeaderMedia item={item} />
+		<Series item={item} />
+		<Headline item={item} />
+		<Standfirst item={item} />
+	</header>
+);
+
 const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	// Display.Immersive needs to come before Design.Interview
 	if (item.display === Display.Immersive) {
@@ -268,6 +277,8 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 		return <ShowcaseHeader item={item} />;
 	} else if (item.design === Design.Analysis) {
 		return <AnalysisHeader item={item} />;
+	} else if (item.design === Design.Correction) {
+		return <CorrectionsHeader item={item} />;
 	} else if (item.design === Design.Media) {
 		return isPicture(item.tags) ? (
 			<PictureHeader item={item} />

@@ -8,6 +8,7 @@ import {
 	article,
 	cartoon,
 	comment,
+	correction,
 	editorial,
 	feature,
 	interview,
@@ -154,6 +155,22 @@ const Letter = (): ReactElement => (
 		}}
 	/>
 );
+
+const Correction = (): ReactElement => (
+	<Article
+		item={{
+			...correction,
+			tags: [
+				getTag(
+					'theguardian/series/correctionsandclarifications',
+					'Corrections and Clarifications ',
+				),
+			],
+			theme: selectPillar(Pillar.News),
+		}}
+	/>
+);
+
 const MatchReport = (): ReactElement => (
 	<Article
 		item={{
@@ -218,6 +235,7 @@ export {
 	Editorial,
 	Gallery,
 	Letter,
+	Correction,
 	MatchReport,
 	Cartoon,
 };

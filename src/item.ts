@@ -112,6 +112,11 @@ interface Obituary extends Fields {
 	body: Body;
 }
 
+interface Correction extends Fields {
+	design: Design.Correction;
+	body: Body;
+}
+
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each Design type.
 interface Standard extends Fields {
@@ -135,7 +140,8 @@ type Item =
 	| MatchReport
 	| Letter
 	| Obituary
-	| Editorial;
+	| Editorial
+	| Correction;
 
 // ----- Convenience Types ----- //
 
@@ -298,6 +304,9 @@ const isQuiz = hasTag('tone/quizzes');
 const isLabs = hasTag('tone/advertisement-features');
 
 const isMatchReport = hasTag('tone/matchreports');
+
+const isCorrection = hasTag('theguardian/series/correctionsandclarifications');
+
 const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog = (context: Context) => (
@@ -339,6 +348,11 @@ const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
 	} else if (isAnalysis(tags)) {
 		return {
 			design: Design.Analysis,
+			...itemFieldsWithBody(context, request),
+		};
+	} else if (isCorrection(tags)) {
+		return {
+			design: Design.Correction,
 			...itemFieldsWithBody(context, request),
 		};
 	} else if (isLetter(tags)) {
