@@ -281,7 +281,7 @@ Resources:
       HealthCheckType: ELB
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
-      - Ref: InternalLoadBalancerSecurityGroup
+      - Ref: InternalLoadBalancer
       Tags:
       - Key: Stage
         Value:
@@ -318,7 +318,7 @@ Resources:
       AlarmDescription: !Sub |
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
       Dimensions:
-      - Name: LoadBalancerName
+      - Name: InternalLoadBalancer
         Value: !Ref InternalLoadBalancerSecurityGroup
       EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
       MetricName: Latency
