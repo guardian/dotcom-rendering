@@ -1,10 +1,13 @@
-name: PR deployment
+name: DCR PR deployment
 on:
     pull_request:
         types: [labeled]
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
     pr_deployment:
+        name: DCR PR deployment    
         # We only want to run the app if the PR Deployment label has been added
         if: ${{ github.event.label.id == 2500798832 }}
 
@@ -16,10 +19,11 @@ jobs:
             - name: Install Node
               uses: guardian/actions-setup-node@main
             - run: make build
+              working-directory: dotcom-rendering
             - name: Boot server and run ngrok
               run: |
                   npm install -g ngrok
-                  NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js &
+                  NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dotcom-rendering/dist/frontend.server.js &
                   timeout 5h ngrok http 9000 -log=stdout | \
                     grep --line-buffered -o 'https://.*' | \
                     xargs -L1 -I{} -t \
