@@ -86,28 +86,6 @@ Mappings:
       MaxCapacity: 4
 
 Resources:
-  LoadBalancerSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: HTTP access to the load balancer from within the Guardian (for now)
-      VpcId:
-        Ref: VpcId
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIp: 0.0.0.0/0
-      Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
-
   InternalLoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
