@@ -49,6 +49,9 @@ const docParser = JSDOM.fragment.bind(null);
 
 // ----- Functions ----- //
 
+const stage = Stage === 'CODE' ? 'code' : 'prod';
+const s3Path = `https://editions-published-${stage}.s3.eu-west-1.amazonaws.com`;
+
 const getEditionsEnv = (isPreview: boolean, path?: string): EditionsEnv => {
 	if (isPreview) {
 		return EditionsEnv.Preview;
@@ -66,7 +69,7 @@ const getFonts = (env: EditionsEnv): string => {
 		case EditionsEnv.Prod:
 			return prodFonts;
 		case EditionsEnv.Preview:
-			return previewFonts;
+			return previewFonts(s3Path);
 		default:
 			return devFonts;
 	}
@@ -180,9 +183,6 @@ function render(
 
 	const devScript = map(getAssetLocation)(some('editions.js'));
 	const prodScript = some('assets/js/editions.js');
-
-	const stage = Stage === 'CODE' ? 'code' : 'prod';
-	const s3Path = `https://editions-published-${stage}.s3.eu-west-1.amazonaws.com`;
 	const previewScript = some(`${s3Path}/assets/js/editions.js`);
 
 	const getClientScript = (env: EditionsEnv): Option<string> => {

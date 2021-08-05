@@ -11,7 +11,6 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { Design, map, none, some, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
-import { Stage } from 'server/appIdentity';
 
 export const sidePadding = css`
 	padding-left: ${remSpace[3]};
@@ -468,10 +467,7 @@ export const editionsPageFonts = `
 	)}
 `;
 
-const stage = Stage === 'CODE' ? 'code' : 'prod';
-const s3Path = `https://editions-published-${stage}.s3.eu-west-1.amazonaws.com`;
-
-export const editionsPreviewFonts = `
+export const editionsPreviewFonts = (s3Path: string): string => `
     ${fontFace(
 		'Guardian Text Egyptian Web',
 		some(400),
