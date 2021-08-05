@@ -318,7 +318,7 @@ Resources:
       AlarmDescription: !Sub |
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
       Dimensions:
-      - Name: InternalLoadBalancerName
+      - Name: LoadBalancerName
         Value: !Ref InternalLoadBalancer
       EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
       MetricName: Latency
@@ -341,7 +341,7 @@ Resources:
         Alarm if 5XX backend errors are greater than ${Backend5XXAlarmThreshold} over last ${Backend5XXAlarmPeriod} seconds
       ComparisonOperator: GreaterThanOrEqualToThreshold
       Dimensions:
-      - Name: InternalLoadBalancerName
+      - Name: LoadBalancerName
         Value: !Ref InternalLoadBalancer
       MetricName: HTTPCode_Backend_5XX
       Namespace: AWS/ELB
