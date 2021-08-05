@@ -253,6 +253,7 @@ Resources:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
       Scheme: internal
+      LoadBalancerName: !Sub '${Stack}-${Stage}-${App}-ELB'
       Listeners:
       - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
       CrossZone: true
@@ -341,6 +342,7 @@ Resources:
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
       - Ref: LoadBalancer
+      - Ref: InternalLoadBalancer
       Tags:
       - Key: Stage
         Value:
