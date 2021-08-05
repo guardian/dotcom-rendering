@@ -86,28 +86,6 @@ Mappings:
       MaxCapacity: 4
 
 Resources:
-  LoadBalancerSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: HTTP access to the load balancer from within the Guardian (for now)
-      VpcId:
-        Ref: VpcId
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIp: 0.0.0.0/0
-      Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
-
   InternalLoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -141,12 +119,6 @@ Resources:
       VpcId:
         Ref: VpcId
       SecurityGroupIngress:
-        # allow ELB to talk to instance
-      - IpProtocol: tcp
-        FromPort: 9000
-        ToPort: 9000
-        SourceSecurityGroupId:
-          Ref: LoadBalancerSecurityGroup
         # allow ELB to talk to instance
       - IpProtocol: tcp
         FromPort: 9000
@@ -216,44 +188,6 @@ Resources:
       Path: /
       Roles:
       - Ref: InstanceRole
-
-  LoadBalancer:
-    Type: AWS::ElasticLoadBalancing::LoadBalancer
-    Properties:
-      Listeners:
-      - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
-      CrossZone: true
-      HealthCheck:
-        Target: HTTP:9000/_healthcheck
-        HealthyThreshold: 2
-        UnhealthyThreshold: 10
-        Interval: 30
-        Timeout: 10
-      Subnets:
-        Ref: Subnets
-      SecurityGroups:
-      - Ref: LoadBalancerSecurityGroup
-      AccessLoggingPolicy:
-        EmitInterval: 5
-        Enabled: true
-        S3BucketName: gu-elb-logs
-        S3BucketPrefix:
-          Fn::Join:
-          - "/"
-          - - ELBLogs
-            - Fn::FindInMap: [ Constants, Stack, Value ]
-            - Fn::FindInMap: [ Constants, App, Value ]
-            - Ref: Stage
-      Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
 
   InternalLoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
@@ -347,7 +281,6 @@ Resources:
       HealthCheckType: ELB
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
-      - Ref: LoadBalancer
       - Ref: InternalLoadBalancer
       Tags:
       - Key: Stage
@@ -386,7 +319,7 @@ Resources:
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
       Dimensions:
       - Name: LoadBalancerName
-        Value: !Ref LoadBalancer
+        Value: !Ref InternalLoadBalancer
       EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
       MetricName: Latency
       Namespace: AWS/ELB
@@ -409,7 +342,7 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold
       Dimensions:
       - Name: LoadBalancerName
-        Value: !Ref LoadBalancer
+        Value: !Ref InternalLoadBalancer
       MetricName: HTTPCode_Backend_5XX
       Namespace: AWS/ELB
       EvaluationPeriods: !Ref Backend5XXConsecutivePeriod
@@ -423,5 +356,5 @@ Outputs:
   LoadBalancerUrl:
     Value:
       'Fn::GetAtt':
-      - LoadBalancer
+      - InternalLoadBalancer
       - DNSName
