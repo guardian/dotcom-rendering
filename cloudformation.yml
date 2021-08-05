@@ -356,5 +356,5 @@ Outputs:
   LoadBalancerUrl:
     Value:
       'Fn::GetAtt':
-      - LoadBalancer
+      - InternalLoadBalancer
       - DNSName
