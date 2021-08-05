@@ -166,7 +166,8 @@ const Article: FC<Props> = ({ item }) => {
 		item.design === Design.Quiz ||
 		item.design === Design.Recipe ||
 		item.design === Design.MatchReport ||
-		item.design === Design.Obituary
+		item.design === Design.Obituary ||
+		item.design === Design.Correction
 	) {
 		return (
 			<main css={mainStyles}>
