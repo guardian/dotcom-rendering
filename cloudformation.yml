@@ -147,6 +147,12 @@ Resources:
         ToPort: 9000
         SourceSecurityGroupId:
           Ref: LoadBalancerSecurityGroup
+        # allow ELB to talk to instance
+      - IpProtocol: tcp
+        FromPort: 9000
+        ToPort: 9000
+        SourceSecurityGroupId:
+          Ref: InternalLoadBalancerSecurityGroup
       Tags:
       - Key: Stage
         Value:
