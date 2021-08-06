@@ -256,8 +256,7 @@ export const document = ({ data }: Props): string => {
 	}
 
 	const commercialBundle =
-		CAPI.config &&
-		CAPI.config.abTests.standaloneCommercialBundleVariant === 'variant'
+		CAPI.config?.abTests.standaloneCommercialBundleVariant === 'variant'
 			? { src: CAPI.config.standaloneCommercialBundleUrl }
 			: { src: CAPI.config.commercialBundleUrl };
 	/**
