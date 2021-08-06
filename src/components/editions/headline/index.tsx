@@ -12,11 +12,10 @@ import { border, neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
-import { Design, Display, OptionKind } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
 import { editionsHeadlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { pipe } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import Series from '../series';
@@ -38,9 +37,9 @@ const analysisStyles = (kickerColor: string): SerializedStyles => css`
 	padding-bottom: 0;
 `;
 
-const commentStyles = (hasImage: boolean): SerializedStyles => css`
+const commentStyles = css`
 	padding-bottom: 0;
-	padding-right: ${hasImage ? '6rem' : 0};
+	padding-right: 6rem;
 `;
 
 const galleryStyles = css`
@@ -180,7 +179,6 @@ const getDecorativeStyles = (item: Item): JSX.Element | string => {
 const getHeadlineStyles = (
 	format: Format,
 	kickerColor: string,
-	hasImage: boolean,
 ): SerializedStyles => {
 	const sharedStyles = getSharedStyles(format);
 
@@ -197,7 +195,7 @@ const getHeadlineStyles = (
 		return css(
 			sharedStyles,
 			getFontStyles('regular', 'light'),
-			commentStyles(hasImage),
+			commentStyles,
 		);
 	}
 
@@ -245,13 +243,6 @@ const Headline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
-	const [contributor] = item.contributors;
-
-	const hasImage = pipe(
-		contributor.image,
-		(image) => image.kind === OptionKind.Some,
-	);
-
 	return (
 		<div css={headlineWrapperStyles}>
 			{hasSeriesKicker(format) && (
@@ -259,7 +250,7 @@ const Headline: FC<Props> = ({ item }) => {
 					<Series item={item} />
 				</div>
 			)}
-			<h1 css={getHeadlineStyles(format, kickerColor, hasImage)}>
+			<h1 css={getHeadlineStyles(format, kickerColor)}>
 				{getDecorativeStyles(item)}
 			</h1>
 		</div>
