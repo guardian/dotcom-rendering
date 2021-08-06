@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
 
-import { border } from '@guardian/src-foundations/palette';
-
 import { getZIndex, getZIndexImportant } from '@frontend/web/lib/getZIndex';
 
 type Props = {
@@ -19,7 +17,6 @@ type StuckProps = Props & {
 // classes are tightly coupled.
 const stickyAdWrapper = (zIndex = 'stickyAdWrapper') => css`
 	background-color: white;
-	border-bottom: 0.0625rem solid ${border.secondary};
 	position: sticky;
 	top: 0;
 	${getZIndex(zIndex)}
