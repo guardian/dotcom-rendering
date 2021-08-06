@@ -6,7 +6,8 @@ type Props = {
 	children?: React.ReactNode;
 };
 
-type StuckProps = Props & {
+type StuckProps = {
+	children?: React.ReactNode;
 	zIndex?: string;
 };
 
