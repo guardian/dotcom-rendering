@@ -17,13 +17,13 @@ const root = resolve(__dirname, '..', '..');
  *
  * A script to automatically download the latest json data for a production article and
  * insert it into a fixture file to use for testing. In particular, we use these fixtures
- * for our layoout stories
+ * for our layout stories
  *
  * Edit the articles array below to add or amend the urls that we use. The script will fetch
  * ${article.url}.json?dcr and save the response in ${article.name}.ts in the fixtures folder
  *
  * Usage
- * $ node scripts/test-data/gen-schema.js
+ * $ node scripts/test-data/gen-fixtures.js
  */
 
 const articles = [
