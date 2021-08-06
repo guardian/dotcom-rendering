@@ -3788,6 +3788,7 @@
                 "shortUrlId",
                 "showRelatedContent",
                 "stage",
+				"standaloneCommercialBundleUrl",
                 "switches"
             ]
         },

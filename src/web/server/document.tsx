@@ -254,6 +254,12 @@ export const document = ({ data }: Props): string => {
 	function isDefined<T>(argument: T | boolean): argument is T {
 		return argument !== false;
 	}
+
+	const commercialBundle =
+		CAPI.config &&
+		CAPI.config.abTests.standaloneCommercialBundleVariant === 'variant'
+			? { src: CAPI.config.standaloneCommercialBundleUrl }
+			: { src: CAPI.config.commercialBundleUrl };
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -265,7 +271,7 @@ export const document = ({ data }: Props): string => {
 		[
 			{ src: polyfillIO },
 			...getScriptArrayFromChunkName('ophan'),
-			CAPI.config && { src: CAPI.config.commercialBundleUrl },
+			commercialBundle,
 			...getScriptArrayFromChunkName('sentryLoader'),
 			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),
