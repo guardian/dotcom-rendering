@@ -51,8 +51,6 @@ export const YoutubeBlockComponent: React.FC<{
 	if (element.channelId) {
 		// related videos metadata
 		attributes['data-param-rel'] = '0';
-		attributes['data-param-listType'] = 'playlist';
-		attributes['data-param-list'] = element.channelId;
 	}
 
 	return (
