@@ -118,10 +118,6 @@ const BrazeEpicWithSatisfiedDependencies = ({
 								}),
 								credentials: 'include',
 							});
-							console.log(
-								'Subscribed to newsletter with id ',
-								newsletterId,
-							);
 						}}
 						countryCode={countryCode}
 					/>
@@ -165,3 +161,5 @@ export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
 		</>
 	);
 };
+
+
