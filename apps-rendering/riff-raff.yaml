@@ -1,0 +1,23 @@
+stacks: [mobile, mobile-preview]
+regions: [eu-west-1]
+deployments:
+  mobile-apps-rendering-cfn:
+    type: cloud-formation
+    app: mobile-apps-rendering
+    parameters:
+      amiEncrypted: true
+      amiTags:
+        Recipe: bionic-mobile-node-ARM
+        AmigoStage: PROD
+      templatePath: cloudformation.yaml
+  mobile-apps-rendering:
+    type: autoscaling
+    parameters:
+      bucket: mobile-apps-api-dist
+    dependencies: [mobile-apps-rendering-cfn]
+  mobile-assets:
+    type: aws-s3
+    parameters:
+      bucket: mobile-apps-rendering-assets
+      cacheControl: public, max-age=315360000
+      prefixStack: false

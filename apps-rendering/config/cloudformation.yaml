@@ -1,0 +1,371 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Standard template for each mapi microservice
+
+Mappings:
+  CODE:
+    ScalingUp:
+      Period: 300
+      Threshold: 20
+    ScalingDown:
+      Period: 300
+      Threshold: 15
+    InstanceType:
+       Value: "t4g.micro"
+  PROD:
+    ScalingUp:
+      Period: 300
+      Threshold: 20
+    ScalingDown:
+      Period: 300
+      Threshold: 15
+    InstanceType:
+      Value: "t4g.micro"
+  Constants:
+    RunbookCopy:
+      Value: <<<Runbook|https://docs.google.com/document/d/1VRYMTYtlb0pYt19S7AZoXttLH3N2MJ41hS5oo2vfVhI>>>
+
+Parameters:
+  App:
+    Description: The name of the microservice. Typically mobile-something (fronts, items etc)
+    Type: String
+    Default: mobile-apps-rendering
+  Stage:
+    AllowedValues:
+      - CODE
+      - PROD
+    Description: Stage
+    Type: String
+  Stack:
+    AllowedValues:
+      - mobile
+      - mobile-preview
+    Description: Stack
+    Type: String
+  AMI:
+    Description: AMI use by the instances
+    Type: AWS::EC2::Image::Id
+  AutoscalingNotifications:
+    Description: The ARN of the SNS topic to send notifications to
+    Type: String
+  ASGMinSize:
+    Type: Number
+    Description: Minimum size of the autoscaling group
+  ASGMaxSize:
+    Type: Number
+    Description: Maximum size of the autoscaling group
+  DefaultVpcSecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: The default security group of the MAPI vpc
+  CertificateArn:
+    Type: String
+    Description: The ARN of the SSL certificate used by the ALB
+  HostedZone:
+    Type: String
+    Description: The HostedZone, should contain the trailing dot zone.example.com.
+  DomainName:
+    Type: String
+    Description: The DomainName of the ALB, should contain the trailing dot stuff.zone.example.com.
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Application configuration
+        Parameters:
+          - App
+          - Stack
+          - Stage
+      - Label:
+          default: Autoscaling group configuration
+        Parameters:
+          - AMI
+          - AutoscalingNotifications
+          - ASGMinSize
+          - ASGMaxSize
+
+Resources:
+
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub rendering-${Stack}-${Stage}
+      Scheme: internal
+      SecurityGroups:
+        - !Ref DefaultVpcSecurityGroup
+        - !Ref LoadBalancerToEc2SecurityGroup
+      Subnets: !Split [ ',', !ImportValue MobileAppsApiVPC-PublicSubnets]
+      Tags:
+        - Key: App
+          Value: !Ref App
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Stack
+          Value: !Ref Stack
+
+  LoadBalancerToEc2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Open up HTTP access to load balancer
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 3040
+          IpProtocol: tcp
+          ToPort: 3040
+      VpcId: !ImportValue MobileAppsApiVPC-VpcId
+
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      DefaultActions:
+        - TargetGroupArn: !Ref AppsRenderingTargetGroup
+          Type: forward
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 443
+      Protocol: HTTPS
+
+  AppsRenderingTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 5
+      HealthCheckPath: /healthcheck
+      HealthCheckPort: 3040
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 3
+      HealthyThresholdCount: 2
+      UnhealthyThresholdCount: 5
+      Name: !Sub rendering-${Stack}-${Stage}
+      Port: 3040
+      Protocol: HTTP
+      Tags:
+        - Key: App
+          Value: mobile-apps-rendering
+        - Key: Stage
+          Value: !Ref Stage
+        - Key: Stack
+          Value: !Ref Stack
+      TargetGroupAttributes:
+        - Key: "deregistration_delay.timeout_seconds"
+          Value: "10"
+      VpcId: !ImportValue MobileAppsApiVPC-VpcId
+
+  AutoscalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AvailabilityZones: !GetAZs
+      HealthCheckGracePeriod: 300
+      HealthCheckType: ELB
+      LaunchConfigurationName: !Ref LaunchConfig
+      TargetGroupARNs:
+        - !Ref AppsRenderingTargetGroup
+      MaxSize: !Ref ASGMaxSize
+      MinSize: !Ref ASGMinSize
+      NotificationConfiguration:
+        NotificationTypes:
+          - autoscaling:EC2_INSTANCE_LAUNCH_ERROR
+          - autoscaling:EC2_INSTANCE_TERMINATE_ERROR
+        TopicARN: !Ref AutoscalingNotifications
+      Tags:
+        - Key: Stage
+          PropagateAtLaunch: true
+          Value: !Ref Stage
+        - Key: Stack
+          PropagateAtLaunch: true
+          Value: !Ref Stack
+        - Key: App
+          PropagateAtLaunch: true
+          Value: !Ref App
+      VPCZoneIdentifier: !Split [ ',', !ImportValue MobileAppsApiVPC-PrivateSubnets]
+
+  DistributionInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles: [!Ref DistributionRole]
+
+  DistributionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+      Path: /
+      ManagedPolicyArns: [ !Sub 'arn:aws:iam::${AWS::AccountId}:policy/ssm-scala-v1' ]
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Action: s3:GetObject
+                Effect: Allow
+                Resource: arn:aws:s3:::mobile-apps-api-dist/*
+              - Action:
+                  - ec2:DescribeTags
+                  - ec2:DescribeInstances
+                Effect: Allow
+                Resource: '*'
+              - Action:
+                  - cloudwatch:*
+                  - logs:*
+                Effect: Allow
+                Resource: '*'
+              - Action:
+                  - ssm:GetParametersByPath
+                Effect: Allow
+                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${App}/${Stage}/${Stack}/
+              - Action:
+                  - autoscaling:DescribeAutoScalingInstances
+                  - autoscaling:DescribeAutoScalingGroups
+                Resource: '*'
+                Effect: Allow
+              - Effect: Allow
+                Action:
+                  - kinesis:PutRecord
+                  - kinesis:PutRecords
+                  - kinesis:DescribeStream
+                Resource: !Sub arn:aws:kinesis:${AWS::Region}:${AWS::AccountId}:stream/mobile-log-aggregation-${Stage}
+          PolicyName: root
+
+  HighCpuAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmActions: [!Ref ScaleUpPolicy]
+      AlarmDescription: !Sub
+        - Scale-Up if cpu is greater than ${Threshold}% over last ${Period} seconds. ${RunbookCopy}
+        - Threshold: !FindInMap [!Ref Stage, ScalingUp, Threshold]
+          Period: !FindInMap [!Ref Stage, ScalingUp, Period]
+          RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      Dimensions:
+        - Name: AutoScalingGroupName
+          Value: !Ref AutoscalingGroup
+      EvaluationPeriods: 1
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Period: !FindInMap [!Ref Stage, ScalingUp, Period]
+      Statistic: Average
+      Threshold: !FindInMap [!Ref Stage, ScalingUp, Threshold]
+
+  LowCpuAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmActions: [!Ref ScaleDownPolicy]
+      AlarmDescription: !Sub
+        - Scale-Down if cpu is lower than ${Threshold}% over last ${Period} seconds. ${RunbookCopy}
+        - Threshold: !FindInMap [!Ref Stage, ScalingDown, Threshold]
+          Period: !FindInMap [!Ref Stage, ScalingDown, Period]
+          RunbookCopy: !FindInMap [Constants, RunbookCopy, Value]
+      ComparisonOperator: LessThanThreshold
+      Dimensions:
+        - Name: AutoScalingGroupName
+          Value: !Ref AutoscalingGroup
+      EvaluationPeriods: 1
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Period: !FindInMap [!Ref Stage, ScalingDown, Period]
+      Statistic: Average
+      Threshold: !FindInMap [!Ref Stage, ScalingDown, Threshold]
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Open up HTTP access to load balancer
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 80
+          IpProtocol: tcp
+          ToPort: 80
+        - CidrIp: 0.0.0.0/0
+          FromPort: 443
+          IpProtocol: tcp
+          ToPort: 443
+      SecurityGroupIngress:
+        - FromPort: 3040
+          IpProtocol: tcp
+          SourceSecurityGroupId:
+            Fn::ImportValue: !Sub mobile-router-${Stack}-${Stage}-LoadBalancerSecurityGroup
+          ToPort: 3040
+      VpcId: !ImportValue MobileAppsApiVPC-VpcId
+
+  WazuhSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+          GroupDescription: Allow outbound traffic from wazuh agent to manager
+          VpcId: !ImportValue MobileAppsApiVPC-VpcId
+          SecurityGroupEgress:
+              - IpProtocol: tcp
+                FromPort: 1514
+                ToPort: 1515
+                CidrIp: 0.0.0.0/0
+
+  LaunchConfig:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      AssociatePublicIpAddress: false
+      IamInstanceProfile: !Ref DistributionInstanceProfile
+      ImageId: !Ref AMI
+      InstanceType: !FindInMap [!Ref Stage, InstanceType, Value]
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+        - Fn::ImportValue: !Sub SecurityGroups-${Stage}-MapiGuardianLondonSSH
+        - !Ref DefaultVpcSecurityGroup
+        - !Ref WazuhSecurityGroup
+      MetadataOptions:
+          HttpTokens: required
+      UserData:
+        "Fn::Base64":
+          !Sub |
+          #!/bin/bash -ev
+          groupadd mapi
+          useradd -r -m -s /usr/bin/nologin -g mapi ${App}
+
+          export App=${App}
+          export Stack=${Stack}
+          export Stage=${Stage}
+          export NODE_ENV=production
+
+          aws --region ${AWS::Region} s3 cp s3://mobile-apps-api-dist/${Stack}/${Stage}/${App}/${App}.zip /tmp
+          mkdir -p /opt/${App}
+          unzip /tmp/${App}.zip -d /opt/${App}
+          chown -R ${App}:mapi /opt/${App}
+
+          mkdir -p /usr/share/${App}/logs
+          chown -R ${App}:mapi /usr/share/${App}
+          ln -s /usr/share/${App}/logs /var/log/${App}
+          chown -R ${App}:mapi /var/log/${App}
+
+          export PM2_HOME="/usr/share/${App}"
+          export ASSETS_MANIFEST="/opt/${App}/manifest.json"
+
+          /usr/local/node/pm2 start --name ${App} --uid ${App} --gid mapi /opt/${App}/server.js
+          /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} mobile-log-aggregation-${Stage} '/var/log/${App}/*'
+          /usr/local/node/pm2 logrotate -u ${App}
+
+  ScaleDownPolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AdjustmentType: ChangeInCapacity
+      AutoScalingGroupName: !Ref AutoscalingGroup
+      Cooldown: 900
+      ScalingAdjustment: -1
+
+  ScaleUpPolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AdjustmentType: PercentChangeInCapacity
+      AutoScalingGroupName: !Ref AutoscalingGroup
+      Cooldown: 400
+      ScalingAdjustment: 100
+
+  DnsRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: CNAME
+      TTL: 3600
+      ResourceRecords: [!GetAtt LoadBalancer.DNSName]
