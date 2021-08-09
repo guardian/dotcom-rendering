@@ -28,7 +28,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --org=guardian-mobile --project-name=apps-rendering --exclude=dotcom-rendering --dev=true --prune-repeated-subdependencies --sarif-file-output=snyk-node.sarif
+          args: --org=guardian-mobile --project-name=apps-rendering --exclude=dotcom-rendering --all-projects --dev=true --prune-repeated-subdependencies --sarif-file-output=snyk-node.sarif
           command: test
 
       - name: Run Snyk to check for vulnerabilities
