@@ -1,0 +1,41 @@
+name: AR Snyk
+
+on:
+    schedule:
+        - cron: "0 9 * * 1-5"
+    push:
+        paths-ignore:
+            - "dotcom-rendering/**"
+    pull_request:
+        paths-ignore:
+            - "dotcom-rendering/**"
+    workflow_dispatch:
+
+jobs:
+    snyk:
+        name: AR Snyk
+        runs-on: ubuntu-latest
+        timeout-minutes: 3
+
+        strategy:
+            matrix:
+                node-version: [12.x]
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Run Snyk to check for vulnerabilities
+              uses: snyk/actions/node@master
+              env:
+                  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+              with:
+                  args: --org=guardian-mobile --project-name=apps-rendering --file=apps-rendering/package-lock.json --all-projects --dev=true
+                  command: test
+
+            - name: Run Snyk to check for vulnerabilities
+              uses: snyk/actions/node@master
+              env:
+                  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+                  SNYK_ORG: ${{ secrets.SNYK_ORG }}
+              with:
+                  command: monitor
+                  args: --org=${SNYK_ORG} --project-name=apps-rendering --file=apps-rendering/package-lock.json
