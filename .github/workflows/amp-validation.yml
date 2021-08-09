@@ -1,9 +1,12 @@
-name: AMP Validation
-on: push
+name: DCR AMP Validation
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
     amp_validation:
-        name: AMP Validation
+        name: DCR AMP Validation
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -14,9 +17,13 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: dotcom-rendering
 
             - name: Install
               run: yarn
+              working-directory: dotcom-rendering
 
             - name: Validate AMP
               run: make ampValidation
+              working-directory: dotcom-rendering
