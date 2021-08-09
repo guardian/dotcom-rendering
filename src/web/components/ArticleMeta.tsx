@@ -11,6 +11,7 @@ import { Lines } from '@guardian/src-ed-lines';
 import { border, space } from '@guardian/src-foundations';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	format: Format;
@@ -264,7 +265,10 @@ export const ArticleMeta = ({
 
 	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
 	return (
-		<div css={metaContainer(format)}>
+		<div
+			className={interactiveLegacyClasses.metaContainer}
+			css={metaContainer(format)}
+		>
 			<div css={meta}>
 				{branding && <Branding branding={branding} palette={palette} />}
 				{format.theme === Special.Labs ? (
@@ -312,7 +316,10 @@ export const ArticleMeta = ({
 					</>
 				</RowBelowLeftCol>
 				<div data-print-layout="hide" css={metaFlex}>
-					<div css={metaExtras(palette)}>
+					<div
+						className={interactiveLegacyClasses.shareIcons}
+						css={metaExtras(palette)}
+					>
 						<ShareIcons
 							pageId={pageId}
 							webTitle={webTitle}

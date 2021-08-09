@@ -19,6 +19,10 @@ export const interactiveLegacyClasses = {
 	contentMainColumn: 'content__main-column--interactive',
 	headline: 'content__headline',
 	labelLink: 'content__label__link',
+	metaContainer: 'content__meta-container_dcr',
+	standFirst: 'content__standfirst',
+	byline: 'byline',
+	shareIcons: 'meta__social',
 };
 
 // Styles expected by interactives from the Frontend days. These shouldn't be
