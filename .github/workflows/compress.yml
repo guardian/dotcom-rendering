@@ -1,16 +1,19 @@
-name: Compressed Size
-
-on: [pull_request]
+name: DCR Compressed Size
+on:
+    pull_request:
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
     compressed_size:
-        name: Compressed Size
+        name: DCR Compressed Size
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v2
             - uses: guardian/actions-setup-node@main
-            - uses: preactjs/compressed-size-action@v1
+            - uses: preactjs/compressed-size-action@v2
               with:
-                  repo-token: '${{ secrets.GITHUB_TOKEN }}'
+                  cwd: ./dotcom-rendering
+                  repo-token: "${{ secrets.GITHUB_TOKEN }}"
                   build-script: makeBuild

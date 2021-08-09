@@ -1,9 +1,12 @@
-name: Bundle Analyser
-on: push
+name: DCR Bundle Analyser
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
     build_check:
-        name: Bundle Analyser
+        name: DCR Bundle Analyser
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -14,15 +17,19 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: dotcom-rendering
 
             - name: Install
               run: yarn
+              working-directory: dotcom-rendering
 
             - name: Generate production build
               run: make build
+              working-directory: dotcom-rendering
 
             - name: Archive code coverage results
               uses: actions/upload-artifact@v2
               with:
-                name: bundle-analyser-report
-                path: dist/browser-bundles.html
+                  name: bundle-analyser-report
+                  path: dotcom-rendering/dist/browser-bundles.html
