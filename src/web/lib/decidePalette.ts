@@ -226,7 +226,7 @@ const textArticleLinkHover = (format: Format): string => {
 };
 
 const textCardHeadline = (format: Format): string => {
-	if (format.display === Display.Immersive) return WHITE;
+	if (format.display === Display.Immersive) return BLACK;
 	if (format.theme === Special.SpecialReport) return WHITE;
 	switch (format.design) {
 		case Design.Feature:
