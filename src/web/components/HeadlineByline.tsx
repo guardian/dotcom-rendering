@@ -6,6 +6,7 @@ import { space } from '@guardian/src-foundations';
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import { Display, Design, Format, Special } from '@guardian/types';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { until } from '@guardian/src-foundations/mq';
 
 const wrapperStyles = css`
 	margin-left: 6px;
@@ -53,6 +54,12 @@ const opinionStyles = (palette: Palette, format: Format) => css`
 	font-style: italic;
 	color: ${palette.text.headlineByline};
 	background: ${palette.background.headlineByline};
+
+	${until.mobileMedium} {
+		${headline.small({
+			fontWeight: 'light',
+		})}
+	}
 
 	a {
 		color: inherit;

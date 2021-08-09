@@ -78,7 +78,7 @@ export const pillarPalette_DO_NOT_USE: Record<
 	},
 	[Pillar.Opinion]: {
 		dark: opinion[300],
-		main: opinion[400],
+		main: opinion[300],
 		bright: opinion[500],
 		pastel: opinion[600],
 		faded: opinion[800],
@@ -163,9 +163,9 @@ export const pillarMap: <T>(f: (name: Theme) => T) => { [K in Theme]: T } = (
 });
 /*
 Further notes on this function:
-    - It maps by hand because it's easy to lose track of types when you use Object.assign()
-    - Where the function parameter f returns type T, pillarMap will return an object with
-      a key for each pillar and values of type T.
+	- It maps by hand because it's easy to lose track of types when you use Object.assign()
+	- Where the function parameter f returns type T, pillarMap will return an object with
+	  a key for each pillar and values of type T.
  */
 
 export const neutralBorder = (pillar: Theme): ColourType => {
