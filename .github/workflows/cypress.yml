@@ -1,23 +1,27 @@
-name: cypress
-on: [push]
+name: DCR cypress
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 jobs:
     cypress:
-        name: Cypress
+        name: DCR Cypress
         runs-on: ubuntu-16.04
         strategy:
-          fail-fast: false
-          matrix:
-            group: [1, 2, 3, 4, 5, 6]
+            fail-fast: false
+            matrix:
+                group: [1, 2, 3, 4, 5, 6]
         steps:
             - name: Checkout
               uses: actions/checkout@v1
             - name: Cypress run
               uses: cypress-io/github-action@v2
               env:
-                NODE_ENV: development
+                  NODE_ENV: development
               with:
                   start: node scripts/frontend/dev-server
-                  wait-on: 'http://localhost:3030'
+                  working-directory: dotcom-rendering
+                  wait-on: "http://localhost:3030"
                   wait-on-timeout: 180
                   quiet: true
                   browser: chrome
