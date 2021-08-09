@@ -5,7 +5,7 @@ import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import {
 	getWeeklyArticleHistory,
 	logView,
-} from '@root/node_modules/@guardian/automat-client';
+} from '@guardian/automat-contributions';
 import {
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -21,7 +21,7 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
-import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-client/dist/types';
+import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-contributions/dist/lib/types';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';

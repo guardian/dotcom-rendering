@@ -15,7 +15,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import { incrementWeeklyArticleCount } from '@guardian/automat-client';
+import { incrementWeeklyArticleCount } from '@guardian/automat-contributions';
 import {
 	QandaAtom,
 	GuideAtom,
