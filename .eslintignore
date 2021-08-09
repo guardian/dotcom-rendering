@@ -1,1 +1,7 @@
 node_modules
+
+apps-rendering/*.test.ts
+apps-rendering/node_modules
+apps-rendering/api-models
+apps-rendering/webpack.config.ts
+dotcom-rendering/node_modules
