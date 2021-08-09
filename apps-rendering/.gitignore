@@ -1,0 +1,26 @@
+### Node template
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules
+
+# IDE files
+.idea
+.vscode/*
+!.vscode/extensions.json
+.metals/
+
+# System files
+.DS_Store
+
+# Built files
+dist
+
+# Istanbul/Jest code coverage
+coverage
+
+# sbt
+target
