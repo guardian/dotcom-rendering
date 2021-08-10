@@ -250,9 +250,9 @@ async function serveArticlePost(
 		const themeOverride = themeFromUnknown(req.query.theme);
 
 		if (richLinkDetails) {
-			void serveRichLinkDetails(renderingRequest, res);
+			await serveRichLinkDetails(renderingRequest, res);
 		} else {
-			void serveArticleSwitch(
+			await serveArticleSwitch(
 				renderingRequest,
 				res,
 				isEditions,
@@ -279,7 +279,7 @@ async function serveEditionsArticlePost(
 		};
 		const themeOverride = themeFromUnknown(req.query.theme);
 
-		void serveEditionsArticle(renderingRequest, res, themeOverride);
+		await serveEditionsArticle(renderingRequest, res, themeOverride);
 	} catch (e) {
 		logger.error('This error occurred', e);
 		next(e);
@@ -295,9 +295,10 @@ async function serveArticleGet(
 		const isEditions = req.query.editions === '';
 		const capiContent = await askCapiFor(articleId);
 
-		either(
+		await either(
 			(errorStatus: number) => {
 				res.sendStatus(errorStatus);
+				return Promise.resolve();
 			},
 			async ([content, relatedContent]: [Content, RelatedContent]) => {
 				const footballContent = await getFootballContent(content);
@@ -317,9 +318,9 @@ async function serveArticleGet(
 				const themeOverride = themeFromUnknown(req.query.theme);
 
 				if (richLinkDetails) {
-					void serveRichLinkDetails(mockedRenderingRequest, res);
+					await serveRichLinkDetails(mockedRenderingRequest, res);
 				} else {
-					void serveArticleSwitch(
+					await serveArticleSwitch(
 						mockedRenderingRequest,
 						res,
 						isEditions,
