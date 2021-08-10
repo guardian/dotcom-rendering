@@ -262,8 +262,6 @@ const textCardKicker = (format: Format): string => {
 		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
 		return '#ff9941';
 	if (format.theme === Special.SpecialReport) return brandAlt[400];
-	if (format.display === Display.Immersive)
-		return pillarPalette[format.theme].bright;
 	switch (format.design) {
 		case Design.LiveBlog:
 			switch (format.theme) {
