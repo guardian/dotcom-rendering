@@ -1025,7 +1025,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						>
 							<EmbedBlockComponent
 								html={embed.html}
-								alt={embed.alt}
+								caption={embed.caption}
 							/>
 						</ClickToView>
 					) : (
