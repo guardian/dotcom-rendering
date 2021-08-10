@@ -33,6 +33,7 @@ describe('Enhance Embeds', () => {
 							_type:
 								'model.dotcomrendering.pageElements.EmbedBlockElement',
 							elementId: '17bb4750-37c3-4cef-a535-82a5c40509fd',
+							caption: 'Sign up to the Fiver',
 						},
 					],
 				},
@@ -57,6 +58,7 @@ describe('Enhance Embeds', () => {
 							_type:
 								'model.dotcomrendering.pageElements.EmbedBlockElement',
 							elementId: '17bb4750-37c3-4cef-a535-82a5c40509fd',
+							caption: 'Sign up to the Fiver',
 						},
 					],
 				},

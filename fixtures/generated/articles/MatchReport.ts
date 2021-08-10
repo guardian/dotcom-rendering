@@ -1842,6 +1842,7 @@ export const MatchReport: CAPIType = {
 					_type:
 						'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '2957b548-62b0-42ad-bdbc-ee69ec1562e3',
+					caption: 'Fiver email embed',
 				},
 				{
 					html:
