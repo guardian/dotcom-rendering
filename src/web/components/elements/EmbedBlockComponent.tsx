@@ -27,7 +27,9 @@ export const EmbedBlockComponent = ({ html, caption }: Props) => {
 	return (
 		<div data-cy="embed-block" css={embedContainer}>
 			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
-			{isEmailEmbed && caption && <div css={emailCaptionStyle}>{caption}</div>}
+			{isEmailEmbed && caption && (
+				<div css={emailCaptionStyle}>{caption}</div>
+			)}
 		</div>
 	);
 };
