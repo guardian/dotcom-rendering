@@ -701,7 +701,7 @@ const textDropCap = (format: Format): string => {
 		case Design.Letter:
 		case Design.Comment:
 			return format.theme === Pillar.Opinion
-				? opinion[400]
+				? pillarPalette[format.theme].main
 				: pillarPalette[format.theme].dark;
 		default:
 			return pillarPalette[format.theme].dark;

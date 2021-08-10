@@ -63,10 +63,10 @@ describe('ampadslots', () => {
 		const res = adJson(paramSet);
 		const p = res.targeting.find((param) => param.name === 'p');
 		if (p === undefined) {
-			return fail();
+			fail();
+		} else {
+			expect(p.value).toBe('amp');
 		}
-
-		expect(p.value).toBe('amp');
 	});
 
 	it('should set rendering platform to dotcom-rendering', () => {
@@ -75,18 +75,20 @@ describe('ampadslots', () => {
 			(param) => param.name === 'rp',
 		);
 		if (renderingPlatform === undefined) {
-			return fail();
+			fail();
+		} else {
+			expect(renderingPlatform.value).toBe('dotcom-rendering');
 		}
-		expect(renderingPlatform.value).toBe('dotcom-rendering');
 	});
 
 	it('should set values to a comma-separated string', () => {
 		const res = adJson(paramSet);
 		const p = res.targeting.find((param) => param.name === 'su');
 		if (p === undefined) {
-			return fail();
+			fail();
+		} else {
+			expect(p.value).toBe('4,5,1,2,3');
 		}
-		expect(p.value).toBe('4,5,1,2,3');
 	});
 });
 

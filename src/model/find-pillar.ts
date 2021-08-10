@@ -27,5 +27,7 @@ export const findPillar: (
 			return Pillar.Sport;
 		case 'lifestyle':
 			return Pillar.Lifestyle;
+		default:
+			return undefined;
 	}
 };
