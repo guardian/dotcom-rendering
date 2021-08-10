@@ -7,6 +7,10 @@
     "files.watcherExclude": {
         "**/target": true
     },
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#648FFF",
+        "titleBar.activeForeground": "#000000"
+	},
     "typescript.tsdk": "node_modules/typescript/lib",
     "gitlens.advanced.blame.customArguments": ["--ignore-revs-file", ".git-blame-ignore-revs"]
 }
