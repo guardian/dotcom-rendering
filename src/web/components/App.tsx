@@ -1202,6 +1202,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							format={format}
 							pillar={pillar}
 							edition={CAPI.editionId}
+							shortUrlId={CAPI.config.shortUrlId}
 						/>
 					</Suspense>
 				</Lazy>

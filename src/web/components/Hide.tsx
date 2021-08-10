@@ -5,6 +5,7 @@ interface Props {
 	children: React.ReactNode;
 	when: 'above' | 'below';
 	breakpoint: Breakpoint;
+	force?: boolean;
 }
 
 interface PropsSpan extends Props {
@@ -18,6 +19,7 @@ export const Hide = ({
 	children,
 	when,
 	breakpoint,
+	force,
 	el,
 }: PropsSpan | PropsLi) => {
 	let whenToHide;
@@ -34,6 +36,13 @@ export const Hide = ({
 			}
 		`;
 	}
+
+	if (force) {
+		whenToHide = css`
+			display: none;
+		`;
+	}
+
 	return el === 'li' ? (
 		<li css={whenToHide}>{children}</li>
 	) : (

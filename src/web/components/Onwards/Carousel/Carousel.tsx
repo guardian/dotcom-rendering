@@ -54,7 +54,6 @@ const SvgChevronRightSingle = () => {
 
 const wrapperStyle = css`
 	display: flex;
-	justify-content: space-between;
 	overflow: hidden;
 	${from.desktop} {
 		padding-right: 40px;

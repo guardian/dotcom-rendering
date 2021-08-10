@@ -304,6 +304,25 @@ export const Headlines = () => (
 
 Headlines.story = 'Headlines carousel';
 
+export const SingleItemCarousel = () => (
+	<>
+		<ElementContainer showTopBorder={true}>
+			<Carousel
+				heading="More on this story"
+				trails={trails.slice(1, 2)}
+				ophanComponentName="curated-content"
+				format={{
+					theme: Pillar.News,
+					design: Design.Article,
+					display: Display.Standard,
+				}}
+			/>
+		</ElementContainer>
+	</>
+);
+
+Headlines.story = 'Carousel with single item';
+
 export const Immersive = () => (
 	<>
 		<ElementContainer showTopBorder={true}>
