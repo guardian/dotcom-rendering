@@ -1726,10 +1726,10 @@
   dependencies:
     youtube-player "^5.5.2"
 
-"@guardian/automat-client@^0.2.17":
-  version "0.2.17"
-  resolved "https://registry.yarnpkg.com/@guardian/automat-client/-/automat-client-0.2.17.tgz#253724307312f4d5bc01b5749179193b8a29ae8b"
-  integrity sha512-SbNeBjoc1iqt/EZ+zQTy7EbbXbdEHOuKObcseLKWyy/LF+4FQtHNuYxLGQ3zjl6fR7s/nvcnIEBAPrnFv0gcqQ==
+"@guardian/automat-contributions@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@guardian/automat-contributions/-/automat-contributions-0.3.6.tgz#eeb47307522f88a8cb41ccfb34b7ecae36b363b0"
+  integrity sha512-v6LkzMQaE8MaR1aNBA+9QGBSt7ICjvsPOB3iNudhnKft1LP+99TZohOyroJKc1HPYL5fbR0Oe+5CVbpkfABgrg==
 
 "@guardian/braze-components@^3.2.0":
   version "3.2.0"
