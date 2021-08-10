@@ -2,9 +2,18 @@ import { css } from '@emotion/react';
 
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
+import { Pillar } from '@guardian/types';
 
 import { OnwardsData } from './OnwardsData';
+import { Carousel } from './Carousel/Carousel';
 import { OnwardsLayout } from './OnwardsLayout';
+
+type PillarForContainer =
+	| 'headlines'
+	| 'sport'
+	| 'opinion'
+	| 'culture'
+	| 'lifestyle';
 
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
 // If you change this list then you should also update ^
@@ -70,6 +79,88 @@ const onwardsWrapper = css`
 	width: 100%;
 `;
 
+const containerUrls = {
+	headlines: {
+		UK: 'uk-alpha/news/regular-stories',
+		US: 'c5cad9ee-584d-4e85-85cd-bf8ee481b026',
+		AU: 'au-alpha/news/regular-stories',
+		INT: '10f21d96-18f6-426f-821b-19df55dfb831',
+	},
+	sport: {
+		UK: '754c-8e8c-fad9-a927',
+		US: 'f6dd-d7b1-0e85-4650',
+		AU: 'c45d-318f-896c-3a85',
+		INT: 'd1ad8ec3-5ee2-4673-94c8-cc3f8d261e52',
+	},
+	opinion: {
+		UK: '3ff78b30-52f5-4d30-ace8-c887113cbe0d',
+		US: '98df412d-b0e7-4d9a-98c2-062642823e94',
+		AU: 'au-alpha/contributors/feature-stories',
+		INT: 'ee3386bb-9430-4a6d-8bca-b99d65790f3b',
+	},
+	culture: {
+		UK: 'ae511a89-ef38-4ec9-aab1-3a5ebc96d118',
+		US: 'fb59c1f8-72a7-41d5-8365-a4d574809bed',
+		AU: '22262088-4bce-4290-9810-cb50bbead8db',
+		INT: 'c7154e22-7292-4d93-a14d-22fd4b6b693d',
+	},
+	lifestyle: {
+		UK: 'uk-alpha/features/feature-stories',
+		US: 'us-alpha/features/feature-stories',
+		AU: '13636104-51ce-4264-bb6b-556c80227331',
+		INT: '7b297ef5-a3f9-45e5-b915-b54951d7f6ec',
+	},
+};
+
+const getContainer = (pillar: PillarForContainer, edition: Edition) => {
+	return containerUrls[pillar][edition];
+};
+
+const getContainerDataUrl = (
+	pillar: Theme,
+	edition: Edition,
+	ajaxUrl: string,
+) => {
+	switch (pillar) {
+		case Pillar.Sport:
+			return joinUrl([
+				ajaxUrl,
+				'container/data',
+				`${getContainer('sport', edition)}.json`,
+			]);
+		case Pillar.News:
+			return joinUrl([
+				ajaxUrl,
+				'container/data',
+				`${getContainer('headlines', edition)}.json`,
+			]);
+		case Pillar.Culture:
+			return joinUrl([
+				ajaxUrl,
+				'container/data',
+				`${getContainer('culture', edition)}.json`,
+			]);
+		case Pillar.Lifestyle:
+			return joinUrl([
+				ajaxUrl,
+				'container/data',
+				`${getContainer('lifestyle', edition)}.json`,
+			]);
+		case Pillar.Opinion:
+			return joinUrl([
+				ajaxUrl,
+				'container/data',
+				`${getContainer('opinion', edition)}.json`,
+			]);
+		default:
+			return joinUrl([
+				ajaxUrl,
+				'container/data',
+				`${getContainer('headlines', edition)}.json`,
+			]);
+	}
+};
+
 type Props = {
 	ajaxUrl: string;
 	hasRelated: boolean;
@@ -82,6 +173,8 @@ type Props = {
 	contentType: string;
 	tags: TagType[];
 	format: Format;
+	edition: Edition;
+	pillar: Theme;
 };
 
 export const OnwardsUpper = ({
@@ -96,6 +189,8 @@ export const OnwardsUpper = ({
 	contentType,
 	tags,
 	format,
+	pillar,
+	edition,
 }: Props) => {
 	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
 
@@ -166,6 +261,8 @@ export const OnwardsUpper = ({
 		ophanComponentName = 'related-stories';
 	}
 
+	const curatedDataUrl = getContainerDataUrl(pillar, edition, ajaxUrl);
+
 	return (
 		<div css={onwardsWrapper}>
 			{url && (
@@ -174,7 +271,19 @@ export const OnwardsUpper = ({
 						url={url}
 						limit={8}
 						ophanComponentName={ophanComponentName}
-						Container={OnwardsLayout}
+						Container={isPaidContent ? OnwardsLayout : Carousel}
+						format={format}
+					/>
+				</ElementContainer>
+			)}
+			{!isPaidContent && (
+				<ElementContainer showTopBorder={true}>
+					<OnwardsData
+						url={curatedDataUrl}
+						limit={20}
+						ophanComponentName="curated-content"
+						Container={Carousel}
+						isCuratedContent={true}
 						format={format}
 					/>
 				</ElementContainer>
