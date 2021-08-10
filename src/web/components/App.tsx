@@ -68,6 +68,7 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/Uns
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import { storage } from '@guardian/libs';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -232,7 +233,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const hasOptedOut = await hasOptedOutOfArticleCount();
 			if (!hasOptedOut) {
 				incrementDailyArticleCount();
-				incrementWeeklyArticleCount();
+				incrementWeeklyArticleCount(storage.local, CAPI.pageId);
 			}
 		};
 		incrementArticleCountsIfConsented().catch((e) =>
