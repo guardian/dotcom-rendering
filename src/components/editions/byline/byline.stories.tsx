@@ -72,19 +72,12 @@ const isImmersive = (): { display: Display } => {
 	};
 };
 
-const hasShareIcon = (): { webUrl: string } => {
-	return {
-		webUrl: boolean('ShareIcon', true) ? 'www.guardian.com' : '',
-	};
-};
-
 // ----- Stories ----- //
 
 const Default = (): ReactElement => (
 	<Byline
 		item={{
 			...article,
-			...hasShareIcon(),
 			display: Display.Standard,
 			bylineHtml: mockBylineHtml(),
 			theme: selectPillar(Pillar.News),
@@ -97,7 +90,6 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			...isImmersive(),
-			...hasShareIcon(),
 			bylineHtml: mockBylineHtml(),
 			theme: selectPillar(Pillar.News),
 		}}
@@ -109,7 +101,6 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			...isImmersive(),
-			...hasShareIcon(),
 			bylineHtml: mockBylineHtml(),
 			theme: selectPillar(Pillar.News),
 		}}
@@ -120,7 +111,6 @@ const Review = (): ReactElement => (
 	<Byline
 		item={{
 			...review,
-			...hasShareIcon(),
 			bylineHtml: mockBylineHtml(),
 			theme: selectPillar(Pillar.News),
 		}}
@@ -132,7 +122,6 @@ const Showcase = (): ReactElement => (
 		item={{
 			...article,
 			display: Display.Showcase,
-			...hasShareIcon(),
 			bylineHtml: mockBylineHtml(),
 			theme: selectPillar(Pillar.News),
 		}}
@@ -144,7 +133,6 @@ const Interview = (): ReactElement => (
 		item={{
 			...interview,
 			...isImmersive(),
-			...hasShareIcon(),
 			bylineHtml: mockBylineHtml(),
 			theme: selectPillar(Pillar.News),
 		}}
