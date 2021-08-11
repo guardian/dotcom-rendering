@@ -226,7 +226,7 @@ const textArticleLinkHover = (format: Format): string => {
 };
 
 const textCardHeadline = (format: Format): string => {
-	if (format.display === Display.Immersive) return WHITE;
+	if (format.display === Display.Immersive) return BLACK;
 	if (format.theme === Special.SpecialReport) return WHITE;
 	switch (format.design) {
 		case Design.Feature:
@@ -262,8 +262,6 @@ const textCardKicker = (format: Format): string => {
 		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
 		return '#ff9941';
 	if (format.theme === Special.SpecialReport) return brandAlt[400];
-	if (format.display === Display.Immersive)
-		return pillarPalette[format.theme].bright;
 	switch (format.design) {
 		case Design.LiveBlog:
 			switch (format.theme) {
@@ -701,7 +699,7 @@ const textDropCap = (format: Format): string => {
 		case Design.Letter:
 		case Design.Comment:
 			return format.theme === Pillar.Opinion
-				? opinion[400]
+				? pillarPalette[format.theme].main
 				: pillarPalette[format.theme].dark;
 		default:
 			return pillarPalette[format.theme].dark;

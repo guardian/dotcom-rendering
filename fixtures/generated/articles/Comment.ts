@@ -1844,7 +1844,7 @@ export const Comment: CAPIType = {
 			elementId: 'c59f08ad-f84d-4996-bdb5-a14d0116bd6e',
 		},
 	],
-	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	webPublicationDateDeprecated: '2020-02-10T06:00:27.000Z',
 	blocks: [
 		{
 			id: '6bc6fa8c-a504-4e81-9828-3a7a0a78b052',

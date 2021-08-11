@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 import {
-	getBodyEnd,
+	getEpicMeta,
 	getViewLog,
 	logView,
 	getWeeklyArticleHistory,
-} from '@guardian/automat-client';
+} from '@guardian/automat-contributions';
 import {
 	isRecurringContributor,
 	getLastOneOffContributionTimestamp,
@@ -25,7 +25,7 @@ import {
 	submitComponentEvent,
 	SdcTestMeta,
 } from '@root/src/web/browser/ophan/ophan';
-import { Metadata } from '@guardian/automat-client/dist/types';
+import { Metadata } from '@guardian/automat-contributions/dist/lib/types';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '../../browser/cookie';
@@ -142,7 +142,7 @@ export const canShow = async (
 
 	const contributionsPayload = await buildPayload(data);
 
-	const response = await getBodyEnd(
+	const response = await getEpicMeta(
 		contributionsPayload,
 		`${contributionsServiceUrl}/epic${queryString}`,
 	);

@@ -58,7 +58,7 @@ run: stop build start
 
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
-	@NODE_ENV=development nodemon scripts/frontend/dev-server
+	@NODE_ENV=development nodemon scripts/frontend/dev-server -- --max-old-space-size=7168
 
 # tests #####################################
 

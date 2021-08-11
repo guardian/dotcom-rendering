@@ -1751,7 +1751,7 @@ export const MatchReport: CAPIType = {
 			elementId: '77549f03-7853-46ef-92ba-0ae397b89135',
 		},
 	],
-	webPublicationDate: '2021-02-05T22:16:43.000Z',
+	webPublicationDateDeprecated: '2021-02-05T22:16:43.000Z',
 	blocks: [
 		{
 			id: '601d96ef8f0862592e4b23ca',

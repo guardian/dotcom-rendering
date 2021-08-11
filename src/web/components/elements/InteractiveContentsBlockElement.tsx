@@ -175,7 +175,7 @@ export const InteractiveContentsBlockElement = ({
 	// -> If we stop intersecting with the current element, and its in view > show the preview element
 	// -> If we're intersecting with an element set that to the active one
 	// -> If the end element is in view, but the last element is not > show the last element
-	useEffect(() => {
+	useEffect((): any => {
 		if ('IntersectionObserver' in window) {
 			const getSubheadingIndexById = (id: string): number =>
 				enhancedSubheadings.findIndex((item) => item.ref?.id === id);

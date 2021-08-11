@@ -52,11 +52,12 @@ const SvgChevronRightSingle = () => {
 	);
 };
 
-const wrapperStyle = css`
+const wrapperStyle = (length: number) => css`
 	display: flex;
-	justify-content: space-between;
+	/* Remove space-between where there is a single item, so that it is left-aligned */
+	${length > 1 && 'justify-content: space-between'}
 	overflow: hidden;
-	${from.tablet} {
+	${from.desktop} {
 		padding-right: 40px;
 	}
 `;
@@ -236,6 +237,16 @@ const buttonStyle = css`
 
 const prevButtonStyle = (index: number) => css`
 	background-color: ${index !== 0 ? neutral[0] : neutral[60]};
+	cursor: ${index !== 0 ? 'pointer' : 'default'};
+
+	&:hover,
+	&:focus {
+		background-color: ${index !== 0 ? brandAlt[400] : neutral[60]};
+
+		svg {
+			fill: ${neutral[100]};
+		}
+	}
 `;
 
 const nextButtonStyle = (index: number, totalStories: number) => css`
@@ -244,6 +255,18 @@ const nextButtonStyle = (index: number, totalStories: number) => css`
 	background-color: ${!isLastCardShowing(index, totalStories)
 		? neutral[0]
 		: neutral[60]};
+	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
+
+	&:hover,
+	&:focus {
+		background-color: ${!isLastCardShowing(index, totalStories)
+			? brandAlt[400]
+			: neutral[60]};
+
+		svg {
+			fill: ${neutral[100]};
+		}
+	}
 `;
 
 const headerRowStyles = css`
@@ -524,7 +547,10 @@ export const Carousel: React.FC<OnwardsType> = ({
 	if (isFullCardImage) trails = convertToImmersive(trails);
 
 	return (
-		<div css={wrapperStyle} data-link-name={formatAttrString(heading)}>
+		<div
+			css={wrapperStyle(trails.length)}
+			data-link-name={formatAttrString(heading)}
+		>
 			<LeftColumn showRightBorder={false} showPartialRightBorder={true}>
 				<HeaderAndNav
 					heading={heading}
@@ -606,8 +632,8 @@ export const Carousel: React.FC<OnwardsType> = ({
 						const {
 							url: linkTo,
 							headline: headlineText,
-							format: trailFormat,
 							webPublicationDate,
+							format: trailFormat,
 							image: fallbackImageUrl,
 							carouselImages,
 							kickerText,

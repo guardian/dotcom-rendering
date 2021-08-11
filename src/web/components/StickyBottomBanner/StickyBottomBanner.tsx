@@ -43,6 +43,7 @@ const getBannerLastClosedAt = (key: string): string | undefined => {
 		const parsedItem = JSON.parse(item) as { [key: string]: any };
 		return parsedItem.value;
 	}
+	return item;
 };
 
 const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
