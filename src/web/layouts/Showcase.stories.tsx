@@ -207,7 +207,7 @@ NumberedListStory.story = {
 
 // Anniversary stuff (Delete once event is over)
 
-const convertToAnniversary = (CAPI: CAPIType) => {
+const convertToAnniversary = (CAPI: CAPIType): CAPIType => {
 	return {
 		...CAPI,
 		config: {
