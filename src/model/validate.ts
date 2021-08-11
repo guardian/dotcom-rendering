@@ -16,6 +16,11 @@ addFormats(ajv);
 const validate = ajv.compile(schema);
 
 export const validateAsCAPIType = (data: { [key: string]: any }): CAPIType => {
+	// validation is slow so don't perform on PROD.
+	if (process.env.NODE_ENV === 'production') {
+		return data as CAPIType;
+	}
+
 	const isValid = validate(data);
 
 	if (!isValid) {
