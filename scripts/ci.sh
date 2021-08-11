@@ -1,7 +1,9 @@
 #!/bin/bash
+
 source ~/.nvm/nvm.sh
 nvm install
 nvm use
+
 #Code Validation
 echo bundlesize token $BUNDLESIZE_GITHUB_TOKEN
 make validate-ci
