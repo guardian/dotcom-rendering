@@ -175,6 +175,7 @@ type Props = {
 	format: Format;
 	edition: Edition;
 	pillar: Theme;
+	shortUrlId: string;
 };
 
 export const OnwardsUpper = ({
@@ -191,9 +192,8 @@ export const OnwardsUpper = ({
 	format,
 	pillar,
 	edition,
+	shortUrlId,
 }: Props) => {
-	const dontShowRelatedContent = !showRelatedContent || !hasRelated;
-
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
 	const tagToFilterBy = firstPopularTag(keywordIds, isPaidContent);
@@ -206,7 +206,10 @@ export const OnwardsUpper = ({
 	let url;
 	let ophanComponentName: OphanComponentName = 'default-onwards';
 
-	if (hasStoryPackage) {
+	if (!showRelatedContent) {
+		// Then don't show related content
+		// This is the first priority for deciding whether to include related content
+	} else if (hasStoryPackage) {
 		// Always fetch the story package if it exists
 		url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
 		ophanComponentName = 'more-on-this-story';
@@ -221,10 +224,14 @@ export const OnwardsUpper = ({
 		//              type: "Series",
 		//          }
 		//
-		url = joinUrl([ajaxUrl, 'series', `${seriesTag.id}.json?dcr`]);
+		url = joinUrl([
+			ajaxUrl,
+			'series',
+			`${seriesTag.id}.json?dcr&shortUrl=${shortUrlId}`,
+		]);
 		ophanComponentName = 'series';
-	} else if (dontShowRelatedContent) {
-		// Then don't show related content
+	} else if (!hasRelated) {
+		// There is no related content to show
 	} else if (tagToFilterBy) {
 		// Use popular in tag endpoint
 		let popularInTagUrl = `/popular-in-tag/${tagToFilterBy}.json?dcr=true`;
@@ -261,7 +268,9 @@ export const OnwardsUpper = ({
 		ophanComponentName = 'related-stories';
 	}
 
-	const curatedDataUrl = getContainerDataUrl(pillar, edition, ajaxUrl);
+	const curatedDataUrl = showRelatedContent
+		? getContainerDataUrl(pillar, edition, ajaxUrl)
+		: null;
 
 	return (
 		<div css={onwardsWrapper}>
@@ -276,7 +285,7 @@ export const OnwardsUpper = ({
 					/>
 				</ElementContainer>
 			)}
-			{!isPaidContent && (
+			{!isPaidContent && curatedDataUrl && (
 				<ElementContainer showTopBorder={true}>
 					<OnwardsData
 						url={curatedDataUrl}
