@@ -52,8 +52,9 @@ const SvgChevronRightSingle = () => {
 	);
 };
 
-const wrapperStyle = css`
+const wrapperStyle = (length: number) => css`
 	display: flex;
+	${length > 1 && 'justify-content: space-between'}
 	overflow: hidden;
 	${from.desktop} {
 		padding-right: 40px;
@@ -545,7 +546,10 @@ export const Carousel: React.FC<OnwardsType> = ({
 	if (isFullCardImage) trails = convertToImmersive(trails);
 
 	return (
-		<div css={wrapperStyle} data-link-name={formatAttrString(heading)}>
+		<div
+			css={wrapperStyle(trails.length)}
+			data-link-name={formatAttrString(heading)}
+		>
 			<LeftColumn showRightBorder={false} showPartialRightBorder={true}>
 				<HeaderAndNav
 					heading={heading}
