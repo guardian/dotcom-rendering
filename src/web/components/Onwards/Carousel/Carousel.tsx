@@ -54,6 +54,7 @@ const SvgChevronRightSingle = () => {
 
 const wrapperStyle = (length: number) => css`
 	display: flex;
+	/* Remove space-between where there is a single item, so that it is left-aligned */
 	${length > 1 && 'justify-content: space-between'}
 	overflow: hidden;
 	${from.desktop} {
