@@ -665,7 +665,7 @@ interface ConfigType extends CommercialConfigType {
 	sentryHost: string;
 	dcrSentryDsn: string;
 	switches: { [key: string]: boolean };
-	abTests: { [key: string]: string };
+	abTests: Record<string, "control" | "variant">;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;
