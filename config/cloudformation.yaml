@@ -111,6 +111,11 @@ Resources:
           FromPort: 3040
           IpProtocol: tcp
           ToPort: 3040
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: '443'
+          IpProtocol: tcp
+          ToPort: '443'
       VpcId: !ImportValue MobileAppsApiVPC-VpcId
 
   Listener:
