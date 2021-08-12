@@ -65,6 +65,12 @@ Parameters:
   DomainName:
     Type: String
     Description: The DomainName of the ALB, should contain the trailing dot stuff.zone.example.com.
+  EditionsPreviewLambdaSecurityGroupId:
+    Type: String
+    Description: A security group id for editions preview lambda to access AR
+  EditionsPublishedLambdaSecurityGroupId:
+    Type: String
+    Description: A security group id for editions published lambda to access AR    
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -112,10 +118,15 @@ Resources:
           IpProtocol: tcp
           ToPort: 3040
       SecurityGroupIngress:
-        - CidrIp: 0.0.0.0/0
-          FromPort: '443'
+        - FromPort: '443'
           IpProtocol: tcp
           ToPort: '443'
+          SourceSecurityGroupId: !Ref EditionsPreviewLambdaSecurityGroupId
+      SecurityGroupIngress:
+        - FromPort: '443'
+          IpProtocol: tcp
+          ToPort: '443'
+          SourceSecurityGroupId: !Ref EditionsPublishedLambdaSecurityGroupId      
       VpcId: !ImportValue MobileAppsApiVPC-VpcId
 
   Listener:
