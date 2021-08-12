@@ -163,6 +163,14 @@ const go = () => {
 		}),
 	);
 
+	app.post(
+		'/Interactive',
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/Interactive' },
+		}),
+	);
+
 	app.get(
 		'/AMPInteractive',
 		async (req, res, next) => {
@@ -202,8 +210,10 @@ const go = () => {
 		res.redirect('/');
 	});
 
-	app.use((err, req, res) => {
-		res.status(500).send(err.stack);
+	// express requires all 4 args here:
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	app.use((err, req, res, next) => {
+		res.status(500).send(`<pre>${err.stack}</pre>`);
 	});
 
 	const port = process.env.PORT || 3030;
