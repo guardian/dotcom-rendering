@@ -63,17 +63,34 @@ const Renderer: React.FC<{
 			webTitle,
 		});
 
-		return ok ? (
-			<figure
-				id={'elementId' in element ? element.elementId : undefined}
-				key={index}
-				className={
-					interactiveLegacyFigureClasses.get(element._type) || ''
-				}
-			>
-				{el}
-			</figure>
-		) : null;
+		if (ok) {
+			switch (element._type) {
+				// Here we think it makes sense not to wrap every `p` inside a `figure`
+				case 'model.dotcomrendering.pageElements.TextBlockElement':
+					return el;
+
+				default:
+					return (
+						<figure
+							id={
+								'elementId' in element
+									? element.elementId
+									: undefined
+							}
+							key={index}
+							className={
+								interactiveLegacyFigureClasses.get(
+									element._type,
+								) || ''
+							}
+						>
+							{el}
+						</figure>
+					);
+			}
+		}
+
+		return null;
 	});
 
 	return <div>{output}</div>;
