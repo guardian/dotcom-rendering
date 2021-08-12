@@ -2,8 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { body } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -16,14 +14,7 @@ interface Props {
 	text: string;
 }
 
-const styles = css`
-	${body.medium({ lineHeight: 'loose' })}
-	display: inline;
-	overflow-wrap: break-word;
-	margin: 0 0 ${remSpace[3]};
-`;
-
-const bulletStyles = (format: Format): SerializedStyles => {
+const styles = (format: Format): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
 
 	return css`
@@ -46,10 +37,10 @@ const bulletStyles = (format: Format): SerializedStyles => {
 };
 
 const Bullet: FC<Props> = ({ format, text }) => (
-	<p css={styles}>
-		<span css={bulletStyles(format)}>•</span>
+	<>
+		<span css={styles(format)}>•</span>
 		{text.replace(/•/g, '')}
-	</p>
+	</>
 );
 
 // ----- Exports ----- //

@@ -1,17 +1,19 @@
 import { css } from '@emotion/react';
 import {
 	isPlatformMessageEvent,
+	isShareIconMessageEvent,
 	MessageKind,
 	pingEditionsNative,
 	Platform,
 } from '@guardian/renditions';
+import type { PlatformMessage, ShareIconMessage } from '@guardian/renditions';
 import type { FC, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
 const usePlatform = (defaultPlatform: Platform): Platform => {
 	const [platform, setPlatform] = useState(defaultPlatform);
 
-	const handlePlatform = (event: CustomEventInit): void => {
+	const handlePlatform = (event: CustomEventInit<PlatformMessage>): void => {
 		if (isPlatformMessageEvent(event)) {
 			setPlatform(event.detail.value);
 		}
@@ -25,6 +27,25 @@ const usePlatform = (defaultPlatform: Platform): Platform => {
 	}, []);
 
 	return platform;
+};
+
+const useShareIcon = (defaultShareIcon: boolean): boolean => {
+	const [showIcon, setShowIcon] = useState(defaultShareIcon);
+
+	const handleShare = (event: CustomEventInit<ShareIconMessage>): void => {
+		if (isShareIconMessageEvent(event)) {
+			setShowIcon(!!event.detail?.value);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('editionsPing', handleShare);
+
+		return (): void =>
+			document.removeEventListener('editionsPing', handleShare);
+	}, []);
+
+	return showIcon;
 };
 
 const IOSShareIcon = (): ReactElement => (
@@ -54,10 +75,13 @@ const buttonStyles = css`
 
 const ShareIcon: FC = () => {
 	const platform = usePlatform(Platform.IOS);
+	const showIcon = useShareIcon(true);
+
 	useEffect(() => {
 		pingEditionsNative({ kind: MessageKind.PlatformQuery });
 	}, []);
-	return (
+
+	return showIcon ? (
 		<button
 			css={buttonStyles}
 			onClick={(): void =>
@@ -70,7 +94,7 @@ const ShareIcon: FC = () => {
 				<AndroidShareIcon />
 			)}
 		</button>
-	);
+	) : null;
 };
 
 export default ShareIcon;

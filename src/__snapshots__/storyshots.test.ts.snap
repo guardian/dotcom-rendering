@@ -24,22 +24,13 @@ exports[`Storyshots Anchor Default 1`] = `
 `;
 
 exports[`Storyshots Bullet Default 1`] = `
-.emotion-0 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-  display: inline;
-  overflow-wrap: break-word;
-  margin: 0 0 0.75rem;
-}
-
-.emotion-1 {
+Array [
+  .emotion-0 {
   color: transparent;
   display: inline-block;
 }
 
-.emotion-1::before {
+.emotion-0::before {
   content: '';
   background-color: #C70000;
   width: 1rem;
@@ -50,21 +41,18 @@ exports[`Storyshots Bullet Default 1`] = `
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-1::before {
+  .emotion-0::before {
     background-color: #FF5943;
   }
 }
 
-<p
-  className="emotion-0"
->
-  <span
-    className="emotion-1"
+<span
+    className="emotion-0"
   >
     •
-  </span>
-   Lorem ipsum
-</p>
+  </span>,
+  " Lorem ipsum",
+]
 `;
 
 exports[`Storyshots Byline Comment 1`] = `

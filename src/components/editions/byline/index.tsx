@@ -238,7 +238,7 @@ const Byline: FC<Props> = ({ item }) => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
-	const showShareIcon = hasShareIcon(format) && item.webUrl;
+	const showShareIcon = hasShareIcon(format);
 
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={getBylineStyles(format, iconColor)}>

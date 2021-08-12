@@ -187,6 +187,10 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 			return h('li', { key }, children);
 		case 'MARK':
 			return styledH('mark', { key }, children);
+		case 'SUB':
+			return h('sub', { key }, children);
+		case 'SUP':
+			return h('sup', { key }, children);
 		default:
 			return null;
 	}
@@ -242,6 +246,10 @@ const textElement = (format: Format, supportsDarkMode = true) => (
 			return h(ListItem, { format, children });
 		case 'MARK':
 			return styledH('mark', { key }, children);
+		case 'SUB':
+			return h('sub', { key }, children);
+		case 'SUP':
+			return h('sup', { key }, children);
 		default:
 			return null;
 	}
