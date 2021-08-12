@@ -122,7 +122,6 @@ Resources:
           IpProtocol: tcp
           ToPort: '443'
           SourceSecurityGroupId: !Ref EditionsBackendPreviewLambdaSecurityGroupId
-      SecurityGroupIngress:
         - FromPort: '443'
           IpProtocol: tcp
           ToPort: '443'
