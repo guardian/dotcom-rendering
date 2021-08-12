@@ -163,6 +163,14 @@ const go = () => {
 		}),
 	);
 
+	app.post(
+		'/Interactive',
+		webpackHotServerMiddleware(compiler, {
+			chunkName: `${siteName}.server`,
+			serverRendererOptions: { path: '/Interactive' },
+		}),
+	);
+
 	app.get(
 		'/AMPInteractive',
 		async (req, res, next) => {
