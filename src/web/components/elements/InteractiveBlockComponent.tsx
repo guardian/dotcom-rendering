@@ -17,6 +17,7 @@ type Props = {
 	caption?: string;
 	format: Format;
 	palette: Palette;
+	elementId?: string;
 };
 
 /*
@@ -231,6 +232,7 @@ export const InteractiveBlockComponent = ({
 	caption,
 	format,
 	palette,
+	elementId = '',
 }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
@@ -281,14 +283,14 @@ export const InteractiveBlockComponent = ({
 	}, [loaded]);
 
 	return (
-		<figure
-			className={interactiveLegacyFigureClasses}
-			data-alt={alt} /* for compatibility with custom boot scripts */
-			data-cypress={`interactive-element-${encodeURI(alt || '')}`}
-		>
-			<div
+		<>
+			<figure
+				id={elementId} // required for hydration
 				ref={wrapperRef}
 				css={wrapperStyle({ format, role, loaded, palette })}
+				className={interactiveLegacyFigureClasses}
+				data-alt={alt} // for compatibility with custom boot scripts
+				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 			>
 				{!loaded && (
 					<>
@@ -306,7 +308,7 @@ export const InteractiveBlockComponent = ({
 						</a>
 					</>
 				)}
-			</div>
+			</figure>
 			{caption && (
 				<Caption
 					captionText={caption}
@@ -314,6 +316,6 @@ export const InteractiveBlockComponent = ({
 					palette={palette}
 				/>
 			)}
-		</figure>
+		</>
 	);
 };
