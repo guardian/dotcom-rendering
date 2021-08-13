@@ -139,4 +139,8 @@ export const interactiveGlobalStyles = css`
 			display: none;
 		}
 	}
+
+	.interactive-atom {
+		position: relative;
+	}
 `;
