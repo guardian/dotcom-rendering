@@ -721,7 +721,8 @@ export const renderElement = ({
 };
 
 // bareElements is the set of element types that don't get wrapped in a Figure
-// for most article types.
+// for most article types, either because they don't need it or because they
+// add the figure themselves.
 const bareElements = new Set([
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 	'model.dotcomrendering.pageElements.CaptionBlockElement',
