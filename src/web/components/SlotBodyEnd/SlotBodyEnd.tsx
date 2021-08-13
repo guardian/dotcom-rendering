@@ -88,7 +88,7 @@ const buildBrazeEpicConfig = (
 				/>
 			),
 		},
-		timeoutMillis: 5000,
+		timeoutMillis: 2000,
 	};
 };
 
@@ -127,7 +127,7 @@ export const SlotBodyEnd = ({
 			idApiUrl,
 		);
 		const epicConfig: SlotConfig = {
-			candidates: [readerRevenueEpic, brazeEpic],
+			candidates: [brazeEpic, readerRevenueEpic],
 			name: 'slotBodyEnd',
 		};
 
