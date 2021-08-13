@@ -7,6 +7,7 @@ import { space } from '@guardian/src-foundations';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 import { Caption } from '@root/src/web/components/Caption';
 import libDebounce from 'lodash.debounce';
+import { interactiveLegacyFigureClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	url?: string;
@@ -280,12 +281,14 @@ export const InteractiveBlockComponent = ({
 	}, [loaded]);
 
 	return (
-		<>
+		<figure
+			className={interactiveLegacyFigureClasses}
+			data-alt={alt} /* for compatibility with custom boot scripts */
+			data-cypress={`interactive-element-${encodeURI(alt || '')}`}
+		>
 			<div
-				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 				ref={wrapperRef}
 				css={wrapperStyle({ format, role, loaded, palette })}
-				data-alt={alt} // for compatibility with custom boot scripts
 			>
 				{!loaded && (
 					<>
@@ -311,6 +314,6 @@ export const InteractiveBlockComponent = ({
 					palette={palette}
 				/>
 			)}
-		</>
+		</figure>
 	);
 };
