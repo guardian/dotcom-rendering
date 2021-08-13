@@ -119,7 +119,13 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 	}
 
 	return (
-		<div>
+		<header
+			/* Note, some interactives require this - e.g. https://www.theguardian.com/environment/ng-interactive/2015/jun/05/carbon-bomb-the-coal-boom-choking-china. */
+			css={css`
+				${getZIndex('headerWrapper')};
+				position: relative;
+			`}
+		>
 			<div data-print-layout="hide">
 				<Stuck>
 					<ElementContainer
@@ -188,7 +194,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					/>
 				</ElementContainer>
 			)}
-		</div>
+		</header>
 	);
 };
 
