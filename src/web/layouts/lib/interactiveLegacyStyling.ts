@@ -144,4 +144,10 @@ export const interactiveGlobalStyles = css`
 	.interactive-atom {
 		position: relative;
 	}
+
+	ol,
+	ul {
+		padding: 0;
+		margin-left: 1.5625rem;
+	}
 `;
