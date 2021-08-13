@@ -37,7 +37,7 @@ const isLongEnough = (html: string): boolean => {
 
 const decideDropCapLetter = (html: string): string => {
 	const first = html.substr(0, 1);
-	if (first === '“') {
+	if (first === '“' || first === "'") {
 		const second = html.substr(1, 1);
 
 		if (!isLetter(second)) {
