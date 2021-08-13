@@ -10,15 +10,15 @@ import { fullName } from '../example';
 // ----- Component ----- //
 
 const styles: SerializedStyles = css`
-    ${body.medium()}
+	${body.medium()}
 `;
 
 interface Props {
-    person: Person;
+	person: Person;
 }
 
 const Example: FC<Props> = ({ person }) =>
-    <p css={styles}>Hello {fullName(person)}</p>
+	<p css={styles}>Hello {fullName(person)}</p>
 
 // ----- Exports ----- //
 

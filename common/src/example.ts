@@ -1,21 +1,21 @@
 // ----- Types ----- //
 
 type Person = {
-    firstName: string;
-    lastName: string;
+	firstName: string;
+	lastName: string;
 }
 
 // ----- Functions ----- //
 
 const fullName = ({ firstName, lastName }: Person): string =>
-    `${firstName} ${lastName}`
+	`${firstName} ${lastName}`
 
 // ----- Exports ----- //
 
 export type {
-    Person,
+	Person,
 };
 
 export {
-    fullName,
+	fullName,
 };
