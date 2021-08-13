@@ -24,6 +24,12 @@ export const interactiveLegacyClasses = {
 // Styles expected by interactives from the Frontend days. These shouldn't be
 // used for new interactives though.
 export const interactiveGlobalStyles = css`
+	*,
+	*:before,
+	*:after {
+		box-sizing: content-box;
+	}
+
 	.fc-container__inner,
 	.gs-container {
 		${center}
@@ -42,11 +48,6 @@ export const interactiveGlobalStyles = css`
 		font-size: 1.0625rem;
 		line-height: 1.5;
 		font-weight: 400;
-
-		::before,
-		::after {
-			box-sizing: content-box;
-		}
 	}
 
 	button,
