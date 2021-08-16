@@ -14,7 +14,7 @@ const wrapperStyles = css`
 	margin-bottom: 24px;
 `;
 
-// We only stick most viewed when an ads are not showing. We do this
+// We only stick most viewed when ads are not showing. We do this
 // to maximise right column space
 const stickyStyles = css`
 	position: sticky;
