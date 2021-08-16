@@ -23,8 +23,8 @@ const isLetter = (letter: string) => {
 	return letter.toLowerCase() !== letter.toUpperCase();
 };
 
-const isOpenQuote = (t: string) => {
-	[
+const isOpenQuote = (t: string): boolean => {
+	return [
 		'\'' /* apostrophe  */,
 		'"'/* quotation mark */,
 		'\u2018'/* open single quote */,
