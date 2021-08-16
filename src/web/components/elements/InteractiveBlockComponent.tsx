@@ -7,6 +7,7 @@ import { space } from '@guardian/src-foundations';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 import { Caption } from '@root/src/web/components/Caption';
 import libDebounce from 'lodash.debounce';
+import { interactiveLegacyFigureClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	url?: string;
@@ -16,6 +17,7 @@ type Props = {
 	caption?: string;
 	format: Format;
 	palette: Palette;
+	elementId?: string;
 };
 
 /*
@@ -230,6 +232,7 @@ export const InteractiveBlockComponent = ({
 	caption,
 	format,
 	palette,
+	elementId = '',
 }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
@@ -281,11 +284,13 @@ export const InteractiveBlockComponent = ({
 
 	return (
 		<>
-			<div
-				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
+			<figure
+				id={elementId} // required for hydration
 				ref={wrapperRef}
 				css={wrapperStyle({ format, role, loaded, palette })}
+				className={interactiveLegacyFigureClasses}
 				data-alt={alt} // for compatibility with custom boot scripts
+				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 			>
 				{!loaded && (
 					<>
@@ -303,7 +308,7 @@ export const InteractiveBlockComponent = ({
 						</a>
 					</>
 				)}
-			</div>
+			</figure>
 			{caption && (
 				<Caption
 					captionText={caption}
