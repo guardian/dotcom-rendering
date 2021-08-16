@@ -80,7 +80,7 @@ const veggieBurgerStyles = (display: Display) => css`
 	${getZIndex('burger')}
 
 	right: 5px;
-	bottom: 48px;
+	bottom: 58px;
 	${from.mobileMedium} {
 		bottom: ${display === Display.Immersive ? '3px' : '-3px'};
 		right: 5px;

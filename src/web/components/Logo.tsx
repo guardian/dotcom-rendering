@@ -16,7 +16,7 @@ const link = (isAnniversary?: boolean) => css`
 	margin-bottom: 21px;
 
 	${until.mobileMedium} {
-		margin-top: ${isAnniversary ? '25px' : ''};
+		margin-top: ${isAnniversary ? '20px' : ''};
 	}
 
 	${from.mobileMedium} {
@@ -26,8 +26,11 @@ const link = (isAnniversary?: boolean) => css`
 	${from.mobileLandscape} {
 		margin-right: 20px;
 	}
+	${from.tablet} {
+		margin-top: 8px;
+	}
 	${from.desktop} {
-		margin-top: ${isAnniversary ? '10px' : '5px'};
+		margin-top: ${isAnniversary ? '8px' : '5px'};
 		margin-bottom: 15px;
 		position: relative;
 	}
@@ -40,10 +43,10 @@ const link = (isAnniversary?: boolean) => css`
 
 const style = (isAnniversary?: boolean) => css`
 	height: ${isAnniversary ? 'auto' : '44px'};
-	width: 135px;
+	width: 146px;
 	${from.mobileMedium} {
 		height: ${isAnniversary ? 'auto' : '56px'};
-		width: 175px;
+		width: 195px;
 	}
 	${from.tablet} {
 		height: ${isAnniversary ? 'auto' : '72px'};
