@@ -1150,7 +1150,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper />
+						<MostViewedRightWrapper isSignedIn={isSignedIn} />
 					</Suspense>
 				</Lazy>
 			</Portal>
