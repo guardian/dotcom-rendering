@@ -176,7 +176,11 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 		<div
 			data-print-layout="hide"
 			css={[nestedStyles(palette), standfirstStyles(format, palette)]}
-			className={interactiveLegacyClasses.standFirst}
+			className={
+				format.design === Design.Interactive
+					? interactiveLegacyClasses.standFirst
+					: ''
+			}
 			// eslint-disable-next-line react/no-danger
 			dangerouslySetInnerHTML={{
 				__html: sanitise(standfirst, {

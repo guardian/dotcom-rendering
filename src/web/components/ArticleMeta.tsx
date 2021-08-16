@@ -264,9 +264,12 @@ export const ArticleMeta = ({
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
 	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
+	const isInteractive = format.design === Design.Interactive;
 	return (
 		<div
-			className={interactiveLegacyClasses.metaContainer}
+			className={
+				isInteractive ? interactiveLegacyClasses.metaContainer : ''
+			}
 			css={metaContainer(format)}
 		>
 			<div css={meta}>
@@ -317,7 +320,11 @@ export const ArticleMeta = ({
 				</RowBelowLeftCol>
 				<div data-print-layout="hide" css={metaFlex}>
 					<div
-						className={interactiveLegacyClasses.shareIcons}
+						className={
+							isInteractive
+								? interactiveLegacyClasses.shareIcons
+								: ''
+						}
 						css={metaExtras(palette)}
 					>
 						<ShareIcons

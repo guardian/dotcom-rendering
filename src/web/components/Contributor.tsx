@@ -70,17 +70,18 @@ export const Contributor: React.FC<{
 		>
 			{format.design !== Design.Interview && (
 				<div
-					className={interactiveLegacyClasses.byline}
+					className={
+						format.design === Design.Interactive
+							? interactiveLegacyClasses.byline
+							: ''
+					}
 					css={bylineStyles(palette, format)}
 				>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (
-				<div
-					className={interactiveLegacyClasses.byline}
-					css={twitterHandleStyles(palette)}
-				>
+				<div css={twitterHandleStyles(palette)}>
 					<TwitterIcon />
 					<a
 						href={`https://www.twitter.com/${author.twitterHandle}`}
