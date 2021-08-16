@@ -58,7 +58,13 @@ const convertToStandard = (CAPI: CAPIType) => {
 // HydratedLayout is used here to simulated the hydration that happens after we init react on
 // the client. We need a separate component so that we can make use of useEffect to ensure
 // the hydrate step only runs once the dom has been rendered.
-const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
+const HydratedLayout = ({
+	ServerCAPI,
+	modifyPage,
+}: {
+	ServerCAPI: CAPIType;
+	modifyPage?: () => void;
+}) => {
 	fireAndResetHydrationState();
 	const NAV = extractNAV(ServerCAPI.nav);
 
@@ -69,6 +75,9 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);
 	}, [ServerCAPI, NAV]);
+	if (modifyPage) {
+		modifyPage();
+	}
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
 };
 
@@ -77,6 +86,31 @@ export const ArticleStory = (): React.ReactNode => {
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ArticleStory.story = { name: 'Article' };
+
+export const ArticlePrintStory = (): React.ReactNode => {
+	const ServerCAPI = convertToStandard(Article);
+	return (
+		<HydratedLayout
+			ServerCAPI={ServerCAPI}
+			modifyPage={() => {
+				const styleTag = document.createElement('link');
+				styleTag.setAttribute('href', '/css/print.css');
+				styleTag.setAttribute('rel', 'stylesheet');
+				document.getElementById('root')?.prepend(styleTag);
+			}}
+		/>
+	);
+};
+ArticlePrintStory.story = {
+	name: 'Article Print',
+};
+
+ArticlePrintStory.parameters = {
+	viewport: {
+		defaultViewport: 'tablet',
+	},
+	chromatic: { viewports: [740] },
+};
 
 export const ReviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Review);
