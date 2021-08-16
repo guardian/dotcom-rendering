@@ -1,6 +1,15 @@
 export const buildAdTargeting = (
-	config: ConfigType | ConfigTypeBrowser,
+	CAPI:
+		| CAPIType
+		| CAPIBrowserType
+		| Pick<CAPIType, 'isAdFreeUser' | 'config'>,
 ): AdTargeting => {
+	if (CAPI.isAdFreeUser) {
+		return {
+			disableAds: true,
+		};
+	}
+	const { config } = CAPI;
 	const customParams = {
 		sens: config.isSensitive ? 't' : 'f',
 		si: 'f',
