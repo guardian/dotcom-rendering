@@ -142,6 +142,7 @@ interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
 	width?: number;
 	html: string;
 	isMandatory: boolean;
+	caption?: string;
 }
 
 interface ExplainerAtomBlockElement {

@@ -38,4 +38,5 @@ export interface ArticleModel {
 	commercialProperties: CommercialProperties;
 	isImmersive: boolean;
 	starRating?: number;
+	isAdFreeUser: boolean;
 }

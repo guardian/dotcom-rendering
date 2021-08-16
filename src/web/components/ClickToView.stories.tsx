@@ -480,7 +480,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={facebookEmbed.html}
-							alt={facebookEmbed.alt}
+							caption={facebookEmbed.caption}
 						/>
 					</ClickToView>
 				</Figure>
@@ -501,7 +501,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={vimeoEmbedEmbed.html}
-							alt={vimeoEmbedEmbed.alt}
+							caption={vimeoEmbedEmbed.caption}
 						/>
 					</ClickToView>
 				</Figure>
@@ -522,7 +522,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={youtubeEmbedEmbed.html}
-							alt={youtubeEmbedEmbed.alt}
+							caption={youtubeEmbedEmbed.caption}
 						/>
 					</ClickToView>
 				</Figure>
@@ -543,7 +543,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={spotifyEmbedEmbed.html}
-							alt={spotifyEmbedEmbed.alt}
+							caption={spotifyEmbedEmbed.caption}
 						/>
 					</ClickToView>
 				</Figure>
@@ -564,7 +564,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={bandcampEmbedEmbed.html}
-							alt={bandcampEmbedEmbed.alt}
+							caption={bandcampEmbedEmbed.caption}
 						/>
 					</ClickToView>
 				</Figure>
@@ -585,7 +585,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={ourworldindataEmbedEmbed.html}
-							alt={ourworldindataEmbedEmbed.alt}
+							caption={ourworldindataEmbedEmbed.alt}
 						/>
 					</ClickToView>
 				</Figure>
@@ -606,7 +606,7 @@ export const EmbedBlockComponentStory = () => {
 						<EmbedBlockComponent
 							key={1}
 							html={bbcEmbedEmbed.html}
-							alt={bbcEmbedEmbed.alt}
+							caption={bbcEmbedEmbed.caption}
 						/>
 					</ClickToView>
 				</Figure>

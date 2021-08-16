@@ -15,7 +15,7 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import { incrementWeeklyArticleCount } from '@guardian/automat-client';
+import { incrementWeeklyArticleCount } from '@guardian/automat-contributions';
 import {
 	QandaAtom,
 	GuideAtom,
@@ -372,7 +372,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	};
 	const palette = decidePalette(format);
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI.config);
+	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
@@ -1025,7 +1025,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						>
 							<EmbedBlockComponent
 								html={embed.html}
-								alt={embed.alt}
+								caption={embed.caption}
 							/>
 						</ClickToView>
 					) : (
@@ -1150,7 +1150,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<Portal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper />
+						<MostViewedRightWrapper isSignedIn={isSignedIn} />
 					</Suspense>
 				</Lazy>
 			</Portal>
@@ -1200,6 +1200,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							contentType={CAPI.contentType}
 							tags={CAPI.tags}
 							format={format}
+							pillar={pillar}
+							edition={CAPI.editionId}
+							shortUrlId={CAPI.config.shortUrlId}
 						/>
 					</Suspense>
 				</Lazy>

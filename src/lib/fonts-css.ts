@@ -131,6 +131,28 @@ const fontList: FontDisplay[] = [
 		weight: 700,
 		style: 'normal',
 	},
+	{
+		family: 'GH Guardian Headline',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
+	},
+	{
+		family: 'Guardian Egyptian Web',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2',
+		woff:
+			'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.woff',
+		ttf:
+			'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.ttf',
+		weight: 700,
+		style: 'italic',
+	},
 	// GuardianTextEgyptian, with legacy family name of Guardian Text Egyptian Web
 	{
 		family: 'GuardianTextEgyptian',

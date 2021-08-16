@@ -1351,6 +1351,9 @@
                 "isMandatory": {
                     "type": "boolean"
                 },
+                "caption": {
+                    "type": "string"
+                },
                 "isThirdPartyTracking": {
                     "type": "boolean"
                 },

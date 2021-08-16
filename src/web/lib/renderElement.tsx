@@ -256,7 +256,7 @@ export const renderElement = ({
 					<EmbedBlockComponent
 						key={index}
 						html={element.html}
-						alt={element.alt}
+						caption={element.caption}
 					/>
 				</ClickToView>,
 			];

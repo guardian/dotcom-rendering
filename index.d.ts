@@ -178,10 +178,12 @@ interface AdTargetParam {
 	value: string | string[];
 }
 
-interface AdTargeting {
+type AdTargeting = {
 	adUnit: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	customParams: { [key: string]: any };
+	customParams: Record<string, unknown>;
+	disableAds?: false;
+} | {
+	disableAds: true;
 }
 
 interface SectionNielsenAPI {
@@ -665,7 +667,7 @@ interface ConfigType extends CommercialConfigType {
 	sentryHost: string;
 	dcrSentryDsn: string;
 	switches: { [key: string]: boolean };
-	abTests: { [key: string]: string };
+	abTests: Record<string, "control" | "variant">;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;

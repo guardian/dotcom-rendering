@@ -28,6 +28,12 @@ export const interactiveLegacyClasses = {
 // Styles expected by interactives from the Frontend days. These shouldn't be
 // used for new interactives though.
 export const interactiveGlobalStyles = css`
+	*,
+	*:before,
+	*:after {
+		box-sizing: content-box;
+	}
+
 	.fc-container__inner,
 	.gs-container {
 		${center}
@@ -35,6 +41,7 @@ export const interactiveGlobalStyles = css`
 
 	/* There is room for better solution where we don't have to load global styles onto the body.
 		For now this works, but we shouldn't support for it for newly made interactives. */
+	p,
 	.${interactiveLegacyClasses.contentInteractive} {
 		margin-bottom: 1rem;
 
@@ -46,11 +53,6 @@ export const interactiveGlobalStyles = css`
 		font-size: 1.0625rem;
 		line-height: 1.5;
 		font-weight: 400;
-
-		::before,
-		::after {
-			box-sizing: content-box;
-		}
 	}
 
 	button,
@@ -142,5 +144,15 @@ export const interactiveGlobalStyles = css`
 		.mobile-only {
 			display: none;
 		}
+	}
+
+	.interactive-atom {
+		position: relative;
+	}
+
+	ol,
+	ul {
+		padding: 0;
+		margin-left: 1.5625rem;
 	}
 `;
