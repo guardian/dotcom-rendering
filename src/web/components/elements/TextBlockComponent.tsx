@@ -23,6 +23,15 @@ const isLetter = (letter: string) => {
 	return letter.toLowerCase() !== letter.toUpperCase();
 };
 
+const isOpenQuote = (t: string) => {
+	[
+		'\'' /* apostrophe  */,
+		'"'/* quotation mark */,
+		'\u2018'/* open single quote */,
+		'\u201c' /* open double quote */
+	].includes(t)
+}
+
 const isLongEnough = (html: string): boolean => {
 	// Only show a dropcap if the block of text is 200 characters or
 	// longer. But we first need to strip any markup from our html string so
@@ -37,7 +46,7 @@ const isLongEnough = (html: string): boolean => {
 
 const decideDropCapLetter = (html: string): string => {
 	const first = html.substr(0, 1);
-	if (first === '“' || first === "'") {
+	if (isOpenQuote(first)) {
 		const second = html.substr(1, 1);
 
 		if (!isLetter(second)) {
@@ -171,7 +180,7 @@ export const TextBlockComponent = ({
 					width: 15.2px;
 					margin-right: 0.2px;
 					background-color: ${decidePalette(format).background
-						.bullet};
+					.bullet};
 				}
 
 				${until.tablet} {
