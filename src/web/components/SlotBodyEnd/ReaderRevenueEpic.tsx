@@ -28,6 +28,7 @@ import {
 import { Metadata } from '@guardian/automat-contributions/dist/lib/types';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { cmp } from '@guardian/consent-management-platform';
+import { storage } from '@guardian/libs';
 import { getCookie } from '../../browser/cookie';
 import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
 
@@ -107,8 +108,8 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 				data.isSignedIn || false,
 			),
 			lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
-			epicViewLog: getViewLog(),
-			weeklyArticleHistory: getWeeklyArticleHistory(),
+			epicViewLog: getViewLog(storage.local),
+			weeklyArticleHistory: getWeeklyArticleHistory(storage.local),
 			hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: data.countryCode,
@@ -220,7 +221,7 @@ export const ReaderRevenueEpic = ({
 			// Should only run once
 			const { abTestName } = meta;
 
-			logView(abTestName);
+			logView(storage.local, abTestName);
 
 			sendOphanComponentEvent('VIEW', meta);
 		}

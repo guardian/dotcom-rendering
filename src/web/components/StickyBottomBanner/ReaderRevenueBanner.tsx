@@ -26,6 +26,7 @@ import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { storage } from '@guardian/libs';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -92,7 +93,7 @@ const buildPayload = ({
 			subscriptionBannerLastClosedAt,
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode,
-			weeklyArticleHistory: getWeeklyArticleHistory(),
+			weeklyArticleHistory: getWeeklyArticleHistory(storage.local),
 			optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 		},
@@ -311,7 +312,7 @@ const RemoteBanner = ({
 	useOnce(() => {
 		const { abTestName, componentType } = meta;
 
-		logView(abTestName);
+		logView(storage.local, abTestName);
 
 		sendOphanComponentEvent('VIEW', meta);
 
