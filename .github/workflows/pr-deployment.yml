@@ -13,9 +13,7 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2.1.5
-              with:
-                  node-version: 12
+            - uses: guardian/actions-setup-node@main
             - uses: actions/cache@v2
               with:
                   path: ~/.npm
