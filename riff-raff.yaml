@@ -7,7 +7,7 @@ deployments:
     parameters:
       amiEncrypted: true
       amiTags:
-        Recipe: TEST-bionic-mobile-node-ARM
+        Recipe: bionic-mobile-node-ARM
         AmigoStage: PROD
       templatePath: cloudformation.yaml
   mobile-apps-rendering:
