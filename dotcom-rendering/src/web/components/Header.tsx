@@ -29,7 +29,7 @@ export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
 				/>
 			</div>
 		</Hide>
-		<Logo isAnniversary={isAnniversary} />
+		<Logo isAnniversary={isAnniversary} edition={edition} />
 		<div id="reader-revenue-links-header" />
 		<div id="links-root">
 			<Links supporterCTA="" idUrl={idUrl} mmaUrl={mmaUrl} />

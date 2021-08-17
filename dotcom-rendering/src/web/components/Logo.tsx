@@ -6,6 +6,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 import GuardianAnniversaryLogoSVG from '@frontend/static/logos/guardian-anniversary-logo.svg';
+import GuardianAnniversaryLogoUKSVG from '@frontend/static/logos/guardian-anniversary-logo-uk.svg';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
@@ -62,16 +63,16 @@ const style = (isAnniversary?: boolean) => css`
 	}
 `;
 
-const SVG = ({ isAnniversary }: { isAnniversary?: boolean }) =>
-	isAnniversary ? (
-		<GuardianAnniversaryLogoSVG css={style(isAnniversary)} />
-	) : (
-		<TheGuardianLogoSVG css={style(isAnniversary)} />
-	);
+const SVG = ({ isAnniversary, edition }: { isAnniversary?: boolean; edition:Edition }) => {
+if(isAnniversary ) {return (<GuardianAnniversaryLogoSVG css={style(isAnniversary)} />)}
+if(isAnniversary&& edition==='UK'){return (<GuardianAnniversaryLogoUKSVG css={style(isAnniversary)} />)}
+ return(<TheGuardianLogoSVG css={style(isAnniversary)} />)
+};
 
 export const Logo: React.FC<{
 	isAnniversary?: boolean;
-}> = ({ isAnniversary }) => (
+	edition: Edition;
+}> = ({ isAnniversary, edition }) => (
 	<a css={link(isAnniversary)} href="/" data-link-name="nav2 : logo">
 		<span
 			css={css`
@@ -80,6 +81,6 @@ export const Logo: React.FC<{
 		>
 			The Guardian - Back to home
 		</span>
-		<SVG isAnniversary={isAnniversary} />
+		<SVG isAnniversary={isAnniversary} edition={edition} />
 	</a>
 );
