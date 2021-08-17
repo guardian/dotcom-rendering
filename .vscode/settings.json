@@ -4,6 +4,9 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "eslint.workingDirectories": [
+        "./dotcom-rendering"
+	],
     "files.watcherExclude": {
         "**/target": true
     },
