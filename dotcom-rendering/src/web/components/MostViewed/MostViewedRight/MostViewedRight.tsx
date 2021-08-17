@@ -28,10 +28,10 @@ const headingStyles = css`
 
 interface Props {
 	limitItems?: number;
-	isSignedIn?: boolean;
+	isAdFreeUser: boolean;
 }
 
-export const MostViewedRight = ({ limitItems = 5, isSignedIn }: Props) => {
+export const MostViewedRight = ({ limitItems = 5, isAdFreeUser }: Props) => {
 	const adBlockerDetected = useAdBlockInUse();
 
 	const endpointUrl: string =
@@ -47,7 +47,7 @@ export const MostViewedRight = ({ limitItems = 5, isSignedIn }: Props) => {
 		const trails: TrailType[] = data.trails
 			.map(decideTrail)
 			.slice(0, limitItems);
-		const stickToTop = adBlockerDetected || isSignedIn;
+		const stickToTop = adBlockerDetected || isAdFreeUser;
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
 			<div
