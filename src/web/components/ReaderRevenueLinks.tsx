@@ -46,9 +46,13 @@ type Props = {
 };
 
 const headerStyles = css`
-	padding-top: 33px;
+	padding-top: 39px;
 	padding-left: 10px;
 	max-width: 310px;
+
+	${from.mobileMedium} {
+		padding-top: 44px;
+	}
 
 	${from.mobileLandscape} {
 		padding-left: ${space[5]}px;
@@ -58,6 +62,7 @@ const headerStyles = css`
 		padding-top: ${space[1]}px;
 		padding-bottom: ${space[5]}px;
 		padding-left: ${space[5]}px;
+		max-width: 340px;
 	}
 
 	${from.desktop} {
