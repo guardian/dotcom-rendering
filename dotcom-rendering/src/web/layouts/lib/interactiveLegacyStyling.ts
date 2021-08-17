@@ -15,6 +15,10 @@ export const interactiveLegacyClasses = {
 	contentMainColumn: 'content__main-column--interactive',
 	headline: 'content__headline',
 	labelLink: 'content__label__link',
+
+	// some legacy interactives do not use the content--interactive container
+	// to ensure all editorial content has correct font, we need to target this too
+	interactiveWrapper: 'interactive-wrapper',
 };
 
 // Styles expected by interactives from the Frontend days. These shouldn't be
@@ -33,8 +37,8 @@ export const interactiveGlobalStyles = css`
 
 	/* There is room for better solution where we don't have to load global styles onto the body.
 		For now this works, but we shouldn't support for it for newly made interactives. */
-	p,
-	.${interactiveLegacyClasses.contentInteractive} {
+	.${interactiveLegacyClasses.contentInteractive},
+	.${interactiveLegacyClasses.interactiveWrapper} {
 		margin-bottom: 1rem;
 
 		/* stylelint-disable */
