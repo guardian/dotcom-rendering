@@ -63,10 +63,20 @@ const style = (isAnniversary?: boolean) => css`
 	}
 `;
 
-const SVG = ({ isAnniversary, edition }: { isAnniversary?: boolean; edition:Edition }) => {
-if(isAnniversary ) {return (<GuardianAnniversaryLogoSVG css={style(isAnniversary)} />)}
-if(isAnniversary&& edition==='UK'){return (<GuardianAnniversaryLogoUKSVG css={style(isAnniversary)} />)}
- return(<TheGuardianLogoSVG css={style(isAnniversary)} />)
+const SVG = ({
+	isAnniversary,
+	edition,
+}: {
+	isAnniversary?: boolean;
+	edition: Edition;
+}) => {
+	if (isAnniversary) {
+		return <GuardianAnniversaryLogoSVG css={style(isAnniversary)} />;
+	}
+	if (isAnniversary && edition === 'UK') {
+		return <GuardianAnniversaryLogoUKSVG css={style(isAnniversary)} />;
+	}
+	return <TheGuardianLogoSVG css={style(isAnniversary)} />;
 };
 
 export const Logo: React.FC<{
