@@ -256,81 +256,84 @@ export const ShowcaseLayout = ({
 	return (
 		<>
 			{format.theme !== Special.Labs ? (
-				<div>
-					<Stuck>
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								display={format.display}
-							/>
-						</ElementContainer>
-					</Stuck>
-					<SendToBack>
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							backgroundColour={brandBackground.primary}
-						>
-							<Header
-								edition={CAPI.editionId}
-								idUrl={CAPI.config.idUrl}
-								mmaUrl={CAPI.config.mmaUrl}
-								isAnniversary={
-									CAPI.config.switches.anniversaryHeaderSvg
-								}
-							/>
-						</ElementContainer>
-
-						<ElementContainer
-							showSideBorders={true}
-							borderColour={brandLine.primary}
-							showTopBorder={false}
-							padded={false}
-							backgroundColour={brandBackground.primary}
-						>
-							<Nav
-								nav={NAV}
-								format={{
-									...format,
-									theme: getCurrentPillar(CAPI),
-								}}
-								subscribeUrl={
-									CAPI.nav.readerRevenueLinks.header.subscribe
-								}
-								edition={CAPI.editionId}
-							/>
-						</ElementContainer>
-
-						{NAV.subNavSections && (
+				<>
+					<div>
+						<Stuck>
 							<ElementContainer
-								backgroundColour={palette.background.article}
+								showTopBorder={false}
+								showSideBorders={false}
 								padded={false}
-								sectionId="sub-nav-root"
 							>
-								<SubNav
-									subNavSections={NAV.subNavSections}
-									currentNavLink={NAV.currentNavLink}
-									palette={palette}
-									format={format}
+								<HeaderAdSlot
+									isAdFreeUser={CAPI.isAdFreeUser}
+									shouldHideAds={CAPI.shouldHideAds}
+									display={format.display}
 								/>
 							</ElementContainer>
-						)}
+						</Stuck>
+						<SendToBack>
+							<ElementContainer
+								showTopBorder={false}
+								showSideBorders={false}
+								padded={false}
+								backgroundColour={brandBackground.primary}
+							>
+								<Header
+									edition={CAPI.editionId}
+									idUrl={CAPI.config.idUrl}
+									mmaUrl={CAPI.config.mmaUrl}
+									isAnniversary={
+										CAPI.config.switches
+											.anniversaryHeaderSvg
+									}
+								/>
+							</ElementContainer>
+						</SendToBack>
+					</div>
 
+					<ElementContainer
+						showSideBorders={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+					>
+						<Nav
+							nav={NAV}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
+							subscribeUrl={
+								CAPI.nav.readerRevenueLinks.header.subscribe
+							}
+							edition={CAPI.editionId}
+						/>
+					</ElementContainer>
+
+					{NAV.subNavSections && (
 						<ElementContainer
 							backgroundColour={palette.background.article}
 							padded={false}
-							showTopBorder={false}
+							sectionId="sub-nav-root"
 						>
-							<Lines count={4} effect="straight" />
+							<SubNav
+								subNavSections={NAV.subNavSections}
+								currentNavLink={NAV.currentNavLink}
+								palette={palette}
+								format={format}
+							/>
 						</ElementContainer>
-					</SendToBack>
-				</div>
+					)}
+
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<Lines count={4} effect="straight" />
+					</ElementContainer>
+				</>
 			) : (
 				// Else, this is a labs article so just show Nav and the Labs header
 				<>
