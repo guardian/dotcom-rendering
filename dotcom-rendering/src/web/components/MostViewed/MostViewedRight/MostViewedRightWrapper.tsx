@@ -5,6 +5,7 @@ import { MostViewedRight } from './MostViewedRight';
 
 type Props = {
 	limitItems?: number;
+	isAdFreeUser: boolean;
 };
 
 // Minimum height needed to render MostViewedRight is its own outer height.
@@ -15,7 +16,7 @@ const flexGrow = css`
 `;
 
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
-export const MostViewedRightWrapper = ({ limitItems }: Props) => {
+export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
 	const bodyRef = useRef<HTMLDivElement>(null);
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
@@ -44,7 +45,10 @@ export const MostViewedRightWrapper = ({ limitItems }: Props) => {
 	return (
 		<div ref={bodyRef} css={flexGrow}>
 			{heightIsAvailable ? (
-				<MostViewedRight limitItems={limitItems} />
+				<MostViewedRight
+					limitItems={limitItems}
+					isAdFreeUser={isAdFreeUser}
+				/>
 			) : null}
 		</div>
 	);

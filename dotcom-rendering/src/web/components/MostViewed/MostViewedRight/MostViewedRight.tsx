@@ -28,9 +28,10 @@ const headingStyles = css`
 
 interface Props {
 	limitItems?: number;
+	isAdFreeUser: boolean;
 }
 
-export const MostViewedRight = ({ limitItems = 5 }: Props) => {
+export const MostViewedRight = ({ limitItems = 5, isAdFreeUser }: Props) => {
 	const adBlockerDetected = useAdBlockInUse();
 
 	const endpointUrl: string =
@@ -46,10 +47,11 @@ export const MostViewedRight = ({ limitItems = 5 }: Props) => {
 		const trails: TrailType[] = data.trails
 			.map(decideTrail)
 			.slice(0, limitItems);
+		const stickToTop = adBlockerDetected || isAdFreeUser;
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
 			<div
-				css={[wrapperStyles, adBlockerDetected && stickyStyles]}
+				css={[wrapperStyles, stickToTop && stickyStyles]}
 				data-component="geo-most-popular"
 			>
 				<Lines count={4} effect="straight" />
