@@ -14,7 +14,7 @@ import {
 } from '@guardian/types';
 import type { Option, Result } from '@guardian/types';
 import { compose, parseIntOpt, pipe, resultFromNullable } from 'lib';
-import type { DocParser } from 'types/parserContext';
+import type { DocParser } from 'parserContext';
 
 // ----- Types ----- //
 

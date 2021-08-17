@@ -5,7 +5,7 @@ import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
-import type { Context } from 'types/parserContext';
+import type { Context } from 'parserContext';
 
 // ----- Types ----- //
 

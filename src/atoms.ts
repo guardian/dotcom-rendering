@@ -5,10 +5,10 @@ import { err, fromNullable, ok } from '@guardian/types';
 import type { Result } from '@guardian/types';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
-import { atomScript } from 'components/atoms/interactiveAtom';
+import { atomScript } from 'components/interactiveAtom';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
-import type { DocParser } from 'types/parserContext';
+import type { DocParser } from 'parserContext';
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
 	if (date === undefined) return undefined;

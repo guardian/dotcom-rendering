@@ -48,10 +48,6 @@ import type {
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
 import Anchor from 'components/anchor';
-import InteractiveAtom, {
-	atomCss,
-	atomScript,
-} from 'components/atoms/interactiveAtom';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
@@ -62,6 +58,10 @@ import Video from 'components/editions/video';
 import { EmbedComponentWrapper } from 'components/embedWrapper';
 import HorizontalRule from 'components/horizontalRule';
 import Interactive from 'components/interactive';
+import InteractiveAtom, {
+	atomCss,
+	atomScript,
+} from 'components/interactiveAtom';
 import List from 'components/list';
 import ListItem from 'components/listItem';
 import LiveEventLink from 'components/liveEventLink';

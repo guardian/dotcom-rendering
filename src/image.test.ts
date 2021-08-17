@@ -8,7 +8,7 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
 import { none, OptionKind, Role, some, withDefault } from '@guardian/types';
 import { ImageElementFields } from '@guardian/content-api-models/v1/imageElementFields';
-import { Context } from 'types/parserContext';
+import { Context } from 'parserContext';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetFields } from '@guardian/content-api-models/v1/assetFields';
 

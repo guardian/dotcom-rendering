@@ -21,7 +21,7 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
-import type { Context } from 'types/parserContext';
+import type { Context } from 'parserContext';
 
 // ----- Types ----- //
 

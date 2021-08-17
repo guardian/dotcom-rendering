@@ -15,7 +15,7 @@ import { MainMediaKind } from 'headerMedia';
 import { parseImage } from 'image';
 import { isLabs } from 'item';
 import { pipe } from 'lib';
-import type { Context } from 'types/parserContext';
+import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
 
 // ----- Lookups ----- //

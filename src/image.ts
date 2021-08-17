@@ -7,8 +7,8 @@ import { Dpr, src, srcsets } from '@guardian/image-rendering';
 import type { Format, Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, Role, some } from '@guardian/types';
 import { pipe } from 'lib';
+import type { Context } from 'parserContext';
 import type { ReactNode } from 'react';
-import type { Context } from 'types/parserContext';
 
 // ----- Types ----- //
 
