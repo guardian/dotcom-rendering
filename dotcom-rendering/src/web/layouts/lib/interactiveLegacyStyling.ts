@@ -83,6 +83,34 @@ export const interactiveGlobalStyles = css`
 		margin-left: 0;
 	}
 
+	.meta__extras {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 6px;
+		position: relative;
+		ul {
+			margin-left: 0px;
+		}
+	}
+
+	.content__main-column {
+		position: relative;
+
+		${from.tablet} {
+			max-width: 700px;
+		}
+		${from.desktop} {
+			margin-left: 0px;
+			margin-right: 310px;
+		}
+		${from.leftCol} {
+			margin-left: 150px;
+		}
+		${from.wide} {
+			margin-left: 230px;
+		}
+	}
+
 	.social__item {
 		float: left;
 		min-width: 2rem;
