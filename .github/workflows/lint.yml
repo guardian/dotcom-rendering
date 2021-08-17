@@ -1,9 +1,12 @@
-name: lint 🔎
-on: [push]
+name: DCR lint 🔎
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
     lint:
-        name: Lint
+        name: DCR Lint
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -11,9 +14,13 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: dotcom-rendering
 
             - name: Install
               run: yarn
+              working-directory: dotcom-rendering
 
             - name: Lint
               run: yarn lint
+              working-directory: dotcom-rendering
