@@ -7,6 +7,7 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Display, Design, Special } from '@guardian/types';
 import { sanitise } from '@frontend/lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	format: Format;
@@ -175,6 +176,11 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 		<div
 			data-print-layout="hide"
 			css={[nestedStyles(palette), standfirstStyles(format, palette)]}
+			className={
+				format.design === Design.Interactive
+					? interactiveLegacyClasses.standFirst
+					: ''
+			}
 			// eslint-disable-next-line react/no-danger
 			dangerouslySetInnerHTML={{
 				__html: sanitise(standfirst, {

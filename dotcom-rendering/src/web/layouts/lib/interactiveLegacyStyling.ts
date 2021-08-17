@@ -15,6 +15,10 @@ export const interactiveLegacyClasses = {
 	contentMainColumn: 'content__main-column--interactive',
 	headline: 'content__headline',
 	labelLink: 'content__label__link',
+	metaContainer: 'content__meta-container_dcr',
+	standFirst: 'content__standfirst',
+	byline: 'byline',
+	shareIcons: 'meta__social',
 
 	// some legacy interactives do not use the content--interactive container
 	// to ensure all editorial content has correct font, we need to target this too
