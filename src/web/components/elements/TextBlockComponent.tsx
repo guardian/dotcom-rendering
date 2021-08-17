@@ -25,12 +25,12 @@ const isLetter = (letter: string) => {
 
 const isOpenQuote = (t: string): boolean => {
 	return [
-		'\'' /* apostrophe  */,
-		'"'/* quotation mark */,
-		'\u2018'/* open single quote */,
-		'\u201c' /* open double quote */
-	].includes(t)
-}
+		"'" /* apostrophe  */,
+		'"' /* quotation mark */,
+		'\u2018' /* open single quote */,
+		'\u201c' /* open double quote */,
+	].includes(t);
+};
 
 const isLongEnough = (html: string): boolean => {
 	// Only show a dropcap if the block of text is 200 characters or
@@ -180,7 +180,7 @@ export const TextBlockComponent = ({
 					width: 15.2px;
 					margin-right: 0.2px;
 					background-color: ${decidePalette(format).background
-					.bullet};
+						.bullet};
 				}
 
 				${until.tablet} {

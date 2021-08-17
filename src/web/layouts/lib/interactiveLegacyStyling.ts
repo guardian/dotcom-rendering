@@ -35,6 +35,18 @@ export const interactiveGlobalStyles = css`
 		${center}
 	}
 
+	/* Legacy utility classes */
+	.u-h {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+
 	/* There is room for better solution where we don't have to load global styles onto the body.
 		For now this works, but we shouldn't support for it for newly made interactives. */
 	p,
@@ -69,6 +81,10 @@ export const interactiveGlobalStyles = css`
 	/* Start social icon support */
 	.meta__social {
 		padding-top: 0.375rem;
+	}
+
+	ul.social {
+		margin-left: 0;
 	}
 
 	.social__item {
@@ -126,6 +142,10 @@ export const interactiveGlobalStyles = css`
 		box-sizing: border-box;
 		padding-top: 0.125rem;
 		margin-bottom: 0.375rem;
+	}
+
+	.content__dateline time {
+		display: inline-block;
 	}
 	/* End social icon support */
 
