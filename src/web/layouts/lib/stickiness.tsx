@@ -1,28 +1,27 @@
 import { css } from '@emotion/react';
 
-import { border } from '@guardian/src-foundations/palette';
-
 import { getZIndex, getZIndexImportant } from '@frontend/web/lib/getZIndex';
 
 type Props = {
 	children?: React.ReactNode;
 };
 
-type StuckProps = Props & {
+type StuckProps = {
+	children?: React.ReactNode;
 	zIndex?: string;
 };
 
-// The advert is stuck to the top of the container as we scroll
-// until we hit the bottom of the wrapper that contains
-// the top banner and the header/navigation
-// We apply sticky positioning and z-indexes, the stickAdWrapper and headerWrapper
-// classes are tightly coupled.
-const stickyAdWrapper = (zIndex = 'stickyAdWrapper') => css`
-	background-color: white;
-	border-bottom: 0.0625rem solid ${border.secondary};
+const stickyStyles = css`
 	position: sticky;
 	top: 0;
+`;
+
+const addZindex = (zIndex = 'stickyAdWrapper') => css`
 	${getZIndex(zIndex)}
+`;
+
+const whiteBackground = css`
+	background-color: white;
 `;
 
 const headerWrapper = css`
@@ -44,7 +43,9 @@ const bannerWrapper = css`
 `;
 
 export const Stuck = ({ children, zIndex }: StuckProps) => (
-	<div css={stickyAdWrapper(zIndex)}>{children}</div>
+	<div css={[stickyStyles, addZindex(zIndex), whiteBackground]}>
+		{children}
+	</div>
 );
 
 export const SendToBack = ({ children }: Props) => (
