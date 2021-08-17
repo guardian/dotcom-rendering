@@ -4,6 +4,8 @@ source ~/.nvm/nvm.sh
 nvm install
 nvm use
 
+cd dotcom-rendering
+
 #Code Validation
 echo bundlesize token $BUNDLESIZE_GITHUB_TOKEN
 make validate-ci
