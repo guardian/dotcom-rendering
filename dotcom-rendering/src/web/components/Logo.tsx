@@ -68,10 +68,10 @@ export const Logo: React.FC<{
 	edition: Edition;
 }> = ({ isAnniversary, edition }) => {
 	let svg;
-	if (isAnniversary) {
-		svg = <GuardianAnniversaryLogoSVG css={style(isAnniversary)} />;
-	} else if (isAnniversary && edition === 'UK') {
+	if (isAnniversary && edition === 'UK') {
 		svg = <GuardianAnniversaryLogoUKSVG css={style(isAnniversary)} />;
+	} else if (isAnniversary ) {
+		svg = <GuardianAnniversaryLogoSVG css={style(isAnniversary)} />;
 	} else svg = <TheGuardianLogoSVG css={style(isAnniversary)} />;
 
 	return (
