@@ -239,7 +239,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		incrementArticleCountsIfConsented().catch((e) =>
 			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
 		);
-	}, []);
+	}, [CAPI.pageId]);
 
 	// AnniversaryAtom
 	// Add a cookie for the serverside A/B test that is checked to see if we should
