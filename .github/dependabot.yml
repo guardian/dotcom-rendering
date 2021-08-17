@@ -9,7 +9,7 @@ version: 2
 updates:
   # NPM packages
   - package-ecosystem: "npm" 
-    directory: "/"
+    directory: "/dotcom-rendering"
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
