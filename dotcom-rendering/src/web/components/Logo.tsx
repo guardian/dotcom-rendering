@@ -63,34 +63,27 @@ const style = (isAnniversary?: boolean) => css`
 	}
 `;
 
-const SVG = ({
-	isAnniversary,
-	edition,
-}: {
-	isAnniversary?: boolean;
-	edition: Edition;
-}) => {
-	if (isAnniversary) {
-		return <GuardianAnniversaryLogoSVG css={style(isAnniversary)} />;
-	}
-	if (isAnniversary && edition === 'UK') {
-		return <GuardianAnniversaryLogoUKSVG css={style(isAnniversary)} />;
-	}
-	return <TheGuardianLogoSVG css={style(isAnniversary)} />;
-};
-
 export const Logo: React.FC<{
 	isAnniversary?: boolean;
 	edition: Edition;
-}> = ({ isAnniversary, edition }) => (
-	<a css={link(isAnniversary)} href="/" data-link-name="nav2 : logo">
-		<span
-			css={css`
-				${visuallyHidden};
-			`}
-		>
-			The Guardian - Back to home
-		</span>
-		<SVG isAnniversary={isAnniversary} edition={edition} />
-	</a>
-);
+}> = ({ isAnniversary, edition }) => {
+	let svg;
+	if (isAnniversary) {
+		svg = <GuardianAnniversaryLogoSVG css={style(isAnniversary)} />;
+	} else if (isAnniversary && edition === 'UK') {
+		svg = <GuardianAnniversaryLogoUKSVG css={style(isAnniversary)} />;
+	} else svg = <TheGuardianLogoSVG css={style(isAnniversary)} />;
+
+	return (
+		<a css={link(isAnniversary)} href="/" data-link-name="nav2 : logo">
+			<span
+				css={css`
+					${visuallyHidden};
+				`}
+			>
+				The Guardian - Back to home
+			</span>
+			{svg}
+		</a>
+	);
+};
