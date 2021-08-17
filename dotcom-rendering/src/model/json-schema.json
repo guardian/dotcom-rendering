@@ -3628,7 +3628,10 @@
                     }
                 },
                 "abTests": {
-                    "$ref": "#/definitions/Record<string,\"control\"|\"variant\">"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
                 },
                 "dfpAccountId": {
                     "type": "string"
@@ -3790,9 +3793,6 @@
                 "stage",
                 "switches"
             ]
-        },
-        "Record<string,\"control\"|\"variant\">": {
-            "type": "object"
         },
         "CommercialProperties": {
             "type": "object",
