@@ -1,6 +1,6 @@
 # Dotcom/Apps Rendering
 
-This multi-project repo includes dotcom-rendering, annd shortly will include apps-rendering, which will live side by side as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
+This multi-project repo includes apps-rendering and dotcom-rendering as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
 
 The codebase of dotcom rendering is moved in a ‘dotcom-rendering’ subdirectory. To run dotcom-rendering scripts, e.g `make dev` `yarn storybook`, etc - You can do so by first `cd`’ing into the dotcom-rendering subdirectory.
 
@@ -42,3 +42,5 @@ We recommend using [nvm](https://github.com/creationix/nvm) (especially combined
 ### dotcom rendering
 
 Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
+
+Testing
