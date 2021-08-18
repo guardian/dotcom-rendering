@@ -1731,10 +1731,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/automat-contributions/-/automat-contributions-0.4.0.tgz#bc710031601dd3eb90f3e6555a8fed9d69d0b93d"
   integrity sha512-ooyeNl4lFOCTi376GipsdV6IHnxY7MGHfM7c/iFbAatElYbH4Lr2Y0kIOBg6yR5XGDMhQ8PWyDQ/YgMIL5BKRw==
 
-"@guardian/braze-components@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-3.3.0.tgz#9d4e84c60ec543ebb52dbe73a56cfde6a995352e"
-  integrity sha512-NwLCUrCWPv8LtAIHV9HnFN3bwLDEDSOtAat/Ux6pTz4xfEufpmoavfEgUDrZ9NQnIK66LwdMk0H8tmXsN9AEMw==
+"@guardian/braze-components@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-3.4.0.tgz#55930a56b75a645bd4e3f45aafe52d1352a65458"
+  integrity sha512-I6Yr0AwPAvdCwd4YblQX5NUjpbNz2hTgo/XbkQbLRFzSQiPKv3DWx2JbbvUJHXGvaoFMfwdefdBx9sAN8o5Yyg==
 
 "@guardian/commercial-core@^0.19.2":
   version "0.19.2"
