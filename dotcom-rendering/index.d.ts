@@ -472,6 +472,11 @@ interface CAPIType {
 	matchUrl?: string;
 	isSpecialReport: boolean;
 
+	// Interactives made on Frontend rather than DCR require special handling.
+	// The logic is date-driven. See:
+	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
+	isLegacyInteractive?: boolean;
+
 	anniversaryInteractiveAtom?: InteractiveAtomBlockElement; // TEMPORARY, to be removed following 200th anniversary
 }
 

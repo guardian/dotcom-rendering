@@ -382,6 +382,9 @@
         "isSpecialReport": {
             "type": "boolean"
         },
+        "isLegacyInteractive": {
+            "type": "boolean"
+        },
         "anniversaryInteractiveAtom": {
             "$ref": "#/definitions/InteractiveAtomBlockElement"
         }
@@ -3628,10 +3631,7 @@
                     }
                 },
                 "abTests": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
+                    "$ref": "#/definitions/Record<string,\"control\"|\"variant\">"
                 },
                 "dfpAccountId": {
                     "type": "string"
@@ -3793,6 +3793,9 @@
                 "stage",
                 "switches"
             ]
+        },
+        "Record<string,\"control\"|\"variant\">": {
+            "type": "object"
         },
         "CommercialProperties": {
             "type": "object",
