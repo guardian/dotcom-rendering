@@ -81,6 +81,13 @@ module.exports = {
 			'@frontend': path.resolve(__dirname, '../src'),
 		};
 
+		// Allows files in the 'common' directory to find node_modules
+		config.resolve.modules = [
+			...config.resolve.modules,
+			// This is 'dotcom-rendering/node_modules'
+			path.resolve(__dirname, '../node_modules'),
+		];
+
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
 		config.plugins.push(

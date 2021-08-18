@@ -43,6 +43,7 @@ scripts/git-hooks/*
 
 # Storybook static folder (used if taking snapshots locally)
 /storybook-static/*
+dotcom-rendering/storybook-static/*
 
 # Architecture Diagram
 webArchitecture.svg
