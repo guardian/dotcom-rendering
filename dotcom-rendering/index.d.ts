@@ -421,6 +421,7 @@ interface CAPIType {
 	pillar: LegacyPillar;
 
 	isImmersive: boolean;
+	isLegacyInteractive: boolean;
 	sectionLabel: string;
 	sectionUrl: string;
 	sectionName?: string;
