@@ -25,10 +25,7 @@ import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import {
-	interactiveGlobalStyles,
-	legacyInteractiveImmersiveStyling,
-} from './lib/interactiveLegacyStyling';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { Picture } from '../components/Picture';
 
 interface Props {
@@ -85,7 +82,9 @@ const Renderer: React.FC<{
 							className={`element element-image element--${element.role}`}
 						>
 							<Picture
-								imageRole="showcase"
+								// Hardcoding image role for legacy interactives as a best
+								// guess for the image sizes
+								imageRole='showcase'
 								imageSources={element.imageSources}
 								alt={element.data.alt || ''}
 								width={element.media.allImages[0].fields.width}
@@ -96,12 +95,12 @@ const Renderer: React.FC<{
 								isMainMedia={false}
 							/>
 							<figcaption>
-								<span className="element-image__caption">
+								<span className='element-image__caption'>
 									{element.data.caption
 										? element.data.caption
 										: ''}{' '}
 								</span>
-								<span className="element-image__credit">
+								<span className='element-image__credit'>
 									{element.data.credit
 										? element.data.credit
 										: ''}
@@ -259,21 +258,13 @@ export const InteractiveImmersiveLayout = ({
 }: Props): JSX.Element => {
 	const {
 		config: { host },
-		isLegacyInteractive,
 	} = CAPI;
 
 	return (
 		<>
-			<Global
-				styles={
-					isLegacyInteractive
-						? [
-								interactiveGlobalStyles,
-								legacyInteractiveImmersiveStyling,
-						  ]
-						: interactiveGlobalStyles
-				}
-			/>
+			{CAPI.isLegacyInteractive && (
+				<Global styles={interactiveGlobalStyles} />
+			)}
 			<div
 				css={css`
 					background-color: ${palette.background.article};

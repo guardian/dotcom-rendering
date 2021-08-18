@@ -8,6 +8,8 @@ import { BylineLink } from '@frontend/web/components/BylineLink';
 
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+
 const twitterHandleStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};
 	font-weight: bold;
@@ -67,7 +69,14 @@ export const Contributor: React.FC<{
 			data-link-name="byline"
 		>
 			{format.design !== Design.Interview && (
-				<div css={bylineStyles(palette, format)}>
+				<div
+					className={
+						format.design === Design.Interactive
+							? interactiveLegacyClasses.byline
+							: ''
+					}
+					css={bylineStyles(palette, format)}
+				>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>
 			)}
