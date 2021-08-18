@@ -240,7 +240,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide">
-				<Global styles={interactiveGlobalStyles} />
+				{CAPI.isLegacyInteractive && (
+					<Global styles={interactiveGlobalStyles} />
+				)}
 				<>
 					<Stuck>
 						<ElementContainer

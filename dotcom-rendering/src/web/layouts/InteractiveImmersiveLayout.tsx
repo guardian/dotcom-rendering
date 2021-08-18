@@ -220,7 +220,9 @@ export const InteractiveImmersiveLayout = ({
 
 	return (
 		<>
-			<Global styles={interactiveGlobalStyles} />
+			{CAPI.isLegacyInteractive && (
+				<Global styles={interactiveGlobalStyles} />
+			)}
 			<div
 				css={css`
 					background-color: ${palette.background.article};
