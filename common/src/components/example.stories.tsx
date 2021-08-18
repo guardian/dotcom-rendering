@@ -17,7 +17,7 @@ const Default: FC = () =>
 
 export default {
 	component: Example,
-	title: 'Example',
+	title: 'Common/Components/Example',
 }
 
 export {

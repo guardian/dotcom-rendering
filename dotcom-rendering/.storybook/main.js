@@ -5,7 +5,10 @@ module.exports = {
 	core: {
 		builder: 'webpack5',
 	},
-	stories: ['../src/**/*.stories.@(tsx)'],
+	stories: [
+		'../src/**/*.stories.@(tsx)', // DCR stories
+		'../../common/src/**/*.stories.@(tsx)', // Common stories
+	],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
