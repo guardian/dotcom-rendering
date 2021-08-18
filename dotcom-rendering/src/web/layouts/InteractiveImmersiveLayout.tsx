@@ -67,6 +67,23 @@ const Renderer: React.FC<{
 				case 'model.dotcomrendering.pageElements.TextBlockElement':
 					return el;
 
+				// We map image classes to their role name for compatibility with
+				// legacy interactive immersives
+				case 'model.dotcomrendering.pageElements.ImageBlockElement':
+					return (
+						<figure
+							id={
+								'elementId' in element
+									? element.elementId
+									: undefined
+							}
+							key={index}
+							className={`element element-image element--${element.role}`}
+						>
+							{el}
+						</figure>
+					);
+
 				default:
 					return (
 						<figure
