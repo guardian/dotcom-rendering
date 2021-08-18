@@ -161,7 +161,7 @@ export const interactiveGlobalStyles = css`
 	.interactive-atom {
 		position: relative;
 	}
-	`;
+`;
 
 // Styles added specifically to ensure compatibility with
 // legacy interactive immersives

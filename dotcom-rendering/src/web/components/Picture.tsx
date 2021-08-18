@@ -4,7 +4,7 @@ import { breakpoints } from '@guardian/src-foundations/mq';
 
 type Props = {
 	imageSources: ImageSource[];
-	role: RoleType;
+	imageRole: RoleType;
 	alt: string;
 	height: string;
 	width: string;
@@ -119,17 +119,17 @@ const getSizes = (role: RoleType, isMainMedia: boolean): string => {
 
 export const Picture = ({
 	imageSources,
-	role,
+	imageRole,
 	alt,
 	height,
 	width,
 	isMainMedia = false,
 	isLazy = true,
 }: Props) => {
-	const hdpiSources = getSources(role, 'hdpi', imageSources);
-	const mdpiSources = getSources(role, 'mdpi', imageSources);
-	const fallbackSrc = getFallback(role, 'hdpi', imageSources);
-	const sizes = getSizes(role, isMainMedia);
+	const hdpiSources = getSources(imageRole, 'hdpi', imageSources);
+	const mdpiSources = getSources(imageRole, 'mdpi', imageSources);
+	const fallbackSrc = getFallback(imageRole, 'hdpi', imageSources);
+	const sizes = getSizes(imageRole, isMainMedia);
 
 	return (
 		<picture itemProp="contentUrl">

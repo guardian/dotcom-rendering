@@ -28,7 +28,8 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import {
 	interactiveGlobalStyles,
 	legacyInteractiveImmersiveStyling,
- } from './lib/interactiveLegacyStyling';
+} from './lib/interactiveLegacyStyling';
+import { Picture } from '../components/Picture';
 
 interface Props {
 	CAPI: CAPIType;
@@ -83,7 +84,29 @@ const Renderer: React.FC<{
 							key={index}
 							className={`element element-image element--${element.role}`}
 						>
-							{el}
+							<Picture
+								imageRole="showcase"
+								imageSources={element.imageSources}
+								alt={element.data.alt || ''}
+								width={element.media.allImages[0].fields.width}
+								height={
+									element.media.allImages[0].fields.height
+								}
+								isLazy={true}
+								isMainMedia={false}
+							/>
+							<figcaption>
+								<span className="element-image__caption">
+									{element.data.caption
+										? element.data.caption
+										: ''}{' '}
+								</span>
+								<span className="element-image__credit">
+									{element.data.credit
+										? element.data.credit
+										: ''}
+								</span>
+							</figcaption>
 						</figure>
 					);
 
@@ -241,11 +264,16 @@ export const InteractiveImmersiveLayout = ({
 
 	return (
 		<>
-			<Global styles={
-				isLegacyInteractive
-				? [interactiveGlobalStyles, legacyInteractiveImmersiveStyling]
-				: interactiveGlobalStyles
-			} />
+			<Global
+				styles={
+					isLegacyInteractive
+						? [
+								interactiveGlobalStyles,
+								legacyInteractiveImmersiveStyling,
+						  ]
+						: interactiveGlobalStyles
+				}
+			/>
 			<div
 				css={css`
 					background-color: ${palette.background.article};
