@@ -1,0 +1,48 @@
+name: "AR Chromatic"
+
+on:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "dotcom-rendering/**"
+            - "apps-rendering/api-models/"
+            - "apps-rendering/project/"
+            - "*.sbt"
+            - "*.md"
+            - "*.yml"
+            - ".gitignore"
+    pull_request:
+        branches:
+            - main
+        paths-ignore:
+            - "dotcom-rendering/**"
+            - "apps-rendering/api-models/"
+            - "apps-rendering/project/"
+            - "*.sbt"
+            - "*.md"
+            - "*.yml"
+            - ".gitignore"
+
+jobs:
+    ar_chromatic:
+        name: AR Chromatic
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/setup-node@v2.1.5
+              with:
+                  node-version: 12
+            - uses: actions/cache@v2
+              with:
+                  path: ~/.npm
+                  key: node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: node-
+            - name: install
+              run: npm ci
+              working-directory: apps-rendering
+            - uses: chromaui/action@v1
+              with:
+                  workingDir: apps-rendering
+                  projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
+                  token: ${{ secrets.GITHUB_TOKEN }}
