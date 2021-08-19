@@ -42,7 +42,8 @@ const Renderer: React.FC<{
 	host?: string;
 	pageId: string;
 	webTitle: string;
-}> = ({ format, palette, elements, host, pageId, webTitle }) => {
+	isLegacyInteractive?: boolean;
+}> = ({ format, palette, elements, host, pageId, webTitle, isLegacyInteractive = false }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -61,6 +62,21 @@ const Renderer: React.FC<{
 			webTitle,
 		});
 
+		function wrapEl() {
+			return (
+				<figure
+					id={
+						'elementId' in element
+							? element.elementId
+							: undefined
+					}
+					key={index}
+				>
+					{el}
+				</figure>
+			);
+		}
+
 		if (ok) {
 			switch (element._type) {
 				// Here we think it makes sense not to wrap every `p` inside a `figure`
@@ -71,57 +87,51 @@ const Renderer: React.FC<{
 				// We map image classes to their role name for compatibility with
 				// legacy interactive immersives
 				case 'model.dotcomrendering.pageElements.ImageBlockElement':
-					return (
-						<figure
-							id={
-								'elementId' in element
-									? element.elementId
-									: undefined
-							}
-							key={index}
-							className={`element element-image element--${element.role}`}
-						>
-							<Picture
-								// Hardcoding image role for legacy interactives as a best
-								// guess for the image sizes
-								imageRole='showcase'
-								imageSources={element.imageSources}
-								alt={element.data.alt || ''}
-								width={element.media.allImages[0].fields.width}
-								height={
-									element.media.allImages[0].fields.height
+					if (isLegacyInteractive) {
+						return (
+							<figure
+								id={
+									'elementId' in element
+										? element.elementId
+										: undefined
 								}
-								isLazy={true}
-								isMainMedia={false}
-							/>
-							<figcaption>
-								<span className='element-image__caption'>
-									{element.data.caption
-										? element.data.caption
-										: ''}{' '}
-								</span>
-								<span className='element-image__credit'>
-									{element.data.credit
-										? element.data.credit
-										: ''}
-								</span>
-							</figcaption>
-						</figure>
-					);
+								key={index}
+								className={`element element-image element--${element.role}`}
+							>
+								<Picture
+									// This structure most closely represents how images in
+									// legacy interactives were rendered via Frontend. We
+									// hard code the image role as a best guess for the
+									// image size.
+									imageRole='showcase'
+									imageSources={element.imageSources}
+									alt={element.data.alt || ''}
+									width={element.media.allImages[0].fields.width}
+									height={
+										element.media.allImages[0].fields.height
+									}
+									isLazy={true}
+									isMainMedia={false}
+								/>
+								<figcaption>
+									<span className='element-image__caption'>
+										{element.data.caption
+											? element.data.caption
+											: ''}{' '}
+									</span>
+									<span className='element-image__credit'>
+										{element.data.credit
+											? element.data.credit
+											: ''}
+									</span>
+								</figcaption>
+							</figure>
+						);
+					}
+					return wrapEl();
 
 				default:
-					return (
-						<figure
-							id={
-								'elementId' in element
-									? element.elementId
-									: undefined
-							}
-							key={index}
-						>
-							{el}
-						</figure>
-					);
+					return wrapEl();
 			}
 		}
 
@@ -308,6 +318,7 @@ export const InteractiveImmersiveLayout = ({
 						host={host}
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
+						isLegacyInteractive={CAPI.isLegacyInteractive}
 					/>
 				</main>
 			</ElementContainer>
