@@ -11,14 +11,11 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import type { Format, Option } from '@guardian/types';
 import {
-	andThen,
 	Design,
 	Display,
 	fromNullable,
 	map,
-	none,
 	Pillar,
-	some,
 	Special,
 } from '@guardian/types';
 import type { Body } from 'bodyElement';
@@ -195,9 +192,6 @@ function getDisplay(content: Content): Display {
 	return Display.Standard;
 }
 
-const nonEmptyString = (s: string): Option<string> =>
-	s !== '' ? some(s) : none;
-
 const itemFields = (
 	context: Context,
 	request: RenderingRequest,
@@ -216,7 +210,6 @@ const itemFields = (
 		bylineHtml: pipe(
 			content.fields?.bylineHtml,
 			fromNullable,
-			andThen(nonEmptyString),
 			map(context.docParser),
 		),
 		publishDate: maybeCapiDate(content.webPublicationDate),

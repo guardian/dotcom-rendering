@@ -108,10 +108,10 @@ const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
 		}
 	`;
 	return (
-		<h3 css={styles}>
+		<h2 css={styles}>
 			<Triangle color={triangleColor} />
 			{location}
-		</h3>
+		</h2>
 	);
 };
 
