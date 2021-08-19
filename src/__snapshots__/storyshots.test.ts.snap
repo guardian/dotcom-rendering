@@ -755,11 +755,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-
-  .emotion-21 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
-  }
 }
 
 @media (min-width: 740px) {
@@ -1987,11 +1982,6 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-
-  .emotion-22 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
-  }
 }
 
 @media (min-width: 740px) {
@@ -2674,11 +2664,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-  }
-
-  .emotion-23 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
   }
 }
 
@@ -3795,11 +3780,6 @@ exports[`Storyshots Editions/Article Correction 1`] = `
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-
-  .emotion-15 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
-  }
 }
 
 @media (min-width: 740px) {
@@ -4913,11 +4893,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-  }
-
-  .emotion-20 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
   }
 }
 
@@ -6092,11 +6067,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-
-  .emotion-21 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
-  }
 }
 
 @media (min-width: 740px) {
@@ -7257,11 +7227,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-  }
-
-  .emotion-20 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
   }
 }
 
@@ -8493,11 +8458,6 @@ width:@media (min-width: 320px) {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-
-  .emotion-22 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
-  }
 }
 
 @media (min-width: 740px) {
@@ -8759,7 +8719,7 @@ width:@media (min-width: 320px) {
           <div
             className="editions-gallery-caption emotion-25"
           >
-            <h3
+            <h2
               className="emotion-26"
             >
               <svg
@@ -8772,7 +8732,7 @@ width:@media (min-width: 320px) {
                 />
               </svg>
               Washington DC, US
-            </h3>
+            </h2>
             <p
               className="emotion-28"
             >
@@ -8803,7 +8763,7 @@ width:@media (min-width: 320px) {
           <div
             className="editions-gallery-caption emotion-25"
           >
-            <h3
+            <h2
               className="emotion-26"
             >
               <svg
@@ -8816,7 +8776,7 @@ width:@media (min-width: 320px) {
                 />
               </svg>
               Prayagraj, India
-            </h3>
+            </h2>
             <p
               className="emotion-28"
             >
@@ -8847,7 +8807,7 @@ width:@media (min-width: 320px) {
           <div
             className="editions-gallery-caption emotion-25"
           >
-            <h3
+            <h2
               className="emotion-26"
             >
               <svg
@@ -8860,7 +8820,7 @@ width:@media (min-width: 320px) {
                 />
               </svg>
               Hua Hin, Thailand
-            </h3>
+            </h2>
             <p
               className="emotion-28"
             >
@@ -8891,7 +8851,7 @@ width:@media (min-width: 320px) {
           <div
             className="editions-gallery-caption emotion-25"
           >
-            <h3
+            <h2
               className="emotion-26"
             >
               <svg
@@ -8904,7 +8864,7 @@ width:@media (min-width: 320px) {
                 />
               </svg>
               Mulhouse, France
-            </h3>
+            </h2>
             <p
               className="emotion-28"
             >
@@ -9423,11 +9383,6 @@ width:@media (min-width: 320px) {
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-  }
-
-  .emotion-22 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
   }
 }
 
@@ -10570,11 +10525,6 @@ exports[`Storyshots Editions/Article Letter 1`] = `
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-  }
-
-  .emotion-18 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
   }
 }
 
@@ -11976,11 +11926,6 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-
-  .emotion-42 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
-  }
 }
 
 @media (min-width: 740px) {
@@ -13013,11 +12958,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-  }
-
-  .emotion-26 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
   }
 }
 
@@ -14261,11 +14201,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-  }
-
-  .emotion-20 h2 {
-    margin: 0;
-    padding: 1rem 0 0.25rem 0;
   }
 }
 

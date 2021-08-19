@@ -5,8 +5,8 @@ import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { background, border, neutral } from '@guardian/src-foundations/palette';
-import type { Format, Option } from '@guardian/types';
-import { Design, Display, OptionKind, partition } from '@guardian/types';
+import type { Format } from '@guardian/types';
+import { Design, Display, partition } from '@guardian/types';
 import type { Item } from 'item';
 import { isPicture } from 'item';
 import type { FC } from 'react';
@@ -44,22 +44,15 @@ const articleStyles = css`
 	${articleMarginStyles}
 `;
 
-const hasChildNodes = (field: Option<DocumentFragment>): boolean =>
-	field.kind === OptionKind.Some && field.value.hasChildNodes();
-
-const headerStyles = (item: Item): SerializedStyles => {
-	const hasByline = hasChildNodes(item.bylineHtml);
-
-	return css`
-		${articleWidthStyles}
-		${hasByline && `border-bottom: 1px solid ${border.secondary};`}
+const headerStyles = css`
+	${articleWidthStyles}
+	border-bottom: 1px solid ${border.secondary};
 
 	${from.tablet} {
-			padding-right: ${remSpace[3]};
-			border-right: 1px solid ${border.secondary};
-		}
-	`;
-};
+		padding-right: ${remSpace[3]};
+		border-right: 1px solid ${border.secondary};
+	}
+`;
 
 const bodyStyles = css`
 	padding-top: ${remSpace[3]};
@@ -82,11 +75,6 @@ const bodyStyles = css`
 			margin: 0;
 			padding-top: ${remSpace[3]};
 			padding-bottom: ${remSpace[3]};
-		}
-
-		h2 {
-			margin: 0;
-			padding: ${remSpace[4]} 0 ${remSpace[1]} 0;
 		}
 	}
 
@@ -153,7 +141,7 @@ const itemStyles = (item: Item): SerializedStyles => {
 	}
 };
 
-const getSectionStyles = (item: Item): SerializedStyles[] => {
+const getSectionStyles = (item: Format): SerializedStyles[] => {
 	if (
 		item.design === Design.Interview ||
 		item.design === Design.Media ||
@@ -161,7 +149,7 @@ const getSectionStyles = (item: Item): SerializedStyles[] => {
 	) {
 		return [];
 	}
-	return [headerStyles(item), articleStyles];
+	return [headerStyles, articleStyles];
 };
 
 const Article: FC<Props> = ({ item }) => {
