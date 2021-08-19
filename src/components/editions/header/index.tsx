@@ -204,6 +204,7 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 	<header css={galleryHeaderStyles}>
 		<HeaderMedia item={item} />
 		<div css={galleryInnerHeaderStyles}>
+			<Series item={item} />
 			<Headline item={item} />
 			<div css={galleryHeaderBorderStyles}>
 				<Standfirst item={item} />
