@@ -27,22 +27,22 @@ const bottomPadding = css`
 	}
 `;
 
-const setMetaWidth = (palette: Palette) => css `
-    position: relative;
-    ${from.tablet} {
-        max-width: 620px;
-    }
-    ${from.desktop} {
+const setMetaWidth = (palette: Palette) => css`
+	position: relative;
+	${from.tablet} {
+		max-width: 620px;
+	}
+	${from.desktop} {
 		margin-left: 0px;
-        margin-right: 310px;
-    }
-    ${from.leftCol} {
+		margin-right: 310px;
+	}
+	${from.leftCol} {
 		margin-left: 150px;
 		padding-left: 10px;
 		border-left: 1px solid ${palette.border.article};
-    }
-    ${from.wide} {
-        margin-left: 230px;
+	}
+	${from.wide} {
+		margin-left: 230px;
 	}
 `;
 
@@ -150,7 +150,14 @@ export const SubMeta = ({
 	const hasSectionLinks = subMetaSectionLinks.length > 0;
 	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
 	return (
-		<div data-print-layout="hide" css={format.design === Design.Interactive ? [bottomPadding, setMetaWidth(palette)] : bottomPadding}>
+		<div
+			data-print-layout="hide"
+			css={
+				format.design === Design.Interactive
+					? [bottomPadding, setMetaWidth(palette)]
+					: bottomPadding
+			}
+		>
 			{badge && (
 				<div css={badgeWrapper}>
 					<Badge
@@ -234,21 +241,21 @@ export const SubMeta = ({
 						size="medium"
 					/>
 					<div css={syndicationButtonOverrides(palette)}>
-						{format.design === Design.Interactive ? null :
-						<LinkButton
-							priority="tertiary"
-							size="xsmall"
-							data-link-name="meta-syndication-article"
-							href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
-								webUrl,
-							)}&type=article&internalpagecode=${pageId}`}
-							target="_blank"
-							rel="noopener"
-							title="Reuse this content"
-						>
-							Reuse this content
-						</LinkButton>
-						}
+						{format.design === Design.Interactive ? null : (
+							<LinkButton
+								priority="tertiary"
+								size="xsmall"
+								data-link-name="meta-syndication-article"
+								href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
+									webUrl,
+								)}&type=article&internalpagecode=${pageId}`}
+								target="_blank"
+								rel="noopener"
+								title="Reuse this content"
+							>
+								Reuse this content
+							</LinkButton>
+						)}
 					</div>
 				</div>
 			)}

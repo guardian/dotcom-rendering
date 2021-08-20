@@ -8,9 +8,9 @@ const ensure = require('./ensure');
 	try {
 		const [semver] = await ensure('semver');
 
-        const nodeVersion = process.version.match(/^v(\d+\.\d+\.\d+)/)[1];
-        console.log("join: " + join(__dirname, '..', '..', '..', '.nvmrc'));
-		const nvmrcVersion = (			
+		const nodeVersion = process.version.match(/^v(\d+\.\d+\.\d+)/)[1];
+		console.log('join: ' + join(__dirname, '..', '..', '..', '.nvmrc'));
+		const nvmrcVersion = (
 			await readFile(join(__dirname, '..', '..', '..', '.nvmrc'), 'utf8')
 		).trim();
 
