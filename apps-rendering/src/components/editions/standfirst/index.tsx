@@ -65,6 +65,13 @@ const styles = (kickerColor: string): SerializedStyles => css`
 		font-style: normal;
 	}
 
+	.button-styles {
+		background: none;
+		border: none;
+		padding: 0;
+		height: 2.5rem;
+	}
+
 	svg {
 		flex: 0 0 1.875rem;
 		margin-top: 0.375rem;

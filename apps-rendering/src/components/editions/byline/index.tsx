@@ -92,6 +92,13 @@ const styles = (iconColor: string): SerializedStyles => {
 		position: relative;
 		display: flex;
 		justify-content: space-between;
+
+		.button-styles {
+			background: none;
+			border: none;
+			padding: 0;
+			height: 2.5rem;
+		}
 		svg {
 			flex: 0 0 1.875rem;
 			padding-top: 0.375rem;
