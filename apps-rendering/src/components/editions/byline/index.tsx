@@ -93,7 +93,7 @@ const styles = (iconColor: string): SerializedStyles => {
 		display: flex;
 		justify-content: space-between;
 
-		.button-styles {
+		.js-share-icon {
 			background: none;
 			border: none;
 			padding: 0;

@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
 	isPlatformMessageEvent,
 	isShareIconMessageEvent,
@@ -33,7 +34,7 @@ const useShareIcon = (defaultShareIcon: boolean): boolean => {
 
 	const handleShare = (event: CustomEventInit<ShareIconMessage>): void => {
 		if (isShareIconMessageEvent(event)) {
-			setShowIcon(!!event.detail?.value);
+			setShowIcon(!event.detail?.value);
 		}
 	};
 
@@ -65,9 +66,16 @@ const AndroidShareIcon = (): ReactElement => (
 	</svg>
 );
 
+const buttonStyles = css`
+	background: none;
+	border: none;
+	padding: 0;
+	height: 2.5rem;
+`;
+
 const ShareIcon: FC = () => {
 	const platform = usePlatform(Platform.IOS);
-	const showIcon = useShareIcon(false);
+	const showIcon = useShareIcon(true);
 
 	useEffect(() => {
 		pingEditionsNative({ kind: MessageKind.PlatformQuery });
@@ -75,7 +83,7 @@ const ShareIcon: FC = () => {
 
 	return showIcon ? (
 		<button
-			className="button-styles"
+			css={buttonStyles}
 			onClick={(): void =>
 				pingEditionsNative({ kind: MessageKind.Share })
 			}
