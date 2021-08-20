@@ -1,4 +1,5 @@
 import { Article } from '@root/fixtures/generated/articles/Article';
+import { addCookie, removeCookie } from '@root/src/web/browser/cookie';
 import { buildAdTargeting } from './ad-targeting';
 
 const CAPI = {
@@ -30,7 +31,7 @@ const CAPI = {
 };
 
 describe('buildAdTargeting', () => {
-	const expectedAdTargeting = {
+	const expectedAdTargeting = ({isSignedIn}: {isSignedIn: string}) => ({
 		adUnit: '/59666047/theguardian.com/money/article/ng',
 		customParams: {
 			cc: 'UK',
@@ -54,12 +55,18 @@ describe('buildAdTargeting', () => {
 			url:
 				'/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 			sens: 'f',
-			si: 'f',
+			si: isSignedIn,
 			vl: 0,
 		},
-	};
+	});
 
 	it('builds adTargeting correctly', () => {
-		expect(buildAdTargeting(CAPI)).toEqual(expectedAdTargeting);
+		expect(buildAdTargeting(CAPI)).toEqual(expectedAdTargeting({isSignedIn: 'f'}));
+	});
+
+	it('builds adTargeting correctly for a signed in user', () => {
+		addCookie('GU_U', 'something');
+		expect(buildAdTargeting(CAPI)).toEqual(expectedAdTargeting({isSignedIn: 't'}));
+		removeCookie('GU_U');
 	});
 });
