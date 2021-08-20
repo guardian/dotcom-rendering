@@ -1,3 +1,5 @@
+import { getCookie } from '@root/src/web/browser/cookie';
+
 export const buildAdTargeting = (
 	CAPI:
 		| CAPIType
@@ -10,9 +12,10 @@ export const buildAdTargeting = (
 		};
 	}
 	const { config } = CAPI;
+	const isSignedIn = getCookie('GU_U') ? 't' : 'f';
 	const customParams = {
 		sens: config.isSensitive ? 't' : 'f',
-		si: 'f',
+		si: isSignedIn,
 		vl: config.videoDuration,
 		cc: config.edition,
 		s: config.section,
