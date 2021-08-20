@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
-import { Special } from '@guardian/types';
-import { until } from '@guardian/src-foundations/mq';
+import { Design, Special } from '@guardian/types';
+import { until, from } from '@guardian/src-foundations/mq';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';
@@ -24,6 +24,25 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 	${until.desktop} {
 		padding-bottom: ${space[5]}px;
+	}
+`;
+
+const setMetaWidth = (palette: Palette) => css`
+	position: relative;
+	${from.tablet} {
+		max-width: 620px;
+	}
+	${from.desktop} {
+		margin-left: 0px;
+		margin-right: 310px;
+	}
+	${from.leftCol} {
+		margin-left: 150px;
+		padding-left: 10px;
+		border-left: 1px solid ${palette.border.article};
+	}
+	${from.wide} {
+		margin-left: 230px;
 	}
 `;
 
@@ -131,7 +150,14 @@ export const SubMeta = ({
 	const hasSectionLinks = subMetaSectionLinks.length > 0;
 	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
 	return (
-		<div data-print-layout="hide" css={bottomPadding}>
+		<div
+			data-print-layout="hide"
+			css={
+				format.design === Design.Interactive
+					? [bottomPadding, setMetaWidth(palette)]
+					: bottomPadding
+			}
+		>
 			{badge && (
 				<div css={badgeWrapper}>
 					<Badge
@@ -215,19 +241,21 @@ export const SubMeta = ({
 						size="medium"
 					/>
 					<div css={syndicationButtonOverrides(palette)}>
-						<LinkButton
-							priority="tertiary"
-							size="xsmall"
-							data-link-name="meta-syndication-article"
-							href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
-								webUrl,
-							)}&type=article&internalpagecode=${pageId}`}
-							target="_blank"
-							rel="noopener"
-							title="Reuse this content"
-						>
-							Reuse this content
-						</LinkButton>
+						{format.design === Design.Interactive ? null : (
+							<LinkButton
+								priority="tertiary"
+								size="xsmall"
+								data-link-name="meta-syndication-article"
+								href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
+									webUrl,
+								)}&type=article&internalpagecode=${pageId}`}
+								target="_blank"
+								rel="noopener"
+								title="Reuse this content"
+							>
+								Reuse this content
+							</LinkButton>
+						)}
 					</div>
 				</div>
 			)}
