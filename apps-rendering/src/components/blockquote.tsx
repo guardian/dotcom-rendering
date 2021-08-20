@@ -15,6 +15,7 @@ import { getThemeStyles } from 'themeStyles';
 interface Props {
 	children?: ReactNode;
 	format: Format;
+	isEditions: boolean;
 }
 
 const styles = (format: Format): SerializedStyles => {
@@ -40,9 +41,9 @@ const styles = (format: Format): SerializedStyles => {
 	`;
 };
 
-const Blockquote: FC<Props> = ({ children, format }: Props) => (
+const Blockquote: FC<Props> = ({ children, format, isEditions }: Props) => (
 	<blockquote css={styles(format)}>
-		<SvgQuote />
+		{!isEditions && <SvgQuote />}
 		{children}
 	</blockquote>
 );
