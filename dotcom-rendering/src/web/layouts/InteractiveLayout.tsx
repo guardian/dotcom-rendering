@@ -93,7 +93,6 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  lines'
 						'.      border  meta'
 						'body   body    body'
-						'bottomlines  bottomlines   bottomlines'
 						'.      .       .';
 				}
 
