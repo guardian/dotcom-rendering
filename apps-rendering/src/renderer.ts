@@ -196,10 +196,11 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
-const textElement = (format: Format, supportsDarkMode = true) => (
-	node: Node,
-	key: number,
-): ReactNode => {
+const textElement = (
+	format: Format,
+	supportsDarkMode = true,
+	isEditions = false,
+) => (node: Node, key: number): ReactNode => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map(
 		textElement(format, supportsDarkMode),
@@ -231,7 +232,7 @@ const textElement = (format: Format, supportsDarkMode = true) => (
 						children,
 				  );
 		case 'BLOCKQUOTE':
-			return h(Blockquote, { key, format }, children);
+			return h(Blockquote, { key, format, isEditions }, children);
 		case 'STRONG':
 			return h('strong', { key }, children);
 		case 'B':
@@ -301,8 +302,11 @@ const text = (
 	doc: DocumentFragment,
 	format: Format,
 	supportsDarkMode = true,
+	isEditions = false,
 ): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format, supportsDarkMode));
+	Array.from(doc.childNodes).map(
+		textElement(format, supportsDarkMode, isEditions),
+	);
 
 const editionsStandfirstFilter = (node: Node): boolean =>
 	!['UL', 'LI', 'A'].includes(node.nodeName);
@@ -429,10 +433,11 @@ const textRenderer = (
 	excludeStyles: boolean,
 	element: Text,
 	supportsDarkMode?: boolean,
+	isEditions?: boolean,
 ): ReactNode => {
 	return excludeStyles
 		? Array.from(element.doc.childNodes).map(plainTextElement)
-		: text(element.doc, format, supportsDarkMode);
+		: text(element.doc, format, supportsDarkMode, isEditions);
 };
 
 const guideAtomRenderer = (
@@ -719,7 +724,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 ): ReactNode => {
 	switch (element.kind) {
 		case ElementKind.Text:
-			return textRenderer(format, excludeStyles, element, false);
+			return textRenderer(format, excludeStyles, element, false, true);
 
 		case ElementKind.Image:
 			return format.design === Design.Media
