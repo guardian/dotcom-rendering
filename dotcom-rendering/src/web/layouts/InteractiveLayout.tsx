@@ -93,6 +93,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.      border  lines'
 						'.      border  meta'
 						'body   body    body'
+						'bottomlines  bottomlines   bottomlines'
 						'.      .       .';
 				}
 
@@ -175,6 +176,19 @@ const stretchLines = css`
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
+	}
+`;
+
+const stretchMetaLines = css`
+	margin: 0 -10px;
+	${from.mobileLandscape} {
+		margin: 0 -20px;
+	}
+	${from.tablet} {
+		margin-right: -40px;
+	}
+	${from.leftCol} {
+		margin-right: -20px;
 	}
 `;
 
@@ -474,7 +488,13 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										webTitle={CAPI.webTitle}
 									/>
 
-									<Lines data-print-layout="hide" count={4} />
+									{/* <Lines data-print-layout="hide" count={4} /> */}
+									<div css={stretchMetaLines}>
+										<Lines
+											count={4}
+											data-print-layout="hide"
+										/>
+									</div>
 									<SubMeta
 										palette={palette}
 										format={format}
