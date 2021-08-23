@@ -12,7 +12,7 @@ export const buildAdTargeting = (
 		};
 	}
 	const { config } = CAPI;
-	const isSignedIn = getCookie('GU_U') ? 't' : 'f';
+	const isSignedIn = (typeof window !== "undefined") && getCookie('GU_U') ? 't' : 'f';
 	const customParams = {
 		sens: config.isSensitive ? 't' : 'f',
 		si: isSignedIn,
