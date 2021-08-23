@@ -34,7 +34,8 @@ const buildPlaceholders = (data: CAPIType): Map<string, string> => {
 			byline: data.author.byline || '',
 			webTitle: data.webTitle,
 			trailText: data.trailText,
-			sectionLabel: data.sectionLabel,
+			sectionTag: data.sectionLabel,
+			webURL: data.webURL,
 			// shareLinks: TODO,
 		}),
 	);
