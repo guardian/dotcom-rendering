@@ -31,11 +31,27 @@ const tablet = tabletContentWidth + 12;
 
 // ----- Template Format Specific Styles ----- //
 
-const analysisStyles = (kickerColor: string): SerializedStyles => css`
-	text-decoration: underline;
-	text-decoration-thickness: from-font;
-	text-decoration-color: ${kickerColor};
-	padding-bottom: 0;
+const analysisStyles = css`
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent,
+		transparent 46px,
+		${neutral[86]}
+	);
+	line-height: 48px;
+	background-size: ${remSpace[4]} ${remSpace[12]};
+	background-position: top left;
+	background-clip: content-box;
+	background-origin: content-box;
+	padding-bottom: ${remSpace[2]};
+
+	${from.mobile} {
+		line-height: 48px;
+	}
+
+	${from.tablet} {
+		line-height: 48px;
+	}
 `;
 
 const commentStyles = (hasImage: boolean): SerializedStyles => css`
@@ -179,7 +195,6 @@ const getDecorativeStyles = (item: Item): JSX.Element | string => {
 
 const getHeadlineStyles = (
 	format: Format,
-	kickerColor: string,
 	hasImage: boolean,
 ): SerializedStyles => {
 	const sharedStyles = getSharedStyles(format);
@@ -223,7 +238,7 @@ const getHeadlineStyles = (
 			return css(
 				sharedStyles,
 				getFontStyles('regular', 'light'),
-				analysisStyles(kickerColor),
+				analysisStyles,
 			);
 		case Design.Media:
 			return css(sharedStyles, galleryStyles);
@@ -243,7 +258,6 @@ interface Props {
 
 const Headline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
-	const { kicker: kickerColor } = getThemeStyles(format.theme);
 	const contributor = index(0)(item.contributors);
 
 	const hasImage =
@@ -257,7 +271,7 @@ const Headline: FC<Props> = ({ item }) => {
 					<Series item={item} />
 				</div>
 			)}
-			<h1 css={getHeadlineStyles(format, kickerColor, hasImage)}>
+			<h1 css={getHeadlineStyles(format, hasImage)}>
 				{getDecorativeStyles(item)}
 			</h1>
 		</div>
