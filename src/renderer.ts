@@ -231,7 +231,9 @@ const textElement = (format: Format, supportsDarkMode = true) => (
 						children,
 				  );
 		case 'BLOCKQUOTE':
-			return h(Blockquote, { key, format }, children);
+			return supportsDarkMode
+				? h(Blockquote, { key, format }, children)
+				: h('blockquote', { key }, children);
 		case 'STRONG':
 			return h('strong', { key }, children);
 		case 'B':
