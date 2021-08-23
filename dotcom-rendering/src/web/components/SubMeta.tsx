@@ -42,7 +42,7 @@ const setMetaWidth = (palette: Palette) => css`
 		border-left: 1px solid ${palette.border.article};
 	}
 	${from.wide} {
-		margin-left: 230px;
+		margin-left: 229px;
 	}
 `;
 
