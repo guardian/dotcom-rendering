@@ -1,49 +1,51 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactNode } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { Format } from '@guardian/types/Format';
-import { icons, darkModeCss } from 'styles';
-import { getPillarStyles } from 'pillarStyles';
-import { neutral } from '@guardian/src-foundations/palette';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
-
+import { neutral } from '@guardian/src-foundations/palette';
+import { SvgQuote } from '@guardian/src-icons';
+import type { Format } from '@guardian/types';
+import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
 interface Props {
-    children?: ReactNode;
-    format: Format;
+	children?: ReactNode;
+	format: Format;
 }
 
-const styles = (format: Format): SerializedStyles => css`
-    font-style: italic;
-    position: relative;
-    margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
-    padding: 0 ${remSpace[6]};
+const styles = (format: Format): SerializedStyles => {
+	const { kicker } = getThemeStyles(format.theme);
+	return css`
+		font-style: italic;
+		position: relative;
+		margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
+		padding: 0 ${remSpace[6]};
+		svg {
+			height: 62.4px;
+			margin-left: -9.2625px;
+			margin-bottom: -12px;
+			margin-top: 4.4px;
+			fill: ${kicker};
+		}
 
-    &::before {
-        ${icons}
-        font-style: normal;
-        font-size: 2.5rem;
-        content: '\\e11c';
-        color: ${getPillarStyles(format.pillar).kicker};
-    }
+		${darkModeCss`
+            svg {
+                fill: ${neutral[86]};
+            }
+        `}
+	`;
+};
 
-    ${darkModeCss`
-        &::before {
-            color: ${neutral[86]};
-        }
-    `}
-`;
-
-
-
-const Blockquote: FC<Props> = ({ children, format }: Props) =>
-    <blockquote css={styles(format)}>
-        {children}
-    </blockquote>
-
+const Blockquote: FC<Props> = ({ children, format }: Props) => (
+	<blockquote css={styles(format)}>
+		<SvgQuote />
+		{children}
+	</blockquote>
+);
 
 // ----- Exports ----- //
 

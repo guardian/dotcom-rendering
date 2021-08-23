@@ -179,11 +179,4 @@ export const renederedItemsAssetsCss = `
   font-style: italic;
   font-weight: 700;
 }
-@font-face {
-  font-family: Guardian Icons;
-  src: url("/assets/fonts/icons.otf");
-}
-.icons {
-  font-family: Guardian Icons;
-}
-`
+`;

@@ -1,75 +1,81 @@
 // ----- Imports ----- //
 
-import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
+import { Design, Display, none, Pillar } from '@guardian/types';
+import type { Contributor } from 'contributor';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
+import renderer from 'react-test-renderer';
 import Follow from './follow';
-import { Pillar, Design, Display } from '@guardian/types/Format';
-import { none } from '@guardian/types/option';
-import { Contributor } from 'contributor';
-
 
 // ----- Setup ----- //
 
-configure({ adapter: new Adapter() });
-
 const followFormat = {
-    pillar: Pillar.News,
-    design: Design.Article,
-    display: Display.Standard,
+	theme: Pillar.News,
+	design: Design.Article,
+	display: Display.Standard,
 };
-
 
 // ----- Tests ----- //
 
 describe('Follow component renders as expected', () => {
-    it('Displays title correctly', () => {
-        const contributors: Contributor[] = [
-            {
-                apiUrl: "https://mapi.co.uk/test",
-                name: "George Monbiot",
-                id: "test",
-                image: none,
-            },
-        ];
-        const follow = shallow(
-            <Follow contributors={contributors} {...followFormat} />
-        );
+	it('Displays title correctly', () => {
+		const contributors: Contributor[] = [
+			{
+				apiUrl: 'https://mapi.co.uk/test',
+				name: 'George Monbiot',
+				id: 'test',
+				image: none,
+			},
+		];
 
-        expect(follow.text()).toBe("Follow George Monbiot");
-    })
+		const container = document.createElement('div');
+		document.body.appendChild(container);
 
-    it('Renders null if no apiUrl', () => {
-        const contributors: Contributor[] = [
-            { name: "George Monbiot", id: "test", apiUrl: "", image: none },
-        ];
-        const follow = shallow(
-            <Follow contributors={contributors} {...followFormat} />
-        );
+		act(() => {
+			render(
+				<Follow contributors={contributors} {...followFormat} />,
+				container,
+			);
+		});
 
-        expect(follow.html()).toBe(null);
-    })
+		expect(container.textContent).toBe(' Follow George Monbiot');
 
-    it('Renders null if more than one contributor', () => {
-        const contributors: Contributor[] = [
-            {
-                name: "Contributor 1",
-                apiUrl: "https://mapi.co.uk/test",
-                id: "test",
-                image: none,
-            },
-            {
-                name: "Contributor 2",
-                apiUrl: "https://mapi.co.uk/test",
-                id: "test",
-                image: none,
-            },
-        ];
-        const follow = shallow(
-            <Follow contributors={contributors} {...followFormat} />
-        );
+		unmountComponentAtNode(container);
+		container.remove();
+	});
 
-        expect(follow.html()).toBe(null);
-    })
+	it('Renders null if no apiUrl', () => {
+		const contributors: Contributor[] = [
+			{ name: 'George Monbiot', id: 'test', apiUrl: '', image: none },
+		];
+
+		const follow = renderer.create(
+			<Follow contributors={contributors} {...followFormat} />,
+		);
+
+		expect(follow.root.children).toHaveLength(0);
+	});
+
+	it('Renders null if more than one contributor', () => {
+		const contributors: Contributor[] = [
+			{
+				name: 'Contributor 1',
+				apiUrl: 'https://mapi.co.uk/test',
+				id: 'test',
+				image: none,
+			},
+			{
+				name: 'Contributor 2',
+				apiUrl: 'https://mapi.co.uk/test',
+				id: 'test',
+				image: none,
+			},
+		];
+
+		const follow = renderer.create(
+			<Follow contributors={contributors} {...followFormat} />,
+		);
+
+		expect(follow.root.children).toHaveLength(0);
+	});
 });

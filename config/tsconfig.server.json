@@ -2,7 +2,6 @@
     "extends": "../tsconfig",
     "compilerOptions": {
         "target": "es2019",
-        "jsx": "preserve",
     },
     "files": [
         "../src/server/server.ts"

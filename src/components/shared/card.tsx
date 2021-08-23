@@ -1,328 +1,485 @@
-import React, { ReactElement, FC } from 'react';
-import { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
-import { css, SerializedStyles } from '@emotion/core';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { remSpace, breakpoints, palette } from '@guardian/src-foundations';
-import { Option, withDefault, map, fromNullable, OptionKind } from '@guardian/types/option';
-import { makeRelativeDate, formatSeconds } from 'date';
-import { pipe2 } from 'lib';
-import { text, neutral, background, opinion } from '@guardian/src-foundations/palette';
-import { Design, Display, Format } from '@guardian/types/Format';
-import { Image } from 'image';
-import { darkModeCss } from 'styles';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { getPillarStyles, pillarFromString } from 'pillarStyles';
-import Img from 'components/img';
-import { border } from 'editorialPalette';
-import { SvgCamera, SvgVideo, SvgAudio, SvgQuote } from '@guardian/src-icons';
+import { Img } from '@guardian/image-rendering';
+import { palette, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
+import {
+	background,
+	neutral,
+	opinion,
+	text,
+} from '@guardian/src-foundations/palette';
+import { headline, textSans } from '@guardian/src-foundations/typography';
+import { SvgAudio, SvgCamera, SvgQuote, SvgVideo } from '@guardian/src-icons';
+import {
+	Design,
+	Display,
+	fromNullable,
+	map,
+	none,
+	OptionKind,
+	withDefault,
+} from '@guardian/types';
+import type { Format, Option } from '@guardian/types';
 import { stars } from 'components/starRating';
-
+import { formatSeconds, makeRelativeDate } from 'date';
+import { border } from 'editorialPalette';
+import type { Image } from 'image';
+import { pipe } from 'lib';
+import type { FC, ReactElement } from 'react';
+import { darkModeCss } from 'styles';
+import { getThemeStyles, themeFromString } from 'themeStyles';
 
 interface Props {
-    relatedItem: RelatedItem;
-    image: Option<Image>;
+	relatedItem: RelatedItem;
+	image: Option<Image>;
 }
 
-const borderColor = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
-        return css`1px solid ${palette.labs[300]}`
-    } else {
-        return css`1px solid ${getPillarStyles(format.pillar).kicker}`
-    }
-}
+const borderColor = (
+	type: RelatedItemType,
+	format: Format,
+): SerializedStyles => {
+	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
+		return css`1px solid ${palette.labs[300]}`;
+	} else {
+		return css`1px solid ${getThemeStyles(format.theme).kicker}`;
+	}
+};
 
-const listStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    return css`
-        background: white;
-        margin-right: ${remSpace[3]};
-        flex: 0 0 15rem;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-top : ${borderColor(itemType, format)};
+const listStyles = (
+	type: RelatedItemType,
+	format: Format,
+): SerializedStyles => {
+	return css`
+		background: white;
+		margin-right: ${remSpace[2]};
+		flex: 0 0 42vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border-top: ${borderColor(type, format)};
+		max-width: 10rem;
 
-        &.fade {
-            opacity: .7;
-        }
+		&.fade {
+			opacity: 0.7;
+		}
 
-        img {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        ${darkModeCss`
-            background: ${neutral[20]};
+		${darkModeCss`
+            background: ${neutral[7]};
         `}
-    `;
-}
 
-const timeStyles = css`
-    ${textSans.small()};
-    color: ${text.supporting};
-    text-align: right;
-    display: inline-block;
-    vertical-align: top;
+		${from.tablet} {
+			margin-right: ${remSpace[5]};
+		}
+
+		${from.desktop} {
+			max-width: 13.75rem;
+		}
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	`;
+};
+
+const fullWidthImage = css`
+	img {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		position: relative;
+	}
 `;
 
+const timeStyles = (type: RelatedItemType): SerializedStyles => {
+	switch (type) {
+		case RelatedItemType.VIDEO:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.GALLERY: {
+			return css`
+				${textSans.small()};
+				color: ${text.ctaPrimary};
+				text-align: right;
+				display: inline-block;
+				vertical-align: top;
+				font-weight: 700;
+			`;
+		}
+		default:
+			return css`
+				${textSans.small()};
+				color: ${text.supporting};
+				text-align: right;
+				display: inline-block;
+				vertical-align: top;
+				font-weight: 700;
+			`;
+	}
+};
+
 const durationStyles = css`
-    margin-left: ${remSpace[2]};
+	margin-left: ${remSpace[3]};
 `;
 
 const dateStyles = css`
-    float: right;
-`
+	float: right;
+`;
 
 const anchorStyles = css`
-    color: ${neutral[7]};
-    text-decoration: none;
-    ${darkModeCss`
+	color: ${neutral[7]};
+	text-decoration: none;
+	${darkModeCss`
         color: ${neutral[86]};
     `}
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 `;
 
 const headingWrapperStyles = css`
-    padding: ${remSpace[2]};
-    min-height: 150px;
-`
-
-const headingStyles = (itemType: RelatedItemType): SerializedStyles => {
-    if (itemType === RelatedItemType.ADVERTISEMENT_FEATURE){
-        return css`
-            ${textSans.medium({ lineHeight: 'regular' })}
-            margin: 0 0 ${remSpace[2]} 0;
-        `;
-    } else {
-        return css`
-            ${headline.xxsmall()}
-            margin: 0 0 ${remSpace[2]} 0;
-        `;
-    }
-}
-
-const imageWrapperStyles = css`
-    padding-bottom: 56.25%;
-    position: relative;
+	padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
+	flex-grow: 1;
 `;
 
-const relativeFirstPublished = (date: Option<Date>): JSX.Element | null => pipe2(
-    date,
-    map(date => <time css={[timeStyles, dateStyles]}>{makeRelativeDate(date)}</time>),
-    withDefault<JSX.Element | null>(null),
-);
+const headingStyles = (type: RelatedItemType): SerializedStyles => {
+	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
+		return css`
+			${textSans.medium({ lineHeight: 'regular' })}
+			margin: 0;
+		`;
+	} else {
+		return css`
+			${headline.xxxsmall()}
+			margin: 0;
 
-const cardStyles = (itemType: RelatedItemType, format: Format): SerializedStyles => {
-    switch (itemType) {
-        case RelatedItemType.FEATURE: {
-            const { kicker } = getPillarStyles(format.pillar);
+			${from.desktop} {
+				${headline.xxsmall()}
+			}
+		`;
+	}
+};
 
-            return css`
-                h2 {
-                    ${headline.xxxsmall({ fontWeight: 'bold' })}
-                    color: ${kicker};
-                }
-            `;
-        }
+const imageWrapperStyles = css`
+	position: relative;
+`;
 
-        case RelatedItemType.ANALYSIS: {
-            return css`
-                ${headline.xxxsmall({ lineHeight: 'regular', fontWeight: 'light' })};
-                h3 {
-                    box-shadow: inset 0 -0.025rem ${border.primary(format)};
-                    padding-bottom: 0.2rem;
-                    display: inline;
+const imageBackground = css`
+	background: ${neutral[86]};
+`;
 
-                    ${darkModeCss`
+const relativeFirstPublished = (
+	date: Option<Date>,
+	type: RelatedItemType,
+): JSX.Element | null =>
+	pipe(
+		date,
+		map((date) => (
+			<time css={[timeStyles(type), dateStyles]}>
+				{makeRelativeDate(date)}
+			</time>
+		)),
+		withDefault<JSX.Element | null>(null),
+	);
+
+const cardStyles = (
+	type: RelatedItemType,
+	format: Format,
+): SerializedStyles => {
+	switch (type) {
+		case RelatedItemType.FEATURE: {
+			const { kicker } = getThemeStyles(format.theme);
+
+			return css`
+				h2 {
+					${headline.xxxsmall({ fontWeight: 'bold' })}
+					color: ${kicker};
+				}
+			`;
+		}
+
+		case RelatedItemType.ANALYSIS: {
+			return css`
+				${headline.xxxsmall({
+					lineHeight: 'regular',
+					fontWeight: 'light',
+				})};
+				h3 {
+					box-shadow: inset 0 -0.025rem ${border.primary(format)};
+					display: inline;
+
+					${darkModeCss`
                         box-shadow: inset 0 -0.025rem ${neutral[46]};
                     `}
-                }
-            `;
-        }
+				}
+			`;
+		}
 
-        case RelatedItemType.VIDEO:
-        case RelatedItemType.AUDIO:
-        case RelatedItemType.GALLERY: {
-            return css`
-                background: ${background.inverse};
-                h3 {
-                    color: ${text.ctaPrimary};
-                }
-            `;
-        }
+		case RelatedItemType.VIDEO:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.GALLERY: {
+			return css`
+				background: ${background.inverse};
+				h3 {
+					color: ${text.ctaPrimary};
+				}
+			`;
+		}
 
-        case RelatedItemType.SPECIAL: {
-            return css``;
-        }
+		case RelatedItemType.SPECIAL: {
+			return css``;
+		}
 
-        case RelatedItemType.LIVE: {
-            const { kicker, liveblogDarkBackground } = getPillarStyles(format.pillar);
-            return css`
-                background: ${kicker};
-                h3, time {
-                    color: ${text.ctaPrimary};
-                }
-                ${darkModeCss`
+		case RelatedItemType.LIVE: {
+			const {
+				liveblogBackground,
+				liveblogDarkBackground,
+			} = getThemeStyles(format.theme);
+			return css`
+				background: ${liveblogBackground};
+				h3,
+				time {
+					color: ${text.ctaPrimary};
+				}
+				${darkModeCss`
                     background: ${liveblogDarkBackground};
                 `}
-            `;
-        }
+			`;
+		}
 
-        case RelatedItemType.ADVERTISEMENT_FEATURE: {
-            return css`
-                background-color : ${neutral[93]};
-                ${textSans.large()}
-            `;
-        }
+		case RelatedItemType.ADVERTISEMENT_FEATURE: {
+			return css`
+				background-color: ${neutral[93]};
+				${textSans.large()}
+			`;
+		}
 
-        case RelatedItemType.COMMENT: {
-            return css`
-                background-color : ${opinion[800]};
-                ${headline.xxsmall()}
-            `;
-        }
+		case RelatedItemType.COMMENT: {
+			return css`
+				background-color: ${opinion[800]};
+				${headline.xxsmall()}
+			`;
+		}
 
-        default: {
-            return css``;
-        }
-    }
-}
+		default: {
+			return css``;
+		}
+	}
+};
 
 const parentIconStyles: SerializedStyles = css`
-    display:inline-block;
-    svg {
-        width: 1rem;
-        height: auto;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 0.25rem;
-        display: block;
-    }
+	display: inline-block;
+	line-height: 1;
+	svg {
+		width: 1rem;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 0.25rem;
+		display: block;
+	}
 `;
 
 const iconStyles = (format: Format): SerializedStyles => {
-    const { inverted } = getPillarStyles(format.pillar);
-    return css`
-        width: 1.5rem;
-        height: 1.5rem;
-        display: inline-block;
-        background-color: ${inverted};
-        border-radius: 50%;
-    `;
-}
+	const { inverted } = getThemeStyles(format.theme);
+	return css`
+		width: 1.5rem;
+		height: 1.5rem;
+		display: inline-block;
+		background-color: ${inverted};
+		border-radius: 50%;
+		margin-top: -${remSpace[1]};
+	`;
+};
 
-const commentIconStyle = (): SerializedStyles => {
-    return css`
-        width: 2.0rem;
-        height: 1.4375rem;
-        display: inline-block;
-        fill: ${opinion[400]};
-        vertical-align: text-top;
-        margin-top: -3px;
-        margin-right: -2px;
-    `;
-}
-
-const icon = (itemType: RelatedItemType, format: Format): ReactElement | null => {
-    switch (itemType){
-        case RelatedItemType.GALLERY:
-            return <span css={iconStyles(format)}>< SvgCamera /></span>;
-        case RelatedItemType.AUDIO:
-            return <span css={iconStyles(format)}>< SvgAudio /></span>;
-        case RelatedItemType.VIDEO:
-            return <span css={iconStyles(format)}>< SvgVideo /></span>
-        default:
-            return null;
-    }
-}
-
-const quotationComment = (itemType: RelatedItemType, format: Format): ReactElement | null => {
-    if (itemType === RelatedItemType.COMMENT){
-        return <span css={commentIconStyle}>< SvgQuote /></span>;
-    } else {
-        return null
-    }
-}
-
-const metadataStyles: SerializedStyles = css`
-    padding: 0 ${remSpace[2]};
-    min-height: 2rem;
+const commentIconStyle: SerializedStyles = css`
+	width: 2rem;
+	height: 1.4375rem;
+	display: inline-block;
+	fill: ${opinion[400]};
+	vertical-align: text-top;
+	margin-top: -3px;
+	margin-right: -2px;
 `;
 
-const durationMedia = (duration: Option<string>): ReactElement | null => {
-    return pipe2(
-        duration,
-        map(length => {
-            const seconds = formatSeconds(length);
-            if (seconds.kind === OptionKind.Some) {
-                return <time css={[timeStyles, durationStyles]}>
-                    {seconds.value}
-                </time>
-            } else {
-                return null;
-            }
-        }),
-        withDefault<ReactElement | null>(null)
-    )
-}
+const icon = (type: RelatedItemType, format: Format): ReactElement | null => {
+	switch (type) {
+		case RelatedItemType.GALLERY:
+			return (
+				<span css={iconStyles(format)}>
+					<SvgCamera />
+				</span>
+			);
+		case RelatedItemType.AUDIO:
+			return (
+				<span css={iconStyles(format)}>
+					<SvgAudio />
+				</span>
+			);
+		case RelatedItemType.VIDEO:
+			return (
+				<span css={iconStyles(format)}>
+					<SvgVideo />
+				</span>
+			);
+		default:
+			return null;
+	}
+};
+
+const quotationComment = (
+	type: RelatedItemType,
+	format: Format,
+): ReactElement | null => {
+	if (type === RelatedItemType.COMMENT) {
+		return (
+			<span css={commentIconStyle}>
+				<SvgQuote />
+			</span>
+		);
+	} else {
+		return null;
+	}
+};
+
+const metadataStyles: SerializedStyles = css`
+	padding: 0 ${remSpace[2]} ${remSpace[1]};
+	height: ${remSpace[6]};
+`;
+
+const bylineStyles: SerializedStyles = css`
+	color: ${opinion[400]};
+`;
+
+const durationMedia = (
+	duration: Option<string>,
+	type: RelatedItemType,
+): ReactElement | null => {
+	return pipe(
+		duration,
+		map((length) => {
+			const seconds = formatSeconds(length);
+			if (seconds.kind === OptionKind.Some) {
+				return (
+					<time css={[timeStyles(type), durationStyles]}>
+						{seconds.value}
+					</time>
+				);
+			} else {
+				return null;
+			}
+		}),
+		withDefault<ReactElement | null>(null),
+	);
+};
+
+const cardByline = (
+	type: RelatedItemType,
+	byline?: string,
+): ReactElement | null => {
+	if (type !== RelatedItemType.COMMENT) {
+		return null;
+	}
+
+	return pipe(
+		fromNullable(byline),
+		map((byline) => {
+			return <div css={bylineStyles}>{byline}</div>;
+		}),
+		withDefault<ReactElement | null>(null),
+	);
+};
+
+const cardImage = (
+	image: Option<Image>,
+	relatedItem: RelatedItem,
+): ReactElement | null => {
+	const format = {
+		theme: themeFromString(relatedItem.pillar.id),
+		design: Design.Article,
+		display: Display.Standard,
+	};
+
+	return pipe(
+		image,
+		map((img) => {
+			return (
+				<div css={[fullWidthImage, imageWrapperStyles]}>
+					<Img
+						image={img}
+						sizes={{
+							mediaQueries: [
+								{ breakpoint: 'phablet', size: '620px' },
+							],
+							default: '100%',
+						}}
+						format={format}
+						className={none}
+						supportsDarkMode
+						lightbox={none}
+					/>
+				</div>
+			);
+		}),
+		withDefault<ReactElement | null>(
+			<div css={[imageWrapperStyles, imageBackground]}></div>,
+		),
+	);
+};
 
 const Card: FC<Props> = ({ relatedItem, image }) => {
-    const format = {
-        pillar: pillarFromString(relatedItem.pillar.id),
-        design: Design.Article,
-        display: Display.Standard
-    }
+	const format = {
+		theme: themeFromString(relatedItem.pillar.id),
+		design: Design.Article,
+		display: Display.Standard,
+	};
 
-    const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100%`;
+	const img = cardImage(image, relatedItem);
+	const { type, title, mediaDuration, link, byline } = relatedItem;
 
-    const img = pipe2(
-        image,
-        map(img => {
-            return <Img
-                image={img}
-                sizes={sizes}
-                format={format}
-            />
-        }),
-        withDefault<ReactElement | null>(null)
-    )
+	const lastModified = relatedItem.lastModified?.iso8601;
+	const date =
+		lastModified && type !== RelatedItemType.ADVERTISEMENT_FEATURE
+			? relativeFirstPublished(fromNullable(new Date(lastModified)), type)
+			: null;
+	const starRating =
+		relatedItem.starRating &&
+		!Number.isNaN(parseInt(relatedItem.starRating))
+			? stars(parseInt(relatedItem.starRating))
+			: null;
 
-    const lastModified = relatedItem.lastModified?.iso8601;
-    const date = (lastModified && relatedItem.type !== RelatedItemType.ADVERTISEMENT_FEATURE) 
-        ? relativeFirstPublished(fromNullable(new Date(lastModified))) : null;
-    const starRating = relatedItem.starRating && !Number.isNaN(parseInt(relatedItem.starRating))
-        ? stars(parseInt(relatedItem.starRating)) : null;
-    const articleId = relatedItem.link.split('.com/').pop();
-
-    return (
-        <li
-            className="js-card"
-            data-article-id={articleId}
-            css={[listStyles(relatedItem.type, format), cardStyles(relatedItem.type, format)]}
-        >
-            <a css={anchorStyles} href={relatedItem.link}>
-                <section css={headingWrapperStyles}>
-                    <h3 css={headingStyles(relatedItem.type)}>
-                        {quotationComment(relatedItem.type, format)}
-                        {relatedItem.title}
-                    </h3>
-                    {starRating}
-                </section>
-                <section>
-                    <div css={metadataStyles}>
-                        <section css={parentIconStyles}>
-                            {icon(relatedItem.type, format)}
-                        </section>
-                        {durationMedia(fromNullable(relatedItem.mediaDuration))}
-                        {date}
-                    </div>
-                    <div css={imageWrapperStyles}>{img}</div>
-                </section>
-            </a>
-        </li>
-    )
-}
+	return (
+		<li
+			className="js-card"
+			data-article-id={link}
+			css={[listStyles(type, format), cardStyles(type, format)]}
+		>
+			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
+				<section css={headingWrapperStyles}>
+					<h3 css={headingStyles(type)}>
+						{quotationComment(type, format)}
+						{title}
+						{cardByline(type, byline)}
+					</h3>
+					{starRating}
+				</section>
+				<section>
+					<div css={metadataStyles}>
+						<section css={parentIconStyles}>
+							{icon(type, format)}
+						</section>
+						{durationMedia(fromNullable(mediaDuration), type)}
+						{date}
+					</div>
+					{img}
+				</section>
+			</a>
+		</li>
+	);
+};
 
 export default Card;

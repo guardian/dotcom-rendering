@@ -1,21 +1,21 @@
 // ----- Imports ----- //
 
-import React, { FC, ReactElement } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { text, neutral } from '@guardian/src-foundations/palette';
-import { Option, withDefault, map } from '@guardian/types/option';
-import { darkModeCss as darkMode } from 'styles';
+import type { Option, Theme } from '@guardian/types';
+import { map, Pillar, withDefault } from '@guardian/types';
 import { formatDate } from 'date';
-import { pipe2 } from 'lib';
-import { Pillar } from '@guardian/types/Format';
-
+import { pipe } from 'lib';
+import type { FC, ReactElement } from 'react';
+import { darkModeCss as darkMode } from 'styles';
 
 // ----- Component ----- //
 
 interface Props {
-    date: Option<Date>;
-    pillar: Pillar;
+	date: Option<Date>;
+	theme: Theme;
 }
 
 const darkStyles = darkMode`
@@ -23,35 +23,42 @@ const darkStyles = darkMode`
 `;
 
 const styles = css`
-    ${textSans.xsmall()}
-    color: ${text.supporting};
+	${textSans.xsmall()}
+	color: ${text.supporting};
 
-    ${darkStyles}
+	${darkStyles}
 `;
 
 const commentDatelineStyles = css`
-    ${textSans.xsmall()}
-    color: ${neutral[20]};
+	${textSans.xsmall()}
+	color: ${neutral[20]};
 
-    ${darkStyles}
+	${darkStyles}
 `;
 
-const getDatelineStyles = (pillar: Pillar): SerializedStyles => {
-    switch(pillar){
-        case Pillar.Opinion:
-            return commentDatelineStyles;
-        default:
-            return styles;
-    }
-}
+const getDatelineStyles = (theme: Theme): SerializedStyles => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return commentDatelineStyles;
+		default:
+			return styles;
+	}
+};
 
-const Dateline: FC<Props> = ({ date, pillar }) =>
-    pipe2(
-        date,
-        map(d => <time css={getDatelineStyles(pillar)} data-date={d} className="date">{ formatDate(d) }</time>),
-        withDefault<ReactElement | null>(null),
-    )
-
+const Dateline: FC<Props> = ({ date, theme }) =>
+	pipe(
+		date,
+		map((d) => (
+			<time
+				css={getDatelineStyles(theme)}
+				data-date={d}
+				className="date js-date"
+			>
+				{formatDate(d)}
+			</time>
+		)),
+		withDefault<ReactElement | null>(null),
+	);
 
 // ----- Exports ----- //
 

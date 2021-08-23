@@ -80,6 +80,12 @@ ESLint is used to validate the code. It can be run like this:
 npm run lint
 ```
 
+It can automatically fix problems for you:
+
+```sh
+npm run lint:fix
+```
+
 ### Storybook
 A good way to see components and test them in isolation is to run storybook:
 
@@ -89,7 +95,7 @@ npm run storybook
 
 Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering)
 
-### Generating Apps rendering API models
+### Generating apps-rendering API models
 
 In order to release the models you'll need to:
  - have a bintray account with access to the guardian organisation

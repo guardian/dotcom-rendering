@@ -1,52 +1,55 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { breakpoints, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { remSpace, breakpoints } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
-
 import Img from 'components/img';
-import { BodyImageProps } from 'image';
+import type { BodyImageProps } from 'image';
+import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Setup ----- //
 
 const sizes = `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
 
-
 // ----- Component ----- //
 
 const styles = css`
-    margin: ${remSpace[4]} 0;
+	margin: ${remSpace[4]} 0;
 `;
 
 const imgStyles = (width: number, height: number): SerializedStyles => css`
-    height: calc((100vw - ${remSpace[4]}) * ${height / width});
-    display: block;
-    width: 100%;
-    
-    ${from.phablet} {
-        height: calc(620px * ${height / width});
-    }
+	height: calc((100vw - ${remSpace[4]}) * ${height / width});
+	display: block;
+	width: 100%;
 
-    ${darkModeCss`
+	${from.phablet} {
+		height: calc(620px * ${height / width});
+	}
+
+	${darkModeCss`
         color: ${neutral[60]};
         background-color: ${neutral[20]};
     `}
 `;
 
-const BodyImage: FC<BodyImageProps> = ({ image, children, format }: BodyImageProps) =>
-    <figure css={styles}>
-        <Img
-            image={image}
-            sizes={sizes}
-            className={imgStyles(image.width, image.height)}
-            format={format}
-        />
-        {children}
-    </figure>
-
+const BodyImage: FC<BodyImageProps> = ({
+	image,
+	children,
+	format,
+}: BodyImageProps) => (
+	<figure css={styles}>
+		<Img
+			image={image}
+			sizes={sizes}
+			className={imgStyles(image.width, image.height)}
+			format={format}
+		/>
+		{children}
+	</figure>
+);
 
 // ----- Exports ----- //
 

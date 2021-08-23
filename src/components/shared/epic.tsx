@@ -1,126 +1,113 @@
 // ----- Imports ----- //
 
-import React, { useState, useEffect, useRef } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
-import { ThemeProvider } from 'emotion-theming'
-import { from } from '@guardian/src-foundations/mq';
-import { brandAltBackground, neutral,  } from '@guardian/src-foundations/palette';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
-import { SvgArrowRightStraight } from "@guardian/src-icons"
-import { Button, buttonReaderRevenue } from '@guardian/src-button';
-import { body, headline } from '@guardian/src-foundations/typography';
-
-import { acquisitionsClient } from 'native/nativeApi';
-
+import { from } from '@guardian/src-foundations/mq';
+import {
+	brandAlt,
+	brandAltBackground,
+	neutral,
+} from '@guardian/src-foundations/palette';
+import { body, headline, textSans } from '@guardian/src-foundations/typography';
+import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //
 
-const EpicStyles = (): SerializedStyles => css`
-        width: calc(100% - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]} - ${remSpace[2]});
-        margin: ${remSpace[2]};
+const styles: SerializedStyles = css`
+	& > div {
+		${from.wide} {
+			margin: ${remSpace[3]} 0;
+		}
 
-        ${from.wide} {
-            margin: ${remSpace[2]} 0;
-        }
+		border-top: 1px solid ${brandAltBackground.primary};
+		background: ${neutral[97]};
+		padding: ${remSpace[3]};
+		${body.medium()}
+		clear: left;
+	}
 
-        clear: both;
+	h1:first-of-type {
+		margin-top: 0;
+		${headline.xsmall()}
+	}
 
-        border-top: 1px solid ${brandAltBackground.primary};
-        background: ${neutral[97]};
-        padding: ${remSpace[2]};
-        ${body.medium()}
-        clear: left;
+	button {
+		margin: 0 ${remSpace[3]} ${remSpace[3]} 0;
+	}
 
-        h1:first-of-type {
-            ${headline.large()}
-        }
+	.button-container {
+		margin-top: ${remSpace[9]};
+	}
 
-        button {
-            margin: 0 ${remSpace[2]} ${remSpace[2]} 0;
-        }
+	mark {
+		background: ${brandAltBackground.primary};
+		padding: 0.1rem 0.125rem;
+	}
 
-        .button-container {
-            margin-top: ${remSpace[9]};
-        }
+	// Source Button styles
+	.button-container svg {
+		margin-right: -4px;
+		flex: 0 0 auto;
+		display: block;
+		fill: currentColor;
+		position: relative;
+		width: 30px;
+		height: auto;
+	}
 
-        svg {
-            margin-left: ${remSpace[2]};
-            margin-top: -${remSpace[1]};
-            vertical-align: middle;
-        }
+	.src-button-space {
+		width: 12px;
+	}
 
-        mark {
-            background: ${brandAltBackground.primary};
-            padding: .1rem .125rem;
-        }
+	button {
+		display: inline-flex;
+
+		justify-content: space-between;
+
+		align-items: center;
+		box-sizing: border-box;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		transition: 0.3s ease-in-out;
+		text-decoration: none;
+		white-space: nowrap;
+		${textSans.medium()}
+		line-height: 1.5;
+		font-weight: 700;
+		height: 44px;
+		min-height: 44px;
+		padding: 0 20px;
+		border-radius: 44px;
+		padding-bottom: 2px;
+		background-color: #ffe500;
+		color: #052962;
+
+		margin: 0 ${remSpace[3]} ${remSpace[3]} 0;
+	}
 `;
 
+const darkStyles: SerializedStyles = darkModeCss`
+	& > div {
+		color: ${neutral[93]};
+		background-color: ${neutral[20]};
+		border-top: 1px solid ${brandAlt[200]};
 
-// ----- Component ----- //
+		mark {
+			background: ${brandAlt[200]};
+		}
 
-interface EpicProps {
-    title: string;
-    body: string;
-    firstButton: string;
-    secondButton: string | undefined;
+		.button-container button {
+			background: ${brandAlt[200]};
+		}
+	}
+
+`;
+
+function Epic(): React.ReactElement {
+	return <div css={[styles, darkStyles]} id="js-epic-placeholder"></div>;
 }
-
-const isElementPartiallyInViewport = (el: React.MutableRefObject<HTMLDivElement>): boolean => {
-    const rect = el.current.getBoundingClientRect();
-    const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-    const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-    const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) >= 0);
-    const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) >= 0);
-    return (vertInView && horInView);
-}
-
-const debounce = (fn: () => void, time: number): () => void => {
-    let timeout: NodeJS.Timeout;
-    return function(...args: []): void {
-        const functionCall = (): void => fn(...args);
-        clearTimeout(timeout);
-        timeout = setTimeout(functionCall, time);
-    }
-}
-
-function Epic({ title, body, firstButton, secondButton }: EpicProps): React.ReactElement | null {
-    const [impressionSeen, setImpressionSeen] = useState(false);    
-    const epicContainer = useRef() as React.MutableRefObject<HTMLDivElement>;
-
-    useEffect(() => {
-        const handleSeenEpic = debounce(() => {
-            if (!impressionSeen && isElementPartiallyInViewport(epicContainer)) {
-                void acquisitionsClient.epicSeen();
-                setImpressionSeen(true);
-            }
-        }, 100);
-        window.addEventListener('scroll', handleSeenEpic);
-        return (): void => {
-            window.removeEventListener('scroll', handleSeenEpic);
-        }
-    }, [impressionSeen]);
-
-    const epicButton = (text: string, action: () => Promise<void>): JSX.Element =>
-        <Button onClick={action} iconSide="right" icon={<SvgArrowRightStraight />}>
-            {text}
-        </Button>
-
-    return (
-        <div css={EpicStyles} ref={epicContainer}>
-            <h1>{title}</h1>
-            <div dangerouslySetInnerHTML={{__html: body}}></div>
-            <div className="button-container">
-                <ThemeProvider theme={buttonReaderRevenue}>
-                    {epicButton(firstButton, () => acquisitionsClient.launchFrictionScreen())}
-                    {secondButton
-                        ? epicButton(secondButton, () => acquisitionsClient.launchFrictionScreen())
-                        : null}
-                </ThemeProvider>
-            </div>
-        </div>
-    )
-}
-
 
 // ----- Exports ----- //
 

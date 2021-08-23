@@ -1,40 +1,35 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
+import { Design, Display, none, Pillar } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
-
-import Follow from './follow';
-import { Pillar, Design, Display } from '@guardian/types/Format';
+import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import { none } from '@guardian/types/option';
-
+import Follow from './follow';
 
 // ----- Stories ----- //
 
-const Default: FC = () =>
-    <Follow
-        contributors={[
-            {
-                id: 'profile/janesmith',
-                apiUrl: 'janesmith.com',
-                name: 'Jane Smith',
-                image: none,
-            }
-        ]}
-        pillar={selectPillar(Pillar.News)}
-        design={Design.Article}
-        display={Display.Standard}
-    />
-
+const Default: FC = () => (
+	<Follow
+		contributors={[
+			{
+				id: 'profile/janesmith',
+				apiUrl: 'janesmith.com',
+				name: 'Jane Smith',
+				image: none,
+			},
+		]}
+		theme={selectPillar(Pillar.News)}
+		design={Design.Article}
+		display={Display.Standard}
+	/>
+);
 
 // ----- Exports ----- //
 
 export default {
-    component: Follow,
-    title: 'Follow',
-    decorators: [ withKnobs ],
-}
+	component: Follow,
+	title: 'Follow',
+	decorators: [withKnobs],
+};
 
-export {
-    Default,
-}
+export { Default };

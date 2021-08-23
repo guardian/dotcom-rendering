@@ -1,67 +1,111 @@
 // ----- Imports ----- //
 
-import React, { FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { remSpace } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-
-import { Format } from '@guardian/types/Format';
-import { getPillarStyles } from 'pillarStyles';
-import { Contributor, isSingleContributor } from 'contributor';
+import { Special } from '@guardian/types';
+import type { Format } from '@guardian/types';
+import FollowStatus from 'components/followStatus';
+import type { Contributor } from 'contributor';
+import { isSingleContributor } from 'contributor';
+import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { Design } from '@guardian/types/Format';
-
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
 interface Props extends Format {
-    contributors: Contributor[];
+	contributors: Contributor[];
 }
 
-const styles = (kicker: string, inverted: string): SerializedStyles => css`
-    ${textSans.small()}
-    color: ${kicker};
-    display: block;
-    padding: 0;
-    border: none;
-    background: none;
-    margin-left: 0;
+const styles = ({ theme }: Format): SerializedStyles => {
+	const { kicker, inverted } = getThemeStyles(theme);
 
-    ${darkModeCss`
-        color: ${inverted};
-    `}
-`;
+	return css`
+		${textSans.small()}
+		color: ${kicker};
+		display: block;
+		padding: 0;
+		border: none;
+		background: none;
+		margin-left: 0;
+		margin-top: ${remSpace[1]};
+		min-height: 1.5rem;
 
-function getStyles({ pillar }: Format): SerializedStyles {
-    const { kicker, inverted } = getPillarStyles(pillar);
+		${darkModeCss`
+			color: ${inverted};
+		`}
+	`;
+};
 
-    return styles(kicker, inverted);
-}
+const statusStyles = ({ theme }: Format): SerializedStyles => {
+	const { kicker, inverted } = getThemeStyles(theme);
+
+	return css`
+		svg {
+			width: ${remSpace[6]};
+			height: ${remSpace[6]};
+			margin-bottom: -0.375rem;
+		}
+
+		.follow-icon {
+			circle {
+				fill: ${kicker};
+			}
+
+			path {
+				fill: #fff;
+			}
+
+			${darkModeCss`
+				circle {
+					fill: ${inverted};
+				}
+
+				path {
+					fill: ${neutral[7]};
+				}
+			`}
+		}
+
+		.following-icon {
+			fill: ${kicker};
+
+			${darkModeCss`
+				fill: ${inverted};
+			`}
+		}
+	`;
+};
 
 const Follow: FC<Props> = ({ contributors, ...format }) => {
-    const [contributor] = contributors;
+	const [contributor] = contributors;
 
-    if (
-        isSingleContributor(contributors) &&
-        contributor.apiUrl !== '' &&
-        format.design !== Design.AdvertisementFeature
-    ) {
-        return (
-            <button
-                className="js-follow"
-                css={getStyles(format)}
-                data-id={contributor.id}
-                data-display-name={contributor.name}
-            >
-                <span className="js-status">Follow </span>
-                { contributor.name }
-            </button>
-        );
-    }
+	if (
+		isSingleContributor(contributors) &&
+		contributor.apiUrl !== '' &&
+		format.theme !== Special.Labs
+	) {
+		return (
+			<button
+				className="js-follow"
+				css={styles(format)}
+				data-id={contributor.id}
+				data-display-name={contributor.name}
+			>
+				<span className="js-follow-status" css={statusStyles(format)}>
+					<FollowStatus isFollowing={false} />
+				</span>
 
-    return null;
+				{contributor.name}
+			</button>
+		);
+	}
 
-}
-
+	return null;
+};
 
 // ----- Exports ----- //
 

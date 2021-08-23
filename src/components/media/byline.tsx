@@ -1,69 +1,69 @@
 // ----- Imports ----- //
 
-import React, { ReactNode, FC } from 'react';
-import { css, SerializedStyles } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
-import { Pillar } from '@guardian/types/Format';
-import { Option, map, withDefault } from '@guardian/types/option';
-import { Item, getFormat } from 'item';
-import { textSans } from "@guardian/src-foundations/typography";
-import { renderText } from "../../renderer";
-import { remSpace } from "@guardian/src-foundations";
+import { textSans } from '@guardian/src-foundations/typography';
+import { map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import Dateline from 'components/dateline';
-import { pipe2 } from 'lib';
-
+import { getFormat } from 'item';
+import type { Item } from 'item';
+import { pipe } from 'lib';
+import type { FC, ReactNode } from 'react';
+import { renderText } from '../../renderer';
 
 // ----- Styles ----- //
 
 const styles: SerializedStyles = css`
-    .author {
-        margin: ${remSpace[2]} 0 ${remSpace[3]} 0;
-        color: ${neutral[86]};
+	.author {
+		margin: ${remSpace[3]} 0 ${remSpace[3]} 0;
+		color: ${neutral[86]};
 
-        .follow, a {
-            color: ${neutral[86]};
-        }
+		.follow,
+		a {
+			color: ${neutral[86]};
+		}
 
-        time, .follow {
-            ${textSans.xsmall()}
-        }
+		time,
+		.follow {
+			${textSans.xsmall()}
+		}
 
-        time {
-            ${textSans.xsmall()};
-            color: ${neutral[86]};
-        }
-    }
+		time {
+			${textSans.xsmall()};
+			color: ${neutral[86]};
+		}
+	}
 `;
-
 
 // ----- Component ----- //
 
 interface Props {
-    pillar: Pillar;
-    publicationDate: Option<Date>;
-    className: SerializedStyles;
-    item: Item;
+	publicationDate: Option<Date>;
+	className: SerializedStyles;
+	item: Item;
 }
 
-const Byline: FC<Props> = ({ pillar, publicationDate, className, item }) => {
-    const byline = pipe2(
-        item.bylineHtml,
-        map(html => <address>{ renderText(html, getFormat(item)) }</address>),
-        withDefault<ReactNode>(null),
-    );
+const Byline: FC<Props> = ({ publicationDate, className, item }) => {
+	const byline = pipe(
+		item.bylineHtml,
+		map((html) => <address>{renderText(html, getFormat(item))}</address>),
+		withDefault<ReactNode>(null),
+	);
 
-    return (
-        <div css={[className, styles]}>
-            <div>
-                <div className="author">
-                    { byline }
-                    <Dateline date={publicationDate} pillar={item.pillar}/>
-                </div>
-            </div>
-        </div>
-    );
-}
-
+	return (
+		<div css={[className, styles]}>
+			<div>
+				<div className="author">
+					{byline}
+					<Dateline date={publicationDate} theme={item.theme} />
+				</div>
+			</div>
+		</div>
+	);
+};
 
 // ----- Exports ----- //
 
