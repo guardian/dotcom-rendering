@@ -17,6 +17,7 @@
     "babel-loader": "^8.2.2",
     "chromatic": "^5.9.2",
     "desvg-loader": "^0.1.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "mockdate": "^3.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
