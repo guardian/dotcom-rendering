@@ -9,7 +9,6 @@ import express, {
     Response as ExpressResponse,
 } from 'express';
 import compression from 'compression';
-import bodyParser from 'body-parser';
 import fetch, { Response } from 'node-fetch';
 
 import { render } from 'server/page';
@@ -67,7 +66,7 @@ const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
 
 const parseCapiResponse = (articleId: string) => async (capiResponse: Response): CapiReturn => {
     const buffer = await capiResponse.buffer();
-        
+
     switch (capiResponse.status) {
         case 200: {
             const response = await capiDecoder(buffer);
@@ -246,7 +245,7 @@ if (process.env.NODE_ENV === "production") {
 
 const app = express();
 
-app.use(bodyParser.raw({ limit: '50mb' }));
+app.use(express.raw({ limit: '50mb' }));
 app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
@@ -268,9 +267,9 @@ app.get('/healthcheck', (_req, res) => res.send("Ok"));
 
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 
-app.get('/*', bodyParser.raw(), serveArticle);
+app.get('/*', express.raw(), serveArticle);
 
-app.post('/article', bodyParser.raw(), serveArticlePost);
+app.post('/article', express.raw(), serveArticlePost);
 
 app.listen(port, () => {
     if (process.env.NODE_ENV === "production") {
