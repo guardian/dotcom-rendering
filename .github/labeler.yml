@@ -1,8 +1,8 @@
 enhancement:
-  - dotcom-rendering
+  - dotcom-rendering/**
 
 question:
-  - apps-rendering
+  - apps-rendering/**
 
 duplicate:
-  - .github
+  - .github/**
