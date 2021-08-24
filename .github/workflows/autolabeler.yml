@@ -1,0 +1,3 @@
+apps-rendering: ["/apps-rendering"]
+dotcom-rendering: ["/dotcom-rendering"]
+config: [".github", "."]
