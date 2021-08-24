@@ -187,7 +187,10 @@ const Article: FC<Props> = ({ item }) => {
 								: null,
 						]}
 					>
-						<section css={[bodyStyles, itemStyles(item)]}>
+						<section
+							className={'body-content'}
+							css={[bodyStyles, itemStyles(item)]}
+						>
 							{renderEditionsAll(item, partition(item.body).oks)}
 						</section>
 					</div>

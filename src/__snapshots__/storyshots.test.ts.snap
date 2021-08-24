@@ -1298,7 +1298,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
       className="emotion-20"
     >
       <section
-        className="emotion-21"
+        className="body-content emotion-21"
       >
         <p
           className="emotion-22"
@@ -2140,7 +2140,7 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
       className="emotion-21"
     >
       <section
-        className="emotion-22"
+        className="body-content emotion-22"
       />
     </div>
   </article>
@@ -3238,7 +3238,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
       className="emotion-22"
     >
       <section
-        className="emotion-23"
+        className="body-content emotion-23"
       >
         <p
           className="emotion-24"
@@ -4276,7 +4276,7 @@ exports[`Storyshots Editions/Article Correction 1`] = `
       className="emotion-14"
     >
       <section
-        className="emotion-15"
+        className="body-content emotion-15"
       >
         <p
           className="emotion-16"
@@ -5432,7 +5432,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
       className="emotion-19"
     >
       <section
-        className="emotion-20"
+        className="body-content emotion-20"
       >
         <p
           className="emotion-21"
@@ -6610,7 +6610,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
       className="emotion-20"
     >
       <section
-        className="emotion-21"
+        className="body-content emotion-21"
       >
         <p
           className="emotion-22"
@@ -7766,7 +7766,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
       className="emotion-19"
     >
       <section
-        className="emotion-20"
+        className="body-content emotion-20"
       >
         <p
           className="emotion-21"
@@ -8694,7 +8694,7 @@ width:@media (min-width: 320px) {
       className="emotion-21"
     >
       <section
-        className="emotion-22"
+        className="body-content emotion-22"
       >
         <figure
           className="editions-gallery-figure emotion-23"
@@ -9931,7 +9931,7 @@ width:@media (min-width: 320px) {
       className="emotion-21"
     >
       <section
-        className="emotion-22"
+        className="body-content emotion-22"
       >
         <p
           className="emotion-23"
@@ -11053,7 +11053,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
       className="emotion-17"
     >
       <section
-        className="emotion-18"
+        className="body-content emotion-18"
       >
         <p
           className="emotion-19"
@@ -12280,7 +12280,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
       className="emotion-41"
     >
       <section
-        className="emotion-42"
+        className="body-content emotion-42"
       >
         <figure
           className="emotion-43"
@@ -13571,7 +13571,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
       className="emotion-25"
     >
       <section
-        className="emotion-26"
+        className="body-content emotion-26"
       >
         <p
           className="emotion-27"
@@ -14740,7 +14740,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
       className="emotion-19"
     >
       <section
-        className="emotion-20"
+        className="body-content emotion-20"
       >
         <p
           className="emotion-21"
