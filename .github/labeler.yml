@@ -1,8 +1,9 @@
-apps-rendering:
-  - dotcom-rendering/**
-
 dotcom-rendering:
+  - dotcom-rendering/**/*
+
+apps-rendering:
   - apps-rendering/**
 
 config:
-  - .github/**
+  - any: ["*"]
+    all: ["!dotcom-rendering/**/*", "!apps-rendering/**"]
