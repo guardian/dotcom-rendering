@@ -9,7 +9,7 @@ import Headline from './headline';
 
 // ----- Setup ----- //
 
-const starRating: Record<number, number> = [0, 1, 2, 3, 4, 5];
+const starRating = { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 };
 
 // ----- Stories ----- //
 
