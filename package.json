@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "repository": "git@github.com:guardian/dotcom-rendering.git",
   "license": "Apache-2.0",
+  "workspaces": [
+    "dotcom-rendering"
+  ],
+  "private": true,
   "scripts": {
     "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
