@@ -5,5 +5,4 @@ apps-rendering:
   - apps-rendering/**
 
 config:
-  - any: ["*", "**/*"]
-    all: ["!dotcom-rendering/**/*", "!apps-rendering/**"]
+  - any: ["*", "**/*", "!dotcom-rendering/**/*", "!apps-rendering/**"]
