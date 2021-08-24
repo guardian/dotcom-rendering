@@ -1,8 +1,8 @@
-enhancement:
+apps-rendering:
   - dotcom-rendering/**
 
-question:
+dotcom-rendering:
   - apps-rendering/**
 
-duplicate:
+config:
   - .github/**
