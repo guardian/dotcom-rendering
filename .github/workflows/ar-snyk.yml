@@ -6,6 +6,7 @@ on:
   push:
     paths-ignore:
       - "dotcom-rendering/**"
+  workflow_dispatch:
 
 jobs:
     snyk:
