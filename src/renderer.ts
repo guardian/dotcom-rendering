@@ -231,9 +231,9 @@ const textElement = (format: Format, isEditions = false) => (
 						children,
 				  );
 		case 'BLOCKQUOTE':
-			return !isEditions
-				? h(Blockquote, { key, format }, children)
-				: h('blockquote', { key }, children);
+			return isEditions
+				? h('blockquote', { key }, children)
+				: h(Blockquote, { key, format }, children);
 		case 'STRONG':
 			return h('strong', { key }, children);
 		case 'B':
