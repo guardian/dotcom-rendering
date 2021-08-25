@@ -1,5 +1,5 @@
 name: AR Snyk
-# Test
+# Test-
 on:
   schedule:
     - cron: "0 9 * * 1-5"
