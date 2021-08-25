@@ -1,13 +1,15 @@
 #!/bin/bash
 
-gitVersion="$(git --version)"
-echo "git version: $gitVersion"
+git fetch origin main
 
-currentBranch="$(git branch --show-current)"
+gitBranches="$(git branch -r)"
+echo "git branches: $gitBranches"
+
+currentBranch="$(git rev-parse --abbrev-ref HEAD)"
 echo "current branch: $currentBranch"
 
 # files that were changed between current branch and main
-files="$(git diff --name-only origin/main)"
+files="$(git diff --name-only $currentBranch origin/main)"
 echo "files: $files"
 
 # files that are not within apps-rendering sub directory
@@ -19,9 +21,9 @@ echo "filteredFiles: $filteredFiles"
 # - we are in the main branch
 if [[ $currentBranch != "main" ]] && [ -z "$filteredFiles" ] 
 then
-    printf "Skipping DCR ci build because \nDCR file changes is empty \nand branch is $currentBranch"
+    printf "Skipping DCR ci build because DCR file changes is empty and branch is $currentBranch\n\n"
 else
-    printf "Running DCR ci build because \nDCR file changes contains $filteredFiles \nand branch is $currentBranch"
+    printf "Running DCR ci build because DCR file changes contains $filteredFiles and branch is $currentBranch\n\n"
 
     source ~/.nvm/nvm.sh
     nvm install
