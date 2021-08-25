@@ -1,16 +1,16 @@
 # Dotcom/Apps Rendering
 
-This multi-project repo includes dotcom-rendering, annd shortly will include apps-rendering, which will live side by side as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
+This repository has become a mopnorepo containing dotcom-rendering and apps-rendering as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
 
-The codebase of dotcom rendering is moved in a ‘dotcom-rendering’ subdirectory. To run dotcom-rendering scripts, e.g `make dev` `yarn storybook`, etc - You can do so by first `cd`’ing into the dotcom-rendering subdirectory.
+You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `npm run watch` for apps-rendering). Linting, imports, builds and github actions should work as before.
 
 <!-- TEMPORARY : This section is just here as an initial guide for the first few days post-migration -->
 
-## Getting started after migration?!
+## Getting started after migration?
 
-Welcome back to dotcom rendering!
+Welcome to the monorepo for dotcom-rendering and apps-rendering.
 
-If you're using this project, not too much has changed! Follow the steps below to get up-and-running with dotcom rendering -
+If you're using this project, not too much has changed. Follow the steps below to get up and running:
 
 ```bash
 # (Optional) Delete your existing node_modules folder
@@ -27,9 +27,19 @@ dotcom-rendering/dotcom-rendering $ yarn install
 
 # Run DCR
 dotcom-rendering/dotcom-rendering $ make dev
-```
 
-The biggest change to the repository is simply that the contents of dotcom-rendering has now moved into a `dotcom-rendering` subdirectory, and you should always cd into that directory before running your familiar DCR commands. Everything you're used to (linting, imports, builds, github actions) should work as before, so no need to worry!
+# If you're working with apps-rendering, move into the apps-rendering subdirectory
+dotcom-rendering $ cd apps-rendering
+
+# You should now be in the 'apps-rendering' subdirectory
+
+# (Optional) Install node packages
+# If you're not running 'npm run watch' right away
+dotcom-rendering/apps-rendering $ npm install
+
+# Run AR
+dotcom-rendering/apps-rendering $ npm run watch
+```
 
 ## Quick start
 
@@ -42,3 +52,7 @@ We recommend using [nvm](https://github.com/creationix/nvm) (especially combined
 ### dotcom rendering
 
 Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
+
+### apps rendering
+
+Go to [apps rendering](apps-rendering/README.md) for more details.
