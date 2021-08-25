@@ -196,13 +196,13 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
-const textElement = (format: Format, supportsDarkMode = true) => (
+const textElement = (format: Format, isEditions = false) => (
 	node: Node,
 	key: number,
 ): ReactNode => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map(
-		textElement(format, supportsDarkMode),
+		textElement(format, isEditions),
 	);
 	switch (node.nodeName) {
 		case 'P':
@@ -218,7 +218,7 @@ const textElement = (format: Format, supportsDarkMode = true) => (
 					href: withDefault('')(getHref(node)),
 					format,
 					key,
-					supportsDarkMode,
+					isEditions,
 				},
 				transform(text, format),
 			);
@@ -231,7 +231,9 @@ const textElement = (format: Format, supportsDarkMode = true) => (
 						children,
 				  );
 		case 'BLOCKQUOTE':
-			return h(Blockquote, { key, format }, children);
+			return isEditions
+				? h('blockquote', { key }, children)
+				: h(Blockquote, { key, format }, children);
 		case 'STRONG':
 			return h('strong', { key }, children);
 		case 'B':
@@ -300,9 +302,9 @@ const standfirstTextElement = (format: Format) => (
 const text = (
 	doc: DocumentFragment,
 	format: Format,
-	supportsDarkMode = true,
+	isEditions = false,
 ): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format, supportsDarkMode));
+	Array.from(doc.childNodes).map(textElement(format, isEditions));
 
 const editionsStandfirstFilter = (node: Node): boolean =>
 	!['UL', 'LI', 'A'].includes(node.nodeName);
@@ -428,11 +430,11 @@ const textRenderer = (
 	format: Format,
 	excludeStyles: boolean,
 	element: Text,
-	supportsDarkMode?: boolean,
+	isEditions?: boolean,
 ): ReactNode => {
 	return excludeStyles
 		? Array.from(element.doc.childNodes).map(plainTextElement)
-		: text(element.doc, format, supportsDarkMode);
+		: text(element.doc, format, isEditions);
 };
 
 const guideAtomRenderer = (
@@ -719,7 +721,7 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 ): ReactNode => {
 	switch (element.kind) {
 		case ElementKind.Text:
-			return textRenderer(format, excludeStyles, element, false);
+			return textRenderer(format, excludeStyles, element, true);
 
 		case ElementKind.Image:
 			return format.design === Design.Media
