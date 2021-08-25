@@ -2,7 +2,7 @@
 
 This multi-project repo includes dotcom-rendering, annd shortly will include apps-rendering, which will live side by side as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
 
-The codebase of dotcom rendering is moved in a ‘dotcom-rendering’ subdirectory. To run dotcom-rendering scripts, e.g `make dev` `yarn storybook`, etc - You can do so by first `cd`’ing into the dotcom-rendering subdirectory.
+The codebase of dotcom rendering is moved in a ‘dotcom-rendering’ subdirectory. To run dotcom-rendering scripts, e.g `make dev`, etc - You can do so by first `cd`’ing into the dotcom-rendering subdirectory.
 
 <!-- TEMPORARY : This section is just here as an initial guide for the first few days post-migration -->
 
@@ -15,6 +15,9 @@ If you're using this project, not too much has changed! Follow the steps below t
 ```bash
 # (Optional) Delete your existing node_modules folder
 dotcom-rendering $ rm -rf ./node_modules
+
+# Install root dependencies
+dotcom-rendering $ yarn install
 
 # (IMPORTANT) Move into the dotcom-rendering subdirectory
 dotcom-rendering $ cd dotcom-rendering
@@ -30,6 +33,10 @@ dotcom-rendering/dotcom-rendering $ make dev
 ```
 
 The biggest change to the repository is simply that the contents of dotcom-rendering has now moved into a `dotcom-rendering` subdirectory, and you should always cd into that directory before running your familiar DCR commands. Everything you're used to (linting, imports, builds, github actions) should work as before, so no need to worry!
+
+## Storybook
+
+While most DCR scripts should be run from within the `dotcom-rendering` subdirectory, storybook remains at the root of the project. So make sure you're _not_ in a subdirectory before running `yarn storybook` or `yarn build-storybook` as before.
 
 ## Quick start
 
