@@ -38,7 +38,7 @@ const analysisStyles = css`
 		transparent 46px,
 		${neutral[86]}
 	);
-	line-height: 48px;
+	line-height: ${remSpace[12]};
 	background-size: ${remSpace[4]} ${remSpace[12]};
 	background-position: top left;
 	background-clip: content-box;
@@ -47,11 +47,11 @@ const analysisStyles = css`
 	padding-right: 0;
 
 	${from.mobile} {
-		line-height: 48px;
+		line-height: ${remSpace[12]};
 	}
 
 	${from.tablet} {
-		line-height: 48px;
+		line-height: ${remSpace[12]};
 	}
 `;
 

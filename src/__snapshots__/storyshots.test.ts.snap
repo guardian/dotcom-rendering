@@ -462,7 +462,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   		transparent 46px,
   		#DCDCDC
   	);
-  line-height: 48px;
+  line-height: 3rem;
   -webkit-background-size: 1rem 3rem;
   background-size: 1rem 3rem;
   -webkit-background-position: top left;
@@ -494,13 +494,13 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 @media (min-width: 320px) {
   .emotion-11 {
-    line-height: 48px;
+    line-height: 3rem;
   }
 }
 
 @media (min-width: 740px) {
   .emotion-11 {
-    line-height: 48px;
+    line-height: 3rem;
   }
 }
 
@@ -16939,7 +16939,7 @@ exports[`Storyshots Editions/Headline Analysis 1`] = `
   		transparent 46px,
   		#DCDCDC
   	);
-  line-height: 48px;
+  line-height: 3rem;
   -webkit-background-size: 1rem 3rem;
   background-size: 1rem 3rem;
   -webkit-background-position: top left;
@@ -16971,13 +16971,13 @@ exports[`Storyshots Editions/Headline Analysis 1`] = `
 
 @media (min-width: 320px) {
   .emotion-1 {
-    line-height: 48px;
+    line-height: 3rem;
   }
 }
 
 @media (min-width: 740px) {
   .emotion-1 {
-    line-height: 48px;
+    line-height: 3rem;
   }
 }
 
