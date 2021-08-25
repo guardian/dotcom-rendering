@@ -44,6 +44,7 @@ const analysisStyles = css`
 	background-clip: content-box;
 	background-origin: content-box;
 	padding-bottom: ${remSpace[2]};
+	padding-right: 0;
 
 	${from.mobile} {
 		line-height: 48px;
