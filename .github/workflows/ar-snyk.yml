@@ -4,11 +4,7 @@ on:
   schedule:
   	- cron: "0 9 * * 1-5"
   push:
-    paths-ignore:
-      - "dotcom-rendering/**"
-  workflow_dispatch:
-
-jobs:
+  jobs:
     snyk:
         name: AR Snyk
         runs-on: ubuntu-latest
