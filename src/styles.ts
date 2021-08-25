@@ -353,7 +353,7 @@ export const editionsPageFonts = `
 		'Guardian Text Egyptian Web',
 		some(400),
 		some('italic'),
-		'assets/fonts/GuardianTextEgyptian-RegItalic.ttf',
+		'assets/fonts/GuardianTextEgyptian-RegIt.ttf',
 	)}
     ${fontFace(
 		'Guardian Text Egyptian Web',
@@ -390,7 +390,7 @@ export const editionsPageFonts = `
 		'Guardian Text Sans Web',
 		some(400),
 		some('italic'),
-		'assets/fonts/GuardianTextSans-RegularItalic.ttf',
+		'assets/fonts/GuardianTextSans-RegularIt.ttf',
 	)}
     ${fontFace(
 		'Guardian Text Sans Web',
@@ -478,7 +478,7 @@ export const editionsPreviewFonts = (s3Path: string): string => `
 		'Guardian Text Egyptian Web',
 		some(400),
 		some('italic'),
-		`${s3Path}/assets/fonts/GuardianTextEgyptian-RegItalic.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextEgyptian-RegIt.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Egyptian Web',
@@ -515,7 +515,7 @@ export const editionsPreviewFonts = (s3Path: string): string => `
 		'Guardian Text Sans Web',
 		some(400),
 		some('italic'),
-		`${s3Path}/assets/fonts/GuardianTextSans-RegularItalic.ttf`,
+		`${s3Path}/assets/fonts/GuardianTextSans-RegularIt.ttf`,
 	)}
     ${fontFace(
 		'Guardian Text Sans Web',
