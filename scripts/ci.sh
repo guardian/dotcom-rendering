@@ -1,5 +1,8 @@
 #!/bin/bash
 
+gitVersion="$(git --version)"
+echo "git version: $gitVersion"
+
 currentBranch="$(git branch --show-current)"
 echo "current branch: $currentBranch"
 
