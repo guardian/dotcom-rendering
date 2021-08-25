@@ -196,7 +196,7 @@ const getHeadlineStyles = (
 	if (format.design === Design.Comment) {
 		return css(
 			sharedStyles,
-			getFontStyles('regular', 'light'),
+			getFontStyles('tight', 'light'),
 			commentStyles(hasImage),
 		);
 	}
