@@ -2,29 +2,29 @@ name: AR Snyk
 
 on:
   schedule:
-		- cron: "0 9 * * 1-5"
+    - cron: "0 9 * * 1-5"
   push:
     paths-ignore:
       - "dotcom-rendering/**"
   workflow_dispatch:
 
 jobs:
-    snyk:
-        name: AR Snyk
-        runs-on: ubuntu-latest
-        timeout-minutes: 3
+  snyk:
+    name: AR Snyk
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
 
-        strategy:
-            matrix:
-                node-version: [12.x]
+    strategy:
+      matrix:
+        node-version: [12.x]
 
-        steps:
-            - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: Run Snyk to check for vulnerabilities
-              uses: snyk/actions/node@master
-              env:
-                  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-              with:
-                  command: monitor
-                  args: --org=guardian-mobile --project-name=apps-rendering --file=apps-rendering/package-lock.json
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --org=guardian-mobile --project-name=apps-rendering --file=apps-rendering/package-lock.json
