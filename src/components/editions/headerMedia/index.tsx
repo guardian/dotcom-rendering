@@ -171,7 +171,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 		if (media.kind === MainMediaKind.Image) {
 			const {
 				image,
-				image: { nativeCaption, credit },
+				image: { caption, credit },
 			} = media;
 
 			const matchScores = 'football' in item ? item.football : none;
@@ -207,7 +207,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						})}
 					/>
 					<HeaderImageCaption
-						caption={nativeCaption}
+						caption={caption}
 						credit={credit}
 						styles={getCaptionStyles(format)}
 						iconColor={iconColor}
