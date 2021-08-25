@@ -456,22 +456,11 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   font-size: 1.5rem;
   line-height: 1.35;
   font-weight: 300;
-  background-image: repeating-linear-gradient(
-  		to bottom,
-  		transparent,
-  		transparent 46px,
-  		#DCDCDC
-  	);
-  line-height: 3rem;
-  -webkit-background-size: 1rem 3rem;
-  background-size: 1rem 3rem;
-  -webkit-background-position: top left;
-  background-position: top left;
-  -webkit-background-clip: content-box;
-  background-clip: content-box;
-  background-origin: content-box;
-  padding-bottom: 0.5rem;
-  padding-right: 0;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-color: #BB3B80;
+  padding-bottom: 0;
 }
 
 @media (min-width: 375px) {
@@ -489,18 +478,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
     font-size: 2.125rem;
     line-height: 1.35;
     font-weight: 300;
-  }
-}
-
-@media (min-width: 320px) {
-  .emotion-11 {
-    line-height: 3rem;
-  }
-}
-
-@media (min-width: 740px) {
-  .emotion-11 {
-    line-height: 3rem;
   }
 }
 
@@ -16933,22 +16910,11 @@ exports[`Storyshots Editions/Headline Analysis 1`] = `
   font-size: 1.5rem;
   line-height: 1.35;
   font-weight: 300;
-  background-image: repeating-linear-gradient(
-  		to bottom,
-  		transparent,
-  		transparent 46px,
-  		#DCDCDC
-  	);
-  line-height: 3rem;
-  -webkit-background-size: 1rem 3rem;
-  background-size: 1rem 3rem;
-  -webkit-background-position: top left;
-  background-position: top left;
-  -webkit-background-clip: content-box;
-  background-clip: content-box;
-  background-origin: content-box;
-  padding-bottom: 0.5rem;
-  padding-right: 0;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-decoration-color: #C70000;
+  padding-bottom: 0;
 }
 
 @media (min-width: 375px) {
@@ -16966,18 +16932,6 @@ exports[`Storyshots Editions/Headline Analysis 1`] = `
     font-size: 2.125rem;
     line-height: 1.35;
     font-weight: 300;
-  }
-}
-
-@media (min-width: 320px) {
-  .emotion-1 {
-    line-height: 3rem;
-  }
-}
-
-@media (min-width: 740px) {
-  .emotion-1 {
-    line-height: 3rem;
   }
 }
 
