@@ -1,6 +1,7 @@
 #!/bin/bash
 
 currentBranch="$(git branch --show-current)"
+echo "current branch: $currentBranch"
 
 # files that were changed between current branch and main
 files="$(git diff --name-only origin/main)"
