@@ -1,31 +1,187 @@
-import { css, Global } from '@emotion/react';
+import { css } from '@emotion/react';
 
 import {
+	neutral,
 	brandBackground,
 	brandBorder,
 	labs,
 	border,
-	brandLine,
-	neutral,
 } from '@guardian/src-foundations/palette';
-import { Display, Format, Special } from '@guardian/types';
+import { from, until } from '@guardian/src-foundations/mq';
+import { Design, Special } from '@guardian/types';
+import type { Format } from '@guardian/types';
 
+import { ArticleBody } from '@root/src/web/components/ArticleBody';
+import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
+import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
+import { SubMeta } from '@root/src/web/components/SubMeta';
+import { MainMedia } from '@root/src/web/components/MainMedia';
+import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
+import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
+import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
+import { GridItem } from '@root/src/web/components/GridItem';
+import { Caption } from '@root/src/web/components/Caption';
+import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
+import {
+	decideLineCount,
+	decideLineEffect,
+	getCurrentPillar,
+} from '@root/src/web/lib/layoutHelpers';
+import { Lines } from '@guardian/src-ed-lines';
+import { interactiveLegacyClasses } from './lib/interactiveLegacyStyling';
 
-import { renderElement } from '../lib/renderElement';
-import { Header } from '../components/Header';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
+const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.leftCol} {
+				margin-left: 0px;
+			}
+			${from.leftCol} {
+				margin-left: 151px;
+			}
+			${from.wide} {
+				margin-left: 230px;
+			}
+
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+
+				grid-column-gap: 10px;
+
+				/*
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+				*/
+				${from.wide} {
+					grid-template-columns: 219px 1px 1fr;
+
+					grid-template-areas:
+						'title  border  headline'
+						'.      border  standfirst'
+						'.      border  media'
+						'.      border  media'
+						'.      border  lines'
+						'.      border  meta'
+						'body   body    body'
+						'.      .       .';
+				}
+
+				/*
+					Explanation of each unit of grid-template-columns
+
+					Left Column (220 - 1px border)
+					Vertical grey border
+					Main content
+				*/
+				${until.wide} {
+					grid-template-columns: 140px 1px 1fr;
+
+					grid-template-areas:
+						'title  border  headline'
+						'.      border  standfirst'
+						'.      border  media'
+						'.      border  media'
+						'.      border  lines'
+						'.      border  meta'
+						'body   body    body'
+						'.      .       .';
+				}
+
+				${until.leftCol} {
+					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-areas:
+						'title'
+						'headline'
+						'standfirst'
+						'media'
+						'lines'
+						'meta'
+						'body'
+						'.';
+				}
+
+				${until.desktop} {
+					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-areas:
+						'title'
+						'headline'
+						'standfirst'
+						'media'
+						'lines'
+						'meta'
+						'body';
+				}
+
+				${until.tablet} {
+					grid-column-gap: 0px;
+					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-areas:
+						'media'
+						'title'
+						'headline'
+						'standfirst'
+						'lines'
+						'meta'
+						'body';
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const maxWidth = css`
+	${from.desktop} {
+		max-width: 620px;
+	}
+`;
+
+const stretchLines = css`
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+`;
+
+const hasMainMediaStyles = css`
+	height: 100vh;
+	/**
+    100vw is normally enough but don't let the content shrink vertically too
+    much just in case
+    */
+	min-height: 25rem;
+	${from.desktop} {
+		min-height: 31.25rem;
+	}
+	${from.wide} {
+		min-height: 50rem;
+	}
+`;
 
 interface Props {
 	CAPI: CAPIType;
@@ -34,179 +190,56 @@ interface Props {
 	palette: Palette;
 }
 
-const Renderer: React.FC<{
-	format: Format;
+const decideCaption = (mainMedia: ImageBlockElement): string => {
+	const caption = [];
+	if (mainMedia && mainMedia.data && mainMedia.data.caption)
+		caption.push(mainMedia.data.caption);
+	if (
+		mainMedia &&
+		mainMedia.displayCredit &&
+		mainMedia.data &&
+		mainMedia.data.credit
+	)
+		caption.push(mainMedia.data.credit);
+	return caption.join(' ');
+};
+
+const Box = ({
+	palette,
+	children,
+}: {
 	palette: Palette;
-	elements: CAPIElement[];
-	host?: string;
-	pageId: string;
-	webTitle: string;
-}> = ({ format, palette, elements, host, pageId, webTitle }) => {
-	// const cleanedElements = elements.map(element =>
-	//     'html' in element ? { ...element, html: clean(element.html) } : element,
-	// );
-	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
-	//    But should be soon.
-	const output = elements.map((element, index) => {
-		const [ok, el] = renderElement({
-			format,
-			palette,
-			element,
-			adTargeting: undefined,
-			host,
-			index,
-			isMainMedia: false,
-			pageId,
-			webTitle,
-		});
-
-		if (ok) {
-			switch (element._type) {
-				// Here we think it makes sense not to wrap every `p` inside a `figure`
-				case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
-				case 'model.dotcomrendering.pageElements.TextBlockElement':
-					return el;
-
-				default:
-					return (
-						<figure
-							id={
-								'elementId' in element
-									? element.elementId
-									: undefined
-							}
-							key={index}
-						>
-							{el}
-						</figure>
-					);
-			}
-		}
-
-		return null;
-	});
-
-	return <div>{output}</div>;
-};
-
-const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
-	// Typically immersives use the slim nav, but this switch is used to force
-	// the full nav - typically during special events such as Project 200, or
-	// the Euros. The motivation is to better onboard new visitors; interactives
-	// often reach readers who are less familiar with the Guardian.
-	const isSlimNav = !CAPI.config.switches.interactiveFullHeaderSwitch;
-
-	if (isSlimNav) {
-		return (
-			<header
-				css={css`
-					${getZIndex('headerWrapper')}
-					order: 0;
-				`}
-			>
-				<ElementContainer
-					showSideBorders={true}
-					borderColour={brandLine.primary}
-					showTopBorder={false}
-					padded={false}
-					backgroundColour={brandBackground.primary}
-				>
-					<Nav
-						format={{
-							display: format.display,
-							design: format.design,
-							theme: getCurrentPillar(CAPI),
-						}}
-						nav={NAV}
-						subscribeUrl={
-							CAPI.nav.readerRevenueLinks.header.subscribe
-						}
-						edition={CAPI.editionId}
-					/>
-				</ElementContainer>
-			</header>
-		);
-	}
-
-	return (
-		<header
-			/* Note, some interactives require this - e.g. https://www.theguardian.com/environment/ng-interactive/2015/jun/05/carbon-bomb-the-coal-boom-choking-china. */
-			css={css`
-				${getZIndex('headerWrapper')};
+	children: React.ReactNode;
+}) => (
+	<div
+		css={css`
+			/*
+				This pseudo css shows a black box to the right of the headline
+				so that the black background of the inverted text stretches
+				all the way right. But only from mobileLandscape because below
+				that we want to show a gap. To work properly it needs to wrap
+				the healine so it inherits the correct height based on the length
+				of the headline text
+			*/
+			${from.mobileLandscape} {
 				position: relative;
-			`}
-		>
-			<div data-print-layout="hide">
-				<Stuck>
-					<ElementContainer
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						shouldCenter={false}
-						element="aside"
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							display={format.display}
-						/>
-					</ElementContainer>
-				</Stuck>
-				{format.theme !== Special.Labs && (
-					<ElementContainer
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
-							isAnniversary={
-								CAPI.config.switches.anniversaryHeaderSvg
-							}
-						/>
-					</ElementContainer>
-				)}
-			</div>
-
-			<ElementContainer
-				showSideBorders={true}
-				borderColour={brandLine.primary}
-				showTopBorder={false}
-				padded={false}
-				backgroundColour={brandBackground.primary}
-			>
-				<Nav
-					format={{
-						display: Display.Standard,
-						design: format.design,
-						theme: getCurrentPillar(CAPI),
-					}}
-					nav={NAV}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
-				/>
-			</ElementContainer>
-
-			{NAV.subNavSections && format.theme !== Special.Labs && (
-				<ElementContainer
-					backgroundColour={neutral[100]}
-					padded={false}
-					sectionId="sub-nav-root"
-				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-						format={format}
-					/>
-				</ElementContainer>
-			)}
-		</header>
-	);
-};
+				:after {
+					content: '';
+					display: block;
+					position: absolute;
+					width: 50%;
+					right: 0;
+					background-color: ${palette.background.headline};
+					${getZIndex('immersiveBlackBox')}
+					top: 0;
+					bottom: 0;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
 
 export const InteractiveImmersiveLayout = ({
 	CAPI,
@@ -215,66 +248,316 @@ export const InteractiveImmersiveLayout = ({
 	palette,
 }: Props): JSX.Element => {
 	const {
-		config: { host },
+		config: { isPaidContent, host },
 	} = CAPI;
+
+	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+
+	// const showBodyEndSlot =
+	// 	parse(CAPI.slotMachineFlags || '').showBodyEnd ||
+	// 	CAPI.config.switches.slotBodyEnd;
+
+	// TODO:
+	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
+	// 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+
+	const seriesTag = CAPI.tags.find(
+		(tag) => tag.type === 'Series' || tag.type === 'Blog',
+	);
+	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
+
+	const showComments = CAPI.isCommentable;
+
+	const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
+	const captionText = decideCaption(mainMedia);
+	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
+
+	const LeftColCaption = () => (
+		<div
+			css={css`
+				margin-top: ${HEADLINE_OFFSET}px;
+				position: absolute;
+				margin-left: 20px;
+			`}
+		>
+			<Caption
+				palette={palette}
+				captionText={captionText}
+				format={format}
+				shouldLimitWidth={true}
+				isLeftCol={true}
+			/>
+		</div>
+	);
 
 	return (
 		<>
-			{CAPI.isLegacyInteractive && (
-				<Global styles={interactiveGlobalStyles} />
-			)}
 			<div
 				css={css`
 					background-color: ${palette.background.article};
 				`}
 			>
-				<NavHeader
-					CAPI={CAPI}
-					NAV={NAV}
-					format={format}
-					palette={palette}
-				/>
-
-				{format.theme === Special.Labs && (
-					<Stuck>
+				<div
+					css={[
+						mainMedia && hasMainMediaStyles,
+						css`
+							display: flex;
+							flex-direction: column;
+						`,
+					]}
+				>
+					<header
+						css={css`
+							${getZIndex('headerWrapper')}
+							order: 0;
+						`}
+					>
 						<ElementContainer
-							showSideBorders={true}
+							showSideBorders={false}
 							showTopBorder={false}
-							backgroundColour={labs[400]}
-							borderColour={border.primary}
-							sectionId="labs-header"
+							padded={false}
+							backgroundColour={brandBackground.primary}
 						>
-							<LabsHeader />
+							<Nav
+								format={{
+									...format,
+									theme: getCurrentPillar(CAPI),
+								}}
+								nav={NAV}
+								subscribeUrl={
+									CAPI.nav.readerRevenueLinks.header.subscribe
+								}
+								edition={CAPI.editionId}
+							/>
 						</ElementContainer>
-					</Stuck>
-				)}
-			</div>
+					</header>
 
-			<ElementContainer
-				showTopBorder={false}
-				showSideBorders={false}
-				shouldCenter={false}
-				padded={false}
-				backgroundColour={palette.background.article}
-				element="article"
-			>
-				<main>
-					<Renderer
+					{format.theme === Special.Labs && (
+						<Stuck>
+							<ElementContainer
+								showSideBorders={true}
+								showTopBorder={false}
+								backgroundColour={labs[400]}
+								borderColour={border.primary}
+								sectionId="labs-header"
+							>
+								<LabsHeader />
+							</ElementContainer>
+						</Stuck>
+					)}
+
+					<MainMedia
 						format={format}
 						palette={palette}
-						elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
+						elements={CAPI.mainMediaElements}
+						adTargeting={adTargeting}
+						starRating={
+							format.design === Design.Review && CAPI.starRating
+								? CAPI.starRating
+								: undefined
+						}
 						host={host}
+						hideCaption={true}
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
 					/>
-				</main>
+				</div>
+				{mainMedia && (
+					<>
+						<div
+							css={css`
+								margin-top: -${HEADLINE_OFFSET}px;
+								/*
+                        This z-index is what ensures the headline title text shows above main media. For
+                        the actual headline we set the z-index deeper in ArticleHeadline itself so that
+                        the text appears above the pseudo Box element
+                    */
+								position: relative;
+								${getZIndex('articleHeadline')};
+							`}
+						>
+							<ContainerLayout
+								verticalMargins={false}
+								padContent={false}
+								padSides={false}
+								leftContent={<LeftColCaption />}
+							>
+								<ArticleTitle
+									format={format}
+									palette={palette}
+									tags={CAPI.tags}
+									sectionLabel={CAPI.sectionLabel}
+									sectionUrl={CAPI.sectionUrl}
+									guardianBaseURL={CAPI.guardianBaseURL}
+									badge={CAPI.badge}
+								/>
+							</ContainerLayout>
+							<Box palette={palette}>
+								<ContainerLayout
+									verticalMargins={false}
+									padContent={false}
+									padSides={false}
+								>
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										palette={palette}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+									/>
+								</ContainerLayout>
+							</Box>
+						</div>
+					</>
+				)}
+			</div>
+			<ElementContainer
+				data-print-layout="hide"
+				showTopBorder={false}
+				backgroundColour={palette.background.article}
+				borderColour={palette.border.article}
+				element="article"
+			>
+				<div className={interactiveLegacyClasses.contentInteractive}>
+					<InteractiveGrid>
+						<GridItem area="standfirst">
+							<Standfirst
+								format={format}
+								standfirst={CAPI.standfirst}
+							/>
+						</GridItem>
+						<GridItem area="lines">
+							<div css={maxWidth}>
+								<div css={stretchLines}>
+									<Lines
+										count={decideLineCount(format.design)}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								</div>
+							</div>
+						</GridItem>
+						<GridItem area="meta">
+							<div css={maxWidth}>
+								<ArticleMeta
+									branding={branding}
+									format={format}
+									palette={palette}
+									pageId={CAPI.pageId}
+									webTitle={CAPI.webTitle}
+									author={CAPI.author}
+									tags={CAPI.tags}
+									primaryDateline={
+										CAPI.webPublicationDateDisplay
+									}
+									secondaryDateline={
+										CAPI.webPublicationSecondaryDateDisplay
+									}
+								/>
+							</div>
+						</GridItem>
+						<GridItem area="body">
+							<ArticleContainer>
+								<main>
+									<ArticleBody
+										format={format}
+										palette={palette}
+										blocks={CAPI.blocks}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
+									/>
+
+									<Lines data-print-layout="hide" count={4} />
+									<SubMeta
+										palette={palette}
+										format={format}
+										subMetaKeywordLinks={
+											CAPI.subMetaKeywordLinks
+										}
+										subMetaSectionLinks={
+											CAPI.subMetaSectionLinks
+										}
+										pageId={CAPI.pageId}
+										webUrl={CAPI.webURL}
+										webTitle={CAPI.webTitle}
+										showBottomSocialButtons={
+											CAPI.showBottomSocialButtons
+										}
+										badge={CAPI.badge}
+									/>
+								</main>
+							</ArticleContainer>
+						</GridItem>
+					</InteractiveGrid>
+				</div>
+			</ElementContainer>
+
+			{/* Onwards (when signed OUT) */}
+			<aside id="onwards-upper-whensignedout" />
+			{showOnwardsLower && (
+				<ElementContainer
+					sectionId="onwards-lower-whensignedout"
+					element="aside"
+				/>
+			)}
+
+			{!isPaidContent && showComments && (
+				<ElementContainer sectionId="comments" element="aside">
+					<Discussion
+						discussionApiUrl={CAPI.config.discussionApiUrl}
+						shortUrlId={CAPI.config.shortUrlId}
+						isCommentable={CAPI.isCommentable}
+						pillar={format.theme}
+						palette={palette}
+						discussionD2Uid={CAPI.config.discussionD2Uid}
+						discussionApiClientHeader={
+							CAPI.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={false}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						shouldHideAds={CAPI.shouldHideAds}
+						beingHydrated={false}
+						display={format.display}
+					/>
+				</ElementContainer>
+			)}
+
+			{/* Onwards (when signed IN) */}
+			<aside id="onwards-upper-whensignedin" />
+			{showOnwardsLower && (
+				<ElementContainer
+					sectionId="onwards-lower-whensignedin"
+					element="aside"
+				/>
+			)}
+
+			{!isPaidContent && (
+				<ElementContainer
+					sectionId="most-viewed-footer"
+					element="aside"
+				/>
+			)}
+
+			<ElementContainer
+				padded={false}
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={neutral[93]}
+				element="aside"
+			>
+				<AdSlot position="merchandising" display={format.display} />
 			</ElementContainer>
 
 			{NAV.subNavSections && (
 				<ElementContainer
 					padded={false}
 					sectionId="sub-nav-root"
-					backgroundColour={neutral[100]}
 					element="nav"
 				>
 					<SubNav
