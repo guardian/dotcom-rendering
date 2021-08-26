@@ -1212,7 +1212,10 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -2126,7 +2129,10 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -3122,7 +3128,10 @@ exports[`Storyshots Editions/Article Comment 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -4237,7 +4246,10 @@ exports[`Storyshots Editions/Article Correction 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -5351,7 +5363,10 @@ exports[`Storyshots Editions/Article Default 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -6524,7 +6539,10 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -7685,7 +7703,10 @@ exports[`Storyshots Editions/Article Feature 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -8605,7 +8626,10 @@ width:@media (min-width: 320px) {
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -9839,7 +9863,10 @@ width:@media (min-width: 320px) {
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -10983,7 +11010,10 @@ exports[`Storyshots Editions/Article Letter 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -12194,7 +12224,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -13416,7 +13449,10 @@ exports[`Storyshots Editions/Article Review 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -14668,7 +14704,10 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -16355,7 +16394,10 @@ width:@media (min-width: 320px) {
       <span
         id="header-image-caption"
       >
-        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+        <em>
+          Jane Smith
+        </em>
+         Editor of things
          
         Photograph: Philip Keith/The Guardian
       </span>
@@ -16523,7 +16565,10 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
       <span
         id="header-image-caption"
       >
-        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+        <em>
+          Jane Smith
+        </em>
+         Editor of things
          
         Photograph: Philip Keith/The Guardian
       </span>
@@ -16811,7 +16856,10 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
       <span
         id="header-image-caption"
       >
-        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+        <em>
+          Jane Smith
+        </em>
+         Editor of things
          
         Photograph: Philip Keith/The Guardian
       </span>

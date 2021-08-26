@@ -45,6 +45,12 @@ const bylineHtml: Option<DocumentFragment> = pipe(
 	toOption,
 );
 
+const captionDocFragment: Option<DocumentFragment> = pipe(
+	'<em>Jane Smith</em> Editor of things',
+	parseHtml,
+	toOption,
+);
+
 const docFixture = (): DocumentFragment => {
 	const doc = new DocumentFragment();
 
@@ -98,7 +104,7 @@ const mainMedia: Option<MainMedia> = {
 			alt: some('image'),
 			width: 3000,
 			height: 1800,
-			caption: none,
+			caption: captionDocFragment,
 			credit: {
 				kind: OptionKind.Some,
 				value: 'Photograph: Philip Keith/The Guardian',

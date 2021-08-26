@@ -8,7 +8,7 @@ import { SvgCamera } from '@guardian/src-icons';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { FC, ReactElement, ReactNode } from 'react';
 
 const captionId = 'header-image-caption';
 
@@ -79,13 +79,25 @@ const svgStyle = (iconColor?: string): SerializedStyles => css`
 `;
 
 interface Props {
-	caption: Option<string>;
+	caption: Option<DocumentFragment>;
 	credit: Option<string>;
 	styles?: SerializedStyles;
 	iconColor?: string;
 	iconBackgroundColor?: string;
 	isFullWidthImage: boolean;
 }
+
+const toReact = (node: Node, key: number): ReactNode => {
+	switch (node.nodeName) {
+		case 'EM':
+			return <em>{node.textContent}</em>;
+		case '#text':
+			return node.textContent;
+	}
+};
+
+const renderText = (caption: DocumentFragment): ReactNode =>
+	Array.from(caption.childNodes).map((node, i) => toReact(node, i));
 
 const HeaderImageCaption: FC<Props> = ({
 	caption,
@@ -115,7 +127,7 @@ const HeaderImageCaption: FC<Props> = ({
 						</span>
 					</summary>
 					<span id={captionId}>
-						{cap} {withDefault('')(credit)}
+						{renderText(cap)} {withDefault('')(credit)}
 					</span>
 				</details>
 			</figcaption>
