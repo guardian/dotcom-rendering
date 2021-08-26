@@ -102,11 +102,7 @@ export const Ad = ({
 	// Set Primary ad size as first element (should be the largest)
 	const [{ width, height }] = adSizes;
 	// Secondary ad sizes
-	const multiSizes = adSizes
-		// Secondary sizes doesn't have to include primary ad size
-		.slice(1)
-		.map((e) => `${e.width}x${e.height}`)
-		.join(',');
+	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	return (
 		<ClassNames>
