@@ -1,12 +1,10 @@
-name: DCR chromatic 👓
+name: Chromatic 👓
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
+    push
 
 jobs:
     chromatic:
-        name: DCR Chromatic
+        name: Chromatic
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
@@ -15,10 +13,15 @@ jobs:
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
 
-            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            # Install packages for dotcom-rendering project
             - uses: bahmutov/npm-install@v1
               with:
                   working-directory: dotcom-rendering
+
+            # Install packages for apps-rendering project
+            - uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: apps-rendering
 
             - uses: chromaui/action@v1
               with:
