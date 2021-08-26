@@ -5,6 +5,7 @@ import { regionClasses } from '@root/src/amp/lib/region-classes';
 
 // Largest size first
 const inlineSizes = [
+	{ width: 320, height: 480 }, // Picnic story
 	{ width: 300, height: 250 }, // MPU
 	{ width: 250, height: 250 }, // Square
 ];
@@ -98,8 +99,14 @@ export const Ad = ({
 	commercialProperties,
 }: AdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
-	const [{ width, height }] = adSizes; // Set initial size as first element (should be the largest)
-	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
+	// Set Primary ad size as first element (should be the largest)
+	const [{ width, height }] = adSizes;
+	// Secondary ad sizes
+	const multiSizes = adSizes
+		// Secondary sizes doesn't have to include primary ad size
+		.slice(1)
+		.map((e) => `${e.width}x${e.height}`)
+		.join(',');
 
 	return (
 		<ClassNames>
@@ -111,9 +118,15 @@ export const Ad = ({
 						`,
 					)}
 					data-block-on-consent=""
+					// Primary ad size width and height
 					width={width}
 					height={height}
+					// Secondary ad sizes
 					data-multi-size={multiSizes}
+					// Setting data-multi-size-validation to false allows
+					// secondary ad sizes that are less than 2/3rds of the
+					// corresponding primary size.
+					data-multi-size-validation="false"
 					data-npa-on-unknown-consent={true}
 					data-loading-strategy="prefer-viewability-over-views"
 					layout="fixed"
