@@ -2,7 +2,7 @@
 
 ### Install
 
-1. Clone the repo
+1. Clone the repo, then CD into the `apps-rendering` subdirectory before running any commands -
 2. Make sure you're using Node 12 (specific version found in `.nvmrc`)
 3. Install dependencies:
 
@@ -87,6 +87,7 @@ npm run lint:fix
 ```
 
 ### Storybook
+
 A good way to see components and test them in isolation is to run storybook:
 
 ```sh
@@ -98,12 +99,14 @@ Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering
 ### Generating apps-rendering API models
 
 In order to release the models you'll need to:
- - have a bintray account with access to the guardian organisation
- - have an NPM account, part of the [@guardian](https://www.npmjs.com/org/guardian) org with a [configured token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
+
+- have a bintray account with access to the guardian organisation
+- have an NPM account, part of the [@guardian](https://www.npmjs.com/org/guardian) org with a [configured token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
 
 Make sure you set upstream `git push --set-upstream origin <BRANCH_NAME>`
 
 In the SBT repl:
+
 ```sbtshell
 clean
 project scalaApiModels
