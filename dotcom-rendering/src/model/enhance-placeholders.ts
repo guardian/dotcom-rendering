@@ -36,6 +36,7 @@ const buildPlaceholders = (data: CAPIType): Map<string, string> => {
 			trailText: data.trailText,
 			sectionTag: data.sectionLabel,
 			webURL: data.webURL,
+			standirst: data.standfirst,
 			// shareLinks: TODO,
 		}),
 	);
@@ -55,7 +56,6 @@ const buildPlaceholders = (data: CAPIType): Map<string, string> => {
 export const enhancePlaceholders = (data: CAPIType): CAPIType => {
 	const design: Design = decideDesign(data.format);
 
-	// Only immersive interactives are modified.
 	if (design !== Design.Interactive) {
 		return data;
 	}

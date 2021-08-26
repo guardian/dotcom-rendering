@@ -79,5 +79,6 @@ export const enhanceCAPI = (body: CAPIType): CAPIType => {
 		.enhanceDots()
 		.enhanceImages()
 		.enhanceNumberedLists()
+		.enhancePlaceholders()
 		.enhanceEmbeds().capi;
 };
