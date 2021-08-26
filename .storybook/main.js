@@ -5,7 +5,7 @@ module.exports = {
 	core: {
 		builder: 'webpack5',
 	},
-	stories: ['../src/**/*.stories.@(tsx)'],
+	stories: [ '../dotcom-rendering/src/**/*.stories.@(tsx)' ],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
@@ -31,7 +31,7 @@ module.exports = {
 		// https://storybook.js.org/docs/configurations/typescript-config/
 		rules.push({
 			test: /\.[jt]sx?|mjs$/,
-			exclude: require('../scripts/webpack/browser').babelExclude,
+			exclude: require('../dotcom-rendering/scripts/webpack/browser').babelExclude,
 			use: [
 				{
 					loader: 'babel-loader',
@@ -53,7 +53,7 @@ module.exports = {
 				{
 					loader: 'ts-loader',
 					options: {
-						configFile: 'tsconfig.build.json',
+						configFile: 'dotcom-rendering/tsconfig.build.json',
 						transpileOnly: true,
 					},
 				},
@@ -67,15 +67,15 @@ module.exports = {
 		fileLoaderRule.exclude = /\.svg$/;
 		rules.push({
 			test: /\.svg$/,
-			use: ['desvg-loader/react', 'svg-loader'],
+			use: [ 'desvg-loader/react', 'svg-loader' ],
 		});
 
 		// Add the @frontend and @root aliases to prevent imports using it from failing
 		// Nb. __dirname is the current working directory, so .storybook in this case
 		config.resolve.alias = {
 			...config.resolve.alias,
-			'@root': path.resolve(__dirname, '..'),
-			'@frontend': path.resolve(__dirname, '../src'),
+			'@root': path.resolve(__dirname, '../dotcom-rendering'),
+			'@frontend': path.resolve(__dirname, '../dotcom-rendering/src'),
 		};
 
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
