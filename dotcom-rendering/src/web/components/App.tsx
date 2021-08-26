@@ -373,7 +373,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	};
 	const palette = decidePalette(format);
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargeting: AdTargeting = buildAdTargeting(CAPI, !!isSignedIn);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(

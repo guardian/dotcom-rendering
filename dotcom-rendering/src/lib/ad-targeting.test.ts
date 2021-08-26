@@ -1,5 +1,4 @@
 import { Article } from '@root/fixtures/generated/articles/Article';
-import { addCookie, removeCookie } from '@root/src/web/browser/cookie';
 import { buildAdTargeting } from './ad-targeting';
 
 const CAPI = {
@@ -65,9 +64,7 @@ describe('buildAdTargeting', () => {
 	});
 
 	it('builds adTargeting correctly for a signed in user', () => {
-		addCookie('GU_U', 'something');
-		expect(buildAdTargeting(CAPI)).toEqual(expectedAdTargeting({isSignedIn: 't'}));
-		removeCookie('GU_U');
+		expect(buildAdTargeting(CAPI, true)).toEqual(expectedAdTargeting({isSignedIn: 't'}));
 	});
 
 	it('builds adTargeting correctly for an ad free user', () => {

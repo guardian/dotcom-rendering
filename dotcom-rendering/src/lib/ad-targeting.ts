@@ -1,10 +1,9 @@
-import { getCookie } from '@root/src/web/browser/cookie';
-
 export const buildAdTargeting = (
 	CAPI:
 		| CAPIType
 		| CAPIBrowserType
 		| Pick<CAPIType, 'isAdFreeUser' | 'config'>,
+	isSignedIn: boolean = false,
 ): AdTargeting => {
 	if (CAPI.isAdFreeUser) {
 		return {
@@ -12,10 +11,9 @@ export const buildAdTargeting = (
 		};
 	}
 	const { config } = CAPI;
-	const isSignedIn = (typeof window !== "undefined") && getCookie('GU_U') ? 't' : 'f';
 	const customParams = {
 		sens: config.isSensitive ? 't' : 'f',
-		si: isSignedIn,
+		si: isSignedIn ? 't' : 'f',
 		vl: config.videoDuration,
 		cc: config.edition,
 		s: config.section,
