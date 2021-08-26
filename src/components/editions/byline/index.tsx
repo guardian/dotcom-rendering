@@ -11,10 +11,10 @@ import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
 import { body, headline } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
-import { Design, Display } from '@guardian/types';
+import { Design, Display, OptionKind } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { maybeRender } from 'lib';
+import { index, maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from '../avatar';
@@ -75,8 +75,8 @@ const showcaseStyles = css`
 	padding-bottom: ${remSpace[6]};
 `;
 
-const commentStyles = css`
-	padding-right: 6.5625rem;
+const commentStyles = (hasImage: boolean): SerializedStyles => css`
+	padding-right: ${hasImage ? '6.5625rem' : 0};
 `;
 
 const avatarWrapperStyles = css`
@@ -176,6 +176,7 @@ const bylineSecondaryStyles = (format: Format): SerializedStyles => {
 const getBylineStyles = (
 	format: Format,
 	iconColor: string,
+	hasImage: boolean,
 ): SerializedStyles => {
 	// Display.Immersive needs to come before Design.Interview
 	if (format.display === Display.Immersive) {
@@ -185,7 +186,7 @@ const getBylineStyles = (
 		return css(styles(iconColor), interviewStyles);
 	}
 	if (format.design === Design.Comment) {
-		return css(styles(iconColor), commentStyles);
+		return css(styles(iconColor), commentStyles(hasImage));
 	}
 	if (format.display === Display.Showcase) {
 		return css(styles(iconColor), showcaseStyles);
@@ -239,9 +240,14 @@ const Byline: FC<Props> = ({ item }) => {
 
 	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
 	const showShareIcon = hasShareIcon(format);
+	const contributor = index(0)(item.contributors);
+
+	const hasImage =
+		contributor.kind === OptionKind.Some &&
+		contributor.value.image.kind === OptionKind.Some;
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getBylineStyles(format, iconColor)}>
+		<div css={getBylineStyles(format, iconColor, hasImage)}>
 			<address>{renderText(byline, format)}</address>
 			{showShareIcon && (
 				<span className="js-share-button" role="button">
