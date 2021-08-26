@@ -359,11 +359,12 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			);
 		}
 		case 'top-above-nav': {
+			const padding = space[4] + 2; // 18px - currently being reviewed
 			const adSlotAboveNav = css`
 				position: relative;
 				margin: 0 auto;
-				min-height: 108px;
-				padding-bottom: 18px;
+				min-height: ${250 + padding}px;
+				padding-bottom: ${padding}px;
 				text-align: left;
 				display: table;
 				width: 728px;
