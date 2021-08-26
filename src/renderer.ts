@@ -745,24 +745,6 @@ const renderEditions = (format: Format, excludeStyles = false) => (
 				editions: true,
 			});
 
-		case ElementKind.ExplainerAtom:
-			return h(ExplainerAtom, { ...element });
-
-		case ElementKind.GuideAtom:
-			return guideAtomRenderer(format, element);
-
-		case ElementKind.QandaAtom:
-			return qandaAtomRenderer(format, element);
-
-		case ElementKind.ProfileAtom:
-			return profileAtomRenderer(format, element);
-
-		case ElementKind.TimelineAtom:
-			return timelineAtomRenderer(format, element);
-
-		case ElementKind.InteractiveAtom:
-			return interactiveAtomRenderer(format, element);
-
 		case ElementKind.MediaAtom:
 			return mediaAtomRenderer(format, element, true);
 
