@@ -14,15 +14,13 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
+
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            - uses: bahmutov/npm-install@v1
               with:
                   working-directory: dotcom-rendering
 
-            - name: Install and build
-              run: yarn && yarn makeBuild
-              working-directory: dotcom-rendering
-
             - uses: chromaui/action@v1
               with:
-                  workingDir: dotcom-rendering
                   projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
                   token: ${{ secrets.GITHUB_TOKEN }}
