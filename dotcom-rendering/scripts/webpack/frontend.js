@@ -27,6 +27,9 @@ const commonConfigs = ({ platform }) => ({
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',
 			'react-dom': 'preact/compat',
+			// Does not try to require the 'canvas' package,
+			// an optional dependency of jsdom that we aren't using.
+			canvas: false,
 		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
