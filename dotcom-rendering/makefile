@@ -132,7 +132,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn --silent
+	@cd ..; yarn --silent
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
