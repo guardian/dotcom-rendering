@@ -805,284 +805,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   }
 }
 
-.emotion-27 {
-  display: block;
-  position: relative;
-}
-
-.emotion-28 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-28 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-28 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-28 summary:focus {
-  outline: none;
-}
-
 .emotion-29 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #BB3B80;
-}
-
-.emotion-30 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-31 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-31:hover {
-  background: #BB3B80;
-}
-
-.emotion-32 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-33 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-34 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-34 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-34 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-34 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-34 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-34 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-34 b {
-  font-weight: 700;
-}
-
-.emotion-34 i {
-  font-style: italic;
-}
-
-.emotion-34 a {
-  color: #7D0068;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-34 a:hover {
-  border-bottom: solid 0.0625rem #BB3B80;
-}
-
-.emotion-35 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-36 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-37 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-37:hover {
-  background: #BB3B80;
-}
-
-.emotion-37:focus {
-  border: none;
-}
-
-.emotion-38 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-39 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-39:hover {
-  background: #BB3B80;
-}
-
-.emotion-39:focus {
-  border: none;
-}
-
-.emotion-41 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-44 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -1097,14 +820,14 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-44 {
+  .emotion-29 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-44:before {
+.emotion-29:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -1116,7 +839,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-44:after {
+.emotion-29:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -1126,25 +849,25 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
   border-top: 1px solid #BB3B80;
 }
 
-.emotion-45 {
+.emotion-30 {
   margin: 0;
 }
 
-.emotion-46 {
+.emotion-31 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-46 svg {
+.emotion-31 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #BB3B80;
 }
 
-.emotion-47 {
+.emotion-32 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -1212,7 +935,10 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -1332,117 +1058,6 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
         <p
           className="emotion-22"
         />
-        <div
-          className="emotion-27"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-28"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-29"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-30"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-31"
-              >
-                <span
-                  className="emotion-32"
-                >
-                  <span
-                    className="emotion-33"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-34"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-35"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-36"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-37"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-38"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-39"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-38"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-41"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-22"
         />
@@ -1450,13 +1065,13 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
           className="emotion-22"
         />
         <aside
-          className="emotion-44"
+          className="emotion-29"
         >
           <blockquote
-            className="emotion-45"
+            className="emotion-30"
           >
             <p
-              className="emotion-46"
+              className="emotion-31"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -1471,7 +1086,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-47"
+              className="emotion-32"
             >
               Jane Giddins
             </cite>
@@ -2126,7 +1741,10 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -2334,7 +1952,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
-  line-height: 1.35;
+  line-height: 1.15;
   font-weight: 300;
   padding-bottom: 0;
   padding-right: 6rem;
@@ -2344,7 +1962,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   .emotion-10 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 1.75rem;
-    line-height: 1.35;
+    line-height: 1.15;
     font-weight: 300;
   }
 }
@@ -2353,7 +1971,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   .emotion-10 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
-    line-height: 1.35;
+    line-height: 1.15;
     font-weight: 300;
   }
 }
@@ -2715,284 +2333,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   }
 }
 
-.emotion-29 {
-  display: block;
-  position: relative;
-}
-
-.emotion-30 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-30 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-30 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-30 summary:focus {
-  outline: none;
-}
-
 .emotion-31 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #C70000;
-}
-
-.emotion-32 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-33 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-33:hover {
-  background: #C70000;
-}
-
-.emotion-34 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-35 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-36 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-36 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-36 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-36 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-36 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-36 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-36 b {
-  font-weight: 700;
-}
-
-.emotion-36 i {
-  font-style: italic;
-}
-
-.emotion-36 a {
-  color: #AB0613;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-36 a:hover {
-  border-bottom: solid 0.0625rem #C70000;
-}
-
-.emotion-37 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-38 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-39 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-39:hover {
-  background: #C70000;
-}
-
-.emotion-39:focus {
-  border: none;
-}
-
-.emotion-40 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-41 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-41:hover {
-  background: #C70000;
-}
-
-.emotion-41:focus {
-  border: none;
-}
-
-.emotion-43 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-46 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -3007,14 +2348,14 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-46 {
+  .emotion-31 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-46:before {
+.emotion-31:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -3026,7 +2367,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-46:after {
+.emotion-31:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -3036,25 +2377,25 @@ exports[`Storyshots Editions/Article Comment 1`] = `
   border-top: 1px solid #C70000;
 }
 
-.emotion-47 {
+.emotion-32 {
   margin: 0;
 }
 
-.emotion-48 {
+.emotion-33 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-48 svg {
+.emotion-33 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #C70000;
 }
 
-.emotion-49 {
+.emotion-34 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -3122,7 +2463,10 @@ exports[`Storyshots Editions/Article Comment 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -3272,117 +2616,6 @@ exports[`Storyshots Editions/Article Comment 1`] = `
         <p
           className="emotion-24"
         />
-        <div
-          className="emotion-29"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-30"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-31"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-32"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-33"
-              >
-                <span
-                  className="emotion-34"
-                >
-                  <span
-                    className="emotion-35"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-36"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-37"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-38"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-39"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-40"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-41"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-40"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-43"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-24"
         />
@@ -3390,13 +2623,13 @@ exports[`Storyshots Editions/Article Comment 1`] = `
           className="emotion-24"
         />
         <aside
-          className="emotion-46"
+          className="emotion-31"
         >
           <blockquote
-            className="emotion-47"
+            className="emotion-32"
           >
             <p
-              className="emotion-48"
+              className="emotion-33"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -3411,7 +2644,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-49"
+              className="emotion-34"
             >
               Jane Giddins
             </cite>
@@ -3830,284 +3063,7 @@ exports[`Storyshots Editions/Article Correction 1`] = `
   }
 }
 
-.emotion-21 {
-  display: block;
-  position: relative;
-}
-
-.emotion-22 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-22 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-22 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-22 summary:focus {
-  outline: none;
-}
-
 .emotion-23 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #C70000;
-}
-
-.emotion-24 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-25 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-25:hover {
-  background: #C70000;
-}
-
-.emotion-26 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-27 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-28 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-28 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-28 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-28 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-28 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-28 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-28 b {
-  font-weight: 700;
-}
-
-.emotion-28 i {
-  font-style: italic;
-}
-
-.emotion-28 a {
-  color: #AB0613;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-28 a:hover {
-  border-bottom: solid 0.0625rem #C70000;
-}
-
-.emotion-29 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-30 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-31 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-31:hover {
-  background: #C70000;
-}
-
-.emotion-31:focus {
-  border: none;
-}
-
-.emotion-32 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-33 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-33:hover {
-  background: #C70000;
-}
-
-.emotion-33:focus {
-  border: none;
-}
-
-.emotion-35 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-38 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -4122,14 +3078,14 @@ exports[`Storyshots Editions/Article Correction 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-38 {
+  .emotion-23 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-38:before {
+.emotion-23:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -4141,7 +3097,7 @@ exports[`Storyshots Editions/Article Correction 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-38:after {
+.emotion-23:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -4151,25 +3107,25 @@ exports[`Storyshots Editions/Article Correction 1`] = `
   border-top: 1px solid #C70000;
 }
 
-.emotion-39 {
+.emotion-24 {
   margin: 0;
 }
 
-.emotion-40 {
+.emotion-25 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-40 svg {
+.emotion-25 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #C70000;
 }
 
-.emotion-41 {
+.emotion-26 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -4237,7 +3193,10 @@ exports[`Storyshots Editions/Article Correction 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -4310,117 +3269,6 @@ exports[`Storyshots Editions/Article Correction 1`] = `
         <p
           className="emotion-16"
         />
-        <div
-          className="emotion-21"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-22"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-23"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-24"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-25"
-              >
-                <span
-                  className="emotion-26"
-                >
-                  <span
-                    className="emotion-27"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-28"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-29"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-30"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-31"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-32"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-33"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-32"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-35"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-16"
         />
@@ -4428,13 +3276,13 @@ exports[`Storyshots Editions/Article Correction 1`] = `
           className="emotion-16"
         />
         <aside
-          className="emotion-38"
+          className="emotion-23"
         >
           <blockquote
-            className="emotion-39"
+            className="emotion-24"
           >
             <p
-              className="emotion-40"
+              className="emotion-25"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -4449,7 +3297,7 @@ exports[`Storyshots Editions/Article Correction 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-41"
+              className="emotion-26"
             >
               Jane Giddins
             </cite>
@@ -4944,284 +3792,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   }
 }
 
-.emotion-26 {
-  display: block;
-  position: relative;
-}
-
-.emotion-27 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-27 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-27 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-27 summary:focus {
-  outline: none;
-}
-
 .emotion-28 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #C70000;
-}
-
-.emotion-29 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-30 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-30:hover {
-  background: #C70000;
-}
-
-.emotion-31 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-32 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-33 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-33 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-33 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-33 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-33 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-33 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-33 b {
-  font-weight: 700;
-}
-
-.emotion-33 i {
-  font-style: italic;
-}
-
-.emotion-33 a {
-  color: #AB0613;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-33 a:hover {
-  border-bottom: solid 0.0625rem #C70000;
-}
-
-.emotion-34 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-35 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-36 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-36:hover {
-  background: #C70000;
-}
-
-.emotion-36:focus {
-  border: none;
-}
-
-.emotion-37 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-38 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-38:hover {
-  background: #C70000;
-}
-
-.emotion-38:focus {
-  border: none;
-}
-
-.emotion-40 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-43 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -5236,14 +3807,14 @@ exports[`Storyshots Editions/Article Default 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-43 {
+  .emotion-28 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-43:before {
+.emotion-28:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -5255,7 +3826,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-43:after {
+.emotion-28:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -5265,25 +3836,25 @@ exports[`Storyshots Editions/Article Default 1`] = `
   border-top: 1px solid #C70000;
 }
 
-.emotion-44 {
+.emotion-29 {
   margin: 0;
 }
 
-.emotion-45 {
+.emotion-30 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-45 svg {
+.emotion-30 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #C70000;
 }
 
-.emotion-46 {
+.emotion-31 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -5351,7 +3922,10 @@ exports[`Storyshots Editions/Article Default 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -5466,117 +4040,6 @@ exports[`Storyshots Editions/Article Default 1`] = `
         <p
           className="emotion-21"
         />
-        <div
-          className="emotion-26"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-27"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-28"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-29"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-30"
-              >
-                <span
-                  className="emotion-31"
-                >
-                  <span
-                    className="emotion-32"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-33"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-34"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-35"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-36"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-37"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-38"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-37"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-40"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-21"
         />
@@ -5584,13 +4047,13 @@ exports[`Storyshots Editions/Article Default 1`] = `
           className="emotion-21"
         />
         <aside
-          className="emotion-43"
+          className="emotion-28"
         >
           <blockquote
-            className="emotion-44"
+            className="emotion-29"
           >
             <p
-              className="emotion-45"
+              className="emotion-30"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -5605,7 +4068,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-46"
+              className="emotion-31"
             >
               Jane Giddins
             </cite>
@@ -6117,284 +4580,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   }
 }
 
-.emotion-27 {
-  display: block;
-  position: relative;
-}
-
-.emotion-28 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-28 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-28 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-28 summary:focus {
-  outline: none;
-}
-
 .emotion-29 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #E05E00;
-}
-
-.emotion-30 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-31 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-31:hover {
-  background: #E05E00;
-}
-
-.emotion-32 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-33 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-34 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-34 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-34 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-34 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-34 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-34 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-34 b {
-  font-weight: 700;
-}
-
-.emotion-34 i {
-  font-style: italic;
-}
-
-.emotion-34 a {
-  color: #CB4700;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-34 a:hover {
-  border-bottom: solid 0.0625rem #E05E00;
-}
-
-.emotion-35 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-36 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-37 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-37:hover {
-  background: #E05E00;
-}
-
-.emotion-37:focus {
-  border: none;
-}
-
-.emotion-38 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-39 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-39:hover {
-  background: #E05E00;
-}
-
-.emotion-39:focus {
-  border: none;
-}
-
-.emotion-41 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-44 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -6409,14 +4595,14 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-44 {
+  .emotion-29 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-44:before {
+.emotion-29:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -6428,7 +4614,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-44:after {
+.emotion-29:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -6438,25 +4624,25 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   border-top: 1px solid #E05E00;
 }
 
-.emotion-45 {
+.emotion-30 {
   margin: 0;
 }
 
-.emotion-46 {
+.emotion-31 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-46 svg {
+.emotion-31 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #E05E00;
 }
 
-.emotion-47 {
+.emotion-32 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -6524,7 +4710,10 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -6644,117 +4833,6 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
         <p
           className="emotion-22"
         />
-        <div
-          className="emotion-27"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-28"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-29"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-30"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-31"
-              >
-                <span
-                  className="emotion-32"
-                >
-                  <span
-                    className="emotion-33"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-34"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-35"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-36"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-37"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-38"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-39"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-38"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-41"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-22"
         />
@@ -6762,13 +4840,13 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
           className="emotion-22"
         />
         <aside
-          className="emotion-44"
+          className="emotion-29"
         >
           <blockquote
-            className="emotion-45"
+            className="emotion-30"
           >
             <p
-              className="emotion-46"
+              className="emotion-31"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -6783,7 +4861,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-47"
+              className="emotion-32"
             >
               Jane Giddins
             </cite>
@@ -7278,284 +5356,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   }
 }
 
-.emotion-26 {
-  display: block;
-  position: relative;
-}
-
-.emotion-27 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-27 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-27 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-27 summary:focus {
-  outline: none;
-}
-
 .emotion-28 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #0084C6;
-}
-
-.emotion-29 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-30 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-30:hover {
-  background: #0084C6;
-}
-
-.emotion-31 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-32 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-33 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-33 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-33 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-33 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-33 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-33 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-33 b {
-  font-weight: 700;
-}
-
-.emotion-33 i {
-  font-style: italic;
-}
-
-.emotion-33 a {
-  color: #005689;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-33 a:hover {
-  border-bottom: solid 0.0625rem #0084C6;
-}
-
-.emotion-34 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-35 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-36 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-36:hover {
-  background: #0084C6;
-}
-
-.emotion-36:focus {
-  border: none;
-}
-
-.emotion-37 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-38 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-38:hover {
-  background: #0084C6;
-}
-
-.emotion-38:focus {
-  border: none;
-}
-
-.emotion-40 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-43 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -7570,14 +5371,14 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-43 {
+  .emotion-28 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-43:before {
+.emotion-28:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -7589,7 +5390,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-43:after {
+.emotion-28:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -7599,25 +5400,25 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   border-top: 1px solid #0084C6;
 }
 
-.emotion-44 {
+.emotion-29 {
   margin: 0;
 }
 
-.emotion-45 {
+.emotion-30 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-45 svg {
+.emotion-30 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #0084C6;
 }
 
-.emotion-46 {
+.emotion-31 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -7685,7 +5486,10 @@ exports[`Storyshots Editions/Article Feature 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -7800,117 +5604,6 @@ exports[`Storyshots Editions/Article Feature 1`] = `
         <p
           className="emotion-21"
         />
-        <div
-          className="emotion-26"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-27"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-28"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-29"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-30"
-              >
-                <span
-                  className="emotion-31"
-                >
-                  <span
-                    className="emotion-32"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-33"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-34"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-35"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-36"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-37"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-38"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-37"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-40"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-21"
         />
@@ -7918,13 +5611,13 @@ exports[`Storyshots Editions/Article Feature 1`] = `
           className="emotion-21"
         />
         <aside
-          className="emotion-43"
+          className="emotion-28"
         >
           <blockquote
-            className="emotion-44"
+            className="emotion-29"
           >
             <p
-              className="emotion-45"
+              className="emotion-30"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -7939,7 +5632,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-46"
+              className="emotion-31"
             >
               Jane Giddins
             </cite>
@@ -8605,7 +6298,10 @@ width:@media (min-width: 320px) {
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -9434,284 +7130,7 @@ width:@media (min-width: 320px) {
   }
 }
 
-.emotion-28 {
-  display: block;
-  position: relative;
-}
-
-.emotion-29 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-29 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-29 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-29 summary:focus {
-  outline: none;
-}
-
 .emotion-30 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #0084C6;
-}
-
-.emotion-31 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-32 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-32:hover {
-  background: #0084C6;
-}
-
-.emotion-33 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-34 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-35 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-35 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-35 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-35 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-35 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-35 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-35 b {
-  font-weight: 700;
-}
-
-.emotion-35 i {
-  font-style: italic;
-}
-
-.emotion-35 a {
-  color: #005689;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-35 a:hover {
-  border-bottom: solid 0.0625rem #0084C6;
-}
-
-.emotion-36 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-37 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-38 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-38:hover {
-  background: #0084C6;
-}
-
-.emotion-38:focus {
-  border: none;
-}
-
-.emotion-39 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-40 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-40:hover {
-  background: #0084C6;
-}
-
-.emotion-40:focus {
-  border: none;
-}
-
-.emotion-42 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-45 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -9726,14 +7145,14 @@ width:@media (min-width: 320px) {
 }
 
 @media (min-width: 980px) {
-  .emotion-45 {
+  .emotion-30 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-45:before {
+.emotion-30:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -9745,7 +7164,7 @@ width:@media (min-width: 320px) {
   border-radius: 0 0 100% 0;
 }
 
-.emotion-45:after {
+.emotion-30:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -9755,25 +7174,25 @@ width:@media (min-width: 320px) {
   border-top: 1px solid #0084C6;
 }
 
-.emotion-46 {
+.emotion-31 {
   margin: 0;
 }
 
-.emotion-47 {
+.emotion-32 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-47 svg {
+.emotion-32 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #0084C6;
 }
 
-.emotion-48 {
+.emotion-33 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -9839,7 +7258,10 @@ width:@media (min-width: 320px) {
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -9965,117 +7387,6 @@ width:@media (min-width: 320px) {
         <p
           className="emotion-23"
         />
-        <div
-          className="emotion-28"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-29"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-30"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-31"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-32"
-              >
-                <span
-                  className="emotion-33"
-                >
-                  <span
-                    className="emotion-34"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-35"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-36"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-37"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-38"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-39"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-40"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-39"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-42"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-23"
         />
@@ -10083,13 +7394,13 @@ width:@media (min-width: 320px) {
           className="emotion-23"
         />
         <aside
-          className="emotion-45"
+          className="emotion-30"
         >
           <blockquote
-            className="emotion-46"
+            className="emotion-31"
           >
             <p
-              className="emotion-47"
+              className="emotion-32"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -10104,7 +7415,7 @@ width:@media (min-width: 320px) {
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-48"
+              className="emotion-33"
             >
               Jane Giddins
             </cite>
@@ -10576,284 +7887,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   }
 }
 
-.emotion-24 {
-  display: block;
-  position: relative;
-}
-
-.emotion-25 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-25 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-25 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-25 summary:focus {
-  outline: none;
-}
-
 .emotion-26 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #E05E00;
-}
-
-.emotion-27 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-28 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-28:hover {
-  background: #E05E00;
-}
-
-.emotion-29 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-30 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-31 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-31 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-31 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-31 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-31 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-31 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-31 b {
-  font-weight: 700;
-}
-
-.emotion-31 i {
-  font-style: italic;
-}
-
-.emotion-31 a {
-  color: #CB4700;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-31 a:hover {
-  border-bottom: solid 0.0625rem #E05E00;
-}
-
-.emotion-32 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-33 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-34 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-34:hover {
-  background: #E05E00;
-}
-
-.emotion-34:focus {
-  border: none;
-}
-
-.emotion-35 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-36 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-36:hover {
-  background: #E05E00;
-}
-
-.emotion-36:focus {
-  border: none;
-}
-
-.emotion-38 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-41 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -10868,14 +7902,14 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-41 {
+  .emotion-26 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-41:before {
+.emotion-26:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -10887,7 +7921,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-41:after {
+.emotion-26:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -10897,25 +7931,25 @@ exports[`Storyshots Editions/Article Letter 1`] = `
   border-top: 1px solid #E05E00;
 }
 
-.emotion-42 {
+.emotion-27 {
   margin: 0;
 }
 
-.emotion-43 {
+.emotion-28 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-43 svg {
+.emotion-28 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #E05E00;
 }
 
-.emotion-44 {
+.emotion-29 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -10983,7 +8017,10 @@ exports[`Storyshots Editions/Article Letter 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -11087,117 +8124,6 @@ exports[`Storyshots Editions/Article Letter 1`] = `
         <p
           className="emotion-19"
         />
-        <div
-          className="emotion-24"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-25"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-26"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-27"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-28"
-              >
-                <span
-                  className="emotion-29"
-                >
-                  <span
-                    className="emotion-30"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-31"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-32"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-33"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-34"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-35"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-36"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-35"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-38"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-19"
         />
@@ -11205,13 +8131,13 @@ exports[`Storyshots Editions/Article Letter 1`] = `
           className="emotion-19"
         />
         <aside
-          className="emotion-41"
+          className="emotion-26"
         >
           <blockquote
-            className="emotion-42"
+            className="emotion-27"
           >
             <p
-              className="emotion-43"
+              className="emotion-28"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -11226,7 +8152,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-44"
+              className="emotion-29"
             >
               Jane Giddins
             </cite>
@@ -12194,7 +9120,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -13009,284 +9938,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   }
 }
 
-.emotion-32 {
-  display: block;
-  position: relative;
-}
-
-.emotion-33 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-33 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-33 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-33 summary:focus {
-  outline: none;
-}
-
 .emotion-34 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #A1845C;
-}
-
-.emotion-35 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-36 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-36:hover {
-  background: #A1845C;
-}
-
-.emotion-37 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-38 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-39 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-39 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-39 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-39 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-39 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-39 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-39 b {
-  font-weight: 700;
-}
-
-.emotion-39 i {
-  font-style: italic;
-}
-
-.emotion-39 a {
-  color: #6B5840;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-39 a:hover {
-  border-bottom: solid 0.0625rem #A1845C;
-}
-
-.emotion-40 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-41 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-42 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-42:hover {
-  background: #A1845C;
-}
-
-.emotion-42:focus {
-  border: none;
-}
-
-.emotion-43 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-44 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-44:hover {
-  background: #A1845C;
-}
-
-.emotion-44:focus {
-  border: none;
-}
-
-.emotion-46 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-49 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -13301,14 +9953,14 @@ exports[`Storyshots Editions/Article Review 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-49 {
+  .emotion-34 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-49:before {
+.emotion-34:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -13320,7 +9972,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-49:after {
+.emotion-34:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -13330,25 +9982,25 @@ exports[`Storyshots Editions/Article Review 1`] = `
   border-top: 1px solid #A1845C;
 }
 
-.emotion-50 {
+.emotion-35 {
   margin: 0;
 }
 
-.emotion-51 {
+.emotion-36 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-51 svg {
+.emotion-36 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #A1845C;
 }
 
-.emotion-52 {
+.emotion-37 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -13416,7 +10068,10 @@ exports[`Storyshots Editions/Article Review 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -13605,117 +10260,6 @@ exports[`Storyshots Editions/Article Review 1`] = `
         <p
           className="emotion-27"
         />
-        <div
-          className="emotion-32"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-33"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-34"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-35"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-36"
-              >
-                <span
-                  className="emotion-37"
-                >
-                  <span
-                    className="emotion-38"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-39"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-40"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-41"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-42"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-43"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-44"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-43"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-46"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-27"
         />
@@ -13723,13 +10267,13 @@ exports[`Storyshots Editions/Article Review 1`] = `
           className="emotion-27"
         />
         <aside
-          className="emotion-49"
+          className="emotion-34"
         >
           <blockquote
-            className="emotion-50"
+            className="emotion-35"
           >
             <p
-              className="emotion-51"
+              className="emotion-36"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -13744,7 +10288,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-52"
+              className="emotion-37"
             >
               Jane Giddins
             </cite>
@@ -14252,284 +10796,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   }
 }
 
-.emotion-26 {
-  display: block;
-  position: relative;
-}
-
-.emotion-27 {
-  margin: 16px 0 36px;
-  background: #EDEDED;
-  color: #121212;
-  padding: 0 5px 6px;
-  border-image: repeating-linear-gradient(
-              to bottom,
-              #DCDCDC,
-              #DCDCDC 1px,
-              transparent 1px,
-              transparent 4px
-          ) 13;
-  border-top: 13px solid black;
-  position: relative;
-}
-
-.emotion-27 summary {
-  list-style: none;
-  margin: 0 0 16px;
-}
-
-.emotion-27 summary::-webkit-details-marker {
-  display: none;
-}
-
-.emotion-27 summary:focus {
-  outline: none;
-}
-
 .emotion-28 {
-  display: block;
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 700;
-  color: #C70000;
-}
-
-.emotion-29 {
-  font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.15;
-  font-weight: 500;
-  margin: 0;
-  line-height: 22px;
-}
-
-.emotion-30 {
-  background: #121212;
-  color: #FFFFFF;
-  height: 2rem;
-  position: absolute;
-  bottom: 0;
-  -webkit-transform: translate(0, 50%);
-  -moz-transform: translate(0, 50%);
-  -ms-transform: translate(0, 50%);
-  transform: translate(0, 50%);
-  padding: 0 15px 0 7px;
-  border-radius: 100em;
-  cursor: pointer;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 0;
-  margin: 0;
-}
-
-.emotion-30:hover {
-  background: #C70000;
-}
-
-.emotion-31 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-32 {
-  margin-right: 12px;
-  margin-bottom: 6px;
-  width: 33px;
-  fill: white;
-  height: 28px;
-}
-
-.emotion-33 {
-  font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-33 p {
-  margin-bottom: 0.5rem;
-}
-
-.emotion-33 ol {
-  list-style: decimal;
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-.emotion-33 ul {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.emotion-33 ul li {
-  margin-bottom: 0.375rem;
-  padding-left: 1.25rem;
-}
-
-.emotion-33 ul li:before {
-  display: inline-block;
-  content: '';
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
-  background-color: #DCDCDC;
-  margin-left: -1.25rem;
-}
-
-.emotion-33 b {
-  font-weight: 700;
-}
-
-.emotion-33 i {
-  font-style: italic;
-}
-
-.emotion-33 a {
-  color: #AB0613;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  border-bottom: 0.0625rem solid #DCDCDC;
-  -webkit-transition: border-color 0.15s ease-out;
-  transition: border-color 0.15s ease-out;
-}
-
-.emotion-33 a:hover {
-  border-bottom: solid 0.0625rem #C70000;
-}
-
-.emotion-34 {
-  font-size: 13px;
-  line-height: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
-}
-
-.emotion-35 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-36 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.emotion-36:hover {
-  background: #C70000;
-}
-
-.emotion-36:focus {
-  border: none;
-}
-
-.emotion-37 {
-  width: 16px;
-  height: 16px;
-}
-
-.emotion-38 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background: black;
-  color: white;
-  border-style: hidden;
-  border-radius: 100%;
-  margin: 0 0 0 5px;
-  padding: 0;
-  width: 28px;
-  height: 28px;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-}
-
-.emotion-38:hover {
-  background: #C70000;
-}
-
-.emotion-38:focus {
-  border: none;
-}
-
-.emotion-40 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 400;
-  height: 28px;
-}
-
-.emotion-43 {
   width: 10.875rem;
   position: relative;
   box-sizing: border-box;
@@ -14544,14 +10811,14 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 }
 
 @media (min-width: 980px) {
-  .emotion-43 {
+  .emotion-28 {
     float: right;
     clear: right;
     margin-right: calc(-10.875rem - 2.5rem);
   }
 }
 
-.emotion-43:before {
+.emotion-28:before {
   content: '';
   position: absolute;
   top: 100%;
@@ -14563,7 +10830,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   border-radius: 0 0 100% 0;
 }
 
-.emotion-43:after {
+.emotion-28:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -14573,25 +10840,25 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   border-top: 1px solid #C70000;
 }
 
-.emotion-44 {
+.emotion-29 {
   margin: 0;
 }
 
-.emotion-45 {
+.emotion-30 {
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
 }
 
-.emotion-45 svg {
+.emotion-30 svg {
   margin-bottom: -0.6rem;
   height: 2rem;
   margin-left: -0.3rem;
   fill: #C70000;
 }
 
-.emotion-46 {
+.emotion-31 {
   font-style: normal;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
@@ -14668,7 +10935,10 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
                 <span
                   id="header-image-caption"
                 >
-                  ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+                  <em>
+                    Jane Smith
+                  </em>
+                   Editor of things
                    
                   Photograph: Philip Keith/The Guardian
                 </span>
@@ -14774,117 +11044,6 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
         <p
           className="emotion-21"
         />
-        <div
-          className="emotion-26"
-          data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-          data-atom-type="guide"
-        >
-          <details
-            className="emotion-27"
-            data-atom-id="575888ee-9973-4256-9a96-bad4b9c65d81"
-            data-snippet-type="guide"
-          >
-            <summary
-              onClick={[Function]}
-            >
-              <span
-                className="emotion-28"
-              >
-                Quick Guide
-              </span>
-              <h4
-                className="emotion-29"
-              >
-                What is Queen's consent?
-              </h4>
-              <span
-                className="emotion-30"
-              >
-                <span
-                  className="emotion-31"
-                >
-                  <span
-                    className="emotion-32"
-                  >
-                    <svg
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M13.8 16.2l.425 9.8h1.525l.45-9.8 9.8-.45v-1.525l-9.8-.425-.45-9.8h-1.525l-.425 9.8-9.8.425v1.525l9.8.45z"
-                        fillRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  Show
-                </span>
-              </span>
-            </summary>
-            <div>
-              <div
-                className="emotion-33"
-                dangerouslySetInnerHTML={
-                  Object {
-                    "__html": "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-                  }
-                }
-              />
-            </div>
-            <footer
-              className="emotion-34"
-            >
-              <div
-                hidden={false}
-              >
-                <div
-                  className="emotion-35"
-                >
-                  <div>
-                    Was this helpful?
-                  </div>
-                  <button
-                    className="emotion-36"
-                    data-testid="like"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-37"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    className="emotion-38"
-                    data-testid="dislike"
-                    onClick={[Function]}
-                  >
-                    <svg
-                      className="emotion-37"
-                      viewBox="0 0 40 40"
-                    >
-                      <path
-                        d="M33.78 22.437l-4.228 13.98L27.93 37.5 5.062 34.14V15.503l7.8-1.517L24.354 2.5h1.624L28.9 5.426l-4.548 8.67h.107l10.477 1.31"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div
-                className="emotion-40"
-                data-testid="feedback"
-                hidden={true}
-              >
-                Thank you for your feedback.
-              </div>
-            </footer>
-          </details>
-        </div>
         <p
           className="emotion-21"
         />
@@ -14892,13 +11051,13 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
           className="emotion-21"
         />
         <aside
-          className="emotion-43"
+          className="emotion-28"
         >
           <blockquote
-            className="emotion-44"
+            className="emotion-29"
           >
             <p
-              className="emotion-45"
+              className="emotion-30"
             >
               <svg
                 viewBox="0 0 30 30"
@@ -14913,7 +11072,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
               Why should the crown be allowed to carry on with a feudal system just because they want to?
             </p>
             <cite
-              className="emotion-46"
+              className="emotion-31"
             >
               Jane Giddins
             </cite>
@@ -16374,7 +12533,10 @@ width:@media (min-width: 320px) {
       <span
         id="header-image-caption"
       >
-        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+        <em>
+          Jane Smith
+        </em>
+         Editor of things
          
         Photograph: Philip Keith/The Guardian
       </span>
@@ -16542,7 +12704,10 @@ exports[`Storyshots Editions/HeaderMedia Image 1`] = `
       <span
         id="header-image-caption"
       >
-        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+        <em>
+          Jane Smith
+        </em>
+         Editor of things
          
         Photograph: Philip Keith/The Guardian
       </span>
@@ -16830,7 +12995,10 @@ exports[`Storyshots Editions/HeaderMedia With Star Rating 1`] = `
       <span
         id="header-image-caption"
       >
-        ‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.
+        <em>
+          Jane Smith
+        </em>
+         Editor of things
          
         Photograph: Philip Keith/The Guardian
       </span>
@@ -16979,7 +13147,7 @@ exports[`Storyshots Editions/Headline Comment 1`] = `
   margin: 0;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.5rem;
-  line-height: 1.35;
+  line-height: 1.15;
   font-weight: 300;
   padding-bottom: 0;
   padding-right: 6rem;
@@ -16989,7 +13157,7 @@ exports[`Storyshots Editions/Headline Comment 1`] = `
   .emotion-1 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 1.75rem;
-    line-height: 1.35;
+    line-height: 1.15;
     font-weight: 300;
   }
 }
@@ -16998,7 +13166,7 @@ exports[`Storyshots Editions/Headline Comment 1`] = `
   .emotion-1 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
-    line-height: 1.35;
+    line-height: 1.15;
     font-weight: 300;
   }
 }
