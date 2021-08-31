@@ -2,7 +2,7 @@
 
 This repository has become a mopnorepo containing dotcom-rendering and apps-rendering as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
 
-You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `npm run watch` for apps-rendering). Linting, imports, builds and github actions should work as before.
+You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `npm run watch` for apps-rendering) except for storybook. Linting, imports, builds and github actions should work as before.
 
 <!-- TEMPORARY : This section is just here as an initial guide for the first few days post-migration -->
 
@@ -15,6 +15,9 @@ If you're using this project, not too much has changed. Follow the steps below t
 ```bash
 # (Optional) Delete your existing node_modules folder
 dotcom-rendering $ rm -rf ./node_modules
+
+# Install root dependencies for storybook
+dotcom-rendering $ yarn install
 
 # (IMPORTANT) Move into the dotcom-rendering subdirectory
 dotcom-rendering $ cd dotcom-rendering
@@ -40,6 +43,11 @@ dotcom-rendering/apps-rendering $ npm install
 # Run AR
 dotcom-rendering/apps-rendering $ npm run watch
 ```
+
+## Storybook
+
+While most DCR scripts should be run from within the `dotcom-rendering` subdirectory, storybook remains at the root of the project. So make sure you're _not_ in a subdirectory before running `yarn storybook` or `yarn build-storybook` as before.
+
 
 ## Quick start
 
