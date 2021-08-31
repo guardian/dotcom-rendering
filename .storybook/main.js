@@ -106,7 +106,10 @@ const arWebpack = (config) => {
 
 	rules.push({
 		test: /\.tsx?$/,
-		include: path.resolve(__dirname, "../apps-rendering"),
+		include: [
+			path.resolve(__dirname, "../apps-rendering"),
+			path.resolve(__dirname, "../common-rendering"),
+		],
 		use: [
 			{
 				loader: "babel-loader",
@@ -141,6 +144,7 @@ const arWebpack = (config) => {
 	config.resolve.modules = [
 		...(config?.resolve?.modules || []),
 		path.resolve(__dirname, "../apps-rendering/src"),
+		path.resolve(__dirname, "../common-rendering/src"),
 	];
 
 	config.resolve.alias = {
