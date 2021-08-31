@@ -324,6 +324,17 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				}
 			});
 
+			onConsentChange((consentState) => {
+				const consentUUID = getCookie('consentUUID')
+				console.log("browserId", browserId);
+				console.log("consentUUID", consentUUID);
+				if (consentState.tcfv2) {
+					console.log("[tcfv2] consent string", consentState?.tcfv2?.tcString);
+				} else {
+					console.log("Not tcfv2")
+				}
+			});
+
 			cmp.init({
 				country: countryCode,
 				pubData,
