@@ -137,8 +137,9 @@ const largeTextStyles = (
 const standardTextStyles = (
 	fontStyle: FontStyle,
 	fontWeight: FontWeight,
+	lineHeight: LineHeight,
 ): SerializedStyles => css`
-	${body.medium({ fontStyle, fontWeight })}
+	${body.medium({ fontStyle, fontWeight, lineHeight })}
 `;
 
 const bylinePrimaryStyles = (format: Format): SerializedStyles => {
@@ -154,7 +155,7 @@ const bylinePrimaryStyles = (format: Format): SerializedStyles => {
 
 	return css`
 		color: ${color};
-		${standardTextStyles('normal', 'bold')}
+		${standardTextStyles('normal', 'bold', 'regular')}
 	`;
 };
 
@@ -168,7 +169,7 @@ const bylineSecondaryStyles = (format: Format): SerializedStyles => {
 		`;
 	}
 	return css`
-		${standardTextStyles('italic', 'light')};
+		${standardTextStyles('italic', 'light', 'regular')};
 		color: ${color};
 	`;
 };
