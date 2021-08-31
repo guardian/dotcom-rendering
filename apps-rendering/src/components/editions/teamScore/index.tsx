@@ -1,11 +1,14 @@
 import type { SerializedStyles } from '@emotion/core';
 import { css } from '@emotion/core';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
+import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import { fromNullable } from '@guardian/types';
 import { TeamLocation } from 'football';
+import { maybeRender } from 'lib';
 import type { FC } from 'react';
 
 interface Props {
@@ -61,12 +64,12 @@ const scoreNumberStyles = css`
 	width: 1.5em;
 	height: 1.5em;
 	position: relative;
+	text-align: center;
 `;
 
 const scoreInlineStyles = css`
-	position: absolute;
+	position: relative;
 	top: 7%;
-	left: 29%;
 `;
 
 const infoStyles = (location: TeamLocation): SerializedStyles => css`
@@ -86,27 +89,30 @@ const scorerStyles = (location: TeamLocation): SerializedStyles => css`
 	}
 `;
 
-const TeamScore: FC<Props> = ({ team, location }) => (
-	<section css={styles(location)}>
-		<div css={scoreStyles(location)}>
-			<div css={scoreNumberStyles}>
-				<span css={scoreInlineStyles}>{team.score}</span>
+const TeamScore: FC<Props> = ({ team, location }) => {
+	const scorers = fromNullable(team.scorers);
+	return (
+		<section css={styles(location)}>
+			<div css={scoreStyles(location)}>
+				<div css={scoreNumberStyles}>
+					<span css={scoreInlineStyles}>{team.score}</span>
+				</div>
 			</div>
-		</div>
-		<div css={infoStyles(location)}>
-			<h3 css={teamNameStyles}>{team.name}</h3>
-			{team.scorers.length > 0 && (
-				<ul css={scorerStyles(location)}>
-					{team.scorers.map((scorer) => (
-						<li key={`${scorer.player}`}>
-							{scorer.player} {scorer.timeInMinutes}&apos;{' '}
-							{scorer.additionalInfo}
-						</li>
-					))}
-				</ul>
-			)}
-		</div>
-	</section>
-);
+			<div css={infoStyles(location)}>
+				<h3 css={teamNameStyles}>{team.name}</h3>
+				{maybeRender(scorers, (s: Scorer[]) => (
+					<ul css={scorerStyles(location)}>
+						{s.map((scorer: Scorer) => (
+							<li key={`${scorer.player}`}>
+								{scorer.player} {scorer.timeInMinutes}&apos;{' '}
+								{scorer.additionalInfo}
+							</li>
+						))}
+					</ul>
+				))}
+			</div>
+		</section>
+	);
+};
 
 export { TeamScore };

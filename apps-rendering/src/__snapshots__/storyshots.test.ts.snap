@@ -8375,12 +8375,12 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   width: 1.5em;
   height: 1.5em;
   position: relative;
+  text-align: center;
 }
 
 .emotion-16 {
-  position: absolute;
+  position: relative;
   top: 7%;
-  left: 29%;
 }
 
 .emotion-18 {
@@ -12069,12 +12069,12 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
   width: 1.5em;
   height: 1.5em;
   position: relative;
+  text-align: center;
 }
 
 .emotion-9 {
-  position: absolute;
+  position: relative;
   top: 7%;
-  left: 29%;
 }
 
 .emotion-11 {
@@ -12086,6 +12086,22 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 .emotion-12 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  font-weight: 400;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 740px) {
+  .emotion-12 {
+    grid-column: 1;
+  }
+}
+
+.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12103,7 +12119,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-12 {
+  .emotion-13 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -12123,12 +12139,12 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-12 {
+  .emotion-13 {
     border-right: 1px dotted #000000;
   }
 }
 
-.emotion-13 {
+.emotion-14 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
@@ -12137,18 +12153,18 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-13 {
+  .emotion-14 {
     margin-left: 0.75rem;
   }
 }
 
 @media (min-width: 660px) {
-  .emotion-16 {
+  .emotion-17 {
     margin-left: 0.75rem;
   }
 }
 
-.emotion-18 {
+.emotion-19 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -12206,13 +12222,16 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
         >
           Arsenal
         </h3>
+        <ul
+          className="emotion-12"
+        />
       </div>
     </section>
     <section
-      className="emotion-12"
+      className="emotion-13"
     >
       <div
-        className="emotion-13"
+        className="emotion-14"
       >
         <div
           className="emotion-8"
@@ -12225,7 +12244,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
         </div>
       </div>
       <div
-        className="emotion-16"
+        className="emotion-17"
       >
         <h3
           className="emotion-11"
@@ -12233,7 +12252,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
           Man City
         </h3>
         <ul
-          className="emotion-18"
+          className="emotion-19"
         >
           <li>
             Sterling

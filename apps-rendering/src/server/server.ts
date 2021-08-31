@@ -29,7 +29,7 @@ import express from 'express';
 import { MainMediaKind } from 'headerMedia';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
-import { pipe, toArray } from 'lib';
+import { pipe, resultToNullable, toArray } from 'lib';
 import { logger } from 'logger';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
@@ -273,8 +273,10 @@ async function serveEditionsArticlePost(
 		// The "req.body" should contain a 'Content' object which fetched by the
 		// Edition backend from the capi
 		const content = await capiContentDecoder(req.body);
+		const footballContent = await getFootballContent(content);
 		const renderingRequest: RenderingRequest = {
 			content,
+			footballContent: resultToNullable(footballContent),
 		};
 		const themeOverride = themeFromUnknown(req.query.theme);
 
@@ -310,7 +312,7 @@ async function serveArticleGet(
 					},
 					commentCount: 30,
 					relatedContent,
-					footballContent,
+					footballContent: resultToNullable(footballContent),
 				};
 
 				const richLinkDetails = req.query.richlink === '';
