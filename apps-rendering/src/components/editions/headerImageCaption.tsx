@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { SvgCamera } from '@guardian/src-icons';
@@ -9,6 +8,7 @@ import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
+import { articlePaddingStyles } from './styles';
 
 const captionId = 'header-image-caption';
 
@@ -49,13 +49,7 @@ const HeaderImageCaptionStyles = (
 		${textSans.small()};
 		box-sizing: border-box;
 
-		${isFullWidthImage &&
-		`${from.tablet} {
-			padding-left: ${remSpace[6]};
-		}
-		${from.desktop} {
-			padding-left: 9rem;
-		}`}
+		${isFullWidthImage && articlePaddingStyles}
 	}
 	pointer-events: none;
 	position: absolute;
