@@ -186,6 +186,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 									league={scores.league}
 									homeTeam={scores.homeTeam}
 									awayTeam={scores.awayTeam}
+									stadium={scores.stadium}
 								/>
 							</div>
 						);
