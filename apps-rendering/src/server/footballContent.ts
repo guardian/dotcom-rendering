@@ -8,26 +8,22 @@ import {
 	fromNullable,
 	map2,
 	none,
-	OptionKind,
 	map as optMap,
 	resultAndThen,
 	some,
-	withDefault,
 } from '@guardian/types';
 import type { Option, Result } from '@guardian/types';
 import { padZero } from 'date';
-import { pipe } from 'lib';
+import { fold, pipe } from 'lib';
 import fetch from 'node-fetch';
 import type { Response } from 'node-fetch';
 import type { Parser } from 'parser';
 import {
 	arrayParser,
 	fieldParser,
-	map,
 	map3,
 	map6,
 	map7,
-	maybe,
 	numberParser,
 	oneOf,
 	parse,
@@ -51,15 +47,6 @@ const getFootballSelector = (date: Date, [teamA, teamB]: Teams): string => {
 
 const getFootballEndpoint = (selectorId: string): string =>
 	`https://mobile.guardianapis.com/sport/football/matches?selector=${selectorId}`;
-
-const optionToUndefined = <A>(optA: Option<A>): A | undefined =>
-	withDefault<A | undefined>(undefined)(optA);
-
-const stringOrUndefinedParser: Parser<string | undefined> = pipe(
-	stringParser,
-	maybe,
-	map(optionToUndefined),
-);
 
 const makeScorer = (
 	player: string,
@@ -108,10 +95,7 @@ const makeFootballContent = (
 const scorerParser: Parser<Scorer> = map3(makeScorer)(
 	fieldParser('player', stringParser),
 	fieldParser('timeInMinutes', numberParser),
-	oneOf([
-		fieldParser('additionalInfo', stringOrUndefinedParser),
-		succeed(''),
-	]),
+	oneOf([fieldParser('additionalInfo', stringParser), succeed(undefined)]),
 );
 
 const footballTeamParser: Parser<FootballTeam> = map6(makeFootballTeam)(
@@ -199,19 +183,18 @@ const getFootballContent = async (
 
 	const selectorId = map2(getFootballSelector)(date)(teams);
 
-	if (selectorId.kind === OptionKind.Some) {
-		const footballEndpoint = getFootballEndpoint(selectorId.value);
+	return fold(async (selectorIdValue: string) => {
+		const footballEndpoint = getFootballEndpoint(selectorIdValue);
 
 		const response = await fetch(footballEndpoint);
 
 		const footballContent = await parseFootballResponse(
 			response,
-			selectorId.value,
+			selectorIdValue,
 		);
 
 		return footballContent;
-	}
-	return err('Could not get selectorId');
+	}, Promise.resolve(err('Could not get selectorId')))(selectorId);
 };
 
 export { getFootballContent };
