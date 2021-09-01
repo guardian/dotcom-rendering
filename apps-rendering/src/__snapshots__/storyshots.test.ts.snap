@@ -289,7 +289,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -723,7 +723,7 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 @media (min-width: 740px) {
   .emotion-20 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -1148,7 +1148,7 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 
 @media (min-width: 740px) {
   .emotion-5 {
-    padding-left: 48px;
+    padding-left: 24px;
   }
 }
 
@@ -1513,7 +1513,7 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 details[open] {
-    padding-left: 48px;
+    padding-left: 24px;
   }
 }
 
@@ -1575,7 +1575,7 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 
 @media (min-width: 740px) {
   .emotion-21 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -1840,7 +1840,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -2287,7 +2287,7 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 @media (min-width: 740px) {
   .emotion-22 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -2749,7 +2749,7 @@ exports[`Storyshots Editions/Article Correction 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -3029,7 +3029,7 @@ exports[`Storyshots Editions/Article Correction 1`] = `
 
 @media (min-width: 740px) {
   .emotion-14 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -3414,7 +3414,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -3770,7 +3770,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -4197,7 +4197,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -4570,7 +4570,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 
 @media (min-width: 740px) {
   .emotion-20 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -5002,7 +5002,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -5358,7 +5358,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -5857,7 +5857,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-7 details[open] {
-    padding-left: 48px;
+    padding-left: 24px;
   }
 }
 
@@ -5902,7 +5902,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-9 {
-    padding-left: 48px;
+    padding-left: 24px;
   }
 }
 
@@ -6213,7 +6213,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-21 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -6795,7 +6795,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-6 details[open] {
-    padding-left: 48px;
+    padding-left: 24px;
   }
 }
 
@@ -6832,7 +6832,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-8 {
-    padding-left: 48px;
+    padding-left: 24px;
   }
 }
 
@@ -7029,7 +7029,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-15 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -7119,7 +7119,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-17 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -7191,7 +7191,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-21 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -7627,7 +7627,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -7960,7 +7960,7 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
 @media (min-width: 740px) {
   .emotion-17 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -8376,7 +8376,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -8975,7 +8975,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 @media (min-width: 740px) {
   .emotion-39 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -9625,7 +9625,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -10017,7 +10017,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
 @media (min-width: 740px) {
   .emotion-25 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -10518,7 +10518,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -10887,7 +10887,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -11842,7 +11842,7 @@ exports[`Storyshots Editions/Byline Interview 1`] = `
 
 @media (min-width: 740px) {
   .emotion-0 {
-    margin-left: 48px;
+    margin-left: 24px;
   }
 }
 
@@ -12641,7 +12641,7 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-2 details[open] {
-    padding-left: 48px;
+    padding-left: 24px;
   }
 }
 

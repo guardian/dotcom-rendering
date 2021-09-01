@@ -13,7 +13,7 @@ export const wideContentWidth = 545;
 export const tabletImageWidth = 720;
 export const wideImageWidth = 750;
 
-export const tabletArticleMargin = 48;
+export const tabletArticleMargin = 24;
 export const desktopArticleMargin = 144;
 export const wideArticleMargin = 312;
 
