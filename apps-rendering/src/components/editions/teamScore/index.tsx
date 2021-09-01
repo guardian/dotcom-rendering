@@ -65,6 +65,11 @@ const scoreNumberStyles = css`
 	height: 1.5em;
 	position: relative;
 	text-align: center;
+	margin-top: ${remSpace[1]};
+
+	${from.phablet} {
+		margin-top: ${remSpace[2]};
+	}
 `;
 
 const scoreInlineStyles = css`

@@ -58,14 +58,13 @@ const fullWidthCaptionStyles = css`
 	height: 100%;
 `;
 
-const footballWrapperStyles: SerializedStyles = css`
+const footballWrapperStyles = (isVideo: boolean): SerializedStyles => css`
 	${from.tablet} {
-		width: calc(100vw - 3.75rem);
+		width: ${isVideo ? `750px` : `calc(100vw - 3.75rem)`};
 		background-color: ${brandAltBackground.primary};
 	}
-
 	${from.desktop} {
-		width: inherit;
+		width: ${isVideo ? `750px` : `inherit`};
 	}
 `;
 
@@ -166,6 +165,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 		cameraIcon: iconColor,
 		cameraIconBackground: iconBackgroundColor,
 	} = getThemeStyles(format.theme);
+	const matchScores = 'football' in item ? item.football : none;
 
 	return maybeRender(item.mainMedia, (media) => {
 		if (media.kind === MainMediaKind.Image) {
@@ -174,8 +174,6 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				image: { caption, credit },
 			} = media;
 
-			const matchScores = 'football' in item ? item.football : none;
-
 			return (
 				<figure
 					css={[getStyles(format, isPicture)]}
@@ -183,7 +181,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				>
 					{maybeRender(matchScores, (scores) => {
 						return (
-							<div css={footballWrapperStyles}>
+							<div css={footballWrapperStyles(false)}>
 								<FootballScores
 									league={scores.league}
 									homeTeam={scores.homeTeam}
@@ -222,7 +220,22 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 				video: { title, atomId },
 			} = media;
 
-			return <Video atomId={atomId} title={title} />;
+			return (
+				<>
+					{maybeRender(matchScores, (scores) => {
+						return (
+							<div css={footballWrapperStyles(true)}>
+								<FootballScores
+									league={scores.league}
+									homeTeam={scores.homeTeam}
+									awayTeam={scores.awayTeam}
+								/>
+							</div>
+						);
+					})}
+					<Video atomId={atomId} title={title} />
+				</>
+			);
 		}
 	});
 };

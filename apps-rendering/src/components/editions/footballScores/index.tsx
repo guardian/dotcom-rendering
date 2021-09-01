@@ -24,12 +24,12 @@ const styles = css`
 	padding: ${remSpace[3]};
 
 	${from.tablet} {
-		width: ${tabletContentWidth + 5}px;
+		width: ${tabletContentWidth + 1}px;
 		padding-right: 0;
 	}
 
 	${from.desktop} {
-		width: ${wideContentWidth + 5}px;
+		width: ${wideContentWidth + 1}px;
 	}
 `;
 
