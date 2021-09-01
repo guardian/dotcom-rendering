@@ -367,7 +367,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 				min-height: 90px;
 				text-align: left;
 				display: block;
-				width: 728px;
+				min-width: 728px;
 			`;
 			return (
 				<>
