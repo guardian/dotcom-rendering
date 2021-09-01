@@ -19,8 +19,8 @@ const headerAdWrapper = css`
 	padding-bottom: ${padding}px;
 
 	display: flex;
-	flex-wrap: wrap;
-	align-content: center;
+	flex-direction: column;
+	justify-content: center;
 
 	position: sticky;
 	top: 0;
