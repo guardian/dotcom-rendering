@@ -8,6 +8,7 @@ module.exports = {
 	stories: [
 		"../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)",
 		"../dotcom-rendering/src/**/*.stories.@(tsx)",
+		"../common-rendering/src/**/*.stories.@(tsx)",
 	],
 	addons: [
 		"@storybook/addon-essentials",
@@ -88,7 +89,7 @@ const dcrWebpack = (config) => {
 	fileLoaderRule.exclude = /\.svg$/;
 	rules.push({
 		test: /\.svg$/,
-		use: ["desvg-loader/react", "svg-loader"],
+		use: [ "desvg-loader/react", "svg-loader" ],
 	});
 
 	config.resolve.alias = {
@@ -105,7 +106,10 @@ const arWebpack = (config) => {
 
 	rules.push({
 		test: /\.tsx?$/,
-		include: path.resolve(__dirname, "../apps-rendering"),
+		include: [
+			path.resolve(__dirname, "../apps-rendering"),
+			path.resolve(__dirname, "../common-rendering"),
+		],
 		use: [
 			{
 				loader: "babel-loader",
@@ -140,6 +144,7 @@ const arWebpack = (config) => {
 	config.resolve.modules = [
 		...(config?.resolve?.modules || []),
 		path.resolve(__dirname, "../apps-rendering/src"),
+		path.resolve(__dirname, "../common-rendering/src"),
 	];
 
 	config.resolve.alias = {
