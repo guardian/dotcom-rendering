@@ -1387,7 +1387,7 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
   color: #FFFFFF;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -1395,7 +1395,7 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 .emotion-15 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #FFFFFF;
 }
 
@@ -3664,7 +3664,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -3672,7 +3672,7 @@ exports[`Storyshots Editions/Article Default 1`] = `
 .emotion-17 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -4452,7 +4452,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
   color: #E05E00;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -4460,7 +4460,7 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 .emotion-18 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -5228,7 +5228,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
   color: #0084C6;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -5236,7 +5236,7 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 .emotion-17 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -6051,7 +6051,7 @@ width:@media (min-width: 320px) {
   color: #FFFFFF;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -6059,7 +6059,7 @@ width:@media (min-width: 320px) {
 .emotion-19 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #FFFFFF;
 }
 
@@ -7002,7 +7002,7 @@ width:@media (min-width: 320px) {
   color: #0084C6;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -7010,7 +7010,7 @@ width:@media (min-width: 320px) {
 .emotion-19 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -8774,7 +8774,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   color: #0084C6;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -8782,7 +8782,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 .emotion-39 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -9810,7 +9810,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
   color: #A1845C;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -9818,7 +9818,7 @@ exports[`Storyshots Editions/Article Review 1`] = `
 .emotion-23 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -10668,7 +10668,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -10676,7 +10676,7 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 .emotion-17 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -11439,7 +11439,7 @@ exports[`Storyshots Editions/Byline Default 1`] = `
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -11447,7 +11447,7 @@ exports[`Storyshots Editions/Byline Default 1`] = `
 .emotion-2 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -11543,7 +11543,7 @@ exports[`Storyshots Editions/Byline Feature 1`] = `
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -11551,7 +11551,7 @@ exports[`Storyshots Editions/Byline Feature 1`] = `
 .emotion-2 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -11678,7 +11678,7 @@ exports[`Storyshots Editions/Byline Interview 1`] = `
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -11686,7 +11686,7 @@ exports[`Storyshots Editions/Byline Interview 1`] = `
 .emotion-2 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -11782,7 +11782,7 @@ exports[`Storyshots Editions/Byline Review 1`] = `
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -11790,7 +11790,7 @@ exports[`Storyshots Editions/Byline Review 1`] = `
 .emotion-2 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
@@ -11887,7 +11887,7 @@ exports[`Storyshots Editions/Byline Showcase 1`] = `
   color: #C70000;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   font-weight: 700;
   font-style: normal;
 }
@@ -11895,7 +11895,7 @@ exports[`Storyshots Editions/Byline Showcase 1`] = `
 .emotion-2 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: #121212;
 }
 
