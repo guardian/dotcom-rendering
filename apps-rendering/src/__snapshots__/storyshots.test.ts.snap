@@ -8447,41 +8447,22 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 .emotion-8 {
-  text-indent: -10000px;
-  position: absolute;
-  margin: 0;
-}
-
-.emotion-9 {
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-
-@media (min-width: 660px) {
-  .emotion-9 {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-.emotion-10 {
-  grid-column: 2;
-}
-
-@media (min-width: 660px) {
-  .emotion-10 {
-    grid-column: 1;
-  }
-}
-
-.emotion-11 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 700;
 }
 
+.emotion-9 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+}
+
 @media (min-width: 660px) {
-  .emotion-12 {
+  .emotion-10 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -8489,7 +8470,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   }
 }
 
-.emotion-13 {
+.emotion-11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8507,7 +8488,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-13 {
+  .emotion-11 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -8528,12 +8509,12 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-13 {
+  .emotion-11 {
     border-right: 1px dotted #000000;
   }
 }
 
-.emotion-14 {
+.emotion-12 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
@@ -8541,7 +8522,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   margin-right: 0.75rem;
 }
 
-.emotion-15 {
+.emotion-13 {
   border: 1px solid #000000;
   border-radius: 100%;
   display: block;
@@ -8553,17 +8534,17 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-15 {
+  .emotion-13 {
     margin-top: 0.5rem;
   }
 }
 
-.emotion-16 {
+.emotion-14 {
   position: relative;
   top: 7%;
 }
 
-.emotion-18 {
+.emotion-16 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
@@ -8571,7 +8552,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   margin: 0;
 }
 
-.emotion-19 {
+.emotion-17 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -8582,12 +8563,12 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-19 {
+  .emotion-17 {
     grid-column: 1;
   }
 }
 
-.emotion-20 {
+.emotion-18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8605,7 +8586,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-20 {
+  .emotion-18 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -8625,12 +8606,12 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-20 {
+  .emotion-18 {
     border-right: 1px dotted #000000;
   }
 }
 
-.emotion-21 {
+.emotion-19 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
@@ -8639,18 +8620,18 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-21 {
+  .emotion-19 {
     margin-left: 0.75rem;
   }
 }
 
 @media (min-width: 660px) {
-  .emotion-24 {
+  .emotion-22 {
     margin-left: 0.75rem;
   }
 }
 
-.emotion-26 {
+.emotion-24 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -8660,7 +8641,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   padding: 0;
 }
 
-.emotion-27 {
+.emotion-25 {
   width: 100vw;
   height: calc(100vw * 0.6);
   background-color: #F6F6F6;
@@ -8671,27 +8652,27 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 1300px) {
-  .emotion-27 {
+  .emotion-25 {
     width: 620px;
     height: calc(620px * 0.6);
   }
 }
 
 @media (min-width: 740px) {
-  .emotion-27 {
+  .emotion-25 {
     width: calc(100vw - 3.75rem);
     height: calc((100vw - 3.75rem) * 0.6);
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-27 {
+  .emotion-25 {
     width: 750px;
     height: 450px;
   }
 }
 
-.emotion-28 {
+.emotion-26 {
   pointer-events: none;
   position: absolute;
   left: 0;
@@ -8700,7 +8681,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   top: 0;
 }
 
-.emotion-28 summary {
+.emotion-26 summary {
   display: block;
   pointer-events: auto;
   text-align: center;
@@ -8714,11 +8695,11 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   outline: none;
 }
 
-.emotion-28 summary::-webkit-details-marker {
+.emotion-26 summary::-webkit-details-marker {
   display: none;
 }
 
-.emotion-28 details[open] {
+.emotion-26 details[open] {
   min-height: 44px;
   max-height: 999px;
   height: 100%;
@@ -8736,33 +8717,33 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-28 {
+  .emotion-26 {
     width: calc(100vw - 3.75rem);
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-28 {
+  .emotion-26 {
     width: 750px;
   }
 }
 
-.emotion-29 {
+.emotion-27 {
   line-height: 32px;
   font-size: 0;
 }
 
-.emotion-29 svg {
+.emotion-27 svg {
   width: 75%;
   height: 75%;
   margin: 12.5%;
 }
 
-.emotion-29 path {
+.emotion-27 path {
   fill: #F1F8FC;
 }
 
-.emotion-30 {
+.emotion-28 {
   box-sizing: border-box;
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -8774,16 +8755,16 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-30 {
+  .emotion-28 {
     padding-bottom: 0.75rem;
   }
 }
 
-.emotion-31 {
+.emotion-29 {
   position: relative;
 }
 
-.emotion-32 {
+.emotion-30 {
   color: #121212;
   box-sizing: border-box;
   border-top: 1px solid #DCDCDC;
@@ -8797,7 +8778,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 375px) {
-  .emotion-32 {
+  .emotion-30 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 1.75rem;
     line-height: 1.15;
@@ -8806,7 +8787,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-32 {
+  .emotion-30 {
     font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
     font-size: 2.125rem;
     line-height: 1.15;
@@ -8814,7 +8795,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   }
 }
 
-.emotion-33 {
+.emotion-31 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.15;
@@ -8831,28 +8812,28 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-33 {
+  .emotion-31 {
     width: 526px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-33 {
+  .emotion-31 {
     width: 545px;
   }
 }
 
-.emotion-33 p,
-.emotion-33 ul {
+.emotion-31 p,
+.emotion-31 ul {
   padding-top: 0.25rem;
   margin: 0;
 }
 
-.emotion-33 address {
+.emotion-31 address {
   font-style: normal;
 }
 
-.emotion-33 svg {
+.emotion-31 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -8862,15 +8843,15 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   height: 1.875rem;
 }
 
-.emotion-33 svg circle {
+.emotion-31 svg circle {
   stroke: #0084C6;
 }
 
-.emotion-33 svg path {
+.emotion-31 svg path {
   fill: #0084C6;
 }
 
-.emotion-34 {
+.emotion-32 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8880,23 +8861,23 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   flex-direction: column;
 }
 
-.emotion-35 {
+.emotion-33 {
   box-sizing: border-box;
 }
 
 @media (min-width: 740px) {
-  .emotion-35 {
+  .emotion-33 {
     width: 539px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-35 {
+  .emotion-33 {
     width: 558px;
   }
 }
 
-.emotion-36 {
+.emotion-34 {
   background-image: repeating-linear-gradient(
   		to bottom,
   		#DCDCDC,
@@ -8912,7 +8893,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   height: calc(0.25rem * 3 + 1px);
 }
 
-.emotion-37 {
+.emotion-35 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -8926,7 +8907,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   margin: 0;
 }
 
-.emotion-37 svg {
+.emotion-35 svg {
   -webkit-flex: 0 0 1.875rem;
   -ms-flex: 0 0 1.875rem;
   flex: 0 0 1.875rem;
@@ -8935,22 +8916,22 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   height: 1.875rem;
 }
 
-.emotion-37 svg circle {
+.emotion-35 svg circle {
   stroke: #0084C6;
 }
 
-.emotion-37 svg path {
+.emotion-35 svg path {
   fill: #0084C6;
 }
 
 @media (min-width: 740px) {
-  .emotion-37 {
+  .emotion-35 {
     min-height: 2.25rem;
     padding-bottom: 2.25rem;
   }
 }
 
-.emotion-38 {
+.emotion-36 {
   color: #0084C6;
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
@@ -8959,14 +8940,14 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   font-style: normal;
 }
 
-.emotion-39 {
+.emotion-37 {
   font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
   font-size: 1.0625rem;
   line-height: 1.35;
   color: #121212;
 }
 
-.emotion-40 {
+.emotion-38 {
   background: none;
   border: none;
   padding: 0;
@@ -8974,66 +8955,66 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-41 {
+  .emotion-39 {
     width: 526px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-41 {
+  .emotion-39 {
     width: 545px;
   }
 }
 
 @media (min-width: 740px) {
-  .emotion-41 {
+  .emotion-39 {
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
 @media (min-width: 740px) {
-  .emotion-41 {
+  .emotion-39 {
     margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
-  .emotion-41 {
+  .emotion-39 {
     margin-left: 144px;
   }
 }
 
 @media (min-width: 1300px) {
-  .emotion-41 {
+  .emotion-39 {
     margin-left: 312px;
   }
 }
 
-.emotion-42 {
+.emotion-40 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
 
-.emotion-42 iframe {
+.emotion-40 iframe {
   width: 100%;
   border: none;
 }
 
-.emotion-42 figcaption {
+.emotion-40 figcaption {
   background: #FFFFFF;
   padding-bottom: 0.75rem;
 }
 
 @media (min-width: 740px) {
-  .emotion-42 {
+  .emotion-40 {
     padding-top: 0;
     padding-bottom: 0;
   }
 
-  .emotion-42 p {
+  .emotion-40 p {
     margin: 0;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
@@ -9041,24 +9022,24 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-42 {
+  .emotion-40 {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.emotion-43 {
+.emotion-41 {
   margin: 1rem 0;
   width: 100%;
 }
 
 @media (min-width: 660px) {
-  .emotion-43 {
+  .emotion-41 {
     width: 620px;
   }
 }
 
-.emotion-44 {
+.emotion-42 {
   width: 100%;
   height: calc(100% * 0.6666081768731357);
   background-color: #F6F6F6;
@@ -9067,19 +9048,19 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-44 {
+  .emotion-42 {
     width: 620px;
     height: calc(620px * 0.6666081768731357);
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-44 {
+  .emotion-42 {
     background-color: #333333;
   }
 }
 
-.emotion-45 {
+.emotion-43 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -9088,16 +9069,23 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   color: #767676;
 }
 
-.emotion-46 {
+.emotion-44 {
   fill: #0084C6;
   height: 0.8em;
   padding-right: 0.25rem;
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-46 {
+  .emotion-44 {
     fill: #00B2FF;
   }
+}
+
+.emotion-45 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 .emotion-47 {
@@ -9108,13 +9096,6 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 .emotion-49 {
-  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.emotion-51 {
   width: 100%;
   height: calc(100% * 0.6666666666666666);
   background-color: #F6F6F6;
@@ -9123,14 +9104,14 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-51 {
+  .emotion-49 {
     width: 620px;
     height: calc(620px * 0.6666666666666666);
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .emotion-51 {
+  .emotion-49 {
     background-color: #333333;
   }
 }
@@ -9160,53 +9141,47 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
               <section
                 className="emotion-7"
               >
-                <h2
-                  className="emotion-8"
-                >
-                  Scores
-                </h2>
-                <div
-                  className="emotion-9"
-                >
-                  <div
-                    className="emotion-10"
+                <div>
+                  <nav
+                    className="emotion-8"
                   >
-                    <nav
-                      className="emotion-11"
-                    >
-                      Premier League
-                    </nav>
-                  </div>
+                    Premier League
+                  </nav>
+                  <address
+                    className="emotion-9"
+                  >
+                    The King Power Stadium
+                  </address>
                 </div>
                 <div
-                  className="emotion-12"
+                  className="emotion-10"
                 >
                   <section
-                    className="emotion-13"
+                    className="emotion-11"
                   >
                     <div
-                      className="emotion-14"
+                      className="emotion-12"
                     >
                       <div
-                        className="emotion-15"
+                        className="emotion-13"
                       >
                         <span
-                          className="emotion-16"
+                          className="emotion-14"
                         >
                           2
                         </span>
                       </div>
                     </div>
                     <div
-                      className="emotion-17"
+                      className="emotion-15"
                     >
                       <h3
-                        className="emotion-18"
+                        className="emotion-16"
                       >
                         Leicester
                       </h3>
                       <ul
-                        className="emotion-19"
+                        className="emotion-17"
                       >
                         <li>
                           Castagne
@@ -9226,31 +9201,31 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
                     </div>
                   </section>
                   <section
-                    className="emotion-20"
+                    className="emotion-18"
                   >
                     <div
-                      className="emotion-21"
+                      className="emotion-19"
                     >
                       <div
-                        className="emotion-15"
+                        className="emotion-13"
                       >
                         <span
-                          className="emotion-16"
+                          className="emotion-14"
                         >
                           1
                         </span>
                       </div>
                     </div>
                     <div
-                      className="emotion-24"
+                      className="emotion-22"
                     >
                       <h3
-                        className="emotion-18"
+                        className="emotion-16"
                       >
                         Crystal Palace
                       </h3>
                       <ul
-                        className="emotion-26"
+                        className="emotion-24"
                       >
                         <li>
                           Zaha
@@ -9277,18 +9252,18 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
               />
               <img
                 alt="image"
-                className="js-launch-slideshow js-main-image emotion-27"
+                className="js-launch-slideshow js-main-image emotion-25"
                 data-ratio={0.6}
                 src="https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f"
               />
             </picture>
             <figcaption
-              className="emotion-28"
+              className="emotion-26"
             >
               <details>
                 <summary>
                   <span
-                    className="emotion-29"
+                    className="emotion-27"
                   >
                     <svg
                       viewBox="0 0 30 30"
@@ -9317,24 +9292,24 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             </figcaption>
           </figure>
           <nav
-            className="emotion-30"
+            className="emotion-28"
           >
             Sport 
           </nav>
           <div
-            className="emotion-31"
+            className="emotion-29"
           >
             <h1
-              className="emotion-32"
+              className="emotion-30"
             >
               Reclaimed lakes and giant airports: how Mexico City might have looked
             </h1>
           </div>
           <div
-            className="emotion-33"
+            className="emotion-31"
           >
             <div
-              className="emotion-34"
+              className="emotion-32"
             >
               <p>
                 The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects
@@ -9342,23 +9317,23 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             </div>
           </div>
           <div
-            className="emotion-35"
+            className="emotion-33"
           >
             <div
-              className="emotion-36"
+              className="emotion-34"
             />
           </div>
           <div
-            className="emotion-37"
+            className="emotion-35"
           >
             <address>
               <span
-                className="emotion-38"
+                className="emotion-36"
               >
                 Jane Smith
               </span>
               <span
-                className="emotion-39"
+                className="emotion-37"
               >
                  Editor of things
               </span>
@@ -9368,7 +9343,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
               role="button"
             >
               <button
-                className="emotion-40"
+                className="emotion-38"
                 onClick={[Function]}
               >
                 <svg
@@ -9392,13 +9367,13 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
       </section>
     </div>
     <div
-      className="emotion-41"
+      className="emotion-39"
     >
       <section
-        className="body-content emotion-42"
+        className="body-content emotion-40"
       >
         <figure
-          className="emotion-43"
+          className="emotion-41"
         >
           <picture>
             <source
@@ -9412,7 +9387,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
             <img
               alt="Washington, DC, US Subcommittee chair Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol, during a House Judiciary subcommittee on Crime, Terrorism, and Homeland Security hearing"
-              className="js-launch-slideshow emotion-44"
+              className="js-launch-slideshow emotion-42"
               data-caption="<strong>Washington DC, US</strong> <br><br>Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol during a House judiciary subcommittee hearing"
               data-credit="Photograph: Al Drago/Getty Images"
               data-ratio={0.6666081768731357}
@@ -9420,10 +9395,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
           </picture>
           <figcaption
-            className="emotion-45"
+            className="emotion-43"
           >
             <svg
-              className="emotion-46"
+              className="emotion-44"
               viewBox="0 0 10 9"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -9432,17 +9407,17 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
               />
             </svg>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               Washington DC, US
             </span>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol during a House judiciary subcommittee hearing
             </span>
             <span
-              className="emotion-49"
+              className="emotion-47"
             >
                
               Photograph: Al Drago/Getty Images
@@ -9450,7 +9425,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
           </figcaption>
         </figure>
         <figure
-          className="emotion-43"
+          className="emotion-41"
         >
           <picture>
             <source
@@ -9464,7 +9439,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
             <img
               alt="Prayagraj, India A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers, during Magh Mela festival"
-              className="js-launch-slideshow emotion-51"
+              className="js-launch-slideshow emotion-49"
               data-caption="<strong>Prayagraj, India</strong> <br><br>A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers"
               data-credit="Photograph: Rajesh Kumar Singh/AP"
               data-ratio={0.6666666666666666}
@@ -9472,10 +9447,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
           </picture>
           <figcaption
-            className="emotion-45"
+            className="emotion-43"
           >
             <svg
-              className="emotion-46"
+              className="emotion-44"
               viewBox="0 0 10 9"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -9484,17 +9459,17 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
               />
             </svg>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               Prayagraj, India
             </span>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers
             </span>
             <span
-              className="emotion-49"
+              className="emotion-47"
             >
                
               Photograph: Rajesh Kumar Singh/AP
@@ -9502,7 +9477,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
           </figcaption>
         </figure>
         <figure
-          className="emotion-43"
+          className="emotion-41"
         >
           <picture>
             <source
@@ -9516,7 +9491,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
             <img
               alt="Hua Hin, Thailand A bird flies over the abandoned sculpture of a Buddhist monk in Cha-am outside Hua Hin, south of Bangkok"
-              className="js-launch-slideshow emotion-51"
+              className="js-launch-slideshow emotion-49"
               data-caption="<strong>Hua Hin, Thailand <br><br></strong>A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok"
               data-credit="Photograph: Mladen Antonov/AFP/Getty Images"
               data-ratio={0.6666666666666666}
@@ -9524,10 +9499,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
           </picture>
           <figcaption
-            className="emotion-45"
+            className="emotion-43"
           >
             <svg
-              className="emotion-46"
+              className="emotion-44"
               viewBox="0 0 10 9"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -9536,17 +9511,17 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
               />
             </svg>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               Hua Hin, Thailand
             </span>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok
             </span>
             <span
-              className="emotion-49"
+              className="emotion-47"
             >
                
               Photograph: Mladen Antonov/AFP/Getty Images
@@ -9554,7 +9529,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
           </figcaption>
         </figure>
         <figure
-          className="emotion-43"
+          className="emotion-41"
         >
           <picture>
             <source
@@ -9568,7 +9543,7 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
             <img
               alt="Mulhouse, France A polar bear cub makes its first steps outside, in an enclosure at the Zoological and Botanical park in eastern France. The cub was born in November 2020"
-              className="js-launch-slideshow emotion-51"
+              className="js-launch-slideshow emotion-49"
               data-caption="<strong>Mulhouse, France</strong> <br><br>A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park"
               data-credit="Photograph: Sébastien Bozon/AFP/Getty Images"
               data-ratio={0.6666666666666666}
@@ -9576,10 +9551,10 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
             />
           </picture>
           <figcaption
-            className="emotion-45"
+            className="emotion-43"
           >
             <svg
-              className="emotion-46"
+              className="emotion-44"
               viewBox="0 0 10 9"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -9588,17 +9563,17 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
               />
             </svg>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               Mulhouse, France
             </span>
             <span
-              className="emotion-47"
+              className="emotion-45"
             >
               A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park
             </span>
             <span
-              className="emotion-49"
+              className="emotion-47"
             >
                
               Photograph: Sébastien Bozon/AFP/Getty Images
@@ -12189,41 +12164,22 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 .emotion-1 {
-  text-indent: -10000px;
-  position: absolute;
-  margin: 0;
-}
-
-.emotion-2 {
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
-
-@media (min-width: 660px) {
-  .emotion-2 {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-.emotion-3 {
-  grid-column: 2;
-}
-
-@media (min-width: 660px) {
-  .emotion-3 {
-    grid-column: 1;
-  }
-}
-
-.emotion-4 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 1.0625rem;
   line-height: 1.5;
   font-weight: 700;
 }
 
+.emotion-2 {
+  font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+}
+
 @media (min-width: 660px) {
-  .emotion-5 {
+  .emotion-3 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -12231,7 +12187,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
   }
 }
 
-.emotion-6 {
+.emotion-4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12249,7 +12205,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-6 {
+  .emotion-4 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -12270,12 +12226,12 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-6 {
+  .emotion-4 {
     border-right: 1px dotted #000000;
   }
 }
 
-.emotion-7 {
+.emotion-5 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
@@ -12283,7 +12239,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
   margin-right: 0.75rem;
 }
 
-.emotion-8 {
+.emotion-6 {
   border: 1px solid #000000;
   border-radius: 100%;
   display: block;
@@ -12295,17 +12251,17 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-8 {
+  .emotion-6 {
     margin-top: 0.5rem;
   }
 }
 
-.emotion-9 {
+.emotion-7 {
   position: relative;
   top: 7%;
 }
 
-.emotion-11 {
+.emotion-9 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 1.25rem;
   line-height: 1.15;
@@ -12313,7 +12269,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
   margin: 0;
 }
 
-.emotion-12 {
+.emotion-10 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -12324,12 +12280,12 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-12 {
+  .emotion-10 {
     grid-column: 1;
   }
 }
 
-.emotion-13 {
+.emotion-11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12347,7 +12303,7 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-13 {
+  .emotion-11 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -12367,12 +12323,12 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 740px) {
-  .emotion-13 {
+  .emotion-11 {
     border-right: 1px dotted #000000;
   }
 }
 
-.emotion-14 {
+.emotion-12 {
   font-family: GH Guardian Headline,Guardian Egyptian Web,Georgia,serif;
   font-size: 2.625rem;
   line-height: 1.15;
@@ -12381,18 +12337,18 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 }
 
 @media (min-width: 660px) {
-  .emotion-14 {
+  .emotion-12 {
     margin-left: 0.75rem;
   }
 }
 
 @media (min-width: 660px) {
-  .emotion-17 {
+  .emotion-15 {
     margin-left: 0.75rem;
   }
 }
 
-.emotion-19 {
+.emotion-17 {
   font-family: GuardianTextSans,Guardian Text Sans Web,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
   font-size: 0.9375rem;
   line-height: 1.5;
@@ -12405,82 +12361,76 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 <section
   className="emotion-0"
 >
-  <h2
-    className="emotion-1"
-  >
-    Scores
-  </h2>
-  <div
-    className="emotion-2"
-  >
-    <div
-      className="emotion-3"
+  <div>
+    <nav
+      className="emotion-1"
     >
-      <nav
-        className="emotion-4"
-      >
-        Premier League
-      </nav>
-    </div>
+      Premier League
+    </nav>
+    <address
+      className="emotion-2"
+    >
+      Elland road
+    </address>
   </div>
   <div
-    className="emotion-5"
+    className="emotion-3"
   >
     <section
-      className="emotion-6"
+      className="emotion-4"
     >
       <div
-        className="emotion-7"
+        className="emotion-5"
       >
         <div
-          className="emotion-8"
+          className="emotion-6"
         >
           <span
-            className="emotion-9"
+            className="emotion-7"
           >
             0
           </span>
         </div>
       </div>
       <div
-        className="emotion-10"
+        className="emotion-8"
       >
         <h3
-          className="emotion-11"
+          className="emotion-9"
         >
           Arsenal
         </h3>
         <ul
-          className="emotion-12"
+          className="emotion-10"
         />
       </div>
     </section>
     <section
-      className="emotion-13"
+      className="emotion-11"
     >
       <div
-        className="emotion-14"
+        className="emotion-12"
       >
         <div
-          className="emotion-8"
+          className="emotion-6"
         >
           <span
-            className="emotion-9"
+            className="emotion-7"
           >
             2
           </span>
         </div>
       </div>
       <div
-        className="emotion-17"
+        className="emotion-15"
       >
         <h3
-          className="emotion-11"
+          className="emotion-9"
         >
           Man City
         </h3>
         <ul
-          className="emotion-19"
+          className="emotion-17"
         >
           <li>
             Sterling
