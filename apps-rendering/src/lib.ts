@@ -7,6 +7,7 @@ import {
 	map,
 	none,
 	ok,
+	OptionKind,
 	ResultKind,
 	some,
 	withDefault,
@@ -116,6 +117,24 @@ const resultMap3 = <A, B, C, D>(f: (a: A, b: B, c: C) => D) => <E>(
 	return ok(f(resultA.value, resultB.value, resultC.value));
 };
 
+const optionMap3 = <A, B, C, D>(f: (a: A, b: B, c: C) => D) => (
+	optA: Option<A>,
+	optB: Option<B>,
+	optC: Option<C>,
+): Option<D> => {
+	if (
+		optA.kind === OptionKind.Some &&
+		optB.kind === OptionKind.Some &&
+		optC.kind === OptionKind.Some
+	) {
+		return some(f(optA.value, optB.value, optC.value));
+	}
+	return none;
+};
+
+const resultToNullable = <E, A>(result: Result<E, A>): A | undefined =>
+	result.kind === ResultKind.Ok ? result.value : undefined;
+
 const resultMap2 = <A, B, C>(f: (a: A, b: B) => C) => <E>(
 	resultA: Result<E, A>,
 ) => (resultB: Result<E, B>): Result<E, C> => {
@@ -148,8 +167,10 @@ export {
 	handleErrors,
 	index,
 	resultFromNullable,
+	optionMap3,
 	parseIntOpt,
 	resultMap2,
 	resultMap3,
+	resultToNullable,
 	fold,
 };

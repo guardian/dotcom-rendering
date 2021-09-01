@@ -1,66 +1,146 @@
 import type { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
+import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
+import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import { err, none, ok, OptionKind, ResultKind, some } from '@guardian/types';
+import {
+	err,
+	fromNullable,
+	map2,
+	none,
+	map as optMap,
+	resultAndThen,
+	some,
+} from '@guardian/types';
 import type { Option, Result } from '@guardian/types';
 import { padZero } from 'date';
+import { fold, pipe } from 'lib';
 import fetch from 'node-fetch';
 import type { Response } from 'node-fetch';
+import type { Parser } from 'parser';
+import {
+	arrayParser,
+	fieldParser,
+	map3,
+	map6,
+	map7,
+	numberParser,
+	oneOf,
+	parse,
+	stringParser,
+	succeed,
+} from 'parser';
 
 type Teams = [string, string];
 
-const getFootballSelector = (
-	date: Option<Date>,
-	teamA: Option<string>,
-	teamB: Option<string>,
-): Option<string> => {
-	if (
-		date.kind === OptionKind.Some &&
-		teamA.kind === OptionKind.Some &&
-		teamB.kind === OptionKind.Some
-	) {
-		// MAPI sorts these by string value
-		const teams =
-			teamA.value < teamB.value
-				? [teamA.value, teamB.value]
-				: [teamB.value, teamA.value];
+const getFootballSelector = (date: Date, [teamA, teamB]: Teams): string => {
+	// MAPI sorts these by string value
+	const teams = teamA < teamB ? [teamA, teamB] : [teamB, teamA];
 
-		const d = date.value;
-		const year = d.getUTCFullYear();
-		const month = padZero(d.getUTCMonth() + 1);
-		const day = padZero(d.getUTCDate());
+	const d = date;
+	const year = d.getUTCFullYear();
+	const month = padZero(d.getUTCMonth() + 1);
+	const day = padZero(d.getUTCDate());
 
-		return some(`${year}-${month}-${day}_${teams[0]}_${teams[1]}`);
-	}
-
-	return none;
+	return `${year}-${month}-${day}_${teams[0]}_${teams[1]}`;
 };
 
-const getFootballEndpoint = (selectorId: Option<string>): Option<string> => {
-	if (selectorId.kind === OptionKind.Some) {
-		return some(
-			`https://mobile.guardianapis.com/sport/football/matches?selector=${selectorId.value}`,
-		);
-	}
-	return none;
-};
+const getFootballEndpoint = (selectorId: string): string =>
+	`https://mobile.guardianapis.com/sport/football/matches?selector=${selectorId}`;
 
-type FootballResponse = Record<string, FootballContent>;
+const makeScorer = (
+	player: string,
+	timeInMinutes: number,
+	additionalInfo: undefined | string,
+): Scorer => ({
+	player,
+	timeInMinutes,
+	additionalInfo,
+});
 
-interface FootballError {
-	errorMessage: string;
-}
+const makeFootballTeam = (
+	id: string,
+	name: string,
+	shortCode: string,
+	crestUri: string,
+	score: number,
+	scorers: Scorer[],
+): FootballTeam => ({
+	id,
+	name,
+	shortCode,
+	crestUri,
+	score,
+	scorers,
+});
+
+const makeFootballContent = (
+	id: string,
+	status: string,
+	kickOff: string,
+	competitionDisplayName: string,
+	homeTeam: FootballTeam,
+	awayTeam: FootballTeam,
+	venue: string | undefined,
+): FootballContent => ({
+	id,
+	status,
+	kickOff,
+	competitionDisplayName,
+	homeTeam,
+	awayTeam,
+	venue,
+});
+
+const scorerParser: Parser<Scorer> = map3(makeScorer)(
+	fieldParser('player', stringParser),
+	fieldParser('timeInMinutes', numberParser),
+	oneOf([fieldParser('additionalInfo', stringParser), succeed(undefined)]),
+);
+
+const footballTeamParser: Parser<FootballTeam> = map6(makeFootballTeam)(
+	fieldParser('id', stringParser),
+	fieldParser('name', stringParser),
+	fieldParser('shortCode', stringParser),
+	fieldParser('crestUri', stringParser),
+	fieldParser('score', numberParser),
+	oneOf([fieldParser('scorers', arrayParser(scorerParser)), succeed([])]),
+);
+
+const footballContentParser: Parser<FootballContent> = map7(
+	makeFootballContent,
+)(
+	fieldParser('id', stringParser),
+	fieldParser('status', stringParser),
+	fieldParser('kickOff', stringParser),
+	fieldParser('competitionDisplayName', stringParser),
+	fieldParser('homeTeam', footballTeamParser),
+	fieldParser('awayTeam', footballTeamParser),
+	oneOf([fieldParser('venue', stringParser), succeed(undefined)]),
+);
+
+const footballContentParserFor = (
+	selectorId: string,
+): Parser<FootballContent> => fieldParser(selectorId, footballContentParser);
+
+const footballErrorParser: Parser<string> = fieldParser(
+	'errorMessage',
+	stringParser,
+);
 
 const parseFootballResponse = async (
 	response: Response,
 	selectorId: string,
 ): Promise<Result<string, FootballContent>> => {
 	if (response.status === 200) {
-		const json = (await response.json()) as FootballResponse;
-		return ok(json[selectorId]);
+		const parser = footballContentParserFor(selectorId);
+		return pipe(await response.json(), parse(parser));
 	} else if (response.status === 400) {
-		const json = (await response.json()) as FootballError;
-		return err(json.errorMessage);
+		return pipe(
+			await response.json(),
+			parse(footballErrorParser),
+			resultAndThen<string, string, FootballContent>(err),
+		);
 	} else {
 		return err('Problem accessing PA API');
 	}
@@ -90,44 +170,31 @@ const teamsFromTags = (tags: Tag[]): Option<Teams> => {
 
 const getFootballContent = async (
 	content: Content,
-): Promise<FootballContent | undefined> => {
+): Promise<Result<string, FootballContent>> => {
 	const teams = teamsFromTags(content.tags);
 
-	if (teams.kind === OptionKind.Some) {
-		const currentTeams = teams.value;
-		const teamA = some(currentTeams[0]);
-		const teamB = some(currentTeams[1]);
+	const makeDate = (s: string): Date => new Date(s);
 
-		const webPublicationDate = content.webPublicationDate?.iso8601;
+	const date = pipe(
+		content.webPublicationDate?.iso8601,
+		fromNullable,
+		optMap(makeDate),
+	);
 
-		if (webPublicationDate) {
-			const date = some(new Date(webPublicationDate));
+	const selectorId = map2(getFootballSelector)(date)(teams);
 
-			const selectorId = getFootballSelector(date, teamA, teamB);
+	return fold(async (selectorIdValue: string) => {
+		const footballEndpoint = getFootballEndpoint(selectorIdValue);
 
-			if (selectorId.kind === OptionKind.Some) {
-				const footballEndpoint = getFootballEndpoint(selectorId);
+		const response = await fetch(footballEndpoint);
 
-				if (footballEndpoint.kind === OptionKind.Some) {
-					const response = await fetch(footballEndpoint.value);
+		const footballContent = await parseFootballResponse(
+			response,
+			selectorIdValue,
+		);
 
-					const footballContent = await parseFootballResponse(
-						response,
-						selectorId.value,
-					);
-
-					if (footballContent.kind === ResultKind.Ok) {
-						return footballContent.value;
-					}
-					return undefined;
-				}
-				return undefined;
-			}
-			return undefined;
-		}
-		return undefined;
-	}
-	return undefined;
+		return footballContent;
+	}, Promise.resolve(err('Could not get selectorId')))(selectorId);
 };
 
 export { getFootballContent };
