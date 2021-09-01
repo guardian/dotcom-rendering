@@ -11,6 +11,7 @@ import FootballScores from './index';
 const Default: FC = () => (
 	<FootballScores
 		league={text('League', 'Premier League')}
+		stadium="Elland road"
 		homeTeam={{
 			id: '1006',
 			name: 'Arsenal',
