@@ -45,10 +45,12 @@ enum Size {
 	empty = '2,2',
 }
 
+export const labelHeight = 24;
+
 const adSlotLabelStyles = css`
 	${textSans.xxsmall()};
 	position: relative;
-	height: 24px;
+	height: ${labelHeight}px;
 	background-color: ${neutral[97]};
 	padding: 0 8px;
 	border-top: 1px solid ${border.secondary};
@@ -359,14 +361,12 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			);
 		}
 		case 'top-above-nav': {
-			const padding = space[4] + 2; // 18px - currently being reviewed
 			const adSlotAboveNav = css`
 				position: relative;
 				margin: 0 auto;
-				min-height: ${250 + padding}px;
-				padding-bottom: ${padding}px;
+				min-height: 90px;
 				text-align: left;
-				display: table;
+				display: block;
 				width: 728px;
 			`;
 			return (
