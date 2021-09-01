@@ -8435,14 +8435,14 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 @media (min-width: 740px) {
   .emotion-7 {
-    width: 531px;
+    width: 527px;
     padding-right: 0;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-7 {
-    width: 550px;
+    width: 546px;
   }
 }
 
@@ -8549,6 +8549,13 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
   height: 1.5em;
   position: relative;
   text-align: center;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-15 {
+    margin-top: 0.5rem;
+  }
 }
 
 .emotion-16 {
@@ -12170,14 +12177,14 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
 
 @media (min-width: 740px) {
   .emotion-0 {
-    width: 531px;
+    width: 527px;
     padding-right: 0;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-0 {
-    width: 550px;
+    width: 546px;
   }
 }
 
@@ -12284,6 +12291,13 @@ exports[`Storyshots Editions/FootballScores Default 1`] = `
   height: 1.5em;
   position: relative;
   text-align: center;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 660px) {
+  .emotion-8 {
+    margin-top: 0.5rem;
+  }
 }
 
 .emotion-9 {
