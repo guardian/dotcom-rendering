@@ -16,13 +16,12 @@ import { isPicture } from 'item';
 import type { FC, ReactElement } from 'react';
 import {
 	articleMarginStyles,
+	articlePaddingStyles,
 	headerBackgroundColour,
 	interviewBackgroundColour,
 	sidePadding,
-	tabletArticleMargin,
 	tabletContentWidth,
 	tabletImmersiveWidth,
-	wideArticleMargin,
 	wideContentWidth,
 	wideImmersiveWidth,
 } from '../styles';
@@ -42,13 +41,7 @@ const headerStyles = css`
 
 const galleryInnerHeaderStyles = css`
 	${sidePadding}
-	${from.tablet} {
-		padding-left: ${tabletArticleMargin}px;
-	}
-
-	${from.desktop} {
-		padding-left: ${wideArticleMargin}px;
-	}
+	${articlePaddingStyles}
 `;
 
 const galleryHeaderStyles = css`
@@ -70,6 +63,10 @@ const galleryLinesStyles = css`
 	${from.desktop} {
 		margin-left: 0;
 	}
+
+	${from.wide} {
+		margin-left: 0;
+	}
 `;
 
 const galleryHeaderBorderStyles = css`
@@ -88,14 +85,7 @@ const interviewStyles = (item: Item): SerializedStyles => {
 	const backgroundColour = interviewBackgroundColour(item);
 
 	return css`
-		${from.tablet} {
-			padding-left: ${tabletArticleMargin}px;
-		}
-
-		${from.desktop} {
-			padding-left: ${wideArticleMargin}px;
-		}
-
+		${articlePaddingStyles}
 		background-color: ${backgroundColour};
 	`;
 };
@@ -111,15 +101,14 @@ const immersiveHeadlineStyles = (item: Item): SerializedStyles => {
 
 		${from.tablet} {
 			margin-top: -4.625rem;
-			padding-left: ${tabletArticleMargin}px;
 			width: ${tabletImmersiveWidth}px;
 		}
 
 		${from.desktop} {
-			padding-left: ${wideArticleMargin}px;
 			width: ${wideImmersiveWidth}px;
 		}
 
+		${articlePaddingStyles}
 		background-color: ${backgroundColour};
 	`;
 };
@@ -129,12 +118,10 @@ const immersiveStandfirstStyles = css`
 	padding-right: ${remSpace[3]};
 
 	${from.tablet} {
-		padding-left: ${tabletArticleMargin}px;
+		padding: 0;
 	}
 
-	${from.desktop} {
-		padding-left: ${wideArticleMargin}px;
-	}
+	${articleMarginStyles}
 `;
 
 const linesBorderStyles = css`
@@ -238,8 +225,8 @@ const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 		<div css={immersiveStandfirstStyles}>
 			<Standfirst item={item} />
 			<Lines />
+			<Byline item={item} />
 		</div>
-		<Byline item={item} />
 	</header>
 );
 

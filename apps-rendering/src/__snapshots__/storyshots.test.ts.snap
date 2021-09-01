@@ -289,13 +289,19 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -717,13 +723,19 @@ exports[`Storyshots Editions/Article Analysis 1`] = `
 
 @media (min-width: 740px) {
   .emotion-20 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-20 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-20 {
+    margin-left: 312px;
   }
 }
 
@@ -1136,13 +1148,19 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 
 @media (min-width: 740px) {
   .emotion-5 {
-    padding-left: 24px;
+    padding-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-5 {
     padding-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-5 {
+    padding-left: 312px;
   }
 }
 
@@ -1312,6 +1330,12 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 }
 
 @media (min-width: 980px) {
+  .emotion-11 {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1300px) {
   .emotion-11 {
     margin-left: 0;
   }
@@ -1489,13 +1513,19 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 details[open] {
-    padding-left: 1.5rem;
+    padding-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-19 details[open] {
-    padding-left: 9rem;
+    padding-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-19 details[open] {
+    padding-left: 312px;
   }
 }
 
@@ -1545,13 +1575,19 @@ exports[`Storyshots Editions/Article Cartoon 1`] = `
 
 @media (min-width: 740px) {
   .emotion-21 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-21 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-21 {
+    margin-left: 312px;
   }
 }
 
@@ -1804,13 +1840,19 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -2245,13 +2287,19 @@ exports[`Storyshots Editions/Article Comment 1`] = `
 
 @media (min-width: 740px) {
   .emotion-22 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-22 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-22 {
+    margin-left: 312px;
   }
 }
 
@@ -2701,13 +2749,19 @@ exports[`Storyshots Editions/Article Correction 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -2975,13 +3029,19 @@ exports[`Storyshots Editions/Article Correction 1`] = `
 
 @media (min-width: 740px) {
   .emotion-14 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-14 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-14 {
+    margin-left: 312px;
   }
 }
 
@@ -3354,13 +3414,19 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -3704,13 +3770,19 @@ exports[`Storyshots Editions/Article Default 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-19 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-19 {
+    margin-left: 312px;
   }
 }
 
@@ -4125,13 +4197,19 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -4492,13 +4570,19 @@ exports[`Storyshots Editions/Article Editorial 1`] = `
 
 @media (min-width: 740px) {
   .emotion-20 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-20 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-20 {
+    margin-left: 312px;
   }
 }
 
@@ -4918,13 +5002,19 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -5268,13 +5358,19 @@ exports[`Storyshots Editions/Article Feature 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-19 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-19 {
+    margin-left: 312px;
   }
 }
 
@@ -5761,13 +5857,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-7 details[open] {
-    padding-left: 1.5rem;
+    padding-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-7 details[open] {
-    padding-left: 9rem;
+    padding-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-7 details[open] {
+    padding-left: 312px;
   }
 }
 
@@ -5800,13 +5902,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-9 {
-    padding-left: 24px;
+    padding-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-9 {
     padding-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-9 {
+    padding-left: 312px;
   }
 }
 
@@ -5981,6 +6089,12 @@ width:@media (min-width: 320px) {
   }
 }
 
+@media (min-width: 1300px) {
+  .emotion-15 {
+    margin-left: 0;
+  }
+}
+
 .emotion-16 {
   background-image: repeating-linear-gradient(
   		to bottom,
@@ -6099,13 +6213,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-21 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-21 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-21 {
+    margin-left: 312px;
   }
 }
 
@@ -6675,13 +6795,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-6 details[open] {
-    padding-left: 1.5rem;
+    padding-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-6 details[open] {
-    padding-left: 9rem;
+    padding-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-6 details[open] {
+    padding-left: 312px;
   }
 }
 
@@ -6706,13 +6832,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-8 {
-    padding-left: 24px;
+    padding-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-8 {
     padding-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-8 {
+    padding-left: 312px;
   }
 }
 
@@ -6897,13 +7029,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-15 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-15 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-15 {
+    margin-left: 312px;
   }
 }
 
@@ -6973,16 +7111,27 @@ width:@media (min-width: 320px) {
 @media (min-width: 740px) {
   .emotion-17 {
     box-sizing: border-box;
-    margin-left: 1.5rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
+@media (min-width: 740px) {
+  .emotion-17 {
+    margin-left: 48px;
+  }
+}
+
 @media (min-width: 980px) {
   .emotion-17 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-17 {
+    margin-left: 312px;
   }
 }
 
@@ -7042,13 +7191,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-21 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-21 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-21 {
+    margin-left: 312px;
   }
 }
 
@@ -7472,13 +7627,19 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -7799,13 +7960,19 @@ exports[`Storyshots Editions/Article Letter 1`] = `
 
 @media (min-width: 740px) {
   .emotion-17 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-17 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-17 {
+    margin-left: 312px;
   }
 }
 
@@ -8209,13 +8376,19 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -8814,13 +8987,19 @@ exports[`Storyshots Editions/Article Match Report 1`] = `
 
 @media (min-width: 740px) {
   .emotion-41 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-41 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-41 {
+    margin-left: 312px;
   }
 }
 
@@ -9464,13 +9643,19 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -9850,13 +10035,19 @@ exports[`Storyshots Editions/Article Review 1`] = `
 
 @media (min-width: 740px) {
   .emotion-25 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-25 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-25 {
+    margin-left: 312px;
   }
 }
 
@@ -10345,13 +10536,19 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
 @media (min-width: 740px) {
   .emotion-3 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-3 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-3 {
+    margin-left: 312px;
   }
 }
 
@@ -10708,13 +10905,19 @@ exports[`Storyshots Editions/Article Showcase 1`] = `
 
 @media (min-width: 740px) {
   .emotion-19 {
-    margin-left: 24px;
+    margin-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-19 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-19 {
+    margin-left: 312px;
   }
 }
 
@@ -11649,16 +11852,27 @@ exports[`Storyshots Editions/Byline Interview 1`] = `
 @media (min-width: 740px) {
   .emotion-0 {
     box-sizing: border-box;
-    margin-left: 1.5rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     border-right: 1px solid #DCDCDC;
   }
 }
 
+@media (min-width: 740px) {
+  .emotion-0 {
+    margin-left: 48px;
+  }
+}
+
 @media (min-width: 980px) {
   .emotion-0 {
     margin-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-0 {
+    margin-left: 312px;
   }
 }
 
@@ -12444,13 +12658,19 @@ width:@media (min-width: 320px) {
 
 @media (min-width: 740px) {
   .emotion-2 details[open] {
-    padding-left: 1.5rem;
+    padding-left: 48px;
   }
 }
 
 @media (min-width: 980px) {
   .emotion-2 details[open] {
-    padding-left: 9rem;
+    padding-left: 144px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .emotion-2 details[open] {
+    padding-left: 312px;
   }
 }
 

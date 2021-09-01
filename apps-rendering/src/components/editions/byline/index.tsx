@@ -20,10 +20,10 @@ import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from '../avatar';
 import ShareIcon from '../shareIcon';
 import {
+	articleMarginStyles,
 	articleWidthStyles,
 	borderWidthStyles,
 	tabletImmersiveWidth,
-	wideArticleMargin,
 	wideImmersiveWidth,
 } from '../styles';
 
@@ -35,34 +35,25 @@ const interviewStyles = css`
 
 	${from.tablet} {
 		box-sizing: border-box;
-		margin-left: ${remSpace[6]};
 		padding-left: ${remSpace[3]};
 		padding-right: ${remSpace[3]};
 		border-right: 1px solid ${border.secondary};
 	}
 
-	${from.desktop} {
-		margin-left: ${wideArticleMargin}px;
-	}
+	${articleMarginStyles}
 	${borderWidthStyles}
 	border-bottom: 1px solid ${border.secondary};
 `;
 
 const immersiveStyles = css`
-	padding-left: ${remSpace[3]};
-	padding-right: ${remSpace[3]};
 	box-sizing: border-box;
 	background-color: ${neutral[7]};
 
 	${from.tablet} {
-		padding-left: 0;
-		padding-right: ${remSpace[3]};
-		margin-left: ${remSpace[6]};
 		width: ${tabletImmersiveWidth}px;
 	}
 
 	${from.desktop} {
-		margin-left: ${wideArticleMargin}px;
 		width: ${wideImmersiveWidth}px;
 	}
 `;

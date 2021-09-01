@@ -13,8 +13,9 @@ export const wideContentWidth = 545;
 export const tabletImageWidth = 720;
 export const wideImageWidth = 750;
 
-export const tabletArticleMargin = 24;
-export const wideArticleMargin = 144;
+export const tabletArticleMargin = 48;
+export const desktopArticleMargin = 144;
+export const wideArticleMargin = 312;
 
 const wideBorderWidth = wideContentWidth + 13;
 const tabletBorderWidth = tabletContentWidth + 13;
@@ -58,7 +59,25 @@ export const articleMarginStyles: SerializedStyles = css`
 	}
 
 	${from.desktop} {
+		margin-left: ${desktopArticleMargin}px;
+	}
+
+	${from.wide} {
 		margin-left: ${wideArticleMargin}px;
+	}
+`;
+
+export const articlePaddingStyles: SerializedStyles = css`
+	${from.tablet} {
+		padding-left: ${tabletArticleMargin}px;
+	}
+
+	${from.desktop} {
+		padding-left: ${desktopArticleMargin}px;
+	}
+
+	${from.wide} {
+		padding-left: ${wideArticleMargin}px;
 	}
 `;
 
