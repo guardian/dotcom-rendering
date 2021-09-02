@@ -21,7 +21,7 @@ import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import FootballScores from '../footballScores';
 import Series from '../series';
-import { articleMarginStyles, wideImageWidth } from '../styles';
+import { wideImageWidth } from '../styles';
 import Video from '../video';
 
 // ----- Styles ----- //
@@ -59,20 +59,15 @@ const fullWidthCaptionStyles = css`
 	height: 100%;
 `;
 
-const imageSeriesStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	${articleMarginStyles}
-`;
+const getVideoSeriesStyles = (format: Format): SerializedStyles => {
+	if (format.design === Design.Interview) {
+		return interviewStyles;
+	}
+	return css``;
+};
 
-const videoSeriesStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	z-index: 2;
+const interviewStyles = css`
 	display: none;
-	${articleMarginStyles}
 
 	${from.desktop} {
 		display: block;
@@ -242,11 +237,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						isFullWidthImage={isFullWidthImage(format)}
 					/>
 					<StarRating item={item} />
-					{hasSeriesKicker(format) && (
-						<div css={imageSeriesStyles}>
-							<Series item={item} />
-						</div>
-					)}
+					{hasSeriesKicker(format) && <Series item={item} />}
 				</figure>
 			);
 		} else {
@@ -269,7 +260,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						);
 					})}
 					{hasSeriesKicker(format) && (
-						<div css={videoSeriesStyles}>
+						<div css={getVideoSeriesStyles(format)}>
 							<Series item={item} />
 						</div>
 					)}

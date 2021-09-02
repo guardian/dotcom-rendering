@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { Display, Pillar } from '@guardian/types';
-import { article, review } from 'fixtures/item';
+import { article, interview, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import HeaderMedia from './index';
@@ -64,6 +64,16 @@ const Video = (): ReactElement => (
 	/>
 );
 
+const InterviewVideo = (): ReactElement => (
+	<HeaderMedia
+		item={{
+			...interview,
+			mainMedia: video,
+			theme: selectPillar(Pillar.News),
+		}}
+	/>
+);
+
 // ----- Exports ----- //
 
 export default {
@@ -71,4 +81,4 @@ export default {
 	title: 'Editions/HeaderMedia',
 };
 
-export { Image, FullScreen, WithStarRating, Video };
+export { Image, FullScreen, WithStarRating, Video, InterviewVideo };
