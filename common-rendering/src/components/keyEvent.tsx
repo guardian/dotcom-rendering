@@ -6,6 +6,7 @@ import type { FC } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { palette, remSpace } from "@guardian/src-foundations";
 import { SvgChevronUpSingle } from "@guardian/src-icons";
+import { Format, Pillar } from "@guardian/types";
 
 // ----- Component ----- //
 
@@ -60,11 +61,26 @@ const copyStyles: SerializedStyles = css`
 	margin-left: ${remSpace[3]};
 `;
 
-const textStyles: SerializedStyles = css`
+const getTextColor = (format: Format) => {
+	switch (format.theme) {
+		case Pillar.Sport:
+			return palette.sport[300];
+		case Pillar.Culture:
+			return palette.culture[300];
+		case Pillar.Lifestyle:
+			return palette.lifestyle[300];
+		case Pillar.Opinion:
+			return palette.opinion[300];
+		default:
+			return palette.news[300];
+	}
+};
+
+const textStyles = (format: Format): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
 
 	a {
-		color: ${palette.news[300]};
+		color: ${getTextColor(format)};
 		text-decoration: none;
 	}
 `;
@@ -82,18 +98,20 @@ export interface Event {
 
 interface KeyEventProps {
 	events: Event[];
+	format: Format;
 }
 
 interface ListItemProps {
 	event: Event;
+	format: Format;
 }
 
-const ListItem: FC<ListItemProps> = ({ event }) => {
+const ListItem: FC<ListItemProps> = ({ event, format }) => {
 	return (
 		<li css={listItemStyles}>
 			<div css={copyStyles}>
 				<div css={timeStyles}>{event.time}</div>
-				<div css={textStyles}>
+				<div css={textStyles(format)}>
 					<a href={event.url}>{event.text}</a>
 				</div>
 			</div>
@@ -101,7 +119,7 @@ const ListItem: FC<ListItemProps> = ({ event }) => {
 	);
 };
 
-const KeyEvent: FC<KeyEventProps> = ({ events }) => {
+const KeyEvent: FC<KeyEventProps> = ({ events, format }) => {
 	return (
 		<>
 			<div css={titleRowStyles}>
@@ -110,7 +128,7 @@ const KeyEvent: FC<KeyEventProps> = ({ events }) => {
 			</div>
 			<ul css={listStyles}>
 				{events.map((event) => (
-					<ListItem event={event} />
+					<ListItem event={event} format={format} />
 				))}
 			</ul>
 		</>

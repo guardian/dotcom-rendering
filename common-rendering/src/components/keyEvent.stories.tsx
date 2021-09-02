@@ -3,8 +3,24 @@
 import type { FC } from "react";
 import type { Event } from "./keyEvent";
 import KeyEvent from "./keyEvent";
+import { Design, Display, Pillar, Special, Theme } from "@guardian/types";
+import { select, withKnobs } from "@storybook/addon-knobs";
 
 // ----- Stories ----- //
+
+const pillarOptions = {
+	News: Pillar.News,
+	Opinion: Pillar.Opinion,
+	Sport: Pillar.Sport,
+	Culture: Pillar.Culture,
+	Lifestyle: Pillar.Lifestyle,
+	Labs: Special.Labs,
+	SpecialReport: Special.SpecialReport,
+};
+
+const selectPillar = (initial: Pillar): Theme => {
+	return select("Pillar", pillarOptions, initial);
+};
 
 const events: Event[] = [
 	{
@@ -57,13 +73,23 @@ const events: Event[] = [
 	},
 ];
 
-const Default: FC = () => <KeyEvent events={events} />;
+const Default: FC = () => (
+	<KeyEvent
+		events={events}
+		format={{
+			theme: selectPillar(Pillar.Opinion),
+			design: Design.Article,
+			display: Display.Standard,
+		}}
+	/>
+);
 
 // ----- Exports ----- //
 
 export default {
 	component: KeyEvent,
 	title: "Common/Components/KeyEvent",
+	decorators: [withKnobs],
 };
 
 export { Default };
