@@ -19,7 +19,6 @@ import { getFormat } from 'item';
 import { index } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
-import Series from '../series';
 import {
 	articleWidthStyles,
 	tabletContentWidth,
@@ -103,13 +102,6 @@ const interviewFontStyles = css`
 	box-shadow: -${remSpace[3]} 0 0 ${neutral[7]},
 		${remSpace[3]} 0 0 ${neutral[7]};
 	display: inline;
-`;
-
-const seriesStyles = css`
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
 `;
 
 // ----- Headline Component Styles ----- //
@@ -235,9 +227,6 @@ const getHeadlineStyles = (
 	return css(sharedStyles, getFontStyles('tight', 'medium'));
 };
 
-const hasSeriesKicker = (format: Format): boolean =>
-	format.display === Display.Immersive || format.design === Design.Interview;
-
 // ----- Component ----- //
 
 interface Props {
@@ -255,11 +244,6 @@ const Headline: FC<Props> = ({ item }) => {
 
 	return (
 		<div css={headlineWrapperStyles}>
-			{hasSeriesKicker(format) && (
-				<div css={seriesStyles}>
-					<Series item={item} />
-				</div>
-			)}
 			<h1 css={getHeadlineStyles(format, kickerColor, hasImage)}>
 				{getDecorativeStyles(item)}
 			</h1>

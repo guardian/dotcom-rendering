@@ -20,7 +20,8 @@ import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import FootballScores from '../footballScores';
-import { wideImageWidth } from '../styles';
+import Series from '../series';
+import { articleMarginStyles, wideImageWidth } from '../styles';
 import Video from '../video';
 
 // ----- Styles ----- //
@@ -56,6 +57,30 @@ const captionStyles = css`
 const fullWidthCaptionStyles = css`
 	width: 100%;
 	height: 100%;
+`;
+
+const imageSeriesStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	${articleMarginStyles}
+`;
+
+const videoSeriesStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	display: none;
+	${articleMarginStyles}
+
+	${from.desktop} {
+		display: block;
+	}
+`;
+
+const videoWrapperStyles = css`
+	position: relative;
 `;
 
 const footballWrapperStyles = (isVideo: boolean): SerializedStyles => css`
@@ -133,6 +158,9 @@ const getStyles = (format: Format, isPicture: boolean): SerializedStyles => {
 const getCaptionStyles = (format: Format): SerializedStyles => {
 	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
 };
+
+const hasSeriesKicker = (format: Format): boolean =>
+	format.display === Display.Immersive || format.design === Design.Interview;
 
 const getImageSizes = (
 	format: Format,
@@ -214,6 +242,11 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						isFullWidthImage={isFullWidthImage(format)}
 					/>
 					<StarRating item={item} />
+					{hasSeriesKicker(format) && (
+						<div css={imageSeriesStyles}>
+							<Series item={item} />
+						</div>
+					)}
 				</figure>
 			);
 		} else {
@@ -222,7 +255,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 			} = media;
 
 			return (
-				<>
+				<div css={videoWrapperStyles}>
 					{maybeRender(matchScores, (scores) => {
 						return (
 							<div css={footballWrapperStyles(true)}>
@@ -235,8 +268,13 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 							</div>
 						);
 					})}
+					{hasSeriesKicker(format) && (
+						<div css={videoSeriesStyles}>
+							<Series item={item} />
+						</div>
+					)}
 					<Video atomId={atomId} title={title} />
-				</>
+				</div>
 			);
 		}
 	});
