@@ -2,13 +2,22 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import type { FC } from "react";
+import { FC, useState } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { palette, remSpace } from "@guardian/src-foundations";
-import { SvgChevronUpSingle } from "@guardian/src-icons";
+import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
 import { Format, Pillar } from "@guardian/types";
+import { from } from "@guardian/src-foundations/mq";
 
 // ----- Component ----- //
+
+const keyEventWrapperStyles: SerializedStyles = css`
+	width: 100%;
+
+	${from.desktop} {
+		width: 220px;
+	}
+`;
 
 const titleRowStyles: SerializedStyles = css`
 	position: relative;
@@ -16,6 +25,15 @@ const titleRowStyles: SerializedStyles = css`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	${from.phablet} {
+		margin: ${remSpace[1]} ${remSpace[5]} 0;
+	}
+
+	${from.desktop} {
+		margin: ${remSpace[1]} 0 0;
+		display: none;
+	}
 
 	svg {
 		height: 30px;
@@ -31,8 +49,31 @@ const titleStyle: SerializedStyles = css`
 	color: ${palette.neutral[7]};
 `;
 
+const authorStyles: SerializedStyles = css`
+	display: none;
+
+	${from.desktop} {
+		display: block;
+	}
+`;
+
+const buttonStyles: SerializedStyles = css`
+	border: 0;
+	background: 0;
+	outline: 0;
+	padding: 0;
+`;
+
 const listStyles: SerializedStyles = css`
 	margin: ${remSpace[3]};
+
+	${from.phablet} {
+		margin: ${remSpace[3]} ${remSpace[5]};
+	}
+
+	${from.desktop} {
+		margin: ${remSpace[1]} 0 0;
+	}
 
 	li::before {
 		content: "";
@@ -120,18 +161,35 @@ const ListItem: FC<ListItemProps> = ({ event, format }) => {
 };
 
 const KeyEvent: FC<KeyEventProps> = ({ events, format }) => {
+	const [showList, setShowList] = useState(true);
+
 	return (
-		<>
+		<div css={keyEventWrapperStyles}>
+			<div css={authorStyles}>
+				Clea Skopeliti (now), Tom Ambrose, Emma Kemp, and Helen Sullivan
+				(earlier)
+			</div>
 			<div css={titleRowStyles}>
 				<div css={titleStyle}>Key Events</div>
-				<SvgChevronUpSingle />
+				<button
+					css={buttonStyles}
+					onClick={() => setShowList(!showList)}
+				>
+					{showList ? (
+						<SvgChevronUpSingle />
+					) : (
+						<SvgChevronDownSingle />
+					)}
+				</button>
 			</div>
-			<ul css={listStyles}>
-				{events.map((event) => (
-					<ListItem event={event} format={format} />
-				))}
-			</ul>
-		</>
+			{showList && (
+				<ul css={listStyles}>
+					{events.map((event) => (
+						<ListItem event={event} format={format} />
+					))}
+				</ul>
+			)}
+		</div>
 	);
 };
 
