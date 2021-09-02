@@ -8,49 +8,49 @@ import KeyEvent from "./keyEvent";
 
 const events: Event[] = [
 	{
-		time: "2021/09/01",
+		time: "1m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2021/09/01",
+		time: "2m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2021/09/01",
+		time: "3m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2021/09/01",
+		time: "5m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2021/09/01",
+		time: "9m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2021/09/01",
+		time: "15m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2021/09/01",
+		time: "20m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2021/09/01",
+		time: "35m ago",
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",

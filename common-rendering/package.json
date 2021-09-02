@@ -5,6 +5,7 @@
     "dependencies": {
         "@emotion/react": "^11.4.1",
         "@guardian/src-foundations": "^3.9.0",
+				"@guardian/src-icons": "^3.8.0",
         "react": "^17.0.2"
     }
 }
