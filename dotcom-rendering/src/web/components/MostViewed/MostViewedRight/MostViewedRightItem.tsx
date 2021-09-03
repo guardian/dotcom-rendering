@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { neutral, border, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
@@ -92,7 +92,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 						</div>
 					)}
 					<div css={headlineWrapperStyles}>
-						{trail.format.design === Design.LiveBlog ? (
+						{trail.format.design === ArticleDesign.LiveBlog ? (
 							<LinkHeadline
 								headlineText={trail.headline}
 								palette={trail.palette}

@@ -1,4 +1,4 @@
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 export const replacePlaceholders = (
@@ -54,9 +54,9 @@ const buildPlaceholders = (data: CAPIType): Map<string, string> => {
  * Surrounding whitespace is ignored. E.g. [[webPublicationDate    ]] is fine.
  */
 export const enhancePlaceholders = (data: CAPIType): CAPIType => {
-	const design: Design = decideDesign(data.format);
+	const design: ArticleDesign = decideDesign(data.format);
 
-	if (design !== Design.Interactive) {
+	if (design !== ArticleDesign.Interactive) {
 		return data;
 	}
 

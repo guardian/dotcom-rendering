@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { CommentCount } from './CommentCount';
 import { decidePalette } from '../lib/decidePalette';
@@ -12,9 +12,9 @@ describe('CommentCount', () => {
 				isCommentable={false}
 				commentCount={123}
 				palette={decidePalette({
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				})}
 				setIsExpanded={() => {}}
 			/>,
@@ -29,9 +29,9 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={123}
 				palette={decidePalette({
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				})}
 				setIsExpanded={() => {}}
 			/>,
@@ -47,9 +47,9 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={92878}
 				palette={decidePalette({
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				})}
 				setIsExpanded={() => {}}
 			/>,
@@ -65,9 +65,9 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={0}
 				palette={decidePalette({
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				})}
 				setIsExpanded={() => {}}
 			/>,
@@ -82,9 +82,9 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				palette={decidePalette({
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				})}
 				setIsExpanded={() => {}}
 			/>,

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
@@ -32,14 +32,14 @@ export const smallAspectRatio = () => {
 				credit=""
 				title=""
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 			/>
 			<p>abc</p>
@@ -60,14 +60,14 @@ export const largeAspectRatio = () => {
 				credit=""
 				title=""
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 			/>
 			<p>abc</p>
@@ -88,14 +88,14 @@ export const verticalAspectRatio = () => {
 				credit=""
 				title=""
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 			/>
 			<p>abc</p>

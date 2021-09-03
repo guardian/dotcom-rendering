@@ -2,16 +2,16 @@ import { css } from '@emotion/react';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
-import { Special } from '@guardian/types';
+import { ArticleSpecial } from '@guardian/libs';
 
 type Props = {
 	text: string;
 	palette: Palette;
-	format: Format;
+	format: ArticleFormat;
 	size: SmallHeadlineSize;
 };
 
-const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
+const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 	const baseStyles = css`
 		display: block;
 		font-style: italic;
@@ -19,7 +19,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
 
 	switch (size) {
 		case 'large': {
-			if (format.theme === Special.Labs) {
+			if (format.theme === ArticleSpecial.Labs) {
 				return css`
 					${baseStyles};
 					${textSans.large()};
@@ -40,7 +40,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
 			`;
 		}
 		case 'medium': {
-			if (format.theme === Special.Labs) {
+			if (format.theme === ArticleSpecial.Labs) {
 				return css`
 					${baseStyles};
 					${textSans.large()};
@@ -60,7 +60,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: Format) => {
 			`;
 		}
 		case 'small': {
-			if (format.theme === Special.Labs) {
+			if (format.theme === ArticleSpecial.Labs) {
 				return css`
 					${baseStyles};
 					${textSans.medium()};

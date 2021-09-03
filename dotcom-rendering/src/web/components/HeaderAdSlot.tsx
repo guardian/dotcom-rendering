@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { neutral, space } from '@guardian/src-foundations';
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 
 import { AdSlot, labelHeight } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';
@@ -33,7 +33,7 @@ const headerAdWrapperHidden = css`
 export const HeaderAdSlot: React.FC<{
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
-	display: Display;
+	display: ArticleDisplay;
 }> = ({ isAdFreeUser, shouldHideAds, display }) => (
 	<div css={headerWrapper}>
 		<Global

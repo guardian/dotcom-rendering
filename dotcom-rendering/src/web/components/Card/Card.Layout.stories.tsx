@@ -1,6 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Design, Display, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Flex } from '@frontend/web/components/Flex';
@@ -35,9 +40,9 @@ export const News = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.News,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[0]}
 							headlineSize="large"
@@ -57,9 +62,9 @@ export const News = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.News,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[1]}
 							headlineSize="large"
@@ -75,9 +80,9 @@ export const News = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Culture,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Culture,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[2]}
 							kickerText={kickers[1]}
@@ -97,9 +102,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Opinion,
-										design: Design.Editorial,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Opinion,
+										design: ArticleDesign.Editorial,
 									}}
 									headlineText={headlines[3]}
 									kickerText="Editorial"
@@ -112,9 +117,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Special.SpecialReport,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticleSpecial.SpecialReport,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[4]}
 									headlineSize="small"
@@ -124,9 +129,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.News,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[5]}
 									headlineSize="small"
@@ -146,9 +151,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Sport,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[6]}
 									headlineSize="small"
@@ -160,9 +165,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.News,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[7]}
 									headlineSize="small"
@@ -173,9 +178,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.News,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[8]}
 									headlineSize="small"
@@ -186,9 +191,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.News,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[9]}
 									headlineSize="small"
@@ -199,9 +204,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Lifestyle,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Lifestyle,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[10]}
 									headlineSize="small"
@@ -212,9 +217,9 @@ export const News = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.News,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.News,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[11]}
 									headlineSize="small"
@@ -245,9 +250,9 @@ export const InDepth = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Sport,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[6]}
 									headlineSize="medium"
@@ -261,9 +266,9 @@ export const InDepth = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Sport,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[6]}
 									headlineSize="small"
@@ -278,9 +283,9 @@ export const InDepth = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Sport,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[6]}
 									headlineSize="small"
@@ -294,9 +299,9 @@ export const InDepth = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Sport,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[2]}
 									headlineSize="small"
@@ -310,9 +315,9 @@ export const InDepth = () => (
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
-										display: Display.Standard,
-										theme: Pillar.Sport,
-										design: Design.Article,
+										display: ArticleDisplay.Standard,
+										theme: ArticlePillar.Sport,
+										design: ArticleDesign.Standard,
 									}}
 									headlineText={headlines[7]}
 									headlineSize="small"
@@ -333,9 +338,9 @@ export const InDepth = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Opinion,
-								design: Design.Comment,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Opinion,
+								design: ArticleDesign.Comment,
 							}}
 							headlineText={headlines[7]}
 							headlineSize="large"
@@ -365,9 +370,9 @@ export const Related = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Sport,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[7]}
 							headlineSize="medium"
@@ -386,9 +391,9 @@ export const Related = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.DeadBlog,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Sport,
+								design: ArticleDesign.DeadBlog,
 							}}
 							headlineText={headlines[8]}
 							headlineSize="medium"
@@ -408,9 +413,9 @@ export const Related = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Special.SpecialReport,
-								design: Design.Comment,
+								display: ArticleDisplay.Standard,
+								theme: ArticleSpecial.SpecialReport,
+								design: ArticleDesign.Comment,
 							}}
 							headlineText={headlines[8]}
 							headlineSize="medium"
@@ -426,9 +431,9 @@ export const Related = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.News,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[9]}
 							headlineSize="small"
@@ -445,9 +450,9 @@ export const Related = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Sport,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[10]}
 							headlineSize="small"
@@ -464,9 +469,9 @@ export const Related = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Culture,
-								design: Design.Interview,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Culture,
+								design: ArticleDesign.Interview,
 							}}
 							headlineText={headlines[1]}
 							headlineSize="small"
@@ -483,9 +488,9 @@ export const Related = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Lifestyle,
-								design: Design.Feature,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Lifestyle,
+								design: ArticleDesign.Feature,
 							}}
 							headlineText={headlines[3]}
 							headlineSize="small"
@@ -510,9 +515,9 @@ export const Spotlight = () => (
 				<Card
 					linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 					format={{
-						display: Display.Standard,
-						theme: Pillar.Sport,
-						design: Design.Feature,
+						display: ArticleDisplay.Standard,
+						theme: ArticlePillar.Sport,
+						design: ArticleDesign.Feature,
 					}}
 					headlineText={headlines[11]}
 					headlineSize="large"
@@ -540,9 +545,9 @@ export const Quad = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Opinion,
-								design: Design.Comment,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Opinion,
+								design: ArticleDesign.Comment,
 							}}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -567,9 +572,9 @@ export const Quad = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Special.SpecialReport,
-								design: Design.LiveBlog,
+								display: ArticleDisplay.Standard,
+								theme: ArticleSpecial.SpecialReport,
+								design: ArticleDesign.LiveBlog,
 							}}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -590,9 +595,9 @@ export const Quad = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.News,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -613,9 +618,9 @@ export const Quad = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.News,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -649,9 +654,9 @@ export const Media = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Culture,
-								design: Design.Media,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Culture,
+								design: ArticleDesign.Media,
 							}}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -671,9 +676,9 @@ export const Media = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.News,
-								design: Design.Media,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.News,
+								design: ArticleDesign.Media,
 							}}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -694,9 +699,9 @@ export const Media = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Pillar.Sport,
-								design: Design.Media,
+								display: ArticleDisplay.Standard,
+								theme: ArticlePillar.Sport,
+								design: ArticleDesign.Media,
 							}}
 							headlineText={headlines[11]}
 							headlineSize="medium"
@@ -790,9 +795,9 @@ export const Labs = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticleSpecial.Labs,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[12]}
 							headlineSize="medium"
@@ -810,9 +815,9 @@ export const Labs = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticleSpecial.Labs,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[14]}
 							headlineSize="medium"
@@ -830,9 +835,9 @@ export const Labs = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticleSpecial.Labs,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[13]}
 							headlineSize="medium"
@@ -850,9 +855,9 @@ export const Labs = () => (
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 							format={{
-								display: Display.Standard,
-								theme: Special.Labs,
-								design: Design.Article,
+								display: ArticleDisplay.Standard,
+								theme: ArticleSpecial.Labs,
+								design: ArticleDesign.Standard,
 							}}
 							headlineText={headlines[15]}
 							headlineSize="medium"

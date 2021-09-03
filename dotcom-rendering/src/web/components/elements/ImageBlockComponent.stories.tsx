@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { ElementContainer } from '../ElementContainer';
 import { Flex } from '../Flex';
@@ -61,14 +61,14 @@ export const StandardArticle = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -86,14 +86,14 @@ export const Immersive = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'immersive' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -111,14 +111,14 @@ export const Showcase = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'showcase' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -136,14 +136,14 @@ export const Thumbnail = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'thumbnail' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -161,14 +161,14 @@ export const Supporting = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'supporting' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -186,14 +186,14 @@ export const HideCaption = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					hideCaption={true}
 				/>
@@ -212,14 +212,14 @@ export const InlineTitle = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					title="This is the title text"
 					hideCaption={true}
@@ -243,14 +243,14 @@ export const InlineTitleMobile = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					title="This is the title text"
 					hideCaption={true}
@@ -274,14 +274,14 @@ export const ImmersiveTitle = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'immersive' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					title="This is the title text"
 					hideCaption={true}
@@ -301,14 +301,14 @@ export const ShowcaseTitle = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'showcase' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					title="This is the title text"
 					hideCaption={true}
@@ -352,14 +352,14 @@ export const HalfWidth = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -417,14 +417,14 @@ export const HalfWidthMobile = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -482,14 +482,14 @@ export const HalfWidthWide = () => {
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>

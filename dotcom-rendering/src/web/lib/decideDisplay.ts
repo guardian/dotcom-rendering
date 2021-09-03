@@ -1,17 +1,17 @@
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 
-export const decideDisplay = (format: CAPIFormat): Display => {
+export const decideDisplay = (format: CAPIFormat): ArticleDisplay => {
 	const { display } = format;
 	switch (display) {
 		case 'StandardDisplay':
-			return Display.Standard;
+			return ArticleDisplay.Standard;
 		case 'ImmersiveDisplay':
-			return Display.Immersive;
+			return ArticleDisplay.Immersive;
 		case 'ShowcaseDisplay':
-			return Display.Showcase;
+			return ArticleDisplay.Showcase;
 		case 'NumberedListDisplay':
-			return Display.NumberedList;
+			return ArticleDisplay.NumberedList;
 		default:
-			return Display.Standard;
+			return ArticleDisplay.Standard;
 	}
 };

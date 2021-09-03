@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 
-import { Design, Format, Special } from '@guardian/types';
+import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/src-foundations/palette';
 
-const linkStyles = (format: Format, palette: Palette) => {
+const linkStyles = (format: ArticleFormat, palette: Palette) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -37,7 +37,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 		}
 	`;
 
-	if (format.theme === Special.SpecialReport) {
+	if (format.theme === ArticleSpecial.SpecialReport) {
 		return css`
 			${baseLinkStyles};
 			:hover {
@@ -47,9 +47,9 @@ const linkStyles = (format: Format, palette: Palette) => {
 	}
 
 	switch (format.design) {
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return css`
 				${baseLinkStyles};
 				:hover {
@@ -60,8 +60,8 @@ const linkStyles = (format: Format, palette: Palette) => {
 					background-color: #fdf0e8;
 				}
 			`;
-		case Design.Media:
-		case Design.LiveBlog:
+		case ArticleDesign.Media:
+		case ArticleDesign.LiveBlog:
 			return css`
 				${baseLinkStyles};
 				:hover {
@@ -81,7 +81,7 @@ const linkStyles = (format: Format, palette: Palette) => {
 type Props = {
 	children: React.ReactNode;
 	linkTo: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	dataLinkName?: string;
 };

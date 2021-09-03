@@ -7,7 +7,7 @@ import {
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { Format, Special } from '@guardian/types';
+import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
 
@@ -25,7 +25,7 @@ interface Props {
 	contentType: ContentType;
 	url: string;
 	starRating?: number;
-	format: Format;
+	format: ArticleFormat;
 	tags: TagType[];
 	sponsorName: string;
 	contributorImage?: string;
@@ -226,7 +226,7 @@ export const RichLink = ({
 		: false;
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
-	const isLabs = format.theme === Special.Labs;
+	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	return (
 		<div

@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { useApi as useApi_ } from '@root/src/web/lib/useApi';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
@@ -30,9 +30,9 @@ describe('MostViewedFooterData', () => {
 			<MostViewedFooterData
 				sectionName="Section Name"
 				palette={decidePalette({
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
@@ -66,9 +66,9 @@ describe('MostViewedFooterData', () => {
 			<MostViewedFooterData
 				sectionName="Section Name"
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
@@ -99,9 +99,9 @@ describe('MostViewedFooterData', () => {
 			<MostViewedFooterData
 				sectionName="Section Name"
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
@@ -142,9 +142,9 @@ describe('MostViewedFooterData', () => {
 			<MostViewedFooterData
 				sectionName="Section Name"
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
@@ -183,9 +183,9 @@ describe('MostViewedFooterData', () => {
 			<MostViewedFooterData
 				sectionName="Section Name"
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
@@ -201,9 +201,9 @@ describe('MostViewedFooterData', () => {
 			<MostViewedFooterData
 				sectionName="Section Name"
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,

@@ -4,7 +4,7 @@ import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
-import { Display, Pillar, Special } from '@guardian/types';
+import { ArticleDisplay, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 
 import { Card } from './Card';
 import { UL } from './components/UL';
@@ -12,7 +12,7 @@ import { LI } from './components/LI';
 import { images, standfirsts } from './Card.mocks';
 
 export const Format = (
-	format: Format,
+	format: ArticleFormat,
 	title: string,
 	starRating?: number,
 ) => () => (
@@ -26,10 +26,10 @@ export const Format = (
 					<LI padSides={true} percentage="25%">
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
-							format={{ ...format, theme: Pillar.News }}
+							format={{ ...format, theme: ArticlePillar.News }}
 							headlineText="News"
 							standfirst={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 									? ''
 									: standfirsts[0]
 							}
@@ -41,7 +41,7 @@ export const Format = (
 							showClock={true}
 							commentCount={99}
 							isFullCardImage={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 							}
 							starRating={starRating}
 						/>
@@ -54,10 +54,10 @@ export const Format = (
 					>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
-							format={{ ...format, theme: Pillar.Culture }}
+							format={{ ...format, theme: ArticlePillar.Culture }}
 							headlineText="Culture"
 							standfirst={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 									? ''
 									: standfirsts[0]
 							}
@@ -69,7 +69,7 @@ export const Format = (
 							showClock={true}
 							commentCount={99}
 							isFullCardImage={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 							}
 							starRating={starRating}
 						/>
@@ -82,10 +82,10 @@ export const Format = (
 					>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
-							format={{ ...format, theme: Pillar.Sport }}
+							format={{ ...format, theme: ArticlePillar.Sport }}
 							headlineText="Sport"
 							standfirst={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 									? ''
 									: standfirsts[0]
 							}
@@ -97,7 +97,7 @@ export const Format = (
 							showClock={true}
 							commentCount={99}
 							isFullCardImage={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 							}
 							starRating={starRating}
 						/>
@@ -110,10 +110,10 @@ export const Format = (
 					>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
-							format={{ ...format, theme: Pillar.Opinion }}
+							format={{ ...format, theme: ArticlePillar.Opinion }}
 							headlineText="Opinion"
 							standfirst={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 									? ''
 									: standfirsts[0]
 							}
@@ -125,7 +125,7 @@ export const Format = (
 							showClock={true}
 							commentCount={99}
 							isFullCardImage={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 							}
 							starRating={starRating}
 						/>
@@ -135,10 +135,13 @@ export const Format = (
 					<LI percentage="33%" padSides={true}>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
-							format={{ ...format, theme: Pillar.Lifestyle }}
+							format={{
+								...format,
+								theme: ArticlePillar.Lifestyle,
+							}}
 							headlineText="Lifestyle"
 							standfirst={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 									? ''
 									: standfirsts[0]
 							}
@@ -150,7 +153,7 @@ export const Format = (
 							showClock={true}
 							commentCount={99}
 							isFullCardImage={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 							}
 							starRating={starRating}
 						/>
@@ -163,10 +166,10 @@ export const Format = (
 					>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
-							format={{ ...format, theme: Special.Labs }}
+							format={{ ...format, theme: ArticleSpecial.Labs }}
 							headlineText="Labs"
 							standfirst={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 									? ''
 									: standfirsts[0]
 							}
@@ -178,7 +181,7 @@ export const Format = (
 							showClock={true}
 							commentCount={99}
 							isFullCardImage={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 							}
 							starRating={starRating}
 						/>
@@ -191,10 +194,13 @@ export const Format = (
 					>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
-							format={{ ...format, theme: Special.SpecialReport }}
+							format={{
+								...format,
+								theme: ArticleSpecial.SpecialReport,
+							}}
 							headlineText="SpecialReport"
 							standfirst={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 									? ''
 									: standfirsts[0]
 							}
@@ -206,7 +212,7 @@ export const Format = (
 							showClock={true}
 							commentCount={99}
 							isFullCardImage={
-								format.display === Display.Immersive
+								format.display === ArticleDisplay.Immersive
 							}
 							starRating={starRating}
 						/>

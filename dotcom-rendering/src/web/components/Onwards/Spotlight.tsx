@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 
 import { Card } from '@frontend/web/components/Card/Card';
 
@@ -17,12 +17,12 @@ export const Spotlight = ({ content }: Props) => (
 		byline={content[0].byline}
 		showByline={content[0].showByline}
 		showQuotes={
-			content[0].format.design === Design.Comment ||
-			content[0].format.design === Design.Letter
+			content[0].format.design === ArticleDesign.Comment ||
+			content[0].format.design === ArticleDesign.Letter
 		}
 		webPublicationDate={content[0].webPublicationDate}
 		kickerText={content[0].kickerText}
-		showPulsingDot={content[0].format.design === Design.LiveBlog}
+		showPulsingDot={content[0].format.design === ArticleDesign.LiveBlog}
 		showSlash={true}
 		showClock={false}
 		imageUrl={content[0].image}

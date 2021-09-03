@@ -1,6 +1,11 @@
 /* eslint-disable jsx-a11y/aria-role */
 
-import { Design, Display, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { Figure } from '@frontend/web/components/Figure';
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
@@ -35,9 +40,9 @@ export const Article = () => {
 					contentType="article"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -59,9 +64,9 @@ export const Network = () => {
 					contentType="network"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -89,9 +94,9 @@ export const SectionStory = () => {
 					contentType="section"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Sport,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Sport,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -116,9 +121,9 @@ export const Inline = () => {
 					contentType="section"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Lifestyle,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Lifestyle,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -143,9 +148,9 @@ export const ImageContent = () => {
 					contentType="imageContent"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -173,9 +178,9 @@ export const Interactive = () => {
 					contentType="interactive"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Lifestyle,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Lifestyle,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -202,9 +207,9 @@ export const Gallery = () => {
 					contentType="gallery"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Special.Labs,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticleSpecial.Labs,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -232,9 +237,9 @@ export const Video = () => {
 					contentType="video"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -263,9 +268,9 @@ export const Audio = () => {
 					contentType="audio"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -287,9 +292,9 @@ export const LiveBlog = () => {
 					contentType="liveBlog"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Sport,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Sport,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -317,9 +322,9 @@ export const Tag = () => {
 					contentType="tag"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -341,9 +346,9 @@ export const Index = () => {
 					contentType="index"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Opinion,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Opinion,
 					}}
 					tags={[
 						{
@@ -372,9 +377,9 @@ export const Crossword = () => {
 					contentType="crossword"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Opinion,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Opinion,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -396,9 +401,9 @@ export const Survey = () => {
 					contentType="survey"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -420,9 +425,9 @@ export const Signup = () => {
 					contentType="signup"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -445,9 +450,9 @@ export const Userid = () => {
 					contentType="userid"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -469,9 +474,9 @@ export const PaidFor = () => {
 					contentType="userid"
 					url=""
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.Culture,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
 					}}
 					tags={[
 						{

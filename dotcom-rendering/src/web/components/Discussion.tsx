@@ -17,13 +17,13 @@ import { Hide } from '@frontend/web/components/Hide';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { useDiscussion } from '@root/src/web/lib/useDiscussion';
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 
 type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	pillar: Theme;
+	pillar: ArticleTheme;
 	palette: Palette;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
@@ -45,7 +45,7 @@ type Props = {
 	// then thank you!
 	beingHydrated?: boolean;
 	// **************************************************************************
-	display: Display;
+	display: ArticleDisplay;
 };
 
 const commentIdFromUrl = () => {
