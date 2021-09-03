@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { space } from '@guardian/src-foundations';
 import { Display } from '@guardian/types';
 
@@ -36,6 +36,19 @@ export const HeaderAdSlot: React.FC<{
 	display: Display;
 }> = ({ isAdFreeUser, shouldHideAds, display }) => (
 	<div css={headerWrapper}>
+		<Global
+			styles={css`
+				/**
+				* Hides the top-above-nav ad-slot container when a
+				* Bonzai TrueSkin (Australian 3rd Party page skin) is shown
+				*/
+				.bz-custom-container
+					~ #bannerandheader
+					> .top-banner-ad-container {
+					display: none;
+				}
+			`}
+		/>
 		<Hide when="below" breakpoint="tablet">
 			<div
 				css={[
