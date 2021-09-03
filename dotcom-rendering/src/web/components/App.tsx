@@ -70,6 +70,7 @@ import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { storage } from '@guardian/libs';
 import {
+	getOphanRecordFunction,
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
@@ -325,14 +326,24 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			});
 
 			onConsentChange((consentState) => {
-				const consentUUID = getCookie('consentUUID')
-				console.log("browserId", browserId);
-				console.log("consentUUID", consentUUID);
-				if (consentState.tcfv2) {
-					console.log("[tcfv2] consent string", consentState?.tcfv2?.tcString);
-				} else {
-					console.log("Not tcfv2")
+				const decideConsentString = () => {
+					if (consentState.tcfv2) {
+						return consentState?.tcfv2?.tcString;
+					}
+					return "undefined";
 				}
+				const consentUUID = getCookie('consentUUID')
+				const consentString = decideConsentString();
+				const event = {
+					component: {
+					  componentType: 'CONSENT',
+					  products: [],
+					  labels:  [consentUUID, consentString],
+					},
+					action: 'CONSENT',
+				}
+				const ophanEventSubmit = getOphanRecordFunction()
+				ophanEventSubmit(event);
 			});
 
 			cmp.init({
