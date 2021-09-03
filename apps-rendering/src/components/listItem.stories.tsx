@@ -23,7 +23,7 @@ const Default: FC = () => (
 
 export default {
 	component: ListItem,
-	title: 'ListItem',
+	title: 'AR/ListItem',
 };
 
 export { Default };

@@ -47,7 +47,7 @@ const Default = (): ReactElement => {
 
 export default {
 	component: ShareIcon,
-	title: 'Editions/ShareIcon',
+	title: 'AR/Editions/ShareIcon',
 	decorators: [withKnobs],
 };
 

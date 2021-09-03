@@ -26,7 +26,7 @@ const Default = (): ReactElement => (
 
 export default {
 	component: GalleryImage,
-	title: 'Editions/GalleryImage',
+	title: 'AR/Editions/GalleryImage',
 	parameters: {
 		backgrounds: {
 			default: 'gallery-template-bg',

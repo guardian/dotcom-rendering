@@ -26,7 +26,7 @@ const NotReview = (): ReactElement => <StarRating item={article} />;
 
 export default {
 	component: StarRating,
-	title: 'Star Rating',
+	title: 'AR/Star Rating',
 	decorators: [withKnobs],
 };
 

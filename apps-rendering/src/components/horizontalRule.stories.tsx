@@ -11,7 +11,7 @@ const Default: FC = () => <HorizontalRule />;
 
 export default {
 	component: HorizontalRule,
-	title: 'HorizontalRule',
+	title: 'AR/HorizontalRule',
 };
 
 export { Default };

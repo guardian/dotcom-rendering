@@ -60,7 +60,7 @@ const Immersive = (): ReactElement => (
 
 export default {
 	component: Series,
-	title: 'Editions/Series',
+	title: 'AR/Editions/Series',
 	decorators: [withKnobs],
 };
 

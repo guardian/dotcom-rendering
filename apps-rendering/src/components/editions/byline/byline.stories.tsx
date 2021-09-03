@@ -161,7 +161,7 @@ const Comment = (): ReactElement => (
 
 export default {
 	component: Byline,
-	title: 'Editions/Byline',
+	title: 'AR/Editions/Byline',
 	decorators: [withKnobs],
 };
 

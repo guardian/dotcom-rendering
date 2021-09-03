@@ -61,7 +61,7 @@ const Labs: FC = () => (
 
 export default {
 	component: Byline,
-	title: 'Byline',
+	title: 'AR/Byline',
 	decorators: [withKnobs],
 };
 

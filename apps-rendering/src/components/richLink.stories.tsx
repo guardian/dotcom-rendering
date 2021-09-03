@@ -37,7 +37,7 @@ const Default: FC = () => (
 
 export default {
 	component: RichLink,
-	title: 'Rich Link',
+	title: 'AR/Rich Link',
 	decorators: [withKnobs],
 };
 
