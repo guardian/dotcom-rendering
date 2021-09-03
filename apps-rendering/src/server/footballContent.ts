@@ -95,7 +95,7 @@ const makeFootballContent = (
 const scorerParser: Parser<Scorer> = map3(makeScorer)(
 	fieldParser('player', stringParser),
 	fieldParser('timeInMinutes', numberParser),
-	oneOf([fieldParser('additionalInfo', stringParser), succeed(undefined)]),
+	oneOf([fieldParser('additionalInfo', stringParser), succeed('')]),
 );
 
 const footballTeamParser: Parser<FootballTeam> = map6(makeFootballTeam)(
@@ -116,7 +116,7 @@ const footballContentParser: Parser<FootballContent> = map7(
 	fieldParser('competitionDisplayName', stringParser),
 	fieldParser('homeTeam', footballTeamParser),
 	fieldParser('awayTeam', footballTeamParser),
-	oneOf([fieldParser('venue', stringParser), succeed(undefined)]),
+	oneOf([fieldParser('venue', stringParser), succeed('')]),
 );
 
 const footballContentParserFor = (
