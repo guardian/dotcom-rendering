@@ -55,6 +55,7 @@ export const HeaderAdSlot: React.FC<{
 					headerAdWrapper,
 					(isAdFreeUser || shouldHideAds) && headerAdWrapperHidden,
 				]}
+				className="top-banner-ad-container"
 			>
 				<AdSlot position="top-above-nav" display={display} />
 			</div>
