@@ -7,7 +7,7 @@ module.exports = {
 	},
 	stories: [
 		"../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)",
-		"../dotcom-rendering/src/**/*.stories.@(tsx)",
+		// "../dotcom-rendering/src/**/*.stories.@(tsx)",
 		"../common-rendering/src/**/*.stories.@(tsx)",
 	],
 	addons: [
@@ -89,7 +89,7 @@ const dcrWebpack = (config) => {
 	fileLoaderRule.exclude = /\.svg$/;
 	rules.push({
 		test: /\.svg$/,
-		use: [ "desvg-loader/react", "svg-loader" ],
+		use: ["desvg-loader/react", "svg-loader"],
 	});
 
 	config.resolve.alias = {
