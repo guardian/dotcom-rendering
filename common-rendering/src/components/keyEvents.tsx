@@ -60,7 +60,7 @@ const listStyles: SerializedStyles = css`
 	margin: ${remSpace[3]};
 
 	${from.phablet} {
-		margin: ${remSpace[3]} ${remSpace[5]};
+		margin: ${remSpace[3]} ${remSpace[5]} 0;
 	}
 
 	${from.desktop} {
