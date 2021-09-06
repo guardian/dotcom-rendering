@@ -1,53 +1,54 @@
 import { css } from '@emotion/react';
+import { ArticleElementRole } from '@guardian/libs';
 import { Button } from '@guardian/src-button';
 import { remSpace } from '@guardian/src-foundations';
 import { background, border } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { SvgCheckmark } from '@guardian/src-icons';
 import type { Option } from '@guardian/types';
-import { OptionKind, Role, withDefault } from '@guardian/types';
+import { OptionKind, withDefault } from '@guardian/types';
 import { fold } from 'lib';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
 export type ClickToViewProps = {
 	children: React.ReactNode;
-	role: Option<Role>;
+	role: Option<ArticleElementRole>;
 	onAccept: Option<() => void>;
 	source: Option<string>;
 	sourceDomain: Option<string>;
 };
 
-const roleTextSize = (role: Role): string => {
+const roleTextSize = (role: ArticleElementRole): string => {
 	switch (role) {
-		case Role.Standard:
-		case Role.Immersive:
-		case Role.Inline:
-		case Role.Showcase: {
+		case ArticleElementRole.Standard:
+		case ArticleElementRole.Immersive:
+		case ArticleElementRole.Inline:
+		case ArticleElementRole.Showcase: {
 			return textSans.medium({ lineHeight: 'regular' });
 		}
-		case Role.HalfWidth:
-		case Role.Supporting:
-		case Role.Thumbnail: {
+		case ArticleElementRole.HalfWidth:
+		case ArticleElementRole.Supporting:
+		case ArticleElementRole.Thumbnail: {
 			return textSans.small({ lineHeight: 'regular' });
 		}
 	}
 };
 
-const roleHeadlineSize = (role: Role): string => {
+const roleHeadlineSize = (role: ArticleElementRole): string => {
 	switch (role) {
-		case Role.Standard:
-		case Role.Immersive:
-		case Role.Inline:
-		case Role.Showcase: {
+		case ArticleElementRole.Standard:
+		case ArticleElementRole.Immersive:
+		case ArticleElementRole.Inline:
+		case ArticleElementRole.Showcase: {
 			return textSans.large({
 				fontWeight: 'bold',
 				lineHeight: 'regular',
 			});
 		}
-		case Role.HalfWidth:
-		case Role.Supporting:
-		case Role.Thumbnail: {
+		case ArticleElementRole.HalfWidth:
+		case ArticleElementRole.Supporting:
+		case ArticleElementRole.Thumbnail: {
 			return textSans.medium({
 				fontWeight: 'bold',
 				lineHeight: 'regular',
@@ -56,34 +57,36 @@ const roleHeadlineSize = (role: Role): string => {
 	}
 };
 
-const roleButtonSize = (role: Role): 'default' | 'small' | 'xsmall' => {
+const roleButtonSize = (
+	role: ArticleElementRole,
+): 'default' | 'small' | 'xsmall' => {
 	switch (role) {
-		case Role.Standard:
-		case Role.Immersive:
-		case Role.Inline:
-		case Role.Showcase: {
+		case ArticleElementRole.Standard:
+		case ArticleElementRole.Immersive:
+		case ArticleElementRole.Inline:
+		case ArticleElementRole.Showcase: {
 			return 'default';
 		}
-		case Role.HalfWidth:
-		case Role.Supporting:
+		case ArticleElementRole.HalfWidth:
+		case ArticleElementRole.Supporting:
 			return 'small';
-		case Role.Thumbnail: {
+		case ArticleElementRole.Thumbnail: {
 			return 'xsmall';
 		}
 	}
 };
 
-const roleButtonText = (role: Role): string => {
+const roleButtonText = (role: ArticleElementRole): string => {
 	switch (role) {
-		case Role.Standard:
-		case Role.Immersive:
-		case Role.Inline:
-		case Role.Showcase:
-		case Role.HalfWidth:
-		case Role.Supporting: {
+		case ArticleElementRole.Standard:
+		case ArticleElementRole.Immersive:
+		case ArticleElementRole.Inline:
+		case ArticleElementRole.Showcase:
+		case ArticleElementRole.HalfWidth:
+		case ArticleElementRole.Supporting: {
 			return 'Allow and continue';
 		}
-		case Role.Thumbnail: {
+		case ArticleElementRole.Thumbnail: {
 			return 'Allow';
 		}
 	}
@@ -105,7 +108,7 @@ export const ClickToView: FC<ClickToViewProps> = ({
 		}
 	};
 
-	const roleWithDefault = withDefault(Role.Inline)(role);
+	const roleWithDefault = withDefault(ArticleElementRole.Inline)(role);
 
 	const textSize = roleTextSize(roleWithDefault);
 

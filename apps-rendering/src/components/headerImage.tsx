@@ -4,10 +4,11 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
-import { Design, Display, some } from '@guardian/types';
+import { some } from '@guardian/types';
 import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
 import type { Image } from 'image';
 import type { FC } from 'react';
@@ -16,13 +17,13 @@ import { wideContentWidth } from 'styles';
 // ----- Subcomponents ----- //
 
 interface CaptionProps {
-	format: Format;
+	format: ArticleFormat;
 	image: Image;
 }
 
 const Caption: FC<CaptionProps> = ({ format, image }: CaptionProps) => {
 	switch (format.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return null;
 		default:
 			return (
@@ -78,12 +79,12 @@ const immersiveImgStyles = css`
 	width: 100vw;
 `;
 
-const getStyles = ({ design, display }: Format): SerializedStyles => {
+const getStyles = ({ design, display }: ArticleFormat): SerializedStyles => {
 	switch (design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return css(styles, liveStyles);
 		default:
-			if (display === Display.Immersive) {
+			if (display === ArticleDisplay.Immersive) {
 				return immersiveStyles;
 			}
 
@@ -91,18 +92,21 @@ const getStyles = ({ design, display }: Format): SerializedStyles => {
 	}
 };
 
-const getImgStyles = (format: Format, image: Image): SerializedStyles => {
+const getImgStyles = (
+	format: ArticleFormat,
+	image: Image,
+): SerializedStyles => {
 	switch (format.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return immersiveImgStyles;
 		default:
 			return imgStyles(image.width, image.height);
 	}
 };
 
-const getSizes = ({ display }: Format, image: Image): Sizes => {
+const getSizes = ({ display }: ArticleFormat, image: Image): Sizes => {
 	switch (display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return {
 				mediaQueries: [],
 				default: `${(100 * image.width) / image.height}vh `,
@@ -118,7 +122,7 @@ const getSizes = ({ display }: Format, image: Image): Sizes => {
 interface Props {
 	image: Image;
 	className?: SerializedStyles;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (

@@ -6,7 +6,8 @@ import { parseCardImage, parseImage, Image } from 'image';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
-import { none, OptionKind, Role, some, withDefault } from '@guardian/types';
+import { none, OptionKind, some, withDefault } from '@guardian/types';
+import { ArticleElementRole } from '@guardian/libs';
 import { ImageElementFields } from '@guardian/content-api-models/v1/imageElementFields';
 import { Context } from 'parserContext';
 import { Asset } from '@guardian/content-api-models/v1/asset';
@@ -32,20 +33,20 @@ const defaultImage: Image = {
 	caption: none,
 	credit: none,
 	nativeCaption: none,
-	role: Role.Standard,
+	role: ArticleElementRole.Standard,
 };
 const roleTestCases = [
 	{
 		role: 'thumbnail',
-		roleEnum: Role.Thumbnail,
+		roleEnum: ArticleElementRole.Thumbnail,
 	},
 	{
 		role: 'halfWidth',
-		roleEnum: Role.HalfWidth,
+		roleEnum: ArticleElementRole.HalfWidth,
 	},
 	{
 		role: 'thumanyThingElsebnail',
-		roleEnum: Role.Standard,
+		roleEnum: ArticleElementRole.Standard,
 	},
 ];
 const expectedSrcset =
@@ -103,7 +104,7 @@ describe('parseImage', () => {
 		expect(actual.caption.kind).toEqual(OptionKind.Some);
 		expect(actual.credit).toEqual(some(imageDataCredit));
 		expect(actual.nativeCaption).toEqual(some(imageData.caption));
-		expect(actual.role).toBe(Role.Standard);
+		expect(actual.role).toBe(ArticleElementRole.Standard);
 	});
 
 	test('returns none given no assets in element', () => {
@@ -233,7 +234,7 @@ describe('parseCardImage', () => {
 			caption: none,
 			credit: none,
 			nativeCaption: none,
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		};
 
 		const parsed = withDefault(defaultImage)(

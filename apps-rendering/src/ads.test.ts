@@ -2,16 +2,21 @@ import { getAdPlaceholderInserter } from './ads';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar, Format, Design, Display } from '@guardian/types';
+import {
+	ArticlePillar,
+	ArticleFormat,
+	ArticleDesign,
+	ArticleDisplay,
+} from '@guardian/libs';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'bodyElement';
 
 const shouldHideAdverts = false;
 const insertAdPlaceholders = getAdPlaceholderInserter(shouldHideAdverts);
-const mockFormat: Format = {
-	theme: Pillar.News,
-	design: Design.Article,
-	display: Display.Standard,
+const mockFormat: ArticleFormat = {
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
 };
 
 const textElement = (nodes: string[]): BodyElement => ({

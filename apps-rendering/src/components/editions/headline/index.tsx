@@ -2,6 +2,8 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import type {
 	FontWeight,
@@ -11,8 +13,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
-import type { Format } from '@guardian/types';
-import { Design, Display, OptionKind } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
 import { editionsHeadlineTextColour } from 'editorialStyles';
 import { MainMediaKind } from 'headerMedia';
 import type { Item } from 'item';
@@ -141,7 +142,7 @@ const getFontStyles = (
 	}
 `;
 
-const getSharedStyles = (format: Format): SerializedStyles => css`
+const getSharedStyles = (format: ArticleFormat): SerializedStyles => css`
 	${editionsHeadlineTextColour(format)}
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
@@ -150,7 +151,7 @@ const getSharedStyles = (format: Format): SerializedStyles => css`
 	margin: 0;
 `;
 
-const getQuoteStyles = (format: Format): SerializedStyles => {
+const getQuoteStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker } = getThemeStyles(format.theme);
 
 	return css`
@@ -174,11 +175,11 @@ const getQuoteStyles = (format: Format): SerializedStyles => {
 const getDecorativeStyles = (item: Item): JSX.Element | string => {
 	const format = getFormat(item);
 
-	if (item.design === Design.Interview) {
+	if (item.design === ArticleDesign.Interview) {
 		return <span css={interviewFontStyles}>{item.headline}</span>;
 	}
 
-	if (item.design === Design.Comment) {
+	if (item.design === ArticleDesign.Comment) {
 		return (
 			<span css={getQuoteStyles(format)}>
 				<SvgQuote />
@@ -190,13 +191,13 @@ const getDecorativeStyles = (item: Item): JSX.Element | string => {
 };
 
 const getHeadlineStyles = (
-	format: Format,
+	format: ArticleFormat,
 	kickerColor: string,
 	hasImage: boolean,
 ): SerializedStyles => {
 	const sharedStyles = getSharedStyles(format);
 
-	if (format.display === Display.Immersive) {
+	if (format.display === ArticleDisplay.Immersive) {
 		return css(
 			sharedStyles,
 			getFontStyles('tight', 'bold'),
@@ -205,7 +206,7 @@ const getHeadlineStyles = (
 	}
 
 	// this needs to come before Display.Showcase
-	if (format.design === Design.Comment) {
+	if (format.design === ArticleDesign.Comment) {
 		return css(
 			sharedStyles,
 			getFontStyles('tight', 'light'),
@@ -214,12 +215,12 @@ const getHeadlineStyles = (
 	}
 
 	// this needs to come before Display.Showcase
-	if (format.design === Design.Letter) {
+	if (format.design === ArticleDesign.Letter) {
 		return css(sharedStyles, getFontStyles('tight', 'light'));
 	}
 
 	// this needs to come before Display.Showcase
-	if (format.design === Design.Interview) {
+	if (format.design === ArticleDesign.Interview) {
 		return css(
 			sharedStyles,
 			getFontStyles('tight', 'bold'),
@@ -227,31 +228,32 @@ const getHeadlineStyles = (
 		);
 	}
 
-	if (format.display === Display.Showcase) {
+	if (format.display === ArticleDisplay.Showcase) {
 		return css(sharedStyles, getFontStyles('tight', 'bold'));
 	}
 
 	switch (format.design) {
-		case Design.Review:
+		case ArticleDesign.Review:
 			return css(sharedStyles, getFontStyles('tight', 'bold'));
-		case Design.Analysis:
+		case ArticleDesign.Analysis:
 			return css(
 				sharedStyles,
 				getFontStyles('regular', 'light'),
 				analysisStyles(kickerColor),
 			);
-		case Design.Media:
+		case ArticleDesign.Media:
 			return css(sharedStyles, galleryStyles);
 	}
 
 	return css(sharedStyles, getFontStyles('tight', 'medium'));
 };
 
-const hasSeriesKicker = (format: Format): boolean =>
-	format.display === Display.Immersive || format.design === Design.Interview;
+const hasSeriesKicker = (format: ArticleFormat): boolean =>
+	format.display === ArticleDisplay.Immersive ||
+	format.design === ArticleDesign.Interview;
 
-const isInterviewHeadline = (format: Format): boolean =>
-	format.design === Design.Interview;
+const isInterviewHeadline = (format: ArticleFormat): boolean =>
+	format.design === ArticleDesign.Interview;
 
 // ----- Component ----- //
 

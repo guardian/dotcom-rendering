@@ -1,17 +1,13 @@
 // ----- Imports ----- //
 
 import {
-	Design,
-	Display,
-	none,
-	OptionKind,
-	Pillar,
-	ResultKind,
-	Role,
-	some,
-	Special,
-	toOption,
-} from '@guardian/types';
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleElementRole,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import { none, OptionKind, ResultKind, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -74,7 +70,7 @@ const image: Image = {
 	alt: some('image'),
 	width: 550,
 	height: 550,
-	role: Role.Standard,
+	role: ArticleElementRole.Standard,
 	caption: none,
 	nativeCaption: none,
 	credit: none,
@@ -110,7 +106,7 @@ const mainMedia: Option<MainMedia> = {
 				kind: OptionKind.Some,
 				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		},
 	},
 };
@@ -148,7 +144,7 @@ const body: Body = [
 				kind: OptionKind.Some,
 				value: 'Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles.',
 			},
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		},
 	},
 	{
@@ -242,8 +238,8 @@ const matchScores: MatchScores = {
 };
 
 const fields = {
-	theme: Pillar.News,
-	display: Display.Standard,
+	theme: ArticlePillar.News,
+	display: ArticleDisplay.Standard,
 	body: body,
 	headline: headline,
 	standfirst: standfirst,
@@ -273,73 +269,73 @@ const fields = {
 };
 
 const article: Item = {
-	design: Design.Article,
+	design: ArticleDesign.Standard,
 	...fields,
 };
 
 const analysis: Item = {
-	design: Design.Analysis,
+	design: ArticleDesign.Analysis,
 	...fields,
 };
 
 const feature: Item = {
-	design: Design.Feature,
+	design: ArticleDesign.Feature,
 	...fields,
 };
 
 const review: Review = {
-	design: Design.Review,
+	design: ArticleDesign.Review,
 	starRating: 4,
 	...fields,
 };
 
 const labs: Item = {
-	design: Design.Article,
+	design: ArticleDesign.Standard,
 	...fields,
-	theme: Special.Labs,
+	theme: ArticleSpecial.Labs,
 };
 
 const comment: Item = {
-	design: Design.Comment,
+	design: ArticleDesign.Comment,
 	...fields,
 };
 
 const letter: Item = {
-	design: Design.Letter,
+	design: ArticleDesign.Letter,
 	...fields,
 };
 
 const editorial: Item = {
-	design: Design.Editorial,
+	design: ArticleDesign.Editorial,
 	...fields,
 };
 
 const interview: Item = {
-	design: Design.Interview,
+	design: ArticleDesign.Interview,
 	...fields,
 };
 
 const media: Item = {
-	design: Design.Media,
+	design: ArticleDesign.Media,
 	...fields,
 	body: galleryBody,
 };
 
 const cartoon: Item = {
-	design: Design.Media,
+	design: ArticleDesign.Media,
 	...fields,
 	body: [],
 };
 
 const matchReport: Item = {
-	design: Design.MatchReport,
+	design: ArticleDesign.MatchReport,
 	football: some(matchScores),
 	...fields,
 	body: galleryBody,
 };
 
 const correction: Item = {
-	design: Design.Correction,
+	design: ArticleDesign.Correction,
 	...fields,
 };
 // ----- Exports ----- //

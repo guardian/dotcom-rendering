@@ -1,7 +1,12 @@
 // ----- Imports ----- //
 import type { Tag } from '@guardian/content-api-models/v1/tag';
+import {
+	ArticleDisplay,
+	ArticleElementRole,
+	ArticlePillar,
+} from '@guardian/libs';
 import { breakpoints } from '@guardian/src-foundations';
-import { Display, none, Pillar, Role, some } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import {
@@ -35,7 +40,7 @@ const image: Image = {
 	alt: some('image'),
 	width: 550,
 	height: 550,
-	role: Role.Immersive,
+	role: ArticleElementRole.Immersive,
 	caption: none,
 	nativeCaption: none,
 	credit: none,
@@ -56,11 +61,11 @@ const hasContributor = (): { contributors: Contributor[] } => {
 	};
 };
 
-const isImmersive = (): { display: Display } => {
+const isImmersive = (): { display: ArticleDisplay } => {
 	return {
 		display: boolean('Immersive', false)
-			? Display.Immersive
-			: Display.Standard,
+			? ArticleDisplay.Immersive
+			: ArticleDisplay.Standard,
 	};
 };
 
@@ -88,7 +93,7 @@ const Default = (): ReactElement => (
 			...article,
 			...isImmersive(),
 			...hasShareIcon(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -101,7 +106,7 @@ const Analysis = (): ReactElement => (
 			...hasShareIcon(),
 
 			tags: [getTag('tone/analysis', 'View from the Guardian ')],
-			theme: selectPillar(Pillar.Lifestyle),
+			theme: selectPillar(ArticlePillar.Lifestyle),
 		}}
 	/>
 );
@@ -114,7 +119,7 @@ const Editorial = (): ReactElement => (
 			...isImmersive(),
 			...hasShareIcon(),
 
-			theme: selectPillar(Pillar.Opinion),
+			theme: selectPillar(ArticlePillar.Opinion),
 		}}
 	/>
 );
@@ -126,7 +131,7 @@ const Feature = (): ReactElement => (
 			...isImmersive(),
 			...hasShareIcon(),
 
-			theme: selectPillar(Pillar.Sport),
+			theme: selectPillar(ArticlePillar.Sport),
 		}}
 	/>
 );
@@ -137,7 +142,7 @@ const Review = (): ReactElement => (
 			...review,
 			...hasShareIcon(),
 
-			theme: selectPillar(Pillar.Culture),
+			theme: selectPillar(ArticlePillar.Culture),
 		}}
 	/>
 );
@@ -148,8 +153,8 @@ const Showcase = (): ReactElement => (
 			...article,
 			...hasShareIcon(),
 
-			display: Display.Showcase,
-			theme: selectPillar(Pillar.News),
+			display: ArticleDisplay.Showcase,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -161,7 +166,7 @@ const Interview = (): ReactElement => (
 			...hasShareIcon(),
 
 			...isImmersive(),
-			theme: selectPillar(Pillar.Sport),
+			theme: selectPillar(ArticlePillar.Sport),
 		}}
 	/>
 );
@@ -173,7 +178,7 @@ const Comment = (): ReactElement => (
 			...hasShareIcon(),
 			...hasContributor(),
 			...isImmersive(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -184,7 +189,7 @@ const Letter = (): ReactElement => (
 			...letter,
 			...hasShareIcon(),
 			tags: [getTag('tone/letters', 'Letters ')],
-			theme: selectPillar(Pillar.Opinion),
+			theme: selectPillar(ArticlePillar.Opinion),
 		}}
 	/>
 );
@@ -199,7 +204,7 @@ const Correction = (): ReactElement => (
 					'Corrections and Clarifications ',
 				),
 			],
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -210,7 +215,7 @@ const MatchReport = (): ReactElement => (
 			...matchReport,
 			...hasShareIcon(),
 			tags: [getTag('tone/sport', 'Sport ')],
-			theme: selectPillar(Pillar.Sport),
+			theme: selectPillar(ArticlePillar.Sport),
 		}}
 	/>
 );
@@ -230,7 +235,7 @@ const Gallery = (): ReactElement => (
 		item={{
 			...media,
 			...hasShareIcon(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );

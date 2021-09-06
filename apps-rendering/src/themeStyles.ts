@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import * as palette from '@guardian/src-foundations/palette';
-import type { Theme } from '@guardian/types';
-import { Pillar, Special } from '@guardian/types';
 
 // ----- Types ----- //
 
@@ -18,11 +18,11 @@ interface ThemeStyles {
 }
 
 type ThemeColours = {
-	[theme in Theme]: ThemeStyles;
+	[theme in ArticleTheme]: ThemeStyles;
 };
 
 export const themeColours: ThemeColours = {
-	[Pillar.News]: {
+	[ArticlePillar.News]: {
 		kicker: palette.news[400],
 		inverted: palette.news[500],
 		liveblogKicker: palette.news[600],
@@ -32,7 +32,7 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.news[800],
 		cameraIconBackground: palette.news[400],
 	},
-	[Pillar.Opinion]: {
+	[ArticlePillar.Opinion]: {
 		kicker: palette.opinion[400],
 		inverted: palette.opinion[500],
 		liveblogKicker: palette.opinion[600],
@@ -42,7 +42,7 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.opinion[800],
 		cameraIconBackground: palette.opinion[400],
 	},
-	[Pillar.Sport]: {
+	[ArticlePillar.Sport]: {
 		kicker: palette.sport[400],
 		inverted: palette.sport[500],
 		liveblogKicker: palette.sport[600],
@@ -52,7 +52,7 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.sport[800],
 		cameraIconBackground: palette.sport[400],
 	},
-	[Pillar.Culture]: {
+	[ArticlePillar.Culture]: {
 		kicker: palette.culture[400],
 		inverted: palette.culture[500],
 		liveblogKicker: palette.culture[600],
@@ -62,7 +62,7 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.culture[800],
 		cameraIconBackground: palette.culture[400],
 	},
-	[Pillar.Lifestyle]: {
+	[ArticlePillar.Lifestyle]: {
 		kicker: palette.lifestyle[400],
 		inverted: palette.lifestyle[500],
 		liveblogKicker: palette.lifestyle[500],
@@ -72,7 +72,7 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.lifestyle[800],
 		cameraIconBackground: palette.lifestyle[400],
 	},
-	[Special.SpecialReport]: {
+	[ArticleSpecial.SpecialReport]: {
 		kicker: palette.specialReport[400],
 		inverted: palette.specialReport[500],
 		liveblogKicker: palette.specialReport[500],
@@ -82,7 +82,7 @@ export const themeColours: ThemeColours = {
 		cameraIcon: palette.specialReport[800],
 		cameraIconBackground: palette.specialReport[400],
 	},
-	[Special.Labs]: {
+	[ArticleSpecial.Labs]: {
 		kicker: palette.specialReport[400],
 		inverted: palette.specialReport[500],
 		liveblogKicker: palette.specialReport[500],
@@ -94,63 +94,64 @@ export const themeColours: ThemeColours = {
 	},
 };
 
-const getThemeStyles = (theme: Theme): ThemeStyles => themeColours[theme];
+const getThemeStyles = (theme: ArticleTheme): ThemeStyles =>
+	themeColours[theme];
 
-function themeFromString(theme: string | undefined): Pillar {
+function themeFromString(theme: string | undefined): ArticlePillar {
 	switch (theme) {
 		case 'pillar/opinion':
-			return Pillar.Opinion;
+			return ArticlePillar.Opinion;
 		case 'pillar/sport':
-			return Pillar.Sport;
+			return ArticlePillar.Sport;
 		case 'pillar/arts':
-			return Pillar.Culture;
+			return ArticlePillar.Culture;
 		case 'pillar/lifestyle':
-			return Pillar.Lifestyle;
+			return ArticlePillar.Lifestyle;
 		case 'pillar/news':
 		default:
-			return Pillar.News;
+			return ArticlePillar.News;
 	}
 }
 
-function themeToPillarString(theme: Theme): string {
+function themeToPillarString(theme: ArticleTheme): string {
 	switch (theme) {
-		case Pillar.Opinion:
+		case ArticlePillar.Opinion:
 			return 'opinion';
-		case Pillar.Sport:
+		case ArticlePillar.Sport:
 			return 'sport';
-		case Pillar.Culture:
+		case ArticlePillar.Culture:
 			return 'culture';
-		case Pillar.Lifestyle:
+		case ArticlePillar.Lifestyle:
 			return 'lifestyle';
-		case Pillar.News:
+		case ArticlePillar.News:
 		default:
 			return 'news';
 	}
 }
 
-function themeToPillar(theme: Theme): Pillar {
+function themeToPillar(theme: ArticleTheme): ArticlePillar {
 	switch (theme) {
-		case Special.SpecialReport:
-		case Special.Labs:
-			return Pillar.News;
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.Labs:
+			return ArticlePillar.News;
 		default:
 			return theme;
 	}
 }
-const stringToPillar = (pillar: string): Pillar => {
+const stringToPillar = (pillar: string): ArticlePillar => {
 	switch (pillar) {
 		case 'news':
-			return Pillar.News;
+			return ArticlePillar.News;
 		case 'opinion':
-			return Pillar.Opinion;
+			return ArticlePillar.Opinion;
 		case 'culture':
-			return Pillar.Culture;
+			return ArticlePillar.Culture;
 		case 'sport':
-			return Pillar.Sport;
+			return ArticlePillar.Sport;
 		case 'lifestyle':
-			return Pillar.Lifestyle;
+			return ArticlePillar.Lifestyle;
 		default:
-			return Pillar.News;
+			return ArticlePillar.News;
 	}
 };
 

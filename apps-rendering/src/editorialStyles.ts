@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Format } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
 import type { Colour } from 'editorialPalette';
 import { background, text } from 'editorialPalette';
 
@@ -27,16 +27,16 @@ const backgroundColour = (light: Colour, dark: Colour): SerializedStyles =>
 		}
 	`;
 
-const headlineTextColour = (format: Format): SerializedStyles =>
+const headlineTextColour = (format: ArticleFormat): SerializedStyles =>
 	textColour(
 		text.headlinePrimary(format),
 		text.headlinePrimaryInverse(format),
 	);
 
-const editionsHeadlineTextColour = (format: Format): SerializedStyles =>
+const editionsHeadlineTextColour = (format: ArticleFormat): SerializedStyles =>
 	textColour(text.headlinePrimary(format));
 
-const headlineBackgroundColour = (format: Format): SerializedStyles =>
+const headlineBackgroundColour = (format: ArticleFormat): SerializedStyles =>
 	backgroundColour(
 		background.headlinePrimary(format),
 		background.headlinePrimaryInverse(format),

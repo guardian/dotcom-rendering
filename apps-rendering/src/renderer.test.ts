@@ -7,22 +7,27 @@ import {
 	transformHref,
 } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar } from '@guardian/types';
+import {
+	ArticleElementRole,
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleFormat,
+	ArticlePillar,
+} from '@guardian/libs';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { Role, none, some } from '@guardian/types';
-import { Design, Display, Format } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode, render as renderDom } from 'react-dom';
 import { EmbedKind } from 'embed';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 
-const mockFormat: Format = {
-	theme: Pillar.News,
-	design: Design.Article,
-	display: Display.Standard,
+const mockFormat: ArticleFormat = {
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
 };
 
 beforeEach(() => {
@@ -45,7 +50,7 @@ const imageElement = (): BodyElement => ({
 	credit: some('credit'),
 	width: 500,
 	height: 500,
-	role: Role.Standard,
+	role: ArticleElementRole.Standard,
 });
 
 const imageElementWithRole = () => ({

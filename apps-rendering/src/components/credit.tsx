@@ -1,10 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format, Option } from '@guardian/types';
-import { Design, map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 
@@ -12,7 +14,7 @@ import type { FC, ReactElement } from 'react';
 
 interface Props {
 	credit: Option<string>;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const mediaStyles = css`
@@ -29,7 +31,7 @@ const Credit: FC<Props> = ({ format, credit }) =>
 		credit,
 		map((cred) => {
 			switch (format.design) {
-				case Design.Media:
+				case ArticleDesign.Media:
 					return <p css={mediaStyles}>{cred}</p>;
 				default:
 					return <span css={defaultStyles}> {cred}</span>;

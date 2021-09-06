@@ -2,10 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Design, Display, map, Special, withDefault } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
@@ -91,24 +92,24 @@ const advertisementFeature = css`
 `;
 
 const getStyles = (item: Item): SerializedStyles => {
-	if (item.display === Display.Immersive) {
-		return item.theme === Special.Labs ? immersiveLabs : immersive;
+	if (item.display === ArticleDisplay.Immersive) {
+		return item.theme === ArticleSpecial.Labs ? immersiveLabs : immersive;
 	}
 
-	if (item.theme === Special.Labs) {
+	if (item.theme === ArticleSpecial.Labs) {
 		return advertisementFeature;
 	}
 
 	switch (item.design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return css(styles, liveblogStyles);
-		case Design.Review:
-		case Design.Feature:
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Review:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return css(styles, thinHeadline);
-		case Design.Media:
+		case ArticleDesign.Media:
 			return media;
 
 		default:
@@ -125,7 +126,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
 	const bylineInStandfirst =
 		item.byline !== '' && standfirst.textContent?.includes(item.byline);
 
-	if (item.display === Display.Immersive && !bylineInStandfirst) {
+	if (item.display === ArticleDisplay.Immersive && !bylineInStandfirst) {
 		return pipe(
 			item.bylineHtml,
 			map((byline) => (

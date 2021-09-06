@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { Design, Display, Pillar } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import { selectPillar } from '../storybookHelpers';
@@ -25,9 +25,9 @@ const Default: FC = () => (
 	<section css={overrideStyle}>
 		<RichLink
 			format={{
-				design: Design.Article,
-				display: Display.Standard,
-				theme: selectPillar(Pillar.News),
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: selectPillar(ArticlePillar.News),
 			}}
 			linkText={linkText()}
 			url={url()}

@@ -1,6 +1,11 @@
 // ----- Imports ----- //
 
-import { Display, none, Pillar, Role, some } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleElementRole,
+	ArticlePillar,
+} from '@guardian/libs';
+import { none, some } from '@guardian/types';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import {
@@ -29,7 +34,7 @@ const image: Image = {
 	alt: some('image'),
 	width: 550,
 	height: 550,
-	role: Role.Immersive,
+	role: ArticleElementRole.Immersive,
 	caption: none,
 	nativeCaption: none,
 	credit: none,
@@ -50,11 +55,11 @@ const hasContributor = (): { contributors: Contributor[] } => {
 	};
 };
 
-const isImmersive = (): { display: Display } => {
+const isImmersive = (): { display: ArticleDisplay } => {
 	return {
 		display: boolean('Immersive', false)
-			? Display.Immersive
-			: Display.Standard,
+			? ArticleDisplay.Immersive
+			: ArticleDisplay.Standard,
 	};
 };
 
@@ -65,7 +70,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			...isImmersive(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -75,7 +80,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			...isImmersive(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -85,7 +90,7 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			...isImmersive(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -94,7 +99,7 @@ const Review = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			theme: selectPillar(Pillar.Culture),
+			theme: selectPillar(ArticlePillar.Culture),
 		}}
 	/>
 );
@@ -104,8 +109,8 @@ const Showcase = (): ReactElement => (
 		item={{
 			...review,
 			...isImmersive(),
-			display: Display.Showcase,
-			theme: selectPillar(Pillar.News),
+			display: ArticleDisplay.Showcase,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -115,7 +120,7 @@ const Interview = (): ReactElement => (
 		item={{
 			...interview,
 			...isImmersive(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -126,7 +131,7 @@ const Comment = (): ReactElement => (
 			...comment,
 			...isImmersive(),
 			...hasContributor(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -135,7 +140,7 @@ const Media = (): ReactElement => (
 	<Headline
 		item={{
 			...media,
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );

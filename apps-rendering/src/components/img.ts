@@ -2,9 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleElementRole } from '@guardian/libs';
 import { neutral } from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types';
-import { Design, Role, withDefault } from '@guardian/types';
+import { withDefault } from '@guardian/types';
 import type { Image } from 'image';
 import { createElement as h } from 'react';
 import type { FC } from 'react';
@@ -16,23 +17,26 @@ interface Props {
 	image: Image;
 	sizes: string;
 	className?: SerializedStyles;
-	format: Format;
+	format: ArticleFormat;
 }
 
-const styles = (role: Role, format: Format): SerializedStyles => {
-	const backgroundColour = (format: Format): string => {
+const styles = (
+	role: ArticleElementRole,
+	format: ArticleFormat,
+): SerializedStyles => {
+	const backgroundColour = (format: ArticleFormat): string => {
 		switch (format.design) {
-			case Design.Media:
+			case ArticleDesign.Media:
 				return neutral[20];
-			case Design.Editorial:
-			case Design.Letter:
-			case Design.Comment:
+			case ArticleDesign.Editorial:
+			case ArticleDesign.Letter:
+			case ArticleDesign.Comment:
 				return neutral[86];
 			default:
 				return neutral[97];
 		}
 	};
-	return role === Role.Thumbnail
+	return role === ArticleElementRole.Thumbnail
 		? css`
 				color: ${neutral[60]};
 		  `

@@ -2,11 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { background, border, neutral } from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types';
-import { Design, Display, partition } from '@guardian/types';
+import { partition } from '@guardian/types';
 import type { Item } from 'item';
 import { isPicture } from 'item';
 import type { FC } from 'react';
@@ -35,9 +36,11 @@ const mainStyles = css`
 	height: 100%;
 `;
 
-const articleWrapperStyles = (item: Format): SerializedStyles => css`
+const articleWrapperStyles = (item: ArticleFormat): SerializedStyles => css`
 	min-height: 100%;
-	background-color: ${item.design === Design.Media ? neutral[7] : 'inherit'};
+	background-color: ${item.design === ArticleDesign.Media
+		? neutral[7]
+		: 'inherit'};
 `;
 
 const articleStyles = css`
@@ -112,7 +115,7 @@ export const galleryWrapperStyles = css`
 	}
 `;
 
-const headerBackgroundStyles = (format: Format): SerializedStyles => css`
+const headerBackgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${headerBackgroundColour(format)};
 `;
 
@@ -120,7 +123,7 @@ const itemStyles = (item: Item): SerializedStyles => {
 	const { kicker } = getThemeStyles(item.theme);
 
 	switch (item.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return css`
 				> p:first-of-type:first-letter,
 				> hr + p:first-letter {
@@ -141,11 +144,11 @@ const itemStyles = (item: Item): SerializedStyles => {
 	}
 };
 
-const getSectionStyles = (item: Format): SerializedStyles[] => {
+const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 	if (
-		item.design === Design.Interview ||
-		item.design === Design.Media ||
-		item.display === Display.Immersive
+		item.design === ArticleDesign.Interview ||
+		item.design === ArticleDesign.Media ||
+		item.display === ArticleDisplay.Immersive
 	) {
 		return [];
 	}
@@ -154,20 +157,20 @@ const getSectionStyles = (item: Format): SerializedStyles[] => {
 
 const Article: FC<Props> = ({ item }) => {
 	if (
-		item.design === Design.Analysis ||
-		item.design === Design.Article ||
-		item.design === Design.Comment ||
-		item.design === Design.Review ||
-		item.design === Design.Interview ||
-		item.design === Design.Feature ||
-		item.design === Design.Media ||
-		item.design === Design.Editorial ||
-		item.design === Design.Letter ||
-		item.design === Design.Quiz ||
-		item.design === Design.Recipe ||
-		item.design === Design.MatchReport ||
-		item.design === Design.Obituary ||
-		item.design === Design.Correction
+		item.design === ArticleDesign.Analysis ||
+		item.design === ArticleDesign.Standard ||
+		item.design === ArticleDesign.Comment ||
+		item.design === ArticleDesign.Review ||
+		item.design === ArticleDesign.Interview ||
+		item.design === ArticleDesign.Feature ||
+		item.design === ArticleDesign.Media ||
+		item.design === ArticleDesign.Editorial ||
+		item.design === ArticleDesign.Letter ||
+		item.design === ArticleDesign.Quiz ||
+		item.design === ArticleDesign.Recipe ||
+		item.design === ArticleDesign.MatchReport ||
+		item.design === ArticleDesign.Obituary ||
+		item.design === ArticleDesign.Correction
 	) {
 		return (
 			<main css={mainStyles}>
@@ -182,7 +185,7 @@ const Article: FC<Props> = ({ item }) => {
 							bodyWrapperStyles,
 							articleStyles,
 							isPicture(item.tags) && extendedBodyStyles,
-							item.design === Design.Media
+							item.design === ArticleDesign.Media
 								? galleryWrapperStyles
 								: null,
 						]}

@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -33,7 +33,7 @@ const styles = (kickerColor: string): SerializedStyles => {
 // ----- Stories ----- //
 
 const Default = (): ReactElement => {
-	const theme = selectPillar(Pillar.News);
+	const theme = selectPillar(ArticlePillar.News);
 	const { kicker } = getThemeStyles(theme);
 
 	return (

@@ -3,8 +3,9 @@
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { Dpr, src, srcsetWithWidths } from '@guardian/image-rendering';
+import { ArticleElementRole } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { fromNullable, map, none, Role } from '@guardian/types';
+import { fromNullable, map, none } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
 import { pipe } from 'lib';
@@ -42,7 +43,7 @@ const tagToContributor =
 				credit: none,
 				caption: none,
 				alt: none,
-				role: Role.Standard,
+				role: ArticleElementRole.Standard,
 				nativeCaption: none,
 			})),
 		),

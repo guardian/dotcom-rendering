@@ -4,10 +4,11 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
-import { Design, Display, none, some } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import HeaderImageCaption, {
 	captionId,
 } from 'components/editions/headerImageCaption';
@@ -70,7 +71,7 @@ const footballWrapperStyles = (isVideo: boolean): SerializedStyles => css`
 
 const getImageStyle = (
 	{ width, height }: Image,
-	format: Format,
+	format: ArticleFormat,
 	isPicture: boolean,
 ): SerializedStyles => {
 	const aspectRatio = width / height;
@@ -121,21 +122,24 @@ const getImageStyle = (
 	`;
 };
 
-const isFullWidthImage = (format: Format): boolean =>
-	format.display === Display.Immersive ||
-	format.design === Design.Interview ||
-	format.design === Design.Media;
+const isFullWidthImage = (format: ArticleFormat): boolean =>
+	format.display === ArticleDisplay.Immersive ||
+	format.design === ArticleDesign.Interview ||
+	format.design === ArticleDesign.Media;
 
-const getStyles = (format: Format, isPicture: boolean): SerializedStyles => {
+const getStyles = (
+	format: ArticleFormat,
+	isPicture: boolean,
+): SerializedStyles => {
 	return isFullWidthImage(format) && !isPicture ? fullWidthStyles : styles;
 };
 
-const getCaptionStyles = (format: Format): SerializedStyles => {
+const getCaptionStyles = (format: ArticleFormat): SerializedStyles => {
 	return isFullWidthImage(format) ? fullWidthCaptionStyles : captionStyles;
 };
 
 const getImageSizes = (
-	format: Format,
+	format: ArticleFormat,
 	image: Image,
 	isPicture: boolean,
 ): Sizes => {

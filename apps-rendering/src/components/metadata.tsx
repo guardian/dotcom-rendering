@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
-import { Design, Display } from '@guardian/types';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
 import CommentCount from 'components/commentCount';
@@ -60,10 +60,10 @@ const Metadata: FC<Props> = (props: Props) => {
 	const { display, design } = props.item;
 
 	if (
-		display === Display.Immersive ||
-		design === Design.Comment ||
-		design === Design.Letter ||
-		design === Design.Editorial
+		display === ArticleDisplay.Immersive ||
+		design === ArticleDesign.Comment ||
+		design === ArticleDesign.Letter ||
+		design === ArticleDesign.Editorial
 	) {
 		return <ShortMetadata {...props} />;
 	}

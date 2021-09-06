@@ -2,10 +2,11 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/image-rendering';
 import { Img } from '@guardian/image-rendering';
+import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format, Option } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
 import { maybeRender, pipe } from 'lib';
@@ -16,12 +17,12 @@ const width = '100%';
 
 type Props = {
 	image: Image;
-	format: Format;
+	format: ArticleFormat;
 };
 
 type CaptionProps = {
 	details: CaptionDetails;
-	format: Format;
+	format: ArticleFormat;
 };
 
 type CaptionDetails = {

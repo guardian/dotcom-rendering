@@ -41,6 +41,7 @@
     "@guardian/discussion-rendering": "^7.0.0",
     "@guardian/image-rendering": "github:guardian/image-rendering#1167f8bc",
     "@guardian/node-riffraff-artifact": "^0.2.2",
+    "@guardian/libs": "^3.2.0",
     "@guardian/renditions": "^0.2.0",
     "@guardian/src-brand": "^3.9.0",
     "@guardian/src-button": "^3.9.0",

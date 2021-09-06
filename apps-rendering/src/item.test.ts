@@ -8,15 +8,13 @@ import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	Design,
-	Display,
 	err,
 	none,
 	ok,
 	resultAndThen,
 	resultMap,
-	Special,
 	toOption,
 	withDefault,
 } from '@guardian/types';
@@ -201,67 +199,67 @@ const getFirstBody = (item: Review | Standard) =>
 describe('fromCapi returns correct Item', () => {
 	test('media', () => {
 		const item = f(contentWithTag('type/audio'));
-		expect(item.design).toBe(Design.Media);
+		expect(item.design).toBe(ArticleDesign.Media);
 	});
 
 	test('review', () => {
 		const item = f(reviewContent);
-		expect(item.design).toBe(Design.Review);
+		expect(item.design).toBe(ArticleDesign.Review);
 	});
 
 	test('analysis', () => {
 		const item = f(contentWithTag('tone/analysis'));
-		expect(item.design).toBe(Design.Analysis);
+		expect(item.design).toBe(ArticleDesign.Analysis);
 	});
 
 	test('comment', () => {
 		const item = f(contentWithTag('tone/comment'));
-		expect(item.design).toBe(Design.Comment);
+		expect(item.design).toBe(ArticleDesign.Comment);
 	});
 
 	test('feature', () => {
 		const item = f(contentWithTag('tone/features'));
-		expect(item.design).toBe(Design.Feature);
+		expect(item.design).toBe(ArticleDesign.Feature);
 	});
 
 	test('live blog', () => {
 		const item = f(contentWithTag('tone/minutebyminute'));
-		expect(item.design).toBe(Design.LiveBlog);
+		expect(item.design).toBe(ArticleDesign.LiveBlog);
 	});
 
 	test('recipe', () => {
 		const item = f(contentWithTag('tone/recipes'));
-		expect(item.design).toBe(Design.Recipe);
+		expect(item.design).toBe(ArticleDesign.Recipe);
 	});
 
 	test('matchreport', () => {
 		const item = f(contentWithTag('tone/matchreports'));
-		expect(item.design).toBe(Design.MatchReport);
+		expect(item.design).toBe(ArticleDesign.MatchReport);
 	});
 
 	test('interview', () => {
 		const item = f(contentWithTag('tone/interview'));
-		expect(item.design).toBe(Design.Interview);
+		expect(item.design).toBe(ArticleDesign.Interview);
 	});
 
 	test('editorial', () => {
 		const item = f(contentWithTag('tone/editorials'));
-		expect(item.design).toBe(Design.Editorial);
+		expect(item.design).toBe(ArticleDesign.Editorial);
 	});
 
 	test('quiz', () => {
 		const item = f(contentWithTag('tone/quizzes'));
-		expect(item.design).toBe(Design.Quiz);
+		expect(item.design).toBe(ArticleDesign.Quiz);
 	});
 
 	test('labs', () => {
 		const item = f(contentWithTag('tone/advertisement-features'));
-		expect(item.theme).toBe(Special.Labs);
+		expect(item.theme).toBe(ArticleSpecial.Labs);
 	});
 
 	test('article', () => {
 		const item = f(articleContent);
-		expect(item.design).toBe(Design.Article);
+		expect(item.design).toBe(ArticleDesign.Standard);
 	});
 });
 
@@ -761,12 +759,12 @@ describe('format', () => {
 	test('Uses immersive display', () => {
 		const item = f(immersive);
 		const format = getFormat(item);
-		expect(format.display).toBe(Display.Immersive);
+		expect(format.display).toBe(ArticleDisplay.Immersive);
 	});
 
 	test('Uses showcase display', () => {
 		const item = f(showcase);
 		const format = getFormat(item);
-		expect(format.display).toBe(Display.Showcase);
+		expect(format.display).toBe(ArticleDisplay.Showcase);
 	});
 });

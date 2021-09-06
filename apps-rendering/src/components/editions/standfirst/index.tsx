@@ -2,6 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
 import type {
 	FontWeight,
@@ -9,8 +11,6 @@ import type {
 } from '@guardian/src-foundations/dist/types/typography/types';
 import { from } from '@guardian/src-foundations/mq';
 import { body, headline } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
-import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
@@ -87,33 +87,36 @@ const textContainerStyles = css`
 	flex-direction: column;
 `;
 
-const getStyles = (format: Format): SerializedStyles => {
+const getStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	// Display.Immersive needs to come before Design.Interview
-	if (format.display === Display.Immersive) {
+	if (format.display === ArticleDisplay.Immersive) {
 		return css(
 			styles(kickerColor),
 			getFontStyles(neutral[100], 'tight', 'bold'),
 		);
 	}
-	if (format.design === Design.Interview) {
+	if (format.design === ArticleDesign.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
-	if (format.design === Design.Analysis || format.design === Design.Letter) {
+	if (
+		format.design === ArticleDesign.Analysis ||
+		format.design === ArticleDesign.Letter
+	) {
 		return css(
 			styles(kickerColor),
 			getFontStyles(neutral[46], 'tight', 'bold'),
 		);
 	}
 	if (
-		format.design === Design.Comment ||
-		format.display === Display.Showcase
+		format.design === ArticleDesign.Comment ||
+		format.display === ArticleDisplay.Showcase
 	) {
 		return css(styles(kickerColor), getFontStyles(neutral[20], 'tight'));
 	}
 
-	if (format.design === Design.Media) {
+	if (format.design === ArticleDesign.Media) {
 		return css(styles(kickerColor), galleryStyles);
 	}
 	return styles(kickerColor);

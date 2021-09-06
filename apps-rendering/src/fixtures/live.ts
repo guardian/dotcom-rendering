@@ -1,15 +1,12 @@
 // ----- Imports ----- //
 
 import {
-	Design,
-	Display,
-	none,
-	OptionKind,
-	Pillar,
-	Role,
-	some,
-	toOption,
-} from '@guardian/types';
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleElementRole,
+	ArticlePillar,
+} from '@guardian/libs';
+import { none, OptionKind, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { MainMedia } from 'headerMedia';
@@ -61,7 +58,7 @@ const mainMedia: Option<MainMedia> = {
 				kind: OptionKind.Some,
 				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		},
 	},
 };
@@ -226,8 +223,8 @@ const tags = [
 ];
 
 const fields = {
-	theme: Pillar.News,
-	display: Display.Standard,
+	theme: ArticlePillar.News,
+	display: ArticleDisplay.Standard,
 	body: [],
 	headline: headline,
 	standfirst: standfirst,
@@ -261,7 +258,7 @@ const fields = {
 };
 
 const live: Liveblog = {
-	design: Design.LiveBlog,
+	design: ArticleDesign.LiveBlog,
 	...fields,
 	blocks: [],
 	totalBodyBlocks: 12,

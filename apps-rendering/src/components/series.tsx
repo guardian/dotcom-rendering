@@ -2,12 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
-import { Design, Display, map, Special, withDefault } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -21,11 +22,12 @@ interface Props {
 	item: Item;
 }
 
-const isDisplayLabs = (format: Format): boolean =>
-	format.theme === Special.Labs;
+const isDisplayLabs = (format: ArticleFormat): boolean =>
+	format.theme === ArticleSpecial.Labs;
 
-const isDesignBlog = (format: Format): boolean =>
-	format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+const isDesignBlog = (format: ArticleFormat): boolean =>
+	format.design === ArticleDesign.LiveBlog ||
+	format.design === ArticleDesign.DeadBlog;
 
 const immersiveStyles = (
 	{ kicker }: ThemeStyles,
@@ -91,11 +93,11 @@ const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
 	${font(isLabs)}
 `;
 
-const getLinkStyles = (format: Format): SerializedStyles => {
+const getLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	const isLabs = isDisplayLabs(format);
 	const isBlog = isDesignBlog(format);
 
-	if (format.display === Display.Immersive) {
+	if (format.display === ArticleDisplay.Immersive) {
 		return immersiveLinkStyles(isLabs);
 	}
 	const themeStyles = getThemeStyles(format.theme);
@@ -103,10 +105,10 @@ const getLinkStyles = (format: Format): SerializedStyles => {
 	return linkStyles(themeStyles, isLabs, isBlog);
 };
 
-const getStyles = (format: Format): SerializedStyles => {
+const getStyles = (format: ArticleFormat): SerializedStyles => {
 	const isLabs = isDisplayLabs(format);
 
-	if (format.display === Display.Immersive) {
+	if (format.display === ArticleDisplay.Immersive) {
 		return immersiveStyles(getThemeStyles(format.theme), isLabs);
 	}
 

@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { Pillar, some } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
+import { some } from '@guardian/types';
 import { date, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -10,7 +11,7 @@ import Dateline from './dateline';
 
 const Default: FC = () => (
 	<Dateline
-		theme={selectPillar(Pillar.Opinion)}
+		theme={selectPillar(ArticlePillar.Opinion)}
 		date={some(
 			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
 		)}

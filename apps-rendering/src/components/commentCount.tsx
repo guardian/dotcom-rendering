@@ -2,11 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format, Option } from '@guardian/types';
-import { Design, map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -14,7 +16,7 @@ import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
-interface Props extends Format {
+interface Props extends ArticleFormat {
 	count: Option<number>;
 	commentable: boolean;
 }
@@ -38,20 +40,29 @@ const bubbleStyles = (colour: string): SerializedStyles => css`
 	fill: ${colour};
 `;
 
-const getStyles = ({ theme, design }: Format): SerializedStyles => {
+const getStyles = ({ theme, design }: ArticleFormat): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
+	if (
+		design === ArticleDesign.LiveBlog ||
+		design === ArticleDesign.DeadBlog
+	) {
 		return styles(neutral[93]);
 	}
 
 	return styles(colours.kicker);
 };
 
-const getBubbleStyles = ({ theme, design }: Format): SerializedStyles => {
+const getBubbleStyles = ({
+	theme,
+	design,
+}: ArticleFormat): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
+	if (
+		design === ArticleDesign.LiveBlog ||
+		design === ArticleDesign.DeadBlog
+	) {
 		return bubbleStyles(neutral[93]);
 	}
 

@@ -2,10 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Option, Theme } from '@guardian/types';
-import { map, Pillar, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { formatDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -15,7 +17,7 @@ import { darkModeCss as darkMode } from 'styles';
 
 interface Props {
 	date: Option<Date>;
-	theme: Theme;
+	theme: ArticleTheme;
 }
 
 const darkStyles = darkMode`
@@ -36,9 +38,9 @@ const commentDatelineStyles = css`
 	${darkStyles}
 `;
 
-const getDatelineStyles = (theme: Theme): SerializedStyles => {
+const getDatelineStyles = (theme: ArticleTheme): SerializedStyles => {
 	switch (theme) {
-		case Pillar.Opinion:
+		case ArticlePillar.Opinion:
 			return commentDatelineStyles;
 		default:
 			return styles;

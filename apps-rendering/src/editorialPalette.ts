@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	background as coreBackground,
 	text as coreText,
@@ -10,8 +12,6 @@ import {
 	opinion,
 	sport,
 } from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types';
-import { Design, Display, Pillar } from '@guardian/types';
 
 // ----- Types ----- //
 
@@ -34,24 +34,27 @@ interface Palette {
 
 // ----- Functions ----- //
 
-const textHeadlinePrimary = (format: Format): Colour => {
+const textHeadlinePrimary = (format: ArticleFormat): Colour => {
 	if (
-		format.display === Display.Immersive ||
-		format.design === Design.Media ||
-		format.design === Design.LiveBlog
+		format.display === ArticleDisplay.Immersive ||
+		format.design === ArticleDesign.Media ||
+		format.design === ArticleDesign.LiveBlog
 	) {
 		return neutral[100];
 	}
 
-	if (format.design === Design.Feature || format.design === Design.Review) {
+	if (
+		format.design === ArticleDesign.Feature ||
+		format.design === ArticleDesign.Review
+	) {
 		switch (format.theme) {
-			case Pillar.Opinion:
+			case ArticlePillar.Opinion:
 				return opinion[300];
-			case Pillar.Sport:
+			case ArticlePillar.Sport:
 				return sport[300];
-			case Pillar.Culture:
+			case ArticlePillar.Culture:
 				return culture[300];
-			case Pillar.Lifestyle:
+			case ArticlePillar.Lifestyle:
 				return lifestyle[300];
 			default:
 				return news[300];
@@ -61,53 +64,53 @@ const textHeadlinePrimary = (format: Format): Colour => {
 	return coreText.primary;
 };
 
-const textHeadlinePrimaryInverse = (_: Format): Colour => neutral[86];
+const textHeadlinePrimaryInverse = (_: ArticleFormat): Colour => neutral[86];
 
-const backgroundHeadlinePrimary = (format: Format): Colour => {
-	if (format.display === Display.Immersive) {
+const backgroundHeadlinePrimary = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
 		return neutral[7];
-	} else if (format.design === Design.LiveBlog) {
+	} else if (format.design === ArticleDesign.LiveBlog) {
 		switch (format.theme) {
-			case Pillar.Culture:
+			case ArticlePillar.Culture:
 				return culture[300];
-			case Pillar.Sport:
+			case ArticlePillar.Sport:
 				return sport[300];
-			case Pillar.Lifestyle:
+			case ArticlePillar.Lifestyle:
 				return lifestyle[300];
-			case Pillar.Opinion:
+			case ArticlePillar.Opinion:
 				return opinion[300];
-			case Pillar.News:
+			case ArticlePillar.News:
 				return news[300];
 			default:
 				return news[300];
 		}
 	} else if (
-		format.design === Design.Comment ||
-		format.design === Design.Letter ||
-		format.design === Design.Editorial
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Letter ||
+		format.design === ArticleDesign.Editorial
 	) {
 		return opinion[800];
-	} else if (format.design === Design.Media) {
+	} else if (format.design === ArticleDesign.Media) {
 		return coreBackground.inverse;
 	}
 
 	return coreBackground.primary;
 };
 
-const backgroundHeadlinePrimaryInverse = (_: Format): Colour =>
+const backgroundHeadlinePrimaryInverse = (_: ArticleFormat): Colour =>
 	coreBackground.inverse;
 
-const borderPrimary = (format: Format): Colour => {
+const borderPrimary = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case Pillar.Opinion:
+		case ArticlePillar.Opinion:
 			return opinion[400];
-		case Pillar.Sport:
+		case ArticlePillar.Sport:
 			return sport[400];
-		case Pillar.Culture:
+		case ArticlePillar.Culture:
 			return culture[400];
-		case Pillar.Lifestyle:
+		case ArticlePillar.Lifestyle:
 			return lifestyle[400];
-		case Pillar.News:
+		case ArticlePillar.News:
 		default:
 			return news[400];
 	}
@@ -132,7 +135,7 @@ const border = {
 	primaryInverse: borderPrimaryInverse,
 };
 
-const palette = (format: Format): Palette => ({
+const palette = (format: ArticleFormat): Palette => ({
 	text: {
 		headlinePrimary: text.headlinePrimary(format),
 		headlinePrimaryInverse: text.headlinePrimaryInverse(format),
