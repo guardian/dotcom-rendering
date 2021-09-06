@@ -9,6 +9,7 @@ import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
 import { Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
 import { getColor, KeyEvent } from "../keyEvent";
+import { Button } from "@guardian/src-button";
 
 // ----- Component ----- //
 
@@ -22,21 +23,17 @@ const keyEventWrapperStyles: SerializedStyles = css`
 
 const titleRowStyles: SerializedStyles = css`
 	position: relative;
-	margin: ${remSpace[1]} ${remSpace[3]} 0;
+	margin: ${remSpace[1]} ${remSpace[1]} 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
-	svg {
-		height: 30px;
-	}
 
 	path {
 		fill: ${palette.neutral[46]};
 	}
 
 	${from.phablet} {
-		margin: ${remSpace[1]} ${remSpace[5]} 0;
+		margin: ${remSpace[1]} ${remSpace[4]} 0;
 	}
 
 	${from.desktop} {
@@ -50,7 +47,6 @@ const titleStyle: SerializedStyles = css`
 `;
 
 const buttonStyles: SerializedStyles = css`
-	border: 0;
 	background: 0;
 	outline: 0;
 	padding: 0;
@@ -103,6 +99,7 @@ const textStyles = (theme: Theme): SerializedStyles => css`
 const timeStyles: SerializedStyles = css`
 	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${palette.neutral[7]};
+	display: block;
 `;
 
 interface KeyEventsProps {
@@ -119,7 +116,7 @@ const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
 	return (
 		<li css={listItemStyles}>
 			<div css={timeTextWrapperStyles}>
-				<div css={timeStyles}>{keyEvent.time}</div>
+				<time css={timeStyles}>{keyEvent.time}</time>
 				<a css={textStyles(theme)} href={keyEvent.url}>
 					{keyEvent.text}
 				</a>
@@ -135,16 +132,20 @@ const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, theme }) => {
 		<div css={keyEventWrapperStyles}>
 			<div css={titleRowStyles}>
 				<div css={titleStyle}>Key Events</div>
-				<button
-					css={buttonStyles}
+				<Button
+					type="button"
+					size="default"
+					cssOverrides={buttonStyles}
 					onClick={() => setShowList(!showList)}
-				>
-					{showList ? (
-						<SvgChevronUpSingle />
-					) : (
-						<SvgChevronDownSingle />
-					)}
-				</button>
+					hideLabel={true}
+					icon={
+						showList ? (
+							<SvgChevronUpSingle />
+						) : (
+							<SvgChevronDownSingle />
+						)
+					}
+				></Button>
 			</div>
 			{showList && (
 				<ul css={listStyles}>

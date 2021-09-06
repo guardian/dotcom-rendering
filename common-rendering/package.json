@@ -4,6 +4,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "@emotion/react": "^11.4.1",
+        "@guardian/src-button": "^3.8.0",
         "@guardian/src-foundations": "^3.9.0",
         "@guardian/src-icons": "^3.8.0",
         "@guardian/types": "^8.0.0",
