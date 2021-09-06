@@ -8,7 +8,7 @@ import { palette, remSpace } from "@guardian/src-foundations";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
 import { Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
-import { getTextColor, KeyEvent } from "../keyEvent";
+import { getColor, KeyEvent } from "../keyEvent";
 
 // ----- Component ----- //
 
@@ -49,14 +49,6 @@ const titleStyle: SerializedStyles = css`
 	color: ${palette.neutral[7]};
 `;
 
-const authorStyles: SerializedStyles = css`
-	display: none;
-
-	${from.desktop} {
-		display: block;
-	}
-`;
-
 const buttonStyles: SerializedStyles = css`
 	border: 0;
 	background: 0;
@@ -73,7 +65,6 @@ const listStyles: SerializedStyles = css`
 
 	${from.desktop} {
 		margin: ${remSpace[1]} 0 0;
-		border-top: 1px solid ${palette.neutral[86]};
 	}
 
 	li::before {
@@ -105,7 +96,7 @@ const timeTextWrapperStyles: SerializedStyles = css`
 
 const textStyles = (theme: Theme): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
-	color: ${getTextColor(theme, 300)};
+	color: ${getColor(theme, 300)};
 	text-decoration: none;
 `;
 
@@ -115,37 +106,33 @@ const timeStyles: SerializedStyles = css`
 `;
 
 interface KeyEventProps {
-	events: KeyEvent[];
+	keyEvents: KeyEvent[];
 	theme: Theme;
 }
 
 interface ListItemProps {
-	event: KeyEvent;
+	keyEvent: KeyEvent;
 	theme: Theme;
 }
 
-const ListItem: FC<ListItemProps> = ({ event, theme }) => {
+const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
 	return (
 		<li css={listItemStyles}>
 			<div css={timeTextWrapperStyles}>
-				<div css={timeStyles}>{event.time}</div>
-				<a css={textStyles(theme)} href={event.url}>
-					{event.text}
+				<div css={timeStyles}>{keyEvent.time}</div>
+				<a css={textStyles(theme)} href={keyEvent.url}>
+					{keyEvent.text}
 				</a>
 			</div>
 		</li>
 	);
 };
 
-const KeyEvent: FC<KeyEventProps> = ({ events, theme }) => {
+const KeyEvent: FC<KeyEventProps> = ({ keyEvents, theme }) => {
 	const [showList, setShowList] = useState(true);
 
 	return (
 		<div css={keyEventWrapperStyles}>
-			<div css={authorStyles}>
-				Clea Skopeliti (now), Tom Ambrose, Emma Kemp, and Helen Sullivan
-				(earlier)
-			</div>
 			<div css={titleRowStyles}>
 				<div css={titleStyle}>Key Events</div>
 				<button
@@ -161,8 +148,8 @@ const KeyEvent: FC<KeyEventProps> = ({ events, theme }) => {
 			</div>
 			{showList && (
 				<ul css={listStyles}>
-					{events.map((event) => (
-						<ListItem event={event} theme={theme} />
+					{keyEvents.slice(0, 7).map((event) => (
+						<ListItem keyEvent={event} theme={theme} />
 					))}
 				</ul>
 			)}

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { FC } from "react";
-import type { Event } from "./keyEvent";
+import type { KeytEvent } from "./keyEvent";
 import KeyEvent from "./keyEvent";
 import { Design, Display, Pillar, Special, Theme } from "@guardian/types";
 import { select, withKnobs } from "@storybook/addon-knobs";
@@ -22,7 +22,7 @@ const selectPillar = (initial: Pillar): Theme => {
 	return select("Pillar", pillarOptions, initial);
 };
 
-const events: Event[] = [
+const events: KeytEvent[] = [
 	{
 		time: "1m ago",
 		text: "Gold for Uganda",
@@ -75,14 +75,7 @@ const events: Event[] = [
 ];
 
 const Default: FC = () => (
-	<KeyEvent
-		events={events}
-		format={{
-			theme: selectPillar(Pillar.Opinion),
-			design: Design.Article,
-			display: Display.Standard,
-		}}
-	/>
+	<KeyEvent keyEvents={events} theme={selectPillar(Pillar.Opinion)} />
 );
 
 // ----- Exports ----- //

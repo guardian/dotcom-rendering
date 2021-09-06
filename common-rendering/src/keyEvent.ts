@@ -9,7 +9,7 @@ export interface KeyEvent {
 	url: string;
 }
 
-export const getTextColor = (pillar: Theme, paletteId: paletteId) => {
+export const getColor = (pillar: Theme, paletteId: paletteId) => {
 	switch (pillar) {
 		case Pillar.Sport:
 			return palette.sport[paletteId];
