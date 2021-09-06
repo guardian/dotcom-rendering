@@ -743,7 +743,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Portal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce rootId={youTubeAtom.elementId}>
+				<HydrateOnce
+					rootId={youTubeAtom.elementId}
+					waitFor={[isSignedIn]}
+				>
 					<YoutubeBlockComponent
 						format={format}
 						palette={palette}
