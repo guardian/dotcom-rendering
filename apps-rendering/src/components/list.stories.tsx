@@ -27,7 +27,7 @@ const Default: FC = () => <List>{[listItem, listItem, listItem]}</List>;
 
 export default {
 	component: List,
-	title: 'List',
+	title: 'AR/List',
 };
 
 export { Default };

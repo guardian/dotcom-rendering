@@ -47,7 +47,7 @@ const Default: FC = () => (
 
 export default {
 	component: FootballScores,
-	title: 'Editions/FootballScores',
+	title: 'AR/Editions/FootballScores',
 	decorators: [withKnobs],
 };
 

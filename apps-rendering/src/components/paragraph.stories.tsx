@@ -38,7 +38,7 @@ const Labs: FC = () => (
 
 export default {
 	component: Paragraph,
-	title: 'Paragraph',
+	title: 'AR/Paragraph',
 };
 
 export { Default, Labs };

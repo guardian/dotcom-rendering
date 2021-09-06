@@ -21,7 +21,7 @@ const Default = (format: Format): JSX.Element => (
 
 export default {
 	component: Tags,
-	title: 'Tags',
+	title: 'AR/Tags',
 	decorators: [withKnobs],
 };
 

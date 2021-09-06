@@ -61,7 +61,7 @@ const Comment = (): ReactElement => (
 
 export default {
 	component: Standfirst,
-	title: 'Standfirst',
+	title: 'AR/Standfirst',
 	decorators: [withKnobs],
 };
 

@@ -21,7 +21,7 @@ const Default: FC = () => (
 
 export default {
 	component: Dateline,
-	title: 'Dateline',
+	title: 'AR/Dateline',
 	decorators: [withKnobs],
 };
 

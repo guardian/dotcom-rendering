@@ -89,7 +89,7 @@ const Media = (): ReactElement => (
 
 export default {
 	component: Standfirst,
-	title: 'Editions/Standfirst',
+	title: 'AR/Editions/Standfirst',
 	decorators: [withKnobs],
 };
 

@@ -145,7 +145,7 @@ const Media = (): ReactElement => (
 
 export default {
 	component: Headline,
-	title: 'Editions/Headline',
+	title: 'AR/Editions/Headline',
 	decorators: [withKnobs],
 };
 

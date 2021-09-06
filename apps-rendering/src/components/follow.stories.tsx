@@ -28,7 +28,7 @@ const Default: FC = () => (
 
 export default {
 	component: Follow,
-	title: 'Follow',
+	title: 'AR/Follow',
 	decorators: [withKnobs],
 };
 

@@ -152,7 +152,7 @@ const Instagram: FC = () => (
 
 export default {
 	component: EmbedComponentWrapper,
-	title: 'EmbedComponentWrapper',
+	title: 'AR/EmbedComponentWrapper',
 	decorators: [withKnobs],
 };
 
