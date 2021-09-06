@@ -23,12 +23,12 @@ if (isChromatic()) {
 mockRESTCalls();
 
 // Add base css for the site
-let css = `${getFontsCss()}${defaults}`;
-let head = document.getElementsByTagName("head")[0];
-let style = document.createElement("style");
-head.appendChild(style);
-style.type = "text/css";
-style.appendChild(document.createTextNode(css));
+// let css = `${getFontsCss()}${defaults}`;
+// let head = document.getElementsByTagName("head")[0];
+// let style = document.createElement("style");
+// head.appendChild(style);
+// style.type = "text/css";
+// style.appendChild(document.createTextNode(css));
 
 const guardianViewports = {
 	mobileMedium: {
