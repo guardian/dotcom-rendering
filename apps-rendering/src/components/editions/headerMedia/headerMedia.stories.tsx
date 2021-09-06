@@ -68,7 +68,7 @@ const Video = (): ReactElement => (
 
 export default {
 	component: HeaderMedia,
-	title: 'Editions/HeaderMedia',
+	title: 'AR/Editions/HeaderMedia',
 };
 
 export { Image, FullScreen, WithStarRating, Video };

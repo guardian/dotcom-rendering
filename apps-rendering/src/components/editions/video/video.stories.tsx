@@ -23,7 +23,7 @@ const Default = (): ReactElement => <Video {...video} />;
 
 export default {
 	component: Video,
-	title: 'Editions/Video',
+	title: 'AR/Editions/Video',
 };
 
 export { Default };

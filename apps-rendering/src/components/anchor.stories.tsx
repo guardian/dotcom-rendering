@@ -32,7 +32,7 @@ const Default: FC = () => (
 
 export default {
 	component: Anchor,
-	title: 'Anchor',
+	title: 'AR/Anchor',
 	decorators: [withKnobs],
 };
 

@@ -34,7 +34,7 @@ const Default = (): ReactElement => <Pullquote {...getInputProps()} />;
 
 export default {
 	component: Pullquote,
-	title: 'Editions/PullQuote',
+	title: 'AR/Editions/PullQuote',
 	decorators: [withKnobs],
 };
 

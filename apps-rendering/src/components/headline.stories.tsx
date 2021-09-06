@@ -73,7 +73,7 @@ const Labs = (): ReactElement => (
 
 export default {
 	component: Headline,
-	title: 'Headline',
+	title: 'AR/Headline',
 	decorators: [withKnobs],
 };
 

@@ -23,7 +23,7 @@ const Default: FC = () => (
 
 export default {
 	component: Bullet,
-	title: 'Bullet',
+	title: 'AR/Bullet',
 	decorators: [withKnobs],
 };
 

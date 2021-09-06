@@ -17,6 +17,7 @@ interface Props {
 	league: string;
 	homeTeam: FootballTeam;
 	awayTeam: FootballTeam;
+	stadium: string;
 }
 
 const styles = css`
@@ -33,23 +34,6 @@ const styles = css`
 	}
 `;
 
-const matchInfoStyles = css`
-	display: grid;
-	grid-template-columns: auto 1fr;
-
-	${from.phablet} {
-		grid-template-columns: 1fr 1fr 1fr;
-	}
-`;
-
-const otherMatchStyles = css`
-	grid-column: 2;
-
-	${from.phablet} {
-		grid-column: 1;
-	}
-`;
-
 const scoreStyles = css`
 	${from.phablet} {
 		display: flex;
@@ -60,19 +44,15 @@ const leagueStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
 `;
 
-const titleStyles = css`
-	text-indent: -10000px;
-	position: absolute;
-	margin: 0;
+const stadiumStyles = css`
+	${textSans.medium({ fontStyle: 'normal' })}
 `;
 
-const FootballScores: FC<Props> = ({ league, homeTeam, awayTeam }) => (
+const FootballScores: FC<Props> = ({ league, homeTeam, awayTeam, stadium }) => (
 	<section css={styles}>
-		<h2 css={titleStyles}>Scores</h2>
-		<div css={matchInfoStyles}>
-			<div css={otherMatchStyles}>
-				<nav css={leagueStyles}>{league}</nav>
-			</div>
+		<div>
+			<nav css={leagueStyles}>{league}</nav>
+			<address css={stadiumStyles}>{stadium}</address>
 		</div>
 		<div css={scoreStyles}>
 			<TeamScore location={TeamLocation.Home} team={homeTeam} />

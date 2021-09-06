@@ -22,7 +22,7 @@ const Default: FC = () => (
 
 export default {
 	component: CommentCount,
-	title: 'CommentCount',
+	title: 'AR/CommentCount',
 	decorators: [withKnobs],
 };
 

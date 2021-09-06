@@ -51,7 +51,7 @@ const Default = (): ReactElement => (
 
 export default {
 	component: Avatar,
-	title: 'Editions/Avatar',
+	title: 'AR/Editions/Avatar',
 	decorators: [withKnobs],
 };
 

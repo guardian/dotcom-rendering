@@ -344,7 +344,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	return (
 		<>
-			<div data-print-layout="hide">
+			<div data-print-layout="hide" id="bannerandheader">
 				<>
 					<Stuck>
 						<ElementContainer

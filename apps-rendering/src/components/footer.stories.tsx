@@ -14,7 +14,7 @@ const Default: FC = () => <Footer isCcpa={false} />;
 
 export default {
 	component: Footer,
-	title: 'Footer',
+	title: 'AR/Footer',
 	decorators: [withKnobs],
 };
 
