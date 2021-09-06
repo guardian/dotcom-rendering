@@ -6,7 +6,7 @@ import { FC, useState } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { palette, remSpace } from "@guardian/src-foundations";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
-import { Format } from "@guardian/types";
+import { Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
 import { getTextColor, KeyEvent } from "../keyEvent";
 
@@ -103,9 +103,9 @@ const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: ${remSpace[4]};
 `;
 
-const textStyles = (format: Format): SerializedStyles => css`
+const textStyles = (theme: Theme): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
-	color: ${getTextColor(format.theme, 300)};
+	color: ${getTextColor(theme, 300)};
 	text-decoration: none;
 `;
 
@@ -116,20 +116,20 @@ const timeStyles: SerializedStyles = css`
 
 interface KeyEventProps {
 	events: KeyEvent[];
-	format: Format;
+	theme: Theme;
 }
 
 interface ListItemProps {
 	event: KeyEvent;
-	format: Format;
+	theme: Theme;
 }
 
-const ListItem: FC<ListItemProps> = ({ event, format }) => {
+const ListItem: FC<ListItemProps> = ({ event, theme }) => {
 	return (
 		<li css={listItemStyles}>
 			<div css={timeTextWrapperStyles}>
 				<div css={timeStyles}>{event.time}</div>
-				<a css={textStyles(format)} href={event.url}>
+				<a css={textStyles(theme)} href={event.url}>
 					{event.text}
 				</a>
 			</div>
@@ -137,7 +137,7 @@ const ListItem: FC<ListItemProps> = ({ event, format }) => {
 	);
 };
 
-const KeyEvent: FC<KeyEventProps> = ({ events, format }) => {
+const KeyEvent: FC<KeyEventProps> = ({ events, theme }) => {
 	const [showList, setShowList] = useState(true);
 
 	return (
@@ -162,7 +162,7 @@ const KeyEvent: FC<KeyEventProps> = ({ events, format }) => {
 			{showList && (
 				<ul css={listStyles}>
 					{events.map((event) => (
-						<ListItem event={event} format={format} />
+						<ListItem event={event} theme={theme} />
 					))}
 				</ul>
 			)}
