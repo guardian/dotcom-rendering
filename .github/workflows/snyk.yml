@@ -20,8 +20,8 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Set command to monitor
-              if: github.ref == 'refs/heads/main'
-              run: echo "SNYK_COMMAND=monitor" >> $GITHUB_ENV
+              # if: github.ref == 'refs/heads/main'
+               run: echo "SNYK_COMMAND=monitor" >> $GITHUB_ENV
 
             - name: Run Snyk to check for vulnerabilities
               uses: snyk/actions/node@0.3.0
@@ -39,7 +39,7 @@ jobs:
                   checkout_path: ${{ github.workspace }}/dotcom-rendering
 
             - name: Run Snyk monitor to update snyk.io
-              if: github.ref == 'refs/heads/main'
+              # if: github.ref == 'refs/heads/main'
               uses: snyk/actions/node@0.3.0
               continue-on-error: true # To make sure that SARIF upload gets called
               env:
