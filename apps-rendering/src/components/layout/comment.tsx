@@ -10,7 +10,7 @@ import {
 	opinion,
 } from '@guardian/src-foundations/palette';
 import Byline from 'components/byline';
-import Cutout from 'components/comment/cutout';
+import Cutout from 'components/cutout';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
@@ -33,7 +33,7 @@ import {
 // ----- Styles ----- //
 
 const Styles = css`
-	background: ${neutral[97]};
+	background: ${neutral[ 97 ]};
 `;
 
 const DarkStyles = darkModeCss`
@@ -41,7 +41,7 @@ const DarkStyles = darkModeCss`
 `;
 
 const BorderStyles = css`
-	background: ${opinion[800]};
+	background: ${opinion[ 800 ]};
 	${darkModeCss`background: ${background.inverse};`}
 
 	${from.wide} {
@@ -51,15 +51,15 @@ const BorderStyles = css`
 `;
 
 const topBorder = css`
-	border-top: solid 1px ${neutral[86]};
-	margin-top: ${remSpace[3]};
+	border-top: solid 1px ${neutral[ 86 ]};
+	margin-top: ${remSpace[ 3 ]};
 
 	${from.wide} {
-		margin-top: ${remSpace[3]};
+		margin-top: ${remSpace[ 3 ]};
 	}
 
 	${darkModeCss`
-        border-top: solid 1px ${neutral[20]};
+        border-top: solid 1px ${neutral[ 20 ]};
     `}
 `;
 
@@ -73,7 +73,7 @@ interface Props {
 }
 
 const Comment: FC<Props> = ({ item, children }) => (
-	<main css={[Styles, DarkStyles]}>
+	<main css={[ Styles, DarkStyles ]}>
 		<article css={BorderStyles}>
 			<header>
 				<Series item={item} />
@@ -86,7 +86,7 @@ const Comment: FC<Props> = ({ item, children }) => (
 					className={articleWidthStyles}
 					format={item}
 				/>
-				<div css={[commentLineStylePosition, lineStyles]}>
+				<div css={[ commentLineStylePosition, lineStyles ]}>
 					<Lines count={8} />
 				</div>
 
@@ -94,14 +94,14 @@ const Comment: FC<Props> = ({ item, children }) => (
 					<Standfirst item={item} />
 				</div>
 
-				<section css={[articleWidthStyles, topBorder]}>
+				<section css={[ articleWidthStyles, topBorder ]}>
 					<Metadata item={item} />
 				</section>
 
 				<HeaderMedia item={item} />
 				<section css={articleWidthStyles}>{OptionalLogo(item)}</section>
 			</header>
-			<ArticleBody className={[articleWidthStyles]} format={item}>
+			<ArticleBody className={[ articleWidthStyles ]} format={item}>
 				{children}
 			</ArticleBody>
 			<section css={articleWidthStyles}>

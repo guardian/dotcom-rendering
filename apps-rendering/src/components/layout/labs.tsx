@@ -22,7 +22,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import Logo from './logo';
+import Logo from 'components/labsLogo';
 
 // ----- Styles ----- //
 
