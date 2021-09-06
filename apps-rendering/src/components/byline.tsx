@@ -21,6 +21,7 @@ interface Props extends Format {
 const styles = (kicker: string): SerializedStyles => css`
 	${headline.xxxsmall()}
 	color: ${kicker};
+	font-style: italic;
 
 	${darkModeCss`
         color: ${neutral[60]};
@@ -62,6 +63,7 @@ const commentAnchorStyles = (
 const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular' })}
 	color: ${palette.labs[300]};
+	font-style: italic;
 
 	${darkModeCss`
         color: ${palette.labs[400]};
