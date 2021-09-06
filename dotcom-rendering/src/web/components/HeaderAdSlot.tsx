@@ -45,7 +45,7 @@ export const HeaderAdSlot: React.FC<{
 				*/
 				.bz-custom-container
 					~ #bannerandheader
-					> .top-banner-ad-container {
+					.top-banner-ad-container {
 					display: none;
 				}
 			`}
