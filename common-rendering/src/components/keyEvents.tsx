@@ -105,7 +105,7 @@ const timeStyles: SerializedStyles = css`
 	color: ${palette.neutral[7]};
 `;
 
-interface KeyEventProps {
+interface KeyEventsProps {
 	keyEvents: KeyEvent[];
 	theme: Theme;
 }
@@ -128,7 +128,7 @@ const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
 	);
 };
 
-const KeyEvent: FC<KeyEventProps> = ({ keyEvents, theme }) => {
+const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, theme }) => {
 	const [showList, setShowList] = useState(true);
 
 	return (
@@ -159,4 +159,4 @@ const KeyEvent: FC<KeyEventProps> = ({ keyEvents, theme }) => {
 
 // ----- Exports ----- //
 
-export default KeyEvent;
+export default KeyEvents;
