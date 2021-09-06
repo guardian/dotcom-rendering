@@ -7,6 +7,7 @@ import { background, neutral } from '@guardian/src-foundations/palette';
 import { map, withDefault } from '@guardian/types';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
+import Logo from 'components/labsLogo';
 import Metadata from 'components/metadata';
 import Series from 'components/series';
 import Body from 'components/shared/articleBody';
@@ -22,7 +23,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import Logo from 'components/labsLogo';
 
 // ----- Styles ----- //
 
