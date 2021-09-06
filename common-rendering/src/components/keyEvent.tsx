@@ -6,8 +6,9 @@ import { FC, useState } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { palette, remSpace } from "@guardian/src-foundations";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
-import { Format, Pillar } from "@guardian/types";
+import { Format } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
+import { getTextColor, KeyEvent } from "../keyEvent";
 
 // ----- Component ----- //
 
@@ -26,21 +27,20 @@ const titleRowStyles: SerializedStyles = css`
 	justify-content: space-between;
 	align-items: center;
 
-	${from.phablet} {
-		margin: ${remSpace[1]} ${remSpace[5]} 0;
-	}
-
-	${from.desktop} {
-		margin: ${remSpace[1]} 0 0;
-		display: none;
-	}
-
 	svg {
 		height: 30px;
 	}
 
 	path {
 		fill: ${palette.neutral[46]};
+	}
+
+	${from.phablet} {
+		margin: ${remSpace[1]} ${remSpace[5]} 0;
+	}
+
+	${from.desktop} {
+		display: none;
 	}
 `;
 
@@ -73,6 +73,7 @@ const listStyles: SerializedStyles = css`
 
 	${from.desktop} {
 		margin: ${remSpace[1]} 0 0;
+		border-top: 1px solid ${palette.neutral[86]};
 	}
 
 	li::before {
@@ -98,32 +99,14 @@ const listItemStyles: SerializedStyles = css`
 	}
 `;
 
-const copyStyles: SerializedStyles = css`
-	margin-left: ${remSpace[3]};
+const timeTextWrapperStyles: SerializedStyles = css`
+	margin-left: ${remSpace[4]};
 `;
-
-const getTextColor = (format: Format) => {
-	switch (format.theme) {
-		case Pillar.Sport:
-			return palette.sport[300];
-		case Pillar.Culture:
-			return palette.culture[300];
-		case Pillar.Lifestyle:
-			return palette.lifestyle[300];
-		case Pillar.Opinion:
-			return palette.opinion[300];
-		default:
-			return palette.news[300];
-	}
-};
 
 const textStyles = (format: Format): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
-
-	a {
-		color: ${getTextColor(format)};
-		text-decoration: none;
-	}
+	color: ${getTextColor(format.theme, 300)};
+	text-decoration: none;
 `;
 
 const timeStyles: SerializedStyles = css`
@@ -131,30 +114,24 @@ const timeStyles: SerializedStyles = css`
 	color: ${palette.neutral[7]};
 `;
 
-export interface Event {
-	time: string;
-	text: string;
-	url: string;
-}
-
 interface KeyEventProps {
-	events: Event[];
+	events: KeyEvent[];
 	format: Format;
 }
 
 interface ListItemProps {
-	event: Event;
+	event: KeyEvent;
 	format: Format;
 }
 
 const ListItem: FC<ListItemProps> = ({ event, format }) => {
 	return (
 		<li css={listItemStyles}>
-			<div css={copyStyles}>
+			<div css={timeTextWrapperStyles}>
 				<div css={timeStyles}>{event.time}</div>
-				<div css={textStyles(format)}>
-					<a href={event.url}>{event.text}</a>
-				</div>
+				<a css={textStyles(format)} href={event.url}>
+					{event.text}
+				</a>
 			</div>
 		</li>
 	);

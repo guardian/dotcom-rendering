@@ -31,7 +31,8 @@ const events: Event[] = [
 	},
 	{
 		time: "2m ago",
-		text: "Gold for Uganda",
+		text:
+			"Ben Maher goes into the gold medal sport in the equestrian jumps",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
@@ -49,7 +50,7 @@ const events: Event[] = [
 	},
 	{
 		time: "9m ago",
-		text: "Gold for Uganda",
+		text: "Jodie Williams qualifies for the 400m final",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
