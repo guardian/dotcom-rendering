@@ -26,10 +26,11 @@ const ampData = (section: string, contentType: string): string => {
 	return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
-const getPlacementId = (adRegion: AdRegion): number => {
+const getPlacementId = (isSticky: boolean, adRegion: AdRegion): number => {
 	switch (adRegion) {
-		case 'US':
-			return 7;
+		case 'US': {
+			return isSticky ? 22138171 : 7;
+		}
 		case 'AU':
 			return 6;
 		default:
@@ -38,11 +39,12 @@ const getPlacementId = (adRegion: AdRegion): number => {
 };
 
 const realTimeConfig = (
+	isSticky: boolean,
 	adRegion: AdRegion,
 	usePrebid: boolean,
 	usePermutive: boolean,
 ): any => {
-	const placementID = getPlacementId(adRegion);
+	const placementID = getPlacementId(isSticky, adRegion);
 	const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
 	const permutiveURL =
 		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
@@ -89,7 +91,7 @@ export interface AdProps {
 }
 
 export const Ad = ({
-	isSticky,
+	isSticky = false,
 	adRegion,
 	edition,
 	section,
@@ -123,6 +125,7 @@ export const Ad = ({
 					)}
 					data-slot={ampData(section, contentType)}
 					rtc-config={realTimeConfig(
+						isSticky,
 						adRegion,
 						config.usePrebid,
 						config.usePermutive,
