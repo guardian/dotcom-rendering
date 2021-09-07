@@ -2,9 +2,19 @@
 
 import { KeyEvent } from "../keyEvent";
 import KeyEvents from "./keyEvents";
-import { Pillar, Special, Theme } from "@guardian/types";
+import { Pillar, Special } from "@guardian/types";
 
 // ----- Stories ----- //
+
+const pillarOptions = {
+	News: Pillar.News,
+	Opinion: Pillar.Opinion,
+	Sport: Pillar.Sport,
+	Culture: Pillar.Culture,
+	Lifestyle: Pillar.Lifestyle,
+	Labs: Special.Labs,
+	SpecialReport: Special.SpecialReport,
+};
 
 const events: KeyEvent[] = [
 	{
@@ -58,7 +68,9 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const Default = (args) => <KeyEvents keyEvents={events} {...args} />;
+const Default = (args: { theme: Pillar }) => (
+	<KeyEvents keyEvents={events} {...args} />
+);
 
 Default.args = {
 	theme: Pillar.News,
@@ -71,16 +83,9 @@ export default {
 	title: "Common/Components/KeyEvents",
 	argTypes: {
 		theme: {
-			options: [
-				Pillar.News,
-				Pillar.Opinion,
-				Pillar.Sport,
-				Pillar.Culture,
-				Pillar.Lifestyle,
-				Special.Labs,
-				Special.SpecialReport,
-			],
+			options: Object.keys(pillarOptions),
 			control: { type: "select" },
+			mapping: pillarOptions,
 		},
 	},
 };

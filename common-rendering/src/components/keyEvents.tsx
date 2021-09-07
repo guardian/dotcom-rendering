@@ -17,7 +17,7 @@ const keyEventWrapperStyles: SerializedStyles = css`
 	width: 100%;
 
 	${from.desktop} {
-		width: 220px;
+		width: 13.75rem;
 	}
 `;
 
