@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { KeyEvent } from "../keyEvent";
+import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
 import { Pillar, Special } from "@guardian/types";
 

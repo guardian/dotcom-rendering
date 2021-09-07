@@ -6,12 +6,33 @@ import { FC, useState } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { palette, remSpace } from "@guardian/src-foundations";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
-import { Theme } from "@guardian/types";
+import { Pillar, Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
-import { getColor, KeyEvent } from "../keyEvent";
 import { Button } from "@guardian/src-button";
 
 // ----- Component ----- //
+export type paletteId = 300 | 400;
+
+interface KeyEvent {
+	time: string;
+	text: string;
+	url: string;
+}
+
+const getColor = (theme: Theme, paletteId: paletteId) => {
+	switch (theme) {
+		case Pillar.Sport:
+			return palette.sport[paletteId];
+		case Pillar.Culture:
+			return palette.culture[paletteId];
+		case Pillar.Lifestyle:
+			return palette.lifestyle[paletteId];
+		case Pillar.Opinion:
+			return palette.opinion[paletteId];
+		default:
+			return palette.news[paletteId];
+	}
+};
 
 const keyEventWrapperStyles: SerializedStyles = css`
 	width: 100%;
@@ -161,3 +182,4 @@ const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, theme }) => {
 // ----- Exports ----- //
 
 export default KeyEvents;
+export { KeyEvent };
