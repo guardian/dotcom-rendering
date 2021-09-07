@@ -8,14 +8,20 @@
     "dependencies": {
         "@emotion/react": "^11.4.1",
         "@guardian/src-foundations": "^3.9.0",
-        "react": "^17.0.2"
+        "react": "^17.0.2",
+        "@guardian/types": "^8.0.0"
     },
     "devDependencies": {
+        "@emotion/jest": "^11.3.0",
         "@types/jest": "^26.0.20",
         "jest": "^26.6.3",
+        "react-test-renderer": "^17.0.1",
         "ts-jest": "^26.5.3"
     },
     "jest": {
-        "preset": "ts-jest/presets/js-with-ts"
+        "preset": "ts-jest/presets/js-with-ts",
+        "transformIgnorePatterns": [
+            "node_modules/(?!(@guardian/src-foundations|@guardian/types)/)"
+        ]
     }
 }
