@@ -5,6 +5,7 @@ import { regionClasses } from '@root/src/amp/lib/region-classes';
 
 // Largest size first
 const inlineSizes = [
+	{ width: 320, height: 480 }, // Picnic story
 	{ width: 300, height: 250 }, // MPU
 	{ width: 250, height: 250 }, // Square
 ];
@@ -13,6 +14,9 @@ const inlineSizes = [
 const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
 
 type AdRegion = 'US' | 'AU' | 'ROW';
+
+// Array of possible ad regions
+const adRegions: AdRegion[] = ['US', 'AU', 'ROW'];
 
 const dfpAdUnitRoot = 'theguardian.com';
 
@@ -99,7 +103,6 @@ interface CommercialConfig {
 
 export interface AdProps {
 	isSticky?: boolean;
-	adRegion: AdRegion;
 	edition: Edition;
 	section: string;
 	contentType: string;
@@ -107,7 +110,11 @@ export interface AdProps {
 	commercialProperties: CommercialProperties;
 }
 
-export const Ad = ({
+export interface RegionalAdProps extends AdProps {
+	adRegion: AdRegion;
+}
+
+export const RegionalAd = ({
 	isSticky = false,
 	adRegion,
 	edition,
@@ -115,9 +122,11 @@ export const Ad = ({
 	contentType,
 	config,
 	commercialProperties,
-}: AdProps) => {
+}: RegionalAdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
-	const [{ width, height }] = adSizes; // Set initial size as first element (should be the largest)
+	// Set Primary ad size as first element (should be the largest)
+	const [{ width, height }] = adSizes;
+	// Secondary ad sizes
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	return (
@@ -130,9 +139,15 @@ export const Ad = ({
 						`,
 					)}
 					data-block-on-consent=""
+					// Primary ad size width and height
 					width={width}
 					height={height}
+					// Secondary ad sizes
 					data-multi-size={multiSizes}
+					// Setting data-multi-size-validation to false allows
+					// secondary ad sizes that are less than 2/3rds of the
+					// corresponding primary size.
+					data-multi-size-validation="false"
 					data-npa-on-unknown-consent={true}
 					data-loading-strategy="prefer-viewability-over-views"
 					layout="fixed"
@@ -152,3 +167,26 @@ export const Ad = ({
 		</ClassNames>
 	);
 };
+
+export const Ad = ({
+	isSticky,
+	edition,
+	section,
+	contentType,
+	config,
+	commercialProperties,
+}: AdProps) => (
+	<>
+		{adRegions.map((adRegion) => (
+			<RegionalAd
+				adRegion={adRegion}
+				isSticky={isSticky}
+				edition={edition}
+				section={section}
+				contentType={contentType}
+				config={config}
+				commercialProperties={commercialProperties}
+			/>
+		))}
+	</>
+);
