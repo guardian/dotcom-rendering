@@ -2,13 +2,12 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { palette, remSpace } from "@guardian/src-foundations";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
 import { Pillar, Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
-import { Button } from "@guardian/src-button";
 
 // ----- Component ----- //
 export type paletteId = 300 | 400;
@@ -42,15 +41,34 @@ const keyEventWrapperStyles: SerializedStyles = css`
 	}
 `;
 
+const detailsStyles: SerializedStyles = css`
+	&:not([open]) .is-on,
+	&[open] .is-off {
+		display: none;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+`;
+
 const titleRowStyles: SerializedStyles = css`
 	position: relative;
-	margin: ${remSpace[1]} ${remSpace[1]} 0;
+	margin: ${remSpace[1]} ${remSpace[1]} 0 ${remSpace[3]};
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
+	&:focus {
+		outline: none;
+	}
+
 	path {
 		fill: ${palette.neutral[46]};
+	}
+
+	svg {
+		height: 2rem;
 	}
 
 	${from.phablet} {
@@ -65,12 +83,6 @@ const titleRowStyles: SerializedStyles = css`
 const titleStyle: SerializedStyles = css`
 	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${palette.neutral[7]};
-`;
-
-const buttonStyles: SerializedStyles = css`
-	background: 0;
-	outline: 0;
-	padding: 0;
 `;
 
 const listStyles: SerializedStyles = css`
@@ -147,34 +159,24 @@ const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
 };
 
 const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, theme }) => {
-	const [showList, setShowList] = useState(true);
-
 	return (
 		<div css={keyEventWrapperStyles}>
-			<div css={titleRowStyles}>
-				<div css={titleStyle}>Key Events</div>
-				<Button
-					type="button"
-					size="default"
-					cssOverrides={buttonStyles}
-					onClick={() => setShowList(!showList)}
-					hideLabel={true}
-					icon={
-						showList ? (
-							<SvgChevronUpSingle />
-						) : (
-							<SvgChevronDownSingle />
-						)
-					}
-				></Button>
-			</div>
-			{showList && (
+			<details open css={detailsStyles}>
+				<summary css={titleRowStyles}>
+					<div css={titleStyle}>Key Events</div>
+					<span className="is-off">
+						<SvgChevronDownSingle />
+					</span>
+					<span className="is-on">
+						<SvgChevronUpSingle />
+					</span>
+				</summary>
 				<ul css={listStyles}>
 					{keyEvents.slice(0, 7).map((event) => (
 						<ListItem keyEvent={event} theme={theme} />
 					))}
 				</ul>
-			)}
+			</details>
 		</div>
 	);
 };
