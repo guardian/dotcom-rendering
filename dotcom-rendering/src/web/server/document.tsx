@@ -1,11 +1,9 @@
-import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
-import { CacheProvider, Global, css } from '@emotion/react';
 
-import { focusHalo } from '@guardian/src-foundations/accessibility';
+import { Page } from '@root/src/web/components/Page';
 
 import { escapeData } from '@root/src/lib/escapeData';
 import {
@@ -70,20 +68,9 @@ export const document = ({ data }: Props): string => {
 		ids: cssIDs,
 	}: RenderToStringResult = extractCritical(
 		renderToString(
-			<CacheProvider value={cache}>
-				<StrictMode>
-					<Global
-						styles={css`
-							/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-							/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-							*:focus {
-								${focusHalo}
-							}
-						`}
-					/>
-					<DecideLayout CAPI={CAPI} NAV={NAV} />
-				</StrictMode>
-			</CacheProvider>,
+			<Page cache={cache}>
+				<DecideLayout CAPI={CAPI} NAV={NAV} />
+			</Page>,
 		),
 	);
 
