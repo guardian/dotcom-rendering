@@ -147,23 +147,6 @@ export const Blocks: React.FunctionComponent<{
 								css={adStyle}
 							>
 								<Ad
-									adRegion="US"
-									edition={edition}
-									section={section || ''}
-									contentType={contentType}
-									config={adConfig}
-									commercialProperties={commercialProperties}
-								/>
-								<Ad
-									adRegion="AU"
-									edition={edition}
-									section={section || ''}
-									contentType={contentType}
-									config={adConfig}
-									commercialProperties={commercialProperties}
-								/>
-								<Ad
-									adRegion="ROW"
 									edition={edition}
 									section={section || ''}
 									contentType={contentType}
