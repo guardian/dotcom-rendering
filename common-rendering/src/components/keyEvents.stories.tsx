@@ -6,7 +6,7 @@ import { Pillar, Special } from "@guardian/types";
 
 // ----- Stories ----- //
 
-const pillarOptions = {
+const themeOptions = {
 	News: Pillar.News,
 	Opinion: Pillar.Opinion,
 	Sport: Pillar.Sport,
@@ -83,9 +83,9 @@ export default {
 	title: "Common/Components/KeyEvents",
 	argTypes: {
 		theme: {
-			options: Object.keys(pillarOptions),
+			options: Object.keys(themeOptions),
 			control: { type: "select" },
-			mapping: pillarOptions,
+			mapping: themeOptions,
 		},
 	},
 };

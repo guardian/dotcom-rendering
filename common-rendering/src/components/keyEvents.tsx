@@ -10,12 +10,22 @@ import { Pillar, Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
 
 // ----- Component ----- //
-export type paletteId = 300 | 400;
+type paletteId = 300 | 400;
 
 interface KeyEvent {
 	time: string;
 	text: string;
 	url: string;
+}
+
+interface KeyEventsProps {
+	keyEvents: KeyEvent[];
+	theme: Theme;
+}
+
+interface ListItemProps {
+	keyEvent: KeyEvent;
+	theme: Theme;
 }
 
 const getColor = (theme: Theme, paletteId: paletteId) => {
@@ -134,16 +144,6 @@ const timeStyles: SerializedStyles = css`
 	color: ${palette.neutral[7]};
 	display: block;
 `;
-
-interface KeyEventsProps {
-	keyEvents: KeyEvent[];
-	theme: Theme;
-}
-
-interface ListItemProps {
-	keyEvent: KeyEvent;
-	theme: Theme;
-}
 
 const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
 	return (
