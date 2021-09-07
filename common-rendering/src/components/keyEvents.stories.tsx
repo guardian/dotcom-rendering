@@ -1,26 +1,10 @@
 // ----- Imports ----- //
 
-import type { FC } from "react";
 import { KeyEvent } from "../keyEvent";
 import KeyEvents from "./keyEvents";
 import { Pillar, Special, Theme } from "@guardian/types";
-import { select, withKnobs } from "@storybook/addon-knobs";
 
 // ----- Stories ----- //
-
-const pillarOptions = {
-	News: Pillar.News,
-	Opinion: Pillar.Opinion,
-	Sport: Pillar.Sport,
-	Culture: Pillar.Culture,
-	Lifestyle: Pillar.Lifestyle,
-	Labs: Special.Labs,
-	SpecialReport: Special.SpecialReport,
-};
-
-const selectPillar = (initial: Pillar): Theme => {
-	return select("Pillar", pillarOptions, initial);
-};
 
 const events: KeyEvent[] = [
 	{
@@ -74,16 +58,31 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const Default: FC = () => (
-	<KeyEvents keyEvents={events} theme={selectPillar(Pillar.Opinion)} />
-);
+const Default = (args) => <KeyEvents keyEvents={events} {...args} />;
+
+Default.args = {
+	theme: Pillar.News,
+};
 
 // ----- Exports ----- //
 
 export default {
 	component: KeyEvents,
 	title: "Common/Components/KeyEvents",
-	decorators: [withKnobs],
+	argTypes: {
+		theme: {
+			options: [
+				Pillar.News,
+				Pillar.Opinion,
+				Pillar.Sport,
+				Pillar.Culture,
+				Pillar.Lifestyle,
+				Special.Labs,
+				Special.SpecialReport,
+			],
+			control: { type: "select" },
+		},
+	},
 };
 
 export { Default };

@@ -3,14 +3,14 @@ import { Pillar, Theme } from "@guardian/types";
 
 export type paletteId = 300 | 400;
 
-export interface KeyEvent {
+interface KeyEvent {
 	time: string;
 	text: string;
 	url: string;
 }
 
-export const getColor = (pillar: Theme, paletteId: paletteId) => {
-	switch (pillar) {
+const getColor = (theme: Theme, paletteId: paletteId) => {
+	switch (theme) {
 		case Pillar.Sport:
 			return palette.sport[paletteId];
 		case Pillar.Culture:
@@ -23,3 +23,5 @@ export const getColor = (pillar: Theme, paletteId: paletteId) => {
 			return palette.news[paletteId];
 	}
 };
+
+export { KeyEvent, getColor };
