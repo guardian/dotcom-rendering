@@ -10,8 +10,8 @@ import { Design, Display, map, none, some } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
-import Body from 'components/body';
 import { atomCss, atomScript } from 'components/interactiveAtom';
+import Layout from 'components/layout';
 import Meta from 'components/meta';
 import Scripts from 'components/scripts';
 import { fromCapi } from 'item';
@@ -132,7 +132,7 @@ const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
 	emotionServer.extractCritical(
 		renderToString(
 			<CacheProvider value={cache}>
-				<Body item={item} shouldHideAds={shouldHideAds(request)} />
+				<Layout item={item} shouldHideAds={shouldHideAds(request)} />
 			</CacheProvider>,
 		),
 	);
