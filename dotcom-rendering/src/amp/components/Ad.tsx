@@ -15,6 +15,9 @@ const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
 
 type AdRegion = 'US' | 'AU' | 'ROW';
 
+// Array of possible ad regions
+const adRegions: AdRegion[] = ['US', 'AU', 'ROW'];
+
 const dfpAdUnitRoot = 'theguardian.com';
 
 const ampData = (section: string, contentType: string): string => {
@@ -81,7 +84,6 @@ interface CommercialConfig {
 
 export interface AdProps {
 	isSticky?: boolean;
-	adRegion: AdRegion;
 	edition: Edition;
 	section: string;
 	contentType: string;
@@ -89,7 +91,11 @@ export interface AdProps {
 	commercialProperties: CommercialProperties;
 }
 
-export const Ad = ({
+export interface RegionalAdProps extends AdProps {
+	adRegion: AdRegion;
+}
+
+export const RegionalAd = ({
 	isSticky,
 	adRegion,
 	edition,
@@ -97,7 +103,7 @@ export const Ad = ({
 	contentType,
 	config,
 	commercialProperties,
-}: AdProps) => {
+}: RegionalAdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
 	const [{ width, height }] = adSizes;
@@ -141,3 +147,26 @@ export const Ad = ({
 		</ClassNames>
 	);
 };
+
+export const Ad = ({
+	isSticky,
+	edition,
+	section,
+	contentType,
+	config,
+	commercialProperties,
+}: AdProps) => (
+	<>
+		{adRegions.map((adRegion) => (
+			<RegionalAd
+				adRegion={adRegion}
+				isSticky={isSticky}
+				edition={edition}
+				section={section}
+				contentType={contentType}
+				config={config}
+				commercialProperties={commercialProperties}
+			/>
+		))}
+	</>
+);

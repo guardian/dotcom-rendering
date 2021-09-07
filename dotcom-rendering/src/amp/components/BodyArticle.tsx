@@ -140,27 +140,6 @@ export const Body: React.FC<{
 								css={adStyle}
 							>
 								<Ad
-									adRegion="US"
-									edition={data.editionId}
-									section={data.sectionName || ''}
-									contentType={adInfo.contentType}
-									config={adConfig}
-									commercialProperties={
-										adInfo.commercialProperties
-									}
-								/>
-								<Ad
-									adRegion="AU"
-									edition={data.editionId}
-									section={data.sectionName || ''}
-									contentType={adInfo.contentType}
-									config={adConfig}
-									commercialProperties={
-										adInfo.commercialProperties
-									}
-								/>
-								<Ad
-									adRegion="ROW"
 									edition={data.editionId}
 									section={data.sectionName || ''}
 									contentType={adInfo.contentType}
