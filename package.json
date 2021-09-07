@@ -20,6 +20,7 @@
     "@storybook/react": "^6.3.7",
     "babel-loader": "^8.2.2",
     "chromatic": "^5.9.2",
+    "copy-webpack-plugin": "^9.0.1",
     "desvg-loader": "^0.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "mockdate": "^3.0.5",
