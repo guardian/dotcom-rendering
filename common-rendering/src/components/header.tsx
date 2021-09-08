@@ -31,9 +31,9 @@ const backgroundTop = (theme: Theme): SerializedStyles => css`
 	}
 `;
 
-const creditStyles: SerializedStyles = css`
+const creditStyles = (theme): SerializedStyles => css`
 	${headline.xxxsmall()};
-	color: ${news[600]};
+	color: ${getAccentColour(theme)};
 	margin-bottom: ${space[1]}px;
 `;
 
@@ -53,7 +53,7 @@ const backgroundBottom = (theme: Theme): SerializedStyles => css`
 
 	li::before {
 		content: "";
-		background-color: ${news[600]};
+		background-color: ${getAccentColour(theme)};
 		width: 0.75rem;
 		height: 0.75rem;
 		border-radius: 0.5rem;
@@ -69,14 +69,14 @@ const backgroundBottom = (theme: Theme): SerializedStyles => css`
 	a {
 		text-decoration: none;
 		padding-bottom: 0.005rem;
-		border-bottom: 1px solid ${news[600]};
+		border-bottom: 1px solid ${getAccentColour(theme)};
 	}
 `;
 
 const Header: FC<HeaderProps> = ({ theme, title, credit, standfirst }) => (
 	<>
 		<div css={backgroundTop(theme)}>
-			<span css={creditStyles}>{credit}</span>
+			<span css={creditStyles(theme)}>{credit}</span>
 			<span>{title}</span>
 		</div>
 		<div css={backgroundBottom(theme)}>{standfirst}</div>
@@ -110,6 +110,21 @@ const getPillarBottom = (theme: Theme) => {
 			return opinion[200];
 		default:
 			return news[200];
+	}
+};
+
+const getAccentColour = (theme: Theme) => {
+	switch (theme) {
+		case Pillar.Sport:
+			return text.ctaPrimary;
+		case Pillar.Culture:
+			return culture[600];
+		case Pillar.Lifestyle:
+			return lifestyle[600];
+		case Pillar.Opinion:
+			return opinion[600];
+		default:
+			return news[600];
 	}
 };
 
