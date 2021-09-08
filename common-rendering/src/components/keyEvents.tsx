@@ -4,8 +4,8 @@ import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { remSpace } from "@guardian/src-foundations";
+import { focusHalo } from "@guardian/src-foundations/accessibility";
 import {
-	border,
 	culture,
 	lifestyle,
 	neutral,
@@ -79,7 +79,7 @@ const titleRowStyles: SerializedStyles = css`
 	align-items: center;
 
 	&:focus {
-		outline: ${border.focusHalo} solid 5px;
+		${focusHalo}
 	}
 
 	path {
