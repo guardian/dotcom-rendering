@@ -4,7 +4,16 @@ import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
 import { FC } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
-import { palette, remSpace } from "@guardian/src-foundations";
+import { remSpace } from "@guardian/src-foundations";
+import {
+	border,
+	culture,
+	lifestyle,
+	neutral,
+	news,
+	sport,
+	opinion,
+} from "@guardian/src-foundations/palette";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
 import { Pillar, Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
@@ -31,15 +40,15 @@ interface ListItemProps {
 const getColor = (theme: Theme, paletteId: paletteId) => {
 	switch (theme) {
 		case Pillar.Sport:
-			return palette.sport[paletteId];
+			return sport[paletteId];
 		case Pillar.Culture:
-			return palette.culture[paletteId];
+			return culture[paletteId];
 		case Pillar.Lifestyle:
-			return palette.lifestyle[paletteId];
+			return lifestyle[paletteId];
 		case Pillar.Opinion:
-			return palette.opinion[paletteId];
+			return opinion[paletteId];
 		default:
-			return palette.news[paletteId];
+			return news[paletteId];
 	}
 };
 
@@ -70,11 +79,11 @@ const titleRowStyles: SerializedStyles = css`
 	align-items: center;
 
 	&:focus {
-		outline: none;
+		outline: ${border.focusHalo} solid 5px;
 	}
 
 	path {
-		fill: ${palette.neutral[46]};
+		fill: ${neutral[46]};
 	}
 
 	svg {
@@ -92,7 +101,7 @@ const titleRowStyles: SerializedStyles = css`
 
 const titleStyle: SerializedStyles = css`
 	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 `;
 
 const listStyles: SerializedStyles = css`
@@ -108,7 +117,7 @@ const listStyles: SerializedStyles = css`
 
 	li::before {
 		content: "";
-		border-color: transparent ${palette.neutral[7]};
+		border-color: transparent ${neutral[7]};
 		border-style: solid;
 		border-width: 0.4rem 0 0.4rem 0.5rem;
 		display: block;
@@ -121,7 +130,7 @@ const listStyles: SerializedStyles = css`
 
 const listItemStyles: SerializedStyles = css`
 	padding-bottom: ${remSpace[3]};
-	border-left: 1px solid ${palette.neutral[7]};
+	border-left: 1px solid ${neutral[7]};
 	position: relative;
 
 	&:last-child {
@@ -141,7 +150,7 @@ const textStyles = (theme: Theme): SerializedStyles => css`
 
 const timeStyles: SerializedStyles = css`
 	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 	display: block;
 `;
 
@@ -163,7 +172,7 @@ const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, theme }) => {
 		<div css={keyEventWrapperStyles}>
 			<details open css={detailsStyles}>
 				<summary css={titleRowStyles}>
-					<div css={titleStyle}>Key Events</div>
+					<h2 css={titleStyle}>Key Events</h2>
 					<span className="is-off">
 						<SvgChevronDownSingle />
 					</span>
@@ -184,4 +193,4 @@ const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, theme }) => {
 // ----- Exports ----- //
 
 export default KeyEvents;
-export { KeyEvent };
+export type { KeyEvent };

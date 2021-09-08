@@ -2,7 +2,7 @@
 
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
-import { Pillar, Special } from "@guardian/types";
+import { Pillar, Theme, Special } from "@guardian/types";
 
 // ----- Stories ----- //
 
@@ -68,7 +68,7 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const Default = (args: { theme: Pillar }) => (
+const Default = (args: { theme: Theme }) => (
 	<KeyEvents keyEvents={events} {...args} />
 );
 
