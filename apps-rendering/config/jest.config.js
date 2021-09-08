@@ -36,7 +36,7 @@ module.exports = {
 						'@babel/preset-react',
 						{
 							runtime: 'automatic',
-							importSource: '@emotion/core',
+							importSource: '@emotion/react',
 						},
 					],
 				],
