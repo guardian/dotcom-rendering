@@ -13,7 +13,8 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import { BodyImage, FigCaption } from '@guardian/image-rendering';
+import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
+import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';

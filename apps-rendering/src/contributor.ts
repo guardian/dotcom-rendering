@@ -2,7 +2,7 @@
 
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import { Dpr, src, srcsetWithWidths } from '@guardian/image-rendering';
+import { Dpr, src, srcsetWithWidths } from '@guardian/common-rendering/src/srcsets';
 import type { Option } from '@guardian/types';
 import { fromNullable, map, none, Role } from '@guardian/types';
 import { articleContributors } from 'capi';
