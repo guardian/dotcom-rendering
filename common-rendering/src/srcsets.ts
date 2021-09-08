@@ -16,7 +16,7 @@ const lowerQuality = 45;
 
 // ----- Types ----- //
 
-const enum Dpr {
+enum Dpr {
   One,
   Two,
 }
