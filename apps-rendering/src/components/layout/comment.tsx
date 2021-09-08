@@ -10,7 +10,7 @@ import {
 	opinion,
 } from '@guardian/src-foundations/palette';
 import Byline from 'components/byline';
-import Cutout from 'components/comment/cutout';
+import Cutout from 'components/cutout';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';

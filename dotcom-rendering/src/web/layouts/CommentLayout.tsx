@@ -316,7 +316,7 @@ export const CommentLayout = ({
 
 	return (
 		<>
-			<div>
+			<div id="bannerandheader">
 				<Stuck>
 					<ElementContainer
 						showTopBorder={false}
