@@ -154,7 +154,7 @@ const timeStyles: SerializedStyles = css`
 	display: block;
 `;
 
-const ListItem = ({ keyEvent, theme }) => {
+const ListItem = ({ keyEvent, theme }: ListItemProps) => {
 	return (
 		<li css={listItemStyles}>
 			<div css={timeTextWrapperStyles}>
@@ -171,7 +171,7 @@ const ListItem = ({ keyEvent, theme }) => {
 	);
 };
 
-const KeyEvents = ({ keyEvents, theme }) => {
+const KeyEvents = ({ keyEvents, theme }: KeyEventsProps) => {
 	return (
 		<div css={keyEventWrapperStyles}>
 			<details open css={detailsStyles}>
