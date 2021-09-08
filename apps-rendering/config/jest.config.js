@@ -32,15 +32,7 @@ module.exports = {
 						'@babel/preset-env',
 						{ targets: { node: '12' }, modules: 'cjs' },
 					],
-					[
-						'@babel/preset-react',
-						{
-							runtime: 'automatic',
-							importSource: '@emotion/react',
-						},
-					],
 				],
-				plugins: ['@emotion'],
 			},
 			tsconfig: 'config/tsconfig.test.json',
 		},
