@@ -21,9 +21,6 @@
     "cypress:run": "cypress run",
     "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
     "cypress:run:mocked": "cypress run --spec 'cypress/integration/mocked/**/*'",
-    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./src/static -p 6006",
-    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./src/static",
-    "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
     "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/frontend.js"
   },
   "bundlesize": [
@@ -43,9 +40,9 @@
     "@emotion/server": "^11.4.0",
     "@guardian/ab-core": "^2.0.0",
     "@guardian/ab-react": "^2.0.1",
-    "@guardian/atoms-rendering": "^18.0.0",
+    "@guardian/atoms-rendering": "^18.0.1",
     "@guardian/automat-contributions": "^0.4.0",
-    "@guardian/braze-components": "^3.4.0",
+    "@guardian/braze-components": "^3.5.0",
     "@guardian/commercial-core": "^0.19.2",
     "@guardian/consent-management-platform": "~6.11.5",
     "@guardian/discussion-rendering": "^7.0.0",

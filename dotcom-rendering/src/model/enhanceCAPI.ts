@@ -7,6 +7,7 @@ import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-inte
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { enhanceEmbeds } from '@root/src/model/enhance-embeds';
+import { enhancePlaceholders } from '@root/src/model/enhance-placeholders';
 
 class CAPIEnhancer {
 	capi: CAPIType;
@@ -59,6 +60,11 @@ class CAPIEnhancer {
 		this.capi = setIsDev(this.capi);
 		return this;
 	}
+
+	enhancePlaceholders() {
+		this.capi = enhancePlaceholders(this.capi);
+		return this;
+	}
 }
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
@@ -73,5 +79,6 @@ export const enhanceCAPI = (body: CAPIType): CAPIType => {
 		.enhanceDots()
 		.enhanceImages()
 		.enhanceNumberedLists()
+		.enhancePlaceholders()
 		.enhanceEmbeds().capi;
 };

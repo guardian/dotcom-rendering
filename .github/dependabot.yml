@@ -3,13 +3,26 @@
 # Please see the documentation for all configuration options:
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
-# We check @guardian NPM dependencies daily and the rest of the npm dependencies weekly.
-
 version: 2
 updates:
-  # NPM packages
-  - package-ecosystem: "npm" 
-    directory: "/dotcom-rendering"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
+    - package-ecosystem: 'npm'
+      directory: '/'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/apps-rendering'
+      schedule:
+          interval: 'daily'
+      labels:
+        - "AR Dependency"
+    - package-ecosystem: "npm" 
+      directory: "/dotcom-rendering"
+      schedule:
+        interval: "daily"
+      labels:
+        - "DCR Dependency"
+      open-pull-requests-limit: 10
+    - package-ecosystem: 'github-actions'
+      directory: '/'
+      schedule:
+          interval: 'daily'

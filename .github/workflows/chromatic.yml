@@ -1,28 +1,28 @@
-name: DCR chromatic 👓
-on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
+name: Chromatic 👓
+on: push
 
 jobs:
-    chromatic:
-        name: DCR Chromatic
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - uses: guardian/actions-setup-node@main
+  chromatic:
+    name: Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: guardian/actions-setup-node@main
 
-            # Cache npm dependencies using https://github.com/bahmutov/npm-install
-            - uses: bahmutov/npm-install@v1
-              with:
-                  working-directory: dotcom-rendering
+      # Cache npm dependencies using https://github.com/bahmutov/npm-install
+      - uses: bahmutov/npm-install@v1
 
-            - name: Install and build
-              run: yarn && yarn makeBuild
-              working-directory: dotcom-rendering
+      # Install packages for dotcom-rendering project
+      - uses: bahmutov/npm-install@v1
+        with:
+          working-directory: dotcom-rendering
 
-            - uses: chromaui/action@v1
-              with:
-                  workingDir: dotcom-rendering
-                  projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
-                  token: ${{ secrets.GITHUB_TOKEN }}
+      # Install packages for apps-rendering project
+      - uses: bahmutov/npm-install@v1
+        with:
+          working-directory: apps-rendering
+
+      - uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -557,24 +557,24 @@ export const Front2 = () => (
 			showTopBorder={false}
 			padded={false}
 			backgroundColour={brandBackground.primary}
-        >
+		>
 			<Nav
 				format={{
-                    theme: Pillar.News,
-                    display: Display.Standard,
-                    design: Design.Article,
-                }}
+					theme: Pillar.News,
+					display: Display.Standard,
+					design: Design.Article,
+				}}
 				nav={NAV}
 				subscribeUrl=""
 				edition="US"
-            />
+			/>
 		</ElementContainer>
 		<ElementContainer
 			backgroundColour={background.primary}
 			padded={false}
 			showTopBorder={false}
 			showSideBorders={true}
-        >
+		>
 			<Lines count={4} effect="straight" />
 		</ElementContainer>
 		<ContainerLayout

@@ -178,6 +178,19 @@ const stretchLines = css`
 	}
 `;
 
+const stretchMetaLines = css`
+	margin: 0 -10px;
+	${from.mobileLandscape} {
+		margin: 0 -20px;
+	}
+	${from.tablet} {
+		margin-right: -40px;
+	}
+	${from.leftCol} {
+		margin-right: -20px;
+	}
+`;
+
 const starWrapper = css`
 	margin-bottom: 18px;
 	margin-top: 6px;
@@ -474,7 +487,13 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										webTitle={CAPI.webTitle}
 									/>
 
-									<Lines data-print-layout="hide" count={4} />
+									{/* <Lines data-print-layout="hide" count={4} /> */}
+									<div css={stretchMetaLines}>
+										<Lines
+											count={4}
+											data-print-layout="hide"
+										/>
+									</div>
 									<SubMeta
 										palette={palette}
 										format={format}
