@@ -21,6 +21,10 @@ jobs:
             - uses: actions/checkout@v1
             - uses: guardian/actions-setup-node@main
 
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            # Root dependencies
+            - uses: bahmutov/npm-install@v1
+
             - uses: actions/cache@v2
               with:
                   path: ~/.npm
