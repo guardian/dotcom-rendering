@@ -15,6 +15,7 @@ import {
 	opinion,
 } from "@guardian/src-foundations/palette";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
+import { Link } from "@guardian/src-link";
 import { Pillar, Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
 
@@ -159,9 +160,13 @@ const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
 		<li css={listItemStyles}>
 			<div css={timeTextWrapperStyles}>
 				<time css={timeStyles}>{keyEvent.time}</time>
-				<a css={textStyles(theme)} href={keyEvent.url}>
+				<Link
+					priority="secondary"
+					css={textStyles(theme)}
+					href={keyEvent.url}
+				>
 					{keyEvent.text}
-				</a>
+				</Link>
 			</div>
 		</li>
 	);

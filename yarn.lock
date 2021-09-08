@@ -1392,6 +1392,13 @@
   resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-3.9.0.tgz#2c1c8c3fc91ba7916371d1608bcd09b925ba17bd"
   integrity sha512-RlyU41mwRkXUdQSt7+JzXYaDXdqEady5/NiweFtunPeIXYGEoSe/5i6KPZdaIJ5vTnoRmglNYJhdMVbvzxfV2Q==
 
+"@guardian/src-link@^3.8.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-link/-/src-link-3.9.0.tgz#2fd9c406329e9421529dc65615fed20307c580af"
+  integrity sha512-gWm64JUHtS2F0jVR2MP63aIb5F6HY0l9oayM/qdrf0tZ6XhsfuhyR5qX0KyeNKxwiU1nO8vrnxGFDmYg6lfxAw==
+  dependencies:
+    "@guardian/src-helpers" "^3.9.0"
+
 "@guardian/types@^8.0.0":
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/@guardian/types/-/types-8.1.0.tgz#520e16d93c1a8f2bf36c8f4faff5bea81fb9346d"
