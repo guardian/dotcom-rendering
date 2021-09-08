@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import Img from '@guardian/common-rendering/src/components/img';
+import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
