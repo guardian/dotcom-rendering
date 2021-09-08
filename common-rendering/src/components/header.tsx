@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
 import type { FC, ReactElement } from "react";
+import { useState } from "react";
 import { headline } from "@guardian/src-foundations/typography";
 import { space } from "@guardian/src-foundations";
 import { Theme, Pillar } from "@guardian/types";
@@ -20,111 +21,112 @@ type HeaderProps = {
 	standfirst: ReactElement;
 };
 
-const backgroundTop = (theme: Theme): SerializedStyles => css`
-	background-color: ${getPillarTop(theme)};
-	width: 100%;
-	${headline.small()};
-	color: ${text.ctaPrimary};
-	padding: ${space[1]}px ${space[2]}px ${space[5]}px;
-	span {
-		display: block;
-	}
-`;
+const Header: FC<HeaderProps> = ({ theme, title, credit, standfirst }) => {
+	const [themeColours, setThemeColours] = useState<Colours>(() =>
+		getThemeColours(theme)
+	);
 
-const creditStyles = (theme): SerializedStyles => css`
-	${headline.xxxsmall()};
-	color: ${getAccentColour(theme)};
-	margin-bottom: ${space[1]}px;
-`;
-
-const backgroundBottom = (theme: Theme): SerializedStyles => css`
-	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${getPillarBottom(theme)};
-	width: 100%;
-	min-height: 100px;
-	p,
-	a,
-	li {
+	const backgroundTop: SerializedStyles = css`
+		background-color: ${themeColours.backgroundTop};
+		width: 100%;
+		${headline.small()};
 		color: ${text.ctaPrimary};
+		padding: ${space[1]}px ${space[2]}px ${space[5]}px;
+		span {
+			display: block;
+		}
+	`;
+
+	const creditStyles: SerializedStyles = css`
 		${headline.xxxsmall()};
-		line-height: 135%;
-		margin-bottom: ${space[2]}px;
-	}
+		color: ${themeColours.creditColour};
+		margin-bottom: ${space[1]}px;
+	`;
 
-	li::before {
-		content: "";
-		background-color: ${getAccentColour(theme)};
-		width: 0.75rem;
-		height: 0.75rem;
-		border-radius: 0.5rem;
-		display: inline-block;
-		vertical-align: middle;
-		margin-right: 0.5rem;
-	}
+	const backgroundBottom: SerializedStyles = css`
+		padding: ${space[1]}px ${space[2]}px;
+		background-color: ${themeColours.backgroundTop};
+		width: 100%;
+		min-height: 100px;
+		p,
+		a,
+		li {
+			color: ${text.ctaPrimary};
+			${headline.xxxsmall()};
+			line-height: 135%;
+			margin-bottom: ${space[2]}px;
+		}
 
-	li {
-		padding-left: 1.25rem;
-		text-indent: -1.25rem;
-	}
-	a {
-		text-decoration: none;
-		padding-bottom: 0.005rem;
-		border-bottom: 1px solid ${getAccentColour(theme)};
-	}
-`;
+		li::before {
+			content: "";
+			background-color: ${themeColours.accentColour};
+			width: 0.75rem;
+			height: 0.75rem;
+			border-radius: 0.5rem;
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 0.5rem;
+		}
 
-const Header: FC<HeaderProps> = ({ theme, title, credit, standfirst }) => (
-	<>
-		<div css={backgroundTop(theme)}>
-			<span css={creditStyles(theme)}>{credit}</span>
-			<span>{title}</span>
-		</div>
-		<div css={backgroundBottom(theme)}>{standfirst}</div>
-	</>
-);
+		li {
+			padding-left: 1.25rem;
+			text-indent: -1.25rem;
+		}
+		a {
+			text-decoration: none;
+			padding-bottom: 0.005rem;
+			border-bottom: 1px solid ${themeColours.accentColour};
+		}
+	`;
 
-const getPillarTop = (theme: Theme) => {
-	switch (theme) {
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		default:
-			return news[300];
-	}
+	return (
+		<>
+			<div css={backgroundTop}>
+				<span css={creditStyles}>{credit}</span>
+				<span>{title}</span>
+			</div>
+			<div css={backgroundBottom}>{standfirst}</div>
+		</>
+	);
 };
 
-const getPillarBottom = (theme: Theme) => {
+const getThemeColours = (theme: Theme) => {
 	switch (theme) {
 		case Pillar.Sport:
-			return sport[100];
+			return {
+				backgroundTop: sport[300],
+				backgroundBottom: sport[100],
+				creditColour: sport[600],
+				accentColour: text.ctaPrimary,
+			};
 		case Pillar.Culture:
-			return culture[200];
+			return {
+				backgroundTop: culture[300],
+				backgroundBottom: culture[200],
+				creditColour: culture[600],
+				accentColour: culture[400],
+			};
 		case Pillar.Lifestyle:
-			return lifestyle[200];
+			return {
+				backgroundTop: lifestyle[300],
+				backgroundBottom: lifestyle[200],
+				creditColour: lifestyle[600],
+				accentColour: lifestyle[500],
+			};
 		case Pillar.Opinion:
-			return opinion[200];
+			return {
+				backgroundTop: opinion[300],
+				backgroundBottom: opinion[200],
+				creditColour: opinion[800],
+				accentColour: opinion[500],
+			};
 		default:
-			return news[200];
-	}
-};
-
-const getAccentColour = (theme: Theme) => {
-	switch (theme) {
-		case Pillar.Sport:
-			return text.ctaPrimary;
-		case Pillar.Culture:
-			return culture[600];
-		case Pillar.Lifestyle:
-			return lifestyle[600];
-		case Pillar.Opinion:
-			return opinion[600];
-		default:
-			return news[600];
+			return {
+				backgroundTop: news[300],
+				backgroundBottom: news[200],
+				creditColour: news[600],
+				accentColour: news[600],
+			};
 	}
 };
 
