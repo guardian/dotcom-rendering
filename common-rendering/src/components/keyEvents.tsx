@@ -2,7 +2,6 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { FC } from "react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { remSpace } from "@guardian/src-foundations";
 import {
@@ -155,7 +154,7 @@ const timeStyles: SerializedStyles = css`
 	display: block;
 `;
 
-const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
+const ListItem = ({ keyEvent, theme }) => {
 	return (
 		<li css={listItemStyles}>
 			<div css={timeTextWrapperStyles}>
@@ -172,7 +171,7 @@ const ListItem: FC<ListItemProps> = ({ keyEvent, theme }) => {
 	);
 };
 
-const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, theme }) => {
+const KeyEvents = ({ keyEvents, theme }) => {
 	return (
 		<div css={keyEventWrapperStyles}>
 			<details open css={detailsStyles}>
