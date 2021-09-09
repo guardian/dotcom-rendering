@@ -55,7 +55,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 						/>
 					);
 				}
-				case Design.FullPageInteractive: {
+				case Design.FullPageInteractiveImmersive: {
 					return (
 						<FullPageInteractiveImmersiveLayout
 							CAPI={CAPI}
