@@ -68,12 +68,13 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const Default = (args: { theme: Theme }) => (
+const Default = (args: { theme: Theme; supportsDarkMode: boolean }) => (
 	<KeyEvents keyEvents={events} {...args} />
 );
 
 Default.args = {
 	theme: Pillar.News,
+	supportsDarkMode: false,
 };
 
 // ----- Exports ----- //
