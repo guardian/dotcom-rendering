@@ -218,7 +218,6 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 };
 
 const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
-	console.log("supportsDarkMode: ", supportsDarkMode);
 	return (
 		<div css={keyEventWrapperStyles(supportsDarkMode)}>
 			<details open css={detailsStyles}>
