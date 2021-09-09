@@ -153,11 +153,13 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	`}
 `;
 
-const listItemStyles: SerializedStyles = css`
+const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	padding-bottom: ${remSpace[3]};
 	border-left: 1px solid ${neutral[7]};
 	position: relative;
-
+	${darkModeCss(supportsDarkMode)`
+		border-left: 1px solid ${neutral[60]};
+	`}
 	&:last-child {
 		border-left: none;
 	}
@@ -175,8 +177,16 @@ const textStyles = (
 	color: ${getColor(theme, 300)};
 	text-decoration: none;
 
+	&:hover {
+		color: ${getColor(theme, 300)};
+		text-decoration: underline;
+	}
+
 	${darkModeCss(supportsDarkMode)`
 		color: ${getColor(theme, 500)};
+		&:hover {
+			color: ${getColor(theme, 500)};
+		}
 	`}
 `;
 
@@ -192,7 +202,7 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 	return (
-		<li css={listItemStyles}>
+		<li css={listItemStyles(supportsDarkMode)}>
 			<div css={timeTextWrapperStyles}>
 				<time css={timeStyles(supportsDarkMode)}>{keyEvent.time}</time>
 				<Link
