@@ -82,7 +82,7 @@ const detailsStyles: SerializedStyles = css`
 
 const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	position: relative;
-	margin: ${remSpace[1]} ${remSpace[1]} 0 ${remSpace[3]};
+	margin: 0 ${remSpace[1]} 0 ${remSpace[3]};
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
