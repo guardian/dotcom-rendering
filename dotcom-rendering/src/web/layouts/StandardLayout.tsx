@@ -353,7 +353,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							padded={false}
 							shouldCenter={false}
 						>
-							{JSON.stringify(CAPI.config.abTests, null, 2)}
+							<div className="abtest" css={{display: "none"}}>{JSON.stringify(CAPI.config.abTests, null, 2)}</div>
 
 							<HeaderAdSlot
 								isAdFreeUser={CAPI.isAdFreeUser}
