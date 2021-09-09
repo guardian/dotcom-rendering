@@ -158,11 +158,11 @@ const arWebpack = (config) => {
 		Buffer: "buffer",
 	};
 
-	// config.plugins.push(
-	// 	new CopyPlugin({
-	// 		patterns: [{ from: "apps-rendering/assets/fonts/", to: "fonts/" }],
-	// 	})
-	// );
+	config.plugins.push(
+		new CopyPlugin({
+			patterns: [{ from: "apps-rendering/assets/fonts/", to: "fonts/" }],
+		})
+	);
 
 	return config;
 };
