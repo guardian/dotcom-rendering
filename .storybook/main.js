@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
 	core: {
@@ -90,7 +89,7 @@ const dcrWebpack = (config) => {
 	fileLoaderRule.exclude = /\.svg$/;
 	rules.push({
 		test: /\.svg$/,
-		use: ["desvg-loader/react", "svg-loader"],
+		use: [ "desvg-loader/react", "svg-loader" ],
 	});
 
 	config.resolve.alias = {
@@ -157,12 +156,6 @@ const arWebpack = (config) => {
 		"preact-render-to-string": "react-dom/server",
 		Buffer: "buffer",
 	};
-
-	config.plugins.push(
-		new CopyPlugin({
-			patterns: [{ from: "apps-rendering/assets/fonts/", to: "fonts/" }],
-		})
-	);
 
 	return config;
 };
