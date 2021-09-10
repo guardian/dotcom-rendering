@@ -5,7 +5,7 @@ import { useState } from "react";
 import { headline, textSans } from "@guardian/src-foundations/typography";
 import { space } from "@guardian/src-foundations";
 import { from, until } from "@guardian/src-foundations/mq";
-import { Theme, Pillar } from "@guardian/types";
+import { Theme, Pillar } from "@guardian/types"; // TODO: update to /libs when possible
 import {
 	sport,
 	news,
