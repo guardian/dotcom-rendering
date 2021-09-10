@@ -330,7 +330,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					if (consentState.tcfv2) {
 						return consentState.tcfv2?.tcString;
 					}
-					return "undefined";
+					return "";
 				}
 				const consentUUID = getCookie('consentUUID')
 				const consentString = decideConsentString();
