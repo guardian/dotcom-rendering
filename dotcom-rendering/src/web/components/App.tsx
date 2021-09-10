@@ -328,7 +328,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			onConsentChange((consentState) => {
 				const decideConsentString = () => {
 					if (consentState.tcfv2) {
-						return consentState?.tcfv2?.tcString;
+						return consentState.tcfv2?.tcString;
 					}
 					return "undefined";
 				}
@@ -336,11 +336,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				const consentString = decideConsentString();
 				const event = {
 					component: {
-					  componentType: 'CONSENT',
-					  products: [],
-					  labels:  [consentUUID, consentString],
+						componentType: 'CONSENT',
+						products: [],
+						labels: [consentUUID, consentString],
 					},
-					action: 'CONSENT',
+					action: 'MANAGE_CONSENT', // I am using MANAGE_CONSENT as the default action while we develop this code.
 				}
 				const ophanEventSubmit = getOphanRecordFunction()
 				ophanEventSubmit(event);
@@ -721,11 +721,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
-				<CommercialMetrics
-					browserId={browserId}
-					pageViewId={pageViewId}
-				/>
-			)}
+			<CommercialMetrics
+				browserId={browserId}
+				pageViewId={pageViewId}
+					/>
+				)}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
