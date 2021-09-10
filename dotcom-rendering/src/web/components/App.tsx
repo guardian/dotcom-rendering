@@ -151,6 +151,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		Promise<CountryCode | null>
 	>();
 
+	const [consentState, setConsentState] = useState<ConsentState | undefined>(
+		undefined,
+	);
+
 	const [brazeMessages, setBrazeMessages] = useState<
 		Promise<BrazeMessagesInterface>
 	>();
@@ -291,72 +295,73 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [CAPI.shouldHideReaderRevenue]);
 
 	// kick off the CMP...
-	useEffect(() => {
+	useOnce(() => {
+		if (!CAPI.config.switches.consentManagement) return; // CMP turned off!
+
+		// Run each time consent is submitted
+		onConsentChange((newConsent) => {
+			setConsentState(newConsent);
+		});
+
+		// manually updates the footer DOM because it's not hydrated
+		injectPrivacySettingsLink();
+
 		// the UI is injected automatically into the page,
 		// and is not a react component, so it's
 		// handled in here.
-		if (CAPI.config.switches.consentManagement && countryCode) {
-			const pubData = {
+		cmp.init({
+			country: countryCode,
+			pubData: {
 				platform: 'next-gen',
 				browserId,
 				pageViewId,
-			};
-			injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
+			},
+		});
+	}, [countryCode, pageViewId, browserId]);
 
-			// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-			// mark: CONSENT_TIMING
-			let recordedConsentTime = false;
-			onConsentChange(() => {
-				if (!recordedConsentTime) {
-					recordedConsentTime = true;
-					cmp.willShowPrivacyMessage()
-						.then((willShow) => {
-							trackPerformance(
-								'consent',
-								'acquired',
-								willShow ? 'new' : 'existing',
-							);
-						})
-						.catch((e) =>
-							console.error(
-								`CMP willShowPrivacyMessage - error: ${e}`,
-							),
-						);
-				}
-			});
+	// This code is executed at first render and then again each time consentState is set
+	useEffect(() => {
+		if (!consentState) return;
+		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+		// mark: CONSENT_TIMING
+		let recordedConsentTime = false;
 
-			onConsentChange((consentState) => {
-				const decideConsentString = () => {
-					if (consentState.tcfv2) {
-						return consentState.tcfv2?.tcString;
-					}
-					return "";
-				}
-				const consentUUID = getCookie('consentUUID')
-				const consentString = decideConsentString();
-				const event = {
-					component: {
-						componentType: 'CONSENT',
-						products: [],
-						labels: [consentUUID, consentString],
-					},
-					action: 'MANAGE_CONSENT', // I am using MANAGE_CONSENT as the default action while we develop this code.
-				}
-				const ophanEventSubmit = getOphanRecordFunction()
-				ophanEventSubmit(event);
-			});
-
-			cmp.init({
-				country: countryCode,
-				pubData,
-			});
+		// Track performance once
+		if (!recordedConsentTime) {
+			recordedConsentTime = true;
+			cmp.willShowPrivacyMessage()
+				.then((willShow) => {
+					trackPerformance(
+						'consent',
+						'acquired',
+						willShow ? 'new' : 'existing',
+					);
+				})
+				.catch((e) =>
+					console.error(`CMP willShowPrivacyMessage - error: ${e}`),
+				);
 		}
-	}, [
-		countryCode,
-		CAPI.config.switches.consentManagement,
-		pageViewId,
-		browserId,
-	]);
+
+		// Register changes in consent state
+		const decideConsentString = () => {
+			if (consentState.tcfv2) {
+				return consentState.tcfv2?.tcString;
+			}
+			return '';
+		};
+		const consentUUID = getCookie('consentUUID');
+		const consentString = decideConsentString();
+		const event = {
+			component: {
+				componentType: 'CONSENT',
+				products: [],
+				labels: [consentUUID, consentString],
+			},
+			action: 'MANAGE_CONSENT', // I am using MANAGE_CONSENT as the default action while we develop this code.
+		};
+		const ophanEventSubmit = getOphanRecordFunction();
+		ophanEventSubmit(event);
+	}, [consentState]);
 
 	// ************************
 	// *   Google Analytics   *
