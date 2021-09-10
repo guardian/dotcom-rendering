@@ -30,7 +30,7 @@ const globalH3Styles = (display: Display) => {
 	if (display !== Display.NumberedList) return null;
 	return css`
 		h3 {
-			${headline.small({ fontWeight: 'bold' })};
+			${headline.xsmall({ fontWeight: 'bold' })};
 			margin-bottom: ${space[2]}px;
 		}
 	`;
