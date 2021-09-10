@@ -30,6 +30,89 @@ type Colours = {
 	accentColour: string;
 };
 
+const getBackgroundTop = (backgroundTop: string): SerializedStyles => css`
+	display: flex;
+	background-color: ${backgroundTop};
+	width: 100%;
+	padding: ${space[1]}px ${space[2]}px ${space[5]}px;
+
+	${from.mobileLandscape} {
+		padding: ${space[1]}px ${space[5]}px ${space[5]}px;
+	}
+
+	${from.desktop} {
+		padding: ${space[1]}px 0 ${space[5]}px;
+	}
+`;
+
+const titleStyles: SerializedStyles = css`
+	display: block;
+	${headline.small()};
+	color: ${text.ctaPrimary};
+`;
+
+const getCreditStyles = (creditColour: string): SerializedStyles => css`
+	display: block;
+	${headline.xxxsmall()};
+	color: ${creditColour};
+	margin-bottom: ${space[1]}px;
+
+	${from.desktop} {
+		position: absolute;
+		left: ${space[5]}px;
+		max-width: 180px;
+	}
+`;
+
+const getBackgroundBottom = (backgroundBottom: string, accentColour: string): SerializedStyles => css`
+	display: flex;
+	padding: ${space[1]}px ${space[2]}px;
+	background-color: ${backgroundBottom};
+	width: 100%;
+	min-height: 100px;
+	p,
+	a,
+	li {
+		color: ${text.ctaPrimary};
+		${headline.xxxsmall()};
+		line-height: 135%;
+		margin-bottom: ${space[2]}px;
+	}
+
+	li::before {
+		content: "";
+		background-color: ${accentColour};
+		width: 0.75rem;
+		height: 0.75rem;
+		border-radius: 0.5rem;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 0.5rem;
+	}
+
+	li {
+		padding-left: 1.25rem;
+		text-indent: -1.25rem;
+	}
+	a {
+		text-decoration: none;
+		padding-bottom: 0.005rem;
+		border-bottom: 1px solid ${accentColour};
+	}
+
+	${from.mobileLandscape} {
+		padding: ${space[1]}px ${space[5]}px;
+	}
+
+	${from.desktop} {
+		padding: ${space[1]}px 0;
+	}
+`;
+
+const bylineStyles: SerializedStyles = css`
+	margin: ${space[5]}px 0 ${space[3]}px;
+`;
+
 const leftColStyles: SerializedStyles = css`
 	display: inline-block;
 	height: 100%;
@@ -94,100 +177,17 @@ const Header: FC<HeaderProps> = ({
 	byline,
 }) => {
 	const [themeColours] = useState<Colours>(() => getThemeColours(theme));
-
-	const backgroundTop: SerializedStyles = css`
-		display: flex;
-		background-color: ${themeColours.backgroundTop};
-		width: 100%;
-		padding: ${space[1]}px ${space[2]}px ${space[5]}px;
-
-		${from.mobileLandscape} {
-			padding: ${space[1]}px ${space[5]}px ${space[5]}px;
-		}
-
-		${from.desktop} {
-			padding: ${space[1]}px 0 ${space[5]}px;
-		}
-	`;
-
-	const titleStyles: SerializedStyles = css`
-		display: block;
-		${headline.small()};
-		color: ${text.ctaPrimary};
-	`;
-
-	const creditStyles: SerializedStyles = css`
-		display: block;
-		${headline.xxxsmall()};
-		color: ${themeColours.creditColour};
-		margin-bottom: ${space[1]}px;
-
-		${from.desktop} {
-			position: absolute;
-			left: ${space[5]}px;
-			max-width: 180px;
-		}
-	`;
-
-	const backgroundBottom: SerializedStyles = css`
-		display: flex;
-		padding: ${space[1]}px ${space[2]}px;
-		background-color: ${themeColours.backgroundBottom};
-		width: 100%;
-		min-height: 100px;
-		p,
-		a,
-		li {
-			color: ${text.ctaPrimary};
-			${headline.xxxsmall()};
-			line-height: 135%;
-			margin-bottom: ${space[2]}px;
-		}
-
-		li::before {
-			content: "";
-			background-color: ${themeColours.accentColour};
-			width: 0.75rem;
-			height: 0.75rem;
-			border-radius: 0.5rem;
-			display: inline-block;
-			vertical-align: middle;
-			margin-right: 0.5rem;
-		}
-
-		li {
-			padding-left: 1.25rem;
-			text-indent: -1.25rem;
-		}
-		a {
-			text-decoration: none;
-			padding-bottom: 0.005rem;
-			border-bottom: 1px solid ${themeColours.accentColour};
-		}
-
-		${from.mobileLandscape} {
-			padding: ${space[1]}px ${space[5]}px;
-		}
-
-		${from.desktop} {
-			padding: ${space[1]}px 0;
-		}
-	`;
-
-	const bylineStyles: SerializedStyles = css`
-		margin: ${space[5]}px 0 ${space[3]}px;
-	`;
-	// TODO: implment timeAgo in the 'LIVE Updated [timeAgo] ago' span
+	// TODO: implment timeAgo in the 'LIVE Updated' section, and replace pulsing dot
 	return (
 		<>
-			<div css={backgroundTop}>
+			<div css={getBackgroundTop(themeColours.backgroundTop)}>
 				<aside css={leftColStyles} />
 				<div css={containerStyles}>
-					<span css={creditStyles}>{credit}</span>
+					<span css={getCreditStyles(themeColours.creditColour)}>{credit}</span>
 					<span css={titleStyles}>{title}</span>
 				</div>
 			</div>
-			<div css={backgroundBottom}>
+			<div css={getBackgroundBottom(themeColours.backgroundBottom, themeColours.accentColour)}>
 				<aside css={leftColStyles}>
 					<span css={[dotStyles, animation]} />
 					<span css={updatedStyles}>LIVE Updated 6m ago</span>
