@@ -70,6 +70,7 @@ import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { storage } from '@guardian/libs';
 import {
+	getOphanRecordFunction,
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
@@ -322,6 +323,27 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							),
 						);
 				}
+			});
+
+			onConsentChange((consentState) => {
+				const decideConsentString = () => {
+					if (consentState.tcfv2) {
+						return consentState.tcfv2?.tcString;
+					}
+					return "";
+				}
+				const consentUUID = getCookie('consentUUID')
+				const consentString = decideConsentString();
+				const event = {
+					component: {
+						componentType: 'CONSENT',
+						products: [],
+						labels: [consentUUID, consentString],
+					},
+					action: 'MANAGE_CONSENT', // I am using MANAGE_CONSENT as the default action while we develop this code.
+				}
+				const ophanEventSubmit = getOphanRecordFunction()
+				ophanEventSubmit(event);
 			});
 
 			cmp.init({
@@ -699,11 +721,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
-				<CommercialMetrics
-					browserId={browserId}
-					pageViewId={pageViewId}
-				/>
-			)}
+			<CommercialMetrics
+				browserId={browserId}
+				pageViewId={pageViewId}
+					/>
+				)}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
