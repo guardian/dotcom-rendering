@@ -378,15 +378,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		});
 	}, []);
 
-	const display: Display = decideDisplay(CAPI.format);
-	const design: Design = decideDesign(CAPI.format);
-	const pillar: Theme = decideTheme(CAPI.format);
-
 	useOnce(() => {
 		setBrazeMessages(
 			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
 		);
 	}, [isSignedIn, CAPI.config.idApiUrl]);
+
+	const display: Display = decideDisplay(CAPI.format);
+	const design: Design = decideDesign(CAPI.format);
+	const pillar: Theme = decideTheme(CAPI.format);
 
 	const format: Format = {
 		display,
