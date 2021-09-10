@@ -721,11 +721,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
-			<CommercialMetrics
-				browserId={browserId}
-				pageViewId={pageViewId}
-					/>
-				)}
+				<CommercialMetrics
+					browserId={browserId}
+					pageViewId={pageViewId}
+				/>
+			)}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
