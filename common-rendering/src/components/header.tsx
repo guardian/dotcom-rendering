@@ -1,9 +1,10 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
 import type { FC, ReactElement } from "react";
 import { useState } from "react";
-import { headline } from "@guardian/src-foundations/typography";
+import { headline, textSans } from "@guardian/src-foundations/typography";
 import { space } from "@guardian/src-foundations";
+import { from, until } from "@guardian/src-foundations/mq";
 import { Theme, Pillar } from "@guardian/types";
 import {
 	sport,
@@ -19,33 +20,119 @@ type HeaderProps = {
 	title: string;
 	credit: string;
 	standfirst: ReactElement;
+	byline?: ReactElement;
 };
 
-const Header: FC<HeaderProps> = ({ theme, title, credit, standfirst }) => {
-	const [themeColours, setThemeColours] = useState<Colours>(() =>
-		getThemeColours(theme)
-	);
+type Colours = {
+	backgroundTop: string;
+	backgroundBottom: string;
+	creditColour: string;
+	accentColour: string;
+};
+
+const leftColStyles: SerializedStyles = css`
+	display: inline-block;
+	height: 100%;
+	width: 220px;
+	padding: 0 ${space[5]}px;
+
+	${until.desktop} {
+		display: none;
+	}
+`;
+
+const containerStyles: SerializedStyles = css`
+	width: 100%;
+
+	${from.desktop} {
+		max-width: 700px;
+	}
+`;
+
+const updatedStyles: SerializedStyles = css`
+	color: ${text.ctaPrimary};
+	${textSans.xxsmall()};
+`;
+
+// The following pulsing dot implementation is a placeholder for the PulsingDot component, which
+// we will ideally lift up from dcr to common-rendering
+const allowsAnimation = "@media (prefers-reduced-motion: no-preference)";
+
+const livePulse = keyframes`
+    0% {opacity: 1;}
+    10% {opacity: .25;}
+    40% {opacity: 1;}
+    100% {opacity: 1;}
+`;
+
+const animation: SerializedStyles = css`
+	${allowsAnimation} {
+		animation: ${livePulse} 1s infinite;
+	}
+`;
+
+const dotStyles: SerializedStyles = css`
+	:before {
+		content: "";
+		background-color: ${text.ctaPrimary};
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 0.5rem;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 0.25rem;
+	}
+`;
+
+// End of temporary pulsing dot implementation
+
+const Header: FC<HeaderProps> = ({
+	theme,
+	title,
+	credit,
+	standfirst,
+	byline,
+}) => {
+	const [themeColours] = useState<Colours>(() => getThemeColours(theme));
 
 	const backgroundTop: SerializedStyles = css`
+		display: flex;
 		background-color: ${themeColours.backgroundTop};
 		width: 100%;
-		${headline.small()};
-		color: ${text.ctaPrimary};
 		padding: ${space[1]}px ${space[2]}px ${space[5]}px;
-		span {
-			display: block;
+
+		${from.mobileLandscape} {
+			padding: ${space[1]}px ${space[5]}px ${space[5]}px;
+		}
+
+		${from.desktop} {
+			padding: ${space[1]}px 0 ${space[5]}px;
 		}
 	`;
 
+	const titleStyles: SerializedStyles = css`
+		display: block;
+		${headline.small()};
+		color: ${text.ctaPrimary};
+	`;
+
 	const creditStyles: SerializedStyles = css`
+		display: block;
 		${headline.xxxsmall()};
 		color: ${themeColours.creditColour};
 		margin-bottom: ${space[1]}px;
+
+		${from.desktop} {
+			position: absolute;
+			left: ${space[5]}px;
+			max-width: 180px;
+		}
 	`;
 
 	const backgroundBottom: SerializedStyles = css`
+		display: flex;
 		padding: ${space[1]}px ${space[2]}px;
-		background-color: ${themeColours.backgroundTop};
+		background-color: ${themeColours.backgroundBottom};
 		width: 100%;
 		min-height: 100px;
 		p,
@@ -77,20 +164,44 @@ const Header: FC<HeaderProps> = ({ theme, title, credit, standfirst }) => {
 			padding-bottom: 0.005rem;
 			border-bottom: 1px solid ${themeColours.accentColour};
 		}
+
+		${from.mobileLandscape} {
+			padding: ${space[1]}px ${space[5]}px;
+		}
+
+		${from.desktop} {
+			padding: ${space[1]}px 0;
+		}
 	`;
 
+	const bylineStyles: SerializedStyles = css`
+		margin: ${space[5]}px 0 ${space[3]}px;
+	`;
+	// TODO: implment timeAgo in the 'LIVE Updated [timeAgo] ago' span
 	return (
 		<>
 			<div css={backgroundTop}>
-				<span css={creditStyles}>{credit}</span>
-				<span>{title}</span>
+				<aside css={leftColStyles} />
+				<div css={containerStyles}>
+					<span css={creditStyles}>{credit}</span>
+					<span css={titleStyles}>{title}</span>
+				</div>
 			</div>
-			<div css={backgroundBottom}>{standfirst}</div>
+			<div css={backgroundBottom}>
+				<aside css={leftColStyles}>
+					<span css={[dotStyles, animation]} />
+					<span css={updatedStyles}>LIVE Updated 6m ago</span>
+				</aside>
+				<div css={containerStyles}>
+					<span>{standfirst}</span>
+					{byline && <span css={bylineStyles}>{byline}</span>}
+				</div>
+			</div>
 		</>
 	);
 };
 
-const getThemeColours = (theme: Theme) => {
+function getThemeColours(theme: Theme) {
 	switch (theme) {
 		case Pillar.Sport:
 			return {
@@ -128,6 +239,6 @@ const getThemeColours = (theme: Theme) => {
 				accentColour: news[600],
 			};
 	}
-};
+}
 
 export default Header;
