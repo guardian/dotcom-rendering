@@ -15,7 +15,7 @@ export const replacePlaceholders = (
 
 	// Note: use str.replace with 'g' (global) flag as str.replaceAll not
 	// supported in current node version (14.6).
-	const re = /{{\s*(\w+)\s*}}/g;
+	const re = /\[\[\s*(\w+)\s*\]\]/g;
 	elem.html = elem.html.replace(re, replacer);
 
 	return elem;
@@ -50,8 +50,8 @@ const buildPlaceholders = (data: CAPIType): Map<string, string> => {
  * elements. Note, this will therefore not work on dynamically loaded or
  * generated markup.
  *
- * Variables are wrapped in curlies, e.g. {{ webPublicationDate }}. Surrounding
- * whitespace is ignored. E.g. {{webPublicationDate    }} is fine.
+ * Variables are wrapped in square brackets, e.g. [[ webPublicationDate ]].
+ * Surrounding whitespace is ignored. E.g. [[webPublicationDate    ]] is fine.
  */
 export const enhancePlaceholders = (data: CAPIType): CAPIType => {
 	const design: Design = decideDesign(data.format);
