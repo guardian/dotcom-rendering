@@ -55,15 +55,19 @@ const variantFromRunnable =
 
 ## Server-side A/B tests
 
-In order to set up a server-side test in DCR, follow steps 1-4 outlined in the [`frontend` documentation](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#write-a-server-side-test).
+In order to set up a server-side test in DCR, follow steps 1-4 outlined in the `frontend` [documentation](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#write-a-server-side-test).
 
 On the live website, [Fastly](https://github.com/guardian/fastly-edge-cache/blob/main/theguardiancom/src/main/resources/varnish21/ab-tests.vcl) automatically assigns users to buckets. You can force yourself into a test on your local machine by following these steps:
 
 1) Ensure you are running `frontend` locally and your server-side experiment is enabled in the dashboard.
-2) Use the Header Hacker extension to change the request as described in the `frontend` documentation. ⚠️ This is the only way to opt-in locally.
+2) Use the Header Hacker extension to change the HTTP headers as described in the `frontend` documentation. Please note that this is the only way to opt-in locally. If testing in the CODE environment, use the `/opt/in/` link.
 
-You can verify that you have been correctly assigned to the variant by appending `.json?dcr` to the end of an article link (e.g. `http://localhost:9000/world/2021/jan/01/your-article.json?dcr`. This will return the CAPI object in `JSON` format. Your A/B test will be within `config` in camel case, as follows:
+You can verify that you have been correctly assigned to the variant by appending `.json?dcr` to the end of an article link (e.g. `http://localhost:9000/world/2021/jan/01/your-article.json?dcr`. This will return the document data in `JSON` format. Your A/B test will be within the `config` object in camel case, as follows:
 
-`"abTests": { "yourAbTestVariant": "variant" }`
+```json
+"abTests": {
+	"yourAbTestVariant": "variant"
+}
+```
 
-The CAPI object can be accessed with `CAPI.config.abTests`
+You can access server-side `abTests` within DCR wherever the CAPI object is used (`CAPI.config.abTests`).
