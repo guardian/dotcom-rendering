@@ -342,9 +342,16 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					theme: getCurrentPillar(CAPI),
 			  };
 
+    // The following two lines refer to a server-side experiment ("remove-sticky-nav")
+	// that removes the sticky behaviour of the navigation and subnavigation bars.
+	// TODO: Remove this code after the experiment is complete.
+	const isInRemoveStickyNavVariant = CAPI.config.abTests.removeStickyNavVariant === 'variant';
+	const componentName = isInRemoveStickyNavVariant ? "non-sticky-nav" : "sticky-nav";
+
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader">
+			{/* The data-component attribute is needed to run analytics on the experiment. Remove after A/B testing is over. */}
+			<div data-print-layout="hide" id="bannerandheader" data-component={componentName}>
 				<>
 					<Stuck>
 						<ElementContainer
@@ -353,8 +360,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							padded={false}
 							shouldCenter={false}
 						>
-							<div className="abtest" css={{display: "none"}}>{JSON.stringify(CAPI.config.abTests, null, 2)}</div>
-
 							<HeaderAdSlot
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
@@ -379,9 +384,39 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					)}
+					{isInRemoveStickyNavVariant && (<ElementContainer
+						showSideBorders={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+					>
+						<Nav
+							nav={NAV}
+							format={formatForNav}
+							subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+							edition={CAPI.editionId}
+					/>
+					</ElementContainer>)}
+
+					{isInRemoveStickyNavVariant && NAV.subNavSections && format.theme !== Special.Labs && (
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						sectionId="sub-nav-root"
+				>
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							palette={palette}
+							format={format}
+					/>
+					</ElementContainer>
+			)}
+
 				</>
 			</div>
-
+			{!isInRemoveStickyNavVariant && (
 			<ElementContainer
 				showSideBorders={true}
 				borderColour={brandLine.primary}
@@ -395,9 +430,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
 					edition={CAPI.editionId}
 				/>
-			</ElementContainer>
+			</ElementContainer> )}
 
-			{NAV.subNavSections && format.theme !== Special.Labs && (
+			{!isInRemoveStickyNavVariant && NAV.subNavSections && format.theme !== Special.Labs && (
 				<ElementContainer
 					backgroundColour={palette.background.article}
 					padded={false}
