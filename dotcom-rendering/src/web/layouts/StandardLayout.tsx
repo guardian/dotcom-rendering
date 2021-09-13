@@ -390,7 +390,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</ElementContainer>
 					)}
 
-					{/* Experiment starts here. Remove this block of code after A/B testing is complete. */}
+					{/* For the purpose of this A/B test, the nav bar, the subnav and the four lines have been moved up
+					into this div to get rid of stickiness.
+					Remove this block of code after A/B testing is complete to restore original behaviour */}
 					{isInRemoveStickyNavVariant && (<ElementContainer
 						showSideBorders={true}
 						borderColour={brandLine.primary}
@@ -430,7 +432,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</>
 
 			)}
-					{/* Experiment ends here. Remove block of code above after A/B testing is complete. */}
+					{/* Remove block of code above after A/B testing is complete */}
 				</>
 			</div>
 
@@ -469,7 +471,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 			{/* If the user is in the experiment bucket and the page is not a Guardian Labs article, don't display the four lines,
 			as they've already been rendered in the sticky div above.
-			TODO: Get rid of nested ternary after the experiment is over.  */}
+			TODO: Get rid of nested ternary after the experiment is over */}
 			{format.theme !== Special.Labs ?
 			(!isInRemoveStickyNavVariant ? (
 				<ElementContainer
