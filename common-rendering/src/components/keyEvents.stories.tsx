@@ -2,7 +2,7 @@
 
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
-import { Pillar } from "@guardian/types";
+import { Pillar, Theme } from "@guardian/types";
 import { css } from "@emotion/react";
 
 // ----- Stories ----- //
@@ -59,6 +59,17 @@ const events: KeyEvent[] = [
 	},
 ];
 
+const keyEventComp = (dark: boolean, theme: Theme, title: string) => (
+	<div css={flexItemStyles}>
+		<div>{title}</div>
+		<KeyEvents keyEvents={events} theme={theme} supportsDarkMode={dark} />
+	</div>
+);
+
+const flexItemStyles = css`
+	flex-grow: 1;
+`;
+
 const keyEventWithTheme = (dark: boolean) => () => (
 	<div
 		css={css`
@@ -69,65 +80,11 @@ const keyEventWithTheme = (dark: boolean) => () => (
 			-ms-flex-positive: 1;
 		`}
 	>
-		<div
-			css={css`
-				flex-grow: 1;
-			`}
-		>
-			<KeyEvents
-				keyEvents={events}
-				theme={Pillar.News}
-				supportsDarkMode={dark}
-			/>
-		</div>
-
-		<div
-			css={css`
-				flex-grow: 1;
-			`}
-		>
-			<KeyEvents
-				keyEvents={events}
-				theme={Pillar.Opinion}
-				supportsDarkMode={dark}
-			/>
-		</div>
-
-		<div
-			css={css`
-				flex-grow: 1;
-			`}
-		>
-			<KeyEvents
-				keyEvents={events}
-				theme={Pillar.Culture}
-				supportsDarkMode={dark}
-			/>
-		</div>
-
-		<div
-			css={css`
-				flex-grow: 1;
-			`}
-		>
-			<KeyEvents
-				keyEvents={events}
-				theme={Pillar.Sport}
-				supportsDarkMode={dark}
-			/>
-		</div>
-
-		<div
-			css={css`
-				flex-grow: 1;
-			`}
-		>
-			<KeyEvents
-				keyEvents={events}
-				theme={Pillar.Lifestyle}
-				supportsDarkMode={dark}
-			/>
-		</div>
+		{keyEventComp(dark, Pillar.News, "News")}
+		{keyEventComp(dark, Pillar.Culture, "Culture")}
+		{keyEventComp(dark, Pillar.Lifestyle, "Lifestyle")}
+		{keyEventComp(dark, Pillar.Opinion, "Opinion")}
+		{keyEventComp(dark, Pillar.Sport, "Sport")}
 	</div>
 );
 
