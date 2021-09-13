@@ -2,19 +2,10 @@
 
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
-import { Pillar, Theme, Special } from "@guardian/types";
+import { Pillar } from "@guardian/types";
+import { css } from "@emotion/react";
 
 // ----- Stories ----- //
-
-const themeOptions = {
-	News: Pillar.News,
-	Opinion: Pillar.Opinion,
-	Sport: Pillar.Sport,
-	Culture: Pillar.Culture,
-	Lifestyle: Pillar.Lifestyle,
-	Labs: Special.Labs,
-	SpecialReport: Special.SpecialReport,
-};
 
 const events: KeyEvent[] = [
 	{
@@ -68,27 +59,86 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const Default = (args: { theme: Theme; supportsDarkMode: boolean }) => (
-	<KeyEvents keyEvents={events} {...args} />
+const keyEventWithTheme = (dark: boolean) => () => (
+	<div
+		css={css`
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			-ms-flex-positive: 1;
+		`}
+	>
+		<div
+			css={css`
+				flex-grow: 1;
+			`}
+		>
+			<KeyEvents
+				keyEvents={events}
+				theme={Pillar.News}
+				supportsDarkMode={dark}
+			/>
+		</div>
+
+		<div
+			css={css`
+				flex-grow: 1;
+			`}
+		>
+			<KeyEvents
+				keyEvents={events}
+				theme={Pillar.Opinion}
+				supportsDarkMode={dark}
+			/>
+		</div>
+
+		<div
+			css={css`
+				flex-grow: 1;
+			`}
+		>
+			<KeyEvents
+				keyEvents={events}
+				theme={Pillar.Culture}
+				supportsDarkMode={dark}
+			/>
+		</div>
+
+		<div
+			css={css`
+				flex-grow: 1;
+			`}
+		>
+			<KeyEvents
+				keyEvents={events}
+				theme={Pillar.Sport}
+				supportsDarkMode={dark}
+			/>
+		</div>
+
+		<div
+			css={css`
+				flex-grow: 1;
+			`}
+		>
+			<KeyEvents
+				keyEvents={events}
+				theme={Pillar.Lifestyle}
+				supportsDarkMode={dark}
+			/>
+		</div>
+	</div>
 );
 
-Default.args = {
-	theme: Pillar.News,
-	supportsDarkMode: false,
-};
+const Default = keyEventWithTheme(false);
+const Dark = keyEventWithTheme(true);
 
 // ----- Exports ----- //
 
 export default {
 	component: KeyEvents,
 	title: "Common/Components/KeyEvents",
-	argTypes: {
-		theme: {
-			options: Object.keys(themeOptions),
-			control: { type: "select" },
-			mapping: themeOptions,
-		},
-	},
 };
 
-export { Default };
+export { Default, Dark };
