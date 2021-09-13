@@ -23,6 +23,7 @@ type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	branding?: Branding;
+	hasByline?: boolean;
 };
 
 const meta = css`
@@ -263,7 +264,8 @@ export const ArticleMeta = ({
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
-	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
+	const showAvatar =
+		onlyOneContributor && hasByline && shouldShowAvatar(format);
 	const isInteractive = format.design === Design.Interactive;
 	return (
 		<div

@@ -562,6 +562,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								secondaryDateline={
 									CAPI.webPublicationSecondaryDateDisplay
 								}
+								hasByline={!!CAPI.author.byline}
 							/>
 						</div>
 					</GridItem>
