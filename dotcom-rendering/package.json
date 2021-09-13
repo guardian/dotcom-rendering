@@ -97,7 +97,7 @@
     "he": "^1.2.0",
     "html-minifier": "^4.0.0",
     "inquirer": "^5.2.0",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.7.0",
     "lodash.debounce": "^4.0.6",
     "lodash.escape": "^4.0.1",
     "lodash.get": "^4.4.2",
@@ -111,7 +111,7 @@
     "pretty-bytes": "^5.6.0",
     "reset-css": "^5.0.1",
     "sanitize-html": "^2.3.2",
-    "swr": "^0.5.5",
+    "swr": "^0.5.7",
     "web-vitals": "^2.1.0",
     "youtube-player": "^5.5.2"
   },
