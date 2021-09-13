@@ -75,55 +75,6 @@ const stretchLines = css`
 	}
 `;
 
-const metaExtras = (palette: Palette) => css`
-	border-top: 1px solid ${palette.border.article};
-	flex-grow: 1;
-	padding-top: 6px;
-
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-
-	${between.leftCol.and.wide} {
-		padding-bottom: 6px;
-	}
-`;
-
-const metaNumbers = (palette: Palette) => css`
-	border-top: 1px solid ${palette.border.article};
-	display: flex;
-	flex-grow: 1;
-
-	justify-content: flex-end;
-	${between.leftCol.and.wide} {
-		justify-content: flex-start;
-	}
-
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-`;
-
 const metaContainer = (format: Format) => {
 	const defaultMargins = css`
 		${until.phablet} {
