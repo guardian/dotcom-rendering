@@ -344,7 +344,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			  };
 
 
-    // The following two lines refer to a server-side experiment ("remove-sticky-nav")
+	// The following two lines refer to a server-side experiment ("remove-sticky-nav")
 	// that removes the sticky behaviour of the navigation and subnavigation bars
 	// in order to measure ad viewability when these components are not sticky.
 	// TODO: Remove this code after the experiment is complete.
@@ -388,7 +388,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								}
 							/>
 						</ElementContainer>
-
 					)}
 
 					{/* Experiment starts here. Remove this block of code after A/B testing is complete. */}
