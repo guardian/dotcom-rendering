@@ -127,7 +127,7 @@ export const getBylineComponentsFromTokens = (
 	return bylineComponents;
 };
 
-const BylineLink = ({ byline, tags }: Props) => {
+/* const BylineLink = ({ byline, tags }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
@@ -146,7 +146,7 @@ const BylineLink = ({ byline, tags }: Props) => {
 	});
 
 	return <>{renderedTokens}</>;
-};
+}; */
 
 const bylineStyle = css`
 	color: ${palette.news[300]};
@@ -220,14 +220,14 @@ const getAuthorName = (tags: TagType[]) => {
 	return contributorTag && contributorTag.title;
 };
 
-function Byline(byline: string, authors: Authors[]) {
+/*function Byline(byline: string, authors: Authors[]) {
 	if (byline.includes("now")) {
 		byline.replace("now", "(now)");
 	}
 	if (byline.includes("earlier")) {
 		byline.replace("earlier", "(earlier)");
 	}
-}
+}*/
 
 export const MetaData = ({
 	palette,

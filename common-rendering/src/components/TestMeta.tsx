@@ -1,17 +1,15 @@
-import { css } from "@emotion/react";
+/*import { css } from "@emotion/react";
 import { between, from, until } from "@guardian/src-foundations/mq";
 import { Display, Design, Special } from "@guardian/types";
 import type { Format } from "@guardian/types";
 
-import { Contributor } from "@root/src/web/components/Contributor";
-import { Avatar } from "@root/src/web/components/Avatar";
-import { Counts } from "@root/src/web/components/Counts";
-import { Branding } from "@root/src/web/components/Branding";
-import { Lines } from "@guardian/src-ed-lines";
+ import { Contributor } from "../@root/src/web/components/Contributor";
+// import { Avatar } from "@root/src/web/components/Avatar";
+// import { Counts } from "@root/src/web/components/Counts";
+// import { Branding } from "@root/src/web/components/Branding";
+// import { Lines } from "@guardian/src-ed-lines";
 import { border, space } from "@guardian/src-foundations";
-import { ShareIcons } from "./ShareIcons";
-import { Dateline } from "./Dateline";
-import { interactiveLegacyClasses } from "../layouts/lib/interactiveLegacyStyling";
+//import { Dateline } from "./Dateline";
 
 interface TagType {
 	id: string;
@@ -203,4 +201,4 @@ export const ArticleMeta = ({
 			</div>
 		</div>
 	);
-};
+};*/
