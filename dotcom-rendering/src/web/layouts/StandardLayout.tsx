@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { css } from '@emotion/react';
 
 import {
@@ -342,6 +343,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					theme: getCurrentPillar(CAPI),
 			  };
 
+
     // The following two lines refer to a server-side experiment ("remove-sticky-nav")
 	// that removes the sticky behaviour of the navigation and subnavigation bars
 	// in order to measure ad viewability when these components are not sticky.
@@ -359,6 +361,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
+							showBottomBorder={true}
 							padded={false}
 							shouldCenter={false}
 						>
@@ -385,7 +388,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								}
 							/>
 						</ElementContainer>
+
 					)}
+
 					{/* Experiment starts here. Remove this block of code after A/B testing is complete. */}
 					{isInRemoveStickyNavVariant && (<ElementContainer
 						showSideBorders={true}
@@ -403,18 +408,28 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</ElementContainer>)}
 
 					{isInRemoveStickyNavVariant && NAV.subNavSections && format.theme !== Special.Labs && (
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						sectionId="sub-nav-root"
+						<>
+							<ElementContainer
+								backgroundColour={palette.background.article}
+								padded={false}
+								sectionId="sub-nav-root"
 				>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							palette={palette}
-							format={format}
+								<SubNav
+									subNavSections={NAV.subNavSections}
+									currentNavLink={NAV.currentNavLink}
+									palette={palette}
+									format={format}
 					/>
-					</ElementContainer>
+							</ElementContainer>
+							<ElementContainer
+								backgroundColour={palette.background.article}
+								padded={false}
+								showTopBorder={false}
+								>
+								<Lines count={4} effect="straight" />
+							</ElementContainer>
+						</>
+
 			)}
 					{/* Experiment ends here. Remove block of code above after A/B testing is complete. */}
 				</>
@@ -453,7 +468,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</ElementContainer>
 			)}
 
-			{format.theme !== Special.Labs ? (
+			{/* If the user is in the experiment bucket and the page is not a Guardian Labs article, don't display the four lines,
+			as they've already been rendered in the sticky div above.
+			TODO: Get rid of nested ternary after the experiment is over.  */}
+			{format.theme !== Special.Labs ?
+			(!isInRemoveStickyNavVariant ? (
 				<ElementContainer
 					backgroundColour={palette.background.article}
 					padded={false}
@@ -461,19 +480,17 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				>
 					<Lines count={4} effect="straight" />
 				</ElementContainer>
-			) : (
-				<Stuck>
-					<ElementContainer
-						showSideBorders={true}
-						showTopBorder={false}
-						backgroundColour={labs[400]}
-						borderColour={border.primary}
-						sectionId="labs-header"
-					>
-						<LabsHeader />
-					</ElementContainer>
-				</Stuck>
-			)}
+			) : null) : (<Stuck>
+				<ElementContainer
+					showSideBorders={true}
+					showTopBorder={false}
+					backgroundColour={labs[400]}
+					borderColour={border.primary}
+					sectionId="labs-header"
+			>
+					<LabsHeader />
+				</ElementContainer>
+			</Stuck>)}
 
 			{CAPI.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
