@@ -36,7 +36,7 @@ const buildPlaceholders = (data: CAPIType): Map<string, string> => {
 			trailText: data.trailText,
 			sectionTag: data.sectionLabel,
 			webURL: data.webURL,
-			standirst: data.standfirst,
+			standfirst: data.standfirst,
 			// shareLinks: TODO,
 		}),
 	);
