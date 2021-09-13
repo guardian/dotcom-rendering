@@ -343,14 +343,16 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			  };
 
     // The following two lines refer to a server-side experiment ("remove-sticky-nav")
-	// that removes the sticky behaviour of the navigation and subnavigation bars.
+	// that removes the sticky behaviour of the navigation and subnavigation bars
+	// in order to measure ad viewability when these components are not sticky.
 	// TODO: Remove this code after the experiment is complete.
 	const isInRemoveStickyNavVariant = CAPI.config.abTests.removeStickyNavVariant === 'variant';
 	const componentName = isInRemoveStickyNavVariant ? "non-sticky-nav" : "sticky-nav";
 
 	return (
 		<>
-			{/* The data-component attribute is needed to run analytics on the experiment. Remove after A/B testing is over. */}
+			{/* The data-component attribute within this div is needed to run analytics on the experiment.
+			Remove after A/B testing is over. */}
 			<div data-print-layout="hide" id="bannerandheader" data-component={componentName}>
 				<>
 					<Stuck>
@@ -384,6 +386,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					)}
+					{/* Experiment starts here. Remove this block of code after A/B testing is complete. */}
 					{isInRemoveStickyNavVariant && (<ElementContainer
 						showSideBorders={true}
 						borderColour={brandLine.primary}
@@ -413,9 +416,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 					</ElementContainer>
 			)}
-
+					{/* Experiment ends here. Remove block of code above after A/B testing is complete. */}
 				</>
 			</div>
+
+			{/* Remove isInRemoveStickyNavVariant conditional rendering after A/B testing is complete */}
 			{!isInRemoveStickyNavVariant && (
 			<ElementContainer
 				showSideBorders={true}
@@ -432,6 +437,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</ElementContainer> )}
 
+			{/* Remove !isInRemoveStickyNavVariant conditional rendering after A/B testing is complete */}
 			{!isInRemoveStickyNavVariant && NAV.subNavSections && format.theme !== Special.Labs && (
 				<ElementContainer
 					backgroundColour={palette.background.article}
