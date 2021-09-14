@@ -57,7 +57,7 @@ const variantFromRunnable =
 
 In order to set up a server-side test in DCR, follow steps 1-4 outlined in the `frontend` [documentation](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#write-a-server-side-test).
 
-On the live website, [Fastly](https://github.com/guardian/fastly-edge-cache/blob/main/theguardiancom/src/main/resources/varnish21/ab-tests.vcl) automatically assigns users to buckets. You can force yourself into a test on your local machine by following these steps:
+On the live website, Fastly automatically assigns users to buckets. You can force yourself into a test on your local machine by following these steps:
 
 1) Ensure you are running `frontend` locally and your server-side experiment is enabled in the dashboard.
 2) Use the Header Hacker extension to change the HTTP headers as described in the `frontend` documentation. Please note that this is the only way to opt-in locally. If testing in the CODE environment, use the `/opt/in/` link.
