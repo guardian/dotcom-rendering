@@ -23,7 +23,7 @@ type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	branding?: Branding;
-	hasByline?: boolean;
+	hasByline?: string;
 };
 
 const meta = css`
@@ -247,6 +247,13 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const ShowAvatar = (hasByline: string | undefined) => {
+	if (hasByline === undefined || hasByline === '') {
+		return false;
+	}
+	return true;
+};
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -262,11 +269,13 @@ export const ArticleMeta = ({
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
 
+	const bylineAvatar = ShowAvatar(hasByline);
+
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
 	const showAvatar =
-		onlyOneContributor && hasByline && shouldShowAvatar(format);
+		onlyOneContributor && bylineAvatar && shouldShowAvatar(format);
 	const isInteractive = format.design === Design.Interactive;
 	return (
 		<div
