@@ -272,10 +272,13 @@ export const ArticleMeta = ({
 	console.log('byline' in author);
 
 	const showAvatarFromAuthor = () => {
-		if ('byline' in author && format.design !== Design.Comment) {
-			return true;
+		if (
+			!('byline' in author) ||
+			(author.byline === '' && format.design === Design.Comment)
+		) {
+			return false;
 		}
-		return false;
+		return true;
 	};
 
 	const onlyOneContributor: boolean =
