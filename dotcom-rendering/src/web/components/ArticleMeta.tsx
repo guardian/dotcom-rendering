@@ -261,10 +261,7 @@ export const ArticleMeta = ({
 	const authorName = getAuthorName(tags);
 
 	const showAvatarFromAuthor = () => {
-		if (
-			(!('byline' in author) || author.byline === '') &&
-			format.design === Design.Comment
-		) {
+		if (!('byline' in author) || author.byline === '') {
 			return false;
 		}
 		return true;
