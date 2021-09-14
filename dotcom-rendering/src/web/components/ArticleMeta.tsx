@@ -257,6 +257,7 @@ export const ArticleMeta = ({
 	tags,
 	primaryDateline,
 	secondaryDateline,
+	hasByline,
 }: Props) => {
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
