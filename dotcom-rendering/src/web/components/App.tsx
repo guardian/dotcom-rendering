@@ -298,6 +298,20 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	useOnce(() => {
 		if (!CAPI.config.switches.consentManagement) return; // CMP turned off!
 
+		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+		// mark: CONSENT_TIMING
+		cmp.willShowPrivacyMessage()
+			.then((willShow) => {
+				trackPerformance(
+					'consent',
+					'acquired',
+					willShow ? 'new' : 'existing',
+				);
+			})
+			.catch((e) =>
+				console.error(`CMP willShowPrivacyMessage - error: ${e}`),
+			);
+
 		// Run each time consent is submitted
 		onConsentChange((newConsent) => {
 			setConsentState(newConsent);
@@ -322,26 +336,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// This code is executed at first render and then again each time consentState is set
 	useEffect(() => {
 		if (!consentState) return;
-		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-		// mark: CONSENT_TIMING
-		let recordedConsentTime = false;
-
-		// Track performance once
-		if (!recordedConsentTime) {
-			recordedConsentTime = true;
-			cmp.willShowPrivacyMessage()
-				.then((willShow) => {
-					trackPerformance(
-						'consent',
-						'acquired',
-						willShow ? 'new' : 'existing',
-					);
-				})
-				.catch((e) =>
-					console.error(`CMP willShowPrivacyMessage - error: ${e}`),
-				);
-		}
-
 		// Register changes in consent state
 		const decideConsentString = () => {
 			if (consentState.tcfv2) {
