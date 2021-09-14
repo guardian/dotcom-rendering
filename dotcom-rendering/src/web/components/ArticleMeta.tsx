@@ -246,13 +246,6 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-/* const ShowAvatar = (hasByline: string | undefined) => {
-	if (hasByline === undefined || hasByline === '') {
-		return false;
-	}
-	return true;
-}; */
-
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -266,10 +259,6 @@ export const ArticleMeta = ({
 }: Props) => {
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
-
-	// const bylineAvatar = ShowAvatar(hasByline);
-
-	console.log('byline' in author);
 
 	const showAvatarFromAuthor = () => {
 		if (
