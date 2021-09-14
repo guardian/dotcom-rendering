@@ -1,58 +1,72 @@
 // ----- Imports ----- //
-
+import { css } from "@emotion/react";
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
 import { Pillar, Special, Theme } from "@guardian/types";
-import { css } from "@emotion/react";
 
 // ----- Stories ----- //
 
+const now = new Date();
+
+function addMinutes(date: Date, minutes: number) {
+	return new Date(date.getTime() - minutes * 60000).toISOString();
+}
+
+const currentTime = addMinutes(now, 0);
+const thirtySeconds = addMinutes(now, 0.5);
+const fiveMinutes = addMinutes(now, 5);
+const fifteenMinutes = addMinutes(now, 15);
+const oneHour = addMinutes(now, 60);
+const oneDay = addMinutes(now, 60 * 24);
+const oneWeek = addMinutes(now, 60 * 24 * 7);
+const oneYear = addMinutes(now, 60 * 24 * 7 * 52);
+
 const events: KeyEvent[] = [
 	{
-		time: "1m ago",
+		time: currentTime,
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "2m ago",
+		time: thirtySeconds,
 		text:
 			"Ben Maher goes into the gold medal sport in the equestrian jumps",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "3m ago",
+		time: fiveMinutes,
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "5m ago",
+		time: fifteenMinutes,
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "9m ago",
+		time: oneHour,
 		text: "Jodie Williams qualifies for the 400m final",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "15m ago",
+		time: oneDay,
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "20m ago",
+		time: oneWeek,
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
 	},
 	{
-		time: "35m ago",
+		time: oneYear,
 		text: "Gold for Uganda",
 		url:
 			"https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy",
