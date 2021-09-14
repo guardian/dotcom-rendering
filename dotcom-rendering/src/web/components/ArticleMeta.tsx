@@ -260,10 +260,18 @@ export const ArticleMeta = ({
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
 
+	const showAvatarFromAuthor = () => {
+		if (!('byline' in author) || author.byline === '') {
+			return false;
+		}
+		return true;
+	};
+
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
-	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
+	const showAvatar =
+		onlyOneContributor && showAvatarFromAuthor && shouldShowAvatar(format);
 	const isInteractive = format.design === Design.Interactive;
 	return (
 		<div
