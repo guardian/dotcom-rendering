@@ -11,7 +11,7 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
-import { FullPageInteractiveImmersiveLayout } from './FullPageInteractiveImmersiveLayout';
+import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
 
@@ -31,39 +31,35 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	};
 	const palette = decidePalette(format);
 
-	// TBD: Remove
-	return (
-		<InteractiveImmersiveLayout
-			CAPI={CAPI}
-			NAV={NAV}
-			palette={palette}
-			format={format}
-		/>
-	);
-
 	// TODO we can probably better express this as data
 	switch (display) {
 		case Display.Immersive: {
 			switch (design) {
 				case Design.Interactive: {
-					return (
-						<InteractiveImmersiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
-					);
-				}
-				case Design.FullPageInteractiveImmersive: {
-					return (
-						<FullPageInteractiveImmersiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
-					);
+					// TBD: Remove when we migrate legacy content
+					switch (CAPI.isLegacyInteractive) {
+						case true: {
+							return (
+								<FullPageInteractiveLayout
+									CAPI={CAPI}
+									NAV={NAV}
+									format={format}
+									palette={palette}
+								/>
+							);
+						}
+						default: {
+							return (
+								<InteractiveImmersiveLayout
+									CAPI={CAPI}
+									NAV={NAV}
+									format={format}
+									palette={palette}
+								/>
+							);
+						}
+					}
+
 				}
 				default: {
 					return (
@@ -124,6 +120,16 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							palette={palette}
 						/>
 					);
+				case Design.FullPageInteractive: {
+					return (
+						<FullPageInteractiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
+				}
 				case Design.LiveBlog:
 				case Design.DeadBlog:
 					return (
