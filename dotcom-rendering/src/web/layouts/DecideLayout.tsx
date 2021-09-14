@@ -59,7 +59,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							);
 						}
 					}
-
 				}
 				default: {
 					return (
