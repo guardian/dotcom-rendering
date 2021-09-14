@@ -261,7 +261,11 @@ export const ArticleMeta = ({
 	const authorName = getAuthorName(tags);
 
 	const showAvatarFromAuthor = () => {
-		if (!('byline' in author) || author.byline === '') {
+		if (
+			author.byline === undefined ||
+			!author.byline ||
+			author.byline === ''
+		) {
 			return false;
 		}
 		return true;
@@ -271,7 +275,9 @@ export const ArticleMeta = ({
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
 	const showAvatar =
-		onlyOneContributor && showAvatarFromAuthor && shouldShowAvatar(format);
+		onlyOneContributor &&
+		showAvatarFromAuthor() &&
+		shouldShowAvatar(format);
 	const isInteractive = format.design === Design.Interactive;
 	return (
 		<div
