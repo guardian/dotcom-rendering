@@ -272,7 +272,7 @@ export const ArticleMeta = ({
 	console.log('byline' in author);
 
 	const showAvatarFromAuthor = () => {
-		if ('byline' in author) {
+		if ('byline' in author && format.design !== Design.Comment) {
 			return true;
 		}
 		return false;
