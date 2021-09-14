@@ -61,7 +61,7 @@
     "babel-jest": "^26.6.2",
     "buffer": "^6.0.3",
     "compression": "^1.7.4",
-    "core-js": "^3.8.2",
+    "core-js": "^3.17.3",
     "create-emotion-server": "^10.0.27",
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
