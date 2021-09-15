@@ -178,9 +178,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		submitComponentEvent(componentEvent, ophanRecord);
 	};
 
-	const [articleCountIsReady, setArticleCountIsReady] = useState<boolean>(
-		false,
-	);
+	const [articleCountIsReady, setArticleCountIsReady] = useState<
+		Promise<true>
+	>();
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -239,10 +239,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				incrementDailyArticleCount();
 				incrementWeeklyArticleCount(storage.local, CAPI.pageId);
 			}
-			setArticleCountIsReady(true);
 		};
-		incrementArticleCountsIfConsented().catch((e) =>
-			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
+
+		setArticleCountIsReady(
+			incrementArticleCountsIfConsented().then(() => true),
 		);
 	}, [CAPI.pageId]);
 
@@ -1171,24 +1171,23 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					</Lazy>
 				</Portal>
 			)}
-			{articleCountIsReady && (
-				<Portal rootId="slot-body-end">
-					<SlotBodyEnd
-						isSignedIn={isSignedIn}
-						countryCode={countryCode}
-						contentType={CAPI.contentType}
-						sectionName={CAPI.sectionName}
-						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-						isMinuteArticle={CAPI.pageType.isMinuteArticle}
-						isPaidContent={CAPI.pageType.isPaidContent}
-						tags={CAPI.tags}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						brazeMessages={brazeMessages}
-						idApiUrl={CAPI.config.idApiUrl}
-						stage={CAPI.stage}
-					/>
-				</Portal>
-			)}
+			<Portal rootId="slot-body-end">
+				<SlotBodyEnd
+					isSignedIn={isSignedIn}
+					countryCode={countryCode}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					tags={CAPI.tags}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					brazeMessages={brazeMessages}
+					idApiUrl={CAPI.config.idApiUrl}
+					stage={CAPI.stage}
+					articleCountIsReady={articleCountIsReady}
+				/>
+			</Portal>
 			<Portal
 				rootId={
 					isSignedIn
@@ -1280,17 +1279,16 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					/>
 				</Lazy>
 			</Portal>
-			{articleCountIsReady && (
-				<Portal rootId="bottom-banner">
-					<StickyBottomBanner
-						isSignedIn={isSignedIn}
-						asyncCountryCode={asyncCountryCode}
-						CAPI={CAPI}
-						brazeMessages={brazeMessages}
-						isPreview={!!CAPI.isPreview}
-					/>
-				</Portal>
-			)}
+			<Portal rootId="bottom-banner">
+				<StickyBottomBanner
+					isSignedIn={isSignedIn}
+					asyncCountryCode={asyncCountryCode}
+					CAPI={CAPI}
+					brazeMessages={brazeMessages}
+					isPreview={!!CAPI.isPreview}
+					articleCountIsReady={articleCountIsReady}
+				/>
+			</Portal>
 		</React.StrictMode>
 	);
 };

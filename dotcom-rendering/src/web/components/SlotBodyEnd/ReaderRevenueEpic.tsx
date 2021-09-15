@@ -83,6 +83,7 @@ export type CanShowData = {
 	contributionsServiceUrl: string;
 	idApiUrl: string;
 	stage: string;
+	articleCountIsReady: Promise<true>;
 };
 
 const buildPayload = async (data: CanShowData): Promise<Metadata> => {
@@ -129,6 +130,7 @@ export const canShow = async (
 		contributionsServiceUrl,
 		idApiUrl,
 		stage,
+		articleCountIsReady,
 	} = data;
 
 	if (shouldHideReaderRevenue || isPaidContent) {
@@ -141,6 +143,7 @@ export const canShow = async (
 	const forcedVariant = getForcedVariant('epic');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
 
+	await articleCountIsReady;
 	const contributionsPayload = await buildPayload(data);
 
 	const response = await getEpicMeta(

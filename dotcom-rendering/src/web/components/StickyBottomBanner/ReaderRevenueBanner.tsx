@@ -56,6 +56,7 @@ type CanShowProps = BaseProps & {
 	isPreview: boolean;
 	idApiUrl: string;
 	signInGateWillShow: boolean;
+	articleCountIsReady: Promise<true>;
 };
 
 type ReaderRevenueComponentType =
@@ -138,6 +139,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
+	articleCountIsReady,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -161,6 +163,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 
 	const countryCode = await asyncCountryCode;
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
+	await articleCountIsReady;
 	const bannerPayload = buildPayload({
 		isSignedIn,
 		countryCode,

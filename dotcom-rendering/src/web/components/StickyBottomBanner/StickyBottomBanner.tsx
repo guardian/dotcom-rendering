@@ -27,6 +27,7 @@ type Props = {
 	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	isPreview: boolean;
+	articleCountIsReady?: Promise<true>;
 };
 
 type RRBannerConfig = {
@@ -77,6 +78,7 @@ const buildRRBannerConfigWith = ({
 		isSignedIn: boolean,
 		asyncCountryCode: Promise<string>,
 		isPreview: boolean,
+		articleCountIsReady: Promise<true>,
 		signInGateWillShow: boolean = false,
 	): CandidateConfig<BannerProps> => {
 		return {
@@ -106,6 +108,7 @@ const buildRRBannerConfigWith = ({
 						isPreview,
 						idApiUrl: CAPI.config.idApiUrl,
 						signInGateWillShow,
+						articleCountIsReady,
 					}),
 				show: ({ meta, module, email }: BannerProps) => () => (
 					<BannerComponent
@@ -151,6 +154,7 @@ export const StickyBottomBanner = ({
 	CAPI,
 	brazeMessages,
 	isPreview,
+	articleCountIsReady,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({ isSignedIn, CAPI });
@@ -161,12 +165,14 @@ export const StickyBottomBanner = ({
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<string>,
 			isPreview,
+			articleCountIsReady as Promise<true>,
 		);
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<CountryCode>,
 			isPreview,
+			articleCountIsReady as Promise<true>,
 			signInGateWillShow,
 		);
 		const brazeBanner = buildBrazeBanner(
@@ -184,7 +190,13 @@ export const StickyBottomBanner = ({
 			.catch((e) =>
 				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, asyncCountryCode, CAPI, brazeMessages]);
+	}, [
+		isSignedIn,
+		asyncCountryCode,
+		CAPI,
+		brazeMessages,
+		articleCountIsReady,
+	]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;
