@@ -15,7 +15,10 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import { incrementWeeklyArticleCount } from '@guardian/automat-contributions';
+import {
+	getWeeklyArticleHistory,
+	incrementWeeklyArticleCount,
+} from '@guardian/automat-contributions';
 import {
 	QandaAtom,
 	GuideAtom,
@@ -69,6 +72,7 @@ import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { storage } from '@guardian/libs';
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -178,8 +182,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		submitComponentEvent(componentEvent, ophanRecord);
 	};
 
-	const [articleCountIsReady, setArticleCountIsReady] = useState<
-		Promise<true>
+	const [asyncArticleCount, setAsyncArticleCount] = useState<
+		Promise<WeeklyArticleHistory | undefined>
 	>();
 
 	// *******************************
@@ -241,8 +245,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			}
 		};
 
-		setArticleCountIsReady(
-			incrementArticleCountsIfConsented().then(() => true),
+		setAsyncArticleCount(
+			incrementArticleCountsIfConsented().then(() =>
+				getWeeklyArticleHistory(storage.local),
+			),
 		);
 	}, [CAPI.pageId]);
 
@@ -1185,7 +1191,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
-					articleCountIsReady={articleCountIsReady}
+					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
 			<Portal
@@ -1286,7 +1292,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
 					isPreview={!!CAPI.isPreview}
-					articleCountIsReady={articleCountIsReady}
+					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
 		</React.StrictMode>

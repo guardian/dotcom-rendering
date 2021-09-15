@@ -9,6 +9,7 @@ import {
 } from '@root/src/web/lib/messagePicker';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	ReaderRevenueEpic,
 	canShow as canShowReaderRevenueEpic,
@@ -30,7 +31,7 @@ type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	idApiUrl: string;
 	stage: string;
-	articleCountIsReady?: Promise<true>;
+	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 };
 
 const buildReaderRevenueEpicConfig = ({
@@ -45,7 +46,7 @@ const buildReaderRevenueEpicConfig = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	stage,
-	articleCountIsReady,
+	asyncArticleCount,
 }: RRCanShowData): CandidateConfig<RREpicConfig> => {
 	return {
 		candidate: {
@@ -63,7 +64,7 @@ const buildReaderRevenueEpicConfig = ({
 					contributionsServiceUrl,
 					idApiUrl,
 					stage,
-					articleCountIsReady,
+					asyncArticleCount,
 				}),
 			show: (meta: RREpicConfig) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
@@ -108,7 +109,7 @@ export const SlotBodyEnd = ({
 	brazeMessages,
 	idApiUrl,
 	stage,
-	articleCountIsReady,
+	asyncArticleCount,
 }: Props) => {
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -124,7 +125,9 @@ export const SlotBodyEnd = ({
 			contributionsServiceUrl,
 			idApiUrl,
 			stage,
-			articleCountIsReady: articleCountIsReady as Promise<true>,
+			asyncArticleCount: asyncArticleCount as Promise<
+				WeeklyArticleHistory | undefined
+			>,
 		});
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,
@@ -141,7 +144,7 @@ export const SlotBodyEnd = ({
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, countryCode, brazeMessages, articleCountIsReady]);
+	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedEpic) {
 		return <SelectedEpic />;
