@@ -23,14 +23,14 @@ export interface Authors {
 
 type BylineComponent = { token: string; tag: TagType } | string;
 
-interface TagType {
+type TagType = {
 	id: string;
 	type: string;
 	title: string;
 	twitterHandle?: string;
 	paidContentType?: string;
 	bylineImageUrl?: string;
-}
+};
 
 type Props = {
 	theme: Theme;
