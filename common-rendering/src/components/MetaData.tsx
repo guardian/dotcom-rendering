@@ -21,7 +21,7 @@ export interface Authors {
 	contributor: boolean;
 }
 
-type BylineComponent = { token: string; tag: TagType } | string;
+// type BylineComponent = { token: string; tag: TagType } | string;
 
 type TagType = {
 	id: string;
