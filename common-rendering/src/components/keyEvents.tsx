@@ -18,7 +18,6 @@ import { Link } from "@guardian/src-link";
 import { Pillar, Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
 import { darkModeCss } from "../lib";
-import { useTimeAgo } from "../hooks/useTimeAgo";
 import { timeAgo } from "@guardian/libs";
 
 // ----- Component ----- //
@@ -203,7 +202,6 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 `;
 
 const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
-	useTimeAgo();
 	const time = timeAgo(new Date(keyEvent.time).getTime());
 
 	return (

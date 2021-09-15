@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
 import { Pillar, Special, Theme } from "@guardian/types";
+import { useTimeAgo } from "../hooks/useTimeAgo";
 
 // ----- Stories ----- //
 
@@ -84,24 +85,28 @@ const KeyEventComp = (dark: boolean, theme: Theme, title: string) => (
 	</div>
 );
 
-const keyEventWithTheme = (dark: boolean) => () => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			flex-wrap: wrap;
-		`}
-	>
-		{KeyEventComp(dark, Pillar.News, "News")}
-		{KeyEventComp(dark, Pillar.Culture, "Culture")}
-		{KeyEventComp(dark, Pillar.Lifestyle, "Lifestyle")}
-		{KeyEventComp(dark, Pillar.Opinion, "Opinion")}
-		{KeyEventComp(dark, Pillar.Sport, "Sport")}
-		{KeyEventComp(dark, Special.Labs, "Labs")}
-		{KeyEventComp(dark, Special.SpecialReport, "SpecialReport")}
-	</div>
-);
+const keyEventWithTheme = (dark: boolean) => () => {
+	useTimeAgo();
+
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				flex-wrap: wrap;
+			`}
+		>
+			{KeyEventComp(dark, Pillar.News, "News")}
+			{KeyEventComp(dark, Pillar.Culture, "Culture")}
+			{KeyEventComp(dark, Pillar.Lifestyle, "Lifestyle")}
+			{KeyEventComp(dark, Pillar.Opinion, "Opinion")}
+			{KeyEventComp(dark, Pillar.Sport, "Sport")}
+			{KeyEventComp(dark, Special.Labs, "Labs")}
+			{KeyEventComp(dark, Special.SpecialReport, "SpecialReport")}
+		</div>
+	);
+};
 
 const Default = keyEventWithTheme(false);
 const Dark = keyEventWithTheme(true);
