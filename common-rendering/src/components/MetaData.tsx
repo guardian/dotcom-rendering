@@ -273,7 +273,8 @@ const dateStyle = (colour) => css`
 	}
 `;
 
-// I would normally use the Lines component
+// I would normally use the Lines component - but as we are unsure how component sharing is going to work
+// going forward this version will be used instead.
 const lines = css`
 	background-image: repeating-linear-gradient(
 		to bottom,
