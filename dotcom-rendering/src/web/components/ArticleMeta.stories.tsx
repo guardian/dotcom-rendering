@@ -75,34 +75,6 @@ export const ArticleStory = () => {
 	);
 };
 
-export const TwoNameStory = () => {
-	return (
-		<Container>
-			<ArticleMeta
-				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				}}
-				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
-				})}
-				pageId=""
-				webTitle=""
-				author={{
-					byline: 'Lanre Bakare and Sarah Smith',
-					twitterHandle: 'lanre_bakare',
-				}}
-				tags={tagsWithBylineImage}
-				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
-			/>
-		</Container>
-	);
-};
-
 export const BrandingStory = () => {
 	return (
 		<Container>
