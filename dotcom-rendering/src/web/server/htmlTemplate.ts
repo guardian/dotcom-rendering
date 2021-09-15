@@ -284,7 +284,8 @@ export const htmlTemplate = ({
                 </noscript>
                 ${loadableConfigScripts.join('\n')}
                 ${priorityScriptTags.join('\n')}
-                <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
+                <style class="webfont">${getFontsCss()}</style>
+                <style>${resetCSS}${css}</style>
 
                 <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
             </head>

@@ -3,7 +3,6 @@ import { tests } from '@frontend/web/experiments/ab-tests';
 import { useEffect, useState } from 'react';
 import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { useAB } from '@guardian/ab-react';
-import { commercialPartner } from '../experiments/tests/commercial-partner';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 
 export const CommercialMetrics: React.FC<{
@@ -21,7 +20,7 @@ export const CommercialMetrics: React.FC<{
 		if (visibilityState !== 'hidden') return;
 		if (sentCommercialMetrics) return;
 
-		const testsToForceMetrics: ABTest[] = [commercialPartner];
+		const testsToForceMetrics: ABTest[] = [];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(
 			tests,
 		).some((test) =>

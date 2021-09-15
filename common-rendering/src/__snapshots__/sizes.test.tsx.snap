@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sizesAttribute returns a list of media queries 1`] = `"(min-width: 980px) 20px, (min-width: 740px) 20%, 30vw"`;
+
+exports[`styles returns dimensions for each media query 1`] = `
+<div
+  className="css-9i4kf7"
+/>
+`;
+
+exports[`styles returns the default dimensions when there are no media queries 1`] = `
+<div
+  className="css-1xhyoy7"
+/>
+`;
