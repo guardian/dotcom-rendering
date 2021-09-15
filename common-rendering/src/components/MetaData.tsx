@@ -42,6 +42,11 @@ type Props = {
 	secondaryDateline: string;
 };
 
+type ContributorLinkProps = {
+	contributor: string;
+	contributorTagId: string;
+};
+
 /*
 	These are here temporarily for now until we decide on the best approach for multiple authors or whether we use
 	existing components
@@ -193,10 +198,10 @@ const getAuthorNames = (tags: TagType[]) => {
 	}
 }*/
 
-const ContributorLink: React.FC<{
-	contributor: string;
-	contributorTagId: string;
-}> = ({ contributor, contributorTagId }) => (
+const ContributorLink = ({
+	contributor,
+	contributorTagId,
+}: ContributorLinkProps) => (
 	<a
 		rel="author"
 		data-link-name="auto tag link"
