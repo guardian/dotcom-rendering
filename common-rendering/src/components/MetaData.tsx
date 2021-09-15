@@ -330,7 +330,7 @@ export const MetaData = ({
 	primaryDateline,
 	secondaryDateline,
 }: Props) => {
-	// Remember how to get array of contributors
+	// This is how to get the array of authors - it's not being used yet until the component issue mentioned above is sorted
 	// const authorNames = getAuthorNames(tags);
 	const themeColours = getThemeColours(theme);
 	console.log(themeColours);
