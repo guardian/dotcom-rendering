@@ -11,6 +11,7 @@ import {
 	sport,
 	opinion,
 	text,
+	brandAlt,
 } from "@guardian/src-foundations/palette";
 import { space } from "@guardian/src-foundations";
 
@@ -254,8 +255,8 @@ const bylineStyle = (colour) => css`
 		font-style: normal;
 		:hover {
 			text-decoration: underline;
-			background: #ffe500;
-			color: #121212;
+			background: ${brandAlt[400]};
+			color: ${neutral[7]};
 		}
 	}
 `;
