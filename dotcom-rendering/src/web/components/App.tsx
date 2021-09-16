@@ -242,7 +242,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const hasOptedOut = await hasOptedOutOfArticleCount();
 			if (!hasOptedOut) {
 				incrementDailyArticleCount();
-				incrementWeeklyArticleCount(storage.local, CAPI.pageId);
+				incrementWeeklyArticleCount(storage.local, CAPI.pageId, CAPI.config.keywordIds.split(','));
 			}
 		};
 
