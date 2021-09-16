@@ -15,7 +15,10 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import { incrementWeeklyArticleCount } from '@guardian/automat-contributions';
+import {
+	getWeeklyArticleHistory,
+	incrementWeeklyArticleCount,
+} from '@guardian/automat-contributions';
 import {
 	QandaAtom,
 	GuideAtom,
@@ -69,6 +72,7 @@ import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { storage } from '@guardian/libs';
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
@@ -179,6 +183,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		submitComponentEvent(componentEvent, ophanRecord);
 	};
 
+	const [asyncArticleCount, setAsyncArticleCount] = useState<
+		Promise<WeeklyArticleHistory | undefined>
+	>();
+
 	// *******************************
 	// ** Setup AB Test Tracking *****
 	// *******************************
@@ -237,8 +245,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				incrementWeeklyArticleCount(storage.local, CAPI.pageId);
 			}
 		};
-		incrementArticleCountsIfConsented().catch((e) =>
-			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
+
+		setAsyncArticleCount(
+			incrementArticleCountsIfConsented().then(() =>
+				getWeeklyArticleHistory(storage.local),
+			),
 		);
 	}, [CAPI.pageId]);
 
@@ -1202,6 +1213,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
+					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
 			<Portal
@@ -1302,6 +1314,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
 					isPreview={!!CAPI.isPreview}
+					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
 		</React.StrictMode>
