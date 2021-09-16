@@ -242,7 +242,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const hasOptedOut = await hasOptedOutOfArticleCount();
 			if (!hasOptedOut) {
 				incrementDailyArticleCount();
-				incrementWeeklyArticleCount(storage.local, CAPI.pageId);
+				incrementWeeklyArticleCount(storage.local, CAPI.pageId, CAPI.config.keywordIds.split(','));
 			}
 		};
 
@@ -251,7 +251,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				getWeeklyArticleHistory(storage.local),
 			),
 		);
-	}, [CAPI.pageId]);
+	}, [CAPI.pageId, CAPI.config.keywordIds]);
 
 	// AnniversaryAtom
 	// Add a cookie for the serverside A/B test that is checked to see if we should
