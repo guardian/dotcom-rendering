@@ -251,7 +251,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				getWeeklyArticleHistory(storage.local),
 			),
 		);
-	}, [CAPI.pageId]);
+	}, [CAPI.pageId, CAPI.config.keywordIds]);
 
 	// AnniversaryAtom
 	// Add a cookie for the serverside A/B test that is checked to see if we should
