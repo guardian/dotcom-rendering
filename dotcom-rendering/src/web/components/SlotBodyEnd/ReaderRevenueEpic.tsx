@@ -5,7 +5,6 @@ import {
 	getEpicMeta,
 	getViewLog,
 	logView,
-	getWeeklyArticleHistory,
 } from '@guardian/automat-contributions';
 import {
 	isRecurringContributor,
@@ -25,7 +24,10 @@ import {
 	submitComponentEvent,
 	SdcTestMeta,
 } from '@root/src/web/browser/ophan/ophan';
-import { Metadata } from '@guardian/automat-contributions/dist/lib/types';
+import {
+	Metadata,
+	WeeklyArticleHistory,
+} from '@guardian/automat-contributions/dist/lib/types';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { cmp } from '@guardian/consent-management-platform';
 import { storage } from '@guardian/libs';
@@ -83,6 +85,7 @@ export type CanShowData = {
 	contributionsServiceUrl: string;
 	idApiUrl: string;
 	stage: string;
+	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
 };
 
 const buildPayload = async (data: CanShowData): Promise<Metadata> => {
@@ -109,7 +112,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 			),
 			lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 			epicViewLog: getViewLog(storage.local),
-			weeklyArticleHistory: getWeeklyArticleHistory(storage.local),
+			weeklyArticleHistory: await data.asyncArticleCount,
 			hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode: data.countryCode,

@@ -38,8 +38,8 @@ scripts/git-hooks/*
 !scripts/git-hooks/install.js
 
 # Cypress result files
-/cypress/screenshots/*
-/cypress/videos/*
+/dotcom-rendering/cypress/screenshots/*
+/dotcom-rendering/cypress/videos/*
 
 # Storybook static folder (used if taking snapshots locally)
 /storybook-static/*

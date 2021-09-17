@@ -1,5 +1,5 @@
-import type { SerializedStyles } from '@emotion/core';
-import { css } from '@emotion/core';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import { remSpace } from '@guardian/src-foundations';
