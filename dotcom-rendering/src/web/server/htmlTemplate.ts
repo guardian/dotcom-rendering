@@ -24,17 +24,17 @@ export const htmlTemplate = ({
 }: {
 	title?: string;
 	description: string;
-	linkedData: { [key: string]: any };
+	linkedData?: { [key: string]: any };
 	loadableConfigScripts: string[];
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	css: string;
 	html: string;
-	windowGuardian: string;
-	gaPath: { modern: string; legacy: string };
+	windowGuardian?: string;
+	gaPath?: { modern: string; legacy: string };
 	ampLink?: string;
-	openGraphData: { [key: string]: string };
-	twitterData: { [key: string]: string };
+	openGraphData?: { [key: string]: string };
+	twitterData?: { [key: string]: string };
 	keywords: string;
 	skipToMainContent: string;
 	skipToNavigation: string;
@@ -83,13 +83,13 @@ export const htmlTemplate = ({
 		return '';
 	};
 
-	const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
+	const openGraphMetaTags = openGraphData && generateMetaTags(openGraphData, 'property');
 
 	// Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
 	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
 	const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
 
-	const twitterMetaTags = generateMetaTags(twitterData, 'name');
+	const twitterMetaTags = twitterData && generateMetaTags(twitterData, 'name');
 
 	// Duplicated prefetch and preconnect tags from DCP:
 	// Documented here: https://github.com/guardian/frontend/pull/12935
@@ -192,9 +192,11 @@ export const htmlTemplate = ({
                 ${preconnectTags.join('\n')}
                 ${prefetchTags.join('\n')}
 
-                <script type="application/ld+json">
-                    ${JSON.stringify(linkedData)}
-                </script>
+				${linkedData && `
+					<script type="application/ld+json">
+						${JSON.stringify(linkedData)}
+					</script>`
+				}
 
                 <!-- TODO make this conditional when we support more content types -->
                 ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
@@ -212,19 +214,19 @@ export const htmlTemplate = ({
                 <meta name="robots" content="max-image-preview:large">
 
                 <script>
-                    window.guardian = ${windowGuardian};
+                    ${windowGuardian && `window.guardian = ${windowGuardian};`}
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
                 </script>
 
                 <script type="module">
                     window.guardian.mustardCut = true;
-                    window.guardian.gaPath = "${gaPath.modern}";
+                    ${gaPath && `window.guardian.gaPath = "${gaPath.modern}";`}
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
-                    window.guardian.gaPath = "${gaPath.legacy}";
+                    ${gaPath && `window.guardian.gaPath = "${gaPath.legacy}";`}
                 </script>
 
                 <script>

@@ -1,7 +1,7 @@
 import express from 'express';
 import { extractNAV } from '@root/src/model/extract-nav';
 
-import { document } from '@root/src/web/server/document';
+import { generateArticleHtml } from '@root/src/web/server/generateArticleHtml';
 import { enhanceCAPI } from '@root/src/model/enhanceCAPI';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
@@ -12,7 +12,7 @@ export const renderArticle = (
 ): void => {
 	try {
 		const CAPI = enhanceCAPI(body);
-		const resp = document({
+		const html = generateArticleHtml({
 			data: {
 				CAPI,
 				site: 'frontend',
@@ -23,8 +23,8 @@ export const renderArticle = (
 			},
 		});
 
-		res.status(200).send(resp);
-	} catch (e) {
+		res.status(200).send(html);
+	} catch (e: any) {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		res.status(500).send(`<pre>${e.stack}</pre>`);
 	}
@@ -48,7 +48,7 @@ export const renderArticleJson = (
 		};
 
 		res.status(200).send(resp);
-	} catch (e) {
+	} catch (e: any) {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		res.status(500).send(`<pre>${e.stack}</pre>`);
 	}
@@ -68,7 +68,7 @@ export const renderInteractive = (
 ): void => {
 	try {
 		const CAPI = enhanceCAPI(body);
-		const resp = document({
+		const html = generateArticleHtml({
 			data: {
 				CAPI,
 				site: 'frontend',
@@ -79,8 +79,8 @@ export const renderInteractive = (
 			},
 		});
 
-		res.status(200).send(resp);
-	} catch (e) {
+		res.status(200).send(html);
+	} catch (e: any) {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		res.status(500).send(`<pre>${e.stack}</pre>`);
 	}
