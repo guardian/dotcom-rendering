@@ -97,7 +97,6 @@ export const ShowcaseInterview = () => (
 							theme: Pillar.Culture,
 						}}
 						tags={[]}
-						isShowcase={true}
 						byline="Byline text"
 					/>
 				</div>
@@ -148,7 +147,6 @@ export const ShowcaseInterviewNobyline = () => (
 							theme: Pillar.Culture,
 						}}
 						tags={[]}
-						isShowcase={true}
 						byline=""
 					/>
 				</div>
