@@ -15,7 +15,10 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import { incrementWeeklyArticleCount } from '@guardian/automat-contributions';
+import {
+	getWeeklyArticleHistory,
+	incrementWeeklyArticleCount,
+} from '@guardian/automat-contributions';
 import {
 	QandaAtom,
 	GuideAtom,
@@ -69,6 +72,7 @@ import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { storage } from '@guardian/libs';
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
@@ -151,6 +155,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		Promise<CountryCode | null>
 	>();
 
+	const [consentState, setConsentState] = useState<ConsentState | undefined>(
+		undefined,
+	);
+
 	const [brazeMessages, setBrazeMessages] = useState<
 		Promise<BrazeMessagesInterface>
 	>();
@@ -178,6 +186,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		};
 		submitComponentEvent(componentEvent, ophanRecord);
 	};
+
+	const [asyncArticleCount, setAsyncArticleCount] = useState<
+		Promise<WeeklyArticleHistory | undefined>
+	>();
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -234,13 +246,16 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const hasOptedOut = await hasOptedOutOfArticleCount();
 			if (!hasOptedOut) {
 				incrementDailyArticleCount();
-				incrementWeeklyArticleCount(storage.local, CAPI.pageId);
+				incrementWeeklyArticleCount(storage.local, CAPI.pageId, CAPI.config.keywordIds.split(','));
 			}
 		};
-		incrementArticleCountsIfConsented().catch((e) =>
-			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
+
+		setAsyncArticleCount(
+			incrementArticleCountsIfConsented().then(() =>
+				getWeeklyArticleHistory(storage.local),
+			),
 		);
-	}, [CAPI.pageId]);
+	}, [CAPI.pageId, CAPI.config.keywordIds]);
 
 	// AnniversaryAtom
 	// Add a cookie for the serverside A/B test that is checked to see if we should
@@ -291,72 +306,67 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [CAPI.shouldHideReaderRevenue]);
 
 	// kick off the CMP...
-	useEffect(() => {
+	useOnce(() => {
+		if (!CAPI.config.switches.consentManagement) return; // CMP turned off!
+
+		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+		// mark: CONSENT_TIMING
+		cmp.willShowPrivacyMessage()
+			.then((willShow) => {
+				trackPerformance(
+					'consent',
+					'acquired',
+					willShow ? 'new' : 'existing',
+				);
+			})
+			.catch((e) =>
+				console.error(`CMP willShowPrivacyMessage - error: ${e}`),
+			);
+
+		// Run each time consent is submitted
+		onConsentChange((newConsent) => {
+			setConsentState(newConsent);
+		});
+
+		// manually updates the footer DOM because it's not hydrated
+		injectPrivacySettingsLink();
+
 		// the UI is injected automatically into the page,
 		// and is not a react component, so it's
 		// handled in here.
-		if (CAPI.config.switches.consentManagement && countryCode) {
-			const pubData = {
+		cmp.init({
+			country: countryCode,
+			pubData: {
 				platform: 'next-gen',
 				browserId,
 				pageViewId,
-			};
-			injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
+			},
+		});
+	}, [countryCode, pageViewId, browserId]);
 
-			// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-			// mark: CONSENT_TIMING
-			let recordedConsentTime = false;
-			onConsentChange(() => {
-				if (!recordedConsentTime) {
-					recordedConsentTime = true;
-					cmp.willShowPrivacyMessage()
-						.then((willShow) => {
-							trackPerformance(
-								'consent',
-								'acquired',
-								willShow ? 'new' : 'existing',
-							);
-						})
-						.catch((e) =>
-							console.error(
-								`CMP willShowPrivacyMessage - error: ${e}`,
-							),
-						);
-				}
-			});
-
-			onConsentChange((consentState) => {
-				const decideConsentString = () => {
-					if (consentState.tcfv2) {
-						return consentState.tcfv2?.tcString;
-					}
-					return "";
-				}
-				const consentUUID = getCookie('consentUUID')
-				const consentString = decideConsentString();
-				const event = {
-					component: {
-						componentType: 'CONSENT',
-						products: [],
-						labels: [consentUUID, consentString],
-					},
-					action: 'MANAGE_CONSENT', // I am using MANAGE_CONSENT as the default action while we develop this code.
-				}
-				const ophanEventSubmit = getOphanRecordFunction()
-				ophanEventSubmit(event);
-			});
-
-			cmp.init({
-				country: countryCode,
-				pubData,
-			});
-		}
-	}, [
-		countryCode,
-		CAPI.config.switches.consentManagement,
-		pageViewId,
-		browserId,
-	]);
+	// This code is executed at first render and then again each time consentState is set
+	useEffect(() => {
+		if (!consentState) return;
+		// Register changes in consent state
+		const decideConsentString = () => {
+			if (consentState.tcfv2) {
+				return consentState.tcfv2?.tcString;
+			}
+			return '';
+		};
+		const consentUUID = getCookie('consentUUID');
+		const consentString = decideConsentString();
+		const event = {
+			component: {
+				componentType: 'CONSENT',
+				products: [],
+				labels: [consentUUID, consentString],
+			},
+			action: 'MANAGE_CONSENT', // I am using MANAGE_CONSENT as the default action while we develop this code.
+		};
+		const ophanEventSubmit = getOphanRecordFunction();
+		ophanEventSubmit(event);
+	}, [consentState]);
 
 	// ************************
 	// *   Google Analytics   *
@@ -378,15 +388,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		});
 	}, []);
 
-	const display: Display = decideDisplay(CAPI.format);
-	const design: Design = decideDesign(CAPI.format);
-	const pillar: Theme = decideTheme(CAPI.format);
-
 	useOnce(() => {
 		setBrazeMessages(
 			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
 		);
 	}, [isSignedIn, CAPI.config.idApiUrl]);
+
+	const display: Display = decideDisplay(CAPI.format);
+	const design: Design = decideDesign(CAPI.format);
+	const pillar: Theme = decideTheme(CAPI.format);
 
 	const format: Format = {
 		display,
@@ -721,11 +731,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
-			<CommercialMetrics
-				browserId={browserId}
-				pageViewId={pageViewId}
-					/>
-				)}
+				<CommercialMetrics
+					browserId={browserId}
+					pageViewId={pageViewId}
+				/>
+			)}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
@@ -1202,6 +1212,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
+					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
 			<Portal
@@ -1302,6 +1313,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
 					isPreview={!!CAPI.isPreview}
+					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
 		</React.StrictMode>
