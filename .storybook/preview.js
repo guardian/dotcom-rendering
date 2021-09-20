@@ -10,6 +10,7 @@ import 'reset-css';
 import { Lazy } from '@root/src/web/components/Lazy';
 import { Picture } from '@root/src/web/components/Picture';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
+import { useTimeAgo } from '../common-rendering/src/hooks/useTimeAgo'
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -91,3 +92,12 @@ export const parameters = {
 	},
 	layout: 'fullscreen',
 };
+
+
+export const decorators = [
+	(Story) => {
+		useTimeAgo()
+		return (
+			  <Story />
+	)},
+]
