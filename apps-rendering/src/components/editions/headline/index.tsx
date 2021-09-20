@@ -75,17 +75,23 @@ const immersiveStyles = css`
 	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[6]};
 	background-color: ${neutral[7]};
+	min-height: 3.5rem;
 
 	${from.tablet} {
 		padding-left: 0;
+		min-height: 4.625rem;
 	}
 `;
 
 const interviewStyles = css`
 	margin-left: ${remSpace[3]};
 	border: 0;
-
+	min-height: 3.5rem;
 	${articleWidthStyles}
+
+	${from.tablet} {
+		min-height: 4.625rem;
+	}
 `;
 
 const interviewFontStyles = css`
