@@ -198,6 +198,37 @@ const isItemLink = (element: CAPIElement): boolean => {
 	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
 };
 
+const removeGlobalH2Styles = (elements: CAPIElement[]): CAPIElement[] => {
+	/**
+	 * Article pages come with some global style rules, one of which affects h2
+	 * tags. But for numbered lists we don't want these styles because we use
+	 * these html elements to represents our special titles. Rather than start a
+	 * css war, this enhancer uses the `data-ignore` attribute which is a contract
+	 * established to allow global styles to be ignored.
+	 *
+	 * All h2 tags inside an article of Design: NumberedList have this attirbute
+	 * set.
+	 */
+	const withH2StylesIgnored: CAPIElement[] = [];
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+				'model.dotcomrendering.pageElements.SubheadingBlockElement'
+		) {
+			withH2StylesIgnored.push(
+				{
+					...thisElement,
+					html: thisElement.html.replace('<h2>', '<h2 data-ignore="global-h2-styling">'),
+				},
+			);
+		} else {
+			// Pass through
+			withH2StylesIgnored.push(thisElement);
+		}
+	});
+	return withH2StylesIgnored;
+};
+
 const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	/**
 	 * Why not just add H3s in Composer?
@@ -343,6 +374,11 @@ class Enhancer {
 		return this;
 	}
 
+	removeGlobalH2Styles() {
+		this.elements = removeGlobalH2Styles(this.elements);
+		return this;
+	}
+
 	addH3s() {
 		this.elements = addH3s(this.elements);
 		return this;
@@ -370,6 +406,8 @@ const enhance = (
 ): CAPIElement[] => {
 	return (
 		new Enhancer(elements, format)
+			// Add the data-ignore='global-h2-styling' attribute
+			.removeGlobalH2Styles()
 			// Turn false h3s into real ones
 			.addH3s()
 			// Add item links
