@@ -20,7 +20,6 @@ export const CommercialMetrics: React.FC<{
 	const [adBlockerInUse, setAdBlockerInUse] = useState<boolean>();
 
 	isAdBlockInUse().then((value) => {
-		console.log("value ",  value)
 		setAdBlockerInUse(value);
 	}).catch((error) => {
 		console.log(error);
@@ -28,10 +27,8 @@ export const CommercialMetrics: React.FC<{
 
 	useEffect(() => {
 		if (adBlockerInUse === undefined) return;
-		console.log("visibilityState ", visibilityState)
 		if (visibilityState !== 'hidden') return;
 		if (sentCommercialMetrics) return;
-		console.log("adBlockerInUse", adBlockerInUse)
 
 		const testsToForceMetrics: ABTest[] = [];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(
@@ -50,7 +47,7 @@ export const CommercialMetrics: React.FC<{
 					pageViewId,
 					browserId,
 					Boolean(isDev),
-					// adBlockerInUse,
+					adBlockerInUse,
 				),
 			);
 	}, [
