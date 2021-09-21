@@ -337,7 +337,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			country: countryCode,
 			pubData: {
 				platform: 'next-gen',
-				browserId,
+				browserId: browserId ?? undefined,
 				pageViewId,
 			},
 		});
@@ -731,7 +731,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
 				<CommercialMetrics
-					browserId={browserId}
+					browserId={browserId ?? undefined}
 					pageViewId={pageViewId}
 				/>
 			)}
