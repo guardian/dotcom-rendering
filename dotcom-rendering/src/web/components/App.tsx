@@ -340,7 +340,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			country: countryCode,
 			pubData: {
 				platform: 'next-gen',
-				browserId: browserId ?? undefined,
+				browserId: browserId ?? undefined, // if `undefined`, the resulting consent signal cannot be joined to a page view.
 				pageViewId,
 			},
 		});
