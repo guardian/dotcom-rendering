@@ -50,7 +50,4 @@ module.exports = {
 	moduleDirectories: ['node_modules', 'src'],
 	snapshotSerializers: ['@emotion/jest/serializer'],
 	transformIgnorePatterns: ['node_modules/(?!@guardian)'],
-	moduleNameMapper: {
-		'preact-render-to-string': 'react-dom/server',
-	},
 };
