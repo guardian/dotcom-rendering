@@ -164,6 +164,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+	// [string] for the actual id;
+	// [null] for when the cookie does not exist;
+	// [undefined] for when the cookie has not been read yet
 	const [browserId, setBrowserId] = useState<string | null | undefined>(undefined);
 	useOnce(() => {
 		setBrowserId(getCookie('bwid'));
