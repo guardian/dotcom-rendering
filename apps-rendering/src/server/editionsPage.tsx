@@ -158,8 +158,8 @@ function render(
 	getAssetLocation: (assetName: string) => string,
 	themeOverride: Option<Theme>,
 ): Page {
-	const path = res.req?.path;
-	const isPreview = res.req?.query.isPreview === 'true';
+	const path = res.req.path;
+	const isPreview = res.req.query.isPreview === 'true';
 	const environment = getEditionsEnv(isPreview, path);
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
 
