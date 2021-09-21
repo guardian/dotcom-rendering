@@ -3,7 +3,7 @@
 ### Install
 
 1. Clone the repo, then CD into the `apps-rendering` subdirectory before running any commands -
-2. Make sure you're using Node 12 (specific version found in `.nvmrc`)
+2. Make sure you're using the version of Node specified in [`.nvmrc`](/.nvmrc)
 3. Install dependencies:
 
 ```sh
