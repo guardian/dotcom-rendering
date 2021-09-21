@@ -240,7 +240,8 @@
     "webpack-sources": "^2.2.0"
   },
   "resolutions": {
-    "@types/serve-static": "^1.13.9"
+    "@types/serve-static": "^1.13.9",
+		"remark": "11.0.2"
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
