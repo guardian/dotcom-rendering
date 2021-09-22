@@ -3,11 +3,38 @@ import { css } from '@emotion/react';
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { from, until } from '@guardian/src-foundations/mq';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { labelStyles as adLabelStyles } from '../components/AdSlot';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
 	position: relative;
+`;
+
+// These styles are applied to dynamic ad slots (i.e. slots that are not fixed), e.g. ads inserted
+// by spacefinder across all layout types (articles, comments, etc)
+//
+// spacefinder is scoped to placing elements in spaces within the .article-body-commercial-selector
+// hence we scope the styles at the same level
+const adStylesDynamic = css`
+	${adLabelStyles}
+
+	& .ad-slot.ad-slot--collapse {
+		display: none;
+	}
+
+	${from.tablet} {
+		.mobile-only .ad-slot {
+			display: none;
+		}
+	}
+
+	${until.tablet} {
+		.hide-until-tablet .ad-slot {
+			display: none;
+		}
+	}
 `;
 
 export const ArticleRenderer: React.FC<{
@@ -50,7 +77,7 @@ export const ArticleRenderer: React.FC<{
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}
-			css={commercialPosition}
+			css={[adStylesDynamic, commercialPosition]}
 		>
 			{/* Insert the placeholder for the sign in gate on the 2nd article element */}
 			{withSignInGateSlot(output)}
