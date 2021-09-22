@@ -2,19 +2,10 @@
 
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
-import { Pillar, Theme, Special } from "@guardian/types";
+import { Pillar, Special, Theme } from "@guardian/types";
+import { css } from "@emotion/react";
 
 // ----- Stories ----- //
-
-const themeOptions = {
-	News: Pillar.News,
-	Opinion: Pillar.Opinion,
-	Sport: Pillar.Sport,
-	Culture: Pillar.Culture,
-	Lifestyle: Pillar.Lifestyle,
-	Labs: Special.Labs,
-	SpecialReport: Special.SpecialReport,
-};
 
 const events: KeyEvent[] = [
 	{
@@ -68,26 +59,44 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const Default = (args: { theme: Theme }) => (
-	<KeyEvents keyEvents={events} {...args} />
+const KeyEventComp = (dark: boolean, theme: Theme, title: string) => (
+	<div
+		css={css`
+			flex-grow: 1;
+		`}
+	>
+		<div>{title}</div>
+		<KeyEvents keyEvents={events} theme={theme} supportsDarkMode={dark} />
+	</div>
 );
 
-Default.args = {
-	theme: Pillar.News,
-};
+const keyEventWithTheme = (dark: boolean) => () => (
+	<div
+		css={css`
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		`}
+	>
+		{KeyEventComp(dark, Pillar.News, "News")}
+		{KeyEventComp(dark, Pillar.Culture, "Culture")}
+		{KeyEventComp(dark, Pillar.Lifestyle, "Lifestyle")}
+		{KeyEventComp(dark, Pillar.Opinion, "Opinion")}
+		{KeyEventComp(dark, Pillar.Sport, "Sport")}
+		{KeyEventComp(dark, Special.Labs, "Labs")}
+		{KeyEventComp(dark, Special.SpecialReport, "SpecialReport")}
+	</div>
+);
+
+const Default = keyEventWithTheme(false);
+const Dark = keyEventWithTheme(true);
 
 // ----- Exports ----- //
 
 export default {
 	component: KeyEvents,
 	title: "Common/Components/KeyEvents",
-	argTypes: {
-		theme: {
-			options: Object.keys(themeOptions),
-			control: { type: "select" },
-			mapping: themeOptions,
-		},
-	},
 };
 
-export { Default };
+export { Default, Dark };

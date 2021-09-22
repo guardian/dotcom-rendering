@@ -1719,22 +1719,22 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^18.0.3":
-  version "18.0.3"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-18.0.3.tgz#de63cb6af5fbfe030edbdebe499a46c3f3907e29"
-  integrity sha512-KG0PKiob3P3/6pWSb3FqQVvWxK/Ru8HQcjvN6vLbvKoUZFz5FVJYJ0V8EZipKalh4PaT9pbQg8UAvMg8oMg7fw==
+"@guardian/atoms-rendering@^19.0.0":
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-19.0.0.tgz#5bfcb779acecc541b26d2985cba43c4d2d325263"
+  integrity sha512-Kxd4l4LO7j1bqCpvgmGaZO9E6b+Q2eUJWKLSrZG7vdp1MGACrUAgJBl3qztI10nAqt3KNJrbpOFgWMEU7OuYcA==
   dependencies:
     youtube-player "^5.5.2"
 
-"@guardian/automat-contributions@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@guardian/automat-contributions/-/automat-contributions-0.4.0.tgz#bc710031601dd3eb90f3e6555a8fed9d69d0b93d"
-  integrity sha512-ooyeNl4lFOCTi376GipsdV6IHnxY7MGHfM7c/iFbAatElYbH4Lr2Y0kIOBg6yR5XGDMhQ8PWyDQ/YgMIL5BKRw==
+"@guardian/automat-contributions@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@guardian/automat-contributions/-/automat-contributions-0.4.1.tgz#a2e7033feccc8a20dcce83615055b3248bb6f4ac"
+  integrity sha512-rud691019bLWh9S/jXhFGnS75aiH8LUx/g4PBuM7Jd1ziC8eR/rG6Cz8BhQvP3oV2hH9QPN4zwjQK0zzvzckLQ==
 
-"@guardian/braze-components@^3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-3.5.0.tgz#cb2b28e06d0ede0b967a21fcb1c33f3de29585f2"
-  integrity sha512-FnRh53rTJZfgg1eqSnAf8T0RBVdDEbC2PrK0OZ0d54/Exy/uUislOPEfA667QyLuB4jN5mThM98vNIlmfP2wVw==
+"@guardian/braze-components@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-3.6.0.tgz#51ba3cfd067e075859b1234a3799b53855a87620"
+  integrity sha512-qIeESQ+RLV6ta8OBh3VBxNu3FSA6ekg9N+wdUzj4aDzKwycHaomHrs98CQWWzWCRkLiG+7PJBm8L5k0hspHvPQ==
 
 "@guardian/commercial-core@^0.19.2":
   version "0.19.2"
@@ -16035,10 +16035,10 @@ preact-render-to-string@^5.1.19:
   dependencies:
     pretty-format "^3.8.0"
 
-preact@^10.5.12:
-  version "10.5.12"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.12.tgz#6a8ee8bf40a695c505df9abebacd924e4dd37704"
-  integrity sha512-r6siDkuD36oszwlCkcqDJCAKBQxGoeEGytw2DGMD5A/GGdu5Tymw+N2OBXwvOLxg6d1FeY8MgMV3cc5aVQo4Cg==
+preact@^10.5.14:
+  version "10.5.14"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.14.tgz#0b14a2eefba3c10a57116b90d1a65f5f00cd2701"
+  integrity sha512-KojoltCrshZ099ksUZ2OQKfbH66uquFoxHSbnwKbTJHeQNvx42EmC7wQVWNuDt6vC5s3nudRHFtKbpY4ijKlaQ==
 
 prebuild-install@^5.3.0:
   version "5.3.0"

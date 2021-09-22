@@ -17,9 +17,10 @@ import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
 import { Link } from "@guardian/src-link";
 import { Pillar, Theme } from "@guardian/types";
 import { from } from "@guardian/src-foundations/mq";
+import { darkModeCss } from "../lib";
 
 // ----- Component ----- //
-type paletteId = 300 | 400;
+type paletteId = 300 | 400 | 500;
 
 interface KeyEvent {
 	time: string;
@@ -30,11 +31,13 @@ interface KeyEvent {
 interface KeyEventsProps {
 	keyEvents: KeyEvent[];
 	theme: Theme;
+	supportsDarkMode: boolean;
 }
 
 interface ListItemProps {
 	keyEvent: KeyEvent;
 	theme: Theme;
+	supportsDarkMode: boolean;
 }
 
 const getColor = (theme: Theme, paletteId: paletteId) => {
@@ -52,12 +55,18 @@ const getColor = (theme: Theme, paletteId: paletteId) => {
 	}
 };
 
-const keyEventWrapperStyles: SerializedStyles = css`
+const keyEventWrapperStyles = (
+	supportsDarkMode: boolean
+): SerializedStyles => css`
 	width: 100%;
 
 	${from.desktop} {
 		width: 13.75rem;
 	}
+
+	${darkModeCss(supportsDarkMode)`
+		background-color: ${neutral[10]};
+	`}
 `;
 
 const detailsStyles: SerializedStyles = css`
@@ -71,9 +80,9 @@ const detailsStyles: SerializedStyles = css`
 	}
 `;
 
-const titleRowStyles: SerializedStyles = css`
+const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	position: relative;
-	margin: ${remSpace[1]} ${remSpace[1]} 0 ${remSpace[3]};
+	margin: 0 ${remSpace[1]} 0 ${remSpace[3]};
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -90,6 +99,12 @@ const titleRowStyles: SerializedStyles = css`
 		height: 2rem;
 	}
 
+	${darkModeCss(supportsDarkMode)`
+		path {
+			fill: ${neutral[60]};
+		}
+	`}
+
 	${from.phablet} {
 		margin: ${remSpace[1]} ${remSpace[4]} 0;
 	}
@@ -99,12 +114,16 @@ const titleRowStyles: SerializedStyles = css`
 	}
 `;
 
-const titleStyle: SerializedStyles = css`
+const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${neutral[7]};
+
+	${darkModeCss(supportsDarkMode)`
+		color: ${neutral[86]};
+	`}
 `;
 
-const listStyles: SerializedStyles = css`
+const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	margin: ${remSpace[3]};
 
 	${from.phablet} {
@@ -126,13 +145,21 @@ const listStyles: SerializedStyles = css`
 		top: 0;
 		position: absolute;
 	}
+
+	${darkModeCss(supportsDarkMode)`
+		li::before {
+			border-color: transparent ${neutral[60]};
+		}
+	`}
 `;
 
-const listItemStyles: SerializedStyles = css`
+const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	padding-bottom: ${remSpace[3]};
 	border-left: 1px solid ${neutral[7]};
 	position: relative;
-
+	${darkModeCss(supportsDarkMode)`
+		border-left: 1px solid ${neutral[60]};
+	`}
 	&:last-child {
 		border-left: none;
 	}
@@ -142,26 +169,45 @@ const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: ${remSpace[4]};
 `;
 
-const textStyles = (theme: Theme): SerializedStyles => css`
+const textStyles = (
+	theme: Theme,
+	supportsDarkMode: boolean
+): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
 	color: ${getColor(theme, 300)};
 	text-decoration: none;
+
+	&:hover {
+		color: ${getColor(theme, 300)};
+		text-decoration: underline;
+	}
+
+	${darkModeCss(supportsDarkMode)`
+		color: ${getColor(theme, 500)};
+		&:hover {
+			color: ${getColor(theme, 500)};
+		}
+	`}
 `;
 
-const timeStyles: SerializedStyles = css`
+const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${neutral[7]};
 	display: block;
+
+	${darkModeCss(supportsDarkMode)`
+		color: ${neutral[60]};
+	`}
 `;
 
-const ListItem = ({ keyEvent, theme }: ListItemProps) => {
+const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 	return (
-		<li css={listItemStyles}>
+		<li css={listItemStyles(supportsDarkMode)}>
 			<div css={timeTextWrapperStyles}>
-				<time css={timeStyles}>{keyEvent.time}</time>
+				<time css={timeStyles(supportsDarkMode)}>{keyEvent.time}</time>
 				<Link
 					priority="secondary"
-					css={textStyles(theme)}
+					css={textStyles(theme, supportsDarkMode)}
 					href={keyEvent.url}
 				>
 					{keyEvent.text}
@@ -171,12 +217,12 @@ const ListItem = ({ keyEvent, theme }: ListItemProps) => {
 	);
 };
 
-const KeyEvents = ({ keyEvents, theme }: KeyEventsProps) => {
+const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 	return (
-		<div css={keyEventWrapperStyles}>
+		<div css={keyEventWrapperStyles(supportsDarkMode)}>
 			<details open css={detailsStyles}>
-				<summary css={titleRowStyles}>
-					<h2 css={titleStyle}>Key Events</h2>
+				<summary css={titleRowStyles(supportsDarkMode)}>
+					<h2 css={titleStyle(supportsDarkMode)}>Key Events</h2>
 					<span className="is-off">
 						<SvgChevronDownSingle />
 					</span>
@@ -184,9 +230,13 @@ const KeyEvents = ({ keyEvents, theme }: KeyEventsProps) => {
 						<SvgChevronUpSingle />
 					</span>
 				</summary>
-				<ul css={listStyles}>
+				<ul css={listStyles(supportsDarkMode)}>
 					{keyEvents.slice(0, 7).map((event) => (
-						<ListItem keyEvent={event} theme={theme} />
+						<ListItem
+							keyEvent={event}
+							theme={theme}
+							supportsDarkMode={supportsDarkMode}
+						/>
 					))}
 				</ul>
 			</details>
