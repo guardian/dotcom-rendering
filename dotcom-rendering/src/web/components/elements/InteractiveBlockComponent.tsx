@@ -137,6 +137,7 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 				message = JSON.parse(event.data);
 			} catch (e) {
 				window?.guardian?.modules?.sentry?.reportError(
+					// @ts-expect-error
 					e,
 					'Json parse Failed on in interactiveBlockComponent',
 				);

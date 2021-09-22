@@ -15,7 +15,6 @@ type Props = {
 	format: Format;
 	byline?: string;
 	tags: TagType[];
-	isShowcase?: boolean; // Used for Interviews to change headline position
 	palette: Palette;
 };
 
