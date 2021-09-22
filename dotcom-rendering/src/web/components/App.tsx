@@ -164,10 +164,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	const [browserId, setBrowserId] = useState<string | undefined>(undefined);
+	// [string] for the actual id;
+	// [null] for when the cookie does not exist;
+	// [undefined] for when the cookie has not been read yet
+	const [browserId, setBrowserId] = useState<string | null | undefined>(undefined);
 	useOnce(() => {
-		// TODO: can the browserId actually be null?
-		setBrowserId(getCookie('bwid') ?? undefined);
+		setBrowserId(getCookie('bwid'));
 	}, []);
 
 	const componentEventHandler = (
@@ -338,7 +340,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			country: countryCode,
 			pubData: {
 				platform: 'next-gen',
-				browserId,
+				browserId: browserId ?? undefined, // if `undefined`, the resulting consent signal cannot be joined to a page view.
 				pageViewId,
 			},
 		});
@@ -732,7 +734,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
 				<CommercialMetrics
-					browserId={browserId}
+					browserId={browserId ?? undefined}
 					pageViewId={pageViewId}
 				/>
 			)}
