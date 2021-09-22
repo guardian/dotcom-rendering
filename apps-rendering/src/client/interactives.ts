@@ -16,18 +16,17 @@ function handleMessage(interactive: HTMLIFrameElement, message: string): void {
 	}
 }
 
-const updateInteractives = (interactives: Element[]) => ({
-	data,
-	source,
-}: MessageEvent): void =>
-	interactives.forEach((elem) => {
-		if (
-			elem instanceof HTMLIFrameElement &&
-			source === elem.contentWindow
-		) {
-			handleMessage(elem, data);
-		}
-	});
+const updateInteractives =
+	(interactives: Element[]) =>
+	({ data, source }: MessageEvent): void =>
+		interactives.forEach((elem) => {
+			if (
+				elem instanceof HTMLIFrameElement &&
+				source === elem.contentWindow
+			) {
+				handleMessage(elem, data);
+			}
+		});
 
 function interactives(): void {
 	const interactives = Array.from(

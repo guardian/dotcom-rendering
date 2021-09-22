@@ -49,21 +49,21 @@ const buildCaption = (
 	return null;
 };
 
-const caption = (format: Format) => (
-	mainmedia: MainMedia,
-): ReactElement | null => {
-	switch (mainmedia.kind) {
-		case MainMediaKind.Image:
-			return buildCaption(
-				mainmedia.image.caption,
-				format,
-				mainmedia.image.credit,
-			);
-		case MainMediaKind.Video:
-		default:
-			return null;
-	}
-};
+const caption =
+	(format: Format) =>
+	(mainmedia: MainMedia): ReactElement | null => {
+		switch (mainmedia.kind) {
+			case MainMediaKind.Image:
+				return buildCaption(
+					mainmedia.image.caption,
+					format,
+					mainmedia.image.credit,
+				);
+			case MainMediaKind.Video:
+			default:
+				return null;
+		}
+	};
 
 const ImmersiveCaption: FC<Props> = (props) => {
 	if (props.item.display === Display.Immersive) {

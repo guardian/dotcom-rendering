@@ -69,8 +69,10 @@ const isObject = (a: unknown): a is Record<string, unknown> =>
  * const parserB = fieldParser('bar', numberParser); // Parser<number>
  * const resultB = parse(parserB)(json); // Err<string>, with 'missing field' err
  */
-const parse = <A>(pa: Parser<A>) => (a: unknown): Result<string, A> =>
-	pa.run(a);
+const parse =
+	<A>(pa: Parser<A>) =>
+	(a: unknown): Result<string, A> =>
+		pa.run(a);
 
 // ----- Basic Parsers ----- //
 
@@ -272,8 +274,10 @@ const arrayParser = <A>(pa: Parser<A>): Parser<A[]> =>
  * const valueB: unknown = 'foo';
  * const resultB = parse(parser)(valueB); // Err<string>, with 'not a number' err
  */
-const map = <A, B>(f: (a: A) => B) => (pa: Parser<A>): Parser<B> =>
-	parser((a) => resultMap(f)(pa.run(a)));
+const map =
+	<A, B>(f: (a: A) => B) =>
+	(pa: Parser<A>): Parser<B> =>
+		parser((a) => resultMap(f)(pa.run(a)));
 
 /**
  * Similar to `map`. Will apply the given function `f` to the results of two
@@ -301,362 +305,362 @@ const map = <A, B>(f: (a: A) => B) => (pa: Parser<A>): Parser<B> =>
  * const jsonB: unknown = JSON.parse('{ "name": "CP Scott" }');
  * const resultB = parse(personParser)(jsonB); // Err<string>, 'missing field' err
  */
-const map2 = <A, B, C>(f: (a: A, b: B) => C) => (
-	pa: Parser<A>,
-	pb: Parser<B>,
-): Parser<C> =>
-	parser((a) => {
-		const resultA = pa.run(a);
+const map2 =
+	<A, B, C>(f: (a: A, b: B) => C) =>
+	(pa: Parser<A>, pb: Parser<B>): Parser<C> =>
+		parser((a) => {
+			const resultA = pa.run(a);
 
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
+			if (resultA.kind === ResultKind.Err) {
+				return resultA;
+			}
 
-		const resultB = pb.run(a);
+			const resultB = pb.run(a);
 
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
+			if (resultB.kind === ResultKind.Err) {
+				return resultB;
+			}
 
-		return ok(f(resultA.value, resultB.value));
-	});
-
-/**
- * Similar to `map2`, but for more parsers. See the docs for that function for
- * more details and examples.
- */
-const map3 = <A, B, C, D>(f: (a: A, b: B, c: C) => D) => (
-	pa: Parser<A>,
-	pb: Parser<B>,
-	pc: Parser<C>,
-): Parser<D> =>
-	parser((a) => {
-		const resultA = pa.run(a);
-
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
-
-		const resultB = pb.run(a);
-
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
-
-		const resultC = pc.run(a);
-
-		if (resultC.kind === ResultKind.Err) {
-			return resultC;
-		}
-
-		return ok(f(resultA.value, resultB.value, resultC.value));
-	});
+			return ok(f(resultA.value, resultB.value));
+		});
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
  */
-const map4 = <A, B, C, D, E>(f: (a: A, b: B, c: C, d: D) => E) => (
-	pa: Parser<A>,
-	pb: Parser<B>,
-	pc: Parser<C>,
-	pd: Parser<D>,
-): Parser<E> =>
-	parser((a) => {
-		const resultA = pa.run(a);
+const map3 =
+	<A, B, C, D>(f: (a: A, b: B, c: C) => D) =>
+	(pa: Parser<A>, pb: Parser<B>, pc: Parser<C>): Parser<D> =>
+		parser((a) => {
+			const resultA = pa.run(a);
 
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
+			if (resultA.kind === ResultKind.Err) {
+				return resultA;
+			}
 
-		const resultB = pb.run(a);
+			const resultB = pb.run(a);
 
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
+			if (resultB.kind === ResultKind.Err) {
+				return resultB;
+			}
 
-		const resultC = pc.run(a);
+			const resultC = pc.run(a);
 
-		if (resultC.kind === ResultKind.Err) {
-			return resultC;
-		}
+			if (resultC.kind === ResultKind.Err) {
+				return resultC;
+			}
 
-		const resultD = pd.run(a);
-
-		if (resultD.kind === ResultKind.Err) {
-			return resultD;
-		}
-
-		return ok(
-			f(resultA.value, resultB.value, resultC.value, resultD.value),
-		);
-	});
+			return ok(f(resultA.value, resultB.value, resultC.value));
+		});
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
  */
-const map5 = <A, B, C, D, E, F>(f: (a: A, b: B, c: C, d: D, e: E) => F) => (
-	pa: Parser<A>,
-	pb: Parser<B>,
-	pc: Parser<C>,
-	pd: Parser<D>,
-	pe: Parser<E>,
-): Parser<F> =>
-	parser((a) => {
-		const resultA = pa.run(a);
+const map4 =
+	<A, B, C, D, E>(f: (a: A, b: B, c: C, d: D) => E) =>
+	(pa: Parser<A>, pb: Parser<B>, pc: Parser<C>, pd: Parser<D>): Parser<E> =>
+		parser((a) => {
+			const resultA = pa.run(a);
 
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
+			if (resultA.kind === ResultKind.Err) {
+				return resultA;
+			}
 
-		const resultB = pb.run(a);
+			const resultB = pb.run(a);
 
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
+			if (resultB.kind === ResultKind.Err) {
+				return resultB;
+			}
 
-		const resultC = pc.run(a);
+			const resultC = pc.run(a);
 
-		if (resultC.kind === ResultKind.Err) {
-			return resultC;
-		}
+			if (resultC.kind === ResultKind.Err) {
+				return resultC;
+			}
 
-		const resultD = pd.run(a);
+			const resultD = pd.run(a);
 
-		if (resultD.kind === ResultKind.Err) {
-			return resultD;
-		}
+			if (resultD.kind === ResultKind.Err) {
+				return resultD;
+			}
 
-		const resultE = pe.run(a);
-
-		if (resultE.kind === ResultKind.Err) {
-			return resultE;
-		}
-
-		return ok(
-			f(
-				resultA.value,
-				resultB.value,
-				resultC.value,
-				resultD.value,
-				resultE.value,
-			),
-		);
-	});
+			return ok(
+				f(resultA.value, resultB.value, resultC.value, resultD.value),
+			);
+		});
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
  */
-const map6 = <A, B, C, D, E, F, G>(
-	f: (a: A, b: B, c: C, d: D, e: E, f: F) => G,
-) => (
-	pa: Parser<A>,
-	pb: Parser<B>,
-	pc: Parser<C>,
-	pd: Parser<D>,
-	pe: Parser<E>,
-	pf: Parser<F>,
-): Parser<G> =>
-	parser((a) => {
-		const resultA = pa.run(a);
+const map5 =
+	<A, B, C, D, E, F>(f: (a: A, b: B, c: C, d: D, e: E) => F) =>
+	(
+		pa: Parser<A>,
+		pb: Parser<B>,
+		pc: Parser<C>,
+		pd: Parser<D>,
+		pe: Parser<E>,
+	): Parser<F> =>
+		parser((a) => {
+			const resultA = pa.run(a);
 
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
+			if (resultA.kind === ResultKind.Err) {
+				return resultA;
+			}
 
-		const resultB = pb.run(a);
+			const resultB = pb.run(a);
 
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
+			if (resultB.kind === ResultKind.Err) {
+				return resultB;
+			}
 
-		const resultC = pc.run(a);
+			const resultC = pc.run(a);
 
-		if (resultC.kind === ResultKind.Err) {
-			return resultC;
-		}
+			if (resultC.kind === ResultKind.Err) {
+				return resultC;
+			}
 
-		const resultD = pd.run(a);
+			const resultD = pd.run(a);
 
-		if (resultD.kind === ResultKind.Err) {
-			return resultD;
-		}
+			if (resultD.kind === ResultKind.Err) {
+				return resultD;
+			}
 
-		const resultE = pe.run(a);
+			const resultE = pe.run(a);
 
-		if (resultE.kind === ResultKind.Err) {
-			return resultE;
-		}
+			if (resultE.kind === ResultKind.Err) {
+				return resultE;
+			}
 
-		const resultF = pf.run(a);
-
-		if (resultF.kind === ResultKind.Err) {
-			return resultF;
-		}
-
-		return ok(
-			f(
-				resultA.value,
-				resultB.value,
-				resultC.value,
-				resultD.value,
-				resultE.value,
-				resultF.value,
-			),
-		);
-	});
+			return ok(
+				f(
+					resultA.value,
+					resultB.value,
+					resultC.value,
+					resultD.value,
+					resultE.value,
+				),
+			);
+		});
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
  */
-const map7 = <A, B, C, D, E, F, G, H>(
-	f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
-) => (
-	pa: Parser<A>,
-	pb: Parser<B>,
-	pc: Parser<C>,
-	pd: Parser<D>,
-	pe: Parser<E>,
-	pf: Parser<F>,
-	pg: Parser<G>,
-): Parser<H> =>
-	parser((a) => {
-		const resultA = pa.run(a);
+const map6 =
+	<A, B, C, D, E, F, G>(f: (a: A, b: B, c: C, d: D, e: E, f: F) => G) =>
+	(
+		pa: Parser<A>,
+		pb: Parser<B>,
+		pc: Parser<C>,
+		pd: Parser<D>,
+		pe: Parser<E>,
+		pf: Parser<F>,
+	): Parser<G> =>
+		parser((a) => {
+			const resultA = pa.run(a);
 
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
+			if (resultA.kind === ResultKind.Err) {
+				return resultA;
+			}
 
-		const resultB = pb.run(a);
+			const resultB = pb.run(a);
 
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
+			if (resultB.kind === ResultKind.Err) {
+				return resultB;
+			}
 
-		const resultC = pc.run(a);
+			const resultC = pc.run(a);
 
-		if (resultC.kind === ResultKind.Err) {
-			return resultC;
-		}
+			if (resultC.kind === ResultKind.Err) {
+				return resultC;
+			}
 
-		const resultD = pd.run(a);
+			const resultD = pd.run(a);
 
-		if (resultD.kind === ResultKind.Err) {
-			return resultD;
-		}
+			if (resultD.kind === ResultKind.Err) {
+				return resultD;
+			}
 
-		const resultE = pe.run(a);
+			const resultE = pe.run(a);
 
-		if (resultE.kind === ResultKind.Err) {
-			return resultE;
-		}
+			if (resultE.kind === ResultKind.Err) {
+				return resultE;
+			}
 
-		const resultF = pf.run(a);
+			const resultF = pf.run(a);
 
-		if (resultF.kind === ResultKind.Err) {
-			return resultF;
-		}
+			if (resultF.kind === ResultKind.Err) {
+				return resultF;
+			}
 
-		const resultG = pg.run(a);
-
-		if (resultG.kind === ResultKind.Err) {
-			return resultG;
-		}
-
-		return ok(
-			f(
-				resultA.value,
-				resultB.value,
-				resultC.value,
-				resultD.value,
-				resultE.value,
-				resultF.value,
-				resultG.value,
-			),
-		);
-	});
+			return ok(
+				f(
+					resultA.value,
+					resultB.value,
+					resultC.value,
+					resultD.value,
+					resultE.value,
+					resultF.value,
+				),
+			);
+		});
 
 /**
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
  */
-const map8 = <A, B, C, D, E, F, G, H, I>(
-	f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I,
-) => (
-	pa: Parser<A>,
-	pb: Parser<B>,
-	pc: Parser<C>,
-	pd: Parser<D>,
-	pe: Parser<E>,
-	pf: Parser<F>,
-	pg: Parser<G>,
-	ph: Parser<H>,
-): Parser<I> =>
-	parser((a) => {
-		const resultA = pa.run(a);
+const map7 =
+	<A, B, C, D, E, F, G, H>(
+		f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
+	) =>
+	(
+		pa: Parser<A>,
+		pb: Parser<B>,
+		pc: Parser<C>,
+		pd: Parser<D>,
+		pe: Parser<E>,
+		pf: Parser<F>,
+		pg: Parser<G>,
+	): Parser<H> =>
+		parser((a) => {
+			const resultA = pa.run(a);
 
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
+			if (resultA.kind === ResultKind.Err) {
+				return resultA;
+			}
 
-		const resultB = pb.run(a);
+			const resultB = pb.run(a);
 
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
+			if (resultB.kind === ResultKind.Err) {
+				return resultB;
+			}
 
-		const resultC = pc.run(a);
+			const resultC = pc.run(a);
 
-		if (resultC.kind === ResultKind.Err) {
-			return resultC;
-		}
+			if (resultC.kind === ResultKind.Err) {
+				return resultC;
+			}
 
-		const resultD = pd.run(a);
+			const resultD = pd.run(a);
 
-		if (resultD.kind === ResultKind.Err) {
-			return resultD;
-		}
+			if (resultD.kind === ResultKind.Err) {
+				return resultD;
+			}
 
-		const resultE = pe.run(a);
+			const resultE = pe.run(a);
 
-		if (resultE.kind === ResultKind.Err) {
-			return resultE;
-		}
+			if (resultE.kind === ResultKind.Err) {
+				return resultE;
+			}
 
-		const resultF = pf.run(a);
+			const resultF = pf.run(a);
 
-		if (resultF.kind === ResultKind.Err) {
-			return resultF;
-		}
+			if (resultF.kind === ResultKind.Err) {
+				return resultF;
+			}
 
-		const resultG = pg.run(a);
+			const resultG = pg.run(a);
 
-		if (resultG.kind === ResultKind.Err) {
-			return resultG;
-		}
+			if (resultG.kind === ResultKind.Err) {
+				return resultG;
+			}
 
-		const resultH = ph.run(a);
+			return ok(
+				f(
+					resultA.value,
+					resultB.value,
+					resultC.value,
+					resultD.value,
+					resultE.value,
+					resultF.value,
+					resultG.value,
+				),
+			);
+		});
 
-		if (resultH.kind === ResultKind.Err) {
-			return resultH;
-		}
+/**
+ * Similar to `map2`, but for more parsers. See the docs for that function for
+ * more details and examples.
+ */
+const map8 =
+	<A, B, C, D, E, F, G, H, I>(
+		f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I,
+	) =>
+	(
+		pa: Parser<A>,
+		pb: Parser<B>,
+		pc: Parser<C>,
+		pd: Parser<D>,
+		pe: Parser<E>,
+		pf: Parser<F>,
+		pg: Parser<G>,
+		ph: Parser<H>,
+	): Parser<I> =>
+		parser((a) => {
+			const resultA = pa.run(a);
 
-		return ok(
-			f(
-				resultA.value,
-				resultB.value,
-				resultC.value,
-				resultD.value,
-				resultE.value,
-				resultF.value,
-				resultG.value,
-				resultH.value,
-			),
-		);
-	});
+			if (resultA.kind === ResultKind.Err) {
+				return resultA;
+			}
+
+			const resultB = pb.run(a);
+
+			if (resultB.kind === ResultKind.Err) {
+				return resultB;
+			}
+
+			const resultC = pc.run(a);
+
+			if (resultC.kind === ResultKind.Err) {
+				return resultC;
+			}
+
+			const resultD = pd.run(a);
+
+			if (resultD.kind === ResultKind.Err) {
+				return resultD;
+			}
+
+			const resultE = pe.run(a);
+
+			if (resultE.kind === ResultKind.Err) {
+				return resultE;
+			}
+
+			const resultF = pf.run(a);
+
+			if (resultF.kind === ResultKind.Err) {
+				return resultF;
+			}
+
+			const resultG = pg.run(a);
+
+			if (resultG.kind === ResultKind.Err) {
+				return resultG;
+			}
+
+			const resultH = ph.run(a);
+
+			if (resultH.kind === ResultKind.Err) {
+				return resultH;
+			}
+
+			return ok(
+				f(
+					resultA.value,
+					resultB.value,
+					resultC.value,
+					resultD.value,
+					resultE.value,
+					resultF.value,
+					resultG.value,
+					resultH.value,
+				),
+			);
+		});
 
 /**
  * Like `map` but applies a function that *also* returns an `Parser`. Then
@@ -690,8 +694,12 @@ const map8 = <A, B, C, D, E, F, G, H, I>(
  * const jsonB: unknown = JSON.parse('{ "answer": "d" }');
  * const resultB = parse(answerParser)(jsonB); // Err<string>, "Needed 'a', 'b' or 'c'."
  */
-const andThen = <A, B>(f: (a: A) => Parser<B>) => (pa: Parser<A>): Parser<B> =>
-	parser((a) => resultAndThen<string, A, B>((x) => f(x).run(a))(pa.run(a)));
+const andThen =
+	<A, B>(f: (a: A) => Parser<B>) =>
+	(pa: Parser<A>): Parser<B> =>
+		parser((a) =>
+			resultAndThen<string, A, B>((x) => f(x).run(a))(pa.run(a)),
+		);
 
 /**
  * Handles situations where there are multiple valid ways that the input data

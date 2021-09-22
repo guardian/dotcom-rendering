@@ -18,8 +18,7 @@ const Generic: FC = () => (
 			embed={{
 				kind: EmbedKind.Generic,
 				alt: some('Lemmy'),
-				html:
-					'<iframe src="https://embed.spotify.com/?uri=spotify:user:guardianmusic:playlist:00lXay2hDczhstNhC7D1sl" width="460" height="480" frameborder="0" allowtransparency="true">',
+				html: '<iframe src="https://embed.spotify.com/?uri=spotify:user:guardianmusic:playlist:00lXay2hDczhstNhC7D1sl" width="460" height="480" frameborder="0" allowtransparency="true">',
 				height: 480,
 				mandatory: true,
 				source: some('Spotify'),
@@ -36,8 +35,7 @@ const Generic: FC = () => (
 			embed={{
 				kind: EmbedKind.Generic,
 				alt: some('Lemmy'),
-				html:
-					'<iframe src="https://embed.spotify.com/?uri=spotify:user:guardianmusic:playlist:00lXay2hDczhstNhC7D1sl" width="460" height="480" frameborder="0" allowtransparency="true">',
+				html: '<iframe src="https://embed.spotify.com/?uri=spotify:user:guardianmusic:playlist:00lXay2hDczhstNhC7D1sl" width="460" height="480" frameborder="0" allowtransparency="true">',
 				height: 480,
 				mandatory: true,
 				source: some('Spotify'),
@@ -91,8 +89,7 @@ const Spotify: FC = () => (
 		<EmbedComponentWrapper
 			embed={{
 				kind: EmbedKind.Spotify,
-				src:
-					'https://embed.spotify.com/?uri=spotify:album:1PULmKbHeOqlkIwcDMNwD4',
+				src: 'https://embed.spotify.com/?uri=spotify:album:1PULmKbHeOqlkIwcDMNwD4',
 				width: 300,
 				height: 380,
 				tracking: EmbedTracksType.TRACKS,
@@ -106,8 +103,7 @@ const Spotify: FC = () => (
 		<EmbedComponentWrapper
 			embed={{
 				kind: EmbedKind.Spotify,
-				src:
-					'https://embed.spotify.com/?uri=spotify:user:juderogers:playlist:5FTUcQhfk54BZwcdiwE1QY',
+				src: 'https://embed.spotify.com/?uri=spotify:user:juderogers:playlist:5FTUcQhfk54BZwcdiwE1QY',
 				width: 300,
 				height: 380,
 				tracking: EmbedTracksType.DOES_NOT_TRACK,
