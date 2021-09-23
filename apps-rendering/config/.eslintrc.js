@@ -22,7 +22,6 @@ module.exports = {
 		project: 'tsconfig.json',
 	},
 	rules: {
-		'@typescript-eslint/no-unsafe-call': 'off',
 		// Triple-equals equality in JS
 		eqeqeq: 'error',
 		// Avoid let when variable is never re-assigned
