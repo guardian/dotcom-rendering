@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { space } from '@guardian/src-foundations';
+import { neutral, space} from '@guardian/src-foundations';
 import { Display } from '@guardian/types';
 
 import { AdSlot, labelHeight } from '@root/src/web/components/AdSlot';
@@ -14,7 +14,7 @@ const padding = space[4] + 2; // 18px - currently being reviewed
 const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
-	background-color: white;
+	background-color: ${neutral[97]};
 	min-height: ${250 + padding + labelHeight}px;
 	padding-bottom: ${padding}px;
 

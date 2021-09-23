@@ -86,7 +86,6 @@ const Headline: React.FC<{
 	headlineText: string;
 	standfirst: string;
 	pillar: Theme;
-	starRating?: number;
 }> = ({ headlineText, pillar, standfirst }) => {
 	return (
 		<div css={fullWidth}>
@@ -110,7 +109,6 @@ export const TopMetaLiveblog: React.FC<{
 			headlineText={articleData.headline}
 			standfirst={articleData.standfirst}
 			pillar={pillar}
-			starRating={articleData.starRating}
 		/>
 
 		{articleData.mainMediaElements.map((element, i) => (
