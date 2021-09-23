@@ -46,7 +46,7 @@
     "@guardian/commercial-core": "0.19.2",
     "@guardian/consent-management-platform": "~6.11.5",
     "@guardian/discussion-rendering": "^7.0.0",
-    "@guardian/libs": "^2.0.0",
+    "@guardian/libs": "^3.0.0",
     "@guardian/shimport": "^1.0.2",
     "@guardian/src-button": "^3.9.0",
     "@guardian/src-checkbox": "^3.9.0",
