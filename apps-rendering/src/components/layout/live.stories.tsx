@@ -2,9 +2,8 @@
 import { breakpoints } from '@guardian/src-foundations';
 import { withKnobs } from '@storybook/addon-knobs';
 import Live from 'components/layout/live';
-
-import type { ReactElement } from 'react';
 import { live } from 'fixtures/live';
+import type { ReactElement } from 'react';
 
 // ----- Stories ----- //
 

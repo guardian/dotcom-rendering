@@ -12,9 +12,10 @@ import {
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
+import type { MainMedia } from 'headerMedia';
+import { MainMediaKind } from 'headerMedia';
+import type { Liveblog } from 'item';
 import { pipe } from 'lib';
-import { Liveblog } from 'item';
-import { MainMedia, MainMediaKind } from 'headerMedia';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
@@ -23,7 +24,7 @@ const headline =
 	'Covid live: Brazil health minister who shook hands with maskless Boris Johnson at UN tests positive';
 
 const standfirst: Option<DocumentFragment> = pipe(
-	'<p><a href=\"x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ae7e58f08b228c9498279#block-614ae7e58f08b228c9498279\">Marcelo Quiroga tests positive</a> at UN general assembly in New York; <a href=\"x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ad64b8f087b5c6fb4a8dc#block-614ad64b8f087b5c6fb4a8dc\">Australia tourism minister says</a> on track to reopen borders ‘by Christmas’</p>\n<ul>\n <li><a href=\"x-gu://item/mobile.guardianapis.com/uk/items/world/2021/sep/22/calculated-risk-ardern-gambles-as-new-zealand-covid-restrictions-eased\">Ardern gambles as New Zealand Covid restrictions eased</a></li>\n <li><a href=\"x-gu://item/mobile.guardianapis.com/uk/items/australia-news/2021/sep/22/riot-police-on-melbourne-streets-to-prevent-third-day-of-protests\">Riot police on Melbourne streets to prevent third day of protests</a></li>\n <li><a href=\"x-gu://item/mobile.guardianapis.com/uk/items/global-development/2021/sep/21/argentina-to-lift-almost-all-covid-restrictions-as-cases-and-deaths-fall\">Argentina to lift almost all Covid restrictions as cases and deaths fall</a></li>\n <li><a href=\"x-gu://item/mobile.guardianapis.com/uk/items/education/2021/sep/21/more-than-100000-pupils-off-school-in-england-last-week-amid-covid-surge\">‘High alert’ warning as more than 100,000 pupils in England miss school</a></li>\n</ul>',
+	'<p><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ae7e58f08b228c9498279#block-614ae7e58f08b228c9498279">Marcelo Quiroga tests positive</a> at UN general assembly in New York; <a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ad64b8f087b5c6fb4a8dc#block-614ad64b8f087b5c6fb4a8dc">Australia tourism minister says</a> on track to reopen borders ‘by Christmas’</p>\n<ul>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/2021/sep/22/calculated-risk-ardern-gambles-as-new-zealand-covid-restrictions-eased">Ardern gambles as New Zealand Covid restrictions eased</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/australia-news/2021/sep/22/riot-police-on-melbourne-streets-to-prevent-third-day-of-protests">Riot police on Melbourne streets to prevent third day of protests</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/global-development/2021/sep/21/argentina-to-lift-almost-all-covid-restrictions-as-cases-and-deaths-fall">Argentina to lift almost all Covid restrictions as cases and deaths fall</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/education/2021/sep/21/more-than-100000-pupils-off-school-in-england-last-week-amid-covid-surge">‘High alert’ warning as more than 100,000 pupils in England miss school</a></li>\n</ul>',
 	parseHtml,
 	toOption,
 );
@@ -38,7 +39,6 @@ const captionDocFragment: Option<DocumentFragment> = pipe(
 	parseHtml,
 	toOption,
 );
-
 
 const mainMedia: Option<MainMedia> = {
 	kind: OptionKind.Some,
@@ -77,10 +77,11 @@ const tags = [
 		sectionName: 'World news',
 		webTitle: 'Coronavirus live',
 		webUrl: 'https://www.theguardian.com/world/series/coronavirus-live',
-		apiUrl: 'https://content.guardianapis.com/world/series/coronavirus-live',
+		apiUrl:
+			'https://content.guardianapis.com/world/series/coronavirus-live',
 		references: [],
 		description: `<p>Follow the Guardian's live coverage of the <a href="https://www.theguardian.com/world/coronavirus-outbreak">coronavirus pandemic</a><br></p>`,
-		internalName: 'Coronavirus live (LIVE BLOG ONLY series tag)'
+		internalName: 'Coronavirus live (LIVE BLOG ONLY series tag)',
 	},
 	{
 		id: 'world/coronavirus-outbreak',
@@ -91,7 +92,7 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/world/coronavirus-outbreak',
 		apiUrl: 'https://content.guardianapis.com/world/coronavirus-outbreak',
 		references: [],
-		internalName: 'Coronavirus (main tag)'
+		internalName: 'Coronavirus (main tag)',
 	},
 	{
 		id: 'world/world',
@@ -102,7 +103,7 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/world/world',
 		apiUrl: 'https://content.guardianapis.com/world/world',
 		references: [],
-		internalName: 'World news'
+		internalName: 'World news',
 	},
 	{
 		id: 'type/article',
@@ -111,7 +112,7 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/articles',
 		apiUrl: 'https://content.guardianapis.com/type/article',
 		references: [],
-		internalName: 'Article (Content type)'
+		internalName: 'Article (Content type)',
 	},
 	{
 		id: 'tone/minutebyminute',
@@ -120,7 +121,7 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/tone/minutebyminute',
 		apiUrl: 'https://content.guardianapis.com/tone/minutebyminute',
 		references: [],
-		internalName: 'Minute by minute (Tone)'
+		internalName: 'Minute by minute (Tone)',
 	},
 	{
 		id: 'tone/news',
@@ -129,7 +130,7 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/tone/news',
 		apiUrl: 'https://content.guardianapis.com/tone/news',
 		references: [],
-		internalName: 'News (Tone)'
+		internalName: 'News (Tone)',
 	},
 	{
 		id: 'profile/helen-sullivan',
@@ -139,13 +140,15 @@ const tags = [
 		apiUrl: 'https://content.guardianapis.com/profile/helen-sullivan',
 		references: [],
 		bio: `<p>Helen Sullivan is the world news liveblogger and reporter on the Guardian's foreign desk in Sydney. She also writes a fortnightly column about animals. Twitter <a href="https://twitter.com/helenrsullivan">@helenrsullivan</a></p>`,
-		bylineImageUrl: 'https://uploads.guim.co.uk/2020/04/08/Helen_Sullivan.jpg',
-		bylineLargeImageUrl: 'https://uploads.guim.co.uk/2020/04/08/Helen_Sullivan.png',
+		bylineImageUrl:
+			'https://uploads.guim.co.uk/2020/04/08/Helen_Sullivan.jpg',
+		bylineLargeImageUrl:
+			'https://uploads.guim.co.uk/2020/04/08/Helen_Sullivan.png',
 		firstName: 'Helen',
 		lastName: 'Sullivan',
 		twitterHandle: 'helenrsullivan',
 		r2ContributorId: '83691',
-		internalName: 'Helen Sullivan'
+		internalName: 'Helen Sullivan',
 	},
 	{
 		id: 'profile/miranda-bryant',
@@ -158,7 +161,7 @@ const tags = [
 		firstName: 'Miranda',
 		lastName: 'Bryant',
 		r2ContributorId: '85415',
-		internalName: 'Miranda Bryant'
+		internalName: 'Miranda Bryant',
 	},
 	{
 		id: 'profile/tom-ambrose',
@@ -170,7 +173,7 @@ const tags = [
 		firstName: 'Tom',
 		lastName: 'Ambrose',
 		r2ContributorId: '90702',
-		internalName: 'Tom Ambrose'
+		internalName: 'Tom Ambrose',
 	},
 	{
 		id: 'profile/oliver-milman',
@@ -179,15 +182,18 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/profile/oliver-milman',
 		apiUrl: 'https://content.guardianapis.com/profile/oliver-milman',
 		references: [],
-		bio: '<p>Oliver Milman is an environment reporter for Guardian US. Twitter&nbsp;<a href="https://twitter.com/olliemilman">@olliemilman</a></p>',
-		bylineImageUrl: 'https://static.guim.co.uk/sys-images/Guardian/Pix/contributor/2014/9/30/1412084830432/Oliver-Milman.jpg',
-		bylineLargeImageUrl: 'https://uploads.guim.co.uk/2017/10/09/Oliver-Milman,-L.png',
+		bio:
+			'<p>Oliver Milman is an environment reporter for Guardian US. Twitter&nbsp;<a href="https://twitter.com/olliemilman">@olliemilman</a></p>',
+		bylineImageUrl:
+			'https://static.guim.co.uk/sys-images/Guardian/Pix/contributor/2014/9/30/1412084830432/Oliver-Milman.jpg',
+		bylineLargeImageUrl:
+			'https://uploads.guim.co.uk/2017/10/09/Oliver-Milman,-L.png',
 		firstName: 'Milman',
 		lastName: 'Oliver',
 		twitterHandle: 'olliemilman',
 		rcsId: 'Oliver Mi',
 		r2ContributorId: '47089',
-		internalName: 'Oliver Milman'
+		internalName: 'Oliver Milman',
 	},
 	{
 		id: 'profile/peterwalker',
@@ -196,13 +202,15 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/profile/peterwalker',
 		apiUrl: 'https://content.guardianapis.com/profile/peterwalker',
 		references: [],
-		bio: '<p>Peter Walker is a political correspondent for the Guardian. <br></p><p>He is the author of The Miracle Pill: Why A Sedentary World Is Getting It All Wrong</p>',
-		bylineImageUrl: 'https://static.guim.co.uk/sys-images/Guardian/Pix/contributor/2007/09/28/peter_walker_140x140.jpg',
+		bio:
+			'<p>Peter Walker is a political correspondent for the Guardian. <br></p><p>He is the author of The Miracle Pill: Why A Sedentary World Is Getting It All Wrong</p>',
+		bylineImageUrl:
+			'https://static.guim.co.uk/sys-images/Guardian/Pix/contributor/2007/09/28/peter_walker_140x140.jpg',
 		firstName: 'Peter',
 		lastName: 'Walker',
 		twitterHandle: 'peterwalker99',
 		r2ContributorId: '19159',
-		internalName: 'Peter Walker'
+		internalName: 'Peter Walker',
 	},
 	{
 		id: 'profile/ben-doherty',
@@ -213,14 +221,15 @@ const tags = [
 		references: [],
 		bio: `<p>Ben Doherty is a reporter for Guardian Australia, and a former foreign correspondent covering south-east Asia. He has won three Walkley awards for his foreign and immigration reporting. Email: ben.doherty@theguardian.com. Click <a href="https://www.theguardian.com/pgp/PublicKeys/Ben%20Doherty.pub.txt">here</a> for Ben's public key</p>`,
 		bylineImageUrl: 'https://uploads.guim.co.uk/2020/06/29/Ben_Doherty.png',
-		bylineLargeImageUrl: 'https://uploads.guim.co.uk/2017/11/27/Ben_Doherty_720x600_final.png',
+		bylineLargeImageUrl:
+			'https://uploads.guim.co.uk/2017/11/27/Ben_Doherty_720x600_final.png',
 		firstName: 'Ben ',
 		lastName: 'Doherty',
 		twitterHandle: 'bendohertycorro',
 		r2ContributorId: '37536',
-		internalName: 'Ben Doherty'
-	}
-]
+		internalName: 'Ben Doherty',
+	},
+];
 
 const fields = {
 	theme: Pillar.News,
@@ -240,10 +249,11 @@ const fields = {
 		sectionName: 'World news',
 		webTitle: 'Coronavirus live',
 		webUrl: 'https://www.theguardian.com/world/series/coronavirus-live',
-		apiUrl: 'https://content.guardianapis.com/world/series/coronavirus-live',
+		apiUrl:
+			'https://content.guardianapis.com/world/series/coronavirus-live',
 		references: [],
 		description: `<p>Follow the Guardian's live coverage of the <a href="https://www.theguardian.com/world/coronavirus-outbreak">coronavirus pandemic</a><br></p>`,
-		internalName: 'Coronavirus live (LIVE BLOG ONLY series tag)'
+		internalName: 'Coronavirus live (LIVE BLOG ONLY series tag)',
 	}),
 	commentable: false,
 	tags: tags,
@@ -264,8 +274,4 @@ const live: Liveblog = {
 	totalBodyBlocks: 12,
 };
 
-
-export {
-	live
-};
-
+export { live };

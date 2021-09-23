@@ -5,9 +5,14 @@ import { Lines } from '@guardian/src-ed-lines';
 import { background, neutral } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import Footer from 'components/footer';
-import type { FC } from 'react';
-import type { Liveblog } from 'item';
+import Headline from 'components/headline';
+import Metadata from 'components/metadata';
 import RelatedContent from 'components/shared/relatedContent';
+import Standfirst from 'components/standfirst';
+import Tags from 'components/tags';
+import HeaderMedia from 'headerMedia';
+import type { Liveblog } from 'item';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -15,11 +20,6 @@ import {
 	onwardStyles,
 } from 'styles';
 import Series from '../series';
-import Headline from 'components/headline';
-import Standfirst from 'components/standfirst';
-import HeaderMedia from 'headerMedia';
-import Metadata from 'components/metadata';
-import Tags from 'components/tags';
 
 // // ----- Styles ----- //
 
