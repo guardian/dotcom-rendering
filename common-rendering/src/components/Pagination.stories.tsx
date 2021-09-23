@@ -20,7 +20,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const defaultStory = () => {
 	return (
 		<Container>
-			<Pagination currentPage={1} totalPages={6} />
+			<Pagination currentPage={2} totalPages={6} />
 		</Container>
 	);
 };
