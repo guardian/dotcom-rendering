@@ -33,7 +33,6 @@ function getAssetMappings(): AssetMapping {
 			{},
 		);
 	} catch (e) {
-		// @ts-expect-error because of compilation error
 		logger.error(`Unable to load asset mapping`, e);
 		throw e;
 	}

@@ -127,7 +127,6 @@ function formatDates(): void {
 		} catch (e) {
 			const message =
 				timestamp ?? 'because the data-date attribute was empty';
-			// @ts-expect-error because of compilation error
 			logger.error(`Unable to parse and format date ${message}`, e);
 		}
 	});

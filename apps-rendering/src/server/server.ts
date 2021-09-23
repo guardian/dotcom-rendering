@@ -262,7 +262,6 @@ async function serveArticlePost(
 			);
 		}
 	} catch (e) {
-		// @ts-expect-error because of compilation error
 		logger.error(`This error occurred`, e);
 		next(e);
 	}
@@ -286,7 +285,6 @@ async function serveEditionsArticlePost(
 
 		await serveEditionsArticle(renderingRequest, res, themeOverride);
 	} catch (e) {
-		// @ts-expect-error because of compilation error
 		logger.error('This error occurred', e);
 		next(e);
 	}
@@ -336,7 +334,6 @@ async function serveArticleGet(
 			},
 		)(capiContent);
 	} catch (e) {
-		// @ts-expect-error because of compilation error
 		logger.error(`This error occurred`, e);
 		res.sendStatus(500);
 	}

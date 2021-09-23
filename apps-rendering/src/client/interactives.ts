@@ -12,8 +12,7 @@ function handleMessage(interactive: HTMLIFrameElement, message: string): void {
 			}
 		}
 	} catch (e) {
-		// @ts-expect-error because of compilation error
-		logger.error(e);
+		logger.error('Unable to handle the message', e);
 	}
 }
 
