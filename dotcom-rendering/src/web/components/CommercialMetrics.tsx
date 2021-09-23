@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { useAB } from '@guardian/ab-react';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
-import { isAdBlockInUse } from '../lib/detectAdBlocker'
+import { useAdBlockInUse } from '../lib/useAdBlockInUse'
 
 export const CommercialMetrics: React.FC<{
 	pageViewId: string;
@@ -17,16 +17,9 @@ export const CommercialMetrics: React.FC<{
 		false,
 	);
 
-	const [adBlockerInUse, setAdBlockerInUse] = useState<boolean>();
-
-	isAdBlockInUse().then((value) => {
-		setAdBlockerInUse(value);
-	}).catch((error) => {
-		console.log(error);
-	});
+	const adBlockerInUse = useAdBlockInUse()
 
 	useEffect(() => {
-		if (adBlockerInUse === undefined) return;
 		if (visibilityState !== 'hidden') return;
 		if (sentCommercialMetrics) return;
 
@@ -41,22 +34,20 @@ export const CommercialMetrics: React.FC<{
 			window.guardian.config.page.isDev ||
 			window.location.hostname.includes('localhost');
 
-		if (isDev || shouldForceMetrics || userIsInSamplingGroup)
+		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
+			const args: [string, string | undefined, boolean, boolean?] = adBlockerInUse === undefined
+				? [pageViewId, browserId, Boolean(isDev)]
+				: [pageViewId, browserId, Boolean(isDev), adBlockerInUse];
 			setSentCommercialMetrics(
-				sendCommercialMetrics(
-					pageViewId,
-					browserId,
-					Boolean(isDev),
-					adBlockerInUse,
-				),
+				sendCommercialMetrics(...args),
 			);
+		}
 	}, [
 		ABTestAPI,
 		pageViewId,
 		browserId,
 		visibilityState,
 		sentCommercialMetrics,
-		adBlockerInUse
 	]);
 
 	// We don’t render anything
