@@ -1536,7 +1536,7 @@
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-3.6.0.tgz#51ba3cfd067e075859b1234a3799b53855a87620"
   integrity sha512-qIeESQ+RLV6ta8OBh3VBxNu3FSA6ekg9N+wdUzj4aDzKwycHaomHrs98CQWWzWCRkLiG+7PJBm8L5k0hspHvPQ==
 
-"@guardian/commercial-core@^0.21.0":
+"@guardian/commercial-core@0.21.0":
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-0.21.0.tgz#a876dee100e2d341efa176edfccdbe71f40620ca"
   integrity sha512-GLI97c2pJGnH350DNmYypIF433BZzeWHG46JzfwcnaSK/6d+3h/fzD1j7cAeN59T1nRb3ehibmYDXoDaxGUpOA==
@@ -1563,10 +1563,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-1.8.1.tgz#22bccd66be7c5bf70cd5bbb1bf7700d94610ccb7"
   integrity sha512-Q/JPLhNeYa5XhDPJhw/1+fbZmszopvovWW8I7dGEuFPGWeNUmXAbW8J3kzuonDu7l9/tuFZg8jljbKHZlrFx0A==
 
-"@guardian/libs@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-2.0.0.tgz#8582703eb510df2e1c29b4b57aa81213dd63fd6f"
-  integrity sha512-rcl6BnePEh/ecp1Vgd8lA2ZANLjLSiHyG4F7RnlLNsr+G0U756/YJpLZRZ5HevALLLrU+g02c51yiSEqpDXFZw==
+"@guardian/libs@^3.0.0":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-3.2.1.tgz#96368fcd76f63b842708ea1489275bd3200f5e4b"
+  integrity sha512-/o84jYYlodIfKs+aRj1QoluHnQ/OdgJN/v1FONwGCf7eGn6RYn9BCh5QvHRujpoSqzgq435tzx5Ug3EF1wWvfQ==
 
 "@guardian/prettier@^0.5.0":
   version "0.5.0"

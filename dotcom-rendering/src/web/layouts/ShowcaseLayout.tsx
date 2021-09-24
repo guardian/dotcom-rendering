@@ -263,6 +263,7 @@ export const ShowcaseLayout = ({
 								showTopBorder={false}
 								showSideBorders={false}
 								padded={false}
+								shouldCenter={false}
 							>
 								<HeaderAdSlot
 									isAdFreeUser={CAPI.isAdFreeUser}
