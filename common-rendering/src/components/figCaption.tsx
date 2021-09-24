@@ -86,7 +86,7 @@ const getStyles = (
   }
 };
 
-export const FigCaption: FC<Props> = ({
+const FigCaption: FC<Props> = ({
   format,
   supportsDarkMode,
   children,
@@ -104,3 +104,7 @@ export const FigCaption: FC<Props> = ({
       return null;
   }
 };
+
+// ----- Exports ----- //
+
+export default FigCaption;
