@@ -51,6 +51,7 @@ export const CommercialMetrics: React.FC<{
 		browserId,
 		visibilityState,
 		sentCommercialMetrics,
+		adBlockerInUse,
 	]);
 
 	// We don’t render anything
