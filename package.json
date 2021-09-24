@@ -5,7 +5,8 @@
   "license": "Apache-2.0",
   "private": true,
   "workspaces": [
-    "common-rendering"
+		"dotcom-rendering",
+		"common-rendering"
   ],
   "scripts": {
     "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
