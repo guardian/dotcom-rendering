@@ -47,7 +47,7 @@ import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import { Display, Design } from '@guardian/types';
+import { Display, Design} from '@guardian/types';
 import type { Format, CountryCode } from '@guardian/types';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -73,8 +73,10 @@ import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { storage } from '@guardian/libs';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
+
 import {
-	getOphanRecordFunction,
+	OphanComponentType,
+	OphanAction,
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
@@ -356,18 +358,19 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			}
 			return '';
 		};
-		const consentUUID = getCookie('consentUUID');
+		const componentType: OphanComponentType = "CONSENT";
+		const consentUUID = getCookie('consentUUID') || "";
 		const consentString = decideConsentString();
+		const action: OphanAction = 'MANAGE_CONSENT'; // I am using MANAGE_CONSENT as the default action while we develop this code.
 		const event = {
 			component: {
-				componentType: 'CONSENT',
+				componentType,
 				products: [],
 				labels: [consentUUID, consentString],
 			},
-			action: 'MANAGE_CONSENT', // I am using MANAGE_CONSENT as the default action while we develop this code.
+			action,
 		};
-		const ophanEventSubmit = getOphanRecordFunction();
-		ophanEventSubmit(event);
+		submitComponentEvent(event);
 	}, [consentState]);
 
 	// ************************
