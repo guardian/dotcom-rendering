@@ -43,7 +43,6 @@ function resolve(
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
 		alias: {
 			logger: path.resolve(__dirname, `src/logger/${loggerName}`),
-			react: path.resolve('./node_modules/react'),
 			// This line exists because atoms-rendering imports `preact-render-to-string`
 			// https://github.com/guardian/atoms-rendering/blob/24b166fc40d125b33ae9ac56d3535c27b0ff5304/src/lib/unifyPageContent.tsx#L2
 			//
