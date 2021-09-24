@@ -6,6 +6,8 @@ import { useAB } from '@guardian/ab-react';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse'
 
+// TODO disallow undefined browserIds by placing conditional in App.tsx
+// so that we wait to render this component until browserId is defined.
 export const CommercialMetrics: React.FC<{
 	pageViewId: string;
 	browserId: string | undefined;
@@ -19,6 +21,7 @@ export const CommercialMetrics: React.FC<{
 
 	const adBlockerInUse = useAdBlockInUse()
 
+	// TODO replace useEffect with useOnce, simplifying the below logic
 	useEffect(() => {
 		if (visibilityState !== 'hidden') return;
 		if (sentCommercialMetrics) return;
