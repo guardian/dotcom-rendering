@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { neutral, space} from '@guardian/src-foundations';
+import { neutral, space } from '@guardian/src-foundations';
 import { Display } from '@guardian/types';
 
 import { AdSlot, labelHeight } from '@root/src/web/components/AdSlot';

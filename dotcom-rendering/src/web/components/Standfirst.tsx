@@ -152,6 +152,13 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette.text.standfirst};
+								a {
+									color: ${neutral[7]};
+									border-bottom: 1px solid ${neutral[60]};
+								}
+								a:hover {
+									border-bottom: 1px solid ${neutral[7]};
+								}
 							`;
 						default:
 							return css`

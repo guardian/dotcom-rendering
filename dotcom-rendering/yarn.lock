@@ -1536,10 +1536,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-3.6.0.tgz#51ba3cfd067e075859b1234a3799b53855a87620"
   integrity sha512-qIeESQ+RLV6ta8OBh3VBxNu3FSA6ekg9N+wdUzj4aDzKwycHaomHrs98CQWWzWCRkLiG+7PJBm8L5k0hspHvPQ==
 
-"@guardian/commercial-core@0.19.2":
-  version "0.19.2"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-0.19.2.tgz#8965a502f6a3c6ed7373f324f4180d41f1c1ed87"
-  integrity sha512-039V6kicXnwI3Xug2kwzOcpLRWvOITBbj69il//kvSSPNu65C0K4QiTewO0oozL1pDVoYH20BC9j1C+oAFok4g==
+"@guardian/commercial-core@0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-0.21.0.tgz#a876dee100e2d341efa176edfccdbe71f40620ca"
+  integrity sha512-GLI97c2pJGnH350DNmYypIF433BZzeWHG46JzfwcnaSK/6d+3h/fzD1j7cAeN59T1nRb3ehibmYDXoDaxGUpOA==
 
 "@guardian/consent-management-platform@~6.11.5":
   version "6.11.5"
@@ -1548,10 +1548,10 @@
   dependencies:
     "@guardian/libs" "^1"
 
-"@guardian/discussion-rendering@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-7.0.0.tgz#2cc39a04eaa03d5d26ef4cb08a88583d9c82d8d3"
-  integrity sha512-R8HK1dMM8H60aasne4v2QaPgnMBQf4Q1QUFjeHz4BvPQAPLLFnPAtWOaoHAoUyy460oKFpwkZ2jFv+dahzRkpQ==
+"@guardian/discussion-rendering@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-7.2.0.tgz#b2d10ac2b7f7c2117d3963899591f4244b6e1efc"
+  integrity sha512-Ui5RyPdhbrbAfi4G+6JP7LiI+8D/2K5Bh5SG/rwlHYRmHM3gGOzm2Koqj42V+v9bHm3A8g+qS9A0khG5QfgEcw==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
@@ -1563,10 +1563,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-1.8.1.tgz#22bccd66be7c5bf70cd5bbb1bf7700d94610ccb7"
   integrity sha512-Q/JPLhNeYa5XhDPJhw/1+fbZmszopvovWW8I7dGEuFPGWeNUmXAbW8J3kzuonDu7l9/tuFZg8jljbKHZlrFx0A==
 
-"@guardian/libs@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-2.0.0.tgz#8582703eb510df2e1c29b4b57aa81213dd63fd6f"
-  integrity sha512-rcl6BnePEh/ecp1Vgd8lA2ZANLjLSiHyG4F7RnlLNsr+G0U756/YJpLZRZ5HevALLLrU+g02c51yiSEqpDXFZw==
+"@guardian/libs@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-3.3.0.tgz#fa98c7b8216ab35b8cf3087cd9ba336958fac99a"
+  integrity sha512-XB9o8qtDOg+KlPh1sjEr4u+Ai3RFTRr2riZ/HJpdlh8Cu4ZpYjCSGUZXSGkxp1CwFWT9sduANnsWSqZ97iBloQ==
 
 "@guardian/prettier@^0.5.0":
   version "0.5.0"

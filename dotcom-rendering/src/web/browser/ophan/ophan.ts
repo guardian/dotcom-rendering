@@ -1,4 +1,8 @@
 import type {
+	TestMeta,
+} from '@guardian/types';
+
+import type {
 	OphanABEvent,
 	OphanABPayload,
 	OphanAction,
@@ -6,8 +10,7 @@ import type {
 	OphanComponentEvent,
 	OphanComponentType,
 	OphanProduct,
-	TestMeta,
-} from '@guardian/types';
+} from '@guardian/libs';
 
 export type OphanRecordFunction = (event: { [key: string]: any }) => void;
 
