@@ -16,7 +16,8 @@ export const CommercialMetrics: React.FC<{
 	const visibilityState = useDocumentVisibilityState();
 
 	const adBlockerInUse = useAdBlockInUse();
-	const isHidden = visibilityState === 'hidden';
+	// only send metrics when visibility state changes to hidden;
+	const isHidden = visibilityState === 'hidden' || undefined
 
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [];
@@ -35,7 +36,7 @@ export const CommercialMetrics: React.FC<{
 		ABTestAPI,
 		pageViewId,
 		adBlockerInUse,
-		isHidden || undefined, // only send metrics when visibility state changes to hidden
+		isHidden
 	]);
 
 	// We don’t render anything
