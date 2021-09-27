@@ -19,7 +19,7 @@
         "@types/jest": "^26.0.20",
         "jest": "^26.6.3",
         "react-test-renderer": "^17.0.1",
-        "ts-jest": "^26.5.3"
+        "ts-jest": "^27.0.5"
     },
     "jest": {
         "preset": "ts-jest/presets/js-with-ts",
