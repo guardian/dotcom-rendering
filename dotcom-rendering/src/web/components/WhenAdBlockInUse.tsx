@@ -13,7 +13,7 @@ type Props = {
  * detection checks and returns a promise.
  *
  * Sure, you could just use this custom hook directly but sometimes code is easier
- * to read and undertand when conditional rendering is done using composition
+ * to read and understand when conditional rendering is done using composition
  *
  * @param {ReactNode} children - What gets rendered if an ad blocker is in use
  * */
