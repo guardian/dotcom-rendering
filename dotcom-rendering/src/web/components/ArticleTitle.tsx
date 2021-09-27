@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
-import { Display, Design } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	tags: TagType[];
 	sectionLabel: string;
@@ -67,7 +67,7 @@ export const ArticleTitle = ({
 	badge,
 }: Props) => (
 	<div css={[sectionStyles, badge && badgeContainer]}>
-		{badge && format.display !== Display.Immersive && (
+		{badge && format.display !== ArticleDisplay.Immersive && (
 			<div css={titleBadgeWrapper}>
 				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
 			</div>
@@ -75,8 +75,8 @@ export const ArticleTitle = ({
 		<div
 			css={[
 				badge && marginTop,
-				format.display === Display.Immersive &&
-					format.design !== Design.PrintShop &&
+				format.display === ArticleDisplay.Immersive &&
+					format.design !== ArticleDesign.PrintShop &&
 					immersiveMargins,
 			]}
 		>

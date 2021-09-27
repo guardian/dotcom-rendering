@@ -1,5 +1,10 @@
-import { Design, Display, Pillar, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { Avatar } from './Avatar';
 import { decidePalette } from '../lib/decidePalette';
@@ -16,10 +21,10 @@ const imageSrc300 =
 const imageSrc300Sport =
 	'https://i.guim.co.uk/img/uploads/2018/05/25/Sid_Lowe,_L.png?width=300&quality=85&auto=format&fit=max&s=4e058df05bd09dd029abe3d23bddb27c';
 
-const format: Format = {
-	theme: Pillar.News,
-	design: Design.Article,
-	display: Display.Standard,
+const format: ArticleFormat = {
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
 };
 
 export const defaultStory = () => (
@@ -29,7 +34,7 @@ export const defaultStory = () => (
 			imageAlt="The alt of the image"
 			palette={decidePalette({
 				...format,
-				theme: Pillar.Opinion,
+				theme: ArticlePillar.Opinion,
 			})}
 		/>
 	</div>
@@ -43,7 +48,7 @@ export const largeStory = () => (
 			imageAlt="The alt of the image"
 			palette={decidePalette({
 				...format,
-				theme: Pillar.Lifestyle,
+				theme: ArticlePillar.Lifestyle,
 			})}
 		/>
 	</div>
@@ -68,7 +73,7 @@ export const largeStoryCulture = () => (
 			imageAlt="The alt of the image"
 			palette={decidePalette({
 				...format,
-				theme: Pillar.Culture,
+				theme: ArticlePillar.Culture,
 			})}
 		/>
 	</div>
@@ -82,7 +87,7 @@ export const SpecialReport = () => (
 			imageAlt="The alt of the image"
 			palette={decidePalette({
 				...format,
-				theme: Special.SpecialReport,
+				theme: ArticleSpecial.SpecialReport,
 			})}
 		/>
 	</div>
@@ -96,7 +101,7 @@ export const smallStory = () => (
 			imageAlt="The alt of the image"
 			palette={decidePalette({
 				...format,
-				theme: Pillar.Sport,
+				theme: ArticlePillar.Sport,
 			})}
 		/>
 	</div>

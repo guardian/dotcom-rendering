@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { css } from '@emotion/react';
 import { body, textSans } from '@guardian/src-foundations/typography';
-import { Special } from '@guardian/types';
+import { ArticleSpecial } from '@guardian/libs';
 import { space } from '@guardian/src-foundations';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 import { Caption } from '@root/src/web/components/Caption';
@@ -15,7 +15,7 @@ type Props = {
 	alt?: string;
 	role?: RoleType;
 	caption?: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	elementId?: string;
 };
@@ -98,12 +98,12 @@ const wrapperStyle = ({
 	loaded,
 	palette,
 }: {
-	format: Format;
+	format: ArticleFormat;
 	role: RoleType;
 	loaded: boolean;
 	palette: Palette;
 }) => css`
-	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
+	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 	background-color: ${palette.background.article};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;

@@ -5,7 +5,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { useComments } from '@root/src/web/lib/useComments';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 import { ContainerTitle } from '../ContainerTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';
@@ -58,7 +58,7 @@ export const OnwardsLayout: React.FC<OnwardsType> = (data: OnwardsType) => {
 					...trail,
 					format: {
 						...trail.format,
-						display: Display.Standard,
+						display: ArticleDisplay.Standard,
 					},
 				};
 			}),

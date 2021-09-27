@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -51,7 +51,7 @@ const immersiveWrapper = css`
 `;
 
 export const MainMedia: React.FC<{
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	elements: CAPIElement[];
 	hideCaption?: boolean;
@@ -74,7 +74,9 @@ export const MainMedia: React.FC<{
 	<div
 		css={[
 			mainMedia,
-			format.display === Display.Immersive ? immersiveWrapper : noGutters,
+			format.display === ArticleDisplay.Immersive
+				? immersiveWrapper
+				: noGutters,
 		]}
 	>
 		{elements.map((element, index) =>

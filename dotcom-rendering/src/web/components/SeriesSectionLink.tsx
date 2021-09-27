@@ -5,12 +5,12 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
 import { Hide } from '@frontend/web/components/Hide';
-import { Display, Design, Special } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { Badge } from '@frontend/web/components/Badge';
 import { interactiveLegacyClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	tags: TagType[];
 	sectionLabel: string;
@@ -66,11 +66,11 @@ const invertedStyle = css`
 	}
 `;
 
-const fontStyles = (format: Format) => {
+const fontStyles = (format: ArticleFormat) => {
 	switch (format.theme) {
-		case Special.Labs:
+		case ArticleSpecial.Labs:
 			switch (format.display) {
-				case Display.Immersive:
+				case ArticleDisplay.Immersive:
 					return css`
 						${textSans.large({ fontWeight: 'bold' })}
 						line-height: 23px;
@@ -97,8 +97,8 @@ const fontStyles = (format: Format) => {
 	}
 };
 
-const secondaryFontStyles = (format: Format) => {
-	if (format.theme === Special.Labs) {
+const secondaryFontStyles = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.Labs) {
 		return css`
 			${textSans.medium({ fontWeight: 'regular' })}
 		`;
@@ -156,14 +156,14 @@ export const SeriesSectionLink = ({
 
 	const hasSeriesTag = tag && tag.type === 'Series';
 
-	const isLabs = format.theme === Special.Labs;
+	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	switch (format.display) {
-		case Display.Immersive: {
+		case ArticleDisplay.Immersive: {
 			switch (format.design) {
-				case Design.Comment:
-				case Design.Editorial:
-				case Design.Letter: {
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter: {
 					if (tag) {
 						// We have a tag, we're not immersive, show both series and section titles
 						return (
@@ -303,9 +303,9 @@ export const SeriesSectionLink = ({
 				}
 			}
 		}
-		case Display.Showcase:
-		case Display.NumberedList:
-		case Display.Standard:
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
 		default: {
 			if (tag) {
 				// We have a tag, we're not immersive, show both series and section titles

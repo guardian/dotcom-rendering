@@ -54,11 +54,11 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
-import { Design, Format } from '@guardian/types';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Figure } from '../components/Figure';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
@@ -73,9 +73,13 @@ type Props = {
 
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
-export const updateRole = (el: CAPIElement, format: Format): CAPIElement => {
+export const updateRole = (
+	el: CAPIElement,
+	format: ArticleFormat,
+): CAPIElement => {
 	const isLiveBlog =
-		format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
 
 	switch (el._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -334,7 +338,7 @@ export const renderElement = ({
 				</ClickToView>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-			if (format.design === Design.Interactive) {
+			if (format.design === ArticleDesign.Interactive) {
 				return [
 					true,
 					<InteractiveLayoutAtom

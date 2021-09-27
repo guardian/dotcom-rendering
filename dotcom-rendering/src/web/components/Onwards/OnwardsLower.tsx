@@ -6,7 +6,7 @@ type Props = {
 	ajaxUrl: string;
 	hasStoryPackage: boolean;
 	tags: TagType[];
-	format: Format;
+	format: ArticleFormat;
 };
 
 export const OnwardsLower = ({

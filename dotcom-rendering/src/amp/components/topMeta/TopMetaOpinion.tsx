@@ -25,7 +25,7 @@ const headerStyle = css`
 	color: ${palette.neutral[7]};
 `;
 
-const bylineStyle = (pillar: Theme) => css`
+const bylineStyle = (pillar: ArticleTheme) => css`
 	${headline.small()};
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	font-style: italic;
@@ -68,7 +68,7 @@ const bottomPadding = css`
 
 const BylineMeta: React.FunctionComponent<{
 	articleData: ArticleModel;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ articleData, pillar }) => {
 	const contributorTag = articleData.tags.find(
 		(t) => t.type === 'Contributor',
@@ -105,7 +105,7 @@ const BylineMeta: React.FunctionComponent<{
 
 export const TopMetaOpinion: React.FC<{
 	articleData: ArticleModel;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ articleData, pillar }) => {
 	return (
 		<header>

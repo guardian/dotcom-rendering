@@ -7,8 +7,8 @@ import {
 	brandLine,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display, Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { Lines } from '@guardian/src-ed-lines';
 
@@ -50,7 +50,7 @@ const StandardGrid = ({
 	display,
 }: {
 	children: React.ReactNode;
-	display: Display;
+	display: ArticleDisplay;
 }) => (
 	<div
 		css={css`
@@ -85,7 +85,7 @@ const StandardGrid = ({
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 300px;
 
-					${display === Display.Showcase
+					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
 									'title      border  headline    headline'
@@ -117,7 +117,7 @@ const StandardGrid = ({
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
 
-					${display === Display.Showcase
+					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
 									'title      border  headline    headline'
@@ -272,7 +272,7 @@ const mainMediaWrapper = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -332,7 +332,7 @@ export const CommentLayout = ({
 					</ElementContainer>
 				</Stuck>
 				<SendToBack>
-					{format.theme !== Special.Labs && (
+					{format.theme !== ArticleSpecial.Labs && (
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
@@ -473,7 +473,7 @@ export const CommentLayout = ({
 					<GridItem area="media">
 						<div
 							css={
-								format.display === Display.Showcase
+								format.display === ArticleDisplay.Showcase
 									? mainMediaWrapper
 									: maxWidth
 							}
@@ -484,7 +484,7 @@ export const CommentLayout = ({
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								starRating={
-									format.design === Design.Review &&
+									format.design === ArticleDesign.Review &&
 									CAPI.starRating
 										? CAPI.starRating
 										: undefined

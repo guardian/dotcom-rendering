@@ -12,12 +12,12 @@ import { Hide } from '@frontend/web/components/Hide';
 
 import { clearFix } from '@root/src/lib/mixins';
 
-import { Display, Special } from '@guardian/types';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	nav: NavType;
 	subscribeUrl: string;
 	edition: Edition;
@@ -67,7 +67,8 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 
 export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 	const displayRoundel =
-		format.display === Display.Immersive || format.theme === Special.Labs;
+		format.display === ArticleDisplay.Immersive ||
+		format.theme === ArticleSpecial.Labs;
 
 	return (
 		<div css={rowStyles}>
@@ -164,11 +165,11 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 				css={[
 					clearFixStyle,
 					rowStyles,
-					format.display === Display.Immersive && minHeight,
+					format.display === ArticleDisplay.Immersive && minHeight,
 				]}
 				data-component="nav2"
 			>
-				{format.display === Display.Immersive && (
+				{format.display === ArticleDisplay.Immersive && (
 					<Hide when="above" breakpoint="tablet">
 						<ThemeProvider theme={buttonReaderRevenue}>
 							<PositionButton>

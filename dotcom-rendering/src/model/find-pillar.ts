@@ -1,15 +1,15 @@
-import { Pillar, Special } from '@guardian/types';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 
 export const findPillar: (
 	name: string,
 	tags?: TagType[],
-) => Theme | undefined = (name, tags?) => {
+) => ArticleTheme | undefined = (name, tags?) => {
 	// Flag paid content for Labs pillar (for styling purposes)
 	const isPaidContent = (tag: TagType) =>
 		tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
 
 	if (tags && tags.some(isPaidContent)) {
-		return Special.Labs;
+		return ArticleSpecial.Labs;
 	}
 
 	const pillar: string = name.toLowerCase();
@@ -18,15 +18,15 @@ export const findPillar: (
 		// The pillar name is "arts" in CAPI, but "culture" everywhere else
 		case 'arts':
 		case 'culture':
-			return Pillar.Culture;
+			return ArticlePillar.Culture;
 		case 'opinion':
-			return Pillar.Opinion;
+			return ArticlePillar.Opinion;
 		case 'news':
-			return Pillar.News;
+			return ArticlePillar.News;
 		case 'sport':
-			return Pillar.Sport;
+			return ArticlePillar.Sport;
 		case 'lifestyle':
-			return Pillar.Lifestyle;
+			return ArticlePillar.Lifestyle;
 		default:
 			return undefined;
 	}

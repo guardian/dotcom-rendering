@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 
-import { Display, Design, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { ArticleMeta } from './ArticleMeta';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -52,14 +57,14 @@ export const ArticleStory = () => {
 		<Container>
 			<ArticleMeta
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				pageId=""
 				webTitle=""
@@ -99,14 +104,14 @@ export const BrandingStory = () => {
 						'https://www.theguardian.com/info/2016/jan/25/content-funding',
 				}}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				pageId=""
 				webTitle=""
@@ -129,14 +134,14 @@ export const FeatureStory = () => {
 		<Container>
 			<ArticleMeta
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Culture,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Culture,
 				})}
 				pageId=""
 				webTitle=""
@@ -158,14 +163,14 @@ export const SpecialReportStory = () => {
 		<Container>
 			<ArticleMeta
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticleSpecial.SpecialReport,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticleSpecial.SpecialReport,
 				})}
 				pageId=""
 				webTitle=""
@@ -187,14 +192,14 @@ export const CommentStory = () => {
 		<Container>
 			<ArticleMeta
 				format={{
-					display: Display.Standard,
-					design: Design.Comment,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Opinion,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Comment,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Opinion,
 				})}
 				pageId=""
 				webTitle=""
@@ -216,14 +221,14 @@ export const InterviewStory = () => {
 		<Container>
 			<ArticleMeta
 				format={{
-					display: Display.Standard,
-					design: Design.Interview,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Interview,
+					theme: ArticlePillar.Lifestyle,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Interview,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Interview,
+					theme: ArticlePillar.Lifestyle,
 				})}
 				pageId=""
 				webTitle=""
@@ -245,14 +250,14 @@ export const ImmersiveStory = () => {
 		<Container>
 			<ArticleMeta
 				format={{
-					display: Display.Immersive,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Immersive,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				pageId=""
 				webTitle=""
@@ -274,14 +279,14 @@ export const TwoContributorsStory = () => {
 		<Container>
 			<ArticleMeta
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Sport,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Sport,
 				})}
 				pageId=""
 				webTitle=""

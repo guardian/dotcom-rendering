@@ -1,6 +1,6 @@
 import fetchMock from 'fetch-mock';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { ABProvider } from '@guardian/ab-react';
 
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
@@ -46,13 +46,13 @@ export const withTwoTabs = () => {
 			<ElementContainer>
 				<MostViewedFooter
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					display={Display.Standard}
+					display={ArticleDisplay.Standard}
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -71,12 +71,12 @@ export const withOneTabs = () => {
 			<ElementContainer>
 				<MostViewedFooter
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					display={Display.Standard}
+					display={ArticleDisplay.Standard}
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -95,12 +95,12 @@ export const withNoMostSharedImage = () => {
 			<ElementContainer>
 				<MostViewedFooter
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					display={Display.Standard}
+					display={ArticleDisplay.Standard}
 				/>
 			</ElementContainer>
 		</AbProvider>

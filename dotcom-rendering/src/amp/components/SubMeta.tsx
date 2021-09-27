@@ -9,7 +9,7 @@ import { palette } from '@guardian/src-foundations';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
-const guardianLines = (pillar: Theme) => css`
+const guardianLines = (pillar: ArticleTheme) => css`
 	background-image: repeating-linear-gradient(
 		to bottom,
 		${neutralBorder(pillar)},
@@ -24,7 +24,7 @@ const guardianLines = (pillar: Theme) => css`
 	margin-top: 12px;
 `;
 
-const linkStyle = (pillar: Theme) => css`
+const linkStyle = (pillar: ArticleTheme) => css`
 	position: relative;
 	padding-left: 5px;
 	padding-right: 6px;
@@ -50,7 +50,7 @@ const itemStyle = css`
 	}
 `;
 
-const keywordListStyle = (pillar: Theme) => css`
+const keywordListStyle = (pillar: ArticleTheme) => css`
 	display: block;
 	margin-left: -6px;
 	padding-top: 6px;
@@ -59,7 +59,7 @@ const keywordListStyle = (pillar: Theme) => css`
 	margin-bottom: 6px;
 `;
 
-const sectionLinkStyle = (pillar: Theme) => css`
+const sectionLinkStyle = (pillar: ArticleTheme) => css`
 	position: relative;
 	padding-left: 5px;
 	padding-right: 6px;
@@ -112,7 +112,7 @@ const shareIcons = css`
 `;
 
 export const SubMeta: React.FC<{
-	pillar: Theme;
+	pillar: ArticleTheme;
 	sections: SimpleLinkType[];
 	keywords: SimpleLinkType[];
 	sharingURLs: {

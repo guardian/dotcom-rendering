@@ -1,4 +1,4 @@
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 
 import { Discussion } from './Discussion';
@@ -16,9 +16,9 @@ export const Basic = () => {
 				isCommentable={true}
 				pillar={3}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.Culture,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Culture,
 				})}
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"

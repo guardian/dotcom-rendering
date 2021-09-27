@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 
 import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
-import { Display, Design, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 const shortQuoteHtml =
@@ -26,18 +31,18 @@ export const Unquoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.News,
 				})}
 			/>
 			<h1>Short</h1>
 			<BlockquoteBlockComponent
 				html={shortQuoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.News,
 				})}
 			/>
 		</div>
@@ -52,9 +57,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.News,
 				})}
 				quoted={true}
 			/>
@@ -62,9 +67,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.Sport,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Sport,
 				})}
 				quoted={true}
 			/>
@@ -72,9 +77,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.Culture,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Culture,
 				})}
 				quoted={true}
 			/>
@@ -82,9 +87,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.Lifestyle,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Lifestyle,
 				})}
 				quoted={true}
 			/>
@@ -92,9 +97,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Pillar.Opinion,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Opinion,
 				})}
 				quoted={true}
 			/>
@@ -102,9 +107,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Special.SpecialReport,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticleSpecial.SpecialReport,
 				})}
 				quoted={true}
 			/>
@@ -112,9 +117,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Special.Labs,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticleSpecial.Labs,
 				})}
 				quoted={true}
 			/>
@@ -122,9 +127,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.LiveBlog,
-					display: Display.Standard,
-					theme: Pillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.News,
 				})}
 				quoted={true}
 			/>
@@ -132,9 +137,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.DeadBlog,
-					display: Display.Standard,
-					theme: Pillar.News,
+					design: ArticleDesign.DeadBlog,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.News,
 				})}
 				quoted={true}
 			/>
@@ -142,9 +147,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.LiveBlog,
-					display: Display.Standard,
-					theme: Pillar.Sport,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Sport,
 				})}
 				quoted={true}
 			/>
@@ -152,9 +157,9 @@ export const Quoted = () => {
 			<BlockquoteBlockComponent
 				html={blockquoteHtml}
 				palette={decidePalette({
-					design: Design.DeadBlog,
-					display: Display.Standard,
-					theme: Pillar.Sport,
+					design: ArticleDesign.DeadBlog,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Sport,
 				})}
 				quoted={true}
 			/>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Special } from '@guardian/types';
+import { ArticleSpecial as Special } from '@guardian/libs';
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
-const style = (pillar: Theme) => css`
+const style = (pillar: ArticleTheme) => css`
 	h2 {
 		margin-top: 24px;
 		margin-bottom: 10px;
@@ -43,7 +43,7 @@ const subHeadingStyleLabs = css`
 
 export const SubheadingBlockComponent: React.FC<{
 	html: string;
-	pillar: Theme;
+	pillar: ArticleTheme;
 	isImmersive: boolean;
 }> = ({ html, pillar, isImmersive }) => (
 	<span

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design, Special } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
@@ -31,9 +31,11 @@ const twitterHandleStyles = (palette: Palette) => css`
 	}
 `;
 
-const bylineStyles = (palette: Palette, format: Format) => css`
-	${format.theme === Special.Labs ? textSans.medium() : headline.xxxsmall()};
-	${format.theme === Special.Labs && 'line-height: 20px;'};
+const bylineStyles = (palette: Palette, format: ArticleFormat) => css`
+	${format.theme === ArticleSpecial.Labs
+		? textSans.medium()
+		: headline.xxxsmall()};
+	${format.theme === ArticleSpecial.Labs && 'line-height: 20px;'};
 	color: ${palette.text.byline};
 	padding-bottom: 8px;
 	font-style: italic;
@@ -52,7 +54,7 @@ const bylineStyles = (palette: Palette, format: Format) => css`
 export const Contributor: React.FC<{
 	author: AuthorType;
 	tags: TagType[];
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }> = ({ author, tags, format, palette }) => {
 	if (!author.byline) {
@@ -68,10 +70,10 @@ export const Contributor: React.FC<{
 			data-component="meta-byline"
 			data-link-name="byline"
 		>
-			{format.design !== Design.Interview && (
+			{format.design !== ArticleDesign.Interview && (
 				<div
 					className={
-						format.design === Design.Interactive
+						format.design === ArticleDesign.Interactive
 							? interactiveLegacyClasses.byline
 							: ''
 					}

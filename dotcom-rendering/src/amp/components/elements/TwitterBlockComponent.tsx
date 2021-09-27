@@ -28,7 +28,7 @@ export const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: ArticleTheme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
@@ -39,7 +39,7 @@ const LinkStyle = (pillar: Theme) => css`
 	}
 `;
 
-const TextStyle = (pillar: Theme) => css`
+const TextStyle = (pillar: ArticleTheme) => css`
 	strong {
 		font-weight: 700;
 	}
@@ -76,7 +76,7 @@ const makeFallback = (html: string): string | null => {
 
 export const TwitterBlockComponent: React.FC<{
 	element: TweetBlockElement;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ element, pillar }) => {
 	const fallbackHTML = makeFallback(element.html);
 

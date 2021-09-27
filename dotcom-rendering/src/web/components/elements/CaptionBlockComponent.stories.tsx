@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { ElementContainer } from '../ElementContainer';
 import { Flex } from '../Flex';
@@ -56,14 +56,14 @@ export const StandardArticle = () => {
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 			/>
 		</Container>
@@ -79,14 +79,14 @@ export const PhotoEssay = () => {
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
-					display: Display.Immersive,
-					design: Design.PhotoEssay,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.PhotoEssay,
+					theme: ArticlePillar.Lifestyle,
 				}}
 				palette={decidePalette({
-					display: Display.Immersive,
-					design: Design.PhotoEssay,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.PhotoEssay,
+					theme: ArticlePillar.Lifestyle,
 				})}
 				padCaption={false}
 				credit="Credit text"
@@ -107,14 +107,14 @@ export const PhotoEssayHTML = () => {
 			<CaptionBlockComponent
 				captionText="<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>"
 				format={{
-					display: Display.Immersive,
-					design: Design.PhotoEssay,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.PhotoEssay,
+					theme: ArticlePillar.Sport,
 				}}
 				palette={decidePalette({
-					display: Display.Immersive,
-					design: Design.PhotoEssay,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.PhotoEssay,
+					theme: ArticlePillar.Sport,
 				})}
 				padCaption={false}
 				credit="Credit text"
@@ -135,14 +135,14 @@ export const Padded = () => {
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
-					display: Display.Standard,
-					design: Design.Analysis,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: ArticlePillar.Culture,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Analysis,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: ArticlePillar.Culture,
 				})}
 				padCaption={true}
 				credit="Credit text"
@@ -163,14 +163,14 @@ export const WidthLimited = () => {
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
-					display: Display.Standard,
-					design: Design.Review,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Review,
+					theme: ArticlePillar.Culture,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Review,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Review,
+					theme: ArticlePillar.Culture,
 				})}
 				padCaption={false}
 				credit="Credit text"
@@ -191,14 +191,14 @@ export const Credited = () => {
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
-					display: Display.Standard,
-					design: Design.MatchReport,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.MatchReport,
+					theme: ArticlePillar.Culture,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.MatchReport,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.MatchReport,
+					theme: ArticlePillar.Culture,
 				})}
 				padCaption={false}
 				credit="Credit text"
@@ -219,14 +219,14 @@ export const Overlayed = () => {
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
-					display: Display.Showcase,
-					design: Design.Comment,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Showcase,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Sport,
 				}}
 				palette={decidePalette({
-					display: Display.Showcase,
-					design: Design.Comment,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Showcase,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Sport,
 				})}
 				padCaption={false}
 				credit="Credit text"

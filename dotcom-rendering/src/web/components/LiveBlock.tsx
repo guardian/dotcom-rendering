@@ -15,7 +15,7 @@ const ASIDE_WIDTH = 58;
 const GUTTER = space[3];
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	block: Block;
 	pageId: string;
 	webTitle: string;

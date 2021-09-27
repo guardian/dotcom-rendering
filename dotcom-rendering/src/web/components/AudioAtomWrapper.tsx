@@ -11,7 +11,7 @@ type Props = {
 	kicker: string;
 	title?: string | undefined;
 	duration: number;
-	pillar: Theme;
+	pillar: ArticleTheme;
 	contentIsNotSensitive: boolean;
 	aCastisEnabled: boolean;
 	readerCanBeShownAds: boolean;
