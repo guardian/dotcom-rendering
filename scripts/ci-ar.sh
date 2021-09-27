@@ -29,8 +29,6 @@ else
     nvm install
     nvm use
 
-    yarn --silent
-
     cd apps-rendering
 
     npm ci
