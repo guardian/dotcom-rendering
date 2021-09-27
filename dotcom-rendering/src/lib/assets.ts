@@ -20,11 +20,11 @@ try {
 const stage =
 	typeof process.env.GU_STAGE === 'string'
 		? process.env.GU_STAGE.toUpperCase()
-		: process.env.GU_STAGE;
+		: undefined;
 
 export const CDN = stage
 	? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
-	: '/';
+	: 'http://localhost:3030/';
 export const loadableManifestJson = loadableManifest;
 
 export const getScriptArrayFromFilename = (
