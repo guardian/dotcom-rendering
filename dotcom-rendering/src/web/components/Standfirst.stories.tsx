@@ -277,3 +277,19 @@ export const PhotoEssay = () => {
 	);
 };
 PhotoEssay.story = { name: 'PhotoEssay' };
+
+export const LabsWithLink = () => {
+	return (
+		<ElementContainer>
+			<Standfirst
+				format={{
+					display: Display.Standard,
+					design: Design.Article,
+					theme: Special.Labs,
+				}}
+				standfirst='<p>Whether your holiday priorities are sampling gastronomic delights, visiting cultural landmarks, adventuring in the great outdoors or just having an easy time with the kids, this quiz will help you plan your itinerary for Brittany, Normandy and the Atlantic Loire Valley</p> <ul> <li>National restrictions may apply, please consult <a href="https://www.gov.uk/guidance/travel-advice-novel-coronavirus" rel="nofollow">government advice</a> before planning travel</li> </ul>'
+			/>
+		</ElementContainer>
+	);
+};
+LabsWithLink.story = { name: 'LabsWithLink' };
