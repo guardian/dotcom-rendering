@@ -16,8 +16,7 @@ type Props = {
 };
 
 const getInputProps = (): Props => ({
-	quote:
-		'The anti-slaughter movement is declining due to increased surveillance and repression that criminalises Tibetan identity',
+	quote: 'The anti-slaughter movement is declining due to increased surveillance and repression that criminalises Tibetan identity',
 	attribution: { kind: 0, value: 'Katia Buffetrille, anthropologist' },
 	format: {
 		display: Display.Standard,

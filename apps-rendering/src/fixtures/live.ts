@@ -45,10 +45,8 @@ const mainMedia: Option<MainMedia> = {
 	value: {
 		kind: MainMediaKind.Image,
 		image: {
-			src:
-				'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f',
-			srcset:
-				'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w',
+			src: 'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f',
+			srcset: 'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=85&fit=bounds&s=d0c466d24ac750ce4b1c9fe8a40fbdd3 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=85&fit=bounds&s=6d0b66dcc9233754f89c07e74c44158f 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=85&fit=bounds&s=8f38bcd742d1ae10a3f01508e31c7f5f 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=85&fit=bounds&s=45e33e51a33abe2b327882eb9de69d04 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=85&fit=bounds&s=5bc078a6facde21b41d2c649ac36e01b 2000w',
 			dpr2Srcset:
 				'https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=140&quality=45&fit=bounds&s=5b4d13a66861d58dff15b371d11043ae 140w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=500&quality=45&fit=bounds&s=e043c3329b11500e9b907ac2c93275ff 500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1000&quality=45&fit=bounds&s=bb69b200c27229f685132af3eddd10b3 1000w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=1500&quality=45&fit=bounds&s=5ea519b33cadfdca59a7d7b1ce570631 1500w, https://i.guim.co.uk/img/media/305593466a8bbd045d233b207b368a5dbcfd08f4/0_101_3000_1800/master/3000.jpg?width=2000&quality=45&fit=bounds&s=fe2810561ff271c2a97583ca67cd97e8 2000w',
 			alt: some('image'),
@@ -61,8 +59,7 @@ const mainMedia: Option<MainMedia> = {
 			},
 			nativeCaption: {
 				kind: OptionKind.Some,
-				value:
-					'‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
+				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
 			role: Role.Standard,
 		},
@@ -77,8 +74,7 @@ const tags = [
 		sectionName: 'World news',
 		webTitle: 'Coronavirus live',
 		webUrl: 'https://www.theguardian.com/world/series/coronavirus-live',
-		apiUrl:
-			'https://content.guardianapis.com/world/series/coronavirus-live',
+		apiUrl: 'https://content.guardianapis.com/world/series/coronavirus-live',
 		references: [],
 		description: `<p>Follow the Guardian's live coverage of the <a href="https://www.theguardian.com/world/coronavirus-outbreak">coronavirus pandemic</a><br></p>`,
 		internalName: 'Coronavirus live (LIVE BLOG ONLY series tag)',
@@ -182,8 +178,7 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/profile/oliver-milman',
 		apiUrl: 'https://content.guardianapis.com/profile/oliver-milman',
 		references: [],
-		bio:
-			'<p>Oliver Milman is an environment reporter for Guardian US. Twitter&nbsp;<a href="https://twitter.com/olliemilman">@olliemilman</a></p>',
+		bio: '<p>Oliver Milman is an environment reporter for Guardian US. Twitter&nbsp;<a href="https://twitter.com/olliemilman">@olliemilman</a></p>',
 		bylineImageUrl:
 			'https://static.guim.co.uk/sys-images/Guardian/Pix/contributor/2014/9/30/1412084830432/Oliver-Milman.jpg',
 		bylineLargeImageUrl:
@@ -202,8 +197,7 @@ const tags = [
 		webUrl: 'https://www.theguardian.com/profile/peterwalker',
 		apiUrl: 'https://content.guardianapis.com/profile/peterwalker',
 		references: [],
-		bio:
-			'<p>Peter Walker is a political correspondent for the Guardian. <br></p><p>He is the author of The Miracle Pill: Why A Sedentary World Is Getting It All Wrong</p>',
+		bio: '<p>Peter Walker is a political correspondent for the Guardian. <br></p><p>He is the author of The Miracle Pill: Why A Sedentary World Is Getting It All Wrong</p>',
 		bylineImageUrl:
 			'https://static.guim.co.uk/sys-images/Guardian/Pix/contributor/2007/09/28/peter_walker_140x140.jpg',
 		firstName: 'Peter',
@@ -249,8 +243,7 @@ const fields = {
 		sectionName: 'World news',
 		webTitle: 'Coronavirus live',
 		webUrl: 'https://www.theguardian.com/world/series/coronavirus-live',
-		apiUrl:
-			'https://content.guardianapis.com/world/series/coronavirus-live',
+		apiUrl: 'https://content.guardianapis.com/world/series/coronavirus-live',
 		references: [],
 		description: `<p>Follow the Guardian's live coverage of the <a href="https://www.theguardian.com/world/coronavirus-outbreak">coronavirus pandemic</a><br></p>`,
 		internalName: 'Coronavirus live (LIVE BLOG ONLY series tag)',

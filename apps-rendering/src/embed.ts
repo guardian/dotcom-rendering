@@ -99,11 +99,15 @@ const youtubeUrl = (id: string): string => {
 	return `${youtube}/embed/${id}?${params.toString()}`;
 };
 
-const getNumericAttribute = (attr: string) => (elem: Element): Option<number> =>
-	pipe(elem.getAttribute(attr), fromNullable, andThen(parseIntOpt));
+const getNumericAttribute =
+	(attr: string) =>
+	(elem: Element): Option<number> =>
+		pipe(elem.getAttribute(attr), fromNullable, andThen(parseIntOpt));
 
-const getAttribute = (attr: string) => (elem: Element): Option<string> =>
-	pipe(elem.getAttribute(attr), fromNullable);
+const getAttribute =
+	(attr: string) =>
+	(elem: Element): Option<string> =>
+		pipe(elem.getAttribute(attr), fromNullable);
 
 const getPermalink = (blockquote: HTMLElement): Result<string, string> =>
 	pipe(
@@ -113,16 +117,16 @@ const getPermalink = (blockquote: HTMLElement): Result<string, string> =>
 		),
 	);
 
-const parseInstagramHTML = (parser: DocParser) => (
-	html: string,
-): Result<string, string> =>
-	pipe(
-		parser(html).querySelector('blockquote'),
-		resultFromNullable(
-			"I couldn't find a blockquote in the html for this embed",
-		),
-		resultAndThen(getPermalink),
-	);
+const parseInstagramHTML =
+	(parser: DocParser) =>
+	(html: string): Result<string, string> =>
+		pipe(
+			parser(html).querySelector('blockquote'),
+			resultFromNullable(
+				"I couldn't find a blockquote in the html for this embed",
+			),
+			resultAndThen(getPermalink),
+		);
 
 const getWidth = getNumericAttribute('width');
 const getHeight = getNumericAttribute('height');
@@ -140,16 +144,16 @@ const iframeAttributes = (iframe: HTMLIFrameElement): Result<string, IFrame> =>
 		})),
 	);
 
-const parseIframe = (parser: DocParser) => (
-	html: string,
-): Result<string, IFrame> =>
-	pipe(
-		parser(html).querySelector('iframe'),
-		resultFromNullable(
-			"I couldn't find an iframe in the html for this embed",
-		),
-		resultAndThen(iframeAttributes),
-	);
+const parseIframe =
+	(parser: DocParser) =>
+	(html: string): Result<string, IFrame> =>
+		pipe(
+			parser(html).querySelector('iframe'),
+			resultFromNullable(
+				"I couldn't find an iframe in the html for this embed",
+			),
+			resultAndThen(iframeAttributes),
+		);
 
 const genericHeight = (parser: DocParser): ((html: string) => number) =>
 	compose(
@@ -222,23 +226,23 @@ const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
 		})),
 	);
 
-const parseSpotifyAudio = (parser: DocParser) => (
-	element: BlockElement,
-): Result<string, Spotify> =>
-	pipe(
-		extractAudioHtml(element),
-		resultAndThen(parseIframe(parser)),
-		resultMap(({ src, width, height }) => ({
-			kind: EmbedKind.Spotify,
-			src,
-			width,
-			height,
-			source: fromNullable(element.audioTypeData?.source),
-			sourceDomain: fromNullable(element.audioTypeData?.sourceDomain),
-			tracking:
-				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-		})),
-	);
+const parseSpotifyAudio =
+	(parser: DocParser) =>
+	(element: BlockElement): Result<string, Spotify> =>
+		pipe(
+			extractAudioHtml(element),
+			resultAndThen(parseIframe(parser)),
+			resultMap(({ src, width, height }) => ({
+				kind: EmbedKind.Spotify,
+				src,
+				width,
+				height,
+				source: fromNullable(element.audioTypeData?.source),
+				sourceDomain: fromNullable(element.audioTypeData?.sourceDomain),
+				tracking:
+					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
+			})),
+		);
 
 const parseVideo = (element: BlockElement): Result<string, Embed> => {
 	if (element.videoTypeData === undefined) {
@@ -258,25 +262,25 @@ const parseVideo = (element: BlockElement): Result<string, Embed> => {
 	);
 };
 
-const parseAudio = (parser: DocParser) => (
-	element: BlockElement,
-): Result<string, Embed> => {
-	if (element.audioTypeData === undefined) {
+const parseAudio =
+	(parser: DocParser) =>
+	(element: BlockElement): Result<string, Embed> => {
+		if (element.audioTypeData === undefined) {
+			return err(
+				"I can't parse this audio element, it has no 'audioTypeData' field",
+			);
+		}
+
+		if (element.audioTypeData.source === 'Spotify') {
+			return parseSpotifyAudio(parser)(element);
+		}
+
 		return err(
-			"I can't parse this audio element, it has no 'audioTypeData' field",
+			`I don't recognise the 'source' of this audio element: ${
+				element.audioTypeData.source ?? 'undefined'
+			}`,
 		);
-	}
-
-	if (element.audioTypeData.source === 'Spotify') {
-		return parseSpotifyAudio(parser)(element);
-	}
-
-	return err(
-		`I don't recognise the 'source' of this audio element: ${
-			element.audioTypeData.source ?? 'undefined'
-		}`,
-	);
-};
+	};
 
 const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 	if (element.instagramTypeData === undefined) {
@@ -304,77 +308,80 @@ const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 	);
 };
 
-const parseGenericEmbedKind = (parser: DocParser) => (
-	element: BlockElement,
-) => (
-	html: string,
-): EmbedKind.TikTok | EmbedKind.EmailSignup | EmbedKind.Generic => {
-	if (element.embedTypeData?.source === 'TikTok') {
-		return EmbedKind.TikTok;
-	}
-	if (isEmailSignUp(parser)(html)) {
-		return EmbedKind.EmailSignup;
-	}
-	return EmbedKind.Generic;
-};
+const parseGenericEmbedKind =
+	(parser: DocParser) =>
+	(element: BlockElement) =>
+	(
+		html: string,
+	): EmbedKind.TikTok | EmbedKind.EmailSignup | EmbedKind.Generic => {
+		if (element.embedTypeData?.source === 'TikTok') {
+			return EmbedKind.TikTok;
+		}
+		if (isEmailSignUp(parser)(html)) {
+			return EmbedKind.EmailSignup;
+		}
+		return EmbedKind.Generic;
+	};
 
 const extractIdFromInstagramUrl = (url: string): string => {
 	const splitUrl = url.split('/');
 	return splitUrl[splitUrl.length - 2];
 };
 
-const extractInstagramId = (parser: DocParser) => (
-	html: string,
-): Result<string, string> =>
-	pipe(
-		html,
-		parseInstagramHTML(parser),
-		resultMap(extractIdFromInstagramUrl),
-	);
-
-const parseGenericInstagram = (parser: DocParser) => (
-	element: BlockElement,
-): Result<string, Instagram> =>
-	pipe(
-		element,
-		extractGenericHtml,
-		resultAndThen(extractInstagramId(parser)),
-		resultMap(
-			(id: string): Instagram => ({
-				kind: EmbedKind.Instagram,
-				id,
-				caption: fromNullable(element.embedTypeData?.alt),
-				tracking:
-					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-			}),
-		),
-	);
-
-const parseGeneric = (parser: DocParser) => (
-	element: BlockElement,
-): Result<string, Embed> => {
-	if (element.embedTypeData === undefined) {
-		return err(
-			"I can't parse this generic embed, it has no 'embedTypeData' field",
+const extractInstagramId =
+	(parser: DocParser) =>
+	(html: string): Result<string, string> =>
+		pipe(
+			html,
+			parseInstagramHTML(parser),
+			resultMap(extractIdFromInstagramUrl),
 		);
-	}
 
-	if (element.embedTypeData.source === 'Instagram') {
-		return parseGenericInstagram(parser)(element);
-	}
+const parseGenericInstagram =
+	(parser: DocParser) =>
+	(element: BlockElement): Result<string, Instagram> =>
+		pipe(
+			element,
+			extractGenericHtml,
+			resultAndThen(extractInstagramId(parser)),
+			resultMap(
+				(id: string): Instagram => ({
+					kind: EmbedKind.Instagram,
+					id,
+					caption: fromNullable(element.embedTypeData?.alt),
+					tracking:
+						element.tracking?.tracks ??
+						EmbedTracksType.DOES_NOT_TRACK,
+				}),
+			),
+		);
 
-	return resultMap((html: string): Generic | EmailSignup | TikTok => ({
-		kind: parseGenericEmbedKind(parser)(element)(html),
-		alt: fromNullable(element.embedTypeData?.alt),
-		html,
-		height: genericHeight(parser)(html),
-		mandatory: element.embedTypeData?.isMandatory ?? false,
-		source: fromNullable(element.embedTypeData?.source),
-		sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
-		// If there's no tracking information the embed does not track
-		tracking: element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-	}))(extractGenericHtml(element));
-};
+const parseGeneric =
+	(parser: DocParser) =>
+	(element: BlockElement): Result<string, Embed> => {
+		if (element.embedTypeData === undefined) {
+			return err(
+				"I can't parse this generic embed, it has no 'embedTypeData' field",
+			);
+		}
+
+		if (element.embedTypeData.source === 'Instagram') {
+			return parseGenericInstagram(parser)(element);
+		}
+
+		return resultMap((html: string): Generic | EmailSignup | TikTok => ({
+			kind: parseGenericEmbedKind(parser)(element)(html),
+			alt: fromNullable(element.embedTypeData?.alt),
+			html,
+			height: genericHeight(parser)(html),
+			mandatory: element.embedTypeData?.isMandatory ?? false,
+			source: fromNullable(element.embedTypeData?.source),
+			sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
+			// If there's no tracking information the embed does not track
+			tracking:
+				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
+		}))(extractGenericHtml(element));
+	};
 
 // ----- Exports ----- //
 

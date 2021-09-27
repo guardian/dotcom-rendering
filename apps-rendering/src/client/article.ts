@@ -127,7 +127,6 @@ function formatDates(): void {
 		} catch (e) {
 			const message =
 				timestamp ?? 'because the data-date attribute was empty';
-
 			logger.error(`Unable to parse and format date ${message}`, e);
 		}
 	});
@@ -143,12 +142,8 @@ function insertEpic(): void {
 		Promise.all([userClient.isPremium(), acquisitionsClient.getEpics()])
 			.then(([isPremium, maybeEpic]) => {
 				if (!isPremium && maybeEpic.epic) {
-					const {
-						title,
-						body,
-						firstButton,
-						secondButton,
-					} = maybeEpic.epic;
+					const { title, body, firstButton, secondButton } =
+						maybeEpic.epic;
 					const epicProps = {
 						title,
 						body,
@@ -347,9 +342,8 @@ function callouts(): void {
 
 					submit(await data, form);
 				} catch (e) {
-					const errorPlaceholder = form.querySelector(
-						'.js-error-message',
-					);
+					const errorPlaceholder =
+						form.querySelector('.js-error-message');
 					if (errorPlaceholder) {
 						errorPlaceholder.textContent =
 							'There was a problem with the file you uploaded above. We accept images and pdfs up to 6MB';
@@ -397,14 +391,14 @@ function hydrateQuizAtoms(): void {
 		const props = atom.querySelector('.js-quiz-params')?.innerHTML;
 		try {
 			if (props) {
-				const quizProps = (JSON.parse(
+				const quizProps = JSON.parse(
 					props.replace(/&quot;/g, '"'),
-				) as unknown) as { quizType: string };
+				) as unknown as { quizType: string };
 				if (quizProps.quizType === 'personality') {
 					ReactDOM.hydrate(
 						h(
 							PersonalityQuizAtom,
-							(quizProps as unknown) as React.ComponentProps<
+							quizProps as unknown as React.ComponentProps<
 								typeof PersonalityQuizAtom
 							>,
 						),
@@ -414,7 +408,7 @@ function hydrateQuizAtoms(): void {
 					ReactDOM.hydrate(
 						h(
 							KnowledgeQuizAtom,
-							(quizProps as unknown) as React.ComponentProps<
+							quizProps as unknown as React.ComponentProps<
 								typeof KnowledgeQuizAtom
 							>,
 						),
@@ -468,9 +462,8 @@ function richLinks(): void {
 								richLink.classList.add(`js-${pillar}`);
 							}
 
-							const placeholder = richLink.querySelector(
-								'.js-image',
-							);
+							const placeholder =
+								richLink.querySelector('.js-image');
 							if (placeholder && typeof image === 'string') {
 								const img = document.createElement('img');
 								img.addEventListener('load', (_) => {
@@ -513,9 +506,8 @@ function resizeEmailSignups(): void {
 	const emailSignupIframes = document.querySelectorAll('.js-email-signup');
 	Array.from(emailSignupIframes).forEach((emailSignupIframe) => {
 		if (isIframe(emailSignupIframe)) {
-			const innerIframe = emailSignupIframe.contentDocument?.querySelector(
-				'iframe',
-			);
+			const innerIframe =
+				emailSignupIframe.contentDocument?.querySelector('iframe');
 			if (innerIframe) {
 				innerIframe.style.width = '100%';
 			}
