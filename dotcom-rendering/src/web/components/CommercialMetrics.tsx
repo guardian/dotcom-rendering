@@ -29,11 +29,7 @@ export const CommercialMetrics: React.FC<{
 			window.location.hostname.includes('localhost');
 
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
-			const args: [string, string | undefined, boolean, boolean?] =
-				adBlockerInUse === undefined
-					? [pageViewId, browserId, Boolean(isDev)]
-					: [pageViewId, browserId, Boolean(isDev), adBlockerInUse];
-			sendCommercialMetrics(...args);
+			sendCommercialMetrics(pageViewId, browserId, Boolean(isDev), adBlockerInUse);
 		}
 	}, [
 		ABTestAPI,
