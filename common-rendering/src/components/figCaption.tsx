@@ -57,7 +57,7 @@ type Props = {
 };
 
 const styles = (supportsDarkMode: boolean) => css`
-  ${textSans.xxsmall({ lineHeight: "regular" })}
+  ${textSans.xsmall()}
   padding-top: ${remSpace[2]};
   color: ${text.supporting};
 
