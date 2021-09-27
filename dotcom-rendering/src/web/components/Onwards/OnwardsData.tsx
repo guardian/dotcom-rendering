@@ -7,7 +7,7 @@ type Props = {
 	limit: number; // Limit the number of items shown (the api often returns more)
 	ophanComponentName: OphanComponentName;
 	Container: React.FC<OnwardsType>;
-	format: Format;
+	format: ArticleFormat;
 	isCuratedContent?: boolean;
 	isFullCardImage?: boolean;
 };

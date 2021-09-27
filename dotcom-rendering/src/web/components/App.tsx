@@ -47,8 +47,8 @@ import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import { Display, Design} from '@guardian/types';
-import type { Format, CountryCode } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, storage } from '@guardian/libs';
+import type { ArticleFormat, CountryCode } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
@@ -71,7 +71,7 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/Uns
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { storage } from '@guardian/libs';
+
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 
 import {
@@ -169,7 +169,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// [string] for the actual id;
 	// [null] for when the cookie does not exist;
 	// [undefined] for when the cookie has not been read yet
-	const [browserId, setBrowserId] = useState<string | null | undefined>(undefined);
+	const [browserId, setBrowserId] = useState<string | null | undefined>(
+		undefined,
+	);
 	useOnce(() => {
 		setBrowserId(getCookie('bwid'));
 	}, []);
@@ -250,7 +252,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const hasOptedOut = await hasOptedOutOfArticleCount();
 			if (!hasOptedOut) {
 				incrementDailyArticleCount();
-				incrementWeeklyArticleCount(storage.local, CAPI.pageId, CAPI.config.keywordIds.split(','));
+				incrementWeeklyArticleCount(
+					storage.local,
+					CAPI.pageId,
+					CAPI.config.keywordIds.split(','),
+				);
 			}
 		};
 
@@ -358,8 +364,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			}
 			return '';
 		};
-		const componentType: OphanComponentType = "CONSENT";
-		const consentUUID = getCookie('consentUUID') || "";
+		const componentType: OphanComponentType = 'CONSENT';
+		const consentUUID = getCookie('consentUUID') || '';
 		const consentString = decideConsentString();
 		const action: OphanAction = 'MANAGE_CONSENT'; // I am using MANAGE_CONSENT as the default action while we develop this code.
 		const event = {
@@ -399,11 +405,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		);
 	}, [isSignedIn, CAPI.config.idApiUrl]);
 
-	const display: Display = decideDisplay(CAPI.format);
-	const design: Design = decideDesign(CAPI.format);
-	const pillar: Theme = decideTheme(CAPI.format);
+	const display: ArticleDisplay = decideDisplay(CAPI.format);
+	const design: ArticleDesign = decideDesign(CAPI.format);
+	const pillar: ArticleTheme = decideTheme(CAPI.format);
 
-	const format: Format = {
+	const format: ArticleFormat = {
 		display,
 		design,
 		theme: pillar,

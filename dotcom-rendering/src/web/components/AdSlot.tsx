@@ -3,12 +3,12 @@ import { css } from '@emotion/react';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 import { space } from '@guardian/src-foundations';
 import { adSizes } from '@guardian/commercial-core';
 
 type Props = {
-	display: Display;
+	display: ArticleDisplay;
 	position: AdSlotType;
 };
 
@@ -188,9 +188,9 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 	switch (position) {
 		case 'right':
 			switch (display) {
-				case Display.Immersive:
-				case Display.Showcase:
-				case Display.NumberedList: {
+				case ArticleDisplay.Immersive:
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.NumberedList: {
 					return (
 						<div
 							id="dfp-ad--right"
@@ -220,7 +220,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 						/>
 					);
 				}
-				case Display.Standard: {
+				case ArticleDisplay.Standard: {
 					const MOSTVIEWED_STICKY_HEIGHT = 1059;
 					return (
 						<div

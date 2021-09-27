@@ -1,31 +1,31 @@
-import { Design, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { decideNavTheme } from './decideNavTheme';
 
 export const decideLineEffect = (
-	design: Design,
-	pillar: Theme,
+	design: ArticleDesign,
+	pillar: ArticleTheme,
 ): LineEffectType => {
-	if (pillar === Pillar.Sport) {
+	if (pillar === ArticlePillar.Sport) {
 		return 'dotted';
 	}
 
 	switch (design) {
-		case Design.Feature:
-		case Design.Recipe:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Recipe:
 			return 'squiggly';
 		default:
 			return 'straight';
 	}
 };
 
-export const decideLineCount = (design?: Design): 8 | 4 => {
-	if (design === Design.Comment) {
+export const decideLineCount = (design?: ArticleDesign): 8 | 4 => {
+	if (design === ArticleDesign.Comment) {
 		return 8;
 	}
 	return 4;
 };
 
-export const getCurrentPillar = (CAPI: CAPIType): Theme => {
+export const getCurrentPillar = (CAPI: CAPIType): ArticleTheme => {
 	const currentPillar =
 		(CAPI.nav.currentPillarTitle &&
 			(CAPI.nav.currentPillarTitle.toLowerCase() as LegacyPillar)) ||

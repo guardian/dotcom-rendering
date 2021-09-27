@@ -1,4 +1,4 @@
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/src-foundations/mq';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 
@@ -24,7 +24,7 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 	return trails.map((trail) => {
 		const format = {
 			...trail.format,
-			display: Display.Immersive,
+			display: ArticleDisplay.Immersive,
 		};
 		return {
 			...trail,
@@ -50,14 +50,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: true,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.LiveBlog,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.LiveBlog,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.LiveBlog,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.LiveBlog,
 		}),
 		webPublicationDate: '2021-02-17T12:45:05.000Z',
 		headline:
@@ -79,14 +79,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: false,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		}),
 		webPublicationDate: '2021-02-17T10:03:02.000Z',
 		headline:
@@ -108,14 +108,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: false,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		}),
 		webPublicationDate: '2021-02-17T11:11:43.000Z',
 		headline:
@@ -137,14 +137,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: false,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		}),
 		webPublicationDate: '2021-02-16T16:00:55.000Z',
 		headline:
@@ -166,14 +166,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: false,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		}),
 		webPublicationDate: '2021-02-16T18:22:53.000Z',
 		headline:
@@ -196,14 +196,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: false,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Article,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
 		}),
 		webPublicationDate: '2021-02-16T16:35:45.000Z',
 		headline:
@@ -225,14 +225,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: true,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.LiveBlog,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.LiveBlog,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.LiveBlog,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.LiveBlog,
 		}),
 		webPublicationDate: '2021-02-16T17:00:15.000Z',
 		headline:
@@ -254,14 +254,14 @@ const trails: TrailType[] = [
 		},
 		isLiveBlog: false,
 		format: {
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Analysis,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Analysis,
 		},
 		palette: decidePalette({
-			display: Display.Standard,
-			theme: Pillar.News,
-			design: Design.Analysis,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Analysis,
 		}),
 		webPublicationDate: '2021-02-16T18:42:44.000Z',
 		headline:
@@ -280,9 +280,9 @@ export const Headlines = () => (
 				trails={trails}
 				ophanComponentName="curated-content"
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 			/>
 		</ElementContainer>
@@ -292,9 +292,9 @@ export const Headlines = () => (
 				trails={trails}
 				ophanComponentName="curated-content"
 				format={{
-					theme: Pillar.Sport,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.Sport,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isCuratedContent={true}
 			/>
@@ -312,9 +312,9 @@ export const SingleItemCarousel = () => (
 				trails={trails.slice(1, 2)}
 				ophanComponentName="curated-content"
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 			/>
 		</ElementContainer>
@@ -331,9 +331,9 @@ export const Immersive = () => (
 				trails={immersiveTrails}
 				ophanComponentName="curated-content"
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFullCardImage={true}
 			/>
@@ -344,9 +344,9 @@ export const Immersive = () => (
 				trails={immersiveTrails}
 				ophanComponentName="curated-content"
 				format={{
-					theme: Pillar.Sport,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.Sport,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFullCardImage={true}
 				isCuratedContent={true}

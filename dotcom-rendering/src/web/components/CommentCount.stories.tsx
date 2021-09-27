@@ -2,7 +2,12 @@
 
 import { css } from '@emotion/react';
 
-import { Design, Display, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { CommentCount } from './CommentCount';
 import { decidePalette } from '../lib/decidePalette';
@@ -26,9 +31,9 @@ export const SpecialReportStory = () => {
 				setIsExpanded={() => {}}
 				commentCount={306}
 				palette={decidePalette({
-					theme: Special.SpecialReport,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticleSpecial.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 			/>
 		</div>
@@ -50,9 +55,9 @@ export const NewsStory = () => {
 				setIsExpanded={() => {}}
 				commentCount={36}
 				palette={decidePalette({
-					theme: Pillar.News,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 			/>
 		</div>
@@ -74,9 +79,9 @@ export const LargeNumber = () => {
 				setIsExpanded={() => {}}
 				commentCount={10836}
 				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 			/>
 		</div>
@@ -98,9 +103,9 @@ export const Zero = () => {
 				setIsExpanded={() => {}}
 				commentCount={0}
 				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 			/>
 		</div>
@@ -121,9 +126,9 @@ export const Undefined = () => {
 				isCommentable={true}
 				setIsExpanded={() => {}}
 				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 			/>
 		</div>

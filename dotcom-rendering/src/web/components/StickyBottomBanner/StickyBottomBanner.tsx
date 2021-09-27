@@ -16,7 +16,7 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
-import { CountryCode } from '@guardian/types';
+import { CountryCode } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';

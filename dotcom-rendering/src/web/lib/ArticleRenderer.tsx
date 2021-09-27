@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
-import { Design, Format } from '@guardian/types';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 // This is required for spacefinder to work!
@@ -11,7 +11,7 @@ const commercialPosition = css`
 `;
 
 export const ArticleRenderer: React.FC<{
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
@@ -46,7 +46,7 @@ export const ArticleRenderer: React.FC<{
 
 				// Note, this class MUST be on the *direct parent* of the
 				// elements for some legacy interactive styling to work.
-				format.design === Design.Interactive
+				format.design === ArticleDesign.Interactive
 					? interactiveLegacyClasses.contentMainColumn
 					: '',
 			].join(' ')}

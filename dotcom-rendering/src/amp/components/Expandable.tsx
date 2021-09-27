@@ -29,7 +29,7 @@ const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: ArticleTheme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
@@ -40,7 +40,7 @@ const LinkStyle = (pillar: Theme) => css`
 	}
 `;
 
-const TextStyle = (pillar: Theme) => css`
+const TextStyle = (pillar: ArticleTheme) => css`
 	strong {
 		font-weight: 700;
 	}
@@ -63,7 +63,7 @@ const TextStyle = (pillar: Theme) => css`
 	${ListStyle(neutralBorder(pillar))};
 `;
 
-const wrapper = (pillar: Theme) => css`
+const wrapper = (pillar: ArticleTheme) => css`
 	background: ${palette.neutral[93]};
 	position: relative;
 	padding: 0 5px 6px;
@@ -124,7 +124,7 @@ const creditStyle = css`
 	margin: 12px 0;
 `;
 
-const pillarColour = (pillar: Theme) => css`
+const pillarColour = (pillar: ArticleTheme) => css`
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 `;
 
@@ -172,7 +172,7 @@ export const Expandable: React.FC<{
 	title: string;
 	img?: string;
 	credit?: string;
-	pillar: Theme;
+	pillar: ArticleTheme;
 	children: React.ReactNode;
 }> = ({ id, type, title, img, children, credit, pillar }) => (
 	<aside css={wrapper(pillar)}>

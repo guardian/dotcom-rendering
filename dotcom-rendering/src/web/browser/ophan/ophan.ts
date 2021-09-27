@@ -1,8 +1,4 @@
 import type {
-	TestMeta,
-} from '@guardian/types';
-
-import type {
 	OphanABEvent,
 	OphanABPayload,
 	OphanAction,
@@ -10,6 +6,7 @@ import type {
 	OphanComponentEvent,
 	OphanComponentType,
 	OphanProduct,
+	OphanABTestMeta,
 } from '@guardian/libs';
 
 export type OphanRecordFunction = (event: { [key: string]: any }) => void;
@@ -47,7 +44,7 @@ export const submitComponentEvent = (
 	ophanRecord({ componentEvent });
 };
 
-export interface SdcTestMeta extends TestMeta {
+export interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
 }
 
@@ -150,5 +147,5 @@ export {
 	OphanComponentEvent,
 	OphanComponentType,
 	OphanProduct,
-	TestMeta,
+	OphanABTestMeta,
 };

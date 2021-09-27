@@ -1,5 +1,10 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import { Design, Display, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { css } from '@emotion/react';
 import { decidePalette } from '../lib/decidePalette';
@@ -61,14 +66,14 @@ export const News = () => {
 		<Container>
 			<SubMeta
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -87,14 +92,14 @@ export const Sport = () => {
 		<Container>
 			<SubMeta
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Sport,
 				})}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Sport,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -113,14 +118,14 @@ export const Culture = () => {
 		<Container>
 			<SubMeta
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Culture,
 				})}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Culture,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -139,14 +144,14 @@ export const Lifestyle = () => {
 		<Container>
 			<SubMeta
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Lifestyle,
 				})}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Lifestyle,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -165,14 +170,14 @@ export const Opinion = () => {
 		<Container>
 			<SubMeta
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
 				})}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -191,14 +196,14 @@ export const Labs = () => {
 		<Container>
 			<SubMeta
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.Labs,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.Labs,
 				})}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.Labs,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.Labs,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -217,14 +222,14 @@ export const SpecialReport = () => {
 		<Container>
 			<SubMeta
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReport,
 				})}
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReport,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}

@@ -4,7 +4,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
-const style = (pillar: Theme) => css`
+const style = (pillar: ArticleTheme) => css`
 	${textSans.small()};
 
 	a {
@@ -14,7 +14,7 @@ const style = (pillar: Theme) => css`
 
 export const DisclaimerBlockComponent: React.FC<{
 	html: string;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ html, pillar }) => (
 	<span
 		css={style(pillar)}

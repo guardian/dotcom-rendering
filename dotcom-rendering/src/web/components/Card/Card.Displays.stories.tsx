@@ -1,4 +1,4 @@
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { Format } from './Card.Format.stories';
 
@@ -17,27 +17,27 @@ export default {
 
 const Standard = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Article,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
 	},
 	'Standard',
 );
 
 const Showcase = Format(
 	{
-		display: Display.Showcase,
-		theme: Pillar.News,
-		design: Design.Article,
+		display: ArticleDisplay.Showcase,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
 	},
 	'Showcase',
 );
 
 const Immersive = Format(
 	{
-		display: Display.Immersive,
-		theme: Pillar.News,
-		design: Design.Article,
+		display: ArticleDisplay.Immersive,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
 	},
 	'Immersive',
 );

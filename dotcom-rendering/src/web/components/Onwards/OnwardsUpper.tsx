@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 
 import { OnwardsData } from './OnwardsData';
 import { Carousel } from './Carousel/Carousel';
@@ -117,36 +117,36 @@ const getContainer = (pillar: PillarForContainer, edition: Edition) => {
 };
 
 const getContainerDataUrl = (
-	pillar: Theme,
+	pillar: ArticleTheme,
 	edition: Edition,
 	ajaxUrl: string,
 ) => {
 	switch (pillar) {
-		case Pillar.Sport:
+		case ArticlePillar.Sport:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('sport', edition)}.json`,
 			]);
-		case Pillar.News:
+		case ArticlePillar.News:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('headlines', edition)}.json`,
 			]);
-		case Pillar.Culture:
+		case ArticlePillar.Culture:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('culture', edition)}.json`,
 			]);
-		case Pillar.Lifestyle:
+		case ArticlePillar.Lifestyle:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('lifestyle', edition)}.json`,
 			]);
-		case Pillar.Opinion:
+		case ArticlePillar.Opinion:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
@@ -172,9 +172,9 @@ type Props = {
 	keywordIds: string | string[];
 	contentType: string;
 	tags: TagType[];
-	format: Format;
+	format: ArticleFormat;
 	edition: Edition;
-	pillar: Theme;
+	pillar: ArticleTheme;
 	shortUrlId: string;
 };
 

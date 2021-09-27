@@ -9,7 +9,7 @@ import { UL } from '@frontend/web/components/Card/components/UL';
 import { LI } from '@frontend/web/components/Card/components/LI';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Display, Pillar, Design } from '@guardian/types';
+import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
 
 import {
 	brandBorder,
@@ -59,9 +59,9 @@ export const Newsletters = (): React.ReactNode => (
 		>
 			<Nav
 				format={{
-					theme: Pillar.News,
-					display: Display.Immersive,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.Standard,
 				}}
 				nav={NAV}
 				subscribeUrl=""
@@ -153,7 +153,7 @@ export const Newsletters = (): React.ReactNode => (
 		>
 			<Footer
 				pageFooter={pageFooter}
-				pillar={Pillar.News}
+				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
 			/>
 		</ElementContainer>

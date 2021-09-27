@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
@@ -76,7 +76,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 				<BigNumber index={position} />
 			</span>
 			<div css={headlineHeader}>
-				{trail.format.design === Design.LiveBlog ? (
+				{trail.format.design === ArticleDesign.LiveBlog ? (
 					<LinkHeadline
 						headlineText={trail.headline}
 						palette={trail.palette}
@@ -94,8 +94,8 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 						format={trail.format}
 						size="small"
 						showQuotes={
-							trail.format.design === Design.Comment ||
-							trail.format.design === Design.Letter
+							trail.format.design === ArticleDesign.Comment ||
+							trail.format.design === ArticleDesign.Letter
 						}
 					/>
 				)}

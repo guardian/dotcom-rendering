@@ -1,4 +1,4 @@
-import { CountryCode } from '@guardian/types';
+import { CountryCode } from '@guardian/libs';
 import * as geo from './getCountryCode';
 
 let localePromise: Promise<CountryCode | null>;

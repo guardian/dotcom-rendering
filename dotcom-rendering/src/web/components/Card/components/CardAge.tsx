@@ -1,21 +1,20 @@
 import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
 import { textSans } from '@guardian/src-foundations/typography';
-import { timeAgo } from '@guardian/libs';
+import { ArticleDesign, timeAgo } from '@guardian/libs';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
 import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	webPublicationDate: string;
 	showClock?: boolean;
 };
 
-const ageStyles = (format: Format, palette: Palette) => {
+const ageStyles = (format: ArticleFormat, palette: Palette) => {
 	return css`
 		${textSans.xxsmall()};
 		color: ${palette.text.cardFooter};
@@ -38,7 +37,8 @@ const ageStyles = (format: Format, palette: Palette) => {
 
 		> time {
 			${textSans.xxsmall({
-				fontWeight: format.design === Design.Media ? `bold` : `regular`,
+				fontWeight:
+					format.design === ArticleDesign.Media ? `bold` : `regular`,
 			})};
 		}
 	`;

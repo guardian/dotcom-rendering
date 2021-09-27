@@ -4,7 +4,7 @@ import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	embedUrl?: string;
 	height: number;

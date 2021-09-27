@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design, Special } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { neutral } from '@guardian/src-foundations/palette';
 import { until } from '@guardian/src-foundations/mq';
@@ -12,7 +12,7 @@ import { space } from '@guardian/src-foundations';
 
 type Props = {
 	headlineText: string; // The text shown
-	format: Format; // Used to decide when to add type specific styles
+	format: ArticleFormat; // Used to decide when to add type specific styles
 	palette: Palette; // Used to colour the headline and the kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
@@ -140,10 +140,11 @@ export const CardHeadline = ({
 	<>
 		<h4
 			css={[
-				format.theme === Special.Labs
+				format.theme === ArticleSpecial.Labs
 					? labTextStyles(size)
 					: fontStyles(size),
-				format.design === Design.Analysis && underlinedStyles(size),
+				format.design === ArticleDesign.Analysis &&
+					underlinedStyles(size),
 				isFullCardImage &&
 					css`
 						line-height: 1; /* Reset line height in full image carousel */
