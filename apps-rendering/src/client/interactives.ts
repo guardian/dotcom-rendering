@@ -12,7 +12,7 @@ function handleMessage(interactive: HTMLIFrameElement, message: string): void {
 			}
 		}
 	} catch (e) {
-		logger.error('Unable to handle the message', e);
+		logger.error('Unable to parse the interactive message', e);
 	}
 }
 
