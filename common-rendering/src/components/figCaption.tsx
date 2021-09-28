@@ -57,7 +57,7 @@ type Props = {
 };
 
 const styles = (supportsDarkMode: boolean) => css`
-  ${textSans.xsmall()}
+  ${textSans.xxsmall({ lineHeight: "regular" })}
   padding-top: ${remSpace[2]};
   color: ${text.supporting};
 
@@ -86,7 +86,7 @@ const getStyles = (
   }
 };
 
-const FigCaption: FC<Props> = ({
+export const FigCaption: FC<Props> = ({
   format,
   supportsDarkMode,
   children,
@@ -104,7 +104,3 @@ const FigCaption: FC<Props> = ({
       return null;
   }
 };
-
-// ----- Exports ----- //
-
-export default FigCaption;

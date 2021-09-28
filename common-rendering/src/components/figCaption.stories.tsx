@@ -4,7 +4,7 @@
 
 import { Design, Display, Pillar, some } from "@guardian/types";
 import type { FC } from "react";
-import FigCaption from "./figCaption";
+import { FigCaption } from "./figCaption";
 
 // ----- Stories ----- //
 
