@@ -14,6 +14,7 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v1
+						- uses: bahmutov/npm-install@v1
             - name: Cypress run
               uses: cypress-io/github-action@v2
               env:

@@ -12,6 +12,7 @@ jobs:
               uses: actions/checkout@v1
             - name: Install Node
               uses: guardian/actions-setup-node@main
+						- uses: bahmutov/npm-install@v1
             - run: make build
               working-directory: dotcom-rendering
             - name: Install and run Lighthouse CI
