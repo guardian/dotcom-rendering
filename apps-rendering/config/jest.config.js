@@ -50,7 +50,4 @@ module.exports = {
 	moduleDirectories: ['node_modules', 'src'],
 	snapshotSerializers: ['@emotion/jest/serializer'],
 	transformIgnorePatterns: ['node_modules/(?!@guardian)'],
-	moduleNameMapper: {
-		'^react$': '<rootDir>/node_modules/react'
-	}
 };
