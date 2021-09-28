@@ -1548,10 +1548,10 @@
   dependencies:
     "@guardian/libs" "^1"
 
-"@guardian/discussion-rendering@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-8.0.0.tgz#2d969612f9ab32b0ea02342bfd4470d45f9e2ae6"
-  integrity sha512-JeCxiW33nK45M8kVYr81weJnVleV2Fel4/3jhiG+ziuSA1ww6nWxWgjoNTMj1hiIFquG3LD75rTkGy0HB9LOvQ==
+"@guardian/discussion-rendering@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-8.1.0.tgz#5bc0a93fdda6507826aa07661af88d7982b4536c"
+  integrity sha512-Lw6pdpjG9GKp7pVo/bLb129qbY+SBqYwkV3AKOzCxcDRRAsbifV2Toxo9ZyoPFhwyuSTs8qCQPwbaBQh6gHHBw==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
