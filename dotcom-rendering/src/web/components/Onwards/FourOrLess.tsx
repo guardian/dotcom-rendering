@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -45,13 +45,13 @@ export const FourOrLess = ({ content }: Props) => {
 							byline={trail.byline}
 							showByline={trail.showByline}
 							showQuotes={
-								trail.format.design === Design.Comment ||
-								trail.format.design === Design.Letter
+								trail.format.design === ArticleDesign.Comment ||
+								trail.format.design === ArticleDesign.Letter
 							}
 							webPublicationDate={trail.webPublicationDate}
 							kickerText={trail.kickerText}
 							showPulsingDot={
-								trail.format.design === Design.LiveBlog
+								trail.format.design === ArticleDesign.LiveBlog
 							}
 							showSlash={true}
 							showClock={false}

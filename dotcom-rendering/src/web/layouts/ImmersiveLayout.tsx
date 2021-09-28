@@ -9,8 +9,8 @@ import {
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -190,7 +190,7 @@ const hasMainMediaStyles = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -338,7 +338,7 @@ export const ImmersiveLayout = ({
 						</ElementContainer>
 					</header>
 
-					{format.theme === Special.Labs && (
+					{format.theme === ArticleSpecial.Labs && (
 						<Stuck>
 							<ElementContainer
 								showSideBorders={true}
@@ -358,7 +358,8 @@ export const ImmersiveLayout = ({
 						elements={CAPI.mainMediaElements}
 						adTargeting={adTargeting}
 						starRating={
-							format.design === Design.Review && CAPI.starRating
+							format.design === ArticleDesign.Review &&
+							CAPI.starRating
 								? CAPI.starRating
 								: undefined
 						}
@@ -436,7 +437,7 @@ export const ImmersiveLayout = ({
 						</Hide>
 					</GridItem>
 					<GridItem area="border">
-						{format.design === Design.PhotoEssay ? (
+						{format.design === ArticleDesign.PhotoEssay ? (
 							<></>
 						) : (
 							<Border palette={palette} />
@@ -500,22 +501,22 @@ export const ImmersiveLayout = ({
 						/>
 					</GridItem>
 					<GridItem area="lines">
-						{format.design === Design.PhotoEssay &&
-						format.theme !== Special.Labs ? (
+						{format.design === ArticleDesign.PhotoEssay &&
+						format.theme !== ArticleSpecial.Labs ? (
 							<></>
 						) : (
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									{format.theme === Special.Labs ? (
+									{format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
 										<Lines
 											effect={decideLineEffect(
-												Design.Article,
+												ArticleDesign.Standard,
 												format.theme,
 											)}
 											count={decideLineCount(
-												Design.Article,
+												ArticleDesign.Standard,
 											)}
 										/>
 									)}

@@ -11,7 +11,7 @@ import { Lazy } from '@root/src/web/components/Lazy';
 
 import { useAB } from '@guardian/ab-react';
 import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 
 const MostViewedFooterData = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedFooterData');
@@ -95,7 +95,7 @@ interface Props {
 	sectionName?: string;
 	palette: Palette;
 	ajaxUrl: string;
-	display: Display;
+	display: ArticleDisplay;
 }
 
 export const MostViewedFooter = ({

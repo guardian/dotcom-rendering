@@ -17,7 +17,7 @@ type Props = {
 	altText?: string;
 	assetId: string;
 	expired: boolean;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	role: RoleType;
 	hideCaption?: boolean;

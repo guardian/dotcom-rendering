@@ -34,7 +34,7 @@ const adStyle = css`
 	}
 `;
 
-const blockStyle = (pillar: Theme) => css`
+const blockStyle = (pillar: ArticleTheme) => css`
 	padding: 6px 10px 12px;
 	background-color: ${palette.neutral[100]};
 	border-top: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
@@ -65,7 +65,7 @@ const clearBoth = css`
 // that out and have an Ad element type we match against
 export const Blocks: React.FunctionComponent<{
 	blocks: Block[];
-	pillar: Theme;
+	pillar: ArticleTheme;
 	edition: Edition;
 	section?: string;
 	contentType: string;

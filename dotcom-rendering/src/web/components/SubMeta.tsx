@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { LinkButton } from '@guardian/src-button';
-import { Design, Special } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { until, from } from '@guardian/src-foundations/mq';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
@@ -94,8 +94,8 @@ const linkStyles = (palette: Palette) => css`
 	color: ${palette.text.subMeta};
 `;
 
-const sectionStyles = (format: Format) => {
-	if (format.theme === Special.Labs) {
+const sectionStyles = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.Labs) {
 		return css`
 			${textSans.medium()}
 			line-height: 19px;
@@ -118,7 +118,7 @@ const hideSlash = css`
 
 type Props = {
 	palette: Palette;
-	format: Format;
+	format: ArticleFormat;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
 	pageId: string;
@@ -153,7 +153,7 @@ export const SubMeta = ({
 		<div
 			data-print-layout="hide"
 			css={
-				format.design === Design.Interactive
+				format.design === ArticleDesign.Interactive
 					? [bottomPadding, setMetaWidth(palette)]
 					: bottomPadding
 			}
@@ -241,7 +241,7 @@ export const SubMeta = ({
 						size="medium"
 					/>
 					<div css={syndicationButtonOverrides(palette)}>
-						{format.design === Design.Interactive ? null : (
+						{format.design === ArticleDesign.Interactive ? null : (
 							<LinkButton
 								priority="tertiary"
 								size="xsmall"

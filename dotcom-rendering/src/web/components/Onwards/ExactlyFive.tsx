@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 
 import { Card } from '@frontend/web/components/Card/Card';
 import { UL } from '@frontend/web/components/Card/components/UL';
@@ -22,13 +22,13 @@ export const ExactlyFive = ({ content }: Props) => (
 					byline={content[0].byline}
 					showByline={content[0].showByline}
 					showQuotes={
-						content[0].format.design === Design.Comment ||
-						content[0].format.design === Design.Letter
+						content[0].format.design === ArticleDesign.Comment ||
+						content[0].format.design === ArticleDesign.Letter
 					}
 					webPublicationDate={content[0].webPublicationDate}
 					kickerText={content[0].kickerText}
 					showPulsingDot={
-						content[0].format.design === Design.LiveBlog
+						content[0].format.design === ArticleDesign.LiveBlog
 					}
 					showSlash={true}
 					showClock={false}
@@ -54,13 +54,13 @@ export const ExactlyFive = ({ content }: Props) => (
 					byline={content[1].byline}
 					showByline={content[1].showByline}
 					showQuotes={
-						content[1].format.design === Design.Comment ||
-						content[1].format.design === Design.Letter
+						content[1].format.design === ArticleDesign.Comment ||
+						content[1].format.design === ArticleDesign.Letter
 					}
 					webPublicationDate={content[1].webPublicationDate}
 					kickerText={content[1].kickerText}
 					showPulsingDot={
-						content[1].format.design === Design.LiveBlog
+						content[1].format.design === ArticleDesign.LiveBlog
 					}
 					showSlash={true}
 					showClock={false}
@@ -88,13 +88,16 @@ export const ExactlyFive = ({ content }: Props) => (
 							byline={content[2].byline}
 							showByline={content[2].showByline}
 							showQuotes={
-								content[2].format.design === Design.Comment ||
-								content[2].format.design === Design.Letter
+								content[2].format.design ===
+									ArticleDesign.Comment ||
+								content[2].format.design ===
+									ArticleDesign.Letter
 							}
 							webPublicationDate={content[2].webPublicationDate}
 							kickerText={content[2].kickerText}
 							showPulsingDot={
-								content[2].format.design === Design.LiveBlog
+								content[2].format.design ===
+								ArticleDesign.LiveBlog
 							}
 							showSlash={true}
 							showClock={false}
@@ -114,13 +117,16 @@ export const ExactlyFive = ({ content }: Props) => (
 							byline={content[3].byline}
 							showByline={content[3].showByline}
 							showQuotes={
-								content[3].format.design === Design.Comment ||
-								content[3].format.design === Design.Letter
+								content[3].format.design ===
+									ArticleDesign.Comment ||
+								content[3].format.design ===
+									ArticleDesign.Letter
 							}
 							webPublicationDate={content[3].webPublicationDate}
 							kickerText={content[3].kickerText}
 							showPulsingDot={
-								content[3].format.design === Design.LiveBlog
+								content[3].format.design ===
+								ArticleDesign.LiveBlog
 							}
 							showSlash={true}
 							showClock={false}
@@ -140,13 +146,16 @@ export const ExactlyFive = ({ content }: Props) => (
 							byline={content[4].byline}
 							showByline={content[4].showByline}
 							showQuotes={
-								content[4].format.design === Design.Comment ||
-								content[4].format.design === Design.Letter
+								content[4].format.design ===
+									ArticleDesign.Comment ||
+								content[4].format.design ===
+									ArticleDesign.Letter
 							}
 							webPublicationDate={content[4].webPublicationDate}
 							kickerText={content[4].kickerText}
 							showPulsingDot={
-								content[4].format.design === Design.LiveBlog
+								content[4].format.design ===
+								ArticleDesign.LiveBlog
 							}
 							showSlash={true}
 							showClock={false}

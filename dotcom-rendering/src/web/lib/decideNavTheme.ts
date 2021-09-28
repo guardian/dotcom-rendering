@@ -1,20 +1,20 @@
-import { Pillar, Special } from '@guardian/types';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 
-export const decideNavTheme = (pillar: LegacyPillar): Theme => {
+export const decideNavTheme = (pillar: LegacyPillar): ArticleTheme => {
 	switch (pillar) {
 		case 'news':
-			return Pillar.News;
+			return ArticlePillar.News;
 		case 'opinion':
-			return Pillar.Opinion;
+			return ArticlePillar.Opinion;
 		case 'sport':
-			return Pillar.Sport;
+			return ArticlePillar.Sport;
 		case 'culture':
-			return Pillar.Culture;
+			return ArticlePillar.Culture;
 		case 'lifestyle':
-			return Pillar.Lifestyle;
+			return ArticlePillar.Lifestyle;
 		case 'labs':
-			return Special.Labs;
+			return ArticleSpecial.Labs;
 		default:
-			return Pillar.News;
+			return ArticlePillar.News;
 	}
 };

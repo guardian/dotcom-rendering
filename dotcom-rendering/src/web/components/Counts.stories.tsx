@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import fetchMock from 'fetch-mock';
 
-import { Pillar, Design, Display } from '@guardian/types';
+import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
 import { decidePalette } from '../lib/decidePalette';
 
@@ -56,9 +56,9 @@ export const Both = () => {
 						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -101,9 +101,9 @@ export const ShareOnly = () => {
 						isCommentable={false}
 						commentCount={239}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -146,9 +146,9 @@ export const CommentOnly = () => {
 						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -191,9 +191,9 @@ export const ZeroComments = () => {
 						isCommentable={true}
 						commentCount={0}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -236,9 +236,9 @@ export const BigNumbers = () => {
 						isCommentable={true}
 						commentCount={4320}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>

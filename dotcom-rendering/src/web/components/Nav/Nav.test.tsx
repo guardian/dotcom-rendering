@@ -1,5 +1,5 @@
 import { render, within } from '@testing-library/react';
-import { Display, Pillar, Design } from '@guardian/types';
+import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 
@@ -9,9 +9,9 @@ describe('Nav', () => {
 			<Nav
 				nav={nav}
 				format={{
-					theme: Pillar.News,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				}}
 				subscribeUrl=""
 				edition="UK"
@@ -29,9 +29,9 @@ describe('Nav', () => {
 		const { getByTestId } = render(
 			<Nav
 				format={{
-					theme: Pillar.News,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				}}
 				nav={nav}
 				subscribeUrl=""

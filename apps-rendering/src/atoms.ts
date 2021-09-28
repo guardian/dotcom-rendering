@@ -236,13 +236,8 @@ function parseAtom(
 				return err(`No atom matched this id: ${id}`);
 			}
 
-			const {
-				posterUrl,
-				duration,
-				assets,
-				activeVersion,
-				title,
-			} = atom.data.media;
+			const { posterUrl, duration, assets, activeVersion, title } =
+				atom.data.media;
 			const videoId = assets.find(
 				(asset) =>
 					asset.version.toNumber() === activeVersion?.toNumber(),

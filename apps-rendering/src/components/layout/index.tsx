@@ -18,11 +18,10 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 
 // ----- Functions ----- //
 
-const renderWithAds = (shouldHide: boolean) => (
-	format: Format,
-	elements: BodyElement[],
-): ReactNode[] =>
-	getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
+const renderWithAds =
+	(shouldHide: boolean) =>
+	(format: Format, elements: BodyElement[]): ReactNode[] =>
+		getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
 
 // ----- Component ----- //
 

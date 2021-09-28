@@ -112,23 +112,25 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 	}
 };
 
-const toReact = (format: Format) => (node: Node, index: number): ReactNode => {
-	switch (node.nodeName) {
-		case 'A':
-			return (
-				<a
-					href={withDefault('')(getHref(node))}
-					css={getAnchorStyles(format)}
-					key={`anchor-${index}`}
-				>
-					{node.textContent ?? ''}
-				</a>
-			);
-		case 'SPAN':
-			return Array.from(node.childNodes).map(toReact(format));
-		case '#text':
-			return node.textContent;
-	}
+const toReact = (format: Format) => {
+	return function getReactNode(node: Node, index: number): ReactNode {
+		switch (node.nodeName) {
+			case 'A':
+				return (
+					<a
+						href={withDefault('')(getHref(node))}
+						css={getAnchorStyles(format)}
+						key={`anchor-${index}`}
+					>
+						{node.textContent ?? ''}
+					</a>
+				);
+			case 'SPAN':
+				return Array.from(node.childNodes).map(toReact(format));
+			case '#text':
+				return node.textContent;
+		}
+	};
 };
 
 const renderText = (format: Format, byline: DocumentFragment): ReactNode =>

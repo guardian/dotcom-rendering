@@ -23,7 +23,7 @@ import { enhance } from '@root/src/amp/lib/enhance';
 
 export const Elements = (
 	elements: CAPIElement[],
-	pillar: Pillar,
+	pillar: ArticlePillar,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
 ): JSX.Element[] => {

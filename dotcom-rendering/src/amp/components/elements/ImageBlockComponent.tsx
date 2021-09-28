@@ -21,7 +21,7 @@ const captionStyle = css`
 
 export const ImageBlockComponent: React.FC<{
 	element: ImageBlockElement;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ element, pillar }) => {
 	const containerWidth = 600;
 	const image: SrcSetItem = bestFitImage(

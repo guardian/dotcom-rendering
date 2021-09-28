@@ -1,7 +1,7 @@
 import { LiveBlock } from '../components/LiveBlock';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	blocks: Block[];
 	adTargeting: AdTargeting;
 	host?: string;

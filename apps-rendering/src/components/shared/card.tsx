@@ -235,10 +235,8 @@ const cardStyles = (
 		}
 
 		case RelatedItemType.LIVE: {
-			const {
-				liveblogBackground,
-				liveblogDarkBackground,
-			} = getThemeStyles(format.theme);
+			const { liveblogBackground, liveblogDarkBackground } =
+				getThemeStyles(format.theme);
 			return css`
 				background: ${liveblogBackground};
 				h3,

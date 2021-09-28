@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { palette } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Special } from '@guardian/types';
+import { ArticleSpecial } from '@guardian/libs';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 
@@ -28,7 +28,7 @@ const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: ArticleTheme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
@@ -39,7 +39,7 @@ const LinkStyle = (pillar: Theme) => css`
 	}
 `;
 
-const standfirstCss = (pillar: Theme) => css`
+const standfirstCss = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	font-weight: 100;
 	color: ${palette.neutral[7]};
@@ -68,13 +68,13 @@ const labsStyle = css`
 
 export const Standfirst: React.FunctionComponent<{
 	text: string;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ text, pillar }) => {
 	return (
 		<div
 			data-print-layout="hide"
 			css={
-				pillar === Special.Labs
+				pillar === ArticleSpecial.Labs
 					? [standfirstCss(pillar), labsStyle]
 					: standfirstCss(pillar)
 			}

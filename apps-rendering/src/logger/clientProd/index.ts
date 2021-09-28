@@ -8,10 +8,10 @@ class ClientProdLogger implements LoggerFunctions {
 	info(message: string): void {}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function -- To be implemented
-	warn(message: string, error?: Error): void {}
+	warn(message: string, error?: Error | unknown): void {}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function -- To be implemented
-	error(message: string, error?: Error): void {}
+	error(message: string, error?: Error | unknown): void {}
 }
 
 export const logger: LoggerFunctions = new ClientProdLogger();

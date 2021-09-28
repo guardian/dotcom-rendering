@@ -6,7 +6,7 @@ import { Caption } from '@root/src/web/components/Caption';
 
 export const GuVideoBlockComponent: React.FC<{
 	html: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	credit: string;
 	caption?: string;

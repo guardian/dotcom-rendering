@@ -6,7 +6,7 @@ import { regionClasses } from '@root/src/amp/lib/region-classes';
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { isEdition } from '@root/src/amp/lib/edition';
 
-const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: ArticleTheme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
@@ -17,7 +17,7 @@ const LinkStyle = (pillar: Theme) => css`
 	}
 `;
 
-const brandingStyle = (pillar: Theme) => css`
+const brandingStyle = (pillar: ArticleTheme) => css`
 	padding: 10px 0;
 	${LinkStyle(pillar)}
 
@@ -38,7 +38,7 @@ const brandingLogoStyle = css`
 
 export const Branding: React.FC<{
 	branding: Branding;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ branding, pillar }) => {
 	const { logo, sponsorName } = branding;
 

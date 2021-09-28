@@ -15,16 +15,16 @@ try {
 	// do nothing
 }
 
-// TODO: this should be removed in favor of `frontendAssetsFullURL` defined in CAPI
+// TODO: this should be removed in favour of `frontendAssetsFullURL` defined in CAPI
 // GU_STAGE is set in cloudformation.yml, so will be undefined locally
 const stage =
 	typeof process.env.GU_STAGE === 'string'
 		? process.env.GU_STAGE.toUpperCase()
-		: process.env.GU_STAGE;
+		: undefined;
 
 export const CDN = stage
 	? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
-	: '/';
+	: 'http://localhost:3030/';
 export const loadableManifestJson = loadableManifest;
 
 export const getScriptArrayFromFilename = (

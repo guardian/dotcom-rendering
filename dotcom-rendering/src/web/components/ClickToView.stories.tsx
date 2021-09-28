@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
@@ -799,14 +799,14 @@ export const VimeoBlockComponentStory = () => {
 					>
 						<VimeoBlockComponent
 							format={{
-								theme: Pillar.News,
-								display: Display.Standard,
-								design: Design.Article,
+								theme: ArticlePillar.News,
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
 							}}
 							palette={decidePalette({
-								theme: Pillar.News,
-								display: Display.Standard,
-								design: Design.Article,
+								theme: ArticlePillar.News,
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
 							})}
 							embedUrl={vimeoVideoEmbed.embedUrl}
 							height={vimeoVideoEmbed.height}
@@ -973,14 +973,14 @@ export const SpotifyBlockComponentStory = () => {
 							title={spotifyAudioEmbed.title}
 							caption={spotifyAudioEmbed.caption}
 							format={{
-								theme: Pillar.News,
-								display: Display.Standard,
-								design: Design.Article,
+								theme: ArticlePillar.News,
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
 							}}
 							palette={decidePalette({
-								theme: Pillar.News,
-								display: Display.Standard,
-								design: Design.Article,
+								theme: ArticlePillar.News,
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
 							})}
 							credit="Spotify"
 						/>
