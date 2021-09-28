@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { Role, some } from "@guardian/types";
+import { ArticleElementRole } from "@guardian/libs";
+import { some } from "@guardian/types";
 import type { Image } from "../image";
 
 // ----- Fixtures ----- //
@@ -15,7 +16,7 @@ const image: Image = {
   alt: some("Demo image"),
   width: 5644,
   height: 3387,
-  role: Role.Standard,
+  role: ArticleElementRole.Standard,
 };
 
 // ----- Exports ----- //
