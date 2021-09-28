@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import Img from '@guardian/common-rendering/src/components/img';
-import type { Sizes } from '@guardian/common-rendering/src/sizes';
+import type { Sizes } from '@guardian/image-rendering';
+import { Img } from '@guardian/image-rendering';
 import { map, none, some, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
