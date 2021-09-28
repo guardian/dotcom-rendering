@@ -39,7 +39,6 @@
     "@guardian/content-api-models": "^17.1.1",
     "@guardian/content-atom-model": "^3.2.4",
     "@guardian/discussion-rendering": "^7.0.0",
-    "@guardian/image-rendering": "github:guardian/image-rendering#1167f8bc",
     "@guardian/node-riffraff-artifact": "^0.2.2",
     "@guardian/renditions": "^0.2.0",
     "@guardian/src-brand": "^3.9.0",
