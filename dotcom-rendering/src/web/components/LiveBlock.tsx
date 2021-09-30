@@ -9,7 +9,7 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import LiveBlockContainer from 'common-rendering/src/components/liveBlockContainer';
 
 const GUTTER = space[3];
 
