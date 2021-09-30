@@ -22,7 +22,7 @@ describe('Commercial E2E tests', function () {
 		// cases this check will pass much faster
 		cy.get('.js-ad-slot:not([data-name="survey"]', {
 			timeout: 30000,
-		}).should('have.length', 15);
+		}).should('have.length', 17);
 
 		Array(10)
 			.fill()
