@@ -1,11 +1,27 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { center } from '@root/src/web/lib/center';
 
-// Classes present in Frontend on figure wrapping elements for certain element types.
-export const interactiveLegacyFigureClasses =
-	'element-interactive element interactive';
+export const isInteractive = (design: ArticleDesign): boolean =>
+	design === ArticleDesign.Interactive;
+
+export const interactiveLegacyFigureClasses = (
+	elementType: string,
+	role?: RoleType,
+): string => {
+	const elementClasses: { [key: string]: string } = {
+		'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
+			'element-atom',
+		'model.dotcomrendering.pageElements.InteractiveBlockElement':
+			'element-interactive',
+	};
+
+	const roleClass = role ? `element-${role}` : '';
+	const elementClass = elementClasses[elementType] || '';
+	return `element ${elementClass} ${roleClass}`;
+};
 
 // Classes present in Frontend that we add for legacy interactives.
 export const interactiveLegacyClasses = {
