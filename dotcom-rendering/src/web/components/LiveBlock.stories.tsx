@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/aria-role */
 
 import { css } from '@emotion/react';
+import { from } from '@guardian/src-foundations/mq';
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
@@ -39,7 +40,10 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 		<div
 			css={css`
 				padding: 20px;
-				max-width: 620px;
+				max-width: 740px;
+				${from.tablet} {
+					width: 740px;
+				}
 			`}
 		>
 			{children}

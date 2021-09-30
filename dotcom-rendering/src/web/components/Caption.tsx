@@ -3,9 +3,10 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
-import TriangleIcon from '@frontend/static/icons/triangle.svg';
+import CameraIcon from '@frontend/static/icons/camera.svg';
 
 type Props = {
 	captionText?: string;
@@ -107,9 +108,14 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = (palette: Palette) => css`
-	fill: ${palette.fill.captionTriangle};
-	padding-right: 3px;
+const iconStyle = css`
+	fill: ${neutral[60]};
+	margin-right: ${space[1]}px;
+	display: inline-block;
+
+	svg {
+		/* display: block; */
+	}
 `;
 
 const captionLink = (palette: Palette) => css`
@@ -154,12 +160,12 @@ export const Caption = ({
 		>
 			<span
 				css={[
-					iconStyle(palette),
+					iconStyle,
 					format.display === ArticleDisplay.Immersive &&
 						hideIconBelowLeftCol,
 				]}
 			>
-				<TriangleIcon />
+				<CameraIcon />
 			</span>
 			{captionText && (
 				<span

@@ -11,7 +11,9 @@ import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
-const ASIDE_WIDTH = 58;
+const LEFT_MARGIN_DESKTOP = 60;
+const SIDE_MARGIN = 20;
+const SIDE_MARGIN_MOBILE = 10;
 const GUTTER = space[3];
 
 type Props = {
@@ -36,11 +38,15 @@ const Container = ({
 		<div
 			id={`block-${id}`}
 			css={css`
-				padding-top: ${space[2]}px;
-				padding-bottom: ${space[3]}px;
+				display: inline-flex;
+				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
 				border-top: 1px solid ${palette.border.liveBlock};
+				${from.tablet} {
+					padding: ${space[2]}px ${SIDE_MARGIN}px;
+					padding-left: ${LEFT_MARGIN_DESKTOP}px;
+				}
 			`}
 		>
 			{children}
@@ -55,9 +61,6 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 				padding-right: ${GUTTER}px;
 				display: flex;
 				flex-direction: column;
-				${from.phablet} {
-					flex-direction: row;
-				}
 			`}
 		>
 			{children}
@@ -65,53 +68,6 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-const Footer = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<footer
-			css={css`
-				margin-left: ${ASIDE_WIDTH}px;
-				padding-left: ${GUTTER}px;
-				padding-right: ${GUTTER}px;
-			`}
-		>
-			{children}
-		</footer>
-	);
-};
-
-const BlockMedia = ({ children }: { children: React.ReactNode }) => {
-	return (
-		// Don't set side margins, causing content to flow to the edges (but
-		// we do set margins on any figcaption)
-		<div
-			css={css`
-				& figcaption {
-					margin-left: ${ASIDE_WIDTH}px;
-					padding-left: ${GUTTER}px;
-					padding-right: ${GUTTER}px;
-				}
-			`}
-		>
-			{children}
-		</div>
-	);
-};
-
-const BlockText = ({ children }: { children: React.ReactNode }) => {
-	return (
-		// Set a left margin the same with as the left aside column plus
-		// padding gutters on both sides
-		<div
-			css={css`
-				margin-left: ${ASIDE_WIDTH}px;
-				padding-left: ${GUTTER}px;
-				padding-right: ${GUTTER}px;
-			`}
-		>
-			{children}
-		</div>
-	);
-};
 
 const BlockTitle = ({ title }: { title: string }) => {
 	return (
@@ -168,9 +124,6 @@ const FirstPublished = ({
 				padding-top: ${space[1]}px;
 				display: flex;
 				flex-direction: row;
-				${from.phablet} {
-					flex-direction: column;
-				}
 				text-decoration: none;
 				:hover {
 					filter: brightness(30%);
@@ -180,7 +133,9 @@ const FirstPublished = ({
 			<time
 				dateTime={publishedDate.toISOString()}
 				css={css`
-					color: ${neutral[20]};
+					color: ${neutral[46]};
+					font-weight: bold;
+					margin-right: ${space[2]}px;
 				`}
 			>
 				{timeAgo(firstPublished)}
@@ -246,27 +201,14 @@ export const LiveBlock = ({
 
 	return (
 		<Container id={block.id} palette={palette}>
-			<Header>
-				<aside
-					css={css`
-						${from.phablet} {
-							/* Yes, we do need both */
-							min-width: ${ASIDE_WIDTH + GUTTER}px;
-							width: ${ASIDE_WIDTH + GUTTER}px;
-						}
-						padding-left: ${GUTTER}px;
-						padding-right: ${GUTTER}px;
-						padding-bottom: ${space[2]}px;
-					`}
-				>
+			<main>
+				<Header>
 					{block.blockFirstPublished && (
 						<FirstPublished
 							firstPublished={block.blockFirstPublished}
 							blockLink={blockLink}
 						/>
 					)}
-				</aside>
-				<span>
 					{block.title && <BlockTitle title={block.title} />}
 					{headerElement &&
 						renderArticleElement({
@@ -280,72 +222,51 @@ export const LiveBlock = ({
 							pageId,
 							webTitle,
 						})}
-				</span>
-			</Header>
-			<main>
+				</Header>
 				{/* For each element, we decide what margins to set depending on the type */}
-				{mainElements.map((element, index) => {
-					if (typesWeStretch.includes(element._type)) {
-						return (
-							<BlockMedia key={`${element._type}-${index}`}>
-								{renderArticleElement({
-									format,
-									palette,
-									element,
-									adTargeting,
-									host,
-									index,
-									isMainMedia: false,
-									pageId,
-									webTitle,
-								})}
-							</BlockMedia>
-						);
-					}
-
-					return (
-						<BlockText key={`${element._type}-${index}`}>
-							{renderArticleElement({
-								format,
-								palette,
-								element,
-								isMainMedia: false,
-								index,
-								pageId,
-								webTitle,
-							})}
-						</BlockText>
-					);
-				})}
+				{mainElements.map((element, index) => (
+					<p key={`${element._type}-${index}`}>
+						{renderArticleElement({
+							format,
+							palette,
+							element,
+							isMainMedia: false,
+							index,
+							pageId,
+							webTitle,
+						})}
+					</p>
+					)
+				)}
+				<div>
+					<Hide when="below" breakpoint="phablet">
+						<div
+							css={css`
+								display: flex;
+								justify-content: space-between;
+							`}
+						>
+							<ShareIcons
+								pageId={pageId}
+								webTitle={webTitle}
+								displayIcons={['facebook', 'twitter']}
+								palette={palette}
+								size="small"
+							/>
+							{showLastUpdated &&
+								block.blockLastUpdated &&
+								block.blockLastUpdatedDisplay && (
+									<LastUpdated
+										lastUpdated={block.blockLastUpdated}
+										lastUpdatedDisplay={
+											block.blockLastUpdatedDisplay
+										}
+									/>
+								)}
+						</div>
+					</Hide>
+				</div>
 			</main>
-			<Footer>
-				<Hide when="below" breakpoint="phablet">
-					<div
-						css={css`
-							display: flex;
-							justify-content: space-between;
-						`}
-					>
-						<ShareIcons
-							pageId={pageId}
-							webTitle={webTitle}
-							displayIcons={['facebook', 'twitter']}
-							palette={palette}
-							size="small"
-						/>
-						{showLastUpdated &&
-							block.blockLastUpdated &&
-							block.blockLastUpdatedDisplay && (
-								<LastUpdated
-									lastUpdated={block.blockLastUpdated}
-									lastUpdatedDisplay={
-										block.blockLastUpdatedDisplay
-									}
-								/>
-							)}
-					</div>
-				</Hide>
-			</Footer>
 		</Container>
 	);
 };
