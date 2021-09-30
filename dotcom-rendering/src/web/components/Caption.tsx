@@ -112,10 +112,7 @@ const iconStyle = css`
 	fill: ${neutral[60]};
 	margin-right: ${space[1]}px;
 	display: inline-block;
-
-	svg {
-		/* display: block; */
-	}
+	vertical-align: middle;
 `;
 
 const captionLink = (palette: Palette) => css`
