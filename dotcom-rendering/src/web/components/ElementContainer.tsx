@@ -45,7 +45,7 @@ type Props = {
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
 	element?: 'div' | 'article' | 'aside' | 'nav'; // ElementContainer is generally a top-level wrapper
-	className?: string | null;
+	className?: string;
 };
 
 export const ElementContainer = ({
@@ -59,7 +59,7 @@ export const ElementContainer = ({
 	shouldCenter = true,
 	children,
 	element = 'div',
-	className = null,
+	className,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
