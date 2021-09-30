@@ -6,7 +6,7 @@ import { remSpace } from '@guardian/src-foundations';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
-import { map, withDefault } from '@guardian/types';
+import { Design, map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -38,14 +38,22 @@ const bubbleStyles = (colour: string): SerializedStyles => css`
 	fill: ${colour};
 `;
 
-const getStyles = ({ theme }: Format): SerializedStyles => {
+const getStyles = ({ theme, design }: Format): SerializedStyles => {
 	const colours = getThemeStyles(theme);
+
+	if (design === Design.LiveBlog || design === Design.DeadBlog) {
+		return styles(neutral[93]);
+	}
 
 	return styles(colours.kicker);
 };
 
-const getBubbleStyles = ({ theme }: Format): SerializedStyles => {
+const getBubbleStyles = ({ theme, design }: Format): SerializedStyles => {
 	const colours = getThemeStyles(theme);
+
+	if (design === Design.LiveBlog || design === Design.DeadBlog) {
+		return bubbleStyles(neutral[93]);
+	}
 
 	return bubbleStyles(colours.kicker);
 };

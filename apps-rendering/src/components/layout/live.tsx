@@ -1,25 +1,15 @@
 // // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { Lines } from '@guardian/src-ed-lines';
 import { background, neutral } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import Footer from 'components/footer';
-import Headline from 'components/headline';
-import Metadata from 'components/metadata';
+import LiveblogHeader from 'components/liveblogHeader';
 import RelatedContent from 'components/shared/relatedContent';
-import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
-import HeaderMedia from 'headerMedia';
 import type { Liveblog } from 'item';
 import type { FC } from 'react';
-import {
-	articleWidthStyles,
-	darkModeCss,
-	lineStyles,
-	onwardStyles,
-} from 'styles';
-import Series from '../series';
+import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 
 // // ----- Styles ----- //
 
@@ -32,42 +22,26 @@ const BorderStyles = css`
 		margin: 0 auto;
 	}
 `;
-
 interface Props {
 	item: Liveblog;
 }
 
-const Live: FC<Props> = ({ item }) => {
-	return (
-		<main>
-			<article className="js-article" css={BorderStyles}>
-				<header>
-					<Series item={item} />
-					<Headline item={item} />
-					<div css={articleWidthStyles}>
-						<Standfirst item={item} />
-					</div>
-					<div css={lineStyles}>
-						<Lines count={4} />
-					</div>
-					<div css={articleWidthStyles}>
-						<Metadata item={item} />
-						<HeaderMedia item={item} />
-					</div>
-				</header>
-			</article>
-			<section css={articleWidthStyles}>
-				<Tags tags={item.tags} format={item} />
-			</section>
-			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
-			</section>
-			<section css={articleWidthStyles}>
-				<Footer isCcpa={false} />
-			</section>
-		</main>
-	);
-};
+const Live: FC<Props> = ({ item }) => (
+	<main>
+		<article className="js-article" css={BorderStyles}>
+			<LiveblogHeader item={item} />
+		</article>
+		<section css={articleWidthStyles}>
+			<Tags tags={item.tags} format={item} />
+		</section>
+		<section css={onwardStyles}>
+			<RelatedContent content={item.relatedContent} />
+		</section>
+		<section css={articleWidthStyles}>
+			<Footer isCcpa={false} />
+		</section>
+	</main>
+);
 
 // // ----- Exports ----- //
 

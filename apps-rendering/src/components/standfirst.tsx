@@ -66,6 +66,16 @@ const immersiveLabs: SerializedStyles = css`
     margin-top: ${remSpace[3]};
 `;
 
+const liveblogStyles: SerializedStyles = css`
+	color: ${neutral[100]};
+	${headline.xxxsmall()};
+
+	p {
+		margin: 0;
+		padding: 0.75rem 0;
+	}
+`;
+
 const media = css`
 	color: ${neutral[86]};
 	p,
@@ -90,6 +100,8 @@ const getStyles = (item: Item): SerializedStyles => {
 	}
 
 	switch (item.design) {
+		case Design.LiveBlog:
+			return css(styles, liveblogStyles);
 		case Design.Review:
 		case Design.Feature:
 		case Design.Editorial:

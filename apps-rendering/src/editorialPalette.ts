@@ -37,7 +37,8 @@ interface Palette {
 const textHeadlinePrimary = (format: Format): Colour => {
 	if (
 		format.display === Display.Immersive ||
-		format.design === Design.Media
+		format.design === Design.Media ||
+		format.design === Design.LiveBlog
 	) {
 		return neutral[100];
 	}
@@ -65,6 +66,21 @@ const textHeadlinePrimaryInverse = (_: Format): Colour => neutral[86];
 const backgroundHeadlinePrimary = (format: Format): Colour => {
 	if (format.display === Display.Immersive) {
 		return neutral[7];
+	} else if (format.design === Design.LiveBlog) {
+		switch (format.theme) {
+			case Pillar.Culture:
+				return culture[300];
+			case Pillar.Sport:
+				return sport[300];
+			case Pillar.Lifestyle:
+				return lifestyle[300];
+			case Pillar.Opinion:
+				return opinion[300];
+			case Pillar.News:
+				return news[300];
+			default:
+				return news[300];
+		}
 	} else if (
 		format.design === Design.Comment ||
 		format.design === Design.Letter ||
