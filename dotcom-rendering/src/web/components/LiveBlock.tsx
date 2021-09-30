@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 
-import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
 import { timeAgo } from '@guardian/libs';
 
@@ -10,10 +9,8 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 
-const LEFT_MARGIN_DESKTOP = 60;
-const SIDE_MARGIN = 20;
-const SIDE_MARGIN_MOBILE = 10;
 const GUTTER = space[3];
 
 type Props = {
@@ -25,34 +22,7 @@ type Props = {
 	host?: string;
 };
 
-const Container = ({
-	id,
-	children,
-	palette,
-}: {
-	id: string;
-	children: React.ReactNode;
-	palette: Palette;
-}) => {
-	return (
-		<div
-			id={`block-${id}`}
-			css={css`
-				display: inline-flex;
-				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
-				margin-bottom: ${space[3]}px;
-				background: ${neutral[100]};
-				border-top: 1px solid ${palette.border.liveBlock};
-				${from.tablet} {
-					padding: ${space[2]}px ${SIDE_MARGIN}px;
-					padding-left: ${LEFT_MARGIN_DESKTOP}px;
-				}
-			`}
-		>
-			{children}
-		</div>
-	);
-};
+
 
 const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -200,8 +170,8 @@ export const LiveBlock = ({
 		block.blockLastUpdated > block.blockFirstPublished;
 
 	return (
-		<Container id={block.id} palette={palette}>
-			<main>
+		<LiveBlockContainer id={block.id} borderColour={palette.border.liveBlock}>
+			<>
 				<Header>
 					{block.blockFirstPublished && (
 						<FirstPublished
@@ -266,7 +236,7 @@ export const LiveBlock = ({
 						</div>
 					</Hide>
 				</div>
-			</main>
-		</Container>
+			</>
+		</LiveBlockContainer>
 	);
 };
