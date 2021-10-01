@@ -8,6 +8,7 @@ import he from 'he';
 import resetCSS from /* preval */ '@root/src/lib/reset-css';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { stickyAdLabelCss } from '@root/src/amp/components/StickyAd';
+import { ampEpicChoiceCardStyles } from '@root/src/amp/components/Epic';
 
 interface RenderToStringResult {
 	html: string;
@@ -20,12 +21,12 @@ interface Metadata {
 }
 
 export const document = ({
-	linkedData,
-	title,
-	body,
-	scripts,
-	metadata,
-}: {
+							 linkedData,
+							 title,
+							 body,
+							 scripts,
+							 metadata,
+						 }: {
 	linkedData: { [key: string]: any }[];
 	title: string;
 	body: React.ReactElement<any>;
@@ -98,6 +99,7 @@ export const document = ({
         ${resetCSS}
         ${css}
 		${stickyAdLabelCss}
+		${ampEpicChoiceCardStyles}
     </style>
 
     </head>

@@ -17,6 +17,56 @@ import {
 } from '@guardian/src-foundations/palette';
 import { JsonScript } from '@root/src/amp/components/JsonScript';
 
+// selected-contribution-type=ONE_OFF&selected-amount=60
+
+export const ampEpicChoiceCardStyles = `
+	.epicChoiceCard {
+		color: #707070;
+		cursor: pointer;
+		border-radius: 4px;
+		box-shadow: inset 0 0 0 2px #999999;
+		box-sizing: border-box;
+		min-height: 44px;
+		margin: 0 0 8px 0;
+		border: none;
+		outline: none;
+		background-color: transparent;
+		font-weight: 700;
+		font-size: 1.0625rem;
+		font-family: GuardianTextSans, Guardian Text Sans Web, Helvetica Neue,
+			Helvetica, Arial, Lucida Grande, sans-serif;
+		text-align: center;
+	}
+	.epicChoiceCard:hover {
+		box-shadow: inset 0 0 0 4px #007abc;
+		color: #052962;
+	}
+	.epicChoiceCardSelected {
+		box-shadow: inset 0 0 0 4px #007abc !important;
+		background-color: #e3f6ff !important;
+		color: #052962 !important;
+	}
+`;
+
+const choiceCardGroupColumn = css`
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	box-sizing: border-box;
+`;
+const choiceCardGroupRow = css`
+	display: grid;
+	justify-content: space-between;
+	width: 100%;
+	column-gap: 8px;
+	row-gap: 8px;
+	box-sizing: border-box;
+	grid-template-columns: repeat(3, 1fr);
+`;
+const choiceCardContainer = css`
+	position: relative;
+	margin-top: 8px;
+`;
 const epicStyle = css`
 	border-top: 0.0625rem solid ${brandAlt[400]};
 	background-color: ${neutral[97]};
@@ -340,6 +390,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		.toString()
 		.padStart(2, '0')}-01`;
 	const epicStateJson = {
+		ctaBaseUrl: webURL,
 		hideButtons: false,
 		hideReminderWrapper: true,
 		hideSuccessMessage: true,
@@ -347,19 +398,35 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		hideReminderCta: false,
 		hideReminderForm: false,
 		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
+		choiceCardSelection: { frequency: 'MONTHLY', amount: 6 },
+		choiceCardLabelSuffix: {
+			ONE_OFF: '',
+			MONTHLY: ' per month',
+			ANNUAL: ' per year',
+		},
+		classNames: {
+			choiceCard: 'epicChoiceCard',
+			choiceCardSelected: 'epicChoiceCard epicChoiceCardSelected',
+		},
 	};
-	const supportDotcomComponentsUrl =
-		process.env.GU_STAGE === 'PROD'
-			? 'https://contributions.guardianapis.com'
-			: 'https://contributions.code.dev-guardianapis.com';
+	const supportDotcomComponentsUrl = 'http://localhost:8082';
+	// process.env.GU_STAGE === 'PROD'
+	// 	? 'https://contributions.guardianapis.com'
+	// 	: 'https://contributions.code.dev-guardianapis.com';
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
 	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
 
+	// @ts-ignore
 	return (
 		<div>
 			<amp-state id="epicState">
 				<JsonScript o={epicStateJson} />
 			</amp-state>
+
+			<amp-state
+				id="choiceCardsData"
+				src={`${supportDotcomComponentsUrl}/amp/choice_cards_data`}
+			/>
 
 			<amp-list
 				layout="fixed-height"
@@ -435,6 +502,52 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<MoustacheVariable name="highlightedText" />
 						</span>
 						<br />
+
+						<div css={choiceCardContainer}>
+							<br />
+							<div css={choiceCardGroupRow}>
+								<button
+									data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+									on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ONE_OFF', amount: choiceCardsData.amounts['ONE_OFF'][1] } } })"
+								>
+									<span>Single</span>
+								</button>
+								<button
+									data-amp-bind-class="epicState.choiceCardSelection.frequency == 'MONTHLY' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+									on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'MONTHLY', amount: choiceCardsData.amounts['MONTHLY'][1] } } })"
+								>
+									<span>Monthly</span>
+								</button>
+								<button
+									data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ANNUAL' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+									on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ANNUAL', amount: choiceCardsData.amounts['ANNUAL'][1] } } })"
+								>
+									<span>Annual</span>
+								</button>
+							</div>
+							<br />
+							<div css={choiceCardGroupColumn}>
+								<button
+									data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+									on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] } } })"
+								>
+									<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
+								</button>
+								<button
+									data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+									on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] } } })"
+								>
+									<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
+								</button>
+								<button
+									data-amp-bind-class="epicState.choiceCardSelection.amount == 'other' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+									on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: 'other' } } })"
+								>
+									<span>Other</span>
+								</button>
+							</div>
+						</div>
+
 						<div
 							css="buttonsWrapper"
 							data-amp-bind-hidden="epicState.hideButtons"
