@@ -14,17 +14,16 @@ import {
 	neutral,
 	error,
 	brandBackground,
+	border,
 } from '@guardian/src-foundations/palette';
 import { JsonScript } from '@root/src/amp/components/JsonScript';
 
-// selected-contribution-type=ONE_OFF&selected-amount=60
-
-export const ampEpicChoiceCardStyles = `
+export const epicChoiceCardCss = `
 	.epicChoiceCard {
-		color: #707070;
+		color: ${neutral[46]};
 		cursor: pointer;
 		border-radius: 4px;
-		box-shadow: inset 0 0 0 2px #999999;
+		box-shadow: inset 0 0 0 2px ${border.primary};
 		box-sizing: border-box;
 		min-height: 44px;
 		margin: 0 0 8px 0;
@@ -38,13 +37,13 @@ export const ampEpicChoiceCardStyles = `
 		text-align: center;
 	}
 	.epicChoiceCard:hover {
-		box-shadow: inset 0 0 0 4px #007abc;
-		color: #052962;
+		box-shadow: inset 0 0 0 4px ${brand[500]};
+		color: ${brand[400]};
 	}
 	.epicChoiceCardSelected {
-		box-shadow: inset 0 0 0 4px #007abc !important;
+		box-shadow: inset 0 0 0 4px ${brand[500]} !important;
 		background-color: #e3f6ff !important;
-		color: #052962 !important;
+		color: ${brand[400]} !important;
 	}
 `;
 
@@ -390,7 +389,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 		.toString()
 		.padStart(2, '0')}-01`;
 	const epicStateJson = {
-		ctaBaseUrl: webURL,
+		ctaUrl: webURL,
 		hideButtons: false,
 		hideReminderWrapper: true,
 		hideSuccessMessage: true,
@@ -416,7 +415,6 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
 	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
 
-	// @ts-ignore
 	return (
 		<div>
 			<amp-state id="epicState">
@@ -503,50 +501,52 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 						</span>
 						<br />
 
-						<div css={choiceCardContainer}>
-							<br />
-							<div css={choiceCardGroupRow}>
-								<button
-									data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-									on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ONE_OFF', amount: choiceCardsData.amounts['ONE_OFF'][1] } } })"
-								>
-									<span>Single</span>
-								</button>
-								<button
-									data-amp-bind-class="epicState.choiceCardSelection.frequency == 'MONTHLY' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-									on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'MONTHLY', amount: choiceCardsData.amounts['MONTHLY'][1] } } })"
-								>
-									<span>Monthly</span>
-								</button>
-								<button
-									data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ANNUAL' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-									on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ANNUAL', amount: choiceCardsData.amounts['ANNUAL'][1] } } })"
-								>
-									<span>Annual</span>
-								</button>
+						<MoustacheSection name="choiceCards">
+							<div css={choiceCardContainer}>
+								<br />
+								<div css={choiceCardGroupRow}>
+									<button
+										data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ONE_OFF', amount: choiceCardsData.amounts['ONE_OFF'][1] } } })"
+									>
+										<span>Single</span>
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCardSelection.frequency == 'MONTHLY' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'MONTHLY', amount: choiceCardsData.amounts['MONTHLY'][1] } } })"
+									>
+										<span>Monthly</span>
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ANNUAL' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ANNUAL', amount: choiceCardsData.amounts['ANNUAL'][1] } } })"
+									>
+										<span>Annual</span>
+									</button>
+								</div>
+								<br />
+								<div css={choiceCardGroupColumn}>
+									<button
+										data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] } } })"
+									>
+										<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] } } })"
+									>
+										<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCardSelection.amount == 'other' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: 'other' } } })"
+									>
+										<span>Other</span>
+									</button>
+								</div>
 							</div>
-							<br />
-							<div css={choiceCardGroupColumn}>
-								<button
-									data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-									on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] } } })"
-								>
-									<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
-								</button>
-								<button
-									data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-									on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] } } })"
-								>
-									<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
-								</button>
-								<button
-									data-amp-bind-class="epicState.choiceCardSelection.amount == 'other' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-									on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: 'other' } } })"
-								>
-									<span>Other</span>
-								</button>
-							</div>
-						</div>
+						</MoustacheSection>
 
 						<div
 							css="buttonsWrapper"
@@ -555,8 +555,28 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<div css={buttonsStyle}>
 								<div>
 									<MoustacheSection name="cta">
+										{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 										<a
+											id="primaryCta"
 											href={buildUrl(
+												moustacheVariable('url'),
+												webURL,
+												moustacheVariable(
+													'campaignCode',
+												),
+												moustacheVariable(
+													'componentId',
+												),
+												{
+													name: moustacheVariable(
+														'testName',
+													),
+													variant: moustacheVariable(
+														'variantName',
+													),
+												},
+											)}
+											data-amp-bind-href={buildUrl(
 												moustacheVariable('url'),
 												webURL,
 												moustacheVariable(
