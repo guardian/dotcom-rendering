@@ -10,8 +10,9 @@ describe('helper functions return correct styles', () => {
 			cameraIconBackground: '#C70000',
 			kicker: '#C70000',
 			inverted: '#FF5943',
-			liveblogBackground: '#AB0613',
-			liveblogDarkBackground: '#8B0000',
+			liveblogBackground: "#8B0000",
+			liveblogDarkBackground: "#660505",
+			liveblogKicker: "#FFBAC8",
 			link: '#AB0613',
 		};
 		expect(pillarStyles).toEqual(expectedNewsPillarStyles);

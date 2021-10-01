@@ -7,7 +7,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format } from '@guardian/types';
-import { Display, map, Special, withDefault } from '@guardian/types';
+import { Design, Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -20,6 +20,12 @@ import type { ThemeStyles } from 'themeStyles';
 interface Props {
 	item: Item;
 }
+
+const isDisplayLabs = (format: Format): boolean =>
+	format.theme === Special.Labs;
+
+const isDesignBlog = (format: Format): boolean =>
+	format.design === Design.LiveBlog || format.design === Design.DeadBlog;
 
 const immersiveStyles = (
 	{ kicker }: ThemeStyles,
@@ -49,18 +55,34 @@ const font = (isLabs: boolean): string =>
 		? textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })
 		: headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' });
 
-const linkStyles = (
-	{ kicker, inverted }: ThemeStyles,
+const getLinkColour = (
+	{ liveblogKicker, kicker }: ThemeStyles,
 	isLabs: boolean,
-): SerializedStyles => css`
-	${font(isLabs)}
-	color: ${isLabs ? palette.labs[300] : kicker};
-	text-decoration: none;
+	isBlog: boolean,
+): string => {
+	if (isLabs) {
+		return palette.labs[300];
+	}
+	if (isBlog) {
+		return liveblogKicker;
+	}
+	return kicker;
+};
 
-	${darkModeCss`
-        color: ${inverted};
-    `}
-`;
+const linkStyles = (
+	themeStyles: ThemeStyles,
+	isLabs: boolean,
+	isBlog: boolean,
+): SerializedStyles =>
+	css`
+		${font(isLabs)}
+		color: ${getLinkColour(themeStyles, isLabs, isBlog)};
+		text-decoration: none;
+
+		${darkModeCss`
+			color: ${isBlog ? themeStyles.liveblogKicker : themeStyles.inverted};
+		`}
+	`;
 
 const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
 	color: ${neutral[100]};
@@ -69,24 +91,23 @@ const immersiveLinkStyles = (isLabs: boolean): SerializedStyles => css`
 	${font(isLabs)}
 `;
 
-const getLinkStyles = ({
-	display,
-	theme,
-	design,
-}: Format): SerializedStyles => {
-	const isLabs = theme === Special.Labs;
+const getLinkStyles = (format: Format): SerializedStyles => {
+	const isLabs = isDisplayLabs(format);
+	const isBlog = isDesignBlog(format);
 
-	if (display === Display.Immersive) {
+	if (format.display === Display.Immersive) {
 		return immersiveLinkStyles(isLabs);
 	}
+	const themeStyles = getThemeStyles(format.theme);
 
-	return linkStyles(getThemeStyles(theme), isLabs);
+	return linkStyles(themeStyles, isLabs, isBlog);
 };
 
-const getStyles = ({ display, theme, design }: Format): SerializedStyles => {
-	if (display === Display.Immersive) {
-		const isLabs = theme === Special.Labs;
-		return immersiveStyles(getThemeStyles(theme), isLabs);
+const getStyles = (format: Format): SerializedStyles => {
+	const isLabs = isDisplayLabs(format);
+
+	if (format.display === Display.Immersive) {
+		return immersiveStyles(getThemeStyles(format.theme), isLabs);
 	}
 
 	return articleWidthStyles;

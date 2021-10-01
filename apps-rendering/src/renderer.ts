@@ -262,9 +262,16 @@ const linkColourFromFormat = (format: Format): string => {
 		return palette.labs[300];
 	}
 
+	if (format.design === Design.LiveBlog) {
+		return palette.neutral[100];
+	}
+
 	const { kicker, inverted } = getThemeStyles(format.theme);
 	return format.design === Design.Media ? inverted : kicker;
 };
+
+const textDecorationFromFormat = (format: Format): string =>
+	format.design === Design.LiveBlog ? 'underline' : 'none';
 
 const standfirstTextElement =
 	(format: Format) =>
@@ -282,10 +289,11 @@ const standfirstTextElement =
 			case 'LI':
 				return h(ListItem, { format, children });
 			case 'A': {
-				const colour = linkColourFromFormat(format);
+				const { liveblogKicker } = getThemeStyles(format.theme);
 				const styles = css`
-					color: ${colour};
-					text-decoration: none;
+					color: ${linkColourFromFormat(format)};
+					text-decoration: ${textDecorationFromFormat(format)};
+					text-decoration-color: ${liveblogKicker};
 				`;
 				const url = withDefault('')(getHref(node));
 				const href = url.startsWith('profile/')
