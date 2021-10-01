@@ -24,7 +24,7 @@ describe('Commercial E2E tests', function () {
 			cy.get('.js-ad-slot:not([data-name="survey"]', {
 				timeout: 30000,
 			})
-		).to.be.greaterThan(14);
+		).length.to.be.greaterThan(14);
 
 		Array(10)
 			.fill()
