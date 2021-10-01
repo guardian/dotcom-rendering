@@ -65,7 +65,9 @@ const styles = (format: Format): string => `
     ${pageFonts}
 
     body {
-        background: ${format.design === Design.Media ? background.inverse : 'white'};
+        background: ${
+			format.design === Design.Media ? background.inverse : 'white'
+		};
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
         overflow-x: hidden;
@@ -99,7 +101,9 @@ function renderHead(
 		inlineStyles,
 		isEditions,
 	);
-	const meta = <Meta title={request.content.webTitle} cspString={cspString} />;
+	const meta = (
+		<Meta title={request.content.webTitle} cspString={cspString} />
+	);
 
 	return `
         ${renderToString(meta)}
