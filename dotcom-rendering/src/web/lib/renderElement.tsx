@@ -652,7 +652,6 @@ export const renderElement = ({
 			const witnessType = element.witnessTypeData._type;
 			switch (witnessType) {
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataImage = element.witnessTypeData;
 					return [
 						true,
@@ -667,7 +666,6 @@ export const renderElement = ({
 						/>,
 					];
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataVideo = element.witnessTypeData;
 					return [
 						true,
@@ -681,7 +679,6 @@ export const renderElement = ({
 						/>,
 					];
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataText':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
 					const witnessTypeDataText = element.witnessTypeData;
 					return [
 						true,
