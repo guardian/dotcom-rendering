@@ -44,6 +44,7 @@ import type {
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
 import Anchor from 'components/anchor';
+import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
@@ -74,7 +75,6 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
-import Quiz from 'components/atoms/quiz';
 
 // ----- Renderer ----- //
 
