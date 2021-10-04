@@ -2,8 +2,8 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/src-ed-lines';
-import type { Format } from '@guardian/types';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
@@ -19,7 +19,9 @@ import Series from './series';
 
 // // ----- Styles ----- //
 
-const headlineBackgroundStyles = (format: Format): SerializedStyles => css`
+const headlineBackgroundStyles = (
+	format: ArticleFormat,
+): SerializedStyles => css`
 	${headlineBackgroundColour(format)};
 `;
 
