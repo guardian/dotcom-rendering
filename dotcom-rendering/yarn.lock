@@ -1519,11 +1519,9 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering#135c452@^20.0.0":
-  name "@guardian/atoms-rendering"
+"@guardian/atoms-rendering@git://github.com/arelra/atoms-rendering#b7b568c":
   version "20.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-20.0.0.tgz#7365f513f85ff740653e544470978d7d883fbc75"
-  integrity sha512-lnyPz27rPRueY4pIw6/iPvWlxbsPt2gtDT2QIlULdBgUMsDe2YZoj2lc8ERp+fzZ2Ik7qB/97n3KotZOCrozfg==
+  resolved "git://github.com/arelra/atoms-rendering#b7b568ca0e2d70b448c758cab71f128dcabb00aa"
   dependencies:
     youtube-player "^5.5.2"
 
