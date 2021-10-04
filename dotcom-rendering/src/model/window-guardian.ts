@@ -18,6 +18,7 @@ export interface WindowGuardianConfig {
 		showRelatedContent: boolean;
 		ajaxUrl: string;
 		shouldHideReaderRevenue: boolean;
+		pageAdTargeting: Record<string, unknown>;
 	} & ConfigType;
 	libs: {
 		googletag: string;

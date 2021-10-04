@@ -42,9 +42,10 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
 
 export const YoutubeBlockComponent: React.FC<{
 	element: YoutubeBlockElement;
+	
 	pillar: ArticleTheme;
-	adTargeting?: AdTargeting;
-}> = ({ element, pillar, adTargeting }) => {
+	adTargetingBuilder?: AdTargetingBuilder;
+}> = ({ element, pillar, adTargetingBuilder }) => {
 	// https://www.ampproject.org/docs/reference/components/amp-youtube
 	// https://developers.google.com/youtube/player_parameters
 	const attributes: { [key: string]: any } = {
@@ -57,9 +58,9 @@ export const YoutubeBlockComponent: React.FC<{
 		credentials: 'omit',
 	};
 
-	if (adTargeting) {
+	if (adTargetingBuilder) {
 		attributes['data-param-embed_config'] = JSON.stringify(
-			buildEmbedConfig(adTargeting),
+			buildEmbedConfig(adTargetingBuilder()),
 		);
 	}
 

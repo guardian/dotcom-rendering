@@ -3,7 +3,7 @@ import { LiveBlock } from '../components/LiveBlock';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
-	adTargeting: AdTargeting;
+	adTargetingBuilder: AdTargetingBuilder;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -12,7 +12,7 @@ type Props = {
 export const LiveBlogRenderer = ({
 	format,
 	blocks,
-	adTargeting,
+	adTargetingBuilder,
 	host,
 	pageId,
 	webTitle,
@@ -26,7 +26,7 @@ export const LiveBlogRenderer = ({
 						block={block}
 						pageId={pageId}
 						webTitle={webTitle}
-						adTargeting={adTargeting}
+						adTargetingBuilder={adTargetingBuilder}
 						host={host}
 					/>
 				);

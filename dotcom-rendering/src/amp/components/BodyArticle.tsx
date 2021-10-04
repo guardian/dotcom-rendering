@@ -99,7 +99,7 @@ export const Body: React.FC<{
 	config: ConfigType;
 }> = ({ data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-	const adTargeting = buildAdTargeting({
+	const adTargetingBuilder = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
 		config,
 	});
@@ -109,7 +109,7 @@ export const Body: React.FC<{
 		capiElements,
 		pillar,
 		data.isImmersive,
-		adTargeting,
+		adTargetingBuilder,
 	);
 	const slotIndexes = findAdSlots(capiElements);
 	const adInfo = {
@@ -177,7 +177,7 @@ export const Body: React.FC<{
 				data={data}
 				design={design}
 				pillar={pillar}
-				adTargeting={adTargeting}
+				adTargetingBuilder={adTargetingBuilder}
 			/>
 
 			{elements}

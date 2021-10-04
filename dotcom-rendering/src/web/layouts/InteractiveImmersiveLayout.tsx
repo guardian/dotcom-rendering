@@ -57,7 +57,7 @@ const Renderer: React.FC<{
 			format,
 			palette,
 			element,
-			adTargeting: undefined,
+			adTargetingBuilder: undefined,
 			host,
 			index,
 			isMainMedia: false,

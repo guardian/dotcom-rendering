@@ -85,7 +85,7 @@ export const VideoAsSecond = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -128,7 +128,7 @@ export const Title = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -196,7 +196,7 @@ export const Video = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -236,7 +236,7 @@ export const RichLink = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -264,7 +264,7 @@ export const FirstImage = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -293,7 +293,7 @@ export const ImaheAndTitle = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -318,7 +318,7 @@ export const Updated = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,

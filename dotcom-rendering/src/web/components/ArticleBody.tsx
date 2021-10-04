@@ -12,7 +12,7 @@ type Props = {
 	format: ArticleFormat;
 	palette: Palette;
 	blocks: Block[];
-	adTargeting: AdTargeting;
+	adTargetingBuilder: AdTargetingBuilder;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -65,7 +65,7 @@ export const ArticleBody = ({
 	format,
 	palette,
 	blocks,
-	adTargeting,
+	adTargetingBuilder,
 	host,
 	pageId,
 	webTitle,
@@ -81,7 +81,7 @@ export const ArticleBody = ({
 				<LiveBlogRenderer
 					format={format}
 					blocks={blocks}
-					adTargeting={adTargeting}
+					adTargetingBuilder={adTargetingBuilder}
 					host={host}
 					pageId={pageId}
 					webTitle={webTitle}
@@ -106,7 +106,7 @@ export const ArticleBody = ({
 				format={format}
 				palette={palette}
 				elements={blocks[0] ? blocks[0].elements : []}
-				adTargeting={adTargeting}
+				adTargetingBuilder={adTargetingBuilder}
 				host={host}
 				pageId={pageId}
 				webTitle={webTitle}

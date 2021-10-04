@@ -26,7 +26,7 @@ type Props = {
 		url: string;
 		width: number;
 	}[];
-	adTargeting?: AdTargeting;
+	adTargetingBuilder?: AdTargetingBuilder;
 	isMainMedia?: boolean;
 	height?: number;
 	width?: number;
@@ -80,7 +80,7 @@ export const YoutubeBlockComponent = ({
 	posterImage,
 	expired,
 	role,
-	adTargeting,
+	adTargetingBuilder,
 	isMainMedia,
 	height = 259,
 	width = 460,
@@ -179,7 +179,7 @@ export const YoutubeBlockComponent = ({
 				}
 				role={role}
 				alt={altText || mediaTitle || ''}
-				adTargeting={adTargeting}
+				adTargetingBuilder={adTargetingBuilder}
 				height={height}
 				width={width}
 				title={mediaTitle}

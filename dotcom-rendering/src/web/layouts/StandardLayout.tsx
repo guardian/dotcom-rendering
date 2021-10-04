@@ -310,7 +310,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargetingBuilder: AdTargetingBuilder = buildAdTargeting(CAPI);
 
 	const showBodyEndSlot =
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
@@ -608,7 +608,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								format={format}
 								palette={palette}
 								elements={CAPI.mainMediaElements}
-								adTargeting={adTargeting}
+								adTargetingBuilder={adTargetingBuilder}
 								host={host}
 								pageId={CAPI.pageId}
 								webTitle={CAPI.webTitle}
@@ -656,7 +656,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									format={format}
 									palette={palette}
 									blocks={CAPI.blocks}
-									adTargeting={adTargeting}
+									adTargetingBuilder={adTargetingBuilder}
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}

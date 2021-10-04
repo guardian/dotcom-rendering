@@ -19,7 +19,7 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	adTargeting: AdTargeting;
+	adTargetingBuilder: AdTargetingBuilder;
 	host?: string;
 };
 
@@ -217,7 +217,7 @@ export const LiveBlock = ({
 	block,
 	pageId,
 	webTitle,
-	adTargeting,
+	adTargetingBuilder,
 	host,
 }: Props) => {
 	if (block.elements.length === 0) return null;
@@ -275,7 +275,7 @@ export const LiveBlock = ({
 							element: headerElement,
 							isMainMedia: false,
 							host,
-							adTargeting,
+							adTargetingBuilder,
 							index: 0,
 							pageId,
 							webTitle,
@@ -292,7 +292,7 @@ export const LiveBlock = ({
 									format,
 									palette,
 									element,
-									adTargeting,
+									adTargetingBuilder,
 									host,
 									index,
 									isMainMedia: false,

@@ -237,7 +237,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargetingBuilder: AdTargetingBuilder = buildAdTargeting(CAPI);
 
 	const seriesTag = CAPI.tags.find(
 		(tag) => tag.type === 'Series' || tag.type === 'Blog',
@@ -436,7 +436,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									format={format}
 									palette={palette}
 									elements={CAPI.mainMediaElements}
-									adTargeting={adTargeting}
+									adTargetingBuilder={adTargetingBuilder}
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
@@ -482,7 +482,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										format={format}
 										palette={palette}
 										blocks={CAPI.blocks}
-										adTargeting={adTargeting}
+										adTargetingBuilder={adTargetingBuilder}
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}

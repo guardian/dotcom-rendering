@@ -60,6 +60,6 @@ describe('buildAdTargeting', () => {
 	};
 
 	it('builds adTargeting correctly', () => {
-		expect(buildAdTargeting(CAPI)).toEqual(expectedAdTargeting);
+		expect(buildAdTargeting(CAPI)()).toEqual(expectedAdTargeting);
 	});
 });

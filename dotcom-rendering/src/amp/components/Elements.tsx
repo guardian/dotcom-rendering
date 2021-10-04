@@ -25,7 +25,7 @@ export const Elements = (
 	elements: CAPIElement[],
 	pillar: ArticlePillar,
 	isImmersive: boolean,
-	adTargeting?: AdTargeting,
+	adTargetingBuilder?: AdTargetingBuilder,
 ): JSX.Element[] => {
 	const cleanedElements = enhance(elements);
 	const output = cleanedElements.map((element, i) => {
@@ -214,7 +214,7 @@ export const Elements = (
 					<YoutubeBlockComponent
 						element={element}
 						pillar={pillar}
-						adTargeting={adTargeting}
+						adTargetingBuilder={adTargetingBuilder}
 					/>
 				);
 			default:

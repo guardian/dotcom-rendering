@@ -55,7 +55,7 @@ export const MainMedia: React.FC<{
 	palette: Palette;
 	elements: CAPIElement[];
 	hideCaption?: boolean;
-	adTargeting?: AdTargeting;
+	adTargetingBuilder?: AdTargetingBuilder;
 	starRating?: number;
 	host?: string;
 	pageId: string;
@@ -65,7 +65,7 @@ export const MainMedia: React.FC<{
 	format,
 	palette,
 	hideCaption,
-	adTargeting,
+	adTargetingBuilder,
 	starRating,
 	host,
 	pageId,
@@ -84,7 +84,7 @@ export const MainMedia: React.FC<{
 				format,
 				palette,
 				element,
-				adTargeting,
+				adTargetingBuilder,
 				host,
 				index,
 				isMainMedia: true,

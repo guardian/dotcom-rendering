@@ -419,7 +419,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	};
 	const palette = decidePalette(format);
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargetingBuilder: AdTargetingBuilder = buildAdTargeting(CAPI);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
@@ -796,7 +796,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
-						adTargeting={adTargeting}
+						adTargetingBuilder={adTargetingBuilder}
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}

@@ -196,6 +196,8 @@ type AdTargeting =
 			disableAds: true;
 	  };
 
+type AdTargetingBuilder = () => AdTargeting;
+
 interface SectionNielsenAPI {
 	name: string;
 	apiID: string;

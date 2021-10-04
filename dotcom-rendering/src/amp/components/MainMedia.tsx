@@ -128,7 +128,7 @@ const expanded = css`
 const asComponent = (
 	element: CAPIElement,
 	pillar: ArticlePillar,
-	adTargeting?: any,
+	adTargetingBuilder?: AdTargetingBuilder,
 ) => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -138,7 +138,7 @@ const asComponent = (
 				<YoutubeBlockComponent
 					element={element}
 					pillar={pillar}
-					adTargeting={adTargeting}
+					adTargetingBuilder={adTargetingBuilder}
 				/>
 			);
 		default:
@@ -149,9 +149,9 @@ const asComponent = (
 export const MainMedia: React.FC<{
 	element: CAPIElement;
 	pillar: ArticleTheme;
-	adTargeting?: any;
-}> = ({ element, pillar, adTargeting }) => {
+	adTargetingBuilder?: AdTargetingBuilder;
+}> = ({ element, pillar, adTargetingBuilder }) => {
 	return (
-		<div css={expanded}>{asComponent(element, pillar, adTargeting)}</div>
+		<div css={expanded}>{asComponent(element, pillar, adTargetingBuilder)}</div>
 	);
 };

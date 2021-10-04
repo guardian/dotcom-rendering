@@ -65,7 +65,7 @@ type Props = {
 	format: ArticleFormat;
 	palette: Palette;
 	element: CAPIElement;
-	adTargeting?: AdTargeting;
+	adTargetingBuilder?: AdTargetingBuilder;
 	host?: string;
 	index: number;
 	isMainMedia: boolean;
@@ -118,7 +118,7 @@ export const renderElement = ({
 	format,
 	palette,
 	element,
-	adTargeting,
+	adTargetingBuilder,
 	host,
 	index,
 	hideCaption,
@@ -704,7 +704,7 @@ export const renderElement = ({
 					hideCaption={hideCaption}
 					// eslint-disable-next-line jsx-a11y/aria-role
 					role="inline"
-					adTargeting={adTargeting}
+					adTargetingBuilder={adTargetingBuilder}
 					isMainMedia={isMainMedia}
 					id={element.id}
 					assetId={element.assetId}
@@ -755,7 +755,7 @@ export const renderArticleElement = ({
 	format,
 	palette,
 	element,
-	adTargeting,
+	adTargetingBuilder,
 	host,
 	index,
 	hideCaption,
@@ -770,7 +770,7 @@ export const renderArticleElement = ({
 		format,
 		palette,
 		element: withUpdatedRole,
-		adTargeting,
+		adTargetingBuilder,
 		host,
 		index,
 		isMainMedia,

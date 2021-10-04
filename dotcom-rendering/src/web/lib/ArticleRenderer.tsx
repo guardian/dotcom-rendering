@@ -50,17 +50,17 @@ export const ArticleRenderer: React.FC<{
 	format: ArticleFormat;
 	palette: Palette;
 	elements: CAPIElement[];
-	adTargeting?: AdTargeting;
+	adTargetingBuilder?: AdTargetingBuilder;
 	host?: string;
 	pageId: string;
 	webTitle: string;
-}> = ({ format, palette, elements, adTargeting, host, pageId, webTitle }) => {
+}> = ({ format, palette, elements, adTargetingBuilder, host, pageId, webTitle }) => {
 	const output = elements.map((element, index) => {
 		return renderArticleElement({
 			format,
 			palette,
 			element,
-			adTargeting,
+			adTargetingBuilder,
 			host,
 			index,
 			isMainMedia: false,

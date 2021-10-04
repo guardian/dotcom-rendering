@@ -255,7 +255,7 @@ export const ImmersiveLayout = ({
 		config: { isPaidContent, host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargetingBuilder: AdTargetingBuilder = buildAdTargeting(CAPI);
 
 	const showBodyEndSlot =
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
@@ -356,7 +356,7 @@ export const ImmersiveLayout = ({
 						format={format}
 						palette={palette}
 						elements={CAPI.mainMediaElements}
-						adTargeting={adTargeting}
+						adTargetingBuilder={adTargetingBuilder}
 						starRating={
 							format.design === ArticleDesign.Review &&
 							CAPI.starRating
@@ -548,7 +548,7 @@ export const ImmersiveLayout = ({
 									format={format}
 									palette={palette}
 									blocks={CAPI.blocks}
-									adTargeting={adTargeting}
+									adTargetingBuilder={adTargetingBuilder}
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}

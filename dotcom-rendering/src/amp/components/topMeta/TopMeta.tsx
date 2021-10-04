@@ -12,8 +12,8 @@ export const TopMeta: React.FunctionComponent<{
 	data: ArticleModel;
 	design: ArticleDesign;
 	pillar: ArticleTheme;
-	adTargeting?: AdTargeting;
-}> = ({ data, design, pillar, adTargeting }) => {
+	adTargetingBuilder?: AdTargetingBuilder;
+}> = ({ data, design, pillar, adTargetingBuilder }) => {
 	if (pillar === ArticleSpecial.Labs)
 		return <TopMetaPaidContent articleData={data} pillar={pillar} />;
 	switch (design) {
@@ -26,7 +26,7 @@ export const TopMeta: React.FunctionComponent<{
 			return (
 				<TopMetaNews
 					articleData={data}
-					adTargeting={adTargeting}
+					adTargetingBuilder={adTargetingBuilder}
 					pillar={pillar}
 				/>
 			);

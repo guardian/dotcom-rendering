@@ -64,9 +64,9 @@ const Headline: React.FC<{
 
 export const TopMetaNews: React.FC<{
 	articleData: ArticleModel;
-	adTargeting?: AdTargeting;
+	adTargetingBuilder?: AdTargetingBuilder;
 	pillar: ArticleTheme;
-}> = ({ articleData, adTargeting, pillar }) => {
+}> = ({ articleData, adTargetingBuilder, pillar }) => {
 	return (
 		<header>
 			{articleData.mainMediaElements.map((element, i) => (
@@ -74,7 +74,7 @@ export const TopMetaNews: React.FC<{
 					key={i}
 					element={element}
 					pillar={pillar}
-					adTargeting={adTargeting}
+					adTargetingBuilder={adTargetingBuilder}
 				/>
 			))}
 
