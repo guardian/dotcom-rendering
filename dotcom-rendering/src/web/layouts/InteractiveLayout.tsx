@@ -358,6 +358,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.article}
 				borderColour={palette.border.article}
 				element="article"
+				className={interactiveLegacyClasses.contentInteractive}
 			>
 				<div className={interactiveLegacyClasses.contentInteractive}>
 					<InteractiveGrid>

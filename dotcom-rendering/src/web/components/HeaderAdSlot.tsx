@@ -15,7 +15,7 @@ const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
 	background-color: ${neutral[97]};
-	min-height: ${250 + padding + labelHeight}px;
+	min-height: ${90 + padding + labelHeight}px;
 	padding-bottom: ${padding}px;
 
 	display: flex;
