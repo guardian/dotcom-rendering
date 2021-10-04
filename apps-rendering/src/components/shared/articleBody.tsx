@@ -45,10 +45,19 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     }
 `;
 
-const ArticleBody: FC<ArticleBodyProps> = ({ className, children, format }) => (
-	<div css={[ArticleBodyStyles(format), ArticleBodyDarkStyles, ...className]}>
-		{children}
-	</div>
-);
+const ArticleBody: FC<ArticleBodyProps> = ({ className, children, format }) => {
+	const classNames = className ? className : [];
+	return (
+		<div
+			css={[
+				ArticleBodyStyles(format),
+				ArticleBodyDarkStyles,
+				...classNames,
+			]}
+		>
+			{children}
+		</div>
+	);
+};
 
 export default ArticleBody;
