@@ -7,7 +7,7 @@ import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 
 interface ArticleBodyProps {
-	className: SerializedStyles[];
+	className?: SerializedStyles[];
 	children: ReactNode[];
 	format: Format;
 }

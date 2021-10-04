@@ -208,7 +208,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 	);
 };
 
-export const InteractiveImmersiveLayout = ({
+export const FullPageInteractiveLayout = ({
 	CAPI,
 	NAV,
 	format,

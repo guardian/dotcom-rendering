@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-
 import { css } from '@emotion/react';
 import { Lines } from '@guardian/src-ed-lines';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
@@ -82,11 +81,7 @@ const ImmersiveInteractive: FC<Props> = ({ item, children }) => {
 						{OptionalLogo(item)}
 					</section>
 				</header>
-				<Body
-					format={item}
-				>
-					{children}
-				</Body>
+				<Body format={item}>{children}</Body>
 				{epicContainer}
 				<section className="js-tags" css={articleWidthStyles}>
 					<Tags tags={item.tags} format={item} />
