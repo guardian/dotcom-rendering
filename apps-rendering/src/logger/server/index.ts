@@ -94,11 +94,11 @@ class ServerLogger implements LoggerFunctions {
 		});
 	}
 
-	error(message: string, error?: Error): void {
+	error(message: string, error?: Error | unknown): void {
 		this.log({
 			level: 'error',
 			message,
-			stack_trace: error?.stack,
+			stack_trace: error instanceof Error ? error.stack : undefined,
 		});
 	}
 }

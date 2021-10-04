@@ -1,4 +1,9 @@
-import { Display, Design, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
@@ -15,11 +20,11 @@ export const SportInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Sport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -37,11 +42,11 @@ export const LabsInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.Labs,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.Labs,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -59,11 +64,11 @@ export const LifestyleInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Lifestyle,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -81,11 +86,11 @@ export const CultureInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Culture,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -103,11 +108,11 @@ export const NewsInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -125,11 +130,11 @@ export const OpinionInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Comment}
+				design={ArticleDesign.Comment}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Comment,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Opinion,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -147,11 +152,11 @@ export const SpecialReportInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -170,11 +175,11 @@ export const SportSupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Sport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -192,11 +197,11 @@ export const LabsSupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.Labs,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.Labs,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -214,11 +219,11 @@ export const LifestyleSupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Lifestyle,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -236,11 +241,11 @@ export const CultureSupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Culture,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -258,11 +263,11 @@ export const NewsSupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -280,11 +285,11 @@ export const OpinionSupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Comment}
+				design={ArticleDesign.Comment}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Comment,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Opinion,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -302,11 +307,11 @@ export const SpecialReportSupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.Article}
+				design={ArticleDesign.Standard}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -325,11 +330,11 @@ export const PhotoEssayInline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.PhotoEssay}
+				design={ArticleDesign.PhotoEssay}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.PhotoEssay,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.PhotoEssay,
+					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role
@@ -347,11 +352,11 @@ export const PhotoEssaySupporting = () => {
 	return (
 		<ContainerLayout centralBorder="full">
 			<PullQuoteBlockComponent
-				design={Design.PhotoEssay}
+				design={ArticleDesign.PhotoEssay}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.PhotoEssay,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.PhotoEssay,
+					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				// eslint-disable-next-line jsx-a11y/aria-role

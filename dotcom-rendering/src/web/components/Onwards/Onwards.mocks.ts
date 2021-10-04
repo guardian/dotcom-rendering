@@ -1,4 +1,9 @@
-import { Pillar, Design, Display, Special } from '@guardian/types';
+import {
+	ArticlePillar,
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
@@ -191,9 +196,9 @@ export const storyPackageTrails: OnwardsType = {
 	trails,
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -202,9 +207,9 @@ export const oneTrail: OnwardsType = {
 	trails: trails.slice(0, 1),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -213,9 +218,9 @@ export const twoTrails: OnwardsType = {
 	trails: trails.slice(0, 2),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -224,9 +229,9 @@ export const threeTrails: OnwardsType = {
 	trails: trails.slice(0, 3),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -235,9 +240,9 @@ export const fourTrails: OnwardsType = {
 	trails: trails.slice(0, 4),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -246,9 +251,9 @@ export const fiveTrails: OnwardsType = {
 	trails: trails.slice(0, 5),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -257,9 +262,9 @@ export const sixTrails: OnwardsType = {
 	trails: trails.slice(0, 6),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -268,9 +273,9 @@ export const sevenTrails: OnwardsType = {
 	trails: trails.slice(0, 7),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -279,9 +284,9 @@ export const eightTrails: OnwardsType = {
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -292,15 +297,15 @@ export const labsTrails: OnwardsType = {
 			...trail,
 			format: {
 				...trail.format,
-				theme: Special.Labs,
+				theme: ArticleSpecial.Labs,
 			},
 		};
 	}),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Special.Labs,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticleSpecial.Labs,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -312,9 +317,9 @@ export const linkAndDescription: OnwardsType = {
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -325,9 +330,9 @@ export const withLongDescription: OnwardsType = {
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };
 
@@ -338,8 +343,8 @@ export const withLink: OnwardsType = {
 	trails: trails.slice(0, 8),
 	ophanComponentName: 'more-on-this-story',
 	format: {
-		theme: Pillar.News,
-		design: Design.Article,
-		display: Display.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	},
 };

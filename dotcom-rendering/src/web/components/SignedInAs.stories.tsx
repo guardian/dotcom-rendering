@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { SignedInAs } from './SignedInAs';
@@ -41,9 +41,9 @@ export const SignedIn = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.News,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={true}
 				commentCount={3}
@@ -59,9 +59,9 @@ export const Image = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.Culture,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
@@ -80,9 +80,9 @@ export const Banned = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.Culture,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
@@ -104,9 +104,9 @@ export const NoDisplayName = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.News,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
@@ -125,9 +125,9 @@ export const NotSignedIn = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.Lifestyle,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
@@ -144,9 +144,9 @@ export const DiscussionClosed = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
@@ -165,9 +165,9 @@ export const DiscussionClosedSignedOut = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.Sport,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={true}
 				commentCount={32}
@@ -185,9 +185,9 @@ export const DiscussionDisabled = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={false}
 				commentCount={32}
@@ -206,9 +206,9 @@ export const DiscussionDisabledSignedOut = () => {
 		<Container>
 			<SignedInAs
 				palette={decidePalette({
-					theme: Pillar.Opinion,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				})}
 				enableDiscussionSwitch={false}
 				commentCount={32}

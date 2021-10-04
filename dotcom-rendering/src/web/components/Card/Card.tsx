@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/src-foundations/palette';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -28,7 +28,7 @@ import { CardBranding } from './components/CardBranding';
 
 type Props = {
 	linkTo: string;
-	format: Format;
+	format: ArticleFormat;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
@@ -227,16 +227,19 @@ export const Card = ({
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
-											format.design === Design.LiveBlog
+											format.design ===
+											ArticleDesign.LiveBlog
 												? 'Live'
 												: kickerText
 										}
 										showPulsingDot={
-											format.design === Design.LiveBlog ||
+											format.design ===
+												ArticleDesign.LiveBlog ||
 											showPulsingDot
 										}
 										showSlash={
-											format.design === Design.LiveBlog ||
+											format.design ===
+												ArticleDesign.LiveBlog ||
 											showSlash
 										}
 										byline={byline}
@@ -293,7 +296,7 @@ export const Card = ({
 									}
 									isFullCardImage={isFullCardImage}
 									mediaMeta={
-										format.design === Design.Media &&
+										format.design === ArticleDesign.Media &&
 										mediaType ? (
 											<MediaMeta
 												palette={cardPalette}

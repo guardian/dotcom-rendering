@@ -1,6 +1,11 @@
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Caption } from '@frontend/web/components/Caption';
-import { Display, Design, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 
 export default {
@@ -25,14 +30,14 @@ export const Article = () => (
 		<Caption
 			captionText="This is how an Article caption looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 		/>
 	</ElementContainer>
@@ -44,14 +49,14 @@ export const Analysis = () => (
 		<Caption
 			captionText="This is how an Analysis caption looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Analysis,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Analysis,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Analysis,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Analysis,
+				theme: ArticlePillar.News,
 			})}
 		/>
 	</ElementContainer>
@@ -63,14 +68,14 @@ export const PhotoEssay = () => (
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
 			format={{
-				display: Display.Immersive,
-				design: Design.PhotoEssay,
-				theme: Pillar.News,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.PhotoEssay,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Immersive,
-				design: Design.PhotoEssay,
-				theme: Pillar.News,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.PhotoEssay,
+				theme: ArticlePillar.News,
 			})}
 		/>
 	</ElementContainer>
@@ -82,14 +87,14 @@ export const SpecialReport = () => (
 		<Caption
 			captionText="This is how a SpecialReport caption looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Special.SpecialReport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.SpecialReport,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Special.SpecialReport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.SpecialReport,
 			})}
 		/>
 	</ElementContainer>
@@ -101,14 +106,14 @@ export const PhotoEssayLimitedWidth = () => (
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
 			format={{
-				display: Display.Immersive,
-				design: Design.PhotoEssay,
-				theme: Pillar.News,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.PhotoEssay,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Immersive,
-				design: Design.PhotoEssay,
-				theme: Pillar.News,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.PhotoEssay,
+				theme: ArticlePillar.News,
 			})}
 			shouldLimitWidth={true}
 		/>
@@ -121,14 +126,14 @@ export const Credit = () => (
 		<Caption
 			captionText="This is how a Feature caption looks with credit showing"
 			format={{
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.News,
 			})}
 			credit="Credited to Able Jones"
 			displayCredit={true}
@@ -142,14 +147,14 @@ export const WidthLimited = () => (
 		<Caption
 			captionText="This is how a caption looks with width limited"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			shouldLimitWidth={true}
 		/>
@@ -162,14 +167,14 @@ export const Padded = () => (
 		<Caption
 			captionText="This is how a caption looks when padded"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			padCaption={true}
 		/>

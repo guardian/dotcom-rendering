@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 
-import { Display, Design, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { HeadlineByline } from './HeadlineByline';
 
@@ -13,9 +18,9 @@ export const interviewStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Standard,
-				design: Design.Interview,
-				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Interview,
+				theme: ArticlePillar.Culture,
 			}}
 			byline="Jane Smith"
 			tags={[]}
@@ -28,9 +33,9 @@ export const commentStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Sport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Sport,
 			}}
 			byline="Jane Smith"
 			tags={[]}
@@ -43,9 +48,9 @@ export const specialStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Special.SpecialReport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticleSpecial.SpecialReport,
 			}}
 			byline="Jane Smith"
 			tags={[]}
@@ -59,9 +64,9 @@ export const commentWithBylineImageStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Sport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Sport,
 			}}
 			byline="Jane Smith"
 			tags={[
@@ -83,9 +88,9 @@ export const immersiveStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Immersive,
-				design: Design.Article,
-				theme: Pillar.Lifestyle,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Lifestyle,
 			}}
 			byline="Jane Smith"
 			tags={[
@@ -110,9 +115,9 @@ export const ImmersiveComment = () => {
 		>
 			<HeadlineByline
 				format={{
-					display: Display.Immersive,
-					design: Design.Comment,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Lifestyle,
 				}}
 				byline="Jane Smith"
 				tags={[
@@ -132,9 +137,9 @@ export const MultipleStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Immersive,
-				design: Design.Article,
-				theme: Pillar.Lifestyle,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Lifestyle,
 			}}
 			byline="Jane Smith, John Doe and Nae Bevan"
 			tags={[
@@ -163,9 +168,9 @@ export const MultipleDuplicateStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Immersive,
-				design: Design.Article,
-				theme: Pillar.Lifestyle,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Lifestyle,
 			}}
 			byline="Duncan Campbell and Duncan Campbell"
 			tags={[
@@ -192,9 +197,9 @@ export const noBylineStory = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Standard,
-				design: Design.Interview,
-				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Interview,
+				theme: ArticlePillar.Culture,
 			}}
 			byline=""
 			tags={[]}
@@ -207,9 +212,9 @@ export const LabsImmersive = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Immersive,
-				design: Design.Article,
-				theme: Special.Labs,
+				display: ArticleDisplay.Immersive,
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.Labs,
 			}}
 			byline="Jane Smith"
 			tags={[
@@ -228,9 +233,9 @@ export const LabsComment = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Special.Labs,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticleSpecial.Labs,
 			}}
 			byline="Jane Smith"
 			tags={[
@@ -249,9 +254,9 @@ export const LabsInterview = () => {
 	return (
 		<HeadlineByline
 			format={{
-				display: Display.Standard,
-				design: Design.Interview,
-				theme: Special.Labs,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Interview,
+				theme: ArticleSpecial.Labs,
 			}}
 			byline="Jane Smith"
 			tags={[

@@ -1,7 +1,10 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Design, Special } from '@guardian/types';
+import {
+	ArticleDesign as Design,
+	ArticleSpecial as Special,
+} from '@guardian/libs';
 import { until } from '@guardian/src-foundations/mq';
 import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -26,7 +29,7 @@ const innerContainerStyles = css`
 	padding-right: 10px;
 `;
 
-const bulletStyle = (pillar: Theme) => css`
+const bulletStyle = (pillar: ArticleTheme) => css`
 	.bullet {
 		color: transparent;
 		font-size: 1px;
@@ -44,7 +47,7 @@ const bulletStyle = (pillar: Theme) => css`
 	}
 `;
 
-const decideBackground = (design: Design, pillar: Theme): string => {
+const decideBackground = (design: Design, pillar: ArticleTheme): string => {
 	if (pillar === Special.Labs) return palette.neutral[86];
 	switch (design) {
 		case Design.Comment:
@@ -55,7 +58,7 @@ const decideBackground = (design: Design, pillar: Theme): string => {
 	}
 };
 
-const body = (pillar: Pillar, design: Design) => {
+const body = (pillar: ArticlePillar, design: Design) => {
 	return css`
 		background-color: ${decideBackground(design, pillar)};
 		${bulletStyle(pillar)}

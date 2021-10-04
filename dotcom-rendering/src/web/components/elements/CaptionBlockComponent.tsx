@@ -2,7 +2,7 @@ import { Caption } from '@frontend/web/components/Caption';
 
 type Props = {
 	captionText?: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	padCaption?: boolean;
 	credit?: string;

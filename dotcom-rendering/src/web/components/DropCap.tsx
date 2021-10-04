@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 import { headline } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	letter: string;
-	format: Format;
+	format: ArticleFormat;
 };
 
 const outerStyles = (palette: Palette) => css`
@@ -21,7 +21,7 @@ const outerStyles = (palette: Palette) => css`
 	color: ${palette.text.dropCap};
 `;
 
-const innerStyles = (format: Format) => {
+const innerStyles = (format: ArticleFormat) => {
 	const baseStyles = css`
 		${headline.large({ fontWeight: 'bold' })}
 		font-size: 118px;
@@ -32,9 +32,9 @@ const innerStyles = (format: Format) => {
 	`;
 
 	switch (format.design) {
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return css`
 				${baseStyles};
 				font-weight: 200;

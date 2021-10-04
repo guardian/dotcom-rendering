@@ -85,6 +85,8 @@ const toReact = (node: Node, key: number): ReactNode => {
 	switch (node.nodeName) {
 		case 'EM':
 			return <em>{node.textContent}</em>;
+		case 'A':
+			return <span>{node.textContent}</span>;
 		case '#text':
 			return node.textContent;
 	}

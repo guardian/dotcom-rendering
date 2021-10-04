@@ -47,6 +47,11 @@ const go = () => {
 		webpackDevMiddleware(compiler, {
 			serverSideRender: true,
 			publicPath: '/assets/',
+			headers: (req, res) => {
+				// Allow any localhost request from accessing the assets
+				if(req.hostname === "localhost" && req.headers.origin)
+					res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+			  },
 		}),
 	);
 

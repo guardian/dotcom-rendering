@@ -20,18 +20,21 @@ type LiveBlock = {
 
 // ----- Functions ----- //
 
-const parse = (context: Context) => (block: Block): LiveBlock => ({
-	id: block.id,
-	isKeyEvent: block.attributes.keyEvent ?? false,
-	title: block.title ?? '',
-	firstPublished: maybeCapiDate(block.firstPublishedDate),
-	lastModified: maybeCapiDate(block.lastModifiedDate),
-	body: parseElements(context)(block.elements),
-});
+const parse =
+	(context: Context) =>
+	(block: Block): LiveBlock => ({
+		id: block.id,
+		isKeyEvent: block.attributes.keyEvent ?? false,
+		title: block.title ?? '',
+		firstPublished: maybeCapiDate(block.firstPublishedDate),
+		lastModified: maybeCapiDate(block.lastModifiedDate),
+		body: parseElements(context)(block.elements),
+	});
 
-const parseMany = (blocks: Block[]): ((context: Context) => LiveBlock[]) => (
-	context: Context,
-): LiveBlock[] => blocks.map(parse(context));
+const parseMany =
+	(blocks: Block[]): ((context: Context) => LiveBlock[]) =>
+	(context: Context): LiveBlock[] =>
+		blocks.map(parse(context));
 
 // ----- Exports ----- //
 

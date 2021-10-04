@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { ArticleMeta } from './ArticleMeta';
 import { decidePalette } from '../lib/decidePalette';
@@ -9,9 +9,9 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 describe('ArticleMeta', () => {
 	it('It should contain legacy class names to support customised styling in interactives', () => {
 		const format = {
-			theme: Pillar.Lifestyle,
-			design: Design.Interactive,
-			display: Display.Immersive,
+			theme: ArticlePillar.Lifestyle,
+			design: ArticleDesign.Interactive,
+			display: ArticleDisplay.Immersive,
 		};
 
 		const { container } = render(
@@ -45,9 +45,9 @@ describe('ArticleMeta', () => {
 
 	it("It should not contain legacy class names for articles that aren't interactives", () => {
 		const format = {
-			theme: Pillar.Lifestyle,
-			design: Design.Article,
-			display: Display.Standard,
+			theme: ArticlePillar.Lifestyle,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
 		};
 
 		const { container } = render(

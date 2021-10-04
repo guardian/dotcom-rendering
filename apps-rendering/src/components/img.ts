@@ -49,8 +49,7 @@ const Img: FC<Props> = ({ image, sizes, className, format }) =>
 			key: `${image.src}-dpr2Srcset`,
 			sizes,
 			srcSet: image.dpr2Srcset,
-			media:
-				'(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
+			media: '(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)',
 		}),
 		h('source', {
 			key: `${image.src}-srcset`,

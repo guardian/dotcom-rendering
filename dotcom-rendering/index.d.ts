@@ -55,7 +55,7 @@ type CAPIDisplay =
 	| 'NumberedListDisplay';
 
 // CAPIFormat is the stringified version of Format passed through from CAPI.
-// It gets converted to the @guardian/types format on platform
+// It gets converted to the @guardian/libs format on platform
 
 type CAPIFormat = {
 	design: CAPIDesign;
@@ -63,17 +63,17 @@ type CAPIFormat = {
 	display: CAPIDisplay;
 };
 
-type Display = import('@guardian/types').Display;
-type Design = import('@guardian/types').Design;
-type Theme = import('@guardian/types').Theme;
-type Format = import('@guardian/types').Format;
-type Pillar = Theme;
+type ArticleDisplay = import('@guardian/libs').ArticleDisplay;
+type ArticleDesign = import('@guardian/libs').ArticleDesign;
+type ArticleTheme = import('@guardian/libs').ArticleTheme;
+type ArticleFormat = import('@guardian/libs').ArticleFormat;
+type ArticlePillar = ArticleTheme;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
 // and can be used to add TypeSafety when needing to override a style in a designType
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DesignTypesObj = { [key in Design]: any };
+type DesignTypesObj = { [key in ArticleDesign]: any };
 
 type Colour = string;
 
@@ -228,12 +228,12 @@ interface LinkType extends SimpleLinkType {
 	longTitle: string;
 	children?: LinkType[];
 	mobileOnly?: boolean;
-	pillar?: Pillar;
+	pillar?: ArticlePillar;
 	more?: boolean;
 }
 
 interface PillarType extends LinkType {
-	pillar: Pillar;
+	pillar: ArticlePillar;
 }
 
 interface MoreType extends LinkType {
@@ -641,7 +641,7 @@ type OnwardsType = {
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-	format: Format;
+	format: ArticleFormat;
 	isCuratedContent?: boolean;
 	isFullCardImage?: boolean;
 };
@@ -908,7 +908,7 @@ interface BaseTrailType {
 }
 interface TrailType extends BaseTrailType {
 	palette: Palette;
-	format: Format;
+	format: ArticleFormat;
 }
 
 interface CAPITrailType extends BaseTrailType {

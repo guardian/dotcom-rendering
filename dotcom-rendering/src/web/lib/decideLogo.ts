@@ -1,19 +1,19 @@
-import { Design, Special, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial, ArticlePillar } from '@guardian/libs';
 
-const shouldUseLogoForDarkBackground = (format: Format): boolean => {
-	if (format.theme === Special.SpecialReport) return true;
+const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
+	if (format.theme === ArticleSpecial.SpecialReport) return true;
 	switch (format.design) {
-		case Design.Media:
+		case ArticleDesign.Media:
 			return true;
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case Special.Labs:
+				case ArticleSpecial.Labs:
 					return false;
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Lifestyle:
-				case Pillar.Culture:
+				case ArticlePillar.News:
+				case ArticlePillar.Sport:
+				case ArticlePillar.Opinion:
+				case ArticlePillar.Lifestyle:
+				case ArticlePillar.Culture:
 				default:
 					return true;
 			}
@@ -23,7 +23,7 @@ const shouldUseLogoForDarkBackground = (format: Format): boolean => {
 };
 
 export const decideLogo = (
-	format: Format,
+	format: ArticleFormat,
 	branding: Branding,
 ): BrandingLogo => {
 	return shouldUseLogoForDarkBackground(format) &&

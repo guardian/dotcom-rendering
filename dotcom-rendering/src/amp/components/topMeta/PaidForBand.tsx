@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
-import { Special } from '@guardian/types';
+import { ArticleSpecial } from '@guardian/libs';
 
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
@@ -17,7 +17,7 @@ const headerStyle = css`
 	margin: 0 -10px;
 	padding: 0 10px;
 	height: 58px;
-	background-color: ${pillarPalette_DO_NOT_USE[Special.Labs].bright};
+	background-color: ${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].bright};
 
 	${from.mobileLandscape} {
 		padding: 0 20px;
@@ -47,8 +47,10 @@ const aboutButtonStyle = css`
 	margin-left: 10px;
 	padding: 10px;
 	border: 0;
-	border-left: solid 1px ${pillarPalette_DO_NOT_USE[Special.Labs].faded};
-	border-right: solid 1px ${pillarPalette_DO_NOT_USE[Special.Labs].faded};
+	border-left: solid 1px
+		${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].faded};
+	border-right: solid 1px
+		${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].faded};
 	background: transparent;
 	color: inherit;
 	cursor: pointer;
@@ -87,7 +89,7 @@ const logoStyle = css`
 
 const aStyle = css`
 	display: inline-block;
-	color: ${pillarPalette_DO_NOT_USE[Special.Labs].bright};
+	color: ${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].bright};
 	text-decoration: none;
 	margin-top: 10px;
 	&:hover {
@@ -96,7 +98,7 @@ const aStyle = css`
 `;
 
 const iconStyle = css`
-	fill: ${pillarPalette_DO_NOT_USE[Special.Labs].bright};
+	fill: ${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].bright};
 	margin: 0 0;
 	padding-right: 3px;
 	vertical-align: middle;

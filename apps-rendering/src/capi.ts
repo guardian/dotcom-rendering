@@ -31,8 +31,10 @@ interface Logo {
 	alt: string;
 }
 
-const tagsOfType = (tagType: TagType) => (tags: Tag[]): Tag[] =>
-	tags.filter((tag: Tag) => tag.type === tagType);
+const tagsOfType =
+	(tagType: TagType) =>
+	(tags: Tag[]): Tag[] =>
+		tags.filter((tag: Tag) => tag.type === tagType);
 
 const isImmersive = (content: Content): boolean =>
 	content.fields?.displayHint === 'immersive';

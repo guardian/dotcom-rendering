@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 
@@ -8,11 +8,11 @@ const determinePadding = ({
 	design,
 	starRating,
 }: {
-	design: Design;
+	design: ArticleDesign;
 	starRating?: boolean;
 }) => {
 	switch (design) {
-		case Design.Review:
+		case ArticleDesign.Review:
 			if (starRating) {
 				return '';
 			}
@@ -22,9 +22,9 @@ const determinePadding = ({
 					padding-bottom: ${space[9]}px;
 				}
 			`;
-		case Design.Interview:
-		case Design.LiveBlog:
-		case Design.DeadBlog:
+		case ArticleDesign.Interview:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
 			// Don't add extra padding
 			return css``;
 		default:
@@ -39,7 +39,7 @@ const determinePadding = ({
 
 export const ArticleHeadlinePadding: React.FC<{
 	children: React.ReactNode;
-	design: Design;
+	design: ArticleDesign;
 	starRating?: boolean;
 }> = ({ children, design, starRating }) => (
 	<div css={determinePadding({ design, starRating })}>{children}</div>

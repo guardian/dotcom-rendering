@@ -8,8 +8,7 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import type { ArticleFormat, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -186,7 +185,7 @@ const hasMainMediaStyles = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 

@@ -3,13 +3,13 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
-import { Display, Design, Special } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
 
 type Props = {
 	captionText?: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	padCaption?: boolean;
 	credit?: string;
@@ -155,7 +155,7 @@ export const Caption = ({
 			<span
 				css={[
 					iconStyle(palette),
-					format.display === Display.Immersive &&
+					format.display === ArticleDisplay.Immersive &&
 						hideIconBelowLeftCol,
 				]}
 			>
@@ -176,8 +176,8 @@ export const Caption = ({
 	);
 
 	switch (format.design) {
-		case Design.PhotoEssay:
-			if (format.theme === Special.Labs && isLeftCol) {
+		case ArticleDesign.PhotoEssay:
+			if (format.theme === ArticleSpecial.Labs && isLeftCol) {
 				return defaultCaption;
 			}
 			return (

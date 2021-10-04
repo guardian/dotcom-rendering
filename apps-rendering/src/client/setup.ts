@@ -7,8 +7,9 @@ import interactives from './interactives';
 // ----- Procedures ----- //
 
 function twitter(): void {
-	const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
-		.matches;
+	const isDarkMode = window.matchMedia(
+		'(prefers-color-scheme: dark)',
+	).matches;
 	const themeMeta = document.getElementById('twitter-theme');
 
 	if (isDarkMode) {

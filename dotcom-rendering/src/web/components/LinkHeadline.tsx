@@ -9,7 +9,7 @@ import { Byline } from '@root/src/web/components/Byline';
 type Props = {
 	headlineText: string; // The text shown
 	palette: Palette; // Used to colour the headline and the kicker
-	format: Format;
+	format: ArticleFormat;
 	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
 	kickerText?: string;
 	showPulsingDot?: boolean;

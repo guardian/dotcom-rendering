@@ -1,50 +1,50 @@
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 
-export const decideDesign = (format: CAPIFormat): Design => {
+export const decideDesign = (format: CAPIFormat): ArticleDesign => {
 	const designType: CAPIDesign = format.design;
 	switch (designType) {
 		case 'ArticleDesign':
-			return Design.Article;
+			return ArticleDesign.Standard;
 		case 'MediaDesign':
-			return Design.Media;
+			return ArticleDesign.Media;
 		case 'ReviewDesign':
-			return Design.Review;
+			return ArticleDesign.Review;
 		case 'AnalysisDesign':
-			return Design.Analysis;
+			return ArticleDesign.Analysis;
 		case 'CommentDesign':
 			// Temporary hack until we can handle Immersive Opinion pieces
 			return format.display === 'ImmersiveDisplay'
-				? Design.Article
-				: Design.Comment;
+				? ArticleDesign.Standard
+				: ArticleDesign.Comment;
 		case 'LetterDesign':
-			return Design.Letter;
+			return ArticleDesign.Letter;
 		case 'FeatureDesign':
-			return Design.Feature;
+			return ArticleDesign.Feature;
 		case 'LiveBlogDesign':
-			return Design.LiveBlog;
+			return ArticleDesign.LiveBlog;
 		case 'DeadBlogDesign':
-			return Design.DeadBlog;
+			return ArticleDesign.DeadBlog;
 		case 'RecipeDesign':
-			return Design.Recipe;
+			return ArticleDesign.Recipe;
 		case 'MatchReportDesign':
-			return Design.MatchReport;
+			return ArticleDesign.MatchReport;
 		case 'InterviewDesign':
-			return Design.Interview;
+			return ArticleDesign.Interview;
 		case 'EditorialDesign':
-			return Design.Editorial;
+			return ArticleDesign.Editorial;
 		case 'QuizDesign':
-			return Design.Quiz;
+			return ArticleDesign.Quiz;
 		case 'InteractiveDesign':
-			return Design.Interactive;
+			return ArticleDesign.Interactive;
 		case 'PhotoEssayDesign':
-			return Design.PhotoEssay;
+			return ArticleDesign.PhotoEssay;
 		case 'PrintShopDesign':
-			return Design.PrintShop;
+			return ArticleDesign.PrintShop;
 		case 'ObituaryDesign':
-			return Design.Obituary;
+			return ArticleDesign.Obituary;
 		case 'FullPageInteractiveDesign':
-			return Design.FullPageInteractive;
+			return ArticleDesign.FullPageInteractive;
 		default:
-			return Design.Article;
+			return ArticleDesign.Standard;
 	}
 };

@@ -5,7 +5,7 @@ import {
 
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { nav } from './Nav.mock';
 import { Nav } from './Nav';
 
@@ -25,9 +25,9 @@ export const StandardStory = () => {
 		>
 			<Nav
 				format={{
-					theme: Pillar.News,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				}}
 				nav={nav}
 				subscribeUrl=""
@@ -49,9 +49,9 @@ export const OpinionStory = () => {
 		>
 			<Nav
 				format={{
-					theme: Pillar.Opinion,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				}}
 				nav={nav}
 				subscribeUrl=""
@@ -73,9 +73,9 @@ export const ImmersiveStory = () => {
 		>
 			<Nav
 				format={{
-					theme: Pillar.News,
-					display: Display.Immersive,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Immersive,
+					design: ArticleDesign.Standard,
 				}}
 				nav={nav}
 				subscribeUrl=""

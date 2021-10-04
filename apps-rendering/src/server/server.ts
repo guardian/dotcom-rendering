@@ -49,9 +49,8 @@ import { getFootballContent } from './footballContent';
 
 // ----- Setup ----- //
 
-const getAssetLocation: (
-	assetName: string,
-) => string = getMappedAssetLocation();
+const getAssetLocation: (assetName: string) => string =
+	getMappedAssetLocation();
 const defaultId =
 	'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 const port = 3040;
@@ -87,53 +86,57 @@ function getPrefetchHeader(resources: string[]): string {
 	);
 }
 
-const capiRequest = (articleId: string) => (key: string): Promise<Response> =>
-	fetch(capiEndpoint(articleId, key));
+const capiRequest =
+	(articleId: string) =>
+	(key: string): Promise<Response> =>
+		fetch(capiEndpoint(articleId, key));
 
-const parseCapiResponse = (articleId: string) => async (
-	capiResponse: Response,
-): CapiReturn => {
-	const buffer = await capiResponse.buffer();
+const parseCapiResponse =
+	(articleId: string) =>
+	async (capiResponse: Response): CapiReturn => {
+		const buffer = await capiResponse.buffer();
 
-	switch (capiResponse.status) {
-		case 200: {
-			const response = await capiDecoder(buffer);
+		switch (capiResponse.status) {
+			case 200: {
+				const response = await capiDecoder(buffer);
 
-			if (response.content === undefined) {
+				if (response.content === undefined) {
+					logger.error(
+						`CAPI returned a 200 for ${articleId}, but didn't give me any content`,
+					);
+					return err(500);
+				}
+
+				if (response.relatedContent === undefined) {
+					logger.error(
+						`Unable to fetch related content for ${articleId}`,
+					);
+					return err(500);
+				}
+
+				const relatedContent = parseRelatedContent(
+					response.relatedContent,
+				);
+				return ok([response.content, relatedContent]);
+			}
+
+			case 404:
+				logger.warn(
+					`CAPI says that it doesn't recognise this resource: ${articleId}`,
+				);
+
+				return err(404);
+
+			default: {
+				const response = await errorDecoder(buffer);
+
 				logger.error(
-					`CAPI returned a 200 for ${articleId}, but didn't give me any content`,
+					`I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`,
 				);
 				return err(500);
 			}
-
-			if (response.relatedContent === undefined) {
-				logger.error(
-					`Unable to fetch related content for ${articleId}`,
-				);
-				return err(500);
-			}
-
-			const relatedContent = parseRelatedContent(response.relatedContent);
-			return ok([response.content, relatedContent]);
 		}
-
-		case 404:
-			logger.warn(
-				`CAPI says that it doesn't recognise this resource: ${articleId}`,
-			);
-
-			return err(404);
-
-		default: {
-			const response = await errorDecoder(buffer);
-
-			logger.error(
-				`I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`,
-			);
-			return err(500);
-		}
-	}
-};
+	};
 
 const askCapiFor = (articleId: string): CapiReturn =>
 	getConfigValue('capi.key').then((key) => {

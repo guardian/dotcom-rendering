@@ -1,5 +1,5 @@
-import { Display, Design } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
@@ -21,10 +21,10 @@ type Props = {
 };
 
 export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
-	const display: Display = decideDisplay(CAPI.format);
-	const design: Design = decideDesign(CAPI.format);
-	const theme: Pillar = decideTheme(CAPI.format);
-	const format: Format = {
+	const display: ArticleDisplay = decideDisplay(CAPI.format);
+	const design: ArticleDesign = decideDesign(CAPI.format);
+	const theme: ArticlePillar = decideTheme(CAPI.format);
+	const format: ArticleFormat = {
 		display,
 		design,
 		theme,
@@ -33,9 +33,9 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 
 	// TODO we can probably better express this as data
 	switch (display) {
-		case Display.Immersive: {
+		case ArticleDisplay.Immersive: {
 			switch (design) {
-				case Design.Interactive: {
+				case ArticleDesign.Interactive: {
 					// TBD: Remove when we migrate legacy content
 					switch (CAPI.isLegacyInteractive) {
 						case true: {
@@ -72,11 +72,11 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 				}
 			}
 		}
-		case Display.NumberedList:
-		case Display.Showcase: {
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Showcase: {
 			switch (design) {
-				case Design.LiveBlog:
-				case Design.DeadBlog:
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
 							CAPI={CAPI}
@@ -85,9 +85,9 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							palette={palette}
 						/>
 					);
-				case Design.Comment:
-				case Design.Editorial:
-				case Design.Letter:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
 							CAPI={CAPI}
@@ -107,10 +107,10 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 					);
 			}
 		}
-		case Display.Standard:
+		case ArticleDisplay.Standard:
 		default: {
 			switch (design) {
-				case Design.Interactive:
+				case ArticleDesign.Interactive:
 					return (
 						<InteractiveLayout
 							CAPI={CAPI}
@@ -119,7 +119,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							palette={palette}
 						/>
 					);
-				case Design.FullPageInteractive: {
+				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
 							CAPI={CAPI}
@@ -129,8 +129,8 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 						/>
 					);
 				}
-				case Design.LiveBlog:
-				case Design.DeadBlog:
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
 							CAPI={CAPI}
@@ -139,9 +139,9 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							palette={palette}
 						/>
 					);
-				case Design.Comment:
-				case Design.Editorial:
-				case Design.Letter:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
 							CAPI={CAPI}

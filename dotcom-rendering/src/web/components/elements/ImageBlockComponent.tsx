@@ -1,7 +1,7 @@
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	element: ImageBlockElement;
 	hideCaption?: boolean;

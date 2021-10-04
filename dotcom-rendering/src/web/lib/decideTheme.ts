@@ -1,23 +1,23 @@
-import { Pillar, Special } from '@guardian/types';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 
-export const decideTheme = (format: CAPIFormat): Theme => {
+export const decideTheme = (format: CAPIFormat): ArticleTheme => {
 	const { theme } = format;
 	switch (theme) {
 		case 'NewsPillar':
-			return Pillar.News;
+			return ArticlePillar.News;
 		case 'OpinionPillar':
-			return Pillar.Opinion;
+			return ArticlePillar.Opinion;
 		case 'SportPillar':
-			return Pillar.Sport;
+			return ArticlePillar.Sport;
 		case 'CulturePillar':
-			return Pillar.Culture;
+			return ArticlePillar.Culture;
 		case 'LifestylePillar':
-			return Pillar.Lifestyle;
+			return ArticlePillar.Lifestyle;
 		case 'SpecialReportTheme':
-			return Special.SpecialReport;
+			return ArticleSpecial.SpecialReport;
 		case 'Labs':
-			return Special.Labs;
+			return ArticleSpecial.Labs;
 		default:
-			return Pillar.News;
+			return ArticlePillar.News;
 	}
 };

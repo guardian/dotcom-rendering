@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
-import { space } from '@guardian/src-foundations';
-import { Display } from '@guardian/types';
+import { neutral, space } from '@guardian/src-foundations';
+import { ArticleDisplay } from '@guardian/libs';
 
 import { AdSlot, labelHeight } from '@root/src/web/components/AdSlot';
 import { Hide } from '@root/src/web/components/Hide';
@@ -14,8 +14,8 @@ const padding = space[4] + 2; // 18px - currently being reviewed
 const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
-	background-color: white;
-	min-height: ${250 + padding + labelHeight}px;
+	background-color: ${neutral[97]};
+	min-height: ${90 + padding + labelHeight}px;
 	padding-bottom: ${padding}px;
 
 	display: flex;
@@ -33,7 +33,7 @@ const headerAdWrapperHidden = css`
 export const HeaderAdSlot: React.FC<{
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
-	display: Display;
+	display: ArticleDisplay;
 }> = ({ isAdFreeUser, shouldHideAds, display }) => (
 	<div css={headerWrapper}>
 		<Global
