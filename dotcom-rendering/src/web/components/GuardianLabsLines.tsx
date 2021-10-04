@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { border, space } from '@guardian/src-foundations';
 
 export const GuardianLabsLines = () => (
