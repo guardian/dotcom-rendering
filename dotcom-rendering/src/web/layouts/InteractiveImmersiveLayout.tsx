@@ -8,7 +8,7 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import type { ArticleFormat, ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -333,7 +333,7 @@ export const InteractiveImmersiveLayout = ({
 						</ElementContainer>
 					</header>
 
-					{format.theme === Special.Labs && (
+					{format.theme === ArticleSpecial.Labs && (
 						<Stuck>
 							<ElementContainer
 								showSideBorders={true}
@@ -353,7 +353,7 @@ export const InteractiveImmersiveLayout = ({
 						elements={CAPI.mainMediaElements}
 						adTargeting={adTargeting}
 						starRating={
-							format.design === Design.Review && CAPI.starRating
+							format.design === ArticleDesign.Review && CAPI.starRating
 								? CAPI.starRating
 								: undefined
 						}

@@ -8,7 +8,7 @@ import {
 	brandLine,
 	neutral,
 } from '@guardian/src-foundations/palette';
-import { Display, Format, Special } from '@guardian/types';
+import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
@@ -30,12 +30,12 @@ import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
 const Renderer: React.FC<{
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	elements: CAPIElement[];
 	host?: string;
@@ -152,7 +152,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 						/>
 					</ElementContainer>
 				</Stuck>
-				{format.theme !== Special.Labs && (
+				{format.theme !== ArticleSpecial.Labs && (
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
@@ -180,7 +180,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 			>
 				<Nav
 					format={{
-						display: Display.Standard,
+						display: ArticleDisplay.Standard,
 						design: format.design,
 						theme: getCurrentPillar(CAPI),
 					}}
@@ -190,7 +190,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 				/>
 			</ElementContainer>
 
-			{NAV.subNavSections && format.theme !== Special.Labs && (
+			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
 				<ElementContainer
 					backgroundColour={neutral[100]}
 					padded={false}
@@ -208,7 +208,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 	);
 };
 
-export const FullPageInteractiveLayout = ({
+export const InteractiveImmersiveLayout = ({
 	CAPI,
 	NAV,
 	format,
@@ -235,7 +235,7 @@ export const FullPageInteractiveLayout = ({
 					palette={palette}
 				/>
 
-				{format.theme === Special.Labs && (
+				{format.theme === ArticleSpecial.Labs && (
 					<Stuck>
 						<ElementContainer
 							showSideBorders={true}
