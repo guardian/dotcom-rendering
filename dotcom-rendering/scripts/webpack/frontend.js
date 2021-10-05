@@ -42,6 +42,7 @@ const commonConfigs = ({ platform }) => ({
 			writeToDisk: true,
 			filename: `loadable-manifest-${platform}.json`,
 		}),
+		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
 		PROD &&
 			new BundleAnalyzerPlugin({
 				reportFilename: path.join(dist, `${platform}-bundles.html`),
