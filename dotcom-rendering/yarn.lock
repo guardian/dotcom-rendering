@@ -1526,10 +1526,10 @@
   dependencies:
     youtube-player "^5.5.2"
 
-"@guardian/automat-contributions@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@guardian/automat-contributions/-/automat-contributions-0.4.1.tgz#a2e7033feccc8a20dcce83615055b3248bb6f4ac"
-  integrity sha512-rud691019bLWh9S/jXhFGnS75aiH8LUx/g4PBuM7Jd1ziC8eR/rG6Cz8BhQvP3oV2hH9QPN4zwjQK0zzvzckLQ==
+"@guardian/automat-contributions@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@guardian/automat-contributions/-/automat-contributions-0.4.2.tgz#38eff2111ee032a1a25dc6bc32798cbf62a9db7e"
+  integrity sha512-6aSGaIHgkcVYLW5tgmiWYdv3N5k7I4NOCwv+YIz8HPWOq/QBHR43nx1tliF8+7LX9bKBVPuEEvPkND1i44tQbA==
 
 "@guardian/braze-components@^4.0.0":
   version "4.0.0"
@@ -1580,6 +1580,19 @@
   dependencies:
     tslib "^2.0.0"
 
+"@guardian/source-react-components-development-kitchen@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.3.tgz#fbe7292ddd0bdacb444d6afbb602ff545eea7d89"
+  integrity sha512-D69S8wT6aka126UfGH+NGFIS7BRhXLDA/uu2B8S07JWFZjcfzJu56UNE5YkvgJ8qLJVMkvjJsh3pRYaLHKEUjw==
+  dependencies:
+    "@guardian/src-button" "^3.9.0"
+    "@guardian/src-helpers" "^3.9.0"
+
+"@guardian/src-brand@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-brand/-/src-brand-3.9.0.tgz#f90d7a68671d3d699107d2c8f7d550722925fc5c"
+  integrity sha512-Ek/1BcUfyquhg99+kVAAenj7yS4Q5p6Q8mpSyNV8sl+PyIBVfCUSAA1Chi1pflEjxJH4PGtHlAM43MBaW18JyQ==
+
 "@guardian/src-button@^3.9.0":
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-3.9.0.tgz#566a6d1b559c7bf6fed60fc7b6cb5a53b270246e"
@@ -1595,13 +1608,6 @@
     "@guardian/src-helpers" "^3.9.0"
     "@guardian/src-label" "^3.9.0"
     "@guardian/src-user-feedback" "^3.9.0"
-
-"@guardian/src-ed-lines@^3.9.0":
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/@guardian/src-ed-lines/-/src-ed-lines-3.9.0.tgz#cd9bd4e2bd61b4a7fed53d9b9967a409fbfea741"
-  integrity sha512-/BMLsEbj+3kVDJiEIlOGpI4a/yk7RjEnO39v8A11E6gyNeqI266r7Wqa4Eo3rckbWxqJYUSu8fgnRSFpUKG1dA==
-  dependencies:
-    "@guardian/src-helpers" "^3.9.0"
 
 "@guardian/src-foundations@^3.9.0":
   version "3.9.0"
