@@ -56,6 +56,10 @@ import {
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Figure } from '../components/Figure';
+import {
+	isInteractive,
+	interactiveLegacyFigureClasses,
+} from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	format: ArticleFormat;
@@ -648,8 +652,7 @@ export const renderElement = ({
 			const witnessType = element.witnessTypeData._type;
 			switch (witnessType) {
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-					const witnessTypeDataImage = element.witnessTypeData as WitnessTypeDataImage;
+					const witnessTypeDataImage = element.witnessTypeData;
 					return [
 						true,
 						<WitnessImageBlockComponent
@@ -663,8 +666,7 @@ export const renderElement = ({
 						/>,
 					];
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-					const witnessTypeDataVideo = element.witnessTypeData as WitnessTypeDataVideo;
+					const witnessTypeDataVideo = element.witnessTypeData;
 					return [
 						true,
 						<WitnessVideoBlockComponent
@@ -677,8 +679,7 @@ export const renderElement = ({
 						/>,
 					];
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataText':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-					const witnessTypeDataText = element.witnessTypeData as WitnessTypeDataText;
+					const witnessTypeDataText = element.witnessTypeData;
 					return [
 						true,
 						<WitnessTextBlockComponent
@@ -778,12 +779,18 @@ export const renderArticleElement = ({
 	}
 
 	const needsFigure = !bareElements.has(element._type);
+	const role = 'role' in element ? (element.role as RoleType) : undefined;
 
 	return needsFigure ? (
 		<Figure
 			isMainMedia={isMainMedia}
 			id={'elementId' in element ? element.elementId : undefined}
-			role={'role' in element ? (element.role as RoleType) : undefined}
+			role={role}
+			className={
+				isInteractive(format.design)
+					? interactiveLegacyFigureClasses(element._type, role)
+					: ''
+			}
 		>
 			{el}
 		</Figure>
