@@ -37,28 +37,28 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 			switch (design) {
 				case ArticleDesign.Interactive: {
 					// TBD: Remove when we migrate legacy content
-					switch (CAPI.isLegacyInteractive) {
-						case true: {
-							return (
-								<FullPageInteractiveLayout
-									CAPI={CAPI}
-									NAV={NAV}
-									format={format}
-									palette={palette}
-								/>
-							);
-						}
-						default: {
-							return (
-								<InteractiveImmersiveLayout
-									CAPI={CAPI}
-									NAV={NAV}
-									format={format}
-									palette={palette}
-								/>
-							);
-						}
-					}
+					// switch (CAPI.isLegacyInteractive) {
+					// 	case true: {
+					// 		return (
+					// 			<FullPageInteractiveLayout
+					// 				CAPI={CAPI}
+					// 				NAV={NAV}
+					// 				format={format}
+					// 				palette={palette}
+					// 			/>
+					// 		);
+					// 	}
+					// 	default: {
+					return (
+						<InteractiveImmersiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+							palette={palette}
+						/>
+					);
+					// 	}
+					// }
 				}
 				default: {
 					return (
