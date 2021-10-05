@@ -15,8 +15,8 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v1
 
-						# Make sure we install dependencies in the root directory
-						- uses: bahmutov/npm-install@v1
+            # Make sure we install dependencies in the root directory
+            - uses: bahmutov/npm-install@v1
 
             - name: Cypress run
               uses: cypress-io/github-action@v2
