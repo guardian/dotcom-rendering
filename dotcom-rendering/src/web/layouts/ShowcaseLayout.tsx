@@ -48,7 +48,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

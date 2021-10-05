@@ -289,7 +289,10 @@ export const InteractiveBlockComponent = ({
 				id={elementId} // required for hydration
 				ref={wrapperRef}
 				css={wrapperStyle({ format, role, loaded, palette })}
-				className={interactiveLegacyFigureClasses}
+				className={interactiveLegacyFigureClasses(
+					'model.dotcomrendering.pageElements.InteractiveBlockElement',
+					role,
+				)}
 				data-alt={alt} // for compatibility with custom boot scripts
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 			>
