@@ -9,6 +9,7 @@ import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import Comment from 'components/layout/comment';
 import Interactive from 'components/layout/interactive';
+import { InteractiveImmersive } from 'components/layout/interactiveimmersive';
 import Labs from 'components/layout/labs';
 import Media from 'components/layout/media';
 import Standard from 'components/layout/standard';
@@ -56,7 +57,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === Design.Interactive &&
 		item.display === Display.Immersive
 	) {
-		return <Interactive>{renderAllWithoutStyles(item, body)}</Interactive>;
+		return (
+			<InteractiveImmersive>
+				{renderAllWithoutStyles(item, body)}
+			</InteractiveImmersive>
+		);
 	}
 
 	if (
