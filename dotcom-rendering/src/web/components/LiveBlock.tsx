@@ -75,6 +75,8 @@ const LastUpdated = ({
 	);
 };
 
+const formatTime = (time) => time < 10 ? `0${time}` : time;
+
 const FirstPublished = ({
 	firstPublished,
 	blockLink,
@@ -116,7 +118,7 @@ const FirstPublished = ({
 					color: ${neutral[46]};
 				`}
 			>
-				{`${publishedDate.getHours()}:${publishedDate.getMinutes()}`}
+				{`${formatTime(publishedDate.getHours())}:${formatTime(publishedDate.getMinutes())}`}
 			</span>
 		</a>
 	);
