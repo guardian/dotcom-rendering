@@ -12,6 +12,8 @@ jobs:
               uses: actions/checkout@v1
             - name: Install Node
               uses: guardian/actions-setup-node@main
+						# Make sure we install dependencies in the root directory
+            - uses: bahmutov/npm-install@v1
             - run: make build
               working-directory: dotcom-rendering
             - name: Install and run Lighthouse CI

@@ -10,12 +10,8 @@ jobs:
       - uses: guardian/actions-setup-node@main
 
       # Cache npm dependencies using https://github.com/bahmutov/npm-install
+			# Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
-
-      # Install packages for dotcom-rendering project
-      - uses: bahmutov/npm-install@v1
-        with:
-          working-directory: dotcom-rendering
 
       # Install packages for apps-rendering project
       - uses: bahmutov/npm-install@v1

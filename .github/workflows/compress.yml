@@ -12,6 +12,10 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: guardian/actions-setup-node@main
+
+						# Make sure we install dependencies in the root directory
+						- uses: bahmutov/npm-install@v1
+
             - uses: preactjs/compressed-size-action@v2
               with:
                   cwd: ./dotcom-rendering
