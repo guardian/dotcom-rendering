@@ -38,7 +38,7 @@ import {
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveLegacyClasses } from './lib/interactiveLegacyStyling';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
