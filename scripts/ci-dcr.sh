@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# exit when any command fails
+set -e
+
 git fetch origin main
 
 gitBranches="$(git branch -r)"
@@ -19,7 +22,7 @@ echo "filteredFiles: $filteredFiles"
 # run the ci steps if either of the followings is true
 # - filteredFiles is empty (all changes were in apps-rendering)
 # - we are in the main branch
-if [[ $currentBranch != "main" ]] && [ -z "$filteredFiles" ] 
+if [[ $currentBranch != "main" ]] && [ -z "$filteredFiles" ]
 then
     printf "Skipping DCR ci build because DCR file changes is empty and branch is $currentBranch\n\n"
 else
