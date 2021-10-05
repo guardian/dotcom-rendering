@@ -51,7 +51,7 @@ const styles = (
     `}
 `;
 
-export const Img: FC<Props> = ({
+const Img: FC<Props> = ({
   image,
   sizes,
   className,
@@ -81,3 +81,7 @@ export const Img: FC<Props> = ({
     />
   </picture>
 );
+
+// ----- Exports ----- //
+
+export default Img;
