@@ -740,6 +740,7 @@ const bareElements = new Set([
 	'model.dotcomrendering.pageElements.SubheadingBlockElement',
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveBlockElement',
 ]);
 
 // renderArticleElement is a wrapper for renderElement that wraps elements in a

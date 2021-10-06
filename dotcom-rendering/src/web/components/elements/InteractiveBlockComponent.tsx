@@ -86,26 +86,16 @@ const decideHeight = (role: RoleType) => {
 			return 500;
 	}
 };
-const getMinHeight = (role: RoleType, loaded: boolean) => {
-	if (loaded) {
-		return `auto`;
-	}
-	return `${decideHeight(role)}px`;
-};
 const wrapperStyle = ({
 	format,
-	role,
-	loaded,
 	palette,
 }: {
 	format: ArticleFormat;
-	role: RoleType;
-	loaded: boolean;
 	palette: Palette;
 }) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 	background-color: ${palette.background.article};
-	min-height: ${getMinHeight(role, loaded)};
+	min-height: auto;
 	position: relative;
 `;
 
@@ -286,9 +276,9 @@ export const InteractiveBlockComponent = ({
 	return (
 		<>
 			<figure
-				id={elementId} // required for hydration
+				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
-				css={wrapperStyle({ format, role, loaded, palette })}
+				css={wrapperStyle({ format, palette })}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					role,
@@ -301,13 +291,13 @@ export const InteractiveBlockComponent = ({
 						<Placeholder
 							height={decideHeight(role)}
 							shouldShimmer={false}
-						/>
+							/>
 						<a
 							ref={placeholderLinkRef}
 							data-name="placeholder"
 							css={placeholderLinkStyle}
 							href={url}
-						>
+							>
 							{alt}
 						</a>
 					</>
