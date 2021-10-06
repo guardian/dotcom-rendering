@@ -40,8 +40,10 @@ const headerBackgroundStyles = ({
 const isBlog = (format: Format): boolean =>
 	format.design === Design.LiveBlog || format.design === Design.DeadBlog;
 
-const lineStyles = (format: Format): SerializedStyles =>
-	css`
+const lineStyles = (format: Format): SerializedStyles => {
+	const lineColour = isBlog(format) ? neutral[93] : neutral[20];
+
+	return css`
 		${from.wide} {
 			width: ${wideContentWidth}px;
 			margin-left: auto;
@@ -51,14 +53,15 @@ const lineStyles = (format: Format): SerializedStyles =>
 			${darkModeCss`
 			background-image: repeating-linear-gradient(
 				to bottom,
-				${isBlog(format) ? neutral[93] : neutral[20]},
-				${isBlog(format) ? neutral[93] : neutral[20]} 1px,
+				${lineColour},
+				${lineColour} 1px,
 				transparent 1px,
 				transparent 3px
 				);
 			`}
 		}
 	`;
+};
 
 interface Props {
 	item: Liveblog;
