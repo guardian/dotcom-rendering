@@ -47,7 +47,7 @@
     "@guardian/atoms-rendering": "git://github.com/arelra/atoms-rendering#b7b568c",
     "@guardian/automat-contributions": "^0.4.2",
     "@guardian/braze-components": "^4.1.0",
-    "@guardian/commercial-core": "0.22.0",
+    "@guardian/commercial-core": "0.23.0",
     "@guardian/consent-management-platform": "~6.11.5",
     "@guardian/discussion-rendering": "^8.1.0",
     "@guardian/libs": "^3.3.0",
