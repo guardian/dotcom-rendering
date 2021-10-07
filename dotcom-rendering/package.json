@@ -4,6 +4,10 @@
   "version": "0.1.0-alpha",
   "license": "Apache-2.0",
   "tocList": "README.md docs/contributing/**",
+  "private": true,
+	"workspaces": {
+		"nohoist": ["html-minifier", "html-minifier/**"]
+	},
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx && yarn lint-cypress",
     "lint-cypress": "eslint ./cypress",
