@@ -110,12 +110,12 @@ const hydrateQuizzes = (): void =>
 				);
 
 			ReactDOM.hydrate(atom, atomElement);
-		} else if (parsedProps.kind === ResultKind.Err) {
+		} else {
 			console.error(parsedProps.err);
 		}
 	});
 
-const hydrate = () => {
+const hydrate = (): void => {
 	hydrateQuizzes();
 };
 
