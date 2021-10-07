@@ -5,18 +5,15 @@ import {
 	PersonalityQuizAtom,
 } from '@guardian/atoms-rendering';
 import type { Format } from '@guardian/types';
-import { ElementKind } from 'bodyElement';
-import type {
-	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
-	PersonalityQuizAtom as PersonalityQuizAtomElement,
-} from 'bodyElement';
+import { ElementKind } from 'bodyElementKind';
+import type { QuizAtom } from 'quizAtom';
 import type { FC } from 'react';
 
 // ----- Component ----- //
 
 interface Props {
 	format: Format;
-	element: KnowledgeQuizAtomElement | PersonalityQuizAtomElement;
+	element: QuizAtom;
 }
 
 const DecideQuiz: FC<Props> = ({ format, element }) =>
@@ -33,7 +30,7 @@ const DecideQuiz: FC<Props> = ({ format, element }) =>
 const Quiz: FC<Props> = ({ format, element }) => {
 	const hydrationParams = (
 		<script className="js-quiz-params" type="application/json">
-			{JSON.stringify(element)}
+			{JSON.stringify({ quiz: element, theme: format.theme })}
 		</script>
 	);
 
