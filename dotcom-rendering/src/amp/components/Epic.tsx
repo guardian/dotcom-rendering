@@ -40,9 +40,9 @@ export const epicChoiceCardCss = `
 		color: ${brand[400]};
 	}
 	.epicChoiceCardSelected {
-		box-shadow: inset 0 0 0 4px ${brand[500]} !important;
-		background-color: #e3f6ff !important;
-		color: ${brand[400]} !important;
+		box-shadow: inset 0 0 0 4px ${brand[500]};
+		background-color: #e3f6ff;
+		color: ${brand[400]};
 	}
 `;
 
