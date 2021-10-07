@@ -16,7 +16,6 @@ import {
 	brandBackground,
 	border,
 } from '@guardian/src-foundations/palette';
-import { JsonScript } from '@root/src/amp/components/JsonScript';
 
 export const epicChoiceCardCss = `
 	.epicChoiceCard {
@@ -369,45 +368,7 @@ const buildUrl = (
 	)}`;
 };
 
-const getReminderDate = (date: Date = new Date()): Date => {
-	const monthsAhead = date.getDate() < 20 ? 1 : 2;
-	const reminderDate = new Date();
-	reminderDate.setMonth(date.getMonth() + monthsAhead);
-
-	return reminderDate;
-};
-
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-	const reminderDate = getReminderDate();
-	const reminderMonth = reminderDate.toLocaleString('default', {
-		month: 'long',
-	});
-	const reminderYear = reminderDate.getFullYear();
-	const reminderDateString = `${reminderDate.getFullYear()}-${(
-		reminderDate.getMonth() + 1
-	)
-		.toString()
-		.padStart(2, '0')}-01`;
-	const epicStateJson = {
-		ctaUrl: webURL,
-		hideButtons: false,
-		hideReminderWrapper: true,
-		hideSuccessMessage: true,
-		hideFailureMessage: true,
-		hideReminderCta: false,
-		hideReminderForm: false,
-		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
-		choiceCardSelection: { frequency: 'MONTHLY', amount: 6 },
-		choiceCardLabelSuffix: {
-			ONE_OFF: '',
-			MONTHLY: ' per month',
-			ANNUAL: ' per year',
-		},
-		classNames: {
-			choiceCard: 'epicChoiceCard',
-			choiceCardSelected: 'epicChoiceCard epicChoiceCardSelected',
-		},
-	};
 	const supportDotcomComponentsUrl = 'http://localhost:8082';
 	// process.env.GU_STAGE === 'PROD'
 	// 	? 'https://contributions.guardianapis.com'
@@ -417,14 +378,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 
 	return (
 		<div>
-			<amp-state id="epicState">
-				<JsonScript o={epicStateJson} />
-			</amp-state>
-
-			<amp-state
-				id="choiceCardsData"
-				src={`${supportDotcomComponentsUrl}/amp/choice_cards_data`}
-			/>
+			<amp-state id="epicState" src={epicUrl} />
 
 			<amp-list
 				layout="fixed-height"
@@ -432,7 +386,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 				// will not display. This is such an edge case that we can live with it, and in general it will fill the
 				// space.
 				height="1px"
-				src={epicUrl}
+				src="amp-state:epicState"
 				credentials="include"
 				id="epic-container"
 				single-item="true"
@@ -504,22 +458,25 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 						<MoustacheSection name="choiceCards">
 							<div css={choiceCardContainer}>
 								<br />
+								<p data-amp-bind-text="epicState.choiceCards.choiceCardSelection.amount" />
+								<p data-amp-bind-text="epicState.choiceCards.choiceCardSelection.frequency" />
+								<br />
 								<div css={choiceCardGroupRow}>
 									<button
-										data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-										on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ONE_OFF', amount: choiceCardsData.amounts['ONE_OFF'][1] } } })"
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { frequency: 'ONE_OFF', amount: epicState.choiceCards.amounts['ONE_OFF'][1] } } } })"
 									>
 										<span>Single</span>
 									</button>
 									<button
-										data-amp-bind-class="epicState.choiceCardSelection.frequency == 'MONTHLY' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-										on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'MONTHLY', amount: choiceCardsData.amounts['MONTHLY'][1] } } })"
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'MONTHLY' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { frequency: 'MONTHLY', amount: epicState.choiceCards.amounts['MONTHLY'][1] } } } })"
 									>
 										<span>Monthly</span>
 									</button>
 									<button
-										data-amp-bind-class="epicState.choiceCardSelection.frequency == 'ANNUAL' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-										on="tap:AMP.setState({ epicState: { choiceCardSelection: { frequency: 'ANNUAL', amount: choiceCardsData.amounts['ANNUAL'][1] } } })"
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'ANNUAL' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { frequency: 'ANNUAL', amount: epicState.choiceCards.amounts['ANNUAL'][1] } } } })"
 									>
 										<span>Annual</span>
 									</button>
@@ -527,20 +484,20 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<br />
 								<div css={choiceCardGroupColumn}>
 									<button
-										data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-										on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] } } })"
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.amount == epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][0] ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { amount: epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][0] } } } })"
 									>
-										<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][0] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
+										<span data-amp-bind-text="epicState.choiceCards.currencySymbol + epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][0] + epicState.choiceCards.choiceCardLabelSuffix[epicState.choiceCards.choiceCardSelection.frequency]" />
 									</button>
 									<button
-										data-amp-bind-class="epicState.choiceCardSelection.amount == choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-										on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] } } })"
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.amount == epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][1] ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { amount: epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][1] } } } })"
 									>
-										<span data-amp-bind-text="choiceCardsData.currencySymbol + choiceCardsData.amounts[epicState.choiceCardSelection.frequency][1] + epicState.choiceCardLabelSuffix[epicState.choiceCardSelection.frequency]" />
+										<span data-amp-bind-text="epicState.choiceCards.currencySymbol + epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][1] + epicState.choiceCards.choiceCardLabelSuffix[epicState.choiceCards.choiceCardSelection.frequency]" />
 									</button>
 									<button
-										data-amp-bind-class="epicState.choiceCardSelection.amount == 'other' ? epicState.classNames.choiceCardSelected : epicState.classNames.choiceCard"
-										on="tap:AMP.setState({ epicState: { choiceCardSelection: { amount: 'other' } } })"
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.amount == 'other' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { amount: 'other' } } } })"
 									>
 										<span>Other</span>
 									</button>
@@ -555,28 +512,9 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<div css={buttonsStyle}>
 								<div>
 									<MoustacheSection name="cta">
-										{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 										<a
 											id="primaryCta"
 											href={buildUrl(
-												moustacheVariable('url'),
-												webURL,
-												moustacheVariable(
-													'campaignCode',
-												),
-												moustacheVariable(
-													'componentId',
-												),
-												{
-													name: moustacheVariable(
-														'testName',
-													),
-													variant: moustacheVariable(
-														'variantName',
-													),
-												},
-											)}
-											data-amp-bind-href={buildUrl(
 												moustacheVariable('url'),
 												webURL,
 												moustacheVariable(
@@ -610,12 +548,12 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 										</a>
 									</MoustacheSection>
 								</div>
-								<div data-amp-bind-hidden="epicState.hideReminderCta">
+								<div data-amp-bind-hidden="epicState.reminder.hideReminderCta">
 									<button
 										css={transparentButtonStyle}
-										on="tap:AMP.setState({epicState:{hideReminderWrapper: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
+										on="tap:AMP.setState({epicState:{reminder:{hideReminderWrapper: false, hideButtons: true}}}),epic-container.changeToLayoutContainer()"
 									>
-										Remind me in {reminderMonth}
+										<span data-amp-bind-text="epicState.reminder.reminderCta" />
 									</button>
 								</div>
 							</div>
@@ -632,17 +570,17 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 
 						<div
 							css={reminderWrapperStyle}
-							data-amp-bind-hidden="epicState.hideReminderWrapper"
+							data-amp-bind-hidden="epicState.reminder.hideReminderWrapper"
 						>
 							<div css={quadLineStyle} />
 							<div css={reminderFormTopStyle}>
 								<div
 									css={epicHeaderStyle}
-									data-amp-bind-text="epicState.headerText"
+									data-amp-bind-text="epicState.reminder.headerText"
 								/>
 								<button
 									css={closeButtonStyle}
-									on="tap:AMP.setState({epicState:{hideReminderWrapper: true, hideButtons: false}}),reminderForm.clear"
+									on="tap:AMP.setState({epicState:{reminder:{hideReminderWrapper: true, hideButtons: false}}}),reminderForm.clear"
 								>
 									<svg
 										viewBox="0 0 30 30"
@@ -658,13 +596,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							</div>
 							<form
 								id="reminderForm"
-								data-amp-bind-hidden="epicState.hideReminderForm"
+								data-amp-bind-hidden="epicState.reminder.hideReminderForm"
 								method="post"
 								action-xhr={setReminderUrl}
 								target="_blank"
 								custom-validation-reporting="interact-and-submit"
 								encType="application/x-www-form-urlencoded"
-								on="submit-success:AMP.setState({epicState:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}});submit-error:AMP.setState({epicState:{hideFailureMessage:false}})"
+								on="submit-success:AMP.setState({epicState:{reminder:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}}});submit-error:AMP.setState({epicState:{reminder:{hideFailureMessage:false}}})"
 							>
 								<div css={inputLabelStyle}>Email address</div>
 								<div
@@ -711,7 +649,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<input
 									type="hidden"
 									name="reminderDate"
-									value={reminderDateString}
+									data-amp-bind-value="epicState.reminder.reminderPeriod"
 								/>
 								<input
 									css={emailInputStyle}
@@ -738,16 +676,16 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</button>
 								<div
 									css={reminderErrorStyle}
-									data-amp-bind-hidden="epicState.hideFailureMessage"
+									data-amp-bind-hidden="epicState.reminder.hideFailureMessage"
 								>
 									Sorry we couldn&apos;t set a reminder for
 									you this time. Please try again later.
 								</div>
 								<div css={reminderTermsStyle}>
 									We will send you a maximum of two emails in{' '}
-									{reminderMonth} {reminderYear}. To find out
-									what personal data we collect and how we use
-									it, view our{' '}
+									<span data-amp-bind-text="epicState.reminder.reminderLabel" />
+									. To find out what personal data we collect
+									and how we use it, view our{' '}
 									<a
 										target="_blank"
 										href="https://www.theguardian.com/help/privacy-policy"
@@ -759,12 +697,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							</form>
 							<div
 								css={successMessageStyle}
-								data-amp-bind-hidden="epicState.hideSuccessMessage"
+								data-amp-bind-hidden="epicState.reminder.hideSuccessMessage"
 							>
 								We will be in touch to remind you to contribute.
 								Look out for a message in your inbox in{' '}
-								{reminderMonth} {reminderYear}. If you have any
-								questions about contributing, please{' '}
+								<span data-amp-bind-text="epicState.reminder.reminderLabel" />
+								. If you have any questions about contributing,
+								please{' '}
 								<a
 									target="_blank"
 									href="mailto:contribution.support@theguardian.com"
