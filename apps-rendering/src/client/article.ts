@@ -1,8 +1,7 @@
 // ----- Imports ----- //
+
 import 'regenerator-runtime/runtime.js';
-import {
-	AudioAtom,
-} from '@guardian/atoms-rendering';
+import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';

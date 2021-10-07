@@ -254,7 +254,11 @@ const arrayParser = <A>(pa: Parser<A>): Parser<A[]> =>
 				return f([...acc, parsed.value], tail);
 			}
 
-			return err(`Could not parse array item ${String(item)} because ${parsed.err}`);
+			return err(
+				`Could not parse array item ${String(item)} because ${
+					parsed.err
+				}`,
+			);
 		};
 
 		if (Array.isArray(a)) {

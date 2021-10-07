@@ -15,6 +15,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import { parseAtom } from 'atoms';
+import { ElementKind } from 'bodyElementKind';
 import { formatDate } from 'date';
 import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
@@ -22,8 +23,7 @@ import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
 import type { Context } from 'parserContext';
-import { ElementKind } from 'bodyElementKind';
-import { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
+import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 
 // ----- Types ----- //
 

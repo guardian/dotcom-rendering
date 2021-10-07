@@ -3,7 +3,22 @@
 import { withDefault } from '@guardian/types';
 import { ElementKind } from 'bodyElementKind';
 import { pipe } from 'lib';
-import { andThen, arrayParser, booleanParser, fieldParser, map, map3, map4, map5, maybe, numberParser, oneOf, Parser, stringParser, succeed } from 'parser';
+import type { Parser } from 'parser';
+import {
+	andThen,
+	arrayParser,
+	booleanParser,
+	fieldParser,
+	map,
+	map3,
+	map4,
+	map5,
+	maybe,
+	numberParser,
+	oneOf,
+	stringParser,
+	succeed,
+} from 'parser';
 
 // ----- Types ----- //
 
@@ -58,58 +73,58 @@ const makeKnowledgeQuiz = (
 	questions: Question[],
 	resultGroups: ResultGroup[],
 ): KnowledgeQuizAtom => ({
-    kind: ElementKind.KnowledgeQuizAtom,
-    id,
-    questions,
-    resultGroups,
+	kind: ElementKind.KnowledgeQuizAtom,
+	id,
+	questions,
+	resultGroups,
 });
 
 const makeQuestion = (
-    id: string,
-    text: string,
-    answers: Answer[],
-    imageUrl: string | undefined,
+	id: string,
+	text: string,
+	answers: Answer[],
+	imageUrl: string | undefined,
 ): Question => ({
-    id,
-    text,
-    answers,
-    imageUrl,
+	id,
+	text,
+	answers,
+	imageUrl,
 });
 
 const makeAnswer = (
-    id: string,
-    text: string,
-    revealText: string | undefined,
-    isCorrect: boolean,
-    answerBuckets: string[],
+	id: string,
+	text: string,
+	revealText: string | undefined,
+	isCorrect: boolean,
+	answerBuckets: string[],
 ): Answer => ({
-    id,
-    text,
-    revealText,
-    isCorrect,
-    answerBuckets,
+	id,
+	text,
+	revealText,
+	isCorrect,
+	answerBuckets,
 });
 
 const makeResultGroup = (
-    title: string,
-    shareText: string,
-    minScore: number,
-    id: string,
+	title: string,
+	shareText: string,
+	minScore: number,
+	id: string,
 ): ResultGroup => ({
-    title,
-    shareText,
-    minScore,
-    id,
+	title,
+	shareText,
+	minScore,
+	id,
 });
 
 const makeResultBucket = (
-    id: string,
-    title: string,
-    description: string,
+	id: string,
+	title: string,
+	description: string,
 ): ResultBucket => ({
-    id,
-    title,
-    description,
+	id,
+	title,
+	description,
 });
 
 const makePersonalityQuiz = (
@@ -117,86 +132,76 @@ const makePersonalityQuiz = (
 	questions: Question[],
 	resultBuckets: ResultBucket[],
 ): PersonalityQuizAtom => ({
-    kind: ElementKind.PersonalityQuizAtom,
-    id,
-    questions,
-    resultBuckets,
+	kind: ElementKind.PersonalityQuizAtom,
+	id,
+	questions,
+	resultBuckets,
 });
 
 const aOrUndefinedParser = <A>(aParser: Parser<A>): Parser<A | undefined> =>
-    pipe(
-        maybe(aParser),
-        map(withDefault<A | undefined>(undefined)),
-    )
+	pipe(maybe(aParser), map(withDefault<A | undefined>(undefined)));
 
 function equals<A>(a: A) {
-	return (b: A): Parser<A> => a === b ? succeed(a) : fail('');
+	return (b: A): Parser<A> => (a === b ? succeed(a) : fail(''));
 }
 
 const answerParser: Parser<Answer> = map5(makeAnswer)(
-    fieldParser('id', stringParser),
-    fieldParser('text', stringParser),
-    aOrUndefinedParser(fieldParser('revealText', stringParser)),
-    fieldParser('isCorrect', booleanParser),
-    fieldParser('answerBuckets', arrayParser(stringParser)),
+	fieldParser('id', stringParser),
+	fieldParser('text', stringParser),
+	aOrUndefinedParser(fieldParser('revealText', stringParser)),
+	fieldParser('isCorrect', booleanParser),
+	fieldParser('answerBuckets', arrayParser(stringParser)),
 );
 
 const questionParser: Parser<Question> = map4(makeQuestion)(
-    fieldParser('id', stringParser),
-    fieldParser('text', stringParser),
-    fieldParser('answers', arrayParser(answerParser)),
-    aOrUndefinedParser(fieldParser('imageUrl', stringParser)),
+	fieldParser('id', stringParser),
+	fieldParser('text', stringParser),
+	fieldParser('answers', arrayParser(answerParser)),
+	aOrUndefinedParser(fieldParser('imageUrl', stringParser)),
 );
 
 const resultGroupParser: Parser<ResultGroup> = map4(makeResultGroup)(
-    fieldParser('title', stringParser),
-    fieldParser('shareText', stringParser),
-    fieldParser('minScore', numberParser),
-    fieldParser('id', stringParser),
-)
+	fieldParser('title', stringParser),
+	fieldParser('shareText', stringParser),
+	fieldParser('minScore', numberParser),
+	fieldParser('id', stringParser),
+);
 
 const resultBucketParser: Parser<ResultBucket> = map3(makeResultBucket)(
-    fieldParser('id', stringParser),
-    fieldParser('title', stringParser),
-    fieldParser('description', stringParser),
-)
+	fieldParser('id', stringParser),
+	fieldParser('title', stringParser),
+	fieldParser('description', stringParser),
+);
 
-const knowledgeQuizParser: Parser<KnowledgeQuizAtom> =
-	pipe(
-		fieldParser('kind', numberParser),
-		andThen(equals(ElementKind.KnowledgeQuizAtom)),
-		(_) => map3(makeKnowledgeQuiz)(
-            fieldParser('id', stringParser),
-            fieldParser('questions', arrayParser(questionParser)),
-            fieldParser('resultGroups', arrayParser(resultGroupParser)),
-		)
-	)
+const knowledgeQuizParser: Parser<KnowledgeQuizAtom> = pipe(
+	fieldParser('kind', numberParser),
+	andThen(equals(ElementKind.KnowledgeQuizAtom)),
+	(_) =>
+		map3(makeKnowledgeQuiz)(
+			fieldParser('id', stringParser),
+			fieldParser('questions', arrayParser(questionParser)),
+			fieldParser('resultGroups', arrayParser(resultGroupParser)),
+		),
+);
 
-const personalityQuizParser: Parser<PersonalityQuizAtom> =
-	pipe(
-		fieldParser('kind', numberParser),
-		andThen(equals(ElementKind.PersonalityQuizAtom)),
-		(_) => map3(makePersonalityQuiz)(
-            fieldParser('id', stringParser),
-            fieldParser('questions', arrayParser(questionParser)),
-            fieldParser('resultBuckets', arrayParser(resultBucketParser)),
-		)
-	)
+const personalityQuizParser: Parser<PersonalityQuizAtom> = pipe(
+	fieldParser('kind', numberParser),
+	andThen(equals(ElementKind.PersonalityQuizAtom)),
+	(_) =>
+		map3(makePersonalityQuiz)(
+			fieldParser('id', stringParser),
+			fieldParser('questions', arrayParser(questionParser)),
+			fieldParser('resultBuckets', arrayParser(resultBucketParser)),
+		),
+);
 
-const parser: Parser<QuizAtom> =
-	oneOf<QuizAtom>([
-		knowledgeQuizParser,
-		personalityQuizParser,
-	]);
+const parser: Parser<QuizAtom> = oneOf<QuizAtom>([
+	knowledgeQuizParser,
+	personalityQuizParser,
+]);
 
 // ----- Exports ----- //
 
-export type {
-    KnowledgeQuizAtom,
-    PersonalityQuizAtom,
-    QuizAtom,
-};
+export type { KnowledgeQuizAtom, PersonalityQuizAtom, QuizAtom };
 
-export {
-    parser,
-};
+export { parser };

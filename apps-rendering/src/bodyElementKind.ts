@@ -25,6 +25,4 @@ const enum ElementKind {
 
 // ----- Exports ----- //
 
-export {
-    ElementKind,
-};
+export { ElementKind };
