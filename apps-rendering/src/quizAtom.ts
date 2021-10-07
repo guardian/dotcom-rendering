@@ -143,7 +143,9 @@ const aOrUndefinedParser = <A>(aParser: Parser<A>): Parser<A | undefined> =>
 
 function equals<A>(a: A) {
 	return (b: A): Parser<A> =>
-		a === b ? succeed(a) : fail(`${String(a)} is not equal to ${String(b)}`);
+		a === b
+			? succeed(a)
+			: fail(`${String(a)} is not equal to ${String(b)}`);
 }
 
 const answerParser: Parser<Answer> = map5(makeAnswer)(
