@@ -60,10 +60,7 @@ const parseQuizProps = (rawProps: string | undefined): Result<string, QuizProps>
 		rawProps,
 		resultFromNullable('The quiz atom did not have an accompanying element containing props'),
 		resultAndThen(p => fromUnsafe<unknown, string>(
-			() => {
-				const res = JSON.parse(p.replace(/&quot;/g, '"'));
-				return res;
-			},
+			() => JSON.parse(p.replace(/&quot;/g, '"')),
 			'The props for the quiz atom are not valid JSON',
 		)),
 		resultAndThen(parse(quizPropsParser)),
