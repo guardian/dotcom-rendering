@@ -343,38 +343,15 @@ const reminderWrapperStyle = css`
 	}
 `;
 
-interface ABTest {
-	name: string;
-	variant: string;
-}
-
-const buildUrl = (
-	contributionsUrl: string,
-	articleUrl: string,
-	campaignCode: string,
-	componentId: string,
-	abTest: ABTest,
-): string => {
-	const acquisitionData = {
-		source: 'GOOGLE_AMP',
-		componentType: 'ACQUISITIONS_EPIC',
-		componentId,
-		campaignCode,
-		abTest,
-		referrerUrl: articleUrl,
-	};
-	return `${contributionsUrl}?INTCMP=${campaignCode}&acquisitionData=${JSON.stringify(
-		acquisitionData,
-	)}`;
-};
-
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-	const supportDotcomComponentsUrl = 'http://localhost:8082';
-	// process.env.GU_STAGE === 'PROD'
-	// 	? 'https://contributions.guardianapis.com'
-	// 	: 'https://contributions.code.dev-guardianapis.com';
+	const supportDotcomComponentsUrl =
+		process.env.GU_STAGE === 'PROD'
+			? 'https://contributions.guardianapis.com'
+			: process?.env?.SDC_URL ??
+			  'https://contributions.code.dev-guardianapis.com';
+
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
-	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
+	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS&webUrl=${webURL}`;
 
 	return (
 		<div>
@@ -458,9 +435,6 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 						<MoustacheSection name="choiceCards">
 							<div css={choiceCardContainer}>
 								<br />
-								<p data-amp-bind-text="epicState.choiceCards.choiceCardSelection.amount" />
-								<p data-amp-bind-text="epicState.choiceCards.choiceCardSelection.frequency" />
-								<br />
 								<div css={choiceCardGroupRow}>
 									<button
 										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
@@ -507,31 +481,15 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 
 						<div
 							css="buttonsWrapper"
-							data-amp-bind-hidden="epicState.hideButtons"
+							data-amp-bind-hidden="epicState.reminder.hideButtons"
 						>
 							<div css={buttonsStyle}>
 								<div>
 									<MoustacheSection name="cta">
+										{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 										<a
 											id="primaryCta"
-											href={buildUrl(
-												moustacheVariable('url'),
-												webURL,
-												moustacheVariable(
-													'campaignCode',
-												),
-												moustacheVariable(
-													'componentId',
-												),
-												{
-													name: moustacheVariable(
-														'testName',
-													),
-													variant: moustacheVariable(
-														'variantName',
-													),
-												},
-											)}
+											data-amp-bind-href="epicState.choiceCards ? epicState.ctaUrl + '&selected-contribution-type=' + epicState.choiceCards.choiceCardSelection.frequency + '&selected-amount=' + epicState.choiceCards.choiceCardSelection.amount : epicState.ctaUrl"
 											css={yellowButtonStyle}
 										>
 											<MoustacheVariable name="text" />
@@ -576,7 +534,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<div css={reminderFormTopStyle}>
 								<div
 									css={epicHeaderStyle}
-									data-amp-bind-text="epicState.reminder.headerText"
+									data-amp-bind-text="'Remind me in ' + epicState.reminder.reminderLabel"
 								/>
 								<button
 									css={closeButtonStyle}
