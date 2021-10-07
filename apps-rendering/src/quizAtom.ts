@@ -142,7 +142,8 @@ const aOrUndefinedParser = <A>(aParser: Parser<A>): Parser<A | undefined> =>
 	pipe(maybe(aParser), map(withDefault<A | undefined>(undefined)));
 
 function equals<A>(a: A) {
-	return (b: A): Parser<A> => (a === b ? succeed(a) : fail(''));
+	return (b: A): Parser<A> =>
+		a === b ? succeed(a) : fail(`${a} is not equal to ${b}`);
 }
 
 const answerParser: Parser<Answer> = map5(makeAnswer)(
