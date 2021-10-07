@@ -317,7 +317,10 @@ const parseGenericEmbedKind =
 		if (element.embedTypeData?.source === 'TikTok') {
 			return EmbedKind.TikTok;
 		}
-		if (isEmailSignUp(parser)(html)) {
+		if (
+			isEmailSignUp(parser)(html) ||
+			element.embedTypeData?.alt === 'Email signup'
+		) {
 			return EmbedKind.EmailSignup;
 		}
 		return EmbedKind.Generic;
