@@ -149,6 +149,7 @@ type Props = {
 	role?: RoleType | 'richLink';
 	id?: string;
 	isNumberedListTitle?: boolean;
+	className?: string;
 };
 
 const mainMediaFigureStyles = css`
@@ -161,6 +162,7 @@ export const Figure = ({
 	id,
 	isMainMedia,
 	isNumberedListTitle = false,
+	className = '',
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -181,6 +183,7 @@ export const Figure = ({
 			data-spacefinder-ignore={
 				isNumberedListTitle ? 'numbered-list-title' : null
 			}
+			className={className}
 		>
 			{children}
 		</figure>

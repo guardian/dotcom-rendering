@@ -8,7 +8,7 @@ import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
 
 import {

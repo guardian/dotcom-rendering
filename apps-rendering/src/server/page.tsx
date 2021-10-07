@@ -17,7 +17,6 @@ import Scripts from 'components/scripts';
 import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
-import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
@@ -33,6 +32,8 @@ interface Page {
 // ----- Setup ----- //
 
 const docParser = JSDOM.fragment.bind(null);
+const emotionCache = createCache({ key: 'ar' });
+const emotionServer = createEmotionServer(emotionCache);
 
 // ----- Functions ----- //
 
@@ -60,10 +61,8 @@ const scriptName = ({ design, display }: Format): Option<string> => {
 const shouldHideAds = (request: RenderingRequest): boolean =>
 	request.content.fields?.shouldHideAdverts ?? false;
 
-const styles = (format: Format): string => {
-	const bg = format.design === Design.Media ? background.inverse : 'white';
-	return `
-        ${pageFonts}
+const styles = (format: Format): string => `
+    ${pageFonts}
 
     body {
         background: ${
@@ -77,20 +76,10 @@ const styles = (format: Format): string => {
 
     @media (prefers-color-scheme: dark) {
         body {
-            background: ${bg};
-            margin: 0;
-            font-family: 'Guardian Text Egyptian Web';
-            overflow-x: hidden;
-            line-height: 1.5;
+            background: transparent;
         }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: transparent;
-            }
-        }
-    `;
-};
+    }
+`;
 
 function renderHead(
 	item: Item,
@@ -112,7 +101,9 @@ function renderHead(
 		inlineStyles,
 		isEditions,
 	);
-	const meta = h(Meta, { title: request.content.webTitle, cspString });
+	const meta = (
+		<Meta title={request.content.webTitle} cspString={cspString} />
+	);
 
 	return `
         ${renderToString(meta)}
@@ -125,13 +116,10 @@ function renderHead(
     `;
 }
 
-const cache = createCache({ key: 'ar' });
-const emotionServer = createEmotionServer(cache);
-
 const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
 	emotionServer.extractCritical(
 		renderToString(
-			<CacheProvider value={cache}>
+			<CacheProvider value={emotionCache}>
 				<Layout item={item} shouldHideAds={shouldHideAds(request)} />
 			</CacheProvider>,
 		),

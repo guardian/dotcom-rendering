@@ -45,6 +45,7 @@ type Props = {
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
 	element?: 'div' | 'article' | 'aside' | 'nav'; // ElementContainer is generally a top-level wrapper
+	className?: string;
 };
 
 export const ElementContainer = ({
@@ -58,6 +59,7 @@ export const ElementContainer = ({
 	shouldCenter = true,
 	children,
 	element = 'div',
+	className,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -81,7 +83,7 @@ export const ElementContainer = ({
 			// Create a react element from the tagName passed in OR
 			// default to <div>
 			return _jsx(`${element}`, {
-				className: style,
+				className: className ? `${style} ${className}` : style,
 				children: child,
 			});
 		}}

@@ -9,7 +9,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { Compiler, Configuration, ResolveOptions } from 'webpack';
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import nodeExternals from 'webpack-node-externals';
 import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
 import { WebpackPluginInstance } from 'webpack';
 
@@ -43,7 +42,6 @@ function resolve(
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
 		alias: {
 			logger: path.resolve(__dirname, `src/logger/${loggerName}`),
-			react: path.resolve('./node_modules/react'),
 		},
 	};
 
@@ -83,14 +81,6 @@ const serverConfig = (
 		mode,
 		entry: 'server/server.ts',
 		target: 'node',
-		externals: isProd
-			? []
-			: [
-					nodeExternals({
-						allowlist: [/@guardian/],
-					}),
-			  ],
-
 		node: {
 			__dirname: false,
 		},
