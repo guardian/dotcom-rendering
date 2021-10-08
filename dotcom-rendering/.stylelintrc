@@ -7,9 +7,9 @@
   "rules": {
     "no-duplicate-selectors": null,
     "no-descending-specificity": null,
-    "property-blacklist": [["font-family"], { "message": "Please use the typography functions from src-foundations/typography"}],
+    "property-disallowed-list": [["font-family"], { "message": "Please use the typography functions from src-foundations/typography"}],
     "color-no-hex": [true, { "message": "Please use the src-foundations palette variables instead of hex values"}],
-    "declaration-property-value-blacklist": [{
+    "declaration-property-value-disallowed-list": [{
         "color": ["/^rgba/"]
     }, { "message": "Please use the src-foundations palette variables instead of rgba values"}]
   }
