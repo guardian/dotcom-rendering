@@ -69,9 +69,9 @@ Go to [apps rendering](apps-rendering/README.md) for more details.
 
 > Note: This is only being used for dotcom-rendering and common-rendering, not apps-rendering
 
-When updating, adding, or removing packages for a specific sub-project (e.g dotcom-rendering), it should be done with the `yarn workspace` command.
+When updating, adding, or removing packages for a specific sub-project (e.g dotcom-rendering), it should be done with the `yarn workspace` command in the root directory.
 
-Some examples (all run in ROOT directory)
+Some examples (all run in root directory)
 
 ```
 # General usage
