@@ -243,7 +243,7 @@
     "globals": {
       "ts-jest": {
         "diagnostics": false,
-        "tsConfigFile": "tsconfig.test.json"
+        "tsConfig": "tsconfig.test.json"
       }
     },
     "testMatch": [
