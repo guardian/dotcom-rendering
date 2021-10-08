@@ -5,9 +5,12 @@
   "license": "Apache-2.0",
   "tocList": "README.md docs/contributing/**",
   "private": true,
-	"workspaces": {
-		"nohoist": ["html-minifier", "html-minifier/**"]
-	},
+  "workspaces": {
+    "nohoist": [
+      "html-minifier",
+      "html-minifier/**"
+    ]
+  },
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx && yarn lint-cypress",
     "lint-cypress": "eslint ./cypress",
@@ -104,6 +107,7 @@
     "lodash.get": "^4.4.2",
     "log4js": "6.3.0",
     "minify-css-string": "^1.0.0",
+    "node-fetch": "2.6.1",
     "ophan-tracker-js": "^1.3.28",
     "pm2": "5.0.0",
     "prettier-eslint": "^11.0.0",
@@ -189,7 +193,6 @@
     "lint-staged": "^10.5.4",
     "load-json-file": "^6.2.0",
     "lodash.clonedeep": "^4.5.0",
-    "node-fetch": "^2.6.4",
     "nodemon": "^2.0.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
