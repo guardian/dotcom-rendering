@@ -64,3 +64,28 @@ Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
 ### apps rendering
 
 Go to [apps rendering](apps-rendering/README.md) for more details.
+
+## Using yarn workspaces
+
+> Note: This is only being used for dotcom-rendering and common-rendering, not apps-rendering
+
+When updating, adding, or removing packages for a specific sub-project (e.g dotcom-rendering), it should be done with the `yarn workspace` command.
+
+Some examples (all run in ROOT directory)
+
+```
+# General usage
+yarn workspace <package name> <yarn command> < ... ags >
+# <package name> should be the "name" specified in the package.json, not the subdirectory name, e.g @guardian/common-rendering, or @guardian/dotcom-rendering
+
+# e.g
+
+# Add a package
+yarn workspace @guadian/dotcom-rendering add my-new-package
+
+# Remove a package
+yarn workspace @guadian/dotcom-rendering remove my-new-package
+
+# Update a package
+yarn workspace @guadian/dotcom-rendering upgrade my-new-package
+```
