@@ -72,7 +72,7 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) => {
 						<ToggleSwitch
 							device="ios"
 							label={'Get alerts on this story'}
-							onChange={(e) => {
+							onChange={(e): void => {
 								console.log('changed toggle');
 							}}
 						></ToggleSwitch>

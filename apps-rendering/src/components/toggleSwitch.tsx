@@ -1,9 +1,9 @@
-import { FormControlLabel, FormGroup, Switch } from '@mui/material';
-import { FC } from 'react';
-import { createTheme, styled } from '@mui/material/styles';
+import { css } from '@emotion/react';
 import { success } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
-import { css } from '@emotion/react';
+import { FormControlLabel, FormGroup, Switch } from '@mui/material';
+import { createTheme, styled } from '@mui/material/styles';
+import type { FC } from 'react';
 
 interface Props {
 	defaultChecked?: boolean;
