@@ -114,10 +114,12 @@ const darkTheme = createTheme({
 });
 
 const labelStyles = css`
+	padding-left: 8px;
 	span {
 		font-size: 0.9375rem;
 		${textSans.small()};
 		color: #fff;
+		line-height: 1;
 	}
 `;
 

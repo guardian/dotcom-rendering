@@ -23,6 +23,11 @@ const styles = css`
 	margin-bottom: ${remSpace[5]};
 `;
 
+const blogStyles = css`
+	display: block;
+	margin-bottom: ${remSpace[5]};
+`;
+
 const withBylineStyles = css`
 	margin-bottom: ${remSpace[5]};
 `;
@@ -35,26 +40,48 @@ const withBylineTextStyles = css`
 	padding-top: ${remSpace[1]};
 `;
 
+const metaButtomStyles = css`
+	display: flex;
+`;
+
+const alertStyles = css`
+	flex-grow: 1;
+`;
+
+const isBlog = (design: Design): boolean =>
+	design === Design.LiveBlog || design === Design.DeadBlog;
+
 const MetadataWithByline: FC<Props> = ({ item }: Props) => {
-	//const [checked, setChecked] = useState(true);
 	return (
-		<div css={css(styles, withBylineStyles)}>
+		<div
+			css={css(
+				styles,
+				withBylineStyles,
+				isBlog(item.design) && blogStyles,
+			)}
+		>
 			<Avatar {...item} />
 			<div css={css(textStyles, withBylineTextStyles)}>
 				<Byline {...item} />
 				<Dateline date={item.publishDate} theme={item.theme} />
 				<Follow {...item} />
 			</div>
-			<CommentCount count={item.commentCount} {...item} />
-			<div>
-				<ToggleSwitch
-					device="android"
-					label={'Get alerts on this story'}
-					onChange={(e) => {
-						console.log('changed toggle');
-					}}
-				></ToggleSwitch>
-			</div>
+			{isBlog(item.design) ? (
+				<div css={metaButtomStyles}>
+					<div css={alertStyles}>
+						<ToggleSwitch
+							device="ios"
+							label={'Get alerts on this story'}
+							onChange={(e) => {
+								console.log('changed toggle');
+							}}
+						></ToggleSwitch>
+					</div>
+					<CommentCount count={item.commentCount} {...item} />
+				</div>
+			) : (
+				<CommentCount count={item.commentCount} {...item} />
+			)}
 		</div>
 	);
 };
