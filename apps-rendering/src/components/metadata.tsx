@@ -10,6 +10,7 @@ import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import type { Item } from 'item';
 import type { FC } from 'react';
+import { ToggleSwitch } from './toggleSwitch';
 
 // ----- Component ----- //
 
@@ -34,17 +35,29 @@ const withBylineTextStyles = css`
 	padding-top: ${remSpace[1]};
 `;
 
-const MetadataWithByline: FC<Props> = ({ item }: Props) => (
-	<div css={css(styles, withBylineStyles)}>
-		<Avatar {...item} />
-		<div css={css(textStyles, withBylineTextStyles)}>
-			<Byline {...item} />
-			<Dateline date={item.publishDate} theme={item.theme} />
-			<Follow {...item} />
+const MetadataWithByline: FC<Props> = ({ item }: Props) => {
+	//const [checked, setChecked] = useState(true);
+	return (
+		<div css={css(styles, withBylineStyles)}>
+			<Avatar {...item} />
+			<div css={css(textStyles, withBylineTextStyles)}>
+				<Byline {...item} />
+				<Dateline date={item.publishDate} theme={item.theme} />
+				<Follow {...item} />
+			</div>
+			<CommentCount count={item.commentCount} {...item} />
+			<div>
+				<ToggleSwitch
+					device="android"
+					label={'Get alerts on this story'}
+					onChange={(e) => {
+						console.log('changed toggle');
+					}}
+				></ToggleSwitch>
+			</div>
 		</div>
-		<CommentCount count={item.commentCount} {...item} />
-	</div>
-);
+	);
+};
 
 const ShortMetadata: FC<Props> = ({ item }: Props) => (
 	<div css={styles}>

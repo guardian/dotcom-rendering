@@ -49,6 +49,7 @@
     "@guardian/src-text-area": "^3.9.0",
     "@guardian/src-text-input": "^3.9.0",
     "@guardian/types": "^8.1.0",
+    "@mui/material": "^5.0.2",
     "@types/jsdom": "^16.2.13",
     "@types/uuid": "^8.3.1",
     "@types/webpack-node-externals": "^2.5.2",
