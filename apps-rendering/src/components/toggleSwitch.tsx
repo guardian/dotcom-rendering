@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { success } from '@guardian/src-foundations';
+import { neutral, success } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { FormControlLabel, FormGroup, Switch } from '@mui/material';
 import { createTheme, styled } from '@mui/material/styles';
@@ -8,8 +8,8 @@ import type { FC } from 'react';
 interface Props {
 	defaultChecked?: boolean;
 	label?: string;
-	colorTheme?: 'dark' | 'light';
-	device: 'ios' | 'android';
+	isDarkBackground?: boolean;
+	device?: 'ios' | 'android';
 	checked?: boolean;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -113,12 +113,12 @@ const darkTheme = createTheme({
 	},
 });
 
-const labelStyles = css`
+const labelStyles = (isDarkBackground: boolean) => css`
 	padding-left: 8px;
 	span {
 		font-size: 0.9375rem;
 		${textSans.small()};
-		color: #fff;
+		color: ${isDarkBackground ? neutral[7] : 'fff'};
 		line-height: 1;
 	}
 `;
@@ -126,21 +126,23 @@ const labelStyles = css`
 export const ToggleSwitch: FC<Props> = ({
 	label,
 	device = 'android',
-	colorTheme = 'dark',
+	isDarkBackground = false,
 	defaultChecked = false,
 	...props
 }: Props) => {
+	console.log("device: ")
+	console.log(device)
 	if (label) {
 		return (
-			<div css={labelStyles}>
+			<div css={labelStyles(isDarkBackground)}>
 				<FormGroup>
 					<FormControlLabel
 						control={
-							device === 'ios' ? (
+							device === 'ios' ? (								
 								<IOSSwitch
 									sx={{ m: 1 }}
 									theme={
-										colorTheme === 'dark'
+										isDarkBackground
 											? darkTheme
 											: lightTheme
 									}
@@ -152,7 +154,7 @@ export const ToggleSwitch: FC<Props> = ({
 								<AndroidSwitch
 									sx={{ m: 1 }}
 									theme={
-										colorTheme === 'dark'
+										isDarkBackground
 											? darkTheme
 											: lightTheme
 									}
@@ -170,16 +172,29 @@ export const ToggleSwitch: FC<Props> = ({
 	} else {
 		const ariaLabel = { inputProps: { 'aria-label': 'Toggle switch' } };
 		return (
-			<div css={labelStyles}>
+			<div css={labelStyles(isDarkBackground)}>
+				{device === 'ios' ? 
 				<IOSSwitch
 					sx={{ m: 1 }}
-					theme={colorTheme === 'dark' ? darkTheme : lightTheme}
+					theme={isDarkBackground ? darkTheme : lightTheme}
 					defaultChecked={defaultChecked}
 					device={device}
 					{...props}
 					{...ariaLabel}
 				/>
+				: 
+				<AndroidSwitch
+					sx={{ m: 1 }}
+					theme={isDarkBackground ? darkTheme : lightTheme}
+					defaultChecked={defaultChecked}
+					device={device}
+					{...props}
+					{...ariaLabel}
+				/>
+				}
 			</div>
 		);
 	}
 };
+
+export default ToggleSwitch;
