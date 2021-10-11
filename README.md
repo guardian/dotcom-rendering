@@ -57,6 +57,10 @@ Make sure you have [Node.js](https://nodejs.org) installed.
 
 We recommend using [nvm](https://github.com/creationix/nvm) (especially combined with [this handy gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)). It is great at managing multiple versions of Node.js on one machine.
 
+### Install Pacakges
+
+run `yarn` in the root directory of this project to install packages for `dotcom-rendering`, `apps-rendering` (currenly post-install), and `common-rendering`.
+
 ### dotcom rendering
 
 Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
