@@ -186,15 +186,17 @@ interface AdTargetParam {
 	value: string | string[];
 }
 
-type AdTargeting =
-	| {
-			adUnit: string;
-			customParams: Record<string, unknown>;
-			disableAds?: false;
-	  }
-	| {
-			disableAds: true;
-	  };
+type AdTargetingEnabled = {
+	adUnit: string;
+	customParams: Record<string, unknown>;
+	disableAds?: false;	// allows conditional type narrowing
+}
+
+type AdTargetingDisabled = {
+	disableAds: true;
+}
+
+type AdTargeting = AdTargetingEnabled | AdTargetingDisabled;
 
 type AdTargetingBuilder = () => AdTargeting;
 
