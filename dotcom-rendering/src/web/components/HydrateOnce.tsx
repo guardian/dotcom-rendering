@@ -50,6 +50,17 @@ export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
 	const { start, end } = initPerf('hydration');
 	const element = document.getElementById(rootId);
 	if (!element) return null;
+
+	// If a component has server-rendered placeholders and we'd like to replace the entire content
+	// then we'd expect to use a Portal, not use hydration. For interactive block elements we have
+	// a hybrid situation because a single component supports boot scripts that replace the entire
+	// component content as well as appending new child elements. Note that interactive block
+	// components have multiple placeholders hence the need for querySelectorAll.
+	const placeholderElements = element.querySelectorAll(
+		'[data-name="placeholder"]',
+	);
+	if (placeholderElements.length > 0) placeholderElements.forEach(el => el.remove());
+
 	start();
 	ReactDOM.hydrate(children, element, () => {
 		end();

@@ -86,16 +86,26 @@ const decideHeight = (role: RoleType) => {
 			return 500;
 	}
 };
+const getMinHeight = (role: RoleType, loaded: boolean) => {
+	if (loaded) {
+		return `auto`;
+	}
+	return `${decideHeight(role)}px`;
+};
 const wrapperStyle = ({
 	format,
+	role,
+	loaded,
 	palette,
 }: {
 	format: ArticleFormat;
+	role: RoleType;
+	loaded: boolean;
 	palette: Palette;
 }) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 	background-color: ${palette.background.article};
-	min-height: auto;
+	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
 `;
 
@@ -264,7 +274,7 @@ export const InteractiveBlockComponent = ({
 							wrapperRef.current,
 							document,
 							window.guardian.config,
-						);
+							);
 					}
 				},
 			);
@@ -278,7 +288,7 @@ export const InteractiveBlockComponent = ({
 			<figure
 				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
-				css={wrapperStyle({ format, palette })}
+				css={wrapperStyle({ format, role, loaded, palette })}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					role,
@@ -288,16 +298,16 @@ export const InteractiveBlockComponent = ({
 			>
 				{!loaded && (
 					<>
-						<Placeholder
+						<Placeholder // removed by HydrateOnce
 							height={decideHeight(role)}
 							shouldShimmer={false}
-							/>
+						/>
 						<a
 							ref={placeholderLinkRef}
-							data-name="placeholder"
+							data-name="placeholder" // removed by HydrateOnce
 							css={placeholderLinkStyle}
 							href={url}
-							>
+						>
 							{alt}
 						</a>
 					</>

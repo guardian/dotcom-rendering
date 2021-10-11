@@ -807,7 +807,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</HydrateOnce>
 			))}
 			{interactiveElements.map((interactiveBlock) => (
-				<Portal rootId={interactiveBlock.elementId}>
+				<HydrateOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent
 						url={interactiveBlock.url}
 						scriptUrl={interactiveBlock.scriptUrl}
@@ -817,7 +817,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						format={format}
 						palette={palette}
 					/>
-				</Portal>
+				</HydrateOnce>
 			))}
 			{interactiveContentsElement.map((interactiveBlock) => (
 				<HydrateOnce rootId={interactiveBlock.elementId}>
