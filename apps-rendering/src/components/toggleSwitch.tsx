@@ -52,7 +52,7 @@ const AndroidSwitch = styled((props: Props) => (
 	'& .MuiSwitch-track': {
 		backgroundColor:
 			theme.palette.mode === 'light'
-				? 'rgba(153, 153, 153, 0.4)'
+				? 'rgba(112, 112, 112, 0.4)'
 				: 'rgba(256,256,256,0.6)',
 	},
 }));
@@ -92,7 +92,7 @@ const IOSSwitch = styled((props: Props) => (
 		borderRadius: 30 / 2,
 		backgroundColor:
 			theme.palette.mode === 'light'
-				? 'rgba(153, 153, 153, 0.4)'
+				? 'rgba(112, 112, 112, 0.4)'
 				: 'rgba(256,256,256,0.6)',
 		opacity: 1,
 		transition: theme.transitions.create(['background-color'], {
@@ -115,11 +115,11 @@ const darkTheme = createTheme({
 
 const labelStyles = (isDarkBackground: boolean): SerializedStyles => css`
 	padding-left: 8px;
-	span {
+	label > span:nth-child(2) {
 		font-size: 0.9375rem;
 		${textSans.small()};
 		color: ${isDarkBackground ? '#fff' : neutral[7]};
-		line-height: 1;
+		transform: translateY(-2px);
 	}
 `;
 
