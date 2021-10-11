@@ -274,7 +274,7 @@ export const InteractiveBlockComponent = ({
 							wrapperRef.current,
 							document,
 							window.guardian.config,
-							);
+						);
 					}
 				},
 			);
