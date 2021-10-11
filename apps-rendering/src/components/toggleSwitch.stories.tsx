@@ -8,37 +8,24 @@ import ToggleSwitch from './toggleSwitch';
 
 // ----- Setup ----- //
 
-
 // ----- Stories ----- //
 
-const Default = (): ReactElement => (
-	<ToggleSwitch/>
-);
+const Default = (): ReactElement => <ToggleSwitch />;
 
-const IOS = (): ReactElement => (
-	<ToggleSwitch
-		device="ios"
-	/>
-);
+const IOS = (): ReactElement => <ToggleSwitch device="ios" />;
 
 const AndroidLabel = (): ReactElement => (
-	<ToggleSwitch
-		device="android"
-		label={'Get alerts on this story'}
-	/>
+	<ToggleSwitch device="android" label={'Get alerts on this story'} />
 );
 
 const IOSLabel = (): ReactElement => (
-	<ToggleSwitch
-		device="ios"
-		label={'Get alerts on this story'}
-	/>
+	<ToggleSwitch device="ios" label={'Get alerts on this story'} />
 );
 
 const darkBackgroundStyle = css`
 	width: 100%;
 	height: 100%;
-	background: ${news[200]}
+	background: ${news[200]};
 `;
 
 const IOSDarkBackground = (): ReactElement => (
@@ -50,7 +37,6 @@ const IOSDarkBackground = (): ReactElement => (
 		/>
 	</div>
 );
-
 
 const AndroidDarkBackground = (): ReactElement => (
 	<div css={darkBackgroundStyle}>
@@ -70,4 +56,11 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, IOS, AndroidLabel, IOSLabel, IOSDarkBackground, AndroidDarkBackground};
+export {
+	Default,
+	IOS,
+	AndroidLabel,
+	IOSLabel,
+	IOSDarkBackground,
+	AndroidDarkBackground,
+};

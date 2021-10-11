@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, success } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -113,7 +114,7 @@ const darkTheme = createTheme({
 	},
 });
 
-const labelStyles = (isDarkBackground: boolean) => css`
+const labelStyles = (isDarkBackground: boolean): SerializedStyles => css`
 	padding-left: 8px;
 	span {
 		font-size: 0.9375rem;
@@ -130,15 +131,15 @@ export const ToggleSwitch: FC<Props> = ({
 	defaultChecked = false,
 	...props
 }: Props) => {
-	console.log("device: ")
-	console.log(device)
+	console.log('device: ');
+	console.log(device);
 	if (label) {
 		return (
 			<div css={labelStyles(isDarkBackground)}>
 				<FormGroup>
 					<FormControlLabel
 						control={
-							device === 'ios' ? (								
+							device === 'ios' ? (
 								<IOSSwitch
 									sx={{ m: 1 }}
 									theme={
@@ -173,25 +174,25 @@ export const ToggleSwitch: FC<Props> = ({
 		const ariaLabel = { inputProps: { 'aria-label': 'Toggle switch' } };
 		return (
 			<div css={labelStyles(isDarkBackground)}>
-				{device === 'ios' ? 
-				<IOSSwitch
-					sx={{ m: 1 }}
-					theme={isDarkBackground ? darkTheme : lightTheme}
-					defaultChecked={defaultChecked}
-					device={device}
-					{...props}
-					{...ariaLabel}
-				/>
-				: 
-				<AndroidSwitch
-					sx={{ m: 1 }}
-					theme={isDarkBackground ? darkTheme : lightTheme}
-					defaultChecked={defaultChecked}
-					device={device}
-					{...props}
-					{...ariaLabel}
-				/>
-				}
+				{device === 'ios' ? (
+					<IOSSwitch
+						sx={{ m: 1 }}
+						theme={isDarkBackground ? darkTheme : lightTheme}
+						defaultChecked={defaultChecked}
+						device={device}
+						{...props}
+						{...ariaLabel}
+					/>
+				) : (
+					<AndroidSwitch
+						sx={{ m: 1 }}
+						theme={isDarkBackground ? darkTheme : lightTheme}
+						defaultChecked={defaultChecked}
+						device={device}
+						{...props}
+						{...ariaLabel}
+					/>
+				)}
 			</div>
 		);
 	}
