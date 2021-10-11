@@ -14,11 +14,11 @@ const Default = (): ReactElement => <ToggleSwitch />;
 
 const IOS = (): ReactElement => <ToggleSwitch device="ios" />;
 
-const AndroidLabel = (): ReactElement => (
+const AndroidLabelLightBackground = (): ReactElement => (
 	<ToggleSwitch device="android" label={'Get alerts on this story'} />
 );
 
-const IOSLabel = (): ReactElement => (
+const IOSLabelLightBackground = (): ReactElement => (
 	<ToggleSwitch device="ios" label={'Get alerts on this story'} />
 );
 
@@ -59,8 +59,8 @@ export default {
 export {
 	Default,
 	IOS,
-	AndroidLabel,
-	IOSLabel,
+	AndroidLabelLightBackground,
+	IOSLabelLightBackground,
 	IOSDarkBackground,
 	AndroidDarkBackground,
 };

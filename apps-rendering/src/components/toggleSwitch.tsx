@@ -36,10 +36,7 @@ const AndroidSwitch = styled((props: Props) => (
 			'& + .MuiSwitch-track': {
 				opacity: 1,
 				border: 0,
-				backgroundColor:
-					theme.palette.mode === 'light'
-						? 'rgba(153, 153, 153, 0.4)'
-						: 'rgb(88,208,139, 0.5)',
+				backgroundColor: 'rgb(88,208,139, 0.5)',
 			},
 			'& .MuiSwitch-thumb': {
 				backgroundColor: success[500],
@@ -50,6 +47,7 @@ const AndroidSwitch = styled((props: Props) => (
 	'& .MuiSwitch-thumb': {
 		width: 18,
 		height: 18,
+		backgroundColor: '#fff',
 	},
 	'& .MuiSwitch-track': {
 		backgroundColor:
@@ -88,13 +86,14 @@ const IOSSwitch = styled((props: Props) => (
 		boxSizing: 'border-box',
 		width: 26,
 		height: 26,
+		backgroundColor: '#fff',
 	},
 	'& .MuiSwitch-track': {
 		borderRadius: 30 / 2,
 		backgroundColor:
 			theme.palette.mode === 'light'
 				? 'rgba(153, 153, 153, 0.4)'
-				: 'rgba(256,256,256,0.25)',
+				: 'rgba(256,256,256,0.6)',
 		opacity: 1,
 		transition: theme.transitions.create(['background-color'], {
 			duration: 500,
@@ -119,7 +118,7 @@ const labelStyles = (isDarkBackground: boolean): SerializedStyles => css`
 	span {
 		font-size: 0.9375rem;
 		${textSans.small()};
-		color: ${isDarkBackground ? neutral[7] : 'fff'};
+		color: ${isDarkBackground ? '#fff' : neutral[7]};
 		line-height: 1;
 	}
 `;
