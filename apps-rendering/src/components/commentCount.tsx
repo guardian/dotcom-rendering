@@ -19,7 +19,7 @@ interface Props extends Format {
 	commentable: boolean;
 }
 
-const styles = (colour: string): SerializedStyles => css`
+const styles = (colour: string, darkColour: string): SerializedStyles => css`
 	${textSans.medium({ fontWeight: 'bold' })}
 	border: none;
 	background: none;
@@ -27,7 +27,7 @@ const styles = (colour: string): SerializedStyles => css`
 	padding-top: ${remSpace[3]};
 	color: ${colour};
 	${darkModeCss`
-        border-left: 1px solid ${neutral[20]};
+        border-left: 1px solid ${darkColour};
     `}
 `;
 
@@ -42,10 +42,10 @@ const getStyles = ({ theme, design }: Format): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
 	if (design === Design.LiveBlog || design === Design.DeadBlog) {
-		return styles(neutral[93]);
+		return styles(neutral[93], neutral[93]);
 	}
 
-	return styles(colours.kicker);
+	return styles(colours.kicker, neutral[20]);
 };
 
 const getBubbleStyles = ({ theme, design }: Format): SerializedStyles => {

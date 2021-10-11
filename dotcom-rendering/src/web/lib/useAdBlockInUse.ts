@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-import { isAdBlockInUse } from '@root/src/web/lib/detectAdBlocker';
+import { isAdBlockInUse } from '@guardian/commercial-core';
 
 /**
  * @description
