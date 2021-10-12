@@ -50,6 +50,7 @@ const AndroidSwitch = styled((props: Props) => (
 		backgroundColor: '#fff',
 	},
 	'& .MuiSwitch-track': {
+		opacity: 1,
 		backgroundColor:
 			theme.palette.mode === 'light'
 				? 'rgba(112, 112, 112, 0.4)'
