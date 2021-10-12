@@ -120,7 +120,7 @@ const labelStyles = (isDarkBackground: boolean): SerializedStyles => css`
 		font-size: 0.9375rem;
 		${textSans.small()};
 		color: ${isDarkBackground ? '#fff' : neutral[7]};
-		transform: translateY(-2px);
+		transform: translateY(-1px);
 	}
 `;
 
