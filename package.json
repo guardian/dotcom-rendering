@@ -26,7 +26,7 @@
 		"reset-css": "^5.0.1"
 	},
   "devDependencies": {
-    "@babel/core": "^7.15.0",
+    "@babel/core": "^7.15.8",
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-knobs": "^6.3.1",
     "@storybook/builder-webpack5": "^6.3.7",
