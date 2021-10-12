@@ -13,13 +13,15 @@ import type { FC } from 'react';
 
 // ----- Component ----- //
 
-const styles = (supportsDarkMode: boolean): SerializedStyles => css`
+const styles = css`
 	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
+`;
 
-	details[open] {
+const detailsStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	&[open] {
 		min-height: 44px;
 		max-height: 999px;
 		background-color: rgba(0, 0, 0, 0.8);
@@ -88,8 +90,8 @@ const ImageDetails: FC<Props> = ({
 	id,
 }: Props) =>
 	maybeRender(caption, (cap) => (
-		<figcaption css={styles(supportsDarkMode)}>
-			<details>
+		<figcaption css={styles}>
+			<details css={detailsStyles(supportsDarkMode)}>
 				<summary css={iconStyles(supportsDarkMode)}>
 					<span css={svgStyles}>
 						<SvgCamera />
