@@ -11,8 +11,6 @@ import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 
-const GUTTER = space[3];
-
 type Props = {
 	format: ArticleFormat;
 	block: Block;
@@ -28,7 +26,7 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<header
 			css={css`
-				padding-right: ${GUTTER}px;
+				padding-right: ${space[3]}px;
 				display: flex;
 				flex-direction: column;
 			`}
@@ -44,7 +42,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 		<h2
 			css={css`
 				${headline.xxsmall({ fontWeight: 'bold' })}
-				margin-bottom: ${space[3]}px;
+				margin-bottom: ${space[2]}px;
 			`}
 		>
 			{title}
