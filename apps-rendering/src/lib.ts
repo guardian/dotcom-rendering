@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { maybeRender, pipe } from '@guardian/common-rendering/src/lib';
 import type { Option, Result } from '@guardian/types';
 import {
 	err,
@@ -12,7 +13,6 @@ import {
 	some,
 	withDefault,
 } from '@guardian/types';
-import { maybeRender, pipe } from '@guardian/common-rendering/src/lib';
 
 // ----- Functions ----- //
 
