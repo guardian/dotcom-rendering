@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { background, neutral, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
+import type { Format } from '@guardian/types';
 import { Design, Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -29,7 +30,10 @@ const darkStyles: SerializedStyles = darkMode`
     }
 `;
 
-const styles: SerializedStyles = css`
+const isNotBlog = (format: Format): boolean =>
+	format.design !== Design.LiveBlog && format.design !== Design.DeadBlog;
+
+const styles = (format: Format): SerializedStyles => css`
 	margin-bottom: ${remSpace[3]};
 	color: ${text.primary};
 
@@ -42,7 +46,7 @@ const styles: SerializedStyles = css`
 		font-style: normal;
 	}
 
-	${darkStyles}
+	${isNotBlog(format) && darkStyles}
 `;
 
 const normalHeadline = css`
@@ -55,15 +59,13 @@ const thinHeadline = css`
 `;
 
 const immersive: SerializedStyles = css`
-	${styles}
 	${headline.xsmall({ fontWeight: 'light' })}
-    margin-top: ${remSpace[3]};
+	margin-top: ${remSpace[3]};
 `;
 
 const immersiveLabs: SerializedStyles = css`
-	${styles}
 	${textSans.large()}
-    margin-top: ${remSpace[3]};
+	margin-top: ${remSpace[3]};
 `;
 
 const liveblogStyles: SerializedStyles = css`
@@ -86,33 +88,35 @@ const media = css`
 `;
 
 const advertisementFeature = css`
-	${styles}
 	${textSans.medium()}
 `;
 
 const getStyles = (item: Item): SerializedStyles => {
+	const format = getFormat(item);
 	if (item.display === Display.Immersive) {
-		return item.theme === Special.Labs ? immersiveLabs : immersive;
+		return item.theme === Special.Labs
+			? css(styles(format), immersiveLabs)
+			: css(styles(format), immersive);
 	}
 
 	if (item.theme === Special.Labs) {
-		return advertisementFeature;
+		return css(styles(format), advertisementFeature);
 	}
 
 	switch (item.design) {
 		case Design.LiveBlog:
-			return css(styles, liveblogStyles);
+			return css(styles(format), liveblogStyles);
 		case Design.Review:
 		case Design.Feature:
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
-			return css(styles, thinHeadline);
+			return css(styles(format), thinHeadline);
 		case Design.Media:
 			return media;
 
 		default:
-			return css(styles, normalHeadline);
+			return css(styles(format), normalHeadline);
 	}
 };
 function content(standfirst: DocumentFragment, item: Item): ReactNode {

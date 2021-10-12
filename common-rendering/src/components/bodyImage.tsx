@@ -12,8 +12,8 @@ import type { Image } from "../image";
 import { darkModeCss } from "../lib";
 import type { Lightbox } from "../lightbox";
 import type { Sizes } from "../sizes";
-import { FigCaption } from "./figCaption";
-import { Img } from "./img";
+import FigCaption from "./figCaption";
+import Img from "./img";
 
 // ----- Setup ----- //
 
@@ -103,7 +103,7 @@ const getStyles = (
   }
 };
 
-export const BodyImage: FC<Props> = ({
+const BodyImage: FC<Props> = ({
   image,
   format,
   supportsDarkMode,
@@ -125,3 +125,7 @@ export const BodyImage: FC<Props> = ({
     </FigCaption>
   </figure>
 );
+
+// ----- Exports ----- //
+
+export default BodyImage;

@@ -255,7 +255,7 @@ Resources:
 
               chown -R dotcom-rendering:frontend ${App}
 
-              cd ${App}
+              cd ${App}/dotcom-rendering
 
               export TERM=xterm-256color
               export NODE_ENV=production

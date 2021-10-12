@@ -38,6 +38,9 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// Onwards Carousel (Related content etc)
+	'onwardsCarousel',
+
 	// Search link should be above The Guardian svg
 	'searchHeaderLink',
 	'TheGuardian',
