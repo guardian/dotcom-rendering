@@ -8,10 +8,14 @@ import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display, some } from '@guardian/types';
-import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
+import ImageDetails from '@guardian/common-rendering/src/components/imageDetails';
 import type { Image } from 'image';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
+
+// ----- Setup ----- //
+
+const captionId = 'header-image-caption';
 
 // ----- Subcomponents ----- //
 
@@ -26,9 +30,11 @@ const Caption: FC<CaptionProps> = ({ format, image }: CaptionProps) => {
 			return null;
 		default:
 			return (
-				<HeaderImageCaption
+				<ImageDetails
 					caption={image.nativeCaption}
 					credit={image.credit}
+					supportsDarkMode
+					id={captionId}
 				/>
 			);
 	}

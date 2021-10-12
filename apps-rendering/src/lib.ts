@@ -12,7 +12,7 @@ import {
 	some,
 	withDefault,
 } from '@guardian/types';
-import type { ReactElement } from 'react';
+import { maybeRender, pipe } from '@guardian/common-rendering/src/lib';
 
 // ----- Functions ----- //
 
@@ -20,29 +20,6 @@ const compose =
 	<A, B, C>(f: (_b: B) => C, g: (_a: A) => B) =>
 	(a: A): C =>
 		f(g(a));
-
-function pipe<A, B>(a: A, f: (_a: A) => B): B;
-function pipe<A, B, C>(a: A, f: (_a: A) => B, g: (_b: B) => C): C;
-function pipe<A, B, C, D>(
-	a: A,
-	f: (_a: A) => B,
-	g: (_b: B) => C,
-	h: (_c: C) => D,
-): D;
-function pipe<A, B, C, D>(
-	a: A,
-	f: (_a: A) => B,
-	g?: (_b: B) => C,
-	h?: (_c: C) => D,
-): unknown {
-	if (g !== undefined && h !== undefined) {
-		return h(g(f(a)));
-	} else if (g !== undefined) {
-		return g(f(a));
-	}
-
-	return f(a);
-}
 
 const identity = <A>(a: A): A => a;
 
@@ -76,11 +53,6 @@ function errorToString(error: unknown, fallback: string): string {
 // https://github.com/typescript-eslint/typescript-eslint/issues/2118#issuecomment-641464651
 const isObject = (a: unknown): a is Record<string, unknown> =>
 	typeof a === 'object' && a !== null;
-
-const maybeRender = <A>(
-	oa: Option<A>,
-	f: (a: A) => ReactElement | null,
-): ReactElement | null => fold(f, null)(oa);
 
 function handleErrors(response: Response): Response | never {
 	if (!response.ok) {
