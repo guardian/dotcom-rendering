@@ -23,6 +23,7 @@ type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	branding?: Branding;
+	guardianBaseURL: string;
 };
 
 const meta = css`
@@ -256,6 +257,7 @@ export const ArticleMeta = ({
 	tags,
 	primaryDateline,
 	secondaryDateline,
+	guardianBaseURL,
 }: Props) => {
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
@@ -323,6 +325,7 @@ export const ArticleMeta = ({
 									tags={tags}
 									format={format}
 									palette={palette}
+									guardianBaseURL={guardianBaseURL}
 								/>
 							)}
 							<Dateline

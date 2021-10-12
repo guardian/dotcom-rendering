@@ -427,6 +427,7 @@ export const ShowcaseLayout = ({
 									palette={palette}
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
+									guardianBaseURL={CAPI.guardianBaseURL}
 								/>
 								{age && (
 									<AgeWarning
@@ -489,6 +490,7 @@ export const ShowcaseLayout = ({
 								secondaryDateline={
 									CAPI.webPublicationSecondaryDateDisplay
 								}
+								guardianBaseURL={CAPI.guardianBaseURL}
 							/>
 						</div>
 					</GridItem>

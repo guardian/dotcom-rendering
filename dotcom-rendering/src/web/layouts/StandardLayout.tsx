@@ -576,6 +576,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									tags={CAPI.tags}
 									byline={CAPI.author.byline}
 									palette={palette}
+									guardianBaseURL={CAPI.guardianBaseURL}
 								/>
 								{age && (
 									<AgeWarning
@@ -646,6 +647,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								secondaryDateline={
 									CAPI.webPublicationSecondaryDateDisplay
 								}
+								guardianBaseURL={CAPI.guardianBaseURL}
 							/>
 						</div>
 					</GridItem>

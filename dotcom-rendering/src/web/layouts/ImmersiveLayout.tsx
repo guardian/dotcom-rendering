@@ -411,6 +411,7 @@ export const ImmersiveLayout = ({
 										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
+										guardianBaseURL={CAPI.guardianBaseURL}
 									/>
 								</ContainerLayout>
 							</Box>
@@ -480,6 +481,7 @@ export const ImmersiveLayout = ({
 										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
+										guardianBaseURL={CAPI.guardianBaseURL}
 									/>
 								</div>
 							)}
@@ -498,6 +500,7 @@ export const ImmersiveLayout = ({
 							byline={
 								CAPI.author.byline ? CAPI.author.byline : ''
 							}
+							guardianBaseURL={CAPI.guardianBaseURL}
 						/>
 					</GridItem>
 					<GridItem area="lines">
@@ -538,6 +541,7 @@ export const ImmersiveLayout = ({
 								secondaryDateline={
 									CAPI.webPublicationSecondaryDateDisplay
 								}
+								guardianBaseURL={CAPI.guardianBaseURL}
 							/>
 						</div>
 					</GridItem>

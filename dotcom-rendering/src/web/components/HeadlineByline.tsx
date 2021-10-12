@@ -109,12 +109,13 @@ type Props = {
 	format: ArticleFormat;
 	byline: string;
 	tags: TagType[];
+	guardianBaseURL: string;
 };
 
 const hasSingleContributor = (tags: TagType[]) =>
 	tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
-export const HeadlineByline = ({ format, byline, tags }: Props) => {
+export const HeadlineByline = ({ format, byline, tags, guardianBaseURL }: Props) => {
 	if (byline === '') {
 		return null;
 	}
@@ -127,7 +128,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				<div css={immersiveStyles(format)}>
 					by{' '}
 					<span css={immersiveLinkStyles(palette, format)}>
-						<BylineLink byline={byline} tags={tags} />
+						<BylineLink byline={byline} tags={tags} guardianBaseURL={guardianBaseURL} />
 					</span>
 				</div>
 			);
@@ -140,7 +141,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 					return (
 						<div css={wrapperStyles}>
 							<div css={yellowBoxStyles(format)}>
-								<BylineLink byline={byline} tags={tags} />
+								<BylineLink byline={byline} tags={tags} guardianBaseURL={guardianBaseURL} />
 							</div>
 						</div>
 					);
@@ -156,7 +157,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 							]}
 						>
 							<div css={opinionStyles(palette, format)}>
-								<BylineLink byline={byline} tags={tags} />
+								<BylineLink byline={byline} tags={tags} guardianBaseURL={guardianBaseURL} />
 							</div>
 						</div>
 					);

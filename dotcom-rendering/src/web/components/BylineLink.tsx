@@ -5,6 +5,7 @@ import {
 
 type Props = {
 	byline: string;
+	guardianBaseURL: string;
 	tags: TagType[];
 };
 
@@ -63,17 +64,18 @@ export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 const ContributorLink: React.FC<{
 	contributor: string;
 	contributorTagId: string;
-}> = ({ contributor, contributorTagId }) => (
+	guardianBaseURL: string;
+}> = ({ contributor, contributorTagId, guardianBaseURL }) => (
 	<a
 		rel="author"
 		data-link-name="auto tag link"
-		href={`//www.theguardian.com/${contributorTagId}`}
+		href={`${guardianBaseURL}/${contributorTagId}`}
 	>
 		{contributor}
 	</a>
 );
 
-export const BylineLink = ({ byline, tags }: Props) => {
+export const BylineLink = ({ byline, guardianBaseURL, tags }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
@@ -86,6 +88,7 @@ export const BylineLink = ({ byline, tags }: Props) => {
 			<ContributorLink
 				contributor={bylineComponent.token}
 				contributorTagId={bylineComponent.tag.id}
+				guardianBaseURL={guardianBaseURL}
 				key={bylineComponent.tag.id}
 			/>
 		);

@@ -434,6 +434,7 @@ export const CommentLayout = ({
 										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
+										guardianBaseURL={CAPI.guardianBaseURL}
 									/>
 									{age && (
 										<AgeWarning
@@ -509,6 +510,7 @@ export const CommentLayout = ({
 								secondaryDateline={
 									CAPI.webPublicationSecondaryDateDisplay
 								}
+								guardianBaseURL={CAPI.guardianBaseURL}
 							/>
 						</div>
 					</GridItem>

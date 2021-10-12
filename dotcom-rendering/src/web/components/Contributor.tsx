@@ -56,7 +56,8 @@ export const Contributor: React.FC<{
 	tags: TagType[];
 	format: ArticleFormat;
 	palette: Palette;
-}> = ({ author, tags, format, palette }) => {
+	guardianBaseURL: string;
+}> = ({ author, tags, format, palette, guardianBaseURL }) => {
 	if (!author.byline) {
 		return null;
 	}
@@ -79,7 +80,7 @@ export const Contributor: React.FC<{
 					}
 					css={bylineStyles(palette, format)}
 				>
-					<BylineLink byline={author.byline} tags={tags} />
+					<BylineLink byline={author.byline} tags={tags} guardianBaseURL={guardianBaseURL} />
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (

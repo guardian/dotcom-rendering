@@ -21,6 +21,7 @@ type Props = {
 	byline?: string;
 	tags: TagType[];
 	palette: Palette;
+	guardianBaseURL: string;
 };
 
 const curly = (x: any) => x;
@@ -222,6 +223,7 @@ export const ArticleHeadline = ({
 	tags,
 	byline,
 	palette,
+	guardianBaseURL,
 }: Props) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -262,6 +264,7 @@ export const ArticleHeadline = ({
 									format={format}
 									byline={byline}
 									tags={tags}
+									guardianBaseURL={guardianBaseURL}
 								/>
 							)}
 						</>
@@ -350,6 +353,7 @@ export const ArticleHeadline = ({
 									format={format}
 									byline={byline}
 									tags={tags}
+									guardianBaseURL={guardianBaseURL}
 								/>
 							)}
 						</>
@@ -420,6 +424,7 @@ export const ArticleHeadline = ({
 									format={format}
 									byline={byline}
 									tags={tags}
+									guardianBaseURL={guardianBaseURL}
 								/>
 							)}
 						</div>
