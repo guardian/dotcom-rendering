@@ -73,7 +73,7 @@ const LastUpdated = ({
 	);
 };
 
-const formatTime = (time) => time < 10 ? `0${time}` : time;
+const formatTime = (time: number) => time < 10 ? `0${time}` : time;
 
 const FirstPublished = ({
 	firstPublished,
