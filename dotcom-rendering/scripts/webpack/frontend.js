@@ -42,6 +42,9 @@ const commonConfigs = ({ platform }) => ({
 			writeToDisk: true,
 			filename: `loadable-manifest-${platform}.json`,
 		}),
+		// Does not try to require the 'canvas' package,
+		// an optional dependency of jsdom that we aren't using.
+		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
 		PROD &&
 			new BundleAnalyzerPlugin({
 				reportFilename: path.join(dist, `${platform}-bundles.html`),
