@@ -53,7 +53,7 @@ const AndroidSwitch = styled((props: Props) => (
 		backgroundColor:
 			theme.palette.mode === 'light'
 				? 'rgba(112, 112, 112, 0.4)'
-				: 'rgba(256,256,256,0.6)',
+				: 'rgba(256,256,256,0.4)',
 	},
 }));
 
@@ -93,7 +93,7 @@ const IOSSwitch = styled((props: Props) => (
 		backgroundColor:
 			theme.palette.mode === 'light'
 				? 'rgba(112, 112, 112, 0.4)'
-				: 'rgba(256,256,256,0.6)',
+				: 'rgba(256,256,256,0.4)',
 		opacity: 1,
 		transition: theme.transitions.create(['background-color'], {
 			duration: 500,
