@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import type { CommonBannerComponentProps } from '@guardian/braze-components/banner';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type { BrazeArticleContext, BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 
@@ -40,6 +40,7 @@ const containerStyles = css`
 // - The force-braze-message query string arg is passed
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
+	brazeArticleContext: BrazeArticleContext
 ): Promise<CanShowResult<any>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
@@ -51,7 +52,7 @@ export const canShow = async (
 
 	try {
 		const brazeMessages = await brazeMessagesPromise;
-		const message = await brazeMessages.getMessageForBanner();
+		const message = await brazeMessages.getMessageForBanner(brazeArticleContext);
 
 		const logButtonClickWithBraze = (internalButtonId: number) => {
 			message.logButtonClick(internalButtonId);
