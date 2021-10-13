@@ -4,8 +4,8 @@ import { remSpace } from '@guardian/src-foundations';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { SvgCamera } from '@guardian/src-icons';
-import { Option, OptionKind } from '@guardian/types';
-import { map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, OptionKind, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { articlePaddingStyles } from './styles';
@@ -110,10 +110,7 @@ const HeaderImageCaption: FC<Props> = ({
 	return (
 		<figcaption
 			css={[
-				HeaderImageCaptionStyles(
-					isFullWidthImage,
-					iconBackgroundColor,
-				),
+				HeaderImageCaptionStyles(isFullWidthImage, iconBackgroundColor),
 				styles,
 			]}
 		>
@@ -125,12 +122,13 @@ const HeaderImageCaption: FC<Props> = ({
 					</span>
 				</summary>
 				<span id={captionId}>
-					{pipe(caption, map(renderText), withDefault<ReactNode>(''))} {withDefault('')(credit)}
+					{pipe(caption, map(renderText), withDefault<ReactNode>(''))}{' '}
+					{withDefault('')(credit)}
 				</span>
 			</details>
 		</figcaption>
 	);
-}
+};
 
 export default HeaderImageCaption;
 
