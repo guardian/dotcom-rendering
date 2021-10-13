@@ -13,7 +13,8 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import { BodyImage, FigCaption } from '@guardian/image-rendering';
+import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
+import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
@@ -256,12 +257,15 @@ const textElement =
 		}
 	};
 
+const isBlog = (format: Format): boolean =>
+	format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+
 const linkColourFromFormat = (format: Format): string => {
 	if (format.theme === Special.Labs) {
 		return palette.labs[300];
 	}
 
-	if (format.design === Design.LiveBlog) {
+	if (isBlog(format)) {
 		return palette.neutral[100];
 	}
 
@@ -269,8 +273,16 @@ const linkColourFromFormat = (format: Format): string => {
 	return format.design === Design.Media ? inverted : kicker;
 };
 
-const textDecorationFromFormat = (format: Format): string =>
-	format.design === Design.LiveBlog ? 'underline' : 'none';
+const borderFromFormat = (format: Format): string => {
+	const { liveblogKicker } = getThemeStyles(format.theme);
+
+	const styles = `
+		border-bottom: 0.0625rem solid ${liveblogKicker};
+		text-decoration: none;
+	`;
+
+	return isBlog(format) ? styles : 'none';
+};
 
 const standfirstTextElement =
 	(format: Format) =>
@@ -288,11 +300,9 @@ const standfirstTextElement =
 			case 'LI':
 				return h(ListItem, { format, children });
 			case 'A': {
-				const { liveblogKicker } = getThemeStyles(format.theme);
 				const styles = css`
 					color: ${linkColourFromFormat(format)};
-					text-decoration: ${textDecorationFromFormat(format)};
-					text-decoration-color: ${liveblogKicker};
+					${borderFromFormat(format)};
 				`;
 				const url = withDefault('')(getHref(node));
 				const href = url.startsWith('profile/')

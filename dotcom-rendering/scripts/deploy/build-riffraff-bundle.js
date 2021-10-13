@@ -68,7 +68,7 @@ const zipBundle = () => {
 	log(' - zipping bundle');
 	return execa(
 		'zip',
-		['--recurse-paths', 'rendering.zip', '.', '--exclude', '.git/**\\*'],
+		['--recurse-paths', 'rendering.zip', '../', '--exclude', '.git/**\\*'],
 		{
 			shell: true,
 			maxBuffer: 200000000, // increase if you get a maxBuffer exceeded error

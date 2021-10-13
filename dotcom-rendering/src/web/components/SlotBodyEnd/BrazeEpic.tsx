@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type { BrazeArticleContext, BrazeMessagesInterface } from '@guardian/braze-components/logic';
 
 import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -29,6 +29,7 @@ type EpicConfig = {
 
 export const canShow = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
+	brazeArticleContext: BrazeArticleContext
 ): Promise<CanShowResult<any>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
@@ -40,7 +41,7 @@ export const canShow = async (
 
 	try {
 		const brazeMessages = await brazeMessagesPromise;
-		const message = await brazeMessages.getMessageForEndOfArticle();
+		const message = await brazeMessages.getMessageForEndOfArticle(brazeArticleContext);
 
 		return {
 			show: true,

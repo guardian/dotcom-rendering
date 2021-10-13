@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { Img } from '@guardian/image-rendering';
+import Img from '@guardian/common-rendering/src/components/img';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import {
