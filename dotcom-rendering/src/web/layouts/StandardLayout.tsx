@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { css } from '@emotion/react';
 
 import {
@@ -343,31 +342,16 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					theme: getCurrentPillar(CAPI),
 			  };
 
-	// The following two lines refer to a server-side experiment ("remove-sticky-nav")
-	// that removes the sticky behaviour of the navigation and subnavigation bars
-	// in order to measure ad viewability when these components are not sticky.
-	// TODO: Remove this code after the experiment is complete.
-	const isInRemoveStickyNavVariant =
-		CAPI.config.abTests.removeStickyNavVariant === 'variant';
-	const componentName = isInRemoveStickyNavVariant
-		? 'non-sticky-nav'
-		: 'sticky-nav';
-
 	return (
 		<>
 			{/* The data-component attribute within this div is needed to run analytics on the experiment.
 			Remove after A/B testing is over. */}
-			<div
-				data-print-layout="hide"
-				id="bannerandheader"
-				data-component={componentName}
-			>
+			<div data-print-layout="hide" id="bannerandheader">
 				<>
 					<Stuck>
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
-							showBottomBorder={isInRemoveStickyNavVariant}
 							padded={false}
 							shouldCenter={false}
 						>
@@ -395,113 +379,50 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					)}
-
-					{/* For the purpose of this A/B test, the nav bar, the subnav and the four lines have been moved up
-					into this div to get rid of stickiness.
-					Remove this block of code after A/B testing is complete to restore original behaviour */}
-					{isInRemoveStickyNavVariant && (
-						<ElementContainer
-							showSideBorders={true}
-							borderColour={brandLine.primary}
-							showTopBorder={false}
-							padded={false}
-							backgroundColour={brandBackground.primary}
-						>
-							<Nav
-								nav={NAV}
-								format={formatForNav}
-								subscribeUrl={
-									CAPI.nav.readerRevenueLinks.header.subscribe
-								}
-								edition={CAPI.editionId}
-							/>
-						</ElementContainer>
-					)}
-
-					{isInRemoveStickyNavVariant &&
-						NAV.subNavSections &&
-						format.theme !== ArticleSpecial.Labs && (
-							<>
-								<ElementContainer
-									backgroundColour={
-										palette.background.article
-									}
-									padded={false}
-									sectionId="sub-nav-root"
-								>
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										palette={palette}
-										format={format}
-									/>
-								</ElementContainer>
-								<ElementContainer
-									backgroundColour={
-										palette.background.article
-									}
-									padded={false}
-									showTopBorder={false}
-								>
-									<Lines count={4} effect="straight" />
-								</ElementContainer>
-							</>
-						)}
-					{/* Remove block of code above after A/B testing is complete */}
 				</>
 			</div>
 
-			{/* Remove isInRemoveStickyNavVariant conditional rendering after A/B testing is complete */}
-			{!isInRemoveStickyNavVariant && (
+			<ElementContainer
+				showSideBorders={true}
+				borderColour={brandLine.primary}
+				showTopBorder={false}
+				padded={false}
+				backgroundColour={brandBackground.primary}
+			>
+				<Nav
+					nav={NAV}
+					format={formatForNav}
+					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
+					edition={CAPI.editionId}
+				/>
+			</ElementContainer>
+
+			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
 				<ElementContainer
-					showSideBorders={true}
-					borderColour={brandLine.primary}
-					showTopBorder={false}
+					backgroundColour={palette.background.article}
 					padded={false}
-					backgroundColour={brandBackground.primary}
+					sectionId="sub-nav-root"
 				>
-					<Nav
-						nav={NAV}
-						format={formatForNav}
-						subscribeUrl={
-							CAPI.nav.readerRevenueLinks.header.subscribe
-						}
-						edition={CAPI.editionId}
+					<SubNav
+						subNavSections={NAV.subNavSections}
+						currentNavLink={NAV.currentNavLink}
+						palette={palette}
+						format={format}
 					/>
 				</ElementContainer>
 			)}
-
-			{/* Remove !isInRemoveStickyNavVariant conditional rendering after A/B testing is complete */}
-			{!isInRemoveStickyNavVariant &&
-				NAV.subNavSections &&
-				format.theme !== ArticleSpecial.Labs && (
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						sectionId="sub-nav-root"
-					>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							palette={palette}
-							format={format}
-						/>
-					</ElementContainer>
-				)}
 
 			{/* If the user is in the experiment bucket and the page is not a Guardian Labs article, don't display the four lines,
 			as they've already been rendered in the sticky div above.
 			TODO: Get rid of nested ternary after the experiment is over */}
 			{format.theme !== ArticleSpecial.Labs ? (
-				!isInRemoveStickyNavVariant ? (
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<Lines count={4} effect="straight" />
-					</ElementContainer>
-				) : null
+				<ElementContainer
+					backgroundColour={palette.background.article}
+					padded={false}
+					showTopBorder={false}
+				>
+					<Lines count={4} effect="straight" />
+				</ElementContainer>
 			) : (
 				<Stuck>
 					<ElementContainer
