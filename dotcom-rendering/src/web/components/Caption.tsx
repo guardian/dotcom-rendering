@@ -21,9 +21,9 @@ type Props = {
 };
 
 const captionStyle = (palette: Palette) => css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
+	line-height: 135%;
 	padding-top: 6px;
-	${textSans.xxsmall()};
 	word-wrap: break-word;
 	color: ${palette.text.caption};
 	${until.tablet} {
@@ -109,10 +109,13 @@ const hideIconBelowLeftCol = css`
 `;
 
 const iconStyle = css`
-	fill: ${neutral[60]};
-	margin-right: ${space[1]}px;
+	fill: ${neutral[46]};
+	margin-right: ${space[1] /2}px;
 	display: inline-block;
 	vertical-align: middle;
+	svg {
+		width: 85%;
+	}
 `;
 
 const captionLink = (palette: Palette) => css`
