@@ -6,9 +6,9 @@ import { remSpace } from '@guardian/src-foundations';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { SvgCamera } from '@guardian/src-icons';
-import type { Option } from '@guardian/types';
+import { Option, OptionKind } from '@guardian/types';
 import { withDefault } from '@guardian/types';
-import { darkModeCss, maybeRender } from '@guardian/common-rendering/src/lib';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import type { FC } from 'react';
 
 // ----- Component ----- //
@@ -88,8 +88,12 @@ const ImageDetails: FC<Props> = ({
 	credit,
 	supportsDarkMode,
 	id,
-}: Props) =>
-	maybeRender(caption, (cap) => (
+}: Props) => {
+	if (caption.kind === OptionKind.None && credit.kind === OptionKind.None) {
+		return null;
+	}
+
+	return (
 		<figcaption css={styles}>
 			<details css={detailsStyles(supportsDarkMode)}>
 				<summary css={iconStyles(supportsDarkMode)}>
@@ -99,11 +103,12 @@ const ImageDetails: FC<Props> = ({
 					</span>
 				</summary>
 				<span id={id}>
-					{cap} {withDefault('')(credit)}
+					{withDefault('')(caption)} {withDefault('')(credit)}
 				</span>
 			</details>
 		</figcaption>
-	));
+	);
+}
 
 // ----- Exports ----- //
 
