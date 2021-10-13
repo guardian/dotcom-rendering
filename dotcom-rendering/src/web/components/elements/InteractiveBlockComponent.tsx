@@ -298,13 +298,13 @@ export const InteractiveBlockComponent = ({
 			>
 				{!loaded && (
 					<>
-						<Placeholder // removed by HydrateOnce
+						<Placeholder // removed by HydrateInteractiveOnce
 							height={decideHeight(role)}
 							shouldShimmer={false}
 						/>
 						<a
 							ref={placeholderLinkRef}
-							data-name="placeholder" // removed by HydrateOnce
+							data-name="placeholder" // removed by HydrateInteractiveOnce
 							css={placeholderLinkStyle}
 							href={url}
 						>
