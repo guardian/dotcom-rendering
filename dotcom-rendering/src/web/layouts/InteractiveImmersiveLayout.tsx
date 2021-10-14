@@ -14,7 +14,11 @@ import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import {
+	MobileStickyContainer,
+	labelStyles as adLabelStyles,
+	adCollapseStyles,
+} from '@root/src/web/components/AdSlot';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -22,6 +26,7 @@ import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 
+import { from, until } from '@guardian/src-foundations/mq';
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -86,7 +91,23 @@ const Renderer: React.FC<{
 		return null;
 	});
 
-	return <div>{output}</div>;
+	const adStyles = css`
+		${adLabelStyles}
+		${adCollapseStyles}
+
+		${from.tablet} {
+			.mobile-only .ad-slot {
+				display: none;
+			}
+		}
+		${until.tablet} {
+			.hide-until-tablet .ad-slot {
+				display: none;
+			}
+		}
+	`;
+
+	return <div css={adStyles}>{output}</div>;
 };
 
 const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
