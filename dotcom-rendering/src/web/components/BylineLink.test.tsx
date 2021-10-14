@@ -90,7 +90,7 @@ describe('BylineLink', () => {
 			<BylineLink
 				byline={byline}
 				tags={tags}
-				guardianBaseURL="https://www.theguardian.com/uk"
+				guardianBaseURL="https://www.theguardian.com"
 			/>,
 		);
 
@@ -119,7 +119,7 @@ describe('BylineLink', () => {
 			<BylineLink
 				byline={byline}
 				tags={tags}
-				guardianBaseURL="https://www.theguardian.com/uk"
+				guardianBaseURL="https://www.theguardian.com"
 			/>,
 		);
 
@@ -150,7 +150,7 @@ describe('BylineLink', () => {
 			<BylineLink
 				byline={byline}
 				tags={tags}
-				guardianBaseURL="https://www.theguardian.com/uk"
+				guardianBaseURL="https://www.theguardian.com"
 				/>,
 		);
 

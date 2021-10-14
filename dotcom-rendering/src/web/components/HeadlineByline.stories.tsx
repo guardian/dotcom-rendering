@@ -24,7 +24,7 @@ export const interviewStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -40,7 +40,7 @@ export const commentStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -56,7 +56,7 @@ export const specialStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -82,7 +82,7 @@ export const commentWithBylineImageStory = () => {
 						'https://i.guim.co.uk/img/uploads/2018/01/10/Marina_Hyde,_L.png?width=300&quality=85&auto=format&fit=max&s=6476202195914952e48ef41aadb116ff',
 				},
 			]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -104,7 +104,7 @@ export const immersiveStory = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -132,7 +132,7 @@ export const ImmersiveComment = () => {
 						title: 'Jane Smith',
 					},
 				]}
-				guardianBaseURL="https://www.theguardian.com/uk"
+				guardianBaseURL="https://www.theguardian.com"
 			/>
 		</div>
 	);
@@ -165,7 +165,7 @@ export const MultipleStory = () => {
 					title: 'Nae Bevan',
 				},
 			]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -192,7 +192,7 @@ export const MultipleDuplicateStory = () => {
 					title: 'Duncan Campbell',
 				},
 			]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -211,7 +211,7 @@ export const noBylineStory = () => {
 			}}
 			byline=""
 			tags={[]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -233,7 +233,7 @@ export const LabsImmersive = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -255,7 +255,7 @@ export const LabsComment = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };
@@ -277,7 +277,7 @@ export const LabsInterview = () => {
 					title: 'Jane Smith',
 				},
 			]}
-			guardianBaseURL="https://www.theguardian.com/uk"
+			guardianBaseURL="https://www.theguardian.com"
 		/>
 	);
 };

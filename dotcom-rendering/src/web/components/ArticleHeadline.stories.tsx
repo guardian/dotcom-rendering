@@ -43,7 +43,7 @@ export const ArticleStory = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -71,7 +71,7 @@ export const Feature = () => (
 						theme: ArticlePillar.Lifestyle,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -105,7 +105,7 @@ export const ShowcaseInterview = () => (
 						}}
 						tags={[]}
 						byline="Byline text"
-						guardianBaseURL="https://www.theguardian.com/uk"
+						guardianBaseURL="https://www.theguardian.com"
 					/>
 				</div>
 				<MainMedia
@@ -156,7 +156,7 @@ export const ShowcaseInterviewNobyline = () => (
 						}}
 						tags={[]}
 						byline=""
-						guardianBaseURL="https://www.theguardian.com/uk"
+						guardianBaseURL="https://www.theguardian.com"
 					/>
 				</div>
 				<MainMedia
@@ -204,7 +204,7 @@ export const Interview = () => (
 					}}
 					tags={[]}
 					byline="Byline text"
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 				<Standfirst
 					format={{
@@ -257,7 +257,7 @@ export const InterviewSpecialReport = () => (
 					}}
 					tags={[]}
 					byline="Byline text"
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 				<Standfirst
 					format={{
@@ -312,7 +312,7 @@ export const InterviewNoByline = () => (
 					}}
 					tags={[]}
 					byline=""
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 				<Standfirst
 					format={{
@@ -366,7 +366,7 @@ export const Comment = () => (
 						theme: ArticlePillar.Opinion,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -394,7 +394,7 @@ export const Analysis = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -422,7 +422,7 @@ export const Media = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -450,7 +450,7 @@ export const Review = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -478,7 +478,7 @@ export const PhotoEssay = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -506,7 +506,7 @@ export const Quiz = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -534,7 +534,7 @@ export const Recipe = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -562,7 +562,7 @@ export const Immersive = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -590,7 +590,7 @@ export const ImmersiveNoMainMedia = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -622,7 +622,7 @@ export const ImmersiveComment = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -650,7 +650,7 @@ export const Editorial = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -678,7 +678,7 @@ export const MatchReport = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -706,7 +706,7 @@ export const SpecialReport = () => (
 						theme: ArticleSpecial.SpecialReport,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -734,7 +734,7 @@ export const LiveBlog = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>
@@ -775,7 +775,7 @@ export const DeadBlog = () => (
 						theme: ArticlePillar.News,
 					}}
 					tags={[]}
-					guardianBaseURL="https://www.theguardian.com/uk"
+					guardianBaseURL="https://www.theguardian.com"
 				/>
 			</ArticleContainer>
 		</Flex>

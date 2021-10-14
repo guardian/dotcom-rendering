@@ -26,7 +26,7 @@ describe('Contributor', () => {
 						title: 'Observer Design',
 					},
 				]}
-				guardianBaseURL="https://www.theguardian.com/uk"
+				guardianBaseURL="https://www.theguardian.com"
 			/>,
 		);
 
@@ -54,7 +54,7 @@ describe('Contributor', () => {
 						title: 'Observer Design',
 					},
 				]}
-				guardianBaseURL="https://www.theguardian.com/uk"
+				guardianBaseURL="https://www.theguardian.com"
 			/>,
 		);
 
