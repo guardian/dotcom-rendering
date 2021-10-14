@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { from, until } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { labelStyles as adLabelStyles } from '../components/AdSlot';
 
@@ -22,18 +22,6 @@ const adStylesDynamic = css`
 
 	& .ad-slot.ad-slot--collapse {
 		display: none;
-	}
-
-	${from.tablet} {
-		.mobile-only .ad-slot {
-			display: none;
-		}
-	}
-
-	${until.tablet} {
-		.hide-until-tablet .ad-slot {
-			display: none;
-		}
 	}
 
 	.ad-slot--im {
