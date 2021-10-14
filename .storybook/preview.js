@@ -7,16 +7,10 @@ import { getFontsCss } from "@root/src/lib/fonts-css";
 
 // import 'reset-css';
 
-<<<<<<< HEAD
-import { Lazy } from "@root/src/web/components/Lazy";
-import { Picture } from "@root/src/web/components/Picture";
-import { mockRESTCalls } from "@root/src/web/lib/mockRESTCalls";
-=======
 import { Lazy } from '@root/src/web/components/Lazy';
 import { Picture } from '@root/src/web/components/Picture';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 import { addCookie } from '@root/src/web/browser/cookie';
->>>>>>> 28425a1a639ed6ad3cdba27f953d4780b17b1d00
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
