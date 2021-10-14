@@ -75,6 +75,7 @@ export const ArticleStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);
@@ -122,6 +123,7 @@ export const BrandingStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);
@@ -152,6 +154,7 @@ export const FeatureStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);
@@ -181,6 +184,7 @@ export const SpecialReportStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);
@@ -210,6 +214,7 @@ export const CommentStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);
@@ -239,6 +244,7 @@ export const InterviewStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);
@@ -268,6 +274,7 @@ export const ImmersiveStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);
@@ -297,6 +304,7 @@ export const TwoContributorsStory = () => {
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</Container>
 	);

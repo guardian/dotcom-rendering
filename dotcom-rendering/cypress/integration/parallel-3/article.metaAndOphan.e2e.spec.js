@@ -87,7 +87,7 @@ describe('The web document renders with the correct meta and analytics elements 
 			.should(
 				'have.attr',
 				'href',
-				'//www.theguardian.com/profile/zoewilliams',
+				'https://www.theguardian.com/profile/zoewilliams',
 			);
 	});
 

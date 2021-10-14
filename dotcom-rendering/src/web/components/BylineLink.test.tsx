@@ -87,7 +87,11 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<BylineLink byline={byline} tags={tags} />,
+			<BylineLink
+				byline={byline}
+				tags={tags}
+				guardianBaseURL="https://www.theguardian.com/uk"
+			/>,
 		);
 
 		const links = container.querySelectorAll('a');
@@ -112,7 +116,11 @@ describe('BylineLink', () => {
 			},
 		];
 		const { container } = render(
-			<BylineLink byline={byline} tags={tags} />,
+			<BylineLink
+				byline={byline}
+				tags={tags}
+				guardianBaseURL="https://www.theguardian.com/uk"
+			/>,
 		);
 
 		const links = container.querySelectorAll('a');
@@ -139,7 +147,11 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<BylineLink byline={byline} tags={tags} />,
+			<BylineLink
+				byline={byline}
+				tags={tags}
+				guardianBaseURL="https://www.theguardian.com/uk"
+				/>,
 		);
 
 		const links = container.querySelectorAll('a');

@@ -24,6 +24,7 @@ export const interviewStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -39,6 +40,7 @@ export const commentStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -54,6 +56,7 @@ export const specialStory = () => {
 			}}
 			byline="Jane Smith"
 			tags={[]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -79,6 +82,7 @@ export const commentWithBylineImageStory = () => {
 						'https://i.guim.co.uk/img/uploads/2018/01/10/Marina_Hyde,_L.png?width=300&quality=85&auto=format&fit=max&s=6476202195914952e48ef41aadb116ff',
 				},
 			]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -100,6 +104,7 @@ export const immersiveStory = () => {
 					title: 'Jane Smith',
 				},
 			]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -127,6 +132,7 @@ export const ImmersiveComment = () => {
 						title: 'Jane Smith',
 					},
 				]}
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>
 		</div>
 	);
@@ -159,6 +165,7 @@ export const MultipleStory = () => {
 					title: 'Nae Bevan',
 				},
 			]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -185,6 +192,7 @@ export const MultipleDuplicateStory = () => {
 					title: 'Duncan Campbell',
 				},
 			]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -203,6 +211,7 @@ export const noBylineStory = () => {
 			}}
 			byline=""
 			tags={[]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -224,6 +233,7 @@ export const LabsImmersive = () => {
 					title: 'Jane Smith',
 				},
 			]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -245,6 +255,7 @@ export const LabsComment = () => {
 					title: 'Jane Smith',
 				},
 			]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };
@@ -266,6 +277,7 @@ export const LabsInterview = () => {
 					title: 'Jane Smith',
 				},
 			]}
+			guardianBaseURL="https://www.theguardian.com/uk"
 		/>
 	);
 };

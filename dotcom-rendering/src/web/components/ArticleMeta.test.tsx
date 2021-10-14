@@ -30,6 +30,7 @@ describe('ArticleMeta', () => {
 				]}
 				primaryDateline="primary date line"
 				secondaryDateline="secondary date line"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>,
 		);
 
@@ -66,6 +67,7 @@ describe('ArticleMeta', () => {
 				]}
 				primaryDateline="primary date line"
 				secondaryDateline="secondary date line"
+				guardianBaseURL="https://www.theguardian.com/uk"
 			/>,
 		);
 

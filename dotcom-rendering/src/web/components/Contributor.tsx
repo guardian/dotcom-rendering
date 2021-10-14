@@ -80,7 +80,11 @@ export const Contributor: React.FC<{
 					}
 					css={bylineStyles(palette, format)}
 				>
-					<BylineLink byline={author.byline} tags={tags} guardianBaseURL={guardianBaseURL} />
+					<BylineLink
+						byline={author.byline}
+						tags={tags}
+						guardianBaseURL={guardianBaseURL}
+					/>
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (
