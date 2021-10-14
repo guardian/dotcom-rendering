@@ -17,6 +17,7 @@ import { Nav } from '@root/src/web/components/Nav/Nav';
 import {
 	MobileStickyContainer,
 	labelStyles as adLabelStyles,
+	adCollapseStyles,
 } from '@root/src/web/components/AdSlot';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
@@ -92,6 +93,7 @@ const Renderer: React.FC<{
 
 	const adStyles = css`
 		${adLabelStyles}
+		${adCollapseStyles}
 
 		${from.tablet} {
 			.mobile-only .ad-slot {

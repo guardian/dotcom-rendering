@@ -59,6 +59,12 @@ export const labelStyles = css`
 	}
 `;
 
+export const adCollapseStyles = css`
+	& .ad-slot.ad-slot--collapse {
+		display: none;
+	}
+`;
+
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.

@@ -5,7 +5,10 @@ import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { from } from '@guardian/src-foundations/mq';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { labelStyles as adLabelStyles } from '../components/AdSlot';
+import {
+	labelStyles as adLabelStyles,
+	adCollapseStyles,
+} from '../components/AdSlot';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -19,10 +22,7 @@ const commercialPosition = css`
 // hence we scope the styles at the same level
 const adStylesDynamic = css`
 	${adLabelStyles}
-
-	& .ad-slot.ad-slot--collapse {
-		display: none;
-	}
+	${adCollapseStyles}
 
 	.ad-slot--im {
 		float: left;
