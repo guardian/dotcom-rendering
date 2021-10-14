@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Sizes } from '@guardian/image-rendering';
-import { Img } from '@guardian/image-rendering';
+import Img from '@guardian/common-rendering/src/components/img';
+import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import { brandAltBackground } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
@@ -161,10 +161,8 @@ interface Props {
 const HeaderMedia: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const isPicture = checkIfPicture(item.tags);
-	const {
-		cameraIcon: iconColor,
-		cameraIconBackground: iconBackgroundColor,
-	} = getThemeStyles(format.theme);
+	const { cameraIcon: iconColor, cameraIconBackground: iconBackgroundColor } =
+		getThemeStyles(format.theme);
 	const matchScores = 'football' in item ? item.football : none;
 
 	return maybeRender(item.mainMedia, (media) => {

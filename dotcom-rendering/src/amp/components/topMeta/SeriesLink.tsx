@@ -4,7 +4,7 @@ import { headline } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
-const seriesStyle = (pillar: Theme) => css`
+const seriesStyle = (pillar: ArticleTheme) => css`
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	${headline.xxxsmall()};
 	font-weight: 900;
@@ -20,7 +20,7 @@ export const SeriesLink: React.FunctionComponent<{
 	fallbackToSection: boolean;
 	sectionLabel?: string; // required for fallback only
 	sectionUrl?: string; // required for fallback only
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({
 	baseURL,
 	tags,

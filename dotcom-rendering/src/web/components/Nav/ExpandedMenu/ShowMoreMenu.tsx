@@ -5,7 +5,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { headline } from '@guardian/src-foundations/typography';
 import { brandText, brandAlt } from '@guardian/src-foundations/palette';
 
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 import { navInputCheckboxId, showMoreButtonId } from '../config';
 
 const screenReadable = css`
@@ -50,7 +50,7 @@ const showMoreTextStyles = css`
 	}
 `;
 
-const openExpandedMenuStyles = (display: Display) => css`
+const openExpandedMenuStyles = (display: ArticleDisplay) => css`
 	${headline.xsmall()};
 	font-weight: 300;
 	color: ${brandText.primary};
@@ -65,7 +65,7 @@ const openExpandedMenuStyles = (display: Display) => css`
 	padding-right: 20px;
 	${from.desktop} {
 		display: block;
-		padding-top: ${display === Display.Immersive ? '9px' : '5px'};
+		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '5px'};
 		height: 42px;
 	}
 	:hover,
@@ -74,7 +74,7 @@ const openExpandedMenuStyles = (display: Display) => css`
 	}
 `;
 
-export const ShowMoreMenu = ({ display }: { display: Display }) => (
+export const ShowMoreMenu = ({ display }: { display: ArticleDisplay }) => (
 	<>
 		{/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */}
 		{/*

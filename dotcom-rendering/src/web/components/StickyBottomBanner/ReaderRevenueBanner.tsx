@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import {
-	getWeeklyArticleHistory,
-	logView,
-} from '@guardian/automat-contributions';
+import { logView } from '@guardian/automat-contributions';
 import {
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -21,7 +18,7 @@ import {
 } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
-import { WeeklyArticleHistory } from '@root/node_modules/@guardian/automat-contributions/dist/lib/types';
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
@@ -47,6 +44,7 @@ type BaseProps = {
 type BuildPayloadProps = BaseProps & {
 	countryCode: string;
 	optedOutOfArticleCount: boolean;
+	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
 };
 
 type CanShowProps = BaseProps & {
@@ -56,6 +54,7 @@ type CanShowProps = BaseProps & {
 	isPreview: boolean;
 	idApiUrl: string;
 	signInGateWillShow: boolean;
+	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
 };
 
 type ReaderRevenueComponentType =
@@ -67,7 +66,7 @@ export type CanShowFunctionType<T> = (
 ) => Promise<CanShowResult<T>>;
 
 // TODO specify return type (need to update client to provide this first)
-const buildPayload = ({
+const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
 	isPaidContent,
@@ -76,6 +75,7 @@ const buildPayload = ({
 	subscriptionBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
+	asyncArticleCount,
 }: BuildPayloadProps) => {
 	return {
 		tracking: {
@@ -93,7 +93,7 @@ const buildPayload = ({
 			subscriptionBannerLastClosedAt,
 			mvtId: Number(getCookie('GU_mvt_id')),
 			countryCode,
-			weeklyArticleHistory: getWeeklyArticleHistory(storage.local),
+			weeklyArticleHistory: await asyncArticleCount,
 			optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 		},
@@ -138,6 +138,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
+	asyncArticleCount,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -161,7 +162,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 
 	const countryCode = await asyncCountryCode;
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
-	const bannerPayload = buildPayload({
+	const bannerPayload = await buildPayload({
 		isSignedIn,
 		countryCode,
 		contentType,
@@ -176,6 +177,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		optedOutOfArticleCount,
+		asyncArticleCount,
 	});
 	const forcedVariant = getForcedVariant('banner');
 	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
@@ -214,6 +216,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	section,
+	asyncArticleCount,
 }) => {
 	const isPuzzlesPage =
 		section === 'crosswords' ||
@@ -227,7 +230,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	if (isPuzzlesPage && remoteBannerConfig) {
 		const countryCode = await asyncCountryCode;
 		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
-		const bannerPayload = buildPayload({
+		const bannerPayload = await buildPayload({
 			isSignedIn,
 			countryCode,
 			contentType,
@@ -242,6 +245,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			optedOutOfArticleCount,
+			asyncArticleCount,
 		});
 		return getBanner(
 			bannerPayload,

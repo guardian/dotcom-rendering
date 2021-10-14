@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
 import { headline } from '@guardian/src-foundations/typography';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
@@ -94,8 +94,8 @@ const fullyInline = css`
 	display: block;
 `;
 
-function decidePosition(role: string, design: Design) {
-	if (design === Design.PhotoEssay) {
+function decidePosition(role: string, design: ArticleDesign) {
+	if (design === ArticleDesign.PhotoEssay) {
 		return role === 'supporting' ? fullyLeft : fullyInline;
 	}
 	return role === 'supporting' ? partiallyLeft : partiallyInline;
@@ -115,15 +115,15 @@ function decideFont(role: string) {
 export const PullQuoteBlockComponent: React.FC<{
 	html?: string;
 	palette: Palette;
-	design: Design;
+	design: ArticleDesign;
 	role: string;
 	attribution?: string;
 }> = ({ html, palette, design, attribution, role }) => {
 	if (!html) return <></>;
 	switch (design) {
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return (
 				<aside
 					css={[
@@ -167,7 +167,7 @@ export const PullQuoteBlockComponent: React.FC<{
 					</footer>
 				</aside>
 			);
-		case Design.PhotoEssay:
+		case ArticleDesign.PhotoEssay:
 			return (
 				<aside
 					css={[

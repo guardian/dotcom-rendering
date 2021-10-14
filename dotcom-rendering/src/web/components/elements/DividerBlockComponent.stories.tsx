@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { DividerBlockComponent } from '@frontend/web/components/elements/DividerBlockComponent';
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { TextBlockComponent } from '@root/src/web/components/elements/TextBlockComponent';
 
@@ -11,9 +11,9 @@ export default {
 };
 
 const format = {
-	display: Display.Standard,
-	design: Design.Article,
-	theme: Pillar.News,
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
 };
 
 const lorem =

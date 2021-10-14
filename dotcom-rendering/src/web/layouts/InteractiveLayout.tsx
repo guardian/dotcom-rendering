@@ -11,10 +11,10 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -228,7 +228,7 @@ const ageWarningMargins = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -271,7 +271,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					</Stuck>
-					{format.theme !== Special.Labs && (
+					{format.theme !== ArticleSpecial.Labs && (
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
@@ -309,7 +309,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</ElementContainer>
 
-			{NAV.subNavSections && format.theme !== Special.Labs && (
+			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
 				<ElementContainer
 					backgroundColour={palette.background.article}
 					padded={false}
@@ -324,7 +324,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</ElementContainer>
 			)}
 
-			{format.theme !== Special.Labs ? (
+			{format.theme !== ArticleSpecial.Labs ? (
 				<>
 					<ElementContainer
 						backgroundColour={palette.background.article}
@@ -358,6 +358,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={palette.background.article}
 				borderColour={palette.border.article}
 				element="article"
+				className={interactiveLegacyClasses.contentInteractive}
 			>
 				<div className={interactiveLegacyClasses.contentInteractive}>
 					<InteractiveGrid>
@@ -377,7 +378,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="border">
-							{format.theme === Special.Labs ? (
+							{format.theme === ArticleSpecial.Labs ? (
 								<></>
 							) : (
 								<Border palette={palette} />

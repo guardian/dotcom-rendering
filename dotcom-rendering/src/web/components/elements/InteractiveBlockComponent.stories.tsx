@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { InteractiveBlockComponent } from '@frontend/web/components/elements/InteractiveBlockComponent';
 import { Figure } from '@frontend/web/components/Figure';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Pillar, Design, Display } from '@guardian/types';
+import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { decidePalette } from '@frontend/web/lib/decidePalette';
 
 export default {
@@ -19,9 +19,9 @@ const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
 		format={{
-			theme: Pillar.News,
-			design: Design.Article,
-			display: Display.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
 		}}
 		isFirstParagraph={false}
 	/>
@@ -50,14 +50,14 @@ export const Default = () => {
 					alt="map"
 					role="supporting"
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -81,14 +81,14 @@ export const InlineMap = () => {
 					alt="The agreement mediated by Russia in Nagorno-Karabakh"
 					role="inline"
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -111,14 +111,14 @@ export const Showcase = () => {
 					alt="Photo collage"
 					role="showcase"
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -143,14 +143,14 @@ export const WithCaption = () => {
 					role="inline"
 					caption="There’s (normally) such a lovely atmosphere on this tee. A par start and you are happy. You don’t want to hit it right, with the bunker and worse out there. The ideal shot is a little fade off the left side with a driver. You have more chance with your second shot if missing it left. The second shot is a case of ‘don’t go long.’ It’s a common theme about not short-siding yourself at Augusta but it probably applies more at the 1st than elsewhere. Hit to the heart of the green and try to two putt. A couple of the back pins are OK but you can have swinging putts to the front ones."
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>
@@ -174,14 +174,14 @@ export const NonBootJs = () => {
 					alt="Bird Quiz"
 					role="inline"
 					format={{
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					}}
 					palette={decidePalette({
-						display: Display.Standard,
-						design: Design.Article,
-						theme: Pillar.News,
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
 					})}
 				/>
 			</Figure>

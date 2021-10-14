@@ -8,7 +8,7 @@ describe('Enhance Placeholders', () => {
 			id: 'foo',
 			url: 'example.com/foo',
 			elementId: 'foo1',
-			html: '<div>Written by: {{ byline }}</div>',
+			html: '<div>Written by: [[ byline ]]</div>',
 		};
 
 		const variables = new Map();
@@ -26,7 +26,7 @@ describe('Enhance Placeholders', () => {
 			id: 'foo',
 			url: 'example.com/foo',
 			elementId: 'foo1',
-			html: '<div>Written by: {{byline    }}</div>',
+			html: '<div>Written by: [[byline    ]]</div>',
 		};
 
 		const variables = new Map();
@@ -44,7 +44,7 @@ describe('Enhance Placeholders', () => {
 			id: 'foo',
 			url: 'example.com/foo',
 			elementId: 'foo1',
-			html: '<div>Written by: {{ unsupported }}</div>',
+			html: '<div>Written by: [[ unsupported ]]</div>',
 		};
 
 		const variables = new Map();

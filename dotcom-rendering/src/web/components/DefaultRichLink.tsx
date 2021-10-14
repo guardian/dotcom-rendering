@@ -1,4 +1,4 @@
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { RichLink } from '@root/src/web/components/RichLink';
 
@@ -31,9 +31,9 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
 			contentType="article"
 			url={url}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			tags={[]}
 			sponsorName=""

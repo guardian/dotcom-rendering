@@ -9,7 +9,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 
 type Props = {
 	images: ImageBlockElement[];
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	caption?: string;
 };

@@ -14,6 +14,7 @@ import { SvgQuote } from '@guardian/src-icons';
 import type { Format } from '@guardian/types';
 import { Design, Display, OptionKind } from '@guardian/types';
 import { editionsHeadlineTextColour } from 'editorialStyles';
+import { MainMediaKind } from 'headerMedia';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
@@ -74,17 +75,23 @@ const immersiveStyles = css`
 	padding-top: 0.0625rem;
 	padding-bottom: ${remSpace[6]};
 	background-color: ${neutral[7]};
+	min-height: 3.5rem;
 
 	${from.tablet} {
 		padding-left: 0;
+		min-height: 4.625rem;
 	}
 `;
 
 const interviewStyles = css`
 	margin-left: ${remSpace[3]};
 	border: 0;
-
+	min-height: 3.5rem;
 	${articleWidthStyles}
+
+	${from.tablet} {
+		min-height: 4.625rem;
+	}
 `;
 
 const interviewFontStyles = css`
@@ -105,11 +112,16 @@ const interviewFontStyles = css`
 	display: inline;
 `;
 
-const seriesStyles = css`
+const seriesStyles = (isInterviewVideoHeader: boolean): SerializedStyles => css`
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
+	display: ${isInterviewVideoHeader ? 'none' : 'block'};
+
+	${from.desktop} {
+		display: block;
+	}
 `;
 
 // ----- Headline Component Styles ----- //
@@ -238,6 +250,9 @@ const getHeadlineStyles = (
 const hasSeriesKicker = (format: Format): boolean =>
 	format.display === Display.Immersive || format.design === Design.Interview;
 
+const isInterviewHeadline = (format: Format): boolean =>
+	format.design === Design.Interview;
+
 // ----- Component ----- //
 
 interface Props {
@@ -253,10 +268,17 @@ const Headline: FC<Props> = ({ item }) => {
 		contributor.kind === OptionKind.Some &&
 		contributor.value.image.kind === OptionKind.Some;
 
+	const isVideo =
+		item.mainMedia.kind === OptionKind.Some &&
+		item.mainMedia.value.kind === MainMediaKind.Video;
+
+	const isInterview = isInterviewHeadline(format);
+	const isInterviewVideoHeader = isInterview && isVideo;
+
 	return (
 		<div css={headlineWrapperStyles}>
 			{hasSeriesKicker(format) && (
-				<div css={seriesStyles}>
+				<div css={seriesStyles(isInterviewVideoHeader)}>
 					<Series item={item} />
 				</div>
 			)}

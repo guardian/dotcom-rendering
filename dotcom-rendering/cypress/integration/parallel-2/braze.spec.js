@@ -82,6 +82,8 @@ describe('Braze messaging', function () {
 		enableBraze();
 		becomeLoggedIn();
 
+		cy.setCookie('bwid', 'myBrowserId');
+
 		setCountry();
 		acceptConsents()
 			.then(visitArticle)
@@ -95,6 +97,8 @@ describe('Braze messaging', function () {
 	it('clears Braze data when a user logs out', function () {
 		enableBraze();
 		becomeLoggedIn();
+
+		cy.setCookie('bwid', 'myBrowserId');
 
 		setCountry();
 		acceptConsents()

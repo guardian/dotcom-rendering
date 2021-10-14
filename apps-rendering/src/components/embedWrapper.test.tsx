@@ -50,9 +50,8 @@ describe('EmbedComponentWrapper.embedComponentFromWrapperProps', () => {
 		);
 
 		if (container.firstElementChild) {
-			const embedComponentFromWrapperProps = createEmbedComponentFromProps(
-				container.firstElementChild,
-			);
+			const embedComponentFromWrapperProps =
+				createEmbedComponentFromProps(container.firstElementChild);
 			expect(embedComponentFromWrapperProps).toStrictEqual(
 				some(expectedWrapperContents),
 			);

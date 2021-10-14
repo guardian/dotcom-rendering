@@ -54,11 +54,15 @@ import {
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
-import { Design, Format } from '@guardian/types';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Figure } from '../components/Figure';
+import {
+	isInteractive,
+	interactiveLegacyFigureClasses,
+} from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
@@ -73,9 +77,13 @@ type Props = {
 
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
-export const updateRole = (el: CAPIElement, format: Format): CAPIElement => {
+export const updateRole = (
+	el: CAPIElement,
+	format: ArticleFormat,
+): CAPIElement => {
 	const isLiveBlog =
-		format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
 
 	switch (el._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -334,7 +342,7 @@ export const renderElement = ({
 				</ClickToView>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-			if (format.design === Design.Interactive) {
+			if (format.design === ArticleDesign.Interactive) {
 				return [
 					true,
 					<InteractiveLayoutAtom
@@ -644,8 +652,7 @@ export const renderElement = ({
 			const witnessType = element.witnessTypeData._type;
 			switch (witnessType) {
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-					const witnessTypeDataImage = element.witnessTypeData as WitnessTypeDataImage;
+					const witnessTypeDataImage = element.witnessTypeData;
 					return [
 						true,
 						<WitnessImageBlockComponent
@@ -659,8 +666,7 @@ export const renderElement = ({
 						/>,
 					];
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-					const witnessTypeDataVideo = element.witnessTypeData as WitnessTypeDataVideo;
+					const witnessTypeDataVideo = element.witnessTypeData;
 					return [
 						true,
 						<WitnessVideoBlockComponent
@@ -673,8 +679,7 @@ export const renderElement = ({
 						/>,
 					];
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataText':
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-					const witnessTypeDataText = element.witnessTypeData as WitnessTypeDataText;
+					const witnessTypeDataText = element.witnessTypeData;
 					return [
 						true,
 						<WitnessTextBlockComponent
@@ -724,6 +729,12 @@ export const renderElement = ({
 // bareElements is the set of element types that don't get wrapped in a Figure
 // for most article types, either because they don't need it or because they
 // add the figure themselves.
+// We might assume that InteractiveBlockElement should be included in this list,
+// however we can't do this while we maintain the current component abstraction.
+// If no outer figure, then HydrateOnce uses the component's figure as the root
+// for hydration. For InteractiveBlockElements, the result is that the state that
+// determines height is never updated leaving an empty placeholder space in the
+// article even after the interactive content has loaded.
 const bareElements = new Set([
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 	'model.dotcomrendering.pageElements.CaptionBlockElement',
@@ -774,12 +785,18 @@ export const renderArticleElement = ({
 	}
 
 	const needsFigure = !bareElements.has(element._type);
+	const role = 'role' in element ? (element.role as RoleType) : undefined;
 
 	return needsFigure ? (
 		<Figure
 			isMainMedia={isMainMedia}
 			id={'elementId' in element ? element.elementId : undefined}
-			role={'role' in element ? (element.role as RoleType) : undefined}
+			role={role}
+			className={
+				isInteractive(format.design)
+					? interactiveLegacyFigureClasses(element._type, role)
+					: ''
+			}
 		>
 			{el}
 		</Figure>

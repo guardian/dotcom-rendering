@@ -127,7 +127,7 @@ const expanded = css`
 
 const asComponent = (
 	element: CAPIElement,
-	pillar: Pillar,
+	pillar: ArticlePillar,
 	adTargeting?: any,
 ) => {
 	switch (element._type) {
@@ -148,7 +148,7 @@ const asComponent = (
 
 export const MainMedia: React.FC<{
 	element: CAPIElement;
-	pillar: Theme;
+	pillar: ArticleTheme;
 	adTargeting?: any;
 }> = ({ element, pillar, adTargeting }) => {
 	return (

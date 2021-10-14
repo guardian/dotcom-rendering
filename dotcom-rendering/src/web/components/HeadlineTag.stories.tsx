@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 
-import { Special, Pillar, Design, Display } from '@guardian/types';
+import {
+	ArticleSpecial,
+	ArticlePillar,
+	ArticleDesign,
+	ArticleDisplay,
+} from '@guardian/libs';
 
 import { HeadlineTag } from './HeadlineTag';
 import { decidePalette } from '../lib/decidePalette';
@@ -15,9 +20,9 @@ export const defaultStory = () => {
 		<HeadlineTag
 			tagText="Tag name"
 			palette={decidePalette({
-				design: Design.Article,
-				display: Display.Standard,
-				theme: Pillar.Culture,
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: ArticlePillar.Culture,
 			})}
 		/>
 	);
@@ -29,9 +34,9 @@ export const longTagNameStory = () => {
 		<HeadlineTag
 			tagText="Slightly longer tag name"
 			palette={decidePalette({
-				design: Design.Article,
-				display: Display.Standard,
-				theme: Pillar.News,
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: ArticlePillar.News,
 			})}
 		/>
 	);
@@ -48,9 +53,9 @@ export const wrappedTagNameStory = () => {
 			<HeadlineTag
 				tagText="Very long tag name with enough text to wrap to a second line"
 				palette={decidePalette({
-					design: Design.Article,
-					display: Display.Standard,
-					theme: Special.Labs,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticleSpecial.Labs,
 				})}
 			/>
 		</div>

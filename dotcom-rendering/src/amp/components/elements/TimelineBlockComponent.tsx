@@ -42,7 +42,7 @@ export const TimelineBlockComponent: React.FC<{
 	title: string;
 	description?: string;
 	events: TimelineEvent[];
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ id, title, description, events, pillar }) => (
 	<Expandable id={id} type="Timeline" title={title} pillar={pillar}>
 		{description || ''}

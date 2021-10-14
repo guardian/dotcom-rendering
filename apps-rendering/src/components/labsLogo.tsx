@@ -32,7 +32,7 @@ const styles = css`
     `}
 `;
 
-const Logo: FC<Props> = ({ logo }: Props) => (
+const LabsLogo: FC<Props> = ({ logo }: Props) => (
 	<section css={styles}>
 		<span>Paid for by</span>
 		<span>
@@ -43,4 +43,4 @@ const Logo: FC<Props> = ({ logo }: Props) => (
 	</section>
 );
 
-export default Logo;
+export default LabsLogo;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Special } from '@guardian/types';
+import { ArticleSpecial } from '@guardian/libs';
 import { palette } from '@guardian/src-foundations';
 import { body, textSans } from '@guardian/src-foundations/typography';
 
@@ -33,7 +33,7 @@ const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-const LinkStyle = (pillar: Theme) => css`
+const LinkStyle = (pillar: ArticleTheme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
@@ -44,7 +44,7 @@ const LinkStyle = (pillar: Theme) => css`
 	}
 `;
 
-const TextStyle = (pillar: Theme) => css`
+const TextStyle = (pillar: ArticleTheme) => css`
 	strong {
 		font-weight: 700;
 	}
@@ -76,11 +76,11 @@ const textStyleLabs = css`
 
 export const TextBlockComponent: React.FC<{
 	html: string;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ html, pillar }) => (
 	<span
 		css={
-			pillar === Special.Labs
+			pillar === ArticleSpecial.Labs
 				? [TextStyle(pillar), textStyleLabs]
 				: TextStyle(pillar)
 		}

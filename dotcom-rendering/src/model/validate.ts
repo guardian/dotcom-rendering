@@ -19,6 +19,7 @@ export const validateAsCAPIType = (data: { [key: string]: any }): CAPIType => {
 	const isValid = validate(data);
 
 	if (!isValid) {
+		// @ts-expect-error
 		const url = data.webURL || 'unknown url';
 
 		throw new TypeError(

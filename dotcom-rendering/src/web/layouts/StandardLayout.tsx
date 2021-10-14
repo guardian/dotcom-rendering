@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { css } from '@emotion/react';
 
 import {
@@ -10,8 +11,8 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -49,7 +50,7 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 const StandardGrid = ({
 	children,
@@ -300,7 +301,7 @@ const ageWarningMargins = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -326,7 +327,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
 	const isMatchReport =
-		format.design === Design.MatchReport && !!CAPI.matchUrl;
+		format.design === ArticleDesign.MatchReport && !!CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -335,21 +336,38 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
 	const formatForNav =
-		format.theme === Special.Labs
+		format.theme === ArticleSpecial.Labs
 			? format
 			: {
 					...format,
 					theme: getCurrentPillar(CAPI),
 			  };
 
+	// The following two lines refer to a server-side experiment ("remove-sticky-nav")
+	// that removes the sticky behaviour of the navigation and subnavigation bars
+	// in order to measure ad viewability when these components are not sticky.
+	// TODO: Remove this code after the experiment is complete.
+	const isInRemoveStickyNavVariant =
+		CAPI.config.abTests.removeStickyNavVariant === 'variant';
+	const componentName = isInRemoveStickyNavVariant
+		? 'non-sticky-nav'
+		: 'sticky-nav';
+
 	return (
 		<>
-			<div data-print-layout="hide">
+			{/* The data-component attribute within this div is needed to run analytics on the experiment.
+			Remove after A/B testing is over. */}
+			<div
+				data-print-layout="hide"
+				id="bannerandheader"
+				data-component={componentName}
+			>
 				<>
 					<Stuck>
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
+							showBottomBorder={isInRemoveStickyNavVariant}
 							padded={false}
 							shouldCenter={false}
 						>
@@ -360,7 +378,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					</Stuck>
-					{format.theme !== Special.Labs && (
+					{format.theme !== ArticleSpecial.Labs && (
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
@@ -377,47 +395,113 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					)}
+
+					{/* For the purpose of this A/B test, the nav bar, the subnav and the four lines have been moved up
+					into this div to get rid of stickiness.
+					Remove this block of code after A/B testing is complete to restore original behaviour */}
+					{isInRemoveStickyNavVariant && (
+						<ElementContainer
+							showSideBorders={true}
+							borderColour={brandLine.primary}
+							showTopBorder={false}
+							padded={false}
+							backgroundColour={brandBackground.primary}
+						>
+							<Nav
+								nav={NAV}
+								format={formatForNav}
+								subscribeUrl={
+									CAPI.nav.readerRevenueLinks.header.subscribe
+								}
+								edition={CAPI.editionId}
+							/>
+						</ElementContainer>
+					)}
+
+					{isInRemoveStickyNavVariant &&
+						NAV.subNavSections &&
+						format.theme !== ArticleSpecial.Labs && (
+							<>
+								<ElementContainer
+									backgroundColour={
+										palette.background.article
+									}
+									padded={false}
+									sectionId="sub-nav-root"
+								>
+									<SubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
+										palette={palette}
+										format={format}
+									/>
+								</ElementContainer>
+								<ElementContainer
+									backgroundColour={
+										palette.background.article
+									}
+									padded={false}
+									showTopBorder={false}
+								>
+									<Lines count={4} effect="straight" />
+								</ElementContainer>
+							</>
+						)}
+					{/* Remove block of code above after A/B testing is complete */}
 				</>
 			</div>
 
-			<ElementContainer
-				showSideBorders={true}
-				borderColour={brandLine.primary}
-				showTopBorder={false}
-				padded={false}
-				backgroundColour={brandBackground.primary}
-			>
-				<Nav
-					nav={NAV}
-					format={formatForNav}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
-				/>
-			</ElementContainer>
-
-			{NAV.subNavSections && format.theme !== Special.Labs && (
+			{/* Remove isInRemoveStickyNavVariant conditional rendering after A/B testing is complete */}
+			{!isInRemoveStickyNavVariant && (
 				<ElementContainer
-					backgroundColour={palette.background.article}
+					showSideBorders={true}
+					borderColour={brandLine.primary}
+					showTopBorder={false}
 					padded={false}
-					sectionId="sub-nav-root"
+					backgroundColour={brandBackground.primary}
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-						format={format}
+					<Nav
+						nav={NAV}
+						format={formatForNav}
+						subscribeUrl={
+							CAPI.nav.readerRevenueLinks.header.subscribe
+						}
+						edition={CAPI.editionId}
 					/>
 				</ElementContainer>
 			)}
 
-			{format.theme !== Special.Labs ? (
-				<ElementContainer
-					backgroundColour={palette.background.article}
-					padded={false}
-					showTopBorder={false}
-				>
-					<Lines count={4} effect="straight" />
-				</ElementContainer>
+			{/* Remove !isInRemoveStickyNavVariant conditional rendering after A/B testing is complete */}
+			{!isInRemoveStickyNavVariant &&
+				NAV.subNavSections &&
+				format.theme !== ArticleSpecial.Labs && (
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						sectionId="sub-nav-root"
+					>
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							palette={palette}
+							format={format}
+						/>
+					</ElementContainer>
+				)}
+
+			{/* If the user is in the experiment bucket and the page is not a Guardian Labs article, don't display the four lines,
+			as they've already been rendered in the sticky div above.
+			TODO: Get rid of nested ternary after the experiment is over */}
+			{format.theme !== ArticleSpecial.Labs ? (
+				!isInRemoveStickyNavVariant ? (
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<Lines count={4} effect="straight" />
+					</ElementContainer>
+				) : null
 			) : (
 				<Stuck>
 					<ElementContainer
@@ -456,7 +540,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</GridItem>
 					<GridItem area="border">
-						{format.theme === Special.Labs ? (
+						{format.theme === ArticleSpecial.Labs ? (
 							<></>
 						) : (
 							<Border palette={palette} />
@@ -464,7 +548,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="matchNav">
 						<div css={maxWidth}>
-							{format.design === Design.MatchReport &&
+							{format.design === ArticleDesign.MatchReport &&
 								CAPI.matchUrl && (
 									<Placeholder
 										rootId="match-nav"
@@ -534,7 +618,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="lines">
 						<div css={maxWidth}>
 							<div css={stretchLines}>
-								{format.theme === Special.Labs ? (
+								{format.theme === ArticleSpecial.Labs ? (
 									<GuardianLabsLines />
 								) : (
 									<Lines

@@ -1,4 +1,9 @@
-import { Design, Display, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
@@ -16,14 +21,14 @@ export const Article = () => (
 		<CardHeadline
 			headlineText="This is how an Article card headline looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 		/>
 	</ElementContainer>
@@ -35,14 +40,14 @@ export const Analysis = () => (
 		<CardHeadline
 			headlineText="This is how an Analysis card headline looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Analysis,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Analysis,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Analysis,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Analysis,
+				theme: ArticlePillar.News,
 			})}
 		/>
 	</ElementContainer>
@@ -54,14 +59,14 @@ export const Feature = () => (
 		<CardHeadline
 			headlineText="This is how a Feature card headline looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.News,
 			})}
 		/>
 	</ElementContainer>
@@ -73,14 +78,14 @@ export const xsmallStory = () => (
 		<CardHeadline
 			headlineText="This is how a large card headline looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			size="large"
 		/>
@@ -93,14 +98,14 @@ export const liveStory = () => (
 		<CardHeadline
 			headlineText="This is how a card headline with a live kicker looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			kickerText="Live"
 		/>
@@ -113,14 +118,14 @@ export const noSlash = () => (
 		<CardHeadline
 			headlineText="This is how a card headline with no kicker slash looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			kickerText="Live"
 			showSlash={false}
@@ -134,14 +139,14 @@ export const pulsingDot = () => (
 		<CardHeadline
 			headlineText="This is how a card headline with a pulsing dot looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			kickerText="Live"
 			showPulsingDot={true}
@@ -155,14 +160,14 @@ export const cultureVariant = () => (
 		<CardHeadline
 			headlineText="This is how a Feature card headline with the culture pillar looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.Culture,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.Culture,
 			})}
 			kickerText="Art and stuff"
 		/>
@@ -175,14 +180,14 @@ export const AnalysisXSmall = () => (
 		<CardHeadline
 			headlineText="Xsmall card headline for an Analysis article"
 			format={{
-				display: Display.Standard,
-				design: Design.Analysis,
-				theme: Pillar.Lifestyle,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Analysis,
+				theme: ArticlePillar.Lifestyle,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Analysis,
-				theme: Pillar.Lifestyle,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Analysis,
+				theme: ArticlePillar.Lifestyle,
 			})}
 			size="large"
 		/>
@@ -195,14 +200,14 @@ export const opinionxxxsmall = () => (
 		<CardHeadline
 			headlineText="This is how small card headline for opinion articles look"
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Opinion,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Opinion,
 			})}
 			showQuotes={true}
 			size="small"
@@ -216,14 +221,14 @@ export const OpinionKicker = () => (
 		<CardHeadline
 			headlineText="This is how an opinion card headline with a kicker and quotes looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Opinion,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Opinion,
 			})}
 			showQuotes={true}
 			kickerText="George Monbiot"
@@ -242,14 +247,14 @@ export const SpecialReport = () => (
 		<CardHeadline
 			headlineText="This is how a Special Report card headline with kicker and quotes looks"
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Special.SpecialReport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.SpecialReport,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Special.SpecialReport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.SpecialReport,
 			})}
 			showQuotes={true}
 			kickerText="Special Report"
@@ -264,14 +269,14 @@ export const Busy = () => (
 		<CardHeadline
 			headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 			format={{
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.Lifestyle,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.Lifestyle,
 			}}
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Feature,
-				theme: Pillar.Lifestyle,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: ArticlePillar.Lifestyle,
 			})}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
@@ -287,14 +292,14 @@ export const Byline = () => (
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Special.Labs,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticleSpecial.Labs,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Special.Labs,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticleSpecial.Labs,
 				})}
 				byline="Labs byline"
 				showByline={true}
@@ -305,14 +310,14 @@ export const Byline = () => (
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.News,
 				})}
 				byline="News byline"
 				showByline={true}
@@ -323,14 +328,14 @@ export const Byline = () => (
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Sport,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Sport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Sport,
 				})}
 				byline="Sport byline"
 				showByline={true}
@@ -341,14 +346,14 @@ export const Byline = () => (
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Culture,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Culture,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Culture,
 				})}
 				byline="Culture byline"
 				showByline={true}
@@ -359,14 +364,14 @@ export const Byline = () => (
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Lifestyle,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Lifestyle,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Lifestyle,
 				})}
 				byline="Lifestyle byline"
 				showByline={true}
@@ -377,14 +382,14 @@ export const Byline = () => (
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Opinion,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Pillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Opinion,
 				})}
 				byline="Opinion byline"
 				showByline={true}
@@ -399,14 +404,14 @@ export const Byline = () => (
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticleSpecial.SpecialReport,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Feature,
-					theme: Special.SpecialReport,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticleSpecial.SpecialReport,
 				})}
 				byline="SpecialReport byline"
 				showByline={true}

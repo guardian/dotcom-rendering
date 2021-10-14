@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import {
@@ -10,7 +10,7 @@ import {
 	opinion,
 } from '@guardian/src-foundations/palette';
 import Byline from 'components/byline';
-import Cutout from 'components/comment/cutout';
+import Cutout from 'components/cutout';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';

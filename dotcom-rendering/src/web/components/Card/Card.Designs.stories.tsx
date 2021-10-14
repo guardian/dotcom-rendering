@@ -1,4 +1,4 @@
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { Format } from './Card.Format.stories';
 
@@ -17,9 +17,9 @@ export default {
 
 const Review = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Review,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Review,
 	},
 	'Review',
 	0, // star rating
@@ -27,144 +27,144 @@ const Review = Format(
 
 const Interview = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Interview,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Interview,
 	},
 	'Interview',
 );
 
 const PhotoEssay = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.PhotoEssay,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.PhotoEssay,
 	},
 	'PhotoEssay',
 );
 
 const Feature = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Feature,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Feature,
 	},
 	'Feature',
 );
 
 const Article = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Article,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Standard,
 	},
 	'Article',
 );
 
 const Letter = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Letter,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Letter,
 	},
 	'Letter',
 );
 
 const Quiz = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Quiz,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Quiz,
 	},
 	'Quiz',
 );
 
 const Editorial = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Editorial,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Editorial,
 	},
 	'Editorial',
 );
 
 const Interactive = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Interactive,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Interactive,
 	},
 	'Interactive',
 );
 
 const MatchReport = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.MatchReport,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.MatchReport,
 	},
 	'MatchReport',
 );
 
 const Media = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Media,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Media,
 	},
 	'Media',
 );
 
 const LiveBlog = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.LiveBlog,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.LiveBlog,
 	},
 	'LiveBlog',
 );
 
 const DeadBlog = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.DeadBlog,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.DeadBlog,
 	},
 	'DeadBlog',
 );
 
 const PrintShop = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.PrintShop,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.PrintShop,
 	},
 	'PrintShop',
 );
 
 const Comment = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Comment,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Comment,
 	},
 	'Comment',
 );
 
 const Recipe = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Recipe,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Recipe,
 	},
 	'Recipe',
 );
 
 const Analysis = Format(
 	{
-		display: Display.Standard,
-		theme: Pillar.News,
-		design: Design.Analysis,
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.News,
+		design: ArticleDesign.Analysis,
 	},
 	'Analysis',
 );

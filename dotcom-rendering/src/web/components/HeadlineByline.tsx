@@ -4,7 +4,12 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
-import { Display, Design, Format, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { until } from '@guardian/src-foundations/mq';
 
@@ -15,8 +20,8 @@ const wrapperStyles = css`
 	z-index: 1;
 `;
 
-const yellowBoxStyles = (format: Format) => css`
-	${format.theme === Special.Labs
+const yellowBoxStyles = (format: ArticleFormat) => css`
+	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'regular' })
 		: headline.xxsmall({
 				fontWeight: 'regular',
@@ -42,8 +47,8 @@ const opinionWrapperStyles = css`
 	display: inline-block;
 `;
 
-const opinionStyles = (palette: Palette, format: Format) => css`
-	${format.theme === Special.Labs
+const opinionStyles = (palette: Palette, format: ArticleFormat) => css`
+	${format.theme === ArticleSpecial.Labs
 		? textSans.xxxlarge({ lineHeight: 'loose' })
 		: headline.medium({
 				fontWeight: 'light',
@@ -70,8 +75,8 @@ const opinionStyles = (palette: Palette, format: Format) => css`
 	}
 `;
 
-const immersiveStyles = (format: Format) => css`
-	${format.theme === Special.Labs
+const immersiveStyles = (format: ArticleFormat) => css`
+	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'tight' })
 		: headline.xsmall({
 				fontWeight: 'light',
@@ -79,11 +84,11 @@ const immersiveStyles = (format: Format) => css`
 	margin-bottom: ${space[6]}px;
 `;
 
-const immersiveLinkStyles = (palette: Palette, format: Format) => css`
+const immersiveLinkStyles = (palette: Palette, format: ArticleFormat) => css`
 	a {
 		color: ${palette.text.headlineByline};
 		border-bottom: 1px solid
-			${format.theme === Special.Labs
+			${format.theme === ArticleSpecial.Labs
 				? palette.border.articleLink
 				: palette.text.headlineByline};
 		text-decoration: none;
@@ -101,7 +106,7 @@ const authorBylineWithImage = css`
 `;
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	byline: string;
 	tags: TagType[];
 };
@@ -117,7 +122,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	const palette = decidePalette(format);
 
 	switch (format.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return (
 				<div css={immersiveStyles(format)}>
 					by{' '}
@@ -126,12 +131,12 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 					</span>
 				</div>
 			);
-		case Display.Showcase:
-		case Display.NumberedList:
-		case Display.Standard:
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard:
 		default: {
 			switch (format.design) {
-				case Design.Interview:
+				case ArticleDesign.Interview:
 					return (
 						<div css={wrapperStyles}>
 							<div css={yellowBoxStyles(format)}>
@@ -139,9 +144,9 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 							</div>
 						</div>
 					);
-				case Design.Editorial:
-				case Design.Letter:
-				case Design.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+				case ArticleDesign.Comment:
 					return (
 						<div
 							css={[

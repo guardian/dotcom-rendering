@@ -1,11 +1,9 @@
-import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
-import { CacheProvider, Global, css } from '@emotion/react';
 
-import { focusHalo } from '@guardian/src-foundations/accessibility';
+import { Page } from '@root/src/web/components/Page';
 
 import { escapeData } from '@root/src/lib/escapeData';
 import {
@@ -17,7 +15,7 @@ import {
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 import { decideTheme } from '../lib/decideTheme';
@@ -50,7 +48,7 @@ interface Props {
 }
 
 const decideTitle = (CAPI: CAPIType): string => {
-	if (decideTheme(CAPI.format) === Pillar.Opinion && CAPI.author.byline) {
+	if (decideTheme(CAPI.format) === ArticlePillar.Opinion && CAPI.author.byline) {
 		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
 	}
 	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
@@ -70,20 +68,9 @@ export const document = ({ data }: Props): string => {
 		ids: cssIDs,
 	}: RenderToStringResult = extractCritical(
 		renderToString(
-			<CacheProvider value={cache}>
-				<StrictMode>
-					<Global
-						styles={css`
-							/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-							/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-							*:focus {
-								${focusHalo}
-							}
-						`}
-					/>
-					<DecideLayout CAPI={CAPI} NAV={NAV} />
-				</StrictMode>
-			</CacheProvider>,
+			<Page cache={cache}>
+				<DecideLayout CAPI={CAPI} NAV={NAV} />
+			</Page>,
 		),
 	);
 
@@ -241,7 +228,7 @@ export const document = ({ data }: Props): string => {
 	];
 
 	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const pageHasNonBootInteractiveElements = CAPIElements.some(
 		(element) =>

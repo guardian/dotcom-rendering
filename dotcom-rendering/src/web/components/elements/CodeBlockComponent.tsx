@@ -18,7 +18,7 @@ const codeStyles = css`
 	color: black;
 	text-shadow: 0 1px white;
 	/* The GU fonts don't work here */
-	/* stylelint-disable-next-line property-blacklist */
+	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	text-align: left;
 	white-space: pre;

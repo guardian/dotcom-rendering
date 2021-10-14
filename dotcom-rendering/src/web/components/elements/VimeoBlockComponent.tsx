@@ -14,7 +14,7 @@ const responsiveAspectRatio = (height: number, width: number) => css`
 	}
 `;
 export const VimeoBlockComponent: React.FC<{
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	embedUrl?: string;
 	height: number;

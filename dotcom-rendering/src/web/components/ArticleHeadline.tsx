@@ -6,16 +6,20 @@ import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
-import { Display, Design, Format, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { interactiveLegacyClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	headlineString: string;
-	format: Format;
+	format: ArticleFormat;
 	byline?: string;
 	tags: TagType[];
-	isShowcase?: boolean; // Used for Interviews to change headline position
 	palette: Palette;
 };
 
@@ -220,9 +224,9 @@ export const ArticleHeadline = ({
 	palette,
 }: Props) => {
 	switch (format.display) {
-		case Display.Immersive: {
+		case ArticleDisplay.Immersive: {
 			switch (format.design) {
-				case Design.PrintShop:
+				case ArticleDesign.PrintShop:
 					return (
 						// Immersive headlines have two versions, with main media, and (this one) without
 						<h1
@@ -237,9 +241,9 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					);
-				case Design.Comment:
-				case Design.Editorial:
-				case Design.Letter:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
 					return (
 						<>
 							<h1
@@ -277,7 +281,7 @@ export const ArticleHeadline = ({
 						>
 							<span
 								css={[
-									format.theme === Special.Labs
+									format.theme === ArticleSpecial.Labs
 										? jumboLabsFont
 										: jumboFont,
 									maxWidth,
@@ -292,7 +296,7 @@ export const ArticleHeadline = ({
 					);
 			}
 		}
-		case Display.NumberedList:
+		case ArticleDisplay.NumberedList:
 			return (
 				<h1
 					css={[
@@ -306,13 +310,13 @@ export const ArticleHeadline = ({
 					{curly(headlineString)}
 				</h1>
 			);
-		case Display.Showcase:
-		case Display.Standard:
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.Standard:
 		default: {
 			switch (format.design) {
-				case Design.Review:
-				case Design.Recipe:
-				case Design.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Feature:
 					return (
 						<h1
 							css={[
@@ -326,8 +330,8 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					);
-				case Design.Comment:
-				case Design.Editorial:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
 					return (
 						<>
 							<h1
@@ -351,7 +355,7 @@ export const ArticleHeadline = ({
 						</>
 					);
 
-				case Design.Letter:
+				case ArticleDesign.Letter:
 					return (
 						<>
 							<h1
@@ -367,7 +371,7 @@ export const ArticleHeadline = ({
 							</h1>
 						</>
 					);
-				case Design.Analysis:
+				case ArticleDesign.Analysis:
 					return (
 						<h1
 							css={[
@@ -382,7 +386,7 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					);
-				case Design.Interview:
+				case ArticleDesign.Interview:
 					return (
 						// Inverted headlines have a wrapper div for positioning
 						// and a black background (only for the text)
@@ -420,8 +424,8 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
-				case Design.LiveBlog:
-				case Design.DeadBlog:
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
 					return (
 						<h1
 							css={[
@@ -434,7 +438,7 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					);
-				case Design.Interactive:
+				case ArticleDesign.Interactive:
 					return (
 						<div
 							css={css`
@@ -459,7 +463,7 @@ export const ArticleHeadline = ({
 					return (
 						<h1
 							css={[
-								format.theme === Special.Labs
+								format.theme === ArticleSpecial.Labs
 									? labsFont
 									: standardFont,
 								topPadding,

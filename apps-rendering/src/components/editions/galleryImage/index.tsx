@@ -1,12 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Sizes } from '@guardian/image-rendering';
-import { Img } from '@guardian/image-rendering';
+import Img from '@guardian/common-rendering/src/components/img';
+import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
-import { map, none, some, withDefault } from '@guardian/types';
+import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
 import { maybeRender, pipe } from 'lib';
 import type { FC } from 'react';
@@ -26,7 +26,7 @@ type CaptionProps = {
 
 type CaptionDetails = {
 	location: Option<string>;
-	description: Option<string>;
+	description: Option<string[]>;
 };
 
 const sizes: Sizes = {
@@ -49,7 +49,18 @@ const styles = css`
 const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 	const details: CaptionDetails = {
 		location: none,
-		description: none,
+		description: some([]),
+	};
+
+	const pushToDescription = (
+		details: CaptionDetails,
+		node: Node,
+	): CaptionDetails => {
+		node.textContent &&
+			details.description.kind === OptionKind.Some &&
+			details.description.value.push(node.textContent);
+
+		return details;
 	};
 
 	const parseCaptionNode = (doc: DocumentFragment): CaptionDetails =>
@@ -58,10 +69,8 @@ const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 				details.location = node.textContent
 					? some(node.textContent)
 					: none;
-			} else if (node.nodeName === '#text') {
-				details.description = node.textContent
-					? some(node.textContent)
-					: none;
+			} else if (node.nodeName === '#text' || node.nodeName === 'A') {
+				details = pushToDescription(details, node);
 			}
 			return details;
 		}, details);
@@ -115,14 +124,23 @@ const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
 	);
 };
 
-const CaptionDescription: FC<{ description: string }> = ({ description }) => {
+const CaptionDescription: FC<{ description: string[] }> = ({ description }) => {
 	const styles = css`
 		${textSans.small({ lineHeight: 'regular' })};
 		color: ${neutral[100]};
 		margin: 0;
 		padding: 0;
+		display: inline;
 	`;
-	return <p css={styles}>{description}</p>;
+	return (
+		<>
+			{description.map((desc, i) => (
+				<p key={i} css={styles}>
+					{desc}
+				</p>
+			))}
+		</>
+	);
 };
 
 const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {

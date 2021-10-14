@@ -7,9 +7,16 @@ import { getFontsCss } from "@root/src/lib/fonts-css";
 
 // import 'reset-css';
 
+<<<<<<< HEAD
 import { Lazy } from "@root/src/web/components/Lazy";
 import { Picture } from "@root/src/web/components/Picture";
 import { mockRESTCalls } from "@root/src/web/lib/mockRESTCalls";
+=======
+import { Lazy } from '@root/src/web/components/Lazy';
+import { Picture } from '@root/src/web/components/Picture';
+import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
+import { addCookie } from '@root/src/web/browser/cookie';
+>>>>>>> 28425a1a639ed6ad3cdba27f953d4780b17b1d00
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -29,6 +36,22 @@ mockRESTCalls();
 // head.appendChild(style);
 // style.type = "text/css";
 // style.appendChild(document.createTextNode(css));
+
+// Mock certain page properties to ensure client side hydration completes as expected
+// in our page/layout stories. These properties were specifically added after we refactored
+// how the CMP loads in App.tsx but they are also used in other areas and can be taken
+// as an example for a quick way to mock cookies or the window object.
+// Could this be better? Sure, we could investigate ways to really, truly server side
+// render in Storybook but for now this (and some of the other steps we take around
+// hydration) achieve what we need
+window.guardian = {
+	config: {
+		ophan: {
+			pageViewId: 'mockPageViewId',
+		}
+	},
+}
+addCookie('bwid', 'mockBrowserId');
 
 const guardianViewports = {
 	mobileMedium: {

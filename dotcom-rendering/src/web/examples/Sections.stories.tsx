@@ -8,8 +8,8 @@ import { Header } from '@frontend/web/components/Header';
 import { Footer } from '@frontend/web/components/Footer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 
-import { Lines } from '@guardian/src-ed-lines';
-import { Display, Pillar, Design } from '@guardian/types';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
 
 import {
 	brandBorder,
@@ -69,9 +69,9 @@ export const Sections = (): React.ReactNode => (
 		>
 			<Nav
 				format={{
-					theme: Pillar.News,
-					display: Display.Standard,
-					design: Design.Article,
+					theme: ArticlePillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
 				}}
 				nav={NAV}
 				subscribeUrl=""
@@ -141,7 +141,7 @@ export const Sections = (): React.ReactNode => (
 		>
 			<Footer
 				pageFooter={pageFooter}
-				pillar={Pillar.News}
+				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
 			/>
 		</ElementContainer>

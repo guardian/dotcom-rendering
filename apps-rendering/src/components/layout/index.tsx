@@ -7,22 +7,21 @@ import type { Format } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
-import Comment from 'components/comment/article';
-import Interactive from 'components/interactive/article';
-import Labs from 'components/labs/article';
-import Media from 'components/media/article';
-import Standard from 'components/standard/article';
+import Comment from 'components/layout/comment';
+import Interactive from 'components/layout/interactive';
+import Labs from 'components/layout/labs';
+import Media from 'components/layout/media';
+import Standard from 'components/layout/standard';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 
 // ----- Functions ----- //
 
-const renderWithAds = (shouldHide: boolean) => (
-	format: Format,
-	elements: BodyElement[],
-): ReactNode[] =>
-	getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
+const renderWithAds =
+	(shouldHide: boolean) =>
+	(format: Format, elements: BodyElement[]): ReactNode[] =>
+		getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
 
 // ----- Component ----- //
 
@@ -41,7 +40,7 @@ const notImplemented = (
 	</p>
 );
 
-const Body: FC<Props> = ({ item, shouldHideAds }) => {
+const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 	if (item.design === Design.LiveBlog) {
 		return notImplemented;
 	}
@@ -98,4 +97,4 @@ const Body: FC<Props> = ({ item, shouldHideAds }) => {
 
 // ----- Exports ----- //
 
-export default Body;
+export default Layout;

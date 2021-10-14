@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { images } from '@root/fixtures/generated/images';
 
@@ -87,9 +87,9 @@ export const VideoAsSecond = () => {
 			<LiveBlock
 				adTargeting={{ adUnit: '', customParams: {} }}
 				format={{
-					theme: Pillar.News,
-					design: Design.LiveBlog,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
 				}}
 				block={block}
 				pageId=""
@@ -130,9 +130,9 @@ export const Title = () => {
 			<LiveBlock
 				adTargeting={{ adUnit: '', customParams: {} }}
 				format={{
-					theme: Pillar.News,
-					design: Design.LiveBlog,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
 				}}
 				block={block}
 				pageId=""
@@ -198,9 +198,9 @@ export const Video = () => {
 			<LiveBlock
 				adTargeting={{ adUnit: '', customParams: {} }}
 				format={{
-					theme: Pillar.News,
-					design: Design.LiveBlog,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
 				}}
 				block={block}
 				pageId=""
@@ -238,9 +238,9 @@ export const RichLink = () => {
 			<LiveBlock
 				adTargeting={{ adUnit: '', customParams: {} }}
 				format={{
-					theme: Pillar.News,
-					design: Design.LiveBlog,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
 				}}
 				block={block}
 				pageId=""
@@ -266,9 +266,9 @@ export const FirstImage = () => {
 			<LiveBlock
 				adTargeting={{ adUnit: '', customParams: {} }}
 				format={{
-					theme: Pillar.News,
-					design: Design.LiveBlog,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
 				}}
 				block={block}
 				pageId=""
@@ -295,9 +295,9 @@ export const ImaheAndTitle = () => {
 			<LiveBlock
 				adTargeting={{ adUnit: '', customParams: {} }}
 				format={{
-					theme: Pillar.News,
-					design: Design.LiveBlog,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
 				}}
 				block={block}
 				pageId=""
@@ -320,9 +320,9 @@ export const Updated = () => {
 			<LiveBlock
 				adTargeting={{ adUnit: '', customParams: {} }}
 				format={{
-					theme: Pillar.News,
-					design: Design.LiveBlog,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
 				}}
 				block={block}
 				pageId=""

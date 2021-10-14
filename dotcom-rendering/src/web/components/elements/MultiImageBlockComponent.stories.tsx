@@ -1,4 +1,4 @@
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
@@ -20,14 +20,14 @@ export const SingleImage = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={oneImage}
 			/>
@@ -43,14 +43,14 @@ export const SingleImageWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={oneImage}
 				caption="This is the caption for a single image"
@@ -67,14 +67,14 @@ export const SideBySide = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={twoImages}
 			/>
@@ -90,14 +90,14 @@ export const SideBySideWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={twoImages}
 				caption="This is the caption for side by side"
@@ -114,14 +114,14 @@ export const OneAboveTwo = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={threeImages}
 			/>
@@ -137,14 +137,14 @@ export const OneAboveTwoWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={threeImages}
 				caption="This is the caption for one above two"
@@ -161,14 +161,14 @@ export const GridOfFour = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={fourImages}
 			/>
@@ -184,14 +184,14 @@ export const GridOfFourWithCaption = () => {
 		<ContainerLayout>
 			<MultiImageBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				images={fourImages}
 				caption="This is the caption for grid of four"

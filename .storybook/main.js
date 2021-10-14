@@ -153,7 +153,6 @@ const arWebpack = (config) => {
 			__dirname,
 			`../apps-rendering/src/logger/clientDev`
 		),
-		"preact-render-to-string": "react-dom/server",
 		Buffer: "buffer",
 	};
 

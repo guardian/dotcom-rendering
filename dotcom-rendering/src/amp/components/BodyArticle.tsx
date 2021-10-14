@@ -1,7 +1,10 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Design, Special } from '@guardian/types';
+import {
+	ArticleDesign as Design,
+	ArticleSpecial as Special,
+} from '@guardian/libs';
 import { until } from '@guardian/src-foundations/mq';
 import { text } from '@guardian/src-foundations/palette';
 import { palette } from '@guardian/src-foundations';
@@ -26,7 +29,7 @@ const innerContainerStyles = css`
 	padding-right: 10px;
 `;
 
-const bulletStyle = (pillar: Theme) => css`
+const bulletStyle = (pillar: ArticleTheme) => css`
 	.bullet {
 		color: transparent;
 		font-size: 1px;
@@ -44,7 +47,7 @@ const bulletStyle = (pillar: Theme) => css`
 	}
 `;
 
-const decideBackground = (design: Design, pillar: Theme): string => {
+const decideBackground = (design: Design, pillar: ArticleTheme): string => {
 	if (pillar === Special.Labs) return palette.neutral[86];
 	switch (design) {
 		case Design.Comment:
@@ -55,7 +58,7 @@ const decideBackground = (design: Design, pillar: Theme): string => {
 	}
 };
 
-const body = (pillar: Pillar, design: Design) => {
+const body = (pillar: ArticlePillar, design: Design) => {
 	return css`
 		background-color: ${decideBackground(design, pillar)};
 		${bulletStyle(pillar)}
@@ -77,7 +80,7 @@ const adStyle = css`
 		display: block;
 		${textSans.xxsmall()};
 		/* Adverts specifcally don't use the GU font branding. */
-		/* stylelint-disable-next-line property-blacklist */
+		/* stylelint-disable-next-line property-disallowed-list */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
 			sans-serif;
 		padding: 3px 10px;
@@ -140,27 +143,6 @@ export const Body: React.FC<{
 								css={adStyle}
 							>
 								<Ad
-									adRegion="US"
-									edition={data.editionId}
-									section={data.sectionName || ''}
-									contentType={adInfo.contentType}
-									config={adConfig}
-									commercialProperties={
-										adInfo.commercialProperties
-									}
-								/>
-								<Ad
-									adRegion="AU"
-									edition={data.editionId}
-									section={data.sectionName || ''}
-									contentType={adInfo.contentType}
-									config={adConfig}
-									commercialProperties={
-										adInfo.commercialProperties
-									}
-								/>
-								<Ad
-									adRegion="ROW"
 									edition={data.editionId}
 									section={data.sectionName || ''}
 									contentType={adInfo.contentType}

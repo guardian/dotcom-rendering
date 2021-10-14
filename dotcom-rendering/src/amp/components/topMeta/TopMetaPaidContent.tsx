@@ -84,7 +84,7 @@ const Headline: React.FC<{
 
 export const TopMetaPaidContent: React.FC<{
 	articleData: ArticleModel;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ articleData, pillar }) => (
 	<header>
 		<PaidForBand />

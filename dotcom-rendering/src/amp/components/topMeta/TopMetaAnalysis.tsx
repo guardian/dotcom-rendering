@@ -54,7 +54,7 @@ const underlinedStyles = css`
 	background-origin: content-box;
 `;
 
-const bylineStyle = (pillar: Theme) => css`
+const bylineStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	padding-bottom: 8px;
@@ -92,7 +92,7 @@ const Headline: React.FC<{
 export const TopMetaAnalysis: React.FC<{
 	articleData: ArticleModel;
 	adTargeting?: AdTargeting;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ articleData, adTargeting, pillar }) => {
 	return (
 		<header>

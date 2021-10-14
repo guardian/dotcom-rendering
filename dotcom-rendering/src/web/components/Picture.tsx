@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
+import { ArticleDisplay } from '@guardian/libs';
 
 import { breakpoints } from '@guardian/src-foundations/mq';
 
 type Props = {
 	imageSources: ImageSource[];
 	role: RoleType;
+	format: ArticleFormat;
 	alt: string;
 	height: string;
 	width: string;
@@ -87,7 +89,31 @@ const getSources = (
  *       wide: 1300
  */
 
-const getSizes = (role: RoleType, isMainMedia: boolean): string => {
+const getSizes = (
+	role: RoleType,
+	isMainMedia: boolean,
+	format: ArticleFormat,
+): string => {
+	if (format.display === ArticleDisplay.Immersive && isMainMedia) {
+		// Immersive MainMedia elements fill the height of the viewport, meaning
+		// on mobile devices even though the viewport width is small, we'll need
+		// a larger image to maintain quality. To solve this problem we're using
+		// the viewport height (vh) to calculate width. The value of 167vh
+		// relates to an assumed image ratio of 5:3 which is equal to
+		// 167 (viewport height)  : 100 (viewport width).
+		return `(orientation: portrait) 167vh, 100vw`;
+	}
+
+	if (
+		(format.display === ArticleDisplay.Showcase ||
+			format.display === ArticleDisplay.NumberedList) &&
+		isMainMedia
+	) {
+		// Showcase main media images (which includes numbered list articles) appear
+		// larger than in body showcase images so we use a different set of image sizes
+		return `(min-width: ${breakpoints.wide}px) 1020px, (min-width: ${breakpoints.leftCol}px) 940px, (min-width: ${breakpoints.tablet}px) 700px, (min-width: ${breakpoints.phablet}px) 660px, 100vw`;
+	}
+
 	switch (role) {
 		case 'inline':
 			return `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
@@ -96,30 +122,18 @@ const getSizes = (role: RoleType, isMainMedia: boolean): string => {
 		case 'thumbnail':
 			return '140px';
 		case 'immersive':
-			// Immersive MainMedia elements fill the height of the viewport, meaning
-			// on mobile devices even though the viewport width is small, we'll need
-			// a larger image to maintain quality. To solve this problem we're using
-			// the viewport height (vh) to calculate width. The value of 167vh
-			// relates to an assumed image ratio of 5:3 which is equal to
-			// 167 (viewport height)  : 100 (viewport width).
-
-			// Immersive body images stretch the full viewport width below wide,
-			// but do not stretch beyond 1300px after that.
-			return isMainMedia
-				? `(orientation: portrait) 167vh, 100vw`
-				: `(min-width: ${breakpoints.wide}px) 1300px, 100vw`;
+			return `(min-width: ${breakpoints.wide}px) 1300px, 100vw`;
 		case 'supporting':
 			return `(min-width: ${breakpoints.wide}px) 380px, 300px`;
 		case 'showcase':
-			return isMainMedia
-				? `(min-width: ${breakpoints.wide}px) 1020px, (min-width: ${breakpoints.leftCol}px) 940px, (min-width: ${breakpoints.tablet}px) 700px, (min-width: ${breakpoints.phablet}px) 660px, 100vw`
-				: `(min-width: ${breakpoints.wide}px) 860px, (min-width: ${breakpoints.leftCol}px) 780px, (min-width: ${breakpoints.phablet}px) 620px, 100vw`;
+			return `(min-width: ${breakpoints.wide}px) 860px, (min-width: ${breakpoints.leftCol}px) 780px, (min-width: ${breakpoints.phablet}px) 620px, 100vw`;
 	}
 };
 
 export const Picture = ({
 	imageSources,
 	role,
+	format,
 	alt,
 	height,
 	width,
@@ -129,7 +143,7 @@ export const Picture = ({
 	const hdpiSources = getSources(role, 'hdpi', imageSources);
 	const mdpiSources = getSources(role, 'mdpi', imageSources);
 	const fallbackSrc = getFallback(role, 'hdpi', imageSources);
-	const sizes = getSizes(role, isMainMedia);
+	const sizes = getSizes(role, isMainMedia, format);
 
 	return (
 		<picture itemProp="contentUrl">

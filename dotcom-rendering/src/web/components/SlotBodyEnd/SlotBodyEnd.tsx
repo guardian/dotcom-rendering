@@ -8,7 +8,8 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type { BrazeMessagesInterface, BrazeArticleContext } from '@guardian/braze-components/logic';
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	ReaderRevenueEpic,
 	canShow as canShowReaderRevenueEpic,
@@ -30,6 +31,7 @@ type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	idApiUrl: string;
 	stage: string;
+	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 };
 
 const buildReaderRevenueEpicConfig = ({
@@ -44,6 +46,7 @@ const buildReaderRevenueEpicConfig = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	stage,
+	asyncArticleCount,
 }: RRCanShowData): CandidateConfig<RREpicConfig> => {
 	return {
 		candidate: {
@@ -61,6 +64,7 @@ const buildReaderRevenueEpicConfig = ({
 					contributionsServiceUrl,
 					idApiUrl,
 					stage,
+					asyncArticleCount,
 				}),
 			show: (meta: RREpicConfig) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
@@ -75,11 +79,12 @@ const buildBrazeEpicConfig = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
 	countryCode: string,
 	idApiUrl: string,
+	brazeArticleContext: BrazeArticleContext
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
 			id: 'braze-epic',
-			canShow: () => canShowBrazeEpic(brazeMessages),
+			canShow: () => canShowBrazeEpic(brazeMessages, brazeArticleContext),
 			show: (meta: any) => () => (
 				<MaybeBrazeEpic
 					meta={meta}
@@ -105,6 +110,7 @@ export const SlotBodyEnd = ({
 	brazeMessages,
 	idApiUrl,
 	stage,
+	asyncArticleCount,
 }: Props) => {
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -120,11 +126,18 @@ export const SlotBodyEnd = ({
 			contributionsServiceUrl,
 			idApiUrl,
 			stage,
+			asyncArticleCount: asyncArticleCount as Promise<
+				WeeklyArticleHistory | undefined
+			>,
 		});
+		const brazeArticleContext: BrazeArticleContext = {
+			section: sectionName
+		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,
 			countryCode as string,
 			idApiUrl,
+			brazeArticleContext
 		);
 		const epicConfig: SlotConfig = {
 			candidates: [brazeEpic, readerRevenueEpic],
@@ -136,7 +149,7 @@ export const SlotBodyEnd = ({
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, countryCode, brazeMessages]);
+	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedEpic) {
 		return <SelectedEpic />;

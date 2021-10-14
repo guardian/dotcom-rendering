@@ -5,6 +5,7 @@ import { regionClasses } from '@root/src/amp/lib/region-classes';
 
 // Largest size first
 const inlineSizes = [
+	{ width: 320, height: 480 }, // Picnic story
 	{ width: 300, height: 250 }, // MPU
 	{ width: 250, height: 250 }, // Square
 ];
@@ -13,6 +14,9 @@ const inlineSizes = [
 const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
 
 type AdRegion = 'US' | 'AU' | 'ROW';
+
+// Array of possible ad regions
+const adRegions: AdRegion[] = ['US', 'AU', 'ROW'];
 
 const dfpAdUnitRoot = 'theguardian.com';
 
@@ -26,10 +30,26 @@ const ampData = (section: string, contentType: string): string => {
 	return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
-const getPlacementId = (adRegion: AdRegion): number => {
+/**
+ * Determine the Placement ID that is used to look up a given stored bid request
+ *
+ * Stored bid requests are stored by the prebid server instance and each is
+ * keyed by a placement ID. This placement ID corresponds to the tag id parameter
+ * provided on the client
+ *
+ * @param isSticky Whether the ad is sticky - sticky ads have stored bid requests
+ * containing different SSP ids to non-sticky ads
+ * @param adRegion The advertising region - different regions are covered by different
+ * stored bid requests
+ * @returns The placement id for an ad, depending on its ad region and whether
+ * it is sticky
+ */
+const getPlacementId = (isSticky: boolean, adRegion: AdRegion): number => {
 	switch (adRegion) {
-		case 'US':
-			return 7;
+		case 'US': {
+			// In the US use different placement IDs depending on whether ad is sticky
+			return isSticky ? 22138171 : 7;
+		}
 		case 'AU':
 			return 6;
 		default:
@@ -38,16 +58,19 @@ const getPlacementId = (adRegion: AdRegion): number => {
 };
 
 const realTimeConfig = (
+	isSticky: boolean,
 	adRegion: AdRegion,
 	usePrebid: boolean,
 	usePermutive: boolean,
 ): any => {
-	const placementID = getPlacementId(adRegion);
+	const placementID = getPlacementId(isSticky, adRegion);
 	const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
 	const permutiveURL =
 		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
-
 	const prebidURL = [
+		// The tag_id in the URL is used to look up the bulk of the request
+		// In this case it corresponds to the placement ID of the bid requests
+		// on the prebid server
 		`${preBidServerPrefix}?tag_id=${placementID}`,
 		'w=ATTR(width)',
 		'h=ATTR(height)',
@@ -80,7 +103,6 @@ interface CommercialConfig {
 
 export interface AdProps {
 	isSticky?: boolean;
-	adRegion: AdRegion;
 	edition: Edition;
 	section: string;
 	contentType: string;
@@ -88,17 +110,23 @@ export interface AdProps {
 	commercialProperties: CommercialProperties;
 }
 
-export const Ad = ({
-	isSticky,
+export interface RegionalAdProps extends AdProps {
+	adRegion: AdRegion;
+}
+
+export const RegionalAd = ({
+	isSticky = false,
 	adRegion,
 	edition,
 	section,
 	contentType,
 	config,
 	commercialProperties,
-}: AdProps) => {
+}: RegionalAdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
-	const [{ width, height }] = adSizes; // Set initial size as first element (should be the largest)
+	// Set Primary ad size as first element (should be the largest)
+	const [{ width, height }] = adSizes;
+	// Secondary ad sizes
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	return (
@@ -111,9 +139,15 @@ export const Ad = ({
 						`,
 					)}
 					data-block-on-consent=""
+					// Primary ad size width and height
 					width={width}
 					height={height}
+					// Secondary ad sizes
 					data-multi-size={multiSizes}
+					// Setting data-multi-size-validation to false allows
+					// secondary ad sizes that are less than 2/3rds of the
+					// corresponding primary size.
+					data-multi-size-validation="false"
 					data-npa-on-unknown-consent={true}
 					data-loading-strategy="prefer-viewability-over-views"
 					layout="fixed"
@@ -123,6 +157,7 @@ export const Ad = ({
 					)}
 					data-slot={ampData(section, contentType)}
 					rtc-config={realTimeConfig(
+						isSticky,
 						adRegion,
 						config.usePrebid,
 						config.usePermutive,
@@ -132,3 +167,26 @@ export const Ad = ({
 		</ClassNames>
 	);
 };
+
+export const Ad = ({
+	isSticky,
+	edition,
+	section,
+	contentType,
+	config,
+	commercialProperties,
+}: AdProps) => (
+	<>
+		{adRegions.map((adRegion) => (
+			<RegionalAd
+				adRegion={adRegion}
+				isSticky={isSticky}
+				edition={edition}
+				section={section}
+				contentType={contentType}
+				config={config}
+				commercialProperties={commercialProperties}
+			/>
+		))}
+	</>
+);

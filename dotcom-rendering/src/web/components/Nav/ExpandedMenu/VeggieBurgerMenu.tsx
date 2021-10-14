@@ -4,7 +4,7 @@ import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 import { from } from '@guardian/src-foundations/mq';
 import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
@@ -67,7 +67,7 @@ const veggieBurgerIconStyles = css`
 	}
 `;
 
-const veggieBurgerStyles = (display: Display) => css`
+const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	background-color: ${brandAlt[400]};
 	color: ${neutral[7]};
 	cursor: pointer;
@@ -82,7 +82,7 @@ const veggieBurgerStyles = (display: Display) => css`
 	right: 5px;
 	bottom: 58px;
 	${from.mobileMedium} {
-		bottom: ${display === Display.Immersive ? '3px' : '-3px'};
+		bottom: ${display === ArticleDisplay.Immersive ? '3px' : '-3px'};
 		right: 5px;
 	}
 	${from.mobileLandscape} {
@@ -101,7 +101,7 @@ const veggieBurgerStyles = (display: Display) => css`
 `;
 
 export const VeggieBurgerMenu: React.FC<{
-	display: Display;
+	display: ArticleDisplay;
 }> = ({ display }) => {
 	return (
 		/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */

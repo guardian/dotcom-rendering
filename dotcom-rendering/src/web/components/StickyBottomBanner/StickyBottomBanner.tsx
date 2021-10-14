@@ -16,9 +16,10 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
-import { CountryCode } from '@guardian/types';
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import { CountryCode } from '@guardian/libs';
+import type { BrazeArticleContext, BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
@@ -27,6 +28,7 @@ type Props = {
 	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	isPreview: boolean;
+	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 };
 
 type RRBannerConfig = {
@@ -77,6 +79,7 @@ const buildRRBannerConfigWith = ({
 		isSignedIn: boolean,
 		asyncCountryCode: Promise<string>,
 		isPreview: boolean,
+		asyncArticleCount: Promise<WeeklyArticleHistory | undefined>,
 		signInGateWillShow: boolean = false,
 	): CandidateConfig<BannerProps> => {
 		return {
@@ -106,6 +109,7 @@ const buildRRBannerConfigWith = ({
 						isPreview,
 						idApiUrl: CAPI.config.idApiUrl,
 						signInGateWillShow,
+						asyncArticleCount,
 					}),
 				show: ({ meta, module, email }: BannerProps) => () => (
 					<BannerComponent
@@ -136,10 +140,11 @@ const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 
 const buildBrazeBanner = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
+	brazeArticleContext: BrazeArticleContext
 ): CandidateConfig<any> => ({
 	candidate: {
 		id: 'braze-banner',
-		canShow: () => canShowBrazeBanner(brazeMessages),
+		canShow: () => canShowBrazeBanner(brazeMessages, brazeArticleContext),
 		show: (meta: any) => () => <BrazeBanner meta={meta} />,
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
@@ -151,6 +156,7 @@ export const StickyBottomBanner = ({
 	CAPI,
 	brazeMessages,
 	isPreview,
+	asyncArticleCount,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({ isSignedIn, CAPI });
@@ -161,16 +167,22 @@ export const StickyBottomBanner = ({
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<string>,
 			isPreview,
+			asyncArticleCount as Promise<WeeklyArticleHistory | undefined>,
 		);
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			CAPI,
 			isSignedIn as boolean,
 			asyncCountryCode as Promise<CountryCode>,
 			isPreview,
+			asyncArticleCount as Promise<WeeklyArticleHistory | undefined>,
 			signInGateWillShow,
 		);
+		const brazeArticleContext: BrazeArticleContext = {
+			section: CAPI.sectionName
+		};
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
+			brazeArticleContext
 		);
 		const bannerConfig: SlotConfig = {
 			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],
@@ -184,7 +196,7 @@ export const StickyBottomBanner = ({
 			.catch((e) =>
 				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, asyncCountryCode, CAPI, brazeMessages]);
+	}, [isSignedIn, asyncCountryCode, CAPI, brazeMessages, asyncArticleCount]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;
