@@ -1,16 +1,25 @@
+// ----- Imports ----- //
+
 import { matchers } from '@emotion/jest';
 import { some } from '@guardian/types';
-import HeaderImageCaption, { captionId } from 'components/headerImageCaption';
+import ImageDetails from './imageDetails';
 import renderer from 'react-test-renderer';
 
+// ----- Setup ----- //
+
 expect.extend(matchers);
+const captionId = 'header-image-caption';
+
+// ----- Tests ----- //
 
 describe('HeaderImageCaption component renders as expected', () => {
 	it('Formats the Caption correctly', () => {
 		const headerImageCaption = renderer.create(
-			<HeaderImageCaption
+			<ImageDetails
 				caption={some('Here is a caption.')}
 				credit={some('Photograph: cameraman')}
+				supportsDarkMode
+				id={captionId}
 			/>,
 		);
 
