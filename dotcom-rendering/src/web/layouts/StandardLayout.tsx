@@ -350,7 +350,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
-							showBottomBorder={true}
 							padded={false}
 							shouldCenter={false}
 						>
