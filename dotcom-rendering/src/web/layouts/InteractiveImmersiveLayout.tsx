@@ -14,7 +14,10 @@ import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
-import { MobileStickyContainer } from '@root/src/web/components/AdSlot';
+import {
+	MobileStickyContainer,
+	labelStyles as adLabelStyles,
+} from '@root/src/web/components/AdSlot';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -88,6 +91,8 @@ const Renderer: React.FC<{
 	});
 
 	const adStyles = css`
+		${adLabelStyles}
+
 		${from.tablet} {
 			.mobile-only .ad-slot {
 				display: none;
