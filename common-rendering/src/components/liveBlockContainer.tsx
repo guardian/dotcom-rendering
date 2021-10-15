@@ -21,7 +21,6 @@ const LiveBlockContainer = ({
 		<div
 			id={`block-${id}`}
 			css={css`
-				display: inline-flex;
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
