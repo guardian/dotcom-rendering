@@ -171,7 +171,6 @@ export const LiveBlock = ({
 
 	return (
 		<LiveBlockContainer id={block.id} borderColour={palette.border.liveBlock}>
-			<>
 				<Header>
 					{block.blockFirstPublished && (
 						<FirstPublished
@@ -236,7 +235,6 @@ export const LiveBlock = ({
 						</div>
 					</Hide>
 				</div>
-			</>
 		</LiveBlockContainer>
 	);
 };

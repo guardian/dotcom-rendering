@@ -4,7 +4,7 @@ import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
 
 const LEFT_MARGIN_DESKTOP = 60;
-const SIDE_MARGIN = 20;
+const SIDE_MARGIN = space[5];
 const SIDE_MARGIN_MOBILE = 10;
 
 const LiveBlockContainer = ({
