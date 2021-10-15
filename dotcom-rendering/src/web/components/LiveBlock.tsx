@@ -171,70 +171,70 @@ export const LiveBlock = ({
 
 	return (
 		<LiveBlockContainer id={block.id} borderColour={palette.border.liveBlock}>
-				<Header>
-					{block.blockFirstPublished && (
-						<FirstPublished
-							firstPublished={block.blockFirstPublished}
-							blockLink={blockLink}
-						/>
-					)}
-					{block.title && <BlockTitle title={block.title} />}
-					{headerElement &&
-						renderArticleElement({
-							format,
-							palette,
-							element: headerElement,
-							isMainMedia: false,
-							host,
-							adTargeting,
-							index: 0,
-							pageId,
-							webTitle,
-						})}
-				</Header>
-				{/* For each element, we decide what margins to set depending on the type */}
-				{mainElements.map((element, index) => (
-					<p key={`${element._type}-${index}`}>
-						{renderArticleElement({
-							format,
-							palette,
-							element,
-							isMainMedia: false,
-							index,
-							pageId,
-							webTitle,
-						})}
-					</p>
-					)
+			<Header>
+				{block.blockFirstPublished && (
+					<FirstPublished
+						firstPublished={block.blockFirstPublished}
+						blockLink={blockLink}
+					/>
 				)}
-				<div>
-					<Hide when="below" breakpoint="phablet">
-						<div
-							css={css`
-								display: flex;
-								justify-content: space-between;
-							`}
-						>
-							<ShareIcons
-								pageId={pageId}
-								webTitle={webTitle}
-								displayIcons={['facebook', 'twitter']}
-								palette={palette}
-								size="small"
-							/>
-							{showLastUpdated &&
-								block.blockLastUpdated &&
-								block.blockLastUpdatedDisplay && (
-									<LastUpdated
-										lastUpdated={block.blockLastUpdated}
-										lastUpdatedDisplay={
-											block.blockLastUpdatedDisplay
-										}
-									/>
-								)}
-						</div>
-					</Hide>
-				</div>
+				{block.title && <BlockTitle title={block.title} />}
+				{headerElement &&
+					renderArticleElement({
+						format,
+						palette,
+						element: headerElement,
+						isMainMedia: false,
+						host,
+						adTargeting,
+						index: 0,
+						pageId,
+						webTitle,
+					})}
+			</Header>
+			{/* For each element, we decide what margins to set depending on the type */}
+			{mainElements.map((element, index) => (
+				<p key={`${element._type}-${index}`}>
+					{renderArticleElement({
+						format,
+						palette,
+						element,
+						isMainMedia: false,
+						index,
+						pageId,
+						webTitle,
+					})}
+				</p>
+				)
+			)}
+			<div>
+				<Hide when="below" breakpoint="phablet">
+					<div
+						css={css`
+							display: flex;
+							justify-content: space-between;
+						`}
+					>
+						<ShareIcons
+							pageId={pageId}
+							webTitle={webTitle}
+							displayIcons={['facebook', 'twitter']}
+							palette={palette}
+							size="small"
+						/>
+						{showLastUpdated &&
+							block.blockLastUpdated &&
+							block.blockLastUpdatedDisplay && (
+								<LastUpdated
+									lastUpdated={block.blockLastUpdated}
+									lastUpdatedDisplay={
+										block.blockLastUpdatedDisplay
+									}
+								/>
+							)}
+					</div>
+				</Hide>
+			</div>
 		</LiveBlockContainer>
 	);
 };
