@@ -11,6 +11,7 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';

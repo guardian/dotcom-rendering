@@ -55,6 +55,7 @@ import {
 	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 import { Figure } from '../components/Figure';
 import {
 	isInteractive,

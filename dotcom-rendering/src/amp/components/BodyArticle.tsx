@@ -19,7 +19,7 @@ import { Ad } from '@root/src/amp/components/Ad';
 import { StickyAd } from '@root/src/amp/components/StickyAd';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+import { buildAdTargetingStatic } from '@root/src/lib/ad-targeting';
 import { Epic } from '@root/src/amp/components/Epic';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
@@ -99,7 +99,7 @@ export const Body: React.FC<{
 	config: ConfigType;
 }> = ({ data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-	const adTargetingBuilder = buildAdTargeting({
+	const adTargetingBuilder = buildAdTargetingStatic({
 		isAdFreeUser: data.isAdFreeUser,
 		config,
 	});

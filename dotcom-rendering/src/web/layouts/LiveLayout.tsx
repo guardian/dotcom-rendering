@@ -10,6 +10,7 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import type { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';

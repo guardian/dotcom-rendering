@@ -3,13 +3,14 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
 import { timeAgo } from '@guardian/libs';
+import { headline, textSans } from '@guardian/src-foundations/typography';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
-import { headline, textSans } from '@guardian/src-foundations/typography';
 
 const ASIDE_WIDTH = 58;
 const GUTTER = space[3];

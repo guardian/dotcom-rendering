@@ -5,6 +5,7 @@ import { string as curly } from 'curlyquotes';
 import { palette } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { until } from '@guardian/src-foundations/mq';
+import type { AdTargetingBuilderStatic } from '@root/src/lib/ad-targeting';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
@@ -91,7 +92,7 @@ const Headline: React.FC<{
 
 export const TopMetaAnalysis: React.FC<{
 	articleData: ArticleModel;
-	adTargetingBuilder?: AdTargetingBuilder;
+	adTargetingBuilder?: AdTargetingBuilderStatic;
 	pillar: ArticleTheme;
 }> = ({ articleData, adTargetingBuilder, pillar }) => {
 	return (

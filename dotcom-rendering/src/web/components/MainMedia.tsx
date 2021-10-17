@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
 import { ArticleDisplay } from '@guardian/libs';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';

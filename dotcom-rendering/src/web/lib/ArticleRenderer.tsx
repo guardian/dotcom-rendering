@@ -2,8 +2,10 @@ import { css } from '@emotion/react';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
+
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { from } from '@guardian/src-foundations/mq';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	labelStyles as adLabelStyles,

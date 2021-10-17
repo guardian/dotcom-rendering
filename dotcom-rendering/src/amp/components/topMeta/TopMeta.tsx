@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { AdTargetingBuilderStatic } from '@root/src/lib/ad-targeting';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaNews } from '@root/src/amp/components/topMeta/TopMetaNews';
@@ -12,7 +13,7 @@ export const TopMeta: React.FunctionComponent<{
 	data: ArticleModel;
 	design: ArticleDesign;
 	pillar: ArticleTheme;
-	adTargetingBuilder?: AdTargetingBuilder;
+	adTargetingBuilder?: AdTargetingBuilderStatic;
 }> = ({ data, design, pillar, adTargetingBuilder }) => {
 	if (pillar === ArticleSpecial.Labs)
 		return <TopMetaPaidContent articleData={data} pillar={pillar} />;

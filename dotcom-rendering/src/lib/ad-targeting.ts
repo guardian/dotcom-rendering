@@ -1,8 +1,12 @@
-import { getPermutivePFPSegments } from '@guardian/commercial-core';
-import { getCookie } from '@root/src/web/browser/cookie';
-import { canUseDom } from './can-use-dom';
+import { constructQuery } from '@root/src/lib/querystring';
+import { buildAdsConfigWithConsent } from '@guardian/commercial-core';
+import type { AdTargetingBuilder, AdsConfigBasic, AdsConfigDisabled } from '@guardian/commercial-core';
 
-type CustomParams = AdTargetingEnabled['customParams'];
+type MaybeArray<T> = T | T[];
+
+type CustomParams = Record<string, MaybeArray<string | number | boolean>>;
+
+export type AdTargetingBuilderStatic = () => AdsConfigBasic | AdsConfigDisabled;
 
 const buildCustomParamsFromCAPI = (config: ConfigType | ConfigTypeBrowser): CustomParams => {
 	return {
@@ -12,45 +16,56 @@ const buildCustomParamsFromCAPI = (config: ConfigType | ConfigTypeBrowser): Cust
 		s: config.section,
 		sens: config.isSensitive ? 't' : 'f',
 		si: 'f',
-		vl: config.videoDuration,
+		vl: config.videoDuration || 0,
 		...config.sharedAdTargeting,
 	};
 };
 
-const buildCustomParamsFromBrowser = (): CustomParams =>
-	canUseDom() ?
-		{
-			permutive: getPermutivePFPSegments(),
-			si: getCookie('GU_U') ? 't' : 'f',
-		}
-		: {};
-
 /**
- * Returns a function that will return an ad targeting object.
- * This is so we can invoke the function client side and
- * retrieve data from the browser.
+ * Returns a function that will return a promise for an ad targeting object.
+ * This is so we can dynamically invoke the function client side
+ * and retrieve data such as consent, permutive and signed-in state
+ * from the browser.
  *
- * @returns AdTargetingBuilder: () => AdTargeting
+ * @returns AdTargetingBuilder: () => Promise<AdsConfig>
  */
 const buildAdTargeting = (
 	CAPI:
 		| CAPIType
 		| CAPIBrowserType
 		| Pick<CAPIType, 'isAdFreeUser' | 'config'>,
-): AdTargetingBuilder => () => {
+): AdTargetingBuilder => () =>
+	buildAdsConfigWithConsent(
+		CAPI.isAdFreeUser,
+		CAPI.config.adUnit,
+		buildCustomParamsFromCAPI(CAPI.config),
+	);
 
+/**
+ * Returns a function that will return an ad targeting object.
+ * This is to maintain compatibility with AMP until it is
+ * also migrated to dynamic ad targeting.
+ *
+ * @returns () => AdsConfig
+ */
+ const buildAdTargetingStatic = (
+	CAPI:
+		| CAPIType
+		| CAPIBrowserType
+		| Pick<CAPIType, 'isAdFreeUser' | 'config'>,
+): AdTargetingBuilderStatic => () => {
 	if (CAPI.isAdFreeUser) {
 		return { disableAds: true };
 	}
-
-	const customParamsFromCAPI = buildCustomParamsFromCAPI(CAPI.config);
-	const customParamsFromBrowser = buildCustomParamsFromBrowser();
-	const mergedCustomParams = { ...customParamsFromCAPI, ...customParamsFromBrowser };
-
 	return {
-		adUnit: CAPI.config.adUnit,
-		customParams: mergedCustomParams,
+		adTagParameters: {
+			iu: CAPI.config.adUnit,
+			cust_params: encodeURIComponent(constructQuery(buildCustomParamsFromCAPI(CAPI.config))),
+		}
 	};
 };
 
-export { buildAdTargeting }
+export {
+	buildAdTargeting,
+	buildAdTargetingStatic,
+}

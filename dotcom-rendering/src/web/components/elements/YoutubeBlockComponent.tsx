@@ -5,11 +5,12 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
-
 import { Caption } from '@root/src/web/components/Caption';
+
 
 type Props = {
 	id: string;

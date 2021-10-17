@@ -34,6 +34,14 @@ const baseBlock: Block = {
 	id: '60300f5f8f08ad21ea60071e',
 };
 
+const adTargetingBuilder = () => Promise.resolve(
+	{
+		adTagParameters: {
+			iu: '',
+			cust_params: '',
+		}
+	});
+
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
@@ -85,7 +93,7 @@ export const VideoAsSecond = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
+				adTargetingBuilder={adTargetingBuilder}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -128,7 +136,7 @@ export const Title = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
+				adTargetingBuilder={adTargetingBuilder}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -196,7 +204,7 @@ export const Video = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
+				adTargetingBuilder={adTargetingBuilder}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -236,7 +244,7 @@ export const RichLink = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
+				adTargetingBuilder={adTargetingBuilder}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -264,7 +272,7 @@ export const FirstImage = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
+				adTargetingBuilder={adTargetingBuilder}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -293,7 +301,7 @@ export const ImaheAndTitle = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
+				adTargetingBuilder={adTargetingBuilder}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -318,7 +326,7 @@ export const Updated = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargetingBuilder={() => ({ adUnit: '', customParams: {} })}
+				adTargetingBuilder={adTargetingBuilder}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,

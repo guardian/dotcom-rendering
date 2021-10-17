@@ -1,3 +1,4 @@
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 import { LiveBlock } from '../components/LiveBlock';
 
 type Props = {

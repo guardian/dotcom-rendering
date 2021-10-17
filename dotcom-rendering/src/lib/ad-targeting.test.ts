@@ -1,12 +1,12 @@
+import { buildAdsConfigWithConsent } from '@guardian/commercial-core';
+import type { AdsConfigBasic } from '@guardian/commercial-core';
 import { Article } from '@root/fixtures/generated/articles/Article';
-import { getPermutivePFPSegments } from '@guardian/commercial-core';
-import { getCookie } from '@root/src/web/browser/cookie';
-import { buildAdTargeting } from './ad-targeting';
-import { canUseDom } from './can-use-dom';
+import {
+	buildAdTargeting,
+	buildAdTargetingStatic,
+ } from './ad-targeting';
 
-jest.mock('./can-use-dom');
 jest.mock('@guardian/commercial-core');
-jest.mock('@root/src/web/browser/cookie');
 
 const CAPI = {
 	...Article,
@@ -37,48 +37,39 @@ const CAPI = {
 };
 
 describe('buildAdTargeting', () => {
-	const expectedAdTargeting = {
-		adUnit: '/59666047/theguardian.com/money/article/ng',
-		customParams: {
-			cc: 'UK',
-			co: ['rob-davies'],
-			ct: 'article',
-			edition: 'uk',
-			inskin: 'f',
-			k: [
-				'ticket-prices',
-				'consumer-affairs',
-				'internet',
-				'viagogo',
-				'money',
-			],
-			p: 'ng',
-			pa: 'f',
-			s: 'money',
-			sh: 'https://theguardian.com/p/64ak8',
-			su: ['0'],
-			tn: ['news'],
-			url:
-				'/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-			sens: 'f',
-			si: 'f',
-			vl: 0,
-		},
-	};
 
-	it('builds adTargeting correctly', () => {
-		(canUseDom as jest.Mock).mockReturnValue(false);
-		expect(buildAdTargeting(CAPI)()).toEqual(expectedAdTargeting);
+	it('builds static adTargeting', () => {
+		const adTargeting = buildAdTargetingStatic(CAPI)() as AdsConfigBasic;
+		expect(adTargeting.adTagParameters.cust_params.includes('cc%3DUK'));
+		expect(adTargeting.adTagParameters.cust_params.includes('sens%3Df'));
+		expect(adTargeting.adTagParameters.cust_params.includes('si%3Df'));
+		expect(adTargeting.adTagParameters.cust_params.includes('vl%3D0'));
+		expect(adTargeting.adTagParameters.iu.includes('/59666047/theguardian.com/money/article/ng'));
 	});
 
-	it('builds adTargeting correctly when invoked in a browser', () => {
-		(canUseDom as jest.Mock).mockReturnValue(true);
-		(getCookie as jest.Mock).mockReturnValue('value');
-		(getPermutivePFPSegments as jest.Mock).mockReturnValue([1,2,3]);
-		const expectedAdTargetingBrowser = { ...expectedAdTargeting };
-		expectedAdTargetingBrowser.customParams = {
-			...expectedAdTargetingBrowser.customParams,
-			...{permutive: [1,2,3], si: 't'}};
-		expect(buildAdTargeting(CAPI)()).toEqual(expectedAdTargetingBrowser);
+	it('builds dynamic adTargeting', async () => {
+		(buildAdsConfigWithConsent as jest.Mock).mockReturnValue(
+			Promise.resolve(
+				{
+					adTargetingParameters: {
+						iu: 'someAdUnit',
+						cust_params: 'someParams',
+					}
+				}
+			));
+		const adTargeting = await buildAdTargeting(CAPI)()
+		expect(adTargeting).toEqual(
+			{
+				adTargetingParameters: {
+					iu: 'someAdUnit',
+					cust_params: 'someParams',
+				}
+			}
+		);
+		expect(buildAdsConfigWithConsent as jest.Mock).toBeCalledWith(
+			false,
+			'/59666047/theguardian.com/money/article/ng',
+			expect.anything()
+		);
 	});
 });

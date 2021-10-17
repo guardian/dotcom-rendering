@@ -13,6 +13,7 @@ import {
 import { from, until } from '@guardian/src-foundations/mq';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 

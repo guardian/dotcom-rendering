@@ -186,19 +186,6 @@ interface AdTargetParam {
 	value: string | string[];
 }
 
-type AdTargetingEnabled = {
-	adUnit: string;
-	customParams: Record<string, unknown>;
-	disableAds?: false;	// allows conditional type narrowing
-}
-
-type AdTargetingDisabled = {
-	disableAds: true;
-}
-
-type AdTargeting = AdTargetingEnabled | AdTargetingDisabled;
-
-type AdTargetingBuilder = () => AdTargeting;
 
 interface SectionNielsenAPI {
 	name: string;

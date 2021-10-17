@@ -18,6 +18,7 @@ import { TwitterBlockComponent } from '@root/src/amp/components/elements/Twitter
 import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/VideoVimeoBlockComponent';
 import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
+import type { AdTargetingBuilderStatic } from '@root/src/lib/ad-targeting';
 
 import { enhance } from '@root/src/amp/lib/enhance';
 
@@ -25,7 +26,7 @@ export const Elements = (
 	elements: CAPIElement[],
 	pillar: ArticlePillar,
 	isImmersive: boolean,
-	adTargetingBuilder?: AdTargetingBuilder,
+	adTargetingBuilder?: AdTargetingBuilderStatic,
 ): JSX.Element[] => {
 	const cleanedElements = enhance(elements);
 	const output = cleanedElements.map((element, i) => {

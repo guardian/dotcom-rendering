@@ -1,50 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Caption } from '@root/src/amp/components/Caption';
-import { constructQuery } from '@root/src/lib/querystring';
-
-type EmbedConfig = {
-	adsConfig:
-		| {
-				adTagParameters: {
-					iu: string;
-					cust_params: string;
-				};
-				disableAds?: false;
-		  }
-		| {
-				disableAds: true;
-		  };
-};
-
-const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
-	switch (adTargeting.disableAds) {
-		case true:
-			return {
-				adsConfig: {
-					disableAds: true,
-				},
-			};
-		case false:
-		case undefined:
-			return {
-				adsConfig: {
-					adTagParameters: {
-						iu: `${adTargeting.adUnit || ''}`,
-						cust_params: encodeURIComponent(
-							constructQuery(adTargeting.customParams || {}),
-						),
-					},
-				},
-			};
-	}
-};
+import type { AdTargetingBuilderStatic } from '@root/src/lib/ad-targeting';
 
 export const YoutubeBlockComponent: React.FC<{
 	element: YoutubeBlockElement;
-	
+
 	pillar: ArticleTheme;
-	adTargetingBuilder?: AdTargetingBuilder;
+	adTargetingBuilder?: AdTargetingBuilderStatic;
 }> = ({ element, pillar, adTargetingBuilder }) => {
 	// https://www.ampproject.org/docs/reference/components/amp-youtube
 	// https://developers.google.com/youtube/player_parameters
@@ -60,7 +23,7 @@ export const YoutubeBlockComponent: React.FC<{
 
 	if (adTargetingBuilder) {
 		attributes['data-param-embed_config'] = JSON.stringify(
-			buildEmbedConfig(adTargetingBuilder()),
+			{ adsConfig: adTargetingBuilder() },
 		);
 	}
 

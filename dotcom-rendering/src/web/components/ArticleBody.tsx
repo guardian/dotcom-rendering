@@ -7,6 +7,7 @@ import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { space } from '@guardian/src-foundations';
+import type { AdTargetingBuilder } from '@guardian/commercial-core';
 
 type Props = {
 	format: ArticleFormat;

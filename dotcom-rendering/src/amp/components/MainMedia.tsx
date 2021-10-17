@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import type { AdTargetingBuilderStatic } from '@root/src/lib/ad-targeting';
 
 import InfoIcon from '@frontend/static/icons/info.svg';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
@@ -128,7 +129,7 @@ const expanded = css`
 const asComponent = (
 	element: CAPIElement,
 	pillar: ArticlePillar,
-	adTargetingBuilder?: AdTargetingBuilder,
+	adTargetingBuilder?: AdTargetingBuilderStatic,
 ) => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
@@ -149,7 +150,7 @@ const asComponent = (
 export const MainMedia: React.FC<{
 	element: CAPIElement;
 	pillar: ArticleTheme;
-	adTargetingBuilder?: AdTargetingBuilder;
+	adTargetingBuilder?: AdTargetingBuilderStatic;
 }> = ({ element, pillar, adTargetingBuilder }) => {
 	return (
 		<div css={expanded}>{asComponent(element, pillar, adTargetingBuilder)}</div>

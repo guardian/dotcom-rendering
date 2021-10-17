@@ -19,6 +19,7 @@ import {
 	BrandingRegionContainer,
 } from '@root/src/amp/components/topMeta/Branding';
 import { StarRating } from '@root/src/amp/components/StarRating';
+import type { AdTargetingBuilderStatic } from '@root/src/lib/ad-targeting';
 
 const headerStyle = css`
 	${headline.small()};
@@ -64,7 +65,7 @@ const Headline: React.FC<{
 
 export const TopMetaNews: React.FC<{
 	articleData: ArticleModel;
-	adTargetingBuilder?: AdTargetingBuilder;
+	adTargetingBuilder?: AdTargetingBuilderStatic;
 	pillar: ArticleTheme;
 }> = ({ articleData, adTargetingBuilder, pillar }) => {
 	return (
