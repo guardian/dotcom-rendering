@@ -4,9 +4,9 @@ import type { Image as CardImage } from '@guardian/apps-rendering-api-models/ima
 import type { Image as ImageData } from '@guardian/common-rendering/src/image';
 import { Dpr, src, srcsets } from '@guardian/common-rendering/src/srcsets';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
+import { ArticleElementRole } from '@guardian/libs';
 import type { Format, Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
-import { ArticleElementRole } from '@guardian/libs';
 import { pipe } from 'lib';
 import type { Context } from 'parserContext';
 import type { ReactNode } from 'react';

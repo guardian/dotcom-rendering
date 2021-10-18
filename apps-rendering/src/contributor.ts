@@ -7,9 +7,9 @@ import {
 } from '@guardian/common-rendering/src/srcsets';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
+import { ArticleElementRole } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { fromNullable, map, none } from '@guardian/types';
-import { ArticleElementRole } from '@guardian/libs';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
 import { pipe } from 'lib';

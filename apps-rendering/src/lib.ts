@@ -1,25 +1,27 @@
 // ----- Imports ----- //
 
 import { maybeRender, pipe } from '@guardian/common-rendering/src/lib';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
-	ArticleFormat,
 	ArticleDisplay,
-	ArticleTheme,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import type { Format, Option, Result } from '@guardian/types';
-import { Design, Display, Theme, Pillar, Special } from '@guardian/types';
+import type { Format, Option, Result, Theme } from '@guardian/types';
 import {
+	Design,
+	Display,
 	err,
 	fromNullable,
 	map,
 	none,
 	ok,
 	OptionKind,
+	Pillar,
 	ResultKind,
 	some,
+	Special,
 	withDefault,
 } from '@guardian/types';
 
