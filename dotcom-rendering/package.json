@@ -55,7 +55,7 @@
     "@guardian/source-react-components-development-kitchen": "^0.0.3",
     "@guardian/src-brand": "^3.9.0",
     "@guardian/src-button": "^3.9.0",
-    "@guardian/src-checkbox": "^3.9.0",
+    "@guardian/src-checkbox": "^3.10.1",
     "@guardian/src-foundations": "^3.9.0",
     "@guardian/src-icons": "^3.9.0",
     "@guardian/src-link": "^3.9.0",
