@@ -69,7 +69,7 @@ import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
 import RichLink from 'components/richLink';
-import { isElement, pipe } from 'lib';
+import { convertFormatToArticleFormat, isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { backgroundColor, darkModeCss } from 'styles';
@@ -434,7 +434,7 @@ const imageRenderer = (
 			renderCaption(cap, format),
 			h(Credit, { credit, format, key }),
 		])(caption),
-		format,
+		format: convertFormatToArticleFormat(format),
 		key,
 		supportsDarkMode: true,
 		lightbox: some({
@@ -592,7 +592,7 @@ const mediaAtomRenderer = (
 		css: styles,
 	};
 	const figcaption = h(FigCaption, {
-		format,
+		format: convertFormatToArticleFormat(format),
 		supportsDarkMode: true,
 		children: map((cap: DocumentFragment) => renderCaption(cap, format))(
 			caption,
