@@ -1227,6 +1227,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
+					browserId={browserId || undefined}
 				/>
 			</Portal>
 			<Portal
