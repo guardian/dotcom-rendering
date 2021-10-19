@@ -2,9 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { from } from '@guardian/src-foundations/mq';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Option, Theme } from '@guardian/types';
+import { Design, Format, Option } from '@guardian/types';
 import { map, Pillar, withDefault } from '@guardian/types';
 import { formatDate } from 'date';
 import { pipe } from 'lib';
@@ -15,7 +16,7 @@ import { darkModeCss as darkMode } from 'styles';
 
 interface Props {
 	date: Option<Date>;
-	theme: Theme;
+	format: Format;
 }
 
 const darkStyles = darkMode`
@@ -36,21 +37,41 @@ const commentDatelineStyles = css`
 	${darkStyles}
 `;
 
-const getDatelineStyles = (theme: Theme): SerializedStyles => {
-	switch (theme) {
-		case Pillar.Opinion:
-			return commentDatelineStyles;
+const liveblogDatelineStyles = css`
+	${styles}
+	color: ${neutral[100]};
+
+	${darkMode`
+    	color: ${neutral[93]};
+	`}
+
+	${from.tablet} {
+		${from.mobileLandscape} {
+			color: ${neutral[20]};
+		}
+	}
+`;
+
+const getDatelineStyles = (format: Format): SerializedStyles => {
+	switch (format.design) {
+		case Design.LiveBlog:
+			return liveblogDatelineStyles;
 		default:
-			return styles;
+			switch (format.theme) {
+				case Pillar.Opinion:
+					return commentDatelineStyles;
+				default:
+					return styles;
+			}
 	}
 };
 
-const Dateline: FC<Props> = ({ date, theme }) =>
+const Dateline: FC<Props> = ({ date, format }) =>
 	pipe(
 		date,
 		map((d) => (
 			<time
-				css={getDatelineStyles(theme)}
+				css={getDatelineStyles(format)}
 				data-date={d}
 				className="date js-date"
 			>

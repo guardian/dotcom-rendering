@@ -87,12 +87,18 @@ const labsStyles = css`
     `}
 `;
 
-const liveblogStyles = (kicker: string): SerializedStyles => css`
+const liveblogStyles = (link: string): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
 	color: ${palette.neutral[93]};
 
+	${from.tablet} {
+		${from.mobileLandscape} {
+			color: ${link};
+		}
+	}
+
 	${from.desktop} {
-		color: ${kicker};
+		color: ${link};
 	}
 `;
 
@@ -108,7 +114,7 @@ const labsAnchorStyles = css`
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+	const { kicker, link } = getThemeStyles(format.theme);
 
 	if (format.theme === Special.Labs) {
 		return labsStyles;
@@ -117,7 +123,7 @@ const getStyles = (format: Format): SerializedStyles => {
 	switch (format.design) {
 		case Design.LiveBlog:
 		case Design.DeadBlog:
-			return liveblogStyles(kicker);
+			return liveblogStyles(link);
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
