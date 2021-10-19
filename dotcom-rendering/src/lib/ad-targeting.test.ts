@@ -29,7 +29,6 @@ const CAPI = {
 	},
 };
 
-// TODO temporary workaround
 describe('buildAdTargeting', () => {
 	const expectedAdTargeting = {
 		adUnit: '/59666047/theguardian.com/money/article/ng',

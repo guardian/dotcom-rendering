@@ -186,10 +186,17 @@ interface AdTargetParam {
 	value: string | string[];
 }
 
+type MaybeArray<T> = T | T[];
+
+type CustomParams = Record<
+	string,
+	MaybeArray<string | number | boolean>
+>;
+
 type AdTargeting =
 	| {
 			adUnit: string;
-			customParams: Record<string, unknown>;
+			customParams: CustomParams;
 			disableAds?: false;
 	  }
 	| {

@@ -1,5 +1,7 @@
 /* eslint-disable mocha/no-setup-in-describe */
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { cmpIframe } from '../../lib/cmpIframe';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { skipOn } from '@cypress/skip-test';
 
 const firstPage =
@@ -9,21 +11,6 @@ const secondPage =
 	'https://www.theguardian.com/environment/2020/nov/19/blue-whale-sightings-off-south-georgia-raise-hopes-of-recovery';
 
 describe('Consent tests', function () {
-	const cmpIframe = () => {
-		return cy
-			.get('iframe[id^="sp_message_iframe"]')
-			.its('0.contentDocument.body')
-			.should('not.be.empty')
-			.then(cy.wrap);
-	};
-
-	const privacySettingsIframe = () => {
-		return cy
-			.get('[src*="https://cdn.privacy-mgmt.com/privacy-manager"]')
-			.its('0.contentDocument.body')
-			.should('not.be.empty')
-			.then(cy.wrap);
-	};
 
 	const waitForAnalyticsToInit = () => {
 		// Waiting is sad but we need to ensure the init script has executed which occurs
