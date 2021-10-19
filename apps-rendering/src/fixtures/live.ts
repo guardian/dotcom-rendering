@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
+import { ArticleElementRole } from '@guardian/libs';
 import {
 	Design,
 	Display,
 	none,
 	OptionKind,
 	Pillar,
-	Role,
 	some,
 	toOption,
 } from '@guardian/types';
@@ -61,7 +61,7 @@ const mainMedia: Option<MainMedia> = {
 				kind: OptionKind.Some,
 				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		},
 	},
 };

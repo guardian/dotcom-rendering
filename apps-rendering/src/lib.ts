@@ -1,16 +1,27 @@
 // ----- Imports ----- //
 
 import { maybeRender, pipe } from '@guardian/common-rendering/src/lib';
-import type { Option, Result } from '@guardian/types';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import type { Format, Option, Result, Theme } from '@guardian/types';
+import {
+	Design,
+	Display,
 	err,
 	fromNullable,
 	map,
 	none,
 	ok,
 	OptionKind,
+	Pillar,
 	ResultKind,
 	some,
+	Special,
 	withDefault,
 } from '@guardian/types';
 
@@ -133,6 +144,94 @@ const fold =
 	(opt: Option<A>): B => {
 		return withDefault(ifNone)(map(f)(opt));
 	};
+
+const convertFormatToArticleFormat = (format: Format): ArticleFormat => {
+	return {
+		design: convertDesignToArticleDesign(format.design),
+		display: convertDisplayToArticleDisplay(format.display),
+		theme: convertThemeToArticleTheme(format.theme),
+	};
+};
+
+const convertDesignToArticleDesign = (design: Design): ArticleDesign => {
+	switch (design) {
+		case Design.Media:
+			return ArticleDesign.Media;
+		case Design.Review:
+			return ArticleDesign.Review;
+		case Design.Analysis:
+			return ArticleDesign.Analysis;
+		case Design.Comment:
+			return ArticleDesign.Comment;
+		case Design.Letter:
+			return ArticleDesign.Letter;
+		case Design.Feature:
+			return ArticleDesign.Feature;
+		case Design.LiveBlog:
+			return ArticleDesign.LiveBlog;
+		case Design.DeadBlog:
+			return ArticleDesign.DeadBlog;
+		case Design.Recipe:
+			return ArticleDesign.Recipe;
+		case Design.MatchReport:
+			return ArticleDesign.MatchReport;
+		case Design.Interview:
+			return ArticleDesign.Interview;
+		case Design.Editorial:
+			return ArticleDesign.Editorial;
+		case Design.Quiz:
+			return ArticleDesign.Quiz;
+		case Design.Interactive:
+			return ArticleDesign.Interactive;
+		case Design.PhotoEssay:
+			return ArticleDesign.PhotoEssay;
+		case Design.PrintShop:
+			return ArticleDesign.PrintShop;
+		case Design.Obituary:
+			return ArticleDesign.Obituary;
+		case Design.Correction:
+			return ArticleDesign.Correction;
+		case Design.FullPageInteractive:
+			return ArticleDesign.FullPageInteractive;
+		case Design.Article:
+		default:
+			return ArticleDesign.Standard;
+	}
+};
+
+const convertDisplayToArticleDisplay = (display: Display): ArticleDisplay => {
+	switch (display) {
+		case Display.Immersive:
+			return ArticleDisplay.Immersive;
+		case Display.Showcase:
+			return ArticleDisplay.Showcase;
+		case Display.NumberedList:
+			return ArticleDisplay.NumberedList;
+		case Display.Standard:
+		default:
+			return ArticleDisplay.Standard;
+	}
+};
+
+const convertThemeToArticleTheme = (theme: Theme): ArticleTheme => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return ArticlePillar.Opinion;
+		case Pillar.Sport:
+			return ArticlePillar.Sport;
+		case Pillar.Culture:
+			return ArticlePillar.Culture;
+		case Pillar.Lifestyle:
+			return ArticlePillar.Lifestyle;
+		case Special.SpecialReport:
+			return ArticleSpecial.SpecialReport;
+		case Special.Labs:
+			return ArticleSpecial.Labs;
+		case Pillar.News:
+		default:
+			return ArticlePillar.News;
+	}
+};
 // ----- Exports ----- //
 
 export {
@@ -154,4 +253,5 @@ export {
 	resultMap3,
 	resultToNullable,
 	fold,
+	convertFormatToArticleFormat,
 };
