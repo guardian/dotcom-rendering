@@ -14,7 +14,8 @@ import CommentCount from 'components/commentCount';
 import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import type { Item } from 'item';
-import { FC, useState } from 'react';
+import type { FC } from 'react';
+import { useState } from 'react';
 import {
 	darkModeCss,
 	liveblogPhabletSidePadding,

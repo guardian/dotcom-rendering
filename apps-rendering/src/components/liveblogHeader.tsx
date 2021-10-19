@@ -2,6 +2,8 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { neutral, remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
@@ -15,8 +17,6 @@ import { liveblogPhabletSidePadding, liveblogWidthStyles } from 'styles';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
-import { from } from '@guardian/src-foundations/mq';
-import { neutral, remSpace } from '@guardian/src-foundations';
 
 // // ----- Styles ----- //
 
