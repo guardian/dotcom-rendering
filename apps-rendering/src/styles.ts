@@ -22,6 +22,13 @@ export const sidePadding = css`
 	}
 `;
 
+export const liveblogPhabletSidePadding = css`
+	${from.phablet} {
+		padding-left: ${remSpace[5]};
+		padding-right: ${remSpace[4]};
+	}
+`;
+
 export const darkModeCss = (
 	styles: TemplateStringsArray,
 	...placeholders: string[]
@@ -64,6 +71,13 @@ export const articleWidthStyles: SerializedStyles = css`
 
 	${from.phablet} {
 		width: ${wideContentWidth}px;
+	}
+`;
+
+export const liveblogWidthStyles: SerializedStyles = css`
+	${articleWidthStyles}
+	${from.desktop} {
+		margin: 0 auto;
 	}
 `;
 

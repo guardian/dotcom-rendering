@@ -15,7 +15,12 @@ import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import type { Item } from 'item';
 import { FC, useState } from 'react';
-import { darkModeCss } from 'styles';
+import {
+	darkModeCss,
+	liveblogPhabletSidePadding,
+	sidePadding,
+	wideColumnWidth,
+} from 'styles';
 
 // ----- Component ----- //
 
@@ -42,7 +47,10 @@ const withBylineTextStyles = css`
 
 const blogStyles = css`
 	display: block;
-	margin-bottom: ${remSpace[5]};
+	margin-bottom: ${remSpace[2]};
+	${from.desktop} {
+		width: ${wideColumnWidth}px;
+	}
 `;
 
 const metaButtomStyles = css`
@@ -52,26 +60,9 @@ const metaButtomStyles = css`
 
 const alertStyles = css`
 	flex-grow: 1;
-	padding-top: ${remSpace[2]};
-	padding-left: ${remSpace[3]};
-	padding-right: ${remSpace[3]};
+	padding-top: 8px;
 	${from.phablet} {
-		padding-left: 0px;
-	}
-	${from.tablet} {
 		padding-left: ${remSpace[5]};
-	}
-`;
-
-const liveSidePadding = css`
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-bottom: 8px;
-	padding-top: 3px;
-
-	${from.phablet} {
-		padding-left: 0px;
-		padding-right: 0px;
 	}
 `;
 
@@ -108,16 +99,14 @@ const lineStyles = css`
 				transparent 0.25rem );
 			`}
 
-		${from.tablet} {
-			${from.mobileLandscape} {
-				background-image: repeating-linear-gradient(
-					to bottom,
-					${neutral[86]},
-					${neutral[86]} 1px,
-					transparent 1px,
-					transparent 0.25rem
-				);
-			}
+		${from.desktop} {
+			background-image: repeating-linear-gradient(
+				to bottom,
+				${neutral[86]},
+				${neutral[86]} 1px,
+				transparent 1px,
+				transparent 0.25rem
+			);
 		}
 	}
 `;
@@ -130,13 +119,20 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				<Lines count={4} color={'rgba(255, 255, 255, 0.4)'} />
 			</div>
 			<Avatar {...item} />
-			<div css={css(textStyles, withBylineTextStyles, liveSidePadding)}>
+			<div
+				css={css(
+					textStyles,
+					withBylineTextStyles,
+					sidePadding,
+					liveblogPhabletSidePadding,
+				)}
+			>
 				<Byline {...item} />
 				<Dateline date={item.publishDate} format={item} />
 				<Follow {...item} />
 			</div>
 			<div css={metaButtomStyles}>
-				<div css={alertStyles}>
+				<div css={css(alertStyles, sidePadding)}>
 					<ToggleSwitch
 						checked={checked}
 						label={'Get alerts on this story'}

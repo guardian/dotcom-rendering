@@ -11,7 +11,13 @@ import { Design, Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
+import {
+	articleWidthStyles,
+	darkModeCss,
+	liveblogPhabletSidePadding,
+	liveblogWidthStyles,
+	wideContentWidth,
+} from 'styles';
 import { getThemeStyles } from 'themeStyles';
 import type { ThemeStyles } from 'themeStyles';
 
@@ -108,6 +114,13 @@ const getStyles = (format: Format): SerializedStyles => {
 
 	if (format.display === Display.Immersive) {
 		return immersiveStyles(getThemeStyles(format.theme), isLabs);
+	}
+
+	if (
+		format.design === Design.LiveBlog ||
+		format.design === Design.DeadBlog
+	) {
+		return css(liveblogWidthStyles, liveblogPhabletSidePadding);
 	}
 
 	return articleWidthStyles;

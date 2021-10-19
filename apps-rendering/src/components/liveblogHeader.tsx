@@ -11,10 +11,12 @@ import HeaderMedia from 'headerMedia';
 import type { Liveblog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
-import { articleWidthStyles } from 'styles';
+import { liveblogPhabletSidePadding, liveblogWidthStyles } from 'styles';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
+import { from } from '@guardian/src-foundations/mq';
+import { neutral, remSpace } from '@guardian/src-foundations';
 
 // // ----- Styles ----- //
 
@@ -33,6 +35,24 @@ const headerBackgroundStyles = ({
 	}
 `;
 
+const metadataStyles = (themeStyle: ThemeStyles): SerializedStyles => css`
+	${headerBackgroundStyles(themeStyle)}
+
+	${from.desktop} {
+		background-color: ${neutral[97]};
+		padding: ${remSpace[3]} ${remSpace[5]};
+	}
+	${from.desktop} {
+		display: flex;
+	}
+`;
+
+const headerMediaStyles = css`
+	${from.desktop} {
+		padding-left: ${remSpace[5]};
+	}
+`;
+
 interface Props {
 	item: Liveblog;
 }
@@ -48,15 +68,15 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 				<Headline item={item} />
 			</div>
 			<div css={headerBackgroundStyles(themeStyles)}>
-				<div css={articleWidthStyles}>
+				<div css={css(liveblogWidthStyles, liveblogPhabletSidePadding)}>
 					<Standfirst item={item} />
 				</div>
-				<div>
-					<Metadata item={item} />
-				</div>
 			</div>
-			<div css={articleWidthStyles}>
-				<HeaderMedia item={item} />
+			<div css={metadataStyles(themeStyles)}>
+				<Metadata item={item} />
+				<div css={headerMediaStyles}>
+					<HeaderMedia item={item} />
+				</div>
 			</div>
 		</header>
 	);

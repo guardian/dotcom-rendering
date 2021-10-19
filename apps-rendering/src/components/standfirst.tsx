@@ -71,10 +71,16 @@ const immersiveLabs: SerializedStyles = css`
 const liveblogStyles: SerializedStyles = css`
 	color: ${neutral[100]};
 	${headline.xxxsmall()};
+	margin-bottom: 0;
+	padding-bottom: ${remSpace[3]};
 
 	p {
 		margin: 0;
 		padding: 0.75rem 0;
+	}
+
+	ul {
+		margin-bottom: 0;
 	}
 `;
 
