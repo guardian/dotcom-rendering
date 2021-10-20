@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/src-foundations/palette';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import CameraIcon from '@frontend/static/icons/camera.svg';
@@ -44,11 +44,15 @@ const overlayedStyles = css`
 	background: rgba(18, 18, 18, 0.8);
 
 	span {
-		color: white;
+		color: ${text.ctaPrimary};
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}
-	color: white;
+
+	svg {
+		fill: ${text.ctaPrimary};
+	}
+	color: ${text.ctaPrimary};
 	font-size: 0.75rem;
 	line-height: 1rem;
 	padding-top: 0.375rem;
