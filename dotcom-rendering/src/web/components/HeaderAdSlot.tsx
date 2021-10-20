@@ -1,5 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { neutral, space } from '@guardian/src-foundations';
+import { border } from '@guardian/src-foundations/palette';
 import { ArticleDisplay } from '@guardian/libs';
 import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial-core/dist/esm/constants';
 
@@ -17,6 +18,7 @@ const headerAdWrapper = css`
 	width: 100%;
 	background-color: ${neutral[97]};
 	min-height: ${TOP_ABOVE_NAV_HEIGHT + padding + labelHeight}px;
+	border-bottom: 1px solid ${border.secondary};
 	padding-bottom: ${padding}px;
 
 	display: flex;
