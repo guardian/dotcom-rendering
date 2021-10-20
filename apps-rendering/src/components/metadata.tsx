@@ -6,7 +6,7 @@ import {
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
 import { neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
@@ -54,7 +54,7 @@ const blogStyles = css`
 	}
 `;
 
-const metaButtomStyles = css`
+const metaBottomStyles = css`
 	display: flex;
 	border-top: 1px solid rgba(255, 255, 255, 0.4);
 `;
@@ -112,6 +112,22 @@ const lineStyles = css`
 	}
 `;
 
+const toggleOverrideStyles = css`
+	${until.desktop} {
+		button[aria-checked='false'] {
+			background-color: rgba(255, 255, 255, 0.5);
+		}
+
+		label {
+			color: ${neutral[100]};
+		}
+	}
+
+	button {
+		margin-left: 0;
+	}
+`;
+
 const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
@@ -132,11 +148,12 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				<Dateline date={item.publishDate} format={item} />
 				<Follow {...item} />
 			</div>
-			<div css={metaButtomStyles}>
+			<div css={metaBottomStyles}>
 				<div css={css(alertStyles, sidePadding)}>
 					<ToggleSwitch
 						checked={checked}
 						label={'Get alerts on this story'}
+						cssOverrides={toggleOverrideStyles}
 						onClick={(e): void => {
 							setChecked(!checked);
 							console.log('changed toggle');
