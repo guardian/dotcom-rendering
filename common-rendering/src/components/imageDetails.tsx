@@ -9,7 +9,7 @@ import { SvgCamera } from '@guardian/src-icons';
 import { Option, OptionKind } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 // ----- Component ----- //
 
@@ -76,7 +76,7 @@ const svgStyles: SerializedStyles = css`
 `;
 
 interface Props {
-	caption: Option<string>;
+	caption: Option<ReactNode>;
 	credit: Option<string>;
 	supportsDarkMode: boolean;
 	id: string;
@@ -102,7 +102,7 @@ const ImageDetails: FC<Props> = ({
 					</span>
 				</summary>
 				<span id={id}>
-					{withDefault('')(caption)} {withDefault('')(credit)}
+					{withDefault<ReactNode>(null)(caption)} {withDefault('')(credit)}
 				</span>
 			</details>
 		</figcaption>
