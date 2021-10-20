@@ -113,6 +113,17 @@ const lineStyles = css`
 `;
 
 const toggleOverrideStyles = css`
+	button {
+		margin-left: 0;
+	}
+
+	display: flex;
+	align-items: center;
+	padding-right: 6px;
+
+	label {
+		flex-shrink: 100;
+	}
 	${until.desktop} {
 		button[aria-checked='false'] {
 			background-color: rgba(255, 255, 255, 0.5);
@@ -122,9 +133,14 @@ const toggleOverrideStyles = css`
 			color: ${neutral[100]};
 		}
 	}
+`;
 
-	button {
-		margin-left: 0;
+const liveblogSidePadding = css`
+	${sidePadding}
+
+	${from.desktop} {
+		padding-left: 0;
+		padding-right: 0;
 	}
 `;
 
@@ -140,8 +156,8 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				css={css(
 					textStyles,
 					withBylineTextStyles,
-					sidePadding,
 					liveblogPhabletSidePadding,
+					liveblogSidePadding,
 				)}
 			>
 				<Byline {...item} />
@@ -149,7 +165,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				<Follow {...item} />
 			</div>
 			<div css={metaBottomStyles}>
-				<div css={css(alertStyles, sidePadding)}>
+				<div css={css(alertStyles, liveblogSidePadding)}>
 					<ToggleSwitch
 						checked={checked}
 						label={'Get alerts on this story'}

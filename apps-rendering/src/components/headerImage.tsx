@@ -77,6 +77,20 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
 	}
 `;
 
+const liveblogImgStyles = (
+	width: number,
+	height: number,
+): SerializedStyles => css`
+	display: block;
+	width: 100%;
+	height: calc(100vw * ${height / width});
+
+	${from.desktop} {
+		width: 700px;
+		height: ${(700 * height) / width}px;
+	}
+`;
+
 const immersiveImgStyles = css`
 	display: block;
 	height: 80vh;
@@ -98,11 +112,17 @@ const getStyles = ({ design, display }: Format): SerializedStyles => {
 };
 
 const getImgStyles = (format: Format, image: Image): SerializedStyles => {
-	switch (format.display) {
-		case Display.Immersive:
-			return immersiveImgStyles;
+	switch (format.design) {
+		case Design.LiveBlog:
+		case Design.DeadBlog:
+			return liveblogImgStyles(image.width, image.height);
 		default:
-			return imgStyles(image.width, image.height);
+			switch (format.display) {
+				case Display.Immersive:
+					return immersiveImgStyles;
+				default:
+					return imgStyles(image.width, image.height);
+			}
 	}
 };
 
