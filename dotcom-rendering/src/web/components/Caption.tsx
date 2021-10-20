@@ -24,7 +24,7 @@ const captionStyle = (palette: Palette) => css`
 	${textSans.xsmall()};
 	line-height: 135%;
 	padding-top: 6px;
-	word-wrap: break-word;
+	word-wrap: break-all;
 	color: ${palette.text.caption};
 	${until.tablet} {
 		padding-left: ${space[2]}px;
@@ -108,8 +108,8 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = css`
-	fill: ${neutral[46]};
+const iconStyle = (palette: Palette) => css`
+	fill: ${palette.text.caption};
 	margin-right: ${space[1] /2}px;
 	display: inline-block;
 	vertical-align: middle;
@@ -160,7 +160,7 @@ export const Caption = ({
 		>
 			<span
 				css={[
-					iconStyle,
+					iconStyle(palette),
 					format.display === ArticleDisplay.Immersive &&
 						hideIconBelowLeftCol,
 				]}
