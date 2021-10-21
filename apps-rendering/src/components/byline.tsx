@@ -90,15 +90,14 @@ const labsStyles = css`
 const liveblogStyles = (link: string): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
 	color: ${palette.neutral[93]};
-
-	${from.tablet} {
-		${from.mobileLandscape} {
-			color: ${link};
-		}
-	}
-
 	${from.desktop} {
 		color: ${link};
+	}
+	a {
+		color: ${palette.neutral[93]};
+		${from.desktop} {
+			color: ${link};
+		}
 	}
 `;
 

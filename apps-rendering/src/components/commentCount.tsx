@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
@@ -46,11 +47,19 @@ const getStyles = ({ theme, design }: Format): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
 	if (design === Design.LiveBlog || design === Design.DeadBlog) {
-		return styles(
-			neutral[93],
-			'rgba(255, 255, 255, 0.4)',
-			'rgba(255, 255, 255, 0.4)',
-		);
+		return css`
+			${styles(
+				neutral[93],
+				'rgba(255, 255, 255, 0.4)',
+				'rgba(255, 255, 255, 0.4)',
+			)}
+
+			${from.desktop} {
+				color: ${neutral[46]};
+				border-left: 1px solid ${neutral[86]};
+			}
+			margin-bottom: 6px;
+		`;
 	}
 
 	return styles(colours.kicker, border.secondary, neutral[20]);
@@ -60,7 +69,12 @@ const getBubbleStyles = ({ theme, design }: Format): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
 	if (design === Design.LiveBlog || design === Design.DeadBlog) {
-		return bubbleStyles(neutral[93]);
+		return css`
+			${bubbleStyles(neutral[93])}
+			${from.desktop} {
+				fill: ${neutral[46]};
+			}
+		`;
 	}
 
 	return bubbleStyles(colours.kicker);

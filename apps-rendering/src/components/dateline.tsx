@@ -38,17 +38,15 @@ const commentDatelineStyles = css`
 `;
 
 const liveblogDatelineStyles = css`
-	${styles}
+	${textSans.xxsmall()}
 	color: ${neutral[100]};
 
 	${darkMode`
     	color: ${neutral[93]};
 	`}
 
-	${from.tablet} {
-		${from.mobileLandscape} {
-			color: ${neutral[20]};
-		}
+	${from.desktop} {
+		color: ${neutral[20]};
 	}
 `;
 

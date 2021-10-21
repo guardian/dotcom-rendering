@@ -57,58 +57,27 @@ const blogStyles = css`
 const metaBottomStyles = css`
 	display: flex;
 	border-top: 1px solid rgba(255, 255, 255, 0.4);
-`;
 
-const alertStyles = css`
-	flex-grow: 1;
-	padding-top: 8px;
-	${from.phablet} {
-		padding-left: ${remSpace[5]};
+	${from.desktop} {
+		border-top: 1px solid ${neutral[86]};
 	}
 `;
 
-const MetadataWithByline: FC<Props> = ({ item }: Props) => (
-	<div css={css(styles, withBylineStyles)}>
-		<Avatar {...item} />
-		<div css={css(textStyles, withBylineTextStyles)}>
-			<Byline {...item} />
-			<Dateline date={item.publishDate} format={item} />
-			<Follow {...item} />
-		</div>
-		<CommentCount count={item.commentCount} {...item} />
-	</div>
-);
+const toggleStyles = css`
+	flex-grow: 1;
+	padding-top: 8px;
+`;
 
-const ShortMetadata: FC<Props> = ({ item }: Props) => (
-	<div css={styles}>
-		<div css={textStyles}>
-			<Dateline date={item.publishDate} format={item} />
-			<Follow {...item} />
-		</div>
-		<CommentCount count={item.commentCount} {...item} />
-	</div>
-);
+const liveblogSidePadding = css`
+	${sidePadding}
 
-const lineStyles = css`
-	div {
-		${darkModeCss`
-			background-image: repeating-linear-gradient( 
-				to bottom, 
-				rgba(255, 255, 255, 0.4), 
-				rgba(255, 255, 255, 0.4) 1px, 
-				transparent 1px, 
-				transparent 0.25rem );
-			`}
+	padding-bottom: ${remSpace[3]};
 
-		${from.desktop} {
-			background-image: repeating-linear-gradient(
-				to bottom,
-				${neutral[86]},
-				${neutral[86]} 1px,
-				transparent 1px,
-				transparent 0.25rem
-			);
-		}
+	${liveblogPhabletSidePadding}
+
+	${from.desktop} {
+		padding-left: 0;
+		padding-right: 0;
 	}
 `;
 
@@ -135,14 +104,57 @@ const toggleOverrideStyles = css`
 	}
 `;
 
-const liveblogSidePadding = css`
-	${sidePadding}
+const lineStyles = css`
+	div {
+		${darkModeCss`
+			background-image: repeating-linear-gradient( 
+				to bottom, 
+				rgba(255, 255, 255, 0.4), 
+				rgba(255, 255, 255, 0.4) 1px, 
+				transparent 1px, 
+				transparent 0.25rem );
+			`}
 
-	${from.desktop} {
-		padding-left: 0;
-		padding-right: 0;
+		${from.desktop} {
+			background-image: repeating-linear-gradient(
+				to bottom,
+				${neutral[86]},
+				${neutral[86]} 1px,
+				transparent 1px,
+				transparent 0.25rem
+			);
+		}
 	}
 `;
+
+const liveBylineStyles = css`
+	margin-bottom: ${remSpace[2]};
+	${from.desktop} {
+		margin-bottom: ${remSpace[6]};
+	}
+`;
+
+const MetadataWithByline: FC<Props> = ({ item }: Props) => (
+	<div css={css(styles, withBylineStyles)}>
+		<Avatar {...item} />
+		<div css={css(textStyles, withBylineTextStyles)}>
+			<Byline {...item} />
+			<Dateline date={item.publishDate} format={item} />
+			<Follow {...item} />
+		</div>
+		<CommentCount count={item.commentCount} {...item} />
+	</div>
+);
+
+const ShortMetadata: FC<Props> = ({ item }: Props) => (
+	<div css={styles}>
+		<div css={textStyles}>
+			<Dateline date={item.publishDate} format={item} />
+			<Follow {...item} />
+		</div>
+		<CommentCount count={item.commentCount} {...item} />
+	</div>
+);
 
 const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
@@ -153,19 +165,16 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 			</div>
 			<Avatar {...item} />
 			<div
-				css={css(
-					textStyles,
-					withBylineTextStyles,
-					liveblogPhabletSidePadding,
-					liveblogSidePadding,
-				)}
+				css={css(textStyles, withBylineTextStyles, liveblogSidePadding)}
 			>
-				<Byline {...item} />
+				<div css={liveBylineStyles}>
+					<Byline {...item} />
+				</div>
 				<Dateline date={item.publishDate} format={item} />
 				<Follow {...item} />
 			</div>
 			<div css={metaBottomStyles}>
-				<div css={css(alertStyles, liveblogSidePadding)}>
+				<div css={css(toggleStyles, liveblogSidePadding)}>
 					<ToggleSwitch
 						checked={checked}
 						label={'Get alerts on this story'}
