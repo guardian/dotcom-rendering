@@ -186,10 +186,8 @@ interface AdTargetParam {
 	value: string | string[];
 }
 
-type MaybeArray<T> = T | T[];
-
 type CustomParams = {
-	[key: string]: MaybeArray<string | number | boolean>
+	[key: string]: string | string[] | number | number[] | boolean | boolean[]
 };
 
 type AdTargeting =
