@@ -19,7 +19,7 @@ const embedPlayEvent = {
 
 describe('Video', function () {
 
-	before(function () {
+	beforeEach(function () {
 		storage.local.set('gu.geo.override', 'GB');
 	})
 
