@@ -1,7 +1,7 @@
 /* eslint-disable mocha/no-setup-in-describe */
 import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
-import { skipOn } from '@cypress/skip-test';
+import { storage } from '@guardian/libs';
 
 const mainMediaVideo =
 	'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents';
@@ -19,86 +19,81 @@ const embedPlayEvent = {
 
 describe('Video', function () {
 
-	// Skipping only on CI because, these tests work fine locally but can fail on CI is the server
-	// being used is in the US
-	skipOn(
-		Cypress.env('TEAMCITY') === 'true' ||
-			Cypress.env('GITHUB_ACTIONS') === 'true',
-		() => {
+	before(function () {
+		storage.local.set('gu.geo.override', 'GB');
+	})
 
-		it('Main media youtube video', function () {
+	it('Main media youtube video', function () {
 
-			cy.visit(`/Article?url=${mainMediaVideo}`);
-			cmpIframe().contains("It's your choice");
-			cmpIframe().find("[title='Manage my cookies']").click();
-			privacySettingsIframe().contains('Privacy settings');
-			privacySettingsIframe().find("[title='Accept all']").click();
+		cy.visit(`/Article?url=${mainMediaVideo}`);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe().find("[title='Accept all']").click();
 
-			cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as('youtubePlayer');
+		cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as('youtubePlayer');
 
-			cy.intercept(
-				{
-					url: 'http://ophan.theguardian.com/img/2?*',
-					query: {
-						video: /(.*)eventType\":\"video:content:play(.*)/,
-					},
+		cy.intercept(
+			{
+				url: 'http://ophan.theguardian.com/img/2?*',
+				query: {
+					video: /(.*)eventType\":\"video:content:play(.*)/,
 				},
-				function (req) {
-					const url = new URL(req.url);
-					const videoValue = url.searchParams.get('video');
-					expect(JSON.parse(videoValue)).to.deep.equal(
-						mainMediaPlayEvent,
-					);
+			},
+			function (req) {
+				const url = new URL(req.url);
+				const videoValue = url.searchParams.get('video');
+				expect(JSON.parse(videoValue)).to.deep.equal(
+					mainMediaPlayEvent,
+				);
+			},
+		).as('ophanCall');
+
+		cy.wait('@youtubePlayer');
+
+		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+
+		cy.get(`[daya-cy="youtube-overlay"]`).click();
+
+		cy.wait('@ophanCall');
+
+		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
+	});
+
+	it('Embed youtube video', function () {
+
+		cy.visit(`/Article?url=${embedMediaVideo}`);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe().find("[title='Accept all']").click();
+
+		cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as('youtubePlayer');
+
+		cy.intercept(
+			{
+				url: 'http://ophan.theguardian.com/img/2?*',
+				query: {
+					video: /(.*)eventType\":\"video:content:play(.*)/,
 				},
-			).as('ophanCall');
+			},
+			function (req) {
+				const url = new URL(req.url);
+				const videoValue = url.searchParams.get('video');
+				expect(JSON.parse(videoValue)).to.deep.equal(
+					embedPlayEvent,
+				);
+			},
+		).as('ophanCall');
 
-			cy.wait('@youtubePlayer');
+		cy.wait('@youtubePlayer');
 
-			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 
-			cy.get(`[daya-cy="youtube-overlay"]`).click();
+		cy.get(`[daya-cy="youtube-overlay"]`).click();
 
-			cy.wait('@ophanCall');
+		cy.wait('@ophanCall');
 
-			cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
-		});
-
-		// eslint-disable-next-line mocha/no-exclusive-tests
-		it('Embed youtube video', function () {
-
-			cy.visit(`/Article?url=${embedMediaVideo}`);
-			cmpIframe().contains("It's your choice");
-			cmpIframe().find("[title='Manage my cookies']").click();
-			privacySettingsIframe().contains('Privacy settings');
-			privacySettingsIframe().find("[title='Accept all']").click();
-
-			cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as('youtubePlayer');
-
-			cy.intercept(
-				{
-					url: 'http://ophan.theguardian.com/img/2?*',
-					query: {
-						video: /(.*)eventType\":\"video:content:play(.*)/,
-					},
-				},
-				function (req) {
-					const url = new URL(req.url);
-					const videoValue = url.searchParams.get('video');
-					expect(JSON.parse(videoValue)).to.deep.equal(
-						embedPlayEvent,
-					);
-				},
-			).as('ophanCall');
-
-			cy.wait('@youtubePlayer');
-
-			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
-
-			cy.get(`[daya-cy="youtube-overlay"]`).click();
-
-			cy.wait('@ophanCall');
-
-			cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
-		});
+		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 	});
 });
