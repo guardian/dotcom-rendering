@@ -112,8 +112,8 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = (palette: Palette) => css`
-	fill: ${palette.text.caption};
+const iconStyle = css`
+	fill: ${neutral[46]};
 	margin-right: ${space[1] /2}px;
 	display: inline-block;
 	vertical-align: middle;
@@ -164,7 +164,7 @@ export const Caption = ({
 		>
 			<span
 				css={[
-					iconStyle(palette),
+					iconStyle,
 					format.display === ArticleDisplay.Immersive &&
 						hideIconBelowLeftCol,
 				]}
