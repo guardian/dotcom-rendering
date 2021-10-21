@@ -761,6 +761,10 @@ const textNumberedPosition = (): string => {
 	return text.supporting;
 };
 
+const textOverlayed = (): string => {
+	return WHITE;
+}
+
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
@@ -815,6 +819,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
+			overlayed: textOverlayed(),
 		},
 		background: {
 			article: backgroundArticle(format),

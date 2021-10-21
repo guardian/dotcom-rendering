@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
-import { neutral, text } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/src-foundations/palette';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import CameraIcon from '@frontend/static/icons/camera.svg';
@@ -36,7 +36,7 @@ const bottomMargin = css`
 	margin-bottom: 6px;
 `;
 
-const overlayedStyles = css`
+const overlayedStyles = (palette: Palette) => css`
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -44,15 +44,15 @@ const overlayedStyles = css`
 	background: rgba(18, 18, 18, 0.8);
 
 	span {
-		color: ${text.ctaPrimary};
+		color: ${palette.text.overlayed};
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}
 
 	svg {
-		fill: ${text.ctaPrimary};
+		fill: ${palette.text.overlayed};
 	}
-	color: ${text.ctaPrimary};
+	color: ${palette.text.overlayed};
 	font-size: 0.75rem;
 	line-height: 1rem;
 	padding-top: 0.375rem;
@@ -112,8 +112,8 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const iconStyle = css`
-	fill: ${neutral[46]};
+const iconStyle = (palette: Palette) => css`
+	fill: ${palette.text.caption};
 	margin-right: ${space[1] /2}px;
 	display: inline-block;
 	vertical-align: middle;
@@ -158,13 +158,13 @@ export const Caption = ({
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
-				isOverlayed && overlayedStyles,
+				isOverlayed && overlayedStyles(palette),
 				padCaption && captionPadding,
 			]}
 		>
 			<span
 				css={[
-					iconStyle,
+					iconStyle(palette),
 					format.display === ArticleDisplay.Immersive &&
 						hideIconBelowLeftCol,
 				]}
