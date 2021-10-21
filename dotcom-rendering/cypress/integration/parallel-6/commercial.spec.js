@@ -45,6 +45,16 @@ describe('Commercial E2E tests', function () {
 		// eslint-disable-next-line mocha/no-setup-in-describe
 		skipOn(Cypress.env('TEAMCITY') === 'true', () => {
 			it(`It should check slots for a long article in Frontend`, function () {
+
+				// TODO: temporary workaround for uncaught exception from rich-link json request
+				cy.on('uncaught:exception', (err, runnable, promise) => {
+					// return false to prevent the error from failing this test
+					if (promise) {
+						console.log(err);
+						return false;
+					}
+				});
+
 				Cypress.config('baseUrl', '');
 				runLongReadTestFor(`${longReadURL}?dcr=false`);
 			});
