@@ -1,5 +1,4 @@
 import { disableCMP } from '../../lib/disableCMP';
-import { skipOn } from '@cypress/skip-test';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 describe('Commercial E2E tests', function () {
@@ -22,7 +21,7 @@ describe('Commercial E2E tests', function () {
 		// cases this check will pass much faster
 		cy.get('.js-ad-slot:not([data-name="survey"]', {
 			timeout: 30000,
-		}).should('have.length.of.at.least', 14)
+		}).should('have.length.of.at.least', 14);
 
 		Array(10)
 			.fill()
@@ -41,23 +40,18 @@ describe('Commercial E2E tests', function () {
 			runLongReadTestFor(`Article?url=${longReadURL}`);
 		});
 
-		// Skipping only on CI because, overriding the baseURL works fine locally but hangs on CI.
-		// eslint-disable-next-line mocha/no-setup-in-describe
-		skipOn(Cypress.env('TEAMCITY') === 'true', () => {
-			it(`It should check slots for a long article in Frontend`, function () {
-
-				// TODO: temporary workaround for uncaught exception from rich-link json request
-				cy.on('uncaught:exception', (err, runnable, promise) => {
-					// return false to prevent the error from failing this test
-					if (promise) {
-						console.log(err);
-						return false;
-					}
-				});
-
-				Cypress.config('baseUrl', '');
-				runLongReadTestFor(`${longReadURL}?dcr=false`);
+		it(`It should check slots for a long article in Frontend`, function () {
+			// TODO: temporary workaround for uncaught exception from rich-link json request
+			cy.on('uncaught:exception', (err, runnable, promise) => {
+				// return false to prevent the error from failing this test
+				if (promise) {
+					console.log(err);
+					return false;
+				}
 			});
+
+			Cypress.config('baseUrl', '');
+			runLongReadTestFor(`${longReadURL}?dcr=false`);
 		});
 	});
 });
