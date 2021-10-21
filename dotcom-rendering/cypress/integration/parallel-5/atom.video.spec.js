@@ -33,12 +33,9 @@ describe('Video', function () {
 			cmpIframe().find("[title='Manage my cookies']").click();
 			privacySettingsIframe().contains('Privacy settings');
 			privacySettingsIframe().find("[title='Accept all']").click();
-			// reload now we have consent
-			cy.visit(`Article?url=${mainMediaVideo}`);
 
-			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+			cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as('youtubePlayer');
 
-			cy.get(`[daya-cy="youtube-overlay"]`).click();
 			cy.intercept(
 				{
 					url: 'http://ophan.theguardian.com/img/2?*',
@@ -55,44 +52,53 @@ describe('Video', function () {
 				},
 			).as('ophanCall');
 
+			cy.wait('@youtubePlayer');
+
+			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+
+			cy.get(`[daya-cy="youtube-overlay"]`).click();
+
 			cy.wait('@ophanCall');
 
 			cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 		});
 
 		// eslint-disable-next-line mocha/no-exclusive-tests
-		it.only('Embed youtube video', function () {
-				cy.visit(`/Article?url=${embedMediaVideo}`);
-				cmpIframe().contains("It's your choice");
-				cmpIframe().find("[title='Manage my cookies']").click();
-				privacySettingsIframe().contains('Privacy settings');
-				privacySettingsIframe().find("[title='Accept all']").click();
-				// reload now we have consent
-				cy.visit(`Article?url=${embedMediaVideo}`);
+		it('Embed youtube video', function () {
 
-				cy.get(`[daya-cy="youtube-overlay"]`).scrollIntoView();
-				cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+			cy.visit(`/Article?url=${embedMediaVideo}`);
+			cmpIframe().contains("It's your choice");
+			cmpIframe().find("[title='Manage my cookies']").click();
+			privacySettingsIframe().contains('Privacy settings');
+			privacySettingsIframe().find("[title='Accept all']").click();
 
-				cy.get(`[daya-cy="youtube-overlay"]`).click();
-				cy.intercept(
-					{
-						url: 'http://ophan.theguardian.com/img/2?*',
-						query: {
-							video: /(.*)eventType\":\"video:content:play(.*)/,
-						},
+			cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as('youtubePlayer');
+
+			cy.intercept(
+				{
+					url: 'http://ophan.theguardian.com/img/2?*',
+					query: {
+						video: /(.*)eventType\":\"video:content:play(.*)/,
 					},
-					function (req) {
-						const url = new URL(req.url);
-						const videoValue = url.searchParams.get('video');
-						expect(JSON.parse(videoValue)).to.deep.equal(
-							embedPlayEvent,
-						);
-					},
-				).as('ophanCall');
+				},
+				function (req) {
+					const url = new URL(req.url);
+					const videoValue = url.searchParams.get('video');
+					expect(JSON.parse(videoValue)).to.deep.equal(
+						embedPlayEvent,
+					);
+				},
+			).as('ophanCall');
 
-				cy.wait('@ophanCall');
+			cy.wait('@youtubePlayer');
 
-				cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
+			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+
+			cy.get(`[daya-cy="youtube-overlay"]`).click();
+
+			cy.wait('@ophanCall');
+
+			cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 		});
 	});
 });
