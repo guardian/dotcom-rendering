@@ -56,8 +56,7 @@ const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	}
 
 	${darkModeCss(supportsDarkMode)`
-		background-color: ${neutral[60]};
-		opacity: .7;
+		background-color: ${neutral[93]};
 	`}
 `;
 

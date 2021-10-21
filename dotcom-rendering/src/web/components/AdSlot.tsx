@@ -347,7 +347,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			const adSlotAboveNav = css`
 				position: relative;
 				margin: 0 auto;
-				min-height: 90px;
+				min-height: ${adSizes.leaderboard.height}px;
 				text-align: left;
 				display: block;
 				min-width: 728px;

@@ -157,8 +157,8 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 				position: relative;
 			`}
 		>
-			<div data-print-layout="hide">
-				<Stuck>
+			<Stuck>
+				<div data-print-layout="hide">
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
@@ -172,8 +172,11 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 							display={format.display}
 						/>
 					</ElementContainer>
-				</Stuck>
-				{format.theme !== ArticleSpecial.Labs && (
+				</div>
+			</Stuck>
+
+			{format.theme !== ArticleSpecial.Labs && (
+				<div data-print-layout="hide">
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
@@ -189,8 +192,8 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 							}
 						/>
 					</ElementContainer>
-				)}
-			</div>
+				</div>
+			)}
 
 			<ElementContainer
 				showSideBorders={true}

@@ -16,7 +16,7 @@ import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
 import { isPicture as checkIfPicture, getFormat } from 'item';
-import { maybeRender } from 'lib';
+import { convertFormatToArticleFormat, maybeRender } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import FootballScores from '../footballScores';
@@ -192,7 +192,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 					<Img
 						image={image}
 						sizes={getImageSizes(format, image, isPicture)}
-						format={item}
+						format={convertFormatToArticleFormat(item)}
 						className={some(
 							getImageStyle(image, format, isPicture),
 						)}
