@@ -789,7 +789,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Portal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce rootId={youTubeAtom.elementId}>
+				<HydrateOnce rootId={youTubeAtom.elementId} waitFor={[consentState]}>
 					<YoutubeBlockComponent
 						format={format}
 						palette={palette}
@@ -797,6 +797,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
+						consentState={consentState}
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
