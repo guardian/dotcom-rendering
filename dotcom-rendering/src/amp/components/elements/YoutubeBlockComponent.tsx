@@ -53,6 +53,7 @@ export const YoutubeBlockComponent: React.FC<{
 		layout: 'responsive',
 		width: '16',
 		height: '9',
+		'data-block-on-consent': true, // Block player until consent is obtained
 		'data-param-modestbranding': true, // Remove YouTube logo
 		credentials: 'omit',
 	};
