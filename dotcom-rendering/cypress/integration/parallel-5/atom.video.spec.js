@@ -17,17 +17,6 @@ const embedPlayEvent = {
 	eventType: 'video:content:play',
 };
 
-// Youtube needs consent state in order to pass to the player
-const visitArticleAndConsent = (article) => () => {
-	cy.visit(`/Article?url=${article}`);
-	cmpIframe().contains("It's your choice");
-	cmpIframe().find("[title='Manage my cookies']").click();
-	privacySettingsIframe().contains('Privacy settings');
-	privacySettingsIframe().find("[title='Accept all']").click();
-	// reload now we have consent
-	cy.visit(`Article?url=${article}`);
-}
-
 describe('Video', function () {
 
 	// Skipping only on CI because, these tests work fine locally but can fail on CI is the server
@@ -37,53 +26,53 @@ describe('Video', function () {
 			Cypress.env('GITHUB_ACTIONS') === 'true',
 		() => {
 
-		describe('Main media youtube video', function () {
+		it('Main media youtube video', function () {
 
-			before(
-				visitArticleAndConsent(mainMediaVideo)
-			);
+			cy.visit(`/Article?url=${mainMediaVideo}`);
+			cmpIframe().contains("It's your choice");
+			cmpIframe().find("[title='Manage my cookies']").click();
+			privacySettingsIframe().contains('Privacy settings');
+			privacySettingsIframe().find("[title='Accept all']").click();
+			// reload now we have consent
+			cy.visit(`Article?url=${mainMediaVideo}`);
 
-			it('should render', function () {
-				cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
-			});
+			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 
-			it('should dispatch play to server', function () {
-				cy.get(`[daya-cy="youtube-overlay"]`).click();
-				cy.intercept(
-					{
-						url: 'http://ophan.theguardian.com/img/2?*',
-						query: {
-							video: /(.*)eventType\":\"video:content:play(.*)/,
-						},
+			cy.get(`[daya-cy="youtube-overlay"]`).click();
+			cy.intercept(
+				{
+					url: 'http://ophan.theguardian.com/img/2?*',
+					query: {
+						video: /(.*)eventType\":\"video:content:play(.*)/,
 					},
-					function (req) {
-						const url = new URL(req.url);
-						const videoValue = url.searchParams.get('video');
-						expect(JSON.parse(videoValue)).to.deep.equal(
-							mainMediaPlayEvent,
-						);
-					},
-				).as('ophanCall');
+				},
+				function (req) {
+					const url = new URL(req.url);
+					const videoValue = url.searchParams.get('video');
+					expect(JSON.parse(videoValue)).to.deep.equal(
+						mainMediaPlayEvent,
+					);
+				},
+			).as('ophanCall');
 
-				cy.wait('@ophanCall');
-			});
+			cy.wait('@ophanCall');
 
-			it('should no longer display overlay', function () {
-				cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
-			});
+			cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 		});
 
-		describe('Embed youtube video', function () {
-			before(
-				visitArticleAndConsent(embedMediaVideo)
-			);
+		// eslint-disable-next-line mocha/no-exclusive-tests
+		it.only('Embed youtube video', function () {
+				cy.visit(`/Article?url=${embedMediaVideo}`);
+				cmpIframe().contains("It's your choice");
+				cmpIframe().find("[title='Manage my cookies']").click();
+				privacySettingsIframe().contains('Privacy settings');
+				privacySettingsIframe().find("[title='Accept all']").click();
+				// reload now we have consent
+				cy.visit(`Article?url=${embedMediaVideo}`);
 
-			it('should render', function () {
 				cy.get(`[daya-cy="youtube-overlay"]`).scrollIntoView();
 				cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
-			});
 
-			it('should dispatch play to server', function () {
 				cy.get(`[daya-cy="youtube-overlay"]`).click();
 				cy.intercept(
 					{
@@ -102,11 +91,8 @@ describe('Video', function () {
 				).as('ophanCall');
 
 				cy.wait('@ophanCall');
-			});
 
-			it('should no longer display overlay', function () {
 				cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
-			});
 		});
 	});
 });
