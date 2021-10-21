@@ -7,8 +7,6 @@ import {
 	ChartAtom,
 	ExplainerAtom,
 	GuideAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
 	ProfileAtom,
 	QandaAtom,
 	TimelineAtom,
@@ -40,15 +38,14 @@ import type {
 	GuideAtom as GuideAtomElement,
 	Image,
 	InteractiveAtom as InteractiveAtomElement,
-	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
 	MediaAtom as MediaAtomElement,
-	PersonalityQuizAtom as PersonalityQuizAtomElement,
 	ProfileAtom as ProfileAtomElement,
 	QandaAtom as QandaAtomElement,
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
 import Anchor from 'components/anchor';
+import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
@@ -632,29 +629,6 @@ const audioAtomRenderer = (
 	);
 };
 
-const quizAtomRenderer = (
-	format: Format,
-	element: KnowledgeQuizAtomElement | PersonalityQuizAtomElement,
-): ReactNode => {
-	const props = JSON.stringify(element);
-	const { theme } = format;
-	const hydrationParams = h(
-		'script',
-		{ className: 'js-quiz-params', type: 'application/json' },
-		props,
-	);
-	if (element.kind === ElementKind.KnowledgeQuizAtom) {
-		return h('div', { className: 'js-quiz' }, [
-			hydrationParams,
-			h(KnowledgeQuizAtom, { ...element, theme, sharingUrls: {} }),
-		]);
-	}
-	return h('div', { className: 'js-quiz' }, [
-		hydrationParams,
-		h(PersonalityQuizAtom, { ...element, theme, sharingUrls: {} }),
-	]);
-};
-
 const render =
 	(format: Format, excludeStyles = false) =>
 	(element: BodyElement, key: number): ReactNode => {
@@ -731,7 +705,7 @@ const render =
 
 			case ElementKind.KnowledgeQuizAtom:
 			case ElementKind.PersonalityQuizAtom:
-				return quizAtomRenderer(format, element);
+				return h(Quiz, { format, element });
 		}
 	};
 

@@ -5,6 +5,7 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
@@ -27,6 +28,7 @@ type Props = {
 		width: number;
 	}[];
 	adTargeting?: AdTargeting;
+	consentState?: ConsentState;
 	isMainMedia?: boolean;
 	height?: number;
 	width?: number;
@@ -81,6 +83,7 @@ export const YoutubeBlockComponent = ({
 	expired,
 	role,
 	adTargeting,
+	consentState,
 	isMainMedia,
 	height = 259,
 	width = 460,
@@ -180,6 +183,7 @@ export const YoutubeBlockComponent = ({
 				role={role}
 				alt={altText || mediaTitle || ''}
 				adTargeting={adTargeting}
+				consentState={consentState}
 				height={height}
 				width={width}
 				title={mediaTitle}
