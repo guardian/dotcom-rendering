@@ -18,7 +18,7 @@ Picture.disableLazyLoading = isChromatic();
 
 if (isChromatic()) {
 	// Fix the date to prevent false negatives
-	MockDate.set('Sun Jan 10 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
+	MockDate.set('Fri Oct 22 2021 11:28:15 GMT+0100 (British Summer Time)');
 }
 
 mockRESTCalls();
