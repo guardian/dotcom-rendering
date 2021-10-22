@@ -26,6 +26,19 @@ const globalH2Styles = (display: ArticleDisplay) => css`
 	}
 `;
 
+const globalOlStyles = () => css`
+	ol:not([data-ignore='global-ol-styling']) {
+		counter-reset: li;
+		li:before {
+			font-size: 1.0625rem;
+			line-height: 1.25rem;
+			content: counter(li);
+			counter-increment: li;
+			margin-right: 0.25rem;
+		}
+	}
+`;
+
 const globalH3Styles = (display: ArticleDisplay) => {
 	if (display !== ArticleDisplay.NumberedList) return null;
 	return css`
@@ -98,6 +111,7 @@ export const ArticleBody = ({
 				isInteractive ? null : bodyPadding,
 				globalH2Styles(format.display),
 				globalH3Styles(format.display),
+				globalOlStyles(),
 				globalStrongStyles,
 				globalLinkStyles(palette),
 			]}
