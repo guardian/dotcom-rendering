@@ -6,7 +6,7 @@ import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { space, remSpace } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 
 type Props = {
 	format: ArticleFormat;
@@ -33,7 +33,7 @@ const globalOlStyles = () => css`
 			${body.medium({lineHeight : 'tight'})};
 			content: counter(li);
 			counter-increment: li;
-			margin-right: ${remSpace[1]}
+			margin-right: ${space[1]}px;
 		}
 	}
 `;
