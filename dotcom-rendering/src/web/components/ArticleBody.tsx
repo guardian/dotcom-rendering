@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, body } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { space } from '@guardian/src-foundations';
+import { space, remSpace } from '@guardian/src-foundations';
 
 type Props = {
 	format: ArticleFormat;
@@ -30,11 +30,10 @@ const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
 		li:before {
-			font-size: 1.0625rem;
-			line-height: 1.25rem;
+			${body.medium({lineHeight : 'tight'})};
 			content: counter(li);
 			counter-increment: li;
-			margin-right: 0.25rem;
+			margin-right: ${remSpace[1]}
 		}
 	}
 `;
