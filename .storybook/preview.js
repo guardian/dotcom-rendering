@@ -18,7 +18,9 @@ Picture.disableLazyLoading = isChromatic();
 
 if (isChromatic()) {
 	// Fix the date to prevent false negatives
-	MockDate.set('Fri Oct 22 2021 11:28:15 GMT+0100 (British Summer Time)');
+	// And not just any date... 200 years! 🎉
+	// https://www.theguardian.com/gnm-press-office/2021/apr/30/the-guardian-celebrates-200-extraordinary-years
+	MockDate.set('Wed May 5 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
 }
 
 mockRESTCalls();
