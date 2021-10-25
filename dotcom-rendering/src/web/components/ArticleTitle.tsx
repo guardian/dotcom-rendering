@@ -45,7 +45,7 @@ const marginTop = css`
 
 const immersiveMargins = css`
 	max-width: 400px;
-	margin-bottom: 4px;
+	//margin-bottom: 4px;
 	/*
         Make sure we vertically align the title font with the body font
     */
@@ -54,6 +54,10 @@ const immersiveMargins = css`
 	}
 	${from.leftCol} {
 		margin-left: 25px;
+	}
+
+	${until.mobileLandscape} {
+		margin-right: 40px;
 	}
 `;
 
