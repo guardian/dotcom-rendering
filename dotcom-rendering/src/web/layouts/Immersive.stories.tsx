@@ -24,6 +24,8 @@ import { PrintShop } from '@root/fixtures/generated/articles/PrintShop';
 import { Labs } from '@root/fixtures/generated/articles/Labs';
 import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
 
+import { ReviewLongSeriesLink } from '@root/fixtures/generated/articles/ReviewLongSeriesLink';
+
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
@@ -115,6 +117,18 @@ ReviewStory.story = {
 	name: 'Review',
 	parameters: {
 		viewport: { defaultViewport: 'phablet' },
+		chromatic: { viewports: [660] },
+	},
+};
+
+export const ReviewStorySeries = (): React.ReactNode => {
+	const ServerCAPI = convertToImmersive(ReviewLongSeriesLink);
+	return <HydratedLayout ServerCAPI={ServerCAPI} />;
+};
+ReviewStorySeries.story = {
+	name: 'Review Series Link',
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: { viewports: [660] },
 	},
 };

@@ -46,6 +46,10 @@ const marginTop = css`
 
 const immersiveMargins = css`
 	max-width: 400px;
+	${from.phablet} {
+		max-width: 600px;
+	}
+	padding-right: 5px;
 	//margin-bottom: 4px;
 	/*
         Make sure we vertically align the title font with the body font
