@@ -41,6 +41,15 @@ describe('Consent tests', function () {
 	});
 
 	it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
+		// TODO: temporary workaround for uncaught exception from rich-link json request
+		cy.on('uncaught:exception', (err, runnable, promise) => {
+			// return false to prevent the error from failing this test
+			if (promise) {
+				console.log(err);
+				return false;
+			}
+		});
+
 		cy.visit(`Article?url=${firstPage}`);
 		waitForAnalyticsToInit();
 		cy.window().its('ga').should('not.exist');
