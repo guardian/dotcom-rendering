@@ -4,6 +4,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { SeriesSectionLink } from './SeriesSectionLink';
+import { palette } from '@guardian/src-foundations';
 
 type Props = {
 	format: ArticleFormat;
@@ -57,8 +58,12 @@ const immersiveMargins = css`
 	}
 
 	${until.mobileLandscape} {
-		margin-right: 40px;
+		margin-right: 39px;
 	}
+`;
+
+const backgroundColour = (palette: Palette) => css`
+	background-color: ${palette.background.seriesTitle};
 `;
 
 export const ArticleTitle = ({
@@ -82,6 +87,7 @@ export const ArticleTitle = ({
 				format.display === ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.PrintShop &&
 					immersiveMargins,
+				backgroundColour(palette),
 			]}
 		>
 			<SeriesSectionLink

@@ -54,15 +54,15 @@ const invertedStyle = css`
 		line-height: 28px;
 	}
 
-	padding-right: ${space[1]}px;
-	padding-top: ${space[1]}px;
+	//padding-right: ${space[1]}px;
+	padding-top: 3px;
 	padding-bottom: ${space[3]}px;
 	padding-left: ${space[3]}px;
-	${from.mobileLandscape} {
+	/*${from.mobileLandscape} {
 		padding-left: ${space[5]}px;
-	}
+	}*/
 	${from.tablet} {
-		padding-left: ${space[1]}px;
+		//padding-left: ${space[1]}px;
 	}
 `;
 
