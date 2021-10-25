@@ -55,7 +55,10 @@ const invertedStyle = css`
 	}
 
 	//padding-right: ${space[1]}px;
-	padding-top: 3px;
+	${until.tablet} {
+		padding-top: 3px;
+	}
+
 	padding-bottom: ${space[3]}px;
 	padding-left: ${space[3]}px;
 	/*${from.mobileLandscape} {
