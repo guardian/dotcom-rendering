@@ -20,6 +20,7 @@ import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/Vi
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
 
 import { enhance } from '@root/src/amp/lib/enhance';
+import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
 
 export const Elements = (
 	elements: CAPIElement[],
@@ -221,9 +222,7 @@ export const Elements = (
 				// eslint-disable-next-line no-console
 				console.log('Unsupported Element', JSON.stringify(element));
 				if ((element as { isMandatory?: boolean }).isMandatory) {
-					throw new Error(
-						'This page cannot be rendered due to incompatible content that is marked as mandatory.',
-					);
+					throw new NotRenderableInDCR();
 				}
 				return null;
 		}
