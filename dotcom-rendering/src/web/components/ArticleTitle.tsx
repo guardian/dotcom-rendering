@@ -4,7 +4,6 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { Badge } from '@frontend/web/components/Badge';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { SeriesSectionLink } from './SeriesSectionLink';
-import { palette } from '@guardian/src-foundations';
 
 type Props = {
 	format: ArticleFormat;
