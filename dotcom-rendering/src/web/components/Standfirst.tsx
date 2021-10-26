@@ -120,6 +120,20 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 			switch (format.design) {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
+					return css`
+						${headline.xxxsmall({
+							fontWeight: 'light',
+						})};
+						margin-bottom: ${space[3]}px;
+						max-width:80%;
+						color: ${palette.text.standfirst};
+						${from.tablet} {
+							${headline.xxsmall({
+								fontWeight: 'light',
+							})};
+							max-width:540px;
+						}
+					`;
 				case ArticleDesign.Letter:
 				case ArticleDesign.Feature:
 				case ArticleDesign.Recipe:
