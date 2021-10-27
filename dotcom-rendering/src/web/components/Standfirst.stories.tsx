@@ -12,7 +12,10 @@ import { Standfirst } from './Standfirst';
 export default {
 	component: Standfirst,
 	title: 'Components/Standfirst',
-	chromatic: { viewports : [breakpoints.tablet, breakpoints.wide] }
+	parameters: {
+		chromatic: {
+			viewports : [breakpoints.tablet, breakpoints.wide] }
+	}
 };
 
 export const Article = () => {
