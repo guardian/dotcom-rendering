@@ -135,9 +135,9 @@ const immersiveTitleBadgeStyle = (palette: Palette) => css`
 	line-height: 1.15;
 	/* Offset parent container margins when Immersive */
 	margin-bottom: -10px;
-	background-color: ${palette.background.seriesTitle};
+	/* background-color: ${palette.background.seriesTitle};
 	box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
-		6px 0 0 0 ${palette.background.seriesTitle};
+		6px 0 0 0 ${palette.background.seriesTitle}; */
 `;
 
 export const SeriesSectionLink = ({
@@ -282,14 +282,12 @@ export const SeriesSectionLink = ({
 										breakWord,
 										css`
 											color: ${palette.text.seriesTitle};
-											background-color: ${palette
+											/* background-color: ${palette
 												.background.seriesTitle};
 											box-shadow: -6px 0 0 0
-													${palette.background
-														.seriesTitle},
+													${palette.background.seriesTitle},
 												6px 0 0 0
-													${palette.background
-														.seriesTitle};
+													${palette.background.seriesTitle}; */
 										`,
 									]}
 									href={`${guardianBaseURL}/${linkExt}`}

@@ -45,19 +45,19 @@ const marginTop = css`
 
 const immersiveMargins = css`
 	max-width: 400px;
-	${from.phablet} {
+	/* ${from.phablet} {
 		max-width: 600px;
-	}
+	} */
 	padding-right: 5px;
 	//margin-bottom: 4px;
 	/*
         Make sure we vertically align the title font with the body font
     */
 	${from.tablet} {
-		margin-left: 16px;
+		margin-left: 12px;
 	}
 	${from.leftCol} {
-		margin-left: 25px;
+		margin-left: 20px;
 	}
 
 	${until.mobileLandscape} {
