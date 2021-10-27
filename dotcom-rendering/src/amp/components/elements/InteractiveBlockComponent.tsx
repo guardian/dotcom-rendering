@@ -2,6 +2,7 @@ import React from 'react';
 import { ClassNames } from '@emotion/react';
 
 import { ShowMoreButton } from '@root/src/amp/components/ShowMoreButton';
+import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
 
 export const InteractiveBlockComponent: React.FunctionComponent<{
 	url?: string;
@@ -10,9 +11,7 @@ export const InteractiveBlockComponent: React.FunctionComponent<{
 	// If this element is mandatory, we don't know if we can render it properly, so we have to
 	// throw an error and chuck the whole page out of AMP. You're barred son.
 	if (isMandatory) {
-		throw new Error(
-			'This page cannot be rendered due to incompatible content that is marked as mandatory.',
-		);
+		throw new NotRenderableInDCR();
 	}
 
 	if (!url) {
