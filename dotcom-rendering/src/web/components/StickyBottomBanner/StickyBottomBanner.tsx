@@ -17,7 +17,10 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 import { CountryCode } from '@guardian/libs';
-import type { BrazeArticleContext, BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type {
+	BrazeArticleContext,
+	BrazeMessagesInterface,
+} from '@guardian/braze-components/logic';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
@@ -140,7 +143,7 @@ const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 
 const buildBrazeBanner = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
-	brazeArticleContext: BrazeArticleContext
+	brazeArticleContext: BrazeArticleContext,
 ): CandidateConfig<any> => ({
 	candidate: {
 		id: 'braze-banner',
@@ -178,11 +181,11 @@ export const StickyBottomBanner = ({
 			signInGateWillShow,
 		);
 		const brazeArticleContext: BrazeArticleContext = {
-			section: CAPI.sectionName
+			section: CAPI.sectionName,
 		};
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
-			brazeArticleContext
+			brazeArticleContext,
 		);
 		const bannerConfig: SlotConfig = {
 			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],

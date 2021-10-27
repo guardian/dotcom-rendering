@@ -11,9 +11,9 @@ const SDK_OPTIONS: appboy.InitializationOptions = {
 };
 
 const initialiseAppboy = async (apiKey: string): Promise<typeof appboy> => {
-	const importedAppboy = (await import(
+	const importedAppboy = ((await import(
 		/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
-	)) as unknown as typeof appboy;
+	)) as unknown) as typeof appboy;
 
 	importedAppboy.setLogger((message) => log('tx', message));
 	importedAppboy.initialize(apiKey, SDK_OPTIONS);

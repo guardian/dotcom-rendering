@@ -213,14 +213,15 @@ const removeGlobalH2Styles = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-				'model.dotcomrendering.pageElements.SubheadingBlockElement'
+			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
-			withH2StylesIgnored.push(
-				{
-					...thisElement,
-					html: thisElement.html.replace('<h2>', '<h2 data-ignore="global-h2-styling">'),
-				},
-			);
+			withH2StylesIgnored.push({
+				...thisElement,
+				html: thisElement.html.replace(
+					'<h2>',
+					'<h2 data-ignore="global-h2-styling">',
+				),
+			});
 		} else {
 			// Pass through
 			withH2StylesIgnored.push(thisElement);

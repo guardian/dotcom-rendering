@@ -73,9 +73,9 @@ export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
 export const HydrateInteractiveOnce = ({
-	 rootId,
-	 children,
-	 waitFor = [],
+	rootId,
+	children,
+	waitFor = [],
 }: Props) => {
 	const [alreadyHydrated, setAlreadyHydrated] = useState(false);
 	if (alreadyHydrated) return null;

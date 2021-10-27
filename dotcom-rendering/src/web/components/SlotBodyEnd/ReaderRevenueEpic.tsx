@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import {
-	getEpicMeta,
-	getViewLog,
-} from '@guardian/automat-contributions';
+import { getEpicMeta, getViewLog } from '@guardian/automat-contributions';
 import {
 	isRecurringContributor,
 	getLastOneOffContributionTimestamp,

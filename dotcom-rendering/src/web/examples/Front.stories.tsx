@@ -416,7 +416,8 @@ export const Front = () => (
 						kickerText={kickers[3]}
 						webPublicationDate="2019-11-14T06:00:31Z"
 						avatar={{
-							src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+							src:
+								'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
 							alt: 'Avatar alt text',
 						}}
 						showClock={true}
@@ -915,7 +916,8 @@ export const Front2 = () => (
 						kickerText={kickers[3]}
 						webPublicationDate="2019-11-14T06:00:31Z"
 						avatar={{
-							src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+							src:
+								'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
 							alt: 'Avatar alt text',
 						}}
 						showClock={true}

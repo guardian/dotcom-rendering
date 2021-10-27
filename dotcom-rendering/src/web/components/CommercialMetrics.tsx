@@ -18,12 +18,14 @@ export const CommercialMetrics: React.FC<{
 
 	const adBlockerInUse = useAdBlockInUse();
 	// only send metrics when visibility state changes to hidden;
-	const isHidden = visibilityState === 'hidden' || undefined
+	const isHidden = visibilityState === 'hidden' || undefined;
 
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [prebidTimeout];
-		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
-			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
+		const shouldForceMetrics = ABTestAPI.allRunnableTests(
+			tests,
+		).some((test) =>
+			testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
 		const userIsInSamplingGroup = Math.random() <= 1 / 100;
 		const isDev =
@@ -31,14 +33,14 @@ export const CommercialMetrics: React.FC<{
 			window.location.hostname.includes('localhost');
 
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
-			sendCommercialMetrics(pageViewId, browserId, Boolean(isDev), adBlockerInUse);
+			sendCommercialMetrics(
+				pageViewId,
+				browserId,
+				Boolean(isDev),
+				adBlockerInUse,
+			);
 		}
-	}, [
-		ABTestAPI,
-		pageViewId,
-		adBlockerInUse,
-		isHidden
-	]);
+	}, [ABTestAPI, pageViewId, adBlockerInUse, isHidden]);
 
 	// We don’t render anything
 	return null;

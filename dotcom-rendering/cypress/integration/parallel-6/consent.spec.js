@@ -11,7 +11,6 @@ const secondPage =
 	'https://www.theguardian.com/environment/2020/nov/19/blue-whale-sightings-off-south-georgia-raise-hopes-of-recovery';
 
 describe('Consent tests', function () {
-
 	const waitForAnalyticsToInit = () => {
 		// Waiting is sad but we need to ensure the init script has executed which occurs
 		// after the pageLoadEvent has fired

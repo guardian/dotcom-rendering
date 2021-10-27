@@ -8,7 +8,10 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 
-import type { BrazeMessagesInterface, BrazeArticleContext } from '@guardian/braze-components/logic';
+import type {
+	BrazeMessagesInterface,
+	BrazeArticleContext,
+} from '@guardian/braze-components/logic';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	ReaderRevenueEpic,
@@ -79,7 +82,7 @@ const buildBrazeEpicConfig = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
 	countryCode: string,
 	idApiUrl: string,
-	brazeArticleContext: BrazeArticleContext
+	brazeArticleContext: BrazeArticleContext,
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
@@ -131,13 +134,13 @@ export const SlotBodyEnd = ({
 			>,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
-			section: sectionName
+			section: sectionName,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,
 			countryCode as string,
 			idApiUrl,
-			brazeArticleContext
+			brazeArticleContext,
 		);
 		const epicConfig: SlotConfig = {
 			candidates: [brazeEpic, readerRevenueEpic],
