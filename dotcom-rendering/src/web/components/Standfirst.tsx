@@ -118,7 +118,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (format.design) {
-				case ArticleDesign.Editorial:
+				case ArticleDesign.Comment:
 					return css`
 						${headline.xxxsmall({
 							fontWeight: 'light',
@@ -133,7 +133,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 							max-width:540px;
 						}
 					`;
-				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 				case ArticleDesign.Feature:
 				case ArticleDesign.Recipe:
