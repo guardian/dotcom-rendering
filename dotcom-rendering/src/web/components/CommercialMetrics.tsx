@@ -3,6 +3,7 @@ import { tests } from '@frontend/web/experiments/ab-tests';
 import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { useAB } from '@guardian/ab-react';
+import { prebidTimeout } from '@frontend/web/experiments/tests/prebid-timeout-test';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 
@@ -20,7 +21,7 @@ export const CommercialMetrics: React.FC<{
 	const isHidden = visibilityState === 'hidden' || undefined
 
 	useOnce(() => {
-		const testsToForceMetrics: ABTest[] = [];
+		const testsToForceMetrics: ABTest[] = [prebidTimeout];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
