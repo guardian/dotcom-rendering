@@ -15,6 +15,7 @@ export const VideoYoutubeBlockComponent: React.FC<{
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
 			<amp-youtube
+				data-block-on-consent={true} // Block player until consent is obtained
 				data-videoid={youtubeId}
 				layout="responsive"
 				width={element.width}
