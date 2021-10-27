@@ -14,7 +14,7 @@ export default {
 	title: 'Components/Standfirst',
 	parameters: {
 		chromatic: {
-			viewports : [breakpoints.tablet, breakpoints.wide] }
+			viewports : [breakpoints.mobile, breakpoints.tablet] }
 	}
 };
 
