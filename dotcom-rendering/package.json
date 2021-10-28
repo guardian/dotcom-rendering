@@ -50,7 +50,7 @@
     "@guardian/commercial-core": "^0.26.0",
     "@guardian/consent-management-platform": "~6.11.5",
     "@guardian/discussion-rendering": "^8.1.0",
-    "@guardian/libs": "^3.3.0",
+    "@guardian/libs": "^3.4.1",
     "@guardian/shimport": "^1.0.2",
     "@guardian/source-react-components-development-kitchen": "^0.0.3",
     "@guardian/src-brand": "^3.9.0",
