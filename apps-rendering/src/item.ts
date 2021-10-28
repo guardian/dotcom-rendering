@@ -75,8 +75,14 @@ interface ResizedRelatedContent extends RelatedContent {
 	resizedImages: Array<Option<Image>>;
 }
 
-interface Liveblog extends Fields {
+interface LiveBlog extends Fields {
 	design: Design.LiveBlog;
+	blocks: LiveBlock[];
+	totalBodyBlocks: number;
+}
+
+interface DeadBlog extends Fields {
+	design: Design.DeadBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
 }
@@ -123,6 +129,7 @@ interface Standard extends Fields {
 	design: Exclude<
 		Design,
 		| Design.LiveBlog
+		| Design.DeadBlog
 		| Design.Review
 		| Design.Comment
 		| Design.Letter
@@ -132,7 +139,8 @@ interface Standard extends Fields {
 }
 
 type Item =
-	| Liveblog
+	| LiveBlog
+	| DeadBlog
 	| Review
 	| Comment
 	| Standard
@@ -315,12 +323,12 @@ const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
-	(request: RenderingRequest): Liveblog => {
+	(request: RenderingRequest): LiveBlog | DeadBlog => {
 		const { content } = request;
-		const body = content.blocks?.body?.slice(0, 7) ?? [];
+		const body = content.blocks?.body ?? [];
 
 		return {
-			design: Design.LiveBlog,
+			design: content.fields?.liveBloggingNow === true ? Design.LiveBlog : Design.DeadBlog,
 			blocks: parseLiveBlocks(body)(context),
 			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
 			...itemFields(context, request),
@@ -432,7 +440,8 @@ const fromCapi =
 export {
 	Item,
 	Comment,
-	Liveblog,
+	LiveBlog,
+	DeadBlog,
 	Review,
 	Standard,
 	MatchReport,

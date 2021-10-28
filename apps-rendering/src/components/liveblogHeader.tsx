@@ -12,7 +12,7 @@ import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
 import { headlineBackgroundColour } from 'editorialStyles';
 import HeaderMedia from 'headerMedia';
-import type { Liveblog } from 'item';
+import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
@@ -64,7 +64,7 @@ const lineStyles = (format: Format): SerializedStyles => {
 };
 
 interface Props {
-	item: Liveblog;
+	item: LiveBlog | DeadBlog;
 }
 
 const LiveblogHeader: FC<Props> = ({ item }) => {
