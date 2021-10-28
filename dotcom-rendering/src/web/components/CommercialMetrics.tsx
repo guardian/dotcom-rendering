@@ -4,6 +4,7 @@ import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { useAB } from '@guardian/ab-react';
 import { prebidTimeout } from '@frontend/web/experiments/tests/prebid-timeout-test';
+import { bypassCoreWebVitalsSampling } from '@guardian/libs';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 
@@ -18,7 +19,7 @@ export const CommercialMetrics: React.FC<{
 
 	const adBlockerInUse = useAdBlockInUse();
 	// only send metrics when visibility state changes to hidden;
-	const isHidden = visibilityState === 'hidden' || undefined
+	const isHidden = visibilityState === 'hidden' || undefined;
 
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [prebidTimeout];
@@ -31,14 +32,10 @@ export const CommercialMetrics: React.FC<{
 			window.location.hostname.includes('localhost');
 
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
-			sendCommercialMetrics(pageViewId, browserId, Boolean(isDev), adBlockerInUse);
+			sendCommercialMetrics(pageViewId, browserId, isDev, adBlockerInUse);
+			bypassCoreWebVitalsSampling('commercial');
 		}
-	}, [
-		ABTestAPI,
-		pageViewId,
-		adBlockerInUse,
-		isHidden
-	]);
+	}, [ABTestAPI, pageViewId, adBlockerInUse, isHidden]);
 
 	// We don’t render anything
 	return null;
