@@ -328,7 +328,10 @@ const fromCapiLiveBlog =
 		const body = content.blocks?.body ?? [];
 
 		return {
-			design: content.fields?.liveBloggingNow === true ? Design.LiveBlog : Design.DeadBlog,
+			design:
+				content.fields?.liveBloggingNow === true
+					? Design.LiveBlog
+					: Design.DeadBlog,
 			blocks: parseLiveBlocks(body)(context),
 			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
 			...itemFields(context, request),

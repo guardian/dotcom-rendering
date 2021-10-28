@@ -1,32 +1,38 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
+import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
 import { background, neutral } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
+import { OptionKind } from '@guardian/types';
 import Footer from 'components/footer';
 import LiveblogHeader from 'components/liveblogHeader';
 import RelatedContent from 'components/shared/relatedContent';
 import Tags from 'components/tags';
 import type { DeadBlog, LiveBlog } from 'item';
+import { convertThemeToArticleTheme } from 'lib';
+import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
-import KeyEvents, { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
-import { convertThemeToArticleTheme } from 'lib';
-import { OptionKind } from '@guardian/types';
-import { LiveBlock } from 'liveBlock';
 
 // ----- Component ----- //
 
 const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
-	blocks.reduce<KeyEvent[]>((events, block) =>
-		block.isKeyEvent && block.firstPublished.kind !== OptionKind.None
-			? [ ...events, {
-				time: block.firstPublished.value.toUTCString(),
-				text: block.title,
-				url: `#block-${block.id}`,
-			}]
-			: events
-	, []);
+	blocks.reduce<KeyEvent[]>(
+		(events, block) =>
+			block.isKeyEvent && block.firstPublished.kind !== OptionKind.None
+				? [
+						...events,
+						{
+							time: block.firstPublished.value.toUTCString(),
+							text: block.title,
+							url: `#block-${block.id}`,
+						},
+				  ]
+				: events,
+		[],
+	);
 
 const BorderStyles = css`
 	background: ${neutral[100]};
