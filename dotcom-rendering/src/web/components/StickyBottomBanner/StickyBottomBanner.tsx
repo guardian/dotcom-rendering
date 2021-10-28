@@ -91,7 +91,7 @@ const buildRRBannerConfigWith = ({
 						isSignedIn,
 						asyncCountryCode,
 						contentType: CAPI.contentType,
-						sectionName: CAPI.sectionName,
+						sectionId: CAPI.config.section,
 						shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
 						isMinuteArticle: CAPI.pageType.isMinuteArticle,
 						isPaidContent: CAPI.pageType.isPaidContent,
