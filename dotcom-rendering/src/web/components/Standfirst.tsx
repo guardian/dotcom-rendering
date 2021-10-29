@@ -121,6 +121,9 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 				case ArticleDesign.Comment:
+				case ArticleDesign.Feature:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Review:
 					return css`
 						${headline.xxxsmall({
 							fontWeight: 'light',
@@ -134,17 +137,6 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 							})};
 							max-width:540px;
 						}
-					`;
-				case ArticleDesign.Feature:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Review:
-					return css`
-						${headline.xxsmall({
-							fontWeight: 'light',
-						})};
-						margin-bottom: ${space[3]}px;
-						max-width: 540px;
-						color: ${palette.text.standfirst};
 					`;
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
@@ -181,8 +173,11 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 								})};
 								line-height: 20px;
 								margin-bottom: ${space[3]}px;
-								max-width: 540px;
+								max-width: 80%;
 								color: ${palette.text.standfirst};
+								${from.tablet} {
+									max-width:540px;
+								}
 							`;
 					}
 			}
