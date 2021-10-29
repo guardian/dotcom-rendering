@@ -115,13 +115,13 @@ const buildRRBannerConfigWith = ({
 						asyncArticleCount,
 					}),
 				show:
-					({ meta, module, email }: BannerProps) =>
+					({ meta, module, fetchEmail }: BannerProps) =>
 					() =>
 						(
 							<BannerComponent
 								meta={meta}
 								module={module}
-								email={email}
+								fetchEmail={fetchEmail}
 							/>
 						),
 			},
