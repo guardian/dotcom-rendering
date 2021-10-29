@@ -22,10 +22,8 @@ export const CommercialMetrics: React.FC<{
 
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [prebidTimeout];
-		const shouldForceMetrics = ABTestAPI.allRunnableTests(
-			tests,
-		).some((test) =>
-			testsToForceMetrics.map((t) => t.id).includes(test.id),
+		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
+			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
 		const userIsInSamplingGroup = Math.random() <= 1 / 100;
 		const isDev =

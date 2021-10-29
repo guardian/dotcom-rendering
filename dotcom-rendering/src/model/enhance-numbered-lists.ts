@@ -13,12 +13,10 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const html = frag.firstElementChild.outerHTML;
 	// The following things must be true for an element to be a faux H3
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
-	const containsStrongtags = frag.firstElementChild.outerHTML.includes(
-		'<strong>',
-	);
-	const doesNotContainLinks = !frag.firstElementChild.outerHTML.includes(
-		'<a>',
-	);
+	const containsStrongtags =
+		frag.firstElementChild.outerHTML.includes('<strong>');
+	const doesNotContainLinks =
+		!frag.firstElementChild.outerHTML.includes('<a>');
 	const htmlLength = html.length;
 	const startStrong = html.substr(0, 11) === '<p><strong>';
 	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
@@ -144,8 +142,7 @@ const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 			const rating = extractStarCount(thisElement);
 			// Inline this image
 			withStars.push({
-				_type:
-					'model.dotcomrendering.pageElements.StarRatingBlockElement',
+				_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 				elementId: thisElement.elementId,
 				rating,
 				size: 'large',
@@ -260,8 +257,7 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 
 			withH3s.push(
 				{
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
+					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
 					spaceAbove: isPreviousItemLink ? 'loose' : 'tight',
 				},
@@ -289,15 +285,13 @@ const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
 		) {
 			withItemLink.push(
 				{
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
+					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
 					spaceAbove: 'tight',
 				},
 				{
 					...thisElement,
-					_type:
-						'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement',
 				},
 			);
 		} else {
@@ -332,14 +326,12 @@ const addTitles = (
 			const { html } = thisElement;
 			withTitles.push(
 				{
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
+					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
 					spaceAbove: 'loose',
 				},
 				{
-					_type:
-						'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+					_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 					elementId: thisElement.elementId,
 					position,
 					html,

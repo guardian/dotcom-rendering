@@ -117,9 +117,8 @@ const BrazeBannerWithSatisfiedDependencies = ({
 };
 
 export const BrazeBanner = ({ meta }: Props) => {
-	const [BrazeComponent, setBrazeComponent] = useState<
-		React.FC<CommonBannerComponentProps>
-	>();
+	const [BrazeComponent, setBrazeComponent] =
+		useState<React.FC<CommonBannerComponentProps>>();
 
 	useEffect(() => {
 		import(

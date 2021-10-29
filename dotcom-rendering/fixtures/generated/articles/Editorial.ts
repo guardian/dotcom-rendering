@@ -13,8 +13,7 @@
 
 export const Editorial: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image" data-media-id="c8200f3ea53cda44927b11af11e8fc731afc3f34"> <img src="https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg" alt="‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">‘Ministers have said further border measures are required, but cannot say when they will be applied.’</span> <span class="element-image__credit">Photograph: May James/ZUMA Wire/REX/Shutterstock</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="c8200f3ea53cda44927b11af11e8fc731afc3f34"> <img src="https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg" alt="‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">‘Ministers have said further border measures are required, but cannot say when they will be applied.’</span> <span class="element-image__credit">Photograph: May James/ZUMA Wire/REX/Shutterstock</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/world/coronavirus-outbreak',
@@ -38,8 +37,7 @@ export const Editorial: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 				{
 					name: 'tn',
@@ -89,8 +87,7 @@ export const Editorial: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 				{
 					name: 'tn',
@@ -144,8 +141,7 @@ export const Editorial: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 				{
 					name: 'tn',
@@ -199,8 +195,7 @@ export const Editorial: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 				{
 					name: 'tn',
@@ -441,8 +436,7 @@ export const Editorial: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -825,8 +819,7 @@ export const Editorial: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -902,8 +895,7 @@ export const Editorial: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -955,23 +947,19 @@ export const Editorial: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1112,8 +1100,7 @@ export const Editorial: CAPIType = {
 		'article:modified_time': '2021-02-04T05:22:07.000Z',
 	},
 	sectionUrl: 'world/coronavirus-outbreak',
-	pageId:
-		'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+	pageId: 'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	version: 3,
 	tags: [
 		{
@@ -1213,8 +1200,7 @@ export const Editorial: CAPIType = {
 		},
 	],
 	pillar: 'opinion',
-	webURL:
-		'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+	webURL: 'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Coronavirus',
@@ -1293,8 +1279,7 @@ export const Editorial: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1336,8 +1321,7 @@ export const Editorial: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1357,15 +1341,13 @@ export const Editorial: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1417,8 +1399,7 @@ export const Editorial: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/2000.jpg',
+						url: 'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/2000.jpg',
 					},
 					{
 						index: 1,
@@ -1428,8 +1409,7 @@ export const Editorial: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg',
+						url: 'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg',
 					},
 					{
 						index: 2,
@@ -1439,8 +1419,7 @@ export const Editorial: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/500.jpg',
+						url: 'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/500.jpg',
 					},
 					{
 						index: 3,
@@ -1450,8 +1429,7 @@ export const Editorial: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/140.jpg',
+						url: 'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/140.jpg',
 					},
 					{
 						index: 4,
@@ -1461,8 +1439,7 @@ export const Editorial: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/5322.jpg',
+						url: 'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/5322.jpg',
 					},
 					{
 						index: 5,
@@ -1473,14 +1450,12 @@ export const Editorial: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg',
+						url: 'https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg',
 					},
 				],
 			},
 			data: {
-				alt:
-					'‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January.',
+				alt: '‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January.',
 				caption:
 					'‘Ministers have said further border measures are required, but cannot say when they will be applied.’',
 				credit: 'Photograph: May James/ZUMA Wire/REX/Shutterstock',
@@ -1492,33 +1467,27 @@ export const Editorial: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
 							width: 890,
 						},
 					],
@@ -1527,23 +1496,19 @@ export const Editorial: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=140&quality=85&auto=format&fit=max&s=df1f0f80da2e008f55dcb719c5b64ae6',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=140&quality=85&auto=format&fit=max&s=df1f0f80da2e008f55dcb719c5b64ae6',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fa35f2e7edfd2a38f8602ff6b8ccb74b',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fa35f2e7edfd2a38f8602ff6b8ccb74b',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=120&quality=85&auto=format&fit=max&s=ccd00556d1c5bfc364a45233c280e2a7',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=120&quality=85&auto=format&fit=max&s=ccd00556d1c5bfc364a45233c280e2a7',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=88d49838164e64407f85a773dc746411',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=88d49838164e64407f85a773dc746411',
 							width: 240,
 						},
 					],
@@ -1552,53 +1517,43 @@ export const Editorial: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=380&quality=85&auto=format&fit=max&s=e71c7ed5ecc18120fa8773c826f50bd0',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=380&quality=85&auto=format&fit=max&s=e71c7ed5ecc18120fa8773c826f50bd0',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=fad9d345b3c671c9d3950c0ab5e9034b',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=fad9d345b3c671c9d3950c0ab5e9034b',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=300&quality=85&auto=format&fit=max&s=b294b19570bb2856d32231ba66285449',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=300&quality=85&auto=format&fit=max&s=b294b19570bb2856d32231ba66285449',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=844e08da6df3711c5c3eb24928d94728',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=844e08da6df3711c5c3eb24928d94728',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
 							width: 890,
 						},
 					],
@@ -1607,73 +1562,59 @@ export const Editorial: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1020&quality=85&auto=format&fit=max&s=be1e5720158f6d4d61cb4f38277d4782',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1020&quality=85&auto=format&fit=max&s=be1e5720158f6d4d61cb4f38277d4782',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=1dfb6c64fbd8a16ab516fec4cc549f5d',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=1dfb6c64fbd8a16ab516fec4cc549f5d',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=940&quality=85&auto=format&fit=max&s=6776a806cfaefb9824e3c64ec11a1de4',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=940&quality=85&auto=format&fit=max&s=6776a806cfaefb9824e3c64ec11a1de4',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c3a074edda4b27e72f5772d4b74b844d',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c3a074edda4b27e72f5772d4b74b844d',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=85&auto=format&fit=max&s=f3e85030d0bd7b6ebe41958c540f92a1',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=85&auto=format&fit=max&s=f3e85030d0bd7b6ebe41958c540f92a1',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cb1815c5d400a2d4c6ce53c257f32a52',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cb1815c5d400a2d4c6ce53c257f32a52',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=85&auto=format&fit=max&s=f3e85030d0bd7b6ebe41958c540f92a1',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=85&auto=format&fit=max&s=f3e85030d0bd7b6ebe41958c540f92a1',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cb1815c5d400a2d4c6ce53c257f32a52',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cb1815c5d400a2d4c6ce53c257f32a52',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=660&quality=85&auto=format&fit=max&s=7c0319274ca2269971949422ad5b792f',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=660&quality=85&auto=format&fit=max&s=7c0319274ca2269971949422ad5b792f',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cdcbd6e25a6ad27769f64b94d6b3041a',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cdcbd6e25a6ad27769f64b94d6b3041a',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=85&auto=format&fit=max&s=dbce27296d3001413277f72b260369c3',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=85&auto=format&fit=max&s=dbce27296d3001413277f72b260369c3',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9095b7ef57d1bd6918b75d9757aeea6f',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9095b7ef57d1bd6918b75d9757aeea6f',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=85&auto=format&fit=max&s=cebb53a5122ee05421188edfd0e4df61',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=85&auto=format&fit=max&s=cebb53a5122ee05421188edfd0e4df61',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a07f0b470e352aa20e8f6c4b3745ef4',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a07f0b470e352aa20e8f6c4b3745ef4',
 							width: 930,
 						},
 					],
@@ -1682,33 +1623,27 @@ export const Editorial: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=85&auto=format&fit=max&s=65e9a737e8d3a5e62766be63f200ffdc',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a8ba524f3af26898e5bca2895ec6e29d',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=85&auto=format&fit=max&s=4274db44c63aa85739510dfcac178413',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d2b6a863bf723ec26aa4958f1fc07693',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=85&auto=format&fit=max&s=b2e36ca6c7e0f65a9ef49bcc284a8f46',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ad0731ec258bbf02c0fb25135942e6b2',
 							width: 890,
 						},
 					],
@@ -1717,73 +1652,59 @@ export const Editorial: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1300&quality=85&auto=format&fit=max&s=5671d8e875fa661be54c91a44d91f0b4',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1300&quality=85&auto=format&fit=max&s=5671d8e875fa661be54c91a44d91f0b4',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=28f0acfc3a27ec5048c8850d9cb292c9',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=28f0acfc3a27ec5048c8850d9cb292c9',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1140&quality=85&auto=format&fit=max&s=d2b0b7dbd62b7bc61e1980b6138f2b0a',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1140&quality=85&auto=format&fit=max&s=d2b0b7dbd62b7bc61e1980b6138f2b0a',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=2f6dd56a0e654b7ffc5ddb7206386ca8',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=2f6dd56a0e654b7ffc5ddb7206386ca8',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1125&quality=85&auto=format&fit=max&s=48d2b1a8faaad907faa3135c23992764',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1125&quality=85&auto=format&fit=max&s=48d2b1a8faaad907faa3135c23992764',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=3281838687f8b0a5b0389e4899c52b16',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=3281838687f8b0a5b0389e4899c52b16',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=965&quality=85&auto=format&fit=max&s=9a8412b45aff53607515fbed23b3f920',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=965&quality=85&auto=format&fit=max&s=9a8412b45aff53607515fbed23b3f920',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=c3438be50fadcc216e63987d53bce318',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=c3438be50fadcc216e63987d53bce318',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=725&quality=85&auto=format&fit=max&s=b3574c3679cd804ad95d3c6e5de467c7',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=725&quality=85&auto=format&fit=max&s=b3574c3679cd804ad95d3c6e5de467c7',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=bbfff86aca3d0ae3ceaa4bf601cddfc9',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=bbfff86aca3d0ae3ceaa4bf601cddfc9',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=85&auto=format&fit=max&s=dbce27296d3001413277f72b260369c3',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=85&auto=format&fit=max&s=dbce27296d3001413277f72b260369c3',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9095b7ef57d1bd6918b75d9757aeea6f',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9095b7ef57d1bd6918b75d9757aeea6f',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=85&auto=format&fit=max&s=cebb53a5122ee05421188edfd0e4df61',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=85&auto=format&fit=max&s=cebb53a5122ee05421188edfd0e4df61',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a07f0b470e352aa20e8f6c4b3745ef4',
+							src: 'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a07f0b470e352aa20e8f6c4b3745ef4',
 							width: 930,
 						},
 					],
@@ -1799,45 +1720,33 @@ export const Editorial: CAPIType = {
 			id: '5e74ae948f088d75755971e4',
 			elements: [
 				{
-					html:
-						'<p>The greatest advances in the battle against the coronavirus have been made by modern science, but before there were vaccines, countries had to rely on older techniques: stopping people mingling; preventing new cases of the disease arriving from overseas. Britain’s record with lockdowns is not great (late to implement, premature in lifting), but with quarantine at the border there is barely even a record to defend. For much of last year there was a notional obligation on travellers from various countries to self-isolate on arrival in the UK, but with a shifting roster of places that qualified for “safe” travel corridors.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The greatest advances in the battle against the coronavirus have been made by modern science, but before there were vaccines, countries had to rely on older techniques: stopping people mingling; preventing new cases of the disease arriving from overseas. Britain’s record with lockdowns is not great (late to implement, premature in lifting), but with quarantine at the border there is barely even a record to defend. For much of last year there was a notional obligation on travellers from various countries to self-isolate on arrival in the UK, but with a shifting roster of places that qualified for “safe” travel corridors.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'b17455c3-227f-4fbc-851b-5252c65b8d4f',
 				},
 				{
-					html:
-						'<p>There were many categories of exemption. The regulations were unclear and poorly implemented. <a href="https://www.theguardian.com/world/commentisfree/2021/jan/28/uk-covid-travel-quarantine-hotel" title="">Efforts at enforcement have been patchy</a>. Essentially, self-isolation has been self-policed. Only towards the end of last year, as it became clear that mutant strains of the virus were spreading – and that Britain’s approach was persistently failing – did the government start focusing on <a href="https://www.theguardian.com/world/2021/jan/27/how-quarantine-rules-work-and-what-uk-government-is-planning" title="">quarantine as part of the anti-virus arsenal</a>. More travellers are now required to show proof of a negative Covid test and there are tighter restrictions on arrivals from certain “hotspot” countries. That approach is still flawed. People, and the virus they might carry, do not always travel straight from the heart of an outbreak to the UK. Mutations are dispersed along multiple paths.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>There were many categories of exemption. The regulations were unclear and poorly implemented. <a href="https://www.theguardian.com/world/commentisfree/2021/jan/28/uk-covid-travel-quarantine-hotel" title="">Efforts at enforcement have been patchy</a>. Essentially, self-isolation has been self-policed. Only towards the end of last year, as it became clear that mutant strains of the virus were spreading – and that Britain’s approach was persistently failing – did the government start focusing on <a href="https://www.theguardian.com/world/2021/jan/27/how-quarantine-rules-work-and-what-uk-government-is-planning" title="">quarantine as part of the anti-virus arsenal</a>. More travellers are now required to show proof of a negative Covid test and there are tighter restrictions on arrivals from certain “hotspot” countries. That approach is still flawed. People, and the virus they might carry, do not always travel straight from the heart of an outbreak to the UK. Mutations are dispersed along multiple paths.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '0a45c490-1948-458b-b13c-c679cf078c97',
 				},
 				{
-					html:
-						'<p>Ministers have said further border measures are required, but cannot say when they will be applied. The new regime is expected to involve diverting large numbers of arrivals to government-approved hotels for up to 10 days, with an option of getting out sooner with a negative test. The Department for Transport and the Treasury <a href="https://www.theguardian.com/world/2021/feb/03/grant-shapps-resists-blanket-border-controls-to-stem-covid-in-britain" title="">have been squeamish</a> about the cost of such a regime. Passengers would get a bill, but the whole system would still be expensive and inflict another wound on an already injured aviation sector.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Ministers have said further border measures are required, but cannot say when they will be applied. The new regime is expected to involve diverting large numbers of arrivals to government-approved hotels for up to 10 days, with an option of getting out sooner with a negative test. The Department for Transport and the Treasury <a href="https://www.theguardian.com/world/2021/feb/03/grant-shapps-resists-blanket-border-controls-to-stem-covid-in-britain" title="">have been squeamish</a> about the cost of such a regime. Passengers would get a bill, but the whole system would still be expensive and inflict another wound on an already injured aviation sector.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '30a3cc4a-8291-4dcf-ac26-c3d4d78b22ee',
 				},
 				{
-					html:
-						'<p>But, as has been demonstrated many times in the pandemic, resisting tighter restrictions to avoid an immediate financial burden is a false economy. Delay allows the disease to spread. The onerous measures are still required and have to be in place for longer. That remains true even as the vaccination programme is rolled out. Not enough is yet known about vaccine resilience in the face of recently discovered coronavirus variants, let alone any future mutations. <a href="https://www.theguardian.com/world/2021/jan/22/covid-vaccines-what-are-the-implications-of-new-variants-of-virus" title="">The risk is not negligible.</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>But, as has been demonstrated many times in the pandemic, resisting tighter restrictions to avoid an immediate financial burden is a false economy. Delay allows the disease to spread. The onerous measures are still required and have to be in place for longer. That remains true even as the vaccination programme is rolled out. Not enough is yet known about vaccine resilience in the face of recently discovered coronavirus variants, let alone any future mutations. <a href="https://www.theguardian.com/world/2021/jan/22/covid-vaccines-what-are-the-implications-of-new-variants-of-virus" title="">The risk is not negligible.</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '5a854a2f-79ea-41fe-9043-692e281b5afd',
 				},
 				{
-					html:
-						'<p>Countries with the strongest records against disease have applied the full range of containment measures quickly and thoroughly, including efficient testing, contact tracing, and a presumption that all new arrivals face quarantine (with some flexibility for humanitarian exceptions, naturally). That principle should be the basis for the UK’s regime. A speedy vaccination roll-out has given Boris Johnson <a href="https://www.theguardian.com/society/2021/jan/31/daily-record-as-600000-people-in-the-uk-receive-covid-jabs-on-saturday" title="">cause to celebrate</a> his government’s accomplishments relative to other countries. Ministerial relief at having something to cheer is palpable, but it must not lead to neglect of other fronts in the battle or feed the culture of impatience and denial that causes many Conservative MPs to demand unwarranted easing of restrictions.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Countries with the strongest records against disease have applied the full range of containment measures quickly and thoroughly, including efficient testing, contact tracing, and a presumption that all new arrivals face quarantine (with some flexibility for humanitarian exceptions, naturally). That principle should be the basis for the UK’s regime. A speedy vaccination roll-out has given Boris Johnson <a href="https://www.theguardian.com/society/2021/jan/31/daily-record-as-600000-people-in-the-uk-receive-covid-jabs-on-saturday" title="">cause to celebrate</a> his government’s accomplishments relative to other countries. Ministerial relief at having something to cheer is palpable, but it must not lead to neglect of other fronts in the battle or feed the culture of impatience and denial that causes many Conservative MPs to demand unwarranted easing of restrictions.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ed546098-b373-4711-a1ab-802efff0f30f',
 				},
 				{
-					html:
-						'<p>No one should belittle the social, economic and psychological cost of anti-Covid restrictions. Quarantine, like lockdown, is a harsh instrument to be used only as an emergency resort. But we are now a year into such an emergency. The government’s haphazard approach, justified by a pursuit of short-term economic relief, has only prolonged the ordeal. The vaccine programme illuminates a way out. It would be a tragic squandering of that success if overreliance on new technology were to breed complacency regarding older but no less vital methods of protecting the public.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>No one should belittle the social, economic and psychological cost of anti-Covid restrictions. Quarantine, like lockdown, is a harsh instrument to be used only as an emergency resort. But we are now a year into such an emergency. The government’s haphazard approach, justified by a pursuit of short-term economic relief, has only prolonged the ordeal. The vaccine programme illuminates a way out. It would be a tragic squandering of that success if overreliance on new technology were to breed complacency regarding older but no less vital methods of protecting the public.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '99a93985-cb93-412b-9490-4882f006b816',
 				},
 			],
@@ -1853,8 +1762,7 @@ export const Editorial: CAPIType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://amp.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+			'@id': 'https://amp.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1863,8 +1771,7 @@ export const Editorial: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -1903,12 +1810,10 @@ export const Editorial: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+			'@id': 'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				target: 'android-app://com.guardian/https/www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			},
 		},
 	],
@@ -2024,8 +1929,7 @@ export const Editorial: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -2079,8 +1983,7 @@ export const Editorial: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

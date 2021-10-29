@@ -20,8 +20,7 @@ describe('The web document renders with the correct meta and analytics elements 
 		const metaTags = [
 			{
 				name: 'description',
-				value:
-					'From warming up your voice to avoiding spillages, here are some tips for keeping up professional appearances',
+				value: 'From warming up your voice to avoiding spillages, here are some tips for keeping up professional appearances',
 			},
 			{
 				name: 'viewport',

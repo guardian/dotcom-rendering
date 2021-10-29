@@ -125,9 +125,9 @@ const go = () => {
 		async (req, res, next) => {
 			try {
 				const url = buildUrlFromQueryParam(req);
-				const { html, ...config } = await fetch(
-					ampifyUrl(url),
-				).then((article) => article.json());
+				const { html, ...config } = await fetch(ampifyUrl(url)).then(
+					(article) => article.json(),
+				);
 				req.body = config;
 				next();
 			} catch (error) {
@@ -154,9 +154,9 @@ const go = () => {
 		async (req, res, next) => {
 			try {
 				const url = buildUrlFromQueryParam(req);
-				const { html, ...config } = await fetch(
-					url,
-				).then((interactive) => interactive.json());
+				const { html, ...config } = await fetch(url).then(
+					(interactive) => interactive.json(),
+				);
 
 				req.body = config;
 				next();
@@ -184,9 +184,9 @@ const go = () => {
 		async (req, res, next) => {
 			try {
 				const url = buildUrlFromQueryParam(req);
-				const { html, ...config } = await fetch(
-					ampifyUrl(url),
-				).then((article) => article.json());
+				const { html, ...config } = await fetch(ampifyUrl(url)).then(
+					(article) => article.json(),
+				);
 				req.body = config;
 				next();
 			} catch (error) {

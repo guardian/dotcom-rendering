@@ -159,9 +159,10 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 			if (ccpa || aus) {
 				resolve(true);
 			} else if (tcfv2) {
-				const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
-					(consent) => tcfv2.consents[consent],
-				);
+				const hasRequiredConsents =
+					REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
+						(consent) => tcfv2.consents[consent],
+					);
 
 				if (!hasRequiredConsents) {
 					removeArticleCountsFromLocalStorage();

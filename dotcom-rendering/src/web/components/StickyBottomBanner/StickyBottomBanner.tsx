@@ -114,13 +114,16 @@ const buildRRBannerConfigWith = ({
 						signInGateWillShow,
 						asyncArticleCount,
 					}),
-				show: ({ meta, module, email }: BannerProps) => () => (
-					<BannerComponent
-						meta={meta}
-						module={module}
-						email={email}
-					/>
-				),
+				show:
+					({ meta, module, email }: BannerProps) =>
+					() =>
+						(
+							<BannerComponent
+								meta={meta}
+								module={module}
+								email={email}
+							/>
+						),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};

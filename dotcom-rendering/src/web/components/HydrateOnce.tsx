@@ -16,11 +16,10 @@ const isReady = (dependencies: unknown[]): boolean => {
 const resetHydrationStateEventName = 'resetHydrationState';
 
 // HOF required to enable removeEventListener
-const setAlreadyHydratedToFalse = () => (
-	setAlreadyHydrated: (value: SetStateAction<boolean>) => void,
-) => {
-	setAlreadyHydrated(false);
-};
+const setAlreadyHydratedToFalse =
+	() => (setAlreadyHydrated: (value: SetStateAction<boolean>) => void) => {
+		setAlreadyHydrated(false);
+	};
 
 // For use in storybook for clicking between components
 export const fireAndResetHydrationState = () => {

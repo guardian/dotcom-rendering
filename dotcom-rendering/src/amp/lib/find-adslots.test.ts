@@ -37,16 +37,14 @@ describe('ampadslots', () => {
 		it('adds an advert after 700 chars', () => {
 			const data: CAPIElement[] = [
 				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'mockId',
 					html: `Mr and Mrs Dursley of number 4 privet drive were proud to say${'.'.repeat(
 						700,
 					)}`,
 				},
 				{
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'mockId',
 					html: `that they were perfectly normal${'.'.repeat(700)}`,
 				},

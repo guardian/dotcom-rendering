@@ -44,7 +44,8 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateName-variant-other': new Date().toISOString(),
+						'SignInGateName-variant-other':
+							new Date().toISOString(),
 					},
 				}),
 			);
@@ -62,7 +63,8 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateOther-variant-name': new Date().toISOString(),
+						'SignInGateOther-variant-name':
+							new Date().toISOString(),
 					},
 				}),
 			);
@@ -82,7 +84,8 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateCurrent-variant-name': lessThanADayAgo.toISOString(),
+						'SignInGateCurrent-variant-name':
+							lessThanADayAgo.toISOString(),
 					},
 				}),
 			);
@@ -102,7 +105,8 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateCurrent-variant-name': moreThanADayAgo.toISOString(),
+						'SignInGateCurrent-variant-name':
+							moreThanADayAgo.toISOString(),
 					},
 				}),
 			);

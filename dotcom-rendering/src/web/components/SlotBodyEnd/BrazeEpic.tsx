@@ -136,9 +136,8 @@ const BrazeEpicWithSatisfiedDependencies = ({
 };
 
 export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
-	const [BrazeComponent, setBrazeComponent] = useState<
-		React.FC<CommonEndOfArticleComponentProps>
-	>();
+	const [BrazeComponent, setBrazeComponent] =
+		useState<React.FC<CommonEndOfArticleComponentProps>>();
 
 	useEffect(() => {
 		import(

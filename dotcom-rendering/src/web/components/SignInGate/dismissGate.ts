@@ -51,9 +51,8 @@ const setSigninGatePrefs = (prefs: any) => {
 export const setUserDismissedGate = (variant: string, name: string): void => {
 	try {
 		const prefs = getSigninGatePrefsSafely();
-		prefs[
-			localStorageDismissedDateKey(variant, name)
-		] = new Date().toISOString();
+		prefs[localStorageDismissedDateKey(variant, name)] =
+			new Date().toISOString();
 		setSigninGatePrefs(prefs);
 	} catch (error) {
 		// Alas, sometimes localstorage isn't available

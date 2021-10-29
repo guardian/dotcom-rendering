@@ -13,10 +13,8 @@ describe('unwrapHtml', () => {
 			],
 		};
 
-		const {
-			willUnwrap: bqIsUnwrapped,
-			unwrappedHtml: bqUnwrappedHtml,
-		} = unwrapHtml(bqUnwrap);
+		const { willUnwrap: bqIsUnwrapped, unwrappedHtml: bqUnwrappedHtml } =
+			unwrapHtml(bqUnwrap);
 
 		// Paragraph, no elements inside
 		const pUnwrap = {
@@ -28,10 +26,8 @@ describe('unwrapHtml', () => {
 				},
 			],
 		};
-		const {
-			willUnwrap: pIsUnwrapped,
-			unwrappedHtml: pUnwrappedHtml,
-		} = unwrapHtml(pUnwrap);
+		const { willUnwrap: pIsUnwrapped, unwrappedHtml: pUnwrappedHtml } =
+			unwrapHtml(pUnwrap);
 
 		// Testy test
 		expect(bqIsUnwrapped).toBeTruthy();
