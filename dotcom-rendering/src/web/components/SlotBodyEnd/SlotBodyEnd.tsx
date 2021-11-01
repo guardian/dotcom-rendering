@@ -15,11 +15,11 @@ import type {
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	ReaderRevenueEpic,
-	canShow as canShowReaderRevenueEpic,
+	canShowReaderRevenueEpic,
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
 } from './ReaderRevenueEpic';
-import { MaybeBrazeEpic, canShow as canShowBrazeEpic } from './BrazeEpic';
+import { MaybeBrazeEpic, canShowBrazeEpic } from './BrazeEpic';
 
 type Props = {
 	isSignedIn?: boolean;

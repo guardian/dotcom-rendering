@@ -41,7 +41,7 @@ const containerStyles = css`
 // - The Braze app Boy subscription to in app message returns meta info
 // OR
 // - The force-braze-message query string arg is passed
-export const canShow = async (
+export const canShowBrazeBanner = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 	brazeArticleContext: BrazeArticleContext,
 ): Promise<CanShowResult<any>> => {
