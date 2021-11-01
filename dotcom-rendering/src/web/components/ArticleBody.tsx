@@ -30,7 +30,7 @@ const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
 		li:before {
-			${body.medium({lineHeight : 'tight'})};
+			${body.medium({ lineHeight: 'tight' })};
 			content: counter(li);
 			counter-increment: li;
 			margin-right: ${space[1]}px;

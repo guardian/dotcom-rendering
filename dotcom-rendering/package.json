@@ -185,7 +185,6 @@
     "eslint-plugin-dcr": "https://github.com/guardian/eslint-plugin-dcr#v0.1.0",
     "fetch-mock": "^9.11.0",
     "find": "^0.3.0",
-    "husky": "^4.3.8",
     "jest": "^24.9.0",
     "jest-dom": "^2.1.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",

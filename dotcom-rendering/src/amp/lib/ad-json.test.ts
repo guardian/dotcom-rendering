@@ -98,13 +98,11 @@ describe('stringify', () => {
 		const outputJson = {
 			targeting: {
 				su: '4,5,1,2,3',
-				url:
-					'/business/2019/feb/07/no-deal-brexit-uk-exporters-risk-being-locked-out-of-world-harbours',
+				url: '/business/2019/feb/07/no-deal-brexit-uk-exporters-risk-being-locked-out-of-world-harbours',
 				tn: 'news',
 				ct: 'article',
 				co: 'richard-partington',
-				k:
-					'asia-pacific,politics,business,uk/uk,eu,newzealand,world,europe-news,internationaltrade,foreignpolicy,australia-news,eu-referendum,global-economy,japan,economics,south-korea',
+				k: 'asia-pacific,politics,business,uk/uk,eu,newzealand,world,europe-news,internationaltrade,foreignpolicy,australia-news,eu-referendum,global-economy,japan,economics,south-korea',
 				edition: 'au',
 				sh: 'https://theguardian.com/p/akj3n',
 				p: 'amp',

@@ -1,7 +1,5 @@
 // https://stackoverflow.com/a/5624139
-function hexToRgb(
-	hex: string,
-): {
+function hexToRgb(hex: string): {
 	r: number;
 	g: number;
 	b: number;

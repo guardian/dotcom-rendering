@@ -43,8 +43,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecropdouble.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecropdouble.jpg',
 		typeData: {
 			name: 'mediumlandscapecropdouble',
 		},
@@ -52,8 +51,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecrop.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecrop.jpg',
 		typeData: {
 			name: 'mediumlandscapecrop',
 		},
@@ -61,8 +59,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumoriginalaspectdouble.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumoriginalaspectdouble.jpg',
 		typeData: {
 			name: 'mediumoriginalaspectdouble',
 		},
@@ -70,8 +67,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-small.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-small.jpg',
 		typeData: {
 			name: 'small',
 		},
@@ -79,8 +75,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-medium.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-medium.jpg',
 		typeData: {
 			name: 'medium',
 		},
@@ -88,8 +83,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-large.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-large.jpg',
 		typeData: {
 			name: 'large',
 		},
@@ -97,8 +91,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-extralarge.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-extralarge.jpg',
 		typeData: {
 			name: 'extralarge',
 		},
@@ -106,8 +99,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumdouble.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumdouble.jpg',
 		typeData: {
 			name: 'mediumdouble',
 		},

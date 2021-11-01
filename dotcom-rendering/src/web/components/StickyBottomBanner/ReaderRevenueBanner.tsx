@@ -11,9 +11,7 @@ import {
 	getEmail,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
-import {
-	submitComponentEvent,
-} from '@root/src/web/browser/ophan/ophan';
+import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';

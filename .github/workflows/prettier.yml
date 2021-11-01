@@ -1,0 +1,23 @@
+name: DCR prettier 💅
+on:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
+
+jobs:
+    lint:
+        name: DCR Prettier
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: guardian/actions-setup-node@main
+
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            - uses: bahmutov/npm-install@v1
+
+            - name: Install
+              run: yarn
+
+            - name: Prettier check
+              run: yarn prettier:check
+              working-directory: dotcom-rendering

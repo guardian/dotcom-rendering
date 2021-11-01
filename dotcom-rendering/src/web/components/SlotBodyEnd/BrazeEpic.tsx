@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 
-import type { BrazeArticleContext, BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type {
+	BrazeArticleContext,
+	BrazeMessagesInterface,
+} from '@guardian/braze-components/logic';
 
 import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -29,7 +32,7 @@ type EpicConfig = {
 
 export const canShowBrazeEpic = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
-	brazeArticleContext: BrazeArticleContext
+	brazeArticleContext: BrazeArticleContext,
 ): Promise<CanShowResult<any>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
@@ -41,7 +44,9 @@ export const canShowBrazeEpic = async (
 
 	try {
 		const brazeMessages = await brazeMessagesPromise;
-		const message = await brazeMessages.getMessageForEndOfArticle(brazeArticleContext);
+		const message = await brazeMessages.getMessageForEndOfArticle(
+			brazeArticleContext,
+		);
 
 		return {
 			show: true,
@@ -131,9 +136,8 @@ const BrazeEpicWithSatisfiedDependencies = ({
 };
 
 export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
-	const [BrazeComponent, setBrazeComponent] = useState<
-		React.FC<CommonEndOfArticleComponentProps>
-	>();
+	const [BrazeComponent, setBrazeComponent] =
+		useState<React.FC<CommonEndOfArticleComponentProps>>();
 
 	useEffect(() => {
 		import(

@@ -14,8 +14,9 @@ export default {
 	title: 'Components/Standfirst',
 	parameters: {
 		chromatic: {
-			viewports : [breakpoints.mobile, breakpoints.tablet] }
-	}
+			viewports: [breakpoints.mobile, breakpoints.tablet],
+		},
+	},
 };
 
 export const Article = () => {
