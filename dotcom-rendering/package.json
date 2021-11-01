@@ -48,7 +48,7 @@
     "@guardian/automat-contributions": "^0.4.2",
     "@guardian/braze-components": "^4.1.0",
     "@guardian/commercial-core": "^0.26.0",
-    "@guardian/consent-management-platform": "9.x.x",
+    "@guardian/consent-management-platform": "^9.0.1",
     "@guardian/discussion-rendering": "^8.1.0",
     "@guardian/libs": "^3.4.1",
     "@guardian/shimport": "^1.0.2",
