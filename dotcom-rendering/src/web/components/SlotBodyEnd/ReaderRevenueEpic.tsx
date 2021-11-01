@@ -115,7 +115,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
 
-export const canShow = async (
+export const canShowReaderRevenueEpic = async (
 	data: CanShowData,
 ): Promise<CanShowResult<EpicConfig>> => {
 	const {

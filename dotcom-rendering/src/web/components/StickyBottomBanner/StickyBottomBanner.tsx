@@ -20,7 +20,7 @@ import { CountryCode } from '@guardian/libs';
 import type { BrazeArticleContext, BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
-import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
+import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
