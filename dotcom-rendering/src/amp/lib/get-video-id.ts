@@ -3,8 +3,8 @@ import { parse, URLSearchParams } from 'url';
 export const getIdFromUrl = (
 	urlString: string,
 	regexFormat: string,
-	inPath?: boolean,
-	queryParam?: string,
+	tryInPath?: boolean,
+	tryQueryParam?: string,
 ) => {
 	const logErr = (actual: string, message: string) => {
 		throw new Error(
@@ -14,20 +14,24 @@ export const getIdFromUrl = (
 
 	const url = parse(urlString);
 
-	const id =
-		(inPath && url.pathname && url.pathname.split('/').pop()) ||
-		(queryParam &&
-			url.query &&
-			new URLSearchParams(url.query).get(queryParam)) ||
-		logErr(
-			'an undefined ID',
-			'Could not get ID from pathname or searchParams.',
-		);
+	// Looks for ID in both formats if provided
+	const ids: string[] = [
+		tryInPath && url.pathname && url.pathname.split('/').pop(),
+		tryQueryParam && url.query && new URLSearchParams(url.query).get(tryQueryParam)
+	].filter((tryId): tryId is string => !!tryId)
 
-	if (!new RegExp(regexFormat).test(id)) {
+	if (!ids.length) logErr(
+		'an undefined ID',
+		'Could not get ID from pathname or searchParams.',
+	);
+
+	// Allows for a matching ID to be selected from either (or both) formats
+	const id = ids.find((tryId) => new RegExp(regexFormat).test(tryId))
+
+	if (!id) {
 		return logErr(
-			id,
-			`Popped value didn't match regexFormat ${regexFormat}`,
+			id || ids.join(', '),
+			`Value(s) didn't match regexFormat ${regexFormat}`,
 		);
 	}
 
