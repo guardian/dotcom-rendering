@@ -8,6 +8,7 @@
         "stkb.rewrap",
         "jpoissonnier.vscode-styled-components",
         "stylelint.vscode-stylelint",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker"
     ]
 }

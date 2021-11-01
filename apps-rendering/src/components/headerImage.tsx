@@ -10,6 +10,7 @@ import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
 import { Design, Display, some } from '@guardian/types';
 import type { Image } from 'image';
+import { convertFormatToArticleFormat } from 'lib';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
 
@@ -153,7 +154,7 @@ const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (
 			image={image}
 			sizes={getSizes(format, image)}
 			className={some(getImgStyles(format, image))}
-			format={format}
+			format={convertFormatToArticleFormat(format)}
 			supportsDarkMode
 			lightbox={some({
 				className: 'js-launch-slideshow',

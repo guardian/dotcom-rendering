@@ -1,4 +1,7 @@
-import { disableCMP } from '../../lib/disableCMP.js';
+/* eslint-disable mocha/no-setup-in-describe */
+import { cmpIframe } from '../../lib/cmpIframe';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
+import { storage } from '@guardian/libs';
 
 const mainMediaVideo =
 	'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents';
@@ -15,74 +18,82 @@ const embedPlayEvent = {
 };
 
 describe('Video', function () {
-	describe('Main media youtube video', function () {
-		beforeEach(function () {
-			disableCMP();
-		});
-		it('should render', function () {
-			cy.visit(`/Article?url=${mainMediaVideo}`);
-			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
-		});
 
-		it('should dispatch play to server', function () {
-			cy.get(`[daya-cy="youtube-overlay"]`).click();
-			cy.intercept(
-				{
-					url: 'http://ophan.theguardian.com/img/2?*',
-					query: {
-						video: /(.*)eventType\":\"video:content:play(.*)/,
-					},
+	beforeEach(function () {
+		storage.local.set('gu.geo.override', 'GB');
+	})
+
+	it('Main media youtube video', function () {
+
+		cy.visit(`/Article?url=${mainMediaVideo}`);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe().find("[title='Accept all']").click();
+
+		cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as('youtubePlayer');
+
+		cy.intercept(
+			{
+				url: 'http://ophan.theguardian.com/img/2?*',
+				query: {
+					video: /(.*)eventType\":\"video:content:play(.*)/,
 				},
-				function (req) {
-					const url = new URL(req.url);
-					const videoValue = url.searchParams.get('video');
-					expect(JSON.parse(videoValue)).to.deep.equal(
-						mainMediaPlayEvent,
-					);
-				},
-			).as('ophanCall');
+			},
+			function (req) {
+				const url = new URL(req.url);
+				const videoValue = url.searchParams.get('video');
+				expect(JSON.parse(videoValue)).to.deep.equal(
+					mainMediaPlayEvent,
+				);
+			},
+		).as('ophanCall');
 
-			cy.wait('@ophanCall');
-		});
+		cy.wait('@youtubePlayer');
 
-		it('should no longer display overlay', function () {
-			cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
-		});
+		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+
+		cy.get(`[daya-cy="youtube-overlay"]`).click();
+
+		cy.wait('@ophanCall');
+
+		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 	});
 
-	describe('Embed youtube video', function () {
-		beforeEach(function () {
-			disableCMP();
-		});
-		it('should render', function () {
-			cy.visit(`/Article?url=${embedMediaVideo}`);
-			cy.get(`[daya-cy="youtube-overlay"]`).scrollIntoView();
-			cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
-		});
+	it('Embed youtube video', function () {
 
-		it('should dispatch play to server', function () {
-			cy.get(`[daya-cy="youtube-overlay"]`).click();
-			cy.intercept(
-				{
-					url: 'http://ophan.theguardian.com/img/2?*',
-					query: {
-						video: /(.*)eventType\":\"video:content:play(.*)/,
-					},
+		cy.visit(`/Article?url=${embedMediaVideo}`);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe().find("[title='Accept all']").click();
+
+		cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as('youtubePlayer');
+
+		cy.intercept(
+			{
+				url: 'http://ophan.theguardian.com/img/2?*',
+				query: {
+					video: /(.*)eventType\":\"video:content:play(.*)/,
 				},
-				function (req) {
-					const url = new URL(req.url);
-					const videoValue = url.searchParams.get('video');
-					expect(JSON.parse(videoValue)).to.deep.equal(
-						embedPlayEvent,
-					);
-				},
-			).as('ophanCall');
+			},
+			function (req) {
+				const url = new URL(req.url);
+				const videoValue = url.searchParams.get('video');
+				expect(JSON.parse(videoValue)).to.deep.equal(
+					embedPlayEvent,
+				);
+			},
+		).as('ophanCall');
 
-			cy.wait('@ophanCall');
-		});
+		cy.wait('@youtubePlayer');
 
-		it('should no longer display overlay', function () {
-			cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
-		});
+		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+
+		cy.get(`[daya-cy="youtube-overlay"]`).click();
+
+		cy.wait('@ophanCall');
+
+		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 	});
 });

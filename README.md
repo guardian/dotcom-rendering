@@ -1,6 +1,6 @@
 # Dotcom/Apps Rendering
 
-This repository has become a mopnorepo containing dotcom-rendering and apps-rendering as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
+This repository has become a monorepo containing dotcom-rendering and apps-rendering as separate applications. The purpose of the monorepo is to make it easier for the two projects to share code and reduce duplication. The projects are swimlaned for fault isolation, and share the same node version.
 
 You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `npm run watch` for apps-rendering) except for storybook. Linting, imports, builds and github actions should work as before.
 
@@ -57,9 +57,9 @@ Make sure you have [Node.js](https://nodejs.org) installed.
 
 We recommend using [nvm](https://github.com/creationix/nvm) (especially combined with [this handy gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)). It is great at managing multiple versions of Node.js on one machine.
 
-### Install Pacakges
+### Install Packages
 
-run `yarn` in the root directory of this project to install packages for `dotcom-rendering`, `apps-rendering` (currenly post-install), and `common-rendering`.
+run `yarn` in the root directory of this project to install packages for `dotcom-rendering`, `apps-rendering` (currently post-install), and `common-rendering`.
 
 ### dotcom rendering
 
@@ -85,11 +85,11 @@ yarn workspace <package name> <yarn command> < ... ags >
 # e.g
 
 # Add a package
-yarn workspace @guadian/dotcom-rendering add my-new-package
+yarn workspace @guardian/dotcom-rendering add my-new-package
 
 # Remove a package
-yarn workspace @guadian/dotcom-rendering remove my-new-package
+yarn workspace @guardian/dotcom-rendering remove my-new-package
 
 # Update a package
-yarn workspace @guadian/dotcom-rendering upgrade my-new-package
+yarn workspace @guardian/dotcom-rendering upgrade my-new-package
 ```

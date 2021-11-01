@@ -6,7 +6,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@frontend/web/experiments/tests/newsletter-merch-unit-test';
-import { refreshConfiantBlockedAds } from './tests/refresh-confiant-blocked-ads';
+import { prebidTimeout } from '@frontend/web/experiments/tests/prebid-timeout-test';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -16,5 +16,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	refreshConfiantBlockedAds,
+	prebidTimeout,
 ];

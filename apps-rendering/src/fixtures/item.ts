@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { ArticleElementRole } from '@guardian/libs';
 import {
 	Design,
 	Display,
@@ -7,7 +8,6 @@ import {
 	OptionKind,
 	Pillar,
 	ResultKind,
-	Role,
 	some,
 	Special,
 	toOption,
@@ -74,7 +74,7 @@ const image: Image = {
 	alt: some('image'),
 	width: 550,
 	height: 550,
-	role: Role.Standard,
+	role: ArticleElementRole.Standard,
 	caption: none,
 	nativeCaption: none,
 	credit: none,
@@ -110,7 +110,7 @@ const mainMedia: Option<MainMedia> = {
 				kind: OptionKind.Some,
 				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		},
 	},
 };
@@ -148,7 +148,7 @@ const body: Body = [
 				kind: OptionKind.Some,
 				value: 'Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles.',
 			},
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		},
 	},
 	{

@@ -5,8 +5,10 @@ import { css } from "@emotion/react";
 import { remSpace } from "@guardian/src-foundations";
 import { brandAltText, neutral, text } from "@guardian/src-foundations/palette";
 import { textSans } from "@guardian/src-foundations/typography";
-import type { Format, Option } from "@guardian/types";
-import { Design, OptionKind } from "@guardian/types";
+import type { ArticleFormat } from "@guardian/libs";
+import { ArticleDesign } from "@guardian/libs";
+import type { Option } from "@guardian/types";
+import { OptionKind } from "@guardian/types";
 import type { FC, ReactNode } from "react";
 import { fill } from "../editorialPalette";
 import { darkModeCss } from "../lib";
@@ -14,12 +16,12 @@ import { darkModeCss } from "../lib";
 // ----- Sub-Components ----- //
 
 interface TriangleProps {
-  format: Format;
+  format: ArticleFormat;
   supportsDarkMode: boolean;
 }
 
 const triangleStyles = (
-  format: Format,
+  format: ArticleFormat,
   supportsDarkMode: boolean
 ): SerializedStyles => css`
   fill: ${fill.iconPrimary(format)};
@@ -33,7 +35,7 @@ const triangleStyles = (
 
 const Triangle: FC<TriangleProps> = ({ format, supportsDarkMode }) => {
   switch (format.design) {
-    case Design.Media:
+    case ArticleDesign.Media:
       return null;
     default:
       return (
@@ -51,7 +53,7 @@ const Triangle: FC<TriangleProps> = ({ format, supportsDarkMode }) => {
 // ----- Component ----- //
 
 type Props = {
-  format: Format;
+  format: ArticleFormat;
   supportsDarkMode: boolean;
   children: Option<ReactNode>;
 };
@@ -75,11 +77,11 @@ const mediaStyles = (supportsDarkMode: boolean) => css`
 `;
 
 const getStyles = (
-  format: Format,
+  format: ArticleFormat,
   supportsDarkMode: boolean
 ): SerializedStyles => {
   switch (format.design) {
-    case Design.Media:
+    case ArticleDesign.Media:
       return css(styles(supportsDarkMode), mediaStyles(supportsDarkMode));
     default:
       return styles(supportsDarkMode);

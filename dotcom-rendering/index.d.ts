@@ -186,10 +186,14 @@ interface AdTargetParam {
 	value: string | string[];
 }
 
+type CustomParams = {
+	[key: string]: string | string[] | number | number[] | boolean | boolean[]
+};
+
 type AdTargeting =
 	| {
 			adUnit: string;
-			customParams: Record<string, unknown>;
+			customParams: CustomParams;
 			disableAds?: false;
 	  }
 	| {
