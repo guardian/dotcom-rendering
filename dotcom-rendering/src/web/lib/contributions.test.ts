@@ -1,3 +1,4 @@
+import { getIdApiUserData } from '@root/src/web/lib/getIdapiUserData';
 import { addCookie } from '../browser/cookie';
 import {
 	getLastOneOffContributionTimestamp,
@@ -6,7 +7,6 @@ import {
 	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 } from './contributions';
-import { getIdApiUserData } from '@root/src/web/lib/getIdapiUserData';
 
 const clearAllCookies = () => {
 	const cookies = document.cookie.split(';');

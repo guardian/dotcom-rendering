@@ -204,18 +204,18 @@ const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
 		});
 };
 
-export const lazyFetchEmailWithTimeout = (
-	idapiUrl: string,
-): (() => Promise<string | null>) => () => {
-	return new Promise((resolve) => {
-		setTimeout(() => resolve(null), 1000);
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		getEmail(idapiUrl).then((email) => {
-			if (email) {
-				resolve(email);
-			} else {
-				resolve(null);
-			}
+export const lazyFetchEmailWithTimeout =
+	(idapiUrl: string): (() => Promise<string | null>) =>
+	() => {
+		return new Promise((resolve) => {
+			setTimeout(() => resolve(null), 1000);
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			getEmail(idapiUrl).then((email) => {
+				if (email) {
+					resolve(email);
+				} else {
+					resolve(null);
+				}
+			});
 		});
-	});
-};
+	};
