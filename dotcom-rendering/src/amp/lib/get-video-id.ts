@@ -16,8 +16,8 @@ export const getIdFromUrl = (
 
 	// Looks for ID in both formats if provided
 	const ids: string[] = [
+		tryQueryParam && url.query && new URLSearchParams(url.query).get(tryQueryParam),
 		tryInPath && url.pathname && url.pathname.split('/').pop(),
-		tryQueryParam && url.query && new URLSearchParams(url.query).get(tryQueryParam)
 	].filter((tryId): tryId is string => !!tryId)
 
 	if (!ids.length) logErr(
